@@ -3,7 +3,8 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Aitor Beriain <beriain@bitmessage.ch>, 2018
+# beriain <beriain@bitmessage.ch>, 2018
+# beriain <beriain@bitmessage.ch>, 2018
 # Egoitz Rodriguez Obieta <egoitzro@gmail.com>, 2015
 # Jon Latorre Martinez <patataman@airtel.net>, 2003
 # Piarres Beobide <pi@beobide.net>, 2004-2009,2011
@@ -14,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-04 06:31+0200\n"
-"PO-Revision-Date: 2018-10-15 15:37+0000\n"
-"Last-Translator: Aitor Beriain <beriain@bitmessage.ch>\n"
+"POT-Creation-Date: 2018-10-27 00:30+0200\n"
+"PO-Revision-Date: 2018-11-15 15:40+0000\n"
+"Last-Translator: beriain <beriain@bitmessage.ch>\n"
 "Language-Team: Basque (http://www.transifex.com/xfce/xfce4-panel/language/eu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,68 +46,69 @@ msgid "Customize the panel"
 msgstr "Pertsonalizatu panela"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1047
-#: ../panel/panel-preferences-dialog.c:1168
+#: ../libxfce4panel/xfce-panel-plugin.c:1050
+#: ../panel/panel-preferences-dialog.c:1174
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Ziur al zaude \"%s\" idazmahaia ezabatu nahi duzula?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1052
-#: ../panel/panel-preferences-dialog.c:1171
+#: ../libxfce4panel/xfce-panel-plugin.c:1055
+#: ../panel/panel-preferences-dialog.c:1177
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Elementua paneletik ezabatzen baduzu betirako galduko da."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1053 ../panel/panel-dialogs.c:127
-#: ../panel/panel-preferences-dialog.c:1173
+#: ../libxfce4panel/xfce-panel-plugin.c:1056 ../panel/panel-dialogs.c:163
+#: ../panel/panel-preferences-dialog.c:1179
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "Cancel"
 msgstr "Utzi"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1054
+#: ../libxfce4panel/xfce-panel-plugin.c:1057
 #: ../panel/panel-plugin-external.c:436
-#: ../panel/panel-preferences-dialog.c:896
-#: ../panel/panel-preferences-dialog.c:1174
+#: ../panel/panel-preferences-dialog.c:897
+#: ../panel/panel-preferences-dialog.c:1180
 #: ../plugins/launcher/launcher-dialog.c:854
 msgid "Remove"
 msgstr "Ezabatu"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1195
+#: ../libxfce4panel/xfce-panel-plugin.c:1198
 msgid "_Properties"
 msgstr "_Propietateak"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1210
+#: ../libxfce4panel/xfce-panel-plugin.c:1213 ../panel/panel-window.c:2754
 msgid "_About"
 msgstr "_Honi buruz"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1225
+#: ../libxfce4panel/xfce-panel-plugin.c:1228
 msgid "_Move"
 msgstr "_Mugitu"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1249
+#: ../libxfce4panel/xfce-panel-plugin.c:1252
 msgid "_Remove"
 msgstr "_Ezabatu"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1270
+#: ../libxfce4panel/xfce-panel-plugin.c:1273
 msgid "Pane_l"
 msgstr "Pane_la"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1279 ../panel/panel-window.c:2679
+#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:2679
 msgid "Add _New Items..."
 msgstr "Gehitu elementu _berriak..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1294 ../panel/panel-window.c:2694
+#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:2694
 msgid "Panel Pr_eferences..."
 msgstr "Panel hob_espenak..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1315 ../panel/panel-window.c:2726
+#: ../libxfce4panel/xfce-panel-plugin.c:1318 ../panel/panel-window.c:2726
 msgid "Log _Out"
 msgstr "Sai_oa itxi"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1335
-#: ../panel/panel-preferences-dialog.glade.h:12
+#: ../libxfce4panel/xfce-panel-plugin.c:1338 ../panel/panel-item-dialog.c:208
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2745
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#: ../plugins/clock/clock-dialog.glade.h:8
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 #: ../plugins/pager/pager-dialog.glade.h:10
@@ -116,7 +118,7 @@ msgstr "Sai_oa itxi"
 msgid "_Help"
 msgstr "_Laguntza"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1350
+#: ../libxfce4panel/xfce-panel-plugin.c:1353
 msgid "About"
 msgstr "Honi buruz"
 
@@ -169,72 +171,72 @@ msgid "Name %s lost on the message dbus, exiting."
 msgstr "%s dbus mezuan galduta, irteten."
 
 #. parse context options
-#: ../panel/main.c:258
+#: ../panel/main.c:262
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTUAK...]"
 
-#: ../panel/main.c:265
+#: ../panel/main.c:269
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Idatzi \"%s --help\" erabilera argibideentzat."
 
-#: ../panel/main.c:284
+#: ../panel/main.c:288
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce garapen taldea. Eskubide guztiak erreserbaturik."
 
-#: ../panel/main.c:285
+#: ../panel/main.c:289
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Mesedez programa erroreen berri <%s>-n eman."
 
-#: ../panel/main.c:351
+#: ../panel/main.c:355
 msgid "There is already a running instance"
 msgstr "Dagoeneko badago instantzia bat abiarazita"
 
 #. spawn ourselfs again
-#: ../panel/main.c:394
+#: ../panel/main.c:398
 msgid "Restarting..."
 msgstr "Berrabiarazi..."
 
-#: ../panel/main.c:409
+#: ../panel/main.c:413
 msgid "Failed to show the preferences dialog"
 msgstr "Huts hobespen leihoa bistaratzean"
 
-#: ../panel/main.c:411
+#: ../panel/main.c:415
 msgid "Failed to show the add new items dialog"
 msgstr "Huts elementu berriak gehitzeko leihoa bistaratzean"
 
-#: ../panel/main.c:413
+#: ../panel/main.c:417
 msgid "Failed to save the panel configuration"
 msgstr "Huts panel konfigurazioa gordetzean"
 
-#: ../panel/main.c:415
+#: ../panel/main.c:419
 msgid "Failed to add a plugin to the panel"
 msgstr "Huts panelera plugin bat gehitzean"
 
-#: ../panel/main.c:417
+#: ../panel/main.c:421
 msgid "Failed to restart the panel"
 msgstr "Huts panela berrabiaraztean"
 
-#: ../panel/main.c:419
+#: ../panel/main.c:423
 msgid "Failed to quit the panel"
 msgstr "Huts panela ixterakoan"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:425
 msgid "Failed to send D-Bus message"
 msgstr "Huts D-Bus mezua bidaltzean"
 
-#: ../panel/main.c:431 ../panel/panel-plugin-external.c:435
+#: ../panel/main.c:435 ../panel/panel-plugin-external.c:435
 msgid "Execute"
 msgstr "Exekutatu"
 
-#: ../panel/main.c:432
+#: ../panel/main.c:436
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Panela abiarazi nahi dfuzu? Hala bada ziurtatu zaitez saioa gordetzen duzula ixterakoan, horrela saioa hastean panela automatikoki abiaraziko da."
 
-#: ../panel/main.c:435 ../panel/main.c:449
+#: ../panel/main.c:439 ../panel/main.c:453
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Ez da %s-ren instantzia abiarazirik topatu"
@@ -260,21 +262,21 @@ msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Sortu abiarazle berri bat %d mahaigain fitxategitik"
 msgstr[1] "Sortu abiarazle berri bat %d mahaigain fitxategietatik"
 
-#: ../panel/panel-application.c:1724
+#: ../panel/panel-application.c:1725
 msgid "Quit"
 msgstr "Itxi"
 
-#: ../panel/panel-application.c:1725
+#: ../panel/panel-application.c:1726
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "X saio kudeatzaile gabe abiarazi duzu, Itxi sakatzean X zerbitzaria itxiko du."
 
-#: ../panel/panel-application.c:1726
+#: ../panel/panel-application.c:1727
 msgid "Are you sure you want to quit the panel?"
 msgstr "Ziur al zaude panela ezabatu nahi duzula?"
 
-#: ../panel/panel-application.c:1734
+#: ../panel/panel-application.c:1735
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Ezin da \"%s\" komandoa exekutatu"
@@ -291,69 +293,77 @@ msgid ""
 "uint."
 msgstr "Okerreko \"%s\" gomendio mota. Mota erabilgarriak bool, double, int, string eta uint dira."
 
-#: ../panel/panel-dialogs.c:49
+#: ../panel/panel-dialogs.c:58
+msgid "Unable to open the e-mail address"
+msgstr "Ezin izan da posta elektronikoko helbidea ireki"
+
+#: ../panel/panel-dialogs.c:83
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Xfce mahaigain inguruneko panela"
 
-#: ../panel/panel-dialogs.c:54
+#: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
 msgstr "Piarres Beobide"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Gehitu elementu berri bat"
 
-#: ../panel/panel-dialogs.c:128
+#: ../panel/panel-dialogs.c:164
 msgid "Add"
 msgstr "Gehitu"
 
-#: ../panel/panel-dialogs.c:139
+#: ../panel/panel-dialogs.c:175
 msgid "Please choose a panel for the new plugin:"
 msgstr "Mesedez hautatu plugin berriarentzat panel bat:"
 
-#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:831
+#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:832
 #, c-format
 msgid "Panel %d"
 msgstr "%d panela"
 
-#: ../panel/panel-dialogs.c:199
+#: ../panel/panel-dialogs.c:235
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr "Panela kiosko moduan abiarazirik dagoenez ezin dizkiozu aldaketarik egin erabiltzaile arrunt gisa"
 
-#: ../panel/panel-dialogs.c:201
+#: ../panel/panel-dialogs.c:237
 msgid "Modifying the panel is not allowed"
 msgstr "Ez da onartzen panela eraldatzean"
 
-#: ../panel/panel-item-dialog.c:194
+#: ../panel/panel-item-dialog.c:195
 msgid "Add New Items"
 msgstr "Gehitu elementu berriak"
 
-#: ../panel/panel-item-dialog.c:196
+#: ../panel/panel-item-dialog.c:197
 msgid "Add new plugins to the panel"
 msgstr "Gehitu plugin berriak panelera"
 
-#: ../panel/panel-item-dialog.c:202
+#: ../panel/panel-item-dialog.c:203
 msgid "_Add"
 msgstr "_Gehitu"
 
-#: ../panel/panel-item-dialog.c:206
-msgid "Help"
-msgstr "Laguntza"
+#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-preferences-dialog.glade.h:11
+#: ../plugins/actions/actions-dialog.glade.h:3
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
+#: ../plugins/clock/clock-dialog.glade.h:7
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+#: ../plugins/pager/pager-dialog.glade.h:9
+#: ../plugins/separator/separator-dialog.glade.h:5
+#: ../plugins/systray/systray-dialog.glade.h:2
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+msgid "_Close"
+msgstr "_Itxi"
 
-#: ../panel/panel-item-dialog.c:208 ../panel/panel-tic-tac-toe.c:124
-#: ../plugins/launcher/launcher-dialog.glade.h:17
-msgid "Close"
-msgstr "Itxi"
-
-#: ../panel/panel-item-dialog.c:221
+#: ../panel/panel-item-dialog.c:230
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "_Search:"
 msgstr "_Bilatu:"
 
-#: ../panel/panel-item-dialog.c:229
+#: ../panel/panel-item-dialog.c:238
 msgid "Enter search phrase here"
 msgstr "Idatzi bilaketa katea hemen"
 
@@ -370,39 +380,39 @@ msgid ""
 "permanently removed from the panel."
 msgstr "Plugin-a behin baino gehiago berrabiarazi da azken %d segundoetan. Abiarazi sakatuaz panela abiarazten saiatuko da bestela betirako kenduko da paneletik."
 
-#: ../panel/panel-preferences-dialog.c:486
+#: ../panel/panel-preferences-dialog.c:487
 msgid "Automatic"
 msgstr "Automatikoa"
 
-#: ../panel/panel-preferences-dialog.c:496
+#: ../panel/panel-preferences-dialog.c:497
 msgid "Primary"
 msgstr "Funtsezkoa"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:515
+#: ../panel/panel-preferences-dialog.c:516
 #, c-format
 msgid "Monitor %d"
 msgstr "%d monitorea"
 
-#: ../panel/panel-preferences-dialog.c:897
+#: ../panel/panel-preferences-dialog.c:898
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Panela eta plugin konfigurazioak betirako kenduko dira"
 
-#: ../panel/panel-preferences-dialog.c:898
+#: ../panel/panel-preferences-dialog.c:899
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Ziur al zaude %d panela ezabatu nahi duzula?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1010
+#: ../panel/panel-preferences-dialog.c:1016
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(kanpokoa)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1015
+#: ../panel/panel-preferences-dialog.c:1021
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -411,7 +421,7 @@ msgstr "Barne-izena: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1027
+#: ../panel/panel-preferences-dialog.c:1033
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Barne-izena: %s-%d"
@@ -453,17 +463,6 @@ msgstr "Kolore solidoa"
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "Background image"
 msgstr "Atzealdeko irudia"
-
-#: ../panel/panel-preferences-dialog.glade.h:11
-#: ../plugins/actions/actions-dialog.glade.h:3
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
-#: ../plugins/pager/pager-dialog.glade.h:9
-#: ../plugins/separator/separator-dialog.glade.h:5
-#: ../plugins/systray/systray-dialog.glade.h:2
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
-msgid "_Close"
-msgstr "_Itxi"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Add a new panel"
@@ -649,6 +648,11 @@ msgstr "Ele_mentuak"
 #: ../panel/panel-tic-tac-toe.c:122
 msgid "_New Game"
 msgstr "Joko _berria"
+
+#: ../panel/panel-tic-tac-toe.c:124
+#: ../plugins/launcher/launcher-dialog.glade.h:17
+msgid "Close"
+msgstr "Itxi"
 
 #: ../panel/panel-tic-tac-toe.c:133
 msgid "_Level:"
@@ -902,12 +906,12 @@ msgstr "Ordenagailua %d segundotan itzaltzen."
 msgid "Separator"
 msgstr "Bereizlea"
 
-#: ../plugins/actions/actions.c:1022
+#: ../plugins/actions/actions.c:1036
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Huts \"%s\" ekintza abiaraztean"
 
-#: ../plugins/actions/actions.c:1189
+#: ../plugins/actions/actions.c:1203
 msgid "John Doe"
 msgstr "John Doo"
 
@@ -952,7 +956,7 @@ msgid ""
 msgstr "Aukera hau hautatu menuan aplikazioaren izen generikoa bistartzeko, adibidez \"Fitxategi kudeatzailea\" \"Thunar ordez\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
-#: ../plugins/clock/clock-dialog.glade.h:15
+#: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/pager/pager-dialog.glade.h:6
 #: ../plugins/separator/separator-dialog.glade.h:9
@@ -1084,25 +1088,25 @@ msgstr "LCD"
 msgid "Clock"
 msgstr "Ordularia"
 
-#: ../plugins/clock/clock-dialog.glade.h:7
+#: ../plugins/clock/clock-dialog.glade.h:9
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
 msgstr "Ordu-zonalde datubaseko ordu-zonalde izena, adibidez \"Amerika/New York\". Hutsik utzi ordu lokala erabiltzeko."
 
-#: ../plugins/clock/clock-dialog.glade.h:8
+#: ../plugins/clock/clock-dialog.glade.h:10
 msgid "Time_zone:"
 msgstr "Ordu-_zonaldea:"
 
-#: ../plugins/clock/clock-dialog.glade.h:9
+#: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Time and Date _Settings..."
 msgstr "Ordu eta data e_zarpenak..."
 
-#: ../plugins/clock/clock-dialog.glade.h:10
+#: ../plugins/clock/clock-dialog.glade.h:12
 msgid "Time Settings"
 msgstr "Ordu ezarpernak"
 
-#: ../plugins/clock/clock-dialog.glade.h:12
+#: ../plugins/clock/clock-dialog.glade.h:14
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1111,53 +1115,53 @@ msgid ""
 "page for additional information."
 msgstr "Formatuak fitxategi izenean txertatuko diren data eta ordu zatiak zehazten ditu. Adibidez, %Y urteaz ordeztuko da, %m hilabeteaz eta %d egunaz. Antzeko moduan <b></b> etiketak testua lodituko du. Begiratu \"laguntza\" orrialdea argibide gehiagorako."
 
-#: ../plugins/clock/clock-dialog.glade.h:13
+#: ../plugins/clock/clock-dialog.glade.h:15
 msgid "_Tooltip format:"
 msgstr "A_holku formatua:"
 
-#: ../plugins/clock/clock-dialog.glade.h:14
+#: ../plugins/clock/clock-dialog.glade.h:16
 msgid "_Layout:"
 msgstr "_Ingurunea:"
 
-#: ../plugins/clock/clock-dialog.glade.h:16
+#: ../plugins/clock/clock-dialog.glade.h:18
 msgid "Sho_w AM/PM"
 msgstr "AM/_PM bistarazi"
 
-#: ../plugins/clock/clock-dialog.glade.h:17
+#: ../plugins/clock/clock-dialog.glade.h:19
 msgid "Fl_ash time separators"
 msgstr "Fl_ash ordu bereizleak"
 
-#: ../plugins/clock/clock-dialog.glade.h:18
+#: ../plugins/clock/clock-dialog.glade.h:20
 msgid "24-_hour clock"
 msgstr "24 _orduko ordularia"
 
-#: ../plugins/clock/clock-dialog.glade.h:19
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
 msgstr "Egiazko ordulari _bitarra"
 
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Display _seconds"
 msgstr "Bistarazi _segunduak"
 
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:23
 msgid "F_ormat:"
 msgstr "F_ormatua:"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:23
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "F_uzziness:"
 msgstr "La_usotasuna:"
 
-#: ../plugins/clock/clock-dialog.glade.h:24
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "Show _inactive dots"
 msgstr "Ikusi puntu _inaktiboak"
 
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:27
 msgid "Show gri_d"
 msgstr "Ikusi _sareta"
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:28
 msgid "Clock Options"
 msgstr "Ordulari aukerak"
 
