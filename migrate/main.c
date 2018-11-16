@@ -111,58 +111,17 @@ main (gint argc, gchar **argv)
             goto migrate_default;
         }
 
-      /* create question dialog */
-      dialog = gtk_message_dialog_new (NULL, 0, GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
-                                       _("Welcome to the first start of the panel"));
-      gtk_window_set_title (GTK_WINDOW (dialog), _("Panel"));
-      gtk_window_set_icon_name (GTK_WINDOW (dialog), "preferences-system");
-      gtk_window_stick (GTK_WINDOW (dialog));
-      gtk_window_set_keep_above (GTK_WINDOW (dialog), TRUE);
-
       if (filename_46 != NULL)
-        {
-          gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s\n%s",
-              _("Because the panel moved to a new system for storing the "
-                "settings, it has to load a fresh initial configuration."),
-              _("Choose below which setup you want for the first startup."));
-
-          button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Migrate old config"), GTK_RESPONSE_OK);
-          gtk_widget_set_tooltip_text (button, _("Migrate the old 4.6 configuration to Xfconf"));
-          default_response = GTK_RESPONSE_OK;
-        }
-      else
-        {
-          gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-              _("Choose below which setup you want for the first startup."));
-        }
-
-      if (filename_default != NULL)
-        {
-          button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Use default config"), GTK_RESPONSE_YES);
-          gtk_widget_set_tooltip_text (button, _("Load the default configuration"));
-
-          if (default_response == GTK_RESPONSE_CANCEL)
-            default_response = GTK_RESPONSE_YES;
-        }
-
-      button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("One empty panel"), GTK_RESPONSE_CANCEL);
-      gtk_widget_set_tooltip_text (button, _("Start with one empty panel"));
-
-      gtk_dialog_set_default_response (GTK_DIALOG (dialog), default_response);
-      result = gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
-
-      if (result == GTK_RESPONSE_OK && filename_46 != NULL)
         {
           /* restore 4.6 config */
           if (!migrate_46 (filename_46, channel, &error))
             {
-              xfce_dialog_show_error (NULL, error, _("Failed to migrate the old panel configuration"));
+              xfce_dialog_show_error (NULL, error, _("Tried but failed to migrate your old panel configuration"));
               g_error_free (error);
               retval = EXIT_FAILURE;
             }
         }
-      else if (result == GTK_RESPONSE_YES && filename_default != NULL)
+      else if (filename_default != NULL)
         {
           migrate_default:
 
