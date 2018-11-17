@@ -556,7 +556,11 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   g_signal_handler_unblock (G_OBJECT (object), dialog->output_changed_handler_id);
 
   /* update visibility of the output selector */
-  object = gtk_builder_get_object (GTK_BUILDER (dialog), "output-box");
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "output-label");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  g_object_set (G_OBJECT (object), "visible", selector_visible, NULL);
+
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "output-name");
   panel_return_if_fail (GTK_IS_WIDGET (object));
   g_object_set (G_OBJECT (object), "visible", selector_visible, NULL);
 
@@ -647,11 +651,19 @@ panel_preferences_dialog_bg_style_changed (PanelPreferencesDialog *dialog)
   g_object_get (G_OBJECT (dialog->active), "composited", &composited, NULL);
   gtk_color_chooser_set_use_alpha (GTK_COLOR_CHOOSER (object), composited);
 
-  object = gtk_builder_get_object (GTK_BUILDER (dialog), "bg-color-box");
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "background-rgba-label");
   panel_return_if_fail (GTK_IS_WIDGET (object));
   g_object_set (G_OBJECT (object), "visible", active == 1, NULL);
 
-  object = gtk_builder_get_object (GTK_BUILDER (dialog), "bg-image-box");
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "background-rgba");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  g_object_set (G_OBJECT (object), "visible", active == 1, NULL);
+
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "background-image-label");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  g_object_set (G_OBJECT (object), "visible", active == 2, NULL);
+
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "background-image");
   panel_return_if_fail (GTK_IS_WIDGET (object));
   g_object_set (G_OBJECT (object), "visible", active == 2, NULL);
 }
