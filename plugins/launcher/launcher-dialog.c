@@ -803,6 +803,15 @@ launcher_dialog_item_desktop_item_edit (GtkWidget            *widget,
 
 
 static void
+launcher_dialog_item_link_button_clicked (GtkWidget            *button,
+                                          LauncherPluginDialog *dialog)
+{
+  launcher_dialog_item_desktop_item_edit (button, "Link", NULL, dialog);
+}
+
+
+
+static void
 launcher_dialog_item_button_clicked (GtkWidget            *button,
                                      LauncherPluginDialog *dialog)
 {
@@ -1200,6 +1209,9 @@ launcher_dialog_show (LauncherPlugin *plugin)
       g_signal_connect (G_OBJECT (object), "clicked",
           G_CALLBACK (launcher_dialog_item_button_clicked), dialog);
     }
+  object = gtk_builder_get_object (builder, "item-link");
+  g_signal_connect (G_OBJECT (object), "clicked",
+                    G_CALLBACK (launcher_dialog_item_link_button_clicked), dialog);
 
   /* connect menu items */
   for (i = 0; i < G_N_ELEMENTS (mi_names); i++)
