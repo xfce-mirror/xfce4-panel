@@ -21,8 +21,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-18 06:31+0200\n"
-"PO-Revision-Date: 2018-10-18 12:14+0000\n"
+"POT-Creation-Date: 2018-11-18 00:31+0100\n"
+"PO-Revision-Date: 2018-11-18 11:23+0000\n"
 "Last-Translator: No Ne\n"
 "Language-Team: Polish (http://www.transifex.com/xfce/xfce4-panel/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -42,8 +42,7 @@ msgid ""
 msgstr "Dodaje do panelu aplet aktywatora wykorzystując do tego wskazany plik .desktop"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2667
-#: ../migrate/main.c:117
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2666
 msgid "Panel"
 msgstr "Panel"
 
@@ -53,18 +52,18 @@ msgstr "Konfiguruje wygląd, zachowanie i zawartość paneli"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1050
-#: ../panel/panel-preferences-dialog.c:1174
+#: ../panel/panel-preferences-dialog.c:1186
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Usunąć aplet „%s”?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1055
-#: ../panel/panel-preferences-dialog.c:1177
+#: ../panel/panel-preferences-dialog.c:1189
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Aplet zostanie nieodwracalnie usunięty."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1056 ../panel/panel-dialogs.c:163
-#: ../panel/panel-preferences-dialog.c:1179
+#: ../panel/panel-preferences-dialog.c:1191
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "Cancel"
@@ -72,9 +71,9 @@ msgstr "Anuluj"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1057
 #: ../panel/panel-plugin-external.c:436
-#: ../panel/panel-preferences-dialog.c:897
-#: ../panel/panel-preferences-dialog.c:1180
-#: ../plugins/launcher/launcher-dialog.c:854
+#: ../panel/panel-preferences-dialog.c:909
+#: ../panel/panel-preferences-dialog.c:1192
+#: ../plugins/launcher/launcher-dialog.c:863
 msgid "Remove"
 msgstr "Usuń"
 
@@ -82,7 +81,7 @@ msgstr "Usuń"
 msgid "_Properties"
 msgstr "_Właściwości"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1213 ../panel/panel-window.c:2755
+#: ../libxfce4panel/xfce-panel-plugin.c:1213 ../panel/panel-window.c:2754
 msgid "_About"
 msgstr "_O programie"
 
@@ -98,20 +97,20 @@ msgstr "_Usuń"
 msgid "Pane_l"
 msgstr "Pane_l"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:2680
+#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:2679
 msgid "Add _New Items..."
 msgstr "_Dodaj aplet..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:2695
+#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:2694
 msgid "Panel Pr_eferences..."
 msgstr "_Ustawienia..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1318 ../panel/panel-window.c:2727
+#: ../libxfce4panel/xfce-panel-plugin.c:1318 ../panel/panel-window.c:2726
 msgid "Log _Out"
 msgstr "Za_kończ sesję"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1338
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2746
+#: ../libxfce4panel/xfce-panel-plugin.c:1338 ../panel/panel-item-dialog.c:208
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2745
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -177,72 +176,72 @@ msgid "Name %s lost on the message dbus, exiting."
 msgstr "Nazwa %s nie znajduje się w dbusie wiadomości, zakończenie działania."
 
 #. parse context options
-#: ../panel/main.c:258
+#: ../panel/main.c:262
 msgid "[ARGUMENTS...]"
 msgstr "[PARAMETR...]"
 
-#: ../panel/main.c:265
+#: ../panel/main.c:269
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Proszę wprowadzić „%s --help”, aby wypisać komunikat pomocy."
 
-#: ../panel/main.c:284
+#: ../panel/main.c:288
 msgid "The Xfce development team. All rights reserved."
 msgstr "Zespół twórców środowiska graficznego Xfce. Wszystkie prawa zastrzeżone."
 
-#: ../panel/main.c:285
+#: ../panel/main.c:289
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Proszę zgłaszać błędy na adres <%s>."
 
-#: ../panel/main.c:351
+#: ../panel/main.c:355
 msgid "There is already a running instance"
 msgstr "Jedno wystąpienie programu jest już uruchomione."
 
 #. spawn ourselfs again
-#: ../panel/main.c:394
+#: ../panel/main.c:398
 msgid "Restarting..."
 msgstr "Ponowne uruchamianie...."
 
-#: ../panel/main.c:409
+#: ../panel/main.c:413
 msgid "Failed to show the preferences dialog"
 msgstr "Nie udało się wyświetlić okna preferencji"
 
-#: ../panel/main.c:411
+#: ../panel/main.c:415
 msgid "Failed to show the add new items dialog"
 msgstr "Nie udało się wyświetlić okna dodawania apletów"
 
-#: ../panel/main.c:413
+#: ../panel/main.c:417
 msgid "Failed to save the panel configuration"
 msgstr "Nie udało się zapisać konfiguracji panelu"
 
-#: ../panel/main.c:415
+#: ../panel/main.c:419
 msgid "Failed to add a plugin to the panel"
 msgstr "Nie udało się dodać apletu do panelu"
 
-#: ../panel/main.c:417
+#: ../panel/main.c:421
 msgid "Failed to restart the panel"
 msgstr "Nie udało się ponownie uruchomić panelu"
 
-#: ../panel/main.c:419
+#: ../panel/main.c:423
 msgid "Failed to quit the panel"
 msgstr "Nie udało się zakończyć działania panelu"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:425
 msgid "Failed to send D-Bus message"
 msgstr "Nie udało się wysłać wiadomości systemu D-Bus"
 
-#: ../panel/main.c:431 ../panel/panel-plugin-external.c:435
+#: ../panel/main.c:435 ../panel/panel-plugin-external.c:435
 msgid "Execute"
 msgstr "Wykonaj"
 
-#: ../panel/main.c:432
+#: ../panel/main.c:436
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Uruchomić panel? Proszę zapisać sesję przed wylogowaniem, aby panel został uruchomiony podczas następnego logowania."
 
-#: ../panel/main.c:435 ../panel/main.c:449
+#: ../panel/main.c:439 ../panel/main.c:453
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Nie odnaleziono uruchomionego wystąpienia %s"
@@ -314,7 +313,7 @@ msgid "translator-credits"
 msgstr "Piotr Sokół <psokol@jabster.pl>, 2008, 2009, 2010, 2011, 2012, 2013, 2014\nMichał Olber <michal.olber@osworld.pl>, 2012, 2013, 2014"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:12
 msgid "Add New Item"
 msgstr "Dodawanie aktywatora"
 
@@ -326,7 +325,7 @@ msgstr "Dodaj"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Proszę wybrać panel, do którego zostanie dodany aplet:"
 
-#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:832
+#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:844
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -341,33 +340,37 @@ msgstr "Panel uruchomiono w trybie kiosk, przez co zwykły użytkownik nie może
 msgid "Modifying the panel is not allowed"
 msgstr "Nie zezwolono na modyfikowanie paneli"
 
-#: ../panel/panel-item-dialog.c:194
+#: ../panel/panel-item-dialog.c:195
 msgid "Add New Items"
 msgstr "Dodawanie apletów"
 
-#: ../panel/panel-item-dialog.c:196
+#: ../panel/panel-item-dialog.c:197
 msgid "Add new plugins to the panel"
 msgstr "Dodaje nowe aplety do panelu"
 
-#: ../panel/panel-item-dialog.c:202
+#: ../panel/panel-item-dialog.c:203
 msgid "_Add"
 msgstr "_Dodaj"
 
-#: ../panel/panel-item-dialog.c:206
-msgid "Help"
-msgstr "Pomoc"
+#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-preferences-dialog.glade.h:11
+#: ../plugins/actions/actions-dialog.glade.h:3
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
+#: ../plugins/clock/clock-dialog.glade.h:7
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+#: ../plugins/pager/pager-dialog.glade.h:9
+#: ../plugins/separator/separator-dialog.glade.h:5
+#: ../plugins/systray/systray-dialog.glade.h:2
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+msgid "_Close"
+msgstr "_Zamknij"
 
-#: ../panel/panel-item-dialog.c:208 ../panel/panel-tic-tac-toe.c:124
-#: ../plugins/launcher/launcher-dialog.glade.h:17
-msgid "Close"
-msgstr "Zamknij"
-
-#: ../panel/panel-item-dialog.c:221
-#: ../plugins/launcher/launcher-dialog.glade.h:3
+#: ../panel/panel-item-dialog.c:230
+#: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "_Search:"
 msgstr "_Wyszukiwanie:"
 
-#: ../panel/panel-item-dialog.c:229
+#: ../panel/panel-item-dialog.c:238
 msgid "Enter search phrase here"
 msgstr "Wprowadza wyszukiwany ciąg"
 
@@ -398,25 +401,25 @@ msgstr "Nadrzędny"
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:898
+#: ../panel/panel-preferences-dialog.c:910
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Panel zostanie usunięty wraz z konfiguracją apletów."
 
-#: ../panel/panel-preferences-dialog.c:899
+#: ../panel/panel-preferences-dialog.c:911
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Usunąć panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1016
+#: ../panel/panel-preferences-dialog.c:1028
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(zewnętrzny)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1021
+#: ../panel/panel-preferences-dialog.c:1033
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -425,7 +428,7 @@ msgstr "Wewnętrzna nazwa: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1033
+#: ../panel/panel-preferences-dialog.c:1045
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Wewnętrzna nazwa: %s-%d"
@@ -468,18 +471,6 @@ msgstr "Jednolity kolor"
 msgid "Background image"
 msgstr "Obraz tła"
 
-#: ../panel/panel-preferences-dialog.glade.h:11
-#: ../plugins/actions/actions-dialog.glade.h:3
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#: ../plugins/clock/clock-dialog.glade.h:7
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
-#: ../plugins/pager/pager-dialog.glade.h:9
-#: ../plugins/separator/separator-dialog.glade.h:5
-#: ../plugins/systray/systray-dialog.glade.h:2
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
-msgid "_Close"
-msgstr "_Zamknij"
-
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Add a new panel"
 msgstr "Dodaje nowy panel"
@@ -497,12 +488,12 @@ msgid "Switch between panel presets"
 msgstr "Przełącza pomiędzy zestawami ustawień panelu"
 
 #: ../panel/panel-preferences-dialog.glade.h:17
-msgid "M_ode:"
-msgstr "_Układ:"
+msgid "<b>General</b>"
+msgstr "<b>Ogólne</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:18
-msgid "O_utput:"
-msgstr "_Ekran:"
+msgid "M_ode:"
+msgstr "_Układ:"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid "Span mo_nitors"
@@ -522,82 +513,80 @@ msgid ""
 msgstr "Ukrywa uchwyty panelu i blokuje jego położenie"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
-msgid "Automatically hide the panel:"
-msgstr "Automatycznie ukrywaj panel:"
-
-#: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Don't _reserve space on borders"
 msgstr "Zw_olnienie obszaru na krawędziach ekranu"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:24
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr "Sprawia, że zmaksymalizowane okna zakrywają powierzchnię za panelem. Działa tylko, gdy panel jest umieszczony przy krawędzi."
 
+#: ../panel/panel-preferences-dialog.glade.h:25
+msgid "Automatically hide the panel:"
+msgstr "Automatycznie ukrywaj panel:"
+
 #: ../panel/panel-preferences-dialog.glade.h:26
-#: ../plugins/actions/actions-dialog.glade.h:9
-#: ../plugins/launcher/launcher-dialog.glade.h:23
-msgid "General"
-msgstr "Ogólne"
+msgid "O_utput:"
+msgstr "_Ekran:"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
-msgid "A_utomatically increase the length"
-msgstr "_Rozciągnięcie"
-
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:28
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
-msgstr "Automatycznie zwiększa długość panelu jeśli aplety będą wymagać większej ilości przestrzeni."
+msgid "<b>Measurements</b>"
+msgstr "<b>Pomiary</b>"
+
+#: ../panel/panel-preferences-dialog.glade.h:29
+msgid "Row _Size (pixels):"
+msgstr "_Rozmiar wiersza (piksele):"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
-#, no-c-format
-msgid "L_ength (%):"
-msgstr "_Długość (%):"
-
-#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Num_ber of rows:"
 msgstr "_Ilość wierszy:"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
-msgid "Row _Size (pixels):"
-msgstr "_Rozmiar wiersza (piksele):"
+#, no-c-format
+msgid "L_ength (%):"
+msgstr "_Długość (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#: ../panel/panel-preferences-dialog.glade.h:33
+msgid "A_utomatically increase the length"
+msgstr "_Rozciągnięcie"
+
 #: ../panel/panel-preferences-dialog.glade.h:34
-msgid "Measurements"
-msgstr "Wymiary"
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr "Automatycznie zwiększa długość panelu jeśli aplety będą wymagać większej ilości przestrzeni."
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid "D_isplay"
 msgstr "_Wyświetlanie"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
+msgid "<b>Background</b>"
+msgstr "<b>Tło</b>"
+
+#: ../panel/panel-preferences-dialog.glade.h:37
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Style:"
 msgstr "_Styl:"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "C_olor:"
 msgstr "_Kolor:"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "Pick a Panel Color"
 msgstr "Wybór koloru"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "_File:"
 msgstr "_Plik:"
 
-#: ../panel/panel-preferences-dialog.glade.h:40
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "Select A Background Image"
 msgstr "Wybór pliku"
-
-#: ../panel/panel-preferences-dialog.glade.h:41
-msgid "Background"
-msgstr "Tło"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid ""
@@ -616,8 +605,8 @@ msgid "_Leave:"
 msgstr "_Nieaktywny:"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
-msgid "Opacity"
-msgstr "Nieprzezroczystość"
+msgid "<b>Opacity</b>"
+msgstr "<b>Nieprzezroczystość</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 msgid ""
@@ -649,7 +638,7 @@ msgid "Remove currently selected item"
 msgstr "Usuwa zaznaczony aplet"
 
 #: ../panel/panel-preferences-dialog.glade.h:54
-#: ../plugins/launcher/launcher-dialog.glade.h:22
+#: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Edit the currently selected item"
 msgstr "Wyświetla okno preferencji zaznaczonego elementu"
 
@@ -664,6 +653,11 @@ msgstr "_Aplety"
 #: ../panel/panel-tic-tac-toe.c:122
 msgid "_New Game"
 msgstr "_Nowa gra"
+
+#: ../panel/panel-tic-tac-toe.c:124
+#: ../plugins/launcher/launcher-dialog.glade.h:17
+msgid "Close"
+msgstr "Zamknij"
 
 #: ../panel/panel-tic-tac-toe.c:133
 msgid "_Level:"
@@ -685,65 +679,27 @@ msgstr "Zaawansowany"
 msgid "Expert"
 msgstr "Ekspert"
 
-#: ../panel/panel-window.c:2712
+#: ../panel/panel-window.c:2711
 msgid "_Lock Panel"
 msgstr "_Zablokowanie panelu"
 
-#: ../migrate/main.c:116
-msgid "Welcome to the first start of the panel"
-msgstr "Pierwsze uruchomienie panelu"
+#: ../migrate/main.c:119
+msgid "Tried but failed to migrate your old panel configuration"
+msgstr "Próbowano, ale nie udało się przeprowadzić migracji starej konfiguracji panelu"
 
-#: ../migrate/main.c:125
-msgid ""
-"Because the panel moved to a new system for storing the settings, it has to "
-"load a fresh initial configuration."
-msgstr "Panele używają nowego systemu przechowywania ustawień. Należy zainicjować nową konfigurację programu."
-
-#: ../migrate/main.c:127 ../migrate/main.c:136
-msgid "Choose below which setup you want for the first startup."
-msgstr "Proszę wybrać sposób konfiguracji panelu."
-
-#: ../migrate/main.c:129
-msgid "Migrate old config"
-msgstr "Zaimportuj starą konfigurację"
-
-#: ../migrate/main.c:130
-msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr "Importuje starą konfigurację wersji Xfce 4.6 do Xfconf"
-
-#: ../migrate/main.c:141
-msgid "Use default config"
-msgstr "Użyj domyślnej"
-
-#: ../migrate/main.c:142
-msgid "Load the default configuration"
-msgstr "Wczytuje domyślną konfigurację programu"
-
-#: ../migrate/main.c:148
-msgid "One empty panel"
-msgstr "Utwórz pusty panel"
-
-#: ../migrate/main.c:149
-msgid "Start with one empty panel"
-msgstr "Uruchamia program z jednym pustym panelem"
-
-#: ../migrate/main.c:160
-msgid "Failed to migrate the old panel configuration"
-msgstr "Nie udało się zaimportować starej konfiguracji programu"
-
-#: ../migrate/main.c:172
+#: ../migrate/main.c:131
 msgid "Failed to load the default configuration"
 msgstr "Nie udało się wczytać domyślnej konfiguracji"
 
-#: ../migrate/main.c:185
+#: ../migrate/main.c:144
 msgid "Panel config needs migration..."
 msgstr "Ustawienia panelu wymagają migracji..."
 
-#: ../migrate/main.c:189
+#: ../migrate/main.c:148
 msgid "Failed to migrate the existing configuration"
 msgstr "Nie udało się zaimportować istniejącej konfiguracji programu"
 
-#: ../migrate/main.c:195
+#: ../migrate/main.c:154
 msgid "Panel configuration has been updated."
 msgstr "Zaktualizowano konfigurację panelu."
 
@@ -772,6 +728,11 @@ msgstr "Wyświetla okno potwierdzające, wstrzymujące podjęcie czynności na 3
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Appeara_nce:"
 msgstr "_Wygląd:"
+
+#: ../plugins/actions/actions-dialog.glade.h:9
+#: ../plugins/launcher/launcher-dialog.glade.h:24
+msgid "General"
+msgstr "Ogólne"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "Visible"
@@ -1501,107 +1462,111 @@ msgstr "Brak aktywatorów"
 msgid "Failed to open desktop item editor"
 msgstr "Nie udało się otworzyć edytora elementów pulpitu"
 
-#: ../plugins/launcher/launcher-dialog.c:855
+#: ../plugins/launcher/launcher-dialog.c:864
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Aktywator zostanie nieodwracalnie usunięty."
 
-#: ../plugins/launcher/launcher-dialog.c:856
+#: ../plugins/launcher/launcher-dialog.c:865
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Usunąć aktywator „%s”?"
 
-#: ../plugins/launcher/launcher-dialog.c:857
+#: ../plugins/launcher/launcher-dialog.c:866
 msgid "Unnamed item"
 msgstr "Nienazwany element"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:2
-msgid "Add one or more existing items to the launcher"
-msgstr "Dodaje istniejące aktywatory do apletu"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:4
+#: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Default"
 msgstr "Domyślne"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:5
+#: ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "North"
 msgstr "Na górze"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:6
+#: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "West"
 msgstr "Po lewej"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:7
+#: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "East"
 msgstr "Po prawej"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:8
+#: ../plugins/launcher/launcher-dialog.glade.h:5
 msgid "South"
 msgstr "Na dole"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:9
+#: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "Inside Button"
 msgstr "Wewnątrz"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:10
+#: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "_Edit Item"
 msgstr "Edytuj obiekt"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:11
+#: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "D_elete Item"
 msgstr "_Usuń element"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:12
+#: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Add Appli_cation"
 msgstr "Dodaj _aplikację"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:13
+#: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "New _Application"
 msgstr "Nowa _aplikacja"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:14
+#: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "New _Link"
 msgstr "Nowy _link"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:13
+msgid "Add one or more existing items to the launcher"
+msgstr "Dodaje istniejące aktywatory do apletu"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
 msgstr "Aktywator"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:20
-msgid "Add a new empty item"
-msgstr "Dodaje nowy aktywator"
-
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "Delete the currently selected item"
 msgstr "Usuwa zaznaczony aktywator"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:24
+#: ../plugins/launcher/launcher-dialog.glade.h:22
+msgid "Add a new empty item"
+msgstr "Dodaje nowy aktywator"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:23
+msgid "Add a new hyperlink"
+msgstr "Dodaje nowe hiperłącze"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "Disable t_ooltips"
 msgstr "Wyłączenie p_odpowiedzi"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:25
+#: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
 msgstr "Wyłącza podpowiedzi przycisków panelu"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:26
+#: ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "Show _label instead of icon"
 msgstr "Wyświetlanie _etykiety zamiast ikony"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:27
+#: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "Show last _used item in panel"
 msgstr "Wyświetlanie ostatnio _użytego aktywatora"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:28
+#: ../plugins/launcher/launcher-dialog.glade.h:29
 msgid "Select this option to move the clicked menu item to the panel."
 msgstr "Wyświetla ostatnio użyty aktywator menu na panelu"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:29
+#: ../plugins/launcher/launcher-dialog.glade.h:30
 msgid "_Arrow button position:"
 msgstr "Położenie przycisku _strzałki:"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:30
+#: ../plugins/launcher/launcher-dialog.glade.h:31
 msgid "Advanced"
 msgstr "Zaawansowane"
 
