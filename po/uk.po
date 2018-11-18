@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-27 00:30+0200\n"
-"PO-Revision-Date: 2018-11-15 11:08+0000\n"
+"POT-Creation-Date: 2018-11-18 00:31+0100\n"
+"PO-Revision-Date: 2018-11-18 13:09+0000\n"
 "Last-Translator: Yarema aka Knedlyk <yupadmin@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/xfce/xfce4-panel/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,6 @@ msgstr "Додати новий запускач до панелі на осно
 
 #: ../panel-preferences.desktop.in.h:1
 #: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2666
-#: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Панель"
 
@@ -43,18 +42,18 @@ msgstr "Упорядкувати панель"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1050
-#: ../panel/panel-preferences-dialog.c:1174
+#: ../panel/panel-preferences-dialog.c:1186
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Дійсно бажаєте видалити \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1055
-#: ../panel/panel-preferences-dialog.c:1177
+#: ../panel/panel-preferences-dialog.c:1189
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Якщо Ви видалите цей елемент з панелі, він буде повністю втрачений."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1056 ../panel/panel-dialogs.c:163
-#: ../panel/panel-preferences-dialog.c:1179
+#: ../panel/panel-preferences-dialog.c:1191
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "Cancel"
@@ -62,9 +61,9 @@ msgstr "Скасувати"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1057
 #: ../panel/panel-plugin-external.c:436
-#: ../panel/panel-preferences-dialog.c:897
-#: ../panel/panel-preferences-dialog.c:1180
-#: ../plugins/launcher/launcher-dialog.c:854
+#: ../panel/panel-preferences-dialog.c:909
+#: ../panel/panel-preferences-dialog.c:1192
+#: ../plugins/launcher/launcher-dialog.c:863
 msgid "Remove"
 msgstr "Вилучити"
 
@@ -304,7 +303,7 @@ msgid "translator-credits"
 msgstr "Дмитро Нікітін/nЯрема aka Knedlyk"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:12
 msgid "Add New Item"
 msgstr "Додати новий елемент"
 
@@ -316,7 +315,7 @@ msgstr "Додати"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Будь-ласка виберіть панель для нового розширення:"
 
-#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:832
+#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:844
 #, c-format
 msgid "Panel %d"
 msgstr "Панель %d"
@@ -357,7 +356,7 @@ msgid "_Close"
 msgstr "_Закрити"
 
 #: ../panel/panel-item-dialog.c:230
-#: ../plugins/launcher/launcher-dialog.glade.h:3
+#: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "_Search:"
 msgstr "_Пошук:"
 
@@ -392,25 +391,25 @@ msgstr "Початково"
 msgid "Monitor %d"
 msgstr "Монітор %d"
 
-#: ../panel/panel-preferences-dialog.c:898
+#: ../panel/panel-preferences-dialog.c:910
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Панель та конфігурації розширень будуть видалені"
 
-#: ../panel/panel-preferences-dialog.c:899
+#: ../panel/panel-preferences-dialog.c:911
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Ви впевнені, що бажаєте видалити панель %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1016
+#: ../panel/panel-preferences-dialog.c:1028
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(зовнішній)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1021
+#: ../panel/panel-preferences-dialog.c:1033
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -419,7 +418,7 @@ msgstr "Внутрішня назва: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1033
+#: ../panel/panel-preferences-dialog.c:1045
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Внутрішня назва: %s-%d"
@@ -479,12 +478,12 @@ msgid "Switch between panel presets"
 msgstr "Перемикання між налаштуваннями панелі"
 
 #: ../panel/panel-preferences-dialog.glade.h:17
-msgid "M_ode:"
-msgstr "_Режим:"
+msgid "<b>General</b>"
+msgstr "<b>Основне</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:18
-msgid "O_utput:"
-msgstr "В_ивід:"
+msgid "M_ode:"
+msgstr "_Режим:"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid "Span mo_nitors"
@@ -504,82 +503,80 @@ msgid ""
 msgstr "Виберіть цю опцію щоб сховати тримачі панелі та зафіксувати їх позиції."
 
 #: ../panel/panel-preferences-dialog.glade.h:23
-msgid "Automatically hide the panel:"
-msgstr "Автоматично приховувати панель:"
-
-#: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Don't _reserve space on borders"
 msgstr "Не _резервувати місце на рамках"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:24
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr "Виберіть цю опцію, якщо бажаєте, щоб максимізовані вікна закривали область за панеллю. Це працюватиме тільки коли панель приєднано до рамки екрану."
 
+#: ../panel/panel-preferences-dialog.glade.h:25
+msgid "Automatically hide the panel:"
+msgstr "Автоматично приховувати панель:"
+
 #: ../panel/panel-preferences-dialog.glade.h:26
-#: ../plugins/actions/actions-dialog.glade.h:9
-#: ../plugins/launcher/launcher-dialog.glade.h:23
-msgid "General"
-msgstr "Основне"
+msgid "O_utput:"
+msgstr "В_ивід:"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
-msgid "A_utomatically increase the length"
-msgstr "А_втоматично збільшувати довжину"
-
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:28
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
-msgstr "Виберіть цю опцію щоб автоматично збільшувати довжину панелі, якщо плагіни потребують більше місця."
+msgid "<b>Measurements</b>"
+msgstr "<b>Виміри</b>"
+
+#: ../panel/panel-preferences-dialog.glade.h:29
+msgid "Row _Size (pixels):"
+msgstr "Розм_ір (пікселі):"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
-#, no-c-format
-msgid "L_ength (%):"
-msgstr "Д_овжина (%):"
-
-#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Num_ber of rows:"
 msgstr "Кількі_сть рядків:"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
-msgid "Row _Size (pixels):"
-msgstr "Розм_ір (пікселі):"
+#, no-c-format
+msgid "L_ength (%):"
+msgstr "Д_овжина (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#: ../panel/panel-preferences-dialog.glade.h:33
+msgid "A_utomatically increase the length"
+msgstr "А_втоматично збільшувати довжину"
+
 #: ../panel/panel-preferences-dialog.glade.h:34
-msgid "Measurements"
-msgstr "Розміри"
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr "Виберіть цю опцію щоб автоматично збільшувати довжину панелі, якщо плагіни потребують більше місця."
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid "D_isplay"
 msgstr "_Дисплей"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
+msgid "<b>Background</b>"
+msgstr "<b>Тло</b>"
+
+#: ../panel/panel-preferences-dialog.glade.h:37
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Style:"
 msgstr "_Стиль:"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "C_olor:"
 msgstr "К_олір:"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "Pick a Panel Color"
 msgstr "Виберіть колір панелі"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "_File:"
 msgstr "Ф_айл:"
 
-#: ../panel/panel-preferences-dialog.glade.h:40
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "Select A Background Image"
 msgstr "Вибрати малюнок фону"
-
-#: ../panel/panel-preferences-dialog.glade.h:41
-msgid "Background"
-msgstr "Фон"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid ""
@@ -598,8 +595,8 @@ msgid "_Leave:"
 msgstr "_Залишити:"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
-msgid "Opacity"
-msgstr "Непрозорість"
+msgid "<b>Opacity</b>"
+msgstr "<b>Прозорість</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 msgid ""
@@ -631,7 +628,7 @@ msgid "Remove currently selected item"
 msgstr "Видалити поточний виділений елемент"
 
 #: ../panel/panel-preferences-dialog.glade.h:54
-#: ../plugins/launcher/launcher-dialog.glade.h:22
+#: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Edit the currently selected item"
 msgstr "Редагувати поточний вибраний елемент"
 
@@ -676,61 +673,23 @@ msgstr "Експерт"
 msgid "_Lock Panel"
 msgstr "_Заблокувати панель"
 
-#: ../migrate/main.c:116
-msgid "Welcome to the first start of the panel"
-msgstr "Запрошуємо до першого старту панелі"
+#: ../migrate/main.c:119
+msgid "Tried but failed to migrate your old panel configuration"
+msgstr "Шкода, але не вдалося перенести налаштування Вашої старої панелі"
 
-#: ../migrate/main.c:125
-msgid ""
-"Because the panel moved to a new system for storing the settings, it has to "
-"load a fresh initial configuration."
-msgstr "Через переміщення панелі на нову систему збереження властивостей, вона завантажує свіжу початкову конфігурацію."
-
-#: ../migrate/main.c:127 ../migrate/main.c:136
-msgid "Choose below which setup you want for the first startup."
-msgstr "Виберіть нижче, з яким налаштуванням Ви хочете розпочати перший старт."
-
-#: ../migrate/main.c:129
-msgid "Migrate old config"
-msgstr "Міграція старої конфігурації"
-
-#: ../migrate/main.c:130
-msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr "Міграція старої конфігурації 4.6 на Xfconf"
-
-#: ../migrate/main.c:141
-msgid "Use default config"
-msgstr "Використовувати типову конфігурацію"
-
-#: ../migrate/main.c:142
-msgid "Load the default configuration"
-msgstr "Завантажити типову конфігурацію"
-
-#: ../migrate/main.c:148
-msgid "One empty panel"
-msgstr "Одна порожня панель"
-
-#: ../migrate/main.c:149
-msgid "Start with one empty panel"
-msgstr "Стартувати з однією порожньою панеллю"
-
-#: ../migrate/main.c:160
-msgid "Failed to migrate the old panel configuration"
-msgstr "Не вдалось провести міграцію старої конфігурації панелі"
-
-#: ../migrate/main.c:172
+#: ../migrate/main.c:131
 msgid "Failed to load the default configuration"
 msgstr "Не вдалось завантажити типову конфігурацію"
 
-#: ../migrate/main.c:185
+#: ../migrate/main.c:144
 msgid "Panel config needs migration..."
 msgstr "Потрібно провести міграцію конфігурації панелі..."
 
-#: ../migrate/main.c:189
+#: ../migrate/main.c:148
 msgid "Failed to migrate the existing configuration"
 msgstr "Не вдалось провести міграцію старої конфігурації панелі"
 
-#: ../migrate/main.c:195
+#: ../migrate/main.c:154
 msgid "Panel configuration has been updated."
 msgstr "Конфігурацію панелі оновлено."
 
@@ -759,6 +718,11 @@ msgstr "Показати діалогове вікно підтвердженн�
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Appeara_nce:"
 msgstr "Зовніш_ній вигляд"
+
+#: ../plugins/actions/actions-dialog.glade.h:9
+#: ../plugins/launcher/launcher-dialog.glade.h:24
+msgid "General"
+msgstr "Основне"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "Visible"
@@ -1488,107 +1452,111 @@ msgstr "Немає елементів"
 msgid "Failed to open desktop item editor"
 msgstr "Не вдалось відкрити редактор елементів стільниці"
 
-#: ../plugins/launcher/launcher-dialog.c:855
+#: ../plugins/launcher/launcher-dialog.c:864
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Якщо Ви видалите елемент, його буде повністю вилучено"
 
-#: ../plugins/launcher/launcher-dialog.c:856
+#: ../plugins/launcher/launcher-dialog.c:865
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Дійсно бажаєте видалити \"%s\"?"
 
-#: ../plugins/launcher/launcher-dialog.c:857
+#: ../plugins/launcher/launcher-dialog.c:866
 msgid "Unnamed item"
 msgstr "Неназваний елемент"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:2
-msgid "Add one or more existing items to the launcher"
-msgstr "Додати одну або більше наявних елементів до запускача"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:4
+#: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Default"
 msgstr "Типова"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:5
+#: ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "North"
 msgstr "Північ"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:6
+#: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "West"
 msgstr "Захід"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:7
+#: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "East"
 msgstr "Схід"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:8
+#: ../plugins/launcher/launcher-dialog.glade.h:5
 msgid "South"
 msgstr "Південь"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:9
+#: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "Inside Button"
 msgstr "Всередині кнопки"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:10
+#: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "_Edit Item"
 msgstr "_Редагувати пункт"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:11
+#: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "D_elete Item"
 msgstr "Вилучити пункт"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:12
+#: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Add Appli_cation"
 msgstr "Додати програму"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:13
+#: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "New _Application"
 msgstr "Нова _програми"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:14
+#: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "New _Link"
 msgstr "Нове _посилання"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:13
+msgid "Add one or more existing items to the launcher"
+msgstr "Додати одну або більше наявних елементів до запускача"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
 msgstr "Запуск програм"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:20
-msgid "Add a new empty item"
-msgstr "Додати нову порожню панель"
-
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "Delete the currently selected item"
 msgstr "Видалити поточну виділений елемент"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:24
+#: ../plugins/launcher/launcher-dialog.glade.h:22
+msgid "Add a new empty item"
+msgstr "Додати нову порожню панель"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:23
+msgid "Add a new hyperlink"
+msgstr "Додати нове гіперпосилання"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "Disable t_ooltips"
 msgstr "Вимкнути с_пливаючі повідомлення"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:25
+#: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
 msgstr "Виберіть цю опцію щоб вимкнути спливаючі повідомлення над кнопками панелі чи елементами меню."
 
-#: ../plugins/launcher/launcher-dialog.glade.h:26
+#: ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "Show _label instead of icon"
 msgstr "Показувати _мітки замість значків"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:27
+#: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "Show last _used item in panel"
 msgstr "Показати останні _використовувані в панелі"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:28
+#: ../plugins/launcher/launcher-dialog.glade.h:29
 msgid "Select this option to move the clicked menu item to the panel."
 msgstr "Виберіть цю опцію для переміщення натиснутого елементу меню на панель."
 
-#: ../plugins/launcher/launcher-dialog.glade.h:29
+#: ../plugins/launcher/launcher-dialog.glade.h:30
 msgid "_Arrow button position:"
 msgstr "Позиція кнопки зі _стрілкою:"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:30
+#: ../plugins/launcher/launcher-dialog.glade.h:31
 msgid "Advanced"
 msgstr "Розширений"
 
