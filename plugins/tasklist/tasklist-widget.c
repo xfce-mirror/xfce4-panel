@@ -293,6 +293,9 @@ static void               xfce_tasklist_connect_screen                   (XfceTa
 static void               xfce_tasklist_disconnect_screen                (XfceTasklist         *tasklist);
 static void               xfce_tasklist_gdk_screen_changed               (GdkScreen            *gdk_screen,
                                                                           XfceTasklist         *tasklist);
+static gboolean           xfce_tasklist_configure_event                  (GtkWidget            *widget,
+                                                                          GdkEvent             *event,
+                                                                          XfceTasklist         *tasklist);
 static void               xfce_tasklist_active_window_changed            (WnckScreen           *screen,
                                                                           WnckWindow           *previous_window,
                                                                           XfceTasklist         *tasklist);
@@ -1539,11 +1542,10 @@ xfce_tasklist_connect_screen (XfceTasklist *tasklist)
   for (li = windows; li != NULL; li = li->next)
     xfce_tasklist_window_added (tasklist->screen, li->data, tasklist);
 
-  /* monitor gdk changes */
-  g_signal_connect (G_OBJECT (tasklist->gdk_screen), "monitors-changed",
-      G_CALLBACK (xfce_tasklist_gdk_screen_changed), tasklist);
-  g_signal_connect (G_OBJECT (tasklist->gdk_screen), "size-changed",
-      G_CALLBACK (xfce_tasklist_gdk_screen_changed), tasklist);
+  /* monitor window movement */
+  g_signal_connect (G_OBJECT (gtk_widget_get_toplevel (GTK_WIDGET (tasklist))),
+                    "configure-event",
+                    G_CALLBACK (xfce_tasklist_configure_event), tasklist);
 
   /* monitor screen changes */
   g_signal_connect (G_OBJECT (tasklist->screen), "active-window-changed",
@@ -1629,6 +1631,23 @@ xfce_tasklist_gdk_screen_changed (GdkScreen    *gdk_screen,
       /* update the monitor geometry */
       xfce_tasklist_update_monitor_geometry (tasklist);
     }
+}
+
+
+
+static gboolean
+xfce_tasklist_configure_event (GtkWidget    *widget,
+                               GdkEvent     *event,
+                               XfceTasklist *tasklist)
+{
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+
+  if (!tasklist->all_monitors)
+    {
+      /* update the monitor geometry */
+      xfce_tasklist_update_monitor_geometry (tasklist);
+    }
+  return FALSE;
 }
 
 
