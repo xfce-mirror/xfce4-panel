@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-18 06:31+0200\n"
-"PO-Revision-Date: 2018-10-22 18:11+0000\n"
+"POT-Creation-Date: 2018-11-18 00:31+0100\n"
+"PO-Revision-Date: 2018-11-18 10:35+0000\n"
 "Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce4-panel/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -32,8 +32,7 @@ msgid ""
 msgstr "Afegeix un nou llançador al tauler a partir de la informació d'aquest fitxer d'escriptori"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2667
-#: ../migrate/main.c:117
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2666
 msgid "Panel"
 msgstr "Tauler"
 
@@ -43,18 +42,18 @@ msgstr "Personalitzeu el tauler"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1050
-#: ../panel/panel-preferences-dialog.c:1174
+#: ../panel/panel-preferences-dialog.c:1186
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Esteu segur que voleu suprimir «%s»?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1055
-#: ../panel/panel-preferences-dialog.c:1177
+#: ../panel/panel-preferences-dialog.c:1189
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Si suprimiu l'element del tauler, es perdrà permanentment."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1056 ../panel/panel-dialogs.c:163
-#: ../panel/panel-preferences-dialog.c:1179
+#: ../panel/panel-preferences-dialog.c:1191
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "Cancel"
@@ -62,9 +61,9 @@ msgstr "Cancel·la"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1057
 #: ../panel/panel-plugin-external.c:436
-#: ../panel/panel-preferences-dialog.c:897
-#: ../panel/panel-preferences-dialog.c:1180
-#: ../plugins/launcher/launcher-dialog.c:854
+#: ../panel/panel-preferences-dialog.c:909
+#: ../panel/panel-preferences-dialog.c:1192
+#: ../plugins/launcher/launcher-dialog.c:863
 msgid "Remove"
 msgstr "Suprimeix"
 
@@ -72,7 +71,7 @@ msgstr "Suprimeix"
 msgid "_Properties"
 msgstr "_Propietats"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1213 ../panel/panel-window.c:2755
+#: ../libxfce4panel/xfce-panel-plugin.c:1213 ../panel/panel-window.c:2754
 msgid "_About"
 msgstr "_Quant a"
 
@@ -88,20 +87,20 @@ msgstr "_Suprimeix"
 msgid "Pane_l"
 msgstr "Tau_ler"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:2680
+#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:2679
 msgid "Add _New Items..."
 msgstr "Afegeix elements _nous..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:2695
+#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:2694
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferències del tauler..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1318 ../panel/panel-window.c:2727
+#: ../libxfce4panel/xfce-panel-plugin.c:1318 ../panel/panel-window.c:2726
 msgid "Log _Out"
 msgstr "_Surt"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1338
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2746
+#: ../libxfce4panel/xfce-panel-plugin.c:1338 ../panel/panel-item-dialog.c:208
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2745
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -167,72 +166,72 @@ msgid "Name %s lost on the message dbus, exiting."
 msgstr "S'ha perdut el nom %s en el missatge dbus, se surt."
 
 #. parse context options
-#: ../panel/main.c:258
+#: ../panel/main.c:262
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTS...]"
 
-#: ../panel/main.c:265
+#: ../panel/main.c:269
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Feu «%s --help» per veure l'ús."
 
-#: ../panel/main.c:284
+#: ../panel/main.c:288
 msgid "The Xfce development team. All rights reserved."
 msgstr "L'equip de desenvolupament de Xfce. Tots els drets reservats."
 
-#: ../panel/main.c:285
+#: ../panel/main.c:289
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Envieu els errors a <%s>."
 
-#: ../panel/main.c:351
+#: ../panel/main.c:355
 msgid "There is already a running instance"
 msgstr "Ja hi ha una altra instància executant-se"
 
 #. spawn ourselfs again
-#: ../panel/main.c:394
+#: ../panel/main.c:398
 msgid "Restarting..."
 msgstr "S'està reiniciant..."
 
-#: ../panel/main.c:409
+#: ../panel/main.c:413
 msgid "Failed to show the preferences dialog"
 msgstr "Ha fallat la visualització del diàleg de preferències"
 
-#: ../panel/main.c:411
+#: ../panel/main.c:415
 msgid "Failed to show the add new items dialog"
 msgstr "Ha fallat la visualització del diàleg d'afegiment d'elements nous"
 
-#: ../panel/main.c:413
+#: ../panel/main.c:417
 msgid "Failed to save the panel configuration"
 msgstr "Ha fallat el desament de la configuració del tauler"
 
-#: ../panel/main.c:415
+#: ../panel/main.c:419
 msgid "Failed to add a plugin to the panel"
 msgstr "Ha fallat l'afegiment d'un connector al tauler"
 
-#: ../panel/main.c:417
+#: ../panel/main.c:421
 msgid "Failed to restart the panel"
 msgstr "Ha fallat el reinici del tauler"
 
-#: ../panel/main.c:419
+#: ../panel/main.c:423
 msgid "Failed to quit the panel"
 msgstr "Ha fallat la sortida del tauler"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:425
 msgid "Failed to send D-Bus message"
 msgstr "Ha fallat l'enviament del missatge D-BUS"
 
-#: ../panel/main.c:431 ../panel/panel-plugin-external.c:435
+#: ../panel/main.c:435 ../panel/panel-plugin-external.c:435
 msgid "Execute"
 msgstr "Executa"
 
-#: ../panel/main.c:432
+#: ../panel/main.c:436
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Voleu iniciar el tauler? Si és el cas, assegureu-vos que deseu la sessió quan sortiu per tal que el tauler s'iniciï automàticament el pròxim cop que inicieu la sessió."
 
-#: ../panel/main.c:435 ../panel/main.c:449
+#: ../panel/main.c:439 ../panel/main.c:453
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "No s'ha trobat una instància en marxa de %s"
@@ -302,7 +301,7 @@ msgid "translator-credits"
 msgstr "Carles Muñoz Gorriz <carlesmu@internuatas.org>, 2003-2004, 2008-2010.\nHarald Servat <redcrash@gmail.com>, 2010.\nIvà Burgos <debian.public@gmail.com>, 2007.\nPau Rul·lan Ferragut <paurullan@bulma.net>, 2005-2007.\nRobert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2016-2018."
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:12
 msgid "Add New Item"
 msgstr "Afegeix un element nou"
 
@@ -314,7 +313,7 @@ msgstr "Afegeix"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Trieu un tauler per al connector nou:"
 
-#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:832
+#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:844
 #, c-format
 msgid "Panel %d"
 msgstr "Tauler %d"
@@ -329,33 +328,37 @@ msgstr "El tauler està executant-se en mode quiosc; no se us permet fer cap can
 msgid "Modifying the panel is not allowed"
 msgstr "No es permet la modificació del tauler"
 
-#: ../panel/panel-item-dialog.c:194
+#: ../panel/panel-item-dialog.c:195
 msgid "Add New Items"
 msgstr "Afegeix elements nous"
 
-#: ../panel/panel-item-dialog.c:196
+#: ../panel/panel-item-dialog.c:197
 msgid "Add new plugins to the panel"
 msgstr "Afegiu connectors nous al tauler"
 
-#: ../panel/panel-item-dialog.c:202
+#: ../panel/panel-item-dialog.c:203
 msgid "_Add"
 msgstr "_Afegeix"
 
-#: ../panel/panel-item-dialog.c:206
-msgid "Help"
-msgstr "Ajuda"
+#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-preferences-dialog.glade.h:11
+#: ../plugins/actions/actions-dialog.glade.h:3
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
+#: ../plugins/clock/clock-dialog.glade.h:7
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+#: ../plugins/pager/pager-dialog.glade.h:9
+#: ../plugins/separator/separator-dialog.glade.h:5
+#: ../plugins/systray/systray-dialog.glade.h:2
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+msgid "_Close"
+msgstr "Tan_ca"
 
-#: ../panel/panel-item-dialog.c:208 ../panel/panel-tic-tac-toe.c:124
-#: ../plugins/launcher/launcher-dialog.glade.h:17
-msgid "Close"
-msgstr "Tanca"
-
-#: ../panel/panel-item-dialog.c:221
-#: ../plugins/launcher/launcher-dialog.glade.h:3
+#: ../panel/panel-item-dialog.c:230
+#: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "_Search:"
 msgstr "_Cerca:"
 
-#: ../panel/panel-item-dialog.c:229
+#: ../panel/panel-item-dialog.c:238
 msgid "Enter search phrase here"
 msgstr "Introduïu la frase a cercar aquí"
 
@@ -386,25 +389,25 @@ msgstr "Primària"
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:898
+#: ../panel/panel-preferences-dialog.c:910
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "El tauler i la configuració dels connectors seran eliminats permanentment."
 
-#: ../panel/panel-preferences-dialog.c:899
+#: ../panel/panel-preferences-dialog.c:911
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Esteu segur que voleu eliminar el tauler %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1016
+#: ../panel/panel-preferences-dialog.c:1028
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1021
+#: ../panel/panel-preferences-dialog.c:1033
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -413,7 +416,7 @@ msgstr "Nom intern: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1033
+#: ../panel/panel-preferences-dialog.c:1045
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nom intern: %s-%d"
@@ -456,18 +459,6 @@ msgstr "Color sòlid"
 msgid "Background image"
 msgstr "Imatge de fons"
 
-#: ../panel/panel-preferences-dialog.glade.h:11
-#: ../plugins/actions/actions-dialog.glade.h:3
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#: ../plugins/clock/clock-dialog.glade.h:7
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
-#: ../plugins/pager/pager-dialog.glade.h:9
-#: ../plugins/separator/separator-dialog.glade.h:5
-#: ../plugins/systray/systray-dialog.glade.h:2
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
-msgid "_Close"
-msgstr "Tan_ca"
-
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Add a new panel"
 msgstr "Afegeix un tauler nou"
@@ -485,12 +476,12 @@ msgid "Switch between panel presets"
 msgstr "Canvia entre els preestabliments del tauler"
 
 #: ../panel/panel-preferences-dialog.glade.h:17
-msgid "M_ode:"
-msgstr "M_ode:"
+msgid "<b>General</b>"
+msgstr "<b>General</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:18
-msgid "O_utput:"
-msgstr "_Sortida:"
+msgid "M_ode:"
+msgstr "M_ode:"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid "Span mo_nitors"
@@ -510,82 +501,80 @@ msgid ""
 msgstr "Seleccioneu aquesta opció per bloquejar la posició del tauler i ocultar els tiradors."
 
 #: ../panel/panel-preferences-dialog.glade.h:23
-msgid "Automatically hide the panel:"
-msgstr "Oculta automàticament el tauler:"
-
-#: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Don't _reserve space on borders"
 msgstr "No _reservis cap espai a les vores"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:24
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr "Seleccioneu aquesta opció per maximitzar les finestres i que cobreixin el tauler. Això només funciona quan el tauler està adjuntat a una vora de la pantalla."
 
+#: ../panel/panel-preferences-dialog.glade.h:25
+msgid "Automatically hide the panel:"
+msgstr "Oculta automàticament el tauler:"
+
 #: ../panel/panel-preferences-dialog.glade.h:26
-#: ../plugins/actions/actions-dialog.glade.h:9
-#: ../plugins/launcher/launcher-dialog.glade.h:23
-msgid "General"
-msgstr "General"
+msgid "O_utput:"
+msgstr "_Sortida:"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
-msgid "A_utomatically increase the length"
-msgstr "Incrementa _automàticament la longitud"
-
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:28
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
-msgstr "Seleccioneu aquesta opció per augmentar automàticament la longitud del tauler quan els connectors necessitin més espai."
+msgid "<b>Measurements</b>"
+msgstr "<b>Mesures</b>"
+
+#: ../panel/panel-preferences-dialog.glade.h:29
+msgid "Row _Size (pixels):"
+msgstr "_Mida de la fila (píxels):"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
-#, no-c-format
-msgid "L_ength (%):"
-msgstr "_Longitud (%):"
-
-#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Num_ber of rows:"
 msgstr "_Nombre de files:"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
-msgid "Row _Size (pixels):"
-msgstr "_Mida de la fila (píxels):"
+#, no-c-format
+msgid "L_ength (%):"
+msgstr "_Longitud (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#: ../panel/panel-preferences-dialog.glade.h:33
+msgid "A_utomatically increase the length"
+msgstr "Incrementa _automàticament la longitud"
+
 #: ../panel/panel-preferences-dialog.glade.h:34
-msgid "Measurements"
-msgstr "Mides"
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr "Seleccioneu aquesta opció per augmentar automàticament la longitud del tauler quan els connectors necessitin més espai."
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid "D_isplay"
 msgstr "V_isualització"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
+msgid "<b>Background</b>"
+msgstr "<b>Fons</b>"
+
+#: ../panel/panel-preferences-dialog.glade.h:37
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Style:"
 msgstr "_Estil:"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "C_olor:"
 msgstr "C_olor:"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "Pick a Panel Color"
 msgstr "Tria un color del tauler"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "_File:"
 msgstr "_Fitxer:"
 
-#: ../panel/panel-preferences-dialog.glade.h:40
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "Select A Background Image"
 msgstr "Seleccioneu una imatge per al fons"
-
-#: ../panel/panel-preferences-dialog.glade.h:41
-msgid "Background"
-msgstr "Fons"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid ""
@@ -604,8 +593,8 @@ msgid "_Leave:"
 msgstr "_Sortida:"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
-msgid "Opacity"
-msgstr "Opacitat"
+msgid "<b>Opacity</b>"
+msgstr "<b>Opacitat</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 msgid ""
@@ -637,7 +626,7 @@ msgid "Remove currently selected item"
 msgstr "Suprimeix l'element seleccionat"
 
 #: ../panel/panel-preferences-dialog.glade.h:54
-#: ../plugins/launcher/launcher-dialog.glade.h:22
+#: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Edit the currently selected item"
 msgstr "Edita l'element seleccionat"
 
@@ -652,6 +641,11 @@ msgstr "Ele_ments"
 #: ../panel/panel-tic-tac-toe.c:122
 msgid "_New Game"
 msgstr "_Nou joc"
+
+#: ../panel/panel-tic-tac-toe.c:124
+#: ../plugins/launcher/launcher-dialog.glade.h:17
+msgid "Close"
+msgstr "Tanca"
 
 #: ../panel/panel-tic-tac-toe.c:133
 msgid "_Level:"
@@ -673,65 +667,27 @@ msgstr "Experimentat"
 msgid "Expert"
 msgstr "Expert"
 
-#: ../panel/panel-window.c:2712
+#: ../panel/panel-window.c:2711
 msgid "_Lock Panel"
 msgstr "_Bloqueja el tauler"
 
-#: ../migrate/main.c:116
-msgid "Welcome to the first start of the panel"
-msgstr "Benvingut al primer cop que s'inicia el tauler"
+#: ../migrate/main.c:119
+msgid "Tried but failed to migrate your old panel configuration"
+msgstr "S'ha intentat però ha fallat la migració de la configuració antiga del tauler"
 
-#: ../migrate/main.c:125
-msgid ""
-"Because the panel moved to a new system for storing the settings, it has to "
-"load a fresh initial configuration."
-msgstr "A causa que el tauler s'ha mogut a un nou sistema per a l'emmagatzematge dels ajusts, aquest ha de carregar una configuració inicial des de zero."
-
-#: ../migrate/main.c:127 ../migrate/main.c:136
-msgid "Choose below which setup you want for the first startup."
-msgstr "Trieu a continuació quina configuració voleu per la primera engegada."
-
-#: ../migrate/main.c:129
-msgid "Migrate old config"
-msgstr "Migra l'antiga configuració"
-
-#: ../migrate/main.c:130
-msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr "Migra l'antiga configuració a Xfconf"
-
-#: ../migrate/main.c:141
-msgid "Use default config"
-msgstr "Utilitza la configuració predeterminada"
-
-#: ../migrate/main.c:142
-msgid "Load the default configuration"
-msgstr "Carrega la configuració predeterminada"
-
-#: ../migrate/main.c:148
-msgid "One empty panel"
-msgstr "Un tauler buit"
-
-#: ../migrate/main.c:149
-msgid "Start with one empty panel"
-msgstr "Comença amb un tauler buit"
-
-#: ../migrate/main.c:160
-msgid "Failed to migrate the old panel configuration"
-msgstr "Ha fallat la migració de la configuració antiga del tauler"
-
-#: ../migrate/main.c:172
+#: ../migrate/main.c:131
 msgid "Failed to load the default configuration"
 msgstr "Ha fallat la càrrega de la configuració predeterminada"
 
-#: ../migrate/main.c:185
+#: ../migrate/main.c:144
 msgid "Panel config needs migration..."
 msgstr "La configuració del tauler necessita la migració..."
 
-#: ../migrate/main.c:189
+#: ../migrate/main.c:148
 msgid "Failed to migrate the existing configuration"
 msgstr "Ha fallat la migració de la configuració existent"
 
-#: ../migrate/main.c:195
+#: ../migrate/main.c:154
 msgid "Panel configuration has been updated."
 msgstr "La configuració del tauler s'ha actualitzat."
 
@@ -760,6 +716,11 @@ msgstr "Mostra un diàleg de confirmació amb un comptador de 30 segons per algu
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Appeara_nce:"
 msgstr "Apare_nça:"
+
+#: ../plugins/actions/actions-dialog.glade.h:9
+#: ../plugins/launcher/launcher-dialog.glade.h:24
+msgid "General"
+msgstr "General"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "Visible"
@@ -1489,107 +1450,111 @@ msgstr "Sense elements"
 msgid "Failed to open desktop item editor"
 msgstr "Ha fallat l'obriment de l'editor d'elements de l'escriptori"
 
-#: ../plugins/launcher/launcher-dialog.c:855
+#: ../plugins/launcher/launcher-dialog.c:864
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Si esborreu un element, se suprimirà permanentment"
 
-#: ../plugins/launcher/launcher-dialog.c:856
+#: ../plugins/launcher/launcher-dialog.c:865
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Esteu segur que voleu suprimir «%s»?"
 
-#: ../plugins/launcher/launcher-dialog.c:857
+#: ../plugins/launcher/launcher-dialog.c:866
 msgid "Unnamed item"
 msgstr "Element sense nom"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:2
-msgid "Add one or more existing items to the launcher"
-msgstr "Afegeix un o més elements al llançador"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:4
+#: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Default"
 msgstr "Predeterminat"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:5
+#: ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "North"
 msgstr "Nord"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:6
+#: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "West"
 msgstr "Oest"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:7
+#: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "East"
 msgstr "Est"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:8
+#: ../plugins/launcher/launcher-dialog.glade.h:5
 msgid "South"
 msgstr "Sud"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:9
+#: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "Inside Button"
 msgstr "Com a botó"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:10
+#: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "_Edit Item"
 msgstr "_Edita l'element"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:11
+#: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "D_elete Item"
 msgstr "_Suprimeix l'element"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:12
+#: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Add Appli_cation"
 msgstr "Afegeix una _aplicació"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:13
+#: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "New _Application"
 msgstr "_Aplicació nova"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:14
+#: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "New _Link"
 msgstr "En_llaç nou"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:13
+msgid "Add one or more existing items to the launcher"
+msgstr "Afegeix un o més elements al llançador"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
 msgstr "Llançador"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:20
-msgid "Add a new empty item"
-msgstr "Afegeix un element buit nou"
-
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "Delete the currently selected item"
 msgstr "Suprimeix l'element seleccionat"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:24
+#: ../plugins/launcher/launcher-dialog.glade.h:22
+msgid "Add a new empty item"
+msgstr "Afegeix un element buit nou"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:23
+msgid "Add a new hyperlink"
+msgstr "Afegeix un hiperenllaç nou"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "Disable t_ooltips"
 msgstr "Inhabilita els quadres de _text emergents"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:25
+#: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
 msgstr "Seleccioneu aquesta opció per inhabilitar els indicadors de funció quan us moveu sobre els botons del tauler o els elements del menú."
 
-#: ../plugins/launcher/launcher-dialog.glade.h:26
+#: ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "Show _label instead of icon"
 msgstr "Mostra una _etiqueta en lloc de la icona"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:27
+#: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "Show last _used item in panel"
 msgstr "Mostra l'últim _element utilitzat al tauler"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:28
+#: ../plugins/launcher/launcher-dialog.glade.h:29
 msgid "Select this option to move the clicked menu item to the panel."
 msgstr "Seleccioneu aquesta opció per a moure l'element del menú que s'ha fet clic al tauler."
 
-#: ../plugins/launcher/launcher-dialog.glade.h:29
+#: ../plugins/launcher/launcher-dialog.glade.h:30
 msgid "_Arrow button position:"
 msgstr "Botó de _fletxa:"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:30
+#: ../plugins/launcher/launcher-dialog.glade.h:31
 msgid "Advanced"
 msgstr "Avançat"
 
