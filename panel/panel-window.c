@@ -1673,11 +1673,10 @@ panel_window_screen_struts_set (PanelWindow *window)
   gulong         struts[N_STRUTS] = { 0, };
   GdkRectangle  *alloc = &window->alloc;
   GdkMonitor    *monitor;
-  GdkRectangle   geometry;
   guint          i;
   gboolean       update_struts = FALSE;
   gint           n;
-  gint           scale_factor;
+  gint           scale_factor = 1;
   const gchar   *strut_border[] = { "left", "right", "top", "bottom" };
   const gchar   *strut_xy[] = { "y", "y", "x", "x" };
 
@@ -1689,9 +1688,9 @@ panel_window_screen_struts_set (PanelWindow *window)
   if (!gtk_widget_get_realized (GTK_WIDGET (window)))
     return;
 
-  monitor = gdk_display_get_monitor_at_point (window->display, window->base_x, window->base_y);
-  scale_factor = gdk_monitor_get_scale_factor(monitor);
-  gdk_monitor_get_geometry(monitor, &geometry);
+  monitor = gdk_display_get_monitor_at_point (window->display, alloc->x, alloc->y);
+  if (monitor)
+    scale_factor = gdk_monitor_get_scale_factor(monitor);
 
   /* set the struts */
   /* note that struts are relative to the screen edge! */
@@ -1705,7 +1704,7 @@ panel_window_screen_struts_set (PanelWindow *window)
   else if (window->struts_edge == STRUTS_EDGE_BOTTOM)
     {
       /* the window is snapped on the bottom screen edge */
-      struts[STRUT_BOTTOM] = (geometry.height - alloc->y) * scale_factor;
+      struts[STRUT_BOTTOM] = (gdk_screen_get_height(window->screen) - alloc->y) * scale_factor;
       struts[STRUT_BOTTOM_START_X] = alloc->x * scale_factor;
       struts[STRUT_BOTTOM_END_X] = (alloc->x + alloc->width - 1) * scale_factor;
     }
@@ -1719,7 +1718,7 @@ panel_window_screen_struts_set (PanelWindow *window)
   else if (window->struts_edge == STRUTS_EDGE_RIGHT)
     {
       /* the window is snapped on the right screen edge */
-      struts[STRUT_RIGHT] = (geometry.width - alloc->x) * scale_factor;
+      struts[STRUT_RIGHT] = (gdk_screen_get_width(window->screen) - alloc->x) * scale_factor;
       struts[STRUT_RIGHT_START_Y] = alloc->y * scale_factor;
       struts[STRUT_RIGHT_END_Y] = (alloc->y + alloc->height - 1) * scale_factor;
     }
