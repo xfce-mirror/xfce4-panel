@@ -326,7 +326,10 @@ launcher_plugin_class_init (LauncherPluginClass *klass)
 static void
 launcher_plugin_init (LauncherPlugin *plugin)
 {
-  GtkIconTheme *icon_theme;
+  GtkIconTheme    *icon_theme;
+  GtkCssProvider  *css_provider;
+  GtkStyleContext *context;
+  gchar           *css_string;
 
   plugin->disable_tooltips = FALSE;
   plugin->move_first = FALSE;
@@ -371,6 +374,16 @@ launcher_plugin_init (LauncherPlugin *plugin)
       G_CALLBACK (launcher_plugin_button_drag_leave), plugin);
   g_signal_connect_after (G_OBJECT (plugin->button), "draw",
       G_CALLBACK (launcher_plugin_button_draw), plugin);
+
+  /* Make sure there aren't any constraints set on buttons by themes (Adwaita sets those minimum sizes) */
+  context = gtk_widget_get_style_context (plugin->button);
+  css_provider = gtk_css_provider_new ();
+  css_string = g_strdup_printf ("#launcher-arrow { min-height: 0; min-width: 0; }");
+  gtk_css_provider_load_from_data (css_provider, css_string, -1, NULL);
+  gtk_style_context_add_provider (context,
+                                  GTK_STYLE_PROVIDER (css_provider),
+                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  g_free (css_string);
 
   plugin->child = gtk_image_new ();
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->child);
@@ -1262,15 +1275,14 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 {
   LauncherPlugin    *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
   gint               p_width, p_height;
-  gint               a_size;
-  gint               icon_size;
+  gint               a_width, a_height;
   gboolean           horizontal;
   LauncherArrowType  arrow_position;
 
   /* initialize the plugin size */
   size /= xfce_panel_plugin_get_nrows (panel_plugin);
   p_width = p_height = size;
-  icon_size = xfce_panel_plugin_get_icon_size (panel_plugin);
+  a_width = a_height = -1;
 
   /* add the arrow size */
   if (gtk_widget_get_visible (plugin->arrow))
@@ -1286,20 +1298,20 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
         {
         case LAUNCHER_ARROW_NORTH:
         case LAUNCHER_ARROW_SOUTH:
-          if (!horizontal)
-            {
-              gtk_widget_get_preferred_height (plugin->arrow, NULL, &a_size);
-              p_height += a_size;
-            }
+          a_height = ARROW_BUTTON_SIZE;
+          if (horizontal)
+            p_width -= ARROW_BUTTON_SIZE;
+          else
+            p_height += ARROW_BUTTON_SIZE;
           break;
 
         case LAUNCHER_ARROW_EAST:
         case LAUNCHER_ARROW_WEST:
+          a_width = ARROW_BUTTON_SIZE;
           if (horizontal)
-            {
-              gtk_widget_get_preferred_width (plugin->arrow, NULL, &a_size);
-              p_width += a_size;
-            }
+            p_width += ARROW_BUTTON_SIZE;
+          else
+            p_height -= ARROW_BUTTON_SIZE;
           break;
 
         default:
@@ -1307,29 +1319,43 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
           panel_assert_not_reached ();
           break;
         }
+
+        /* set the arrow size */
+        gtk_widget_set_size_request (plugin->arrow, a_width, a_height);
+
     }
 
   /* set the panel plugin size */
-  if (plugin->show_label)
+  if (plugin->show_label) {
     gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), -1, -1);
+  }
   else {
-    gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), p_width, p_height);
+    GtkStyleContext *context;
+    GtkBorder        padding, border;
+    gint             icon_width, icon_height;
+
+    context = gtk_widget_get_style_context (plugin->button);
+    gtk_style_context_get_padding (context, gtk_widget_get_state_flags (plugin->button), &padding);
+    gtk_style_context_get_border (context, gtk_widget_get_state_flags (plugin->button), &border);
+    icon_width = p_width - (padding.left + padding.right + border.left + border.right);
+    icon_height = p_height - (padding.top + padding.bottom + border.top + border.bottom);
+
     /* if the icon is a pixbuf we have to recreate and scale it */
     if (plugin->pixbuf != NULL &&
         plugin->icon_name != NULL) {
       g_object_unref (plugin->pixbuf);
       plugin->pixbuf = gdk_pixbuf_new_from_file_at_size (plugin->icon_name,
-                                                         icon_size, icon_size,
+                                                         icon_width, icon_height,
                                                          NULL);
       gtk_image_set_from_pixbuf (GTK_IMAGE (plugin->child), plugin->pixbuf);
     }
     /* set the panel plugin icon size */
-    else
-      gtk_image_set_pixel_size (GTK_IMAGE (plugin->child), icon_size);
+    else {
+      gtk_image_set_pixel_size (GTK_IMAGE (plugin->child), MIN (icon_width, icon_height));
+    }
   }
 
-
-  return TRUE;
+  return FALSE;
 }
 
 
@@ -1417,8 +1443,10 @@ launcher_plugin_pack_widgets (LauncherPlugin *plugin)
   panel_assert (pos != LAUNCHER_ARROW_DEFAULT);
 
   /* set the position of the arrow button in the box */
-  gtk_box_reorder_child (GTK_BOX (plugin->box), plugin->arrow,
-      (pos == LAUNCHER_ARROW_WEST || pos == LAUNCHER_ARROW_NORTH) ? 0 : -1);
+  gtk_box_set_child_packing (GTK_BOX (plugin->box), plugin->arrow, TRUE, TRUE, 0,
+                      (pos == LAUNCHER_ARROW_SOUTH || pos == LAUNCHER_ARROW_EAST) ? GTK_PACK_END : GTK_PACK_START);
+  gtk_box_set_child_packing (GTK_BOX (plugin->box), plugin->button, FALSE, FALSE, 0,
+                      (pos == LAUNCHER_ARROW_SOUTH || pos == LAUNCHER_ARROW_EAST) ? GTK_PACK_START : GTK_PACK_END);
 
   /* set the orientation */
   gtk_orientable_set_orientation (GTK_ORIENTABLE (plugin->box),
