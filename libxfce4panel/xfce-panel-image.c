@@ -308,7 +308,6 @@ xfce_panel_image_finalize (GObject *object)
 
 
 
-//#if GTK_CHECK_VERSION (3, 0, 0) && !GTK_CHECK_VERSION (3, 10, 0)
 #if GTK_CHECK_VERSION (3, 0, 0)
 #define GTK_BUTTON_SIZING_FIX
 #endif
@@ -704,7 +703,7 @@ xfce_panel_image_load (gpointer data)
   if (priv->pixbuf != NULL)
     {
       /* use the pixbuf set by the user */
-      pixbuf = g_object_ref (G_OBJECT (priv->pixbuf));
+      pixbuf = (GdkPixbuf *) g_object_ref (G_OBJECT (priv->pixbuf));
 
       if (G_LIKELY (pixbuf != NULL))
         {
@@ -758,7 +757,7 @@ xfce_panel_image_scale_pixbuf (GdkPixbuf *source,
 
   /* check if we need to scale */
   if (source_width <= dest_width && source_height <= dest_height)
-    return g_object_ref (G_OBJECT (source));
+    return (GdkPixbuf *) g_object_ref (G_OBJECT (source));
 
   /* calculate the new dimensions */
 
