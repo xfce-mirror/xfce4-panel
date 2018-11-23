@@ -73,6 +73,8 @@ static void                     panel_preferences_dialog_panel_add              
                                                                                  PanelPreferencesDialog *dialog);
 static void                     panel_preferences_dialog_panel_remove           (GtkWidget              *widget,
                                                                                  PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_compositing_clicked    (GtkButton              *button,
+                                                                                 gpointer                user_data);
 static void                     panel_preferences_dialog_panel_switch           (GtkWidget              *widget,
                                                                                  PanelPreferencesDialog *dialog);
 static XfcePanelPluginProvider *panel_preferences_dialog_item_get_selected      (PanelPreferencesDialog *dialog,
@@ -182,6 +184,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   GtkTreeSelection  *selection;
   gchar             *path_old;
   gchar             *path_new;
+  gchar             *xfwm4_tweaks;
 
   dialog->bindings = NULL;
   dialog->application = panel_application_get ();
@@ -233,6 +236,16 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   g_object_bind_property (G_OBJECT (object), "sensitive",
                           G_OBJECT (info), "visible",
                           G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
+
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "xfwm4-settings");
+  panel_return_if_fail (G_IS_OBJECT (object));
+  xfwm4_tweaks = g_find_program_in_path ("xfwm4-tweaks-settings");
+  if (xfwm4_tweaks != NULL)
+    gtk_widget_show (GTK_WIDGET (object));
+  else
+    gtk_widget_hide (GTK_WIDGET (object));
+  g_signal_connect (G_OBJECT (object), "clicked",
+                    G_CALLBACK (panel_preferences_dialog_compositing_clicked), xfwm4_tweaks);
 
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "background-image");
   panel_return_if_fail (GTK_IS_FILE_CHOOSER_BUTTON (object));
@@ -927,6 +940,29 @@ panel_preferences_dialog_panel_remove (GtkWidget              *widget,
       /* rebuild the selector */
       panel_preferences_dialog_panel_combobox_rebuild (dialog, CLAMP (idx, 0, n_windows));
     }
+}
+
+
+
+static void
+panel_preferences_dialog_compositing_clicked (GtkButton *button, gpointer user_data)
+{
+  gchar    *command = user_data;
+  GAppInfo *app_info = NULL;
+  GError   *error = NULL;
+
+  app_info = g_app_info_create_from_commandline (command, "Window Manager Tweaks", G_APP_INFO_CREATE_NONE, &error);
+  if (G_UNLIKELY (app_info == NULL)) {
+    g_warning ("Could not find application %s", error->message);
+    return;
+  }
+  if (error != NULL)
+    g_error_free (error);
+
+  if (!g_app_info_launch (app_info, NULL, NULL, &error))
+    g_warning ("Could not launch the application %s", error->message);
+  if (error != NULL)
+    g_error_free (error);
 }
 
 
