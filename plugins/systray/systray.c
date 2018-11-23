@@ -721,7 +721,7 @@ systray_plugin_box_draw_icon (GtkWidget *child,
 }
 
 
-#if GTK_CHECK_VERSION (3, 22, 0)
+
 static void
 systray_plugin_box_draw (GtkWidget *box,
                          cairo_t   *cr,
@@ -746,23 +746,6 @@ systray_plugin_box_draw (GtkWidget *box,
   gtk_container_foreach (GTK_CONTAINER (box),
                          (GtkCallback) systray_plugin_box_draw_icon, cr);
 }
-#else
-static void
-systray_plugin_box_draw (GtkWidget *box,
-                         cairo_t   *cr,
-                         gpointer   user_data)
-{
-  panel_return_if_fail (cr != NULL);
-
-  if (!gtk_widget_is_composited (box))
-    return;
-
-  /* separately draw all the composed tray icons after gtk
-   * handled the draw event */
-  gtk_container_foreach (GTK_CONTAINER (box),
-                         (GtkCallback) systray_plugin_box_draw_icon, cr);
-}
-#endif
 
 
 

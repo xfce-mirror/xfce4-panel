@@ -58,7 +58,8 @@ static gboolean panel_base_window_enter_notify_event          (GtkWidget        
                                                                GdkEventCrossing     *event);
 static gboolean panel_base_window_leave_notify_event          (GtkWidget            *widget,
                                                                GdkEventCrossing     *event);
-static void     panel_base_window_composited_changed          (GtkWidget            *widget);
+static void     panel_base_window_composited_changed          (GdkScreen            *screen,
+                                                               GtkWidget            *widget);
 static gboolean panel_base_window_active_timeout              (gpointer              user_data);
 static void     panel_base_window_active_timeout_destroyed    (gpointer              user_data);
 static void     panel_base_window_set_background_color_css    (PanelBaseWindow      *window);
@@ -125,7 +126,6 @@ panel_base_window_class_init (PanelBaseWindowClass *klass)
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->enter_notify_event = panel_base_window_enter_notify_event;
   gtkwidget_class->leave_notify_event = panel_base_window_leave_notify_event;
-  gtkwidget_class->composited_changed = panel_base_window_composited_changed;
   gtkwidget_class->screen_changed = panel_base_window_screen_changed;
 
   g_object_class_install_property (gobject_class,
@@ -194,6 +194,7 @@ static void
 panel_base_window_init (PanelBaseWindow *window)
 {
   GtkStyleContext *context;
+  GdkScreen       *screen;
 
   window->priv = panel_base_window_get_instance_private (window);
 
@@ -203,10 +204,15 @@ panel_base_window_init (PanelBaseWindow *window)
   window->background_rgba = NULL;
   window->enter_opacity = 1.00;
   window->leave_opacity = 1.00;
+  window->leave_opacity_old = 1.00;
 
   window->priv->css_provider = gtk_css_provider_new ();
   window->priv->borders = PANEL_BORDER_NONE;
   window->priv->active_timeout_id = 0;
+
+  screen = gtk_widget_get_screen (GTK_WIDGET (window));
+  g_signal_connect (G_OBJECT (screen), "composited-changed",
+                    G_CALLBACK (panel_base_window_composited_changed), window);
 
   /* some wm require stick to show the window on all workspaces, on xfwm4
    * the type-hint already takes care of that */
@@ -445,11 +451,7 @@ panel_base_window_screen_changed (GtkWidget *widget, GdkScreen *previous_screen)
   if (visual != NULL)
     {
       gtk_widget_set_visual (widget, visual);
-#if GTK_CHECK_VERSION (3, 22, 0)
       window->is_composited = gdk_screen_is_composited (screen);
-#else
-      window->is_composited = gtk_widget_is_composited (widget);
-#endif
     }
 
    panel_debug (PANEL_DEBUG_BASE_WINDOW,
@@ -504,7 +506,8 @@ panel_base_window_leave_notify_event (GtkWidget        *widget,
 
 
 static void
-panel_base_window_composited_changed (GtkWidget *widget)
+panel_base_window_composited_changed (GdkScreen *screen,
+                                      GtkWidget *widget)
 {
   PanelBaseWindow *window = PANEL_BASE_WINDOW (widget);
   gboolean         was_composited = window->is_composited;
@@ -512,14 +515,8 @@ panel_base_window_composited_changed (GtkWidget *widget)
   GtkAllocation    allocation;
 
   /* set new compositing state */
-#if GTK_CHECK_VERSION (3, 22, 0)
-  GdkScreen       *screen;
-
-  screen = gtk_window_get_screen (GTK_WINDOW (window));
   window->is_composited = gdk_screen_is_composited (screen);
-#else
-  window->is_composited = gtk_widget_is_composited (widget);
-#endif
+
   if (window->is_composited == was_composited)
     return;
 

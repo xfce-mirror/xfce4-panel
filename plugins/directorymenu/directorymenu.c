@@ -395,11 +395,9 @@ directory_menu_plugin_configure_plugin_icon_chooser (GtkWidget           *button
                                          _("OK"), GTK_RESPONSE_ACCEPT,
                                          NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_ACCEPT);
-#if !GTK_CHECK_VERSION (3, 0, 0)
   gtk_dialog_set_alternative_button_order (GTK_DIALOG (chooser),
                                            GTK_RESPONSE_ACCEPT,
                                            GTK_RESPONSE_CANCEL, -1);
-#endif
 
   if (!panel_str_is_empty (plugin->icon_name))
   exo_icon_chooser_dialog_set_icon (EXO_ICON_CHOOSER_DIALOG (chooser), plugin->icon_name);
@@ -1017,16 +1015,10 @@ directory_menu_plugin_menu (GtkWidget           *button,
                            g_object_unref);
   directory_menu_plugin_menu_load (menu, plugin);
 
-#if GTK_CHECK_VERSION (3, 22, 0)
   gtk_menu_popup_at_widget (GTK_MENU (menu), button,
                             xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
                             ? GDK_GRAVITY_WEST : GDK_GRAVITY_NORTH,
                             xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
                             ? GDK_GRAVITY_EAST : GDK_GRAVITY_SOUTH,
                             NULL);
-#else
-  gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
-                  button != NULL ? xfce_panel_plugin_position_menu : NULL,
-                  plugin, 1, gtk_get_current_event_time ());
-#endif
 }

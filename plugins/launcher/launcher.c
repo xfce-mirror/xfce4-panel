@@ -1706,7 +1706,6 @@ launcher_plugin_menu_popup (gpointer user_data)
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->arrow), TRUE);
 
   /* popup the menu */
-#if GTK_CHECK_VERSION (3, 22, 0)
   gtk_menu_popup_at_widget (GTK_MENU (plugin->menu),
                             plugin->button,
                             xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
@@ -1714,12 +1713,6 @@ launcher_plugin_menu_popup (gpointer user_data)
                             xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
                             ? GDK_GRAVITY_EAST : GDK_GRAVITY_SOUTH,
                             NULL);
-#else
-  gtk_menu_popup (GTK_MENU (plugin->menu), NULL, NULL,
-                  xfce_panel_plugin_position_menu,
-                  XFCE_PANEL_PLUGIN (plugin), 1,
-                  gtk_get_current_event_time ());
-#endif
 
   /* fallback to manual positioning, this is used with
    * drag motion over the arrow button */

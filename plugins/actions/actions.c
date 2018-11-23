@@ -1343,16 +1343,10 @@ actions_plugin_menu (GtkWidget     *button,
         }
     }
 
-#if GTK_CHECK_VERSION (3, 22, 0)
   gtk_menu_popup_at_widget (GTK_MENU (plugin->menu), button,
                             xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
                             ? GDK_GRAVITY_WEST : GDK_GRAVITY_NORTH,
                             xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
                             ? GDK_GRAVITY_EAST : GDK_GRAVITY_SOUTH,
                             NULL);
-#else
-  gtk_menu_popup (GTK_MENU (plugin->menu), NULL, NULL,
-                  button != NULL ? xfce_panel_plugin_position_menu : NULL,
-                  plugin, 1, gtk_get_current_event_time ());
-#endif
 }

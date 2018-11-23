@@ -994,13 +994,12 @@ xfce_panel_plugin_button_press_event (GtkWidget      *widget,
         gtk_widget_set_sensitive (item, plugin->priv->menu_blocked == 0);
 
       /* popup the menu */
-#if GTK_CHECK_VERSION (3, 22, 0)
+#if GTK_CHECK_VERSION (3, 0, 0)
       gtk_menu_popup_at_pointer (menu, (GdkEvent *) event);
 #else
       gtk_menu_popup (menu, NULL, NULL, NULL, NULL,
                       event->button, event->time);
 #endif
-
       return TRUE;
     }
 
@@ -2433,7 +2432,7 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
 {
   XfceScreenPosition  screen_position;
   GdkScreen          *screen;
-#if GTK_CHECK_VERSION (3, 22, 0)
+#if GTK_CHECK_VERSION (3, 0, 0)
   GdkDisplay         *display;
   GdkMonitor         *monitor;
 #else
@@ -2466,7 +2465,7 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
 
       /* get the monitor geometry */
       screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
-#if GTK_CHECK_VERSION (3, 22, 0)
+#if GTK_CHECK_VERSION (3, 0, 0)
       display = gdk_screen_get_display (screen);
       monitor = gdk_display_get_monitor_at_window (display, window);
       gdk_monitor_get_geometry (monitor, &geometry);
@@ -2515,7 +2514,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
   GtkRequisition  requisition;
   GdkScreen      *screen;
   GdkRectangle    geometry;
-#if GTK_CHECK_VERSION (3, 22, 0)
+#if GTK_CHECK_VERSION (3, 0, 0)
   GdkDisplay     *display;
   GdkMonitor     *monitor;
 #else
@@ -2620,7 +2619,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
 
   /* get the monitor geometry */
   screen = gtk_widget_get_screen (attach_widget);
-#if GTK_CHECK_VERSION (3, 22, 0)
+#if GTK_CHECK_VERSION (3, 0, 0)
   display = gdk_screen_get_display (screen);
   monitor = gdk_display_get_monitor_at_window (display, gtk_widget_get_window (attach_widget));
   gdk_monitor_get_geometry (monitor, &geometry);

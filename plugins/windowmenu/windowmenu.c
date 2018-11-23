@@ -943,15 +943,10 @@ window_menu_plugin_menu_window_item_activate (GtkWidget      *mi,
       g_signal_connect (G_OBJECT (menu), "selection-done",
           G_CALLBACK (window_menu_plugin_menu_actions_selection_done),
           gtk_widget_get_parent (mi));
-#if GTK_CHECK_VERSION (3, 22, 0)
       gtk_menu_popup_at_widget (GTK_MENU (menu), mi,
                                 GDK_GRAVITY_SOUTH,
                                 GDK_GRAVITY_NORTH_WEST,
                                 (GdkEvent *) event);
-#else
-      gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL,
-                      NULL, event->button, event->time);
-#endif
 
       return TRUE;
     }
@@ -1399,16 +1394,10 @@ window_menu_plugin_menu (GtkWidget        *button,
   g_signal_connect (G_OBJECT (menu), "deactivate",
       G_CALLBACK (window_menu_plugin_menu_selection_done), button);
 
-#if GTK_CHECK_VERSION (3, 22, 0)
   gtk_menu_popup_at_widget (GTK_MENU (menu), button,
                             xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
                             ? GDK_GRAVITY_WEST : GDK_GRAVITY_NORTH,
                             xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
                             ? GDK_GRAVITY_EAST : GDK_GRAVITY_SOUTH,
                             NULL);
-#else
-  gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
-                  button != NULL ? xfce_panel_plugin_position_menu : NULL,
-                  plugin, 1, gtk_get_current_event_time ());
-#endif
 }
