@@ -525,12 +525,23 @@ panel_base_window_composited_changed (GtkWidget *widget)
 
   if (window->is_composited)
     {
+      if (window->leave_opacity != window->leave_opacity_old)
+        window->leave_opacity = window->leave_opacity_old;
       gtk_widget_set_opacity (GTK_WIDGET (widget), window->leave_opacity);
       panel_base_window_set_plugin_data (window,
                                          panel_base_window_set_plugin_leave_opacity);
 
     }
-
+  else
+    {
+      /* make sure that the leave opacity is always disabled without compositing, but
+         remember the original value so we can reset it if compositing gets re-enabled */
+      window->leave_opacity_old = window->leave_opacity;
+      window->leave_opacity = 1.0;
+      gtk_widget_set_opacity (GTK_WIDGET (widget), window->leave_opacity);
+      panel_base_window_set_plugin_data (window,
+                                         panel_base_window_set_plugin_leave_opacity);
+    }
   panel_debug (PANEL_DEBUG_BASE_WINDOW,
                "%p: compositing=%s", window,
                PANEL_DEBUG_BOOL (window->is_composited));
