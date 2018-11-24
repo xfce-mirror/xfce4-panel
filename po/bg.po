@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-18 00:31+0100\n"
-"PO-Revision-Date: 2018-11-18 09:12+0000\n"
+"POT-Creation-Date: 2018-11-24 06:30+0100\n"
+"PO-Revision-Date: 2018-11-24 14:03+0000\n"
 "Last-Translator: Kiril Kirilov <cybercop_montana@abv.bg>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/xfce/xfce4-panel/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -42,79 +42,77 @@ msgid "Customize the panel"
 msgstr "Персонализация на панела"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1050
-#: ../panel/panel-preferences-dialog.c:1186
+#: ../libxfce4panel/xfce-panel-plugin.c:1049
+#: ../panel/panel-preferences-dialog.c:1222
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Сигурни ли сте, че искате да премахнете „%s“?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1055
-#: ../panel/panel-preferences-dialog.c:1189
+#: ../libxfce4panel/xfce-panel-plugin.c:1054
+#: ../panel/panel-preferences-dialog.c:1225
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Ако премахнете този елемент от панела, той ще бъде изгубен окончателно."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1056 ../panel/panel-dialogs.c:163
-#: ../panel/panel-preferences-dialog.c:1191
-#: ../plugins/applicationsmenu/applicationsmenu.c:538
-#: ../plugins/directorymenu/directorymenu.c:394
+#: ../libxfce4panel/xfce-panel-plugin.c:1055 ../panel/panel-dialogs.c:163
+#: ../panel/panel-preferences-dialog.c:1227
 msgid "Cancel"
 msgstr "Отказ"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1057
+#: ../libxfce4panel/xfce-panel-plugin.c:1056
 #: ../panel/panel-plugin-external.c:436
-#: ../panel/panel-preferences-dialog.c:909
-#: ../panel/panel-preferences-dialog.c:1192
-#: ../plugins/launcher/launcher-dialog.c:863
+#: ../panel/panel-preferences-dialog.c:922
+#: ../panel/panel-preferences-dialog.c:1228
+#: ../plugins/launcher/launcher-dialog.c:855
 msgid "Remove"
 msgstr "Премахване"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1198
+#: ../libxfce4panel/xfce-panel-plugin.c:1197
 msgid "_Properties"
 msgstr "_Свойства"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1213 ../panel/panel-window.c:2754
+#: ../libxfce4panel/xfce-panel-plugin.c:1212 ../panel/panel-window.c:2754
 msgid "_About"
 msgstr "_Относно"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1228
+#: ../libxfce4panel/xfce-panel-plugin.c:1227
 msgid "_Move"
 msgstr "_Преместване"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1252
+#: ../libxfce4panel/xfce-panel-plugin.c:1251
 msgid "_Remove"
 msgstr "_Премахване"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1273
+#: ../libxfce4panel/xfce-panel-plugin.c:1272
 msgid "Pane_l"
 msgstr "Панел"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:2679
+#: ../libxfce4panel/xfce-panel-plugin.c:1281 ../panel/panel-window.c:2679
 msgid "Add _New Items..."
 msgstr "Добавяне на нови елементи..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:2694
+#: ../libxfce4panel/xfce-panel-plugin.c:1296 ../panel/panel-window.c:2694
 msgid "Panel Pr_eferences..."
 msgstr "Настройки на панела..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1318 ../panel/panel-window.c:2726
+#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2726
 msgid "Log _Out"
 msgstr "Изход"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1338 ../panel/panel-item-dialog.c:208
+#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-item-dialog.c:208
 #: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2745
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-#: ../plugins/pager/pager-dialog.glade.h:10
+#: ../plugins/pager/pager-dialog.glade.h:3
 #: ../plugins/separator/separator-dialog.glade.h:6
 #: ../plugins/systray/systray-dialog.glade.h:3
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "_Help"
 msgstr "_Помощ"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353
+#: ../libxfce4panel/xfce-panel-plugin.c:1352
 msgid "About"
 msgstr "Относно"
 
@@ -314,7 +312,7 @@ msgstr "Добавяне"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Моля, изберете панел за новата добавка:"
 
-#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:844
+#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:857
 #, c-format
 msgid "Panel %d"
 msgstr "Панел %d"
@@ -347,7 +345,7 @@ msgstr "_Добавяне"
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:7
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
-#: ../plugins/pager/pager-dialog.glade.h:9
+#: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/separator/separator-dialog.glade.h:5
 #: ../plugins/systray/systray-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
@@ -376,39 +374,39 @@ msgid ""
 "permanently removed from the panel."
 msgstr "Добавката е била стартирана няколко пъти в последните %d секунди. Ако натиснете „Изпълнение“, панелът ще опита да я рестартира. В противен случай, тя ще бъде окончателно премахната от него."
 
-#: ../panel/panel-preferences-dialog.c:487
+#: ../panel/panel-preferences-dialog.c:500
 msgid "Automatic"
 msgstr "Автоматично"
 
-#: ../panel/panel-preferences-dialog.c:497
+#: ../panel/panel-preferences-dialog.c:510
 msgid "Primary"
 msgstr "Главен"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:516
+#: ../panel/panel-preferences-dialog.c:529
 #, c-format
 msgid "Monitor %d"
 msgstr "Монитор %d"
 
-#: ../panel/panel-preferences-dialog.c:910
+#: ../panel/panel-preferences-dialog.c:923
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Избраният панел ще бъде напълно премахнат заедно с всичките му елементи"
 
-#: ../panel/panel-preferences-dialog.c:911
+#: ../panel/panel-preferences-dialog.c:924
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Наистина ли искате да премахнете панел %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1028
+#: ../panel/panel-preferences-dialog.c:1064
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(external)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1033
+#: ../panel/panel-preferences-dialog.c:1069
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -417,7 +415,7 @@ msgstr "Вътрешно име: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1045
+#: ../panel/panel-preferences-dialog.c:1081
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Вътрешно име: %s-%d"
@@ -578,64 +576,69 @@ msgid "Select A Background Image"
 msgstr "Избор на изображение за фон"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
+msgid "<b>Opacity</b>"
+msgstr "<b>Непрозрачност</b>"
+
+#: ../panel/panel-preferences-dialog.glade.h:43
+msgid "Configure..."
+msgstr "Конфигуриране..."
+
+#: ../panel/panel-preferences-dialog.glade.h:44
+msgid ""
+"<b>Compositing is currently disabled</b>\n"
+"Enable compositing in the window manager for opacity settings in the panel."
+msgstr "<b>В момента, композирането е изключено</b>\nВключете композирането в мениджъра на прозорците за настройване прозрачността на панела."
+
+#. I18N: label for the enter transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:47
+msgid "_Enter:"
+msgstr "Влизане:"
+
+#. I18N: label for the leave transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:49
+msgid "_Leave:"
+msgstr "Напускане:"
+
+#: ../panel/panel-preferences-dialog.glade.h:50
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "Прозрачност, когато показалецът на мишката не се намира над панела (0 — пълна прозрачност, 100 — непрозрачно)."
 
-#. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:44
-msgid "_Enter:"
-msgstr "Влизане:"
-
-#. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:46
-msgid "_Leave:"
-msgstr "Напускане:"
-
-#: ../panel/panel-preferences-dialog.glade.h:47
-msgid "<b>Opacity</b>"
-msgstr "<b>Непрозрачност</b>"
-
-#: ../panel/panel-preferences-dialog.glade.h:48
-msgid ""
-"Enable compositing in the window manager for opacity settings in the panel."
-msgstr "Включете композитният мениджър на прозорци, за да настроите прозрачността на панела."
-
-#: ../panel/panel-preferences-dialog.glade.h:49
+#: ../panel/panel-preferences-dialog.glade.h:51
 msgid "Appeara_nce"
 msgstr "Външен вид"
 
-#: ../panel/panel-preferences-dialog.glade.h:50
+#: ../panel/panel-preferences-dialog.glade.h:52
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 #: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Move currently selected item up by one row"
 msgstr "Преместване на избраният елемент с един ред нагоре"
 
-#: ../panel/panel-preferences-dialog.glade.h:51
+#: ../panel/panel-preferences-dialog.glade.h:53
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 #: ../plugins/systray/systray-dialog.glade.h:9
 msgid "Move currently selected item down by one row"
 msgstr "Преместване на избраният елемент с един ред надолу"
 
-#: ../panel/panel-preferences-dialog.glade.h:52
+#: ../panel/panel-preferences-dialog.glade.h:54
 msgid "Add new item to this panel"
 msgstr "Добавяне на нов елемент в този панел"
 
-#: ../panel/panel-preferences-dialog.glade.h:53
+#: ../panel/panel-preferences-dialog.glade.h:55
 msgid "Remove currently selected item"
 msgstr "Премахване на текущо избран елемент"
 
-#: ../panel/panel-preferences-dialog.glade.h:54
+#: ../panel/panel-preferences-dialog.glade.h:56
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Edit the currently selected item"
 msgstr "Редактиране на текущо избраният елемент"
 
-#: ../panel/panel-preferences-dialog.glade.h:55
+#: ../panel/panel-preferences-dialog.glade.h:57
 msgid "Show about information of the currently selected item"
 msgstr "Показване на информация за текущо избраният елемент."
 
-#: ../panel/panel-preferences-dialog.glade.h:56
+#: ../panel/panel-preferences-dialog.glade.h:58
 msgid "Ite_ms"
 msgstr "Елементи"
 
@@ -919,7 +922,7 @@ msgstr "Изберете тази опция, за да се показват о
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
-#: ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager-dialog.glade.h:8
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/systray/systray-dialog.glade.h:7
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
@@ -961,13 +964,18 @@ msgstr "Програми"
 msgid "Select An Icon"
 msgstr "Избиране на икона"
 
+#: ../plugins/applicationsmenu/applicationsmenu.c:538
+#: ../plugins/directorymenu/directorymenu.c:394
+msgid "_Cancel"
+msgstr "_Отказ"
+
 #: ../plugins/applicationsmenu/applicationsmenu.c:539
 #: ../plugins/directorymenu/directorymenu.c:395
-msgid "OK"
-msgstr "ОК"
+msgid "_OK"
+msgstr "_ОК"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:581
-#: ../plugins/clock/clock.c:918 ../plugins/launcher/launcher.c:2381
+#: ../plugins/applicationsmenu/applicationsmenu.c:576
+#: ../plugins/clock/clock.c:918 ../plugins/launcher/launcher.c:2404
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Неуспех при изпълнението на команда „%s“."
@@ -1369,36 +1377,36 @@ msgstr "Колко е часът?"
 msgid "Directory Menu"
 msgstr "Меню на директория"
 
-#: ../plugins/directorymenu/directorymenu.c:579
+#: ../plugins/directorymenu/directorymenu.c:574
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Неуспешно стартиране на програмата „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:611
+#: ../plugins/directorymenu/directorymenu.c:606
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Неуспешно запитване за типа на съдържанието на „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:620
+#: ../plugins/directorymenu/directorymenu.c:615
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Не е намерена програма по подразбиране за „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:636
+#: ../plugins/directorymenu/directorymenu.c:631
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Неуспешно стартиране на програмата по подразбиране за „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:734
+#: ../plugins/directorymenu/directorymenu.c:729
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Неуспешно изпълнение на предпочитаната програма за категория „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:808
+#: ../plugins/directorymenu/directorymenu.c:803
 msgid "Open Folder"
 msgstr "Отваряне на папка"
 
-#: ../plugins/directorymenu/directorymenu.c:823
+#: ../plugins/directorymenu/directorymenu.c:818
 msgid "Open in Terminal"
 msgstr "Отваряне в терминал"
 
@@ -1435,32 +1443,32 @@ msgstr "Шаблон на файл:"
 msgid "Filtering"
 msgstr "Филтриране"
 
-#: ../plugins/launcher/launcher.c:392
+#: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
 msgstr "Отваряне на стартер на меню"
 
-#: ../plugins/launcher/launcher.c:1599
+#: ../plugins/launcher/launcher.c:1629
 msgid "Unnamed Item"
 msgstr "Елемент без име"
 
-#: ../plugins/launcher/launcher.c:1780
+#: ../plugins/launcher/launcher.c:1803
 msgid "No items"
 msgstr "Няма елементи"
 
-#: ../plugins/launcher/launcher-dialog.c:796
+#: ../plugins/launcher/launcher-dialog.c:788
 msgid "Failed to open desktop item editor"
 msgstr "Не може да бъде отворен редактора на елементите на работният плот"
 
-#: ../plugins/launcher/launcher-dialog.c:864
+#: ../plugins/launcher/launcher-dialog.c:856
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Ако изтриете елемента, той ще бъде изгубен безвъзвратно"
 
-#: ../plugins/launcher/launcher-dialog.c:865
+#: ../plugins/launcher/launcher-dialog.c:857
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Сигурни ли сте, че искате да премахнете „%s“?"
 
-#: ../plugins/launcher/launcher-dialog.c:866
+#: ../plugins/launcher/launcher-dialog.c:858
 msgid "Unnamed item"
 msgstr "Елемент без име"
 
@@ -1563,7 +1571,7 @@ msgstr "Разширени"
 msgid "Program launcher with optional menu"
 msgstr "Стартер на програма с допълнително меню"
 
-#: ../plugins/pager/pager.c:449 ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager.c:449 ../plugins/pager/pager-dialog.glade.h:7
 msgid "Workspace _Settings..."
 msgstr "Настройка на работните места..."
 
@@ -1581,25 +1589,25 @@ msgstr "Работно място %d"
 msgid "Workspace Switcher"
 msgstr "Превключване на работните места"
 
-#: ../plugins/pager/pager-dialog.glade.h:2
+#: ../plugins/pager/pager-dialog.glade.h:4
 msgid "Number of _rows:"
 msgstr "Брой редове:"
 
-#: ../plugins/pager/pager-dialog.glade.h:3
+#: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
 msgstr "Показване на преглед с миниатюри"
 
-#: ../plugins/pager/pager-dialog.glade.h:4
+#: ../plugins/pager/pager-dialog.glade.h:6
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
 msgstr "Показване на миниатюри на работните места с правоъгълник, отбелязващ видимият прозорец"
 
-#: ../plugins/pager/pager-dialog.glade.h:7
+#: ../plugins/pager/pager-dialog.glade.h:9
 msgid "Switch workspaces using the mouse _wheel"
 msgstr "Превключване на работните места с колелото на мишката"
 
-#: ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager-dialog.glade.h:10
 #: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "Behaviour"
 msgstr "Поведение"
@@ -1650,21 +1658,21 @@ msgid "Unable to start the notification area"
 msgstr "Неуспех при стартиране на областта за уведомяване"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:980
+#: ../plugins/systray/systray.c:963
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Най-вероятно, друга програма е поела функцията на областта за уведомяване. Тази зона няма да бъде използвана."
 
-#: ../plugins/systray/systray.c:982
+#: ../plugins/systray/systray.c:965
 msgid "The notification area lost selection"
 msgstr "Областта за уведомяване изгуби селекцията си"
 
-#: ../plugins/systray/systray.c:1246
+#: ../plugins/systray/systray.c:1229
 msgid "Clear"
 msgstr "Изчистване"
 
-#: ../plugins/systray/systray.c:1247
+#: ../plugins/systray/systray.c:1230
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Наистина ли искате да изчистите списъка с познатите приложения?"
 
@@ -1784,30 +1792,30 @@ msgid "Show windows from _all workspaces or viewports"
 msgstr "Показване на прозорците от всички работни места или демонстрационни прозорци"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:27
-msgid "Show only _minimized windows"
-msgstr "Показване само на минимизираните прозорци"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:28
 msgid "Show windows from all mo_nitors"
 msgstr "Показване на прозорците от всички монитори"
 
-#: ../plugins/tasklist/tasklist-widget.c:3492
+#: ../plugins/tasklist/tasklist-dialog.glade.h:28
+msgid "Show only _minimized windows"
+msgstr "Показване само на минимизираните прозорци"
+
+#: ../plugins/tasklist/tasklist-widget.c:3477
 msgid "Mi_nimize All"
 msgstr "Минимизиране на всички"
 
-#: ../plugins/tasklist/tasklist-widget.c:3500
+#: ../plugins/tasklist/tasklist-widget.c:3485
 msgid "Un_minimize All"
 msgstr "Деминимизиране на всички"
 
-#: ../plugins/tasklist/tasklist-widget.c:3508
+#: ../plugins/tasklist/tasklist-widget.c:3493
 msgid "Ma_ximize All"
 msgstr "Максимизиране на всички"
 
-#: ../plugins/tasklist/tasklist-widget.c:3516
+#: ../plugins/tasklist/tasklist-widget.c:3501
 msgid "_Unmaximize All"
 msgstr "Демаксимизиране на всички"
 
-#: ../plugins/tasklist/tasklist-widget.c:3528
+#: ../plugins/tasklist/tasklist-widget.c:3513
 msgid "_Close All"
 msgstr "Затваряне на всички"
 
@@ -1819,24 +1827,24 @@ msgstr "Превключване между отворените прозорц�
 msgid "Desktop"
 msgstr "Работен плот"
 
-#: ../plugins/windowmenu/windowmenu.c:1272
+#: ../plugins/windowmenu/windowmenu.c:1267
 msgid "No Windows"
 msgstr "Няма прозорци"
 
-#: ../plugins/windowmenu/windowmenu.c:1287
+#: ../plugins/windowmenu/windowmenu.c:1282
 msgid "Urgent Windows"
 msgstr "Спешни прозорци"
 
-#: ../plugins/windowmenu/windowmenu.c:1330
+#: ../plugins/windowmenu/windowmenu.c:1325
 msgid "Add Workspace"
 msgstr "Добавяне на работно място"
 
-#: ../plugins/windowmenu/windowmenu.c:1353
+#: ../plugins/windowmenu/windowmenu.c:1348
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Премахване на работно място „%s“"
 
-#: ../plugins/windowmenu/windowmenu.c:1355
+#: ../plugins/windowmenu/windowmenu.c:1350
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Премахване на работно място %d"
