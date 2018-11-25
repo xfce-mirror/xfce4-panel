@@ -110,7 +110,6 @@ panel_tic_tac_toe_init (PanelTicTacToe *dialog)
   guint      i;
   GtkWidget *label;
   guint      row, col;
-  GtkWidget *align;
   GtkWidget *vbox;
   GtkWidget *combo;
   GtkWidget *hbox;

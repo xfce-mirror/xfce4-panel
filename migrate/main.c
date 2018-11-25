@@ -50,11 +50,7 @@ gint
 main (gint argc, gchar **argv)
 {
   GError        *error = NULL;
-  GtkWidget     *dialog;
-  GtkWidget     *button;
-  gint           result;
   gint           retval = EXIT_SUCCESS;
-  gint           default_response = GTK_RESPONSE_CANCEL;
   XfconfChannel *channel;
   gint           configver;
   gchar         *filename_46;

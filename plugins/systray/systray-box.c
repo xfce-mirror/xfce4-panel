@@ -229,7 +229,6 @@ systray_box_size_get_max_child_size (SystrayBox *box,
   gint              row_size;
   GtkStyleContext  *ctx;
   GtkBorder         padding;
-  gint              spacing;
 
   ctx = gtk_widget_get_style_context (widget);
   gtk_style_context_get_padding (ctx, gtk_widget_get_state_flags (widget), &padding);
