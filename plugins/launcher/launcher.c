@@ -1330,28 +1330,21 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
     gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), -1, -1);
   }
   else {
-    GtkStyleContext *context;
-    GtkBorder        padding, border;
-    gint             icon_width, icon_height;
+    gint             icon_size;
 
-    context = gtk_widget_get_style_context (plugin->button);
-    gtk_style_context_get_padding (context, gtk_widget_get_state_flags (plugin->button), &padding);
-    gtk_style_context_get_border (context, gtk_widget_get_state_flags (plugin->button), &border);
-    icon_width = p_width - (padding.left + padding.right + border.left + border.right);
-    icon_height = p_height - (padding.top + padding.bottom + border.top + border.bottom);
-
+    icon_size = xfce_panel_plugin_get_icon_size (panel_plugin);
     /* if the icon is a pixbuf we have to recreate and scale it */
     if (plugin->pixbuf != NULL &&
         plugin->icon_name != NULL) {
       g_object_unref (plugin->pixbuf);
       plugin->pixbuf = gdk_pixbuf_new_from_file_at_size (plugin->icon_name,
-                                                         icon_width, icon_height,
+                                                         icon_size, icon_size,
                                                          NULL);
       gtk_image_set_from_pixbuf (GTK_IMAGE (plugin->child), plugin->pixbuf);
     }
     /* set the panel plugin icon size */
     else {
-      gtk_image_set_pixel_size (GTK_IMAGE (plugin->child), MIN (icon_width, icon_height));
+      gtk_image_set_pixel_size (GTK_IMAGE (plugin->child), MIN (icon_size, icon_size));
     }
   }
 
