@@ -98,6 +98,7 @@ struct _PanelItembar
   /* some properties we clone from the panel window */
   XfcePanelPluginMode  mode;
   gint                 size;
+  gint                 icon_size;
   gint                 nrows;
 
   /* dnd support */
@@ -127,6 +128,7 @@ enum
   PROP_0,
   PROP_MODE,
   PROP_SIZE,
+  PROP_ICON_SIZE,
   PROP_NROWS
 };
 
@@ -204,6 +206,13 @@ panel_itembar_class_init (PanelItembarClass *klass)
                                                       G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_ICON_SIZE,
+                                   g_param_spec_uint ("icon-size",
+                                                      NULL, NULL,
+                                                      0, 256, 0,
+                                                      G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_NROWS,
                                    g_param_spec_uint ("nrows",
                                                       NULL, NULL,
@@ -240,6 +249,7 @@ panel_itembar_init (PanelItembar *itembar)
   itembar->children = NULL;
   itembar->mode = XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
   itembar->size = 30;
+  itembar->icon_size = 0;
   itembar->nrows = 1;
   itembar->highlight_index = -1;
   itembar->highlight_length = -1;
@@ -267,6 +277,10 @@ panel_itembar_set_property (GObject      *object,
 
     case PROP_SIZE:
       itembar->size = g_value_get_uint (value);
+      break;
+
+    case PROP_ICON_SIZE:
+      itembar->icon_size = g_value_get_uint (value);
       break;
 
     case PROP_NROWS:

@@ -589,7 +589,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
       g_param_spec_int ("icon-size",
                         "Icon Size",
                         "Size of the plugin's icon",
-                        0, (128 * 6), 0,
+                        0, (256 * 6), 0,
                         G_PARAM_READABLE
                         | G_PARAM_STATIC_STRINGS);
 
