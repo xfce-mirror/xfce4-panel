@@ -3494,7 +3494,7 @@ xfce_tasklist_group_button_menu (XfceTasklistChild *group_child,
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
       gtk_widget_show (mi);
 
-      image = gtk_image_new_from_icon_name ("wnck-stock-minimize", GTK_ICON_SIZE_MENU);
+      image = gtk_image_new_from_icon_name ("window-minimize-symbolic", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       mi = gtk_image_menu_item_new_with_mnemonic (_("Mi_nimize All"));
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
@@ -3510,7 +3510,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
           G_CALLBACK (xfce_tasklist_group_button_menu_unminimize_all), group_child);
       gtk_widget_show (mi);
 
-      image = gtk_image_new_from_icon_name ("wnck-stock-maximize", GTK_ICON_SIZE_MENU);
+      image = gtk_image_new_from_icon_name ("window-maximize-symbolic", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       mi = gtk_image_menu_item_new_with_mnemonic (_("Ma_ximize All"));
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
@@ -3530,7 +3530,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
       gtk_widget_show (mi);
 
-      image = gtk_image_new_from_icon_name ("wnck-stock-delete", GTK_ICON_SIZE_MENU);
+      image = gtk_image_new_from_icon_name ("window-close-symbolic", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       mi = gtk_image_menu_item_new_with_mnemonic(_("_Close All"));
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
