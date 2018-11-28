@@ -1641,6 +1641,7 @@ xfce_tasklist_active_window_changed (WnckScreen   *screen,
                                      XfceTasklist *tasklist)
 {
   WnckWindow        *active_window;
+  WnckClassGroup    *class_group = NULL;
   GList             *li;
   XfceTasklistChild *child;
 
@@ -1661,11 +1662,31 @@ xfce_tasklist_active_window_changed (WnckScreen   *screen,
 
       /* update timestamp for window */
       if (child->window == active_window)
-        g_get_current_time (&child->last_focused);
+        {
+          g_get_current_time (&child->last_focused);
+          /* the active window is in a group, so find the group button */
+          if (child->type == CHILD_TYPE_GROUP_MENU)
+            {
+              class_group = child->class_group;
+            }
+        }
 
       /* set the toggle button state */
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (child->button),
                                     !!(child->window == active_window));
+    }
+  /* set the toggle button state for the group button */
+  if (class_group)
+    {
+      for (li = tasklist->windows; li != NULL; li = li->next)
+      {
+        child = li->data;
+        if (child->type == CHILD_TYPE_GROUP
+          && child->class_group == class_group)
+          {
+            gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (child->button), TRUE);
+          }
+      }
     }
 
   /* release the lock */
