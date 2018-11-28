@@ -343,6 +343,8 @@ static XfceTasklistChild *xfce_tasklist_button_new                       (WnckWi
 static void               xfce_tasklist_group_button_remove              (XfceTasklistChild    *group_child);
 static void               xfce_tasklist_group_button_add_window          (XfceTasklistChild    *group_child,
                                                                           XfceTasklistChild    *window_child);
+static void               xfce_tasklist_group_button_icon_changed        (WnckClassGroup       *class_group,
+                                                                          XfceTasklistChild    *group_child);
 static XfceTasklistChild *xfce_tasklist_group_button_new                 (WnckClassGroup       *class_group,
                                                                           XfceTasklist         *tasklist);
 
@@ -1684,6 +1686,9 @@ xfce_tasklist_active_window_changed (WnckScreen   *screen,
         if (child->type == CHILD_TYPE_GROUP
           && child->class_group == class_group)
           {
+            /* update the button's state and icon, the latter makes sure it is rendered correctly
+               if all previous group windows were minimized */
+            xfce_tasklist_group_button_icon_changed (child->class_group, child);
             gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (child->button), TRUE);
           }
       }
@@ -2655,10 +2660,11 @@ xfce_tasklist_button_state_changed (WnckWindow        *window,
                                     WnckWindowState    new_state,
                                     XfceTasklistChild *child)
 {
-  gboolean       blink;
-  WnckScreen    *screen;
-  XfceTasklist  *tasklist;
-  WnckWorkspace *active_ws;
+  gboolean           blink;
+  WnckScreen        *screen;
+  XfceTasklist      *tasklist;
+  WnckWorkspace     *active_ws;
+  XfceTasklistChild *group_child;
 
   panel_return_if_fail (WNCK_IS_WINDOW (window));
   panel_return_if_fail (child->window == window);
@@ -2698,6 +2704,14 @@ xfce_tasklist_button_state_changed (WnckWindow        *window,
         {
           /* update the icon (lucent) */
           xfce_tasklist_button_icon_changed (window, child);
+          if (child->class_group != NULL)
+            {
+              /* find the child for the group */
+              g_hash_table_lookup_extended (child->tasklist->class_groups,
+                                            child->class_group,
+                                            NULL, (gpointer *) &group_child);
+              xfce_tasklist_group_button_icon_changed (child->class_group, group_child);
+            }
         }
     }
 
@@ -3656,8 +3670,12 @@ static void
 xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
                                          XfceTasklistChild *group_child)
 {
-  GdkPixbuf *pixbuf;
-  gint       icon_size;
+  GdkPixbuf         *pixbuf;
+  GdkPixbuf         *lucent = NULL;
+  GSList            *li;
+  XfceTasklistChild *child;
+  gboolean           all_minimized_in_group = TRUE;
+  gint               icon_size;
 
   panel_return_if_fail (XFCE_IS_TASKLIST (group_child->tasklist));
   panel_return_if_fail (WNCK_IS_CLASS_GROUP (class_group));
@@ -3678,6 +3696,28 @@ xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
     pixbuf = wnck_class_group_get_mini_icon (class_group);
   else
     pixbuf = wnck_class_group_get_icon (class_group);
+
+  /* check if all the windows in the group are minimized */
+  for (li = group_child->windows; li != NULL; li = li->next)
+    {
+      child = li->data;
+      if (!wnck_window_is_minimized (child->window))
+        {
+          all_minimized_in_group = FALSE;
+          break;
+        }
+    }
+  /* if the icons in the group are ALL minimized, than display
+   * a minimized lucent effect for the group icon too */
+  if (!group_child->tasklist->only_minimized
+      && group_child->tasklist->minimized_icon_lucency < 100
+      && all_minimized_in_group)
+    {
+      lucent = exo_gdk_pixbuf_lucent (pixbuf, group_child->tasklist->minimized_icon_lucency);
+      if (G_UNLIKELY (lucent != NULL))
+        pixbuf = lucent;
+    }
+
 
   if (G_LIKELY (pixbuf != NULL))
     gtk_image_set_from_pixbuf (GTK_IMAGE (group_child->icon), pixbuf);
