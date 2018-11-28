@@ -3556,8 +3556,6 @@ xfce_tasklist_group_button_menu_destroy (GtkWidget         *menu,
 
   gtk_widget_destroy (menu);
 
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (group_child->button), FALSE);
-
 #ifdef GDK_WINDOWING_X11
   /* make sure the wireframe is hidden */
   xfce_tasklist_wireframe_hide (group_child->tasklist);
