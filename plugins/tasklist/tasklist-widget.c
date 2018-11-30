@@ -2881,6 +2881,20 @@ xfce_tasklist_button_enter_notify_event (GtkWidget         *button,
 
 
 
+static void
+xfce_tasklist_button_menu_destroy (GtkWidget         *menu,
+                                   XfceTasklistChild *child)
+{
+  panel_return_if_fail (XFCE_IS_TASKLIST (child->tasklist));
+  panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (child->button));
+  panel_return_if_fail (GTK_IS_WIDGET (menu));
+
+  gtk_widget_destroy (menu);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (child->button), FALSE);
+}
+
+
+
 static gboolean
 xfce_tasklist_button_button_press_event (GtkWidget         *button,
                                          GdkEventButton    *event,
@@ -2910,7 +2924,7 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
     {
       menu = wnck_action_menu_new (child->window);
       g_signal_connect (G_OBJECT (menu), "selection-done",
-          G_CALLBACK (gtk_widget_destroy), NULL);
+          G_CALLBACK (xfce_tasklist_button_menu_destroy), child);
 
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
       gtk_menu_popup_at_widget (GTK_MENU (menu), button,
@@ -2920,6 +2934,7 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
                                 ? GDK_GRAVITY_SOUTH_EAST : GDK_GRAVITY_SOUTH_WEST,
                                 (GdkEvent *) event);
 
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
       return TRUE;
     }
 
@@ -3611,6 +3626,7 @@ xfce_tasklist_group_button_menu_destroy (GtkWidget         *menu,
   panel_return_if_fail (GTK_IS_WIDGET (menu));
 
   gtk_widget_destroy (menu);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (group_child->button), FALSE);
 
 #ifdef GDK_WINDOWING_X11
   /* make sure the wireframe is hidden */
@@ -3660,6 +3676,7 @@ xfce_tasklist_group_button_button_press_event (GtkWidget         *button,
                                 ? GDK_GRAVITY_SOUTH_EAST : GDK_GRAVITY_SOUTH_WEST,
                                 (GdkEvent *) event);
 
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
       return TRUE;
     }
 
