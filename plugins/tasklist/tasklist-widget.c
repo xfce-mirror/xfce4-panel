@@ -28,7 +28,6 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <exo/exo.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <libwnck/libwnck.h>
 #include <libxfce4panel/libxfce4panel.h>
@@ -2181,6 +2180,7 @@ xfce_tasklist_child_new (XfceTasklist *tasklist)
 {
   XfceTasklistChild *child;
   GtkCssProvider    *provider;
+  gchar             *css_string;
 
   panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), NULL);
 
@@ -2201,12 +2201,23 @@ xfce_tasklist_child_new (XfceTasklist *tasklist)
   gtk_widget_show (child->box);
 
   provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_data (provider, "image { padding: 3px; }", -1, NULL);
+  /* silly workaround for gtkcss only accepting "." as decimal separator and floats returning
+     with "," as decimal separator in some locales */
+  if (tasklist->minimized_icon_lucency < 100
+      && tasklist->minimized_icon_lucency > 0)
+    css_string = g_strdup_printf ("image { padding: 3px; } image.minimized { opacity: 0.%d; }", tasklist->minimized_icon_lucency / 10);
+  else if (tasklist->minimized_icon_lucency == 100)
+    css_string = g_strdup_printf ("image { padding: 3px; } image.minimized { opacity: %f; }", 1.0);
+  else if (tasklist->minimized_icon_lucency == 0)
+    css_string = g_strdup_printf ("image { padding: 3px; } image.minimized { opacity: %f; }", 0.0);
+  gtk_css_provider_load_from_data (provider, css_string, -1, NULL);
   child->icon = gtk_image_new ();
   gtk_style_context_add_provider (gtk_widget_get_style_context (child->icon),
                                   GTK_STYLE_PROVIDER (provider),
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
   g_object_unref (provider);
+  g_free (css_string);
+
   if (tasklist->show_labels)
     gtk_box_pack_start (GTK_BOX (child->box), child->icon, FALSE, TRUE, 0);
   else
@@ -2555,10 +2566,10 @@ static void
 xfce_tasklist_button_icon_changed (WnckWindow        *window,
                                    XfceTasklistChild *child)
 {
-  GdkPixbuf    *pixbuf;
-  GdkPixbuf    *lucent = NULL;
-  XfceTasklist *tasklist = child->tasklist;
-  gint          icon_size;
+  GtkStyleContext *context;
+  GdkPixbuf       *pixbuf;
+  XfceTasklist    *tasklist = child->tasklist;
+  gint             icon_size;
 
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
   panel_return_if_fail (GTK_IS_WIDGET (child->icon));
@@ -2570,6 +2581,7 @@ xfce_tasklist_button_icon_changed (WnckWindow        *window,
     return;
 
   icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (xfce_tasklist_get_panel_plugin (tasklist)));
+  context = gtk_widget_get_style_context (GTK_WIDGET (child->icon));
 
   /* get the window icon */
   if (tasklist->show_labels ||
@@ -2592,17 +2604,16 @@ xfce_tasklist_button_icon_changed (WnckWindow        *window,
       && tasklist->minimized_icon_lucency < 100
       && wnck_window_is_minimized (window))
     {
-#ifdef EXO_CHECK_VERSION
-      lucent = exo_gdk_pixbuf_lucent (pixbuf, tasklist->minimized_icon_lucency);
-      if (G_UNLIKELY (lucent != NULL))
-        pixbuf = lucent;
-#endif
+      if (!gtk_style_context_has_class (context, "minimized"))
+        gtk_style_context_add_class (context, "minimized");
+    }
+  else
+    {
+      if (gtk_style_context_has_class (context, "minimized"))
+        gtk_style_context_remove_class (context, "minimized");
     }
 
   gtk_image_set_from_pixbuf (GTK_IMAGE (child->icon), pixbuf);
-
-  if (lucent != NULL && lucent != pixbuf)
-    g_object_unref (G_OBJECT (lucent));
 }
 
 
@@ -2702,7 +2713,7 @@ xfce_tasklist_button_state_changed (WnckWindow        *window,
         }
       else
         {
-          /* update the icon (lucent) */
+          /* update the icon opacity */
           xfce_tasklist_button_icon_changed (window, child);
           if (child->class_group != NULL)
             {
@@ -2989,10 +3000,14 @@ static GtkWidget *
 xfce_tasklist_button_proxy_menu_item (XfceTasklistChild *child,
                                       gboolean           allow_wireframe)
 {
-  GtkWidget    *mi;
-  GtkWidget    *image;
-  GtkWidget    *label;
-  XfceTasklist *tasklist = child->tasklist;
+  GtkWidget       *mi;
+  GtkWidget       *image;
+  GtkWidget       *label;
+  GtkStyleContext *context_button;
+  GtkStyleContext *context_menuitem;
+  GtkCssProvider  *provider;
+  gchar           *css_string;
+  XfceTasklist    *tasklist = child->tasklist;
 
   panel_return_val_if_fail (XFCE_IS_TASKLIST (child->tasklist), NULL);
   panel_return_val_if_fail (child->type == CHILD_TYPE_OVERFLOW_MENU
@@ -3019,6 +3034,33 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
+  /* sync the minimized state css style class between the button and the menuitem */
+  context_button = gtk_widget_get_style_context (GTK_WIDGET (child->icon));
+  context_menuitem = gtk_widget_get_style_context (GTK_WIDGET (image));
+
+  provider = gtk_css_provider_new ();
+  /* silly workaround for gtkcss only accepting "." as decimal separator and floats returning
+     with "," as decimal separator in some locales */
+  if (tasklist->minimized_icon_lucency < 100
+      && tasklist->minimized_icon_lucency > 0)
+    css_string = g_strdup_printf ("image.minimized { opacity: 0.%d; }", tasklist->minimized_icon_lucency / 10);
+  else if (tasklist->minimized_icon_lucency == 100)
+    css_string = g_strdup_printf ("image.minimized { opacity: %f; }", 1.0);
+  else if (tasklist->minimized_icon_lucency == 0)
+    css_string = g_strdup_printf ("image.minimized { opacity: %f; }", 0.0);
+  gtk_css_provider_load_from_data (provider, css_string, -1, NULL);
+  gtk_style_context_add_provider (context_menuitem,
+                                  GTK_STYLE_PROVIDER (provider),
+                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  g_object_unref (provider);
+  g_free (css_string);
+
+  if (gtk_style_context_has_class (context_button, "minimized"))
+    gtk_style_context_add_class (context_menuitem, "minimized");
+  else if (!gtk_style_context_has_class (context_button, "minimized")
+           && gtk_style_context_has_class (context_menuitem, "minimized"))
+    gtk_style_context_remove_class (context_menuitem, "minimized");
+
   gtk_image_set_pixel_size (GTK_IMAGE (image), GTK_ICON_SIZE_MENU);
   g_object_bind_property (G_OBJECT (child->icon), "pixbuf",
                           G_OBJECT (image), "pixbuf",
@@ -3670,6 +3712,7 @@ static void
 xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
                                          XfceTasklistChild *group_child)
 {
+  GtkStyleContext   *context;
   GdkPixbuf         *pixbuf;
   GdkPixbuf         *lucent = NULL;
   GSList            *li;
@@ -3688,6 +3731,7 @@ xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
     return;
 
   icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (xfce_tasklist_get_panel_plugin (group_child->tasklist)));
+  context = gtk_widget_get_style_context (GTK_WIDGET (group_child->icon));
 
   /* get the class group icon */
   if (group_child->tasklist->show_labels)
@@ -3707,17 +3751,19 @@ xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
           break;
         }
     }
-  /* if the icons in the group are ALL minimized, than display
+  /* if the icons in the group are ALL minimized, then display
    * a minimized lucent effect for the group icon too */
   if (!group_child->tasklist->only_minimized
       && group_child->tasklist->minimized_icon_lucency < 100
-      && all_minimized_in_group)
+      && all_minimized_in_group
+      && !gtk_style_context_has_class (context, "minimized"))
     {
-      lucent = exo_gdk_pixbuf_lucent (pixbuf, group_child->tasklist->minimized_icon_lucency);
-      if (G_UNLIKELY (lucent != NULL))
-        pixbuf = lucent;
+      gtk_style_context_add_class (context, "minimized");
     }
-
+  else if (gtk_style_context_has_class (context, "minimized"))
+    {
+      gtk_style_context_remove_class (context, "minimized");
+    }
 
   if (G_LIKELY (pixbuf != NULL))
     gtk_image_set_from_pixbuf (GTK_IMAGE (group_child->icon), pixbuf);
