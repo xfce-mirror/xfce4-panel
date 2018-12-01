@@ -2721,7 +2721,9 @@ xfce_tasklist_button_state_changed (WnckWindow        *window,
               g_hash_table_lookup_extended (child->tasklist->class_groups,
                                             child->class_group,
                                             NULL, (gpointer *) &group_child);
-              xfce_tasklist_group_button_icon_changed (child->class_group, group_child);
+
+              if (child->type == CHILD_TYPE_GROUP)
+                xfce_tasklist_group_button_icon_changed (child->class_group, group_child);
             }
         }
     }
