@@ -1702,9 +1702,8 @@ launcher_plugin_menu_popup (gpointer user_data)
   gtk_menu_popup_at_widget (GTK_MENU (plugin->menu),
                             plugin->button,
                             xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
-                            ? GDK_GRAVITY_WEST : GDK_GRAVITY_NORTH,
-                            xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
-                            ? GDK_GRAVITY_EAST : GDK_GRAVITY_SOUTH,
+                            ? GDK_GRAVITY_NORTH_EAST : GDK_GRAVITY_SOUTH_WEST,
+                            GDK_GRAVITY_NORTH_WEST,
                             NULL);
 
   /* fallback to manual positioning, this is used with

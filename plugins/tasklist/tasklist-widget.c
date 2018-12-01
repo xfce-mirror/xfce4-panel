@@ -1515,9 +1515,8 @@ xfce_tasklist_arrow_button_toggled (GtkWidget    *button,
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
       gtk_menu_popup_at_widget (GTK_MENU (menu), button,
                                 xfce_tasklist_vertical (tasklist)
-                                ? GDK_GRAVITY_WEST : GDK_GRAVITY_NORTH_EAST,
-                                xfce_tasklist_vertical (tasklist)
-                                ? GDK_GRAVITY_EAST : GDK_GRAVITY_SOUTH_EAST,
+                                ? GDK_GRAVITY_NORTH_EAST : GDK_GRAVITY_SOUTH_WEST,
+                                GDK_GRAVITY_NORTH_WEST,
                                 NULL);
     }
 }
@@ -2919,9 +2918,8 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
       gtk_menu_popup_at_widget (GTK_MENU (menu), button,
                                 xfce_tasklist_vertical (child->tasklist)
-                                ? GDK_GRAVITY_SOUTH_EAST : GDK_GRAVITY_NORTH_WEST,
-                                xfce_tasklist_vertical (child->tasklist)
-                                ? GDK_GRAVITY_SOUTH_EAST : GDK_GRAVITY_SOUTH_WEST,
+                                ? GDK_GRAVITY_NORTH_EAST : GDK_GRAVITY_SOUTH_WEST,
+                                GDK_GRAVITY_NORTH_WEST,
                                 (GdkEvent *) event);
 
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
@@ -3657,9 +3655,8 @@ xfce_tasklist_group_button_button_press_event (GtkWidget         *button,
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
       gtk_menu_popup_at_widget (GTK_MENU (menu), button,
                                 xfce_tasklist_vertical (group_child->tasklist)
-                                ? GDK_GRAVITY_SOUTH_EAST : GDK_GRAVITY_NORTH_WEST,
-                                xfce_tasklist_vertical (group_child->tasklist)
-                                ? GDK_GRAVITY_SOUTH_EAST : GDK_GRAVITY_SOUTH_WEST,
+                                ? GDK_GRAVITY_NORTH_EAST : GDK_GRAVITY_SOUTH_WEST,
+                                GDK_GRAVITY_NORTH_WEST,
                                 (GdkEvent *) event);
 
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
