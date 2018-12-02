@@ -2203,13 +2203,9 @@ xfce_tasklist_child_new (XfceTasklist *tasklist)
   provider = gtk_css_provider_new ();
   /* silly workaround for gtkcss only accepting "." as decimal separator and floats returning
      with "," as decimal separator in some locales */
-  if (tasklist->minimized_icon_lucency < 100
-      && tasklist->minimized_icon_lucency > 0)
-    css_string = g_strdup_printf ("image { padding: 3px; } image.minimized { opacity: 0.%d; }", tasklist->minimized_icon_lucency / 10);
-  else if (tasklist->minimized_icon_lucency == 100)
-    css_string = g_strdup_printf ("image { padding: 3px; } image.minimized { opacity: %f; }", 1.0);
-  else if (tasklist->minimized_icon_lucency == 0)
-    css_string = g_strdup_printf ("image { padding: 3px; } image.minimized { opacity: %f; }", 0.0);
+  css_string = g_strdup_printf ("image { padding: 3px; } image.minimized { opacity: %d.%02d; }",
+                                tasklist->minimized_icon_lucency / 100,
+                                tasklist->minimized_icon_lucency % 100);
   gtk_css_provider_load_from_data (provider, css_string, -1, NULL);
   child->icon = gtk_image_new ();
   gtk_style_context_add_provider (gtk_widget_get_style_context (child->icon),
@@ -3058,13 +3054,9 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   provider = gtk_css_provider_new ();
   /* silly workaround for gtkcss only accepting "." as decimal separator and floats returning
      with "," as decimal separator in some locales */
-  if (tasklist->minimized_icon_lucency < 100
-      && tasklist->minimized_icon_lucency > 0)
-    css_string = g_strdup_printf ("image.minimized { opacity: 0.%d; }", tasklist->minimized_icon_lucency / 10);
-  else if (tasklist->minimized_icon_lucency == 100)
-    css_string = g_strdup_printf ("image.minimized { opacity: %f; }", 1.0);
-  else if (tasklist->minimized_icon_lucency == 0)
-    css_string = g_strdup_printf ("image.minimized { opacity: %f; }", 0.0);
+  css_string = g_strdup_printf ("image { padding: 3px; } image.minimized { opacity: %d.%02d; }",
+                                tasklist->minimized_icon_lucency / 100,
+                                tasklist->minimized_icon_lucency % 100);
   gtk_css_provider_load_from_data (provider, css_string, -1, NULL);
   gtk_style_context_add_provider (context_menuitem,
                                   GTK_STYLE_PROVIDER (provider),
