@@ -1639,7 +1639,7 @@ xfce_tasklist_configure_event (GtkWidget    *widget,
                                GdkEvent     *event,
                                XfceTasklist *tasklist)
 {
-  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), FALSE);
 
   if (!tasklist->all_monitors)
     {
