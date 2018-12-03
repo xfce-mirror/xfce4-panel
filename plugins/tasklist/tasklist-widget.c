@@ -2734,7 +2734,19 @@ xfce_tasklist_button_state_changed (WnckWindow        *window,
               gtk_widget_show (child->button);
             }
 
-          xfce_arrow_button_set_blinking (XFCE_ARROW_BUTTON (child->button), blink);
+
+          /* make sure the group button can blink too */
+          if (child->type == CHILD_TYPE_GROUP_MENU)
+            {
+              /* find the child for the group */
+              g_hash_table_lookup_extended (child->tasklist->class_groups,
+                                            child->class_group,
+                                            NULL, (gpointer *) &group_child);
+              xfce_arrow_button_set_blinking (XFCE_ARROW_BUTTON (group_child->button), blink);
+            }
+          /* otherwise just let the window button blink */
+          else
+            xfce_arrow_button_set_blinking (XFCE_ARROW_BUTTON (child->button), blink);
 
           if (child->tasklist->all_blinking
               && !xfce_tasklist_button_visible (child, active_ws))
