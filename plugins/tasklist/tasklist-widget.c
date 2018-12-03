@@ -3947,6 +3947,7 @@ xfce_tasklist_group_button_new (WnckClassGroup *class_group,
   child->type = CHILD_TYPE_GROUP;
   child->class_group = class_group;
 
+  gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (child->button)), "group-button");
   /* note that the same signals should be in the proxy menu item too */
   g_signal_connect (G_OBJECT (child->button), "button-press-event",
       G_CALLBACK (xfce_tasklist_group_button_button_press_event), child);
