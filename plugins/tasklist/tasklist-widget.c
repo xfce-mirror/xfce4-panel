@@ -108,7 +108,7 @@ struct _XfceTasklist
 
   /* the screen of this tasklist */
   WnckScreen           *screen;
-  GdkScreen            *gdk_screen;
+  GdkDisplay           *display;
 
   /* window children in the tasklist */
   GList                *windows;
@@ -1527,15 +1527,23 @@ xfce_tasklist_arrow_button_toggled (GtkWidget    *button,
 static void
 xfce_tasklist_connect_screen (XfceTasklist *tasklist)
 {
-  GList *windows, *li;
+  GList     *windows, *li;
+  GdkScreen *screen;
 
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
   panel_return_if_fail (tasklist->screen == NULL);
-  panel_return_if_fail (tasklist->gdk_screen == NULL);
+  panel_return_if_fail (tasklist->display == NULL);
+
+  /* set the display */
+  tasklist->display = gtk_widget_get_display (GTK_WIDGET (tasklist));
 
   /* set the new screen */
-  tasklist->gdk_screen = gtk_widget_get_screen (GTK_WIDGET (tasklist));
-  tasklist->screen = wnck_screen_get (gdk_screen_get_number (tasklist->gdk_screen));
+  /* We need the screen number for Wnck. We could use wnck_screen_get_default
+     but that might not be correct everywhere. */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+  screen = gtk_widget_get_screen (GTK_WIDGET (tasklist));
+  tasklist->screen = wnck_screen_get (gdk_screen_get_number (screen));
+G_GNUC_END_IGNORE_DEPRECATIONS
 
   /* add all existing windows on this screen */
   windows = wnck_screen_get_windows (tasklist->screen);
@@ -1617,7 +1625,7 @@ xfce_tasklist_disconnect_screen (XfceTasklist *tasklist)
   panel_assert (tasklist->skipped_windows == NULL);
 
   tasklist->screen = NULL;
-  tasklist->gdk_screen = NULL;
+  tasklist->display = NULL;
 }
 
 
@@ -2025,19 +2033,11 @@ static gboolean
 xfce_tasklist_update_monitor_geometry_idle (gpointer data)
 {
   XfceTasklist *tasklist = XFCE_TASKLIST (data);
-  GdkScreen    *screen;
 
   panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), FALSE);
+  panel_return_val_if_fail (GDK_IS_DISPLAY (tasklist->display), FALSE);
 
-  if (!tasklist->all_monitors)
-    {
-      screen = gtk_widget_get_screen (GTK_WIDGET (tasklist));
-
-      if (G_LIKELY (screen != NULL))
-        {
-          tasklist->n_monitors = gdk_screen_get_n_monitors (screen);
-        }
-    }
+  tasklist->n_monitors = gdk_display_get_n_monitors (tasklist->display);
 
   /* update visibility of buttons */
   if (tasklist->screen != NULL)
@@ -2375,6 +2375,7 @@ xfce_tasklist_button_visible (XfceTasklistChild *child,
   panel_return_val_if_fail (active_ws == NULL || WNCK_IS_WORKSPACE (active_ws), FALSE);
   panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), FALSE);
   panel_return_val_if_fail (WNCK_IS_WINDOW (child->window), FALSE);
+  panel_return_val_if_fail (GDK_IS_DISPLAY (tasklist->display), FALSE);
 
   if (xfce_tasklist_filter_monitors (tasklist))
     {
@@ -2385,8 +2386,8 @@ xfce_tasklist_button_visible (XfceTasklistChild *child,
       wnck_window_get_geometry (child->window, &x, &y, &w, &h);
 
       /* Ask Gdk if they are on the same monitor. */
-      if (gdk_screen_get_monitor_at_window(tasklist->gdk_screen, window) !=
-          gdk_screen_get_monitor_at_point(tasklist->gdk_screen, x+(w/2), y+(h/2)) )
+      if (gdk_display_get_monitor_at_window(tasklist->display, window) !=
+          gdk_display_get_monitor_at_point(tasklist->display, x+(w/2), y+(h/2)))
          return FALSE;
     }
 
