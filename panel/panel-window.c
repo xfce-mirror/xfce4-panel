@@ -1693,7 +1693,10 @@ panel_window_screen_struts_set (PanelWindow *window)
     scale_factor = gdk_monitor_get_scale_factor(monitor);
 
   /* set the struts */
-  /* note that struts are relative to the screen edge! */
+  /* Note that struts are relative to the screen edge! (NOT the monitor)
+     This means we have no choice but to use deprecated GtkScreen calls.
+     The screen height/width can't be calculated from monitor geometry
+     because it can extend beyond the lowest/rightmost monitor. */
   if (window->struts_edge == STRUTS_EDGE_TOP)
     {
       /* the window is snapped on the top screen edge */
@@ -1704,7 +1707,9 @@ panel_window_screen_struts_set (PanelWindow *window)
   else if (window->struts_edge == STRUTS_EDGE_BOTTOM)
     {
       /* the window is snapped on the bottom screen edge */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       struts[STRUT_BOTTOM] = (gdk_screen_get_height(window->screen) - alloc->y) * scale_factor;
+G_GNUC_END_IGNORE_DEPRECATIONS
       struts[STRUT_BOTTOM_START_X] = alloc->x * scale_factor;
       struts[STRUT_BOTTOM_END_X] = (alloc->x + alloc->width - 1) * scale_factor;
     }
@@ -1718,7 +1723,9 @@ panel_window_screen_struts_set (PanelWindow *window)
   else if (window->struts_edge == STRUTS_EDGE_RIGHT)
     {
       /* the window is snapped on the right screen edge */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       struts[STRUT_RIGHT] = (gdk_screen_get_width(window->screen) - alloc->x) * scale_factor;
+G_GNUC_END_IGNORE_DEPRECATIONS
       struts[STRUT_RIGHT_START_Y] = alloc->y * scale_factor;
       struts[STRUT_RIGHT_END_Y] = (alloc->y + alloc->height - 1) * scale_factor;
     }
