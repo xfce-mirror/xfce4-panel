@@ -1574,16 +1574,16 @@ xfce_tasklist_disconnect_screen (XfceTasklist *tasklist)
 
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
   panel_return_if_fail (WNCK_IS_SCREEN (tasklist->screen));
-  panel_return_if_fail (GDK_IS_SCREEN (tasklist->gdk_screen));
+
+  /* disconnect configure-event signal */
+  g_signal_handlers_disconnect_by_func (
+      G_OBJECT (gtk_widget_get_toplevel (GTK_WIDGET (tasklist))),
+      G_CALLBACK (xfce_tasklist_configure_event), tasklist);
 
   /* disconnect monitor signals */
   n = g_signal_handlers_disconnect_matched (G_OBJECT (tasklist->screen),
       G_SIGNAL_MATCH_DATA, 0, 0, NULL, NULL, tasklist);
   panel_return_if_fail (n == 5);
-
-  /* disconnect geometry changed signals */
-  g_signal_handlers_disconnect_by_func (G_OBJECT (tasklist->gdk_screen),
-      G_CALLBACK (xfce_tasklist_gdk_screen_changed), tasklist);
 
   /* delete all known class groups (and their buttons) */
   g_hash_table_remove_all (tasklist->class_groups);
