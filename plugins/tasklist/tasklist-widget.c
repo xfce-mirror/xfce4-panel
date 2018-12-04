@@ -1382,6 +1382,11 @@ xfce_tasklist_scroll_event (GtkWidget      *widget,
     case GDK_SCROLL_RIGHT:
       /* TODO */
       break;
+
+    default:
+      panel_debug_filtered (PANEL_DEBUG_TASKLIST, "unknown scrolling event type");
+      break;
+
     }
 
   if (lnew != NULL)
