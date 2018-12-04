@@ -1299,9 +1299,7 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
         case LAUNCHER_ARROW_NORTH:
         case LAUNCHER_ARROW_SOUTH:
           a_height = ARROW_BUTTON_SIZE;
-          if (horizontal)
-            p_width -= ARROW_BUTTON_SIZE;
-          else
+          if (!horizontal)
             p_height += ARROW_BUTTON_SIZE;
           break;
 
@@ -1310,8 +1308,6 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
           a_width = ARROW_BUTTON_SIZE;
           if (horizontal)
             p_width += ARROW_BUTTON_SIZE;
-          else
-            p_height -= ARROW_BUTTON_SIZE;
           break;
 
         default:
@@ -1332,6 +1328,8 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   else {
     gint             icon_size;
 
+    gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), p_width, p_height);
+
     icon_size = xfce_panel_plugin_get_icon_size (panel_plugin);
     /* if the icon is a pixbuf we have to recreate and scale it */
     if (plugin->pixbuf != NULL &&
@@ -1348,7 +1346,7 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
     }
   }
 
-  return FALSE;
+  return TRUE;
 }
 
 
