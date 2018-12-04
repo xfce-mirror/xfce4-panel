@@ -1451,7 +1451,6 @@ xfce_panel_plugin_set_size (XfcePanelPluginProvider *provider,
   XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
   gboolean         handled = FALSE;
   gint             real_size;
-  gint             icon_size;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
