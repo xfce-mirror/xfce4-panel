@@ -71,7 +71,6 @@
 #define xfce_tasklist_vertical(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
 #define xfce_tasklist_deskbar(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
 #define xfce_tasklist_filter_monitors(tasklist) (!(tasklist)->all_monitors && (tasklist)->n_monitors > 1)
-#define xfce_tasklist_geometry_set_invalid(tasklist) ((tasklist)->n_monitors = 0)
 
 
 
@@ -587,7 +586,6 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->all_blinking = TRUE;
   tasklist->middle_click = XFCE_TASKLIST_MIDDLE_CLICK_DEFAULT;
   tasklist->label_decorations = TRUE;
-  xfce_tasklist_geometry_set_invalid (tasklist);
 #ifdef GDK_WINDOWING_X11
   tasklist->wireframe_window = 0;
 #endif
@@ -2043,7 +2041,6 @@ xfce_tasklist_update_monitor_geometry_idle (gpointer data)
 {
   XfceTasklist *tasklist = XFCE_TASKLIST (data);
   GdkScreen    *screen;
-  gboolean      geometry_set = FALSE;
 
   panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), FALSE);
 
@@ -2054,14 +2051,8 @@ xfce_tasklist_update_monitor_geometry_idle (gpointer data)
       if (G_LIKELY (screen != NULL))
         {
           tasklist->n_monitors = gdk_screen_get_n_monitors (screen);
-          geometry_set = TRUE;
         }
     }
-
-  /* make sure we never poke the window geometry unneeded
-   * in the visibility function */
-  if (!geometry_set)
-    xfce_tasklist_geometry_set_invalid (tasklist);
 
   /* update visibility of buttons */
   if (tasklist->screen != NULL)
@@ -4035,8 +4026,6 @@ xfce_tasklist_set_include_all_monitors (XfceTasklist *tasklist,
        * update the visibility of the buttons */
       if (all_monitors)
         {
-          xfce_tasklist_geometry_set_invalid (tasklist);
-
           /* update visibility of buttons */
           xfce_tasklist_active_workspace_changed (tasklist->screen,
                                                   NULL, tasklist);
