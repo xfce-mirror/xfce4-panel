@@ -39,7 +39,7 @@
 #define DEFAULT_TITLE     _("Applications")
 #define DEFAULT_ICON_NAME "xfce4-panel-menu"
 #define DEFAULT_ICON_SIZE (16)
-
+#define DEFAULT_EDITOR    "menulibre"
 
 
 struct _ApplicationsMenuPluginClass
@@ -64,6 +64,7 @@ struct _ApplicationsMenuPlugin
   gchar           *button_icon;
   gboolean         custom_menu;
   gchar           *custom_menu_file;
+  gchar           *menu_editor;
 
   /* temp item we store here when the
    * properties dialog is opened */
@@ -83,7 +84,8 @@ enum
   PROP_BUTTON_TITLE,
   PROP_BUTTON_ICON,
   PROP_CUSTOM_MENU,
-  PROP_CUSTOM_MENU_FILE
+  PROP_CUSTOM_MENU_FILE,
+  PROP_MENU_EDITOR
 };
 
 
@@ -193,6 +195,13 @@ applications_menu_plugin_class_init (ApplicationsMenuPluginClass *klass)
                                                         NULL, NULL,
                                                         NULL,
                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_MENU_EDITOR,
+                                   g_param_spec_string ("menu-editor",
+                                                        NULL, NULL,
+                                                        DEFAULT_EDITOR,
+                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 }
 
 
@@ -286,6 +295,10 @@ applications_menu_plugin_get_property (GObject    *object,
       g_value_set_string (value, plugin->custom_menu_file);
       break;
 
+    case PROP_MENU_EDITOR:
+      g_value_set_string (value, plugin->menu_editor);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -371,6 +384,10 @@ applications_menu_plugin_set_property (GObject      *object,
         applications_menu_plugin_set_garcon_menu (plugin);
       break;
 
+    case PROP_MENU_EDITOR:
+      plugin->menu_editor = g_value_dup_string (value);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -399,6 +416,7 @@ applications_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "button-icon", G_TYPE_STRING },
     { "custom-menu", G_TYPE_BOOLEAN },
     { "custom-menu-file", G_TYPE_STRING },
+    { "menu-editor", G_TYPE_STRING },
     { NULL }
   };
 
@@ -411,6 +429,9 @@ applications_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   /* make sure the menu is set */
   applications_menu_plugin_set_garcon_menu (plugin);
+
+  if (!plugin->menu_editor)
+      plugin->menu_editor = DEFAULT_EDITOR;
 
   gtk_widget_show (plugin->button);
 
@@ -565,15 +586,14 @@ applications_menu_plugin_configure_plugin_edit (GtkWidget              *button,
                                                 ApplicationsMenuPlugin *plugin)
 {
   GError      *error = NULL;
-  const gchar  command[] = "alacarte";
 
   panel_return_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin));
   panel_return_if_fail (GTK_IS_WIDGET (button));
 
-  if (!xfce_spawn_command_line_on_screen (gtk_widget_get_screen (button), command,
+  if (!xfce_spawn_command_line_on_screen (gtk_widget_get_screen (button), plugin->menu_editor,
                                           FALSE, FALSE, &error))
     {
-      xfce_dialog_show_error (NULL, error, _("Failed to execute command \"%s\"."), command);
+      xfce_dialog_show_error (NULL, error, _("Failed to execute command \"%s\"."), plugin->menu_editor);
       g_error_free (error);
     }
 }
@@ -628,7 +648,7 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   /* whether we show the edit menu button */
   object = gtk_builder_get_object (builder, "edit-menu-button");
   panel_return_if_fail (GTK_IS_BUTTON (object));
-  path = g_find_program_in_path ("alacarte");
+  path = g_find_program_in_path (plugin->menu_editor);
   if (path != NULL)
     {
       object2 = gtk_builder_get_object (builder, "use-default-menu");
