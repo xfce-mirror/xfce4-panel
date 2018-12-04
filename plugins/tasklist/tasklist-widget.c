@@ -290,8 +290,6 @@ static void               xfce_tasklist_arrow_button_toggled             (GtkWid
                                                                           XfceTasklist         *tasklist);
 static void               xfce_tasklist_connect_screen                   (XfceTasklist         *tasklist);
 static void               xfce_tasklist_disconnect_screen                (XfceTasklist         *tasklist);
-static void               xfce_tasklist_gdk_screen_changed               (GdkScreen            *gdk_screen,
-                                                                          XfceTasklist         *tasklist);
 static gboolean           xfce_tasklist_configure_event                  (GtkWidget            *widget,
                                                                           GdkEvent             *event,
                                                                           XfceTasklist         *tasklist);
@@ -1562,7 +1560,11 @@ xfce_tasklist_connect_screen (XfceTasklist *tasklist)
       G_CALLBACK (xfce_tasklist_viewports_changed), tasklist);
 
   /* update the viewport if not all monitors are shown */
-  xfce_tasklist_gdk_screen_changed (tasklist->gdk_screen, tasklist);
+  if (!tasklist->all_monitors)
+  {
+    /* update the monitor geometry */
+    xfce_tasklist_update_monitor_geometry (tasklist);
+  }
 }
 
 
@@ -1616,23 +1618,6 @@ xfce_tasklist_disconnect_screen (XfceTasklist *tasklist)
 
   tasklist->screen = NULL;
   tasklist->gdk_screen = NULL;
-}
-
-
-
-static void
-xfce_tasklist_gdk_screen_changed (GdkScreen    *gdk_screen,
-                                  XfceTasklist *tasklist)
-{
-  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
-  panel_return_if_fail (GDK_IS_SCREEN (gdk_screen));
-  panel_return_if_fail (tasklist->gdk_screen == gdk_screen);
-
-  if (!tasklist->all_monitors)
-    {
-      /* update the monitor geometry */
-      xfce_tasklist_update_monitor_geometry (tasklist);
-    }
 }
 
 
@@ -4022,18 +4007,10 @@ xfce_tasklist_set_include_all_monitors (XfceTasklist *tasklist,
     {
       tasklist->all_monitors = all_monitors;
 
-      /* set the geometry to invalid or update the geometry and
-       * update the visibility of the buttons */
-      if (all_monitors)
-        {
-          /* update visibility of buttons */
-          xfce_tasklist_active_workspace_changed (tasklist->screen,
-                                                  NULL, tasklist);
-        }
-      else if (tasklist->gdk_screen != NULL)
-        {
-          xfce_tasklist_gdk_screen_changed (tasklist->gdk_screen, tasklist);
-        }
+      /* update all windows */
+      if (tasklist->screen != NULL)
+        xfce_tasklist_active_workspace_changed (tasklist->screen,
+                                                NULL, tasklist);
     }
 }
 
