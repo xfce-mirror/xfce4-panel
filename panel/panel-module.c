@@ -490,7 +490,9 @@ panel_module_new_plugin (PanelModule  *module,
         }
 
       /* fall-through (make wrapper plugin), probably a plugin with
-       * preinit_func which is not supported for internal plugins */
+       * preinit_func which is not supported for internal plugins
+       * note: next comment tells GCC7 to ignore the fallthrough */
+      /* fall through */
 
     case WRAPPER:
       plugin = panel_plugin_external_wrapper_new (module, unique_id, arguments);

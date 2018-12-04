@@ -459,17 +459,20 @@ panel_tic_tac_toe_get_move (gint state,
           moves = panel_tic_tac_toe_best_opening (state, first_moves);
           if (moves != 0)
             break;
+          /* else fall through */
 
         case LEVEL_INTERMEDIATE:
           /* try to find a winning move */
           moves = panel_tic_tac_toe_get_winner_move (state, PLAYER_X);
           if (moves != 0)
             break;
+          /* else fall through */
 
           /* try to find a blocking move */
           moves = panel_tic_tac_toe_get_winner_move (state, PLAYER_O);
           if (moves != 0)
             break;
+          /* else fall through */
 
         case LEVEL_NOVICE:
           moves = legal_moves;

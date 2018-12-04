@@ -129,6 +129,7 @@ wrapper_gproxy_set (XfcePanelPluginProvider *provider,
 
         case PROVIDER_PROP_TYPE_ACTION_QUIT_FOR_RESTART:
           retval = PLUGIN_EXIT_SUCCESS_AND_RESTART;
+          /* fall through */
         case PROVIDER_PROP_TYPE_ACTION_QUIT:
           gtk_main_quit ();
           break;
