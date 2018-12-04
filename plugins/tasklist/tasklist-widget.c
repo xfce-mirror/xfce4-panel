@@ -3727,7 +3727,6 @@ xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
 {
   GtkStyleContext   *context;
   GdkPixbuf         *pixbuf;
-  GdkPixbuf         *lucent = NULL;
   GSList            *li;
   XfceTasklistChild *child;
   gboolean           all_minimized_in_group = TRUE;
