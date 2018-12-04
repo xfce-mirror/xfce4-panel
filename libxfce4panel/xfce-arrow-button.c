@@ -119,7 +119,7 @@ static guint arrow_button_signals[LAST_SIGNAL];
 
 
 
-G_DEFINE_TYPE (XfceArrowButton, xfce_arrow_button, GTK_TYPE_TOGGLE_BUTTON)
+G_DEFINE_TYPE_WITH_PRIVATE (XfceArrowButton, xfce_arrow_button, GTK_TYPE_TOGGLE_BUTTON)
 
 
 
@@ -128,8 +128,6 @@ xfce_arrow_button_class_init (XfceArrowButtonClass * klass)
 {
   GObjectClass   *gobject_class;
   GtkWidgetClass *gtkwidget_class;
-
-  g_type_class_add_private (klass, sizeof (XfceArrowButtonPrivate));
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->get_property = xfce_arrow_button_get_property;
@@ -191,7 +189,7 @@ xfce_arrow_button_init (XfceArrowButton *button)
   GtkCssProvider  *provider;
 #endif
 
-  button->priv = G_TYPE_INSTANCE_GET_PRIVATE (button, XFCE_TYPE_ARROW_BUTTON, XfceArrowButtonPrivate);
+  button->priv = xfce_arrow_button_get_instance_private (button);
 
   /* initialize button values */
   button->priv->arrow_type = GTK_ARROW_UP;

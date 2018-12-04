@@ -148,7 +148,7 @@ static GdkPixbuf *xfce_panel_image_scale_pixbuf         (GdkPixbuf       *source
 
 
 
-G_DEFINE_TYPE (XfcePanelImage, xfce_panel_image, GTK_TYPE_WIDGET)
+G_DEFINE_TYPE_WITH_PRIVATE (XfcePanelImage, xfce_panel_image, GTK_TYPE_WIDGET)
 
 
 
@@ -157,8 +157,6 @@ xfce_panel_image_class_init (XfcePanelImageClass *klass)
 {
   GObjectClass   *gobject_class;
   GtkWidgetClass *gtkwidget_class;
-
-  g_type_class_add_private (klass, sizeof (XfcePanelImagePrivate));
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->set_property = xfce_panel_image_set_property;
@@ -224,7 +222,7 @@ xfce_panel_image_init (XfcePanelImage *image)
 {
   gtk_widget_set_has_window (GTK_WIDGET (image), FALSE);
 
-  image->priv = G_TYPE_INSTANCE_GET_PRIVATE (image, XFCE_TYPE_PANEL_IMAGE, XfcePanelImagePrivate);
+  image->priv = xfce_panel_image_get_instance_private (image);
 
   image->priv->pixbuf = NULL;
   image->priv->cache = NULL;

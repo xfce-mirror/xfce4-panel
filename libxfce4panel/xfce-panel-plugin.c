@@ -211,8 +211,9 @@ static GParamSpec *plugin_props[N_PROPERTIES] = { NULL, };
 
 
 G_DEFINE_TYPE_WITH_CODE (XfcePanelPlugin, xfce_panel_plugin, GTK_TYPE_EVENT_BOX,
+                         G_ADD_PRIVATE (XfcePanelPlugin)
                          G_IMPLEMENT_INTERFACE (XFCE_TYPE_PANEL_PLUGIN_PROVIDER,
-                         xfce_panel_plugin_provider_init));
+                                                xfce_panel_plugin_provider_init));
 
 
 
@@ -221,8 +222,6 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
 {
   GObjectClass   *gobject_class;
   GtkWidgetClass *gtkwidget_class;
-
-  g_type_class_add_private (klass, sizeof (XfcePanelPluginPrivate));
 
   klass->construct = NULL;
 
@@ -701,7 +700,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
 static void
 xfce_panel_plugin_init (XfcePanelPlugin *plugin)
 {
-  plugin->priv = G_TYPE_INSTANCE_GET_PRIVATE (plugin, XFCE_TYPE_PANEL_PLUGIN, XfcePanelPluginPrivate);
+  plugin->priv = xfce_panel_plugin_get_instance_private (plugin);
 
   plugin->priv->name = NULL;
   plugin->priv->display_name = NULL;
