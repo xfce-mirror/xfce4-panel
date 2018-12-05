@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-27 00:30+0200\n"
-"PO-Revision-Date: 2018-11-01 22:37+0000\n"
+"POT-Creation-Date: 2018-12-03 22:34+0100\n"
+"PO-Revision-Date: 2018-12-05 22:16+0000\n"
 "Last-Translator: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>\n"
 "Language-Team: Japanese (http://www.transifex.com/xfce/xfce4-panel/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -31,8 +31,7 @@ msgid ""
 msgstr "このデスクトップファイルの情報を基にパネルに新しいランチャーを追加します。"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2666
-#: ../migrate/main.c:117
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2692
 msgid "Panel"
 msgstr "パネル"
 
@@ -41,79 +40,77 @@ msgid "Customize the panel"
 msgstr "パネルをカスタマイズします"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1050
-#: ../panel/panel-preferences-dialog.c:1174
+#: ../libxfce4panel/xfce-panel-plugin.c:1079
+#: ../panel/panel-preferences-dialog.c:1308
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "\"%s\" を削除してもよろしいですか?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1055
-#: ../panel/panel-preferences-dialog.c:1177
+#: ../libxfce4panel/xfce-panel-plugin.c:1084
+#: ../panel/panel-preferences-dialog.c:1311
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "パネルから削除すると、このアイテムは完全に失われます。"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1056 ../panel/panel-dialogs.c:163
-#: ../panel/panel-preferences-dialog.c:1179
-#: ../plugins/applicationsmenu/applicationsmenu.c:538
-#: ../plugins/directorymenu/directorymenu.c:394
+#: ../libxfce4panel/xfce-panel-plugin.c:1085 ../panel/panel-dialogs.c:163
+#: ../panel/panel-preferences-dialog.c:1313
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1057
-#: ../panel/panel-plugin-external.c:436
-#: ../panel/panel-preferences-dialog.c:897
-#: ../panel/panel-preferences-dialog.c:1180
-#: ../plugins/launcher/launcher-dialog.c:854
+#: ../libxfce4panel/xfce-panel-plugin.c:1086
+#: ../panel/panel-plugin-external.c:439
+#: ../panel/panel-preferences-dialog.c:956
+#: ../panel/panel-preferences-dialog.c:1314
+#: ../plugins/launcher/launcher-dialog.c:855
 msgid "Remove"
 msgstr "削除"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1198
+#: ../libxfce4panel/xfce-panel-plugin.c:1227
 msgid "_Properties"
 msgstr "プロパティ(_P)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1213 ../panel/panel-window.c:2754
+#: ../libxfce4panel/xfce-panel-plugin.c:1242 ../panel/panel-window.c:2780
 msgid "_About"
 msgstr "このプログラムについて(_A)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1228
+#: ../libxfce4panel/xfce-panel-plugin.c:1257
 msgid "_Move"
 msgstr "移動(_M)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1252
+#: ../libxfce4panel/xfce-panel-plugin.c:1281
 msgid "_Remove"
 msgstr "削除(_R)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1273
+#: ../libxfce4panel/xfce-panel-plugin.c:1302
 msgid "Pane_l"
 msgstr "パネル(_L)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:2679
+#: ../libxfce4panel/xfce-panel-plugin.c:1311 ../panel/panel-window.c:2705
 msgid "Add _New Items..."
 msgstr "新しいアイテムの追加(_N)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:2694
+#: ../libxfce4panel/xfce-panel-plugin.c:1326 ../panel/panel-window.c:2720
 msgid "Panel Pr_eferences..."
 msgstr "パネルの設定(_E)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1318 ../panel/panel-window.c:2726
+#: ../libxfce4panel/xfce-panel-plugin.c:1347 ../panel/panel-window.c:2752
 msgid "Log _Out"
 msgstr "ログアウト(_O)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1338 ../panel/panel-item-dialog.c:208
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2745
+#: ../libxfce4panel/xfce-panel-plugin.c:1367 ../panel/panel-item-dialog.c:208
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2771
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-#: ../plugins/pager/pager-dialog.glade.h:10
+#: ../plugins/pager/pager-dialog.glade.h:3
 #: ../plugins/separator/separator-dialog.glade.h:6
 #: ../plugins/systray/systray-dialog.glade.h:3
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "_Help"
 msgstr "ヘルプ(_H)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353
+#: ../libxfce4panel/xfce-panel-plugin.c:1382
 msgid "About"
 msgstr "このソフトウェアについて"
 
@@ -221,7 +218,7 @@ msgstr "パネルの終了に失敗しました"
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus メッセージの送信に失敗しました"
 
-#: ../panel/main.c:435 ../panel/panel-plugin-external.c:435
+#: ../panel/main.c:435 ../panel/panel-plugin-external.c:438
 msgid "Execute"
 msgstr "実行"
 
@@ -240,37 +237,37 @@ msgstr "動作中の %s インスタンスが見つかりませんでした"
 msgid "Failed to launch the migration application"
 msgstr "移行アプリケーションの起動に失敗しました"
 
-#: ../panel/panel-application.c:982
+#: ../panel/panel-application.c:983
 msgid "Create _Launcher"
 msgstr "ランチャーを作成(_L)"
 
-#: ../panel/panel-application.c:983
+#: ../panel/panel-application.c:984
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "パネル上に新しいランチャーを作成し、ドロップしたファイルをメニューアイテムとして挿入します。"
 
-#: ../panel/panel-application.c:985
+#: ../panel/panel-application.c:986
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "%d 個のデスクトップファイルから新しいランチャーを作成します"
 
-#: ../panel/panel-application.c:1725
+#: ../panel/panel-application.c:1726
 msgid "Quit"
 msgstr "終了"
 
-#: ../panel/panel-application.c:1726
+#: ../panel/panel-application.c:1727
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "セッションマネージャーなしで X を起動した場合、「終了」をクリックすると X サーバーをクローズします。"
 
-#: ../panel/panel-application.c:1727
+#: ../panel/panel-application.c:1728
 msgid "Are you sure you want to quit the panel?"
 msgstr "パネルを終了してもよろしいですか?"
 
-#: ../panel/panel-application.c:1735
+#: ../panel/panel-application.c:1736
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "コマンド \"%s\" の実行に失敗しました"
@@ -300,7 +297,7 @@ msgid "translator-credits"
 msgstr "Daichi Kawahata <daichi@xfce.org>, 2005-2007.\nMasato Hashimoto <cabezon.hashimoto@gmail.com>, 2010-2012."
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:12
 msgid "Add New Item"
 msgstr "新しいアイテムの追加"
 
@@ -312,7 +309,7 @@ msgstr "追加"
 msgid "Please choose a panel for the new plugin:"
 msgstr "新しいプラグインのパネルを選択してください:"
 
-#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:832
+#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:891
 #, c-format
 msgid "Panel %d"
 msgstr "パネル %d"
@@ -345,7 +342,7 @@ msgstr "追加(_A)"
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:7
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
-#: ../plugins/pager/pager-dialog.glade.h:9
+#: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/separator/separator-dialog.glade.h:5
 #: ../plugins/systray/systray-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
@@ -353,7 +350,7 @@ msgid "_Close"
 msgstr "閉じる(_C)"
 
 #: ../panel/panel-item-dialog.c:230
-#: ../plugins/launcher/launcher-dialog.glade.h:3
+#: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "_Search:"
 msgstr "検索(_S):"
 
@@ -361,12 +358,12 @@ msgstr "検索(_S):"
 msgid "Enter search phrase here"
 msgstr "検索フレーズを入力してください"
 
-#: ../panel/panel-plugin-external.c:429
+#: ../panel/panel-plugin-external.c:432
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "プラグイン \"%s\" は予期せずパネルから失われました。このプラグインを再起動しますか?"
 
-#: ../panel/panel-plugin-external.c:431
+#: ../panel/panel-plugin-external.c:434
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -374,39 +371,39 @@ msgid ""
 "permanently removed from the panel."
 msgstr "プラグインは最近 %d 秒以内に 1 回以上再起動されました。「実行」を押すとパネルはプラグインの再起動を試みます。その他の場合はパネルから完全に削除されます。"
 
-#: ../panel/panel-preferences-dialog.c:487
+#: ../panel/panel-preferences-dialog.c:517
 msgid "Automatic"
 msgstr "自動"
 
-#: ../panel/panel-preferences-dialog.c:497
+#: ../panel/panel-preferences-dialog.c:527
 msgid "Primary"
 msgstr "プライマリー"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:516
+#: ../panel/panel-preferences-dialog.c:546
 #, c-format
 msgid "Monitor %d"
 msgstr "モニター %d"
 
-#: ../panel/panel-preferences-dialog.c:898
+#: ../panel/panel-preferences-dialog.c:957
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "パネルとプラグインの設定は完全に削除されます"
 
-#: ../panel/panel-preferences-dialog.c:899
+#: ../panel/panel-preferences-dialog.c:958
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "パネル %d を削除してもよろしいですか?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1016
+#: ../panel/panel-preferences-dialog.c:1150
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(外部)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1021
+#: ../panel/panel-preferences-dialog.c:1155
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -415,7 +412,7 @@ msgstr "内部名: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1033
+#: ../panel/panel-preferences-dialog.c:1167
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "内部名: %s-%d"
@@ -475,12 +472,12 @@ msgid "Switch between panel presets"
 msgstr "パネルプリセットを切り替えます。"
 
 #: ../panel/panel-preferences-dialog.glade.h:17
-msgid "M_ode:"
-msgstr "モード(_O):"
+msgid "<b>General</b>"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:18
-msgid "O_utput:"
-msgstr "出力(_U):"
+msgid "M_ode:"
+msgstr "モード(_O):"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid "Span mo_nitors"
@@ -500,233 +497,210 @@ msgid ""
 msgstr "パネルの取っ手を非表示にして位置を固定する場合はこのオプションを選択してください。"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
-msgid "Automatically hide the panel:"
-msgstr "パネルを自動的に隠す:"
-
-#: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Don't _reserve space on borders"
 msgstr "パネル分のスペースを確保しない(_R)"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:24
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr "ウィンドウを最大化したときにパネルの後ろまで広げたい場合はこのオプションを選択してください。これはパネルが画面端に付着している場合のみ機能します。"
 
+#: ../panel/panel-preferences-dialog.glade.h:25
+msgid "Automatically hide the panel:"
+msgstr "パネルを自動的に隠す:"
+
 #: ../panel/panel-preferences-dialog.glade.h:26
-#: ../plugins/actions/actions-dialog.glade.h:9
-#: ../plugins/launcher/launcher-dialog.glade.h:23
-msgid "General"
-msgstr "一般"
+msgid "O_utput:"
+msgstr "出力(_U):"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
-msgid "A_utomatically increase the length"
-msgstr "長さを自動的に伸ばす(_U)"
-
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:28
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
-msgstr "プラグインの要求に合わせてパネルの長さを自動的に伸ばします。"
+msgid "<b>Measurements</b>"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:29
+msgid "Row _Size (pixels):"
+msgstr "行サイズ (ピクセル)(_S):"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
-#, no-c-format
-msgid "L_ength (%):"
-msgstr "長さ (%)(_E):"
-
-#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Num_ber of rows:"
 msgstr "行数(_B):"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
-msgid "Row _Size (pixels):"
-msgstr "行サイズ (ピクセル)(_S):"
+#, no-c-format
+msgid "L_ength (%):"
+msgstr "長さ (%)(_E):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#: ../panel/panel-preferences-dialog.glade.h:33
+msgid "A_utomatically increase the length"
+msgstr "長さを自動的に伸ばす(_U)"
+
 #: ../panel/panel-preferences-dialog.glade.h:34
-msgid "Measurements"
-msgstr "大きさ"
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr "プラグインの要求に合わせてパネルの長さを自動的に伸ばします。"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid "D_isplay"
 msgstr "表示(_I)"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
+msgid "<b>Background</b>"
+msgstr "<b>背景</b>"
+
+#: ../panel/panel-preferences-dialog.glade.h:37
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Style:"
 msgstr "スタイル(_S):"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "C_olor:"
 msgstr "配色(_O):"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "Pick a Panel Color"
 msgstr "パネルの色の選択"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "_File:"
 msgstr "ファイル(_F):"
 
-#: ../panel/panel-preferences-dialog.glade.h:40
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "Select A Background Image"
 msgstr "背景画像の選択"
 
-#: ../panel/panel-preferences-dialog.glade.h:41
-msgid "Background"
-msgstr "背景"
-
 #: ../panel/panel-preferences-dialog.glade.h:42
+msgid "<b>Icons</b>"
+msgstr "<b>アイコン</b>"
+
+#: ../panel/panel-preferences-dialog.glade.h:43
+msgid "Adjust size automatically"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:44
+msgid "Fixed Icon Size (pixels):"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:45
+msgid "<b>Opacity</b>"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:46
+msgid "Configure..."
+msgstr "設定"
+
+#: ../panel/panel-preferences-dialog.glade.h:47
+msgid ""
+"<b>Compositing is currently disabled</b>\n"
+"Enable compositing in the window manager for opacity settings in the panel."
+msgstr ""
+
+#. I18N: label for the enter transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:50
+msgid "_Enter:"
+msgstr "ホバー(_E):"
+
+#. I18N: label for the leave transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:52
+msgid "_Leave:"
+msgstr "非ホバー(_L):"
+
+#: ../panel/panel-preferences-dialog.glade.h:53
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "ポインターがパネル上にないときの透明度です。0 で完全に透明、100 で完全に不透明になります。"
 
-#. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:44
-msgid "_Enter:"
-msgstr "ホバー(_E):"
-
-#. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:46
-msgid "_Leave:"
-msgstr "非ホバー(_L):"
-
-#: ../panel/panel-preferences-dialog.glade.h:47
-msgid "Opacity"
-msgstr "不透明度"
-
-#: ../panel/panel-preferences-dialog.glade.h:48
-msgid ""
-"Enable compositing in the window manager for opacity settings in the panel."
-msgstr "パネルの不透明度を設定する場合はウィンドウマネージャーの合成処理を有効にしてください。"
-
-#: ../panel/panel-preferences-dialog.glade.h:49
+#: ../panel/panel-preferences-dialog.glade.h:54
 msgid "Appeara_nce"
 msgstr "外観(_N)"
 
-#: ../panel/panel-preferences-dialog.glade.h:50
+#: ../panel/panel-preferences-dialog.glade.h:55
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 #: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Move currently selected item up by one row"
 msgstr "現在選択されているアイテムを一つ上へ移動します"
 
-#: ../panel/panel-preferences-dialog.glade.h:51
+#: ../panel/panel-preferences-dialog.glade.h:56
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 #: ../plugins/systray/systray-dialog.glade.h:9
 msgid "Move currently selected item down by one row"
 msgstr "現在選択されているアイテムを一つ下へ移動します"
 
-#: ../panel/panel-preferences-dialog.glade.h:52
+#: ../panel/panel-preferences-dialog.glade.h:57
 msgid "Add new item to this panel"
 msgstr "このパネルに新しいアイテムを追加します"
 
-#: ../panel/panel-preferences-dialog.glade.h:53
+#: ../panel/panel-preferences-dialog.glade.h:58
 msgid "Remove currently selected item"
 msgstr "現在選択されているアイテムを削除します"
 
-#: ../panel/panel-preferences-dialog.glade.h:54
-#: ../plugins/launcher/launcher-dialog.glade.h:22
+#: ../panel/panel-preferences-dialog.glade.h:59
+#: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Edit the currently selected item"
 msgstr "現在選択されているアイテムを編集します"
 
-#: ../panel/panel-preferences-dialog.glade.h:55
+#: ../panel/panel-preferences-dialog.glade.h:60
 msgid "Show about information of the currently selected item"
 msgstr "現在選択されているアイテムの情報を表示します"
 
-#: ../panel/panel-preferences-dialog.glade.h:56
+#: ../panel/panel-preferences-dialog.glade.h:61
 msgid "Ite_ms"
 msgstr "アイテム(_M)"
 
-#: ../panel/panel-tic-tac-toe.c:122
+#: ../panel/panel-tic-tac-toe.c:121
 msgid "_New Game"
 msgstr "新規ゲーム(_N)"
 
-#: ../panel/panel-tic-tac-toe.c:124
+#: ../panel/panel-tic-tac-toe.c:123
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Close"
 msgstr "閉じる"
 
-#: ../panel/panel-tic-tac-toe.c:133
+#: ../panel/panel-tic-tac-toe.c:132
 msgid "_Level:"
 msgstr "レベル(_L):"
 
-#: ../panel/panel-tic-tac-toe.c:139
+#: ../panel/panel-tic-tac-toe.c:138
 msgid "Novice"
 msgstr "新米"
 
-#: ../panel/panel-tic-tac-toe.c:140
+#: ../panel/panel-tic-tac-toe.c:139
 msgid "Intermediate"
 msgstr "中級者"
 
-#: ../panel/panel-tic-tac-toe.c:141
+#: ../panel/panel-tic-tac-toe.c:140
 msgid "Experienced"
 msgstr "上級者"
 
-#: ../panel/panel-tic-tac-toe.c:142
+#: ../panel/panel-tic-tac-toe.c:141
 msgid "Expert"
 msgstr "達人"
 
-#: ../panel/panel-window.c:2711
+#: ../panel/panel-window.c:2737
 msgid "_Lock Panel"
 msgstr "パネルをロック(_L)"
 
-#: ../migrate/main.c:116
-msgid "Welcome to the first start of the panel"
-msgstr "ようこそ Xfce へ。はじめてパネルが起動されました。"
+#: ../migrate/main.c:115
+msgid "Tried but failed to migrate your old panel configuration"
+msgstr ""
 
-#: ../migrate/main.c:125
-msgid ""
-"Because the panel moved to a new system for storing the settings, it has to "
-"load a fresh initial configuration."
-msgstr "新しいシステムでパネルを使用するにあたり、使用する初期設定を選択してください。"
-
-#: ../migrate/main.c:127 ../migrate/main.c:136
-msgid "Choose below which setup you want for the first startup."
-msgstr "最初の起動時にどのセットアップを行うか選択してください。"
-
-#: ../migrate/main.c:129
-msgid "Migrate old config"
-msgstr "古い設定を移行する"
-
-#: ../migrate/main.c:130
-msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr "古い 4.6 の設定を Xfconf へ移行します"
-
-#: ../migrate/main.c:141
-msgid "Use default config"
-msgstr "デフォルト設定を使用する"
-
-#: ../migrate/main.c:142
-msgid "Load the default configuration"
-msgstr "デフォルト設定を読み込みます"
-
-#: ../migrate/main.c:148
-msgid "One empty panel"
-msgstr "空のパネルにする"
-
-#: ../migrate/main.c:149
-msgid "Start with one empty panel"
-msgstr "一つの空のパネルで起動します"
-
-#: ../migrate/main.c:160
-msgid "Failed to migrate the old panel configuration"
-msgstr "古いパネル設定の移行に失敗しました"
-
-#: ../migrate/main.c:172
+#: ../migrate/main.c:127
 msgid "Failed to load the default configuration"
 msgstr "デフォルト設定の読み込みに失敗しました"
 
-#: ../migrate/main.c:185
+#: ../migrate/main.c:140
 msgid "Panel config needs migration..."
 msgstr "パネルの設定は移行が必要です..."
 
-#: ../migrate/main.c:189
+#: ../migrate/main.c:144
 msgid "Failed to migrate the existing configuration"
 msgstr "既存の設定の移行に失敗しました"
 
-#: ../migrate/main.c:195
+#: ../migrate/main.c:150
 msgid "Panel configuration has been updated."
 msgstr "パネルの設定は更新されました。"
 
@@ -755,6 +729,11 @@ msgstr "一部のアクションが選択されたとき、30 秒待機する確
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Appeara_nce:"
 msgstr "外観(_N):"
+
+#: ../plugins/actions/actions-dialog.glade.h:9
+#: ../plugins/launcher/launcher-dialog.glade.h:24
+msgid "General"
+msgstr "一般"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "Visible"
@@ -952,7 +931,7 @@ msgstr "アプリケーションを一般名でメニューに表示する場合
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
-#: ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager-dialog.glade.h:8
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/systray/systray-dialog.glade.h:7
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
@@ -994,13 +973,18 @@ msgstr "アプリケーション"
 msgid "Select An Icon"
 msgstr "アイコンを選択してください"
 
+#: ../plugins/applicationsmenu/applicationsmenu.c:538
+#: ../plugins/directorymenu/directorymenu.c:394
+msgid "_Cancel"
+msgstr "キャンセル(_C)"
+
 #: ../plugins/applicationsmenu/applicationsmenu.c:539
 #: ../plugins/directorymenu/directorymenu.c:395
-msgid "OK"
-msgstr "OK"
+msgid "_OK"
+msgstr "OK(_O)"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:581
-#: ../plugins/clock/clock.c:918 ../plugins/launcher/launcher.c:2381
+#: ../plugins/applicationsmenu/applicationsmenu.c:576
+#: ../plugins/clock/clock.c:918 ../plugins/launcher/launcher.c:2396
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "コマンド \"%s\" の実行に失敗しました"
@@ -1402,36 +1386,36 @@ msgstr "いま何時ですか?"
 msgid "Directory Menu"
 msgstr "ディレクトリメニュー"
 
-#: ../plugins/directorymenu/directorymenu.c:579
+#: ../plugins/directorymenu/directorymenu.c:574
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "アプリケーション \"%s\" の起動に失敗しました"
 
-#: ../plugins/directorymenu/directorymenu.c:611
+#: ../plugins/directorymenu/directorymenu.c:606
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "\"%s\" のコンテンツタイプの問い合わせに失敗しました"
 
-#: ../plugins/directorymenu/directorymenu.c:620
+#: ../plugins/directorymenu/directorymenu.c:615
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "\"%s\" のデフォルトアプリケーションが見つかりませんでした"
 
-#: ../plugins/directorymenu/directorymenu.c:636
+#: ../plugins/directorymenu/directorymenu.c:631
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "\"%s\" のデフォルトアプリケーションを起動できませんでした"
 
-#: ../plugins/directorymenu/directorymenu.c:734
+#: ../plugins/directorymenu/directorymenu.c:729
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "カテゴリ \"%s\" の規定のアプリケーションの実行に失敗しました"
 
-#: ../plugins/directorymenu/directorymenu.c:808
+#: ../plugins/directorymenu/directorymenu.c:803
 msgid "Open Folder"
 msgstr "フォルダーを開く"
 
-#: ../plugins/directorymenu/directorymenu.c:823
+#: ../plugins/directorymenu/directorymenu.c:818
 msgid "Open in Terminal"
 msgstr "ターミナルで開く"
 
@@ -1468,123 +1452,127 @@ msgstr "ファイルパターン(_F):"
 msgid "Filtering"
 msgstr "フィルター"
 
-#: ../plugins/launcher/launcher.c:392
+#: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
 msgstr "ランチャーメニューを開く"
 
-#: ../plugins/launcher/launcher.c:1599
+#: ../plugins/launcher/launcher.c:1622
 msgid "Unnamed Item"
 msgstr "未設定"
 
-#: ../plugins/launcher/launcher.c:1780
+#: ../plugins/launcher/launcher.c:1795
 msgid "No items"
 msgstr "アイテムなし"
 
-#: ../plugins/launcher/launcher-dialog.c:796
+#: ../plugins/launcher/launcher-dialog.c:788
 msgid "Failed to open desktop item editor"
 msgstr "デスクトップアイテムエディターを開けませんでした"
 
-#: ../plugins/launcher/launcher-dialog.c:855
+#: ../plugins/launcher/launcher-dialog.c:856
 msgid "If you delete an item, it will be permanently removed"
 msgstr "アイテムを削除すると、完全に失われます"
 
-#: ../plugins/launcher/launcher-dialog.c:856
+#: ../plugins/launcher/launcher-dialog.c:857
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "\"%s\" を削除してもよろしいですか?"
 
-#: ../plugins/launcher/launcher-dialog.c:857
+#: ../plugins/launcher/launcher-dialog.c:858
 msgid "Unnamed item"
 msgstr "未設定"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:2
-msgid "Add one or more existing items to the launcher"
-msgstr "既存のアイテムを追加します"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:4
+#: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Default"
 msgstr "デフォルト"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:5
+#: ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "North"
 msgstr "上"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:6
+#: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "West"
 msgstr "左"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:7
+#: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "East"
 msgstr "右"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:8
+#: ../plugins/launcher/launcher-dialog.glade.h:5
 msgid "South"
 msgstr "下"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:9
+#: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "Inside Button"
 msgstr "アイコンボタン"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:10
+#: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "_Edit Item"
 msgstr "アイテムの編集(_E)"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:11
+#: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "D_elete Item"
 msgstr "アイテムの削除(_E)"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:12
+#: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Add Appli_cation"
 msgstr "アプリケーションの追加(_C)"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:13
+#: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "New _Application"
 msgstr "新しいアプリケーション(_A)"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:14
+#: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "New _Link"
 msgstr "新しいリンク(_L)"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:13
+msgid "Add one or more existing items to the launcher"
+msgstr "既存のアイテムを追加します"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
 msgstr "ランチャー"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:20
-msgid "Add a new empty item"
-msgstr "新しいアイテムを作成します"
-
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "Delete the currently selected item"
 msgstr "現在選択されているアイテムを削除します"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:24
+#: ../plugins/launcher/launcher-dialog.glade.h:22
+msgid "Add a new empty item"
+msgstr "新しいアイテムを作成します"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:23
+msgid "Add a new hyperlink"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "Disable t_ooltips"
 msgstr "ツールチップを無効にする(_O)"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:25
+#: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
 msgstr "パネルボタンやメニューアイテム上にポインターを移動したときにツールチップを表示させない場合はこのオプションを選択してください。"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:26
+#: ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "Show _label instead of icon"
 msgstr "アイコンの代わりにラベルを表示する(_L)"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:27
+#: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "Show last _used item in panel"
 msgstr "最後に使用したアイテムをパネルに表示する(_U)"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:28
+#: ../plugins/launcher/launcher-dialog.glade.h:29
 msgid "Select this option to move the clicked menu item to the panel."
 msgstr "クリックしたメニューをパネルに移動させる場合はこのオプションを選択してください。"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:29
+#: ../plugins/launcher/launcher-dialog.glade.h:30
 msgid "_Arrow button position:"
 msgstr "矢印ボタンの位置(_A):"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:30
+#: ../plugins/launcher/launcher-dialog.glade.h:31
 msgid "Advanced"
 msgstr "拡張"
 
@@ -1592,7 +1580,7 @@ msgstr "拡張"
 msgid "Program launcher with optional menu"
 msgstr "オプションでメニューが付くプログラムランチャーです。"
 
-#: ../plugins/pager/pager.c:449 ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager.c:449 ../plugins/pager/pager-dialog.glade.h:7
 msgid "Workspace _Settings..."
 msgstr "ワークスペースの設定(_S)..."
 
@@ -1610,25 +1598,25 @@ msgstr "ワークスペース %d"
 msgid "Workspace Switcher"
 msgstr "ワークスペーススイッチャー"
 
-#: ../plugins/pager/pager-dialog.glade.h:2
+#: ../plugins/pager/pager-dialog.glade.h:4
 msgid "Number of _rows:"
 msgstr "行数(_R):"
 
-#: ../plugins/pager/pager-dialog.glade.h:3
+#: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
 msgstr "ミニチュアを表示する(_N)"
 
-#: ../plugins/pager/pager-dialog.glade.h:4
+#: ../plugins/pager/pager-dialog.glade.h:6
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
 msgstr "ワークスペース内のウィンドウをミニチュア表示します"
 
-#: ../plugins/pager/pager-dialog.glade.h:7
+#: ../plugins/pager/pager-dialog.glade.h:9
 msgid "Switch workspaces using the mouse _wheel"
 msgstr "マウスホイールを使用してワークスペースを切り替える(_W)"
 
-#: ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager-dialog.glade.h:10
 #: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "Behaviour"
 msgstr "振る舞い"
@@ -1679,21 +1667,21 @@ msgid "Unable to start the notification area"
 msgstr "通知エリアが起動できません"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:980
+#: ../plugins/systray/systray.c:963
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "おそらく他のウィジェットが通知エリアの機能を占有しています。この通知エリアは使用されません。"
 
-#: ../plugins/systray/systray.c:982
+#: ../plugins/systray/systray.c:965
 msgid "The notification area lost selection"
 msgstr "通知エリアはセレクションを失いました"
 
-#: ../plugins/systray/systray.c:1246
+#: ../plugins/systray/systray.c:1229
 msgid "Clear"
 msgstr "クリア"
 
-#: ../plugins/systray/systray.c:1247
+#: ../plugins/systray/systray.c:1230
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "既知のアプリケーションのリストをクリアしてもよろしいですか?"
 
@@ -1813,30 +1801,30 @@ msgid "Show windows from _all workspaces or viewports"
 msgstr "全ワークスペースまたはビューポートのウィンドウを表示する(_A)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:27
-msgid "Show only _minimized windows"
-msgstr "最小化されたウィンドウのみ表示する(_M)"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:28
 msgid "Show windows from all mo_nitors"
 msgstr "全モニターのウィンドウを表示する(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3492
+#: ../plugins/tasklist/tasklist-dialog.glade.h:28
+msgid "Show only _minimized windows"
+msgstr "最小化されたウィンドウのみ表示する(_M)"
+
+#: ../plugins/tasklist/tasklist-widget.c:3554
 msgid "Mi_nimize All"
 msgstr "すべて最小化(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3500
+#: ../plugins/tasklist/tasklist-widget.c:3562
 msgid "Un_minimize All"
 msgstr "すべて元に戻す(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3508
+#: ../plugins/tasklist/tasklist-widget.c:3570
 msgid "Ma_ximize All"
 msgstr "すべて最大化(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3516
+#: ../plugins/tasklist/tasklist-widget.c:3578
 msgid "_Unmaximize All"
 msgstr "すべて元に戻す(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3528
+#: ../plugins/tasklist/tasklist-widget.c:3590
 msgid "_Close All"
 msgstr "すべて閉じる(_C)"
 
@@ -1848,24 +1836,24 @@ msgstr "開いているウィンドウをボタンを使って切り替えます
 msgid "Desktop"
 msgstr "デスクトップ"
 
-#: ../plugins/windowmenu/windowmenu.c:1272
+#: ../plugins/windowmenu/windowmenu.c:1267
 msgid "No Windows"
 msgstr "ウィンドウなし"
 
-#: ../plugins/windowmenu/windowmenu.c:1287
+#: ../plugins/windowmenu/windowmenu.c:1282
 msgid "Urgent Windows"
 msgstr "緊急通知ウィンドウ"
 
-#: ../plugins/windowmenu/windowmenu.c:1330
+#: ../plugins/windowmenu/windowmenu.c:1325
 msgid "Add Workspace"
 msgstr "ワークスペースの追加"
 
-#: ../plugins/windowmenu/windowmenu.c:1353
+#: ../plugins/windowmenu/windowmenu.c:1348
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "ワークスペース \"%s\" の削除"
 
-#: ../plugins/windowmenu/windowmenu.c:1355
+#: ../plugins/windowmenu/windowmenu.c:1350
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "ワークスペース %d を削除"
