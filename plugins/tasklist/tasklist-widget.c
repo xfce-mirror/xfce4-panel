@@ -2709,8 +2709,9 @@ xfce_tasklist_button_state_changed (WnckWindow        *window,
                                             child->class_group,
                                             NULL, (gpointer *) &group_child);
 
-              if (child->type == CHILD_TYPE_GROUP)
+              if (group_child->type == CHILD_TYPE_GROUP) {
                 xfce_tasklist_group_button_icon_changed (child->class_group, group_child);
+              }
             }
         }
     }
