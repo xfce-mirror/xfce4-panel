@@ -364,6 +364,7 @@ xfce_arrow_button_get_preferred_width (GtkWidget *widget,
   GtkStyleContext *context;
   GtkBorder        padding, border;
 
+  minimum_child_width = natural_child_width = 0;
   child = gtk_bin_get_child (GTK_BIN (widget));
   if (child != NULL
       && gtk_widget_get_visible (child))
@@ -389,8 +390,7 @@ xfce_arrow_button_get_preferred_width (GtkWidget *widget,
       context = gtk_widget_get_style_context (widget);
       gtk_style_context_get_padding (context, gtk_widget_get_state_flags (widget), &padding);
       gtk_style_context_get_border (context, gtk_widget_get_state_flags (widget), &border);
-      natural_child_width = (ARROW_WIDTH + padding.left + padding.right + border.left + border.right);
-      minimum_child_width = natural_child_width - ARROW_WIDTH;
+      minimum_child_width = natural_child_width = (ARROW_WIDTH + padding.left + padding.right + border.left + border.right);
     }
 
   if (minimum_width != NULL)
@@ -413,6 +413,7 @@ xfce_arrow_button_get_preferred_height (GtkWidget *widget,
   GtkStyleContext *context;
   GtkBorder        padding, border;
 
+  minimum_child_height = natural_child_height = 0;
   child = gtk_bin_get_child (GTK_BIN (widget));
   if (child != NULL
       && gtk_widget_get_visible (child))
@@ -438,8 +439,7 @@ xfce_arrow_button_get_preferred_height (GtkWidget *widget,
       context = gtk_widget_get_style_context (widget);
       gtk_style_context_get_padding (context, gtk_widget_get_state_flags (widget), &padding);
       gtk_style_context_get_border (context, gtk_widget_get_state_flags (widget), &border);
-      natural_child_height = (ARROW_WIDTH + padding.top + padding.bottom + border.top + border.bottom);
-      minimum_child_height = natural_child_height - ARROW_WIDTH;
+      minimum_child_height = natural_child_height = (ARROW_WIDTH + padding.top + padding.bottom + border.top + border.bottom);
     }
 
 
@@ -514,6 +514,7 @@ xfce_arrow_button_size_request (GtkWidget      *widget,
   XfceArrowButton *button = XFCE_ARROW_BUTTON (widget);
   GtkWidget *child;
 
+  requisition->height = requisition->width = 0;
   child = gtk_bin_get_child (GTK_BIN (widget));
   if (child != NULL && GTK_WIDGET_VISIBLE (child))
     {
