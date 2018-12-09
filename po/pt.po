@@ -4,6 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
+# José Vieira <jvieira33@sapo.pt>, 2017
 # Xfce Bot <transifex@xfce.org>, 2017
 # Bruno Guerreiro <american.jesus.pt@gmail.com>, 2017
 # 
@@ -73,7 +74,7 @@ msgstr "Adicionar _novos itens..."
 #. customize panel
 #: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2646
 msgid "Panel Pr_eferences..."
-msgstr "Preferências do pain_el..."
+msgstr "Pr_eferências do painel..."
 
 #. logout item
 #: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2674
@@ -157,7 +158,7 @@ msgstr "Falha ao mostrar o diálogo de preferências"
 
 #: ../panel/main.c:383
 msgid "Failed to show the add new items dialog"
-msgstr "Falha ao mostrar o diálogo \"Adicionar novos itens\""
+msgstr "Falha ao mostrar a caixa de adicionar novos itens"
 
 #: ../panel/main.c:385
 msgid "Failed to save the panel configuration"
@@ -177,16 +178,15 @@ msgstr "Falha ao fechar o painel"
 
 #: ../panel/main.c:393
 msgid "Failed to send D-Bus message"
-msgstr "Falha ao enviar a mensagem D-Bus"
+msgstr "Falha ao enviar a mensagem de D-Bus"
 
 #: ../panel/main.c:404
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr ""
-"Pretende iniciar o painel? Se sim, certifique-se que grava a sessão ao sair "
-"para que o painel seja iniciado automaticamente na próxima vez que a "
-"iniciar."
+"Iniciar o painel? Se sim, gravar a sessão ao sair para que na próxima sessão"
+" o painel seja iniciado automaticamente."
 
 #: ../panel/main.c:407 ../panel/main.c:421
 #, c-format
@@ -639,7 +639,7 @@ msgstr "Principiante"
 
 #: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
-msgstr "Normal"
+msgstr "Intermédio"
 
 #: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
@@ -728,7 +728,7 @@ msgstr "Inverter _orientação dos botões"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
 msgid "_Show confirmation dialog"
-msgstr "Mo_strar diálogo de confirmação"
+msgstr "Mo_strar caixa de diálogo de confirmação"
 
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid ""
@@ -762,7 +762,7 @@ msgstr "_Sair"
 
 #: ../plugins/actions/actions.c:153
 msgid "Are you sure you want to log out?"
-msgstr "Tem a certeza que pretende sair?"
+msgstr "Tem a certeza de que pretende sair?"
 
 #: ../plugins/actions/actions.c:154
 #, c-format
@@ -854,12 +854,12 @@ msgstr "_Desligar"
 
 #: ../plugins/actions/actions.c:206
 msgid "Are you sure you want to shut down?"
-msgstr "Tem a certeza que pretende desligar?"
+msgstr "Tem a certeza de que pretende desligar?"
 
 #: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Turning off computer in %d seconds."
-msgstr "A desligar em %d segundos."
+msgstr "A desligar o computador em %d segundos."
 
 #: ../plugins/actions/actions.c:621
 #: ../plugins/separator/separator-dialog.glade.h:1
@@ -956,7 +956,7 @@ msgstr "Ficheiro de menu"
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu.c:39
 msgid "Applications"
-msgstr "Aplicativos"
+msgstr "Aplicações"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:565
 #: ../plugins/directorymenu/directorymenu.c:388
@@ -1372,12 +1372,12 @@ msgstr "Falha ao consultar o tipo de conteúdo de \"%s\""
 #: ../plugins/directorymenu/directorymenu.c:609
 #, c-format
 msgid "No default application found for \"%s\""
-msgstr "Nenhuma aplicação encontrada para \"%s\""
+msgstr "Nenhuma aplicação predefinida encontrada para \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:624
 #, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr "Falha ao iniciar a aplicação utilizada para \"%s\""
+msgstr "Falha ao iniciar a aplicação predefinida para \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:719
 #, c-format
@@ -1410,13 +1410,13 @@ msgid ""
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr ""
-"Indique aqui uma lista de exemplos, utilizados para determinar os ficheiros "
-"visíveis num diretório. Se especificar mais que um exemplo, os itens da "
+"Indique aqui uma lista de extensões, utilizadas para determinar os ficheiros"
+" visíveis num diretório. Se especificar mais que uma extensão, os itens da "
 "lista devem estar separados por ponto e vírgula (ex. *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
-msgstr "Padrão do _ficheiro:"
+msgstr "Extensão do _ficheiro:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "Show _hidden files"
@@ -1459,7 +1459,7 @@ msgstr "Item sem nome"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Default"
-msgstr "Omisso"
+msgstr "Predefinição"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "North"
@@ -1527,7 +1527,7 @@ msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
 msgstr ""
-"Ative esta opção para desativar as dicas exibidas ao passar o rato nos "
+"Selecionar esta opção para desativar as dicas exibidas ao passar o rato nos "
 "botões do painel ou itens do menu."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
@@ -1540,7 +1540,7 @@ msgstr "Mostrar no painel o último item _utilizado"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr "Ative esta opção para mover o item do menu para o painel."
+msgstr "Selecionar esta opção para mover o item do menu para o painel."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "_Arrow button position:"
@@ -1621,20 +1621,20 @@ msgstr "Adiciona um separador ou espaço entre os itens do painel"
 
 #: ../plugins/showdesktop/showdesktop.c:210
 msgid "Restore the minimized windows"
-msgstr "Restaurar janelas minimizadas"
+msgstr "Restaurar as janelas minimizadas"
 
 #: ../plugins/showdesktop/showdesktop.c:212
 msgid "Minimize all open windows and show the desktop"
-msgstr "Minimizar todas as janelas abertas e mostrar o ambiente de trabalho"
+msgstr "Minimizar todas as janelas abertas e mostrar a área de trabalho"
 
 #: ../plugins/showdesktop/showdesktop.c:215
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
-msgstr "Mostrar ambiente de trabalho"
+msgstr "Mostrar a área de trabalho"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Hide all windows and show the desktop"
-msgstr "Ocultar todas as janelas e mostrar o ambiente de trabalho"
+msgstr "Ocultar todas as janelas e mostrar a área de trabalho"
 
 #: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
@@ -1746,7 +1746,7 @@ msgstr "Restaurar janelas minimi_zadas para a área de trabalho atual"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "D_raw window frame when hovering a button"
-msgstr "Desenha_r moldura ao passar sobre um botão"
+msgstr "Desenha_r caixilho da janela ao passar sobre um botão"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "_Switch windows using the mouse wheel"
@@ -1802,7 +1802,7 @@ msgstr "Trocar entre janelas abertas com os botões"
 
 #: ../plugins/windowmenu/windowmenu.c:655
 msgid "Desktop"
-msgstr "Ambiente de trabalho"
+msgstr "Área de trabalho"
 
 #: ../plugins/windowmenu/windowmenu.c:1246
 msgid "No Windows"
@@ -1829,7 +1829,7 @@ msgstr "Remover área de trabalho %d"
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
 #: ../plugins/windowmenu/windowmenu.desktop.in.in.h:1
 msgid "Window Menu"
-msgstr "Menu da janela"
+msgstr "Menu de janela"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
 msgid "Button layout:"
@@ -1837,7 +1837,7 @@ msgstr "Esquema do botão:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Show workspace a_ctions"
-msgstr "Mostrar ações da área de tra_balho"
+msgstr "Mostrar a_cções da área de trabalho"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "Show workspace _names"
@@ -1849,7 +1849,7 @@ msgstr "Ativar notificação de _urgência"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show windows from _all workspaces"
-msgstr "Mostrar j_anelas de todas as áreas de trabalho"
+msgstr "Mostrar janelas de _todas as áreas de trabalho"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Icon"
