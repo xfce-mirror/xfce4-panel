@@ -2568,12 +2568,13 @@ xfce_tasklist_button_icon_changed (WnckWindow        *window,
     return;
 
   icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (xfce_tasklist_get_panel_plugin (tasklist)));
-  wnck_set_default_icon_size (icon_size);
   context = gtk_widget_get_style_context (GTK_WIDGET (child->icon));
 
   /* get the window icon */
-  if (tasklist->show_labels
-      || child->type == CHILD_TYPE_GROUP_MENU)
+  if (tasklist->show_labels ||
+      child->type == CHILD_TYPE_GROUP_MENU)
+    pixbuf = wnck_window_get_mini_icon (window);
+  else if (icon_size <= 31)
     pixbuf = wnck_window_get_mini_icon (window);
   else
     pixbuf = wnck_window_get_icon (window);
@@ -3743,11 +3744,12 @@ xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
     return;
 
   icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (xfce_tasklist_get_panel_plugin (group_child->tasklist)));
-  wnck_set_default_icon_size (icon_size);
   context = gtk_widget_get_style_context (GTK_WIDGET (group_child->icon));
 
   /* get the class group icon */
   if (group_child->tasklist->show_labels)
+    pixbuf = wnck_class_group_get_mini_icon (class_group);
+  else if (icon_size <= 31)
     pixbuf = wnck_class_group_get_mini_icon (class_group);
   else
     pixbuf = wnck_class_group_get_icon (class_group);
@@ -3756,13 +3758,6 @@ xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
   for (li = group_child->windows; li != NULL; li = li->next)
     {
       child = li->data;
-      /* in case the libwnck icon_cache provided us with a 32px group icon and that's not
-         what we want we take the app icon of the first app in the group instead (only until
-         cache is invalidated of course), because we always get that at the correct size */
-      if (gdk_pixbuf_get_width (pixbuf) != icon_size
-          && !group_child->tasklist->show_labels)
-          pixbuf = wnck_window_get_icon (child->window);
-
       if (!wnck_window_is_minimized (child->window))
         {
           all_minimized_in_group = FALSE;
@@ -3787,20 +3782,6 @@ xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
     gtk_image_set_from_pixbuf (GTK_IMAGE (group_child->icon), pixbuf);
   else
     gtk_image_clear (GTK_IMAGE (group_child->icon));
-}
-
-
-
-static gboolean
-xfce_tasklist_group_button_size_allocate (GtkWidget         *widget,
-                                          GdkRectangle      *allocation,
-                                          gpointer           user_data)
-{
-  XfceTasklistChild *child = user_data;
-  /* Make sure the icons have the correct size */
-  xfce_tasklist_group_button_icon_changed (child->class_group, child);
-
-  return TRUE;
 }
 
 
@@ -3983,8 +3964,6 @@ xfce_tasklist_group_button_new (WnckClassGroup *class_group,
   /* note that the same signals should be in the proxy menu item too */
   g_signal_connect (G_OBJECT (child->button), "button-press-event",
       G_CALLBACK (xfce_tasklist_group_button_button_press_event), child);
-  g_signal_connect (G_OBJECT (child->button), "size-allocate",
-      G_CALLBACK (xfce_tasklist_group_button_size_allocate), child);
 
   /* monitor class group changes */
   g_signal_connect (G_OBJECT (class_group), "icon-changed",
