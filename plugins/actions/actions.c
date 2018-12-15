@@ -837,12 +837,12 @@ actions_plugin_action_dbus_xfsm (const gchar  *method,
         }
 
       g_object_unref (G_OBJECT (proxy));
-    }
 
-  if (retval)
-    {
-      g_variant_unref (retval);
-      return TRUE;
+      if (retval)
+        {
+          g_variant_unref (retval);
+          return TRUE;
+        }
     }
 
   return FALSE;
