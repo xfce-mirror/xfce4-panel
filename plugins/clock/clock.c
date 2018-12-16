@@ -152,11 +152,8 @@ struct _ClockPlugin
   gchar              *tooltip_format;
   ClockTimeTimeout   *tooltip_timeout;
 
-  GdkDevice          *device;
-  GdkDevice          *keyboard;
-  GdkDevice          *pointer;
-  gboolean            keyboard_grabbed;
-  gboolean            pointer_grabbed;
+  GdkSeat            *seat;
+  gboolean            seat_grabbed;
 
   gchar              *time_config_tool;
   ClockTime          *time;
@@ -275,11 +272,8 @@ clock_plugin_init (ClockPlugin *plugin)
   plugin->command = NULL;
   plugin->time_config_tool = g_strdup (DEFAULT_TIME_CONFIG_TOOL);
   plugin->rotate_vertically = TRUE;
-  plugin->device = NULL;
-  plugin->keyboard = NULL;
-  plugin->pointer = NULL;
-  plugin->keyboard_grabbed = FALSE;
-  plugin->pointer_grabbed = FALSE;
+  plugin->seat = NULL;
+  plugin->seat_grabbed = FALSE;
   plugin->time = clock_time_new ();
 
   plugin->button = xfce_panel_create_toggle_button ();
@@ -1188,16 +1182,10 @@ clock_plugin_pointer_ungrab (ClockPlugin *plugin,
 {
   panel_return_if_fail (XFCE_IS_CLOCK_PLUGIN (plugin));
 
-  if (plugin->keyboard != NULL && plugin->keyboard_grabbed)
+  if (plugin->seat != NULL && plugin->seat_grabbed)
     {
-      gdk_device_ungrab (plugin->keyboard, GDK_CURRENT_TIME);
-      plugin->keyboard_grabbed = FALSE;
-    }
-
-  if (plugin->pointer != NULL && plugin->pointer_grabbed)
-    {
-      gdk_device_ungrab (plugin->pointer, GDK_CURRENT_TIME);
-      plugin->pointer_grabbed = FALSE;
+      gdk_seat_ungrab (plugin->seat);
+      plugin->seat_grabbed = FALSE;
     }
 }
 
@@ -1213,57 +1201,32 @@ clock_plugin_pointer_grab (ClockPlugin *plugin,
   gboolean          grabbed = FALSE;
   guint             i;
   GdkDisplay       *display;
-  GdkDeviceManager *device_manager;
-  GList            *devices;
+  GdkDevice        *device;
 
   window = gtk_widget_get_window (widget);
 
-  if (plugin->device == NULL)
-    plugin->device = gtk_get_current_event_device ();
+  device = gtk_get_current_event_device ();
 
-  if (plugin->device == NULL)
+  if (device == NULL)
     {
       display = gtk_widget_get_display (widget);
-      device_manager = gdk_display_get_device_manager (display);
-      devices = gdk_device_manager_list_devices (device_manager, GDK_DEVICE_TYPE_MASTER);
-      plugin->device = devices->data;
-      g_list_free (devices);
-    }
-
-  if (gdk_device_get_source (plugin->device) == GDK_SOURCE_KEYBOARD)
-    {
-      plugin->keyboard = plugin->device;
-      plugin->pointer = gdk_device_get_associated_device (plugin->device);
+      plugin->seat = gdk_display_get_default_seat (display);
     }
   else
     {
-      plugin->pointer = plugin->device;
-      plugin->keyboard = gdk_device_get_associated_device (plugin->device);
+      plugin->seat = gdk_device_get_seat (device);
     }
 
   /* don't try to get the grab for longer then 1/4 second */
   for (i = 0; i < (G_USEC_PER_SEC / 100 / 4); i++)
     {
-      plugin->keyboard_grabbed =
-        plugin->keyboard != NULL &&
-        gdk_device_grab (plugin->keyboard, window,
-                         GDK_OWNERSHIP_WINDOW, TRUE,
-                         GDK_KEY_PRESS_MASK | GDK_KEY_RELEASE_MASK,
-                         NULL, activate_time) == GDK_GRAB_SUCCESS;
-      if (plugin->keyboard_grabbed)
-        {
-          grabbed = plugin->pointer_grabbed =
-            plugin->pointer != NULL &&
-            gdk_device_grab (plugin->pointer, window,
-                             GDK_OWNERSHIP_WINDOW, TRUE,
-                             GDK_SMOOTH_SCROLL_MASK |
-                             GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK |
-                             GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK |
-                             GDK_POINTER_MOTION_MASK,
-                             NULL, activate_time) == GDK_GRAB_SUCCESS;
-          if (grabbed)
-            break;
-        }
+      grabbed = plugin->seat_grabbed =
+        plugin->seat != NULL &&
+        gdk_seat_grab (plugin->seat, window,
+                         GDK_SEAT_CAPABILITY_ALL, TRUE,
+                         NULL, NULL, NULL, NULL) == GDK_GRAB_SUCCESS;
+      if (grabbed)
+        break;
       g_usleep (100);
     }
 
