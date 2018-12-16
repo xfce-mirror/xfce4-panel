@@ -340,7 +340,7 @@ systray_manager_register (SystrayManager  *manager,
   display = gdk_screen_get_display (screen);
 
   /* set the invisible window and take a reference */
-  manager->invisible = g_object_ref (G_OBJECT (invisible));
+  manager->invisible = GTK_WIDGET (g_object_ref (G_OBJECT (invisible)));
 
   /* set the visial property for transparent tray icons */
   systray_manager_set_visual (manager);
