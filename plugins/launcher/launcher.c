@@ -2006,7 +2006,9 @@ launcher_plugin_supported_drop (GdkDragContext *context,
   GdkModifierType  modifiers = 0;
 
   /* do not handle drops if control is pressed */
-  gdk_window_get_pointer (gtk_widget_get_window (widget), NULL, NULL, &modifiers);
+  gdk_window_get_device_position (gtk_widget_get_window (widget),
+                                  gdk_drag_context_get_device(context),
+                                  NULL, NULL, &modifiers);
   if (PANEL_HAS_FLAG (modifiers, GDK_CONTROL_MASK))
     return GDK_NONE;
 
@@ -2250,8 +2252,8 @@ launcher_plugin_arrow_drag_leave_timeout (gpointer user_data)
     return FALSE;
 
   /* get the pointer position */
-  gdk_display_get_pointer (gtk_widget_get_display (menu),
-                           NULL, &pointer_x, &pointer_y, NULL);
+  gdk_device_get_position (gdk_seat_get_pointer (gdk_display_get_default_seat (gtk_widget_get_display (menu))),
+                           NULL, &pointer_x, &pointer_y);
 
   /* get the menu position */
   gdk_window_get_root_origin (gtk_widget_get_window (menu), &menu_x, &menu_y);
