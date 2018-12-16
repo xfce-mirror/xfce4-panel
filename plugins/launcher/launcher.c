@@ -792,7 +792,7 @@ launcher_plugin_items_load (LauncherPlugin *plugin,
               /* if something failed, use the pool item, but this one
                * won't be editable in the dialog */
               if (G_UNLIKELY (item == NULL))
-                item = g_object_ref (G_OBJECT (pool_item));
+                item = GARCON_MENU_ITEM (g_object_ref (G_OBJECT (pool_item)));
             }
 
           /* skip this item if still not found */
