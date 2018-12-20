@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-24 06:30+0100\n"
-"PO-Revision-Date: 2018-12-01 09:28+0000\n"
+"POT-Creation-Date: 2018-12-03 22:34+0100\n"
+"PO-Revision-Date: 2018-12-20 18:29+0000\n"
 "Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/xfce/xfce4-panel/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgid ""
 msgstr "Új parancsikon panelhez adása ezen asztali fájl információi alapján"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2666
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2692
 msgid "Panel"
 msgstr "Panel"
 
@@ -41,64 +41,64 @@ msgid "Customize the panel"
 msgstr "A panel személyre szabása"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1049
-#: ../panel/panel-preferences-dialog.c:1222
+#: ../libxfce4panel/xfce-panel-plugin.c:1079
+#: ../panel/panel-preferences-dialog.c:1308
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Biztosan eltávolítja a következőt: „%s”?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1054
-#: ../panel/panel-preferences-dialog.c:1225
+#: ../libxfce4panel/xfce-panel-plugin.c:1084
+#: ../panel/panel-preferences-dialog.c:1311
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Ha eltávolítja az elemet a panelről, az véglegesen elvész."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1055 ../panel/panel-dialogs.c:163
-#: ../panel/panel-preferences-dialog.c:1227
+#: ../libxfce4panel/xfce-panel-plugin.c:1085 ../panel/panel-dialogs.c:163
+#: ../panel/panel-preferences-dialog.c:1313
 msgid "Cancel"
 msgstr "Mégse"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1056
-#: ../panel/panel-plugin-external.c:436
-#: ../panel/panel-preferences-dialog.c:922
-#: ../panel/panel-preferences-dialog.c:1228
+#: ../libxfce4panel/xfce-panel-plugin.c:1086
+#: ../panel/panel-plugin-external.c:439
+#: ../panel/panel-preferences-dialog.c:956
+#: ../panel/panel-preferences-dialog.c:1314
 #: ../plugins/launcher/launcher-dialog.c:855
 msgid "Remove"
 msgstr "Eltávolítás"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1197
+#: ../libxfce4panel/xfce-panel-plugin.c:1227
 msgid "_Properties"
 msgstr "_Tulajdonságok"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1212 ../panel/panel-window.c:2754
+#: ../libxfce4panel/xfce-panel-plugin.c:1242 ../panel/panel-window.c:2780
 msgid "_About"
 msgstr "_Névjegy"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1227
+#: ../libxfce4panel/xfce-panel-plugin.c:1257
 msgid "_Move"
 msgstr "Át_helyezés"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1251
+#: ../libxfce4panel/xfce-panel-plugin.c:1281
 msgid "_Remove"
 msgstr "_Eltávolítás"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1272
+#: ../libxfce4panel/xfce-panel-plugin.c:1302
 msgid "Pane_l"
 msgstr "_Panel"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1281 ../panel/panel-window.c:2679
+#: ../libxfce4panel/xfce-panel-plugin.c:1311 ../panel/panel-window.c:2705
 msgid "Add _New Items..."
 msgstr "Új _elemek hozzáadása…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1296 ../panel/panel-window.c:2694
+#: ../libxfce4panel/xfce-panel-plugin.c:1326 ../panel/panel-window.c:2720
 msgid "Panel Pr_eferences..."
 msgstr "_Panel beállításai…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2726
+#: ../libxfce4panel/xfce-panel-plugin.c:1347 ../panel/panel-window.c:2752
 msgid "Log _Out"
 msgstr "_Kijelentkezés"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-item-dialog.c:208
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2745
+#: ../libxfce4panel/xfce-panel-plugin.c:1367 ../panel/panel-item-dialog.c:208
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2771
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -111,7 +111,7 @@ msgstr "_Kijelentkezés"
 msgid "_Help"
 msgstr "_Súgó"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1352
+#: ../libxfce4panel/xfce-panel-plugin.c:1382
 msgid "About"
 msgstr "Névjegy"
 
@@ -219,7 +219,7 @@ msgstr "A panelből való kilépés meghiúsult"
 msgid "Failed to send D-Bus message"
 msgstr "A D-Bus üzenet elküldése meghiúsult"
 
-#: ../panel/main.c:435 ../panel/panel-plugin-external.c:435
+#: ../panel/main.c:435 ../panel/panel-plugin-external.c:438
 msgid "Execute"
 msgstr "Végrehajtás"
 
@@ -238,38 +238,38 @@ msgstr "Nem található a(z) %s futó példánya"
 msgid "Failed to launch the migration application"
 msgstr "A költöztető alkalmazás indítása meghiúsult"
 
-#: ../panel/panel-application.c:982
+#: ../panel/panel-application.c:983
 msgid "Create _Launcher"
 msgstr "_Parancsikon létrehozása"
 
-#: ../panel/panel-application.c:983
+#: ../panel/panel-application.c:984
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Ez egy új indítóbővítményt hoz létre a panelen, a ráejtett fájlokat menüelemekként pedig veszi fel."
 
-#: ../panel/panel-application.c:985
+#: ../panel/panel-application.c:986
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Új parancsikon létrehozása %d asztali fájlból"
 msgstr[1] "Új parancsikon létrehozása %d asztali fájlból"
 
-#: ../panel/panel-application.c:1725
+#: ../panel/panel-application.c:1726
 msgid "Quit"
 msgstr "Kilépés"
 
-#: ../panel/panel-application.c:1726
+#: ../panel/panel-application.c:1727
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Az X-et munkamenet-kezelő nélkül indította. A Kilépés gombra kattintás bezárja az X kiszolgálót."
 
-#: ../panel/panel-application.c:1727
+#: ../panel/panel-application.c:1728
 msgid "Are you sure you want to quit the panel?"
 msgstr "Biztos, hogy be kívánja zárni a panelt?"
 
-#: ../panel/panel-application.c:1735
+#: ../panel/panel-application.c:1736
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "A parancs („%s”) indítása meghiúsult"
@@ -311,7 +311,7 @@ msgstr "Hozzáadás"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Válasszon panelt az új bővítményhez:"
 
-#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:857
+#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:891
 #, c-format
 msgid "Panel %d"
 msgstr "%d. panel"
@@ -360,12 +360,12 @@ msgstr "_Keresés:"
 msgid "Enter search phrase here"
 msgstr "Adja meg a keresőkifejezést"
 
-#: ../panel/panel-plugin-external.c:429
+#: ../panel/panel-plugin-external.c:432
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "A(z) „%s” bővítmény összeomlott, újra akarja indítani?"
 
-#: ../panel/panel-plugin-external.c:431
+#: ../panel/panel-plugin-external.c:434
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -373,39 +373,39 @@ msgid ""
 "permanently removed from the panel."
 msgstr "A bővítmény többször is újraindult az elmúlt %d másodpercben. A Végrehajtás gomb megnyomásával a panel megpróbálja újraindítani a bővítményt, egyébként az véglegesen eltávolításra kerül a panelről."
 
-#: ../panel/panel-preferences-dialog.c:500
+#: ../panel/panel-preferences-dialog.c:517
 msgid "Automatic"
 msgstr "Automatikus"
 
-#: ../panel/panel-preferences-dialog.c:510
+#: ../panel/panel-preferences-dialog.c:527
 msgid "Primary"
 msgstr "Elsődleges"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:529
+#: ../panel/panel-preferences-dialog.c:546
 #, c-format
 msgid "Monitor %d"
 msgstr "%d. monitor"
 
-#: ../panel/panel-preferences-dialog.c:923
+#: ../panel/panel-preferences-dialog.c:957
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "A panel és a bővítmények beállításai el lesznek távolítva"
 
-#: ../panel/panel-preferences-dialog.c:924
+#: ../panel/panel-preferences-dialog.c:958
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Biztos, hogy el kívánja távolítani a(z) %d. panelt?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1064
+#: ../panel/panel-preferences-dialog.c:1150
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(külső)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1069
+#: ../panel/panel-preferences-dialog.c:1155
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -414,7 +414,7 @@ msgstr "Belső név: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1081
+#: ../panel/panel-preferences-dialog.c:1167
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Belső név: %s-%d"
@@ -575,122 +575,134 @@ msgid "Select A Background Image"
 msgstr "Válasszon háttérképet"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
+msgid "<b>Icons</b>"
+msgstr "<b>Ikonok</b>"
+
+#: ../panel/panel-preferences-dialog.glade.h:43
+msgid "Adjust size automatically"
+msgstr "Méret automatikus állítása"
+
+#: ../panel/panel-preferences-dialog.glade.h:44
+msgid "Fixed Icon Size (pixels):"
+msgstr "Fix ikonméret (képpont):"
+
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid "<b>Opacity</b>"
 msgstr "<b>Átlátszatlanság</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:43
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Configure..."
 msgstr "Beállítás…"
 
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:47
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr "<b>A kompozitálás jelenleg le van tiltva</b>\nEngedélyezze a kompozitálást a az ablakkezelőben, hogy beállíthassa a panel átlátszatlanságát."
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:50
 msgid "_Enter:"
 msgstr "Rám_utatás:"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:49
+#: ../panel/panel-preferences-dialog.glade.h:52
 msgid "_Leave:"
 msgstr "_Elhagyás:"
 
-#: ../panel/panel-preferences-dialog.glade.h:50
+#: ../panel/panel-preferences-dialog.glade.h:53
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "Átlátszóság, amikor a mutató nem a panel fölött áll, 0 (átlátszó) és 100 (átlátszatlan) között."
 
-#: ../panel/panel-preferences-dialog.glade.h:51
+#: ../panel/panel-preferences-dialog.glade.h:54
 msgid "Appeara_nce"
 msgstr "_Megjelenés"
 
-#: ../panel/panel-preferences-dialog.glade.h:52
+#: ../panel/panel-preferences-dialog.glade.h:55
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 #: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Move currently selected item up by one row"
 msgstr "A kiválasztott elem mozgatása egy sorral feljebb"
 
-#: ../panel/panel-preferences-dialog.glade.h:53
+#: ../panel/panel-preferences-dialog.glade.h:56
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 #: ../plugins/systray/systray-dialog.glade.h:9
 msgid "Move currently selected item down by one row"
 msgstr "A kiválasztott elem mozgatása egy sorral lejjebb"
 
-#: ../panel/panel-preferences-dialog.glade.h:54
+#: ../panel/panel-preferences-dialog.glade.h:57
 msgid "Add new item to this panel"
 msgstr "Új elem hozzáadása a panelhez"
 
-#: ../panel/panel-preferences-dialog.glade.h:55
+#: ../panel/panel-preferences-dialog.glade.h:58
 msgid "Remove currently selected item"
 msgstr "A kiválasztott elem eltávolítása"
 
-#: ../panel/panel-preferences-dialog.glade.h:56
+#: ../panel/panel-preferences-dialog.glade.h:59
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Edit the currently selected item"
 msgstr "A kiválasztott elem szerkesztése"
 
-#: ../panel/panel-preferences-dialog.glade.h:57
+#: ../panel/panel-preferences-dialog.glade.h:60
 msgid "Show about information of the currently selected item"
 msgstr "A kiválasztott elem névjegy-információinak megjelenítése"
 
-#: ../panel/panel-preferences-dialog.glade.h:58
+#: ../panel/panel-preferences-dialog.glade.h:61
 msgid "Ite_ms"
 msgstr "_Elemek"
 
-#: ../panel/panel-tic-tac-toe.c:122
+#: ../panel/panel-tic-tac-toe.c:121
 msgid "_New Game"
 msgstr "Ú_j játék"
 
-#: ../panel/panel-tic-tac-toe.c:124
+#: ../panel/panel-tic-tac-toe.c:123
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Close"
 msgstr "Mégse"
 
-#: ../panel/panel-tic-tac-toe.c:133
+#: ../panel/panel-tic-tac-toe.c:132
 msgid "_Level:"
 msgstr "S_zint:"
 
-#: ../panel/panel-tic-tac-toe.c:139
+#: ../panel/panel-tic-tac-toe.c:138
 msgid "Novice"
 msgstr "Újonc"
 
-#: ../panel/panel-tic-tac-toe.c:140
+#: ../panel/panel-tic-tac-toe.c:139
 msgid "Intermediate"
 msgstr "Haladó"
 
-#: ../panel/panel-tic-tac-toe.c:141
+#: ../panel/panel-tic-tac-toe.c:140
 msgid "Experienced"
 msgstr "Gyakorlott"
 
-#: ../panel/panel-tic-tac-toe.c:142
+#: ../panel/panel-tic-tac-toe.c:141
 msgid "Expert"
 msgstr "Szakértő"
 
-#: ../panel/panel-window.c:2711
+#: ../panel/panel-window.c:2737
 msgid "_Lock Panel"
 msgstr "_Panel zárolása"
 
-#: ../migrate/main.c:119
+#: ../migrate/main.c:115
 msgid "Tried but failed to migrate your old panel configuration"
 msgstr "A régi panelkonfiguráció átköltöztetési kísérlete meghiúsult."
 
-#: ../migrate/main.c:131
+#: ../migrate/main.c:127
 msgid "Failed to load the default configuration"
 msgstr "Az alapértelmezett beállítások betöltése meghiúsult"
 
-#: ../migrate/main.c:144
+#: ../migrate/main.c:140
 msgid "Panel config needs migration..."
 msgstr "A panel beállításait át kell költöztetni…"
 
-#: ../migrate/main.c:148
+#: ../migrate/main.c:144
 msgid "Failed to migrate the existing configuration"
 msgstr "A meglévő beállítások átköltöztetése meghiúsult"
 
-#: ../migrate/main.c:154
+#: ../migrate/main.c:150
 msgid "Panel configuration has been updated."
 msgstr "A panel beállításai frissítésre kerültek."
 
@@ -974,7 +986,7 @@ msgid "_OK"
 msgstr "_OK"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:576
-#: ../plugins/clock/clock.c:918 ../plugins/launcher/launcher.c:2404
+#: ../plugins/clock/clock.c:918 ../plugins/launcher/launcher.c:2396
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "A parancs („%s”) végrehajtása meghiúsult."
@@ -1446,11 +1458,11 @@ msgstr "Szűrés"
 msgid "Open launcher menu"
 msgstr "Indítómenü megnyitása"
 
-#: ../plugins/launcher/launcher.c:1629
+#: ../plugins/launcher/launcher.c:1622
 msgid "Unnamed Item"
 msgstr "Névtelen elem"
 
-#: ../plugins/launcher/launcher.c:1803
+#: ../plugins/launcher/launcher.c:1795
 msgid "No items"
 msgstr "Nincs elem"
 
@@ -1798,23 +1810,23 @@ msgstr "Az összes m_onitor ablakainak megjelenítése"
 msgid "Show only _minimized windows"
 msgstr "_Csak minimalizált ablakok megjelenítése"
 
-#: ../plugins/tasklist/tasklist-widget.c:3477
+#: ../plugins/tasklist/tasklist-widget.c:3554
 msgid "Mi_nimize All"
 msgstr "Összes mi_nimalizálása"
 
-#: ../plugins/tasklist/tasklist-widget.c:3485
+#: ../plugins/tasklist/tasklist-widget.c:3562
 msgid "Un_minimize All"
 msgstr "Összes _eredeti méretű"
 
-#: ../plugins/tasklist/tasklist-widget.c:3493
+#: ../plugins/tasklist/tasklist-widget.c:3570
 msgid "Ma_ximize All"
 msgstr "Összes ma_ximalizálás"
 
-#: ../plugins/tasklist/tasklist-widget.c:3501
+#: ../plugins/tasklist/tasklist-widget.c:3578
 msgid "_Unmaximize All"
 msgstr "Összes _eredeti méretű"
 
-#: ../plugins/tasklist/tasklist-widget.c:3513
+#: ../plugins/tasklist/tasklist-widget.c:3590
 msgid "_Close All"
 msgstr "Összes _bezárása"
 
