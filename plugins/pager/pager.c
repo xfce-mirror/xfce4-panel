@@ -388,7 +388,9 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin)
         g_message ("Setting the pager rows returned false. Maybe the setting is not applied.");
 
       wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       plugin->ratio = (gfloat) gdk_screen_width () / (gfloat) gdk_screen_height ();
+G_GNUC_END_IGNORE_DEPRECATIONS
     }
   else
     {
@@ -412,7 +414,9 @@ pager_plugin_screen_changed (GtkWidget *widget,
   WnckScreen  *wnck_screen;
 
   screen = gtk_widget_get_screen (widget);
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   wnck_screen = wnck_screen_get (gdk_screen_get_number (screen));
+G_GNUC_END_IGNORE_DEPRECATIONS
 
   if (plugin->wnck_screen != wnck_screen)
     {

@@ -401,7 +401,9 @@ window_menu_plugin_screen_changed (GtkWidget *widget,
   /* get the wnck screen */
   screen = gtk_widget_get_screen (widget);
   panel_return_if_fail (GDK_IS_SCREEN (screen));
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   wnck_screen = wnck_screen_get (gdk_screen_get_number (screen));
+G_GNUC_END_IGNORE_DEPRECATIONS
   panel_return_if_fail (WNCK_IS_SCREEN (wnck_screen));
 
   /* leave when we same wnck screen was picked */
