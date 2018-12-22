@@ -141,7 +141,9 @@ enum
 
 
 G_DEFINE_ABSTRACT_TYPE_WITH_CODE (PanelPluginExternal, panel_plugin_external, GTK_TYPE_SOCKET,
-  G_IMPLEMENT_INTERFACE (XFCE_TYPE_PANEL_PLUGIN_PROVIDER, panel_plugin_external_provider_init))
+                                  G_ADD_PRIVATE (PanelPluginExternal)
+                                  G_IMPLEMENT_INTERFACE (XFCE_TYPE_PANEL_PLUGIN_PROVIDER,
+                                                         panel_plugin_external_provider_init))
 
 
 
@@ -151,8 +153,6 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
   GObjectClass   *gobject_class;
   GtkWidgetClass *gtkwidget_class;
   GtkSocketClass *gtksocket_class;
-
-  g_type_class_add_private (klass, sizeof (PanelPluginExternalPrivate));
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = panel_plugin_external_finalize;
@@ -197,7 +197,7 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
 static void
 panel_plugin_external_init (PanelPluginExternal *external)
 {
-  external->priv = G_TYPE_INSTANCE_GET_PRIVATE (external, PANEL_TYPE_PLUGIN_EXTERNAL, PanelPluginExternalPrivate);
+  external->priv = panel_plugin_external_get_instance_private (external);
 
   external->module = NULL;
   external->show_configure = FALSE;
