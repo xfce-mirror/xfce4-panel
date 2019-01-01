@@ -1,3 +1,54 @@
+4.13.4
+======
+- Add per-panel setting "icon-size"
+- Set minimum Gtk+3 version to 3.22
+- Bugfixes:
+  - Gtk+ deprecation fixes (all plugins)
+  - tasklist: Fix group-button states
+  - libxfce4panel: arrow button size fixes
+  - launcher: plugin sizing fixes
+  - appmenu: Add support for other menu editors (Bug #11684)
+  - tasklist: Fix urgency blinking for group buttons (Bug #6904)
+  - tasklist: Add 'group-button' styleclass
+  - Fix anchors for gtk_menu_popup_at_widget (Bug #14803)
+  - Fix struts on the bottom and right of the screen (Bug #14886)
+  - tasklist: Don't listen for monitor changes in the plugin (Bug #10725)
+  - tasklist: Use Gdk to to determine which monitor contains a window
+  - tasklist: Ensure pressed buttons with open menus
+  - tasklist: Replace exo-lucency with gtkcss
+  - tasklist: Make all-minimized group buttons translucent (Bug #10862)
+  - tasklist: Switch from wnck* icons to standard names
+  - tasklist: Keep groupbutton active after closing menu
+  - tasklist: Make sure icons in the group menu are 16px
+  - tasklist: Make grouped buttons active (Bug #9129)
+  - launcher: Rely on icon-size provided by panel
+  - Prevent crash on removing certain plugins (Bug #14418)
+  - Add "configure" button to composited infobar
+  - Make compositor info in settings dialog a GtkInfoBar
+  - directorymenu: Fix crash and drop deprecated call
+  - Fix unreadable panel items without compositing (Bug #14842)
+  - launcher: Fix arrows not being shown (Bug #14373)
+  - launcher: Fix tooltip icon size (Bug #14774)
+  - Re-introduce button images to plugin settings dialogs
+  - Make the settings dialog more HIG compliant
+  - launcher: Add 'New Link' button to properties (Bug #14855)
+  - Drop the panel's welcome dialog (Bug #14388)
+  - clock: Resolve deprecations and fix binary clock
+  - Workaround for xinput2's subpixel handling (LP #1795135)
+  - Ensure the orientation style classes are always applied
+  - Add orientation-related style classes for improved theming
+  - actions: Add support for dm-tool
+  - panel-window: set struts with monitor scaling
+-Translation updates: Albanian, Arabic, Asturian, Basque, Belarusian, Bengali,
+  Bulgarian, Catalan, Chinese (China), Chinese (Hong Kong), Chinese (Taiwan),
+  Croatian, Czech, Danish, Dutch (Flemish), English (Australia), English
+  (Great Britain), Estonian, Finnish, French, Galician, German, Greek, Hebrew,
+  Hungarian, Icelandic, Indonesian, Italian, Japanese, Kazakh, Korean, Lithuanian,
+  Malay, Norwegian Bokmål, Norwegian Nynorsk, Occitan, Panjabi, Polish,
+  Portuguese, Portuguese (Brazilian), Romanian, Russian, Serbian, Slovak,
+  Slovenian, Spanish, Swedish, Telugu, Thai, Turkish, Ukrainian, Uyghur,
+  Vietnamese
+
 4.13.3
 ======
 - Bugfixes:
