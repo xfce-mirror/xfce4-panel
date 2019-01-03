@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-03 22:34+0100\n"
-"PO-Revision-Date: 2018-12-31 09:34+0000\n"
+"PO-Revision-Date: 2019-01-03 05:21+0000\n"
 "Last-Translator: Theppitak Karoonboonyanan <theppitak@gmail.com>\n"
 "Language-Team: Thai (http://www.transifex.com/xfce/xfce4-panel/language/th/)\n"
 "MIME-Version: 1.0\n"
@@ -286,7 +286,7 @@ msgstr "ชนิด \"%s\" ของ hint ไม่ถูกต้อง ชน
 
 #: ../panel/panel-dialogs.c:58
 msgid "Unable to open the e-mail address"
-msgstr ""
+msgstr "ไม่สามารถเปิดที่อยู่อีเมลนี้ได้"
 
 #: ../panel/panel-dialogs.c:83
 msgid "The panel of the Xfce Desktop Environment"
@@ -294,7 +294,7 @@ msgstr "พาเนลของเดสก์ท็อป Xfce"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr "Theppitak Karoonboonyanan <thep@linux.thai.net>"
+msgstr "Theppitak Karoonboonyanan <theppitak@gmail.com>"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:12
@@ -473,7 +473,7 @@ msgstr "สลับใช้ผังสำเร็จรูปของพา
 
 #: ../panel/panel-preferences-dialog.glade.h:17
 msgid "<b>General</b>"
-msgstr ""
+msgstr "<b>ทั่วไป</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "M_ode:"
@@ -518,7 +518,7 @@ msgstr "_จอที่แสดง:"
 #. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "<b>Measurements</b>"
-msgstr ""
+msgstr "<b>ขนาด</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Row _Size (pixels):"
@@ -549,7 +549,7 @@ msgstr "การแสดง_ผล"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "<b>Background</b>"
-msgstr ""
+msgstr "<b>พื้นหลัง</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 #: ../plugins/separator/separator-dialog.glade.h:7
@@ -574,19 +574,19 @@ msgstr "เลือกภาพพื้นหลัง"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid "<b>Icons</b>"
-msgstr ""
+msgstr "<b>ไอคอน</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:43
 msgid "Adjust size automatically"
-msgstr ""
+msgstr "ปรับขนาดโดยอัตโนมัติ"
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Fixed Icon Size (pixels):"
-msgstr ""
+msgstr "ใช้ไอคอนขนาดคงที่ (พิกเซล):"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "<b>Opacity</b>"
-msgstr ""
+msgstr "<b>ความทึบแสง</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Configure..."
@@ -596,7 +596,7 @@ msgstr "ตั้งค่า..."
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr ""
+msgstr "<b>การทำ composite ถูกปิดอยู่</b>\nคุณต้องเปิดใช้ composite ในโปรแกรมจัดการหน้าต่างเพื่อจะกำหนดค่าความทึบแสงต่างๆ ในพาเนลได้"
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:50
@@ -616,7 +616,7 @@ msgstr "ความโปร่งแสงของพาเนลเมื่
 
 #: ../panel/panel-preferences-dialog.glade.h:54
 msgid "Appeara_nce"
-msgstr "รูปโฉ_ม"
+msgstr "รูป_ลักษณ์"
 
 #: ../panel/panel-preferences-dialog.glade.h:55
 #: ../plugins/launcher/launcher-dialog.glade.h:18
@@ -686,7 +686,7 @@ msgstr "_ตรึงพาเนล"
 
 #: ../migrate/main.c:115
 msgid "Tried but failed to migrate your old panel configuration"
-msgstr ""
+msgstr "ได้พยายามปรับย้ายค่าตั้งพาเนลรุ่นเก่าของคุณแล้ว แต่ไม่สำเร็จ"
 
 #: ../migrate/main.c:127
 msgid "Failed to load the default configuration"
@@ -698,7 +698,7 @@ msgstr "การตั้งค่าพาเนลจำเป็นต้อ
 
 #: ../migrate/main.c:144
 msgid "Failed to migrate the existing configuration"
-msgstr "ย้ายข้อมูลค่าตั้งที่มีอยู่ไม่สำเร็จ"
+msgstr "ปรับย้ายค่าตั้งที่มีอยู่ไม่สำเร็จ"
 
 #: ../migrate/main.c:150
 msgid "Panel configuration has been updated."
@@ -1544,7 +1544,7 @@ msgstr "เพิ่มรายการเปล่ารายการให
 
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Add a new hyperlink"
-msgstr ""
+msgstr "เพิ่มไฮเพอร์ลิงก์อันใหม่"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "Disable t_ooltips"
