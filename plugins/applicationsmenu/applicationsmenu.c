@@ -362,10 +362,7 @@ applications_menu_plugin_set_property (GObject      *object,
     case PROP_BUTTON_ICON:
       g_free (plugin->button_icon);
       plugin->button_icon = g_value_dup_string (value);
-      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->icon),
-                                    panel_str_is_empty (plugin->button_icon) ?
-                                    DEFAULT_ICON_NAME : plugin->button_icon,
-                                    GTK_ICON_SIZE_BUTTON);
+
       force_a_resize = TRUE;
       break;
 
@@ -474,10 +471,19 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                                        gint             size)
 {
   ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (panel_plugin);
+  gint                    row_size;
   XfcePanelPluginMode     mode;
   GtkRequisition          label_size;
   GtkOrientation          orientation;
-  gint                    icon_size;
+  gint                    border_thickness;
+  GdkPixbuf              *icon;
+  gint                    icon_width_max, icon_height_max;
+  gint                    icon_width = 0;
+  GdkScreen              *screen;
+  GtkIconTheme           *icon_theme = NULL;
+  gchar                  *icon_name;
+  GtkStyleContext        *ctx;
+  GtkBorder               padding, border;
 
   gtk_box_set_child_packing (GTK_BOX (plugin->box), plugin->icon,
                              !plugin->show_button_title,
@@ -491,16 +497,44 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   else
     orientation = GTK_ORIENTATION_VERTICAL;
 
+  row_size = size / xfce_panel_plugin_get_nrows (panel_plugin);
+  /* style thickness */
+  ctx = gtk_widget_get_style_context (plugin->button);
+  gtk_style_context_get_padding (ctx, gtk_widget_get_state_flags (plugin->button), &padding);
+  gtk_style_context_get_border (ctx, gtk_widget_get_state_flags (plugin->button), &border);
+  border_thickness = MAX (padding.left + padding.right + border.left + border.right,
+                          padding.top + padding.bottom + border.top + border.bottom);
 
-  icon_size = xfce_panel_plugin_get_icon_size (panel_plugin);
-  gtk_image_set_pixel_size (GTK_IMAGE (plugin->icon), icon_size);
+  /* arbitrary limit on non-square icon width in horizontal panel */
+  icon_width_max = (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL) ?
+    6 * row_size - border_thickness : size - border_thickness;
+  icon_height_max = row_size - border_thickness;
+
+  screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
+  if (G_LIKELY (screen != NULL))
+    icon_theme = gtk_icon_theme_get_for_screen (screen);
+
+  icon_name = panel_str_is_empty (plugin->button_icon) ?
+    DEFAULT_ICON_NAME : plugin->button_icon;
+
+  icon = xfce_panel_pixbuf_from_source_at_size (icon_name,
+                                                icon_theme,
+                                                icon_width_max,
+                                                icon_height_max);
+
+  if (G_LIKELY (icon != NULL))
+    {
+      gtk_image_set_from_pixbuf (GTK_IMAGE (plugin->icon), icon);
+      icon_width = gdk_pixbuf_get_width (icon);
+      g_object_unref (G_OBJECT (icon));
+    }
 
   if (plugin->show_button_title &&
       mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
     {
       /* check if the label (minimum size) fits next to the icon */
       gtk_widget_get_preferred_size (GTK_WIDGET (plugin->label), &label_size, NULL);
-      if (label_size.width <= size - icon_size - 4)
+      if (label_size.width <= size - icon_width - 2 - border_thickness)
         orientation = GTK_ORIENTATION_HORIZONTAL;
     }
 
@@ -569,7 +603,7 @@ applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget              *
       icon = exo_icon_chooser_dialog_get_icon (EXO_ICON_CHOOSER_DIALOG (chooser));
       g_object_set (G_OBJECT (plugin), "button-icon", icon, NULL);
       gtk_image_set_from_icon_name (GTK_IMAGE (plugin->dialog_icon),
-                                    panel_str_is_empty (plugin->button_icon) ?
+                                    exo_str_is_empty (plugin->button_icon) ?
                                     DEFAULT_ICON_NAME : plugin->button_icon,
                                     GTK_ICON_SIZE_DIALOG);
       g_free (icon);
