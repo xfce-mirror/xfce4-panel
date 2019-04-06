@@ -129,6 +129,7 @@ typedef struct
   const gchar *question;
   const gchar *status;
   const gchar *icon_name;
+  const gchar *fallback_icon_name;
 }
 ActionEntry;
 
@@ -145,7 +146,7 @@ static ActionEntry action_entries[] =
 {
   { ACTION_TYPE_SEPARATOR,
     "separator",
-    NULL, NULL, NULL, NULL, NULL /* not needed */
+    NULL, NULL, NULL, NULL, NULL, NULL /* not needed */
   },
   { ACTION_TYPE_LOGOUT,
     "logout-dialog",
@@ -153,28 +154,32 @@ static ActionEntry action_entries[] =
     N_("_Log Out"),
     N_("Are you sure you want to log out?"),
     N_("Logging out in %d seconds."),
-    "system-log-out"
+    "system-log-out",
+    NULL
   },
   { ACTION_TYPE_LOGOUT_DIALOG,
     "logout",
     N_("Log Out..."),
     N_("Log _Out..."),
     NULL, NULL, /* already shows a dialog */
-    "system-log-out"
+    "system-log-out",
+    NULL
   },
   { ACTION_TYPE_SWITCH_USER,
     "switch-user",
     N_("Switch User"),
     N_("_Switch User"),
     NULL, NULL, /* not needed */
-    "system-users"
+    "system-users",
+    NULL
   },
   { ACTION_TYPE_LOCK_SCREEN,
     "lock-screen",
     N_("Lock Screen"),
     N_("Loc_k Screen"),
     NULL, NULL, /* not needed */
-    "system-lock-screen"
+    "system-lock-screen",
+    NULL
   },
   { ACTION_TYPE_HIBERNATE,
     "hibernate",
@@ -182,7 +187,8 @@ static ActionEntry action_entries[] =
     N_("_Hibernate"),
     N_("Do you want to suspend to disk?"),
     N_("Hibernating computer in %d seconds."),
-    "system-hibernate"
+    "system-hibernate",
+    NULL
   },
   { ACTION_TYPE_HYBRID_SLEEP,
     "hybrid-sleep",
@@ -190,6 +196,7 @@ static ActionEntry action_entries[] =
     N_("_Hybrid Sleep"),
     N_("Do you want to hibernate and suspend the system?"),
     N_("Hibernating and Suspending computer in %d seconds."),
+    "system-suspend-hibernate",
     "system-hibernate"
   },
   { ACTION_TYPE_SUSPEND,
@@ -198,7 +205,8 @@ static ActionEntry action_entries[] =
     N_("Sus_pend"),
     N_("Do you want to suspend to RAM?"),
     N_("Suspending computer in %d seconds."),
-    "system-suspend"
+    "system-suspend",
+    NULL
   },
   { ACTION_TYPE_RESTART,
     "restart",
@@ -206,7 +214,8 @@ static ActionEntry action_entries[] =
     N_("_Restart"),
     N_("Are you sure you want to restart?"),
     N_("Restarting computer in %d seconds."),
-    "system-reboot"
+    "system-reboot",
+    NULL
   },
   { ACTION_TYPE_SHUTDOWN,
     "shutdown",
@@ -214,7 +223,8 @@ static ActionEntry action_entries[] =
     N_("Shut _Down"),
     N_("Are you sure you want to shut down?"),
     N_("Turning off computer in %d seconds."),
-    "system-shutdown"
+    "system-shutdown",
+    NULL
   }
 };
 
@@ -744,7 +754,11 @@ actions_plugin_action_confirmation (ActionsPlugin *plugin,
   button = gtk_dialog_add_button (GTK_DIALOG (dialog), _(entry->mnemonic), GTK_RESPONSE_ACCEPT);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
 
-  image = gtk_image_new_from_icon_name (entry->icon_name, GTK_ICON_SIZE_BUTTON);
+  if (gtk_icon_theme_has_icon (gtk_icon_theme_get_default (), entry->icon_name))
+    image = gtk_image_new_from_icon_name (entry->icon_name, GTK_ICON_SIZE_BUTTON);
+  else
+    image = gtk_image_new_from_icon_name (entry->fallback_icon_name, GTK_ICON_SIZE_BUTTON);
+
   gtk_button_set_image (GTK_BUTTON (button), image);
 
   timeout = g_slice_new0 (ActionTimeout);
@@ -1071,7 +1085,11 @@ actions_plugin_action_button (ActionsPlugin  *plugin,
       g_signal_connect (G_OBJECT (widget), "clicked",
           G_CALLBACK (actions_plugin_action_activate), plugin);
 
-      image = gtk_image_new_from_icon_name (entry->icon_name, GTK_ICON_SIZE_BUTTON);
+      if (gtk_icon_theme_has_icon (gtk_icon_theme_get_default (), entry->icon_name))
+        image = gtk_image_new_from_icon_name (entry->icon_name, GTK_ICON_SIZE_BUTTON);
+      else
+        image = gtk_image_new_from_icon_name (entry->fallback_icon_name, GTK_ICON_SIZE_BUTTON);
+
       gtk_container_add (GTK_CONTAINER (widget), image);
       gtk_widget_show (image);
     }
@@ -1110,7 +1128,11 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   g_signal_connect (G_OBJECT (mi), "activate",
       G_CALLBACK (actions_plugin_action_activate), plugin);
 
-  image = gtk_image_new_from_icon_name (entry->icon_name, GTK_ICON_SIZE_MENU);
+  if (gtk_icon_theme_has_icon (gtk_icon_theme_get_default (), entry->icon_name))
+    image = gtk_image_new_from_icon_name (entry->icon_name, GTK_ICON_SIZE_MENU);
+  else
+    image = gtk_image_new_from_icon_name (entry->fallback_icon_name, GTK_ICON_SIZE_MENU);
+
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
