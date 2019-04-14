@@ -297,7 +297,7 @@ pager_buttons_rebuild_idle (gpointer user_data)
   panel_return_val_if_fail (WNCK_IS_SCREEN (pager->wnck_screen), FALSE);
 
   gtk_container_foreach (GTK_CONTAINER (pager),
-      (GtkCallback) gtk_widget_destroy, NULL);
+      (GtkCallback) (void (*)(void)) gtk_widget_destroy, NULL);
 
   g_slist_free (pager->buttons);
   pager->buttons = NULL;

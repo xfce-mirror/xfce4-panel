@@ -1019,7 +1019,7 @@ launcher_dialog_tree_row_changed (GtkTreeModel         *model,
   panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
 
   /* item moved with dnd, save the tree to update the plugin */
-  gdk_threads_add_idle ((GSourceFunc) launcher_dialog_tree_save, dialog);
+  gdk_threads_add_idle ((GSourceFunc) (void (*)(void)) launcher_dialog_tree_save, dialog);
 
   /* select the moved item to there is no selection change on reload */
   treeview = gtk_builder_get_object (dialog->builder, "item-treeview");

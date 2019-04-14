@@ -1059,7 +1059,7 @@ xfce_panel_plugin_menu_move (XfcePanelPlugin *plugin)
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (plugin));
 
   /* wait for the popup to go down */
-  g_idle_add ((GSourceFunc) xfce_panel_plugin_idle_move, plugin);
+  g_idle_add ((GSourceFunc) (void (*)(void)) xfce_panel_plugin_idle_move, plugin);
 }
 
 

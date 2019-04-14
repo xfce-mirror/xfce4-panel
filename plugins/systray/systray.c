@@ -744,7 +744,7 @@ systray_plugin_box_draw (GtkWidget *box,
   /* separately draw all the composed tray icons after gtk
    * handled the draw event */
   gtk_container_foreach (GTK_CONTAINER (box),
-                         (GtkCallback) systray_plugin_box_draw_icon, cr);
+                         (GtkCallback) (void (*)(void)) systray_plugin_box_draw_icon, cr);
 }
 
 

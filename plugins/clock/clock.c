@@ -1036,7 +1036,7 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   object = gtk_builder_get_object (builder, "mode");
   g_signal_connect_data (G_OBJECT (object), "changed",
       G_CALLBACK (clock_plugin_configure_plugin_mode_changed), dialog,
-      (GClosureNotify) clock_plugin_configure_plugin_free, 0);
+      (GClosureNotify) (void (*)(void)) clock_plugin_configure_plugin_free, 0);
   g_object_bind_property (G_OBJECT (plugin), "mode",
                           G_OBJECT (object), "active",
                           G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);

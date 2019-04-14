@@ -723,7 +723,7 @@ launcher_plugin_items_free (LauncherPlugin *plugin)
 {
   if (G_LIKELY (plugin->items != NULL))
     {
-      g_slist_foreach (plugin->items, (GFunc) g_object_unref, NULL);
+      g_slist_foreach (plugin->items, (GFunc) (void (*)(void)) g_object_unref, NULL);
       g_slist_free (plugin->items);
       plugin->items = NULL;
     }
@@ -2678,7 +2678,7 @@ launcher_plugin_uri_list_free (GSList *uri_list)
 {
   if (uri_list != NULL)
     {
-      g_slist_foreach (uri_list, (GFunc) g_free, NULL);
+      g_slist_foreach (uri_list, (GFunc) (void (*)(void)) g_free, NULL);
       g_slist_free (uri_list);
     }
 }
@@ -2691,7 +2691,7 @@ launcher_plugin_get_items (LauncherPlugin *plugin)
   panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), NULL);
 
   /* set extra reference and return a copy of the list */
-  g_slist_foreach (plugin->items, (GFunc) g_object_ref, NULL);
+  g_slist_foreach (plugin->items, (GFunc) (void (*)(void)) g_object_ref, NULL);
   return g_slist_copy (plugin->items);
 }
 

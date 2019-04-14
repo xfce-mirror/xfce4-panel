@@ -56,7 +56,7 @@ xfce_panel_plugin_provider_get_type (void)
       type = g_type_register_static_simple (G_TYPE_INTERFACE,
                                             g_intern_static_string ("XfcePanelPluginProvider"),
                                             sizeof (XfcePanelPluginProviderInterface),
-                                            (GClassInitFunc) xfce_panel_plugin_provider_default_init,
+                                            (GClassInitFunc) (void (*)(void)) xfce_panel_plugin_provider_default_init,
                                             0,
                                             NULL,
                                             0);

@@ -249,7 +249,7 @@ systray_manager_finalize (GObject *object)
     {
       /* cleanup all pending messages */
       g_slist_foreach (manager->messages,
-                       (GFunc) systray_manager_message_free, NULL);
+                       (GFunc) (void (*)(void)) systray_manager_message_free, NULL);
 
       /* free the list */
       g_slist_free (manager->messages);

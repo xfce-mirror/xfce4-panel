@@ -253,7 +253,7 @@ panel_application_finalize (GObject *object)
 #endif
 
   /* destroy all panels */
-  g_slist_foreach (application->windows, (GFunc) gtk_widget_destroy, NULL);
+  g_slist_foreach (application->windows, (GFunc) (void (*)(void)) gtk_widget_destroy, NULL);
   g_slist_free (application->windows);
 
   g_object_unref (G_OBJECT (application->factory));

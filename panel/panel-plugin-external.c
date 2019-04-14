@@ -253,7 +253,9 @@ panel_plugin_external_finalize (GObject *object)
     {
       /* remove the child watch and don't leave zombies */
       g_source_remove (external->priv->watch_id);
-      g_child_watch_add (external->priv->pid, (GChildWatchFunc) g_spawn_close_pid, NULL);
+      g_child_watch_add (external->priv->pid,
+                         (GChildWatchFunc) (void (*)(void)) g_spawn_close_pid,
+                         NULL);
     }
 
   panel_plugin_external_queue_free (external);
@@ -472,7 +474,9 @@ panel_plugin_external_child_ask_restart (PanelPluginExternal *external)
         {
           /* remove the child watch and don't leave zombies */
           g_source_remove (external->priv->watch_id);
-          g_child_watch_add (external->priv->pid, (GChildWatchFunc) g_spawn_close_pid, NULL);
+          g_child_watch_add (external->priv->pid,
+                             (GChildWatchFunc) (void (*)(void)) g_spawn_close_pid,
+                             NULL);
           external->priv->watch_id = 0;
         }
 

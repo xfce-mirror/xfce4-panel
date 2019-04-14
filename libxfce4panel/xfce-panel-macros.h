@@ -184,12 +184,12 @@ typedef GTypeModule XfcePanelTypeModule;
       sizeof (TypeName##Class), \
       NULL, \
       NULL, \
-      (GClassInitFunc) type_name##_class_intern_init, \
+      (GClassInitFunc) (void (*)(void)) type_name##_class_intern_init, \
       NULL, \
       NULL, \
       sizeof (TypeName), \
       0, \
-      (GInstanceInitFunc) type_name##_init, \
+      (GInstanceInitFunc) (void (*)(void)) type_name##_init, \
       NULL, \
     }; \
     \
