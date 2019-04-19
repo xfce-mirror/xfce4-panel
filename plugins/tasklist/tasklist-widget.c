@@ -3097,8 +3097,7 @@ xfce_tasklist_button_activate (XfceTasklistChild *child,
   panel_return_if_fail (WNCK_IS_WINDOW (child->window));
   panel_return_if_fail (WNCK_IS_SCREEN (child->tasklist->screen));
 
-  if (wnck_window_is_active (child->window)
-      || wnck_window_transient_is_most_recently_activated (child->window))
+  if (wnck_window_is_active (child->window))
     {
       /* minimize does not work when this is assigned to the
        * middle mouse button */
@@ -3205,7 +3204,7 @@ xfce_tasklist_button_activate (XfceTasklistChild *child,
             }
         }
 
-      wnck_window_activate_transient (child->window, timestamp);
+      wnck_window_activate (child->window, timestamp);
     }
 }
 
