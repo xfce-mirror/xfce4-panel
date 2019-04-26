@@ -1460,8 +1460,7 @@ launcher_plugin_tooltip_pixbuf (GdkScreen   *screen,
 
   /* load directly from a file */
   if (G_UNLIKELY (g_path_is_absolute (icon_name)))
-    return gdk_pixbuf_new_from_file_at_scale (icon_name, GTK_ICON_SIZE_DND, GTK_ICON_SIZE_DND,
-                                              TRUE, NULL);
+    return gdk_pixbuf_new_from_file_at_scale (icon_name, 32, 32, TRUE, NULL);
 
   if (G_LIKELY (screen != NULL))
     theme = gtk_icon_theme_get_for_screen (screen);
