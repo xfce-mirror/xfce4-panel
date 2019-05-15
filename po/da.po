@@ -73,7 +73,7 @@ msgstr "Tilføj _nye elementer..."
 #. customize panel
 #: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2646
 msgid "Panel Pr_eferences..."
-msgstr "Paneli_ndstillinger..."
+msgstr "Panel_præferencer..."
 
 #. logout item
 #: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2674
@@ -82,7 +82,7 @@ msgstr "_Log ud"
 
 #: ../panel/main.c:80
 msgid "Show the 'Panel Preferences' dialog"
-msgstr "Vis dialogen 'Panelindstillinger'"
+msgstr "Vis 'Panelpræferencer'-dialogen"
 
 #: ../panel/main.c:80 ../panel/main.c:81
 msgid "PANEL-NUMBER"
@@ -90,7 +90,7 @@ msgstr "PANELNUMMER"
 
 #: ../panel/main.c:81
 msgid "Show the 'Add New Items' dialog"
-msgstr "Vis dialogen 'Tilføj nye elementer'"
+msgstr "Vis 'Tilføj nye elementer'-dialogen"
 
 #: ../panel/main.c:82
 msgid "Save the panel configuration"
@@ -153,7 +153,7 @@ msgstr "Genstarter..."
 
 #: ../panel/main.c:381
 msgid "Failed to show the preferences dialog"
-msgstr "Kunne ikke vise dialogen indstillinger"
+msgstr "Kunne ikke vise præferencer-dialogen"
 
 #: ../panel/main.c:383
 msgid "Failed to show the add new items dialog"
@@ -184,9 +184,9 @@ msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr ""
-"Ønsker du at starte panelet? Hvis du vil det skal du huske at gemme "
-"sessionen ved log ud. Det vil sikre dig at panelet vil blive startet "
-"automatisk næste gang ved login."
+"Vil du starte panelet? Hvis du vil det skal du huske at gemme sessionen ved "
+"log ud. Det vil sikre dig at panelet vil blive startet automatisk næste gang"
+" ved login."
 
 #: ../panel/main.c:407 ../panel/main.c:421
 #, c-format
@@ -475,9 +475,8 @@ msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr ""
-"Vælg dette tilvalg hvis du ønsker maksimerede vinduer til at dække arealet "
-"bag panelet. Dette fungerer kun, når panelet er tilsluttet til et "
-"skærmhjørne."
+"Vælg dette tilvalg hvis du vil maksimerede vinduer til at dække arealet bag "
+"panelet. Dette fungerer kun, når panelet er tilsluttet til et skærmhjørne."
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -670,7 +669,7 @@ msgstr ""
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
-msgstr "Vælg forneden hvilken opsætning du ønsker for den første opstart."
+msgstr "Vælg forneden hvilken opsætning du vil bruge til den første opstart."
 
 #: ../migrate/main.c:129
 msgid "Migrate old config"
@@ -807,7 +806,7 @@ msgstr "_Dvaletilstand"
 
 #: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
-msgstr "Ønsker du at gå i hvile til disken?"
+msgstr "Vil du gå i hvile til disken?"
 
 #: ../plugins/actions/actions.c:183
 #, c-format
@@ -824,7 +823,7 @@ msgstr "H_viletilstand"
 
 #: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
-msgstr "Ønsker du at gå i hvile til hukommelsen?"
+msgstr "Vil du gå i hvile til hukommelsen?"
 
 #: ../plugins/actions/actions.c:191
 #, c-format
@@ -1050,7 +1049,7 @@ msgstr "_Layout:"
 
 #: ../plugins/clock/clock-dialog.glade.h:7
 msgid "_Tooltip format:"
-msgstr "_Værktøjstipformat:"
+msgstr "Format for _værktøjstip:"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
 #, no-c-format
@@ -1692,7 +1691,7 @@ msgstr "Kunne ikke allokere håndteringsvalg for skærm %d"
 
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Area where notification icons appear"
-msgstr "Område hvor underretningsikoner fremkommer"
+msgstr "Område hvor underretningsikoner vises"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
