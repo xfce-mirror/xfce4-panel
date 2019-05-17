@@ -1,3 +1,26 @@
+4.13.5
+======
+- Bugfixes:
+  - Revert "Applications menu icon sizing fixes" (Bug #14976)
+  - Make sure panel plugin icons aren't clipped (LP #1756608)
+  - actions: use a different icon for hybrid sleep when possible (Bug #15204)
+  - Fix compiler error -Wcast-function-type (GCC 8)
+  - Fix alpha-transparent background images (Bug #14850)
+  - Fix this use of "defined" may not be portable
+  - Bump glib version to 2.42.0
+  - tasklist: Activate parent windows (Bug #15307)
+  - launcher: Fix tooltip icon size (Bug #15319)
+  - Hide systray frame in default panel config
+  - separator: Use symbolic icon for more clarity (Bug #15359)
+- Translation updates: Albanian, Arabic, Asturian, Basque, Belarusian, Bengali,
+    Bulgarian, Catalan, Chinese (China), Chinese (Hong Kong), Czech, Danish,
+    Dutch (Flemish), English (Australia), English (Great Britain), Estonian,
+    Finnish, Galician, German, Greek, Icelandic, Indonesian, Italian, Kazakh,
+    Korean, Lithuanian, Malay, Norwegian Bokmål, Norwegian Nynorsk, Occitan,
+    Panjabi, Portuguese, Portuguese (Brazilian), Romanian, Russian, Serbian,
+    Slovak, Slovenian, Spanish, Swedish, Thai, Turkish, Ukrainian, Uyghur,
+    Vietnamese
+
 4.13.4
 ======
 - Add per-panel setting "icon-size"
