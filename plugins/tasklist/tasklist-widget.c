@@ -1337,7 +1337,7 @@ xfce_tasklist_scroll_event (GtkWidget      *widget,
     scrolling_direction = GDK_SCROLL_RIGHT;
   else
     {
-      panel_debug_filtered (PANEL_DEBUG_TASKLIST, "scrolling event with no delta happend");
+      panel_debug_filtered (PANEL_DEBUG_TASKLIST, "scrolling event with no delta happened");
       return TRUE;
     }
 
