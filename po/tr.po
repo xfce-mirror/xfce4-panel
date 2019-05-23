@@ -12,14 +12,15 @@
 # Gökmen görgen <gkmngrgn@gmail.com>, 2009
 # Necdet Yücel <necdetyucel@gmail.com>, 2013,2015,2017-2018
 # Recep, 2013
+# Serdar Sağlam <teknomobil@msn.com>, 2019
 # Zafer Eren <zaferern@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-03 22:34+0100\n"
-"PO-Revision-Date: 2019-04-07 08:01+0000\n"
-"Last-Translator: Demiray Muhterem <mdemiray@msn.com>\n"
+"PO-Revision-Date: 2019-05-23 00:53+0000\n"
+"Last-Translator: Serdar Sağlam <teknomobil@msn.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/xfce/xfce4-panel/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,13 +30,13 @@ msgstr ""
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Create Launcher on the panel"
-msgstr "Xfce Panelinde Başlatıcı oluştur"
+msgstr "Panelde Başlatıcı oluştur"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop "
 "file"
-msgstr "Bu masaüstü dosyası bilgisine dayalı olarak panele yeni bir başlatıcı ekle"
+msgstr "Bu masaüstü dosyasının bilgisine dayanarak panele yeni bir başlatıcı ekle"
 
 #: ../panel-preferences.desktop.in.h:1
 #: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2692
@@ -131,7 +132,7 @@ msgstr "PANEL-NUMARASI"
 
 #: ../panel/main.c:82
 msgid "Show the 'Add New Items' dialog"
-msgstr "'Yeni Öğeler Ekle' penceresini göster"
+msgstr "'Yeni Ögeler Ekle' penceresini göster"
 
 #: ../panel/main.c:83
 msgid "Save the panel configuration"
@@ -203,7 +204,7 @@ msgstr "Tercihler penceresi gösterilemedi"
 
 #: ../panel/main.c:415
 msgid "Failed to show the add new items dialog"
-msgstr "'Yeni Öğeler Ekle' penceresi gösterilemedi"
+msgstr "'Yeni Ögeler Ekle' penceresi gösterilemedi"
 
 #: ../panel/main.c:417
 msgid "Failed to save the panel configuration"
@@ -219,7 +220,7 @@ msgstr "Panel yeniden başlatılamadı"
 
 #: ../panel/main.c:423
 msgid "Failed to quit the panel"
-msgstr "Panel  kaldırılamadı"
+msgstr "Panelden çıkılamadı"
 
 #: ../panel/main.c:425
 msgid "Failed to send D-Bus message"
@@ -242,17 +243,17 @@ msgstr "%s 'in hiçbir çalışan örneği bulunamadı"
 
 #: ../panel/panel-application.c:215
 msgid "Failed to launch the migration application"
-msgstr "Göç uygulaması çalıştırılamadı"
+msgstr "Geçiş uygulaması başlatılamadı"
 
 #: ../panel/panel-application.c:983
 msgid "Create _Launcher"
-msgstr "Baş_latıcı oluştur"
+msgstr "_Başlatıcı Oluştur"
 
 #: ../panel/panel-application.c:984
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Bu davranış panelde yeni bir uygulama başlatıcısı yaratacak ve sürükleyip bırakılan dosyaları menü öğesi olarak ekleyecek."
+msgstr "Bu panelde yeni bir başlatıcı eklentisi oluşturur ve eklenen dosyaları menü ögeleri olarak ekler."
 
 #: ../panel/panel-application.c:986
 #, c-format
@@ -269,7 +270,7 @@ msgstr "Çık"
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "Oturum yöneticisi olmadan X başlamıştır. Çık tıklamak X sunucusu kapanacak."
+msgstr "X'i oturum yöneticisi olmadan başlattınız. Çık'ı tıklattığınızda X sunucusu kapanır."
 
 #: ../panel/panel-application.c:1728
 msgid "Are you sure you want to quit the panel?"
@@ -307,7 +308,7 @@ msgstr "çevirmenler"
 #. setup the dialog
 #: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:12
 msgid "Add New Item"
-msgstr "Yeni Öğe Ekle"
+msgstr "Yeni Öge Ekle"
 
 #: ../panel/panel-dialogs.c:164
 msgid "Add"
@@ -315,7 +316,7 @@ msgstr "Ekle"
 
 #: ../panel/panel-dialogs.c:175
 msgid "Please choose a panel for the new plugin:"
-msgstr "Lütfen yeni eklenti için bir panel seçiniz:"
+msgstr "Lütfen yeni eklenti için bir panel seçin:"
 
 #: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:891
 #, c-format
@@ -326,7 +327,7 @@ msgstr "Panel %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "Panel kiosk modunda çalıştığı için, normal kullanıcı olarak panel ayarları üzerinde değişiklik yapmanıza izin verilmiyor"
+msgstr "Panel kiosk kipinde çalıştığı için, normal kullanıcı olarak panel ayarları üzerinde değişiklik yapmanıza izin verilmiyor"
 
 #: ../panel/panel-dialogs.c:237
 msgid "Modifying the panel is not allowed"
@@ -334,7 +335,7 @@ msgstr "Panelde değişiklik yapılmasına izin verilmedi"
 
 #: ../panel/panel-item-dialog.c:195
 msgid "Add New Items"
-msgstr "Yeni Öğeler Ekle"
+msgstr "Yeni Ögeler Ekle"
 
 #: ../panel/panel-item-dialog.c:197
 msgid "Add new plugins to the panel"
@@ -485,7 +486,7 @@ msgstr "<b>Genel</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "M_ode:"
-msgstr "M_od:"
+msgstr "_Kip:"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid "Span mo_nitors"
@@ -497,7 +498,7 @@ msgstr "Paneli birden fazla ekranda göstermek için bu seçeneği seçin."
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "_Lock panel"
-msgstr "Paneli _Kilitle"
+msgstr "Paneli _kilitle"
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid ""
@@ -630,34 +631,34 @@ msgstr "Görünüm"
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 #: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Move currently selected item up by one row"
-msgstr "Seçili öğeyi bir satır yukarı taşı"
+msgstr "Seçili ögeyi bir satır yukarı taşı"
 
 #: ../panel/panel-preferences-dialog.glade.h:56
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 #: ../plugins/systray/systray-dialog.glade.h:9
 msgid "Move currently selected item down by one row"
-msgstr "Seçili öğeyi bir satır aşağı doğru hareket ettirin"
+msgstr "Seçili ögeyi bir satır aşağı doğru hareket ettir"
 
 #: ../panel/panel-preferences-dialog.glade.h:57
 msgid "Add new item to this panel"
-msgstr "Bu panele yeni öğe ekle"
+msgstr "Bu panele yeni öge ekle"
 
 #: ../panel/panel-preferences-dialog.glade.h:58
 msgid "Remove currently selected item"
-msgstr "Seçili öğeyi kaldır"
+msgstr "Seçili ögeyi kaldır"
 
 #: ../panel/panel-preferences-dialog.glade.h:59
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Edit the currently selected item"
-msgstr "Seçili öğeyi düzenle"
+msgstr "Seçili ögeyi düzenle"
 
 #: ../panel/panel-preferences-dialog.glade.h:60
 msgid "Show about information of the currently selected item"
-msgstr "Seçili öğenin 'hakkında' bilgisini göster"
+msgstr "Seçili ögenin 'hakkında' bilgisini göster"
 
 #: ../panel/panel-preferences-dialog.glade.h:61
 msgid "Ite_ms"
-msgstr "Öğe_ler"
+msgstr "Öge_ler"
 
 #: ../panel/panel-tic-tac-toe.c:121
 msgid "_New Game"
@@ -753,7 +754,7 @@ msgstr "Eylem"
 
 #: ../plugins/actions/actions-dialog.glade.h:12
 msgid "_Actions"
-msgstr "_Panel Davranışları"
+msgstr "_Eylemler"
 
 #: ../plugins/actions/actions.c:152
 msgid "Log Out"
@@ -761,7 +762,7 @@ msgstr "Çıkış Yap"
 
 #: ../plugins/actions/actions.c:153
 msgid "_Log Out"
-msgstr "Çıkış_Yap"
+msgstr "_Çıkış Yap"
 
 #: ../plugins/actions/actions.c:154
 msgid "Are you sure you want to log out?"
@@ -912,11 +913,11 @@ msgstr "_Simge:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Button _title:"
-msgstr "Tuş _başlığı:"
+msgstr "Düğme _başlığı:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "_Show button title"
-msgstr "_Tuş başlığını göster"
+msgstr "_Düğme başlığını göster"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Show application d_escription in tooltip"
@@ -974,7 +975,7 @@ msgstr "Menü Dosyası"
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu.c:39
 msgid "Applications"
-msgstr "Bütün Uygulamalar"
+msgstr "Uygulamalar"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:536
 #: ../plugins/directorymenu/directorymenu.c:392
@@ -1107,7 +1108,7 @@ msgstr "_İpucu biçimi:"
 
 #: ../plugins/clock/clock-dialog.glade.h:16
 msgid "_Layout:"
-msgstr "_Yerleşim:"
+msgstr "_Düzen:"
 
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "Sho_w AM/PM"
@@ -1425,7 +1426,7 @@ msgstr "Dizini Aç"
 
 #: ../plugins/directorymenu/directorymenu.c:818
 msgid "Open in Terminal"
-msgstr "Uçbirimde aç"
+msgstr "Uçbirimde Aç"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
@@ -1452,33 +1453,33 @@ msgstr "Bir dizindeki görünebilir olmasını istediğiniz dosyaların desenini
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
 msgid "_File Pattern:"
-msgstr "_Dosya Deseni:"
+msgstr "_Dosya Örneği:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
 #: ../plugins/tasklist/tasklist-dialog.glade.h:29
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Filtering"
-msgstr "Filtre"
+msgstr "Süzgeçle"
 
 #: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
-msgstr "Başlatma menüsünü aç"
+msgstr "Başlatıcı menüsünü aç"
 
 #: ../plugins/launcher/launcher.c:1622
 msgid "Unnamed Item"
-msgstr "İsimsiz Öğe"
+msgstr "İsimsiz Öge"
 
 #: ../plugins/launcher/launcher.c:1795
 msgid "No items"
-msgstr "Öğe yok"
+msgstr "Öge yok"
 
 #: ../plugins/launcher/launcher-dialog.c:788
 msgid "Failed to open desktop item editor"
-msgstr "Masaüstü öğe düzenleyicisi açılamadı"
+msgstr "Masaüstü öge düzenleyicisi açılamadı"
 
 #: ../plugins/launcher/launcher-dialog.c:856
 msgid "If you delete an item, it will be permanently removed"
-msgstr "Bir öğeyi silerseniz, kalıcı olarak kaldırılacaktır"
+msgstr "Bir ögeyi silerseniz, kalıcı olarak kaldırılır"
 
 #: ../plugins/launcher/launcher-dialog.c:857
 #, c-format
@@ -1487,7 +1488,7 @@ msgstr "'%s' i silmek istediğinizden emin misiniz?"
 
 #: ../plugins/launcher/launcher-dialog.c:858
 msgid "Unnamed item"
-msgstr "İsimsiz öğe"
+msgstr "İsimsiz öge"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Default"
@@ -1515,11 +1516,11 @@ msgstr "Düğmenin Yanında"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "_Edit Item"
-msgstr "Öğeyi _Düzenle"
+msgstr "Ögeyi _Düzenle"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "D_elete Item"
-msgstr "Öğeyi S_il"
+msgstr "Ögeyi S_il"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Add Appli_cation"
@@ -1544,11 +1545,11 @@ msgstr "Başlatıcı"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "Delete the currently selected item"
-msgstr "Seçili öğeyi sil"
+msgstr "Seçili ögeyi sil"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Add a new empty item"
-msgstr "Yeni boş bir öğe ekle"
+msgstr "Yeni bir boş öge ekle"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Add a new hyperlink"
@@ -1578,7 +1579,7 @@ msgstr "Tıklanmış menü ögesini panele taşımak için bu seçeneği seçin.
 
 #: ../plugins/launcher/launcher-dialog.glade.h:30
 msgid "_Arrow button position:"
-msgstr "O_k tuşu konumu:"
+msgstr "_Ok düğmesi konumu:"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:31
 msgid "Advanced"
@@ -1586,7 +1587,7 @@ msgstr "Gelişmiş"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr "Uygulama çalıştırıcısı"
+msgstr "İsteğe bağlı menü ile program başlatıcısı"
 
 #: ../plugins/pager/pager.c:449 ../plugins/pager/pager-dialog.glade.h:7
 msgid "Workspace _Settings..."
@@ -1639,7 +1640,7 @@ msgstr "Şeffaf"
 
 #: ../plugins/separator/separator-dialog.glade.h:3
 msgid "Handle"
-msgstr "İşle:"
+msgstr "Çerçeve"
 
 #: ../plugins/separator/separator-dialog.glade.h:4
 msgid "Dots"
@@ -1651,7 +1652,7 @@ msgstr "_Genişlet"
 
 #: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Adds a separator or space between panel items"
-msgstr "Panel öğeleri arasına boşluk veya ayraç ekler"
+msgstr "Panel ögeleri arasına bir ayırıcı veya boşluk ekler"
 
 #: ../plugins/showdesktop/showdesktop.c:216
 msgid "Restore the minimized windows"
@@ -1696,11 +1697,11 @@ msgstr "Bilinen uygulama listesini temizlemek istediğinizden emin misiniz?"
 #: ../plugins/systray/systray-dialog.glade.h:1
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Notification Area"
-msgstr "Sistem çekmecesi"
+msgstr "Bildirim Alanı"
 
 #: ../plugins/systray/systray-dialog.glade.h:4
 msgid "_Maximum icon size (px):"
-msgstr "_En büyük simge boyutu (px):"
+msgstr "_Azami simge boyutu (pk):"
 
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "Sq_uare icons"
@@ -1712,7 +1713,7 @@ msgstr "Ç_erçeve göster"
 
 #: ../plugins/systray/systray-dialog.glade.h:10
 msgid "C_lear Known Applications"
-msgstr "Biline Uygulamaları T_emizle"
+msgstr "Bilinen Uygulamaları _Temizle"
 
 #: ../plugins/systray/systray-dialog.glade.h:11
 msgid "Known Applications"
@@ -1774,7 +1775,7 @@ msgstr "Düğme _etiketlerini göster"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show _flat buttons"
-msgstr "Düz düğmeleri göster"
+msgstr "_Düz düğmeler göster"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Show _handle"
@@ -1818,23 +1819,23 @@ msgstr "Sadece _küçültülmüş pencereleri göster"
 
 #: ../plugins/tasklist/tasklist-widget.c:3554
 msgid "Mi_nimize All"
-msgstr "Hepsini _küçült"
+msgstr "Tümünü _Küçült"
 
 #: ../plugins/tasklist/tasklist-widget.c:3562
 msgid "Un_minimize All"
-msgstr "Küçült_meleri geri al"
+msgstr "Küçültmeleri Geri Al"
 
 #: ../plugins/tasklist/tasklist-widget.c:3570
 msgid "Ma_ximize All"
-msgstr "Hepsini _büyüt"
+msgstr "Tümünü _Büyüt"
 
 #: ../plugins/tasklist/tasklist-widget.c:3578
 msgid "_Unmaximize All"
-msgstr "Büyültmeleri geri al"
+msgstr "Büyültmeleri Geri Al"
 
 #: ../plugins/tasklist/tasklist-widget.c:3590
 msgid "_Close All"
-msgstr "Hepsini _Kapat"
+msgstr "Tümünü _Kapat"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Switch between open windows using buttons"
@@ -1854,17 +1855,17 @@ msgstr "Önemli Pencereler"
 
 #: ../plugins/windowmenu/windowmenu.c:1325
 msgid "Add Workspace"
-msgstr "Çalışma alanı ekle"
+msgstr "Çalışma Alanı Ekle"
 
 #: ../plugins/windowmenu/windowmenu.c:1348
 #, c-format
 msgid "Remove Workspace \"%s\""
-msgstr "'%s' çalışma alanını sil"
+msgstr "'%s' Çalışma Alanını Kaldır"
 
 #: ../plugins/windowmenu/windowmenu.c:1350
 #, c-format
 msgid "Remove Workspace %d"
-msgstr "%d. çalışma alanını sil"
+msgstr "%d. Çalışma Alanını Kaldır"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
 msgid "Icon"
@@ -1872,28 +1873,28 @@ msgstr "Simge"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
 msgid "Arrow"
-msgstr "O_k:"
+msgstr "Ok"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 #: ../plugins/windowmenu/windowmenu.desktop.in.in.h:1
 msgid "Window Menu"
-msgstr "Pencere Listesi"
+msgstr "Pencere Menüsü"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "Button layout:"
-msgstr "Düğme düzenleme:"
+msgstr "Düğme düzeni:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "Show workspace a_ctions"
-msgstr "Çalışma alanı _hareketlerini göster"
+msgstr "Çalışma alanı _eylemlerini göster"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Show workspace _names"
-msgstr "Çalışma ala_nı isimlerini göster"
+msgstr "Çalışma alanı _isimlerini göster"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Enable _urgency notification"
-msgstr "Acil _uyarıyı etkinleştir"
+msgstr "Acil _bildirimini etkinleştir"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Show windows from _all workspaces"
