@@ -160,8 +160,8 @@ panel_dialogs_choose_panel (PanelApplication *application)
   /* setup the dialog */
   dialog = gtk_dialog_new_with_buttons (_("Add New Item"), NULL,
                                         0,
-                                        _("Cancel"), GTK_RESPONSE_CANCEL,
-                                        _("Add"), GTK_RESPONSE_OK, NULL);
+                                        _("_Cancel"), GTK_RESPONSE_CANCEL,
+                                        _("_Add"), GTK_RESPONSE_OK, NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
   gtk_window_set_icon_name (GTK_WINDOW (dialog), "list-add");
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
