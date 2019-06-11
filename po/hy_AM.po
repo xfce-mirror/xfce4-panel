@@ -212,8 +212,8 @@ msgstr ""
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ստեղծել նոր գործարկիչ %d աշխատասեղանի նիշից"
+msgstr[1] "Ստեղծել նոր գործարկիչ %d աշխատասեղանի նիշից"
 
 #: ../panel/panel-application.c:1728
 msgid ""
@@ -250,15 +250,15 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
-msgstr ""
+msgstr "Սպասարկողներ"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
-msgstr ""
+msgstr "Աշխատանքային Ընտրացանկի Եղանակ"
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
-msgstr ""
+msgstr "Ոչ֊գործուն Սպասարկողներ"
 
 #: ../panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
@@ -339,7 +339,7 @@ msgstr "Առաջնային"
 #: ../panel/panel-preferences-dialog.c:520
 #, c-format
 msgid "Screen %d"
-msgstr ""
+msgstr "Էկրան %d"
 
 #. I18N: monitor name in the output selector
 #: ../panel/panel-preferences-dialog.c:546
@@ -482,7 +482,7 @@ msgstr "Ընդհանուր"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Row _Size (pixels):"
-msgstr ""
+msgstr "Տողի _չափ (պատկերատարրերով)․"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 #, no-c-format
@@ -509,7 +509,7 @@ msgstr ""
 #. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Measurements"
-msgstr ""
+msgstr "Չափեր"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "D_isplay"
@@ -522,13 +522,15 @@ msgstr "_Ձեւ․"
 
 #: ../panel/panel-preferences-dialog.glade.h:34
 msgid "_Alpha:"
-msgstr ""
+msgstr "_Թափանցիկոթիւն․"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
 msgstr ""
+"Ընտրացանկի յետնապատկերի թափանցիկութեան արժէքը՝ 0֊ն ամբողջապէս թափանցիկ, իսկ "
+"100֊ը՝ ամբողջապէս անթափանց։"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "C_olor:"
@@ -548,7 +550,7 @@ msgstr "Ընտրել Յետնապատկերը"
 
 #: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Background"
-msgstr ""
+msgstr "Յետնապատկեր"
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:42
@@ -565,6 +567,8 @@ msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully"
 " transparent and 100 fully opaque."
 msgstr ""
+"Թափանցիկութիւնը, երբ սլաքը գտնուում է ընտրացանկի վրայ, 0֊ն ամբողջապէս "
+"թափանցիկ, իսկ 100֊ը՝ ամբողջապէս անթափանց։"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid ""
@@ -576,12 +580,14 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 msgid "Opacity"
-msgstr ""
+msgstr "Մգութիւն"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr ""
+"Միացրէք բաղադրեալ ընտրանքները պատուհանների կառավարչում, ընտրացանկում "
+"թափանցիկութեան կարգաւորումների համար։"
 
 #: ../panel/panel-preferences-dialog.glade.h:49
 msgid "Appeara_nce"
@@ -648,41 +654,43 @@ msgstr "_Կողպել Ընտրացանկը"
 
 #: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
-msgstr ""
+msgstr "Բարի գալուստ։ Սա ընտրացանկի առաջին գործարկումն է"
 
 #: ../migrate/main.c:125
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
 msgstr ""
+"Քանի որ ընտրացանկը տեղափոխուել է նոր համակարգ՝ կարգաւորումների պահման համար,"
+" պէտք է ներբեռնուի սկզբնական կազմաձեւումը։"
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
-msgstr ""
+msgstr "Ընտրէք առաջին գործարկման կազմաձեւումը։"
 
 #: ../migrate/main.c:129
 msgid "Migrate old config"
-msgstr ""
+msgstr "Տեղափոխել նախկին կարգաւորումները"
 
 #: ../migrate/main.c:130
 msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr ""
+msgstr "Տեղափոխեք հին, 4.6 կազմաձեւումը Xfconf"
 
 #: ../migrate/main.c:141
 msgid "Use default config"
-msgstr ""
+msgstr "Աւգտագործել լռելեայն կազմաձեւում"
 
 #: ../migrate/main.c:142
 msgid "Load the default configuration"
-msgstr ""
+msgstr "Բեռնել լռելեայն կազմաձեւումը"
 
 #: ../migrate/main.c:148
 msgid "One empty panel"
-msgstr ""
+msgstr "Մեկ դատարկ ընտրացանկ"
 
 #: ../migrate/main.c:149
 msgid "Start with one empty panel"
-msgstr ""
+msgstr "Սկսել մեկ դատարկ ընտրացանկով"
 
 #: ../migrate/main.c:160
 msgid "Failed to migrate the old panel configuration"
@@ -711,7 +719,7 @@ msgstr "Գործողութիւնների կոճակներ"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
 msgid "Appeara_nce:"
-msgstr ""
+msgstr "_Տեսք"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "Invert buttons _orientation"
@@ -730,15 +738,15 @@ msgstr ""
 
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid "Visible"
-msgstr ""
+msgstr "Տեսանելիութիւն"
 
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Action"
-msgstr ""
+msgstr "Գործողութիւն"
 
 #: ../plugins/actions/actions-dialog.glade.h:9
 msgid "_Actions"
-msgstr ""
+msgstr "_Գործողութիւններ"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "Session Menu"
@@ -1380,23 +1388,23 @@ msgstr "Չյաջողուեց գործարկել նախընտրած հավելվ�
 
 #: ../plugins/directorymenu/directorymenu.c:792
 msgid "Open Folder"
-msgstr ""
+msgstr "Բացել Պանակը"
 
 #: ../plugins/directorymenu/directorymenu.c:803
 msgid "Open in Terminal"
-msgstr ""
+msgstr "Բացել Վահանակում"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
-msgstr ""
+msgstr "Ցուցադրել նշարանների ծառը՝ ցանկում"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Select A Directory"
-msgstr ""
+msgstr "Ընտրել Նշարան"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 msgid "_Base Directory:"
-msgstr ""
+msgstr "_Հիմնական Նշարան․"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
 msgid ""
@@ -1404,136 +1412,141 @@ msgid ""
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr ""
+"Մուտքագրեք այն աւրինակների ցուցակը, որոնք կոգտագործուեն որոշելու համար, թե "
+"որ նիշերն են տեսանելի՝ նշարանում։ Եթե նշեք մեկից աւելի աւրինակ, ցանկի "
+"տարրերը պէտք է բաժանվեն մի կետ֊ստորակետերով (աւր․՝ *.txt;*.doc):"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
-msgstr ""
+msgstr "_Նիշի Պատկեր․"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "Show _hidden files"
-msgstr ""
+msgstr "Ցուցադրել _թաքնուած նիշերը"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist-dialog.glade.h:24
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Filtering"
-msgstr ""
+msgstr "Զտում"
 
 #: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
-msgstr ""
+msgstr "Բացել թողարկչի ցանկը"
 
 #: ../plugins/launcher/launcher.c:1575
 msgid "Unnamed Item"
-msgstr ""
+msgstr "Անանուն Տարր"
 
 #: ../plugins/launcher/launcher.c:1728
 msgid "No items"
-msgstr ""
+msgstr "Տարրեր չկան"
 
 #: ../plugins/launcher/launcher-dialog.c:798
 msgid "Failed to open desktop item editor"
-msgstr ""
+msgstr "Չյաջողուեց բացել աշխատասեղանի տարրերի խմբագիրը"
 
 #: ../plugins/launcher/launcher-dialog.c:857
 msgid "If you delete an item, it will be permanently removed"
-msgstr ""
+msgstr "Եթե ջնջէք նիշ, ապա այն վերջնականապէս կը հեռացուի"
 
 #: ../plugins/launcher/launcher-dialog.c:858
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr ""
+msgstr "Ջնջե՞լ «%s»֊ը։"
 
 #: ../plugins/launcher/launcher-dialog.c:859
 msgid "Unnamed item"
-msgstr ""
+msgstr "Անանուն տարր"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Default"
-msgstr ""
+msgstr "Լռելեայն"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "North"
-msgstr ""
+msgstr "Հիւսիս"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "West"
-msgstr ""
+msgstr "Արեւմուտք"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "East"
-msgstr ""
+msgstr "Արեւելք"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:5
 msgid "South"
-msgstr ""
+msgstr "Հարաւ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "Inside Button"
-msgstr ""
+msgstr "Ներսի Կոճակ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "_Edit Item"
-msgstr ""
+msgstr "_Խմբագրել Տարրը"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "D_elete Item"
-msgstr ""
+msgstr "Ջ_նջել Տարրը"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Add Appli_cation"
-msgstr ""
+msgstr "Աւելացնել յա_ւելուած"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "New _Application"
-msgstr ""
+msgstr "Նոր _Յղում"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "New _Link"
-msgstr ""
+msgstr "Նոր _Յղում"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:12
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
-msgstr ""
+msgstr "Թողարկիչ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "Add one or more existing items to the launcher"
-msgstr ""
+msgstr "Յաւելել մեկ կամ աւելի առկայ տարրեր՝ գործարկչի համար"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "Add a new empty item"
-msgstr ""
+msgstr "Աւելացնել նոր, դատարկ տարր"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Delete the currently selected item"
-msgstr ""
+msgstr "Ջնջեք ընտրուած տարրը"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Disable t_ooltips"
-msgstr ""
+msgstr "Անջատել գոր_ծիքայուշերը"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
 msgstr ""
+"Նշեք այս ընտրանքը՝ գործիքահուշերի անջատման համար, երբ տեղափոխուում են "
+"ընտրացանկի կոճակը կամ ցանկի տարրերը։"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
-msgstr ""
+msgstr "Ցուցադրել _նշիչ՝ պատկերակի փոխարէն"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Show last _used item in panel"
-msgstr ""
+msgstr "Ցուցադրել ընտրացանկում վերջին անգամ _գործածուած տարրը"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr ""
+msgstr "Նշեք այս ընտրանքը, տեղափոխելու համար սեղմված ցանկը՝ ընտրացանկ։"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "_Arrow button position:"
-msgstr ""
+msgstr "_Սլաքի կոճակի դիրք․"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "Advanced"
@@ -1541,93 +1554,95 @@ msgstr "Յառաջացած"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr ""
+msgstr "Ծրագրի գործարկիչ՝ ընտրովի ցանկով"
 
 #: ../plugins/pager/pager.c:396 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
-msgstr ""
+msgstr "Աշխատատարածքի _կարգաւորումներ..."
 
 #: ../plugins/pager/pager.c:479
 msgid "Unable to open the workspace settings"
-msgstr ""
+msgstr "Չյաջողուեց բացել աշխատատարածքի կարգաւորումները"
 
 #: ../plugins/pager/pager-buttons.c:579 ../plugins/windowmenu/windowmenu.c:857
 #, c-format
 msgid "Workspace %d"
-msgstr ""
+msgstr "%d Աշխատատարածք"
 
 #: ../plugins/pager/pager-dialog.glade.h:1
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Workspace Switcher"
-msgstr ""
+msgstr "Աշխատատարածքների Փոխանջատիչ"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 msgid "Number of _rows:"
-msgstr ""
+msgstr "Տող_երի քանակ․"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
 msgid "Show mi_niature view"
-msgstr ""
+msgstr "Ցոյց տալ մանրա_նկարչական տեսքը"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
 msgstr ""
+"Ցուցադրել աշխատատեղի մանրանկարչական տեսքը ուղղանկիւններով՝ տեսանելի "
+"պատուհանների համար"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 msgid "Switch workspaces using the mouse _wheel"
-msgstr ""
+msgstr "Փոխանջատել աշխատատարածնքերը՝ մկնիկի _անիւի աւգնութեամբ"
 
 #: ../plugins/pager/pager-dialog.glade.h:8
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Behaviour"
-msgstr ""
+msgstr "Վարքագիծ"
 
 #: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Switch between virtual desktops"
-msgstr ""
+msgstr "Փոխանջատում վերիրային աշխատասեղանների միջեւ"
 
 #: ../plugins/separator/separator-dialog.glade.h:3
 msgid "_Expand"
-msgstr ""
+msgstr "_Ընդարձակել"
 
 #: ../plugins/separator/separator-dialog.glade.h:5
 msgid "Transparent"
-msgstr ""
+msgstr "Թափանցիկ"
 
 #: ../plugins/separator/separator-dialog.glade.h:6
 msgid "Handle"
-msgstr ""
+msgstr "Բռնակ"
 
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "Dots"
-msgstr ""
+msgstr "Կէտեր"
 
 #: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Adds a separator or space between panel items"
-msgstr ""
+msgstr "Աւելացնում է բաժանիչ կամ բացատ ընտրացանկի տարրերի միջեւ"
 
 #: ../plugins/showdesktop/showdesktop.c:210
 msgid "Restore the minimized windows"
-msgstr ""
+msgstr "Վերականգնել փոքրացրած պատուհանները"
 
 #: ../plugins/showdesktop/showdesktop.c:212
 msgid "Minimize all open windows and show the desktop"
-msgstr ""
+msgstr "Փոքրացնել բոլոր բացուած պատուհանները եւ ցուցադրել աշխատասեղանը"
 
 #: ../plugins/showdesktop/showdesktop.c:215
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
-msgstr ""
+msgstr "Ցուցադրել Աշխատասեղանը"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Hide all windows and show the desktop"
-msgstr ""
+msgstr "Թաքցնել բոլոր պատուհանները եւ ցուցադրել աշխատասեղանը"
 
 #: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
-msgstr ""
+msgstr "Չյաջողուեց գործարկել ծանուցման տիրոյթը"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:868
@@ -1635,208 +1650,210 @@ msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr ""
+"Ամենայն հաւանականութեամբ՝ եւս մեկ հարմարանք ստանձնեց ծանուցման տիրոյթի "
+"գործառոյթը։ Այս տարածքը չի աւգտագործուի։"
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
-msgstr ""
+msgstr "Ծանուցուման տիրոյթի ընտրման կորուստ"
 
 #: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr ""
+msgstr "Մաքրե՞լ ծանոթ հավելվածների ցուցակը։"
 
 #: ../plugins/systray/systray-dialog.glade.h:1
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Notification Area"
-msgstr ""
+msgstr "Ծանուցումների Գաւտի"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
 msgid "_Maximum icon size (px):"
-msgstr ""
+msgstr "_Պատկերակի առավելագոյն չափս (պտրր.)․"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
 msgid "Show _frame"
-msgstr ""
+msgstr "Ցուցադրել _եզրագծերը"
 
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "C_lear Known Applications"
-msgstr ""
+msgstr "Մա_քրել ծանոթ յաւելուածները"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
 msgid "Known Applications"
-msgstr ""
+msgstr "Ծանոթ Յաւելուածներ"
 
 #: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr ""
+msgstr "Չյաջողուեց ստանալ կառավարչի ընտրութիւնը %d ցուցադրիչի համար"
 
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Area where notification icons appear"
-msgstr ""
+msgstr "Տիրոյթ, որտեղ յայտնուում են ծանուցման պատկերակները"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
-msgstr ""
+msgstr "Երբ, տարածքը սահմանափակ է"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "Timestamp"
-msgstr ""
+msgstr "Ժամակնիք"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
 msgid "Group title and timestamp"
-msgstr ""
+msgstr "Խմբի անուն եւ ժամակնիք"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Window title"
-msgstr ""
+msgstr "Պատուհանի անուն"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Group title and window title"
-msgstr ""
+msgstr "Խմբի եւ պատուհանի անուններ"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "None, allow drag-and-drop"
-msgstr ""
+msgstr "Ոչինչ՝ թոյլատրել «քաշ ու քից»֊ը"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Window Buttons"
-msgstr ""
+msgstr "Պատուհանի Կոճակներ"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Show button _labels"
-msgstr ""
+msgstr "Ցուցադրել կոճակի _անունը"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
-msgstr ""
+msgstr "Ցուցադրել _հարթ կոճակները"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _handle"
-msgstr ""
+msgstr "Ցուցադրել _բռնակը"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Sorting _order:"
-msgstr ""
+msgstr "Տեսակավորման _կարգ․"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Window _grouping:"
-msgstr ""
+msgstr "Պատուհանների _խմբավորում։"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Mi_ddle click action:"
-msgstr ""
+msgstr "Կեն_տրոնասեղմում․"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Restore minimized windows to current _workspace"
-msgstr ""
+msgstr "Վերականգնել փոքրացուած պատուհանները ներկայիս _աշխատատարածքում։"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "D_raw window frame when hovering a button"
-msgstr ""
+msgstr "Ցու_ցադրել պատուհանի եզրագծերը, երբ սլաքը կոճակի վրայ է"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "_Switch windows using the mouse wheel"
-msgstr ""
+msgstr "_Փոխանջատել պատուհանները մկնիկի անիւի աւգնութեամբ"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Show windows from _all workspaces or viewports"
-msgstr ""
+msgstr "Ցուցադրել պատուհանները _բոլոր աշխատատարածքներից կամ տեսադաշտերից"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Show windows from all mo_nitors"
-msgstr ""
+msgstr "Ցուցադրել պատուհանները բոլոր ցու_ցասարքերից"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "Show only _minimized windows"
-msgstr ""
+msgstr "Ցուցադրել միայն _փոքրացուած պատուհանները"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "Nothing"
-msgstr ""
+msgstr "Ոչինչ"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Close Window"
-msgstr ""
+msgstr "Փակել Պատուհանը"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:27
 msgid "Minimize Window"
-msgstr ""
+msgstr "Պատուհանի Փոքրեցում"
 
 #: ../plugins/tasklist/tasklist-widget.c:3326
 msgid "Mi_nimize All"
-msgstr ""
+msgstr "Փո_քրացնել բոլորը"
 
 #: ../plugins/tasklist/tasklist-widget.c:3335
 msgid "Un_minimize All"
-msgstr ""
+msgstr "Մե_ծացնել Բոլորը"
 
 #: ../plugins/tasklist/tasklist-widget.c:3341
 msgid "Ma_ximize All"
-msgstr ""
+msgstr "Առ_աւելացնել Բոլորը"
 
 #: ../plugins/tasklist/tasklist-widget.c:3350
 msgid "_Unmaximize All"
-msgstr ""
+msgstr "_Մեծացնել բոլորը"
 
 #: ../plugins/tasklist/tasklist-widget.c:3360
 msgid "_Close All"
-msgstr ""
+msgstr "_Փակել Բոլորը"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Switch between open windows using buttons"
-msgstr ""
+msgstr "Փոխել բացուած պատուհանները՝ կոճակների աւգնութեամբ"
 
 #: ../plugins/windowmenu/windowmenu.c:655
 msgid "Desktop"
-msgstr ""
+msgstr "Աշխատասեղան"
 
 #: ../plugins/windowmenu/windowmenu.c:1246
 msgid "No Windows"
-msgstr ""
+msgstr "Պատուհաններ Չկան"
 
 #: ../plugins/windowmenu/windowmenu.c:1261
 msgid "Urgent Windows"
-msgstr ""
+msgstr "Անհրաժեշտ Պատուհաններ"
 
 #: ../plugins/windowmenu/windowmenu.c:1303
 msgid "Add Workspace"
-msgstr ""
+msgstr "Աւելացնել Աշխատատարածք"
 
 #: ../plugins/windowmenu/windowmenu.c:1323
 #, c-format
 msgid "Remove Workspace \"%s\""
-msgstr ""
+msgstr "Հեռացնել «%s» Աշխատատարածքը"
 
 #: ../plugins/windowmenu/windowmenu.c:1325
 #, c-format
 msgid "Remove Workspace %d"
-msgstr ""
+msgstr "Հեռացնել %d Աշխատատարածքը"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
 #: ../plugins/windowmenu/windowmenu.desktop.in.in.h:1
 msgid "Window Menu"
-msgstr ""
+msgstr "Պատուհանների Ցանկ"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
 msgid "Button layout:"
-msgstr ""
+msgstr "Կոճակի շարակարգ․"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Show workspace a_ctions"
-msgstr ""
+msgstr "Ցուցադրել աշխատատարածքի գո_րծողութիւնները"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "Show workspace _names"
-msgstr ""
+msgstr "Ցուցադրել աշխատատարածքների _անունները"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "Enable _urgency notification"
-msgstr ""
+msgstr "Թոյլատրել _հրատապ ծանուցումները"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show windows from _all workspaces"
-msgstr ""
+msgstr "Ցուցադրել պատուհանները _բոլոր աշխատատարածքներում"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Icon"
@@ -1844,8 +1861,8 @@ msgstr "Պատկերակ"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Arrow"
-msgstr ""
+msgstr "Սլաք"
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
 msgid "Switch between open windows using a menu"
-msgstr ""
+msgstr "Փոխել բացված պատուհանները՝ ցանկի աւգնությամբ։"
