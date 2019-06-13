@@ -54,11 +54,17 @@ enum
 {
   PROP_0,
   PROP_SHOW_SECONDS,
-  PROP_TRUE_BINARY,
+  PROP_MODE,
   PROP_SHOW_INACTIVE,
   PROP_SHOW_GRID,
   PROP_SIZE_RATIO,
   PROP_ORIENTATION
+};
+
+enum
+{
+  MODE_MAIN,
+  MODE_TRUE
 };
 
 struct _XfceClockBinaryClass
@@ -73,7 +79,7 @@ struct _XfceClockBinary
   ClockTimeTimeout *timeout;
 
   guint     show_seconds : 1;
-  guint     true_binary : 1;
+  guint     mode;
   guint     show_inactive : 1;
   guint     show_grid : 1;
 
@@ -123,11 +129,11 @@ xfce_clock_binary_class_init (XfceClockBinaryClass *klass)
                                                          | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_TRUE_BINARY,
-                                   g_param_spec_boolean ("true-binary", NULL, NULL,
-                                                         FALSE,
-                                                         G_PARAM_READWRITE
-                                                         | G_PARAM_STATIC_STRINGS));
+                                   PROP_MODE,
+                                   g_param_spec_uint ("binary-mode", NULL, NULL,
+                                                      MODE_MAIN, MODE_TRUE, MODE_MAIN,
+                                                      G_PARAM_READWRITE
+                                                      | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_SHOW_INACTIVE,
@@ -150,7 +156,7 @@ static void
 xfce_clock_binary_init (XfceClockBinary *binary)
 {
   binary->show_seconds = FALSE;
-  binary->true_binary = FALSE;
+  binary->mode = MODE_MAIN;
   binary->show_inactive = TRUE;
   binary->show_grid = FALSE;
 
@@ -176,8 +182,8 @@ xfce_clock_binary_set_property (GObject      *object,
       g_object_notify (object, "size-ratio");
       break;
 
-    case PROP_TRUE_BINARY:
-      binary->true_binary = g_value_get_boolean (value);
+    case PROP_MODE:
+      binary->mode = g_value_get_uint (value);
       g_object_notify (object, "size-ratio");
       break;
 
@@ -217,8 +223,8 @@ xfce_clock_binary_get_property (GObject    *object,
       g_value_set_boolean (value, binary->show_seconds);
       break;
 
-    case PROP_TRUE_BINARY:
-      g_value_set_boolean (value, binary->true_binary);
+    case PROP_MODE:
+      g_value_set_uint (value, binary->mode);
       break;
 
     case PROP_SHOW_INACTIVE:
@@ -230,10 +236,16 @@ xfce_clock_binary_get_property (GObject    *object,
       break;
 
     case PROP_SIZE_RATIO:
-      if (binary->true_binary)
-        ratio = binary->show_seconds ? 2.0 : 3.0;
-      else
+      switch (binary->mode) {
+      case MODE_MAIN:
         ratio = binary->show_seconds ? 1.5 : 1.0;
+        break;
+      case MODE_TRUE:
+        ratio = binary->show_seconds ? 2.0 : 3.0;
+        break;
+      default:
+        return;
+      }
       g_value_set_double (value, ratio);
       break;
 
@@ -354,14 +366,25 @@ xfce_clock_binary_draw (GtkWidget *widget,
   alloc.x = pad_x + 1;
   alloc.y = pad_y + 1;
 
+  switch (binary->mode) {
+  case MODE_MAIN:
+    cols = binary->show_seconds ? 6 : 4;
+    rows = 4;
+    break;
+  case MODE_TRUE:
+    cols = 6;
+    rows = binary->show_seconds ? 3 : 2;
+    break;
+  default:
+    return FALSE;
+  }
+
   /* align columns and fix rounding */
-  cols = binary->true_binary ? 6 : (binary->show_seconds ? 6 : 4);
   diff = alloc.width - (floor ((gdouble) alloc.width / cols) * cols);
   alloc.width -= diff;
   alloc.x += diff / 2;
 
   /* align rows and fix rounding */
-  rows = binary->true_binary ? (binary->show_seconds ? 3 : 2) : 4;
   diff = alloc.height - (floor ((gdouble) alloc.height / rows) * rows);
   alloc.height -= diff;
   alloc.y += diff / 2;
@@ -397,10 +420,14 @@ xfce_clock_binary_draw (GtkWidget *widget,
 
   time = clock_time_get_time (binary->time);
 
-  if (binary->true_binary)
-    xfce_clock_binary_algo_true (table, time, binary->show_seconds, rows, cols);
-  else
+  switch (binary->mode) {
+  case MODE_MAIN:
     xfce_clock_binary_algo_main (table, time, binary->show_seconds, rows, cols);
+    break;
+  case MODE_TRUE:
+    xfce_clock_binary_algo_true (table, time, binary->show_seconds, rows, cols);
+    break;
+  }
 
   g_date_time_unref (time);
 
