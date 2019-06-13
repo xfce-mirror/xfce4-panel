@@ -64,7 +64,8 @@ enum
 enum
 {
   MODE_MAIN,
-  MODE_TRUE
+  MODE_TRUE,
+  MODE_BINARY_TIME
 };
 
 struct _XfceClockBinaryClass
@@ -131,7 +132,7 @@ xfce_clock_binary_class_init (XfceClockBinaryClass *klass)
   g_object_class_install_property (gobject_class,
                                    PROP_MODE,
                                    g_param_spec_uint ("binary-mode", NULL, NULL,
-                                                      MODE_MAIN, MODE_TRUE, MODE_MAIN,
+                                                      MODE_MAIN, MODE_BINARY_TIME, MODE_MAIN,
                                                       G_PARAM_READWRITE
                                                       | G_PARAM_STATIC_STRINGS));
 
@@ -243,6 +244,9 @@ xfce_clock_binary_get_property (GObject    *object,
       case MODE_TRUE:
         ratio = binary->show_seconds ? 2.0 : 3.0;
         break;
+      case MODE_BINARY_TIME:
+        ratio = binary->show_seconds ? 1.5 : 2.5;
+        break;
       default:
         return;
       }
@@ -328,6 +332,25 @@ xfce_clock_binary_draw_binary (gulong          *table,
 
 
 
+static void
+xfce_clock_binary_draw_time (gulong    *table,
+                             GDateTime *time,
+                             gboolean   seconds)
+{
+  guint n;
+
+  n = g_date_time_get_hour (time) * 60 * 60 +
+    g_date_time_get_minute (time) * 60 +
+    g_date_time_get_second (time);
+
+  *table = (n * 512) / 675; // 2 ** 16 / (24 * 60 * 60)
+
+  if (!seconds)
+    *table >>= 8;
+}
+
+
+
 static gboolean
 xfce_clock_binary_draw (GtkWidget *widget,
                         cairo_t   *cr)
@@ -372,6 +395,10 @@ xfce_clock_binary_draw (GtkWidget *widget,
   case MODE_TRUE:
     cols = 6;
     rows = binary->show_seconds ? 3 : 2;
+    break;
+  case MODE_BINARY_TIME:
+    cols = 4;
+    rows = binary->show_seconds ? 4 : 2;
     break;
   default:
     return FALSE;
@@ -425,6 +452,9 @@ xfce_clock_binary_draw (GtkWidget *widget,
     break;
   case MODE_TRUE:
     xfce_clock_binary_draw_true_binary (&table, time, binary->show_seconds, rows, cols);
+    break;
+  case MODE_BINARY_TIME:
+    xfce_clock_binary_draw_time (&table, time, binary->show_seconds);
     break;
   }
 
