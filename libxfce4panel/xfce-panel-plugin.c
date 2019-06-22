@@ -730,6 +730,9 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 #endif
 
+  if (g_getenv ("PANEL_GDK_CORE_DEVICE_EVENTS"))
+    g_unsetenv ("GDK_CORE_DEVICE_EVENTS");
+
   /* hide the event box window to make the plugin transparent */
   gtk_event_box_set_visible_window (GTK_EVENT_BOX (plugin), FALSE);
 }

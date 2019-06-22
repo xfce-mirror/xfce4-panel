@@ -255,7 +255,13 @@ main (gint argc, gchar **argv)
 #endif
 
   /* Workaround for xinput2's subpixel handling triggering unwanted enter/leave-notify events:
-   * https://bugs.freedesktop.org/show_bug.cgi?id=92681 */
+   * https://bugs.freedesktop.org/show_bug.cgi?id=92681
+   * We retain the original env var in our own custom env var which we use to re-set the
+   * original value for plugins. If the env var is not set we treat that as "0", which is Gtk+'s
+   * default behavior as well. */
+  if (!g_getenv ("GDK_CORE_DEVICE_EVENTS"))
+    g_setenv ("PANEL_GDK_CORE_DEVICE_EVENTS", "0", TRUE);
+
   g_setenv ("GDK_CORE_DEVICE_EVENTS", "1", TRUE);
 
   /* parse context options */
