@@ -2905,7 +2905,7 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
       return TRUE;
     }
 
-  if (event->button == 3)
+  if (event->button == 3 && !GTK_IS_MENU_ITEM (button))
     {
       menu = wnck_action_menu_new (child->window);
       g_signal_connect (G_OBJECT (menu), "selection-done",
@@ -2920,6 +2920,11 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
 
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
       return TRUE;
+    }
+  else if (event->button == 3 && GTK_IS_MENU_ITEM (button))
+    {
+      xfce_tasklist_button_activate (child, event->time);
+      return FALSE;
     }
 
   return FALSE;
