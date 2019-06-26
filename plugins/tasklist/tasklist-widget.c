@@ -240,6 +240,7 @@ struct _XfceTasklistChild
 
   /* list of windows in case of a group button */
   GSList                 *windows;
+  gint                    n_windows;
 
   /* wnck information */
   WnckWindow             *window;
@@ -337,6 +338,9 @@ static XfceTasklistChild *xfce_tasklist_button_new                       (WnckWi
                                                                           XfceTasklist         *tasklist);
 
 /* tasklist group buttons */
+static gboolean           xfce_tasklist_group_button_button_draw         (GtkWidget            *widget,
+                                                                          cairo_t         *cr,
+                                                                          XfceTasklistChild    *group_child);
 static void               xfce_tasklist_group_button_remove              (XfceTasklistChild    *group_child);
 static void               xfce_tasklist_group_button_add_window          (XfceTasklistChild    *group_child,
                                                                           XfceTasklistChild    *window_child);
@@ -3621,6 +3625,87 @@ xfce_tasklist_group_button_menu_destroy (GtkWidget         *menu,
 
 
 static gboolean
+xfce_tasklist_group_button_button_draw (GtkWidget         *widget,
+                                        cairo_t           *cr,
+                                        XfceTasklistChild *group_child)
+{
+  if (group_child->n_windows > 1)
+    {
+      GtkStyleContext *context;
+      GtkAllocation *allocation = g_new0 (GtkAllocation, 1);
+      PangoRectangle ink_extent, log_extent;
+      PangoFontDescription *desc;
+      PangoLayout *n_windows_layout;
+      gchar *n_windows;
+      GdkRGBA fg, bg;
+      gdouble radius, x, y;
+      gint icon_size;
+
+      gtk_widget_get_allocation (GTK_WIDGET (widget), allocation);
+      cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+      /* Get the theme colors. We use the foreground alpha for both fg and bg for
+         consistent alpha. */
+      context = gtk_widget_get_style_context (widget);
+      gtk_style_context_get_color (context, gtk_style_context_get_state (context), &fg);
+      gtk_style_context_get (context, GTK_STATE_FLAG_SELECTED,
+                             GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
+                             &bg, NULL);
+
+      n_windows = g_strdup_printf ("%d", group_child->n_windows);
+      n_windows_layout = gtk_widget_create_pango_layout (GTK_WIDGET (widget), n_windows);
+      desc = pango_font_description_from_string ("Mono Bold 8");
+      if (desc)
+      {
+          pango_layout_set_font_description (n_windows_layout, desc);
+          pango_font_description_free (desc);
+      }
+
+      pango_layout_get_pixel_extents (n_windows_layout, &ink_extent, &log_extent);
+      icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (xfce_tasklist_get_panel_plugin (group_child->tasklist)));
+      radius = log_extent.height / 2;
+      if (group_child->tasklist->show_labels || icon_size <= 31)
+        {
+          y = allocation->height / 2 + radius;
+          if ((y + radius) > allocation->height)
+            y = allocation->height - radius;
+          if (group_child->tasklist->show_labels)
+            x = 24 - radius;
+          else
+            x = allocation->width / 2 + 8 - radius / 2;
+        }
+      else
+        {
+          x = allocation->width / 2 + 16 - radius;
+          y = allocation->height / 2 + 16 - radius;
+        }
+
+      /* Draw the background circle */
+      cairo_move_to (cr, x, y);
+      cairo_arc (cr, x, y, radius, 0.0, 2 * M_PI);
+      cairo_close_path (cr);
+      cairo_set_line_width (cr, 1.0);
+      cairo_set_source_rgba (cr, bg.red, bg.green, bg.blue, fg.alpha);
+      cairo_stroke_preserve (cr);
+      cairo_set_source_rgba (cr, fg.red, fg.green, fg.blue, fg.alpha);
+      cairo_fill (cr);
+
+      /* Draw the number of windows */
+      cairo_move_to (cr,
+                     x - (log_extent.width / 2),
+                     y - (log_extent.height / 2) + 0.25);
+      cairo_set_source_rgba (cr, bg.red, bg.green, bg.blue, fg.alpha);
+      pango_cairo_show_layout (cr, n_windows_layout);
+
+      g_object_unref (n_windows_layout);
+      g_free (n_windows);
+    }
+
+  return FALSE;
+}
+
+
+
+static gboolean
 xfce_tasklist_group_button_button_press_event (GtkWidget         *button,
                                                GdkEventButton    *event,
                                                XfceTasklistChild *group_child)
@@ -3673,8 +3758,6 @@ xfce_tasklist_group_button_name_changed (WnckClassGroup    *class_group,
                                          XfceTasklistChild *group_child)
 {
   const gchar       *name;
-  gchar             *label;
-  guint              n_windows;
   GSList            *li;
   XfceTasklistChild *child;
 
@@ -3683,22 +3766,17 @@ xfce_tasklist_group_button_name_changed (WnckClassGroup    *class_group,
   panel_return_if_fail (WNCK_IS_CLASS_GROUP (group_child->class_group));
 
   /* count number of windows in the menu */
-  for (li = group_child->windows, n_windows = 0; li != NULL; li = li->next)
+  for (li = group_child->windows, group_child->n_windows = 0; li != NULL; li = li->next)
     {
       child = li->data;
       if (gtk_widget_get_visible (child->button)
           && child->type == CHILD_TYPE_GROUP_MENU)
-        n_windows++;
+        group_child->n_windows++;
     }
 
   /* create the button label */
   name = wnck_class_group_get_name (group_child->class_group);
-  if (!panel_str_is_empty (name))
-    label = g_strdup_printf ("%s (%d)", name, n_windows);
-  else
-    label = g_strdup_printf ("(%d)", n_windows);
-  gtk_label_set_text (GTK_LABEL (group_child->label), label);
-  g_free (label);
+  gtk_label_set_text (GTK_LABEL (group_child->label), name);
 
   /* don't sort if there is no need to update the sorting (ie. only number
    * of windows is changed or button is not inserted in the tasklist yet */
@@ -3947,6 +4025,8 @@ xfce_tasklist_group_button_new (WnckClassGroup *class_group,
   child->class_group = class_group;
 
   gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (child->button)), "group-button");
+  g_signal_connect_after (G_OBJECT (child->button), "draw",
+      G_CALLBACK (xfce_tasklist_group_button_button_draw), child);
   /* note that the same signals should be in the proxy menu item too */
   g_signal_connect (G_OBJECT (child->button), "button-press-event",
       G_CALLBACK (xfce_tasklist_group_button_button_press_event), child);
