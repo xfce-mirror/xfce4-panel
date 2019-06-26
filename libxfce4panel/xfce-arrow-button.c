@@ -346,7 +346,7 @@ xfce_arrow_button_draw (GtkWidget *widget,
         gtk_render_arrow (context, cr, angle, x, y, width);
     }
 
-  return TRUE;
+  return FALSE;
 }
 
 
