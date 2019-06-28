@@ -3647,7 +3647,7 @@ xfce_tasklist_group_button_button_draw (GtkWidget         *widget,
          consistent alpha. */
       context = gtk_widget_get_style_context (widget);
       gtk_style_context_get_color (context, gtk_style_context_get_state (context), &fg);
-      gtk_style_context_get (context, GTK_STATE_FLAG_SELECTED,
+      gtk_style_context_get (context, gtk_style_context_get_state (context),
                              GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                              &bg, NULL);
 
