@@ -274,12 +274,13 @@
                 <property name="spacing">6</property>
                 <child>
                   <object class="GtkButton" id="panel-switch">
-                    <property name="label" translatable="yes">Backup and restore</property>
+                    <property name="label" translatable="yes">_Backup and restore</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="tooltip_text" translatable="yes">Switch between panel presets</property>
                     <property name="image">image10</property>
+                    <property name="use_underline">True</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -422,7 +423,8 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="margin_left">12</property>
-                                <property name="label" translatable="yes">Automatically hide the panel:</property>
+                                <property name="label" translatable="yes">Au_tomatically hide the panel:</property>
+                                <property name="use_underline">True</property>
                                 <property name="xalign">0</property>
                               </object>
                               <packing>
@@ -783,7 +785,8 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="margin_left">12</property>
-                            <property name="label" translatable="yes">Adjust size automatically</property>
+                            <property name="label" translatable="yes">Adjust size au_tomatically</property>
+                            <property name="use_underline">True</property>
                             <property name="xalign">0</property>
                           </object>
                           <packing>
@@ -819,7 +822,8 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="margin_left">12</property>
-                                    <property name="label" translatable="yes">Fixed icon size (pixels):</property>
+                                    <property name="label" translatable="yes">Fixed icon _size (pixels):</property>
+                                    <property name="use_underline">True</property>
                                     <property name="xalign">0</property>
                                   </object>
                                   <packing>
