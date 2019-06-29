@@ -6,13 +6,13 @@
 # Arianit Kukaj <akukaj@msn.com>, 2019
 # Besnik <besnik@programeshqip.org>, 2007
 # Besnik <besnik@programeshqip.org>, 2007
-# Besnik <besnik@programeshqip.org>, 2018
+# Besnik <besnik@programeshqip.org>, 2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-03 22:34+0100\n"
-"PO-Revision-Date: 2019-03-15 19:08+0000\n"
+"POT-Creation-Date: 2019-06-29 00:30+0200\n"
+"PO-Revision-Date: 2019-06-29 09:46+0000\n"
 "Last-Translator: Besnik <besnik@programeshqip.org>\n"
 "Language-Team: Albanian (http://www.transifex.com/xfce/xfce4-panel/language/sq/)\n"
 "MIME-Version: 1.0\n"
@@ -31,8 +31,7 @@ msgid ""
 "file"
 msgstr "Shtoni te paneli një nisës të ri bazuar në të dhëna të kësaj kartele desktop"
 
-#: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2692
+#: ../panel-preferences.desktop.in.h:1 ../panel/panel-window.c:2699
 msgid "Panel"
 msgstr "Panel"
 
@@ -41,64 +40,63 @@ msgid "Customize the panel"
 msgstr "Përshtateni panelin"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1079
+#: ../libxfce4panel/xfce-panel-plugin.c:1081
 #: ../panel/panel-preferences-dialog.c:1308
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Jeni i sigurt se doni të hiqet \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1084
+#: ../libxfce4panel/xfce-panel-plugin.c:1086
 #: ../panel/panel-preferences-dialog.c:1311
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Nëse e hiqni elemetin prej panelit, humb përgjithnjë."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1085 ../panel/panel-dialogs.c:163
+#: ../libxfce4panel/xfce-panel-plugin.c:1087 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1313
-msgid "Cancel"
-msgstr "Anuloje"
+#: ../plugins/applicationsmenu/applicationsmenu.c:593
+#: ../plugins/directorymenu/directorymenu.c:394
+msgid "_Cancel"
+msgstr "_Anuloje"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1086
-#: ../panel/panel-plugin-external.c:439
+#: ../libxfce4panel/xfce-panel-plugin.c:1088
+#: ../libxfce4panel/xfce-panel-plugin.c:1283
+#: ../panel/panel-plugin-external.c:441
 #: ../panel/panel-preferences-dialog.c:956
 #: ../panel/panel-preferences-dialog.c:1314
 #: ../plugins/launcher/launcher-dialog.c:855
-msgid "Remove"
-msgstr "Hiqe"
-
-#: ../libxfce4panel/xfce-panel-plugin.c:1227
-msgid "_Properties"
-msgstr "_Veti"
-
-#: ../libxfce4panel/xfce-panel-plugin.c:1242 ../panel/panel-window.c:2780
-msgid "_About"
-msgstr "_Rreth"
-
-#: ../libxfce4panel/xfce-panel-plugin.c:1257
-msgid "_Move"
-msgstr "_Zhvendose"
-
-#: ../libxfce4panel/xfce-panel-plugin.c:1281
 msgid "_Remove"
 msgstr "_Hiqe"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1302
+#: ../libxfce4panel/xfce-panel-plugin.c:1229
+msgid "_Properties"
+msgstr "_Veti"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2787
+msgid "_About"
+msgstr "_Rreth"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1259
+msgid "_Move"
+msgstr "_Zhvendose"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1304
 msgid "Pane_l"
 msgstr "_Panel"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1311 ../panel/panel-window.c:2705
+#: ../libxfce4panel/xfce-panel-plugin.c:1313 ../panel/panel-window.c:2712
 msgid "Add _New Items..."
 msgstr "Shtoni Elemente të _Rinj…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1326 ../panel/panel-window.c:2720
+#: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:2727
 msgid "Panel Pr_eferences..."
 msgstr "_Parapëlqime Paneli…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1347 ../panel/panel-window.c:2752
+#: ../libxfce4panel/xfce-panel-plugin.c:1349 ../panel/panel-window.c:2759
 msgid "Log _Out"
 msgstr "_Dilni"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1367 ../panel/panel-item-dialog.c:208
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2771
+#: ../libxfce4panel/xfce-panel-plugin.c:1369 ../panel/panel-item-dialog.c:208
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2778
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -111,7 +109,7 @@ msgstr "_Dilni"
 msgid "_Help"
 msgstr "_Ndihmë"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1382
+#: ../libxfce4panel/xfce-panel-plugin.c:1384
 msgid "About"
 msgstr "Rreth"
 
@@ -121,7 +119,7 @@ msgstr "Shfaq dialogun 'Parapëlqime Paneli'"
 
 #: ../panel/main.c:81 ../panel/main.c:82
 msgid "PANEL-NUMBER"
-msgstr ""
+msgstr "NUMËR-PANELI"
 
 #: ../panel/main.c:82
 msgid "Show the 'Add New Items' dialog"
@@ -164,72 +162,72 @@ msgid "Name %s lost on the message dbus, exiting."
 msgstr "Emri %s humbi në dbus mesazhi, po dilet."
 
 #. parse context options
-#: ../panel/main.c:262
+#: ../panel/main.c:268
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTE…]"
 
-#: ../panel/main.c:269
+#: ../panel/main.c:275
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Për përdorimin, shtypni '%s --help'."
 
-#: ../panel/main.c:288
+#: ../panel/main.c:294
 msgid "The Xfce development team. All rights reserved."
 msgstr "Ekipi zhvillues i Xfce-së. Tërë të drejtat të rezervuara."
 
-#: ../panel/main.c:289
+#: ../panel/main.c:295
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Ju lutemi, njoftoni të meta te <%s>."
 
-#: ../panel/main.c:355
+#: ../panel/main.c:361
 msgid "There is already a running instance"
 msgstr "Ka tashmë një instancë në xhirim e sipër"
 
 #. spawn ourselfs again
-#: ../panel/main.c:398
+#: ../panel/main.c:404
 msgid "Restarting..."
 msgstr "Po riniset…"
 
-#: ../panel/main.c:413
+#: ../panel/main.c:419
 msgid "Failed to show the preferences dialog"
 msgstr "S’u arrit të shfaqet dialogu i parapëlqimeve"
 
-#: ../panel/main.c:415
+#: ../panel/main.c:421
 msgid "Failed to show the add new items dialog"
 msgstr "S’u arrit të shfaqet dialogu i shtimit të elementëve të rinj"
 
-#: ../panel/main.c:417
+#: ../panel/main.c:423
 msgid "Failed to save the panel configuration"
 msgstr "S’u arrit të ruhet formësimi i panelit"
 
-#: ../panel/main.c:419
+#: ../panel/main.c:425
 msgid "Failed to add a plugin to the panel"
 msgstr "S’u arrit të shtohet shtojcë te paneli"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:427
 msgid "Failed to restart the panel"
 msgstr "S’u arrit të riniset paneli"
 
-#: ../panel/main.c:423
+#: ../panel/main.c:429
 msgid "Failed to quit the panel"
 msgstr "S’u arrit të braktiset paneli"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:431
 msgid "Failed to send D-Bus message"
 msgstr "S’u arrit të dërgohet mesazh D-Bus"
 
-#: ../panel/main.c:435 ../panel/panel-plugin-external.c:438
+#: ../panel/main.c:441
 msgid "Execute"
 msgstr "Përmbushe"
 
-#: ../panel/main.c:436
+#: ../panel/main.c:442
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Doni ta nisni panelin? Nëse po, sigurohuni se e ruani sesionin gjatë daljes, që paneli të niset vetvetiu herës tjetër kur bëni hyrjen."
 
-#: ../panel/main.c:439 ../panel/main.c:453
+#: ../panel/main.c:445 ../panel/main.c:459
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "S’u gjet instancë %s në xhirim e sipër"
@@ -303,9 +301,9 @@ msgstr "kredite përkthyesish"
 msgid "Add New Item"
 msgstr "Shtoni Element të Ri"
 
-#: ../panel/panel-dialogs.c:164
-msgid "Add"
-msgstr "Shto"
+#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:203
+msgid "_Add"
+msgstr "_Shtoje"
 
 #: ../panel/panel-dialogs.c:175
 msgid "Please choose a panel for the new plugin:"
@@ -334,16 +332,13 @@ msgstr "Shto Elemente të Rinj"
 msgid "Add new plugins to the panel"
 msgstr "Shtoni te paneli shtojca të reja"
 
-#: ../panel/panel-item-dialog.c:203
-msgid "_Add"
-msgstr "_Shtoje"
-
 #: ../panel/panel-item-dialog.c:214
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../plugins/actions/actions-dialog.glade.h:3
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:7
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+#: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/separator/separator-dialog.glade.h:5
 #: ../plugins/systray/systray-dialog.glade.h:2
@@ -360,18 +355,22 @@ msgstr "_Kërko:"
 msgid "Enter search phrase here"
 msgstr "Jepni këtu një togfjalësh kërkimi"
 
-#: ../panel/panel-plugin-external.c:432
+#: ../panel/panel-plugin-external.c:434
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "Shtojca \"%s\" e la papritmas panelin, doni të riniset?"
 
-#: ../panel/panel-plugin-external.c:434
+#: ../panel/panel-plugin-external.c:436
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
 msgstr "Shtojca u nis më shumë se një herë në %d sekondat e fundit. Nëse shtypni Ekzekutoje, paneli do të provojë të rinisë shtojcën, përndryshe do të hiqet përgjithmonë nga paneli."
+
+#: ../panel/panel-plugin-external.c:440
+msgid "_Execute"
+msgstr "_Kryeje"
 
 #: ../panel/panel-preferences-dialog.c:517
 msgid "Automatic"
@@ -457,6 +456,10 @@ msgstr "Ngjyrë e plotë"
 msgid "Background image"
 msgstr "Figurë sfond"
 
+#: ../panel/panel-preferences-dialog.glade.h:10
+msgid "Panel Preferences"
+msgstr "Parapëlqime Paneli"
+
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Add a new panel"
 msgstr "Shtoni panel të ri"
@@ -523,7 +526,7 @@ msgid "<b>Measurements</b>"
 msgstr "<b>Matje</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid "Row _Size (pixels):"
+msgid "Row _size (pixels):"
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:30
@@ -583,8 +586,8 @@ msgid "Adjust size automatically"
 msgstr "Ujdise vetvetiu madhësinë"
 
 #: ../panel/panel-preferences-dialog.glade.h:44
-msgid "Fixed Icon Size (pixels):"
-msgstr "Madhësi e Fiksuar Ikonash (piksel):"
+msgid "Fixed icon size (pixels):"
+msgstr "Madhësi e fiksuar ikone (piksel):"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "<b>Opacity</b>"
@@ -658,7 +661,6 @@ msgid "_New Game"
 msgstr "Lojë e _Re"
 
 #: ../panel/panel-tic-tac-toe.c:123
-#: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Close"
 msgstr "Mbylle"
 
@@ -682,7 +684,7 @@ msgstr "I sprovuar"
 msgid "Expert"
 msgstr "I regjur"
 
-#: ../panel/panel-window.c:2737
+#: ../panel/panel-window.c:2744
 msgid "_Lock Panel"
 msgstr "_Kyçe Panelin"
 
@@ -749,144 +751,144 @@ msgstr "Veprim"
 msgid "_Actions"
 msgstr "_Veprime"
 
-#: ../plugins/actions/actions.c:152
+#: ../plugins/actions/actions.c:153
 msgid "Log Out"
 msgstr "Dilni"
 
-#: ../plugins/actions/actions.c:153
+#: ../plugins/actions/actions.c:154
 msgid "_Log Out"
 msgstr "_Dilni"
 
-#: ../plugins/actions/actions.c:154
+#: ../plugins/actions/actions.c:155
 msgid "Are you sure you want to log out?"
 msgstr "Jeni i sigurt se doni të dilni?"
 
-#: ../plugins/actions/actions.c:155
+#: ../plugins/actions/actions.c:156
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Dilet për %d sekonda."
 
-#: ../plugins/actions/actions.c:160
+#: ../plugins/actions/actions.c:162
 msgid "Log Out..."
 msgstr "Dilni…"
 
-#: ../plugins/actions/actions.c:161
+#: ../plugins/actions/actions.c:163
 msgid "Log _Out..."
 msgstr "_Dilni…"
 
-#: ../plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:170
 msgid "Switch User"
 msgstr "Ndërroni Përdorues"
 
-#: ../plugins/actions/actions.c:168
+#: ../plugins/actions/actions.c:171
 msgid "_Switch User"
 msgstr "_Ndërroni Përdorues"
 
-#: ../plugins/actions/actions.c:174
+#: ../plugins/actions/actions.c:178
 msgid "Lock Screen"
 msgstr "Kyçe Ekranin"
 
-#: ../plugins/actions/actions.c:175
+#: ../plugins/actions/actions.c:179
 msgid "Loc_k Screen"
 msgstr "_Kyçe Ekranin"
 
-#: ../plugins/actions/actions.c:181
+#: ../plugins/actions/actions.c:186
 msgid "Hibernate"
 msgstr "Dimëroje"
 
-#: ../plugins/actions/actions.c:182
+#: ../plugins/actions/actions.c:187
 msgid "_Hibernate"
 msgstr "_Dimëroje"
 
-#: ../plugins/actions/actions.c:183
+#: ../plugins/actions/actions.c:188
 msgid "Do you want to suspend to disk?"
 msgstr "Doni të pezullohet disku?"
 
-#: ../plugins/actions/actions.c:184
+#: ../plugins/actions/actions.c:189
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Kompjuteri do të vihet në dimërim pas %d sekondash."
 
-#: ../plugins/actions/actions.c:189
+#: ../plugins/actions/actions.c:195
 msgid "Hybrid Sleep"
 msgstr ""
 
-#: ../plugins/actions/actions.c:190
+#: ../plugins/actions/actions.c:196
 msgid "_Hybrid Sleep"
 msgstr ""
 
-#: ../plugins/actions/actions.c:191
+#: ../plugins/actions/actions.c:197
 msgid "Do you want to hibernate and suspend the system?"
 msgstr "Doni të kalohet në dimërim dhe të pezullohet sistemi?"
 
-#: ../plugins/actions/actions.c:192
+#: ../plugins/actions/actions.c:198
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr "Kompjuteri do të kalohet në Dimërim dhe do të Pezullohet pas %d sekondash."
 
-#: ../plugins/actions/actions.c:197
+#: ../plugins/actions/actions.c:204
 msgid "Suspend"
 msgstr "Pezulloje"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:205
 msgid "Sus_pend"
 msgstr "_Pezulloje"
 
-#: ../plugins/actions/actions.c:199
+#: ../plugins/actions/actions.c:206
 msgid "Do you want to suspend to RAM?"
 msgstr "Doni të pezullohet RAM-i?"
 
-#: ../plugins/actions/actions.c:200
+#: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Kompjuteri do të pezullohet pas %d sekondash."
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:213
 msgid "Restart"
 msgstr "Rinis"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:214
 msgid "_Restart"
 msgstr "_Rinise"
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:215
 msgid "Are you sure you want to restart?"
 msgstr "Jeni i sigurt se doni të riniset?"
 
-#: ../plugins/actions/actions.c:208
+#: ../plugins/actions/actions.c:216
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Kompjuteri do të riniset pas %d sekondash."
 
-#: ../plugins/actions/actions.c:213
+#: ../plugins/actions/actions.c:222
 msgid "Shut Down"
 msgstr "Fike"
 
-#: ../plugins/actions/actions.c:214
+#: ../plugins/actions/actions.c:223
 msgid "Shut _Down"
 msgstr "_Fike"
 
-#: ../plugins/actions/actions.c:215
+#: ../plugins/actions/actions.c:224
 msgid "Are you sure you want to shut down?"
 msgstr "Jeni i sigurt se doni të fiket?"
 
-#: ../plugins/actions/actions.c:216
+#: ../plugins/actions/actions.c:225
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Kompjuteri do të fiket pas %d sekondash."
 
-#: ../plugins/actions/actions.c:615
+#: ../plugins/actions/actions.c:625
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Ndarës"
 
-#: ../plugins/actions/actions.c:1036
+#: ../plugins/actions/actions.c:1050
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "S’u arrit të xhirohet veprimi \"%s\""
 
-#: ../plugins/actions/actions.c:1203
+#: ../plugins/actions/actions.c:1225
 msgid "John Doe"
 msgstr "Gjin Gjoni"
 
@@ -970,23 +972,18 @@ msgstr "Kartelë Menuje"
 msgid "Applications"
 msgstr "Aplikacione"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:536
+#: ../plugins/applicationsmenu/applicationsmenu.c:591
 #: ../plugins/directorymenu/directorymenu.c:392
 msgid "Select An Icon"
 msgstr "Përzgjidhni Ikonë"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:538
-#: ../plugins/directorymenu/directorymenu.c:394
-msgid "_Cancel"
-msgstr "_Anuloje"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:539
+#: ../plugins/applicationsmenu/applicationsmenu.c:594
 #: ../plugins/directorymenu/directorymenu.c:395
 msgid "_OK"
 msgstr "_OK"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:576
-#: ../plugins/clock/clock.c:918 ../plugins/launcher/launcher.c:2396
+#: ../plugins/applicationsmenu/applicationsmenu.c:630
+#: ../plugins/clock/clock.c:912 ../plugins/launcher/launcher.c:2395
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Dështoi përmbushja e urdhrit \"%s\"."
@@ -1031,15 +1028,15 @@ msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
 
-#: ../plugins/clock/clock.c:177
+#: ../plugins/clock/clock.c:174
 msgid "Week %V"
 msgstr "Java %V"
 
-#: ../plugins/clock/clock.c:470
+#: ../plugins/clock/clock.c:464
 msgid "Failed to execute clock command"
 msgstr "Dështoi përmbushja e urdhrit clock"
 
-#: ../plugins/clock/clock.c:857
+#: ../plugins/clock/clock.c:851
 msgid "Custom Format"
 msgstr "Format Vetjak"
 
@@ -1458,11 +1455,11 @@ msgstr "Filtrim"
 msgid "Open launcher menu"
 msgstr "Hap menu nisësi"
 
-#: ../plugins/launcher/launcher.c:1622
+#: ../plugins/launcher/launcher.c:1619
 msgid "Unnamed Item"
 msgstr "Element i Paemërtuar"
 
-#: ../plugins/launcher/launcher.c:1795
+#: ../plugins/launcher/launcher.c:1792
 msgid "No items"
 msgstr "Pa elementë"
 
@@ -1582,15 +1579,15 @@ msgstr "Të mëtejshme"
 msgid "Program launcher with optional menu"
 msgstr "Nisës programi me menu opsionale"
 
-#: ../plugins/pager/pager.c:449 ../plugins/pager/pager-dialog.glade.h:7
+#: ../plugins/pager/pager.c:453 ../plugins/pager/pager-dialog.glade.h:7
 msgid "Workspace _Settings..."
 msgstr "_Rregullime Hapësirash Pune"
 
-#: ../plugins/pager/pager.c:537
+#: ../plugins/pager/pager.c:541
 msgid "Unable to open the workspace settings"
 msgstr "S’arrihet të hapen rregullime hapësire pune"
 
-#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:870
+#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:872
 #, c-format
 msgid "Workspace %d"
 msgstr "Hapësirë pune %d"
@@ -1647,15 +1644,15 @@ msgstr "_Zgjeroje"
 msgid "Adds a separator or space between panel items"
 msgstr "Shtoni një ndarës ose hapësirë mes elementësh paneli"
 
-#: ../plugins/showdesktop/showdesktop.c:216
+#: ../plugins/showdesktop/showdesktop.c:218
 msgid "Restore the minimized windows"
 msgstr "Rikthe dritare të _minimizuara"
 
-#: ../plugins/showdesktop/showdesktop.c:218
+#: ../plugins/showdesktop/showdesktop.c:220
 msgid "Minimize all open windows and show the desktop"
 msgstr "Minimizo tërë dritaret dhe shfaq desktopin"
 
-#: ../plugins/showdesktop/showdesktop.c:221
+#: ../plugins/showdesktop/showdesktop.c:223
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Shfaq Desktop"
@@ -1712,7 +1709,7 @@ msgstr "_Pastro Aplikacione të Njohur"
 msgid "Known Applications"
 msgstr "Aplikacione të Njohur"
 
-#: ../plugins/systray/systray-manager.c:403
+#: ../plugins/systray/systray-manager.c:405
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Dështoi pasja e përzgjedhjes së administratorit për skenën %d"
@@ -1810,23 +1807,23 @@ msgstr "Shfaq dritaret prej krejt _monitorëve"
 msgid "Show only _minimized windows"
 msgstr "Shfaq vetëm dritare të _minimizuara"
 
-#: ../plugins/tasklist/tasklist-widget.c:3554
+#: ../plugins/tasklist/tasklist-widget.c:3558
 msgid "Mi_nimize All"
 msgstr "Mi_nimizoji Krejt"
 
-#: ../plugins/tasklist/tasklist-widget.c:3562
+#: ../plugins/tasklist/tasklist-widget.c:3566
 msgid "Un_minimize All"
 msgstr "Hiqua të Tërave M_inimizimin"
 
-#: ../plugins/tasklist/tasklist-widget.c:3570
+#: ../plugins/tasklist/tasklist-widget.c:3574
 msgid "Ma_ximize All"
 msgstr "Ma_ksimizoji Krejt"
 
-#: ../plugins/tasklist/tasklist-widget.c:3578
+#: ../plugins/tasklist/tasklist-widget.c:3582
 msgid "_Unmaximize All"
 msgstr "Hiqua të Tërave M_aksimizimin"
 
-#: ../plugins/tasklist/tasklist-widget.c:3590
+#: ../plugins/tasklist/tasklist-widget.c:3594
 msgid "_Close All"
 msgstr "_Mbylli Krejt"
 
@@ -1834,28 +1831,28 @@ msgstr "_Mbylli Krejt"
 msgid "Switch between open windows using buttons"
 msgstr "Hidhu nga njëra dritare e hapur në tjetrën duke përdorur butona"
 
-#: ../plugins/windowmenu/windowmenu.c:668
+#: ../plugins/windowmenu/windowmenu.c:670
 msgid "Desktop"
 msgstr "Desktop"
 
-#: ../plugins/windowmenu/windowmenu.c:1267
+#: ../plugins/windowmenu/windowmenu.c:1269
 msgid "No Windows"
 msgstr "Pa Dritare"
 
-#: ../plugins/windowmenu/windowmenu.c:1282
+#: ../plugins/windowmenu/windowmenu.c:1284
 msgid "Urgent Windows"
 msgstr "Dritare Urgjente"
 
-#: ../plugins/windowmenu/windowmenu.c:1325
+#: ../plugins/windowmenu/windowmenu.c:1327
 msgid "Add Workspace"
 msgstr "Shtoni Hapësirë Pune"
 
-#: ../plugins/windowmenu/windowmenu.c:1348
+#: ../plugins/windowmenu/windowmenu.c:1350
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Hiq Hapësirë Pune \"%s\""
 
-#: ../plugins/windowmenu/windowmenu.c:1350
+#: ../plugins/windowmenu/windowmenu.c:1352
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Hiq Hapësirë pune %d"
