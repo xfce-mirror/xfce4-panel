@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-29 00:30+0200\n"
-"PO-Revision-Date: 2019-06-17 19:30+0000\n"
+"POT-Creation-Date: 2019-06-29 00:30+0200\n"
+"PO-Revision-Date: 2019-06-29 13:24+0000\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/xfce/xfce4-panel/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -33,8 +33,7 @@ msgid ""
 "file"
 msgstr "Tilføj en ny starter til panelet baseret på informationen fra denne skrivebordsfil"
 
-#: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2699
+#: ../panel-preferences.desktop.in.h:1 ../panel/panel-window.c:2699
 msgid "Panel"
 msgstr "Panel"
 
@@ -43,26 +42,26 @@ msgid "Customize the panel"
 msgstr "Tilpas panelet"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1078
+#: ../libxfce4panel/xfce-panel-plugin.c:1081
 #: ../panel/panel-preferences-dialog.c:1308
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Er du sikker på, at du vil fjerne \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1083
+#: ../libxfce4panel/xfce-panel-plugin.c:1086
 #: ../panel/panel-preferences-dialog.c:1311
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Hvis du fjerner elementet fra panelet vil det gå tabt permanent."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1084 ../panel/panel-dialogs.c:163
+#: ../libxfce4panel/xfce-panel-plugin.c:1087 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1313
 #: ../plugins/applicationsmenu/applicationsmenu.c:593
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "_Cancel"
 msgstr "_Annuller"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1085
-#: ../libxfce4panel/xfce-panel-plugin.c:1280
+#: ../libxfce4panel/xfce-panel-plugin.c:1088
+#: ../libxfce4panel/xfce-panel-plugin.c:1283
 #: ../panel/panel-plugin-external.c:441
 #: ../panel/panel-preferences-dialog.c:956
 #: ../panel/panel-preferences-dialog.c:1314
@@ -70,35 +69,35 @@ msgstr "_Annuller"
 msgid "_Remove"
 msgstr "F_jern"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1226
+#: ../libxfce4panel/xfce-panel-plugin.c:1229
 msgid "_Properties"
 msgstr "_Egenskaber"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1241 ../panel/panel-window.c:2787
+#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2787
 msgid "_About"
 msgstr "_Om"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1256
+#: ../libxfce4panel/xfce-panel-plugin.c:1259
 msgid "_Move"
 msgstr "_Flyt"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1301
+#: ../libxfce4panel/xfce-panel-plugin.c:1304
 msgid "Pane_l"
 msgstr "Pane_l"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:2712
+#: ../libxfce4panel/xfce-panel-plugin.c:1313 ../panel/panel-window.c:2712
 msgid "Add _New Items..."
 msgstr "Tilføj _nye elementer ..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1325 ../panel/panel-window.c:2727
+#: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:2727
 msgid "Panel Pr_eferences..."
 msgstr "Panel_præferencer ..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1346 ../panel/panel-window.c:2759
+#: ../libxfce4panel/xfce-panel-plugin.c:1349 ../panel/panel-window.c:2759
 msgid "Log _Out"
 msgstr "_Log ud"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1366 ../panel/panel-item-dialog.c:208
+#: ../libxfce4panel/xfce-panel-plugin.c:1369 ../panel/panel-item-dialog.c:208
 #: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2778
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
@@ -112,7 +111,7 @@ msgstr "_Log ud"
 msgid "_Help"
 msgstr "_Hjælp"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1381
+#: ../libxfce4panel/xfce-panel-plugin.c:1384
 msgid "About"
 msgstr "Om"
 
@@ -165,72 +164,72 @@ msgid "Name %s lost on the message dbus, exiting."
 msgstr "Navn %s tabt på meddelelses-dbus'en, afslutter."
 
 #. parse context options
-#: ../panel/main.c:262
+#: ../panel/main.c:268
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTER ...]"
 
-#: ../panel/main.c:269
+#: ../panel/main.c:275
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Skriv \"%s --help\" for anvendelse."
 
-#: ../panel/main.c:288
+#: ../panel/main.c:294
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce's udviklingshold. Alle rettigheder forbeholdes."
 
-#: ../panel/main.c:289
+#: ../panel/main.c:295
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Rapportér venligst fejl til <%s>."
 
-#: ../panel/main.c:355
+#: ../panel/main.c:361
 msgid "There is already a running instance"
 msgstr "Der findes allerede en kørende instans"
 
 #. spawn ourselfs again
-#: ../panel/main.c:398
+#: ../panel/main.c:404
 msgid "Restarting..."
 msgstr "Genstarter ..."
 
-#: ../panel/main.c:413
+#: ../panel/main.c:419
 msgid "Failed to show the preferences dialog"
 msgstr "Kunne ikke vise præferencer-dialogen"
 
-#: ../panel/main.c:415
+#: ../panel/main.c:421
 msgid "Failed to show the add new items dialog"
 msgstr "Kunne ikke vise dialogen tilføj nye elementer"
 
-#: ../panel/main.c:417
+#: ../panel/main.c:423
 msgid "Failed to save the panel configuration"
 msgstr "Kunne ikke gemme panelkonfigurationen"
 
-#: ../panel/main.c:419
+#: ../panel/main.c:425
 msgid "Failed to add a plugin to the panel"
 msgstr "Kunne ikke tilføje et plugin til panelet"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:427
 msgid "Failed to restart the panel"
 msgstr "Kunne ikke genstarte panelet"
 
-#: ../panel/main.c:423
+#: ../panel/main.c:429
 msgid "Failed to quit the panel"
 msgstr "Kunne ikke afslutte panelet"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:431
 msgid "Failed to send D-Bus message"
 msgstr "Kunne ikke sende D-bus-meddelelse"
 
-#: ../panel/main.c:435
+#: ../panel/main.c:441
 msgid "Execute"
 msgstr "Kør"
 
-#: ../panel/main.c:436
+#: ../panel/main.c:442
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Vil du starte panelet? Hvis du gør det skal du huske at gemme sessionen når du logger ud, så panelet startes automatisk næste gang du logger ind."
 
-#: ../panel/main.c:439 ../panel/main.c:453
+#: ../panel/main.c:445 ../panel/main.c:459
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Ingen kørende instans af %s blev fundet"
@@ -459,6 +458,10 @@ msgstr "Ensfarvet"
 msgid "Background image"
 msgstr "Baggrundsbillede"
 
+#: ../panel/panel-preferences-dialog.glade.h:10
+msgid "Panel Preferences"
+msgstr "Panelpræferencer"
+
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Add a new panel"
 msgstr "Tilføj et nyt panel"
@@ -525,8 +528,8 @@ msgid "<b>Measurements</b>"
 msgstr "<b>Målinger</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid "Row _Size (pixels):"
-msgstr "Række_højde (pixels):"
+msgid "Row _size (pixels):"
+msgstr "Række_størrelse (pixels):"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Num_ber of rows:"
@@ -585,7 +588,7 @@ msgid "Adjust size automatically"
 msgstr "Juster størrelse automatisk"
 
 #: ../panel/panel-preferences-dialog.glade.h:44
-msgid "Fixed Icon Size (pixels):"
+msgid "Fixed icon size (pixels):"
 msgstr "Fast ikonstørrelse (pixels):"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
@@ -1806,23 +1809,23 @@ msgstr "Vis vinduer fra alle _skærme"
 msgid "Show only _minimized windows"
 msgstr "Vis kun _minimerede vinduer"
 
-#: ../plugins/tasklist/tasklist-widget.c:3549
+#: ../plugins/tasklist/tasklist-widget.c:3558
 msgid "Mi_nimize All"
 msgstr "Mi_nimer alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3557
+#: ../plugins/tasklist/tasklist-widget.c:3566
 msgid "Un_minimize All"
 msgstr "Gen_dan alle minimerede"
 
-#: ../plugins/tasklist/tasklist-widget.c:3565
+#: ../plugins/tasklist/tasklist-widget.c:3574
 msgid "Ma_ximize All"
 msgstr "Maksi_mer alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3573
+#: ../plugins/tasklist/tasklist-widget.c:3582
 msgid "_Unmaximize All"
 msgstr "_Gendan alle maksimerede"
 
-#: ../plugins/tasklist/tasklist-widget.c:3585
+#: ../plugins/tasklist/tasklist-widget.c:3594
 msgid "_Close All"
 msgstr "_Luk alle"
 
