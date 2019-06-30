@@ -3643,13 +3643,17 @@ xfce_tasklist_group_button_button_draw (GtkWidget         *widget,
 
       gtk_widget_get_allocation (GTK_WIDGET (widget), allocation);
       cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
-      /* Get the theme colors. We use the foreground alpha for both fg and bg for
-         consistent alpha. */
+      /* Get the theme fg color for drawing the circle background. We then use a
+         simple calculation to decide whether the background color - which is ironically
+         used for the text - should be white or black.
+         We use the theme fg color alpha for the fg and the bg for consistency. */
       context = gtk_widget_get_style_context (widget);
       gtk_style_context_get_color (context, gtk_style_context_get_state (context), &fg);
-      gtk_style_context_get (context, gtk_style_context_get_state (context),
-                             GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
-                             &bg, NULL);
+      /* The magical number 1.5 is a third of the sum of the max rgb values */
+      if ((fg.red + fg.green + fg.blue) < 1.5)
+        gdk_rgba_parse (&bg, "#ffffff");
+      else
+        gdk_rgba_parse (&bg, "#000000");
 
       n_windows = g_strdup_printf ("%d", group_child->n_windows);
       n_windows_layout = gtk_widget_create_pango_layout (GTK_WIDGET (widget), n_windows);
