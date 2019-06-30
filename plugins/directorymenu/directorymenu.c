@@ -503,14 +503,16 @@ directory_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
 
 
 static void
-directory_menu_plugin_selection_done (GtkWidget *menu,
-                                      GtkWidget *button)
+directory_menu_plugin_selection_done (GtkWidget           *menu,
+                                      DirectoryMenuPlugin *plugin)
 {
-  panel_return_if_fail (button == NULL || GTK_IS_TOGGLE_BUTTON (button));
+  panel_return_if_fail (plugin->button == NULL || GTK_IS_TOGGLE_BUTTON (plugin->button));
   panel_return_if_fail (GTK_IS_MENU (menu));
 
-  if (button != NULL)
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), FALSE);
+  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), FALSE);
+
+  if (plugin->button != NULL)
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button), FALSE);
 
   /* delay destruction so we can handle the activate event first */
   panel_utils_destroy_later (GTK_WIDGET (menu));
@@ -1005,16 +1007,16 @@ directory_menu_plugin_menu (GtkWidget           *button,
 
   menu = gtk_menu_new ();
   g_signal_connect (G_OBJECT (menu), "deactivate",
-      G_CALLBACK (directory_menu_plugin_selection_done), button);
+      G_CALLBACK (directory_menu_plugin_selection_done), plugin);
 
   g_object_set_qdata_full (G_OBJECT (menu), menu_file,
                            g_object_ref (plugin->base_directory),
                            g_object_unref);
   directory_menu_plugin_menu_load (menu, plugin);
-
   gtk_menu_popup_at_widget (GTK_MENU (menu), button,
                             xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
                             ? GDK_GRAVITY_NORTH_EAST : GDK_GRAVITY_SOUTH_WEST,
                             GDK_GRAVITY_NORTH_WEST,
                             NULL);
+  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), TRUE);
 }
