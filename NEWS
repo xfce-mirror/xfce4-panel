@@ -1,3 +1,27 @@
+4.13.6
+======
+- Update default panel layout
+- Bugfixes:
+  - Retain original GDK_CORE_DEVICE_EVENTS setting for plugins (Bug
+  #15044)
+  - directorymenu: Fix plugin menu autohide behaviour
+  - prefs: Add missing mnemonic accelerators (Bug #15652)
+  - prefs: Improve window title (Bug #15653)
+  - prefs: Correct capitalization of labels (Bug #15651)
+  - arrow-button: Allow connect_after signals on draw
+  - tasklist: Draw grouped windows count indicator (Bug #10844)
+  - tasklist: Only base bg color of group indicator on Gtk theme
+  - tasklist: Avoid draw signal loop
+  - tasklist: Don't show actionsmenu in grouped windows (Bug #15622)
+  - Add more accelerators to dialog buttons (Bug #15490)
+  - AC_CONFIG_MACRO_DIR -> AC_CONFIG_MACRO_DIRS
+  - Fix typo in debug output
+- Translation updates:
+    Albanian, Bulgarian, Catalan, Chinese (China), Chinese (Taiwan),
+    Croatian, Czech, Danish, Dutch (Flemish), English (Australia), French,
+    German, Italian, Lithuanian, Polish, Portuguese, Portuguese
+    (Brazilian), Serbian, Spanish, Turkish
+
 4.13.5
 ======
 - Bugfixes:
