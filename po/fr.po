@@ -12,13 +12,13 @@
 # Jérôme Guelfucci <jeromeg@xfce.org>, 2009
 # Olivier Fourdan <fourdan@xfce.org>, 2004
 # Urien Desterres <urien.desterres@gmail.com>, 2014
-# Yannick Le Guen <leguen.yannick@gmail.com>, 2014-2015,2017-2018
+# Yannick Le Guen <leguen.yannick@gmail.com>, 2014-2015,2017-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-29 00:30+0200\n"
-"PO-Revision-Date: 2019-06-11 09:01+0000\n"
+"POT-Creation-Date: 2019-06-29 00:30+0200\n"
+"PO-Revision-Date: 2019-06-30 16:03+0000\n"
 "Last-Translator: Yannick Le Guen <leguen.yannick@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/xfce/xfce4-panel/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -37,8 +37,7 @@ msgid ""
 "file"
 msgstr "Ajouter un nouveau lanceur dans le tableau de bord avec les informations de ce fichier desktop"
 
-#: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2699
+#: ../panel-preferences.desktop.in.h:1 ../panel/panel-window.c:2699
 msgid "Panel"
 msgstr "Tableau de bord"
 
@@ -47,26 +46,26 @@ msgid "Customize the panel"
 msgstr "Personnaliser le tableau de bord"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1078
+#: ../libxfce4panel/xfce-panel-plugin.c:1081
 #: ../panel/panel-preferences-dialog.c:1308
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Voulez-vous vraiment supprimer « %s » ?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1083
+#: ../libxfce4panel/xfce-panel-plugin.c:1086
 #: ../panel/panel-preferences-dialog.c:1311
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Si vous supprimez l’élément du tableau de bord, il le sera définitivement."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1084 ../panel/panel-dialogs.c:163
+#: ../libxfce4panel/xfce-panel-plugin.c:1087 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1313
 #: ../plugins/applicationsmenu/applicationsmenu.c:593
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "_Cancel"
 msgstr "_Annuler"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1085
-#: ../libxfce4panel/xfce-panel-plugin.c:1280
+#: ../libxfce4panel/xfce-panel-plugin.c:1088
+#: ../libxfce4panel/xfce-panel-plugin.c:1283
 #: ../panel/panel-plugin-external.c:441
 #: ../panel/panel-preferences-dialog.c:956
 #: ../panel/panel-preferences-dialog.c:1314
@@ -74,35 +73,35 @@ msgstr "_Annuler"
 msgid "_Remove"
 msgstr "_Supprimer"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1226
+#: ../libxfce4panel/xfce-panel-plugin.c:1229
 msgid "_Properties"
 msgstr "_Propriétés"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1241 ../panel/panel-window.c:2787
+#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2787
 msgid "_About"
 msgstr "À _propos"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1256
+#: ../libxfce4panel/xfce-panel-plugin.c:1259
 msgid "_Move"
 msgstr "_Déplacer"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1301
+#: ../libxfce4panel/xfce-panel-plugin.c:1304
 msgid "Pane_l"
 msgstr "Tableau de _bord"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:2712
+#: ../libxfce4panel/xfce-panel-plugin.c:1313 ../panel/panel-window.c:2712
 msgid "Add _New Items..."
 msgstr "Ajouter de _nouveaux éléments…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1325 ../panel/panel-window.c:2727
+#: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:2727
 msgid "Panel Pr_eferences..."
 msgstr "Pr_éférences du tableau de bord…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1346 ../panel/panel-window.c:2759
+#: ../libxfce4panel/xfce-panel-plugin.c:1349 ../panel/panel-window.c:2759
 msgid "Log _Out"
 msgstr "Dé_connexion"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1366 ../panel/panel-item-dialog.c:208
+#: ../libxfce4panel/xfce-panel-plugin.c:1369 ../panel/panel-item-dialog.c:208
 #: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2778
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
@@ -116,7 +115,7 @@ msgstr "Dé_connexion"
 msgid "_Help"
 msgstr "_Aide"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1381
+#: ../libxfce4panel/xfce-panel-plugin.c:1384
 msgid "About"
 msgstr "À propos"
 
@@ -169,72 +168,72 @@ msgid "Name %s lost on the message dbus, exiting."
 msgstr "Nom %s perdu sur le message dbus, fermeture."
 
 #. parse context options
-#: ../panel/main.c:262
+#: ../panel/main.c:268
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTS…]"
 
-#: ../panel/main.c:269
+#: ../panel/main.c:275
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Taper « %s --help » pour plus d’aide."
 
-#: ../panel/main.c:288
+#: ../panel/main.c:294
 msgid "The Xfce development team. All rights reserved."
 msgstr "L’équipe de développement de Xfce. Tous droits réservés."
 
-#: ../panel/main.c:289
+#: ../panel/main.c:295
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Veuillez signaler les bogues à <%s>."
 
-#: ../panel/main.c:355
+#: ../panel/main.c:361
 msgid "There is already a running instance"
 msgstr "Il y a déjà un tableau de bord en cours d’exécution"
 
 #. spawn ourselfs again
-#: ../panel/main.c:398
+#: ../panel/main.c:404
 msgid "Restarting..."
 msgstr "Redémarrage…"
 
-#: ../panel/main.c:413
+#: ../panel/main.c:419
 msgid "Failed to show the preferences dialog"
 msgstr "Impossible d’afficher la fenêtre des préférences"
 
-#: ../panel/main.c:415
+#: ../panel/main.c:421
 msgid "Failed to show the add new items dialog"
 msgstr "Impossible d’afficher la boîte de dialogue « Ajouter de nouveaux éléments »."
 
-#: ../panel/main.c:417
+#: ../panel/main.c:423
 msgid "Failed to save the panel configuration"
 msgstr "Impossible d’enregistrer la configuration du tableau de bord"
 
-#: ../panel/main.c:419
+#: ../panel/main.c:425
 msgid "Failed to add a plugin to the panel"
 msgstr "Impossible d’ajouter un greffon dans le tableau de bord"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:427
 msgid "Failed to restart the panel"
 msgstr "Impossible de redémarrer le tableau de bord"
 
-#: ../panel/main.c:423
+#: ../panel/main.c:429
 msgid "Failed to quit the panel"
 msgstr "Impossible de quitter le tableau de bord"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:431
 msgid "Failed to send D-Bus message"
 msgstr "Impossible d’envoyer un message D-Bus"
 
-#: ../panel/main.c:435
+#: ../panel/main.c:441
 msgid "Execute"
 msgstr "Exécuter"
 
-#: ../panel/main.c:436
+#: ../panel/main.c:442
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Voulez-vous démarrer le tableau de bord ? Si oui, veillez à ce que la session soit enregistrée lors de la déconnexion, de sorte que le tableau de bord soit relancé à la prochaine ouverture de session."
 
-#: ../panel/main.c:439 ../panel/main.c:453
+#: ../panel/main.c:445 ../panel/main.c:459
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Aucune instance de %s n’a été trouvée"
@@ -463,6 +462,10 @@ msgstr "Couleur pleine"
 msgid "Background image"
 msgstr "Image d’arrière-plan"
 
+#: ../panel/panel-preferences-dialog.glade.h:10
+msgid "Panel Preferences"
+msgstr "Préférences du tableau de bord"
+
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Add a new panel"
 msgstr "Ajouter un nouveau tableau de bord"
@@ -529,7 +532,7 @@ msgid "<b>Measurements</b>"
 msgstr "<b>Mesures</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid "Row _Size (pixels):"
+msgid "Row _size (pixels):"
 msgstr "_Taille d’une ligne (pixels) :"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
@@ -589,8 +592,8 @@ msgid "Adjust size automatically"
 msgstr "Ajuster la taille automatiquement"
 
 #: ../panel/panel-preferences-dialog.glade.h:44
-msgid "Fixed Icon Size (pixels):"
-msgstr "Taille d’icônes fixe (en pixels) :"
+msgid "Fixed icon size (pixels):"
+msgstr "Taille des icônes fixe (pixels) :"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "<b>Opacity</b>"
@@ -1810,23 +1813,23 @@ msgstr "Afficher les fenêtres de tous les _moniteurs"
 msgid "Show only _minimized windows"
 msgstr "Afficher uniquement les fenêtres _réduites"
 
-#: ../plugins/tasklist/tasklist-widget.c:3549
+#: ../plugins/tasklist/tasklist-widget.c:3558
 msgid "Mi_nimize All"
 msgstr "Tout _réduire"
 
-#: ../plugins/tasklist/tasklist-widget.c:3557
+#: ../plugins/tasklist/tasklist-widget.c:3566
 msgid "Un_minimize All"
 msgstr "Tout _afficher"
 
-#: ../plugins/tasklist/tasklist-widget.c:3565
+#: ../plugins/tasklist/tasklist-widget.c:3574
 msgid "Ma_ximize All"
 msgstr "Tout _maximiser"
 
-#: ../plugins/tasklist/tasklist-widget.c:3573
+#: ../plugins/tasklist/tasklist-widget.c:3582
 msgid "_Unmaximize All"
 msgstr "Tout r_estaurer"
 
-#: ../plugins/tasklist/tasklist-widget.c:3585
+#: ../plugins/tasklist/tasklist-widget.c:3594
 msgid "_Close All"
 msgstr "Tout _fermer"
 
