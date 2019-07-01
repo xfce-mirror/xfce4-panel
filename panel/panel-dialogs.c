@@ -48,7 +48,7 @@ panel_dialogs_show_about_email_hook (GtkAboutDialog *dialog,
       /* open tic-tac-toe */
       panel_tic_tac_toe_show ();
       /* close the about dialog as its modality will otherwise prevent you from playing */
-      gtk_widget_destroy (GTK_WIDGET (dialog));
+      gtk_widget_hide (GTK_WIDGET (dialog));
       return TRUE;
     }
   else if (!gtk_show_uri_on_window (GTK_WINDOW (dialog),
