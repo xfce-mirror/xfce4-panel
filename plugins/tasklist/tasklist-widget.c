@@ -622,6 +622,48 @@ xfce_tasklist_init (XfceTasklist *tasklist)
 
 
 
+static GdkPixbuf *
+xfce_tasklist_get_window_icon_from_theme (WnckWindow *window,
+                                          GdkPixbuf  *fallback)
+{
+  GdkPixbuf    *pixbuf;
+  int           size = gdk_pixbuf_get_width (fallback);
+  GtkIconTheme *theme = gtk_icon_theme_get_default ();
+  const char   *name = wnck_window_get_class_instance_name (window);
+
+  /* return the most likely icon if found */
+  pixbuf = gtk_icon_theme_load_icon (theme, name, size, GTK_ICON_LOOKUP_FORCE_SIZE, NULL);
+
+  if (pixbuf)
+    return pixbuf;
+
+  return fallback;
+}
+
+
+
+static GdkPixbuf *
+xfce_tasklist_get_window_icon (WnckWindow *window,
+                               gboolean    show_labels,
+                               int         size,
+                               int         type)
+{
+  GdkPixbuf *pixbuf;
+
+  if (show_labels || type == CHILD_TYPE_GROUP_MENU || size <= 31)
+    pixbuf = wnck_window_get_mini_icon (window);
+  else
+    pixbuf = wnck_window_get_icon (window);
+
+  /* check if the icon is fallback, in that case just try with the theme */
+  if (wnck_window_get_icon_is_fallback (window))
+    pixbuf = xfce_tasklist_get_window_icon_from_theme (window, pixbuf);
+
+  return pixbuf;
+}
+
+
+
 static void
 xfce_tasklist_get_property (GObject    *object,
                             guint       prop_id,
@@ -2557,14 +2599,7 @@ xfce_tasklist_button_icon_changed (WnckWindow        *window,
   context = gtk_widget_get_style_context (GTK_WIDGET (child->icon));
 
   /* get the window icon */
-  if (tasklist->show_labels ||
-      child->type == CHILD_TYPE_GROUP_MENU)
-    pixbuf = wnck_window_get_mini_icon (window);
-  else if (icon_size <= 31)
-    pixbuf = wnck_window_get_mini_icon (window);
-  else
-    pixbuf = wnck_window_get_icon (window);
-
+  pixbuf = xfce_tasklist_get_window_icon (child->window, tasklist->show_labels, icon_size, child->type);
   /* leave when there is no valid pixbuf */
   if (G_UNLIKELY (pixbuf == NULL))
     {
@@ -3268,7 +3303,7 @@ xfce_tasklist_button_drag_begin (GtkWidget         *button,
     }
 #endif
 
-  pixbuf = wnck_window_get_icon (child->window);
+  pixbuf = xfce_tasklist_get_window_icon (child->window, FALSE, 32, CHILD_TYPE_WINDOW);
   if (G_LIKELY (pixbuf != NULL))
     gtk_drag_set_icon_pixbuf (context, pixbuf, 0, 0);
 }
