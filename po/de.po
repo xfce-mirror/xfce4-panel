@@ -12,14 +12,14 @@
 # Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>, 2010,2012
 # Simon Schneider <simon@schneiderimtal.de>, 2009
 # Tobias Bannert <tobannert@gmail.com>, 2013-2017
-# Vinzenz Vietzke <vinz@vinzv.de>, 2017-2018
+# Vinzenz Vietzke <vinz@vinzv.de>, 2017-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-29 00:30+0200\n"
-"PO-Revision-Date: 2019-06-29 16:30+0000\n"
-"Last-Translator: Andreas Eitel <github-aneitel@online.de>\n"
+"POT-Creation-Date: 2019-07-04 00:30+0200\n"
+"PO-Revision-Date: 2019-07-04 09:42+0000\n"
+"Last-Translator: Vinzenz Vietzke <vinz@vinzv.de>\n"
 "Language-Team: German (http://www.transifex.com/xfce/xfce4-panel/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -340,6 +340,7 @@ msgstr "Neue Erweiterungen zur Leiste hinzufügen"
 
 #: ../panel/panel-item-dialog.c:214
 #: ../panel/panel-preferences-dialog.glade.h:11
+#: ../panel/panel-tic-tac-toe.c:123
 #: ../plugins/actions/actions-dialog.glade.h:3
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:7
@@ -475,8 +476,8 @@ msgid "Remove the currently selected panel"
 msgstr "Die ausgewählte Leiste entfernen"
 
 #: ../panel/panel-preferences-dialog.glade.h:15
-msgid "Backup and restore"
-msgstr "Sichern und wiederherstellen"
+msgid "_Backup and restore"
+msgstr "_Sichern und Wiederherstellen"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Switch between panel presets"
@@ -518,8 +519,8 @@ msgid ""
 msgstr "Diese Option auswählen, wenn Sie möchten, dass vergrößerte Fenster den Platz hinter der Leiste benutzen sollen. Das funktioniert nur, wenn sich die Leiste am Rand des Bildschirms befindet."
 
 #: ../panel/panel-preferences-dialog.glade.h:25
-msgid "Automatically hide the panel:"
-msgstr "Leiste automatisch verbergen:"
+msgid "Au_tomatically hide the panel:"
+msgstr "Leiste au_tomatisch verstecken:"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "O_utput:"
@@ -588,12 +589,12 @@ msgid "<b>Icons</b>"
 msgstr "<b>Symbole</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:43
-msgid "Adjust size automatically"
-msgstr "Größe automatisch anpassen"
+msgid "Adjust size au_tomatically"
+msgstr "Größe au_tomatisch anpassen"
 
 #: ../panel/panel-preferences-dialog.glade.h:44
-msgid "Fixed icon size (pixels):"
-msgstr "Feste Symbolgröße (in Pixeln):"
+msgid "Fixed icon _size (pixels):"
+msgstr "Feste Symbol_größe (Pixel):"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "<b>Opacity</b>"
@@ -665,10 +666,6 @@ msgstr "_Objekte"
 #: ../panel/panel-tic-tac-toe.c:121
 msgid "_New Game"
 msgstr "_Neues Spiel"
-
-#: ../panel/panel-tic-tac-toe.c:123
-msgid "Close"
-msgstr "Schließen"
 
 #: ../panel/panel-tic-tac-toe.c:132
 msgid "_Level:"
@@ -1391,36 +1388,36 @@ msgstr "Wie spät ist es?"
 msgid "Directory Menu"
 msgstr "Verzeichnismenü"
 
-#: ../plugins/directorymenu/directorymenu.c:574
+#: ../plugins/directorymenu/directorymenu.c:576
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Anwendung »%s« konnte nicht gestartet werden"
 
-#: ../plugins/directorymenu/directorymenu.c:606
+#: ../plugins/directorymenu/directorymenu.c:608
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Inhaltstyp für »%s« konnte nicht erfragen werden"
 
-#: ../plugins/directorymenu/directorymenu.c:615
+#: ../plugins/directorymenu/directorymenu.c:617
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Keine Standardanwendung für »%s« gefunden"
 
-#: ../plugins/directorymenu/directorymenu.c:631
+#: ../plugins/directorymenu/directorymenu.c:633
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Vorgabeanwendung für »%s« konnte nicht gestartet werden"
 
-#: ../plugins/directorymenu/directorymenu.c:729
+#: ../plugins/directorymenu/directorymenu.c:731
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Bevorzugte Anwendung der Kategorie »%s« konnte nicht gestartet werden"
 
-#: ../plugins/directorymenu/directorymenu.c:803
+#: ../plugins/directorymenu/directorymenu.c:805
 msgid "Open Folder"
 msgstr "Ordner öffnen"
 
-#: ../plugins/directorymenu/directorymenu.c:818
+#: ../plugins/directorymenu/directorymenu.c:820
 msgid "Open in Terminal"
 msgstr "In Terminal öffnen"
 
@@ -1813,23 +1810,23 @@ msgstr "Fenster v_on allen Bildschirmen anzeigen"
 msgid "Show only _minimized windows"
 msgstr "N_ur verkleinerte Fenster anzeigen"
 
-#: ../plugins/tasklist/tasklist-widget.c:3558
+#: ../plugins/tasklist/tasklist-widget.c:3593
 msgid "Mi_nimize All"
 msgstr "_Alle verkleinern"
 
-#: ../plugins/tasklist/tasklist-widget.c:3566
+#: ../plugins/tasklist/tasklist-widget.c:3601
 msgid "Un_minimize All"
 msgstr "Alle _wiederherstellen"
 
-#: ../plugins/tasklist/tasklist-widget.c:3574
+#: ../plugins/tasklist/tasklist-widget.c:3609
 msgid "Ma_ximize All"
 msgstr "_Alle vergrößern"
 
-#: ../plugins/tasklist/tasklist-widget.c:3582
+#: ../plugins/tasklist/tasklist-widget.c:3617
 msgid "_Unmaximize All"
 msgstr "Alle _wiederherstellen"
 
-#: ../plugins/tasklist/tasklist-widget.c:3594
+#: ../plugins/tasklist/tasklist-widget.c:3629
 msgid "_Close All"
 msgstr "_Alle schließen"
 
