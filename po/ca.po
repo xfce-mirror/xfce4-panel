@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Ivà Burgos <debian.public@gmail.com>, 2007
+# jolupa <jolupameister@gmail.com>, 2019
 # Davidmp <medipas@gmail.com>, 2015,2019
 # Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2016-2019
 # Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2016
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-29 00:30+0200\n"
-"PO-Revision-Date: 2019-06-30 13:36+0000\n"
-"Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
+"POT-Creation-Date: 2019-07-04 00:30+0200\n"
+"PO-Revision-Date: 2019-07-04 11:33+0000\n"
+"Last-Translator: jolupa <jolupameister@gmail.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce4-panel/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -334,6 +335,7 @@ msgstr "Afegiu connectors nous al tauler"
 
 #: ../panel/panel-item-dialog.c:214
 #: ../panel/panel-preferences-dialog.glade.h:11
+#: ../panel/panel-tic-tac-toe.c:123
 #: ../plugins/actions/actions-dialog.glade.h:3
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:7
@@ -469,8 +471,8 @@ msgid "Remove the currently selected panel"
 msgstr "Suprimeix el tauler seleccionat actualment"
 
 #: ../panel/panel-preferences-dialog.glade.h:15
-msgid "Backup and restore"
-msgstr "Còpia de seguretat i restauració"
+msgid "_Backup and restore"
+msgstr "_Copia de Seguretat i Restauració"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Switch between panel presets"
@@ -512,8 +514,8 @@ msgid ""
 msgstr "Seleccioneu aquesta opció per maximitzar les finestres i que cobreixin el tauler. Això només funciona quan el tauler està adjuntat a una vora de la pantalla."
 
 #: ../panel/panel-preferences-dialog.glade.h:25
-msgid "Automatically hide the panel:"
-msgstr "Oculta automàticament el tauler:"
+msgid "Au_tomatically hide the panel:"
+msgstr "Amaga el tauler au_tomáticament"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "O_utput:"
@@ -582,12 +584,12 @@ msgid "<b>Icons</b>"
 msgstr "<b>Icones</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:43
-msgid "Adjust size automatically"
-msgstr "Ajusta la mida automàticament"
+msgid "Adjust size au_tomatically"
+msgstr "Ajusta la mida au_tomáticament"
 
 #: ../panel/panel-preferences-dialog.glade.h:44
-msgid "Fixed icon size (pixels):"
-msgstr "Mida de la icona fixa (píxels):"
+msgid "Fixed icon _size (pixels):"
+msgstr "_Mida de les icones fixa (píxels)"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "<b>Opacity</b>"
@@ -659,10 +661,6 @@ msgstr "Ele_ments"
 #: ../panel/panel-tic-tac-toe.c:121
 msgid "_New Game"
 msgstr "_Nou joc"
-
-#: ../panel/panel-tic-tac-toe.c:123
-msgid "Close"
-msgstr "Tanca"
 
 #: ../panel/panel-tic-tac-toe.c:132
 msgid "_Level:"
@@ -1385,36 +1383,36 @@ msgstr "Quina hora és?"
 msgid "Directory Menu"
 msgstr "Menú dels directoris"
 
-#: ../plugins/directorymenu/directorymenu.c:574
+#: ../plugins/directorymenu/directorymenu.c:576
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Ha fallat el llançament de l'aplicació «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:606
+#: ../plugins/directorymenu/directorymenu.c:608
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Ha fallat la consulta del tipus de contingut per «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:615
+#: ../plugins/directorymenu/directorymenu.c:617
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "No s'ha trobat una aplicació predeterminada per «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:631
+#: ../plugins/directorymenu/directorymenu.c:633
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Ha fallat el llançament de l'aplicació predeterminada per «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:729
+#: ../plugins/directorymenu/directorymenu.c:731
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Ha fallat l'execució de l'aplicació preferida per a la categoria «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:803
+#: ../plugins/directorymenu/directorymenu.c:805
 msgid "Open Folder"
 msgstr "Obre la carpeta"
 
-#: ../plugins/directorymenu/directorymenu.c:818
+#: ../plugins/directorymenu/directorymenu.c:820
 msgid "Open in Terminal"
 msgstr "Obre al terminal"
 
@@ -1807,23 +1805,23 @@ msgstr "Mostra les finestres de tots els mo_nitors"
 msgid "Show only _minimized windows"
 msgstr "Mostra només les finestres _minimitzades"
 
-#: ../plugins/tasklist/tasklist-widget.c:3558
+#: ../plugins/tasklist/tasklist-widget.c:3593
 msgid "Mi_nimize All"
 msgstr "Mi_nimitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3566
+#: ../plugins/tasklist/tasklist-widget.c:3601
 msgid "Un_minimize All"
 msgstr "De_sminimitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3574
+#: ../plugins/tasklist/tasklist-widget.c:3609
 msgid "Ma_ximize All"
 msgstr "Ma_ximitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3582
+#: ../plugins/tasklist/tasklist-widget.c:3617
 msgid "_Unmaximize All"
 msgstr "Des_maximitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3594
+#: ../plugins/tasklist/tasklist-widget.c:3629
 msgid "_Close All"
 msgstr "_Tanca-ho tot"
 
