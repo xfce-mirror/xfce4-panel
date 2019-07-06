@@ -37,7 +37,9 @@ EXTRA_DIST = \
 	$(desktop_in_files) \
 	intltool-extract.in \
 	intltool-merge.in \
-	intltool-update.in
+	intltool-update.in \
+	m4/introspection.m4 \
+	m4/vapigen.m4
 
 DISTCLEANFILES = \
 	$(desktop_DATA) \
