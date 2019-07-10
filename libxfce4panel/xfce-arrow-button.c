@@ -74,7 +74,7 @@ static void     xfce_arrow_button_get_property         (GObject               *o
                                                         guint                  prop_id,
                                                         GValue                *value,
                                                         GParamSpec            *pspec);
-static void     xfce_arrow_button_finalize             (GObject               *object);
+static void     xfce_arrow_button_dispose              (GObject               *object);
 #if GTK_CHECK_VERSION (3, 0, 0)
 static gboolean xfce_arrow_button_draw                 (GtkWidget             *widget,
                                                         cairo_t               *cr);
@@ -132,7 +132,7 @@ xfce_arrow_button_class_init (XfceArrowButtonClass * klass)
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->get_property = xfce_arrow_button_get_property;
   gobject_class->set_property = xfce_arrow_button_set_property;
-  gobject_class->finalize = xfce_arrow_button_finalize;
+  gobject_class->dispose = xfce_arrow_button_dispose;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
 #if GTK_CHECK_VERSION (3, 0, 0)
@@ -265,14 +265,17 @@ xfce_arrow_button_get_property (GObject    *object,
 
 
 static void
-xfce_arrow_button_finalize (GObject *object)
+xfce_arrow_button_dispose (GObject *object)
 {
   XfceArrowButton *button = XFCE_ARROW_BUTTON (object);
 
   if (button->priv->blinking_timeout_id != 0)
-    g_source_remove (button->priv->blinking_timeout_id);
+    {
+      g_source_remove (button->priv->blinking_timeout_id);
+      button->priv->blinking_timeout_id = 0;
+    }
 
-  (*G_OBJECT_CLASS (xfce_arrow_button_parent_class)->finalize) (object);
+  (*G_OBJECT_CLASS (xfce_arrow_button_parent_class)->dispose) (object);
 }
 
 
