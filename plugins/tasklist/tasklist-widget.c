@@ -1946,6 +1946,8 @@ xfce_tasklist_window_removed (WnckScreen   *screen,
           break;
         }
     }
+
+    gtk_widget_queue_resize (GTK_WIDGET (tasklist));
 }
 
 
