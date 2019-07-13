@@ -54,6 +54,12 @@ static void     pager_plugin_set_property                 (GObject           *ob
                                                            GParamSpec        *pspec);
 static gboolean pager_plugin_scroll_event                 (GtkWidget         *widget,
                                                            GdkEventScroll    *event);
+static void     pager_plugin_drag_begin_event             (GtkWidget         *widget,
+                                                           GdkDragContext    *context,
+                                                           gpointer           user_data);
+static void     pager_plugin_drag_end_event               (GtkWidget         *widget,
+                                                           GdkDragContext    *context,
+                                                           gpointer           user_data);
 static void     pager_plugin_screen_changed               (GtkWidget         *widget,
                                                            GdkScreen         *previous_screen);
 static void     pager_plugin_construct                    (XfcePanelPlugin   *panel_plugin);
@@ -361,6 +367,32 @@ pager_plugin_scroll_event (GtkWidget      *widget,
 
 
 static void
+pager_plugin_drag_begin_event (GtkWidget      *widget,
+                               GdkDragContext *context,
+                               gpointer        user_data)
+{
+  PagerPlugin *plugin = user_data;
+
+  panel_return_if_fail (XFCE_IS_PAGER_PLUGIN (plugin));
+  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), TRUE);
+}
+
+
+
+static void
+pager_plugin_drag_end_event (GtkWidget      *widget,
+                             GdkDragContext *context,
+                             gpointer        user_data)
+{
+  PagerPlugin *plugin = user_data;
+
+  panel_return_if_fail (XFCE_IS_PAGER_PLUGIN (plugin));
+  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), FALSE);
+}
+
+
+
+static void
 pager_plugin_screen_layout_changed (PagerPlugin *plugin)
 {
   XfcePanelPluginMode mode;
@@ -391,6 +423,10 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin)
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       plugin->ratio = (gfloat) gdk_screen_width () / (gfloat) gdk_screen_height ();
 G_GNUC_END_IGNORE_DEPRECATIONS
+      g_signal_connect_after (G_OBJECT (plugin->pager), "drag-begin",
+                              G_CALLBACK (pager_plugin_drag_begin_event), plugin);
+      g_signal_connect_after (G_OBJECT (plugin->pager), "drag-end",
+                              G_CALLBACK (pager_plugin_drag_end_event), plugin);
     }
   else
     {
