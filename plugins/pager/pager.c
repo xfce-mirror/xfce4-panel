@@ -401,6 +401,10 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 
   gtk_container_add (GTK_CONTAINER (plugin), plugin->pager);
   gtk_widget_show (plugin->pager);
+
+  /* Poke the style-updated signal to set the correct background color for the newly
+     created widget. Otherwise it may sometimes end up transparent. */
+  pager_plugin_style_updated (plugin->pager, NULL);
 }
 
 
