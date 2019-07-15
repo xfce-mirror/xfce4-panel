@@ -527,6 +527,9 @@ directory_menu_plugin_menu_sort (gconstpointer a,
   GFileType type_a = g_file_info_get_file_type (G_FILE_INFO (a));
   GFileType type_b = g_file_info_get_file_type (G_FILE_INFO (b));
   gboolean  hidden_a, hidden_b;
+  const gchar *display_name_a, *display_name_b;
+  gchar *sort_display_name_a, *sort_display_name_b;
+  gint sort_value;
 
   if (type_a != type_b)
     {
@@ -544,8 +547,15 @@ directory_menu_plugin_menu_sort (gconstpointer a,
   if (hidden_a != hidden_b)
     return hidden_a ? -1 : 1;
 
-  return g_utf8_collate (g_file_info_get_display_name (G_FILE_INFO (a)),
-                         g_file_info_get_display_name (G_FILE_INFO (b)));
+  display_name_a = g_file_info_get_display_name (G_FILE_INFO (a));
+  display_name_b = g_file_info_get_display_name (G_FILE_INFO (b));
+  sort_display_name_a = g_utf8_collate_key_for_filename (display_name_a, -1);
+  sort_display_name_b = g_utf8_collate_key_for_filename (display_name_b, -1);
+  sort_value = strcmp (sort_display_name_a,
+                       sort_display_name_b);
+  g_free (sort_display_name_a);
+  g_free (sort_display_name_b);
+  return sort_value;
 }
 
 
