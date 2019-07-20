@@ -5,14 +5,15 @@
 # Translators:
 # nab <nab@mail.by>, 2004
 # nab <nab@mail.by>, 2004
-# Zmicer Turok <zmicerturok@gmail.com>, 2018-2019
+# Zmicer Turok <nashtlumach@gmail.com>, 2019
+# Zmicer Turok <nashtlumach@gmail.com>, 2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-03 22:34+0100\n"
-"PO-Revision-Date: 2019-01-22 11:01+0000\n"
-"Last-Translator: Zmicer Turok <zmicerturok@gmail.com>\n"
+"POT-Creation-Date: 2019-07-04 00:30+0200\n"
+"PO-Revision-Date: 2019-07-20 19:22+0000\n"
+"Last-Translator: Zmicer Turok <nashtlumach@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/xfce/xfce4-panel/language/be/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,8 +31,7 @@ msgid ""
 "file"
 msgstr "Дадаць новы запускальнік"
 
-#: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2692
+#: ../panel-preferences.desktop.in.h:1 ../panel/panel-window.c:2699
 msgid "Panel"
 msgstr "Панэль"
 
@@ -40,64 +40,63 @@ msgid "Customize the panel"
 msgstr "Наладзіць панэль"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1079
+#: ../libxfce4panel/xfce-panel-plugin.c:1081
 #: ../panel/panel-preferences-dialog.c:1308
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Сапраўды жадаеце выдаліць \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1084
+#: ../libxfce4panel/xfce-panel-plugin.c:1086
 #: ../panel/panel-preferences-dialog.c:1311
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Калі вы выдаліце гэты элемент з панэлі, то гэта будзе назаўжды."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1085 ../panel/panel-dialogs.c:163
+#: ../libxfce4panel/xfce-panel-plugin.c:1087 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1313
-msgid "Cancel"
-msgstr "Скасаваць"
+#: ../plugins/applicationsmenu/applicationsmenu.c:593
+#: ../plugins/directorymenu/directorymenu.c:394
+msgid "_Cancel"
+msgstr "_Скасаваць"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1086
-#: ../panel/panel-plugin-external.c:439
+#: ../libxfce4panel/xfce-panel-plugin.c:1088
+#: ../libxfce4panel/xfce-panel-plugin.c:1283
+#: ../panel/panel-plugin-external.c:441
 #: ../panel/panel-preferences-dialog.c:956
 #: ../panel/panel-preferences-dialog.c:1314
 #: ../plugins/launcher/launcher-dialog.c:855
-msgid "Remove"
-msgstr "Выдаліць"
-
-#: ../libxfce4panel/xfce-panel-plugin.c:1227
-msgid "_Properties"
-msgstr "_Уласцівасці"
-
-#: ../libxfce4panel/xfce-panel-plugin.c:1242 ../panel/panel-window.c:2780
-msgid "_About"
-msgstr "_Пра праграму"
-
-#: ../libxfce4panel/xfce-panel-plugin.c:1257
-msgid "_Move"
-msgstr "Пера_мясціць"
-
-#: ../libxfce4panel/xfce-panel-plugin.c:1281
 msgid "_Remove"
 msgstr "_Выдаліць"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1302
+#: ../libxfce4panel/xfce-panel-plugin.c:1229
+msgid "_Properties"
+msgstr "_Уласцівасці"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2787
+msgid "_About"
+msgstr "_Пра праграму"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1259
+msgid "_Move"
+msgstr "Пера_мясціць"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1304
 msgid "Pane_l"
 msgstr "Панэль"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1311 ../panel/panel-window.c:2705
+#: ../libxfce4panel/xfce-panel-plugin.c:1313 ../panel/panel-window.c:2712
 msgid "Add _New Items..."
 msgstr "Дадаць новы элемент..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1326 ../panel/panel-window.c:2720
+#: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:2727
 msgid "Panel Pr_eferences..."
 msgstr "Налады панэлі..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1347 ../panel/panel-window.c:2752
+#: ../libxfce4panel/xfce-panel-plugin.c:1349 ../panel/panel-window.c:2759
 msgid "Log _Out"
 msgstr "Скончыць _сеанс"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1367 ../panel/panel-item-dialog.c:208
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2771
+#: ../libxfce4panel/xfce-panel-plugin.c:1369 ../panel/panel-item-dialog.c:208
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2778
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -110,7 +109,7 @@ msgstr "Скончыць _сеанс"
 msgid "_Help"
 msgstr "_Даведка"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1382
+#: ../libxfce4panel/xfce-panel-plugin.c:1384
 msgid "About"
 msgstr "Пра праграму"
 
@@ -163,72 +162,72 @@ msgid "Name %s lost on the message dbus, exiting."
 msgstr "Назва %s згубленая ў паведамленні dbus, выхад."
 
 #. parse context options
-#: ../panel/main.c:262
+#: ../panel/main.c:268
 msgid "[ARGUMENTS...]"
 msgstr "[АРГУМЕНТЫ...]"
 
-#: ../panel/main.c:269
+#: ../panel/main.c:275
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Увядзіце \"%s --help\" для даведкі."
 
-#: ../panel/main.c:288
+#: ../panel/main.c:294
 msgid "The Xfce development team. All rights reserved."
 msgstr "Каманда распрацоўкі Xfce. Усе правы абароненыя."
 
-#: ../panel/main.c:289
+#: ../panel/main.c:295
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Калі ласка, паведамляйце пра памылкі на <%s>."
 
-#: ../panel/main.c:355
+#: ../panel/main.c:361
 msgid "There is already a running instance"
 msgstr "На гэтым экране ўжо прысутнічае гэтая панэль"
 
 #. spawn ourselfs again
-#: ../panel/main.c:398
+#: ../panel/main.c:404
 msgid "Restarting..."
 msgstr "Перазапуск…"
 
-#: ../panel/main.c:413
+#: ../panel/main.c:419
 msgid "Failed to show the preferences dialog"
 msgstr "Не атрымалася паказаць акно налад"
 
-#: ../panel/main.c:415
+#: ../panel/main.c:421
 msgid "Failed to show the add new items dialog"
 msgstr "Не атрымалася паказаць акно дадання новага элемента"
 
-#: ../panel/main.c:417
+#: ../panel/main.c:423
 msgid "Failed to save the panel configuration"
 msgstr "Не атрымалася захаваць налады панэлі"
 
-#: ../panel/main.c:419
+#: ../panel/main.c:425
 msgid "Failed to add a plugin to the panel"
 msgstr "Не атрымалася дадаць убудову на панэль"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:427
 msgid "Failed to restart the panel"
 msgstr "Не атрымалася перазапусціць панэль"
 
-#: ../panel/main.c:423
+#: ../panel/main.c:429
 msgid "Failed to quit the panel"
 msgstr "Не атрымалася закрыць панэль"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:431
 msgid "Failed to send D-Bus message"
 msgstr "Не атрымалася адправіць паведамленне праз D-Bus"
 
-#: ../panel/main.c:435 ../panel/panel-plugin-external.c:438
+#: ../panel/main.c:441
 msgid "Execute"
 msgstr "Запусціць"
 
-#: ../panel/main.c:436
+#: ../panel/main.c:442
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Хочаце запусціць панэль? Калі вы захаваеце сеанс пры выхадзе, панэль пачне аўтаматычна запускацца падчас уваходу ў сістэму."
 
-#: ../panel/main.c:439 ../panel/main.c:453
+#: ../panel/main.c:445 ../panel/main.c:459
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Не знойдзена запушчанай %s"
@@ -304,9 +303,9 @@ msgstr "Zmicer Turok zmicerturok@gmail.com"
 msgid "Add New Item"
 msgstr "Дадаць новы элемент"
 
-#: ../panel/panel-dialogs.c:164
-msgid "Add"
-msgstr "Дадаць"
+#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:203
+msgid "_Add"
+msgstr "_Дадаць"
 
 #: ../panel/panel-dialogs.c:175
 msgid "Please choose a panel for the new plugin:"
@@ -335,16 +334,14 @@ msgstr "Дадаць новыя элементы"
 msgid "Add new plugins to the panel"
 msgstr "Дадаць новыя ўбудовы на панэль"
 
-#: ../panel/panel-item-dialog.c:203
-msgid "_Add"
-msgstr "_Дадаць"
-
 #: ../panel/panel-item-dialog.c:214
 #: ../panel/panel-preferences-dialog.glade.h:11
+#: ../panel/panel-tic-tac-toe.c:123
 #: ../plugins/actions/actions-dialog.glade.h:3
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:7
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+#: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/separator/separator-dialog.glade.h:5
 #: ../plugins/systray/systray-dialog.glade.h:2
@@ -361,18 +358,22 @@ msgstr "_Пошук:"
 msgid "Enter search phrase here"
 msgstr "Увядзіце фразу для пошуку"
 
-#: ../panel/panel-plugin-external.c:432
+#: ../panel/panel-plugin-external.c:434
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "Убудова \"%s\" нечакана знікла з панэлі, перазапусціць яе?"
 
-#: ../panel/panel-plugin-external.c:434
+#: ../panel/panel-plugin-external.c:436
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
 msgstr "Убудова была перазапушчана некалькі разоў цягам %d секунд. Калі вы націснеце \"Запусціць\", панэль паспрабуе запусціць яе зноў, інакш яна будзе выдалена з панэлі."
+
+#: ../panel/panel-plugin-external.c:440
+msgid "_Execute"
+msgstr "_Запуск"
 
 #: ../panel/panel-preferences-dialog.c:517
 msgid "Automatic"
@@ -458,6 +459,10 @@ msgstr "Суцэльны колер"
 msgid "Background image"
 msgstr "Выява фону"
 
+#: ../panel/panel-preferences-dialog.glade.h:10
+msgid "Panel Preferences"
+msgstr "Налады панэлі"
+
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Add a new panel"
 msgstr "Дадаць новую панэль"
@@ -467,8 +472,8 @@ msgid "Remove the currently selected panel"
 msgstr "Выдаліць абраную панэль"
 
 #: ../panel/panel-preferences-dialog.glade.h:15
-msgid "Backup and restore"
-msgstr "Стварэнне рэзервовай копіі і аднаўленне"
+msgid "_Backup and restore"
+msgstr "_Стварэнне рэзервовай копіі і аднаўленне"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Switch between panel presets"
@@ -510,8 +515,8 @@ msgid ""
 msgstr "Абярыце гэты параметр калі вы хочаце, каб разгорнутыя вокны мясціліся пад панэллю. Панэль мусіць быць прымацавана да края экрану."
 
 #: ../panel/panel-preferences-dialog.glade.h:25
-msgid "Automatically hide the panel:"
-msgstr "Аўтаматычна хаваць панэль:"
+msgid "Au_tomatically hide the panel:"
+msgstr "_Аўтаматычна хаваць панэль:"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "O_utput:"
@@ -524,8 +529,8 @@ msgid "<b>Measurements</b>"
 msgstr "<b>Вымярэнні</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid "Row _Size (pixels):"
-msgstr "Вышыня _радка (у пікселях):"
+msgid "Row _size (pixels):"
+msgstr "Памер _радка ў пікселях:"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Num_ber of rows:"
@@ -580,12 +585,12 @@ msgid "<b>Icons</b>"
 msgstr "<b>Значкі</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:43
-msgid "Adjust size automatically"
-msgstr "Наладжваць памер аўтаматычна"
+msgid "Adjust size au_tomatically"
+msgstr "Аўтаматычна _падладжваць памер"
 
 #: ../panel/panel-preferences-dialog.glade.h:44
-msgid "Fixed Icon Size (pixels):"
-msgstr "Фіксаваны памер значка (пікселі):"
+msgid "Fixed icon _size (pixels):"
+msgstr "Фіксаваны памер _значкоў у пікселях"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "<b>Opacity</b>"
@@ -658,11 +663,6 @@ msgstr "Эле_менты"
 msgid "_New Game"
 msgstr "_Новая гульня"
 
-#: ../panel/panel-tic-tac-toe.c:123
-#: ../plugins/launcher/launcher-dialog.glade.h:17
-msgid "Close"
-msgstr "Закрыць"
-
 #: ../panel/panel-tic-tac-toe.c:132
 msgid "_Level:"
 msgstr "_Узровень:"
@@ -683,7 +683,7 @@ msgstr "Дасведчаны"
 msgid "Expert"
 msgstr "Эксперт"
 
-#: ../panel/panel-window.c:2737
+#: ../panel/panel-window.c:2744
 msgid "_Lock Panel"
 msgstr "_Заблакаваць панэль"
 
@@ -750,144 +750,144 @@ msgstr "Дзеянне"
 msgid "_Actions"
 msgstr "_Дзеянні"
 
-#: ../plugins/actions/actions.c:152
+#: ../plugins/actions/actions.c:153
 msgid "Log Out"
 msgstr "Выйсці"
 
-#: ../plugins/actions/actions.c:153
+#: ../plugins/actions/actions.c:154
 msgid "_Log Out"
 msgstr "_Выйсці"
 
-#: ../plugins/actions/actions.c:154
+#: ../plugins/actions/actions.c:155
 msgid "Are you sure you want to log out?"
 msgstr "Сапраўды хочаце выйсці?"
 
-#: ../plugins/actions/actions.c:155
+#: ../plugins/actions/actions.c:156
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Сеанс завершыцца праз %d секунд."
 
-#: ../plugins/actions/actions.c:160
+#: ../plugins/actions/actions.c:162
 msgid "Log Out..."
 msgstr "Скончыць сеанс…"
 
-#: ../plugins/actions/actions.c:161
+#: ../plugins/actions/actions.c:163
 msgid "Log _Out..."
 msgstr "_Выйсці..."
 
-#: ../plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:170
 msgid "Switch User"
 msgstr "Пераключыць карыстальніка"
 
-#: ../plugins/actions/actions.c:168
+#: ../plugins/actions/actions.c:171
 msgid "_Switch User"
 msgstr "_Пераключыць карыстальніка"
 
-#: ../plugins/actions/actions.c:174
+#: ../plugins/actions/actions.c:178
 msgid "Lock Screen"
 msgstr "Заблакаваць экран"
 
-#: ../plugins/actions/actions.c:175
+#: ../plugins/actions/actions.c:179
 msgid "Loc_k Screen"
 msgstr "Забла_каваць экран"
 
-#: ../plugins/actions/actions.c:181
+#: ../plugins/actions/actions.c:186
 msgid "Hibernate"
 msgstr "Усыпіць"
 
-#: ../plugins/actions/actions.c:182
+#: ../plugins/actions/actions.c:187
 msgid "_Hibernate"
 msgstr "_Усыпіць"
 
-#: ../plugins/actions/actions.c:183
+#: ../plugins/actions/actions.c:188
 msgid "Do you want to suspend to disk?"
 msgstr "Усыпіць, захаваўшы даныя на дыск?"
 
-#: ../plugins/actions/actions.c:184
+#: ../plugins/actions/actions.c:189
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Кампутар засне праз %d секунд."
 
-#: ../plugins/actions/actions.c:189
+#: ../plugins/actions/actions.c:195
 msgid "Hybrid Sleep"
 msgstr "Гібрыдны рэжым усыплення"
 
-#: ../plugins/actions/actions.c:190
+#: ../plugins/actions/actions.c:196
 msgid "_Hybrid Sleep"
 msgstr "_Гібрыдны рэжым усыплення"
 
-#: ../plugins/actions/actions.c:191
+#: ../plugins/actions/actions.c:197
 msgid "Do you want to hibernate and suspend the system?"
 msgstr "Сапраўды хочаце ўсыпіць і прыпыніць сістэму?"
 
-#: ../plugins/actions/actions.c:192
+#: ../plugins/actions/actions.c:198
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr "Кампутар усыпіцца і прыпыніцца праз %d секунд."
 
-#: ../plugins/actions/actions.c:197
+#: ../plugins/actions/actions.c:204
 msgid "Suspend"
 msgstr "Прыпыніць"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:205
 msgid "Sus_pend"
 msgstr "Пры_пыніць"
 
-#: ../plugins/actions/actions.c:199
+#: ../plugins/actions/actions.c:206
 msgid "Do you want to suspend to RAM?"
 msgstr "Усыпіць, захаваўшы даныя ў RAM?"
 
-#: ../plugins/actions/actions.c:200
+#: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Кампутар прыпыніцца праз %d секунд."
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:213
 msgid "Restart"
 msgstr "Перазапуск"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:214
 msgid "_Restart"
 msgstr "Пераза_пусьціць"
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:215
 msgid "Are you sure you want to restart?"
 msgstr "Сапраўды хочаце перазапусціць кампутар?"
 
-#: ../plugins/actions/actions.c:208
+#: ../plugins/actions/actions.c:216
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Кампутар перазапусціцца праз %d секунд."
 
-#: ../plugins/actions/actions.c:213
+#: ../plugins/actions/actions.c:222
 msgid "Shut Down"
 msgstr "Выключыць"
 
-#: ../plugins/actions/actions.c:214
+#: ../plugins/actions/actions.c:223
 msgid "Shut _Down"
 msgstr "Вык_лючыць"
 
-#: ../plugins/actions/actions.c:215
+#: ../plugins/actions/actions.c:224
 msgid "Are you sure you want to shut down?"
 msgstr "Сапраўды хочаце выключыць кампутар?"
 
-#: ../plugins/actions/actions.c:216
+#: ../plugins/actions/actions.c:225
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Кампутар выключыцца праз %d  секунд."
 
-#: ../plugins/actions/actions.c:615
+#: ../plugins/actions/actions.c:625
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Падзяляльнік"
 
-#: ../plugins/actions/actions.c:1036
+#: ../plugins/actions/actions.c:1050
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Не атрымалася выканаць дзеянне \"%s\""
 
-#: ../plugins/actions/actions.c:1203
+#: ../plugins/actions/actions.c:1225
 msgid "John Doe"
 msgstr "Алесь Сямашка"
 
@@ -971,23 +971,18 @@ msgstr "Файл меню"
 msgid "Applications"
 msgstr "Праграмы"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:536
+#: ../plugins/applicationsmenu/applicationsmenu.c:591
 #: ../plugins/directorymenu/directorymenu.c:392
 msgid "Select An Icon"
 msgstr "Абраць значок"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:538
-#: ../plugins/directorymenu/directorymenu.c:394
-msgid "_Cancel"
-msgstr "_Скасаваць"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:539
+#: ../plugins/applicationsmenu/applicationsmenu.c:594
 #: ../plugins/directorymenu/directorymenu.c:395
 msgid "_OK"
 msgstr "_Добра"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:576
-#: ../plugins/clock/clock.c:918 ../plugins/launcher/launcher.c:2396
+#: ../plugins/applicationsmenu/applicationsmenu.c:630
+#: ../plugins/clock/clock.c:912 ../plugins/launcher/launcher.c:2395
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Не атрымалася запусціць загад \"%s\"."
@@ -1032,15 +1027,15 @@ msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
 
-#: ../plugins/clock/clock.c:177
+#: ../plugins/clock/clock.c:174
 msgid "Week %V"
 msgstr "Тыдзень %V"
 
-#: ../plugins/clock/clock.c:470
+#: ../plugins/clock/clock.c:464
 msgid "Failed to execute clock command"
 msgstr "Не атрымалася запусціць гадзіннік"
 
-#: ../plugins/clock/clock.c:857
+#: ../plugins/clock/clock.c:851
 msgid "Custom Format"
 msgstr "Адвольны фармат"
 
@@ -1389,36 +1384,36 @@ msgstr "Колькі зараз часу?"
 msgid "Directory Menu"
 msgstr "Каталог"
 
-#: ../plugins/directorymenu/directorymenu.c:574
+#: ../plugins/directorymenu/directorymenu.c:576
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Не атрымалася запусціць праграму \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:606
+#: ../plugins/directorymenu/directorymenu.c:608
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Немагчыма атрымаць тып змесціва для \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:615
+#: ../plugins/directorymenu/directorymenu.c:617
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Прадвызначанай праграмы для \"%s\" не знойдзена"
 
-#: ../plugins/directorymenu/directorymenu.c:631
+#: ../plugins/directorymenu/directorymenu.c:633
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Не атрымалася запусціць прадвызначаную для \"%s\" праграму"
 
-#: ../plugins/directorymenu/directorymenu.c:729
+#: ../plugins/directorymenu/directorymenu.c:731
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Не атрымалася запусціць пераважную праграму для \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:803
+#: ../plugins/directorymenu/directorymenu.c:805
 msgid "Open Folder"
 msgstr "Адкрыць каталог"
 
-#: ../plugins/directorymenu/directorymenu.c:818
+#: ../plugins/directorymenu/directorymenu.c:820
 msgid "Open in Terminal"
 msgstr "Адкрыць у тэрмінале"
 
@@ -1459,11 +1454,11 @@ msgstr "Фільтраванне"
 msgid "Open launcher menu"
 msgstr "Адкрыць меню запуску"
 
-#: ../plugins/launcher/launcher.c:1622
+#: ../plugins/launcher/launcher.c:1619
 msgid "Unnamed Item"
 msgstr "Элемент без назвы"
 
-#: ../plugins/launcher/launcher.c:1795
+#: ../plugins/launcher/launcher.c:1792
 msgid "No items"
 msgstr "Без элементаў"
 
@@ -1583,15 +1578,15 @@ msgstr "Дадаткова"
 msgid "Program launcher with optional menu"
 msgstr "Запускальнік праграм з наладжваемым меню"
 
-#: ../plugins/pager/pager.c:449 ../plugins/pager/pager-dialog.glade.h:7
+#: ../plugins/pager/pager.c:453 ../plugins/pager/pager-dialog.glade.h:7
 msgid "Workspace _Settings..."
 msgstr "_Налады працоўных прастораў..."
 
-#: ../plugins/pager/pager.c:537
+#: ../plugins/pager/pager.c:541
 msgid "Unable to open the workspace settings"
 msgstr "Не атрымалася адкрыць налады працоўных прастораў"
 
-#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:870
+#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:872
 #, c-format
 msgid "Workspace %d"
 msgstr "Працоўная прастора %d"
@@ -1648,15 +1643,15 @@ msgstr "Па_шырыць"
 msgid "Adds a separator or space between panel items"
 msgstr "Дадаць падзяляльнік альбо прагал паміж элементамі панэлі"
 
-#: ../plugins/showdesktop/showdesktop.c:216
+#: ../plugins/showdesktop/showdesktop.c:218
 msgid "Restore the minimized windows"
 msgstr "Аднаўленне згорнутых акон"
 
-#: ../plugins/showdesktop/showdesktop.c:218
+#: ../plugins/showdesktop/showdesktop.c:220
 msgid "Minimize all open windows and show the desktop"
 msgstr "Згарнуць усе вокны і паказаць працоўны стол"
 
-#: ../plugins/showdesktop/showdesktop.c:221
+#: ../plugins/showdesktop/showdesktop.c:223
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Паказваць працоўны стол"
@@ -1713,7 +1708,7 @@ msgstr "Ачыс_ціць спіс вядомых праграм"
 msgid "Known Applications"
 msgstr "Вядомыя праграмы"
 
-#: ../plugins/systray/systray-manager.c:403
+#: ../plugins/systray/systray-manager.c:405
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Немагчыма запусціць кіраўніка вылучэння для экрану %d"
@@ -1811,23 +1806,23 @@ msgstr "Паказваць вокны з усіх мані_тораў"
 msgid "Show only _minimized windows"
 msgstr "Паказваць толькі _згорнутыя вокны"
 
-#: ../plugins/tasklist/tasklist-widget.c:3554
+#: ../plugins/tasklist/tasklist-widget.c:3593
 msgid "Mi_nimize All"
 msgstr "З_гарнуць усе"
 
-#: ../plugins/tasklist/tasklist-widget.c:3562
+#: ../plugins/tasklist/tasklist-widget.c:3601
 msgid "Un_minimize All"
 msgstr "Раз_гарнуць усё"
 
-#: ../plugins/tasklist/tasklist-widget.c:3570
+#: ../plugins/tasklist/tasklist-widget.c:3609
 msgid "Ma_ximize All"
 msgstr "Раз_гарнуць усе"
 
-#: ../plugins/tasklist/tasklist-widget.c:3578
+#: ../plugins/tasklist/tasklist-widget.c:3617
 msgid "_Unmaximize All"
 msgstr "_Згарнуць усё"
 
-#: ../plugins/tasklist/tasklist-widget.c:3590
+#: ../plugins/tasklist/tasklist-widget.c:3629
 msgid "_Close All"
 msgstr "_Закрыць усё"
 
@@ -1835,28 +1830,28 @@ msgstr "_Закрыць усё"
 msgid "Switch between open windows using buttons"
 msgstr "Пераключацца паміж адкрытымі вокнамі праз кнопкі"
 
-#: ../plugins/windowmenu/windowmenu.c:668
+#: ../plugins/windowmenu/windowmenu.c:670
 msgid "Desktop"
 msgstr "Працоўны стол"
 
-#: ../plugins/windowmenu/windowmenu.c:1267
+#: ../plugins/windowmenu/windowmenu.c:1269
 msgid "No Windows"
 msgstr "Без акон"
 
-#: ../plugins/windowmenu/windowmenu.c:1282
+#: ../plugins/windowmenu/windowmenu.c:1284
 msgid "Urgent Windows"
 msgstr "Тэрміновыя вокны"
 
-#: ../plugins/windowmenu/windowmenu.c:1325
+#: ../plugins/windowmenu/windowmenu.c:1327
 msgid "Add Workspace"
 msgstr "Дадаць працоўную прастору"
 
-#: ../plugins/windowmenu/windowmenu.c:1348
+#: ../plugins/windowmenu/windowmenu.c:1350
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Выдаліць працоўную прастору \"%s\""
 
-#: ../plugins/windowmenu/windowmenu.c:1350
+#: ../plugins/windowmenu/windowmenu.c:1352
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Выдаліць прастору %d"
