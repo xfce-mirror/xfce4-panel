@@ -2662,6 +2662,7 @@ xfce_tasklist_button_name_changed (WnckWindow        *window,
     }
 
   gtk_label_set_text (GTK_LABEL (child->label), name);
+  gtk_label_set_ellipsize (GTK_LABEL (child->label), child->tasklist->ellipsize_mode);
 
   g_free (label);
 
@@ -4328,8 +4329,6 @@ xfce_tasklist_update_orientation (XfceTasklist *tasklist)
           gtk_label_set_xalign (GTK_LABEL (child->label), 0.0);
           gtk_label_set_yalign (GTK_LABEL (child->label), 0.5);
           gtk_label_set_angle (GTK_LABEL (child->label), 0);
-          gtk_label_set_ellipsize (GTK_LABEL (child->label),
-                                   child->tasklist->ellipsize_mode);
         }
       else
         {
@@ -4337,7 +4336,6 @@ xfce_tasklist_update_orientation (XfceTasklist *tasklist)
           gtk_label_set_yalign (GTK_LABEL (child->label), 0.0);
           gtk_label_set_xalign (GTK_LABEL (child->label), 0.5);
           gtk_label_set_angle (GTK_LABEL (child->label), 270);
-          gtk_label_set_ellipsize (GTK_LABEL (child->label), PANGO_ELLIPSIZE_NONE);
         }
     }
 
