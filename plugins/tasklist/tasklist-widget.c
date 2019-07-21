@@ -3705,13 +3705,26 @@ xfce_tasklist_group_button_button_draw (GtkWidget         *widget,
       radius = log_extent.height / 2;
       if (group_child->tasklist->show_labels || icon_size <= 31)
         {
-          y = allocation->height / 2 + radius;
-          if ((y + radius) > allocation->height)
-            y = allocation->height - radius;
-          if (group_child->tasklist->show_labels)
-            x = 24 - radius;
+          if (xfce_tasklist_vertical (group_child->tasklist))
+            {
+              x = allocation->width / 2 + radius;
+              if ((x + radius) > allocation->width)
+                x = allocation->width - radius;
+              if (group_child->tasklist->show_labels)
+                y = 24 - radius;
+              else
+                y = allocation->height / 2 + 8 - radius / 2;
+            }
           else
-            x = allocation->width / 2 + 8 - radius / 2;
+            {
+              y = allocation->height / 2 + radius;
+              if ((y + radius) > allocation->height)
+                y = allocation->height - radius;
+              if (group_child->tasklist->show_labels)
+                x = 24 - radius;
+              else
+                x = allocation->width / 2 + 8 - radius / 2;
+            }
         }
       else
         {
