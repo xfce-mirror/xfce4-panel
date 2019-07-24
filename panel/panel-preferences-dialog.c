@@ -218,7 +218,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   connect_signal ("panel-combobox", "changed", panel_preferences_dialog_panel_combobox_changed);
 
   /* check if xfce4-panel-profiles or panel-switch are installed and if either is show the button */
-  object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-switch");
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-profiles");
   path_old = g_find_program_in_path ("xfpanel-switch");
   path_new = g_find_program_in_path ("xfce4-panel-profiles");
   if (path_new == NULL && path_old == NULL)
