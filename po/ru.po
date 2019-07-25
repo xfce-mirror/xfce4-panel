@@ -14,7 +14,7 @@
 # Artem Zolochevskiy <artem.zolochevskiy@gmail.com>, 2011
 # Denis Koryavov <dkoryavov@yandex.ru>, 2009-2010
 # Dmitrij Smirnov <other@igus.lv>, 2010-2011
-# AlexanderFilev, 2014
+# Alexander Filev <avfill@outlook.com>, 2014
 # Igor <f2404@yandex.ru>, 2016-2019
 # Poul Ionkin <wizzard@nmg.lv>, 2003
 # Sergey Alyoshin <alyoshin.s@gmail.com>, 2014-2016
@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-01 00:30+0200\n"
-"PO-Revision-Date: 2019-07-01 13:37+0000\n"
+"POT-Creation-Date: 2019-07-25 06:30+0200\n"
+"PO-Revision-Date: 2019-07-25 17:11+0000\n"
 "Last-Translator: Igor <f2404@yandex.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/xfce/xfce4-panel/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -348,6 +348,7 @@ msgstr "Добавьте на панель новые модули"
 
 #: ../panel/panel-item-dialog.c:214
 #: ../panel/panel-preferences-dialog.glade.h:11
+#: ../panel/panel-tic-tac-toe.c:123
 #: ../plugins/actions/actions-dialog.glade.h:3
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:7
@@ -475,208 +476,208 @@ msgid "Panel Preferences"
 msgstr "Параметры панели"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
-msgid "Add a new panel"
-msgstr "Добавить новую панель"
+msgid "Profiles:"
+msgstr "Профили:"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
-msgid "Remove the currently selected panel"
-msgstr "Удалить выбранную панель"
-
-#: ../panel/panel-preferences-dialog.glade.h:15
 msgid "_Backup and restore"
 msgstr "_Резервное копирование и восстановление"
 
-#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Switch between panel presets"
 msgstr "Переключить между настройками панелей"
 
+#: ../panel/panel-preferences-dialog.glade.h:16
+msgid "Add a new panel"
+msgstr "Добавить новую панель"
+
 #: ../panel/panel-preferences-dialog.glade.h:17
+msgid "Remove the currently selected panel"
+msgstr "Удалить выбранную панель"
+
+#: ../panel/panel-preferences-dialog.glade.h:18
 msgid "<b>General</b>"
 msgstr "<b>Общие</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:19
 msgid "M_ode:"
 msgstr "Ре_жим:"
 
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Span mo_nitors"
 msgstr "Объединить _мониторы"
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Выберите этот параметр для расширения панели на несколько мониторов."
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:22
 msgid "_Lock panel"
 msgstr "Зак_репить панель"
 
-#: ../panel/panel-preferences-dialog.glade.h:22
+#: ../panel/panel-preferences-dialog.glade.h:23
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr "Выберите этот параметр для скрытия ручек и закрепления позиции панели."
 
-#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Don't _reserve space on borders"
 msgstr "_Не резервировать место у краёв"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr "Отметьте это параметр, если вы хотите, чтобы развёрнутые окна занимали пространство позади панели. Чтобы это работало, панель должна быть прикреплена к краю экрана."
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
 msgstr "А_втоматически скрывать панель:"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "O_utput:"
 msgstr "В_ывод:"
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid "<b>Measurements</b>"
 msgstr "<b>Размеры</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Row _size (pixels):"
 msgstr "_Высота строки (пикс.):"
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Num_ber of rows:"
 msgstr "Коли_чество строк:"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:33
 #, no-c-format
 msgid "L_ength (%):"
 msgstr "_Длина (%):"
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "A_utomatically increase the length"
 msgstr "Автоматически уве_личивать длину"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr "Выберите этот параметр для автоматического увеличения длины панели при недостатке места для модулей."
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "D_isplay"
 msgstr "_Экран"
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "<b>Background</b>"
 msgstr "<b>Фон</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:38
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Style:"
 msgstr "С_тиль:"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "C_olor:"
 msgstr "_Цвет:"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Pick a Panel Color"
 msgstr "Выберите цвет панели"
 
-#: ../panel/panel-preferences-dialog.glade.h:40
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_File:"
 msgstr "_Файл:"
 
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:42
 msgid "Select A Background Image"
 msgstr "Выберите фоновое изображение"
 
-#: ../panel/panel-preferences-dialog.glade.h:42
+#: ../panel/panel-preferences-dialog.glade.h:43
 msgid "<b>Icons</b>"
 msgstr "<b>Значки</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:43
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Adjust size au_tomatically"
 msgstr "Автоматически _подгонять размер"
 
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Fixed icon _size (pixels):"
 msgstr "Фиксированный _размер значков (пикс.):"
 
-#: ../panel/panel-preferences-dialog.glade.h:45
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid "<b>Opacity</b>"
 msgstr "<b>Непрозрачность</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:46
+#: ../panel/panel-preferences-dialog.glade.h:47
 msgid "Configure..."
 msgstr "Настроить..."
 
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:48
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr "<b>Композитный режим отключен</b>\nЧтобы использовать прозрачность, включите композитный режим в диспетчере окон."
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:50
+#: ../panel/panel-preferences-dialog.glade.h:51
 msgid "_Enter:"
 msgstr "При _наведении:"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:52
+#: ../panel/panel-preferences-dialog.glade.h:53
 msgid "_Leave:"
 msgstr "_Стандартная:"
 
-#: ../panel/panel-preferences-dialog.glade.h:53
+#: ../panel/panel-preferences-dialog.glade.h:54
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "Степень прозрачности, когда указатель мыши не находится над панелью: 0 — полностью прозрачно, 100 — непрозрачно."
 
-#: ../panel/panel-preferences-dialog.glade.h:54
+#: ../panel/panel-preferences-dialog.glade.h:55
 msgid "Appeara_nce"
 msgstr "Вне_шний вид"
 
-#: ../panel/panel-preferences-dialog.glade.h:55
+#: ../panel/panel-preferences-dialog.glade.h:56
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 #: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Move currently selected item up by one row"
 msgstr "Переместить выбранный элемент на одну строку вверх"
 
-#: ../panel/panel-preferences-dialog.glade.h:56
+#: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 #: ../plugins/systray/systray-dialog.glade.h:9
 msgid "Move currently selected item down by one row"
 msgstr "Переместить выбранный элемент на одну строку вниз"
 
-#: ../panel/panel-preferences-dialog.glade.h:57
+#: ../panel/panel-preferences-dialog.glade.h:58
 msgid "Add new item to this panel"
 msgstr "Добавить новый элемент на эту панель"
 
-#: ../panel/panel-preferences-dialog.glade.h:58
+#: ../panel/panel-preferences-dialog.glade.h:59
 msgid "Remove currently selected item"
 msgstr "Удалить выбранный элемент"
 
-#: ../panel/panel-preferences-dialog.glade.h:59
+#: ../panel/panel-preferences-dialog.glade.h:60
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Edit the currently selected item"
 msgstr "Редактировать выбранный элемент"
 
-#: ../panel/panel-preferences-dialog.glade.h:60
+#: ../panel/panel-preferences-dialog.glade.h:61
 msgid "Show about information of the currently selected item"
 msgstr "Показать сведения о выбранном элементе"
 
-#: ../panel/panel-preferences-dialog.glade.h:61
+#: ../panel/panel-preferences-dialog.glade.h:62
 msgid "Ite_ms"
 msgstr "Эле_менты"
 
 #: ../panel/panel-tic-tac-toe.c:121
 msgid "_New Game"
 msgstr "_Новая игра"
-
-#: ../panel/panel-tic-tac-toe.c:123
-msgid "Close"
-msgstr "Закрыть"
 
 #: ../panel/panel-tic-tac-toe.c:132
 msgid "_Level:"
@@ -1399,36 +1400,36 @@ msgstr "Который час?"
 msgid "Directory Menu"
 msgstr "Меню каталога"
 
-#: ../plugins/directorymenu/directorymenu.c:576
+#: ../plugins/directorymenu/directorymenu.c:586
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Не удалось запустить приложение «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:608
+#: ../plugins/directorymenu/directorymenu.c:618
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Не удалось получить тип содержимого для «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:617
+#: ../plugins/directorymenu/directorymenu.c:627
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Не найдено приложение по умолчанию для «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:633
+#: ../plugins/directorymenu/directorymenu.c:643
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Не удалось запустить приложение по умолчанию для «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:731
+#: ../plugins/directorymenu/directorymenu.c:741
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Не удалось запустить предпочитаемое приложение для категории «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:805
+#: ../plugins/directorymenu/directorymenu.c:815
 msgid "Open Folder"
 msgstr "Открыть папку"
 
-#: ../plugins/directorymenu/directorymenu.c:820
+#: ../plugins/directorymenu/directorymenu.c:830
 msgid "Open in Terminal"
 msgstr "Открыть в терминале"
 
@@ -1593,11 +1594,11 @@ msgstr "Расширенные"
 msgid "Program launcher with optional menu"
 msgstr "Кнопка запуска приложений с дополнительным меню"
 
-#: ../plugins/pager/pager.c:453 ../plugins/pager/pager-dialog.glade.h:7
+#: ../plugins/pager/pager.c:457 ../plugins/pager/pager-dialog.glade.h:7
 msgid "Workspace _Settings..."
 msgstr "_Настройки рабочих мест..."
 
-#: ../plugins/pager/pager.c:541
+#: ../plugins/pager/pager.c:545
 msgid "Unable to open the workspace settings"
 msgstr "Не удалось открыть настройки рабочих мест"
 
@@ -1658,15 +1659,15 @@ msgstr "_Расширять"
 msgid "Adds a separator or space between panel items"
 msgstr "Добавляет разделитель или промежуток между элементами панели"
 
-#: ../plugins/showdesktop/showdesktop.c:218
+#: ../plugins/showdesktop/showdesktop.c:242
 msgid "Restore the minimized windows"
 msgstr "Восстановить свёрнутые окна"
 
-#: ../plugins/showdesktop/showdesktop.c:220
+#: ../plugins/showdesktop/showdesktop.c:244
 msgid "Minimize all open windows and show the desktop"
 msgstr "Скрыть окна и показать рабочий стол"
 
-#: ../plugins/showdesktop/showdesktop.c:223
+#: ../plugins/showdesktop/showdesktop.c:247
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Показать рабочий стол"
@@ -1821,23 +1822,23 @@ msgstr "Показывать окна со всех _мониторов"
 msgid "Show only _minimized windows"
 msgstr "Показывать только с_вёрнутые окна"
 
-#: ../plugins/tasklist/tasklist-widget.c:3558
+#: ../plugins/tasklist/tasklist-widget.c:3594
 msgid "Mi_nimize All"
 msgstr "Св_ернуть все"
 
-#: ../plugins/tasklist/tasklist-widget.c:3566
+#: ../plugins/tasklist/tasklist-widget.c:3602
 msgid "Un_minimize All"
 msgstr "Отменить сво_рачивание всех"
 
-#: ../plugins/tasklist/tasklist-widget.c:3574
+#: ../plugins/tasklist/tasklist-widget.c:3610
 msgid "Ma_ximize All"
 msgstr "Раз_вернуть все"
 
-#: ../plugins/tasklist/tasklist-widget.c:3582
+#: ../plugins/tasklist/tasklist-widget.c:3618
 msgid "_Unmaximize All"
 msgstr "Отменить _разворачивание всех"
 
-#: ../plugins/tasklist/tasklist-widget.c:3594
+#: ../plugins/tasklist/tasklist-widget.c:3630
 msgid "_Close All"
 msgstr "_Закрыть все"
 
