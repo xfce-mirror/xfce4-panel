@@ -21,8 +21,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-01 00:30+0200\n"
-"PO-Revision-Date: 2019-07-01 05:43+0000\n"
+"POT-Creation-Date: 2019-07-25 06:30+0200\n"
+"PO-Revision-Date: 2019-07-25 13:02+0000\n"
 "Last-Translator: No Ne\n"
 "Language-Team: Polish (http://www.transifex.com/xfce/xfce4-panel/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -346,6 +346,7 @@ msgstr "Dodaje nowe aplety do panelu"
 
 #: ../panel/panel-item-dialog.c:214
 #: ../panel/panel-preferences-dialog.glade.h:11
+#: ../panel/panel-tic-tac-toe.c:123
 #: ../plugins/actions/actions-dialog.glade.h:3
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:7
@@ -473,208 +474,208 @@ msgid "Panel Preferences"
 msgstr "Ustawienia panelu"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
-msgid "Add a new panel"
-msgstr "Dodaje nowy panel"
+msgid "Profiles:"
+msgstr "Profile:"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
-msgid "Remove the currently selected panel"
-msgstr "Usuwa wybrany panel"
-
-#: ../panel/panel-preferences-dialog.glade.h:15
 msgid "_Backup and restore"
 msgstr "_Kopia zapasowa i przywracanie"
 
-#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Switch between panel presets"
 msgstr "Przełącza pomiędzy zestawami ustawień panelu"
 
+#: ../panel/panel-preferences-dialog.glade.h:16
+msgid "Add a new panel"
+msgstr "Dodaje nowy panel"
+
 #: ../panel/panel-preferences-dialog.glade.h:17
+msgid "Remove the currently selected panel"
+msgstr "Usuwa wybrany panel"
+
+#: ../panel/panel-preferences-dialog.glade.h:18
 msgid "<b>General</b>"
 msgstr "<b>Ogólne</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:19
 msgid "M_ode:"
 msgstr "_Układ:"
 
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Span mo_nitors"
 msgstr "Marginesy monitora"
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Rozciąga panel pomiędzy kilkoma ekranami"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:22
 msgid "_Lock panel"
 msgstr "_Zablokowanie"
 
-#: ../panel/panel-preferences-dialog.glade.h:22
+#: ../panel/panel-preferences-dialog.glade.h:23
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr "Ukrywa uchwyty panelu i blokuje jego położenie"
 
-#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Don't _reserve space on borders"
 msgstr "Zw_olnienie obszaru na krawędziach ekranu"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr "Sprawia, że zmaksymalizowane okna zakrywają powierzchnię za panelem. Działa tylko, gdy panel jest umieszczony przy krawędzi."
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
 msgstr "Au_tomatycznie ukrywaj panel:"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "O_utput:"
 msgstr "_Ekran:"
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid "<b>Measurements</b>"
 msgstr "<b>Pomiary</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Row _size (pixels):"
 msgstr "_Rozmiar wiersza (piksele):"
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Num_ber of rows:"
 msgstr "_Ilość wierszy:"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:33
 #, no-c-format
 msgid "L_ength (%):"
 msgstr "_Długość (%):"
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "A_utomatically increase the length"
 msgstr "_Rozciągnięcie"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr "Automatycznie zwiększa długość panelu jeśli aplety będą wymagać większej ilości przestrzeni."
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "D_isplay"
 msgstr "_Wyświetlanie"
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "<b>Background</b>"
 msgstr "<b>Tło</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:38
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Style:"
 msgstr "_Styl:"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "C_olor:"
 msgstr "_Kolor:"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Pick a Panel Color"
 msgstr "Wybór koloru"
 
-#: ../panel/panel-preferences-dialog.glade.h:40
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_File:"
 msgstr "_Plik:"
 
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:42
 msgid "Select A Background Image"
 msgstr "Wybór pliku"
 
-#: ../panel/panel-preferences-dialog.glade.h:42
+#: ../panel/panel-preferences-dialog.glade.h:43
 msgid "<b>Icons</b>"
 msgstr "<b>Ikony</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:43
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Adjust size au_tomatically"
 msgstr "Dostosuj rozmiar au_tomatycznie"
 
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Fixed icon _size (pixels):"
 msgstr "Stały _rozmiar ikony (piksele):"
 
-#: ../panel/panel-preferences-dialog.glade.h:45
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid "<b>Opacity</b>"
 msgstr "<b>Nieprzezroczystość</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:46
+#: ../panel/panel-preferences-dialog.glade.h:47
 msgid "Configure..."
 msgstr "Konfiguruj..."
 
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:48
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr "<b>Obsługa kompozycji jest obecnie wyłączona</b>\nWłącz obsługę kompozycji menedżera okien, aby uzyskać dostęp do ustawień nieprzezroczystości panelu."
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:50
+#: ../panel/panel-preferences-dialog.glade.h:51
 msgid "_Enter:"
 msgstr "A_ktywny:"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:52
+#: ../panel/panel-preferences-dialog.glade.h:53
 msgid "_Leave:"
 msgstr "_Nieaktywny:"
 
-#: ../panel/panel-preferences-dialog.glade.h:53
+#: ../panel/panel-preferences-dialog.glade.h:54
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "Określa stopień przezroczystości panelu, kiedy kursor myszy znajduje się poza panelem. Całkowita przezroczystość dla wartości 0 i brak przezroczystości dla wartości 100."
 
-#: ../panel/panel-preferences-dialog.glade.h:54
+#: ../panel/panel-preferences-dialog.glade.h:55
 msgid "Appeara_nce"
 msgstr "Wyg_ląd"
 
-#: ../panel/panel-preferences-dialog.glade.h:55
+#: ../panel/panel-preferences-dialog.glade.h:56
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 #: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Move currently selected item up by one row"
 msgstr "Przemieszcza wybrany element jeden wiersz w górę"
 
-#: ../panel/panel-preferences-dialog.glade.h:56
+#: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 #: ../plugins/systray/systray-dialog.glade.h:9
 msgid "Move currently selected item down by one row"
 msgstr "Przemieszcza wybrany element jeden wiersz w dół"
 
-#: ../panel/panel-preferences-dialog.glade.h:57
+#: ../panel/panel-preferences-dialog.glade.h:58
 msgid "Add new item to this panel"
 msgstr "Dodaje nowy aplet do panelu"
 
-#: ../panel/panel-preferences-dialog.glade.h:58
+#: ../panel/panel-preferences-dialog.glade.h:59
 msgid "Remove currently selected item"
 msgstr "Usuwa zaznaczony aplet"
 
-#: ../panel/panel-preferences-dialog.glade.h:59
+#: ../panel/panel-preferences-dialog.glade.h:60
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Edit the currently selected item"
 msgstr "Wyświetla okno preferencji zaznaczonego elementu"
 
-#: ../panel/panel-preferences-dialog.glade.h:60
+#: ../panel/panel-preferences-dialog.glade.h:61
 msgid "Show about information of the currently selected item"
 msgstr "Wyświetla informacje na temat zaznaczonego elementu"
 
-#: ../panel/panel-preferences-dialog.glade.h:61
+#: ../panel/panel-preferences-dialog.glade.h:62
 msgid "Ite_ms"
 msgstr "_Aplety"
 
 #: ../panel/panel-tic-tac-toe.c:121
 msgid "_New Game"
 msgstr "_Nowa gra"
-
-#: ../panel/panel-tic-tac-toe.c:123
-msgid "Close"
-msgstr "Zamknij"
 
 #: ../panel/panel-tic-tac-toe.c:132
 msgid "_Level:"
@@ -1397,36 +1398,36 @@ msgstr "Wyświetla bieżący czas"
 msgid "Directory Menu"
 msgstr "Menu katalogów"
 
-#: ../plugins/directorymenu/directorymenu.c:576
+#: ../plugins/directorymenu/directorymenu.c:586
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Nie udało się uruchomić programu „%s”."
 
-#: ../plugins/directorymenu/directorymenu.c:608
+#: ../plugins/directorymenu/directorymenu.c:618
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Nie udało się odpytać o typ zawartości „%s”"
 
-#: ../plugins/directorymenu/directorymenu.c:617
+#: ../plugins/directorymenu/directorymenu.c:627
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Nie odnaleziono domyślnego programu dla „%s”."
 
-#: ../plugins/directorymenu/directorymenu.c:633
+#: ../plugins/directorymenu/directorymenu.c:643
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Nie udało się uruchomić domyślnego programu dla „%s”."
 
-#: ../plugins/directorymenu/directorymenu.c:731
+#: ../plugins/directorymenu/directorymenu.c:741
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Nie udało się uruchomić preferowanego programu dla kategorii „%s”."
 
-#: ../plugins/directorymenu/directorymenu.c:805
+#: ../plugins/directorymenu/directorymenu.c:815
 msgid "Open Folder"
 msgstr "Otwórz"
 
-#: ../plugins/directorymenu/directorymenu.c:820
+#: ../plugins/directorymenu/directorymenu.c:830
 msgid "Open in Terminal"
 msgstr "Otwórz w terminalu"
 
@@ -1591,11 +1592,11 @@ msgstr "Zaawansowane"
 msgid "Program launcher with optional menu"
 msgstr "Uruchamia programy z opcjonalnymi parametrami"
 
-#: ../plugins/pager/pager.c:453 ../plugins/pager/pager-dialog.glade.h:7
+#: ../plugins/pager/pager.c:457 ../plugins/pager/pager-dialog.glade.h:7
 msgid "Workspace _Settings..."
 msgstr "U_stawienia obszarów roboczych..."
 
-#: ../plugins/pager/pager.c:541
+#: ../plugins/pager/pager.c:545
 msgid "Unable to open the workspace settings"
 msgstr "Nie można otworzyć preferencji obszarów roboczych"
 
@@ -1656,15 +1657,15 @@ msgstr "_Rozciągnięcie"
 msgid "Adds a separator or space between panel items"
 msgstr "Rozdziela aplety za pomocą odstępu lub separatora"
 
-#: ../plugins/showdesktop/showdesktop.c:218
+#: ../plugins/showdesktop/showdesktop.c:242
 msgid "Restore the minimized windows"
 msgstr "Przywraca zminimalizowane okna"
 
-#: ../plugins/showdesktop/showdesktop.c:220
+#: ../plugins/showdesktop/showdesktop.c:244
 msgid "Minimize all open windows and show the desktop"
 msgstr "Minimalizuje wszystkie otwarte okna i wyświetla pulpit"
 
-#: ../plugins/showdesktop/showdesktop.c:223
+#: ../plugins/showdesktop/showdesktop.c:247
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Wyświetlanie pulpitu"
@@ -1819,23 +1820,23 @@ msgstr "Okna wszystkich _ekranów"
 msgid "Show only _minimized windows"
 msgstr "Wyświetlanie tylko _zminimalizowanych okien"
 
-#: ../plugins/tasklist/tasklist-widget.c:3558
+#: ../plugins/tasklist/tasklist-widget.c:3594
 msgid "Mi_nimize All"
 msgstr "Zm_inimalizuj wszystkie"
 
-#: ../plugins/tasklist/tasklist-widget.c:3566
+#: ../plugins/tasklist/tasklist-widget.c:3602
 msgid "Un_minimize All"
 msgstr "_Cofnij minimalizację wszystkich"
 
-#: ../plugins/tasklist/tasklist-widget.c:3574
+#: ../plugins/tasklist/tasklist-widget.c:3610
 msgid "Ma_ximize All"
 msgstr "Zm_aksymalizuj wszystkie"
 
-#: ../plugins/tasklist/tasklist-widget.c:3582
+#: ../plugins/tasklist/tasklist-widget.c:3618
 msgid "_Unmaximize All"
 msgstr "C_ofnij maksymalizację wszystkich"
 
-#: ../plugins/tasklist/tasklist-widget.c:3594
+#: ../plugins/tasklist/tasklist-widget.c:3630
 msgid "_Close All"
 msgstr "Za_mknij wszystkie"
 
