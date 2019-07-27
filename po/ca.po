@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-04 00:30+0200\n"
-"PO-Revision-Date: 2019-07-04 11:33+0000\n"
-"Last-Translator: jolupa <jolupameister@gmail.com>\n"
+"POT-Creation-Date: 2019-07-26 12:30+0200\n"
+"PO-Revision-Date: 2019-07-27 13:55+0000\n"
+"Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce4-panel/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -463,198 +463,202 @@ msgid "Panel Preferences"
 msgstr "Preferències del tauler"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
-msgid "Add a new panel"
-msgstr "Afegeix un tauler nou"
+msgid "Profiles:"
+msgstr "Perfils:"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
-msgid "Remove the currently selected panel"
-msgstr "Suprimeix el tauler seleccionat actualment"
-
-#: ../panel/panel-preferences-dialog.glade.h:15
 msgid "_Backup and restore"
 msgstr "_Copia de Seguretat i Restauració"
 
-#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Switch between panel presets"
 msgstr "Canvia entre els preestabliments del tauler"
 
+#: ../panel/panel-preferences-dialog.glade.h:16
+msgid "Add a new panel"
+msgstr "Afegeix un tauler nou"
+
 #: ../panel/panel-preferences-dialog.glade.h:17
+msgid "Remove the currently selected panel"
+msgstr "Suprimeix el tauler seleccionat actualment"
+
+#: ../panel/panel-preferences-dialog.glade.h:18
 msgid "<b>General</b>"
 msgstr "<b>General</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:19
 msgid "M_ode:"
 msgstr "M_ode:"
 
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Span mo_nitors"
 msgstr "Expandeix els mo_nitors"
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Seleccioneu aquesta opció per estendre el tauler a diversos monitors."
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:22
 msgid "_Lock panel"
 msgstr "_Bloqueja el tauler"
 
-#: ../panel/panel-preferences-dialog.glade.h:22
+#: ../panel/panel-preferences-dialog.glade.h:23
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr "Seleccioneu aquesta opció per bloquejar la posició del tauler i ocultar els tiradors."
 
-#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Don't _reserve space on borders"
 msgstr "No _reservis cap espai a les vores"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr "Seleccioneu aquesta opció per maximitzar les finestres i que cobreixin el tauler. Això només funciona quan el tauler està adjuntat a una vora de la pantalla."
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
 msgstr "Amaga el tauler au_tomáticament"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "O_utput:"
 msgstr "_Sortida:"
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid "<b>Measurements</b>"
 msgstr "<b>Mesures</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Row _size (pixels):"
 msgstr "_Mida de la fila (píxels):"
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Num_ber of rows:"
 msgstr "_Nombre de files:"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:33
 #, no-c-format
 msgid "L_ength (%):"
 msgstr "_Longitud (%):"
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "A_utomatically increase the length"
 msgstr "Incrementa _automàticament la longitud"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr "Seleccioneu aquesta opció per augmentar automàticament la longitud del tauler quan els connectors necessitin més espai."
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "D_isplay"
 msgstr "V_isualització"
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "<b>Background</b>"
 msgstr "<b>Fons</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:38
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Style:"
 msgstr "_Estil:"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "C_olor:"
 msgstr "C_olor:"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Pick a Panel Color"
 msgstr "Tria un color del tauler"
 
-#: ../panel/panel-preferences-dialog.glade.h:40
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_File:"
 msgstr "_Fitxer:"
 
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:42
 msgid "Select A Background Image"
 msgstr "Seleccioneu una imatge per al fons"
 
-#: ../panel/panel-preferences-dialog.glade.h:42
+#: ../panel/panel-preferences-dialog.glade.h:43
 msgid "<b>Icons</b>"
 msgstr "<b>Icones</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:43
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Adjust size au_tomatically"
 msgstr "Ajusta la mida au_tomáticament"
 
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Fixed icon _size (pixels):"
 msgstr "_Mida de les icones fixa (píxels)"
 
-#: ../panel/panel-preferences-dialog.glade.h:45
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid "<b>Opacity</b>"
 msgstr "<b>Opacitat</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:46
+#: ../panel/panel-preferences-dialog.glade.h:47
 msgid "Configure..."
 msgstr "Configura..."
 
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:48
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr "<b>La composició està inhabilitada actualment</b>\nHabiliteu la composició al gestor de finestres per als ajusts de l'opacitat al tauler."
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:50
+#: ../panel/panel-preferences-dialog.glade.h:51
 msgid "_Enter:"
 msgstr "_Entrada:"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:52
+#: ../panel/panel-preferences-dialog.glade.h:53
 msgid "_Leave:"
 msgstr "_Sortida:"
 
-#: ../panel/panel-preferences-dialog.glade.h:53
+#: ../panel/panel-preferences-dialog.glade.h:54
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "Transparència quan el punter no està sobre el tauler, essent 0 completament transparent i 100 completament opac."
 
-#: ../panel/panel-preferences-dialog.glade.h:54
+#: ../panel/panel-preferences-dialog.glade.h:55
 msgid "Appeara_nce"
 msgstr "Apare_nça"
 
-#: ../panel/panel-preferences-dialog.glade.h:55
+#: ../panel/panel-preferences-dialog.glade.h:56
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 #: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Move currently selected item up by one row"
 msgstr "Mou l'element seleccionat a una fila superior"
 
-#: ../panel/panel-preferences-dialog.glade.h:56
+#: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 #: ../plugins/systray/systray-dialog.glade.h:9
 msgid "Move currently selected item down by one row"
 msgstr "Mou l'element seleccionat a una fila inferior"
 
-#: ../panel/panel-preferences-dialog.glade.h:57
+#: ../panel/panel-preferences-dialog.glade.h:58
 msgid "Add new item to this panel"
 msgstr "Afegeix un element nou a aquest tauler"
 
-#: ../panel/panel-preferences-dialog.glade.h:58
+#: ../panel/panel-preferences-dialog.glade.h:59
 msgid "Remove currently selected item"
 msgstr "Suprimeix l'element seleccionat"
 
-#: ../panel/panel-preferences-dialog.glade.h:59
+#: ../panel/panel-preferences-dialog.glade.h:60
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Edit the currently selected item"
 msgstr "Edita l'element seleccionat"
 
-#: ../panel/panel-preferences-dialog.glade.h:60
+#: ../panel/panel-preferences-dialog.glade.h:61
 msgid "Show about information of the currently selected item"
 msgstr "Mostra la informació sobre l'element seleccionat actualment"
 
-#: ../panel/panel-preferences-dialog.glade.h:61
+#: ../panel/panel-preferences-dialog.glade.h:62
 msgid "Ite_ms"
 msgstr "Ele_ments"
 
@@ -1143,8 +1147,8 @@ msgstr "Opcions del rellotge"
 #. TRANSLATORS: adjust this accordingly for your locale format
 #: ../plugins/clock/clock-digital.h:25
 msgctxt "Time"
-msgid "%R"
-msgstr "%R"
+msgid "%a %d %b, %R"
+msgstr "%a %d %b %R"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Night"
@@ -1383,36 +1387,36 @@ msgstr "Quina hora és?"
 msgid "Directory Menu"
 msgstr "Menú dels directoris"
 
-#: ../plugins/directorymenu/directorymenu.c:576
+#: ../plugins/directorymenu/directorymenu.c:586
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Ha fallat el llançament de l'aplicació «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:608
+#: ../plugins/directorymenu/directorymenu.c:618
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Ha fallat la consulta del tipus de contingut per «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:617
+#: ../plugins/directorymenu/directorymenu.c:627
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "No s'ha trobat una aplicació predeterminada per «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:633
+#: ../plugins/directorymenu/directorymenu.c:643
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Ha fallat el llançament de l'aplicació predeterminada per «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:731
+#: ../plugins/directorymenu/directorymenu.c:741
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Ha fallat l'execució de l'aplicació preferida per a la categoria «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:805
+#: ../plugins/directorymenu/directorymenu.c:815
 msgid "Open Folder"
 msgstr "Obre la carpeta"
 
-#: ../plugins/directorymenu/directorymenu.c:820
+#: ../plugins/directorymenu/directorymenu.c:830
 msgid "Open in Terminal"
 msgstr "Obre al terminal"
 
@@ -1577,11 +1581,11 @@ msgstr "Avançat"
 msgid "Program launcher with optional menu"
 msgstr "Llançador de programes amb el menu opcional"
 
-#: ../plugins/pager/pager.c:453 ../plugins/pager/pager-dialog.glade.h:7
+#: ../plugins/pager/pager.c:457 ../plugins/pager/pager-dialog.glade.h:7
 msgid "Workspace _Settings..."
 msgstr "Ajust_s de l'espai de treball..."
 
-#: ../plugins/pager/pager.c:541
+#: ../plugins/pager/pager.c:545
 msgid "Unable to open the workspace settings"
 msgstr "No es poden obrir els ajusts de l'espai de treball"
 
@@ -1642,15 +1646,15 @@ msgstr "_Expandeix"
 msgid "Adds a separator or space between panel items"
 msgstr "Afegeix un espai o un separador entre elements del tauler"
 
-#: ../plugins/showdesktop/showdesktop.c:218
+#: ../plugins/showdesktop/showdesktop.c:242
 msgid "Restore the minimized windows"
 msgstr "Restaura les finestres minimitzades"
 
-#: ../plugins/showdesktop/showdesktop.c:220
+#: ../plugins/showdesktop/showdesktop.c:244
 msgid "Minimize all open windows and show the desktop"
 msgstr "Minimitza totes les finestres i mostra l'escriptori"
 
-#: ../plugins/showdesktop/showdesktop.c:223
+#: ../plugins/showdesktop/showdesktop.c:247
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Mostra l'escriptori"
@@ -1805,23 +1809,23 @@ msgstr "Mostra les finestres de tots els mo_nitors"
 msgid "Show only _minimized windows"
 msgstr "Mostra només les finestres _minimitzades"
 
-#: ../plugins/tasklist/tasklist-widget.c:3593
+#: ../plugins/tasklist/tasklist-widget.c:3594
 msgid "Mi_nimize All"
 msgstr "Mi_nimitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3601
+#: ../plugins/tasklist/tasklist-widget.c:3602
 msgid "Un_minimize All"
 msgstr "De_sminimitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3609
+#: ../plugins/tasklist/tasklist-widget.c:3610
 msgid "Ma_ximize All"
 msgstr "Ma_ximitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3617
+#: ../plugins/tasklist/tasklist-widget.c:3618
 msgid "_Unmaximize All"
 msgstr "Des_maximitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3629
+#: ../plugins/tasklist/tasklist-widget.c:3630
 msgid "_Close All"
 msgstr "_Tanca-ho tot"
 
