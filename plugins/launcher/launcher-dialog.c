@@ -660,10 +660,7 @@ launcher_dialog_tree_popup_menu (GtkWidget            *treeview,
 
   /* show the menu */
   menu = gtk_builder_get_object (dialog->builder, "popup-menu");
-  gtk_menu_popup_at_widget (GTK_MENU (menu), treeview,
-                            GDK_GRAVITY_SOUTH_WEST,
-                            GDK_GRAVITY_NORTH_WEST,
-                            NULL);
+  gtk_menu_popup_at_pointer (GTK_MENU (menu), NULL);
   return TRUE;
 }
 
