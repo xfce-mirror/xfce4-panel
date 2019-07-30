@@ -98,7 +98,7 @@
     <property name="can_focus">False</property>
     <child>
       <object class="GtkImageMenuItem" id="mi-move-up">
-        <property name="label">Up</property>
+        <property name="label" translatable="yes">Up</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="image">image16</property>
@@ -107,7 +107,7 @@
     </child>
     <child>
       <object class="GtkImageMenuItem" id="mi-move-down">
-        <property name="label">Down</property>
+        <property name="label" translatable="yes">Down</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="image">image18</property>
@@ -221,7 +221,7 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="button-add">
-                <property name="label">_Add</property>
+                <property name="label" translatable="yes">_Add</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
@@ -237,7 +237,7 @@
             </child>
             <child>
               <object class="GtkButton" id="button5">
-                <property name="label">_Close</property>
+                <property name="label" translatable="yes">_Close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
