@@ -40,6 +40,7 @@
 #include <X11/extensions/shape.h>
 #endif
 
+
 #include "tasklist-widget.h"
 
 
@@ -2195,17 +2196,46 @@ xfce_tasklist_child_drag_leave (XfceTasklistChild *child,
 
 
 
+static void
+xfce_tasklist_child_drag_begin_event (GtkWidget      *widget,
+                                      GdkDragContext *context,
+                                      gpointer        user_data)
+{
+  GtkWidget *plugin = user_data;
+
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), TRUE);
+}
+
+
+
+static void
+xfce_tasklist_child_drag_end_event (GtkWidget      *widget,
+                                    GdkDragContext *context,
+                                    gpointer        user_data)
+{
+  GtkWidget *plugin = user_data;
+
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), FALSE);
+}
+
+
+
 static XfceTasklistChild *
 xfce_tasklist_child_new (XfceTasklist *tasklist)
 {
   XfceTasklistChild *child;
   GtkCssProvider    *provider;
   gchar             *css_string;
+  GtkWidget         *plugin;
 
   panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), NULL);
 
   child = g_slice_new0 (XfceTasklistChild);
   child->tasklist = tasklist;
+
+  plugin = xfce_tasklist_get_panel_plugin (tasklist);
 
   /* create the window button */
   child->button = xfce_arrow_button_new (GTK_ARROW_NONE);
@@ -2273,9 +2303,13 @@ xfce_tasklist_child_new (XfceTasklist *tasklist)
   gtk_drag_dest_set (GTK_WIDGET (child->button), 0,
                      NULL, 0, GDK_ACTION_DEFAULT);
   g_signal_connect_swapped (G_OBJECT (child->button), "drag-motion",
-     G_CALLBACK (xfce_tasklist_child_drag_motion), child);
+                            G_CALLBACK (xfce_tasklist_child_drag_motion), child);
   g_signal_connect_swapped (G_OBJECT (child->button), "drag-leave",
-     G_CALLBACK (xfce_tasklist_child_drag_leave), child);
+                            G_CALLBACK (xfce_tasklist_child_drag_leave), child);
+  g_signal_connect_after (G_OBJECT (child->button), "drag-begin",
+                          G_CALLBACK (xfce_tasklist_child_drag_begin_event), XFCE_PANEL_PLUGIN (plugin));
+  g_signal_connect_after (G_OBJECT (child->button), "drag-end",
+                          G_CALLBACK (xfce_tasklist_child_drag_end_event), XFCE_PANEL_PLUGIN (plugin));
 
   return child;
 }
