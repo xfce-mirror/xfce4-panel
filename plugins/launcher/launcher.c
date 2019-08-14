@@ -1596,6 +1596,7 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
 
   /* create a new menu */
   plugin->menu = gtk_menu_new ();
+  gtk_menu_set_reserve_toggle_size (GTK_MENU (plugin->menu), FALSE);
   gtk_menu_attach_to_widget (GTK_MENU (plugin->menu), GTK_WIDGET (plugin), NULL);
   g_signal_connect (G_OBJECT (plugin->menu), "deactivate",
       G_CALLBACK (launcher_plugin_menu_deactivate), plugin);
@@ -1618,7 +1619,7 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
       mi = gtk_menu_item_new ();
       label = gtk_label_new (panel_str_is_empty (name) ? _("Unnamed Item") : name);
       gtk_label_set_xalign (GTK_LABEL (label), 0.0);
-      box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+      box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
       gtk_box_pack_end (GTK_BOX (box), label, TRUE, TRUE, 0);
       gtk_container_add (GTK_CONTAINER (mi), box);
       g_object_set_qdata (G_OBJECT (mi), launcher_plugin_quark, plugin);
