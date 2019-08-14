@@ -1483,6 +1483,7 @@ launcher_plugin_menu_deactivate (GtkWidget      *menu,
 
   /* deactivate the arrow button */
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->arrow), FALSE);
+  gtk_widget_unset_state_flags (GTK_WIDGET (plugin->arrow), GTK_STATE_FLAG_PRELIGHT);
 }
 
 
@@ -1574,6 +1575,7 @@ launcher_plugin_menu_item_drag_data_received (GtkWidget          *widget,
 
   /* inactivate the toggle button */
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->arrow), FALSE);
+  gtk_widget_unset_state_flags (GTK_WIDGET (plugin->arrow), GTK_STATE_FLAG_PRELIGHT);
 
   /* finish the drag */
   gtk_drag_finish (context, TRUE, FALSE, drag_time);
@@ -1599,7 +1601,7 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
   gtk_menu_set_reserve_toggle_size (GTK_MENU (plugin->menu), FALSE);
   gtk_menu_attach_to_widget (GTK_MENU (plugin->menu), GTK_WIDGET (plugin), NULL);
   g_signal_connect (G_OBJECT (plugin->menu), "deactivate",
-      G_CALLBACK (launcher_plugin_menu_deactivate), plugin);
+                    G_CALLBACK (launcher_plugin_menu_deactivate), plugin);
 
   /* get the arrow type of the plugin */
   arrow_type = xfce_arrow_button_get_arrow_type (XFCE_ARROW_BUTTON (plugin->arrow));
@@ -1744,6 +1746,7 @@ launcher_plugin_menu_destroy (LauncherPlugin *plugin)
 
       /* deactivate the toggle button */
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->arrow), FALSE);
+      gtk_widget_unset_state_flags (GTK_WIDGET (plugin->arrow), GTK_STATE_FLAG_PRELIGHT);
     }
 }
 
