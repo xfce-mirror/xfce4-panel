@@ -368,6 +368,7 @@ pager_buttons_rebuild_idle (gpointer user_data)
           vp_info[VIEWPORT_Y] = (n / (workspace_height / screen_height)) * screen_height;
 
           button = xfce_panel_create_toggle_button ();
+          gtk_widget_add_events (GTK_WIDGET (button), GDK_SCROLL_MASK | GDK_SMOOTH_SCROLL_MASK);
           if (viewport_x >= vp_info[VIEWPORT_X] && viewport_x < vp_info[VIEWPORT_X] + screen_width
               && viewport_y >= vp_info[VIEWPORT_Y] && viewport_y < vp_info[VIEWPORT_Y] + screen_height)
             gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
@@ -410,6 +411,7 @@ pager_buttons_rebuild_idle (gpointer user_data)
           workspace = WNCK_WORKSPACE (li->data);
 
           button = xfce_panel_create_toggle_button ();
+          gtk_widget_add_events (GTK_WIDGET (button), GDK_SCROLL_MASK | GDK_SMOOTH_SCROLL_MASK);
           if (workspace == active_ws)
             gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
           g_signal_connect (G_OBJECT (button), "toggled",

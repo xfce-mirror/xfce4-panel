@@ -42,7 +42,8 @@ typedef enum
   PANEL_DEBUG_POSITIONING      = 1 << 12,
   PANEL_DEBUG_STRUTS           = 1 << 13,
   PANEL_DEBUG_SYSTRAY          = 1 << 14,
-  PANEL_DEBUG_TASKLIST         = 1 << 15
+  PANEL_DEBUG_TASKLIST         = 1 << 15,
+  PANEL_DEBUG_PAGER            = 1 << 16
 }
 PanelDebugFlag;
 

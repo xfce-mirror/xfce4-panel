@@ -54,7 +54,8 @@ static const GDebugKey panel_debug_keys[] =
   { "positioning", PANEL_DEBUG_POSITIONING },
   { "struts", PANEL_DEBUG_STRUTS },
   { "systray", PANEL_DEBUG_SYSTRAY },
-  { "tasklist", PANEL_DEBUG_TASKLIST }
+  { "tasklist", PANEL_DEBUG_TASKLIST },
+  { "pager", PANEL_DEBUG_PAGER }
 };
 
 

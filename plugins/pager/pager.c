@@ -32,6 +32,7 @@
 #include <common/panel-xfconf.h>
 #include <common/panel-utils.h>
 #include <common/panel-private.h>
+#include <common/panel-debug.h>
 #include <libwnck/libwnck.h>
 
 #include "pager.h"
@@ -320,11 +321,12 @@ static gboolean
 pager_plugin_scroll_event (GtkWidget      *widget,
                            GdkEventScroll *event)
 {
-  PagerPlugin   *plugin = XFCE_PAGER_PLUGIN (widget);
-  WnckWorkspace *active_ws;
-  WnckWorkspace *new_ws;
-  gint           active_n;
-  gint           n_workspaces;
+  PagerPlugin        *plugin = XFCE_PAGER_PLUGIN (widget);
+  WnckWorkspace      *active_ws;
+  WnckWorkspace      *new_ws;
+  gint                active_n;
+  gint                n_workspaces;
+  GdkScrollDirection  scrolling_direction;
 
   panel_return_val_if_fail (WNCK_IS_SCREEN (plugin->wnck_screen), FALSE);
 
@@ -332,11 +334,27 @@ pager_plugin_scroll_event (GtkWidget      *widget,
   if (plugin->scrolling == FALSE)
     return TRUE;
 
+  if (event->direction != GDK_SCROLL_SMOOTH)
+    scrolling_direction = event->direction;
+  else if (event->delta_y < 0)
+    scrolling_direction = GDK_SCROLL_UP;
+  else if (event->delta_y > 0)
+    scrolling_direction = GDK_SCROLL_DOWN;
+  else if (event->delta_x < 0)
+    scrolling_direction = GDK_SCROLL_LEFT;
+  else if (event->delta_x > 0)
+    scrolling_direction = GDK_SCROLL_RIGHT;
+  else
+    {
+      panel_debug_filtered (PANEL_DEBUG_PAGER, "Scrolling event with no delta happened.");
+      return TRUE;
+    }
+
   active_ws = wnck_screen_get_active_workspace (plugin->wnck_screen);
   active_n = wnck_workspace_get_number (active_ws);
 
-  if (event->direction == GDK_SCROLL_UP
-      || event->direction == GDK_SCROLL_LEFT)
+  if (scrolling_direction == GDK_SCROLL_UP
+      || scrolling_direction == GDK_SCROLL_LEFT)
     active_n--;
   else
     active_n++;
