@@ -13,6 +13,7 @@
 # Piotr Sokół <psokol.l10n@gmail.com>, 2009-2015
 # Piotr Sokół <psokol.l10n@gmail.com>, 2014
 # Piotr Sokół <psokol.l10n@gmail.com>, 2014-2015
+# Piotr Sokół <psokol.l10n@gmail.com>, 2019
 # Piotr Strębski <strebski@gmail.com>, 2017
 # Piotr Strębski <strebski@gmail.com>, 2013-2014
 # Szymon Kałasz <szymon_maestro@gazeta.pl>, 2006
@@ -21,9 +22,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-25 06:30+0200\n"
-"PO-Revision-Date: 2019-07-25 13:02+0000\n"
-"Last-Translator: No Ne\n"
+"POT-Creation-Date: 2019-07-30 06:30+0200\n"
+"PO-Revision-Date: 2019-08-17 18:41+0000\n"
+"Last-Translator: Piotr Sokół <psokol.l10n@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/xfce/xfce4-panel/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,7 +74,7 @@ msgstr "_Anuluj"
 #: ../panel/panel-plugin-external.c:441
 #: ../panel/panel-preferences-dialog.c:956
 #: ../panel/panel-preferences-dialog.c:1314
-#: ../plugins/launcher/launcher-dialog.c:855
+#: ../plugins/launcher/launcher-dialog.c:852
 msgid "_Remove"
 msgstr "_Usuń"
 
@@ -111,11 +112,12 @@ msgstr "Za_kończ sesję"
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-#: ../plugins/launcher/launcher-dialog.glade.h:16
+#: ../plugins/launcher/launcher-dialog.glade.h:20
 #: ../plugins/pager/pager-dialog.glade.h:3
 #: ../plugins/separator/separator-dialog.glade.h:6
 #: ../plugins/systray/systray-dialog.glade.h:3
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "_Help"
 msgstr "Pomo_c"
 
@@ -267,7 +269,7 @@ msgstr[3] "Tworzenie %d aktywatorów"
 
 #: ../panel/panel-application.c:1726
 msgid "Quit"
-msgstr "Wyjdź"
+msgstr "Zakończ"
 
 #: ../panel/panel-application.c:1727
 msgid ""
@@ -306,14 +308,15 @@ msgstr "Wyświetla panele w środowisku graficznym Xfce"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr "Piotr Sokół <psokol@jabster.pl>, 2008, 2009, 2010, 2011, 2012, 2013, 2014\nMichał Olber <michal.olber@osworld.pl>, 2012, 2013, 2014"
+msgstr "Piotr Sokół <psokol.l10n@gmail.com>, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2019\nMichał Olber <michal.olber@osworld.pl>, 2012, 2013, 2014"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:12
+#: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Add New Item"
 msgstr "Dodawanie aktywatora"
 
 #: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:203
+#: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "_Dodaj"
 
@@ -356,11 +359,12 @@ msgstr "Dodaje nowe aplety do panelu"
 #: ../plugins/separator/separator-dialog.glade.h:5
 #: ../plugins/systray/systray-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "_Close"
-msgstr "_Zamknij"
+msgstr "Za_mknij"
 
 #: ../panel/panel-item-dialog.c:230
-#: ../plugins/launcher/launcher-dialog.glade.h:14
+#: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "_Wyszukiwanie:"
 
@@ -438,7 +442,7 @@ msgstr "Nigdy"
 
 #: ../panel/panel-preferences-dialog.glade.h:2
 msgid "Intelligently"
-msgstr "Inteligentnie"
+msgstr "Inteligentne"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 #: ../plugins/tasklist/tasklist-dialog.glade.h:2
@@ -475,7 +479,7 @@ msgstr "Ustawienia panelu"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Profiles:"
-msgstr "Profile:"
+msgstr "Profil:"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid "_Backup and restore"
@@ -530,7 +534,7 @@ msgstr "Sprawia, że zmaksymalizowane okna zakrywają powierzchnię za panelem. 
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
-msgstr "Au_tomatycznie ukrywaj panel:"
+msgstr "Au_tomatyczne ukrywanie panelu:"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid "O_utput:"
@@ -540,7 +544,7 @@ msgstr "_Ekran:"
 #. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:29
 msgid "<b>Measurements</b>"
-msgstr "<b>Pomiary</b>"
+msgstr "<b>Wymiary</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Row _size (pixels):"
@@ -548,7 +552,7 @@ msgstr "_Rozmiar wiersza (piksele):"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Num_ber of rows:"
-msgstr "_Ilość wierszy:"
+msgstr "_Liczba wierszy:"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 #, no-c-format
@@ -600,11 +604,11 @@ msgstr "<b>Ikony</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Adjust size au_tomatically"
-msgstr "Dostosuj rozmiar au_tomatycznie"
+msgstr "Au_tomatyczny rozmiar"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Fixed icon _size (pixels):"
-msgstr "Stały _rozmiar ikony (piksele):"
+msgstr "Ustalony _rozmiar ikon (piksele):"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "<b>Opacity</b>"
@@ -618,7 +622,7 @@ msgstr "Konfiguruj..."
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>Obsługa kompozycji jest obecnie wyłączona</b>\nWłącz obsługę kompozycji menedżera okien, aby uzyskać dostęp do ustawień nieprzezroczystości panelu."
+msgstr "<b>Obsługa kompozycji jest obecnie wyłączona</b>\nProszę włączyć obsługę kompozycji menedżera okien, aby uzyskać dostęp do ustawień nieprzezroczystości panelu."
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:51
@@ -641,13 +645,13 @@ msgid "Appeara_nce"
 msgstr "Wyg_ląd"
 
 #: ../panel/panel-preferences-dialog.glade.h:56
-#: ../plugins/launcher/launcher-dialog.glade.h:18
+#: ../plugins/launcher/launcher-dialog.glade.h:21
 #: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Move currently selected item up by one row"
 msgstr "Przemieszcza wybrany element jeden wiersz w górę"
 
 #: ../panel/panel-preferences-dialog.glade.h:57
-#: ../plugins/launcher/launcher-dialog.glade.h:19
+#: ../plugins/launcher/launcher-dialog.glade.h:22
 #: ../plugins/systray/systray-dialog.glade.h:9
 msgid "Move currently selected item down by one row"
 msgstr "Przemieszcza wybrany element jeden wiersz w dół"
@@ -661,7 +665,7 @@ msgid "Remove currently selected item"
 msgstr "Usuwa zaznaczony aplet"
 
 #: ../panel/panel-preferences-dialog.glade.h:60
-#: ../plugins/launcher/launcher-dialog.glade.h:20
+#: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Edit the currently selected item"
 msgstr "Wyświetla okno preferencji zaznaczonego elementu"
 
@@ -703,7 +707,7 @@ msgstr "_Zablokowanie panelu"
 
 #: ../migrate/main.c:115
 msgid "Tried but failed to migrate your old panel configuration"
-msgstr "Próbowano, ale nie udało się przeprowadzić migracji starej konfiguracji panelu"
+msgstr "Nie udało się przeprowadzić migracji starej konfiguracji panelu"
 
 #: ../migrate/main.c:127
 msgid "Failed to load the default configuration"
@@ -748,7 +752,7 @@ msgid "Appeara_nce:"
 msgstr "_Wygląd:"
 
 #: ../plugins/actions/actions-dialog.glade.h:9
-#: ../plugins/launcher/launcher-dialog.glade.h:24
+#: ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "General"
 msgstr "Ogólne"
 
@@ -832,12 +836,12 @@ msgstr "_Uśpienie hybrydowe"
 
 #: ../plugins/actions/actions.c:197
 msgid "Do you want to hibernate and suspend the system?"
-msgstr "Czy chcesz zahibernować i wstrzymać system?"
+msgstr "Zahibernować i wstrzymać działanie systemu?"
 
 #: ../plugins/actions/actions.c:198
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
-msgstr "Hibernowanie i wstrzymywanie komputera w ciągu %d sekund."
+msgstr "Hibernowanie i wstrzymywanie działania komputera nastąpi w ciągu %d sekund."
 
 #: ../plugins/actions/actions.c:204
 msgid "Suspend"
@@ -952,7 +956,7 @@ msgstr "Wyświetla w menu ogólne nazwy programów, np. „Przeglądarka plików
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/systray/systray-dialog.glade.h:7
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Appearance"
 msgstr "Wygląd"
 
@@ -1158,8 +1162,8 @@ msgstr "Wskazania"
 #. TRANSLATORS: adjust this accordingly for your locale format
 #: ../plugins/clock/clock-digital.h:25
 msgctxt "Time"
-msgid "%R"
-msgstr "%R"
+msgid "%a %d %b, %R"
+msgstr "%a, %d %b, %R"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Night"
@@ -1460,7 +1464,7 @@ msgstr "_Wzór plików:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
 #: ../plugins/tasklist/tasklist-dialog.glade.h:29
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
 msgstr "Filtrowanie"
 
@@ -1476,20 +1480,20 @@ msgstr "Nienazwany element"
 msgid "No items"
 msgstr "Brak aktywatorów"
 
-#: ../plugins/launcher/launcher-dialog.c:788
+#: ../plugins/launcher/launcher-dialog.c:785
 msgid "Failed to open desktop item editor"
 msgstr "Nie udało się otworzyć edytora elementów pulpitu"
 
-#: ../plugins/launcher/launcher-dialog.c:856
+#: ../plugins/launcher/launcher-dialog.c:853
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Aktywator zostanie nieodwracalnie usunięty."
 
-#: ../plugins/launcher/launcher-dialog.c:857
+#: ../plugins/launcher/launcher-dialog.c:854
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Usunąć aktywator „%s”?"
 
-#: ../plugins/launcher/launcher-dialog.c:858
+#: ../plugins/launcher/launcher-dialog.c:855
 msgid "Unnamed item"
 msgstr "Nienazwany element"
 
@@ -1518,73 +1522,81 @@ msgid "Inside Button"
 msgstr "Wewnątrz"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
+msgid "Up"
+msgstr "Góra"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:8
+msgid "Down"
+msgstr "Dół"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "_Edit Item"
 msgstr "Edytuj obiekt"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:8
+#: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "D_elete Item"
 msgstr "_Usuń element"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:9
+#: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "Add Appli_cation"
 msgstr "Dodaj _aplikację"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:10
+#: ../plugins/launcher/launcher-dialog.glade.h:12
 msgid "New _Application"
 msgstr "Nowa _aplikacja"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:11
+#: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "New _Link"
 msgstr "Nowy _link"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:13
+#: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "Add one or more existing items to the launcher"
 msgstr "Dodaje istniejące aktywatory do apletu"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:15
+#: ../plugins/launcher/launcher-dialog.glade.h:19
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
 msgstr "Aktywator"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:21
+#: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "Delete the currently selected item"
 msgstr "Usuwa zaznaczony aktywator"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:22
+#: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "Add a new empty item"
 msgstr "Dodaje nowy aktywator"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:23
+#: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "Add a new hyperlink"
 msgstr "Dodaje nowe hiperłącze"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:25
+#: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "Disable t_ooltips"
 msgstr "Wyłączenie p_odpowiedzi"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:26
+#: ../plugins/launcher/launcher-dialog.glade.h:29
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
 msgstr "Wyłącza podpowiedzi przycisków panelu"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:27
+#: ../plugins/launcher/launcher-dialog.glade.h:30
 msgid "Show _label instead of icon"
 msgstr "Wyświetlanie _etykiety zamiast ikony"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:28
+#: ../plugins/launcher/launcher-dialog.glade.h:31
 msgid "Show last _used item in panel"
 msgstr "Wyświetlanie ostatnio _użytego aktywatora"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:29
+#: ../plugins/launcher/launcher-dialog.glade.h:32
 msgid "Select this option to move the clicked menu item to the panel."
 msgstr "Wyświetla ostatnio użyty aktywator menu na panelu"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:30
+#: ../plugins/launcher/launcher-dialog.glade.h:33
 msgid "_Arrow button position:"
 msgstr "Położenie przycisku _strzałki:"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:31
+#: ../plugins/launcher/launcher-dialog.glade.h:34
 msgid "Advanced"
 msgstr "Zaawansowane"
 
@@ -1612,7 +1624,7 @@ msgstr "Podgląd obszarów roboczych"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
 msgid "Number of _rows:"
-msgstr "Ilość _rzędów:"
+msgstr "Liczba _wierszy:"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
@@ -1883,23 +1895,23 @@ msgstr "Strzałka"
 msgid "Window Menu"
 msgstr "Menu okien"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Button layout:"
 msgstr "Przycisk:"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show workspace a_ctions"
 msgstr "Polecenia _obszarów roboczych"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Show workspace _names"
 msgstr "_Nazwy obszarów roboczych"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Enable _urgency notification"
 msgstr "_Pilne powiadomienia"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:11
 msgid "Show windows from _all workspaces"
 msgstr "Okna _wszystkich obszarów roboczych"
 
