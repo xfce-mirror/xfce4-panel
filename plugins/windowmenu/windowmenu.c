@@ -882,6 +882,7 @@ window_menu_plugin_menu_workspace_item_new (WnckWorkspace        *workspace,
   panel_return_val_if_fail (GTK_IS_LABEL (label), NULL);
   gtk_label_set_ellipsize (GTK_LABEL (label), plugin->ellipsize_mode);
   gtk_label_set_max_width_chars (GTK_LABEL (label), plugin->max_width_chars);
+  gtk_label_set_xalign (GTK_LABEL (label), 0.5);
 
   /* modify the label font if needed */
   if (bold)
@@ -1222,10 +1223,6 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
           gtk_widget_show (mi);
 
-          mi = gtk_separator_menu_item_new ();
-          gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-          gtk_widget_show (mi);
-
           /* not empty anymore */
           is_empty = FALSE;
         }
@@ -1265,12 +1262,9 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
             urgent_windows++;
         }
 
-      if (has_windows)
-        {
-          mi = gtk_separator_menu_item_new ();
-          gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-          gtk_widget_show (mi);
-        }
+      mi = gtk_separator_menu_item_new ();
+      gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+      gtk_widget_show (mi);
     }
 
   /* destroy the last menu item if it's a separator */
