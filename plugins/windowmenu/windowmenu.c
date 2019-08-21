@@ -853,9 +853,10 @@ window_menu_plugin_menu_workspace_item_active (GtkWidget     *mi,
 static GtkWidget *
 window_menu_plugin_menu_workspace_item_new (WnckWorkspace        *workspace,
                                             WindowMenuPlugin     *plugin,
-                                            PangoFontDescription *bold)
+                                            gboolean              bold)
 {
   const gchar *name;
+  gchar       *label_text = NULL;
   gchar       *utf8 = NULL, *name_num = NULL;
   GtkWidget   *mi, *label;
 
@@ -883,8 +884,15 @@ window_menu_plugin_menu_workspace_item_new (WnckWorkspace        *workspace,
   gtk_label_set_max_width_chars (GTK_LABEL (label), plugin->max_width_chars);
 
   /* modify the label font if needed */
-  if (bold != NULL)
-    gtk_widget_modify_font (label, bold);
+  if (bold)
+    label_text = g_strdup_printf ("<b>%s</b>", name);
+  else
+    label_text = g_strdup_printf ("<i>%s</i>", name);
+  if (label_text)
+  {
+    gtk_label_set_markup (GTK_LABEL (label), label_text);
+    g_free (label_text);
+  }
 
   g_free (utf8);
   g_free (name_num);
@@ -967,6 +975,7 @@ window_menu_plugin_menu_window_item_new (WnckWindow           *window,
                                          gint                  icon_h)
 {
   const gchar *name, *tooltip;
+  gchar       *label_text = NULL;
   gchar       *utf8 = NULL;
   gchar       *decorated = NULL;
   GtkWidget   *mi, *label, *image;
@@ -1006,14 +1015,19 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   /* make the label pretty on long window names */
   label = gtk_bin_get_child (GTK_BIN (mi));
   panel_return_val_if_fail (GTK_IS_LABEL (label), NULL);
-  gtk_label_set_ellipsize (GTK_LABEL (label), plugin->ellipsize_mode);
-  gtk_label_set_max_width_chars (GTK_LABEL (label), plugin->max_width_chars);
-
   /* modify the label font if needed */
   if (wnck_window_is_active (window))
-    gtk_widget_modify_font (label, italic);
+    label_text = g_strdup_printf ("<b><i>%s</i></b>", name);
   else if (wnck_window_or_transient_needs_attention (window))
-    gtk_widget_modify_font (label, bold);
+    label_text = g_strdup_printf ("<b>%s</b>", name);
+  if (label_text)
+    {
+      gtk_label_set_markup (GTK_LABEL (label), label_text);
+      g_free (label_text);
+    }
+
+  gtk_label_set_ellipsize (GTK_LABEL (label), plugin->ellipsize_mode);
+  gtk_label_set_max_width_chars (GTK_LABEL (label), plugin->max_width_chars);
 
   if (plugin->minimized_icon_lucency > 0)
     {
@@ -1204,7 +1218,7 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
         {
           /* create the workspace menu item */
           mi = window_menu_plugin_menu_workspace_item_new (workspace, plugin,
-              workspace == active_workspace ? bold : italic);
+              workspace == active_workspace);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
           gtk_widget_show (mi);
 
