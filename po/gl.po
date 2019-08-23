@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-07-30 06:30+0200\n"
-"PO-Revision-Date: 2019-08-17 11:25+0000\n"
+"PO-Revision-Date: 2019-08-23 13:06+0000\n"
 "Last-Translator: Daniel Muñiz Fontoira <dani@damufo.com>\n"
 "Language-Team: Galician (http://www.transifex.com/xfce/xfce4-panel/language/gl/)\n"
 "MIME-Version: 1.0\n"
@@ -179,7 +179,7 @@ msgstr "O equipo de desenvolvemento de Xfce. Todos os dereitos reservados."
 #: ../panel/main.c:295
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr "Por favor, comuníquelle os erros a <%s>."
+msgstr "Por favor, comuníquelle os fallos a <%s>."
 
 #: ../panel/main.c:361
 msgid "There is already a running instance"
@@ -192,31 +192,31 @@ msgstr "Reiniciando..."
 
 #: ../panel/main.c:419
 msgid "Failed to show the preferences dialog"
-msgstr "Produciuse un erro ao amosar o diálogo de preferencias"
+msgstr "Produciuse un fallo ao amosar o diálogo de preferencias"
 
 #: ../panel/main.c:421
 msgid "Failed to show the add new items dialog"
-msgstr "Produciuse un erro ao amosar o diálogo para engadir elementos novos"
+msgstr "Produciuse un fallo ao amosar o diálogo para engadir elementos novos"
 
 #: ../panel/main.c:423
 msgid "Failed to save the panel configuration"
-msgstr "Produciuse un erro ao gardar a configuración do panel"
+msgstr "Produciuse un fallo ao gardar a configuración do panel"
 
 #: ../panel/main.c:425
 msgid "Failed to add a plugin to the panel"
-msgstr "Produciuse un erro ao engadir un engadido ao panel"
+msgstr "Produciuse un fallo ao engadir un engadido ao panel"
 
 #: ../panel/main.c:427
 msgid "Failed to restart the panel"
-msgstr "Produciuse un erro ao reiniciar o panel"
+msgstr "Produciuse un fallo ao reiniciar o panel"
 
 #: ../panel/main.c:429
 msgid "Failed to quit the panel"
-msgstr "Produciuse un erro ao saír do panel"
+msgstr "Produciuse un fallo ao saír do panel"
 
 #: ../panel/main.c:431
 msgid "Failed to send D-Bus message"
-msgstr "Produciuse un erro ao enviar a mensaxe a D-Bus"
+msgstr "Produciuse un fallo ao enviar a mensaxe a D-Bus"
 
 #: ../panel/main.c:441
 msgid "Execute"
@@ -235,7 +235,7 @@ msgstr "Non se atopou ningunha instancia en execución de %s"
 
 #: ../panel/panel-application.c:215
 msgid "Failed to launch the migration application"
-msgstr "Produciuse un erro ao iniciar o aplicativo de migración"
+msgstr "Produciuse un fallo ao iniciar a aplicación de migración"
 
 #: ../panel/panel-application.c:983
 msgid "Create _Launcher"
@@ -271,7 +271,7 @@ msgstr "Desexa realmente saír do panel?"
 #: ../panel/panel-application.c:1736
 #, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "Produciuse un erro ao executar a orde \"%s\""
+msgstr "Produciuse un fallo ao executar a orde \"%s\""
 
 #: ../panel/panel-dbus-client.c:218
 msgid ""
@@ -283,7 +283,7 @@ msgstr "Especificouse unha sintaxe de evento de engadido incorrecta. Use ENGADID
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "O tipo \"%s\" non é válido. O tipos válidos son: bool, double, int, string e uint."
+msgstr "O tipo \"%s\" non é correcto. O tipos correctos son: bool, double, int, string e uint."
 
 #: ../panel/panel-dialogs.c:58
 msgid "Unable to open the e-mail address"
@@ -694,11 +694,11 @@ msgstr "B_loquear o panel"
 
 #: ../migrate/main.c:115
 msgid "Tried but failed to migrate your old panel configuration"
-msgstr "Intentouse, mais non puido migrar a configuración do seu antigo panel"
+msgstr "Intentouse, mais produciuse un fallo ao migrar a configuración do seu antigo panel"
 
 #: ../migrate/main.c:127
 msgid "Failed to load the default configuration"
-msgstr "Produciuse un erro ao cargar a configuración predeterminada"
+msgstr "Produciuse un fallo ao cargar a configuración predeterminada"
 
 #: ../migrate/main.c:140
 msgid "Panel config needs migration..."
@@ -706,7 +706,7 @@ msgstr "É preciso migrar a configuración do panel..."
 
 #: ../migrate/main.c:144
 msgid "Failed to migrate the existing configuration"
-msgstr "Produciuse un erro ao migrar a antiga configuración"
+msgstr "Produciuse un fallo ao migrar a antiga configuración"
 
 #: ../migrate/main.c:150
 msgid "Panel configuration has been updated."
@@ -890,7 +890,7 @@ msgstr "Separador"
 #: ../plugins/actions/actions.c:1050
 #, c-format
 msgid "Failed to run action \"%s\""
-msgstr "Produciuse un erro ao executar a acción «%s»"
+msgstr "Produciuse un fallo ao executar a acción «%s»"
 
 #: ../plugins/actions/actions.c:1225
 msgid "John Doe"
@@ -903,7 +903,7 @@ msgstr "Saír da sesión, bloquear a pantalla ou outras accións do sistema"
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:1
 msgid "Applications Menu"
-msgstr "Menú de aplicativos"
+msgstr "Menú de aplicacións"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
@@ -920,7 +920,7 @@ msgstr "Mo_strar o título do botón"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Show application d_escription in tooltip"
-msgstr "Amosar a descrición do aplicativo nunha _notificación"
+msgstr "Amosar a descrición da aplicación nunha _notificación"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show ic_ons in menu"
@@ -928,13 +928,13 @@ msgstr "Amosar ic_onas no menú"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show generic application n_ames"
-msgstr "Amosar os n_omes xenéricos dos aplicativos"
+msgstr "Amosar _os nomes xenéricos das aplicacións"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Seleccione esta opción para amosar o nome xenérico do aplicativo no menú, por exemplo \"Xestor de ficheiros\" no canto de \"Thunar\""
+msgstr "Seleccione esta opción para amosar o nome xenérico da aplicación no menú, por exemplo \"Xestor de ficheiros\" no canto de \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:17
@@ -974,7 +974,7 @@ msgstr "Ficheiro do menú"
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu.c:39
 msgid "Applications"
-msgstr "Aplicativos"
+msgstr "Aplicacións"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:591
 #: ../plugins/directorymenu/directorymenu.c:392
@@ -990,11 +990,11 @@ msgstr "De ac_ordo"
 #: ../plugins/clock/clock.c:912 ../plugins/launcher/launcher.c:2395
 #, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "Produciuse un erro ao executar a orde \"%s\"."
+msgstr "Produciuse un fallo ao executar a orde \"%s\"."
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr "Amosar un menú que contén as categorías dos aplicativos instalados"
+msgstr "Amosar un menú que contén as categorías das aplicacións instaladas"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -1038,7 +1038,7 @@ msgstr "Seman %V"
 
 #: ../plugins/clock/clock.c:464
 msgid "Failed to execute clock command"
-msgstr "Produciuse un erro ao executar a orde do reloxo"
+msgstr "Produciuse un fallo ao executar a orde do reloxo"
 
 #: ../plugins/clock/clock.c:851
 msgid "Custom Format"
@@ -1392,27 +1392,27 @@ msgstr "Menú de directorios"
 #: ../plugins/directorymenu/directorymenu.c:586
 #, c-format
 msgid "Failed to launch application \"%s\""
-msgstr "Produciuse un erro ao iniciar o aplicativo «%s»"
+msgstr "Produciuse un fallo ao iniciar a aplicación «%s»"
 
 #: ../plugins/directorymenu/directorymenu.c:618
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr "Produciuse un erro ao consultar o tipo de contido de «%s»"
+msgstr "Produciuse un fallo ao consultar o tipo de contido de «%s»"
 
 #: ../plugins/directorymenu/directorymenu.c:627
 #, c-format
 msgid "No default application found for \"%s\""
-msgstr "Non se atopou o aplicativo predeterminado para «%s»"
+msgstr "Non se atopou a aplicación predeterminada para «%s»"
 
 #: ../plugins/directorymenu/directorymenu.c:643
 #, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr "Produciuse un erro ao iniciar o aplicativo predeterminado para «%s»"
+msgstr "Produciuse un fallo ao iniciar a aplicación predeterminada para «%s»"
 
 #: ../plugins/directorymenu/directorymenu.c:741
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr "Produciuse un fallo ao executar o aplicativo preferido para a categoría «%s»."
+msgstr "Produciuse un fallo ao executar a aplicación preferida para a categoría «%s»."
 
 #: ../plugins/directorymenu/directorymenu.c:815
 msgid "Open Folder"
@@ -1469,7 +1469,7 @@ msgstr "Sen elementos"
 
 #: ../plugins/launcher/launcher-dialog.c:785
 msgid "Failed to open desktop item editor"
-msgstr "Produciuse un erro ao abrir o editor de elementos do escritorio"
+msgstr "Produciuse un fallo ao abrir o editor de elementos do escritorio"
 
 #: ../plugins/launcher/launcher-dialog.c:853
 msgid "If you delete an item, it will be permanently removed"
@@ -1530,7 +1530,7 @@ msgstr "Engadir apli_cativo"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:12
 msgid "New _Application"
-msgstr "Novo _aplicativo"
+msgstr "Nova _aplicación"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "New _Link"
@@ -1694,7 +1694,7 @@ msgstr "Limpar"
 
 #: ../plugins/systray/systray.c:1230
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr "Desexa realmente limpar a lista dos aplicativos coñecidos?"
+msgstr "Desexa realmente limpar a lista das aplicacións coñecidas?"
 
 #: ../plugins/systray/systray-dialog.glade.h:1
 #: ../plugins/systray/systray.desktop.in.in.h:1
@@ -1715,16 +1715,16 @@ msgstr "Amosar _marco"
 
 #: ../plugins/systray/systray-dialog.glade.h:10
 msgid "C_lear Known Applications"
-msgstr "_Limpar os aplicativos coñecidos"
+msgstr "_Limpar as aplicacións coñecidas"
 
 #: ../plugins/systray/systray-dialog.glade.h:11
 msgid "Known Applications"
-msgstr "Aplicativos coñecidos"
+msgstr "Aplicacións coñecidas"
 
 #: ../plugins/systray/systray-manager.c:405
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr "Produciuse un erro ao adquirir a selección do xestor para a pantalla %d"
+msgstr "Produciuse un fallo ao adquirir a selección do xestor para a pantalla %d"
 
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Area where notification icons appear"
