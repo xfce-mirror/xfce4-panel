@@ -54,6 +54,8 @@ struct _XfcePanelPluginProviderInterface
                                        gint                           size);
   void         (*set_icon_size)       (XfcePanelPluginProvider       *provider,
                                        gint                           icon_size);
+  void         (*set_dark_mode)       (XfcePanelPluginProvider       *provider,
+                                       gboolean                       dark_mode);
   void         (*set_mode)            (XfcePanelPluginProvider       *provider,
                                        XfcePanelPluginMode            mode);
   void         (*set_nrows)           (XfcePanelPluginProvider       *provider,
@@ -104,6 +106,7 @@ typedef enum /*< skip >*/
 {
   PROVIDER_PROP_TYPE_SET_SIZE,                /* gint */
   PROVIDER_PROP_TYPE_SET_ICON_SIZE,           /* gint */
+  PROVIDER_PROP_TYPE_SET_DARK_MODE,           /* gboolean */
   PROVIDER_PROP_TYPE_SET_MODE,                /* XfcePanelPluginMode (as gint) */
   PROVIDER_PROP_TYPE_SET_SCREEN_POSITION,     /* XfceScreenPosition (as gint) */
   PROVIDER_PROP_TYPE_SET_BACKGROUND_ALPHA,    /* gdouble */
@@ -162,6 +165,9 @@ void                  xfce_panel_plugin_provider_set_size            (XfcePanelP
 
 void                  xfce_panel_plugin_provider_set_icon_size       (XfcePanelPluginProvider       *provider,
                                                                       gint                           icon_size);
+
+void                  xfce_panel_plugin_provider_set_dark_mode       (XfcePanelPluginProvider       *provider,
+                                                                      gboolean                       dark_mode);
 
 void                  xfce_panel_plugin_provider_set_mode            (XfcePanelPluginProvider       *provider,
                                                                       XfcePanelPluginMode            mode);

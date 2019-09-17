@@ -139,6 +139,7 @@ static void         panel_window_size_allocate_set_xy                 (PanelWind
 static void         panel_window_screen_changed                       (GtkWidget        *widget,
                                                                        GdkScreen        *previous_screen);
 static void         panel_window_style_updated                        (GtkWidget        *widget);
+static void         panel_window_update_dark_mode                     (gboolean          dark_mode);
 static void         panel_window_realize                              (GtkWidget        *widget);
 static StrutsEgde   panel_window_screen_struts_edge                   (PanelWindow      *window);
 static void         panel_window_screen_struts_set                    (PanelWindow      *window);
@@ -175,6 +176,8 @@ static void         panel_window_plugin_set_size                      (GtkWidget
                                                                        gpointer          user_data);
 static void         panel_window_plugin_set_icon_size                 (GtkWidget        *widget,
                                                                        gpointer          user_data);
+static void         panel_window_plugin_set_dark_mode                 (GtkWidget        *widget,
+                                                                       gpointer          user_data);
 static void         panel_window_plugin_set_nrows                     (GtkWidget        *widget,
                                                                        gpointer          user_data);
 static void         panel_window_plugin_set_screen_position           (GtkWidget        *widget,
@@ -197,7 +200,8 @@ enum
   PROP_OUTPUT_NAME,
   PROP_POSITION,
   PROP_DISABLE_STRUTS,
-  PROP_ICON_SIZE
+  PROP_ICON_SIZE,
+  PROP_DARK_MODE
 };
 
 enum _PluginProp
@@ -206,7 +210,8 @@ enum _PluginProp
   PLUGIN_PROP_SCREEN_POSITION,
   PLUGIN_PROP_NROWS,
   PLUGIN_PROP_SIZE,
-  PLUGIN_PROP_ICON_SIZE
+  PLUGIN_PROP_ICON_SIZE,
+  PLUGIN_PROP_DARK_MODE
 };
 
 enum _AutohideBehavior
@@ -310,6 +315,9 @@ struct _PanelWindow
   StrutsEgde           struts_edge;
   gulong               struts[N_STRUTS];
   guint                struts_disabled : 1;
+
+  /* dark mode */
+  gboolean             dark_mode;
 
   /* window positioning */
   guint                size;
@@ -430,6 +438,12 @@ panel_window_class_init (PanelWindowClass *klass)
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_DARK_MODE,
+                                   g_param_spec_boolean ("dark-mode", NULL, NULL,
+                                                         FALSE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_NROWS,
                                    g_param_spec_uint ("nrows", NULL, NULL,
                                                       1, 6, 1,
@@ -533,6 +547,7 @@ panel_window_init (PanelWindow *window)
   window->mode = XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
   window->size = 48;
   window->icon_size = 0;
+  window->dark_mode = FALSE;
   window->nrows = 1;
   window->length = 0.10;
   window->length_adjust = TRUE;
@@ -594,6 +609,10 @@ panel_window_get_property (GObject    *object,
 
     case PROP_ICON_SIZE:
       g_value_set_uint (value, window->icon_size);
+      break;
+
+    case PROP_DARK_MODE:
+      g_value_set_boolean (value, window->dark_mode);
       break;
 
     case PROP_NROWS:
@@ -699,6 +718,18 @@ panel_window_set_property (GObject      *object,
 
       /* send the new icon size to the panel plugins */
       panel_window_plugins_update (window, PLUGIN_PROP_ICON_SIZE);
+      break;
+
+    case PROP_DARK_MODE:
+      val_bool = g_value_get_boolean (value);
+      if (window->dark_mode != val_bool)
+        {
+          window->dark_mode = val_bool;
+        }
+
+      /* set dark mode for the main application and plugins */
+      panel_window_update_dark_mode (window->dark_mode);
+      panel_window_plugins_update (window, PLUGIN_PROP_DARK_MODE);
       break;
 
     case PROP_NROWS:
@@ -1631,6 +1662,22 @@ panel_window_screen_changed (GtkWidget *widget,
   panel_window_update_autohide_window (window, wnck_screen, wnck_window);
 }
 
+
+
+static void
+panel_window_update_dark_mode (gboolean dark_mode)
+{
+  GtkSettings *gtk_settings;
+
+  gtk_settings = gtk_settings_get_default ();
+
+  if (!dark_mode)
+    gtk_settings_reset_property (gtk_settings, "gtk-application-prefer-dark-theme");
+  g_object_set (gtk_settings,
+                  "gtk-application-prefer-dark-theme",
+                  dark_mode,
+                  NULL);
+}
 
 
 static void
@@ -2956,6 +3003,10 @@ panel_window_plugins_update (PanelWindow *window,
       func = panel_window_plugin_set_icon_size;
       break;
 
+    case PLUGIN_PROP_DARK_MODE:
+      func = panel_window_plugin_set_dark_mode;
+      break;
+
     default:
       panel_assert_not_reached ();
       return;
@@ -3006,6 +3057,19 @@ panel_window_plugin_set_icon_size (GtkWidget *widget,
 
   xfce_panel_plugin_provider_set_icon_size (XFCE_PANEL_PLUGIN_PROVIDER (widget),
                                             PANEL_WINDOW (user_data)->icon_size);
+}
+
+
+
+static void
+panel_window_plugin_set_dark_mode (GtkWidget *widget,
+                                   gpointer   user_data)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (widget));
+  panel_return_if_fail (PANEL_IS_WINDOW (user_data));
+
+  xfce_panel_plugin_provider_set_dark_mode (XFCE_PANEL_PLUGIN_PROVIDER (widget),
+                                            PANEL_WINDOW (user_data)->dark_mode);
 }
 
 
@@ -3177,6 +3241,7 @@ panel_window_set_povider_info (PanelWindow *window,
   panel_window_plugin_set_screen_position (provider, window);
   panel_window_plugin_set_size (provider, window);
   panel_window_plugin_set_icon_size (provider, window);
+  panel_window_plugin_set_dark_mode (provider, window);
   panel_window_plugin_set_nrows (provider, window);
 }
 

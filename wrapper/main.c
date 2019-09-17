@@ -79,6 +79,10 @@ wrapper_gproxy_set (XfcePanelPluginProvider *provider,
           xfce_panel_plugin_provider_set_icon_size (provider, g_variant_get_int32 (variant));
           break;
 
+        case PROVIDER_PROP_TYPE_SET_DARK_MODE:
+          xfce_panel_plugin_provider_set_dark_mode (provider, g_variant_get_boolean (variant));
+          break;
+
         case PROVIDER_PROP_TYPE_SET_MODE:
           xfce_panel_plugin_provider_set_mode (provider, g_variant_get_int32 (variant));
           break;

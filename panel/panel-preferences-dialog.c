@@ -487,6 +487,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   panel_preferences_dialog_bindings_add (dialog, "background-style", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "background-rgba", "rgba", 0);
   panel_preferences_dialog_bindings_add (dialog, "icon-size", "value", 0);
+  panel_preferences_dialog_bindings_add (dialog, "dark-mode", "active", 0);
 
   /* watch image changes from the panel */
   dialog->bg_image_notify_handler_id = g_signal_connect_swapped (G_OBJECT (dialog->active),

@@ -93,6 +93,8 @@ static void          xfce_panel_plugin_set_size               (XfcePanelPluginPr
                                                                gint                              size);
 static void          xfce_panel_plugin_set_icon_size          (XfcePanelPluginProvider          *provider,
                                                                gint                              icon_size);
+static void          xfce_panel_plugin_set_dark_mode          (XfcePanelPluginProvider          *provider,
+                                                               gboolean                          dark_mode);
 static void          xfce_panel_plugin_set_mode               (XfcePanelPluginProvider          *provider,
                                                                XfcePanelPluginMode               mode);
 static void          xfce_panel_plugin_set_nrows              (XfcePanelPluginProvider          *provider,
@@ -130,6 +132,7 @@ enum
   PROP_ORIENTATION,
   PROP_SIZE,
   PROP_ICON_SIZE,
+  PROP_DARK_MODE,
   PROP_SMALL,
   PROP_SCREEN_POSITION,
   PROP_EXPAND,
@@ -177,6 +180,7 @@ struct _XfcePanelPluginPrivate
   gchar              **arguments;
   gint                 size; /* single row size */
   gint                 icon_size;
+  gboolean             dark_mode;
   guint                expand : 1;
   guint                shrink : 1;
   guint                nrows;
@@ -591,6 +595,22 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                         | G_PARAM_STATIC_STRINGS);
 
   /**
+   * XfcePanelPlugin:dark-mode:
+   *
+   * Whether the #XfcePanelPlugin shall request the Gtk dark theme variant (based on the panel
+   * setting).
+   *
+   * Since: 4.14
+   **/
+  plugin_props[PROP_DARK_MODE] =
+      g_param_spec_boolean ("dark-mode",
+                            "Dark Mode",
+                            "Whether or not to request the Gtk dark theme variant",
+                            FALSE,
+                            G_PARAM_READWRITE
+                            | G_PARAM_STATIC_STRINGS);
+
+  /**
    * XfcePanelPlugin:screen-position:
    *
    * The #XfceScreenPosition of the #XfcePanelPlugin. Plugin writer can use it
@@ -708,6 +728,7 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
   plugin->priv->arguments = NULL;
   plugin->priv->size = 0;
   plugin->priv->icon_size = 0;
+  plugin->priv->dark_mode = FALSE;
   plugin->priv->small = FALSE;
   plugin->priv->expand = FALSE;
   plugin->priv->shrink = FALSE;
@@ -744,6 +765,7 @@ xfce_panel_plugin_provider_init (XfcePanelPluginProviderInterface *iface)
   iface->get_unique_id = (ProviderToPluginInt) xfce_panel_plugin_get_unique_id;
   iface->set_size = xfce_panel_plugin_set_size;
   iface->set_icon_size = xfce_panel_plugin_set_icon_size;
+  iface->set_dark_mode = xfce_panel_plugin_set_dark_mode;
   iface->set_mode = xfce_panel_plugin_set_mode;
   iface->set_nrows = xfce_panel_plugin_set_nrows;
   iface->set_screen_position = xfce_panel_plugin_set_screen_position;
@@ -819,6 +841,10 @@ xfce_panel_plugin_get_property (GObject    *object,
       g_value_set_uint (value, private->icon_size);
       break;
 
+    case PROP_DARK_MODE:
+      g_value_set_boolean (value, private->dark_mode);
+      break;
+
     case PROP_NROWS:
       g_value_set_uint (value, private->nrows);
       break;
@@ -888,6 +914,11 @@ xfce_panel_plugin_set_property (GObject      *object,
 
     case PROP_ARGUMENTS:
       private->arguments = g_value_dup_boxed (value);
+      break;
+
+    case PROP_DARK_MODE:
+      xfce_panel_plugin_set_dark_mode (XFCE_PANEL_PLUGIN_PROVIDER (object),
+                                       g_value_get_boolean (value));
       break;
 
     case PROP_SMALL:
@@ -1485,6 +1516,35 @@ xfce_panel_plugin_set_icon_size (XfcePanelPluginProvider *provider,
       /* also update the size so the icon gets re-rendered */
       xfce_panel_plugin_set_size (provider, -1);
     }
+}
+
+
+
+static void
+xfce_panel_plugin_set_dark_mode (XfcePanelPluginProvider *provider,
+                                 gboolean                 dark_mode)
+{
+#if GTK_CHECK_VERSION (3, 0, 0)
+  XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
+  GtkSettings *gtk_settings;
+
+  if (G_LIKELY (plugin->priv->dark_mode != dark_mode))
+    {
+      plugin->priv->dark_mode = dark_mode;
+      g_object_notify_by_pspec (G_OBJECT (plugin), plugin_props[PROP_DARK_MODE]);
+
+      gtk_settings = gtk_widget_get_settings (GTK_WIDGET (plugin));
+
+      if (!dark_mode)
+        gtk_settings_reset_property (gtk_settings,
+                                     "gtk-application-prefer-dark-theme");
+
+      g_object_set (gtk_settings,
+                    "gtk-application-prefer-dark-theme",
+                    dark_mode,
+                    NULL);
+    }
+#endif
 }
 
 
