@@ -24,7 +24,7 @@
 #include <glib.h>
 #include <glib-object.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
-#include <libxfce4panel/xfce-panel-macros-46.h>
+#include <libxfce4panel/xfce-panel-convenience.h>
 
 G_BEGIN_DECLS
 

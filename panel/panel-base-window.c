@@ -33,7 +33,6 @@
 #include <panel/panel-base-window.h>
 #include <panel/panel-window.h>
 #include <panel/panel-plugin-external.h>
-#include <panel/panel-plugin-external-46.h>
 
 
 

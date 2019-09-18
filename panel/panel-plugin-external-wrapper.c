@@ -242,7 +242,6 @@ panel_plugin_external_wrapper_get_argv (PanelPluginExternal   *external,
   argv[PLUGIN_ARGV_NAME] = g_strdup (panel_module_get_name (external->module));
   argv[PLUGIN_ARGV_DISPLAY_NAME] = g_strdup (panel_module_get_display_name (external->module));
   argv[PLUGIN_ARGV_COMMENT] = g_strdup (panel_module_get_comment (external->module));
-  argv[PLUGIN_ARGV_BACKGROUND_IMAGE] = g_strdup (""); /* unused, for 4.6 plugins only */
 
   /* append the arguments */
   if (G_UNLIKELY (arguments != NULL))

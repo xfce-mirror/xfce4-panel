@@ -36,7 +36,6 @@
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4panel/xfce-panel-macros.h>
 
-#include <migrate/migrate-46.h>
 #include <migrate/migrate-config.h>
 #include <migrate/migrate-default.h>
 
@@ -53,7 +52,6 @@ main (gint argc, gchar **argv)
   gint           retval = EXIT_SUCCESS;
   XfconfChannel *channel;
   gint           configver;
-  gchar         *filename_46;
   gchar         *filename_default;
   gboolean       migrate_vendor_default;
 
@@ -77,17 +75,14 @@ main (gint argc, gchar **argv)
   channel = xfconf_channel_get (XFCE_PANEL_CHANNEL_NAME);
   if (!xfconf_channel_has_property (channel, "/panels"))
     {
-      /* lookup the old 4.6 config file */
-      filename_46 = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, XFCE_46_CONFIG);
-
       /* lookup the default configuration */
       xfce_resource_push_path (XFCE_RESOURCE_CONFIG, XDGCONFIGDIR);
       filename_default = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, DEFAULT_CONFIG_FILENAME);
       xfce_resource_pop_path (XFCE_RESOURCE_CONFIG);
 
-      if (filename_46 == NULL && filename_default == NULL)
+      if (filename_default == NULL)
         {
-          g_warning ("No default or old configuration found");
+          g_warning ("No default configuration found");
           return EXIT_FAILURE;
         }
 
@@ -99,25 +94,13 @@ main (gint argc, gchar **argv)
       if (g_getenv ("XFCE_PANEL_MIGRATE_DEFAULT") != NULL
           || migrate_vendor_default)
         {
-          if (filename_46 != NULL)
-            g_message ("Tried to auto-migrate, but old configuration found");
-          else if (filename_default == NULL)
+          if (filename_default == NULL)
             g_message ("Tried to auto-migrate, but no default configuration found");
           else
             goto migrate_default;
         }
 
-      if (filename_46 != NULL)
-        {
-          /* restore 4.6 config */
-          if (!migrate_46 (filename_46, channel, &error))
-            {
-              xfce_dialog_show_error (NULL, error, _("Tried but failed to migrate your old panel configuration"));
-              g_error_free (error);
-              retval = EXIT_FAILURE;
-            }
-        }
-      else if (filename_default != NULL)
+      if (filename_default != NULL)
         {
           migrate_default:
 
@@ -130,7 +113,6 @@ main (gint argc, gchar **argv)
             }
         }
 
-      g_free (filename_46);
       g_free (filename_default);
     }
 

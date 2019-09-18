@@ -56,22 +56,15 @@ GtkWidget *
 xfce_panel_create_button (void)
 {
   GtkWidget       *button = gtk_button_new ();
-#if GTK_CHECK_VERSION (3, 0, 0)
   GtkStyleContext *context;
   GtkCssProvider  *provider;
-#endif
 
   gtk_widget_set_can_default (GTK_WIDGET (button), FALSE);
   gtk_widget_set_can_focus (GTK_WIDGET (button), FALSE);
   gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
-#if GTK_CHECK_VERSION (3, 0, 0)
   gtk_widget_set_focus_on_click (GTK_WIDGET (button), FALSE);
-#else
-  gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
-#endif
   gtk_widget_set_name (button, "xfce-panel-button");
 
-#if GTK_CHECK_VERSION (3, 0, 0)
   /* Make sure themes like Adwaita, which set excessive padding, don't cause the
      launcher buttons to overlap when panels have a fairly normal size */
   context = gtk_widget_get_style_context (GTK_WIDGET (button));
@@ -80,7 +73,6 @@ xfce_panel_create_button (void)
   gtk_style_context_add_provider (context,
                                   GTK_STYLE_PROVIDER (provider),
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-#endif
 
   return button;
 }
@@ -98,24 +90,17 @@ xfce_panel_create_button (void)
 GtkWidget *
 xfce_panel_create_toggle_button (void)
 {
-#if GTK_CHECK_VERSION (3, 0, 0)
   GtkStyleContext *context;
   GtkCssProvider  *provider;
-#endif
 
   GtkWidget *button = gtk_toggle_button_new ();
 
   gtk_widget_set_can_default (GTK_WIDGET (button), FALSE);
   gtk_widget_set_can_focus (GTK_WIDGET (button), FALSE);
   gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
-#if GTK_CHECK_VERSION (3, 0, 0)
   gtk_widget_set_focus_on_click (GTK_WIDGET (button), FALSE);
-#else
-  gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
-#endif
   gtk_widget_set_name (button, "xfce-panel-toggle-button");
 
-#if GTK_CHECK_VERSION (3, 0, 0)
   /* Make sure themes like Adwaita, which set excessive padding, don't cause the
      launcher buttons to overlap when panels have a fairly normal size */
   context = gtk_widget_get_style_context (GTK_WIDGET (button));
@@ -124,7 +109,6 @@ xfce_panel_create_toggle_button (void)
   gtk_style_context_add_provider (context,
                                   GTK_STYLE_PROVIDER (provider),
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-#endif
 
   return button;
 }

@@ -53,7 +53,6 @@
 #include <panel/panel-dialogs.h>
 #include <panel/panel-dbus-service.h>
 #include <panel/panel-plugin-external.h>
-#include <panel/panel-plugin-external-46.h>
 #include <panel/panel-tic-tac-toe.h>
 
 

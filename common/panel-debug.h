@@ -35,15 +35,14 @@ typedef enum
   PANEL_DEBUG_BASE_WINDOW      = 1 << 5,
   PANEL_DEBUG_DISPLAY_LAYOUT   = 1 << 6,
   PANEL_DEBUG_EXTERNAL         = 1 << 7,
-  PANEL_DEBUG_EXTERNAL46       = 1 << 8,
-  PANEL_DEBUG_MAIN             = 1 << 9,
-  PANEL_DEBUG_MODULE           = 1 << 10,
-  PANEL_DEBUG_MODULE_FACTORY   = 1 << 11,
-  PANEL_DEBUG_POSITIONING      = 1 << 12,
-  PANEL_DEBUG_STRUTS           = 1 << 13,
-  PANEL_DEBUG_SYSTRAY          = 1 << 14,
-  PANEL_DEBUG_TASKLIST         = 1 << 15,
-  PANEL_DEBUG_PAGER            = 1 << 16
+  PANEL_DEBUG_MAIN             = 1 << 8,
+  PANEL_DEBUG_MODULE           = 1 << 9,
+  PANEL_DEBUG_MODULE_FACTORY   = 1 << 10,
+  PANEL_DEBUG_POSITIONING      = 1 << 11,
+  PANEL_DEBUG_STRUTS           = 1 << 12,
+  PANEL_DEBUG_SYSTRAY          = 1 << 13,
+  PANEL_DEBUG_TASKLIST         = 1 << 14,
+  PANEL_DEBUG_PAGER            = 1 << 15
 }
 PanelDebugFlag;
 

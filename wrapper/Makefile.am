@@ -38,43 +38,6 @@ wrapper_2_0_LDADD = \
 wrapper_2_0_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la
 
-#
-# Gtk+ 2 support library
-#
-if ENABLE_GTK2_LIBRARY
-
-wrapper_PROGRAMS += wrapper-1.0
-
-wrapper_1_0_SOURCES = \
-	main.c \
-	wrapper-module.c \
-	wrapper-module.h \
-	wrapper-plug.c \
-	wrapper-plug.h
-
-wrapper_1_0_CFLAGS = \
-	$(GTK2_CFLAGS) \
-	$(GIO_CFLAGS) \
-	$(GMODULE_CFLAGS) \
-	$(LIBXFCE4UTIL_CFLAGS) \
-	$(PLATFORM_CFLAGS)
-
-wrapper_1_0_LDFLAGS = \
-	-no-undefined \
-	$(PLATFORM_LDFLAGS)
-
-wrapper_1_0_LDADD = \
-	$(top_builddir)/libxfce4panel/libxfce4panel-1.0.la \
-	$(GTK2_LIBS) \
-	$(GIO_LIBS) \
-	$(GMODULE_LIBS) \
-	$(LIBXFCE4UTIL_LIBS)
-
-wrapper_1_0_DEPENDENCIES = \
-	$(top_builddir)/libxfce4panel/libxfce4panel-1.0.la
-
-endif
-
 if MAINTAINER_MODE
 
 #wrapper-marshal.h: $(top_builddir)/panel/panel-marshal.list Makefile

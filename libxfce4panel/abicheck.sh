@@ -20,5 +20,5 @@
 
 trap 'rm expected-abi actual-abi' EXIT
 ${CPP:-cpp} -DINCLUDE_INTERNAL_SYMBOLS -DINCLUDE_VARIABLES -DALL_FILES ${srcdir:-.}/libxfce4panel.symbols | sed 's/ G_GNUC.*$//;s/ PRIVATE//;/^ *$/d;/^#/d' | sort >expected-abi
-${NM:-nm} -D -g -P .libs/libxfce4panel-1.0.so | awk '$2~/^[DRTG]$/&&$1~/^[^_]/{print $1}' | sort >actual-abi
+${NM:-nm} -D -g -P .libs/libxfce4panel-2.0.so | awk '$2~/^[DRTG]$/&&$1~/^[^_]/{print $1}' | sort >actual-abi
 diff -u expected-abi actual-abi

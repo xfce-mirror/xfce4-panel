@@ -23,7 +23,6 @@
 
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel-enums.h>
-#include <libxfce4panel/xfce-panel-macros-46.h>
 
 G_BEGIN_DECLS
 

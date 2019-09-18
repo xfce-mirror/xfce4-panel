@@ -121,55 +121,8 @@ panel_utils_show_help (GtkWindow   *parent,
 gboolean
 panel_utils_grab_available (void)
 {
-#if GTK_CHECK_VERSION (3, 0, 0)
   /* TODO fix for gtk3 */
   return TRUE;
-#else
-  GdkScreen     *screen;
-  GdkWindow     *root;
-  GdkGrabStatus  grab_pointer = GDK_GRAB_FROZEN;
-  GdkGrabStatus  grab_keyboard = GDK_GRAB_FROZEN;
-  gboolean       grab_succeed = FALSE;
-  guint          i;
-  GdkEventMask   pointer_mask = GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK
-                                | GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK
-                                | GDK_POINTER_MOTION_MASK;
-
-  screen = xfce_gdk_screen_get_active (NULL);
-  root = gdk_screen_get_root_window (screen);
-
-  /* don't try to get the grab for longer then 1/4 second */
-  for (i = 0; i < (G_USEC_PER_SEC / 100 / 4); i++)
-    {
-      grab_keyboard = gdk_keyboard_grab (root, TRUE, GDK_CURRENT_TIME);
-      if (grab_keyboard == GDK_GRAB_SUCCESS)
-        {
-          grab_pointer = gdk_pointer_grab (root, TRUE, pointer_mask,
-                                           NULL, NULL, GDK_CURRENT_TIME);
-          if (grab_pointer == GDK_GRAB_SUCCESS)
-            {
-              grab_succeed = TRUE;
-              break;
-            }
-        }
-
-      g_usleep (100);
-    }
-
-  /* release the grab so the gtk_menu_popup() can take it */
-  if (grab_pointer == GDK_GRAB_SUCCESS)
-    gdk_pointer_ungrab (GDK_CURRENT_TIME);
-  if (grab_keyboard == GDK_GRAB_SUCCESS)
-    gdk_keyboard_ungrab (GDK_CURRENT_TIME);
-
-  if (!grab_succeed)
-    {
-      g_printerr (PACKAGE_NAME ": Unable to get keyboard and mouse "
-                  "grab. Menu popup failed.\n");
-    }
-
-  return grab_succeed;
-#endif
 }
 
 

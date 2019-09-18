@@ -154,14 +154,6 @@ XDT_CHECK_PACKAGE([GMODULE], [gmodule-2.0], [2.42.0])
 XDT_CHECK_PACKAGE([CAIRO], [cairo], [1.0.0])
 XDT_CHECK_PACKAGE([LIBWNCK], [libwnck-3.0], [3.0])
 
-dnl ***********************************************************
-dnl *** Optional support for a GTK+2 version of the library ***
-dnl ***********************************************************
-XDT_CHECK_OPTIONAL_PACKAGE([GTK2],
-                           [gtk+-2.0], [2.20.0], [gtk2],
-                           [GTK+ 2 support])
-AM_CONDITIONAL([ENABLE_GTK2_LIBRARY], [test "x$GTK2_FOUND" = "xyes"])
-
 dnl **********************************
 dnl *** Optional GIO UNIX features ***
 dnl **********************************
@@ -301,9 +293,4 @@ echo "Build Configuration:"
 echo
 echo "* Debug Support:          $enable_debug"
 echo "* GNU Visibility:         $have_gnuc_visibility"
-if test x"$GTK2_FOUND" = x"yes"; then
-echo "* GTK+ 2 Support:         yes"
-else
-echo "* GTK+ 2 Support:         no"
-fi
 echo

@@ -46,7 +46,6 @@ static const GDebugKey panel_debug_keys[] =
   { "applicationsmenu", PANEL_DEBUG_APPLICATIONSMENU },
   { "base-window", PANEL_DEBUG_BASE_WINDOW },
   { "display-layout", PANEL_DEBUG_DISPLAY_LAYOUT },
-  { "external46", PANEL_DEBUG_EXTERNAL46 },
   { "external", PANEL_DEBUG_EXTERNAL },
   { "main", PANEL_DEBUG_MAIN },
   { "module-factory", PANEL_DEBUG_MODULE_FACTORY },

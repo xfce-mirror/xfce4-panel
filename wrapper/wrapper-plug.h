@@ -20,9 +20,7 @@
 #define __WRAPPER_PLUG_H__
 
 #include <gtk/gtk.h>
-#if GTK_CHECK_VERSION (3, 0, 0)
 #include <gtk/gtkx.h>
-#endif
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 
@@ -42,11 +40,7 @@ extern gchar *wrapper_name;
 
 GType         wrapper_plug_get_type             (void) G_GNUC_CONST;
 
-#if GTK_CHECK_VERSION (3, 0, 0)
 WrapperPlug  *wrapper_plug_new                  (Window           socket_id);
-#else
-WrapperPlug  *wrapper_plug_new                  (GdkNativeWindow  socket_id);
-#endif
 
 void          wrapper_plug_set_opacity          (WrapperPlug     *plug,
                                                  gdouble          opacity);

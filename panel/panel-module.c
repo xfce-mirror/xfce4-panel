@@ -32,7 +32,6 @@
 #include <panel/panel-module.h>
 #include <panel/panel-module-factory.h>
 #include <panel/panel-plugin-external-wrapper.h>
-#include <panel/panel-plugin-external-46.h>
 
 #define PANEL_PLUGINS_LIB_DIR (LIBDIR G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "plugins")
 #define PANEL_PLUGINS_LIB_DIR_OLD (LIBDIR G_DIR_SEPARATOR_S "panel-plugins")
@@ -61,8 +60,7 @@ enum _PanelModuleRunMode
 {
   UNKNOWN,    /* Unset */
   INTERNAL,   /* plugin library will be loaded in the panel */
-  WRAPPER,    /* external library with comunication through PanelPluginExternal */
-  EXTERNAL_46 /* external executable with comunication through PanelPluginExternal46 */
+  WRAPPER     /* external library with communication through PanelPluginExternal */
 };
 
 enum _PanelModuleUnique
@@ -79,8 +77,7 @@ struct _PanelModule
   /* module type */
   PanelModuleRunMode   mode;
 
-  /* filename to the library or executable
-   * for an old 4.6 plugin */
+  /* filename of the library */
   gchar               *filename;
 
   /* plugin information from the desktop file */
@@ -92,7 +89,7 @@ struct _PanelModule
   guint                use_count;
   PanelModuleUnique    unique_mode;
 
-  /* module location (null for 4.6 plugins) */
+  /* module location */
   GModule             *library;
 
   /* for non-gobject plugin */
@@ -306,7 +303,6 @@ panel_module_new_from_desktop_file (const gchar *filename,
   XfceRc      *rc;
   const gchar *module_name;
   gchar       *path;
-  const gchar *module_exec;
   const gchar *module_unique;
   gboolean     found;
 
@@ -380,24 +376,6 @@ panel_module_new_from_desktop_file (const gchar *filename,
           g_critical ("Plugin %s: There was no module found at \"%s\"",
                       name, path);
           g_free (path);
-        }
-    }
-  else
-    {
-      /* yeah, we support ancient shizzle too... */
-      module_exec = xfce_rc_read_entry_untranslated (rc, "X-XFCE-Exec", NULL);
-      if (module_exec != NULL
-          && g_path_is_absolute (module_exec)
-          && g_file_test (module_exec, G_FILE_TEST_EXISTS))
-        {
-          module = g_object_new (PANEL_TYPE_MODULE, NULL);
-          module->filename = g_strdup (module_exec);
-          module->mode = EXTERNAL_46;
-        }
-      else
-        {
-          g_critical ("Plugin %s: There was no executable found at \"%s\"",
-                      name, module_exec);
         }
     }
 
@@ -497,11 +475,6 @@ panel_module_new_plugin (PanelModule  *module,
     case WRAPPER:
       plugin = panel_plugin_external_wrapper_new (module, unique_id, arguments);
       debug_type = "external-wrapper";
-      break;
-
-    case EXTERNAL_46:
-      plugin = panel_plugin_external_46_new (module, unique_id, arguments);
-      debug_type = "external-46";
       break;
 
     default:

@@ -100,10 +100,8 @@ wrapper_gproxy_set (XfcePanelPluginProvider *provider,
           break;
 
         case PROVIDER_PROP_TYPE_SET_OPACITY:
-#if GTK_CHECK_VERSION (3, 0, 0)
           plug = g_object_get_qdata (G_OBJECT (provider), plug_quark);
           wrapper_plug_set_opacity (plug, g_variant_get_double (variant));
-#endif
           break;
 
         case PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR:
@@ -314,11 +312,7 @@ main (gint argc, gchar **argv)
   GError                  *error = NULL;
   const gchar             *filename;
   gint                     unique_id;
-#if GTK_CHECK_VERSION (3, 0, 0)
   Window                   socket_id;
-#else
-  GdkNativeWindow          socket_id;
-#endif
   const gchar             *name;
   const gchar             *display_name;
   const gchar             *comment;

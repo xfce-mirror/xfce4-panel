@@ -28,9 +28,7 @@
 #endif
 
 #include <gtk/gtk.h>
-#if GTK_CHECK_VERSION (3, 0, 0)
 #include <gtk/gtkx.h>
-#endif
 #include <glib.h>
 #include <libxfce4util/libxfce4util.h>
 
@@ -1026,12 +1024,7 @@ xfce_panel_plugin_button_press_event (GtkWidget      *widget,
         gtk_widget_set_sensitive (item, plugin->priv->menu_blocked == 0);
 
       /* popup the menu */
-#if GTK_CHECK_VERSION (3, 0, 0)
       gtk_menu_popup_at_pointer (menu, (GdkEvent *) event);
-#else
-      gtk_menu_popup (menu, NULL, NULL, NULL, NULL,
-                      event->button, event->time);
-#endif
       return TRUE;
     }
 
@@ -2501,12 +2494,8 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
 {
   XfceScreenPosition  screen_position;
   GdkScreen          *screen;
-#if GTK_CHECK_VERSION (3, 0, 0)
   GdkDisplay         *display;
   GdkMonitor         *monitor;
-#else
-  gint                monitor_num;
-#endif
   GdkRectangle        geometry;
   gint                x, y;
   GdkWindow          *window;
@@ -2534,14 +2523,10 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
 
       /* get the monitor geometry */
       screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
-#if GTK_CHECK_VERSION (3, 0, 0)
       display = gdk_screen_get_display (screen);
       monitor = gdk_display_get_monitor_at_window (display, window);
       gdk_monitor_get_geometry (monitor, &geometry);
-#else
-      monitor_num = gdk_screen_get_monitor_at_window (screen, window);
-      gdk_screen_get_monitor_geometry (screen, monitor_num, &geometry);
-#endif
+
       /* get the plugin root origin */
       gdk_window_get_root_origin (window, &x, &y);
 
@@ -2583,12 +2568,8 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
   GtkRequisition  requisition;
   GdkScreen      *screen;
   GdkRectangle    geometry;
-#if GTK_CHECK_VERSION (3, 0, 0)
   GdkDisplay     *display;
   GdkMonitor     *monitor;
-#else
-  gint            monitor_num;
-#endif
   GTimeVal        now_t, end_t;
   GtkWidget      *toplevel, *plug;
   gint            px, py;
@@ -2612,11 +2593,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
     gtk_widget_realize (attach_widget);
 
   /* get the menu/widget size request */
-#if GTK_CHECK_VERSION (3, 0, 0)
   gtk_widget_get_preferred_size (menu_widget, &requisition, NULL);
-#else
-  gtk_widget_size_request (menu_widget, &requisition);
-#endif
 
   /* get the root position of the attach widget */
   toplevel = gtk_widget_get_toplevel (attach_widget);
@@ -2626,14 +2603,8 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
   plug = gtk_widget_get_ancestor (attach_widget, GTK_TYPE_PLUG);
   if (plug != NULL)
     {
-#if GTK_CHECK_VERSION (3, 0, 0)
        gdk_window_get_geometry (gtk_plug_get_socket_window (GTK_PLUG (plug)),
                                 &px, &py, NULL, NULL);
-#else
-       gdk_window_get_geometry (gtk_plug_get_socket_window (GTK_PLUG (plug)),
-                                &px, &py, NULL, NULL, NULL);
-#endif
-
        *x += px;
        *y += py;
     }
@@ -2688,14 +2659,9 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
 
   /* get the monitor geometry */
   screen = gtk_widget_get_screen (attach_widget);
-#if GTK_CHECK_VERSION (3, 0, 0)
   display = gdk_screen_get_display (screen);
   monitor = gdk_display_get_monitor_at_window (display, gtk_widget_get_window (attach_widget));
   gdk_monitor_get_geometry (monitor, &geometry);
-#else
-  monitor_num = gdk_screen_get_monitor_at_window (screen, gtk_widget_get_window (attach_widget));
-  gdk_screen_get_monitor_geometry (screen, monitor_num, &geometry);
-#endif
 
   /* keep the menu inside the screen */
   if (*x > geometry.x + geometry.width - requisition.width)
@@ -2772,15 +2738,10 @@ xfce_panel_plugin_position_menu (GtkMenu  *menu,
   xfce_panel_plugin_position_widget (XFCE_PANEL_PLUGIN (panel_plugin),
                                      GTK_WIDGET (menu), attach_widget, x, y);
 
-#if GTK_CHECK_VERSION (3, 0, 0)
   /* FIXME */
   /* A workaround for Gtk3 popup menus with scroll buttons */
   /* Menus are "pushed in" anyway */
   *push_in = FALSE;
-#else
-  /* keep the menu inside screen */
-  *push_in = TRUE;
-#endif
 }
 
 

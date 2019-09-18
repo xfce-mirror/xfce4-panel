@@ -75,7 +75,6 @@ static void     xfce_arrow_button_get_property         (GObject               *o
                                                         GValue                *value,
                                                         GParamSpec            *pspec);
 static void     xfce_arrow_button_dispose              (GObject               *object);
-#if GTK_CHECK_VERSION (3, 0, 0)
 static gboolean xfce_arrow_button_draw                 (GtkWidget             *widget,
                                                         cairo_t               *cr);
 static void     xfce_arrow_button_get_preferred_width  (GtkWidget             *widget,
@@ -84,12 +83,6 @@ static void     xfce_arrow_button_get_preferred_width  (GtkWidget             *w
 static void     xfce_arrow_button_get_preferred_height (GtkWidget             *widget,
                                                         gint                  *minimum_height,
                                                         gint                  *natural_height);
-#else
-static gboolean xfce_arrow_button_expose_event         (GtkWidget             *widget,
-                                                        GdkEventExpose        *event);
-static void     xfce_arrow_button_size_request         (GtkWidget             *widget,
-                                                        GtkRequisition        *requisition);
-#endif
 static void     xfce_arrow_button_size_allocate        (GtkWidget             *widget,
                                                         GtkAllocation         *allocation);
 
@@ -106,11 +99,6 @@ struct _XfceArrowButtonPrivate
   /* counter to make the blinking stop when
    * MAX_BLINKING_COUNT is reached */
   guint          blinking_counter;
-
-#if !GTK_CHECK_VERSION (3, 0, 0)
-  /* button relief when the blinking starts */
-  GtkReliefStyle last_relief;
-#endif
 };
 
 
@@ -135,14 +123,9 @@ xfce_arrow_button_class_init (XfceArrowButtonClass * klass)
   gobject_class->dispose = xfce_arrow_button_dispose;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
-#if GTK_CHECK_VERSION (3, 0, 0)
   gtkwidget_class->draw = xfce_arrow_button_draw;
   gtkwidget_class->get_preferred_width = xfce_arrow_button_get_preferred_width;
   gtkwidget_class->get_preferred_height = xfce_arrow_button_get_preferred_height;
-#else
-  gtkwidget_class->expose_event = xfce_arrow_button_expose_event;
-  gtkwidget_class->size_request = xfce_arrow_button_size_request;
-#endif
   gtkwidget_class->size_allocate = xfce_arrow_button_size_allocate;
 
   /**
@@ -184,10 +167,8 @@ xfce_arrow_button_class_init (XfceArrowButtonClass * klass)
 static void
 xfce_arrow_button_init (XfceArrowButton *button)
 {
-#if GTK_CHECK_VERSION (3, 0, 0)
   GtkStyleContext *context;
   GtkCssProvider  *provider;
-#endif
 
   button->priv = xfce_arrow_button_get_instance_private (button);
 
@@ -195,15 +176,11 @@ xfce_arrow_button_init (XfceArrowButton *button)
   button->priv->arrow_type = GTK_ARROW_UP;
   button->priv->blinking_timeout_id = 0;
   button->priv->blinking_counter = 0;
-#if !GTK_CHECK_VERSION (3, 0, 0)
-  button->priv->last_relief = GTK_RELIEF_NORMAL;
-#endif
 
   /* set some widget properties */
   gtk_widget_set_has_window (GTK_WIDGET (button), FALSE);
   gtk_widget_set_can_default (GTK_WIDGET (button), FALSE);
   gtk_widget_set_can_focus (GTK_WIDGET (button), FALSE);
-#if GTK_CHECK_VERSION (3, 0, 0)
   gtk_widget_set_focus_on_click (GTK_WIDGET (button), FALSE);
   /* Make sure themes like Adwaita, which set excessive padding, don't cause the
      launcher buttons to overlap when panels have a fairly normal size */
@@ -213,9 +190,6 @@ xfce_arrow_button_init (XfceArrowButton *button)
   gtk_style_context_add_provider (context,
                                   GTK_STYLE_PROVIDER (provider),
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-#else
-  gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
-#endif
 }
 
 
@@ -280,7 +254,6 @@ xfce_arrow_button_dispose (GObject *object)
 
 
 
-#if GTK_CHECK_VERSION (3, 0, 0)
 static gboolean
 xfce_arrow_button_draw (GtkWidget *widget,
                         cairo_t   *cr)
@@ -450,102 +423,6 @@ xfce_arrow_button_get_preferred_height (GtkWidget *widget,
   if (natural_height != NULL)
     *natural_height = natural_child_height;
 }
-#endif
-
-
-
-#if !GTK_CHECK_VERSION (3, 0, 0)
-static gboolean
-xfce_arrow_button_expose_event (GtkWidget      *widget,
-                                GdkEventExpose *event)
-{
-  XfceArrowButton *button = XFCE_ARROW_BUTTON (widget);
-  GtkWidget       *child;
-  gint             x, y, width;
-
-  /* draw the button */
-  (*GTK_WIDGET_CLASS (xfce_arrow_button_parent_class)->expose_event) (widget, event);
-
-  if (button->priv->arrow_type != GTK_ARROW_NONE
-      && GTK_WIDGET_DRAWABLE (widget))
-    {
-      child = gtk_bin_get_child (GTK_BIN (widget));
-      if (child != NULL && GTK_WIDGET_VISIBLE (child))
-        {
-          if (button->priv->arrow_type == GTK_ARROW_UP
-              || button->priv->arrow_type == GTK_ARROW_DOWN)
-            {
-              width = ARROW_WIDTH;
-              x = widget->allocation.x + widget->style->xthickness;
-              y = widget->allocation.y + (widget->allocation.height - width) / 2;
-            }
-          else
-            {
-              width = ARROW_WIDTH;
-              x = widget->allocation.x + (widget->allocation.width - width) / 2;
-              y = widget->allocation.y + widget->style->ythickness;
-            }
-        }
-      else
-        {
-          width = MIN (widget->allocation.height - 2 * widget->style->ythickness,
-                       widget->allocation.width  - 2 * widget->style->xthickness);
-          width = CLAMP (width, 1, ARROW_WIDTH);
-
-          x = widget->allocation.x + (widget->allocation.width - width) / 2;
-          y = widget->allocation.y + (widget->allocation.height - width) / 2;
-        }
-
-      gtk_paint_arrow (widget->style, widget->window,
-                       GTK_WIDGET_STATE (widget), GTK_SHADOW_NONE,
-                       &(event->area), widget, "xfce_arrow_button",
-                       button->priv->arrow_type, FALSE,
-                       x, y, width, width);
-    }
-
-  return TRUE;
-}
-
-
-
-static void
-xfce_arrow_button_size_request (GtkWidget      *widget,
-                                GtkRequisition *requisition)
-{
-  XfceArrowButton *button = XFCE_ARROW_BUTTON (widget);
-  GtkWidget *child;
-
-  requisition->height = requisition->width = 0;
-  child = gtk_bin_get_child (GTK_BIN (widget));
-  if (child != NULL && GTK_WIDGET_VISIBLE (child))
-    {
-      /* use gtk for the widget size */
-      (*GTK_WIDGET_CLASS (xfce_arrow_button_parent_class)->size_request) (widget, requisition);
-
-      /* reserve space for the arrow */
-      switch (button->priv->arrow_type)
-        {
-        case GTK_ARROW_UP:
-        case GTK_ARROW_DOWN:
-          requisition->width += ARROW_WIDTH;
-          break;
-
-        case GTK_ARROW_LEFT:
-        case GTK_ARROW_RIGHT:
-          requisition->height += ARROW_WIDTH;
-          break;
-
-        default:
-          break;
-        }
-    }
-  else if (button->priv->arrow_type != GTK_ARROW_NONE)
-    {
-      requisition->height = ARROW_WIDTH + 2 * widget->style->xthickness;
-      requisition->width = ARROW_WIDTH + 2 * widget->style->ythickness;
-    }
-}
-#endif
 
 
 
@@ -597,7 +474,6 @@ xfce_arrow_button_blinking_timeout (gpointer user_data)
 {
   XfceArrowButton *button = XFCE_ARROW_BUTTON (user_data);
 
-#if GTK_CHECK_VERSION (3, 0, 0)
   GtkStateFlags    flags = gtk_widget_get_state_flags (GTK_WIDGET (button));
 
   if ((flags & GTK_STATE_FLAG_ACTIVE) == GTK_STATE_FLAG_ACTIVE
@@ -609,27 +485,6 @@ xfce_arrow_button_blinking_timeout (gpointer user_data)
     {
       gtk_widget_set_state_flags (GTK_WIDGET (button), GTK_STATE_FLAG_ACTIVE, FALSE);
     }
-#else
-  GtkStyle        *style;
-  GtkRcStyle      *rc;
-
-  rc = gtk_widget_get_modifier_style (GTK_WIDGET (button));
-  if(PANEL_HAS_FLAG (rc->color_flags[GTK_STATE_NORMAL], GTK_RC_BG)
-     || button->priv->blinking_timeout_id == 0)
-    {
-      gtk_button_set_relief (GTK_BUTTON (button), button->priv->last_relief);
-      PANEL_UNSET_FLAG (rc->color_flags[GTK_STATE_NORMAL], GTK_RC_BG);
-      gtk_widget_modify_style (GTK_WIDGET (button), rc);
-    }
-  else
-    {
-      gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NORMAL);
-      PANEL_SET_FLAG (rc->color_flags[GTK_STATE_NORMAL], GTK_RC_BG);
-      style = gtk_widget_get_style (GTK_WIDGET (button));
-      rc->bg[GTK_STATE_NORMAL] = style->bg[GTK_STATE_SELECTED];
-      gtk_widget_modify_style(GTK_WIDGET (button), rc);
-    }
-#endif
 
   return (button->priv->blinking_counter++ < MAX_BLINKING_COUNT);
 }
@@ -641,16 +496,7 @@ xfce_arrow_button_blinking_timeout_destroyed (gpointer user_data)
 {
   XfceArrowButton *button = XFCE_ARROW_BUTTON (user_data);
 
-#if GTK_CHECK_VERSION (3, 0, 0)
   gtk_widget_unset_state_flags (GTK_WIDGET (button), GTK_STATE_FLAG_ACTIVE);
-#else
-  GtkRcStyle      *rc;
-
-  rc = gtk_widget_get_modifier_style (GTK_WIDGET (button));
-  gtk_button_set_relief (GTK_BUTTON (button), button->priv->last_relief);
-  PANEL_UNSET_FLAG (rc->color_flags[GTK_STATE_NORMAL], GTK_RC_BG);
-  gtk_widget_modify_style (GTK_WIDGET (button), rc);
-#endif
 
   button->priv->blinking_timeout_id = 0;
   button->priv->blinking_counter = 0;
@@ -764,11 +610,6 @@ xfce_arrow_button_set_blinking (XfceArrowButton *button,
 
   if (blinking)
     {
-#if !GTK_CHECK_VERSION (3, 0, 0)
-      /* store the relief of the button */
-      button->priv->last_relief = gtk_button_get_relief (GTK_BUTTON (button));
-#endif
-
       if (button->priv->blinking_timeout_id == 0)
         {
           /* start blinking timeout */

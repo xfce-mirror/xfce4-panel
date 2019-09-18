@@ -20,6 +20,7 @@
 #define __PANEL_PREFERENCES_DIALOG_H__
 
 #include <gtk/gtk.h>
+#include <gtk/gtkx.h>
 #include <panel/panel-application.h>
 #include <panel/panel-window.h>
 

@@ -43,7 +43,6 @@
 
 #include <panel/panel-dbus-service.h>
 #include <panel/panel-base-window.h>
-#include <panel/panel-plugin-external-46.h>
 #include <panel/panel-window.h>
 #include <panel/panel-application.h>
 #include <panel/panel-itembar.h>
@@ -798,13 +797,6 @@ panel_application_plugin_insert (PanelApplication  *application,
   /* add signal to monitor provider signals */
   g_signal_connect (G_OBJECT (provider), "provider-signal",
       G_CALLBACK (panel_application_plugin_provider_signal), application);
-
-  /* work around the problem that we need a background before
-   * realizing for 4.6 panel plugins */
-  if (PANEL_BASE_WINDOW (window)->background_style == PANEL_BG_STYLE_IMAGE
-      && PANEL_IS_PLUGIN_EXTERNAL_46 (provider))
-    panel_plugin_external_set_background_image (PANEL_PLUGIN_EXTERNAL (provider),
-        PANEL_BASE_WINDOW (window)->background_image);
 
   /* add the item to the panel */
   itembar = gtk_bin_get_child (GTK_BIN (window));

@@ -46,7 +46,6 @@
 
 #include <panel/panel-module.h>
 #include <panel/panel-plugin-external.h>
-#include <panel/panel-plugin-external-46.h>
 #include <panel/panel-window.h>
 #include <panel/panel-dialogs.h>
 
@@ -1197,14 +1196,7 @@ panel_plugin_external_set_background_image (PanelPluginExternal *external,
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
 
-  if (!external->priv->embedded
-      && PANEL_IS_PLUGIN_EXTERNAL_46 (external))
-    {
-      /* hack to set the background of 4.6 plugins before the child is
-       * embedded, so it is directly send with the startup arguments */
-      panel_plugin_external_46_set_background_image (PANEL_PLUGIN_EXTERNAL_46 (external), image);
-    }
-  else if (G_UNLIKELY (image != NULL))
+  if (G_UNLIKELY (image != NULL))
     {
       g_value_init (&value, G_TYPE_STRING);
       g_value_set_string (&value, image);
