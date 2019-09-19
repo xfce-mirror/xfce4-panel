@@ -653,25 +653,30 @@ panel_base_window_reset_background_css (PanelBaseWindow *window) {
   gtk_style_context_get (context, GTK_STATE_FLAG_NORMAL,
                          GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                          &background_rgba, NULL);
-  if (PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_BOTTOM))
-    border_side = "bottom";
-  else if (PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_TOP))
-    border_side = "top";
-  else if (PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_LEFT))
-    border_side = "left";
-  else if (PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_RIGHT))
-    border_side = "right";
 
-  if (border_side) {
-    color_text = gdk_rgba_to_string (background_rgba);
-    base_css = g_strdup_printf ("%s .xfce4-panel.background { border-%s: 1px solid shade(%s, 0.7); }",
-                                PANEL_BASE_CSS, border_side, color_text);
-    gtk_css_provider_load_from_data (window->priv->css_provider, base_css, -1, NULL);
-    g_free(base_css);
-    g_free(color_text);
-  }
+  /* Set correct border style depending on panel position and length */
+  if (priv->borders != PANEL_BORDER_NONE)
+    {
+      border_side = g_strdup_printf ("%s %s %s %s",
+                                     PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_TOP) ? "solid" : "none",
+                                     PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_RIGHT) ? "solid" : "none",
+                                     PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_BOTTOM) ? "solid" : "none",
+                                     PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_LEFT) ? "solid" : "none");
+    }
+
+  if (border_side)
+    {
+      color_text = gdk_rgba_to_string (background_rgba);
+      base_css = g_strdup_printf ("%s .xfce4-panel.background { border-style: %s; border-width: 1px; border-color: shade(%s, 0.7); }",
+                                  PANEL_BASE_CSS, border_side, color_text);
+      gtk_css_provider_load_from_data (window->priv->css_provider, base_css, -1, NULL);
+      g_free (base_css);
+      g_free (color_text);
+      g_free (border_side);
+    }
   else
     gtk_css_provider_load_from_data (window->priv->css_provider, PANEL_BASE_CSS, -1, NULL);
+
   gtk_style_context_add_provider (context,
                                   GTK_STYLE_PROVIDER (window->priv->css_provider),
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
