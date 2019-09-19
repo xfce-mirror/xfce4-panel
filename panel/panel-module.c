@@ -325,6 +325,14 @@ panel_module_new_from_desktop_file (const gchar *filename,
       return NULL;
     }
 
+  if (g_strcmp0 (xfce_rc_read_entry (rc, "X-XFCE-API", "1.0"), "2.0") != 0)
+    {
+      g_critical ("Plugin %s: The Desktop file %s requested the Gtk2 API (v1.0), which is "
+                  "no longer supported.", name, filename);
+      xfce_rc_close (rc);
+      return NULL;
+    }
+
   xfce_rc_set_group (rc, "Xfce Panel");
 
   /* read module location from the desktop file */
@@ -365,8 +373,7 @@ panel_module_new_from_desktop_file (const gchar *filename,
             {
               module->mode = WRAPPER;
               g_free (module->api);
-              //module->api = g_strdup (xfce_rc_read_entry (rc, "X-XFCE-API", LIBXFCE4PANEL_VERSION_API));
-              module->api = g_strdup (xfce_rc_read_entry (rc, "X-XFCE-API", "1.0"));
+              module->api = g_strdup (xfce_rc_read_entry (rc, "X-XFCE-API", LIBXFCE4PANEL_VERSION_API));
             }
           else
             module->mode = INTERNAL;
