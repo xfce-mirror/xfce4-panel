@@ -172,7 +172,7 @@ panel_module_factory_load_modules_dir (PanelModuleFactory *factory,
       filename = g_build_filename (path, name, NULL);
 
       /* find the dot in the name, this cannot
-       * fail since it pasted the .desktop suffix check */
+       * fail since it passed the .desktop suffix check */
       p = strrchr (name, '.');
 
       /* get the new module internal name */
