@@ -751,6 +751,7 @@ static void
 systray_manager_set_visual (SystrayManager *manager)
 {
   GdkDisplay  *display;
+  GdkVisual   *visual;
   Visual      *xvisual;
   Atom         visual_atom;
   gulong       data[1];
@@ -768,11 +769,12 @@ systray_manager_set_visual (SystrayManager *manager)
   visual_atom = gdk_x11_get_xatom_by_name_for_display (display,
       "_NET_SYSTEM_TRAY_VISUAL");
 
-  if (gdk_screen_is_composited (gtk_widget_get_screen (manager->invisible))
-      && (gdk_screen_get_rgba_visual (screen) != NULL))
+  visual = gdk_screen_get_rgba_visual (screen);
+  panel_debug (PANEL_DEBUG_SYSTRAY, "rgba visual is %p", visual);
+  if (visual != NULL)
     {
-      /* get the rgba visual */
-      xvisual = GDK_VISUAL_XVISUAL (gdk_screen_get_rgba_visual (screen));
+      /* use the rgba visual */
+      xvisual = GDK_VISUAL_XVISUAL (visual);
     }
   else
     {
