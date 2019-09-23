@@ -728,18 +728,8 @@ systray_plugin_box_draw (GtkWidget *box,
                          gpointer   user_data)
 {
   SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (user_data);
-  GdkScreen      *screen;
-
   panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
   panel_return_if_fail (cr != NULL);
-
-  screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
-
-  if (G_LIKELY (screen != NULL))
-    {
-      if (!gdk_screen_is_composited (screen))
-        return;
-    }
 
   /* separately draw all the composed tray icons after gtk
    * handled the draw event */
