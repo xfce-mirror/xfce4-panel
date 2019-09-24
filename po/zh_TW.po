@@ -5,7 +5,8 @@
 # 
 # Translators:
 # Xfce Bot <transifex@xfce.org>, 2017
-# Jeff Huang <s8321414@gmail.com>, 2017
+# 黃柏諺 <s8321414@gmail.com>, 2017
+# Walter Cheuk <wwycheuk@gmail.com>, 2019
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-10 00:31+0200\n"
 "PO-Revision-Date: 2017-09-09 15:44+0000\n"
-"Last-Translator: Jeff Huang <s8321414@gmail.com>, 2017\n"
+"Last-Translator: Walter Cheuk <wwycheuk@gmail.com>, 2019\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/xfce/teams/16840/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -108,7 +109,7 @@ msgstr "重新啟動執行中的面板實體"
 
 #: ../panel/main.c:85
 msgid "Quit the running panel instance"
-msgstr "退出執行中的面板實體"
+msgstr "結束執行中的面板實體"
 
 #: ../panel/main.c:86
 msgid "Do not wait for a window manager on startup"
@@ -171,7 +172,7 @@ msgstr "未能重新啟動面板"
 
 #: ../panel/main.c:391
 msgid "Failed to quit the panel"
-msgstr "未能退出面板"
+msgstr "未能結束面板"
 
 #: ../panel/main.c:393
 msgid "Failed to send D-Bus message"
@@ -212,11 +213,11 @@ msgstr[0] "由 %d 項桌面檔建立新的啟動器"
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "若您未透過工作階段管理程式啟動 X。只要點擊「退出」就會關閉 X 伺服器。"
+msgstr "若未透過工作階段管理程式啟動 X。只要點擊「結束」就會關閉 X 伺服器。"
 
 #: ../panel/panel-application.c:1729
 msgid "Are you sure you want to quit the panel?"
-msgstr "您確定要退出該面板嗎？"
+msgstr "確定要結束該面板嗎？"
 
 #: ../panel/panel-application.c:1737
 #, c-format
@@ -254,7 +255,9 @@ msgstr "Xfce 桌面環境的面板"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr "Cheng-Chia Tseng <pswo10680@gmail.com>, 2010."
+msgstr ""
+"Cheng-Chia Tseng <pswo10680@gmail.com>, 2010.\n"
+"Walter Cheuk <wwycheuk@gmail.com>, 2019."
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:27
@@ -337,7 +340,7 @@ msgstr "面板與插件組態將被永久移除"
 #: ../panel/panel-preferences-dialog.c:929
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
-msgstr "您確定要移除面板 %d 嗎？"
+msgstr "確定要移除面板 %d 嗎？"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
@@ -727,7 +730,7 @@ msgstr "登出(_L)"
 
 #: ../plugins/actions/actions.c:153
 msgid "Are you sure you want to log out?"
-msgstr "您確定要登出嗎？"
+msgstr "確定要登出嗎？"
 
 #: ../plugins/actions/actions.c:154
 #, c-format
@@ -768,7 +771,7 @@ msgstr "休眠(_H)"
 
 #: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
-msgstr "您想要將電腦暫停至磁碟中嗎？"
+msgstr "想要將電腦暫停至磁碟中嗎？"
 
 #: ../plugins/actions/actions.c:183
 #, c-format
@@ -785,7 +788,7 @@ msgstr "暫停(_P)"
 
 #: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
-msgstr "您想要將電腦暫停至 RAM 中嗎？"
+msgstr "想要將電腦暫停至 RAM 中嗎？"
 
 #: ../plugins/actions/actions.c:191
 #, c-format
@@ -802,7 +805,7 @@ msgstr "重新啟動"
 
 #: ../plugins/actions/actions.c:198
 msgid "Are you sure you want to restart?"
-msgstr "您確定要重新啟動嗎？"
+msgstr "確定要重新啟動嗎？"
 
 #: ../plugins/actions/actions.c:199
 #, c-format
@@ -819,7 +822,7 @@ msgstr "關機(_D)"
 
 #: ../plugins/actions/actions.c:206
 msgid "Are you sure you want to shut down?"
-msgstr "您確定要關機嗎？"
+msgstr "確定要關機嗎？"
 
 #: ../plugins/actions/actions.c:207
 #, c-format
@@ -1022,7 +1025,7 @@ msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
-msgstr "顯示秒(_S)"
+msgstr "顯示秒數(_S)"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 msgid "True _binary clock"
@@ -1034,7 +1037,7 @@ msgstr "24小時制時鐘(_H)"
 
 #: ../plugins/clock/clock-dialog.glade.h:14
 msgid "Fl_ash time separators"
-msgstr "讓時間分隔符閃爍(_F)"
+msgstr "時間分隔符閃爍(_F)"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid "Sho_w AM/PM"
@@ -1076,7 +1079,7 @@ msgstr "數位式"
 
 #: ../plugins/clock/clock-dialog.glade.h:25
 msgid "Fuzzy"
-msgstr "模糊"
+msgstr "大概"
 
 #: ../plugins/clock/clock-dialog.glade.h:26
 msgid "LCD"
@@ -1408,7 +1411,7 @@ msgstr "若您刪除項目，它將被永遠移除"
 #: ../plugins/launcher/launcher-dialog.c:858
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr "您確定要移除「%s」嗎？"
+msgstr "確定要移除「%s」嗎？"
 
 #: ../plugins/launcher/launcher-dialog.c:859
 msgid "Unnamed item"
