@@ -182,7 +182,7 @@ msgstr "未能傳送 D-Bus 訊息"
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "您想要啟動面板嗎？如果要的話，請確認在登出時您有儲存工作階段，這樣該面板才能在下一次您登入時自動啟動。"
+msgstr "想要啟動面板嗎？如果要的話，請確定在登出時您有儲存工作階段，這樣該面板才能在下一次登入時自動啟動。"
 
 #: ../panel/main.c:407 ../panel/main.c:421
 #, c-format
@@ -303,7 +303,7 @@ msgstr "在這裡輸入搜尋詞語"
 #: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "插件「%s」無預期退出面板，您想要重新啟動它嗎？"
+msgstr "插件「%s」無預期退出面板，想要重新啟動它嗎？"
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
@@ -454,7 +454,7 @@ msgstr "不要保留邊緣空間(_R)"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "如果你想讓最大化視窗覆蓋面板後的區域，請選取此選項。這只對於附在螢幕邊緣的面板有效。"
+msgstr "如果想令最大化視窗覆蓋面板後的區域，請選取此選項。這只對於附在螢幕邊緣的面板有效。"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -735,7 +735,7 @@ msgstr "確定要登出嗎？"
 #: ../plugins/actions/actions.c:154
 #, c-format
 msgid "Logging out in %d seconds."
-msgstr "%d 秒內登出。"
+msgstr "%d 秒後登出。"
 
 #: ../plugins/actions/actions.c:159
 msgid "Log Out..."
@@ -776,7 +776,7 @@ msgstr "想要將電腦暫停至磁碟中嗎？"
 #: ../plugins/actions/actions.c:183
 #, c-format
 msgid "Hibernating computer in %d seconds."
-msgstr "%d 秒內電腦休眠。"
+msgstr "%d 秒後電腦休眠。"
 
 #: ../plugins/actions/actions.c:188
 msgid "Suspend"
@@ -793,7 +793,7 @@ msgstr "想要將電腦暫停至 RAM 中嗎？"
 #: ../plugins/actions/actions.c:191
 #, c-format
 msgid "Suspending computer in %d seconds."
-msgstr "%d 秒內暫停電腦。"
+msgstr "%d 秒後暫停電腦。"
 
 #: ../plugins/actions/actions.c:196
 msgid "Restart"
@@ -810,7 +810,7 @@ msgstr "確定要重新啟動嗎？"
 #: ../plugins/actions/actions.c:199
 #, c-format
 msgid "Restarting computer in %d seconds."
-msgstr "%d 秒內重新啟動電腦。"
+msgstr "%d 秒後重新啟動電腦。"
 
 #: ../plugins/actions/actions.c:204
 msgid "Shut Down"
@@ -827,7 +827,7 @@ msgstr "確定要關機嗎？"
 #: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Turning off computer in %d seconds."
-msgstr "%d 秒內關閉電腦。"
+msgstr "%d 秒後關閉電腦。"
 
 #: ../plugins/actions/actions.c:621
 #: ../plugins/separator/separator-dialog.glade.h:1
@@ -990,7 +990,7 @@ msgstr "時鐘"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "時區的名稱，會對應至時區資訊資料庫中的檔案，舉例「America/New_York」。留空則使用本第十間。"
+msgstr "時區的名稱，會對應至時區資訊資料庫中的檔案，例如「America/New_York」。留空則使用本地時間。"
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Time_zone:"
@@ -1020,8 +1020,8 @@ msgid ""
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
 msgstr ""
-"要插入面板的時間格式，用來描述日期與時間。舉例來說，%Y 會以年份數字替換，%m 會被月份數字替換，而 %d 則是日數字。而 <b></b> "
-"標籤則會使文字轉為粗體。請查看「幫助」頁面以瞭解更多資訊。"
+"要插入面板的時間格式，用來描述日期與時間。舉例來說，%Y 會以年份數字替換，%m 會以月份數字替換，而 %d 則是日數字。而 <b></b> "
+"標籤則會使文字轉為粗體。請查看「求助」頁面以瞭解更多資訊。"
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
