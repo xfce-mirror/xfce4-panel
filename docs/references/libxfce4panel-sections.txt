@@ -34,33 +34,12 @@ xfce_arrow_button_get_type
 </SECTION>
 
 <SECTION>
-<FILE>xfce-hvbox</FILE>
-XfceHVBox
-xfce_hvbox_new
-xfce_hvbox_set_orientation
-xfce_hvbox_get_orientation
-<SUBSECTION Standard>
-XfceHVBoxClass
-XFCE_TYPE_HVBOX
-XFCE_HVBOX
-XFCE_HVBOX_CLASS
-XFCE_IS_HVBOX
-XFCE_IS_HVBOX_CLASS
-XFCE_HVBOX_GET_CLASS
-<SUBSECTION Private>
-xfce_hvbox_get_type
-</SECTION>
-
-<SECTION>
 <FILE>convenience</FILE>
 xfce_panel_create_button
 xfce_panel_create_toggle_button
 xfce_panel_get_channel_name
 xfce_panel_pixbuf_from_source
 xfce_panel_pixbuf_from_source_at_size
-xfce_allow_panel_customization
-xfce_create_panel_button
-xfce_create_panel_toggle_button
 </SECTION>
 
 <SECTION>
@@ -104,22 +83,6 @@ xfce_screen_position_get_type
 </SECTION>
 
 <SECTION>
-<FILE>macros</FILE>
-XFCE_PANEL_CHANNEL_NAME
-<SUBSECTION>
-panel_slice_alloc
-panel_slice_alloc0
-panel_slice_free
-panel_slice_free1
-panel_slice_new
-panel_slice_new0
-<SUBSECTION>
-PANEL_PARAM_READABLE
-PANEL_PARAM_READWRITE
-PANEL_PARAM_WRITABLE
-</SECTION>
-
-<SECTION>
 <FILE>xfce-panel-plugin</FILE>
 XfcePanelPlugin
 XfcePanelPluginClass
@@ -152,7 +115,6 @@ xfce_panel_plugin_block_autohide
 xfce_panel_plugin_lookup_rc_file
 xfce_panel_plugin_save_location
 xfce_panel_plugin_xfconf_channel_new
-xfce_panel_plugin_set_panel_hidden
 xfce_panel_plugin_get_icon_size
 xfce_panel_plugin_get_mode
 xfce_panel_plugin_get_nrows
@@ -180,16 +142,6 @@ XfcePanelPluginPreInit
 XFCE_PANEL_PLUGIN_REGISTER
 XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK
 XFCE_PANEL_PLUGIN_REGISTER_FULL
-</SECTION>
-
-<SECTION>
-<FILE>register-46-plugins</FILE>
-XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL
-XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL
-XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK
-<SUBSECTION>
-XFCE_PANEL_PLUGIN_REGISTER_INTERNAL
-XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK
 </SECTION>
 
 <SECTION>
