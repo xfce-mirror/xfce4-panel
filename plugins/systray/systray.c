@@ -107,13 +107,11 @@ struct _SystrayPlugin
   guint           idle_startup;
 
   /* widgets */
-  GtkWidget      *frame;
   GtkWidget      *hvbox;
   GtkWidget      *box;
   GtkWidget      *button;
 
   /* settings */
-  guint           show_frame : 1;
   GSList         *names_ordered;
   GHashTable     *names_hidden;
 
@@ -197,13 +195,6 @@ systray_plugin_class_init (SystrayPluginClass *klass)
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_SHOW_FRAME,
-                                   g_param_spec_boolean ("show-frame",
-                                                         NULL, NULL,
-                                                         TRUE,
-                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
-
-  g_object_class_install_property (gobject_class,
                                    PROP_NAMES_ORDERED,
                                    g_param_spec_boxed ("names-ordered",
                                                        NULL, NULL,
@@ -223,27 +214,13 @@ systray_plugin_class_init (SystrayPluginClass *klass)
 static void
 systray_plugin_init (SystrayPlugin *plugin)
 {
-  //GtkRcStyle *style;
-
   plugin->manager = NULL;
-  plugin->show_frame = TRUE;
   plugin->idle_startup = 0;
   plugin->names_ordered = NULL;
   plugin->names_hidden = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
-  plugin->frame = gtk_frame_new (NULL);
-  gtk_container_add (GTK_CONTAINER (plugin), plugin->frame);
-  gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame), GTK_SHADOW_ETCHED_IN);
-  gtk_widget_show (plugin->frame);
-
-  // FIXME
-  //style = gtk_rc_style_new ();
-  //style->xthickness = style->ythickness = 1;
-  //gtk_widget_modify_style (plugin->frame, style);
-  //g_object_unref (G_OBJECT (style));
-
   plugin->hvbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
-  gtk_container_add (GTK_CONTAINER (plugin->frame), plugin->hvbox);
+  gtk_container_add (GTK_CONTAINER (plugin), plugin->hvbox);
   gtk_widget_show (plugin->hvbox);
 
   plugin->box = systray_box_new ();
@@ -295,10 +272,6 @@ systray_plugin_get_property (GObject    *object,
                            systray_box_get_squared (XFCE_SYSTRAY_BOX (plugin->box)));
       break;
 
-    case PROP_SHOW_FRAME:
-      g_value_set_boolean (value, plugin->show_frame);
-      break;
-
     case PROP_NAMES_ORDERED:
       array = g_ptr_array_new_full (1, (GDestroyNotify) systray_free_array_element);
       g_slist_foreach (plugin->names_ordered, systray_plugin_names_collect_ordered, array);
@@ -328,12 +301,11 @@ systray_plugin_set_property (GObject      *object,
                              GParamSpec   *pspec)
 {
   SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (object);
-  gboolean       boolean_val, old_boolean_val;
+  gboolean       boolean_val;
   GPtrArray     *array;
   const GValue  *tmp;
   gchar         *name;
   guint          i;
-  //GtkRcStyle    *style;
 
   switch (prop_id)
     {
@@ -343,39 +315,10 @@ systray_plugin_set_property (GObject      *object,
       break;
 
     case PROP_SQUARE_ICONS:
-    case PROP_SHOW_FRAME:
       boolean_val = g_value_get_boolean (value);
-      old_boolean_val = !systray_box_get_squared (XFCE_SYSTRAY_BOX (plugin->box))
-                        && plugin->show_frame;
-
-      switch (prop_id)
-        {
-        case PROP_SQUARE_ICONS:
-          systray_box_set_squared (XFCE_SYSTRAY_BOX (plugin->box), boolean_val);
-          break;
-
-        case PROP_SHOW_FRAME:
-          plugin->show_frame = boolean_val;
-          break;
-        }
-
-      boolean_val = !systray_box_get_squared (XFCE_SYSTRAY_BOX (plugin->box))
-                    && plugin->show_frame;
-
-      if (old_boolean_val != boolean_val)
-        {
-          gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame),
-                                     boolean_val ? GTK_SHADOW_ETCHED_IN : GTK_SHADOW_NONE);
-
-          // FIXME
-          //style = gtk_rc_style_new ();
-          //style->xthickness = style->ythickness = boolean_val ? 1 : 0;
-          //gtk_widget_modify_style (plugin->frame, style);
-          //g_object_unref (G_OBJECT (style));
-
-          systray_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
-                                       xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
-        }
+      systray_box_set_squared (XFCE_SYSTRAY_BOX (plugin->box), boolean_val);
+      systray_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
+                                   xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
       break;
 
     case PROP_NAMES_ORDERED:
@@ -510,7 +453,6 @@ systray_plugin_construct (XfcePanelPlugin *panel_plugin)
   {
     { "size-max", G_TYPE_UINT },
     { "square-icons", G_TYPE_BOOLEAN },
-    { "show-frame", G_TYPE_BOOLEAN },
     { "names-ordered", G_TYPE_PTR_ARRAY },
     { "names-hidden", G_TYPE_PTR_ARRAY },
     { NULL }
@@ -586,26 +528,16 @@ systray_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                              gint             size)
 {
   SystrayPlugin    *plugin = XFCE_SYSTRAY_PLUGIN (panel_plugin);
-  GtkWidget        *frame = plugin->frame;
-  gint              border = 0;
-  GtkStyleContext  *ctx;
+  GtkStyleContext  *context;
   GtkBorder         padding;
-
-  /* set the frame border */
-  if (!systray_box_get_squared (XFCE_SYSTRAY_BOX (plugin->box)) &&
-      plugin->show_frame && size > 26)
-    {
-      border = 1;
-    }
-  gtk_container_set_border_width (GTK_CONTAINER (frame), border);
+  gint              border = 0;
 
   /* because the allocated size, used in size_requested is always 1 step
    * behind the allocated size when resizing and during startup, we
    * correct the maximum size set by the user with the size the panel
    * will most likely allocated */
-
-  ctx = gtk_widget_get_style_context (frame);
-  gtk_style_context_get_padding (ctx, gtk_widget_get_state_flags (frame), &padding);
+  context = gtk_widget_get_style_context (plugin->hvbox);
+  gtk_style_context_get_padding (context, gtk_widget_get_state_flags (plugin->hvbox), &padding);
 
   border += MAX (padding.left + padding.right, padding.top + padding.bottom);
   systray_box_set_size_alloc (XFCE_SYSTRAY_BOX (plugin->box), size - 2 * border,
@@ -645,15 +577,6 @@ systray_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_object_bind_property (G_OBJECT (plugin), "square-icons",
                           G_OBJECT (object), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
-
-  object = gtk_builder_get_object (builder, "show-frame");
-  panel_return_if_fail (GTK_IS_WIDGET (object));
-  g_object_bind_property (G_OBJECT (plugin), "show-frame",
-                          G_OBJECT (object), "active",
-                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
-  g_object_bind_property (G_OBJECT (plugin), "square-icons",
-                          G_OBJECT (object), "sensitive",
-                          G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
 
   store = gtk_builder_get_object (builder, "applications-store");
   panel_return_if_fail (GTK_IS_LIST_STORE (store));
