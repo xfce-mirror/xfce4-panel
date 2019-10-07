@@ -223,6 +223,8 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   path_new = g_find_program_in_path ("xfce4-panel-profiles");
   if (path_new == NULL && path_old == NULL)
     gtk_widget_hide (GTK_WIDGET (object));
+  g_free (path_old);
+  g_free (path_new);
   connect_signal ("panel-switch", "clicked", panel_preferences_dialog_panel_switch);
 
   /* style tab */
@@ -255,12 +257,10 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "xfwm4-settings");
   panel_return_if_fail (G_IS_OBJECT (object));
   xfwm4_tweaks = g_find_program_in_path ("xfwm4-tweaks-settings");
-  if (xfwm4_tweaks != NULL)
-    gtk_widget_show (GTK_WIDGET (object));
-  else
-    gtk_widget_hide (GTK_WIDGET (object));
+  gtk_widget_set_visible (GTK_WIDGET (object), xfwm4_tweaks != NULL);
+  g_free (xfwm4_tweaks);
   g_signal_connect (G_OBJECT (object), "clicked",
-                    G_CALLBACK (panel_preferences_dialog_compositing_clicked), xfwm4_tweaks);
+                    G_CALLBACK (panel_preferences_dialog_compositing_clicked), NULL);
 
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "background-image");
   panel_return_if_fail (GTK_IS_FILE_CHOOSER_BUTTON (object));
@@ -1033,22 +1033,27 @@ panel_preferences_dialog_icon_size_changed (GtkSpinButton          *button,
 static void
 panel_preferences_dialog_compositing_clicked (GtkButton *button, gpointer user_data)
 {
-  gchar    *command = user_data;
+  gchar    *command;
   GAppInfo *app_info = NULL;
   GError   *error = NULL;
 
-  app_info = g_app_info_create_from_commandline (command, "Window Manager Tweaks", G_APP_INFO_CREATE_NONE, &error);
-  if (G_UNLIKELY (app_info == NULL)) {
-    g_warning ("Could not find application %s", error->message);
-    return;
-  }
-  if (error != NULL)
-    g_error_free (error);
+  command = g_find_program_in_path ("xfwm4-tweaks-settings");
+  if (command != NULL)
+    app_info = g_app_info_create_from_commandline (command, "Window Manager Tweaks", G_APP_INFO_CREATE_NONE, &error);
+  g_free (command);
 
-  if (!g_app_info_launch (app_info, NULL, NULL, &error))
-    g_warning ("Could not launch the application %s", error->message);
   if (error != NULL)
-    g_error_free (error);
+    {
+      g_warning ("Could not find application %s", error->message);
+      g_error_free (error);
+      return;
+    }
+
+  if (app_info != NULL && !g_app_info_launch (app_info, NULL, NULL, &error))
+    {
+      g_warning ("Could not launch the application %s", error->message);
+      g_error_free (error);
+    }
 }
 
 
@@ -1059,7 +1064,6 @@ panel_preferences_dialog_panel_switch (GtkWidget *widget, PanelPreferencesDialog
   GtkWidget *toplevel;
   gchar     *path_old;
   gchar     *path_new;
-  GError    *error = NULL;
 
   path_old = g_find_program_in_path ("xfpanel-switch");
   path_new = g_find_program_in_path ("xfce4-panel-profiles");
@@ -1072,10 +1076,14 @@ panel_preferences_dialog_panel_switch (GtkWidget *widget, PanelPreferencesDialog
 
   /* first try the new name of the executable, then the old */
   if (path_new)
-    g_spawn_command_line_async (path_new, &error);
+    g_spawn_command_line_async (path_new, NULL);
   else if (path_old)
-    g_spawn_command_line_async (path_old, &error);
+    g_spawn_command_line_async (path_old, NULL);
+
+  g_free (path_old);
+  g_free (path_new);
 }
+
 
 
 static XfcePanelPluginProvider *
