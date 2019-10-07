@@ -36,7 +36,6 @@
 
 #define ICON_SIZE     (22)
 #define BUTTON_SIZE   (16)
-#define FRAME_SPACING (1)
 
 
 static void     systray_plugin_get_property                 (GObject               *object,
@@ -123,7 +122,6 @@ enum
   PROP_0,
   PROP_SIZE_MAX,
   PROP_SQUARE_ICONS,
-  PROP_SHOW_FRAME,
   PROP_NAMES_ORDERED,
   PROP_NAMES_HIDDEN
 };
@@ -227,7 +225,7 @@ systray_plugin_init (SystrayPlugin *plugin)
   gtk_box_pack_start (GTK_BOX (plugin->hvbox), plugin->box, TRUE, TRUE, 0);
   g_signal_connect (G_OBJECT (plugin->box), "draw",
       G_CALLBACK (systray_plugin_box_draw), plugin);
-  gtk_container_set_border_width (GTK_CONTAINER (plugin->box), FRAME_SPACING);
+  gtk_container_set_border_width (GTK_CONTAINER (plugin->box), 1);
   gtk_widget_show (plugin->box);
 
   plugin->button = xfce_arrow_button_new (GTK_ARROW_RIGHT);
