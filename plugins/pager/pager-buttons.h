@@ -46,6 +46,9 @@ void       pager_buttons_set_orientation (PagerButtons        *pager,
 void       pager_buttons_set_n_rows      (PagerButtons        *pager,
                                           gint                 rows);
 
+void       pager_buttons_set_numbering   (PagerButtons        *pager,
+                                          gboolean             numbering);
+
 G_END_DECLS
 
 #endif /* !__PAGER_BUTTONS_H__ */

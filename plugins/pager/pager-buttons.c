@@ -75,6 +75,7 @@ struct _PagerButtons
   WnckScreen     *wnck_screen;
 
   gint            rows;
+  gboolean        numbering;
   GtkOrientation  orientation;
 };
 
@@ -83,7 +84,8 @@ enum
   PROP_0,
   PROP_SCREEN,
   PROP_ROWS,
-  PROP_ORIENTATION
+  PROP_ORIENTATION,
+  PROP_NUMBERING
 };
 
 enum
@@ -131,6 +133,13 @@ pager_buttons_class_init (PagerButtonsClass *klass)
                                                      GTK_TYPE_ORIENTATION,
                                                      GTK_ORIENTATION_HORIZONTAL,
                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_NUMBERING,
+                                   g_param_spec_boolean ("numbering",
+                                                         NULL, NULL,
+                                                         FALSE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 }
 
 
@@ -141,13 +150,13 @@ pager_buttons_init (PagerButtons *pager)
   pager->rows = 1;
   pager->wnck_screen = NULL;
   pager->orientation = GTK_ORIENTATION_HORIZONTAL;
+  pager->numbering = FALSE;
   pager->buttons = NULL;
   pager->rebuild_id = 0;
 
   /* although I'd prefer normal allocation, the homogeneous setting
    * takes care of small panels, while non-homogeneous tables allocate
    * outside the panel size --nick */
-  /* gtk_table_set_homogeneous (GTK_TABLE (pager), TRUE); */
   gtk_grid_set_row_homogeneous (GTK_GRID (pager), TRUE);
   gtk_grid_set_column_homogeneous (GTK_GRID (pager), TRUE);
 }
@@ -170,6 +179,10 @@ pager_buttons_get_property (GObject    *object,
 
     case PROP_ORIENTATION:
       g_value_set_enum (value, pager->orientation);
+      break;
+
+    case PROP_NUMBERING:
+      g_value_set_boolean (value, pager->numbering);
       break;
 
     default:
@@ -212,6 +225,10 @@ pager_buttons_set_property (GObject      *object,
 
     case PROP_ORIENTATION:
       pager_buttons_set_orientation (pager, g_value_get_enum (value));
+      break;
+
+    case PROP_NUMBERING:
+      pager_buttons_set_numbering (pager, g_value_get_boolean (value));
       break;
 
     default:
@@ -422,6 +439,7 @@ pager_buttons_rebuild_idle (gpointer user_data)
           gtk_widget_show (button);
 
           label = gtk_label_new (NULL);
+          g_object_set_data (G_OBJECT (label), "numbering", GINT_TO_POINTER (pager->numbering));
           g_signal_connect_object (G_OBJECT (workspace), "name-changed",
               G_CALLBACK (pager_buttons_workspace_button_label), label, 0);
           pager_buttons_workspace_button_label (workspace, label);
@@ -554,10 +572,13 @@ pager_buttons_workspace_button_label (WnckWorkspace *workspace,
                                       GtkWidget     *label)
 {
   const gchar *name;
-  gchar       *utf8 = NULL, *name_num = NULL;
+  gchar       *utf8 = NULL, *name_fallback = NULL, *name_num = NULL;
+  gboolean     numbering;
 
   panel_return_if_fail (WNCK_IS_WORKSPACE (workspace));
   panel_return_if_fail (GTK_IS_LABEL (label));
+
+  numbering = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (label), "numbering"));
 
   /* try to get an utf-8 valid name */
   name = wnck_workspace_get_name (workspace);
@@ -566,12 +587,18 @@ pager_buttons_workspace_button_label (WnckWorkspace *workspace,
     name = utf8 = g_locale_to_utf8 (name, -1, NULL, NULL, NULL);
 
   if (panel_str_is_empty (name))
-    name = name_num = g_strdup_printf (_("Workspace %d"),
-        wnck_workspace_get_number (workspace) + 1);
+    name = name_fallback = g_strdup_printf (_("Workspace %d"),
+                                            wnck_workspace_get_number (workspace) + 1);
+
+  if (numbering)
+    name = name_num = g_strdup_printf ("%d - %s",
+                                       wnck_workspace_get_number (workspace) + 1,
+                                       name);
 
   gtk_label_set_text (GTK_LABEL (label), name);
 
   g_free (utf8);
+  g_free (name_fallback);
   g_free (name_num);
 }
 
@@ -653,5 +680,20 @@ pager_buttons_set_n_rows (PagerButtons *pager,
    return;
 
   pager->rows = rows;
+  pager_buttons_queue_rebuild (pager);
+}
+
+
+
+void
+pager_buttons_set_numbering (PagerButtons *pager,
+                             gboolean      numbering)
+{
+  panel_return_if_fail (XFCE_IS_PAGER_BUTTONS (pager));
+
+  if (pager->numbering == numbering)
+   return;
+
+  pager->numbering = numbering;
   pager_buttons_queue_rebuild (pager);
 }

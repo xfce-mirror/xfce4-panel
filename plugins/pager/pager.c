@@ -101,6 +101,7 @@ struct _PagerPlugin
   XfcePanelPlugin __parent__;
 
   GtkWidget     *pager;
+  GObject       *numbering_switch;
 
   WnckScreen    *wnck_screen;
 
@@ -109,6 +110,7 @@ struct _PagerPlugin
   guint          wrap_workspaces : 1;
   guint          miniature_view : 1;
   gint           rows;
+  gboolean       numbering;
   gfloat         ratio;
 };
 
@@ -118,7 +120,8 @@ enum
   PROP_WORKSPACE_SCROLLING,
   PROP_WRAP_WORKSPACES,
   PROP_MINIATURE_VIEW,
-  PROP_ROWS
+  PROP_ROWS,
+  PROP_NUMBERING
 };
 
 
@@ -181,6 +184,13 @@ pager_plugin_class_init (PagerPluginClass *klass)
                                                       NULL, NULL,
                                                       1, 50, 1,
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_NUMBERING,
+                                   g_param_spec_boolean ("numbering",
+                                                         NULL, NULL,
+                                                         FALSE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 }
 
 
@@ -193,6 +203,7 @@ pager_plugin_init (PagerPlugin *plugin)
   plugin->wrap_workspaces = FALSE;
   plugin->miniature_view = TRUE;
   plugin->rows = 1;
+  plugin->numbering = FALSE;
   plugin->ratio = 1.0;
   plugin->pager = NULL;
 }
@@ -220,11 +231,17 @@ pager_plugin_get_property (GObject    *object,
     case PROP_MINIATURE_VIEW:
       g_value_set_boolean (value, plugin->miniature_view);
 
+      if (G_IS_OBJECT (plugin->numbering_switch))
+        gtk_widget_set_visible (GTK_WIDGET (plugin->numbering_switch), !plugin->miniature_view);
       pager_plugin_screen_layout_changed (plugin);
       break;
 
     case PROP_ROWS:
       g_value_set_uint (value, plugin->rows);
+      break;
+
+    case PROP_NUMBERING:
+      g_value_set_boolean (value, plugin->numbering);
       break;
 
     default:
@@ -271,6 +288,13 @@ pager_plugin_set_property (GObject      *object,
           else
             pager_buttons_set_n_rows (XFCE_PAGER_BUTTONS (plugin->pager), plugin->rows);
         }
+      break;
+
+    case PROP_NUMBERING:
+      plugin->numbering = g_value_get_boolean (value);
+
+      if (!plugin->miniature_view)
+        pager_buttons_set_numbering (XFCE_PAGER_BUTTONS (plugin->pager), plugin->numbering);
       break;
 
     default:
@@ -451,6 +475,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       plugin->pager = pager_buttons_new (plugin->wnck_screen);
       pager_buttons_set_n_rows (XFCE_PAGER_BUTTONS (plugin->pager), plugin->rows);
       pager_buttons_set_orientation (XFCE_PAGER_BUTTONS (plugin->pager), orientation);
+      pager_buttons_set_numbering (XFCE_PAGER_BUTTONS (plugin->pager), plugin->numbering);
     }
 
   gtk_container_add (GTK_CONTAINER (plugin), plugin->pager);
@@ -502,6 +527,7 @@ pager_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "wrap-workspaces", G_TYPE_BOOLEAN },
     { "miniature-view", G_TYPE_BOOLEAN },
     { "rows", G_TYPE_UINT },
+    { "numbering", G_TYPE_BOOLEAN },
     { NULL }
   };
 
@@ -695,6 +721,13 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_object_bind_property (G_OBJECT (plugin), "rows",
                           G_OBJECT (object), "value",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+
+  plugin->numbering_switch = gtk_builder_get_object (builder, "numbering");
+  panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (plugin->numbering_switch));
+  g_object_bind_property (G_OBJECT (plugin), "numbering",
+                          G_OBJECT (plugin->numbering_switch), "active",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+  gtk_widget_set_visible (GTK_WIDGET (plugin->numbering_switch), !plugin->miniature_view);
 
   /* update the rows limit */
   pager_plugin_configure_n_workspaces_changed (plugin->wnck_screen, NULL, builder);
