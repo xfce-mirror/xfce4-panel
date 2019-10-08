@@ -102,6 +102,7 @@ struct _PagerPlugin
 
   GtkWidget     *pager;
   GObject       *numbering_switch;
+  GObject       *scrolling_frame;
 
   WnckScreen    *wnck_screen;
 
@@ -233,6 +234,9 @@ pager_plugin_get_property (GObject    *object,
 
       if (G_IS_OBJECT (plugin->numbering_switch))
         gtk_widget_set_visible (GTK_WIDGET (plugin->numbering_switch), !plugin->miniature_view);
+      if (G_IS_OBJECT (plugin->scrolling_frame))
+        gtk_widget_set_visible (GTK_WIDGET (plugin->scrolling_frame), !plugin->miniature_view);
+
       pager_plugin_screen_layout_changed (plugin);
       break;
 
@@ -728,6 +732,10 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                           G_OBJECT (plugin->numbering_switch), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
   gtk_widget_set_visible (GTK_WIDGET (plugin->numbering_switch), !plugin->miniature_view);
+
+  plugin->scrolling_frame = gtk_builder_get_object (builder, "scrolling-frame");
+  panel_return_if_fail (GTK_IS_FRAME (plugin->scrolling_frame));
+  gtk_widget_set_visible (GTK_WIDGET (plugin->scrolling_frame), !plugin->miniature_view);
 
   /* update the rows limit */
   pager_plugin_configure_n_workspaces_changed (plugin->wnck_screen, NULL, builder);
