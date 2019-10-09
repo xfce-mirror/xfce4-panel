@@ -102,7 +102,7 @@ struct _PagerPlugin
 
   GtkWidget     *pager;
   GObject       *numbering_switch;
-  GObject       *scrolling_frame;
+  GObject       *scrolling_switch;
 
   WnckScreen    *wnck_screen;
 
@@ -234,8 +234,8 @@ pager_plugin_get_property (GObject    *object,
 
       if (G_IS_OBJECT (plugin->numbering_switch))
         gtk_widget_set_visible (GTK_WIDGET (plugin->numbering_switch), !plugin->miniature_view);
-      if (G_IS_OBJECT (plugin->scrolling_frame))
-        gtk_widget_set_visible (GTK_WIDGET (plugin->scrolling_frame), !plugin->miniature_view);
+      if (G_IS_OBJECT (plugin->scrolling_switch))
+        gtk_widget_set_visible (GTK_WIDGET (plugin->scrolling_switch), !plugin->miniature_view);
 
       pager_plugin_screen_layout_changed (plugin);
       break;
@@ -709,14 +709,14 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_signal_connect (G_OBJECT (object), "clicked",
       G_CALLBACK (pager_plugin_configure_workspace_settings), dialog);
 
-  object = gtk_builder_get_object (builder, "workspace-scrolling");
-  panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (object));
+  plugin->scrolling_switch = gtk_builder_get_object (builder, "workspace-scrolling");
+  panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (plugin->scrolling_switch));
   g_object_bind_property (G_OBJECT (plugin), "workspace-scrolling",
-                          G_OBJECT (object), "active",
+                          G_OBJECT (plugin->scrolling_switch), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
-  object = gtk_builder_get_object (builder, "miniature-view");
-  panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (object));
+  object = gtk_builder_get_object (builder, "appearance");
+  panel_return_if_fail (GTK_IS_COMBO_BOX (object));
   g_object_bind_property (G_OBJECT (plugin), "miniature-view",
                           G_OBJECT (object), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
@@ -734,9 +734,7 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
   gtk_widget_set_visible (GTK_WIDGET (plugin->numbering_switch), !plugin->miniature_view);
 
-  plugin->scrolling_frame = gtk_builder_get_object (builder, "scrolling-frame");
-  panel_return_if_fail (GTK_IS_FRAME (plugin->scrolling_frame));
-  gtk_widget_set_visible (GTK_WIDGET (plugin->scrolling_frame), !plugin->miniature_view);
+  gtk_widget_set_visible (GTK_WIDGET (plugin->scrolling_switch), !plugin->miniature_view);
 
   /* update the rows limit */
   pager_plugin_configure_n_workspaces_changed (plugin->wnck_screen, NULL, builder);
