@@ -471,14 +471,12 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                                        gint             size)
 {
   ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (panel_plugin);
-  gint                    row_size;
   XfcePanelPluginMode     mode;
   GtkRequisition          label_size;
   GtkOrientation          orientation;
   gint                    border_thickness;
   GdkPixbuf              *icon;
-  gint                    icon_width_max, icon_height_max;
-  gint                    icon_width = 0;
+  gint                    icon_size;
   GdkScreen              *screen;
   GtkIconTheme           *icon_theme = NULL;
   gchar                  *icon_name;
@@ -497,7 +495,6 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   else
     orientation = GTK_ORIENTATION_VERTICAL;
 
-  row_size = size / xfce_panel_plugin_get_nrows (panel_plugin);
   /* style thickness */
   ctx = gtk_widget_get_style_context (plugin->button);
   gtk_style_context_get_padding (ctx, gtk_widget_get_state_flags (plugin->button), &padding);
@@ -505,10 +502,7 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   border_thickness = MAX (padding.left + padding.right + border.left + border.right,
                           padding.top + padding.bottom + border.top + border.bottom);
 
-  /* arbitrary limit on non-square icon width in horizontal panel */
-  icon_width_max = (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL) ?
-    6 * row_size - border_thickness : size - border_thickness;
-  icon_height_max = row_size - border_thickness;
+  icon_size = xfce_panel_plugin_get_icon_size (panel_plugin);
 
   screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
   if (G_LIKELY (screen != NULL))
@@ -519,13 +513,12 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 
   icon = xfce_panel_pixbuf_from_source_at_size (icon_name,
                                                 icon_theme,
-                                                icon_width_max,
-                                                icon_height_max);
+                                                icon_size,
+                                                icon_size);
 
   if (G_LIKELY (icon != NULL))
     {
       gtk_image_set_from_pixbuf (GTK_IMAGE (plugin->icon), icon);
-      icon_width = gdk_pixbuf_get_width (icon);
       g_object_unref (G_OBJECT (icon));
     }
 
@@ -534,7 +527,7 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
     {
       /* check if the label (minimum size) fits next to the icon */
       gtk_widget_get_preferred_size (GTK_WIDGET (plugin->label), &label_size, NULL);
-      if (label_size.width <= size - icon_width - 2 - border_thickness)
+      if (label_size.width <= size - icon_size - 2 - border_thickness)
         orientation = GTK_ORIENTATION_HORIZONTAL;
     }
 
