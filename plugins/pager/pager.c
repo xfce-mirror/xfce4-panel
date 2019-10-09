@@ -297,7 +297,8 @@ pager_plugin_set_property (GObject      *object,
     case PROP_NUMBERING:
       plugin->numbering = g_value_get_boolean (value);
 
-      if (!plugin->miniature_view)
+      if (plugin->pager != NULL
+          && !plugin->miniature_view)
         pager_buttons_set_numbering (XFCE_PAGER_BUTTONS (plugin->pager), plugin->numbering);
       break;
 
