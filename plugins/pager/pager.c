@@ -102,7 +102,9 @@ struct _PagerPlugin
 
   GtkWidget     *pager;
   GObject       *numbering_switch;
+  GObject       *numbering_label;
   GObject       *scrolling_switch;
+  GObject       *scrolling_label;
 
   WnckScreen    *wnck_screen;
 
@@ -232,8 +234,12 @@ pager_plugin_get_property (GObject    *object,
     case PROP_MINIATURE_VIEW:
       g_value_set_boolean (value, plugin->miniature_view);
 
+      if (G_IS_OBJECT (plugin->numbering_label))
+        gtk_widget_set_visible (GTK_WIDGET (plugin->numbering_label), !plugin->miniature_view);
       if (G_IS_OBJECT (plugin->numbering_switch))
         gtk_widget_set_visible (GTK_WIDGET (plugin->numbering_switch), !plugin->miniature_view);
+      if (G_IS_OBJECT (plugin->scrolling_label))
+        gtk_widget_set_visible (GTK_WIDGET (plugin->scrolling_label), !plugin->miniature_view);
       if (G_IS_OBJECT (plugin->scrolling_switch))
         gtk_widget_set_visible (GTK_WIDGET (plugin->scrolling_switch), !plugin->miniature_view);
 
@@ -709,8 +715,9 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_signal_connect (G_OBJECT (object), "clicked",
       G_CALLBACK (pager_plugin_configure_workspace_settings), dialog);
 
+  plugin->scrolling_label = gtk_builder_get_object (builder, "workspace-scrolling-label");
   plugin->scrolling_switch = gtk_builder_get_object (builder, "workspace-scrolling");
-  panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (plugin->scrolling_switch));
+  panel_return_if_fail (GTK_IS_SWITCH (plugin->scrolling_switch));
   g_object_bind_property (G_OBJECT (plugin), "workspace-scrolling",
                           G_OBJECT (plugin->scrolling_switch), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
@@ -727,13 +734,16 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                           G_OBJECT (object), "value",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
+  plugin->numbering_label = gtk_builder_get_object (builder, "numbering-label");
   plugin->numbering_switch = gtk_builder_get_object (builder, "numbering");
-  panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (plugin->numbering_switch));
+  panel_return_if_fail (GTK_IS_SWITCH (plugin->numbering_switch));
   g_object_bind_property (G_OBJECT (plugin), "numbering",
                           G_OBJECT (plugin->numbering_switch), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
-  gtk_widget_set_visible (GTK_WIDGET (plugin->numbering_switch), !plugin->miniature_view);
 
+  gtk_widget_set_visible (GTK_WIDGET (plugin->numbering_label), !plugin->miniature_view);
+  gtk_widget_set_visible (GTK_WIDGET (plugin->numbering_switch), !plugin->miniature_view);
+  gtk_widget_set_visible (GTK_WIDGET (plugin->scrolling_label), !plugin->miniature_view);
   gtk_widget_set_visible (GTK_WIDGET (plugin->scrolling_switch), !plugin->miniature_view);
 
   /* update the rows limit */
