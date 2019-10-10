@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-09 06:30+0200\n"
-"PO-Revision-Date: 2019-10-09 12:47+0000\n"
+"POT-Creation-Date: 2019-10-10 06:30+0200\n"
+"PO-Revision-Date: 2019-10-10 11:07+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/xfce/xfce4-panel/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr "Jei pašalinsite elementą iš skydelio, jis bus prarastas visam laikui.
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1313
-#: ../plugins/applicationsmenu/applicationsmenu.c:593
+#: ../plugins/applicationsmenu/applicationsmenu.c:586
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "_Cancel"
 msgstr "_Atsisakyti"
@@ -100,7 +100,7 @@ msgstr "_Atsijungti"
 #: ../plugins/clock/clock-dialog.glade.h:8
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 #: ../plugins/launcher/launcher-dialog.glade.h:20
-#: ../plugins/pager/pager-dialog.glade.h:3
+#: ../plugins/pager/pager-dialog.glade.h:4
 #: ../plugins/separator/separator-dialog.glade.h:6
 #: ../plugins/systray/systray-dialog.glade.h:3
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
@@ -342,7 +342,7 @@ msgstr "Pridėti naujus įskiepius į skydelį"
 #: ../plugins/clock/clock-dialog.glade.h:7
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 #: ../plugins/launcher/launcher-dialog.glade.h:17
-#: ../plugins/pager/pager-dialog.glade.h:2
+#: ../plugins/pager/pager-dialog.glade.h:5
 #: ../plugins/separator/separator-dialog.glade.h:5
 #: ../plugins/systray/systray-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
@@ -935,7 +935,6 @@ msgstr "Pasirinkite šį parametrą, norėdami meniu matyti bendrinį programos 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
-#: ../plugins/pager/pager-dialog.glade.h:9
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/systray/systray-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
@@ -972,17 +971,17 @@ msgstr "Meniu failas"
 msgid "Applications"
 msgstr "Programos"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:591
+#: ../plugins/applicationsmenu/applicationsmenu.c:584
 #: ../plugins/directorymenu/directorymenu.c:392
 msgid "Select An Icon"
 msgstr "Pasirinkite piktogramą"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:594
+#: ../plugins/applicationsmenu/applicationsmenu.c:587
 #: ../plugins/directorymenu/directorymenu.c:395
 msgid "_OK"
 msgstr "_Gerai"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:630
+#: ../plugins/applicationsmenu/applicationsmenu.c:623
 #: ../plugins/clock/clock.c:912 ../plugins/launcher/launcher.c:2399
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -1587,11 +1586,11 @@ msgstr "Išplėstiniai"
 msgid "Program launcher with optional menu"
 msgstr "Programų leistukas su pasirinktiniu meniu"
 
-#: ../plugins/pager/pager.c:541 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:542 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "Darbo srities _nustatymai..."
 
-#: ../plugins/pager/pager.c:629
+#: ../plugins/pager/pager.c:630
 msgid "Unable to open the workspace settings"
 msgstr "Nepavyko atverti darbo srities nustatymų"
 
@@ -1601,36 +1600,33 @@ msgid "Workspace %d"
 msgstr "Darbo sritis %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:1
+msgid "Buttons"
+msgstr "Mygtukai"
+
+#: ../plugins/pager/pager-dialog.glade.h:2
+msgid "Miniature View"
+msgstr "Miniatiūrų rodinys"
+
+#: ../plugins/pager/pager-dialog.glade.h:3
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Workspace Switcher"
 msgstr "Darbo sričių perjungiklis"
 
-#: ../plugins/pager/pager-dialog.glade.h:4
+#: ../plugins/pager/pager-dialog.glade.h:7
+msgid "Appearance:"
+msgstr "Išvaizda:"
+
+#: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Number of _rows:"
 msgstr "Eilučių _skaičius:"
 
-#: ../plugins/pager/pager-dialog.glade.h:5
-msgid "Show mi_niature view"
-msgstr "Rodyti _mažą peržiūrą"
-
-#: ../plugins/pager/pager-dialog.glade.h:6
-msgid ""
-"Show a miniature view of the workspace with rectangles for the visible "
-"windows"
-msgstr "Rodyti mažą darbo srities rodinį su matomų langų stačiakampiais"
-
-#: ../plugins/pager/pager-dialog.glade.h:7
+#: ../plugins/pager/pager-dialog.glade.h:9
 msgid "Show workspace number"
 msgstr "Rodyti darbo srities numerį"
 
 #: ../plugins/pager/pager-dialog.glade.h:10
 msgid "Switch workspaces using the mouse _wheel"
 msgstr "Perjungti darbo sritis naudojant p_elės ratuką"
-
-#: ../plugins/pager/pager-dialog.glade.h:11
-#: ../plugins/tasklist/tasklist-dialog.glade.h:25
-msgid "Behaviour"
-msgstr "Elgsena"
 
 #: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Switch between virtual desktops"
@@ -1802,6 +1798,10 @@ msgstr "_Užvedus pelę ant mygtuko, piešti lango rėmelį"
 #: ../plugins/tasklist/tasklist-dialog.glade.h:24
 msgid "_Switch windows using the mouse wheel"
 msgstr "_Perjungti langus naudojant pelės ratuką"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+msgid "Behaviour"
+msgstr "Elgsena"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Show windows from _all workspaces or viewports"
