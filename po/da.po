@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-09 06:30+0200\n"
-"PO-Revision-Date: 2019-10-09 16:06+0000\n"
+"POT-Creation-Date: 2019-10-10 06:30+0200\n"
+"PO-Revision-Date: 2019-10-10 13:07+0000\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/xfce/xfce4-panel/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +55,7 @@ msgstr "Hvis du fjerner elementet fra panelet vil det gå tabt permanent."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1313
-#: ../plugins/applicationsmenu/applicationsmenu.c:593
+#: ../plugins/applicationsmenu/applicationsmenu.c:586
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "_Cancel"
 msgstr "_Annuller"
@@ -104,7 +104,7 @@ msgstr "_Log ud"
 #: ../plugins/clock/clock-dialog.glade.h:8
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 #: ../plugins/launcher/launcher-dialog.glade.h:20
-#: ../plugins/pager/pager-dialog.glade.h:3
+#: ../plugins/pager/pager-dialog.glade.h:4
 #: ../plugins/separator/separator-dialog.glade.h:6
 #: ../plugins/systray/systray-dialog.glade.h:3
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
@@ -344,7 +344,7 @@ msgstr "Tilføj nye plugins til panelet"
 #: ../plugins/clock/clock-dialog.glade.h:7
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 #: ../plugins/launcher/launcher-dialog.glade.h:17
-#: ../plugins/pager/pager-dialog.glade.h:2
+#: ../plugins/pager/pager-dialog.glade.h:5
 #: ../plugins/separator/separator-dialog.glade.h:5
 #: ../plugins/systray/systray-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
@@ -937,7 +937,6 @@ msgstr "Vælg denne indstilling for at vise det generiske navn i menuen, eksempe
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
-#: ../plugins/pager/pager-dialog.glade.h:9
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/systray/systray-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
@@ -974,17 +973,17 @@ msgstr "Menufil"
 msgid "Applications"
 msgstr "Programmer"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:591
+#: ../plugins/applicationsmenu/applicationsmenu.c:584
 #: ../plugins/directorymenu/directorymenu.c:392
 msgid "Select An Icon"
 msgstr "Vælg et ikon"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:594
+#: ../plugins/applicationsmenu/applicationsmenu.c:587
 #: ../plugins/directorymenu/directorymenu.c:395
 msgid "_OK"
 msgstr "_OK"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:630
+#: ../plugins/applicationsmenu/applicationsmenu.c:623
 #: ../plugins/clock/clock.c:912 ../plugins/launcher/launcher.c:2399
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -1589,11 +1588,11 @@ msgstr "Avanceret"
 msgid "Program launcher with optional menu"
 msgstr "Programstarter med valgfri menu"
 
-#: ../plugins/pager/pager.c:541 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:542 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "Arbejdsområde_indstillinger ..."
 
-#: ../plugins/pager/pager.c:629
+#: ../plugins/pager/pager.c:630
 msgid "Unable to open the workspace settings"
 msgstr "Kunne ikke åbne indstillingerne til arbejdsområde"
 
@@ -1603,36 +1602,33 @@ msgid "Workspace %d"
 msgstr "Arbejdsområde %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:1
+msgid "Buttons"
+msgstr "Knapper"
+
+#: ../plugins/pager/pager-dialog.glade.h:2
+msgid "Miniature View"
+msgstr "Miniaturevisning"
+
+#: ../plugins/pager/pager-dialog.glade.h:3
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Workspace Switcher"
 msgstr "Arbejdsområdeskifter"
 
-#: ../plugins/pager/pager-dialog.glade.h:4
+#: ../plugins/pager/pager-dialog.glade.h:7
+msgid "Appearance:"
+msgstr "Udseende:"
+
+#: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Number of _rows:"
 msgstr "Antal ræ_kker:"
 
-#: ../plugins/pager/pager-dialog.glade.h:5
-msgid "Show mi_niature view"
-msgstr "Vis mi_niatureoversigt"
-
-#: ../plugins/pager/pager-dialog.glade.h:6
-msgid ""
-"Show a miniature view of the workspace with rectangles for the visible "
-"windows"
-msgstr "Vis en miniatureoversigt af arbejdsområdet med rektangler for de synlige vinduer"
-
-#: ../plugins/pager/pager-dialog.glade.h:7
+#: ../plugins/pager/pager-dialog.glade.h:9
 msgid "Show workspace number"
 msgstr "Vis arbejdsområdenummer"
 
 #: ../plugins/pager/pager-dialog.glade.h:10
 msgid "Switch workspaces using the mouse _wheel"
 msgstr "Skift arbejdsområde med muse_hjulet"
-
-#: ../plugins/pager/pager-dialog.glade.h:11
-#: ../plugins/tasklist/tasklist-dialog.glade.h:25
-msgid "Behaviour"
-msgstr "Opførsel"
 
 #: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Switch between virtual desktops"
@@ -1804,6 +1800,10 @@ msgstr "Te_gn en vinduesramme når svævning over en knap"
 #: ../plugins/tasklist/tasklist-dialog.glade.h:24
 msgid "_Switch windows using the mouse wheel"
 msgstr "_Skift arbejdsområde med musehjulet"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+msgid "Behaviour"
+msgstr "Opførsel"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Show windows from _all workspaces or viewports"
