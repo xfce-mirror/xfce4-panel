@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-09 06:30+0200\n"
-"PO-Revision-Date: 2019-10-09 11:00+0000\n"
+"POT-Creation-Date: 2019-10-10 18:30+0200\n"
+"PO-Revision-Date: 2019-10-11 17:13+0000\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/xfce/xfce4-panel/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -52,7 +52,7 @@ msgstr "Als u een element van de werkbalk verwijdert, dan kan dit niet meer onge
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1313
-#: ../plugins/applicationsmenu/applicationsmenu.c:593
+#: ../plugins/applicationsmenu/applicationsmenu.c:586
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "_Cancel"
 msgstr "_Afbreken"
@@ -101,7 +101,7 @@ msgstr "Af_melden"
 #: ../plugins/clock/clock-dialog.glade.h:8
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 #: ../plugins/launcher/launcher-dialog.glade.h:20
-#: ../plugins/pager/pager-dialog.glade.h:3
+#: ../plugins/pager/pager-dialog.glade.h:4
 #: ../plugins/separator/separator-dialog.glade.h:6
 #: ../plugins/systray/systray-dialog.glade.h:3
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
@@ -341,7 +341,7 @@ msgstr "Voeg nieuwe invoegsels toe aan de werkbalk"
 #: ../plugins/clock/clock-dialog.glade.h:7
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 #: ../plugins/launcher/launcher-dialog.glade.h:17
-#: ../plugins/pager/pager-dialog.glade.h:2
+#: ../plugins/pager/pager-dialog.glade.h:5
 #: ../plugins/separator/separator-dialog.glade.h:5
 #: ../plugins/systray/systray-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
@@ -934,7 +934,6 @@ msgstr "Kies deze optie om de generieke naam in het menu weer te geven, bijvoorb
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
-#: ../plugins/pager/pager-dialog.glade.h:9
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/systray/systray-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
@@ -971,17 +970,17 @@ msgstr "Menubestand"
 msgid "Applications"
 msgstr "Toepassingen"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:591
+#: ../plugins/applicationsmenu/applicationsmenu.c:584
 #: ../plugins/directorymenu/directorymenu.c:392
 msgid "Select An Icon"
 msgstr "Kies een pictogram"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:594
+#: ../plugins/applicationsmenu/applicationsmenu.c:587
 #: ../plugins/directorymenu/directorymenu.c:395
 msgid "_OK"
 msgstr "_Oké"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:630
+#: ../plugins/applicationsmenu/applicationsmenu.c:623
 #: ../plugins/clock/clock.c:912 ../plugins/launcher/launcher.c:2399
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -1586,11 +1585,11 @@ msgstr "Geavanceerd"
 msgid "Program launcher with optional menu"
 msgstr "Programma-starter met optioneel menu"
 
-#: ../plugins/pager/pager.c:541 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:548 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "Werkbladinstellingen"
 
-#: ../plugins/pager/pager.c:629
+#: ../plugins/pager/pager.c:636
 msgid "Unable to open the workspace settings"
 msgstr "Kon de werkbladinstellingen niet openen"
 
@@ -1600,36 +1599,33 @@ msgid "Workspace %d"
 msgstr "Werkblad %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:1
+msgid "Buttons"
+msgstr "Knoppen"
+
+#: ../plugins/pager/pager-dialog.glade.h:2
+msgid "Miniature View"
+msgstr "Miniatuurweergave"
+
+#: ../plugins/pager/pager-dialog.glade.h:3
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Workspace Switcher"
 msgstr "Werkbladwisselaar"
 
-#: ../plugins/pager/pager-dialog.glade.h:4
+#: ../plugins/pager/pager-dialog.glade.h:7
 msgid "Number of _rows:"
 msgstr "Aantal _rijen:"
 
-#: ../plugins/pager/pager-dialog.glade.h:5
-msgid "Show mi_niature view"
-msgstr "Toon mi_niatuuraanblik"
-
-#: ../plugins/pager/pager-dialog.glade.h:6
-msgid ""
-"Show a miniature view of the workspace with rectangles for the visible "
-"windows"
-msgstr "Toon een miniatuuraanblik van het werkblad met rechthoeken voor de zichtbare vensters"
-
-#: ../plugins/pager/pager-dialog.glade.h:7
+#: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Show workspace number"
 msgstr "Toon nummer van werkblad"
 
-#: ../plugins/pager/pager-dialog.glade.h:10
-msgid "Switch workspaces using the mouse _wheel"
-msgstr "Wissel _werkbladen met het muiswieltje"
+#: ../plugins/pager/pager-dialog.glade.h:9
+msgid "Switch workspaces using the mouse wheel"
+msgstr "Verwissel werkbladen met het muiswieltje"
 
-#: ../plugins/pager/pager-dialog.glade.h:11
-#: ../plugins/tasklist/tasklist-dialog.glade.h:25
-msgid "Behaviour"
-msgstr "Gedrag"
+#: ../plugins/pager/pager-dialog.glade.h:10
+msgid "<b>Appearance</b>"
+msgstr "<b>Uiterlijk</b>"
 
 #: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Switch between virtual desktops"
@@ -1802,9 +1798,13 @@ msgstr "Teken venster_rand als de muisaanwijzer over een knop zweeft"
 msgid "_Switch windows using the mouse wheel"
 msgstr "Wissel vensters met het muiswieltje"
 
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+msgid "Behaviour"
+msgstr "Gedrag"
+
 #: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Show windows from _all workspaces or viewports"
-msgstr "Toon vensters van _alle werkbladen"
+msgstr "Toon vensters van _alle werkbladen of beeldschermen"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:27
 msgid "Show windows from all mo_nitors"
