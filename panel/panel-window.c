@@ -69,6 +69,7 @@
 #define HANDLE_SIZE           (HANDLE_DOTS * (HANDLE_PIXELS + \
                                HANDLE_PIXEL_SPACE) - HANDLE_PIXEL_SPACE)
 #define HANDLE_SIZE_TOTAL     (2 * HANDLE_SPACING + HANDLE_SIZE)
+#define FADE_TIME              200
 #define IS_HORIZONTAL(window) ((window)->mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 
 
@@ -157,6 +158,7 @@ static void         panel_window_active_window_state_changed          (WnckWindo
                                                                        PanelWindow      *window);
 static void         panel_window_autohide_queue                       (PanelWindow      *window,
                                                                        AutohideState     new_state);
+static gboolean     panel_window_autohide_slideout                    (gpointer          data);
 static void         panel_window_set_autohide_behavior                (PanelWindow      *window,
                                                                        AutohideBehavior  behavior);
 static void         panel_window_update_autohide_window               (PanelWindow      *window,
@@ -330,6 +332,7 @@ struct _PanelWindow
   AutohideBehavior     autohide_behavior;
   AutohideState        autohide_state;
   guint                autohide_timeout_id;
+  guint                autohide_fade_id;
   gint                 autohide_block;
   gint                 autohide_grab_block;
   gint                 autohide_size;
@@ -1356,6 +1359,8 @@ panel_window_size_allocate (GtkWidget     *widget,
   if (G_UNLIKELY (window->autohide_state == AUTOHIDE_HIDDEN
                   || window->autohide_state == AUTOHIDE_POPUP))
     {
+      guint fade_change_timeout;
+
       /* window is invisible */
       window->alloc.x = window->alloc.y = -9999;
 
@@ -1393,6 +1398,17 @@ panel_window_size_allocate (GtkWidget     *widget,
       panel_window_size_allocate_set_xy (window, w, h, &x, &y);
       panel_base_window_move_resize (PANEL_BASE_WINDOW (window->autohide_window),
                                      x, y, w, h);
+
+      /* slide out the panel window in FADE_TIME
+         FIXME: Make sure floating panels don't get animated */
+      if (IS_HORIZONTAL (window))
+        fade_change_timeout = FADE_TIME / window->alloc.height;
+      else
+        fade_change_timeout = FADE_TIME / window->alloc.width;
+
+      window->autohide_fade_id = g_timeout_add (fade_change_timeout,
+                                                panel_window_autohide_slideout,
+                                                window);
     }
   else
     {
@@ -1409,9 +1425,9 @@ panel_window_size_allocate (GtkWidget     *widget,
       if (window->autohide_window != NULL)
         panel_base_window_move_resize (PANEL_BASE_WINDOW (window->autohide_window),
                                        -9999, -9999, -1, -1);
-    }
 
-  gtk_window_move (GTK_WINDOW (window), window->alloc.x, window->alloc.y);
+      gtk_window_move (GTK_WINDOW (window), window->alloc.x, window->alloc.y);
+    }
 
   child = gtk_bin_get_child (GTK_BIN (widget));
   if (G_LIKELY (child != NULL))
@@ -2466,6 +2482,65 @@ panel_window_autohide_event (GtkWidget        *widget,
     panel_window_autohide_drag_leave (widget, NULL, 0, window);
 
   return FALSE;
+}
+
+
+
+static gboolean
+panel_window_autohide_slideout (gpointer data)
+{
+  PanelWindow  *window = PANEL_WINDOW (data);
+  PanelBorders  borders;
+  gint          x, y, auto_x, auto_y;
+
+  gtk_window_get_position (GTK_WINDOW (window), &x, &y);
+  gtk_window_get_position (GTK_WINDOW (window->autohide_window), &auto_x, &auto_y);
+  borders = panel_base_window_get_borders (PANEL_BASE_WINDOW (window));
+
+  g_warning ("autohide window: %d/%d panel window %d/%d", auto_x, auto_y, x, y);
+
+  if (IS_HORIZONTAL (window))
+    {
+      if (PANEL_HAS_FLAG (borders, PANEL_BORDER_BOTTOM))
+        y -= 1;
+      else
+        y += 1;
+
+      gtk_window_move (GTK_WINDOW (window), x, y);
+
+      if (PANEL_HAS_FLAG (borders, PANEL_BORDER_BOTTOM)
+          && y < (auto_y - window->alloc.height))
+        {
+          return FALSE;
+        }
+      else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_TOP)
+          && y > (auto_y + window->alloc.height))
+        {
+          return FALSE;
+        }
+    }
+  else
+  {
+    if (PANEL_HAS_FLAG (borders, PANEL_BORDER_RIGHT))
+      x -= 1;
+    else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_LEFT))
+      x += 1;
+
+    gtk_window_move (GTK_WINDOW (window), x, y);
+
+    if (PANEL_HAS_FLAG (borders, PANEL_BORDER_RIGHT)
+        && x < (auto_x - window->alloc.width))
+      {
+        return FALSE;
+      }
+    else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_LEFT)
+        && x > (auto_x + window->alloc.width))
+      {
+        return FALSE;
+      }
+  }
+
+  return TRUE;
 }
 
 
