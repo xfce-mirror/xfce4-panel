@@ -1352,6 +1352,7 @@ panel_window_size_allocate (GtkWidget     *widget,
   gint           w, h, x, y;
   PanelBorders   borders;
   GtkWidget     *child;
+  gboolean       floating = TRUE;
 
   gtk_widget_set_allocation (widget, alloc);
   window->alloc = *alloc;
@@ -1399,16 +1400,40 @@ panel_window_size_allocate (GtkWidget     *widget,
       panel_base_window_move_resize (PANEL_BASE_WINDOW (window->autohide_window),
                                      x, y, w, h);
 
-      /* slide out the panel window in FADE_TIME
-         FIXME: Make sure floating panels don't get animated */
-      if (IS_HORIZONTAL (window))
-        fade_change_timeout = FADE_TIME / window->alloc.height;
-      else
-        fade_change_timeout = FADE_TIME / window->alloc.width;
+      /* slide out the panel window in FADE_TIME, but ignore panels that are floating, i.e. not
+         attached to a GdkScreen border (i.e. including panels which are on a monitor border, but
+         at are at the same time between two monitors) */
+      if (IS_HORIZONTAL (window)
+          && (((y + h) == gdk_screen_get_height (window->screen))
+               || (y == 0)))
+        {
+          floating = FALSE;
+        }
+      else if (!IS_HORIZONTAL (window)
+               && (((x + w) == gdk_screen_get_width (window->screen))
+                    || (x == 0)))
+        {
+          floating = FALSE;
+        }
 
-      window->autohide_fade_id = g_timeout_add (fade_change_timeout,
-                                                panel_window_autohide_slideout,
-                                                window);
+      if (floating)
+        {
+          gtk_window_move (GTK_WINDOW (window), window->alloc.x, window->alloc.y);
+        }
+      else
+        {
+          if (IS_HORIZONTAL (window))
+            fade_change_timeout = FADE_TIME / window->alloc.height;
+          else
+            fade_change_timeout = FADE_TIME / window->alloc.width;
+
+          /* FIXME: make sure the transition can be properly canceled, e.g. when
+             the autohide block mechanism of showing a menu ends, the hovering
+             cursor results in a panel that jumps back and forth */
+          window->autohide_fade_id = g_timeout_add (fade_change_timeout,
+                                                    panel_window_autohide_slideout,
+                                                    window);
+        }
     }
   else
     {
@@ -2497,6 +2522,8 @@ panel_window_autohide_slideout (gpointer data)
   gtk_window_get_position (GTK_WINDOW (window->autohide_window), &auto_x, &auto_y);
   borders = panel_base_window_get_borders (PANEL_BASE_WINDOW (window));
 
+  /* FIXME: maybe use something instead of the autohide window, because this may
+     cause issues with the autohide window being moved to -9999/-9999 */
   g_warning ("autohide window: %d/%d panel window %d/%d", auto_x, auto_y, x, y);
 
   if (IS_HORIZONTAL (window))
