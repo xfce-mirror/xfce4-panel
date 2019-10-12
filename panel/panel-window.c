@@ -2516,56 +2516,46 @@ panel_window_autohide_slideout (gpointer data)
 {
   PanelWindow  *window = PANEL_WINDOW (data);
   PanelBorders  borders;
-  gint          x, y, auto_x, auto_y;
+  gint          x, y, w, h;
 
   gtk_window_get_position (GTK_WINDOW (window), &x, &y);
-  gtk_window_get_position (GTK_WINDOW (window->autohide_window), &auto_x, &auto_y);
+  w = gdk_screen_get_width (window->screen);
+  h = gdk_screen_get_height (window->screen);
   borders = panel_base_window_get_borders (PANEL_BASE_WINDOW (window));
-
-  /* FIXME: maybe use something instead of the autohide window, because this may
-     cause issues with the autohide window being moved to -9999/-9999 */
-  g_warning ("autohide window: %d/%d panel window %d/%d", auto_x, auto_y, x, y);
 
   if (IS_HORIZONTAL (window))
     {
       if (PANEL_HAS_FLAG (borders, PANEL_BORDER_BOTTOM))
-        y -= 1;
-      else
-        y += 1;
-
-      gtk_window_move (GTK_WINDOW (window), x, y);
-
-      if (PANEL_HAS_FLAG (borders, PANEL_BORDER_BOTTOM)
-          && y < (auto_y - window->alloc.height))
         {
-          return FALSE;
+          y--;
+
+          if (y < (0 - window->alloc.height - 1))
+            return FALSE;
         }
-      else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_TOP)
-          && y > (auto_y + window->alloc.height))
+      else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_TOP))
         {
-          return FALSE;
+          y++;
+          if (y > (h + window->alloc.height + 1))
+            return FALSE;
         }
     }
   else
-  {
-    if (PANEL_HAS_FLAG (borders, PANEL_BORDER_RIGHT))
-      x -= 1;
-    else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_LEFT))
-      x += 1;
+    {
+      if (PANEL_HAS_FLAG (borders, PANEL_BORDER_RIGHT))
+        {
+          x--;
+          if (x < (0 - window->alloc.width + 1))
+            return FALSE;
+        }
+      else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_LEFT))
+        {
+          x++;
+          if (x > (w + window->alloc.width + 1))
+            return FALSE;
+        }
+    }
 
-    gtk_window_move (GTK_WINDOW (window), x, y);
-
-    if (PANEL_HAS_FLAG (borders, PANEL_BORDER_RIGHT)
-        && x < (auto_x - window->alloc.width))
-      {
-        return FALSE;
-      }
-    else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_LEFT)
-        && x > (auto_x + window->alloc.width))
-      {
-        return FALSE;
-      }
-  }
+  gtk_window_move (GTK_WINDOW (window), x, y);
 
   return TRUE;
 }
