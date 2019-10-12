@@ -794,6 +794,46 @@ clock_plugin_validate_entry_text (GtkEditable *entry,
 
 
 static void
+clock_plugin_validate_timezone (GtkEntry    *entry,
+                                const gchar *format,
+                                ClockPlugin *plugin)
+{
+  GtkStyleContext *context;
+  gchar           *filename;
+
+  context = gtk_widget_get_style_context (GTK_WIDGET (entry));
+
+  if (strcmp (format, "") != 0)
+    {
+      filename = g_build_filename (ZONEINFO_DIR, format, NULL);
+
+      if (!g_file_test (filename, G_FILE_TEST_IS_REGULAR))
+        gtk_style_context_add_class (context, "error");
+      else
+        gtk_style_context_remove_class (context, "error");
+    }
+  else
+    {
+      gtk_style_context_remove_class (context, "error");
+    }
+}
+
+
+
+static void
+clock_plugin_validate_entry_tz (GtkEditable *entry,
+                                gpointer     user_data)
+{
+  ClockPlugin *plugin = user_data;
+
+  clock_plugin_validate_timezone (GTK_ENTRY (entry),
+                                  gtk_entry_get_text (GTK_ENTRY (entry)),
+                                  plugin);
+}
+
+
+
+static void
 clock_plugin_configure_plugin_chooser_fill (ClockPlugin *plugin,
                                             GtkComboBox *combo,
                                             GtkEntry    *entry,
@@ -1026,6 +1066,8 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
   object = gtk_builder_get_object (builder, "timezone-name");
   panel_return_if_fail (GTK_IS_ENTRY (object));
+  g_signal_connect (G_OBJECT (object), "changed",
+                    G_CALLBACK (clock_plugin_validate_entry_tz), plugin);
   g_object_bind_property (G_OBJECT (plugin->time), "timezone",
                           G_OBJECT (object), "text",
                           G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
