@@ -2777,13 +2777,13 @@ xfce_panel_plugin_focus_widget (XfcePanelPlugin *plugin,
  * @plugin  : an #XfcePanelPlugin.
  * @blocked : new blocking state of this plugin.
  *
- * Wether this plugin blocks the autohide functality of the panel. Use
+ * Whether this plugin blocks the autohide functionality of the panel. Use
  * this when you 'popup' something that is visually attached to the
  * plugin at it will look weird for a user if the panel will hide while
  * he/she is working in the popup.
  *
- * For menus it there is xfce_panel_plugin_register_menu() which will
- * take care of this.
+ * For menus use xfce_panel_plugin_register_menu() which will take care
+ * of this.
  **/
 void
 xfce_panel_plugin_block_autohide (XfcePanelPlugin *plugin,
