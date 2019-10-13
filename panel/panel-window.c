@@ -542,6 +542,7 @@ panel_window_init (PanelWindow *window)
   window->autohide_behavior = AUTOHIDE_BEHAVIOR_NEVER;
   window->autohide_state = AUTOHIDE_DISABLED;
   window->autohide_timeout_id = 0;
+  window->autohide_fade_id = 0;
   window->autohide_block = 0;
   window->autohide_grab_block = 0;
   window->autohide_size = DEFAULT_ATUOHIDE_SIZE;
@@ -821,6 +822,9 @@ panel_window_finalize (GObject *object)
   if (G_UNLIKELY (window->autohide_timeout_id != 0))
     g_source_remove (window->autohide_timeout_id);
 
+  if (G_UNLIKELY (window->autohide_fade_id != 0))
+    g_source_remove (window->autohide_fade_id);
+
   /* destroy the autohide window */
   if (window->autohide_window != NULL)
     gtk_widget_destroy (window->autohide_window);
@@ -928,6 +932,9 @@ panel_window_enter_notify_event (GtkWidget        *widget,
       /* stop a running autohide timeout */
       if (window->autohide_timeout_id != 0)
         g_source_remove (window->autohide_timeout_id);
+
+      if (window->autohide_fade_id != 0)
+        g_source_remove (window->autohide_fade_id);
 
       /* update autohide status */
       if (window->autohide_state == AUTOHIDE_POPDOWN)
@@ -1452,6 +1459,7 @@ panel_window_size_allocate (GtkWidget     *widget,
                                        -9999, -9999, -1, -1);
 
       gtk_window_move (GTK_WINDOW (window), window->alloc.x, window->alloc.y);
+      window->autohide_fade_id = 0;
     }
 
   child = gtk_bin_get_child (GTK_BIN (widget));
@@ -2404,6 +2412,7 @@ static void
 panel_window_autohide_timeout_destroy (gpointer user_data)
 {
   PANEL_WINDOW (user_data)->autohide_timeout_id = 0;
+  PANEL_WINDOW (user_data)->autohide_fade_id = 0;
 }
 
 
@@ -2419,6 +2428,9 @@ panel_window_autohide_queue (PanelWindow   *window,
   /* stop pending timeout */
   if (window->autohide_timeout_id != 0)
     g_source_remove (window->autohide_timeout_id);
+
+  if (window->autohide_fade_id != 0)
+    g_source_remove (window->autohide_fade_id);
 
   /* set new autohide state */
   window->autohide_state = new_state;
@@ -2486,6 +2498,9 @@ panel_window_autohide_drag_leave (GtkWidget      *widget,
   if (window->autohide_timeout_id != 0)
     g_source_remove (window->autohide_timeout_id);
 
+  if (window->autohide_fade_id != 0)
+    g_source_remove (window->autohide_fade_id);
+
   /* update the status */
   if (window->autohide_state == AUTOHIDE_POPUP)
     window->autohide_state = AUTOHIDE_HIDDEN;
@@ -2530,13 +2545,19 @@ panel_window_autohide_slideout (gpointer data)
           y--;
 
           if (y < (0 - window->alloc.height - 1))
-            return FALSE;
+            {
+              window->autohide_fade_id = 0;
+              return FALSE;
+            }
         }
       else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_TOP))
         {
           y++;
           if (y > (h + window->alloc.height + 1))
-            return FALSE;
+            {
+              window->autohide_fade_id = 0;
+              return FALSE;
+            }
         }
     }
   else
@@ -2545,13 +2566,19 @@ panel_window_autohide_slideout (gpointer data)
         {
           x--;
           if (x < (0 - window->alloc.width + 1))
-            return FALSE;
+            {
+              window->autohide_fade_id = 0;
+              return FALSE;
+            }
         }
       else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_LEFT))
         {
           x++;
           if (x > (w + window->alloc.width + 1))
-            return FALSE;
+            {
+              window->autohide_fade_id = 0;
+              return FALSE;
+            }
         }
     }
 
