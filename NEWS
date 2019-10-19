@@ -1,3 +1,35 @@
+4.15.0
+======
+ - Drop support for Gtk2 and 4.6 plugins
+ - Drop Gtk2/4.6-only references from the docs
+ - Don't show or try to load Gtk2 plugins anymore
+ - Add dark mode preference
+ - autohide: Add sliding out animation
+ - Draw panel border based on position and length
+ - appmenu: Listen to icon theme changes (Bug #15861)
+ - appmenu: Use panel's icon size
+ - clock: Validate timezone entry (Bug #16036)
+ - prefs: Plug memory leaks (Bug #16016)
+ - docs: Fix build by dropping unused refs (Bug #16031)
+ - pager: Fix scrolling in pager-buttons (Bug #15614)
+ - pager: Face-lift of settings dialog
+ - pager: Only show scroll-option with buttons
+ - pager: Add option to show workspace number
+ - systray: Drop "Show frame" option (Bug #14186)
+ - tasklist: Resize when windows get removed (Bug #14394)
+ - systray: Fix icons without compositing (Bug #14577)
+ - windowlist: Make layout consistent with xfdesktop
+ - windowlist: Replace deprecated gtk_widget_modify_font
+ - launcher: Fix visual state of arrow-button (Bug #15818)
+ - launcher: Avoid excessive left padding on popup menu (Bug #15819)
+ - Fix typos and improve code formatting
+ - Translation Updates:
+   Albanian, Arabic, Armenian (Armenia), Belarusian, Bulgarian, Chinese
+   (China), Chinese (Taiwan), Croatian, Danish, Dutch, French, Galician,
+   German, Greek, Hebrew, Hungarian, Indonesian, Italian, Japanese,
+   Lithuanian, Malay, Norwegian Bokmål, Polish, Portuguese, Portuguese
+   (Brazil), Russian, Serbian, Slovak, Spanish, Swedish, Thai, Turkish
+
 4.14.0
 ======
  - tasklist: Keep panel visible on drag and drop (Bug #15703)
