@@ -2606,6 +2606,9 @@ panel_window_autohide_slideout (gpointer data)
               return FALSE;
             }
         }
+      /* if the panel has no borders, we don't animate */
+      else
+        return FALSE;
     }
   else
     {
@@ -2627,6 +2630,9 @@ panel_window_autohide_slideout (gpointer data)
               return FALSE;
             }
         }
+      /* if the panel has no borders, we don't animate */
+      else
+        return FALSE;
     }
 
   gtk_window_move (GTK_WINDOW (window), x, y);

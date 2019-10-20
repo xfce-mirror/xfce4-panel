@@ -654,7 +654,7 @@ panel_base_window_reset_background_css (PanelBaseWindow *window) {
                          &background_rgba, NULL);
 
   /* Set correct border style depending on panel position and length */
-  if (priv->borders != PANEL_BORDER_NONE)
+  if (window->background_style == PANEL_BG_STYLE_NONE)
     {
       border_side = g_strdup_printf ("%s %s %s %s",
                                      PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_TOP) ? "solid" : "none",
@@ -838,8 +838,6 @@ panel_base_window_get_borders (PanelBaseWindow *window)
   if (priv->active_timeout_id != 0)
     return PANEL_BORDER_TOP | PANEL_BORDER_BOTTOM
            | PANEL_BORDER_LEFT | PANEL_BORDER_RIGHT;
-  else if (window->background_style != PANEL_BG_STYLE_NONE)
-    return PANEL_BORDER_NONE;
 
   return priv->borders;
 }
