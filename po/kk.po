@@ -1,17 +1,20 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2009,2013-2015,2017-2019
+# Xfce Bot <transifex@xfce.org>, 2019
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Xfce4-panel\n"
+"Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-30 06:30+0200\n"
-"PO-Revision-Date: 2019-08-03 09:28+0000\n"
-"Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
-"Language-Team: Kazakh (http://www.transifex.com/xfce/xfce4-panel/language/kk/)\n"
+"POT-Creation-Date: 2019-10-20 18:22+0200\n"
+"PO-Revision-Date: 2019-10-20 16:24+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>, 2019\n"
+"Language-Team: Kazakh (https://www.transifex.com/xfce/teams/16840/kk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,7 +29,8 @@ msgstr "Панельде жөнелткішті жасау"
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop "
 "file"
-msgstr "Бұл desktop файлының ақпараты негізінде панельге жаңа жөнелткішті қосу"
+msgstr ""
+"Бұл desktop файлының ақпараты негізінде панельге жаңа жөнелткішті қосу"
 
 #: ../panel-preferences.desktop.in.h:1 ../panel/panel-window.c:2699
 msgid "Panel"
@@ -38,19 +42,19 @@ msgstr "Панельді баптау"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1081
-#: ../panel/panel-preferences-dialog.c:1308
+#: ../panel/panel-preferences-dialog.c:1316
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "\"%s\" өшіруді шынымен қалайсыз ба?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1086
-#: ../panel/panel-preferences-dialog.c:1311
+#: ../panel/panel-preferences-dialog.c:1319
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Элементті панельден өшірсеңіз, ол толығымен жойылады."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1087 ../panel/panel-dialogs.c:163
-#: ../panel/panel-preferences-dialog.c:1313
-#: ../plugins/applicationsmenu/applicationsmenu.c:593
+#: ../panel/panel-preferences-dialog.c:1321
+#: ../plugins/applicationsmenu/applicationsmenu.c:602
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "_Cancel"
 msgstr "Ба_с тарту"
@@ -59,7 +63,7 @@ msgstr "Ба_с тарту"
 #: ../libxfce4panel/xfce-panel-plugin.c:1283
 #: ../panel/panel-plugin-external.c:441
 #: ../panel/panel-preferences-dialog.c:956
-#: ../panel/panel-preferences-dialog.c:1314
+#: ../panel/panel-preferences-dialog.c:1322
 #: ../plugins/launcher/launcher-dialog.c:852
 msgid "_Remove"
 msgstr "Өші_ру"
@@ -223,7 +227,10 @@ msgstr "Жөнелту"
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "Панельді іске қосуды қалайсыз ба? Олай болса, шыққан кезде сессияны сақтағаныңызға көз жеткізіңіз, одан кейін келесі кіргенде панель автоматты түрде іске қосылады."
+msgstr ""
+"Панельді іске қосуды қалайсыз ба? Олай болса, шыққан кезде сессияны "
+"сақтағаныңызға көз жеткізіңіз, одан кейін келесі кіргенде панель автоматты "
+"түрде іске қосылады."
 
 #: ../panel/main.c:445 ../panel/main.c:459
 #, c-format
@@ -242,7 +249,9 @@ msgstr "Жө_нелткішті жасау"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Бұл панельде жаңа жөнелткіш плагинін жасайды және тасталған файлдарды мәзір элементтері ретінде орнатады."
+msgstr ""
+"Бұл панельде жаңа жөнелткіш плагинін жасайды және тасталған файлдарды мәзір "
+"элементтері ретінде орнатады."
 
 #: ../panel/panel-application.c:986
 #, c-format
@@ -259,7 +268,9 @@ msgstr "Шығу"
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "X серверін сессия басқарушысыз іске қосқансыз. Шығу басылған кезде X сервері өз жұмысын аяқтайды."
+msgstr ""
+"X серверін сессия басқарушысыз іске қосқансыз. Шығу басылған кезде X сервері"
+" өз жұмысын аяқтайды."
 
 #: ../panel/panel-application.c:1728
 msgid "Are you sure you want to quit the panel?"
@@ -273,14 +284,18 @@ msgstr "\"%s\" командасын орындау сәтсіз аяқталды
 #: ../panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Плагин оқиға синтаксисі қате. PLUGIN-NAME:NAME[:TYPE:VALUE] түрінде болуы керек."
+msgstr ""
+"Плагин оқиға синтаксисі қате. PLUGIN-NAME:NAME[:TYPE:VALUE] түрінде болуы "
+"керек."
 
 #: ../panel/panel-dbus-client.c:248
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "Қате көмексөз түрі \"%s\". Дұрыс түрлері bool, double, int, string және uint."
+msgstr ""
+"Қате көмексөз түрі \"%s\". Дұрыс түрлері bool, double, int, string және "
+"uint."
 
 #: ../panel/panel-dialogs.c:58
 msgid "Unable to open the e-mail address"
@@ -317,7 +332,9 @@ msgstr "Панель %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "Панель киоск түрінде қосулы тұр, қалыпты пайдаланушы ретінде оның баптауларын өзгерте алмайсыз"
+msgstr ""
+"Панель киоск түрінде қосулы тұр, қалыпты пайдаланушы ретінде оның "
+"баптауларын өзгерте алмайсыз"
 
 #: ../panel/panel-dialogs.c:237
 msgid "Modifying the panel is not allowed"
@@ -367,7 +384,10 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Плагин соңғы %d секундта бірден көп рет қайта қосылған. Орындау батырмасын бассаңыз, панель ол плагинді қайта қосып көреді, олай болмаса, ол плагин панельден өшіріледі."
+msgstr ""
+"Плагин соңғы %d секундта бірден көп рет қайта қосылған. Орындау батырмасын "
+"бассаңыз, панель ол плагинді қайта қосып көреді, олай болмаса, ол плагин "
+"панельден өшіріледі."
 
 #: ../panel/panel-plugin-external.c:440
 msgid "_Execute"
@@ -398,23 +418,25 @@ msgstr "%d панелін өшіруді шынымен қалайсыз ба?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1150
+#: ../panel/panel-preferences-dialog.c:1158
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(сыртқы)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1155
+#: ../panel/panel-preferences-dialog.c:1163
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "Ішкі аты: %s-%d\nPID: %d"
+msgstr ""
+"Ішкі аты: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1167
+#: ../panel/panel-preferences-dialog.c:1175
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Ішкі аты: %s-%d"
@@ -514,7 +536,9 @@ msgstr "Шет_терде орынды алдын-ала қалдырмау"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "Жазық етілген терезе панельдің артындағы орынды алу керек болса, бұл опцияны таңдаңыз. Бұл әрекет панель экран шетіне тіркеліп тұрса ғана істейді."
+msgstr ""
+"Жазық етілген терезе панельдің артындағы орынды алу керек болса, бұл опцияны"
+" таңдаңыз. Бұл әрекет панель экран шетіне тіркеліп тұрса ғана істейді."
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
@@ -551,7 +575,9 @@ msgstr "Панель е_нін автоөзгерту"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Таңдалған болса, панель ені плагиндер талап ететін еніне дейін автоөзгертіледі."
+msgstr ""
+"Таңдалған болса, панель ені плагиндер талап ететін еніне дейін "
+"автоөзгертіледі."
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "D_isplay"
@@ -606,7 +632,9 @@ msgstr "Баптау..."
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>Композитинг сөндірілген</b>\nПанельдегі мөлдірсіздік эффектері үшін терезелер басқарушысында композитингті іске қосыңыз."
+msgstr ""
+"<b>Композитинг сөндірілген</b>\n"
+"Панельдегі мөлдірсіздік эффектері үшін терезелер басқарушысында композитингті іске қосыңыз."
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:51
@@ -622,7 +650,9 @@ msgstr "Қа_лдыру:"
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "Курсор панельдің үстінде болмаған кезде панельдің мөлдірлілігі (0 - толығымен мөлдір, 100 - мүлдем мөлдір емес)"
+msgstr ""
+"Курсор панельдің үстінде болмаған кезде панельдің мөлдірлілігі (0 - "
+"толығымен мөлдір, 100 - мүлдем мөлдір емес)"
 
 #: ../panel/panel-preferences-dialog.glade.h:55
 msgid "Appeara_nce"
@@ -691,7 +721,8 @@ msgstr "Пане_льді бұғаттау"
 
 #: ../migrate/main.c:115
 msgid "Tried but failed to migrate your old panel configuration"
-msgstr "Панельдің ескі баптауларын көшіру талабы жасалды, бірақ, сәтсіз аяқталды"
+msgstr ""
+"Панельдің ескі баптауларын көшіру талабы жасалды, бірақ, сәтсіз аяқталды"
 
 #: ../migrate/main.c:127
 msgid "Failed to load the default configuration"
@@ -825,7 +856,8 @@ msgstr "Жүйені гибернация мен ұйықтатуға жібер
 #: ../plugins/actions/actions.c:198
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
-msgstr "Компьютер %d секундтан кейін гибернацияға жіберіледі және ұйықтатылады."
+msgstr ""
+"Компьютер %d секундтан кейін гибернацияға жіберіледі және ұйықтатылады."
 
 #: ../plugins/actions/actions.c:204
 msgid "Suspend"
@@ -931,7 +963,9 @@ msgstr "Қолданбалардың негізгі а_тауларын көрс
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Мәзірде қолданбалардың негізгі атауын көрсету үшін, мыс. \"Thunar\" орнына \"Файлдар басқарушысы\", бұл опцияны таңдаңыз"
+msgstr ""
+"Мәзірде қолданбалардың негізгі атауын көрсету үшін, мыс. \"Thunar\" орнына "
+"\"Файлдар басқарушысы\", бұл опцияны таңдаңыз"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:17
@@ -973,18 +1007,18 @@ msgstr "Мәзір файлы"
 msgid "Applications"
 msgstr "Қолданбалар"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:591
+#: ../plugins/applicationsmenu/applicationsmenu.c:600
 #: ../plugins/directorymenu/directorymenu.c:392
 msgid "Select An Icon"
 msgstr "Таңбашаны таңдаңыз"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:594
+#: ../plugins/applicationsmenu/applicationsmenu.c:603
 #: ../plugins/directorymenu/directorymenu.c:395
 msgid "_OK"
 msgstr "_ОК"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:630
-#: ../plugins/clock/clock.c:912 ../plugins/launcher/launcher.c:2395
+#: ../plugins/applicationsmenu/applicationsmenu.c:639
+#: ../plugins/clock/clock.c:912 ../plugins/launcher/launcher.c:2399
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" командасын орындау сәтсіз аяқталды"
@@ -1070,7 +1104,9 @@ msgstr "Сағат"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Жүйелік уақыт белдеулер дерекқорына сәйкес уақыт белдеуінің атауы. Жергілікті уақытқа қайтару үшін бос қалдырыңыз."
+msgstr ""
+"Жүйелік уақыт белдеулер дерекқорына сәйкес уақыт белдеуінің атауы. "
+"Жергілікті уақытқа қайтару үшін бос қалдырыңыз."
 
 #: ../plugins/clock/clock-dialog.glade.h:10
 msgid "Time_zone:"
@@ -1091,7 +1127,10 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "Бұл пішім файл атына қойылатын уақыт пен күнді сипаттайды. Мысалы, %Y ағымдағы жылмен, %m аймен ал %d күнмен алмастырылады. Көбірек білу үшін, date утилитасының құжаттамасын оқыңыз."
+msgstr ""
+"Бұл пішім файл атына қойылатын уақыт пен күнді сипаттайды. Мысалы, %Y "
+"ағымдағы жылмен, %m аймен ал %d күнмен алмастырылады. Көбірек білу үшін, "
+"date утилитасының құжаттамасын оқыңыз."
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid "_Tooltip format:"
@@ -1440,7 +1479,9 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Бумада көрінетін файлдарды анықтайтын үлгілерді енгізіңіз. Бірден көп үлгі көрсетілсе, оларды нүктелі үтірмен ажыратыңыз (мыс. *.txt;*.doc)."
+msgstr ""
+"Бумада көрінетін файлдарды анықтайтын үлгілерді енгізіңіз. Бірден көп үлгі "
+"көрсетілсе, оларды нүктелі үтірмен ажыратыңыз (мыс. *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
 msgid "_File Pattern:"
@@ -1456,11 +1497,11 @@ msgstr "Сүзгілеу"
 msgid "Open launcher menu"
 msgstr "Жөнелткіш мәзірін ашу"
 
-#: ../plugins/launcher/launcher.c:1619
+#: ../plugins/launcher/launcher.c:1622
 msgid "Unnamed Item"
 msgstr "Атаусыз элемент"
 
-#: ../plugins/launcher/launcher.c:1792
+#: ../plugins/launcher/launcher.c:1796
 msgid "No items"
 msgstr "Элементтер жоқ"
 
@@ -1562,7 +1603,9 @@ msgstr "Хабарламаларды сөн_діру"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "Курсорды панель батырмасы не мәзір құрамасынан өткізген кездегі хабарламаларды сөндіру үшін бұл опцияны таңдаңыз."
+msgstr ""
+"Курсорды панель батырмасы не мәзір құрамасынан өткізген кездегі "
+"хабарламаларды сөндіру үшін бұл опцияны таңдаңыз."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:30
 msgid "Show _label instead of icon"
@@ -1588,15 +1631,15 @@ msgstr "Кеңейтілген"
 msgid "Program launcher with optional menu"
 msgstr "Қосымша мәзірі бар бағдарлама жіберуші"
 
-#: ../plugins/pager/pager.c:457 ../plugins/pager/pager-dialog.glade.h:7
+#: ../plugins/pager/pager.c:511 ../plugins/pager/pager-dialog.glade.h:7
 msgid "Workspace _Settings..."
 msgstr "Жұмыс орын _баптаулары..."
 
-#: ../plugins/pager/pager.c:545
+#: ../plugins/pager/pager.c:599
 msgid "Unable to open the workspace settings"
 msgstr "Жұмыс орындар баптауларын ашу мүмкін емес"
 
-#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:872
+#: ../plugins/pager/pager-buttons.c:569 ../plugins/windowmenu/windowmenu.c:873
 #, c-format
 msgid "Workspace %d"
 msgstr "Жұмыс орны %d"
@@ -1675,21 +1718,23 @@ msgid "Unable to start the notification area"
 msgstr "Хабарламалар орнын іске қосу мүмкін емес"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:963
+#: ../plugins/systray/systray.c:953
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "Басқа виджет хабарламалар орны ролін алып отырған сияқты. Бұл орын қолданылмайды."
+msgstr ""
+"Басқа виджет хабарламалар орны ролін алып отырған сияқты. Бұл орын "
+"қолданылмайды."
 
-#: ../plugins/systray/systray.c:965
+#: ../plugins/systray/systray.c:955
 msgid "The notification area lost selection"
 msgstr "Хабарламалар орны таңдауды жоғалтқан"
 
-#: ../plugins/systray/systray.c:1229
+#: ../plugins/systray/systray.c:1219
 msgid "Clear"
 msgstr "Тазарту"
 
-#: ../plugins/systray/systray.c:1230
+#: ../plugins/systray/systray.c:1220
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Белгілі қолданбалар тізімін тазартуды шынымен қалайсыз ба?"
 
@@ -1816,23 +1861,23 @@ msgstr "Барлық м_ониторлар терезелерін көрсету
 msgid "Show only _minimized windows"
 msgstr "Тек қа_йырылған терезелерді көрсету"
 
-#: ../plugins/tasklist/tasklist-widget.c:3594
+#: ../plugins/tasklist/tasklist-widget.c:3630
 msgid "Mi_nimize All"
 msgstr "Барл_ығын қайыру"
 
-#: ../plugins/tasklist/tasklist-widget.c:3602
+#: ../plugins/tasklist/tasklist-widget.c:3638
 msgid "Un_minimize All"
 msgstr "Барлығы_н қайырудан қайтару"
 
-#: ../plugins/tasklist/tasklist-widget.c:3610
+#: ../plugins/tasklist/tasklist-widget.c:3646
 msgid "Ma_ximize All"
 msgstr "Бар_лығын жазық қылу"
 
-#: ../plugins/tasklist/tasklist-widget.c:3618
+#: ../plugins/tasklist/tasklist-widget.c:3654
 msgid "_Unmaximize All"
 msgstr "Барлығын _жазық емес қылу"
 
-#: ../plugins/tasklist/tasklist-widget.c:3630
+#: ../plugins/tasklist/tasklist-widget.c:3666
 msgid "_Close All"
 msgstr "Ба_рлығын жабу"
 
@@ -1844,24 +1889,24 @@ msgstr "Ашық терезелер арасында батырмалар арқ
 msgid "Desktop"
 msgstr "Жұмыс үстелі"
 
-#: ../plugins/windowmenu/windowmenu.c:1269
+#: ../plugins/windowmenu/windowmenu.c:1277
 msgid "No Windows"
 msgstr "Терезелер жоқ"
 
-#: ../plugins/windowmenu/windowmenu.c:1284
+#: ../plugins/windowmenu/windowmenu.c:1292
 msgid "Urgent Windows"
 msgstr "Шұғыл терезелер"
 
-#: ../plugins/windowmenu/windowmenu.c:1327
+#: ../plugins/windowmenu/windowmenu.c:1335
 msgid "Add Workspace"
 msgstr "Жұмыс орнын қосу"
 
-#: ../plugins/windowmenu/windowmenu.c:1350
+#: ../plugins/windowmenu/windowmenu.c:1358
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "\"%s\" жұмыс орнын өшіру"
 
-#: ../plugins/windowmenu/windowmenu.c:1352
+#: ../plugins/windowmenu/windowmenu.c:1360
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "%d жұмыс орнын өшіру"
