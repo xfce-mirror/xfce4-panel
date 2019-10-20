@@ -38,8 +38,10 @@
 
 #define PANEL_BASE_CSS        ".xfce4-panel.background { border-style: solid; }"\
                               ".xfce4-panel.background button { background: transparent; padding: 0; }"\
-                              ".xfce4-panel.background.marching-ants { border: 1px dashed #ff0000; }"
-
+                              ".xfce4-panel.background.marching-ants-dashed { border: 1px dashed #ff0000; }"\
+                              ".xfce4-panel.background.marching-ants-dotted { border: 1px dotted #ff0000; }"
+#define MARCHING_ANTS_DASHED  "marching-ants-dashed"
+#define MARCHING_ANTS_DOTTED  "marching-ants-dotted"
 
 
 static void     panel_base_window_get_property                (GObject              *object,
@@ -568,13 +570,23 @@ panel_base_window_active_timeout (gpointer user_data)
   GtkStyleContext        *context;
 
   context = gtk_widget_get_style_context (GTK_WIDGET (window));
-  /* Animate the border à la "marching ants" by adding a dashed border
-     and removing it again every other second */
+
+  /* Animate the border à la "marching ants" by cycling betwee a dashed and
+     dotted border every other second */
   g_get_current_time (&timeval);
   if (timeval.tv_sec%2 == 0)
-    gtk_style_context_add_class (context, "marching-ants");
+    {
+      if (gtk_style_context_has_class (context, MARCHING_ANTS_DOTTED))
+        gtk_style_context_remove_class (context, MARCHING_ANTS_DOTTED);
+      gtk_style_context_add_class (context, MARCHING_ANTS_DASHED);
+    }
   else
-    gtk_style_context_remove_class (context, "marching-ants");
+    {
+      if (gtk_style_context_has_class (context, MARCHING_ANTS_DASHED))
+        gtk_style_context_remove_class (context, MARCHING_ANTS_DASHED);
+      gtk_style_context_add_class (context, MARCHING_ANTS_DOTTED);
+    }
+
   gtk_widget_queue_draw (GTK_WIDGET (window));
   return TRUE;
 }
@@ -589,8 +601,12 @@ panel_base_window_active_timeout_destroyed (gpointer user_data)
 
   window->priv->active_timeout_id = 0;
   context = gtk_widget_get_style_context (GTK_WIDGET (window));
+
   /* Stop the marching ants */
-  gtk_style_context_remove_class (context, "marching-ants");
+  if (gtk_style_context_has_class (context, MARCHING_ANTS_DASHED))
+    gtk_style_context_remove_class (context, MARCHING_ANTS_DASHED);
+  if (gtk_style_context_has_class (context, MARCHING_ANTS_DOTTED))
+    gtk_style_context_remove_class (context, MARCHING_ANTS_DOTTED);
 }
 
 
