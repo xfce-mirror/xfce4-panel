@@ -1,22 +1,20 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Ammuu5, 2017-2018
-# Jiri Grönroos <jiri.gronroos@iki.fi>, 2018-2019
-# Juhani Numminen <juhaninumminen0@gmail.com>, 2013
-# Pasi Lallinaho <pasi@shimmerproject.org>, 2014-2015,2018-2019
-# Tapio Väisänen, 2014
-# Tero Mononen <tero@mononen.eu>, 2014
+# Xfce Bot <transifex@xfce.org>, 2019
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Xfce4-panel\n"
+"Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-30 06:30+0200\n"
-"PO-Revision-Date: 2019-08-05 19:11+0000\n"
-"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
-"Language-Team: Finnish (http://www.transifex.com/xfce/xfce4-panel/language/fi/)\n"
+"POT-Creation-Date: 2019-10-20 18:22+0200\n"
+"PO-Revision-Date: 2019-10-20 16:24+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>, 2019\n"
+"Language-Team: Finnish (https://www.transifex.com/xfce/teams/16840/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,7 +29,8 @@ msgstr "Luo käynnistin paneeliin"
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop "
 "file"
-msgstr "Lisää uusi käynnistin paneeliin perustuen tämän työpöytätiedoston tietoihin"
+msgstr ""
+"Lisää uusi käynnistin paneeliin perustuen tämän työpöytätiedoston tietoihin"
 
 #: ../panel-preferences.desktop.in.h:1 ../panel/panel-window.c:2699
 msgid "Panel"
@@ -43,19 +42,19 @@ msgstr "Muokkaa paneelia"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1081
-#: ../panel/panel-preferences-dialog.c:1308
+#: ../panel/panel-preferences-dialog.c:1316
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Haluatko varmasti poistaa kohteen ”%s”?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1086
-#: ../panel/panel-preferences-dialog.c:1311
+#: ../panel/panel-preferences-dialog.c:1319
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Jos poistat kohteen paneelista, se menetetään pysyvästi."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1087 ../panel/panel-dialogs.c:163
-#: ../panel/panel-preferences-dialog.c:1313
-#: ../plugins/applicationsmenu/applicationsmenu.c:593
+#: ../panel/panel-preferences-dialog.c:1321
+#: ../plugins/applicationsmenu/applicationsmenu.c:602
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "_Cancel"
 msgstr "_Peru"
@@ -64,7 +63,7 @@ msgstr "_Peru"
 #: ../libxfce4panel/xfce-panel-plugin.c:1283
 #: ../panel/panel-plugin-external.c:441
 #: ../panel/panel-preferences-dialog.c:956
-#: ../panel/panel-preferences-dialog.c:1314
+#: ../panel/panel-preferences-dialog.c:1322
 #: ../plugins/launcher/launcher-dialog.c:852
 msgid "_Remove"
 msgstr "_Poista"
@@ -228,7 +227,10 @@ msgstr "Suorita"
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "Haluatko käynnistää paneelin? Jos käynnistät paneelin, varmista että tallennat istunnon kirjautuessasi ulos, jotta paneeli käynnistetään automaattisesti seuraavan kerran kun kirjaudut sisään."
+msgstr ""
+"Haluatko käynnistää paneelin? Jos käynnistät paneelin, varmista että "
+"tallennat istunnon kirjautuessasi ulos, jotta paneeli käynnistetään "
+"automaattisesti seuraavan kerran kun kirjaudut sisään."
 
 #: ../panel/main.c:445 ../panel/main.c:459
 #, c-format
@@ -247,7 +249,9 @@ msgstr "Luo kä_ynnistin"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Tämä luo uuden käynnistinliitännäisen paneeliin ja lisää pudoteut tiedostot valikkokohteina."
+msgstr ""
+"Tämä luo uuden käynnistinliitännäisen paneeliin ja lisää pudoteut tiedostot "
+"valikkokohteina."
 
 #: ../panel/panel-application.c:986
 #, c-format
@@ -264,7 +268,9 @@ msgstr "Lopeta"
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "Olet käynnistänyt X:n ilman ikkunointimanageria. Painaessasi \"Quit\" X-palvelin suljetaan."
+msgstr ""
+"Olet käynnistänyt X:n ilman ikkunointimanageria. Painaessasi \"Quit\" "
+"X-palvelin suljetaan."
 
 #: ../panel/panel-application.c:1728
 msgid "Are you sure you want to quit the panel?"
@@ -278,14 +284,18 @@ msgstr "Komennon ”%s” suorittaminen epäonnistui."
 #: ../panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Liitännäisen tapahtuman syntaksi on tuntematon. Käytä syntaksia LIITÄNNÄISEN-NIMI:NIMI[:TYYPPI:ARVO]."
+msgstr ""
+"Liitännäisen tapahtuman syntaksi on tuntematon. Käytä syntaksia "
+"LIITÄNNÄISEN-NIMI:NIMI[:TYYPPI:ARVO]."
 
 #: ../panel/panel-dbus-client.c:248
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "Virheellinen vihjeen tyyppi ”%s”. Mahdolliset tyypit ovat bool, double, int, string ja uint."
+msgstr ""
+"Virheellinen vihjeen tyyppi ”%s”. Mahdolliset tyypit ovat bool, double, int,"
+" string ja uint."
 
 #: ../panel/panel-dialogs.c:58
 msgid "Unable to open the e-mail address"
@@ -297,7 +307,9 @@ msgstr "Xfce-työpöytäympäristön paneeli"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr "Juhani Numminen <juhaninumminen0@gmail.com>\nPasi Lallinaho <pasi@shimmerproject.org>"
+msgstr ""
+"Juhani Numminen <juhaninumminen0@gmail.com>\n"
+"Pasi Lallinaho <pasi@shimmerproject.org>"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:14
@@ -322,7 +334,9 @@ msgstr "Paneeli %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "Koska paneelia ajetaan kioskitilassa, et voi tehdä muutoksia paneeliin normaalina käyttäjänä."
+msgstr ""
+"Koska paneelia ajetaan kioskitilassa, et voi tehdä muutoksia paneeliin "
+"normaalina käyttäjänä."
 
 #: ../panel/panel-dialogs.c:237
 msgid "Modifying the panel is not allowed"
@@ -364,7 +378,9 @@ msgstr "Kirjoita hakusana tähän"
 #: ../panel/panel-plugin-external.c:434
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "Liitännäinen ”%s” sulkeutui odottamattomasti, haluatko käynnistää sen uudelleen?"
+msgstr ""
+"Liitännäinen ”%s” sulkeutui odottamattomasti, haluatko käynnistää sen "
+"uudelleen?"
 
 #: ../panel/panel-plugin-external.c:436
 #, c-format
@@ -372,7 +388,10 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Liitännäinen käynnistyi uudelleen useammin kuin kerran viimeisen %d sekunnin aikana. Jos painat Suorita, paneeli yrittää käynnistää liitännäisen uudelleen. Muussa tapauksessa se poistetaan lopullisesti paneelista."
+msgstr ""
+"Liitännäinen käynnistyi uudelleen useammin kuin kerran viimeisen %d sekunnin"
+" aikana. Jos painat Suorita, paneeli yrittää käynnistää liitännäisen "
+"uudelleen. Muussa tapauksessa se poistetaan lopullisesti paneelista."
 
 #: ../panel/panel-plugin-external.c:440
 msgid "_Execute"
@@ -403,23 +422,25 @@ msgstr "Haluatko varmasti poistaa paneelin %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1150
+#: ../panel/panel-preferences-dialog.c:1158
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(ulkoinen)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1155
+#: ../panel/panel-preferences-dialog.c:1163
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "Sisäinen nimi: %s-%d\nProsessitunniste: %d"
+msgstr ""
+"Sisäinen nimi: %s-%d\n"
+"Prosessitunniste: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1167
+#: ../panel/panel-preferences-dialog.c:1175
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Sisäinen nimi: %s-%d"
@@ -500,7 +521,8 @@ msgstr "Venytä _näyttöjen yli"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr "Valitse tämä valinta jos haluat venyttää paneelin useammalle näytölle."
+msgstr ""
+"Valitse tämä valinta jos haluat venyttää paneelin useammalle näytölle."
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "_Lock panel"
@@ -519,7 +541,10 @@ msgstr "Älä va_raa tilaa reunoilla"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "Valitse tämä valinta jos haluat suurennettujen ikkunoiden peittävän alueen paneelin takana. Tämä valinta toimii vain kun paneeli on kiinni näytön reunassa."
+msgstr ""
+"Valitse tämä valinta jos haluat suurennettujen ikkunoiden peittävän alueen "
+"paneelin takana. Tämä valinta toimii vain kun paneeli on kiinni näytön "
+"reunassa."
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
@@ -556,7 +581,9 @@ msgstr "Kas_vata pituutta automaattisesti"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Kasvata paneelin pituutta automaattisesti, jos liitännäiset pyytävät lisätilaa."
+msgstr ""
+"Kasvata paneelin pituutta automaattisesti, jos liitännäiset pyytävät "
+"lisätilaa."
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "D_isplay"
@@ -611,7 +638,9 @@ msgstr "Mukauta..."
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>Komposointi ei ole käytössä</b>\nKytke komposointi päälle ikkunointimanagerissa käyttääksesi paneelin läpikuultavuusasetuksia."
+msgstr ""
+"<b>Komposointi ei ole käytössä</b>\n"
+"Kytke komposointi päälle ikkunointimanagerissa käyttääksesi paneelin läpikuultavuusasetuksia."
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:51
@@ -627,7 +656,9 @@ msgstr "Hiiri pois _päältä:"
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "Läpinäkyvyys kun osoitin ei ole paneelin päällä, jossa 0 on täysin läpinäkyvä ja 100 täysin läpinäkymätön."
+msgstr ""
+"Läpinäkyvyys kun osoitin ei ole paneelin päällä, jossa 0 on täysin "
+"läpinäkyvä ja 100 täysin läpinäkymätön."
 
 #: ../panel/panel-preferences-dialog.glade.h:55
 msgid "Appeara_nce"
@@ -696,7 +727,8 @@ msgstr "_Lukitse paneeli"
 
 #: ../migrate/main.c:115
 msgid "Tried but failed to migrate your old panel configuration"
-msgstr "Yritettiin mutta epäonnistuttiin vanhojen paneelin asetusten tuomisessa"
+msgstr ""
+"Yritettiin mutta epäonnistuttiin vanhojen paneelin asetusten tuomisessa"
 
 #: ../migrate/main.c:127
 msgid "Failed to load the default configuration"
@@ -734,7 +766,8 @@ msgstr "_Kysy vahvistusta"
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Näytä vahvistusikkuna 30 sekunnin aikakatkaisulla joillekin toiminnoista."
+msgstr ""
+"Näytä vahvistusikkuna 30 sekunnin aikakatkaisulla joillekin toiminnoista."
 
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Appeara_nce:"
@@ -936,7 +969,9 @@ msgstr "Näytä sovellusten yleiset nimet"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Valitse tämä valinta näyttääksesi sovellusten yleiset nimet valikossa, esimerkiksi \"Tiedostoselain\" eikä \"Thunar\". "
+msgstr ""
+"Valitse tämä valinta näyttääksesi sovellusten yleiset nimet valikossa, "
+"esimerkiksi \"Tiedostoselain\" eikä \"Thunar\". "
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:17
@@ -978,18 +1013,18 @@ msgstr "Valikkotiedosto"
 msgid "Applications"
 msgstr "Sovellukset"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:591
+#: ../plugins/applicationsmenu/applicationsmenu.c:600
 #: ../plugins/directorymenu/directorymenu.c:392
 msgid "Select An Icon"
 msgstr "Valitse kuvake"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:594
+#: ../plugins/applicationsmenu/applicationsmenu.c:603
 #: ../plugins/directorymenu/directorymenu.c:395
 msgid "_OK"
 msgstr "_OK"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:630
-#: ../plugins/clock/clock.c:912 ../plugins/launcher/launcher.c:2395
+#: ../plugins/applicationsmenu/applicationsmenu.c:639
+#: ../plugins/clock/clock.c:912 ../plugins/launcher/launcher.c:2399
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Komennon ”%s” suorittaminen epäonnistui."
@@ -1075,7 +1110,9 @@ msgstr "Kello"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Zoneinfo-tietokannan mukainen aikavyöhykkeen nimi, esimerkiksi \"America/New_York\". Jätä tyhjäksi käyttääksesi localtimeä."
+msgstr ""
+"Zoneinfo-tietokannan mukainen aikavyöhykkeen nimi, esimerkiksi "
+"\"America/New_York\". Jätä tyhjäksi käyttääksesi localtimeä."
 
 #: ../plugins/clock/clock-dialog.glade.h:10
 msgid "Time_zone:"
@@ -1096,7 +1133,11 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "Muoto määrittelee päiväyksen ja ajan osat jotka näytetään paneelissa. Esimerkiksi %Y korvataan vuodella, %m kuukaudella ja %d päivällä. Samalla tavalla, <b></b> -tagit tummentaa tekstin. Katso \"Ohje\" -sivulta lisätietoja."
+msgstr ""
+"Muoto määrittelee päiväyksen ja ajan osat jotka näytetään paneelissa. "
+"Esimerkiksi %Y korvataan vuodella, %m kuukaudella ja %d päivällä. Samalla "
+"tavalla, <b></b> -tagit tummentaa tekstin. Katso \"Ohje\" -sivulta "
+"lisätietoja."
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid "_Tooltip format:"
@@ -1445,7 +1486,10 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Syötä lista suodattimista, jotka määrittävät mitkä tiedostot ovat näkyvissä hakemistossa. Jos määrität useamman kuin yhden suodattimen, listan pitää erotella puolipilkuilla (esim. *.txt;*.doc)."
+msgstr ""
+"Syötä lista suodattimista, jotka määrittävät mitkä tiedostot ovat näkyvissä "
+"hakemistossa. Jos määrität useamman kuin yhden suodattimen, listan pitää "
+"erotella puolipilkuilla (esim. *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
 msgid "_File Pattern:"
@@ -1461,11 +1505,11 @@ msgstr "Suodatus"
 msgid "Open launcher menu"
 msgstr "Avaa käynnistinvalikko"
 
-#: ../plugins/launcher/launcher.c:1619
+#: ../plugins/launcher/launcher.c:1622
 msgid "Unnamed Item"
 msgstr "Nimetön kohde"
 
-#: ../plugins/launcher/launcher.c:1792
+#: ../plugins/launcher/launcher.c:1796
 msgid "No items"
 msgstr "Ei kohteita"
 
@@ -1567,7 +1611,9 @@ msgstr "Kytke t_yökaluvihjeet pois päältä"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "Valitse tämä valinta kytkeäksesi työkaluvihjeet pois päältä silloin kun osoitin on paneelin painikkeiden tai valikon kohteiden päällä."
+msgstr ""
+"Valitse tämä valinta kytkeäksesi työkaluvihjeet pois päältä silloin kun "
+"osoitin on paneelin painikkeiden tai valikon kohteiden päällä."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:30
 msgid "Show _label instead of icon"
@@ -1579,7 +1625,8 @@ msgstr "Näytä _viimeksi käytetty kohde paneelissa"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:32
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr "Valitse tämä valinta siirtääksesi napsautetun valikon kohteen paneeliin."
+msgstr ""
+"Valitse tämä valinta siirtääksesi napsautetun valikon kohteen paneeliin."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:33
 msgid "_Arrow button position:"
@@ -1593,15 +1640,15 @@ msgstr "Lisäasetukset"
 msgid "Program launcher with optional menu"
 msgstr "Sovelluskäynnistin valinnaisella valikolla"
 
-#: ../plugins/pager/pager.c:457 ../plugins/pager/pager-dialog.glade.h:7
+#: ../plugins/pager/pager.c:511 ../plugins/pager/pager-dialog.glade.h:7
 msgid "Workspace _Settings..."
 msgstr "Työtila-_asetukset..."
 
-#: ../plugins/pager/pager.c:545
+#: ../plugins/pager/pager.c:599
 msgid "Unable to open the workspace settings"
 msgstr "Työtila-asetuksia ei voitu avata"
 
-#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:872
+#: ../plugins/pager/pager-buttons.c:569 ../plugins/windowmenu/windowmenu.c:873
 #, c-format
 msgid "Workspace %d"
 msgstr "Työtila %d"
@@ -1623,7 +1670,9 @@ msgstr "Näytä pienoisnäkymä"
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
-msgstr "Näyttää työtilan pienoisnäkymän, jossa näkyvien ikkunoiden kohdalla on suorakulmiot"
+msgstr ""
+"Näyttää työtilan pienoisnäkymän, jossa näkyvien ikkunoiden kohdalla on "
+"suorakulmiot"
 
 #: ../plugins/pager/pager-dialog.glade.h:9
 msgid "Switch workspaces using the mouse _wheel"
@@ -1680,21 +1729,23 @@ msgid "Unable to start the notification area"
 msgstr "Ilmoitusaluetta ei voitu käynnistää"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:963
+#: ../plugins/systray/systray.c:953
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "Jokin muu vimpain toimii todennäköisesti ilmoitusalueena. Tätä aluetta ei käytetä."
+msgstr ""
+"Jokin muu vimpain toimii todennäköisesti ilmoitusalueena. Tätä aluetta ei "
+"käytetä."
 
-#: ../plugins/systray/systray.c:965
+#: ../plugins/systray/systray.c:955
 msgid "The notification area lost selection"
 msgstr "Ilmoitusalue menetti valinnan"
 
-#: ../plugins/systray/systray.c:1229
+#: ../plugins/systray/systray.c:1219
 msgid "Clear"
 msgstr "Tyhjennä"
 
-#: ../plugins/systray/systray.c:1230
+#: ../plugins/systray/systray.c:1220
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Haluatko varmasti tyhjentää listan tunnetuista ohjelmista?"
 
@@ -1821,23 +1872,23 @@ msgstr "Näytä ikkunat kaikista _näytöistä"
 msgid "Show only _minimized windows"
 msgstr "Näytä vain _pienennetyt ikkunat"
 
-#: ../plugins/tasklist/tasklist-widget.c:3594
+#: ../plugins/tasklist/tasklist-widget.c:3630
 msgid "Mi_nimize All"
 msgstr "_Pienennä kaikki"
 
-#: ../plugins/tasklist/tasklist-widget.c:3602
+#: ../plugins/tasklist/tasklist-widget.c:3638
 msgid "Un_minimize All"
 msgstr "_Palauta kaikki näkyviin"
 
-#: ../plugins/tasklist/tasklist-widget.c:3610
+#: ../plugins/tasklist/tasklist-widget.c:3646
 msgid "Ma_ximize All"
 msgstr "S_uurenna kaikki"
 
-#: ../plugins/tasklist/tasklist-widget.c:3618
+#: ../plugins/tasklist/tasklist-widget.c:3654
 msgid "_Unmaximize All"
 msgstr "Palauta kaikkien _koko"
 
-#: ../plugins/tasklist/tasklist-widget.c:3630
+#: ../plugins/tasklist/tasklist-widget.c:3666
 msgid "_Close All"
 msgstr "_Sulje kaikki"
 
@@ -1849,24 +1900,24 @@ msgstr "Vaihda avointen ikkunoiden välillä käyttäen painikkeita"
 msgid "Desktop"
 msgstr "Työpöytä"
 
-#: ../plugins/windowmenu/windowmenu.c:1269
+#: ../plugins/windowmenu/windowmenu.c:1277
 msgid "No Windows"
 msgstr "Ei ikkunoita"
 
-#: ../plugins/windowmenu/windowmenu.c:1284
+#: ../plugins/windowmenu/windowmenu.c:1292
 msgid "Urgent Windows"
 msgstr "Kiireelliset ikkunat"
 
-#: ../plugins/windowmenu/windowmenu.c:1327
+#: ../plugins/windowmenu/windowmenu.c:1335
 msgid "Add Workspace"
 msgstr "Lisää työtila"
 
-#: ../plugins/windowmenu/windowmenu.c:1350
+#: ../plugins/windowmenu/windowmenu.c:1358
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Poista työtila ”%s”"
 
-#: ../plugins/windowmenu/windowmenu.c:1352
+#: ../plugins/windowmenu/windowmenu.c:1360
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Poista työtila %d"
