@@ -1,0 +1,1910 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Xfce Bot <transifex@xfce.org>, 2019
+# Ali Rostami <rostami.ali@gmail.com>, 2019
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-20 18:31+0200\n"
+"PO-Revision-Date: 2019-10-20 16:24+0000\n"
+"Last-Translator: Ali Rostami <rostami.ali@gmail.com>, 2019\n"
+"Language-Team: Persian (Iran) (https://www.transifex.com/xfce/teams/16840/fa_IR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fa_IR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ../panel-desktop-handler.desktop.in.h:1
+msgid "Create Launcher on the panel"
+msgstr ""
+
+#: ../panel-desktop-handler.desktop.in.h:2
+msgid ""
+"Add a new launcher to the panel based on the information of this desktop "
+"file"
+msgstr ""
+
+#: ../panel-preferences.desktop.in.h:1 ../panel/panel-window.c:2699
+msgid "Panel"
+msgstr ""
+
+#: ../panel-preferences.desktop.in.h:2
+msgid "Customize the panel"
+msgstr ""
+
+#. I18N: %s is the name of the plugin
+#: ../libxfce4panel/xfce-panel-plugin.c:1081
+#: ../panel/panel-preferences-dialog.c:1316
+#, c-format
+msgid "Are you sure that you want to remove \"%s\"?"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1086
+#: ../panel/panel-preferences-dialog.c:1319
+msgid "If you remove the item from the panel, it is permanently lost."
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1087 ../panel/panel-dialogs.c:163
+#: ../panel/panel-preferences-dialog.c:1321
+#: ../plugins/applicationsmenu/applicationsmenu.c:602
+#: ../plugins/directorymenu/directorymenu.c:394
+msgid "_Cancel"
+msgstr "انصراف"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1088
+#: ../libxfce4panel/xfce-panel-plugin.c:1283
+#: ../panel/panel-plugin-external.c:441
+#: ../panel/panel-preferences-dialog.c:956
+#: ../panel/panel-preferences-dialog.c:1322
+#: ../plugins/launcher/launcher-dialog.c:852
+msgid "_Remove"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1229
+msgid "_Properties"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2787
+msgid "_About"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1259
+msgid "_Move"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1304
+msgid "Pane_l"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1313 ../panel/panel-window.c:2712
+msgid "Add _New Items..."
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:2727
+msgid "Panel Pr_eferences..."
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1349 ../panel/panel-window.c:2759
+msgid "Log _Out"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1369 ../panel/panel-item-dialog.c:208
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2778
+#: ../plugins/actions/actions-dialog.glade.h:4
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#: ../plugins/clock/clock-dialog.glade.h:8
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
+#: ../plugins/launcher/launcher-dialog.glade.h:20
+#: ../plugins/pager/pager-dialog.glade.h:3
+#: ../plugins/separator/separator-dialog.glade.h:6
+#: ../plugins/systray/systray-dialog.glade.h:3
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
+msgid "_Help"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1384
+msgid "About"
+msgstr ""
+
+#: ../panel/main.c:81
+msgid "Show the 'Panel Preferences' dialog"
+msgstr ""
+
+#: ../panel/main.c:81 ../panel/main.c:82
+msgid "PANEL-NUMBER"
+msgstr ""
+
+#: ../panel/main.c:82
+msgid "Show the 'Add New Items' dialog"
+msgstr ""
+
+#: ../panel/main.c:83
+msgid "Save the panel configuration"
+msgstr ""
+
+#: ../panel/main.c:84
+msgid "Add a new plugin to the panel"
+msgstr ""
+
+#: ../panel/main.c:84
+msgid "PLUGIN-NAME"
+msgstr "نام-افزونه"
+
+#: ../panel/main.c:85
+msgid "Restart the running panel instance"
+msgstr ""
+
+#: ../panel/main.c:86
+msgid "Quit the running panel instance"
+msgstr ""
+
+#: ../panel/main.c:87
+msgid "Do not wait for a window manager on startup"
+msgstr "در زمان راه اندازی منتظر مدیر پنجره نمان"
+
+#: ../panel/main.c:88
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
+msgid "Print version information and exit"
+msgstr ""
+
+#: ../panel/main.c:207
+#, c-format
+msgid "Name %s lost on the message dbus, exiting."
+msgstr ""
+
+#. parse context options
+#: ../panel/main.c:268
+msgid "[ARGUMENTS...]"
+msgstr ""
+
+#: ../panel/main.c:275
+#, c-format
+msgid "Type \"%s --help\" for usage."
+msgstr ""
+
+#: ../panel/main.c:294
+msgid "The Xfce development team. All rights reserved."
+msgstr "تیم توسعه Xfce. تمامی حقوق محفوظ است"
+
+#: ../panel/main.c:295
+#, c-format
+msgid "Please report bugs to <%s>."
+msgstr "لطفا مشکلات را به <%s> گزارش دهید"
+
+#: ../panel/main.c:361
+msgid "There is already a running instance"
+msgstr ""
+
+#. spawn ourselfs again
+#: ../panel/main.c:404
+msgid "Restarting..."
+msgstr ""
+
+#: ../panel/main.c:419
+msgid "Failed to show the preferences dialog"
+msgstr ""
+
+#: ../panel/main.c:421
+msgid "Failed to show the add new items dialog"
+msgstr ""
+
+#: ../panel/main.c:423
+msgid "Failed to save the panel configuration"
+msgstr ""
+
+#: ../panel/main.c:425
+msgid "Failed to add a plugin to the panel"
+msgstr ""
+
+#: ../panel/main.c:427
+msgid "Failed to restart the panel"
+msgstr ""
+
+#: ../panel/main.c:429
+msgid "Failed to quit the panel"
+msgstr ""
+
+#: ../panel/main.c:431
+msgid "Failed to send D-Bus message"
+msgstr ""
+
+#: ../panel/main.c:441
+msgid "Execute"
+msgstr ""
+
+#: ../panel/main.c:442
+msgid ""
+"Do you want to start the panel? If you do, make sure you save the session on"
+" logout, so the panel is automatically started the next time you login."
+msgstr ""
+
+#: ../panel/main.c:445 ../panel/main.c:459
+#, c-format
+msgid "No running instance of %s was found"
+msgstr ""
+
+#: ../panel/panel-application.c:215
+msgid "Failed to launch the migration application"
+msgstr ""
+
+#: ../panel/panel-application.c:983
+msgid "Create _Launcher"
+msgstr ""
+
+#: ../panel/panel-application.c:984
+msgid ""
+"This will create a new launcher plugin on the panel and inserts the dropped "
+"files as menu items."
+msgstr ""
+
+#: ../panel/panel-application.c:986
+#, c-format
+msgid "Create new launcher from %d desktop file"
+msgid_plural "Create new launcher from %d desktop files"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../panel/panel-application.c:1726
+msgid "Quit"
+msgstr "بستن"
+
+#: ../panel/panel-application.c:1727
+msgid ""
+"You have started X without session manager. Clicking Quit will close the X "
+"server."
+msgstr ""
+
+#: ../panel/panel-application.c:1728
+msgid "Are you sure you want to quit the panel?"
+msgstr "آیا مطمئن هستید که می‌خواهید پنل را ببندید؟"
+
+#: ../panel/panel-application.c:1736
+#, c-format
+msgid "Failed to execute command \"%s\""
+msgstr ""
+
+#: ../panel/panel-dbus-client.c:218
+msgid ""
+"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr ""
+
+#: ../panel/panel-dbus-client.c:248
+#, c-format
+msgid ""
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and "
+"uint."
+msgstr ""
+
+#: ../panel/panel-dialogs.c:58
+msgid "Unable to open the e-mail address"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:83
+msgid "The panel of the Xfce Desktop Environment"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:87
+msgid "translator-credits"
+msgstr ""
+
+#. setup the dialog
+#: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:14
+msgid "Add New Item"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:203
+#: ../plugins/launcher/launcher-dialog.glade.h:16
+msgid "_Add"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:175
+msgid "Please choose a panel for the new plugin:"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:891
+#, c-format
+msgid "Panel %d"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:235
+msgid ""
+"Because the panel is running in kiosk mode, you are not allowed to make "
+"changes to the panel configuration as a regular user"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:237
+msgid "Modifying the panel is not allowed"
+msgstr ""
+
+#: ../panel/panel-item-dialog.c:195
+msgid "Add New Items"
+msgstr ""
+
+#: ../panel/panel-item-dialog.c:197
+msgid "Add new plugins to the panel"
+msgstr ""
+
+#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-preferences-dialog.glade.h:11
+#: ../panel/panel-tic-tac-toe.c:123
+#: ../plugins/actions/actions-dialog.glade.h:3
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
+#: ../plugins/clock/clock-dialog.glade.h:7
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+#: ../plugins/launcher/launcher-dialog.glade.h:17
+#: ../plugins/pager/pager-dialog.glade.h:2
+#: ../plugins/separator/separator-dialog.glade.h:5
+#: ../plugins/systray/systray-dialog.glade.h:2
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
+msgid "_Close"
+msgstr "بستن"
+
+#: ../panel/panel-item-dialog.c:230
+#: ../plugins/launcher/launcher-dialog.glade.h:18
+msgid "_Search:"
+msgstr ""
+
+#: ../panel/panel-item-dialog.c:238
+msgid "Enter search phrase here"
+msgstr ""
+
+#: ../panel/panel-plugin-external.c:434
+#, c-format
+msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
+msgstr ""
+
+#: ../panel/panel-plugin-external.c:436
+#, c-format
+msgid ""
+"The plugin restarted more than once in the last %d seconds. If you press "
+"Execute the panel will try to restart the plugin otherwise it will be "
+"permanently removed from the panel."
+msgstr ""
+
+#: ../panel/panel-plugin-external.c:440
+msgid "_Execute"
+msgstr "اجرا کردن"
+
+#: ../panel/panel-preferences-dialog.c:517
+msgid "Automatic"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.c:527
+msgid "Primary"
+msgstr ""
+
+#. I18N: monitor name in the output selector
+#: ../panel/panel-preferences-dialog.c:546
+#, c-format
+msgid "Monitor %d"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.c:957
+msgid "The panel and plugin configurations will be permanently removed"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.c:958
+#, c-format
+msgid "Are you sure you want to remove panel %d?"
+msgstr ""
+
+#. I18N: append (external) in the preferences dialog if the plugin
+#. * runs external
+#: ../panel/panel-preferences-dialog.c:1158
+#, c-format
+msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
+msgstr ""
+
+#. I18N: tooltip in preferences dialog when hovering an item in the list
+#. * for external plugins
+#: ../panel/panel-preferences-dialog.c:1163
+#, c-format
+msgid ""
+"Internal name: %s-%d\n"
+"PID: %d"
+msgstr ""
+
+#. I18N: tooltip in preferences dialog when hovering an item in the list
+#. * for internal plugins
+#: ../panel/panel-preferences-dialog.c:1175
+#, c-format
+msgid "Internal name: %s-%d"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:1
+#: ../plugins/tasklist/tasklist-dialog.glade.h:1
+msgid "Never"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:2
+msgid "Intelligently"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:3
+#: ../plugins/tasklist/tasklist-dialog.glade.h:2
+msgid "Always"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:4
+msgid "Horizontal"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:5
+msgid "Vertical"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:6
+msgid "Deskbar"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:7
+msgid "None (use system style)"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:8
+msgid "Solid color"
+msgstr "رنگ تنها"
+
+#: ../panel/panel-preferences-dialog.glade.h:9
+msgid "Background image"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:10
+msgid "Panel Preferences"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:13
+msgid "Profiles:"
+msgstr "نمایه‌ها:"
+
+#: ../panel/panel-preferences-dialog.glade.h:14
+msgid "_Backup and restore"
+msgstr "_پشتیبان گیری و بازگردانی"
+
+#: ../panel/panel-preferences-dialog.glade.h:15
+msgid "Switch between panel presets"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:16
+msgid "Add a new panel"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:17
+msgid "Remove the currently selected panel"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:18
+msgid "<b>General</b>"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:19
+msgid "M_ode:"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:20
+msgid "Span mo_nitors"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:21
+msgid "Select this option to extend the panel over multiple monitors."
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:22
+msgid "_Lock panel"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:23
+msgid ""
+"Select this option to hide the handles of the panel and lock its position."
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:24
+msgid "Don't _reserve space on borders"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:25
+msgid ""
+"Select this option if you want maximized windows to cover the area behind "
+"the panel. This only works when the panel is attached to a screen edge."
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:26
+msgid "Au_tomatically hide the panel:"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:27
+msgid "O_utput:"
+msgstr ""
+
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
+#: ../panel/panel-preferences-dialog.glade.h:29
+msgid "<b>Measurements</b>"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:30
+msgid "Row _size (pixels):"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:31
+msgid "Num_ber of rows:"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:33
+#, no-c-format
+msgid "L_ength (%):"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:34
+msgid "A_utomatically increase the length"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:35
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:36
+msgid "D_isplay"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:37
+msgid "<b>Background</b>"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../plugins/separator/separator-dialog.glade.h:7
+msgid "_Style:"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:39
+msgid "C_olor:"
+msgstr "رنگ:"
+
+#: ../panel/panel-preferences-dialog.glade.h:40
+msgid "Pick a Panel Color"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:41
+msgid "_File:"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:42
+msgid "Select A Background Image"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:43
+msgid "<b>Icons</b>"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:44
+msgid "Adjust size au_tomatically"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:45
+msgid "Fixed icon _size (pixels):"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:46
+msgid "<b>Opacity</b>"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:47
+msgid "Configure..."
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:48
+msgid ""
+"<b>Compositing is currently disabled</b>\n"
+"Enable compositing in the window manager for opacity settings in the panel."
+msgstr ""
+
+#. I18N: label for the enter transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:51
+msgid "_Enter:"
+msgstr ""
+
+#. I18N: label for the leave transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:53
+msgid "_Leave:"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:54
+msgid ""
+"Transparency when the pointer is not hovering over the panel, with 0 being "
+"fully transparent and 100 fully opaque."
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:55
+msgid "Appeara_nce"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:56
+#: ../plugins/launcher/launcher-dialog.glade.h:21
+#: ../plugins/systray/systray-dialog.glade.h:8
+msgid "Move currently selected item up by one row"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:57
+#: ../plugins/launcher/launcher-dialog.glade.h:22
+#: ../plugins/systray/systray-dialog.glade.h:9
+msgid "Move currently selected item down by one row"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:58
+msgid "Add new item to this panel"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:59
+msgid "Remove currently selected item"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:60
+#: ../plugins/launcher/launcher-dialog.glade.h:23
+msgid "Edit the currently selected item"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:61
+msgid "Show about information of the currently selected item"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:62
+msgid "Ite_ms"
+msgstr ""
+
+#: ../panel/panel-tic-tac-toe.c:121
+msgid "_New Game"
+msgstr ""
+
+#: ../panel/panel-tic-tac-toe.c:132
+msgid "_Level:"
+msgstr ""
+
+#: ../panel/panel-tic-tac-toe.c:138
+msgid "Novice"
+msgstr ""
+
+#: ../panel/panel-tic-tac-toe.c:139
+msgid "Intermediate"
+msgstr ""
+
+#: ../panel/panel-tic-tac-toe.c:140
+msgid "Experienced"
+msgstr ""
+
+#: ../panel/panel-tic-tac-toe.c:141
+msgid "Expert"
+msgstr ""
+
+#: ../panel/panel-window.c:2744
+msgid "_Lock Panel"
+msgstr ""
+
+#: ../migrate/main.c:115
+msgid "Tried but failed to migrate your old panel configuration"
+msgstr ""
+
+#: ../migrate/main.c:127
+msgid "Failed to load the default configuration"
+msgstr ""
+
+#: ../migrate/main.c:140
+msgid "Panel config needs migration..."
+msgstr ""
+
+#: ../migrate/main.c:144
+msgid "Failed to migrate the existing configuration"
+msgstr ""
+
+#: ../migrate/main.c:150
+msgid "Panel configuration has been updated."
+msgstr ""
+
+#: ../plugins/actions/actions-dialog.glade.h:1
+#: ../plugins/actions/actions.desktop.in.in.h:1
+msgid "Action Buttons"
+msgstr ""
+
+#: ../plugins/actions/actions-dialog.glade.h:2
+msgid "Session Menu"
+msgstr "پنجره نشست"
+
+#: ../plugins/actions/actions-dialog.glade.h:5
+msgid "Invert buttons _orientation"
+msgstr ""
+
+#: ../plugins/actions/actions-dialog.glade.h:6
+msgid "_Show confirmation dialog"
+msgstr ""
+
+#: ../plugins/actions/actions-dialog.glade.h:7
+msgid ""
+"Show a confirmation dialog with a 30 second timeout for some of the actions."
+msgstr ""
+
+#: ../plugins/actions/actions-dialog.glade.h:8
+msgid "Appeara_nce:"
+msgstr ""
+
+#: ../plugins/actions/actions-dialog.glade.h:9
+#: ../plugins/launcher/launcher-dialog.glade.h:27
+msgid "General"
+msgstr ""
+
+#: ../plugins/actions/actions-dialog.glade.h:10
+msgid "Visible"
+msgstr "قابل رویت"
+
+#: ../plugins/actions/actions-dialog.glade.h:11
+msgid "Action"
+msgstr ""
+
+#: ../plugins/actions/actions-dialog.glade.h:12
+msgid "_Actions"
+msgstr "_واکنش‌ها"
+
+#: ../plugins/actions/actions.c:153
+msgid "Log Out"
+msgstr "خروج"
+
+#: ../plugins/actions/actions.c:154
+msgid "_Log Out"
+msgstr "_خروج"
+
+#: ../plugins/actions/actions.c:155
+msgid "Are you sure you want to log out?"
+msgstr "آیا برای خارج شدن مطمئن هستید؟"
+
+#: ../plugins/actions/actions.c:156
+#, c-format
+msgid "Logging out in %d seconds."
+msgstr "خروج در %d  ثانیه"
+
+#: ../plugins/actions/actions.c:162
+msgid "Log Out..."
+msgstr "خروج ..."
+
+#: ../plugins/actions/actions.c:163
+msgid "Log _Out..."
+msgstr "خروج ..."
+
+#: ../plugins/actions/actions.c:170
+msgid "Switch User"
+msgstr "تغییر کاربر"
+
+#: ../plugins/actions/actions.c:171
+msgid "_Switch User"
+msgstr "_تغییر کاربر"
+
+#: ../plugins/actions/actions.c:178
+msgid "Lock Screen"
+msgstr "قفل کردن صفحه نمایش "
+
+#: ../plugins/actions/actions.c:179
+msgid "Loc_k Screen"
+msgstr "قفل صفحه"
+
+#: ../plugins/actions/actions.c:186
+msgid "Hibernate"
+msgstr "خواب زمستانی"
+
+#: ../plugins/actions/actions.c:187
+msgid "_Hibernate"
+msgstr "_خواب زمستانی"
+
+#: ../plugins/actions/actions.c:188
+msgid "Do you want to suspend to disk?"
+msgstr "آیا می خواهید دیسک را به حالت تعلیق درآورید؟"
+
+#: ../plugins/actions/actions.c:189
+#, c-format
+msgid "Hibernating computer in %d seconds."
+msgstr "خواب زمستانی رایانه در %d ثانیه"
+
+#: ../plugins/actions/actions.c:195
+msgid "Hybrid Sleep"
+msgstr "خواب ترکیبی"
+
+#: ../plugins/actions/actions.c:196
+msgid "_Hybrid Sleep"
+msgstr "_خواب ترکیبی"
+
+#: ../plugins/actions/actions.c:197
+msgid "Do you want to hibernate and suspend the system?"
+msgstr "آیا می خواهید سیستم به خواب زمستانی و حالت تعلیق درآید؟"
+
+#: ../plugins/actions/actions.c:198
+#, c-format
+msgid "Hibernating and Suspending computer in %d seconds."
+msgstr "خواب زمستانی و تعلیق رایانه در %d ثانیه."
+
+#: ../plugins/actions/actions.c:204
+msgid "Suspend"
+msgstr "تعلیق"
+
+#: ../plugins/actions/actions.c:205
+msgid "Sus_pend"
+msgstr "تعلیق"
+
+#: ../plugins/actions/actions.c:206
+msgid "Do you want to suspend to RAM?"
+msgstr "آیا می خواهید که حافظه‌فرار(RAM) شما تعلیق گردد؟"
+
+#: ../plugins/actions/actions.c:207
+#, c-format
+msgid "Suspending computer in %d seconds."
+msgstr "تعلیق رایانه در %d ثانیه."
+
+#: ../plugins/actions/actions.c:213
+msgid "Restart"
+msgstr "راه اندازی مجدد "
+
+#: ../plugins/actions/actions.c:214
+msgid "_Restart"
+msgstr "_راه اندازی مجدد"
+
+#: ../plugins/actions/actions.c:215
+msgid "Are you sure you want to restart?"
+msgstr "ایا از راه‌اندازی مجدد مطمئن هستید؟"
+
+#: ../plugins/actions/actions.c:216
+#, c-format
+msgid "Restarting computer in %d seconds."
+msgstr "شروع دوباره رایانه در %d ثانیه"
+
+#: ../plugins/actions/actions.c:222
+msgid "Shut Down"
+msgstr "خاموش کردن"
+
+#: ../plugins/actions/actions.c:223
+msgid "Shut _Down"
+msgstr "خاموش کردن"
+
+#: ../plugins/actions/actions.c:224
+msgid "Are you sure you want to shut down?"
+msgstr "آیا از خاموش کردن مطمئن هستید؟"
+
+#: ../plugins/actions/actions.c:225
+#, c-format
+msgid "Turning off computer in %d seconds."
+msgstr "خاموش کردن رایانه در %d ثانیه."
+
+#: ../plugins/actions/actions.c:625
+#: ../plugins/separator/separator-dialog.glade.h:2
+#: ../plugins/separator/separator.desktop.in.in.h:1
+msgid "Separator"
+msgstr "جدا کننده"
+
+#: ../plugins/actions/actions.c:1050
+#, c-format
+msgid "Failed to run action \"%s\""
+msgstr "شکست در انجام عمل \"%s\""
+
+#: ../plugins/actions/actions.c:1225
+msgid "John Doe"
+msgstr "جان دو"
+
+#: ../plugins/actions/actions.desktop.in.in.h:2
+msgid "Log out, lock or other system actions"
+msgstr "خارج شوید ، قفل کنید یا سایر اقدامات سیستم"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
+#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:1
+msgid "Applications Menu"
+msgstr "فهرست برنامه‌ها"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
+msgid "_Icon:"
+msgstr ""
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
+msgid "Button _title:"
+msgstr "عنوان  _دکمه "
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+msgid "_Show button title"
+msgstr "_نشان دادن عنوان دکمه"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+msgid "Show application d_escription in tooltip"
+msgstr "نمایش توصبف برنامه در راهنمای ابزار"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
+msgid "Show ic_ons in menu"
+msgstr "نمایش آیکون در‌فهرست"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+msgid "Show generic application n_ames"
+msgstr "نمایش عمومی نام برنامه‌ها"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+msgid ""
+"Select this option to show the generic application name in the menu, for "
+"example \"File Manager\" instead of \"Thunar\""
+msgstr ""
+"انتخاب این‌ گزینه نوع برنامه را، در‌فهرست به نمایش می‌گذراد. به عنوان مثال "
+"مدیر برنامه \"File Manager\" به جای  \"Thunar\" نمایش داده می‌شود."
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
+#: ../plugins/clock/clock-dialog.glade.h:17
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
+#: ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/separator/separator-dialog.glade.h:9
+#: ../plugins/systray/systray-dialog.glade.h:7
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
+msgid "Appearance"
+msgstr "ظاهر"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
+msgid "Use the _default menu"
+msgstr "از فهرست پیش فرض استفاده شود."
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+msgid "Ed_it Menu"
+msgstr "ویرایش فهرست"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
+msgid "Use c_ustom menu file:"
+msgstr "از فایل فهرست سفارشی استفاده شود:"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
+msgid "Menu _file:"
+msgstr "فهرست فایل:"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:16
+msgid "Select A Menu File"
+msgstr "انتخاب یک فهرست فایل"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:17
+msgid "Menu File"
+msgstr "فهرست فایل"
+
+#. I18N: default tooltip of the application menu
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
+msgid "Applications"
+msgstr "برنامه‌های کاربردی"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:600
+#: ../plugins/directorymenu/directorymenu.c:392
+msgid "Select An Icon"
+msgstr "انتخاب یک آیکون"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:603
+#: ../plugins/directorymenu/directorymenu.c:395
+msgid "_OK"
+msgstr ""
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:639
+#: ../plugins/clock/clock.c:912 ../plugins/launcher/launcher.c:2399
+#, c-format
+msgid "Failed to execute command \"%s\"."
+msgstr "شکست در اجرای یک دستور \"%s\"."
+
+#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
+msgid "Show a menu containing categories of installed applications"
+msgstr "نمایش یک فهرست شامل دسته‌بندی برنامه‌های نصب شده"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:27
+msgid "Usage:"
+msgstr ""
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
+msgid "OPTION"
+msgstr "گزینه"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:30
+msgid "Options:"
+msgstr ""
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
+msgid "Popup menu at current mouse position"
+msgstr "فهرست بازشو در موقعیت فعالی ماوس"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
+msgid "Show help options"
+msgstr "نمایش گزینه‌های کمک "
+
+#. TRANSLATORS: adjust this accordingly for your locale format
+#: ../plugins/clock/clock.c:46
+msgctxt "Date"
+msgid "%A %d %B %Y"
+msgstr "%A%d %B %Y"
+
+#: ../plugins/clock/clock.c:174
+msgid "Week %V"
+msgstr "هفته %V"
+
+#: ../plugins/clock/clock.c:464
+msgid "Failed to execute clock command"
+msgstr "شکست در اجرای دستور ساعت"
+
+#: ../plugins/clock/clock.c:851
+msgid "Custom Format"
+msgstr "قالب بندی سفارشی"
+
+#: ../plugins/clock/clock-dialog.glade.h:1
+msgid "Analog"
+msgstr "آنالوگ"
+
+#: ../plugins/clock/clock-dialog.glade.h:2
+msgid "Binary"
+msgstr "باینری"
+
+#: ../plugins/clock/clock-dialog.glade.h:3
+msgid "Digital"
+msgstr "دیجیتال"
+
+#: ../plugins/clock/clock-dialog.glade.h:4
+msgid "Fuzzy"
+msgstr "فازی"
+
+#: ../plugins/clock/clock-dialog.glade.h:5
+msgid "LCD"
+msgstr "ال سی دی"
+
+#: ../plugins/clock/clock-dialog.glade.h:6
+#: ../plugins/clock/clock.desktop.in.in.h:1
+msgid "Clock"
+msgstr "ساعت"
+
+#: ../plugins/clock/clock-dialog.glade.h:9
+msgid ""
+"Name of a timezone corresponding a file in the zoneinfo database, for "
+"example \"America/New_York\". Leave empty to use the localtime."
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:10
+msgid "Time_zone:"
+msgstr "منطقه زمانی:"
+
+#: ../plugins/clock/clock-dialog.glade.h:11
+msgid "Time and Date _Settings..."
+msgstr "تنظیمات زمان و تاریخ ..."
+
+#: ../plugins/clock/clock-dialog.glade.h:12
+msgid "Time Settings"
+msgstr "تنظیمات زمان"
+
+#: ../plugins/clock/clock-dialog.glade.h:14
+#, no-c-format
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"page for additional information."
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:15
+msgid "_Tooltip format:"
+msgstr "قالب بندی راهنمای ابزار:"
+
+#: ../plugins/clock/clock-dialog.glade.h:16
+msgid "_Layout:"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:18
+msgid "Sho_w AM/PM"
+msgstr "نمایش AM/PM"
+
+#: ../plugins/clock/clock-dialog.glade.h:19
+msgid "Fl_ash time separators"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:20
+msgid "24-_hour clock"
+msgstr "زمان ۲۴ ساعته"
+
+#: ../plugins/clock/clock-dialog.glade.h:21
+msgid "True _binary clock"
+msgstr "ساعت باینری صحیح"
+
+#: ../plugins/clock/clock-dialog.glade.h:22
+msgid "Display _seconds"
+msgstr "نمایش ثانیه"
+
+#: ../plugins/clock/clock-dialog.glade.h:23
+msgid "F_ormat:"
+msgstr "قالب بندی:"
+
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
+#: ../plugins/clock/clock-dialog.glade.h:25
+msgid "F_uzziness:"
+msgstr "فازی:"
+
+#: ../plugins/clock/clock-dialog.glade.h:26
+msgid "Show _inactive dots"
+msgstr "نمایش نقاط غیرفعال"
+
+#: ../plugins/clock/clock-dialog.glade.h:27
+msgid "Show gri_d"
+msgstr "نمایش خطوط"
+
+#: ../plugins/clock/clock-dialog.glade.h:28
+msgid "Clock Options"
+msgstr "گزینه‌های ساعت"
+
+#. TRANSLATORS: adjust this accordingly for your locale format
+#: ../plugins/clock/clock-digital.h:25
+msgctxt "Time"
+msgid "%a %d %b, %R"
+msgstr "%a%d %b, %R"
+
+#: ../plugins/clock/clock-fuzzy.c:87
+msgid "Night"
+msgstr "شب"
+
+#: ../plugins/clock/clock-fuzzy.c:88
+msgid "Early morning"
+msgstr "سحرگاه"
+
+#: ../plugins/clock/clock-fuzzy.c:89
+msgid "Morning"
+msgstr "بامداد"
+
+#: ../plugins/clock/clock-fuzzy.c:90
+msgid "Almost noon"
+msgstr "تقریباً ظهر"
+
+#: ../plugins/clock/clock-fuzzy.c:91
+msgid "Noon"
+msgstr "ظهر"
+
+#: ../plugins/clock/clock-fuzzy.c:92
+msgid "Afternoon"
+msgstr "بعد از ظهر"
+
+#: ../plugins/clock/clock-fuzzy.c:93
+msgid "Evening"
+msgstr "عصر"
+
+#: ../plugins/clock/clock-fuzzy.c:94
+msgid "Late evening"
+msgstr ""
+
+#. I18N: %0 will be replaced with the preceding hour, %1 with
+#. * the comming hour
+#: ../plugins/clock/clock-fuzzy.c:101
+#, no-c-format
+msgid "%0 o'clock"
+msgstr "ساعت %0"
+
+#: ../plugins/clock/clock-fuzzy.c:102
+#, no-c-format
+msgid "five past %0"
+msgstr "پنج دقیقه گذشته %0"
+
+#: ../plugins/clock/clock-fuzzy.c:103
+#, no-c-format
+msgid "ten past %0"
+msgstr "ده دقیقه گذشته %0"
+
+#: ../plugins/clock/clock-fuzzy.c:104
+#, no-c-format
+msgid "quarter past %0"
+msgstr "یک ربع گذشته %0"
+
+#: ../plugins/clock/clock-fuzzy.c:105
+#, no-c-format
+msgid "twenty past %0"
+msgstr "بیست دقیقه گذشته %0"
+
+#: ../plugins/clock/clock-fuzzy.c:106
+#, no-c-format
+msgid "twenty five past %0"
+msgstr "بیست و پنج دقیقه گذشته %0"
+
+#: ../plugins/clock/clock-fuzzy.c:107
+#, no-c-format
+msgid "half past %0"
+msgstr "نیم ساعت گذشته %0"
+
+#: ../plugins/clock/clock-fuzzy.c:108
+#, no-c-format
+msgid "twenty five to %1"
+msgstr "بیست و پنج دقیقه مانده  %1"
+
+#: ../plugins/clock/clock-fuzzy.c:109
+#, no-c-format
+msgid "twenty to %1"
+msgstr "بیست دقیقه مانده %1"
+
+#: ../plugins/clock/clock-fuzzy.c:110
+#, no-c-format
+msgid "quarter to %1"
+msgstr "یک ربع مانده به %1"
+
+#: ../plugins/clock/clock-fuzzy.c:111
+#, no-c-format
+msgid "ten to %1"
+msgstr "ده دقیقه مانده به %1"
+
+#: ../plugins/clock/clock-fuzzy.c:112
+#, no-c-format
+msgid "five to %1"
+msgstr " پنج دقیقه مانده به %1"
+
+#: ../plugins/clock/clock-fuzzy.c:113
+#, no-c-format
+msgid "%1 o'clock"
+msgstr "ساعت  %1"
+
+#. I18N: some languages have a singular form for the first hour,
+#. * other languages should just use the same strings as above
+#: ../plugins/clock/clock-fuzzy.c:120
+#, no-c-format
+msgctxt "one"
+msgid "%0 o'clock"
+msgstr "ساعت %0"
+
+#: ../plugins/clock/clock-fuzzy.c:121
+#, no-c-format
+msgctxt "one"
+msgid "five past %0"
+msgstr "پنج دقیقه گذشته %0"
+
+#: ../plugins/clock/clock-fuzzy.c:122
+#, no-c-format
+msgctxt "one"
+msgid "ten past %0"
+msgstr "ده دقیقه گذشته %0"
+
+#: ../plugins/clock/clock-fuzzy.c:123
+#, no-c-format
+msgctxt "one"
+msgid "quarter past %0"
+msgstr "یک ربع گذشته %0"
+
+#: ../plugins/clock/clock-fuzzy.c:124
+#, no-c-format
+msgctxt "one"
+msgid "twenty past %0"
+msgstr "بیست دقیقه گذشته %0"
+
+#: ../plugins/clock/clock-fuzzy.c:125
+#, no-c-format
+msgctxt "one"
+msgid "twenty five past %0"
+msgstr "بیست و پنج دقیقه گذشته %0"
+
+#: ../plugins/clock/clock-fuzzy.c:126
+#, no-c-format
+msgctxt "one"
+msgid "half past %0"
+msgstr "نیم ساعت گذشته %0"
+
+#: ../plugins/clock/clock-fuzzy.c:127
+#, no-c-format
+msgctxt "one"
+msgid "twenty five to %1"
+msgstr "بیست و پنج دقیقه مانده  %1"
+
+#: ../plugins/clock/clock-fuzzy.c:128
+#, no-c-format
+msgctxt "one"
+msgid "twenty to %1"
+msgstr "بیست دقیقه مانده %1"
+
+#: ../plugins/clock/clock-fuzzy.c:129
+#, no-c-format
+msgctxt "one"
+msgid "quarter to %1"
+msgstr "یک ربع مانده به %1"
+
+#: ../plugins/clock/clock-fuzzy.c:130
+#, no-c-format
+msgctxt "one"
+msgid "ten to %1"
+msgstr "ده دقیقه مانده به %1"
+
+#: ../plugins/clock/clock-fuzzy.c:131
+#, no-c-format
+msgctxt "one"
+msgid "five to %1"
+msgstr " پنج دقیقه مانده به %1"
+
+#: ../plugins/clock/clock-fuzzy.c:132
+#, no-c-format
+msgctxt "one"
+msgid "%1 o'clock"
+msgstr "ساعت  %1"
+
+#: ../plugins/clock/clock-fuzzy.c:137
+msgid "one"
+msgstr "یک"
+
+#: ../plugins/clock/clock-fuzzy.c:138
+msgid "two"
+msgstr "دو"
+
+#: ../plugins/clock/clock-fuzzy.c:139
+msgid "three"
+msgstr "سه"
+
+#: ../plugins/clock/clock-fuzzy.c:140
+msgid "four"
+msgstr "چهار"
+
+#: ../plugins/clock/clock-fuzzy.c:141
+msgid "five"
+msgstr "پنج"
+
+#: ../plugins/clock/clock-fuzzy.c:142
+msgid "six"
+msgstr "شش"
+
+#: ../plugins/clock/clock-fuzzy.c:143
+msgid "seven"
+msgstr "هفت"
+
+#: ../plugins/clock/clock-fuzzy.c:144
+msgid "eight"
+msgstr "هشت"
+
+#: ../plugins/clock/clock-fuzzy.c:145
+msgid "nine"
+msgstr "نه"
+
+#: ../plugins/clock/clock-fuzzy.c:146
+msgid "ten"
+msgstr "ده"
+
+#: ../plugins/clock/clock-fuzzy.c:147
+msgid "eleven"
+msgstr "یازده"
+
+#: ../plugins/clock/clock-fuzzy.c:148
+msgid "twelve"
+msgstr "دوازده"
+
+#: ../plugins/clock/clock.desktop.in.in.h:2
+msgid "What time is it?"
+msgstr "ساعت چند است؟"
+
+#: ../plugins/directorymenu/directorymenu.c:242
+#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
+msgid "Directory Menu"
+msgstr "فهرست دایرکتوری"
+
+#: ../plugins/directorymenu/directorymenu.c:586
+#, c-format
+msgid "Failed to launch application \"%s\""
+msgstr "شکست در راه اندازی برنامه \"%s\""
+
+#: ../plugins/directorymenu/directorymenu.c:618
+#, c-format
+msgid "Failed to query content type for \"%s\""
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu.c:627
+#, c-format
+msgid "No default application found for \"%s\""
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu.c:643
+#, c-format
+msgid "Failed to launch default application for \"%s\""
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu.c:741
+#, c-format
+msgid "Failed to execute the preferred application for category \"%s\""
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu.c:815
+msgid "Open Folder"
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu.c:830
+msgid "Open in Terminal"
+msgstr "گشودن در پایانه"
+
+#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
+msgid "Show a directory tree in a menu"
+msgstr "نمایش یک دایرکتوری درخت در فهرست"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
+msgid "Select A Directory"
+msgstr "انتخاب یک دایرکتوری"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
+msgid "_Base Directory:"
+msgstr "_پایگاه دایرکتوری"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
+msgid "Show _hidden files"
+msgstr "نمایش فایل‌های پنهان"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+msgid ""
+"Enter a list of patterns that will be used to determine which files are "
+"visible in a directory. If you specify more than one pattern here, the list "
+"items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
+msgid "_File Pattern:"
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:29
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
+msgid "Filtering"
+msgstr "فیلتر کردن"
+
+#: ../plugins/launcher/launcher.c:405
+msgid "Open launcher menu"
+msgstr "گشودن فهرست اجرا کننده"
+
+#: ../plugins/launcher/launcher.c:1622
+msgid "Unnamed Item"
+msgstr "مورد بی‌نام"
+
+#: ../plugins/launcher/launcher.c:1796
+msgid "No items"
+msgstr "بدون مورد"
+
+#: ../plugins/launcher/launcher-dialog.c:785
+msgid "Failed to open desktop item editor"
+msgstr "شکست در گشودن ویرایشگر دسکتاپ"
+
+#: ../plugins/launcher/launcher-dialog.c:853
+msgid "If you delete an item, it will be permanently removed"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:854
+#, c-format
+msgid "Are you sure you want to remove \"%s\"?"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:855
+msgid "Unnamed item"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.glade.h:1
+msgid "Default"
+msgstr "پیش فرض"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:2
+msgid "North"
+msgstr "شمال"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:3
+msgid "West"
+msgstr "غرب"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:4
+msgid "East"
+msgstr "شرق"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:5
+msgid "South"
+msgstr "جنوب"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:6
+msgid "Inside Button"
+msgstr "داخل دکمه"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:7
+msgid "Up"
+msgstr "بالا"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:8
+msgid "Down"
+msgstr "پایین"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:9
+msgid "_Edit Item"
+msgstr "_ویرایش مورد"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:10
+msgid "D_elete Item"
+msgstr "حذف مورد"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:11
+msgid "Add Appli_cation"
+msgstr "اضافه کردن برنامه"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:12
+msgid "New _Application"
+msgstr "برنامه تازه"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:13
+msgid "New _Link"
+msgstr "لینک تازه"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:15
+msgid "Add one or more existing items to the launcher"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.glade.h:19
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
+msgid "Launcher"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.glade.h:24
+msgid "Delete the currently selected item"
+msgstr "حذف مورد انتخاب شده حال حاضر"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:25
+msgid "Add a new empty item"
+msgstr "اضافه کردن یه مورد خالی تاره"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:26
+msgid "Add a new hyperlink"
+msgstr "اضافه کردن یک هایپرلینک تازه"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:28
+msgid "Disable t_ooltips"
+msgstr "غیرفعال کردن راهنمای ابزارها"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:29
+msgid ""
+"Select this option to disable the tooltips when moving over the panel button"
+" or menu items."
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.glade.h:30
+msgid "Show _label instead of icon"
+msgstr "نمایش برچسب بجای آیکون"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:31
+msgid "Show last _used item in panel"
+msgstr "نمایش آخرین مورد استفاده شده در پنل"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:32
+msgid "Select this option to move the clicked menu item to the panel."
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.glade.h:33
+msgid "_Arrow button position:"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.glade.h:34
+msgid "Advanced"
+msgstr ""
+
+#: ../plugins/launcher/launcher.desktop.in.in.h:2
+msgid "Program launcher with optional menu"
+msgstr ""
+
+#: ../plugins/pager/pager.c:511 ../plugins/pager/pager-dialog.glade.h:7
+msgid "Workspace _Settings..."
+msgstr "تنظیمات فضای کاری"
+
+#: ../plugins/pager/pager.c:599
+msgid "Unable to open the workspace settings"
+msgstr "گشودن تنظیمات فضای کاری ممکن نیست"
+
+#: ../plugins/pager/pager-buttons.c:569 ../plugins/windowmenu/windowmenu.c:873
+#, c-format
+msgid "Workspace %d"
+msgstr ""
+
+#: ../plugins/pager/pager-dialog.glade.h:1
+#: ../plugins/pager/pager.desktop.in.in.h:1
+msgid "Workspace Switcher"
+msgstr "تعویض فضای کاری"
+
+#: ../plugins/pager/pager-dialog.glade.h:4
+msgid "Number of _rows:"
+msgstr "تعداد ردیف‌ها:"
+
+#: ../plugins/pager/pager-dialog.glade.h:5
+msgid "Show mi_niature view"
+msgstr ""
+
+#: ../plugins/pager/pager-dialog.glade.h:6
+msgid ""
+"Show a miniature view of the workspace with rectangles for the visible "
+"windows"
+msgstr ""
+
+#: ../plugins/pager/pager-dialog.glade.h:9
+msgid "Switch workspaces using the mouse _wheel"
+msgstr ""
+
+#: ../plugins/pager/pager-dialog.glade.h:10
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+msgid "Behaviour"
+msgstr "رفتار"
+
+#: ../plugins/pager/pager.desktop.in.in.h:2
+msgid "Switch between virtual desktops"
+msgstr "بین دسکتاپ های مجازی جابجا شوید"
+
+#: ../plugins/separator/separator-dialog.glade.h:1
+msgid "Transparent"
+msgstr "شفاف"
+
+#: ../plugins/separator/separator-dialog.glade.h:3
+msgid "Handle"
+msgstr "رسیدگی"
+
+#: ../plugins/separator/separator-dialog.glade.h:4
+msgid "Dots"
+msgstr "نقاط"
+
+#: ../plugins/separator/separator-dialog.glade.h:8
+msgid "_Expand"
+msgstr "توسعه دادن"
+
+#: ../plugins/separator/separator.desktop.in.in.h:2
+msgid "Adds a separator or space between panel items"
+msgstr ""
+
+#: ../plugins/showdesktop/showdesktop.c:242
+msgid "Restore the minimized windows"
+msgstr "پنجره های به حداقل رسیده را بازیابی کنید"
+
+#: ../plugins/showdesktop/showdesktop.c:244
+msgid "Minimize all open windows and show the desktop"
+msgstr "تمام پنجره های باز را به حداقل برسانید و دسک تاپ را نمایش دهید"
+
+#: ../plugins/showdesktop/showdesktop.c:247
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
+msgid "Show Desktop"
+msgstr "نمایش دسکتاپ "
+
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
+msgid "Hide all windows and show the desktop"
+msgstr "پنهان کردن همه پنجره‌ها و نشان دادن دسکتاپ"
+
+#: ../plugins/systray/systray.c:458
+msgid "Unable to start the notification area"
+msgstr "شروع ناحیه اعلان امکان پذیر نمی‌باشد"
+
+#. create fake error and show it
+#: ../plugins/systray/systray.c:953
+msgid ""
+"Most likely another widget took over the function of a notification area. "
+"This area will be unused."
+msgstr ""
+
+#: ../plugins/systray/systray.c:955
+msgid "The notification area lost selection"
+msgstr ""
+
+#: ../plugins/systray/systray.c:1219
+msgid "Clear"
+msgstr ""
+
+#: ../plugins/systray/systray.c:1220
+msgid "Are you sure you want to clear the list of known applications?"
+msgstr "آیا مطمئن هستید که می خواهید لیست برنامه های شناخته شده را پاک کنید؟"
+
+#: ../plugins/systray/systray-dialog.glade.h:1
+#: ../plugins/systray/systray.desktop.in.in.h:1
+msgid "Notification Area"
+msgstr "ناحیه اطلاع"
+
+#: ../plugins/systray/systray-dialog.glade.h:4
+msgid "_Maximum icon size (px):"
+msgstr ""
+
+#: ../plugins/systray/systray-dialog.glade.h:5
+msgid "Sq_uare icons"
+msgstr ""
+
+#: ../plugins/systray/systray-dialog.glade.h:6
+msgid "Show _frame"
+msgstr ""
+
+#: ../plugins/systray/systray-dialog.glade.h:10
+msgid "C_lear Known Applications"
+msgstr ""
+
+#: ../plugins/systray/systray-dialog.glade.h:11
+msgid "Known Applications"
+msgstr "برنامه های شناخته شده"
+
+#: ../plugins/systray/systray-manager.c:405
+#, c-format
+msgid "Failed to acquire manager selection for screen %d"
+msgstr ""
+
+#: ../plugins/systray/systray.desktop.in.in.h:2
+msgid "Area where notification icons appear"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:3
+msgid "When space is limited"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:4
+msgid "Nothing"
+msgstr "هیچ چیز"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+msgid "Close Window"
+msgstr "بستن پنجره"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:6
+msgid "Minimize Window"
+msgstr "به حداقل رساندن پنجره"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:7
+msgid "Timestamp"
+msgstr "برچسب زمان"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+msgid "Group title and timestamp"
+msgstr "گروه عنوان و برچسب زمان"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:9
+msgid "Window title"
+msgstr "عنوان پنجره"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+msgid "Group title and window title"
+msgstr "گروه عنوان و برچسب زمان"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+msgid "None, allow drag-and-drop"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:1
+msgid "Window Buttons"
+msgstr "پنجره دکمه‌ها"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+msgid "Show button _labels"
+msgstr "نمایش برچسب‌های دکمه"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+msgid "Show _flat buttons"
+msgstr "نمایش دکمه‌های صاف"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+msgid "Show _handle"
+msgstr "نمایش رسیدگی "
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+msgid "Sorting _order:"
+msgstr "مرتب سازی ترتیبی"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+msgid "Window _grouping:"
+msgstr "گروه بندی پنجره"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+msgid "Mi_ddle click action:"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+msgid "Restore minimized windows to current _workspace"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
+msgid "D_raw window frame when hovering a button"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:24
+msgid "_Switch windows using the mouse wheel"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:26
+msgid "Show windows from _all workspaces or viewports"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:27
+msgid "Show windows from all mo_nitors"
+msgstr "نمایش پنجره‌ها از تمامی نمایشگرها"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:28
+msgid "Show only _minimized windows"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-widget.c:3630
+msgid "Mi_nimize All"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-widget.c:3638
+msgid "Un_minimize All"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-widget.c:3646
+msgid "Ma_ximize All"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-widget.c:3654
+msgid "_Unmaximize All"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-widget.c:3666
+msgid "_Close All"
+msgstr "بستن همه"
+
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:2
+msgid "Switch between open windows using buttons"
+msgstr "جابجایی با استفاده از دکمه‌ها بین پنجره‌های باز"
+
+#: ../plugins/windowmenu/windowmenu.c:670
+msgid "Desktop"
+msgstr "میزکار"
+
+#: ../plugins/windowmenu/windowmenu.c:1277
+msgid "No Windows"
+msgstr "بدون پنجره"
+
+#: ../plugins/windowmenu/windowmenu.c:1292
+msgid "Urgent Windows"
+msgstr "پنجره‌های فوری"
+
+#: ../plugins/windowmenu/windowmenu.c:1335
+msgid "Add Workspace"
+msgstr "اضافه کردن فضای کاری"
+
+#: ../plugins/windowmenu/windowmenu.c:1358
+#, c-format
+msgid "Remove Workspace \"%s\""
+msgstr "حذف فضای کاری \"%s\""
+
+#: ../plugins/windowmenu/windowmenu.c:1360
+#, c-format
+msgid "Remove Workspace %d"
+msgstr "حذف فضا کاری %d"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
+msgid "Icon"
+msgstr ""
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
+msgid "Arrow"
+msgstr ""
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
+#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:1
+msgid "Window Menu"
+msgstr ""
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
+msgid "Button layout:"
+msgstr ""
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
+msgid "Show workspace a_ctions"
+msgstr ""
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
+msgid "Show workspace _names"
+msgstr "نمایش نام فضای کاری"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
+msgid "Enable _urgency notification"
+msgstr "نمایش اطلاع فوری"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:11
+msgid "Show windows from _all workspaces"
+msgstr "نمایش پنجره‌ها در تمامی فضاهای کاری"
+
+#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
+msgid "Switch between open windows using a menu"
+msgstr ""
