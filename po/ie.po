@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-17 06:31+0200\n"
-"PO-Revision-Date: 2019-10-20 16:41+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
+"PO-Revision-Date: 2019-10-31 10:00+0000\n"
+"Last-Translator: Caarmi\n"
 "Language-Team: Interlingue (http://www.transifex.com/xfce/xfce4-panel/language/ie/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,11 +61,11 @@ msgstr "_Anullar"
 #: ../panel/panel-preferences-dialog.c:1323
 #: ../plugins/launcher/launcher-dialog.c:852
 msgid "_Remove"
-msgstr ""
+msgstr "_Remover"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1253
 msgid "_Properties"
-msgstr ""
+msgstr "_Proprietás"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:2953
 msgid "_About"
@@ -108,7 +108,7 @@ msgstr "Au_xilie"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1408
 msgid "About"
-msgstr ""
+msgstr "Pri"
 
 #: ../panel/main.c:81
 msgid "Show the 'Panel Preferences' dialog"
@@ -120,7 +120,7 @@ msgstr "PANEL-NUMERO"
 
 #: ../panel/main.c:82
 msgid "Show the 'Add New Items' dialog"
-msgstr ""
+msgstr "Monstrar li dialog «Adjunter elementes»"
 
 #: ../panel/main.c:83
 msgid "Save the panel configuration"
@@ -156,7 +156,7 @@ msgstr "Monstra li information del version, poy surtir"
 #: ../panel/main.c:207
 #, c-format
 msgid "Name %s lost on the message dbus, exiting."
-msgstr ""
+msgstr "Li nómine \"%s\" esset perdit sur li dbus de missages, surti."
 
 #. parse context options
 #: ../panel/main.c:268
@@ -192,7 +192,7 @@ msgstr "Ne successat monstrar li dialog de preferenties"
 
 #: ../panel/main.c:421
 msgid "Failed to show the add new items dialog"
-msgstr ""
+msgstr "Ne successat monstrar li dialog «Adjunter elementes»"
 
 #: ../panel/main.c:423
 msgid "Failed to save the panel configuration"
@@ -216,7 +216,7 @@ msgstr "Ne successat inviar un missage D-Bus"
 
 #: ../panel/main.c:441
 msgid "Execute"
-msgstr ""
+msgstr "Executer"
 
 #: ../panel/main.c:442
 msgid ""
@@ -241,7 +241,7 @@ msgstr "Crear _lansator"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr ""
+msgstr "Un nov lansator va esser creat e li cadet files va esser usat quam elementes de menú."
 
 #: ../panel/panel-application.c:979
 #, c-format
@@ -283,7 +283,7 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:58
 msgid "Unable to open the e-mail address"
-msgstr ""
+msgstr "Ne successat aperter li adresse de e-post"
 
 #: ../panel/panel-dialogs.c:83
 msgid "The panel of the Xfce Desktop Environment"
@@ -301,7 +301,7 @@ msgstr "Adjuncter un nov element"
 #: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:203
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
-msgstr ""
+msgstr "_Adjunter"
 
 #: ../panel/panel-dialogs.c:175
 msgid "Please choose a panel for the new plugin:"
@@ -353,7 +353,7 @@ msgstr "_Serchar:"
 
 #: ../panel/panel-item-dialog.c:238
 msgid "Enter search phrase here"
-msgstr ""
+msgstr "Serchar ti-ci"
 
 #: ../panel/panel-plugin-external.c:436
 #, c-format
@@ -378,7 +378,7 @@ msgstr "Automatic"
 
 #: ../panel/panel-preferences-dialog.c:528
 msgid "Primary"
-msgstr ""
+msgstr "Primari"
 
 #. I18N: monitor name in the output selector
 #: ../panel/panel-preferences-dialog.c:547
@@ -458,19 +458,19 @@ msgstr "Image del funde"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "Panel Preferences"
-msgstr ""
+msgstr "Preferenties del panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Profiles:"
-msgstr ""
+msgstr "Profiles:"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid "_Backup and restore"
-msgstr ""
+msgstr "_Archivar e restituer"
 
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Switch between panel presets"
-msgstr ""
+msgstr "Alterar parametres predefinit"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Add a new panel"
@@ -482,7 +482,7 @@ msgstr "Remover li selectet panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "<b>General</b>"
-msgstr ""
+msgstr "<b>General</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid "M_ode:"
@@ -490,11 +490,11 @@ msgstr "M_ode:"
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Span mo_nitors"
-msgstr ""
+msgstr "Extender trans mo_nitores"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr ""
+msgstr "Extender li panel trans multiplic monitores."
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "_Lock panel"
@@ -503,7 +503,7 @@ msgstr "_Serrar li panel"
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr ""
+msgstr "Celar li anses del panel e fixar su position."
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Don't _reserve space on borders"
@@ -517,21 +517,21 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
-msgstr ""
+msgstr "Au_tomaticmen celar li panel:"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid "O_utput:"
-msgstr ""
+msgstr "Prod_uction:"
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:29
 msgid "<b>Measurements</b>"
-msgstr ""
+msgstr "<b>Dimensiones</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Row _size (pixels):"
-msgstr ""
+msgstr "A_ltore de un range (pixeles):"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Num_ber of rows:"
@@ -550,7 +550,7 @@ msgstr "A_utomaticmen augmentar li longore"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr ""
+msgstr "Automaticmen augmentar li longore del panel si li plugines besona plu spacie."
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "D_isplay"
@@ -558,11 +558,11 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Dark mode"
-msgstr ""
+msgstr "Mode obscur"
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "<b>Background</b>"
-msgstr ""
+msgstr "<b>Funde</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 #: ../plugins/separator/separator-dialog.glade.h:7
@@ -587,45 +587,45 @@ msgstr "Selecte un image del funde"
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "<b>Icons</b>"
-msgstr ""
+msgstr "<b>Icones</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Adjust size au_tomatically"
-msgstr ""
+msgstr "Redimensionar au_tomaticmen"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Fixed icon _size (pixels):"
-msgstr ""
+msgstr "Dimen_sion de icone (px):"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 msgid "<b>Opacity</b>"
-msgstr ""
+msgstr "<b>Opacitá</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 msgid "Configure..."
-msgstr ""
+msgstr "Configurar..."
 
 #: ../panel/panel-preferences-dialog.glade.h:49
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr ""
+msgstr "<b>Composition es depermisset nu</b>\nActivar li composition in li gerente de fenestres por controlar li opacitá del panel."
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:52
 msgid "_Enter:"
-msgstr ""
+msgstr "Act_iv:"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:54
 msgid "_Leave:"
-msgstr ""
+msgstr "Í_nactiv:"
 
 #: ../panel/panel-preferences-dialog.glade.h:55
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr ""
+msgstr "Transparentie quande li apuntator es éxter del panel; 0 es completmen transparent, 100 es completmen opac."
 
 #: ../panel/panel-preferences-dialog.glade.h:56
 msgid "Appeara_nce"
@@ -658,7 +658,7 @@ msgstr "Modificar li selectet element"
 
 #: ../panel/panel-preferences-dialog.glade.h:62
 msgid "Show about information of the currently selected item"
-msgstr ""
+msgstr "Monstrar information pri li selectet element"
 
 #: ../panel/panel-preferences-dialog.glade.h:63
 msgid "Ite_ms"
@@ -728,7 +728,7 @@ msgstr "_Monstrar un dialog de confirmation"
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr ""
+msgstr "Monstrar un dialog de confirmation durante 30 sec por alcun actiones."
 
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Appeara_nce:"
@@ -811,20 +811,20 @@ msgstr "Hivernante li computator pos %d secondes."
 
 #: ../plugins/actions/actions.c:195
 msgid "Hybrid Sleep"
-msgstr ""
+msgstr "Somnie hibrid"
 
 #: ../plugins/actions/actions.c:196
 msgid "_Hybrid Sleep"
-msgstr ""
+msgstr "Somnie _hibrid"
 
 #: ../plugins/actions/actions.c:197
 msgid "Do you want to hibernate and suspend the system?"
-msgstr ""
+msgstr "Esque vu vole hivernar e suspender li sistema?"
 
 #: ../plugins/actions/actions.c:198
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
-msgstr ""
+msgstr "Hivernante e suspendente li computator pos %d secondes."
 
 #: ../plugins/actions/actions.c:204
 msgid "Suspend"
@@ -894,7 +894,7 @@ msgstr ""
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
-msgstr ""
+msgstr "Cluder, serrar, o altri actiones de session"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:1
@@ -916,7 +916,7 @@ msgstr "M_onstrar li titul del buton"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Show application d_escription in tooltip"
-msgstr ""
+msgstr "Monstrar li d_escrition de application in un info-panel"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show ic_ons in menu"
@@ -924,13 +924,13 @@ msgstr "Monstra ic_ones in menú"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show generic application n_ames"
-msgstr ""
+msgstr "Monstrar géneric nómines de applicationes"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr ""
+msgstr "Monstrar géneric nómines in li menú, p. ex. «Gerente de files» in vice de «Thunar»"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:17
@@ -1019,13 +1019,13 @@ msgstr "Monstrar li menú al apuntator"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
 msgid "Show help options"
-msgstr ""
+msgstr "Monstrar optiones de auxilie"
 
 #. TRANSLATORS: adjust this accordingly for your locale format
 #: ../plugins/clock/clock.c:46
 msgctxt "Date"
 msgid "%A %d %B %Y"
-msgstr ""
+msgstr "%a, %d %B %Y"
 
 #: ../plugins/clock/clock.c:174
 msgid "Week %V"
@@ -1135,7 +1135,7 @@ msgstr "Monstrar ínact_iv punctus"
 
 #: ../plugins/clock/clock-dialog.glade.h:27
 msgid "Show gri_d"
-msgstr ""
+msgstr "Monstrar un _grille"
 
 #: ../plugins/clock/clock-dialog.glade.h:28
 msgid "Clock Options"
@@ -1145,7 +1145,7 @@ msgstr "Optiones del horloge"
 #: ../plugins/clock/clock-digital.h:25
 msgctxt "Time"
 msgid "%a %d %b, %R"
-msgstr ""
+msgstr "%a, %d %b, %R"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Night"
@@ -1407,7 +1407,7 @@ msgstr "Ne successat lansar li application predefinit por «%s»"
 #: ../plugins/directorymenu/directorymenu.c:741
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr ""
+msgstr "Ne successat executer li application predefinit por li categorie «%s»."
 
 #: ../plugins/directorymenu/directorymenu.c:815
 msgid "Open Folder"
@@ -1438,7 +1438,7 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
+msgstr "Un liste de mustres por determinar quel files es visibil in un liste. Multiplic mustres deve esser separat per semicolónes (p.ex. *.txt;*.doc)"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
 msgid "_File Pattern:"
@@ -1501,7 +1501,7 @@ msgstr "Sud"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "Inside Button"
-msgstr ""
+msgstr "Intra li buton"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "Up"
@@ -1550,7 +1550,7 @@ msgstr "Adjuncter un nov vacui element"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "Add a new hyperlink"
-msgstr ""
+msgstr "Adjuncter un nov hiperligament"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "Disable t_ooltips"
@@ -1572,7 +1572,7 @@ msgstr "Monstrar li _ultim usat element in panel"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:32
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr ""
+msgstr "Mover li max recentmen usat element al panel."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:33
 msgid "_Arrow button position:"
@@ -1605,7 +1605,7 @@ msgstr "Butones"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 msgid "Miniature View"
-msgstr ""
+msgstr "Vise de miniaturas"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
 #: ../plugins/pager/pager.desktop.in.in.h:1
@@ -1618,11 +1618,11 @@ msgstr "Númere de _ranges:"
 
 #: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Show workspace number"
-msgstr ""
+msgstr "Monstrar li numeró de labor-spacie"
 
 #: ../plugins/pager/pager-dialog.glade.h:9
 msgid "Switch workspaces using the mouse wheel"
-msgstr ""
+msgstr "Alterar labor-spacies per li rulette de mus"
 
 #: ../plugins/pager/pager-dialog.glade.h:10
 msgid "<b>Appearance</b>"
@@ -1682,7 +1682,7 @@ msgstr ""
 
 #: ../plugins/systray/systray.c:876
 msgid "The notification area lost selection"
-msgstr ""
+msgstr "Li area de notificationes perdit li selection"
 
 #: ../plugins/systray/systray.c:1140
 msgid "Clear"
@@ -1690,7 +1690,7 @@ msgstr "Vacuar"
 
 #: ../plugins/systray/systray.c:1141
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr ""
+msgstr "Esque vu vole vacuar li liste de conosset applicationes?"
 
 #: ../plugins/systray/systray-dialog.glade.h:1
 #: ../plugins/systray/systray.desktop.in.in.h:1
@@ -1703,7 +1703,7 @@ msgstr "_Max dimension de icones (px):"
 
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "Sq_uare icons"
-msgstr ""
+msgstr "Q_uadrat icones"
 
 #: ../plugins/systray/systray-dialog.glade.h:9
 msgid "C_lear Known Applications"
@@ -1740,11 +1740,11 @@ msgstr "Minimisar li fenestre"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Timestamp"
-msgstr ""
+msgstr "Témpor"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Group title and timestamp"
-msgstr ""
+msgstr "Titul de gruppe e témpor"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "Window title"
@@ -1752,11 +1752,11 @@ msgstr "Titul del fenestre"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Group title and window title"
-msgstr ""
+msgstr "Titul de gruppe e titul de fenestre"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "None, allow drag-and-drop"
-msgstr ""
+msgstr "Manualmen per tirar-e-cader"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
@@ -1793,7 +1793,7 @@ msgstr "Re_stituer li minimisat fenestres al actual labor-spacie"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "D_raw window frame when hovering a button"
-msgstr ""
+msgstr "Monst_rar li borde por un fenestre sub li apuntator"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:24
 msgid "_Switch windows using the mouse wheel"
@@ -1805,7 +1805,7 @@ msgstr "Conduida"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Show windows from _all workspaces or viewports"
-msgstr ""
+msgstr "Monstrar fenestres de _omni labor-spacies o vises"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:27
 msgid "Show windows from all mo_nitors"
