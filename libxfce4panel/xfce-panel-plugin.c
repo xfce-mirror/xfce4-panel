@@ -243,7 +243,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    * @plugin : an #XfcePanelPlugin.
    *
    * This signal is emmitted when the About entry in the right-click
-   * menu is clicked. Plugin writes can use it to show information
+   * menu is clicked. Plugin writers can use it to show information
    * about the plugin and display credits of the developers, translators
    * and other contributors.
    *
@@ -263,7 +263,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    * @plugin : an #XfcePanelPlugin.
    *
    * This signal is emmitted when the Properties entry in the right-click
-   * menu is clicked. Plugin writes can use this signal to open a
+   * menu is clicked. Plugin writers can use this signal to open a
    * plugin settings dialog.
    *
    * See also: xfce_panel_plugin_menu_show_configure() and
@@ -629,8 +629,8 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   /**
    * XfcePanelPlugin:small:
    *
-   * Wether the #XfcePanelPlugin is small enough to fit a single row of a multi-row panel.
-   * Plugin writes can use it to read or set this property, but xfce_panel_plugin_set_small()
+   * Whether the #XfcePanelPlugin is small enough to fit a single row of a multi-row panel.
+   * Plugin writers can use it to read or set this property, but xfce_panel_plugin_set_small()
    * is recommended.
    *
    * Since: 4.10
@@ -646,7 +646,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   /**
    * XfcePanelPlugin:expand:
    *
-   * Wether the #XfcePanelPlugin expands on the panel. Plugin writes can use it
+   * Whether the #XfcePanelPlugin expands on the panel. Plugin writers can use it
    * to read or set this property, but xfce_panel_plugin_set_expand()
    * is recommended.
    **/
@@ -661,8 +661,8 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   /**
    * XfcePanelPlugin:shrink:
    *
-   * Wether the #XfcePanelPlugin can shrink when there is no space left on the panel.
-   * Plugin writes can use it to read or set this property, but xfce_panel_plugin_set_shrink()
+   * Whether the #XfcePanelPlugin can shrink when there is no space left on the panel.
+   * Plugin writers can use it to read or set this property, but xfce_panel_plugin_set_shrink()
    * is recommended.
    *
    * Since: 4.10
@@ -1989,7 +1989,7 @@ xfce_panel_plugin_get_expand (XfcePanelPlugin *plugin)
  * @plugin : an #XfcePanelPlugin.
  * @expand : whether to expand the plugin.
  *
- * Wether the plugin should expand of not
+ * Whether the plugin should expand of not
  **/
 void
 xfce_panel_plugin_set_expand (XfcePanelPlugin *plugin,
@@ -2046,7 +2046,7 @@ xfce_panel_plugin_get_shrink (XfcePanelPlugin *plugin)
  * @plugin : an #XfcePanelPlugin.
  * @shrink : whether the plugin can shrink.
  *
- * Wether the plugin can shrink if the size on the panel
+ * Whether the plugin can shrink if the size on the panel
  * is limited. This does not work if the plugin is expanded.
  **/
 void
