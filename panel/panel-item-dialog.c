@@ -210,7 +210,7 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   gtk_widget_show_all (button);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button, GTK_RESPONSE_HELP);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog), dialog->add_button, GTK_RESPONSE_OK);
-  icon = gtk_image_new_from_icon_name ("window-close", GTK_ICON_SIZE_BUTTON);
+  icon = gtk_image_new_from_icon_name ("window-close-symbolic", GTK_ICON_SIZE_BUTTON);
   button = gtk_button_new_with_mnemonic (_("_Close"));
   gtk_button_set_image (GTK_BUTTON (button), icon);
   gtk_widget_show_all (button);
@@ -542,7 +542,7 @@ panel_item_dialog_drag_begin (GtkWidget       *treeview,
       else
         {
           /* plugin is not usable */
-          gtk_drag_set_icon_name (context, "window-close", 0, 0);
+          gtk_drag_set_icon_name (context, "window-close-symbolic", 0, 0);
         }
 
       g_object_unref (G_OBJECT (module));
