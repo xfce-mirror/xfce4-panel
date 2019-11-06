@@ -1373,7 +1373,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
       gtk_widget_show (item);
 
-      image = gtk_image_new_from_icon_name ("gtk-help", GTK_ICON_SIZE_MENU);
+      image = gtk_image_new_from_icon_name ("help-browser", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
