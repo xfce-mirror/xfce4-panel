@@ -529,7 +529,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
         {
           gtk_combo_box_set_active_iter (GTK_COMBO_BOX (object), &iter);
           output_selected = TRUE;
-          span_monitors_sensitive = TRUE;
+          span_monitors_sensitive = FALSE;
         }
 
       if (n_monitors >= 1)
@@ -649,7 +649,11 @@ panel_preferences_dialog_output_changed (GtkComboBox            *combobox,
       /* monitor spanning does not work when an output is selected */
       object = gtk_builder_get_object (GTK_BUILDER (dialog), "span-monitors");
       panel_return_if_fail (GTK_IS_WIDGET (object));
-      gtk_widget_set_sensitive (GTK_WIDGET (object), output_name == NULL);
+      if (output_name == NULL ||
+          g_strcmp0 ("Automatic", output_name) == 0)
+        gtk_widget_set_sensitive (GTK_WIDGET (object), TRUE);
+      else
+        gtk_widget_set_sensitive (GTK_WIDGET (object), FALSE);
 
       g_free (output_name);
     }
