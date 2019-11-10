@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-10 18:30+0200\n"
-"PO-Revision-Date: 2019-10-14 18:43+0000\n"
+"POT-Creation-Date: 2019-11-10 00:30+0100\n"
+"PO-Revision-Date: 2019-11-10 19:21+0000\n"
 "Last-Translator: Edin Veskovic <edin.lockedin@gmail.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/xfce/xfce4-panel/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgid ""
 "file"
 msgstr "Dodaj novi pokretač na ploču baziran na informaciji ovoge datoteke radne površine"
 
-#: ../panel-preferences.desktop.in.h:1 ../panel/panel-window.c:2698
+#: ../panel-preferences.desktop.in.h:1 ../panel/panel-window.c:2871
 msgid "Panel"
 msgstr "Ploča"
 
@@ -40,63 +40,63 @@ msgid "Customize the panel"
 msgstr "Prilagodi ploču"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1074
-#: ../panel/panel-preferences-dialog.c:1308
+#: ../libxfce4panel/xfce-panel-plugin.c:1105
+#: ../panel/panel-preferences-dialog.c:1321
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Jeste li sigurni da želite ukloniti \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1079
-#: ../panel/panel-preferences-dialog.c:1311
+#: ../libxfce4panel/xfce-panel-plugin.c:1110
+#: ../panel/panel-preferences-dialog.c:1324
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Ako uklonite stavku sa ploče, biti će trajno izgubljena."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-dialogs.c:163
-#: ../panel/panel-preferences-dialog.c:1313
-#: ../plugins/applicationsmenu/applicationsmenu.c:586
+#: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
+#: ../panel/panel-preferences-dialog.c:1326
+#: ../plugins/applicationsmenu/applicationsmenu.c:602
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "_Cancel"
 msgstr "_Odustani"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1081
-#: ../libxfce4panel/xfce-panel-plugin.c:1276
-#: ../panel/panel-plugin-external.c:440
-#: ../panel/panel-preferences-dialog.c:956
-#: ../panel/panel-preferences-dialog.c:1314
+#: ../libxfce4panel/xfce-panel-plugin.c:1112
+#: ../libxfce4panel/xfce-panel-plugin.c:1307
+#: ../panel/panel-plugin-external.c:443
+#: ../panel/panel-preferences-dialog.c:961
+#: ../panel/panel-preferences-dialog.c:1327
 #: ../plugins/launcher/launcher-dialog.c:852
 msgid "_Remove"
 msgstr "_Ukloni"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1222
+#: ../libxfce4panel/xfce-panel-plugin.c:1253
 msgid "_Properties"
 msgstr "_Svojstva"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1237 ../panel/panel-window.c:2786
+#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:2959
 msgid "_About"
 msgstr "_O programu"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1252
+#: ../libxfce4panel/xfce-panel-plugin.c:1283
 msgid "_Move"
 msgstr "_Premjesti"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1297
+#: ../libxfce4panel/xfce-panel-plugin.c:1328
 msgid "Pane_l"
 msgstr "Ploč_a"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1306 ../panel/panel-window.c:2711
+#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2884
 msgid "Add _New Items..."
 msgstr "Dodaj _nove stavke..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1321 ../panel/panel-window.c:2726
+#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2899
 msgid "Panel Pr_eferences..."
 msgstr "Osobitosti pl_oče..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1342 ../panel/panel-window.c:2758
+#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2931
 msgid "Log _Out"
 msgstr "Odja_va"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1362 ../panel/panel-item-dialog.c:208
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2777
+#: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:208
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2950
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -110,7 +110,7 @@ msgstr "Odja_va"
 msgid "_Help"
 msgstr "_Pomoć"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1377
+#: ../libxfce4panel/xfce-panel-plugin.c:1408
 msgid "About"
 msgstr "O programu"
 
@@ -237,17 +237,17 @@ msgstr "Nije pronađena pokrenuta instanca %s"
 msgid "Failed to launch the migration application"
 msgstr "Neuspjelo pokretanje programa za premještanje"
 
-#: ../panel/panel-application.c:975
+#: ../panel/panel-application.c:976
 msgid "Create _Launcher"
 msgstr "Napravi _pokretač"
 
-#: ../panel/panel-application.c:976
+#: ../panel/panel-application.c:977
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Ovo će stvoriti novi priključak pokretača na ploči i umetnuti će ubačene datoteke kao stavke izbornika."
 
-#: ../panel/panel-application.c:978
+#: ../panel/panel-application.c:979
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -255,21 +255,21 @@ msgstr[0] "Napravi novi pokretač sa %d datoteke radne površine"
 msgstr[1] "Napravi nove pokretače sa %d datoteka radne površine"
 msgstr[2] "Napravi nove pokretače sa %d datoteka radne površine"
 
-#: ../panel/panel-application.c:1718
+#: ../panel/panel-application.c:1719
 msgid "Quit"
 msgstr "Odustani"
 
-#: ../panel/panel-application.c:1719
+#: ../panel/panel-application.c:1720
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Pokrenuli ste X bez upravitelja sesijom.Kliknte na Isključi i X poslužitelj će se zatvoriti."
 
-#: ../panel/panel-application.c:1720
+#: ../panel/panel-application.c:1721
 msgid "Are you sure you want to quit the panel?"
 msgstr "Jeste li sigurni da želite isključiti ploču?"
 
-#: ../panel/panel-application.c:1728
+#: ../panel/panel-application.c:1729
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Neuspjelo izvršenje naredbe \"%s\""
@@ -312,7 +312,7 @@ msgstr "_Dodaj"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Molim odaberite ploču za novi priključak:"
 
-#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:891
+#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:896
 #, c-format
 msgid "Panel %d"
 msgstr "Ploča %d"
@@ -360,12 +360,12 @@ msgstr "_Traži:"
 msgid "Enter search phrase here"
 msgstr "Ovdje unesite frazu traženja"
 
-#: ../panel/panel-plugin-external.c:433
+#: ../panel/panel-plugin-external.c:436
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "Priključak \"%s\" je neočekivano napustio ploču, želite li ga ponovno pokrenuti?"
 
-#: ../panel/panel-plugin-external.c:435
+#: ../panel/panel-plugin-external.c:438
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -373,43 +373,43 @@ msgid ""
 "permanently removed from the panel."
 msgstr "Priključak se ponovno pokrenuo više puta u zadnjih %d sekundi. Ako pritisnete Izvrši ploča će probati ponovno pokrenuti priključak inače će biti trajno izbrisan s ploče."
 
-#: ../panel/panel-plugin-external.c:439
+#: ../panel/panel-plugin-external.c:442
 msgid "_Execute"
 msgstr "_Izvrši"
 
-#: ../panel/panel-preferences-dialog.c:517
+#: ../panel/panel-preferences-dialog.c:518
 msgid "Automatic"
 msgstr "Automatski"
 
-#: ../panel/panel-preferences-dialog.c:527
+#: ../panel/panel-preferences-dialog.c:528
 msgid "Primary"
 msgstr "Primarni"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:546
+#: ../panel/panel-preferences-dialog.c:547
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:957
+#: ../panel/panel-preferences-dialog.c:962
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Ploča i konfiguracija priključka biti će trajno uklonjeni"
 
-#: ../panel/panel-preferences-dialog.c:958
+#: ../panel/panel-preferences-dialog.c:963
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Jeste li sigurni da želite ukloniti ploču %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1150
+#: ../panel/panel-preferences-dialog.c:1163
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(vanjski)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1155
+#: ../panel/panel-preferences-dialog.c:1168
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -418,7 +418,7 @@ msgstr "Interno ime: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1167
+#: ../panel/panel-preferences-dialog.c:1180
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Interno ime: %s-%d"
@@ -562,106 +562,110 @@ msgid "D_isplay"
 msgstr "Z_aslon"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
+msgid "Dark mode"
+msgstr "Mračni način rada"
+
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "<b>Background</b>"
 msgstr "<b>Pozadina</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:39
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Style:"
 msgstr "_Stil:"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "C_olor:"
 msgstr "B_oja:"
 
-#: ../panel/panel-preferences-dialog.glade.h:40
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "Pick a Panel Color"
 msgstr "Odaberite boju ploče"
 
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:42
 msgid "_File:"
 msgstr "_Datoteka:"
 
-#: ../panel/panel-preferences-dialog.glade.h:42
+#: ../panel/panel-preferences-dialog.glade.h:43
 msgid "Select A Background Image"
 msgstr "Odaberi pozadinsku sliku"
 
-#: ../panel/panel-preferences-dialog.glade.h:43
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid "<b>Icons</b>"
 msgstr "<b>Ikone</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Adjust size au_tomatically"
 msgstr "Au_tomatski prilagodi veličinu"
 
-#: ../panel/panel-preferences-dialog.glade.h:45
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Fixed icon _size (pixels):"
 msgstr "Fiksna veličina _ikona (pikseli):"
 
-#: ../panel/panel-preferences-dialog.glade.h:46
+#: ../panel/panel-preferences-dialog.glade.h:47
 msgid "<b>Opacity</b>"
 msgstr "<b>Vidljivost</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:48
 msgid "Configure..."
 msgstr "Postavi..."
 
-#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../panel/panel-preferences-dialog.glade.h:49
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr "<b>Slaganje je trenutno onemogućeno\nOmogućite slaganje u upravitelju prozora za postavku prozirnosti ploče."
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:51
+#: ../panel/panel-preferences-dialog.glade.h:52
 msgid "_Enter:"
 msgstr "_Unesi:"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:53
+#: ../panel/panel-preferences-dialog.glade.h:54
 msgid "_Leave:"
 msgstr "_Napusti:"
 
-#: ../panel/panel-preferences-dialog.glade.h:54
+#: ../panel/panel-preferences-dialog.glade.h:55
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "Prozirnost ploče kada se pokazivač ne nalazi iznad nje, gdje 0 znači potpunu prozirnost, a 100 potpunu neprozirnost."
 
-#: ../panel/panel-preferences-dialog.glade.h:55
+#: ../panel/panel-preferences-dialog.glade.h:56
 msgid "Appeara_nce"
 msgstr "Izgl_ed"
 
-#: ../panel/panel-preferences-dialog.glade.h:56
+#: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 #: ../plugins/systray/systray-dialog.glade.h:7
 msgid "Move currently selected item up by one row"
 msgstr "Pomakni odabranu stavku gore za jedan red"
 
-#: ../panel/panel-preferences-dialog.glade.h:57
+#: ../panel/panel-preferences-dialog.glade.h:58
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 #: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Move currently selected item down by one row"
 msgstr "Pomakni odabranu stavku dolje za jedan red"
 
-#: ../panel/panel-preferences-dialog.glade.h:58
+#: ../panel/panel-preferences-dialog.glade.h:59
 msgid "Add new item to this panel"
 msgstr "Dodaj novu stavku na ovu ploču"
 
-#: ../panel/panel-preferences-dialog.glade.h:59
+#: ../panel/panel-preferences-dialog.glade.h:60
 msgid "Remove currently selected item"
 msgstr "Uklonite trenutno odabranu stavku"
 
-#: ../panel/panel-preferences-dialog.glade.h:60
+#: ../panel/panel-preferences-dialog.glade.h:61
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Edit the currently selected item"
 msgstr "Uredi trenutno odabranu stavku"
 
-#: ../panel/panel-preferences-dialog.glade.h:61
+#: ../panel/panel-preferences-dialog.glade.h:62
 msgid "Show about information of the currently selected item"
 msgstr "Pokaži informacije o trenutno odabranoj stavci."
 
-#: ../panel/panel-preferences-dialog.glade.h:62
+#: ../panel/panel-preferences-dialog.glade.h:63
 msgid "Ite_ms"
 msgstr "Stav_ke"
 
@@ -689,7 +693,7 @@ msgstr "Iskusni"
 msgid "Expert"
 msgstr "Ekspert"
 
-#: ../panel/panel-window.c:2743
+#: ../panel/panel-window.c:2916
 msgid "_Lock Panel"
 msgstr "_Zaključaj ploču"
 
@@ -972,18 +976,18 @@ msgstr "Datoteka izbornika"
 msgid "Applications"
 msgstr "Programi"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:584
+#: ../plugins/applicationsmenu/applicationsmenu.c:600
 #: ../plugins/directorymenu/directorymenu.c:392
 msgid "Select An Icon"
 msgstr "Odaberite ikonu"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:587
+#: ../plugins/applicationsmenu/applicationsmenu.c:603
 #: ../plugins/directorymenu/directorymenu.c:395
 msgid "_OK"
 msgstr "_U redu"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:623
-#: ../plugins/clock/clock.c:912 ../plugins/launcher/launcher.c:2399
+#: ../plugins/applicationsmenu/applicationsmenu.c:639
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2399
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Neuspjelo izvršenje naredbe \"%s\"."
@@ -1032,11 +1036,11 @@ msgstr "%A %d %B %Y"
 msgid "Week %V"
 msgstr "Tjedan %V"
 
-#: ../plugins/clock/clock.c:464
+#: ../plugins/clock/clock.c:465
 msgid "Failed to execute clock command"
 msgstr "Neuspjelo izvršenje naredbe sata"
 
-#: ../plugins/clock/clock.c:851
+#: ../plugins/clock/clock.c:894
 msgid "Custom Format"
 msgstr "Prilagođeni format"
 
@@ -1145,8 +1149,8 @@ msgstr "Opcije sata"
 #. TRANSLATORS: adjust this accordingly for your locale format
 #: ../plugins/clock/clock-digital.h:25
 msgctxt "Time"
-msgid "%a %d %b, %R"
-msgstr "%a %d %b, %R"
+msgid "%a %_d %b, %R"
+msgstr "%a %_d %b, %R"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Night"
