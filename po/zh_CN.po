@@ -22,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-17 06:31+0200\n"
-"PO-Revision-Date: 2019-10-18 03:09+0000\n"
+"POT-Creation-Date: 2019-11-10 00:30+0100\n"
+"PO-Revision-Date: 2019-11-11 06:09+0000\n"
 "Last-Translator: 玉堂白鹤 <yjwork@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/xfce/xfce4-panel/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -42,7 +42,7 @@ msgid ""
 "file"
 msgstr "基于此桌面文件的信息在面板上添加一个新的启动器"
 
-#: ../panel-preferences.desktop.in.h:1 ../panel/panel-window.c:2865
+#: ../panel-preferences.desktop.in.h:1 ../panel/panel-window.c:2871
 msgid "Panel"
 msgstr "面板"
 
@@ -52,18 +52,18 @@ msgstr "自定义面板"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1105
-#: ../panel/panel-preferences-dialog.c:1317
+#: ../panel/panel-preferences-dialog.c:1321
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "您确定要移除 “%s” 吗？"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1110
-#: ../panel/panel-preferences-dialog.c:1320
+#: ../panel/panel-preferences-dialog.c:1324
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "如果您从面板上移除此项目，它将永远消失。"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
-#: ../panel/panel-preferences-dialog.c:1322
+#: ../panel/panel-preferences-dialog.c:1326
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "_Cancel"
@@ -72,8 +72,8 @@ msgstr "取消(_C)"
 #: ../libxfce4panel/xfce-panel-plugin.c:1112
 #: ../libxfce4panel/xfce-panel-plugin.c:1307
 #: ../panel/panel-plugin-external.c:443
-#: ../panel/panel-preferences-dialog.c:957
-#: ../panel/panel-preferences-dialog.c:1323
+#: ../panel/panel-preferences-dialog.c:961
+#: ../panel/panel-preferences-dialog.c:1327
 #: ../plugins/launcher/launcher-dialog.c:852
 msgid "_Remove"
 msgstr "移除(_R)"
@@ -82,7 +82,7 @@ msgstr "移除(_R)"
 msgid "_Properties"
 msgstr "属性(_P)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:2953
+#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:2959
 msgid "_About"
 msgstr "关于(_A)"
 
@@ -94,20 +94,20 @@ msgstr "移动(_M)"
 msgid "Pane_l"
 msgstr "面板(_L)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2878
+#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2884
 msgid "Add _New Items..."
 msgstr "添加新项目(_N)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2893
+#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2899
 msgid "Panel Pr_eferences..."
 msgstr "面板首选项(_E)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2925
+#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2931
 msgid "Log _Out"
 msgstr "注销(_O)"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:208
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2944
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2950
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -321,7 +321,7 @@ msgstr "添加(_A)"
 msgid "Please choose a panel for the new plugin:"
 msgstr "请为新插件挑选面板："
 
-#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:892
+#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:896
 #, c-format
 msgid "Panel %d"
 msgstr "面板 %d"
@@ -400,25 +400,25 @@ msgstr "主要的"
 msgid "Monitor %d"
 msgstr "显示器 %d"
 
-#: ../panel/panel-preferences-dialog.c:958
+#: ../panel/panel-preferences-dialog.c:962
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "将永远移除面板和插件配置"
 
-#: ../panel/panel-preferences-dialog.c:959
+#: ../panel/panel-preferences-dialog.c:963
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "您确定要移除面板 %d 吗？"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1159
+#: ../panel/panel-preferences-dialog.c:1163
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(外部)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1164
+#: ../panel/panel-preferences-dialog.c:1168
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -427,7 +427,7 @@ msgstr "内部名称：%s-%d\nPID：%d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1176
+#: ../panel/panel-preferences-dialog.c:1180
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "内部名称：%s-%d"
@@ -702,7 +702,7 @@ msgstr "高级"
 msgid "Expert"
 msgstr "专家"
 
-#: ../panel/panel-window.c:2910
+#: ../panel/panel-window.c:2916
 msgid "_Lock Panel"
 msgstr "锁定面板(_L)"
 
@@ -996,7 +996,7 @@ msgid "_OK"
 msgstr "确定(_O)"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:954 ../plugins/launcher/launcher.c:2399
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2399
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "无法执行命令 “%s”。"
@@ -1045,11 +1045,11 @@ msgstr " %Y年%b%d日 %A"
 msgid "Week %V"
 msgstr "第 %V 周"
 
-#: ../plugins/clock/clock.c:464
+#: ../plugins/clock/clock.c:465
 msgid "Failed to execute clock command"
 msgstr "无法执行时钟命令"
 
-#: ../plugins/clock/clock.c:893
+#: ../plugins/clock/clock.c:894
 msgid "Custom Format"
 msgstr "自定义格式"
 
@@ -1158,8 +1158,8 @@ msgstr "时钟选项"
 #. TRANSLATORS: adjust this accordingly for your locale format
 #: ../plugins/clock/clock-digital.h:25
 msgctxt "Time"
-msgid "%a %d %b, %R"
-msgstr "星期%a  %b%d日, %R"
+msgid "%a %_d %b, %R"
+msgstr "%a %_d %b, %R"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Night"
