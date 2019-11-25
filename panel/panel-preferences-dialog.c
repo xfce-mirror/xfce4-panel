@@ -476,6 +476,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   panel_preferences_dialog_bindings_add (dialog, "span-monitors", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "position-locked", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "autohide-behavior", "active", 0);
+  panel_preferences_dialog_bindings_add (dialog, "autohide-style", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "disable-struts", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "size", "value", 0);
   panel_preferences_dialog_bindings_add (dialog, "nrows", "value", 0);
@@ -667,6 +668,7 @@ panel_preferences_dialog_autohide_changed (GtkComboBox            *combobox,
                                            PanelPreferencesDialog *dialog)
 {
   GObject *object;
+  GObject *styleobj;
 
   panel_return_if_fail (GTK_IS_COMBO_BOX (combobox));
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
@@ -675,11 +677,22 @@ panel_preferences_dialog_autohide_changed (GtkComboBox            *combobox,
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "disable-struts");
   panel_return_if_fail (GTK_IS_WIDGET (object));
 
-  /* make "don't reserve space on borders" sensitive only when autohide is disabled */
+  styleobj = gtk_builder_get_object (GTK_BUILDER (dialog), "autohide-style");
+  panel_return_if_fail (GTK_IS_COMBO_BOX (styleobj));
+
+  /* make "don't reserve space on borders" sensitive only when autohide is disabled,
+   * and vice versa for auto hide style
+   */
   if (gtk_combo_box_get_active (combobox) == 0)
-    gtk_widget_set_sensitive (GTK_WIDGET (object), TRUE);
+    {
+      gtk_widget_set_sensitive (GTK_WIDGET (object), TRUE);
+      gtk_widget_set_sensitive (GTK_WIDGET (styleobj), FALSE);
+    }
   else
-    gtk_widget_set_sensitive (GTK_WIDGET (object), FALSE);
+    {
+      gtk_widget_set_sensitive (GTK_WIDGET (object), FALSE);
+      gtk_widget_set_sensitive (GTK_WIDGET (styleobj), TRUE);
+    }
 }
 
 

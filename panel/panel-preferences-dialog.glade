@@ -20,6 +20,20 @@
       </row>
     </data>
   </object>
+  <object class="GtkListStore" id="autohide-style-store">
+    <columns>
+      <!-- column-name title -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Slide</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Collapse</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkSizeGroup" id="bg-sizegroup"/>
   <object class="GtkSizeGroup" id="display-sizegroup"/>
   <object class="GtkAdjustment" id="enter-opacity">
@@ -443,7 +457,7 @@
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
-                            <property name="top_attach">6</property>
+                            <property name="top_attach">7</property>
                             <property name="width">2</property>
                           </packing>
                         </child>
@@ -522,6 +536,51 @@
                           <packing>
                             <property name="left_attach">1</property>
                             <property name="top_attach">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="spacing">12</property>
+                            <child>
+                              <object class="GtkLabel" id="autohidestyle_label">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">Panel-hiding style: </property>
+                                <property name="use_underline">True</property>
+                                <property name="xalign">0</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkComboBox" id="autohide-style">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="model">autohide-style-store</property>
+                                <child>
+                                  <object class="GtkCellRendererText" id="cellrenderertext6"/>
+                                  <attributes>
+                                    <attribute name="text">0</attribute>
+                                  </attributes>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="pack_type">end</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">6</property>
+                            <property name="width">2</property>
                           </packing>
                         </child>
                       </object>

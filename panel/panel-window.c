@@ -76,6 +76,7 @@
 
 typedef enum _StrutsEgde    StrutsEgde;
 typedef enum _AutohideBehavior AutohideBehavior;
+typedef enum _AutohideStyle AutohideStyle;
 typedef enum _AutohideState AutohideState;
 typedef enum _SnapPosition  SnapPosition;
 typedef enum _PluginProp    PluginProp;
@@ -162,6 +163,8 @@ static void         panel_window_autohide_queue                       (PanelWind
 static gboolean     panel_window_autohide_slideout                    (gpointer          data);
 static void         panel_window_set_autohide_behavior                (PanelWindow      *window,
                                                                        AutohideBehavior  behavior);
+static void         panel_window_set_autohide_style                   (PanelWindow      *window,
+                                                                       AutohideStyle     style);
 static void         panel_window_update_autohide_window               (PanelWindow      *window,
                                                                        WnckScreen       *screen,
                                                                        WnckWindow       *active_window);
@@ -196,6 +199,7 @@ enum
   PROP_LENGTH_ADJUST,
   PROP_POSITION_LOCKED,
   PROP_AUTOHIDE_BEHAVIOR,
+  PROP_AUTOHIDE_STYLE,
   PROP_SPAN_MONITORS,
   PROP_OUTPUT_NAME,
   PROP_POSITION,
@@ -219,6 +223,12 @@ enum _AutohideBehavior
   AUTOHIDE_BEHAVIOR_NEVER = 0,
   AUTOHIDE_BEHAVIOR_INTELLIGENTLY,
   AUTOHIDE_BEHAVIOR_ALWAYS,
+};
+
+enum _AutohideStyle
+{
+  AUTOHIDE_STYLE_SLIDE = 0,
+  AUTOHIDE_STYLE_COLLAPSE,
 };
 
 enum _AutohideState
@@ -338,6 +348,7 @@ struct _PanelWindow
   WnckWindow          *wnck_active_window;
   GtkWidget           *autohide_window;
   AutohideBehavior     autohide_behavior;
+  AutohideStyle        autohide_style;
   AutohideState        autohide_state;
   guint                autohide_timeout_id;
   guint                autohide_fade_id;
@@ -476,6 +487,14 @@ panel_window_class_init (PanelWindowClass *klass)
                                                       G_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_AUTOHIDE_STYLE,
+                                   g_param_spec_uint ("autohide-style", NULL, NULL,
+                                                      AUTOHIDE_STYLE_SLIDE,
+                                                      AUTOHIDE_STYLE_COLLAPSE,
+                                                      AUTOHIDE_STYLE_SLIDE,
+                                                      G_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_SPAN_MONITORS,
                                    g_param_spec_boolean ("span-monitors", NULL, NULL,
                                                          FALSE,
@@ -555,6 +574,7 @@ panel_window_init (PanelWindow *window)
   window->span_monitors = FALSE;
   window->position_locked = FALSE;
   window->autohide_behavior = AUTOHIDE_BEHAVIOR_NEVER;
+  window->autohide_style = AUTOHIDE_STYLE_SLIDE;
   window->autohide_state = AUTOHIDE_DISABLED;
   window->autohide_timeout_id = 0;
   window->autohide_fade_id = 0;
@@ -633,6 +653,10 @@ panel_window_get_property (GObject    *object,
 
     case PROP_AUTOHIDE_BEHAVIOR:
       g_value_set_uint (value, window->autohide_behavior);
+      break;
+
+    case PROP_AUTOHIDE_STYLE:
+      g_value_set_uint(value, window->autohide_style);
       break;
 
     case PROP_SPAN_MONITORS:
@@ -781,6 +805,11 @@ panel_window_set_property (GObject      *object,
     case PROP_AUTOHIDE_BEHAVIOR:
       panel_window_set_autohide_behavior (window, MIN (g_value_get_uint (value),
                                                        AUTOHIDE_BEHAVIOR_ALWAYS));
+      break;
+
+    case PROP_AUTOHIDE_STYLE:
+      panel_window_set_autohide_style (window, MIN (g_value_get_uint (value),
+						    AUTOHIDE_STYLE_COLLAPSE));
       break;
 
     case PROP_SPAN_MONITORS:
@@ -2578,18 +2607,27 @@ panel_window_autohide_slideout (gpointer data)
 {
   PanelWindow  *window = PANEL_WINDOW (data);
   PanelBorders  borders;
-  gint          x, y, w, h;
+  gint          x, y, xinc, yinc, w, h;
 
   gtk_window_get_position (GTK_WINDOW (window), &x, &y);
   w = gdk_screen_get_width (window->screen);
   h = gdk_screen_get_height (window->screen);
   borders = panel_base_window_get_borders (PANEL_BASE_WINDOW (window));
 
+  if (window->autohide_style == AUTOHIDE_STYLE_SLIDE)
+    {
+      xinc = 1; yinc = 1;
+    }
+  else
+    {
+      xinc = window->alloc.width; yinc = window->alloc.height;
+    }
+
   if (IS_HORIZONTAL (window))
     {
       if (PANEL_HAS_FLAG (borders, PANEL_BORDER_BOTTOM))
         {
-          y--;
+          y -= yinc;
 
           if (y < (0 - window->alloc.height - 1))
             {
@@ -2599,7 +2637,7 @@ panel_window_autohide_slideout (gpointer data)
         }
       else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_TOP))
         {
-          y++;
+          y += yinc;
           if (y > (h + window->alloc.height + 1))
             {
               window->autohide_fade_id = 0;
@@ -2614,7 +2652,7 @@ panel_window_autohide_slideout (gpointer data)
     {
       if (PANEL_HAS_FLAG (borders, PANEL_BORDER_RIGHT))
         {
-          x--;
+          x -= xinc;
           if (x < (0 - window->alloc.width + 1))
             {
               window->autohide_fade_id = 0;
@@ -2623,7 +2661,7 @@ panel_window_autohide_slideout (gpointer data)
         }
       else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_LEFT))
         {
-          x++;
+          x += xinc;
           if (x > (w + window->alloc.width + 1))
             {
               window->autohide_fade_id = 0;
@@ -2640,7 +2678,13 @@ panel_window_autohide_slideout (gpointer data)
   return TRUE;
 }
 
-
+static void
+panel_window_set_autohide_style (PanelWindow *window,
+				 AutohideStyle style)
+{
+  /* Doesn't actually seem to be anything to do other than remember the style */
+  window->autohide_style = style;
+}
 
 static void
 panel_window_set_autohide_behavior (PanelWindow *window,

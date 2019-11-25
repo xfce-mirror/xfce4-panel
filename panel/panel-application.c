@@ -288,6 +288,7 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
   {
     { "position-locked", G_TYPE_BOOLEAN },
     { "autohide-behavior", G_TYPE_UINT },
+    { "autohide-style", G_TYPE_UINT },
     { "span-monitors", G_TYPE_BOOLEAN },
     { "mode", G_TYPE_UINT },
     { "size", G_TYPE_UINT },
