@@ -1651,25 +1651,29 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
 
       /* set the icon if one is set */
       icon_name = garcon_menu_item_get_icon_name (item);
-      if (!panel_str_is_empty (icon_name))
+
+      if (panel_str_is_empty (icon_name))
         {
-          if (g_path_is_absolute (icon_name))
-            {
-              /* remember the icon name for recreating the pixbuf when panel
-                 size changes */
-              plugin->icon_name = g_strdup (icon_name);
-              plugin->pixbuf = gdk_pixbuf_new_from_file_at_size (icon_name, 16, 16, NULL);
-              image = gtk_image_new_from_pixbuf (plugin->pixbuf);
-            }
-          else
-            {
-              image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_MENU);
-              gtk_image_set_pixel_size (GTK_IMAGE (image), 16);
-              plugin->icon_name = NULL;
-            }
-          gtk_box_pack_start (GTK_BOX (box), image, FALSE, TRUE, 3);
-          gtk_widget_show (image);
+          /* use an empty placeholder icon */
+          image = gtk_image_new_from_icon_name ("", GTK_ICON_SIZE_MENU);
         }
+      else if (g_path_is_absolute (icon_name))
+        {
+          /* remember the icon name for recreating the pixbuf when panel
+              size changes */
+          plugin->icon_name = g_strdup (icon_name);
+          plugin->pixbuf = gdk_pixbuf_new_from_file_at_size (icon_name, 16, 16, NULL);
+          image = gtk_image_new_from_pixbuf (plugin->pixbuf);
+        }
+      else
+        {
+          image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_MENU);
+          gtk_image_set_pixel_size (GTK_IMAGE (image), 16);
+          plugin->icon_name = NULL;
+        }
+
+      gtk_box_pack_start (GTK_BOX (box), image, FALSE, TRUE, 3);
+      gtk_widget_show (image);
     }
 }
 
