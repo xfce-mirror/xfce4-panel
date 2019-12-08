@@ -53,6 +53,8 @@ struct _DirectoryMenuPlugin
 
   GFile           *base_directory;
   gchar           *icon_name;
+  guint            open_folder;
+  guint            open_in_terminal;
   gchar           *file_pattern;
   guint            hidden_files : 1;
 
@@ -69,7 +71,9 @@ enum
   PROP_BASE_DIRECTORY,
   PROP_ICON_NAME,
   PROP_FILE_PATTERN,
-  PROP_HIDDEN_FILES
+  PROP_HIDDEN_FILES,
+  PROP_OPEN_FOLDER,
+  PROP_OPEN_IN_TERMINAL
 };
 
 
@@ -136,6 +140,20 @@ directory_menu_plugin_class_init (DirectoryMenuPluginClass *klass)
                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_OPEN_FOLDER,
+                                   g_param_spec_boolean ("open-folder",
+                                                         NULL, NULL,
+                                                         TRUE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_OPEN_IN_TERMINAL,
+                                   g_param_spec_boolean ("open-in-terminal",
+                                                         NULL, NULL,
+                                                         TRUE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_FILE_PATTERN,
                                    g_param_spec_string ("file-pattern",
                                                         NULL, NULL,
@@ -168,6 +186,9 @@ directory_menu_plugin_init (DirectoryMenuPlugin *plugin)
   plugin->icon = gtk_image_new_from_icon_name (DEFAULT_ICON_NAME, GTK_ICON_SIZE_BUTTON);
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
   gtk_widget_show (plugin->icon);
+
+  plugin->open_folder = TRUE;
+  plugin->open_in_terminal = TRUE;
 }
 
 
@@ -193,6 +214,14 @@ directory_menu_plugin_get_property (GObject    *object,
 
     case PROP_ICON_NAME:
       g_value_set_string (value, plugin->icon_name);
+      break;
+
+    case PROP_OPEN_FOLDER:
+      g_value_set_boolean (value, plugin->open_folder);
+      break;
+
+    case PROP_OPEN_IN_TERMINAL:
+      g_value_set_boolean (value, plugin->open_in_terminal);
       break;
 
     case PROP_FILE_PATTERN:
@@ -253,6 +282,14 @@ directory_menu_plugin_set_property (GObject      *object,
           icon_size);
       break;
 
+    case PROP_OPEN_FOLDER:
+      plugin->open_folder = g_value_get_boolean (value);
+      break;
+
+    case PROP_OPEN_IN_TERMINAL:
+      plugin->open_in_terminal = g_value_get_boolean (value);
+      break;
+
     case PROP_FILE_PATTERN:
       g_free (plugin->file_pattern);
       plugin->file_pattern = g_value_dup_string (value);
@@ -291,6 +328,8 @@ directory_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
   {
     { "base-directory", G_TYPE_STRING },
     { "icon-name", G_TYPE_STRING },
+    { "open-folder", G_TYPE_BOOLEAN },
+    { "open-in-terminal", G_TYPE_BOOLEAN },
     { "file-pattern", G_TYPE_STRING },
     { "hidden-files", G_TYPE_BOOLEAN },
     { NULL }
@@ -448,6 +487,18 @@ directory_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   gtk_container_add (GTK_CONTAINER (object), plugin->dialog_icon);
   g_object_add_weak_pointer (G_OBJECT (plugin->dialog_icon), (gpointer) &plugin->dialog_icon);
   gtk_widget_show (plugin->dialog_icon);
+
+  object = gtk_builder_get_object (builder, "open-folder");
+  panel_return_if_fail (GTK_IS_CHECK_BUTTON (object));
+  g_object_bind_property (G_OBJECT (plugin), "open-folder",
+                          G_OBJECT (object), "active",
+                          G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
+
+  object = gtk_builder_get_object (builder, "open-in-terminal");
+  panel_return_if_fail (GTK_IS_CHECK_BUTTON (object));
+  g_object_bind_property (G_OBJECT (plugin), "open-in-terminal",
+                          G_OBJECT (object), "active",
+                          G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
 
   object = gtk_builder_get_object (builder, "file-pattern");
   panel_return_if_fail (GTK_IS_ENTRY (object));
@@ -811,35 +862,39 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
   if (G_UNLIKELY (dir == NULL))
     return;
 
+  if (plugin->open_folder) {
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  mi = gtk_image_menu_item_new_with_label (_("Open Folder"));
+    mi = gtk_image_menu_item_new_with_label (_("Open Folder"));
 G_GNUC_END_IGNORE_DEPRECATIONS
-  gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-  g_signal_connect_data (G_OBJECT (mi), "activate",
-      G_CALLBACK (directory_menu_plugin_menu_open_folder),
-      g_object_ref (dir), (GClosureNotify) (void (*)(void)) g_object_unref, 0);
-  gtk_widget_show (mi);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+    g_signal_connect_data (G_OBJECT (mi), "activate",
+        G_CALLBACK (directory_menu_plugin_menu_open_folder),
+        g_object_ref (dir), (GClosureNotify) (void (*)(void)) g_object_unref, 0);
+    gtk_widget_show (mi);
 
-  image = gtk_image_new_from_icon_name ("folder-open", GTK_ICON_SIZE_MENU);
+    image = gtk_image_new_from_icon_name ("folder-open", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
+    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
-  gtk_widget_show (image);
+    gtk_widget_show (image);
+  }
 
+  if (plugin->open_in_terminal) {
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  mi = gtk_image_menu_item_new_with_label (_("Open in Terminal"));
+    mi = gtk_image_menu_item_new_with_label (_("Open in Terminal"));
 G_GNUC_END_IGNORE_DEPRECATIONS
-  gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-  g_signal_connect_data (G_OBJECT (mi), "activate",
-      G_CALLBACK (directory_menu_plugin_menu_open_terminal),
-      g_object_ref (dir), (GClosureNotify) (void (*)(void)) g_object_unref, 0);
-  gtk_widget_show (mi);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+    g_signal_connect_data (G_OBJECT (mi), "activate",
+        G_CALLBACK (directory_menu_plugin_menu_open_terminal),
+        g_object_ref (dir), (GClosureNotify) (void (*)(void)) g_object_unref, 0);
+    gtk_widget_show (mi);
 
-  image = gtk_image_new_from_icon_name ("utilities-terminal", GTK_ICON_SIZE_MENU);
+    image = gtk_image_new_from_icon_name ("utilities-terminal", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
+    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
-  gtk_widget_show (image);
+    gtk_widget_show (image);
+  }
 
   iter = g_file_enumerate_children (dir, G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME
                                     "," G_FILE_ATTRIBUTE_STANDARD_NAME
@@ -891,7 +946,8 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 
       g_object_unref (G_OBJECT (iter));
 
-      if (G_LIKELY (infos != NULL))
+      if (G_LIKELY (infos != NULL
+            && (plugin->open_folder || plugin->open_in_terminal)))
         {
           mi = gtk_separator_menu_item_new ();
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
