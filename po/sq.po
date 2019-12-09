@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-10 00:30+0100\n"
-"PO-Revision-Date: 2019-11-10 09:24+0000\n"
+"POT-Creation-Date: 2019-12-09 00:30+0100\n"
+"PO-Revision-Date: 2019-12-09 09:15+0000\n"
 "Last-Translator: Besnik <besnik@programeshqip.org>\n"
 "Language-Team: Albanian (http://www.transifex.com/xfce/xfce4-panel/language/sq/)\n"
 "MIME-Version: 1.0\n"
@@ -54,7 +54,7 @@ msgstr "Nëse e hiqni elemetin prej panelit, humb përgjithnjë."
 #: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
-#: ../plugins/directorymenu/directorymenu.c:394
+#: ../plugins/directorymenu/directorymenu.c:433
 msgid "_Cancel"
 msgstr "_Anuloje"
 
@@ -535,7 +535,7 @@ msgstr "<b>Matje</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Row _size (pixels):"
-msgstr ""
+msgstr "_Madhësi rreshti (piksel):"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Num_ber of rows:"
@@ -562,7 +562,7 @@ msgstr "_Ekran"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Dark mode"
-msgstr ""
+msgstr "Mënyra Errët"
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "<b>Background</b>"
@@ -599,7 +599,7 @@ msgstr "Përshtate madhësinë _automatikisht"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Fixed icon _size (pixels):"
-msgstr ""
+msgstr "_Madhësi e fiksuar ikonash (piksel):"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 msgid "<b>Opacity</b>"
@@ -938,7 +938,7 @@ msgstr "Përzgjidheni këtë mundësi që të shfaqet te menuja emri përshkrues
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:17
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/systray/systray-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
@@ -976,12 +976,12 @@ msgid "Applications"
 msgstr "Aplikacione"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:600
-#: ../plugins/directorymenu/directorymenu.c:392
+#: ../plugins/directorymenu/directorymenu.c:431
 msgid "Select An Icon"
 msgstr "Përzgjidhni Ikonë"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/directorymenu/directorymenu.c:395
+#: ../plugins/directorymenu/directorymenu.c:434
 msgid "_OK"
 msgstr "_OK"
 
@@ -1382,42 +1382,42 @@ msgstr "dymbëdhjetë"
 msgid "What time is it?"
 msgstr "Sa është ora?"
 
-#: ../plugins/directorymenu/directorymenu.c:242
+#: ../plugins/directorymenu/directorymenu.c:271
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Menu Drejtorish"
 
-#: ../plugins/directorymenu/directorymenu.c:586
+#: ../plugins/directorymenu/directorymenu.c:637
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "S’u arrit të niset aplikacioni \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:618
+#: ../plugins/directorymenu/directorymenu.c:669
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "S’u arrit të kërkohej lloji i lëndës për \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:627
+#: ../plugins/directorymenu/directorymenu.c:678
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "S’u gjet aplikacion parazgjedhje për \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:643
+#: ../plugins/directorymenu/directorymenu.c:694
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "S’u arrit të niset aplikacioni parazgjedhje për \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:741
+#: ../plugins/directorymenu/directorymenu.c:792
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Dështoi në ekzekutimin e aplikacionit të parapëlqyer për kategorinë \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:815
+#: ../plugins/directorymenu/directorymenu.c:867
 msgid "Open Folder"
 msgstr "Hap Dosje"
 
-#: ../plugins/directorymenu/directorymenu.c:830
+#: ../plugins/directorymenu/directorymenu.c:884
 msgid "Open in Terminal"
 msgstr "Hape në Terminal"
 
@@ -1433,22 +1433,30 @@ msgstr "Përzgjidhni Drejtori"
 msgid "_Base Directory:"
 msgstr "_Drejtori Bazë:"
 
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
+msgid "Show '_Open _Folder'"
+msgstr "Shfaq '_Hap _Dosje'"
+
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
+msgid "Show 'Open in _Terminal'"
+msgstr "Shfaq 'Hap në _Terminal'"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
 msgid "Show _hidden files"
 msgstr "Shfaq kartela të _fshehura"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr "Jepni një listë rregullsish që do të përdoren për të përcaktuar cilat kartela janë të dukshme në drejtori. Nëse këtu përcaktoni më tepër se një rregullsi, elementët e listës duhen ndarë me një pikëpresje (p.sh., *.txt;*.doc)."
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
 msgid "_File Pattern:"
 msgstr "Rregullsi _Kartele:"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:13
 #: ../plugins/tasklist/tasklist-dialog.glade.h:29
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
