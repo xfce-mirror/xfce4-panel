@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-10 00:30+0100\n"
-"PO-Revision-Date: 2019-11-10 19:31+0000\n"
+"POT-Creation-Date: 2019-12-09 00:30+0100\n"
+"PO-Revision-Date: 2019-12-10 22:59+0000\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/xfce/xfce4-panel/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -53,7 +53,7 @@ msgstr "Als u een element van de werkbalk verwijdert, dan kan dit niet meer onge
 #: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
-#: ../plugins/directorymenu/directorymenu.c:394
+#: ../plugins/directorymenu/directorymenu.c:433
 msgid "_Cancel"
 msgstr "_Afbreken"
 
@@ -937,7 +937,7 @@ msgstr "Kies deze optie om de generieke naam in het menu weer te geven, bijvoorb
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:17
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/systray/systray-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
@@ -975,12 +975,12 @@ msgid "Applications"
 msgstr "Toepassingen"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:600
-#: ../plugins/directorymenu/directorymenu.c:392
+#: ../plugins/directorymenu/directorymenu.c:431
 msgid "Select An Icon"
 msgstr "Kies een pictogram"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/directorymenu/directorymenu.c:395
+#: ../plugins/directorymenu/directorymenu.c:434
 msgid "_OK"
 msgstr "_Oké"
 
@@ -1381,42 +1381,42 @@ msgstr "twaalf"
 msgid "What time is it?"
 msgstr "Hoe laat is het?"
 
-#: ../plugins/directorymenu/directorymenu.c:242
+#: ../plugins/directorymenu/directorymenu.c:271
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Mapmenu"
 
-#: ../plugins/directorymenu/directorymenu.c:586
+#: ../plugins/directorymenu/directorymenu.c:637
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Kon toepassing '%s' niet starten"
 
-#: ../plugins/directorymenu/directorymenu.c:618
+#: ../plugins/directorymenu/directorymenu.c:669
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Kon het type inhoud van '%s' niet achterhalen"
 
-#: ../plugins/directorymenu/directorymenu.c:627
+#: ../plugins/directorymenu/directorymenu.c:678
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Geen standaardtoepassing gevonden voor '%s'"
 
-#: ../plugins/directorymenu/directorymenu.c:643
+#: ../plugins/directorymenu/directorymenu.c:694
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Kon standaardtoepassing voor '%s' niet starten"
 
-#: ../plugins/directorymenu/directorymenu.c:741
+#: ../plugins/directorymenu/directorymenu.c:792
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Kon de voorkeurstoepassing voor de categorie '%s' niet starten"
 
-#: ../plugins/directorymenu/directorymenu.c:815
+#: ../plugins/directorymenu/directorymenu.c:867
 msgid "Open Folder"
 msgstr "Map openen"
 
-#: ../plugins/directorymenu/directorymenu.c:830
+#: ../plugins/directorymenu/directorymenu.c:884
 msgid "Open in Terminal"
 msgstr "Openen in terminalvenster"
 
@@ -1432,22 +1432,30 @@ msgstr "Kies een map"
 msgid "_Base Directory:"
 msgstr "_Basismap:"
 
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
+msgid "Show '_Open _Folder'"
+msgstr "Toon 'Map openen'"
+
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
+msgid "Show 'Open in _Terminal'"
+msgstr "Toon 'Terminalvenster openen'"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
 msgid "Show _hidden files"
 msgstr "Toon _verborgen bestanden"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr "Geef een lijst in van patronen die gebruikt zullen worden om te bepalen welke bestanden er in een map worden weergegeven. Als hier meer dan één patroon wordt ingevoerd, dan dienen de individuele elementen in de lijst gescheiden te worden met behulp van puntkomma's (bijv. *.txt;*.doc)."
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
 msgid "_File Pattern:"
 msgstr "_Bestandpatroon:"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:13
 #: ../plugins/tasklist/tasklist-dialog.glade.h:29
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
