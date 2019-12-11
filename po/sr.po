@@ -8,12 +8,13 @@
 # Саша Петровић <salepetronije@gmail.com>, 2012-2014,2017,2019
 # Саша Петровић <salepetronije@gmail.com>, 2017
 # Саша Петровић <salepetronije@gmail.com>, 2017,2019
+# Саша Петровић <salepetronije@gmail.com>, 2017,2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-17 06:31+0200\n"
-"PO-Revision-Date: 2019-10-27 07:45+0000\n"
+"POT-Creation-Date: 2019-12-09 00:30+0100\n"
+"PO-Revision-Date: 2019-12-11 10:58+0000\n"
 "Last-Translator: Саша Петровић <salepetronije@gmail.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/xfce/xfce4-panel/language/sr/)\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +33,7 @@ msgid ""
 "file"
 msgstr "Додај нови покретач на полицу на основу података о овој датотеци радне површи"
 
-#: ../panel-preferences.desktop.in.h:1 ../panel/panel-window.c:2865
+#: ../panel-preferences.desktop.in.h:1 ../panel/panel-window.c:2871
 msgid "Panel"
 msgstr "Полица"
 
@@ -42,28 +43,28 @@ msgstr "Прилагоди полицу"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1105
-#: ../panel/panel-preferences-dialog.c:1317
+#: ../panel/panel-preferences-dialog.c:1321
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "Да ли сте сигурни да желите да уклоните „%s“?"
+msgstr "Да ли сте сигурни да желите уклонити „%s“?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1110
-#: ../panel/panel-preferences-dialog.c:1320
+#: ../panel/panel-preferences-dialog.c:1324
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Ако уклоните ставку са полице, биће заувек изгубљена."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
-#: ../panel/panel-preferences-dialog.c:1322
+#: ../panel/panel-preferences-dialog.c:1326
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
-#: ../plugins/directorymenu/directorymenu.c:394
+#: ../plugins/directorymenu/directorymenu.c:433
 msgid "_Cancel"
 msgstr "_Откажи"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1112
 #: ../libxfce4panel/xfce-panel-plugin.c:1307
 #: ../panel/panel-plugin-external.c:443
-#: ../panel/panel-preferences-dialog.c:957
-#: ../panel/panel-preferences-dialog.c:1323
+#: ../panel/panel-preferences-dialog.c:961
+#: ../panel/panel-preferences-dialog.c:1327
 #: ../plugins/launcher/launcher-dialog.c:852
 msgid "_Remove"
 msgstr "_Уклони"
@@ -72,7 +73,7 @@ msgstr "_Уклони"
 msgid "_Properties"
 msgstr "_Својства"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:2953
+#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:2959
 msgid "_About"
 msgstr "_О програму"
 
@@ -84,20 +85,20 @@ msgstr "_Премести"
 msgid "Pane_l"
 msgstr "Полиц_а"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2878
+#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2884
 msgid "Add _New Items..."
 msgstr "Додај _нове ставке..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2893
+#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2899
 msgid "Panel Pr_eferences..."
 msgstr "По_дешавања полице..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2925
+#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2931
 msgid "Log _Out"
 msgstr "Одја_ва"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:208
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2944
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2950
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -313,7 +314,7 @@ msgstr "_Додај"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Изаберите полицу за нови прикључак:"
 
-#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:892
+#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:896
 #, c-format
 msgid "Panel %d"
 msgstr "Полица %d"
@@ -392,25 +393,25 @@ msgstr "Главни"
 msgid "Monitor %d"
 msgstr "Монитор %d"
 
-#: ../panel/panel-preferences-dialog.c:958
+#: ../panel/panel-preferences-dialog.c:962
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Поставке полице и прикључака ће бити трајно уклоњене"
 
-#: ../panel/panel-preferences-dialog.c:959
+#: ../panel/panel-preferences-dialog.c:963
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Да ли сте сигурни да желите да уклоните полицу %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1159
+#: ../panel/panel-preferences-dialog.c:1163
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(спољни)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1164
+#: ../panel/panel-preferences-dialog.c:1168
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -419,7 +420,7 @@ msgstr "Унутрашњи назив: %s-%d\nПИБ: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1176
+#: ../panel/panel-preferences-dialog.c:1180
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Унутрашњи назив: %s-%d"
@@ -694,7 +695,7 @@ msgstr "Искусан"
 msgid "Expert"
 msgstr "Стручњак"
 
-#: ../panel/panel-window.c:2910
+#: ../panel/panel-window.c:2916
 msgid "_Lock Panel"
 msgstr "_Закључај полицу"
 
@@ -940,7 +941,7 @@ msgstr "Изаберите ову могућност за приказивање
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:17
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/systray/systray-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
@@ -978,17 +979,17 @@ msgid "Applications"
 msgstr "Програми"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:600
-#: ../plugins/directorymenu/directorymenu.c:392
+#: ../plugins/directorymenu/directorymenu.c:431
 msgid "Select An Icon"
 msgstr "Изаберите сличицу"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/directorymenu/directorymenu.c:395
+#: ../plugins/directorymenu/directorymenu.c:434
 msgid "_OK"
 msgstr "_У реду"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:954 ../plugins/launcher/launcher.c:2399
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2399
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Нисам успео да извршим наредбу „%s“."
@@ -1037,33 +1038,33 @@ msgstr "%A %d %B %Y"
 msgid "Week %V"
 msgstr "Седмица %V"
 
-#: ../plugins/clock/clock.c:464
+#: ../plugins/clock/clock.c:465
 msgid "Failed to execute clock command"
 msgstr "Нисам успео да извршим наредбу сата"
 
-#: ../plugins/clock/clock.c:893
+#: ../plugins/clock/clock.c:894
 msgid "Custom Format"
 msgstr "Прилагођени облик"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
 msgid "Analog"
-msgstr "Сказаљшни"
+msgstr "Казаљке"
 
 #: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Binary"
-msgstr "Бинарни"
+msgstr "Бинарно"
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Digital"
-msgstr "Бројчани"
+msgstr "Бројчано"
 
 #: ../plugins/clock/clock-dialog.glade.h:4
 msgid "Fuzzy"
-msgstr "Нејасно"
+msgstr "Беседно"
 
 #: ../plugins/clock/clock-dialog.glade.h:5
 msgid "LCD"
-msgstr "ТКД"
+msgstr "ЛЦД"
 
 #: ../plugins/clock/clock-dialog.glade.h:6
 #: ../plugins/clock/clock.desktop.in.in.h:1
@@ -1150,8 +1151,8 @@ msgstr "Могућности часовника"
 #. TRANSLATORS: adjust this accordingly for your locale format
 #: ../plugins/clock/clock-digital.h:25
 msgctxt "Time"
-msgid "%a %d %b, %R"
-msgstr ""
+msgid "%a %_d %b, %R"
+msgstr "%a %b %_d, %R"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Night"
@@ -1384,42 +1385,42 @@ msgstr "дванаест"
 msgid "What time is it?"
 msgstr "Колико је сати?"
 
-#: ../plugins/directorymenu/directorymenu.c:242
+#: ../plugins/directorymenu/directorymenu.c:271
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Изборник датотека"
 
-#: ../plugins/directorymenu/directorymenu.c:586
+#: ../plugins/directorymenu/directorymenu.c:637
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Нисам успео да покренем програм „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:618
+#: ../plugins/directorymenu/directorymenu.c:669
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Нисам успео да пропитам врсту садржаја за „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:627
+#: ../plugins/directorymenu/directorymenu.c:678
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Нисам пронашао подразумевани програм за „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:643
+#: ../plugins/directorymenu/directorymenu.c:694
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Нисам успео да покренем подразумевани програм за „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:741
+#: ../plugins/directorymenu/directorymenu.c:792
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Нисам успео да извршим подразумевани програм за врсту „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:815
+#: ../plugins/directorymenu/directorymenu.c:867
 msgid "Open Folder"
 msgstr "Отвори фасциклу"
 
-#: ../plugins/directorymenu/directorymenu.c:830
+#: ../plugins/directorymenu/directorymenu.c:884
 msgid "Open in Terminal"
 msgstr "Отвори у терминалу"
 
@@ -1435,22 +1436,30 @@ msgstr "Изаберите фасциклу"
 msgid "_Base Directory:"
 msgstr "_Основна фасцикла:"
 
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
+msgid "Show '_Open _Folder'"
+msgstr "Приказуј „_Отвори _Фасциклу“"
+
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
+msgid "Show 'Open in _Terminal'"
+msgstr "Приказуј „Отвори у _Терминалу“"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
 msgid "Show _hidden files"
 msgstr "Прикажи _скривене датотеке"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr "Унесите списак образаца који ће бити коришћени за одређивање које датотеке ће бити видљиве у фасцикли. Ако овде наведете више од једног обрасца, ставке списка морају бити раздвојене тачком и запетом (нпр. *.txt;*.doc)."
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
 msgid "_File Pattern:"
 msgstr "Образац _датотеке:"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:13
 #: ../plugins/tasklist/tasklist-dialog.glade.h:29
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
