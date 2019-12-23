@@ -3373,8 +3373,8 @@ xfce_tasklist_button_drag_data_received (GtkWidget         *button,
   sibling = g_list_find (tasklist->windows, child2);
   panel_return_if_fail (sibling != NULL);
 
-  if ((!xfce_tasklist_vertical (tasklist) && x >= allocation.width / 2)
-      || (xfce_tasklist_vertical (tasklist) && y >= allocation.height / 2))
+  if ((xfce_tasklist_horizontal (tasklist) && x >= allocation.width / 2)
+      || (!xfce_tasklist_horizontal (tasklist) && y >= allocation.height / 2))
     sibling = g_list_next (sibling);
 
   xid = *((gulong *) gtk_selection_data_get_data (selection_data));
