@@ -7,7 +7,7 @@
 # Cristian Marchi <cri.panta@gmail.com>, 2009
 # Cristian Marchi <cri.penta@gmail.com>, 2013-2015
 # Emanuele Petriglia <transifex@emanuelepetriglia.com>, 2018
-# Emanuele Petriglia <transifex@emanuelepetriglia.com>, 2019
+# Emanuele Petriglia <transifex@emanuelepetriglia.com>, 2019-2020
 # Enrico B. <enricobe@hotmail.com>, 2017
 # Enrico B. <enricobe@hotmail.com>, 2018
 # Francesco Galizzi <f.galizzi92@gmail.com>, 2017
@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-29 18:30+0100\n"
-"PO-Revision-Date: 2019-12-30 11:10+0000\n"
+"POT-Creation-Date: 2020-01-05 00:30+0100\n"
+"PO-Revision-Date: 2020-01-05 16:15+0000\n"
 "Last-Translator: Emanuele Petriglia <transifex@emanuelepetriglia.com>\n"
 "Language-Team: Italian (http://www.transifex.com/xfce/xfce4-panel/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -61,7 +61,8 @@ msgstr "Se si rimuove l'elemento dal pannello, verrà perso per sempre."
 #: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
-#: ../plugins/directorymenu/directorymenu.c:433
+#: ../plugins/directorymenu/directorymenu.c:473
+#: ../plugins/directorymenu/directorymenu.c:938
 msgid "_Cancel"
 msgstr "A_nnulla"
 
@@ -945,7 +946,7 @@ msgstr "Selezionare questa opzione per mostrare il nome generico dell'applicazio
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:17
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/systray/systray-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
@@ -983,12 +984,12 @@ msgid "Applications"
 msgstr "Applicazioni"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:600
-#: ../plugins/directorymenu/directorymenu.c:431
+#: ../plugins/directorymenu/directorymenu.c:471
 msgid "Select An Icon"
 msgstr "Selezionare un'icona"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/directorymenu/directorymenu.c:434
+#: ../plugins/directorymenu/directorymenu.c:474
 msgid "_OK"
 msgstr "_OK"
 
@@ -1389,44 +1390,77 @@ msgstr "dodici"
 msgid "What time is it?"
 msgstr "Che ora è?"
 
-#: ../plugins/directorymenu/directorymenu.c:271
+#: ../plugins/directorymenu/directorymenu.c:301
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Menu delle cartelle"
 
-#: ../plugins/directorymenu/directorymenu.c:637
+#: ../plugins/directorymenu/directorymenu.c:689
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Impossibile avviare l'applicazione \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:669
+#: ../plugins/directorymenu/directorymenu.c:721
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Impossibile interrogare il tipo di contenuto per \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:678
+#: ../plugins/directorymenu/directorymenu.c:730
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Non è stata trovata alcuna applicazione predefinita per \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:694
+#: ../plugins/directorymenu/directorymenu.c:746
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Impossibile avviare l'applicazione predefinita per \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:792
+#: ../plugins/directorymenu/directorymenu.c:844
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Impossibile eseguire l'applicazione preferita per la categoria \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:867
+#: ../plugins/directorymenu/directorymenu.c:927
+msgid "Create New Folder"
+msgstr "Crea una nuova cartella"
+
+#: ../plugins/directorymenu/directorymenu.c:932
+msgid "Create New Text Document"
+msgstr "Crea un nuovo documento di testo"
+
+#: ../plugins/directorymenu/directorymenu.c:939
+msgid "C_reate"
+msgstr "C_rea"
+
+#: ../plugins/directorymenu/directorymenu.c:940
+msgid "Create & _Open"
+msgstr "Crea & _Apri"
+
+#: ../plugins/directorymenu/directorymenu.c:954
+msgid "Enter the new name:"
+msgstr "Inserire il nuovo nome:"
+
+#: ../plugins/directorymenu/directorymenu.c:990
+#, c-format
+msgid "Failed to create folder: %s"
+msgstr "Impossibile creare la cartella: %s"
+
+#: ../plugins/directorymenu/directorymenu.c:1075
 msgid "Open Folder"
 msgstr "Apri cartella"
 
-#: ../plugins/directorymenu/directorymenu.c:884
+#: ../plugins/directorymenu/directorymenu.c:1092
 msgid "Open in Terminal"
 msgstr "Apri nel terminale"
+
+#: ../plugins/directorymenu/directorymenu.c:1109
+msgid "Create Folder..."
+msgstr "Crea cartella…"
+
+#: ../plugins/directorymenu/directorymenu.c:1126
+msgid "Create Text Document..."
+msgstr "Crea documento di testo…"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
@@ -1440,30 +1474,42 @@ msgstr "Selezionare una cartella"
 msgid "_Base Directory:"
 msgstr "Cartella _principale:"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
-msgid "Show 'Open _Folder'"
-msgstr "Mostra 'Apri _Cartella'"
-
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
+msgid "Show 'New Text _Document'"
+msgstr "Mostra 'nuovo _documento di testo'"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+msgid "Show '_New Folder'"
+msgstr "Mostra '_Nuova cartella'"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
 msgid "Show 'Open in _Terminal'"
 msgstr "Mostra 'Apri nel _Terminale'"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
+msgid "Show '_Open _Folder'"
+msgstr "Mostra '_Apri _Cartella'"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
+msgid "Menu"
+msgstr "Menu"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:13
 msgid "Show _hidden files"
 msgstr "Mostra i file _nascosti"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:14
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr "Inserire un elenco di schemi che determineranno quali file dovranno essere visibili nella cartella. Se si specifica più di uno schema, gli elementi della lista dovranno essere separati con il punto e virgola (es. *.txt;*.doc)."
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:15
 msgid "_File Pattern:"
 msgstr "Schema del _file:"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:13
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:16
 #: ../plugins/tasklist/tasklist-dialog.glade.h:29
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
