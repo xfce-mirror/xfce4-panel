@@ -6,13 +6,13 @@
 # Masato HASHIMOTO <cabezon.hashimoto@gmail.com>, 2017
 # Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 2016
 # Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 2016-2019
-# UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2019
+# UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2019-2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-29 18:30+0100\n"
-"PO-Revision-Date: 2019-12-30 20:21+0000\n"
+"POT-Creation-Date: 2020-01-05 00:30+0100\n"
+"PO-Revision-Date: 2020-01-05 08:00+0000\n"
 "Last-Translator: UTUMI Hirosi <utuhiro78@yahoo.co.jp>\n"
 "Language-Team: Japanese (http://www.transifex.com/xfce/xfce4-panel/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -37,14 +37,14 @@ msgstr "パネル"
 
 #: ../panel-preferences.desktop.in.h:2
 msgid "Customize the panel"
-msgstr "パネルをカスタマイズします"
+msgstr "パネルをカスタマイズする"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1105
 #: ../panel/panel-preferences-dialog.c:1321
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "\"%s\" を削除してもよろしいですか?"
+msgstr "\"%s\" を削除しますか？"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1110
 #: ../panel/panel-preferences-dialog.c:1324
@@ -54,7 +54,8 @@ msgstr "パネルから削除すると、このアイテムは完全に失われ
 #: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
-#: ../plugins/directorymenu/directorymenu.c:433
+#: ../plugins/directorymenu/directorymenu.c:473
+#: ../plugins/directorymenu/directorymenu.c:938
 msgid "_Cancel"
 msgstr "キャンセル(_C)"
 
@@ -85,7 +86,7 @@ msgstr "パネル(_L)"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2884
 msgid "Add _New Items..."
-msgstr "新しいアイテムの追加(_N)..."
+msgstr "新しいアイテムを追加する(_N)..."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2899
 msgid "Panel Pr_eferences..."
@@ -124,7 +125,7 @@ msgstr "PANEL-NUMBER"
 
 #: ../panel/main.c:82
 msgid "Show the 'Add New Items' dialog"
-msgstr "'新しいアイテムの追加' ダイアログを表示する"
+msgstr "'新しいアイテムを追加する' ダイアログを表示する"
 
 #: ../panel/main.c:83
 msgid "Save the panel configuration"
@@ -226,7 +227,7 @@ msgstr "実行"
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "パネルを起動しますか? 起動した場合、ログアウト時にセッションを保存すれば次回ログイン時にパネルは自動起動されます。"
+msgstr "パネルを起動しますか？起動した場合、ログアウト時にセッションを保存すれば次回ログイン時にパネルは自動的に起動されます。"
 
 #: ../panel/main.c:445 ../panel/main.c:459
 #, c-format
@@ -261,11 +262,11 @@ msgstr "終了"
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "セッションマネージャーなしで X を起動した場合、「終了」をクリックすると X サーバーをクローズします。"
+msgstr "セッションマネージャーなしでXを起動しました。「終了」をクリックするとXサーバーを閉じます。"
 
 #: ../panel/panel-application.c:1721
 msgid "Are you sure you want to quit the panel?"
-msgstr "パネルを終了してもよろしいですか?"
+msgstr "パネルを終了しますか？"
 
 #: ../panel/panel-application.c:1729
 #, c-format
@@ -299,7 +300,7 @@ msgstr "Daichi Kawahata <daichi@xfce.org>, 2005-2007.\nMasato Hashimoto <cabezon
 #. setup the dialog
 #: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Add New Item"
-msgstr "新しいアイテムの追加"
+msgstr "新しいアイテムを追加する"
 
 #: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:203
 #: ../plugins/launcher/launcher-dialog.glade.h:16
@@ -327,11 +328,11 @@ msgstr "パネルの変更は許可されていません"
 
 #: ../panel/panel-item-dialog.c:195
 msgid "Add New Items"
-msgstr "新しいアイテムの追加"
+msgstr "新しいアイテムを追加する"
 
 #: ../panel/panel-item-dialog.c:197
 msgid "Add new plugins to the panel"
-msgstr "パネルに新しいプラグインを追加します"
+msgstr "パネルに新しいプラグインを追加する"
 
 #: ../panel/panel-item-dialog.c:214
 #: ../panel/panel-preferences-dialog.glade.h:11
@@ -361,7 +362,7 @@ msgstr "検索フレーズを入力してください"
 #: ../panel/panel-plugin-external.c:436
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "プラグイン \"%s\" は予期せずパネルから失われました。このプラグインを再起動しますか?"
+msgstr "プラグイン \"%s\" は予期せずパネルから失われました。このプラグインを再起動しますか？"
 
 #: ../panel/panel-plugin-external.c:438
 #, c-format
@@ -396,7 +397,7 @@ msgstr "パネルとプラグインの設定は完全に削除されます"
 #: ../panel/panel-preferences-dialog.c:963
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
-msgstr "パネル %d を削除してもよろしいですか?"
+msgstr "パネル %d を削除しますか？"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
@@ -477,7 +478,7 @@ msgstr "パネルプリセットを切り替えます。"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Add a new panel"
-msgstr "新しいパネルを追加します"
+msgstr "新しいパネルを追加する"
 
 #: ../panel/panel-preferences-dialog.glade.h:17
 msgid "Remove the currently selected panel"
@@ -648,7 +649,7 @@ msgstr "現在選択されているアイテムを一つ下へ移動します"
 
 #: ../panel/panel-preferences-dialog.glade.h:59
 msgid "Add new item to this panel"
-msgstr "このパネルに新しいアイテムを追加します"
+msgstr "このパネルに新しいアイテムを追加する"
 
 #: ../panel/panel-preferences-dialog.glade.h:60
 msgid "Remove currently selected item"
@@ -669,7 +670,7 @@ msgstr "アイテム(_M)"
 
 #: ../panel/panel-tic-tac-toe.c:121
 msgid "_New Game"
-msgstr "新規ゲーム(_N)"
+msgstr "新しいゲーム(_N)"
 
 #: ../panel/panel-tic-tac-toe.c:132
 msgid "_Level:"
@@ -764,7 +765,7 @@ msgstr "ログアウト(_L)"
 
 #: ../plugins/actions/actions.c:155
 msgid "Are you sure you want to log out?"
-msgstr "ログアウトしてもよろしいですか?"
+msgstr "ログアウトしますか？"
 
 #: ../plugins/actions/actions.c:156
 #, c-format
@@ -805,7 +806,7 @@ msgstr "ハイバネート(_H)"
 
 #: ../plugins/actions/actions.c:188
 msgid "Do you want to suspend to disk?"
-msgstr "現在の状態をディスクに保存してシステムを一時停止しますか?"
+msgstr "現在の状態をディスクに保存してシステムをサスペンドしますか？"
 
 #: ../plugins/actions/actions.c:189
 #, c-format
@@ -822,7 +823,7 @@ msgstr "ハイブリッドスリープ(_H)"
 
 #: ../plugins/actions/actions.c:197
 msgid "Do you want to hibernate and suspend the system?"
-msgstr "システムをハイバネートおよびサスペンドしますか?"
+msgstr "システムをハイバネートおよびサスペンドしますか？"
 
 #: ../plugins/actions/actions.c:198
 #, c-format
@@ -839,7 +840,7 @@ msgstr "サスペンド(_P)"
 
 #: ../plugins/actions/actions.c:206
 msgid "Do you want to suspend to RAM?"
-msgstr "現在の状態を RAM に保存してシステムを一時停止しますか?"
+msgstr "現在の状態を RAM に保存してシステムをサスペンドしますか？"
 
 #: ../plugins/actions/actions.c:207
 #, c-format
@@ -856,7 +857,7 @@ msgstr "再起動(_R)"
 
 #: ../plugins/actions/actions.c:215
 msgid "Are you sure you want to restart?"
-msgstr "再起動してもよろしいですか?"
+msgstr "再起動しますか？"
 
 #: ../plugins/actions/actions.c:216
 #, c-format
@@ -873,7 +874,7 @@ msgstr "シャットダウン(_D)"
 
 #: ../plugins/actions/actions.c:224
 msgid "Are you sure you want to shut down?"
-msgstr "シャットダウンしてもよろしいですか?"
+msgstr "シャットダウンしますか？"
 
 #: ../plugins/actions/actions.c:225
 #, c-format
@@ -937,7 +938,7 @@ msgstr "アプリケーションを一般名でメニューに表示する場合
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:17
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/systray/systray-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
@@ -975,12 +976,12 @@ msgid "Applications"
 msgstr "アプリケーション"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:600
-#: ../plugins/directorymenu/directorymenu.c:431
+#: ../plugins/directorymenu/directorymenu.c:471
 msgid "Select An Icon"
 msgstr "アイコンを選択してください"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/directorymenu/directorymenu.c:434
+#: ../plugins/directorymenu/directorymenu.c:474
 msgid "_OK"
 msgstr "OK(_O)"
 
@@ -1379,46 +1380,79 @@ msgstr "12"
 
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
-msgstr "いま何時ですか?"
+msgstr "いま何時ですか？"
 
-#: ../plugins/directorymenu/directorymenu.c:271
+#: ../plugins/directorymenu/directorymenu.c:301
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "ディレクトリメニュー"
 
-#: ../plugins/directorymenu/directorymenu.c:637
+#: ../plugins/directorymenu/directorymenu.c:689
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "アプリケーション \"%s\" の起動に失敗しました"
 
-#: ../plugins/directorymenu/directorymenu.c:669
+#: ../plugins/directorymenu/directorymenu.c:721
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "\"%s\" のコンテンツタイプの問い合わせに失敗しました"
 
-#: ../plugins/directorymenu/directorymenu.c:678
+#: ../plugins/directorymenu/directorymenu.c:730
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "\"%s\" のデフォルトアプリケーションが見つかりませんでした"
 
-#: ../plugins/directorymenu/directorymenu.c:694
+#: ../plugins/directorymenu/directorymenu.c:746
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "\"%s\" のデフォルトアプリケーションを起動できませんでした"
 
-#: ../plugins/directorymenu/directorymenu.c:792
+#: ../plugins/directorymenu/directorymenu.c:844
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "カテゴリ \"%s\" の規定のアプリケーションの実行に失敗しました"
 
-#: ../plugins/directorymenu/directorymenu.c:867
+#: ../plugins/directorymenu/directorymenu.c:927
+msgid "Create New Folder"
+msgstr "新しいフォルダーを作成する"
+
+#: ../plugins/directorymenu/directorymenu.c:932
+msgid "Create New Text Document"
+msgstr "新しいテキストドキュメントを作成する"
+
+#: ../plugins/directorymenu/directorymenu.c:939
+msgid "C_reate"
+msgstr "作成(_R)"
+
+#: ../plugins/directorymenu/directorymenu.c:940
+msgid "Create & _Open"
+msgstr "作成して開く(_O)"
+
+#: ../plugins/directorymenu/directorymenu.c:954
+msgid "Enter the new name:"
+msgstr "新しい名前を入力してください:"
+
+#: ../plugins/directorymenu/directorymenu.c:990
+#, c-format
+msgid "Failed to create folder: %s"
+msgstr "フォルダーの作成に失敗しました: %s"
+
+#: ../plugins/directorymenu/directorymenu.c:1075
 msgid "Open Folder"
 msgstr "フォルダーを開く"
 
-#: ../plugins/directorymenu/directorymenu.c:884
+#: ../plugins/directorymenu/directorymenu.c:1092
 msgid "Open in Terminal"
 msgstr "ターミナルで開く"
+
+#: ../plugins/directorymenu/directorymenu.c:1109
+msgid "Create Folder..."
+msgstr "フォルダーを作成する..."
+
+#: ../plugins/directorymenu/directorymenu.c:1126
+msgid "Create Text Document..."
+msgstr "テキストドキュメントを作成する..."
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
@@ -1432,30 +1466,42 @@ msgstr "ディレクトリを選択してください"
 msgid "_Base Directory:"
 msgstr "ベースディレクトリ(_B):"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
-msgid "Show 'Open _Folder'"
-msgstr "'フォルダーを開く(_F)' を表示する"
-
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
+msgid "Show 'New Text _Document'"
+msgstr "'新しいテキストドキュメント' を表示する(_D)"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+msgid "Show '_New Folder'"
+msgstr "'新しいフォルダー' を表示する(_N)"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
 msgid "Show 'Open in _Terminal'"
 msgstr "'ターミナルで開く(_T)を開く' を表示する"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
+msgid "Show '_Open _Folder'"
+msgstr "'フォルダーを開く(_O)(_F)' を表示する"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
+msgid "Menu"
+msgstr "メニュー"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:13
 msgid "Show _hidden files"
 msgstr "隠しファイルを表示する(_H)"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:14
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr "ディレクトリ内のファイルを表示するパターンのリストを入力してください。1 つ以上のパターンを指定する場合は、それぞれをセミコロンで区切ってください (例: *.txt;*.doc)。"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:15
 msgid "_File Pattern:"
 msgstr "ファイルパターン(_F):"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:13
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:16
 #: ../plugins/tasklist/tasklist-dialog.glade.h:29
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
@@ -1484,7 +1530,7 @@ msgstr "アイテムを削除すると、完全に失われます"
 #: ../plugins/launcher/launcher-dialog.c:854
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr "\"%s\" を削除してもよろしいですか?"
+msgstr "\"%s\" を削除しますか？"
 
 #: ../plugins/launcher/launcher-dialog.c:855
 msgid "Unnamed item"
@@ -1557,7 +1603,7 @@ msgstr "現在選択されているアイテムを削除します"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "Add a new empty item"
-msgstr "新しいアイテムを作成します"
+msgstr "新しいアイテムを作成する"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "Add a new hyperlink"
@@ -1701,7 +1747,7 @@ msgstr "クリア"
 
 #: ../plugins/systray/systray.c:1141
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr "既知のアプリケーションのリストをクリアしてもよろしいですか?"
+msgstr "既知のアプリケーションのリストをクリアしますか？"
 
 #: ../plugins/systray/systray-dialog.glade.h:1
 #: ../plugins/systray/systray.desktop.in.in.h:1
@@ -1796,7 +1842,7 @@ msgstr "ウィンドウのグループ化(_G):"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Mi_ddle click action:"
-msgstr "中央クリック時の動作(_D):"
+msgstr "ミドルクリック時の動作(_D):"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Restore minimized windows to current _workspace"
