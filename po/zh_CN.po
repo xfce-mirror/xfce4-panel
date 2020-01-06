@@ -17,13 +17,13 @@
 # Yongtao Yang <yongtao.yang@telia.com>, 2004
 # Cally Mal <zhouxiaobo.500@gmail.com>, 2013-2014
 # 玉堂 白鹤 <squeeze@189.cn>, 2010
-# 玉堂白鹤 <yjwork@qq.com>, 2015,2017-2019
+# 玉堂白鹤 <yjwork@qq.com>, 2015,2017-2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-29 18:30+0100\n"
-"PO-Revision-Date: 2019-12-30 02:28+0000\n"
+"POT-Creation-Date: 2020-01-05 00:30+0100\n"
+"PO-Revision-Date: 2020-01-06 00:10+0000\n"
 "Last-Translator: 玉堂白鹤 <yjwork@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/xfce/xfce4-panel/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -65,7 +65,8 @@ msgstr "如果您从面板上移除此项目，它将永远消失。"
 #: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
-#: ../plugins/directorymenu/directorymenu.c:433
+#: ../plugins/directorymenu/directorymenu.c:473
+#: ../plugins/directorymenu/directorymenu.c:938
 msgid "_Cancel"
 msgstr "取消(_C)"
 
@@ -305,7 +306,7 @@ msgstr "Xfce 桌面环境的面板"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr "Yongtao Yang <yongtao.yang@telia.com>, 2004.\nHuang Huan <unicon221@gmail.com>, 2006.\nJick Nan <jick.nan@gmail.com>, 2006.\nwuli <wurisky@gmail.com>, 2007, 2008.\nHunt Xu <huntxu@live.cn>, 2008, 2009, 2010.\nChris K. Zhang <plutino@gmail.com>, 2009.\nAron Xu <aronmalache@163.com>, 2009.\n玉堂白鹤 <yjwork@qq.com>, 2010.\nChipong Luo <chipong.luo@yahoo.com>, 2011, 2012."
+msgstr "Yongtao Yang <yongtao.yang@telia.com>, 2004.\nHuang Huan <unicon221@gmail.com>, 2006.\nJick Nan <jick.nan@gmail.com>, 2006.\nwuli <wurisky@gmail.com>, 2007, 2008.\nHunt Xu <huntxu@live.cn>, 2008, 2009, 2010.\nChris K. Zhang <plutino@gmail.com>, 2009.\nAron Xu <aronmalache@163.com>, 2009.\n玉堂白鹤 <yjwork@qq.com>, 2010,2020.\nChipong Luo <chipong.luo@yahoo.com>, 2011, 2012."
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:14
@@ -948,7 +949,7 @@ msgstr "选择此项在菜单中显示通用应用程序名称，比如用 “�
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:17
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/systray/systray-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
@@ -986,12 +987,12 @@ msgid "Applications"
 msgstr "所有应用程序"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:600
-#: ../plugins/directorymenu/directorymenu.c:431
+#: ../plugins/directorymenu/directorymenu.c:471
 msgid "Select An Icon"
 msgstr "选择图标"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/directorymenu/directorymenu.c:434
+#: ../plugins/directorymenu/directorymenu.c:474
 msgid "_OK"
 msgstr "确定(_O)"
 
@@ -1392,44 +1393,77 @@ msgstr "12"
 msgid "What time is it?"
 msgstr "现在几点？"
 
-#: ../plugins/directorymenu/directorymenu.c:271
+#: ../plugins/directorymenu/directorymenu.c:301
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "目录菜单"
 
-#: ../plugins/directorymenu/directorymenu.c:637
+#: ../plugins/directorymenu/directorymenu.c:689
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "无法启动应用程序 “%s”"
 
-#: ../plugins/directorymenu/directorymenu.c:669
+#: ../plugins/directorymenu/directorymenu.c:721
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "无法查询 “%s” 的内容类型"
 
-#: ../plugins/directorymenu/directorymenu.c:678
+#: ../plugins/directorymenu/directorymenu.c:730
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "未找到 “%s” 的默认应用程序"
 
-#: ../plugins/directorymenu/directorymenu.c:694
+#: ../plugins/directorymenu/directorymenu.c:746
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "无法启动 “%s” 的默认应用程序"
 
-#: ../plugins/directorymenu/directorymenu.c:792
+#: ../plugins/directorymenu/directorymenu.c:844
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "无法执行类别 “%s” 的首选应用程序"
 
-#: ../plugins/directorymenu/directorymenu.c:867
+#: ../plugins/directorymenu/directorymenu.c:927
+msgid "Create New Folder"
+msgstr "创建新文件夹"
+
+#: ../plugins/directorymenu/directorymenu.c:932
+msgid "Create New Text Document"
+msgstr "创建新的文本文档"
+
+#: ../plugins/directorymenu/directorymenu.c:939
+msgid "C_reate"
+msgstr "创建(_R)"
+
+#: ../plugins/directorymenu/directorymenu.c:940
+msgid "Create & _Open"
+msgstr "创建并打开(_O)"
+
+#: ../plugins/directorymenu/directorymenu.c:954
+msgid "Enter the new name:"
+msgstr "输入新名称:"
+
+#: ../plugins/directorymenu/directorymenu.c:990
+#, c-format
+msgid "Failed to create folder: %s"
+msgstr "无法创建文件夹: %s"
+
+#: ../plugins/directorymenu/directorymenu.c:1075
 msgid "Open Folder"
 msgstr "打开文件夹"
 
-#: ../plugins/directorymenu/directorymenu.c:884
+#: ../plugins/directorymenu/directorymenu.c:1092
 msgid "Open in Terminal"
 msgstr "在终端中打开"
+
+#: ../plugins/directorymenu/directorymenu.c:1109
+msgid "Create Folder..."
+msgstr "创建文件夹..."
+
+#: ../plugins/directorymenu/directorymenu.c:1126
+msgid "Create Text Document..."
+msgstr "创建文本文档..."
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
@@ -1443,30 +1477,42 @@ msgstr "选择一个目录"
 msgid "_Base Directory:"
 msgstr "基本目录(_B)："
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
-msgid "Show 'Open _Folder'"
-msgstr "显示“打开文件夹(_F)”"
-
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
+msgid "Show 'New Text _Document'"
+msgstr "显示\"新建文本文档\""
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+msgid "Show '_New Folder'"
+msgstr "显示“新建文件夹(_N)”"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
 msgid "Show 'Open in _Terminal'"
 msgstr "显示“在终端中打开(_T)”"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
+msgid "Show '_Open _Folder'"
+msgstr "显示“打开文件夹(_O)”"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
+msgid "Menu"
+msgstr "菜单"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:13
 msgid "Show _hidden files"
 msgstr "显示隐藏文件(_H)"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:14
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr "输入一些用以决定哪些文件在目录中可见的类型列表。如果您在此指定了不止一个类型，列出的项目之间必须用分号隔开(如 *.txt;*.doc)。"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:15
 msgid "_File Pattern:"
 msgstr "文件类型(_F)："
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:13
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:16
 #: ../plugins/tasklist/tasklist-dialog.glade.h:29
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
