@@ -198,24 +198,21 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   gtk_window_set_icon_name (GTK_WINDOW (dialog), "list-add");
   gtk_window_set_default_size (GTK_WINDOW (dialog), 350, 450);
   gtk_window_set_type_hint (GTK_WINDOW (dialog), GDK_WINDOW_TYPE_HINT_NORMAL);
+  xfce_titled_dialog_create_action_area (XFCE_TITLED_DIALOG (dialog));
 
+  dialog->add_button = xfce_titled_dialog_add_button (XFCE_TITLED_DIALOG (dialog), _("_Add"), GTK_RESPONSE_OK);
   icon = gtk_image_new_from_icon_name ("list-add", GTK_ICON_SIZE_BUTTON);
-  dialog->add_button = gtk_button_new_with_mnemonic (_("_Add"));
   gtk_button_set_image (GTK_BUTTON (dialog->add_button), icon);
-  gtk_widget_show_all (dialog->add_button);
 
+  button = xfce_titled_dialog_add_button (XFCE_TITLED_DIALOG (dialog), _("_Help"), GTK_RESPONSE_HELP);
   icon = gtk_image_new_from_icon_name ("help-browser", GTK_ICON_SIZE_BUTTON);
-  button = gtk_button_new_with_mnemonic (_("_Help"));
   gtk_button_set_image (GTK_BUTTON (button), icon);
-  gtk_widget_show_all (button);
-  gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button, GTK_RESPONSE_HELP);
-  gtk_dialog_add_action_widget (GTK_DIALOG (dialog), dialog->add_button, GTK_RESPONSE_OK);
+
+  button = xfce_titled_dialog_add_button (XFCE_TITLED_DIALOG (dialog), _("_Close"), GTK_RESPONSE_CLOSE);
   icon = gtk_image_new_from_icon_name ("window-close-symbolic", GTK_ICON_SIZE_BUTTON);
-  button = gtk_button_new_with_mnemonic (_("_Close"));
   gtk_button_set_image (GTK_BUTTON (button), icon);
-  gtk_widget_show_all (button);
-  gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button, GTK_RESPONSE_CLOSE);
-  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE);
+
+  xfce_titled_dialog_set_default_response (XFCE_TITLED_DIALOG (dialog), GTK_RESPONSE_CLOSE);
 
   main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, BORDER * 2);
   gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), main_vbox);
