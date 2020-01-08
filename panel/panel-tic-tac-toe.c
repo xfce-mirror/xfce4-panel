@@ -118,9 +118,11 @@ panel_tic_tac_toe_init (PanelTicTacToe *dialog)
   gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
   gtk_window_set_icon_name (GTK_WINDOW (dialog), "applications-games");
 
+  xfce_titled_dialog_create_action_area (XFCE_TITLED_DIALOG (dialog));
+
   button = xfce_gtk_button_new_mixed ("document-new", _("_New Game"));
-  gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button, GTK_RESPONSE_ACCEPT);
-  gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Close"), GTK_RESPONSE_CLOSE);
+  xfce_titled_dialog_add_action_widget (XFCE_TITLED_DIALOG (dialog), button, GTK_RESPONSE_ACCEPT);
+  xfce_titled_dialog_add_button (XFCE_TITLED_DIALOG (dialog), _("_Close"), GTK_RESPONSE_CLOSE);
 
   vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
   gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), vbox, TRUE, TRUE, 0);
