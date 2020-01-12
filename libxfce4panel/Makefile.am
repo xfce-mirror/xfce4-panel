@@ -213,6 +213,8 @@ endif
 EXTRA_DIST = \
 	abicheck.sh \
 	libxfce4panel.symbols \
+	libxfce4panel-2.0.deps \
+	libxfce4panel-2.0.metadata \
 	libxfce4panel-alias.h \
 	libxfce4panel-aliasdef.c \
 	libxfce4panel-marshal.list \
@@ -232,8 +234,6 @@ libxfce4panel_2_0_vapi_FILES = libxfce4panel-2.0.gir
 
 vapidir = $(datadir)/vala/vapi
 vapi_DATA = $(VAPIGEN_VAPIS) $(VAPIGEN_VAPIS:.vapi=.deps)
-
-EXTRA_DIST += libxfce4panel-2.0.metadata libxfce4panel-2.0.deps
 endif
 
 if HAVE_GNUC_VISIBILITY
