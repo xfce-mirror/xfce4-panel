@@ -6,7 +6,7 @@
   <object class="GtkListStore" id="applications-store">
     <columns>
       <!-- column-name icon -->
-      <column type="GdkPixbuf"/>
+      <column type="GIcon"/>
       <!-- column-name title -->
       <column type="gchararray"/>
       <!-- column-name hidden -->
@@ -18,7 +18,7 @@
   <object class="GtkImage" id="image1">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="icon_name">edit-clear</property>
+    <property name="icon_name">edit-clear-symbolic</property>
   </object>
   <object class="GtkImage" id="image4">
     <property name="visible">True</property>
@@ -242,7 +242,7 @@
                                         <child>
                                           <object class="GtkCellRendererPixbuf" id="cellrendererpixbuf1"/>
                                           <attributes>
-                                            <attribute name="pixbuf">0</attribute>
+                                            <attribute name="gicon">0</attribute>
                                           </attributes>
                                         </child>
                                       </object>

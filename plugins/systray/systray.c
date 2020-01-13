@@ -128,7 +128,7 @@ enum
 
 enum
 {
-  COLUMN_PIXBUF,
+  COLUMN_GICON,
   COLUMN_TITLE,
   COLUMN_HIDDEN,
   COLUMN_INTERNAL_NAME
@@ -154,6 +154,9 @@ static const gchar *known_applications[][3] =
   { "workrave tray icon", NULL, "Workrave Applet" },
   { "audacious2", "audacious", "Audacious" },
   { "wicd-client.py", "wicd-gtk", "Wicd" },
+  { "drop-down terminal", "utilities-terminal", "Xfce Dropdown Terminal" },
+  { "xfce terminal", "utilities-terminal", "Xfce Terminal" },
+  { "task manager", "utilities-system-monitor", "Xfce Taskmanager" },
   { "xfce4-power-manager", "xfpm-ac-adapter", "Xfce Power Manager" },
 };
 
@@ -932,6 +935,7 @@ systray_plugin_dialog_add_application_names (gpointer data,
   gchar          *camelcase = NULL;
   const gchar    *icon_name = name;
   GdkPixbuf      *pixbuf;
+  GIcon          *gicon;
   guint           i;
   GtkTreeIter     iter;
 
@@ -962,14 +966,14 @@ systray_plugin_dialog_add_application_names (gpointer data,
 
   /* try to load the icon name */
   if (G_LIKELY (icon_name != NULL))
-    pixbuf = xfce_panel_pixbuf_from_source (icon_name, NULL, ICON_SIZE);
+    gicon = xfce_gicon_from_name (icon_name);
   else
-    pixbuf = NULL;
+    gicon = xfce_gicon_from_name (name);
 
   /* insert in the store */
   gtk_list_store_append (store, &iter);
   gtk_list_store_set (store, &iter,
-                      COLUMN_PIXBUF, pixbuf,
+                      COLUMN_GICON, gicon,
                       COLUMN_TITLE, title,
                       COLUMN_HIDDEN, hidden,
                       COLUMN_INTERNAL_NAME, name,
