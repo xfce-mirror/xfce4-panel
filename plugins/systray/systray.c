@@ -21,6 +21,10 @@
 #include <config.h>
 #endif
 
+#include <gdk/gdk.h>
+#include <gdk/gdkx.h>
+#include <gtk/gtk.h>
+
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-private.h>
@@ -34,7 +38,6 @@
 #include "systray-manager.h"
 #include "systray-dialog_ui.h"
 
-#define ICON_SIZE     (22)
 #define BUTTON_SIZE   (16)
 
 
@@ -508,11 +511,38 @@ systray_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
 {
   SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (panel_plugin);
 
+
   gtk_orientable_set_orientation (GTK_ORIENTABLE (plugin->hvbox), orientation);
   systray_box_set_orientation (XFCE_SYSTRAY_BOX (plugin->box), orientation);
 
   if (G_LIKELY (plugin->manager != NULL))
     systray_manager_set_orientation (plugin->manager, orientation);
+
+  /* apply symbolic colors */
+  if (G_LIKELY (plugin->manager != NULL)) {
+    GtkStyleContext *context;
+    GdkRGBA rgba;
+    GdkColor color;
+    GdkColor fg;
+    GdkColor error;
+    GdkColor warning;
+    GdkColor success;
+
+    context = gtk_widget_get_style_context (GTK_WIDGET (plugin->box));
+    gtk_style_context_get_color (context, GTK_STATE_NORMAL, &rgba);
+
+    color.pixel = 0;
+    color.red = rgba.red * G_MAXUSHORT;
+    color.green = rgba.green * G_MAXUSHORT;
+    color.blue = rgba.blue * G_MAXUSHORT;
+
+    g_warning ("setting the symbolic color to: %d %d %d", color.red, color.green, color.blue);
+
+    fg = error = warning = success = color;
+
+    systray_manager_set_colors (plugin->manager, &fg, &error, &warning, &success);
+  }
+
 
   if (orientation == GTK_ORIENTATION_HORIZONTAL)
     gtk_widget_set_size_request (plugin->button, BUTTON_SIZE, -1);

@@ -78,6 +78,7 @@ static void            systray_manager_handle_dock_request                (Systr
 static gboolean        systray_manager_handle_undock_request              (GtkSocket           *socket,
                                                                            gpointer             user_data);
 static void            systray_manager_set_visual                         (SystrayManager      *manager);
+static void            systray_manager_set_colors_property                (SystrayManager      *manager);
 static void            systray_manager_message_free                       (SystrayMessage      *message);
 static void            systray_manager_message_remove_from_list           (SystrayManager      *manager,
                                                                            XClientMessageEvent *xevent);
@@ -108,6 +109,12 @@ struct _SystrayManager
 
   /* list of client sockets */
   GHashTable     *sockets;
+
+  /* symbolic colors */
+  GdkColor fg;
+  GdkColor error;
+  GdkColor warning;
+  GdkColor success;
 
   /* orientation of the tray */
   GtkOrientation  orientation;
@@ -218,6 +225,23 @@ systray_manager_init (SystrayManager *manager)
   manager->orientation = GTK_ORIENTATION_HORIZONTAL;
   manager->messages = NULL;
   manager->sockets = g_hash_table_new (NULL, NULL);
+
+  /* initialize symbolic colors */
+  manager->fg.red = 0.0;
+  manager->fg.green = 0.0;
+  manager->fg.blue = 0.0;
+
+  manager->error.red = 1.0;
+  manager->error.green = 0.0;
+  manager->error.blue = 0.0;
+
+  manager->warning.red = 1.0;
+  manager->warning.green = 1.0;
+  manager->warning.blue = 0.0;
+
+  manager->success.red = 0.0;
+  manager->success.green = 1.0;
+  manager->success.blue = 0.0;
 }
 
 
@@ -344,8 +368,11 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   /* set the invisible window and take a reference */
   manager->invisible = GTK_WIDGET (g_object_ref (G_OBJECT (invisible)));
 
-  /* set the visial property for transparent tray icons */
+  /* set the visual property for transparent tray icons */
   systray_manager_set_visual (manager);
+
+  /* set the property for symbolic color support */
+  systray_manager_set_colors_property (manager);
 
   /* get the current x server time stamp */
   timestamp = gdk_x11_get_server_time (gtk_widget_get_window (GTK_WIDGET (invisible)));
@@ -789,6 +816,63 @@ systray_manager_set_visual (SystrayManager *manager)
                    XA_VISUALID, 32,
                    PropModeReplace,
                    (guchar *) &data, 1);
+}
+
+
+
+void
+systray_manager_set_colors (SystrayManager *manager,
+                            GdkColor       *fg,
+                            GdkColor       *error,
+                            GdkColor       *warning,
+                            GdkColor       *success)
+{
+  panel_return_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager));
+
+  manager->fg = *fg;
+  manager->error = *error;
+  manager->warning = *warning;
+  manager->success = *success;
+
+  systray_manager_set_colors_property (manager);
+}
+
+
+
+static void
+systray_manager_set_colors_property (SystrayManager *manager)
+{
+  GdkWindow  *window;
+  GdkDisplay *display;
+  Atom        atom;
+  gulong      data[12];
+
+  g_return_if_fail (manager->invisible != NULL);
+  window = gtk_widget_get_window (manager->invisible);
+  g_return_if_fail (window != NULL);
+
+  display = gtk_widget_get_display (manager->invisible);
+  atom = gdk_x11_get_xatom_by_name_for_display (display, "_NET_SYSTEM_TRAY_COLORS");
+
+  data[0] = manager->fg.red;
+  data[1] = manager->fg.green;
+  data[2] = manager->fg.blue;
+  data[3] = manager->error.red;
+  data[4] = manager->error.green;
+  data[5] = manager->error.blue;
+  data[6] = manager->warning.red;
+  data[7] = manager->warning.green;
+  data[8] = manager->warning.blue;
+  data[9] = manager->success.red;
+  data[10] = manager->success.green;
+  data[11] = manager->success.blue;
+
+  XChangeProperty (GDK_DISPLAY_XDISPLAY (display),
+                   GDK_WINDOW_XID (window),
+                   atom,
+                   XA_CARDINAL, 32,
+                   PropModeReplace,
+                   (guchar *) &data, 12);
 }
 
 
