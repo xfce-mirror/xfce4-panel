@@ -536,8 +536,6 @@ systray_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
     color.green = rgba.green * G_MAXUSHORT;
     color.blue = rgba.blue * G_MAXUSHORT;
 
-    g_warning ("setting the symbolic color to: %d %d %d", color.red, color.green, color.blue);
-
     fg = error = warning = success = color;
 
     systray_manager_set_colors (plugin->manager, &fg, &error, &warning, &success);
