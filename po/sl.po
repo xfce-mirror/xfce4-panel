@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Aljoša Žagar <anthon.manix@gmail.com>, 2013,2017
-# Arnold Marko <arnold.marko@gmail.com>, 2019
+# Arnold Marko <arnold.marko@gmail.com>, 2019-2020
 # Kernc, 2013,2015
 # Kernc, 2017
 # Klemen Košir <klemen.kosir@kream.io>, 2013
@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-10 00:30+0100\n"
-"PO-Revision-Date: 2019-11-19 12:40+0000\n"
+"POT-Creation-Date: 2020-01-30 00:30+0100\n"
+"PO-Revision-Date: 2020-01-30 09:23+0000\n"
 "Last-Translator: Arnold Marko <arnold.marko@gmail.com>\n"
 "Language-Team: Slovenian (http://www.transifex.com/xfce/xfce4-panel/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -49,14 +49,15 @@ msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Ste prepričani, da želite izbrisati \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1110
-#: ../panel/panel-preferences-dialog.c:1324
-msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Če izbrišete predmet iz pulta, bo ta trajno izgubljen."
+msgid ""
+"Removing the item from the panel also means its configuration will be lost."
+msgstr "Po odstranitvi predmeta iz pulta bodo izgubljene tudi vse nastavitve predmeta."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
-#: ../plugins/directorymenu/directorymenu.c:394
+#: ../plugins/directorymenu/directorymenu.c:473
+#: ../plugins/directorymenu/directorymenu.c:938
 msgid "_Cancel"
 msgstr "_Prekliči"
 
@@ -97,7 +98,7 @@ msgstr "_Možnosti pulta ..."
 msgid "Log _Out"
 msgstr "_Odjava"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:208
+#: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:207
 #: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2950
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
@@ -338,9 +339,9 @@ msgstr "Dodaj nove predmete"
 msgid "Add new plugins to the panel"
 msgstr "Dodaj nove vstavke v pult"
 
-#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-item-dialog.c:211
 #: ../panel/panel-preferences-dialog.glade.h:11
-#: ../panel/panel-tic-tac-toe.c:123
+#: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:3
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:7
@@ -354,12 +355,12 @@ msgstr "Dodaj nove vstavke v pult"
 msgid "_Close"
 msgstr "_Zapri"
 
-#: ../panel/panel-item-dialog.c:230
+#: ../panel/panel-item-dialog.c:227
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "_Poišči:"
 
-#: ../panel/panel-item-dialog.c:238
+#: ../panel/panel-item-dialog.c:235
 msgid "Enter search phrase here"
 msgstr "Vnesite iskalni niz"
 
@@ -425,6 +426,10 @@ msgstr "Interno ime: %s-%d\nPID: %d"
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Interno ime: %s-%d"
+
+#: ../panel/panel-preferences-dialog.c:1324
+msgid "If you remove the item from the panel, it is permanently lost."
+msgstr "Če izbrišete predmet iz pulta, bo ta trajno izgubljen."
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
@@ -666,33 +671,33 @@ msgstr "Uredi trenutno izbrani predmet"
 
 #: ../panel/panel-preferences-dialog.glade.h:62
 msgid "Show about information of the currently selected item"
-msgstr "Pokaži informacije o trenutno izbranem predmetu"
+msgstr "Prikaži podatke o trenutno izbranem predmetu"
 
 #: ../panel/panel-preferences-dialog.glade.h:63
 msgid "Ite_ms"
 msgstr "Pred_meti"
 
-#: ../panel/panel-tic-tac-toe.c:121
+#: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
 msgstr "_Nova igra"
 
-#: ../panel/panel-tic-tac-toe.c:132
+#: ../panel/panel-tic-tac-toe.c:134
 msgid "_Level:"
 msgstr "_Raven:"
 
-#: ../panel/panel-tic-tac-toe.c:138
+#: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
 msgstr "Začetnik"
 
-#: ../panel/panel-tic-tac-toe.c:139
+#: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
 msgstr "Srednje težko"
 
-#: ../panel/panel-tic-tac-toe.c:140
+#: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
 msgstr "Izkušeno"
 
-#: ../panel/panel-tic-tac-toe.c:141
+#: ../panel/panel-tic-tac-toe.c:143
 msgid "Expert"
 msgstr "Profesionalno"
 
@@ -731,12 +736,12 @@ msgstr "_Obrni usmerjenost gumbov"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
 msgid "_Show confirmation dialog"
-msgstr "Po_kaži potrditveno okno"
+msgstr "Pri_kaži potrditveno okno"
 
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Pokaži potrditveno okno s 30-sekundno zakasnitvijo za nekatera dejanja."
+msgstr "Prikaži potrditveno okno s 30-sekundno zakasnitvijo za nekatera dejanja."
 
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Appeara_nce:"
@@ -924,21 +929,21 @@ msgstr "Pokaži oznako gum_ba"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Show application d_escription in tooltip"
-msgstr "Pokaži opise programov v orodnem namigu"
+msgstr "Pokaži opis programa v namigu za orodje"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show ic_ons in menu"
-msgstr "Pokaži ik_one v meniju"
+msgstr "Prikaži ik_one v meniju"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show generic application n_ames"
-msgstr "Pok_aži splošna imena programov"
+msgstr "Prik_aži generična imena programov"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Z izbiro te možnosti so v meniju prikazana splošna imena programov, npr. \"Upravljalnik datotek\" namesto \"Thunar\""
+msgstr "Z izbiro te možnosti so v meniju prikazana generična imena programov, npr. \"Upravljalnik datotek\" namesto \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:17
@@ -980,24 +985,24 @@ msgid "Applications"
 msgstr "Programi"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:600
-#: ../plugins/directorymenu/directorymenu.c:392
+#: ../plugins/directorymenu/directorymenu.c:471
 msgid "Select An Icon"
 msgstr "Izberite ikono"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/directorymenu/directorymenu.c:395
+#: ../plugins/directorymenu/directorymenu.c:474
 msgid "_OK"
 msgstr "_V redu"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2399
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2403
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Izvedba ukaza \"%s\" je spodletela."
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr "Pokaži meni, ki vsebuje kategorije nemeščenih programov"
+msgstr "Prikaži meni, ki vsebuje kategorije nameščenih programov"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -1027,7 +1032,7 @@ msgstr "Pojavni meni pri trenutnem položaju miške"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
 msgid "Show help options"
-msgstr "Pokaži možnosti pomoči"
+msgstr "Prikaži možnosti pomoči"
 
 #. TRANSLATORS: adjust this accordingly for your locale format
 #: ../plugins/clock/clock.c:46
@@ -1139,11 +1144,11 @@ msgstr "Ohla_pnost:"
 
 #: ../plugins/clock/clock-dialog.glade.h:26
 msgid "Show _inactive dots"
-msgstr "Pokaž_i neaktivne pike"
+msgstr "Prikaž_i neaktivne pike"
 
 #: ../plugins/clock/clock-dialog.glade.h:27
 msgid "Show gri_d"
-msgstr "Pokaži m_režo"
+msgstr "Prikaži m_režo"
 
 #: ../plugins/clock/clock-dialog.glade.h:28
 msgid "Clock Options"
@@ -1386,48 +1391,81 @@ msgstr "dvanajst"
 msgid "What time is it?"
 msgstr "Koliko je ura?"
 
-#: ../plugins/directorymenu/directorymenu.c:242
+#: ../plugins/directorymenu/directorymenu.c:301
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Meni map"
 
-#: ../plugins/directorymenu/directorymenu.c:586
+#: ../plugins/directorymenu/directorymenu.c:689
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Programa \"%s\" ni mogoče zagnati"
 
-#: ../plugins/directorymenu/directorymenu.c:618
+#: ../plugins/directorymenu/directorymenu.c:721
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Ni mogoče poizvesti vsebinskega tipa za \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:627
+#: ../plugins/directorymenu/directorymenu.c:730
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Privzeti program za \"%s\" ni nastavljen"
 
-#: ../plugins/directorymenu/directorymenu.c:643
+#: ../plugins/directorymenu/directorymenu.c:746
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Ni bilo mogoče zagnati privzetega programa za \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:741
+#: ../plugins/directorymenu/directorymenu.c:844
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Ni bilo mogoče zagnati prednostnega programa za kategorijo \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:815
+#: ../plugins/directorymenu/directorymenu.c:927
+msgid "Create New Folder"
+msgstr "Ustvari novo mapo"
+
+#: ../plugins/directorymenu/directorymenu.c:932
+msgid "Create New Text Document"
+msgstr "Ustvari nov dokument z besedilom"
+
+#: ../plugins/directorymenu/directorymenu.c:939
+msgid "C_reate"
+msgstr "U_stvari"
+
+#: ../plugins/directorymenu/directorymenu.c:940
+msgid "Create & _Open"
+msgstr "Ustvari & _odpri"
+
+#: ../plugins/directorymenu/directorymenu.c:954
+msgid "Enter the new name:"
+msgstr "Vpišite novo ime:"
+
+#: ../plugins/directorymenu/directorymenu.c:990
+#, c-format
+msgid "Failed to create folder: %s"
+msgstr "Ustvarjanje mape ni bilo uspešno: %s"
+
+#: ../plugins/directorymenu/directorymenu.c:1075
 msgid "Open Folder"
 msgstr "Odpri mapo"
 
-#: ../plugins/directorymenu/directorymenu.c:830
+#: ../plugins/directorymenu/directorymenu.c:1092
 msgid "Open in Terminal"
 msgstr "Odpri v terminalu"
 
+#: ../plugins/directorymenu/directorymenu.c:1109
+msgid "Create Folder..."
+msgstr "Ustvari mapo..."
+
+#: ../plugins/directorymenu/directorymenu.c:1126
+msgid "Create Text Document..."
+msgstr "Ustvari dokument z besedilom..."
+
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
-msgstr "Pokaži drevo map v meniju"
+msgstr "V meniju prikaži drevesno strukturo map"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 msgid "Select A Directory"
@@ -1438,21 +1476,41 @@ msgid "_Base Directory:"
 msgstr "Os_novna mapa:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
+msgid "Show 'New Text _Document'"
+msgstr "Prikaži 'Nov dokument_z_besedilom'"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+msgid "Show '_New Folder'"
+msgstr "Prikaži '_Nova mapa'"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
+msgid "Show 'Open in _Terminal'"
+msgstr "Prikaži 'Odpri v _terminalu'"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
+msgid "Show '_Open _Folder'"
+msgstr "Prikaži '_Odpri _Mapo'"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
+msgid "Menu"
+msgstr "Meni"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:13
 msgid "Show _hidden files"
 msgstr "Pokaži _skrite datoteke"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:14
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr "Vnesite seznam vzorcev, ki bodo določali, katere datoteke naj bodo vidne v mapi. Če določite več kot en vzorec, morajo biti ti ločeni s podpičji (npr. *.txt;*.doc)."
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:15
 msgid "_File Pattern:"
 msgstr "V_zorec:"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:16
 #: ../plugins/tasklist/tasklist-dialog.glade.h:29
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
@@ -1466,7 +1524,7 @@ msgstr "Odpri meni zaganjalnikov"
 msgid "Unnamed Item"
 msgstr "Neimenovan predmet"
 
-#: ../plugins/launcher/launcher.c:1796
+#: ../plugins/launcher/launcher.c:1800
 msgid "No items"
 msgstr "Ni predmetov"
 
@@ -1572,11 +1630,11 @@ msgstr "S to možnostjo onemogočite orodne namige gumbov v pultu in predmetov v
 
 #: ../plugins/launcher/launcher-dialog.glade.h:30
 msgid "Show _label instead of icon"
-msgstr "Pokaži _oznako namesto ikone"
+msgstr "Prikaži _oznako namesto ikone"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:31
 msgid "Show last _used item in panel"
-msgstr "Pokaži zadnje uporabljen predmet v pultu"
+msgstr "Pokaži zadnji _uporabljeni predmet v pultu"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:32
 msgid "Select this option to move the clicked menu item to the panel."
@@ -1626,7 +1684,7 @@ msgstr "Število _vrstic:"
 
 #: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Show workspace number"
-msgstr "Pokaži številko delovne površine"
+msgstr "Prikaži številko delovne površine"
 
 #: ../plugins/pager/pager-dialog.glade.h:9
 msgid "Switch workspaces using the mouse wheel"
@@ -1671,32 +1729,32 @@ msgstr "Skrči vsa razpeta okna in prikaži namizje"
 #: ../plugins/showdesktop/showdesktop.c:247
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
-msgstr "Pokaži namizje"
+msgstr "Prikaži namizje"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Hide all windows and show the desktop"
 msgstr "Skrij vsa okna in prikaži namizje"
 
-#: ../plugins/systray/systray.c:399
+#: ../plugins/systray/systray.c:405
 msgid "Unable to start the notification area"
 msgstr "Ni bilo mogoče zagnati obvestilnega področja"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:874
+#: ../plugins/systray/systray.c:905
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Najverjetneje je drug gradnik prevzel funkcijo obvestilnega področja. To področje ne bo uporabljeno."
 
-#: ../plugins/systray/systray.c:876
+#: ../plugins/systray/systray.c:907
 msgid "The notification area lost selection"
 msgstr "Obvestilno področje je izgubilo izbiro"
 
-#: ../plugins/systray/systray.c:1140
+#: ../plugins/systray/systray.c:1172
 msgid "Clear"
 msgstr "Počisti"
 
-#: ../plugins/systray/systray.c:1141
+#: ../plugins/systray/systray.c:1173
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Ali ste prepričani, da želite počistiti seznam znanih programov?"
 
@@ -1721,7 +1779,7 @@ msgstr "_Počisti znane programe"
 msgid "Known Applications"
 msgstr "Znani programi"
 
-#: ../plugins/systray/systray-manager.c:405
+#: ../plugins/systray/systray-manager.c:432
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Ni bilo mogoče pridobiti upravljalnika izbire za zaslon %d"
@@ -1773,15 +1831,15 @@ msgstr "Gumbi oken"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show button _labels"
-msgstr "Pokaži _oznake gumbov"
+msgstr "Prikaži _oznake gumbov"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show _flat buttons"
-msgstr "Pokaži ploske gumbe"
+msgstr "Prikaži ploske gumbe"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Show _handle"
-msgstr "Pokaži _ročico"
+msgstr "Prikaži _ročico"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Sorting _order:"
@@ -1813,7 +1871,7 @@ msgstr "Obnašanje"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Show windows from _all workspaces or viewports"
-msgstr "Pokaži okna z vseh delovnih površin"
+msgstr "Pokaži okna z vseh delovnih površin ali vidnih površin"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:27
 msgid "Show windows from all mo_nitors"
