@@ -14,15 +14,15 @@
 # Natavan Mirzayeva <mirzayevanatavan@gmail.com>, 2019
 # Necdet Yücel <necdetyucel@gmail.com>, 2013,2015,2017-2018
 # Recep, 2013
-# Serdar Sağlam <teknomobil@msn.com>, 2019
+# Serdar Sağlam <teknomobil@msn.com>, 2019-2020
 # Zafer Eren <zaferern@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-29 18:30+0100\n"
-"PO-Revision-Date: 2020-01-01 22:09+0000\n"
-"Last-Translator: Demiray Muhterem <mdemiray@msn.com>\n"
+"POT-Creation-Date: 2020-01-30 00:30+0100\n"
+"PO-Revision-Date: 2020-01-30 12:15+0000\n"
+"Last-Translator: Serdar Sağlam <teknomobil@msn.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/xfce/xfce4-panel/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -56,14 +56,15 @@ msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "'%s' ögesini silmek istediğinizden emin misiniz?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1110
-#: ../panel/panel-preferences-dialog.c:1324
-msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Panelden bir ögeyi kaldırdığınızda, tamamen kaybolur."
+msgid ""
+"Removing the item from the panel also means its configuration will be lost."
+msgstr "Ögenin panelden kaldırılması, yapılandırmasının kaybedileceği anlamına da gelir."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
-#: ../plugins/directorymenu/directorymenu.c:433
+#: ../plugins/directorymenu/directorymenu.c:473
+#: ../plugins/directorymenu/directorymenu.c:938
 msgid "_Cancel"
 msgstr "_İptal"
 
@@ -104,7 +105,7 @@ msgstr "Panel T_ercihleri..."
 msgid "Log _Out"
 msgstr "Çıkış _Yap"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:208
+#: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:207
 #: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2950
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
@@ -343,9 +344,9 @@ msgstr "Yeni Ögeler Ekle"
 msgid "Add new plugins to the panel"
 msgstr "Panele yeni eklentiler ekle"
 
-#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-item-dialog.c:211
 #: ../panel/panel-preferences-dialog.glade.h:11
-#: ../panel/panel-tic-tac-toe.c:123
+#: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:3
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:7
@@ -359,12 +360,12 @@ msgstr "Panele yeni eklentiler ekle"
 msgid "_Close"
 msgstr "_Kapat"
 
-#: ../panel/panel-item-dialog.c:230
+#: ../panel/panel-item-dialog.c:227
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "A_ra:"
 
-#: ../panel/panel-item-dialog.c:238
+#: ../panel/panel-item-dialog.c:235
 msgid "Enter search phrase here"
 msgstr "Aranacak kelimeyi buraya girin"
 
@@ -430,6 +431,10 @@ msgstr "Dahili isim: %s-%d\nPID: %d"
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Dahili isim: %s-%d"
+
+#: ../panel/panel-preferences-dialog.c:1324
+msgid "If you remove the item from the panel, it is permanently lost."
+msgstr "Panelden bir ögeyi kaldırdığınızda, tamamen kaybolur."
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
@@ -677,27 +682,27 @@ msgstr "Seçili ögenin 'hakkında' bilgisini göster"
 msgid "Ite_ms"
 msgstr "Öge_ler"
 
-#: ../panel/panel-tic-tac-toe.c:121
+#: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
 msgstr "_Yeni Oyun"
 
-#: ../panel/panel-tic-tac-toe.c:132
+#: ../panel/panel-tic-tac-toe.c:134
 msgid "_Level:"
 msgstr "_Seviye:"
 
-#: ../panel/panel-tic-tac-toe.c:138
+#: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
 msgstr "Acemi"
 
-#: ../panel/panel-tic-tac-toe.c:139
+#: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
 msgstr "Orta"
 
-#: ../panel/panel-tic-tac-toe.c:140
+#: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
 msgstr "Deneyimli"
 
-#: ../panel/panel-tic-tac-toe.c:141
+#: ../panel/panel-tic-tac-toe.c:143
 msgid "Expert"
 msgstr "Uzman"
 
@@ -947,7 +952,7 @@ msgstr "Menüde uygulamanın genel adını görmek için bu seçeneği seçin, m
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:17
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/systray/systray-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
@@ -985,12 +990,12 @@ msgid "Applications"
 msgstr "Uygulamalar"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:600
-#: ../plugins/directorymenu/directorymenu.c:431
+#: ../plugins/directorymenu/directorymenu.c:471
 msgid "Select An Icon"
 msgstr "Bir Simge Seç"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/directorymenu/directorymenu.c:434
+#: ../plugins/directorymenu/directorymenu.c:474
 msgid "_OK"
 msgstr "_Tamam"
 
@@ -1391,44 +1396,77 @@ msgstr "oniki"
 msgid "What time is it?"
 msgstr "Saat kaç?"
 
-#: ../plugins/directorymenu/directorymenu.c:271
+#: ../plugins/directorymenu/directorymenu.c:301
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Dizin  Menüsü"
 
-#: ../plugins/directorymenu/directorymenu.c:637
+#: ../plugins/directorymenu/directorymenu.c:689
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "\"%s\" uygulaması çalıştırılamadı"
 
-#: ../plugins/directorymenu/directorymenu.c:669
+#: ../plugins/directorymenu/directorymenu.c:721
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "\"%s\" için içerik sorgulama başarısız oldu"
 
-#: ../plugins/directorymenu/directorymenu.c:678
+#: ../plugins/directorymenu/directorymenu.c:730
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "\"%s\" için öntanımlı uygulama bulunamadı"
 
-#: ../plugins/directorymenu/directorymenu.c:694
+#: ../plugins/directorymenu/directorymenu.c:746
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "\"%s\" için öntanımlı uygulama çalıştırılamadı"
 
-#: ../plugins/directorymenu/directorymenu.c:792
+#: ../plugins/directorymenu/directorymenu.c:844
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr " \"%s\" kategorisi için seçilen uygulama çalıştırılamadı"
 
-#: ../plugins/directorymenu/directorymenu.c:867
+#: ../plugins/directorymenu/directorymenu.c:927
+msgid "Create New Folder"
+msgstr "Yeni Klasör Oluştur"
+
+#: ../plugins/directorymenu/directorymenu.c:932
+msgid "Create New Text Document"
+msgstr "Yeni Metin Belgesi Oluştur"
+
+#: ../plugins/directorymenu/directorymenu.c:939
+msgid "C_reate"
+msgstr "_Oluştur"
+
+#: ../plugins/directorymenu/directorymenu.c:940
+msgid "Create & _Open"
+msgstr "Oluştur & _Aç"
+
+#: ../plugins/directorymenu/directorymenu.c:954
+msgid "Enter the new name:"
+msgstr "Yeni ismi girin:"
+
+#: ../plugins/directorymenu/directorymenu.c:990
+#, c-format
+msgid "Failed to create folder: %s"
+msgstr "Klasör oluşturulamadı: %s"
+
+#: ../plugins/directorymenu/directorymenu.c:1075
 msgid "Open Folder"
 msgstr "Dizini Aç"
 
-#: ../plugins/directorymenu/directorymenu.c:884
+#: ../plugins/directorymenu/directorymenu.c:1092
 msgid "Open in Terminal"
 msgstr "Uçbirimde Aç"
+
+#: ../plugins/directorymenu/directorymenu.c:1109
+msgid "Create Folder..."
+msgstr "Klasör Oluştur..."
+
+#: ../plugins/directorymenu/directorymenu.c:1126
+msgid "Create Text Document..."
+msgstr "Metin Belgesi Oluştur..."
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
@@ -1442,30 +1480,42 @@ msgstr "Bir Dizin Seç"
 msgid "_Base Directory:"
 msgstr "_Temel Dizin:"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
-msgid "Show 'Open _Folder'"
-msgstr "'Açık _Dizini' Göster"
-
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
+msgid "Show 'New Text _Document'"
+msgstr "Göster 'Yeni Metin _Belgesi'"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+msgid "Show '_New Folder'"
+msgstr "Göster '_Yeni Klasör'"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
 msgid "Show 'Open in _Terminal'"
 msgstr "'_Terminalde Aç' öğesini göster"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
+msgid "Show '_Open _Folder'"
+msgstr "'_Açık _Klasörü' Göster"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
+msgid "Menu"
+msgstr "Menü"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:13
 msgid "Show _hidden files"
 msgstr "_Gizli dosyaları göster"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:14
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr "Bir dizindeki görünebilir olmasını istediğiniz dosyaların desenini yazın. Eğer birden fazla desen yazacaksanız, noktalı virgül ile ayırın.(ör. *.txt;*.doc)"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:15
 msgid "_File Pattern:"
 msgstr "_Dosya Örneği:"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:13
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:16
 #: ../plugins/tasklist/tasklist-dialog.glade.h:29
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
@@ -1690,26 +1740,26 @@ msgstr "Masaüstünü Göster"
 msgid "Hide all windows and show the desktop"
 msgstr "Tüm pencereleri gizle ve masaüstünü göster"
 
-#: ../plugins/systray/systray.c:399
+#: ../plugins/systray/systray.c:405
 msgid "Unable to start the notification area"
 msgstr "Bildirim alanı başlatılamadı"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:874
+#: ../plugins/systray/systray.c:905
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Bildirim alanının işlevini muhtemelen başka bir bileşen alacak. Bu alan kullanılmayacak."
 
-#: ../plugins/systray/systray.c:876
+#: ../plugins/systray/systray.c:907
 msgid "The notification area lost selection"
 msgstr "Bildirim alanı seçimi bulamıyor"
 
-#: ../plugins/systray/systray.c:1140
+#: ../plugins/systray/systray.c:1172
 msgid "Clear"
 msgstr "Temizle"
 
-#: ../plugins/systray/systray.c:1141
+#: ../plugins/systray/systray.c:1173
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Bilinen uygulama listesini temizlemek istediğinizden emin misiniz?"
 
@@ -1734,7 +1784,7 @@ msgstr "Bilinen Uygulamaları _Temizle"
 msgid "Known Applications"
 msgstr "Bilinen Uygulamalar"
 
-#: ../plugins/systray/systray-manager.c:405
+#: ../plugins/systray/systray-manager.c:432
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "%d ekranı için yönetim seçimi elde edilemedi"
