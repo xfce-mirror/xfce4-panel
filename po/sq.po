@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-05 00:30+0100\n"
-"PO-Revision-Date: 2020-01-27 11:42+0000\n"
+"POT-Creation-Date: 2020-01-30 00:30+0100\n"
+"PO-Revision-Date: 2020-01-30 11:13+0000\n"
 "Last-Translator: Besnik <besnik@programeshqip.org>\n"
 "Language-Team: Albanian (http://www.transifex.com/xfce/xfce4-panel/language/sq/)\n"
 "MIME-Version: 1.0\n"
@@ -47,9 +47,9 @@ msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Jeni i sigurt se doni të hiqet \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1110
-#: ../panel/panel-preferences-dialog.c:1324
-msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Nëse e hiqni elementin prej panelit, humbet përgjithnjë."
+msgid ""
+"Removing the item from the panel also means its configuration will be lost."
+msgstr "Heqja e elementit prej panelit do të thotë se do të humbë edhe formësimi për të."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
@@ -96,7 +96,7 @@ msgstr "_Parapëlqime Paneli…"
 msgid "Log _Out"
 msgstr "_Dilni"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:208
+#: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:207
 #: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2950
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
@@ -175,7 +175,7 @@ msgstr "Për përdorimin, shtypni '%s --help'."
 
 #: ../panel/main.c:294
 msgid "The Xfce development team. All rights reserved."
-msgstr "Ekipi zhvillues i Xfce-sët. Tërë të drejtat të rezervuara."
+msgstr "Ekipi i zhvillimit të Xfce-së. Tërë të drejtat të rezervuara."
 
 #: ../panel/main.c:295
 #, c-format
@@ -335,9 +335,9 @@ msgstr "Shto Elemente të Rinj"
 msgid "Add new plugins to the panel"
 msgstr "Shtoni te paneli shtojca të reja"
 
-#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-item-dialog.c:211
 #: ../panel/panel-preferences-dialog.glade.h:11
-#: ../panel/panel-tic-tac-toe.c:123
+#: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:3
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:7
@@ -351,12 +351,12 @@ msgstr "Shtoni te paneli shtojca të reja"
 msgid "_Close"
 msgstr "_Mbylle"
 
-#: ../panel/panel-item-dialog.c:230
+#: ../panel/panel-item-dialog.c:227
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "_Kërko:"
 
-#: ../panel/panel-item-dialog.c:238
+#: ../panel/panel-item-dialog.c:235
 msgid "Enter search phrase here"
 msgstr "Jepni këtu një togfjalësh kërkimi"
 
@@ -422,6 +422,10 @@ msgstr "Emër i brendshëm: %s-%d\nPID: %d"
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Emër i brendshëm: %s-%d"
+
+#: ../panel/panel-preferences-dialog.c:1324
+msgid "If you remove the item from the panel, it is permanently lost."
+msgstr "Nëse e hiqni elementin prej panelit, humbet përgjithnjë."
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
@@ -669,27 +673,27 @@ msgstr "Shfaq të dhëna rreth të elementit të tanishëm të përzgjedhur"
 msgid "Ite_ms"
 msgstr "_Elementë"
 
-#: ../panel/panel-tic-tac-toe.c:121
+#: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
 msgstr "Lojë e _Re"
 
-#: ../panel/panel-tic-tac-toe.c:132
+#: ../panel/panel-tic-tac-toe.c:134
 msgid "_Level:"
 msgstr "_Nivel:"
 
-#: ../panel/panel-tic-tac-toe.c:138
+#: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
 msgstr "Fillestar"
 
-#: ../panel/panel-tic-tac-toe.c:139
+#: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
 msgstr "Mesatar"
 
-#: ../panel/panel-tic-tac-toe.c:140
+#: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
 msgstr "I sprovuar"
 
-#: ../panel/panel-tic-tac-toe.c:141
+#: ../panel/panel-tic-tac-toe.c:143
 msgid "Expert"
 msgstr "I regjur"
 
@@ -1727,26 +1731,26 @@ msgstr "Shfaq Desktop"
 msgid "Hide all windows and show the desktop"
 msgstr "Fshih tërë dritaret dhe shfaq desktopin"
 
-#: ../plugins/systray/systray.c:399
+#: ../plugins/systray/systray.c:405
 msgid "Unable to start the notification area"
 msgstr "S’arrihet të niset zona e njoftimeve"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:874
+#: ../plugins/systray/systray.c:905
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Ka shumë mundësi që një tjetër widget të ketë marrë funksionin e një zone njoftimesh. Kjo zonë do të jetë e papërdorur."
 
-#: ../plugins/systray/systray.c:876
+#: ../plugins/systray/systray.c:907
 msgid "The notification area lost selection"
 msgstr "Zona e njoftimeve humbi përzgjedhjen"
 
-#: ../plugins/systray/systray.c:1140
+#: ../plugins/systray/systray.c:1172
 msgid "Clear"
 msgstr "Spastroje"
 
-#: ../plugins/systray/systray.c:1141
+#: ../plugins/systray/systray.c:1173
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Jeni i sigurt se doni të spastrohet lista e zbatimeve të njohura?"
 
@@ -1771,7 +1775,7 @@ msgstr "_Spastro Aplikacione të Njohur"
 msgid "Known Applications"
 msgstr "Aplikacione të Njohur"
 
-#: ../plugins/systray/systray-manager.c:405
+#: ../plugins/systray/systray-manager.c:432
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Dështoi pasja e përzgjedhjes së administratorit për skenën %d"
