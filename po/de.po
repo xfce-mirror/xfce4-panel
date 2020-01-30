@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-05 00:30+0100\n"
-"PO-Revision-Date: 2020-01-05 23:12+0000\n"
+"POT-Creation-Date: 2020-01-30 00:30+0100\n"
+"PO-Revision-Date: 2020-01-30 23:30+0000\n"
 "Last-Translator: Andreas Eitel <github-aneitel@online.de>\n"
 "Language-Team: German (http://www.transifex.com/xfce/xfce4-panel/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -53,9 +53,9 @@ msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Soll »%s« wirklich entfernt werden?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1110
-#: ../panel/panel-preferences-dialog.c:1324
-msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Wenn Sie dieses Element von der Leiste entfernen, ist es dauerhaft verloren."
+msgid ""
+"Removing the item from the panel also means its configuration will be lost."
+msgstr "Wenn Sie das Element aus der Leiste entfernen, geht auch seine Konfiguration verloren."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
@@ -102,7 +102,7 @@ msgstr "_Leisteneinstellungen …"
 msgid "Log _Out"
 msgstr "_Abmelden"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:208
+#: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:207
 #: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2950
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
@@ -341,9 +341,9 @@ msgstr "Neue Elemente hinzufügen"
 msgid "Add new plugins to the panel"
 msgstr "Neue Erweiterungen zur Leiste hinzufügen"
 
-#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-item-dialog.c:211
 #: ../panel/panel-preferences-dialog.glade.h:11
-#: ../panel/panel-tic-tac-toe.c:123
+#: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:3
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:7
@@ -357,12 +357,12 @@ msgstr "Neue Erweiterungen zur Leiste hinzufügen"
 msgid "_Close"
 msgstr "_Schließen"
 
-#: ../panel/panel-item-dialog.c:230
+#: ../panel/panel-item-dialog.c:227
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "_Suche:"
 
-#: ../panel/panel-item-dialog.c:238
+#: ../panel/panel-item-dialog.c:235
 msgid "Enter search phrase here"
 msgstr "Suchbegriff hier eingeben"
 
@@ -428,6 +428,10 @@ msgstr "Interner Name: %s-%d\nProzesskennung: %d"
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Interner Name: %s-%d"
+
+#: ../panel/panel-preferences-dialog.c:1324
+msgid "If you remove the item from the panel, it is permanently lost."
+msgstr "Wenn Sie dieses Element von der Leiste entfernen, ist es dauerhaft verloren."
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
@@ -675,27 +679,27 @@ msgstr "Informationen zum ausgewähltes Objekt anzeigen"
 msgid "Ite_ms"
 msgstr "_Objekte"
 
-#: ../panel/panel-tic-tac-toe.c:121
+#: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
 msgstr "_Neues Spiel"
 
-#: ../panel/panel-tic-tac-toe.c:132
+#: ../panel/panel-tic-tac-toe.c:134
 msgid "_Level:"
 msgstr "_Ebene:"
 
-#: ../panel/panel-tic-tac-toe.c:138
+#: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
 msgstr "Anfänger"
 
-#: ../panel/panel-tic-tac-toe.c:139
+#: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
 msgstr "Erfahren"
 
-#: ../panel/panel-tic-tac-toe.c:140
+#: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
 msgstr "Profi"
 
-#: ../panel/panel-tic-tac-toe.c:141
+#: ../panel/panel-tic-tac-toe.c:143
 msgid "Expert"
 msgstr "Experte"
 
@@ -1733,26 +1737,26 @@ msgstr "Schreibtisch anzeigen"
 msgid "Hide all windows and show the desktop"
 msgstr "Fenster verstecken und Schreibtisch anzeigen"
 
-#: ../plugins/systray/systray.c:399
+#: ../plugins/systray/systray.c:405
 msgid "Unable to start the notification area"
 msgstr "Benachrichtigungsfläche kann nicht gestartet werden"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:874
+#: ../plugins/systray/systray.c:905
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Wahrscheinlich hat ein anderes Programm die Funktion der Benachrichtigungsfläche übernommen. Diese Fläche wird nicht verwendet."
 
-#: ../plugins/systray/systray.c:876
+#: ../plugins/systray/systray.c:907
 msgid "The notification area lost selection"
 msgstr "Die Benachrichtigungsfläche hat die Auswahl verloren"
 
-#: ../plugins/systray/systray.c:1140
+#: ../plugins/systray/systray.c:1172
 msgid "Clear"
 msgstr "Leeren"
 
-#: ../plugins/systray/systray.c:1141
+#: ../plugins/systray/systray.c:1173
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Sind Sie sicher, dass Sie die Liste der bekannten Anwendungen löschen wollen?"
 
@@ -1777,7 +1781,7 @@ msgstr "_Liste bekannter Anwendungen leeren"
 msgid "Known Applications"
 msgstr "Bekannte Anwendungen"
 
-#: ../plugins/systray/systray-manager.c:405
+#: ../plugins/systray/systray-manager.c:432
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Verwaltungsauswahl für den Bildschirm %d konnte nicht erhalten werden."
