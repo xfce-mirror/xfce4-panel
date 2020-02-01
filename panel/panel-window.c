@@ -2662,9 +2662,9 @@ panel_window_set_autohide_behavior (PanelWindow *window,
   /* remember the new behavior */
   window->autohide_behavior = behavior;
 
-    /* create an autohide window only if we are autohiding at all */
-    if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
-      {
+  /* create an autohide window only if we are autohiding at all */
+  if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
+    {
       /* create an authohide window; doing this only when it doesn't exist
        * yet allows us to transition between "always autohide" and "intelligently
        * autohide" without recreating the window */
