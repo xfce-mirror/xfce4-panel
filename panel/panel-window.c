@@ -2729,8 +2729,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
           /* start intelligent autohide by making the panel visible initially */
           if (window->autohide_state != AUTOHIDE_VISIBLE)
             {
-              panel_window_autohide_queue (window,
-                  window->autohide_block == 0 ? AUTOHIDE_POPUP : AUTOHIDE_BLOCKED);
+              panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
             }
         }
     }
