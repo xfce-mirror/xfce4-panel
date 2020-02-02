@@ -157,6 +157,8 @@ static void         panel_window_active_window_state_changed          (WnckWindo
                                                                        WnckWindowState   changed,
                                                                        WnckWindowState   new,
                                                                        PanelWindow      *window);
+static void         panel_window_autohide_timeout_destroy             (gpointer          user_data);
+static void         panel_window_autohide_slideout_timeout_destroy    (gpointer          user_data);
 static void         panel_window_autohide_queue                       (PanelWindow      *window,
                                                                        AutohideState     new_state);
 static gboolean     panel_window_autohide_slideout                    (gpointer          data);
@@ -964,8 +966,11 @@ panel_window_enter_notify_event (GtkWidget        *widget,
       if (window->autohide_timeout_id != 0)
         g_source_remove (window->autohide_timeout_id);
 
-      if (window->autohide_fade_id != 0)
+      if (window->autohide_fade_id != 0) {
         g_source_remove (window->autohide_fade_id);
+        /* we were in a slideout animation so restore the original position of the window */
+        panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
+      }
 
       /* update autohide status */
       if (window->autohide_state == AUTOHIDE_POPDOWN)
@@ -1465,12 +1470,11 @@ panel_window_size_allocate (GtkWidget     *widget,
           else
             fade_change_timeout = FADE_TIME / window->alloc.width;
 
-          /* FIXME: make sure the transition can be properly canceled, e.g. when
-             the autohide block mechanism of showing a menu ends, the hovering
-             cursor results in a panel that jumps back and forth */
-          window->autohide_fade_id = g_timeout_add (fade_change_timeout,
-                                                    panel_window_autohide_slideout,
-                                                    window);
+          /* start the autohide animation timer */
+          window->autohide_fade_id =
+              g_timeout_add_full (G_PRIORITY_LOW, fade_change_timeout,
+                                  panel_window_autohide_slideout, window,
+                                  panel_window_autohide_slideout_timeout_destroy);
         }
     }
   else
@@ -2459,6 +2463,13 @@ static void
 panel_window_autohide_timeout_destroy (gpointer user_data)
 {
   PANEL_WINDOW (user_data)->autohide_timeout_id = 0;
+}
+
+
+
+static void
+panel_window_autohide_slideout_timeout_destroy (gpointer user_data)
+{
   PANEL_WINDOW (user_data)->autohide_fade_id = 0;
 }
 
@@ -2580,6 +2591,9 @@ panel_window_autohide_slideout (gpointer data)
   PanelBorders  borders;
   gint          x, y, w, h;
 
+  if (window->autohide_fade_id == 0)
+    return FALSE;
+
   gtk_window_get_position (GTK_WINDOW (window), &x, &y);
   w = gdk_screen_get_width (window->screen);
   h = gdk_screen_get_height (window->screen);
@@ -2592,19 +2606,14 @@ panel_window_autohide_slideout (gpointer data)
           y--;
 
           if (y < (0 - window->alloc.height - 1))
-            {
-              window->autohide_fade_id = 0;
-              return FALSE;
-            }
+            return FALSE;
         }
       else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_TOP))
         {
           y++;
+
           if (y > (h + window->alloc.height + 1))
-            {
-              window->autohide_fade_id = 0;
-              return FALSE;
-            }
+            return FALSE;
         }
       /* if the panel has no borders, we don't animate */
       else
@@ -2615,20 +2624,16 @@ panel_window_autohide_slideout (gpointer data)
       if (PANEL_HAS_FLAG (borders, PANEL_BORDER_RIGHT))
         {
           x--;
+
           if (x < (0 - window->alloc.width + 1))
-            {
-              window->autohide_fade_id = 0;
-              return FALSE;
-            }
+            return FALSE;
         }
       else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_LEFT))
         {
           x++;
+
           if (x > (w + window->alloc.width + 1))
-            {
-              window->autohide_fade_id = 0;
-              return FALSE;
-            }
+            return FALSE;
         }
       /* if the panel has no borders, we don't animate */
       else
