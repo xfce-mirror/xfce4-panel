@@ -62,6 +62,7 @@
 #define DEFAULT_POPUP_DELAY   (225)
 #define DEFAULT_POPDOWN_DELAY (350)
 #define DEFAULT_AUTOHIDE_SIZE (3)
+#define DEFAULT_POPDOWN_SPEED (25)
 #define HANDLE_SPACING        (4)
 #define HANDLE_DOTS           (2)
 #define HANDLE_PIXELS         (2)
@@ -69,7 +70,6 @@
 #define HANDLE_SIZE           (HANDLE_DOTS * (HANDLE_PIXELS + \
                                HANDLE_PIXEL_SPACE) - HANDLE_PIXEL_SPACE)
 #define HANDLE_SIZE_TOTAL     (2 * HANDLE_SPACING + HANDLE_SIZE)
-#define FADE_TIME              200
 #define IS_HORIZONTAL(window) ((window)->mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 
 
@@ -198,6 +198,7 @@ enum
   PROP_LENGTH_ADJUST,
   PROP_POSITION_LOCKED,
   PROP_AUTOHIDE_BEHAVIOR,
+  PROP_POPDOWN_SPEED,
   PROP_SPAN_MONITORS,
   PROP_OUTPUT_NAME,
   PROP_POSITION,
@@ -346,6 +347,7 @@ struct _PanelWindow
   gint                 autohide_block;
   gint                 autohide_grab_block;
   gint                 autohide_size;
+  gint                 popdown_speed;
 
   /* popup/down delay from gtk style */
   gint                 popup_delay;
@@ -478,6 +480,12 @@ panel_window_class_init (PanelWindowClass *klass)
                                                       G_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_POPDOWN_SPEED,
+                                   g_param_spec_uint ("popdown-speed", NULL, NULL,
+                                                      0, G_MAXINT, 25,
+                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_SPAN_MONITORS,
                                    g_param_spec_boolean ("span-monitors", NULL, NULL,
                                                          FALSE,
@@ -565,6 +573,7 @@ panel_window_init (PanelWindow *window)
   window->autohide_size = DEFAULT_AUTOHIDE_SIZE;
   window->popup_delay = DEFAULT_POPUP_DELAY;
   window->popdown_delay = DEFAULT_POPDOWN_DELAY;
+  window->popdown_speed = DEFAULT_POPDOWN_SPEED;
   window->base_x = -1;
   window->base_y = -1;
   window->grab_time = 0;
@@ -635,6 +644,10 @@ panel_window_get_property (GObject    *object,
 
     case PROP_AUTOHIDE_BEHAVIOR:
       g_value_set_uint (value, window->autohide_behavior);
+      break;
+
+    case PROP_POPDOWN_SPEED:
+      g_value_set_uint (value, window->popdown_speed);
       break;
 
     case PROP_SPAN_MONITORS:
@@ -783,6 +796,15 @@ panel_window_set_property (GObject      *object,
     case PROP_AUTOHIDE_BEHAVIOR:
       panel_window_set_autohide_behavior (window, MIN (g_value_get_uint (value),
                                                        AUTOHIDE_BEHAVIOR_ALWAYS));
+      break;
+
+
+    case PROP_POPDOWN_SPEED:
+      val_uint = g_value_get_uint (value);
+      if (window->popdown_speed != val_uint)
+        {
+          window->popdown_speed = val_uint;
+        }
       break;
 
     case PROP_SPAN_MONITORS:
@@ -1443,7 +1465,7 @@ panel_window_size_allocate (GtkWidget     *widget,
       panel_base_window_move_resize (PANEL_BASE_WINDOW (window->autohide_window),
                                      x, y, w, h);
 
-      /* slide out the panel window in FADE_TIME, but ignore panels that are floating, i.e. not
+      /* slide out the panel window with popdown_speed, but ignore panels that are floating, i.e. not
          attached to a GdkScreen border (i.e. including panels which are on a monitor border, but
          at are at the same time between two monitors) */
       if (IS_HORIZONTAL (window)
@@ -1459,16 +1481,14 @@ panel_window_size_allocate (GtkWidget     *widget,
           floating = FALSE;
         }
 
-      if (floating)
+      if (floating
+          || window->popdown_speed == 0)
         {
           gtk_window_move (GTK_WINDOW (window), window->alloc.x, window->alloc.y);
         }
       else
         {
-          if (IS_HORIZONTAL (window))
-            fade_change_timeout = FADE_TIME / window->alloc.height;
-          else
-            fade_change_timeout = FADE_TIME / window->alloc.width;
+          fade_change_timeout = window->popdown_speed;
 
           /* start the autohide animation timer */
           window->autohide_fade_id =
