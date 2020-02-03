@@ -61,7 +61,7 @@
 #define SET_OLD_WM_STRUTS     (FALSE)
 #define DEFAULT_POPUP_DELAY   (225)
 #define DEFAULT_POPDOWN_DELAY (350)
-#define DEFAULT_ATUOHIDE_SIZE (3)
+#define DEFAULT_AUTOHIDE_SIZE (3)
 #define HANDLE_SPACING        (4)
 #define HANDLE_DOTS           (2)
 #define HANDLE_PIXELS         (2)
@@ -522,7 +522,7 @@ panel_window_class_init (PanelWindowClass *klass)
                                                              NULL,
                                                              "Size of hidden panel",
                                                              1, G_MAXINT,
-                                                             DEFAULT_ATUOHIDE_SIZE,
+                                                             DEFAULT_AUTOHIDE_SIZE,
                                                              G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
   /* initialize the atoms */
@@ -562,7 +562,7 @@ panel_window_init (PanelWindow *window)
   window->autohide_fade_id = 0;
   window->autohide_block = 0;
   window->autohide_grab_block = 0;
-  window->autohide_size = DEFAULT_ATUOHIDE_SIZE;
+  window->autohide_size = DEFAULT_AUTOHIDE_SIZE;
   window->popup_delay = DEFAULT_POPUP_DELAY;
   window->popdown_delay = DEFAULT_POPDOWN_DELAY;
   window->base_x = -1;
