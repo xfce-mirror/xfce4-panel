@@ -205,7 +205,6 @@ panel_base_window_init (PanelBaseWindow *window)
   window->background_rgba = NULL;
   window->enter_opacity = 1.00;
   window->leave_opacity = 1.00;
-  window->leave_opacity_old = 1.00;
 
   window->priv->css_provider = gtk_css_provider_new ();
   window->priv->borders = PANEL_BORDER_NONE;
@@ -523,8 +522,6 @@ panel_base_window_composited_changed (GdkScreen *screen,
 
   if (window->is_composited)
     {
-      if (window->leave_opacity != window->leave_opacity_old)
-        window->leave_opacity = window->leave_opacity_old;
       gtk_widget_set_opacity (GTK_WIDGET (widget), window->leave_opacity);
       panel_base_window_set_plugin_data (window,
                                          panel_base_window_set_plugin_leave_opacity);
@@ -532,11 +529,8 @@ panel_base_window_composited_changed (GdkScreen *screen,
     }
   else
     {
-      /* make sure that the leave opacity is always disabled without compositing, but
-         remember the original value so we can reset it if compositing gets re-enabled */
-      window->leave_opacity_old = window->leave_opacity;
-      window->leave_opacity = 1.0;
-      gtk_widget_set_opacity (GTK_WIDGET (widget), window->leave_opacity);
+      /* make sure to always disable the leave opacity without compositing */
+      gtk_widget_set_opacity (GTK_WIDGET (widget), 1.0);
       panel_base_window_set_plugin_data (window,
                                          panel_base_window_set_plugin_leave_opacity);
     }
@@ -755,7 +749,10 @@ panel_base_window_set_plugin_leave_opacity (GtkWidget *widget,
 {
   PanelBaseWindow *window = PANEL_BASE_WINDOW (user_data);
 
-  panel_base_window_set_plugin_opacity (widget, user_data, window->leave_opacity);
+  if (window->is_composited)
+    panel_base_window_set_plugin_opacity (widget, user_data, window->leave_opacity);
+  else
+    panel_base_window_set_plugin_opacity (widget, user_data, 1.0);
 }
 
 

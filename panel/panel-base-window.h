@@ -74,7 +74,6 @@ struct _PanelBaseWindow
   /* transparency settings */
   gdouble                  enter_opacity;
   gdouble                  leave_opacity;
-  gdouble                  leave_opacity_old;
 };
 
 GType        panel_base_window_get_type                    (void) G_GNUC_CONST;
