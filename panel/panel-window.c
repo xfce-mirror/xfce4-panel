@@ -330,6 +330,7 @@ struct _PanelWindow
   XfcePanelPluginMode  mode;
   guint                nrows;
   SnapPosition         snap_position;
+  gboolean             floating;
   guint                span_monitors : 1;
   gchar               *output_name;
 
@@ -348,6 +349,7 @@ struct _PanelWindow
   gint                 autohide_grab_block;
   gint                 autohide_size;
   gint                 popdown_speed;
+  gint                 popdown_progress;
 
   /* popup/down delay from gtk style */
   gint                 popup_delay;
@@ -562,6 +564,7 @@ panel_window_init (PanelWindow *window)
   window->length = 0.10;
   window->length_adjust = TRUE;
   window->snap_position = SNAP_POSITION_NONE;
+  window->floating = TRUE;
   window->span_monitors = FALSE;
   window->position_locked = FALSE;
   window->autohide_behavior = AUTOHIDE_BEHAVIOR_NEVER;
@@ -574,6 +577,7 @@ panel_window_init (PanelWindow *window)
   window->popup_delay = DEFAULT_POPUP_DELAY;
   window->popdown_delay = DEFAULT_POPDOWN_DELAY;
   window->popdown_speed = DEFAULT_POPDOWN_SPEED;
+  window->popdown_progress = 0;
   window->base_x = -1;
   window->base_y = -1;
   window->grab_time = 0;
@@ -1417,7 +1421,6 @@ panel_window_size_allocate (GtkWidget     *widget,
   gint           w, h, x, y;
   PanelBorders   borders;
   GtkWidget     *child;
-  gboolean       floating = TRUE;
 
   gtk_widget_set_allocation (widget, alloc);
   window->alloc = *alloc;
@@ -1425,8 +1428,6 @@ panel_window_size_allocate (GtkWidget     *widget,
   if (G_UNLIKELY (window->autohide_state == AUTOHIDE_HIDDEN
                   || window->autohide_state == AUTOHIDE_POPUP))
     {
-      guint fade_change_timeout;
-
       /* window is invisible */
       window->alloc.x = window->alloc.y = -9999;
 
@@ -1468,37 +1469,34 @@ panel_window_size_allocate (GtkWidget     *widget,
       /* slide out the panel window with popdown_speed, but ignore panels that are floating, i.e. not
          attached to a GdkScreen border (i.e. including panels which are on a monitor border, but
          at are at the same time between two monitors) */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       if (IS_HORIZONTAL (window)
           && (((y + h) == gdk_screen_get_height (window->screen))
                || (y == 0)))
         {
-          floating = FALSE;
+          window->popdown_progress = window->alloc.height;
+          window->floating = FALSE;
         }
       else if (!IS_HORIZONTAL (window)
                && (((x + w) == gdk_screen_get_width (window->screen))
                     || (x == 0)))
         {
-          floating = FALSE;
+          window->popdown_progress = window->alloc.width;
+          window->floating = FALSE;
         }
+G_GNUC_END_IGNORE_DEPRECATIONS
 
-      if (floating
+      /* make the panel visible without animation */
+      if (window->floating
           || window->popdown_speed == 0)
-        {
-          gtk_window_move (GTK_WINDOW (window), window->alloc.x, window->alloc.y);
-        }
-      else
-        {
-          fade_change_timeout = window->popdown_speed;
-
-          /* start the autohide animation timer */
-          window->autohide_fade_id =
-              g_timeout_add_full (G_PRIORITY_LOW, fade_change_timeout,
-                                  panel_window_autohide_slideout, window,
-                                  panel_window_autohide_slideout_timeout_destroy);
-        }
+        gtk_window_move (GTK_WINDOW (window), window->alloc.x, window->alloc.y);
     }
   else
     {
+      /* stop a running autohide animation */
+      if (window->autohide_fade_id != 0)
+        g_source_remove (window->autohide_fade_id);
+
       /* update the allocation */
       panel_window_size_allocate_set_xy (window, alloc->width,
           alloc->height, &window->alloc.x, &window->alloc.y);
@@ -1514,7 +1512,6 @@ panel_window_size_allocate (GtkWidget     *widget,
                                        -9999, -9999, -1, -1);
 
       gtk_window_move (GTK_WINDOW (window), window->alloc.x, window->alloc.y);
-      window->autohide_fade_id = 0;
     }
 
   child = gtk_bin_get_child (GTK_BIN (widget));
@@ -2474,6 +2471,14 @@ panel_window_autohide_timeout (gpointer user_data)
   /* move the windows around */
   gtk_widget_queue_resize (GTK_WIDGET (window));
 
+  /* check whether the panel should be animated on autohide */
+  if (window->floating == FALSE
+      || window->popdown_speed > 0)
+    window->autohide_fade_id =
+            g_timeout_add_full (G_PRIORITY_LOW, 25,
+                                panel_window_autohide_slideout, window,
+                                panel_window_autohide_slideout_timeout_destroy);
+
   return FALSE;
 }
 
@@ -2604,65 +2609,83 @@ panel_window_autohide_event (GtkWidget        *widget,
 
 
 
+/* Cubic ease out function based on Robert Penner's Easing Functions,
+   which are licensed under MIT and BSD license
+   http://robertpenner.com/easing/ */
+static guint
+panel_window_cubic_ease_out (guint p)
+{
+  guint f = (p - 1);
+  return f * f * f + 1;
+}
+
+
+
 static gboolean
 panel_window_autohide_slideout (gpointer data)
 {
   PanelWindow  *window = PANEL_WINDOW (data);
   PanelBorders  borders;
-  gint          x, y, w, h;
+  gint          x, y, w, h, progress;
+  gboolean      ret = TRUE;
 
   if (window->autohide_fade_id == 0)
     return FALSE;
 
   gtk_window_get_position (GTK_WINDOW (window), &x, &y);
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   w = gdk_screen_get_width (window->screen);
   h = gdk_screen_get_height (window->screen);
+G_GNUC_END_IGNORE_DEPRECATIONS
   borders = panel_base_window_get_borders (PANEL_BASE_WINDOW (window));
 
   if (IS_HORIZONTAL (window))
     {
+      progress = panel_window_cubic_ease_out (window->alloc.height - window->popdown_progress) / window->popdown_speed;
       if (PANEL_HAS_FLAG (borders, PANEL_BORDER_BOTTOM))
         {
-          y--;
+          y -= progress;
 
-          if (y < (0 - window->alloc.height - 1))
-            return FALSE;
+          if (y < 0 - window->alloc.height)
+            ret = FALSE;
         }
       else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_TOP))
         {
-          y++;
+          y += progress;
 
-          if (y > (h + window->alloc.height + 1))
-            return FALSE;
+          if (y > h + window->alloc.height)
+            ret = FALSE;
         }
       /* if the panel has no borders, we don't animate */
       else
-        return FALSE;
+        ret = FALSE;
     }
   else
     {
+      progress = panel_window_cubic_ease_out (window->alloc.width - window->popdown_progress) / window->popdown_speed;
       if (PANEL_HAS_FLAG (borders, PANEL_BORDER_RIGHT))
         {
-          x--;
+          x -= progress;
 
-          if (x < (0 - window->alloc.width + 1))
-            return FALSE;
+          if (x < 0 - window->alloc.width)
+            ret = FALSE;
         }
       else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_LEFT))
         {
-          x++;
+          x += progress;
 
-          if (x > (w + window->alloc.width + 1))
-            return FALSE;
+          if (x > (w + window->alloc.width))
+            ret = FALSE;
         }
       /* if the panel has no borders, we don't animate */
       else
-        return FALSE;
+        ret = FALSE;
     }
 
+  window->popdown_progress--;
   gtk_window_move (GTK_WINDOW (window), x, y);
 
-  return TRUE;
+  return ret;
 }
 
 
