@@ -158,10 +158,10 @@ static void         panel_window_active_window_state_changed          (WnckWindo
                                                                        WnckWindowState   new,
                                                                        PanelWindow      *window);
 static void         panel_window_autohide_timeout_destroy             (gpointer          user_data);
-static void         panel_window_autohide_slideout_timeout_destroy    (gpointer          user_data);
+static void         panel_window_autohide_ease_out_timeout_destroy    (gpointer          user_data);
 static void         panel_window_autohide_queue                       (PanelWindow      *window,
                                                                        AutohideState     new_state);
-static gboolean     panel_window_autohide_slideout                    (gpointer          data);
+static gboolean     panel_window_autohide_ease_out                    (gpointer          data);
 static void         panel_window_set_autohide_behavior                (PanelWindow      *window,
                                                                        AutohideBehavior  behavior);
 static void         panel_window_update_autohide_window               (PanelWindow      *window,
@@ -344,7 +344,7 @@ struct _PanelWindow
   AutohideBehavior     autohide_behavior;
   AutohideState        autohide_state;
   guint                autohide_timeout_id;
-  guint                autohide_fade_id;
+  guint                autohide_ease_out_id;
   gint                 autohide_block;
   gint                 autohide_grab_block;
   gint                 autohide_size;
@@ -570,7 +570,7 @@ panel_window_init (PanelWindow *window)
   window->autohide_behavior = AUTOHIDE_BEHAVIOR_NEVER;
   window->autohide_state = AUTOHIDE_DISABLED;
   window->autohide_timeout_id = 0;
-  window->autohide_fade_id = 0;
+  window->autohide_ease_out_id = 0;
   window->autohide_block = 0;
   window->autohide_grab_block = 0;
   window->autohide_size = DEFAULT_AUTOHIDE_SIZE;
@@ -881,8 +881,8 @@ panel_window_finalize (GObject *object)
   if (G_UNLIKELY (window->autohide_timeout_id != 0))
     g_source_remove (window->autohide_timeout_id);
 
-  if (G_UNLIKELY (window->autohide_fade_id != 0))
-    g_source_remove (window->autohide_fade_id);
+  if (G_UNLIKELY (window->autohide_ease_out_id != 0))
+    g_source_remove (window->autohide_ease_out_id);
 
   /* destroy the autohide window */
   if (window->autohide_window != NULL)
@@ -992,9 +992,9 @@ panel_window_enter_notify_event (GtkWidget        *widget,
       if (window->autohide_timeout_id != 0)
         g_source_remove (window->autohide_timeout_id);
 
-      if (window->autohide_fade_id != 0) {
-        g_source_remove (window->autohide_fade_id);
-        /* we were in a slideout animation so restore the original position of the window */
+      if (window->autohide_ease_out_id != 0) {
+        g_source_remove (window->autohide_ease_out_id);
+        /* we were in a ease_out animation so restore the original position of the window */
         panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
       }
 
@@ -1494,8 +1494,8 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   else
     {
       /* stop a running autohide animation */
-      if (window->autohide_fade_id != 0)
-        g_source_remove (window->autohide_fade_id);
+      if (window->autohide_ease_out_id != 0)
+        g_source_remove (window->autohide_ease_out_id);
 
       /* update the allocation */
       panel_window_size_allocate_set_xy (window, alloc->width,
@@ -2474,10 +2474,10 @@ panel_window_autohide_timeout (gpointer user_data)
   /* check whether the panel should be animated on autohide */
   if (window->floating == FALSE
       || window->popdown_speed > 0)
-    window->autohide_fade_id =
+    window->autohide_ease_out_id =
             g_timeout_add_full (G_PRIORITY_LOW, 25,
-                                panel_window_autohide_slideout, window,
-                                panel_window_autohide_slideout_timeout_destroy);
+                                panel_window_autohide_ease_out, window,
+                                panel_window_autohide_ease_out_timeout_destroy);
 
   return FALSE;
 }
@@ -2492,10 +2492,91 @@ panel_window_autohide_timeout_destroy (gpointer user_data)
 
 
 
-static void
-panel_window_autohide_slideout_timeout_destroy (gpointer user_data)
+/* Cubic ease out function based on Robert Penner's Easing Functions,
+   which are licensed under MIT and BSD license
+   http://robertpenner.com/easing/ */
+static guint
+panel_window_cubic_ease_out (guint p)
 {
-  PANEL_WINDOW (user_data)->autohide_fade_id = 0;
+  guint f = (p - 1);
+  return f * f * f + 1;
+}
+
+
+
+static gboolean
+panel_window_autohide_ease_out (gpointer data)
+{
+  PanelWindow  *window = PANEL_WINDOW (data);
+  PanelBorders  borders;
+  gint          x, y, w, h, progress;
+  gboolean      ret = TRUE;
+
+  if (window->autohide_ease_out_id == 0)
+    return FALSE;
+
+  gtk_window_get_position (GTK_WINDOW (window), &x, &y);
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+  w = gdk_screen_get_width (window->screen);
+  h = gdk_screen_get_height (window->screen);
+G_GNUC_END_IGNORE_DEPRECATIONS
+  borders = panel_base_window_get_borders (PANEL_BASE_WINDOW (window));
+
+  if (IS_HORIZONTAL (window))
+    {
+      progress = panel_window_cubic_ease_out (window->alloc.height - window->popdown_progress) / window->popdown_speed;
+      if (PANEL_HAS_FLAG (borders, PANEL_BORDER_BOTTOM))
+        {
+          y -= progress;
+
+          if (y < 0 - window->alloc.height)
+            ret = FALSE;
+        }
+      else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_TOP))
+        {
+          y += progress;
+
+          if (y > h + window->alloc.height)
+            ret = FALSE;
+        }
+      /* if the panel has no borders, we don't animate */
+      else
+        ret = FALSE;
+    }
+  else
+    {
+      progress = panel_window_cubic_ease_out (window->alloc.width - window->popdown_progress) / window->popdown_speed;
+      if (PANEL_HAS_FLAG (borders, PANEL_BORDER_RIGHT))
+        {
+          x -= progress;
+
+          if (x < 0 - window->alloc.width)
+            ret = FALSE;
+        }
+      else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_LEFT))
+        {
+          x += progress;
+
+          if (x > (w + window->alloc.width))
+            ret = FALSE;
+        }
+      /* if the panel has no borders, we don't animate */
+      else
+        ret = FALSE;
+    }
+
+  window->popdown_progress--;
+  gtk_window_move (GTK_WINDOW (window), x, y);
+
+  return ret;
+}
+
+
+
+static void
+panel_window_autohide_ease_out_timeout_destroy (gpointer user_data)
+{
+  PANEL_WINDOW (user_data)->autohide_ease_out_id = 0;
 }
 
 
@@ -2512,8 +2593,8 @@ panel_window_autohide_queue (PanelWindow   *window,
   if (window->autohide_timeout_id != 0)
     g_source_remove (window->autohide_timeout_id);
 
-  if (window->autohide_fade_id != 0)
-    g_source_remove (window->autohide_fade_id);
+  if (window->autohide_ease_out_id != 0)
+    g_source_remove (window->autohide_ease_out_id);
 
   /* set new autohide state */
   window->autohide_state = new_state;
@@ -2581,8 +2662,8 @@ panel_window_autohide_drag_leave (GtkWidget      *widget,
   if (window->autohide_timeout_id != 0)
     g_source_remove (window->autohide_timeout_id);
 
-  if (window->autohide_fade_id != 0)
-    g_source_remove (window->autohide_fade_id);
+  if (window->autohide_ease_out_id != 0)
+    g_source_remove (window->autohide_ease_out_id);
 
   /* update the status */
   if (window->autohide_state == AUTOHIDE_POPUP)
@@ -2605,87 +2686,6 @@ panel_window_autohide_event (GtkWidget        *widget,
     panel_window_autohide_drag_leave (widget, NULL, 0, window);
 
   return FALSE;
-}
-
-
-
-/* Cubic ease out function based on Robert Penner's Easing Functions,
-   which are licensed under MIT and BSD license
-   http://robertpenner.com/easing/ */
-static guint
-panel_window_cubic_ease_out (guint p)
-{
-  guint f = (p - 1);
-  return f * f * f + 1;
-}
-
-
-
-static gboolean
-panel_window_autohide_slideout (gpointer data)
-{
-  PanelWindow  *window = PANEL_WINDOW (data);
-  PanelBorders  borders;
-  gint          x, y, w, h, progress;
-  gboolean      ret = TRUE;
-
-  if (window->autohide_fade_id == 0)
-    return FALSE;
-
-  gtk_window_get_position (GTK_WINDOW (window), &x, &y);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  w = gdk_screen_get_width (window->screen);
-  h = gdk_screen_get_height (window->screen);
-G_GNUC_END_IGNORE_DEPRECATIONS
-  borders = panel_base_window_get_borders (PANEL_BASE_WINDOW (window));
-
-  if (IS_HORIZONTAL (window))
-    {
-      progress = panel_window_cubic_ease_out (window->alloc.height - window->popdown_progress) / window->popdown_speed;
-      if (PANEL_HAS_FLAG (borders, PANEL_BORDER_BOTTOM))
-        {
-          y -= progress;
-
-          if (y < 0 - window->alloc.height)
-            ret = FALSE;
-        }
-      else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_TOP))
-        {
-          y += progress;
-
-          if (y > h + window->alloc.height)
-            ret = FALSE;
-        }
-      /* if the panel has no borders, we don't animate */
-      else
-        ret = FALSE;
-    }
-  else
-    {
-      progress = panel_window_cubic_ease_out (window->alloc.width - window->popdown_progress) / window->popdown_speed;
-      if (PANEL_HAS_FLAG (borders, PANEL_BORDER_RIGHT))
-        {
-          x -= progress;
-
-          if (x < 0 - window->alloc.width)
-            ret = FALSE;
-        }
-      else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_LEFT))
-        {
-          x += progress;
-
-          if (x > (w + window->alloc.width))
-            ret = FALSE;
-        }
-      /* if the panel has no borders, we don't animate */
-      else
-        ret = FALSE;
-    }
-
-  window->popdown_progress--;
-  gtk_window_move (GTK_WINDOW (window), x, y);
-
-  return ret;
 }
 
 
