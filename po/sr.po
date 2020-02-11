@@ -8,13 +8,13 @@
 # Саша Петровић <salepetronije@gmail.com>, 2012-2014,2017,2019
 # Саша Петровић <salepetronije@gmail.com>, 2017
 # Саша Петровић <salepetronije@gmail.com>, 2017,2019
-# Саша Петровић <salepetronije@gmail.com>, 2017,2019
+# Саша Петровић <salepetronije@gmail.com>, 2017,2019-2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-05 00:30+0100\n"
-"PO-Revision-Date: 2020-01-21 13:54+0000\n"
+"POT-Creation-Date: 2020-01-30 00:30+0100\n"
+"PO-Revision-Date: 2020-02-11 07:22+0000\n"
 "Last-Translator: Саша Петровић <salepetronije@gmail.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/xfce/xfce4-panel/language/sr/)\n"
 "MIME-Version: 1.0\n"
@@ -49,9 +49,9 @@ msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Да ли сте сигурни да желите уклонити „%s“?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1110
-#: ../panel/panel-preferences-dialog.c:1324
-msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Ако уклоните ставку са полице, биће заувек изгубљена."
+msgid ""
+"Removing the item from the panel also means its configuration will be lost."
+msgstr "Уклањање ставке са полице такође доводи до губитка њених поставки."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
@@ -98,7 +98,7 @@ msgstr "По_дешавања полице..."
 msgid "Log _Out"
 msgstr "Одја_ва"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:208
+#: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:207
 #: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2950
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
@@ -338,9 +338,9 @@ msgstr "Додај нове ставке"
 msgid "Add new plugins to the panel"
 msgstr "Додајте нови прикључак на полицу"
 
-#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-item-dialog.c:211
 #: ../panel/panel-preferences-dialog.glade.h:11
-#: ../panel/panel-tic-tac-toe.c:123
+#: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:3
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:7
@@ -354,12 +354,12 @@ msgstr "Додајте нови прикључак на полицу"
 msgid "_Close"
 msgstr "_Затвори"
 
-#: ../panel/panel-item-dialog.c:230
+#: ../panel/panel-item-dialog.c:227
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "_Тражи:"
 
-#: ../panel/panel-item-dialog.c:238
+#: ../panel/panel-item-dialog.c:235
 msgid "Enter search phrase here"
 msgstr "Унесите овде кључну реч претраге"
 
@@ -425,6 +425,10 @@ msgstr "Унутрашњи назив: %s-%d\nПИБ: %d"
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Унутрашњи назив: %s-%d"
+
+#: ../panel/panel-preferences-dialog.c:1324
+msgid "If you remove the item from the panel, it is permanently lost."
+msgstr "Ако уклоните ставку са полице, биће заувек изгубљена."
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
@@ -672,27 +676,27 @@ msgstr "Прикажи податке тренутно изабране став
 msgid "Ite_ms"
 msgstr "_Ставке"
 
-#: ../panel/panel-tic-tac-toe.c:121
+#: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
 msgstr "_Нова игра"
 
-#: ../panel/panel-tic-tac-toe.c:132
+#: ../panel/panel-tic-tac-toe.c:134
 msgid "_Level:"
 msgstr "_Ступањ:"
 
-#: ../panel/panel-tic-tac-toe.c:138
+#: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
 msgstr "Новајлија"
 
-#: ../panel/panel-tic-tac-toe.c:139
+#: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
 msgstr "Осредњи"
 
-#: ../panel/panel-tic-tac-toe.c:140
+#: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
 msgstr "Искусан"
 
-#: ../panel/panel-tic-tac-toe.c:141
+#: ../panel/panel-tic-tac-toe.c:143
 msgid "Expert"
 msgstr "Стручњак"
 
@@ -1730,26 +1734,26 @@ msgstr "Прикажи радну површ"
 msgid "Hide all windows and show the desktop"
 msgstr "Сакриј све прозоре и прикажи радну површ"
 
-#: ../plugins/systray/systray.c:399
+#: ../plugins/systray/systray.c:405
 msgid "Unable to start the notification area"
 msgstr "Не могу да покренем обавештајну област"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:874
+#: ../plugins/systray/systray.c:905
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Највероватније је друга справица преузела улогу обавештајне области. Ова област ће бити ван употребе."
 
-#: ../plugins/systray/systray.c:876
+#: ../plugins/systray/systray.c:907
 msgid "The notification area lost selection"
 msgstr "Обавештајна област је изгубила избор"
 
-#: ../plugins/systray/systray.c:1140
+#: ../plugins/systray/systray.c:1172
 msgid "Clear"
 msgstr "Очисти"
 
-#: ../plugins/systray/systray.c:1141
+#: ../plugins/systray/systray.c:1173
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Да ли сте сигурни да желите да избришете списак познатих програма?"
 
@@ -1774,7 +1778,7 @@ msgstr "_Обриши познате програме"
 msgid "Known Applications"
 msgstr "Познати програми"
 
-#: ../plugins/systray/systray-manager.c:405
+#: ../plugins/systray/systray-manager.c:432
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Нисам успео да добијем управника избора за екран %d"
