@@ -990,13 +990,17 @@ panel_window_enter_notify_event (GtkWidget        *widget,
     {
       /* stop a running autohide timeout */
       if (window->autohide_timeout_id != 0)
-        g_source_remove (window->autohide_timeout_id);
+        {
+          window->autohide_state = AUTOHIDE_VISIBLE;
+          g_source_remove (window->autohide_timeout_id);
+        }
 
-      if (window->autohide_ease_out_id != 0) {
-        g_source_remove (window->autohide_ease_out_id);
-        /* we were in a ease_out animation so restore the original position of the window */
-        panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
-      }
+      if (window->autohide_ease_out_id != 0)
+        {
+          g_source_remove (window->autohide_ease_out_id);
+          /* we were in a ease_out animation so restore the original position of the window */
+          panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
+        }
 
       /* update autohide status */
       if (window->autohide_state == AUTOHIDE_POPDOWN)
@@ -1428,6 +1432,10 @@ panel_window_size_allocate (GtkWidget     *widget,
   if (G_UNLIKELY (window->autohide_state == AUTOHIDE_HIDDEN
                   || window->autohide_state == AUTOHIDE_POPUP))
     {
+      /* autohide timeout is already running, so let's wait with hiding the panel */
+      if (window->autohide_timeout_id != 0)
+        return;
+
       /* window is invisible */
       window->alloc.x = window->alloc.y = -9999;
 
@@ -1484,12 +1492,20 @@ G_GNUC_BEGIN_IGNORE_DEPRECATIONS
           window->popdown_progress = window->alloc.width;
           window->floating = FALSE;
         }
+      else
+        window->floating = TRUE;
 G_GNUC_END_IGNORE_DEPRECATIONS
 
-      /* make the panel visible without animation */
+      /* make the panel invisible without animation */
       if (window->floating
           || window->popdown_speed == 0)
-        gtk_window_move (GTK_WINDOW (window), window->alloc.x, window->alloc.y);
+        {
+          /* cancel any pending animations */
+          if (window->autohide_ease_out_id != 0)
+            g_source_remove (window->autohide_ease_out_id);
+
+          gtk_window_move (GTK_WINDOW (window), window->alloc.x, window->alloc.y);
+        }
     }
   else
     {
