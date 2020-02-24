@@ -339,6 +339,9 @@ static XfceTasklistChild *xfce_tasklist_button_new                       (WnckWi
                                                                           XfceTasklist         *tasklist);
 
 /* tasklist group buttons */
+static void               xfce_tasklist_group_button_menu_close          (GtkWidget            *menuitem,
+                                                                          XfceTasklistChild    *child,
+                                                                          guint32               time);
 static gboolean           xfce_tasklist_group_button_button_draw         (GtkWidget            *widget,
                                                                           cairo_t         *cr,
                                                                           XfceTasklistChild    *group_child);
@@ -3041,7 +3044,11 @@ xfce_tasklist_button_button_release_event (GtkWidget         *button,
               break;
 
             case XFCE_TASKLIST_MIDDLE_CLICK_CLOSE_WINDOW:
-              wnck_window_close (child->window, event->time);
+              if (child->type == CHILD_TYPE_GROUP_MENU
+                  && GTK_IS_MENU_ITEM (button))
+                xfce_tasklist_group_button_menu_close (button, child, event->time);
+              else
+                wnck_window_close (child->window, event->time);
               return TRUE;
 
             case XFCE_TASKLIST_MIDDLE_CLICK_MINIMIZE_WINDOW:
@@ -3584,6 +3591,23 @@ xfce_tasklist_group_button_menu_close_all (XfceTasklistChild *group_child)
           wnck_window_close (child->window, gtk_get_current_event_time ());
         }
     }
+}
+
+
+
+static void
+xfce_tasklist_group_button_menu_close (GtkWidget         *menuitem,
+                                       XfceTasklistChild *child,
+                                       guint32            time)
+{
+  GtkWidget *menu = gtk_widget_get_parent (menuitem);
+
+  panel_return_if_fail (WNCK_IS_WINDOW (child->window));
+  panel_return_if_fail (GTK_IS_MENU (menu));
+
+  gtk_container_remove (GTK_CONTAINER (menu), menuitem);
+  gtk_menu_popdown (GTK_MENU (menu));
+  wnck_window_close (child->window, time);
 }
 
 
