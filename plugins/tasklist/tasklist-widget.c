@@ -511,7 +511,7 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                    PROP_LABEL_DECORATIONS,
                                    g_param_spec_boolean ("label-decorations",
                                                          NULL, NULL,
-                                                         TRUE,
+                                                         FALSE,
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   gtk_widget_class_install_style_property (gtkwidget_class,
@@ -591,7 +591,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->wrap_windows = FALSE;
   tasklist->all_blinking = TRUE;
   tasklist->middle_click = XFCE_TASKLIST_MIDDLE_CLICK_DEFAULT;
-  tasklist->label_decorations = TRUE;
+  tasklist->label_decorations = FALSE;
 #ifdef GDK_WINDOWING_X11
   tasklist->wireframe_window = 0;
 #endif
