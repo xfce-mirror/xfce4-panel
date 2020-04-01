@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-30 00:30+0100\n"
-"PO-Revision-Date: 2020-01-30 10:56+0000\n"
+"POT-Creation-Date: 2020-04-01 00:30+0200\n"
+"PO-Revision-Date: 2020-04-01 12:01+0000\n"
 "Last-Translator: Emanuele Petriglia <transifex@emanuelepetriglia.com>\n"
 "Language-Team: Italian (http://www.transifex.com/xfce/xfce4-panel/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -38,11 +38,17 @@ msgid ""
 "file"
 msgstr "Aggiunge un nuovo avviatore sul pannello sulla base delle informazioni contenute in questo file desktop"
 
-#: ../panel-preferences.desktop.in.h:1 ../panel/panel-window.c:2871
+#: ../panel-preferences.desktop.in.h:1
+msgid ""
+"panels;settings;preferences;taskbar;autohide;application "
+"menu;start;buttons;launcher;notification area;status;icons;plugins;"
+msgstr "pannelli;impostazioni;preferenze;barra dei processi;nascondi automaticamente;menu applicazione;avvia;pulsanti;avvia;area di notifica;stato;icone;componenti aggiuntivi;"
+
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2934
 msgid "Panel"
 msgstr "Pannello"
 
-#: ../panel-preferences.desktop.in.h:2
+#: ../panel-preferences.desktop.in.h:3
 msgid "Customize the panel"
 msgstr "Personalizzazione del pannello"
 
@@ -79,7 +85,7 @@ msgstr "_Rimuovi"
 msgid "_Properties"
 msgstr "_Proprietà"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:2959
+#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:3022
 msgid "_About"
 msgstr "_Informazioni"
 
@@ -91,20 +97,20 @@ msgstr "_Sposta"
 msgid "Pane_l"
 msgstr "_Pannello"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2884
+#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2947
 msgid "Add _New Items..."
 msgstr "A_ggiungi nuovi elementi…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2899
+#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2962
 msgid "Panel Pr_eferences..."
 msgstr "_Preferenze del pannello…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2931
+#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2994
 msgid "Log _Out"
 msgstr "_Esci"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:207
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2950
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3013
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -245,38 +251,38 @@ msgstr "Non è stata trovata alcuna istanza di %s in esecuzione"
 msgid "Failed to launch the migration application"
 msgstr "Impossibile avviare l'applicazione di migrazione"
 
-#: ../panel/panel-application.c:976
+#: ../panel/panel-application.c:977
 msgid "Create _Launcher"
 msgstr "Crea _avviatore"
 
-#: ../panel/panel-application.c:977
+#: ../panel/panel-application.c:978
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Questo comando creerà un nuovo avviatore sul pannello e inserirà i file trascinati su di esso come elementi del menu."
 
-#: ../panel/panel-application.c:979
+#: ../panel/panel-application.c:980
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Crea un nuovo avviatore da %d file desktop"
 msgstr[1] "Crea dei nuovi avviatori da %d file desktop"
 
-#: ../panel/panel-application.c:1719
+#: ../panel/panel-application.c:1720
 msgid "Quit"
 msgstr "Esci"
 
-#: ../panel/panel-application.c:1720
+#: ../panel/panel-application.c:1721
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "X è stato avviato senza gestore di sessione. Facendo clic su \"Esci\" il server X verrà chiuso."
 
-#: ../panel/panel-application.c:1721
+#: ../panel/panel-application.c:1722
 msgid "Are you sure you want to quit the panel?"
 msgstr "Rimuovere davvero il pannello?"
 
-#: ../panel/panel-application.c:1729
+#: ../panel/panel-application.c:1730
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Impossibile eseguire il comando \"%s\""
@@ -704,7 +710,7 @@ msgstr "Esperto"
 msgid "Expert"
 msgstr "Veterano"
 
-#: ../panel/panel-window.c:2916
+#: ../panel/panel-window.c:2979
 msgid "_Lock Panel"
 msgstr "_Blocca il pannello"
 
@@ -1884,23 +1890,23 @@ msgstr "Mostra le _finestre di tutti gli sc_hermi"
 msgid "Show only _minimized windows"
 msgstr "Mostra solo le finestre mi_nimizzate"
 
-#: ../plugins/tasklist/tasklist-widget.c:3630
+#: ../plugins/tasklist/tasklist-widget.c:3654
 msgid "Mi_nimize All"
 msgstr "Mi_nimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:3638
+#: ../plugins/tasklist/tasklist-widget.c:3662
 msgid "Un_minimize All"
 msgstr "_Deminimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:3646
+#: ../plugins/tasklist/tasklist-widget.c:3670
 msgid "Ma_ximize All"
 msgstr "_Massimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:3654
+#: ../plugins/tasklist/tasklist-widget.c:3678
 msgid "_Unmaximize All"
 msgstr "D_emassimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:3666
+#: ../plugins/tasklist/tasklist-widget.c:3690
 msgid "_Close All"
 msgstr "_Chiudi tutte"
 
