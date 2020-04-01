@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-30 00:30+0100\n"
-"PO-Revision-Date: 2020-01-30 09:31+0000\n"
+"POT-Creation-Date: 2020-04-01 00:30+0200\n"
+"PO-Revision-Date: 2020-04-01 06:14+0000\n"
 "Last-Translator: 黃柏諺 <s8321414@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/xfce/xfce4-panel/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -35,11 +35,17 @@ msgid ""
 "file"
 msgstr "新增啟動器 (以此桌面檔資訊為基礎) 至面板"
 
-#: ../panel-preferences.desktop.in.h:1 ../panel/panel-window.c:2871
+#: ../panel-preferences.desktop.in.h:1
+msgid ""
+"panels;settings;preferences;taskbar;autohide;application "
+"menu;start;buttons;launcher;notification area;status;icons;plugins;"
+msgstr "panels;settings;preferences;taskbar;autohide;application menu;start;buttons;launcher;notification area;status;icons;plugins;"
+
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2934
 msgid "Panel"
 msgstr "面板"
 
-#: ../panel-preferences.desktop.in.h:2
+#: ../panel-preferences.desktop.in.h:3
 msgid "Customize the panel"
 msgstr "自訂面板"
 
@@ -76,7 +82,7 @@ msgstr "移除(_R)"
 msgid "_Properties"
 msgstr "屬性(_P)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:2959
+#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:3022
 msgid "_About"
 msgstr "關於(_A)"
 
@@ -88,20 +94,20 @@ msgstr "移動(_M)"
 msgid "Pane_l"
 msgstr "面板(_L)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2884
+#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2947
 msgid "Add _New Items..."
 msgstr "新增項目(_N)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2899
+#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2962
 msgid "Panel Pr_eferences..."
 msgstr "面板偏好設定(_E)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2931
+#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2994
 msgid "Log _Out"
 msgstr "登出(_O)"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:207
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2950
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3013
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -242,37 +248,37 @@ msgstr "找不到執行中的 %s 實體"
 msgid "Failed to launch the migration application"
 msgstr "未能啟動轉移應用程式"
 
-#: ../panel/panel-application.c:976
+#: ../panel/panel-application.c:977
 msgid "Create _Launcher"
 msgstr "建立啟動器(_L)"
 
-#: ../panel/panel-application.c:977
+#: ../panel/panel-application.c:978
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "這會在面板尚建立新的啟動器插件，並將放下的檔案插入為選單項目。"
 
-#: ../panel/panel-application.c:979
+#: ../panel/panel-application.c:980
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "由 %d 項桌面檔建立新的啟動器"
 
-#: ../panel/panel-application.c:1719
+#: ../panel/panel-application.c:1720
 msgid "Quit"
 msgstr "結束"
 
-#: ../panel/panel-application.c:1720
+#: ../panel/panel-application.c:1721
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "若未透過工作階段管理程式啟動 X。只要點擊「結束」就會關閉 X 伺服器。"
 
-#: ../panel/panel-application.c:1721
+#: ../panel/panel-application.c:1722
 msgid "Are you sure you want to quit the panel?"
 msgstr "確定要結束該面板嗎？"
 
-#: ../panel/panel-application.c:1729
+#: ../panel/panel-application.c:1730
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "未能執行「%s」指令"
@@ -700,7 +706,7 @@ msgstr "老手"
 msgid "Expert"
 msgstr "專家"
 
-#: ../panel/panel-window.c:2916
+#: ../panel/panel-window.c:2979
 msgid "_Lock Panel"
 msgstr "鎖住面板(_L)"
 
@@ -1880,23 +1886,23 @@ msgstr "顯示所有螢幕的視窗(_N)"
 msgid "Show only _minimized windows"
 msgstr "只顯示最小化的視窗(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3630
+#: ../plugins/tasklist/tasklist-widget.c:3654
 msgid "Mi_nimize All"
 msgstr "最小化全部(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3638
+#: ../plugins/tasklist/tasklist-widget.c:3662
 msgid "Un_minimize All"
 msgstr "取消"
 
-#: ../plugins/tasklist/tasklist-widget.c:3646
+#: ../plugins/tasklist/tasklist-widget.c:3670
 msgid "Ma_ximize All"
 msgstr "最大化全部(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3654
+#: ../plugins/tasklist/tasklist-widget.c:3678
 msgid "_Unmaximize All"
 msgstr "取消最大化(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3666
+#: ../plugins/tasklist/tasklist-widget.c:3690
 msgid "_Close All"
 msgstr "關閉全部(_C)"
 
