@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-05 00:30+0100\n"
-"PO-Revision-Date: 2020-01-07 06:37+0000\n"
+"POT-Creation-Date: 2020-04-01 00:30+0200\n"
+"PO-Revision-Date: 2020-04-01 06:39+0000\n"
 "Last-Translator: Daniel Muñiz Fontoira <dani@damufo.com>\n"
 "Language-Team: Galician (http://www.transifex.com/xfce/xfce4-panel/language/gl/)\n"
 "MIME-Version: 1.0\n"
@@ -31,11 +31,17 @@ msgid ""
 "file"
 msgstr "Engadir un novo iniciador ao panel baseándose na información deste ficheiro desktop"
 
-#: ../panel-preferences.desktop.in.h:1 ../panel/panel-window.c:2871
+#: ../panel-preferences.desktop.in.h:1
+msgid ""
+"panels;settings;preferences;taskbar;autohide;application "
+"menu;start;buttons;launcher;notification area;status;icons;plugins;"
+msgstr "paneis;configuracións;preferencias;barra de tarefas;autoagochar;menú de aplicación;inicio;botóns;iniciador;zona de notificación;estado;iconas;engadidos;"
+
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2934
 msgid "Panel"
 msgstr "Panel"
 
-#: ../panel-preferences.desktop.in.h:2
+#: ../panel-preferences.desktop.in.h:3
 msgid "Customize the panel"
 msgstr "Personalizar o panel"
 
@@ -47,9 +53,9 @@ msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Desexa realmente eliminar «%s»?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1110
-#: ../panel/panel-preferences-dialog.c:1324
-msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Se elimina o elemento do panel, perderase permanentemente."
+msgid ""
+"Removing the item from the panel also means its configuration will be lost."
+msgstr "Ao eliminar o elemento do panel tamén se perderá a súa configuración. "
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
@@ -72,7 +78,7 @@ msgstr "_Retirar"
 msgid "_Properties"
 msgstr "_Propiedades"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:2959
+#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:3022
 msgid "_About"
 msgstr "_Sobre"
 
@@ -84,20 +90,20 @@ msgstr "_Mover"
 msgid "Pane_l"
 msgstr "Pane_l"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2884
+#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2947
 msgid "Add _New Items..."
 msgstr "Engadir _novos elementos..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2899
+#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2962
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferencias do panel..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2931
+#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2994
 msgid "Log _Out"
 msgstr "Saír da _sesión"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:208
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2950
+#: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:207
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3013
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -238,38 +244,38 @@ msgstr "Non se atopou ningunha instancia en execución de %s"
 msgid "Failed to launch the migration application"
 msgstr "Produciuse un fallo ao iniciar a aplicación de migración"
 
-#: ../panel/panel-application.c:976
+#: ../panel/panel-application.c:977
 msgid "Create _Launcher"
 msgstr "Crear un _iniciador"
 
-#: ../panel/panel-application.c:977
+#: ../panel/panel-application.c:978
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Con isto créase un novo iniciador do engadido no panel e insíre os ficheiros que se soltan enriba del como elementos do menú."
 
-#: ../panel/panel-application.c:979
+#: ../panel/panel-application.c:980
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Crear un novo iniciador de %d ficheiro de escritorio"
 msgstr[1] "Crear un novo iniciador de %d ficheiros de escritorio"
 
-#: ../panel/panel-application.c:1719
+#: ../panel/panel-application.c:1720
 msgid "Quit"
 msgstr "Saír"
 
-#: ../panel/panel-application.c:1720
+#: ../panel/panel-application.c:1721
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Iniciou X sen un xestor de sesións. Ao premer Saír vai pechar o servidor de X."
 
-#: ../panel/panel-application.c:1721
+#: ../panel/panel-application.c:1722
 msgid "Are you sure you want to quit the panel?"
 msgstr "Desexa realmente saír do panel?"
 
-#: ../panel/panel-application.c:1729
+#: ../panel/panel-application.c:1730
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Produciuse un fallo ao executar a orde \"%s\""
@@ -335,9 +341,9 @@ msgstr "Engadir novos elementos"
 msgid "Add new plugins to the panel"
 msgstr "Engadir novos engadidos ao panel"
 
-#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-item-dialog.c:211
 #: ../panel/panel-preferences-dialog.glade.h:11
-#: ../panel/panel-tic-tac-toe.c:123
+#: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:3
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:7
@@ -351,12 +357,12 @@ msgstr "Engadir novos engadidos ao panel"
 msgid "_Close"
 msgstr "_Pechar"
 
-#: ../panel/panel-item-dialog.c:230
+#: ../panel/panel-item-dialog.c:227
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "_Buscar:"
 
-#: ../panel/panel-item-dialog.c:238
+#: ../panel/panel-item-dialog.c:235
 msgid "Enter search phrase here"
 msgstr "Introduza aquí a frase a buscar"
 
@@ -422,6 +428,10 @@ msgstr "Nome interno: %s-%d\nPID: %d"
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nome interno: %s-%d"
+
+#: ../panel/panel-preferences-dialog.c:1324
+msgid "If you remove the item from the panel, it is permanently lost."
+msgstr "Se elimina o elemento do panel, perderase permanentemente."
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
@@ -669,31 +679,31 @@ msgstr "Amosar información sobre o elemento seleccionado"
 msgid "Ite_ms"
 msgstr "Ele_mentos"
 
-#: ../panel/panel-tic-tac-toe.c:121
+#: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
 msgstr "_Nova partida"
 
-#: ../panel/panel-tic-tac-toe.c:132
+#: ../panel/panel-tic-tac-toe.c:134
 msgid "_Level:"
 msgstr "_Nivel:"
 
-#: ../panel/panel-tic-tac-toe.c:138
+#: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
 msgstr "Principiante"
 
-#: ../panel/panel-tic-tac-toe.c:139
+#: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
 msgstr "Medio"
 
-#: ../panel/panel-tic-tac-toe.c:140
+#: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
 msgstr "Con experiencia"
 
-#: ../panel/panel-tic-tac-toe.c:141
+#: ../panel/panel-tic-tac-toe.c:143
 msgid "Expert"
 msgstr "Experto"
 
-#: ../panel/panel-window.c:2916
+#: ../panel/panel-window.c:2979
 msgid "_Lock Panel"
 msgstr "B_loquear o panel"
 
@@ -1727,26 +1737,26 @@ msgstr "Amosar o escritorio"
 msgid "Hide all windows and show the desktop"
 msgstr "Agochar todas as xanelas e amosar o escritorio"
 
-#: ../plugins/systray/systray.c:399
+#: ../plugins/systray/systray.c:405
 msgid "Unable to start the notification area"
 msgstr "Non se puido iniciar a zona de notificación"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:874
+#: ../plugins/systray/systray.c:905
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "O máis probábel é que outro trebello teña o control da función da zona de notificación. Non se vai usar esta zona."
 
-#: ../plugins/systray/systray.c:876
+#: ../plugins/systray/systray.c:907
 msgid "The notification area lost selection"
 msgstr "A zona de notificación perdeu a selección"
 
-#: ../plugins/systray/systray.c:1140
+#: ../plugins/systray/systray.c:1172
 msgid "Clear"
 msgstr "Limpar"
 
-#: ../plugins/systray/systray.c:1141
+#: ../plugins/systray/systray.c:1173
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Desexa realmente limpar a lista das aplicacións coñecidas?"
 
@@ -1771,7 +1781,7 @@ msgstr "_Limpar as aplicacións coñecidas"
 msgid "Known Applications"
 msgstr "Aplicacións coñecidas"
 
-#: ../plugins/systray/systray-manager.c:405
+#: ../plugins/systray/systray-manager.c:432
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Produciuse un fallo ao adquirir a selección do xestor para a pantalla %d"
@@ -1873,23 +1883,23 @@ msgstr "Amosar as _xanelas de todos os monitores"
 msgid "Show only _minimized windows"
 msgstr "Amosar só as xanelas _minimizadas"
 
-#: ../plugins/tasklist/tasklist-widget.c:3630
+#: ../plugins/tasklist/tasklist-widget.c:3654
 msgid "Mi_nimize All"
 msgstr "Mi_nimizar todo"
 
-#: ../plugins/tasklist/tasklist-widget.c:3638
+#: ../plugins/tasklist/tasklist-widget.c:3662
 msgid "Un_minimize All"
 msgstr "Des_minimizar todo"
 
-#: ../plugins/tasklist/tasklist-widget.c:3646
+#: ../plugins/tasklist/tasklist-widget.c:3670
 msgid "Ma_ximize All"
 msgstr "Ma_ximizar todo"
 
-#: ../plugins/tasklist/tasklist-widget.c:3654
+#: ../plugins/tasklist/tasklist-widget.c:3678
 msgid "_Unmaximize All"
 msgstr "_Desmaximizar todo"
 
-#: ../plugins/tasklist/tasklist-widget.c:3666
+#: ../plugins/tasklist/tasklist-widget.c:3690
 msgid "_Close All"
 msgstr "_Pechar todo"
 
