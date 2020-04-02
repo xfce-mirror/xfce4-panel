@@ -5,7 +5,7 @@
 # Translators:
 # beriain, 2018
 # beriain, 2018-2019
-# beriain, 2019
+# beriain, 2019-2020
 # Egoitz Rodriguez <egoitzro@gmail.com>, 2015
 # Jon Latorre Martinez <patataman@airtel.net>, 2003
 # Piarres Beobide <pi@beobide.net>, 2004-2009,2011
@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-10 00:30+0100\n"
-"PO-Revision-Date: 2019-11-26 15:48+0000\n"
+"POT-Creation-Date: 2020-04-01 00:30+0200\n"
+"PO-Revision-Date: 2020-04-02 08:25+0000\n"
 "Last-Translator: beriain\n"
 "Language-Team: Basque (http://www.transifex.com/xfce/xfce4-panel/language/eu/)\n"
 "MIME-Version: 1.0\n"
@@ -36,11 +36,17 @@ msgid ""
 "file"
 msgstr "Gehitu abiarazle berri bat panelera mahaigain fitxategi honen argibideetan oinarriturik"
 
-#: ../panel-preferences.desktop.in.h:1 ../panel/panel-window.c:2871
+#: ../panel-preferences.desktop.in.h:1
+msgid ""
+"panels;settings;preferences;taskbar;autohide;application "
+"menu;start;buttons;launcher;notification area;status;icons;plugins;"
+msgstr ""
+
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2934
 msgid "Panel"
 msgstr "Panela"
 
-#: ../panel-preferences.desktop.in.h:2
+#: ../panel-preferences.desktop.in.h:3
 msgid "Customize the panel"
 msgstr "Pertsonalizatu panela"
 
@@ -52,14 +58,15 @@ msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Ziur al zaude \"%s\" idazmahaia ezabatu nahi duzula?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1110
-#: ../panel/panel-preferences-dialog.c:1324
-msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Elementua paneletik ezabatzen baduzu betirako galduko da."
+msgid ""
+"Removing the item from the panel also means its configuration will be lost."
+msgstr "Elementua paneletik kentzean bere konfigurazioa galduko da ere."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
-#: ../plugins/directorymenu/directorymenu.c:394
+#: ../plugins/directorymenu/directorymenu.c:473
+#: ../plugins/directorymenu/directorymenu.c:938
 msgid "_Cancel"
 msgstr "_Utzi"
 
@@ -76,7 +83,7 @@ msgstr "_Ezabatu"
 msgid "_Properties"
 msgstr "_Propietateak"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:2959
+#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:3022
 msgid "_About"
 msgstr "_Honi buruz"
 
@@ -88,20 +95,20 @@ msgstr "_Mugitu"
 msgid "Pane_l"
 msgstr "Pane_la"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2884
+#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2947
 msgid "Add _New Items..."
 msgstr "Gehitu elementu _berriak..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2899
+#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2962
 msgid "Panel Pr_eferences..."
 msgstr "Panel hob_espenak..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2931
+#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2994
 msgid "Log _Out"
 msgstr "Sai_oa itxi"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:208
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2950
+#: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:207
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3013
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -242,38 +249,38 @@ msgstr "Ez da %s-ren instantzia abiarazirik topatu"
 msgid "Failed to launch the migration application"
 msgstr "Huts migrazio aplikazioa abiaraztean"
 
-#: ../panel/panel-application.c:976
+#: ../panel/panel-application.c:977
 msgid "Create _Launcher"
 msgstr "Sortu _abiarazlea"
 
-#: ../panel/panel-application.c:977
+#: ../panel/panel-application.c:978
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Honek abiarazle plugin berri  bat \r\nsortuko du panelean eta bertan\r\nipiniko fitxategiak menu elementu gisa."
 
-#: ../panel/panel-application.c:979
+#: ../panel/panel-application.c:980
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Sortu abiarazle berri bat %d mahaigain fitxategitik"
 msgstr[1] "Sortu abiarazle berri bat %d mahaigain fitxategietatik"
 
-#: ../panel/panel-application.c:1719
+#: ../panel/panel-application.c:1720
 msgid "Quit"
 msgstr "Itxi"
 
-#: ../panel/panel-application.c:1720
+#: ../panel/panel-application.c:1721
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "X saio kudeatzaile gabe abiarazi duzu, Itxi sakatzean X zerbitzaria itxiko du."
 
-#: ../panel/panel-application.c:1721
+#: ../panel/panel-application.c:1722
 msgid "Are you sure you want to quit the panel?"
 msgstr "Ziur al zaude panela ezabatu nahi duzula?"
 
-#: ../panel/panel-application.c:1729
+#: ../panel/panel-application.c:1730
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Ezin da \"%s\" komandoa exekutatu"
@@ -339,9 +346,9 @@ msgstr "Gehitu elementu berriak"
 msgid "Add new plugins to the panel"
 msgstr "Gehitu plugin berriak panelera"
 
-#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-item-dialog.c:211
 #: ../panel/panel-preferences-dialog.glade.h:11
-#: ../panel/panel-tic-tac-toe.c:123
+#: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:3
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:7
@@ -355,12 +362,12 @@ msgstr "Gehitu plugin berriak panelera"
 msgid "_Close"
 msgstr "_Itxi"
 
-#: ../panel/panel-item-dialog.c:230
+#: ../panel/panel-item-dialog.c:227
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "_Bilatu:"
 
-#: ../panel/panel-item-dialog.c:238
+#: ../panel/panel-item-dialog.c:235
 msgid "Enter search phrase here"
 msgstr "Idatzi bilaketa katea hemen"
 
@@ -426,6 +433,10 @@ msgstr "Barne-izena: %s-%d\nPID: %d"
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Barne-izena: %s-%d"
+
+#: ../panel/panel-preferences-dialog.c:1324
+msgid "If you remove the item from the panel, it is permanently lost."
+msgstr "Elementua paneletik ezabatzen baduzu betirako galduko da."
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
@@ -673,31 +684,31 @@ msgstr "Hautaturiko elementuaren argibideak bistarazi"
 msgid "Ite_ms"
 msgstr "Ele_mentuak"
 
-#: ../panel/panel-tic-tac-toe.c:121
+#: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
 msgstr "Joko _berria"
 
-#: ../panel/panel-tic-tac-toe.c:132
+#: ../panel/panel-tic-tac-toe.c:134
 msgid "_Level:"
 msgstr "Mai_la:"
 
-#: ../panel/panel-tic-tac-toe.c:138
+#: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
 msgstr "Hasi-berria"
 
-#: ../panel/panel-tic-tac-toe.c:139
+#: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
 msgstr "Ertaina"
 
-#: ../panel/panel-tic-tac-toe.c:140
+#: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
 msgstr "Esperientziaduna"
 
-#: ../panel/panel-tic-tac-toe.c:141
+#: ../panel/panel-tic-tac-toe.c:143
 msgid "Expert"
 msgstr "Espertoa"
 
-#: ../panel/panel-window.c:2916
+#: ../panel/panel-window.c:2979
 msgid "_Lock Panel"
 msgstr "B_lokeatu panela"
 
@@ -981,17 +992,17 @@ msgid "Applications"
 msgstr "Aplikazioak"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:600
-#: ../plugins/directorymenu/directorymenu.c:392
+#: ../plugins/directorymenu/directorymenu.c:471
 msgid "Select An Icon"
 msgstr "Hautatu ikono bat"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/directorymenu/directorymenu.c:395
+#: ../plugins/directorymenu/directorymenu.c:474
 msgid "_OK"
 msgstr "_ADOS"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2399
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2403
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Ezin da \"%s\" komandoa exekutatu."
@@ -1387,44 +1398,77 @@ msgstr "hamabiak"
 msgid "What time is it?"
 msgstr "Zein ordu da?"
 
-#: ../plugins/directorymenu/directorymenu.c:242
+#: ../plugins/directorymenu/directorymenu.c:301
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Direktorio menua"
 
-#: ../plugins/directorymenu/directorymenu.c:586
+#: ../plugins/directorymenu/directorymenu.c:689
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Huts \"%s\" aplikazioa abiaraztean"
 
-#: ../plugins/directorymenu/directorymenu.c:618
+#: ../plugins/directorymenu/directorymenu.c:721
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Huts \"%s\" eduki mota antzematean"
 
-#: ../plugins/directorymenu/directorymenu.c:627
+#: ../plugins/directorymenu/directorymenu.c:730
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Ez da lehenetsitako aplikaziorik aurkitu \"%s\"-rentzat"
 
-#: ../plugins/directorymenu/directorymenu.c:643
+#: ../plugins/directorymenu/directorymenu.c:746
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Huts \"%s\"-ren lehenetsitako aplikazioa abiaraztean"
 
-#: ../plugins/directorymenu/directorymenu.c:741
+#: ../plugins/directorymenu/directorymenu.c:844
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Huts \"%s\" kategoriaren lehenetsitako aplikazioa abiaraztean"
 
-#: ../plugins/directorymenu/directorymenu.c:815
+#: ../plugins/directorymenu/directorymenu.c:927
+msgid "Create New Folder"
+msgstr "Sortu karpeta berria"
+
+#: ../plugins/directorymenu/directorymenu.c:932
+msgid "Create New Text Document"
+msgstr "Testu dokumentu berri bat sortu"
+
+#: ../plugins/directorymenu/directorymenu.c:939
+msgid "C_reate"
+msgstr "So_rtu"
+
+#: ../plugins/directorymenu/directorymenu.c:940
+msgid "Create & _Open"
+msgstr "Sortu eta ireki"
+
+#: ../plugins/directorymenu/directorymenu.c:954
+msgid "Enter the new name:"
+msgstr "Sartu izen berria:"
+
+#: ../plugins/directorymenu/directorymenu.c:990
+#, c-format
+msgid "Failed to create folder: %s"
+msgstr "Ezin izan da karpeta sortu: %s"
+
+#: ../plugins/directorymenu/directorymenu.c:1075
 msgid "Open Folder"
 msgstr "Ireki karpeta"
 
-#: ../plugins/directorymenu/directorymenu.c:830
+#: ../plugins/directorymenu/directorymenu.c:1092
 msgid "Open in Terminal"
 msgstr "Ireki terminalean"
+
+#: ../plugins/directorymenu/directorymenu.c:1109
+msgid "Create Folder..."
+msgstr "Karpeta sortu..."
+
+#: ../plugins/directorymenu/directorymenu.c:1126
+msgid "Create Text Document..."
+msgstr "Testu dokumentua sortu..."
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
@@ -1439,21 +1483,41 @@ msgid "_Base Directory:"
 msgstr "_Oinarri direktorioa:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
+msgid "Show 'New Text _Document'"
+msgstr "Erakutsi 'Testu dokumentu berria'"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+msgid "Show '_New Folder'"
+msgstr "Erakutsi 'Karpeta berria'"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
+msgid "Show 'Open in _Terminal'"
+msgstr "Erakutsi 'Terminalean ireki'"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
+msgid "Show '_Open _Folder'"
+msgstr "Erakutsi 'Karpeta ireki'"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
+msgid "Menu"
+msgstr "Menua"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:13
 msgid "Show _hidden files"
 msgstr "Ikusi _ezkutatutako fitxategiak"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:14
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr "Idatzi direktorioan bistaraziko diren fitxategiak ezartzen dituen patroi zerrenda. Hemen patroi bat baino gehiago zehazten baduzu, zerrenda elementuak puntu eta gakoz bereizi behar dira (adib *.txt; *.doc)."
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:15
 msgid "_File Pattern:"
 msgstr "_Fitxategi patroia:"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:16
 #: ../plugins/tasklist/tasklist-dialog.glade.h:29
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
@@ -1467,7 +1531,7 @@ msgstr "Ireki abiarazle menua"
 msgid "Unnamed Item"
 msgstr "Elementu izengabea"
 
-#: ../plugins/launcher/launcher.c:1796
+#: ../plugins/launcher/launcher.c:1800
 msgid "No items"
 msgstr "Elementurik ez"
 
@@ -1678,26 +1742,26 @@ msgstr "Ikusi mahaigaina"
 msgid "Hide all windows and show the desktop"
 msgstr "Ezkutatu leiho guztiak eta mahaigaina bistarazi"
 
-#: ../plugins/systray/systray.c:399
+#: ../plugins/systray/systray.c:405
 msgid "Unable to start the notification area"
 msgstr "Ezin da larrialdi berri-ematea abiarazi"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:874
+#: ../plugins/systray/systray.c:905
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Ziurrenik beste widget batek berri-emate eremuaren kargu artu du. Eremu hau ez da erabiliko."
 
-#: ../plugins/systray/systray.c:876
+#: ../plugins/systray/systray.c:907
 msgid "The notification area lost selection"
 msgstr "Beri-emate eremuak hautapena galtzen du"
 
-#: ../plugins/systray/systray.c:1140
+#: ../plugins/systray/systray.c:1172
 msgid "Clear"
 msgstr "Garbitu"
 
-#: ../plugins/systray/systray.c:1141
+#: ../plugins/systray/systray.c:1173
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Ziur al zaude aplikazio ezagunen zerrenda ezabatu nahi duzula?"
 
@@ -1722,7 +1786,7 @@ msgstr "Ga_rbitu aplikazio ezagunak"
 msgid "Known Applications"
 msgstr "Aplikazio ezagunak"
 
-#: ../plugins/systray/systray-manager.c:405
+#: ../plugins/systray/systray-manager.c:432
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Huts %d pantailaren kudeatzaile hautapena eskuratzerakoan"
@@ -1824,23 +1888,23 @@ msgstr "Ikusi mo_nitore guztietako leihoak"
 msgid "Show only _minimized windows"
 msgstr "Ikusi bakarrik _minimizatutako leihoak"
 
-#: ../plugins/tasklist/tasklist-widget.c:3630
+#: ../plugins/tasklist/tasklist-widget.c:3654
 msgid "Mi_nimize All"
 msgstr "Mi_nimizatu dena"
 
-#: ../plugins/tasklist/tasklist-widget.c:3638
+#: ../plugins/tasklist/tasklist-widget.c:3662
 msgid "Un_minimize All"
 msgstr "De_sminimizatu dena"
 
-#: ../plugins/tasklist/tasklist-widget.c:3646
+#: ../plugins/tasklist/tasklist-widget.c:3670
 msgid "Ma_ximize All"
 msgstr "Ma_ximizatu dena"
 
-#: ../plugins/tasklist/tasklist-widget.c:3654
+#: ../plugins/tasklist/tasklist-widget.c:3678
 msgid "_Unmaximize All"
 msgstr "_Desmaximizatu dena"
 
-#: ../plugins/tasklist/tasklist-widget.c:3666
+#: ../plugins/tasklist/tasklist-widget.c:3690
 msgid "_Close All"
 msgstr "_Itxi dena"
 
