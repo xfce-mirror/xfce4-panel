@@ -1197,26 +1197,6 @@ xfce_panel_plugin_menu_panel_help (XfcePanelPlugin *plugin)
 
 
 
-static void
-xfce_panel_plugin_menu_destroy (XfcePanelPlugin *plugin)
-{
-  GSList *li;
-
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
-
-  if (plugin->priv->menu != NULL)
-    {
-      /* remove custom items before they get destroyed */
-      for (li = plugin->priv->menu_items; li != NULL; li = li->next)
-        gtk_container_remove (GTK_CONTAINER (plugin->priv->menu), GTK_WIDGET (li->data));
-
-      gtk_menu_detach (GTK_MENU (plugin->priv->menu));
-      plugin->priv->menu = NULL;
-    }
-}
-
-
-
 static GtkMenu *
 xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
 {
@@ -2404,6 +2384,43 @@ xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
   xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
                                           PROVIDER_SIGNAL_SHOW_ABOUT);
 }
+
+
+
+/**
+ * xfce_panel_plugin_menu_destroy:
+ * @plugin : an #XfcePanelPlugin.
+ *
+ * Remove all custom menu items added through #xfce_panel_plugin_menu_insert_item
+ * from the menu.
+ **/
+ void
+ xfce_panel_plugin_menu_destroy (XfcePanelPlugin *plugin)
+ {
+   GSList *li;
+
+   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+   panel_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin));
+
+   if (plugin->priv->menu != NULL)
+     {
+       /* remove custom items before they get destroyed */
+       for (li = plugin->priv->menu_items; li != NULL; li = li->next)
+         {
+           if (GTK_IS_WIDGET (li->data))
+             {
+               gtk_container_remove (GTK_CONTAINER (plugin->priv->menu), GTK_WIDGET (li->data));
+               g_object_unref (li->data);
+             }
+           xfce_panel_plugin_menu_item_destroy (GTK_WIDGET (li->data), plugin);
+         }
+       g_slist_free (li);
+
+       gtk_menu_detach (GTK_MENU (plugin->priv->menu));
+       plugin->priv->menu = NULL;
+     }
+ }
+
 
 
 
