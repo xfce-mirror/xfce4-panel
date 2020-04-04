@@ -1221,6 +1221,10 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
       gtk_widget_set_sensitive (item, FALSE);
       gtk_widget_show (item);
 
+      /* add custom menu items */
+      for (li = plugin->priv->menu_items; li != NULL; li = li->next)
+        gtk_menu_shell_append (GTK_MENU_SHELL (menu), GTK_WIDGET (li->data));
+
       /* separator */
       item = gtk_separator_menu_item_new ();
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
@@ -1272,10 +1276,6 @@ G_GNUC_BEGIN_IGNORE_DEPRECATIONS
           gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
           gtk_widget_show (image);
-
-          /* add custom menu items */
-          for (li = plugin->priv->menu_items; li != NULL; li = li->next)
-            gtk_menu_shell_append (GTK_MENU_SHELL (menu), GTK_WIDGET (li->data));
 
           /* separator */
           item = gtk_separator_menu_item_new ();
