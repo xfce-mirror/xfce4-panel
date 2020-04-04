@@ -28,6 +28,7 @@
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <garcon/garcon.h>
+#include <garcon-gtk/garcon-gtk.h>
 #include <xfconf/xfconf.h>
 
 #include <libxfce4panel/libxfce4panel.h>
@@ -93,6 +94,9 @@ static void               launcher_plugin_menu_popup_destroyed          (gpointe
 static gboolean           launcher_plugin_menu_popup                    (gpointer              user_data);
 static void               launcher_plugin_menu_destroy                  (LauncherPlugin       *plugin);
 static void               launcher_plugin_button_update                 (LauncherPlugin       *plugin);
+#if GARCON_CHECK_VERSION(0,7,0)
+static void               launcher_plugin_button_update_action_menu     (LauncherPlugin       *plugin);
+#endif
 static void               launcher_plugin_button_state_changed          (GtkWidget            *button_a,
                                                                          GtkStateType         state,
                                                                          GtkWidget            *button_b);
@@ -191,6 +195,9 @@ struct _LauncherPlugin
   GtkWidget         *arrow;
   GtkWidget         *child;
   GtkWidget         *menu;
+#if GARCON_CHECK_VERSION(0,7,0)
+  GtkWidget         *action_menu;
+#endif
 
   GSList            *items;
 
@@ -336,6 +343,9 @@ launcher_plugin_init (LauncherPlugin *plugin)
   plugin->show_label = FALSE;
   plugin->arrow_position = LAUNCHER_ARROW_DEFAULT;
   plugin->menu = NULL;
+#if GARCON_CHECK_VERSION(0,7,0)
+  plugin->action_menu = NULL;
+#endif
   plugin->items = NULL;
   plugin->child = NULL;
   plugin->tooltip_cache = NULL;
@@ -501,7 +511,12 @@ launcher_plugin_item_changed (GarconMenuItem *item,
     {
       /* update the button or destroy the menu */
       if (plugin->items == li)
-        launcher_plugin_button_update (plugin);
+        {
+          launcher_plugin_button_update (plugin);
+#if GARCON_CHECK_VERSION(0,7,0)
+          launcher_plugin_button_update_action_menu (plugin);
+#endif
+        }
       else
         launcher_plugin_menu_destroy (plugin);
     }
@@ -862,6 +877,9 @@ launcher_plugin_set_property (GObject      *object,
 
       /* update the button */
       launcher_plugin_button_update (plugin);
+#if GARCON_CHECK_VERSION(0,7,0)
+      launcher_plugin_button_update_action_menu (plugin);
+#endif
 
       /* update the widget packing */
       goto update_arrow;
@@ -1003,6 +1021,9 @@ launcher_plugin_file_changed (GFileMonitor      *monitor,
     {
       launcher_plugin_button_update (plugin);
       launcher_plugin_menu_destroy (plugin);
+#if GARCON_CHECK_VERSION(0,7,0)
+      launcher_plugin_button_update_action_menu (plugin);
+#endif
 
       /* save the new config */
       launcher_plugin_save_delayed (plugin);
@@ -1832,6 +1853,65 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
                                     "image-missing", icon_size);
     }
 }
+
+
+
+#if GARCON_CHECK_VERSION(0,7,0)
+static void
+launcher_plugin_add_desktop_actions (GtkWidget *widget, gpointer user_data)
+{
+  LauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (user_data);
+
+  panel_return_if_fail (GTK_IS_WIDGET (widget));
+  panel_return_if_fail (GTK_IS_MENU (plugin->action_menu));
+  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
+
+  /* Pack the action menu item into the plugin's context menu */
+  g_object_ref (widget);
+  gtk_container_remove (GTK_CONTAINER (plugin->action_menu), widget);
+  xfce_panel_plugin_menu_insert_item (XFCE_PANEL_PLUGIN (plugin), GTK_MENU_ITEM (widget));
+  g_object_unref (widget);
+}
+
+
+
+static void
+launcher_plugin_button_update_action_menu (LauncherPlugin *plugin)
+{
+  GarconMenuItem      *item = NULL;
+
+  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
+  panel_return_if_fail (plugin->menu == NULL);
+
+  /* If there are >1 items in the launcher don't show the action menu */
+  if (LIST_HAS_TWO_OR_MORE_ENTRIES (plugin->items))
+    {
+      xfce_panel_plugin_menu_destroy (XFCE_PANEL_PLUGIN (plugin));
+      plugin->action_menu = NULL;
+      return;
+    }
+
+  if (G_LIKELY (plugin->items != NULL))
+    item = GARCON_MENU_ITEM (plugin->items->data);
+
+  xfce_panel_plugin_menu_destroy (XFCE_PANEL_PLUGIN (plugin));
+  if (plugin->action_menu)
+    {
+      gtk_widget_destroy (GTK_WIDGET (plugin->action_menu));
+    }
+  else
+    {
+      plugin->action_menu = garcon_gtk_menu_get_desktop_actions_menu (item);
+      gtk_menu_set_reserve_toggle_size (GTK_MENU (plugin->action_menu), FALSE);
+      if (plugin->action_menu)
+        {
+          gtk_container_foreach (GTK_CONTAINER (plugin->action_menu),
+                                 launcher_plugin_add_desktop_actions,
+                                 plugin);
+        }
+    }
+}
+#endif
 
 
 
