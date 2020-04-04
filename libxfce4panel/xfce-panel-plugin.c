@@ -2296,7 +2296,8 @@ xfce_panel_plugin_add_action_widget (XfcePanelPlugin *plugin,
  * @item   : a #GtkMenuItem.
  *
  * Insert a custom menu item to the plugin's right click menu. This item
- * is packed below the "Move" menu item.
+ * is packed below the first item in the menu, which displays the plugin's
+ * name.
  **/
 void
 xfce_panel_plugin_menu_insert_item (XfcePanelPlugin *plugin,
