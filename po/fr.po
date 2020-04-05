@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-30 00:30+0100\n"
-"PO-Revision-Date: 2020-01-30 10:39+0000\n"
+"POT-Creation-Date: 2020-04-01 00:30+0200\n"
+"PO-Revision-Date: 2020-04-05 08:59+0000\n"
 "Last-Translator: Yannick Le Guen <leguen.yannick@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/xfce/xfce4-panel/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -37,11 +37,17 @@ msgid ""
 "file"
 msgstr "Ajouter un nouveau lanceur dans le tableau de bord avec les informations de ce fichier desktop"
 
-#: ../panel-preferences.desktop.in.h:1 ../panel/panel-window.c:2871
+#: ../panel-preferences.desktop.in.h:1
+msgid ""
+"panels;settings;preferences;taskbar;autohide;application "
+"menu;start;buttons;launcher;notification area;status;icons;plugins;"
+msgstr "tableaux de bord;paramètres;préférences;barre des tâches;masquage automatique;menu des applications;démarrer;boutons;lanceur;zone de notification;état;icônes;greffons;"
+
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2934
 msgid "Panel"
 msgstr "Tableau de bord"
 
-#: ../panel-preferences.desktop.in.h:2
+#: ../panel-preferences.desktop.in.h:3
 msgid "Customize the panel"
 msgstr "Personnaliser le tableau de bord"
 
@@ -78,7 +84,7 @@ msgstr "_Supprimer"
 msgid "_Properties"
 msgstr "_Propriétés"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:2959
+#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:3022
 msgid "_About"
 msgstr "À _propos"
 
@@ -90,20 +96,20 @@ msgstr "_Déplacer"
 msgid "Pane_l"
 msgstr "Tableau de _bord"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2884
+#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2947
 msgid "Add _New Items..."
 msgstr "Ajouter de _nouveaux éléments…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2899
+#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2962
 msgid "Panel Pr_eferences..."
 msgstr "Pr_éférences du tableau de bord…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2931
+#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2994
 msgid "Log _Out"
 msgstr "Dé_connexion"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:207
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2950
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3013
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -244,38 +250,38 @@ msgstr "Aucune instance de %s n’a été trouvée"
 msgid "Failed to launch the migration application"
 msgstr "Impossible de lancer la procédure de migration"
 
-#: ../panel/panel-application.c:976
+#: ../panel/panel-application.c:977
 msgid "Create _Launcher"
 msgstr "Créer un _lanceur"
 
-#: ../panel/panel-application.c:977
+#: ../panel/panel-application.c:978
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Un nouveau greffon « Lanceur » va être créé sur le tableau de bord et un élément de menu y sera inséré pour chaque fichier déposé."
 
-#: ../panel/panel-application.c:979
+#: ../panel/panel-application.c:980
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Créer un lanceur à partir de %d fichier desktop"
 msgstr[1] "Créer un lanceur à partir de %d fichiers desktop"
 
-#: ../panel/panel-application.c:1719
+#: ../panel/panel-application.c:1720
 msgid "Quit"
 msgstr "Quitter"
 
-#: ../panel/panel-application.c:1720
+#: ../panel/panel-application.c:1721
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Vous avez démarré le serveur X sans gestionnaire de session. Cliquer sur Quitter fermera le serveur X."
 
-#: ../panel/panel-application.c:1721
+#: ../panel/panel-application.c:1722
 msgid "Are you sure you want to quit the panel?"
 msgstr "Voulez-vous vraiment quitter le tableau de bord ?"
 
-#: ../panel/panel-application.c:1729
+#: ../panel/panel-application.c:1730
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Impossible d’exécuter la commande « %s »"
@@ -703,7 +709,7 @@ msgstr "Confirmé"
 msgid "Expert"
 msgstr "Expert"
 
-#: ../panel/panel-window.c:2916
+#: ../panel/panel-window.c:2979
 msgid "_Lock Panel"
 msgstr "_Verrouiller le tableau de bord"
 
@@ -1735,7 +1741,7 @@ msgstr "Afficher le bureau"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Hide all windows and show the desktop"
-msgstr "Cacher toutes les fenêtres et afficher le bureau"
+msgstr "Masquer toutes les fenêtres et afficher le bureau"
 
 #: ../plugins/systray/systray.c:405
 msgid "Unable to start the notification area"
@@ -1883,23 +1889,23 @@ msgstr "Afficher les fenêtres de tous les _moniteurs"
 msgid "Show only _minimized windows"
 msgstr "Afficher uniquement les fenêtres _réduites"
 
-#: ../plugins/tasklist/tasklist-widget.c:3630
+#: ../plugins/tasklist/tasklist-widget.c:3654
 msgid "Mi_nimize All"
 msgstr "Tout _réduire"
 
-#: ../plugins/tasklist/tasklist-widget.c:3638
+#: ../plugins/tasklist/tasklist-widget.c:3662
 msgid "Un_minimize All"
 msgstr "Tout _afficher"
 
-#: ../plugins/tasklist/tasklist-widget.c:3646
+#: ../plugins/tasklist/tasklist-widget.c:3670
 msgid "Ma_ximize All"
 msgstr "Tout _maximiser"
 
-#: ../plugins/tasklist/tasklist-widget.c:3654
+#: ../plugins/tasklist/tasklist-widget.c:3678
 msgid "_Unmaximize All"
 msgstr "Tout r_estaurer"
 
-#: ../plugins/tasklist/tasklist-widget.c:3666
+#: ../plugins/tasklist/tasklist-widget.c:3690
 msgid "_Close All"
 msgstr "Tout _fermer"
 
