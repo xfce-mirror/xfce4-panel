@@ -222,6 +222,7 @@ wrapper_plug_draw (GtkWidget *widget,
                                  GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                                  &rgba, NULL);
           gdk_cairo_set_source_rgba (cr, rgba);
+          gdk_rgba_free (rgba);
         }
 
       /* draw the background color */
