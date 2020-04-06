@@ -131,15 +131,19 @@ systray_socket_realize (GtkWidget *widget)
 
   if (socket->is_composited)
     {
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       gdk_window_set_background_rgba (window, &transparent);
       gdk_window_set_composited (window, TRUE);
+G_GNUC_END_IGNORE_DEPRECATIONS
 
       socket->parent_relative_bg = FALSE;
     }
   else if (gtk_widget_get_visual (widget) ==
            gdk_window_get_visual (gdk_window_get_parent (window)))
     {
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       gdk_window_set_background_pattern (window, NULL);
+G_GNUC_END_IGNORE_DEPRECATIONS
 
       socket->parent_relative_bg = TRUE;
     }
@@ -148,12 +152,16 @@ systray_socket_realize (GtkWidget *widget)
       socket->parent_relative_bg = FALSE;
     }
 
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   gdk_window_set_composited (window, socket->is_composited);
+G_GNUC_END_IGNORE_DEPRECATIONS
 
   gtk_widget_set_app_paintable (widget,
       socket->parent_relative_bg || socket->is_composited);
 
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   gtk_widget_set_double_buffered (widget, socket->parent_relative_bg);
+G_GNUC_END_IGNORE_DEPRECATIONS
 
   panel_debug_filtered (PANEL_DEBUG_SYSTRAY,
       "socket %s[%p] (composited=%s, relative-bg=%s",
@@ -246,6 +254,7 @@ systray_socket_new (GdkScreen       *screen,
   gint               result;
   GdkVisual         *visual;
   gint               red_prec, green_prec, blue_prec;
+  gboolean           supports_composite = FALSE;
 
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
 
@@ -275,8 +284,11 @@ systray_socket_new (GdkScreen       *screen,
   gdk_visual_get_red_pixel_details (visual, NULL, NULL, &red_prec);
   gdk_visual_get_green_pixel_details (visual, NULL, NULL, &green_prec);
   gdk_visual_get_blue_pixel_details (visual, NULL, NULL, &blue_prec);
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+  supports_composite = gdk_display_supports_composite (gdk_screen_get_display (screen));
+G_GNUC_END_IGNORE_DEPRECATIONS
   if (red_prec + blue_prec + green_prec < gdk_visual_get_depth (visual)
-      && gdk_display_supports_composite (gdk_screen_get_display (screen)))
+      && supports_composite)
     socket->is_composited = TRUE;
 
   return GTK_WIDGET (socket);
