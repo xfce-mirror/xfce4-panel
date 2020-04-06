@@ -2789,15 +2789,14 @@ launcher_plugin_unique_filename (LauncherPlugin *plugin)
 {
   gchar        *filename, *path;
   static guint  counter = 0;
-  GTimeVal      timeval;
 
   panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), NULL);
 
-  g_get_current_time (&timeval);
   filename = g_strdup_printf (RELATIVE_CONFIG_PATH G_DIR_SEPARATOR_S "%ld%d.desktop",
                               xfce_panel_plugin_get_name (XFCE_PANEL_PLUGIN (plugin)),
                               xfce_panel_plugin_get_unique_id (XFCE_PANEL_PLUGIN (plugin)),
-                              timeval.tv_sec, ++counter);
+                              g_get_real_time () / G_USEC_PER_SEC,
+                              ++counter);
   path = xfce_resource_save_location (XFCE_RESOURCE_CONFIG, filename, TRUE);
   g_free (filename);
 

@@ -2648,7 +2648,6 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
   GdkRectangle    geometry;
   GdkDisplay     *display;
   GdkMonitor     *monitor;
-  GTimeVal        now_t, end_t;
   GtkWidget      *toplevel, *plug;
   gint            px, py;
   GtkAllocation   alloc;
@@ -2692,8 +2691,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
    * use the coordinates */
   if (plugin->priv->panel_lock > 0)
     {
-      g_get_current_time (&end_t);
-      g_time_val_add (&end_t, G_USEC_PER_SEC / 2);
+      gint64 end_t = g_get_monotonic_time () + G_USEC_PER_SEC / 2;
 
       while (*x == -9999 && *y == -9999)
         {
@@ -2703,10 +2701,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
           gdk_window_get_position (gtk_widget_get_window (attach_widget), x, y);
 
           /* don't try longer then 1/2 a second */
-          g_get_current_time (&now_t);
-          if (now_t.tv_sec > end_t.tv_sec
-              || (now_t.tv_sec == end_t.tv_sec
-                  && now_t.tv_usec > end_t.tv_usec))
+          if (g_get_monotonic_time () > end_t)
             break;
         }
     }

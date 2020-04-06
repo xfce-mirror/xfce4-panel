@@ -526,7 +526,7 @@ panel_plugin_external_child_spawn (PanelPluginExternal *external)
   gchar         *program, *cmd_line;
   guint          i;
   gint           tmp_argc;
-  GTimeVal       timestamp;
+  gint64         timestamp;
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
   panel_return_if_fail (gtk_widget_get_realized (GTK_WIDGET (external)));
@@ -539,7 +539,7 @@ panel_plugin_external_child_spawn (PanelPluginExternal *external)
   if (panel_debug_has_domain (PANEL_DEBUG_GDB)
       || panel_debug_has_domain (PANEL_DEBUG_VALGRIND))
     {
-      g_get_current_time (&timestamp);
+      timestamp = g_get_real_time ();
       cmd_line = NULL;
       program = NULL;
 
@@ -559,7 +559,7 @@ panel_plugin_external_child_spawn (PanelPluginExternal *external)
                                           "-ex 'backtrace full' "
                                           "-ex 'info registers' "
                                           "-args",
-                                          program, g_get_tmp_dir (), timestamp.tv_sec,
+                                          program, g_get_tmp_dir (), timestamp / G_USEC_PER_SEC,
                                           panel_module_get_name (external->module),
                                           argv[PLUGIN_ARGV_UNIQUE_ID]);
             }
@@ -572,7 +572,7 @@ panel_plugin_external_child_spawn (PanelPluginExternal *external)
               cmd_line = g_strdup_printf ("%s "
                                           "--log-file='%s" G_DIR_SEPARATOR_S "%li_valgrind_%s_%s.log' "
                                           "--leak-check=full --show-reachable=yes -v ",
-                                          program, g_get_tmp_dir (), timestamp.tv_sec,
+                                          program, g_get_tmp_dir (), timestamp / G_USEC_PER_SEC,
                                           panel_module_get_name (external->module),
                                           argv[PLUGIN_ARGV_UNIQUE_ID]);
             }

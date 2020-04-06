@@ -560,15 +560,13 @@ static gboolean
 panel_base_window_active_timeout (gpointer user_data)
 {
   PanelBaseWindow        *window = PANEL_BASE_WINDOW (user_data);
-  GTimeVal                timeval;
   GtkStyleContext        *context;
 
   context = gtk_widget_get_style_context (GTK_WIDGET (window));
 
   /* Animate the border à la "marching ants" by cycling betwee a dashed and
      dotted border every other second */
-  g_get_current_time (&timeval);
-  if (timeval.tv_sec%2 == 0)
+  if ((g_get_real_time () / G_USEC_PER_SEC) % 2 == 0)
     {
       if (gtk_style_context_has_class (context, MARCHING_ANTS_DOTTED))
         gtk_style_context_remove_class (context, MARCHING_ANTS_DOTTED);
