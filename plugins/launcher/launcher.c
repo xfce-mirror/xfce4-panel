@@ -1901,7 +1901,7 @@ launcher_plugin_button_update_action_menu (LauncherPlugin *plugin)
     }
   else
     {
-      plugin->action_menu = garcon_gtk_menu_get_desktop_actions_menu (item);
+      plugin->action_menu = GTK_WIDGET (garcon_gtk_menu_get_desktop_actions_menu (item));
       gtk_menu_set_reserve_toggle_size (GTK_MENU (plugin->action_menu), FALSE);
       if (plugin->action_menu)
         {
