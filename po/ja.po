@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-30 00:30+0100\n"
-"PO-Revision-Date: 2020-01-30 18:28+0000\n"
+"POT-Creation-Date: 2020-04-01 00:30+0200\n"
+"PO-Revision-Date: 2020-03-31 22:58+0000\n"
 "Last-Translator: UTUMI Hirosi <utuhiro78@yahoo.co.jp>\n"
 "Language-Team: Japanese (http://www.transifex.com/xfce/xfce4-panel/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -31,11 +31,17 @@ msgid ""
 "file"
 msgstr "このデスクトップファイルの情報を基にパネルに新しいランチャーを追加します。"
 
-#: ../panel-preferences.desktop.in.h:1 ../panel/panel-window.c:2871
+#: ../panel-preferences.desktop.in.h:1
+msgid ""
+"panels;settings;preferences;taskbar;autohide;application "
+"menu;start;buttons;launcher;notification area;status;icons;plugins;"
+msgstr "パネル;設定;環境設定;タスクバー;自動非表示;アプリケーションメニュー;スタート;ボタン;ランチャー;通知領域;ステータス;アイコン;プラグイン;"
+
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2934
 msgid "Panel"
 msgstr "パネル"
 
-#: ../panel-preferences.desktop.in.h:2
+#: ../panel-preferences.desktop.in.h:3
 msgid "Customize the panel"
 msgstr "パネルをカスタマイズする"
 
@@ -72,7 +78,7 @@ msgstr "削除(_R)"
 msgid "_Properties"
 msgstr "プロパティ(_P)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:2959
+#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:3022
 msgid "_About"
 msgstr "このプログラムについて(_A)"
 
@@ -84,20 +90,20 @@ msgstr "移動(_M)"
 msgid "Pane_l"
 msgstr "パネル(_L)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2884
+#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2947
 msgid "Add _New Items..."
 msgstr "新しいアイテムを追加する(_N)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2899
+#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2962
 msgid "Panel Pr_eferences..."
 msgstr "パネルの設定(_E)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2931
+#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2994
 msgid "Log _Out"
 msgstr "ログアウト(_O)"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:207
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2950
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3013
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -238,37 +244,37 @@ msgstr "動作中の %s インスタンスが見つかりませんでした"
 msgid "Failed to launch the migration application"
 msgstr "移行アプリケーションの起動に失敗しました"
 
-#: ../panel/panel-application.c:976
+#: ../panel/panel-application.c:977
 msgid "Create _Launcher"
 msgstr "ランチャーを作成(_L)"
 
-#: ../panel/panel-application.c:977
+#: ../panel/panel-application.c:978
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "パネル上に新しいランチャーを作成し、ドロップしたファイルをメニューアイテムとして挿入します。"
 
-#: ../panel/panel-application.c:979
+#: ../panel/panel-application.c:980
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "%d 個のデスクトップファイルから新しいランチャーを作成します"
 
-#: ../panel/panel-application.c:1719
+#: ../panel/panel-application.c:1720
 msgid "Quit"
 msgstr "終了"
 
-#: ../panel/panel-application.c:1720
+#: ../panel/panel-application.c:1721
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "セッションマネージャーなしでXを起動しました。「終了」をクリックするとXサーバーを閉じます。"
 
-#: ../panel/panel-application.c:1721
+#: ../panel/panel-application.c:1722
 msgid "Are you sure you want to quit the panel?"
 msgstr "パネルを終了しますか？"
 
-#: ../panel/panel-application.c:1729
+#: ../panel/panel-application.c:1730
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "コマンド \"%s\" の実行に失敗しました"
@@ -696,7 +702,7 @@ msgstr "上級者"
 msgid "Expert"
 msgstr "達人"
 
-#: ../panel/panel-window.c:2916
+#: ../panel/panel-window.c:2979
 msgid "_Lock Panel"
 msgstr "パネルをロック(_L)"
 
@@ -1876,23 +1882,23 @@ msgstr "全モニターのウィンドウを表示する(_N)"
 msgid "Show only _minimized windows"
 msgstr "最小化されたウィンドウのみ表示する(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3630
+#: ../plugins/tasklist/tasklist-widget.c:3654
 msgid "Mi_nimize All"
 msgstr "すべて最小化(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3638
+#: ../plugins/tasklist/tasklist-widget.c:3662
 msgid "Un_minimize All"
 msgstr "すべて元に戻す(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3646
+#: ../plugins/tasklist/tasklist-widget.c:3670
 msgid "Ma_ximize All"
 msgstr "すべて最大化(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3654
+#: ../plugins/tasklist/tasklist-widget.c:3678
 msgid "_Unmaximize All"
 msgstr "すべて元に戻す(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3666
+#: ../plugins/tasklist/tasklist-widget.c:3690
 msgid "_Close All"
 msgstr "すべて閉じる(_C)"
 
