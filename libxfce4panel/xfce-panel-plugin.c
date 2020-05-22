@@ -2624,11 +2624,11 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
  * @menu_widget   : a #GtkWidget that will be used as popup menu.
  * @attach_widget : (allow-none): a #GtkWidget relative to which the menu should be positioned.
  * @x             : (out): return location for the x coordinate.
- * @y             : (out): return location for the x coordinate.
+ * @y             : (out): return location for the y coordinate.
  *
- * The menu widget is positioned relative to @attach_widget.
- * If @attach_widget is NULL, the menu widget is instead positioned
- * relative to @panel_plugin.
+ * Computes the x and y coordinates to position the @menu_widget
+ * relative to @attach_widget. If @attach_widget is NULL, the computed
+ * position will be relative to @plugin.
  *
  * This function is intended for custom menu widgets.
  * For a regular #GtkMenu you should use xfce_panel_plugin_position_menu()
