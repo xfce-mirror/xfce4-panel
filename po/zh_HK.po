@@ -6,6 +6,7 @@
 # Ambrose Li <acli@ada.dhs.org>, 2004
 # Cheng-Chia Tseng <pswo10680@gmail.com>, 2010
 # Hydonsingore Cia <hydonsingore@educities.edu.tw>, 2005
+# Ivan <personal@live.hk>, 2020
 # umm <umm@pchome.com.tw>, 2003
 # Walter Cheuk <wwycheuk@gmail.com>, 2013
 msgid ""
@@ -13,8 +14,8 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-01 00:30+0200\n"
-"PO-Revision-Date: 2020-03-31 22:30+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
+"PO-Revision-Date: 2020-05-26 05:16+0000\n"
+"Last-Translator: Ivan <personal@live.hk>\n"
 "Language-Team: Chinese (Hong Kong) (http://www.transifex.com/xfce/xfce4-panel/language/zh_HK/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +37,7 @@ msgstr "加入新的啟動列 (以此桌面檔資訊為基礎) 至面板"
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
-msgstr ""
+msgstr "面板;設置;首選項;任務欄;自動隱藏;應用程序菜單;開始;按鈕;啟動器;通知區域;狀態;圖標;插件;"
 
 #: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2934
 msgid "Panel"
@@ -56,7 +57,7 @@ msgstr "確定要移除「%s」嗎？"
 #: ../libxfce4panel/xfce-panel-plugin.c:1110
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
-msgstr ""
+msgstr "從面板上卸下該項目也意味著其配置將丟失。"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
@@ -168,7 +169,7 @@ msgstr "印出版本資訊並結束"
 #: ../panel/main.c:207
 #, c-format
 msgid "Name %s lost on the message dbus, exiting."
-msgstr ""
+msgstr "名稱 %s 在消息dbus上丟失，正在退出。"
 
 #. parse context options
 #: ../panel/main.c:268
@@ -228,7 +229,7 @@ msgstr "未能傳送 D-Bus 訊息"
 
 #: ../panel/main.c:441
 msgid "Execute"
-msgstr ""
+msgstr "執行"
 
 #: ../panel/main.c:442
 msgid ""
@@ -294,7 +295,7 @@ msgstr "暗示類型「%s」無效。有效的類型為真假值 (bool)、倍精
 
 #: ../panel/panel-dialogs.c:58
 msgid "Unable to open the e-mail address"
-msgstr ""
+msgstr "無法打開電子郵件地址"
 
 #: ../panel/panel-dialogs.c:83
 msgid "The panel of the Xfce Desktop Environment"
@@ -389,7 +390,7 @@ msgstr "自動"
 
 #: ../panel/panel-preferences-dialog.c:528
 msgid "Primary"
-msgstr ""
+msgstr "主要"
 
 #. I18N: monitor name in the output selector
 #: ../panel/panel-preferences-dialog.c:547
@@ -440,7 +441,7 @@ msgstr "永不"
 
 #: ../panel/panel-preferences-dialog.glade.h:2
 msgid "Intelligently"
-msgstr ""
+msgstr "聰明地"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 #: ../plugins/tasklist/tasklist-dialog.glade.h:2
@@ -473,7 +474,7 @@ msgstr "背景影像"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "Panel Preferences"
-msgstr ""
+msgstr "面板首選項"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Profiles:"
@@ -497,7 +498,7 @@ msgstr "移除目前所選的面板"
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "<b>General</b>"
-msgstr ""
+msgstr "<b>一般</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid "M_ode:"
@@ -542,7 +543,7 @@ msgstr "輸入(_U)："
 #. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:29
 msgid "<b>Measurements</b>"
-msgstr ""
+msgstr "<b>測量</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Row _size (pixels):"
@@ -573,11 +574,11 @@ msgstr "顯示(_I)"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Dark mode"
-msgstr ""
+msgstr "暗模式"
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "<b>Background</b>"
-msgstr ""
+msgstr "<b>背景</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 #: ../plugins/separator/separator-dialog.glade.h:7
@@ -602,7 +603,7 @@ msgstr "選取背景影像"
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "<b>Icons</b>"
-msgstr ""
+msgstr "<b>圖標</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Adjust size au_tomatically"
@@ -614,11 +615,11 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 msgid "<b>Opacity</b>"
-msgstr ""
+msgstr "<b>不透明度</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 msgid "Configure..."
-msgstr ""
+msgstr "配置..."
 
 #: ../panel/panel-preferences-dialog.glade.h:49
 msgid ""
@@ -826,7 +827,7 @@ msgstr "%d 秒內電腦休眠。"
 
 #: ../plugins/actions/actions.c:195
 msgid "Hybrid Sleep"
-msgstr ""
+msgstr "混合睡眠"
 
 #: ../plugins/actions/actions.c:196
 msgid "_Hybrid Sleep"
@@ -834,12 +835,12 @@ msgstr ""
 
 #: ../plugins/actions/actions.c:197
 msgid "Do you want to hibernate and suspend the system?"
-msgstr ""
+msgstr "你是否打算把系統休眠？"
 
 #: ../plugins/actions/actions.c:198
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
-msgstr ""
+msgstr "在 %d秒內休眠與暫停電腦。"
 
 #: ../plugins/actions/actions.c:204
 msgid "Suspend"
@@ -984,7 +985,7 @@ msgstr "選單檔案"
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu.c:39
 msgid "Applications"
-msgstr ""
+msgstr "應用"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:600
 #: ../plugins/directorymenu/directorymenu.c:471
@@ -1430,7 +1431,7 @@ msgstr "建立新資料夾"
 
 #: ../plugins/directorymenu/directorymenu.c:932
 msgid "Create New Text Document"
-msgstr ""
+msgstr "創建新的文本文檔"
 
 #: ../plugins/directorymenu/directorymenu.c:939
 msgid "C_reate"
@@ -1459,11 +1460,11 @@ msgstr "在終端機開啟"
 
 #: ../plugins/directorymenu/directorymenu.c:1109
 msgid "Create Folder..."
-msgstr ""
+msgstr "創建文件夾..."
 
 #: ../plugins/directorymenu/directorymenu.c:1126
 msgid "Create Text Document..."
-msgstr ""
+msgstr "建立文字文件..."
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
@@ -1618,7 +1619,7 @@ msgstr "加入新的空項目"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "Add a new hyperlink"
-msgstr ""
+msgstr "添加新的超連結"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "Disable t_ooltips"
@@ -1673,7 +1674,7 @@ msgstr "按鈕"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 msgid "Miniature View"
-msgstr ""
+msgstr "縮影"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
 #: ../plugins/pager/pager.desktop.in.in.h:1
@@ -1686,11 +1687,11 @@ msgstr "列數(_R)："
 
 #: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Show workspace number"
-msgstr ""
+msgstr "顯示工作區編號"
 
 #: ../plugins/pager/pager-dialog.glade.h:9
 msgid "Switch workspaces using the mouse wheel"
-msgstr ""
+msgstr "使用鼠標滾輪切換工作區"
 
 #: ../plugins/pager/pager-dialog.glade.h:10
 msgid "<b>Appearance</b>"
