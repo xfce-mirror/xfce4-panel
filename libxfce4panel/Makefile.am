@@ -145,7 +145,7 @@ if HAVE_INTROSPECTION
 introspection_sources = $(libxfce4panel_2_0_la_SOURCES)
 
 libxfce4panel-2.0.gir: libxfce4panel-2.0.la Makefile
-libxfce4panel_2_0_gir_INCLUDES = GObject-2.0 GLib-2.0 Gtk-3.0 libxfce4util-1.0
+libxfce4panel_2_0_gir_INCLUDES = GObject-2.0 GLib-2.0 Gio-2.0 Gtk-3.0 libxfce4util-1.0
 libxfce4panel_2_0_gir_CFLAGS = $(AM_CPPFLAGS)
 libxfce4panel_2_0_gir_LIBS = libxfce4panel-2.0.la
 libxfce4panel_2_0_gir_FILES = $(introspection_sources)
