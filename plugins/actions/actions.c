@@ -37,6 +37,7 @@
 
 
 
+#define DEFAULT_TITLE    _("Session Menu")
 #define DEFAULT_ICON_SIZE (16)
 #define DEFAULT_TIMEOUT   (30)
 
@@ -71,11 +72,22 @@ typedef enum
 }
 AppearanceType;
 
+typedef enum
+{
+  BUTTON_TITLE_TYPE_FULLNAME,
+  BUTTON_TITLE_TYPE_USERNAME,
+  BUTTON_TITLE_TYPE_USERID,
+  BUTTON_TITLE_TYPE_CUSTOM
+}
+ButtonTitleType;
+
 enum
 {
   PROP_0,
   PROP_ITEMS,
   PROP_APPEARANCE,
+  PROP_BUTTON_TITLE,
+  PROP_CUSTOM_TITLE,
   PROP_INVERT_ORIENTATION,
   PROP_ASK_CONFIRMATION
 };
@@ -98,6 +110,8 @@ struct _ActionsPlugin
   XfcePanelPlugin __parent__;
 
   AppearanceType  type;
+  ButtonTitleType button_title;
+  gchar          *custom_title;
   GPtrArray      *items;
   GtkWidget      *menu;
   guint           invert_orientation : 1;
@@ -273,6 +287,22 @@ actions_plugin_class_init (ActionsPluginClass *klass)
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_BUTTON_TITLE,
+                                   g_param_spec_uint ("button-title",
+                                                      NULL, NULL,
+                                                      BUTTON_TITLE_TYPE_FULLNAME,
+                                                      BUTTON_TITLE_TYPE_CUSTOM,
+                                                      BUTTON_TITLE_TYPE_FULLNAME,
+                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_CUSTOM_TITLE,
+                                   g_param_spec_string ("custom-title",
+                                                        NULL, NULL,
+                                                        DEFAULT_TITLE,
+                                                        G_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_INVERT_ORIENTATION,
                                    g_param_spec_boolean ("invert-orientation",
                                                          NULL, NULL,
@@ -295,6 +325,7 @@ static void
 actions_plugin_init (ActionsPlugin *plugin)
 {
   plugin->type = APPEARANCE_TYPE_MENU;
+  plugin->button_title = BUTTON_TITLE_TYPE_FULLNAME;
   plugin->invert_orientation = FALSE;
   plugin->ask_confirmation = TRUE;
 }
@@ -328,6 +359,15 @@ actions_plugin_get_property (GObject    *object,
 
     case PROP_APPEARANCE:
       g_value_set_uint (value, plugin->type);
+      break;
+
+    case PROP_BUTTON_TITLE:
+      g_value_set_uint (value, plugin->button_title);
+      break;
+
+    case PROP_CUSTOM_TITLE:
+      g_value_set_string (value, plugin->custom_title == NULL ?
+                          DEFAULT_TITLE : plugin->custom_title);
       break;
 
     case PROP_INVERT_ORIENTATION:
@@ -369,6 +409,17 @@ actions_plugin_set_property (GObject      *object,
       actions_plugin_pack (plugin);
       break;
 
+    case PROP_BUTTON_TITLE:
+      plugin->button_title = g_value_get_uint (value);
+      actions_plugin_pack (plugin);
+      break;
+
+    case PROP_CUSTOM_TITLE:
+      g_free (plugin->custom_title);
+      plugin->custom_title = g_value_dup_string (value);
+      actions_plugin_pack (plugin);
+      break;
+
     case PROP_INVERT_ORIENTATION:
       plugin->invert_orientation = g_value_get_boolean (value);
       actions_plugin_pack (plugin);
@@ -394,6 +445,8 @@ actions_plugin_construct (XfcePanelPlugin *panel_plugin)
   {
     { "items", G_TYPE_PTR_ARRAY },
     { "appearance", G_TYPE_UINT },
+    { "button-title", G_TYPE_UINT },
+    { "custom-title", G_TYPE_STRING },
     { "invert-orientation", G_TYPE_BOOLEAN },
     { "ask-confirmation", G_TYPE_BOOLEAN },
     { NULL }
@@ -570,6 +623,20 @@ actions_plugin_lookup_entry (const gchar *name)
 
 
 static void
+actions_plugin_combo_title_changed_cb (GtkWidget *widget,
+                                       gpointer   user_data)
+{
+  GtkBuilder *builder = GTK_BUILDER (user_data);
+
+  gtk_widget_set_sensitive (GTK_WIDGET (gtk_builder_get_object (builder, "entry-cust-title")),
+                            gtk_combo_box_get_active (GTK_COMBO_BOX (widget)) == 3);
+  gtk_widget_set_sensitive (GTK_WIDGET (gtk_builder_get_object (builder, "label-cust-title")),
+                            gtk_combo_box_get_active (GTK_COMBO_BOX (widget)) == 3);
+}
+
+
+
+static void
 actions_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   ActionsPlugin *plugin = XFCE_ACTIONS_PLUGIN (panel_plugin);
@@ -610,6 +677,24 @@ actions_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_object_bind_property (G_OBJECT (combo), "active",
                           G_OBJECT (object), "sensitive",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL | G_BINDING_INVERT_BOOLEAN);
+
+  object = gtk_builder_get_object (builder, "revealer-title");
+  g_object_bind_property (G_OBJECT (plugin), "appearance",
+                          object, "reveal-child",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+
+  combo = gtk_builder_get_object (builder, "combo-title");
+  g_object_bind_property (G_OBJECT (plugin), "button-title",
+                          G_OBJECT (combo), "active",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+
+  object = gtk_builder_get_object (builder, "entry-cust-title");
+  g_object_bind_property (G_OBJECT (plugin), "custom-title",
+                          G_OBJECT (object), "text",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+
+  g_signal_connect (combo, "changed", G_CALLBACK (actions_plugin_combo_title_changed_cb), builder);
+  actions_plugin_combo_title_changed_cb (GTK_WIDGET (object), builder);
 
   object = gtk_builder_get_object (builder, "confirmation-dialog");
   g_object_bind_property (G_OBJECT (plugin), "ask-confirmation",
@@ -1153,7 +1238,7 @@ actions_plugin_pack_idle (gpointer data)
   GtkWidget           *label;
   GtkWidget           *button;
   GtkWidget           *widget;
-  const gchar         *username;
+  const gchar         *button_title;
   GtkWidget           *child;
   GtkWidget           *box;
   guint                i;
@@ -1217,15 +1302,40 @@ actions_plugin_pack_idle (gpointer data)
     }
   else
     {
-      /* get a decent username, not the glib defaults */
-      username = g_get_real_name ();
-      if (panel_str_is_empty (username)
-          || strcmp (username, "Unknown") == 0)
+      switch (plugin->button_title)
         {
-          username = g_get_user_name ();
-          if (panel_str_is_empty (username)
-              || strcmp (username, "somebody") == 0)
-            username = _("John Doe");
+          case BUTTON_TITLE_TYPE_FULLNAME:
+            /* get a decent username, not the glib defaults */
+            button_title = g_get_real_name ();
+            if (panel_str_is_empty (button_title)
+                || strcmp (button_title, "Unknown") == 0)
+              {
+                button_title = g_get_user_name ();
+                if (panel_str_is_empty (button_title)
+                    || strcmp (button_title, "username") == 0)
+                  button_title = _("Little Mouse");
+              }
+            break;
+
+          case BUTTON_TITLE_TYPE_USERNAME:
+            button_title = g_get_user_name ();
+            if (panel_str_is_empty (button_title))
+              button_title = "username";
+            break;
+
+          case BUTTON_TITLE_TYPE_USERID:
+            {
+              char buf[16];
+              snprintf(buf, sizeof(buf), "%u", (unsigned)getuid());
+              button_title = buf;
+            }
+            break;
+
+          default:
+          case BUTTON_TITLE_TYPE_CUSTOM:
+            button_title = (plugin->custom_title == NULL?
+                            DEFAULT_TITLE : plugin->custom_title);
+            break;
         }
 
       button = xfce_arrow_button_new (GTK_ARROW_NONE);
@@ -1237,7 +1347,7 @@ actions_plugin_pack_idle (gpointer data)
           G_CALLBACK (actions_plugin_menu), plugin);
       gtk_widget_show (button);
 
-      label = gtk_label_new (username);
+      label = gtk_label_new (button_title);
       gtk_container_add (GTK_CONTAINER (button), label);
       mode = xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin));
       gtk_label_set_angle (GTK_LABEL (label),
