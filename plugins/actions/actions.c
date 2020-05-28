@@ -666,7 +666,7 @@ actions_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
   g_signal_connect (combo, "changed", G_CALLBACK (actions_plugin_combo_title_changed_cb), builder);
-  actions_plugin_combo_title_changed_cb (GTK_WIDGET (object), builder);
+  actions_plugin_combo_title_changed_cb (GTK_WIDGET (combo), builder);
 
   object = gtk_builder_get_object (builder, "confirmation-dialog");
   g_object_bind_property (G_OBJECT (plugin), "ask-confirmation",
