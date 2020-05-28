@@ -244,39 +244,6 @@
                         <property name="width">2</property>
                       </packing>
                     </child>
-                    <child>
-                      <object class="GtkCheckButton" id="invert-orientation">
-                        <property name="label" translatable="yes">Invert buttons _orientation</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="draw_indicator">True</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">2</property>
-                        <property name="width">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkCheckButton" id="confirmation-dialog">
-                        <property name="label" translatable="yes">_Show confirmation dialog</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">False</property>
-                        <property name="tooltip_text" translatable="yes">Show a confirmation dialog with a 30 second timeout for some of the actions.</property>
-                        <property name="use_underline">True</property>
-                        <property name="draw_indicator">True</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">3</property>
-                        <property name="width">2</property>
-                      </packing>
-                    </child>
                   </object>
                 </child>
                 <child type="label">
@@ -303,10 +270,13 @@
                 <property name="label_xalign">0</property>
                 <property name="shadow_type">none</property>
                 <child>
-                  <object class="GtkAlignment" id="alignment2">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="left_padding">12</property>
+                    <property name="margin_left">12</property>
+                    <property name="vexpand">True</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">6</property>
                     <child>
                       <object class="GtkScrolledWindow" id="scrolledwindow1">
                         <property name="visible">True</property>
@@ -317,6 +287,8 @@
                           <object class="GtkTreeView" id="actions-treeview">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
                             <property name="model">items-store</property>
                             <property name="headers_clickable">False</property>
                             <property name="reorderable">True</property>
@@ -349,6 +321,27 @@
                           </object>
                         </child>
                       </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkCheckButton" id="confirmation-dialog">
+                        <property name="label" translatable="yes">_Show confirmation dialog</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="tooltip_text" translatable="yes">Show a confirmation dialog with a 30 second timeout for some of the actions.</property>
+                        <property name="use_underline">True</property>
+                        <property name="draw_indicator">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
                     </child>
                   </object>
                 </child>

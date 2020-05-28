@@ -88,7 +88,6 @@ enum
   PROP_APPEARANCE,
   PROP_BUTTON_TITLE,
   PROP_CUSTOM_TITLE,
-  PROP_INVERT_ORIENTATION,
   PROP_ASK_CONFIRMATION
 };
 
@@ -114,7 +113,6 @@ struct _ActionsPlugin
   gchar          *custom_title;
   GPtrArray      *items;
   GtkWidget      *menu;
-  guint           invert_orientation : 1;
   guint           ask_confirmation : 1;
   guint           pack_idle_id;
 };
@@ -303,13 +301,6 @@ actions_plugin_class_init (ActionsPluginClass *klass)
                                                         G_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_INVERT_ORIENTATION,
-                                   g_param_spec_boolean ("invert-orientation",
-                                                         NULL, NULL,
-                                                         FALSE,
-                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
-
-  g_object_class_install_property (gobject_class,
                                    PROP_ASK_CONFIRMATION,
                                    g_param_spec_boolean ("ask-confirmation",
                                                          NULL, NULL,
@@ -326,7 +317,6 @@ actions_plugin_init (ActionsPlugin *plugin)
 {
   plugin->type = APPEARANCE_TYPE_MENU;
   plugin->button_title = BUTTON_TITLE_TYPE_FULLNAME;
-  plugin->invert_orientation = FALSE;
   plugin->ask_confirmation = TRUE;
 }
 
@@ -368,10 +358,6 @@ actions_plugin_get_property (GObject    *object,
     case PROP_CUSTOM_TITLE:
       g_value_set_string (value, plugin->custom_title == NULL ?
                           DEFAULT_TITLE : plugin->custom_title);
-      break;
-
-    case PROP_INVERT_ORIENTATION:
-      g_value_set_boolean (value, plugin->invert_orientation);
       break;
 
     case PROP_ASK_CONFIRMATION:
@@ -420,11 +406,6 @@ actions_plugin_set_property (GObject      *object,
       actions_plugin_pack (plugin);
       break;
 
-    case PROP_INVERT_ORIENTATION:
-      plugin->invert_orientation = g_value_get_boolean (value);
-      actions_plugin_pack (plugin);
-      break;
-
     case PROP_ASK_CONFIRMATION:
       plugin->ask_confirmation = g_value_get_boolean (value);
       break;
@@ -447,7 +428,6 @@ actions_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "appearance", G_TYPE_UINT },
     { "button-title", G_TYPE_UINT },
     { "custom-title", G_TYPE_STRING },
-    { "invert-orientation", G_TYPE_BOOLEAN },
     { "ask-confirmation", G_TYPE_BOOLEAN },
     { NULL }
   };
@@ -669,14 +649,6 @@ actions_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_object_bind_property (G_OBJECT (plugin), "appearance",
                           G_OBJECT (combo), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
-
-  object = gtk_builder_get_object (builder, "invert-orientation");
-  g_object_bind_property (G_OBJECT (plugin), "invert-orientation",
-                          G_OBJECT (object), "active",
-                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
-  g_object_bind_property (G_OBJECT (combo), "active",
-                          G_OBJECT (object), "sensitive",
-                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL | G_BINDING_INVERT_BOOLEAN);
 
   object = gtk_builder_get_object (builder, "revealer-title");
   g_object_bind_property (G_OBJECT (plugin), "appearance",
@@ -1268,8 +1240,6 @@ actions_plugin_pack_idle (gpointer data)
       else
         orientation = GTK_ORIENTATION_HORIZONTAL;
 
-      if (plugin->invert_orientation)
-        orientation = !orientation;
       box = gtk_box_new (orientation, 0);
       gtk_container_add (GTK_CONTAINER (plugin), box);
       gtk_widget_show (box);
@@ -1279,13 +1249,6 @@ actions_plugin_pack_idle (gpointer data)
           val = g_ptr_array_index (plugin->items, i);
           name = g_value_get_string (val);
           if (name == NULL || *name != '+')
-            continue;
-
-          /* skip separators when packing buttons in the opposite
-           * orientation */
-          if (plugin->invert_orientation !=
-              (xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin)) == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
-              && g_strcmp0 (name + 1, "separator") == 0)
             continue;
 
           widget = actions_plugin_action_button (plugin, name + 1, orientation, &type);
