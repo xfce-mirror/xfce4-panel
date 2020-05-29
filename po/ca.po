@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-01 00:30+0200\n"
-"PO-Revision-Date: 2020-04-01 07:43+0000\n"
+"POT-Creation-Date: 2020-05-28 12:45+0200\n"
+"PO-Revision-Date: 2020-05-29 14:06+0000\n"
 "Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce4-panel/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -67,7 +67,7 @@ msgid "_Cancel"
 msgstr "_Cancel·la"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1112
-#: ../libxfce4panel/xfce-panel-plugin.c:1307
+#: ../libxfce4panel/xfce-panel-plugin.c:1287
 #: ../panel/panel-plugin-external.c:443
 #: ../panel/panel-preferences-dialog.c:961
 #: ../panel/panel-preferences-dialog.c:1327
@@ -75,37 +75,37 @@ msgstr "_Cancel·la"
 msgid "_Remove"
 msgstr "_Suprimeix"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1253
+#: ../libxfce4panel/xfce-panel-plugin.c:1237
 msgid "_Properties"
 msgstr "_Propietats"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:3022
+#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3022
 msgid "_About"
 msgstr "_Quant a"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1283
+#: ../libxfce4panel/xfce-panel-plugin.c:1267
 msgid "_Move"
 msgstr "_Mou"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1328
+#: ../libxfce4panel/xfce-panel-plugin.c:1308
 msgid "Pane_l"
 msgstr "Tau_ler"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2947
+#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2947
 msgid "Add _New Items..."
 msgstr "Afegeix elements _nous..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2962
+#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2962
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferències del tauler..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2994
+#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2994
 msgid "Log _Out"
 msgstr "_Surt"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:207
+#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:207
 #: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3013
-#: ../plugins/actions/actions-dialog.glade.h:4
+#: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
@@ -118,7 +118,7 @@ msgstr "_Surt"
 msgid "_Help"
 msgstr "A_juda"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1408
+#: ../libxfce4panel/xfce-panel-plugin.c:1388
 msgid "About"
 msgstr "Quant a"
 
@@ -345,7 +345,7 @@ msgstr "Afegiu connectors nous al tauler"
 #: ../panel/panel-item-dialog.c:211
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../panel/panel-tic-tac-toe.c:125
-#: ../plugins/actions/actions-dialog.glade.h:3
+#: ../plugins/actions/actions-dialog.glade.h:7
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:7
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
@@ -729,184 +729,204 @@ msgstr "La configuració del tauler s'ha actualitzat."
 msgid "Action Buttons"
 msgstr "Botons d'accions"
 
-#: ../plugins/actions/actions-dialog.glade.h:2
+#: ../plugins/actions/actions-dialog.glade.h:2 ../plugins/actions/actions.c:40
 msgid "Session Menu"
 msgstr "Menú de sessió"
 
+#: ../plugins/actions/actions-dialog.glade.h:3
+msgid "Full Name"
+msgstr "Nom complet"
+
+#: ../plugins/actions/actions-dialog.glade.h:4
+msgid "Username"
+msgstr "Nom d'usuari"
+
 #: ../plugins/actions/actions-dialog.glade.h:5
-msgid "Invert buttons _orientation"
-msgstr "Inverteix l'_orientació dels botons"
+msgid "User ID"
+msgstr "Id. d'usuari"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
-msgid "_Show confirmation dialog"
-msgstr "_Mostra el diàleg de confirmació"
+msgid "Custom"
+msgstr "Personalitzat"
 
-#: ../plugins/actions/actions-dialog.glade.h:7
-msgid ""
-"Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Mostra un diàleg de confirmació amb un comptador de 30 segons per algunes accions."
-
-#: ../plugins/actions/actions-dialog.glade.h:8
+#: ../plugins/actions/actions-dialog.glade.h:9
 msgid "Appeara_nce:"
 msgstr "Apare_nça:"
 
-#: ../plugins/actions/actions-dialog.glade.h:9
+#: ../plugins/actions/actions-dialog.glade.h:10
+msgid "Title:"
+msgstr "Títol:"
+
+#: ../plugins/actions/actions-dialog.glade.h:11
+msgid "Custo_m title:"
+msgstr "Títol _personalitzat:"
+
+#: ../plugins/actions/actions-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "General"
 msgstr "General"
 
-#: ../plugins/actions/actions-dialog.glade.h:10
+#: ../plugins/actions/actions-dialog.glade.h:13
 msgid "Visible"
 msgstr "Visible"
 
-#: ../plugins/actions/actions-dialog.glade.h:11
+#: ../plugins/actions/actions-dialog.glade.h:14
 msgid "Action"
 msgstr "Acció"
 
-#: ../plugins/actions/actions-dialog.glade.h:12
+#: ../plugins/actions/actions-dialog.glade.h:15
+msgid "_Show confirmation dialog"
+msgstr "_Mostra el diàleg de confirmació"
+
+#: ../plugins/actions/actions-dialog.glade.h:16
+msgid ""
+"Show a confirmation dialog with a 30 second timeout for some of the actions."
+msgstr "Mostra un diàleg de confirmació amb un comptador de 30 segons per algunes accions."
+
+#: ../plugins/actions/actions-dialog.glade.h:17
 msgid "_Actions"
 msgstr "_Accions"
 
-#: ../plugins/actions/actions.c:153
+#: ../plugins/actions/actions.c:165
 msgid "Log Out"
 msgstr "Surt"
 
-#: ../plugins/actions/actions.c:154
+#: ../plugins/actions/actions.c:166
 msgid "_Log Out"
 msgstr "_Surt"
 
-#: ../plugins/actions/actions.c:155
+#: ../plugins/actions/actions.c:167
 msgid "Are you sure you want to log out?"
 msgstr "Esteu segur que voleu sortir?"
 
-#: ../plugins/actions/actions.c:156
+#: ../plugins/actions/actions.c:168
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Se sortirà en %d segons."
 
-#: ../plugins/actions/actions.c:162
+#: ../plugins/actions/actions.c:174
 msgid "Log Out..."
 msgstr "Surt..."
 
-#: ../plugins/actions/actions.c:163
+#: ../plugins/actions/actions.c:175
 msgid "Log _Out..."
 msgstr "_Surt..."
 
-#: ../plugins/actions/actions.c:170
+#: ../plugins/actions/actions.c:182
 msgid "Switch User"
 msgstr "Canvia d'usuari"
 
-#: ../plugins/actions/actions.c:171
+#: ../plugins/actions/actions.c:183
 msgid "_Switch User"
 msgstr "_Canvia d'usuari"
 
-#: ../plugins/actions/actions.c:178
+#: ../plugins/actions/actions.c:190
 msgid "Lock Screen"
 msgstr "Bloqueja la pantalla"
 
-#: ../plugins/actions/actions.c:179
+#: ../plugins/actions/actions.c:191
 msgid "Loc_k Screen"
 msgstr "_Bloqueja la pantalla"
 
-#: ../plugins/actions/actions.c:186
+#: ../plugins/actions/actions.c:198
 msgid "Hibernate"
 msgstr "Hiverna"
 
-#: ../plugins/actions/actions.c:187
+#: ../plugins/actions/actions.c:199
 msgid "_Hibernate"
 msgstr "_Hiverna"
 
-#: ../plugins/actions/actions.c:188
+#: ../plugins/actions/actions.c:200
 msgid "Do you want to suspend to disk?"
 msgstr "Voleu que la suspensió sigui al disc?"
 
-#: ../plugins/actions/actions.c:189
+#: ../plugins/actions/actions.c:201
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "S'hivernarà l'ordinador en %d segons."
 
-#: ../plugins/actions/actions.c:195
+#: ../plugins/actions/actions.c:207
 msgid "Hybrid Sleep"
 msgstr "Suspensió híbrida"
 
-#: ../plugins/actions/actions.c:196
+#: ../plugins/actions/actions.c:208
 msgid "_Hybrid Sleep"
 msgstr "_Suspensió híbrida"
 
-#: ../plugins/actions/actions.c:197
+#: ../plugins/actions/actions.c:209
 msgid "Do you want to hibernate and suspend the system?"
 msgstr "Voleu hibernar i suspendre el sistema?"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:210
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr "S'hibernarà i se suspendrà l'ordinador en %d segons."
 
-#: ../plugins/actions/actions.c:204
+#: ../plugins/actions/actions.c:216
 msgid "Suspend"
 msgstr "Suspèn"
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:217
 msgid "Sus_pend"
 msgstr "Sus_pèn"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:218
 msgid "Do you want to suspend to RAM?"
 msgstr "Voleu que la suspensió sigui a la RAM?"
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:219
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Se suspendrà l'ordinador en %d segons."
 
-#: ../plugins/actions/actions.c:213
+#: ../plugins/actions/actions.c:225
 msgid "Restart"
 msgstr "Reinicia"
 
-#: ../plugins/actions/actions.c:214
+#: ../plugins/actions/actions.c:226
 msgid "_Restart"
 msgstr "_Reinicia"
 
-#: ../plugins/actions/actions.c:215
+#: ../plugins/actions/actions.c:227
 msgid "Are you sure you want to restart?"
 msgstr "Esteu segur que voleu reiniciar?"
 
-#: ../plugins/actions/actions.c:216
+#: ../plugins/actions/actions.c:228
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Es reiniciarà l'ordinador en %d segons."
 
-#: ../plugins/actions/actions.c:222
+#: ../plugins/actions/actions.c:234
 msgid "Shut Down"
 msgstr "Apaga"
 
-#: ../plugins/actions/actions.c:223
+#: ../plugins/actions/actions.c:235
 msgid "Shut _Down"
 msgstr "_Apaga"
 
-#: ../plugins/actions/actions.c:224
+#: ../plugins/actions/actions.c:236
 msgid "Are you sure you want to shut down?"
 msgstr "Esteu segur que voleu apagar?"
 
-#: ../plugins/actions/actions.c:225
+#: ../plugins/actions/actions.c:237
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "S'apagarà l'ordinador en %d segons."
 
-#: ../plugins/actions/actions.c:625
+#: ../plugins/actions/actions.c:685
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Separador"
 
-#: ../plugins/actions/actions.c:1050
+#: ../plugins/actions/actions.c:1110
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Ha fallat l'execució de l'acció «%s»"
 
-#: ../plugins/actions/actions.c:1225
-msgid "John Doe"
-msgstr "John Doe"
+#: ../plugins/actions/actions.c:1279
+msgid "Little Mouse"
+msgstr "Ratolí petit"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
@@ -998,7 +1018,7 @@ msgid "_OK"
 msgstr "D'ac_ord"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2403
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2483
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Ha fallat l'execució de l'ordre «%s»."
@@ -1519,15 +1539,15 @@ msgstr "Patrons de _fitxers:"
 msgid "Filtering"
 msgstr "Filtratge"
 
-#: ../plugins/launcher/launcher.c:405
+#: ../plugins/launcher/launcher.c:415
 msgid "Open launcher menu"
 msgstr "Obre el menú del llançador"
 
-#: ../plugins/launcher/launcher.c:1622
+#: ../plugins/launcher/launcher.c:1643
 msgid "Unnamed Item"
 msgstr "Element sense nom"
 
-#: ../plugins/launcher/launcher.c:1800
+#: ../plugins/launcher/launcher.c:1821
 msgid "No items"
 msgstr "Sense elements"
 
@@ -1884,23 +1904,23 @@ msgstr "Mostra les finestres de tots els mo_nitors"
 msgid "Show only _minimized windows"
 msgstr "Mostra només les finestres _minimitzades"
 
-#: ../plugins/tasklist/tasklist-widget.c:3654
+#: ../plugins/tasklist/tasklist-widget.c:3650
 msgid "Mi_nimize All"
 msgstr "Mi_nimitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3662
+#: ../plugins/tasklist/tasklist-widget.c:3658
 msgid "Un_minimize All"
 msgstr "De_sminimitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3670
+#: ../plugins/tasklist/tasklist-widget.c:3666
 msgid "Ma_ximize All"
 msgstr "Ma_ximitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3678
+#: ../plugins/tasklist/tasklist-widget.c:3674
 msgid "_Unmaximize All"
 msgstr "Des_maximitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3690
+#: ../plugins/tasklist/tasklist-widget.c:3686
 msgid "_Close All"
 msgstr "_Tanca-ho tot"
 
