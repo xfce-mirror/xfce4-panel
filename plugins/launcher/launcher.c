@@ -1503,8 +1503,15 @@ launcher_plugin_menu_deactivate (GtkWidget      *menu,
   panel_return_if_fail (plugin->menu == menu);
 
   /* deactivate the arrow button */
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->arrow), FALSE);
-  gtk_widget_unset_state_flags (GTK_WIDGET (plugin->arrow), GTK_STATE_FLAG_PRELIGHT);
+  if (plugin->arrow_position != LAUNCHER_ARROW_INTERNAL)
+    {
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->arrow), FALSE);
+      gtk_widget_unset_state_flags (GTK_WIDGET (plugin->arrow), GTK_STATE_FLAG_PRELIGHT);
+    }
+  else
+    {
+      gtk_widget_set_state_flags (GTK_WIDGET (plugin->button), GTK_STATE_FLAG_NORMAL, TRUE);
+    }
 }
 
 
@@ -1594,9 +1601,16 @@ launcher_plugin_menu_item_drag_data_received (GtkWidget          *widget,
   gtk_widget_hide (gtk_widget_get_toplevel (plugin->menu));
   gtk_widget_hide (plugin->menu);
 
-  /* inactivate the toggle button */
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->arrow), FALSE);
-  gtk_widget_unset_state_flags (GTK_WIDGET (plugin->arrow), GTK_STATE_FLAG_PRELIGHT);
+  /* deactivate the toggle button */
+  if (plugin->arrow_position != LAUNCHER_ARROW_INTERNAL)
+    {
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->arrow), FALSE);
+      gtk_widget_unset_state_flags (GTK_WIDGET (plugin->arrow), GTK_STATE_FLAG_PRELIGHT);
+    }
+  else
+    {
+      gtk_widget_set_state_flags (GTK_WIDGET (plugin->button), GTK_STATE_FLAG_NORMAL, TRUE);
+    }
 
   /* finish the drag */
   gtk_drag_finish (context, TRUE, FALSE, drag_time);
@@ -1721,7 +1735,10 @@ launcher_plugin_menu_popup (gpointer user_data)
     launcher_plugin_menu_construct (plugin);
 
   /* toggle the arrow button */
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->arrow), TRUE);
+  if (plugin->arrow_position != LAUNCHER_ARROW_INTERNAL)
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->arrow), TRUE);
+  else
+    gtk_widget_set_state_flags (GTK_WIDGET (plugin->button), GTK_STATE_FLAG_CHECKED, TRUE);
 
   /* popup the menu */
   gtk_menu_popup_at_widget (GTK_MENU (plugin->menu),
@@ -1770,8 +1787,15 @@ launcher_plugin_menu_destroy (LauncherPlugin *plugin)
       plugin->menu = NULL;
 
       /* deactivate the toggle button */
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->arrow), FALSE);
-      gtk_widget_unset_state_flags (GTK_WIDGET (plugin->arrow), GTK_STATE_FLAG_PRELIGHT);
+      if (plugin->arrow_position != LAUNCHER_ARROW_INTERNAL)
+        {
+          gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->arrow), FALSE);
+          gtk_widget_unset_state_flags (GTK_WIDGET (plugin->arrow), GTK_STATE_FLAG_PRELIGHT);
+        }
+      else
+        {
+          gtk_widget_set_state_flags (GTK_WIDGET (plugin->button), GTK_STATE_FLAG_NORMAL, TRUE);
+        }
     }
 }
 
