@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-01 00:30+0200\n"
-"PO-Revision-Date: 2020-04-05 08:59+0000\n"
+"POT-Creation-Date: 2020-05-28 12:45+0200\n"
+"PO-Revision-Date: 2020-05-29 17:22+0000\n"
 "Last-Translator: Yannick Le Guen <leguen.yannick@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/xfce/xfce4-panel/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -72,7 +72,7 @@ msgid "_Cancel"
 msgstr "_Annuler"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1112
-#: ../libxfce4panel/xfce-panel-plugin.c:1307
+#: ../libxfce4panel/xfce-panel-plugin.c:1287
 #: ../panel/panel-plugin-external.c:443
 #: ../panel/panel-preferences-dialog.c:961
 #: ../panel/panel-preferences-dialog.c:1327
@@ -80,37 +80,37 @@ msgstr "_Annuler"
 msgid "_Remove"
 msgstr "_Supprimer"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1253
+#: ../libxfce4panel/xfce-panel-plugin.c:1237
 msgid "_Properties"
 msgstr "_Propriétés"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:3022
+#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3022
 msgid "_About"
 msgstr "À _propos"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1283
+#: ../libxfce4panel/xfce-panel-plugin.c:1267
 msgid "_Move"
 msgstr "_Déplacer"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1328
+#: ../libxfce4panel/xfce-panel-plugin.c:1308
 msgid "Pane_l"
 msgstr "Tableau de _bord"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2947
+#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2947
 msgid "Add _New Items..."
 msgstr "Ajouter de _nouveaux éléments…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2962
+#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2962
 msgid "Panel Pr_eferences..."
 msgstr "Pr_éférences du tableau de bord…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2994
+#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2994
 msgid "Log _Out"
 msgstr "Dé_connexion"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:207
+#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:207
 #: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3013
-#: ../plugins/actions/actions-dialog.glade.h:4
+#: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
@@ -123,7 +123,7 @@ msgstr "Dé_connexion"
 msgid "_Help"
 msgstr "_Aide"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1408
+#: ../libxfce4panel/xfce-panel-plugin.c:1388
 msgid "About"
 msgstr "À propos"
 
@@ -350,7 +350,7 @@ msgstr "Ajouter de nouveaux greffons au tableau de bord"
 #: ../panel/panel-item-dialog.c:211
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../panel/panel-tic-tac-toe.c:125
-#: ../plugins/actions/actions-dialog.glade.h:3
+#: ../plugins/actions/actions-dialog.glade.h:7
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:7
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
@@ -734,184 +734,204 @@ msgstr "La configuration du tableau de bord a été mise à jour."
 msgid "Action Buttons"
 msgstr "Boutons d’action"
 
-#: ../plugins/actions/actions-dialog.glade.h:2
+#: ../plugins/actions/actions-dialog.glade.h:2 ../plugins/actions/actions.c:40
 msgid "Session Menu"
 msgstr "Menu session"
 
+#: ../plugins/actions/actions-dialog.glade.h:3
+msgid "Full Name"
+msgstr "Nom complet"
+
+#: ../plugins/actions/actions-dialog.glade.h:4
+msgid "Username"
+msgstr "Nom d’utilisateur"
+
 #: ../plugins/actions/actions-dialog.glade.h:5
-msgid "Invert buttons _orientation"
-msgstr "Inverser l’_orientation des boutons"
+msgid "User ID"
+msgstr "ID utilisateur"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
-msgid "_Show confirmation dialog"
-msgstr "_Afficher une boîte de dialogue de confirmation"
+msgid "Custom"
+msgstr "Personnalisé"
 
-#: ../plugins/actions/actions-dialog.glade.h:7
-msgid ""
-"Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Afficher une boîte de dialogue avec un délai d’attente de 30 secondes pour certaines actions."
-
-#: ../plugins/actions/actions-dialog.glade.h:8
+#: ../plugins/actions/actions-dialog.glade.h:9
 msgid "Appeara_nce:"
 msgstr "Appar_ence :"
 
-#: ../plugins/actions/actions-dialog.glade.h:9
+#: ../plugins/actions/actions-dialog.glade.h:10
+msgid "Title:"
+msgstr "Titre :"
+
+#: ../plugins/actions/actions-dialog.glade.h:11
+msgid "Custo_m title:"
+msgstr "Titre perso_nnalisé :"
+
+#: ../plugins/actions/actions-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "General"
 msgstr "Général"
 
-#: ../plugins/actions/actions-dialog.glade.h:10
+#: ../plugins/actions/actions-dialog.glade.h:13
 msgid "Visible"
 msgstr "Visible"
 
-#: ../plugins/actions/actions-dialog.glade.h:11
+#: ../plugins/actions/actions-dialog.glade.h:14
 msgid "Action"
 msgstr "Action"
 
-#: ../plugins/actions/actions-dialog.glade.h:12
+#: ../plugins/actions/actions-dialog.glade.h:15
+msgid "_Show confirmation dialog"
+msgstr "_Afficher une boîte de dialogue de confirmation"
+
+#: ../plugins/actions/actions-dialog.glade.h:16
+msgid ""
+"Show a confirmation dialog with a 30 second timeout for some of the actions."
+msgstr "Afficher une boîte de dialogue avec un délai d’attente de 30 secondes pour certaines actions."
+
+#: ../plugins/actions/actions-dialog.glade.h:17
 msgid "_Actions"
 msgstr "_Actions"
 
-#: ../plugins/actions/actions.c:153
+#: ../plugins/actions/actions.c:165
 msgid "Log Out"
 msgstr "Déconnexion"
 
-#: ../plugins/actions/actions.c:154
+#: ../plugins/actions/actions.c:166
 msgid "_Log Out"
 msgstr "_Déconnexion"
 
-#: ../plugins/actions/actions.c:155
+#: ../plugins/actions/actions.c:167
 msgid "Are you sure you want to log out?"
 msgstr "Voulez-vous vraiment vous déconnecter ?"
 
-#: ../plugins/actions/actions.c:156
+#: ../plugins/actions/actions.c:168
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Déconnexion dans %d secondes."
 
-#: ../plugins/actions/actions.c:162
+#: ../plugins/actions/actions.c:174
 msgid "Log Out..."
 msgstr "Déconnexion…"
 
-#: ../plugins/actions/actions.c:163
+#: ../plugins/actions/actions.c:175
 msgid "Log _Out..."
 msgstr "_Déconnexion…"
 
-#: ../plugins/actions/actions.c:170
+#: ../plugins/actions/actions.c:182
 msgid "Switch User"
 msgstr "Changer d’utilisateur"
 
-#: ../plugins/actions/actions.c:171
+#: ../plugins/actions/actions.c:183
 msgid "_Switch User"
 msgstr "_Changer d’utilisateur"
 
-#: ../plugins/actions/actions.c:178
+#: ../plugins/actions/actions.c:190
 msgid "Lock Screen"
 msgstr "Verrouiller l’écran"
 
-#: ../plugins/actions/actions.c:179
+#: ../plugins/actions/actions.c:191
 msgid "Loc_k Screen"
 msgstr "_Verrouiller l’écran"
 
-#: ../plugins/actions/actions.c:186
+#: ../plugins/actions/actions.c:198
 msgid "Hibernate"
 msgstr "Mise en veille prolongée"
 
-#: ../plugins/actions/actions.c:187
+#: ../plugins/actions/actions.c:199
 msgid "_Hibernate"
 msgstr "_Mise en veille prolongée"
 
-#: ../plugins/actions/actions.c:188
+#: ../plugins/actions/actions.c:200
 msgid "Do you want to suspend to disk?"
 msgstr "Souhaitez-vous mettre en veille sur le disque ?"
 
-#: ../plugins/actions/actions.c:189
+#: ../plugins/actions/actions.c:201
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Mise en veille prolongée dans %d secondes."
 
-#: ../plugins/actions/actions.c:195
+#: ../plugins/actions/actions.c:207
 msgid "Hybrid Sleep"
 msgstr "Mise en veille hybride"
 
-#: ../plugins/actions/actions.c:196
+#: ../plugins/actions/actions.c:208
 msgid "_Hybrid Sleep"
 msgstr "Mise en veille _hybride"
 
-#: ../plugins/actions/actions.c:197
+#: ../plugins/actions/actions.c:209
 msgid "Do you want to hibernate and suspend the system?"
 msgstr "Voulez-vous mettre en veille et placer le système en veille prolongée ?"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:210
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr "Mise en veille et mise en veille prolongée de l’ordinateur dans %d secondes. "
 
-#: ../plugins/actions/actions.c:204
+#: ../plugins/actions/actions.c:216
 msgid "Suspend"
 msgstr "Mise en veille"
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:217
 msgid "Sus_pend"
 msgstr "Mi_se en veille"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:218
 msgid "Do you want to suspend to RAM?"
 msgstr "Souhaitez-vous mettre en veille en mémoire vive ?"
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:219
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Mise en veille de l’ordinateur dans %d secondes."
 
-#: ../plugins/actions/actions.c:213
+#: ../plugins/actions/actions.c:225
 msgid "Restart"
 msgstr "Redémarrer"
 
-#: ../plugins/actions/actions.c:214
+#: ../plugins/actions/actions.c:226
 msgid "_Restart"
 msgstr "_Redémarrer"
 
-#: ../plugins/actions/actions.c:215
+#: ../plugins/actions/actions.c:227
 msgid "Are you sure you want to restart?"
 msgstr "Voulez-vous vraiment redémarrer ?"
 
-#: ../plugins/actions/actions.c:216
+#: ../plugins/actions/actions.c:228
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Redémarrage de l’ordinateur dans %d secondes."
 
-#: ../plugins/actions/actions.c:222
+#: ../plugins/actions/actions.c:234
 msgid "Shut Down"
 msgstr "Éteindre"
 
-#: ../plugins/actions/actions.c:223
+#: ../plugins/actions/actions.c:235
 msgid "Shut _Down"
 msgstr "É_teindre"
 
-#: ../plugins/actions/actions.c:224
+#: ../plugins/actions/actions.c:236
 msgid "Are you sure you want to shut down?"
 msgstr "Voulez-vous vraiment éteindre ?"
 
-#: ../plugins/actions/actions.c:225
+#: ../plugins/actions/actions.c:237
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Extinction dans %d secondes."
 
-#: ../plugins/actions/actions.c:625
+#: ../plugins/actions/actions.c:685
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Séparateur"
 
-#: ../plugins/actions/actions.c:1050
+#: ../plugins/actions/actions.c:1110
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Impossible d’exécuter l’action « %s »"
 
-#: ../plugins/actions/actions.c:1225
-msgid "John Doe"
-msgstr "John Doe"
+#: ../plugins/actions/actions.c:1279
+msgid "Little Mouse"
+msgstr "Petite souris"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
@@ -1003,7 +1023,7 @@ msgid "_OK"
 msgstr "_Valider"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2403
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2483
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Impossible d’exécuter la commande « %s »."
@@ -1524,15 +1544,15 @@ msgstr "_Motif des fichiers :"
 msgid "Filtering"
 msgstr "Filtrage"
 
-#: ../plugins/launcher/launcher.c:405
+#: ../plugins/launcher/launcher.c:415
 msgid "Open launcher menu"
 msgstr "Ouvrir le menu du lanceur"
 
-#: ../plugins/launcher/launcher.c:1622
+#: ../plugins/launcher/launcher.c:1643
 msgid "Unnamed Item"
 msgstr "Élément sans nom"
 
-#: ../plugins/launcher/launcher.c:1800
+#: ../plugins/launcher/launcher.c:1821
 msgid "No items"
 msgstr "Aucun élément"
 
@@ -1889,23 +1909,23 @@ msgstr "Afficher les fenêtres de tous les _moniteurs"
 msgid "Show only _minimized windows"
 msgstr "Afficher uniquement les fenêtres _réduites"
 
-#: ../plugins/tasklist/tasklist-widget.c:3654
+#: ../plugins/tasklist/tasklist-widget.c:3650
 msgid "Mi_nimize All"
 msgstr "Tout _réduire"
 
-#: ../plugins/tasklist/tasklist-widget.c:3662
+#: ../plugins/tasklist/tasklist-widget.c:3658
 msgid "Un_minimize All"
 msgstr "Tout _afficher"
 
-#: ../plugins/tasklist/tasklist-widget.c:3670
+#: ../plugins/tasklist/tasklist-widget.c:3666
 msgid "Ma_ximize All"
 msgstr "Tout _maximiser"
 
-#: ../plugins/tasklist/tasklist-widget.c:3678
+#: ../plugins/tasklist/tasklist-widget.c:3674
 msgid "_Unmaximize All"
 msgstr "Tout r_estaurer"
 
-#: ../plugins/tasklist/tasklist-widget.c:3690
+#: ../plugins/tasklist/tasklist-widget.c:3686
 msgid "_Close All"
 msgstr "Tout _fermer"
 
