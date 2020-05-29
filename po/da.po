@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-01 00:30+0200\n"
-"PO-Revision-Date: 2020-04-04 09:27+0000\n"
+"POT-Creation-Date: 2020-05-28 12:45+0200\n"
+"PO-Revision-Date: 2020-05-29 18:01+0000\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/xfce/xfce4-panel/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -68,7 +68,7 @@ msgid "_Cancel"
 msgstr "_Annuller"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1112
-#: ../libxfce4panel/xfce-panel-plugin.c:1307
+#: ../libxfce4panel/xfce-panel-plugin.c:1287
 #: ../panel/panel-plugin-external.c:443
 #: ../panel/panel-preferences-dialog.c:961
 #: ../panel/panel-preferences-dialog.c:1327
@@ -76,37 +76,37 @@ msgstr "_Annuller"
 msgid "_Remove"
 msgstr "F_jern"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1253
+#: ../libxfce4panel/xfce-panel-plugin.c:1237
 msgid "_Properties"
 msgstr "_Egenskaber"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:3022
+#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3022
 msgid "_About"
 msgstr "_Om"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1283
+#: ../libxfce4panel/xfce-panel-plugin.c:1267
 msgid "_Move"
 msgstr "_Flyt"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1328
+#: ../libxfce4panel/xfce-panel-plugin.c:1308
 msgid "Pane_l"
 msgstr "Pane_l"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2947
+#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2947
 msgid "Add _New Items..."
 msgstr "Tilføj _nye elementer ..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2962
+#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2962
 msgid "Panel Pr_eferences..."
 msgstr "Panel_præferencer ..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2994
+#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2994
 msgid "Log _Out"
 msgstr "_Log ud"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:207
+#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:207
 #: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3013
-#: ../plugins/actions/actions-dialog.glade.h:4
+#: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
@@ -119,7 +119,7 @@ msgstr "_Log ud"
 msgid "_Help"
 msgstr "_Hjælp"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1408
+#: ../libxfce4panel/xfce-panel-plugin.c:1388
 msgid "About"
 msgstr "Om"
 
@@ -346,7 +346,7 @@ msgstr "Tilføj nye plugins til panelet"
 #: ../panel/panel-item-dialog.c:211
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../panel/panel-tic-tac-toe.c:125
-#: ../plugins/actions/actions-dialog.glade.h:3
+#: ../plugins/actions/actions-dialog.glade.h:7
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:7
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
@@ -730,184 +730,204 @@ msgstr "Panelkonfigurationen er blevet opdateret."
 msgid "Action Buttons"
 msgstr "Handlingsknapper"
 
-#: ../plugins/actions/actions-dialog.glade.h:2
+#: ../plugins/actions/actions-dialog.glade.h:2 ../plugins/actions/actions.c:40
 msgid "Session Menu"
 msgstr "Sessionsmenu"
 
+#: ../plugins/actions/actions-dialog.glade.h:3
+msgid "Full Name"
+msgstr "Fulde navn"
+
+#: ../plugins/actions/actions-dialog.glade.h:4
+msgid "Username"
+msgstr "Brugernavn"
+
 #: ../plugins/actions/actions-dialog.glade.h:5
-msgid "Invert buttons _orientation"
-msgstr "Vend knappernes _retning"
+msgid "User ID"
+msgstr "Bruger-ID"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
-msgid "_Show confirmation dialog"
-msgstr "_Vis bekræftelsesdialog"
+msgid "Custom"
+msgstr "Tilpasset"
 
-#: ../plugins/actions/actions-dialog.glade.h:7
-msgid ""
-"Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Vis en bekræftelsesdialog med 30 sekunders timeout ved nogle af handlingerne."
-
-#: ../plugins/actions/actions-dialog.glade.h:8
+#: ../plugins/actions/actions-dialog.glade.h:9
 msgid "Appeara_nce:"
 msgstr "_Udseende:"
 
-#: ../plugins/actions/actions-dialog.glade.h:9
+#: ../plugins/actions/actions-dialog.glade.h:10
+msgid "Title:"
+msgstr "Titel:"
+
+#: ../plugins/actions/actions-dialog.glade.h:11
+msgid "Custo_m title:"
+msgstr "_Tilpasset titel:"
+
+#: ../plugins/actions/actions-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "General"
 msgstr "Generelt"
 
-#: ../plugins/actions/actions-dialog.glade.h:10
+#: ../plugins/actions/actions-dialog.glade.h:13
 msgid "Visible"
 msgstr "Synlig"
 
-#: ../plugins/actions/actions-dialog.glade.h:11
+#: ../plugins/actions/actions-dialog.glade.h:14
 msgid "Action"
 msgstr "Handling"
 
-#: ../plugins/actions/actions-dialog.glade.h:12
+#: ../plugins/actions/actions-dialog.glade.h:15
+msgid "_Show confirmation dialog"
+msgstr "_Vis bekræftelsesdialog"
+
+#: ../plugins/actions/actions-dialog.glade.h:16
+msgid ""
+"Show a confirmation dialog with a 30 second timeout for some of the actions."
+msgstr "Vis en bekræftelsesdialog med 30 sekunders timeout ved nogle af handlingerne."
+
+#: ../plugins/actions/actions-dialog.glade.h:17
 msgid "_Actions"
 msgstr "_Handlinger"
 
-#: ../plugins/actions/actions.c:153
+#: ../plugins/actions/actions.c:165
 msgid "Log Out"
 msgstr "Log ud"
 
-#: ../plugins/actions/actions.c:154
+#: ../plugins/actions/actions.c:166
 msgid "_Log Out"
 msgstr "_Log ud"
 
-#: ../plugins/actions/actions.c:155
+#: ../plugins/actions/actions.c:167
 msgid "Are you sure you want to log out?"
 msgstr "Er du sikker på, at du vil logge ud?"
 
-#: ../plugins/actions/actions.c:156
+#: ../plugins/actions/actions.c:168
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Logger ud om %d sekunder."
 
-#: ../plugins/actions/actions.c:162
+#: ../plugins/actions/actions.c:174
 msgid "Log Out..."
 msgstr "Log ud ..."
 
-#: ../plugins/actions/actions.c:163
+#: ../plugins/actions/actions.c:175
 msgid "Log _Out..."
 msgstr "_Log ud ..."
 
-#: ../plugins/actions/actions.c:170
+#: ../plugins/actions/actions.c:182
 msgid "Switch User"
 msgstr "Skift bruger"
 
-#: ../plugins/actions/actions.c:171
+#: ../plugins/actions/actions.c:183
 msgid "_Switch User"
 msgstr "_Skift bruger"
 
-#: ../plugins/actions/actions.c:178
+#: ../plugins/actions/actions.c:190
 msgid "Lock Screen"
 msgstr "Lås skærm"
 
-#: ../plugins/actions/actions.c:179
+#: ../plugins/actions/actions.c:191
 msgid "Loc_k Screen"
 msgstr "Lå_s skærm"
 
-#: ../plugins/actions/actions.c:186
+#: ../plugins/actions/actions.c:198
 msgid "Hibernate"
 msgstr "Dvale"
 
-#: ../plugins/actions/actions.c:187
+#: ../plugins/actions/actions.c:199
 msgid "_Hibernate"
 msgstr "_Dvale"
 
-#: ../plugins/actions/actions.c:188
+#: ../plugins/actions/actions.c:200
 msgid "Do you want to suspend to disk?"
 msgstr "Vil du suspendere til disken?"
 
-#: ../plugins/actions/actions.c:189
+#: ../plugins/actions/actions.c:201
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Computeren sættes i dvale om %d sekunder."
 
-#: ../plugins/actions/actions.c:195
+#: ../plugins/actions/actions.c:207
 msgid "Hybrid Sleep"
 msgstr "Hybridsøvn"
 
-#: ../plugins/actions/actions.c:196
+#: ../plugins/actions/actions.c:208
 msgid "_Hybrid Sleep"
 msgstr "_Hybridsøvn"
 
-#: ../plugins/actions/actions.c:197
+#: ../plugins/actions/actions.c:209
 msgid "Do you want to hibernate and suspend the system?"
 msgstr "Skal systemet sættes i dvale og suspenderes?"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:210
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr "Computeren sættes i dvale og suspenderes om %d sekunder."
 
-#: ../plugins/actions/actions.c:204
+#: ../plugins/actions/actions.c:216
 msgid "Suspend"
 msgstr "Hvile"
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:217
 msgid "Sus_pend"
 msgstr "H_vile"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:218
 msgid "Do you want to suspend to RAM?"
 msgstr "Vil du suspendere til RAM?"
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:219
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Computeren suspenderes om %d sekunder."
 
-#: ../plugins/actions/actions.c:213
+#: ../plugins/actions/actions.c:225
 msgid "Restart"
 msgstr "Genstart"
 
-#: ../plugins/actions/actions.c:214
+#: ../plugins/actions/actions.c:226
 msgid "_Restart"
 msgstr "_Genstart"
 
-#: ../plugins/actions/actions.c:215
+#: ../plugins/actions/actions.c:227
 msgid "Are you sure you want to restart?"
 msgstr "Er du sikker på, at du vil genstarte?"
 
-#: ../plugins/actions/actions.c:216
+#: ../plugins/actions/actions.c:228
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Genstarter din computer om %d sekunder."
 
-#: ../plugins/actions/actions.c:222
+#: ../plugins/actions/actions.c:234
 msgid "Shut Down"
 msgstr "Luk ned"
 
-#: ../plugins/actions/actions.c:223
+#: ../plugins/actions/actions.c:235
 msgid "Shut _Down"
 msgstr "Luk _ned"
 
-#: ../plugins/actions/actions.c:224
+#: ../plugins/actions/actions.c:236
 msgid "Are you sure you want to shut down?"
 msgstr "Er du sikker på, at du vil lukke ned?"
 
-#: ../plugins/actions/actions.c:225
+#: ../plugins/actions/actions.c:237
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Lukker computeren ned om %d sekunder."
 
-#: ../plugins/actions/actions.c:625
+#: ../plugins/actions/actions.c:685
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Separator"
 
-#: ../plugins/actions/actions.c:1050
+#: ../plugins/actions/actions.c:1110
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Kunne ikke starte handling \"%s\""
 
-#: ../plugins/actions/actions.c:1225
-msgid "John Doe"
-msgstr "John Doe"
+#: ../plugins/actions/actions.c:1279
+msgid "Little Mouse"
+msgstr "Lille mus"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
@@ -999,7 +1019,7 @@ msgid "_OK"
 msgstr "_OK"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2403
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2483
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Kunne ikke køre kommandoen \"%s\"."
@@ -1520,15 +1540,15 @@ msgstr "_Filmønster:"
 msgid "Filtering"
 msgstr "Filtrering"
 
-#: ../plugins/launcher/launcher.c:405
+#: ../plugins/launcher/launcher.c:415
 msgid "Open launcher menu"
 msgstr "Åbn menu til opstart"
 
-#: ../plugins/launcher/launcher.c:1622
+#: ../plugins/launcher/launcher.c:1643
 msgid "Unnamed Item"
 msgstr "Ikke navngivet element"
 
-#: ../plugins/launcher/launcher.c:1800
+#: ../plugins/launcher/launcher.c:1821
 msgid "No items"
 msgstr "Ingen elementer"
 
@@ -1885,23 +1905,23 @@ msgstr "Vis vinduer fra alle _skærme"
 msgid "Show only _minimized windows"
 msgstr "Vis kun _minimerede vinduer"
 
-#: ../plugins/tasklist/tasklist-widget.c:3654
+#: ../plugins/tasklist/tasklist-widget.c:3650
 msgid "Mi_nimize All"
 msgstr "Mi_nimer alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3662
+#: ../plugins/tasklist/tasklist-widget.c:3658
 msgid "Un_minimize All"
 msgstr "Gen_dan alle minimerede"
 
-#: ../plugins/tasklist/tasklist-widget.c:3670
+#: ../plugins/tasklist/tasklist-widget.c:3666
 msgid "Ma_ximize All"
 msgstr "Maksi_mer alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3678
+#: ../plugins/tasklist/tasklist-widget.c:3674
 msgid "_Unmaximize All"
 msgstr "_Gendan alle maksimerede"
 
-#: ../plugins/tasklist/tasklist-widget.c:3690
+#: ../plugins/tasklist/tasklist-widget.c:3686
 msgid "_Close All"
 msgstr "_Luk alle"
 
