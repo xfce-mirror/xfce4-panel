@@ -3079,6 +3079,21 @@ xfce_tasklist_button_enter_notify_event_disconnected (gpointer  data,
 
 
 
+static void
+xfce_tasklist_button_proxy_menu_item_activate (GtkMenuItem       *mi,
+                                               XfceTasklistChild *child)
+{
+  gint64 timestamp;
+
+  panel_return_if_fail (XFCE_IS_TASKLIST (child->tasklist));
+  panel_return_if_fail (GTK_IS_MENU_ITEM (mi));
+
+  timestamp = g_get_real_time () / 1000;
+  xfce_tasklist_button_activate (child, timestamp);
+}
+
+
+
 static GtkWidget *
 xfce_tasklist_button_proxy_menu_item (XfceTasklistChild *child,
                                       gboolean           allow_wireframe)
@@ -3156,6 +3171,8 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 
   g_signal_connect (G_OBJECT (mi), "button-press-event",
       G_CALLBACK (xfce_tasklist_button_button_press_event), child);
+  g_signal_connect (G_OBJECT (mi), "activate",
+      G_CALLBACK (xfce_tasklist_button_proxy_menu_item_activate), child);
   g_signal_connect (G_OBJECT (mi), "button-release-event",
       G_CALLBACK (xfce_tasklist_button_button_release_event), child);
 
