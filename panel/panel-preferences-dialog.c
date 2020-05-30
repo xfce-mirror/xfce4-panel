@@ -227,7 +227,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   g_free (path_new);
   connect_signal ("panel-switch", "clicked", panel_preferences_dialog_panel_switch);
 
-  /* style tab */
+  /* appearance tab */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "background-style");
   panel_return_if_fail (G_IS_OBJECT (object));
   g_signal_connect_swapped (G_OBJECT (object), "changed",

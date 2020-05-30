@@ -1709,11 +1709,13 @@ panel_window_update_dark_mode (gboolean dark_mode)
   gtk_settings = gtk_settings_get_default ();
 
   if (!dark_mode)
-    gtk_settings_reset_property (gtk_settings, "gtk-application-prefer-dark-theme");
+    gtk_settings_reset_property (gtk_settings,
+                                 "gtk-application-prefer-dark-theme");
+
   g_object_set (gtk_settings,
-                  "gtk-application-prefer-dark-theme",
-                  dark_mode,
-                  NULL);
+                "gtk-application-prefer-dark-theme",
+                dark_mode,
+                NULL);
 }
 
 

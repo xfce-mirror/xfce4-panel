@@ -52,8 +52,9 @@
 #include <panel/panel-dialogs.h>
 #include <panel/panel-plugin-external.h>
 
-#define AUTOSAVE_INTERVAL (10 * 60)
-#define MIGRATE_BIN       HELPERDIR G_DIR_SEPARATOR_S "migrate"
+#define AUTOSAVE_INTERVAL   (10 * 60)
+#define MIGRATE_BIN         HELPERDIR G_DIR_SEPARATOR_S "migrate"
+#define PANELS_PROPERTY_BASE "/panels"
 
 
 
@@ -297,7 +298,6 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
     { "length-adjust", G_TYPE_BOOLEAN },
     { "enter-opacity", G_TYPE_UINT },
     { "leave-opacity", G_TYPE_UINT },
-    { "dark-mode", G_TYPE_BOOLEAN },
     { "background-style", G_TYPE_UINT },
     { "background-rgba", GDK_TYPE_RGBA },
     { "background-image", G_TYPE_STRING },
@@ -307,11 +307,16 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
     { "disable-struts", G_TYPE_BOOLEAN },
     { NULL }
   };
+  const PanelProperty  global_properties[] =
+  {
+    { "dark-mode", G_TYPE_BOOLEAN },
+    { NULL }
+  };
 
   panel_return_if_fail (XFCONF_IS_CHANNEL (application->xfconf));
 
   /* create the property base */
-  property_base = g_strdup_printf ("/panels/panel-%d", panel_window_get_id (window));
+  property_base = g_strdup_printf ("%s/panel-%d", PANELS_PROPERTY_BASE, panel_window_get_id (window));
 
   /* migrate old autohide property */
   panel_window_migrate_autohide_property (window, application->xfconf, property_base);
@@ -319,6 +324,8 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
   /* bind all the properties */
   panel_properties_bind (application->xfconf, G_OBJECT (window),
                          property_base, properties, save_properties);
+  panel_properties_bind (application->xfconf, G_OBJECT (window),
+                         PANELS_PROPERTY_BASE, global_properties, save_properties);
 
   /* set locking for this panel */
   panel_window_set_locked (window,
@@ -1474,7 +1481,7 @@ panel_application_new_window (PanelApplication *application,
   GtkWidget          *itembar;
   gchar              *property;
   gint                idx;
-  static const gchar *props[] = { "mode", "size", "nrows", "icon-size" };
+  static const gchar *props[] = { "mode", "size", "nrows", "icon-size", "dark-mode" };
   guint               i;
   gchar              *position;
   static gint         unqiue_id_counter = 1;
