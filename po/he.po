@@ -9,6 +9,7 @@
 # Hezy Amiel <open@hezyamiel.com>, 2010
 # Jonatan Perry <Jonatan443@walla.co.il>, 2004
 # Omer, 2020
+# Omer, 2020
 # Yaron Shahrabani <sh.yaron@gmail.com>, 2011,2013-2014
 # Yuval Tanny <tanai@int.gov.il>, 2004,2006
 msgid ""
@@ -16,7 +17,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-28 12:45+0200\n"
-"PO-Revision-Date: 2020-06-01 16:38+0000\n"
+"PO-Revision-Date: 2020-06-09 20:01+0000\n"
 "Last-Translator: Omer\n"
 "Language-Team: Hebrew (http://www.transifex.com/xfce/xfce4-panel/language/he/)\n"
 "MIME-Version: 1.0\n"
@@ -127,11 +128,11 @@ msgstr "אודות"
 
 #: ../panel/main.c:81
 msgid "Show the 'Panel Preferences' dialog"
-msgstr "הצג את דיאלוג 'העדפות פאנל'"
+msgstr "הצג את דו השיח \"העדפות לוח\""
 
 #: ../panel/main.c:81 ../panel/main.c:82
 msgid "PANEL-NUMBER"
-msgstr "מספר-פאנל"
+msgstr "מספר-לוח"
 
 #: ../panel/main.c:82
 msgid "Show the 'Add New Items' dialog"
@@ -139,11 +140,11 @@ msgstr "הצג את דיאלוג 'הוסף פריטים חדשים'"
 
 #: ../panel/main.c:83
 msgid "Save the panel configuration"
-msgstr "שמור את הגדרת הפאנל"
+msgstr "שמור את הגדרת הלוח"
 
 #: ../panel/main.c:84
 msgid "Add a new plugin to the panel"
-msgstr "הוסף תוסף חדש לפאנל"
+msgstr "הוסף תוסף חדש ללוח"
 
 #: ../panel/main.c:84
 msgid "PLUGIN-NAME"
@@ -151,11 +152,11 @@ msgstr "שם-תוסף"
 
 #: ../panel/main.c:85
 msgid "Restart the running panel instance"
-msgstr "התחל מחדש את הפאנל הפעיל"
+msgstr "התחל מחדש את הלוח הפעיל"
 
 #: ../panel/main.c:86
 msgid "Quit the running panel instance"
-msgstr "הפסק את הפאנל הפעיל"
+msgstr "הפסק את הלוח הפעיל"
 
 #: ../panel/main.c:87
 msgid "Do not wait for a window manager on startup"
@@ -211,19 +212,19 @@ msgstr "נכשל להציג את דיאלוג הוספת פריטים חדשים
 
 #: ../panel/main.c:423
 msgid "Failed to save the panel configuration"
-msgstr "נכשל לשמור את הגדרות הפאנל"
+msgstr "נכשל בשמירת הגדרות הלוח"
 
 #: ../panel/main.c:425
 msgid "Failed to add a plugin to the panel"
-msgstr "נכשל להוסיף תוסף לפאנל"
+msgstr "נכשל בהוספת תוסף ללוח"
 
 #: ../panel/main.c:427
 msgid "Failed to restart the panel"
-msgstr "נכשל להתחיל מחדש את הפאנל"
+msgstr "נכשל בהפעלת הלוח מחדש"
 
 #: ../panel/main.c:429
 msgid "Failed to quit the panel"
-msgstr "נכשל להפסיק את הפאנל"
+msgstr "נכשל בהפסקת הלוח"
 
 #: ../panel/main.c:431
 msgid "Failed to send D-Bus message"
@@ -237,7 +238,7 @@ msgstr "בצע"
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "האם ברצונך להתחיל את הפאנל? אם כן, וודא ששמרת את הסשן ביציאה, כך שהפאנל יתחיל אוטומטית בפעם הבאה בה תתחבר."
+msgstr "האם ברצונך להתחיל את הלוח? אם כן, וודא ששמרת את הסשן ביציאה, כך שהפאנל יתחיל אוטומטית בפעם הבאה בה תתחבר."
 
 #: ../panel/main.c:445 ../panel/main.c:459
 #, c-format
@@ -256,7 +257,7 @@ msgstr "צור _מפעיל"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "פעולה זו תיצור תוסף מפעיל חדש בפאנל ותכניס את הקבצים שהושלכו כפריטים בתפריט."
+msgstr "פעולה זו תיצור תוסף מפעיל חדש בלוח ותכניס את הקבצים שהושלכו כפריטים בתפריט."
 
 #: ../panel/panel-application.c:980
 #, c-format
@@ -327,17 +328,17 @@ msgstr "אנא בחר לוח עבור התוסף החדש:"
 #: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:896
 #, c-format
 msgid "Panel %d"
-msgstr "פאנל %d"
+msgstr "לוח %d"
 
 #: ../panel/panel-dialogs.c:235
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "משום שהפאנל מורץ במצב קיוסק, אינך מורשה לערוך שינויים לתצורת פאנל כמו משתמש רגיל"
+msgstr "משום שהלוח מורץ במצב קיוסק, אינך מורשה לערוך שינויים לתצורת הלוח כמו משתמש רגיל"
 
 #: ../panel/panel-dialogs.c:237
 msgid "Modifying the panel is not allowed"
-msgstr "התאמת הפאנל אינה מורשית"
+msgstr "התאמת הלוח אינה מורשית"
 
 #: ../panel/panel-item-dialog.c:195
 msgid "Add New Items"
@@ -345,7 +346,7 @@ msgstr "הוספת פריטים חדשים"
 
 #: ../panel/panel-item-dialog.c:197
 msgid "Add new plugins to the panel"
-msgstr "הוסף תוספים חדשים לפאנל"
+msgstr "הוסף תוספים חדשים ללוח"
 
 #: ../panel/panel-item-dialog.c:211
 #: ../panel/panel-preferences-dialog.glade.h:11
@@ -375,7 +376,7 @@ msgstr "הכנס צירוף מילים לחיפוש כאן"
 #: ../panel/panel-plugin-external.c:436
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "התוסף \"%s\" עזב את הפאנל במפתיע, האם ברצונך להפעיל אותו מחדש?"
+msgstr "התוסף \"%s\" עזב את הלוח בפתאומיות, האם ברצונך להפעיל אותו מחדש?"
 
 #: ../panel/panel-plugin-external.c:438
 #, c-format
