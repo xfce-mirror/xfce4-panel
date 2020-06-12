@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-28 12:45+0200\n"
-"PO-Revision-Date: 2020-06-09 20:01+0000\n"
+"PO-Revision-Date: 2020-06-12 10:05+0000\n"
 "Last-Translator: Omer\n"
 "Language-Team: Hebrew (http://www.transifex.com/xfce/xfce4-panel/language/he/)\n"
 "MIME-Version: 1.0\n"
@@ -136,7 +136,7 @@ msgstr "מספר-לוח"
 
 #: ../panel/main.c:82
 msgid "Show the 'Add New Items' dialog"
-msgstr "הצג את דיאלוג 'הוסף פריטים חדשים'"
+msgstr "הצג את דו־השיח \"הוסף פריטים חדשים\""
 
 #: ../panel/main.c:83
 msgid "Save the panel configuration"
@@ -160,14 +160,14 @@ msgstr "הפסק את הלוח הפעיל"
 
 #: ../panel/main.c:87
 msgid "Do not wait for a window manager on startup"
-msgstr "אל תחכה למנהל חלונות בהדלקה"
+msgstr "אל תחכה למנהל החלונות בהדלקה"
 
 #: ../panel/main.c:88
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
-msgstr "הדפס מידע גרסה וצא"
+msgstr "הדפס את מידע הגרסה וצא"
 
 #: ../panel/main.c:207
 #, c-format
@@ -232,7 +232,7 @@ msgstr "נכשל לשלוח מסר D-Bus"
 
 #: ../panel/main.c:441
 msgid "Execute"
-msgstr "בצע"
+msgstr "הרץ"
 
 #: ../panel/main.c:442
 msgid ""
@@ -290,7 +290,7 @@ msgstr "נכשל לבצע פקודה \"%s\""
 #: ../panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "הוגדר תחביר שגוי של מאורע תוסף. השתמש ב PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr "צויין תחביר שגוי של מאורע תוסף. השתמש ב־ PLUGIN-NAME:NAME[:TYPE:VALUE]."
 
 #: ../panel/panel-dbus-client.c:248
 #, c-format
@@ -553,7 +553,7 @@ msgstr "<b>מידות</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Row _size (pixels):"
-msgstr "_גודל שורה (פיקסלים):"
+msgstr "_גודל שורה (בפיקסלים):"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Num_ber of rows:"
@@ -609,7 +609,7 @@ msgstr "בחר תמונת רקע"
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "<b>Icons</b>"
-msgstr "<b>איקונים</b>"
+msgstr "<b>אייקונים</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Adjust size au_tomatically"
@@ -617,7 +617,7 @@ msgstr "כוון גודל או_טומטית"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Fixed icon _size (pixels):"
-msgstr "_גודל איקון קבוע (פיקסלים):"
+msgstr "_גודל אייקון קבוע (בפיקסלים):"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 msgid "<b>Opacity</b>"
@@ -631,7 +631,7 @@ msgstr "הגדר..."
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>עריכה אינה מופעלת כרגע</b>\nהפעל עריכה במנהל החלונות להגדרות אטימות בלוח."
+msgstr "<b>העריכה אינה מופעלת כרגע</b>\nהפעל את העריכה במנהל החלונות להגדרות אטימות בלוח."
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:52
@@ -861,12 +861,12 @@ msgstr "שינה _היברידית"
 
 #: ../plugins/actions/actions.c:209
 msgid "Do you want to hibernate and suspend the system?"
-msgstr "האם אתה רוצה להכניס את המערכת למצב שינה והפסקה?"
+msgstr "האם ברצונך להכניס את המערכת למצב שינה והשהיה?"
 
 #: ../plugins/actions/actions.c:210
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
-msgstr "מכניס את המחשב למצב שינה והפסקה בעוד %d שניות. "
+msgstr "מכניס את המחשב למצב שינה והשהיה בעוד %d שניות. "
 
 #: ../plugins/actions/actions.c:216
 msgid "Suspend"
@@ -1021,7 +1021,7 @@ msgstr "בחירת איקון"
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
 #: ../plugins/directorymenu/directorymenu.c:474
 msgid "_OK"
-msgstr "_OK"
+msgstr "_אישור"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
 #: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2483
@@ -1055,7 +1055,7 @@ msgstr "אפשרויות:"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
 msgid "Popup menu at current mouse position"
-msgstr "תפריט קופץ במיקום עכבר נוכחי"
+msgstr "תפריט קופץ באזור העכבר הנוכחי"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
@@ -1461,7 +1461,7 @@ msgstr "צור מסמך טקסט חדש"
 
 #: ../plugins/directorymenu/directorymenu.c:939
 msgid "C_reate"
-msgstr "_צור"
+msgstr "צ_ור"
 
 #: ../plugins/directorymenu/directorymenu.c:940
 msgid "Create & _Open"
@@ -1518,7 +1518,7 @@ msgstr "הצג \"פתח ב_מסוף\""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
 msgid "Show '_Open _Folder'"
-msgstr "הצג \"פתח _תיקייה\""
+msgstr "הצג את \"_פתח _תיקייה\""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
 msgid "Menu"
@@ -1533,7 +1533,7 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "הזן רשימה של תבניות אשר ינוצלו לקביעת אילו קבצים זמינים בתוך ספרייה. אם תציין כאן יותר מתבנית אחת, על רשימת הפריטים להיות מופרדת בעזרת נקודה פסיק (דוגמא ‎*.txt;*.doc)."
+msgstr "הזן רשימה של תבניות אשר ינוצלו לקביעת אילו קבצים זמינים בתוך ספרייה. אם תציין כאן יותר מתבנית אחת, על רשימת הפריטים להיות מופרדת בעזרת נקודה פסיק (דוגמה: ‎*.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:15
 msgid "_File Pattern:"
@@ -1563,12 +1563,12 @@ msgstr "נכשל לפתוח עורך פריט שולחן עבודה"
 
 #: ../plugins/launcher/launcher-dialog.c:853
 msgid "If you delete an item, it will be permanently removed"
-msgstr "אם תמחק פריט, זה יוסר לעד"
+msgstr "אם תמחק פריט, הוא יוסר לצמיתות"
 
 #: ../plugins/launcher/launcher-dialog.c:854
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr "האם אתה בטוח כי ברצונך להסיר את \"%s\"?"
+msgstr "האם אתה בטוח שברצונך להסיר את \"%s\"?"
 
 #: ../plugins/launcher/launcher-dialog.c:855
 msgid "Unnamed item"
@@ -1596,15 +1596,15 @@ msgstr "דרום"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "Inside Button"
-msgstr "לחצן פנימי"
+msgstr "כפתור פנימי"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "Up"
-msgstr "מעלה"
+msgstr "למעלה"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "Down"
-msgstr "מטה"
+msgstr "למטה"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "_Edit Item"
@@ -1637,7 +1637,7 @@ msgstr "מפעיל"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "Delete the currently selected item"
-msgstr "מחק את הפריט הנוכחי הנבחר"
+msgstr "מחק את הפריט הנבחר הנוכחי"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "Add a new empty item"
@@ -1655,7 +1655,7 @@ msgstr "נטרל _תיבות צצות"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "בחר את אפשרות זו כדי לנטרל תיבות צצות בעת מעבר מעל לחצן לוח או פריטי תפריט."
+msgstr "בחר את אפשרות זו כדי לנטרל תיבות צצות בעת מעבר מעל כפתור לוח או פריטי תפריט."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:30
 msgid "Show _label instead of icon"
@@ -1671,7 +1671,7 @@ msgstr "בחר את אפשרות זו כדי להזיז פריט תפריט שנ
 
 #: ../plugins/launcher/launcher-dialog.glade.h:33
 msgid "_Arrow button position:"
-msgstr "מיקום לחצן _חץ:"
+msgstr "אזור כפתור _חץ:"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:34
 msgid "Advanced"
@@ -1683,16 +1683,16 @@ msgstr "מפעיל תוכנית עם תפריט אופציונלי"
 
 #: ../plugins/pager/pager.c:548 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
-msgstr "ה_גדרות משטח עבודה..."
+msgstr "ה_גדרות מרחב עבודה..."
 
 #: ../plugins/pager/pager.c:636
 msgid "Unable to open the workspace settings"
-msgstr "לא מסוגל לפתוח הגדרות משפח עבודה"
+msgstr "לא מסוגל לפתוח את הגדרות מרחב העבודה"
 
 #: ../plugins/pager/pager-buttons.c:590 ../plugins/windowmenu/windowmenu.c:873
 #, c-format
 msgid "Workspace %d"
-msgstr "משטח עבודה %d"
+msgstr "מרחב עבודה %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:1
 msgid "Buttons"
@@ -1705,19 +1705,19 @@ msgstr "מבט מיניאטורי"
 #: ../plugins/pager/pager-dialog.glade.h:3
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Workspace Switcher"
-msgstr "בורר משטח עבודה"
+msgstr "בורר מרחב עבודה"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 msgid "Number of _rows:"
-msgstr "מס_פר של שורות:"
+msgstr "מספר של _שורות:"
 
 #: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Show workspace number"
-msgstr "הצג מספר חלל עבודה"
+msgstr "הצג את מספר מרחב העבודה"
 
 #: ../plugins/pager/pager-dialog.glade.h:9
 msgid "Switch workspaces using the mouse wheel"
-msgstr "עבור בין חללי עבודה בעזרת גלגל העכבר"
+msgstr "החלף בין מרחבי עבודה בעזרת גלגל העכבר"
 
 #: ../plugins/pager/pager-dialog.glade.h:10
 msgid "<b>Appearance</b>"
@@ -1798,7 +1798,7 @@ msgstr "גודל סמל _מרבי (פיקסל):"
 
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "Sq_uare icons"
-msgstr "איקונים מ_רובעים"
+msgstr "אייקונים מ_רובעים"
 
 #: ../plugins/systray/systray-dialog.glade.h:9
 msgid "C_lear Known Applications"
@@ -1819,7 +1819,7 @@ msgstr "אזור בו סמלי התראה מופיעים"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
-msgstr "כאשר משטח הינו מוגבל"
+msgstr "כאשר המרחב מוגבל"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "Nothing"
@@ -1851,7 +1851,7 @@ msgstr "קבץ כותרת וכותרת חלון"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "None, allow drag-and-drop"
-msgstr "בלי, התר גרור והשלך"
+msgstr "בלי, התר גרור־והשלך"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
@@ -1860,11 +1860,11 @@ msgstr "לחצני חלונות"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show button _labels"
-msgstr "הצג _תוויות לחצן"
+msgstr "הצג _תוויות כפתור"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show _flat buttons"
-msgstr "הצג לחצנים _שטוחים"
+msgstr "הצג כפתורים _שטוחים"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Show _handle"
@@ -1884,11 +1884,11 @@ msgstr "פעולת ק_ליק אמצעי:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Restore minimized windows to current _workspace"
-msgstr "שחזר חלונות ממוזערים אל _משטח עבודה נוכחי"
+msgstr "שחזר חלונות ממוזערים אל מרחב העבודה _הנוכחי"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "D_raw window frame when hovering a button"
-msgstr "_צייר מסגרת חלון כאשר עוברים על לחצן"
+msgstr "צ_ייר מסגרת חלון כאשר עוברים על כפתור"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:24
 msgid "_Switch windows using the mouse wheel"
@@ -1932,7 +1932,7 @@ msgstr "_סגור הכל"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Switch between open windows using buttons"
-msgstr "החלף בין חלונות פתוחים באמצעות לחצנים"
+msgstr "החלף בין חלונות פתוחים באמצעות כפתורים"
 
 #: ../plugins/windowmenu/windowmenu.c:670
 msgid "Desktop"
@@ -1948,17 +1948,17 @@ msgstr "חלונות דחופים"
 
 #: ../plugins/windowmenu/windowmenu.c:1335
 msgid "Add Workspace"
-msgstr "הוסף משטח עבודה"
+msgstr "הוסף מרחב עבודה"
 
 #: ../plugins/windowmenu/windowmenu.c:1358
 #, c-format
 msgid "Remove Workspace \"%s\""
-msgstr "הסר משטח עבודה \"%s\""
+msgstr "הסר את מרחב העבודה \"%s\""
 
 #: ../plugins/windowmenu/windowmenu.c:1360
 #, c-format
 msgid "Remove Workspace %d"
-msgstr "הסרת משטח עבודה %d"
+msgstr "הסרת מרחב העבודה %d"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
 msgid "Icon"
@@ -1975,7 +1975,7 @@ msgstr "תפריט חלונות"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Button layout:"
-msgstr "צורת לחצן:"
+msgstr "צורת כפתור:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show workspace a_ctions"
@@ -1991,7 +1991,7 @@ msgstr "אפשר התראת _דחיפות"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:11
 msgid "Show windows from _all workspaces"
-msgstr "הצג חלונות מ_כל משטחי העבודה"
+msgstr "הצג חלונות מ_כל מרחבי העבודה"
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
 msgid "Switch between open windows using a menu"
