@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-28 12:45+0200\n"
-"PO-Revision-Date: 2020-06-12 10:05+0000\n"
+"PO-Revision-Date: 2020-06-14 19:25+0000\n"
 "Last-Translator: Omer\n"
 "Language-Team: Hebrew (http://www.transifex.com/xfce/xfce4-panel/language/he/)\n"
 "MIME-Version: 1.0\n"
@@ -212,7 +212,7 @@ msgstr "נכשל להציג את דיאלוג הוספת פריטים חדשים
 
 #: ../panel/main.c:423
 msgid "Failed to save the panel configuration"
-msgstr "נכשל בשמירת הגדרות הלוח"
+msgstr "נכשל בשמירת הגדרת הלוח"
 
 #: ../panel/main.c:425
 msgid "Failed to add a plugin to the panel"
@@ -220,7 +220,7 @@ msgstr "נכשל בהוספת תוסף ללוח"
 
 #: ../panel/main.c:427
 msgid "Failed to restart the panel"
-msgstr "נכשל בהפעלת הלוח מחדש"
+msgstr "נכשל באתחול הלוח"
 
 #: ../panel/main.c:429
 msgid "Failed to quit the panel"
@@ -238,7 +238,7 @@ msgstr "הרץ"
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "האם ברצונך להתחיל את הלוח? אם כן, וודא ששמרת את הסשן ביציאה, כך שהפאנל יתחיל אוטומטית בפעם הבאה בה תתחבר."
+msgstr "האם ברצונך להתחיל את הלוח? אם כן, וודא ששמרת את הסשן ביציאה, כך שהלוח יתחיל אוטומטית בפעם הבאה בה תתחבר."
 
 #: ../panel/main.c:445 ../panel/main.c:459
 #, c-format
@@ -257,7 +257,7 @@ msgstr "צור _מפעיל"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "פעולה זו תיצור תוסף מפעיל חדש בלוח ותכניס את הקבצים שהושלכו כפריטים בתפריט."
+msgstr "פעולה זו תיצור תוסף מפעיל חדש על הלוח ותכניס את הקבצים שהושלכו כפריטים בתפריט."
 
 #: ../panel/panel-application.c:980
 #, c-format
@@ -631,7 +631,7 @@ msgstr "הגדר..."
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>העריכה אינה מופעלת כרגע</b>\nהפעל את העריכה במנהל החלונות להגדרות אטימות בלוח."
+msgstr "<b>העריכה מושבתת כרגע</b>\nהפעל עריכה במנהל החלונות להגדרות אטימות בלוח."
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:52
@@ -866,7 +866,7 @@ msgstr "האם ברצונך להכניס את המערכת למצב שינה ו�
 #: ../plugins/actions/actions.c:210
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
-msgstr "מכניס את המחשב למצב שינה והשהיה בעוד %d שניות. "
+msgstr "כעת מכניס את המחשב למצב שינה והשהיה בעוד %d שניות. "
 
 #: ../plugins/actions/actions.c:216
 msgid "Suspend"
@@ -1474,7 +1474,7 @@ msgstr "הזן שם חדש:"
 #: ../plugins/directorymenu/directorymenu.c:990
 #, c-format
 msgid "Failed to create folder: %s"
-msgstr "נכשל ליצור תיקייה:%s"
+msgstr "נכשל ביצירת תיקייה:%s"
 
 #: ../plugins/directorymenu/directorymenu.c:1075
 msgid "Open Folder"
@@ -1637,7 +1637,7 @@ msgstr "מפעיל"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "Delete the currently selected item"
-msgstr "מחק את הפריט הנבחר הנוכחי"
+msgstr "מחק את הפריט הנוכחי שנבחר"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "Add a new empty item"
@@ -1655,7 +1655,7 @@ msgstr "נטרל _תיבות צצות"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "בחר את אפשרות זו כדי לנטרל תיבות צצות בעת מעבר מעל כפתור לוח או פריטי תפריט."
+msgstr "בחר את האפשרות הזאת על מנת להשבית את התיבות הצצות מעל כפתור הלוח או פריטי תפריט."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:30
 msgid "Show _label instead of icon"
@@ -1687,7 +1687,7 @@ msgstr "ה_גדרות מרחב עבודה..."
 
 #: ../plugins/pager/pager.c:636
 msgid "Unable to open the workspace settings"
-msgstr "לא מסוגל לפתוח את הגדרות מרחב העבודה"
+msgstr "לא מסוגל לפתוח את הגדרות מרחב עבודה"
 
 #: ../plugins/pager/pager-buttons.c:590 ../plugins/windowmenu/windowmenu.c:873
 #, c-format
@@ -1713,7 +1713,7 @@ msgstr "מספר של _שורות:"
 
 #: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Show workspace number"
-msgstr "הצג את מספר מרחב העבודה"
+msgstr "הצג מספר מרחב עבודה"
 
 #: ../plugins/pager/pager-dialog.glade.h:9
 msgid "Switch workspaces using the mouse wheel"
@@ -1851,7 +1851,7 @@ msgstr "קבץ כותרת וכותרת חלון"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "None, allow drag-and-drop"
-msgstr "בלי, התר גרור־והשלך"
+msgstr "בלי, אשר את גרור־והשלך"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
@@ -1953,12 +1953,12 @@ msgstr "הוסף מרחב עבודה"
 #: ../plugins/windowmenu/windowmenu.c:1358
 #, c-format
 msgid "Remove Workspace \"%s\""
-msgstr "הסר את מרחב העבודה \"%s\""
+msgstr "הסר את מרחב עבודה \"%s\""
 
 #: ../plugins/windowmenu/windowmenu.c:1360
 #, c-format
 msgid "Remove Workspace %d"
-msgstr "הסרת מרחב העבודה %d"
+msgstr "הסרת מרחב עבודה %d"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
 msgid "Icon"
