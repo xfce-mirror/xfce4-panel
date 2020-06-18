@@ -153,6 +153,7 @@ PKG_CHECK_MODULES([GIO_UNIX], [gio-unix-2.0 >= 2.42.0])
 XDT_CHECK_PACKAGE([GMODULE], [gmodule-2.0], [2.42.0])
 XDT_CHECK_PACKAGE([CAIRO], [cairo], [1.0.0])
 XDT_CHECK_PACKAGE([LIBWNCK], [libwnck-3.0], [3.0])
+XDT_CHECK_PACKAGE([DBUSMENU], [dbusmenu-gtk3-0.4], [16.04.0])
 
 dnl **********************************
 dnl *** Optional GIO UNIX features ***
@@ -276,6 +277,8 @@ plugins/separator/Makefile
 plugins/separator/separator.desktop.in
 plugins/showdesktop/Makefile
 plugins/showdesktop/showdesktop.desktop.in
+plugins/statusnotifier/Makefile
+plugins/statusnotifier/statusnotifier.desktop.in
 plugins/systray/Makefile
 plugins/systray/systray.desktop.in
 plugins/tasklist/Makefile
