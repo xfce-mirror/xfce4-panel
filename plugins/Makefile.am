@@ -8,6 +8,7 @@ SUBDIRS = \
 	pager \
 	separator \
 	showdesktop \
+	statusnotifier \
 	systray \
 	tasklist \
 	windowmenu
