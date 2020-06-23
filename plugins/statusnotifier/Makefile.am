@@ -13,7 +13,10 @@ plugin_LTLIBRARIES = \
 libstatusnotifier_built_sources = \
 	sn-watcher.h \
 	sn-watcher.c \
-	sn-dialog-ui.h
+	sn-dialog-ui.h \
+	systray-dialog_ui.h \
+	systray-marshal.c \
+	systray-marshal.h
 
 libstatusnotifier_la_SOURCES = \
 	$(libstatusnotifier_built_sources) \
@@ -34,9 +37,18 @@ libstatusnotifier_la_SOURCES = \
 	sn-plugin.c \
 	sn-plugin.h \
 	sn-util.c \
-	sn-util.h
+	sn-util.h \
+	systray.c \
+	systray.h \
+	systray-box.c \
+	systray-box.h \
+	systray-manager.c \
+	systray-manager.h \
+	systray-socket.c \
+	systray-socket.h
 
 libstatusnotifier_la_CFLAGS = \
+	$(LIBX11_CFLAGS) \
 	$(GTK_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
@@ -54,12 +66,19 @@ libstatusnotifier_la_LDFLAGS = \
 	$(PLATFORM_LDFLAGS)
 
 libstatusnotifier_la_LIBADD = \
+	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
+	$(top_builddir)/common/libpanel-common.la \
+	$(LIBX11_LIBS) \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
 	$(LIBXFCE4PANEL_LIBS) \
 	$(XFCONF_LIBS) \
 	$(DBUSMENU_LIBS)
+
+libstatusnotifier_la_DEPENDENCIES = \
+	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
+	$(top_builddir)/common/libpanel-common.la
 
 desktopdir = \
 	$(datadir)/xfce4/panel/plugins
@@ -89,6 +108,16 @@ sn-watcher.c: sn-watcher.xml Makefile
 
 sn-dialog-ui.h: sn-dialog.glade
 	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=sn_dialog_ui $< >$@
+
+systray-marshal.h: systray-marshal.list Makefile
+	$(AM_V_GEN) glib-genmarshal --header --internal --prefix=_systray_marshal $< > $@
+
+systray-marshal.c: systray-marshal.list Makefile
+	$(AM_V_GEN) echo "#include \"systray-marshal.h\"" > $@ \
+	&& glib-genmarshal --prefix=_systray_marshal --body $< >> $@
+
+systray-dialog_ui.h: systray-dialog.glade
+	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=systray_dialog_ui $< >$@
 
 BUILT_SOURCES = \
 	$(libstatusnotifier_built_sources)

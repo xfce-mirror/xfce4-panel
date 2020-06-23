@@ -36,7 +36,7 @@
 #include "systray-box.h"
 #include "systray-socket.h"
 #include "systray-manager.h"
-#include "systray-dialog_ui.h"
+//#include "systray-dialog_ui.h"
 
 #define BUTTON_SIZE   (16)
 
@@ -56,69 +56,37 @@ static void     systray_plugin_orientation_changed          (XfcePanelPlugin    
 static gboolean systray_plugin_size_changed                 (XfcePanelPlugin       *panel_plugin,
                                                              gint                   size);
 static void     systray_plugin_configure_plugin             (XfcePanelPlugin       *panel_plugin);
-static void     systray_plugin_box_draw                     (GtkWidget             *box,
-                                                             cairo_t               *cr,
-                                                             gpointer               user_data);
-static void     systray_plugin_button_toggled               (GtkWidget             *button,
-                                                             SystrayPlugin         *plugin);
-static void     systray_plugin_button_set_arrow             (SystrayPlugin         *plugin);
+static void     systray_plugin_button_set_arrow             (SnPlugin         *plugin);
 static void     systray_plugin_names_collect_ordered        (gpointer               data,
                                                              gpointer               user_data);
 static void     systray_plugin_names_collect_hidden         (gpointer               key,
                                                              gpointer               value,
                                                              gpointer               user_data);
-static void     systray_plugin_names_update                 (SystrayPlugin         *plugin);
-static gboolean systray_plugin_names_get_hidden             (SystrayPlugin         *plugin,
+static void     systray_plugin_names_update                 (SnPlugin         *plugin);
+static gboolean systray_plugin_names_get_hidden             (SnPlugin         *plugin,
                                                              const gchar           *name);
 static void     systray_plugin_icon_added                   (SystrayManager        *manager,
                                                              GtkWidget             *icon,
-                                                             SystrayPlugin         *plugin);
+                                                             SnPlugin         *plugin);
 static void     systray_plugin_icon_removed                 (SystrayManager        *manager,
                                                              GtkWidget             *icon,
-                                                             SystrayPlugin         *plugin);
+                                                             SnPlugin         *plugin);
 static void     systray_plugin_lost_selection               (SystrayManager        *manager,
-                                                             SystrayPlugin         *plugin);
+                                                             SnPlugin         *plugin);
 static void     systray_plugin_dialog_add_application_names (gpointer               data,
                                                              gpointer               user_data);
 static void     systray_plugin_dialog_hidden_toggled        (GtkCellRendererToggle *renderer,
                                                              const gchar           *path_string,
-                                                             SystrayPlugin         *plugin);
+                                                             SnPlugin         *plugin);
 static void     systray_plugin_dialog_selection_changed     (GtkTreeSelection      *selection,
-                                                             SystrayPlugin         *plugin);
+                                                             SnPlugin         *plugin);
 static void     systray_plugin_dialog_item_move_clicked     (GtkWidget             *button,
-                                                             SystrayPlugin         *plugin);
+                                                             SnPlugin         *plugin);
 static void     systray_plugin_dialog_clear_clicked         (GtkWidget             *button,
-                                                             SystrayPlugin         *plugin);
-static void     systray_plugin_dialog_cleanup               (SystrayPlugin         *plugin,
+                                                             SnPlugin         *plugin);
+static void     systray_plugin_dialog_cleanup               (SnPlugin         *plugin,
                                                              GtkBuilder            *builder);
 
-
-
-struct _SystrayPluginClass
-{
-  XfcePanelPluginClass __parent__;
-};
-
-struct _SystrayPlugin
-{
-  XfcePanelPlugin __parent__;
-
-  /* systray manager */
-  SystrayManager *manager;
-
-  guint           idle_startup;
-
-  /* widgets */
-  GtkWidget      *hvbox;
-  GtkWidget      *box;
-  GtkWidget      *button;
-
-  /* settings */
-  GSList         *names_ordered;
-  GHashTable     *names_hidden;
-
-  GtkBuilder     *configure_builder;
-};
 
 enum
 {
@@ -140,10 +108,10 @@ enum
 
 
 /* define the plugin */
-XFCE_PANEL_DEFINE_PLUGIN (SystrayPlugin, systray_plugin,
-    systray_box_register_type,
-    systray_manager_register_type,
-    systray_socket_register_type)
+//XFCE_PANEL_DEFINE_PLUGIN (SnPlugin, systray_plugin,
+//    systray_box_register_type,
+//    systray_manager_register_type,
+//    systray_socket_register_type)
 
 
 
@@ -164,9 +132,9 @@ static const gchar *known_applications[][3] =
 };
 
 
-
+/*
 static void
-systray_plugin_class_init (SystrayPluginClass *klass)
+systray_plugin_class_init (SnPluginClass *klass)
 {
   XfcePanelPluginClass *plugin_class;
   GObjectClass         *gobject_class;
@@ -216,7 +184,7 @@ systray_plugin_class_init (SystrayPluginClass *klass)
 
 
 static void
-systray_plugin_init (SystrayPlugin *plugin)
+systray_plugin_init (SnPlugin *plugin)
 {
   plugin->manager = NULL;
   plugin->idle_startup = 0;
@@ -227,23 +195,23 @@ systray_plugin_init (SystrayPlugin *plugin)
   gtk_container_add (GTK_CONTAINER (plugin), plugin->hvbox);
   gtk_widget_show (plugin->hvbox);
 
-  plugin->box = systray_box_new ();
-  gtk_box_pack_start (GTK_BOX (plugin->hvbox), plugin->box, TRUE, TRUE, 0);
-  g_signal_connect (G_OBJECT (plugin->box), "draw",
+  plugin->systray_box = systray_box_new ();
+  gtk_box_pack_start (GTK_BOX (plugin->hvbox), plugin->systray_box, TRUE, TRUE, 0);
+  g_signal_connect (G_OBJECT (plugin->systray_box), "draw",
       G_CALLBACK (systray_plugin_box_draw), plugin);
-  gtk_container_set_border_width (GTK_CONTAINER (plugin->box), 1);
-  gtk_widget_show (plugin->box);
+  gtk_container_set_border_width (GTK_CONTAINER (plugin->systray_box), 1);
+  gtk_widget_show (plugin->systray_box);
 
   plugin->button = xfce_arrow_button_new (GTK_ARROW_RIGHT);
   gtk_box_pack_start (GTK_BOX (plugin->hvbox), plugin->button, FALSE, FALSE, 0);
   g_signal_connect (G_OBJECT (plugin->button), "toggled",
       G_CALLBACK (systray_plugin_button_toggled), plugin);
   gtk_button_set_relief (GTK_BUTTON (plugin->button), GTK_RELIEF_NONE);
-  g_object_bind_property (G_OBJECT (plugin->box), "has-hidden",
+  g_object_bind_property (G_OBJECT (plugin->systray_box), "has-hidden",
                           G_OBJECT (plugin->button), "visible",
                           G_BINDING_SYNC_CREATE);
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button);
-}
+} */
 
 
 static void
@@ -261,33 +229,33 @@ systray_plugin_get_property (GObject    *object,
                              GValue     *value,
                              GParamSpec *pspec)
 {
-  SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (object);
+  SnPlugin *plugin = XFCE_SN_PLUGIN (object);
   GPtrArray     *array;
 
   switch (prop_id)
     {
     case PROP_SIZE_MAX:
-      g_value_set_uint (value,
-                        systray_box_get_size_max (XFCE_SYSTRAY_BOX (plugin->box)));
+      //g_value_set_uint (value,
+      //                  systray_box_get_size_max (XFCE_SYSTRAY_BOX (plugin->systray_box)));
       break;
 
     case PROP_SQUARE_ICONS:
-      g_value_set_boolean (value,
-                           systray_box_get_squared (XFCE_SYSTRAY_BOX (plugin->box)));
+      //g_value_set_boolean (value,
+      //                     systray_box_get_squared (XFCE_SYSTRAY_BOX (plugin->systray_box)));
       break;
 
     case PROP_NAMES_ORDERED:
-      array = g_ptr_array_new_full (1, (GDestroyNotify) systray_free_array_element);
-      g_slist_foreach (plugin->names_ordered, systray_plugin_names_collect_ordered, array);
-      g_value_set_boxed (value, array);
-      g_ptr_array_unref (array);
+      //array = g_ptr_array_new_full (1, (GDestroyNotify) systray_free_array_element);
+      //g_slist_foreach (plugin->names_ordered, systray_plugin_names_collect_ordered, array);
+      //g_value_set_boxed (value, array);
+      //g_ptr_array_unref (array);
       break;
 
     case PROP_NAMES_HIDDEN:
-      array = g_ptr_array_new_full (1, (GDestroyNotify) systray_free_array_element);
-      g_hash_table_foreach (plugin->names_hidden, systray_plugin_names_collect_hidden, array);
-      g_value_set_boxed (value, array);
-      g_ptr_array_unref (array);
+      //array = g_ptr_array_new_full (1, (GDestroyNotify) systray_free_array_element);
+      //g_hash_table_foreach (plugin->names_hidden, systray_plugin_names_collect_hidden, array);
+      //g_value_set_boxed (value, array);
+      //g_ptr_array_unref (array);
       break;
 
     default:
@@ -304,7 +272,7 @@ systray_plugin_set_property (GObject      *object,
                              const GValue *value,
                              GParamSpec   *pspec)
 {
-  SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (object);
+  SnPlugin *plugin = XFCE_SN_PLUGIN (object);
   gboolean       boolean_val;
   GPtrArray     *array;
   const GValue  *tmp;
@@ -314,58 +282,58 @@ systray_plugin_set_property (GObject      *object,
   switch (prop_id)
     {
     case PROP_SIZE_MAX:
-      systray_box_set_size_max (XFCE_SYSTRAY_BOX (plugin->box),
-                                g_value_get_uint (value));
+      //systray_box_set_size_max (XFCE_SYSTRAY_BOX (plugin->systray_box),
+      //                          g_value_get_uint (value));
       break;
 
     case PROP_SQUARE_ICONS:
-      boolean_val = g_value_get_boolean (value);
-      systray_box_set_squared (XFCE_SYSTRAY_BOX (plugin->box), boolean_val);
-      systray_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
-                                   xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
+      //boolean_val = g_value_get_boolean (value);
+      //systray_box_set_squared (XFCE_SYSTRAY_BOX (plugin->systray_box), boolean_val);
+      //systray_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
+      //                             xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
       break;
 
     case PROP_NAMES_ORDERED:
-      g_slist_free_full (plugin->names_ordered, g_free);
-      plugin->names_ordered = NULL;
+      //g_slist_free_full (plugin->names_ordered, g_free);
+      //plugin->names_ordered = NULL;
 
       /* add new values */
-      array = g_value_get_boxed (value);
-      if (G_LIKELY (array != NULL))
-        {
-          for (i = 0; i < array->len; i++)
-            {
-              tmp = g_ptr_array_index (array, i);
-              panel_assert (G_VALUE_HOLDS_STRING (tmp));
-              name = g_value_dup_string (tmp);
-              plugin->names_ordered = g_slist_prepend (plugin->names_ordered, name);
-            }
+      //array = g_value_get_boxed (value);
+      //if (G_LIKELY (array != NULL))
+      //  {
+      //    for (i = 0; i < array->len; i++)
+      //      {
+      //        tmp = g_ptr_array_index (array, i);
+      //        panel_assert (G_VALUE_HOLDS_STRING (tmp));
+      //        name = g_value_dup_string (tmp);
+      //        plugin->names_ordered = g_slist_prepend (plugin->names_ordered, name);
+      //      }
 
-          plugin->names_ordered = g_slist_reverse (plugin->names_ordered);
-        }
+      //    plugin->names_ordered = g_slist_reverse (plugin->names_ordered);
+      //  }
 
-      /* update icons in the box */
-      systray_plugin_names_update (plugin);
+      ///* update icons in the box */
+      //systray_plugin_names_update (plugin);
       break;
 
     case PROP_NAMES_HIDDEN:
-      g_hash_table_remove_all (plugin->names_hidden);
+      //g_hash_table_remove_all (plugin->names_hidden);
 
-      /* add new values */
-      array = g_value_get_boxed (value);
-      if (G_LIKELY (array != NULL))
-        {
-          for (i = 0; i < array->len; i++)
-            {
-              tmp = g_ptr_array_index (array, i);
-              panel_assert (G_VALUE_HOLDS_STRING (tmp));
-              name = g_value_dup_string (tmp);
-              g_hash_table_replace (plugin->names_hidden, name, NULL);
-            }
-        }
+      ///* add new values */
+      //array = g_value_get_boxed (value);
+      //if (G_LIKELY (array != NULL))
+      //  {
+      //    for (i = 0; i < array->len; i++)
+      //      {
+      //        tmp = g_ptr_array_index (array, i);
+      //        panel_assert (G_VALUE_HOLDS_STRING (tmp));
+      //        name = g_value_dup_string (tmp);
+      //        g_hash_table_replace (plugin->names_hidden, name, NULL);
+      //      }
+      //  }
 
-      /* update icons in the box */
-      systray_plugin_names_update (plugin);
+      ///* update icons in the box */
+      //systray_plugin_names_update (plugin);
       break;
 
     default:
@@ -379,7 +347,7 @@ systray_plugin_set_property (GObject      *object,
 static gboolean
 systray_plugin_screen_changed_idle (gpointer user_data)
 {
-  SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (user_data);
+  SnPlugin *plugin = XFCE_SN_PLUGIN (user_data);
   GdkScreen     *screen;
   GError        *error = NULL;
 
@@ -414,7 +382,7 @@ systray_plugin_screen_changed_idle (gpointer user_data)
 static void
 systray_plugin_screen_changed_idle_destroyed (gpointer user_data)
 {
-  XFCE_SYSTRAY_PLUGIN (user_data)->idle_startup = 0;
+  XFCE_SN_PLUGIN (user_data)->idle_startup = 0;
 }
 
 
@@ -423,7 +391,7 @@ static void
 systray_plugin_screen_changed (GtkWidget *widget,
                                GdkScreen *previous_screen)
 {
-  SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (widget);
+  SnPlugin *plugin = XFCE_SN_PLUGIN (widget);
 
   if (G_UNLIKELY (plugin->manager != NULL))
     {
@@ -452,7 +420,7 @@ systray_plugin_composited_changed (GtkWidget *widget)
 static void
 systray_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
-  SystrayPlugin       *plugin = XFCE_SYSTRAY_PLUGIN (panel_plugin);
+  SnPlugin       *plugin = XFCE_SN_PLUGIN (panel_plugin);
   const PanelProperty  properties[] =
   {
     { "size-max", G_TYPE_UINT },
@@ -483,7 +451,7 @@ systray_plugin_construct (XfcePanelPlugin *panel_plugin)
 static void
 systray_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
-  SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (panel_plugin);
+  SnPlugin *plugin = XFCE_SN_PLUGIN (panel_plugin);
 
   /* stop pending idle startup */
   if (plugin->idle_startup != 0)
@@ -509,11 +477,11 @@ static void
 systray_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
                                     GtkOrientation   orientation)
 {
-  SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (panel_plugin);
+  SnPlugin *plugin = XFCE_SN_PLUGIN (panel_plugin);
 
 
-  gtk_orientable_set_orientation (GTK_ORIENTABLE (plugin->hvbox), orientation);
-  systray_box_set_orientation (XFCE_SYSTRAY_BOX (plugin->box), orientation);
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (plugin->box), orientation);
+  systray_box_set_orientation (XFCE_SYSTRAY_BOX (plugin->systray_box), orientation);
 
   if (G_LIKELY (plugin->manager != NULL))
     systray_manager_set_orientation (plugin->manager, orientation);
@@ -528,7 +496,7 @@ systray_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
     GdkColor warning;
     GdkColor success;
 
-    context = gtk_widget_get_style_context (GTK_WIDGET (plugin->box));
+    context = gtk_widget_get_style_context (GTK_WIDGET (plugin->systray_box));
     gtk_style_context_get_color (context, GTK_STATE_NORMAL, &rgba);
 
     color.pixel = 0;
@@ -556,7 +524,7 @@ static gboolean
 systray_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                              gint             size)
 {
-  SystrayPlugin    *plugin = XFCE_SYSTRAY_PLUGIN (panel_plugin);
+  SnPlugin    *plugin = XFCE_SN_PLUGIN (panel_plugin);
   GtkStyleContext  *context;
   GtkBorder         padding;
   gint              border = 0;
@@ -565,11 +533,11 @@ systray_plugin_size_changed (XfcePanelPlugin *panel_plugin,
    * behind the allocated size when resizing and during startup, we
    * correct the maximum size set by the user with the size the panel
    * will most likely allocated */
-  context = gtk_widget_get_style_context (plugin->hvbox);
-  gtk_style_context_get_padding (context, gtk_widget_get_state_flags (plugin->hvbox), &padding);
+  context = gtk_widget_get_style_context (plugin->box);
+  gtk_style_context_get_padding (context, gtk_widget_get_state_flags (plugin->box), &padding);
 
   border += MAX (padding.left + padding.right, padding.top + padding.bottom);
-  systray_box_set_size_alloc (XFCE_SYSTRAY_BOX (plugin->box), size - 2 * border,
+  systray_box_set_size_alloc (XFCE_SYSTRAY_BOX (plugin->systray_box), size - 2 * border,
                               xfce_panel_plugin_get_nrows (panel_plugin));
 
   return TRUE;
@@ -580,7 +548,7 @@ systray_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 static void
 systray_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
-  SystrayPlugin    *plugin = XFCE_SYSTRAY_PLUGIN (panel_plugin);
+  SnPlugin    *plugin = XFCE_SN_PLUGIN (panel_plugin);
   GtkBuilder       *builder;
   GObject          *dialog, *object, *store;
   GtkTreeSelection *selection;
@@ -674,13 +642,13 @@ systray_plugin_box_draw_icon (GtkWidget *child,
 
 
 
-static void
+void
 systray_plugin_box_draw (GtkWidget *box,
                          cairo_t   *cr,
                          gpointer   user_data)
 {
-  SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (user_data);
-  panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
+  SnPlugin *plugin = XFCE_SN_PLUGIN (user_data);
+  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
   panel_return_if_fail (cr != NULL);
 
   /* separately draw all the composed tray icons after gtk
@@ -691,15 +659,15 @@ systray_plugin_box_draw (GtkWidget *box,
 
 
 
-static void
+void
 systray_plugin_button_toggled (GtkWidget     *button,
-                               SystrayPlugin *plugin)
+                               SnPlugin *plugin)
 {
-  panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
   panel_return_if_fail (plugin->button == button);
 
-  systray_box_set_show_hidden (XFCE_SYSTRAY_BOX (plugin->box),
+  systray_box_set_show_hidden (XFCE_SYSTRAY_BOX (plugin->systray_box),
       gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)));
   systray_plugin_button_set_arrow (plugin);
 }
@@ -707,15 +675,15 @@ systray_plugin_button_toggled (GtkWidget     *button,
 
 
 static void
-systray_plugin_button_set_arrow (SystrayPlugin *plugin)
+systray_plugin_button_set_arrow (SnPlugin *plugin)
 {
   GtkArrowType   arrow_type;
   gboolean       show_hidden;
   GtkOrientation orientation;
 
-  panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
 
-  show_hidden = systray_box_get_show_hidden (XFCE_SYSTRAY_BOX (plugin->box));
+  show_hidden = systray_box_get_show_hidden (XFCE_SYSTRAY_BOX (plugin->systray_box));
   orientation = xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin));
   if (orientation == GTK_ORIENTATION_HORIZONTAL)
     arrow_type = show_hidden ? GTK_ARROW_LEFT : GTK_ARROW_RIGHT;
@@ -764,11 +732,11 @@ static void
 systray_plugin_names_update_icon (GtkWidget *icon,
                                   gpointer   data)
 {
-  SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (data);
+  SnPlugin *plugin = XFCE_SN_PLUGIN (data);
   SystraySocket *socket = XFCE_SYSTRAY_SOCKET (icon);
   const gchar   *name;
 
-  panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
   panel_return_if_fail (XFCE_IS_SYSTRAY_SOCKET (icon));
 
   name = systray_socket_get_name (socket);
@@ -779,24 +747,24 @@ systray_plugin_names_update_icon (GtkWidget *icon,
 
 
 static void
-systray_plugin_names_update (SystrayPlugin *plugin)
+systray_plugin_names_update (SnPlugin *plugin)
 {
-  panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
 
-  gtk_container_foreach (GTK_CONTAINER (plugin->box),
+  gtk_container_foreach (GTK_CONTAINER (plugin->systray_box),
     systray_plugin_names_update_icon, plugin);
-  systray_box_update (XFCE_SYSTRAY_BOX (plugin->box),
+  systray_box_update (XFCE_SYSTRAY_BOX (plugin->systray_box),
     plugin->names_ordered);
 }
 
 
 
 static void
-systray_plugin_names_set_hidden (SystrayPlugin *plugin,
+systray_plugin_names_set_hidden (SnPlugin *plugin,
                                  const gchar   *name,
                                  gboolean       hidden)
 {
-  panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
   panel_return_if_fail (!panel_str_is_empty (name));
 
   if (g_hash_table_contains (plugin->names_hidden, name))
@@ -812,7 +780,7 @@ systray_plugin_names_set_hidden (SystrayPlugin *plugin,
 
 
 static gboolean
-systray_plugin_names_get_hidden (SystrayPlugin *plugin,
+systray_plugin_names_get_hidden (SnPlugin *plugin,
                                  const gchar   *name)
 {
   if (panel_str_is_empty (name))
@@ -837,7 +805,7 @@ systray_plugin_names_get_hidden (SystrayPlugin *plugin,
 
 
 static void
-systray_plugin_names_clear (SystrayPlugin *plugin)
+systray_plugin_names_clear (SnPlugin *plugin)
 {
   g_slist_free_full (plugin->names_ordered, g_free);
   plugin->names_ordered = NULL;
@@ -854,16 +822,16 @@ systray_plugin_names_clear (SystrayPlugin *plugin)
 static void
 systray_plugin_icon_added (SystrayManager *manager,
                            GtkWidget      *icon,
-                           SystrayPlugin  *plugin)
+                           SnPlugin  *plugin)
 {
   panel_return_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager));
-  panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
   panel_return_if_fail (XFCE_IS_SYSTRAY_SOCKET (icon));
   panel_return_if_fail (plugin->manager == manager);
   panel_return_if_fail (GTK_IS_WIDGET (icon));
 
   systray_plugin_names_update_icon (icon, plugin);
-  gtk_container_add (GTK_CONTAINER (plugin->box), icon);
+  gtk_container_add (GTK_CONTAINER (plugin->systray_box), icon);
   gtk_widget_show (icon);
 
   panel_debug_filtered (PANEL_DEBUG_SYSTRAY, "added %s[%p] icon",
@@ -875,15 +843,15 @@ systray_plugin_icon_added (SystrayManager *manager,
 static void
 systray_plugin_icon_removed (SystrayManager *manager,
                              GtkWidget      *icon,
-                             SystrayPlugin  *plugin)
+                             SnPlugin  *plugin)
 {
   panel_return_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager));
-  panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
   panel_return_if_fail (plugin->manager == manager);
   panel_return_if_fail (GTK_IS_WIDGET (icon));
 
   /* remove the icon from the box */
-  gtk_container_remove (GTK_CONTAINER (plugin->box), icon);
+  gtk_container_remove (GTK_CONTAINER (plugin->systray_box), icon);
 
   panel_debug_filtered (PANEL_DEBUG_SYSTRAY, "removed %s[%p] icon",
       systray_socket_get_name (XFCE_SYSTRAY_SOCKET (icon)), icon);
@@ -893,12 +861,12 @@ systray_plugin_icon_removed (SystrayManager *manager,
 
 static void
 systray_plugin_lost_selection (SystrayManager *manager,
-                               SystrayPlugin  *plugin)
+                               SnPlugin  *plugin)
 {
   GError error;
 
   panel_return_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager));
-  panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
   panel_return_if_fail (plugin->manager == manager);
 
   /* create fake error and show it */
@@ -955,7 +923,7 @@ systray_plugin_dialog_add_application_names (gpointer data,
                                              gpointer user_data)
 {
   gpointer      **user_data_array = user_data;
-  SystrayPlugin  *plugin = (SystrayPlugin *)user_data_array[0];
+  SnPlugin  *plugin = (SnPlugin *)user_data_array[0];
   GtkListStore   *store = (GtkListStore *)user_data_array[1];
   const gchar    *name = data;
   gboolean        hidden = g_hash_table_contains (plugin->names_hidden, name);
@@ -1017,15 +985,15 @@ systray_plugin_dialog_add_application_names (gpointer data,
 static void
 systray_plugin_dialog_hidden_toggled (GtkCellRendererToggle *renderer,
                                       const gchar           *path_string,
-                                      SystrayPlugin         *plugin)
+                                      SnPlugin         *plugin)
 {
   GtkTreeIter   iter;
   gboolean      hidden;
   GtkTreeModel *model;
   gchar        *name;
 
-  panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
-  panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (plugin->box));
+  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (plugin->systray_box));
 
   model = GTK_TREE_MODEL (gtk_builder_get_object (plugin->configure_builder, "applications-store"));
   panel_return_if_fail (GTK_IS_LIST_STORE (model));
@@ -1050,7 +1018,7 @@ systray_plugin_dialog_hidden_toggled (GtkCellRendererToggle *renderer,
 
 static void
 systray_plugin_dialog_selection_changed (GtkTreeSelection *selection,
-                                         SystrayPlugin    *plugin)
+                                         SnPlugin    *plugin)
 {
   GtkTreeModel *model;
   GtkTreeIter   iter;
@@ -1060,7 +1028,7 @@ systray_plugin_dialog_selection_changed (GtkTreeSelection *selection,
   gboolean      item_up_sensitive, item_down_sensitive;
   GObject      *object;
 
-  panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
 
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
     {
@@ -1095,7 +1063,7 @@ systray_plugin_dialog_tree_iter_insert (GtkTreeModel *model,
                                         GtkTreeIter  *iter,
                                         gpointer      user_data)
 {
-  SystrayPlugin *plugin = user_data;
+  SnPlugin *plugin = user_data;
   gchar         *name;
 
   gtk_tree_model_get (model, iter, COLUMN_INTERNAL_NAME, &name, -1);
@@ -1108,7 +1076,7 @@ systray_plugin_dialog_tree_iter_insert (GtkTreeModel *model,
 
 static void
 systray_plugin_dialog_item_move_clicked (GtkWidget     *button,
-                                         SystrayPlugin *plugin)
+                                         SnPlugin *plugin)
 {
   GObject          *object;
   GtkTreeSelection *selection;
@@ -1161,12 +1129,12 @@ systray_plugin_dialog_item_move_clicked (GtkWidget     *button,
 
 static void
 systray_plugin_dialog_clear_clicked (GtkWidget     *button,
-                                     SystrayPlugin *plugin)
+                                     SnPlugin *plugin)
 {
   GtkListStore *store;
 
-  panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
-  panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (plugin->box));
+  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (plugin->systray_box));
 
   if (xfce_dialog_confirm (GTK_WINDOW (gtk_widget_get_toplevel (button)),
                            "edit-clear", _("Clear"), NULL,
@@ -1184,10 +1152,10 @@ systray_plugin_dialog_clear_clicked (GtkWidget     *button,
 
 
 static void
-systray_plugin_dialog_cleanup (SystrayPlugin *plugin,
+systray_plugin_dialog_cleanup (SnPlugin *plugin,
                                GtkBuilder    *builder)
 {
-  panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
 
   if (plugin->configure_builder == builder)
     plugin->configure_builder = NULL;

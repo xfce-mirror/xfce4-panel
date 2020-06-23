@@ -22,6 +22,13 @@
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel.h>
 
+#include "systray.h"
+#include "systray-manager.h"
+#include "systray-dialog_ui.h"
+
+#include "sn-backend.h"
+#include "sn-config.h"
+
 G_BEGIN_DECLS
 
 typedef struct _SnPluginClass SnPluginClass;
@@ -33,6 +40,38 @@ typedef struct _SnPlugin      SnPlugin;
 #define XFCE_IS_SN_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_SN_PLUGIN))
 #define XFCE_IS_SN_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_SN_PLUGIN))
 #define XFCE_SN_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_SN_PLUGIN, SnPluginClass))
+
+struct _SnPluginClass
+{
+  XfcePanelPluginClass __parent__;
+};
+
+struct _SnPlugin
+{
+  XfcePanelPlugin      __parent__;
+
+  /* Systray manager */
+  SystrayManager *manager;
+
+  guint           idle_startup;
+
+  /* Widgets */
+  GtkWidget           *box;
+  GtkWidget           *systray_box;
+  GtkWidget           *button;
+  GtkWidget           *item;
+  GtkWidget           *sn_box;
+
+  /* Systray settings */
+  GSList         *names_ordered;
+  GHashTable     *names_hidden;
+
+  GtkBuilder     *configure_builder;
+
+  /* Statusnotifier settings */
+  SnBackend           *backend;
+  SnConfig            *config;
+};
 
 GType                  sn_plugin_get_type                      (void) G_GNUC_CONST;
 

@@ -25,7 +25,21 @@
 #include <string.h>
 #endif
 
+#include <gdk/gdk.h>
+#include <gdk/gdkx.h>
+#include <gtk/gtk.h>
+
 #include <libxfce4util/libxfce4util.h>
+#include <libxfce4ui/libxfce4ui.h>
+#include <common/panel-private.h>
+#include <common/panel-xfconf.h>
+#include <common/panel-utils.h>
+#include <common/panel-debug.h>
+
+#include "systray.h"
+#include "systray-box.h"
+#include "systray-socket.h"
+#include "systray-manager.h"
 
 #include "sn-backend.h"
 #include "sn-box.h"
@@ -34,6 +48,7 @@
 #include "sn-item.h"
 #include "sn-plugin.h"
 
+#define BUTTON_SIZE   (16)
 
 
 static void                  sn_plugin_construct                     (XfcePanelPlugin         *panel_plugin);
@@ -52,21 +67,7 @@ static void                  sn_plugin_show_about                    (XfcePanelP
 
 
 
-struct _SnPluginClass
-{
-  XfcePanelPluginClass __parent__;
-};
 
-struct _SnPlugin
-{
-  XfcePanelPlugin      __parent__;
-
-  GtkWidget           *item;
-  GtkWidget           *box;
-
-  SnBackend           *backend;
-  SnConfig            *config;
-};
 
 XFCE_PANEL_DEFINE_PLUGIN (SnPlugin, sn_plugin)
 
@@ -91,9 +92,15 @@ sn_plugin_class_init (SnPluginClass *klass)
 static void
 sn_plugin_init (SnPlugin *plugin)
 {
-  plugin->item = NULL;
-  plugin->box = NULL;
+  /* Systray init */
+  plugin->manager = NULL;
+  plugin->idle_startup = 0;
+  plugin->names_ordered = NULL;
+  plugin->names_hidden = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
+  /* Statusnotifier init */
+  plugin->item = NULL;
+  plugin->systray_box = NULL;
   plugin->backend = NULL;
   plugin->config = NULL;
 }
@@ -105,11 +112,30 @@ sn_plugin_free (XfcePanelPlugin *panel_plugin)
 {
   SnPlugin *plugin = XFCE_SN_PLUGIN (panel_plugin);
 
+  /* Statusnotifier */
   /* remove children so they won't use unrefed SnItems and SnConfig */
-  gtk_container_remove (GTK_CONTAINER (panel_plugin), plugin->box);
+  gtk_container_remove (GTK_CONTAINER (panel_plugin), plugin->systray_box);
 
   g_object_unref (plugin->backend);
   g_object_unref (plugin->config);
+
+  /* Systray */
+  /* stop pending idle startup */
+  if (plugin->idle_startup != 0)
+    g_source_remove (plugin->idle_startup);
+
+  /* disconnect screen changed signal */
+  //g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
+  //    systray_plugin_screen_changed, NULL);
+
+  g_slist_free_full (plugin->names_ordered, g_free);
+  g_hash_table_destroy (plugin->names_hidden);
+
+  if (G_LIKELY (plugin->manager != NULL))
+    {
+      systray_manager_unregister (plugin->manager);
+      g_object_unref (G_OBJECT (plugin->manager));
+    }
 }
 
 
@@ -204,7 +230,7 @@ sn_plugin_item_added (SnPlugin *plugin,
 
   sn_config_add_known_item (plugin->config, sn_item_get_name (item));
 
-  gtk_container_add (GTK_CONTAINER (plugin->box), button);
+  gtk_container_add (GTK_CONTAINER (plugin->systray_box), button);
   gtk_widget_show (button);
 }
 
@@ -214,7 +240,7 @@ static void
 sn_plugin_item_removed (SnPlugin *plugin,
                         SnItem   *item)
 {
-  sn_box_remove_item (XFCE_SN_BOX (plugin->box), item);
+  sn_box_remove_item (XFCE_SN_BOX (plugin->systray_box), item);
 }
 
 
@@ -224,6 +250,11 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
   SnPlugin *plugin = XFCE_SN_PLUGIN (panel_plugin);
 
+  plugin->manager = NULL;
+  plugin->idle_startup = 0;
+  plugin->names_ordered = NULL;
+  plugin->names_hidden = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 
   xfce_panel_plugin_menu_show_configure (panel_plugin);
@@ -231,12 +262,37 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   plugin->config = sn_config_new (xfce_panel_plugin_get_property_base (panel_plugin));
 
-  plugin->box = sn_box_new (plugin->config);
-  gtk_container_add (GTK_CONTAINER (plugin), GTK_WIDGET (plugin->box));
-  gtk_widget_show (GTK_WIDGET (plugin->box));
+  /* Container for both plugins */
+  plugin->systray_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
+  gtk_container_add (GTK_CONTAINER (plugin), plugin->systray_box);
+  gtk_widget_show (plugin->systray_box);
+
+  /* Add systray box */
+  plugin->systray_box = systray_box_new ();
+  gtk_box_pack_start (GTK_BOX (plugin->systray_box), plugin->systray_box, TRUE, TRUE, 0);
+  g_signal_connect (G_OBJECT (plugin->systray_box), "draw",
+      G_CALLBACK (systray_plugin_box_draw), plugin);
+  gtk_container_set_border_width (GTK_CONTAINER (plugin->systray_box), 1);
+  gtk_widget_show (plugin->systray_box);
+
+  /* Systray arrow button */
+  plugin->button = xfce_arrow_button_new (GTK_ARROW_RIGHT);
+  gtk_box_pack_start (GTK_BOX (plugin->systray_box), plugin->button, FALSE, FALSE, 0);
+  g_signal_connect (G_OBJECT (plugin->button), "toggled",
+      G_CALLBACK (systray_plugin_button_toggled), plugin);
+  gtk_button_set_relief (GTK_BUTTON (plugin->button), GTK_RELIEF_NONE);
+  g_object_bind_property (G_OBJECT (plugin->systray_box), "has-hidden",
+                          G_OBJECT (plugin->button), "visible",
+                          G_BINDING_SYNC_CREATE);
+  xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button);
+
+  /* Add statusnotifier box */
+  plugin->sn_box = sn_box_new (plugin->config);
+  gtk_box_pack_start (GTK_BOX (plugin->systray_box), plugin->sn_box, TRUE, TRUE, 0);
+  gtk_widget_show (GTK_WIDGET (plugin->sn_box));
 
   g_signal_connect_swapped (plugin->config, "configuration-changed",
-                            G_CALLBACK (gtk_widget_queue_resize), plugin->box);
+                            G_CALLBACK (gtk_widget_queue_resize), plugin->systray_box);
 
   plugin->backend = sn_backend_new ();
   g_signal_connect_swapped (plugin->backend, "item-added",
