@@ -9,7 +9,6 @@ SUBDIRS = \
 	separator \
 	showdesktop \
 	statusnotifier \
-	systray \
 	tasklist \
 	windowmenu
 
