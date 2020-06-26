@@ -263,13 +263,13 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
   plugin->config = sn_config_new (xfce_panel_plugin_get_property_base (panel_plugin));
 
   /* Container for both plugins */
-  plugin->systray_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
-  gtk_container_add (GTK_CONTAINER (plugin), plugin->systray_box);
-  gtk_widget_show (plugin->systray_box);
+  plugin->box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
+  gtk_container_add (GTK_CONTAINER (plugin), plugin->box);
+  gtk_widget_show (plugin->box);
 
   /* Add systray box */
   plugin->systray_box = systray_box_new ();
-  gtk_box_pack_start (GTK_BOX (plugin->systray_box), plugin->systray_box, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (plugin->box), plugin->systray_box, TRUE, TRUE, 0);
   g_signal_connect (G_OBJECT (plugin->systray_box), "draw",
       G_CALLBACK (systray_plugin_box_draw), plugin);
   gtk_container_set_border_width (GTK_CONTAINER (plugin->systray_box), 1);
@@ -277,7 +277,7 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   /* Systray arrow button */
   plugin->button = xfce_arrow_button_new (GTK_ARROW_RIGHT);
-  gtk_box_pack_start (GTK_BOX (plugin->systray_box), plugin->button, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (plugin->box), plugin->button, FALSE, FALSE, 0);
   g_signal_connect (G_OBJECT (plugin->button), "toggled",
       G_CALLBACK (systray_plugin_button_toggled), plugin);
   gtk_button_set_relief (GTK_BUTTON (plugin->button), GTK_RELIEF_NONE);
@@ -288,7 +288,7 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   /* Add statusnotifier box */
   plugin->sn_box = sn_box_new (plugin->config);
-  gtk_box_pack_start (GTK_BOX (plugin->systray_box), plugin->sn_box, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (plugin->box), plugin->sn_box, TRUE, TRUE, 0);
   gtk_widget_show (GTK_WIDGET (plugin->sn_box));
 
   g_signal_connect_swapped (plugin->config, "configuration-changed",
