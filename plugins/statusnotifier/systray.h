@@ -42,7 +42,8 @@ void  systray_plugin_screen_changed      (GtkWidget             *widget,
 void  systray_plugin_composited_changed  (GtkWidget             *widget);
 void  systray_plugin_orientation_changed (XfcePanelPlugin       *panel_plugin,
                                           GtkOrientation         orientation);
-
+gboolean systray_plugin_size_changed     (XfcePanelPlugin       *panel_plugin,
+                                          gint                   size);
 G_END_DECLS
 
 #endif /* !__SYSTRAY_H__ */
