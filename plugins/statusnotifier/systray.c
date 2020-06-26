@@ -36,7 +36,6 @@
 #include "systray-box.h"
 #include "systray-socket.h"
 #include "systray-manager.h"
-//#include "systray-dialog_ui.h"
 
 #define BUTTON_SIZE   (16)
 
@@ -51,8 +50,6 @@ static void     systray_plugin_set_property                 (GObject            
                                                              GParamSpec            *pspec);
 static void     systray_plugin_construct                    (XfcePanelPlugin       *panel_plugin);
 static void     systray_plugin_free_data                    (XfcePanelPlugin       *panel_plugin);
-static void     systray_plugin_orientation_changed          (XfcePanelPlugin       *panel_plugin,
-                                                             GtkOrientation         orientation);
 static gboolean systray_plugin_size_changed                 (XfcePanelPlugin       *panel_plugin,
                                                              gint                   size);
 static void     systray_plugin_button_set_arrow             (SnPlugin         *plugin);
@@ -471,7 +468,7 @@ systray_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
 
 
-static void
+void
 systray_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
                                     GtkOrientation   orientation)
 {
