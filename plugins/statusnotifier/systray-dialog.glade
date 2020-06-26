@@ -130,7 +130,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="label" translatable="yes">_Maximum icon size (px):</property>
                                 <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">size-max</property>
+                                <property name="mnemonic_widget">icon-size</property>
                                 <property name="xalign">0</property>
                               </object>
                               <packing>
@@ -140,7 +140,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkSpinButton" id="size-max">
+                              <object class="GtkSpinButton" id="icon-size">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="adjustment">size-adjustment</property>
