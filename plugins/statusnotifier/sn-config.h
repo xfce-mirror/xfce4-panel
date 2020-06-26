@@ -71,9 +71,21 @@ void                   sn_config_set_hidden                    (SnConfig        
                                                                 const gchar             *name,
                                                                 gboolean                 filtered);
 
+gboolean               sn_config_is_legacy_hidden              (SnConfig                *config,
+                                                                const gchar             *name);
+
+void                   sn_config_set_legacy_hidden             (SnConfig                *config,
+                                                                const gchar             *name,
+                                                                gboolean                 filtered);
+
 GList                 *sn_config_get_known_items               (SnConfig                *config);
 
 void                   sn_config_add_known_item                (SnConfig                *config,
+                                                                const gchar             *name);
+
+GList                 *sn_config_get_known_legacy_items        (SnConfig                *config);
+
+void                   sn_config_add_known_legacy_item         (SnConfig                *config,
                                                                 const gchar             *name);
 
 void                   sn_config_swap_known_items              (SnConfig                *config,

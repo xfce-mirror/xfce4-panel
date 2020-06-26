@@ -92,8 +92,8 @@ enum
   PROP_0,
   PROP_ICON_SIZE,
   PROP_SQUARE_ICONS,
-  PROP_KNOWN_ITEMS,
-  PROP_HIDDEN_ITEMS
+  PROP_KNOWN_LEGACY_ITEMS,
+  PROP_HIDDEN_LEGACY_ITEMS
 };
 
 enum
@@ -165,15 +165,15 @@ systray_plugin_class_init (SnPluginClass *klass)
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_KNOWN_ITEMS,
-                                   g_param_spec_boxed ("known-items",
+                                   PROP_KNOWN_LEGACY_ITEMS,
+                                   g_param_spec_boxed ("known-legacy-items",
                                                        NULL, NULL,
                                                        G_TYPE_PTR_ARRAY,
                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_HIDDEN_ITEMS,
-                                   g_param_spec_boxed ("hidden-items",
+                                   PROP_HIDDEN_LEGACY_ITEMS,
+                                   g_param_spec_boxed ("hidden-legacy-items",
                                                        NULL, NULL,
                                                        G_TYPE_PTR_ARRAY,
                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
@@ -242,14 +242,14 @@ systray_plugin_get_property (GObject    *object,
       //                     systray_box_get_squared (XFCE_SYSTRAY_BOX (plugin->systray_box)));
       break;
 
-    case PROP_KNOWN_ITEMS:
+    case PROP_KNOWN_LEGACY_ITEMS:
       //array = g_ptr_array_new_full (1, (GDestroyNotify) systray_free_array_element);
       //g_slist_foreach (plugin->names_ordered, systray_plugin_names_collect_ordered, array);
       //g_value_set_boxed (value, array);
       //g_ptr_array_unref (array);
       break;
 
-    case PROP_HIDDEN_ITEMS:
+    case PROP_HIDDEN_LEGACY_ITEMS:
       //array = g_ptr_array_new_full (1, (GDestroyNotify) systray_free_array_element);
       //g_hash_table_foreach (plugin->names_hidden, systray_plugin_names_collect_hidden, array);
       //g_value_set_boxed (value, array);
@@ -291,7 +291,7 @@ systray_plugin_set_property (GObject      *object,
       //                             xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
       break;
 
-    case PROP_KNOWN_ITEMS:
+    case PROP_KNOWN_LEGACY_ITEMS:
       //g_slist_free_full (plugin->names_ordered, g_free);
       //plugin->names_ordered = NULL;
 
@@ -314,7 +314,7 @@ systray_plugin_set_property (GObject      *object,
       //systray_plugin_names_update (plugin);
       break;
 
-    case PROP_HIDDEN_ITEMS:
+    case PROP_HIDDEN_LEGACY_ITEMS:
       //g_hash_table_remove_all (plugin->names_hidden);
 
       ///* add new values */
@@ -423,8 +423,8 @@ systray_plugin_construct (XfcePanelPlugin *panel_plugin)
   {
     { "icon-size", G_TYPE_UINT },
     { "square-icons", G_TYPE_BOOLEAN },
-    { "known-items", G_TYPE_PTR_ARRAY },
-    { "hidden-items", G_TYPE_PTR_ARRAY },
+    { "known-legacy-items", G_TYPE_PTR_ARRAY },
+    { "hidden-legacy-items", G_TYPE_PTR_ARRAY },
     { NULL }
   };
 
@@ -699,7 +699,7 @@ systray_plugin_names_set_hidden (SnPlugin *plugin,
 
   systray_plugin_names_update (plugin);
 
-  g_object_notify (G_OBJECT (plugin), "hidden-items");
+  g_object_notify (G_OBJECT (plugin), "hidden-legacy-items");
 }
 
 
@@ -716,7 +716,7 @@ systray_plugin_names_get_hidden (SnPlugin *plugin,
     {
       /* add the new name */
       plugin->names_ordered = g_slist_prepend (plugin->names_ordered, g_strdup (name));
-      g_object_notify (G_OBJECT (plugin), "known-items");
+      g_object_notify (G_OBJECT (plugin), "known-legacy-items");
 
       /* do not hide the icon */
       return FALSE;
@@ -736,8 +736,8 @@ systray_plugin_names_clear (SnPlugin *plugin)
   plugin->names_ordered = NULL;
   g_hash_table_remove_all (plugin->names_hidden);
 
-  g_object_notify (G_OBJECT (plugin), "known-items");
-  g_object_notify (G_OBJECT (plugin), "hidden-items");
+  g_object_notify (G_OBJECT (plugin), "known-legacy-items");
+  g_object_notify (G_OBJECT (plugin), "hidden-legacy-items");
 
   systray_plugin_names_update (plugin);
 }
@@ -1043,7 +1043,7 @@ systray_plugin_dialog_item_move_clicked (GtkWidget     *button,
           plugin->names_ordered = NULL;
           gtk_tree_model_foreach (model, systray_plugin_dialog_tree_iter_insert, plugin);
           plugin->names_ordered = g_slist_reverse (plugin->names_ordered);
-          g_object_notify (G_OBJECT (plugin), "known-items");
+          g_object_notify (G_OBJECT (plugin), "known-legacy-items");
         }
 
       gtk_tree_path_free (path);
