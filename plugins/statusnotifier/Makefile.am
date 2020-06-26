@@ -91,8 +91,9 @@ desktop_DATA = $(desktop_in_files:.desktop.in.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \
+	$(desktop_in_files)	\
 	sn-dialog.glade \
-	$(desktop_in_files)
+	systray-marshal.list
 
 DISTCLEANFILES = \
 	$(desktop_DATA)
