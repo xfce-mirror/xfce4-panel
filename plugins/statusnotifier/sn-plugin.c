@@ -69,7 +69,10 @@ static void                  sn_plugin_show_about                    (XfcePanelP
 
 
 
-XFCE_PANEL_DEFINE_PLUGIN (SnPlugin, sn_plugin)
+XFCE_PANEL_DEFINE_PLUGIN (SnPlugin, sn_plugin,
+                          systray_box_register_type,
+                          systray_manager_register_type,
+                          systray_socket_register_type)
 
 
 
@@ -97,10 +100,10 @@ sn_plugin_init (SnPlugin *plugin)
   plugin->idle_startup = 0;
   plugin->names_ordered = NULL;
   plugin->names_hidden = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+  plugin->systray_box = NULL;
 
   /* Statusnotifier init */
   plugin->item = NULL;
-  plugin->systray_box = NULL;
   plugin->backend = NULL;
   plugin->config = NULL;
 }
