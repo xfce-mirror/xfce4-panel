@@ -289,6 +289,15 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
                           G_BINDING_SYNC_CREATE);
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button);
 
+  /* monitor screen changes */
+  g_signal_connect (G_OBJECT (plugin), "screen-changed",
+      G_CALLBACK (systray_plugin_screen_changed), NULL);
+  systray_plugin_screen_changed (GTK_WIDGET (plugin), NULL);
+
+  /* restart internally if compositing changed */
+  g_signal_connect (G_OBJECT (plugin), "composited-changed",
+     G_CALLBACK (systray_plugin_composited_changed), NULL);
+
   /* Add statusnotifier box */
   plugin->sn_box = sn_box_new (plugin->config);
   gtk_box_pack_start (GTK_BOX (plugin->box), plugin->sn_box, TRUE, TRUE, 0);
