@@ -55,7 +55,6 @@ static void     systray_plugin_orientation_changed          (XfcePanelPlugin    
                                                              GtkOrientation         orientation);
 static gboolean systray_plugin_size_changed                 (XfcePanelPlugin       *panel_plugin,
                                                              gint                   size);
-static void     systray_plugin_configure_plugin             (XfcePanelPlugin       *panel_plugin);
 static void     systray_plugin_button_set_arrow             (SnPlugin         *plugin);
 static void     systray_plugin_names_collect_ordered        (gpointer               data,
                                                              gpointer               user_data);
@@ -91,10 +90,10 @@ static void     systray_plugin_dialog_cleanup               (SnPlugin         *p
 enum
 {
   PROP_0,
-  PROP_SIZE_MAX,
+  PROP_ICON_SIZE,
   PROP_SQUARE_ICONS,
-  PROP_NAMES_ORDERED,
-  PROP_NAMES_HIDDEN
+  PROP_KNOWN_ITEMS,
+  PROP_HIDDEN_ITEMS
 };
 
 enum
@@ -147,12 +146,11 @@ systray_plugin_class_init (SnPluginClass *klass)
   plugin_class->construct = systray_plugin_construct;
   plugin_class->free_data = systray_plugin_free_data;
   plugin_class->size_changed = systray_plugin_size_changed;
-  plugin_class->configure_plugin = systray_plugin_configure_plugin;
   plugin_class->orientation_changed = systray_plugin_orientation_changed;
 
   g_object_class_install_property (gobject_class,
-                                   PROP_SIZE_MAX,
-                                   g_param_spec_uint ("size-max",
+                                   PROP_ICON_SIZE,
+                                   g_param_spec_uint ("icon-size",
                                                       NULL, NULL,
                                                       SIZE_MAX_MIN,
                                                       SIZE_MAX_MAX,
@@ -167,15 +165,15 @@ systray_plugin_class_init (SnPluginClass *klass)
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_NAMES_ORDERED,
-                                   g_param_spec_boxed ("names-ordered",
+                                   PROP_KNOWN_ITEMS,
+                                   g_param_spec_boxed ("known-items",
                                                        NULL, NULL,
                                                        G_TYPE_PTR_ARRAY,
                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_NAMES_HIDDEN,
-                                   g_param_spec_boxed ("names-hidden",
+                                   PROP_HIDDEN_ITEMS,
+                                   g_param_spec_boxed ("hidden-items",
                                                        NULL, NULL,
                                                        G_TYPE_PTR_ARRAY,
                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
@@ -234,7 +232,7 @@ systray_plugin_get_property (GObject    *object,
 
   switch (prop_id)
     {
-    case PROP_SIZE_MAX:
+    case PROP_ICON_SIZE:
       //g_value_set_uint (value,
       //                  systray_box_get_size_max (XFCE_SYSTRAY_BOX (plugin->systray_box)));
       break;
@@ -244,14 +242,14 @@ systray_plugin_get_property (GObject    *object,
       //                     systray_box_get_squared (XFCE_SYSTRAY_BOX (plugin->systray_box)));
       break;
 
-    case PROP_NAMES_ORDERED:
+    case PROP_KNOWN_ITEMS:
       //array = g_ptr_array_new_full (1, (GDestroyNotify) systray_free_array_element);
       //g_slist_foreach (plugin->names_ordered, systray_plugin_names_collect_ordered, array);
       //g_value_set_boxed (value, array);
       //g_ptr_array_unref (array);
       break;
 
-    case PROP_NAMES_HIDDEN:
+    case PROP_HIDDEN_ITEMS:
       //array = g_ptr_array_new_full (1, (GDestroyNotify) systray_free_array_element);
       //g_hash_table_foreach (plugin->names_hidden, systray_plugin_names_collect_hidden, array);
       //g_value_set_boxed (value, array);
@@ -281,7 +279,7 @@ systray_plugin_set_property (GObject      *object,
 
   switch (prop_id)
     {
-    case PROP_SIZE_MAX:
+    case PROP_ICON_SIZE:
       //systray_box_set_size_max (XFCE_SYSTRAY_BOX (plugin->systray_box),
       //                          g_value_get_uint (value));
       break;
@@ -293,7 +291,7 @@ systray_plugin_set_property (GObject      *object,
       //                             xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
       break;
 
-    case PROP_NAMES_ORDERED:
+    case PROP_KNOWN_ITEMS:
       //g_slist_free_full (plugin->names_ordered, g_free);
       //plugin->names_ordered = NULL;
 
@@ -316,7 +314,7 @@ systray_plugin_set_property (GObject      *object,
       //systray_plugin_names_update (plugin);
       break;
 
-    case PROP_NAMES_HIDDEN:
+    case PROP_HIDDEN_ITEMS:
       //g_hash_table_remove_all (plugin->names_hidden);
 
       ///* add new values */
@@ -423,10 +421,10 @@ systray_plugin_construct (XfcePanelPlugin *panel_plugin)
   SnPlugin       *plugin = XFCE_SN_PLUGIN (panel_plugin);
   const PanelProperty  properties[] =
   {
-    { "size-max", G_TYPE_UINT },
+    { "icon-size", G_TYPE_UINT },
     { "square-icons", G_TYPE_BOOLEAN },
-    { "names-ordered", G_TYPE_PTR_ARRAY },
-    { "names-hidden", G_TYPE_PTR_ARRAY },
+    { "known-items", G_TYPE_PTR_ARRAY },
+    { "hidden-items", G_TYPE_PTR_ARRAY },
     { NULL }
   };
 
@@ -541,79 +539,6 @@ systray_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                               xfce_panel_plugin_get_nrows (panel_plugin));
 
   return TRUE;
-}
-
-
-
-static void
-systray_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
-{
-  SnPlugin    *plugin = XFCE_SN_PLUGIN (panel_plugin);
-  GtkBuilder       *builder;
-  GObject          *dialog, *object, *store;
-  GtkTreeSelection *selection;
-  gpointer          user_data_array[2];
-
-  /* setup the dialog */
-  PANEL_UTILS_LINK_4UI
-  builder = panel_utils_builder_new (panel_plugin, systray_dialog_ui,
-                                     systray_dialog_ui_length, &dialog);
-  if (G_UNLIKELY (builder == NULL))
-    return;
-
-  plugin->configure_builder = builder;
-
-  object = gtk_builder_get_object (builder, "size-max");
-  panel_return_if_fail (GTK_IS_WIDGET (object));
-  g_object_bind_property (G_OBJECT (plugin), "size-max",
-                          G_OBJECT (object), "value",
-                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
-
-  object = gtk_builder_get_object (builder, "square-icons");
-  panel_return_if_fail (GTK_IS_WIDGET (object));
-  g_object_bind_property (G_OBJECT (plugin), "square-icons",
-                          G_OBJECT (object), "active",
-                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
-
-  store = gtk_builder_get_object (builder, "applications-store");
-  panel_return_if_fail (GTK_IS_LIST_STORE (store));
-  user_data_array[0] = plugin;
-  user_data_array[1] = store;
-  g_slist_foreach (plugin->names_ordered,
-      systray_plugin_dialog_add_application_names, user_data_array);
-
-  object = gtk_builder_get_object (builder, "hidden-toggle");
-  panel_return_if_fail (GTK_IS_CELL_RENDERER_TOGGLE (object));
-  g_signal_connect (G_OBJECT (object), "toggled",
-      G_CALLBACK (systray_plugin_dialog_hidden_toggled), plugin);
-
-  object = gtk_builder_get_object (builder, "applications-treeview");
-  panel_return_if_fail (GTK_IS_TREE_VIEW (object));
-
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (object));
-  g_signal_connect (G_OBJECT (selection), "changed",
-      G_CALLBACK (systray_plugin_dialog_selection_changed), plugin);
-
-  object = gtk_builder_get_object (builder, "item-up");
-  panel_return_if_fail (GTK_IS_BUTTON (object));
-  g_signal_connect (G_OBJECT (object), "clicked",
-      G_CALLBACK (systray_plugin_dialog_item_move_clicked), plugin);
-
-  object = gtk_builder_get_object (builder, "item-down");
-  panel_return_if_fail (GTK_IS_BUTTON (object));
-  g_signal_connect (G_OBJECT (object), "clicked",
-      G_CALLBACK (systray_plugin_dialog_item_move_clicked), plugin);
-
-  object = gtk_builder_get_object (builder, "applications-clear");
-  panel_return_if_fail (GTK_IS_BUTTON (object));
-  g_signal_connect (G_OBJECT (object), "clicked",
-      G_CALLBACK (systray_plugin_dialog_clear_clicked), plugin);
-
-  g_object_weak_ref (G_OBJECT (builder),
-                     (GWeakNotify) systray_plugin_dialog_cleanup,
-                     plugin);
-
-  gtk_widget_show (GTK_WIDGET (dialog));
 }
 
 
@@ -774,7 +699,7 @@ systray_plugin_names_set_hidden (SnPlugin *plugin,
 
   systray_plugin_names_update (plugin);
 
-  g_object_notify (G_OBJECT (plugin), "names-hidden");
+  g_object_notify (G_OBJECT (plugin), "hidden-items");
 }
 
 
@@ -791,7 +716,7 @@ systray_plugin_names_get_hidden (SnPlugin *plugin,
     {
       /* add the new name */
       plugin->names_ordered = g_slist_prepend (plugin->names_ordered, g_strdup (name));
-      g_object_notify (G_OBJECT (plugin), "names-ordered");
+      g_object_notify (G_OBJECT (plugin), "known-items");
 
       /* do not hide the icon */
       return FALSE;
@@ -811,8 +736,8 @@ systray_plugin_names_clear (SnPlugin *plugin)
   plugin->names_ordered = NULL;
   g_hash_table_remove_all (plugin->names_hidden);
 
-  g_object_notify (G_OBJECT (plugin), "names-ordered");
-  g_object_notify (G_OBJECT (plugin), "names-hidden");
+  g_object_notify (G_OBJECT (plugin), "known-items");
+  g_object_notify (G_OBJECT (plugin), "hidden-items");
 
   systray_plugin_names_update (plugin);
 }
@@ -1118,7 +1043,7 @@ systray_plugin_dialog_item_move_clicked (GtkWidget     *button,
           plugin->names_ordered = NULL;
           gtk_tree_model_foreach (model, systray_plugin_dialog_tree_iter_insert, plugin);
           plugin->names_ordered = g_slist_reverse (plugin->names_ordered);
-          g_object_notify (G_OBJECT (plugin), "names-ordered");
+          g_object_notify (G_OBJECT (plugin), "known-items");
         }
 
       gtk_tree_path_free (path);
