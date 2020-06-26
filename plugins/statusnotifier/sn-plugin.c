@@ -153,6 +153,8 @@ sn_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   SnPlugin *plugin = XFCE_SN_PLUGIN (panel_plugin);
 
   sn_config_set_size (plugin->config, size, xfce_panel_plugin_get_nrows (panel_plugin));
+  systray_plugin_size_changed (panel_plugin,
+                               xfce_panel_plugin_get_size (panel_plugin));
 
   return TRUE;
 }
