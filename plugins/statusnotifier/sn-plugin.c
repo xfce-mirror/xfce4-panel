@@ -230,7 +230,7 @@ sn_plugin_item_added (SnPlugin *plugin,
 
   sn_config_add_known_item (plugin->config, sn_item_get_name (item));
 
-  gtk_container_add (GTK_CONTAINER (plugin->systray_box), button);
+  gtk_container_add (GTK_CONTAINER (plugin->sn_box), button);
   gtk_widget_show (button);
 }
 
@@ -240,7 +240,7 @@ static void
 sn_plugin_item_removed (SnPlugin *plugin,
                         SnItem   *item)
 {
-  sn_box_remove_item (XFCE_SN_BOX (plugin->systray_box), item);
+  sn_box_remove_item (XFCE_SN_BOX (plugin->sn_box), item);
 }
 
 
