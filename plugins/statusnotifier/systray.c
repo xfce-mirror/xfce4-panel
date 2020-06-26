@@ -387,7 +387,7 @@ systray_plugin_screen_changed_idle_destroyed (gpointer user_data)
 
 
 
-static void
+void
 systray_plugin_screen_changed (GtkWidget *widget,
                                GdkScreen *previous_screen)
 {
@@ -408,7 +408,7 @@ systray_plugin_screen_changed (GtkWidget *widget,
 }
 
 
-static void
+void
 systray_plugin_composited_changed (GtkWidget *widget)
 {
   /* restart the manager to add the sockets again */

@@ -41,11 +41,14 @@ GType systray_plugin_get_type      (void) G_GNUC_CONST;
 
 //void  systray_plugin_register_type    (XfcePanelTypeModule *type_module);
 
-void  systray_plugin_box_draw         (GtkWidget             *box,
-                                       cairo_t               *cr,
-                                       gpointer               user_data);
-void  systray_plugin_button_toggled   (GtkWidget             *button,
-                                       SnPlugin              *plugin);
+void  systray_plugin_box_draw           (GtkWidget             *box,
+                                         cairo_t               *cr,
+                                         gpointer               user_data);
+void  systray_plugin_button_toggled     (GtkWidget             *button,
+                                         SnPlugin              *plugin);
+void  systray_plugin_screen_changed     (GtkWidget             *widget,
+                                         GdkScreen             *previous_screen);
+void  systray_plugin_composited_changed (GtkWidget             *widget);
 
 G_END_DECLS
 
