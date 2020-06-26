@@ -115,21 +115,14 @@ sn_plugin_free (XfcePanelPlugin *panel_plugin)
 {
   SnPlugin *plugin = XFCE_SN_PLUGIN (panel_plugin);
 
-  /* Statusnotifier */
-  /* remove children so they won't use unrefed SnItems and SnConfig */
-  gtk_container_remove (GTK_CONTAINER (panel_plugin), plugin->systray_box);
-
-  g_object_unref (plugin->backend);
-  g_object_unref (plugin->config);
-
   /* Systray */
   /* stop pending idle startup */
   if (plugin->idle_startup != 0)
     g_source_remove (plugin->idle_startup);
 
   /* disconnect screen changed signal */
-  //g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
-  //    systray_plugin_screen_changed, NULL);
+  g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
+      systray_plugin_screen_changed, NULL);
 
   g_slist_free_full (plugin->names_ordered, g_free);
   g_hash_table_destroy (plugin->names_hidden);
@@ -139,6 +132,16 @@ sn_plugin_free (XfcePanelPlugin *panel_plugin)
       systray_manager_unregister (plugin->manager);
       g_object_unref (G_OBJECT (plugin->manager));
     }
+
+  gtk_container_remove (GTK_CONTAINER (plugin->box), plugin->systray_box);
+
+  /* Statusnotifier */
+  /* remove children so they won't use unrefed SnItems and SnConfig */
+  gtk_container_remove (GTK_CONTAINER (plugin->box), plugin->sn_box);
+  gtk_container_remove (GTK_CONTAINER (panel_plugin), plugin->box);
+
+  g_object_unref (plugin->backend);
+  g_object_unref (plugin->config);
 }
 
 
