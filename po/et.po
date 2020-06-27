@@ -45,12 +45,14 @@ msgstr "Kohanda riba"
 #: ../panel/panel-preferences-dialog.c:1316
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "Kas soovite kindlalt eemaldada „%s”?"
+msgstr "Kas soovid kindlasti eemaldada \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1086
 #: ../panel/panel-preferences-dialog.c:1319
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Kui eemaldate eseme ribalt, kaob see jäädavalt."
+msgstr ""
+"Kui sa eemaldad eseme ribalt, kaob ta sealt jäädavalt,\n"
+"kuid alati saad ta tagasi lisada."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1087 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1321
@@ -459,7 +461,7 @@ msgstr "Vertikaalne"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Deskbar"
-msgstr ""
+msgstr "Töölauatulp"
 
 #: ../panel/panel-preferences-dialog.glade.h:7
 msgid "None (use system style)"
@@ -715,6 +717,7 @@ msgstr "_Lukusta riba"
 #: ../migrate/main.c:115
 msgid "Tried but failed to migrate your old panel configuration"
 msgstr ""
+"Proovisin riba vanu seadistusi üle kolida, kuid ei saanud sellega hakkama"
 
 #: ../migrate/main.c:127
 msgid "Failed to load the default configuration"
@@ -915,7 +918,7 @@ msgstr "Ebaõnnestus käivitada \\„%s\\”"
 
 #: ../plugins/actions/actions.c:1225
 msgid "John Doe"
-msgstr ""
+msgstr "Mati Maasikas"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
@@ -997,7 +1000,7 @@ msgstr "Menüüfail"
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu.c:39
 msgid "Applications"
-msgstr ""
+msgstr "Rakendused"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:600
 #: ../plugins/directorymenu/directorymenu.c:392
@@ -1440,7 +1443,7 @@ msgstr "„%s” jaoks vaikimisi rakenduse käivitamine ebaõnnestus"
 #: ../plugins/directorymenu/directorymenu.c:741
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr ""
+msgstr "Jaotise \"%s\" eelistatud rakenduse käivitamine ebaõnnestus."
 
 #: ../plugins/directorymenu/directorymenu.c:815
 msgid "Open Folder"
