@@ -6,7 +6,12 @@
   <object class="GtkImage" id="image1">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="stock">gtk-clear</property>
+    <property name="icon_name">edit-clear-symbolic</property>
+  </object>
+  <object class="GtkImage" id="image4">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">window-close-symbolic</property>
   </object>
   <object class="GtkListStore" id="items-store">
     <columns>
@@ -47,11 +52,12 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="close-button">
-                <property name="label">window-close-symbolic</property>
+                <property name="label">_Close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
+                <property name="image">image4</property>
+                <property name="use_underline">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -355,7 +361,6 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="orientation">vertical</property>
-                                <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkButton" id="item-up">
                                     <property name="visible">True</property>
@@ -366,7 +371,7 @@
                                       <object class="GtkImage" id="image2">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="stock">gtk-go-up</property>
+                                        <property name="icon_name">go-up-symbolic</property>
                                       </object>
                                     </child>
                                   </object>
@@ -386,7 +391,7 @@
                                       <object class="GtkImage" id="image3">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="stock">gtk-go-down</property>
+                                        <property name="icon_name">go-down-symbolic</property>
                                       </object>
                                     </child>
                                   </object>
@@ -396,6 +401,9 @@
                                     <property name="position">1</property>
                                   </packing>
                                 </child>
+                                <style>
+                                  <class name="linked"/>
+                                </style>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
