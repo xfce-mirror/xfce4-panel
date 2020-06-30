@@ -40,14 +40,6 @@
 #define BUTTON_SIZE   (16)
 
 
-static void     systray_plugin_get_property                 (GObject               *object,
-                                                             guint                  prop_id,
-                                                             GValue                *value,
-                                                             GParamSpec            *pspec);
-static void     systray_plugin_set_property                 (GObject               *object,
-                                                             guint                  prop_id,
-                                                             const GValue          *value,
-                                                             GParamSpec            *pspec);
 static void     systray_plugin_button_set_arrow             (SnPlugin              *plugin);
 static void     systray_plugin_names_collect_ordered        (gpointer               data,
                                                              gpointer               user_data);
@@ -116,51 +108,6 @@ static const gchar *known_applications[][3] =
 };
 
 
-/*
-static void
-systray_plugin_class_init (SnPluginClass *klass)
-{
-  XfcePanelPluginClass *plugin_class;
-  GObjectClass         *gobject_class;
-
-  gobject_class = G_OBJECT_CLASS (klass);
-  gobject_class->get_property = systray_plugin_get_property;
-  gobject_class->set_property = systray_plugin_set_property;
-
-  plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
-
-  g_object_class_install_property (gobject_class,
-                                   PROP_ICON_SIZE,
-                                   g_param_spec_uint ("icon-size",
-                                                      NULL, NULL,
-                                                      SIZE_MAX_MIN,
-                                                      SIZE_MAX_MAX,
-                                                      SIZE_MAX_DEFAULT,
-                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
-
-  g_object_class_install_property (gobject_class,
-                                   PROP_SQUARE_ICONS,
-                                   g_param_spec_boolean ("square-icons",
-                                                         NULL, NULL,
-                                                         FALSE,
-                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
-
-  g_object_class_install_property (gobject_class,
-                                   PROP_KNOWN_LEGACY_ITEMS,
-                                   g_param_spec_boxed ("known-legacy-items",
-                                                       NULL, NULL,
-                                                       G_TYPE_PTR_ARRAY,
-                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
-
-  g_object_class_install_property (gobject_class,
-                                   PROP_HIDDEN_LEGACY_ITEMS,
-                                   g_param_spec_boxed ("hidden-legacy-items",
-                                                       NULL, NULL,
-                                                       G_TYPE_PTR_ARRAY,
-                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
-}*/
-
-
 
 static void
 systray_free_array_element (gpointer data)
@@ -174,134 +121,59 @@ systray_free_array_element (gpointer data)
 void  systray_plugin_configuration_changed  (SnConfig           *config,
                                              SnPlugin           *plugin)
 {
-  gint icon_size = sn_config_get_icon_size (config);
-  gboolean square_icons = sn_config_get_square_icons (config);
+  gint icon_size;
+  gboolean square_icons;
+  GList *list;
+  GList *l;
+  gchar *name;
 
+  /* icon-size */
+  icon_size = sn_config_get_icon_size (config);
   systray_box_set_size_max (XFCE_SYSTRAY_BOX (plugin->systray_box),
                             icon_size);
 
+  /* square-icons */
+  square_icons = sn_config_get_square_icons (config);
   systray_box_set_squared (XFCE_SYSTRAY_BOX (plugin->systray_box), square_icons);
   systray_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
                                xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
-}
 
-static void
-systray_plugin_get_property (GObject    *object,
-                             guint       prop_id,
-                             GValue     *value,
-                             GParamSpec *pspec)
-{
-  SnPlugin      *plugin = XFCE_SN_PLUGIN (object);
-  GPtrArray     *array;
+  /* known-legacy-items */
+  {
+    g_slist_free_full (plugin->names_ordered, g_free);
+    plugin->names_ordered = NULL;
 
-  switch (prop_id)
-    {
-    case PROP_ICON_SIZE:
-      //g_value_set_uint (value,
-      //                  systray_box_get_size_max (XFCE_SYSTRAY_BOX (plugin->systray_box)));
-      break;
+    /* add new values */
+    list = sn_config_get_known_legacy_items (config);
+    for (l = list; l != NULL; l = l->next)
+      {
+        name = g_strdup (l->data);
+        plugin->names_ordered = g_slist_prepend (plugin->names_ordered, name);
+      }
+    plugin->names_ordered = g_slist_reverse (plugin->names_ordered);
 
-    case PROP_SQUARE_ICONS:
-      //g_value_set_boolean (value,
-      //                     systray_box_get_squared (XFCE_SYSTRAY_BOX (plugin->systray_box)));
-      break;
+    /* update icons in the box */
+    systray_plugin_names_update (plugin);
+  }
 
-    case PROP_KNOWN_LEGACY_ITEMS:
-      //array = g_ptr_array_new_full (1, (GDestroyNotify) systray_free_array_element);
-      //g_slist_foreach (plugin->names_ordered, systray_plugin_names_collect_ordered, array);
-      //g_value_set_boxed (value, array);
-      //g_ptr_array_unref (array);
-      break;
+  /* hidden-legacy-items */
+  {
+    g_hash_table_remove_all (plugin->names_hidden);
 
-    case PROP_HIDDEN_LEGACY_ITEMS:
-      //array = g_ptr_array_new_full (1, (GDestroyNotify) systray_free_array_element);
-      //g_hash_table_foreach (plugin->names_hidden, systray_plugin_names_collect_hidden, array);
-      //g_value_set_boxed (value, array);
-      //g_ptr_array_unref (array);
-      break;
+    /* add new values */
+    list = sn_config_get_hidden_legacy_items (config);
+    for (l = list; l != NULL; l = l->next)
+      {
+        name = g_strdup (l->data);
+        g_hash_table_replace (plugin->names_hidden, name, NULL);
+      }
+    
+    if (list != NULL)
+      g_list_free_full (list, (GDestroyNotify) g_free);
 
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-      break;
-    }
-}
-
-
-
-static void
-systray_plugin_set_property (GObject      *object,
-                             guint         prop_id,
-                             const GValue *value,
-                             GParamSpec   *pspec)
-{
-  SnPlugin      *plugin = XFCE_SN_PLUGIN (object);
-  gboolean       boolean_val;
-  GPtrArray     *array;
-  const GValue  *tmp;
-  gchar         *name;
-  guint          i;
-
-  switch (prop_id)
-    {
-    case PROP_ICON_SIZE:
-      //systray_box_set_size_max (XFCE_SYSTRAY_BOX (plugin->systray_box),
-      //                          g_value_get_uint (value));
-      break;
-
-    case PROP_SQUARE_ICONS:
-      //boolean_val = g_value_get_boolean (value);
-      //systray_box_set_squared (XFCE_SYSTRAY_BOX (plugin->systray_box), boolean_val);
-      //systray_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
-      //                             xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
-      break;
-
-    case PROP_KNOWN_LEGACY_ITEMS:
-      //g_slist_free_full (plugin->names_ordered, g_free);
-      //plugin->names_ordered = NULL;
-
-      /* add new values */
-      //array = g_value_get_boxed (value);
-      //if (G_LIKELY (array != NULL))
-      //  {
-      //    for (i = 0; i < array->len; i++)
-      //      {
-      //        tmp = g_ptr_array_index (array, i);
-      //        panel_assert (G_VALUE_HOLDS_STRING (tmp));
-      //        name = g_value_dup_string (tmp);
-      //        plugin->names_ordered = g_slist_prepend (plugin->names_ordered, name);
-      //      }
-
-      //    plugin->names_ordered = g_slist_reverse (plugin->names_ordered);
-      //  }
-
-      ///* update icons in the box */
-      //systray_plugin_names_update (plugin);
-      break;
-
-    case PROP_HIDDEN_LEGACY_ITEMS:
-      //g_hash_table_remove_all (plugin->names_hidden);
-
-      ///* add new values */
-      //array = g_value_get_boxed (value);
-      //if (G_LIKELY (array != NULL))
-      //  {
-      //    for (i = 0; i < array->len; i++)
-      //      {
-      //        tmp = g_ptr_array_index (array, i);
-      //        panel_assert (G_VALUE_HOLDS_STRING (tmp));
-      //        name = g_value_dup_string (tmp);
-      //        g_hash_table_replace (plugin->names_hidden, name, NULL);
-      //      }
-      //  }
-
-      ///* update icons in the box */
-      //systray_plugin_names_update (plugin);
-      break;
-
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-      break;
-    }
+    /* update icons in the box */
+    systray_plugin_names_update(plugin);
+  }
 }
 
 
@@ -978,40 +850,4 @@ systray_plugin_dialog_item_move_clicked (GtkWidget     *button,
 
       gtk_tree_path_free (path);
     }
-}
-
-
-
-static void
-systray_plugin_dialog_clear_clicked (GtkWidget     *button,
-                                     SnPlugin      *plugin)
-{
-  GtkListStore *store;
-
-  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
-  panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (plugin->systray_box));
-
-  if (xfce_dialog_confirm (GTK_WINDOW (gtk_widget_get_toplevel (button)),
-                           "edit-clear", _("Clear"), NULL,
-                           _("Are you sure you want to clear the list of "
-                             "known applications?")))
-    {
-      store = GTK_LIST_STORE (gtk_builder_get_object (plugin->configure_builder, "applications-store"));
-      panel_return_if_fail (GTK_IS_LIST_STORE (store));
-      gtk_list_store_clear (store);
-
-      systray_plugin_names_clear (plugin);
-    }
-}
-
-
-
-static void
-systray_plugin_dialog_cleanup (SnPlugin      *plugin,
-                               GtkBuilder    *builder)
-{
-  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
-
-  if (plugin->configure_builder == builder)
-    plugin->configure_builder = NULL;
 }

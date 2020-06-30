@@ -84,6 +84,7 @@ void                   sn_config_add_known_item                (SnConfig        
                                                                 const gchar             *name);
 
 GList                 *sn_config_get_known_legacy_items        (SnConfig                *config);
+GList                 *sn_config_get_hidden_legacy_items       (SnConfig                *config);
 
 void                   sn_config_add_known_legacy_item         (SnConfig                *config,
                                                                 const gchar             *name);
