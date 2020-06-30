@@ -787,6 +787,35 @@ sn_config_get_known_legacy_items (SnConfig *config)
 
 
 
+static void
+sn_config_collect_hidden_legacy_items (gpointer key,
+                                       gpointer value,
+                                       gpointer array)
+{
+  GList *list = (GList *)array;
+  gchar *item = g_strdup ((gchar *)value);
+
+  list = g_list_prepend (list, item);
+
+  array = (gpointer)list;
+}
+
+
+
+GList*
+sn_config_get_hidden_legacy_items (SnConfig *config)
+{
+  GList *list = NULL;
+
+  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), NULL);
+
+  g_hash_table_foreach (config->hidden_legacy_items, sn_config_collect_hidden_legacy_items, list);
+
+  return list;
+}
+
+
+
 void
 sn_config_add_known_item (SnConfig    *config,
                           const gchar *name)
