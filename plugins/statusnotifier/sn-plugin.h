@@ -77,6 +77,9 @@ GType                  sn_plugin_get_type                      (void) G_GNUC_CON
 
 void                   sn_plugin_register_type                 (XfcePanelTypeModule     *panel_type_module);
 
+void                   sn_plugin_legacy_item_added             (SnPlugin                *plugin,
+                                                                const gchar             *name);
+
 G_END_DECLS
 
 #endif /* !__SN_PLUGIN_H__ */
