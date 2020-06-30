@@ -632,7 +632,7 @@ systray_plugin_names_get_hidden (SnPlugin      *plugin,
     {
       /* add the new name */
       plugin->names_ordered = g_slist_prepend (plugin->names_ordered, g_strdup (name));
-      g_object_notify (G_OBJECT (plugin), "known-legacy-items");
+      sn_plugin_legacy_item_added (plugin, name);
 
       /* do not hide the icon */
       return FALSE;

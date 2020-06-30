@@ -523,7 +523,7 @@ sn_config_set_property (GObject      *object,
               tmp = g_ptr_array_index (array, i);
               g_assert (G_VALUE_HOLDS_STRING (tmp));
               name = g_value_dup_string (tmp);
-              config->known_items = g_list_append (config->known_legacy_items, name);
+              config->known_legacy_items = g_list_append (config->known_legacy_items, name);
             }
         }
       g_signal_emit (G_OBJECT (config), sn_config_signals[ITEM_LIST_CHANGED], 0);
