@@ -123,6 +123,7 @@ void  systray_plugin_configuration_changed  (SnConfig           *config,
 {
   gint icon_size;
   gboolean square_icons;
+  gboolean symbolic_icons;
   GList *list;
   GList *l;
   gchar *name;
@@ -174,6 +175,35 @@ void  systray_plugin_configuration_changed  (SnConfig           *config,
     /* update icons in the box */
     systray_plugin_names_update(plugin);
   }
+
+  /* symbolic-icons */
+  {
+    /* apply symbolic colors */
+    symbolic_icons = sn_config_get_symbolic_icons (plugin->config);
+    if (symbolic_icons && G_LIKELY (plugin->manager != NULL))
+    {
+      GtkStyleContext *context;
+      GdkRGBA rgba;
+      GdkColor color;
+      GdkColor fg;
+      GdkColor error;
+      GdkColor warning;
+      GdkColor success;
+
+      context = gtk_widget_get_style_context (GTK_WIDGET (plugin->systray_box));
+      gtk_style_context_get_color (context, GTK_STATE_NORMAL, &rgba);
+
+      color.pixel = 0;
+      color.red = rgba.red * G_MAXUSHORT;
+      color.green = rgba.green * G_MAXUSHORT;
+      color.blue = rgba.blue * G_MAXUSHORT;
+
+      fg = error = warning = success = color;
+
+      systray_manager_set_colors (plugin->manager, &fg, &error, &warning, &success);
+    }
+  }
+
 }
 
 
@@ -278,7 +308,7 @@ systray_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
                                     GtkOrientation   orientation)
 {
   SnPlugin *plugin = XFCE_SN_PLUGIN (panel_plugin);
-
+  gboolean symbolic_icons = sn_config_get_symbolic_icons (plugin->config);
 
   gtk_orientable_set_orientation (GTK_ORIENTABLE (plugin->box), orientation);
   systray_box_set_orientation (XFCE_SYSTRAY_BOX (plugin->systray_box), orientation);
@@ -287,7 +317,7 @@ systray_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
     systray_manager_set_orientation (plugin->manager, orientation);
 
   /* apply symbolic colors */
-  if (G_LIKELY (plugin->manager != NULL)) {
+  if (symbolic_icons && G_LIKELY (plugin->manager != NULL)) {
     GtkStyleContext *context;
     GdkRGBA rgba;
     GdkColor color;
@@ -308,7 +338,6 @@ systray_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
 
     systray_manager_set_colors (plugin->manager, &fg, &error, &warning, &success);
   }
-
 
   if (orientation == GTK_ORIENTATION_HORIZONTAL)
     gtk_widget_set_size_request (plugin->button, BUTTON_SIZE, -1);
