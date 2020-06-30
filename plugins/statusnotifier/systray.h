@@ -21,6 +21,7 @@
 
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel.h>
+#include "sn-config.h"
 #include "sn-plugin.h"
 
 G_BEGIN_DECLS
@@ -40,6 +41,8 @@ void  systray_plugin_button_toggled      (GtkWidget             *button,
 void  systray_plugin_screen_changed      (GtkWidget             *widget,
                                           GdkScreen             *previous_screen);
 void  systray_plugin_composited_changed  (GtkWidget             *widget);
+void  systray_plugin_configuration_changed  (SnConfig           *config,
+                                             SnPlugin           *plugin);
 void  systray_plugin_orientation_changed (XfcePanelPlugin       *panel_plugin,
                                           GtkOrientation         orientation);
 gboolean systray_plugin_size_changed     (XfcePanelPlugin       *panel_plugin,

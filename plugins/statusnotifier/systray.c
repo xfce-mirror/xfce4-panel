@@ -171,6 +171,20 @@ systray_free_array_element (gpointer data)
   g_free (value);
 }
 
+void  systray_plugin_configuration_changed  (SnConfig           *config,
+                                             SnPlugin           *plugin)
+{
+  gint icon_size = sn_config_get_icon_size (config);
+  gboolean square_icons = sn_config_get_square_icons (config);
+
+  systray_box_set_size_max (XFCE_SYSTRAY_BOX (plugin->systray_box),
+                            icon_size);
+
+  systray_box_set_squared (XFCE_SYSTRAY_BOX (plugin->systray_box), square_icons);
+  systray_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
+                               xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
+}
+
 static void
 systray_plugin_get_property (GObject    *object,
                              guint       prop_id,
