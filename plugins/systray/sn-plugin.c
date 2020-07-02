@@ -237,8 +237,6 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
   plugin->names_ordered = NULL;
   plugin->names_hidden = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
-  xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
-
   xfce_panel_plugin_menu_show_configure (panel_plugin);
 
   plugin->config = sn_config_new (xfce_panel_plugin_get_property_base (panel_plugin));

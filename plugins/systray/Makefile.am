@@ -1,11 +1,9 @@
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"libsystray\" \
-	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	$(PLATFORM_CPPFLAGS)
 
-plugindir = \
-	$(libdir)/xfce4/panel/plugins
+plugindir = $(libdir)/xfce4/panel/plugins
 
 # Keep the legacy "systray" name to ease the migration for users
 plugin_LTLIBRARIES = \
@@ -51,12 +49,11 @@ libsystray_la_SOURCES = \
 libsystray_la_CFLAGS = \
 	$(LIBX11_CFLAGS) \
 	$(GTK_CFLAGS) \
+	$(XFCONF_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
-	$(LIBXFCE4PANEL_CFLAGS) \
-	$(XFCONF_CFLAGS) \
-	$(DBUSMENU_CFLAGS) \
 	$(PLATFORM_CFLAGS) \
+	$(DBUSMENU_CFLAGS) \
 	-DDATADIR=\""$(datadir)"\"
 
 libsystray_la_LDFLAGS = \
@@ -73,7 +70,6 @@ libsystray_la_LIBADD = \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
-	$(LIBXFCE4PANEL_LIBS) \
 	$(XFCONF_LIBS) \
 	$(DBUSMENU_LIBS)
 
@@ -81,12 +77,11 @@ libsystray_la_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la
 
-desktopdir = \
-	$(datadir)/xfce4/panel/plugins
-
-desktop_in_files = \
-	systray.desktop.in.in
-
+#
+# .desktop file
+#
+desktopdir = $(datadir)/xfce4/panel/plugins
+desktop_in_files = systray.desktop.in.in
 desktop_DATA = $(desktop_in_files:.desktop.in.in=.desktop)
 
 @INTLTOOL_DESKTOP_RULE@
@@ -99,7 +94,15 @@ EXTRA_DIST = \
 DISTCLEANFILES = \
 	$(desktop_DATA)
 
+#
+# Rules to auto-generate built sources
+#
 if MAINTAINER_MODE
+BUILT_SOURCES = \
+	$(libsystray_built_sources)
+
+DISTCLEANFILES += \
+	$(libsystray_built_sources)
 
 sn-watcher.h:
 sn-watcher.c: sn-watcher.xml Makefile
@@ -120,12 +123,6 @@ systray-marshal.c: systray-marshal.list Makefile
 
 systray-dialog_ui.h: systray-dialog.glade
 	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=systray_dialog_ui $< >$@
-
-BUILT_SOURCES = \
-	$(libsystray_built_sources)
-
-DISTCLEANFILES += \
-	$(libsystray_built_sources)
 
 endif
 
