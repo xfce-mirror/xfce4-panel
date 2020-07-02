@@ -1,16 +1,17 @@
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
-	-DG_LOG_DOMAIN=\"libstatusnotifier\" \
+	-DG_LOG_DOMAIN=\"libsystray\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	$(PLATFORM_CPPFLAGS)
 
 plugindir = \
 	$(libdir)/xfce4/panel/plugins
 
+# Keep the legacy "systray" name to ease the migration for users
 plugin_LTLIBRARIES = \
-	libstatusnotifier.la
+	libsystray.la
 
-libstatusnotifier_built_sources = \
+libsystray_built_sources = \
 	sn-watcher.h \
 	sn-watcher.c \
 	sn-dialog-ui.h \
@@ -18,8 +19,8 @@ libstatusnotifier_built_sources = \
 	systray-marshal.c \
 	systray-marshal.h
 
-libstatusnotifier_la_SOURCES = \
-	$(libstatusnotifier_built_sources) \
+libsystray_la_SOURCES = \
+	$(libsystray_built_sources) \
 	sn-config.c \
 	sn-config.h \
 	sn-backend.c \
@@ -47,7 +48,7 @@ libstatusnotifier_la_SOURCES = \
 	systray-socket.c \
 	systray-socket.h
 
-libstatusnotifier_la_CFLAGS = \
+libsystray_la_CFLAGS = \
 	$(LIBX11_CFLAGS) \
 	$(GTK_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
@@ -58,14 +59,14 @@ libstatusnotifier_la_CFLAGS = \
 	$(PLATFORM_CFLAGS) \
 	-DDATADIR=\""$(datadir)"\"
 
-libstatusnotifier_la_LDFLAGS = \
+libsystray_la_LDFLAGS = \
 	-avoid-version \
 	-module \
 	-no-undefined \
 	-export-symbols-regex '^xfce_panel_module_(preinit|init|construct)' \
 	$(PLATFORM_LDFLAGS)
 
-libstatusnotifier_la_LIBADD = \
+libsystray_la_LIBADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la \
 	$(LIBX11_LIBS) \
@@ -76,7 +77,7 @@ libstatusnotifier_la_LIBADD = \
 	$(XFCONF_LIBS) \
 	$(DBUSMENU_LIBS)
 
-libstatusnotifier_la_DEPENDENCIES = \
+libsystray_la_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la
 
@@ -84,7 +85,7 @@ desktopdir = \
 	$(datadir)/xfce4/panel/plugins
 
 desktop_in_files = \
-	statusnotifier.desktop.in.in
+	systray.desktop.in.in
 
 desktop_DATA = $(desktop_in_files:.desktop.in.in=.desktop)
 
@@ -121,10 +122,10 @@ systray-dialog_ui.h: systray-dialog.glade
 	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=systray_dialog_ui $< >$@
 
 BUILT_SOURCES = \
-	$(libstatusnotifier_built_sources)
+	$(libsystray_built_sources)
 
 DISTCLEANFILES += \
-	$(libstatusnotifier_built_sources)
+	$(libsystray_built_sources)
 
 endif
 
