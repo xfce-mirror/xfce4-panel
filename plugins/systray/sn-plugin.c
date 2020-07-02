@@ -63,8 +63,6 @@ static void                  sn_plugin_mode_changed                  (XfcePanelP
 
 static void                  sn_plugin_configure_plugin              (XfcePanelPlugin         *panel_plugin);
 
-static void                  sn_plugin_show_about                    (XfcePanelPlugin         *panel_plugin);
-
 
 
 
@@ -87,7 +85,6 @@ sn_plugin_class_init (SnPluginClass *klass)
   panel_plugin_class->size_changed = sn_plugin_size_changed;
   panel_plugin_class->mode_changed = sn_plugin_mode_changed;
   panel_plugin_class->configure_plugin = sn_plugin_configure_plugin;
-  panel_plugin_class->about = sn_plugin_show_about;
 }
 
 
@@ -198,31 +195,6 @@ sn_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
 
 static void
-sn_plugin_show_about (XfcePanelPlugin *panel_plugin)
-{
-  const gchar *auth[] =
-    {
-      "Viktor Odintsev <ninetls@xfce.org>",
-      "Andrzej Radecki <andrzejr@xfce.org>",
-      "Simon Steinbeiß <simon@xfce.org>",
-      "Sean Davis <bluesabre@xfce.org>",
-      NULL
-    };
-
-  gtk_show_about_dialog (NULL,
-                         "logo-icon-name", "org.xfce.panel.statustray",
-                         "license", xfce_get_license_text (XFCE_LICENSE_TEXT_GPL),
-                         "version", PACKAGE_VERSION,
-                         "program-name", PACKAGE_NAME,
-                         "comments", _("Provides a panel area for status notifier items (application indicators)"),
-                         "website", "https://docs.xfce.org/panel-plugins/xfce4-statusnotifier-plugin",
-                         "authors", auth,
-                         NULL);
-}
-
-
-
-static void
 sn_plugin_item_added (SnPlugin *plugin,
                       SnItem   *item)
 {
@@ -268,7 +240,6 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 
   xfce_panel_plugin_menu_show_configure (panel_plugin);
-  xfce_panel_plugin_menu_show_about (panel_plugin);
 
   plugin->config = sn_config_new (xfce_panel_plugin_get_property_base (panel_plugin));
 
