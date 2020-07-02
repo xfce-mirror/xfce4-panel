@@ -1,3 +1,4 @@
+
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"libsystray\" \
@@ -53,8 +54,7 @@ libsystray_la_CFLAGS = \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
 	$(PLATFORM_CFLAGS) \
-	$(DBUSMENU_CFLAGS) \
-	-DDATADIR=\""$(datadir)"\"
+	$(DBUSMENU_CFLAGS)
 
 libsystray_la_LDFLAGS = \
 	-avoid-version \
@@ -83,11 +83,10 @@ libsystray_la_DEPENDENCIES = \
 desktopdir = $(datadir)/xfce4/panel/plugins
 desktop_in_files = systray.desktop.in.in
 desktop_DATA = $(desktop_in_files:.desktop.in.in=.desktop)
-
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \
-	$(desktop_in_files)	\
+	$(desktop_in_files) \
 	sn-dialog.glade \
 	systray-marshal.list
 
@@ -101,7 +100,7 @@ if MAINTAINER_MODE
 BUILT_SOURCES = \
 	$(libsystray_built_sources)
 
-DISTCLEANFILES += \
+DISTCLEANFILES +=	\
 	$(libsystray_built_sources)
 
 sn-watcher.h:
@@ -123,7 +122,6 @@ systray-marshal.c: systray-marshal.list Makefile
 
 systray-dialog_ui.h: systray-dialog.glade
 	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=systray_dialog_ui $< >$@
-
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:
