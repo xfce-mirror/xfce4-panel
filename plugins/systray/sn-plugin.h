@@ -24,7 +24,6 @@
 
 #include "systray.h"
 #include "systray-manager.h"
-#include "systray-dialog_ui.h"
 
 #include "sn-backend.h"
 #include "sn-config.h"
