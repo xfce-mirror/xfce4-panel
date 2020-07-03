@@ -152,9 +152,6 @@ void  systray_plugin_configuration_changed  (SnConfig           *config,
         plugin->names_ordered = g_slist_prepend (plugin->names_ordered, name);
       }
     plugin->names_ordered = g_slist_reverse (plugin->names_ordered);
-
-    /* update icons in the box */
-    systray_plugin_names_update (plugin);
   }
 
   /* hidden-legacy-items */
@@ -170,11 +167,11 @@ void  systray_plugin_configuration_changed  (SnConfig           *config,
       }
     
     if (list != NULL)
-      g_list_free_full (list, (GDestroyNotify) g_free);
-
-    /* update icons in the box */
-    systray_plugin_names_update(plugin);
+      g_list_free (list);
   }
+
+  /* update icons in the box */
+  systray_plugin_names_update (plugin);
 
   /* symbolic-icons */
   {

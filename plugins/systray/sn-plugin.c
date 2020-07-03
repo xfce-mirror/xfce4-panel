@@ -254,17 +254,6 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
   gtk_container_set_border_width (GTK_CONTAINER (plugin->systray_box), 1);
   gtk_widget_show (plugin->systray_box);
 
-  /* Systray arrow button */
-  plugin->button = xfce_arrow_button_new (GTK_ARROW_RIGHT);
-  gtk_box_pack_start (GTK_BOX (plugin->box), plugin->button, FALSE, FALSE, 0);
-  g_signal_connect (G_OBJECT (plugin->button), "toggled",
-      G_CALLBACK (systray_plugin_button_toggled), plugin);
-  gtk_button_set_relief (GTK_BUTTON (plugin->button), GTK_RELIEF_NONE);
-  g_object_bind_property (G_OBJECT (plugin->systray_box), "has-hidden",
-                          G_OBJECT (plugin->button), "visible",
-                          G_BINDING_SYNC_CREATE);
-  xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button);
-
   /* monitor screen changes */
   g_signal_connect (G_OBJECT (plugin), "screen-changed",
       G_CALLBACK (systray_plugin_screen_changed), NULL);
@@ -292,4 +281,15 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
   g_signal_connect_swapped (plugin->backend, "item-removed",
                             G_CALLBACK (sn_plugin_item_removed), plugin);
   sn_backend_start (plugin->backend);
+
+  /* Systray arrow button */
+  plugin->button = xfce_arrow_button_new(GTK_ARROW_RIGHT);
+  gtk_box_pack_start(GTK_BOX(plugin->box), plugin->button, FALSE, FALSE, 0);
+  g_signal_connect(G_OBJECT(plugin->button), "toggled",
+                   G_CALLBACK(systray_plugin_button_toggled), plugin);
+  gtk_button_set_relief(GTK_BUTTON(plugin->button), GTK_RELIEF_NONE);
+  g_object_bind_property(G_OBJECT(plugin->systray_box), "has-hidden",
+                         G_OBJECT(plugin->button), "visible",
+                         G_BINDING_SYNC_CREATE);
+  xfce_panel_plugin_add_action_widget(XFCE_PANEL_PLUGIN(plugin), plugin->button);
 }
