@@ -283,6 +283,8 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
                             G_CALLBACK (gtk_widget_queue_resize), plugin->systray_box);
   g_signal_connect (plugin->config, "configuration-changed",
                             G_CALLBACK (systray_plugin_configuration_changed), plugin);
+  g_signal_connect (plugin->config, "known-items-list-changed",
+                            G_CALLBACK (systray_plugin_configuration_changed), plugin);
 
   plugin->backend = sn_backend_new ();
   g_signal_connect_swapped (plugin->backend, "item-added",
