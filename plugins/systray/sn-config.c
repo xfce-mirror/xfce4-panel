@@ -116,6 +116,7 @@ enum
   CONFIGURATION_CHANGED,
   ITEM_LIST_CHANGED,
   COLLECT_KNOWN_ITEMS,
+  KNOWN_ITEM_LIST_CHANGED,
   LAST_SIGNAL
 };
 
@@ -256,6 +257,14 @@ sn_config_class_init (SnConfigClass *klass)
                   0, NULL, NULL,
                   g_cclosure_marshal_generic,
                   G_TYPE_NONE, 1, G_TYPE_POINTER);
+
+  sn_config_signals[KNOWN_ITEM_LIST_CHANGED] =
+    g_signal_new (g_intern_static_string ("known-items-list-changed"),
+                  G_TYPE_FROM_CLASS (object_class),
+                  G_SIGNAL_RUN_LAST,
+                  0, NULL, NULL,
+                  g_cclosure_marshal_VOID__VOID,
+                  G_TYPE_NONE, 0);
 }
 
 
@@ -476,6 +485,7 @@ sn_config_set_property (GObject      *object,
         {
           config->mode_whitelist = val;
           g_signal_emit (G_OBJECT (config), sn_config_signals[ITEM_LIST_CHANGED], 0);
+          g_signal_emit (G_OBJECT (config), sn_config_signals[KNOWN_ITEM_LIST_CHANGED], 0);
         }
       break;
 
@@ -526,7 +536,7 @@ sn_config_set_property (GObject      *object,
               config->known_legacy_items = g_list_append (config->known_legacy_items, name);
             }
         }
-      g_signal_emit (G_OBJECT (config), sn_config_signals[ITEM_LIST_CHANGED], 0);
+      g_signal_emit (G_OBJECT (config), sn_config_signals[KNOWN_ITEM_LIST_CHANGED], 0);
       break;
 
     case PROP_HIDDEN_LEGACY_ITEMS:
@@ -542,7 +552,7 @@ sn_config_set_property (GObject      *object,
               g_hash_table_replace (config->hidden_legacy_items, name, name);
             }
         }
-      g_signal_emit (G_OBJECT (config), sn_config_signals[ITEM_LIST_CHANGED], 0);
+      g_signal_emit (G_OBJECT (config), sn_config_signals[KNOWN_ITEM_LIST_CHANGED], 0);
       break;
 
     default:
@@ -762,7 +772,7 @@ sn_config_set_legacy_hidden (SnConfig    *config,
       g_hash_table_remove (config->hidden_legacy_items, name);
     }
   g_object_notify (G_OBJECT (config), "hidden-legacy-items");
-  g_signal_emit (G_OBJECT (config), sn_config_signals[ITEM_LIST_CHANGED], 0);
+  g_signal_emit (G_OBJECT (config), sn_config_signals[KNOWN_ITEM_LIST_CHANGED], 0);
 }
 
 
@@ -869,7 +879,7 @@ sn_config_add_known_legacy_item (SnConfig    *config,
     }
 
   g_object_notify (G_OBJECT (config), "known-legacy-items");
-  g_signal_emit (G_OBJECT (config), sn_config_signals[ITEM_LIST_CHANGED], 0);
+  g_signal_emit (G_OBJECT (config), sn_config_signals[KNOWN_ITEM_LIST_CHANGED], 0);
 }
 
 
@@ -909,6 +919,44 @@ sn_config_swap_known_items (SnConfig    *config,
 
   g_object_notify (G_OBJECT (config), "known-items");
   g_signal_emit (G_OBJECT (config), sn_config_signals[ITEM_LIST_CHANGED], 0);
+}
+
+
+
+void sn_config_swap_known_legacy_items(SnConfig *config,
+                                       const gchar *name1,
+                                       const gchar *name2)
+{
+  GList *li, *li_tmp;
+
+  g_return_if_fail(XFCE_IS_SN_CONFIG(config));
+
+  for (li = config->known_legacy_items; li != NULL; li = li->next)
+    if (g_strcmp0(li->data, name1) == 0)
+      break;
+
+  /* make sure that the list contains name1 followed by name2 */
+  if (li == NULL || li->next == NULL || g_strcmp0(li->next->data, name2) != 0)
+  {
+    g_debug("Couldn't swap items: %s and %s", name1, name2);
+    return;
+  }
+
+  /* li_tmp will contain only the removed element (name2) */
+  li_tmp = li->next;
+  config->known_legacy_items = g_list_remove_link(config->known_legacy_items, li_tmp);
+
+  /* not strictly necessary (in testing the list contents was preserved)
+   * but searching for the index again should be safer */
+  for (li = config->known_legacy_items; li != NULL; li = li->next)
+    if (g_strcmp0(li->data, name1) == 0)
+      break;
+
+  config->known_legacy_items = g_list_insert_before(config->known_legacy_items, li, li_tmp->data);
+  g_list_free(li_tmp);
+
+  g_object_notify(G_OBJECT(config), "known-legacy-items");
+  g_signal_emit(G_OBJECT(config), sn_config_signals[KNOWN_ITEM_LIST_CHANGED], 0);
 }
 
 
