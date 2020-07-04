@@ -637,6 +637,11 @@ sn_dialog_clear_clicked (GtkWidget *button,
           gtk_list_store_clear (GTK_LIST_STORE (dialog->store));
           sn_dialog_update_names (dialog);
         }
+      if (sn_config_legacy_items_clear (dialog->config))
+        {
+          gtk_list_store_clear (GTK_LIST_STORE (dialog->legacy_store));
+          sn_dialog_update_legacy_names (dialog);
+        }
     }
 }
 
