@@ -14,7 +14,6 @@ libsystray_built_sources = \
 	sn-watcher.h \
 	sn-watcher.c \
 	sn-dialog-ui.h \
-	systray-dialog_ui.h \
 	systray-marshal.c \
 	systray-marshal.h
 
@@ -119,9 +118,6 @@ systray-marshal.h: systray-marshal.list Makefile
 systray-marshal.c: systray-marshal.list Makefile
 	$(AM_V_GEN) echo "#include \"systray-marshal.h\"" > $@ \
 	&& glib-genmarshal --prefix=_systray_marshal --body $< >> $@
-
-systray-dialog_ui.h: systray-dialog.glade
-	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=systray_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

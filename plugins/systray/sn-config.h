@@ -97,6 +97,7 @@ void                   sn_config_swap_known_legacy_items       (SnConfig        
                                                                 const gchar             *name2);
 
 gboolean               sn_config_items_clear                   (SnConfig                *config);
+gboolean               sn_config_legacy_items_clear            (SnConfig                *config);
 
 G_END_DECLS
 

@@ -41,11 +41,6 @@
 
 
 static void     systray_plugin_button_set_arrow             (SnPlugin              *plugin);
-static void     systray_plugin_names_collect_ordered        (gpointer               data,
-                                                             gpointer               user_data);
-static void     systray_plugin_names_collect_hidden         (gpointer               key,
-                                                             gpointer               value,
-                                                             gpointer               user_data);
 static void     systray_plugin_names_update                 (SnPlugin              *plugin);
 static gboolean systray_plugin_names_get_hidden             (SnPlugin              *plugin,
                                                              const gchar           *name);
@@ -57,66 +52,8 @@ static void     systray_plugin_icon_removed                 (SystrayManager     
                                                              SnPlugin              *plugin);
 static void     systray_plugin_lost_selection               (SystrayManager        *manager,
                                                              SnPlugin              *plugin);
-static void     systray_plugin_dialog_add_application_names (gpointer               data,
-                                                             gpointer               user_data);
-static void     systray_plugin_dialog_hidden_toggled        (GtkCellRendererToggle *renderer,
-                                                             const gchar           *path_string,
-                                                             SnPlugin              *plugin);
-static void     systray_plugin_dialog_selection_changed     (GtkTreeSelection      *selection,
-                                                             SnPlugin              *plugin);
-static void     systray_plugin_dialog_item_move_clicked     (GtkWidget             *button,
-                                                             SnPlugin              *plugin);
-static void     systray_plugin_dialog_clear_clicked         (GtkWidget             *button,
-                                                             SnPlugin              *plugin);
-static void     systray_plugin_dialog_cleanup               (SnPlugin              *plugin,
-                                                             GtkBuilder            *builder);
 
 
-enum
-{
-  PROP_0,
-  PROP_ICON_SIZE,
-  PROP_SQUARE_ICONS,
-  PROP_KNOWN_LEGACY_ITEMS,
-  PROP_HIDDEN_LEGACY_ITEMS
-};
-
-enum
-{
-  COLUMN_GICON,
-  COLUMN_TITLE,
-  COLUMN_HIDDEN,
-  COLUMN_INTERNAL_NAME
-};
-
-
-
-/* known applications to improve the icon and name */
-static const gchar *known_applications[][3] =
-{
-  /* application name, icon-name, understandable name */
-  { "networkmanager applet", "network-workgroup", "Network Manager Applet" },
-  { "thunar", "Thunar", "Thunar Progress Dialog" },
-  { "workrave", NULL, "Workrave" },
-  { "workrave tray icon", NULL, "Workrave Applet" },
-  { "audacious2", "audacious", "Audacious" },
-  { "wicd-client.py", "wicd-gtk", "Wicd" },
-  { "drop-down terminal", "utilities-terminal", "Xfce Dropdown Terminal" },
-  { "xfce terminal", "utilities-terminal", "Xfce Terminal" },
-  { "task manager", "utilities-system-monitor", "Xfce Taskmanager" },
-  { "xfce4-power-manager", "xfpm-ac-adapter", "Xfce Power Manager" },
-};
-
-
-
-static void
-systray_free_array_element (gpointer data)
-{
-  GValue *value = (GValue *)data;
-
-  g_value_unset (value);
-  g_free (value);
-}
 
 void  systray_plugin_configuration_changed  (SnConfig           *config,
                                              SnPlugin           *plugin)
@@ -278,28 +215,6 @@ systray_plugin_composited_changed (GtkWidget *widget)
 
 
 
-static void
-systray_plugin_construct (XfcePanelPlugin *panel_plugin)
-{
-  SnPlugin       *plugin = XFCE_SN_PLUGIN (panel_plugin);
-  const PanelProperty  properties[] =
-  {
-    { "icon-size", G_TYPE_UINT },
-    { "square-icons", G_TYPE_BOOLEAN },
-    { "known-legacy-items", G_TYPE_PTR_ARRAY },
-    { "hidden-legacy-items", G_TYPE_PTR_ARRAY },
-    { NULL }
-  };
-
-  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
-
-  panel_properties_bind (NULL, G_OBJECT (plugin),
-                         xfce_panel_plugin_get_property_base (panel_plugin),
-                         properties, FALSE);
-}
-
-
-
 void
 systray_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
                                     GtkOrientation   orientation)
@@ -449,39 +364,6 @@ systray_plugin_button_set_arrow (SnPlugin *plugin)
 
 
 static void
-systray_plugin_names_collect (GPtrArray   *array,
-                              const gchar *name)
-{
-  GValue *tmp;
-
-  tmp = g_new0 (GValue, 1);
-  g_value_init (tmp, G_TYPE_STRING);
-  g_value_set_string (tmp, name);
-  g_ptr_array_add (array, tmp);
-}
-
-
-
-static void
-systray_plugin_names_collect_ordered (gpointer data,
-                                      gpointer user_data)
-{
-  systray_plugin_names_collect (user_data, data);
-}
-
-
-
-static void
-systray_plugin_names_collect_hidden (gpointer key,
-                                     gpointer value,
-                                     gpointer user_data)
-{
-  systray_plugin_names_collect (user_data, key);
-}
-
-
-
-static void
 systray_plugin_names_update_icon (GtkWidget *icon,
                                   gpointer   data)
 {
@@ -512,26 +394,6 @@ systray_plugin_names_update (SnPlugin *plugin)
 
 
 
-static void
-systray_plugin_names_set_hidden (SnPlugin      *plugin,
-                                 const gchar   *name,
-                                 gboolean       hidden)
-{
-  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
-  panel_return_if_fail (!panel_str_is_empty (name));
-
-  if (g_hash_table_contains (plugin->names_hidden, name))
-    g_hash_table_remove (plugin->names_hidden, name);
-  else
-    g_hash_table_replace (plugin->names_hidden, g_strdup (name), NULL);
-
-  systray_plugin_names_update (plugin);
-
-  g_object_notify (G_OBJECT (plugin), "hidden-legacy-items");
-}
-
-
-
 static gboolean
 systray_plugin_names_get_hidden (SnPlugin      *plugin,
                                  const gchar   *name)
@@ -553,21 +415,6 @@ systray_plugin_names_get_hidden (SnPlugin      *plugin,
     {
       return g_hash_table_contains (plugin->names_hidden, name);
     }
-}
-
-
-
-static void
-systray_plugin_names_clear (SnPlugin *plugin)
-{
-  g_slist_free_full (plugin->names_ordered, g_free);
-  plugin->names_ordered = NULL;
-  g_hash_table_remove_all (plugin->names_hidden);
-
-  g_object_notify (G_OBJECT (plugin), "known-legacy-items");
-  g_object_notify (G_OBJECT (plugin), "hidden-legacy-items");
-
-  systray_plugin_names_update (plugin);
 }
 
 
@@ -626,254 +473,4 @@ systray_plugin_lost_selection (SystrayManager *manager,
   error.message = _("Most likely another widget took over the function "
                     "of a notification area. This area will be unused.");
   xfce_dialog_show_error (NULL, &error, _("The notification area lost selection"));
-}
-
-
-
-static gchar *
-systray_plugin_dialog_camel_case (const gchar *text)
-{
-  const gchar *t;
-  gboolean     upper = TRUE;
-  gunichar     c;
-  GString     *result;
-
-  panel_return_val_if_fail (!panel_str_is_empty (text), NULL);
-
-  /* allocate a new string for the result */
-  result = g_string_sized_new (32);
-
-  /* convert the input text */
-  for (t = text; *t != '\0'; t = g_utf8_next_char (t))
-    {
-      /* check the next char */
-      c = g_utf8_get_char (t);
-      if (g_unichar_isspace (c))
-        {
-          upper = TRUE;
-        }
-      else if (upper)
-        {
-          c = g_unichar_toupper (c);
-          upper = FALSE;
-        }
-      else
-        {
-          c = g_unichar_tolower (c);
-        }
-
-      /* append the char to the result */
-      g_string_append_unichar (result, c);
-    }
-
-  return g_string_free (result, FALSE);
-}
-
-
-
-static void
-systray_plugin_dialog_add_application_names (gpointer data,
-                                             gpointer user_data)
-{
-  gpointer      **user_data_array = user_data;
-  SnPlugin       *plugin = (SnPlugin *)user_data_array[0];
-  GtkListStore   *store = (GtkListStore *)user_data_array[1];
-  const gchar    *name = data;
-  gboolean        hidden = g_hash_table_contains (plugin->names_hidden, name);
-  const gchar    *title = NULL;
-  gchar          *camelcase = NULL;
-  const gchar    *icon_name = name;
-  GdkPixbuf      *pixbuf;
-  GIcon          *gicon;
-  guint           i;
-  GtkTreeIter     iter;
-
-  panel_return_if_fail (GTK_IS_LIST_STORE (store));
-  panel_return_if_fail (name == NULL || g_utf8_validate (name, -1, NULL));
-
-  /* skip invalid names */
-  if (panel_str_is_empty (name))
-     return;
-
-  /* check if we have a better name for the application */
-  for (i = 0; i < G_N_ELEMENTS (known_applications); i++)
-    {
-      if (strcmp (name, known_applications[i][0]) == 0)
-        {
-          icon_name = known_applications[i][1];
-          title = known_applications[i][2];
-          break;
-        }
-    }
-
-  /* create fallback title if the application was not found */
-  if (title == NULL)
-    {
-      camelcase = systray_plugin_dialog_camel_case (name);
-      title = camelcase;
-    }
-
-  /* try to load the icon name */
-  if (G_LIKELY (icon_name != NULL))
-    gicon = xfce_gicon_from_name (icon_name);
-  else
-    gicon = xfce_gicon_from_name (name);
-
-  /* insert in the store */
-  gtk_list_store_append (store, &iter);
-  gtk_list_store_set (store, &iter,
-                      COLUMN_GICON, gicon,
-                      COLUMN_TITLE, title,
-                      COLUMN_HIDDEN, hidden,
-                      COLUMN_INTERNAL_NAME, name,
-                      -1);
-
-  g_free (camelcase);
-  if (pixbuf != NULL)
-    g_object_unref (G_OBJECT (pixbuf));
-}
-
-
-
-static void
-systray_plugin_dialog_hidden_toggled (GtkCellRendererToggle *renderer,
-                                      const gchar           *path_string,
-                                      SnPlugin              *plugin)
-{
-  GtkTreeIter   iter;
-  gboolean      hidden;
-  GtkTreeModel *model;
-  gchar        *name;
-
-  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
-  panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (plugin->systray_box));
-
-  model = GTK_TREE_MODEL (gtk_builder_get_object (plugin->configure_builder, "applications-store"));
-  panel_return_if_fail (GTK_IS_LIST_STORE (model));
-  if (gtk_tree_model_get_iter_from_string (model, &iter, path_string))
-    {
-      gtk_tree_model_get (model, &iter,
-                          COLUMN_HIDDEN, &hidden,
-                          COLUMN_INTERNAL_NAME, &name, -1);
-
-      /* insert value (we need to update it) */
-      hidden = !hidden;
-
-      /* update box and store with new state */
-      systray_plugin_names_set_hidden (plugin, name, hidden);
-      gtk_list_store_set (GTK_LIST_STORE (model), &iter, 2, hidden, -1);
-
-      g_free (name);
-    }
-}
-
-
-
-static void
-systray_plugin_dialog_selection_changed (GtkTreeSelection *selection,
-                                         SnPlugin         *plugin)
-{
-  GtkTreeModel *model;
-  GtkTreeIter   iter;
-  GtkTreePath  *path;
-  gint         *indices;
-  gint          count = 0, position = -1, depth;
-  gboolean      item_up_sensitive, item_down_sensitive;
-  GObject      *object;
-
-  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
-
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-    {
-      path = gtk_tree_model_get_path (model, &iter);
-      indices = gtk_tree_path_get_indices_with_depth (path, &depth);
-
-      if (indices != NULL && depth > 0)
-        position = indices[0];
-
-      count = gtk_tree_model_iter_n_children (model, NULL);
-
-      gtk_tree_path_free (path);
-    }
-
-  item_up_sensitive = position > 0;
-  item_down_sensitive = position + 1 < count;
-
-  object = gtk_builder_get_object (plugin->configure_builder, "item-up");
-  if (GTK_IS_BUTTON (object))
-    gtk_widget_set_sensitive (GTK_WIDGET (object), item_up_sensitive);
-
-  object = gtk_builder_get_object (plugin->configure_builder, "item-down");
-  if (GTK_IS_BUTTON (object))
-    gtk_widget_set_sensitive (GTK_WIDGET (object), item_down_sensitive);
-}
-
-
-
-static gboolean
-systray_plugin_dialog_tree_iter_insert (GtkTreeModel *model,
-                                        GtkTreePath  *path,
-                                        GtkTreeIter  *iter,
-                                        gpointer      user_data)
-{
-  SnPlugin      *plugin = user_data;
-  gchar         *name;
-
-  gtk_tree_model_get (model, iter, COLUMN_INTERNAL_NAME, &name, -1);
-  plugin->names_ordered = g_slist_prepend (plugin->names_ordered, g_strdup (name));
-
-  return FALSE;
-}
-
-
-
-static void
-systray_plugin_dialog_item_move_clicked (GtkWidget     *button,
-                                         SnPlugin      *plugin)
-{
-  GObject          *object;
-  GtkTreeSelection *selection;
-  GtkTreeModel     *model;
-  GtkTreeIter       iter, from_iter;
-  GtkTreePath      *path;
-  gint              direction;
-
-  object = gtk_builder_get_object (plugin->configure_builder, "applications-treeview");
-  panel_return_if_fail (GTK_IS_TREE_VIEW (object));
-
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (object));
-
-  object = gtk_builder_get_object (plugin->configure_builder, "item-up");
-  panel_return_if_fail (GTK_IS_BUTTON (object));
-  direction = object == G_OBJECT (button) ? -1 : 1;
-
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-    {
-      path = gtk_tree_model_get_path (model, &iter);
-
-      if (direction > 0)
-        gtk_tree_path_next (path);
-      else
-        gtk_tree_path_prev (path);
-
-      if (gtk_tree_model_get_iter (model, &from_iter, path))
-        {
-          if (direction > 0)
-            gtk_list_store_move_after (GTK_LIST_STORE (model), &iter, &from_iter);
-          else
-            gtk_list_store_move_before (GTK_LIST_STORE (model), &iter, &from_iter);
-
-          /* update buttons state */
-          systray_plugin_dialog_selection_changed (selection, plugin);
-
-          /* update order */
-          g_slist_free_full (plugin->names_ordered, g_free);
-          plugin->names_ordered = NULL;
-          gtk_tree_model_foreach (model, systray_plugin_dialog_tree_iter_insert, plugin);
-          plugin->names_ordered = g_slist_reverse (plugin->names_ordered);
-          g_object_notify (G_OBJECT (plugin), "known-legacy-items");
-        }
-
-      gtk_tree_path_free (path);
-    }
 }
