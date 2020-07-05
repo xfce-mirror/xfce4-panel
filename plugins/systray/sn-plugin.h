@@ -53,6 +53,8 @@ struct _SnPlugin
   SystrayManager *manager;
 
   guint           idle_startup;
+  gboolean        has_hidden_systray_items;
+  gboolean        has_hidden_sn_items;
 
   /* Widgets */
   GtkWidget           *box;

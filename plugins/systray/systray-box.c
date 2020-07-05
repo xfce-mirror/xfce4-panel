@@ -940,3 +940,12 @@ systray_box_update (SystrayBox *box,
   /* update the box, so we update the has-hidden property */
   gtk_widget_queue_resize (GTK_WIDGET (box));
 }
+
+
+
+gboolean
+systray_box_has_hidden_items (SystrayBox *box)
+{
+  g_return_val_if_fail (XFCE_IS_SYSTRAY_BOX (box), FALSE);
+  return box->n_hidden_children > 0;
+}

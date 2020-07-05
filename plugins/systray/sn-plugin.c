@@ -226,6 +226,72 @@ sn_plugin_item_removed (SnPlugin *plugin,
 }
 
 
+static void
+update_button_visibility (SnPlugin *plugin)
+{
+  gboolean visible = plugin->has_hidden_systray_items || plugin->has_hidden_sn_items;
+  gtk_widget_set_visible(GTK_WIDGET(plugin->button), visible);
+}
+
+
+static void
+systray_has_hidden_cb (SystrayBox *box,
+                       GParamSpec *pspec,
+                       SnPlugin   *plugin)
+{
+  plugin->has_hidden_systray_items = systray_box_has_hidden_items (box);
+  update_button_visibility (plugin);
+}
+
+
+static void
+snbox_has_hidden_cb (SnBox      *box,
+                     GParamSpec *pspec,
+                     SnPlugin   *plugin)
+{
+  plugin->has_hidden_sn_items = sn_box_has_hidden_items (box);
+  update_button_visibility (plugin);
+}
+
+
+
+static void
+sn_plugin_button_set_arrow(SnPlugin *plugin)
+{
+  GtkArrowType arrow_type;
+  gboolean show_hidden;
+  GtkOrientation orientation;
+
+  panel_return_if_fail(XFCE_IS_SN_PLUGIN(plugin));
+
+  show_hidden = systray_box_get_show_hidden(XFCE_SYSTRAY_BOX(plugin->systray_box));
+  orientation = xfce_panel_plugin_get_orientation(XFCE_PANEL_PLUGIN(plugin));
+  if (orientation == GTK_ORIENTATION_HORIZONTAL)
+    arrow_type = show_hidden ? GTK_ARROW_LEFT : GTK_ARROW_RIGHT;
+  else
+    arrow_type = show_hidden ? GTK_ARROW_UP : GTK_ARROW_DOWN;
+
+  xfce_arrow_button_set_arrow_type(XFCE_ARROW_BUTTON(plugin->button), arrow_type);
+}
+
+
+
+void
+sn_plugin_button_toggled (GtkWidget     *button,
+                          SnPlugin      *plugin)
+{
+  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
+  panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
+  panel_return_if_fail (plugin->button == button);
+
+  systray_box_set_show_hidden (XFCE_SYSTRAY_BOX (plugin->systray_box),
+      gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)));
+  sn_box_set_show_hidden (XFCE_SN_BOX (plugin->sn_box),
+      gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)));
+  sn_plugin_button_set_arrow (plugin);
+}
+
+
 
 static void
 sn_plugin_construct (XfcePanelPlugin *panel_plugin)
@@ -286,10 +352,11 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
   plugin->button = xfce_arrow_button_new(GTK_ARROW_RIGHT);
   gtk_box_pack_start(GTK_BOX(plugin->box), plugin->button, FALSE, FALSE, 0);
   g_signal_connect(G_OBJECT(plugin->button), "toggled",
-                   G_CALLBACK(systray_plugin_button_toggled), plugin);
+                   G_CALLBACK(sn_plugin_button_toggled), plugin);
   gtk_button_set_relief(GTK_BUTTON(plugin->button), GTK_RELIEF_NONE);
-  g_object_bind_property(G_OBJECT(plugin->systray_box), "has-hidden",
-                         G_OBJECT(plugin->button), "visible",
-                         G_BINDING_SYNC_CREATE);
+  g_signal_connect (G_OBJECT(plugin->systray_box), "notify::has-hidden",
+                    G_CALLBACK(systray_has_hidden_cb), plugin);
+  g_signal_connect (G_OBJECT(plugin->sn_box), "notify::has-hidden",
+                    G_CALLBACK(snbox_has_hidden_cb), plugin);
   xfce_panel_plugin_add_action_widget(XFCE_PANEL_PLUGIN(plugin), plugin->button);
 }

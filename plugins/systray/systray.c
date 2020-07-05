@@ -40,7 +40,6 @@
 #define BUTTON_SIZE   (16)
 
 
-static void     systray_plugin_button_set_arrow             (SnPlugin              *plugin);
 static void     systray_plugin_names_update                 (SnPlugin              *plugin);
 static gboolean systray_plugin_names_get_hidden             (SnPlugin              *plugin,
                                                              const gchar           *name);
@@ -224,8 +223,6 @@ systray_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
     gtk_widget_set_size_request (plugin->button, BUTTON_SIZE, -1);
   else
     gtk_widget_set_size_request (plugin->button, -1, BUTTON_SIZE);
-
-  systray_plugin_button_set_arrow (plugin);
 }
 
 
@@ -292,42 +289,6 @@ systray_plugin_box_draw (GtkWidget *box,
    * handled the draw event */
   gtk_container_foreach (GTK_CONTAINER (box),
                          (GtkCallback) (void (*)(void)) systray_plugin_box_draw_icon, cr);
-}
-
-
-
-void
-systray_plugin_button_toggled (GtkWidget     *button,
-                               SnPlugin      *plugin)
-{
-  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
-  panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
-  panel_return_if_fail (plugin->button == button);
-
-  systray_box_set_show_hidden (XFCE_SYSTRAY_BOX (plugin->systray_box),
-      gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)));
-  systray_plugin_button_set_arrow (plugin);
-}
-
-
-
-static void
-systray_plugin_button_set_arrow (SnPlugin *plugin)
-{
-  GtkArrowType   arrow_type;
-  gboolean       show_hidden;
-  GtkOrientation orientation;
-
-  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
-
-  show_hidden = systray_box_get_show_hidden (XFCE_SYSTRAY_BOX (plugin->systray_box));
-  orientation = xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin));
-  if (orientation == GTK_ORIENTATION_HORIZONTAL)
-    arrow_type = show_hidden ? GTK_ARROW_LEFT : GTK_ARROW_RIGHT;
-  else
-    arrow_type = show_hidden ? GTK_ARROW_UP : GTK_ARROW_DOWN;
-
-  xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (plugin->button), arrow_type);
 }
 
 

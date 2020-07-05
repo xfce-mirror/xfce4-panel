@@ -34,6 +34,10 @@
 
 
 
+static void                  sn_box_get_property                     (GObject                 *object,
+                                                                      guint                    prop_id,
+                                                                      GValue                  *value,
+                                                                      GParamSpec              *pspec);
 static void                  sn_box_finalize                         (GObject                 *object);
 
 static void                  sn_box_collect_known_items              (SnBox                   *box,
@@ -68,6 +72,12 @@ static void                  sn_box_size_allocate                    (GtkWidget 
 
 
 
+enum
+{
+  PROP_0,
+  PROP_HAS_HIDDEN
+};
+
 struct _SnBoxClass
 {
   GtkContainerClass    __parent__;
@@ -81,6 +91,11 @@ struct _SnBox
 
   /* in theory it's possible to have multiple items with same name */
   GHashTable          *children;
+
+  /* hidden children counter */
+  gint                 n_hidden_children;
+  gint                 n_visible_children;
+  gboolean             show_hidden;
 };
 
 G_DEFINE_TYPE (SnBox, sn_box, GTK_TYPE_CONTAINER)
@@ -95,6 +110,7 @@ sn_box_class_init (SnBoxClass *klass)
   GtkContainerClass *container_class;
 
   object_class = G_OBJECT_CLASS (klass);
+  object_class->get_property = sn_box_get_property;
   object_class->finalize = sn_box_finalize;
 
   widget_class = GTK_WIDGET_CLASS (klass);
@@ -107,6 +123,13 @@ sn_box_class_init (SnBoxClass *klass)
   container_class->remove = sn_box_remove;
   container_class->forall = sn_box_forall;
   container_class->child_type = sn_box_child_type;
+
+  g_object_class_install_property (object_class,
+                                   PROP_HAS_HIDDEN,
+                                   g_param_spec_boolean ("has-hidden",
+                                                         NULL, NULL,
+                                                         FALSE,
+                                                         G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 }
 
 
@@ -119,6 +142,28 @@ sn_box_init (SnBox *box)
   gtk_container_set_border_width (GTK_CONTAINER (box), 0);
 
   box->children = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+}
+
+
+
+static void
+sn_box_get_property(GObject *object,
+                    guint prop_id,
+                    GValue *value,
+                    GParamSpec *pspec)
+{
+  SnBox *box = XFCE_SN_BOX(object);
+
+  switch (prop_id)
+  {
+  case PROP_HAS_HIDDEN:
+    g_value_set_boolean(value, box->n_hidden_children > 0);
+    break;
+
+  default:
+    G_OBJECT_WARN_INVALID_PROPERTY_ID(object, prop_id, pspec);
+    break;
+  }
 }
 
 
@@ -182,11 +227,10 @@ sn_box_list_changed (SnBox    *box,
 {
   SnButton *button;
   GList    *known_items, *li, *li_int, *li_tmp;
+  gint      n_hidden_children = 0, n_visible_children = 0;
 
   g_return_if_fail (XFCE_IS_SN_BOX (box));
   g_return_if_fail (XFCE_IS_SN_CONFIG (config));
-
-  gtk_container_foreach (GTK_CONTAINER (box), (GtkCallback)gtk_widget_unmap, NULL);
 
   known_items = sn_config_get_known_items (box->config);
   for (li = known_items; li != NULL; li = li->next)
@@ -198,9 +242,22 @@ sn_box_list_changed (SnBox    *box,
           if (!sn_config_is_hidden (box->config,
                                     sn_button_get_name (button)))
             {
-              gtk_widget_map (GTK_WIDGET (button));
+              gtk_widget_map (GTK_WIDGET(button));
+              n_visible_children++;
+            }
+          else
+            {
+              gtk_widget_set_mapped (GTK_WIDGET (button), box->show_hidden);
+              n_hidden_children++;
             }
         }
+    }
+  
+  box->n_visible_children = n_visible_children;
+  if (box->n_hidden_children != n_hidden_children)
+    {
+      box->n_hidden_children = n_hidden_children;
+      g_object_notify (G_OBJECT (box), "has-hidden");
     }
 
   gtk_widget_queue_resize (GTK_WIDGET (box));
@@ -311,6 +368,8 @@ sn_box_measure_and_allocate (GtkWidget *widget,
   GtkRequisition  child_req;
   GtkAllocation   child_alloc;
 
+  gint n_hidden_children = 0, n_visible_children = 0;
+
   panel_size = sn_config_get_panel_size (box->config);
   config_nrows = sn_config_get_nrows (box->config);
   icon_size = sn_config_get_icon_size (box->config);
@@ -344,8 +403,15 @@ sn_box_measure_and_allocate (GtkWidget *widget,
           if (sn_config_is_hidden (box->config,
                                    sn_button_get_name (button)))
             {
-              continue;
+              n_hidden_children++;
+              if (!box->show_hidden)
+                {
+                  gtk_widget_unmap (GTK_WIDGET (button));
+                  continue;
+                }
             }
+          gtk_widget_map (GTK_WIDGET (button));
+          n_visible_children++;
 
           gtk_widget_get_preferred_size (GTK_WIDGET (button), NULL, &child_req);
 
@@ -415,6 +481,13 @@ sn_box_measure_and_allocate (GtkWidget *widget,
 
   if (natural_length != NULL)
     *natural_length = total_length;
+
+  box->n_visible_children = n_visible_children;
+  if (box->n_hidden_children != n_hidden_children)
+  {
+    box->n_hidden_children = n_hidden_children;
+    g_object_notify(G_OBJECT(box), "has-hidden");
+  }
 }
 
 
@@ -507,5 +580,27 @@ sn_box_remove_item (SnBox  *box,
               return;
             }
         }
+    }
+}
+
+gboolean
+sn_box_has_hidden_items (SnBox *box)
+{
+  g_return_val_if_fail (XFCE_IS_SN_BOX (box), FALSE);
+  return box->n_hidden_children > 0;
+}
+
+void
+sn_box_set_show_hidden (SnBox      *box,
+                        gboolean    show_hidden)
+{
+  g_return_if_fail (XFCE_IS_SN_BOX (box));
+
+  if (box->show_hidden != show_hidden)
+    {
+      box->show_hidden = show_hidden;
+
+      if (box->children != NULL)
+        gtk_widget_queue_resize (GTK_WIDGET (box));
     }
 }

@@ -43,7 +43,10 @@ void                   sn_box_remove_item                      (SnBox           
                                                                 SnItem                  *item);
 
 GtkWidget             *sn_box_new                              (SnConfig                *config);
+gboolean               sn_box_has_hidden_items                 (SnBox                   *box);
+void                   sn_box_set_show_hidden                  (SnBox                   *box,
+                                                                gboolean                 show_hidden);
 
-G_END_DECLS
+    G_END_DECLS
 
 #endif /* !__SN_BOX_H__ */
