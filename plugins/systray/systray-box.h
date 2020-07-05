@@ -67,4 +67,7 @@ void       systray_box_update          (SystrayBox          *box,
 
 gboolean   systray_box_has_hidden_items (SystrayBox         *box);
 
+void       systray_box_set_single_row  (SystrayBox          *box,
+                                        gboolean             single_row);
+
 #endif /* !__SYSTRAY_BOX_H__ */

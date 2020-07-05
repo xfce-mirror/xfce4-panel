@@ -276,7 +276,7 @@ sn_plugin_button_set_arrow(SnPlugin *plugin)
 
 
 
-void
+static void
 sn_plugin_button_toggled (GtkWidget     *button,
                           SnPlugin      *plugin)
 {

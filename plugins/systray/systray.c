@@ -59,6 +59,7 @@ void  systray_plugin_configuration_changed  (SnConfig           *config,
 {
   gint icon_size;
   gboolean square_icons;
+  gboolean single_row;
   GList *list;
   GList *l;
   gchar *name;
@@ -71,8 +72,10 @@ void  systray_plugin_configuration_changed  (SnConfig           *config,
   /* square-icons */
   square_icons = sn_config_get_square_icons (config);
   systray_box_set_squared (XFCE_SYSTRAY_BOX (plugin->systray_box), square_icons);
-  systray_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
-                               xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
+
+  /* single-row */
+  single_row = sn_config_get_single_row (config);
+  systray_box_set_single_row (XFCE_SYSTRAY_BOX (plugin->systray_box), single_row);
 
   /* known-legacy-items */
   {
@@ -100,13 +103,16 @@ void  systray_plugin_configuration_changed  (SnConfig           *config,
         name = g_strdup (l->data);
         g_hash_table_replace (plugin->names_hidden, name, NULL);
       }
-    
+
     if (list != NULL)
       g_list_free (list);
   }
 
   /* update icons in the box */
   systray_plugin_names_update (plugin);
+
+  systray_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
+                               xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
 }
 
 

@@ -111,6 +111,9 @@ struct _SystrayBox
   /* whether icons are squared */
   guint         square_icons : 1;
 
+  /* whether icons are in a single row */
+  guint         single_row : 1;
+
   /* allocated size by the plugin */
   gint          size_alloc_init;
   gint          size_alloc;
@@ -248,17 +251,24 @@ systray_box_size_get_max_child_size (SystrayBox *box,
   else
     {
       /* count the number of rows that fit in the allocated space */
-      for (rows = 1;; rows++)
+      if (box->single_row)
         {
-          size = rows * box->size_max + (rows - 1) * SPACING;
-          if (size < alloc_size)
-            continue;
+          rows = 1;
+        }
+      else
+        {
+          for (rows = 1;; rows++)
+            {
+              size = rows * box->size_max + (rows - 1) * SPACING;
+              if (size < alloc_size)
+                continue;
 
-          /* decrease rows if the new size doesn't fit */
-          if (rows > 1 && size > alloc_size)
-            rows--;
+              /* decrease rows if the new size doesn't fit */
+              if (rows > 1 && size > alloc_size)
+                rows--;
 
-          break;
+              break;
+            }
         }
 
       row_size = (alloc_size - (rows - 1) * SPACING) / rows;
@@ -948,4 +958,13 @@ systray_box_has_hidden_items (SystrayBox *box)
 {
   g_return_val_if_fail (XFCE_IS_SYSTRAY_BOX (box), FALSE);
   return box->n_hidden_children > 0;
+}
+
+
+void
+systray_box_set_single_row (SystrayBox *box,
+                            gboolean    single_row)
+{
+  box->single_row = single_row;
+  gtk_widget_queue_resize (GTK_WIDGET (box));
 }
