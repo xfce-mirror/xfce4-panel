@@ -65,4 +65,6 @@ gboolean   systray_box_get_squared     (SystrayBox          *box);
 void       systray_box_update          (SystrayBox          *box,
                                         GSList              *names_ordered);
 
+gboolean   systray_box_has_hidden_items (SystrayBox         *box);
+
 #endif /* !__SYSTRAY_BOX_H__ */
