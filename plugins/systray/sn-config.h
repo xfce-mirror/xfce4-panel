@@ -99,6 +99,20 @@ void                   sn_config_swap_known_legacy_items       (SnConfig        
 gboolean               sn_config_items_clear                   (SnConfig                *config);
 gboolean               sn_config_legacy_items_clear            (SnConfig                *config);
 
+
+
+#define DEFAULT_ICON_SIZE          22
+#define DEFAULT_SINGLE_ROW         FALSE
+#define DEFAULT_SQUARE_ICONS       FALSE
+#define DEFAULT_SYMBOLIC_ICONS     FALSE
+#define DEFAULT_MENU_IS_PRIMARY    FALSE
+#define DEFAULT_ORIENTATION        GTK_ORIENTATION_HORIZONTAL
+#define DEFAULT_PANEL_ORIENTATION  GTK_ORIENTATION_HORIZONTAL
+#define DEFAULT_PANEL_SIZE         28
+#define DEFAULT_MODE_WHITELIST     FALSE
+
+
+
 G_END_DECLS
 
 #endif /* !__SN_CONFIG_H__ */

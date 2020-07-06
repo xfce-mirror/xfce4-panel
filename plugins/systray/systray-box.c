@@ -34,6 +34,7 @@
 
 #include "systray-box.h"
 #include "systray-socket.h"
+#include "sn-config.h"
 
 #define SPACING    (2)
 #define OFFSCREEN  (-9999)
@@ -165,14 +166,14 @@ systray_box_init (SystrayBox *box)
 
   box->children = NULL;
   box->names_ordered = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-  box->size_max = SIZE_MAX_DEFAULT;
-  box->size_alloc_init = SIZE_MAX_DEFAULT;
-  box->size_alloc = SIZE_MAX_DEFAULT;
+  box->size_max = DEFAULT_ICON_SIZE;
+  box->size_alloc_init = DEFAULT_ICON_SIZE;
+  box->size_alloc = DEFAULT_ICON_SIZE;
   box->n_hidden_children = 0;
   box->n_visible_children = 0;
   box->horizontal = TRUE;
-  box->show_hidden = FALSE;
-  box->square_icons = FALSE;
+  box->show_hidden = DEFAULT_MODE_WHITELIST;
+  box->square_icons = DEFAULT_SQUARE_ICONS;
 }
 
 
