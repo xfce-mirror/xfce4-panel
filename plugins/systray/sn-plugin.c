@@ -210,11 +210,13 @@ sn_plugin_item_added (SnPlugin *plugin,
   gtk_widget_show (button);
 }
 
-void
+
+
+gboolean
 sn_plugin_legacy_item_added (SnPlugin    *plugin,
                              const gchar *name)
 {
-  sn_config_add_known_legacy_item (plugin->config, name);
+  return sn_config_add_known_legacy_item (plugin->config, name);
 }
 
 

@@ -342,7 +342,12 @@ systray_plugin_names_get_hidden (SnPlugin      *plugin,
     {
       /* add the new name */
       plugin->names_ordered = g_slist_prepend (plugin->names_ordered, g_strdup (name));
-      sn_plugin_legacy_item_added (plugin, name);
+
+      if (sn_plugin_legacy_item_added (plugin, name))
+        {
+          g_hash_table_replace (plugin->names_hidden, g_strdup (name), NULL);
+          return TRUE;
+        }
 
       /* do not hide the icon */
       return FALSE;
