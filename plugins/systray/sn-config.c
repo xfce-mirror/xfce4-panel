@@ -840,19 +840,19 @@ sn_config_add_known_item (SnConfig    *config,
 
 
 
-void
+gboolean
 sn_config_add_known_legacy_item (SnConfig    *config,
                                  const gchar *name)
 {
   GList *li;
   gchar *name_copy;
 
-  g_return_if_fail (XFCE_IS_SN_CONFIG (config));
+  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), TRUE);
 
   /* check if item is already known */
   for(li = config->known_legacy_items; li != NULL; li = li->next)
     if (g_strcmp0 (li->data, name) == 0)
-      return;
+      return g_hash_table_contains (config->hidden_legacy_items, name);
 
   config->known_legacy_items = g_list_prepend (config->known_legacy_items, g_strdup (name));
 
@@ -865,6 +865,8 @@ sn_config_add_known_legacy_item (SnConfig    *config,
 
   g_object_notify (G_OBJECT (config), "known-legacy-items");
   g_signal_emit (G_OBJECT (config), sn_config_signals[LEGACY_ITEM_LIST_CHANGED], 0);
+
+  return config->mode_whitelist;
 }
 
 
