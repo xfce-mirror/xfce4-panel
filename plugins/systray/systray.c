@@ -57,7 +57,7 @@ static void     systray_plugin_lost_selection               (SystrayManager     
 void  systray_plugin_configuration_changed  (SnConfig           *config,
                                              SnPlugin           *plugin)
 {
-  gint icon_size;
+  gint icon_size, n_rows, row_size, padding;
   gboolean square_icons;
   gboolean single_row;
   GList *list;
@@ -65,9 +65,9 @@ void  systray_plugin_configuration_changed  (SnConfig           *config,
   gchar *name;
 
   /* icon-size */
-  icon_size = sn_config_get_icon_size (config);
-  systray_box_set_size_max (XFCE_SYSTRAY_BOX (plugin->systray_box),
-                            icon_size);
+  sn_config_get_dimensions (config, &icon_size, &n_rows, &row_size, &padding);
+  systray_box_set_dimensions (XFCE_SYSTRAY_BOX (plugin->systray_box),
+                              icon_size, n_rows, row_size, padding);
 
   /* square-icons */
   square_icons = sn_config_get_square_icons (config);
@@ -250,8 +250,7 @@ systray_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   gtk_style_context_get_padding (context, gtk_widget_get_state_flags (plugin->box), &padding);
 
   border += MAX (padding.left + padding.right, padding.top + padding.bottom);
-  systray_box_set_size_alloc (XFCE_SYSTRAY_BOX (plugin->systray_box), size - 2 * border,
-                              xfce_panel_plugin_get_nrows (panel_plugin));
+  systray_box_set_size_alloc (XFCE_SYSTRAY_BOX (plugin->systray_box), size - 2 * border);
 
   return TRUE;
 }

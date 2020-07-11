@@ -63,6 +63,11 @@ gboolean               sn_config_get_symbolic_icons            (SnConfig        
 gboolean               sn_config_get_menu_is_primary           (SnConfig                *config);
 
 gint                   sn_config_get_icon_size                 (SnConfig                *config);
+void                   sn_config_get_dimensions                (SnConfig                *config,
+                                                                gint                    *ret_icon_size,
+                                                                gint                    *ret_n_rows,
+                                                                gint                    *ret_row_size,
+                                                                gint                    *ret_padding);
 
 gboolean               sn_config_is_hidden                     (SnConfig                *config,
                                                                 const gchar             *name);
