@@ -67,7 +67,7 @@ class XfceStatusIcon():
 
     def check_menu_item_cb(self, widget, data=None):
         if widget.get_active():
-            icon_name = "xfwm4"
+            icon_name = "parole"
         else:
             icon_name = "xfce4-logo"
         self.update_icon(icon_name)

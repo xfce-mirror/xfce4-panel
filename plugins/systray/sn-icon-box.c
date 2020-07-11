@@ -391,7 +391,9 @@ sn_icon_box_icon_changed (GtkWidget *widget)
 
   box = XFCE_SN_ICON_BOX (widget);
   icon_theme = gtk_icon_theme_get_for_screen (gtk_widget_get_screen (GTK_WIDGET (widget)));
-  icon_size = sn_config_get_icon_size (box->config);
+
+  sn_config_get_dimensions (box->config, &icon_size, NULL, NULL, NULL);
+
   symbolic_icons = sn_config_get_symbolic_icons (box->config);
 
   sn_item_get_icon (box->item, &theme_path,

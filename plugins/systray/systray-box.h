@@ -43,14 +43,14 @@ GtkWidget *systray_box_new             (void) G_GNUC_MALLOC;
 void       systray_box_set_orientation (SystrayBox          *box,
                                         GtkOrientation       orientation);
 
-void       systray_box_set_size_max    (SystrayBox          *box,
-                                        gint                 size_max);
-
-gint       systray_box_get_size_max    (SystrayBox          *box);
+void       systray_box_set_dimensions  (SystrayBox          *box,
+                                        gint                 icon_size,
+                                        gint                 n_rows,
+                                        gint                 row_size,
+                                        gint                 padding);
 
 void       systray_box_set_size_alloc  (SystrayBox          *box,
-                                        gint                 size_alloc,
-                                        gint                 nrows);
+                                        gint                 size_alloc);
 
 void       systray_box_set_show_hidden (SystrayBox          *box,
                                         gboolean             show_hidden);

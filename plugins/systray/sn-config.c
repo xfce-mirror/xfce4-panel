@@ -573,6 +573,63 @@ sn_config_get_icon_size (SnConfig *config)
 
 
 
+void
+sn_config_get_dimensions (SnConfig *config,
+                          gint     *ret_icon_size,
+                          gint     *ret_n_rows,
+                          gint     *ret_row_size,
+                          gint     *ret_padding)
+{
+  gint panel_size, config_nrows, icon_size, hx_size, hy_size, nrows, row_size, padding;
+  gboolean single_row, square_icons;
+
+  panel_size = sn_config_get_panel_size(config);
+  panel_size -= 2; // Add border padding
+  config_nrows = sn_config_get_nrows(config);
+  icon_size = sn_config_get_icon_size(config);
+  single_row = sn_config_get_single_row(config);
+  square_icons = sn_config_get_square_icons(config);
+  if (square_icons)
+  {
+    single_row = TRUE;
+    nrows = single_row ? 1 : MAX(1, config_nrows);
+    hx_size = hy_size = panel_size / nrows;
+  }
+  else
+  {
+    hx_size = MIN(icon_size, panel_size);
+    nrows = single_row ? 1 : MAX(1, panel_size / hx_size);
+    hy_size = panel_size / nrows;
+  }
+  icon_size = MIN(icon_size, MIN(hx_size, hy_size));
+
+  if (icon_size % 2 != 0)
+    {
+      icon_size--;
+    }
+
+  row_size = hy_size;
+  padding = (hy_size - icon_size) / 2;
+  padding += 1;
+
+  if (square_icons)
+    padding = 0;
+
+  if (ret_icon_size != NULL)
+    *ret_icon_size = icon_size;
+
+  if (ret_n_rows != NULL)
+    *ret_n_rows = nrows;
+
+  if (ret_row_size != NULL)
+    *ret_row_size = row_size;
+
+  if (ret_padding != NULL)
+    *ret_padding = padding;
+}
+
+
+
 gboolean
 sn_config_get_single_row (SnConfig *config)
 {
