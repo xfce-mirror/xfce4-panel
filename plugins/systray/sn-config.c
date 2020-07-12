@@ -608,7 +608,6 @@ sn_config_get_dimensions (SnConfig *config,
   gboolean single_row, square_icons;
 
   panel_size = sn_config_get_panel_size(config);
-  panel_size -= 2; // Add border padding
   config_nrows = sn_config_get_nrows(config);
   icon_size = sn_config_get_icon_size(config);
   single_row = sn_config_get_single_row(config);
@@ -621,7 +620,7 @@ sn_config_get_dimensions (SnConfig *config,
   }
   else
   {
-    hx_size = MIN(icon_size, panel_size);
+    hx_size = MIN(icon_size + 2, panel_size);
     nrows = single_row ? 1 : MAX(1, panel_size / hx_size);
     hy_size = panel_size / nrows;
   }
@@ -634,10 +633,9 @@ sn_config_get_dimensions (SnConfig *config,
 
   row_size = hy_size;
   padding = (hy_size - icon_size) / 2;
-  padding += 1;
 
   if (square_icons)
-    padding = 1;
+    padding = 0;
 
   if (ret_icon_size != NULL)
     *ret_icon_size = icon_size;
