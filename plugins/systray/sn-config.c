@@ -47,7 +47,7 @@
 #define DEFAULT_ORIENTATION        GTK_ORIENTATION_HORIZONTAL
 #define DEFAULT_PANEL_ORIENTATION  GTK_ORIENTATION_HORIZONTAL
 #define DEFAULT_PANEL_SIZE         28
-#define DEFAULT_SHOW_NEW_ITEMS     FALSE
+#define DEFAULT_HIDE_NEW_ITEMS     FALSE
 
 
 
@@ -79,7 +79,7 @@ struct _SnConfig
   gboolean            square_icons;
   gboolean            symbolic_icons;
   gboolean            menu_is_primary;
-  gboolean            show_new_items;
+  gboolean            hide_new_items;
   GList              *known_items;
   GHashTable         *hidden_items;
   GList              *known_legacy_items;
@@ -105,7 +105,7 @@ enum
   PROP_SQUARE_ICONS,
   PROP_SYMBOLIC_ICONS,
   PROP_MENU_IS_PRIMARY,
-  PROP_SHOW_NEW_ITEMS,
+  PROP_HIDE_NEW_ITEMS,
   PROP_KNOWN_ITEMS,
   PROP_HIDDEN_ITEMS,
   PROP_KNOWN_LEGACY_ITEMS,
@@ -198,9 +198,9 @@ sn_config_class_init (SnConfigClass *klass)
                                                          G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
-                                   PROP_SHOW_NEW_ITEMS,
-                                   g_param_spec_boolean ("show-new-items", NULL, NULL,
-                                                         DEFAULT_SHOW_NEW_ITEMS,
+                                   PROP_HIDE_NEW_ITEMS,
+                                   g_param_spec_boolean ("hide-new-items", NULL, NULL,
+                                                         DEFAULT_HIDE_NEW_ITEMS,
                                                          G_PARAM_READWRITE |
                                                          G_PARAM_STATIC_STRINGS));
 
@@ -286,7 +286,7 @@ sn_config_init (SnConfig *config)
   config->single_row           = DEFAULT_SINGLE_ROW;
   config->square_icons         = DEFAULT_SQUARE_ICONS;
   config->symbolic_icons       = DEFAULT_SYMBOLIC_ICONS;
-  config->show_new_items       = DEFAULT_SHOW_NEW_ITEMS;
+  config->hide_new_items       = DEFAULT_HIDE_NEW_ITEMS;
   config->known_items          = NULL;
   config->hidden_items         = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   config->known_legacy_items   = NULL;
@@ -377,8 +377,8 @@ sn_config_get_property (GObject    *object,
       g_value_set_boolean (value, config->menu_is_primary);
       break;
 
-    case PROP_SHOW_NEW_ITEMS:
-      g_value_set_boolean (value, config->show_new_items);
+    case PROP_HIDE_NEW_ITEMS:
+      g_value_set_boolean (value, config->hide_new_items);
       break;
 
     case PROP_KNOWN_ITEMS:
@@ -490,11 +490,11 @@ sn_config_set_property (GObject      *object,
         }
       break;
 
-    case PROP_SHOW_NEW_ITEMS:
+    case PROP_HIDE_NEW_ITEMS:
       val = g_value_get_boolean (value);
-      if (config->show_new_items != val)
+      if (config->hide_new_items != val)
         {
-          config->show_new_items = val;
+          config->hide_new_items = val;
           g_signal_emit (G_OBJECT (config), sn_config_signals[ITEM_LIST_CHANGED], 0);
           g_signal_emit (G_OBJECT (config), sn_config_signals[LEGACY_ITEM_LIST_CHANGED], 0);
         }
@@ -914,7 +914,7 @@ sn_config_add_known_item (SnConfig    *config,
 
   config->known_items = g_list_prepend (config->known_items, g_strdup (name));
 
-  if (config->show_new_items)
+  if (config->hide_new_items)
     {
       name_copy = g_strdup (name);
       g_hash_table_replace (config->hidden_items, name_copy, name_copy);
@@ -943,7 +943,7 @@ sn_config_add_known_legacy_item (SnConfig    *config,
 
   config->known_legacy_items = g_list_prepend (config->known_legacy_items, g_strdup (name));
 
-  if (config->show_new_items)
+  if (config->hide_new_items)
     {
       name_copy = g_strdup (name);
       g_hash_table_replace (config->hidden_legacy_items, name_copy, name_copy);
@@ -953,7 +953,7 @@ sn_config_add_known_legacy_item (SnConfig    *config,
   g_object_notify (G_OBJECT (config), "known-legacy-items");
   g_signal_emit (G_OBJECT (config), sn_config_signals[LEGACY_ITEM_LIST_CHANGED], 0);
 
-  return config->show_new_items;
+  return config->hide_new_items;
 }
 
 
@@ -1141,8 +1141,8 @@ sn_config_new (const gchar *property_base)
       xfconf_g_property_bind (channel, property, G_TYPE_BOOLEAN, config, "menu-is-primary");
       g_free (property);
 
-      property = g_strconcat (property_base, "/show-new-items", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_BOOLEAN, config, "show-new-items");
+      property = g_strconcat (property_base, "/hide-new-items", NULL);
+      xfconf_g_property_bind (channel, property, G_TYPE_BOOLEAN, config, "hide-new-items");
       g_free (property);
 
       property = g_strconcat (property_base, "/known-items", NULL);

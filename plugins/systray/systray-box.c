@@ -174,7 +174,7 @@ systray_box_init (SystrayBox *box)
   box->n_hidden_children = 0;
   box->n_visible_children = 0;
   box->horizontal = TRUE;
-  box->show_hidden = DEFAULT_SHOW_NEW_ITEMS;
+  box->show_hidden = DEFAULT_HIDE_NEW_ITEMS;
   box->square_icons = DEFAULT_SQUARE_ICONS;
 }
 
