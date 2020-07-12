@@ -313,7 +313,7 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
   plugin->config = sn_config_new (xfce_panel_plugin_get_property_base (panel_plugin));
 
   /* Container for both plugins */
-  plugin->box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
+  plugin->box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->box);
   gtk_widget_show (plugin->box);
 
@@ -322,7 +322,7 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
   gtk_box_pack_start (GTK_BOX (plugin->box), plugin->systray_box, TRUE, TRUE, 0);
   g_signal_connect (G_OBJECT (plugin->systray_box), "draw",
       G_CALLBACK (systray_plugin_box_draw), plugin);
-  gtk_container_set_border_width (GTK_CONTAINER (plugin->systray_box), 1);
+  gtk_container_set_border_width (GTK_CONTAINER (plugin->systray_box), 0);
   gtk_widget_show (plugin->systray_box);
 
   /* monitor screen changes */
