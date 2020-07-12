@@ -118,7 +118,7 @@ gboolean               sn_config_legacy_items_clear            (SnConfig        
 #define DEFAULT_ORIENTATION        GTK_ORIENTATION_HORIZONTAL
 #define DEFAULT_PANEL_ORIENTATION  GTK_ORIENTATION_HORIZONTAL
 #define DEFAULT_PANEL_SIZE         28
-#define DEFAULT_SHOW_NEW_ITEMS     FALSE
+#define DEFAULT_HIDE_NEW_ITEMS     FALSE
 
 
 

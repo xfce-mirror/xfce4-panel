@@ -761,9 +761,9 @@ sn_dialog_build (SnDialog *dialog)
                               G_OBJECT (object), "active",
                               G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
-      object = gtk_builder_get_object (dialog->builder, "checkbutton-show-new-items");
+      object = gtk_builder_get_object (dialog->builder, "checkbutton-hide-new-items");
       g_return_val_if_fail (GTK_IS_WIDGET (object), FALSE);
-      g_object_bind_property (G_OBJECT (dialog->config), "show-new-items",
+      g_object_bind_property (G_OBJECT (dialog->config), "hide-new-items",
                               G_OBJECT (object), "active",
                               G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
