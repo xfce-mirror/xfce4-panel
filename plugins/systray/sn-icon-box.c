@@ -188,6 +188,8 @@ sn_icon_box_new (SnItem   *item,
 
   settings = gtk_settings_get_default ();
 
+  sn_signal_connect_weak_swapped (config, "icons-changed",
+                                  G_CALLBACK (sn_icon_box_icon_changed), box);
   sn_signal_connect_weak_swapped (config, "notify::icon-size",
                                   G_CALLBACK (sn_icon_box_icon_changed), box);
   sn_signal_connect_weak_swapped (config, "notify::symbolic-icons",

@@ -35,6 +35,10 @@
 
 
 
+#define DEFAULT_ICON_SIZE          22
+
+
+
 static gboolean              sn_dialog_build                         (SnDialog                *dialog);
 
 static void                  sn_dialog_finalize                      (GObject                 *object);
@@ -52,6 +56,9 @@ struct _SnDialog
 
   GtkBuilder          *builder;
   GtkWidget           *dialog;
+  GtkWidget           *auto_size;
+  GtkWidget           *size_spinbutton;
+  GtkWidget           *size_revealer;
   GObject             *store;
   GObject             *legacy_store;
   SnConfig            *config;
@@ -656,6 +663,29 @@ sn_dialog_dialog_unref (SnDialog *dialog)
 
 
 
+static void
+reveal_icon_size (GtkWidget  *widget,
+                  GParamSpec *pspec,
+                  SnDialog   *dialog)
+{
+  gboolean active;
+  gint     icon_size;
+
+  g_return_if_fail (XFCE_IS_SN_DIALOG (dialog));
+
+  active = gtk_switch_get_active (GTK_SWITCH (widget));
+
+  if (active)
+    icon_size = 0;
+  else
+    icon_size = DEFAULT_ICON_SIZE;
+
+  gtk_revealer_set_reveal_child (GTK_REVEALER (dialog->size_revealer), !active);
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON (dialog->size_spinbutton), icon_size);
+}
+
+
+
 static gboolean
 sn_dialog_build (SnDialog *dialog)
 {
@@ -682,12 +712,30 @@ sn_dialog_build (SnDialog *dialog)
                                 G_CALLBACK (gtk_widget_destroy),
                                 dialog->dialog);
 
+      object = gtk_builder_get_object (dialog->builder, "switch-auto-size");
+      g_return_val_if_fail (GTK_IS_WIDGET (object), FALSE);
+      dialog->auto_size = GTK_WIDGET (object);
+
       object = gtk_builder_get_object (dialog->builder, "spinbutton-icon-size");
       g_return_val_if_fail (GTK_IS_WIDGET (object), FALSE);
       g_object_bind_property (G_OBJECT (dialog->config), "icon-size",
                               G_OBJECT (gtk_spin_button_get_adjustment
                                         (GTK_SPIN_BUTTON (object))), "value",
                               G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+      dialog->size_spinbutton = GTK_WIDGET (object);
+
+      object = gtk_builder_get_object (dialog->builder, "revealer-icon-size");
+      g_return_val_if_fail (GTK_IS_WIDGET (object), FALSE);
+      dialog->size_revealer = GTK_WIDGET (object);
+
+      if (sn_config_get_icon_size_is_automatic (dialog->config))
+        {
+          gtk_switch_set_active (GTK_SWITCH (dialog->auto_size), TRUE);
+          gtk_revealer_set_reveal_child (GTK_REVEALER (dialog->size_revealer), FALSE);
+        }
+
+      g_signal_connect (G_OBJECT (dialog->auto_size), "notify::active",
+                        G_CALLBACK (reveal_icon_size), dialog);
 
       object = gtk_builder_get_object (dialog->builder, "checkbutton-single-row");
       g_return_val_if_fail (GTK_IS_WIDGET (object), FALSE);
