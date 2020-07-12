@@ -637,7 +637,7 @@ sn_config_get_dimensions (SnConfig *config,
   padding += 1;
 
   if (square_icons)
-    padding = 0;
+    padding = 1;
 
   if (ret_icon_size != NULL)
     *ret_icon_size = icon_size;

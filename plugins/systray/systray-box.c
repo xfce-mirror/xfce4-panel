@@ -591,7 +591,7 @@ systray_box_size_allocate (GtkWidget     *widget,
               if (box->horizontal)
                 {
                   x = x_start;
-                  y += row_size + spacing;
+                  y += row_size;
 
                   if (!box->square_icons && y > y_end)
                     {
@@ -609,7 +609,7 @@ systray_box_size_allocate (GtkWidget     *widget,
               else
                 {
                   y = y_start;
-                  x += row_size + spacing;
+                  x += row_size;
 
                   if (!box->square_icons && x > x_end)
                     {
