@@ -90,6 +90,7 @@ struct _SnConfig
   GtkOrientation      panel_orientation;
   gint                nrows;
   gint                panel_size;
+  gint                panel_icon_size;
 };
 
 G_DEFINE_TYPE (SnConfig, sn_config, G_TYPE_OBJECT)
@@ -117,6 +118,7 @@ enum
   ITEM_LIST_CHANGED,
   COLLECT_KNOWN_ITEMS,
   LEGACY_ITEM_LIST_CHANGED,
+  ICONS_CHANGED,
   LAST_SIGNAL
 };
 
@@ -163,7 +165,7 @@ sn_config_class_init (SnConfigClass *klass)
   g_object_class_install_property (object_class,
                                    PROP_ICON_SIZE,
                                    g_param_spec_int ("icon-size", NULL, NULL,
-                                                     12, 64, DEFAULT_ICON_SIZE,
+                                                     0, 64, DEFAULT_ICON_SIZE,
                                                      G_PARAM_READWRITE |
                                                      G_PARAM_STATIC_STRINGS));
 
@@ -236,6 +238,14 @@ sn_config_class_init (SnConfigClass *klass)
 
   sn_config_signals[CONFIGURATION_CHANGED] =
     g_signal_new (g_intern_static_string ("configuration-changed"),
+                  G_TYPE_FROM_CLASS (object_class),
+                  G_SIGNAL_RUN_LAST,
+                  0, NULL, NULL,
+                  g_cclosure_marshal_VOID__VOID,
+                  G_TYPE_NONE, 0);
+
+  sn_config_signals[ICONS_CHANGED] =
+    g_signal_new (g_intern_static_string ("icons-changed"),
                   G_TYPE_FROM_CLASS (object_class),
                   G_SIGNAL_RUN_LAST,
                   0, NULL, NULL,
@@ -439,6 +449,7 @@ sn_config_set_property (GObject      *object,
       if (config->icon_size != val)
         {
           config->icon_size = val;
+          g_signal_emit (G_OBJECT (config), sn_config_signals[ICONS_CHANGED], 0);
           g_signal_emit (G_OBJECT (config), sn_config_signals[CONFIGURATION_CHANGED], 0);
         }
       break;
@@ -568,7 +579,20 @@ sn_config_get_icon_size (SnConfig *config)
 {
   g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), DEFAULT_ICON_SIZE);
 
-  return config->icon_size;
+  if (config->icon_size > 0)
+    return config->icon_size;
+
+  return config->panel_icon_size;
+}
+
+
+
+gboolean
+sn_config_get_icon_size_is_automatic (SnConfig *config)
+{
+  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), FALSE);
+
+  return config->icon_size == 0;
 }
 
 
@@ -720,7 +744,8 @@ sn_config_get_panel_orientation (SnConfig *config)
 void
 sn_config_set_size (SnConfig  *config,
                     gint       panel_size,
-                    gint       nrows)
+                    gint       nrows,
+                    gint       icon_size)
 {
   gboolean needs_update = FALSE;
 
@@ -736,6 +761,13 @@ sn_config_set_size (SnConfig  *config,
     {
       config->panel_size = panel_size;
       needs_update = TRUE;
+    }
+
+  if (config->panel_icon_size != icon_size)
+    {
+      config->panel_icon_size = icon_size;
+      needs_update = TRUE;
+      g_signal_emit (G_OBJECT (config), sn_config_signals[ICONS_CHANGED], 0);
     }
 
   if (needs_update)

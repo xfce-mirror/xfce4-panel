@@ -48,7 +48,8 @@ GtkOrientation         sn_config_get_panel_orientation         (SnConfig        
 
 void                   sn_config_set_size                      (SnConfig                *config,
                                                                 gint                     panel_size,
-                                                                gint                     nrows);
+                                                                gint                     nrows,
+                                                                gint                     icon_size);
 
 gint                   sn_config_get_nrows                     (SnConfig                *config);
 
@@ -63,6 +64,9 @@ gboolean               sn_config_get_symbolic_icons            (SnConfig        
 gboolean               sn_config_get_menu_is_primary           (SnConfig                *config);
 
 gint                   sn_config_get_icon_size                 (SnConfig                *config);
+
+gboolean               sn_config_get_icon_size_is_automatic    (SnConfig                *config);
+
 void                   sn_config_get_dimensions                (SnConfig                *config,
                                                                 gint                    *ret_icon_size,
                                                                 gint                    *ret_n_rows,
