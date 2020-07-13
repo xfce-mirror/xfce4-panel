@@ -84,6 +84,11 @@ static const gchar *known_applications[][3] =
   /* application name, icon-name, understandable name */
   { "blueman", "blueman", "Blueman Applet" },
   { "nm-applet", "network-workgroup", "Network Manager Applet" },
+  { "Skype1", "skypeforlinux", "Skype" },
+  { "chrome_status_icon_1", "google-chrome", "Google Chrome" },
+  { "Telegram Desktop", "telegram", "Telegram Desktop" },
+  { "redshift", "redshift", "Redshift" },
+  { "vlc", "vlc", "VLC Player" },
 };
 
 static const gchar *known_legacy_applications[][3] =
@@ -93,13 +98,18 @@ static const gchar *known_legacy_applications[][3] =
   { "drop-down terminal", "utilities-terminal", "Xfce Dropdown Terminal" },
   { "networkmanager applet", "network-workgroup", "Network Manager Applet" },
   { "parole", "parole", "Parole Media Player" },
-  { "task manager", "utilities-system-monitor", "Xfce Taskmanager" },
+  { "task manager", "org.xfce.taskmanager", "Xfce Taskmanager" },
   { "thunar", "Thunar", "Thunar Progress Dialog" },
   { "wicd-client.py", "wicd-gtk", "Wicd" },
   { "workrave tray icon", NULL, "Workrave Applet" },
   { "workrave", NULL, "Workrave" },
   { "xfce terminal", "utilities-terminal", "Xfce Terminal" },
   { "xfce4-power-manager", "xfpm-ac-adapter", "Xfce Power Manager" },
+  { "redshift-gtk", "redshift", "Redshift" },
+  { "skypeforlinux", "skypeforlinux", "Skype" },
+  { "blueman-applet", "blueman", "Blueman Applet" },
+  { "system-config-printer", "printer", "Printing Service" },
+  { "network", "network-workgroup", "Network Manager Applet" },
 };
 
 
