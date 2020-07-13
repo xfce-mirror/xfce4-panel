@@ -89,6 +89,7 @@ static const gchar *known_applications[][3] =
   { "Telegram Desktop", "telegram", "Telegram Desktop" },
   { "redshift", "redshift", "Redshift" },
   { "vlc", "vlc", "VLC Player" },
+  { "zoom", "Zoom", "Zoom" },
 };
 
 static const gchar *known_legacy_applications[][3] =
