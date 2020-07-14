@@ -2984,6 +2984,38 @@ xfce_tasklist_button_get_child_path (XfceTasklistChild *child)
 }
 
 
+static GtkWidget *
+xfce_tasklist_button_create_context_menu (XfceTasklistChild *child)
+{
+  GtkWidget *menu;
+  gchar *path;
+
+  menu = wnck_action_menu_new (child->window);
+
+  /* add "Start new Instance" item to menu if supported by the platform */
+  path = xfce_tasklist_button_get_child_path (child);
+  if (path != NULL)
+    {
+      GtkWidget *item;
+
+      item = gtk_separator_menu_item_new ();
+      gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), item);
+      gtk_widget_show (item);
+
+      item = gtk_menu_item_new_with_label (_("Start New Instance..."));
+      g_object_set_data_full (G_OBJECT (item), "exe-path", path, g_free);
+      gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), item);
+      gtk_widget_show (item);
+      g_signal_connect (item,
+                        "activate",
+                        G_CALLBACK (xfce_tasklist_button_start_new_instance_clicked),
+                        child);
+    }
+
+  return menu;
+}
+
+
 
 static void
 xfce_tasklist_button_menu_destroy (GtkWidget         *menu,
@@ -3026,31 +3058,9 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
 
   if (event->button == 3 && !GTK_IS_MENU_ITEM (button))
     {
-      gchar *path;
-
-      menu = wnck_action_menu_new (child->window);
+      menu = xfce_tasklist_button_create_context_menu (child);
       g_signal_connect (G_OBJECT (menu), "selection-done",
           G_CALLBACK (xfce_tasklist_button_menu_destroy), child);
-
-      /* add "Start new Instance" item to menu if supported by the platform */
-      path = xfce_tasklist_button_get_child_path (child);
-      if (path != NULL)
-        {
-          GtkWidget *item;
-
-          item = gtk_separator_menu_item_new ();
-          gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), item);
-          gtk_widget_show (item);
-
-          item = gtk_menu_item_new_with_label (_("Start New Instance..."));
-          g_object_set_data_full (G_OBJECT (item), "exe-path", path, g_free);
-          gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), item);
-          gtk_widget_show (item);
-          g_signal_connect (item,
-                            "activate",
-                            G_CALLBACK (xfce_tasklist_button_start_new_instance_clicked),
-                            child);
-        }
 
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
       gtk_menu_popup_at_widget (GTK_MENU (menu), button,
@@ -3718,7 +3728,7 @@ xfce_tasklist_group_button_menu (XfceTasklistChild *group_child,
 
           if (action_menu_entries)
             gtk_menu_item_set_submenu (GTK_MENU_ITEM (mi),
-                wnck_action_menu_new (child->window));
+                xfce_tasklist_button_create_context_menu (child));
         }
     }
 
