@@ -2942,6 +2942,50 @@ xfce_tasklist_button_enter_notify_event (GtkWidget         *button,
 
 
 static void
+xfce_tasklist_button_start_new_instance_clicked (GtkMenuItem       *item,
+                                                 XfceTasklistChild *child)
+{
+  GError *error = NULL;
+  const gchar *path = g_object_get_data (G_OBJECT (item), "exe-path");
+  if (!g_spawn_command_line_async (path, &error))
+    {
+      GtkWidget *dialog =
+        gtk_message_dialog_new (NULL,
+                                0,
+                                GTK_MESSAGE_ERROR,
+                                GTK_BUTTONS_OK,
+                                _("Unable to start new instance of '%s'"),
+                                path);
+      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+                                                "%s", error->message);
+      gtk_window_set_title (GTK_WINDOW (dialog), _("Error"));
+      g_error_free (error);
+      gtk_dialog_run (GTK_DIALOG (dialog));
+      gtk_widget_destroy (dialog);
+    }
+}
+
+
+
+static gchar *
+xfce_tasklist_button_get_child_path (XfceTasklistChild *child)
+{
+  gchar *path = NULL;
+  WnckApplication *app = wnck_window_get_application (child->window);
+  int pid = wnck_application_get_pid (app);
+  if (pid > 0)
+    {
+      gchar *link = g_strdup_printf ("/proc/%d/exe", pid);
+      if (g_file_test (link, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_SYMLINK))
+        path = g_file_read_link (link, NULL);
+      g_free (link);
+    }
+  return path;
+}
+
+
+
+static void
 xfce_tasklist_button_menu_destroy (GtkWidget         *menu,
                                    XfceTasklistChild *child)
 {
@@ -2982,9 +3026,31 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
 
   if (event->button == 3 && !GTK_IS_MENU_ITEM (button))
     {
+      gchar *path;
+
       menu = wnck_action_menu_new (child->window);
       g_signal_connect (G_OBJECT (menu), "selection-done",
           G_CALLBACK (xfce_tasklist_button_menu_destroy), child);
+
+      /* add "Start new Instance" item to menu if supported by the platform */
+      path = xfce_tasklist_button_get_child_path (child);
+      if (path != NULL)
+        {
+          GtkWidget *item;
+
+          item = gtk_separator_menu_item_new ();
+          gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), item);
+          gtk_widget_show (item);
+
+          item = gtk_menu_item_new_with_label (_("Start New Instance..."));
+          g_object_set_data_full (G_OBJECT (item), "exe-path", path, g_free);
+          gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), item);
+          gtk_widget_show (item);
+          g_signal_connect (item,
+                            "activate",
+                            G_CALLBACK (xfce_tasklist_button_start_new_instance_clicked),
+                            child);
+        }
 
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
       gtk_menu_popup_at_widget (GTK_MENU (menu), button,
