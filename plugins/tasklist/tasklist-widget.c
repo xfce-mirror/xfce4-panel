@@ -2985,28 +2985,30 @@ xfce_tasklist_button_get_child_path (XfceTasklistChild *child)
 
 
 static void
-xfce_tasklist_button_add_start_new_instance_item (XfceTasklistChild *child,
-                                                      GtkWidget         *menu,
-                                                      gboolean           append)
+xfce_tasklist_button_add_launch_new_instance_item (XfceTasklistChild *child,
+                                                   GtkWidget         *menu,
+                                                   gboolean           append)
 {
   gchar     *path;
   GtkWidget *sep;
   GtkWidget *item;
 
+  /* add "Launch New Instance" item to menu if supported by the platform */
+  path = xfce_tasklist_button_get_child_path (child);
+
   if (path == NULL)
     return;
 
   sep = gtk_separator_menu_item_new ();
+  gtk_widget_show (sep);
 
-  item = gtk_menu_item_new_with_label (_("Start New Instance..."));
+  item = gtk_menu_item_new_with_label (_("Launch New Instance..."));
   g_object_set_data_full (G_OBJECT (item), "exe-path", path, g_free);
+  gtk_widget_show (item);
   g_signal_connect (item,
                     "activate",
                     G_CALLBACK (xfce_tasklist_button_start_new_instance_clicked),
                     child);
-
-  gtk_widget_show (sep);
-  gtk_widget_show (item);
 
   if (append)
     {
@@ -3018,8 +3020,6 @@ xfce_tasklist_button_add_start_new_instance_item (XfceTasklistChild *child,
       gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), sep);
       gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), item);
     }
-
-  return menu;
 }
 
 
@@ -3066,7 +3066,7 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
   if (event->button == 3 && !GTK_IS_MENU_ITEM (button))
     {
       menu = wnck_action_menu_new (child->window);
-      xfce_tasklist_button_add_start_new_instance_item (child, menu, FALSE);
+      xfce_tasklist_button_add_launch_new_instance_item (child, menu, FALSE);
       g_signal_connect (G_OBJECT (menu), "selection-done",
           G_CALLBACK (xfce_tasklist_button_menu_destroy), child);
 
@@ -3739,7 +3739,7 @@ xfce_tasklist_group_button_menu (XfceTasklistChild *group_child,
                 wnck_action_menu_new (child->window));
 
           if (li->next == NULL)
-            xfce_tasklist_button_add_start_new_instance_item (child, menu, TRUE);
+            xfce_tasklist_button_add_launch_new_instance_item (child, menu, TRUE);
         }
     }
 
