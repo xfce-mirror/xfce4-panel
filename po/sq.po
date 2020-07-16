@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-28 12:45+0200\n"
-"PO-Revision-Date: 2020-06-12 14:05+0000\n"
+"POT-Creation-Date: 2020-07-15 12:47+0200\n"
+"PO-Revision-Date: 2020-07-16 09:42+0000\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>\n"
 "Language-Team: Albanian (http://www.transifex.com/xfce/xfce4-panel/language/sq/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panele;rregullime;parapëlqime;shtyllë punësh;vetëfshihu;aplikacion menu;nisje;butona;nisës;zonë njoftimesh;gjendje;ikona;shtojca;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2934
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2936
 msgid "Panel"
 msgstr "Panel"
 
@@ -78,7 +78,7 @@ msgstr "_Hiqe"
 msgid "_Properties"
 msgstr "_Veti"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3022
+#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3024
 msgid "_About"
 msgstr "_Rreth"
 
@@ -90,20 +90,20 @@ msgstr "_Zhvendose"
 msgid "Pane_l"
 msgstr "_Panel"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2947
+#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2949
 msgid "Add _New Items..."
 msgstr "Shtoni Elemente të _Rinj…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2962
+#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2964
 msgid "Panel Pr_eferences..."
 msgstr "_Parapëlqime Paneli…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2994
+#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2996
 msgid "Log _Out"
 msgstr "_Dilni"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:207
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3013
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3015
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -240,42 +240,42 @@ msgstr "Doni ta nisni panelin? Nëse po, sigurohuni se e ruani sesionin gjatë d
 msgid "No running instance of %s was found"
 msgstr "S’u gjet instancë %s në xhirim e sipër"
 
-#: ../panel/panel-application.c:214
+#: ../panel/panel-application.c:215
 msgid "Failed to launch the migration application"
 msgstr "S’u arrit të niset aplikacioni i migrimit"
 
-#: ../panel/panel-application.c:977
+#: ../panel/panel-application.c:984
 msgid "Create _Launcher"
 msgstr "Krijo _Nisës"
 
-#: ../panel/panel-application.c:978
+#: ../panel/panel-application.c:985
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Kjo do të krijojë te paneli një shtojcë të ri nisësi dhe i fut si elementë menuje kartelat e hedhura brenda saj."
 
-#: ../panel/panel-application.c:980
+#: ../panel/panel-application.c:987
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Krijo nisës të ri prej %d kartele desktop"
 msgstr[1] "Krijo nisës të ri prej %d kartelash desktop"
 
-#: ../panel/panel-application.c:1720
+#: ../panel/panel-application.c:1727
 msgid "Quit"
 msgstr "Dilni"
 
-#: ../panel/panel-application.c:1721
+#: ../panel/panel-application.c:1728
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "E keni nisur X-in pa përgjegjës sesionesh. Klikimi mbi Dilni do ta mbyllë shërbyesin X."
 
-#: ../panel/panel-application.c:1722
+#: ../panel/panel-application.c:1729
 msgid "Are you sure you want to quit the panel?"
 msgstr "Jeni i sigurt se doni të dilet nga paneli?"
 
-#: ../panel/panel-application.c:1730
+#: ../panel/panel-application.c:1737
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "S’u arrit të përmbushet urdhri \"%s\""
@@ -703,7 +703,7 @@ msgstr "I sprovuar"
 msgid "Expert"
 msgstr "I regjur"
 
-#: ../panel/panel-window.c:2979
+#: ../panel/panel-window.c:2981
 msgid "_Lock Panel"
 msgstr "_Kyçe Panelin"
 
@@ -1017,7 +1017,7 @@ msgid "_OK"
 msgstr "_OK"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2483
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2507
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Dështoi përmbushja e urdhrit \"%s\"."
@@ -1542,11 +1542,11 @@ msgstr "Filtrim"
 msgid "Open launcher menu"
 msgstr "Hap menu nisësi"
 
-#: ../plugins/launcher/launcher.c:1643
+#: ../plugins/launcher/launcher.c:1657
 msgid "Unnamed Item"
 msgstr "Element i Paemërtuar"
 
-#: ../plugins/launcher/launcher.c:1821
+#: ../plugins/launcher/launcher.c:1845
 msgid "No items"
 msgstr "Pa elementë"
 
@@ -1903,23 +1903,36 @@ msgstr "Shfaq dritare prej krejt mo_nitorëve"
 msgid "Show only _minimized windows"
 msgstr "Shfaq vetëm dritare të _minimizuara"
 
-#: ../plugins/tasklist/tasklist-widget.c:3650
+#: ../plugins/tasklist/tasklist-widget.c:2957
+#, c-format
+msgid "Unable to start new instance of '%s'"
+msgstr "S’arrihet të niset instancë e re e '%s'"
+
+#: ../plugins/tasklist/tasklist-widget.c:2961
+msgid "Error"
+msgstr "Gabim"
+
+#: ../plugins/tasklist/tasklist-widget.c:3005
+msgid "Launch New Instance..."
+msgstr "Nisni Instancë të Re…"
+
+#: ../plugins/tasklist/tasklist-widget.c:3754
 msgid "Mi_nimize All"
 msgstr "Mi_nimizoji Krejt"
 
-#: ../plugins/tasklist/tasklist-widget.c:3658
+#: ../plugins/tasklist/tasklist-widget.c:3762
 msgid "Un_minimize All"
 msgstr "Ç_minimizoji Krejt"
 
-#: ../plugins/tasklist/tasklist-widget.c:3666
+#: ../plugins/tasklist/tasklist-widget.c:3770
 msgid "Ma_ximize All"
 msgstr "Ma_ksimizoji Krejt"
 
-#: ../plugins/tasklist/tasklist-widget.c:3674
+#: ../plugins/tasklist/tasklist-widget.c:3778
 msgid "_Unmaximize All"
 msgstr "Çmaksimi_zoji Krejt"
 
-#: ../plugins/tasklist/tasklist-widget.c:3686
+#: ../plugins/tasklist/tasklist-widget.c:3790
 msgid "_Close All"
 msgstr "_Mbylli Krejt"
 
