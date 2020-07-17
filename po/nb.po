@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-28 12:45+0200\n"
-"PO-Revision-Date: 2020-05-30 04:17+0000\n"
+"POT-Creation-Date: 2020-07-15 12:47+0200\n"
+"PO-Revision-Date: 2020-07-17 04:55+0000\n"
 "Last-Translator: Kjell Cato Heskjestad <cato@heskjestad.xyz>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/xfce/xfce4-panel/language/nb/)\n"
 "MIME-Version: 1.0\n"
@@ -41,7 +41,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panel;innstillinger;oppsett;oppgavelinje;skjul;programmeny;start;knapper;programstarter;varslingsområde;status;ikoner;programtillegg;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2934
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2936
 msgid "Panel"
 msgstr "Panel"
 
@@ -82,7 +82,7 @@ msgstr "_Fjern"
 msgid "_Properties"
 msgstr "_Egenskaper"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3022
+#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3024
 msgid "_About"
 msgstr "_Om"
 
@@ -94,20 +94,20 @@ msgstr "_Flytt"
 msgid "Pane_l"
 msgstr "Pane_l"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2947
+#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2949
 msgid "Add _New Items..."
 msgstr "Legg til _nye elementer …"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2962
+#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2964
 msgid "Panel Pr_eferences..."
 msgstr "Pan_elinnstillinger …"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2994
+#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2996
 msgid "Log _Out"
 msgstr "L_ogg ut"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:207
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3013
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3015
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -244,42 +244,42 @@ msgstr "Ønsker du å starte panelet? Hvis ja, sørg for å lagre økten ved utl
 msgid "No running instance of %s was found"
 msgstr "Ingen aktive instanser av %s funnet"
 
-#: ../panel/panel-application.c:214
+#: ../panel/panel-application.c:215
 msgid "Failed to launch the migration application"
 msgstr "Klarte ikke starte migreringsprogrammet"
 
-#: ../panel/panel-application.c:977
+#: ../panel/panel-application.c:984
 msgid "Create _Launcher"
 msgstr "Lag _oppstarter"
 
-#: ../panel/panel-application.c:978
+#: ../panel/panel-application.c:985
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Dette vil opprette et nytt oppstarter-tillegg på panelet og legger til inndregde filer som menyelementer."
 
-#: ../panel/panel-application.c:980
+#: ../panel/panel-application.c:987
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Lag ny oppstarter fra %d skrivebordsfil"
 msgstr[1] "Lag ny oppstarter fra %d skrivebordsfiler"
 
-#: ../panel/panel-application.c:1720
+#: ../panel/panel-application.c:1727
 msgid "Quit"
 msgstr "Avslutt"
 
-#: ../panel/panel-application.c:1721
+#: ../panel/panel-application.c:1728
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Du har startet X uten en øktbehandler. Ved å klikke Avslutt lukkes X tjeneren."
 
-#: ../panel/panel-application.c:1722
+#: ../panel/panel-application.c:1729
 msgid "Are you sure you want to quit the panel?"
 msgstr "Er du sikker på at du vil avslutte panel?"
 
-#: ../panel/panel-application.c:1730
+#: ../panel/panel-application.c:1737
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Klarte ikke kjøre kommandoen «%s»"
@@ -707,7 +707,7 @@ msgstr "Erfaren"
 msgid "Expert"
 msgstr "Ekspert"
 
-#: ../panel/panel-window.c:2979
+#: ../panel/panel-window.c:2981
 msgid "_Lock Panel"
 msgstr "_Lås panel"
 
@@ -1021,7 +1021,7 @@ msgid "_OK"
 msgstr "_OK"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2483
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2507
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Klarte ikke kjøre kommandoen «%s»."
@@ -1546,11 +1546,11 @@ msgstr "Filtrering"
 msgid "Open launcher menu"
 msgstr "Åpne oppstarter-menyen"
 
-#: ../plugins/launcher/launcher.c:1643
+#: ../plugins/launcher/launcher.c:1657
 msgid "Unnamed Item"
 msgstr "Uten navn"
 
-#: ../plugins/launcher/launcher.c:1821
+#: ../plugins/launcher/launcher.c:1845
 msgid "No items"
 msgstr "Ingen element"
 
@@ -1907,23 +1907,36 @@ msgstr "Vis vi_nduer fra alle skjermer"
 msgid "Show only _minimized windows"
 msgstr "Vis kun _minimerte vinduer"
 
-#: ../plugins/tasklist/tasklist-widget.c:3650
+#: ../plugins/tasklist/tasklist-widget.c:2957
+#, c-format
+msgid "Unable to start new instance of '%s'"
+msgstr "Klarte ikke starte ny instans av «%s»"
+
+#: ../plugins/tasklist/tasklist-widget.c:2961
+msgid "Error"
+msgstr "Feil"
+
+#: ../plugins/tasklist/tasklist-widget.c:3005
+msgid "Launch New Instance..."
+msgstr "Start ny instans …"
+
+#: ../plugins/tasklist/tasklist-widget.c:3754
 msgid "Mi_nimize All"
 msgstr "S_kjul alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3658
+#: ../plugins/tasklist/tasklist-widget.c:3762
 msgid "Un_minimize All"
 msgstr "V_is alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3666
+#: ../plugins/tasklist/tasklist-widget.c:3770
 msgid "Ma_ximize All"
 msgstr "Ma_ksimer alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3674
+#: ../plugins/tasklist/tasklist-widget.c:3778
 msgid "_Unmaximize All"
 msgstr "De-m_aksimer alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3686
+#: ../plugins/tasklist/tasklist-widget.c:3790
 msgid "_Close All"
 msgstr "_Lukk alle"
 
