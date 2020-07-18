@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-28 12:45+0200\n"
-"PO-Revision-Date: 2020-05-29 17:22+0000\n"
+"POT-Creation-Date: 2020-07-15 12:47+0200\n"
+"PO-Revision-Date: 2020-07-18 08:11+0000\n"
 "Last-Translator: Yannick Le Guen <leguen.yannick@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/xfce/xfce4-panel/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -43,7 +43,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "tableaux de bord;paramètres;préférences;barre des tâches;masquage automatique;menu des applications;démarrer;boutons;lanceur;zone de notification;état;icônes;greffons;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2934
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2936
 msgid "Panel"
 msgstr "Tableau de bord"
 
@@ -84,7 +84,7 @@ msgstr "_Supprimer"
 msgid "_Properties"
 msgstr "_Propriétés"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3022
+#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3024
 msgid "_About"
 msgstr "À _propos"
 
@@ -96,20 +96,20 @@ msgstr "_Déplacer"
 msgid "Pane_l"
 msgstr "Tableau de _bord"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2947
+#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2949
 msgid "Add _New Items..."
 msgstr "Ajouter de _nouveaux éléments…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2962
+#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2964
 msgid "Panel Pr_eferences..."
 msgstr "Pr_éférences du tableau de bord…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2994
+#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2996
 msgid "Log _Out"
 msgstr "Dé_connexion"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:207
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3013
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3015
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -246,42 +246,42 @@ msgstr "Voulez-vous démarrer le tableau de bord ? Si oui, veillez à ce que la
 msgid "No running instance of %s was found"
 msgstr "Aucune instance de %s n’a été trouvée"
 
-#: ../panel/panel-application.c:214
+#: ../panel/panel-application.c:215
 msgid "Failed to launch the migration application"
 msgstr "Impossible de lancer la procédure de migration"
 
-#: ../panel/panel-application.c:977
+#: ../panel/panel-application.c:984
 msgid "Create _Launcher"
 msgstr "Créer un _lanceur"
 
-#: ../panel/panel-application.c:978
+#: ../panel/panel-application.c:985
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Un nouveau greffon « Lanceur » va être créé sur le tableau de bord et un élément de menu y sera inséré pour chaque fichier déposé."
 
-#: ../panel/panel-application.c:980
+#: ../panel/panel-application.c:987
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Créer un lanceur à partir de %d fichier desktop"
 msgstr[1] "Créer un lanceur à partir de %d fichiers desktop"
 
-#: ../panel/panel-application.c:1720
+#: ../panel/panel-application.c:1727
 msgid "Quit"
 msgstr "Quitter"
 
-#: ../panel/panel-application.c:1721
+#: ../panel/panel-application.c:1728
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Vous avez démarré le serveur X sans gestionnaire de session. Cliquer sur Quitter fermera le serveur X."
 
-#: ../panel/panel-application.c:1722
+#: ../panel/panel-application.c:1729
 msgid "Are you sure you want to quit the panel?"
 msgstr "Voulez-vous vraiment quitter le tableau de bord ?"
 
-#: ../panel/panel-application.c:1730
+#: ../panel/panel-application.c:1737
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Impossible d’exécuter la commande « %s »"
@@ -709,7 +709,7 @@ msgstr "Confirmé"
 msgid "Expert"
 msgstr "Expert"
 
-#: ../panel/panel-window.c:2979
+#: ../panel/panel-window.c:2981
 msgid "_Lock Panel"
 msgstr "_Verrouiller le tableau de bord"
 
@@ -1023,7 +1023,7 @@ msgid "_OK"
 msgstr "_Valider"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2483
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2507
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Impossible d’exécuter la commande « %s »."
@@ -1548,11 +1548,11 @@ msgstr "Filtrage"
 msgid "Open launcher menu"
 msgstr "Ouvrir le menu du lanceur"
 
-#: ../plugins/launcher/launcher.c:1643
+#: ../plugins/launcher/launcher.c:1657
 msgid "Unnamed Item"
 msgstr "Élément sans nom"
 
-#: ../plugins/launcher/launcher.c:1821
+#: ../plugins/launcher/launcher.c:1845
 msgid "No items"
 msgstr "Aucun élément"
 
@@ -1909,23 +1909,36 @@ msgstr "Afficher les fenêtres de tous les _moniteurs"
 msgid "Show only _minimized windows"
 msgstr "Afficher uniquement les fenêtres _réduites"
 
-#: ../plugins/tasklist/tasklist-widget.c:3650
+#: ../plugins/tasklist/tasklist-widget.c:2957
+#, c-format
+msgid "Unable to start new instance of '%s'"
+msgstr "Impossible de démarrer une nouvelle instance de « %s »"
+
+#: ../plugins/tasklist/tasklist-widget.c:2961
+msgid "Error"
+msgstr "Erreur"
+
+#: ../plugins/tasklist/tasklist-widget.c:3005
+msgid "Launch New Instance..."
+msgstr "Lancer une nouvelle instance…"
+
+#: ../plugins/tasklist/tasklist-widget.c:3754
 msgid "Mi_nimize All"
 msgstr "Tout _réduire"
 
-#: ../plugins/tasklist/tasklist-widget.c:3658
+#: ../plugins/tasklist/tasklist-widget.c:3762
 msgid "Un_minimize All"
 msgstr "Tout _afficher"
 
-#: ../plugins/tasklist/tasklist-widget.c:3666
+#: ../plugins/tasklist/tasklist-widget.c:3770
 msgid "Ma_ximize All"
 msgstr "Tout _maximiser"
 
-#: ../plugins/tasklist/tasklist-widget.c:3674
+#: ../plugins/tasklist/tasklist-widget.c:3778
 msgid "_Unmaximize All"
 msgstr "Tout r_estaurer"
 
-#: ../plugins/tasklist/tasklist-widget.c:3686
+#: ../plugins/tasklist/tasklist-widget.c:3790
 msgid "_Close All"
 msgstr "Tout _fermer"
 
