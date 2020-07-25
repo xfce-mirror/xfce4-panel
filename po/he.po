@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-28 12:45+0200\n"
-"PO-Revision-Date: 2020-06-30 16:36+0000\n"
-"Last-Translator: Omer\n"
+"POT-Creation-Date: 2020-07-15 12:47+0200\n"
+"PO-Revision-Date: 2020-07-25 11:57+0000\n"
+"Last-Translator: Elishai Eliyahu <e1907@mm.st>\n"
 "Language-Team: Hebrew (http://www.transifex.com/xfce/xfce4-panel/language/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,7 +42,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panels;settings;preferences;taskbar;autohide;application menu;start;buttons;launcher;notification area;status;icons;plugins;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2934
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2936
 msgid "Panel"
 msgstr "לוח"
 
@@ -83,7 +83,7 @@ msgstr "_הסר"
 msgid "_Properties"
 msgstr "_מאפיינים"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3022
+#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3024
 msgid "_About"
 msgstr "_אודות"
 
@@ -95,20 +95,20 @@ msgstr "_הזז"
 msgid "Pane_l"
 msgstr "_לוח"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2947
+#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2949
 msgid "Add _New Items..."
 msgstr "הוסף פריטים _חדשים..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2962
+#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2964
 msgid "Panel Pr_eferences..."
 msgstr "_העדפות לוח..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2994
+#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2996
 msgid "Log _Out"
 msgstr "הת_נתק"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:207
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3013
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3015
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -245,21 +245,21 @@ msgstr "האם ברצונך להתחיל את הלוח? אם כן, וודא שש
 msgid "No running instance of %s was found"
 msgstr "אף מופע פועל של %s לא נמצא"
 
-#: ../panel/panel-application.c:214
+#: ../panel/panel-application.c:215
 msgid "Failed to launch the migration application"
 msgstr "נכשלה הפעלת תוכנת הנדידה"
 
-#: ../panel/panel-application.c:977
+#: ../panel/panel-application.c:984
 msgid "Create _Launcher"
 msgstr "צור _מפעיל"
 
-#: ../panel/panel-application.c:978
+#: ../panel/panel-application.c:985
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "פעולה זו תיצור תוסף מפעיל חדש על הלוח ותכניס את הקבצים שהושלכו כפריטים בתפריט."
 
-#: ../panel/panel-application.c:980
+#: ../panel/panel-application.c:987
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -268,21 +268,21 @@ msgstr[1] "צור מפעיל חדש מקבצי שולחן עבודה %d "
 msgstr[2] "צור מפעיל חדש מקבצי שולחן עבודה %d "
 msgstr[3] "צור מפעיל חדש מקבצי שולחן עבודה %d "
 
-#: ../panel/panel-application.c:1720
+#: ../panel/panel-application.c:1727
 msgid "Quit"
 msgstr "הפסק"
 
-#: ../panel/panel-application.c:1721
+#: ../panel/panel-application.c:1728
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "התחלת את X בלי מנהל סשן. לחיצה על יציאה תסגור את שרת ה-X."
 
-#: ../panel/panel-application.c:1722
+#: ../panel/panel-application.c:1729
 msgid "Are you sure you want to quit the panel?"
 msgstr "האם אתה בטוח כי ברצונך לצאת מהלוח?"
 
-#: ../panel/panel-application.c:1730
+#: ../panel/panel-application.c:1737
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "נכשל לבצע פקודה \"%s\""
@@ -710,7 +710,7 @@ msgstr "מנוסה"
 msgid "Expert"
 msgstr "מומחה"
 
-#: ../panel/panel-window.c:2979
+#: ../panel/panel-window.c:2981
 msgid "_Lock Panel"
 msgstr "_נעל לוח"
 
@@ -1024,7 +1024,7 @@ msgid "_OK"
 msgstr "_אישור"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2483
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2507
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "נכשל לבצע פקודה \"%s\"."
@@ -1549,11 +1549,11 @@ msgstr "סינון"
 msgid "Open launcher menu"
 msgstr "פתח תפריט משגר"
 
-#: ../plugins/launcher/launcher.c:1643
+#: ../plugins/launcher/launcher.c:1657
 msgid "Unnamed Item"
 msgstr "פריט בלי שם"
 
-#: ../plugins/launcher/launcher.c:1821
+#: ../plugins/launcher/launcher.c:1845
 msgid "No items"
 msgstr "אין פריטים"
 
@@ -1910,23 +1910,36 @@ msgstr "הצג חלונות מכל ה_מסכים"
 msgid "Show only _minimized windows"
 msgstr "הצד חלונות _ממוזערים בלבד"
 
-#: ../plugins/tasklist/tasklist-widget.c:3650
+#: ../plugins/tasklist/tasklist-widget.c:2957
+#, c-format
+msgid "Unable to start new instance of '%s'"
+msgstr "לא ניתן להתחיל מופע חדש של '%s'"
+
+#: ../plugins/tasklist/tasklist-widget.c:2961
+msgid "Error"
+msgstr "שגיאה"
+
+#: ../plugins/tasklist/tasklist-widget.c:3005
+msgid "Launch New Instance..."
+msgstr "הפעל מופע חדש..."
+
+#: ../plugins/tasklist/tasklist-widget.c:3754
 msgid "Mi_nimize All"
 msgstr "מ_זער הכל"
 
-#: ../plugins/tasklist/tasklist-widget.c:3658
+#: ../plugins/tasklist/tasklist-widget.c:3762
 msgid "Un_minimize All"
 msgstr "בטל_ את מזעור הכל"
 
-#: ../plugins/tasklist/tasklist-widget.c:3666
+#: ../plugins/tasklist/tasklist-widget.c:3770
 msgid "Ma_ximize All"
 msgstr "הג_דל הכל"
 
-#: ../plugins/tasklist/tasklist-widget.c:3674
+#: ../plugins/tasklist/tasklist-widget.c:3778
 msgid "_Unmaximize All"
 msgstr "_בטל הגדל הכל"
 
-#: ../plugins/tasklist/tasklist-widget.c:3686
+#: ../plugins/tasklist/tasklist-widget.c:3790
 msgid "_Close All"
 msgstr "_סגור הכל"
 
