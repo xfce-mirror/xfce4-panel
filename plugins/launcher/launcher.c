@@ -170,12 +170,6 @@ static void               launcher_plugin_item_exec                     (GarconM
 static void               launcher_plugin_item_exec_from_clipboard      (GarconMenuItem       *item,
                                                                          guint32               event_time,
                                                                          GdkScreen            *screen);
-static void               launcher_plugin_exec_append_quoted            (GString              *string,
-                                                                         const gchar          *unquoted);
-static gboolean           launcher_plugin_exec_parse                    (GarconMenuItem       *item,
-                                                                         GSList               *uri_list,
-                                                                         gchar              ***argv,
-                                                                         GError              **error);
 static GSList            *launcher_plugin_uri_list_extract              (GtkSelectionData     *data);
 static void               launcher_plugin_uri_list_free                 (GSList               *uri_list);
 
@@ -2478,24 +2472,37 @@ launcher_plugin_item_exec_on_screen (GarconMenuItem *item,
                                      GdkScreen      *screen,
                                      GSList         *uri_list)
 {
-  GError    *error = NULL;
-  gchar    **argv;
-  gboolean   succeed = FALSE;
+  GError      *error = NULL;
+  gchar      **argv;
+  gboolean     succeed = FALSE;
+  gchar       *command, *uri;
+  const gchar *icon;
 
   panel_return_val_if_fail (GARCON_IS_MENU_ITEM (item), FALSE);
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), FALSE);
 
+  /* get the command */
+  command = (gchar*) garcon_menu_item_get_command (item);
+  panel_return_val_if_fail (!panel_str_is_empty (command), FALSE);
+
+  /* expand the field codes */
+  icon = garcon_menu_item_get_icon_name (item);
+  uri = garcon_menu_item_get_uri (item);
+  command = xfce_expand_desktop_entry_field_codes (command, uri_list, icon,
+                                                   garcon_menu_item_get_name (item),
+                                                   uri,
+                                                   garcon_menu_item_requires_terminal (item));
+  g_free (uri);
+
   /* parse the execute command */
-  if (launcher_plugin_exec_parse (item, uri_list, &argv, &error))
+  if (g_shell_parse_argv (command, NULL, &argv, &error))
     {
       /* launch the command on the screen */
       succeed = xfce_spawn_on_screen (screen,
                                       garcon_menu_item_get_path (item),
                                       argv, NULL, G_SPAWN_SEARCH_PATH,
                                       garcon_menu_item_supports_startup_notification (item),
-                                      event_time,
-                                      garcon_menu_item_get_icon_name (item),
-                                      &error);
+                                      event_time, icon, &error);
 
       g_strfreev (argv);
     }
@@ -2503,11 +2510,11 @@ launcher_plugin_item_exec_on_screen (GarconMenuItem *item,
   if (G_UNLIKELY (!succeed))
     {
       /* show an error dialog */
-      xfce_dialog_show_error (NULL, error,
-                              _("Failed to execute command \"%s\"."),
-                              garcon_menu_item_get_command (item));
+      xfce_dialog_show_error (NULL, error, _("Failed to execute command \"%s\"."), command);
       g_error_free (error);
     }
+
+  g_free (command);
 
   return succeed;
 }
@@ -2598,123 +2605,6 @@ launcher_plugin_item_exec_from_clipboard (GarconMenuItem *item,
     }
 
   g_free (text);
-}
-
-
-
-static void
-launcher_plugin_exec_append_quoted (GString     *string,
-                                    const gchar *unquoted)
-{
-  gchar *quoted;
-
-  quoted = g_shell_quote (unquoted);
-  g_string_append (string, quoted);
-  g_free (quoted);
-}
-
-
-
-static gboolean
-launcher_plugin_exec_parse (GarconMenuItem   *item,
-                            GSList           *uri_list,
-                            gchar          ***argv,
-                            GError          **error)
-{
-  GString     *string;
-  const gchar *p;
-  gboolean     result;
-  GSList      *li;
-  gchar       *filename, *uri;
-  const gchar *command, *tmp;
-
-  panel_return_val_if_fail (GARCON_IS_MENU_ITEM (item), FALSE);
-
-  /* get the command */
-  command = garcon_menu_item_get_command (item);
-  panel_return_val_if_fail (!panel_str_is_empty (command), FALSE);
-
-  /* allocate an empty string */
-  string = g_string_sized_new (100);
-
-  /* prepend terminal command if required */
-  if (garcon_menu_item_requires_terminal (item))
-    g_string_append (string, "exo-open --launch TerminalEmulator ");
-
-  for (p = command; *p != '\0'; ++p)
-    {
-      if (G_UNLIKELY (p[0] == '%' && p[1] != '\0'))
-        {
-          switch (*++p)
-            {
-            case 'f':
-            case 'F':
-              for (li = uri_list; li != NULL; li = li->next)
-                {
-                  filename = g_filename_from_uri ((const gchar *) li->data,
-                                                  NULL, NULL);
-                  if (G_LIKELY (filename != NULL))
-                    launcher_plugin_exec_append_quoted (string, filename);
-                  g_free (filename);
-
-                  if (*p == 'f')
-                    break;
-                  if (li->next != NULL)
-                    g_string_append_c (string, ' ');
-                }
-              break;
-
-            case 'u':
-            case 'U':
-              for (li = uri_list; li != NULL; li = li->next)
-                {
-                  launcher_plugin_exec_append_quoted (string, (const gchar *)
-                                                      li->data);
-
-                  if (*p == 'u')
-                    break;
-                  if (li->next != NULL)
-                    g_string_append_c (string, ' ');
-                }
-              break;
-
-            case 'i':
-              tmp = garcon_menu_item_get_icon_name (item);
-              if (!panel_str_is_empty (tmp))
-                {
-                  g_string_append (string, "--icon ");
-                  launcher_plugin_exec_append_quoted (string, tmp);
-                }
-              break;
-
-            case 'c':
-              tmp = garcon_menu_item_get_name (item);
-              if (!panel_str_is_empty (tmp))
-                launcher_plugin_exec_append_quoted (string, tmp);
-              break;
-
-            case 'k':
-              uri = garcon_menu_item_get_uri (item);
-              if (!panel_str_is_empty (uri))
-                launcher_plugin_exec_append_quoted (string, uri);
-              g_free (uri);
-              break;
-
-            case '%':
-              g_string_append_c (string, '%');
-              break;
-            }
-        }
-      else
-        {
-          g_string_append_c (string, *p);
-        }
-    }
-
-  result = g_shell_parse_argv (string->str, NULL, argv, error);
-  g_string_free (string, TRUE);
-
-  return result;
 }
 
 
