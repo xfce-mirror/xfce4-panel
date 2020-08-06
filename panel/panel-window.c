@@ -1018,14 +1018,25 @@ panel_window_leave_notify_event (GtkWidget        *widget,
 {
   PanelWindow *window = PANEL_WINDOW (widget);
 
-   /* queue an autohide timeout if needed */
+  /* queue an autohide timeout if needed */
   if (event->detail != GDK_NOTIFY_INFERIOR
       && window->autohide_state != AUTOHIDE_DISABLED
       && window->autohide_state != AUTOHIDE_BLOCKED)
     {
       /* simulate a geometry change to check for overlapping windows with intelligent hiding */
       if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
-        panel_window_active_window_geometry_changed (window->wnck_active_window, window);
+        {
+          /* get the pointer position from the event */
+          gint pointer_x = event->x_root;
+          gint pointer_y = event->y_root;
+
+          /*  */
+          if (pointer_x < window->area.x
+              && pointer_y < window->area.y
+              && pointer_x > window->area.x + window->area.width
+              && pointer_y > window->area.y + window->area.height)
+            panel_window_active_window_geometry_changed (window->wnck_active_window, window);
+        }
       /* otherwise just hide the panel */
       else
         panel_window_autohide_queue (window, AUTOHIDE_POPDOWN_SLOW);
