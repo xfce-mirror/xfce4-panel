@@ -1018,7 +1018,7 @@ panel_window_leave_notify_event (GtkWidget        *widget,
 {
   PanelWindow *window = PANEL_WINDOW (widget);
 
-   /* queue an autohide timeout if needed */
+  /* queue an autohide timeout if needed */
   if (event->detail != GDK_NOTIFY_INFERIOR
       && window->autohide_state != AUTOHIDE_DISABLED
       && window->autohide_state != AUTOHIDE_BLOCKED)
@@ -2437,7 +2437,21 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
           if (window->autohide_state != AUTOHIDE_HIDDEN)
             {
               if (gdk_rectangle_intersect (&panel_area,  &window_area, NULL))
-                panel_window_autohide_queue (window, AUTOHIDE_HIDDEN);
+                {
+                  /* get the pointer position */
+                  GdkDisplay* display = gdk_display_get_default ();
+                  GdkSeat* seat = gdk_display_get_default_seat (display);
+                  GdkDevice* device = gdk_seat_get_pointer (seat);
+                  gint pointer_x, pointer_y;
+                  gdk_device_get_position (device, NULL, &pointer_x, &pointer_y);
+
+                  /* check if the cursor is outside the panel area before proceeding */
+                  if (pointer_x < panel_area.x
+                      || pointer_y < panel_area.y
+                      || pointer_x > panel_area.x + panel_area.width
+                      || pointer_y > panel_area.y + panel_area.height)
+                    panel_window_autohide_queue (window, AUTOHIDE_HIDDEN);
+                }
             }
           else
             {
