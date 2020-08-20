@@ -6,16 +6,37 @@ AM_CPPFLAGS = \
 
 plugindir = $(libdir)/xfce4/panel/plugins
 
+# Keep the legacy "systray" name to ease the migration for users
 plugin_LTLIBRARIES = \
 	libsystray.la
 
 libsystray_built_sources = \
-	systray-dialog_ui.h \
+	sn-watcher.h \
+	sn-watcher.c \
+	sn-dialog-ui.h \
 	systray-marshal.c \
 	systray-marshal.h
 
 libsystray_la_SOURCES = \
 	$(libsystray_built_sources) \
+	sn-config.c \
+	sn-config.h \
+	sn-backend.c \
+	sn-backend.h \
+	sn-button.c \
+	sn-button.h \
+	sn-box.c \
+	sn-box.h \
+	sn-dialog.c \
+	sn-dialog.h \
+	sn-icon-box.c \
+	sn-icon-box.h \
+	sn-item.c \
+	sn-item.h \
+	sn-plugin.c \
+	sn-plugin.h \
+	sn-util.c \
+	sn-util.h \
 	systray.c \
 	systray.h \
 	systray-box.c \
@@ -31,7 +52,8 @@ libsystray_la_CFLAGS = \
 	$(XFCONF_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
-	$(PLATFORM_CFLAGS)
+	$(PLATFORM_CFLAGS) \
+	$(DBUSMENU_CFLAGS)
 
 libsystray_la_LDFLAGS = \
 	-avoid-version \
@@ -47,7 +69,8 @@ libsystray_la_LIBADD = \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
-	$(XFCONF_LIBS)
+	$(XFCONF_LIBS) \
+	$(DBUSMENU_LIBS)
 
 libsystray_la_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
@@ -63,7 +86,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in.in=.desktop)
 
 EXTRA_DIST = \
 	$(desktop_in_files) \
-	systray-dialog.glade \
+	sn-dialog.glade \
 	systray-marshal.list
 
 DISTCLEANFILES = \
@@ -79,15 +102,22 @@ BUILT_SOURCES = \
 DISTCLEANFILES +=	\
 	$(libsystray_built_sources)
 
+sn-watcher.h:
+sn-watcher.c: sn-watcher.xml Makefile
+	$(AM_V_GEN) $(GDBUS_CODEGEN) \
+	--interface-prefix org.kde.StatusNotifierWatcher \
+	--generate-c-code sn-watcher \
+	$(srcdir)/sn-watcher.xml
+
+sn-dialog-ui.h: sn-dialog.glade
+	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=sn_dialog_ui $< >$@
+
 systray-marshal.h: systray-marshal.list Makefile
 	$(AM_V_GEN) glib-genmarshal --header --internal --prefix=_systray_marshal $< > $@
 
 systray-marshal.c: systray-marshal.list Makefile
 	$(AM_V_GEN) echo "#include \"systray-marshal.h\"" > $@ \
 	&& glib-genmarshal --prefix=_systray_marshal --body $< >> $@
-
-systray-dialog_ui.h: systray-dialog.glade
-	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=systray_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

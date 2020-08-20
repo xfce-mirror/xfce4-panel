@@ -153,6 +153,7 @@ PKG_CHECK_MODULES([GIO_UNIX], [gio-unix-2.0 >= 2.42.0])
 XDT_CHECK_PACKAGE([GMODULE], [gmodule-2.0], [2.42.0])
 XDT_CHECK_PACKAGE([CAIRO], [cairo], [1.0.0])
 XDT_CHECK_PACKAGE([LIBWNCK], [libwnck-3.0], [3.0])
+XDT_CHECK_PACKAGE([DBUSMENU], [dbusmenu-gtk3-0.4], [16.04.0])
 
 dnl **********************************
 dnl *** Optional GIO UNIX features ***

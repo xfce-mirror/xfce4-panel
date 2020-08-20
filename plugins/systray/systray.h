@@ -21,25 +21,30 @@
 
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel.h>
+#include "sn-config.h"
+#include "sn-plugin.h"
 
 G_BEGIN_DECLS
 
-typedef struct _SystrayPluginClass SystrayPluginClass;
-typedef struct _SystrayPlugin      SystrayPlugin;
+typedef struct _SnPluginClass SnPluginClass;
+typedef struct _SnPlugin      SnPlugin;
 typedef struct _SystrayChild       SystrayChild;
 typedef enum   _SystrayChildState  SystrayChildState;
 
-#define XFCE_TYPE_SYSTRAY_PLUGIN            (systray_plugin_get_type ())
-#define XFCE_SYSTRAY_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_SYSTRAY_PLUGIN, SystrayPlugin))
-#define XFCE_SYSTRAY_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_SYSTRAY_PLUGIN, SystrayPluginClass))
-#define XFCE_IS_SYSTRAY_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_SYSTRAY_PLUGIN))
-#define XFCE_IS_SYSTRAY_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_SYSTRAY_PLUGIN))
-#define XFCE_SYSTRAY_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_SYSTRAY_PLUGIN, SystrayPluginClass))
-
 GType systray_plugin_get_type      (void) G_GNUC_CONST;
 
-void  systray_plugin_register_type (XfcePanelTypeModule *type_module);
-
+void  systray_plugin_box_draw            (GtkWidget             *box,
+                                          cairo_t               *cr,
+                                          gpointer               user_data);
+void  systray_plugin_screen_changed      (GtkWidget             *widget,
+                                          GdkScreen             *previous_screen);
+void  systray_plugin_composited_changed  (GtkWidget             *widget);
+void  systray_plugin_configuration_changed  (SnConfig           *config,
+                                             SnPlugin           *plugin);
+void  systray_plugin_orientation_changed (XfcePanelPlugin       *panel_plugin,
+                                          GtkOrientation         orientation);
+gboolean systray_plugin_size_changed     (XfcePanelPlugin       *panel_plugin,
+                                          gint                   size);
 G_END_DECLS
 
 #endif /* !__SYSTRAY_H__ */

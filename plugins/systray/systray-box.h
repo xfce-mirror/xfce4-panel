@@ -43,14 +43,14 @@ GtkWidget *systray_box_new             (void) G_GNUC_MALLOC;
 void       systray_box_set_orientation (SystrayBox          *box,
                                         GtkOrientation       orientation);
 
-void       systray_box_set_size_max    (SystrayBox          *box,
-                                        gint                 size_max);
-
-gint       systray_box_get_size_max    (SystrayBox          *box);
+void       systray_box_set_dimensions  (SystrayBox          *box,
+                                        gint                 icon_size,
+                                        gint                 n_rows,
+                                        gint                 row_size,
+                                        gint                 padding);
 
 void       systray_box_set_size_alloc  (SystrayBox          *box,
-                                        gint                 size_alloc,
-                                        gint                 nrows);
+                                        gint                 size_alloc);
 
 void       systray_box_set_show_hidden (SystrayBox          *box,
                                         gboolean             show_hidden);
@@ -64,5 +64,10 @@ gboolean   systray_box_get_squared     (SystrayBox          *box);
 
 void       systray_box_update          (SystrayBox          *box,
                                         GSList              *names_ordered);
+
+gboolean   systray_box_has_hidden_items (SystrayBox         *box);
+
+void       systray_box_set_single_row  (SystrayBox          *box,
+                                        gboolean             single_row);
 
 #endif /* !__SYSTRAY_BOX_H__ */
