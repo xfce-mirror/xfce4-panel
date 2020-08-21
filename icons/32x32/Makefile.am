@@ -11,8 +11,7 @@ icons_DATA = \
 	org.xfce.panel.showdesktop.png	\
 	org.xfce.panel.statustray.png	\
 	org.xfce.panel.tasklist.png	\
-	org.xfce.panel.windowmenu.png	\
-	xfce4-panel-menu.png
+	org.xfce.panel.windowmenu.png
 
 EXTRA_DIST = \
 	$(icons_DATA)
