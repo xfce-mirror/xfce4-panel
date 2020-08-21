@@ -552,7 +552,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       G_CALLBACK (pager_plugin_configure_workspace_settings), NULL);
   gtk_widget_show (mi);
 
-  image = gtk_image_new_from_icon_name ("xfce4-workspaces", GTK_ICON_SIZE_MENU);
+  image = gtk_image_new_from_icon_name ("org.xfce.panel.pager", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
