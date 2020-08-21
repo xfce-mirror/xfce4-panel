@@ -129,7 +129,7 @@ show_desktop_plugin_init (ShowDesktopPlugin *plugin)
   g_signal_connect (G_OBJECT (plugin->button), "drag_leave",
       G_CALLBACK (show_desktop_plugin_drag_leave), plugin);
 
-  plugin->icon = gtk_image_new_from_icon_name ("user-desktop", GTK_ICON_SIZE_MENU);
+  plugin->icon = gtk_image_new_from_icon_name ("org.xfce.panel.showdesktop", GTK_ICON_SIZE_MENU);
   gtk_container_add (GTK_CONTAINER (button), plugin->icon);
   gtk_widget_show (plugin->icon);
 }
