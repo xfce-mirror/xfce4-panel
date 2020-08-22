@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-01 00:30+0200\n"
-"PO-Revision-Date: 2020-05-06 20:20+0000\n"
+"POT-Creation-Date: 2020-08-21 00:46+0200\n"
+"PO-Revision-Date: 2020-08-22 22:02+0000\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/xfce/xfce4-panel/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -36,7 +36,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "werkbalken;panelen;werkbalk;paneel;instellingen;voorkeuren;taakbalk;menu;start;knoppen;starter;meldvak;status;invoegsels;pictogrammen;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2934
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2936
 msgid "Panel"
 msgstr "Werkbalk"
 
@@ -65,7 +65,7 @@ msgid "_Cancel"
 msgstr "_Afbreken"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1112
-#: ../libxfce4panel/xfce-panel-plugin.c:1307
+#: ../libxfce4panel/xfce-panel-plugin.c:1287
 #: ../panel/panel-plugin-external.c:443
 #: ../panel/panel-preferences-dialog.c:961
 #: ../panel/panel-preferences-dialog.c:1327
@@ -73,50 +73,49 @@ msgstr "_Afbreken"
 msgid "_Remove"
 msgstr "_Verwijderen"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1253
+#: ../libxfce4panel/xfce-panel-plugin.c:1237
 msgid "_Properties"
 msgstr "Eigenscha_ppen"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:3022
+#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3024
 msgid "_About"
 msgstr "_Over"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1283
+#: ../libxfce4panel/xfce-panel-plugin.c:1267
 msgid "_Move"
 msgstr "_Verplaatsen"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1328
+#: ../libxfce4panel/xfce-panel-plugin.c:1308
 msgid "Pane_l"
 msgstr "_Werkbalk"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2947
+#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2949
 msgid "Add _New Items..."
 msgstr "_Nieuwe elementen toevoegen..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2962
+#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2964
 msgid "Panel Pr_eferences..."
 msgstr "Werkbalkvoork_euren..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2994
+#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2996
 msgid "Log _Out"
 msgstr "Af_melden"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:207
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3013
-#: ../plugins/actions/actions-dialog.glade.h:4
+#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:207
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3015
+#: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 #: ../plugins/pager/pager-dialog.glade.h:4
 #: ../plugins/separator/separator-dialog.glade.h:6
-#: ../plugins/systray/systray-dialog.glade.h:3
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "_Help"
 msgstr "_Hulp"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1408
+#: ../libxfce4panel/xfce-panel-plugin.c:1388
 msgid "About"
 msgstr "Over"
 
@@ -239,42 +238,42 @@ msgstr "Wilt u de werkbalk starten? Zo ja, zorg er dan voor dat u de sessie opsl
 msgid "No running instance of %s was found"
 msgstr "Geen actieve functie van %s gevonden"
 
-#: ../panel/panel-application.c:214
+#: ../panel/panel-application.c:215
 msgid "Failed to launch the migration application"
 msgstr "Kon de migratietoepassing niet openen"
 
-#: ../panel/panel-application.c:977
+#: ../panel/panel-application.c:984
 msgid "Create _Launcher"
 msgstr "Maak starter"
 
-#: ../panel/panel-application.c:978
+#: ../panel/panel-application.c:985
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Dit zal een nieuw starter-invoegsel toevoegen aan de werkbalk en voegt de geplaatste bestanden in als menu-onderdelen."
 
-#: ../panel/panel-application.c:980
+#: ../panel/panel-application.c:987
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Maak een nieuwe starter van %d bureaubladbestand"
 msgstr[1] "Maak een nieuwe starter van %d bureaubladbestanden"
 
-#: ../panel/panel-application.c:1720
+#: ../panel/panel-application.c:1727
 msgid "Quit"
 msgstr "Sluiten"
 
-#: ../panel/panel-application.c:1721
+#: ../panel/panel-application.c:1728
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "U hebt X (de grafische omgeving) gestart zonder sessiebeheerder. Wanneer u op sluiten klikt, dan zal dat de grafische omgeving afsluiten."
 
-#: ../panel/panel-application.c:1722
+#: ../panel/panel-application.c:1729
 msgid "Are you sure you want to quit the panel?"
 msgstr "Weet u zeker dat u de werkbalk wil afsluiten?"
 
-#: ../panel/panel-application.c:1730
+#: ../panel/panel-application.c:1737
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Kon de opdracht '%s' niet uitvoeren"
@@ -343,14 +342,13 @@ msgstr "Voeg nieuwe invoegsels toe aan de werkbalk"
 #: ../panel/panel-item-dialog.c:211
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../panel/panel-tic-tac-toe.c:125
-#: ../plugins/actions/actions-dialog.glade.h:3
+#: ../plugins/actions/actions-dialog.glade.h:7
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:7
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:5
 #: ../plugins/separator/separator-dialog.glade.h:5
-#: ../plugins/systray/systray-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "_Close"
@@ -647,13 +645,11 @@ msgstr "_Uiterlijk"
 
 #: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:21
-#: ../plugins/systray/systray-dialog.glade.h:7
 msgid "Move currently selected item up by one row"
 msgstr "Verplaats het thans geselecteerde element één rij omhoog"
 
 #: ../panel/panel-preferences-dialog.glade.h:58
 #: ../plugins/launcher/launcher-dialog.glade.h:22
-#: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Move currently selected item down by one row"
 msgstr "Verplaats het thans geselecteerde element één rij omlaag"
 
@@ -702,7 +698,7 @@ msgstr "Ervaren"
 msgid "Expert"
 msgstr "Deskundige"
 
-#: ../panel/panel-window.c:2979
+#: ../panel/panel-window.c:2981
 msgid "_Lock Panel"
 msgstr "Werkbalk vergrendelen"
 
@@ -727,184 +723,204 @@ msgstr "Werkbalkconfiguratie is bijgewerkt."
 msgid "Action Buttons"
 msgstr "Actieknoppen"
 
-#: ../plugins/actions/actions-dialog.glade.h:2
+#: ../plugins/actions/actions-dialog.glade.h:2 ../plugins/actions/actions.c:40
 msgid "Session Menu"
 msgstr "Sessiemenu"
 
+#: ../plugins/actions/actions-dialog.glade.h:3
+msgid "Full Name"
+msgstr "Volledige naam"
+
+#: ../plugins/actions/actions-dialog.glade.h:4
+msgid "Username"
+msgstr "Gebruikersnaam"
+
 #: ../plugins/actions/actions-dialog.glade.h:5
-msgid "Invert buttons _orientation"
-msgstr "Draai positie van knoppen om"
+msgid "User ID"
+msgstr "Gebruikers-ID"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
-msgid "_Show confirmation dialog"
-msgstr "Toon bevestigingsdialoog"
+msgid "Custom"
+msgstr "Aangepast"
 
-#: ../plugins/actions/actions-dialog.glade.h:7
-msgid ""
-"Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Toon een bevestigingsdialoog met een aftelling van 30 seconden voor sommige acties."
-
-#: ../plugins/actions/actions-dialog.glade.h:8
+#: ../plugins/actions/actions-dialog.glade.h:9
 msgid "Appeara_nce:"
 msgstr "Uiterlijk"
 
-#: ../plugins/actions/actions-dialog.glade.h:9
+#: ../plugins/actions/actions-dialog.glade.h:10
+msgid "Title:"
+msgstr "Titel:"
+
+#: ../plugins/actions/actions-dialog.glade.h:11
+msgid "Custo_m title:"
+msgstr "Aangepaste titel:"
+
+#: ../plugins/actions/actions-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "General"
 msgstr "Algemeen"
 
-#: ../plugins/actions/actions-dialog.glade.h:10
+#: ../plugins/actions/actions-dialog.glade.h:13
 msgid "Visible"
 msgstr "Zichtbaar"
 
-#: ../plugins/actions/actions-dialog.glade.h:11
+#: ../plugins/actions/actions-dialog.glade.h:14
 msgid "Action"
 msgstr "Actie"
 
-#: ../plugins/actions/actions-dialog.glade.h:12
+#: ../plugins/actions/actions-dialog.glade.h:15
+msgid "_Show confirmation dialog"
+msgstr "Toon bevestigingsdialoog"
+
+#: ../plugins/actions/actions-dialog.glade.h:16
+msgid ""
+"Show a confirmation dialog with a 30 second timeout for some of the actions."
+msgstr "Toon een bevestigingsdialoog met een aftelling van 30 seconden voor sommige acties."
+
+#: ../plugins/actions/actions-dialog.glade.h:17
 msgid "_Actions"
 msgstr "Acties"
 
-#: ../plugins/actions/actions.c:153
+#: ../plugins/actions/actions.c:165
 msgid "Log Out"
 msgstr "Afmelden"
 
-#: ../plugins/actions/actions.c:154
+#: ../plugins/actions/actions.c:166
 msgid "_Log Out"
 msgstr "Af_melden"
 
-#: ../plugins/actions/actions.c:155
+#: ../plugins/actions/actions.c:167
 msgid "Are you sure you want to log out?"
 msgstr "Weet u zeker dat u zich wil afmelden?"
 
-#: ../plugins/actions/actions.c:156
+#: ../plugins/actions/actions.c:168
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Afmelden vindt plaats over %d seconden."
 
-#: ../plugins/actions/actions.c:162
+#: ../plugins/actions/actions.c:174
 msgid "Log Out..."
 msgstr "Afmelden..."
 
-#: ../plugins/actions/actions.c:163
+#: ../plugins/actions/actions.c:175
 msgid "Log _Out..."
 msgstr "Af_melden..."
 
-#: ../plugins/actions/actions.c:170
+#: ../plugins/actions/actions.c:182
 msgid "Switch User"
 msgstr "Gebruiker wisselen"
 
-#: ../plugins/actions/actions.c:171
+#: ../plugins/actions/actions.c:183
 msgid "_Switch User"
 msgstr "Gebruiker _wisselen"
 
-#: ../plugins/actions/actions.c:178
+#: ../plugins/actions/actions.c:190
 msgid "Lock Screen"
 msgstr "Scherm vergrendelen"
 
-#: ../plugins/actions/actions.c:179
+#: ../plugins/actions/actions.c:191
 msgid "Loc_k Screen"
 msgstr "Scherm _vergrendelen"
 
-#: ../plugins/actions/actions.c:186
+#: ../plugins/actions/actions.c:198
 msgid "Hibernate"
 msgstr "Slaapstand"
 
-#: ../plugins/actions/actions.c:187
+#: ../plugins/actions/actions.c:199
 msgid "_Hibernate"
 msgstr "_Slaapstand"
 
-#: ../plugins/actions/actions.c:188
+#: ../plugins/actions/actions.c:200
 msgid "Do you want to suspend to disk?"
 msgstr "Wilt u de slaapstand laten ingaan (wegschrijven op schijf)?"
 
-#: ../plugins/actions/actions.c:189
+#: ../plugins/actions/actions.c:201
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Slaapstand gaat in over %d seconden."
 
-#: ../plugins/actions/actions.c:195
+#: ../plugins/actions/actions.c:207
 msgid "Hybrid Sleep"
 msgstr "Hybride slaapstand"
 
-#: ../plugins/actions/actions.c:196
+#: ../plugins/actions/actions.c:208
 msgid "_Hybrid Sleep"
 msgstr "_Hybride slaapstand"
 
-#: ../plugins/actions/actions.c:197
+#: ../plugins/actions/actions.c:209
 msgid "Do you want to hibernate and suspend the system?"
 msgstr "Wilt u het systeem zowel in slaapstand als in pauzestand brengen?"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:210
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr "Over %d seconden wordt de computer zowel in slaapstand als in pauzestand gebracht."
 
-#: ../plugins/actions/actions.c:204
+#: ../plugins/actions/actions.c:216
 msgid "Suspend"
 msgstr "Pauzestand"
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:217
 msgid "Sus_pend"
 msgstr "_Pauzestand"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:218
 msgid "Do you want to suspend to RAM?"
 msgstr "Wilt u de pauzestand laten ingaan (wegschrijven naar RAM)?"
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:219
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Pauzestand gaat in over %d seconden."
 
-#: ../plugins/actions/actions.c:213
+#: ../plugins/actions/actions.c:225
 msgid "Restart"
 msgstr "Herstarten"
 
-#: ../plugins/actions/actions.c:214
+#: ../plugins/actions/actions.c:226
 msgid "_Restart"
 msgstr "_Herstarten"
 
-#: ../plugins/actions/actions.c:215
+#: ../plugins/actions/actions.c:227
 msgid "Are you sure you want to restart?"
 msgstr "Weet u zeker dat u wilt herstarten?"
 
-#: ../plugins/actions/actions.c:216
+#: ../plugins/actions/actions.c:228
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Herstart vindt plaats over %d seconden."
 
-#: ../plugins/actions/actions.c:222
+#: ../plugins/actions/actions.c:234
 msgid "Shut Down"
 msgstr "Afsluiten"
 
-#: ../plugins/actions/actions.c:223
+#: ../plugins/actions/actions.c:235
 msgid "Shut _Down"
 msgstr "_Afsluiten"
 
-#: ../plugins/actions/actions.c:224
+#: ../plugins/actions/actions.c:236
 msgid "Are you sure you want to shut down?"
 msgstr "Weet u zeker dat u wilt afsluiten?"
 
-#: ../plugins/actions/actions.c:225
+#: ../plugins/actions/actions.c:237
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "De computer zal worden uitgezet over %d seconden."
 
-#: ../plugins/actions/actions.c:625
+#: ../plugins/actions/actions.c:685
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Scheidingslijn"
 
-#: ../plugins/actions/actions.c:1050
+#: ../plugins/actions/actions.c:1110
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Kon actie '%s' niet uitvoeren"
 
-#: ../plugins/actions/actions.c:1225
-msgid "John Doe"
-msgstr "Jantje"
+#: ../plugins/actions/actions.c:1279
+msgid "Little Mouse"
+msgstr "Kleine muis"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
@@ -950,7 +966,6 @@ msgstr "Kies deze optie om de generieke naam in het menu weer te geven, bijvoorb
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
-#: ../plugins/systray/systray-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Appearance"
@@ -995,8 +1010,9 @@ msgstr "Kies een pictogram"
 msgid "_OK"
 msgstr "_Oké"
 
+#. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2403
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2513
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Kon opdracht '%s' niet uitvoeren."
@@ -1517,15 +1533,15 @@ msgstr "_Bestandpatroon:"
 msgid "Filtering"
 msgstr "Filteren"
 
-#: ../plugins/launcher/launcher.c:405
+#: ../plugins/launcher/launcher.c:409
 msgid "Open launcher menu"
 msgstr "Open startermenu"
 
-#: ../plugins/launcher/launcher.c:1622
+#: ../plugins/launcher/launcher.c:1651
 msgid "Unnamed Item"
 msgstr "Naamloos element"
 
-#: ../plugins/launcher/launcher.c:1800
+#: ../plugins/launcher/launcher.c:1839
 msgid "No items"
 msgstr "Geen elementen"
 
@@ -1736,58 +1752,143 @@ msgstr "Bureaublad tonen"
 msgid "Hide all windows and show the desktop"
 msgstr "Verberg alle vensters en toon het bureaublad"
 
-#: ../plugins/systray/systray.c:405
+#: ../plugins/systray/sn-dialog.c:649
+msgid "Clear"
+msgstr "Wissen"
+
+#: ../plugins/systray/sn-dialog.c:650
+msgid "Are you sure you want to clear the list of known items?"
+msgstr "Weet u zeker dat u de lijst van bekende elementen wilt wissen?"
+
+#: ../plugins/systray/sn-dialog.glade.h:1
+msgid "Status Tray Items"
+msgstr "Statusvak-elementen"
+
+#: ../plugins/systray/sn-dialog.glade.h:2
+msgid "C_lear Known Items"
+msgstr "Bekende elementen _wissen"
+
+#: ../plugins/systray/sn-dialog.glade.h:3
+msgid "Resets the list of items and their visibility settings"
+msgstr "Zet de lijst van elementen en hun zichtbaarheidsinstellingen terug op de standaard"
+
+#: ../plugins/systray/sn-dialog.glade.h:4
+msgid "_Fixed icon size (pixels):"
+msgstr "_Vaste pictogramgrootte (beeldpunten):"
+
+#: ../plugins/systray/sn-dialog.glade.h:5
+msgid "Adjust size _automatically"
+msgstr "Grootte _automatisch bijstellen"
+
+#: ../plugins/systray/sn-dialog.glade.h:6
+msgid "Icons"
+msgstr "Pictogrammen"
+
+#: ../plugins/systray/sn-dialog.glade.h:7
+msgid "Arrange _items in a single row"
+msgstr "Elementen rangschikken in een enkele rij"
+
+#: ../plugins/systray/sn-dialog.glade.h:8
+msgid "If enabled, ensure that the items are laid out in a single row"
+msgstr "Wanneer ingeschakeld zorgt dit ervoor dat de elementen worden getoond in een enkele rij"
+
+#: ../plugins/systray/sn-dialog.glade.h:9
+msgid "_Hide items by default"
+msgstr "Elementen standaard verbergen"
+
+#: ../plugins/systray/sn-dialog.glade.h:10
+msgid "When enabled, all new items will be marked as \"Hidden\""
+msgstr "Wanneer ingeschakeld zullen alle nieuwe elementen worden gemarkeerd als 'verborgen\"."
+
+#: ../plugins/systray/sn-dialog.glade.h:11
+msgid "_Square items"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:12
+msgid "Item buttons will take a square when it's possible"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:13
+msgid "Behavior"
+msgstr "Gedrag"
+
+#: ../plugins/systray/sn-dialog.glade.h:14
+msgid "Item"
+msgstr "Element"
+
+#: ../plugins/systray/sn-dialog.glade.h:15
+msgid "Hidden"
+msgstr "Verborgen"
+
+#: ../plugins/systray/sn-dialog.glade.h:16
+msgid "Move the selected item one row up"
+msgstr "Verplaats het element één rij omhoog"
+
+#: ../plugins/systray/sn-dialog.glade.h:17
+msgid "Move the selected item one row down"
+msgstr "Verplaats het gekozen element één rij omlaag"
+
+#: ../plugins/systray/sn-dialog.glade.h:18
+msgid "Known Items"
+msgstr "Bekende elementen"
+
+#: ../plugins/systray/sn-dialog.glade.h:19
+msgid "_Menu is primary action"
+msgstr "_Menu is primaire actie"
+
+#: ../plugins/systray/sn-dialog.glade.h:20
+msgid "Left click will always display the menu for item"
+msgstr "Linksklik zal altijd het menu tonen voor een element"
+
+#: ../plugins/systray/sn-dialog.glade.h:21
+msgid "_Request symbolic icons"
+msgstr "Symbolische pictogrammen opvragen"
+
+#: ../plugins/systray/sn-dialog.glade.h:22
+msgid "Load symbolic icons if available"
+msgstr "Symbolische pictogrammen laden indien beschikbaar"
+
+#: ../plugins/systray/sn-dialog.glade.h:23
+msgid "Features"
+msgstr "Functies"
+
+#: ../plugins/systray/sn-dialog.glade.h:24
+msgid "Status Notifiers"
+msgstr "Statusmelders"
+
+#: ../plugins/systray/sn-dialog.glade.h:25
+msgid "Systray Icons"
+msgstr "Systeemvakpictogrammen"
+
+#: ../plugins/systray/systray.c:146
 msgid "Unable to start the notification area"
 msgstr "Kon het meldingengebied niet starten"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:905
+#: ../plugins/systray/systray.c:413
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Waarschijnlijk heeft een ander onderdeel de functie van meldingengebied overgenomen. Dit gebied zal niet worden gebruikt."
 
-#: ../plugins/systray/systray.c:907
+#: ../plugins/systray/systray.c:415
 msgid "The notification area lost selection"
 msgstr "Het meldingengebied is de selectie kwijt"
-
-#: ../plugins/systray/systray.c:1172
-msgid "Clear"
-msgstr "Wissen"
-
-#: ../plugins/systray/systray.c:1173
-msgid "Are you sure you want to clear the list of known applications?"
-msgstr "Weet u zeker dat u de lijst met bekende toepassingen wilt wissen?"
-
-#: ../plugins/systray/systray-dialog.glade.h:1
-#: ../plugins/systray/systray.desktop.in.in.h:1
-msgid "Notification Area"
-msgstr "Meldingengebied"
-
-#: ../plugins/systray/systray-dialog.glade.h:4
-msgid "_Maximum icon size (px):"
-msgstr "_Maximale pictogramgrootte (px):"
-
-#: ../plugins/systray/systray-dialog.glade.h:5
-msgid "Sq_uare icons"
-msgstr "Vierkante pictogrammen"
-
-#: ../plugins/systray/systray-dialog.glade.h:9
-msgid "C_lear Known Applications"
-msgstr "Bekende toepassingen _wissen"
-
-#: ../plugins/systray/systray-dialog.glade.h:10
-msgid "Known Applications"
-msgstr "Bekende toepassingen"
 
 #: ../plugins/systray/systray-manager.c:432
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Het is niet gelukt om beheerderselectie te verkrijgen voor scherm %d"
 
+#: ../plugins/systray/systray.desktop.in.in.h:1
+msgid "Status Tray Plugin"
+msgstr "Invoegsel voor statusvak"
+
 #: ../plugins/systray/systray.desktop.in.in.h:2
-msgid "Area where notification icons appear"
-msgstr "Gebied waar meldingpictogrammen verschijnen"
+msgid ""
+"Provides status notifier items (application indicators) and legacy systray "
+"items"
+msgstr "Levert statusmeldingselementen (toepassingsindicatoren) en ouderwetse systeemvakelementen"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
@@ -1882,23 +1983,36 @@ msgstr "Toon vensters van alle _monitors"
 msgid "Show only _minimized windows"
 msgstr "Toon alleen ge_minimaliseerde vensters"
 
-#: ../plugins/tasklist/tasklist-widget.c:3654
+#: ../plugins/tasklist/tasklist-widget.c:2957
+#, c-format
+msgid "Unable to start new instance of '%s'"
+msgstr "Kan geen nieuwe instantie starten van '%s'"
+
+#: ../plugins/tasklist/tasklist-widget.c:2961
+msgid "Error"
+msgstr "Fout"
+
+#: ../plugins/tasklist/tasklist-widget.c:3005
+msgid "Launch New Instance..."
+msgstr "Nieuwe instantie starten..."
+
+#: ../plugins/tasklist/tasklist-widget.c:3754
 msgid "Mi_nimize All"
 msgstr "Alles mi_nimaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3662
+#: ../plugins/tasklist/tasklist-widget.c:3762
 msgid "Un_minimize All"
 msgstr "Alles _ONTminimaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3670
+#: ../plugins/tasklist/tasklist-widget.c:3770
 msgid "Ma_ximize All"
 msgstr "Alles ma_ximaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3678
+#: ../plugins/tasklist/tasklist-widget.c:3778
 msgid "_Unmaximize All"
 msgstr "Alles ONT_maximaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3690
+#: ../plugins/tasklist/tasklist-widget.c:3790
 msgid "_Close All"
 msgstr "Alles _sluiten"
 
