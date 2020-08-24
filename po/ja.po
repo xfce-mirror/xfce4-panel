@@ -5,14 +5,14 @@
 # Translators:
 # Masato HASHIMOTO <cabezon.hashimoto@gmail.com>, 2017
 # Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 2016
-# Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 2016-2019
+# Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 2016-2020
 # UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2019-2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-15 12:47+0200\n"
-"PO-Revision-Date: 2020-07-17 15:10+0000\n"
+"POT-Creation-Date: 2020-08-21 00:46+0200\n"
+"PO-Revision-Date: 2020-08-24 22:00+0000\n"
 "Last-Translator: UTUMI Hirosi <utuhiro78@yahoo.co.jp>\n"
 "Language-Team: Japanese (http://www.transifex.com/xfce/xfce4-panel/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -111,7 +111,6 @@ msgstr "ログアウト(_O)"
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 #: ../plugins/pager/pager-dialog.glade.h:4
 #: ../plugins/separator/separator-dialog.glade.h:6
-#: ../plugins/systray/systray-dialog.glade.h:3
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "_Help"
@@ -350,7 +349,6 @@ msgstr "パネルに新しいプラグインを追加する"
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:5
 #: ../plugins/separator/separator-dialog.glade.h:5
-#: ../plugins/systray/systray-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "_Close"
@@ -647,13 +645,11 @@ msgstr "外観(_N)"
 
 #: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:21
-#: ../plugins/systray/systray-dialog.glade.h:7
 msgid "Move currently selected item up by one row"
 msgstr "現在選択されているアイテムを一つ上へ移動します"
 
 #: ../panel/panel-preferences-dialog.glade.h:58
 #: ../plugins/launcher/launcher-dialog.glade.h:22
-#: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Move currently selected item down by one row"
 msgstr "現在選択されているアイテムを一つ下へ移動します"
 
@@ -970,7 +966,6 @@ msgstr "アプリケーションを一般名でメニューに表示する場合
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
-#: ../plugins/systray/systray-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Appearance"
@@ -1015,8 +1010,9 @@ msgstr "アイコンを選択してください"
 msgid "_OK"
 msgstr "OK(_O)"
 
+#. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2507
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2513
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "コマンド \"%s\" の実行に失敗しました"
@@ -1537,15 +1533,15 @@ msgstr "ファイルパターン(_F):"
 msgid "Filtering"
 msgstr "フィルター"
 
-#: ../plugins/launcher/launcher.c:415
+#: ../plugins/launcher/launcher.c:409
 msgid "Open launcher menu"
 msgstr "ランチャーメニューを開く"
 
-#: ../plugins/launcher/launcher.c:1657
+#: ../plugins/launcher/launcher.c:1651
 msgid "Unnamed Item"
 msgstr "未設定"
 
-#: ../plugins/launcher/launcher.c:1845
+#: ../plugins/launcher/launcher.c:1839
 msgid "No items"
 msgstr "アイテムなし"
 
@@ -1756,58 +1752,143 @@ msgstr "デスクトップ表示"
 msgid "Hide all windows and show the desktop"
 msgstr "すべてのウィンドウを隠してデスクトップを表示します。"
 
-#: ../plugins/systray/systray.c:405
+#: ../plugins/systray/sn-dialog.c:649
+msgid "Clear"
+msgstr "クリア"
+
+#: ../plugins/systray/sn-dialog.c:650
+msgid "Are you sure you want to clear the list of known items?"
+msgstr "既知のアイテムリストをクリアしてもよろしいですか?"
+
+#: ../plugins/systray/sn-dialog.glade.h:1
+msgid "Status Tray Items"
+msgstr "ステータストレイアイテム"
+
+#: ../plugins/systray/sn-dialog.glade.h:2
+msgid "C_lear Known Items"
+msgstr "既知のアイテムのクリア(_L)"
+
+#: ../plugins/systray/sn-dialog.glade.h:3
+msgid "Resets the list of items and their visibility settings"
+msgstr "アイテムリストとその表示設定をリセットする"
+
+#: ../plugins/systray/sn-dialog.glade.h:4
+msgid "_Fixed icon size (pixels):"
+msgstr "固定されたアイコンサイズ (ピクセル)(_F):"
+
+#: ../plugins/systray/sn-dialog.glade.h:5
+msgid "Adjust size _automatically"
+msgstr "自動的にサイズを調整する(_A)"
+
+#: ../plugins/systray/sn-dialog.glade.h:6
+msgid "Icons"
+msgstr "アイコン"
+
+#: ../plugins/systray/sn-dialog.glade.h:7
+msgid "Arrange _items in a single row"
+msgstr "アイテムを1行に配置する(_I)"
+
+#: ../plugins/systray/sn-dialog.glade.h:8
+msgid "If enabled, ensure that the items are laid out in a single row"
+msgstr "有効にすると、アイテムが単一の行に配置されます"
+
+#: ../plugins/systray/sn-dialog.glade.h:9
+msgid "_Hide items by default"
+msgstr "デフォルトでアイテムを隠す(_H)"
+
+#: ../plugins/systray/sn-dialog.glade.h:10
+msgid "When enabled, all new items will be marked as \"Hidden\""
+msgstr "有効にすると、すべての新しいアイテムが「非表示」としてマークされます"
+
+#: ../plugins/systray/sn-dialog.glade.h:11
+msgid "_Square items"
+msgstr "アイテムを四角にする(_S)"
+
+#: ../plugins/systray/sn-dialog.glade.h:12
+msgid "Item buttons will take a square when it's possible"
+msgstr "可能な場合、アイテムボタンを四角にします"
+
+#: ../plugins/systray/sn-dialog.glade.h:13
+msgid "Behavior"
+msgstr "振る舞い"
+
+#: ../plugins/systray/sn-dialog.glade.h:14
+msgid "Item"
+msgstr "アイテム"
+
+#: ../plugins/systray/sn-dialog.glade.h:15
+msgid "Hidden"
+msgstr "表示しない"
+
+#: ../plugins/systray/sn-dialog.glade.h:16
+msgid "Move the selected item one row up"
+msgstr "選択したアイテムを1行上に移動する"
+
+#: ../plugins/systray/sn-dialog.glade.h:17
+msgid "Move the selected item one row down"
+msgstr "選択したアイテムを1行下に移動する"
+
+#: ../plugins/systray/sn-dialog.glade.h:18
+msgid "Known Items"
+msgstr "既知のアイテム"
+
+#: ../plugins/systray/sn-dialog.glade.h:19
+msgid "_Menu is primary action"
+msgstr "メニューを最初のアクションにする(_M)"
+
+#: ../plugins/systray/sn-dialog.glade.h:20
+msgid "Left click will always display the menu for item"
+msgstr "左クリックすると、常にアイテムのメニューを表示する"
+
+#: ../plugins/systray/sn-dialog.glade.h:21
+msgid "_Request symbolic icons"
+msgstr "シンボリックアイコンを要求する(_R)"
+
+#: ../plugins/systray/sn-dialog.glade.h:22
+msgid "Load symbolic icons if available"
+msgstr "可能な場合はシンボリックアイコンを読み込む"
+
+#: ../plugins/systray/sn-dialog.glade.h:23
+msgid "Features"
+msgstr "機能"
+
+#: ../plugins/systray/sn-dialog.glade.h:24
+msgid "Status Notifiers"
+msgstr "ステータス通知"
+
+#: ../plugins/systray/sn-dialog.glade.h:25
+msgid "Systray Icons"
+msgstr "システムトレイアイコン"
+
+#: ../plugins/systray/systray.c:146
 msgid "Unable to start the notification area"
 msgstr "通知エリアが起動できません"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:905
+#: ../plugins/systray/systray.c:413
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "おそらく他のウィジェットが通知エリアの機能を占有しています。この通知エリアは使用されません。"
 
-#: ../plugins/systray/systray.c:907
+#: ../plugins/systray/systray.c:415
 msgid "The notification area lost selection"
 msgstr "通知エリアはセレクションを失いました"
-
-#: ../plugins/systray/systray.c:1172
-msgid "Clear"
-msgstr "クリア"
-
-#: ../plugins/systray/systray.c:1173
-msgid "Are you sure you want to clear the list of known applications?"
-msgstr "既知のアプリケーションのリストをクリアしますか？"
-
-#: ../plugins/systray/systray-dialog.glade.h:1
-#: ../plugins/systray/systray.desktop.in.in.h:1
-msgid "Notification Area"
-msgstr "通知エリア"
-
-#: ../plugins/systray/systray-dialog.glade.h:4
-msgid "_Maximum icon size (px):"
-msgstr "最大アイコンサイズ(_M) (px):"
-
-#: ../plugins/systray/systray-dialog.glade.h:5
-msgid "Sq_uare icons"
-msgstr "四角いアイコン(_U)"
-
-#: ../plugins/systray/systray-dialog.glade.h:9
-msgid "C_lear Known Applications"
-msgstr "既知のアプリケーションのクリア(_L)"
-
-#: ../plugins/systray/systray-dialog.glade.h:10
-msgid "Known Applications"
-msgstr "隠すアプリケーション"
 
 #: ../plugins/systray/systray-manager.c:432
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "スクリーン %d の管理セレクションの取得に失敗しました"
 
+#: ../plugins/systray/systray.desktop.in.in.h:1
+msgid "Status Tray Plugin"
+msgstr "ステータストレイプラグイン"
+
 #: ../plugins/systray/systray.desktop.in.in.h:2
-msgid "Area where notification icons appear"
-msgstr "通知アイコンが表示される領域です。"
+msgid ""
+"Provides status notifier items (application indicators) and legacy systray "
+"items"
+msgstr "ステータス通知アイテム（アプリケーションインジケーター）とレガシーシステムトレイアイテムを提供します"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
