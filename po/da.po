@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-28 12:45+0200\n"
-"PO-Revision-Date: 2020-05-29 18:01+0000\n"
+"POT-Creation-Date: 2020-08-21 00:46+0200\n"
+"PO-Revision-Date: 2020-08-26 08:42+0000\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/xfce/xfce4-panel/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -39,7 +39,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "paneler;indstillinger;præferencer;opgavelinje;skjul automatisk;programmenu;start;knapper;starter;underretningsområde;status;ikoner;plugins;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2934
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2936
 msgid "Panel"
 msgstr "Panel"
 
@@ -80,7 +80,7 @@ msgstr "F_jern"
 msgid "_Properties"
 msgstr "_Egenskaber"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3022
+#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3024
 msgid "_About"
 msgstr "_Om"
 
@@ -92,20 +92,20 @@ msgstr "_Flyt"
 msgid "Pane_l"
 msgstr "Pane_l"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2947
+#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2949
 msgid "Add _New Items..."
 msgstr "Tilføj _nye elementer ..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2962
+#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2964
 msgid "Panel Pr_eferences..."
 msgstr "Panel_præferencer ..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2994
+#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2996
 msgid "Log _Out"
 msgstr "_Log ud"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:207
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3013
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3015
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -113,7 +113,6 @@ msgstr "_Log ud"
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 #: ../plugins/pager/pager-dialog.glade.h:4
 #: ../plugins/separator/separator-dialog.glade.h:6
-#: ../plugins/systray/systray-dialog.glade.h:3
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "_Help"
@@ -242,42 +241,42 @@ msgstr "Vil du starte panelet? Hvis du gør det skal du huske at gemme sessionen
 msgid "No running instance of %s was found"
 msgstr "Ingen kørende instans af %s blev fundet"
 
-#: ../panel/panel-application.c:214
+#: ../panel/panel-application.c:215
 msgid "Failed to launch the migration application"
 msgstr "Kunne ikke starte overførselsprogrammet"
 
-#: ../panel/panel-application.c:977
+#: ../panel/panel-application.c:984
 msgid "Create _Launcher"
 msgstr "Opret op_starter"
 
-#: ../panel/panel-application.c:978
+#: ../panel/panel-application.c:985
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Dette vil oprette et plugin for opstart på panelet og indsætter dine flyttede filer som menuelementer."
+msgstr "Dette vil oprette et starterplugin på panelet og indsætter de flyttede filer som menuelementer."
 
-#: ../panel/panel-application.c:980
+#: ../panel/panel-application.c:987
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
-msgstr[0] "Opret en ny opstarter fra %d skrivebordsfilen"
+msgstr[0] "Opret en ny starter fra %d skrivebordsfilen"
 msgstr[1] "Opret en ny starter fra %d skrivebordsfilerne"
 
-#: ../panel/panel-application.c:1720
+#: ../panel/panel-application.c:1727
 msgid "Quit"
 msgstr "Afslut"
 
-#: ../panel/panel-application.c:1721
+#: ../panel/panel-application.c:1728
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Hvis du har startet X uden sessionshåndteringen vil dette lukke X-serveren ned."
 
-#: ../panel/panel-application.c:1722
+#: ../panel/panel-application.c:1729
 msgid "Are you sure you want to quit the panel?"
 msgstr "Er du sikker på, at du vil afslutte panelet?"
 
-#: ../panel/panel-application.c:1730
+#: ../panel/panel-application.c:1737
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Kunne ikke køre kommandoen \"%s\""
@@ -353,7 +352,6 @@ msgstr "Tilføj nye plugins til panelet"
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:5
 #: ../plugins/separator/separator-dialog.glade.h:5
-#: ../plugins/systray/systray-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "_Close"
@@ -544,7 +542,7 @@ msgstr "Ud_data:"
 #. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:29
 msgid "<b>Measurements</b>"
-msgstr "<b>Målinger</b>"
+msgstr "<b>Dimensioner</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Row _size (pixels):"
@@ -650,13 +648,11 @@ msgstr "_Udseende"
 
 #: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:21
-#: ../plugins/systray/systray-dialog.glade.h:7
 msgid "Move currently selected item up by one row"
 msgstr "Flyt det valgte element en række op"
 
 #: ../panel/panel-preferences-dialog.glade.h:58
 #: ../plugins/launcher/launcher-dialog.glade.h:22
-#: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Move currently selected item down by one row"
 msgstr "Flyt det valgte element en række ned"
 
@@ -705,7 +701,7 @@ msgstr "Øvet"
 msgid "Expert"
 msgstr "Ekspert"
 
-#: ../panel/panel-window.c:2979
+#: ../panel/panel-window.c:2981
 msgid "_Lock Panel"
 msgstr "_Lås panel"
 
@@ -973,7 +969,6 @@ msgstr "Vælg denne indstilling for at vise det generiske navn i menuen, eksempe
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
-#: ../plugins/systray/systray-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Appearance"
@@ -1018,8 +1013,9 @@ msgstr "Vælg et ikon"
 msgid "_OK"
 msgstr "_OK"
 
+#. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2483
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2513
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Kunne ikke køre kommandoen \"%s\"."
@@ -1540,15 +1536,15 @@ msgstr "_Filmønster:"
 msgid "Filtering"
 msgstr "Filtrering"
 
-#: ../plugins/launcher/launcher.c:415
+#: ../plugins/launcher/launcher.c:409
 msgid "Open launcher menu"
-msgstr "Åbn menu til opstart"
+msgstr "Åbn startermenu"
 
-#: ../plugins/launcher/launcher.c:1643
+#: ../plugins/launcher/launcher.c:1651
 msgid "Unnamed Item"
 msgstr "Ikke navngivet element"
 
-#: ../plugins/launcher/launcher.c:1821
+#: ../plugins/launcher/launcher.c:1839
 msgid "No items"
 msgstr "Ingen elementer"
 
@@ -1759,58 +1755,143 @@ msgstr "Vis skrivebord"
 msgid "Hide all windows and show the desktop"
 msgstr "Skjul alle vinduer og vis skrivebordet"
 
-#: ../plugins/systray/systray.c:405
+#: ../plugins/systray/sn-dialog.c:649
+msgid "Clear"
+msgstr "Ryd"
+
+#: ../plugins/systray/sn-dialog.c:650
+msgid "Are you sure you want to clear the list of known items?"
+msgstr "Er du sikker på, at du vil rydde listen over kendte elementer?"
+
+#: ../plugins/systray/sn-dialog.glade.h:1
+msgid "Status Tray Items"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:2
+msgid "C_lear Known Items"
+msgstr "_Ryd kendte elementer"
+
+#: ../plugins/systray/sn-dialog.glade.h:3
+msgid "Resets the list of items and their visibility settings"
+msgstr "Nulstiller listen over elementer og deres synlighedsindstillinger"
+
+#: ../plugins/systray/sn-dialog.glade.h:4
+msgid "_Fixed icon size (pixels):"
+msgstr "_Fast ikonstørrelse (pixels):"
+
+#: ../plugins/systray/sn-dialog.glade.h:5
+msgid "Adjust size _automatically"
+msgstr "Juster størrelse _automatisk"
+
+#: ../plugins/systray/sn-dialog.glade.h:6
+msgid "Icons"
+msgstr "Ikoner"
+
+#: ../plugins/systray/sn-dialog.glade.h:7
+msgid "Arrange _items in a single row"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:8
+msgid "If enabled, ensure that the items are laid out in a single row"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:9
+msgid "_Hide items by default"
+msgstr "_Skjul elementer som standard"
+
+#: ../plugins/systray/sn-dialog.glade.h:10
+msgid "When enabled, all new items will be marked as \"Hidden\""
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:11
+msgid "_Square items"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:12
+msgid "Item buttons will take a square when it's possible"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:13
+msgid "Behavior"
+msgstr "Opførsel"
+
+#: ../plugins/systray/sn-dialog.glade.h:14
+msgid "Item"
+msgstr "Element"
+
+#: ../plugins/systray/sn-dialog.glade.h:15
+msgid "Hidden"
+msgstr "Skjulte"
+
+#: ../plugins/systray/sn-dialog.glade.h:16
+msgid "Move the selected item one row up"
+msgstr "Flyt det valgte element en række op"
+
+#: ../plugins/systray/sn-dialog.glade.h:17
+msgid "Move the selected item one row down"
+msgstr "Flyt det valgte element en række ned"
+
+#: ../plugins/systray/sn-dialog.glade.h:18
+msgid "Known Items"
+msgstr "Kendte elementer"
+
+#: ../plugins/systray/sn-dialog.glade.h:19
+msgid "_Menu is primary action"
+msgstr "_Menu er primær handling"
+
+#: ../plugins/systray/sn-dialog.glade.h:20
+msgid "Left click will always display the menu for item"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:21
+msgid "_Request symbolic icons"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:22
+msgid "Load symbolic icons if available"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:23
+msgid "Features"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:24
+msgid "Status Notifiers"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:25
+msgid "Systray Icons"
+msgstr ""
+
+#: ../plugins/systray/systray.c:146
 msgid "Unable to start the notification area"
 msgstr "Kunne ikke starte underretningsområdet"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:905
+#: ../plugins/systray/systray.c:413
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Mest sandsynligt en anden widget har overtaget funktionen af et underretningsområde. Dette område vil være ubenyttet."
 
-#: ../plugins/systray/systray.c:907
+#: ../plugins/systray/systray.c:415
 msgid "The notification area lost selection"
 msgstr "Underretningsområdet mistede valget"
-
-#: ../plugins/systray/systray.c:1172
-msgid "Clear"
-msgstr "Ryd"
-
-#: ../plugins/systray/systray.c:1173
-msgid "Are you sure you want to clear the list of known applications?"
-msgstr "Er du sikker på, at du vil slette listen over kendte programmer?"
-
-#: ../plugins/systray/systray-dialog.glade.h:1
-#: ../plugins/systray/systray.desktop.in.in.h:1
-msgid "Notification Area"
-msgstr "Underretningsområde"
-
-#: ../plugins/systray/systray-dialog.glade.h:4
-msgid "_Maximum icon size (px):"
-msgstr "_Maksimum ikonstørrelse (px):"
-
-#: ../plugins/systray/systray-dialog.glade.h:5
-msgid "Sq_uare icons"
-msgstr "_Firkantede ikoner"
-
-#: ../plugins/systray/systray-dialog.glade.h:9
-msgid "C_lear Known Applications"
-msgstr "R_yd kendte programmer"
-
-#: ../plugins/systray/systray-dialog.glade.h:10
-msgid "Known Applications"
-msgstr "Kendte programmer"
 
 #: ../plugins/systray/systray-manager.c:432
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Kunne ikke allokere håndteringsvalg for skærm %d"
 
+#: ../plugins/systray/systray.desktop.in.in.h:1
+msgid "Status Tray Plugin"
+msgstr ""
+
 #: ../plugins/systray/systray.desktop.in.in.h:2
-msgid "Area where notification icons appear"
-msgstr "Område hvor underretningsikoner vises"
+msgid ""
+"Provides status notifier items (application indicators) and legacy systray "
+"items"
+msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
@@ -1905,23 +1986,36 @@ msgstr "Vis vinduer fra alle _skærme"
 msgid "Show only _minimized windows"
 msgstr "Vis kun _minimerede vinduer"
 
-#: ../plugins/tasklist/tasklist-widget.c:3650
+#: ../plugins/tasklist/tasklist-widget.c:2957
+#, c-format
+msgid "Unable to start new instance of '%s'"
+msgstr "Kan ikke starte ny instans af '%s'"
+
+#: ../plugins/tasklist/tasklist-widget.c:2961
+msgid "Error"
+msgstr "Fejl"
+
+#: ../plugins/tasklist/tasklist-widget.c:3005
+msgid "Launch New Instance..."
+msgstr "Start ny instans..."
+
+#: ../plugins/tasklist/tasklist-widget.c:3754
 msgid "Mi_nimize All"
 msgstr "Mi_nimer alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3658
+#: ../plugins/tasklist/tasklist-widget.c:3762
 msgid "Un_minimize All"
 msgstr "Gen_dan alle minimerede"
 
-#: ../plugins/tasklist/tasklist-widget.c:3666
+#: ../plugins/tasklist/tasklist-widget.c:3770
 msgid "Ma_ximize All"
 msgstr "Maksi_mer alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3674
+#: ../plugins/tasklist/tasklist-widget.c:3778
 msgid "_Unmaximize All"
 msgstr "_Gendan alle maksimerede"
 
-#: ../plugins/tasklist/tasklist-widget.c:3686
+#: ../plugins/tasklist/tasklist-widget.c:3790
 msgid "_Close All"
 msgstr "_Luk alle"
 
