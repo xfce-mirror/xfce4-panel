@@ -1865,10 +1865,10 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
     }
   else
     {
-      /* set missing image icon */
+      /* set fallback icon if there is no application icon (yet) */
       panel_return_if_fail (GTK_IS_WIDGET (plugin->child));
       gtk_image_set_from_icon_name (GTK_IMAGE (plugin->child),
-                                    "image-missing", icon_size);
+                                    "org.xfce.panel.launcher", icon_size);
     }
 }
 
