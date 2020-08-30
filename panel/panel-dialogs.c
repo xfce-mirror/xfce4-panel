@@ -87,7 +87,7 @@ panel_dialogs_show_about (void)
   gtk_about_dialog_set_translator_credits (GTK_ABOUT_DIALOG (about_dialog), _("translator-credits"));
   gtk_about_dialog_set_version (GTK_ABOUT_DIALOG (about_dialog), PACKAGE_VERSION);
   gtk_about_dialog_set_website (GTK_ABOUT_DIALOG (about_dialog), "http://www.xfce.org/");
-  gtk_about_dialog_set_logo_icon_name (GTK_ABOUT_DIALOG (about_dialog), PACKAGE_NAME);
+  gtk_about_dialog_set_logo_icon_name (GTK_ABOUT_DIALOG (about_dialog), "org.xfce.panel");
   gtk_window_set_destroy_with_parent (GTK_WINDOW (about_dialog), TRUE);
   g_signal_connect (G_OBJECT (about_dialog), "activate-link",
                     G_CALLBACK (panel_dialogs_show_about_email_hook), NULL);

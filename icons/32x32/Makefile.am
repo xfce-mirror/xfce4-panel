@@ -7,6 +7,7 @@ icons_DATA = \
 	org.xfce.panel.clock.png	\
 	org.xfce.panel.launcher.png	\
 	org.xfce.panel.pager.png	\
+	org.xfce.panel.png		\
 	org.xfce.panel.separator.png	\
 	org.xfce.panel.showdesktop.png	\
 	org.xfce.panel.statustray.png	\
