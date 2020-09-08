@@ -21,8 +21,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-15 12:47+0200\n"
-"PO-Revision-Date: 2020-07-20 21:14+0000\n"
+"POT-Creation-Date: 2020-08-21 00:46+0200\n"
+"PO-Revision-Date: 2020-09-08 09:14+0000\n"
 "Last-Translator: Demiray Muhterem <mdemiray@msn.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/xfce/xfce4-panel/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -121,7 +121,6 @@ msgstr "Çıkış _Yap"
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 #: ../plugins/pager/pager-dialog.glade.h:4
 #: ../plugins/separator/separator-dialog.glade.h:6
-#: ../plugins/systray/systray-dialog.glade.h:3
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "_Help"
@@ -361,7 +360,6 @@ msgstr "Panele yeni eklentiler ekle"
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:5
 #: ../plugins/separator/separator-dialog.glade.h:5
-#: ../plugins/systray/systray-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "_Close"
@@ -658,13 +656,11 @@ msgstr "Görünüm"
 
 #: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:21
-#: ../plugins/systray/systray-dialog.glade.h:7
 msgid "Move currently selected item up by one row"
 msgstr "Seçili ögeyi bir satır yukarı taşı"
 
 #: ../panel/panel-preferences-dialog.glade.h:58
 #: ../plugins/launcher/launcher-dialog.glade.h:22
-#: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Move currently selected item down by one row"
 msgstr "Seçili ögeyi bir satır aşağı doğru hareket ettir"
 
@@ -981,7 +977,6 @@ msgstr "Menüde uygulamanın genel adını görmek için bu seçeneği seçin, m
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
-#: ../plugins/systray/systray-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Appearance"
@@ -1026,8 +1021,9 @@ msgstr "Bir Simge Seç"
 msgid "_OK"
 msgstr "_Tamam"
 
+#. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2507
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2513
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" komutu çalıştırılamadı."
@@ -1548,15 +1544,15 @@ msgstr "_Dosya Örneği:"
 msgid "Filtering"
 msgstr "Süzgeçle"
 
-#: ../plugins/launcher/launcher.c:415
+#: ../plugins/launcher/launcher.c:409
 msgid "Open launcher menu"
 msgstr "Başlatıcı menüsünü aç"
 
-#: ../plugins/launcher/launcher.c:1657
+#: ../plugins/launcher/launcher.c:1651
 msgid "Unnamed Item"
 msgstr "İsimsiz Öge"
 
-#: ../plugins/launcher/launcher.c:1845
+#: ../plugins/launcher/launcher.c:1839
 msgid "No items"
 msgstr "Öge yok"
 
@@ -1767,58 +1763,143 @@ msgstr "Masaüstünü Göster"
 msgid "Hide all windows and show the desktop"
 msgstr "Tüm pencereleri gizle ve masaüstünü göster"
 
-#: ../plugins/systray/systray.c:405
+#: ../plugins/systray/sn-dialog.c:649
+msgid "Clear"
+msgstr "Temizle"
+
+#: ../plugins/systray/sn-dialog.c:650
+msgid "Are you sure you want to clear the list of known items?"
+msgstr "Bilinen öğeler listesini temizlemek istediğinizden emin misiniz?"
+
+#: ../plugins/systray/sn-dialog.glade.h:1
+msgid "Status Tray Items"
+msgstr "Durum Tepsisi Öğeleri"
+
+#: ../plugins/systray/sn-dialog.glade.h:2
+msgid "C_lear Known Items"
+msgstr "Bilinen Öğeleri T_emizle"
+
+#: ../plugins/systray/sn-dialog.glade.h:3
+msgid "Resets the list of items and their visibility settings"
+msgstr "Öğe listesini ve görünürlük ayarlarını sıfırlar"
+
+#: ../plugins/systray/sn-dialog.glade.h:4
+msgid "_Fixed icon size (pixels):"
+msgstr "_Sabit simge boyutu (piksel):"
+
+#: ../plugins/systray/sn-dialog.glade.h:5
+msgid "Adjust size _automatically"
+msgstr "Boyutu _otomatik olarak ayarla"
+
+#: ../plugins/systray/sn-dialog.glade.h:6
+msgid "Icons"
+msgstr "Simgeler"
+
+#: ../plugins/systray/sn-dialog.glade.h:7
+msgid "Arrange _items in a single row"
+msgstr "_Öğeleri tek bir satırda düzenleyin"
+
+#: ../plugins/systray/sn-dialog.glade.h:8
+msgid "If enabled, ensure that the items are laid out in a single row"
+msgstr "Etkinleştirilirse, öğelerin tek bir satıra yerleştirildiğinden emin olun"
+
+#: ../plugins/systray/sn-dialog.glade.h:9
+msgid "_Hide items by default"
+msgstr "_Öğeleri varsayılan olarak  gizle"
+
+#: ../plugins/systray/sn-dialog.glade.h:10
+msgid "When enabled, all new items will be marked as \"Hidden\""
+msgstr "Etkinleştirildiğinde, tüm yeni öğeler \"Gizli\" olarak işaretlenecektir."
+
+#: ../plugins/systray/sn-dialog.glade.h:11
+msgid "_Square items"
+msgstr "_Kare öğeler"
+
+#: ../plugins/systray/sn-dialog.glade.h:12
+msgid "Item buttons will take a square when it's possible"
+msgstr "Mümkün olduğunda öğe düğmeleri bir kare alacak"
+
+#: ../plugins/systray/sn-dialog.glade.h:13
+msgid "Behavior"
+msgstr "Davranış"
+
+#: ../plugins/systray/sn-dialog.glade.h:14
+msgid "Item"
+msgstr "Öğe"
+
+#: ../plugins/systray/sn-dialog.glade.h:15
+msgid "Hidden"
+msgstr "Gizli"
+
+#: ../plugins/systray/sn-dialog.glade.h:16
+msgid "Move the selected item one row up"
+msgstr "Seçili öğeyi bir satır yukarı taşı"
+
+#: ../plugins/systray/sn-dialog.glade.h:17
+msgid "Move the selected item one row down"
+msgstr "Seçili öğeyi bir satır aşağı taşı"
+
+#: ../plugins/systray/sn-dialog.glade.h:18
+msgid "Known Items"
+msgstr "Bilinen Öğeler"
+
+#: ../plugins/systray/sn-dialog.glade.h:19
+msgid "_Menu is primary action"
+msgstr "_Menü birincil eylemdir"
+
+#: ../plugins/systray/sn-dialog.glade.h:20
+msgid "Left click will always display the menu for item"
+msgstr "Sol tıklama her zaman öğe için menüyü görüntüler"
+
+#: ../plugins/systray/sn-dialog.glade.h:21
+msgid "_Request symbolic icons"
+msgstr "_Sembolik simgeler isteyin"
+
+#: ../plugins/systray/sn-dialog.glade.h:22
+msgid "Load symbolic icons if available"
+msgstr "Varsa sembolik simgeler yükleyin"
+
+#: ../plugins/systray/sn-dialog.glade.h:23
+msgid "Features"
+msgstr "Özellikler"
+
+#: ../plugins/systray/sn-dialog.glade.h:24
+msgid "Status Notifiers"
+msgstr "Durum Bildiriciler"
+
+#: ../plugins/systray/sn-dialog.glade.h:25
+msgid "Systray Icons"
+msgstr "Systray simgeleri"
+
+#: ../plugins/systray/systray.c:146
 msgid "Unable to start the notification area"
 msgstr "Bildirim alanı başlatılamadı"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:905
+#: ../plugins/systray/systray.c:413
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Bildirim alanının işlevini muhtemelen başka bir bileşen alacak. Bu alan kullanılmayacak."
 
-#: ../plugins/systray/systray.c:907
+#: ../plugins/systray/systray.c:415
 msgid "The notification area lost selection"
 msgstr "Bildirim alanı seçimi bulamıyor"
-
-#: ../plugins/systray/systray.c:1172
-msgid "Clear"
-msgstr "Temizle"
-
-#: ../plugins/systray/systray.c:1173
-msgid "Are you sure you want to clear the list of known applications?"
-msgstr "Bilinen uygulama listesini temizlemek istediğinizden emin misiniz?"
-
-#: ../plugins/systray/systray-dialog.glade.h:1
-#: ../plugins/systray/systray.desktop.in.in.h:1
-msgid "Notification Area"
-msgstr "Bildirim Alanı"
-
-#: ../plugins/systray/systray-dialog.glade.h:4
-msgid "_Maximum icon size (px):"
-msgstr "_Azami simge boyutu (pk):"
-
-#: ../plugins/systray/systray-dialog.glade.h:5
-msgid "Sq_uare icons"
-msgstr "Ka_re simgeler"
-
-#: ../plugins/systray/systray-dialog.glade.h:9
-msgid "C_lear Known Applications"
-msgstr "Bilinen Uygulamaları _Temizle"
-
-#: ../plugins/systray/systray-dialog.glade.h:10
-msgid "Known Applications"
-msgstr "Bilinen Uygulamalar"
 
 #: ../plugins/systray/systray-manager.c:432
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "%d ekranı için yönetim seçimi elde edilemedi"
 
+#: ../plugins/systray/systray.desktop.in.in.h:1
+msgid "Status Tray Plugin"
+msgstr "Durum Tepsisi Eklentisi"
+
 #: ../plugins/systray/systray.desktop.in.in.h:2
-msgid "Area where notification icons appear"
-msgstr "Bildirim simgelerinin göründüğü alan"
+msgid ""
+"Provides status notifier items (application indicators) and legacy systray "
+"items"
+msgstr "Durum bildirim öğeleri (uygulama göstergeleri) ve eski sistem tepsisi öğeleri sağlar"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
