@@ -1,7 +1,7 @@
 [![License](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://gitlab.xfce.org/xfce/xfce4-panel/COPYING)
 
-xfce4-panel
-====================
+# xfce4-panel
+
 
 The Xfce Panel is part of the Xfce Desktop Environment and features 
 application launchers, panel menus, a workspace switcher and more. Many 
@@ -27,6 +27,7 @@ See [NEWS](https://gitlab.xfce.org/xfce/xfce4-panel/-/blob/master/NEWS) for deta
 [xfce4-panel archive](https://archive.xfce.org/src/xfce/xfce4-panel)
     or
 [xfce4-panel tags](https://gitlab.xfce.org/xfce/xfce4-panel/-/tags)
+
 ### Installation
 
 From source: 
