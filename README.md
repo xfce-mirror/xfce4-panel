@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://gitlab.xfce.org/xfce/xfce4-panel/COPYING)
+[![License](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://gitlab.xfce.org/xfce/xfce4-panel/-/blob/master/COPYING)
 
 # xfce4-panel
 
@@ -12,7 +12,7 @@ style properties and hidden Xfconf settings.
 
 ### Homepage
 
-[xfce4-panel documentation](https://docs.xfce.org/xfce/xfce4-panel/start)
+[Xfce4-panel documentation](https://docs.xfce.org/xfce/xfce4-panel/start)
 
 ### Changelog
 
@@ -20,13 +20,13 @@ See [NEWS](https://gitlab.xfce.org/xfce/xfce4-panel/-/blob/master/NEWS) for deta
 
 ### Source Code Repository
 
-[xfce4-panel source code](https://gitlab.xfce.org/xfce/xfce4-panel)
+[Xfce4-panel source code](https://gitlab.xfce.org/xfce/xfce4-panel)
 
-### Download A Release Tarball
+### Download a Release Tarball
 
-[xfce4-panel archive](https://archive.xfce.org/src/xfce/xfce4-panel)
+[Xfce4-panel archive](https://archive.xfce.org/src/xfce/xfce4-panel)
     or
-[xfce4-panel tags](https://gitlab.xfce.org/xfce/xfce4-panel/-/tags)
+[Xfce4-panel tags](https://gitlab.xfce.org/xfce/xfce4-panel/-/tags)
 
 ### Installation
 
