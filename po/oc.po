@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-01 00:30+0200\n"
-"PO-Revision-Date: 2020-04-13 09:18+0000\n"
+"POT-Creation-Date: 2020-08-21 00:46+0200\n"
+"PO-Revision-Date: 2020-09-14 14:54+0000\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Occitan (post 1500) (http://www.transifex.com/xfce/xfce4-panel/language/oc/)\n"
 "MIME-Version: 1.0\n"
@@ -36,7 +36,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr ""
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2934
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2936
 msgid "Panel"
 msgstr "Tablèu de bòrd"
 
@@ -65,7 +65,7 @@ msgid "_Cancel"
 msgstr "_Anullar"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1112
-#: ../libxfce4panel/xfce-panel-plugin.c:1307
+#: ../libxfce4panel/xfce-panel-plugin.c:1287
 #: ../panel/panel-plugin-external.c:443
 #: ../panel/panel-preferences-dialog.c:961
 #: ../panel/panel-preferences-dialog.c:1327
@@ -73,50 +73,49 @@ msgstr "_Anullar"
 msgid "_Remove"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1253
+#: ../libxfce4panel/xfce-panel-plugin.c:1237
 msgid "_Properties"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1268 ../panel/panel-window.c:3022
+#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3024
 msgid "_About"
 msgstr "A _prepaus"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1283
+#: ../libxfce4panel/xfce-panel-plugin.c:1267
 msgid "_Move"
 msgstr "_Desplaçar"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1328
+#: ../libxfce4panel/xfce-panel-plugin.c:1308
 msgid "Pane_l"
 msgstr "Tablèu de _bòrd"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1337 ../panel/panel-window.c:2947
+#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2949
 msgid "Add _New Items..."
 msgstr "Apondre d'elements _novèls ..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1352 ../panel/panel-window.c:2962
+#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2964
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferéncias del tablèu de bòrd..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-window.c:2994
+#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2996
 msgid "Log _Out"
 msgstr "Des_connexion"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1393 ../panel/panel-item-dialog.c:207
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3013
-#: ../plugins/actions/actions-dialog.glade.h:4
+#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:207
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3015
+#: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 #: ../plugins/pager/pager-dialog.glade.h:4
 #: ../plugins/separator/separator-dialog.glade.h:6
-#: ../plugins/systray/systray-dialog.glade.h:3
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "_Help"
 msgstr "_Ajuda"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1408
+#: ../libxfce4panel/xfce-panel-plugin.c:1388
 msgid "About"
 msgstr "A prepaus"
 
@@ -166,7 +165,7 @@ msgstr "Afichar las informacions sus la version e quitar"
 #: ../panel/main.c:207
 #, c-format
 msgid "Name %s lost on the message dbus, exiting."
-msgstr ""
+msgstr "Nom %s perdut sul messatge dbus, sortida."
 
 #. parse context options
 #: ../panel/main.c:268
@@ -239,42 +238,42 @@ msgstr "Volètz aviar lo tablèu de bòrd ? Se òc, atencion que la sesilha siá
 msgid "No running instance of %s was found"
 msgstr "Cap d'instància de %s es pas estada trobada"
 
-#: ../panel/panel-application.c:214
+#: ../panel/panel-application.c:215
 msgid "Failed to launch the migration application"
 msgstr "Impossible d'aviar la procedura de migracion"
 
-#: ../panel/panel-application.c:977
+#: ../panel/panel-application.c:984
 msgid "Create _Launcher"
 msgstr "Crear un _aviador"
 
-#: ../panel/panel-application.c:978
+#: ../panel/panel-application.c:985
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Aquò va crear un empeuton d'aviada novèl sul tablèu de bòrd e inserirà los fichièrs depausats coma elements del menú."
 
-#: ../panel/panel-application.c:980
+#: ../panel/panel-application.c:987
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Crear un aviador a partir de %d fichièr de burèu"
 msgstr[1] "Crear un aviador a partir de %d fichièrs de burèu"
 
-#: ../panel/panel-application.c:1720
+#: ../panel/panel-application.c:1727
 msgid "Quit"
 msgstr "Quitar"
 
-#: ../panel/panel-application.c:1721
+#: ../panel/panel-application.c:1728
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Avètz aviat lo servidor X sens gestionari de sesilha. En clicant sus Quitar tamparà lo servidor X."
 
-#: ../panel/panel-application.c:1722
+#: ../panel/panel-application.c:1729
 msgid "Are you sure you want to quit the panel?"
 msgstr "Sètz segur que volètz quitar lo tablèu de bòrd ?"
 
-#: ../panel/panel-application.c:1730
+#: ../panel/panel-application.c:1737
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Impossible d'executar la comanda « %s »"
@@ -343,14 +342,13 @@ msgstr "Apondre d'empeutons novèls al tablèu de bòrd"
 #: ../panel/panel-item-dialog.c:211
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../panel/panel-tic-tac-toe.c:125
-#: ../plugins/actions/actions-dialog.glade.h:3
+#: ../plugins/actions/actions-dialog.glade.h:7
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:7
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:5
 #: ../plugins/separator/separator-dialog.glade.h:5
-#: ../plugins/systray/systray-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "_Close"
@@ -647,13 +645,11 @@ msgstr "Aparé_ncia"
 
 #: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:21
-#: ../plugins/systray/systray-dialog.glade.h:7
 msgid "Move currently selected item up by one row"
 msgstr "Desplaçar l'element actualament seleccionat d'una linha cap amont"
 
 #: ../panel/panel-preferences-dialog.glade.h:58
 #: ../plugins/launcher/launcher-dialog.glade.h:22
-#: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Move currently selected item down by one row"
 msgstr "Desplaçar l'element actualament seleccionat d'una linha cap aval"
 
@@ -702,7 +698,7 @@ msgstr "Confirmat"
 msgid "Expert"
 msgstr "Expèrt"
 
-#: ../panel/panel-window.c:2979
+#: ../panel/panel-window.c:2981
 msgid "_Lock Panel"
 msgstr "_Varrolhar lo tablèu de bòrd"
 
@@ -727,184 +723,204 @@ msgstr "La configuracion del tablèu de bòrd es estada mesa a jorn."
 msgid "Action Buttons"
 msgstr "Botons d'accion"
 
-#: ../plugins/actions/actions-dialog.glade.h:2
+#: ../plugins/actions/actions-dialog.glade.h:2 ../plugins/actions/actions.c:40
 msgid "Session Menu"
 msgstr "Menú sesilha"
 
+#: ../plugins/actions/actions-dialog.glade.h:3
+msgid "Full Name"
+msgstr ""
+
+#: ../plugins/actions/actions-dialog.glade.h:4
+msgid "Username"
+msgstr ""
+
 #: ../plugins/actions/actions-dialog.glade.h:5
-msgid "Invert buttons _orientation"
-msgstr "Inversar l'_orientacion dels botons"
+msgid "User ID"
+msgstr ""
 
 #: ../plugins/actions/actions-dialog.glade.h:6
-msgid "_Show confirmation dialog"
-msgstr "_Afichar una bóstia de dialòg de confirmacion"
+msgid "Custom"
+msgstr ""
 
-#: ../plugins/actions/actions-dialog.glade.h:7
-msgid ""
-"Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Afichar una bóstia de dialòg de confirmacion pendent 30 segondas per d'unas accions."
-
-#: ../plugins/actions/actions-dialog.glade.h:8
+#: ../plugins/actions/actions-dialog.glade.h:9
 msgid "Appeara_nce:"
 msgstr "Apar_éncia :"
 
-#: ../plugins/actions/actions-dialog.glade.h:9
+#: ../plugins/actions/actions-dialog.glade.h:10
+msgid "Title:"
+msgstr ""
+
+#: ../plugins/actions/actions-dialog.glade.h:11
+msgid "Custo_m title:"
+msgstr ""
+
+#: ../plugins/actions/actions-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "General"
 msgstr "General"
 
-#: ../plugins/actions/actions-dialog.glade.h:10
+#: ../plugins/actions/actions-dialog.glade.h:13
 msgid "Visible"
 msgstr "Visible"
 
-#: ../plugins/actions/actions-dialog.glade.h:11
+#: ../plugins/actions/actions-dialog.glade.h:14
 msgid "Action"
 msgstr "Accion"
 
-#: ../plugins/actions/actions-dialog.glade.h:12
+#: ../plugins/actions/actions-dialog.glade.h:15
+msgid "_Show confirmation dialog"
+msgstr "_Afichar una bóstia de dialòg de confirmacion"
+
+#: ../plugins/actions/actions-dialog.glade.h:16
+msgid ""
+"Show a confirmation dialog with a 30 second timeout for some of the actions."
+msgstr "Afichar una bóstia de dialòg de confirmacion pendent 30 segondas per d'unas accions."
+
+#: ../plugins/actions/actions-dialog.glade.h:17
 msgid "_Actions"
 msgstr "_Accions"
 
-#: ../plugins/actions/actions.c:153
+#: ../plugins/actions/actions.c:165
 msgid "Log Out"
 msgstr "Desconnexion"
 
-#: ../plugins/actions/actions.c:154
+#: ../plugins/actions/actions.c:166
 msgid "_Log Out"
 msgstr "_Desconnexion"
 
-#: ../plugins/actions/actions.c:155
+#: ../plugins/actions/actions.c:167
 msgid "Are you sure you want to log out?"
 msgstr "Sètz segur que vos volètz desconnectar ?"
 
-#: ../plugins/actions/actions.c:156
+#: ../plugins/actions/actions.c:168
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Desconnexion dins %d segondas."
 
-#: ../plugins/actions/actions.c:162
+#: ../plugins/actions/actions.c:174
 msgid "Log Out..."
 msgstr "Desconnexion…"
 
-#: ../plugins/actions/actions.c:163
+#: ../plugins/actions/actions.c:175
 msgid "Log _Out..."
 msgstr "_Desconnexion…"
 
-#: ../plugins/actions/actions.c:170
+#: ../plugins/actions/actions.c:182
 msgid "Switch User"
 msgstr "Cambiar d'utilizaire"
 
-#: ../plugins/actions/actions.c:171
+#: ../plugins/actions/actions.c:183
 msgid "_Switch User"
 msgstr "_Cambiar d'utilizaire"
 
-#: ../plugins/actions/actions.c:178
+#: ../plugins/actions/actions.c:190
 msgid "Lock Screen"
 msgstr "Varrolhar l'ecran"
 
-#: ../plugins/actions/actions.c:179
+#: ../plugins/actions/actions.c:191
 msgid "Loc_k Screen"
 msgstr "_Varrolhar l'ecran"
 
-#: ../plugins/actions/actions.c:186
+#: ../plugins/actions/actions.c:198
 msgid "Hibernate"
 msgstr "Mesa en velha perlongada"
 
-#: ../plugins/actions/actions.c:187
+#: ../plugins/actions/actions.c:199
 msgid "_Hibernate"
 msgstr "_Mesa en velha perlongada"
 
-#: ../plugins/actions/actions.c:188
+#: ../plugins/actions/actions.c:200
 msgid "Do you want to suspend to disk?"
 msgstr "Volètz metre en velha sul disc ?"
 
-#: ../plugins/actions/actions.c:189
+#: ../plugins/actions/actions.c:201
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Mesa en velha perlongada dins %d segondas."
 
-#: ../plugins/actions/actions.c:195
+#: ../plugins/actions/actions.c:207
 msgid "Hybrid Sleep"
 msgstr ""
 
-#: ../plugins/actions/actions.c:196
+#: ../plugins/actions/actions.c:208
 msgid "_Hybrid Sleep"
 msgstr ""
 
-#: ../plugins/actions/actions.c:197
+#: ../plugins/actions/actions.c:209
 msgid "Do you want to hibernate and suspend the system?"
 msgstr ""
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:210
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr ""
 
-#: ../plugins/actions/actions.c:204
+#: ../plugins/actions/actions.c:216
 msgid "Suspend"
 msgstr "Mesa en velha"
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:217
 msgid "Sus_pend"
 msgstr "Me_sa en velha"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:218
 msgid "Do you want to suspend to RAM?"
 msgstr "Volètz metre en velha en memòria viva ?"
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:219
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Mesa en velha de l'ordenador dins %d segondas."
 
-#: ../plugins/actions/actions.c:213
+#: ../plugins/actions/actions.c:225
 msgid "Restart"
 msgstr "Reamodar"
 
-#: ../plugins/actions/actions.c:214
+#: ../plugins/actions/actions.c:226
 msgid "_Restart"
 msgstr "_Reamodar"
 
-#: ../plugins/actions/actions.c:215
+#: ../plugins/actions/actions.c:227
 msgid "Are you sure you want to restart?"
 msgstr "Sètz segur que volètz reamodar ?"
 
-#: ../plugins/actions/actions.c:216
+#: ../plugins/actions/actions.c:228
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Reamodament de l'ordenador dins %d segondas."
 
-#: ../plugins/actions/actions.c:222
+#: ../plugins/actions/actions.c:234
 msgid "Shut Down"
 msgstr "Atudar"
 
-#: ../plugins/actions/actions.c:223
+#: ../plugins/actions/actions.c:235
 msgid "Shut _Down"
 msgstr "A_tudar"
 
-#: ../plugins/actions/actions.c:224
+#: ../plugins/actions/actions.c:236
 msgid "Are you sure you want to shut down?"
 msgstr "Sètz segur que volètz atudar ?"
 
-#: ../plugins/actions/actions.c:225
+#: ../plugins/actions/actions.c:237
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Atudament dins %d segondas."
 
-#: ../plugins/actions/actions.c:625
+#: ../plugins/actions/actions.c:685
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Separador"
 
-#: ../plugins/actions/actions.c:1050
+#: ../plugins/actions/actions.c:1110
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Impossible d'aviar l'accion « %s »"
 
-#: ../plugins/actions/actions.c:1225
-msgid "John Doe"
-msgstr "John Doe"
+#: ../plugins/actions/actions.c:1279
+msgid "Little Mouse"
+msgstr ""
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
@@ -950,7 +966,6 @@ msgstr "Seleccionatz aquesta opcion per afichar lo nom generic de l'aplicacion d
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
-#: ../plugins/systray/systray-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Appearance"
@@ -995,8 +1010,9 @@ msgstr "Seleccion de l'icòna"
 msgid "_OK"
 msgstr "_D'acòrdi"
 
+#. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2403
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2513
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Impossible d'executar la comanda « %s »."
@@ -1517,15 +1533,15 @@ msgstr "_Motiu dels fichièrs :"
 msgid "Filtering"
 msgstr "Filtre"
 
-#: ../plugins/launcher/launcher.c:405
+#: ../plugins/launcher/launcher.c:409
 msgid "Open launcher menu"
 msgstr "Dobrir lo menú de l'aviador"
 
-#: ../plugins/launcher/launcher.c:1622
+#: ../plugins/launcher/launcher.c:1651
 msgid "Unnamed Item"
 msgstr "Element sens nom"
 
-#: ../plugins/launcher/launcher.c:1800
+#: ../plugins/launcher/launcher.c:1839
 msgid "No items"
 msgstr "Pas cap d'element"
 
@@ -1736,58 +1752,143 @@ msgstr "Afichar lo burèu"
 msgid "Hide all windows and show the desktop"
 msgstr "Amagar totas las fenèstras e afichar lo burèu"
 
-#: ../plugins/systray/systray.c:405
+#: ../plugins/systray/sn-dialog.c:649
+msgid "Clear"
+msgstr "Escafar"
+
+#: ../plugins/systray/sn-dialog.c:650
+msgid "Are you sure you want to clear the list of known items?"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:1
+msgid "Status Tray Items"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:2
+msgid "C_lear Known Items"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:3
+msgid "Resets the list of items and their visibility settings"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:4
+msgid "_Fixed icon size (pixels):"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:5
+msgid "Adjust size _automatically"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:6
+msgid "Icons"
+msgstr "Icònas"
+
+#: ../plugins/systray/sn-dialog.glade.h:7
+msgid "Arrange _items in a single row"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:8
+msgid "If enabled, ensure that the items are laid out in a single row"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:9
+msgid "_Hide items by default"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:10
+msgid "When enabled, all new items will be marked as \"Hidden\""
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:11
+msgid "_Square items"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:12
+msgid "Item buttons will take a square when it's possible"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:13
+msgid "Behavior"
+msgstr "Comportament"
+
+#: ../plugins/systray/sn-dialog.glade.h:14
+msgid "Item"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:15
+msgid "Hidden"
+msgstr "Elements amagats"
+
+#: ../plugins/systray/sn-dialog.glade.h:16
+msgid "Move the selected item one row up"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:17
+msgid "Move the selected item one row down"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:18
+msgid "Known Items"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:19
+msgid "_Menu is primary action"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:20
+msgid "Left click will always display the menu for item"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:21
+msgid "_Request symbolic icons"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:22
+msgid "Load symbolic icons if available"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:23
+msgid "Features"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:24
+msgid "Status Notifiers"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:25
+msgid "Systray Icons"
+msgstr ""
+
+#: ../plugins/systray/systray.c:146
 msgid "Unable to start the notification area"
 msgstr "Impossible d'aviar la zòna de notificacion"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:905
+#: ../plugins/systray/systray.c:413
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Es probable qu'una autra aplicacion aja pres la foncion de zòna de notificacion. Aquesta zòna demorarà inutilizada."
 
-#: ../plugins/systray/systray.c:907
+#: ../plugins/systray/systray.c:415
 msgid "The notification area lost selection"
 msgstr "La zòna de notificacion a perdut la seleccion"
-
-#: ../plugins/systray/systray.c:1172
-msgid "Clear"
-msgstr "Escafar"
-
-#: ../plugins/systray/systray.c:1173
-msgid "Are you sure you want to clear the list of known applications?"
-msgstr "Sètz segur que volètz suprimir la lista de las aplicacions conegudas ?"
-
-#: ../plugins/systray/systray-dialog.glade.h:1
-#: ../plugins/systray/systray.desktop.in.in.h:1
-msgid "Notification Area"
-msgstr "Zòna de notificacion"
-
-#: ../plugins/systray/systray-dialog.glade.h:4
-msgid "_Maximum icon size (px):"
-msgstr "_Talha maximala d'una icòna (pixèl) :"
-
-#: ../plugins/systray/systray-dialog.glade.h:5
-msgid "Sq_uare icons"
-msgstr ""
-
-#: ../plugins/systray/systray-dialog.glade.h:9
-msgid "C_lear Known Applications"
-msgstr "_Voidar la lista de las aplicacions conegudas"
-
-#: ../plugins/systray/systray-dialog.glade.h:10
-msgid "Known Applications"
-msgstr "Aplicacions conegudas"
 
 #: ../plugins/systray/systray-manager.c:432
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Impossible d'aquerir la seleccion del gestionari per l'ecran %d"
 
+#: ../plugins/systray/systray.desktop.in.in.h:1
+msgid "Status Tray Plugin"
+msgstr ""
+
 #: ../plugins/systray/systray.desktop.in.in.h:2
-msgid "Area where notification icons appear"
-msgstr "Zòna ont las icònas de notificacion apareisson"
+msgid ""
+"Provides status notifier items (application indicators) and legacy systray "
+"items"
+msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
@@ -1882,23 +1983,36 @@ msgstr "Afichar las fenèstras de totes los _monitors"
 msgid "Show only _minimized windows"
 msgstr "Afichar unicament las fenèstras _redusidas"
 
-#: ../plugins/tasklist/tasklist-widget.c:3654
+#: ../plugins/tasklist/tasklist-widget.c:2957
+#, c-format
+msgid "Unable to start new instance of '%s'"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-widget.c:2961
+msgid "Error"
+msgstr "Error"
+
+#: ../plugins/tasklist/tasklist-widget.c:3005
+msgid "Launch New Instance..."
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-widget.c:3754
 msgid "Mi_nimize All"
 msgstr "_Redusir tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3662
+#: ../plugins/tasklist/tasklist-widget.c:3762
 msgid "Un_minimize All"
 msgstr "Des_minimizar tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3670
+#: ../plugins/tasklist/tasklist-widget.c:3770
 msgid "Ma_ximize All"
 msgstr "_Maximizar tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3678
+#: ../plugins/tasklist/tasklist-widget.c:3778
 msgid "_Unmaximize All"
 msgstr "Desma_ximizar tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3690
+#: ../plugins/tasklist/tasklist-widget.c:3790
 msgid "_Close All"
 msgstr "_Tampar tot"
 
