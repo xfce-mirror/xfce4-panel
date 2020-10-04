@@ -52,7 +52,7 @@
 
 
 #define ARROW_WIDTH        (8)
-#define MAX_BLINKING_COUNT (G_MAXUINT)
+#define MAX_BLINKING_COUNT (16)
 
 enum
 {
@@ -476,14 +476,14 @@ xfce_arrow_button_blinking_timeout (gpointer user_data)
 
   GtkStateFlags    flags = gtk_widget_get_state_flags (GTK_WIDGET (button));
 
-  if ((flags & GTK_STATE_FLAG_ACTIVE) == GTK_STATE_FLAG_ACTIVE
+  if ((flags & GTK_STATE_FLAG_CHECKED) == GTK_STATE_FLAG_CHECKED
     || button->priv->blinking_timeout_id == 0)
     {
-      gtk_widget_unset_state_flags (GTK_WIDGET (button), GTK_STATE_FLAG_ACTIVE);
+      gtk_widget_unset_state_flags (GTK_WIDGET (button), GTK_STATE_FLAG_CHECKED);
     }
   else
     {
-      gtk_widget_set_state_flags (GTK_WIDGET (button), GTK_STATE_FLAG_ACTIVE, FALSE);
+      gtk_widget_set_state_flags (GTK_WIDGET (button), GTK_STATE_FLAG_CHECKED, FALSE);
     }
 
   return (button->priv->blinking_counter++ < MAX_BLINKING_COUNT);
@@ -495,8 +495,6 @@ static void
 xfce_arrow_button_blinking_timeout_destroyed (gpointer user_data)
 {
   XfceArrowButton *button = XFCE_ARROW_BUTTON (user_data);
-
-  gtk_widget_unset_state_flags (GTK_WIDGET (button), GTK_STATE_FLAG_ACTIVE);
 
   button->priv->blinking_timeout_id = 0;
   button->priv->blinking_counter = 0;
