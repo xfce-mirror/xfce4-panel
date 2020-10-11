@@ -444,6 +444,8 @@ xfce_clock_binary_draw_binary (XfceClockBinary *binary,
       /* advance offset */
       offset_x += w;
     }
+
+  g_date_time_unref (time);
 }
 
 

@@ -278,6 +278,7 @@ clock_time_timeout_running (gpointer user_data)
       /* sync again when we don't run on time */
       time = clock_time_get_time (timeout->time);
       timeout->restart = (g_date_time_get_second (time) != 0);
+      g_date_time_unref (time);
     }
 
   return !timeout->restart;
@@ -380,6 +381,7 @@ clock_time_timeout_set_interval (ClockTimeTimeout *timeout,
     {
       time = clock_time_get_time (timeout->time);
       next_interval = 60 - g_date_time_get_second (time);
+      g_date_time_unref (time);
     }
   else
     {
