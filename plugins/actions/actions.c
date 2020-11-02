@@ -166,32 +166,32 @@ static ActionEntry action_entries[] =
     N_("_Log Out"),
     N_("Are you sure you want to log out?"),
     N_("Logging out in %d seconds."),
-    "system-log-out",
-    NULL
+    "xfsm-logout",
+    "system-log-out"
   },
   { ACTION_TYPE_LOGOUT_DIALOG,
     "logout",
     N_("Log Out..."),
     N_("Log _Out..."),
     NULL, NULL, /* already shows a dialog */
-    "system-log-out",
-    NULL
+    "xfsm-logout",
+    "system-log-out"
   },
   { ACTION_TYPE_SWITCH_USER,
     "switch-user",
     N_("Switch User"),
     N_("_Switch User"),
     NULL, NULL, /* not needed */
-    "system-users",
-    NULL
+    "xfsm-switch-user",
+    "system-users"
   },
   { ACTION_TYPE_LOCK_SCREEN,
     "lock-screen",
     N_("Lock Screen"),
     N_("Loc_k Screen"),
     NULL, NULL, /* not needed */
-    "system-lock-screen",
-    NULL
+    "xfsm-lock",
+    "system-lock-screen"
   },
   { ACTION_TYPE_HIBERNATE,
     "hibernate",
@@ -199,8 +199,8 @@ static ActionEntry action_entries[] =
     N_("_Hibernate"),
     N_("Do you want to suspend to disk?"),
     N_("Hibernating computer in %d seconds."),
-    "system-hibernate",
-    NULL
+    "xfsm-hibernate",
+    "system-hibernate"
   },
   { ACTION_TYPE_HYBRID_SLEEP,
     "hybrid-sleep",
@@ -208,7 +208,7 @@ static ActionEntry action_entries[] =
     N_("_Hybrid Sleep"),
     N_("Do you want to hibernate and suspend the system?"),
     N_("Hibernating and Suspending computer in %d seconds."),
-    "system-suspend-hibernate",
+    "xfsm-hibernate",
     "system-hibernate"
   },
   { ACTION_TYPE_SUSPEND,
@@ -217,8 +217,8 @@ static ActionEntry action_entries[] =
     N_("Sus_pend"),
     N_("Do you want to suspend to RAM?"),
     N_("Suspending computer in %d seconds."),
-    "system-suspend",
-    NULL
+    "xfsm-suspend",
+    "system-suspend"
   },
   { ACTION_TYPE_RESTART,
     "restart",
@@ -226,8 +226,8 @@ static ActionEntry action_entries[] =
     N_("_Restart"),
     N_("Are you sure you want to restart?"),
     N_("Restarting computer in %d seconds."),
-    "system-reboot",
-    NULL
+    "xfsm-reboot",
+    "system-reboot"
   },
   { ACTION_TYPE_SHUTDOWN,
     "shutdown",
@@ -235,8 +235,8 @@ static ActionEntry action_entries[] =
     N_("Shut _Down"),
     N_("Are you sure you want to shut down?"),
     N_("Turning off computer in %d seconds."),
-    "system-shutdown",
-    NULL
+    "xfsm-shutdown",
+    "system-shutdown"
   }
 };
 
