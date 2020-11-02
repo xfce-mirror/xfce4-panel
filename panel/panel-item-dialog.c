@@ -193,8 +193,6 @@ panel_item_dialog_init (PanelItemDialog *dialog)
       G_CALLBACK (panel_item_dialog_unique_changed), dialog);
 
   gtk_window_set_title (GTK_WINDOW (dialog), _("Add New Items"));
-  xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG (dialog),
-      _("Add new plugins to the panel"));
   gtk_window_set_icon_name (GTK_WINDOW (dialog), "list-add");
   gtk_window_set_default_size (GTK_WINDOW (dialog), 400, 500);
   gtk_window_set_type_hint (GTK_WINDOW (dialog), GDK_WINDOW_TYPE_HINT_NORMAL);
