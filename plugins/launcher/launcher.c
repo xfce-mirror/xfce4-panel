@@ -1981,8 +1981,6 @@ launcher_plugin_button_press_event (GtkWidget      *button,
                                       launcher_plugin_menu_popup_destroyed);
     }
 
-  gtk_widget_set_state_flags (button, GTK_STATE_FLAG_CHECKED, FALSE);
-
   return FALSE;
 }
 
@@ -2018,8 +2016,6 @@ launcher_plugin_button_release_event (GtkWidget      *button,
     launcher_plugin_item_exec_from_clipboard (item, event->time, screen);
   else
     return TRUE;
-
-  gtk_widget_set_state_flags (button, GTK_STATE_FLAG_NORMAL, TRUE);
 
   return FALSE;
 }
