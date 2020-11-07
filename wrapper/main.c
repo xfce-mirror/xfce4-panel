@@ -309,7 +309,7 @@ main (gint argc, gchar **argv)
   GDBusProxy              *dbus_gproxy = NULL;
   WrapperModule           *module = NULL;
   WrapperPlug             *plug;
-  GtkWidget               *provider;
+  GtkWidget               *provider = NULL;
   gchar                   *path;
   guint                    gproxy_destroy_id = 0;
   guint                    gproxy_signal_id = 0;

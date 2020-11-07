@@ -894,7 +894,7 @@ actions_plugin_action_dbus_xfsm (const gchar  *method,
         {
           retval = g_dbus_proxy_call_sync (proxy, method,
                                            NULL,
-                                           G_DBUS_PROXY_FLAGS_NONE,
+                                           G_DBUS_CALL_FLAGS_NONE,
                                            -1,
                                            NULL,
                                            error);
