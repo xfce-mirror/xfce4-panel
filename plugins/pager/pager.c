@@ -348,6 +348,8 @@ pager_plugin_style_updated (GtkWidget *pager,
                                GTK_STYLE_PROVIDER_PRIORITY_THEME);
   gdk_rgba_free (bg_color);
   g_free (color_string);
+  g_free (css_string);
+  g_object_unref (provider);
 }
 
 
