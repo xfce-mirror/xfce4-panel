@@ -1174,7 +1174,6 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
   WnckWindow           *window;
   PangoFontDescription *italic, *bold;
   gint                  urgent_windows = 0;
-  gboolean              has_windows;
   gboolean              is_empty = TRUE;
   guint                 n_workspaces = 0;
   const gchar          *name = NULL;
@@ -1227,7 +1226,7 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
           is_empty = FALSE;
         }
 
-      for (li = windows, has_windows = FALSE; li != NULL; li = li->next)
+      for (li = windows; li != NULL; li = li->next)
         {
           window = WNCK_WINDOW (li->data);
 
@@ -1250,9 +1249,6 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
           mi = window_menu_plugin_menu_window_item_new (window, plugin, italic, bold, w, h);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
           gtk_widget_show (mi);
-
-          /* this workspace is not empty */
-          has_windows = TRUE;
 
           /* menu is not empty anymore */
           is_empty = FALSE;
