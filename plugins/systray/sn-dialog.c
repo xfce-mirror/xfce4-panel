@@ -839,6 +839,13 @@ sn_dialog_build (SnDialog *dialog)
       g_signal_connect (G_OBJECT (object), "clicked",
                         G_CALLBACK (sn_dialog_clear_clicked), dialog);
 
+#ifndef HAVE_DBUSMENU
+      object = gtk_builder_get_object (dialog->builder, "sn_box");
+      gtk_widget_hide (GTK_WIDGET (object));
+      object = gtk_builder_get_object (dialog->builder, "items_stack_switcher");
+      gtk_widget_hide (GTK_WIDGET (object));
+#endif
+
       g_object_weak_ref (G_OBJECT (dialog->dialog),
                          (GWeakNotify)sn_dialog_dialog_unref, dialog);
       return TRUE;
