@@ -70,7 +70,9 @@ struct _SnPlugin
   GtkBuilder     *configure_builder;
 
   /* Statusnotifier settings */
+#ifdef HAVE_DBUSMENU
   SnBackend           *backend;
+#endif
   SnConfig            *config;
 };
 

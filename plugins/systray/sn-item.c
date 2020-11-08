@@ -26,7 +26,9 @@
 #endif
 
 #include <gio/gio.h>
+#ifdef HAVE_DBUSMENU
 #include <libdbusmenu-gtk/dbusmenu-gtk.h>
+#endif
 
 #include "sn-item.h"
 
@@ -1038,6 +1040,7 @@ sn_item_is_menu_only (SnItem *item)
 GtkWidget *
 sn_item_get_menu (SnItem *item)
 {
+  #ifdef HAVE_DBUSMENU
   DbusmenuGtkMenu *menu;
 
   g_return_val_if_fail (XFCE_IS_SN_ITEM (item), NULL);
@@ -1054,6 +1057,9 @@ sn_item_get_menu (SnItem *item)
     }
 
   return item->cached_menu;
+  #else
+  return NULL;
+  #endif
 }
 
 

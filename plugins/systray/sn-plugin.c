@@ -101,7 +101,9 @@ sn_plugin_init (SnPlugin *plugin)
 
   /* Statusnotifier init */
   plugin->item = NULL;
+#ifdef HAVE_DBUSMENU
   plugin->backend = NULL;
+#endif
   plugin->config = NULL;
 }
 
@@ -137,7 +139,9 @@ sn_plugin_free (XfcePanelPlugin *panel_plugin)
   gtk_container_remove (GTK_CONTAINER (plugin->box), plugin->sn_box);
   gtk_container_remove (GTK_CONTAINER (panel_plugin), plugin->box);
 
+#ifdef HAVE_DBUSMENU
   g_object_unref (plugin->backend);
+#endif
   g_object_unref (plugin->config);
 }
 
@@ -195,8 +199,7 @@ sn_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
     }
 }
 
-
-
+#ifdef HAVE_DBUSMENU
 static void
 sn_plugin_item_added (SnPlugin *plugin,
                       SnItem   *item)
@@ -212,6 +215,7 @@ sn_plugin_item_added (SnPlugin *plugin,
   gtk_container_add (GTK_CONTAINER (plugin->sn_box), button);
   gtk_widget_show (button);
 }
+#endif
 
 
 
@@ -222,13 +226,14 @@ sn_plugin_legacy_item_added (SnPlugin    *plugin,
   return sn_config_add_known_legacy_item (plugin->config, name);
 }
 
-
+#ifdef HAVE_DBUSMENU
 static void
 sn_plugin_item_removed (SnPlugin *plugin,
                         SnItem   *item)
 {
   sn_box_remove_item (XFCE_SN_BOX (plugin->sn_box), item);
 }
+#endif
 
 
 static void
@@ -348,12 +353,14 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
   g_signal_connect (plugin->config, "legacy-items-list-changed",
                             G_CALLBACK (systray_plugin_configuration_changed), plugin);
 
+#ifdef HAVE_DBUSMENU
   plugin->backend = sn_backend_new ();
   g_signal_connect_swapped (plugin->backend, "item-added",
                             G_CALLBACK (sn_plugin_item_added), plugin);
   g_signal_connect_swapped (plugin->backend, "item-removed",
                             G_CALLBACK (sn_plugin_item_removed), plugin);
   sn_backend_start (plugin->backend);
+#endif
 
   /* Systray arrow button */
   plugin->button = xfce_arrow_button_new(GTK_ARROW_RIGHT);
