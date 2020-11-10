@@ -213,7 +213,7 @@ systray_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
     GdkColor success;
 
     context = gtk_widget_get_style_context (GTK_WIDGET (plugin->systray_box));
-    gtk_style_context_get_color (context, GTK_STATE_NORMAL, &rgba);
+    gtk_style_context_get_color (context, GTK_STATE_FLAG_NORMAL, &rgba);
 
     color.pixel = 0;
     color.red = rgba.red * G_MAXUSHORT;

@@ -3432,7 +3432,6 @@ panel_window_migrate_autohide_property (PanelWindow   *window,
                                         const gchar   *property_base)
 {
   gboolean autohide;
-  gchar   *new_property;
   gchar   *old_property;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
@@ -3444,7 +3443,7 @@ panel_window_migrate_autohide_property (PanelWindow   *window,
   /* check if we have an old "autohide" property for this panel */
   if (xfconf_channel_has_property (xfconf, old_property))
     {
-      new_property = g_strdup_printf ("%s/autohide-behavior", property_base);
+      gchar *new_property = g_strdup_printf ("%s/autohide-behavior", property_base);
 
       /* migrate from old "autohide" to new "autohide-behavior" if the latter
        * isn't set already */
@@ -3469,5 +3468,9 @@ panel_window_migrate_autohide_property (PanelWindow   *window,
           /* the new property is already set, simply remove the old property */
           xfconf_channel_reset_property (xfconf, old_property, FALSE);
         }
+
+      g_free (new_property);
     }
+
+  g_free (old_property);
 }
