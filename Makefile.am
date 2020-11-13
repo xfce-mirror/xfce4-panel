@@ -39,7 +39,8 @@ EXTRA_DIST = \
 	intltool-merge.in \
 	intltool-update.in \
 	m4/introspection.m4 \
-	m4/vapigen.m4
+	m4/vapigen.m4 \
+	README.md
 
 DISTCLEANFILES = \
 	$(desktop_DATA) \
