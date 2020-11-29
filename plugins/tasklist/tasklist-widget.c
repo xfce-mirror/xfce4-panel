@@ -45,7 +45,7 @@
 
 
 
-#define DEFAULT_BUTTON_SIZE          (25)
+#define DEFAULT_BUTTON_SIZE          (32)
 #define DEFAULT_MAX_BUTTON_LENGTH    (200)
 #define DEFAULT_MIN_BUTTON_LENGTH    (DEFAULT_MAX_BUTTON_LENGTH / 4)
 #define DEFAULT_ICON_LUCENCY         (50)
@@ -654,7 +654,7 @@ xfce_tasklist_get_window_icon (WnckWindow *window,
 {
   GdkPixbuf *pixbuf;
 
-  if (show_labels || type == CHILD_TYPE_GROUP_MENU || size <= 31)
+  if (type == CHILD_TYPE_GROUP_MENU || size <= 31)
     pixbuf = wnck_window_get_mini_icon (window);
   else
     pixbuf = wnck_window_get_icon (window);
