@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Kevin Brubeck Unhammer <unhammer+dill@mm.st>, 2013,2015
+# Kevin Brubeck Unhammer <unhammer+dill@mm.st>, 2013,2015,2020
 # Øystein Steffensen-Alværvik, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-21 00:46+0200\n"
-"PO-Revision-Date: 2020-08-20 22:46+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
+"POT-Creation-Date: 2020-11-03 00:45+0100\n"
+"PO-Revision-Date: 2020-12-04 20:20+0000\n"
+"Last-Translator: Kevin Brubeck Unhammer <unhammer+dill@mm.st>\n"
 "Language-Team: Norwegian Nynorsk (http://www.transifex.com/xfce/xfce4-panel/language/nn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,7 +35,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr ""
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2936
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2950
 msgid "Panel"
 msgstr "Panel"
 
@@ -74,9 +74,9 @@ msgstr "_Fjern"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1237
 msgid "_Properties"
-msgstr ""
+msgstr "Ei_genskapar"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3024
+#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3038
 msgid "_About"
 msgstr "_Om"
 
@@ -88,20 +88,20 @@ msgstr "Fl_ytt"
 msgid "Pane_l"
 msgstr "Pane_l"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2949
+#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2963
 msgid "Add _New Items..."
 msgstr "Legg til _nye oppføringar..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2964
+#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2978
 msgid "Panel Pr_eferences..."
 msgstr "Panel_oppsett..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2996
+#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:3010
 msgid "Log _Out"
 msgstr "Logg _ut"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:207
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3015
+#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3029
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -224,7 +224,7 @@ msgstr "Greidde ikkje senda D-bus-melding"
 
 #: ../panel/main.c:441
 msgid "Execute"
-msgstr ""
+msgstr "Utfør"
 
 #: ../panel/main.c:442
 msgid ""
@@ -291,7 +291,7 @@ msgstr "Ugyldig hinttype «%s». Gyldige typar er booleansk, doble, heiltal, str
 
 #: ../panel/panel-dialogs.c:58
 msgid "Unable to open the e-mail address"
-msgstr ""
+msgstr "Klarte ikkje opna e-postadressa"
 
 #: ../panel/panel-dialogs.c:83
 msgid "The panel of the Xfce Desktop Environment"
@@ -306,10 +306,10 @@ msgstr "Eivind Ødegård"
 msgid "Add New Item"
 msgstr "Legg til nytt element"
 
-#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:203
+#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:201
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
-msgstr ""
+msgstr "_Legg til"
 
 #: ../panel/panel-dialogs.c:175
 msgid "Please choose a panel for the new plugin:"
@@ -334,11 +334,7 @@ msgstr "Du har ikkje lov til å endra panelet"
 msgid "Add New Items"
 msgstr "Legg til nye element"
 
-#: ../panel/panel-item-dialog.c:197
-msgid "Add new plugins to the panel"
-msgstr "Legg til nye innstikk på panelet"
-
-#: ../panel/panel-item-dialog.c:211
+#: ../panel/panel-item-dialog.c:209
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:7
@@ -353,12 +349,12 @@ msgstr "Legg til nye innstikk på panelet"
 msgid "_Close"
 msgstr "L_ukk"
 
-#: ../panel/panel-item-dialog.c:227
+#: ../panel/panel-item-dialog.c:225
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "_Søk:"
 
-#: ../panel/panel-item-dialog.c:235
+#: ../panel/panel-item-dialog.c:233
 msgid "Enter search phrase here"
 msgstr "Skriv inn søkjeorda her"
 
@@ -385,7 +381,7 @@ msgstr "Automatisk"
 
 #: ../panel/panel-preferences-dialog.c:528
 msgid "Primary"
-msgstr ""
+msgstr "Primær"
 
 #. I18N: monitor name in the output selector
 #: ../panel/panel-preferences-dialog.c:547
@@ -469,15 +465,15 @@ msgstr "Bakgrunnsbilete"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "Panel Preferences"
-msgstr ""
+msgstr "Paneloppsett"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Profiles:"
-msgstr ""
+msgstr "Profilar:"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid "_Backup and restore"
-msgstr ""
+msgstr "_Sikkerheitskopier og gjenopprett"
 
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Switch between panel presets"
@@ -493,7 +489,7 @@ msgstr "Fjern dette panelet"
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "<b>General</b>"
-msgstr ""
+msgstr "<b>Allment</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid "M_ode:"
@@ -528,7 +524,7 @@ msgstr "Vel dette om du vil at maksimerte vindaugo skal dekka området bak panel
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
-msgstr ""
+msgstr "Gøym panelet au_tomatisk:"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid "O_utput:"
@@ -538,11 +534,11 @@ msgstr "_Utgang:"
 #. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:29
 msgid "<b>Measurements</b>"
-msgstr ""
+msgstr "<b>Målingar</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Row _size (pixels):"
-msgstr ""
+msgstr "Rad_storleik (punkt):"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Num_ber of rows:"
@@ -569,11 +565,11 @@ msgstr "V_is"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Dark mode"
-msgstr ""
+msgstr "Mørk modus"
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "<b>Background</b>"
-msgstr ""
+msgstr "<b>Bakgrunn</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 #: ../plugins/separator/separator-dialog.glade.h:7
@@ -598,23 +594,23 @@ msgstr "Vel eit bakgrunnsbilete"
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "<b>Icons</b>"
-msgstr ""
+msgstr "<b>Ikon</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Adjust size au_tomatically"
-msgstr ""
+msgstr "Juster storleik au_tomatisk"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Fixed icon _size (pixels):"
-msgstr ""
+msgstr "Fast ikon_storleik (punkt):"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 msgid "<b>Opacity</b>"
-msgstr ""
+msgstr "<b>Ugjennomsiktigheit</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 msgid "Configure..."
-msgstr ""
+msgstr "Konfigurer …"
 
 #: ../panel/panel-preferences-dialog.glade.h:49
 msgid ""
@@ -697,7 +693,7 @@ msgstr "Røynd"
 msgid "Expert"
 msgstr "Meister"
 
-#: ../panel/panel-window.c:2981
+#: ../panel/panel-window.c:2995
 msgid "_Lock Panel"
 msgstr "_Lås panelet"
 
@@ -728,15 +724,15 @@ msgstr "Øktmeny"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "Full Name"
-msgstr ""
+msgstr "Fullt namn"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
 msgid "Username"
-msgstr ""
+msgstr "Brukarnamn"
 
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid "User ID"
-msgstr ""
+msgstr "Brukar-ID"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
 msgid "Custom"
@@ -748,11 +744,11 @@ msgstr "Utsjå_nad:"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "Title:"
-msgstr ""
+msgstr "Tittel:"
 
 #: ../plugins/actions/actions-dialog.glade.h:11
 msgid "Custo_m title:"
-msgstr ""
+msgstr "Eige_n tittel:"
 
 #: ../plugins/actions/actions-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:27
@@ -919,7 +915,7 @@ msgstr "Klarte ikkje køyra handlinga «%s»."
 
 #: ../plugins/actions/actions.c:1279
 msgid "Little Mouse"
-msgstr ""
+msgstr "Lita mus"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
@@ -1011,7 +1007,7 @@ msgstr "_OK"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2513
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2517
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Klarte ikkje køyra kommandoen «%s»"
@@ -1444,7 +1440,7 @@ msgstr "Opprett ei ny mappe"
 
 #: ../plugins/directorymenu/directorymenu.c:932
 msgid "Create New Text Document"
-msgstr ""
+msgstr "Opprett nytt tekstdokument"
 
 #: ../plugins/directorymenu/directorymenu.c:939
 msgid "C_reate"
@@ -1452,7 +1448,7 @@ msgstr "_Opprett"
 
 #: ../plugins/directorymenu/directorymenu.c:940
 msgid "Create & _Open"
-msgstr ""
+msgstr "Opprett & _Opna"
 
 #: ../plugins/directorymenu/directorymenu.c:954
 msgid "Enter the new name:"
@@ -1461,7 +1457,7 @@ msgstr "Skriv inn det nye namnet:"
 #: ../plugins/directorymenu/directorymenu.c:990
 #, c-format
 msgid "Failed to create folder: %s"
-msgstr ""
+msgstr "Klarte ikkje oppretta mappe: %s"
 
 #: ../plugins/directorymenu/directorymenu.c:1075
 msgid "Open Folder"
@@ -1473,11 +1469,11 @@ msgstr "Opna i terminal"
 
 #: ../plugins/directorymenu/directorymenu.c:1109
 msgid "Create Folder..."
-msgstr ""
+msgstr "Opprett mappe …"
 
 #: ../plugins/directorymenu/directorymenu.c:1126
 msgid "Create Text Document..."
-msgstr ""
+msgstr "Opprett tekstdokument …"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
@@ -1493,19 +1489,19 @@ msgstr "Arbei_dsmappe:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "Show 'New Text _Document'"
-msgstr ""
+msgstr "Vis «Nytt tekst_dokument»"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid "Show '_New Folder'"
-msgstr ""
+msgstr "Vis «_Ny mappe»"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
 msgid "Show 'Open in _Terminal'"
-msgstr ""
+msgstr "Vis «Opna i _Terminal»"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
 msgid "Show '_Open _Folder'"
-msgstr ""
+msgstr "Vis «_Opna mappe»"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
 msgid "Menu"
@@ -1632,7 +1628,7 @@ msgstr "Legg til eit nytt tomt element"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "Add a new hyperlink"
-msgstr ""
+msgstr "Legg til ny hyperlenke"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "Disable t_ooltips"
@@ -1687,7 +1683,7 @@ msgstr "Knappar"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 msgid "Miniature View"
-msgstr ""
+msgstr "Miniatyrvisning"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
 #: ../plugins/pager/pager.desktop.in.in.h:1
@@ -1700,11 +1696,11 @@ msgstr "Kor mange _rader:"
 
 #: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Show workspace number"
-msgstr ""
+msgstr "Vis tal på arbeidsområde"
 
 #: ../plugins/pager/pager-dialog.glade.h:9
 msgid "Switch workspaces using the mouse wheel"
-msgstr ""
+msgstr "Byt arbeidsområde med musehjulet"
 
 #: ../plugins/pager/pager-dialog.glade.h:10
 msgid "<b>Appearance</b>"
@@ -1757,15 +1753,15 @@ msgstr "Tøm"
 
 #: ../plugins/systray/sn-dialog.c:650
 msgid "Are you sure you want to clear the list of known items?"
-msgstr ""
+msgstr "Er du sikker på at du vil tømma lista med kjende element?"
 
 #: ../plugins/systray/sn-dialog.glade.h:1
 msgid "Status Tray Items"
-msgstr ""
+msgstr "Element i statusfeltet"
 
 #: ../plugins/systray/sn-dialog.glade.h:2
 msgid "C_lear Known Items"
-msgstr ""
+msgstr "T_øm kjende element"
 
 #: ../plugins/systray/sn-dialog.glade.h:3
 msgid "Resets the list of items and their visibility settings"
