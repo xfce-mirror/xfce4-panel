@@ -2498,11 +2498,11 @@ launcher_plugin_item_exec_on_screen (GarconMenuItem *item,
   if (g_shell_parse_argv (command, NULL, &argv, &error))
     {
       /* launch the command on the screen */
-      succeed = xfce_spawn_no_child (screen,
-                                     garcon_menu_item_get_path (item),
-                                     argv, NULL, G_SPAWN_SEARCH_PATH,
-                                     garcon_menu_item_supports_startup_notification (item),
-                                     event_time, icon, &error);
+      succeed = xfce_spawn (screen,
+                            garcon_menu_item_get_path (item),
+                            argv, NULL, G_SPAWN_SEARCH_PATH,
+                            garcon_menu_item_supports_startup_notification (item),
+                            event_time, icon, FALSE, &error);
 
       g_strfreev (argv);
     }

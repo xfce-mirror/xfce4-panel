@@ -818,11 +818,11 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
 
           /* try to spawn the program, if this fails we try exo for
            * a decent error message */
-          result = xfce_spawn_no_child (gtk_widget_get_screen (mi),
-                                        working_dir, argv, NULL, 0,
-                                        startup_notify,
-                                        gtk_get_current_event_time (),
-                                        NULL, NULL);
+          result = xfce_spawn (gtk_widget_get_screen (mi),
+                               working_dir, argv, NULL, 0,
+                               startup_notify,
+                               gtk_get_current_event_time (),
+                               NULL, FALSE, NULL);
           g_free (filename);
           break;
         }

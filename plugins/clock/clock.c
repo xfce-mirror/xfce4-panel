@@ -457,9 +457,9 @@ clock_plugin_button_press_event (GtkWidget      *widget,
                && !panel_str_is_empty (plugin->command))
         {
           /* launch command */
-          if (!xfce_spawn_command_line_on_screen (gtk_widget_get_screen (widget),
-                                                  plugin->command, FALSE,
-                                                  FALSE, &error))
+          if (!xfce_spawn_command_line (gtk_widget_get_screen (widget),
+                                        plugin->command, FALSE,
+                                        FALSE, TRUE, &error))
             {
               xfce_dialog_show_error (NULL, error,
                                       _("Failed to execute clock command"));
@@ -948,9 +948,9 @@ clock_plugin_configure_run_config_tool (GtkWidget   *button,
 
   panel_return_if_fail (XFCE_IS_CLOCK_PLUGIN (plugin));
 
-  if (!xfce_spawn_command_line_on_screen (gtk_widget_get_screen (button),
-                                          plugin->time_config_tool,
-                                          FALSE, FALSE, &error))
+  if (!xfce_spawn_command_line (gtk_widget_get_screen (button),
+                                plugin->time_config_tool,
+                                FALSE, FALSE, TRUE, &error))
     {
       xfce_dialog_show_error (NULL, error, _("Failed to execute command \"%s\"."), plugin->time_config_tool);
       g_error_free (error);
