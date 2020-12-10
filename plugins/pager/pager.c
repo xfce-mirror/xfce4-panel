@@ -629,8 +629,8 @@ pager_plugin_configure_workspace_settings (GtkWidget *button)
     screen = gdk_screen_get_default ();
 
   /* try to start the settings dialog */
-  if (!xfce_spawn_command_line_on_screen (screen, WORKSPACE_SETTINGS_COMMAND,
-                                          FALSE, FALSE, &error))
+  if (!xfce_spawn_command_line (screen, WORKSPACE_SETTINGS_COMMAND,
+                                FALSE, FALSE, TRUE, &error))
     {
       /* show an error dialog */
       toplevel = gtk_widget_get_toplevel (button);
