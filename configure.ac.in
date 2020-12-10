@@ -1,5 +1,5 @@
 dnl
-dnl Copyright (c) 2004 - 2008 The Xfce development team
+dnl Copyright (c) 2004 - 2020 The Xfce development team
 dnl
 dnl 2005-2007 Jasper Huijsmans <jasper@xfce.org>
 dnl 2006-2008 Nick Schermer <nick@xfce.org>
@@ -27,13 +27,13 @@ m4_define([panel_debug_default], [ifelse(xfce4_panel_version_tag(), [git], [yes]
 dnl ***************************
 dnl *** Initialize autoconf ***
 dnl ***************************
-AC_COPYRIGHT([Copyright (c) 2002 - 2011
+AC_COPYRIGHT([Copyright (c) 2002 - 2020
         The Xfce development team. All rights reserved.
 
 Written for Xfce by Jasper Huijsmans <jasper@xfce.org>
 and Nick Schermer <nick@xfce.org>.])
-AC_INIT([xfce4-panel], [xfce4_panel_version], [http://bugzilla.xfce.org/], [xfce4-panel])
-AC_PREREQ([2.60])
+AC_INIT([xfce4-panel],[xfce4_panel_version],[http://bugzilla.xfce.org/],[xfce4-panel])
+AC_PREREQ([2.69])
 AC_REVISION([xfce4_panel_version_build])
 
 dnl ***************************
@@ -58,15 +58,14 @@ AC_SUBST([HELPER_PATH_PREFIX])
 dnl *******************************
 dnl *** Check for UNIX variants ***
 dnl *******************************
-AC_AIX()
-AC_ISC_POSIX()
+AC_USE_SYSTEM_EXTENSIONS
 
 dnl ********************************
 dnl *** Check for basic programs ***
 dnl ********************************
 AC_PROG_CC()
 AM_PROG_CC_C_O()
-AC_PROG_LD()
+LT_PATH_LD([])
 AC_PROG_INSTALL()
 IT_PROG_INTLTOOL([0.35.0])
 AC_CHECK_PROGS([PERL], [perl5 perl])
@@ -157,7 +156,8 @@ XDT_CHECK_PACKAGE([LIBWNCK], [libwnck-3.0], [3.0])
 dnl *********************************************
 dnl *** Optional DBUSMENU for StatusNotifiers ***
 dnl *********************************************
-XDT_CHECK_OPTIONAL_PACKAGE([DBUSMENU], [dbusmenu-gtk3-0.4], [16.04.0])
+XDT_CHECK_OPTIONAL_PACKAGE([DBUSMENU], [dbusmenu-gtk3-0.4],
+                           [16.04.0], [dbusmenu-gtk3], [dbusmenu features])
 
 dnl **********************************
 dnl *** Optional GIO UNIX features ***
@@ -243,7 +243,7 @@ AC_MSG_CHECKING([PLATFORM_LDFLAGS])
 AC_MSG_RESULT([$PLATFORM_LDFLAGS])
 AC_SUBST([PLATFORM_LDFLAGS])
 
-AC_OUTPUT([
+AC_CONFIG_FILES([
 Makefile
 common/Makefile
 docs/Makefile
@@ -288,6 +288,7 @@ plugins/windowmenu/Makefile
 plugins/windowmenu/windowmenu.desktop.in
 po/Makefile.in
 ])
+AC_OUTPUT
 
 dnl ***************************
 dnl *** Print configuration ***
