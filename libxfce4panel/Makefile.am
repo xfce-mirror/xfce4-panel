@@ -123,7 +123,7 @@ endif
 
 
 # GObject Introspection
-include $(INTROSPECTION_MAKEFILE)
+-include $(INTROSPECTION_MAKEFILE)
 INTROSPECTION_GIRS =
 INTROSPECTION_SCANNER_ENV = CC="$(CC)"
 INTROSPECTION_SCANNER_ARGS = \
@@ -144,13 +144,13 @@ INTROSPECTION_COMPILER_ARGS = \
 if HAVE_INTROSPECTION
 introspection_sources = $(libxfce4panel_2_0_la_SOURCES)
 
-libxfce4panel-2.0.gir: libxfce4panel-2.0.la Makefile
-libxfce4panel_2_0_gir_INCLUDES = GObject-2.0 GLib-2.0 Gio-2.0 Gtk-3.0 libxfce4util-1.0
-libxfce4panel_2_0_gir_CFLAGS = $(AM_CPPFLAGS)
-libxfce4panel_2_0_gir_LIBS = libxfce4panel-2.0.la
-libxfce4panel_2_0_gir_FILES = $(introspection_sources)
-libxfce4panel_2_0_gir_EXPORT_PACKAGES = libxfce4panel-2.0
-INTROSPECTION_GIRS += libxfce4panel-2.0.gir
+Libxfce4panel-2.0.gir: libxfce4panel-2.0.la Makefile
+Libxfce4panel_2_0_gir_INCLUDES = GObject-2.0 GLib-2.0 Gio-2.0 Gtk-3.0 Libxfce4util-1.0
+Libxfce4panel_2_0_gir_CFLAGS = $(AM_CPPFLAGS)
+Libxfce4panel_2_0_gir_LIBS = libxfce4panel-2.0.la
+Libxfce4panel_2_0_gir_FILES = $(introspection_sources)
+Libxfce4panel_2_0_gir_EXPORT_PACKAGES = libxfce4panel-2.0
+INTROSPECTION_GIRS += Libxfce4panel-2.0.gir
 
 girdir = $(datadir)/gir-1.0
 gir_DATA = $(INTROSPECTION_GIRS)
@@ -166,7 +166,7 @@ EXTRA_DIST = \
 	abicheck.sh \
 	libxfce4panel.symbols \
 	libxfce4panel-2.0.deps \
-	libxfce4panel-2.0.metadata \
+	Libxfce4panel-2.0.metadata \
 	libxfce4panel-alias.h \
 	libxfce4panel-aliasdef.c \
 	libxfce4panel-marshal.list \
@@ -175,14 +175,14 @@ EXTRA_DIST = \
 if ENABLE_VAPIGEN
 -include $(VAPIGEN_MAKEFILE)
 
-libxfce4panel-2.0.vapi: libxfce4panel-2.0.gir libxfce4panel-2.0.deps
+libxfce4panel-2.0.vapi: Libxfce4panel-2.0.gir libxfce4panel-2.0.deps
 
 VAPIGEN_VAPIS = libxfce4panel-2.0.vapi
 VAPIGEN_GIRDIRS = $(prefix)/share/gir-1.0
 
 ##libxfce4panel_2_0_vapi_DEPS = libxfce4panel-2.0 GObject-2.0 GLib-2.0 Gtk-3.0 libxfce4util-1.0
 libxfce4panel_2_0_vapi_METADATADIRS = .
-libxfce4panel_2_0_vapi_FILES = libxfce4panel-2.0.gir
+libxfce4panel_2_0_vapi_FILES = Libxfce4panel-2.0.gir
 
 vapidir = $(datadir)/vala/vapi
 vapi_DATA = $(VAPIGEN_VAPIS) $(VAPIGEN_VAPIS:.vapi=.deps)
