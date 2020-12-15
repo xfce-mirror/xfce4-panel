@@ -759,16 +759,7 @@ systray_box_compare_function (gconstpointer a,
     return index_a - index_b;
 
   /* sort unordered icons by name */
-#if GLIB_CHECK_VERSION (2, 16, 0)
   return g_strcmp0 (name_a, name_b);
-#else
-  if (name_a == NULL)
-    return -(name_a != name_b);
-  if (name_b == NULL)
-    return name_a != name_b;
-
-  return strcmp (name_a, name_b);
-#endif
 }
 
 

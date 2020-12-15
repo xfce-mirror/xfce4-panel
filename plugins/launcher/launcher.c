@@ -556,11 +556,7 @@ launcher_plugin_item_duplicate (GFile   *src_file,
     goto err1;
 
   result = g_file_replace_contents (dst_file, contents, length, NULL, FALSE,
-#if GLIB_CHECK_VERSION (2, 20, 0)
                                     G_FILE_CREATE_REPLACE_DESTINATION,
-#else
-                                    G_FILE_CREATE_NONE,
-#endif
                                     NULL, NULL, error);
 
 err1:
