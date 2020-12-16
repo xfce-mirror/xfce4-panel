@@ -2364,20 +2364,32 @@ xfce_tasklist_wireframe_update (XfceTasklist      *tasklist,
 {
   Display              *dpy;
   GdkDisplay           *gdpy;
+  GdkWindow            *gdkwindow;
   gint                  x, y, width, height;
   XSetWindowAttributes  attrs;
   GC                    gc;
   XRectangle            xrect;
+  GtkBorder             extents;
 
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
   panel_return_if_fail (tasklist->show_wireframes == TRUE);
   panel_return_if_fail (WNCK_IS_WINDOW (child->window));
 
-  /* get the window geometry */
-  wnck_window_get_geometry (child->window, &x, &y, &width, &height);
-
   gdpy = gtk_widget_get_display (GTK_WIDGET (tasklist));
   dpy = GDK_DISPLAY_XDISPLAY (gdpy);
+
+  /* get the window geometry */
+  wnck_window_get_geometry (child->window, &x, &y, &width, &height);
+  /* check if we're dealing with a CSD window */
+  gdkwindow = gdk_x11_window_lookup_for_display (gdpy,
+                                                 wnck_window_get_xid (child->window));
+  if (gdkwindow && xfce_has_gtk_frame_extents (gdkwindow, &extents))
+    {
+      x += extents.left;
+      y += extents.top;
+      width -= extents.left + extents.right;
+      height -= extents.top + extents.bottom;
+    }
 
   if (G_LIKELY (tasklist->wireframe_window != 0))
     {
