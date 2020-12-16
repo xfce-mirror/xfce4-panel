@@ -2400,7 +2400,7 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
                                     &window_area.width, &window_area.height);
 
           /* if a window uses client-side decorations, check the _GTK_FRAME_EXTENTS
-           * application window property */
+           * application window property to get its actual size without the shadows */
           gdkwindow = gdk_x11_window_foreign_new_for_display (gdk_display_get_default (),
                                                               wnck_window_get_xid (active_window));
           if (gdkwindow && xfce_has_gtk_frame_extents (gdkwindow, &extents))
@@ -2413,7 +2413,7 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
           /* if a window is shaded, check the height of the window's
            * decoration as exposed through the _NET_FRAME_EXTENTS application
            * window property */
-          if (wnck_window_is_shaded (active_window))
+          else if (wnck_window_is_shaded (active_window))
           {
             Display *display;
             Atom real_type;
