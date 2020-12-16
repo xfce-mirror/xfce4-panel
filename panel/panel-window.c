@@ -30,11 +30,11 @@
 #include <string.h>
 #endif
 
-//#ifdef GDK_WINDOWING_X11
+#ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
-//#endif
+#endif
 
 #include <libwnck/libwnck.h>
 
