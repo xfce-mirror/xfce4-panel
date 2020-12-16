@@ -30,11 +30,11 @@
 #include <string.h>
 #endif
 
-#ifdef GDK_WINDOWING_X11
+//#ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
-#endif
+//#endif
 
 #include <libwnck/libwnck.h>
 
@@ -2370,6 +2370,59 @@ panel_window_active_window_changed (WnckScreen  *screen,
 
 
 
+gboolean
+xfce_panel_has_gtk_frame_extents (Window xwindow,
+                                  GtkBorder *extents)
+{
+  /* Code adapted from gnome-flashback:
+   * Copyright (C) 2015-2017 Alberts Muktupāvels
+   * https://gitlab.gnome.org/GNOME/gnome-flashback/-/commit/f884127
+   */
+  GdkDisplay *display;
+  Display *xdisplay;
+  //Window xwindow;
+  Atom gtk_frame_extents;
+  Atom type;
+  gint format;
+  gulong n_items;
+  gulong bytes_after;
+  guchar *data;
+  gint result;
+  gulong *borders;
+
+  display = gdk_display_get_default ();
+  xdisplay = gdk_x11_display_get_xdisplay (display);
+  //xwindow = gdk_x11_window_get_xid (window);
+  gtk_frame_extents = XInternAtom (xdisplay, "_GTK_FRAME_EXTENTS", False);
+
+  gdk_x11_display_error_trap_push (display);
+  result = XGetWindowProperty (xdisplay, xwindow, gtk_frame_extents,
+                               0, G_MAXLONG, False, XA_CARDINAL,
+                               &type, &format, &n_items, &bytes_after, &data);
+  gdk_x11_display_error_trap_pop_ignored (display);
+
+  if (data == NULL)
+    return FALSE;
+
+  if (result != Success || type != XA_CARDINAL || format != 32 || n_items != 4)
+    {
+      XFree (data);
+      return FALSE;
+    }
+
+  borders = (gulong *) data;
+
+  extents->left = borders[0];
+  extents->right = borders[1];
+  extents->top = borders[2];
+  extents->bottom = borders[3];
+
+  XFree (data);
+  return TRUE;
+}
+
+
+
 static void
 panel_window_active_window_geometry_changed (WnckWindow  *active_window,
                                              PanelWindow *window)
@@ -2391,11 +2444,33 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
     {
       if (wnck_window_get_window_type (active_window) != WNCK_WINDOW_DESKTOP)
         {
+          GdkWindow *csd_window;
+          GtkBorder extents;
+          GdkDisplay *gdkdisplay;
+          Window xwindow;
+
           /* obtain position and dimensions from the active window */
           wnck_window_get_geometry (active_window,
                                     &window_area.x, &window_area.y,
                                     &window_area.width, &window_area.height);
 
+          /* if a window uses client-side decorations, check the _GTK_FRAME_EXTENTS
+           * application window property */
+          xwindow = wnck_window_get_xid (active_window);
+
+          gdkdisplay = gdk_display_get_default ();
+          /* FIXME: Why does this not return a valid GdkWindow? */
+          csd_window = gdk_x11_window_lookup_for_display (gdkdisplay, xwindow);
+          if (!csd_window)
+            g_warning ("active window not found");
+
+          if (xfce_panel_has_gtk_frame_extents (xwindow, &extents))
+            {
+              window_area.x += extents.left;
+              window_area.y += extents.top;
+              window_area.width -= extents.left + extents.right;
+              window_area.height -= extents.top + extents.bottom;
+            }
           /* if a window is shaded, check the height of the window's
            * decoration as exposed through the _NET_FRAME_EXTENTS application
            * window property */
