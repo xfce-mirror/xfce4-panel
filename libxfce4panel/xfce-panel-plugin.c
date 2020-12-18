@@ -1065,8 +1065,10 @@ xfce_panel_plugin_button_press_event (GtkWidget      *widget,
 
 
 static gboolean
-xfce_panel_plugin_idle_move (XfcePanelPlugin *plugin)
+xfce_panel_plugin_idle_move (gpointer user_data)
 {
+  XfcePanelPlugin *plugin = user_data;
+
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), FALSE);
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (plugin), FALSE);
 
