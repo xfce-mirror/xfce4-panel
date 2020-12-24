@@ -1010,8 +1010,6 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   g_signal_connect (G_OBJECT (mi), "button-release-event",
       G_CALLBACK (window_menu_plugin_menu_window_item_activate), window);
 
-  g_free (utf8);
-  g_free (decorated);
 
   /* make the label pretty on long window names */
   label = gtk_bin_get_child (GTK_BIN (mi));
@@ -1026,6 +1024,9 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       gtk_label_set_markup (GTK_LABEL (label), label_text);
       g_free (label_text);
     }
+
+  g_free (decorated);
+  g_free (utf8);
 
   gtk_label_set_ellipsize (GTK_LABEL (label), plugin->ellipsize_mode);
   gtk_label_set_max_width_chars (GTK_LABEL (label), plugin->max_width_chars);
