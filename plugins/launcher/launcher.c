@@ -2498,7 +2498,7 @@ launcher_plugin_item_exec_on_screen (GarconMenuItem *item,
                             garcon_menu_item_get_path (item),
                             argv, NULL, G_SPAWN_SEARCH_PATH,
                             garcon_menu_item_supports_startup_notification (item),
-                            event_time, icon, FALSE, &error);
+                            event_time, icon, TRUE, &error);
 
       g_strfreev (argv);
     }
