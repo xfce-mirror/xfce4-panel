@@ -1,24 +1,20 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Allan Nordhøy <epost@anotheragency.no>, 2014-2015
-# Allan Nordhøy <epost@anotheragency.no>, 2017
-# Christian Lomsdalen <christian@vindstille.net>, 2007
-# Erlend Østlie <erlendandreas12368@gmail.com>, 2018
-# Eskild Hustvedt <eskild@goldenfiles.com>, 2004
-# Harald H. <haarektrans@gmail.com>, 2014-2015
-# Kjell Cato Heskjestad <cato@heskjestad.xyz>, 2019-2020
-# Terje Uriansrud <terje@uriansrud.net>, 2010
+# Xfce Bot <transifex@xfce.org>, 2021
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Xfce4-panel\n"
+"Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-21 00:46+0200\n"
-"PO-Revision-Date: 2020-08-21 15:35+0000\n"
-"Last-Translator: Kjell Cato Heskjestad <cato@heskjestad.xyz>\n"
-"Language-Team: Norwegian Bokmål (http://www.transifex.com/xfce/xfce4-panel/language/nb/)\n"
+"POT-Creation-Date: 2021-01-06 14:19+0100\n"
+"PO-Revision-Date: 2020-12-28 17:37+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>, 2021\n"
+"Language-Team: Norwegian Bokmål (https://www.transifex.com/xfce/teams/16840/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -33,15 +29,18 @@ msgstr "Lag snarvei på panelet"
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop "
 "file"
-msgstr "Legg til ny programstarter til panelet basert på informasjonen i denne skrivebordsfilen"
+msgstr ""
+"Legg til ny programstarter til panelet basert på informasjonen i denne "
+"skrivebordsfilen"
 
 #: ../panel-preferences.desktop.in.h:1
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
-msgstr "panel;innstillinger;oppsett;oppgavelinje;skjul;programmeny;start;knapper;programstarter;varslingsområde;status;ikoner;programtillegg;"
+msgstr ""
+"panel;innstillinger;oppsett;oppgavelinje;skjul;programmeny;start;knapper;programstarter;varslingsområde;status;ikoner;programtillegg;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2936
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2964
 msgid "Panel"
 msgstr "Panel"
 
@@ -50,18 +49,18 @@ msgid "Customize the panel"
 msgstr "Tilpass panelet"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1105
+#: ../libxfce4panel/xfce-panel-plugin.c:1107
 #: ../panel/panel-preferences-dialog.c:1321
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Er du sikker på at du vil fjerne «%s»?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1110
+#: ../libxfce4panel/xfce-panel-plugin.c:1112
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "Hvis du sletter et element fra panelet vil dets oppsett gå tapt."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
+#: ../libxfce4panel/xfce-panel-plugin.c:1113 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
 #: ../plugins/directorymenu/directorymenu.c:473
@@ -69,45 +68,46 @@ msgstr "Hvis du sletter et element fra panelet vil dets oppsett gå tapt."
 msgid "_Cancel"
 msgstr "_Avbryt"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1112
-#: ../libxfce4panel/xfce-panel-plugin.c:1287
+#: ../libxfce4panel/xfce-panel-plugin.c:1114
+#: ../libxfce4panel/xfce-panel-plugin.c:1289
 #: ../panel/panel-plugin-external.c:443
 #: ../panel/panel-preferences-dialog.c:961
 #: ../panel/panel-preferences-dialog.c:1327
-#: ../plugins/launcher/launcher-dialog.c:852
+#: ../panel/panel-preferences-dialog.glade.h:59
+#: ../plugins/launcher/launcher-dialog.c:859
 msgid "_Remove"
 msgstr "_Fjern"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1237
+#: ../libxfce4panel/xfce-panel-plugin.c:1239
 msgid "_Properties"
 msgstr "_Egenskaper"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3024
+#: ../libxfce4panel/xfce-panel-plugin.c:1254 ../panel/panel-window.c:3052
 msgid "_About"
 msgstr "_Om"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1267
+#: ../libxfce4panel/xfce-panel-plugin.c:1269
 msgid "_Move"
 msgstr "_Flytt"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1308
+#: ../libxfce4panel/xfce-panel-plugin.c:1310
 msgid "Pane_l"
 msgstr "Pane_l"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2949
+#: ../libxfce4panel/xfce-panel-plugin.c:1319 ../panel/panel-window.c:2977
 msgid "Add _New Items..."
 msgstr "Legg til _nye elementer …"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2964
+#: ../libxfce4panel/xfce-panel-plugin.c:1334 ../panel/panel-window.c:2992
 msgid "Panel Pr_eferences..."
 msgstr "Pan_elinnstillinger …"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2996
+#: ../libxfce4panel/xfce-panel-plugin.c:1355 ../panel/panel-window.c:3024
 msgid "Log _Out"
 msgstr "L_ogg ut"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:207
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3015
+#: ../libxfce4panel/xfce-panel-plugin.c:1375 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3043
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -120,7 +120,7 @@ msgstr "L_ogg ut"
 msgid "_Help"
 msgstr "_Hjelp"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1388
+#: ../libxfce4panel/xfce-panel-plugin.c:1390
 msgid "About"
 msgstr "Om"
 
@@ -236,7 +236,9 @@ msgstr "Kjør"
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "Ønsker du å starte panelet? Hvis ja, sørg for å lagre økten ved utlogging , slik at panelet startes automatisk neste gang du logger inn."
+msgstr ""
+"Ønsker du å starte panelet? Hvis ja, sørg for å lagre økten ved utlogging , "
+"slik at panelet startes automatisk neste gang du logger inn."
 
 #: ../panel/main.c:445 ../panel/main.c:459
 #, c-format
@@ -255,7 +257,9 @@ msgstr "Lag _oppstarter"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Dette vil opprette et nytt oppstarter-tillegg på panelet og legger til inndregde filer som menyelementer."
+msgstr ""
+"Dette vil opprette et nytt oppstarter-tillegg på panelet og legger til "
+"inndregde filer som menyelementer."
 
 #: ../panel/panel-application.c:987
 #, c-format
@@ -272,7 +276,9 @@ msgstr "Avslutt"
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "Du har startet X uten en øktbehandler. Ved å klikke Avslutt lukkes X tjeneren."
+msgstr ""
+"Du har startet X uten en øktbehandler. Ved å klikke Avslutt lukkes X "
+"tjeneren."
 
 #: ../panel/panel-application.c:1729
 msgid "Are you sure you want to quit the panel?"
@@ -286,14 +292,17 @@ msgstr "Klarte ikke kjøre kommandoen «%s»"
 #: ../panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Ugyldig hendelsessyntaks for programtillegg. Bruk PROGRAMTILLEGGS-NAVN:NAVN[:TYPE:VERDI]."
+msgstr ""
+"Ugyldig hendelsessyntaks for programtillegg. Bruk PROGRAMTILLEGGS-"
+"NAVN:NAVN[:TYPE:VERDI]."
 
 #: ../panel/panel-dbus-client.c:248
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "Ugyldig hinttype «%s». Gyldige verdier er bool, double, int, string og unit."
+msgstr ""
+"Ugyldig hinttype «%s». Gyldige verdier er bool, double, int, string og unit."
 
 #: ../panel/panel-dialogs.c:58
 msgid "Unable to open the e-mail address"
@@ -305,14 +314,19 @@ msgstr "Panelet til Xfce-skrivebordsmiljøet"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr "haarek - Harald <https://www.transifex.com/accounts/profile/haarek/>\nkingu - Allan Nordhøy <https://www.transifex.com/accounts/profile/kingu/>\npapparonny - Ronny K. M. Olufsen <https://www.transifex.com/accounts/profile/papparonny/>\nTerje Uriansrud<terje@uriansrud.net>"
+msgstr ""
+"haarek - Harald <https://www.transifex.com/accounts/profile/haarek/>\n"
+"kingu - Allan Nordhøy <https://www.transifex.com/accounts/profile/kingu/>\n"
+"papparonny - Ronny K. M. Olufsen <https://www.transifex.com/accounts/profile/papparonny/>\n"
+"Terje Uriansrud<terje@uriansrud.net>"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Add New Item"
 msgstr "Legg til nytt element"
 
-#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:203
+#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:201
+#: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "_Legg til"
@@ -330,7 +344,9 @@ msgstr "Panel %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "Ettersom panelet kjører i kiosk-modus, kan du ikke gjøre endringer på panelinnstillinger som vanlig bruker"
+msgstr ""
+"Ettersom panelet kjører i kiosk-modus, kan du ikke gjøre endringer på "
+"panelinnstillinger som vanlig bruker"
 
 #: ../panel/panel-dialogs.c:237
 msgid "Modifying the panel is not allowed"
@@ -340,11 +356,7 @@ msgstr "Endring av panelet er ikke tillatt"
 msgid "Add New Items"
 msgstr "Legg til nye elementer"
 
-#: ../panel/panel-item-dialog.c:197
-msgid "Add new plugins to the panel"
-msgstr "Legg til nye programtillegg i panel"
-
-#: ../panel/panel-item-dialog.c:211
+#: ../panel/panel-item-dialog.c:209
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:7
@@ -359,19 +371,21 @@ msgstr "Legg til nye programtillegg i panel"
 msgid "_Close"
 msgstr "_Lukk"
 
-#: ../panel/panel-item-dialog.c:227
+#: ../panel/panel-item-dialog.c:225
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "_Søk:"
 
-#: ../panel/panel-item-dialog.c:235
+#: ../panel/panel-item-dialog.c:233
 msgid "Enter search phrase here"
 msgstr "Skriv inn søkeord her"
 
 #: ../panel/panel-plugin-external.c:436
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "Programtillegget «%s» forsvant uventet fra panelet, ønsker du å restarte det?"
+msgstr ""
+"Programtillegget «%s» forsvant uventet fra panelet, ønsker du å restarte "
+"det?"
 
 #: ../panel/panel-plugin-external.c:438
 #, c-format
@@ -379,7 +393,10 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Programtillegget startet på nytt mer enn en gang de siste %d sekunder. Hvis du velger Start så vil panelet forsøke å starte på nytt igjen ellers vil det permanent fjernes fra panelet."
+msgstr ""
+"Programtillegget startet på nytt mer enn en gang de siste %d sekunder. Hvis "
+"du velger Start så vil panelet forsøke å starte på nytt igjen ellers vil det"
+" permanent fjernes fra panelet."
 
 #: ../panel/panel-plugin-external.c:442
 msgid "_Execute"
@@ -422,7 +439,9 @@ msgstr "%s <span color=\"grey\" size=\"small\">(ekstern)</span>"
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "Internt navn: %s-%d\nPID: %d"
+msgstr ""
+"Internt navn: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
@@ -530,7 +549,9 @@ msgstr "Ikke _reserver plass ved kanter"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "Velg dette alternativet hvis du vil at maksimerte vinduer skal dekke området bak panelet. Dette fungerer bare når panelet er tilknyttet en skjermkant."
+msgstr ""
+"Velg dette alternativet hvis du vil at maksimerte vinduer skal dekke området"
+" bak panelet. Dette fungerer bare når panelet er tilknyttet en skjermkant."
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
@@ -567,7 +588,9 @@ msgstr "Øk lengden a_utomatisk"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Velg denne for å automatisk øke panellengden hvis programtillegg krever mer plass."
+msgstr ""
+"Velg denne for å automatisk øke panellengden hvis programtillegg krever mer "
+"plass."
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "D_isplay"
@@ -626,7 +649,9 @@ msgstr "Sett opp …"
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>Komposittmodus er slått av</b>\nSlå på kompositteffekter i vindusbehandleren for å kunne justere panelets gjennomsikighet."
+msgstr ""
+"<b>Komposittmodus er slått av</b>\n"
+"Slå på kompositteffekter i vindusbehandleren for å kunne justere panelets gjennomsikighet."
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:52
@@ -642,23 +667,15 @@ msgstr "_Avslutt"
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "Gjennomsiktighet når musepekeren er over panelet, hvor 0 er gjennomsiktig og 100 er ugjennomsiktig."
+msgstr ""
+"Gjennomsiktighet når musepekeren er over panelet, hvor 0 er gjennomsiktig og"
+" 100 er ugjennomsiktig."
 
 #: ../panel/panel-preferences-dialog.glade.h:56
 msgid "Appeara_nce"
 msgstr "Utsee_nde"
 
-#: ../panel/panel-preferences-dialog.glade.h:57
-#: ../plugins/launcher/launcher-dialog.glade.h:21
-msgid "Move currently selected item up by one row"
-msgstr "Flytt valgt element en rad opp"
-
 #: ../panel/panel-preferences-dialog.glade.h:58
-#: ../plugins/launcher/launcher-dialog.glade.h:22
-msgid "Move currently selected item down by one row"
-msgstr "Flytt valgt element en rad ned"
-
-#: ../panel/panel-preferences-dialog.glade.h:59
 msgid "Add new item to this panel"
 msgstr "Legg til nytt element på dette panelet"
 
@@ -676,6 +693,16 @@ msgid "Show about information of the currently selected item"
 msgstr "Vis informasjon om valgt element"
 
 #: ../panel/panel-preferences-dialog.glade.h:63
+#: ../plugins/launcher/launcher-dialog.glade.h:21
+msgid "Move currently selected item up by one row"
+msgstr "Flytt valgt element en rad opp"
+
+#: ../panel/panel-preferences-dialog.glade.h:64
+#: ../plugins/launcher/launcher-dialog.glade.h:22
+msgid "Move currently selected item down by one row"
+msgstr "Flytt valgt element en rad ned"
+
+#: ../panel/panel-preferences-dialog.glade.h:65
 msgid "Ite_ms"
 msgstr "Ele_menter"
 
@@ -703,7 +730,7 @@ msgstr "Erfaren"
 msgid "Expert"
 msgstr "Ekspert"
 
-#: ../panel/panel-window.c:2981
+#: ../panel/panel-window.c:3009
 msgid "_Lock Panel"
 msgstr "_Lås panel"
 
@@ -780,7 +807,9 @@ msgstr "_Vis bekreftelsesdialog"
 #: ../plugins/actions/actions-dialog.glade.h:16
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Vis en bekreftelsesdialog med en 30 sekunders nedtelling for noen av handlingene."
+msgstr ""
+"Vis en bekreftelsesdialog med en 30 sekunders nedtelling for noen av "
+"handlingene."
 
 #: ../plugins/actions/actions-dialog.glade.h:17
 msgid "_Actions"
@@ -965,7 +994,9 @@ msgstr "Vis generiske programn_avn"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Velg denne for å vise generiske programnavn i menyen, for eksempel «Filbehandler» istedenfor «Thunar»"
+msgstr ""
+"Velg denne for å vise generiske programnavn i menyen, for eksempel "
+"«Filbehandler» istedenfor «Thunar»"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:17
@@ -1017,7 +1048,7 @@ msgstr "_OK"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2513
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2509
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Klarte ikke kjøre kommandoen «%s»."
@@ -1103,7 +1134,9 @@ msgstr "Klokke"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Navn på tidssone som har sammenheng med fil i soneinfo-database, for eksempel «Amerika/New_York». La stå tom for å bruke lokal tid."
+msgstr ""
+"Navn på tidssone som har sammenheng med fil i soneinfo-database, for "
+"eksempel «Amerika/New_York». La stå tom for å bruke lokal tid."
 
 #: ../plugins/clock/clock-dialog.glade.h:10
 msgid "Time_zone:"
@@ -1124,7 +1157,11 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "Formatet beskriver dato og tids-delene som settes inn i filnavnet. For eksempel, %Y erstattes med året, %m med måneden og %d med dagen. Likeledes vil <b></b> formatering vil gjøre tekst halvfet. Se \"Hjelp\"-siden for ytterligere informasjon."
+msgstr ""
+"Formatet beskriver dato og tids-delene som settes inn i filnavnet. For "
+"eksempel, %Y erstattes med året, %m med måneden og %d med dagen. Likeledes "
+"vil <b></b> formatering vil gjøre tekst halvfet. Se \"Hjelp\"-siden for "
+"ytterligere informasjon."
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid "_Tooltip format:"
@@ -1526,7 +1563,10 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Skriv inn en liste over mønstre som brukes for å avgjøre hvilke filer som er synlige i en mappe. Hvis du angir men enn ett mønster må de skilles med semikolon (f.eks *.txt;*.doc)."
+msgstr ""
+"Skriv inn en liste over mønstre som brukes for å avgjøre hvilke filer som er"
+" synlige i en mappe. Hvis du angir men enn ett mønster må de skilles med "
+"semikolon (f.eks *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:15
 msgid "_File Pattern:"
@@ -1542,28 +1582,28 @@ msgstr "Filtrering"
 msgid "Open launcher menu"
 msgstr "Åpne oppstarter-menyen"
 
-#: ../plugins/launcher/launcher.c:1651
+#: ../plugins/launcher/launcher.c:1647
 msgid "Unnamed Item"
 msgstr "Uten navn"
 
-#: ../plugins/launcher/launcher.c:1839
+#: ../plugins/launcher/launcher.c:1835
 msgid "No items"
 msgstr "Ingen element"
 
-#: ../plugins/launcher/launcher-dialog.c:785
+#: ../plugins/launcher/launcher-dialog.c:792
 msgid "Failed to open desktop item editor"
 msgstr "Klarte ikke åpne redigering av skrivebordselement"
 
-#: ../plugins/launcher/launcher-dialog.c:853
+#: ../plugins/launcher/launcher-dialog.c:860
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Hvis du sletter et element vil det bli permanent borte"
 
-#: ../plugins/launcher/launcher-dialog.c:854
+#: ../plugins/launcher/launcher-dialog.c:861
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Er du sikker på at du vil fjerne «%s»?"
 
-#: ../plugins/launcher/launcher-dialog.c:855
+#: ../plugins/launcher/launcher-dialog.c:862
 msgid "Unnamed item"
 msgstr "Uten navn"
 
@@ -1648,7 +1688,9 @@ msgstr "Slå av _verktøytips"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "Velg denne for å slå av verktøytips når musepekeren beveger seg over knapper eller menyvalg."
+msgstr ""
+"Velg denne for å slå av verktøytips når musepekeren beveger seg over knapper"
+" eller menyvalg."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:30
 msgid "Show _label instead of icon"
@@ -1674,11 +1716,11 @@ msgstr "Avansert"
 msgid "Program launcher with optional menu"
 msgstr "Programstarter med valgfri undermeny"
 
-#: ../plugins/pager/pager.c:548 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:550 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "Arbeid_sområdeinnstillinger …"
 
-#: ../plugins/pager/pager.c:636
+#: ../plugins/pager/pager.c:638
 msgid "Unable to open the workspace settings"
 msgstr "Klarte ikke åpne innstillinger for arbeidsområde"
 
@@ -1874,7 +1916,9 @@ msgstr "Klarte ikke starte opp varslingsområdet"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "Sannsynligvis tok et annet skjermelement over funksjonen til et varslingsområde. Dette området vil ikke bli brukt."
+msgstr ""
+"Sannsynligvis tok et annet skjermelement over funksjonen til et "
+"varslingsområde. Dette området vil ikke bli brukt."
 
 #: ../plugins/systray/systray.c:415
 msgid "The notification area lost selection"
@@ -1893,7 +1937,9 @@ msgstr "Programtillegg for statuskurv"
 msgid ""
 "Provides status notifier items (application indicators) and legacy systray "
 "items"
-msgstr "Tilbyr elementer for statusvarsling (programindikatorer) og elementer i systemkurv av den gamle typen"
+msgstr ""
+"Tilbyr elementer for statusvarsling (programindikatorer) og elementer i "
+"systemkurv av den gamle typen"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
@@ -1988,36 +2034,36 @@ msgstr "Vis vi_nduer fra alle skjermer"
 msgid "Show only _minimized windows"
 msgstr "Vis kun _minimerte vinduer"
 
-#: ../plugins/tasklist/tasklist-widget.c:2957
+#: ../plugins/tasklist/tasklist-widget.c:2969
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Klarte ikke starte ny instans av «%s»"
 
-#: ../plugins/tasklist/tasklist-widget.c:2961
+#: ../plugins/tasklist/tasklist-widget.c:2973
 msgid "Error"
 msgstr "Feil"
 
-#: ../plugins/tasklist/tasklist-widget.c:3005
+#: ../plugins/tasklist/tasklist-widget.c:3017
 msgid "Launch New Instance..."
 msgstr "Start ny instans …"
 
-#: ../plugins/tasklist/tasklist-widget.c:3754
+#: ../plugins/tasklist/tasklist-widget.c:3766
 msgid "Mi_nimize All"
 msgstr "S_kjul alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3762
+#: ../plugins/tasklist/tasklist-widget.c:3774
 msgid "Un_minimize All"
 msgstr "V_is alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3770
+#: ../plugins/tasklist/tasklist-widget.c:3782
 msgid "Ma_ximize All"
 msgstr "Ma_ksimer alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3778
+#: ../plugins/tasklist/tasklist-widget.c:3790
 msgid "_Unmaximize All"
 msgstr "De-m_aksimer alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3790
+#: ../plugins/tasklist/tasklist-widget.c:3802
 msgid "_Close All"
 msgstr "_Lukk alle"
 
@@ -2029,24 +2075,24 @@ msgstr "Skifte mellom åpne vinduer med taster"
 msgid "Desktop"
 msgstr "Skrivebord"
 
-#: ../plugins/windowmenu/windowmenu.c:1277
+#: ../plugins/windowmenu/windowmenu.c:1273
 msgid "No Windows"
 msgstr "Ingen vinduer"
 
-#: ../plugins/windowmenu/windowmenu.c:1292
+#: ../plugins/windowmenu/windowmenu.c:1288
 msgid "Urgent Windows"
 msgstr "Prioriterte vinduer"
 
-#: ../plugins/windowmenu/windowmenu.c:1335
+#: ../plugins/windowmenu/windowmenu.c:1331
 msgid "Add Workspace"
 msgstr "Legg til arbeidsområde"
 
-#: ../plugins/windowmenu/windowmenu.c:1358
+#: ../plugins/windowmenu/windowmenu.c:1354
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Fjern arbeidsområde «%s»"
 
-#: ../plugins/windowmenu/windowmenu.c:1360
+#: ../plugins/windowmenu/windowmenu.c:1356
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Fjern arbeidsområde %d"
