@@ -1,20 +1,20 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Masato HASHIMOTO <cabezon.hashimoto@gmail.com>, 2017
-# Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 2016
-# Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 2016-2020
-# UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2019-2020
+# Xfce Bot <transifex@xfce.org>, 2021
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Xfce4-panel\n"
+"Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-21 00:46+0200\n"
-"PO-Revision-Date: 2020-08-24 22:00+0000\n"
-"Last-Translator: UTUMI Hirosi <utuhiro78@yahoo.co.jp>\n"
-"Language-Team: Japanese (http://www.transifex.com/xfce/xfce4-panel/language/ja/)\n"
+"POT-Creation-Date: 2021-01-06 14:19+0100\n"
+"PO-Revision-Date: 2020-12-28 17:37+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>, 2021\n"
+"Language-Team: Japanese (https://www.transifex.com/xfce/teams/16840/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -35,9 +35,10 @@ msgstr "このデスクトップファイルの情報を基にパネルに新し
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
-msgstr "パネル;設定;環境設定;タスクバー;自動非表示;アプリケーションメニュー;スタート;ボタン;ランチャー;通知領域;ステータス;アイコン;プラグイン;"
+msgstr ""
+"パネル;設定;環境設定;タスクバー;自動非表示;アプリケーションメニュー;スタート;ボタン;ランチャー;通知領域;ステータス;アイコン;プラグイン;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2936
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2964
 msgid "Panel"
 msgstr "パネル"
 
@@ -46,18 +47,18 @@ msgid "Customize the panel"
 msgstr "パネルをカスタマイズする"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1105
+#: ../libxfce4panel/xfce-panel-plugin.c:1107
 #: ../panel/panel-preferences-dialog.c:1321
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "\"%s\" を削除しますか？"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1110
+#: ../libxfce4panel/xfce-panel-plugin.c:1112
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "パネルからアイテムを削除すると、その設定も失われます。"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
+#: ../libxfce4panel/xfce-panel-plugin.c:1113 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
 #: ../plugins/directorymenu/directorymenu.c:473
@@ -65,45 +66,46 @@ msgstr "パネルからアイテムを削除すると、その設定も失われ
 msgid "_Cancel"
 msgstr "キャンセル(_C)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1112
-#: ../libxfce4panel/xfce-panel-plugin.c:1287
+#: ../libxfce4panel/xfce-panel-plugin.c:1114
+#: ../libxfce4panel/xfce-panel-plugin.c:1289
 #: ../panel/panel-plugin-external.c:443
 #: ../panel/panel-preferences-dialog.c:961
 #: ../panel/panel-preferences-dialog.c:1327
-#: ../plugins/launcher/launcher-dialog.c:852
+#: ../panel/panel-preferences-dialog.glade.h:59
+#: ../plugins/launcher/launcher-dialog.c:859
 msgid "_Remove"
 msgstr "削除(_R)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1237
+#: ../libxfce4panel/xfce-panel-plugin.c:1239
 msgid "_Properties"
 msgstr "プロパティ(_P)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3024
+#: ../libxfce4panel/xfce-panel-plugin.c:1254 ../panel/panel-window.c:3052
 msgid "_About"
 msgstr "このプログラムについて(_A)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1267
+#: ../libxfce4panel/xfce-panel-plugin.c:1269
 msgid "_Move"
 msgstr "移動(_M)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1308
+#: ../libxfce4panel/xfce-panel-plugin.c:1310
 msgid "Pane_l"
 msgstr "パネル(_L)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2949
+#: ../libxfce4panel/xfce-panel-plugin.c:1319 ../panel/panel-window.c:2977
 msgid "Add _New Items..."
 msgstr "新しいアイテムを追加する(_N)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2964
+#: ../libxfce4panel/xfce-panel-plugin.c:1334 ../panel/panel-window.c:2992
 msgid "Panel Pr_eferences..."
 msgstr "パネルの設定(_E)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2996
+#: ../libxfce4panel/xfce-panel-plugin.c:1355 ../panel/panel-window.c:3024
 msgid "Log _Out"
 msgstr "ログアウト(_O)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:207
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3015
+#: ../libxfce4panel/xfce-panel-plugin.c:1375 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3043
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -116,7 +118,7 @@ msgstr "ログアウト(_O)"
 msgid "_Help"
 msgstr "ヘルプ(_H)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1388
+#: ../libxfce4panel/xfce-panel-plugin.c:1390
 msgid "About"
 msgstr "このソフトウェアについて"
 
@@ -300,14 +302,17 @@ msgstr "Xfce デスクトップ環境のパネルです。"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr "Daichi Kawahata <daichi@xfce.org>, 2005-2007.\nMasato Hashimoto <cabezon.hashimoto@gmail.com>, 2010-2012."
+msgstr ""
+"Daichi Kawahata <daichi@xfce.org>, 2005-2007.\n"
+"Masato Hashimoto <cabezon.hashimoto@gmail.com>, 2010-2012."
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Add New Item"
 msgstr "新しいアイテムを追加する"
 
-#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:203
+#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:201
+#: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "追加(_A)"
@@ -335,11 +340,7 @@ msgstr "パネルの変更は許可されていません"
 msgid "Add New Items"
 msgstr "新しいアイテムを追加する"
 
-#: ../panel/panel-item-dialog.c:197
-msgid "Add new plugins to the panel"
-msgstr "パネルに新しいプラグインを追加する"
-
-#: ../panel/panel-item-dialog.c:211
+#: ../panel/panel-item-dialog.c:209
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:7
@@ -354,12 +355,12 @@ msgstr "パネルに新しいプラグインを追加する"
 msgid "_Close"
 msgstr "閉じる(_C)"
 
-#: ../panel/panel-item-dialog.c:227
+#: ../panel/panel-item-dialog.c:225
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "検索(_S):"
 
-#: ../panel/panel-item-dialog.c:235
+#: ../panel/panel-item-dialog.c:233
 msgid "Enter search phrase here"
 msgstr "検索フレーズを入力してください"
 
@@ -374,7 +375,9 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "プラグインは最近 %d 秒以内に 1 回以上再起動されました。「実行」を押すとパネルはプラグインの再起動を試みます。その他の場合はパネルから完全に削除されます。"
+msgstr ""
+"プラグインは最近 %d 秒以内に 1 "
+"回以上再起動されました。「実行」を押すとパネルはプラグインの再起動を試みます。その他の場合はパネルから完全に削除されます。"
 
 #: ../panel/panel-plugin-external.c:442
 msgid "_Execute"
@@ -417,7 +420,9 @@ msgstr "%s <span color=\"grey\" size=\"small\">(外部)</span>"
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "内部名: %s-%d\nPID: %d"
+msgstr ""
+"内部名: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
@@ -525,7 +530,8 @@ msgstr "パネル分のスペースを確保しない(_R)"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "ウィンドウを最大化したときにパネルの後ろまで広げたい場合はこのオプションを選択してください。これはパネルが画面端に付着している場合のみ機能します。"
+msgstr ""
+"ウィンドウを最大化したときにパネルの後ろまで広げたい場合はこのオプションを選択してください。これはパネルが画面端に付着している場合のみ機能します。"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
@@ -621,7 +627,9 @@ msgstr "設定"
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>合成処理は現在無効です。</b>\nパネルの不透明度を設定する場合はウィンドウマネージャーの合成処理を有効にしてください。"
+msgstr ""
+"<b>合成処理は現在無効です。</b>\n"
+"パネルの不透明度を設定する場合はウィンドウマネージャーの合成処理を有効にしてください。"
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:52
@@ -643,17 +651,7 @@ msgstr "ポインターがパネル上にないときの透明度です。0 で�
 msgid "Appeara_nce"
 msgstr "外観(_N)"
 
-#: ../panel/panel-preferences-dialog.glade.h:57
-#: ../plugins/launcher/launcher-dialog.glade.h:21
-msgid "Move currently selected item up by one row"
-msgstr "現在選択されているアイテムを一つ上へ移動します"
-
 #: ../panel/panel-preferences-dialog.glade.h:58
-#: ../plugins/launcher/launcher-dialog.glade.h:22
-msgid "Move currently selected item down by one row"
-msgstr "現在選択されているアイテムを一つ下へ移動します"
-
-#: ../panel/panel-preferences-dialog.glade.h:59
 msgid "Add new item to this panel"
 msgstr "このパネルに新しいアイテムを追加する"
 
@@ -671,6 +669,16 @@ msgid "Show about information of the currently selected item"
 msgstr "現在選択されているアイテムの情報を表示します"
 
 #: ../panel/panel-preferences-dialog.glade.h:63
+#: ../plugins/launcher/launcher-dialog.glade.h:21
+msgid "Move currently selected item up by one row"
+msgstr "現在選択されているアイテムを一つ上へ移動します"
+
+#: ../panel/panel-preferences-dialog.glade.h:64
+#: ../plugins/launcher/launcher-dialog.glade.h:22
+msgid "Move currently selected item down by one row"
+msgstr "現在選択されているアイテムを一つ下へ移動します"
+
+#: ../panel/panel-preferences-dialog.glade.h:65
 msgid "Ite_ms"
 msgstr "アイテム(_M)"
 
@@ -698,7 +706,7 @@ msgstr "上級者"
 msgid "Expert"
 msgstr "達人"
 
-#: ../panel/panel-window.c:2981
+#: ../panel/panel-window.c:3009
 msgid "_Lock Panel"
 msgstr "パネルをロック(_L)"
 
@@ -960,7 +968,9 @@ msgstr "アプリケーションを一般名で表示する(_A)"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "アプリケーションを一般名でメニューに表示する場合にこのオプションを選択してください。例えば \"Thunar\" は \"ファイルマネージャー\" と表示されます。"
+msgstr ""
+"アプリケーションを一般名でメニューに表示する場合にこのオプションを選択してください。例えば \"Thunar\" は \"ファイルマネージャー\" "
+"と表示されます。"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:17
@@ -1012,7 +1022,7 @@ msgstr "OK(_O)"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2513
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2509
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "コマンド \"%s\" の実行に失敗しました"
@@ -1098,7 +1108,9 @@ msgstr "時計"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "zoneinfo database 内と一致するタイムゾーン名を指定してください (例: Asia/Tokyo)。省略するとシステムのタイムゾーンが使用されます。"
+msgstr ""
+"zoneinfo database 内と一致するタイムゾーン名を指定してください (例: "
+"Asia/Tokyo)。省略するとシステムのタイムゾーンが使用されます。"
 
 #: ../plugins/clock/clock-dialog.glade.h:10
 msgid "Time_zone:"
@@ -1119,7 +1131,9 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "この形式はパネルに表示される日付と時刻部分を表します。例えば、%Y は年に、%m は月に、%d は日に置き換えられます。また、<b></b> タグで太字にすることもできます。詳しくは \"ヘルプ\" ページを参照してください。"
+msgstr ""
+"この形式はパネルに表示される日付と時刻部分を表します。例えば、%Y は年に、%m は月に、%d は日に置き換えられます。また、<b></b> "
+"タグで太字にすることもできます。詳しくは \"ヘルプ\" ページを参照してください。"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid "_Tooltip format:"
@@ -1521,7 +1535,9 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "ディレクトリ内のファイルを表示するパターンのリストを入力してください。1 つ以上のパターンを指定する場合は、それぞれをセミコロンで区切ってください (例: *.txt;*.doc)。"
+msgstr ""
+"ディレクトリ内のファイルを表示するパターンのリストを入力してください。1 つ以上のパターンを指定する場合は、それぞれをセミコロンで区切ってください "
+"(例: *.txt;*.doc)。"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:15
 msgid "_File Pattern:"
@@ -1537,28 +1553,28 @@ msgstr "フィルター"
 msgid "Open launcher menu"
 msgstr "ランチャーメニューを開く"
 
-#: ../plugins/launcher/launcher.c:1651
+#: ../plugins/launcher/launcher.c:1647
 msgid "Unnamed Item"
 msgstr "未設定"
 
-#: ../plugins/launcher/launcher.c:1839
+#: ../plugins/launcher/launcher.c:1835
 msgid "No items"
 msgstr "アイテムなし"
 
-#: ../plugins/launcher/launcher-dialog.c:785
+#: ../plugins/launcher/launcher-dialog.c:792
 msgid "Failed to open desktop item editor"
 msgstr "デスクトップアイテムエディターを開けませんでした"
 
-#: ../plugins/launcher/launcher-dialog.c:853
+#: ../plugins/launcher/launcher-dialog.c:860
 msgid "If you delete an item, it will be permanently removed"
 msgstr "アイテムを削除すると、完全に失われます"
 
-#: ../plugins/launcher/launcher-dialog.c:854
+#: ../plugins/launcher/launcher-dialog.c:861
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "\"%s\" を削除しますか？"
 
-#: ../plugins/launcher/launcher-dialog.c:855
+#: ../plugins/launcher/launcher-dialog.c:862
 msgid "Unnamed item"
 msgstr "未設定"
 
@@ -1669,11 +1685,11 @@ msgstr "拡張"
 msgid "Program launcher with optional menu"
 msgstr "オプションでメニューが付くプログラムランチャーです。"
 
-#: ../plugins/pager/pager.c:548 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:550 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "ワークスペースの設定(_S)..."
 
-#: ../plugins/pager/pager.c:636
+#: ../plugins/pager/pager.c:638
 msgid "Unable to open the workspace settings"
 msgstr "ワークスペース設定を開くことができません"
 
@@ -1983,36 +1999,36 @@ msgstr "全モニターのウィンドウを表示する(_N)"
 msgid "Show only _minimized windows"
 msgstr "最小化されたウィンドウのみ表示する(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:2957
+#: ../plugins/tasklist/tasklist-widget.c:2969
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "'%s' の新しいインスタンスを開始できません"
 
-#: ../plugins/tasklist/tasklist-widget.c:2961
+#: ../plugins/tasklist/tasklist-widget.c:2973
 msgid "Error"
 msgstr "エラー"
 
-#: ../plugins/tasklist/tasklist-widget.c:3005
+#: ../plugins/tasklist/tasklist-widget.c:3017
 msgid "Launch New Instance..."
 msgstr "新しいインスタンスを起動..."
 
-#: ../plugins/tasklist/tasklist-widget.c:3754
+#: ../plugins/tasklist/tasklist-widget.c:3766
 msgid "Mi_nimize All"
 msgstr "すべて最小化(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3762
+#: ../plugins/tasklist/tasklist-widget.c:3774
 msgid "Un_minimize All"
 msgstr "すべて元に戻す(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3770
+#: ../plugins/tasklist/tasklist-widget.c:3782
 msgid "Ma_ximize All"
 msgstr "すべて最大化(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3778
+#: ../plugins/tasklist/tasklist-widget.c:3790
 msgid "_Unmaximize All"
 msgstr "すべて元に戻す(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3790
+#: ../plugins/tasklist/tasklist-widget.c:3802
 msgid "_Close All"
 msgstr "すべて閉じる(_C)"
 
@@ -2024,24 +2040,24 @@ msgstr "開いているウィンドウをボタンを使って切り替えます
 msgid "Desktop"
 msgstr "デスクトップ"
 
-#: ../plugins/windowmenu/windowmenu.c:1277
+#: ../plugins/windowmenu/windowmenu.c:1273
 msgid "No Windows"
 msgstr "ウィンドウなし"
 
-#: ../plugins/windowmenu/windowmenu.c:1292
+#: ../plugins/windowmenu/windowmenu.c:1288
 msgid "Urgent Windows"
 msgstr "緊急通知ウィンドウ"
 
-#: ../plugins/windowmenu/windowmenu.c:1335
+#: ../plugins/windowmenu/windowmenu.c:1331
 msgid "Add Workspace"
 msgstr "ワークスペースの追加"
 
-#: ../plugins/windowmenu/windowmenu.c:1358
+#: ../plugins/windowmenu/windowmenu.c:1354
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "ワークスペース \"%s\" の削除"
 
-#: ../plugins/windowmenu/windowmenu.c:1360
+#: ../plugins/windowmenu/windowmenu.c:1356
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "ワークスペース %d を削除"
