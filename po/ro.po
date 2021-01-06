@@ -1,18 +1,20 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Dumitru Moldovan <dumol@gnome.org>, 2015
-# Mișu Moldovan <dumol@xfce.org>, 2015
+# Xfce Bot <transifex@xfce.org>, 2021
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Xfce4-panel\n"
+"Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-21 00:46+0200\n"
-"PO-Revision-Date: 2020-08-20 22:46+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
-"Language-Team: Romanian (http://www.transifex.com/xfce/xfce4-panel/language/ro/)\n"
+"POT-Creation-Date: 2021-01-06 14:19+0100\n"
+"PO-Revision-Date: 2020-12-28 17:37+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>, 2021\n"
+"Language-Team: Romanian (https://www.transifex.com/xfce/teams/16840/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27,7 +29,9 @@ msgstr "Creați un lansator în panou"
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop "
 "file"
-msgstr "Adăugați un nou lansator în panou utilizând informațiile din acest fișier desktop"
+msgstr ""
+"Adăugați un nou lansator în panou utilizând informațiile din acest fișier "
+"desktop"
 
 #: ../panel-preferences.desktop.in.h:1
 msgid ""
@@ -35,7 +39,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr ""
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2936
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2964
 msgid "Panel"
 msgstr "Panouri"
 
@@ -44,18 +48,18 @@ msgid "Customize the panel"
 msgstr "Personalizați panourile"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1105
+#: ../libxfce4panel/xfce-panel-plugin.c:1107
 #: ../panel/panel-preferences-dialog.c:1321
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Sigur doriți să eliminați „%s”?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1110
+#: ../libxfce4panel/xfce-panel-plugin.c:1112
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
+#: ../libxfce4panel/xfce-panel-plugin.c:1113 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
 #: ../plugins/directorymenu/directorymenu.c:473
@@ -63,45 +67,46 @@ msgstr ""
 msgid "_Cancel"
 msgstr "_Renunță"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1112
-#: ../libxfce4panel/xfce-panel-plugin.c:1287
+#: ../libxfce4panel/xfce-panel-plugin.c:1114
+#: ../libxfce4panel/xfce-panel-plugin.c:1289
 #: ../panel/panel-plugin-external.c:443
 #: ../panel/panel-preferences-dialog.c:961
 #: ../panel/panel-preferences-dialog.c:1327
-#: ../plugins/launcher/launcher-dialog.c:852
+#: ../panel/panel-preferences-dialog.glade.h:59
+#: ../plugins/launcher/launcher-dialog.c:859
 msgid "_Remove"
 msgstr "_Elimină"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1237
+#: ../libxfce4panel/xfce-panel-plugin.c:1239
 msgid "_Properties"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3024
+#: ../libxfce4panel/xfce-panel-plugin.c:1254 ../panel/panel-window.c:3052
 msgid "_About"
 msgstr "_Despre"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1267
+#: ../libxfce4panel/xfce-panel-plugin.c:1269
 msgid "_Move"
 msgstr "_Mutare"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1308
+#: ../libxfce4panel/xfce-panel-plugin.c:1310
 msgid "Pane_l"
 msgstr "P_anou"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2949
+#: ../libxfce4panel/xfce-panel-plugin.c:1319 ../panel/panel-window.c:2977
 msgid "Add _New Items..."
 msgstr "Adăugare de _noi elemente…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2964
+#: ../libxfce4panel/xfce-panel-plugin.c:1334 ../panel/panel-window.c:2992
 msgid "Panel Pr_eferences..."
 msgstr "_Preferințe pentru panouri…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2996
+#: ../libxfce4panel/xfce-panel-plugin.c:1355 ../panel/panel-window.c:3024
 msgid "Log _Out"
 msgstr "_Ieșire"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:207
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3015
+#: ../libxfce4panel/xfce-panel-plugin.c:1375 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3043
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -114,7 +119,7 @@ msgstr "_Ieșire"
 msgid "_Help"
 msgstr "_Ajutor"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1388
+#: ../libxfce4panel/xfce-panel-plugin.c:1390
 msgid "About"
 msgstr "Despre"
 
@@ -230,7 +235,9 @@ msgstr ""
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "Dacă doriți să porniți panoul, salvați sesiunea la ieșire, astfel încât panoul să fie pornit automat la următoarea autentificare."
+msgstr ""
+"Dacă doriți să porniți panoul, salvați sesiunea la ieșire, astfel încât "
+"panoul să fie pornit automat la următoarea autentificare."
 
 #: ../panel/main.c:445 ../panel/main.c:459
 #, c-format
@@ -249,7 +256,9 @@ msgstr "Creează un _lansator"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Această acțiune va crea un nou modul de tip lansator în panou și va insera ca elemente de meniu fișierele plasate cu mausul."
+msgstr ""
+"Această acțiune va crea un nou modul de tip lansator în panou și va insera "
+"ca elemente de meniu fișierele plasate cu mausul."
 
 #: ../panel/panel-application.c:987
 #, c-format
@@ -267,7 +276,9 @@ msgstr "Ieșire"
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "Ați pornit serverul X fără un manager de sesiune. Dacă alegeți „Ieșire” veți închide serverul X."
+msgstr ""
+"Ați pornit serverul X fără un manager de sesiune. Dacă alegeți „Ieșire” veți"
+" închide serverul X."
 
 #: ../panel/panel-application.c:1729
 msgid "Are you sure you want to quit the panel?"
@@ -281,14 +292,18 @@ msgstr "Nu s-a putut executa comanda „%s”"
 #: ../panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Sintaxă nevalidă pentru evenimentul de modul. Utilizați NUME-MODUL:NUME[:TIP:VALOARE]."
+msgstr ""
+"Sintaxă nevalidă pentru evenimentul de modul. Utilizați NUME-"
+"MODUL:NUME[:TIP:VALOARE]."
 
 #: ../panel/panel-dbus-client.c:248
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "Tip nevalid de hint: „%s”. Tipurile valide sunt: bool, double, int, string și uint."
+msgstr ""
+"Tip nevalid de hint: „%s”. Tipurile valide sunt: bool, double, int, string "
+"și uint."
 
 #: ../panel/panel-dialogs.c:58
 msgid "Unable to open the e-mail address"
@@ -307,7 +322,8 @@ msgstr "Mișu Moldovan <dumol@xfce.org>"
 msgid "Add New Item"
 msgstr "Adăugare de noi elemente"
 
-#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:203
+#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:201
+#: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr ""
@@ -325,7 +341,9 @@ msgstr "Panoul %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "Pentru că panoul este pornit în modul chioșc, nu aveți permisiunea să modificați configurația panoului ca utilizator obișnuit"
+msgstr ""
+"Pentru că panoul este pornit în modul chioșc, nu aveți permisiunea să "
+"modificați configurația panoului ca utilizator obișnuit"
 
 #: ../panel/panel-dialogs.c:237
 msgid "Modifying the panel is not allowed"
@@ -335,11 +353,7 @@ msgstr "Modificarea panoului nu este permisă"
 msgid "Add New Items"
 msgstr "Adăugare de noi elemente"
 
-#: ../panel/panel-item-dialog.c:197
-msgid "Add new plugins to the panel"
-msgstr "Adăugați noi module în panou"
-
-#: ../panel/panel-item-dialog.c:211
+#: ../panel/panel-item-dialog.c:209
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:7
@@ -354,19 +368,21 @@ msgstr "Adăugați noi module în panou"
 msgid "_Close"
 msgstr "_Închide"
 
-#: ../panel/panel-item-dialog.c:227
+#: ../panel/panel-item-dialog.c:225
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "Cau_tă:"
 
-#: ../panel/panel-item-dialog.c:235
+#: ../panel/panel-item-dialog.c:233
 msgid "Enter search phrase here"
 msgstr "Introduceți termenii de căutare"
 
 #: ../panel/panel-plugin-external.c:436
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "Modulul „%s” a părăsit panoul într-un mod neașteptat, doriți să îl reporniți?"
+msgstr ""
+"Modulul „%s” a părăsit panoul într-un mod neașteptat, doriți să îl "
+"reporniți?"
 
 #: ../panel/panel-plugin-external.c:438
 #, c-format
@@ -374,7 +390,10 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Modulul s-a repornit de mai multe ori în ultimele %d secunde. Dacă alegeți „Execută”, panoul va încerca să repornească modulul, altfel el va fi eliminat definitiv din panou."
+msgstr ""
+"Modulul s-a repornit de mai multe ori în ultimele %d secunde. Dacă alegeți "
+"„Execută”, panoul va încerca să repornească modulul, altfel el va fi "
+"eliminat definitiv din panou."
 
 #: ../panel/panel-plugin-external.c:442
 msgid "_Execute"
@@ -417,7 +436,9 @@ msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "Nume intern: %s-%d\nPID: %d"
+msgstr ""
+"Nume intern: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
@@ -506,7 +527,8 @@ msgstr "Întinde pe toate mo_nitoarele"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr "Selectați această opțiune pentru a extinde panoul pe mai multe monitoare."
+msgstr ""
+"Selectați această opțiune pentru a extinde panoul pe mai multe monitoare."
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "_Lock panel"
@@ -515,7 +537,9 @@ msgstr "Fi_xează panoul"
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr "Selectați această opțiune pentru a ascunde mânerele panoului și a-i fixa poziția."
+msgstr ""
+"Selectați această opțiune pentru a ascunde mânerele panoului și a-i fixa "
+"poziția."
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Don't _reserve space on borders"
@@ -525,7 +549,10 @@ msgstr "Nu rezer_va spațiu la margine"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "Selectați această opțiune dacă doriți ca ferestrele maximizate să acopere zona din spatele panoului. Ceea ce presupune că panoul este atașat marginii unui ecran."
+msgstr ""
+"Selectați această opțiune dacă doriți ca ferestrele maximizate să acopere "
+"zona din spatele panoului. Ceea ce presupune că panoul este atașat marginii "
+"unui ecran."
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
@@ -562,7 +589,9 @@ msgstr "Cr_eștere automată în lungime"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Selectați această opțiune pentru a incrementa automat lungimea unui panou dacă modulele sale necesită mai mult spațiu."
+msgstr ""
+"Selectați această opțiune pentru a incrementa automat lungimea unui panou "
+"dacă modulele sale necesită mai mult spațiu."
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "D_isplay"
@@ -637,23 +666,15 @@ msgstr "I_eșire:"
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "Transparență când cursorul mausului nu este deasupra panoului, 0 însemnând transparență completă, iar 100 însemnând opacitate completă."
+msgstr ""
+"Transparență când cursorul mausului nu este deasupra panoului, 0 însemnând "
+"transparență completă, iar 100 însemnând opacitate completă."
 
 #: ../panel/panel-preferences-dialog.glade.h:56
 msgid "Appeara_nce"
 msgstr "A_spect"
 
-#: ../panel/panel-preferences-dialog.glade.h:57
-#: ../plugins/launcher/launcher-dialog.glade.h:21
-msgid "Move currently selected item up by one row"
-msgstr "Mutați elementul selectat cu un rând mai sus"
-
 #: ../panel/panel-preferences-dialog.glade.h:58
-#: ../plugins/launcher/launcher-dialog.glade.h:22
-msgid "Move currently selected item down by one row"
-msgstr "Mutați elementul selectat cu un rând mai jos"
-
-#: ../panel/panel-preferences-dialog.glade.h:59
 msgid "Add new item to this panel"
 msgstr "Adăugați un nou element în acest panou"
 
@@ -671,6 +692,16 @@ msgid "Show about information of the currently selected item"
 msgstr "Arată detalii despre elementul selectat"
 
 #: ../panel/panel-preferences-dialog.glade.h:63
+#: ../plugins/launcher/launcher-dialog.glade.h:21
+msgid "Move currently selected item up by one row"
+msgstr "Mutați elementul selectat cu un rând mai sus"
+
+#: ../panel/panel-preferences-dialog.glade.h:64
+#: ../plugins/launcher/launcher-dialog.glade.h:22
+msgid "Move currently selected item down by one row"
+msgstr "Mutați elementul selectat cu un rând mai jos"
+
+#: ../panel/panel-preferences-dialog.glade.h:65
 msgid "Ite_ms"
 msgstr "Ele_mente"
 
@@ -698,7 +729,7 @@ msgstr "Avansat"
 msgid "Expert"
 msgstr "Expert"
 
-#: ../panel/panel-window.c:2981
+#: ../panel/panel-window.c:3009
 msgid "_Lock Panel"
 msgstr "Fi_xează panoul"
 
@@ -775,7 +806,9 @@ msgstr "Arată un _dialog de confirmare"
 #: ../plugins/actions/actions-dialog.glade.h:16
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Arată un dialog de confirmare cu un timeout de 30 de secunde pentru anumite acțiuni."
+msgstr ""
+"Arată un dialog de confirmare cu un timeout de 30 de secunde pentru anumite "
+"acțiuni."
 
 #: ../plugins/actions/actions-dialog.glade.h:17
 msgid "_Actions"
@@ -960,7 +993,9 @@ msgstr "A_rată numele generice ale programelor"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Selectați această opțiune pentru a afișa numele generice ale programelor în meniu, de exemplu „Manager de fișiere” pentru „Thunar”"
+msgstr ""
+"Selectați această opțiune pentru a afișa numele generice ale programelor în "
+"meniu, de exemplu „Manager de fișiere” pentru „Thunar”"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:17
@@ -1012,7 +1047,7 @@ msgstr "_OK"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2513
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2509
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Nu s-a putut executa comanda „%s”."
@@ -1098,7 +1133,9 @@ msgstr "Ceas"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Numele unui fus orar conform bazei de date zoneinfo, de exemplu „Europe/Bucharest”. Lăsați necompletat pentru ora locală."
+msgstr ""
+"Numele unui fus orar conform bazei de date zoneinfo, de exemplu "
+"„Europe/Bucharest”. Lăsați necompletat pentru ora locală."
 
 #: ../plugins/clock/clock-dialog.glade.h:10
 msgid "Time_zone:"
@@ -1119,7 +1156,10 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "Formatul descrie data și ora de afișat în panou. De exemplu, %Y reprezintă anul, %m luna, iar %d ziua. În plus, marcajele de tip <b></b> vor îngroșa textul. Consultați pagina de ajutor pentru detalii suplimentare."
+msgstr ""
+"Formatul descrie data și ora de afișat în panou. De exemplu, %Y reprezintă "
+"anul, %m luna, iar %d ziua. În plus, marcajele de tip <b></b> vor îngroșa "
+"textul. Consultați pagina de ajutor pentru detalii suplimentare."
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid "_Tooltip format:"
@@ -1521,7 +1561,11 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Introduceți o listă de modele ce va fi utilizată pentru a determina ce fișiere vor fi vizibile într-un director. Dacă specificați mai mult de un model, lista elementelor trebuie separată prin punct și virgulă (de ex. *.txt;*.doc)."
+msgstr ""
+"Introduceți o listă de modele ce va fi utilizată pentru a determina ce "
+"fișiere vor fi vizibile într-un director. Dacă specificați mai mult de un "
+"model, lista elementelor trebuie separată prin punct și virgulă (de ex. "
+"*.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:15
 msgid "_File Pattern:"
@@ -1537,28 +1581,28 @@ msgstr "Filtrare"
 msgid "Open launcher menu"
 msgstr "Deschide meniul lansatorului"
 
-#: ../plugins/launcher/launcher.c:1651
+#: ../plugins/launcher/launcher.c:1647
 msgid "Unnamed Item"
 msgstr "Element fără nume"
 
-#: ../plugins/launcher/launcher.c:1839
+#: ../plugins/launcher/launcher.c:1835
 msgid "No items"
 msgstr "Niciun element"
 
-#: ../plugins/launcher/launcher-dialog.c:785
+#: ../plugins/launcher/launcher-dialog.c:792
 msgid "Failed to open desktop item editor"
 msgstr "Nu s-a putut deschide editorul elementului de pe desktop"
 
-#: ../plugins/launcher/launcher-dialog.c:853
+#: ../plugins/launcher/launcher-dialog.c:860
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Dacă eliminați un element, acesta va fi șters definitiv"
 
-#: ../plugins/launcher/launcher-dialog.c:854
+#: ../plugins/launcher/launcher-dialog.c:861
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Sigur doriți să eliminați „%s”?"
 
-#: ../plugins/launcher/launcher-dialog.c:855
+#: ../plugins/launcher/launcher-dialog.c:862
 msgid "Unnamed item"
 msgstr "Element fără nume"
 
@@ -1643,7 +1687,9 @@ msgstr "Nu arăta _indicii"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "Selectați această opțiune pentru a dezactiva indiciile la trecerea cursorului de maus peste butonul din panou ori elementele din meniu."
+msgstr ""
+"Selectați această opțiune pentru a dezactiva indiciile la trecerea "
+"cursorului de maus peste butonul din panou ori elementele din meniu."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:30
 msgid "Show _label instead of icon"
@@ -1655,7 +1701,9 @@ msgstr "Arată în panou _ultimul element utilizat"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:32
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr "Selectați această opțiune pentru a muta în panou elementul selectat din meniu."
+msgstr ""
+"Selectați această opțiune pentru a muta în panou elementul selectat din "
+"meniu."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:33
 msgid "_Arrow button position:"
@@ -1669,11 +1717,11 @@ msgstr "Avansate"
 msgid "Program launcher with optional menu"
 msgstr "Lansator de programe cu meniu opțional"
 
-#: ../plugins/pager/pager.c:548 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:550 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "_Opțiuni pentru spațiile de lucru…"
 
-#: ../plugins/pager/pager.c:636
+#: ../plugins/pager/pager.c:638
 msgid "Unable to open the workspace settings"
 msgstr "Nu s-au putut deschide opțiunile pentru spațiile de lucru"
 
@@ -1869,7 +1917,9 @@ msgstr "Nu s-a putut inițializa zona de notificare"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "Cel mai probabil un alt widget a preluat deja funcționalitatea zonei de notificare. Această zonă nu va fi folosită."
+msgstr ""
+"Cel mai probabil un alt widget a preluat deja funcționalitatea zonei de "
+"notificare. Această zonă nu va fi folosită."
 
 #: ../plugins/systray/systray.c:415
 msgid "The notification area lost selection"
@@ -1983,36 +2033,36 @@ msgstr "Arată ferestrele pe _toate monitoarele"
 msgid "Show only _minimized windows"
 msgstr "Arată doar ferestrele _minimizate"
 
-#: ../plugins/tasklist/tasklist-widget.c:2957
+#: ../plugins/tasklist/tasklist-widget.c:2969
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:2961
+#: ../plugins/tasklist/tasklist-widget.c:2973
 msgid "Error"
 msgstr "Eroare"
 
-#: ../plugins/tasklist/tasklist-widget.c:3005
+#: ../plugins/tasklist/tasklist-widget.c:3017
 msgid "Launch New Instance..."
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3754
+#: ../plugins/tasklist/tasklist-widget.c:3766
 msgid "Mi_nimize All"
 msgstr "Mi_nimizează tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3762
+#: ../plugins/tasklist/tasklist-widget.c:3774
 msgid "Un_minimize All"
 msgstr "Restaurea_ză tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3770
+#: ../plugins/tasklist/tasklist-widget.c:3782
 msgid "Ma_ximize All"
 msgstr "Ma_ximizează tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3778
+#: ../plugins/tasklist/tasklist-widget.c:3790
 msgid "_Unmaximize All"
 msgstr "_Demaximizează tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3790
+#: ../plugins/tasklist/tasklist-widget.c:3802
 msgid "_Close All"
 msgstr "În_chide tot"
 
@@ -2024,24 +2074,24 @@ msgstr "Schimbați fereastra activă utilizând butoane"
 msgid "Desktop"
 msgstr "Desktop"
 
-#: ../plugins/windowmenu/windowmenu.c:1277
+#: ../plugins/windowmenu/windowmenu.c:1273
 msgid "No Windows"
 msgstr "Nicio fereastră"
 
-#: ../plugins/windowmenu/windowmenu.c:1292
+#: ../plugins/windowmenu/windowmenu.c:1288
 msgid "Urgent Windows"
 msgstr "Ferestre urgente"
 
-#: ../plugins/windowmenu/windowmenu.c:1335
+#: ../plugins/windowmenu/windowmenu.c:1331
 msgid "Add Workspace"
 msgstr "Adăugare spațiu de lucru"
 
-#: ../plugins/windowmenu/windowmenu.c:1358
+#: ../plugins/windowmenu/windowmenu.c:1354
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Șterge spațiul de lucru „%s”"
 
-#: ../plugins/windowmenu/windowmenu.c:1360
+#: ../plugins/windowmenu/windowmenu.c:1356
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Șterge spațiul de lucru %d"
