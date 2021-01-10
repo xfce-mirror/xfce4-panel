@@ -750,6 +750,11 @@ sn_item_get_all_properties_result (GObject      *source_object,
       g_object_unref (val); \
     }
 
+  if (g_variant_check_format_string (properties, "(a{sv})", FALSE) == FALSE)
+    {
+      g_warning ("Could not parse properties for StatusNotifierItem.");
+      return;
+    }
   g_variant_get (properties, "(a{sv})", &iter);
 
   while (g_variant_iter_loop (iter, "{&sv}", &name, &value)) {
