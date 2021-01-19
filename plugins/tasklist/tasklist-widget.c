@@ -45,7 +45,7 @@
 
 
 
-#define DEFAULT_BUTTON_SIZE          (25)
+#define DEFAULT_BUTTON_SIZE          (32)
 #define DEFAULT_MAX_BUTTON_LENGTH    (200)
 #define DEFAULT_MIN_BUTTON_LENGTH    (DEFAULT_MAX_BUTTON_LENGTH / 4)
 #define DEFAULT_ICON_LUCENCY         (50)
@@ -648,13 +648,12 @@ xfce_tasklist_get_window_icon_from_theme (WnckWindow *window,
 
 static GdkPixbuf *
 xfce_tasklist_get_window_icon (WnckWindow *window,
-                               gboolean    show_labels,
                                int         size,
                                int         type)
 {
   GdkPixbuf *pixbuf;
 
-  if (show_labels || type == CHILD_TYPE_GROUP_MENU || size <= 31)
+  if (type == CHILD_TYPE_GROUP_MENU || size <= 31)
     pixbuf = wnck_window_get_mini_icon (window);
   else
     pixbuf = wnck_window_get_icon (window);
@@ -2014,25 +2013,25 @@ xfce_tasklist_update_icon_geometries (gpointer data)
 
   XfceTasklist      *tasklist = XFCE_TASKLIST (data);
   GList             *li;
-  XfceTasklistChild *child, *child2;
-  GtkAllocation      alloc;
   GSList            *lp;
   gint               root_x, root_y;
   GtkWidget         *toplevel;
 
   toplevel = gtk_widget_get_toplevel (GTK_WIDGET (tasklist));
   gtk_window_get_position (GTK_WINDOW (toplevel), &root_x, &root_y);
-  panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), FALSE);
+  panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), G_SOURCE_REMOVE);
 
   for (li = tasklist->windows; li != NULL; li = li->next)
     {
+      XfceTasklistChild *child, *child2;
+      GtkAllocation      alloc;
+
       child = li->data;
 
       switch (child->type)
         {
         case CHILD_TYPE_WINDOW:
           gtk_widget_get_allocation (child->button, &alloc);
-          panel_return_val_if_fail (WNCK_IS_WINDOW (child->window), FALSE);
           wnck_window_set_icon_geometry (child->window, alloc.x + root_x,
                                          alloc.y + root_y, alloc.width,
                                          alloc.height);
@@ -2043,7 +2042,6 @@ xfce_tasklist_update_icon_geometries (gpointer data)
           for (lp = child->windows; lp != NULL; lp = lp->next)
             {
               child2 = lp->data;
-              panel_return_val_if_fail (WNCK_IS_WINDOW (child2->window), FALSE);
               wnck_window_set_icon_geometry (child2->window, alloc.x + root_x,
                                              alloc.y + root_y, alloc.width,
                                              alloc.height);
@@ -2052,7 +2050,6 @@ xfce_tasklist_update_icon_geometries (gpointer data)
 
         case CHILD_TYPE_OVERFLOW_MENU:
           gtk_widget_get_allocation (tasklist->arrow_button, &alloc);
-          panel_return_val_if_fail (WNCK_IS_WINDOW (child->window), FALSE);
           wnck_window_set_icon_geometry (child->window, alloc.x + root_x,
                                          alloc.y + root_y, alloc.width,
                                          alloc.height);
@@ -2064,7 +2061,7 @@ xfce_tasklist_update_icon_geometries (gpointer data)
         };
     }
 
-  return FALSE;
+  return G_SOURCE_REMOVE;
 }
 
 
@@ -2625,13 +2622,28 @@ xfce_tasklist_button_compare (gconstpointer child_a,
 
 
 static void
+force_box_layout_update (XfceTasklistChild *child)
+{
+  gint          box_baseline;
+  GtkAllocation box_allocation;
+
+  /* Workarounds needed in order to force the box to layout its children.
+   * Required if the icon has been resized. */
+  gtk_container_check_resize (GTK_CONTAINER (child->box));
+  gtk_widget_get_allocated_size (child->box, &box_allocation, &box_baseline);
+  gtk_widget_size_allocate_with_baseline (child->box, &box_allocation, box_baseline);
+}
+
+
+
+static void
 xfce_tasklist_button_icon_changed (WnckWindow        *window,
                                    XfceTasklistChild *child)
 {
   GtkStyleContext *context;
-  GdkPixbuf       *pixbuf;
+  GdkPixbuf       *pixbuf, *old_pixbuf;
   XfceTasklist    *tasklist = child->tasklist;
-  gint             icon_size;
+  gint             icon_size, old_width = -1, old_height = -1;
 
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
   panel_return_if_fail (GTK_IS_WIDGET (child->icon));
@@ -2646,11 +2658,12 @@ xfce_tasklist_button_icon_changed (WnckWindow        *window,
   context = gtk_widget_get_style_context (GTK_WIDGET (child->icon));
 
   /* get the window icon */
-  pixbuf = xfce_tasklist_get_window_icon (child->window, tasklist->show_labels, icon_size, child->type);
+  pixbuf = xfce_tasklist_get_window_icon (child->window, icon_size, child->type);
   /* leave when there is no valid pixbuf */
   if (G_UNLIKELY (pixbuf == NULL))
     {
       gtk_image_clear (GTK_IMAGE (child->icon));
+      force_box_layout_update (child);
       return;
     }
 
@@ -2668,7 +2681,17 @@ xfce_tasklist_button_icon_changed (WnckWindow        *window,
         gtk_style_context_remove_class (context, "minimized");
     }
 
+  old_pixbuf = gtk_image_get_pixbuf (GTK_IMAGE (child->icon));
+  if (old_pixbuf)
+    {
+       old_width = gdk_pixbuf_get_width (old_pixbuf);
+       old_height = gdk_pixbuf_get_height (old_pixbuf);
+    }
+
   gtk_image_set_from_pixbuf (GTK_IMAGE (child->icon), pixbuf);
+
+  if (old_width != gdk_pixbuf_get_width (pixbuf) || old_height != gdk_pixbuf_get_height (pixbuf))
+    force_box_layout_update (child);
 }
 
 
@@ -2871,7 +2894,7 @@ xfce_tasklist_button_geometry_changed2 (WnckWindow        *window,
 
 
 
-static gboolean
+static void
 xfce_tasklist_button_size_allocate (GtkWidget         *widget,
                                     GdkRectangle      *allocation,
                                     gpointer           user_data)
@@ -2879,8 +2902,6 @@ xfce_tasklist_button_size_allocate (GtkWidget         *widget,
   XfceTasklistChild *child = user_data;
   /* Make sure the icons have the correct size */
   xfce_tasklist_button_icon_changed (child->window, child);
-
-  return TRUE;
 }
 
 
@@ -3246,10 +3267,15 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   g_free (css_string);
 
   if (gtk_style_context_has_class (context_button, "minimized"))
-    gtk_style_context_add_class (context_menuitem, "minimized");
-  else if (!gtk_style_context_has_class (context_button, "minimized")
-           && gtk_style_context_has_class (context_menuitem, "minimized"))
-    gtk_style_context_remove_class (context_menuitem, "minimized");
+    {
+      if (!gtk_style_context_has_class (context_menuitem, "minimized"))
+        gtk_style_context_add_class (context_menuitem, "minimized");
+    }
+  else
+    {
+      if (gtk_style_context_has_class (context_menuitem, "minimized"))
+        gtk_style_context_remove_class (context_menuitem, "minimized");
+    }
 
   gtk_image_set_pixel_size (GTK_IMAGE (image), GTK_ICON_SIZE_MENU);
   g_object_bind_property (G_OBJECT (child->icon), "pixbuf",
@@ -3456,7 +3482,7 @@ xfce_tasklist_button_drag_begin (GtkWidget         *button,
     }
 #endif
 
-  pixbuf = xfce_tasklist_get_window_icon (child->window, FALSE, 32, CHILD_TYPE_WINDOW);
+  pixbuf = xfce_tasklist_get_window_icon (child->window, 32, CHILD_TYPE_WINDOW);
   if (G_LIKELY (pixbuf != NULL))
     gtk_drag_set_icon_pixbuf (context, pixbuf, 0, 0);
 }
@@ -3840,7 +3866,7 @@ xfce_tasklist_group_button_button_draw (GtkWidget         *widget,
   if (group_child->n_windows > 1)
     {
       GtkStyleContext *context;
-      GtkAllocation *allocation = g_new0 (GtkAllocation, 1);
+      GtkAllocation allocation;
       PangoRectangle ink_extent, log_extent;
       PangoFontDescription *desc;
       PangoLayout *n_windows_layout;
@@ -3848,8 +3874,10 @@ xfce_tasklist_group_button_button_draw (GtkWidget         *widget,
       GdkRGBA fg, bg;
       gdouble radius, x, y;
       gint icon_size;
+      GdkPixbuf *icon_pixbuf;
+      GdkRectangle icon_pixbuf_rect;
 
-      gtk_widget_get_allocation (GTK_WIDGET (widget), allocation);
+      gtk_widget_get_allocation (GTK_WIDGET (widget), &allocation);
       cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
       /* Get the theme fg color for drawing the circle background. We then use a
          simple calculation to decide whether the background color - which is ironically
@@ -3867,42 +3895,62 @@ xfce_tasklist_group_button_button_draw (GtkWidget         *widget,
       n_windows_layout = gtk_widget_create_pango_layout (GTK_WIDGET (widget), n_windows);
       desc = pango_font_description_from_string ("Mono Bold 8");
       if (desc)
-      {
+        {
           pango_layout_set_font_description (n_windows_layout, desc);
           pango_font_description_free (desc);
-      }
+        }
+
+      icon_pixbuf = gtk_image_get_pixbuf (GTK_IMAGE (group_child->icon));
+      icon_pixbuf_rect.width = gdk_pixbuf_get_width (icon_pixbuf);
+      icon_pixbuf_rect.height = gdk_pixbuf_get_height (icon_pixbuf);
 
       pango_layout_get_pixel_extents (n_windows_layout, &ink_extent, &log_extent);
       icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (xfce_tasklist_get_panel_plugin (group_child->tasklist)));
       radius = log_extent.height / 2;
       if (group_child->tasklist->show_labels || icon_size <= 31)
         {
+          GdkPoint icon_coords = {};
+          g_warn_if_fail (gtk_widget_translate_coordinates (group_child->icon, widget, 0, 0, &icon_coords.x, &icon_coords.y));
+
           if (xfce_tasklist_vertical (group_child->tasklist))
             {
-              x = allocation->width / 2 + radius;
-              if ((x + radius) > allocation->width)
-                x = allocation->width - radius;
+              x = allocation.width / 2 + icon_pixbuf_rect.width / 2;
               if (group_child->tasklist->show_labels)
-                y = 24 - radius;
+                y = icon_coords.y + icon_pixbuf_rect.height;
               else
-                y = allocation->height / 2 + 8 - radius / 2;
+                y = allocation.width / 2 + icon_pixbuf_rect.height / 2;
             }
           else
             {
-              y = allocation->height / 2 + radius;
-              if ((y + radius) > allocation->height)
-                y = allocation->height - radius;
+              y = allocation.height / 2 + icon_pixbuf_rect.height / 2;
               if (group_child->tasklist->show_labels)
-                x = 24 - radius;
+                x = icon_coords.x + icon_pixbuf_rect.width;
               else
-                x = allocation->width / 2 + 8 - radius / 2;
+                x = allocation.height / 2 + icon_pixbuf_rect.width / 2;
             }
         }
       else
         {
-          x = allocation->width / 2 + 16 - radius;
-          y = allocation->height / 2 + 16 - radius;
+          if (xfce_tasklist_vertical (group_child->tasklist))
+            {
+              x = allocation.width / 2 + icon_pixbuf_rect.width / 2;
+              y = allocation.width / 2 + icon_pixbuf_rect.height / 2;
+            }
+          else
+            {
+              x = allocation.height / 2 + icon_pixbuf_rect.width / 2;
+              y = allocation.height / 2 + icon_pixbuf_rect.height / 2;
+            }
         }
+
+      if (x + radius > allocation.width - 2)
+        x = allocation.width - radius - 2;
+      if (y + radius > allocation.height - 2)
+        y = allocation.height - radius - 2;
+      if (G_UNLIKELY (x - radius < 0))
+        x = radius;
+      if (G_UNLIKELY (y - radius < 0))
+        y = radius;
 
       /* Draw the background circle */
       cairo_move_to (cr, x, y);
@@ -3979,6 +4027,18 @@ xfce_tasklist_group_button_button_press_event (GtkWidget         *button,
 
 
 static void
+xfce_tasklist_group_button_button_size_allocate (GtkWidget         *widget,
+                                                 GtkAllocation     *allocation,
+                                                 XfceTasklistChild *child)
+{
+  panel_return_if_fail (XFCE_IS_TASKLIST (child->tasklist));
+  panel_return_if_fail (child->type == CHILD_TYPE_GROUP);
+  xfce_tasklist_group_button_icon_changed (child->class_group, child);
+}
+
+
+
+static void
 xfce_tasklist_group_button_name_changed (WnckClassGroup    *class_group,
                                          XfceTasklistChild *group_child)
 {
@@ -4018,7 +4078,6 @@ xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
   GtkStyleContext   *context;
   GdkPixbuf         *pixbuf;
   GSList            *li;
-  XfceTasklistChild *child;
   gboolean           all_minimized_in_group = TRUE;
   gint               icon_size;
 
@@ -4036,9 +4095,7 @@ xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
   context = gtk_widget_get_style_context (GTK_WIDGET (group_child->icon));
 
   /* get the class group icon */
-  if (group_child->tasklist->show_labels)
-    pixbuf = wnck_class_group_get_mini_icon (class_group);
-  else if (icon_size <= 31)
+  if (icon_size <= 31)
     pixbuf = wnck_class_group_get_mini_icon (class_group);
   else
     pixbuf = wnck_class_group_get_icon (class_group);
@@ -4046,7 +4103,7 @@ xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
   /* check if all the windows in the group are minimized */
   for (li = group_child->windows; li != NULL; li = li->next)
     {
-      child = li->data;
+      XfceTasklistChild *child = li->data;
       if (!wnck_window_is_minimized (child->window))
         {
           all_minimized_in_group = FALSE;
@@ -4057,20 +4114,39 @@ xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
    * a minimized lucent effect for the group icon too */
   if (!group_child->tasklist->only_minimized
       && group_child->tasklist->minimized_icon_lucency < 100
-      && all_minimized_in_group
-      && !gtk_style_context_has_class (context, "minimized"))
+      && all_minimized_in_group)
     {
-      gtk_style_context_add_class (context, "minimized");
+      if (!gtk_style_context_has_class (context, "minimized"))
+        gtk_style_context_add_class (context, "minimized");
     }
-  else if (gtk_style_context_has_class (context, "minimized"))
+  else
     {
-      gtk_style_context_remove_class (context, "minimized");
+      if (gtk_style_context_has_class (context, "minimized"))
+        gtk_style_context_remove_class (context, "minimized");
     }
 
   if (G_LIKELY (pixbuf != NULL))
-    gtk_image_set_from_pixbuf (GTK_IMAGE (group_child->icon), pixbuf);
+    {
+      GdkPixbuf *old_pixbuf;
+      gint old_width = -1, old_height = -1;
+
+      old_pixbuf = gtk_image_get_pixbuf (GTK_IMAGE (group_child->icon));
+      if (old_pixbuf)
+        {
+          old_width = gdk_pixbuf_get_width (old_pixbuf);
+          old_height = gdk_pixbuf_get_height (old_pixbuf);
+        }
+
+      gtk_image_set_from_pixbuf (GTK_IMAGE (group_child->icon), pixbuf);
+
+      if (old_width != gdk_pixbuf_get_width (pixbuf) || old_height != gdk_pixbuf_get_height (pixbuf))
+        force_box_layout_update (group_child);
+    }
   else
-    gtk_image_clear (GTK_IMAGE (group_child->icon));
+    {
+      gtk_image_clear (GTK_IMAGE (group_child->icon));
+      force_box_layout_update (group_child);
+    }
 }
 
 
@@ -4255,6 +4331,8 @@ xfce_tasklist_group_button_new (WnckClassGroup *class_group,
   /* note that the same signals should be in the proxy menu item too */
   g_signal_connect (G_OBJECT (child->button), "button-press-event",
       G_CALLBACK (xfce_tasklist_group_button_button_press_event), child);
+  g_signal_connect (G_OBJECT (child->button), "size-allocate",
+      G_CALLBACK (xfce_tasklist_group_button_button_size_allocate), child);
 
   /* monitor class group changes */
   g_signal_connect (G_OBJECT (class_group), "icon-changed",
