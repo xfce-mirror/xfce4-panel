@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-21 00:46+0200\n"
-"PO-Revision-Date: 2020-08-22 17:00+0000\n"
+"POT-Creation-Date: 2020-11-03 00:45+0100\n"
+"PO-Revision-Date: 2020-11-03 07:37+0000\n"
 "Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce4-panel/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "taulers;ajusts;preferències;barra de tasques;ocultació;menú d'aplicacions;inici;botons;llançador;àrea de notificacions;estat;icones;connectors;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2936
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2950
 msgid "Panel"
 msgstr "Tauler"
 
@@ -79,7 +79,7 @@ msgstr "_Suprimeix"
 msgid "_Properties"
 msgstr "_Propietats"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3024
+#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3038
 msgid "_About"
 msgstr "_Quant a"
 
@@ -91,20 +91,20 @@ msgstr "_Mou"
 msgid "Pane_l"
 msgstr "Tau_ler"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2949
+#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2963
 msgid "Add _New Items..."
 msgstr "Afegeix elements _nous..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2964
+#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2978
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferències del tauler..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2996
+#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:3010
 msgid "Log _Out"
 msgstr "_Surt"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:207
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3015
+#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3029
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -309,7 +309,7 @@ msgstr "Carles Muñoz Gorriz <carlesmu@internuatas.org>, 2003-2004, 2008-2010.\n
 msgid "Add New Item"
 msgstr "Afegeix un element nou"
 
-#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:203
+#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:201
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "_Afegeix"
@@ -337,11 +337,7 @@ msgstr "No es permet la modificació del tauler"
 msgid "Add New Items"
 msgstr "Afegeix elements nous"
 
-#: ../panel/panel-item-dialog.c:197
-msgid "Add new plugins to the panel"
-msgstr "Afegiu connectors nous al tauler"
-
-#: ../panel/panel-item-dialog.c:211
+#: ../panel/panel-item-dialog.c:209
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:7
@@ -356,12 +352,12 @@ msgstr "Afegiu connectors nous al tauler"
 msgid "_Close"
 msgstr "Tan_ca"
 
-#: ../panel/panel-item-dialog.c:227
+#: ../panel/panel-item-dialog.c:225
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "_Cerca:"
 
-#: ../panel/panel-item-dialog.c:235
+#: ../panel/panel-item-dialog.c:233
 msgid "Enter search phrase here"
 msgstr "Introduïu la frase a cercar aquí"
 
@@ -700,7 +696,7 @@ msgstr "Experimentat"
 msgid "Expert"
 msgstr "Expert"
 
-#: ../panel/panel-window.c:2981
+#: ../panel/panel-window.c:2995
 msgid "_Lock Panel"
 msgstr "_Bloqueja el tauler"
 
@@ -1014,7 +1010,7 @@ msgstr "D'ac_ord"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2513
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2517
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Ha fallat l'execució de l'ordre «%s»."
@@ -1764,7 +1760,7 @@ msgstr "Esteu segur que voleu netejar la llista d’elements coneguts?"
 
 #: ../plugins/systray/sn-dialog.glade.h:1
 msgid "Status Tray Items"
-msgstr ""
+msgstr "Elements de la safata de l'estat"
 
 #: ../plugins/systray/sn-dialog.glade.h:2
 msgid "C_lear Known Items"
@@ -1776,11 +1772,11 @@ msgstr "Restableix la llista d’elements i els seus ajusts de visibilitat"
 
 #: ../plugins/systray/sn-dialog.glade.h:4
 msgid "_Fixed icon size (pixels):"
-msgstr ""
+msgstr "Mida de la icona _fixa (píxels):"
 
 #: ../plugins/systray/sn-dialog.glade.h:5
 msgid "Adjust size _automatically"
-msgstr ""
+msgstr "Ajusta la mida _automàticament"
 
 #: ../plugins/systray/sn-dialog.glade.h:6
 msgid "Icons"
@@ -1788,11 +1784,11 @@ msgstr "Icones"
 
 #: ../plugins/systray/sn-dialog.glade.h:7
 msgid "Arrange _items in a single row"
-msgstr ""
+msgstr "Organ_itza els elements en una sola fila"
 
 #: ../plugins/systray/sn-dialog.glade.h:8
 msgid "If enabled, ensure that the items are laid out in a single row"
-msgstr ""
+msgstr "Si està habilitat, els elements es distribueixen en una sola fila"
 
 #: ../plugins/systray/sn-dialog.glade.h:9
 msgid "_Hide items by default"
@@ -1836,31 +1832,31 @@ msgstr "Elements coneguts"
 
 #: ../plugins/systray/sn-dialog.glade.h:19
 msgid "_Menu is primary action"
-msgstr ""
+msgstr "El _menú és l'acció principal"
 
 #: ../plugins/systray/sn-dialog.glade.h:20
 msgid "Left click will always display the menu for item"
-msgstr ""
+msgstr "Fent clic amb el botó esquerre mostrarà sempre el menú per a l'element"
 
 #: ../plugins/systray/sn-dialog.glade.h:21
 msgid "_Request symbolic icons"
-msgstr ""
+msgstr "_Sol·licita icones simbòliques"
 
 #: ../plugins/systray/sn-dialog.glade.h:22
 msgid "Load symbolic icons if available"
-msgstr ""
+msgstr "Carrega les icones simbòliques si estan disponibles"
 
 #: ../plugins/systray/sn-dialog.glade.h:23
 msgid "Features"
-msgstr ""
+msgstr "Característiques"
 
 #: ../plugins/systray/sn-dialog.glade.h:24
 msgid "Status Notifiers"
-msgstr ""
+msgstr "Notificacions de l'estat"
 
 #: ../plugins/systray/sn-dialog.glade.h:25
 msgid "Systray Icons"
-msgstr ""
+msgstr "Icones de la safata del sistema"
 
 #: ../plugins/systray/systray.c:146
 msgid "Unable to start the notification area"
@@ -1884,13 +1880,13 @@ msgstr "Ha fallat l'adquisició de la selecció del gestor per a la pantalla %d"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Status Tray Plugin"
-msgstr ""
+msgstr "Connector de la safata de l'estat"
 
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid ""
 "Provides status notifier items (application indicators) and legacy systray "
 "items"
-msgstr ""
+msgstr "Proporciona elements de notificadors d'estat (indicadors d'aplicació) i elements de de la safata del sistema del llegat"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
