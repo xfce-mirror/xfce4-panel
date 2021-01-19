@@ -33,16 +33,16 @@
 # prflr88 <prflr88@gmail.com>, 2017
 # prflr88 <prflr88@gmail.com>, 2013-2015
 # prflr88 <prflr88@gmail.com>, 2013,2017
-# Pamir Matos <pamirmatos@gmail.com>, 2013
-# Pamir Matos <pamirmatos@gmail.com>, 2013
+# 3939e89e6801929b42d044caa59de284_29791e2, 2013
+# 3939e89e6801929b42d044caa59de284_29791e2, 2013
 # Brian Peraza-Orozco <brian.peraza@gmail.com>, 2013
 # Toni Estévez <toni.estevez@gmail.com>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-21 00:46+0200\n"
-"PO-Revision-Date: 2020-11-02 08:39+0000\n"
+"POT-Creation-Date: 2020-11-03 00:45+0100\n"
+"PO-Revision-Date: 2020-11-03 10:29+0000\n"
 "Last-Translator: Casper casper\n"
 "Language-Team: Spanish (http://www.transifex.com/xfce/xfce4-panel/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -67,7 +67,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "paneles;configuraciones;preferencias;barra de tareas;ocultación automática;menú de la aplicación;inicio;botones;Lanzador;área de notificación;estado;iconos;complementos;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2936
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2950
 msgid "Panel"
 msgstr "Panel"
 
@@ -108,7 +108,7 @@ msgstr "_Quitar"
 msgid "_Properties"
 msgstr "_Propiedades"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3024
+#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3038
 msgid "_About"
 msgstr "Acerca _de"
 
@@ -120,20 +120,20 @@ msgstr "_Mover"
 msgid "Pane_l"
 msgstr "Pane_l"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2949
+#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2963
 msgid "Add _New Items..."
 msgstr "_Añadir elementos nuevos…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2964
+#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2978
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferencias del panel…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2996
+#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:3010
 msgid "Log _Out"
 msgstr "Cerrar ses_ión"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:207
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3015
+#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3029
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -338,7 +338,7 @@ msgstr "Ignacio Poggi <ignaciop.3@gmail.com> 2020,\nManolo Díaz <diaz.manolo@gm
 msgid "Add New Item"
 msgstr "Agregar un elemento nuevo"
 
-#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:203
+#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:201
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "_Agregar"
@@ -366,11 +366,7 @@ msgstr "No se permite modificar el panel"
 msgid "Add New Items"
 msgstr "Agregar nuevos elementos"
 
-#: ../panel/panel-item-dialog.c:197
-msgid "Add new plugins to the panel"
-msgstr "Agrega nuevos complementos al panel"
-
-#: ../panel/panel-item-dialog.c:211
+#: ../panel/panel-item-dialog.c:209
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:7
@@ -385,12 +381,12 @@ msgstr "Agrega nuevos complementos al panel"
 msgid "_Close"
 msgstr "_Cerrar"
 
-#: ../panel/panel-item-dialog.c:227
+#: ../panel/panel-item-dialog.c:225
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "_Buscar:"
 
-#: ../panel/panel-item-dialog.c:235
+#: ../panel/panel-item-dialog.c:233
 msgid "Enter search phrase here"
 msgstr "Escriba el término de búsqueda aquí"
 
@@ -729,7 +725,7 @@ msgstr "Experimentado"
 msgid "Expert"
 msgstr "Experto"
 
-#: ../panel/panel-window.c:2981
+#: ../panel/panel-window.c:2995
 msgid "_Lock Panel"
 msgstr "Anc_lar panel"
 
@@ -1043,7 +1039,7 @@ msgstr "_Aceptar"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2513
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2517
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "No se pudo ejecutar la orden «%s»."
@@ -1833,11 +1829,11 @@ msgstr "Cuando está habilitado, todos los elementos nuevos se marcarán como \"
 
 #: ../plugins/systray/sn-dialog.glade.h:11
 msgid "_Square items"
-msgstr ""
+msgstr "_Elementos cuadrados"
 
 #: ../plugins/systray/sn-dialog.glade.h:12
 msgid "Item buttons will take a square when it's possible"
-msgstr ""
+msgstr "Los botones de elementos tomarán un cuadrado cuando sea posible"
 
 #: ../plugins/systray/sn-dialog.glade.h:13
 msgid "Behavior"
@@ -1845,7 +1841,7 @@ msgstr "Comportamiento"
 
 #: ../plugins/systray/sn-dialog.glade.h:14
 msgid "Item"
-msgstr ""
+msgstr "Elemento"
 
 #: ../plugins/systray/sn-dialog.glade.h:15
 msgid "Hidden"
@@ -1853,43 +1849,43 @@ msgstr "Ocultos"
 
 #: ../plugins/systray/sn-dialog.glade.h:16
 msgid "Move the selected item one row up"
-msgstr ""
+msgstr "Mover el elemento seleccionado una fila hacia arriba"
 
 #: ../plugins/systray/sn-dialog.glade.h:17
 msgid "Move the selected item one row down"
-msgstr ""
+msgstr "Mover el elemento seleccionado una fila hacia abajo"
 
 #: ../plugins/systray/sn-dialog.glade.h:18
 msgid "Known Items"
-msgstr ""
+msgstr "Elementos conocidos"
 
 #: ../plugins/systray/sn-dialog.glade.h:19
 msgid "_Menu is primary action"
-msgstr ""
+msgstr "_El menu es la acción principal"
 
 #: ../plugins/systray/sn-dialog.glade.h:20
 msgid "Left click will always display the menu for item"
-msgstr ""
+msgstr "El clic izquierdo siempre mostrará el menú del elemento"
 
 #: ../plugins/systray/sn-dialog.glade.h:21
 msgid "_Request symbolic icons"
-msgstr ""
+msgstr "_Solicitar iconos simbólicos"
 
 #: ../plugins/systray/sn-dialog.glade.h:22
 msgid "Load symbolic icons if available"
-msgstr ""
+msgstr "Cargar iconos simbólicos si están disponibles"
 
 #: ../plugins/systray/sn-dialog.glade.h:23
 msgid "Features"
-msgstr ""
+msgstr "Caracteristicas"
 
 #: ../plugins/systray/sn-dialog.glade.h:24
 msgid "Status Notifiers"
-msgstr ""
+msgstr "Notificadores de estado"
 
 #: ../plugins/systray/sn-dialog.glade.h:25
 msgid "Systray Icons"
-msgstr ""
+msgstr "Iconos de la Bandeja del sistema"
 
 #: ../plugins/systray/systray.c:146
 msgid "Unable to start the notification area"
@@ -1913,13 +1909,13 @@ msgstr "No se pudo adquirir la selección del gestor para la pantalla %d"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Status Tray Plugin"
-msgstr ""
+msgstr "Complemento de bandeja de estado"
 
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid ""
 "Provides status notifier items (application indicators) and legacy systray "
 "items"
-msgstr ""
+msgstr "Proporciona elementos de notificación de estado (indicadores de aplicación) y elementos de la bandeja del sistema heredados"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
