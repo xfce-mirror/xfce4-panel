@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-21 00:46+0200\n"
-"PO-Revision-Date: 2020-08-20 22:46+0000\n"
+"POT-Creation-Date: 2020-11-03 00:45+0100\n"
+"PO-Revision-Date: 2020-11-02 23:45+0000\n"
 "Last-Translator: Xfce Bot <transifex@xfce.org>\n"
 "Language-Team: Panjabi (Punjabi) (http://www.transifex.com/xfce/xfce4-panel/language/pa/)\n"
 "MIME-Version: 1.0\n"
@@ -36,7 +36,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr ""
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2936
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2950
 msgid "Panel"
 msgstr ""
 
@@ -77,7 +77,7 @@ msgstr ""
 msgid "_Properties"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3024
+#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3038
 msgid "_About"
 msgstr "ਇਸ ਬਾਰੇ(_A)"
 
@@ -89,20 +89,20 @@ msgstr "ਏਧਰ-ਓਧਰ(_M)"
 msgid "Pane_l"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2949
+#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2963
 msgid "Add _New Items..."
 msgstr "ਨਵੀਆਂ ਆਈਟਮਾਂ ਸ਼ਾਮਲ(_N)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2964
+#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2978
 msgid "Panel Pr_eferences..."
 msgstr "ਪੈਨਲ ਪਸੰਦ(_e)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2996
+#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:3010
 msgid "Log _Out"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:207
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3015
+#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3029
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -307,7 +307,7 @@ msgstr "ਅਮਨਪਰੀਤ ਸਿੰਘ ਆਲਮ\nਪੰਜਾਬੀ ਓਪ�
 msgid "Add New Item"
 msgstr "ਨਵੀਂ ਆਈਟਮ ਸ਼ਾਮਲ"
 
-#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:203
+#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:201
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr ""
@@ -335,11 +335,7 @@ msgstr "ਪੈਨਲ 'ਚ ਸੋਧ ਕਰਨ ਦੀ ਮਨਜ਼ੂਰੀ ਨ�
 msgid "Add New Items"
 msgstr "ਨਵੀਆਂ ਆਈਟਮਾਂ ਸ਼ਾਮਲ"
 
-#: ../panel/panel-item-dialog.c:197
-msgid "Add new plugins to the panel"
-msgstr "ਨਵੀਂ ਪਲੱਗਇਨ ਪੈਨਲ 'ਚ ਜੋੜ੍ਹੋ"
-
-#: ../panel/panel-item-dialog.c:211
+#: ../panel/panel-item-dialog.c:209
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:7
@@ -354,12 +350,12 @@ msgstr "ਨਵੀਂ ਪਲੱਗਇਨ ਪੈਨਲ 'ਚ ਜੋੜ੍ਹੋ"
 msgid "_Close"
 msgstr "_ਬੰਦ"
 
-#: ../panel/panel-item-dialog.c:227
+#: ../panel/panel-item-dialog.c:225
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "ਖੋਜ(_S):"
 
-#: ../panel/panel-item-dialog.c:235
+#: ../panel/panel-item-dialog.c:233
 msgid "Enter search phrase here"
 msgstr "ਖੋਜ ਸ਼ਬਦ ਇੱਥੇ ਦਿਓ"
 
@@ -698,7 +694,7 @@ msgstr "ਤਜਰਬੇਕਾਰ"
 msgid "Expert"
 msgstr "ਮਾਹਰ"
 
-#: ../panel/panel-window.c:2981
+#: ../panel/panel-window.c:2995
 msgid "_Lock Panel"
 msgstr ""
 
@@ -1012,7 +1008,7 @@ msgstr ""
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2513
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2517
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" ਕਮਾਂਡ ਚਲਾਉਣ ਲਈ ਫੇਲ੍ਹ ਹੈ।"
