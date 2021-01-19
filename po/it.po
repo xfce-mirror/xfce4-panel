@@ -19,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-21 00:46+0200\n"
-"PO-Revision-Date: 2020-08-21 09:36+0000\n"
-"Last-Translator: Emanuele Petriglia <transifex@emanuelepetriglia.com>\n"
+"POT-Creation-Date: 2020-11-03 00:45+0100\n"
+"PO-Revision-Date: 2020-11-02 23:45+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
 "Language-Team: Italian (http://www.transifex.com/xfce/xfce4-panel/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,7 +45,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "pannelli;impostazioni;preferenze;barra dei processi;nascondi automaticamente;menu applicazione;avvia;pulsanti;avvia;area di notifica;stato;icone;componenti aggiuntivi;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2936
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2950
 msgid "Panel"
 msgstr "Pannello"
 
@@ -86,7 +86,7 @@ msgstr "_Rimuovi"
 msgid "_Properties"
 msgstr "_Proprietà"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3024
+#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3038
 msgid "_About"
 msgstr "_Informazioni"
 
@@ -98,20 +98,20 @@ msgstr "_Sposta"
 msgid "Pane_l"
 msgstr "_Pannello"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2949
+#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2963
 msgid "Add _New Items..."
 msgstr "A_ggiungi nuovi elementi…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2964
+#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2978
 msgid "Panel Pr_eferences..."
 msgstr "_Preferenze del pannello…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2996
+#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:3010
 msgid "Log _Out"
 msgstr "_Esci"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:207
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3015
+#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3029
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -316,7 +316,7 @@ msgstr "Alex Dupre <ale@FreeBSD.org>, 2004\nLuca Marrocco <buildup@libero.it>, 2
 msgid "Add New Item"
 msgstr "Aggiungi un nuovo elemento"
 
-#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:203
+#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:201
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "_Aggiungi"
@@ -344,11 +344,7 @@ msgstr "La modifica del pannello non è consentita"
 msgid "Add New Items"
 msgstr "Aggiungi nuovi elementi"
 
-#: ../panel/panel-item-dialog.c:197
-msgid "Add new plugins to the panel"
-msgstr "Aggiungi un nuovo componente aggiuntivo al pannello"
-
-#: ../panel/panel-item-dialog.c:211
+#: ../panel/panel-item-dialog.c:209
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:7
@@ -363,12 +359,12 @@ msgstr "Aggiungi un nuovo componente aggiuntivo al pannello"
 msgid "_Close"
 msgstr "_Chiudi"
 
-#: ../panel/panel-item-dialog.c:227
+#: ../panel/panel-item-dialog.c:225
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "C_erca:"
 
-#: ../panel/panel-item-dialog.c:235
+#: ../panel/panel-item-dialog.c:233
 msgid "Enter search phrase here"
 msgstr "Inserire qui la frase da cercare"
 
@@ -707,7 +703,7 @@ msgstr "Esperto"
 msgid "Expert"
 msgstr "Veterano"
 
-#: ../panel/panel-window.c:2981
+#: ../panel/panel-window.c:2995
 msgid "_Lock Panel"
 msgstr "_Blocca il pannello"
 
@@ -1021,7 +1017,7 @@ msgstr "_OK"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2513
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2517
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Impossibile eseguire il comando \"%s\"."
