@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-21 00:46+0200\n"
-"PO-Revision-Date: 2020-08-31 04:17+0000\n"
-"Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
+"POT-Creation-Date: 2020-11-03 00:45+0100\n"
+"PO-Revision-Date: 2020-11-02 23:45+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
 "Language-Team: Kazakh (http://www.transifex.com/xfce/xfce4-panel/language/kk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,7 +34,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "панельдер;баптаулар;қалаулар;тапсырмалар панелі;автожасыру;қолданбалар мәзірі;бастау;батырмалар;жөнелткіш;хабарлау аймағы;қалып-күй;таңбашалар;плагиндер;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2936
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2950
 msgid "Panel"
 msgstr "Панель"
 
@@ -75,7 +75,7 @@ msgstr "Өші_ру"
 msgid "_Properties"
 msgstr "Қас_иеттері"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3024
+#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3038
 msgid "_About"
 msgstr "Осы т_уралы"
 
@@ -87,20 +87,20 @@ msgstr "Ж_ылжыту"
 msgid "Pane_l"
 msgstr "Пане_ль"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2949
+#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2963
 msgid "Add _New Items..."
 msgstr "Жаңа _элементтерді қосу..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2964
+#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2978
 msgid "Panel Pr_eferences..."
 msgstr "Панель ба_птаулары..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:2996
+#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:3010
 msgid "Log _Out"
 msgstr "Жүйеден ш_ығу"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:207
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3015
+#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3029
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -305,7 +305,7 @@ msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2009-2014"
 msgid "Add New Item"
 msgstr "Жаңа элементті қосу"
 
-#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:203
+#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:201
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "Қ_осу"
@@ -333,11 +333,7 @@ msgstr "Бұл панельді түзетуге рұқсат жоқ"
 msgid "Add New Items"
 msgstr "Жаңа элементтерді қосу"
 
-#: ../panel/panel-item-dialog.c:197
-msgid "Add new plugins to the panel"
-msgstr "Панельге жаңа плагиндерді қосу"
-
-#: ../panel/panel-item-dialog.c:211
+#: ../panel/panel-item-dialog.c:209
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:7
@@ -352,12 +348,12 @@ msgstr "Панельге жаңа плагиндерді қосу"
 msgid "_Close"
 msgstr "_Жабу"
 
-#: ../panel/panel-item-dialog.c:227
+#: ../panel/panel-item-dialog.c:225
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "І_здеу:"
 
-#: ../panel/panel-item-dialog.c:235
+#: ../panel/panel-item-dialog.c:233
 msgid "Enter search phrase here"
 msgstr "Іздеу мәтінін осында енгізіңіз"
 
@@ -696,7 +692,7 @@ msgstr "Орташа"
 msgid "Expert"
 msgstr "Тәжірибелі"
 
-#: ../panel/panel-window.c:2981
+#: ../panel/panel-window.c:2995
 msgid "_Lock Panel"
 msgstr "Пане_льді бұғаттау"
 
@@ -1010,7 +1006,7 @@ msgstr "_ОК"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2513
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2517
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" командасын орындау сәтсіз аяқталды"
