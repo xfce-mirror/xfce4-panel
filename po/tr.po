@@ -30,14 +30,16 @@ msgstr "Panelde Başlatıcı oluştur"
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop "
 "file"
-msgstr "Bu masaüstü dosyasının bilgisine dayanarak panele yeni başlatıcı ekle"
+msgstr ""
+"Bu desktop uzantılı dosyanın içeriğindeki bilgileri taban alarak, panele "
+"yeni başlatıcı ekle"
 
 #: ../panel-preferences.desktop.in.h:1
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr ""
-"paneller;ayarlar;tercihler;yeğler;görev çubuğu;otomatik gizle;kendiliğinden "
+"paneller;ayarlar;tercihler;görev çubuğu;otomatik gizle;kendiliğinden "
 "gizle;uygulama menüsü;başlat;düğmeler;başlatıcı;bildirim "
 "alanı;durum;simgeler;eklentiler;uzantılar;"
 
@@ -54,14 +56,13 @@ msgstr "Paneli özelleştir"
 #: ../panel/panel-preferences-dialog.c:1321
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "'%s' ögesini silmek istediğinizden emin misiniz?"
+msgstr "\"%s\" ögesini silmek istediğinize emin misiniz?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1112
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr ""
-"Ögenin panelden kaldırılması, yapılandırmasının kaybedileceği anlamına da "
-"gelir."
+"Ögenin panelden kaldırılması, yapılandırmasının kaybolacağı anlamına gelir."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1113 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
@@ -269,7 +270,7 @@ msgstr ""
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "%d masaüstü dosyasından yeni başlatıcı oluştur"
-msgstr[1] "%d masaüstü dosyalarından yeni başlatıcı oluştur"
+msgstr[1] "%d desktop uzantılı dosyadan, yeni başlatıcı oluştur"
 
 #: ../panel/panel-application.c:1727
 msgid "Quit"
@@ -333,7 +334,7 @@ msgstr "_Ekle"
 
 #: ../panel/panel-dialogs.c:175
 msgid "Please choose a panel for the new plugin:"
-msgstr "Lütfen yeni eklenti için panel seçin:"
+msgstr "Lütfen yeni eklenti için bir panel seçin:"
 
 #: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:896
 #, c-format
@@ -414,7 +415,7 @@ msgstr "Birincil"
 #: ../panel/panel-preferences-dialog.c:547
 #, c-format
 msgid "Monitor %d"
-msgstr "Monitör %d"
+msgstr "Ekran %d"
 
 #: ../panel/panel-preferences-dialog.c:962
 msgid "The panel and plugin configurations will be permanently removed"
@@ -430,7 +431,7 @@ msgstr "%d. paneli silmek istediğinize emin misiniz?"
 #: ../panel/panel-preferences-dialog.c:1163
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
-msgstr "%s <span color=\"grey\" size=\"small\">(dış)</span>"
+msgstr "%s <span color=\"grey\" size=\"small\">(harici)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
@@ -440,7 +441,7 @@ msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
 msgstr ""
-"İç ad: %s-%d\n"
+"Dahili isim: %s-%d\n"
 "PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
@@ -448,11 +449,11 @@ msgstr ""
 #: ../panel/panel-preferences-dialog.c:1180
 #, c-format
 msgid "Internal name: %s-%d"
-msgstr "İç ad: %s-%d"
+msgstr "Dahili isim: %s-%d"
 
 #: ../panel/panel-preferences-dialog.c:1324
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Panelden ögeyi kaldırdığınızda tümüyle yitirilir."
+msgstr "Eğer panelden ögeyi kaldırırsanız, kalıcı olarak kaybolur."
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
@@ -526,7 +527,7 @@ msgstr "_Kip:"
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Span mo_nitors"
-msgstr "Mo_nitörleri yay"
+msgstr "Ekra_nlara yay"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Select this option to extend the panel over multiple monitors."
@@ -540,7 +541,8 @@ msgstr "Paneli _kilitle"
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr ""
-"Panelin kulplarını saklamak ve konumunu kilitlemek için bu seçeneği seçin."
+"Panelin taşıyıcılarını gizlemek ve konumunu sabitlemek için bu seçeneği "
+"kullanın."
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Don't _reserve space on borders"
@@ -567,7 +569,7 @@ msgstr "Ç_ıktı:"
 #. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:29
 msgid "<b>Measurements</b>"
-msgstr "<b>Ölçümler</b>"
+msgstr "<b>Ölçüler</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Row _size (pixels):"
@@ -652,8 +654,8 @@ msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr ""
-"</b>Alaşım şu anda devre dışı</b>\n"
-"Paneldeki saydamlık ayarları için pencere yöneticisinde alaşım (compositing) işlemini etkinleştirin."
+"<b>Görüntü birleştirme şu anda devre dışı</b>\n"
+"Panelin saydamlık ayarları için, pencere yöneticisinin görüntü birleştirme (compositing) işlevini etkinleştirin."
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:52
