@@ -435,6 +435,7 @@ sn_button_query_tooltip (GtkWidget  *widget,
   SnButton    *button = XFCE_SN_BUTTON (widget);
   const gchar *tooltip_title;
   const gchar *tooltip_subtitle;
+  gchar       *tooltip_title_escaped;
   gchar       *full;
 
   sn_item_get_tooltip (button->item, &tooltip_title, &tooltip_subtitle);
@@ -443,13 +444,15 @@ sn_button_query_tooltip (GtkWidget  *widget,
     {
       if (tooltip_subtitle != NULL)
         {
-          full = g_strdup_printf ("<b>%s</b>\n%s", tooltip_title, tooltip_subtitle);
+          tooltip_title_escaped = g_markup_escape_text (tooltip_title, -1);
+          full = g_strdup_printf ("<b>%s</b>\n%s", tooltip_title_escaped, tooltip_subtitle);
           gtk_tooltip_set_markup (tooltip, full);
           g_free (full);
+          g_free (tooltip_title_escaped);
         }
       else
         {
-          gtk_tooltip_set_markup (tooltip, tooltip_title);
+          gtk_tooltip_set_text (tooltip, tooltip_title);
         }
 
       return TRUE;
