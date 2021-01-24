@@ -27,6 +27,9 @@
   if (xfce_titled_dialog_get_type () == 0) \
     return;
 
+void        _panel_utils_weak_notify   (gpointer          data,
+                                        GObject          *where_the_object_was);
+
 GtkBuilder *panel_utils_builder_new    (XfcePanelPlugin  *panel_plugin,
                                         const gchar      *buffer,
                                         gsize             length,

@@ -666,8 +666,11 @@ sn_dialog_clear_clicked (GtkWidget *button,
 
 
 static void
-sn_dialog_dialog_unref (SnDialog *dialog)
+sn_dialog_dialog_unref (gpointer  data,
+                        GObject  *where_the_object_was)
 {
+  SnDialog *dialog = data;
+
   dialog->dialog = NULL;
   g_object_unref (dialog);
 }
@@ -846,8 +849,7 @@ sn_dialog_build (SnDialog *dialog)
       gtk_widget_hide (GTK_WIDGET (object));
 #endif
 
-      g_object_weak_ref (G_OBJECT (dialog->dialog),
-                         (GWeakNotify)sn_dialog_dialog_unref, dialog);
+      g_object_weak_ref (G_OBJECT (dialog->dialog), sn_dialog_dialog_unref, dialog);
       return TRUE;
     }
   else
