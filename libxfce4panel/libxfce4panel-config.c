@@ -137,8 +137,3 @@ libxfce4panel_check_version (guint required_major,
     return "Xfce Panel version too old (micro mismatch)";
   return NULL;
 }
-
-
-
-#define __LIBXFCE4PANEL_CONFIG_C__
-#include <libxfce4panel/libxfce4panel-aliasdef.c>

@@ -31,6 +31,18 @@
 
 
 
+void
+_panel_utils_weak_notify (gpointer  data,
+                          GObject  *where_the_object_was)
+{
+  if (XFCE_IS_PANEL_PLUGIN (data))
+    xfce_panel_plugin_unblock_menu (data);
+  else
+    g_object_unref (data);
+}
+
+
+
 static void
 panel_utils_help_button_clicked (GtkWidget       *button,
                                  XfcePanelPlugin *panel_plugin)
@@ -66,14 +78,11 @@ panel_utils_builder_new (XfcePanelPlugin  *panel_plugin,
       dialog = gtk_builder_get_object (builder, "dialog");
       if (G_LIKELY (dialog != NULL))
         {
-          g_object_weak_ref (G_OBJECT (dialog),
-                             (GWeakNotify) g_object_unref, builder);
+          g_object_weak_ref (G_OBJECT (dialog), _panel_utils_weak_notify, builder);
           xfce_panel_plugin_take_window (panel_plugin, GTK_WINDOW (dialog));
 
           xfce_panel_plugin_block_menu (panel_plugin);
-          g_object_weak_ref (G_OBJECT (dialog),
-                             (GWeakNotify) xfce_panel_plugin_unblock_menu,
-                             panel_plugin);
+          g_object_weak_ref (G_OBJECT (dialog), _panel_utils_weak_notify, panel_plugin);
 
           button = gtk_builder_get_object (builder, "close-button");
           if (G_LIKELY (button != NULL))

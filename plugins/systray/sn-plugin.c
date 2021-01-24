@@ -195,7 +195,7 @@ sn_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   if (dialog != NULL)
     {
       xfce_panel_plugin_block_menu (panel_plugin);
-      g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify)xfce_panel_plugin_unblock_menu, panel_plugin);
+      g_object_weak_ref (G_OBJECT (dialog), _panel_utils_weak_notify, panel_plugin);
     }
 }
 
