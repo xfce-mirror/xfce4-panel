@@ -348,7 +348,7 @@ struct _PanelWindow
   gint                 autohide_block;
   gint                 autohide_grab_block;
   gint                 autohide_size;
-  gint                 popdown_speed;
+  guint                popdown_speed;
   gint                 popdown_progress;
 
   /* popup/down delay from gtk style */

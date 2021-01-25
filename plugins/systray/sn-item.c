@@ -631,6 +631,15 @@ sn_item_pixbuf_equals (GdkPixbuf *p1,
 
 
 
+static void
+sn_item_free (guchar   *pixels,
+              gpointer  data)
+{
+  g_free (pixels);
+}
+
+
+
 static GdkPixbuf *
 sn_item_extract_pixbuf (GVariant *variant)
 {
@@ -691,7 +700,7 @@ sn_item_extract_pixbuf (GVariant *variant)
 
       return gdk_pixbuf_new_from_data (array, GDK_COLORSPACE_RGB,
                                        TRUE, 8, lwidth, lheight, 4 * lwidth,
-                                       (GdkPixbufDestroyNotify)g_free, NULL);
+                                       sn_item_free, NULL);
     }
 
   return NULL;
@@ -732,8 +741,9 @@ sn_item_get_all_properties_result (GObject      *source_object,
   if (g_strcmp0 (string_empty_null (val), string_empty_null (item->entry))) \
     { \
       g_free (item->entry); \
-      item->entry = (val) != NULL && strlen (val) > 0 \
-                    ? g_strdup (val) : NULL; \
+      item->entry = \
+        val != NULL && strlen (val != NULL ? val : "") > 0 \
+        ? g_strdup (val) : NULL; \
       update_what = TRUE; \
     }
 
