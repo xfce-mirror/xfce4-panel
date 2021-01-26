@@ -234,15 +234,6 @@ pager_plugin_get_property (GObject    *object,
     case PROP_MINIATURE_VIEW:
       g_value_set_boolean (value, plugin->miniature_view);
 
-      if (G_IS_OBJECT (plugin->numbering_label))
-        gtk_widget_set_visible (GTK_WIDGET (plugin->numbering_label), !plugin->miniature_view);
-      if (G_IS_OBJECT (plugin->numbering_switch))
-        gtk_widget_set_visible (GTK_WIDGET (plugin->numbering_switch), !plugin->miniature_view);
-      if (G_IS_OBJECT (plugin->scrolling_label))
-        gtk_widget_set_visible (GTK_WIDGET (plugin->scrolling_label), !plugin->miniature_view);
-      if (G_IS_OBJECT (plugin->scrolling_switch))
-        gtk_widget_set_visible (GTK_WIDGET (plugin->scrolling_switch), !plugin->miniature_view);
-
       pager_plugin_screen_layout_changed (plugin);
       break;
 
@@ -717,13 +708,6 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_signal_connect (G_OBJECT (object), "clicked",
       G_CALLBACK (pager_plugin_configure_workspace_settings), dialog);
 
-  plugin->scrolling_label = gtk_builder_get_object (builder, "workspace-scrolling-label");
-  plugin->scrolling_switch = gtk_builder_get_object (builder, "workspace-scrolling");
-  panel_return_if_fail (GTK_IS_SWITCH (plugin->scrolling_switch));
-  g_object_bind_property (G_OBJECT (plugin), "workspace-scrolling",
-                          G_OBJECT (plugin->scrolling_switch), "active",
-                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
-
   object = gtk_builder_get_object (builder, "appearance");
   panel_return_if_fail (GTK_IS_COMBO_BOX (object));
   g_object_bind_property (G_OBJECT (plugin), "miniature-view",
@@ -736,17 +720,31 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                           G_OBJECT (object), "value",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
+  plugin->scrolling_label = gtk_builder_get_object (builder, "workspace-scrolling-label");
+  g_object_bind_property (G_OBJECT (plugin), "miniature-view",
+                          G_OBJECT (plugin->scrolling_label), "visible",
+                          G_BINDING_SYNC_CREATE | G_BINDING_DEFAULT | G_BINDING_INVERT_BOOLEAN);
+  plugin->scrolling_switch = gtk_builder_get_object (builder, "workspace-scrolling");
+  panel_return_if_fail (GTK_IS_SWITCH (plugin->scrolling_switch));
+  g_object_bind_property (G_OBJECT (plugin), "miniature-view",
+                          G_OBJECT (plugin->scrolling_switch), "visible",
+                          G_BINDING_SYNC_CREATE | G_BINDING_DEFAULT | G_BINDING_INVERT_BOOLEAN);
+  g_object_bind_property (G_OBJECT (plugin), "workspace-scrolling",
+                          G_OBJECT (plugin->scrolling_switch), "active",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+
   plugin->numbering_label = gtk_builder_get_object (builder, "numbering-label");
+  g_object_bind_property (G_OBJECT (plugin), "miniature-view",
+                          G_OBJECT (plugin->numbering_label), "visible",
+                          G_BINDING_SYNC_CREATE | G_BINDING_DEFAULT | G_BINDING_INVERT_BOOLEAN);
   plugin->numbering_switch = gtk_builder_get_object (builder, "numbering");
   panel_return_if_fail (GTK_IS_SWITCH (plugin->numbering_switch));
+  g_object_bind_property (G_OBJECT (plugin), "miniature-view",
+                          G_OBJECT (plugin->numbering_switch), "visible",
+                          G_BINDING_SYNC_CREATE | G_BINDING_DEFAULT | G_BINDING_INVERT_BOOLEAN);
   g_object_bind_property (G_OBJECT (plugin), "numbering",
                           G_OBJECT (plugin->numbering_switch), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
-
-  gtk_widget_set_visible (GTK_WIDGET (plugin->numbering_label), !plugin->miniature_view);
-  gtk_widget_set_visible (GTK_WIDGET (plugin->numbering_switch), !plugin->miniature_view);
-  gtk_widget_set_visible (GTK_WIDGET (plugin->scrolling_label), !plugin->miniature_view);
-  gtk_widget_set_visible (GTK_WIDGET (plugin->scrolling_switch), !plugin->miniature_view);
 
   /* update the rows limit */
   pager_plugin_configure_n_workspaces_changed (plugin->wnck_screen, NULL, builder);
