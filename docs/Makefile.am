@@ -1,7 +1,4 @@
 SUBDIRS = \
-	references
-
-EXTRA_DIST = \
-	README.gtkrc-2.0
+	reference
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:
