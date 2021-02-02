@@ -3039,8 +3039,10 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   gtk_widget_show (item);
 
   /* help item */
+  image = gtk_image_new_from_icon_name ("help-browser", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   item = gtk_image_menu_item_new_with_mnemonic (_("_Help"));
+  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
   g_signal_connect (G_OBJECT (item), "activate",
       G_CALLBACK (panel_window_menu_help), NULL);
@@ -3048,8 +3050,10 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   gtk_widget_show (item);
 
   /* about item */
+  image = gtk_image_new_from_icon_name ("help-about", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   item = gtk_image_menu_item_new_with_mnemonic (_("_About"));
+  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
   g_signal_connect (G_OBJECT (item), "activate",
       G_CALLBACK (panel_dialogs_show_about), NULL);
