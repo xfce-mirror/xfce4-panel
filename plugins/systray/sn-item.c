@@ -1056,7 +1056,8 @@ GtkWidget *
 sn_item_get_menu (SnItem *item)
 {
   #ifdef HAVE_DBUSMENU
-  DbusmenuGtkMenu *menu;
+  DbusmenuGtkMenu   *menu;
+  DbusmenuGtkClient *client;
 
   g_return_val_if_fail (XFCE_IS_SN_ITEM (item), NULL);
   g_return_val_if_fail (item->initialized, NULL);
@@ -1066,6 +1067,8 @@ sn_item_get_menu (SnItem *item)
       menu = dbusmenu_gtkmenu_new (item->bus_name, item->menu_object_path);
       if (menu != NULL)
         {
+          client = dbusmenu_gtkmenu_get_client (menu);
+          dbusmenu_gtkclient_set_accel_group (client, gtk_accel_group_new ());
           g_object_ref_sink (menu);
           item->cached_menu = GTK_WIDGET (menu);
         }
