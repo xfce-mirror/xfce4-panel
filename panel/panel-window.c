@@ -1244,6 +1244,11 @@ panel_window_grab_notify (GtkWidget *widget,
   PanelWindow *window = PANEL_WINDOW (widget);
   GtkWidget   *current;
 
+  /* there are cases where we pass here only when the grab ends, e.g. when moving
+   * a window in the taskbar, so let's make sure to decrement the autohide counter
+   * only when we have previously incremented it */
+  static gint freeze = 0;
+
   current = gtk_grab_get_current ();
   if (GTK_IS_MENU_SHELL (current))
     {
@@ -1275,10 +1280,16 @@ panel_window_grab_notify (GtkWidget *widget,
       /* avoid hiding the panel when the window is grabbed. this
        * (for example) happens when the user drags in the pager plugin
        * see bug #4597 */
-      if (was_grabbed)
-        panel_window_thaw_autohide (window);
-      else
-        panel_window_freeze_autohide (window);
+      if (!was_grabbed)
+        {
+          freeze++;
+          panel_window_freeze_autohide (window);
+        }
+      else if (freeze > 0)
+        {
+          freeze--;
+          panel_window_thaw_autohide (window);
+        }
     }
 }
 
