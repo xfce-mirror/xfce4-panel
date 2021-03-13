@@ -3493,7 +3493,7 @@ xfce_tasklist_button_drag_data_received (GtkWidget         *button,
       || (!xfce_tasklist_horizontal (tasklist) && y >= allocation.height / 2))
     sibling = g_list_next (sibling);
 
-  xid = *((gulong *) gtk_selection_data_get_data (selection_data));
+  xid = *((gulong *) (gpointer) gtk_selection_data_get_data (selection_data));
   for (li = tasklist->windows; li != NULL; li = li->next)
     {
       child = li->data;
