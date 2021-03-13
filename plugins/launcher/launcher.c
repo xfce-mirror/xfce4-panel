@@ -1892,7 +1892,7 @@ launcher_plugin_add_desktop_actions (GtkWidget *widget, gpointer user_data)
 static void
 launcher_plugin_button_update_action_menu (LauncherPlugin *plugin)
 {
-  GarconMenuItem      *item = NULL;
+  GarconMenuItem *item = NULL;
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
   panel_return_if_fail (plugin->menu == NULL);
@@ -1913,7 +1913,7 @@ launcher_plugin_button_update_action_menu (LauncherPlugin *plugin)
     {
       gtk_widget_destroy (GTK_WIDGET (plugin->action_menu));
     }
-  else
+  else if (garcon_menu_item_get_actions (item) != NULL)
     {
       plugin->action_menu = GTK_WIDGET (garcon_gtk_menu_get_desktop_actions_menu (item));
       if (plugin->action_menu)
