@@ -1471,7 +1471,7 @@ panel_preferences_dialog_item_selection_changed (GtkTreeSelection       *selecti
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
   provider = panel_preferences_dialog_item_get_selected (dialog, NULL);
-  if (G_LIKELY (provider != NULL))
+  if (G_LIKELY (provider != NULL && gtk_widget_get_parent (GTK_WIDGET (provider)) != NULL))
     {
       /* get the current position and the items on the bar */
       itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
