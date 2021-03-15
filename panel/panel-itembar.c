@@ -26,6 +26,8 @@
 
 #include <common/panel-private.h>
 #include <libxfce4panel/libxfce4panel.h>
+#include <common/panel-debug.h>
+#include <libxfce4panel/xfce-panel-plugin-provider.h>
 
 #include <panel/panel-itembar.h>
 
@@ -842,12 +844,47 @@ panel_itembar_add (GtkContainer *container,
 
 
 
+/* for lack of being able to find the reason why extra references accumulate, let's
+ * eliminate them after the item has been removed from the panel and all priority
+ * operations have been performed, until triggering the destruction of the item */
+static gboolean
+panel_itembar_unref (gpointer data)
+{
+  XfcePanelPluginProvider **provider = data;
+  gint                      n = 0, id;
+  gchar                    *name;
+
+  /* should always be true if there were no memory leak */
+  if (*provider == NULL)
+    return FALSE;
+
+  name = g_strdup (xfce_panel_plugin_provider_get_name (*provider));
+  id = xfce_panel_plugin_provider_get_unique_id (*provider);
+
+  while (*provider != NULL)
+    {
+      g_object_unref (*provider);
+      n++;
+    }
+
+  panel_debug (PANEL_DEBUG_ITEMBAR,
+               "%s-%d: number of extra references removed to release the plugin: %d",
+               name, id, n);
+  g_free (name);
+
+  return FALSE;
+}
+
+
+
 static void
 panel_itembar_remove (GtkContainer *container,
                       GtkWidget    *widget)
 {
   PanelItembarChild *child;
   PanelItembar      *itembar = PANEL_ITEMBAR (container);
+
+  static GtkWidget *swidget;
 
   panel_return_if_fail (PANEL_IS_ITEMBAR (itembar));
   panel_return_if_fail (GTK_IS_WIDGET (widget));
@@ -858,6 +895,10 @@ panel_itembar_remove (GtkContainer *container,
   if (G_LIKELY (child != NULL))
     {
       itembar->children = g_slist_remove (itembar->children, child);
+
+      swidget = widget;
+      g_signal_connect (widget, "destroy", G_CALLBACK (gtk_widget_destroyed), &swidget);
+      g_idle_add (panel_itembar_unref, &swidget);
 
       gtk_widget_unparent (widget);
 
