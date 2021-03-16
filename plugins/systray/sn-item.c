@@ -390,7 +390,7 @@ sn_item_set_property (GObject      *object,
 
 
 static void
-sn_item_subscription_context_ubsubscribe (gpointer  data,
+sn_item_subscription_context_unsubscribe (gpointer  data,
                                           GObject  *where_the_object_was)
 {
   SubscriptionContext *context = data;
@@ -432,6 +432,8 @@ sn_item_properties_callback (GObject      *source_object,
   GError *error = NULL;
 
   item->properties_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  g_signal_connect (item->item_proxy, "g-signal",
+                    G_CALLBACK (sn_item_signal_received), item);
   free_error_and_return_if_cancelled (error);
   return_and_finish_if_true (item->properties_proxy == NULL);
 
@@ -466,10 +468,7 @@ sn_item_item_callback (GObject      *source_object,
                                         sn_item_name_owner_changed,
                                         item, NULL);
   g_object_weak_ref (G_OBJECT (item->item_proxy),
-                     sn_item_subscription_context_ubsubscribe, context);
-
-  g_signal_connect (item->item_proxy, "g-signal",
-                    G_CALLBACK (sn_item_signal_received), item);
+                     sn_item_subscription_context_unsubscribe, context);
 
   g_dbus_proxy_new (g_dbus_proxy_get_connection (item->item_proxy),
                     G_DBUS_PROXY_FLAGS_NONE,
@@ -1056,7 +1055,8 @@ GtkWidget *
 sn_item_get_menu (SnItem *item)
 {
   #ifdef HAVE_DBUSMENU
-  DbusmenuGtkMenu *menu;
+  DbusmenuGtkMenu   *menu;
+  DbusmenuGtkClient *client;
 
   g_return_val_if_fail (XFCE_IS_SN_ITEM (item), NULL);
   g_return_val_if_fail (item->initialized, NULL);
@@ -1066,6 +1066,8 @@ sn_item_get_menu (SnItem *item)
       menu = dbusmenu_gtkmenu_new (item->bus_name, item->menu_object_path);
       if (menu != NULL)
         {
+          client = dbusmenu_gtkmenu_get_client (menu);
+          dbusmenu_gtkclient_set_accel_group (client, gtk_accel_group_new ());
           g_object_ref_sink (menu);
           item->cached_menu = GTK_WIDGET (menu);
         }
