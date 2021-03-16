@@ -74,7 +74,6 @@ struct _SnItem
   GCancellable        *cancellable;
   GDBusProxy          *item_proxy;
   GDBusProxy          *properties_proxy;
-  guint                properties_timeout;
 
   gchar               *bus_name;
   gchar               *object_path;
@@ -252,7 +251,6 @@ sn_item_init (SnItem *item)
   item->cancellable = g_cancellable_new ();
   item->item_proxy = NULL;
   item->properties_proxy = NULL;
-  item->properties_timeout = 0;
 
   item->bus_name = NULL;
   item->object_path = NULL;
@@ -288,9 +286,6 @@ sn_item_finalize (GObject *object)
   SnItem *item = XFCE_SN_ITEM (object);
 
   g_object_unref (item->cancellable);
-
-  if (item->properties_timeout != 0)
-    g_source_remove (item->properties_timeout);
 
   if (item->properties_proxy != NULL)
     g_object_unref (item->properties_proxy);
@@ -390,7 +385,7 @@ sn_item_set_property (GObject      *object,
 
 
 static void
-sn_item_subscription_context_ubsubscribe (gpointer  data,
+sn_item_subscription_context_unsubscribe (gpointer  data,
                                           GObject  *where_the_object_was)
 {
   SubscriptionContext *context = data;
@@ -432,6 +427,8 @@ sn_item_properties_callback (GObject      *source_object,
   GError *error = NULL;
 
   item->properties_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  g_signal_connect (item->item_proxy, "g-signal",
+                    G_CALLBACK (sn_item_signal_received), item);
   free_error_and_return_if_cancelled (error);
   return_and_finish_if_true (item->properties_proxy == NULL);
 
@@ -466,10 +463,7 @@ sn_item_item_callback (GObject      *source_object,
                                         sn_item_name_owner_changed,
                                         item, NULL);
   g_object_weak_ref (G_OBJECT (item->item_proxy),
-                     sn_item_subscription_context_ubsubscribe, context);
-
-  g_signal_connect (item->item_proxy, "g-signal",
-                    G_CALLBACK (sn_item_signal_received), item);
+                     sn_item_subscription_context_unsubscribe, context);
 
   g_dbus_proxy_new (g_dbus_proxy_get_connection (item->item_proxy),
                     G_DBUS_PROXY_FLAGS_NONE,
@@ -523,12 +517,11 @@ sn_item_start (SnItem *item)
 
 
 
-static gboolean
-sn_item_perform_invalidate (gpointer user_data)
+void
+sn_item_invalidate (SnItem *item)
 {
-  SnItem *item = user_data;
-
-  item->properties_timeout = 0;
+  g_return_if_fail (XFCE_IS_SN_ITEM (item));
+  g_return_if_fail (item->properties_proxy != NULL);
 
   g_dbus_proxy_call (item->properties_proxy,
                      "GetAll",
@@ -538,22 +531,6 @@ sn_item_perform_invalidate (gpointer user_data)
                      item->cancellable,
                      sn_item_get_all_properties_result,
                      item);
-
-  return G_SOURCE_REMOVE;
-}
-
-
-
-void
-sn_item_invalidate (SnItem *item)
-{
-  g_return_if_fail (XFCE_IS_SN_ITEM (item));
-  g_return_if_fail (item->properties_proxy != NULL);
-
-  /* same approach as in Plasma Workspace */
-  if (item->properties_timeout != 0)
-    g_source_remove (item->properties_timeout);
-  item->properties_timeout = g_timeout_add (10, sn_item_perform_invalidate, item);
 }
 
 
