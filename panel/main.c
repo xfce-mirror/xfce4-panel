@@ -204,7 +204,9 @@ panel_dbus_name_lost (GDBusConnection *connection,
                       const gchar     *name,
                       gpointer         user_data)
 {
-  g_critical (_("Name %s lost on the message dbus, exiting."), name);
+  if (connection == NULL)
+    g_critical (_("Name %s lost on the message dbus, exiting."), name);
+
   gtk_main_quit ();
 }
 
@@ -353,14 +355,6 @@ main (gint argc, gchar **argv)
 
   /* start dbus service */
   dbus_service = panel_dbus_service_get ();
-  if (!panel_dbus_service_is_exported (dbus_service))
-    {
-      /* quit without error if an instance is running */
-      succeed = TRUE;
-
-      g_print ("%s: %s\n\n", G_LOG_DOMAIN, _("There is already a running instance"));
-      goto dbus_return;
-    }
 
   /* start session management */
   sm_client = xfce_sm_client_get ();
@@ -394,6 +388,11 @@ main (gint argc, gchar **argv)
       panel_application_destroy_dialogs (application);
 
       g_object_unref (G_OBJECT (application));
+    }
+  else
+    {
+      /* quit without error if an instance is running */
+      g_print ("%s: %s\n\n", G_LOG_DOMAIN, _("There is already a running instance"));
     }
 
   g_object_unref (G_OBJECT (sm_client));
