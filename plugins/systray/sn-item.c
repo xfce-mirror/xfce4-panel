@@ -147,10 +147,11 @@ if (error != NULL) \
 
 
 
-#define return_and_finish_if_true(condition) \
+#define finish_and_return_if_true(condition) \
 if (condition) \
   { \
-    g_signal_emit (G_OBJECT (item), sn_item_signals[FINISH], 0); \
+    if (G_IS_OBJECT (item)) \
+      g_signal_emit (item, sn_item_signals[FINISH], 0); \
     return; \
   }
 
@@ -413,7 +414,7 @@ sn_item_name_owner_changed (GDBusConnection *connection,
   finish = new_owner == NULL || strlen (new_owner) == 0;
   g_free (new_owner);
 
-  return_and_finish_if_true (finish);
+  finish_and_return_if_true (finish);
 }
 
 
@@ -430,7 +431,7 @@ sn_item_properties_callback (GObject      *source_object,
   g_signal_connect (item->item_proxy, "g-signal",
                     G_CALLBACK (sn_item_signal_received), item);
   free_error_and_return_if_cancelled (error);
-  return_and_finish_if_true (item->properties_proxy == NULL);
+  finish_and_return_if_true (item->properties_proxy == NULL);
 
   sn_item_invalidate (item);
 }
@@ -448,7 +449,7 @@ sn_item_item_callback (GObject      *source_object,
 
   item->item_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
   free_error_and_return_if_cancelled (error);
-  return_and_finish_if_true (item->item_proxy == NULL);
+  finish_and_return_if_true (item->item_proxy == NULL);
 
   context = g_new0 (SubscriptionContext, 1);
   context->connection = g_dbus_proxy_get_connection (item->item_proxy);
@@ -710,7 +711,7 @@ sn_item_get_all_properties_result (GObject      *source_object,
 
   properties = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
   free_error_and_return_if_cancelled (error);
-  return_and_finish_if_true (properties == NULL);
+  finish_and_return_if_true (properties == NULL);
 
   #define string_empty_null(s) ((s) != NULL ? (s) : "")
 
