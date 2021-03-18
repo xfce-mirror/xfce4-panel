@@ -722,7 +722,8 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
           name = g_strdup (xfce_panel_plugin_provider_get_name (provider));
 
           /* destroy the plugin */
-          gtk_widget_destroy (GTK_WIDGET (provider));
+          itembar = gtk_bin_get_child (GTK_BIN (window));
+          gtk_container_remove (GTK_CONTAINER (itembar), GTK_WIDGET (provider));
 
           /* remove the plugin configuration */
           panel_application_plugin_delete_config (application, name, unique_id);
