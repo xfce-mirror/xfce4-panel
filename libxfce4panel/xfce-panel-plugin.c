@@ -116,8 +116,6 @@ static void          xfce_panel_plugin_set_locked             (XfcePanelPluginPr
 static void          xfce_panel_plugin_ask_remove             (XfcePanelPluginProvider          *provider);
 static void          xfce_panel_plugin_take_window_notify     (gpointer                          data,
                                                                GObject                          *where_the_object_was);
-static void          xfce_panel_plugin_menu_item_destroy      (GtkWidget                        *item,
-                                                               XfcePanelPlugin                  *plugin);
 
 
 
@@ -967,33 +965,8 @@ static void
 xfce_panel_plugin_finalize (GObject *object)
 {
   XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (object);
-  GSList          *li;
 
-  /* destroy the menu */
-  if (plugin->priv->menu != NULL)
-    {
-      /* remove custom items before they get destroyed */
-      for (li = plugin->priv->menu_items; li != NULL; li = li->next)
-        {
-          gtk_container_remove (GTK_CONTAINER (plugin->priv->menu), GTK_WIDGET (li->data));
-          g_object_unref (G_OBJECT (li->data));
-        }
-      g_slist_free (plugin->priv->menu_items);
-      /* attached menu is destroyed by GtkWidget */
-      panel_assert (plugin->priv->menu_items == NULL);
-    }
-  else
-    {
-      /* release custom menu items */
-      for (li = plugin->priv->menu_items; li != NULL; li = li->next)
-        {
-          g_signal_handlers_disconnect_by_func (G_OBJECT (li->data),
-              G_CALLBACK (xfce_panel_plugin_menu_item_destroy), plugin);
-          g_object_unref (G_OBJECT (li->data));
-        }
-      g_slist_free (plugin->priv->menu_items);
-    }
-
+  g_slist_free_full (plugin->priv->menu_items, g_object_unref);
   g_free (plugin->priv->name);
   g_free (plugin->priv->display_name);
   g_free (plugin->priv->comment);
@@ -1763,21 +1736,6 @@ xfce_panel_plugin_take_window_notify (gpointer  data,
 
 
 
-static void
-xfce_panel_plugin_menu_item_destroy (GtkWidget       *item,
-                                     XfcePanelPlugin *plugin)
-{
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
-  panel_return_if_fail (GTK_IS_MENU_ITEM (item));
-  panel_return_if_fail (g_slist_find (plugin->priv->menu_items, item) != NULL);
-
-  /* remote the item from the list and release it */
-  plugin->priv->menu_items = g_slist_remove (plugin->priv->menu_items, item);
-  g_object_unref (G_OBJECT (item));
-}
-
-
-
 /**
  * xfce_panel_plugin_get_name:
  * @plugin : an #XfcePanelPlugin.
@@ -2311,11 +2269,6 @@ xfce_panel_plugin_menu_insert_item (XfcePanelPlugin *plugin,
   /* take the item and add to internal list */
   plugin->priv->menu_items = g_slist_append (plugin->priv->menu_items,
                                              g_object_ref_sink (item));
-  g_signal_connect (G_OBJECT (item), "destroy",
-      G_CALLBACK (xfce_panel_plugin_menu_item_destroy), plugin);
-
-  /* destroy the menu */
-  xfce_panel_plugin_menu_destroy (plugin);
 }
 
 
@@ -2397,32 +2350,21 @@ xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
  * Remove all custom menu items added through #xfce_panel_plugin_menu_insert_item
  * from the menu.
  **/
- void
- xfce_panel_plugin_menu_destroy (XfcePanelPlugin *plugin)
- {
-   GSList *li;
+void
+xfce_panel_plugin_menu_destroy (XfcePanelPlugin *plugin)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin));
 
-   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
-   panel_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin));
+  if (plugin->priv->menu != NULL)
+    {
+      g_slist_free_full (plugin->priv->menu_items, g_object_unref);
+      plugin->priv->menu_items = NULL;
 
-   if (plugin->priv->menu != NULL)
-     {
-       /* remove custom items before they get destroyed */
-       for (li = plugin->priv->menu_items; li != NULL; li = li->next)
-         {
-           if (GTK_IS_WIDGET (li->data))
-             {
-               gtk_container_remove (GTK_CONTAINER (plugin->priv->menu), GTK_WIDGET (li->data));
-               g_object_unref (li->data);
-             }
-           xfce_panel_plugin_menu_item_destroy (GTK_WIDGET (li->data), plugin);
-         }
-       g_slist_free (li);
-
-       gtk_menu_detach (GTK_MENU (plugin->priv->menu));
-       plugin->priv->menu = NULL;
-     }
- }
+      gtk_menu_detach (GTK_MENU (plugin->priv->menu));
+      plugin->priv->menu = NULL;
+    }
+}
 
 
 
