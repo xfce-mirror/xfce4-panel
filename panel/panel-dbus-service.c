@@ -92,9 +92,6 @@ struct _PanelDBusService
 
   /* queue for remote-events */
   GHashTable      *remote_events;
-
-  /* whether the service is owner of the name */
-  guint            is_exported : 1;
 };
 
 typedef struct
@@ -132,27 +129,17 @@ panel_dbus_service_class_init (PanelDBusServiceClass *klass)
 static void
 panel_dbus_service_init (PanelDBusService *service)
 {
-  GError         *error = NULL;
+  GError *error = NULL;
 
-  service->is_exported = FALSE;
   service->remote_events = NULL;
 
   service->connection = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
   if (G_LIKELY (service->connection != NULL))
     {
-      service->is_exported =
-      g_dbus_interface_skeleton_export(G_DBUS_INTERFACE_SKELETON(service),
-                                       service->connection,
-                                       "/org/xfce/Panel",
-                                       &error);
-
-      if (error)
-        {
-          g_critical ("Failed to export panel D-BUS interface: %s", error->message);
-          g_error_free (error);
-        }
-
-      if (G_LIKELY (service->is_exported))
+      if (G_LIKELY (g_dbus_interface_skeleton_export (G_DBUS_INTERFACE_SKELETON (service),
+                                                      service->connection,
+                                                      "/org/xfce/Panel",
+                                                      &error)))
         {
           g_signal_connect (service, "handle_add_new_item",
                             G_CALLBACK(panel_dbus_service_add_new_item), service);
@@ -166,6 +153,11 @@ panel_dbus_service_init (PanelDBusService *service)
                             G_CALLBACK(panel_dbus_service_save), service);
           g_signal_connect (service, "handle_terminate",
                             G_CALLBACK(panel_dbus_service_terminate), service);
+        }
+      else
+        {
+          g_critical ("Failed to export panel D-BUS interface: %s", error->message);
+          g_error_free (error);
         }
     }
   else
@@ -477,15 +469,6 @@ panel_dbus_service_get (void)
     }
 
   return service;
-}
-
-
-
-gboolean
-panel_dbus_service_is_exported (PanelDBusService *service)
-{
-  panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
-  return service->is_exported;
 }
 
 
