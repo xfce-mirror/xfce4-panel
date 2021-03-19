@@ -2407,6 +2407,14 @@ xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
 
    if (plugin->priv->menu != NULL)
      {
+       /* defer menu destruction if it is currently popped up */
+       if (gtk_widget_get_visible (GTK_WIDGET (plugin->priv->menu)))
+         {
+           g_signal_connect_swapped (plugin->priv->menu, "deactivate",
+                                     G_CALLBACK (xfce_panel_plugin_menu_destroy), plugin);
+           return;
+         }
+
        /* remove custom items before they get destroyed */
        for (li = plugin->priv->menu_items; li != NULL; li = li->next)
          {
