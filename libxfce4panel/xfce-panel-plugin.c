@@ -2405,7 +2405,8 @@ xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
    panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
    panel_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin));
 
-   if (plugin->priv->menu != NULL)
+   /* ignore the request for destruction if the menu is popped up */
+   if (plugin->priv->menu != NULL && !gtk_widget_get_visible (GTK_WIDGET (plugin->priv->menu)))
      {
        /* remove custom items before they get destroyed */
        for (li = plugin->priv->menu_items; li != NULL; li = li->next)
