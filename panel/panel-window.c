@@ -458,7 +458,7 @@ panel_window_class_init (PanelWindowClass *klass)
   g_object_class_install_property (gobject_class,
                                    PROP_LENGTH,
                                    g_param_spec_uint ("length", NULL, NULL,
-                                                      1, 100, 1,
+                                                      1, 100, 10,
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
