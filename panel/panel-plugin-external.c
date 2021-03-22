@@ -248,6 +248,11 @@ panel_plugin_external_finalize (GObject *object)
 {
   PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (object);
 
+  panel_debug (PANEL_DEBUG_EXTERNAL,
+               "%s-%d: plugin is being finalized",
+               panel_module_get_name (external->module),
+               external->unique_id);
+
   if (external->priv->spawn_timeout_id != 0)
     g_source_remove (external->priv->spawn_timeout_id);
 
