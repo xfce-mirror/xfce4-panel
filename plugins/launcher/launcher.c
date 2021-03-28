@@ -1914,7 +1914,7 @@ launcher_plugin_button_update_action_menu (LauncherPlugin *plugin)
     {
       gtk_widget_destroy (GTK_WIDGET (plugin->action_menu));
     }
-  else if ((list = garcon_menu_item_get_actions (item)) != NULL)
+  else if (item != NULL && (list = garcon_menu_item_get_actions (item)) != NULL)
     {
       g_list_free (list);
       plugin->action_menu = GTK_WIDGET (garcon_gtk_menu_get_desktop_actions_menu (item));
