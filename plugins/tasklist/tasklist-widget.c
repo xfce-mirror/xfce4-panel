@@ -630,15 +630,16 @@ static GdkPixbuf *
 xfce_tasklist_get_window_icon_from_theme (WnckWindow *window,
                                           GdkPixbuf  *fallback)
 {
-  GdkPixbuf    *pixbuf;
+  GdkPixbuf    *pixbuf = NULL;
   int           size = gdk_pixbuf_get_width (fallback);
   GtkIconTheme *theme = gtk_icon_theme_get_default ();
   const char   *name = wnck_window_get_class_instance_name (window);
 
   /* return the most likely icon if found */
-  pixbuf = gtk_icon_theme_load_icon (theme, name, size, GTK_ICON_LOOKUP_FORCE_SIZE, NULL);
+  if (name != NULL)
+    pixbuf = gtk_icon_theme_load_icon (theme, name, size, GTK_ICON_LOOKUP_FORCE_SIZE, NULL);
 
-  if (pixbuf)
+  if (pixbuf != NULL)
     return pixbuf;
 
   return fallback;
@@ -3493,7 +3494,7 @@ xfce_tasklist_button_drag_data_received (GtkWidget         *button,
       || (!xfce_tasklist_horizontal (tasklist) && y >= allocation.height / 2))
     sibling = g_list_next (sibling);
 
-  xid = *((gulong *) gtk_selection_data_get_data (selection_data));
+  xid = *((gulong *) (gpointer) gtk_selection_data_get_data (selection_data));
   for (li = tasklist->windows; li != NULL; li = li->next)
     {
       child = li->data;
