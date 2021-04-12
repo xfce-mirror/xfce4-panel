@@ -2632,7 +2632,8 @@ force_box_layout_update (XfceTasklistChild *child)
    * Sometimes required if the icon has been resized. */
   gtk_container_check_resize (GTK_CONTAINER (child->box));
   gtk_widget_get_allocated_size (child->box, &box_allocation, &box_baseline);
-  gtk_widget_size_allocate_with_baseline (child->box, &box_allocation, box_baseline);
+  if (box_allocation.width > 0 && box_allocation.height > 0)
+    gtk_widget_size_allocate_with_baseline (child->box, &box_allocation, box_baseline);
 }
 
 
