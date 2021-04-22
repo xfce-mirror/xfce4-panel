@@ -1680,20 +1680,20 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
       if (panel_str_is_empty (icon_name))
         {
           /* use an empty placeholder icon */
-          image = gtk_image_new_from_icon_name ("", GTK_ICON_SIZE_MENU);
+          image = gtk_image_new_from_icon_name ("", GTK_ICON_SIZE_DND);
         }
       else if (g_path_is_absolute (icon_name))
         {
           /* remember the icon name for recreating the pixbuf when panel
               size changes */
           plugin->icon_name = g_strdup (icon_name);
-          plugin->pixbuf = gdk_pixbuf_new_from_file_at_size (icon_name, 16, 16, NULL);
+          plugin->pixbuf = gdk_pixbuf_new_from_file_at_size (icon_name, 32, 32, NULL);
           image = gtk_image_new_from_pixbuf (plugin->pixbuf);
         }
       else
         {
-          image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_MENU);
-          gtk_image_set_pixel_size (GTK_IMAGE (image), 16);
+          image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_DND);
+          gtk_image_set_pixel_size (GTK_IMAGE (image), 32);
           plugin->icon_name = NULL;
         }
 
