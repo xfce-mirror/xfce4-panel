@@ -1617,10 +1617,12 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
   GtkWidget      *mi, *box, *label, *image;
   const gchar    *name, *icon_name;
   GSList         *li;
+  gint            icon_size;
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
   panel_return_if_fail (plugin->menu == NULL);
 
+  icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (plugin));
   /* create a new menu */
   plugin->menu = gtk_menu_new ();
   gtk_menu_set_reserve_toggle_size (GTK_MENU (plugin->menu), FALSE);
@@ -1680,22 +1682,22 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
       if (panel_str_is_empty (icon_name))
         {
           /* use an empty placeholder icon */
-          image = gtk_image_new_from_icon_name ("", GTK_ICON_SIZE_MENU);
+          image = gtk_image_new_from_icon_name ("", GTK_ICON_SIZE_DND);
         }
       else if (g_path_is_absolute (icon_name))
         {
           /* remember the icon name for recreating the pixbuf when panel
               size changes */
           plugin->icon_name = g_strdup (icon_name);
-          plugin->pixbuf = gdk_pixbuf_new_from_file_at_size (icon_name, 16, 16, NULL);
+          plugin->pixbuf = gdk_pixbuf_new_from_file_at_size (icon_name, icon_size, icon_size, NULL);
           image = gtk_image_new_from_pixbuf (plugin->pixbuf);
         }
       else
         {
-          image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_MENU);
-          gtk_image_set_pixel_size (GTK_IMAGE (image), 16);
+          image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_DND);
           plugin->icon_name = NULL;
         }
+      gtk_image_set_pixel_size (GTK_IMAGE (image), icon_size);
 
       gtk_box_pack_start (GTK_BOX (box), image, FALSE, TRUE, 3);
       gtk_widget_show (image);
