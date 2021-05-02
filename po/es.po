@@ -42,7 +42,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-03 00:45+0100\n"
-"PO-Revision-Date: 2021-04-25 09:07+0000\n"
+"PO-Revision-Date: 2021-05-02 20:59+0000\n"
 "Last-Translator: Toni Estévez <toni.estevez@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/xfce/xfce4-panel/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -59,13 +59,13 @@ msgstr "Crear un lanzador en el panel"
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop "
 "file"
-msgstr "Agregar un lanzador nuevo al panel basándose en la información de este fichero .desktop"
+msgstr "Añadir un lanzador nuevo al panel con la información de este archivo de escritorio"
 
 #: ../panel-preferences.desktop.in.h:1
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
-msgstr "paneles;configuraciones;preferencias;barra de tareas;ocultación automática;menú de la aplicación;inicio;botones;Lanzador;área de notificación;estado;iconos;complementos;"
+msgstr "paneles;configuración;preferencias;barra de tareas;ocultación automática;menú de aplicación;inicio;botones;lanzador;área de notificación;estado;iconos;complementos;"
 
 #: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2950
 msgid "Panel"
@@ -73,19 +73,19 @@ msgstr "Panel"
 
 #: ../panel-preferences.desktop.in.h:3
 msgid "Customize the panel"
-msgstr "Personalizar el panel"
+msgstr "Personalice el panel"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1105
 #: ../panel/panel-preferences-dialog.c:1321
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "¿Está seguro que quiere eliminar «%s»?"
+msgstr "¿Seguro que quiere eliminar «%s»?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1110
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
-msgstr "Eliminar el elemento del panel también significa que se perderá su configuración."
+msgstr "Al eliminar el elemento del panel también se perderá su configuración."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
@@ -102,7 +102,7 @@ msgstr "_Cancelar"
 #: ../panel/panel-preferences-dialog.c:1327
 #: ../plugins/launcher/launcher-dialog.c:852
 msgid "_Remove"
-msgstr "_Quitar"
+msgstr "_Eliminar"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1237
 msgid "_Properties"
@@ -152,7 +152,7 @@ msgstr "Acerca de"
 
 #: ../panel/main.c:81
 msgid "Show the 'Panel Preferences' dialog"
-msgstr "Mostrar diálogo «Preferencias del panel»"
+msgstr "Mostrar el diálogo de preferencias del panel"
 
 #: ../panel/main.c:81 ../panel/main.c:82
 msgid "PANEL-NUMBER"
@@ -160,7 +160,7 @@ msgstr "NÚMERO-DEL-PANEL"
 
 #: ../panel/main.c:82
 msgid "Show the 'Add New Items' dialog"
-msgstr "Mostrar diálogo «Añadir nuevos elementos»"
+msgstr "Mostrar el diálogo de añadir nuevos elementos"
 
 #: ../panel/main.c:83
 msgid "Save the panel configuration"
@@ -176,15 +176,15 @@ msgstr "NOMBRE-DEL-COMPLEMENTO"
 
 #: ../panel/main.c:85
 msgid "Restart the running panel instance"
-msgstr "Reiniciar la instancia en ejecución del panel"
+msgstr "Reiniciar la instancia del panel en ejecución"
 
 #: ../panel/main.c:86
 msgid "Quit the running panel instance"
-msgstr "Cerrar la instancia en ejecución del panel"
+msgstr "Cerrar la instancia del panel en ejecución"
 
 #: ../panel/main.c:87
 msgid "Do not wait for a window manager on startup"
-msgstr "No esperar a un gestor de ventanas al iniciar"
+msgstr "No esperar al gestor de ventanas al iniciarse"
 
 #: ../panel/main.c:88
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
@@ -196,7 +196,7 @@ msgstr "Imprimir información de la versión y salir"
 #: ../panel/main.c:207
 #, c-format
 msgid "Name %s lost on the message dbus, exiting."
-msgstr "Nombre %s perdido en el mensaje dbus, saliendo."
+msgstr "Se ha perdido el nombre %s en el mensaje de D-Bus, saliendo."
 
 #. parse context options
 #: ../panel/main.c:268
@@ -228,31 +228,31 @@ msgstr "Reiniciando…"
 
 #: ../panel/main.c:419
 msgid "Failed to show the preferences dialog"
-msgstr "No se pudo mostrar el diálogo de preferencias"
+msgstr "No se ha podido mostrar el diálogo de preferencias"
 
 #: ../panel/main.c:421
 msgid "Failed to show the add new items dialog"
-msgstr "No se pudo mostrar el diálogo para añadir nuevos elementos"
+msgstr "No se ha podido mostrar el diálogo para añadir nuevos elementos"
 
 #: ../panel/main.c:423
 msgid "Failed to save the panel configuration"
-msgstr "No se pudo guardar la configuración del panel"
+msgstr "No se ha podido guardar la configuración del panel"
 
 #: ../panel/main.c:425
 msgid "Failed to add a plugin to the panel"
-msgstr "No se pudo añadir un complemento al panel"
+msgstr "No se ha podido añadir un complemento al panel"
 
 #: ../panel/main.c:427
 msgid "Failed to restart the panel"
-msgstr "No se pudo reiniciar el panel"
+msgstr "No se ha podido reiniciar el panel"
 
 #: ../panel/main.c:429
 msgid "Failed to quit the panel"
-msgstr "No se pudo cerrar el panel"
+msgstr "No se ha podido cerrar el panel"
 
 #: ../panel/main.c:431
 msgid "Failed to send D-Bus message"
-msgstr "No se pudo enviar el mensaje de D-Bus"
+msgstr "No se ha podido enviar el mensaje de D-Bus"
 
 #: ../panel/main.c:441
 msgid "Execute"
@@ -262,7 +262,7 @@ msgstr "Ejecutar"
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "¿Desea iniciar el panel? Si lo hace, asegúrese de guardar la sesión antes de salir, así el panel se iniciará automáticamente en la próxima sesión."
+msgstr "¿Quiere iniciar el panel? Si lo hace, asegúrese de guardar la sesión al salir, así el panel se iniciará automáticamente la próxima vez que inicie sesión."
 
 #: ../panel/main.c:445 ../panel/main.c:459
 #, c-format
@@ -271,24 +271,24 @@ msgstr "No se ha encontrado ninguna instancia de %s en ejecución"
 
 #: ../panel/panel-application.c:215
 msgid "Failed to launch the migration application"
-msgstr "No se pudo ejecutar la aplicación de migración"
+msgstr "No se ha podido iniciar la aplicación de migración"
 
 #: ../panel/panel-application.c:984
 msgid "Create _Launcher"
-msgstr "Crear _lanzador"
+msgstr "Crear un _lanzador"
 
 #: ../panel/panel-application.c:985
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Esta opción creará un nuevo complemento en el panel y los archivos que agregue serán insertados como elementos del menú."
+msgstr "Esta acción creará un nuevo lanzador en el panel e insertará los archivos que se suelten como elementos del menú."
 
 #: ../panel/panel-application.c:987
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Crear un nuevo lanzador a partir de %d archivo .desktop"
-msgstr[1] "Crear un nuevo lanzador a partir de %d ficheros .desktop"
+msgstr[1] "Crear un nuevo lanzador a partir de %d archivos de escritorio"
 
 #: ../panel/panel-application.c:1727
 msgid "Quit"
@@ -307,7 +307,7 @@ msgstr "¿Seguro que quiere cerrar el panel?"
 #: ../panel/panel-application.c:1737
 #, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "No se pudo ejecutar la función «%s»"
+msgstr "No se ha podido ejecutar la función «%s»"
 
 #: ../panel/panel-dbus-client.c:218
 msgid ""
@@ -428,7 +428,7 @@ msgstr "El panel y las configuraciones de los complementos serán eliminados per
 #: ../panel/panel-preferences-dialog.c:963
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
-msgstr "¿Está seguro que quiere eliminar el panel «%d»?"
+msgstr "¿Seguro que quiere eliminar el panel «%d»?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
@@ -618,7 +618,7 @@ msgstr "Elija el color del panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid "_File:"
-msgstr "_Fichero:"
+msgstr "_Archivo:"
 
 #: ../panel/panel-preferences-dialog.glade.h:43
 msgid "Select A Background Image"
@@ -731,7 +731,7 @@ msgstr "Anc_lar panel"
 
 #: ../migrate/main.c:110
 msgid "Failed to load the default configuration"
-msgstr "No se pudo cargar la configuración predeterminada"
+msgstr "No se ha podido cargar la configuración predeterminada"
 
 #: ../migrate/main.c:122
 msgid "Panel config needs migration..."
@@ -739,7 +739,7 @@ msgstr "La configuración del panel necesita migración…"
 
 #: ../migrate/main.c:126
 msgid "Failed to migrate the existing configuration"
-msgstr "No se pudo migrar la configuración existente"
+msgstr "No se ha podido migrar la configuración existente"
 
 #: ../migrate/main.c:132
 msgid "Panel configuration has been updated."
@@ -818,7 +818,7 @@ msgstr "Cerrar _sesión"
 
 #: ../plugins/actions/actions.c:167
 msgid "Are you sure you want to log out?"
-msgstr "¿Está seguro que quiere cerrar la sesión?"
+msgstr "¿Seguro que quiere cerrar la sesión?"
 
 #: ../plugins/actions/actions.c:168
 #, c-format
@@ -910,7 +910,7 @@ msgstr "_Reiniciar"
 
 #: ../plugins/actions/actions.c:227
 msgid "Are you sure you want to restart?"
-msgstr "¿Está seguro que quiere reiniciar?"
+msgstr "¿Seguro que quiere reiniciar?"
 
 #: ../plugins/actions/actions.c:228
 #, c-format
@@ -927,7 +927,7 @@ msgstr "_Apagar"
 
 #: ../plugins/actions/actions.c:236
 msgid "Are you sure you want to shut down?"
-msgstr "¿Está seguro que quiere apagar?"
+msgstr "¿Seguro que quiere apagar?"
 
 #: ../plugins/actions/actions.c:237
 #, c-format
@@ -943,7 +943,7 @@ msgstr "Separador"
 #: ../plugins/actions/actions.c:1110
 #, c-format
 msgid "Failed to run action \"%s\""
-msgstr "No se pudo ejecutar la acción «%s»"
+msgstr "No se ha podido ejecutar la acción «%s»"
 
 #: ../plugins/actions/actions.c:1279
 msgid "Little Mouse"
@@ -1012,15 +1012,15 @@ msgstr "Usar un archivo de menú _personalizado"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "Menu _file:"
-msgstr "_Fichero de menú:"
+msgstr "_Archivo de menú:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:16
 msgid "Select A Menu File"
-msgstr "Seleccionar un fichero de menú"
+msgstr "Seleccionar un archivo de menú"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:17
 msgid "Menu File"
-msgstr "Fichero de menú"
+msgstr "Archivo de menú"
 
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu.c:39
@@ -1042,7 +1042,7 @@ msgstr "_Aceptar"
 #: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2517
 #, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "No se pudo ejecutar la orden «%s»."
+msgstr "No se ha podido ejecutar la orden «%s»."
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
 msgid "Show a menu containing categories of installed applications"
@@ -1090,7 +1090,7 @@ msgstr "Semana %V"
 
 #: ../plugins/clock/clock.c:465
 msgid "Failed to execute clock command"
-msgstr "No se pudo ejecutar la orden del reloj"
+msgstr "No se ha podido ejecutar la orden del reloj"
 
 #: ../plugins/clock/clock.c:894
 msgid "Custom Format"
@@ -1444,12 +1444,12 @@ msgstr "Menú de directorios"
 #: ../plugins/directorymenu/directorymenu.c:689
 #, c-format
 msgid "Failed to launch application \"%s\""
-msgstr "No se pudo ejecutar la aplicación «%s»."
+msgstr "No se ha podido ejecutar la aplicación «%s»."
 
 #: ../plugins/directorymenu/directorymenu.c:721
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr "No se pudo determinar el tipo de contenido de «%s»"
+msgstr "No se ha podido determinar el tipo de contenido de «%s»"
 
 #: ../plugins/directorymenu/directorymenu.c:730
 #, c-format
@@ -1459,12 +1459,12 @@ msgstr "No se encontró una aplicación predeterminada para «%s»"
 #: ../plugins/directorymenu/directorymenu.c:746
 #, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr "No se pudo ejecutar la aplicación predeterminada para «%s»"
+msgstr "No se ha podido ejecutar la aplicación predeterminada para «%s»"
 
 #: ../plugins/directorymenu/directorymenu.c:844
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr "No se pudo ejecutar la aplicación favorita para la categoría «%s»"
+msgstr "No se ha podido ejecutar la aplicación favorita para la categoría «%s»"
 
 #: ../plugins/directorymenu/directorymenu.c:927
 msgid "Create New Folder"
@@ -1574,7 +1574,7 @@ msgstr "No hay elementos"
 
 #: ../plugins/launcher/launcher-dialog.c:785
 msgid "Failed to open desktop item editor"
-msgstr "No se pudo abrir el editor de elementos .desktop"
+msgstr "No se ha podido abrir el editor de elementos .desktop"
 
 #: ../plugins/launcher/launcher-dialog.c:853
 msgid "If you delete an item, it will be permanently removed"
@@ -1583,7 +1583,7 @@ msgstr "Si borra un elemento, éste se eliminará definitivamente."
 #: ../plugins/launcher/launcher-dialog.c:854
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr "¿Está seguro que quiere eliminar «%s»?"
+msgstr "¿Seguro que quiere eliminar «%s»?"
 
 #: ../plugins/launcher/launcher-dialog.c:855
 msgid "Unnamed item"
@@ -1702,7 +1702,7 @@ msgstr "_Configuración de áreas de trabajo…"
 
 #: ../plugins/pager/pager.c:636
 msgid "Unable to open the workspace settings"
-msgstr "No se pudo abrir la configuración de áreas de trabajo"
+msgstr "No se ha podido abrir la configuración de áreas de trabajo"
 
 #: ../plugins/pager/pager-buttons.c:590 ../plugins/windowmenu/windowmenu.c:873
 #, c-format
@@ -1889,7 +1889,7 @@ msgstr "Iconos de la Bandeja del sistema"
 
 #: ../plugins/systray/systray.c:146
 msgid "Unable to start the notification area"
-msgstr "No se pudo iniciar el área de notificación"
+msgstr "No se ha podido iniciar el área de notificación"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:413
@@ -1905,7 +1905,7 @@ msgstr "El área de notificación ha perdido el foco"
 #: ../plugins/systray/systray-manager.c:432
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr "No se pudo adquirir la selección del gestor para la pantalla %d"
+msgstr "No se ha podido adquirir la selección del gestor para la pantalla %d"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Status Tray Plugin"
