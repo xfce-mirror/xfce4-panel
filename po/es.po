@@ -42,7 +42,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-03 00:45+0100\n"
-"PO-Revision-Date: 2021-05-02 20:59+0000\n"
+"PO-Revision-Date: 2021-05-03 20:58+0000\n"
 "Last-Translator: Toni Estévez <toni.estevez@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/xfce/xfce4-panel/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -298,7 +298,7 @@ msgstr "Salir"
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "Ha iniciado X sin un gestor de sesión. Al pulsar «Salir» se cerrará el servidor X."
+msgstr "Ha iniciado el sistema X Window sin un gestor de sesión. Al pulsar Salir se cerrará el servidor X."
 
 #: ../panel/panel-application.c:1729
 msgid "Are you sure you want to quit the panel?"
@@ -307,19 +307,19 @@ msgstr "¿Seguro que quiere cerrar el panel?"
 #: ../panel/panel-application.c:1737
 #, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "No se ha podido ejecutar la función «%s»"
+msgstr "No se ha podido ejecutar la orden «%s»"
 
 #: ../panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Sintaxis del complemento de evento especificado inválido. Emplee NOMBRE-DEL-COMPLEMENTO:NOMBRE[:TIPO:VALOR]."
+msgstr "La sintaxis del evento del complemento especificada no es válida. Use NOMBRE-DEL-COMPLEMENTO:NOMBRE[:TIPO:VALOR]."
 
 #: ../panel/panel-dbus-client.c:248
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "Tipo de indicio inválido «%s». Los tipos válidos son bool, double, int, string y uint"
+msgstr "El tipo «%s» no es válido. Los tipos válidos son bool, double, int, string y uint."
 
 #: ../panel/panel-dialogs.c:58
 msgid "Unable to open the e-mail address"
@@ -331,21 +331,21 @@ msgstr "El panel del entorno de escritorio Xfce"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr "Ignacio Poggi <ignaciop.3@gmail.com> 2020,\nManolo Díaz <diaz.manolo@gmail.com> 2015,\nEdwin Pujols <edwinpm5@gmail.com> 2014,\nGabriel Álvarez <gabriel.tandil@gmail.com> 2014,\npharamir <pamirmatos@gmail.com> 2013,\nPablo Roberto Francisco Lezaeta Reyes <prflr88@gmail.com> 2013-2015,\nMC <correomc2000-ing@yahoo.es> 2013,\nHernán «hernan144» Álvarez <hernan.alvarez.guerra@gmail.com> 2013,\ndanpergal84 <danpergal84@gmail.com> 2013,\nBrian «The Idiot» Peraza <brian.peraza@gmail.com> 2013\nAdolfo Jayme Barrientos <fitoschido@ubuntu.com> 2013-2014,\nAbel Martín <abel.martin.ruiz@gmail.com> 2008,\nRudy Godoy <rudy@kernel-panik.org> 2005,\nEdscott Wilson Garcia <edscott@xfce.org> 2004,"
+msgstr "Toni Estevez <toni.estevez@gmail.com>, 2021\nIgnacio Poggi <ignaciop.3@gmail.com>, 2020\nManolo Díaz <diaz.manolo@gmail.com>, 2015\nEdwin Pujols <edwinpm5@gmail.com>, 2014\nGabriel Álvarez <gabriel.tandil@gmail.com> 2014\npharamir <pamirmatos@gmail.com>, 2013\nPablo Roberto Francisco Lezaeta Reyes, <prflr88@gmail.com> 2013-2015\nMC <correomc2000-ing@yahoo.es>, 2013\nHernán «hernan144» Álvarez, <hernan.alvarez.guerra@gmail.com> 2013\ndanpergal84 <danpergal84@gmail.com>, 2013\nBrian «The Idiot» Peraza <brian.peraza@gmail.com>, 2013\nAdolfo Jayme Barrientos <fitoschido@ubuntu.com>, 2013-2014\nAbel Martín <abel.martin.ruiz@gmail.com>, 2008\nRudy Godoy <rudy@kernel-panik.org>, 2005\nEdscott Wilson Garcia <edscott@xfce.org>, 2004"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Add New Item"
-msgstr "Agregar un elemento nuevo"
+msgstr "Añadir un elemento nuevo"
 
 #: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:201
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
-msgstr "_Agregar"
+msgstr "_Añadir"
 
 #: ../panel/panel-dialogs.c:175
 msgid "Please choose a panel for the new plugin:"
-msgstr "Seleccione un panel para el nuevo complemento:"
+msgstr "Seleccione un panel para el complemento nuevo"
 
 #: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:896
 #, c-format
@@ -356,7 +356,7 @@ msgstr "Panel %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "El panel está corriendo en modo quiosco. No tiene permitido hacer cambios a la configuración del panel."
+msgstr "Puesto que el panel se está ejecutando en modo quiosco, no se le permite realizar cambios en la configuración del panel"
 
 #: ../panel/panel-dialogs.c:237
 msgid "Modifying the panel is not allowed"
@@ -364,7 +364,7 @@ msgstr "No se permite modificar el panel"
 
 #: ../panel/panel-item-dialog.c:195
 msgid "Add New Items"
-msgstr "Agregar nuevos elementos"
+msgstr "Añadir elementos nuevos"
 
 #: ../panel/panel-item-dialog.c:209
 #: ../panel/panel-preferences-dialog.glade.h:11
