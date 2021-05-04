@@ -42,7 +42,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-03 00:45+0100\n"
-"PO-Revision-Date: 2021-05-03 20:58+0000\n"
+"PO-Revision-Date: 2021-05-04 00:21+0000\n"
 "Last-Translator: Toni Estévez <toni.estevez@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/xfce/xfce4-panel/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -393,7 +393,7 @@ msgstr "Escriba el término de búsqueda aquí"
 #: ../panel/panel-plugin-external.c:436
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "El complemento «%s» del panel se cerró inesperadamente, ¿Desea reiniciarlo?"
+msgstr "El complemento «%s» del panel se ha cerrado inesperadamente, ¿Quiere reiniciarlo?"
 
 #: ../panel/panel-plugin-external.c:438
 #, c-format
@@ -401,7 +401,7 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "El complemento se ha reiniciado más de una vez en los últimos %d segundos. Si presiona «Ejecutar», se tratará de reiniciar el complemento; de lo contrario, será eliminado permanentemente del panel."
+msgstr "El complemento se ha reiniciado más de una vez en los últimos %d segundos. Si pulsa Ejecutar se intentará reiniciar el complemento, sino se eliminará permanentemente del panel."
 
 #: ../panel/panel-plugin-external.c:442
 msgid "_Execute"
@@ -413,7 +413,7 @@ msgstr "Automático"
 
 #: ../panel/panel-preferences-dialog.c:528
 msgid "Primary"
-msgstr "Primario"
+msgstr "Principal"
 
 #. I18N: monitor name in the output selector
 #: ../panel/panel-preferences-dialog.c:547
@@ -423,12 +423,12 @@ msgstr "Monitor %d"
 
 #: ../panel/panel-preferences-dialog.c:962
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "El panel y las configuraciones de los complementos serán eliminados permanentemente"
+msgstr "El panel y la configuración de los complementos se eliminarán permanentemente"
 
 #: ../panel/panel-preferences-dialog.c:963
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
-msgstr "¿Seguro que quiere eliminar el panel «%d»?"
+msgstr "¿Seguro que quiere eliminar el panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
@@ -455,7 +455,7 @@ msgstr "Nombre interno: %s-%d"
 
 #: ../panel/panel-preferences-dialog.c:1324
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Si quita el elemento del panel se perderá permanentemente."
+msgstr "Si elimina el elemento del panel, se perderá permanentemente."
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
@@ -485,7 +485,7 @@ msgstr "Barra de escritorio"
 
 #: ../panel/panel-preferences-dialog.glade.h:7
 msgid "None (use system style)"
-msgstr "Ninguno (utilizar estilo del sistema)"
+msgstr "Ninguno (usar el estilo del sistema)"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
 msgid "Solid color"
@@ -509,15 +509,15 @@ msgstr "_Copia de seguridad y restauración"
 
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Switch between panel presets"
-msgstr "Cambiar entre las configuraciones preestablecidas del panel"
+msgstr "Cambiar los preajustes del panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Add a new panel"
-msgstr "Agrega un panel nuevo"
+msgstr "Añadir un panel nuevo"
 
 #: ../panel/panel-preferences-dialog.glade.h:17
 msgid "Remove the currently selected panel"
-msgstr "Quitar el panel seleccionado actualmente"
+msgstr "Eliminar el panel seleccionado"
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "<b>General</b>"
@@ -533,16 +533,16 @@ msgstr "E_xtender monitores"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr "Seleccione esta opción para extender el panel sobre múltiples monitores."
+msgstr "Seleccione esta opción para extender el panel a múltiples monitores."
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "_Lock panel"
-msgstr "B_loquear panel"
+msgstr "B_loquear el panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr "Seleccione esta opción para ocultar las manijas del panel y anclar su posición."
+msgstr "Seleccione esta opción para ocultar los tiradores del panel y bloquear su posición."
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Don't _reserve space on borders"
@@ -552,7 +552,7 @@ msgstr "No _reservar espacio en los bordes"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "Seleccione esta opción si quiere que las ventanas maximizadas cubran el área debajo del panel. Esto solo funciona si el panel está adjunto a un borde de la pantalla."
+msgstr "Seleccione esta opción si quiere que las ventanas maximizadas cubran el área de detrás del panel. Solo funciona si el panel está situado en el borde de la pantalla."
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
@@ -589,11 +589,11 @@ msgstr "A_umentar la longitud automáticamente"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Seleccione esta opción para aumentar la longitud del panel cuando los complementos necesiten más espacio."
+msgstr "Seleccione esta opción para aumentar automáticamente la longitud del panel si los complementos requieren más espacio."
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "D_isplay"
-msgstr "P_resentación"
+msgstr "_Visualización"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Dark mode"
@@ -648,7 +648,7 @@ msgstr "Configurar..."
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>La composición está actualmente desactivada</b>\nActive la composición en el gestor de ventanas para las opciones de opacidad en el panel."
+msgstr "<b>La composición está desactivada</b>\nActive la composición en el gestor de ventanas para las opciones de opacidad del panel."
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:52
@@ -664,7 +664,7 @@ msgstr "_Salida:"
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "Transparencia cuando el puntero no está flotando sobre el panel, siendo 0 completamente trasparente y 100 completamente opaco."
+msgstr "Transparencia cuando el puntero no está sobre el panel: 0 totalmente transparente y 100 totalmente opaco."
 
 #: ../panel/panel-preferences-dialog.glade.h:56
 msgid "Appeara_nce"
@@ -673,20 +673,20 @@ msgstr "Aparie_ncia"
 #: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "Move currently selected item up by one row"
-msgstr "Mover el elemento seleccionado una fila hacia arriba"
+msgstr "Subir el elemento seleccionado una fila"
 
 #: ../panel/panel-preferences-dialog.glade.h:58
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Move currently selected item down by one row"
-msgstr "Mover el elemento seleccionado una fila hacia abajo"
+msgstr "Bajar el elemento seleccionado una fila"
 
 #: ../panel/panel-preferences-dialog.glade.h:59
 msgid "Add new item to this panel"
-msgstr "Añadir un nuevo elemento a este panel"
+msgstr "Añadir un elemento nuevo a este panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:60
 msgid "Remove currently selected item"
-msgstr "Quitar el elemento seleccionado"
+msgstr "Eliminar el elemento seleccionado"
 
 #: ../panel/panel-preferences-dialog.glade.h:61
 #: ../plugins/launcher/launcher-dialog.glade.h:23
@@ -703,7 +703,7 @@ msgstr "Ele_mentos"
 
 #: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
-msgstr "_Nuevo juego"
+msgstr "_Juego nuevo"
 
 #: ../panel/panel-tic-tac-toe.c:134
 msgid "_Level:"
@@ -727,7 +727,7 @@ msgstr "Experto"
 
 #: ../panel/panel-window.c:2995
 msgid "_Lock Panel"
-msgstr "Anc_lar panel"
+msgstr "_Bloquear el panel"
 
 #: ../migrate/main.c:110
 msgid "Failed to load the default configuration"
@@ -735,7 +735,7 @@ msgstr "No se ha podido cargar la configuración predeterminada"
 
 #: ../migrate/main.c:122
 msgid "Panel config needs migration..."
-msgstr "La configuración del panel necesita migración…"
+msgstr "Hay que migrar la configuración del panel…"
 
 #: ../migrate/main.c:126
 msgid "Failed to migrate the existing configuration"
@@ -743,7 +743,7 @@ msgstr "No se ha podido migrar la configuración existente"
 
 #: ../migrate/main.c:132
 msgid "Panel configuration has been updated."
-msgstr "La configuración del panel ha sido actualizada."
+msgstr "Se ha actualizado la configuración del panel."
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 #: ../plugins/actions/actions.desktop.in.in.h:1
@@ -760,15 +760,15 @@ msgstr "Nombre completo"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
 msgid "Username"
-msgstr "Nombre de usuario"
+msgstr "Nombre del usuario"
 
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid "User ID"
-msgstr "ID de Usuario"
+msgstr "Identificador del usuario"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
 msgid "Custom"
-msgstr "Personalizado"
+msgstr "Personalizar"
 
 #: ../plugins/actions/actions-dialog.glade.h:9
 msgid "Appeara_nce:"
@@ -797,12 +797,12 @@ msgstr "Acción"
 
 #: ../plugins/actions/actions-dialog.glade.h:15
 msgid "_Show confirmation dialog"
-msgstr "_Mostrar diálogo de confirmación"
+msgstr "_Mostrar el diálogo de confirmación"
 
 #: ../plugins/actions/actions-dialog.glade.h:16
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Para algunas acciones, se mostrará un diálogo de confirmación con un tiempo de espera de 30 segundos."
+msgstr "Mostrar un diálogo de confirmación con un temporizador de 30 segundos para algunas de las acciones."
 
 #: ../plugins/actions/actions-dialog.glade.h:17
 msgid "_Actions"
@@ -818,7 +818,7 @@ msgstr "Cerrar _sesión"
 
 #: ../plugins/actions/actions.c:167
 msgid "Are you sure you want to log out?"
-msgstr "¿Seguro que quiere cerrar la sesión?"
+msgstr "¿Seguro que quiere cerrar sesión?"
 
 #: ../plugins/actions/actions.c:168
 #, c-format
@@ -827,11 +827,11 @@ msgstr "La sesión se cerrará en %d segundos."
 
 #: ../plugins/actions/actions.c:174
 msgid "Log Out..."
-msgstr "Terminar sesión…"
+msgstr "Cerrar sesión…"
 
 #: ../plugins/actions/actions.c:175
 msgid "Log _Out..."
-msgstr "_Terminar sesión…"
+msgstr "Cerrar _sesión…"
 
 #: ../plugins/actions/actions.c:182
 msgid "Switch User"
