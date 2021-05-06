@@ -1,3 +1,20 @@
+4.16.3
+======
+- panel: Change width of default panel-2 to 1% (Fixes #454)
+- panel: Fix xfce4-panel-CRITICAL
+- panel: Fix xfce4-panel-CRITICAL when already running
+- libxfce4panel: Do not destroy context menu if popped up (Fixes #442)
+- launcher: Check for menu item initialization
+- launcher: Fix garcon-CRITICAL at startup
+- systray: Fix GObject-CRITICAL
+- systray: Fix Gtk-CRITICAL at startup/shutdown
+- systray: Fix libsystray-CRITICAL
+- tasklist: Fix Gtk-CRITICAL
+- Silent `-Wcast-align` from Clang
+- Translation Updates:
+  Bulgarian, English (Australia), Estonian, Hebrew, Italian, Norwegian
+  Bokmål, Occitan (post 1500), Portuguese, Spanish, Swedish
+
 4.16.2
 ======
 - Add icons to help and about items in panel menu
