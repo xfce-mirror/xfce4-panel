@@ -208,7 +208,7 @@ msgstr "No se pudo guardar la configuración del panel"
 
 #: ../panel/main.c:425
 msgid "Failed to add a plugin to the panel"
-msgstr "No se pudo añadir un complemento al panel"
+msgstr "No se ha podido añadir un complemento al panel"
 
 #: ../panel/main.c:427
 msgid "Failed to restart the panel"
@@ -252,8 +252,8 @@ msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr ""
-"Esta opción creará un nuevo complemento en el panel y los archivos que "
-"agregue serán insertados como elementos del menú."
+"Esta opción creará un lanzador nuevo en el panel y los archivos que se "
+"suelten se insertarán como elementos del menú."
 
 #: ../panel/panel-application.c:986
 #, c-format
@@ -287,7 +287,7 @@ msgstr "No se pudo ejecutar la función «%s»"
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
-"Sintaxis del complemento de evento especificado inválido. Emplee NOMBRE-DEL-"
+"La sintaxis del evento para el complemento no es válida. Use NOMBRE-DEL-"
 "COMPLEMENTO:NOMBRE[:TIPO:VALOR]."
 
 #: ../panel/panel-dbus-client.c:248
@@ -393,7 +393,8 @@ msgstr "Escriba el término de búsqueda aquí"
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr ""
-"El complemento «%s» del panel se cerró inesperadamente, ¿Desea reiniciarlo?"
+"El complemento del panel «%s» se ha cerrado inesperadamente, ¿Quiere "
+"reiniciarlo?"
 
 #: ../panel/panel-plugin-external.c:436
 #, c-format
@@ -427,7 +428,7 @@ msgstr "Monitor %d"
 #: ../panel/panel-preferences-dialog.c:957
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr ""
-"El panel y las configuraciones de los complementos serán eliminados "
+"El panel y la configuración de los complementos se eliminarán "
 "permanentemente"
 
 #: ../panel/panel-preferences-dialog.c:958
@@ -1654,7 +1655,7 @@ msgstr "Posición de la _flecha:"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:34
 msgid "Advanced"
-msgstr "Avanzado"
+msgstr "Opciones avanzadas"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
