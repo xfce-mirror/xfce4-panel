@@ -40,51 +40,63 @@
 /**
  * libxfce4panel_major_version:
  *
- * The major version number of the libxfce4panel library (e.g. in
- * version 4.8.0 this is 4).
- *
- * This variable is in the library, so represents the
- * libxfce4panel library you have linked against. Contrast with the
+ * This function is internal to the library, so its return value represents
+ * the libxfce4panel library you have linked against. Contrast with the
  * #LIBXFCE4PANEL_MAJOR_VERSION macro, which represents the major
  * version of the libxfce4panel headers you have included.
  *
+ * Returns: The major version number of the libxfce4panel library (e.g. in
+ *          version 4.8.0 this is 4).
+ *
  * Since: 4.8
  **/
-const guint libxfce4panel_major_version = LIBXFCE4PANEL_MAJOR_VERSION;
+guint
+libxfce4panel_major_version (void)
+{
+  return LIBXFCE4PANEL_MAJOR_VERSION;
+}
 
 
 
 /**
  * libxfce4panel_minor_version:
  *
- * The minor version number of the libxfce4panel library (e.g. in
- * version 4.8.0 this is 8).
- *
- * This variable is in the library, so represents the
- * libxfce4panel library you have linked against. Contrast with the
+ * This function is internal to the library, so its return value represents
+ * the libxfce4panel library you have linked against. Contrast with the
  * #LIBXFCE4PANEL_MINOR_VERSION macro, which represents the minor
  * version of the libxfce4panel headers you have included.
  *
+ * Returns: The minor version number of the libxfce4panel library (e.g. in
+ *          version 4.8.0 this is 8).
+ *
  * Since: 4.8
  **/
-const guint libxfce4panel_minor_version = LIBXFCE4PANEL_MINOR_VERSION;
+guint
+libxfce4panel_minor_version (void)
+{
+  return LIBXFCE4PANEL_MINOR_VERSION;
+}
 
 
 
 /**
  * libxfce4panel_micro_version:
  *
- * The micro version number of the libxfce4panel library (e.g. in
- * version 4.8.0 this is 0).
- *
- * This variable is in the library, so represents the
- * libxfce4panel library you have linked against. Contrast with the
+ * This function is internal to the library, so its return value represents
+ * the libxfce4panel library you have linked against. Contrast with the
  * #LIBXFCE4PANEL_MICRO_VERSION macro, which represents the micro
  * version of the libxfce4panel headers you have included.
  *
+ * Returns: The micro version number of the libxfce4panel library (e.g. in
+ *          version 4.8.0 this is 0).
+ *
  * Since: 4.8
  **/
-const guint libxfce4panel_micro_version = LIBXFCE4PANEL_MICRO_VERSION;
+guint
+libxfce4panel_micro_version (void)
+{
+  return LIBXFCE4PANEL_MICRO_VERSION;
+}
 
 
 
