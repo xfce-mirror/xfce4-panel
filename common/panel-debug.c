@@ -63,8 +63,8 @@ static const GDebugKey panel_debug_keys[] =
 static PanelDebugFlag
 panel_debug_init (void)
 {
-  static volatile gsize  inited__volatile = 0;
-  const gchar           *value;
+  static gsize inited__volatile = 0;
+  const gchar *value;
 
   if (g_once_init_enter (&inited__volatile))
     {
