@@ -177,7 +177,13 @@ clock_time_set_property (GObject      *object,
           else
             {
               time->timezone_name = g_strdup (str_value);
+#if GLIB_CHECK_VERSION(2, 68, 0)
+              time->timezone = g_time_zone_new_identifier (str_value);
+              if (time->timezone == NULL)
+                time->timezone = g_time_zone_new_utc ();
+#else
               time->timezone = g_time_zone_new (str_value);
+#endif
             }
 
           g_signal_emit (G_OBJECT (time), clock_time_signals[TIME_CHANGED], 0);

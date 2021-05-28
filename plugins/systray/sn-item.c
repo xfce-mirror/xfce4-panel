@@ -654,7 +654,11 @@ sn_item_extract_pixbuf (GVariant *variant)
                 {
                   if (array != NULL)
                     g_free (array);
+#if GLIB_CHECK_VERSION(2, 68, 0)
+                  array = g_memdup2 (data, size);
+#else
                   array = g_memdup (data, size);
+#endif
                   lwidth = width;
                   lheight = height;
                 }
