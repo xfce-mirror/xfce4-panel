@@ -4,15 +4,15 @@
 # 
 # Translators:
 # Theppitak Karoonboonyanan <thep@linux.thai.net>, 2013
-# Theppitak Karoonboonyanan <theppitak@gmail.com>, 2013,2015,2017
+# Theppitak Karoonboonyanan <theppitak@gmail.com>, 2013,2015,2017,2021
 # Theppitak Karoonboonyanan <theppitak@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-03 00:45+0100\n"
-"PO-Revision-Date: 2020-11-02 23:45+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
+"PO-Revision-Date: 2021-06-27 11:26+0000\n"
+"Last-Translator: Theppitak Karoonboonyanan <theppitak@gmail.com>\n"
 "Language-Team: Thai (http://www.transifex.com/xfce/xfce4-panel/language/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,7 +34,7 @@ msgstr "เพิ่มปุ่มเรียกปุ่มใหม่ลง
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
-msgstr ""
+msgstr "พาเนล;ตั้งค่า;ปรับแต่ง;แถบงาน;ซ่อนอัตโนมัติ;เมนูแอปพลิเคชัน;เริ่ม;ปุ่ม;ปุ่มเรียก;พื้นที่แจ้งเหตุ;สถานะ;ไอคอน;ปลั๊กอิน;"
 
 #: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2950
 msgid "Panel"
@@ -54,7 +54,7 @@ msgstr "แน่ใจหรือไม่ว่าคุณต้องกา
 #: ../libxfce4panel/xfce-panel-plugin.c:1110
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
-msgstr ""
+msgstr "การลบรายการนี้ออกจากพาเนลจะหมายถึงการลบค่าตั้งต่างๆ ของรายการนี้ทิ้งด้วย"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
@@ -565,7 +565,7 @@ msgstr "การแสดง_ผล"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Dark mode"
-msgstr ""
+msgstr "โหมดมืด"
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "<b>Background</b>"
@@ -724,15 +724,15 @@ msgstr "เมนูวาระ"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "Full Name"
-msgstr ""
+msgstr "ชื่อเต็ม"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
 msgid "Username"
-msgstr ""
+msgstr "ชื่อผู้ใช้"
 
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid "User ID"
-msgstr ""
+msgstr "เลขประจำตัวผู้ใช้"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
 msgid "Custom"
@@ -744,11 +744,11 @@ msgstr "รูป_ปรากฏ:"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "Title:"
-msgstr ""
+msgstr "ป้ายแสดง:"
 
 #: ../plugins/actions/actions-dialog.glade.h:11
 msgid "Custo_m title:"
-msgstr ""
+msgstr "_กำหนดป้ายแสดง:"
 
 #: ../plugins/actions/actions-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:27
@@ -915,7 +915,7 @@ msgstr "การกระทำ \"%s\" ทำไม่สำเร็จ"
 
 #: ../plugins/actions/actions.c:1279
 msgid "Little Mouse"
-msgstr ""
+msgstr "สามัญชน คนธรรมดา"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
@@ -1170,7 +1170,7 @@ msgstr "ตัวเลือกของนาฬิกา"
 #: ../plugins/clock/clock-digital.h:25
 msgctxt "Time"
 msgid "%a %_d %b, %R"
-msgstr ""
+msgstr "%a %_d %b, %R"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Night"
@@ -1440,7 +1440,7 @@ msgstr "สร้างโฟลเดอร์ใหม่"
 
 #: ../plugins/directorymenu/directorymenu.c:932
 msgid "Create New Text Document"
-msgstr ""
+msgstr "สร้างแฟ้มข้อความใหม่"
 
 #: ../plugins/directorymenu/directorymenu.c:939
 msgid "C_reate"
@@ -1448,7 +1448,7 @@ msgstr "_สร้าง"
 
 #: ../plugins/directorymenu/directorymenu.c:940
 msgid "Create & _Open"
-msgstr ""
+msgstr "สร้าง & _เปิด"
 
 #: ../plugins/directorymenu/directorymenu.c:954
 msgid "Enter the new name:"
@@ -1457,7 +1457,7 @@ msgstr "ป้อนชื่อที่จะตั้งใหม่:"
 #: ../plugins/directorymenu/directorymenu.c:990
 #, c-format
 msgid "Failed to create folder: %s"
-msgstr ""
+msgstr "ไม่สามารถสร้างโฟลเดอร์: %s"
 
 #: ../plugins/directorymenu/directorymenu.c:1075
 msgid "Open Folder"
@@ -1469,11 +1469,11 @@ msgstr "เปิดในเทอร์มินัล"
 
 #: ../plugins/directorymenu/directorymenu.c:1109
 msgid "Create Folder..."
-msgstr ""
+msgstr "สร้างโฟลเดอร์..."
 
 #: ../plugins/directorymenu/directorymenu.c:1126
 msgid "Create Text Document..."
-msgstr ""
+msgstr "สร้างแฟ้มข้อความ..."
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
@@ -1489,19 +1489,19 @@ msgstr "ไดเรกทอรีตั้ง_ต้น:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "Show 'New Text _Document'"
-msgstr ""
+msgstr "แสดง 'สร้างแฟ้ม_ข้อความใหม่'"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid "Show '_New Folder'"
-msgstr ""
+msgstr "แสดง 'สร้างโ_ฟลเดอร์ใหม่'"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
 msgid "Show 'Open in _Terminal'"
-msgstr ""
+msgstr "แสดง 'เปิดในเ_ทอร์มินัล'"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
 msgid "Show '_Open _Folder'"
-msgstr ""
+msgstr "แสดง '_เปิดโฟลเดอร์'"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
 msgid "Menu"
@@ -1683,7 +1683,7 @@ msgstr "ปุ่ม"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 msgid "Miniature View"
-msgstr ""
+msgstr "ภาพย่อ"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
 #: ../plugins/pager/pager.desktop.in.in.h:1
@@ -1696,11 +1696,11 @@ msgstr "จำนวนแ_ถว:"
 
 #: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Show workspace number"
-msgstr ""
+msgstr "แสดงหมายเลขพื้นที่ทำงาน"
 
 #: ../plugins/pager/pager-dialog.glade.h:9
 msgid "Switch workspaces using the mouse wheel"
-msgstr ""
+msgstr "สลับพื้นที่ทำงานด้วยลูกกลิ้งเมาส์"
 
 #: ../plugins/pager/pager-dialog.glade.h:10
 msgid "<b>Appearance</b>"
@@ -1753,27 +1753,27 @@ msgstr "ล้าง"
 
 #: ../plugins/systray/sn-dialog.c:650
 msgid "Are you sure you want to clear the list of known items?"
-msgstr ""
+msgstr "ยืนยันหรือไม่ว่าจะลบรายชื่อของรายการที่ทราบ?"
 
 #: ../plugins/systray/sn-dialog.glade.h:1
 msgid "Status Tray Items"
-msgstr ""
+msgstr "รายการในถาดสถานะ"
 
 #: ../plugins/systray/sn-dialog.glade.h:2
 msgid "C_lear Known Items"
-msgstr ""
+msgstr "_ล้างรายการที่ทราบ"
 
 #: ../plugins/systray/sn-dialog.glade.h:3
 msgid "Resets the list of items and their visibility settings"
-msgstr ""
+msgstr "ล้างรายชื่อของรายการ พร้อมทั้งค่าการแสดง/ซ่อนของรายการเหล่านั้น"
 
 #: ../plugins/systray/sn-dialog.glade.h:4
 msgid "_Fixed icon size (pixels):"
-msgstr ""
+msgstr "ใช้ขนาดไอคอน_ตายตัว (พิกเซล):"
 
 #: ../plugins/systray/sn-dialog.glade.h:5
 msgid "Adjust size _automatically"
-msgstr ""
+msgstr "ปรับขนาดโดย_อัตโนมัติ"
 
 #: ../plugins/systray/sn-dialog.glade.h:6
 msgid "Icons"
@@ -1781,27 +1781,27 @@ msgstr "ไอคอน"
 
 #: ../plugins/systray/sn-dialog.glade.h:7
 msgid "Arrange _items in a single row"
-msgstr ""
+msgstr "จัดเ_รียงรายการเป็นแถวเดียว"
 
 #: ../plugins/systray/sn-dialog.glade.h:8
 msgid "If enabled, ensure that the items are laid out in a single row"
-msgstr ""
+msgstr "ถ้าเปิดใช้ จะจัดเรียงรายการต่างๆ ให้เป็นแถวเดียว"
 
 #: ../plugins/systray/sn-dialog.glade.h:9
 msgid "_Hide items by default"
-msgstr ""
+msgstr "ซ่อ_นรายการต่างๆ โดยปริยาย"
 
 #: ../plugins/systray/sn-dialog.glade.h:10
 msgid "When enabled, all new items will be marked as \"Hidden\""
-msgstr ""
+msgstr "ถ้าเปิดใช้ จะกำหนดให้รายการใหม่ทั้งหมดมีค่าเป็น \"ซ่อน\""
 
 #: ../plugins/systray/sn-dialog.glade.h:11
 msgid "_Square items"
-msgstr ""
+msgstr "รายการเป็น_จัตุรัส"
 
 #: ../plugins/systray/sn-dialog.glade.h:12
 msgid "Item buttons will take a square when it's possible"
-msgstr ""
+msgstr "ปุ่มของรายการต่างๆ จะใช้เนื้อที่เป็นสี่เหลี่ยมจัตุรัสถ้าทำได้"
 
 #: ../plugins/systray/sn-dialog.glade.h:13
 msgid "Behavior"
@@ -1809,7 +1809,7 @@ msgstr "พฤติกรรม"
 
 #: ../plugins/systray/sn-dialog.glade.h:14
 msgid "Item"
-msgstr ""
+msgstr "รายการ"
 
 #: ../plugins/systray/sn-dialog.glade.h:15
 msgid "Hidden"
@@ -1817,43 +1817,43 @@ msgstr "ซ่อน"
 
 #: ../plugins/systray/sn-dialog.glade.h:16
 msgid "Move the selected item one row up"
-msgstr ""
+msgstr "ย้ายรายการที่เลือกขึ้นหนึ่งแถว"
 
 #: ../plugins/systray/sn-dialog.glade.h:17
 msgid "Move the selected item one row down"
-msgstr ""
+msgstr "ย้ายรายการที่เลือกลงหนึ่งแถว"
 
 #: ../plugins/systray/sn-dialog.glade.h:18
 msgid "Known Items"
-msgstr ""
+msgstr "รายการที่ทราบ"
 
 #: ../plugins/systray/sn-dialog.glade.h:19
 msgid "_Menu is primary action"
-msgstr ""
+msgstr "ใช้เ_มนูเป็นการกระทำหลัก"
 
 #: ../plugins/systray/sn-dialog.glade.h:20
 msgid "Left click will always display the menu for item"
-msgstr ""
+msgstr "คลิกซ้ายจะแสดงเมนูของรายการ"
 
 #: ../plugins/systray/sn-dialog.glade.h:21
 msgid "_Request symbolic icons"
-msgstr ""
+msgstr "ร้อง_ขอไอคอนสัญลักษณ์"
 
 #: ../plugins/systray/sn-dialog.glade.h:22
 msgid "Load symbolic icons if available"
-msgstr ""
+msgstr "ใช้ไอคอนสัญลักษณ์ถ้ามี"
 
 #: ../plugins/systray/sn-dialog.glade.h:23
 msgid "Features"
-msgstr ""
+msgstr "คุณลักษณ์"
 
 #: ../plugins/systray/sn-dialog.glade.h:24
 msgid "Status Notifiers"
-msgstr ""
+msgstr "ตัวแจ้งสถานะ"
 
 #: ../plugins/systray/sn-dialog.glade.h:25
 msgid "Systray Icons"
-msgstr ""
+msgstr "ไอคอนถาดระบบ"
 
 #: ../plugins/systray/systray.c:146
 msgid "Unable to start the notification area"
@@ -1877,13 +1877,13 @@ msgstr "ไม่สามารถจับยึดการเลือกข
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Status Tray Plugin"
-msgstr ""
+msgstr "ปลั๊กอินถาดสถานะ"
 
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid ""
 "Provides status notifier items (application indicators) and legacy systray "
 "items"
-msgstr ""
+msgstr "แสดงตัวแจ้งสถานะต่างๆ ของแอปพลิเคชัน และรายการในถาดระบบแบบเก่า"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
@@ -1981,7 +1981,7 @@ msgstr "แสดงเฉพาะหน้าต่างที่_ย่อ�
 #: ../plugins/tasklist/tasklist-widget.c:2957
 #, c-format
 msgid "Unable to start new instance of '%s'"
-msgstr ""
+msgstr "ไม่สามารถเปิดทำงานอินสแตนซ์ใหม่ของ '%s'"
 
 #: ../plugins/tasklist/tasklist-widget.c:2961
 msgid "Error"
@@ -1989,7 +1989,7 @@ msgstr "ผิดพลาด"
 
 #: ../plugins/tasklist/tasklist-widget.c:3005
 msgid "Launch New Instance..."
-msgstr ""
+msgstr "เรียกทำงานอินสแตนซ์ใหม่..."
 
 #: ../plugins/tasklist/tasklist-widget.c:3754
 msgid "Mi_nimize All"
