@@ -2249,10 +2249,9 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
           else
             {
               /* detect the monitor number by output name */
-              for (n = 0; n < n_monitors; n++)
+              for (n = 0, monitor = NULL; n < n_monitors; n++)
                 {
-                  monitor = gdk_display_get_monitor(window->display, n);
-                  name = gdk_monitor_get_model (monitor);
+                  name = gdk_monitor_get_model (gdk_display_get_monitor (window->display, n));
 
                   /* check if this driver supports output names */
                   if (G_UNLIKELY (name == NULL))
@@ -2276,6 +2275,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
                   /* check if this is the monitor we're looking for */
                   if (strcasecmp (window->output_name, name) == 0)
                     {
+                      monitor = gdk_display_get_monitor (window->display, n);
                       gdk_monitor_get_geometry (monitor, &a);
                       panel_return_if_fail (a.width > 0 && a.height > 0);
                       break;
@@ -2283,7 +2283,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
                 }
             }
 
-          if (G_UNLIKELY (a.height == 0 && a.width == 0))
+          if (G_UNLIKELY (monitor == NULL))
             {
               panel_debug (PANEL_DEBUG_POSITIONING,
                            "%p: monitor %s not found, hiding window",
