@@ -48,8 +48,8 @@ static guint provider_signals[LAST_SIGNAL];
 GType
 xfce_panel_plugin_provider_get_type (void)
 {
-  static volatile gsize type__volatile = 0;
-  GType                 type;
+  static gsize type__volatile = 0;
+  GType        type;
 
   if (g_once_init_enter (&type__volatile))
     {
