@@ -128,10 +128,31 @@ panel_utils_show_help (GtkWindow   *parent,
 
 
 gboolean
-panel_utils_grab_available (void)
+panel_utils_grab_available (GtkWidget *widget)
 {
-  /* TODO fix for gtk3 */
-  return TRUE;
+  GdkDisplay* display = gdk_display_get_default ();
+  GdkSeat *seat = gdk_display_get_default_seat (display);
+  GdkWindow *window = gtk_widget_get_window (widget);
+  guint i;
+  gboolean grabbed = FALSE;
+
+  for (i = 0; i < (G_USEC_PER_SEC / 100 / 4); i++)
+    {
+      grabbed = gdk_seat_grab (seat, window, GDK_SEAT_CAPABILITY_ALL,
+                               FALSE, NULL, NULL, NULL, NULL) == GDK_GRAB_SUCCESS;
+
+      if (grabbed)
+        break;
+
+      g_usleep (100);
+    }
+
+  if (grabbed)
+    {
+      gdk_seat_ungrab (seat);
+    }
+
+  return grabbed;
 }
 
 
