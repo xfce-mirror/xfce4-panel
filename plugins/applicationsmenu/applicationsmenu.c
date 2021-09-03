@@ -739,13 +739,16 @@ applications_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
                                        const GValue    *value)
 {
   ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (panel_plugin);
+  GtkWidget *window;
 
   panel_return_val_if_fail (value == NULL || G_IS_VALUE (value), FALSE);
+
+  window = gtk_widget_get_toplevel (GTK_WIDGET (plugin->button));
 
   if (strcmp (name, "popup") == 0
       && gtk_widget_get_visible (GTK_WIDGET (panel_plugin))
       && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button))
-      && panel_utils_grab_available ())
+      && panel_utils_grab_available (window))
     {
       if (value != NULL
           && G_VALUE_HOLDS_BOOLEAN (value)
@@ -847,11 +850,26 @@ applications_menu_plugin_menu (GtkWidget              *button,
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
 
   /* show the menu */
-  gtk_menu_popup_at_widget (GTK_MENU (plugin->menu), button,
-                            xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
-                            ? GDK_GRAVITY_NORTH_EAST : GDK_GRAVITY_SOUTH_WEST,
-                            GDK_GRAVITY_NORTH_WEST,
-                            (GdkEvent *) event);
+  if (button == NULL)
+    {
+      /* Panel plugin remote events don't send actual GdkEvents, so construct a minimal one so that
+         gtk_menu_popup_at_pointer/rect can extract a location correctly from a GdkWindow */
+      if (event == NULL)
+        {
+          event = g_slice_new0 (GdkEventButton);
+          event->type = GDK_BUTTON_PRESS;
+          event->window = gdk_get_default_root_window ();
+        }
+      gtk_menu_popup_at_pointer (GTK_MENU (plugin->menu), (GdkEvent *) event);
+    }
+  else
+    {
+      gtk_menu_popup_at_widget (GTK_MENU (plugin->menu), button,
+                                xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
+                                ? GDK_GRAVITY_NORTH_EAST : GDK_GRAVITY_SOUTH_WEST,
+                                GDK_GRAVITY_NORTH_WEST,
+                                (GdkEvent *) event);
+    }
 
   return TRUE;
 }
