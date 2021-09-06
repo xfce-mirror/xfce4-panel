@@ -575,13 +575,16 @@ directory_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
                                     const GValue    *value)
 {
   DirectoryMenuPlugin *plugin = XFCE_DIRECTORY_MENU_PLUGIN (panel_plugin);
+  GtkWidget *window;
 
   panel_return_val_if_fail (value == NULL || G_IS_VALUE (value), FALSE);
+
+  window = gtk_widget_get_toplevel (GTK_WIDGET (plugin->button));
 
   if (strcmp (name, "popup") == 0
       && gtk_widget_get_visible (GTK_WIDGET (panel_plugin))
       && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button))
-      && panel_utils_grab_available ())
+      && panel_utils_grab_available (window))
     {
       if (value != NULL
           && G_VALUE_HOLDS_BOOLEAN (value)
