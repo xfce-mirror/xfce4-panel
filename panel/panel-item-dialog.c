@@ -199,11 +199,11 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   xfce_titled_dialog_create_action_area (XFCE_TITLED_DIALOG (dialog));
 
   dialog->add_button = xfce_titled_dialog_add_button (XFCE_TITLED_DIALOG (dialog), _("_Add"), GTK_RESPONSE_OK);
-  icon = gtk_image_new_from_icon_name ("list-add", GTK_ICON_SIZE_BUTTON);
+  icon = gtk_image_new_from_icon_name ("list-add-symbolic", GTK_ICON_SIZE_BUTTON);
   gtk_button_set_image (GTK_BUTTON (dialog->add_button), icon);
 
   button = xfce_titled_dialog_add_button (XFCE_TITLED_DIALOG (dialog), _("_Help"), GTK_RESPONSE_HELP);
-  icon = gtk_image_new_from_icon_name ("help-browser", GTK_ICON_SIZE_BUTTON);
+  icon = gtk_image_new_from_icon_name ("help-contents-symbolic", GTK_ICON_SIZE_BUTTON);
   gtk_button_set_image (GTK_BUTTON (button), icon);
 
   button = xfce_titled_dialog_add_button (XFCE_TITLED_DIALOG (dialog), _("_Close"), GTK_RESPONSE_CLOSE);
@@ -231,7 +231,7 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   gtk_box_pack_start (GTK_BOX (hbox), entry, FALSE, FALSE, 0);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), entry);
   gtk_widget_set_tooltip_text (entry, _("Enter search phrase here"));
-  gtk_entry_set_icon_from_icon_name (GTK_ENTRY (entry), GTK_ENTRY_ICON_PRIMARY, "edit-find");
+  gtk_entry_set_icon_from_icon_name (GTK_ENTRY (entry), GTK_ENTRY_ICON_PRIMARY, "edit-find-symbolic");
   gtk_widget_show (entry);
 
   /* scroller */
