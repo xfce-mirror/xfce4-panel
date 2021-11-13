@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.2 -->
+<!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.18"/>
   <requires lib="libxfce4ui-2" version="4.12"/>
   <object class="GtkImage" id="image1">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">edit-clear-symbolic</property>
+    <property name="can-focus">False</property>
+    <property name="margin-end">4</property>
+    <property name="icon-name">edit-clear-symbolic</property>
   </object>
   <object class="GtkImage" id="image4">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">window-close-symbolic</property>
+    <property name="can-focus">False</property>
+    <property name="margin-end">4</property>
+    <property name="icon-name">window-close-symbolic</property>
   </object>
   <object class="GtkListStore" id="items-store">
     <columns>
@@ -40,34 +42,34 @@
   <object class="GtkAdjustment" id="size-adjustment">
     <property name="upper">64</property>
     <property name="value">22</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">2</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">2</property>
   </object>
   <object class="XfceTitledDialog" id="dialog">
-    <property name="can_focus">False</property>
+    <property name="can-focus">False</property>
     <property name="title" translatable="yes">Status Tray Items</property>
-    <property name="default_width">425</property>
-    <property name="default_height">575</property>
-    <property name="icon_name">org.xfce.panel.statustray</property>
-    <property name="type_hint">normal</property>
+    <property name="default-width">425</property>
+    <property name="default-height">575</property>
+    <property name="icon-name">org.xfce.panel.statustray</property>
+    <property name="type-hint">normal</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox2">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="can-focus">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
           <object class="GtkButtonBox" id="dialog-action_area2">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <child>
               <object class="GtkButton" id="close-button">
                 <property name="label">_Close</property>
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
                 <property name="image">image4</property>
-                <property name="use_underline">True</property>
+                <property name="use-underline">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -79,70 +81,71 @@
               <object class="GtkButton" id="items-clear">
                 <property name="label" translatable="yes">C_lear Known Items</property>
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes">Resets the list of items and their visibility settings</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">Resets the list of items and their visibility settings</property>
                 <property name="image">image1</property>
-                <property name="use_underline">True</property>
+                <property name="use-underline">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
                 <property name="position">1</property>
                 <property name="secondary">True</property>
-                <property name="non_homogeneous">True</property>
+                <property name="non-homogeneous">True</property>
               </packing>
             </child>
           </object>
           <packing>
             <property name="expand">True</property>
             <property name="fill">True</property>
-            <property name="pack_type">end</property>
+            <property name="pack-type">end</property>
             <property name="position">0</property>
           </packing>
         </child>
         <child>
           <object class="GtkBox" id="vbox1">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="border_width">12</property>
+            <property name="can-focus">False</property>
+            <property name="border-width">12</property>
             <property name="orientation">vertical</property>
             <property name="spacing">18</property>
             <child>
               <object class="GtkFrame" id="frame2">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label_xalign">0</property>
-                <property name="shadow_type">none</property>
+                <property name="can-focus">False</property>
+                <property name="label-xalign">0</property>
+                <property name="shadow-type">none</property>
                 <child>
                   <object class="GtkAlignment" id="alignment2">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="top_padding">6</property>
-                    <property name="left_padding">12</property>
+                    <property name="can-focus">False</property>
+                    <property name="top-padding">6</property>
+                    <property name="left-padding">12</property>
                     <child>
+                      <!-- n-columns=3 n-rows=3 -->
                       <object class="GtkGrid" id="icon_grid">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <child>
                           <object class="GtkRevealer" id="revealer-icon-size">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="margin_top">6</property>
-                            <property name="reveal_child">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="margin-top">6</property>
+                            <property name="reveal-child">True</property>
                             <child>
                               <object class="GtkBox" id="hbox1">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
+                                <property name="can-focus">False</property>
                                 <property name="spacing">12</property>
                                 <child>
                                   <object class="GtkLabel" id="label2">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
+                                    <property name="can-focus">False</property>
                                     <property name="hexpand">True</property>
                                     <property name="label" translatable="yes">_Fixed icon size (pixels):</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="mnemonic_widget">spinbutton-icon-size</property>
+                                    <property name="use-underline">True</property>
+                                    <property name="mnemonic-widget">spinbutton-icon-size</property>
                                     <property name="xalign">0</property>
                                   </object>
                                   <packing>
@@ -154,7 +157,7 @@
                                 <child>
                                   <object class="GtkSpinButton" id="spinbutton-icon-size">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
+                                    <property name="can-focus">True</property>
                                     <property name="halign">end</property>
                                     <property name="valign">center</property>
                                     <property name="adjustment">size-adjustment</property>
@@ -170,36 +173,51 @@
                             </child>
                           </object>
                           <packing>
-                            <property name="left_attach">0</property>
-                            <property name="top_attach">1</property>
+                            <property name="left-attach">0</property>
+                            <property name="top-attach">1</property>
                             <property name="width">2</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkLabel" id="auto_size_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
+                            <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="hexpand">True</property>
                             <property name="label" translatable="yes">Adjust size _automatically</property>
-                            <property name="use_underline">True</property>
+                            <property name="use-underline">True</property>
                           </object>
                           <packing>
-                            <property name="left_attach">0</property>
-                            <property name="top_attach">0</property>
+                            <property name="left-attach">0</property>
+                            <property name="top-attach">0</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkSwitch" id="switch-auto-size">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
+                            <property name="can-focus">True</property>
                             <property name="halign">end</property>
                             <property name="valign">center</property>
                           </object>
                           <packing>
-                            <property name="left_attach">1</property>
-                            <property name="top_attach">0</property>
+                            <property name="left-attach">1</property>
+                            <property name="top-attach">0</property>
                           </packing>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
+                        <child>
+                          <placeholder/>
                         </child>
                       </object>
                     </child>
@@ -208,7 +226,7 @@
                 <child type="label">
                   <object class="GtkLabel" id="label1">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Icons</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
@@ -225,30 +243,30 @@
             <child>
               <object class="GtkFrame" id="frame1">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label_xalign">0</property>
-                <property name="shadow_type">none</property>
+                <property name="can-focus">False</property>
+                <property name="label-xalign">0</property>
+                <property name="shadow-type">none</property>
                 <child>
                   <object class="GtkAlignment" id="alignment1">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="top_padding">6</property>
-                    <property name="left_padding">12</property>
+                    <property name="can-focus">False</property>
+                    <property name="top-padding">6</property>
+                    <property name="left-padding">12</property>
                     <child>
                       <object class="GtkBox" id="vbox4">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkCheckButton" id="checkbutton-single-row">
                             <property name="label" translatable="yes">Arrange _items in a single row</property>
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="tooltip_text" translatable="yes">If enabled, ensure that the items are laid out in a single row</property>
-                            <property name="use_underline">True</property>
-                            <property name="draw_indicator">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">False</property>
+                            <property name="tooltip-text" translatable="yes">If enabled, ensure that the items are laid out in a single row</property>
+                            <property name="use-underline">True</property>
+                            <property name="draw-indicator">True</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -260,11 +278,11 @@
                           <object class="GtkCheckButton" id="checkbutton-hide-new-items">
                             <property name="label" translatable="yes">_Hide items by default</property>
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="tooltip_text" translatable="yes">When enabled, all new items will be marked as "Hidden"</property>
-                            <property name="use_underline">True</property>
-                            <property name="draw_indicator">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">False</property>
+                            <property name="tooltip-text" translatable="yes">When enabled, all new items will be marked as "Hidden"</property>
+                            <property name="use-underline">True</property>
+                            <property name="draw-indicator">True</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -276,11 +294,11 @@
                           <object class="GtkCheckButton" id="checkbutton-square-icons">
                             <property name="label" translatable="yes">_Square items</property>
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="tooltip_text" translatable="yes">Item buttons will take a square when it's possible</property>
-                            <property name="use_underline">True</property>
-                            <property name="draw_indicator">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">False</property>
+                            <property name="tooltip-text" translatable="yes">Item buttons will take a square when it's possible</property>
+                            <property name="use-underline">True</property>
+                            <property name="draw-indicator">True</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -295,7 +313,7 @@
                 <child type="label">
                   <object class="GtkLabel" id="label4">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Behavior</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
@@ -312,7 +330,7 @@
             <child>
               <object class="GtkStackSwitcher" id="items_stack_switcher">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="halign">center</property>
                 <property name="stack">items_stack</property>
               </object>
@@ -325,51 +343,51 @@
             <child>
               <object class="GtkStack" id="items_stack">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="transition_type">slide-left-right</property>
+                <property name="can-focus">False</property>
+                <property name="transition-type">slide-left-right</property>
                 <child>
                   <object class="GtkBox" id="sn_box">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">18</property>
                     <child>
                       <object class="GtkFrame" id="sn_known_items">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label_xalign">0</property>
-                        <property name="shadow_type">none</property>
+                        <property name="can-focus">False</property>
+                        <property name="label-xalign">0</property>
+                        <property name="shadow-type">none</property>
                         <child>
                           <object class="GtkAlignment" id="sn_alignment">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="top_padding">6</property>
+                            <property name="can-focus">False</property>
+                            <property name="top-padding">6</property>
                             <child>
                               <object class="GtkBox" id="hbox2">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
+                                <property name="can-focus">False</property>
                                 <property name="vexpand">True</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkScrolledWindow" id="scrolledwindow1">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="hscrollbar_policy">never</property>
-                                    <property name="shadow_type">in</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="hscrollbar-policy">never</property>
+                                    <property name="shadow-type">in</property>
                                     <child>
                                       <object class="GtkTreeView" id="items-treeview">
                                         <property name="visible">True</property>
-                                        <property name="can_focus">True</property>
+                                        <property name="can-focus">True</property>
                                         <property name="model">items-store</property>
-                                        <property name="headers_clickable">False</property>
-                                        <property name="rules_hint">True</property>
-                                        <property name="enable_search">False</property>
+                                        <property name="headers-clickable">False</property>
+                                        <property name="rules-hint">True</property>
+                                        <property name="enable-search">False</property>
                                         <child internal-child="selection">
                                           <object class="GtkTreeSelection"/>
                                         </child>
                                         <child>
                                           <object class="GtkTreeViewColumn" id="treeviewcolumn-icon">
-                                            <property name="min_width">24</property>
+                                            <property name="min-width">24</property>
                                             <child>
                                               <object class="GtkCellRendererPixbuf" id="cellrendererpixbuf1"/>
                                               <attributes>
@@ -413,19 +431,19 @@
                                 <child>
                                   <object class="GtkBox" id="vbox5">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
+                                    <property name="can-focus">False</property>
                                     <property name="orientation">vertical</property>
                                     <child>
                                       <object class="GtkButton" id="item-up">
                                         <property name="visible">True</property>
-                                        <property name="can_focus">True</property>
-                                        <property name="receives_default">True</property>
-                                        <property name="tooltip_text" translatable="yes">Move the selected item one row up</property>
+                                        <property name="can-focus">True</property>
+                                        <property name="receives-default">True</property>
+                                        <property name="tooltip-text" translatable="yes">Move the selected item one row up</property>
                                         <child>
                                           <object class="GtkImage" id="image2">
                                             <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="icon_name">go-up-symbolic</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="icon-name">go-up-symbolic</property>
                                           </object>
                                         </child>
                                       </object>
@@ -438,14 +456,14 @@
                                     <child>
                                       <object class="GtkButton" id="item-down">
                                         <property name="visible">True</property>
-                                        <property name="can_focus">True</property>
-                                        <property name="receives_default">True</property>
-                                        <property name="tooltip_text" translatable="yes">Move the selected item one row down</property>
+                                        <property name="can-focus">True</property>
+                                        <property name="receives-default">True</property>
+                                        <property name="tooltip-text" translatable="yes">Move the selected item one row down</property>
                                         <child>
                                           <object class="GtkImage" id="image3">
                                             <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="icon_name">go-down-symbolic</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="icon-name">go-down-symbolic</property>
                                           </object>
                                         </child>
                                       </object>
@@ -472,7 +490,7 @@
                         <child type="label">
                           <object class="GtkLabel" id="sn_known_items_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
+                            <property name="can-focus">False</property>
                             <property name="label" translatable="yes">Known Items</property>
                             <attributes>
                               <attribute name="weight" value="bold"/>
@@ -489,30 +507,30 @@
                     <child>
                       <object class="GtkFrame" id="frame3">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label_xalign">0</property>
-                        <property name="shadow_type">none</property>
+                        <property name="can-focus">False</property>
+                        <property name="label-xalign">0</property>
+                        <property name="shadow-type">none</property>
                         <child>
                           <object class="GtkAlignment" id="alignment3">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="top_padding">6</property>
-                            <property name="left_padding">12</property>
+                            <property name="can-focus">False</property>
+                            <property name="top-padding">6</property>
+                            <property name="left-padding">12</property>
                             <child>
                               <object class="GtkBox" id="vbox3">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
+                                <property name="can-focus">False</property>
                                 <property name="orientation">vertical</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkCheckButton" id="checkbutton-menu-is-primary">
                                     <property name="label" translatable="yes">_Menu is primary action</property>
                                     <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="tooltip_text" translatable="yes">Left click will always display the menu for item</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="draw_indicator">True</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="receives-default">False</property>
+                                    <property name="tooltip-text" translatable="yes">Left click will always display the menu for item</property>
+                                    <property name="use-underline">True</property>
+                                    <property name="draw-indicator">True</property>
                                   </object>
                                   <packing>
                                     <property name="expand">True</property>
@@ -524,11 +542,11 @@
                                   <object class="GtkCheckButton" id="checkbutton-symbolic-icons">
                                     <property name="label" translatable="yes">_Request symbolic icons</property>
                                     <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="tooltip_text" translatable="yes">Load symbolic icons if available</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="draw_indicator">True</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="receives-default">False</property>
+                                    <property name="tooltip-text" translatable="yes">Load symbolic icons if available</property>
+                                    <property name="use-underline">True</property>
+                                    <property name="draw-indicator">True</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -543,7 +561,7 @@
                         <child type="label">
                           <object class="GtkLabel" id="label3">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
+                            <property name="can-focus">False</property>
                             <property name="label" translatable="yes">Features</property>
                             <attributes>
                               <attribute name="weight" value="bold"/>
@@ -566,40 +584,40 @@
                 <child>
                   <object class="GtkFrame" id="systray_frame">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label_xalign">0</property>
-                    <property name="shadow_type">none</property>
+                    <property name="can-focus">False</property>
+                    <property name="label-xalign">0</property>
+                    <property name="shadow-type">none</property>
                     <child>
                       <object class="GtkAlignment" id="systray_frame_alignment">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="top_padding">6</property>
+                        <property name="can-focus">False</property>
+                        <property name="top-padding">6</property>
                         <child>
                           <object class="GtkBox" id="hbox3">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
+                            <property name="can-focus">False</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkScrolledWindow" id="scrolledwindow2">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="hscrollbar_policy">never</property>
-                                <property name="shadow_type">in</property>
+                                <property name="can-focus">True</property>
+                                <property name="hscrollbar-policy">never</property>
+                                <property name="shadow-type">in</property>
                                 <child>
                                   <object class="GtkTreeView" id="legacy-items-treeview">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
+                                    <property name="can-focus">True</property>
                                     <property name="model">legacy-items-store</property>
-                                    <property name="headers_clickable">False</property>
-                                    <property name="rules_hint">True</property>
-                                    <property name="enable_search">False</property>
-                                    <property name="search_column">1</property>
+                                    <property name="headers-clickable">False</property>
+                                    <property name="rules-hint">True</property>
+                                    <property name="enable-search">False</property>
+                                    <property name="search-column">1</property>
                                     <child internal-child="selection">
                                       <object class="GtkTreeSelection"/>
                                     </child>
                                     <child>
                                       <object class="GtkTreeViewColumn" id="treeviewcolumn-legacy-icon">
-                                        <property name="min_width">24</property>
+                                        <property name="min-width">24</property>
                                         <child>
                                           <object class="GtkCellRendererPixbuf" id="cellrendererpixbuf2"/>
                                           <attributes>
@@ -643,19 +661,19 @@
                             <child>
                               <object class="GtkBox" id="vbox6">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
+                                <property name="can-focus">False</property>
                                 <property name="orientation">vertical</property>
                                 <child>
                                   <object class="GtkButton" id="legacy-item-up">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
-                                    <property name="tooltip_text" translatable="yes">Move the selected item one row up</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="receives-default">True</property>
+                                    <property name="tooltip-text" translatable="yes">Move the selected item one row up</property>
                                     <child>
                                       <object class="GtkImage" id="image5">
                                         <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="icon_name">go-up-symbolic</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="icon-name">go-up-symbolic</property>
                                       </object>
                                     </child>
                                   </object>
@@ -668,14 +686,14 @@
                                 <child>
                                   <object class="GtkButton" id="legacy-item-down">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
-                                    <property name="tooltip_text" translatable="yes">Move the selected item one row down</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="receives-default">True</property>
+                                    <property name="tooltip-text" translatable="yes">Move the selected item one row down</property>
                                     <child>
                                       <object class="GtkImage" id="image6">
                                         <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="icon_name">go-down-symbolic</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="icon-name">go-down-symbolic</property>
                                       </object>
                                     </child>
                                   </object>
@@ -702,7 +720,7 @@
                     <child type="label">
                       <object class="GtkLabel" id="systray_frame_label">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="label" translatable="yes">Known Items</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>

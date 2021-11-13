@@ -1339,7 +1339,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
           G_CALLBACK (window_menu_plugin_workspace_add), plugin);
       gtk_widget_show (mi);
 
-      image = gtk_image_new_from_icon_name ("list-add", GTK_ICON_SIZE_MENU);
+      image = gtk_image_new_from_icon_name ("list-add-symbolic", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
@@ -1371,7 +1371,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       g_free (label);
       g_free (utf8);
 
-      image = gtk_image_new_from_icon_name ("list-remove", GTK_ICON_SIZE_MENU);
+      image = gtk_image_new_from_icon_name ("list-remove-symbolic", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
