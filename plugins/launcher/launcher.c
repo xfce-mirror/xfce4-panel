@@ -2006,6 +2006,11 @@ launcher_plugin_button_release_event (GtkWidget      *button,
       || ARROW_INSIDE_BUTTON (plugin))
     return FALSE;
 
+  /* leave if button release happens outside of launcher */
+  if (event->x < 0 || event->x > gdk_window_get_width (event->window) ||
+      event->y < 0 || event->y > gdk_window_get_height (event->window))
+    return FALSE;
+
   /* get the menu item and the screen */
   item = GARCON_MENU_ITEM (plugin->items->data);
   screen = gtk_widget_get_screen (button);
