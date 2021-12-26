@@ -1215,7 +1215,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
               G_CALLBACK (xfce_panel_plugin_show_configure), plugin);
           g_object_set_qdata (G_OBJECT (menu), item_properties, item);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-          image = gtk_image_new_from_icon_name ("document-properties", GTK_ICON_SIZE_MENU);
+          image = gtk_image_new_from_icon_name ("document-properties-symbolic", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
           gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
@@ -1230,7 +1230,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
               G_CALLBACK (xfce_panel_plugin_show_about), plugin);
           g_object_set_qdata (G_OBJECT (menu), item_about, item);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-          image = gtk_image_new_from_icon_name ("help-about", GTK_ICON_SIZE_MENU);
+          image = gtk_image_new_from_icon_name ("help-about-symbolic", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
           gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
@@ -1246,7 +1246,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
           gtk_widget_show (item);
 
-          image = gtk_image_new_from_icon_name ("go-next", GTK_ICON_SIZE_MENU);
+          image = gtk_image_new_from_icon_name ("go-next-symbolic", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
           gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
@@ -1266,7 +1266,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
           gtk_widget_show (item);
 
-          image = gtk_image_new_from_icon_name ("list-remove", GTK_ICON_SIZE_MENU);
+          image = gtk_image_new_from_icon_name ("list-remove-symbolic", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
           gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
@@ -1296,7 +1296,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
           gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
           gtk_widget_show (item);
 
-          image = gtk_image_new_from_icon_name ("list-add", GTK_ICON_SIZE_MENU);
+          image = gtk_image_new_from_icon_name ("list-add-symbolic", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
           gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
@@ -1311,7 +1311,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
           gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
           gtk_widget_show (item);
 
-          image = gtk_image_new_from_icon_name ("preferences-system", GTK_ICON_SIZE_MENU);
+          image = gtk_image_new_from_icon_name ("preferences-system-symbolic", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
           gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
@@ -1332,7 +1332,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
       gtk_widget_show (item);
 
-      image = gtk_image_new_from_icon_name ("system-log-out", GTK_ICON_SIZE_MENU);
+      image = gtk_image_new_from_icon_name ("system-log-out-symbolic", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
@@ -1352,7 +1352,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
       gtk_widget_show (item);
 
-      image = gtk_image_new_from_icon_name ("help-browser", GTK_ICON_SIZE_MENU);
+      image = gtk_image_new_from_icon_name ("help-contents-symbolic", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
@@ -1367,7 +1367,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
       gtk_widget_show (item);
 
-      image = gtk_image_new_from_icon_name ("help-about", GTK_ICON_SIZE_MENU);
+      image = gtk_image_new_from_icon_name ("help-about-symbolic", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
