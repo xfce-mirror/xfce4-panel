@@ -1504,6 +1504,9 @@ panel_application_new_window (PanelApplication *application,
   /* create panel window */
   window = panel_window_new (screen, panel_id);
 
+  /* give the panel window a unique name for theming */
+  gtk_widget_set_name (GTK_WIDGET (window), g_strdup_printf ("panel-%d", panel_id));
+
   /* put the window in its own group */
   window_group = gtk_window_group_new ();
   gtk_window_group_add_window (window_group, GTK_WINDOW (window));
