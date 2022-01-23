@@ -87,6 +87,7 @@ enum
   PROP_SHOW_ONLY_MINIMIZED,
   PROP_SHOW_WIREFRAMES,
   PROP_SHOW_HANDLE,
+  PROP_SHOW_TOOLTIPS,
   PROP_SORT_ORDER,
   PROP_WINDOW_SCROLLING,
   PROP_WRAP_WINDOWS,
@@ -187,6 +188,8 @@ struct _XfceTasklist
 
   /* dummy properties */
   guint                 show_handle : 1;
+
+  guint                 show_tooltips : 1;
 
 #ifdef GDK_WINDOWING_X11
   /* wireframe window */
@@ -469,6 +472,13 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_SHOW_TOOLTIPS,
+                                   g_param_spec_boolean ("show-tooltips",
+                                                         NULL, NULL,
+                                                         TRUE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_SORT_ORDER,
                                    g_param_spec_uint ("sort-order",
                                                       NULL, NULL,
@@ -585,6 +595,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->show_labels = TRUE;
   tasklist->show_wireframes = FALSE;
   tasklist->show_handle = TRUE;
+  tasklist->show_tooltips = TRUE;
   tasklist->all_monitors = TRUE;
   tasklist->n_monitors = 0;
   tasklist->window_scrolling = TRUE;
@@ -793,6 +804,10 @@ xfce_tasklist_set_property (GObject      *object,
 
     case PROP_SHOW_HANDLE:
       tasklist->show_handle = g_value_get_boolean (value);
+      break;
+
+    case PROP_SHOW_TOOLTIPS:
+      tasklist->show_tooltips = g_value_get_boolean (value);
       break;
 
     case PROP_SORT_ORDER:
@@ -2705,13 +2720,17 @@ xfce_tasklist_button_name_changed (WnckWindow        *window,
   const gchar     *name;
   gchar           *label = NULL;
   GtkStyleContext *ctx;
+  XfceTasklist    *tasklist = child->tasklist;
 
   panel_return_if_fail (window == NULL || child->window == window);
   panel_return_if_fail (WNCK_IS_WINDOW (child->window));
   panel_return_if_fail (XFCE_IS_TASKLIST (child->tasklist));
 
   name = wnck_window_get_name (child->window);
-  gtk_widget_set_tooltip_text (GTK_WIDGET (child->button), name);
+  if (tasklist->show_tooltips)
+    {
+       gtk_widget_set_tooltip_text (GTK_WIDGET (child->button), name);
+    }
 
   ctx = gtk_widget_get_style_context (child->label);
   gtk_style_context_remove_class (ctx, "label-hidden");
@@ -3226,9 +3245,12 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   g_object_bind_property (G_OBJECT (child->label), "label",
                           G_OBJECT (mi), "label",
                           G_BINDING_SYNC_CREATE);
-  g_object_bind_property (G_OBJECT (child->label), "label",
-                          G_OBJECT (mi), "tooltip-text",
-                          G_BINDING_SYNC_CREATE);
+  if (tasklist->show_tooltips)
+    {
+       g_object_bind_property (G_OBJECT (child->label), "label",
+                               G_OBJECT (mi), "tooltip-text",
+                               G_BINDING_SYNC_CREATE);
+    }
 
   label = gtk_bin_get_child (GTK_BIN (mi));
   panel_return_val_if_fail (GTK_IS_LABEL (label), NULL);
