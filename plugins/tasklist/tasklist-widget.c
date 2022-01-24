@@ -365,6 +365,9 @@ static void               xfce_tasklist_set_button_relief                (XfceTa
                                                                           GtkReliefStyle        button_relief);
 static void               xfce_tasklist_set_show_labels                  (XfceTasklist         *tasklist,
                                                                           gboolean              show_labels);
+
+static void               xfce_tasklist_set_show_tooltips                (XfceTasklist *tasklist,
+                                                                          gboolean      show_labels);
 static void               xfce_tasklist_set_show_only_minimized          (XfceTasklist         *tasklist,
                                                                           gboolean              only_minimized);
 static void               xfce_tasklist_set_show_wireframes              (XfceTasklist         *tasklist,
@@ -725,6 +728,10 @@ xfce_tasklist_get_property (GObject    *object,
       g_value_set_boolean (value, tasklist->show_handle);
       break;
 
+    case PROP_SHOW_TOOLTIPS:
+      g_value_set_boolean (value, tasklist->show_tooltips);
+      break;
+
     case PROP_SORT_ORDER:
       g_value_set_uint (value, tasklist->sort_order);
       break;
@@ -807,7 +814,7 @@ xfce_tasklist_set_property (GObject      *object,
       break;
 
     case PROP_SHOW_TOOLTIPS:
-      tasklist->show_tooltips = g_value_get_boolean (value);
+      xfce_tasklist_set_show_tooltips(tasklist, g_value_get_boolean (value));
       break;
 
     case PROP_SORT_ORDER:
@@ -2727,6 +2734,7 @@ xfce_tasklist_button_name_changed (WnckWindow        *window,
   panel_return_if_fail (XFCE_IS_TASKLIST (child->tasklist));
 
   name = wnck_window_get_name (child->window);
+
   if (tasklist->show_tooltips)
     {
        gtk_widget_set_tooltip_text (GTK_WIDGET (child->button), name);
@@ -4441,7 +4449,29 @@ xfce_tasklist_set_button_relief (XfceTasklist   *tasklist,
     }
 }
 
+static void
+xfce_tasklist_set_show_tooltips (XfceTasklist *tasklist,
+                                 gboolean      show_tooltips)
+{
+  GList             *li;
+  XfceTasklistChild *child;
 
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+
+  show_tooltips = !!show_tooltips;
+
+  if (tasklist->show_tooltips != show_tooltips)
+    {
+      tasklist->show_tooltips = show_tooltips;
+
+      for (li = tasklist->windows; li != NULL; li = li->next)
+        {
+          child = li->data;
+
+          gtk_widget_set_has_tooltip(child->button, show_tooltips );
+        }
+    }
+}
 
 static void
 xfce_tasklist_set_show_labels (XfceTasklist *tasklist,
