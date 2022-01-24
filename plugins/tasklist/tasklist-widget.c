@@ -365,9 +365,6 @@ static void               xfce_tasklist_set_button_relief                (XfceTa
                                                                           GtkReliefStyle        button_relief);
 static void               xfce_tasklist_set_show_labels                  (XfceTasklist         *tasklist,
                                                                           gboolean              show_labels);
-
-static void               xfce_tasklist_set_show_tooltips                (XfceTasklist *tasklist,
-                                                                          gboolean      show_labels);
 static void               xfce_tasklist_set_show_only_minimized          (XfceTasklist         *tasklist,
                                                                           gboolean              only_minimized);
 static void               xfce_tasklist_set_show_wireframes              (XfceTasklist         *tasklist,
@@ -814,7 +811,7 @@ xfce_tasklist_set_property (GObject      *object,
       break;
 
     case PROP_SHOW_TOOLTIPS:
-      xfce_tasklist_set_show_tooltips(tasklist, g_value_get_boolean (value));
+      tasklist->show_tooltips = g_value_get_boolean (value);
       break;
 
     case PROP_SORT_ORDER:
@@ -2266,6 +2263,9 @@ xfce_tasklist_child_new (XfceTasklist *tasklist)
   gtk_widget_add_events (GTK_WIDGET(child->button), GDK_SCROLL_MASK
                                                   | GDK_SMOOTH_SCROLL_MASK);
 
+  g_object_bind_property (tasklist, "show_tooltips", child->button, "has-tooltip",
+                         G_BINDING_SYNC_CREATE);
+
   child->box = gtk_box_new (!xfce_tasklist_vertical (tasklist) ?
       GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL, 6);
   gtk_container_add (GTK_CONTAINER (child->button), child->box);
@@ -2727,7 +2727,6 @@ xfce_tasklist_button_name_changed (WnckWindow        *window,
   const gchar     *name;
   gchar           *label = NULL;
   GtkStyleContext *ctx;
-  XfceTasklist    *tasklist = child->tasklist;
 
   panel_return_if_fail (window == NULL || child->window == window);
   panel_return_if_fail (WNCK_IS_WINDOW (child->window));
@@ -2735,10 +2734,7 @@ xfce_tasklist_button_name_changed (WnckWindow        *window,
 
   name = wnck_window_get_name (child->window);
 
-  if (tasklist->show_tooltips)
-    {
-       gtk_widget_set_tooltip_text (GTK_WIDGET (child->button), name);
-    }
+  gtk_widget_set_tooltip_text (GTK_WIDGET (child->button), name);
 
   ctx = gtk_widget_get_style_context (child->label);
   gtk_style_context_remove_class (ctx, "label-hidden");
@@ -3253,12 +3249,10 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   g_object_bind_property (G_OBJECT (child->label), "label",
                           G_OBJECT (mi), "label",
                           G_BINDING_SYNC_CREATE);
-  if (tasklist->show_tooltips)
-    {
-       g_object_bind_property (G_OBJECT (child->label), "label",
-                               G_OBJECT (mi), "tooltip-text",
-                               G_BINDING_SYNC_CREATE);
-    }
+
+  g_object_bind_property (G_OBJECT (child->label), "label",
+                           G_OBJECT (mi), "tooltip-text",
+                           G_BINDING_SYNC_CREATE);
 
   label = gtk_bin_get_child (GTK_BIN (mi));
   panel_return_val_if_fail (GTK_IS_LABEL (label), NULL);
@@ -4446,30 +4440,6 @@ xfce_tasklist_set_button_relief (XfceTasklist   *tasklist,
       /* arrow button for overflow menu */
       gtk_button_set_relief (GTK_BUTTON (tasklist->arrow_button),
                              button_relief);
-    }
-}
-
-static void
-xfce_tasklist_set_show_tooltips (XfceTasklist *tasklist,
-                                 gboolean      show_tooltips)
-{
-  GList             *li;
-  XfceTasklistChild *child;
-
-  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
-
-  show_tooltips = !!show_tooltips;
-
-  if (tasklist->show_tooltips != show_tooltips)
-    {
-      tasklist->show_tooltips = show_tooltips;
-
-      for (li = tasklist->windows; li != NULL; li = li->next)
-        {
-          child = li->data;
-
-          gtk_widget_set_has_tooltip(child->button, show_tooltips );
-        }
     }
 }
 
