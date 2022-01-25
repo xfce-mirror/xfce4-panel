@@ -2727,6 +2727,8 @@ xfce_tasklist_button_name_changed (WnckWindow        *window,
   const gchar     *name;
   gchar           *label = NULL;
   GtkStyleContext *ctx;
+  XfceTasklist    *tasklist = child->tasklist;
+
 
   panel_return_if_fail (window == NULL || child->window == window);
   panel_return_if_fail (WNCK_IS_WINDOW (child->window));
@@ -2735,6 +2737,8 @@ xfce_tasklist_button_name_changed (WnckWindow        *window,
   name = wnck_window_get_name (child->window);
 
   gtk_widget_set_tooltip_text (GTK_WIDGET (child->button), name);
+
+  gtk_widget_set_has_tooltip (GTK_WIDGET (child->button), tasklist->show_tooltips);
 
   ctx = gtk_widget_get_style_context (child->label);
   gtk_style_context_remove_class (ctx, "label-hidden");
@@ -3253,6 +3257,8 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   g_object_bind_property (G_OBJECT (child->label), "label",
                            G_OBJECT (mi), "tooltip-text",
                            G_BINDING_SYNC_CREATE);
+
+  gtk_widget_set_has_tooltip (GTK_WIDGET (child->button), tasklist->show_tooltips);
 
   label = gtk_bin_get_child (GTK_BIN (mi));
   panel_return_val_if_fail (GTK_IS_LABEL (label), NULL);
