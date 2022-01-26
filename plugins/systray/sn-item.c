@@ -698,7 +698,7 @@ sn_item_get_all_properties_result (GObject      *source_object,
   const gchar  *name;
   GVariant     *value;
 
-  const gchar  *cstr_val1;
+  const gchar  *cstr_val1, *item_status = NULL;
   gchar        *str_val1;
   gchar        *str_val2;
   gboolean      bool_val1;
@@ -753,7 +753,7 @@ sn_item_get_all_properties_result (GObject      *source_object,
       }
     else if (!g_strcmp0 (name, "Status"))
       {
-        cstr_val1 = g_variant_get_string (value, NULL);
+        item_status = cstr_val1 = g_variant_get_string (value, NULL);
         bool_val1 = sn_item_status_is_exposed (cstr_val1);
         if (bool_val1 != item->exposed)
           {
@@ -876,7 +876,17 @@ sn_item_get_all_properties_result (GObject      *source_object,
           if (update_tooltip)
             g_signal_emit (G_OBJECT (item), sn_item_signals[TOOLTIP_CHANGED], 0);
           if (update_icon)
-            g_signal_emit (G_OBJECT (item), sn_item_signals[ICON_CHANGED], 0);
+            {
+              /* we prioritize the attention icon if it exists afterwards, but it may
+               * exist here without the corresponding status, which is authentic */
+              if (g_strcmp0 (item_status, "NeedsAttention") != 0)
+                {
+                  g_clear_object (&item->attention_icon_pixbuf);
+                  g_free (item->attention_icon_name);
+                  item->attention_icon_name = NULL;
+                }
+              g_signal_emit (G_OBJECT (item), sn_item_signals[ICON_CHANGED], 0);
+            }
           if (update_menu)
             {
               if (item != NULL)
