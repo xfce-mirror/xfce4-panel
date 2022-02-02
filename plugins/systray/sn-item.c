@@ -892,7 +892,7 @@ sn_item_get_all_properties_result (GObject      *source_object,
         }
       if (update_menu)
         {
-          if (item != NULL)
+          if (item->cached_menu != NULL)
             g_object_unref (item->cached_menu);
           item->cached_menu = NULL;
           g_signal_emit (G_OBJECT (item), sn_item_signals[MENU_CHANGED], 0);
