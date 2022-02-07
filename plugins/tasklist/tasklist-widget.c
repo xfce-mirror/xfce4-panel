@@ -3037,7 +3037,7 @@ xfce_tasklist_button_add_launch_new_instance_item (XfceTasklistChild *child,
   sep = gtk_separator_menu_item_new ();
   gtk_widget_show (sep);
 
-  item = gtk_menu_item_new_with_label (_("Launch New Instance..."));
+  item = gtk_menu_item_new_with_label (_("Launch New Instance"));
   g_object_set_data_full (G_OBJECT (item), "exe-path", path, g_free);
   gtk_widget_show (item);
   g_signal_connect (item,
