@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-03 00:45+0100\n"
-"PO-Revision-Date: 2021-08-18 09:06+0000\n"
-"Last-Translator: Vahe Safaryan <vahe.safaryan@realschool.am>\n"
+"POT-Creation-Date: 2022-02-08 00:47+0100\n"
+"PO-Revision-Date: 2022-02-07 23:47+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
 "Language-Team: Armenian (Armenia) (http://www.transifex.com/xfce/xfce4-panel/language/hy_AM/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,7 +35,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "վահանակ,կարգաւորումներ;առաջադրանքների տող;ինքնապահում;ծրագրերի ընտրացանկ;մեկնարկ․կոճակներ;գործարկիչ;ծանուցումների տարածք;կարգավիճակ;պատկերակներ;ներդրօն;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2950
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2975
 msgid "Panel"
 msgstr "Ընտրացանկ"
 
@@ -44,64 +44,65 @@ msgid "Customize the panel"
 msgstr "Ընտրացանկի կարգաւորումներ"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1105
+#: ../libxfce4panel/xfce-panel-plugin.c:1080
 #: ../panel/panel-preferences-dialog.c:1321
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Վստա՞հ եք, որ ուզում եք հեռացնել %s֊ը։"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1110
+#: ../libxfce4panel/xfce-panel-plugin.c:1085
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "Պատկերակի ջնջումը վահանակից կը զրոյացնի դրա կարգաբերումը։"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
+#: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
 #: ../plugins/directorymenu/directorymenu.c:473
-#: ../plugins/directorymenu/directorymenu.c:938
+#: ../plugins/directorymenu/directorymenu.c:941
 msgid "_Cancel"
 msgstr "_Չեղարկել"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1112
-#: ../libxfce4panel/xfce-panel-plugin.c:1287
-#: ../panel/panel-plugin-external.c:443
+#: ../libxfce4panel/xfce-panel-plugin.c:1087
+#: ../libxfce4panel/xfce-panel-plugin.c:1262
+#: ../panel/panel-plugin-external.c:450
 #: ../panel/panel-preferences-dialog.c:961
 #: ../panel/panel-preferences-dialog.c:1327
-#: ../plugins/launcher/launcher-dialog.c:852
+#: ../panel/panel-preferences-dialog.glade.h:59
+#: ../plugins/launcher/launcher-dialog.c:859
 msgid "_Remove"
 msgstr "_Հեռացնել"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1237
+#: ../libxfce4panel/xfce-panel-plugin.c:1212
 msgid "_Properties"
 msgstr "_Յատկութիւններ"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3038
+#: ../libxfce4panel/xfce-panel-plugin.c:1227 ../panel/panel-window.c:3066
 msgid "_About"
 msgstr "_Ձեռնարկ"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1267
+#: ../libxfce4panel/xfce-panel-plugin.c:1242
 msgid "_Move"
 msgstr "_Շարժ"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1308
+#: ../libxfce4panel/xfce-panel-plugin.c:1283
 msgid "Pane_l"
 msgstr "Ընտրացան_կ"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2963
+#: ../libxfce4panel/xfce-panel-plugin.c:1292 ../panel/panel-window.c:2988
 msgid "Add _New Items..."
 msgstr "Աւելացներ _Նոր Տարրեր..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2978
+#: ../libxfce4panel/xfce-panel-plugin.c:1307 ../panel/panel-window.c:3003
 msgid "Panel Pr_eferences..."
 msgstr "Վահանակի Կար_գաւորումներ..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:3010
+#: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:3035
 msgid "Log _Out"
 msgstr "դուրս գալ"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3029
+#: ../libxfce4panel/xfce-panel-plugin.c:1348 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3055
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -114,7 +115,7 @@ msgstr "դուրս գալ"
 msgid "_Help"
 msgstr "Աւգնութիւն"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1388
+#: ../libxfce4panel/xfce-panel-plugin.c:1363
 msgid "About"
 msgstr "Ձեռնարկ"
 
@@ -161,78 +162,79 @@ msgstr "Չսպասել պատուհանի կառավարչին, մեկնարկի
 msgid "Print version information and exit"
 msgstr "Ցուցադրել տարբերակի վերաբերեալ տեղեկոյթը եւ դուրս գալ"
 
-#: ../panel/main.c:207
+#: ../panel/main.c:208
 #, c-format
 msgid "Name %s lost on the message dbus, exiting."
 msgstr "Անուն %s ֊ը կորել է dbus հաղորդագրութիւնում, ելք։"
 
 #. parse context options
-#: ../panel/main.c:268
+#: ../panel/main.c:270
 msgid "[ARGUMENTS...]"
 msgstr "[ՅԵՆԱՐԿՆԵՐ...]"
 
-#: ../panel/main.c:275
+#: ../panel/main.c:277
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Մուտքագրէք «%s --help» աջակցութեան համար։"
 
-#: ../panel/main.c:294
+#: ../panel/main.c:296
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce֊ի մշակման խումբ։ Բոլոր իրաւունքները պաշտպանուած են։"
 
-#: ../panel/main.c:295
+#: ../panel/main.c:297
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Սխալների մասին կարող էք զեկուցել <%s> հասցէով։"
 
-#: ../panel/main.c:361
+#. quit without error if an instance is running
+#: ../panel/main.c:395
 msgid "There is already a running instance"
 msgstr "Արդէն կայ գործուն աւրինակ"
 
 #. spawn ourselfs again
-#: ../panel/main.c:404
+#: ../panel/main.c:403
 msgid "Restarting..."
 msgstr "Վերագործարկում..."
 
-#: ../panel/main.c:419
+#: ../panel/main.c:418
 msgid "Failed to show the preferences dialog"
 msgstr "Չյաջողուեց ցուցադրել նախընտրութիւնների երկխաւսութիւնը"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:420
 msgid "Failed to show the add new items dialog"
 msgstr "Չյաջողուեց ցոյց տալ «յաւելել նոր տարրեր»֊ի երկխաւսութիւնը"
 
-#: ../panel/main.c:423
+#: ../panel/main.c:422
 msgid "Failed to save the panel configuration"
 msgstr "Չյաջողուեց պահել ընտրացանկի կարգաւորումները"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:424
 msgid "Failed to add a plugin to the panel"
 msgstr "Չյաջողուեց յաւելել ներդրաւն` ընտրացանկում"
 
-#: ../panel/main.c:427
+#: ../panel/main.c:426
 msgid "Failed to restart the panel"
 msgstr "Չյաջողուեց վերագործարկել վահանակը"
 
-#: ../panel/main.c:429
+#: ../panel/main.c:428
 msgid "Failed to quit the panel"
 msgstr "Չյաջողուեց դուրս գալ ընտրացանկից"
 
-#: ../panel/main.c:431
+#: ../panel/main.c:430
 msgid "Failed to send D-Bus message"
 msgstr "Չյաջողուեց ուղարկել D-Bus հաղորդագրութիւն"
 
-#: ../panel/main.c:441
+#: ../panel/main.c:440
 msgid "Execute"
 msgstr "Գործարկել"
 
-#: ../panel/main.c:442
+#: ../panel/main.c:441
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Գործարկե՞լ ընտրացանկը։ Եթե այո, ապա համոզուէք որ պահել էք նիստը դուրս գալուց, որպէսզի ընտրացանկն ինքնաշխատաւրէն միանայ յաջորդ գործարկումների ժամանակ։"
 
-#: ../panel/main.c:445 ../panel/main.c:459
+#: ../panel/main.c:444 ../panel/main.c:458
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "%s֊ի գործարկուող աւրինակ՝ չի յայտնաբերուել"
@@ -241,38 +243,38 @@ msgstr "%s֊ի գործարկուող աւրինակ՝ չի յայտնաբերո
 msgid "Failed to launch the migration application"
 msgstr "Չյաջողուեց գործարկել տեղափոխման յաւելուածը"
 
-#: ../panel/panel-application.c:984
+#: ../panel/panel-application.c:985
 msgid "Create _Launcher"
 msgstr "Ստեղծել _Գործարկիչ"
 
-#: ../panel/panel-application.c:985
+#: ../panel/panel-application.c:986
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Կը ստեղծուի նոր գործարկչի նեդրաւն ընտրացանկում եւ նիշերը կը ներդրուեն, որպէս ցանկի տարրեր։"
 
-#: ../panel/panel-application.c:987
+#: ../panel/panel-application.c:988
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Ստեղծել նոր գործարկիչ %d աշխատասեղանի նիշերից"
 msgstr[1] "Ստեղծել նոր գործարկիչ %d աշխատասեղանի նիշերից"
 
-#: ../panel/panel-application.c:1727
+#: ../panel/panel-application.c:1728
 msgid "Quit"
 msgstr "Ելք"
 
-#: ../panel/panel-application.c:1728
+#: ../panel/panel-application.c:1729
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "X֊ը գործարկուել է առանց նիստի կառավարչի։ «Դուրս Գալ»֊ի սեղմումը կփակի X֊սպասարկիչը։"
 
-#: ../panel/panel-application.c:1729
+#: ../panel/panel-application.c:1730
 msgid "Are you sure you want to quit the panel?"
 msgstr "Փակե՞լ ընտրացանկը։"
 
-#: ../panel/panel-application.c:1737
+#: ../panel/panel-application.c:1738
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Չյաջողուեց գործարկել «%s» հրամանը"
@@ -307,6 +309,7 @@ msgid "Add New Item"
 msgstr "Աւելացնել Նոր Տարր"
 
 #: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:201
+#: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "_Աւելացնել"
@@ -358,12 +361,12 @@ msgstr "_Գտնել․"
 msgid "Enter search phrase here"
 msgstr "Մուտքագրէք որոնուող նիւթն այստեղ"
 
-#: ../panel/panel-plugin-external.c:436
+#: ../panel/panel-plugin-external.c:443
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "«%s» ներդրաւնն անհետացել է ընտրացանկից։ Վերագործարկե՞ լ այն։"
 
-#: ../panel/panel-plugin-external.c:438
+#: ../panel/panel-plugin-external.c:445
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -371,7 +374,7 @@ msgid ""
 "permanently removed from the panel."
 msgstr "Ներդրաւնը՝ %d վայրկեանի ընթացքում, գործարկուել է մեկից աւելի անգամ։ «Գործարկել» հրամանը սեղմելու դէպքում՝ ընտրացանկը կը փորձի վերագործարկել ներդրաւնը, հակառակ դէպքում՝ այն վերջնականապէս կը հեռացուի ընտրացանկից։"
 
-#: ../panel/panel-plugin-external.c:442
+#: ../panel/panel-plugin-external.c:449
 msgid "_Execute"
 msgstr "_Գործարկել"
 
@@ -638,17 +641,7 @@ msgstr "Թափանցիկութիւնը, երբ սլաքը գտնուում է ը
 msgid "Appeara_nce"
 msgstr "_Տեսք"
 
-#: ../panel/panel-preferences-dialog.glade.h:57
-#: ../plugins/launcher/launcher-dialog.glade.h:21
-msgid "Move currently selected item up by one row"
-msgstr "Տեղափոխել ներկայումս նշուած տարրը մեկ տող վերեւ"
-
 #: ../panel/panel-preferences-dialog.glade.h:58
-#: ../plugins/launcher/launcher-dialog.glade.h:22
-msgid "Move currently selected item down by one row"
-msgstr "Տեղափոխել ներկայումս նշուած տարրը մեկ տող ներքեւ"
-
-#: ../panel/panel-preferences-dialog.glade.h:59
 msgid "Add new item to this panel"
 msgstr "Աւելացնել նոր տարր ընտրացանկում"
 
@@ -666,6 +659,16 @@ msgid "Show about information of the currently selected item"
 msgstr "Ցուցադրել նշուած տարրի վերաբերեալ տեղեկոյթը"
 
 #: ../panel/panel-preferences-dialog.glade.h:63
+#: ../plugins/launcher/launcher-dialog.glade.h:21
+msgid "Move currently selected item up by one row"
+msgstr "Տեղափոխել ներկայումս նշուած տարրը մեկ տող վերեւ"
+
+#: ../panel/panel-preferences-dialog.glade.h:64
+#: ../plugins/launcher/launcher-dialog.glade.h:22
+msgid "Move currently selected item down by one row"
+msgstr "Տեղափոխել ներկայումս նշուած տարրը մեկ տող ներքեւ"
+
+#: ../panel/panel-preferences-dialog.glade.h:65
 msgid "Ite_ms"
 msgstr "Տ_արրեր"
 
@@ -693,7 +696,7 @@ msgstr "Հմուտ"
 msgid "Expert"
 msgstr "Փորձառու"
 
-#: ../panel/panel-window.c:2995
+#: ../panel/panel-window.c:3020
 msgid "_Lock Panel"
 msgstr "_Կողպել Ընտրացանկը"
 
@@ -1007,7 +1010,7 @@ msgstr "_Բարի"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2517
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2519
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Չյաջողոեւց գործարկել «%s» հրամանը:"
@@ -1409,69 +1412,69 @@ msgstr "Ժամը քանի՞սն է"
 msgid "Directory Menu"
 msgstr "Նշարանի Ցանկ"
 
-#: ../plugins/directorymenu/directorymenu.c:689
+#: ../plugins/directorymenu/directorymenu.c:692
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Չյաջողուեց գործարկել «%s» յաւելուածը"
 
-#: ../plugins/directorymenu/directorymenu.c:721
+#: ../plugins/directorymenu/directorymenu.c:724
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Չյաջողուեց ստանալ բովանդակության «%s» տիպը"
 
-#: ../plugins/directorymenu/directorymenu.c:730
+#: ../plugins/directorymenu/directorymenu.c:733
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "«%s»֊ի համար լռելեայն յաւելուած չի գտնուել"
 
-#: ../plugins/directorymenu/directorymenu.c:746
+#: ../plugins/directorymenu/directorymenu.c:749
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Չյաջողուեց մեկնարկել «%s» լռելեայն յաւելուածը"
 
-#: ../plugins/directorymenu/directorymenu.c:844
+#: ../plugins/directorymenu/directorymenu.c:847
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Չյաջողուեց գործարկել նախընտրած յաւելուածը՝ «%s» կարգի համար"
 
-#: ../plugins/directorymenu/directorymenu.c:927
+#: ../plugins/directorymenu/directorymenu.c:930
 msgid "Create New Folder"
 msgstr "Ստեղծել նոր պանակ"
 
-#: ../plugins/directorymenu/directorymenu.c:932
+#: ../plugins/directorymenu/directorymenu.c:935
 msgid "Create New Text Document"
 msgstr "Ստեղծել տեքստային նիշք"
 
-#: ../plugins/directorymenu/directorymenu.c:939
+#: ../plugins/directorymenu/directorymenu.c:942
 msgid "C_reate"
 msgstr "Ս_տեղծել"
 
-#: ../plugins/directorymenu/directorymenu.c:940
+#: ../plugins/directorymenu/directorymenu.c:943
 msgid "Create & _Open"
 msgstr "Ստեղծել եւ _Բացել"
 
-#: ../plugins/directorymenu/directorymenu.c:954
+#: ../plugins/directorymenu/directorymenu.c:957
 msgid "Enter the new name:"
 msgstr "Անուն․"
 
-#: ../plugins/directorymenu/directorymenu.c:990
+#: ../plugins/directorymenu/directorymenu.c:993
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Ձախողուեց ստեղծել պանակը․ %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1075
+#: ../plugins/directorymenu/directorymenu.c:1078
 msgid "Open Folder"
 msgstr "Բացել Պանակը"
 
-#: ../plugins/directorymenu/directorymenu.c:1092
+#: ../plugins/directorymenu/directorymenu.c:1095
 msgid "Open in Terminal"
 msgstr "Բացել Վահանակում"
 
-#: ../plugins/directorymenu/directorymenu.c:1109
+#: ../plugins/directorymenu/directorymenu.c:1112
 msgid "Create Folder..."
 msgstr "Ստեղծել պանակ ․․․"
 
-#: ../plugins/directorymenu/directorymenu.c:1126
+#: ../plugins/directorymenu/directorymenu.c:1129
 msgid "Create Text Document..."
 msgstr "Ստեղծել փաստաթուղթ ․․․"
 
@@ -1532,28 +1535,28 @@ msgstr "Զտում"
 msgid "Open launcher menu"
 msgstr "Բացել թողարկչի ցանկը"
 
-#: ../plugins/launcher/launcher.c:1651
+#: ../plugins/launcher/launcher.c:1649
 msgid "Unnamed Item"
 msgstr "Անանուն Տարր"
 
-#: ../plugins/launcher/launcher.c:1839
+#: ../plugins/launcher/launcher.c:1837
 msgid "No items"
 msgstr "Տարրեր չկան"
 
-#: ../plugins/launcher/launcher-dialog.c:785
+#: ../plugins/launcher/launcher-dialog.c:792
 msgid "Failed to open desktop item editor"
 msgstr "Չյաջողուեց բացել աշխատասեղանի տարրերի խմբագիրը"
 
-#: ../plugins/launcher/launcher-dialog.c:853
+#: ../plugins/launcher/launcher-dialog.c:860
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Եթե ջնջէք նիշ, ապա այն վերջնականապէս կը հեռացուի"
 
-#: ../plugins/launcher/launcher-dialog.c:854
+#: ../plugins/launcher/launcher-dialog.c:861
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Ջնջե՞լ «%s»֊ը։"
 
-#: ../plugins/launcher/launcher-dialog.c:855
+#: ../plugins/launcher/launcher-dialog.c:862
 msgid "Unnamed item"
 msgstr "Անանուն տարր"
 
@@ -1664,15 +1667,15 @@ msgstr "Յառաջացած"
 msgid "Program launcher with optional menu"
 msgstr "Ծրագրի գործարկիչ՝ ընտրովի ցանկով"
 
-#: ../plugins/pager/pager.c:548 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:557 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "Աշխատատարածքի _կարգաւորումներ..."
 
-#: ../plugins/pager/pager.c:636
+#: ../plugins/pager/pager.c:645
 msgid "Unable to open the workspace settings"
 msgstr "Չյաջողուեց բացել աշխատատարածքի կարգաւորումները"
 
-#: ../plugins/pager/pager-buttons.c:590 ../plugins/windowmenu/windowmenu.c:873
+#: ../plugins/pager/pager-buttons.c:590 ../plugins/windowmenu/windowmenu.c:876
 #, c-format
 msgid "Workspace %d"
 msgstr "%d Աշխատատարածք"
@@ -1978,36 +1981,36 @@ msgstr "Ցուցադրել պատուհանները բոլոր ցու_ցասար
 msgid "Show only _minimized windows"
 msgstr "Ցուցադրել միայն _փոքրացուած պատուհանները"
 
-#: ../plugins/tasklist/tasklist-widget.c:2957
+#: ../plugins/tasklist/tasklist-widget.c:2992
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:2961
+#: ../plugins/tasklist/tasklist-widget.c:2996
 msgid "Error"
 msgstr "Սխալ"
 
-#: ../plugins/tasklist/tasklist-widget.c:3005
-msgid "Launch New Instance..."
+#: ../plugins/tasklist/tasklist-widget.c:3040
+msgid "Launch New Instance"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3754
+#: ../plugins/tasklist/tasklist-widget.c:3794
 msgid "Mi_nimize All"
 msgstr "Փո_քրացնել Բոլորը"
 
-#: ../plugins/tasklist/tasklist-widget.c:3762
+#: ../plugins/tasklist/tasklist-widget.c:3802
 msgid "Un_minimize All"
 msgstr "Մե_ծացնել Բոլորը"
 
-#: ../plugins/tasklist/tasklist-widget.c:3770
+#: ../plugins/tasklist/tasklist-widget.c:3810
 msgid "Ma_ximize All"
 msgstr "Առ_աւելացնել Բոլորը"
 
-#: ../plugins/tasklist/tasklist-widget.c:3778
+#: ../plugins/tasklist/tasklist-widget.c:3818
 msgid "_Unmaximize All"
 msgstr "_Մեծացնել Բոլորը"
 
-#: ../plugins/tasklist/tasklist-widget.c:3790
+#: ../plugins/tasklist/tasklist-widget.c:3830
 msgid "_Close All"
 msgstr "_Փակել Բոլորը"
 
@@ -2015,7 +2018,7 @@ msgstr "_Փակել Բոլորը"
 msgid "Switch between open windows using buttons"
 msgstr "Փոխել բացուած պատուհանները՝ կոճակների աւգնութեամբ"
 
-#: ../plugins/windowmenu/windowmenu.c:670
+#: ../plugins/windowmenu/windowmenu.c:673
 msgid "Desktop"
 msgstr "Աշխատասեղան"
 
