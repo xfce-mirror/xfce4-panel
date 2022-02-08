@@ -6,15 +6,15 @@
 # Ivà Burgos <debian.public@gmail.com>, 2007
 # jolupa <jolupameister@gmail.com>, 2019
 # Davidmp <medipas@gmail.com>, 2015,2019
-# Robert Antoni Buj i Gelonch <rbuj@fedoraproject.org>, 2016-2020
-# Robert Antoni Buj i Gelonch <rbuj@fedoraproject.org>, 2016
+# Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2016-2020
+# Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-03 00:45+0100\n"
-"PO-Revision-Date: 2020-11-03 07:37+0000\n"
-"Last-Translator: Robert Antoni Buj i Gelonch <rbuj@fedoraproject.org>\n"
+"POT-Creation-Date: 2022-02-08 00:47+0100\n"
+"PO-Revision-Date: 2022-02-07 23:47+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce4-panel/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +38,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "taulers;ajusts;preferències;barra de tasques;ocultació;menú d'aplicacions;inici;botons;llançador;àrea de notificacions;estat;icones;connectors;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2950
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2975
 msgid "Panel"
 msgstr "Tauler"
 
@@ -47,64 +47,65 @@ msgid "Customize the panel"
 msgstr "Personalitzeu el tauler"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1105
+#: ../libxfce4panel/xfce-panel-plugin.c:1080
 #: ../panel/panel-preferences-dialog.c:1321
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Esteu segur que voleu suprimir «%s»?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1110
+#: ../libxfce4panel/xfce-panel-plugin.c:1085
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "Suprimir l’element del tauler, també significa perdre la seva configuració."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
+#: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
 #: ../plugins/directorymenu/directorymenu.c:473
-#: ../plugins/directorymenu/directorymenu.c:938
+#: ../plugins/directorymenu/directorymenu.c:941
 msgid "_Cancel"
 msgstr "_Cancel·la"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1112
-#: ../libxfce4panel/xfce-panel-plugin.c:1287
-#: ../panel/panel-plugin-external.c:443
+#: ../libxfce4panel/xfce-panel-plugin.c:1087
+#: ../libxfce4panel/xfce-panel-plugin.c:1262
+#: ../panel/panel-plugin-external.c:450
 #: ../panel/panel-preferences-dialog.c:961
 #: ../panel/panel-preferences-dialog.c:1327
-#: ../plugins/launcher/launcher-dialog.c:852
+#: ../panel/panel-preferences-dialog.glade.h:59
+#: ../plugins/launcher/launcher-dialog.c:859
 msgid "_Remove"
 msgstr "_Suprimeix"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1237
+#: ../libxfce4panel/xfce-panel-plugin.c:1212
 msgid "_Properties"
 msgstr "_Propietats"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3038
+#: ../libxfce4panel/xfce-panel-plugin.c:1227 ../panel/panel-window.c:3066
 msgid "_About"
 msgstr "_Quant a"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1267
+#: ../libxfce4panel/xfce-panel-plugin.c:1242
 msgid "_Move"
 msgstr "_Mou"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1308
+#: ../libxfce4panel/xfce-panel-plugin.c:1283
 msgid "Pane_l"
 msgstr "Tau_ler"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2963
+#: ../libxfce4panel/xfce-panel-plugin.c:1292 ../panel/panel-window.c:2988
 msgid "Add _New Items..."
 msgstr "Afegeix elements _nous..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2978
+#: ../libxfce4panel/xfce-panel-plugin.c:1307 ../panel/panel-window.c:3003
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferències del tauler..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:3010
+#: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:3035
 msgid "Log _Out"
 msgstr "_Surt"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3029
+#: ../libxfce4panel/xfce-panel-plugin.c:1348 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3055
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -117,7 +118,7 @@ msgstr "_Surt"
 msgid "_Help"
 msgstr "A_juda"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1388
+#: ../libxfce4panel/xfce-panel-plugin.c:1363
 msgid "About"
 msgstr "Quant a"
 
@@ -164,78 +165,79 @@ msgstr "No esperar al gestor de finestres per iniciar-se"
 msgid "Print version information and exit"
 msgstr "Imprimeix la informació de la versió i surt"
 
-#: ../panel/main.c:207
+#: ../panel/main.c:208
 #, c-format
 msgid "Name %s lost on the message dbus, exiting."
 msgstr "S'ha perdut el nom %s en el missatge dbus, se surt."
 
 #. parse context options
-#: ../panel/main.c:268
+#: ../panel/main.c:270
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTS...]"
 
-#: ../panel/main.c:275
+#: ../panel/main.c:277
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Feu «%s --help» per veure l'ús."
 
-#: ../panel/main.c:294
+#: ../panel/main.c:296
 msgid "The Xfce development team. All rights reserved."
 msgstr "L'equip de desenvolupament de Xfce. Tots els drets reservats."
 
-#: ../panel/main.c:295
+#: ../panel/main.c:297
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Envieu els errors a <%s>."
 
-#: ../panel/main.c:361
+#. quit without error if an instance is running
+#: ../panel/main.c:395
 msgid "There is already a running instance"
 msgstr "Ja hi ha una altra instància executant-se"
 
 #. spawn ourselfs again
-#: ../panel/main.c:404
+#: ../panel/main.c:403
 msgid "Restarting..."
 msgstr "S'està reiniciant..."
 
-#: ../panel/main.c:419
+#: ../panel/main.c:418
 msgid "Failed to show the preferences dialog"
 msgstr "Ha fallat la visualització del diàleg de preferències"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:420
 msgid "Failed to show the add new items dialog"
 msgstr "Ha fallat la visualització del diàleg d'afegiment d'elements nous"
 
-#: ../panel/main.c:423
+#: ../panel/main.c:422
 msgid "Failed to save the panel configuration"
 msgstr "Ha fallat el desament de la configuració del tauler"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:424
 msgid "Failed to add a plugin to the panel"
 msgstr "Ha fallat l'afegiment d'un connector al tauler"
 
-#: ../panel/main.c:427
+#: ../panel/main.c:426
 msgid "Failed to restart the panel"
 msgstr "Ha fallat el reinici del tauler"
 
-#: ../panel/main.c:429
+#: ../panel/main.c:428
 msgid "Failed to quit the panel"
 msgstr "Ha fallat la sortida del tauler"
 
-#: ../panel/main.c:431
+#: ../panel/main.c:430
 msgid "Failed to send D-Bus message"
 msgstr "Ha fallat l'enviament del missatge D-BUS"
 
-#: ../panel/main.c:441
+#: ../panel/main.c:440
 msgid "Execute"
 msgstr "Executa"
 
-#: ../panel/main.c:442
+#: ../panel/main.c:441
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Voleu iniciar el tauler? Si és el cas, assegureu-vos que deseu la sessió quan sortiu per tal que el tauler s'iniciï automàticament el pròxim cop que inicieu la sessió."
 
-#: ../panel/main.c:445 ../panel/main.c:459
+#: ../panel/main.c:444 ../panel/main.c:458
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "No s'ha trobat una instància en marxa de %s"
@@ -244,38 +246,38 @@ msgstr "No s'ha trobat una instància en marxa de %s"
 msgid "Failed to launch the migration application"
 msgstr "Ha fallat el llançament de l'aplicació de migració"
 
-#: ../panel/panel-application.c:984
+#: ../panel/panel-application.c:985
 msgid "Create _Launcher"
 msgstr "Crea un _llançador"
 
-#: ../panel/panel-application.c:985
+#: ../panel/panel-application.c:986
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Això crearà un nou connector de llançador al tauler i inserirà els fitxers que es deixin caure com a elements de menú."
 
-#: ../panel/panel-application.c:987
+#: ../panel/panel-application.c:988
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Crea un nou llançador per %d fitxer d'escriptori"
 msgstr[1] "Crea un nou llançador per %d fitxers d'escriptori"
 
-#: ../panel/panel-application.c:1727
+#: ../panel/panel-application.c:1728
 msgid "Quit"
 msgstr "Surt"
 
-#: ../panel/panel-application.c:1728
+#: ../panel/panel-application.c:1729
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Heu iniciat les X sense un gestor de sessions. Premeu Surt per a sortir del servidor de les X."
 
-#: ../panel/panel-application.c:1729
+#: ../panel/panel-application.c:1730
 msgid "Are you sure you want to quit the panel?"
 msgstr "Esteu segur que voleu sortir del tauler?"
 
-#: ../panel/panel-application.c:1737
+#: ../panel/panel-application.c:1738
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Ha fallat l'execució de l'ordre «%s»"
@@ -310,6 +312,7 @@ msgid "Add New Item"
 msgstr "Afegeix un element nou"
 
 #: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:201
+#: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "_Afegeix"
@@ -361,12 +364,12 @@ msgstr "_Cerca:"
 msgid "Enter search phrase here"
 msgstr "Introduïu la frase a cercar aquí"
 
-#: ../panel/panel-plugin-external.c:436
+#: ../panel/panel-plugin-external.c:443
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "El connector del tauler \"%s\" ha finalitzat inesperadament. Voleu reiniciar-lo?"
 
-#: ../panel/panel-plugin-external.c:438
+#: ../panel/panel-plugin-external.c:445
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -374,7 +377,7 @@ msgid ""
 "permanently removed from the panel."
 msgstr "El connector s'ha reiniciat més d'un cop en els últims %d segons. Si premeu «Executa» el tauler intentarà reiniciar el connector, altrament serà eliminat permanentment del tauler."
 
-#: ../panel/panel-plugin-external.c:442
+#: ../panel/panel-plugin-external.c:449
 msgid "_Execute"
 msgstr "_Executa"
 
@@ -641,17 +644,7 @@ msgstr "Transparència quan el punter no està sobre el tauler, essent 0 complet
 msgid "Appeara_nce"
 msgstr "Apare_nça"
 
-#: ../panel/panel-preferences-dialog.glade.h:57
-#: ../plugins/launcher/launcher-dialog.glade.h:21
-msgid "Move currently selected item up by one row"
-msgstr "Mou l'element seleccionat a una fila superior"
-
 #: ../panel/panel-preferences-dialog.glade.h:58
-#: ../plugins/launcher/launcher-dialog.glade.h:22
-msgid "Move currently selected item down by one row"
-msgstr "Mou l'element seleccionat a una fila inferior"
-
-#: ../panel/panel-preferences-dialog.glade.h:59
 msgid "Add new item to this panel"
 msgstr "Afegeix un element nou a aquest tauler"
 
@@ -669,6 +662,16 @@ msgid "Show about information of the currently selected item"
 msgstr "Mostra la informació sobre l'element seleccionat actualment"
 
 #: ../panel/panel-preferences-dialog.glade.h:63
+#: ../plugins/launcher/launcher-dialog.glade.h:21
+msgid "Move currently selected item up by one row"
+msgstr "Mou l'element seleccionat a una fila superior"
+
+#: ../panel/panel-preferences-dialog.glade.h:64
+#: ../plugins/launcher/launcher-dialog.glade.h:22
+msgid "Move currently selected item down by one row"
+msgstr "Mou l'element seleccionat a una fila inferior"
+
+#: ../panel/panel-preferences-dialog.glade.h:65
 msgid "Ite_ms"
 msgstr "Ele_ments"
 
@@ -696,7 +699,7 @@ msgstr "Experimentat"
 msgid "Expert"
 msgstr "Expert"
 
-#: ../panel/panel-window.c:2995
+#: ../panel/panel-window.c:3020
 msgid "_Lock Panel"
 msgstr "_Bloqueja el tauler"
 
@@ -1010,7 +1013,7 @@ msgstr "D'ac_ord"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2517
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2519
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Ha fallat l'execució de l'ordre «%s»."
@@ -1412,69 +1415,69 @@ msgstr "Quina hora és?"
 msgid "Directory Menu"
 msgstr "Menú dels directoris"
 
-#: ../plugins/directorymenu/directorymenu.c:689
+#: ../plugins/directorymenu/directorymenu.c:692
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Ha fallat el llançament de l'aplicació «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:721
+#: ../plugins/directorymenu/directorymenu.c:724
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Ha fallat la consulta del tipus de contingut per «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:730
+#: ../plugins/directorymenu/directorymenu.c:733
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "No s'ha trobat una aplicació predeterminada per «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:746
+#: ../plugins/directorymenu/directorymenu.c:749
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Ha fallat el llançament de l'aplicació predeterminada per «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:844
+#: ../plugins/directorymenu/directorymenu.c:847
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Ha fallat l'execució de l'aplicació preferida per a la categoria «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:927
+#: ../plugins/directorymenu/directorymenu.c:930
 msgid "Create New Folder"
 msgstr "Crea una carpeta nova"
 
-#: ../plugins/directorymenu/directorymenu.c:932
+#: ../plugins/directorymenu/directorymenu.c:935
 msgid "Create New Text Document"
 msgstr "Crea un document de text nou"
 
-#: ../plugins/directorymenu/directorymenu.c:939
+#: ../plugins/directorymenu/directorymenu.c:942
 msgid "C_reate"
 msgstr "C_rea"
 
-#: ../plugins/directorymenu/directorymenu.c:940
+#: ../plugins/directorymenu/directorymenu.c:943
 msgid "Create & _Open"
 msgstr "Crea i _obre"
 
-#: ../plugins/directorymenu/directorymenu.c:954
+#: ../plugins/directorymenu/directorymenu.c:957
 msgid "Enter the new name:"
 msgstr "Introduïu el nom nou:"
 
-#: ../plugins/directorymenu/directorymenu.c:990
+#: ../plugins/directorymenu/directorymenu.c:993
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Ha fallat la creació de la carpeta: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1075
+#: ../plugins/directorymenu/directorymenu.c:1078
 msgid "Open Folder"
 msgstr "Obre la carpeta"
 
-#: ../plugins/directorymenu/directorymenu.c:1092
+#: ../plugins/directorymenu/directorymenu.c:1095
 msgid "Open in Terminal"
 msgstr "Obre al terminal"
 
-#: ../plugins/directorymenu/directorymenu.c:1109
+#: ../plugins/directorymenu/directorymenu.c:1112
 msgid "Create Folder..."
 msgstr "Crea la carpeta..."
 
-#: ../plugins/directorymenu/directorymenu.c:1126
+#: ../plugins/directorymenu/directorymenu.c:1129
 msgid "Create Text Document..."
 msgstr "Crea el document de text..."
 
@@ -1535,28 +1538,28 @@ msgstr "Filtratge"
 msgid "Open launcher menu"
 msgstr "Obre el menú del llançador"
 
-#: ../plugins/launcher/launcher.c:1651
+#: ../plugins/launcher/launcher.c:1649
 msgid "Unnamed Item"
 msgstr "Element sense nom"
 
-#: ../plugins/launcher/launcher.c:1839
+#: ../plugins/launcher/launcher.c:1837
 msgid "No items"
 msgstr "Sense elements"
 
-#: ../plugins/launcher/launcher-dialog.c:785
+#: ../plugins/launcher/launcher-dialog.c:792
 msgid "Failed to open desktop item editor"
 msgstr "Ha fallat l'obriment de l'editor d'elements de l'escriptori"
 
-#: ../plugins/launcher/launcher-dialog.c:853
+#: ../plugins/launcher/launcher-dialog.c:860
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Si esborreu un element, se suprimirà permanentment"
 
-#: ../plugins/launcher/launcher-dialog.c:854
+#: ../plugins/launcher/launcher-dialog.c:861
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Esteu segur que voleu suprimir «%s»?"
 
-#: ../plugins/launcher/launcher-dialog.c:855
+#: ../plugins/launcher/launcher-dialog.c:862
 msgid "Unnamed item"
 msgstr "Element sense nom"
 
@@ -1667,15 +1670,15 @@ msgstr "Avançat"
 msgid "Program launcher with optional menu"
 msgstr "Llançador de programes amb el menu opcional"
 
-#: ../plugins/pager/pager.c:548 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:557 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "Ajust_s de l'espai de treball..."
 
-#: ../plugins/pager/pager.c:636
+#: ../plugins/pager/pager.c:645
 msgid "Unable to open the workspace settings"
 msgstr "No es poden obrir els ajusts de l'espai de treball"
 
-#: ../plugins/pager/pager-buttons.c:590 ../plugins/windowmenu/windowmenu.c:873
+#: ../plugins/pager/pager-buttons.c:590 ../plugins/windowmenu/windowmenu.c:876
 #, c-format
 msgid "Workspace %d"
 msgstr "Espai de treball %d"
@@ -1981,36 +1984,36 @@ msgstr "Mostra les finestres de tots els mo_nitors"
 msgid "Show only _minimized windows"
 msgstr "Mostra només les finestres _minimitzades"
 
-#: ../plugins/tasklist/tasklist-widget.c:2957
+#: ../plugins/tasklist/tasklist-widget.c:2992
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "No es pot iniciar una instància nova de '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:2961
+#: ../plugins/tasklist/tasklist-widget.c:2996
 msgid "Error"
 msgstr "Error"
 
-#: ../plugins/tasklist/tasklist-widget.c:3005
-msgid "Launch New Instance..."
-msgstr "Inicia una instància nova..."
+#: ../plugins/tasklist/tasklist-widget.c:3040
+msgid "Launch New Instance"
+msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3754
+#: ../plugins/tasklist/tasklist-widget.c:3794
 msgid "Mi_nimize All"
 msgstr "Mi_nimitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3762
+#: ../plugins/tasklist/tasklist-widget.c:3802
 msgid "Un_minimize All"
 msgstr "De_sminimitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3770
+#: ../plugins/tasklist/tasklist-widget.c:3810
 msgid "Ma_ximize All"
 msgstr "Ma_ximitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3778
+#: ../plugins/tasklist/tasklist-widget.c:3818
 msgid "_Unmaximize All"
 msgstr "Des_maximitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3790
+#: ../plugins/tasklist/tasklist-widget.c:3830
 msgid "_Close All"
 msgstr "_Tanca-ho tot"
 
@@ -2018,7 +2021,7 @@ msgstr "_Tanca-ho tot"
 msgid "Switch between open windows using buttons"
 msgstr "Canvieu entre les finestres obertes mitjançant botons"
 
-#: ../plugins/windowmenu/windowmenu.c:670
+#: ../plugins/windowmenu/windowmenu.c:673
 msgid "Desktop"
 msgstr "Escriptori"
 
