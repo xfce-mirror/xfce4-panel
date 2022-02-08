@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-03 00:45+0100\n"
-"PO-Revision-Date: 2020-11-02 23:45+0000\n"
+"POT-Creation-Date: 2022-02-08 00:47+0100\n"
+"PO-Revision-Date: 2022-02-07 23:47+0000\n"
 "Last-Translator: Xfce Bot <transifex@xfce.org>\n"
 "Language-Team: Korean (http://www.transifex.com/xfce/xfce4-panel/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -40,7 +40,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panels;패널;창;settings;설정;preferences;기본설정;기본 설정;taskbar;작업표시줄;작업 표시줄;autohide;자동숨김;자동 숨김;application menu;프로그램메뉴;프로그램 메뉴;어플리케이션 메뉴;어플리케이션메뉴start;시작;buttons;버튼;보턴;단추;launcher;실행아이콘;실행 아이콘;notification area;알림영역;알림 영역;status;상태;icons;아이콘;plugins;플러그인;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2950
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2975
 msgid "Panel"
 msgstr "패널"
 
@@ -49,64 +49,65 @@ msgid "Customize the panel"
 msgstr "패널 개별 설정"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1105
+#: ../libxfce4panel/xfce-panel-plugin.c:1080
 #: ../panel/panel-preferences-dialog.c:1321
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "\"%s\"을(를) 정말로 없애시렵니까?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1110
+#: ../libxfce4panel/xfce-panel-plugin.c:1085
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "항목을 패널에서 제거하면 설정도 지워집니다."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-dialogs.c:163
+#: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
 #: ../plugins/directorymenu/directorymenu.c:473
-#: ../plugins/directorymenu/directorymenu.c:938
+#: ../plugins/directorymenu/directorymenu.c:941
 msgid "_Cancel"
 msgstr "취소(_C)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1112
-#: ../libxfce4panel/xfce-panel-plugin.c:1287
-#: ../panel/panel-plugin-external.c:443
+#: ../libxfce4panel/xfce-panel-plugin.c:1087
+#: ../libxfce4panel/xfce-panel-plugin.c:1262
+#: ../panel/panel-plugin-external.c:450
 #: ../panel/panel-preferences-dialog.c:961
 #: ../panel/panel-preferences-dialog.c:1327
-#: ../plugins/launcher/launcher-dialog.c:852
+#: ../panel/panel-preferences-dialog.glade.h:59
+#: ../plugins/launcher/launcher-dialog.c:859
 msgid "_Remove"
 msgstr "제거(_R)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1237
+#: ../libxfce4panel/xfce-panel-plugin.c:1212
 msgid "_Properties"
 msgstr "속성(_P)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1252 ../panel/panel-window.c:3038
+#: ../libxfce4panel/xfce-panel-plugin.c:1227 ../panel/panel-window.c:3066
 msgid "_About"
 msgstr "정보(_A)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1267
+#: ../libxfce4panel/xfce-panel-plugin.c:1242
 msgid "_Move"
 msgstr "이동(_M)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1308
+#: ../libxfce4panel/xfce-panel-plugin.c:1283
 msgid "Pane_l"
 msgstr "패널(_L)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1317 ../panel/panel-window.c:2963
+#: ../libxfce4panel/xfce-panel-plugin.c:1292 ../panel/panel-window.c:2988
 msgid "Add _New Items..."
 msgstr "새 항목 추가(_N)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1332 ../panel/panel-window.c:2978
+#: ../libxfce4panel/xfce-panel-plugin.c:1307 ../panel/panel-window.c:3003
 msgid "Panel Pr_eferences..."
 msgstr "패널 기본 설정(_E)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-window.c:3010
+#: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:3035
 msgid "Log _Out"
 msgstr "로그아웃(_O)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1373 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3029
+#: ../libxfce4panel/xfce-panel-plugin.c:1348 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3055
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -119,7 +120,7 @@ msgstr "로그아웃(_O)"
 msgid "_Help"
 msgstr "도움말(_H)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1388
+#: ../libxfce4panel/xfce-panel-plugin.c:1363
 msgid "About"
 msgstr "정보"
 
@@ -166,78 +167,79 @@ msgstr "시작시 창 관리자 기다리지 않기"
 msgid "Print version information and exit"
 msgstr "버전 정보를 출력하고 끝내기"
 
-#: ../panel/main.c:207
+#: ../panel/main.c:208
 #, c-format
 msgid "Name %s lost on the message dbus, exiting."
 msgstr "메시지 dbus에서 %s를 찾을 수 없습니다, 마무리하겠습니다."
 
 #. parse context options
-#: ../panel/main.c:268
+#: ../panel/main.c:270
 msgid "[ARGUMENTS...]"
 msgstr "<인자...>"
 
-#: ../panel/main.c:275
+#: ../panel/main.c:277
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "사용방법을 보려면 \"%s --help\"를 입력하십시오."
 
-#: ../panel/main.c:294
+#: ../panel/main.c:296
 msgid "The Xfce development team. All rights reserved."
 msgstr "XFCE 개발 팀. All rights reserved."
 
-#: ../panel/main.c:295
+#: ../panel/main.c:297
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "<%s>(으)로 버그를 알려주십시오."
 
-#: ../panel/main.c:361
+#. quit without error if an instance is running
+#: ../panel/main.c:395
 msgid "There is already a running instance"
 msgstr "이미 실행 중인 인스턴스가 있습니다"
 
 #. spawn ourselfs again
-#: ../panel/main.c:404
+#: ../panel/main.c:403
 msgid "Restarting..."
 msgstr "다시 시작하는 중..."
 
-#: ../panel/main.c:419
+#: ../panel/main.c:418
 msgid "Failed to show the preferences dialog"
 msgstr "기본 설정 대화상자 표시에 실패했습니다"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:420
 msgid "Failed to show the add new items dialog"
 msgstr "새 항목 추가 대화상자 표시에 실패했습니다"
 
-#: ../panel/main.c:423
+#: ../panel/main.c:422
 msgid "Failed to save the panel configuration"
 msgstr "패널 설정 저장에 실패했습니다"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:424
 msgid "Failed to add a plugin to the panel"
 msgstr "패널 플러그인 추가에 실패했습니다"
 
-#: ../panel/main.c:427
+#: ../panel/main.c:426
 msgid "Failed to restart the panel"
 msgstr "패널 다시 시작에 실패했습니다"
 
-#: ../panel/main.c:429
+#: ../panel/main.c:428
 msgid "Failed to quit the panel"
 msgstr "패널 끝내기에 실패했습니다"
 
-#: ../panel/main.c:431
+#: ../panel/main.c:430
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus 메시지를 보내는데 실패했습니다"
 
-#: ../panel/main.c:441
+#: ../panel/main.c:440
 msgid "Execute"
 msgstr "실행"
 
-#: ../panel/main.c:442
+#: ../panel/main.c:441
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "패널을 시작하시렵니까? 패널을 시작 하면 로그아웃시 세션을 저장하는지 확인하여 다음 로그인시 패널이 자동으로 시작하도록 합니다."
 
-#: ../panel/main.c:445 ../panel/main.c:459
+#: ../panel/main.c:444 ../panel/main.c:458
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "실행 중인 %s 인스턴스가 없습니다"
@@ -246,37 +248,37 @@ msgstr "실행 중인 %s 인스턴스가 없습니다"
 msgid "Failed to launch the migration application"
 msgstr "마이그레이션 프로그램을 실행하는데 실패했습니다"
 
-#: ../panel/panel-application.c:984
+#: ../panel/panel-application.c:985
 msgid "Create _Launcher"
 msgstr "실행 아이콘 만들기(_L)"
 
-#: ../panel/panel-application.c:985
+#: ../panel/panel-application.c:986
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "패널에 새 실행 아이콘 플러그인을 만들고 파일을 메뉴 항목으로 넣습니다."
 
-#: ../panel/panel-application.c:987
+#: ../panel/panel-application.c:988
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "데스크톱 파일 %d개에 대한 새 실행 아이콘 만들기"
 
-#: ../panel/panel-application.c:1727
+#: ../panel/panel-application.c:1728
 msgid "Quit"
 msgstr "끝내기"
 
-#: ../panel/panel-application.c:1728
+#: ../panel/panel-application.c:1729
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "세션 매니저 없이 X를 시작했습니다. 나가기를 누르면 X 서버가 닫힙니다."
 
-#: ../panel/panel-application.c:1729
+#: ../panel/panel-application.c:1730
 msgid "Are you sure you want to quit the panel?"
 msgstr "정말 패널을 종료하시렵니까?"
 
-#: ../panel/panel-application.c:1737
+#: ../panel/panel-application.c:1738
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" 명령을 실행하지 못 했습니다."
@@ -311,6 +313,7 @@ msgid "Add New Item"
 msgstr "새 항목 추가"
 
 #: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:201
+#: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "추가(_A)"
@@ -362,12 +365,12 @@ msgstr "검색(_S):"
 msgid "Enter search phrase here"
 msgstr "검색 문구를 여기에 입력합니다"
 
-#: ../panel/panel-plugin-external.c:436
+#: ../panel/panel-plugin-external.c:443
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "플러그인 \"%s\"을(를) 예기치 않게 패널에서 제거했습니다. 다시 시작 하시렵니까?"
 
-#: ../panel/panel-plugin-external.c:438
+#: ../panel/panel-plugin-external.c:445
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -375,7 +378,7 @@ msgid ""
 "permanently removed from the panel."
 msgstr "최근 %d 초 안에 플러그인을 한 번 이상 다시 시작했습니다. 패널 실행을 누르시면 플러그인 다시 시작을 시도할 것이고, 그렇지 않으면 패널에서 완전히 제거합니다."
 
-#: ../panel/panel-plugin-external.c:442
+#: ../panel/panel-plugin-external.c:449
 msgid "_Execute"
 msgstr "실행(_E)"
 
@@ -642,17 +645,7 @@ msgstr "마우스 포인터가 패널 위로 올라가지 않았을 때의 투�
 msgid "Appeara_nce"
 msgstr "모양새(_N)"
 
-#: ../panel/panel-preferences-dialog.glade.h:57
-#: ../plugins/launcher/launcher-dialog.glade.h:21
-msgid "Move currently selected item up by one row"
-msgstr "현재 선택한 목록을 한 줄 위로 옮기기"
-
 #: ../panel/panel-preferences-dialog.glade.h:58
-#: ../plugins/launcher/launcher-dialog.glade.h:22
-msgid "Move currently selected item down by one row"
-msgstr "현재 선택한 목록을 한 줄 아래로 옮기기"
-
-#: ../panel/panel-preferences-dialog.glade.h:59
 msgid "Add new item to this panel"
 msgstr "패널에 새 항목 추가"
 
@@ -670,6 +663,16 @@ msgid "Show about information of the currently selected item"
 msgstr "현재 선택한 항목의 정보에 대해 표시"
 
 #: ../panel/panel-preferences-dialog.glade.h:63
+#: ../plugins/launcher/launcher-dialog.glade.h:21
+msgid "Move currently selected item up by one row"
+msgstr "현재 선택한 목록을 한 줄 위로 옮기기"
+
+#: ../panel/panel-preferences-dialog.glade.h:64
+#: ../plugins/launcher/launcher-dialog.glade.h:22
+msgid "Move currently selected item down by one row"
+msgstr "현재 선택한 목록을 한 줄 아래로 옮기기"
+
+#: ../panel/panel-preferences-dialog.glade.h:65
 msgid "Ite_ms"
 msgstr "항목(_M)"
 
@@ -697,7 +700,7 @@ msgstr "숙련자"
 msgid "Expert"
 msgstr "전문가"
 
-#: ../panel/panel-window.c:2995
+#: ../panel/panel-window.c:3020
 msgid "_Lock Panel"
 msgstr "패널 고정(_L)"
 
@@ -1011,7 +1014,7 @@ msgstr "확인(_O)"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2517
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2519
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" 명령 실행에 실패했습니다."
@@ -1413,69 +1416,69 @@ msgstr "몇 시죠?"
 msgid "Directory Menu"
 msgstr "디렉터리 메뉴"
 
-#: ../plugins/directorymenu/directorymenu.c:689
+#: ../plugins/directorymenu/directorymenu.c:692
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "\"%s\" 프로그램을 실행하는데 실패했습니다"
 
-#: ../plugins/directorymenu/directorymenu.c:721
+#: ../plugins/directorymenu/directorymenu.c:724
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "\"%s\"의 내용 형식을 요청하는데 실패했습니다"
 
-#: ../plugins/directorymenu/directorymenu.c:730
+#: ../plugins/directorymenu/directorymenu.c:733
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "\"%s\"에 대한 기본 프로그램을 찾을 수 없습니다"
 
-#: ../plugins/directorymenu/directorymenu.c:746
+#: ../plugins/directorymenu/directorymenu.c:749
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "\"%s\"에 대한 기본 프로그램을 실행하는데 실패했습니다"
 
-#: ../plugins/directorymenu/directorymenu.c:844
+#: ../plugins/directorymenu/directorymenu.c:847
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "\"%s\" 카테고리에 대한 기본 프로그램을 실행하는데 실패했습니다"
 
-#: ../plugins/directorymenu/directorymenu.c:927
+#: ../plugins/directorymenu/directorymenu.c:930
 msgid "Create New Folder"
 msgstr "새 폴더를 만듭니다"
 
-#: ../plugins/directorymenu/directorymenu.c:932
+#: ../plugins/directorymenu/directorymenu.c:935
 msgid "Create New Text Document"
 msgstr "새 텍스트 문서 만들기"
 
-#: ../plugins/directorymenu/directorymenu.c:939
+#: ../plugins/directorymenu/directorymenu.c:942
 msgid "C_reate"
 msgstr "만들기(_R)"
 
-#: ../plugins/directorymenu/directorymenu.c:940
+#: ../plugins/directorymenu/directorymenu.c:943
 msgid "Create & _Open"
 msgstr "만들고 열기(_O)"
 
-#: ../plugins/directorymenu/directorymenu.c:954
+#: ../plugins/directorymenu/directorymenu.c:957
 msgid "Enter the new name:"
 msgstr "새 이름 입력:"
 
-#: ../plugins/directorymenu/directorymenu.c:990
+#: ../plugins/directorymenu/directorymenu.c:993
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "폴더 만들기 실패: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1075
+#: ../plugins/directorymenu/directorymenu.c:1078
 msgid "Open Folder"
 msgstr "폴더 열기"
 
-#: ../plugins/directorymenu/directorymenu.c:1092
+#: ../plugins/directorymenu/directorymenu.c:1095
 msgid "Open in Terminal"
 msgstr "터미널에서 열기"
 
-#: ../plugins/directorymenu/directorymenu.c:1109
+#: ../plugins/directorymenu/directorymenu.c:1112
 msgid "Create Folder..."
 msgstr "폴더 만들기..."
 
-#: ../plugins/directorymenu/directorymenu.c:1126
+#: ../plugins/directorymenu/directorymenu.c:1129
 msgid "Create Text Document..."
 msgstr "텍스트 문서 만들기..."
 
@@ -1536,28 +1539,28 @@ msgstr "필터링"
 msgid "Open launcher menu"
 msgstr "실행 아이콘 메뉴 열기"
 
-#: ../plugins/launcher/launcher.c:1651
+#: ../plugins/launcher/launcher.c:1649
 msgid "Unnamed Item"
 msgstr "이름 없는 항목"
 
-#: ../plugins/launcher/launcher.c:1839
+#: ../plugins/launcher/launcher.c:1837
 msgid "No items"
 msgstr "항목 없음"
 
-#: ../plugins/launcher/launcher-dialog.c:785
+#: ../plugins/launcher/launcher-dialog.c:792
 msgid "Failed to open desktop item editor"
 msgstr "데스크톱 항목 편집기를 여는데 실패했습니다"
 
-#: ../plugins/launcher/launcher-dialog.c:853
+#: ../plugins/launcher/launcher-dialog.c:860
 msgid "If you delete an item, it will be permanently removed"
 msgstr "항목을 삭제하면, 완전히 제거합니다"
 
-#: ../plugins/launcher/launcher-dialog.c:854
+#: ../plugins/launcher/launcher-dialog.c:861
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "\"%s\"을(를) 정말 제거하시렵니까?"
 
-#: ../plugins/launcher/launcher-dialog.c:855
+#: ../plugins/launcher/launcher-dialog.c:862
 msgid "Unnamed item"
 msgstr "이름 없는 항목"
 
@@ -1668,15 +1671,15 @@ msgstr "고급"
 msgid "Program launcher with optional menu"
 msgstr "선택 메뉴가 있는 프로그램 실행 아이콘입니다"
 
-#: ../plugins/pager/pager.c:548 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:557 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "작업 공간 설정(_S)..."
 
-#: ../plugins/pager/pager.c:636
+#: ../plugins/pager/pager.c:645
 msgid "Unable to open the workspace settings"
 msgstr "작업 공간 설정을 열 수 없습니다"
 
-#: ../plugins/pager/pager-buttons.c:590 ../plugins/windowmenu/windowmenu.c:873
+#: ../plugins/pager/pager-buttons.c:590 ../plugins/windowmenu/windowmenu.c:876
 #, c-format
 msgid "Workspace %d"
 msgstr "작업 공간 %d"
@@ -1982,36 +1985,36 @@ msgstr "모든 모니터의 창 표시(_N)"
 msgid "Show only _minimized windows"
 msgstr "숨겨둔 창만 표시(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:2957
+#: ../plugins/tasklist/tasklist-widget.c:2992
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "새 '%s' 인스턴스를 시작할 수 없습니다"
 
-#: ../plugins/tasklist/tasklist-widget.c:2961
+#: ../plugins/tasklist/tasklist-widget.c:2996
 msgid "Error"
 msgstr "오류"
 
-#: ../plugins/tasklist/tasklist-widget.c:3005
-msgid "Launch New Instance..."
-msgstr "새 인스턴스 실행..."
+#: ../plugins/tasklist/tasklist-widget.c:3040
+msgid "Launch New Instance"
+msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3754
+#: ../plugins/tasklist/tasklist-widget.c:3794
 msgid "Mi_nimize All"
 msgstr "모두 최소화(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3762
+#: ../plugins/tasklist/tasklist-widget.c:3802
 msgid "Un_minimize All"
 msgstr "모두 최소화 취소(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3770
+#: ../plugins/tasklist/tasklist-widget.c:3810
 msgid "Ma_ximize All"
 msgstr "모두 최대화(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3778
+#: ../plugins/tasklist/tasklist-widget.c:3818
 msgid "_Unmaximize All"
 msgstr "모두 최대화 취소(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3790
+#: ../plugins/tasklist/tasklist-widget.c:3830
 msgid "_Close All"
 msgstr "모두 닫기(_C)"
 
@@ -2019,7 +2022,7 @@ msgstr "모두 닫기(_C)"
 msgid "Switch between open windows using buttons"
 msgstr "단추를 사용하여 열려있는 창을 전환합니다"
 
-#: ../plugins/windowmenu/windowmenu.c:670
+#: ../plugins/windowmenu/windowmenu.c:673
 msgid "Desktop"
 msgstr "데스크톱"
 
