@@ -2992,7 +2992,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
       gtk_widget_show (item);
 
-      image = gtk_image_new_from_icon_name ("list-add", GTK_ICON_SIZE_MENU);
+      image = gtk_image_new_from_icon_name ("list-add-symbolic", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
@@ -3007,7 +3007,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
       gtk_widget_show (item);
 
-      image = gtk_image_new_from_icon_name ("preferences-system", GTK_ICON_SIZE_MENU);
+      image = gtk_image_new_from_icon_name ("preferences-system-symbolic", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
@@ -3039,7 +3039,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_show (item);
 
-  image = gtk_image_new_from_icon_name ("system-log-out", GTK_ICON_SIZE_MENU);
+  image = gtk_image_new_from_icon_name ("system-log-out-symbolic", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
@@ -3050,7 +3050,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   gtk_widget_show (item);
 
   /* help item */
-  image = gtk_image_new_from_icon_name ("help-browser", GTK_ICON_SIZE_MENU);
+  image = gtk_image_new_from_icon_name ("help-contents-symbolic", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   item = gtk_image_menu_item_new_with_mnemonic (_("_Help"));
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
@@ -3061,7 +3061,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   gtk_widget_show (item);
 
   /* about item */
-  image = gtk_image_new_from_icon_name ("help-about", GTK_ICON_SIZE_MENU);
+  image = gtk_image_new_from_icon_name ("help-about-symbolic", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   item = gtk_image_menu_item_new_with_mnemonic (_("_About"));
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
