@@ -5,7 +5,7 @@
 # Translators:
 # Nikola Radovanović <cobisimo@gmail.com>, 2018
 # Саша Петровић <salepetronije@gmail.com>, 2012
-# Саша Петровић <salepetronije@gmail.com>, 2012-2014,2017,2019
+# Саша Петровић <salepetronije@gmail.com>, 2012-2014,2017,2019,2022
 # Саша Петровић <salepetronije@gmail.com>, 2017
 # Саша Петровић <salepetronije@gmail.com>, 2017,2019
 # Саша Петровић <salepetronije@gmail.com>, 2017,2019-2020
@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-08 00:47+0100\n"
-"PO-Revision-Date: 2022-02-07 23:47+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
+"PO-Revision-Date: 2022-02-10 18:44+0000\n"
+"Last-Translator: Саша Петровић <salepetronije@gmail.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/xfce/xfce4-panel/language/sr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -99,7 +99,7 @@ msgstr "Додај _нове ставке..."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1307 ../panel/panel-window.c:3003
 msgid "Panel Pr_eferences..."
-msgstr "По_дешавања полице..."
+msgstr "Сво_јства полице..."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:3035
 msgid "Log _Out"
@@ -117,7 +117,7 @@ msgstr "Одја_ва"
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "_Help"
-msgstr "_Помоћи"
+msgstr "_Помоћ"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1363
 msgid "About"
@@ -125,7 +125,7 @@ msgstr "О програму"
 
 #: ../panel/main.c:81
 msgid "Show the 'Panel Preferences' dialog"
-msgstr "Приказује прозорче „Особине полице“"
+msgstr "Приказује прозорче „Својства полице“"
 
 #: ../panel/main.c:81 ../panel/main.c:82
 msgid "PANEL-NUMBER"
@@ -149,11 +149,11 @@ msgstr "НАЗИВ-ПРИКЉУЧКА"
 
 #: ../panel/main.c:85
 msgid "Restart the running panel instance"
-msgstr "Поново покреће примерак покренуте полице"
+msgstr "Поново покрени примерак покренуте полице"
 
 #: ../panel/main.c:86
 msgid "Quit the running panel instance"
-msgstr "Обуставља примерак полице у погону"
+msgstr "Обустави примерак полице у погону"
 
 #: ../panel/main.c:87
 msgid "Do not wait for a window manager on startup"
@@ -164,7 +164,7 @@ msgstr "Не чекај управника прозора при покрета�
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
-msgstr "Приказује податке о издању и излази"
+msgstr "Испиши податке о издању и изађи"
 
 #: ../panel/main.c:208
 #, c-format
@@ -273,7 +273,7 @@ msgstr "Одустани"
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "Покренули сте Икс без управника седниице. Клик на „Изађи“ ће затворити Икс-сервер."
+msgstr "Покренули сте Икс без управника седниице. Клик на „Изађи“ ће затворити Икс-служитеља."
 
 #: ../panel/panel-application.c:1730
 msgid "Are you sure you want to quit the panel?"
@@ -473,7 +473,7 @@ msgstr "Позадинска слика"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "Panel Preferences"
-msgstr "Особине полице"
+msgstr "Својства полице"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Profiles:"
@@ -485,7 +485,7 @@ msgstr "_Сачувај и поврати"
 
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Switch between panel presets"
-msgstr "Промени образац полици"
+msgstr "Мењај предложене образаце полице"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Add a new panel"
@@ -509,7 +509,7 @@ msgstr "Испуни при_казе"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr "Изаберите ову могућност за проширење полице на више екрана."
+msgstr "Изаберите ову могућност за проширење полице на више заслона."
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "_Lock panel"
@@ -528,7 +528,7 @@ msgstr "Не _чувај простор на границама"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "Изаберите ову могућност ако желите да увећани прозор прекрије простор иза полице. Ово ради једино када је полица припојена ивици екрана."
+msgstr "Изаберите ову могућност ако желите да увећани прозор прекрије простор иза полице. Ово ради једино када је полица припојена ивици заслона."
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
@@ -778,11 +778,11 @@ msgstr "_Прикажи позорче потврђивања"
 #: ../plugins/actions/actions-dialog.glade.h:16
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Прикажи прозорче потврђивања са временом истека од 30 за неку од радњи."
+msgstr "Прикажи прозорче потврђивања са временом истека од 30 секунди за неко од дејстава."
 
 #: ../plugins/actions/actions-dialog.glade.h:17
 msgid "_Actions"
-msgstr "_Радње"
+msgstr "_Дејства"
 
 #: ../plugins/actions/actions.c:165
 msgid "Log Out"
@@ -819,11 +819,11 @@ msgstr "_Промени корисника"
 
 #: ../plugins/actions/actions.c:190
 msgid "Lock Screen"
-msgstr "Закључај екран"
+msgstr "Закључај заслон"
 
 #: ../plugins/actions/actions.c:191
 msgid "Loc_k Screen"
-msgstr "Закључа_ј екран"
+msgstr "Закључа_ј заслон"
 
 #: ../plugins/actions/actions.c:198
 msgid "Hibernate"
@@ -852,7 +852,7 @@ msgstr "Укрштено успављивање"
 
 #: ../plugins/actions/actions.c:209
 msgid "Do you want to hibernate and suspend the system?"
-msgstr "Да ли желите замрзнути или успавати рачунар?"
+msgstr "Да ли желите замрзнути или обуставити рачунар?"
 
 #: ../plugins/actions/actions.c:210
 #, c-format
@@ -891,7 +891,7 @@ msgstr "Да ли сте сигурни да желите поново да по
 #: ../plugins/actions/actions.c:228
 #, c-format
 msgid "Restarting computer in %d seconds."
-msgstr "Поново ћу покренути за %d секунде."
+msgstr "Поново ћу покренути кроз %d секунде."
 
 #: ../plugins/actions/actions.c:234
 msgid "Shut Down"
@@ -1066,11 +1066,11 @@ msgstr "Седмица %V"
 
 #: ../plugins/clock/clock.c:465
 msgid "Failed to execute clock command"
-msgstr "Нисам успео да извршим наредбу сата"
+msgstr "Нисам успео да извршим наредбу часовника"
 
 #: ../plugins/clock/clock.c:894
 msgid "Custom Format"
-msgstr "Прилагођени облик"
+msgstr "Произвољни облик"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
 msgid "Analog"
@@ -1101,7 +1101,7 @@ msgstr "Часовник"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Назив временске области која одговара врменској области склоп. Оставите празно за враћање на месно време."
+msgstr "Назив временске области која одговара врменској области склопа. Оставите празно за враћање на местно време."
 
 #: ../plugins/clock/clock-dialog.glade.h:10
 msgid "Time_zone:"
@@ -1122,7 +1122,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "Облик описује делове приказа дана и времена који се умећу на полицу. На пример, %Y ће бити замењен годином, %m—месецом, %d—даном. Погледајте упутство прибора дана за додатне податке."
+msgstr "Облик описује делове приказа дана и времена који се умећу на полицу. На пример, %Y ће бити замењен годином, %m—месецом, %d—даном. Слично, ознаке <b></b> ће чинити писмо дебелим. Погледајте страницу „Помоћ“ ради додатних података."
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid "_Tooltip format:"
@@ -1150,7 +1150,7 @@ msgstr "Прави _двобројчани часовник"
 
 #: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Display _seconds"
-msgstr "Прикажи _секунде"
+msgstr "Приказуј _секунде"
 
 #: ../plugins/clock/clock-dialog.glade.h:23
 msgid "F_ormat:"
@@ -1168,7 +1168,7 @@ msgstr "Прикажи _мирујуће тачке"
 
 #: ../plugins/clock/clock-dialog.glade.h:27
 msgid "Show gri_d"
-msgstr "Прикажи решетк_у"
+msgstr "Прикажи мреж_у"
 
 #: ../plugins/clock/clock-dialog.glade.h:28
 msgid "Clock Options"
@@ -1194,7 +1194,7 @@ msgstr "Јутро"
 
 #: ../plugins/clock/clock-fuzzy.c:90
 msgid "Almost noon"
-msgstr "Преподне"
+msgstr "Близина поднева"
 
 #: ../plugins/clock/clock-fuzzy.c:91
 msgid "Noon"
@@ -1247,7 +1247,7 @@ msgstr "%0 и двадесет пет"
 #: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "half past %0"
-msgstr "%0 и тридесет"
+msgstr "пола %1"
 
 #: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
@@ -1285,7 +1285,7 @@ msgstr "%1 сати"
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
-msgstr "%0o сати"
+msgstr "%0 сати"
 
 #: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
@@ -1321,7 +1321,7 @@ msgstr "%0 и двадесет пет"
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
-msgstr "%0 и пола"
+msgstr "пола прошло %0"
 
 #: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
@@ -1997,7 +1997,7 @@ msgstr "Грешка"
 
 #: ../plugins/tasklist/tasklist-widget.c:3040
 msgid "Launch New Instance"
-msgstr ""
+msgstr "Покрени нови примерак"
 
 #: ../plugins/tasklist/tasklist-widget.c:3794
 msgid "Mi_nimize All"
