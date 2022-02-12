@@ -1157,7 +1157,7 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
    * do a fast path to the child allocation, i think */
 
   /* useless but hides compiler warning */
-  w = h = x = y = rows = cols = 0;
+  w = x = y = rows = cols = 0;
 
   xfce_tasklist_size_layout (tasklist, &area, &rows, &cols, &arrow_position);
 
