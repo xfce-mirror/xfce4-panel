@@ -958,7 +958,7 @@ panel_preferences_dialog_panel_remove (GtkWidget              *widget,
     return;
 
   toplevel = gtk_widget_get_toplevel (widget);
-  if (xfce_dialog_confirm (GTK_WINDOW (toplevel), "list-remove", _("_Remove"),
+  if (xfce_dialog_confirm (GTK_WINDOW (toplevel), "list-remove-symbolic", _("_Remove"),
           _("The panel and plugin configurations will be permanently removed"),
           _("Are you sure you want to remove panel %d?"),
           panel_window_get_id (dialog->active)))
