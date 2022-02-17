@@ -3588,8 +3588,6 @@ xfce_tasklist_button_new (WnckWindow   *window,
       G_CALLBACK (xfce_tasklist_button_button_release_event), child);
 
   /* monitor window changes */
-  g_signal_connect (G_OBJECT (child->button), "size-allocate",
-      G_CALLBACK (xfce_tasklist_button_size_allocate), child);
   g_signal_connect (G_OBJECT (window), "icon-changed",
       G_CALLBACK (xfce_tasklist_button_icon_changed), child);
   g_signal_connect (G_OBJECT (window), "name-changed",
