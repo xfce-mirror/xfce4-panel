@@ -2896,18 +2896,6 @@ xfce_tasklist_button_geometry_changed2 (WnckWindow        *window,
 
 
 
-static void
-xfce_tasklist_button_size_allocate (GtkWidget         *widget,
-                                    GdkRectangle      *allocation,
-                                    gpointer           user_data)
-{
-  XfceTasklistChild *child = user_data;
-  /* Make sure the icons have the correct size */
-  xfce_tasklist_button_icon_changed (child->window, child);
-}
-
-
-
 #ifdef GDK_WINDOWING_X11
 static void
 xfce_tasklist_button_geometry_changed (WnckWindow        *window,
