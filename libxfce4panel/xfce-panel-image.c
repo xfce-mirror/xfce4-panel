@@ -370,7 +370,7 @@ xfce_panel_image_get_preferred_height (GtkWidget *widget,
   gint                   height, height_min;
 
   if (priv->size > 0)
-    height = height_min = priv->size;
+    height = priv->size;
   else if (priv->pixbuf != NULL)
     height = gdk_pixbuf_get_height (priv->pixbuf);
   else
