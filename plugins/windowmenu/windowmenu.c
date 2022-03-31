@@ -1162,7 +1162,7 @@ window_menu_plugin_menu_key_press_event (GtkWidget   *menu,
   else
     gtk_menu_item_activate (GTK_MENU_ITEM (mi));
 
-  g_signal_emit_by_name (menu, "selection-done");
+  g_signal_emit_by_name (menu, "deactivate");
 
   return FALSE;
 }
@@ -1404,8 +1404,6 @@ window_menu_plugin_menu (GtkWidget        *button,
   /* popup the menu */
   menu = window_menu_plugin_menu_new (plugin);
   g_signal_connect (G_OBJECT (menu), "deactivate",
-      G_CALLBACK (window_menu_plugin_menu_selection_done), button);
-  g_signal_connect (G_OBJECT (menu), "selection-done",
       G_CALLBACK (window_menu_plugin_menu_selection_done), button);
 
   gtk_menu_popup_at_widget (GTK_MENU (menu), button,
