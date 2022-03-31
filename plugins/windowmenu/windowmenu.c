@@ -1162,6 +1162,8 @@ window_menu_plugin_menu_key_press_event (GtkWidget   *menu,
   else
     gtk_menu_item_activate (GTK_MENU_ITEM (mi));
 
+  g_signal_emit_by_name (menu, "deactivate");
+
   return FALSE;
 }
 
