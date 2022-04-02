@@ -3254,11 +3254,10 @@ G_GNUC_END_IGNORE_DEPRECATIONS
                           G_OBJECT (mi), "label",
                           G_BINDING_SYNC_CREATE);
 
-  g_object_bind_property (G_OBJECT (child->label), "label",
-                           G_OBJECT (mi), "tooltip-text",
-                           G_BINDING_SYNC_CREATE);
-
-  gtk_widget_set_has_tooltip (GTK_WIDGET (child->button), tasklist->show_tooltips);
+  if (tasklist->show_tooltips)
+    g_object_bind_property (G_OBJECT (child->label), "label",
+                            G_OBJECT (mi), "tooltip-text",
+                            G_BINDING_SYNC_CREATE);
 
   label = gtk_bin_get_child (GTK_BIN (mi));
   panel_return_val_if_fail (GTK_IS_LABEL (label), NULL);
