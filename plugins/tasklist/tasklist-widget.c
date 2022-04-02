@@ -188,7 +188,6 @@ struct _XfceTasklist
 
   /* dummy properties */
   guint                 show_handle : 1;
-
   guint                 show_tooltips : 1;
 
 #ifdef GDK_WINDOWING_X11
@@ -2262,9 +2261,8 @@ xfce_tasklist_child_new (XfceTasklist *tasklist)
                          tasklist->button_relief);
   gtk_widget_add_events (GTK_WIDGET(child->button), GDK_SCROLL_MASK
                                                   | GDK_SMOOTH_SCROLL_MASK);
-
   g_object_bind_property (tasklist, "show_tooltips", child->button, "has-tooltip",
-                         G_BINDING_SYNC_CREATE);
+                          G_BINDING_SYNC_CREATE);
 
   child->box = gtk_box_new (!xfce_tasklist_vertical (tasklist) ?
       GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL, 6);
@@ -2727,18 +2725,14 @@ xfce_tasklist_button_name_changed (WnckWindow        *window,
   const gchar     *name;
   gchar           *label = NULL;
   GtkStyleContext *ctx;
-  XfceTasklist    *tasklist = child->tasklist;
-
 
   panel_return_if_fail (window == NULL || child->window == window);
   panel_return_if_fail (WNCK_IS_WINDOW (child->window));
   panel_return_if_fail (XFCE_IS_TASKLIST (child->tasklist));
 
   name = wnck_window_get_name (child->window);
-
   gtk_widget_set_tooltip_text (GTK_WIDGET (child->button), name);
-
-  gtk_widget_set_has_tooltip (GTK_WIDGET (child->button), tasklist->show_tooltips);
+  gtk_widget_set_has_tooltip (GTK_WIDGET (child->button), child->tasklist->show_tooltips);
 
   ctx = gtk_widget_get_style_context (child->label);
   gtk_style_context_remove_class (ctx, "label-hidden");
@@ -4447,6 +4441,8 @@ xfce_tasklist_set_button_relief (XfceTasklist   *tasklist,
                              button_relief);
     }
 }
+
+
 
 static void
 xfce_tasklist_set_show_labels (XfceTasklist *tasklist,
