@@ -263,15 +263,9 @@ sn_button_button_press (GtkWidget      *widget,
             g_signal_connect_swapped (G_OBJECT (button->menu), "deactivate",
                                       G_CALLBACK (sn_button_menu_deactivate), button);
 
-#if GTK_CHECK_VERSION(3, 22, 0)
           gtk_menu_popup_at_widget (GTK_MENU (button->menu), widget,
                                     GDK_GRAVITY_NORTH_WEST, GDK_GRAVITY_NORTH_WEST,
                                     (GdkEvent *)event);
-#else
-          gtk_menu_popup (GTK_MENU (button->menu), NULL, NULL,
-                          button->pos_func, button->pos_func_data,
-                          event->button, event->time);
-#endif
 
           gtk_widget_set_state_flags (widget, GTK_STATE_FLAG_ACTIVE, FALSE);
           return TRUE;

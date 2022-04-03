@@ -1479,7 +1479,6 @@ static void
 xfce_panel_plugin_set_dark_mode (XfcePanelPluginProvider *provider,
                                  gboolean                 dark_mode)
 {
-#if GTK_CHECK_VERSION (3, 0, 0)
   XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
   GtkSettings *gtk_settings;
 
@@ -1499,7 +1498,6 @@ xfce_panel_plugin_set_dark_mode (XfcePanelPluginProvider *provider,
                     dark_mode,
                     NULL);
     }
-#endif
 }
 
 
