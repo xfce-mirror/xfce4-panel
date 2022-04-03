@@ -1128,8 +1128,8 @@ window_menu_plugin_menu_key_press_event (GtkWidget   *menu,
       return FALSE;
     }
 
-  /* popdown the menu, this will also update the active item */
-  gtk_menu_popdown (GTK_MENU (menu));
+  /* popdown the menu, this will also emit the "deactivate" signal */
+  gtk_menu_shell_deactivate (GTK_MENU_SHELL (menu));
 
   /* get the active menu item leave when no item if found */
   mi = gtk_menu_get_active (GTK_MENU (menu));
