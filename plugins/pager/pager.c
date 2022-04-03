@@ -266,7 +266,7 @@ pager_plugin_set_property (GObject      *object,
     case PROP_WORKSPACE_SCROLLING:
       plugin->scrolling = g_value_get_boolean (value);
 
-#if WNCK_CHECK_VERSION (3, 40, 0)
+#if WNCK_CHECK_VERSION (3, 36, 0)
       if (plugin->pager != NULL)
         {
           wnck_pager_set_scroll_mode (WNCK_PAGER (plugin->pager),
@@ -476,7 +476,7 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin)
         g_message ("Setting the pager rows returned false. Maybe the setting is not applied.");
 
       wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
-#if WNCK_CHECK_VERSION (3, 40, 0)
+#if WNCK_CHECK_VERSION (3, 36, 0)
       wnck_pager_set_scroll_mode (WNCK_PAGER (plugin->pager),
                                   plugin->scrolling ?
                                   WNCK_PAGER_SCROLL_1D :
@@ -742,7 +742,7 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                           G_OBJECT (plugin->scrolling_switch), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
-#if !(WNCK_CHECK_VERSION (3, 40, 0))
+#if !(WNCK_CHECK_VERSION (3, 36, 0))
   g_object_bind_property (G_OBJECT (plugin), "miniature-view",
                           G_OBJECT (plugin->scrolling_switch), "visible",
                           G_BINDING_SYNC_CREATE | G_BINDING_DEFAULT | G_BINDING_INVERT_BOOLEAN);
