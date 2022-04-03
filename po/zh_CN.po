@@ -15,16 +15,16 @@
 # wwj402 <wwj402@gmail.com>, 2018
 # 玉堂白鹤 <yjwork@qq.com>, 2013
 # Yongtao Yang <yongtao.yang@telia.com>, 2004
-# Xiaobo Zhou <zhouxiaobo.500@gmail.com>, 2013-2014
+# Cally Mal <zhouxiaobo.500@gmail.com>, 2013-2014
 # 玉堂 白鹤 <squeeze@189.cn>, 2010
 # 玉堂白鹤 <yjwork@qq.com>, 2015,2017-2020,2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 00:47+0100\n"
-"PO-Revision-Date: 2022-02-11 05:04+0000\n"
-"Last-Translator: 玉堂白鹤 <yjwork@qq.com>\n"
+"POT-Creation-Date: 2022-04-03 00:47+0200\n"
+"PO-Revision-Date: 2013-07-02 20:26+0000\n"
+"Last-Translator: 玉堂白鹤 <yjwork@qq.com>, 2015,2017-2020,2022\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/xfce/xfce4-panel/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -313,7 +313,7 @@ msgstr "Xfce 桌面环境的面板"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr "Yongtao Yang <yongtao.yang@telia.com>, 2004.\nHuang Huan <unicon221@gmail.com>, 2006.\nJick Nan <jick.nan@gmail.com>, 2006.\nwuli <wurisky@gmail.com>, 2007, 2008.\nHunt Xu <huntxu@live.cn>, 2008, 2009, 2010.\nChris K. Zhang <plutino@gmail.com>, 2009.\nAron Xu <aronmalache@163.com>, 2009.\n玉堂白鹤 <yjwork@qq.com>, 2010,2020.\nChipong Luo <chipong.luo@yahoo.com>, 2011, 2012."
+msgstr "Yongtao Yang <yongtao.yang@telia.com>, 2004.\nHuang Huan <unicon221@gmail.com>, 2006.\nJick Nan <jick.nan@gmail.com>, 2006.\nwuli <wurisky@gmail.com>, 2007, 2008.\nHunt Xu <huntxu@live.cn>, 2008, 2009, 2010.\nChris K. Zhang <plutino@gmail.com>, 2009.\nAron Xu <aronmalache@163.com>, 2009.\n玉堂白鹤 <yjwork@qq.com>, 2010,2020, 2021, 2022.\nChipong Luo <chipong.luo@yahoo.com>, 2011, 2012."
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:14
@@ -976,7 +976,7 @@ msgstr "选择此项在菜单中显示通用应用程序名称，比如用 “�
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Appearance"
 msgstr "外观"
@@ -1538,7 +1538,7 @@ msgid "_File Pattern:"
 msgstr "文件类型(_F)："
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:16
-#: ../plugins/tasklist/tasklist-dialog.glade.h:29
+#: ../plugins/tasklist/tasklist-dialog.glade.h:30
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
 msgstr "过滤"
@@ -1954,75 +1954,79 @@ msgid "Show _handle"
 msgstr "显示控制器(_H)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
+msgid "Show _tooltips"
+msgstr "显示工具提示(_T)"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Sorting _order:"
 msgstr "排列顺序(_O)："
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window _grouping:"
 msgstr "窗口组(_G)："
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Mi_ddle click action:"
 msgstr "中键点击动作(_D)："
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "Restore minimized windows to current _workspace"
 msgstr "在当前工作区恢复已最小化的窗口(_W)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:23
+#: ../plugins/tasklist/tasklist-dialog.glade.h:24
 msgid "D_raw window frame when hovering a button"
 msgstr "停在按钮上时绘制窗口边框(_R)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "_Switch windows using the mouse wheel"
 msgstr "使用鼠标滚轮切换窗口(_S)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+#: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Behaviour"
 msgstr "行为"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:26
+#: ../plugins/tasklist/tasklist-dialog.glade.h:27
 msgid "Show windows from _all workspaces or viewports"
 msgstr "从所有工作区或视口显示窗口(_A)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:27
+#: ../plugins/tasklist/tasklist-dialog.glade.h:28
 msgid "Show windows from all mo_nitors"
 msgstr "从所有显示器显示窗口(_N)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:28
+#: ../plugins/tasklist/tasklist-dialog.glade.h:29
 msgid "Show only _minimized windows"
 msgstr "仅显示已最小化的窗口(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:2992
+#: ../plugins/tasklist/tasklist-widget.c:3001
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "无法启动新实例 '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:2996
+#: ../plugins/tasklist/tasklist-widget.c:3005
 msgid "Error"
 msgstr "错误"
 
-#: ../plugins/tasklist/tasklist-widget.c:3040
+#: ../plugins/tasklist/tasklist-widget.c:3049
 msgid "Launch New Instance"
 msgstr "启动新实例"
 
-#: ../plugins/tasklist/tasklist-widget.c:3794
+#: ../plugins/tasklist/tasklist-widget.c:3803
 msgid "Mi_nimize All"
 msgstr "全部最小化(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3802
+#: ../plugins/tasklist/tasklist-widget.c:3811
 msgid "Un_minimize All"
 msgstr "最小化全部取消(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3810
+#: ../plugins/tasklist/tasklist-widget.c:3819
 msgid "Ma_ximize All"
 msgstr "全部最大化(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3818
+#: ../plugins/tasklist/tasklist-widget.c:3827
 msgid "_Unmaximize All"
 msgstr "最大化全部取消(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3830
+#: ../plugins/tasklist/tasklist-widget.c:3839
 msgid "_Close All"
 msgstr "全部关闭(_C)"
 
