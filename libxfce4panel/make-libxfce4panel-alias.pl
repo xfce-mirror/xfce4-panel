@@ -33,6 +33,15 @@ print <<EOF;
 
 #include <glib.h>
 
+/*
+ * Silence '-Wredundant-decls' warnings from 'libxfce4panel_*_version'.
+ * GCC 4.6 is required, see https://gcc.gnu.org/gcc-4.6/changes.html
+ */
+#if G_GNUC_CHECK_VERSION (4, 6)
+# pragma GCC diagnostic push
+# pragma GCC diagnostic ignored "-Wredundant-decls"
+#endif
+
 EOF
 
 my $in_comment = 0;
@@ -147,6 +156,10 @@ EOF
   }
 
 print <<EOF;
+
+#if G_GNUC_CHECK_VERSION (4, 6)
+# pragma GCC diagnostic pop
+#endif
 
 #endif /* HAVE_GNUC_VISIBILITY */
 EOF
