@@ -138,6 +138,8 @@ fi
 dnl ***********************************
 dnl *** Check for required packages ***
 dnl ***********************************
+AC_DEFINE(GLIB_VERSION_MAX_ALLOWED, GLIB_VERSION_2_50, Warn when using post 2_50 APIs)
+AC_DEFINE(GLIB_VERSION_MIN_REQUIRED, GLIB_VERSION_2_50, Don't warn about post 2_50 deprecations)
 XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.15.6])
 XDT_CHECK_PACKAGE([GARCON], [garcon-1], [0.5.0])
 XDT_CHECK_PACKAGE([GARCON_GTK3], [garcon-gtk3-1], [0.5.0])

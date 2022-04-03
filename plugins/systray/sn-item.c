@@ -655,7 +655,9 @@ sn_item_extract_pixbuf (GVariant *variant)
                   if (array != NULL)
                     g_free (array);
 #if GLIB_CHECK_VERSION(2, 68, 0)
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
                   array = g_memdup2 (data, size);
+G_GNUC_END_IGNORE_DEPRECATIONS
 #else
                   array = g_memdup (data, size);
 #endif
