@@ -94,9 +94,7 @@ static void               launcher_plugin_menu_popup_destroyed          (gpointe
 static gboolean           launcher_plugin_menu_popup                    (gpointer              user_data);
 static void               launcher_plugin_menu_destroy                  (LauncherPlugin       *plugin);
 static void               launcher_plugin_button_update                 (LauncherPlugin       *plugin);
-#if GARCON_CHECK_VERSION(0,7,0)
 static void               launcher_plugin_button_update_action_menu     (LauncherPlugin       *plugin);
-#endif
 static void               launcher_plugin_button_state_changed          (GtkWidget            *button_a,
                                                                          GtkStateType         state,
                                                                          GtkWidget            *button_b);
@@ -189,9 +187,7 @@ struct _LauncherPlugin
   GtkWidget         *arrow;
   GtkWidget         *child;
   GtkWidget         *menu;
-#if GARCON_CHECK_VERSION(0,7,0)
   GtkWidget         *action_menu;
-#endif
 
   GSList            *items;
 
@@ -337,9 +333,7 @@ launcher_plugin_init (LauncherPlugin *plugin)
   plugin->show_label = FALSE;
   plugin->arrow_position = LAUNCHER_ARROW_DEFAULT;
   plugin->menu = NULL;
-#if GARCON_CHECK_VERSION(0,7,0)
   plugin->action_menu = NULL;
-#endif
   plugin->items = NULL;
   plugin->child = NULL;
   plugin->tooltip_cache = NULL;
@@ -507,9 +501,7 @@ launcher_plugin_item_changed (GarconMenuItem *item,
       if (plugin->items == li)
         {
           launcher_plugin_button_update (plugin);
-#if GARCON_CHECK_VERSION(0,7,0)
           launcher_plugin_button_update_action_menu (plugin);
-#endif
         }
       else
         launcher_plugin_menu_destroy (plugin);
@@ -867,9 +859,7 @@ launcher_plugin_set_property (GObject      *object,
 
       /* update the button */
       launcher_plugin_button_update (plugin);
-#if GARCON_CHECK_VERSION(0,7,0)
       launcher_plugin_button_update_action_menu (plugin);
-#endif
 
       /* update the widget packing */
       goto update_arrow;
@@ -1011,9 +1001,7 @@ launcher_plugin_file_changed (GFileMonitor      *monitor,
     {
       launcher_plugin_button_update (plugin);
       launcher_plugin_menu_destroy (plugin);
-#if GARCON_CHECK_VERSION(0,7,0)
       launcher_plugin_button_update_action_menu (plugin);
-#endif
 
       /* save the new config */
       launcher_plugin_save_delayed (plugin);
@@ -1872,7 +1860,6 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
 
 
 
-#if GARCON_CHECK_VERSION(0,7,0)
 static void
 launcher_plugin_add_desktop_actions (GtkWidget *widget, gpointer user_data)
 {
@@ -1930,7 +1917,6 @@ launcher_plugin_button_update_action_menu (LauncherPlugin *plugin)
         }
     }
 }
-#endif
 
 
 
