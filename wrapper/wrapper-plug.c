@@ -76,7 +76,7 @@ wrapper_plug_init (WrapperPlug *plug)
   GdkScreen *screen;
 
   plug->style_context = gtk_widget_get_style_context (GTK_WIDGET (plug));
-  plug->style_provider = GTK_STYLE_PROVIDER (gtk_css_provider_new());
+  plug->style_provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
 
   gtk_widget_set_name (GTK_WIDGET (plug), "XfcePanelWindowWrapper");
 
