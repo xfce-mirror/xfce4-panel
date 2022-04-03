@@ -590,7 +590,6 @@ static void
 applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget              *button,
                                                         ApplicationsMenuPlugin *plugin)
 {
-#ifdef EXO_CHECK_VERSION
   GtkWidget *chooser;
   gchar     *icon;
 
@@ -619,7 +618,6 @@ applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget              *
     }
 
   gtk_widget_destroy (chooser);
-#endif
 }
 
 

@@ -461,7 +461,6 @@ static void
 directory_menu_plugin_configure_plugin_icon_chooser (GtkWidget           *button,
                                                      DirectoryMenuPlugin *plugin)
 {
-#ifdef EXO_CHECK_VERSION
   GtkWidget *chooser;
   gchar     *icon;
 
@@ -487,7 +486,6 @@ directory_menu_plugin_configure_plugin_icon_chooser (GtkWidget           *button
     }
 
   gtk_widget_destroy (chooser);
-#endif
 }
 
 
@@ -834,13 +832,11 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
     }
 
   if (!result
-#ifdef EXO_CHECK_VERSION
       && !exo_execute_preferred_application_on_screen (category,
                                                        path_as_arg ? working_dir : NULL,
                                                        working_dir,
                                                        NULL,
                                                        gtk_widget_get_screen (mi), &error)
-#endif
      )
     {
       xfce_dialog_show_error (NULL, error,

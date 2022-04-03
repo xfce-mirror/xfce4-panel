@@ -1058,11 +1058,9 @@ G_GNUC_END_IGNORE_DEPRECATIONS
           if (wnck_window_is_minimized (window)
               && plugin->minimized_icon_lucency < 100)
             {
-#ifdef EXO_CHECK_VERSION
               lucent = exo_gdk_pixbuf_lucent (pixbuf, plugin->minimized_icon_lucency);
               if (G_LIKELY (lucent != NULL))
                 pixbuf = lucent;
-#endif
             }
 
           /* set the menu item label */
