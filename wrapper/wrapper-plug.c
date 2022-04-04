@@ -42,8 +42,7 @@ struct _WrapperPlug
 {
   GtkPlug __parent__;
 
-  /* stored styles */
-  GtkStyleContext  *style_context;
+  /* background information */
   GtkStyleProvider *style_provider;
 };
 
@@ -74,9 +73,7 @@ wrapper_plug_init (WrapperPlug *plug)
 {
   GdkVisual *visual = NULL;
   GdkScreen *screen;
-
-  plug->style_context = gtk_widget_get_style_context (GTK_WIDGET (plug));
-  plug->style_provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
+  GtkStyleContext *style_context = gtk_widget_get_style_context (GTK_WIDGET (plug));
 
   gtk_widget_set_name (GTK_WIDGET (plug), "XfcePanelWindowWrapper");
 
@@ -87,13 +84,15 @@ wrapper_plug_init (WrapperPlug *plug)
     gtk_widget_set_visual (GTK_WIDGET (plug), visual);
 
   /* set the panel class */
-  gtk_style_context_add_class (plug->style_context, "panel");
-  gtk_style_context_add_class (plug->style_context, "xfce4-panel");
+  gtk_style_context_add_class (style_context, "panel");
+  gtk_style_context_add_class (style_context, "xfce4-panel");
 
   gtk_drag_dest_unset (GTK_WIDGET (plug));
 
   /* add the style provider */
-  gtk_style_context_add_provider (plug->style_context, plug->style_provider,
+  plug->style_provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
+
+  gtk_style_context_add_provider (style_context, plug->style_provider,
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
