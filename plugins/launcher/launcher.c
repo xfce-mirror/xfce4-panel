@@ -623,9 +623,18 @@ launcher_plugin_item_load (LauncherPlugin *plugin,
           else
             {
               src_path = g_file_get_parse_name (src_file);
-              g_warning ("Failed to create duplicate of desktop file \"%s\" "
-                          "to \"%s\": %s", src_path, dst_path, error->message);
-              g_error_free (error);
+              if (error)
+                {
+                  g_warning ("Failed to create duplicate of desktop file \"%s\" "
+                              "to \"%s\": %s", src_path, dst_path, error->message);
+                  g_error_free (error);
+                }
+              else
+                {
+
+                  g_warning ("Failed to create duplicate of desktop file \"%s\" "
+                          "to \"%s\"", src_path, dst_path);
+                }
               g_free (src_path);
 
               /* continue using the source file, the user won't be able to
