@@ -11,6 +11,7 @@
 # Brian Peraza-Orozco <brian.peraza@gmail.com>, 2013
 # Brian Peraza-Orozco <brian.peraza@gmail.com>, 2013
 # Casper, 2019-2020
+# Casper, 2022
 # danpergal84 <danpergal84@gmail.com>, 2013
 # danpergal84 <danpergal84@gmail.com>, 2013
 # Edwin Pujols <edwinpm5@gmail.com>, 2014
@@ -41,9 +42,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 00:47+0100\n"
-"PO-Revision-Date: 2022-02-10 18:05+0000\n"
-"Last-Translator: Toni Estévez <toni.estevez@gmail.com>\n"
+"POT-Creation-Date: 2022-04-03 00:47+0200\n"
+"PO-Revision-Date: 2013-07-02 20:26+0000\n"
+"Last-Translator: Casper, 2022\n"
 "Language-Team: Spanish (http://www.transifex.com/xfce/xfce4-panel/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -996,7 +997,7 @@ msgstr "Active esta opción para mostrar el nombre genérico de las aplicaciones
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Appearance"
 msgstr "Apariencia"
@@ -1558,7 +1559,7 @@ msgid "_File Pattern:"
 msgstr "_Patrón de archivos:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:16
-#: ../plugins/tasklist/tasklist-dialog.glade.h:29
+#: ../plugins/tasklist/tasklist-dialog.glade.h:30
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
 msgstr "Filtros"
@@ -1974,75 +1975,79 @@ msgid "Show _handle"
 msgstr "Mostrar los tir_adores"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
+msgid "Show _tooltips"
+msgstr "Mostrar _información sobre herramientas"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Sorting _order:"
 msgstr "_Ordenación:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window _grouping:"
 msgstr "Agrupar las ventanas:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Mi_ddle click action:"
 msgstr "Acción del clic central:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "Restore minimized windows to current _workspace"
 msgstr "_Restaurar las ventanas minimizadas en el área de trabajo activa"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:23
+#: ../plugins/tasklist/tasklist-dialog.glade.h:24
 msgid "D_raw window frame when hovering a button"
 msgstr "_Dibujar el marco de la ventana al pasar por encima del botón"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "_Switch windows using the mouse wheel"
 msgstr "Cam_biar de ventana con la rueda del ratón"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+#: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Behaviour"
 msgstr "Comportamiento"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:26
+#: ../plugins/tasklist/tasklist-dialog.glade.h:27
 msgid "Show windows from _all workspaces or viewports"
 msgstr "Mostrar las ventanas de _todas las áreas de trabajo"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:27
+#: ../plugins/tasklist/tasklist-dialog.glade.h:28
 msgid "Show windows from all mo_nitors"
 msgstr "Mostrar las ventanas de todos los m_onitores"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:28
+#: ../plugins/tasklist/tasklist-dialog.glade.h:29
 msgid "Show only _minimized windows"
 msgstr "Mostrar solo las ventanas _minimizadas"
 
-#: ../plugins/tasklist/tasklist-widget.c:2992
+#: ../plugins/tasklist/tasklist-widget.c:3001
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "No se puede iniciar una nueva instancia de '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:2996
+#: ../plugins/tasklist/tasklist-widget.c:3005
 msgid "Error"
 msgstr "Error"
 
-#: ../plugins/tasklist/tasklist-widget.c:3040
+#: ../plugins/tasklist/tasklist-widget.c:3049
 msgid "Launch New Instance"
 msgstr "Iniciar una nueva instancia"
 
-#: ../plugins/tasklist/tasklist-widget.c:3794
+#: ../plugins/tasklist/tasklist-widget.c:3803
 msgid "Mi_nimize All"
 msgstr "Mi_nimizar todas las ventanas"
 
-#: ../plugins/tasklist/tasklist-widget.c:3802
+#: ../plugins/tasklist/tasklist-widget.c:3811
 msgid "Un_minimize All"
 msgstr "_Restaurar todas las ventanas"
 
-#: ../plugins/tasklist/tasklist-widget.c:3810
+#: ../plugins/tasklist/tasklist-widget.c:3819
 msgid "Ma_ximize All"
 msgstr "M_aximizar todas las ventanas"
 
-#: ../plugins/tasklist/tasklist-widget.c:3818
+#: ../plugins/tasklist/tasklist-widget.c:3827
 msgid "_Unmaximize All"
 msgstr "_Desmaximizar todas las ventanas"
 
-#: ../plugins/tasklist/tasklist-widget.c:3830
+#: ../plugins/tasklist/tasklist-widget.c:3839
 msgid "_Close All"
 msgstr "_Cerrar todas las ventanas"
 
