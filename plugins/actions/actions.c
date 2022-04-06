@@ -1220,6 +1220,9 @@ actions_plugin_pack_idle (gpointer data)
   ActionType           allowed_types;
   ActionType           type;
   XfcePanelPluginMode  mode;
+  guint                panel_rows;
+  guint                row;
+  guint                column;
 
   child = gtk_bin_get_child (GTK_BIN (plugin));
   if (child != NULL)
@@ -1235,12 +1238,27 @@ actions_plugin_pack_idle (gpointer data)
 
   if (plugin->type == APPEARANCE_TYPE_BUTTONS)
     {
-      if (xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin)) == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
-        orientation = GTK_ORIENTATION_VERTICAL;
-      else
-        orientation = GTK_ORIENTATION_HORIZONTAL;
+      panel_rows = row = column = 0;
 
-      box = gtk_box_new (orientation, 0);
+      switch (xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin)))
+        {
+        case XFCE_PANEL_PLUGIN_MODE_VERTICAL:
+          orientation = GTK_ORIENTATION_VERTICAL;
+          box = gtk_box_new (orientation, 0);
+          break;
+
+        case XFCE_PANEL_PLUGIN_MODE_DESKBAR:
+          panel_rows = xfce_panel_plugin_get_nrows (XFCE_PANEL_PLUGIN (plugin));
+          orientation = GTK_ORIENTATION_VERTICAL;
+          box = gtk_grid_new ();
+          break;
+
+        default:
+          orientation = GTK_ORIENTATION_HORIZONTAL;
+          box = gtk_box_new (orientation, 0);
+          break;
+        };
+
       gtk_container_add (GTK_CONTAINER (plugin), box);
       gtk_widget_show (box);
 
@@ -1254,7 +1272,27 @@ actions_plugin_pack_idle (gpointer data)
           widget = actions_plugin_action_button (plugin, name + 1, orientation, &type);
           if (widget != NULL)
             {
-              gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
+              if (!panel_rows)
+                {
+                  gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
+                }
+              else if (type == ACTION_TYPE_SEPARATOR)
+                {
+                  gtk_grid_attach (GTK_GRID (box), widget, 0, column, panel_rows, 1);
+                  row = 0;
+                  column++;
+                }
+              else
+                {
+                  gtk_grid_attach (GTK_GRID (box), widget, row, column, 1, 1);
+                  row++;
+                  if (row >= panel_rows)
+                    {
+                      row = 0;
+                      column++;
+                    }
+                }
+
               gtk_widget_set_sensitive (widget, PANEL_HAS_FLAG (allowed_types, type));
               gtk_widget_show (widget);
             }
