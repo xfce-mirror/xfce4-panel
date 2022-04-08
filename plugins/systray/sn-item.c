@@ -428,11 +428,11 @@ sn_item_properties_callback (GObject      *source_object,
   GError *error = NULL;
 
   item->properties_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
-  g_signal_connect (item->item_proxy, "g-signal",
-                    G_CALLBACK (sn_item_signal_received), item);
   free_error_and_return_if_cancelled (error);
   finish_and_return_if_true (item->properties_proxy == NULL);
 
+  g_signal_connect (item->item_proxy, "g-signal",
+                    G_CALLBACK (sn_item_signal_received), item);
   sn_item_invalidate (item);
 }
 
