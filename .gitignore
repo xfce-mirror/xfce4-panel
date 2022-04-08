@@ -32,7 +32,6 @@ gtk-doc.make
 *-ui.h
 *-infos.h
 *.desktop
-*.desktop.in
 libxfce4panel*.pc
 *.o
 *.lo
@@ -64,6 +63,7 @@ panel/panel-gdbus-exported-service.c
 panel/panel-gdbus-exported-service.h
 panel/panel-plugin-external-wrapper-exported.c
 panel/panel-plugin-external-wrapper-exported.h
+plugins/*/*.desktop.in
 plugins/applicationsmenu/xfce4-popup-applicationsmenu
 plugins/directorymenu/xfce4-popup-directorymenu
 plugins/windowmenu/xfce4-popup-windowmenu
