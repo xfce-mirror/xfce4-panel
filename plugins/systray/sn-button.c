@@ -292,6 +292,11 @@ sn_button_button_release (GtkWidget      *widget,
   SnButton *button = XFCE_SN_BUTTON (widget);
   gboolean  menu_is_primary;
 
+  /* leave if button release happens outside of systray item */
+  if (event->x < 0 || event->x > gdk_window_get_width (event->window) ||
+      event->y < 0 || event->y > gdk_window_get_height (event->window))
+    return FALSE;
+
   menu_is_primary = sn_config_get_menu_is_primary (button->config);
 
   if (event->button == 1)
