@@ -301,6 +301,7 @@ panel_base_window_set_property (GObject      *object,
   PanelBaseWindow        *window = PANEL_BASE_WINDOW (object);
   PanelBaseWindowPrivate *priv = window->priv;
   PanelBgStyle            bg_style;
+  GFile                  *file;
 
   switch (prop_id)
     {
@@ -367,9 +368,11 @@ panel_base_window_set_property (GObject      *object,
       break;
 
     case PROP_BACKGROUND_IMAGE:
-      /* store new filename */
+      /* store new uri, built and escaped through a GFile */
       g_free (window->background_image);
-      window->background_image = g_value_dup_string (value);
+      file = g_file_new_for_commandline_arg (g_value_get_string (value));
+      window->background_image = g_file_get_uri (file);
+      g_object_unref (file);
 
       if (window->background_style == PANEL_BG_STYLE_IMAGE)
         {
@@ -620,7 +623,7 @@ static void
 panel_base_window_set_background_image_css (PanelBaseWindow *window) {
   gchar                  *css_string;
   panel_return_if_fail (window->background_image != NULL);
-  css_string = g_strdup_printf (".xfce4-panel.background { background: url('%s');"
+  css_string = g_strdup_printf (".xfce4-panel.background { background: url(\"%s\");"
                                                           "border-color: transparent; } %s",
                                 window->background_image, PANEL_BASE_CSS);
   panel_base_window_set_background_css (window, css_string);

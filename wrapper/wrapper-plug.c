@@ -174,7 +174,7 @@ wrapper_plug_set_background_image (WrapperPlug *plug,
 
   panel_return_if_fail (WRAPPER_IS_PLUG (plug));
 
-  css = g_strdup_printf ("* { background: url('%s'); }", image);
+  css = g_strdup_printf ("* { background: url(\"%s\"); }", image);
 
   gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (plug->style_provider), css, -1, NULL);
 
