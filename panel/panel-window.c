@@ -1696,10 +1696,10 @@ panel_window_screen_changed (GtkWidget *widget,
   /* set the new screen */
   window->screen = screen;
   window->display = gdk_screen_get_display (screen);
-  g_signal_connect (G_OBJECT (window->screen), "monitors-changed",
-      G_CALLBACK (panel_window_screen_layout_changed), window);
-  g_signal_connect (G_OBJECT (window->screen), "size-changed",
-      G_CALLBACK (panel_window_screen_layout_changed), window);
+  g_signal_connect_object (G_OBJECT (window->screen), "monitors-changed",
+      G_CALLBACK (panel_window_screen_layout_changed), window, 0);
+  g_signal_connect_object (G_OBJECT (window->screen), "size-changed",
+      G_CALLBACK (panel_window_screen_layout_changed), window, 0);
 
   /* update the screen layout */
   panel_window_screen_layout_changed (screen, window);
