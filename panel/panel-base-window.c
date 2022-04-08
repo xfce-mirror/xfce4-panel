@@ -211,8 +211,8 @@ panel_base_window_init (PanelBaseWindow *window)
   window->priv->active_timeout_id = 0;
 
   screen = gtk_widget_get_screen (GTK_WIDGET (window));
-  g_signal_connect (G_OBJECT (screen), "composited-changed",
-                    G_CALLBACK (panel_base_window_composited_changed), window);
+  g_signal_connect_object (G_OBJECT (screen), "composited-changed",
+                           G_CALLBACK (panel_base_window_composited_changed), window, 0);
 
   /* some wm require stick to show the window on all workspaces, on xfwm4
    * the type-hint already takes care of that */
