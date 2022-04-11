@@ -854,9 +854,16 @@ panel_itembar_unref (gpointer data)
   gint                      n = 0, id;
   gchar                    *name;
 
-  /* should always be true if there were no memory leak */
+  /* should always be true if there were no memory leak, except in the case below */
   if (*provider == NULL)
     return FALSE;
+
+  /* leave if the widget was reparented (drag and drop should be the only case) */
+  if (gtk_widget_get_parent (GTK_WIDGET (*provider)) != NULL)
+    {
+      g_signal_handlers_disconnect_by_func (*provider, gtk_widget_destroyed, provider);
+      return FALSE;
+    }
 
   name = g_strdup (xfce_panel_plugin_provider_get_name (*provider));
   id = xfce_panel_plugin_provider_get_unique_id (*provider);
