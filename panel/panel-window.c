@@ -2144,7 +2144,7 @@ static void
 panel_window_screen_layout_changed (GdkScreen   *screen,
                                     PanelWindow *window)
 {
-  GdkRectangle  a, b;
+  GdkRectangle  a = { 0 }, b;
   gint          monitor_num, n_monitors, n;
   gint          dest_x, dest_y;
   gint          dest_w, dest_h;
