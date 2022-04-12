@@ -146,9 +146,8 @@ migrate_default_start_element_handler (GMarkupParseContext  *context,
             {
               if (strcmp (attribute_names[i], "name") == 0)
                 {
-                  channel_name = attribute_values[i];
-
-                  /* this is an xfce4-panel workaround to make it work
+                  /* instead of `channel_name = attribute_values[i];`,
+                   * this is an xfce4-panel workaround to make it work
                    * with the custom channel names */
                   channel_name = XFCE_PANEL_CHANNEL_NAME;
                 }
