@@ -367,10 +367,10 @@ xfce_panel_image_get_preferred_height (GtkWidget *widget,
 {
   XfcePanelImagePrivate *priv = XFCE_PANEL_IMAGE (widget)->priv;
   GtkAllocation          alloc;
-  gint                   height, height_min;
+  gint                   height;
 
   if (priv->size > 0)
-    height = height_min = priv->size;
+    height = priv->size;
   else if (priv->pixbuf != NULL)
     height = gdk_pixbuf_get_height (priv->pixbuf);
   else
@@ -384,13 +384,8 @@ xfce_panel_image_get_preferred_height (GtkWidget *widget,
   height = MAX (height, 0);
 #endif
 
-  if (priv->size > 0)
-    height_min = height;
-  else
-    height_min = 0;
-
   if (minimum_height != NULL)
-    *minimum_height = height_min;
+    *minimum_height = priv->size > 0 ? height : 0;
 
   if (natural_height != NULL)
     *natural_height = height;
