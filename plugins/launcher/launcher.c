@@ -525,8 +525,6 @@ launcher_plugin_item_duplicate (GFile   *src_file,
   gboolean  result = FALSE;
   gchar    *uri;
 
-  panel_return_val_if_fail (G_IS_FILE (src_file), FALSE);
-  panel_return_val_if_fail (G_IS_FILE (dst_file), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
   if (!g_file_load_contents (src_file, NULL, &contents, &length, NULL, error))
@@ -543,10 +541,8 @@ launcher_plugin_item_duplicate (GFile   *src_file,
   g_key_file_set_string (key_file, G_KEY_FILE_DESKTOP_GROUP, "X-XFCE-Source", uri);
   g_free (uri);
 
-  contents = g_key_file_to_data (key_file, &length, error);
-  if (contents == NULL)
-    goto err1;
-
+  g_free (contents);
+  contents = g_key_file_to_data (key_file, &length, NULL);
   result = g_file_replace_contents (dst_file, contents, length, NULL, FALSE,
                                     G_FILE_CREATE_REPLACE_DESTINATION,
                                     NULL, NULL, error);
