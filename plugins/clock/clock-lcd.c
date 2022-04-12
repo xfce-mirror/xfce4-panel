@@ -384,7 +384,7 @@ xfce_clock_lcd_draw (GtkWidget *widget,
       ticks = g_date_time_get_hour (time) >= 12 ? 11 : 10;
 
       /* draw the digit */
-      offset_x = xfce_clock_lcd_draw_digit (cr, ticks, size, offset_x, offset_y);
+      xfce_clock_lcd_draw_digit (cr, ticks, size, offset_x, offset_y);
     }
 
   /* drop the pushed group */

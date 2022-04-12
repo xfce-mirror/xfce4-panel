@@ -390,7 +390,6 @@ sn_box_measure_and_allocate (GtkWidget *widget,
 
   total_length = 0;
   column_length = 0;
-  item_length = 0;
   row = 0;
 
   known_items = sn_config_get_known_items (box->config);
