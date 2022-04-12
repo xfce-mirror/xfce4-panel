@@ -408,10 +408,13 @@ sn_icon_box_icon_changed (GtkWidget *widget)
       gtk_icon_theme_prepend_search_path (icon_theme_from_path, theme_path);
     }
 
-  sn_icon_box_apply_icon (box->icon, icon_theme, icon_theme_from_path,
-                          icon_name, icon_pixbuf, icon_size, symbolic_icons);
-  sn_icon_box_apply_icon (box->overlay, icon_theme, icon_theme_from_path,
-                          overlay_icon_name, overlay_icon_pixbuf, icon_size, symbolic_icons);
+  if (icon_size > 0)
+    {
+      sn_icon_box_apply_icon (box->icon, icon_theme, icon_theme_from_path,
+                              icon_name, icon_pixbuf, icon_size, symbolic_icons);
+      sn_icon_box_apply_icon (box->overlay, icon_theme, icon_theme_from_path,
+                              overlay_icon_name, overlay_icon_pixbuf, icon_size, symbolic_icons);
+    }
 
   if (icon_theme_from_path != NULL)
     g_object_unref (icon_theme_from_path);
