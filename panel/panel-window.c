@@ -2183,7 +2183,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
                PANEL_DEBUG_BOOL (window->span_monitors),
                window->base_x, window->base_y);
 
-  if (window->output_name == NULL
+  if ((window->output_name == NULL || g_strcmp0 (window->output_name, "Automatic") == 0)
       && (window->span_monitors || n_monitors == 1))
     {
       /* get the screen geometry we also use this if there is only
