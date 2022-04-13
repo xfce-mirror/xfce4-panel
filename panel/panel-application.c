@@ -553,6 +553,9 @@ panel_application_plugin_move_drag_end (GtkWidget        *item,
   g_signal_handlers_disconnect_by_func (G_OBJECT (item),
       G_CALLBACK (panel_application_plugin_move_drag_data_get), application);
 
+  /* release extra reference */
+  g_object_unref (item);
+
   /* unblock autohide */
   panel_application_windows_blocked (application, FALSE);
 }
@@ -571,6 +574,9 @@ panel_application_plugin_move (GtkWidget        *item,
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (item));
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
+
+  /* keep a reference to prevent any use-after-free when DnDing between different panels */
+  g_object_ref (item);
 
   /* block autohide */
   panel_application_windows_blocked (application, TRUE);
