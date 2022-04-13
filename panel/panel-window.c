@@ -204,7 +204,8 @@ enum
   PROP_POSITION,
   PROP_DISABLE_STRUTS,
   PROP_ICON_SIZE,
-  PROP_DARK_MODE
+  PROP_DARK_MODE,
+  PROP_NO_BORDERS
 };
 
 enum _PluginProp
@@ -321,6 +322,9 @@ struct _PanelWindow
 
   /* dark mode */
   gboolean             dark_mode;
+  
+  /* disable borders */
+  gboolean             no_borders;
 
   /* window positioning */
   guint                size;
@@ -450,6 +454,12 @@ panel_window_class_init (PanelWindowClass *klass)
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_NO_BORDERS,
+                                   g_param_spec_boolean ("no-borders", NULL, NULL,
+                                                         FALSE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_NROWS,
                                    g_param_spec_uint ("nrows", NULL, NULL,
                                                       1, 6, 1,
@@ -560,6 +570,7 @@ panel_window_init (PanelWindow *window)
   window->size = 48;
   window->icon_size = 0;
   window->dark_mode = FALSE;
+  window->no_borders = FALSE;
   window->nrows = 1;
   window->length = 0.10;
   window->length_adjust = TRUE;
@@ -628,6 +639,10 @@ panel_window_get_property (GObject    *object,
 
     case PROP_DARK_MODE:
       g_value_set_boolean (value, window->dark_mode);
+      break;
+
+    case PROP_NO_BORDERS:
+      g_value_set_boolean (value, window->no_borders);
       break;
 
     case PROP_NROWS:
@@ -749,6 +764,17 @@ panel_window_set_property (GObject      *object,
       /* set dark mode for the main application and plugins */
       panel_window_update_dark_mode (window->dark_mode);
       panel_window_plugins_update (window, PLUGIN_PROP_DARK_MODE);
+      break;
+
+    case PROP_NO_BORDERS:
+      val_bool = g_value_get_boolean (value);
+      if (window->no_borders != val_bool)
+        {
+          window->no_borders = val_bool;
+        }
+
+      /* update the panel window's border state */
+      panel_window_screen_update_borders (window);
       break;
 
     case PROP_NROWS:
@@ -1948,6 +1974,13 @@ panel_window_screen_update_borders (PanelWindow *window)
   PanelBorders borders = PANEL_BORDER_NONE;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
+  
+  /* just stop here if we've disabled borders */
+  if (window->no_borders)
+    {
+      panel_base_window_set_borders (PANEL_BASE_WINDOW (window), borders);
+      return;
+    }
 
   switch (window->snap_position)
     {
