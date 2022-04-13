@@ -255,17 +255,17 @@ panel_base_window_get_property (GObject    *object,
       break;
 
     case PROP_BACKGROUND_RGBA:
-      if (window->background_rgba != NULL) {
-        rgba = window->background_rgba;
-      }
+      if (window->background_rgba != NULL)
+        g_value_set_boxed (value, window->background_rgba);
       else
         {
           ctx = gtk_widget_get_style_context (GTK_WIDGET (window));
           gtk_style_context_get (ctx, GTK_STATE_FLAG_NORMAL,
                                  GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                                  &rgba, NULL);
+          g_value_set_boxed (value, rgba);
+          gdk_rgba_free (rgba);
         }
-      g_value_set_boxed (value, rgba);
       break;
 
     case PROP_BACKGROUND_IMAGE:
