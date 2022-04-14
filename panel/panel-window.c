@@ -2471,10 +2471,10 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
                   gdk_device_get_position (device, NULL, &pointer_x, &pointer_y);
 
                   /* check if the cursor is outside the panel area before proceeding */
-                  if (pointer_x < panel_area.x
-                      || pointer_y < panel_area.y
-                      || pointer_x > panel_area.x + panel_area.width
-                      || pointer_y > panel_area.y + panel_area.height)
+                  if (pointer_x <= panel_area.x
+                      || pointer_y <= panel_area.y
+                      || pointer_x >= panel_area.x + panel_area.width
+                      || pointer_y >= panel_area.y + panel_area.height)
                     panel_window_autohide_queue (window, AUTOHIDE_HIDDEN);
                 }
             }
