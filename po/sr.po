@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 00:47+0100\n"
-"PO-Revision-Date: 2022-02-10 18:44+0000\n"
-"Last-Translator: Саша Петровић <salepetronije@gmail.com>\n"
+"POT-Creation-Date: 2022-04-03 00:47+0200\n"
+"PO-Revision-Date: 2013-07-02 20:26+0000\n"
+"Last-Translator: Саша Петровић <salepetronije@gmail.com>, 2012-2014,2017,2019,2022\n"
 "Language-Team: Serbian (http://www.transifex.com/xfce/xfce4-panel/language/sr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -969,7 +969,7 @@ msgstr "Изаберите ову могућност за приказивање
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Appearance"
 msgstr "Изглед"
@@ -1531,7 +1531,7 @@ msgid "_File Pattern:"
 msgstr "Образац _датотеке:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:16
-#: ../plugins/tasklist/tasklist-dialog.glade.h:29
+#: ../plugins/tasklist/tasklist-dialog.glade.h:30
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
 msgstr "Разврставање"
@@ -1947,75 +1947,79 @@ msgid "Show _handle"
 msgstr "Прикажи _ручку"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
+msgid "Show _tooltips"
+msgstr "Приказуј _напомене"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Sorting _order:"
 msgstr "_Начин ређања:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window _grouping:"
 msgstr "_Груписање прозора:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Mi_ddle click action:"
 msgstr "Радња с_редњег клика:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "Restore minimized windows to current _workspace"
 msgstr "Обнови умањене прозоре на тренутни _радни простор"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:23
+#: ../plugins/tasklist/tasklist-dialog.glade.h:24
 msgid "D_raw window frame when hovering a button"
 msgstr "Исц_ртај оквир прозора када је показивач над дугметом"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "_Switch windows using the mouse wheel"
 msgstr "_Мењај прозоре користећи точкић миша"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+#: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Behaviour"
 msgstr "Понашање"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:26
+#: ../plugins/tasklist/tasklist-dialog.glade.h:27
 msgid "Show windows from _all workspaces or viewports"
 msgstr "Прикажи прозоре са свих радних простора или углова посматрања"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:27
+#: ../plugins/tasklist/tasklist-dialog.glade.h:28
 msgid "Show windows from all mo_nitors"
 msgstr "Прикажи прозоре са свих мо_нитора"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:28
+#: ../plugins/tasklist/tasklist-dialog.glade.h:29
 msgid "Show only _minimized windows"
 msgstr "Прикажи само _умањене прозоре"
 
-#: ../plugins/tasklist/tasklist-widget.c:2992
+#: ../plugins/tasklist/tasklist-widget.c:3001
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Нисам успео да покренем нови примерак „%s“"
 
-#: ../plugins/tasklist/tasklist-widget.c:2996
+#: ../plugins/tasklist/tasklist-widget.c:3005
 msgid "Error"
 msgstr "Грешка"
 
-#: ../plugins/tasklist/tasklist-widget.c:3040
+#: ../plugins/tasklist/tasklist-widget.c:3049
 msgid "Launch New Instance"
 msgstr "Покрени нови примерак"
 
-#: ../plugins/tasklist/tasklist-widget.c:3794
+#: ../plugins/tasklist/tasklist-widget.c:3803
 msgid "Mi_nimize All"
 msgstr "Ум_ањи све"
 
-#: ../plugins/tasklist/tasklist-widget.c:3802
+#: ../plugins/tasklist/tasklist-widget.c:3811
 msgid "Un_minimize All"
 msgstr "Поништи _умањење свих"
 
-#: ../plugins/tasklist/tasklist-widget.c:3810
+#: ../plugins/tasklist/tasklist-widget.c:3819
 msgid "Ma_ximize All"
 msgstr "Ув_ећај Све"
 
-#: ../plugins/tasklist/tasklist-widget.c:3818
+#: ../plugins/tasklist/tasklist-widget.c:3827
 msgid "_Unmaximize All"
 msgstr "Поништи у_већање свих"
 
-#: ../plugins/tasklist/tasklist-widget.c:3830
+#: ../plugins/tasklist/tasklist-widget.c:3839
 msgid "_Close All"
 msgstr "_Затвори све"
 
