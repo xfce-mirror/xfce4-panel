@@ -292,7 +292,7 @@ main (gint argc, gchar **argv)
       else
         g_print ("%s", PACKAGE_NAME);
       g_print (" %s (Xfce %s)\n\n", PACKAGE_VERSION, xfce_version_string ());
-      g_print ("%s\n", "Copyright (c) 2004-2011");
+      g_print ("%s\n", "Copyright (c) 2004-2022");
       g_print ("\t%s\n\n", _("The Xfce development team. All rights reserved."));
       g_print (_("Please report bugs to <%s>."), PACKAGE_BUGREPORT);
       g_print ("\n");
