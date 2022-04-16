@@ -522,7 +522,10 @@ void
 sn_item_invalidate (SnItem *item)
 {
   g_return_if_fail (XFCE_IS_SN_ITEM (item));
-  g_return_if_fail (item->properties_proxy != NULL);
+
+  /* leave if the properties proxy has not yet been created */
+  if (item->properties_proxy == NULL)
+    return;
 
   g_dbus_proxy_call (item->properties_proxy,
                      "GetAll",
