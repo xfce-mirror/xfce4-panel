@@ -71,10 +71,11 @@ panel_dialogs_show_about (void)
   gchar **authors;
 
   authors = g_new0 (gchar *, 6);
-  authors[0] = g_strdup ("Nick Schermer <nick@xfce.org>");
   authors[1] = g_strdup ("Andrzej Radecki <ndrwrdck@gmail.com>");
-  authors[2] = g_strdup ("Simon Steinbeiß <simon@xfce.org>");
+  authors[1] = g_strdup ("Gaël Bonithon <gael@xfce.org>");
   authors[3] = g_strdup ("Jasper Huijsmans <jasper@xfce.org>");
+  authors[0] = g_strdup ("Nick Schermer <nick@xfce.org>");
+  authors[2] = g_strdup ("Simon Steinbeiß <simon@xfce.org>");
   authors[4] = g_strdup ("Tic-Tac-Toe <tictactoe@xfce.org>");
 
   about_dialog = gtk_about_dialog_new ();
