@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Ápo. <apostolos.papadimitriu@gmail.com>, 2016-2017
 # Ápo. <apostolos.papadimitriu@gmail.com>, 2016
 # Ápo. <apostolos.papadimitriu@gmail.com>, 2017
 # Christos Arvanitis <arvchristos@gmail.com>, 2019
@@ -10,6 +11,8 @@
 # Efstathios Iosifidis <iosifidis@opensuse.org>, 2012
 # Evaggelos Balaskas <ebal@ebal.gr>, 2008-2010
 # Ioannis LM, 2019
+# Ioannis LM, 2019,2022
+# Panagiotis Tabakis, 2016
 # Panagiotis Tabakis, 2016
 # Spiros Georgaras <sng@hellug.gr>, 2010
 # Stathis Kamperis <ekamperi@auth.gr>, 2006
@@ -19,9 +22,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 00:47+0100\n"
-"PO-Revision-Date: 2022-02-07 23:47+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
+"POT-Creation-Date: 2022-04-03 00:47+0200\n"
+"PO-Revision-Date: 2013-07-02 20:26+0000\n"
+"Last-Translator: Ioannis LM, 2019,2022\n"
 "Language-Team: Greek (http://www.transifex.com/xfce/xfce4-panel/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,19 +34,19 @@ msgstr ""
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Create Launcher on the panel"
-msgstr "Δημιουργία Εκκινητή στο ταμπλό"
+msgstr "Δημιουργία εκκινητή στο ταμπλό"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop "
 "file"
-msgstr "Δημιουργία νέου εκκινητή στο ταμπλό από αυτό το αρχείο .desktop"
+msgstr "Προσθήκη νέου εκκινητή στο ταμπλό από αυτό το αρχείο .desktop"
 
 #: ../panel-preferences.desktop.in.h:1
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
-msgstr ""
+msgstr "ταμπλό;ρυθμίσεις;προτιμήσεις;γραμμή εργασιών;αυτόματη απόκρυψη; μενού εφαρμογής;έναρξη;κουμπιά;εκκινητής;περιοχή ειδοποιήσεων;κατάσταση;εικονίδια;πρόσθετα;"
 
 #: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2975
 msgid "Panel"
@@ -63,7 +66,7 @@ msgstr "Είστε σίγουροι ότι θέλετε να αφαιρέσετ�
 #: ../libxfce4panel/xfce-panel-plugin.c:1085
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
-msgstr ""
+msgstr "Η αφαίρεση του αντικειμένου από το ταμπλό θα διαγράψει και τις ρυθμίσεις παραμέτρων του"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:163
 #: ../panel/panel-preferences-dialog.c:1326
@@ -101,11 +104,11 @@ msgstr "Ταμπ_λό"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1292 ../panel/panel-window.c:2988
 msgid "Add _New Items..."
-msgstr "Προσθήκη _Νέων Αντικειμένων..."
+msgstr "Προσθήκη _Νέων αντικειμένων..."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1307 ../panel/panel-window.c:3003
 msgid "Panel Pr_eferences..."
-msgstr "Π_ροτιμήσεις Ταμπλό..."
+msgstr "Π_ροτιμήσεις ταμπλό..."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:3035
 msgid "Log _Out"
@@ -131,7 +134,7 @@ msgstr "Περί"
 
 #: ../panel/main.c:81
 msgid "Show the 'Panel Preferences' dialog"
-msgstr "Εμφάνιση του διαλόγου 'Προτιμήσεις Ταμπλό'"
+msgstr "Εμφάνιση του διαλόγου 'Προτιμήσεις ταμπλό'"
 
 #: ../panel/main.c:81 ../panel/main.c:82
 msgid "PANEL-NUMBER"
@@ -139,7 +142,7 @@ msgstr "ΑΡΙΘΜΟΣ-ΤΑΜΠΛΟ"
 
 #: ../panel/main.c:82
 msgid "Show the 'Add New Items' dialog"
-msgstr "Εμφάνιση του διαλόγου 'Προσθήκη Νέων Αντικειμένων'"
+msgstr "Εμφάνιση του διαλόγου 'Προσθήκη νέων αντικειμένων'"
 
 #: ../panel/main.c:83
 msgid "Save the panel configuration"
@@ -147,11 +150,11 @@ msgstr "Αποθήκευση της ρύθμισης παραμέτρων του
 
 #: ../panel/main.c:84
 msgid "Add a new plugin to the panel"
-msgstr "Προσθήκη ενός νέου πρόσθετου στο ταμπλό"
+msgstr "Προσθήκη ενός νέου αρθρώματος στο ταμπλό"
 
 #: ../panel/main.c:84
 msgid "PLUGIN-NAME"
-msgstr "ΟΝΟΜΑ-ΠΡΟΣΘΕΤΟΥ"
+msgstr "ΟΝΟΜΑ-ΑΡΘΡΩΜΑΤΟΣ"
 
 #: ../panel/main.c:85
 msgid "Restart the running panel instance"
@@ -261,7 +264,7 @@ msgstr "Δημιουργία _εκκινητή"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Αυτό θα δημιουργήσει νέο πρόσθετο εκκινητή στο ταμπλό και εισάγει τα αρχεία ως αντικείμενα του μενού."
+msgstr "Αυτό θα δημιουργήσει νέο εκκινητή στο ταμπλό και θα εισάγει τα τοποθετημένα αρχεία ως αντικείμενα του μενού."
 
 #: ../panel/panel-application.c:988
 #, c-format
@@ -292,7 +295,7 @@ msgstr "Αδυναμία εκτέλεσης της εντολής \"%s\""
 #: ../panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Προσδιορίστηκε μη έγκυρη σύνταξη του γεγονότος αρθρώματος: Χρησιμοποιήστε το ΟΝΟΜΑ-ΑΡΘΡΩΜΑΤΟΣ:ΟΝΟΜΑ[:ΤΥΠΟΣ:ΤΙΜΗ]."
+msgstr "Προσδιορίστηκε μη έγκυρη σύνταξη του αρθρώματος: Χρησιμοποιήστε το ΟΝΟΜΑ-ΑΡΘΡΩΜΑΤΟΣ:ΟΝΟΜΑ[:ΤΥΠΟΣ:ΤΙΜΗ]."
 
 #: ../panel/panel-dbus-client.c:248
 #, c-format
@@ -311,7 +314,7 @@ msgstr "Το ταμπλό του περιβάλλοντος εργασίας Xfc
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr "Ευάγγελος Μπαλάσκας <ebalaskas@ebalaskas.gr>\nΣταύρος Γιαννούρης <stavrosg@hellug.gr>\nΣτάθης Καμπέρης <ekamperi@auth.gr>\nΣπύρος Γεωργαράς <sng@hellug.gr>\nΕυστάθιος Ιωσηφίδης <iosifidis@opensuse.org>\nΠέτρος Σαμαράς <petros@theoreio.gr>"
+msgstr "Ευάγγελος Μπαλάσκας <ebalaskas@ebalaskas.gr>\nΣταύρος Γιαννούρης <stavrosg@hellug.gr>\nΣτάθης Καμπέρης <ekamperi@auth.gr>\nΣπύρος Γεωργαράς <sng@hellug.gr>\nΕυστάθιος Ιωσηφίδης <iosifidis@opensuse.org>\nΠέτρος Σαμαράς <petros@theoreio.gr>\nΙωάννης"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:14
@@ -382,7 +385,7 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Το άρθρωμα επανεκκινήθηκε περισσότερες από μία φορές τα τελευταία %d δευτερόλεπτα. Εάν πατήσετε εκτέλεση, το ταμπλό θα προσπαθήσει να επανεκκινήσει το άρθρωμα αλλιώς αυτό θα απομακρυνθεί οριστικά από το ταμπλό."
+msgstr "Το άρθρωμα επανεκκινήθηκε περισσότερες από μία φορές τα τελευταία %d δευτερόλεπτα. Εάν πατήσετε εκτέλεση, το ταμπλό θα προσπαθήσει να επανεκκινήσει το άρθρωμα αλλιώς αυτό θα αφαιρεθεί οριστικά από το ταμπλό."
 
 #: ../panel/panel-plugin-external.c:449
 msgid "_Execute"
@@ -404,7 +407,7 @@ msgstr "Οθόνη %d"
 
 #: ../panel/panel-preferences-dialog.c:962
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "Οι ρυθμίσεις παραμέτρων του ταμπλό και του πρόσθετου θα διαγραφούν οριστικά."
+msgstr "Οι ρυθμίσεις παραμέτρων του ταμπλό και των αρθρωμάτων θα αφαιρεθούν οριστικά."
 
 #: ../panel/panel-preferences-dialog.c:963
 #, c-format
@@ -662,11 +665,11 @@ msgstr "Αφαίρεση του τρέχοντος επιλεγμένου αντ
 #: ../panel/panel-preferences-dialog.glade.h:61
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Edit the currently selected item"
-msgstr "Επεξεργασία του επιλεγμένου αντικείμενο μενού"
+msgstr "Επεξεργασία του τρέχοντος επιλεγμένου αντικειμένου"
 
 #: ../panel/panel-preferences-dialog.glade.h:62
 msgid "Show about information of the currently selected item"
-msgstr "Εμφάνιση πληροφοριών για το επιλεγμένο αντιμκείμενο"
+msgstr "Εμφάνιση πληροφοριών για το επιλεγμένο αντικείμενο"
 
 #: ../panel/panel-preferences-dialog.glade.h:63
 #: ../plugins/launcher/launcher-dialog.glade.h:21
@@ -737,15 +740,15 @@ msgstr "Μενού Συνεδρίας"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "Full Name"
-msgstr ""
+msgstr "Πλήρες όνομα"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
 msgid "Username"
-msgstr ""
+msgstr "Όνομα χρήστη"
 
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid "User ID"
-msgstr ""
+msgstr "ID χρήστη"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
 msgid "Custom"
@@ -757,11 +760,11 @@ msgstr "Εμφά_νιση:"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "Title:"
-msgstr ""
+msgstr "Τίτλος:"
 
 #: ../plugins/actions/actions-dialog.glade.h:11
 msgid "Custo_m title:"
-msgstr ""
+msgstr "Προσαρ_μοσμένος τίτλος:"
 
 #: ../plugins/actions/actions-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:27
@@ -816,11 +819,11 @@ msgstr "Απ_οσύνδεση..."
 
 #: ../plugins/actions/actions.c:182
 msgid "Switch User"
-msgstr "Εναλλαγή Χρήστη"
+msgstr "Εναλλαγή χρήστη"
 
 #: ../plugins/actions/actions.c:183
 msgid "_Switch User"
-msgstr "_Εναλλαγή Χρήστη"
+msgstr "_Εναλλαγή χρήστη"
 
 #: ../plugins/actions/actions.c:190
 msgid "Lock Screen"
@@ -862,7 +865,7 @@ msgstr "Θέλετε να θέσετε το σύστημα σε αδρανοπο
 #: ../plugins/actions/actions.c:210
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
-msgstr "Αδρανοποίηση και Αναστολή του υπολογιστή σε %d δευτερόλεπτα."
+msgstr "Αδρανοποίηση και αναστολή του υπολογιστή σε %d δευτερόλεπτα."
 
 #: ../plugins/actions/actions.c:216
 msgid "Suspend"
@@ -908,7 +911,7 @@ msgstr "_Τερματισμός"
 
 #: ../plugins/actions/actions.c:236
 msgid "Are you sure you want to shut down?"
-msgstr "Είστε σίγουροι ότι θέλετε να τερματίσετε τον υπολογιστή;"
+msgstr "Θέλετε σίγουρα να τερματίσετε τον υπολογιστή;"
 
 #: ../plugins/actions/actions.c:237
 #, c-format
@@ -974,7 +977,7 @@ msgstr "Επιλέξτε αυτή την επιλογή για να δείτε �
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Appearance"
 msgstr "Εμφάνιση"
@@ -989,7 +992,7 @@ msgstr "Επε_ξεργασία μενού"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 msgid "Use c_ustom menu file:"
-msgstr "Χρήση _προσαρμοσμένου αρχείου μενού"
+msgstr "Χρήση _προσαρμοσμένου αρχείου μενού:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "Menu _file:"
@@ -1110,7 +1113,7 @@ msgstr "Ορίστε μια ζώνη ώρας που να αντιστοιχεί
 
 #: ../plugins/clock/clock-dialog.glade.h:10
 msgid "Time_zone:"
-msgstr "Ζώνη_ώρας"
+msgstr "Ζώνη _ώρας"
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Time and Date _Settings..."
@@ -1453,7 +1456,7 @@ msgstr "Δημιουργία νέου φακέλου"
 
 #: ../plugins/directorymenu/directorymenu.c:935
 msgid "Create New Text Document"
-msgstr ""
+msgstr "Δημιουργία νέου αρχείου κειμένου"
 
 #: ../plugins/directorymenu/directorymenu.c:942
 msgid "C_reate"
@@ -1461,7 +1464,7 @@ msgstr "_Δημιουργία"
 
 #: ../plugins/directorymenu/directorymenu.c:943
 msgid "Create & _Open"
-msgstr ""
+msgstr "Δημιουργία και άνοι_γμα"
 
 #: ../plugins/directorymenu/directorymenu.c:957
 msgid "Enter the new name:"
@@ -1470,7 +1473,7 @@ msgstr "Εισάγετε νέο όνομα:"
 #: ../plugins/directorymenu/directorymenu.c:993
 #, c-format
 msgid "Failed to create folder: %s"
-msgstr ""
+msgstr "Απέτυχε η δημιουργία του φακέλου: %s"
 
 #: ../plugins/directorymenu/directorymenu.c:1078
 msgid "Open Folder"
@@ -1482,11 +1485,11 @@ msgstr "Εκτέλεση σε τερματικό"
 
 #: ../plugins/directorymenu/directorymenu.c:1112
 msgid "Create Folder..."
-msgstr ""
+msgstr "Δημιουργία φακέλου..."
 
 #: ../plugins/directorymenu/directorymenu.c:1129
 msgid "Create Text Document..."
-msgstr ""
+msgstr "Δημιουργία αρχείου κειμένου..."
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
@@ -1502,19 +1505,19 @@ msgstr "_Βασικός κατάλογος:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "Show 'New Text _Document'"
-msgstr ""
+msgstr "Εμφάνιση 'Νέου αρχείου _κειμένου'"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid "Show '_New Folder'"
-msgstr ""
+msgstr "Εμφάνιση '_Νέου φακέλου'"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
 msgid "Show 'Open in _Terminal'"
-msgstr ""
+msgstr "Εμφάνιση 'Άνοιγμα σε _τερματικό'"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
 msgid "Show '_Open _Folder'"
-msgstr ""
+msgstr "Εμφάνιση '_Άνοιγμα _φακέλου'"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
 msgid "Menu"
@@ -1536,7 +1539,7 @@ msgid "_File Pattern:"
 msgstr "_Μοτίβο αρχείου:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:16
-#: ../plugins/tasklist/tasklist-dialog.glade.h:29
+#: ../plugins/tasklist/tasklist-dialog.glade.h:30
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
 msgstr "Φιλτράρισμα"
@@ -1555,7 +1558,7 @@ msgstr "Δε βρέθηκαν αντικείμενα"
 
 #: ../plugins/launcher/launcher-dialog.c:792
 msgid "Failed to open desktop item editor"
-msgstr "Δεν ήταν δυνατό το άνοιγμα του επεξεργαστή αντικειμένου επιφάνειας εργασίας"
+msgstr "Δεν ήταν δυνατό το άνοιγμα του επεξεργαστή αντικειμένου της επιφάνειας εργασίας"
 
 #: ../plugins/launcher/launcher-dialog.c:860
 msgid "If you delete an item, it will be permanently removed"
@@ -1564,7 +1567,7 @@ msgstr "Εάν διαγράψετε ένα αντικείμενο, θα αφαι
 #: ../plugins/launcher/launcher-dialog.c:861
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr "Είστε σίγουροι ότι θέλετε να διαγράψετε το \"%s\";"
+msgstr "Είστε σίγουροι ότι θέλετε να αφαιρέσετε το \"%s\";"
 
 #: ../plugins/launcher/launcher-dialog.c:862
 msgid "Unnamed item"
@@ -1604,23 +1607,23 @@ msgstr "Κάτω"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "_Edit Item"
-msgstr "_Επεξεργασία Αντικειμένου"
+msgstr "_Επεξεργασία αντικειμένου"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "D_elete Item"
-msgstr "_Διαγραφή Αντικειμένου"
+msgstr "_Διαγραφή αντικειμένου"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "Add Appli_cation"
-msgstr "Προσθήκη Εφαμ_ογής"
+msgstr "Προσθήκη εφαμ_ογής"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:12
 msgid "New _Application"
-msgstr "Νέα _Εφαρμογή"
+msgstr "Νέα _εφαρμογή"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "New _Link"
-msgstr "Νέος _Σύνδεσμος"
+msgstr "Νέος _σύνδεσμος"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "Add one or more existing items to the launcher"
@@ -1645,13 +1648,13 @@ msgstr "Προσθήκη νέου υπερσυνδέσμου"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "Disable t_ooltips"
-msgstr "Απενεργοποίηση συμβ_ουλών εργαλείων"
+msgstr "Απενεργοποίηση υπ_οδείξεων"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:29
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "Επιλέξτε αυτή την επιλογή και θα απενεργοποιηθούν οι συμβουλές όταν μεταφέρονται τα πλήκτρα του ταμπλό ή τα αντικείμενα του μενού."
+msgstr "Επιλέξτε αυτή την επιλογή για να απενεργοποιηθούν οι υποδείξεις κατά τη μετακίνηση στα κουμπιά του ταμπλό ή στα αντικείμενα του μενού."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:30
 msgid "Show _label instead of icon"
@@ -1667,7 +1670,7 @@ msgstr "Επιλέξτε αυτή την επιλογή για να μετακι
 
 #: ../plugins/launcher/launcher-dialog.glade.h:33
 msgid "_Arrow button position:"
-msgstr "_Θέση κουμπιού βέλους:"
+msgstr "_Θέση δείκτη κουμπιού:"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:34
 msgid "Advanced"
@@ -1692,7 +1695,7 @@ msgstr "Χώρος εργασίας %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:1
 msgid "Buttons"
-msgstr "Πλήκτρα"
+msgstr "Κουμπιά"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 msgid "Miniature View"
@@ -1766,27 +1769,27 @@ msgstr "Καθαρισμός"
 
 #: ../plugins/systray/sn-dialog.c:650
 msgid "Are you sure you want to clear the list of known items?"
-msgstr ""
+msgstr "Θέλετε σίγουρα να εκκαθαρίσετε τη λίστα των γνωστών αντικειμένων;"
 
 #: ../plugins/systray/sn-dialog.glade.h:1
 msgid "Status Tray Items"
-msgstr ""
+msgstr "Αντικείμενα γραμμής κατάστασης"
 
 #: ../plugins/systray/sn-dialog.glade.h:2
 msgid "C_lear Known Items"
-msgstr ""
+msgstr "Εκκα_θάριση γνωστών αντικειμένων"
 
 #: ../plugins/systray/sn-dialog.glade.h:3
 msgid "Resets the list of items and their visibility settings"
-msgstr ""
+msgstr "Επαναφορά ρυθμίσεων της λίστας των αντικειμένων και της εμφάνισης τους"
 
 #: ../plugins/systray/sn-dialog.glade.h:4
 msgid "_Fixed icon size (pixels):"
-msgstr ""
+msgstr "_Καθορισμός μεγέθους εικονιδίων (pixels):"
 
 #: ../plugins/systray/sn-dialog.glade.h:5
 msgid "Adjust size _automatically"
-msgstr ""
+msgstr "_Αυτόματη ρύθμιση μεγέθους"
 
 #: ../plugins/systray/sn-dialog.glade.h:6
 msgid "Icons"
@@ -1794,27 +1797,27 @@ msgstr "Εικονίδια"
 
 #: ../plugins/systray/sn-dialog.glade.h:7
 msgid "Arrange _items in a single row"
-msgstr ""
+msgstr "Διάταξη α_ντικειμένων μόνο σε μία γραμμή"
 
 #: ../plugins/systray/sn-dialog.glade.h:8
 msgid "If enabled, ensure that the items are laid out in a single row"
-msgstr ""
+msgstr "Αν ενεργοποιηθεί, τα αντικείμενα θα τοποθετούνται σε μία μόνο γραμμή"
 
 #: ../plugins/systray/sn-dialog.glade.h:9
 msgid "_Hide items by default"
-msgstr ""
+msgstr "Απόκ_ρυψη αντικειμένων από προεπιλογή"
 
 #: ../plugins/systray/sn-dialog.glade.h:10
 msgid "When enabled, all new items will be marked as \"Hidden\""
-msgstr ""
+msgstr "Όταν ενεργοποιηθεί, κάθε νέο αντικείμενο θα εμφανίζεται σαν \"Κρυφό\""
 
 #: ../plugins/systray/sn-dialog.glade.h:11
 msgid "_Square items"
-msgstr ""
+msgstr "_Τετράγωνα αντικείμενα"
 
 #: ../plugins/systray/sn-dialog.glade.h:12
 msgid "Item buttons will take a square when it's possible"
-msgstr ""
+msgstr "Τα κουμπιά των αντικειμένων θα λαμβάνουν τετράγωνη μορφή, όταν είναι δυνατόν"
 
 #: ../plugins/systray/sn-dialog.glade.h:13
 msgid "Behavior"
@@ -1822,51 +1825,51 @@ msgstr "Συμπεριφορά"
 
 #: ../plugins/systray/sn-dialog.glade.h:14
 msgid "Item"
-msgstr ""
+msgstr "Αντικείμενο"
 
 #: ../plugins/systray/sn-dialog.glade.h:15
 msgid "Hidden"
-msgstr "Κρυμμένο"
+msgstr "Κρυφό"
 
 #: ../plugins/systray/sn-dialog.glade.h:16
 msgid "Move the selected item one row up"
-msgstr ""
+msgstr "Μετακίνηση του επιλεγμένου αντικειμένου μια γραμμή επάνω"
 
 #: ../plugins/systray/sn-dialog.glade.h:17
 msgid "Move the selected item one row down"
-msgstr ""
+msgstr "Μετακίνηση του επιλεγμένου αντικειμένου μια γραμμή κάτω"
 
 #: ../plugins/systray/sn-dialog.glade.h:18
 msgid "Known Items"
-msgstr ""
+msgstr "Γνωστά αντικείμενα"
 
 #: ../plugins/systray/sn-dialog.glade.h:19
 msgid "_Menu is primary action"
-msgstr ""
+msgstr "Εμφάνιση του _μενού"
 
 #: ../plugins/systray/sn-dialog.glade.h:20
 msgid "Left click will always display the menu for item"
-msgstr ""
+msgstr "Με αριστερό κλικ θα εμφανίζεται πάντα το μενού για το αντικείμενο"
 
 #: ../plugins/systray/sn-dialog.glade.h:21
 msgid "_Request symbolic icons"
-msgstr ""
+msgstr "Εμ_φάνιση συμβολικών εικονιδίων"
 
 #: ../plugins/systray/sn-dialog.glade.h:22
 msgid "Load symbolic icons if available"
-msgstr ""
+msgstr "Αν είναι διαθέσιμα, φόρτωση των συμβολικών εικονιδίων του θέματος"
 
 #: ../plugins/systray/sn-dialog.glade.h:23
 msgid "Features"
-msgstr ""
+msgstr "Χαρακτηριστικά"
 
 #: ../plugins/systray/sn-dialog.glade.h:24
 msgid "Status Notifiers"
-msgstr ""
+msgstr "Ειδοποιήσεις κατάστασης"
 
 #: ../plugins/systray/sn-dialog.glade.h:25
 msgid "Systray Icons"
-msgstr ""
+msgstr "Εικονίδια γραμμής συστήματος"
 
 #: ../plugins/systray/systray.c:146
 msgid "Unable to start the notification area"
@@ -1890,13 +1893,13 @@ msgstr "Η λήψη επιλογής διαχειριστή απέτυχε γι�
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Status Tray Plugin"
-msgstr ""
+msgstr "Πρόσθετο γραμμής καταστάσεων"
 
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid ""
 "Provides status notifier items (application indicators) and legacy systray "
 "items"
-msgstr ""
+msgstr "Παρέχει ειδοποιήσεις κατάστασης (δείκτες εφαρμογών) και γραμμή κατάστασης αντικειμένων συστήματος"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
@@ -1952,81 +1955,85 @@ msgid "Show _handle"
 msgstr "Εμφάνιση _χειρολαβής"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
+msgid "Show _tooltips"
+msgstr "Εμφάνιση _υποδείξεων"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Sorting _order:"
 msgstr "Σειρά τ_αξινόμησης:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
-msgid "Window _grouping:"
-msgstr "Ομ_αδοποίηση παραθύρων:"
-
 #: ../plugins/tasklist/tasklist-dialog.glade.h:21
-msgid "Mi_ddle click action:"
-msgstr "Ενέργεια μεσαίου κλικ"
+msgid "Window _grouping:"
+msgstr "Ο_μαδοποίηση παραθύρων:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:22
-msgid "Restore minimized windows to current _workspace"
-msgstr "Επαναφορά ελα_χιστοποίησης των παραθύρων στο τωρινό χώρο εργασίας"
+msgid "Mi_ddle click action:"
+msgstr "Ενέργεια με_σαίου κλικ:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
-msgid "D_raw window frame when hovering a button"
-msgstr "Σχ_εδίαση του περιγράμματος ενός παραθύρου όταν περνάει πάνω από ένα πλήκτρο"
+msgid "Restore minimized windows to current _workspace"
+msgstr "_Επαναφορά ελαχιστοποίησης των παραθύρων στο τωρινό χώρο εργασίας"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:24
-msgid "_Switch windows using the mouse wheel"
-msgstr "_Εναλλαγή παραθύρων με χρήση της ροδέλας του ποντικιού"
+msgid "D_raw window frame when hovering a button"
+msgstr "Σχε_δίαση του περιγράμματος παραθύρου όταν ο δείκτης περνάει πάνω από ένα κουμπί"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:25
+msgid "_Switch windows using the mouse wheel"
+msgstr "Εναλλαγή παραθύρων με χρήση της ρ_οδέλας του ποντικιού"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Behaviour"
 msgstr "Συμπεριφορά"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:26
-msgid "Show windows from _all workspaces or viewports"
-msgstr "Προβολή παραθύρων από ό_λους τους χώρους εργασίας ή παράθυρα προβολής"
-
 #: ../plugins/tasklist/tasklist-dialog.glade.h:27
-msgid "Show windows from all mo_nitors"
-msgstr "Προβολή παραθύρων από όλα τα mo_nitor"
+msgid "Show windows from _all workspaces or viewports"
+msgstr "Προβολή παραθύρων από ό_λους τους χώρους εργασίας ή τις προβολές"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:28
-msgid "Show only _minimized windows"
-msgstr "Εμφάνιση μόνο ελα_χιστοποιημένων εφαρμογών"
+msgid "Show windows from all mo_nitors"
+msgstr "Προβολή παραθύρων από όλες τις ο_θόνες"
 
-#: ../plugins/tasklist/tasklist-widget.c:2992
+#: ../plugins/tasklist/tasklist-dialog.glade.h:29
+msgid "Show only _minimized windows"
+msgstr "Εμφάνιση μόνο ελαχιστοποι_ημένων παραθύρων"
+
+#: ../plugins/tasklist/tasklist-widget.c:3001
 #, c-format
 msgid "Unable to start new instance of '%s'"
-msgstr ""
+msgstr "Αποτυχία έναρξης νέας εμφάνισης του '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:2996
+#: ../plugins/tasklist/tasklist-widget.c:3005
 msgid "Error"
 msgstr "Σφάλμα"
 
-#: ../plugins/tasklist/tasklist-widget.c:3040
+#: ../plugins/tasklist/tasklist-widget.c:3049
 msgid "Launch New Instance"
-msgstr ""
+msgstr "Εκκίνηση νέας εμφάνισης"
 
-#: ../plugins/tasklist/tasklist-widget.c:3794
+#: ../plugins/tasklist/tasklist-widget.c:3803
 msgid "Mi_nimize All"
 msgstr "Ελα_χιστοποίηση όλων"
 
-#: ../plugins/tasklist/tasklist-widget.c:3802
+#: ../plugins/tasklist/tasklist-widget.c:3811
 msgid "Un_minimize All"
 msgstr "Αποε_λαχιστοποίηση όλων"
 
-#: ../plugins/tasklist/tasklist-widget.c:3810
+#: ../plugins/tasklist/tasklist-widget.c:3819
 msgid "Ma_ximize All"
 msgstr "Με_γιστοποίηση όλων"
 
-#: ../plugins/tasklist/tasklist-widget.c:3818
+#: ../plugins/tasklist/tasklist-widget.c:3827
 msgid "_Unmaximize All"
 msgstr "Α_πομεγιστοποίηση όλων"
 
-#: ../plugins/tasklist/tasklist-widget.c:3830
+#: ../plugins/tasklist/tasklist-widget.c:3839
 msgid "_Close All"
-msgstr "_Κλείσιμο Όλων"
+msgstr "_Κλείσιμο όλων"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Switch between open windows using buttons"
-msgstr "Χρήση πλήκτρων για την εναλλαγή μεταξύ των ανοιχτών παραθύρων"
+msgstr "Χρήση κουμπιών για την εναλλαγή μεταξύ των ανοιχτών παραθύρων"
 
 #: ../plugins/windowmenu/windowmenu.c:673
 msgid "Desktop"
@@ -2052,7 +2059,7 @@ msgstr "Αφαίρεση του χώρου εργασίας \"%s\""
 #: ../plugins/windowmenu/windowmenu.c:1360
 #, c-format
 msgid "Remove Workspace %d"
-msgstr "Διαγραφή χώρου εργασίας %d"
+msgstr "Αφαίρεση του χώρου εργασίας %d"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
 msgid "Icon"
@@ -2077,7 +2084,7 @@ msgstr "Εμφάνιση εν_εργειών στους χώρους εργασ�
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Show workspace _names"
-msgstr "Προβολή ο_νομάτων χώρων εργασίας"
+msgstr "Εμφάνιση ο_νομάτων των χώρων εργασίας"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Enable _urgency notification"
