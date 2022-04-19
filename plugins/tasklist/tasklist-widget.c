@@ -2398,15 +2398,20 @@ xfce_tasklist_wireframe_update (XfceTasklist      *tasklist,
 
   /* get the window geometry */
   wnck_window_get_geometry (child->window, &x, &y, &width, &height);
+
   /* check if we're dealing with a CSD window */
-  gdkwindow = gdk_x11_window_lookup_for_display (gdpy,
-                                                 wnck_window_get_xid (child->window));
-  if (gdkwindow && xfce_has_gtk_frame_extents (gdkwindow, &extents))
+  gdkwindow = gdk_x11_window_foreign_new_for_display (gdpy, wnck_window_get_xid (child->window));
+  if (gdkwindow != NULL)
     {
-      x += extents.left;
-      y += extents.top;
-      width -= extents.left + extents.right;
-      height -= extents.top + extents.bottom;
+      if (xfce_has_gtk_frame_extents (gdkwindow, &extents))
+        {
+          x += extents.left;
+          y += extents.top;
+          width -= extents.left + extents.right;
+          height -= extents.top + extents.bottom;
+        }
+
+      g_object_unref (gdkwindow);
     }
 
   if (G_LIKELY (tasklist->wireframe_window != 0))
