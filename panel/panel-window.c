@@ -2512,6 +2512,12 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
             }
           }
 
+          /* apply scale factor */
+          window_area.x /= window->scale_factor;
+          window_area.y /= window->scale_factor;
+          window_area.width /= window->scale_factor;
+          window_area.height /= window->scale_factor;
+
           /* obtain position and dimension from the panel */
           panel_window_size_allocate_set_xy (window,
                                              window->alloc.width,
