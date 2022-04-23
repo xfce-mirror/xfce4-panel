@@ -699,6 +699,15 @@ panel_window_get_property (GObject    *object,
 
 
 static void
+panel_window_decrease_size (PanelWindow *window)
+{
+  g_signal_handlers_disconnect_by_func (window, panel_window_decrease_size, NULL);
+  g_object_set (window, "size", window->size - 1, NULL);
+}
+
+
+
+static void
 panel_window_set_property (GObject      *object,
                            guint         prop_id,
                            const GValue *value,
@@ -757,6 +766,10 @@ panel_window_set_property (GObject      *object,
 
     case PROP_SCALE_FACTOR:
       window->scale_factor = g_value_get_uint (value);
+
+      /* a workaround to force external plugins to fully re-render */
+      g_signal_connect_after (window, "draw", G_CALLBACK (panel_window_decrease_size), NULL);
+      g_object_set (window, "size", window->size + 1, NULL);
       break;
 
     case PROP_DARK_MODE:
