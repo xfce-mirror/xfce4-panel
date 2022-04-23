@@ -254,24 +254,9 @@ sn_icon_box_apply_icon (GtkWidget    *image,
         }
 
       if (work_pixbuf == NULL && icon_theme_from_path != NULL)
-        {
-          /* load icon in its real size */
-          work_pixbuf = gtk_icon_theme_load_icon (icon_theme_from_path,
-                                                  sn_preferred_name (),
-                                                  -1, 0, NULL);
-
-          if (work_pixbuf == NULL ||
-              (gdk_pixbuf_get_width (work_pixbuf) <= 1 || gdk_pixbuf_get_height (work_pixbuf) <= 1))
-            {
-              if (work_pixbuf != NULL)
-                g_object_unref (work_pixbuf);
-
-              /* icon size was incorrect, try to pass the desired icon size */
-              work_pixbuf = gtk_icon_theme_load_icon (icon_theme_from_path,
-                                                      sn_preferred_name (),
-                                                      icon_size, 0, NULL);
-            }
-        }
+        work_pixbuf = gtk_icon_theme_load_icon (icon_theme_from_path,
+                                                sn_preferred_name (),
+                                                icon_size, 0, NULL);
 
       if (work_pixbuf == NULL)
         {
