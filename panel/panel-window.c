@@ -2387,6 +2387,7 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
 {
   GdkRectangle panel_area;
   GdkRectangle window_area;
+  gboolean     geometry_fixed = FALSE;
 
   panel_return_if_fail (WNCK_IS_WINDOW (active_window));
   panel_return_if_fail (PANEL_IS_WINDOW (window));
@@ -2414,17 +2415,24 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
            * application window property to get its actual size without the shadows */
           gdkwindow = gdk_x11_window_foreign_new_for_display (gdk_display_get_default (),
                                                               wnck_window_get_xid (active_window));
-          if (gdkwindow && xfce_has_gtk_frame_extents (gdkwindow, &extents))
+          if (gdkwindow != NULL)
             {
-              window_area.x += extents.left;
-              window_area.y += extents.top;
-              window_area.width -= extents.left + extents.right;
-              window_area.height -= extents.top + extents.bottom;
+              if (xfce_has_gtk_frame_extents (gdkwindow, &extents))
+                {
+                  window_area.x += extents.left;
+                  window_area.y += extents.top;
+                  window_area.width -= extents.left + extents.right;
+                  window_area.height -= extents.top + extents.bottom;
+                  geometry_fixed = TRUE;
+                }
+
+              g_object_unref (gdkwindow);
             }
+
           /* if a window is shaded, check the height of the window's
            * decoration as exposed through the _NET_FRAME_EXTENTS application
            * window property */
-          else if (wnck_window_is_shaded (active_window))
+          if (! geometry_fixed && wnck_window_is_shaded (active_window))
           {
             Display *display;
             Atom real_type;
