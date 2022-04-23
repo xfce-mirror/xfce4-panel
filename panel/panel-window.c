@@ -99,6 +99,8 @@ static gboolean     panel_window_enter_notify_event         (GtkWidget        *w
                                                              GdkEventCrossing *event);
 static gboolean     panel_window_leave_notify_event         (GtkWidget        *widget,
                                                              GdkEventCrossing *event);
+static gboolean     panel_window_configure_event            (GtkWidget        *widget,
+                                                             GdkEventConfigure *event);
 static gboolean     panel_window_drag_motion                (GtkWidget        *widget,
                                                              GdkDragContext   *context,
                                                              gint              x,
@@ -193,6 +195,8 @@ enum
   PROP_ID,
   PROP_MODE,
   PROP_SIZE,
+  PROP_ICON_SIZE,
+  PROP_SCALE_FACTOR,
   PROP_NROWS,
   PROP_LENGTH,
   PROP_LENGTH_ADJUST,
@@ -203,7 +207,6 @@ enum
   PROP_OUTPUT_NAME,
   PROP_POSITION,
   PROP_DISABLE_STRUTS,
-  PROP_ICON_SIZE,
   PROP_DARK_MODE
 };
 
@@ -325,6 +328,7 @@ struct _PanelWindow
   /* window positioning */
   guint                size;
   guint                icon_size;
+  guint                scale_factor;
   gdouble              length;
   guint                length_adjust : 1;
   XfcePanelPluginMode  mode;
@@ -402,6 +406,7 @@ panel_window_class_init (PanelWindowClass *klass)
   gtkwidget_class->delete_event = panel_window_delete_event;
   gtkwidget_class->enter_notify_event = panel_window_enter_notify_event;
   gtkwidget_class->leave_notify_event = panel_window_leave_notify_event;
+  gtkwidget_class->configure_event = panel_window_configure_event;
   gtkwidget_class->drag_motion = panel_window_drag_motion;
   gtkwidget_class->drag_leave = panel_window_drag_leave;
   gtkwidget_class->motion_notify_event = panel_window_motion_notify_event;
@@ -441,6 +446,12 @@ panel_window_class_init (PanelWindowClass *klass)
                                    PROP_ICON_SIZE,
                                    g_param_spec_uint ("icon-size", NULL, NULL,
                                                       0, 256, 0,
+                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_SCALE_FACTOR,
+                                   g_param_spec_uint ("scale-factor", NULL, NULL,
+                                                      0, G_MAXUINT, 1,
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
@@ -559,6 +570,7 @@ panel_window_init (PanelWindow *window)
   window->mode = XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
   window->size = 48;
   window->icon_size = 0;
+  window->scale_factor = 1;
   window->dark_mode = FALSE;
   window->nrows = 1;
   window->length = 0.10;
@@ -624,6 +636,10 @@ panel_window_get_property (GObject    *object,
 
     case PROP_ICON_SIZE:
       g_value_set_uint (value, window->icon_size);
+      break;
+
+    case PROP_SCALE_FACTOR:
+      g_value_set_uint (value, window->scale_factor);
       break;
 
     case PROP_DARK_MODE:
@@ -737,6 +753,10 @@ panel_window_set_property (GObject      *object,
 
       /* send the new icon size to the panel plugins */
       panel_window_plugins_update (window, PLUGIN_PROP_ICON_SIZE);
+      break;
+
+    case PROP_SCALE_FACTOR:
+      window->scale_factor = g_value_get_uint (value);
       break;
 
     case PROP_DARK_MODE:
@@ -1032,6 +1052,24 @@ panel_window_leave_notify_event (GtkWidget        *widget,
     }
 
   return (*GTK_WIDGET_CLASS (panel_window_parent_class)->leave_notify_event) (widget, event);
+}
+
+
+
+static gboolean
+panel_window_configure_event (GtkWidget         *widget,
+                              GdkEventConfigure *event)
+{
+  PanelWindow *window = PANEL_WINDOW (widget);
+  guint        scale_factor;
+
+  /* a configure event is sent to the toplevel window when the scale factor changes,
+   * so we catch this information here and inform other widgets */
+  scale_factor = gdk_window_get_scale_factor (gtk_widget_get_window (widget));
+  if (window->scale_factor != scale_factor)
+    g_object_set (window, "scale-factor", scale_factor, NULL);
+
+  return (*GTK_WIDGET_CLASS (panel_window_parent_class)->configure_event) (widget, event);
 }
 
 
@@ -1752,8 +1790,14 @@ static void
 panel_window_realize (GtkWidget *widget)
 {
   PanelWindow *window = PANEL_WINDOW (widget);
+  guint        scale_factor;
 
   (*GTK_WIDGET_CLASS (panel_window_parent_class)->realize) (widget);
+
+  /* initialize scale factor */
+  scale_factor = gdk_window_get_scale_factor (gtk_widget_get_window (widget));
+  if (window->scale_factor != scale_factor)
+    g_object_set (window, "scale-factor", scale_factor, NULL);
 
   /* set struts if we snap to an edge */
   if (window->struts_edge != STRUTS_EDGE_NONE)
