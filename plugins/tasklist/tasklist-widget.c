@@ -2990,12 +2990,37 @@ xfce_tasklist_button_enter_notify_event (GtkWidget         *button,
 
 
 
+static gchar *
+xfce_tasklist_button_get_child_path (XfceTasklistChild *child)
+{
+  gchar *path = NULL;
+  WnckApplication *app = wnck_window_get_application (child->window);
+  int pid = wnck_application_get_pid (app);
+  if (pid > 0)
+    {
+      gchar *link = g_strdup_printf ("/proc/%d/exe", pid);
+      if (g_file_test (link, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_SYMLINK))
+        path = g_file_read_link (link, NULL);
+      g_free (link);
+    }
+  return path;
+}
+
+
+
 static void
-xfce_tasklist_button_start_new_instance_clicked (GtkMenuItem       *item,
+xfce_tasklist_button_start_new_instance_clicked (GtkWidget         *item,
                                                  XfceTasklistChild *child)
 {
   GError *error = NULL;
   const gchar *path = g_object_get_data (G_OBJECT (item), "exe-path");
+
+  if (path == NULL)
+    path = xfce_tasklist_button_get_child_path (child);
+
+  if (path == NULL)
+    return;
+
   if (!g_spawn_command_line_async (path, &error))
     {
       GtkWidget *dialog =
@@ -3014,23 +3039,6 @@ xfce_tasklist_button_start_new_instance_clicked (GtkMenuItem       *item,
     }
 }
 
-
-
-static gchar *
-xfce_tasklist_button_get_child_path (XfceTasklistChild *child)
-{
-  gchar *path = NULL;
-  WnckApplication *app = wnck_window_get_application (child->window);
-  int pid = wnck_application_get_pid (app);
-  if (pid > 0)
-    {
-      gchar *link = g_strdup_printf ("/proc/%d/exe", pid);
-      if (g_file_test (link, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_SYMLINK))
-        path = g_file_read_link (link, NULL);
-      g_free (link);
-    }
-  return path;
-}
 
 
 static void
@@ -3184,6 +3192,10 @@ xfce_tasklist_button_button_release_event (GtkWidget         *button,
               if (!wnck_window_is_minimized (child->window))
                 wnck_window_minimize (child->window);
               return FALSE;
+
+            case XFCE_TASKLIST_MIDDLE_CLICK_NEW_INSTANCE:
+              xfce_tasklist_button_start_new_instance_clicked (button, child);
+              return TRUE;
             }
         }
     }
@@ -4042,6 +4054,51 @@ xfce_tasklist_group_button_button_press_event (GtkWidget         *button,
 
 
 
+static gboolean
+xfce_tasklist_group_button_button_release_event (GtkWidget         *button,
+                                                 GdkEventButton    *event,
+                                                 XfceTasklistChild *group_child)
+{
+  GtkAllocation allocation;
+
+  panel_return_val_if_fail (XFCE_IS_TASKLIST (group_child->tasklist), FALSE);
+  panel_return_val_if_fail (group_child->type == CHILD_TYPE_GROUP, FALSE);
+
+  gtk_widget_get_allocation (button, &allocation);
+
+  /* only respond to in-button events */
+  if (event->type == GDK_BUTTON_RELEASE
+      && !xfce_taskbar_is_locked (group_child->tasklist)
+      && !(event->x == 0 && event->y == 0) /* 0,0 = outside the widget in Gtk */
+      && event->x >= 0 && event->x < allocation.width
+      && event->y >= 0 && event->y < allocation.height)
+    {
+      if (event->button == 2)
+        {
+          switch (group_child->tasklist->middle_click)
+            {
+            case XFCE_TASKLIST_MIDDLE_CLICK_NOTHING:
+              break;
+
+            case XFCE_TASKLIST_MIDDLE_CLICK_CLOSE_WINDOW:
+              break;
+
+            case XFCE_TASKLIST_MIDDLE_CLICK_MINIMIZE_WINDOW:
+              break;
+
+            case XFCE_TASKLIST_MIDDLE_CLICK_NEW_INSTANCE:
+              xfce_tasklist_button_start_new_instance_clicked (button,
+                                                               group_child->windows->data);
+              return TRUE;
+            }
+        }
+    }
+
+  return FALSE;
+}
+
+
+
 static void
 xfce_tasklist_group_button_button_size_allocate (GtkWidget         *widget,
                                                  GtkAllocation     *allocation,
@@ -4347,6 +4404,8 @@ xfce_tasklist_group_button_new (WnckClassGroup *class_group,
   /* note that the same signals should be in the proxy menu item too */
   g_signal_connect (G_OBJECT (child->button), "button-press-event",
       G_CALLBACK (xfce_tasklist_group_button_button_press_event), child);
+  g_signal_connect (G_OBJECT (child->button), "button-release-event",
+      G_CALLBACK (xfce_tasklist_group_button_button_release_event), child);
   g_signal_connect (G_OBJECT (child->button), "size-allocate",
       G_CALLBACK (xfce_tasklist_group_button_button_size_allocate), child);
 
