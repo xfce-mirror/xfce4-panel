@@ -220,12 +220,10 @@ sn_icon_box_apply_icon (GtkWidget    *image,
   GdkPixbuf   *work_pixbuf = NULL;
   gchar       *work_icon_name = NULL;
   gchar       *symbolic_icon_name = NULL;
-  gint         symbolic_icon_size;
   gboolean     use_pixbuf = TRUE;
   gboolean     use_symbolic = FALSE;
   gint         width, height;
   gchar       *s1, *s2;
-  gint         max_size = icon_size;
 
   gtk_image_clear (GTK_IMAGE (image));
 
@@ -263,29 +261,15 @@ sn_icon_box_apply_icon (GtkWidget    *image,
           if (prefer_symbolic && strstr (sn_preferred_name (), "-symbolic") == NULL)
             {
               symbolic_icon_name = g_strdup_printf ("%s-symbolic", sn_preferred_name ());
-
-              symbolic_icon_size = icon_size;
-              if (symbolic_icon_size <= 48)
-                {
-                  /* calculate highest bit (e.g. 22 -> 16, 63 -> 32) */
-                  symbolic_icon_size |= symbolic_icon_size >> 1;
-                  symbolic_icon_size |= symbolic_icon_size >> 2;
-                  symbolic_icon_size |= symbolic_icon_size >> 4;
-                  symbolic_icon_size |= symbolic_icon_size >> 8;
-                  symbolic_icon_size |= symbolic_icon_size >> 16;
-                  symbolic_icon_size = symbolic_icon_size - (symbolic_icon_size >> 1);
-                }
-
               icon_info = gtk_icon_theme_lookup_icon (icon_theme,
                                                       symbolic_icon_name,
-                                                      symbolic_icon_size,
+                                                      icon_size,
                                                       0);
               if (icon_info != NULL)
                 {
                   if (gtk_icon_info_is_symbolic (icon_info))
                     {
                       use_symbolic = TRUE;
-                      max_size = symbolic_icon_size;
                     }
                   else
                     {
@@ -357,7 +341,7 @@ sn_icon_box_apply_icon (GtkWidget    *image,
   if (symbolic_icon_name != NULL)
     g_free (symbolic_icon_name);
 
-  gtk_image_set_pixel_size (GTK_IMAGE (image), max_size);
+  gtk_image_set_pixel_size (GTK_IMAGE (image), icon_size);
 }
 
 
