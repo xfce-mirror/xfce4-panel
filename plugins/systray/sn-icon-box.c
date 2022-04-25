@@ -247,9 +247,9 @@ sn_icon_box_apply_icon (GtkWidget    *image,
         work_icon_name = g_strdup (icon_name);
 
       if (work_pixbuf == NULL && icon_theme_from_path != NULL)
-        work_pixbuf = gtk_icon_theme_load_icon (icon_theme_from_path,
-                                                work_icon_name,
-                                                icon_size, 0, NULL);
+        work_pixbuf = gtk_icon_theme_load_icon (icon_theme_from_path, work_icon_name, icon_size,
+                                                prefer_symbolic ? GTK_ICON_LOOKUP_FORCE_SYMBOLIC : 0,
+                                                NULL);
 
       if (work_pixbuf == NULL)
         work_pixbuf = gtk_icon_theme_load_icon (icon_theme, work_icon_name, icon_size,
