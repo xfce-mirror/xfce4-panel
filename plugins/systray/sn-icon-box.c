@@ -304,10 +304,10 @@ sn_icon_box_apply_icon (GtkWidget    *image,
       width = gdk_pixbuf_get_width (sn_preferred_pixbuf ());
       height = gdk_pixbuf_get_height (sn_preferred_pixbuf ());
 
-      if (width > icon_size && height > icon_size)
+      if (width > icon_size || height > icon_size)
         {
           /* scale pixbuf */
-          if (height > width)
+          if (height < width)
             {
               height = icon_size * height / width;
               width = icon_size;
