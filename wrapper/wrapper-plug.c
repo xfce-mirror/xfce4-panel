@@ -143,7 +143,7 @@ wrapper_plug_set_background_color (WrapperPlug *plug,
                                    const gchar *color_string)
 {
   GdkRGBA  color;
-  gchar   *css;
+  gchar   *css, *str;
 
   panel_return_if_fail (WRAPPER_IS_PLUG (plug));
 
@@ -156,11 +156,13 @@ wrapper_plug_set_background_color (WrapperPlug *plug,
 
   if (gdk_rgba_parse (&color, color_string))
     {
-      css = g_strdup_printf ("* { background: %s; }", gdk_rgba_to_string (&color));
+      str = gdk_rgba_to_string (&color);
+      css = g_strdup_printf ("* { background: %s; }", str);
 
       gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (plug->style_provider), css, -1, NULL);
 
       g_free (css);
+      g_free (str);
     }
 }
 

@@ -609,10 +609,11 @@ panel_base_window_active_timeout_destroyed (gpointer user_data)
 static void
 panel_base_window_set_background_color_css (PanelBaseWindow *window)
 {
-  gchar *css_string;
+  gchar *css_string, *str;
 
   panel_return_if_fail (window->background_rgba != NULL);
 
+  str = gdk_rgba_to_string (window->background_rgba);
   css_string = g_strdup_printf (".xfce4-panel.background { background: %s; "
                                                           "border-color: transparent; } %s",
                                 gdk_rgba_to_string (window->background_rgba),
@@ -621,6 +622,7 @@ panel_base_window_set_background_color_css (PanelBaseWindow *window)
   panel_base_window_set_background_css (window, css_string);
 
   g_free (css_string);
+  g_free (str);
 }
 
 
