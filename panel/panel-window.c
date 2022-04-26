@@ -1807,6 +1807,9 @@ panel_window_realize (GtkWidget *widget)
 
   (*GTK_WIDGET_CLASS (panel_window_parent_class)->realize) (widget);
 
+  /* clear opaque region so compositor properly apply transparency */
+  gdk_window_set_opaque_region (gtk_widget_get_window (widget), NULL);
+
   /* initialize scale factor */
   scale_factor = gdk_window_get_scale_factor (gtk_widget_get_window (widget));
   if (window->scale_factor != scale_factor)
