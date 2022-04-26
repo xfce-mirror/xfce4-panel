@@ -120,7 +120,12 @@ sn_button_init (SnButton *button)
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
   g_object_unref (css_provider);
 
-  gtk_widget_add_events (GTK_WIDGET (button), GDK_SCROLL_MASK | GDK_SMOOTH_SCROLL_MASK);
+  gtk_widget_add_events (GTK_WIDGET (button), GDK_SCROLL_MASK
+/* see https://gitlab.gnome.org/GNOME/gtk/-/issues/4866 */
+#if GTK_CHECK_VERSION (3, 24, 34)
+    | GDK_SMOOTH_SCROLL_MASK
+#endif
+  );
 
   button->item = NULL;
   button->config = NULL;
@@ -328,11 +333,33 @@ sn_button_scroll_event (GtkWidget      *widget,
   SnButton *button = XFCE_SN_BUTTON (widget);
   gdouble   delta_x, delta_y;
 
+/* see https://gitlab.gnome.org/GNOME/gtk/-/issues/4866 */
+#if GTK_CHECK_VERSION (3, 24, 34)
   if (!gdk_event_get_scroll_deltas ((GdkEvent *)event, &delta_x, &delta_y))
     {
       delta_x = event->delta_x;
       delta_y = event->delta_y;
     }
+#else
+  delta_x = delta_y = 0;
+  switch (event->direction)
+    {
+      case GDK_SCROLL_UP:
+        delta_y = -1;
+        break;
+      case GDK_SCROLL_DOWN:
+        delta_y = 1;
+        break;
+      case GDK_SCROLL_RIGHT:
+        delta_x = -1;
+        break;
+      case GDK_SCROLL_LEFT:
+        delta_x = 1;
+        break;
+      default:
+        break;
+    }
+#endif
 
   if (delta_x != 0 || delta_y != 0)
     {
