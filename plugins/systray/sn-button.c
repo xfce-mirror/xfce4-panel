@@ -26,6 +26,8 @@
 #include <string.h>
 #endif
 
+#include <gdk/gdkx.h>
+
 #include "sn-button.h"
 #include "sn-icon-box.h"
 #include "sn-util.h"
@@ -105,6 +107,8 @@ static void
 sn_button_init (SnButton *button)
 {
   GtkCssProvider *css_provider;
+  GdkEventMask    event_mask = GDK_SCROLL_MASK;
+  const gchar    *wm_name;
 
   gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
 
@@ -120,7 +124,12 @@ sn_button_init (SnButton *button)
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
   g_object_unref (css_provider);
 
-  gtk_widget_add_events (GTK_WIDGET (button), GDK_SCROLL_MASK | GDK_SMOOTH_SCROLL_MASK);
+  /* see https://gitlab.xfce.org/xfce/xfwm4/-/issues/641 */
+  wm_name = gdk_x11_screen_get_window_manager_name (gtk_widget_get_screen (GTK_WIDGET (button)));
+  if (g_strcmp0 (wm_name, "Xfwm4") != 0 && g_strcmp0 (wm_name, "unknown") != 0)
+    event_mask |= GDK_SMOOTH_SCROLL_MASK;
+
+  gtk_widget_add_events (GTK_WIDGET (button), event_mask);
 
   button->item = NULL;
   button->config = NULL;
@@ -328,10 +337,35 @@ sn_button_scroll_event (GtkWidget      *widget,
   SnButton *button = XFCE_SN_BUTTON (widget);
   gdouble   delta_x, delta_y;
 
-  if (!gdk_event_get_scroll_deltas ((GdkEvent *)event, &delta_x, &delta_y))
+  /* see reference to https://gitlab.xfce.org/xfce/xfwm4/-/issues/641 in init() */
+  if (gtk_widget_get_events (widget) & GDK_SMOOTH_SCROLL_MASK)
     {
-      delta_x = event->delta_x;
-      delta_y = event->delta_y;
+      if (!gdk_event_get_scroll_deltas ((GdkEvent *)event, &delta_x, &delta_y))
+        {
+          delta_x = event->delta_x;
+          delta_y = event->delta_y;
+        }
+    }
+  else
+    {
+      delta_x = delta_y = 0;
+      switch (event->direction)
+        {
+          case GDK_SCROLL_UP:
+            delta_y = -1;
+            break;
+          case GDK_SCROLL_DOWN:
+            delta_y = 1;
+            break;
+          case GDK_SCROLL_RIGHT:
+            delta_x = -1;
+            break;
+          case GDK_SCROLL_LEFT:
+            delta_x = 1;
+            break;
+          default:
+            break;
+        }
     }
 
   if (delta_x != 0 || delta_y != 0)
