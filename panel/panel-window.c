@@ -1803,15 +1803,17 @@ static void
 panel_window_realize (GtkWidget *widget)
 {
   PanelWindow *window = PANEL_WINDOW (widget);
+  GdkWindow   *gdkwindow;
   guint        scale_factor;
 
   (*GTK_WIDGET_CLASS (panel_window_parent_class)->realize) (widget);
 
-  /* clear opaque region so compositor properly apply transparency */
-  gdk_window_set_opaque_region (gtk_widget_get_window (widget), NULL);
+  /* clear opaque region so compositor properly applies transparency */
+  gdkwindow = gtk_widget_get_window (widget);
+  gdk_window_set_opaque_region (gdkwindow, NULL);
 
   /* initialize scale factor */
-  scale_factor = gdk_window_get_scale_factor (gtk_widget_get_window (widget));
+  scale_factor = gdk_window_get_scale_factor (gdkwindow);
   if (window->scale_factor != scale_factor)
     g_object_set (window, "scale-factor", scale_factor, NULL);
 
