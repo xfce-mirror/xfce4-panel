@@ -66,7 +66,7 @@ static void     panel_base_window_active_timeout_destroyed    (gpointer         
 static void     panel_base_window_set_background_color_css    (PanelBaseWindow      *window);
 static void     panel_base_window_set_background_image_css    (PanelBaseWindow      *window);
 static void     panel_base_window_set_background_css          (PanelBaseWindow      *window,
-                                                               gchar                *css_string);
+                                                               const gchar          *css_string);
 static void     panel_base_window_set_plugin_data             (PanelBaseWindow      *window,
                                                                GtkCallback           func);
 static void     panel_base_window_set_plugin_opacity          (GtkWidget            *widget,
@@ -607,48 +607,63 @@ panel_base_window_active_timeout_destroyed (gpointer user_data)
 
 
 static void
-panel_base_window_set_background_color_css (PanelBaseWindow *window) {
-  gchar                  *css_string;
+panel_base_window_set_background_color_css (PanelBaseWindow *window)
+{
+  gchar *css_string;
+
   panel_return_if_fail (window->background_rgba != NULL);
+
   css_string = g_strdup_printf (".xfce4-panel.background { background: %s; "
                                                           "border-color: transparent; } %s",
                                 gdk_rgba_to_string (window->background_rgba),
                                 PANEL_BASE_CSS);
+
   panel_base_window_set_background_css (window, css_string);
+
+  g_free (css_string);
 }
 
 
 
 static void
-panel_base_window_set_background_image_css (PanelBaseWindow *window) {
-  gchar                  *css_string;
+panel_base_window_set_background_image_css (PanelBaseWindow *window)
+{
+  gchar *css_string;
+
   panel_return_if_fail (window->background_image != NULL);
+
   css_string = g_strdup_printf (".xfce4-panel.background { background: url(\"%s\");"
                                                           "border-color: transparent; } %s",
                                 window->background_image, PANEL_BASE_CSS);
+
   panel_base_window_set_background_css (window, css_string);
+
+  g_free (css_string);
 }
 
 
 
 static void
-panel_base_window_set_background_css (PanelBaseWindow *window, gchar *css_string) {
-  GtkStyleContext        *context;
+panel_base_window_set_background_css (PanelBaseWindow *window,
+                                      const gchar *css_string)
+{
+  GtkStyleContext *context;
 
   context = gtk_widget_get_style_context (GTK_WIDGET (window));
+
   /* Reset the css style provider */
   gtk_style_context_remove_provider (context, GTK_STYLE_PROVIDER (window->priv->css_provider));
   gtk_css_provider_load_from_data (window->priv->css_provider, css_string, -1, NULL);
   gtk_style_context_add_provider (context,
                                   GTK_STYLE_PROVIDER (window->priv->css_provider),
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-  g_free (css_string);
 }
 
 
 
 void
-panel_base_window_reset_background_css (PanelBaseWindow *window) {
+panel_base_window_reset_background_css (PanelBaseWindow *window)
+{
   PanelBaseWindowPrivate  *priv = window->priv;
   GtkStyleContext         *context;
   GdkRGBA                 *background_rgba;
