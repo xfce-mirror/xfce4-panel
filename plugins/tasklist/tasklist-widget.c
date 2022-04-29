@@ -3023,17 +3023,17 @@ xfce_tasklist_button_get_child_path (XfceTasklistChild *child)
 
 
 static void
-xfce_tasklist_button_start_new_instance_clicked (GtkWidget         *item,
+xfce_tasklist_button_start_new_instance_clicked (GtkWidget         *widget,
                                                  XfceTasklistChild *child)
 {
   GError *error = NULL;
-  const gchar *path = g_object_get_data (G_OBJECT (item), "exe-path");
+  gchar *path = xfce_tasklist_button_get_child_path (child);
 
   if (path == NULL)
-    path = xfce_tasklist_button_get_child_path (child);
-
-  if (path == NULL)
-    return;
+    {
+      g_free (path);
+      return;
+    }
 
   if (!g_spawn_command_line_async (path, &error))
     {
@@ -3051,6 +3051,8 @@ xfce_tasklist_button_start_new_instance_clicked (GtkWidget         *item,
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
     }
+
+  g_free (path);
 }
 
 
@@ -3068,13 +3070,15 @@ xfce_tasklist_button_add_launch_new_instance_item (XfceTasklistChild *child,
   path = xfce_tasklist_button_get_child_path (child);
 
   if (path == NULL)
-    return;
+    {
+      g_free (path);
+      return;
+    }
 
   sep = gtk_separator_menu_item_new ();
   gtk_widget_show (sep);
 
   item = gtk_menu_item_new_with_label (_("Launch New Instance"));
-  g_object_set_data_full (G_OBJECT (item), "exe-path", path, g_free);
   gtk_widget_show (item);
   g_signal_connect (item,
                     "activate",
@@ -3091,6 +3095,8 @@ xfce_tasklist_button_add_launch_new_instance_item (XfceTasklistChild *child,
       gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), sep);
       gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), item);
     }
+
+  g_free (path);
 }
 
 
