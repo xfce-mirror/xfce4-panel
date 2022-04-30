@@ -423,8 +423,9 @@ main (gint argc, gchar **argv)
           G_CALLBACK (wrapper_gproxy_provider_signal), dbus_gproxy);
 
       /* connect to service signals */
-      gproxy_signal_id = g_signal_connect (dbus_gproxy, "g-signal",
-                                           G_CALLBACK (wrapper_gproxy_g_signal), provider);
+      gproxy_signal_id = g_signal_connect_object (dbus_gproxy, "g-signal",
+                                                  G_CALLBACK (wrapper_gproxy_g_signal),
+                                                  provider, 0);
 
       /* show the plugin */
       gtk_widget_show (GTK_WIDGET (provider));
