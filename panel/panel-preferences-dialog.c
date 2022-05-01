@@ -1471,14 +1471,14 @@ panel_preferences_dialog_item_selection_changed (GtkTreeSelection       *selecti
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
   provider = panel_preferences_dialog_item_get_selected (dialog, NULL);
-
-  /* when removing an item from the panel, this handler is called when the item is
-   * still selected but has already been unparented, so we also have to check its parent
-   * (see panel_itembar_unref()) */
-  if (G_LIKELY (provider != NULL && gtk_widget_get_parent (GTK_WIDGET (provider)) != NULL))
+  if (G_LIKELY (provider != NULL))
     {
+      /* leave if the selection change is irrelevant */
+      itembar = gtk_widget_get_parent (GTK_WIDGET (provider));
+      if (itembar != gtk_bin_get_child (GTK_BIN (dialog->active)))
+        return;
+
       /* get the current position and the items on the bar */
-      itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
       position = panel_itembar_get_child_index (PANEL_ITEMBAR (itembar), GTK_WIDGET (provider));
       items = panel_itembar_get_n_children (PANEL_ITEMBAR (itembar)) - 1;
 
