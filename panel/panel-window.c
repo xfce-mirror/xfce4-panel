@@ -2641,7 +2641,6 @@ static gboolean
 panel_window_autohide_ease_out (gpointer data)
 {
   PanelWindow  *window = PANEL_WINDOW (data);
-  PanelBorders  borders;
   gint          x, y, w, h, progress;
   gboolean      ret = TRUE;
 
@@ -2653,19 +2652,20 @@ G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   w = gdk_screen_get_width (window->screen);
   h = gdk_screen_get_height (window->screen);
 G_GNUC_END_IGNORE_DEPRECATIONS
-  borders = panel_base_window_get_borders (PANEL_BASE_WINDOW (window));
 
   if (IS_HORIZONTAL (window))
     {
       progress = panel_window_cubic_ease_out (window->alloc.height - window->popdown_progress) / window->popdown_speed;
-      if (PANEL_HAS_FLAG (borders, PANEL_BORDER_BOTTOM))
+      if (window->snap_position == SNAP_POSITION_N || window->snap_position == SNAP_POSITION_NC
+          || window->snap_position == SNAP_POSITION_NW || window->snap_position == SNAP_POSITION_NE)
         {
           y -= progress;
 
           if (y < 0 - window->alloc.height)
             ret = FALSE;
         }
-      else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_TOP))
+      else if (window->snap_position == SNAP_POSITION_S || window->snap_position == SNAP_POSITION_SC
+               || window->snap_position == SNAP_POSITION_SW || window->snap_position == SNAP_POSITION_SE)
         {
           y += progress;
 
@@ -2676,14 +2676,16 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   else
     {
       progress = panel_window_cubic_ease_out (window->alloc.width - window->popdown_progress) / window->popdown_speed;
-      if (PANEL_HAS_FLAG (borders, PANEL_BORDER_RIGHT))
+      if (window->snap_position == SNAP_POSITION_W || window->snap_position == SNAP_POSITION_WC
+          || window->snap_position == SNAP_POSITION_NW || window->snap_position == SNAP_POSITION_SW)
         {
           x -= progress;
 
           if (x < 0 - window->alloc.width)
             ret = FALSE;
         }
-      else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_LEFT))
+      else if (window->snap_position == SNAP_POSITION_E || window->snap_position == SNAP_POSITION_EC
+               || window->snap_position == SNAP_POSITION_NE || window->snap_position == SNAP_POSITION_SE)
         {
           x += progress;
 
