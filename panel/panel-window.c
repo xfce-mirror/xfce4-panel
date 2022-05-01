@@ -2672,9 +2672,6 @@ G_GNUC_END_IGNORE_DEPRECATIONS
           if (y > h + window->alloc.height)
             ret = FALSE;
         }
-      /* if the panel has no borders, we don't animate */
-      else
-        ret = FALSE;
     }
   else
     {
@@ -2693,9 +2690,6 @@ G_GNUC_END_IGNORE_DEPRECATIONS
           if (x > (w + window->alloc.width))
             ret = FALSE;
         }
-      /* if the panel has no borders, we don't animate */
-      else
-        ret = FALSE;
     }
 
   window->popdown_progress--;
