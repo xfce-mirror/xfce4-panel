@@ -246,9 +246,8 @@ systray_box_size_get_max_child_size (SystrayBox *box,
   row_size = box->row_size;
   offset = box->row_padding;
 
-  /* @todo This is not correct, but currently works. */
   if (box->square_icons)
-    icon_size = row_size / box->nrows;
+    icon_size = row_size;
 
   if (rows_ret != NULL)
     *rows_ret = rows;
