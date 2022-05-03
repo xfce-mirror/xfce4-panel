@@ -3004,32 +3004,6 @@ xfce_tasklist_button_enter_notify_event (GtkWidget         *button,
 
 
 
-static void
-xfce_tasklist_button_start_new_instance_clicked (GtkMenuItem       *item,
-                                                 XfceTasklistChild *child)
-{
-  GError *error = NULL;
-  const gchar *path = g_object_get_data (G_OBJECT (item), "exe-path");
-  if (!g_spawn_command_line_async (path, &error))
-    {
-      GtkWidget *dialog =
-        gtk_message_dialog_new (NULL,
-                                0,
-                                GTK_MESSAGE_ERROR,
-                                GTK_BUTTONS_OK,
-                                _("Unable to start new instance of '%s'"),
-                                path);
-      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-                                                "%s", error->message);
-      gtk_window_set_title (GTK_WINDOW (dialog), _("Error"));
-      g_error_free (error);
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
-    }
-}
-
-
-
 static gchar *
 xfce_tasklist_button_get_child_path (XfceTasklistChild *child)
 {
@@ -3047,6 +3021,42 @@ xfce_tasklist_button_get_child_path (XfceTasklistChild *child)
 }
 
 
+
+static void
+xfce_tasklist_button_start_new_instance_clicked (GtkWidget         *widget,
+                                                 XfceTasklistChild *child)
+{
+  GError *error = NULL;
+  gchar *path = xfce_tasklist_button_get_child_path (child);
+
+  if (path == NULL)
+    {
+      g_free (path);
+      return;
+    }
+
+  if (!g_spawn_command_line_async (path, &error))
+    {
+      GtkWidget *dialog =
+        gtk_message_dialog_new (NULL,
+                                0,
+                                GTK_MESSAGE_ERROR,
+                                GTK_BUTTONS_OK,
+                                _("Unable to start new instance of '%s'"),
+                                path);
+      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+                                                "%s", error->message);
+      gtk_window_set_title (GTK_WINDOW (dialog), _("Error"));
+      g_error_free (error);
+      gtk_dialog_run (GTK_DIALOG (dialog));
+      gtk_widget_destroy (dialog);
+    }
+
+  g_free (path);
+}
+
+
+
 static void
 xfce_tasklist_button_add_launch_new_instance_item (XfceTasklistChild *child,
                                                    GtkWidget         *menu,
@@ -3060,13 +3070,15 @@ xfce_tasklist_button_add_launch_new_instance_item (XfceTasklistChild *child,
   path = xfce_tasklist_button_get_child_path (child);
 
   if (path == NULL)
-    return;
+    {
+      g_free (path);
+      return;
+    }
 
   sep = gtk_separator_menu_item_new ();
   gtk_widget_show (sep);
 
   item = gtk_menu_item_new_with_label (_("Launch New Instance"));
-  g_object_set_data_full (G_OBJECT (item), "exe-path", path, g_free);
   gtk_widget_show (item);
   g_signal_connect (item,
                     "activate",
@@ -3083,6 +3095,8 @@ xfce_tasklist_button_add_launch_new_instance_item (XfceTasklistChild *child,
       gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), sep);
       gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), item);
     }
+
+  g_free (path);
 }
 
 
@@ -3198,6 +3212,10 @@ xfce_tasklist_button_button_release_event (GtkWidget         *button,
               if (!wnck_window_is_minimized (child->window))
                 wnck_window_minimize (child->window);
               return FALSE;
+
+            case XFCE_TASKLIST_MIDDLE_CLICK_NEW_INSTANCE:
+              xfce_tasklist_button_start_new_instance_clicked (button, child);
+              return TRUE;
             }
         }
     }
@@ -4056,6 +4074,51 @@ xfce_tasklist_group_button_button_press_event (GtkWidget         *button,
 
 
 
+static gboolean
+xfce_tasklist_group_button_button_release_event (GtkWidget         *button,
+                                                 GdkEventButton    *event,
+                                                 XfceTasklistChild *group_child)
+{
+  GtkAllocation allocation;
+
+  panel_return_val_if_fail (XFCE_IS_TASKLIST (group_child->tasklist), FALSE);
+  panel_return_val_if_fail (group_child->type == CHILD_TYPE_GROUP, FALSE);
+
+  gtk_widget_get_allocation (button, &allocation);
+
+  /* only respond to in-button events */
+  if (event->type == GDK_BUTTON_RELEASE
+      && !xfce_taskbar_is_locked (group_child->tasklist)
+      && !(event->x == 0 && event->y == 0) /* 0,0 = outside the widget in Gtk */
+      && event->x >= 0 && event->x < allocation.width
+      && event->y >= 0 && event->y < allocation.height)
+    {
+      if (event->button == 2)
+        {
+          switch (group_child->tasklist->middle_click)
+            {
+            case XFCE_TASKLIST_MIDDLE_CLICK_NOTHING:
+              break;
+
+            case XFCE_TASKLIST_MIDDLE_CLICK_CLOSE_WINDOW:
+              break;
+
+            case XFCE_TASKLIST_MIDDLE_CLICK_MINIMIZE_WINDOW:
+              break;
+
+            case XFCE_TASKLIST_MIDDLE_CLICK_NEW_INSTANCE:
+              xfce_tasklist_button_start_new_instance_clicked (button,
+                                                               group_child->windows->data);
+              return TRUE;
+            }
+        }
+    }
+
+  return FALSE;
+}
+
+
+
 static void
 xfce_tasklist_group_button_button_size_allocate (GtkWidget         *widget,
                                                  GtkAllocation     *allocation,
@@ -4361,6 +4424,8 @@ xfce_tasklist_group_button_new (WnckClassGroup *class_group,
   /* note that the same signals should be in the proxy menu item too */
   g_signal_connect (G_OBJECT (child->button), "button-press-event",
       G_CALLBACK (xfce_tasklist_group_button_button_press_event), child);
+  g_signal_connect (G_OBJECT (child->button), "button-release-event",
+      G_CALLBACK (xfce_tasklist_group_button_button_release_event), child);
   g_signal_connect (G_OBJECT (child->button), "size-allocate",
       G_CALLBACK (xfce_tasklist_group_button_button_size_allocate), child);
 
