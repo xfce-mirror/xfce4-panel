@@ -3030,10 +3030,7 @@ xfce_tasklist_button_start_new_instance_clicked (GtkWidget         *widget,
   gchar *path = xfce_tasklist_button_get_child_path (child);
 
   if (path == NULL)
-    {
-      g_free (path);
-      return;
-    }
+    return;
 
   if (!g_spawn_command_line_async (path, &error))
     {
@@ -3070,10 +3067,7 @@ xfce_tasklist_button_add_launch_new_instance_item (XfceTasklistChild *child,
   path = xfce_tasklist_button_get_child_path (child);
 
   if (path == NULL)
-    {
-      g_free (path);
-      return;
-    }
+    return;
 
   sep = gtk_separator_menu_item_new ();
   gtk_widget_show (sep);
