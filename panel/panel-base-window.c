@@ -616,8 +616,7 @@ panel_base_window_set_background_color_css (PanelBaseWindow *window)
   str = gdk_rgba_to_string (window->background_rgba);
   css_string = g_strdup_printf (".xfce4-panel.background { background: %s; "
                                                           "border-color: transparent; } %s",
-                                gdk_rgba_to_string (window->background_rgba),
-                                PANEL_BASE_CSS);
+                                str, PANEL_BASE_CSS);
 
   panel_base_window_set_background_css (window, css_string);
 
