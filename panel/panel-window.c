@@ -1146,6 +1146,7 @@ panel_window_motion_notify_event (GtkWidget      *widget,
 
           /* stop the drag, we somehow loose the motion event */
           window->grab_time = 0;
+          panel_window_thaw_autohide (window);
           retval = FALSE;
         }
     }
@@ -1235,6 +1236,7 @@ panel_window_button_press_event (GtkWidget      *widget,
           window->grab_time = event->time;
           window->grab_x = event->x;
           window->grab_y = event->y;
+          panel_window_freeze_autohide (window);
         }
 
       return !!(status == GDK_GRAB_SUCCESS);
@@ -1275,6 +1277,9 @@ panel_window_button_release_event (GtkWidget      *widget,
 
       /* send the new screen position to the panel plugins */
       panel_window_plugins_update (window, PLUGIN_PROP_SCREEN_POSITION);
+
+      /* release autohide lock */
+      panel_window_thaw_autohide (window);
 
       return TRUE;
     }
