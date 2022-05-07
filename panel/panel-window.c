@@ -235,7 +235,6 @@ enum _AutohideState
   AUTOHIDE_POPDOWN_SLOW, /* same as popdown, but timeout is 4x longer */
   AUTOHIDE_HIDDEN,       /* invisible */
   AUTOHIDE_POPUP,        /* invisible, but show timeout is running */
-  AUTOHIDE_BLOCKED       /* autohide is enabled, but blocked */
 };
 
 enum _SnapPosition
@@ -1054,7 +1053,7 @@ panel_window_leave_notify_event (GtkWidget        *widget,
   /* queue an autohide timeout if needed */
   if (event->detail != GDK_NOTIFY_INFERIOR
       && window->autohide_state != AUTOHIDE_DISABLED
-      && window->autohide_state != AUTOHIDE_BLOCKED)
+      && window->autohide_block == 0)
     {
       /* simulate a geometry change to check for overlapping windows with intelligent hiding */
       if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
@@ -2592,7 +2591,7 @@ panel_window_autohide_timeout (gpointer user_data)
   PanelWindow *window = PANEL_WINDOW (user_data);
 
   panel_return_val_if_fail (window->autohide_state != AUTOHIDE_DISABLED, FALSE);
-  panel_return_val_if_fail (window->autohide_state != AUTOHIDE_BLOCKED, FALSE);
+  panel_return_val_if_fail (window->autohide_block == 0, FALSE);
 
   /* update the status */
   if (window->autohide_state == AUTOHIDE_POPDOWN
@@ -2733,7 +2732,7 @@ panel_window_autohide_queue (PanelWindow   *window,
       || window->snap_position != SNAP_POSITION_NONE)
     panel_window_screen_layout_changed (window->screen, window);
 
-  if (new_state == AUTOHIDE_DISABLED || new_state == AUTOHIDE_BLOCKED)
+  if (new_state == AUTOHIDE_DISABLED || new_state == AUTOHIDE_VISIBLE)
     {
       /* queue a resize to make sure the panel is visible */
       gtk_widget_queue_resize (GTK_WIDGET (window));
@@ -2898,7 +2897,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
           if (window->autohide_state != AUTOHIDE_HIDDEN)
           {
             panel_window_autohide_queue (window,
-                window->autohide_block == 0 ? AUTOHIDE_POPDOWN_SLOW : AUTOHIDE_BLOCKED);
+                window->autohide_block == 0 ? AUTOHIDE_POPDOWN_SLOW : AUTOHIDE_VISIBLE);
           }
         }
       else if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
@@ -3444,7 +3443,7 @@ panel_window_freeze_autohide (PanelWindow *window)
 
   if (window->autohide_block == 1
       && window->autohide_state != AUTOHIDE_DISABLED)
-    panel_window_autohide_queue (window, AUTOHIDE_BLOCKED);
+    panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
 }
 
 
