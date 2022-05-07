@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-03 00:47+0200\n"
+"POT-Creation-Date: 2022-05-07 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Kiril Kirilov <cybercop_montana@abv.bg>, 2014-2015,2017-2020,2022\n"
 "Language-Team: Bulgarian (http://www.transifex.com/xfce/xfce4-panel/language/bg/)\n"
@@ -39,7 +39,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "панели;настройки;предпочитания;лента на задачите;автоматично скриване;меню на програмите;бутони;стартер;зона за уведомяване;състояние;икони;добавки;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2975
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3047
 msgid "Panel"
 msgstr "Панел"
 
@@ -59,11 +59,11 @@ msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "При премахване на елемента от панела, конфигурацията му също ще бъде изгубена."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:163
+#: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1326
-#: ../plugins/applicationsmenu/applicationsmenu.c:602
-#: ../plugins/directorymenu/directorymenu.c:473
-#: ../plugins/directorymenu/directorymenu.c:941
+#: ../plugins/applicationsmenu/applicationsmenu.c:601
+#: ../plugins/directorymenu/directorymenu.c:472
+#: ../plugins/directorymenu/directorymenu.c:937
 msgid "_Cancel"
 msgstr "_Отказ"
 
@@ -73,7 +73,7 @@ msgstr "_Отказ"
 #: ../panel/panel-preferences-dialog.c:961
 #: ../panel/panel-preferences-dialog.c:1327
 #: ../panel/panel-preferences-dialog.glade.h:59
-#: ../plugins/launcher/launcher-dialog.c:859
+#: ../plugins/launcher/launcher-dialog.c:861
 msgid "_Remove"
 msgstr "_Премахване"
 
@@ -81,7 +81,7 @@ msgstr "_Премахване"
 msgid "_Properties"
 msgstr "_Свойства"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1227 ../panel/panel-window.c:3066
+#: ../libxfce4panel/xfce-panel-plugin.c:1227 ../panel/panel-window.c:3138
 msgid "_About"
 msgstr "_Относно"
 
@@ -93,20 +93,20 @@ msgstr "_Преместване"
 msgid "Pane_l"
 msgstr "Панел"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1292 ../panel/panel-window.c:2988
+#: ../libxfce4panel/xfce-panel-plugin.c:1292 ../panel/panel-window.c:3060
 msgid "Add _New Items..."
 msgstr "Добавяне на нови елементи..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1307 ../panel/panel-window.c:3003
+#: ../libxfce4panel/xfce-panel-plugin.c:1307 ../panel/panel-window.c:3075
 msgid "Panel Pr_eferences..."
 msgstr "Настройки на панела..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:3035
+#: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:3107
 msgid "Log _Out"
 msgstr "Изход"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1348 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3055
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3127
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -114,7 +114,7 @@ msgstr "Изход"
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 #: ../plugins/pager/pager-dialog.glade.h:4
 #: ../plugins/separator/separator-dialog.glade.h:6
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "_Help"
 msgstr "_Помощ"
@@ -299,45 +299,46 @@ msgstr "Невалиден тип подсказка „%s“. Допустим�
 msgid "Unable to open the e-mail address"
 msgstr "Не може да бъде отворен e-mail адреса"
 
-#: ../panel/panel-dialogs.c:83
+#: ../panel/panel-dialogs.c:84
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Панелът на графична среда Xfce"
 
-#: ../panel/panel-dialogs.c:87
+#: ../panel/panel-dialogs.c:88
 msgid "translator-credits"
 msgstr "Kiril Kirilov (Cybercop) <cybercop_montana@abv.bg>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:14
+#: ../panel/panel-dialogs.c:162
 msgid "Add New Item"
 msgstr "Добавяне на нов елемент"
 
-#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:201
+#: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:201
 #: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "_Добавяне"
 
-#: ../panel/panel-dialogs.c:175
+#: ../panel/panel-dialogs.c:176
 msgid "Please choose a panel for the new plugin:"
 msgstr "Моля, изберете панел за новата добавка:"
 
-#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:896
+#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:896
 #, c-format
 msgid "Panel %d"
 msgstr "Панел %d"
 
-#: ../panel/panel-dialogs.c:235
+#: ../panel/panel-dialogs.c:236
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr "Тъй- като, панелът е стартиран в режим kiosk, вие не можете да правите промени в настройките му като обикновен потребител"
 
-#: ../panel/panel-dialogs.c:237
+#: ../panel/panel-dialogs.c:238
 msgid "Modifying the panel is not allowed"
 msgstr "Не е разрешено да се правят промени в панела"
 
 #: ../panel/panel-item-dialog.c:195
+#: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Add New Items"
 msgstr "Добавяне на нов елемент"
 
@@ -351,7 +352,7 @@ msgstr "Добавяне на нов елемент"
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:5
 #: ../plugins/separator/separator-dialog.glade.h:5
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "_Close"
 msgstr "_Затваряне"
@@ -700,7 +701,7 @@ msgstr "Опитен"
 msgid "Expert"
 msgstr "Експерт"
 
-#: ../panel/panel-window.c:3020
+#: ../panel/panel-window.c:3092
 msgid "_Lock Panel"
 msgstr "Заключване на панел"
 
@@ -783,144 +784,144 @@ msgstr "Показване на диалог за потвърждение с в
 msgid "_Actions"
 msgstr "_Действия"
 
-#: ../plugins/actions/actions.c:165
+#: ../plugins/actions/actions.c:167
 msgid "Log Out"
 msgstr "Изход"
 
-#: ../plugins/actions/actions.c:166
+#: ../plugins/actions/actions.c:168
 msgid "_Log Out"
 msgstr "Изход"
 
-#: ../plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:169
 msgid "Are you sure you want to log out?"
 msgstr "Сигурен ли сте, че искате да излезете?"
 
-#: ../plugins/actions/actions.c:168
+#: ../plugins/actions/actions.c:170
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Излизане след %d секунди."
 
-#: ../plugins/actions/actions.c:174
+#: ../plugins/actions/actions.c:176
 msgid "Log Out..."
 msgstr "Излизане..."
 
-#: ../plugins/actions/actions.c:175
+#: ../plugins/actions/actions.c:177
 msgid "Log _Out..."
 msgstr "Излизане..."
 
-#: ../plugins/actions/actions.c:182
+#: ../plugins/actions/actions.c:184
 msgid "Switch User"
 msgstr "Смяна на потребител"
 
-#: ../plugins/actions/actions.c:183
+#: ../plugins/actions/actions.c:185
 msgid "_Switch User"
 msgstr "Смяна на потребител..."
 
-#: ../plugins/actions/actions.c:190
+#: ../plugins/actions/actions.c:192
 msgid "Lock Screen"
 msgstr "Заключване на екрана"
 
-#: ../plugins/actions/actions.c:191
+#: ../plugins/actions/actions.c:193
 msgid "Loc_k Screen"
 msgstr "Заключване на екрана"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:200
 msgid "Hibernate"
 msgstr "Дълбоко приспиване"
 
-#: ../plugins/actions/actions.c:199
+#: ../plugins/actions/actions.c:201
 msgid "_Hibernate"
 msgstr "Дълбоко приспиване"
 
-#: ../plugins/actions/actions.c:200
+#: ../plugins/actions/actions.c:202
 msgid "Do you want to suspend to disk?"
 msgstr "Искате ли да приспите компютъра върху диска?"
 
-#: ../plugins/actions/actions.c:201
+#: ../plugins/actions/actions.c:203
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Дълбоко приспиване на компютъра след %d секунди."
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:209
 msgid "Hybrid Sleep"
 msgstr "Хибридно приспиване"
 
-#: ../plugins/actions/actions.c:208
+#: ../plugins/actions/actions.c:210
 msgid "_Hybrid Sleep"
 msgstr "_Хибридно приспиване"
 
-#: ../plugins/actions/actions.c:209
+#: ../plugins/actions/actions.c:211
 msgid "Do you want to hibernate and suspend the system?"
 msgstr "Искате ли да приспите и да въведете в хибернация системата?"
 
-#: ../plugins/actions/actions.c:210
+#: ../plugins/actions/actions.c:212
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr "Приспиване и въвеждане в хибернация на компютъра след %d секунди."
 
-#: ../plugins/actions/actions.c:216
+#: ../plugins/actions/actions.c:218
 msgid "Suspend"
 msgstr "Приспиване"
 
-#: ../plugins/actions/actions.c:217
+#: ../plugins/actions/actions.c:219
 msgid "Sus_pend"
 msgstr "Приспиване"
 
-#: ../plugins/actions/actions.c:218
+#: ../plugins/actions/actions.c:220
 msgid "Do you want to suspend to RAM?"
 msgstr "Искате ли да приспите компютъра върху RAM паметта?"
 
-#: ../plugins/actions/actions.c:219
+#: ../plugins/actions/actions.c:221
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Приспиване на компютъра след %d секунди."
 
-#: ../plugins/actions/actions.c:225
+#: ../plugins/actions/actions.c:227
 msgid "Restart"
 msgstr "Рестартиране"
 
-#: ../plugins/actions/actions.c:226
+#: ../plugins/actions/actions.c:228
 msgid "_Restart"
 msgstr "Рестартиране"
 
-#: ../plugins/actions/actions.c:227
+#: ../plugins/actions/actions.c:229
 msgid "Are you sure you want to restart?"
 msgstr "Сигурен ли сте, че искате да рестартирате компютъра?"
 
-#: ../plugins/actions/actions.c:228
+#: ../plugins/actions/actions.c:230
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Рестартиране на компютъра след %d секунди."
 
-#: ../plugins/actions/actions.c:234
+#: ../plugins/actions/actions.c:236
 msgid "Shut Down"
 msgstr "Изключване"
 
-#: ../plugins/actions/actions.c:235
+#: ../plugins/actions/actions.c:237
 msgid "Shut _Down"
 msgstr "Изключване"
 
-#: ../plugins/actions/actions.c:236
+#: ../plugins/actions/actions.c:238
 msgid "Are you sure you want to shut down?"
 msgstr "Сигурен ли сте, че искате да изключите компютъра?"
 
-#: ../plugins/actions/actions.c:237
+#: ../plugins/actions/actions.c:239
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Компютърът ще бъде изключен след %d секунди."
 
-#: ../plugins/actions/actions.c:685
+#: ../plugins/actions/actions.c:688
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Разделител"
 
-#: ../plugins/actions/actions.c:1110
+#: ../plugins/actions/actions.c:1122
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Неуспешно изпълнение на действие „%s“"
 
-#: ../plugins/actions/actions.c:1279
+#: ../plugins/actions/actions.c:1331
 msgid "Little Mouse"
 msgstr "Малка мишка"
 
@@ -968,7 +969,7 @@ msgstr "Изберете тази опция, за да се показват о
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Appearance"
 msgstr "Външен вид"
@@ -1002,19 +1003,19 @@ msgstr "Файл с меню"
 msgid "Applications"
 msgstr "Програми"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:600
-#: ../plugins/directorymenu/directorymenu.c:471
+#: ../plugins/applicationsmenu/applicationsmenu.c:599
+#: ../plugins/directorymenu/directorymenu.c:470
 msgid "Select An Icon"
 msgstr "Избиране на икона"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/directorymenu/directorymenu.c:474
+#: ../plugins/applicationsmenu/applicationsmenu.c:602
+#: ../plugins/directorymenu/directorymenu.c:473
 msgid "_OK"
 msgstr "_ОК"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2519
+#: ../plugins/applicationsmenu/applicationsmenu.c:637
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2501
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Неуспех при изпълнението на команда „%s“."
@@ -1416,69 +1417,69 @@ msgstr "Колко е часът?"
 msgid "Directory Menu"
 msgstr "Меню на директория"
 
-#: ../plugins/directorymenu/directorymenu.c:692
+#: ../plugins/directorymenu/directorymenu.c:690
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Неуспешно стартиране на програмата „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:724
+#: ../plugins/directorymenu/directorymenu.c:722
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Неуспешно запитване за типа на съдържанието на „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:733
+#: ../plugins/directorymenu/directorymenu.c:731
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Не е намерена програма по подразбиране за „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:749
+#: ../plugins/directorymenu/directorymenu.c:747
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Неуспешно стартиране на програмата по подразбиране за „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:847
+#: ../plugins/directorymenu/directorymenu.c:843
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Неуспешно изпълнение на предпочитаната програма за категория „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:930
+#: ../plugins/directorymenu/directorymenu.c:926
 msgid "Create New Folder"
 msgstr "Създаване на нова папка"
 
-#: ../plugins/directorymenu/directorymenu.c:935
+#: ../plugins/directorymenu/directorymenu.c:931
 msgid "Create New Text Document"
 msgstr "Създаване на нов текстов документ"
 
-#: ../plugins/directorymenu/directorymenu.c:942
+#: ../plugins/directorymenu/directorymenu.c:938
 msgid "C_reate"
 msgstr "_Създаване"
 
-#: ../plugins/directorymenu/directorymenu.c:943
+#: ../plugins/directorymenu/directorymenu.c:939
 msgid "Create & _Open"
 msgstr "Създаване и _Отваряне"
 
-#: ../plugins/directorymenu/directorymenu.c:957
+#: ../plugins/directorymenu/directorymenu.c:953
 msgid "Enter the new name:"
 msgstr "Въведете новото име:"
 
-#: ../plugins/directorymenu/directorymenu.c:993
+#: ../plugins/directorymenu/directorymenu.c:989
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Неуспешно създаване на папка: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1078
+#: ../plugins/directorymenu/directorymenu.c:1074
 msgid "Open Folder"
 msgstr "Отваряне на папка"
 
-#: ../plugins/directorymenu/directorymenu.c:1095
+#: ../plugins/directorymenu/directorymenu.c:1091
 msgid "Open in Terminal"
 msgstr "Отваряне в терминал"
 
-#: ../plugins/directorymenu/directorymenu.c:1112
+#: ../plugins/directorymenu/directorymenu.c:1108
 msgid "Create Folder..."
 msgstr "Създаване на папка..."
 
-#: ../plugins/directorymenu/directorymenu.c:1129
+#: ../plugins/directorymenu/directorymenu.c:1125
 msgid "Create Text Document..."
 msgstr "Създаване на текстов документ..."
 
@@ -1530,37 +1531,37 @@ msgid "_File Pattern:"
 msgstr "Шаблон на файл:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:16
-#: ../plugins/tasklist/tasklist-dialog.glade.h:30
+#: ../plugins/tasklist/tasklist-dialog.glade.h:31
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
 msgstr "Филтриране"
 
-#: ../plugins/launcher/launcher.c:409
+#: ../plugins/launcher/launcher.c:403
 msgid "Open launcher menu"
 msgstr "Отваряне на стартер на меню"
 
-#: ../plugins/launcher/launcher.c:1649
+#: ../plugins/launcher/launcher.c:1633
 msgid "Unnamed Item"
 msgstr "Елемент без име"
 
-#: ../plugins/launcher/launcher.c:1837
+#: ../plugins/launcher/launcher.c:1821
 msgid "No items"
 msgstr "Няма елементи"
 
-#: ../plugins/launcher/launcher-dialog.c:792
+#: ../plugins/launcher/launcher-dialog.c:794
 msgid "Failed to open desktop item editor"
 msgstr "Не може да бъде отворен редактора на елементите на работният плот"
 
-#: ../plugins/launcher/launcher-dialog.c:860
+#: ../plugins/launcher/launcher-dialog.c:862
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Ако изтриете елемента, той ще бъде изгубен безвъзвратно"
 
-#: ../plugins/launcher/launcher-dialog.c:861
+#: ../plugins/launcher/launcher-dialog.c:863
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Сигурни ли сте, че искате да премахнете „%s“?"
 
-#: ../plugins/launcher/launcher-dialog.c:862
+#: ../plugins/launcher/launcher-dialog.c:864
 msgid "Unnamed item"
 msgstr "Елемент без име"
 
@@ -1909,116 +1910,120 @@ msgid "Minimize Window"
 msgstr "Минимизиране на прозореца"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
+msgid "New Instance"
+msgstr "Ново копие"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Timestamp"
 msgstr "Клеймо"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+#: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "Group title and timestamp"
 msgstr "Групиране на заглавие и клеймо"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:9
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Window title"
 msgstr "Заглавие на прозорец"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Group title and window title"
 msgstr "Групиране на име на програма и заглавие на прозорец"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "None, allow drag-and-drop"
 msgstr "Без, позволява влачене и пускане"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Window Buttons"
 msgstr "Бутони на прозорец"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show button _labels"
 msgstr "Показване на заглавията на бутоните"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Show _flat buttons"
 msgstr "Показване на плоски бутони"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Show _handle"
 msgstr "Показване на ръкохватка"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Show _tooltips"
 msgstr "Показване на подсказки"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Sorting _order:"
 msgstr "Ред на подреждане:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window _grouping:"
 msgstr "Групиране на прозорци:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "Mi_ddle click action:"
 msgstr "Действие при кликване със среден бутон на мишката:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:23
+#: ../plugins/tasklist/tasklist-dialog.glade.h:24
 msgid "Restore minimized windows to current _workspace"
 msgstr "Възстановяване на минимизираните прозорци в текущото работно място"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "D_raw window frame when hovering a button"
 msgstr "Очертава рамка на прозореца при посочване на бутон"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+#: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "_Switch windows using the mouse wheel"
 msgstr "Превключване на прозорците с колелото на мишката"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:26
+#: ../plugins/tasklist/tasklist-dialog.glade.h:27
 msgid "Behaviour"
 msgstr "Поведение"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:27
+#: ../plugins/tasklist/tasklist-dialog.glade.h:28
 msgid "Show windows from _all workspaces or viewports"
 msgstr "Показване на прозорците от всички работни места или демонстрационни прозорци"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:28
+#: ../plugins/tasklist/tasklist-dialog.glade.h:29
 msgid "Show windows from all mo_nitors"
 msgstr "Показване на прозорците от всички монитори"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:29
+#: ../plugins/tasklist/tasklist-dialog.glade.h:30
 msgid "Show only _minimized windows"
 msgstr "Показване само на минимизираните прозорци"
 
-#: ../plugins/tasklist/tasklist-widget.c:3001
+#: ../plugins/tasklist/tasklist-widget.c:3042
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Не може да бъде стартирано ново копие на \"%s\""
 
-#: ../plugins/tasklist/tasklist-widget.c:3005
+#: ../plugins/tasklist/tasklist-widget.c:3046
 msgid "Error"
 msgstr "Грешка"
 
-#: ../plugins/tasklist/tasklist-widget.c:3049
+#: ../plugins/tasklist/tasklist-widget.c:3075
 msgid "Launch New Instance"
 msgstr "Стартиране на ново копие"
 
-#: ../plugins/tasklist/tasklist-widget.c:3803
+#: ../plugins/tasklist/tasklist-widget.c:3834
 msgid "Mi_nimize All"
 msgstr "Минимизиране на всички"
 
-#: ../plugins/tasklist/tasklist-widget.c:3811
+#: ../plugins/tasklist/tasklist-widget.c:3842
 msgid "Un_minimize All"
 msgstr "Деминимизиране на всички"
 
-#: ../plugins/tasklist/tasklist-widget.c:3819
+#: ../plugins/tasklist/tasklist-widget.c:3850
 msgid "Ma_ximize All"
 msgstr "Максимизиране на всички"
 
-#: ../plugins/tasklist/tasklist-widget.c:3827
+#: ../plugins/tasklist/tasklist-widget.c:3858
 msgid "_Unmaximize All"
 msgstr "Демаксимизиране на всички"
 
-#: ../plugins/tasklist/tasklist-widget.c:3839
+#: ../plugins/tasklist/tasklist-widget.c:3870
 msgid "_Close All"
 msgstr "Затваряне на всички"
 
@@ -2030,24 +2035,24 @@ msgstr "Превключване между отворените прозорц�
 msgid "Desktop"
 msgstr "Работен плот"
 
-#: ../plugins/windowmenu/windowmenu.c:1277
+#: ../plugins/windowmenu/windowmenu.c:1275
 msgid "No Windows"
 msgstr "Няма прозорци"
 
-#: ../plugins/windowmenu/windowmenu.c:1292
+#: ../plugins/windowmenu/windowmenu.c:1290
 msgid "Urgent Windows"
 msgstr "Спешни прозорци"
 
-#: ../plugins/windowmenu/windowmenu.c:1335
+#: ../plugins/windowmenu/windowmenu.c:1333
 msgid "Add Workspace"
 msgstr "Добавяне на работно място"
 
-#: ../plugins/windowmenu/windowmenu.c:1358
+#: ../plugins/windowmenu/windowmenu.c:1356
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Премахване на работно място „%s“"
 
-#: ../plugins/windowmenu/windowmenu.c:1360
+#: ../plugins/windowmenu/windowmenu.c:1358
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Премахване на работно място %d"
