@@ -3468,9 +3468,18 @@ panel_window_thaw_autohide (PanelWindow *window)
       /* simulate a geometry change to check for overlapping windows with intelligent hiding */
       if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
         panel_window_active_window_geometry_changed (window->wnck_active_window, window);
-      /* otherwise just hide the panel */
+      /* otherwise hide the panel if the pointer is outside */
       else
-        panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
+        {
+          GdkDisplay *display = gdk_display_get_default ();
+          GdkSeat *seat = gdk_display_get_default_seat (display);
+          GdkDevice *device = gdk_seat_get_pointer (seat);
+          GdkWindow *gdkwindow = gdk_device_get_window_at_position (device, NULL, NULL);
+
+          if (gdkwindow == NULL || gdk_window_get_effective_toplevel (gdkwindow)
+                                   != gtk_widget_get_window (GTK_WIDGET (window)))
+            panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
+        }
     }
 }
 
