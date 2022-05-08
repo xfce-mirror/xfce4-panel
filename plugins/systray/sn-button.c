@@ -28,6 +28,8 @@
 
 #include <gdk/gdkx.h>
 
+#include <libxfce4panel/libxfce4panel.h>
+
 #include "sn-button.h"
 #include "sn-icon-box.h"
 #include "sn-util.h"
@@ -242,6 +244,7 @@ sn_button_menu_deactivate (GtkWidget *widget,
   }
 
   gtk_widget_unset_state_flags (widget, GTK_STATE_FLAG_ACTIVE);
+  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (button->pos_func_data), FALSE);
 }
 
 
@@ -275,6 +278,7 @@ sn_button_button_press (GtkWidget      *widget,
             g_signal_connect_swapped (G_OBJECT (button->menu), "deactivate",
                                       G_CALLBACK (sn_button_menu_deactivate), button);
 
+          xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (button->pos_func_data), TRUE);
           gtk_menu_popup_at_widget (GTK_MENU (button->menu), widget,
                                     GDK_GRAVITY_NORTH_WEST, GDK_GRAVITY_NORTH_WEST,
                                     (GdkEvent *)event);
