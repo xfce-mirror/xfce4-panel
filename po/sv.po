@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-03 00:47+0200\n"
+"POT-Creation-Date: 2022-05-07 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Luna Jernberg <bittin@cafe8bitar.se>, 2018,2020-2022\n"
 "Language-Team: Swedish (http://www.transifex.com/xfce/xfce4-panel/language/sv/)\n"
@@ -44,7 +44,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "paneler;inställningar;inställningar;programfält;autodölj;programmeny;start;knappar;startare;aviseringsområde;status;ikoner;insticksprogram;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2975
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3047
 msgid "Panel"
 msgstr "Panel"
 
@@ -64,11 +64,11 @@ msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "Om du tar bort objektet från panelen betyder det också att dess konfiguration kommer att bli borttagen."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:163
+#: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1326
-#: ../plugins/applicationsmenu/applicationsmenu.c:602
-#: ../plugins/directorymenu/directorymenu.c:473
-#: ../plugins/directorymenu/directorymenu.c:941
+#: ../plugins/applicationsmenu/applicationsmenu.c:601
+#: ../plugins/directorymenu/directorymenu.c:472
+#: ../plugins/directorymenu/directorymenu.c:937
 msgid "_Cancel"
 msgstr "_Avbryt"
 
@@ -78,7 +78,7 @@ msgstr "_Avbryt"
 #: ../panel/panel-preferences-dialog.c:961
 #: ../panel/panel-preferences-dialog.c:1327
 #: ../panel/panel-preferences-dialog.glade.h:59
-#: ../plugins/launcher/launcher-dialog.c:859
+#: ../plugins/launcher/launcher-dialog.c:861
 msgid "_Remove"
 msgstr "Ta bo_rt"
 
@@ -86,7 +86,7 @@ msgstr "Ta bo_rt"
 msgid "_Properties"
 msgstr "Egenska_per"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1227 ../panel/panel-window.c:3066
+#: ../libxfce4panel/xfce-panel-plugin.c:1227 ../panel/panel-window.c:3138
 msgid "_About"
 msgstr "_Om"
 
@@ -98,20 +98,20 @@ msgstr "_Flytta"
 msgid "Pane_l"
 msgstr "Pane_l"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1292 ../panel/panel-window.c:2988
+#: ../libxfce4panel/xfce-panel-plugin.c:1292 ../panel/panel-window.c:3060
 msgid "Add _New Items..."
 msgstr "Lägg till _nya objekt..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1307 ../panel/panel-window.c:3003
+#: ../libxfce4panel/xfce-panel-plugin.c:1307 ../panel/panel-window.c:3075
 msgid "Panel Pr_eferences..."
 msgstr "Panelinstä_llningar..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:3035
+#: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:3107
 msgid "Log _Out"
 msgstr "Logga _ut"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1348 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3055
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3127
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -119,7 +119,7 @@ msgstr "Logga _ut"
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 #: ../plugins/pager/pager-dialog.glade.h:4
 #: ../plugins/separator/separator-dialog.glade.h:6
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "_Help"
 msgstr "_Hjälp"
@@ -304,45 +304,46 @@ msgstr "Ogiltig antydanstyp \"%s\". Giltiga typer är bool, double, int, string 
 msgid "Unable to open the e-mail address"
 msgstr "Det gick inte att öppna e-postadressen"
 
-#: ../panel/panel-dialogs.c:83
+#: ../panel/panel-dialogs.c:84
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Panelen i skrivbordsmiljön Xfce"
 
-#: ../panel/panel-dialogs.c:87
+#: ../panel/panel-dialogs.c:88
 msgid "translator-credits"
 msgstr "Daniel Nylander <po@danielnylander.se>\nPåvel Nicklasson <pavel@frimix.se>\n\nSkicka synpunkter på översättningen till\n<tp-sv@listor.tp-sv.se>."
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:14
+#: ../panel/panel-dialogs.c:162
 msgid "Add New Item"
 msgstr "Lägg till nytt objekt"
 
-#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:201
+#: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:201
 #: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "L_ägg till"
 
-#: ../panel/panel-dialogs.c:175
+#: ../panel/panel-dialogs.c:176
 msgid "Please choose a panel for the new plugin:"
 msgstr "Välj en panel för den nya insticksmodulen:"
 
-#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:896
+#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:896
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
 
-#: ../panel/panel-dialogs.c:235
+#: ../panel/panel-dialogs.c:236
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr "Eftersom panelen körs i kioskläge, är det inte tillåtet att göra ändringar i panelkonfigurationen som en vanlig användare"
 
-#: ../panel/panel-dialogs.c:237
+#: ../panel/panel-dialogs.c:238
 msgid "Modifying the panel is not allowed"
 msgstr "Ändring av panelen tillåts inte"
 
 #: ../panel/panel-item-dialog.c:195
+#: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Add New Items"
 msgstr "Lägg till nya objekt"
 
@@ -356,7 +357,7 @@ msgstr "Lägg till nya objekt"
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:5
 #: ../plugins/separator/separator-dialog.glade.h:5
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "_Close"
 msgstr "_Stäng"
@@ -705,7 +706,7 @@ msgstr "Erfaren"
 msgid "Expert"
 msgstr "Expert"
 
-#: ../panel/panel-window.c:3020
+#: ../panel/panel-window.c:3092
 msgid "_Lock Panel"
 msgstr "_Lås panel"
 
@@ -788,144 +789,144 @@ msgstr "Visa en bekräftelsedialog med en 30 sekunders timeout för en del av å
 msgid "_Actions"
 msgstr "_Åtgärder"
 
-#: ../plugins/actions/actions.c:165
+#: ../plugins/actions/actions.c:167
 msgid "Log Out"
 msgstr "Logga ut"
 
-#: ../plugins/actions/actions.c:166
+#: ../plugins/actions/actions.c:168
 msgid "_Log Out"
 msgstr "_Logga ut"
 
-#: ../plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:169
 msgid "Are you sure you want to log out?"
 msgstr "Är du säker på att du vill logga ut?"
 
-#: ../plugins/actions/actions.c:168
+#: ../plugins/actions/actions.c:170
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Loggar ut om %d sekunder."
 
-#: ../plugins/actions/actions.c:174
+#: ../plugins/actions/actions.c:176
 msgid "Log Out..."
 msgstr "Logga ut..."
 
-#: ../plugins/actions/actions.c:175
+#: ../plugins/actions/actions.c:177
 msgid "Log _Out..."
 msgstr "L_ogga ut..."
 
-#: ../plugins/actions/actions.c:182
+#: ../plugins/actions/actions.c:184
 msgid "Switch User"
 msgstr "Växla användare"
 
-#: ../plugins/actions/actions.c:183
+#: ../plugins/actions/actions.c:185
 msgid "_Switch User"
 msgstr "V_äxla användare"
 
-#: ../plugins/actions/actions.c:190
+#: ../plugins/actions/actions.c:192
 msgid "Lock Screen"
 msgstr "Lås skärmen"
 
-#: ../plugins/actions/actions.c:191
+#: ../plugins/actions/actions.c:193
 msgid "Loc_k Screen"
 msgstr "Lås s_kärm"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:200
 msgid "Hibernate"
 msgstr "Viloläge"
 
-#: ../plugins/actions/actions.c:199
+#: ../plugins/actions/actions.c:201
 msgid "_Hibernate"
 msgstr "_Viloläge"
 
-#: ../plugins/actions/actions.c:200
+#: ../plugins/actions/actions.c:202
 msgid "Do you want to suspend to disk?"
 msgstr "Vill du gå till vänteläge?"
 
-#: ../plugins/actions/actions.c:201
+#: ../plugins/actions/actions.c:203
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Försätter datorn i viloläge om %d sekunder."
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:209
 msgid "Hybrid Sleep"
 msgstr "Hybridsömn"
 
-#: ../plugins/actions/actions.c:208
+#: ../plugins/actions/actions.c:210
 msgid "_Hybrid Sleep"
 msgstr "_Hybridsömn"
 
-#: ../plugins/actions/actions.c:209
+#: ../plugins/actions/actions.c:211
 msgid "Do you want to hibernate and suspend the system?"
 msgstr "Vill du försätta systemet i viloläge och släcka ner?"
 
-#: ../plugins/actions/actions.c:210
+#: ../plugins/actions/actions.c:212
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr "Försätter datorn i viloläge och släcker ner om %d sekunder."
 
-#: ../plugins/actions/actions.c:216
+#: ../plugins/actions/actions.c:218
 msgid "Suspend"
 msgstr "Vänteläge"
 
-#: ../plugins/actions/actions.c:217
+#: ../plugins/actions/actions.c:219
 msgid "Sus_pend"
 msgstr "V_änteläge"
 
-#: ../plugins/actions/actions.c:218
+#: ../plugins/actions/actions.c:220
 msgid "Do you want to suspend to RAM?"
 msgstr "Vill du gå till viloläge i RAM?"
 
-#: ../plugins/actions/actions.c:219
+#: ../plugins/actions/actions.c:221
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Försätter datorn i viloläge om %d sekunder."
 
-#: ../plugins/actions/actions.c:225
+#: ../plugins/actions/actions.c:227
 msgid "Restart"
 msgstr "Starta om"
 
-#: ../plugins/actions/actions.c:226
+#: ../plugins/actions/actions.c:228
 msgid "_Restart"
 msgstr "Sta_rta om"
 
-#: ../plugins/actions/actions.c:227
+#: ../plugins/actions/actions.c:229
 msgid "Are you sure you want to restart?"
 msgstr "Är du säker på att du vill starta om?"
 
-#: ../plugins/actions/actions.c:228
+#: ../plugins/actions/actions.c:230
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Startar om datorn om %d sekunder."
 
-#: ../plugins/actions/actions.c:234
+#: ../plugins/actions/actions.c:236
 msgid "Shut Down"
 msgstr "Stäng av"
 
-#: ../plugins/actions/actions.c:235
+#: ../plugins/actions/actions.c:237
 msgid "Shut _Down"
 msgstr "Stäng _av"
 
-#: ../plugins/actions/actions.c:236
+#: ../plugins/actions/actions.c:238
 msgid "Are you sure you want to shut down?"
 msgstr "Är du säker på att du vill stänga av?"
 
-#: ../plugins/actions/actions.c:237
+#: ../plugins/actions/actions.c:239
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Stänger av datorn om %d sekunder."
 
-#: ../plugins/actions/actions.c:685
+#: ../plugins/actions/actions.c:688
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Avgränsare"
 
-#: ../plugins/actions/actions.c:1110
+#: ../plugins/actions/actions.c:1122
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Misslyckades kära åtgärd \"%s\""
 
-#: ../plugins/actions/actions.c:1279
+#: ../plugins/actions/actions.c:1331
 msgid "Little Mouse"
 msgstr "Liten mus"
 
@@ -973,7 +974,7 @@ msgstr "Välj detta alternativ för att visa de allmänna programnamnen i menyn,
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Appearance"
 msgstr "Utseende"
@@ -1007,19 +1008,19 @@ msgstr "Menyfil"
 msgid "Applications"
 msgstr "Program"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:600
-#: ../plugins/directorymenu/directorymenu.c:471
+#: ../plugins/applicationsmenu/applicationsmenu.c:599
+#: ../plugins/directorymenu/directorymenu.c:470
 msgid "Select An Icon"
 msgstr "Välj en ikon"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/directorymenu/directorymenu.c:474
+#: ../plugins/applicationsmenu/applicationsmenu.c:602
+#: ../plugins/directorymenu/directorymenu.c:473
 msgid "_OK"
 msgstr "_OK"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2519
+#: ../plugins/applicationsmenu/applicationsmenu.c:637
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2501
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Det gick inte att köra kommandot \"%s\"."
@@ -1421,69 +1422,69 @@ msgstr "Vad är klockan?"
 msgid "Directory Menu"
 msgstr "Katalogmeny"
 
-#: ../plugins/directorymenu/directorymenu.c:692
+#: ../plugins/directorymenu/directorymenu.c:690
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Misslyckades med att starta programmet \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:724
+#: ../plugins/directorymenu/directorymenu.c:722
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Misslyckades att fråga om innehållstyp för \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:733
+#: ../plugins/directorymenu/directorymenu.c:731
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Inget standardprogram hittades för \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:749
+#: ../plugins/directorymenu/directorymenu.c:747
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Det gick inte att starta standardprogrammet för \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:847
+#: ../plugins/directorymenu/directorymenu.c:843
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Misslyckades köra det föredragna programmet för kategori \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:930
+#: ../plugins/directorymenu/directorymenu.c:926
 msgid "Create New Folder"
 msgstr "Skapa ny mapp"
 
-#: ../plugins/directorymenu/directorymenu.c:935
+#: ../plugins/directorymenu/directorymenu.c:931
 msgid "Create New Text Document"
 msgstr "Skapa nytt text dokument"
 
-#: ../plugins/directorymenu/directorymenu.c:942
+#: ../plugins/directorymenu/directorymenu.c:938
 msgid "C_reate"
 msgstr "S_kapa"
 
-#: ../plugins/directorymenu/directorymenu.c:943
+#: ../plugins/directorymenu/directorymenu.c:939
 msgid "Create & _Open"
 msgstr "Skapa & _Öppna"
 
-#: ../plugins/directorymenu/directorymenu.c:957
+#: ../plugins/directorymenu/directorymenu.c:953
 msgid "Enter the new name:"
 msgstr "Ange det nya namnet:"
 
-#: ../plugins/directorymenu/directorymenu.c:993
+#: ../plugins/directorymenu/directorymenu.c:989
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Misslyckades med att skapa mapp: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1078
+#: ../plugins/directorymenu/directorymenu.c:1074
 msgid "Open Folder"
 msgstr "Öppna mapp"
 
-#: ../plugins/directorymenu/directorymenu.c:1095
+#: ../plugins/directorymenu/directorymenu.c:1091
 msgid "Open in Terminal"
 msgstr "Öppna i terminal"
 
-#: ../plugins/directorymenu/directorymenu.c:1112
+#: ../plugins/directorymenu/directorymenu.c:1108
 msgid "Create Folder..."
 msgstr "Skapa mapp..."
 
-#: ../plugins/directorymenu/directorymenu.c:1129
+#: ../plugins/directorymenu/directorymenu.c:1125
 msgid "Create Text Document..."
 msgstr "Skapa text dokument..."
 
@@ -1535,37 +1536,37 @@ msgid "_File Pattern:"
 msgstr "_Filmönster:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:16
-#: ../plugins/tasklist/tasklist-dialog.glade.h:30
+#: ../plugins/tasklist/tasklist-dialog.glade.h:31
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
 msgstr "Filtrering"
 
-#: ../plugins/launcher/launcher.c:409
+#: ../plugins/launcher/launcher.c:403
 msgid "Open launcher menu"
 msgstr "Öppna startmeny"
 
-#: ../plugins/launcher/launcher.c:1649
+#: ../plugins/launcher/launcher.c:1633
 msgid "Unnamed Item"
 msgstr "Namnlöst objekt"
 
-#: ../plugins/launcher/launcher.c:1837
+#: ../plugins/launcher/launcher.c:1821
 msgid "No items"
 msgstr "Inga objekt"
 
-#: ../plugins/launcher/launcher-dialog.c:792
+#: ../plugins/launcher/launcher-dialog.c:794
 msgid "Failed to open desktop item editor"
 msgstr "Misslyckades öppna redigerare för skrivbordsobjekt"
 
-#: ../plugins/launcher/launcher-dialog.c:860
+#: ../plugins/launcher/launcher-dialog.c:862
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Om du tar bort ett objekt så går det inte att ångra."
 
-#: ../plugins/launcher/launcher-dialog.c:861
+#: ../plugins/launcher/launcher-dialog.c:863
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Är du säker på att du vill ta bort \"%s\"?"
 
-#: ../plugins/launcher/launcher-dialog.c:862
+#: ../plugins/launcher/launcher-dialog.c:864
 msgid "Unnamed item"
 msgstr "Namnlöst objekt"
 
@@ -1914,116 +1915,120 @@ msgid "Minimize Window"
 msgstr "Minimera fönster"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
+msgid "New Instance"
+msgstr "Ny instans"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Timestamp"
 msgstr "Tidsstämpel"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+#: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "Group title and timestamp"
 msgstr "Gruppera namn och tidsstämpel"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:9
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Window title"
 msgstr "Fönsternamn"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Group title and window title"
 msgstr "Gruppera namn och fönstertitel"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "None, allow drag-and-drop"
 msgstr "Ingen, tillåt drag och släpp"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Window Buttons"
 msgstr "Fönsterknappar"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show button _labels"
 msgstr "Visa knapp_etiketter"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Show _flat buttons"
 msgstr "Visa _platta knappar"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Show _handle"
 msgstr "Visa _handtag"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Show _tooltips"
 msgstr "Visa _verktygstips"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Sorting _order:"
 msgstr "Sorterings_ordning:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window _grouping:"
 msgstr "Fönster_gruppering:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "Mi_ddle click action:"
 msgstr "_Åtgärd vid mellanklick:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:23
+#: ../plugins/tasklist/tasklist-dialog.glade.h:24
 msgid "Restore minimized windows to current _workspace"
 msgstr "_Återställ minimerade fönster till aktivt skrivbord"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "D_raw window frame when hovering a button"
 msgstr "_Rita fönsterram vid svävning över en knapp"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+#: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "_Switch windows using the mouse wheel"
 msgstr "Växla fön_ster med mushjulet"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:26
+#: ../plugins/tasklist/tasklist-dialog.glade.h:27
 msgid "Behaviour"
 msgstr "Beteende"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:27
+#: ../plugins/tasklist/tasklist-dialog.glade.h:28
 msgid "Show windows from _all workspaces or viewports"
 msgstr "Visa fönster från _alla skrivbord eller skrivbordsvyer"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:28
+#: ../plugins/tasklist/tasklist-dialog.glade.h:29
 msgid "Show windows from all mo_nitors"
 msgstr "Visa fönster från a_lla skärmar"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:29
+#: ../plugins/tasklist/tasklist-dialog.glade.h:30
 msgid "Show only _minimized windows"
 msgstr "Visa endast _minimerade fönster"
 
-#: ../plugins/tasklist/tasklist-widget.c:3001
+#: ../plugins/tasklist/tasklist-widget.c:3042
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Det gick inte att starta en ny instans av '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:3005
+#: ../plugins/tasklist/tasklist-widget.c:3046
 msgid "Error"
 msgstr "Fel"
 
-#: ../plugins/tasklist/tasklist-widget.c:3049
+#: ../plugins/tasklist/tasklist-widget.c:3075
 msgid "Launch New Instance"
 msgstr "Starta ny instans"
 
-#: ../plugins/tasklist/tasklist-widget.c:3803
+#: ../plugins/tasklist/tasklist-widget.c:3834
 msgid "Mi_nimize All"
 msgstr "Mi_nimera alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3811
+#: ../plugins/tasklist/tasklist-widget.c:3842
 msgid "Un_minimize All"
 msgstr "Av_minimera alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3819
+#: ../plugins/tasklist/tasklist-widget.c:3850
 msgid "Ma_ximize All"
 msgstr "Ma_ximera alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3827
+#: ../plugins/tasklist/tasklist-widget.c:3858
 msgid "_Unmaximize All"
 msgstr "Avmax_imera alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3839
+#: ../plugins/tasklist/tasklist-widget.c:3870
 msgid "_Close All"
 msgstr "S_täng alla"
 
@@ -2035,24 +2040,24 @@ msgstr "Växla mellan öppna fönster med knappar"
 msgid "Desktop"
 msgstr "Skrivbord"
 
-#: ../plugins/windowmenu/windowmenu.c:1277
+#: ../plugins/windowmenu/windowmenu.c:1275
 msgid "No Windows"
 msgstr "Inga fönster"
 
-#: ../plugins/windowmenu/windowmenu.c:1292
+#: ../plugins/windowmenu/windowmenu.c:1290
 msgid "Urgent Windows"
 msgstr "Brådskande fönster"
 
-#: ../plugins/windowmenu/windowmenu.c:1335
+#: ../plugins/windowmenu/windowmenu.c:1333
 msgid "Add Workspace"
 msgstr "Lägg till skrivbord"
 
-#: ../plugins/windowmenu/windowmenu.c:1358
+#: ../plugins/windowmenu/windowmenu.c:1356
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Ta bort skrivbord \"%s\""
 
-#: ../plugins/windowmenu/windowmenu.c:1360
+#: ../plugins/windowmenu/windowmenu.c:1358
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Ta bort skrivbord %d"
