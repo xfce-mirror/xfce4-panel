@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-03 00:47+0200\n"
+"POT-Creation-Date: 2022-05-07 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: 黃柏諺 <s8321414@gmail.com>, 2019-2020,2022\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/xfce/xfce4-panel/language/zh_TW/)\n"
@@ -41,7 +41,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panels;settings;preferences;taskbar;autohide;application menu;start;buttons;launcher;notification area;status;icons;plugins;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2975
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3047
 msgid "Panel"
 msgstr "面板"
 
@@ -61,11 +61,11 @@ msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "若從面板移除項目，其設定也會失去。"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:163
+#: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1326
-#: ../plugins/applicationsmenu/applicationsmenu.c:602
-#: ../plugins/directorymenu/directorymenu.c:473
-#: ../plugins/directorymenu/directorymenu.c:941
+#: ../plugins/applicationsmenu/applicationsmenu.c:601
+#: ../plugins/directorymenu/directorymenu.c:472
+#: ../plugins/directorymenu/directorymenu.c:937
 msgid "_Cancel"
 msgstr "取消(_C)"
 
@@ -75,7 +75,7 @@ msgstr "取消(_C)"
 #: ../panel/panel-preferences-dialog.c:961
 #: ../panel/panel-preferences-dialog.c:1327
 #: ../panel/panel-preferences-dialog.glade.h:59
-#: ../plugins/launcher/launcher-dialog.c:859
+#: ../plugins/launcher/launcher-dialog.c:861
 msgid "_Remove"
 msgstr "移除(_R)"
 
@@ -83,7 +83,7 @@ msgstr "移除(_R)"
 msgid "_Properties"
 msgstr "屬性(_P)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1227 ../panel/panel-window.c:3066
+#: ../libxfce4panel/xfce-panel-plugin.c:1227 ../panel/panel-window.c:3138
 msgid "_About"
 msgstr "關於(_A)"
 
@@ -95,20 +95,20 @@ msgstr "移動(_M)"
 msgid "Pane_l"
 msgstr "面板(_L)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1292 ../panel/panel-window.c:2988
+#: ../libxfce4panel/xfce-panel-plugin.c:1292 ../panel/panel-window.c:3060
 msgid "Add _New Items..."
 msgstr "新增項目(_N)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1307 ../panel/panel-window.c:3003
+#: ../libxfce4panel/xfce-panel-plugin.c:1307 ../panel/panel-window.c:3075
 msgid "Panel Pr_eferences..."
 msgstr "面板偏好設定(_E)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:3035
+#: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:3107
 msgid "Log _Out"
 msgstr "登出(_O)"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1348 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3055
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3127
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -116,7 +116,7 @@ msgstr "登出(_O)"
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 #: ../plugins/pager/pager-dialog.glade.h:4
 #: ../plugins/separator/separator-dialog.glade.h:6
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "_Help"
 msgstr "說明(_H)"
@@ -300,45 +300,46 @@ msgstr "無效的暗示類型「%s」。有效的類型為真假值 (bool)、倍
 msgid "Unable to open the e-mail address"
 msgstr "無法開啟電子郵件地址"
 
-#: ../panel/panel-dialogs.c:83
+#: ../panel/panel-dialogs.c:84
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Xfce 桌面環境的面板"
 
-#: ../panel/panel-dialogs.c:87
+#: ../panel/panel-dialogs.c:88
 msgid "translator-credits"
 msgstr "Cheng-Chia Tseng <pswo10680@gmail.com>, 2010.\nＷalter Cheuk <wwycheuk@gmail.com>, 2019."
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:14
+#: ../panel/panel-dialogs.c:162
 msgid "Add New Item"
 msgstr "新增項目"
 
-#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:201
+#: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:201
 #: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "新增(_A)"
 
-#: ../panel/panel-dialogs.c:175
+#: ../panel/panel-dialogs.c:176
 msgid "Please choose a panel for the new plugin:"
 msgstr "請為新插件選擇面板："
 
-#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:896
+#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:896
 #, c-format
 msgid "Panel %d"
 msgstr "面板 %d"
 
-#: ../panel/panel-dialogs.c:235
+#: ../panel/panel-dialogs.c:236
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr "因為面板正在以 kiosk 模式執行中，不允許一般使用者變更面板的組態"
 
-#: ../panel/panel-dialogs.c:237
+#: ../panel/panel-dialogs.c:238
 msgid "Modifying the panel is not allowed"
 msgstr "不允許修改面板"
 
 #: ../panel/panel-item-dialog.c:195
+#: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Add New Items"
 msgstr "新增項目"
 
@@ -352,7 +353,7 @@ msgstr "新增項目"
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:5
 #: ../plugins/separator/separator-dialog.glade.h:5
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "_Close"
 msgstr "關閉(_C)"
@@ -701,7 +702,7 @@ msgstr "老手"
 msgid "Expert"
 msgstr "專家"
 
-#: ../panel/panel-window.c:3020
+#: ../panel/panel-window.c:3092
 msgid "_Lock Panel"
 msgstr "鎖住面板(_L)"
 
@@ -784,144 +785,144 @@ msgstr "針對某些動作顯示倒數 30 秒的確認對話窗。"
 msgid "_Actions"
 msgstr "動作(_A)"
 
-#: ../plugins/actions/actions.c:165
+#: ../plugins/actions/actions.c:167
 msgid "Log Out"
 msgstr "登出"
 
-#: ../plugins/actions/actions.c:166
+#: ../plugins/actions/actions.c:168
 msgid "_Log Out"
 msgstr "登出(_L)"
 
-#: ../plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:169
 msgid "Are you sure you want to log out?"
 msgstr "確定要登出嗎？"
 
-#: ../plugins/actions/actions.c:168
+#: ../plugins/actions/actions.c:170
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "會於 %d 秒後登出。"
 
-#: ../plugins/actions/actions.c:174
+#: ../plugins/actions/actions.c:176
 msgid "Log Out..."
 msgstr "登出..."
 
-#: ../plugins/actions/actions.c:175
+#: ../plugins/actions/actions.c:177
 msgid "Log _Out..."
 msgstr "登出(_O)..."
 
-#: ../plugins/actions/actions.c:182
+#: ../plugins/actions/actions.c:184
 msgid "Switch User"
 msgstr "切換使用者"
 
-#: ../plugins/actions/actions.c:183
+#: ../plugins/actions/actions.c:185
 msgid "_Switch User"
 msgstr "切換使用者(_S)"
 
-#: ../plugins/actions/actions.c:190
+#: ../plugins/actions/actions.c:192
 msgid "Lock Screen"
 msgstr "鎖住螢幕"
 
-#: ../plugins/actions/actions.c:191
+#: ../plugins/actions/actions.c:193
 msgid "Loc_k Screen"
 msgstr "鎖住螢幕(_O)"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:200
 msgid "Hibernate"
 msgstr "休眠"
 
-#: ../plugins/actions/actions.c:199
+#: ../plugins/actions/actions.c:201
 msgid "_Hibernate"
 msgstr "休眠(_H)"
 
-#: ../plugins/actions/actions.c:200
+#: ../plugins/actions/actions.c:202
 msgid "Do you want to suspend to disk?"
 msgstr "想要將電腦暫停至磁碟中嗎？"
 
-#: ../plugins/actions/actions.c:201
+#: ../plugins/actions/actions.c:203
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "電腦會於 %d 秒後休眠。"
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:209
 msgid "Hybrid Sleep"
 msgstr "混合式睡眠"
 
-#: ../plugins/actions/actions.c:208
+#: ../plugins/actions/actions.c:210
 msgid "_Hybrid Sleep"
 msgstr "混合式睡眠(_H)"
 
-#: ../plugins/actions/actions.c:209
+#: ../plugins/actions/actions.c:211
 msgid "Do you want to hibernate and suspend the system?"
 msgstr "想要休眠並暫停系統嗎？"
 
-#: ../plugins/actions/actions.c:210
+#: ../plugins/actions/actions.c:212
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr "在 %d 秒後休眠與暫停系統。"
 
-#: ../plugins/actions/actions.c:216
+#: ../plugins/actions/actions.c:218
 msgid "Suspend"
 msgstr "暫停"
 
-#: ../plugins/actions/actions.c:217
+#: ../plugins/actions/actions.c:219
 msgid "Sus_pend"
 msgstr "暫停(_P)"
 
-#: ../plugins/actions/actions.c:218
+#: ../plugins/actions/actions.c:220
 msgid "Do you want to suspend to RAM?"
 msgstr "想要將電腦暫停至 RAM 中嗎？"
 
-#: ../plugins/actions/actions.c:219
+#: ../plugins/actions/actions.c:221
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "%d 秒後暫停電腦。"
 
-#: ../plugins/actions/actions.c:225
+#: ../plugins/actions/actions.c:227
 msgid "Restart"
 msgstr "重新啟動"
 
-#: ../plugins/actions/actions.c:226
+#: ../plugins/actions/actions.c:228
 msgid "_Restart"
 msgstr "重新啟動"
 
-#: ../plugins/actions/actions.c:227
+#: ../plugins/actions/actions.c:229
 msgid "Are you sure you want to restart?"
 msgstr "確定要重新啟動嗎？"
 
-#: ../plugins/actions/actions.c:228
+#: ../plugins/actions/actions.c:230
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "會於 %d 秒後重新啟動電腦。"
 
-#: ../plugins/actions/actions.c:234
+#: ../plugins/actions/actions.c:236
 msgid "Shut Down"
 msgstr "關機"
 
-#: ../plugins/actions/actions.c:235
+#: ../plugins/actions/actions.c:237
 msgid "Shut _Down"
 msgstr "關機(_D)"
 
-#: ../plugins/actions/actions.c:236
+#: ../plugins/actions/actions.c:238
 msgid "Are you sure you want to shut down?"
 msgstr "確定要關機嗎？"
 
-#: ../plugins/actions/actions.c:237
+#: ../plugins/actions/actions.c:239
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "會於 %d 秒後關掉電腦。"
 
-#: ../plugins/actions/actions.c:685
+#: ../plugins/actions/actions.c:688
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "分隔符"
 
-#: ../plugins/actions/actions.c:1110
+#: ../plugins/actions/actions.c:1122
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "無法執行「%s」動作"
 
-#: ../plugins/actions/actions.c:1279
+#: ../plugins/actions/actions.c:1331
 msgid "Little Mouse"
 msgstr "小老鼠"
 
@@ -969,7 +970,7 @@ msgstr "選取此選項以在選單內顯示通用應用程式名稱，舉例：
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Appearance"
 msgstr "外觀"
@@ -1003,19 +1004,19 @@ msgstr "選單檔案"
 msgid "Applications"
 msgstr "應用程式"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:600
-#: ../plugins/directorymenu/directorymenu.c:471
+#: ../plugins/applicationsmenu/applicationsmenu.c:599
+#: ../plugins/directorymenu/directorymenu.c:470
 msgid "Select An Icon"
 msgstr "選取圖示"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/directorymenu/directorymenu.c:474
+#: ../plugins/applicationsmenu/applicationsmenu.c:602
+#: ../plugins/directorymenu/directorymenu.c:473
 msgid "_OK"
 msgstr "確定(_O)"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2519
+#: ../plugins/applicationsmenu/applicationsmenu.c:637
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2501
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "未能執行「%s」。"
@@ -1417,69 +1418,69 @@ msgstr "現在幾點？"
 msgid "Directory Menu"
 msgstr "目錄選單"
 
-#: ../plugins/directorymenu/directorymenu.c:692
+#: ../plugins/directorymenu/directorymenu.c:690
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "無法啟動應用程式「%s」"
 
-#: ../plugins/directorymenu/directorymenu.c:724
+#: ../plugins/directorymenu/directorymenu.c:722
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "無法查詢「%s」的內容類型"
 
-#: ../plugins/directorymenu/directorymenu.c:733
+#: ../plugins/directorymenu/directorymenu.c:731
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "找不到「%s」的預設應用程式"
 
-#: ../plugins/directorymenu/directorymenu.c:749
+#: ../plugins/directorymenu/directorymenu.c:747
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "無法為「%s」啟動預設應用程式"
 
-#: ../plugins/directorymenu/directorymenu.c:847
+#: ../plugins/directorymenu/directorymenu.c:843
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "未能執行分類「%s」的偏好應用程式"
 
-#: ../plugins/directorymenu/directorymenu.c:930
+#: ../plugins/directorymenu/directorymenu.c:926
 msgid "Create New Folder"
 msgstr "建立新資料夾"
 
-#: ../plugins/directorymenu/directorymenu.c:935
+#: ../plugins/directorymenu/directorymenu.c:931
 msgid "Create New Text Document"
 msgstr "建立新的文字文件"
 
-#: ../plugins/directorymenu/directorymenu.c:942
+#: ../plugins/directorymenu/directorymenu.c:938
 msgid "C_reate"
 msgstr "建立(_R)"
 
-#: ../plugins/directorymenu/directorymenu.c:943
+#: ../plugins/directorymenu/directorymenu.c:939
 msgid "Create & _Open"
 msgstr "建立並開啟 (&O)"
 
-#: ../plugins/directorymenu/directorymenu.c:957
+#: ../plugins/directorymenu/directorymenu.c:953
 msgid "Enter the new name:"
 msgstr "輸入新名稱："
 
-#: ../plugins/directorymenu/directorymenu.c:993
+#: ../plugins/directorymenu/directorymenu.c:989
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "無法建立資料夾：%s"
 
-#: ../plugins/directorymenu/directorymenu.c:1078
+#: ../plugins/directorymenu/directorymenu.c:1074
 msgid "Open Folder"
 msgstr "開啟資料夾"
 
-#: ../plugins/directorymenu/directorymenu.c:1095
+#: ../plugins/directorymenu/directorymenu.c:1091
 msgid "Open in Terminal"
 msgstr "在終端機開啟"
 
-#: ../plugins/directorymenu/directorymenu.c:1112
+#: ../plugins/directorymenu/directorymenu.c:1108
 msgid "Create Folder..."
 msgstr "建立資料夾……"
 
-#: ../plugins/directorymenu/directorymenu.c:1129
+#: ../plugins/directorymenu/directorymenu.c:1125
 msgid "Create Text Document..."
 msgstr "建立文字文件……"
 
@@ -1531,37 +1532,37 @@ msgid "_File Pattern:"
 msgstr "檔案樣式(_F)："
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:16
-#: ../plugins/tasklist/tasklist-dialog.glade.h:30
+#: ../plugins/tasklist/tasklist-dialog.glade.h:31
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
 msgstr "過濾方式"
 
-#: ../plugins/launcher/launcher.c:409
+#: ../plugins/launcher/launcher.c:403
 msgid "Open launcher menu"
 msgstr "開啟啟動器選單"
 
-#: ../plugins/launcher/launcher.c:1649
+#: ../plugins/launcher/launcher.c:1633
 msgid "Unnamed Item"
 msgstr "未命名項目"
 
-#: ../plugins/launcher/launcher.c:1837
+#: ../plugins/launcher/launcher.c:1821
 msgid "No items"
 msgstr "無項目"
 
-#: ../plugins/launcher/launcher-dialog.c:792
+#: ../plugins/launcher/launcher-dialog.c:794
 msgid "Failed to open desktop item editor"
 msgstr "未能開啟桌面項目編輯器"
 
-#: ../plugins/launcher/launcher-dialog.c:860
+#: ../plugins/launcher/launcher-dialog.c:862
 msgid "If you delete an item, it will be permanently removed"
 msgstr "若刪除項目，它將被永遠移除"
 
-#: ../plugins/launcher/launcher-dialog.c:861
+#: ../plugins/launcher/launcher-dialog.c:863
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "確定要移除「%s」嗎？"
 
-#: ../plugins/launcher/launcher-dialog.c:862
+#: ../plugins/launcher/launcher-dialog.c:864
 msgid "Unnamed item"
 msgstr "未命名項目"
 
@@ -1910,116 +1911,120 @@ msgid "Minimize Window"
 msgstr "最小化視窗"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
+msgid "New Instance"
+msgstr "新實體"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Timestamp"
 msgstr "時間戳記"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+#: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "Group title and timestamp"
 msgstr "群組標題與時間戳記"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:9
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Window title"
 msgstr "視窗標題"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Group title and window title"
 msgstr "群組標題與視窗標題"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "None, allow drag-and-drop"
 msgstr "無，允許拖放"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Window Buttons"
 msgstr "視窗按鈕"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show button _labels"
 msgstr "顯示按鈕標籤(_L)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Show _flat buttons"
 msgstr "顯示扁平按鈕(_F)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Show _handle"
 msgstr "顯示控制把(_F)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Show _tooltips"
 msgstr "顯示工具提示(_T)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Sorting _order:"
 msgstr "排序(_O)："
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window _grouping:"
 msgstr "視窗群組(_G)："
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "Mi_ddle click action:"
 msgstr "中鍵點擊動作(_D)："
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:23
+#: ../plugins/tasklist/tasklist-dialog.glade.h:24
 msgid "Restore minimized windows to current _workspace"
 msgstr "還原最小化視窗至目前工作區(_W)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "D_raw window frame when hovering a button"
 msgstr "當滑鼠停在按鈕上時繪製視窗框架(_D)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+#: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "_Switch windows using the mouse wheel"
 msgstr "用滑鼠滾輪切換視窗(_S)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:26
+#: ../plugins/tasklist/tasklist-dialog.glade.h:27
 msgid "Behaviour"
 msgstr "行為"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:27
+#: ../plugins/tasklist/tasklist-dialog.glade.h:28
 msgid "Show windows from _all workspaces or viewports"
 msgstr "顯示所有工作區視域內的視窗(_A)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:28
+#: ../plugins/tasklist/tasklist-dialog.glade.h:29
 msgid "Show windows from all mo_nitors"
 msgstr "顯示所有螢幕的視窗(_N)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:29
+#: ../plugins/tasklist/tasklist-dialog.glade.h:30
 msgid "Show only _minimized windows"
 msgstr "只顯示最小化的視窗(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3001
+#: ../plugins/tasklist/tasklist-widget.c:3042
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "無法啟動「%s」的新實體"
 
-#: ../plugins/tasklist/tasklist-widget.c:3005
+#: ../plugins/tasklist/tasklist-widget.c:3046
 msgid "Error"
 msgstr "錯誤"
 
-#: ../plugins/tasklist/tasklist-widget.c:3049
+#: ../plugins/tasklist/tasklist-widget.c:3075
 msgid "Launch New Instance"
 msgstr "啟動新實體"
 
-#: ../plugins/tasklist/tasklist-widget.c:3803
+#: ../plugins/tasklist/tasklist-widget.c:3834
 msgid "Mi_nimize All"
 msgstr "最小化全部(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3811
+#: ../plugins/tasklist/tasklist-widget.c:3842
 msgid "Un_minimize All"
 msgstr "取消"
 
-#: ../plugins/tasklist/tasklist-widget.c:3819
+#: ../plugins/tasklist/tasklist-widget.c:3850
 msgid "Ma_ximize All"
 msgstr "最大化全部(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3827
+#: ../plugins/tasklist/tasklist-widget.c:3858
 msgid "_Unmaximize All"
 msgstr "取消最大化(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3839
+#: ../plugins/tasklist/tasklist-widget.c:3870
 msgid "_Close All"
 msgstr "關閉全部(_C)"
 
@@ -2031,24 +2036,24 @@ msgstr "使用按鈕在開啟視窗間切換"
 msgid "Desktop"
 msgstr "桌面"
 
-#: ../plugins/windowmenu/windowmenu.c:1277
+#: ../plugins/windowmenu/windowmenu.c:1275
 msgid "No Windows"
 msgstr "無視窗"
 
-#: ../plugins/windowmenu/windowmenu.c:1292
+#: ../plugins/windowmenu/windowmenu.c:1290
 msgid "Urgent Windows"
 msgstr "緊急視窗"
 
-#: ../plugins/windowmenu/windowmenu.c:1335
+#: ../plugins/windowmenu/windowmenu.c:1333
 msgid "Add Workspace"
 msgstr "新增工作區"
 
-#: ../plugins/windowmenu/windowmenu.c:1358
+#: ../plugins/windowmenu/windowmenu.c:1356
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "移除工作區「%s」"
 
-#: ../plugins/windowmenu/windowmenu.c:1360
+#: ../plugins/windowmenu/windowmenu.c:1358
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "移除工作區 %d"
