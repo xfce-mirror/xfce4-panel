@@ -3351,22 +3351,28 @@ panel_window_plugin_set_screen_position (GtkWidget *widget,
 
 GtkWidget *
 panel_window_new (GdkScreen *screen,
-                  gint       id)
+                  gint       id,
+                  gint       autohide_block)
 {
+  PanelWindow *window;
+
   if (screen == NULL)
     screen = gdk_screen_get_default ();
 
-  return g_object_new (PANEL_TYPE_WINDOW,
-                       "id", id,
-                       "type", GTK_WINDOW_TOPLEVEL,
-                       "decorated", FALSE,
-                       "resizable", FALSE,
-                       "screen", screen,
-                       "type-hint", GDK_WINDOW_TYPE_HINT_DOCK,
-                       "gravity", GDK_GRAVITY_STATIC,
-                       "role", "Panel",
-                       "name", "XfcePanelWindow",
-                       NULL);
+  window = g_object_new (PANEL_TYPE_WINDOW,
+                         "id", id,
+                         "type", GTK_WINDOW_TOPLEVEL,
+                         "decorated", FALSE,
+                         "resizable", FALSE,
+                         "screen", screen,
+                         "type-hint", GDK_WINDOW_TYPE_HINT_DOCK,
+                         "gravity", GDK_GRAVITY_STATIC,
+                         "role", "Panel",
+                         "name", "XfcePanelWindow",
+                         NULL);
+  window->autohide_block = autohide_block;
+
+  return GTK_WIDGET (window);
 }
 
 
