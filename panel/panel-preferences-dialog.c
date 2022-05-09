@@ -931,9 +931,6 @@ panel_preferences_dialog_panel_add (GtkWidget              *widget,
   window = panel_application_new_window (dialog->application,
       gtk_widget_get_screen (widget), -1, TRUE);
 
-  /* block autohide */
-  panel_window_freeze_autohide (window);
-
   /* show window */
   gtk_widget_show (GTK_WIDGET (window));
 
