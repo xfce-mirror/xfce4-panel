@@ -235,7 +235,6 @@ enum _AutohideState
   AUTOHIDE_POPDOWN_SLOW, /* same as popdown, but timeout is 4x longer */
   AUTOHIDE_HIDDEN,       /* invisible */
   AUTOHIDE_POPUP,        /* invisible, but show timeout is running */
-  AUTOHIDE_BLOCKED       /* autohide is enabled, but blocked */
 };
 
 enum _SnapPosition
@@ -1054,7 +1053,7 @@ panel_window_leave_notify_event (GtkWidget        *widget,
   /* queue an autohide timeout if needed */
   if (event->detail != GDK_NOTIFY_INFERIOR
       && window->autohide_state != AUTOHIDE_DISABLED
-      && window->autohide_state != AUTOHIDE_BLOCKED)
+      && window->autohide_block == 0)
     {
       /* simulate a geometry change to check for overlapping windows with intelligent hiding */
       if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
@@ -1147,6 +1146,7 @@ panel_window_motion_notify_event (GtkWidget      *widget,
 
           /* stop the drag, we somehow loose the motion event */
           window->grab_time = 0;
+          panel_window_thaw_autohide (window);
           retval = FALSE;
         }
     }
@@ -1236,6 +1236,7 @@ panel_window_button_press_event (GtkWidget      *widget,
           window->grab_time = event->time;
           window->grab_x = event->x;
           window->grab_y = event->y;
+          panel_window_freeze_autohide (window);
         }
 
       return !!(status == GDK_GRAB_SUCCESS);
@@ -1276,6 +1277,9 @@ panel_window_button_release_event (GtkWidget      *widget,
 
       /* send the new screen position to the panel plugins */
       panel_window_plugins_update (window, PLUGIN_PROP_SCREEN_POSITION);
+
+      /* release autohide lock */
+      panel_window_thaw_autohide (window);
 
       return TRUE;
     }
@@ -2592,7 +2596,7 @@ panel_window_autohide_timeout (gpointer user_data)
   PanelWindow *window = PANEL_WINDOW (user_data);
 
   panel_return_val_if_fail (window->autohide_state != AUTOHIDE_DISABLED, FALSE);
-  panel_return_val_if_fail (window->autohide_state != AUTOHIDE_BLOCKED, FALSE);
+  panel_return_val_if_fail (window->autohide_block == 0, FALSE);
 
   /* update the status */
   if (window->autohide_state == AUTOHIDE_POPDOWN
@@ -2733,7 +2737,7 @@ panel_window_autohide_queue (PanelWindow   *window,
       || window->snap_position != SNAP_POSITION_NONE)
     panel_window_screen_layout_changed (window->screen, window);
 
-  if (new_state == AUTOHIDE_DISABLED || new_state == AUTOHIDE_BLOCKED)
+  if (new_state == AUTOHIDE_DISABLED || new_state == AUTOHIDE_VISIBLE)
     {
       /* queue a resize to make sure the panel is visible */
       gtk_widget_queue_resize (GTK_WIDGET (window));
@@ -2898,7 +2902,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
           if (window->autohide_state != AUTOHIDE_HIDDEN)
           {
             panel_window_autohide_queue (window,
-                window->autohide_block == 0 ? AUTOHIDE_POPDOWN_SLOW : AUTOHIDE_BLOCKED);
+                window->autohide_block == 0 ? AUTOHIDE_POPDOWN_SLOW : AUTOHIDE_VISIBLE);
           }
         }
       else if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
@@ -3347,22 +3351,28 @@ panel_window_plugin_set_screen_position (GtkWidget *widget,
 
 GtkWidget *
 panel_window_new (GdkScreen *screen,
-                  gint       id)
+                  gint       id,
+                  gint       autohide_block)
 {
+  PanelWindow *window;
+
   if (screen == NULL)
     screen = gdk_screen_get_default ();
 
-  return g_object_new (PANEL_TYPE_WINDOW,
-                       "id", id,
-                       "type", GTK_WINDOW_TOPLEVEL,
-                       "decorated", FALSE,
-                       "resizable", FALSE,
-                       "screen", screen,
-                       "type-hint", GDK_WINDOW_TYPE_HINT_DOCK,
-                       "gravity", GDK_GRAVITY_STATIC,
-                       "role", "Panel",
-                       "name", "XfcePanelWindow",
-                       NULL);
+  window = g_object_new (PANEL_TYPE_WINDOW,
+                         "id", id,
+                         "type", GTK_WINDOW_TOPLEVEL,
+                         "decorated", FALSE,
+                         "resizable", FALSE,
+                         "screen", screen,
+                         "type-hint", GDK_WINDOW_TYPE_HINT_DOCK,
+                         "gravity", GDK_GRAVITY_STATIC,
+                         "role", "Panel",
+                         "name", "XfcePanelWindow",
+                         NULL);
+  window->autohide_block = autohide_block;
+
+  return GTK_WIDGET (window);
 }
 
 
@@ -3444,7 +3454,7 @@ panel_window_freeze_autohide (PanelWindow *window)
 
   if (window->autohide_block == 1
       && window->autohide_state != AUTOHIDE_DISABLED)
-    panel_window_autohide_queue (window, AUTOHIDE_BLOCKED);
+    panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
 }
 
 
@@ -3459,14 +3469,24 @@ panel_window_thaw_autohide (PanelWindow *window)
   window->autohide_block--;
 
   if (window->autohide_block == 0
-      && window->autohide_state != AUTOHIDE_DISABLED) {
-    /* simulate a geometry change to check for overlapping windows with intelligent hiding */
-    if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
-      panel_window_active_window_geometry_changed (window->wnck_active_window, window);
-    /* otherwise just hide the panel */
-    else
-      panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
-  }
+      && window->autohide_state != AUTOHIDE_DISABLED)
+    {
+      /* simulate a geometry change to check for overlapping windows with intelligent hiding */
+      if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
+        panel_window_active_window_geometry_changed (window->wnck_active_window, window);
+      /* otherwise hide the panel if the pointer is outside */
+      else
+        {
+          GdkDisplay *display = gdk_display_get_default ();
+          GdkSeat *seat = gdk_display_get_default_seat (display);
+          GdkDevice *device = gdk_seat_get_pointer (seat);
+          GdkWindow *gdkwindow = gdk_device_get_window_at_position (device, NULL, NULL);
+
+          if (gdkwindow == NULL || gdk_window_get_effective_toplevel (gdkwindow)
+                                   != gtk_widget_get_window (GTK_WIDGET (window)))
+            panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
+        }
+    }
 }
 
 
