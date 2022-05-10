@@ -1109,7 +1109,8 @@ panel_window_drag_leave (GtkWidget      *widget,
   PanelWindow *window = PANEL_WINDOW (widget);
 
   /* queue an autohide timeout if needed */
-  if (window->autohide_state == AUTOHIDE_VISIBLE)
+  if (window->autohide_state == AUTOHIDE_VISIBLE
+      && window->autohide_block == 0)
     panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
 }
 
