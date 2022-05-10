@@ -127,6 +127,9 @@ struct _PanelApplication
   /* autosave timer for plugins */
   guint               autosave_timer_id;
 
+  /* autohide count at application level */
+  gint                autohide_block;
+
 #ifdef GDK_WINDOWING_X11
   guint               wait_for_wm_timeout_id;
 #endif
@@ -202,6 +205,7 @@ panel_application_init (PanelApplication *application)
   application->drop_desktop_files = FALSE;
   application->drop_data_ready = FALSE;
   application->drop_occurred = FALSE;
+  application->autohide_block = 0;
 
   /* get the xfconf channel (singleton) */
   application->xfconf = panel_properties_get_channel (G_OBJECT (application));
@@ -1502,7 +1506,7 @@ panel_application_new_window (PanelApplication *application,
     }
 
   /* create panel window */
-  window = panel_window_new (screen, panel_id);
+  window = panel_window_new (screen, panel_id, application->autohide_block);
 
   /* put the window in its own group */
   window_group = gtk_window_group_new ();
@@ -1665,19 +1669,25 @@ void
 panel_application_windows_blocked (PanelApplication *application,
                                    gboolean          blocked)
 {
-  GSList *li;
+  void (*autohide_func) (PanelWindow *);
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
+  panel_return_if_fail (application->autohide_block >= 0);
+
+  if (blocked)
+    {
+      application->autohide_block++;
+      autohide_func = panel_window_freeze_autohide;
+    }
+  else
+    {
+      application->autohide_block--;
+      autohide_func = panel_window_thaw_autohide;
+    }
 
   /* walk the windows */
-  for (li = application->windows; li != NULL; li = li->next)
-    {
-      /* block autohide for all windows */
-      if (blocked)
-        panel_window_freeze_autohide (PANEL_WINDOW (li->data));
-      else
-        panel_window_thaw_autohide (PANEL_WINDOW (li->data));
-    }
+  for (GSList *li = application->windows; li != NULL; li = li->next)
+    autohide_func (li->data);
 }
 
 
