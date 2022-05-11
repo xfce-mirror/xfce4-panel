@@ -495,9 +495,14 @@ static void
 xfce_arrow_button_blinking_timeout_destroyed (gpointer user_data)
 {
   XfceArrowButton *button = XFCE_ARROW_BUTTON (user_data);
+  GtkWidget       *plugin;
 
   button->priv->blinking_timeout_id = 0;
   button->priv->blinking_counter = 0;
+
+  /* release our lock */
+  plugin = gtk_widget_get_ancestor (GTK_WIDGET (button), XFCE_TYPE_PANEL_PLUGIN);
+  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), FALSE);
 }
 
 
@@ -610,6 +615,12 @@ xfce_arrow_button_set_blinking (XfceArrowButton *button,
     {
       if (button->priv->blinking_timeout_id == 0)
         {
+          GtkWidget *plugin;
+
+          /* raise the panel if needed, or keep it raised */
+          plugin = gtk_widget_get_ancestor (GTK_WIDGET (button), XFCE_TYPE_PANEL_PLUGIN);
+          xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), TRUE);
+
           /* start blinking timeout */
           button->priv->blinking_timeout_id =
               gdk_threads_add_timeout_full (G_PRIORITY_DEFAULT_IDLE, 500,
