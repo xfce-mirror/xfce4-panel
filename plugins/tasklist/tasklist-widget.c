@@ -4095,7 +4095,8 @@ xfce_tasklist_group_button_button_release_event (GtkWidget         *button,
               break;
 
             case XFCE_TASKLIST_MIDDLE_CLICK_CLOSE_WINDOW:
-              break;
+              xfce_tasklist_group_button_menu_close_all (group_child);
+              return TRUE;
 
             case XFCE_TASKLIST_MIDDLE_CLICK_MINIMIZE_WINDOW:
               break;
