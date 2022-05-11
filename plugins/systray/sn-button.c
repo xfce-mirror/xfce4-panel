@@ -45,6 +45,8 @@ static gboolean              sn_button_button_release                (GtkWidget 
 static gboolean              sn_button_scroll_event                  (GtkWidget               *widget,
                                                                       GdkEventScroll          *event);
 
+static void                  sn_button_unrealize                     (GtkWidget               *widget);
+
 static void                  sn_button_menu_changed                  (GtkWidget               *widget,
                                                                       SnItem                  *item);
 
@@ -99,6 +101,7 @@ sn_button_class_init (SnButtonClass *klass)
   widget_class->button_press_event = sn_button_button_press;
   widget_class->button_release_event = sn_button_button_release;
   widget_class->scroll_event = sn_button_scroll_event;
+  widget_class->unrealize = sn_button_unrealize;
 }
 
 
@@ -378,6 +381,25 @@ sn_button_scroll_event (GtkWidget      *widget,
     }
 
   return TRUE;
+}
+
+
+
+static void
+sn_button_unrealize (GtkWidget *widget)
+{
+  SnButton *button = XFCE_SN_BUTTON (widget);
+
+  /*
+   * The button could be hidden without being destroyed, as Blueman does for example when
+   * the bluetooth service is stopped (see issue #391). As the menu is attached to the
+   * button, care must be taken that it does not remain shown while the button is hidden.
+   * This also triggers the "deactivate" signal handler to cleanly end the menu display.
+   */
+  if (button->menu != NULL && gtk_widget_get_visible (button->menu))
+    gtk_menu_shell_deactivate (GTK_MENU_SHELL (button->menu));
+
+  GTK_WIDGET_CLASS (sn_button_parent_class)->unrealize (widget);
 }
 
 
