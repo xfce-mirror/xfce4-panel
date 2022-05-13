@@ -47,7 +47,8 @@ DISTCLEANFILES = \
 	intltool-extract \
 	intltool-merge \
 	intltool-update \
-	intltool-update-tmp
+	intltool-update-tmp \
+	po/.intltool-merge-cache.lock
 
 DISTCHECK_CONFIGURE_FLAGS = \
 	--enable-gtk-doc \
