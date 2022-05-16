@@ -67,7 +67,7 @@
                                          } G_STMT_END
 #define xfce_taskbar_is_locked(tasklist) (XFCE_TASKLIST (tasklist)->locked > 0)
 
-#define xfce_tasklist_get_panel_plugin(tasklist) gtk_widget_get_ancestor (GTK_WIDGET (tasklist), XFCE_TYPE_PANEL_PLUGIN)
+#define xfce_tasklist_get_panel_plugin(tasklist) XFCE_PANEL_PLUGIN (gtk_widget_get_ancestor (GTK_WIDGET (tasklist), XFCE_TYPE_PANEL_PLUGIN))
 #define xfce_tasklist_horizontal(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 #define xfce_tasklist_vertical(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
 #define xfce_tasklist_deskbar(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
@@ -2243,16 +2243,14 @@ static XfceTasklistChild *
 xfce_tasklist_child_new (XfceTasklist *tasklist)
 {
   XfceTasklistChild *child;
+  XfcePanelPlugin   *plugin;
   GtkCssProvider    *provider;
   gchar             *css_string;
-  GtkWidget         *plugin;
 
   panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), NULL);
 
   child = g_slice_new0 (XfceTasklistChild);
   child->tasklist = tasklist;
-
-  plugin = xfce_tasklist_get_panel_plugin (tasklist);
 
   /* create the window button */
   child->button = xfce_arrow_button_new (GTK_ARROW_NONE);
@@ -2319,6 +2317,7 @@ xfce_tasklist_child_new (XfceTasklist *tasklist)
   if (tasklist->show_labels)
     gtk_widget_show (child->label);
 
+  plugin = xfce_tasklist_get_panel_plugin (tasklist);
   gtk_drag_dest_set (GTK_WIDGET (child->button), 0,
                      NULL, 0, GDK_ACTION_DEFAULT);
   g_signal_connect_swapped (G_OBJECT (child->button), "drag-motion",
@@ -2326,9 +2325,9 @@ xfce_tasklist_child_new (XfceTasklist *tasklist)
   g_signal_connect_swapped (G_OBJECT (child->button), "drag-leave",
                             G_CALLBACK (xfce_tasklist_child_drag_leave), child);
   g_signal_connect_after (G_OBJECT (child->button), "drag-begin",
-                          G_CALLBACK (xfce_tasklist_child_drag_begin_event), XFCE_PANEL_PLUGIN (plugin));
+                          G_CALLBACK (xfce_tasklist_child_drag_begin_event), plugin);
   g_signal_connect_after (G_OBJECT (child->button), "drag-end",
-                          G_CALLBACK (xfce_tasklist_child_drag_end_event), XFCE_PANEL_PLUGIN (plugin));
+                          G_CALLBACK (xfce_tasklist_child_drag_end_event), plugin);
 
   return child;
 }
@@ -2695,7 +2694,7 @@ xfce_tasklist_button_icon_changed (WnckWindow        *window,
   if (tasklist->minimized_icon_lucency == 0)
     return;
 
-  icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (xfce_tasklist_get_panel_plugin (tasklist)));
+  icon_size = xfce_panel_plugin_get_icon_size (xfce_tasklist_get_panel_plugin (tasklist));
   context = gtk_widget_get_style_context (GTK_WIDGET (child->icon));
 
   /* get the window icon */
@@ -3114,7 +3113,8 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
                                          GdkEventButton    *event,
                                          XfceTasklistChild *child)
 {
-  GtkWidget *menu, *panel_plugin;
+  XfcePanelPlugin *plugin;
+  GtkWidget       *menu;
 
   panel_return_val_if_fail (XFCE_IS_TASKLIST (child->tasklist), FALSE);
   panel_return_val_if_fail (child->type != CHILD_TYPE_GROUP, FALSE);
@@ -3127,9 +3127,9 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
   if (PANEL_HAS_FLAG (event->state, GDK_CONTROL_MASK))
     {
       /* send the event to the panel plugin */
-      panel_plugin = xfce_tasklist_get_panel_plugin (child->tasklist);
-      if (G_LIKELY (panel_plugin != NULL))
-        gtk_widget_event (panel_plugin, (GdkEvent *) event);
+      plugin = xfce_tasklist_get_panel_plugin (child->tasklist);
+      if (G_LIKELY (plugin != NULL))
+        gtk_widget_event (GTK_WIDGET (plugin), (GdkEvent *) event);
 
       return TRUE;
     }
@@ -3947,7 +3947,7 @@ xfce_tasklist_group_button_button_draw (GtkWidget         *widget,
       icon_pixbuf_rect.height = gdk_pixbuf_get_height (icon_pixbuf);
 
       pango_layout_get_pixel_extents (n_windows_layout, &ink_extent, &log_extent);
-      icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (xfce_tasklist_get_panel_plugin (group_child->tasklist)));
+      icon_size = xfce_panel_plugin_get_icon_size (xfce_tasklist_get_panel_plugin (group_child->tasklist));
       radius = log_extent.height / 2;
       if (group_child->tasklist->show_labels || icon_size <= 31)
         {
@@ -4025,8 +4025,8 @@ xfce_tasklist_group_button_button_press_event (GtkWidget         *button,
                                                GdkEventButton    *event,
                                                XfceTasklistChild *group_child)
 {
-  GtkWidget *panel_plugin;
-  GtkWidget *menu;
+  XfcePanelPlugin *plugin;
+  GtkWidget       *menu;
 
   panel_return_val_if_fail (XFCE_IS_TASKLIST (group_child->tasklist), FALSE);
   panel_return_val_if_fail (group_child->type == CHILD_TYPE_GROUP, FALSE);
@@ -4039,9 +4039,9 @@ xfce_tasklist_group_button_button_press_event (GtkWidget         *button,
   if (PANEL_HAS_FLAG (event->state, GDK_CONTROL_MASK))
     {
       /* send the event to the panel plugin */
-      panel_plugin = xfce_tasklist_get_panel_plugin (group_child->tasklist);
-      if (G_LIKELY (panel_plugin != NULL))
-        gtk_widget_event (panel_plugin, (GdkEvent *) event);
+      plugin = xfce_tasklist_get_panel_plugin (group_child->tasklist);
+      if (G_LIKELY (plugin != NULL))
+        gtk_widget_event (GTK_WIDGET (plugin), (GdkEvent *) event);
 
       return TRUE;
     }
@@ -4180,7 +4180,7 @@ xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
   if (group_child->tasklist->minimized_icon_lucency == 0)
     return;
 
-  icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (xfce_tasklist_get_panel_plugin (group_child->tasklist)));
+  icon_size = xfce_panel_plugin_get_icon_size (xfce_tasklist_get_panel_plugin (group_child->tasklist));
   context = gtk_widget_get_style_context (GTK_WIDGET (group_child->icon));
 
   /* get the class group icon */
