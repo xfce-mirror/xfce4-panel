@@ -1407,23 +1407,14 @@ xfce_panel_plugin_unregister_menu (GtkMenu         *menu,
                                    XfcePanelPlugin *plugin)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
-  panel_return_if_fail (plugin->priv->panel_lock > 0);
   panel_return_if_fail (GTK_IS_MENU (menu));
 
   /* disconnect this signal */
   g_signal_handlers_disconnect_by_func (G_OBJECT (menu),
       G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
 
-  if (G_LIKELY (plugin->priv->panel_lock > 0))
-    {
-      /* decrease the counter */
-      plugin->priv->panel_lock--;
-
-      /* emit signal to unlock the panel */
-      if (plugin->priv->panel_lock == 0)
-        xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
-                                                PROVIDER_SIGNAL_UNLOCK_PANEL);
-    }
+  /* tell panel it needs to unlock */
+  xfce_panel_plugin_block_autohide (plugin, FALSE);
 }
 
 
@@ -2466,9 +2457,6 @@ xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
   g_return_if_fail (GTK_IS_MENU (menu));
   g_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin));
 
-  /* increase the counter */
-  plugin->priv->panel_lock++;
-
   /* connect signal to menu to decrease counter */
   g_signal_connect (G_OBJECT (menu), "deactivate",
       G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
@@ -2476,9 +2464,7 @@ xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
       G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
 
   /* tell panel it needs to lock */
-  if (plugin->priv->panel_lock == 1)
-    xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
-                                            PROVIDER_SIGNAL_LOCK_PANEL);
+  xfce_panel_plugin_block_autohide (plugin, TRUE);
 }
 
 
