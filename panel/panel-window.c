@@ -101,22 +101,12 @@ static gboolean     panel_window_leave_notify_event         (GtkWidget        *w
                                                              GdkEventCrossing *event);
 static gboolean     panel_window_configure_event            (GtkWidget        *widget,
                                                              GdkEventConfigure *event);
-static gboolean     panel_window_drag_motion                (GtkWidget        *widget,
-                                                             GdkDragContext   *context,
-                                                             gint              x,
-                                                             gint              y,
-                                                             guint             drag_time);
-static void         panel_window_drag_leave                 (GtkWidget        *widget,
-                                                             GdkDragContext   *context,
-                                                             guint             drag_time);
 static gboolean     panel_window_motion_notify_event        (GtkWidget        *widget,
                                                              GdkEventMotion   *event);
 static gboolean     panel_window_button_press_event         (GtkWidget        *widget,
                                                              GdkEventButton   *event);
 static gboolean     panel_window_button_release_event       (GtkWidget        *widget,
                                                              GdkEventButton   *event);
-static void         panel_window_grab_notify                (GtkWidget        *widget,
-                                                             gboolean          was_grabbed);
 static void         panel_window_get_preferred_width        (GtkWidget        *widget,
                                                              gint             *minimum_width,
                                                              gint             *natural_width);
@@ -349,7 +339,6 @@ struct _PanelWindow
   guint                autohide_timeout_id;
   guint                autohide_ease_out_id;
   gint                 autohide_block;
-  gint                 autohide_grab_block;
   gint                 autohide_size;
   guint                popdown_speed;
   gint                 popdown_progress;
@@ -406,12 +395,9 @@ panel_window_class_init (PanelWindowClass *klass)
   gtkwidget_class->enter_notify_event = panel_window_enter_notify_event;
   gtkwidget_class->leave_notify_event = panel_window_leave_notify_event;
   gtkwidget_class->configure_event = panel_window_configure_event;
-  gtkwidget_class->drag_motion = panel_window_drag_motion;
-  gtkwidget_class->drag_leave = panel_window_drag_leave;
   gtkwidget_class->motion_notify_event = panel_window_motion_notify_event;
   gtkwidget_class->button_press_event = panel_window_button_press_event;
   gtkwidget_class->button_release_event = panel_window_button_release_event;
-  gtkwidget_class->grab_notify = panel_window_grab_notify;
   gtkwidget_class->get_preferred_width = panel_window_get_preferred_width;
   gtkwidget_class->get_preferred_height = panel_window_get_preferred_height;
   gtkwidget_class->get_preferred_width_for_height = panel_window_get_preferred_width_for_height;
@@ -583,7 +569,6 @@ panel_window_init (PanelWindow *window)
   window->autohide_timeout_id = 0;
   window->autohide_ease_out_id = 0;
   window->autohide_block = 0;
-  window->autohide_grab_block = 0;
   window->autohide_size = DEFAULT_AUTOHIDE_SIZE;
   window->popup_delay = DEFAULT_POPUP_DELAY;
   window->popdown_delay = DEFAULT_POPDOWN_DELAY;
@@ -1087,36 +1072,6 @@ panel_window_configure_event (GtkWidget         *widget,
 
 
 static gboolean
-panel_window_drag_motion (GtkWidget      *widget,
-                          GdkDragContext *context,
-                          gint            x,
-                          gint            y,
-                          guint           drag_time)
-{
-  if ((*GTK_WIDGET_CLASS (panel_window_parent_class)->drag_motion) != NULL)
-    (*GTK_WIDGET_CLASS (panel_window_parent_class)->drag_motion) (widget, context, x, y, drag_time);
-
-  return TRUE;
-}
-
-
-
-static void
-panel_window_drag_leave (GtkWidget      *widget,
-                         GdkDragContext *context,
-                         guint           drag_time)
-{
-  PanelWindow *window = PANEL_WINDOW (widget);
-
-  /* queue an autohide timeout if needed */
-  if (window->autohide_state == AUTOHIDE_VISIBLE
-      && window->autohide_block == 0)
-    panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
-}
-
-
-
-static gboolean
 panel_window_motion_notify_event (GtkWidget      *widget,
                                   GdkEventMotion *event)
 {
@@ -1289,64 +1244,6 @@ panel_window_button_release_event (GtkWidget      *widget,
     return (*GTK_WIDGET_CLASS (panel_window_parent_class)->button_release_event) (widget, event);
   else
     return FALSE;
-}
-
-
-
-static void
-panel_window_grab_notify (GtkWidget *widget,
-                          gboolean   was_grabbed)
-{
-  PanelWindow *window = PANEL_WINDOW (widget);
-  GtkWidget   *current;
-
-  /* there are cases where we pass here only when the grab ends, e.g. when moving
-   * a window in the taskbar, so let's make sure to decrement the autohide counter
-   * only when we have previously incremented it */
-  static gint freeze = 0;
-
-  current = gtk_grab_get_current ();
-  if (GTK_IS_MENU_SHELL (current))
-    {
-      /* don't act on menu grabs, they should be registered through the
-       * plugin if they should block autohide */
-      window->autohide_grab_block++;
-    }
-  else if (window->autohide_grab_block > 0)
-    {
-      /* drop previous menu block or grab from outside window */
-      window->autohide_grab_block--;
-    }
-  else if (window->autohide_grab_block == 0)
-    {
-      if (current != NULL)
-        {
-          /* filter out grab event that did not occur in the panel window,
-           * but in a windows that is part of this process */
-          if (gtk_widget_get_toplevel (GTK_WIDGET (window)) !=
-              gtk_widget_get_toplevel (current))
-            {
-              /* block the next notification */
-              window->autohide_grab_block++;
-
-              return;
-            }
-       }
-
-      /* avoid hiding the panel when the window is grabbed. this
-       * (for example) happens when the user drags in the pager plugin
-       * see bug #4597 */
-      if (!was_grabbed)
-        {
-          freeze++;
-          panel_window_freeze_autohide (window);
-        }
-      else if (freeze > 0)
-        {
-          freeze--;
-          panel_window_thaw_autohide (window);
-        }
-    }
 }
 
 
