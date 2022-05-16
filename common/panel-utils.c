@@ -60,6 +60,26 @@ panel_utils_help_button_clicked (GtkWidget       *button,
 
 
 
+static void
+panel_utils_block_autohide (XfcePanelPlugin *panel_plugin)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (panel_plugin));
+
+  xfce_panel_plugin_block_autohide (panel_plugin, TRUE);
+}
+
+
+
+static void
+panel_utils_unblock_autohide (XfcePanelPlugin *panel_plugin)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (panel_plugin));
+
+  xfce_panel_plugin_block_autohide (panel_plugin, FALSE);
+}
+
+
+
 GtkBuilder *
 panel_utils_builder_new (XfcePanelPlugin  *panel_plugin,
                          const gchar      *buffer,
@@ -95,7 +115,13 @@ panel_utils_builder_new (XfcePanelPlugin  *panel_plugin,
                 G_CALLBACK (panel_utils_help_button_clicked), panel_plugin);
 
           if (G_LIKELY (dialog_return != NULL))
-            *dialog_return = dialog;
+            {
+              *dialog_return = dialog;
+              g_signal_connect_swapped (dialog, "show",
+                  G_CALLBACK (panel_utils_block_autohide), panel_plugin);
+              g_signal_connect_swapped (dialog, "hide",
+                  G_CALLBACK (panel_utils_unblock_autohide), panel_plugin);
+            }
 
           return builder;
         }
