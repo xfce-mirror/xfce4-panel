@@ -1542,6 +1542,8 @@ xfce_tasklist_arrow_button_menu_destroy (GtkWidget    *menu,
   /* make sure the wireframe is hidden */
   xfce_tasklist_wireframe_hide (tasklist);
 #endif
+
+  xfce_panel_plugin_block_autohide (xfce_tasklist_get_panel_plugin (tasklist), FALSE);
 }
 
 
@@ -1577,6 +1579,7 @@ xfce_tasklist_arrow_button_toggled (GtkWidget    *button,
           gtk_widget_show (mi);
         }
 
+      xfce_panel_plugin_block_autohide (xfce_tasklist_get_panel_plugin (tasklist), TRUE);
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
       gtk_menu_popup_at_widget (GTK_MENU (menu), button,
                                 ! xfce_tasklist_horizontal (tasklist)
@@ -3104,6 +3107,7 @@ xfce_tasklist_button_menu_destroy (GtkWidget         *menu,
 
   gtk_widget_destroy (menu);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (child->button), FALSE);
+  xfce_panel_plugin_block_autohide (xfce_tasklist_get_panel_plugin (child->tasklist), FALSE);
 }
 
 
@@ -3141,6 +3145,7 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
       g_signal_connect (G_OBJECT (menu), "selection-done",
           G_CALLBACK (xfce_tasklist_button_menu_destroy), child);
 
+      xfce_panel_plugin_block_autohide (xfce_tasklist_get_panel_plugin (child->tasklist), TRUE);
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
       gtk_menu_popup_at_widget (GTK_MENU (menu), button,
                                 ! xfce_tasklist_horizontal (child->tasklist)
@@ -3896,6 +3901,8 @@ xfce_tasklist_group_button_menu_destroy (GtkWidget         *menu,
   /* make sure the wireframe is hidden */
   xfce_tasklist_wireframe_hide (group_child->tasklist);
 #endif
+
+  xfce_panel_plugin_block_autohide (xfce_tasklist_get_panel_plugin (group_child->tasklist), FALSE);
 }
 
 
@@ -4052,6 +4059,7 @@ xfce_tasklist_group_button_button_press_event (GtkWidget         *button,
       g_signal_connect (G_OBJECT (menu), "selection-done",
           G_CALLBACK (xfce_tasklist_group_button_menu_destroy), group_child);
 
+      xfce_panel_plugin_block_autohide (xfce_tasklist_get_panel_plugin (group_child->tasklist), TRUE);
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
       gtk_menu_popup_at_widget (GTK_MENU (menu), button,
                                 ! xfce_tasklist_horizontal (group_child->tasklist)
