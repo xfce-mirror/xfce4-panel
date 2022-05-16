@@ -262,7 +262,8 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    *
    * This signal is emmitted when the Properties entry in the right-click
    * menu is clicked. Plugin writers can use this signal to open a
-   * plugin settings dialog.
+   * plugin settings dialog. It is their responsibility to block/unblock panel
+   * autohide when the dialog is shown/hidden.
    *
    * See also: xfce_panel_plugin_menu_show_configure() and
    *           xfce_titled_dialog_new ().
