@@ -227,7 +227,6 @@ enum _AutohideBehavior
 
 enum _AutohideState
 {
-  AUTOHIDE_DISABLED = 0, /* autohide is disabled */
   AUTOHIDE_VISIBLE,      /* visible */
   AUTOHIDE_POPDOWN,      /* visible, but hide timeout is running */
   AUTOHIDE_POPDOWN_SLOW, /* same as popdown, but timeout is 4x longer */
@@ -575,7 +574,7 @@ panel_window_init (PanelWindow *window)
   window->span_monitors = FALSE;
   window->position_locked = FALSE;
   window->autohide_behavior = AUTOHIDE_BEHAVIOR_NEVER;
-  window->autohide_state = AUTOHIDE_DISABLED;
+  window->autohide_state = AUTOHIDE_VISIBLE;
   window->autohide_timeout_id = 0;
   window->autohide_ease_out_id = 0;
   window->autohide_block = 0;
@@ -1013,7 +1012,7 @@ panel_window_enter_notify_event (GtkWidget        *widget,
 
   /* update autohide status */
   if (event->detail != GDK_NOTIFY_INFERIOR
-      && window->autohide_state != AUTOHIDE_DISABLED)
+      && window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
     {
       /* stop a running autohide timeout */
       if (window->autohide_timeout_id != 0)
@@ -1092,7 +1091,7 @@ panel_window_drag_leave (GtkWidget      *widget,
   PanelWindow *window = PANEL_WINDOW (widget);
 
   /* queue an autohide timeout if needed */
-  if (window->autohide_state != AUTOHIDE_DISABLED
+  if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER
       && window->autohide_block == 0)
     {
       /* simulate a geometry change to check for overlapping windows with intelligent hiding */
@@ -1518,7 +1517,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 
       /* update the struts if needed, leave when nothing changed */
       if (window->struts_edge != STRUTS_EDGE_NONE
-          && window->autohide_state == AUTOHIDE_DISABLED)
+          && window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER)
         panel_window_screen_struts_set (window);
 
       /* move the autohide window offscreen */
@@ -1767,7 +1766,7 @@ panel_window_screen_struts_edge (PanelWindow *window)
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), STRUTS_EDGE_NONE);
 
   /* no struts when autohide is active or they are disabled by the user */
-  if (window->autohide_state != AUTOHIDE_DISABLED
+  if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER
       || window->struts_disabled)
     return STRUTS_EDGE_NONE;
 
@@ -2528,7 +2527,7 @@ panel_window_autohide_timeout (gpointer user_data)
 {
   PanelWindow *window = PANEL_WINDOW (user_data);
 
-  panel_return_val_if_fail (window->autohide_state != AUTOHIDE_DISABLED, FALSE);
+  panel_return_val_if_fail (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER, FALSE);
   panel_return_val_if_fail (window->autohide_block == 0, FALSE);
 
   /* update the status */
@@ -2670,7 +2669,7 @@ panel_window_autohide_queue (PanelWindow   *window,
       || window->snap_position != SNAP_POSITION_NONE)
     panel_window_screen_layout_changed (window->screen, window);
 
-  if (new_state == AUTOHIDE_DISABLED || new_state == AUTOHIDE_VISIBLE)
+  if (new_state == AUTOHIDE_VISIBLE)
     {
       /* queue a resize to make sure the panel is visible */
       gtk_widget_queue_resize (GTK_WIDGET (window));
@@ -2850,7 +2849,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
   else if (window->autohide_window != NULL)
     {
       /* stop autohide */
-      panel_window_autohide_queue (window, AUTOHIDE_DISABLED);
+      panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
 
       /* destroy the autohide window */
       panel_return_if_fail (GTK_IS_WINDOW (window->autohide_window));
@@ -3386,7 +3385,7 @@ panel_window_freeze_autohide (PanelWindow *window)
   window->autohide_block++;
 
   if (window->autohide_block == 1
-      && window->autohide_state != AUTOHIDE_DISABLED)
+      && window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
     panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
 }
 
@@ -3402,7 +3401,7 @@ panel_window_thaw_autohide (PanelWindow *window)
   window->autohide_block--;
 
   if (window->autohide_block == 0
-      && window->autohide_state != AUTOHIDE_DISABLED)
+      && window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
     {
       /* simulate a geometry change to check for overlapping windows with intelligent hiding */
       if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
