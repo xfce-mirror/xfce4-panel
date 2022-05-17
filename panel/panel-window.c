@@ -1048,20 +1048,8 @@ static gboolean
 panel_window_leave_notify_event (GtkWidget        *widget,
                                  GdkEventCrossing *event)
 {
-  PanelWindow *window = PANEL_WINDOW (widget);
-
-  /* queue an autohide timeout if needed */
-  if (event->detail != GDK_NOTIFY_INFERIOR
-      && window->autohide_state != AUTOHIDE_DISABLED
-      && window->autohide_block == 0)
-    {
-      /* simulate a geometry change to check for overlapping windows with intelligent hiding */
-      if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
-        panel_window_active_window_geometry_changed (window->wnck_active_window, window);
-      /* otherwise just hide the panel */
-      else
-        panel_window_autohide_queue (window, AUTOHIDE_POPDOWN_SLOW);
-    }
+  if (event->detail != GDK_NOTIFY_INFERIOR)
+    panel_window_drag_leave (widget, NULL, 0);
 
   return (*GTK_WIDGET_CLASS (panel_window_parent_class)->leave_notify_event) (widget, event);
 }
@@ -1109,9 +1097,16 @@ panel_window_drag_leave (GtkWidget      *widget,
   PanelWindow *window = PANEL_WINDOW (widget);
 
   /* queue an autohide timeout if needed */
-  if (window->autohide_state == AUTOHIDE_VISIBLE
+  if (window->autohide_state != AUTOHIDE_DISABLED
       && window->autohide_block == 0)
-    panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
+    {
+      /* simulate a geometry change to check for overlapping windows with intelligent hiding */
+      if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
+        panel_window_active_window_geometry_changed (window->wnck_active_window, window);
+      /* otherwise just hide the panel */
+      else
+        panel_window_autohide_queue (window, AUTOHIDE_POPDOWN_SLOW);
+    }
 }
 
 
