@@ -1012,26 +1012,9 @@ panel_window_enter_notify_event (GtkWidget        *widget,
 
   /* update autohide status */
   if (event->detail != GDK_NOTIFY_INFERIOR
-      && window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
-    {
-      /* stop a running autohide timeout */
-      if (window->autohide_timeout_id != 0)
-        {
-          window->autohide_state = AUTOHIDE_VISIBLE;
-          g_source_remove (window->autohide_timeout_id);
-        }
-
-      if (window->autohide_ease_out_id != 0)
-        {
-          g_source_remove (window->autohide_ease_out_id);
-          /* we were in a ease_out animation so restore the original position of the window */
-          panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
-        }
-
-      /* update autohide status */
-      if (window->autohide_state == AUTOHIDE_POPDOWN)
-        window->autohide_state = AUTOHIDE_VISIBLE;
-    }
+      && window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER
+      && window->autohide_block == 0)
+    panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
 
   return (*GTK_WIDGET_CLASS (panel_window_parent_class)->enter_notify_event) (widget, event);
 }
