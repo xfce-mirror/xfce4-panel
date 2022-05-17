@@ -2470,7 +2470,7 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
                       || pointer_y <= panel_area.y
                       || pointer_x >= panel_area.x + panel_area.width
                       || pointer_y >= panel_area.y + panel_area.height)
-                    panel_window_autohide_queue (window, AUTOHIDE_HIDDEN);
+                    panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
                 }
             }
           else
@@ -2647,6 +2647,10 @@ panel_window_autohide_queue (PanelWindow   *window,
   /* set new autohide state */
   window->autohide_state = new_state;
 
+  /* already hidden */
+  if (new_state == AUTOHIDE_HIDDEN)
+    return;
+
   /* force a layout update to disable struts */
   if (window->struts_edge != STRUTS_EDGE_NONE
       || window->snap_position != SNAP_POSITION_NONE)
@@ -2706,16 +2710,8 @@ panel_window_autohide_drag_leave (GtkWidget      *widget,
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (window->autohide_window == widget);
 
-  /* we left the window before it was hidden, stop the queue */
-  if (window->autohide_timeout_id != 0)
-    g_source_remove (window->autohide_timeout_id);
-
-  if (window->autohide_ease_out_id != 0)
-    g_source_remove (window->autohide_ease_out_id);
-
-  /* update the status */
-  if (window->autohide_state == AUTOHIDE_POPUP)
-    window->autohide_state = AUTOHIDE_HIDDEN;
+  /* we left the autohide window before the panel was shown, stop the queue */
+  panel_window_autohide_queue (window, AUTOHIDE_HIDDEN);
 }
 
 
