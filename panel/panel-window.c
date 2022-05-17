@@ -2470,7 +2470,7 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
                       || pointer_y <= panel_area.y
                       || pointer_x >= panel_area.x + panel_area.width
                       || pointer_y >= panel_area.y + panel_area.height)
-                    panel_window_autohide_queue (window, AUTOHIDE_HIDDEN);
+                    panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
                 }
             }
           else
@@ -2636,6 +2636,7 @@ panel_window_autohide_queue (PanelWindow   *window,
   guint delay;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
+  panel_return_if_fail (new_state != AUTOHIDE_HIDDEN);
 
   /* stop pending timeout */
   if (window->autohide_timeout_id != 0)
