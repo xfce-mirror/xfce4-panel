@@ -115,8 +115,6 @@ static gboolean     panel_window_button_press_event         (GtkWidget        *w
                                                              GdkEventButton   *event);
 static gboolean     panel_window_button_release_event       (GtkWidget        *widget,
                                                              GdkEventButton   *event);
-static void         panel_window_grab_notify                (GtkWidget        *widget,
-                                                             gboolean          was_grabbed);
 static void         panel_window_get_preferred_width        (GtkWidget        *widget,
                                                              gint             *minimum_width,
                                                              gint             *natural_width);
@@ -229,7 +227,6 @@ enum _AutohideBehavior
 
 enum _AutohideState
 {
-  AUTOHIDE_DISABLED = 0, /* autohide is disabled */
   AUTOHIDE_VISIBLE,      /* visible */
   AUTOHIDE_POPDOWN,      /* visible, but hide timeout is running */
   AUTOHIDE_POPDOWN_SLOW, /* same as popdown, but timeout is 4x longer */
@@ -349,7 +346,6 @@ struct _PanelWindow
   guint                autohide_timeout_id;
   guint                autohide_ease_out_id;
   gint                 autohide_block;
-  gint                 autohide_grab_block;
   gint                 autohide_size;
   guint                popdown_speed;
   gint                 popdown_progress;
@@ -411,7 +407,6 @@ panel_window_class_init (PanelWindowClass *klass)
   gtkwidget_class->motion_notify_event = panel_window_motion_notify_event;
   gtkwidget_class->button_press_event = panel_window_button_press_event;
   gtkwidget_class->button_release_event = panel_window_button_release_event;
-  gtkwidget_class->grab_notify = panel_window_grab_notify;
   gtkwidget_class->get_preferred_width = panel_window_get_preferred_width;
   gtkwidget_class->get_preferred_height = panel_window_get_preferred_height;
   gtkwidget_class->get_preferred_width_for_height = panel_window_get_preferred_width_for_height;
@@ -579,11 +574,10 @@ panel_window_init (PanelWindow *window)
   window->span_monitors = FALSE;
   window->position_locked = FALSE;
   window->autohide_behavior = AUTOHIDE_BEHAVIOR_NEVER;
-  window->autohide_state = AUTOHIDE_DISABLED;
+  window->autohide_state = AUTOHIDE_VISIBLE;
   window->autohide_timeout_id = 0;
   window->autohide_ease_out_id = 0;
   window->autohide_block = 0;
-  window->autohide_grab_block = 0;
   window->autohide_size = DEFAULT_AUTOHIDE_SIZE;
   window->popup_delay = DEFAULT_POPUP_DELAY;
   window->popdown_delay = DEFAULT_POPDOWN_DELAY;
@@ -1018,26 +1012,9 @@ panel_window_enter_notify_event (GtkWidget        *widget,
 
   /* update autohide status */
   if (event->detail != GDK_NOTIFY_INFERIOR
-      && window->autohide_state != AUTOHIDE_DISABLED)
-    {
-      /* stop a running autohide timeout */
-      if (window->autohide_timeout_id != 0)
-        {
-          window->autohide_state = AUTOHIDE_VISIBLE;
-          g_source_remove (window->autohide_timeout_id);
-        }
-
-      if (window->autohide_ease_out_id != 0)
-        {
-          g_source_remove (window->autohide_ease_out_id);
-          /* we were in a ease_out animation so restore the original position of the window */
-          panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
-        }
-
-      /* update autohide status */
-      if (window->autohide_state == AUTOHIDE_POPDOWN)
-        window->autohide_state = AUTOHIDE_VISIBLE;
-    }
+      && window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER
+      && window->autohide_block == 0)
+    panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
 
   return (*GTK_WIDGET_CLASS (panel_window_parent_class)->enter_notify_event) (widget, event);
 }
@@ -1097,7 +1074,7 @@ panel_window_drag_leave (GtkWidget      *widget,
   PanelWindow *window = PANEL_WINDOW (widget);
 
   /* queue an autohide timeout if needed */
-  if (window->autohide_state != AUTOHIDE_DISABLED
+  if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER
       && window->autohide_block == 0)
     {
       /* simulate a geometry change to check for overlapping windows with intelligent hiding */
@@ -1284,64 +1261,6 @@ panel_window_button_release_event (GtkWidget      *widget,
     return (*GTK_WIDGET_CLASS (panel_window_parent_class)->button_release_event) (widget, event);
   else
     return FALSE;
-}
-
-
-
-static void
-panel_window_grab_notify (GtkWidget *widget,
-                          gboolean   was_grabbed)
-{
-  PanelWindow *window = PANEL_WINDOW (widget);
-  GtkWidget   *current;
-
-  /* there are cases where we pass here only when the grab ends, e.g. when moving
-   * a window in the taskbar, so let's make sure to decrement the autohide counter
-   * only when we have previously incremented it */
-  static gint freeze = 0;
-
-  current = gtk_grab_get_current ();
-  if (GTK_IS_MENU_SHELL (current))
-    {
-      /* don't act on menu grabs, they should be registered through the
-       * plugin if they should block autohide */
-      window->autohide_grab_block++;
-    }
-  else if (window->autohide_grab_block > 0)
-    {
-      /* drop previous menu block or grab from outside window */
-      window->autohide_grab_block--;
-    }
-  else if (window->autohide_grab_block == 0)
-    {
-      if (current != NULL)
-        {
-          /* filter out grab event that did not occur in the panel window,
-           * but in a windows that is part of this process */
-          if (gtk_widget_get_toplevel (GTK_WIDGET (window)) !=
-              gtk_widget_get_toplevel (current))
-            {
-              /* block the next notification */
-              window->autohide_grab_block++;
-
-              return;
-            }
-       }
-
-      /* avoid hiding the panel when the window is grabbed. this
-       * (for example) happens when the user drags in the pager plugin
-       * see bug #4597 */
-      if (!was_grabbed)
-        {
-          freeze++;
-          panel_window_freeze_autohide (window);
-        }
-      else if (freeze > 0)
-        {
-          freeze--;
-          panel_window_thaw_autohide (window);
-        }
-    }
 }
 
 
@@ -1581,7 +1500,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 
       /* update the struts if needed, leave when nothing changed */
       if (window->struts_edge != STRUTS_EDGE_NONE
-          && window->autohide_state == AUTOHIDE_DISABLED)
+          && window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER)
         panel_window_screen_struts_set (window);
 
       /* move the autohide window offscreen */
@@ -1830,7 +1749,7 @@ panel_window_screen_struts_edge (PanelWindow *window)
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), STRUTS_EDGE_NONE);
 
   /* no struts when autohide is active or they are disabled by the user */
-  if (window->autohide_state != AUTOHIDE_DISABLED
+  if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER
       || window->struts_disabled)
     return STRUTS_EDGE_NONE;
 
@@ -2551,7 +2470,7 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
                       || pointer_y <= panel_area.y
                       || pointer_x >= panel_area.x + panel_area.width
                       || pointer_y >= panel_area.y + panel_area.height)
-                    panel_window_autohide_queue (window, AUTOHIDE_HIDDEN);
+                    panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
                 }
             }
           else
@@ -2591,7 +2510,7 @@ panel_window_autohide_timeout (gpointer user_data)
 {
   PanelWindow *window = PANEL_WINDOW (user_data);
 
-  panel_return_val_if_fail (window->autohide_state != AUTOHIDE_DISABLED, FALSE);
+  panel_return_val_if_fail (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER, FALSE);
   panel_return_val_if_fail (window->autohide_block == 0, FALSE);
 
   /* update the status */
@@ -2717,6 +2636,7 @@ panel_window_autohide_queue (PanelWindow   *window,
   guint delay;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
+  panel_return_if_fail (new_state != AUTOHIDE_HIDDEN);
 
   /* stop pending timeout */
   if (window->autohide_timeout_id != 0)
@@ -2733,7 +2653,7 @@ panel_window_autohide_queue (PanelWindow   *window,
       || window->snap_position != SNAP_POSITION_NONE)
     panel_window_screen_layout_changed (window->screen, window);
 
-  if (new_state == AUTOHIDE_DISABLED || new_state == AUTOHIDE_VISIBLE)
+  if (new_state == AUTOHIDE_VISIBLE)
     {
       /* queue a resize to make sure the panel is visible */
       gtk_widget_queue_resize (GTK_WIDGET (window));
@@ -2913,7 +2833,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
   else if (window->autohide_window != NULL)
     {
       /* stop autohide */
-      panel_window_autohide_queue (window, AUTOHIDE_DISABLED);
+      panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
 
       /* destroy the autohide window */
       panel_return_if_fail (GTK_IS_WINDOW (window->autohide_window));
@@ -3449,7 +3369,7 @@ panel_window_freeze_autohide (PanelWindow *window)
   window->autohide_block++;
 
   if (window->autohide_block == 1
-      && window->autohide_state != AUTOHIDE_DISABLED)
+      && window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
     panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
 }
 
@@ -3465,7 +3385,7 @@ panel_window_thaw_autohide (PanelWindow *window)
   window->autohide_block--;
 
   if (window->autohide_block == 0
-      && window->autohide_state != AUTOHIDE_DISABLED)
+      && window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
     {
       /* simulate a geometry change to check for overlapping windows with intelligent hiding */
       if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
