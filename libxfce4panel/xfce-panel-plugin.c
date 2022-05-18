@@ -262,7 +262,8 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    *
    * This signal is emmitted when the Properties entry in the right-click
    * menu is clicked. Plugin writers can use this signal to open a
-   * plugin settings dialog.
+   * plugin settings dialog. It is their responsibility to block/unblock panel
+   * autohide when the dialog is shown/hidden.
    *
    * See also: xfce_panel_plugin_menu_show_configure() and
    *           xfce_titled_dialog_new ().
@@ -1073,6 +1074,8 @@ xfce_panel_plugin_menu_remove (XfcePanelPlugin *plugin)
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
 
+  xfce_panel_plugin_block_autohide (plugin, TRUE);
+
   /* create question dialog (same code is also in panel-preferences-dialog.c) */
   dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
       GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
@@ -1096,6 +1099,8 @@ xfce_panel_plugin_menu_remove (XfcePanelPlugin *plugin)
     }
 
   gtk_widget_destroy (dialog);
+
+  xfce_panel_plugin_block_autohide (plugin, FALSE);
 }
 
 
