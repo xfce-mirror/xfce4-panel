@@ -555,28 +555,6 @@ err1:
 }
 
 
-static gboolean
-_exo_str_looks_like_an_uri (const gchar *str)
-{
-  const gchar *s = str;
-
-  if (G_UNLIKELY (str == NULL))
-    return FALSE;
-
-  /* <scheme> starts with an alpha character */
-  if (g_ascii_isalpha (*s))
-    {
-      /* <scheme> continues with (alpha | digit | "+" | "-" | ".")* */
-      for (++s; g_ascii_isalnum (*s) || *s == '+' || *s == '-' || *s == '.'; ++s);
-
-      /* <scheme> must be followed by ":" */
-      return (*s == ':' && *(s+1) == '/');
-    }
-
-  return FALSE;
-}
-
-
 static GarconMenuItem *
 launcher_plugin_item_load (LauncherPlugin *plugin,
                            const gchar    *str,
@@ -593,7 +571,7 @@ launcher_plugin_item_load (LauncherPlugin *plugin,
   panel_return_val_if_fail (str != NULL, NULL);
   panel_return_val_if_fail (G_IS_FILE (plugin->config_directory), NULL);
 
-  if (G_UNLIKELY (g_path_is_absolute (str) || _exo_str_looks_like_an_uri (str)))
+  if (G_UNLIKELY (g_path_is_absolute (str) || g_uri_is_valid (str, G_URI_FLAGS_NONE, NULL)))
     {
       src_file = g_file_new_for_commandline_arg (str);
       if (g_file_has_prefix (src_file, plugin->config_directory))
@@ -2646,7 +2624,7 @@ launcher_plugin_uri_list_extract (GtkSelectionData *data)
 
           if (g_path_is_absolute (array[i]))
             uri = g_filename_to_uri (array[i], NULL, NULL);
-          else if (_exo_str_looks_like_an_uri (array[i]))
+          else if (g_uri_is_valid (array[i], G_URI_FLAGS_NONE, NULL))
             uri = g_strdup (array[i]);
 
           /* append the uri if we extracted one */
