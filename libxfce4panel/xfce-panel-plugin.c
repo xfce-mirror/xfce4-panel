@@ -114,8 +114,6 @@ static gboolean      xfce_panel_plugin_remote_event           (XfcePanelPluginPr
 static void          xfce_panel_plugin_set_locked             (XfcePanelPluginProvider          *provider,
                                                                gboolean                          locked);
 static void          xfce_panel_plugin_ask_remove             (XfcePanelPluginProvider          *provider);
-static void          xfce_panel_plugin_take_window_notify     (gpointer                          data,
-                                                               GObject                          *where_the_object_was);
 
 
 
@@ -1717,23 +1715,6 @@ xfce_panel_plugin_ask_remove (XfcePanelPluginProvider *provider)
 
 
 
-static void
-xfce_panel_plugin_take_window_notify (gpointer  data,
-                                      GObject  *where_the_object_was)
-{
-  panel_return_if_fail (GTK_IS_WINDOW (data) || XFCE_IS_PANEL_PLUGIN (data));
-
-  /* release the opposite weak ref */
-  g_object_weak_unref (G_OBJECT (data),
-      xfce_panel_plugin_take_window_notify, where_the_object_was);
-
-  /* destroy the dialog if the plugin was finalized */
-  if (GTK_IS_WINDOW (data))
-    gtk_widget_destroy (GTK_WIDGET (data));
-}
-
-
-
 /**
  * xfce_panel_plugin_get_name:
  * @plugin : an #XfcePanelPlugin.
@@ -2215,12 +2196,8 @@ xfce_panel_plugin_take_window (XfcePanelPlugin *plugin,
   g_return_if_fail (GTK_IS_WINDOW (window));
 
   gtk_window_set_screen (window, gtk_widget_get_screen (GTK_WIDGET (plugin)));
-
-  /* monitor both objects */
-  g_object_weak_ref (G_OBJECT (plugin),
-      xfce_panel_plugin_take_window_notify, window);
-  g_object_weak_ref (G_OBJECT (window),
-      xfce_panel_plugin_take_window_notify, plugin);
+  g_signal_connect_object (plugin, "destroy", G_CALLBACK (gtk_widget_destroy),
+                           window, G_CONNECT_SWAPPED);
 }
 
 
