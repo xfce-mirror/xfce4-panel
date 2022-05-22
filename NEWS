@@ -1,3 +1,48 @@
+4.17.1 (2022-05-22)
+======
+- Dependency Changes:
+  - Garcon >= 4.17.0
+
+- New Features:
+  - tasklist: Middle click minimize window groups (!76)
+  - tasklist: Middle click close window groups (#322, !76)
+  - tasklist: Middle click opens new instance (#166, !72)
+
+- Bug Fixes:
+  - Add some autohide blockers (!78)
+  - Bump minimal required Garcon to 4.17.0 (#184, #485)
+  - libxfce4panel: Destroy plugin prefs dialog on plugin "destroy" signal
+  - Autohide fixes (#48, #116, #397, !75)
+  - systray: Hide button menu if button is hidden by its app (Fixes #391)
+  - launcher: Use same icons for item list as in prefs dialog (Fixes #415)
+  - launcher: Make add dialog consistent with panel add dialog (Fixes #416)
+  - tasklist: Fix context menu position in deskbar mode (Fixes #417)
+  - systray: Display square systray icons on multiple rows (#426)
+  - panel: Do not rely on borders to trigger autohide animation
+  - Revert "Fix autohide with bg color or image (Bug #16064)" (#435, #512)
+  - tasklist: Hide wireframe on window buttons (#543, !70)
+  - systray: Icon size and priority fixes (#571, !73)
+  - systray: Disable broken smooth scroll with Xfwm4 (#411, !74)
+  - prefs-dialog: Filter out irrelevant selection changes in "Items" tab
+  - wrapper: Ensure that provider stays alive when processing "g-signal"
+  - Revert "panel: Keep a reference on item during drag and drop"
+  - panel: Clear opaque region so compositor properly apply transparency (#378, #427)
+  - Fix `gdk_rgba_to_string()`-related memory leaks
+  - panel: Refactor background setters
+  - systray: Load icon from theme at desired size (#463)
+  - Take window scaling into account (#465, #486, !71)
+  - panel: Fix a memory leak
+  - clock: Prevent visual glitch when showing calendar window (#466)
+  - tasklist: Fix wireframe for CSD windows (v2) (#562)
+  - systray: Check that the proxy exists when invalidating item
+
+- Translation Updates:
+  Albanian, Bulgarian, Chinese (China), Chinese (Taiwan), Dutch,
+  English (United Kingdom), French, German, Greek, Hebrew, Italian,
+  Japanese, Lithuanian, Malay, Norwegian Bokmål, Panjabi (Punjabi),
+  Polish, Portuguese, Portuguese (Brazil), Serbian, Slovenian, Spanish,
+  Swedish, Turkish
+
 4.17.0 (2022-04-16)
 ======
 - Dependency Changes:
