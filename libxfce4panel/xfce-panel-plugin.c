@@ -161,7 +161,6 @@ typedef enum
   PLUGIN_FLAG_REALIZED       = 1 << 2,
   PLUGIN_FLAG_SHOW_CONFIGURE = 1 << 3,
   PLUGIN_FLAG_SHOW_ABOUT     = 1 << 4,
-  PLUGIN_FLAG_BLOCK_AUTOHIDE = 1 << 5
 }
 PluginFlags;
 
@@ -1402,23 +1401,14 @@ xfce_panel_plugin_unregister_menu (GtkMenu         *menu,
                                    XfcePanelPlugin *plugin)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
-  panel_return_if_fail (plugin->priv->panel_lock > 0);
   panel_return_if_fail (GTK_IS_MENU (menu));
 
   /* disconnect this signal */
   g_signal_handlers_disconnect_by_func (G_OBJECT (menu),
       G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
 
-  if (G_LIKELY (plugin->priv->panel_lock > 0))
-    {
-      /* decrease the counter */
-      plugin->priv->panel_lock--;
-
-      /* emit signal to unlock the panel */
-      if (plugin->priv->panel_lock == 0)
-        xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
-                                                PROVIDER_SIGNAL_UNLOCK_PANEL);
-    }
+  /* tell panel it needs to unlock */
+  xfce_panel_plugin_block_autohide (plugin, FALSE);
 }
 
 
@@ -2461,9 +2451,6 @@ xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
   g_return_if_fail (GTK_IS_MENU (menu));
   g_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin));
 
-  /* increase the counter */
-  plugin->priv->panel_lock++;
-
   /* connect signal to menu to decrease counter */
   g_signal_connect (G_OBJECT (menu), "deactivate",
       G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
@@ -2471,9 +2458,7 @@ xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
       G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
 
   /* tell panel it needs to lock */
-  if (plugin->priv->panel_lock == 1)
-    xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
-                                            PROVIDER_SIGNAL_LOCK_PANEL);
+  xfce_panel_plugin_block_autohide (plugin, TRUE);
 }
 
 
@@ -2775,8 +2760,9 @@ xfce_panel_plugin_focus_widget (XfcePanelPlugin *plugin,
  * plugin at it will look weird for a user if the panel will hide while
  * he/she is working in the popup.
  *
- * For menus use xfce_panel_plugin_register_menu() which will take care
- * of this.
+ * Be sure to use this function as lock/unlock pairs, as a counter is
+ * incremented/decremented under the hood. For menus, you can use
+ * xfce_panel_plugin_register_menu() which will take care of this.
  **/
 void
 xfce_panel_plugin_block_autohide (XfcePanelPlugin *plugin,
@@ -2785,17 +2771,10 @@ xfce_panel_plugin_block_autohide (XfcePanelPlugin *plugin,
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
   g_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin));
 
-  /* leave when requesting the same block state */
-  if (PANEL_HAS_FLAG (plugin->priv->flags, PLUGIN_FLAG_BLOCK_AUTOHIDE) == blocked)
-    return;
-
   if (blocked)
     {
       /* increase the counter */
-      panel_return_if_fail (plugin->priv->panel_lock >= 0);
       plugin->priv->panel_lock++;
-
-      PANEL_SET_FLAG (plugin->priv->flags, PLUGIN_FLAG_BLOCK_AUTOHIDE);
 
       /* tell panel it needs to lock */
       if (plugin->priv->panel_lock == 1)
@@ -2807,8 +2786,6 @@ xfce_panel_plugin_block_autohide (XfcePanelPlugin *plugin,
       /* decrease the counter */
       panel_return_if_fail (plugin->priv->panel_lock > 0);
       plugin->priv->panel_lock--;
-
-      PANEL_UNSET_FLAG (plugin->priv->flags, PLUGIN_FLAG_BLOCK_AUTOHIDE);
 
       /* tell panel it needs to unlock */
       if (plugin->priv->panel_lock == 0)
