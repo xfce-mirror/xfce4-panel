@@ -138,20 +138,20 @@ fi
 dnl ***********************************
 dnl *** Check for required packages ***
 dnl ***********************************
-AC_DEFINE(GLIB_VERSION_MAX_ALLOWED, GLIB_VERSION_2_56, Warn when using post 2_56 APIs)
-AC_DEFINE(GLIB_VERSION_MIN_REQUIRED, GLIB_VERSION_2_56, Don't warn about post 2_56 deprecations)
+AC_DEFINE(GLIB_VERSION_MAX_ALLOWED, GLIB_VERSION_2_66, Warn when using post 2_66 APIs)
+AC_DEFINE(GLIB_VERSION_MIN_REQUIRED, GLIB_VERSION_2_66, Don't warn about post 2_66 deprecations)
 AC_DEFINE(G_LOG_USE_STRUCTURED, 1, [Use GLib structured logging])
-XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.15.6])
+XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.17.2])
 XDT_CHECK_PACKAGE([GARCON], [garcon-1], [4.17.0])
 XDT_CHECK_PACKAGE([GARCON_GTK3], [garcon-gtk3-1], [4.17.0])
 XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-2], [4.17.1])
 XDT_CHECK_PACKAGE([XFCONF], [libxfconf-0], [4.13.2])
 XDT_CHECK_PACKAGE([GTK], [gtk+-3.0], [3.22.0])
 XDT_CHECK_PACKAGE([EXO], [exo-2], [0.11.2])
-XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [2.56.0])
-XDT_CHECK_PACKAGE([GIO], [gio-2.0], [2.56.0])
-PKG_CHECK_MODULES([GIO_UNIX], [gio-unix-2.0 >= 2.56.0])
-XDT_CHECK_PACKAGE([GMODULE], [gmodule-2.0], [2.56.0])
+XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [2.66.0])
+XDT_CHECK_PACKAGE([GIO], [gio-2.0], [2.66.0])
+PKG_CHECK_MODULES([GIO_UNIX], [gio-unix-2.0 >= 2.66.0])
+XDT_CHECK_PACKAGE([GMODULE], [gmodule-2.0], [2.66.0])
 XDT_CHECK_PACKAGE([CAIRO], [cairo], [1.0.0])
 XDT_CHECK_PACKAGE([LIBWNCK], [libwnck-3.0], [3.0])
 
