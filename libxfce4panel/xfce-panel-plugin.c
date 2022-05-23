@@ -2439,14 +2439,13 @@ xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin)
  *
  * Register a menu that is about to popup. This will make sure the panel
  * will properly handle its autohide behaviour. You have to call this
- * function every time the menu is opened (e.g. using gtk_menu_popup()).
+ * function every time the menu is opened (e.g. using gtk_menu_popup_at_widget()).
  *
  * If you want to open the menu aligned to the side of the panel (and the
- * plugin), you should use xfce_panel_plugin_position_menu() as
- * #GtkMenuPositionFunc. This callback function will take care of calling
- * xfce_panel_plugin_register_menu() as well.
+ * plugin), you should use xfce_panel_plugin_popup_menu(). This function
+ * will take care of calling xfce_panel_plugin_register_menu() as well.
  *
- * See also: xfce_panel_plugin_position_menu() and xfce_panel_plugin_block_autohide().
+ * See also: xfce_panel_plugin_popup_menu() and xfce_panel_plugin_block_autohide().
  **/
 void
 xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
@@ -2472,8 +2471,7 @@ xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
  * xfce_panel_plugin_arrow_type:
  * @plugin : an #XfcePanelPlugin.
  *
- * Determine the #GtkArrowType for a widget that opens a menu and uses
- * xfce_panel_plugin_position_menu() to position the menu.
+ * Determine the #GtkArrowType for a widget that opens a menu.
  *
  * Returns: the #GtkArrowType to use.
  **/
@@ -2541,10 +2539,9 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
  * position will be relative to @plugin.
  *
  * This function is intended for custom menu widgets.
- * For a regular #GtkMenu you should use xfce_panel_plugin_position_menu()
- * instead (as callback argument to gtk_menu_popup()).
+ * For a regular #GtkMenu you should use xfce_panel_plugin_popup_menu() instead.
  *
- * See also: xfce_panel_plugin_position_menu().
+ * See also: xfce_panel_plugin_popup_menu().
  **/
 void
 xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
@@ -2699,6 +2696,8 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
  * xfce_panel_plugin_position_widget() instead.
  *
  * See also: gtk_menu_popup().
+ *
+ * Deprecated: 4.17.2: Use xfce_panel_plugin_popup_menu() instead.
  **/
 void
 xfce_panel_plugin_position_menu (GtkMenu  *menu,
