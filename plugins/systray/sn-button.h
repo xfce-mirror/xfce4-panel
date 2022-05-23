@@ -24,6 +24,7 @@
 
 #include "sn-config.h"
 #include "sn-item.h"
+#include "sn-plugin.h"
 
 G_BEGIN_DECLS
 
@@ -44,8 +45,7 @@ SnItem                *sn_button_get_item                      (SnButton        
 const gchar           *sn_button_get_name                      (SnButton                *button);
 
 GtkWidget             *sn_button_new                           (SnItem                  *item,
-                                                                GtkMenuPositionFunc      pos_func,
-                                                                gpointer                 pos_func_data,
+                                                                SnPlugin                *plugin,
                                                                 SnConfig                *config);
 
 G_END_DECLS
