@@ -766,9 +766,8 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
                                  gboolean     path_as_arg)
 {
   GError       *error = NULL;
-  gchar        *working_dir;
   XfceRc       *rc, *helperrc;
-  const gchar  *value;
+  const gchar  *value, *working_dir;
   gchar        *filename;
   gchar       **binaries = NULL;
   guint         i;
@@ -801,7 +800,7 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
       xfce_rc_close (rc);
     }
 
-  working_dir = g_file_get_path (dir);
+  working_dir = g_file_peek_path (dir);
 
   /* if there are binaries, there is a helper that
    * supports startup notification, try to spawn one */
@@ -814,7 +813,7 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
             continue;
 
           argv[0] = filename;
-          argv[1] = path_as_arg ? working_dir : NULL;
+          argv[1] = path_as_arg ? (gchar *) working_dir : NULL;
           argv[2] = NULL;
 
           /* try to spawn the program, if this fails we try exo for
@@ -843,8 +842,6 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
           _("Failed to execute the preferred application for category \"%s\""), category);
       g_error_free (error);
     }
-
-  g_free (working_dir);
 }
 
 
@@ -1057,7 +1054,6 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
   GFileType        file_type;
 #ifdef HAVE_GIO_UNIX
   GDesktopAppInfo *desktopinfo;
-  gchar           *path;
   const gchar     *description;
 #endif
 
@@ -1218,10 +1214,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
               && g_file_is_native (file)
               && g_str_has_suffix (display_name, ".desktop")))
             {
-              path = g_file_get_path (file);
-              desktopinfo = g_desktop_app_info_new_from_filename (path);
-              g_free (path);
-
+              desktopinfo = g_desktop_app_info_new_from_filename (g_file_peek_path (file));
               if (G_LIKELY (desktopinfo != NULL))
                 {
                   display_name = g_app_info_get_name (G_APP_INFO (desktopinfo));
