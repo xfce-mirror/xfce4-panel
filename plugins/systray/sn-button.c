@@ -71,10 +71,8 @@ struct _SnButton
   GtkButton            __parent__;
 
   SnItem              *item;
+  SnPlugin            *plugin;
   SnConfig            *config;
-
-  GtkMenuPositionFunc  pos_func;
-  gpointer             pos_func_data;
 
   GtkWidget           *menu;
   gboolean             menu_only;
@@ -137,10 +135,8 @@ sn_button_init (SnButton *button)
   gtk_widget_add_events (GTK_WIDGET (button), event_mask);
 
   button->item = NULL;
+  button->plugin = NULL;
   button->config = NULL;
-
-  button->pos_func = NULL;
-  button->pos_func_data = NULL;
 
   button->menu = NULL;
   button->menu_only = FALSE;
@@ -178,10 +174,9 @@ sn_button_get_name (SnButton *button)
 
 
 GtkWidget *
-sn_button_new (SnItem              *item,
-               GtkMenuPositionFunc  pos_func,
-               gpointer             pos_func_data,
-               SnConfig            *config)
+sn_button_new (SnItem   *item,
+               SnPlugin *plugin,
+               SnConfig *config)
 {
   SnButton *button = g_object_new (XFCE_TYPE_SN_BUTTON, NULL);
 
@@ -189,10 +184,8 @@ sn_button_new (SnItem              *item,
   g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), NULL);
 
   button->item = item;
+  button->plugin = plugin;
   button->config = config;
-
-  button->pos_func = pos_func;
-  button->pos_func_data = pos_func_data;
 
   button->box = sn_icon_box_new (item, config);
   gtk_container_add (GTK_CONTAINER (button), button->box);
@@ -244,7 +237,7 @@ sn_button_menu_deactivate (GtkWidget *widget,
   }
 
   gtk_widget_unset_state_flags (widget, GTK_STATE_FLAG_ACTIVE);
-  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (button->pos_func_data), FALSE);
+  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (button->plugin), FALSE);
 }
 
 
@@ -278,7 +271,7 @@ sn_button_button_press (GtkWidget      *widget,
             g_signal_connect_swapped (G_OBJECT (button->menu), "deactivate",
                                       G_CALLBACK (sn_button_menu_deactivate), button);
 
-          xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (button->pos_func_data), TRUE);
+          xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (button->plugin), TRUE);
           gtk_menu_popup_at_widget (GTK_MENU (button->menu), widget,
                                     GDK_GRAVITY_NORTH_WEST, GDK_GRAVITY_NORTH_WEST,
                                     (GdkEvent *)event);

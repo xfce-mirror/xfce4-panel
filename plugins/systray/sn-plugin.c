@@ -221,9 +221,7 @@ sn_plugin_item_added (SnPlugin *plugin,
 {
   GtkWidget *button;
 
-  button = sn_button_new (item,
-                          xfce_panel_plugin_position_menu, plugin,
-                          plugin->config);
+  button = sn_button_new (item, plugin, plugin->config);
 
   sn_config_add_known_item (plugin->config, sn_item_get_name (item));
 
