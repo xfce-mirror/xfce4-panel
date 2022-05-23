@@ -777,8 +777,6 @@ applications_menu_plugin_menu_deactivate (GtkWidget *menu,
   panel_return_if_fail (plugin->button == NULL || GTK_IS_TOGGLE_BUTTON (plugin->button));
   panel_return_if_fail (GTK_IS_MENU (menu));
 
-  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), FALSE);
-
   /* button is NULL when we popup the menu under the cursor position */
   if (plugin->button != NULL)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button), FALSE);
@@ -842,32 +840,19 @@ applications_menu_plugin_menu (GtkWidget              *button,
            && !PANEL_HAS_FLAG (event->state, GDK_CONTROL_MASK)))
     return FALSE;
 
-  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), TRUE);
-
   if (button != NULL)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
+  /* Panel plugin remote events don't send actual GdkEvents, so construct a minimal one so that
+   * gtk_menu_popup_at_pointer/rect can extract a location correctly from a GdkWindow */
+  else if (event == NULL)
+    {
+      event = g_slice_new0 (GdkEventButton);
+      event->type = GDK_BUTTON_PRESS;
+      event->window = gdk_get_default_root_window ();
+    }
 
-  /* show the menu */
-  if (button == NULL)
-    {
-      /* Panel plugin remote events don't send actual GdkEvents, so construct a minimal one so that
-         gtk_menu_popup_at_pointer/rect can extract a location correctly from a GdkWindow */
-      if (event == NULL)
-        {
-          event = g_slice_new0 (GdkEventButton);
-          event->type = GDK_BUTTON_PRESS;
-          event->window = gdk_get_default_root_window ();
-        }
-      gtk_menu_popup_at_pointer (GTK_MENU (plugin->menu), (GdkEvent *) event);
-    }
-  else
-    {
-      gtk_menu_popup_at_widget (GTK_MENU (plugin->menu), button,
-                                xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
-                                ? GDK_GRAVITY_NORTH_EAST : GDK_GRAVITY_SOUTH_WEST,
-                                GDK_GRAVITY_NORTH_WEST,
-                                (GdkEvent *) event);
-    }
+  xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (plugin->menu),
+                                button, (GdkEvent *) event);
 
   return TRUE;
 }

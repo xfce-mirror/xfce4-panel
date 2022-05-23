@@ -1445,8 +1445,6 @@ actions_plugin_menu_deactivate (GtkWidget     *menu,
   panel_return_if_fail (button == NULL || GTK_IS_TOGGLE_BUTTON (button));
   panel_return_if_fail (GTK_IS_MENU (menu));
 
-  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), FALSE);
-
   /* button is NULL when we popup the menu under the cursor position */
   if (button != NULL)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), FALSE);
@@ -1474,8 +1472,6 @@ actions_plugin_menu (GtkWidget     *button,
   if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
     return;
 
-  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), TRUE);
-
   if (plugin->menu == NULL)
     {
       plugin->menu = gtk_menu_new ();
@@ -1502,9 +1498,5 @@ actions_plugin_menu (GtkWidget     *button,
         }
     }
 
-  gtk_menu_popup_at_widget (GTK_MENU (plugin->menu), button,
-                            xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
-                            ? GDK_GRAVITY_NORTH_EAST : GDK_GRAVITY_SOUTH_WEST,
-                            GDK_GRAVITY_NORTH_WEST,
-                            NULL);
+  xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (plugin->menu), button, NULL);
 }

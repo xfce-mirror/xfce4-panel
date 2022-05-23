@@ -1695,12 +1695,8 @@ launcher_plugin_menu_popup (gpointer user_data)
     gtk_widget_set_state_flags (GTK_WIDGET (plugin->button), GTK_STATE_FLAG_CHECKED, TRUE);
 
   /* popup the menu */
-  gtk_menu_popup_at_widget (GTK_MENU (plugin->menu),
-                            plugin->button,
-                            xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
-                            ? GDK_GRAVITY_NORTH_EAST : GDK_GRAVITY_SOUTH_WEST,
-                            GDK_GRAVITY_NORTH_WEST,
-                            NULL);
+  xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (plugin->menu),
+                                plugin->button, NULL);
 
   /* fallback to manual positioning, this is used with
    * drag motion over the arrow button */

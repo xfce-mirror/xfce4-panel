@@ -237,7 +237,6 @@ sn_button_menu_deactivate (GtkWidget *widget,
   }
 
   gtk_widget_unset_state_flags (widget, GTK_STATE_FLAG_ACTIVE);
-  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (button->plugin), FALSE);
 }
 
 
@@ -271,10 +270,8 @@ sn_button_button_press (GtkWidget      *widget,
             g_signal_connect_swapped (G_OBJECT (button->menu), "deactivate",
                                       G_CALLBACK (sn_button_menu_deactivate), button);
 
-          xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (button->plugin), TRUE);
-          gtk_menu_popup_at_widget (GTK_MENU (button->menu), widget,
-                                    GDK_GRAVITY_NORTH_WEST, GDK_GRAVITY_NORTH_WEST,
-                                    (GdkEvent *)event);
+          xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (button->plugin),
+                                        GTK_MENU (button->menu), widget, (GdkEvent *) event);
 
           gtk_widget_set_state_flags (widget, GTK_STATE_FLAG_ACTIVE, FALSE);
           return TRUE;
