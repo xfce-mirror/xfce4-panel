@@ -242,7 +242,7 @@ applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
 
   /* prepare the menu */
   plugin->menu = garcon_gtk_menu_new (NULL);
-  g_signal_connect (G_OBJECT (plugin->menu), "selection-done",
+  g_signal_connect (G_OBJECT (plugin->menu), "deactivate",
       G_CALLBACK (applications_menu_plugin_menu_deactivate), plugin);
 
   plugin->style_set_id = g_signal_connect_swapped (G_OBJECT (plugin->button), "style-set",
