@@ -2439,14 +2439,13 @@ xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin)
  *
  * Register a menu that is about to popup. This will make sure the panel
  * will properly handle its autohide behaviour. You have to call this
- * function every time the menu is opened (e.g. using gtk_menu_popup()).
+ * function every time the menu is opened (e.g. using gtk_menu_popup_at_widget()).
  *
  * If you want to open the menu aligned to the side of the panel (and the
- * plugin), you should use xfce_panel_plugin_position_menu() as
- * #GtkMenuPositionFunc. This callback function will take care of calling
- * xfce_panel_plugin_register_menu() as well.
+ * plugin), you should use xfce_panel_plugin_popup_menu(). This function
+ * will take care of calling xfce_panel_plugin_register_menu() as well.
  *
- * See also: xfce_panel_plugin_position_menu() and xfce_panel_plugin_block_autohide().
+ * See also: xfce_panel_plugin_popup_menu() and xfce_panel_plugin_block_autohide().
  **/
 void
 xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
@@ -2472,8 +2471,7 @@ xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
  * xfce_panel_plugin_arrow_type:
  * @plugin : an #XfcePanelPlugin.
  *
- * Determine the #GtkArrowType for a widget that opens a menu and uses
- * xfce_panel_plugin_position_menu() to position the menu.
+ * Determine the #GtkArrowType for a widget that opens a menu.
  *
  * Returns: the #GtkArrowType to use.
  **/
@@ -2541,10 +2539,9 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
  * position will be relative to @plugin.
  *
  * This function is intended for custom menu widgets.
- * For a regular #GtkMenu you should use xfce_panel_plugin_position_menu()
- * instead (as callback argument to gtk_menu_popup()).
+ * For a regular #GtkMenu you should use xfce_panel_plugin_popup_menu() instead.
  *
- * See also: xfce_panel_plugin_position_menu().
+ * See also: xfce_panel_plugin_popup_menu().
  **/
 void
 xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
@@ -2699,6 +2696,8 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
  * xfce_panel_plugin_position_widget() instead.
  *
  * See also: gtk_menu_popup().
+ *
+ * Deprecated: 4.17.2: Use xfce_panel_plugin_popup_menu() instead.
  **/
 void
 xfce_panel_plugin_position_menu (GtkMenu  *menu,
@@ -2725,6 +2724,93 @@ xfce_panel_plugin_position_menu (GtkMenu  *menu,
   /* A workaround for Gtk3 popup menus with scroll buttons */
   /* Menus are "pushed in" anyway */
   *push_in = FALSE;
+}
+
+
+
+/**
+ * xfce_panel_plugin_popup_menu:
+ * @plugin        : an #XfcePanelPlugin.
+ * @menu          : a #GtkMenu.
+ * @widget        : (allow-none): the #GtkWidget to align @menu with or %NULL
+ *                  to pop up @menu at pointer.
+ * @trigger_event : (allow-none): the #GdkEvent that initiated this request or
+ *                  %NULL if it's the current event.
+ *
+ * Pops up @menu at @widget if @widget is non-%NULL and if appropriate given
+ * the panel position, otherwise pops up @menu at pointer.
+ *
+ * As a convenience, xfce_panel_plugin_popup_menu() calls
+ * xfce_panel_plugin_register_menu() for the @menu.
+ *
+ * For a custom widget that will be used as a popup menu, use
+ * xfce_panel_plugin_position_widget() instead.
+ *
+ * See also: gtk_menu_popup_at_widget() and gtk_menu_popup_at_pointer().
+ *
+ * Since: 4.17.2
+ **/
+void
+xfce_panel_plugin_popup_menu (XfcePanelPlugin *plugin,
+                              GtkMenu         *menu,
+                              GtkWidget       *widget,
+                              const GdkEvent  *trigger_event)
+{
+  GdkGravity widget_anchor, menu_anchor;
+  gboolean   popup_at_widget = TRUE;
+
+  g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+  g_return_if_fail (GTK_IS_MENU (menu));
+
+  /* check if conditions are met to pop up menu at widget */
+  if (widget != NULL)
+    {
+      switch (plugin->priv->screen_position)
+        {
+          case XFCE_SCREEN_POSITION_NW_H:
+          case XFCE_SCREEN_POSITION_N:
+          case XFCE_SCREEN_POSITION_NE_H:
+            widget_anchor = GDK_GRAVITY_SOUTH_WEST;
+            menu_anchor = GDK_GRAVITY_NORTH_WEST;
+            break;
+
+          case XFCE_SCREEN_POSITION_NW_V:
+          case XFCE_SCREEN_POSITION_W:
+          case XFCE_SCREEN_POSITION_SW_V:
+            widget_anchor = GDK_GRAVITY_NORTH_EAST;
+            menu_anchor = GDK_GRAVITY_NORTH_WEST;
+            break;
+
+          case XFCE_SCREEN_POSITION_NE_V:
+          case XFCE_SCREEN_POSITION_E:
+          case XFCE_SCREEN_POSITION_SE_V:
+            widget_anchor = GDK_GRAVITY_NORTH_WEST;
+            menu_anchor = GDK_GRAVITY_NORTH_EAST;
+            break;
+
+          case XFCE_SCREEN_POSITION_SW_H:
+          case XFCE_SCREEN_POSITION_S:
+          case XFCE_SCREEN_POSITION_SE_H:
+            widget_anchor = GDK_GRAVITY_NORTH_WEST;
+            menu_anchor = GDK_GRAVITY_SOUTH_WEST;
+            break;
+
+          default:
+            popup_at_widget = FALSE;
+            break;
+        }
+    }
+  else
+    popup_at_widget = FALSE;
+
+  /* register the menu */
+  xfce_panel_plugin_register_menu (plugin, menu);
+
+  /* pop up the menu */
+  if (popup_at_widget)
+    gtk_menu_popup_at_widget (menu, widget, widget_anchor, menu_anchor, trigger_event);
+  else
+    gtk_menu_popup_at_pointer (menu, trigger_event);
 }
 
 
