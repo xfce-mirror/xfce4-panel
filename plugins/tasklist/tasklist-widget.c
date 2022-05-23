@@ -1542,8 +1542,6 @@ xfce_tasklist_arrow_button_menu_destroy (GtkWidget    *menu,
   /* make sure the wireframe is hidden */
   xfce_tasklist_wireframe_hide (tasklist);
 #endif
-
-  xfce_panel_plugin_block_autohide (xfce_tasklist_get_panel_plugin (tasklist), FALSE);
 }
 
 
@@ -1564,7 +1562,7 @@ xfce_tasklist_arrow_button_toggled (GtkWidget    *button,
   if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
     {
       menu = gtk_menu_new ();
-      g_signal_connect (G_OBJECT (menu), "selection-done",
+      g_signal_connect (G_OBJECT (menu), "deactivate",
           G_CALLBACK (xfce_tasklist_arrow_button_menu_destroy), tasklist);
 
       for (li = tasklist->windows; li != NULL; li = li->next)
@@ -1579,13 +1577,9 @@ xfce_tasklist_arrow_button_toggled (GtkWidget    *button,
           gtk_widget_show (mi);
         }
 
-      xfce_panel_plugin_block_autohide (xfce_tasklist_get_panel_plugin (tasklist), TRUE);
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
-      gtk_menu_popup_at_widget (GTK_MENU (menu), button,
-                                ! xfce_tasklist_horizontal (tasklist)
-                                ? GDK_GRAVITY_NORTH_EAST : GDK_GRAVITY_SOUTH_WEST,
-                                GDK_GRAVITY_NORTH_WEST,
-                                NULL);
+      xfce_panel_plugin_popup_menu (xfce_tasklist_get_panel_plugin (tasklist),
+                                    GTK_MENU (menu), button, NULL);
     }
 }
 
@@ -3107,7 +3101,6 @@ xfce_tasklist_button_menu_destroy (GtkWidget         *menu,
 
   gtk_widget_destroy (menu);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (child->button), FALSE);
-  xfce_panel_plugin_block_autohide (xfce_tasklist_get_panel_plugin (child->tasklist), FALSE);
 }
 
 
@@ -3128,10 +3121,10 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
     return FALSE;
 
   /* send the event to the panel plugin if control is pressed */
+  plugin = xfce_tasklist_get_panel_plugin (child->tasklist);
   if (PANEL_HAS_FLAG (event->state, GDK_CONTROL_MASK))
     {
       /* send the event to the panel plugin */
-      plugin = xfce_tasklist_get_panel_plugin (child->tasklist);
       if (G_LIKELY (plugin != NULL))
         gtk_widget_event (GTK_WIDGET (plugin), (GdkEvent *) event);
 
@@ -3142,16 +3135,11 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
     {
       menu = wnck_action_menu_new (child->window);
       xfce_tasklist_button_add_launch_new_instance_item (child, menu, FALSE);
-      g_signal_connect (G_OBJECT (menu), "selection-done",
+      g_signal_connect (G_OBJECT (menu), "deactivate",
           G_CALLBACK (xfce_tasklist_button_menu_destroy), child);
 
-      xfce_panel_plugin_block_autohide (xfce_tasklist_get_panel_plugin (child->tasklist), TRUE);
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
-      gtk_menu_popup_at_widget (GTK_MENU (menu), button,
-                                ! xfce_tasklist_horizontal (child->tasklist)
-                                ? GDK_GRAVITY_NORTH_EAST : GDK_GRAVITY_SOUTH_WEST,
-                                GDK_GRAVITY_NORTH_WEST,
-                                (GdkEvent *) event);
+      xfce_panel_plugin_popup_menu (plugin, GTK_MENU (menu), button, (GdkEvent *) event);
 
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
       return TRUE;
@@ -3901,8 +3889,6 @@ xfce_tasklist_group_button_menu_destroy (GtkWidget         *menu,
   /* make sure the wireframe is hidden */
   xfce_tasklist_wireframe_hide (group_child->tasklist);
 #endif
-
-  xfce_panel_plugin_block_autohide (xfce_tasklist_get_panel_plugin (group_child->tasklist), FALSE);
 }
 
 
@@ -4043,10 +4029,10 @@ xfce_tasklist_group_button_button_press_event (GtkWidget         *button,
     return FALSE;
 
   /* send the event to the panel plugin if control is pressed */
+  plugin = xfce_tasklist_get_panel_plugin (group_child->tasklist);
   if (PANEL_HAS_FLAG (event->state, GDK_CONTROL_MASK))
     {
       /* send the event to the panel plugin */
-      plugin = xfce_tasklist_get_panel_plugin (group_child->tasklist);
       if (G_LIKELY (plugin != NULL))
         gtk_widget_event (GTK_WIDGET (plugin), (GdkEvent *) event);
 
@@ -4056,16 +4042,11 @@ xfce_tasklist_group_button_button_press_event (GtkWidget         *button,
   if (event->button == 1 || event->button == 3)
     {
       menu = xfce_tasklist_group_button_menu (group_child, event->button == 3);
-      g_signal_connect (G_OBJECT (menu), "selection-done",
+      g_signal_connect (G_OBJECT (menu), "deactivate",
           G_CALLBACK (xfce_tasklist_group_button_menu_destroy), group_child);
 
-      xfce_panel_plugin_block_autohide (xfce_tasklist_get_panel_plugin (group_child->tasklist), TRUE);
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
-      gtk_menu_popup_at_widget (GTK_MENU (menu), button,
-                                ! xfce_tasklist_horizontal (group_child->tasklist)
-                                ? GDK_GRAVITY_NORTH_EAST : GDK_GRAVITY_SOUTH_WEST,
-                                GDK_GRAVITY_NORTH_WEST,
-                                (GdkEvent *) event);
+      xfce_panel_plugin_popup_menu (plugin, GTK_MENU (menu), button, (GdkEvent *) event);
 
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
       return TRUE;
