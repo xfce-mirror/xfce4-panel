@@ -922,14 +922,14 @@ window_menu_plugin_menu_actions_selection_done (GtkWidget    *action_menu,
 
 
 static gboolean
-window_menu_plugin_menu_window_item_activate (GtkWidget      *mi,
-                                              GdkEventButton *event,
-                                              WnckWindow     *window)
+window_menu_plugin_menu_window_item_activate (GtkWidget        *mi,
+                                              GdkEventButton   *event,
+                                              WindowMenuPlugin *plugin)
 {
+  WnckWindow    *window;
   WnckWorkspace *workspace;
   GtkWidget     *menu;
 
-  panel_return_val_if_fail (WNCK_IS_WINDOW (window), FALSE);
   panel_return_val_if_fail (GTK_IS_MENU_ITEM (mi), FALSE);
   panel_return_val_if_fail (GTK_IS_MENU_SHELL (gtk_widget_get_parent (mi)), FALSE);
 
@@ -937,6 +937,7 @@ window_menu_plugin_menu_window_item_activate (GtkWidget      *mi,
   if (event->type != GDK_BUTTON_RELEASE)
     return FALSE;
 
+  window = g_object_get_qdata (G_OBJECT (mi), window_quark);
   if (event->button == 1)
     {
       /* go to workspace and activate window */
@@ -954,13 +955,11 @@ window_menu_plugin_menu_window_item_activate (GtkWidget      *mi,
     {
       /* popup the window action menu */
       menu = wnck_action_menu_new (window);
-      g_signal_connect (G_OBJECT (menu), "selection-done",
+      g_signal_connect (G_OBJECT (menu), "deactivate",
           G_CALLBACK (window_menu_plugin_menu_actions_selection_done),
           gtk_widget_get_parent (mi));
-      gtk_menu_popup_at_widget (GTK_MENU (menu), mi,
-                                GDK_GRAVITY_NORTH_EAST,
-                                GDK_GRAVITY_NORTH_WEST,
-                                (GdkEvent *) event);
+      xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (menu),
+                                    mi, (GdkEvent *) event);
 
       return TRUE;
     }
@@ -1011,7 +1010,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   gtk_widget_set_tooltip_text (mi, tooltip);
   g_object_set_qdata (G_OBJECT (mi), window_quark, window);
   g_signal_connect (G_OBJECT (mi), "button-release-event",
-      G_CALLBACK (window_menu_plugin_menu_window_item_activate), window);
+      G_CALLBACK (window_menu_plugin_menu_window_item_activate), plugin);
 
 
   /* make the label pretty on long window names */
@@ -1089,8 +1088,6 @@ window_menu_plugin_menu_selection_done (GtkWidget        *menu,
   panel_return_if_fail (plugin->button == NULL || GTK_IS_TOGGLE_BUTTON (plugin->button));
   panel_return_if_fail (GTK_IS_MENU (menu));
 
-  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), FALSE);
-
   if (plugin->button != NULL)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button), FALSE);
 
@@ -1101,8 +1098,9 @@ window_menu_plugin_menu_selection_done (GtkWidget        *menu,
 
 
 static gboolean
-window_menu_plugin_menu_key_press_event (GtkWidget   *menu,
-                                         GdkEventKey *event)
+window_menu_plugin_menu_key_press_event (GtkWidget        *menu,
+                                         GdkEventKey      *event,
+                                         WindowMenuPlugin *plugin)
 {
   GtkWidget      *mi = NULL;
   GdkEventButton  fake_event = { 0, };
@@ -1158,7 +1156,7 @@ window_menu_plugin_menu_key_press_event (GtkWidget   *menu,
   /* try the get the window and active an item */
   window = g_object_get_qdata (G_OBJECT (mi), window_quark);
   if (window != NULL)
-    window_menu_plugin_menu_window_item_activate (mi, &fake_event, window);
+    window_menu_plugin_menu_window_item_activate (mi, &fake_event, plugin);
   else
     gtk_menu_item_activate (GTK_MENU_ITEM (mi));
 
@@ -1404,10 +1402,5 @@ window_menu_plugin_menu (GtkWidget        *button,
   g_signal_connect (G_OBJECT (menu), "deactivate",
       G_CALLBACK (window_menu_plugin_menu_selection_done), plugin);
 
-  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), TRUE);
-  gtk_menu_popup_at_widget (GTK_MENU (menu), button,
-                            xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
-                            ? GDK_GRAVITY_NORTH_EAST : GDK_GRAVITY_SOUTH_WEST,
-                            GDK_GRAVITY_NORTH_WEST,
-                            NULL);
+  xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (menu), button, NULL);
 }
