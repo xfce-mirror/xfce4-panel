@@ -2458,6 +2458,8 @@ xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
   /* connect signal to menu to decrease counter */
   g_signal_connect (G_OBJECT (menu), "deactivate",
       G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
+  g_signal_connect (G_OBJECT (menu), "selection-done",
+      G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
   g_signal_connect (G_OBJECT (menu), "destroy",
       G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
 
