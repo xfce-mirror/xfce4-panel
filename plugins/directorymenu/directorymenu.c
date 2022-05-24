@@ -1294,7 +1294,8 @@ static void
 directory_menu_plugin_menu (GtkWidget           *button,
                             DirectoryMenuPlugin *plugin)
 {
-  GtkWidget *menu;
+  GtkWidget      *menu;
+  GdkEventButton *event = NULL;
 
   panel_return_if_fail (XFCE_IS_DIRECTORY_MENU_PLUGIN (plugin));
   panel_return_if_fail (button == NULL || plugin->button == button);
@@ -1302,6 +1303,15 @@ directory_menu_plugin_menu (GtkWidget           *button,
   if (button != NULL
       && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
     return;
+
+  /* Panel plugin remote events don't send actual GdkEvents, so construct a minimal one so that
+   * gtk_menu_popup_at_pointer/rect can extract a location correctly from a GdkWindow */
+  if (button == NULL)
+    {
+      event = g_slice_new0 (GdkEventButton);
+      event->type = GDK_BUTTON_PRESS;
+      event->window = gdk_get_default_root_window ();
+    }
 
   menu = gtk_menu_new ();
   g_signal_connect (G_OBJECT (menu), "deactivate",
@@ -1311,5 +1321,6 @@ directory_menu_plugin_menu (GtkWidget           *button,
                            g_object_ref (plugin->base_directory),
                            g_object_unref);
   directory_menu_plugin_menu_load (menu, plugin);
-  xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (menu), button, NULL);
+  xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (menu),
+                                button, (GdkEvent *) event);
 }
