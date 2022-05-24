@@ -959,7 +959,7 @@ window_menu_plugin_menu_window_item_activate (GtkWidget        *mi,
           G_CALLBACK (window_menu_plugin_menu_actions_selection_done),
           gtk_widget_get_parent (mi));
       xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (menu),
-                                    mi, (GdkEvent *) event);
+                                    NULL, (GdkEvent *) event);
 
       return TRUE;
     }
