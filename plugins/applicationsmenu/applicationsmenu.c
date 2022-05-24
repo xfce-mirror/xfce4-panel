@@ -780,8 +780,6 @@ applications_menu_plugin_menu_deactivate (GtkWidget *menu,
   /* button is NULL when we popup the menu under the cursor position */
   if (plugin->button != NULL)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button), FALSE);
-
-  gtk_menu_popdown (GTK_MENU (menu));
 }
 
 

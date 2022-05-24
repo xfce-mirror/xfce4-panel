@@ -1440,16 +1440,12 @@ actions_plugin_menu_deactivate (GtkWidget     *menu,
   GtkWidget *button;
 
   panel_return_if_fail (XFCE_IS_ACTIONS_PLUGIN (plugin));
-
-  button = gtk_bin_get_child (GTK_BIN (plugin));
-  panel_return_if_fail (button == NULL || GTK_IS_TOGGLE_BUTTON (button));
   panel_return_if_fail (GTK_IS_MENU (menu));
 
   /* button is NULL when we popup the menu under the cursor position */
+  button = gtk_bin_get_child (GTK_BIN (plugin));
   if (button != NULL)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), FALSE);
-
-  gtk_menu_popdown (GTK_MENU (menu));
 }
 
 
@@ -1475,7 +1471,7 @@ actions_plugin_menu (GtkWidget     *button,
   if (plugin->menu == NULL)
     {
       plugin->menu = gtk_menu_new ();
-      g_signal_connect (G_OBJECT (plugin->menu), "selection-done",
+      g_signal_connect (G_OBJECT (plugin->menu), "deactivate",
           G_CALLBACK (actions_plugin_menu_deactivate), plugin);
       g_object_add_weak_pointer (G_OBJECT (plugin->menu), (gpointer) &plugin->menu);
 

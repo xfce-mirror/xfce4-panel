@@ -1082,8 +1082,8 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 
 
 static void
-window_menu_plugin_menu_selection_done (GtkWidget        *menu,
-                                        WindowMenuPlugin *plugin)
+window_menu_plugin_menu_deactivate (GtkWidget        *menu,
+                                    WindowMenuPlugin *plugin)
 {
   panel_return_if_fail (plugin->button == NULL || GTK_IS_TOGGLE_BUTTON (plugin->button));
   panel_return_if_fail (GTK_IS_MENU (menu));
@@ -1400,7 +1400,7 @@ window_menu_plugin_menu (GtkWidget        *button,
   /* popup the menu */
   menu = window_menu_plugin_menu_new (plugin);
   g_signal_connect (G_OBJECT (menu), "deactivate",
-      G_CALLBACK (window_menu_plugin_menu_selection_done), plugin);
+      G_CALLBACK (window_menu_plugin_menu_deactivate), plugin);
 
   xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (menu), button, NULL);
 }
