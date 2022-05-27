@@ -4284,11 +4284,17 @@ xfce_tasklist_group_button_child_visible_changed (XfceTasklistChild *group_child
   panel_return_if_fail (XFCE_IS_TASKLIST (group_child->tasklist));
   panel_return_if_fail (group_child->tasklist->grouping != XFCE_TASKLIST_GROUPING_NEVER);
 
+  /* the group id is defined below as that of the last added window */
+  group_child->unique_id = 0;
+
   for (li = group_child->windows; li != NULL; li = li->next)
     {
       child = li->data;
       if (gtk_widget_get_visible (child->button))
-        visible_counter++;
+        {
+          visible_counter++;
+          group_child->unique_id = MAX (group_child->unique_id, child->unique_id);
+        }
     }
 
   if (visible_counter > 1)
@@ -4311,9 +4317,7 @@ xfce_tasklist_group_button_child_visible_changed (XfceTasklistChild *group_child
         child->type = type;
     }
 
-  gtk_widget_queue_resize (GTK_WIDGET (group_child->tasklist));
-
-  xfce_tasklist_group_button_name_changed (NULL, group_child);
+  xfce_tasklist_group_button_name_changed (group_child->class_group, group_child);
 }
 
 
