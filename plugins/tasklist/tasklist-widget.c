@@ -315,7 +315,9 @@ static void               xfce_tasklist_skipped_windows_state_changed    (WnckWi
                                                                           WnckWindowState       changed_state,
                                                                           WnckWindowState       new_state,
                                                                           XfceTasklist         *tasklist);
-static void               xfce_tasklist_sort                             (XfceTasklist         *tasklist);
+static void               xfce_tasklist_sort                             (XfceTasklist         *tasklist,
+                                                                          gboolean              sort_groups);
+static void               xfce_tasklist_group_button_sort                (XfceTasklistChild    *group_child);
 static gboolean           xfce_tasklist_update_icon_geometries           (gpointer              data);
 static void               xfce_tasklist_update_icon_geometries_destroyed (gpointer              data);
 
@@ -818,7 +820,7 @@ xfce_tasklist_set_property (GObject      *object,
       if (tasklist->sort_order != sort_order)
         {
           tasklist->sort_order = sort_order;
-          xfce_tasklist_sort (tasklist);
+          xfce_tasklist_sort (tasklist, TRUE);
         }
       break;
 
@@ -2009,14 +2011,25 @@ xfce_tasklist_skipped_windows_state_changed (WnckWindow      *window,
 
 
 static void
-xfce_tasklist_sort (XfceTasklist *tasklist)
+xfce_tasklist_sort (XfceTasklist *tasklist,
+                    gboolean      sort_groups)
 {
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
 
   if (tasklist->sort_order != XFCE_TASKLIST_SORT_ORDER_DND)
-    tasklist->windows = g_list_sort_with_data (tasklist->windows,
-                                               xfce_tasklist_button_compare,
-                                               tasklist);
+    {
+      tasklist->windows = g_list_sort_with_data (tasklist->windows,
+                                                 xfce_tasklist_button_compare,
+                                                 tasklist);
+      if (sort_groups && tasklist->grouping != XFCE_TASKLIST_GROUPING_NEVER)
+        for (GList *lp = tasklist->windows; lp != NULL; lp = lp->next)
+          {
+            XfceTasklistChild *child = lp->data;
+
+            if (child->type == CHILD_TYPE_GROUP)
+              xfce_tasklist_group_button_sort (child);
+          }
+    }
 
   gtk_widget_queue_resize (GTK_WIDGET (tasklist));
 }
@@ -2777,7 +2790,7 @@ xfce_tasklist_button_name_changed (WnckWindow        *window,
   /* if window is null, we have not inserted the button the in
    * tasklist, so no need to sort, because we insert with sorting */
   if (window != NULL)
-    xfce_tasklist_sort (child->tasklist);
+    xfce_tasklist_sort (child->tasklist, FALSE);
 }
 
 
@@ -2898,7 +2911,7 @@ xfce_tasklist_button_workspace_changed (WnckWindow        *window,
   panel_return_if_fail (child->window == window);
   panel_return_if_fail (XFCE_IS_TASKLIST (child->tasklist));
 
-  xfce_tasklist_sort (tasklist);
+  xfce_tasklist_sort (tasklist, FALSE);
 
   /* make sure we don't have two active windows (bug #6474) */
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (child->button), FALSE);
@@ -4144,7 +4157,7 @@ xfce_tasklist_group_button_name_changed (WnckClassGroup    *class_group,
   /* don't sort if there is no need to update the sorting (ie. only number
    * of windows is changed or button is not inserted in the tasklist yet */
   if (class_group != NULL)
-    xfce_tasklist_sort (group_child->tasklist);
+    xfce_tasklist_sort (group_child->tasklist, FALSE);
 }
 
 
@@ -4259,6 +4272,9 @@ xfce_tasklist_group_button_remove (XfceTasklistChild *group_child)
       n = g_signal_handlers_disconnect_matched (G_OBJECT (child->button),
           G_SIGNAL_MATCH_DATA, 0, 0, NULL, NULL, group_child);
       panel_return_if_fail (n == 2);
+      n = g_signal_handlers_disconnect_matched (G_OBJECT (child->window),
+          G_SIGNAL_MATCH_DATA, 0, 0, NULL, NULL, group_child);
+      panel_return_if_fail (n == 2);
     }
 
   g_slist_free (group_child->windows);
@@ -4368,6 +4384,19 @@ xfce_tasklist_group_button_child_destroyed (XfceTasklistChild *group_child,
 
 
 static void
+xfce_tasklist_group_button_sort (XfceTasklistChild *group_child)
+{
+  panel_return_if_fail (group_child->type == CHILD_TYPE_GROUP);
+
+  if (group_child->tasklist->sort_order != XFCE_TASKLIST_SORT_ORDER_DND)
+    group_child->windows = g_slist_sort_with_data (group_child->windows,
+                                                   xfce_tasklist_button_compare,
+                                                   group_child->tasklist);
+}
+
+
+
+static void
 xfce_tasklist_group_button_add_window (XfceTasklistChild *group_child,
                                        XfceTasklistChild *window_child)
 {
@@ -4384,9 +4413,15 @@ xfce_tasklist_group_button_add_window (XfceTasklistChild *group_child,
       G_CALLBACK (xfce_tasklist_group_button_child_visible_changed), group_child);
   g_signal_connect_swapped (G_OBJECT (window_child->button), "destroy",
       G_CALLBACK (xfce_tasklist_group_button_child_destroyed), group_child);
+  g_signal_connect_swapped (G_OBJECT (window_child->window), "name-changed",
+      G_CALLBACK (xfce_tasklist_group_button_sort), group_child);
+  g_signal_connect_swapped (G_OBJECT (window_child->window), "workspace-changed",
+      G_CALLBACK (xfce_tasklist_group_button_sort), group_child);
 
   /* add to internal list */
-  group_child->windows = g_slist_prepend (group_child->windows, window_child);
+  group_child->windows = g_slist_insert_sorted_with_data (group_child->windows, window_child,
+                                                          xfce_tasklist_button_compare,
+                                                          group_child->tasklist);
 
   /* update visibility */
   xfce_tasklist_group_button_child_visible_changed (group_child);
@@ -4460,7 +4495,7 @@ xfce_tasklist_set_include_all_workspaces (XfceTasklist *tasklist,
                                                   NULL, tasklist);
 
           /* make sure sorting is ok */
-          xfce_tasklist_sort (tasklist);
+          xfce_tasklist_sort (tasklist, TRUE);
         }
     }
 }
