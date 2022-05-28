@@ -527,6 +527,13 @@ sn_item_invalidate (SnItem *item)
   if (item->properties_proxy == NULL)
     return;
 
+  /* force menu update (see issue #567) */
+  if (item->menu_object_path != NULL)
+    {
+      g_free (item->menu_object_path);
+      item->menu_object_path = NULL;
+    }
+
   g_dbus_proxy_call (item->properties_proxy,
                      "GetAll",
                      g_variant_new ("(s)", "org.kde.StatusNotifierItem"),
