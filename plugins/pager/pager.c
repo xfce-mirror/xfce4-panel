@@ -473,6 +473,10 @@ G_GNUC_END_IGNORE_DEPRECATIONS
                               G_CALLBACK (pager_plugin_drag_begin_event), plugin);
       g_signal_connect_after (G_OBJECT (plugin->pager), "drag-end",
                               G_CALLBACK (pager_plugin_drag_end_event), plugin);
+
+      /* override Libwnck scroll event handler, which does not behave as we want */
+      g_signal_connect_swapped (G_OBJECT (plugin->pager), "scroll-event",
+                                G_CALLBACK (pager_plugin_scroll_event), plugin);
     }
   else
     {
