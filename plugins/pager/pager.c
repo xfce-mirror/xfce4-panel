@@ -279,7 +279,7 @@ pager_plugin_set_property (GObject      *object,
           if (plugin->miniature_view)
             {
               if (!wnck_pager_set_n_rows (WNCK_PAGER (plugin->pager), plugin->rows))
-                g_message ("Failed to set the number of pager rows. You probably "
+                g_warning ("Failed to set the number of pager rows. You probably "
                            "have more than 1 pager in your panel setup.");
             }
           else
@@ -458,9 +458,6 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin)
     {
       plugin->pager = wnck_pager_new ();
       wnck_pager_set_display_mode (WNCK_PAGER (plugin->pager), WNCK_PAGER_DISPLAY_CONTENT);
-      if (!wnck_pager_set_n_rows (WNCK_PAGER (plugin->pager), plugin->rows))
-        g_message ("Setting the pager rows returned false. Maybe the setting is not applied.");
-
       wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       plugin->ratio = (gfloat) gdk_screen_width () / (gfloat) gdk_screen_height ();
@@ -473,6 +470,11 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       /* override Libwnck scroll event handler, which does not behave as we want */
       g_signal_connect_swapped (G_OBJECT (plugin->pager), "scroll-event",
                                 G_CALLBACK (pager_plugin_scroll_event), plugin);
+
+      /* n_rows must be set after pager is anchored */
+      gtk_container_add (GTK_CONTAINER (plugin), plugin->pager);
+      if (!wnck_pager_set_n_rows (WNCK_PAGER (plugin->pager), plugin->rows))
+        g_warning ("Setting the pager rows returned false. Maybe the setting is not applied.");
     }
   else
     {
@@ -480,9 +482,9 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       pager_buttons_set_n_rows (XFCE_PAGER_BUTTONS (plugin->pager), plugin->rows);
       pager_buttons_set_orientation (XFCE_PAGER_BUTTONS (plugin->pager), orientation);
       pager_buttons_set_numbering (XFCE_PAGER_BUTTONS (plugin->pager), plugin->numbering);
+      gtk_container_add (GTK_CONTAINER (plugin), plugin->pager);
     }
 
-  gtk_container_add (GTK_CONTAINER (plugin), plugin->pager);
   gtk_widget_show (plugin->pager);
 
   /* Poke the style-updated signal to set the correct background color for the newly
