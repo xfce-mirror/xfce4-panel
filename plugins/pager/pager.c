@@ -101,10 +101,6 @@ struct _PagerPlugin
   XfcePanelPlugin __parent__;
 
   GtkWidget     *pager;
-  GObject       *numbering_switch;
-  GObject       *numbering_label;
-  GObject       *scrolling_switch;
-  GObject       *scrolling_label;
 
   WnckScreen    *wnck_screen;
 
@@ -265,16 +261,6 @@ pager_plugin_set_property (GObject      *object,
     {
     case PROP_WORKSPACE_SCROLLING:
       plugin->scrolling = g_value_get_boolean (value);
-
-#if WNCK_CHECK_VERSION (3, 40, 0)
-      if (plugin->pager != NULL)
-        {
-          wnck_pager_set_scroll_mode (WNCK_PAGER (plugin->pager),
-                                      plugin->scrolling ?
-                                      WNCK_PAGER_SCROLL_1D :
-                                      WNCK_PAGER_SCROLL_NONE);
-        }
-#endif
       break;
 
     case PROP_WRAP_WORKSPACES:
@@ -476,12 +462,6 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin)
         g_message ("Setting the pager rows returned false. Maybe the setting is not applied.");
 
       wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
-#if WNCK_CHECK_VERSION (3, 40, 0)
-      wnck_pager_set_scroll_mode (WNCK_PAGER (plugin->pager),
-                                  plugin->scrolling ?
-                                  WNCK_PAGER_SCROLL_1D :
-                                  WNCK_PAGER_SCROLL_NONE);
-#endif
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       plugin->ratio = (gfloat) gdk_screen_width () / (gfloat) gdk_screen_height ();
 G_GNUC_END_IGNORE_DEPRECATIONS
@@ -489,6 +469,10 @@ G_GNUC_END_IGNORE_DEPRECATIONS
                               G_CALLBACK (pager_plugin_drag_begin_event), plugin);
       g_signal_connect_after (G_OBJECT (plugin->pager), "drag-end",
                               G_CALLBACK (pager_plugin_drag_end_event), plugin);
+
+      /* override Libwnck scroll event handler, which does not behave as we want */
+      g_signal_connect_swapped (G_OBJECT (plugin->pager), "scroll-event",
+                                G_CALLBACK (pager_plugin_scroll_event), plugin);
     }
   else
     {
@@ -736,34 +720,29 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                           G_OBJECT (object), "value",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
-  plugin->scrolling_switch = gtk_builder_get_object (builder, "workspace-scrolling");
-  panel_return_if_fail (GTK_IS_SWITCH (plugin->scrolling_switch));
+  object = gtk_builder_get_object (builder, "workspace-scrolling");
+  panel_return_if_fail (GTK_IS_SWITCH (object));
   g_object_bind_property (G_OBJECT (plugin), "workspace-scrolling",
-                          G_OBJECT (plugin->scrolling_switch), "active",
+                          G_OBJECT (object), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
-#if !(WNCK_CHECK_VERSION (3, 40, 0))
-  g_object_bind_property (G_OBJECT (plugin), "miniature-view",
-                          G_OBJECT (plugin->scrolling_switch), "visible",
-                          G_BINDING_SYNC_CREATE | G_BINDING_DEFAULT | G_BINDING_INVERT_BOOLEAN);
+  object = gtk_builder_get_object (builder, "wrap-workspaces");
+  panel_return_if_fail (GTK_IS_SWITCH (object));
+  g_object_bind_property (G_OBJECT (plugin), "wrap-workspaces",
+                          G_OBJECT (object), "active",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
-  plugin->scrolling_label = gtk_builder_get_object (builder, "workspace-scrolling-label");
+  object = gtk_builder_get_object (builder, "numbering-label");
   g_object_bind_property (G_OBJECT (plugin), "miniature-view",
-                          G_OBJECT (plugin->scrolling_label), "visible",
+                          G_OBJECT (object), "visible",
                           G_BINDING_SYNC_CREATE | G_BINDING_DEFAULT | G_BINDING_INVERT_BOOLEAN);
-#endif
-
-  plugin->numbering_label = gtk_builder_get_object (builder, "numbering-label");
+  object = gtk_builder_get_object (builder, "numbering");
+  panel_return_if_fail (GTK_IS_SWITCH (object));
   g_object_bind_property (G_OBJECT (plugin), "miniature-view",
-                          G_OBJECT (plugin->numbering_label), "visible",
-                          G_BINDING_SYNC_CREATE | G_BINDING_DEFAULT | G_BINDING_INVERT_BOOLEAN);
-  plugin->numbering_switch = gtk_builder_get_object (builder, "numbering");
-  panel_return_if_fail (GTK_IS_SWITCH (plugin->numbering_switch));
-  g_object_bind_property (G_OBJECT (plugin), "miniature-view",
-                          G_OBJECT (plugin->numbering_switch), "visible",
+                          G_OBJECT (object), "visible",
                           G_BINDING_SYNC_CREATE | G_BINDING_DEFAULT | G_BINDING_INVERT_BOOLEAN);
   g_object_bind_property (G_OBJECT (plugin), "numbering",
-                          G_OBJECT (plugin->numbering_switch), "active",
+                          G_OBJECT (object), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
   /* update the rows limit */
