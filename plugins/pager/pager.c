@@ -726,6 +726,12 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                           G_OBJECT (object), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
+  object = gtk_builder_get_object (builder, "wrap-workspaces");
+  panel_return_if_fail (GTK_IS_SWITCH (object));
+  g_object_bind_property (G_OBJECT (plugin), "wrap-workspaces",
+                          G_OBJECT (object), "active",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+
   object = gtk_builder_get_object (builder, "numbering-label");
   g_object_bind_property (G_OBJECT (plugin), "miniature-view",
                           G_OBJECT (object), "visible",
