@@ -101,10 +101,6 @@ struct _PagerPlugin
   XfcePanelPlugin __parent__;
 
   GtkWidget     *pager;
-  GObject       *numbering_switch;
-  GObject       *numbering_label;
-  GObject       *scrolling_switch;
-  GObject       *scrolling_label;
 
   WnckScreen    *wnck_screen;
 
@@ -724,23 +720,23 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                           G_OBJECT (object), "value",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
-  plugin->scrolling_switch = gtk_builder_get_object (builder, "workspace-scrolling");
-  panel_return_if_fail (GTK_IS_SWITCH (plugin->scrolling_switch));
+  object = gtk_builder_get_object (builder, "workspace-scrolling");
+  panel_return_if_fail (GTK_IS_SWITCH (object));
   g_object_bind_property (G_OBJECT (plugin), "workspace-scrolling",
-                          G_OBJECT (plugin->scrolling_switch), "active",
+                          G_OBJECT (object), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
-  plugin->numbering_label = gtk_builder_get_object (builder, "numbering-label");
+  object = gtk_builder_get_object (builder, "numbering-label");
   g_object_bind_property (G_OBJECT (plugin), "miniature-view",
-                          G_OBJECT (plugin->numbering_label), "visible",
+                          G_OBJECT (object), "visible",
                           G_BINDING_SYNC_CREATE | G_BINDING_DEFAULT | G_BINDING_INVERT_BOOLEAN);
-  plugin->numbering_switch = gtk_builder_get_object (builder, "numbering");
-  panel_return_if_fail (GTK_IS_SWITCH (plugin->numbering_switch));
+  object = gtk_builder_get_object (builder, "numbering");
+  panel_return_if_fail (GTK_IS_SWITCH (object));
   g_object_bind_property (G_OBJECT (plugin), "miniature-view",
-                          G_OBJECT (plugin->numbering_switch), "visible",
+                          G_OBJECT (object), "visible",
                           G_BINDING_SYNC_CREATE | G_BINDING_DEFAULT | G_BINDING_INVERT_BOOLEAN);
   g_object_bind_property (G_OBJECT (plugin), "numbering",
-                          G_OBJECT (plugin->numbering_switch), "active",
+                          G_OBJECT (object), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
   /* update the rows limit */
