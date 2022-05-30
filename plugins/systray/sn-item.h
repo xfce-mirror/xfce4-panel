@@ -37,7 +37,8 @@ GType                  sn_item_get_type                        (void) G_GNUC_CON
 
 void                   sn_item_start                           (SnItem                  *item);
 
-void                   sn_item_invalidate                      (SnItem                  *item);
+void                   sn_item_invalidate                      (SnItem                  *item,
+                                                                gboolean                 force_update);
 
 const gchar           *sn_item_get_name                        (SnItem                  *item);
 
