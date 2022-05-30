@@ -473,6 +473,10 @@ G_GNUC_END_IGNORE_DEPRECATIONS
                               G_CALLBACK (pager_plugin_drag_begin_event), plugin);
       g_signal_connect_after (G_OBJECT (plugin->pager), "drag-end",
                               G_CALLBACK (pager_plugin_drag_end_event), plugin);
+
+      /* override Libwnck scroll event handler, which does not behave as we want */
+      g_signal_connect_swapped (G_OBJECT (plugin->pager), "scroll-event",
+                                G_CALLBACK (pager_plugin_scroll_event), plugin);
     }
   else
     {
@@ -720,15 +724,8 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                           G_OBJECT (object), "value",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
-  plugin->scrolling_label = gtk_builder_get_object (builder, "workspace-scrolling-label");
-  g_object_bind_property (G_OBJECT (plugin), "miniature-view",
-                          G_OBJECT (plugin->scrolling_label), "visible",
-                          G_BINDING_SYNC_CREATE | G_BINDING_DEFAULT | G_BINDING_INVERT_BOOLEAN);
   plugin->scrolling_switch = gtk_builder_get_object (builder, "workspace-scrolling");
   panel_return_if_fail (GTK_IS_SWITCH (plugin->scrolling_switch));
-  g_object_bind_property (G_OBJECT (plugin), "miniature-view",
-                          G_OBJECT (plugin->scrolling_switch), "visible",
-                          G_BINDING_SYNC_CREATE | G_BINDING_DEFAULT | G_BINDING_INVERT_BOOLEAN);
   g_object_bind_property (G_OBJECT (plugin), "workspace-scrolling",
                           G_OBJECT (plugin->scrolling_switch), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
