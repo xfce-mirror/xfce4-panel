@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-07 00:47+0200\n"
+"POT-Creation-Date: 2022-05-31 12:48+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Moo, 2015-2020,2022\n"
 "Language-Team: Lithuanian (http://www.transifex.com/xfce/xfce4-panel/language/lt/)\n"
@@ -35,7 +35,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "skydeliai;nustatymai;nuostatos;užduočių juosta;uzduociu juosta;automatinis slėpimas;automatinis slepimas;automatiškai slėpti;automatiskai slepti;programų meniu;programu meniu;pradžia;pradzia;mygtukai;leistukas;paleidyklė;paleidykle;pranešimų sritis;pranesimu sritis;būsena;busena;piktogramos;įskiepiai;iskiepiai;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3047
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2962
 msgid "Panel"
 msgstr "Skydelis"
 
@@ -45,7 +45,7 @@ msgstr "Tinkinti skydelį"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1080
-#: ../panel/panel-preferences-dialog.c:1321
+#: ../panel/panel-preferences-dialog.c:1318
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Ar esate tikri, jog norite pašalinti „%s”?"
@@ -56,53 +56,53 @@ msgid ""
 msgstr "Elemento šalinimas iš skydelio taip pat reiškia, kad elemento konfigūracija bus prarasta."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:164
-#: ../panel/panel-preferences-dialog.c:1326
-#: ../plugins/applicationsmenu/applicationsmenu.c:601
+#: ../panel/panel-preferences-dialog.c:1323
+#: ../plugins/applicationsmenu/applicationsmenu.c:602
 #: ../plugins/directorymenu/directorymenu.c:472
-#: ../plugins/directorymenu/directorymenu.c:937
+#: ../plugins/directorymenu/directorymenu.c:932
 msgid "_Cancel"
 msgstr "_Atsisakyti"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1087
-#: ../libxfce4panel/xfce-panel-plugin.c:1262
+#: ../libxfce4panel/xfce-panel-plugin.c:1264
 #: ../panel/panel-plugin-external.c:450
-#: ../panel/panel-preferences-dialog.c:961
-#: ../panel/panel-preferences-dialog.c:1327
+#: ../panel/panel-preferences-dialog.c:958
+#: ../panel/panel-preferences-dialog.c:1324
 #: ../panel/panel-preferences-dialog.glade.h:59
 #: ../plugins/launcher/launcher-dialog.c:861
 msgid "_Remove"
 msgstr "Ša_linti"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1212
+#: ../libxfce4panel/xfce-panel-plugin.c:1214
 msgid "_Properties"
 msgstr "_Savybės"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1227 ../panel/panel-window.c:3138
+#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3053
 msgid "_About"
 msgstr "_Apie"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1242
+#: ../libxfce4panel/xfce-panel-plugin.c:1244
 msgid "_Move"
 msgstr "_Perkelti"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1283
+#: ../libxfce4panel/xfce-panel-plugin.c:1285
 msgid "Pane_l"
 msgstr "_Skydelis"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1292 ../panel/panel-window.c:3060
+#: ../libxfce4panel/xfce-panel-plugin.c:1294 ../panel/panel-window.c:2975
 msgid "Add _New Items..."
 msgstr "Pridėti _naujų elementų..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1307 ../panel/panel-window.c:3075
+#: ../libxfce4panel/xfce-panel-plugin.c:1309 ../panel/panel-window.c:2990
 msgid "Panel Pr_eferences..."
 msgstr "Skydelio _nuostatos..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:3107
+#: ../libxfce4panel/xfce-panel-plugin.c:1330 ../panel/panel-window.c:3022
 msgid "Log _Out"
 msgstr "_Atsijungti"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1348 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3127
+#: ../libxfce4panel/xfce-panel-plugin.c:1350 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3042
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -115,7 +115,7 @@ msgstr "_Atsijungti"
 msgid "_Help"
 msgstr "Ž_inynas"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1363
+#: ../libxfce4panel/xfce-panel-plugin.c:1365
 msgid "About"
 msgstr "Apie"
 
@@ -239,21 +239,21 @@ msgstr "Ar norite paleisti skydelį? Jei taip, įsitikinkite, kad atsijungdami �
 msgid "No running instance of %s was found"
 msgstr "Joks veikiantis %s egzempliorius nerastas"
 
-#: ../panel/panel-application.c:215
+#: ../panel/panel-application.c:219
 msgid "Failed to launch the migration application"
 msgstr "Nepavyko paleisti atkėlimo programos"
 
-#: ../panel/panel-application.c:985
+#: ../panel/panel-application.c:989
 msgid "Create _Launcher"
 msgstr "Sukurti _leistuką"
 
-#: ../panel/panel-application.c:986
+#: ../panel/panel-application.c:990
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Tai skydelyje sukurs naują leistuko įskiepį ir įterps atvilktus failus kaip meniu elementus."
 
-#: ../panel/panel-application.c:988
+#: ../panel/panel-application.c:992
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -262,21 +262,21 @@ msgstr[1] "Sukurti naujus leistukus iš %d darbalaukio failų"
 msgstr[2] "Sukurti naujus leistukus iš %d darbalaukio failų"
 msgstr[3] "Sukurti naujus leistukus iš %d darbalaukio failų"
 
-#: ../panel/panel-application.c:1728
+#: ../panel/panel-application.c:1738
 msgid "Quit"
 msgstr "Baigti"
 
-#: ../panel/panel-application.c:1729
+#: ../panel/panel-application.c:1739
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Jūs paleidote X be seansų tvarkytuvės. Spustelėjus „Baigti”, X serveris bus užvertas."
 
-#: ../panel/panel-application.c:1730
+#: ../panel/panel-application.c:1740
 msgid "Are you sure you want to quit the panel?"
 msgstr "Ar tikrai norite baigti skydelio darbą?"
 
-#: ../panel/panel-application.c:1738
+#: ../panel/panel-application.c:1748
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Nepavyko įvykdyti komandos „%s”"
@@ -395,25 +395,25 @@ msgstr "Pirminis"
 msgid "Monitor %d"
 msgstr "Monitorius %d"
 
-#: ../panel/panel-preferences-dialog.c:962
+#: ../panel/panel-preferences-dialog.c:959
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Skydelio ir įskiepių sąranka bus galutinai pašalinta"
 
-#: ../panel/panel-preferences-dialog.c:963
+#: ../panel/panel-preferences-dialog.c:960
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Ar tikrai norite pašalinti %d skydelį?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1163
+#: ../panel/panel-preferences-dialog.c:1160
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(išorinis)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1168
+#: ../panel/panel-preferences-dialog.c:1165
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -422,12 +422,12 @@ msgstr "Vidinis pavadinimas: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1180
+#: ../panel/panel-preferences-dialog.c:1177
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Vidinis pavadinimas: %s-%d"
 
-#: ../panel/panel-preferences-dialog.c:1324
+#: ../panel/panel-preferences-dialog.c:1321
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Jei pašalinsite elementą iš skydelio, jis bus prarastas visam laikui."
 
@@ -699,7 +699,7 @@ msgstr "Patyręs"
 msgid "Expert"
 msgstr "Ekspertas"
 
-#: ../panel/panel-window.c:3092
+#: ../panel/panel-window.c:3007
 msgid "_Lock Panel"
 msgstr "_Užrakinti skydelį"
 
@@ -1001,19 +1001,19 @@ msgstr "Meniu failas"
 msgid "Applications"
 msgstr "Programos"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:599
+#: ../plugins/applicationsmenu/applicationsmenu.c:600
 #: ../plugins/directorymenu/directorymenu.c:470
 msgid "Select An Icon"
 msgstr "Pasirinkite piktogramą"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:602
+#: ../plugins/applicationsmenu/applicationsmenu.c:603
 #: ../plugins/directorymenu/directorymenu.c:473
 msgid "_OK"
 msgstr "_Gerai"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:637
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2501
+#: ../plugins/applicationsmenu/applicationsmenu.c:638
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2475
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Nepavyko paleisti komandos „%s”."
@@ -1415,69 +1415,69 @@ msgstr "Kiek dabar valandų?"
 msgid "Directory Menu"
 msgstr "Katalogų meniu"
 
-#: ../plugins/directorymenu/directorymenu.c:690
+#: ../plugins/directorymenu/directorymenu.c:688
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Nepavyko paleisti programos „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:722
+#: ../plugins/directorymenu/directorymenu.c:720
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Nepavyko užklausti „%s“ turinio tipo"
 
-#: ../plugins/directorymenu/directorymenu.c:731
+#: ../plugins/directorymenu/directorymenu.c:729
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Numatytoji programa skirta „%s“ nerasta"
 
-#: ../plugins/directorymenu/directorymenu.c:747
+#: ../plugins/directorymenu/directorymenu.c:745
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Nepavyko paleisti numatytosios programos skirtos „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:843
+#: ../plugins/directorymenu/directorymenu.c:840
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Nepavyko paleisti pageidaujamos programos kategorijai „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:926
+#: ../plugins/directorymenu/directorymenu.c:921
 msgid "Create New Folder"
 msgstr "Sukurti naują aplanką"
 
-#: ../plugins/directorymenu/directorymenu.c:931
+#: ../plugins/directorymenu/directorymenu.c:926
 msgid "Create New Text Document"
 msgstr "Sukurti naują tekstinį dokumentą"
 
-#: ../plugins/directorymenu/directorymenu.c:938
+#: ../plugins/directorymenu/directorymenu.c:933
 msgid "C_reate"
 msgstr "Su_kurti"
 
-#: ../plugins/directorymenu/directorymenu.c:939
+#: ../plugins/directorymenu/directorymenu.c:934
 msgid "Create & _Open"
 msgstr "Sukurti ir a_tverti"
 
-#: ../plugins/directorymenu/directorymenu.c:953
+#: ../plugins/directorymenu/directorymenu.c:948
 msgid "Enter the new name:"
 msgstr "Įveskite naują pavadinimą:"
 
-#: ../plugins/directorymenu/directorymenu.c:989
+#: ../plugins/directorymenu/directorymenu.c:984
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Nepavyko sukurti aplanko: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1074
+#: ../plugins/directorymenu/directorymenu.c:1068
 msgid "Open Folder"
 msgstr "Atverti aplanką"
 
-#: ../plugins/directorymenu/directorymenu.c:1091
+#: ../plugins/directorymenu/directorymenu.c:1085
 msgid "Open in Terminal"
 msgstr "Atverti terminale"
 
-#: ../plugins/directorymenu/directorymenu.c:1108
+#: ../plugins/directorymenu/directorymenu.c:1102
 msgid "Create Folder..."
 msgstr "Sukurti aplanką..."
 
-#: ../plugins/directorymenu/directorymenu.c:1125
+#: ../plugins/directorymenu/directorymenu.c:1119
 msgid "Create Text Document..."
 msgstr "Sukurti tekstinį dokumentą..."
 
@@ -1538,11 +1538,11 @@ msgstr "Filtravimas"
 msgid "Open launcher menu"
 msgstr "Atverti paleidimo meniu"
 
-#: ../plugins/launcher/launcher.c:1633
+#: ../plugins/launcher/launcher.c:1611
 msgid "Unnamed Item"
 msgstr "Nepavadintas elementas"
 
-#: ../plugins/launcher/launcher.c:1821
+#: ../plugins/launcher/launcher.c:1795
 msgid "No items"
 msgstr "Nėra elementų"
 
@@ -1670,15 +1670,15 @@ msgstr "Išplėstiniai"
 msgid "Program launcher with optional menu"
 msgstr "Programų leistukas su pasirinktiniu meniu"
 
-#: ../plugins/pager/pager.c:557 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:543 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "Darbo srities _nustatymai..."
 
-#: ../plugins/pager/pager.c:645
+#: ../plugins/pager/pager.c:631
 msgid "Unable to open the workspace settings"
 msgstr "Nepavyko atverti darbo srities nustatymų"
 
-#: ../plugins/pager/pager-buttons.c:590 ../plugins/windowmenu/windowmenu.c:876
+#: ../plugins/pager/pager-buttons.c:598 ../plugins/windowmenu/windowmenu.c:876
 #, c-format
 msgid "Workspace %d"
 msgstr "Darbo sritis %d"
@@ -1709,6 +1709,10 @@ msgid "Switch workspaces using the mouse wheel"
 msgstr "Perjungti darbo sritis naudojant pelės ratuką"
 
 #: ../plugins/pager/pager-dialog.glade.h:10
+msgid "Wrap around workspaces"
+msgstr "Perjunginėti darbo sritis ciklu"
+
+#: ../plugins/pager/pager-dialog.glade.h:11
 msgid "<b>Appearance</b>"
 msgstr "<b>Išvaizda</b>"
 
@@ -1992,36 +1996,36 @@ msgstr "Rodyti langus iš _visų ekranų"
 msgid "Show only _minimized windows"
 msgstr "Rodyti tik _suskleistus langus"
 
-#: ../plugins/tasklist/tasklist-widget.c:3042
+#: ../plugins/tasklist/tasklist-widget.c:3051
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Nepavyko paleisti naujo \"%s\" egzemplioriaus"
 
-#: ../plugins/tasklist/tasklist-widget.c:3046
+#: ../plugins/tasklist/tasklist-widget.c:3055
 msgid "Error"
 msgstr "Klaida"
 
-#: ../plugins/tasklist/tasklist-widget.c:3075
+#: ../plugins/tasklist/tasklist-widget.c:3084
 msgid "Launch New Instance"
 msgstr "Paleisti naują egzempliorių"
 
-#: ../plugins/tasklist/tasklist-widget.c:3834
+#: ../plugins/tasklist/tasklist-widget.c:3840
 msgid "Mi_nimize All"
 msgstr "_Suskleisti visus"
 
-#: ../plugins/tasklist/tasklist-widget.c:3842
+#: ../plugins/tasklist/tasklist-widget.c:3848
 msgid "Un_minimize All"
 msgstr "Grąži_nti visus iš suskleidimo"
 
-#: ../plugins/tasklist/tasklist-widget.c:3850
+#: ../plugins/tasklist/tasklist-widget.c:3856
 msgid "Ma_ximize All"
 msgstr "Iš_skleisti visus"
 
-#: ../plugins/tasklist/tasklist-widget.c:3858
+#: ../plugins/tasklist/tasklist-widget.c:3864
 msgid "_Unmaximize All"
 msgstr "Grąži_nti visus iš išskleidimo"
 
-#: ../plugins/tasklist/tasklist-widget.c:3870
+#: ../plugins/tasklist/tasklist-widget.c:3876
 msgid "_Close All"
 msgstr "_Užverti visus"
 
