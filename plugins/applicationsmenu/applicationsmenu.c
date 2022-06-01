@@ -60,6 +60,7 @@ struct _ApplicationsMenuPlugin
   guint            is_constructed : 1;
 
   guint            show_button_title : 1;
+  guint            small : 1;
   gchar           *button_title;
   gchar           *button_icon;
   gboolean         custom_menu;
@@ -82,6 +83,7 @@ enum
   PROP_SHOW_MENU_ICONS,
   PROP_SHOW_TOOLTIPS,
   PROP_SHOW_BUTTON_TITLE,
+  PROP_SMALL,
   PROP_BUTTON_TITLE,
   PROP_BUTTON_ICON,
   PROP_CUSTOM_MENU,
@@ -167,6 +169,13 @@ applications_menu_plugin_class_init (ApplicationsMenuPluginClass *klass)
                                    g_param_spec_boolean ("show-button-title",
                                                          NULL, NULL,
                                                          TRUE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_SMALL,
+                                   g_param_spec_boolean ("small",
+                                                         NULL, NULL,
+                                                         FALSE,
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
@@ -285,6 +294,10 @@ applications_menu_plugin_get_property (GObject    *object,
       g_value_set_boolean (value, plugin->show_button_title);
       break;
 
+    case PROP_SMALL:
+      g_value_set_boolean (value, plugin->small);
+      break;
+
     case PROP_BUTTON_TITLE:
       g_value_set_string (value, plugin->button_title == NULL ?
           DEFAULT_TITLE : plugin->button_title);
@@ -350,6 +363,13 @@ applications_menu_plugin_set_property (GObject      *object,
       applications_menu_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
           xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
       return;
+
+    case PROP_SMALL:
+      plugin->small = g_value_get_boolean (value);
+      xfce_panel_plugin_set_small (XFCE_PANEL_PLUGIN (plugin), plugin->small);
+      applications_menu_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
+          xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
+      break;
 
     case PROP_BUTTON_TITLE:
       g_free (plugin->button_title);
@@ -417,6 +437,7 @@ applications_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "show-menu-icons", G_TYPE_BOOLEAN },
     { "show-button-title", G_TYPE_BOOLEAN },
     { "show-tooltips", G_TYPE_BOOLEAN },
+    { "small", G_TYPE_BOOLEAN },
     { "button-title", G_TYPE_STRING },
     { "button-icon", G_TYPE_STRING },
     { "custom-menu", G_TYPE_BOOLEAN },
@@ -520,6 +541,8 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                           padding.top + padding.bottom + border.top + border.bottom);
 
   icon_size = xfce_panel_plugin_get_icon_size (panel_plugin);
+  if (! plugin->small)
+    icon_size *= xfce_panel_plugin_get_nrows (panel_plugin);
 
   screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
   if (G_LIKELY (screen != NULL))
@@ -651,7 +674,7 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   guint                   i;
   gchar                  *path;
   const gchar            *check_names[] = { "show-generic-names", "show-menu-icons",
-                                            "show-tooltips", "show-button-title" };
+                                            "show-tooltips", "show-button-title", "small" };
 
   /* setup the dialog */
   PANEL_UTILS_LINK_4UI
