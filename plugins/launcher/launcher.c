@@ -2668,7 +2668,7 @@ launcher_plugin_unique_filename (LauncherPlugin *plugin)
 
   panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), NULL);
 
-  filename = g_strdup_printf (RELATIVE_CONFIG_PATH G_DIR_SEPARATOR_S "%ld%d.desktop",
+  filename = g_strdup_printf (RELATIVE_CONFIG_PATH G_DIR_SEPARATOR_S "%" G_GINT64_FORMAT "%d.desktop",
                               xfce_panel_plugin_get_name (XFCE_PANEL_PLUGIN (plugin)),
                               xfce_panel_plugin_get_unique_id (XFCE_PANEL_PLUGIN (plugin)),
                               g_get_real_time () / G_USEC_PER_SEC,
