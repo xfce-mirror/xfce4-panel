@@ -240,7 +240,8 @@ applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->box);
   gtk_widget_show (plugin->box);
 
-  plugin->icon = gtk_image_new_from_icon_name (DEFAULT_ICON_NAME, DEFAULT_ICON_SIZE);
+  plugin->button_icon = g_strdup (DEFAULT_ICON_NAME);
+  plugin->icon = gtk_image_new_from_icon_name (plugin->button_icon, DEFAULT_ICON_SIZE);
   gtk_box_pack_start (GTK_BOX (plugin->box), plugin->icon, FALSE, FALSE, 0);
   gtk_widget_show (plugin->icon);
 
@@ -304,8 +305,7 @@ applications_menu_plugin_get_property (GObject    *object,
       break;
 
     case PROP_BUTTON_ICON:
-      g_value_set_string (value, panel_str_is_empty (plugin->button_icon) ?
-          DEFAULT_ICON_NAME : plugin->button_icon);
+      g_value_set_string (value, plugin->button_icon);
       break;
 
     case PROP_CUSTOM_MENU:
@@ -389,7 +389,9 @@ applications_menu_plugin_set_property (GObject      *object,
 
     case PROP_BUTTON_ICON:
       g_free (plugin->button_icon);
-      plugin->button_icon = g_value_dup_string (value);
+      plugin->button_icon =
+        panel_str_is_empty (g_value_get_string (value)) ? g_strdup (DEFAULT_ICON_NAME)
+                                                        : g_value_dup_string (value);
 
       force_a_resize = TRUE;
       break;
@@ -517,7 +519,6 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   gint                    icon_size;
   GdkScreen              *screen;
   GtkIconTheme           *icon_theme = NULL;
-  gchar                  *icon_name;
   GtkStyleContext        *ctx;
   GtkBorder               padding, border;
 
@@ -548,10 +549,7 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   if (G_LIKELY (screen != NULL))
     icon_theme = gtk_icon_theme_get_for_screen (screen);
 
-  icon_name = panel_str_is_empty (plugin->button_icon) ?
-    DEFAULT_ICON_NAME : plugin->button_icon;
-
-  icon = xfce_panel_pixbuf_from_source_at_size (icon_name,
+  icon = xfce_panel_pixbuf_from_source_at_size (plugin->button_icon,
                                                 icon_theme,
                                                 icon_size,
                                                 icon_size);
@@ -627,16 +625,13 @@ applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget              *
                                          NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_ACCEPT);
 
-  exo_icon_chooser_dialog_set_icon (EXO_ICON_CHOOSER_DIALOG (chooser),
-      panel_str_is_empty (plugin->button_icon) ? DEFAULT_ICON_NAME : plugin->button_icon);
+  exo_icon_chooser_dialog_set_icon (EXO_ICON_CHOOSER_DIALOG (chooser), plugin->button_icon);
 
   if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_ACCEPT)
     {
       icon = exo_icon_chooser_dialog_get_icon (EXO_ICON_CHOOSER_DIALOG (chooser));
       g_object_set (G_OBJECT (plugin), "button-icon", icon, NULL);
-      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->dialog_icon),
-                                    xfce_str_is_empty (plugin->button_icon) ?
-                                    DEFAULT_ICON_NAME : plugin->button_icon,
+      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->dialog_icon), plugin->button_icon,
                                     GTK_ICON_SIZE_DIALOG);
       g_free (icon);
     }
@@ -703,9 +698,7 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_signal_connect (G_OBJECT (object), "clicked",
      G_CALLBACK (applications_menu_plugin_configure_plugin_icon_chooser), plugin);
 
-  plugin->dialog_icon = gtk_image_new_from_icon_name (
-      panel_str_is_empty (plugin->button_icon) ? DEFAULT_ICON_NAME : plugin->button_icon,
-      GTK_ICON_SIZE_DIALOG);
+  plugin->dialog_icon = gtk_image_new_from_icon_name (plugin->button_icon, GTK_ICON_SIZE_DIALOG);
   gtk_container_add (GTK_CONTAINER (object), plugin->dialog_icon);
   g_object_add_weak_pointer (G_OBJECT (plugin->dialog_icon), (gpointer) &plugin->dialog_icon);
   gtk_widget_show (plugin->dialog_icon);
