@@ -278,7 +278,7 @@ directory_menu_plugin_set_property (GObject      *object,
   gchar                *display_name;
   gchar               **array;
   guint                 i;
-  gint                  icon_size;
+  gint                  size;
   const gchar          *path;
 
   switch (prop_id)
@@ -305,8 +305,8 @@ directory_menu_plugin_set_property (GObject      *object,
       plugin->icon_name =
         panel_str_is_empty (g_value_get_string (value)) ? g_strdup (DEFAULT_ICON_NAME)
                                                         : g_value_dup_string (value);
-      icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (object));
-      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->icon), plugin->icon_name, icon_size);
+      size = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
+      directory_menu_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin), size);
       break;
 
     case PROP_OPEN_FOLDER:
@@ -430,7 +430,7 @@ directory_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   size /= xfce_panel_plugin_get_nrows (panel_plugin);
   gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, size);
   icon_size = xfce_panel_plugin_get_icon_size (panel_plugin);
-  gtk_image_set_pixel_size (GTK_IMAGE (plugin->icon), icon_size);
+  gtk_image_set_from_icon_name (GTK_IMAGE (plugin->icon), plugin->icon_name, icon_size);
 
   return TRUE;
 }
