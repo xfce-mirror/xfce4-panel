@@ -67,10 +67,6 @@ struct _ApplicationsMenuPlugin
   gchar           *custom_menu_file;
   gchar           *menu_editor;
 
-  /* temp item we store here when the
-   * properties dialog is opened */
-  GtkWidget       *dialog_icon;
-
   gulong           style_set_id;
   gulong           screen_changed_id;
   gulong           theme_changed_id;
@@ -612,11 +608,10 @@ static void
 applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget              *button,
                                                         ApplicationsMenuPlugin *plugin)
 {
-  GtkWidget *chooser;
+  GtkWidget *chooser, *image;
   gchar     *icon;
 
   panel_return_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin));
-  panel_return_if_fail (GTK_IMAGE (plugin->dialog_icon));
 
   chooser = exo_icon_chooser_dialog_new (_("Select An Icon"),
                                          GTK_WINDOW (gtk_widget_get_toplevel (button)),
@@ -631,9 +626,12 @@ applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget              *
     {
       icon = exo_icon_chooser_dialog_get_icon (EXO_ICON_CHOOSER_DIALOG (chooser));
       g_object_set (G_OBJECT (plugin), "button-icon", icon, NULL);
-      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->dialog_icon), plugin->button_icon,
-                                    GTK_ICON_SIZE_DIALOG);
       g_free (icon);
+
+      image = gtk_image_new_from_icon_name (plugin->button_icon, GTK_ICON_SIZE_DIALOG);
+      gtk_container_remove (GTK_CONTAINER (button), gtk_bin_get_child (GTK_BIN (button)));
+      gtk_container_add (GTK_CONTAINER (button), image);
+      gtk_widget_show (image);
     }
 
   gtk_widget_destroy (chooser);
@@ -665,6 +663,7 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (panel_plugin);
   GtkBuilder             *builder;
+  GtkWidget              *image;
   GObject                *dialog, *object, *object2;
   guint                   i;
   gchar                  *path;
@@ -698,10 +697,9 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_signal_connect (G_OBJECT (object), "clicked",
      G_CALLBACK (applications_menu_plugin_configure_plugin_icon_chooser), plugin);
 
-  plugin->dialog_icon = gtk_image_new_from_icon_name (plugin->button_icon, GTK_ICON_SIZE_DIALOG);
-  gtk_container_add (GTK_CONTAINER (object), plugin->dialog_icon);
-  g_object_add_weak_pointer (G_OBJECT (plugin->dialog_icon), (gpointer) &plugin->dialog_icon);
-  gtk_widget_show (plugin->dialog_icon);
+  image = gtk_image_new_from_icon_name (plugin->button_icon, GTK_ICON_SIZE_DIALOG);
+  gtk_container_add (GTK_CONTAINER (object), image);
+  gtk_widget_show (image);
 
   /* whether we show the edit menu button */
   object = gtk_builder_get_object (builder, "edit-menu-button");
