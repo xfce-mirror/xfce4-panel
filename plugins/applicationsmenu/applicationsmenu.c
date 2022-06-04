@@ -39,6 +39,7 @@
 #define DEFAULT_TITLE     _("Applications")
 #define DEFAULT_ICON_NAME "org.xfce.panel.applicationsmenu"
 #define DEFAULT_ICON_SIZE (16)
+#define DIALOG_ICON_SIZE  (48)
 #define DEFAULT_EDITOR    "menulibre"
 
 
@@ -511,7 +512,6 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   GtkRequisition          label_size;
   GtkOrientation          orientation;
   gint                    border_thickness;
-  GdkPixbuf              *icon;
   gint                    icon_size;
   GdkScreen              *screen;
   GtkIconTheme           *icon_theme = NULL;
@@ -545,16 +545,8 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   if (G_LIKELY (screen != NULL))
     icon_theme = gtk_icon_theme_get_for_screen (screen);
 
-  icon = xfce_panel_pixbuf_from_source_at_size (plugin->button_icon,
-                                                icon_theme,
-                                                icon_size,
-                                                icon_size);
-
-  if (G_LIKELY (icon != NULL))
-    {
-      gtk_image_set_from_pixbuf (GTK_IMAGE (plugin->image), icon);
-      g_object_unref (G_OBJECT (icon));
-    }
+  xfce_panel_set_image_from_source (GTK_IMAGE (plugin->image), plugin->button_icon,
+                                    icon_theme, icon_size);
 
   if (plugin->show_button_title &&
       mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
@@ -628,7 +620,9 @@ applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget              *
       g_object_set (G_OBJECT (plugin), "button-icon", icon, NULL);
       g_free (icon);
 
-      image = gtk_image_new_from_icon_name (plugin->button_icon, GTK_ICON_SIZE_DIALOG);
+      image = gtk_image_new ();
+      xfce_panel_set_image_from_source (GTK_IMAGE (image), plugin->button_icon,
+                                        NULL, DIALOG_ICON_SIZE);
       gtk_container_remove (GTK_CONTAINER (button), gtk_bin_get_child (GTK_BIN (button)));
       gtk_container_add (GTK_CONTAINER (button), image);
       gtk_widget_show (image);
@@ -697,7 +691,9 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_signal_connect (G_OBJECT (object), "clicked",
      G_CALLBACK (applications_menu_plugin_configure_plugin_icon_chooser), plugin);
 
-  image = gtk_image_new_from_icon_name (plugin->button_icon, GTK_ICON_SIZE_DIALOG);
+  image = gtk_image_new ();
+  xfce_panel_set_image_from_source (GTK_IMAGE (image), plugin->button_icon,
+                                    NULL, DIALOG_ICON_SIZE);
   gtk_container_add (GTK_CONTAINER (object), image);
   gtk_widget_show (image);
 
