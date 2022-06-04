@@ -37,6 +37,7 @@
 #include "directorymenu-dialog_ui.h"
 
 #define DEFAULT_ICON_NAME "folder"
+#define DIALOG_ICON_SIZE 48
 
 #define DIALOG_RESPONSE_CREATE 0
 #define DIALOG_RESPONSE_OPEN 1
@@ -430,7 +431,7 @@ directory_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   size /= xfce_panel_plugin_get_nrows (panel_plugin);
   gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, size);
   icon_size = xfce_panel_plugin_get_icon_size (panel_plugin);
-  gtk_image_set_from_icon_name (GTK_IMAGE (plugin->icon), plugin->icon_name, icon_size);
+  xfce_panel_set_image_from_source (GTK_IMAGE (plugin->icon), plugin->icon_name, NULL, icon_size);
 
   return TRUE;
 }
@@ -478,7 +479,9 @@ directory_menu_plugin_configure_plugin_icon_chooser (GtkWidget           *button
       g_object_set (G_OBJECT (plugin), "icon-name", icon, NULL);
       g_free (icon);
 
-      image = gtk_image_new_from_icon_name (plugin->icon_name, GTK_ICON_SIZE_DIALOG);
+      image = gtk_image_new ();
+      xfce_panel_set_image_from_source (GTK_IMAGE (image), plugin->icon_name,
+                                        NULL, DIALOG_ICON_SIZE);
       gtk_container_remove (GTK_CONTAINER (button), gtk_bin_get_child (GTK_BIN (button)));
       gtk_container_add (GTK_CONTAINER (button), image);
       gtk_widget_show (image);
@@ -517,7 +520,9 @@ directory_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_signal_connect (G_OBJECT (object), "clicked",
      G_CALLBACK (directory_menu_plugin_configure_plugin_icon_chooser), plugin);
 
-  image = gtk_image_new_from_icon_name (plugin->icon_name, GTK_ICON_SIZE_DIALOG);
+  image = gtk_image_new ();
+  xfce_panel_set_image_from_source (GTK_IMAGE (image), plugin->icon_name,
+                                    NULL, DIALOG_ICON_SIZE);
   gtk_container_add (GTK_CONTAINER (object), image);
   gtk_widget_show (image);
 
