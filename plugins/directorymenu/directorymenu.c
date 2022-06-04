@@ -63,10 +63,6 @@ struct _DirectoryMenuPlugin
   guint            hidden_files : 1;
 
   GSList          *patterns;
-
-  /* temp item we store here when the
-   * properties dialog is opened */
-  GtkWidget       *dialog_icon;
 };
 
 enum
@@ -462,11 +458,10 @@ static void
 directory_menu_plugin_configure_plugin_icon_chooser (GtkWidget           *button,
                                                      DirectoryMenuPlugin *plugin)
 {
-  GtkWidget *chooser;
+  GtkWidget *chooser, *image;
   gchar     *icon;
 
   panel_return_if_fail (XFCE_IS_DIRECTORY_MENU_PLUGIN (plugin));
-  panel_return_if_fail (GTK_IS_IMAGE (plugin->dialog_icon));
 
   chooser = exo_icon_chooser_dialog_new (_("Select An Icon"),
                                          GTK_WINDOW (gtk_widget_get_toplevel (button)),
@@ -481,8 +476,12 @@ directory_menu_plugin_configure_plugin_icon_chooser (GtkWidget           *button
     {
       icon = exo_icon_chooser_dialog_get_icon (EXO_ICON_CHOOSER_DIALOG (chooser));
       g_object_set (G_OBJECT (plugin), "icon-name", icon, NULL);
-      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->dialog_icon), icon, GTK_ICON_SIZE_DIALOG);
       g_free (icon);
+
+      image = gtk_image_new_from_icon_name (plugin->icon_name, GTK_ICON_SIZE_DIALOG);
+      gtk_container_remove (GTK_CONTAINER (button), gtk_bin_get_child (GTK_BIN (button)));
+      gtk_container_add (GTK_CONTAINER (button), image);
+      gtk_widget_show (image);
     }
 
   gtk_widget_destroy (chooser);
@@ -495,6 +494,7 @@ directory_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   DirectoryMenuPlugin *plugin = XFCE_DIRECTORY_MENU_PLUGIN (panel_plugin);
   GtkBuilder          *builder;
+  GtkWidget           *image;
   GObject             *dialog, *object;
 
   /* setup the dialog */
@@ -517,10 +517,9 @@ directory_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_signal_connect (G_OBJECT (object), "clicked",
      G_CALLBACK (directory_menu_plugin_configure_plugin_icon_chooser), plugin);
 
-  plugin->dialog_icon = gtk_image_new_from_icon_name (plugin->icon_name, GTK_ICON_SIZE_DIALOG);
-  gtk_container_add (GTK_CONTAINER (object), plugin->dialog_icon);
-  g_object_add_weak_pointer (G_OBJECT (plugin->dialog_icon), (gpointer) &plugin->dialog_icon);
-  gtk_widget_show (plugin->dialog_icon);
+  image = gtk_image_new_from_icon_name (plugin->icon_name, GTK_ICON_SIZE_DIALOG);
+  gtk_container_add (GTK_CONTAINER (object), image);
+  gtk_widget_show (image);
 
   object = gtk_builder_get_object (builder, "open-folder");
   panel_return_if_fail (GTK_IS_CHECK_BUTTON (object));
