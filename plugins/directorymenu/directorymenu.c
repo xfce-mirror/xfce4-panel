@@ -203,7 +203,8 @@ directory_menu_plugin_init (DirectoryMenuPlugin *plugin)
   g_signal_connect (G_OBJECT (plugin->button), "toggled",
       G_CALLBACK (directory_menu_plugin_menu), plugin);
 
-  plugin->icon = gtk_image_new_from_icon_name (DEFAULT_ICON_NAME, GTK_ICON_SIZE_BUTTON);
+  plugin->icon_name = g_strdup (DEFAULT_ICON_NAME);
+  plugin->icon = gtk_image_new_from_icon_name (plugin->icon_name, GTK_ICON_SIZE_BUTTON);
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
   gtk_widget_show (plugin->icon);
 
@@ -305,11 +306,11 @@ directory_menu_plugin_set_property (GObject      *object,
 
     case PROP_ICON_NAME:
       g_free (plugin->icon_name);
-      plugin->icon_name = g_value_dup_string (value);
+      plugin->icon_name =
+        panel_str_is_empty (g_value_get_string (value)) ? g_strdup (DEFAULT_ICON_NAME)
+                                                        : g_value_dup_string (value);
       icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (object));
-      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->icon),
-          panel_str_is_empty (plugin->icon_name) ? DEFAULT_ICON_NAME : plugin->icon_name,
-          icon_size);
+      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->icon), plugin->icon_name, icon_size);
       break;
 
     case PROP_OPEN_FOLDER:
@@ -474,7 +475,6 @@ directory_menu_plugin_configure_plugin_icon_chooser (GtkWidget           *button
                                          NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_ACCEPT);
 
-  if (!panel_str_is_empty (plugin->icon_name))
   exo_icon_chooser_dialog_set_icon (EXO_ICON_CHOOSER_DIALOG (chooser), plugin->icon_name);
 
   if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_ACCEPT)
@@ -496,10 +496,6 @@ directory_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   DirectoryMenuPlugin *plugin = XFCE_DIRECTORY_MENU_PLUGIN (panel_plugin);
   GtkBuilder          *builder;
   GObject             *dialog, *object;
-  const gchar         *icon_name = plugin->icon_name;
-
-  if (panel_str_is_empty (icon_name))
-    icon_name = DEFAULT_ICON_NAME;
 
   /* setup the dialog */
   PANEL_UTILS_LINK_4UI
@@ -521,7 +517,7 @@ directory_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_signal_connect (G_OBJECT (object), "clicked",
      G_CALLBACK (directory_menu_plugin_configure_plugin_icon_chooser), plugin);
 
-  plugin->dialog_icon = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_DIALOG);
+  plugin->dialog_icon = gtk_image_new_from_icon_name (plugin->icon_name, GTK_ICON_SIZE_DIALOG);
   gtk_container_add (GTK_CONTAINER (object), plugin->dialog_icon);
   g_object_add_weak_pointer (G_OBJECT (plugin->dialog_icon), (gpointer) &plugin->dialog_icon);
   gtk_widget_show (plugin->dialog_icon);
