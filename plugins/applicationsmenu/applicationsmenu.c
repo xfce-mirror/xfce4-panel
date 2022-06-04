@@ -53,7 +53,7 @@ struct _ApplicationsMenuPlugin
 
   GtkWidget       *button;
   GtkWidget       *box;
-  GtkWidget       *icon;
+  GtkWidget       *image;
   GtkWidget       *label;
   GtkWidget       *menu;
 
@@ -237,9 +237,9 @@ applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
   gtk_widget_show (plugin->box);
 
   plugin->button_icon = g_strdup (DEFAULT_ICON_NAME);
-  plugin->icon = gtk_image_new_from_icon_name (plugin->button_icon, DEFAULT_ICON_SIZE);
-  gtk_box_pack_start (GTK_BOX (plugin->box), plugin->icon, FALSE, FALSE, 0);
-  gtk_widget_show (plugin->icon);
+  plugin->image = gtk_image_new_from_icon_name (plugin->button_icon, DEFAULT_ICON_SIZE);
+  gtk_box_pack_start (GTK_BOX (plugin->box), plugin->image, FALSE, FALSE, 0);
+  gtk_widget_show (plugin->image);
 
   plugin->label = gtk_label_new (DEFAULT_TITLE);
   gtk_box_pack_start (GTK_BOX (plugin->box), plugin->label, FALSE, FALSE, 0);
@@ -518,7 +518,7 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   GtkStyleContext        *ctx;
   GtkBorder               padding, border;
 
-  gtk_box_set_child_packing (GTK_BOX (plugin->box), plugin->icon,
+  gtk_box_set_child_packing (GTK_BOX (plugin->box), plugin->image,
                              !plugin->show_button_title,
                              !plugin->show_button_title,
                              0, GTK_PACK_START);
@@ -552,7 +552,7 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 
   if (G_LIKELY (icon != NULL))
     {
-      gtk_image_set_from_pixbuf (GTK_IMAGE (plugin->icon), icon);
+      gtk_image_set_from_pixbuf (GTK_IMAGE (plugin->image), icon);
       g_object_unref (G_OBJECT (icon));
     }
 
