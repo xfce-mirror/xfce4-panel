@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-31 12:48+0200\n"
+"POT-Creation-Date: 2022-06-02 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: heskjestad <cato@heskjestad.xyz>, 2022\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/xfce/xfce4-panel/language/nb/)\n"
@@ -64,7 +64,7 @@ msgstr "Hvis du sletter et element fra panelet vil dets oppsett gå tapt."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1323
-#: ../plugins/applicationsmenu/applicationsmenu.c:602
+#: ../plugins/applicationsmenu/applicationsmenu.c:625
 #: ../plugins/directorymenu/directorymenu.c:472
 #: ../plugins/directorymenu/directorymenu.c:932
 msgid "_Cancel"
@@ -947,28 +947,32 @@ msgid "Button _title:"
 msgstr "Knappe_tittel:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+msgid "Show button on one _line"
+msgstr "Vis knapp på én _linje"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "_Show button title"
 msgstr "_Vis knappetittel"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show application d_escription in tooltip"
 msgstr "Vis programb_eskrivelser i verktøytips"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show ic_ons in menu"
 msgstr "Vis ik_oner i menyen"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show generic application n_ames"
 msgstr "Vis generiske programn_avn"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
 msgstr "Velg denne for å vise generiske programnavn i menyen, for eksempel «Filbehandler» istedenfor «Thunar»"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
@@ -977,27 +981,27 @@ msgstr "Velg denne for å vise generiske programnavn i menyen, for eksempel «Fi
 msgid "Appearance"
 msgstr "Utseende"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
 msgid "Use the _default menu"
 msgstr "Bruk stan_dard meny"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 msgid "Ed_it Menu"
 msgstr "Red_iger meny"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "Use c_ustom menu file:"
 msgstr "Br_uk tilpasset menyfil:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:16
 msgid "Menu _file:"
 msgstr "Meny_fil"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:16
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:17
 msgid "Select A Menu File"
 msgstr "Velg en menyfil"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:17
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:18
 msgid "Menu File"
 msgstr "Menyfil"
 
@@ -1006,18 +1010,18 @@ msgstr "Menyfil"
 msgid "Applications"
 msgstr "Programmer"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:600
+#: ../plugins/applicationsmenu/applicationsmenu.c:623
 #: ../plugins/directorymenu/directorymenu.c:470
 msgid "Select An Icon"
 msgstr "Velg et ikon"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:603
+#: ../plugins/applicationsmenu/applicationsmenu.c:626
 #: ../plugins/directorymenu/directorymenu.c:473
 msgid "_OK"
 msgstr "_OK"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:638
+#: ../plugins/applicationsmenu/applicationsmenu.c:661
 #: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2475
 #, c-format
 msgid "Failed to execute command \"%s\"."
