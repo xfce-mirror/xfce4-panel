@@ -451,11 +451,9 @@ panel_base_window_screen_changed (GtkWidget *widget, GdkScreen *previous_screen)
   /* set the rgba colormap if supported by the screen */
   screen = gtk_window_get_screen (GTK_WINDOW (window));
   visual = gdk_screen_get_rgba_visual (screen);
-  if (visual != NULL)
-    {
-      gtk_widget_set_visual (widget, visual);
-      window->is_composited = gdk_screen_is_composited (screen);
-    }
+  window->is_composited = gdk_screen_is_composited (screen);
+  if (visual != NULL && window->is_composited)
+    gtk_widget_set_visual (widget, visual);
 
    panel_debug (PANEL_DEBUG_BASE_WINDOW,
                "%p: rgba visual=%p, compositing=%s", window,

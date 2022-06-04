@@ -80,7 +80,7 @@ wrapper_plug_init (WrapperPlug *plug)
   /* set the colormap */
   screen = gtk_window_get_screen (GTK_WINDOW (plug));
   visual = gdk_screen_get_rgba_visual (screen);
-  if (visual != NULL)
+  if (visual != NULL && gdk_screen_is_composited (screen))
     gtk_widget_set_visual (GTK_WIDGET (plug), visual);
 
   /* set the panel class */
