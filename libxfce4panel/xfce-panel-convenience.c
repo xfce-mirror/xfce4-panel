@@ -302,5 +302,38 @@ xfce_panel_pixbuf_from_source (const gchar  *source,
 
 
 
+/**
+ * xfce_panel_set_image_from_source:
+ * @image: GtkImage to be set
+ * @source: string that contains the location of an icon
+ * @icon_theme: (allow-none): icon theme or %NULL to use the default icon theme
+ * @size: size the icon that should be loaded
+ *
+ * See xfce_panel_pixbuf_from_source_at_size
+ *
+ * See also: XfcePanelImage
+ *
+ * Since: 4.17.2
+ **/
+void
+xfce_panel_set_image_from_source (GtkImage     *image,
+                                  const gchar  *source,
+                                  GtkIconTheme *icon_theme,
+                                  gint          size)
+{
+  GdkPixbuf *pixbuf;
+
+  g_return_if_fail (GTK_IS_IMAGE (image));
+
+  pixbuf = xfce_panel_pixbuf_from_source (source, icon_theme, size);
+  if (G_LIKELY (pixbuf != NULL))
+    {
+      gtk_image_set_from_pixbuf (image, pixbuf);
+      g_object_unref (pixbuf);
+    }
+}
+
+
+
 #define __XFCE_PANEL_CONVENIENCE_C__
 #include <libxfce4panel/libxfce4panel-aliasdef.c>
