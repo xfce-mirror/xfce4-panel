@@ -11,6 +11,7 @@
 # jc1 <jc1.quebecos@gmail.com>, 2013,2017,2022
 # Jérôme Guelfucci <jeromeg@xfce.org>, 2009
 # Olivier Fourdan <fourdan@xfce.org>, 2004
+# roxfr <roxfr@outlook.fr>, 2022
 # Urien Desterres <urien.desterres@gmail.com>, 2014
 # Wallon Wallon, 2022
 # Yannick Le Guen <leguen.yannick@gmail.com>, 2014-2015,2017-2020
@@ -18,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-31 12:48+0200\n"
+"POT-Creation-Date: 2022-06-02 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: jc1 <jc1.quebecos@gmail.com>, 2013,2017,2022\n"
+"Last-Translator: roxfr <roxfr@outlook.fr>, 2022\n"
 "Language-Team: French (http://www.transifex.com/xfce/xfce4-panel/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -66,7 +67,7 @@ msgstr "Supprimer l’élément du tableau de bord signifie également que sa co
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1323
-#: ../plugins/applicationsmenu/applicationsmenu.c:602
+#: ../plugins/applicationsmenu/applicationsmenu.c:625
 #: ../plugins/directorymenu/directorymenu.c:472
 #: ../plugins/directorymenu/directorymenu.c:932
 msgid "_Cancel"
@@ -950,28 +951,32 @@ msgid "Button _title:"
 msgstr "_Titre du bouton :"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+msgid "Show button on one _line"
+msgstr "Afficher le bouton sur une _ligne"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "_Show button title"
 msgstr "Afficher le titre du _bouton"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show application d_escription in tooltip"
 msgstr "Afficher la d_escription de l’application dans une infobulle"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show ic_ons in menu"
 msgstr "Afficher les _icônes dans le menu"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show generic application n_ames"
 msgstr "Afficher les noms d’_application génériques"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
 msgstr "Sélectionner cette option pour afficher le nom générique de l’application dans le menu, par exemple « Gestionnaire de fichiers » au lieu de « Thunar »"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
@@ -980,27 +985,27 @@ msgstr "Sélectionner cette option pour afficher le nom générique de l’appli
 msgid "Appearance"
 msgstr "Apparence"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
 msgid "Use the _default menu"
 msgstr "Utiliser le menu par _défaut"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 msgid "Ed_it Menu"
 msgstr "Éd_iter le menu"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "Use c_ustom menu file:"
 msgstr "Utiliser un fichier de menu _personnalisé :"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:16
 msgid "Menu _file:"
 msgstr "_Fichier de menu :"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:16
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:17
 msgid "Select A Menu File"
 msgstr "Sélectionner un fichier de menu"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:17
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:18
 msgid "Menu File"
 msgstr "Fichier de menu"
 
@@ -1009,18 +1014,18 @@ msgstr "Fichier de menu"
 msgid "Applications"
 msgstr "Applications"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:600
+#: ../plugins/applicationsmenu/applicationsmenu.c:623
 #: ../plugins/directorymenu/directorymenu.c:470
 msgid "Select An Icon"
 msgstr "Choisir une icône"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:603
+#: ../plugins/applicationsmenu/applicationsmenu.c:626
 #: ../plugins/directorymenu/directorymenu.c:473
 msgid "_OK"
 msgstr "_Valider"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:638
+#: ../plugins/applicationsmenu/applicationsmenu.c:661
 #: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2475
 #, c-format
 msgid "Failed to execute command \"%s\"."
