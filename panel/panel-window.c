@@ -1718,6 +1718,63 @@ panel_window_style_updated (GtkWidget *widget)
 
 
 
+static GdkFilterReturn
+panel_window_filter (GdkXEvent *xev,
+                     GdkEvent  *gev,
+                     gpointer   data)
+{
+  PanelWindow    *window = data;
+  GdkEventButton *event = (GdkEventButton *) gev;
+  XEvent         *xevent = (XEvent *) xev;
+  XButtonEvent   *xbutton_event = (XButtonEvent *) xev;
+  GdkDevice      *device;
+  gint            position, limit;
+
+  panel_return_val_if_fail (PANEL_IS_WINDOW (window), GDK_FILTER_CONTINUE);
+
+  /* we are only interested in button press on handles */
+  if (window->position_locked || xevent->type != ButtonPress)
+    return GDK_FILTER_CONTINUE;
+
+  if (IS_HORIZONTAL (window))
+    {
+      position = xbutton_event->x;
+      limit = window->alloc.width;
+    }
+  else
+    {
+      position = xbutton_event->y;
+      limit = window->alloc.height;
+    }
+
+  /* leave when the pointer is not on the handles */
+  if (position >= HANDLE_SIZE_TOTAL && position <= limit - HANDLE_SIZE_TOTAL)
+    return GDK_FILTER_CONTINUE;
+
+  /* leave when the pointer is grabbed, typically when the context menu is shown */
+  device = gdk_seat_get_pointer (gdk_display_get_default_seat (window->display));
+  if (gdk_display_device_is_grabbed (window->display, device))
+    return GDK_FILTER_CONTINUE;
+
+  event->type = GDK_BUTTON_PRESS;
+  event->send_event = TRUE;
+  event->time = xbutton_event->time;
+  event->x = xbutton_event->x;
+  event->y = xbutton_event->y;
+  event->axes = NULL;
+  event->state = xbutton_event->state;
+  event->button = xbutton_event->button;
+  event->device = device;
+  event->x_root = xbutton_event->x_root;
+  event->y_root = xbutton_event->y_root;
+
+  /* force the panel to process the event instead of its child widgets */
+  return panel_window_button_press_event (GTK_WIDGET (window), event) ? GDK_FILTER_REMOVE
+                                                                      : GDK_FILTER_CONTINUE;
+}
+
+
+
 static void
 panel_window_realize (GtkWidget *widget)
 {
@@ -1739,6 +1796,9 @@ panel_window_realize (GtkWidget *widget)
   /* set struts if we snap to an edge */
   if (window->struts_edge != STRUTS_EDGE_NONE)
     panel_window_screen_struts_set (window);
+
+  /* redirect some corner cases (see issue #227) */
+  gdk_window_add_filter (gdkwindow, panel_window_filter, window);
 }
 
 
