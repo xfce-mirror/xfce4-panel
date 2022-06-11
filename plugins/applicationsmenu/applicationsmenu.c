@@ -851,9 +851,10 @@ applications_menu_plugin_menu (GtkWidget              *button,
 
   if (button != NULL)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
+
   /* Panel plugin remote events don't send actual GdkEvents, so construct a minimal one so that
    * gtk_menu_popup_at_pointer/rect can extract a location correctly from a GdkWindow */
-  else if (event == NULL)
+  if (event == NULL)
     {
       event = g_slice_new0 (GdkEventButton);
       event->type = GDK_BUTTON_PRESS;
