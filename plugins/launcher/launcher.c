@@ -2310,6 +2310,7 @@ launcher_plugin_arrow_drag_leave_timeout (gpointer user_data)
   gint            pointer_x, pointer_y;
   GtkWidget      *menu = plugin->menu;
   gint            menu_x, menu_y, menu_w, menu_h;
+  GdkDevice      *device;
 
   panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
   panel_return_val_if_fail (menu == NULL || gtk_widget_get_has_window (menu), FALSE);
@@ -2318,9 +2319,12 @@ launcher_plugin_arrow_drag_leave_timeout (gpointer user_data)
   if (G_UNLIKELY (plugin->menu == NULL))
     return FALSE;
 
+  device = gdk_seat_get_pointer (gdk_display_get_default_seat (gtk_widget_get_display (menu)));
+  if (device == NULL)
+    return FALSE;
+
   /* get the pointer position */
-  gdk_device_get_position (gdk_seat_get_pointer (gdk_display_get_default_seat (gtk_widget_get_display (menu))),
-                           NULL, &pointer_x, &pointer_y);
+  gdk_device_get_position (device, NULL, &pointer_x, &pointer_y);
 
   /* get the menu position */
   gdk_window_get_root_origin (gtk_widget_get_window (menu), &menu_x, &menu_y);

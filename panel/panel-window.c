@@ -1753,7 +1753,7 @@ panel_window_filter (GdkXEvent *xev,
 
   /* leave when the pointer is grabbed, typically when the context menu is shown */
   device = gdk_seat_get_pointer (gdk_display_get_default_seat (window->display));
-  if (gdk_display_device_is_grabbed (window->display, device))
+  if (device == NULL || gdk_display_device_is_grabbed (window->display, device))
     return GDK_FILTER_CONTINUE;
 
   event->type = GDK_BUTTON_PRESS;
@@ -2518,14 +2518,15 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
             {
               if (gdk_rectangle_intersect (&panel_area,  &window_area, NULL))
                 {
-                  /* get the pointer position */
-                  GdkDisplay* display = gdk_display_get_default ();
-                  GdkSeat* seat = gdk_display_get_default_seat (display);
-                  GdkDevice* device = gdk_seat_get_pointer (seat);
-                  gint pointer_x, pointer_y;
-                  gdk_device_get_position (device, NULL, &pointer_x, &pointer_y);
+                  GdkDevice *device;
+                  gint       pointer_x, pointer_y;
+
+                  device = gdk_seat_get_pointer (gdk_display_get_default_seat (window->display));
+                  if (device == NULL)
+                    return;
 
                   /* check if the cursor is outside the panel area before proceeding */
+                  gdk_device_get_position (device, NULL, &pointer_x, &pointer_y);
                   if (pointer_x <= panel_area.x
                       || pointer_y <= panel_area.y
                       || pointer_x >= panel_area.x + panel_area.width
@@ -3448,11 +3449,14 @@ panel_window_thaw_autohide (PanelWindow *window)
       /* otherwise hide the panel if the pointer is outside */
       else
         {
-          GdkDisplay *display = gdk_display_get_default ();
-          GdkSeat *seat = gdk_display_get_default_seat (display);
-          GdkDevice *device = gdk_seat_get_pointer (seat);
-          GdkWindow *gdkwindow = gdk_device_get_window_at_position (device, NULL, NULL);
+          GdkDevice *device;
+          GdkWindow *gdkwindow;
 
+          device = gdk_seat_get_pointer (gdk_display_get_default_seat (window->display));
+          if (device == NULL)
+            return;
+
+          gdkwindow = gdk_device_get_window_at_position (device, NULL, NULL);
           if (gdkwindow == NULL || gdk_window_get_effective_toplevel (gdkwindow)
                                    != gtk_widget_get_window (GTK_WIDGET (window)))
             panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
