@@ -754,29 +754,31 @@ applications_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
 
   window = gtk_widget_get_toplevel (GTK_WIDGET (plugin->button));
 
-  if (strcmp (name, "popup") == 0
-      && gtk_widget_get_visible (GTK_WIDGET (panel_plugin))
-      && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button))
-      && panel_utils_grab_available (window))
-    {
-      if (value != NULL
-          && G_VALUE_HOLDS_BOOLEAN (value)
-          && g_value_get_boolean (value))
-        {
-          /* show menu under cursor */
-          applications_menu_plugin_menu (NULL, NULL, plugin);
-        }
-      else
-        {
-          /* show the menu at the button */
-          applications_menu_plugin_menu (plugin->button, NULL, plugin);
-        }
+  /* try next plugin or indicate that it failed */
+  if (strcmp (name, "popup") != 0
+      || ! gtk_widget_get_visible (GTK_WIDGET (panel_plugin)))
+    return FALSE;
 
-      /* don't popup another menu */
-      return TRUE;
+  /* a menu is already shown, don't popup another one */
+  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button))
+      || ! panel_utils_grab_available (window))
+    return TRUE;
+
+  if (value != NULL
+      && G_VALUE_HOLDS_BOOLEAN (value)
+      && g_value_get_boolean (value))
+    {
+      /* popup menu at pointer */
+      applications_menu_plugin_menu (NULL, NULL, plugin);
+    }
+  else
+    {
+      /* popup menu at button */
+      applications_menu_plugin_menu (plugin->button, NULL, plugin);
     }
 
-  return FALSE;
+  /* don't popup another menu */
+  return TRUE;
 }
 
 
