@@ -586,11 +586,8 @@ window_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
                                  const GValue    *value)
 {
   WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
-  GtkWidget *window;
 
   panel_return_val_if_fail (value == NULL || G_IS_VALUE (value), FALSE);
-
-  window = gtk_widget_get_toplevel (GTK_WIDGET (plugin->button));
 
   /* try next plugin or indicate that it failed */
   if (strcmp (name, "popup") != 0
@@ -599,9 +596,14 @@ window_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
 
   /* a menu is already shown, don't popup another one */
   if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button))
-      || ! panel_utils_grab_available (window))
+      || ! panel_utils_device_grab (plugin->button))
     return TRUE;
 
+  /*
+   * The menu will take over the grab when it is shown, and in the rare cases that it is not,
+   * this is not a big deal. This way we are sure that other invocations of the command by
+   * keyboard shortcut will not interfere.
+   */
   if (value != NULL
       && G_VALUE_HOLDS_BOOLEAN (value)
       && g_value_get_boolean (value))

@@ -39,7 +39,7 @@ void        panel_utils_show_help      (GtkWindow        *parent,
                                         const gchar      *page,
                                         const gchar      *offset);
 
-gboolean    panel_utils_grab_available (GtkWidget        *widget);
+gboolean    panel_utils_device_grab    (GtkWidget        *widget);
 
 void        panel_utils_set_atk_info   (GtkWidget        *widget,
                                         const gchar      *name,

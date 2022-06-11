@@ -153,21 +153,14 @@ panel_utils_show_help (GtkWindow   *parent,
 
 
 gboolean
-panel_utils_grab_available (GtkWidget *widget)
+panel_utils_device_grab (GtkWidget *widget)
 {
-  GdkDisplay* display = gdk_display_get_default ();
-  GdkSeat *seat = gdk_display_get_default_seat (display);
-  GdkWindow *window = gtk_widget_get_window (widget);
+  GdkScreen  *screen = gtk_widget_get_screen (widget);
+  GdkDisplay *display = gdk_screen_get_display (screen);
+  GdkSeat    *seat = gdk_display_get_default_seat (display);
+  GdkWindow  *window = gdk_window_get_effective_toplevel (gtk_widget_get_window (widget));
 
-  if (xfce_gdk_device_grab (seat, window, GDK_SEAT_CAPABILITY_ALL, NULL) == TRUE)
-    {
-      gdk_seat_ungrab (seat);
-      return TRUE;
-    }
-  else
-    {
-      return FALSE;
-    }
+  return xfce_gdk_device_grab (seat, window, GDK_SEAT_CAPABILITY_ALL, NULL);
 }
 
 
