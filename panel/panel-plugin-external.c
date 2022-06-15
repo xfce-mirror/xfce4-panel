@@ -404,6 +404,9 @@ panel_plugin_external_plug_added (GtkSocket *socket)
                external->unique_id,
                g_slist_length (external->priv->queue));
 
+  /* silence allocation warning by requesting min panel size as default */
+  gtk_widget_set_size_request (GTK_WIDGET (socket), 16, 16);
+
   /* send queue to wrapper */
   panel_plugin_external_queue_send_to_child (external);
 }
