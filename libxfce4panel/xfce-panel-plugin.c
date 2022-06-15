@@ -1605,8 +1605,6 @@ xfce_panel_plugin_get_show_configure (XfcePanelPluginProvider *provider)
 {
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (provider), FALSE);
 
-  /* TODO, not sure, but maybe return FALSE when menu_blocked > 0 */
-
   return PANEL_HAS_FLAG (XFCE_PANEL_PLUGIN (provider)->priv->flags,
                          PLUGIN_FLAG_SHOW_CONFIGURE);
 }
@@ -1632,8 +1630,6 @@ xfce_panel_plugin_get_show_about (XfcePanelPluginProvider *provider)
 {
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (provider), FALSE);
 
-  /* TODO, not sure, but maybe return FALSE when menu_blocked > 0 */
-
   return PANEL_HAS_FLAG (XFCE_PANEL_PLUGIN (provider)->priv->flags,
                          PLUGIN_FLAG_SHOW_ABOUT);
 }
@@ -1643,12 +1639,9 @@ xfce_panel_plugin_get_show_about (XfcePanelPluginProvider *provider)
 static void
 xfce_panel_plugin_show_about (XfcePanelPluginProvider *provider)
 {
-  XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
-
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
-  if (G_LIKELY (plugin->priv->menu_blocked == 0))
-    g_signal_emit (G_OBJECT (provider), plugin_signals[ABOUT], 0);
+  g_signal_emit (G_OBJECT (provider), plugin_signals[ABOUT], 0);
 }
 
 
