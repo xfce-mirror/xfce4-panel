@@ -4391,7 +4391,6 @@ xfce_tasklist_group_button_child_destroyed (XfceTasklistChild *group_child,
 #endif
     {
       xfce_tasklist_group_button_child_visible_changed (group_child);
-      xfce_tasklist_group_button_name_changed (NULL, group_child);
     }
   else
     {
