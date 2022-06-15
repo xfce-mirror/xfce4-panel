@@ -1091,13 +1091,16 @@ xfce_panel_plugin_menu_remove (XfcePanelPlugin *plugin)
     {
       gtk_widget_hide (dialog);
 
+      /* send signal to unlock the panel before removing the plugin */
+      xfce_panel_plugin_block_autohide (plugin, FALSE);
+
       /* ask the panel or wrapper to remove the plugin */
       xfce_panel_plugin_remove (plugin);
     }
+  else
+    xfce_panel_plugin_block_autohide (plugin, FALSE);
 
   gtk_widget_destroy (dialog);
-
-  xfce_panel_plugin_block_autohide (plugin, FALSE);
 }
 
 
