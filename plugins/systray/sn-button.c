@@ -26,6 +26,10 @@
 #include <string.h>
 #endif
 
+#include <gdk/gdkx.h>
+
+#include <libxfce4panel/libxfce4panel.h>
+
 #include "sn-button.h"
 #include "sn-icon-box.h"
 #include "sn-util.h"
@@ -42,6 +46,8 @@ static gboolean              sn_button_button_release                (GtkWidget 
 
 static gboolean              sn_button_scroll_event                  (GtkWidget               *widget,
                                                                       GdkEventScroll          *event);
+
+static void                  sn_button_unrealize                     (GtkWidget               *widget);
 
 static void                  sn_button_menu_changed                  (GtkWidget               *widget,
                                                                       SnItem                  *item);
@@ -65,10 +71,8 @@ struct _SnButton
   GtkButton            __parent__;
 
   SnItem              *item;
+  SnPlugin            *plugin;
   SnConfig            *config;
-
-  GtkMenuPositionFunc  pos_func;
-  gpointer             pos_func_data;
 
   GtkWidget           *menu;
   gboolean             menu_only;
@@ -97,6 +101,7 @@ sn_button_class_init (SnButtonClass *klass)
   widget_class->button_press_event = sn_button_button_press;
   widget_class->button_release_event = sn_button_button_release;
   widget_class->scroll_event = sn_button_scroll_event;
+  widget_class->unrealize = sn_button_unrealize;
 }
 
 
@@ -105,6 +110,8 @@ static void
 sn_button_init (SnButton *button)
 {
   GtkCssProvider *css_provider;
+  GdkEventMask    event_mask = GDK_SCROLL_MASK;
+  const gchar    *wm_name;
 
   gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
 
@@ -120,13 +127,16 @@ sn_button_init (SnButton *button)
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
   g_object_unref (css_provider);
 
-  gtk_widget_add_events (GTK_WIDGET (button), GDK_SCROLL_MASK | GDK_SMOOTH_SCROLL_MASK);
+  /* see https://gitlab.xfce.org/xfce/xfwm4/-/issues/641 */
+  wm_name = gdk_x11_screen_get_window_manager_name (gtk_widget_get_screen (GTK_WIDGET (button)));
+  if (g_strcmp0 (wm_name, "Xfwm4") != 0 && g_strcmp0 (wm_name, "unknown") != 0)
+    event_mask |= GDK_SMOOTH_SCROLL_MASK;
+
+  gtk_widget_add_events (GTK_WIDGET (button), event_mask);
 
   button->item = NULL;
+  button->plugin = NULL;
   button->config = NULL;
-
-  button->pos_func = NULL;
-  button->pos_func_data = NULL;
 
   button->menu = NULL;
   button->menu_only = FALSE;
@@ -164,10 +174,9 @@ sn_button_get_name (SnButton *button)
 
 
 GtkWidget *
-sn_button_new (SnItem              *item,
-               GtkMenuPositionFunc  pos_func,
-               gpointer             pos_func_data,
-               SnConfig            *config)
+sn_button_new (SnItem   *item,
+               SnPlugin *plugin,
+               SnConfig *config)
 {
   SnButton *button = g_object_new (XFCE_TYPE_SN_BUTTON, NULL);
 
@@ -175,10 +184,8 @@ sn_button_new (SnItem              *item,
   g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), NULL);
 
   button->item = item;
+  button->plugin = plugin;
   button->config = config;
-
-  button->pos_func = pos_func;
-  button->pos_func_data = pos_func_data;
 
   button->box = sn_icon_box_new (item, config);
   gtk_container_add (GTK_CONTAINER (button), button->box);
@@ -263,15 +270,8 @@ sn_button_button_press (GtkWidget      *widget,
             g_signal_connect_swapped (G_OBJECT (button->menu), "deactivate",
                                       G_CALLBACK (sn_button_menu_deactivate), button);
 
-#if GTK_CHECK_VERSION(3, 22, 0)
-          gtk_menu_popup_at_widget (GTK_MENU (button->menu), widget,
-                                    GDK_GRAVITY_NORTH_WEST, GDK_GRAVITY_NORTH_WEST,
-                                    (GdkEvent *)event);
-#else
-          gtk_menu_popup (GTK_MENU (button->menu), NULL, NULL,
-                          button->pos_func, button->pos_func_data,
-                          event->button, event->time);
-#endif
+          xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (button->plugin),
+                                        GTK_MENU (button->menu), widget, (GdkEvent *) event);
 
           gtk_widget_set_state_flags (widget, GTK_STATE_FLAG_ACTIVE, FALSE);
           return TRUE;
@@ -297,6 +297,11 @@ sn_button_button_release (GtkWidget      *widget,
 {
   SnButton *button = XFCE_SN_BUTTON (widget);
   gboolean  menu_is_primary;
+
+  /* leave if button release happens outside of systray item */
+  if (event->x < 0 || event->x > gdk_window_get_width (event->window) ||
+      event->y < 0 || event->y > gdk_window_get_height (event->window))
+    return FALSE;
 
   menu_is_primary = sn_config_get_menu_is_primary (button->config);
 
@@ -329,10 +334,35 @@ sn_button_scroll_event (GtkWidget      *widget,
   SnButton *button = XFCE_SN_BUTTON (widget);
   gdouble   delta_x, delta_y;
 
-  if (!gdk_event_get_scroll_deltas ((GdkEvent *)event, &delta_x, &delta_y))
+  /* see reference to https://gitlab.xfce.org/xfce/xfwm4/-/issues/641 in init() */
+  if (gtk_widget_get_events (widget) & GDK_SMOOTH_SCROLL_MASK)
     {
-      delta_x = event->delta_x;
-      delta_y = event->delta_y;
+      if (!gdk_event_get_scroll_deltas ((GdkEvent *)event, &delta_x, &delta_y))
+        {
+          delta_x = event->delta_x;
+          delta_y = event->delta_y;
+        }
+    }
+  else
+    {
+      delta_x = delta_y = 0;
+      switch (event->direction)
+        {
+          case GDK_SCROLL_UP:
+            delta_y = -1;
+            break;
+          case GDK_SCROLL_DOWN:
+            delta_y = 1;
+            break;
+          case GDK_SCROLL_RIGHT:
+            delta_x = -1;
+            break;
+          case GDK_SCROLL_LEFT:
+            delta_x = 1;
+            break;
+          default:
+            break;
+        }
     }
 
   if (delta_x != 0 || delta_y != 0)
@@ -345,6 +375,25 @@ sn_button_scroll_event (GtkWidget      *widget,
     }
 
   return TRUE;
+}
+
+
+
+static void
+sn_button_unrealize (GtkWidget *widget)
+{
+  SnButton *button = XFCE_SN_BUTTON (widget);
+
+  /*
+   * The button could be hidden without being destroyed, as Blueman does for example when
+   * the bluetooth service is stopped (see issue #391). As the menu is attached to the
+   * button, care must be taken that it does not remain shown while the button is hidden.
+   * This also triggers the "deactivate" signal handler to cleanly end the menu display.
+   */
+  if (button->menu != NULL && gtk_widget_get_visible (button->menu))
+    gtk_menu_shell_deactivate (GTK_MENU_SHELL (button->menu));
+
+  GTK_WIDGET_CLASS (sn_button_parent_class)->unrealize (widget);
 }
 
 

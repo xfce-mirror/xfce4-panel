@@ -37,7 +37,8 @@ typedef struct _PanelWindow      PanelWindow;
 GType      panel_window_get_type                  (void) G_GNUC_CONST;
 
 GtkWidget *panel_window_new                       (GdkScreen   *screen,
-                                                   gint         id) G_GNUC_MALLOC;
+                                                   gint         id,
+                                                   gint         autohide_block) G_GNUC_MALLOC;
 
 gint       panel_window_get_id                    (PanelWindow *window);
 

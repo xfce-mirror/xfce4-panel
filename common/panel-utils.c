@@ -60,6 +60,26 @@ panel_utils_help_button_clicked (GtkWidget       *button,
 
 
 
+static void
+panel_utils_block_autohide (XfcePanelPlugin *panel_plugin)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (panel_plugin));
+
+  xfce_panel_plugin_block_autohide (panel_plugin, TRUE);
+}
+
+
+
+static void
+panel_utils_unblock_autohide (XfcePanelPlugin *panel_plugin)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (panel_plugin));
+
+  xfce_panel_plugin_block_autohide (panel_plugin, FALSE);
+}
+
+
+
 GtkBuilder *
 panel_utils_builder_new (XfcePanelPlugin  *panel_plugin,
                          const gchar      *buffer,
@@ -83,6 +103,11 @@ panel_utils_builder_new (XfcePanelPlugin  *panel_plugin,
 
           xfce_panel_plugin_block_menu (panel_plugin);
           g_object_weak_ref (G_OBJECT (dialog), _panel_utils_weak_notify, panel_plugin);
+
+          g_signal_connect_swapped (dialog, "show",
+              G_CALLBACK (panel_utils_block_autohide), panel_plugin);
+          g_signal_connect_swapped (dialog, "hide",
+              G_CALLBACK (panel_utils_unblock_autohide), panel_plugin);
 
           button = gtk_builder_get_object (builder, "close-button");
           if (G_LIKELY (button != NULL))
@@ -128,21 +153,14 @@ panel_utils_show_help (GtkWindow   *parent,
 
 
 gboolean
-panel_utils_grab_available (GtkWidget *widget)
+panel_utils_device_grab (GtkWidget *widget)
 {
-  GdkDisplay* display = gdk_display_get_default ();
-  GdkSeat *seat = gdk_display_get_default_seat (display);
-  GdkWindow *window = gtk_widget_get_window (widget);
+  GdkScreen  *screen = gtk_widget_get_screen (widget);
+  GdkDisplay *display = gdk_screen_get_display (screen);
+  GdkSeat    *seat = gdk_display_get_default_seat (display);
+  GdkWindow  *window = gdk_window_get_effective_toplevel (gtk_widget_get_window (widget));
 
-  if (xfce_gdk_device_grab (seat, window, GDK_SEAT_CAPABILITY_ALL, NULL) == TRUE)
-    {
-      gdk_seat_ungrab (seat);
-      return TRUE;
-    }
-  else
-    {
-      return FALSE;
-    }
+  return xfce_gdk_device_grab (seat, window, GDK_SEAT_CAPABILITY_ALL, NULL);
 }
 
 

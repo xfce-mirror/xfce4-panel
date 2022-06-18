@@ -729,7 +729,7 @@ sn_backend_host_add_item (SnBackend   *backend,
   item = g_hash_table_lookup (backend->host_items, service);
   if (item != NULL)
     {
-      sn_item_invalidate (item);
+      sn_item_invalidate (item, TRUE);
     }
   else
     {

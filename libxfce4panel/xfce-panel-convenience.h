@@ -41,6 +41,11 @@ GdkPixbuf   *xfce_panel_pixbuf_from_source         (const gchar  *source,
                                                     GtkIconTheme *icon_theme,
                                                     gint          size) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
+void         xfce_panel_set_image_from_source      (GtkImage     *image,
+                                                    const gchar  *source,
+                                                    GtkIconTheme *icon_theme,
+                                                    gint          size);
+
 G_END_DECLS
 
 #endif /* !__XFCE_PANEL_CONVENIENCE_H__ */

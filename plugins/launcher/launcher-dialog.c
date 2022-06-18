@@ -362,7 +362,7 @@ launcher_dialog_add_response (GtkWidget            *widget,
   panel_return_if_fail (GTK_IS_DIALOG (widget));
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (dialog->plugin));
 
-  if (response_id != 0)
+  if (response_id == 1)
     {
       /* add all the selected rows in the add dialog */
       treeview = gtk_builder_get_object (dialog->builder, "add-treeview");
@@ -415,13 +415,15 @@ launcher_dialog_add_response (GtkWidget            *widget,
       /* update the selection */
       launcher_dialog_tree_selection_changed (selection, dialog);
     }
+  else
+    {
+      /* empty the store */
+      store = gtk_builder_get_object (dialog->builder, "add-store");
+      gtk_list_store_clear (GTK_LIST_STORE (store));
 
-  /* empty the store */
-  store = gtk_builder_get_object (dialog->builder, "add-store");
-  gtk_list_store_clear (GTK_LIST_STORE (store));
-
-  /* hide the dialog, since it's owned by gtkbuilder */
-  gtk_widget_hide (widget);
+      /* hide the dialog, since it's owned by gtkbuilder */
+      gtk_widget_hide (widget);
+    }
 }
 
 

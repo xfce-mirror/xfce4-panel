@@ -66,7 +66,7 @@ static void     panel_base_window_active_timeout_destroyed    (gpointer         
 static void     panel_base_window_set_background_color_css    (PanelBaseWindow      *window);
 static void     panel_base_window_set_background_image_css    (PanelBaseWindow      *window);
 static void     panel_base_window_set_background_css          (PanelBaseWindow      *window,
-                                                               gchar                *css_string);
+                                                               const gchar          *css_string);
 static void     panel_base_window_set_plugin_data             (PanelBaseWindow      *window,
                                                                GtkCallback           func);
 static void     panel_base_window_set_plugin_opacity          (GtkWidget            *widget,
@@ -211,8 +211,8 @@ panel_base_window_init (PanelBaseWindow *window)
   window->priv->active_timeout_id = 0;
 
   screen = gtk_widget_get_screen (GTK_WIDGET (window));
-  g_signal_connect (G_OBJECT (screen), "composited-changed",
-                    G_CALLBACK (panel_base_window_composited_changed), window);
+  g_signal_connect_object (G_OBJECT (screen), "composited-changed",
+                           G_CALLBACK (panel_base_window_composited_changed), window, 0);
 
   /* some wm require stick to show the window on all workspaces, on xfwm4
    * the type-hint already takes care of that */
@@ -255,17 +255,17 @@ panel_base_window_get_property (GObject    *object,
       break;
 
     case PROP_BACKGROUND_RGBA:
-      if (window->background_rgba != NULL) {
-        rgba = window->background_rgba;
-      }
+      if (window->background_rgba != NULL)
+        g_value_set_boxed (value, window->background_rgba);
       else
         {
           ctx = gtk_widget_get_style_context (GTK_WIDGET (window));
           gtk_style_context_get (ctx, GTK_STATE_FLAG_NORMAL,
                                  GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                                  &rgba, NULL);
+          g_value_set_boxed (value, rgba);
+          gdk_rgba_free (rgba);
         }
-      g_value_set_boxed (value, rgba);
       break;
 
     case PROP_BACKGROUND_IMAGE:
@@ -301,6 +301,7 @@ panel_base_window_set_property (GObject      *object,
   PanelBaseWindow        *window = PANEL_BASE_WINDOW (object);
   PanelBaseWindowPrivate *priv = window->priv;
   PanelBgStyle            bg_style;
+  GFile                  *file;
 
   switch (prop_id)
     {
@@ -367,9 +368,11 @@ panel_base_window_set_property (GObject      *object,
       break;
 
     case PROP_BACKGROUND_IMAGE:
-      /* store new filename */
+      /* store new uri, built and escaped through a GFile */
       g_free (window->background_image);
-      window->background_image = g_value_dup_string (value);
+      file = g_file_new_for_commandline_arg (g_value_get_string (value));
+      window->background_image = g_file_get_uri (file);
+      g_object_unref (file);
 
       if (window->background_style == PANEL_BG_STYLE_IMAGE)
         {
@@ -448,11 +451,9 @@ panel_base_window_screen_changed (GtkWidget *widget, GdkScreen *previous_screen)
   /* set the rgba colormap if supported by the screen */
   screen = gtk_window_get_screen (GTK_WINDOW (window));
   visual = gdk_screen_get_rgba_visual (screen);
-  if (visual != NULL)
-    {
-      gtk_widget_set_visual (widget, visual);
-      window->is_composited = gdk_screen_is_composited (screen);
-    }
+  window->is_composited = gdk_screen_is_composited (screen);
+  if (visual != NULL && window->is_composited)
+    gtk_widget_set_visual (widget, visual);
 
    panel_debug (PANEL_DEBUG_BASE_WINDOW,
                "%p: rgba visual=%p, compositing=%s", window,
@@ -604,48 +605,64 @@ panel_base_window_active_timeout_destroyed (gpointer user_data)
 
 
 static void
-panel_base_window_set_background_color_css (PanelBaseWindow *window) {
-  gchar                  *css_string;
+panel_base_window_set_background_color_css (PanelBaseWindow *window)
+{
+  gchar *css_string, *str;
+
   panel_return_if_fail (window->background_rgba != NULL);
-  css_string = g_strdup_printf (".xfce4-panel.background { background-color: %s; border-color: transparent; } %s",
-                                gdk_rgba_to_string (window->background_rgba),
-                                PANEL_BASE_CSS);
+
+  str = gdk_rgba_to_string (window->background_rgba);
+  css_string = g_strdup_printf (".xfce4-panel.background { background: %s; "
+                                                          "border-color: transparent; } %s",
+                                str, PANEL_BASE_CSS);
+
   panel_base_window_set_background_css (window, css_string);
+
+  g_free (css_string);
+  g_free (str);
 }
 
 
 
 static void
-panel_base_window_set_background_image_css (PanelBaseWindow *window) {
-  gchar                  *css_string;
+panel_base_window_set_background_image_css (PanelBaseWindow *window)
+{
+  gchar *css_string;
+
   panel_return_if_fail (window->background_image != NULL);
-  css_string = g_strdup_printf (".xfce4-panel.background { background-color: transparent;"
-                                                          "background-image: url('%s');"
+
+  css_string = g_strdup_printf (".xfce4-panel.background { background: url(\"%s\");"
                                                           "border-color: transparent; } %s",
                                 window->background_image, PANEL_BASE_CSS);
+
   panel_base_window_set_background_css (window, css_string);
+
+  g_free (css_string);
 }
 
 
 
 static void
-panel_base_window_set_background_css (PanelBaseWindow *window, gchar *css_string) {
-  GtkStyleContext        *context;
+panel_base_window_set_background_css (PanelBaseWindow *window,
+                                      const gchar *css_string)
+{
+  GtkStyleContext *context;
 
   context = gtk_widget_get_style_context (GTK_WIDGET (window));
+
   /* Reset the css style provider */
   gtk_style_context_remove_provider (context, GTK_STYLE_PROVIDER (window->priv->css_provider));
   gtk_css_provider_load_from_data (window->priv->css_provider, css_string, -1, NULL);
   gtk_style_context_add_provider (context,
                                   GTK_STYLE_PROVIDER (window->priv->css_provider),
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-  g_free (css_string);
 }
 
 
 
 void
-panel_base_window_reset_background_css (PanelBaseWindow *window) {
+panel_base_window_reset_background_css (PanelBaseWindow *window)
+{
   PanelBaseWindowPrivate  *priv = window->priv;
   GtkStyleContext         *context;
   GdkRGBA                 *background_rgba;
@@ -662,7 +679,7 @@ panel_base_window_reset_background_css (PanelBaseWindow *window) {
                          &background_rgba, NULL);
 
   /* Set correct border style depending on panel position and length */
-  if (window->background_style == PANEL_BG_STYLE_NONE)
+  if (priv->borders != PANEL_BORDER_NONE)
     {
       border_side = g_strdup_printf ("%s %s %s %s",
                                      PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_TOP) ? "solid" : "none",
@@ -849,6 +866,8 @@ panel_base_window_get_borders (PanelBaseWindow *window)
   if (priv->active_timeout_id != 0)
     return PANEL_BORDER_TOP | PANEL_BORDER_BOTTOM
            | PANEL_BORDER_LEFT | PANEL_BORDER_RIGHT;
+  else if (window->background_style != PANEL_BG_STYLE_NONE)
+    return PANEL_BORDER_NONE;
 
   return priv->borders;
 }

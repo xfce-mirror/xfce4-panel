@@ -186,6 +186,19 @@ sn_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
 
 
 static void
+sn_plugin_unblock_autohide (gpointer  data,
+                            GObject  *where_the_object_was)
+{
+  XfcePanelPlugin *panel_plugin = data;
+
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (panel_plugin));
+
+  xfce_panel_plugin_block_autohide (panel_plugin, FALSE);
+}
+
+
+
+static void
 sn_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   SnPlugin *plugin = XFCE_SN_PLUGIN (panel_plugin);
@@ -195,7 +208,9 @@ sn_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   if (dialog != NULL)
     {
       xfce_panel_plugin_block_menu (panel_plugin);
+      xfce_panel_plugin_block_autohide (panel_plugin, TRUE);
       g_object_weak_ref (G_OBJECT (dialog), _panel_utils_weak_notify, panel_plugin);
+      g_object_weak_ref (G_OBJECT (dialog), sn_plugin_unblock_autohide, panel_plugin);
     }
 }
 
@@ -206,9 +221,7 @@ sn_plugin_item_added (SnPlugin *plugin,
 {
   GtkWidget *button;
 
-  button = sn_button_new (item,
-                          xfce_panel_plugin_position_menu, plugin,
-                          plugin->config);
+  button = sn_button_new (item, plugin, plugin->config);
 
   sn_config_add_known_item (plugin->config, sn_item_get_name (item));
 

@@ -94,9 +94,7 @@ static void               launcher_plugin_menu_popup_destroyed          (gpointe
 static gboolean           launcher_plugin_menu_popup                    (gpointer              user_data);
 static void               launcher_plugin_menu_destroy                  (LauncherPlugin       *plugin);
 static void               launcher_plugin_button_update                 (LauncherPlugin       *plugin);
-#if GARCON_CHECK_VERSION(0,7,0)
 static void               launcher_plugin_button_update_action_menu     (LauncherPlugin       *plugin);
-#endif
 static void               launcher_plugin_button_state_changed          (GtkWidget            *button_a,
                                                                          GtkStateType         state,
                                                                          GtkWidget            *button_b);
@@ -189,9 +187,7 @@ struct _LauncherPlugin
   GtkWidget         *arrow;
   GtkWidget         *child;
   GtkWidget         *menu;
-#if GARCON_CHECK_VERSION(0,7,0)
   GtkWidget         *action_menu;
-#endif
 
   GSList            *items;
 
@@ -337,9 +333,7 @@ launcher_plugin_init (LauncherPlugin *plugin)
   plugin->show_label = FALSE;
   plugin->arrow_position = LAUNCHER_ARROW_DEFAULT;
   plugin->menu = NULL;
-#if GARCON_CHECK_VERSION(0,7,0)
   plugin->action_menu = NULL;
-#endif
   plugin->items = NULL;
   plugin->child = NULL;
   plugin->tooltip_cache = NULL;
@@ -507,9 +501,7 @@ launcher_plugin_item_changed (GarconMenuItem *item,
       if (plugin->items == li)
         {
           launcher_plugin_button_update (plugin);
-#if GARCON_CHECK_VERSION(0,7,0)
           launcher_plugin_button_update_action_menu (plugin);
-#endif
         }
       else
         launcher_plugin_menu_destroy (plugin);
@@ -533,8 +525,6 @@ launcher_plugin_item_duplicate (GFile   *src_file,
   gboolean  result = FALSE;
   gchar    *uri;
 
-  panel_return_val_if_fail (G_IS_FILE (src_file), FALSE);
-  panel_return_val_if_fail (G_IS_FILE (dst_file), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
   if (!g_file_load_contents (src_file, NULL, &contents, &length, NULL, error))
@@ -551,10 +541,8 @@ launcher_plugin_item_duplicate (GFile   *src_file,
   g_key_file_set_string (key_file, G_KEY_FILE_DESKTOP_GROUP, "X-XFCE-Source", uri);
   g_free (uri);
 
-  contents = g_key_file_to_data (key_file, &length, error);
-  if (contents == NULL)
-    goto err1;
-
+  g_free (contents);
+  contents = g_key_file_to_data (key_file, &length, NULL);
   result = g_file_replace_contents (dst_file, contents, length, NULL, FALSE,
                                     G_FILE_CREATE_REPLACE_DESTINATION,
                                     NULL, NULL, error);
@@ -564,28 +552,6 @@ err1:
   g_key_file_free (key_file);
 
   return result;
-}
-
-
-static gboolean
-_exo_str_looks_like_an_uri (const gchar *str)
-{
-  const gchar *s = str;
-
-  if (G_UNLIKELY (str == NULL))
-    return FALSE;
-
-  /* <scheme> starts with an alpha character */
-  if (g_ascii_isalpha (*s))
-    {
-      /* <scheme> continues with (alpha | digit | "+" | "-" | ".")* */
-      for (++s; g_ascii_isalnum (*s) || *s == '+' || *s == '-' || *s == '.'; ++s);
-
-      /* <scheme> must be followed by ":" */
-      return (*s == ':' && *(s+1) == '/');
-    }
-
-  return FALSE;
 }
 
 
@@ -605,7 +571,7 @@ launcher_plugin_item_load (LauncherPlugin *plugin,
   panel_return_val_if_fail (str != NULL, NULL);
   panel_return_val_if_fail (G_IS_FILE (plugin->config_directory), NULL);
 
-  if (G_UNLIKELY (g_path_is_absolute (str) || _exo_str_looks_like_an_uri (str)))
+  if (G_UNLIKELY (g_path_is_absolute (str) || g_uri_is_valid (str, G_URI_FLAGS_NONE, NULL)))
     {
       src_file = g_file_new_for_commandline_arg (str);
       if (g_file_has_prefix (src_file, plugin->config_directory))
@@ -867,9 +833,7 @@ launcher_plugin_set_property (GObject      *object,
 
       /* update the button */
       launcher_plugin_button_update (plugin);
-#if GARCON_CHECK_VERSION(0,7,0)
       launcher_plugin_button_update_action_menu (plugin);
-#endif
 
       /* update the widget packing */
       goto update_arrow;
@@ -1011,9 +975,7 @@ launcher_plugin_file_changed (GFileMonitor      *monitor,
     {
       launcher_plugin_button_update (plugin);
       launcher_plugin_menu_destroy (plugin);
-#if GARCON_CHECK_VERSION(0,7,0)
       launcher_plugin_button_update_action_menu (plugin);
-#endif
 
       /* save the new config */
       launcher_plugin_save_delayed (plugin);
@@ -1733,12 +1695,8 @@ launcher_plugin_menu_popup (gpointer user_data)
     gtk_widget_set_state_flags (GTK_WIDGET (plugin->button), GTK_STATE_FLAG_CHECKED, TRUE);
 
   /* popup the menu */
-  gtk_menu_popup_at_widget (GTK_MENU (plugin->menu),
-                            plugin->button,
-                            xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
-                            ? GDK_GRAVITY_NORTH_EAST : GDK_GRAVITY_SOUTH_WEST,
-                            GDK_GRAVITY_NORTH_WEST,
-                            NULL);
+  xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (plugin->menu),
+                                plugin->button, NULL);
 
   /* fallback to manual positioning, this is used with
    * drag motion over the arrow button */
@@ -1872,7 +1830,6 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
 
 
 
-#if GARCON_CHECK_VERSION(0,7,0)
 static void
 launcher_plugin_add_desktop_actions (GtkWidget *widget, gpointer user_data)
 {
@@ -1930,7 +1887,6 @@ launcher_plugin_button_update_action_menu (LauncherPlugin *plugin)
         }
     }
 }
-#endif
 
 
 
@@ -2354,6 +2310,7 @@ launcher_plugin_arrow_drag_leave_timeout (gpointer user_data)
   gint            pointer_x, pointer_y;
   GtkWidget      *menu = plugin->menu;
   gint            menu_x, menu_y, menu_w, menu_h;
+  GdkDevice      *device;
 
   panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
   panel_return_val_if_fail (menu == NULL || gtk_widget_get_has_window (menu), FALSE);
@@ -2362,9 +2319,12 @@ launcher_plugin_arrow_drag_leave_timeout (gpointer user_data)
   if (G_UNLIKELY (plugin->menu == NULL))
     return FALSE;
 
+  device = gdk_seat_get_pointer (gdk_display_get_default_seat (gtk_widget_get_display (menu)));
+  if (device == NULL)
+    return FALSE;
+
   /* get the pointer position */
-  gdk_device_get_position (gdk_seat_get_pointer (gdk_display_get_default_seat (gtk_widget_get_display (menu))),
-                           NULL, &pointer_x, &pointer_y);
+  gdk_device_get_position (device, NULL, &pointer_x, &pointer_y);
 
   /* get the menu position */
   gdk_window_get_root_origin (gtk_widget_get_window (menu), &menu_x, &menu_y);
@@ -2664,7 +2624,7 @@ launcher_plugin_uri_list_extract (GtkSelectionData *data)
 
           if (g_path_is_absolute (array[i]))
             uri = g_filename_to_uri (array[i], NULL, NULL);
-          else if (_exo_str_looks_like_an_uri (array[i]))
+          else if (g_uri_is_valid (array[i], G_URI_FLAGS_NONE, NULL))
             uri = g_strdup (array[i]);
 
           /* append the uri if we extracted one */
@@ -2712,7 +2672,7 @@ launcher_plugin_unique_filename (LauncherPlugin *plugin)
 
   panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), NULL);
 
-  filename = g_strdup_printf (RELATIVE_CONFIG_PATH G_DIR_SEPARATOR_S "%ld%d.desktop",
+  filename = g_strdup_printf (RELATIVE_CONFIG_PATH G_DIR_SEPARATOR_S "%" G_GINT64_FORMAT "%d.desktop",
                               xfce_panel_plugin_get_name (XFCE_PANEL_PLUGIN (plugin)),
                               xfce_panel_plugin_get_unique_id (XFCE_PANEL_PLUGIN (plugin)),
                               g_get_real_time () / G_USEC_PER_SEC,

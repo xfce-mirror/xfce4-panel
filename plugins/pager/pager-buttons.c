@@ -73,6 +73,7 @@ struct _PagerButtons
   guint           rebuild_id;
 
   WnckScreen     *wnck_screen;
+  gint            token;
 
   gint            rows;
   gboolean        numbering;
@@ -149,6 +150,7 @@ pager_buttons_init (PagerButtons *pager)
 {
   pager->rows = 1;
   pager->wnck_screen = NULL;
+  pager->token = 0;
   pager->orientation = GTK_ORIENTATION_HORIZONTAL;
   pager->numbering = FALSE;
   pager->buttons = NULL;
@@ -249,6 +251,7 @@ pager_buttons_finalize (GObject *object)
 
   if (G_LIKELY (pager->wnck_screen != NULL))
     {
+      wnck_screen_release_workspace_layout (pager->wnck_screen, pager->token);
       g_signal_handlers_disconnect_by_func (G_OBJECT (pager->wnck_screen),
           G_CALLBACK (pager_buttons_screen_workspace_changed), pager);
       g_signal_handlers_disconnect_by_func (G_OBJECT (pager->wnck_screen),
@@ -368,6 +371,11 @@ pager_buttons_rebuild_idle (gpointer user_data)
         cols++;
     }
 
+  /* set workspace layout so changing workspace and moving windows between workspaces
+   * via keyboard shortcuts or dnd work correctly in all directions */
+  pager->token = wnck_screen_try_set_workspace_layout (pager->wnck_screen, pager->token, rows, 0);
+  if (pager->token == 0)
+    g_warning ("Failed to set workspace layout: some moves between workspaces may not work.");
 
   panel_plugin = gtk_widget_get_ancestor (GTK_WIDGET (pager), XFCE_TYPE_PANEL_PLUGIN);
 

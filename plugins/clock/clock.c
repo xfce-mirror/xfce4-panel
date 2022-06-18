@@ -1203,8 +1203,8 @@ clock_plugin_reposition_calendar (ClockPlugin *plugin)
 
 
 static void
-clock_plugin_calendar_show_event (GtkWidget   *calendar_window,
-                                  ClockPlugin *plugin)
+clock_plugin_calendar_realized (GtkWidget   *calendar_window,
+                                ClockPlugin *plugin)
 {
   GDateTime *time;
 
@@ -1368,8 +1368,8 @@ clock_plugin_popup_calendar (ClockPlugin *plugin)
                                         GTK_CALENDAR_SHOW_HEADING
                                         | GTK_CALENDAR_SHOW_DAY_NAMES
                                         | GTK_CALENDAR_SHOW_WEEK_NUMBERS);
-      g_signal_connect (G_OBJECT (plugin->calendar_window), "show",
-                        G_CALLBACK (clock_plugin_calendar_show_event), plugin);
+      g_signal_connect (G_OBJECT (plugin->calendar_window), "realize",
+                        G_CALLBACK (clock_plugin_calendar_realized), plugin);
       g_signal_connect (G_OBJECT (plugin->calendar_window), "button-press-event",
                         G_CALLBACK (clock_plugin_calendar_button_press_event), plugin);
       g_signal_connect (G_OBJECT (plugin->calendar_window), "key-press-event",

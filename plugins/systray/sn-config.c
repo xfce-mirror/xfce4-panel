@@ -614,7 +614,6 @@ sn_config_get_dimensions (SnConfig *config,
   square_icons = sn_config_get_square_icons(config);
   if (square_icons)
   {
-    single_row = TRUE;
     nrows = single_row ? 1 : MAX(1, config_nrows);
     hx_size = hy_size = panel_size / nrows;
   }

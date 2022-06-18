@@ -726,7 +726,7 @@ static void
 panel_preferences_dialog_bg_image_file_set (GtkFileChooserButton   *button,
                                             PanelPreferencesDialog *dialog)
 {
-  gchar *filename;
+  gchar *uri;
 
   panel_return_if_fail (GTK_IS_FILE_CHOOSER_BUTTON (button));
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
@@ -735,9 +735,9 @@ panel_preferences_dialog_bg_image_file_set (GtkFileChooserButton   *button,
   g_signal_handler_block (G_OBJECT (dialog->active),
       dialog->bg_image_notify_handler_id);
 
-  filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (button));
-  g_object_set (G_OBJECT (dialog->active), "background-image", filename, NULL);
-  g_free (filename);
+  uri = gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (button));
+  g_object_set (G_OBJECT (dialog->active), "background-image", uri, NULL);
+  g_free (uri);
 
   g_signal_handler_unblock (G_OBJECT (dialog->active),
       dialog->bg_image_notify_handler_id);
@@ -748,7 +748,7 @@ panel_preferences_dialog_bg_image_file_set (GtkFileChooserButton   *button,
 static void
 panel_preferences_dialog_bg_image_notified (PanelPreferencesDialog *dialog)
 {
-  gchar   *filename;
+  gchar   *uri;
   GObject *button;
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
@@ -760,9 +760,9 @@ panel_preferences_dialog_bg_image_notified (PanelPreferencesDialog *dialog)
   g_signal_handlers_block_by_func (G_OBJECT (button),
       G_CALLBACK (panel_preferences_dialog_bg_image_file_set), dialog);
 
-  g_object_get (G_OBJECT (dialog->active), "background-image", &filename, NULL);
-  gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (button), filename != NULL ? filename : "");
-  g_free (filename);
+  g_object_get (G_OBJECT (dialog->active), "background-image", &uri, NULL);
+  gtk_file_chooser_set_uri (GTK_FILE_CHOOSER (button), uri != NULL ? uri : "");
+  g_free (uri);
 
   g_signal_handlers_unblock_by_func (G_OBJECT (button),
       G_CALLBACK (panel_preferences_dialog_bg_image_file_set), dialog);
@@ -930,9 +930,6 @@ panel_preferences_dialog_panel_add (GtkWidget              *widget,
   /* create new window */
   window = panel_application_new_window (dialog->application,
       gtk_widget_get_screen (widget), -1, TRUE);
-
-  /* block autohide */
-  panel_window_freeze_autohide (window);
 
   /* show window */
   gtk_widget_show (GTK_WIDGET (window));
@@ -1471,14 +1468,14 @@ panel_preferences_dialog_item_selection_changed (GtkTreeSelection       *selecti
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
   provider = panel_preferences_dialog_item_get_selected (dialog, NULL);
-
-  /* when removing an item from the panel, this handler is called when the item is
-   * still selected but has already been unparented, so we also have to check its parent
-   * (see panel_itembar_unref()) */
-  if (G_LIKELY (provider != NULL && gtk_widget_get_parent (GTK_WIDGET (provider)) != NULL))
+  if (G_LIKELY (provider != NULL))
     {
+      /* leave if the selection change is irrelevant */
+      itembar = gtk_widget_get_parent (GTK_WIDGET (provider));
+      if (itembar != gtk_bin_get_child (GTK_BIN (dialog->active)))
+        return;
+
       /* get the current position and the items on the bar */
-      itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
       position = panel_itembar_get_child_index (PANEL_ITEMBAR (itembar), GTK_WIDGET (provider));
       items = panel_itembar_get_n_children (PANEL_ITEMBAR (itembar)) - 1;
 

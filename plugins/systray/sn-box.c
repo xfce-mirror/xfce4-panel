@@ -375,7 +375,6 @@ sn_box_measure_and_allocate (GtkWidget *widget,
   icon_size = sn_config_get_icon_size (box->config);
   single_row = sn_config_get_single_row (box->config);
   square_icons = sn_config_get_square_icons (box->config);
-  icon_size += 2; /* additional padding */
   if (square_icons)
     {
       nrows = single_row ? 1 : MAX (1, config_nrows);
@@ -390,7 +389,6 @@ sn_box_measure_and_allocate (GtkWidget *widget,
 
   total_length = 0;
   column_length = 0;
-  item_length = 0;
   row = 0;
 
   known_items = sn_config_get_known_items (box->config);

@@ -798,6 +798,12 @@ systray_manager_set_visual (SystrayManager *manager)
 
   visual = gdk_screen_get_rgba_visual (screen);
   panel_debug (PANEL_DEBUG_SYSTRAY, "rgba visual is %p", visual);
+
+  /*
+   * We do not require compositing to be enabled here, unlike other occurrences
+   * of this test in the code, as this minimizes icon rendering problems.
+   * See https://gitlab.xfce.org/xfce/xfce4-panel/-/issues/251#note_49605
+   */
   if (visual != NULL)
     {
       /* use the rgba visual */

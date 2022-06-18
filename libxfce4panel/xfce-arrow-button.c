@@ -99,6 +99,9 @@ struct _XfceArrowButtonPrivate
   /* counter to make the blinking stop when
    * MAX_BLINKING_COUNT is reached */
   guint          blinking_counter;
+
+  /* button style overridden when blinking */
+  GtkReliefStyle style;
 };
 
 
@@ -176,6 +179,7 @@ xfce_arrow_button_init (XfceArrowButton *button)
   button->priv->arrow_type = GTK_ARROW_UP;
   button->priv->blinking_timeout_id = 0;
   button->priv->blinking_counter = 0;
+  button->priv->style = GTK_RELIEF_NORMAL;
 
   /* set some widget properties */
   gtk_widget_set_has_window (GTK_WIDGET (button), FALSE);
@@ -473,18 +477,13 @@ static gboolean
 xfce_arrow_button_blinking_timeout (gpointer user_data)
 {
   XfceArrowButton *button = XFCE_ARROW_BUTTON (user_data);
+  GtkStyleContext *context;
 
-  GtkStateFlags    flags = gtk_widget_get_state_flags (GTK_WIDGET (button));
-
-  if ((flags & GTK_STATE_FLAG_CHECKED) == GTK_STATE_FLAG_CHECKED
-    || button->priv->blinking_timeout_id == 0)
-    {
-      gtk_widget_unset_state_flags (GTK_WIDGET (button), GTK_STATE_FLAG_CHECKED);
-    }
+  context = gtk_widget_get_style_context (GTK_WIDGET (button));
+  if (gtk_style_context_has_class (context, GTK_STYLE_CLASS_SUGGESTED_ACTION))
+    gtk_style_context_remove_class (context, GTK_STYLE_CLASS_SUGGESTED_ACTION);
   else
-    {
-      gtk_widget_set_state_flags (GTK_WIDGET (button), GTK_STATE_FLAG_CHECKED, FALSE);
-    }
+    gtk_style_context_add_class (context, GTK_STYLE_CLASS_SUGGESTED_ACTION);
 
   return (button->priv->blinking_counter++ < MAX_BLINKING_COUNT);
 }
@@ -495,9 +494,14 @@ static void
 xfce_arrow_button_blinking_timeout_destroyed (gpointer user_data)
 {
   XfceArrowButton *button = XFCE_ARROW_BUTTON (user_data);
+  GtkWidget       *plugin;
 
   button->priv->blinking_timeout_id = 0;
   button->priv->blinking_counter = 0;
+
+  /* release our lock */
+  plugin = gtk_widget_get_ancestor (GTK_WIDGET (button), XFCE_TYPE_PANEL_PLUGIN);
+  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), FALSE);
 }
 
 
@@ -610,6 +614,16 @@ xfce_arrow_button_set_blinking (XfceArrowButton *button,
     {
       if (button->priv->blinking_timeout_id == 0)
         {
+          GtkWidget *plugin;
+
+          /* raise the panel if needed, or keep it raised */
+          plugin = gtk_widget_get_ancestor (GTK_WIDGET (button), XFCE_TYPE_PANEL_PLUGIN);
+          xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), TRUE);
+
+          /* override button style so blinking is visible */
+          button->priv->style = gtk_button_get_relief (GTK_BUTTON (button));
+          gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NORMAL);
+
           /* start blinking timeout */
           button->priv->blinking_timeout_id =
               gdk_threads_add_timeout_full (G_PRIORITY_DEFAULT_IDLE, 500,
@@ -618,10 +632,21 @@ xfce_arrow_button_set_blinking (XfceArrowButton *button,
           xfce_arrow_button_blinking_timeout (button);
         }
     }
-  else if (button->priv->blinking_timeout_id != 0)
+  else
     {
+      GtkStyleContext *context;
+
       /* stop the blinking timeout */
-      g_source_remove (button->priv->blinking_timeout_id);
+      if (button->priv->blinking_timeout_id != 0)
+        g_source_remove (button->priv->blinking_timeout_id);
+
+      /* remove css class */
+      context = gtk_widget_get_style_context (GTK_WIDGET (button));
+      if (gtk_style_context_has_class (context, GTK_STYLE_CLASS_SUGGESTED_ACTION))
+        gtk_style_context_remove_class (context, GTK_STYLE_CLASS_SUGGESTED_ACTION);
+
+      /* restore button style */
+      gtk_button_set_relief (GTK_BUTTON (button), button->priv->style);
     }
 }
 

@@ -3,6 +3,7 @@ Makefile
 Makefile.in
 aclocal.m4
 autom4te.cache
+ChangeLog
 compile
 config.guess
 config.h
@@ -32,7 +33,6 @@ gtk-doc.make
 *-ui.h
 *-infos.h
 *.desktop
-*.desktop.in
 libxfce4panel*.pc
 *.o
 *.lo
@@ -47,7 +47,20 @@ po/stamp-it
 po/Makefile.in.in
 po/.intltool-merge-cache*
 po/*.gmo
-docs/references/version.xml
+docs/reference/html
+docs/reference/xml
+docs/reference/*.stamp
+docs/reference/libxfce4panel-decl*.txt
+docs/reference/libxfce4panel-undeclared.txt
+docs/reference/libxfce4panel-undocumented.txt
+docs/reference/libxfce4panel-unused.txt
+docs/reference/libxfce4panel.actions
+docs/reference/libxfce4panel.args
+docs/reference/libxfce4panel.hierarchy
+docs/reference/libxfce4panel.interfaces
+docs/reference/libxfce4panel.prerequisites
+docs/reference/libxfce4panel.signals
+docs/reference/version.xml
 migrate/default.xml
 libxfce4panel/libxfce4panel-alias.h
 libxfce4panel/libxfce4panel-aliasdef.c
@@ -64,6 +77,7 @@ panel/panel-gdbus-exported-service.c
 panel/panel-gdbus-exported-service.h
 panel/panel-plugin-external-wrapper-exported.c
 panel/panel-plugin-external-wrapper-exported.h
+plugins/*/*.desktop.in
 plugins/applicationsmenu/xfce4-popup-applicationsmenu
 plugins/directorymenu/xfce4-popup-directorymenu
 plugins/windowmenu/xfce4-popup-windowmenu

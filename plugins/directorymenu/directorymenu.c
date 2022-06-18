@@ -37,6 +37,7 @@
 #include "directorymenu-dialog_ui.h"
 
 #define DEFAULT_ICON_NAME "folder"
+#define DIALOG_ICON_SIZE 48
 
 #define DIALOG_RESPONSE_CREATE 0
 #define DIALOG_RESPONSE_OPEN 1
@@ -63,10 +64,6 @@ struct _DirectoryMenuPlugin
   guint            hidden_files : 1;
 
   GSList          *patterns;
-
-  /* temp item we store here when the
-   * properties dialog is opened */
-  GtkWidget       *dialog_icon;
 };
 
 enum
@@ -203,7 +200,8 @@ directory_menu_plugin_init (DirectoryMenuPlugin *plugin)
   g_signal_connect (G_OBJECT (plugin->button), "toggled",
       G_CALLBACK (directory_menu_plugin_menu), plugin);
 
-  plugin->icon = gtk_image_new_from_icon_name (DEFAULT_ICON_NAME, GTK_ICON_SIZE_BUTTON);
+  plugin->icon_name = g_strdup (DEFAULT_ICON_NAME);
+  plugin->icon = gtk_image_new_from_icon_name (plugin->icon_name, GTK_ICON_SIZE_BUTTON);
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
   gtk_widget_show (plugin->icon);
 
@@ -281,7 +279,7 @@ directory_menu_plugin_set_property (GObject      *object,
   gchar                *display_name;
   gchar               **array;
   guint                 i;
-  gint                  icon_size;
+  gint                  size;
   const gchar          *path;
 
   switch (prop_id)
@@ -305,11 +303,11 @@ directory_menu_plugin_set_property (GObject      *object,
 
     case PROP_ICON_NAME:
       g_free (plugin->icon_name);
-      plugin->icon_name = g_value_dup_string (value);
-      icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (object));
-      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->icon),
-          panel_str_is_empty (plugin->icon_name) ? DEFAULT_ICON_NAME : plugin->icon_name,
-          icon_size);
+      plugin->icon_name =
+        panel_str_is_empty (g_value_get_string (value)) ? g_strdup (DEFAULT_ICON_NAME)
+                                                        : g_value_dup_string (value);
+      size = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
+      directory_menu_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin), size);
       break;
 
     case PROP_OPEN_FOLDER:
@@ -433,7 +431,7 @@ directory_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   size /= xfce_panel_plugin_get_nrows (panel_plugin);
   gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, size);
   icon_size = xfce_panel_plugin_get_icon_size (panel_plugin);
-  gtk_image_set_pixel_size (GTK_IMAGE (plugin->icon), icon_size);
+  xfce_panel_set_image_from_source (GTK_IMAGE (plugin->icon), plugin->icon_name, NULL, icon_size);
 
   return TRUE;
 }
@@ -461,12 +459,10 @@ static void
 directory_menu_plugin_configure_plugin_icon_chooser (GtkWidget           *button,
                                                      DirectoryMenuPlugin *plugin)
 {
-#ifdef EXO_CHECK_VERSION
-  GtkWidget *chooser;
+  GtkWidget *chooser, *image;
   gchar     *icon;
 
   panel_return_if_fail (XFCE_IS_DIRECTORY_MENU_PLUGIN (plugin));
-  panel_return_if_fail (GTK_IS_IMAGE (plugin->dialog_icon));
 
   chooser = exo_icon_chooser_dialog_new (_("Select An Icon"),
                                          GTK_WINDOW (gtk_widget_get_toplevel (button)),
@@ -475,19 +471,23 @@ directory_menu_plugin_configure_plugin_icon_chooser (GtkWidget           *button
                                          NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_ACCEPT);
 
-  if (!panel_str_is_empty (plugin->icon_name))
   exo_icon_chooser_dialog_set_icon (EXO_ICON_CHOOSER_DIALOG (chooser), plugin->icon_name);
 
   if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_ACCEPT)
     {
       icon = exo_icon_chooser_dialog_get_icon (EXO_ICON_CHOOSER_DIALOG (chooser));
       g_object_set (G_OBJECT (plugin), "icon-name", icon, NULL);
-      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->dialog_icon), icon, GTK_ICON_SIZE_DIALOG);
       g_free (icon);
+
+      image = gtk_image_new ();
+      xfce_panel_set_image_from_source (GTK_IMAGE (image), plugin->icon_name,
+                                        NULL, DIALOG_ICON_SIZE);
+      gtk_container_remove (GTK_CONTAINER (button), gtk_bin_get_child (GTK_BIN (button)));
+      gtk_container_add (GTK_CONTAINER (button), image);
+      gtk_widget_show (image);
     }
 
   gtk_widget_destroy (chooser);
-#endif
 }
 
 
@@ -497,11 +497,8 @@ directory_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   DirectoryMenuPlugin *plugin = XFCE_DIRECTORY_MENU_PLUGIN (panel_plugin);
   GtkBuilder          *builder;
+  GtkWidget           *image;
   GObject             *dialog, *object;
-  const gchar         *icon_name = plugin->icon_name;
-
-  if (panel_str_is_empty (icon_name))
-    icon_name = DEFAULT_ICON_NAME;
 
   /* setup the dialog */
   PANEL_UTILS_LINK_4UI
@@ -523,10 +520,11 @@ directory_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_signal_connect (G_OBJECT (object), "clicked",
      G_CALLBACK (directory_menu_plugin_configure_plugin_icon_chooser), plugin);
 
-  plugin->dialog_icon = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_DIALOG);
-  gtk_container_add (GTK_CONTAINER (object), plugin->dialog_icon);
-  g_object_add_weak_pointer (G_OBJECT (plugin->dialog_icon), (gpointer) &plugin->dialog_icon);
-  gtk_widget_show (plugin->dialog_icon);
+  image = gtk_image_new ();
+  xfce_panel_set_image_from_source (GTK_IMAGE (image), plugin->icon_name,
+                                    NULL, DIALOG_ICON_SIZE);
+  gtk_container_add (GTK_CONTAINER (object), image);
+  gtk_widget_show (image);
 
   object = gtk_builder_get_object (builder, "open-folder");
   panel_return_if_fail (GTK_IS_CHECK_BUTTON (object));
@@ -575,47 +573,49 @@ directory_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
                                     const GValue    *value)
 {
   DirectoryMenuPlugin *plugin = XFCE_DIRECTORY_MENU_PLUGIN (panel_plugin);
-  GtkWidget *window;
 
   panel_return_val_if_fail (value == NULL || G_IS_VALUE (value), FALSE);
 
-  window = gtk_widget_get_toplevel (GTK_WIDGET (plugin->button));
+  /* try next plugin or indicate that it failed */
+  if (strcmp (name, "popup") != 0
+      || ! gtk_widget_get_visible (GTK_WIDGET (panel_plugin)))
+    return FALSE;
 
-  if (strcmp (name, "popup") == 0
-      && gtk_widget_get_visible (GTK_WIDGET (panel_plugin))
-      && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button))
-      && panel_utils_grab_available (window))
+  /* a menu is already shown, don't popup another one */
+  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button))
+      || ! panel_utils_device_grab (plugin->button))
+    return TRUE;
+
+  /*
+   * The menu will take over the grab when it is shown, and in the rare cases that it is not,
+   * this is not a big deal. This way we are sure that other invocations of the command by
+   * keyboard shortcut will not interfere.
+   */
+  if (value != NULL
+      && G_VALUE_HOLDS_BOOLEAN (value)
+      && g_value_get_boolean (value))
     {
-      if (value != NULL
-          && G_VALUE_HOLDS_BOOLEAN (value)
-          && g_value_get_boolean (value))
-        {
-          /* popup the menu under the pointer */
-          directory_menu_plugin_menu (NULL, plugin);
-        }
-      else
-        {
-          /* show the menu */
-          gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button), TRUE);
-        }
-
-      /* don't popup another menu */
-      return TRUE;
+      /* popup menu at pointer */
+      directory_menu_plugin_menu (NULL, plugin);
+    }
+  else
+    {
+      /* popup menu at button */
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button), TRUE);
     }
 
-  return FALSE;
+  /* don't popup another menu */
+  return TRUE;
 }
 
 
 
 static void
-directory_menu_plugin_selection_done (GtkWidget           *menu,
-                                      DirectoryMenuPlugin *plugin)
+directory_menu_plugin_deactivate (GtkWidget           *menu,
+                                  DirectoryMenuPlugin *plugin)
 {
   panel_return_if_fail (plugin->button == NULL || GTK_IS_TOGGLE_BUTTON (plugin->button));
   panel_return_if_fail (GTK_IS_MENU (menu));
-
-  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), FALSE);
 
   if (plugin->button != NULL)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button), FALSE);
@@ -768,9 +768,8 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
                                  gboolean     path_as_arg)
 {
   GError       *error = NULL;
-  gchar        *working_dir;
   XfceRc       *rc, *helperrc;
-  const gchar  *value;
+  const gchar  *value, *working_dir;
   gchar        *filename;
   gchar       **binaries = NULL;
   guint         i;
@@ -803,7 +802,7 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
       xfce_rc_close (rc);
     }
 
-  working_dir = g_file_get_path (dir);
+  working_dir = g_file_peek_path (dir);
 
   /* if there are binaries, there is a helper that
    * supports startup notification, try to spawn one */
@@ -816,7 +815,7 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
             continue;
 
           argv[0] = filename;
-          argv[1] = path_as_arg ? working_dir : NULL;
+          argv[1] = path_as_arg ? (gchar *) working_dir : NULL;
           argv[2] = NULL;
 
           /* try to spawn the program, if this fails we try exo for
@@ -834,21 +833,17 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
     }
 
   if (!result
-#ifdef EXO_CHECK_VERSION
       && !exo_execute_preferred_application_on_screen (category,
                                                        path_as_arg ? working_dir : NULL,
                                                        working_dir,
                                                        NULL,
                                                        gtk_widget_get_screen (mi), &error)
-#endif
      )
     {
       xfce_dialog_show_error (NULL, error,
           _("Failed to execute the preferred application for category \"%s\""), category);
       g_error_free (error);
     }
-
-  g_free (working_dir);
 }
 
 
@@ -1061,7 +1056,6 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
   GFileType        file_type;
 #ifdef HAVE_GIO_UNIX
   GDesktopAppInfo *desktopinfo;
-  gchar           *path;
   const gchar     *description;
 #endif
 
@@ -1222,10 +1216,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
               && g_file_is_native (file)
               && g_str_has_suffix (display_name, ".desktop")))
             {
-              path = g_file_get_path (file);
-              desktopinfo = g_desktop_app_info_new_from_filename (path);
-              g_free (path);
-
+              desktopinfo = g_desktop_app_info_new_from_filename (g_file_peek_path (file));
               if (G_LIKELY (desktopinfo != NULL))
                 {
                   display_name = g_app_info_get_name (G_APP_INFO (desktopinfo));
@@ -1307,7 +1298,8 @@ static void
 directory_menu_plugin_menu (GtkWidget           *button,
                             DirectoryMenuPlugin *plugin)
 {
-  GtkWidget *menu;
+  GtkWidget      *menu;
+  GdkEventButton *event = NULL;
 
   panel_return_if_fail (XFCE_IS_DIRECTORY_MENU_PLUGIN (plugin));
   panel_return_if_fail (button == NULL || plugin->button == button);
@@ -1316,18 +1308,23 @@ directory_menu_plugin_menu (GtkWidget           *button,
       && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
     return;
 
+  /* Panel plugin remote events don't send actual GdkEvents, so construct a minimal one so that
+   * gtk_menu_popup_at_pointer/rect can extract a location correctly from a GdkWindow */
+  if (gtk_get_current_event () == NULL)
+    {
+      event = g_slice_new0 (GdkEventButton);
+      event->type = GDK_BUTTON_PRESS;
+      event->window = gdk_get_default_root_window ();
+    }
+
   menu = gtk_menu_new ();
   g_signal_connect (G_OBJECT (menu), "deactivate",
-      G_CALLBACK (directory_menu_plugin_selection_done), plugin);
+      G_CALLBACK (directory_menu_plugin_deactivate), plugin);
 
   g_object_set_qdata_full (G_OBJECT (menu), menu_file,
                            g_object_ref (plugin->base_directory),
                            g_object_unref);
   directory_menu_plugin_menu_load (menu, plugin);
-  gtk_menu_popup_at_widget (GTK_MENU (menu), button,
-                            xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
-                            ? GDK_GRAVITY_NORTH_EAST : GDK_GRAVITY_SOUTH_WEST,
-                            GDK_GRAVITY_NORTH_WEST,
-                            NULL);
-  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), TRUE);
+  xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (menu),
+                                button, (GdkEvent *) event);
 }

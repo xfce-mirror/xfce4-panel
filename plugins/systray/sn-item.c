@@ -428,12 +428,12 @@ sn_item_properties_callback (GObject      *source_object,
   GError *error = NULL;
 
   item->properties_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
-  g_signal_connect (item->item_proxy, "g-signal",
-                    G_CALLBACK (sn_item_signal_received), item);
   free_error_and_return_if_cancelled (error);
   finish_and_return_if_true (item->properties_proxy == NULL);
 
-  sn_item_invalidate (item);
+  g_signal_connect (item->item_proxy, "g-signal",
+                    G_CALLBACK (sn_item_signal_received), item);
+  sn_item_invalidate (item, FALSE);
 }
 
 
@@ -519,10 +519,24 @@ sn_item_start (SnItem *item)
 
 
 void
-sn_item_invalidate (SnItem *item)
+sn_item_invalidate (SnItem   *item,
+                    gboolean  force_update)
 {
   g_return_if_fail (XFCE_IS_SN_ITEM (item));
-  g_return_if_fail (item->properties_proxy != NULL);
+
+  /* leave if the properties proxy has not yet been created */
+  if (item->properties_proxy == NULL)
+    return;
+
+  if (force_update)
+    {
+      /* force menu update (see issue #567) */
+      if (item->menu_object_path != NULL)
+        {
+          g_free (item->menu_object_path);
+          item->menu_object_path = NULL;
+        }
+    }
 
   g_dbus_proxy_call (item->properties_proxy,
                      "GetAll",
@@ -561,7 +575,7 @@ sn_item_signal_received (GDBusProxy *proxy,
       !g_strcmp0 (signal_name, "NewOverlayIcon") ||
       !g_strcmp0 (signal_name, "NewToolTip"))
     {
-      sn_item_invalidate (item);
+      sn_item_invalidate (item, FALSE);
     }
   else if (!g_strcmp0 (signal_name, "NewStatus"))
     {
@@ -655,7 +669,9 @@ sn_item_extract_pixbuf (GVariant *variant)
                   if (array != NULL)
                     g_free (array);
 #if GLIB_CHECK_VERSION(2, 68, 0)
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
                   array = g_memdup2 (data, size);
+G_GNUC_END_IGNORE_DEPRECATIONS
 #else
                   array = g_memdup (data, size);
 #endif

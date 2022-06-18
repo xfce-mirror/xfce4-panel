@@ -58,6 +58,8 @@ static gboolean   actions_plugin_size_changed        (XfcePanelPlugin       *pan
 static void       actions_plugin_configure_plugin    (XfcePanelPlugin       *panel_plugin);
 static void       actions_plugin_mode_changed        (XfcePanelPlugin       *panel_plugin,
                                                       XfcePanelPluginMode    mode);
+static void       actions_plugin_nrows_changed       (XfcePanelPlugin       *panel_plugin,
+                                                      guint                  rows);
 static void       actions_plugin_pack                (ActionsPlugin         *plugin);
 static GPtrArray *actions_plugin_default_array       (void);
 static void       actions_plugin_menu                (GtkWidget             *button,
@@ -267,6 +269,7 @@ actions_plugin_class_init (ActionsPluginClass *klass)
   plugin_class->size_changed = actions_plugin_size_changed;
   plugin_class->configure_plugin = actions_plugin_configure_plugin;
   plugin_class->mode_changed = actions_plugin_mode_changed;
+  plugin_class->nrows_changed = actions_plugin_nrows_changed;
 
   g_object_class_install_property (gobject_class,
                                    PROP_ITEMS,
@@ -761,6 +764,15 @@ actions_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
 
 
 
+static void
+actions_plugin_nrows_changed (XfcePanelPlugin *panel_plugin,
+                              guint            rows)
+{
+  actions_plugin_pack (XFCE_ACTIONS_PLUGIN (panel_plugin));
+}
+
+
+
 static gboolean
 actions_plugin_action_confirmation_time (gpointer data)
 {
@@ -1220,6 +1232,9 @@ actions_plugin_pack_idle (gpointer data)
   ActionType           allowed_types;
   ActionType           type;
   XfcePanelPluginMode  mode;
+  guint                panel_rows;
+  guint                left;
+  guint                top;
 
   child = gtk_bin_get_child (GTK_BIN (plugin));
   if (child != NULL)
@@ -1235,12 +1250,27 @@ actions_plugin_pack_idle (gpointer data)
 
   if (plugin->type == APPEARANCE_TYPE_BUTTONS)
     {
-      if (xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin)) == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
-        orientation = GTK_ORIENTATION_VERTICAL;
-      else
-        orientation = GTK_ORIENTATION_HORIZONTAL;
+      panel_rows = left = top = 0;
 
-      box = gtk_box_new (orientation, 0);
+      switch (xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin)))
+        {
+        case XFCE_PANEL_PLUGIN_MODE_VERTICAL:
+          orientation = GTK_ORIENTATION_VERTICAL;
+          box = gtk_box_new (orientation, 0);
+          break;
+
+        case XFCE_PANEL_PLUGIN_MODE_DESKBAR:
+          panel_rows = xfce_panel_plugin_get_nrows (XFCE_PANEL_PLUGIN (plugin));
+          orientation = GTK_ORIENTATION_VERTICAL;
+          box = gtk_grid_new ();
+          break;
+
+        default:
+          orientation = GTK_ORIENTATION_HORIZONTAL;
+          box = gtk_box_new (orientation, 0);
+          break;
+        };
+
       gtk_container_add (GTK_CONTAINER (plugin), box);
       gtk_widget_show (box);
 
@@ -1254,7 +1284,29 @@ actions_plugin_pack_idle (gpointer data)
           widget = actions_plugin_action_button (plugin, name + 1, orientation, &type);
           if (widget != NULL)
             {
-              gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
+              if (!panel_rows)
+                {
+                  gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
+                }
+              else if (type == ACTION_TYPE_SEPARATOR)
+                {
+                  if (left > 0)
+                    top++;
+                  gtk_grid_attach (GTK_GRID (box), widget, 0, top, panel_rows, 1);
+                  left = 0;
+                  top++;
+                }
+              else
+                {
+                  gtk_grid_attach (GTK_GRID (box), widget, left, top, 1, 1);
+                  left++;
+                  if (left >= panel_rows)
+                    {
+                      left = 0;
+                      top++;
+                    }
+                }
+
               gtk_widget_set_sensitive (widget, PANEL_HAS_FLAG (allowed_types, type));
               gtk_widget_show (widget);
             }
@@ -1388,18 +1440,12 @@ actions_plugin_menu_deactivate (GtkWidget     *menu,
   GtkWidget *button;
 
   panel_return_if_fail (XFCE_IS_ACTIONS_PLUGIN (plugin));
-
-  button = gtk_bin_get_child (GTK_BIN (plugin));
-  panel_return_if_fail (button == NULL || GTK_IS_TOGGLE_BUTTON (button));
   panel_return_if_fail (GTK_IS_MENU (menu));
 
-  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), FALSE);
-
   /* button is NULL when we popup the menu under the cursor position */
+  button = gtk_bin_get_child (GTK_BIN (plugin));
   if (button != NULL)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), FALSE);
-
-  gtk_menu_popdown (GTK_MENU (menu));
 }
 
 
@@ -1422,12 +1468,10 @@ actions_plugin_menu (GtkWidget     *button,
   if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
     return;
 
-  xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), TRUE);
-
   if (plugin->menu == NULL)
     {
       plugin->menu = gtk_menu_new ();
-      g_signal_connect (G_OBJECT (plugin->menu), "selection-done",
+      g_signal_connect (G_OBJECT (plugin->menu), "deactivate",
           G_CALLBACK (actions_plugin_menu_deactivate), plugin);
       g_object_add_weak_pointer (G_OBJECT (plugin->menu), (gpointer) &plugin->menu);
 
@@ -1450,9 +1494,5 @@ actions_plugin_menu (GtkWidget     *button,
         }
     }
 
-  gtk_menu_popup_at_widget (GTK_MENU (plugin->menu), button,
-                            xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
-                            ? GDK_GRAVITY_NORTH_EAST : GDK_GRAVITY_SOUTH_WEST,
-                            GDK_GRAVITY_NORTH_WEST,
-                            NULL);
+  xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (plugin->menu), button, NULL);
 }

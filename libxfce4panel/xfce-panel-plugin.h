@@ -236,6 +236,11 @@ void                  xfce_panel_plugin_position_menu       (GtkMenu           *
                                                              gboolean          *push_in,
                                                              gpointer           panel_plugin);
 
+void                  xfce_panel_plugin_popup_menu          (XfcePanelPlugin   *plugin,
+                                                             GtkMenu           *menu,
+                                                             GtkWidget         *widget,
+                                                             const GdkEvent    *trigger_event);
+
 void                  xfce_panel_plugin_focus_widget        (XfcePanelPlugin   *plugin,
                                                              GtkWidget         *widget);
 

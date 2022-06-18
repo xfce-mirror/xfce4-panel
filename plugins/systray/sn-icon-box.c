@@ -216,25 +216,16 @@ sn_icon_box_apply_icon (GtkWidget    *image,
                         gint          icon_size,
                         gboolean      prefer_symbolic)
 {
-  GtkIconInfo *icon_info = NULL;
-  GdkPixbuf   *work_pixbuf = NULL;
-  gchar       *work_icon_name = NULL;
-  gchar       *symbolic_icon_name = NULL;
-  gint         symbolic_icon_size;
-  gboolean     use_pixbuf = TRUE;
-  gboolean     use_symbolic = FALSE;
-  gint         width, height;
-  gchar       *s1, *s2;
-  gint         max_size = icon_size;
+  GdkPixbuf *work_pixbuf = NULL;
+  gchar     *work_icon_name = NULL;
+  gint       width, height;
+  gchar     *s1, *s2;
 
   gtk_image_clear (GTK_IMAGE (image));
 
-  #define sn_preferred_name() (work_icon_name != NULL ? work_icon_name : icon_name)
-  #define sn_preferred_pixbuf() (work_pixbuf != NULL ? work_pixbuf : icon_pixbuf)
-
   if (icon_name != NULL)
     {
-      if (icon_name[0] =='/')
+      if (icon_name[0] == '/')
         {
           /* it's a path to file */
           if (g_file_test (icon_name, G_FILE_TEST_IS_REGULAR))
@@ -252,93 +243,34 @@ sn_icon_box_apply_icon (GtkWidget    *image,
                 work_icon_name = g_strdup (&s1[1]);
             }
         }
+      else
+        work_icon_name = g_strdup (icon_name);
 
       if (work_pixbuf == NULL && icon_theme_from_path != NULL)
-        {
-          /* load icon in its real size */
-          work_pixbuf = gtk_icon_theme_load_icon (icon_theme_from_path,
-                                                  sn_preferred_name (),
-                                                  -1, 0, NULL);
-
-          if (work_pixbuf == NULL ||
-              (gdk_pixbuf_get_width (work_pixbuf) <= 1 || gdk_pixbuf_get_height (work_pixbuf) <= 1))
-            {
-              if (work_pixbuf != NULL)
-                g_object_unref (work_pixbuf);
-
-              /* icon size was incorrect, try to pass the desired icon size */
-              work_pixbuf = gtk_icon_theme_load_icon (icon_theme_from_path,
-                                                      sn_preferred_name (),
-                                                      icon_size, 0, NULL);
-            }
-        }
+        work_pixbuf = gtk_icon_theme_load_icon (icon_theme_from_path, work_icon_name, icon_size,
+                                                prefer_symbolic ? GTK_ICON_LOOKUP_FORCE_SYMBOLIC : 0,
+                                                NULL);
 
       if (work_pixbuf == NULL)
-        {
-          if (prefer_symbolic && strstr (sn_preferred_name (), "-symbolic") == NULL)
-            {
-              symbolic_icon_name = g_strdup_printf ("%s-symbolic", sn_preferred_name ());
+        work_pixbuf = gtk_icon_theme_load_icon (icon_theme, work_icon_name, icon_size,
+                                                prefer_symbolic ? GTK_ICON_LOOKUP_FORCE_SYMBOLIC : 0,
+                                                NULL);
 
-              symbolic_icon_size = icon_size;
-              if (symbolic_icon_size <= 48)
-                {
-                  /* calculate highest bit (e.g. 22 -> 16, 63 -> 32) */
-                  symbolic_icon_size |= symbolic_icon_size >> 1;
-                  symbolic_icon_size |= symbolic_icon_size >> 2;
-                  symbolic_icon_size |= symbolic_icon_size >> 4;
-                  symbolic_icon_size |= symbolic_icon_size >> 8;
-                  symbolic_icon_size |= symbolic_icon_size >> 16;
-                  symbolic_icon_size = symbolic_icon_size - (symbolic_icon_size >> 1);
-                }
-
-              icon_info = gtk_icon_theme_lookup_icon (icon_theme,
-                                                      symbolic_icon_name,
-                                                      symbolic_icon_size,
-                                                      0);
-              if (icon_info != NULL)
-                {
-                  if (gtk_icon_info_is_symbolic (icon_info))
-                    {
-                      use_symbolic = TRUE;
-                      max_size = symbolic_icon_size;
-                    }
-                  else
-                    {
-                      g_object_unref (icon_info);
-                      icon_info = NULL;
-                    }
-                }
-            }
-
-          if (icon_info == NULL)
-            {
-              icon_info = gtk_icon_theme_lookup_icon (icon_theme,
-                                                      sn_preferred_name (),
-                                                      icon_size, 0);
-            }
-
-          if (icon_info != NULL)
-            {
-              gtk_image_set_from_icon_name (GTK_IMAGE (image),
-                                            use_symbolic
-                                            ? symbolic_icon_name
-                                            : sn_preferred_name (),
-                                            GTK_ICON_SIZE_BUTTON);
-              g_object_unref (icon_info);
-              use_pixbuf = FALSE;
-            }
-        }
+      g_free (work_icon_name);
     }
 
-  if (use_pixbuf && sn_preferred_pixbuf () != NULL)
-    {
-      width = gdk_pixbuf_get_width (sn_preferred_pixbuf ());
-      height = gdk_pixbuf_get_height (sn_preferred_pixbuf ());
+  if (work_pixbuf == NULL && icon_pixbuf != NULL)
+    work_pixbuf = g_object_ref (icon_pixbuf);
 
-      if (width > icon_size && height > icon_size)
+  if (work_pixbuf != NULL)
+    {
+      width = gdk_pixbuf_get_width (work_pixbuf);
+      height = gdk_pixbuf_get_height (work_pixbuf);
+
+      if (width > icon_size || height > icon_size)
         {
           /* scale pixbuf */
-          if (height > width)
+          if (height < width)
             {
               height = icon_size * height / width;
               width = icon_size;
@@ -349,30 +281,14 @@ sn_icon_box_apply_icon (GtkWidget    *image,
               height = icon_size;
             }
 
-          icon_pixbuf = gdk_pixbuf_scale_simple (sn_preferred_pixbuf (),
-                                                 width, height, GDK_INTERP_BILINEAR);
-          gtk_image_set_from_pixbuf (GTK_IMAGE (image), icon_pixbuf);
-          g_object_unref (icon_pixbuf);
+          icon_pixbuf = gdk_pixbuf_scale_simple (work_pixbuf, width, height, GDK_INTERP_BILINEAR);
+          g_object_unref (work_pixbuf);
+          work_pixbuf = icon_pixbuf;
         }
-      else
-        {
-          gtk_image_set_from_pixbuf (GTK_IMAGE (image), sn_preferred_pixbuf ());
-        }
+
+      gtk_image_set_from_pixbuf (GTK_IMAGE (image), work_pixbuf);
+      g_object_unref (work_pixbuf);
     }
-
-  #undef sn_preferred_pixbuf
-  #undef sn_preferred_name
-
-  if (work_pixbuf != NULL)
-    g_object_unref (work_pixbuf);
-
-  if (work_icon_name != NULL)
-    g_free (work_icon_name);
-
-  if (symbolic_icon_name != NULL)
-    g_free (symbolic_icon_name);
-
-  gtk_image_set_pixel_size (GTK_IMAGE (image), max_size);
 }
 
 
@@ -408,10 +324,13 @@ sn_icon_box_icon_changed (GtkWidget *widget)
       gtk_icon_theme_prepend_search_path (icon_theme_from_path, theme_path);
     }
 
-  sn_icon_box_apply_icon (box->icon, icon_theme, icon_theme_from_path,
-                          icon_name, icon_pixbuf, icon_size, symbolic_icons);
-  sn_icon_box_apply_icon (box->overlay, icon_theme, icon_theme_from_path,
-                          overlay_icon_name, overlay_icon_pixbuf, icon_size, symbolic_icons);
+  if (icon_size > 0)
+    {
+      sn_icon_box_apply_icon (box->icon, icon_theme, icon_theme_from_path,
+                              icon_name, icon_pixbuf, icon_size, symbolic_icons);
+      sn_icon_box_apply_icon (box->overlay, icon_theme, icon_theme_from_path,
+                              overlay_icon_name, overlay_icon_pixbuf, icon_size, symbolic_icons);
+    }
 
   if (icon_theme_from_path != NULL)
     g_object_unref (icon_theme_from_path);
