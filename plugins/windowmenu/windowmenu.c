@@ -1114,24 +1114,47 @@ window_menu_plugin_menu_key_press_event (GtkWidget        *menu,
   panel_return_val_if_fail (GTK_IS_MENU (menu), FALSE);
 
   /* construct an event */
-  switch (event->keyval)
+  if (event->type == GDK_KEY_RELEASE)
     {
-    case GDK_KEY_space:
-    case GDK_KEY_Return:
-    case GDK_KEY_KP_Space:
-    case GDK_KEY_KP_Enter:
-      /* active the menu item */
-      fake_event.button = 1;
-      break;
-
-    case GDK_KEY_Menu:
-      /* popup the window actions menu */
-      fake_event.button = 3;
-      break;
-
-    default:
-      return FALSE;
+      if (event->keyval == GDK_KEY_Alt_L)
+        fake_event.button = 1;
+      else
+        return FALSE;
     }
+  else
+    {
+      switch (event->keyval)
+        {
+        /* catch Escape/Up/Down for it to work when Alt key is held */
+        case GDK_KEY_Escape:
+          gtk_menu_shell_deactivate (GTK_MENU_SHELL (menu));
+          return FALSE;
+
+        case GDK_KEY_Down:
+          g_signal_emit_by_name ( GTK_MENU (menu), "move-current", GTK_MENU_DIR_NEXT);
+          return TRUE;
+
+        case GDK_KEY_Up:
+          g_signal_emit_by_name ( GTK_MENU (menu), "move-current", GTK_MENU_DIR_PREV);
+          return TRUE;
+
+        case GDK_KEY_space:
+        case GDK_KEY_Return:
+        case GDK_KEY_KP_Space:
+        case GDK_KEY_KP_Enter:
+          /* active the menu item */
+          fake_event.button = 1;
+          break;
+
+        case GDK_KEY_Menu:
+          /* popup the window actions menu */
+          fake_event.button = 3;
+          break;
+
+        default:
+          return FALSE;
+        }
+      }
 
   /* popdown the menu, this will also emit the "deactivate" signal */
   gtk_menu_shell_deactivate (GTK_MENU_SHELL (menu));
@@ -1164,7 +1187,7 @@ window_menu_plugin_menu_key_press_event (GtkWidget        *menu,
   else
     gtk_menu_item_activate (GTK_MENU_ITEM (mi));
 
-  return FALSE;
+  return (event->type == GDK_KEY_RELEASE);
 }
 
 
@@ -1197,6 +1220,8 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
 
   menu = gtk_menu_new ();
   g_signal_connect (G_OBJECT (menu), "key-press-event",
+      G_CALLBACK (window_menu_plugin_menu_key_press_event), plugin);
+  g_signal_connect (G_OBJECT (menu), "key-release-event",
       G_CALLBACK (window_menu_plugin_menu_key_press_event), plugin);
 
   /* get all the windows and the active workspace */
@@ -1402,6 +1427,8 @@ window_menu_plugin_menu (GtkWidget        *button,
       && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
     return;
 
+  menu = window_menu_plugin_menu_new (plugin);
+
   /* Panel plugin remote events don't send actual GdkEvents, so construct a minimal one so that
    * gtk_menu_popup_at_pointer/rect can extract a location correctly from a GdkWindow */
   if (gtk_get_current_event () == NULL)
@@ -1409,10 +1436,11 @@ window_menu_plugin_menu (GtkWidget        *button,
       event = g_slice_new0 (GdkEventButton);
       event->type = GDK_BUTTON_PRESS;
       event->window = gdk_get_default_root_window ();
+
+      g_signal_emit_by_name ( GTK_MENU (menu), "move-current", GTK_MENU_DIR_NEXT);
     }
 
   /* popup the menu */
-  menu = window_menu_plugin_menu_new (plugin);
   g_signal_connect (G_OBJECT (menu), "deactivate",
       G_CALLBACK (window_menu_plugin_menu_deactivate), plugin);
 
