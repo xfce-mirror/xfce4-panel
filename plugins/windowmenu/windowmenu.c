@@ -1129,6 +1129,15 @@ window_menu_plugin_menu_key_press_event (GtkWidget        *menu,
       fake_event.button = 3;
       break;
 
+    case GDK_KEY_Tab:
+      g_signal_emit_by_name (GTK_MENU (menu), "move-current", GTK_MENU_DIR_NEXT);
+      return TRUE;
+
+    /* ISO_LEFT_TAB == shift+tab */
+    case GDK_KEY_ISO_Left_Tab:
+      g_signal_emit_by_name (GTK_MENU (menu), "move-current", GTK_MENU_DIR_PREV);
+      return TRUE;
+
     default:
       return FALSE;
     }
