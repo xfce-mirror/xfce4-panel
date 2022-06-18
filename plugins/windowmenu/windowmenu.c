@@ -1116,7 +1116,7 @@ window_menu_plugin_menu_key_press_event (GtkWidget        *menu,
   /* construct an event */
   if (event->type == GDK_KEY_RELEASE)
     {
-      if (event->keyval == GDK_KEY_Alt_L)
+      if (event->keyval == GDK_KEY_Alt_L || event->keyval == GDK_KEY_Meta_L)
         fake_event.button = 1;
       else
         return FALSE;
