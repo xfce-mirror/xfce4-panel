@@ -386,13 +386,14 @@ xfce_clock_fuzzy_update (XfceClockFuzzy *fuzzy,
 
 
 GtkWidget *
-xfce_clock_fuzzy_new (ClockTime *time)
+xfce_clock_fuzzy_new (ClockTime *time, ClockSleepMonitor *sleep_monitor)
 {
   XfceClockFuzzy *fuzzy = g_object_new (XFCE_CLOCK_TYPE_FUZZY, NULL);
 
   fuzzy->time = time;
   fuzzy->timeout = clock_time_timeout_new (CLOCK_INTERVAL_MINUTE,
                                            fuzzy->time,
+                                           sleep_monitor,
                                            G_CALLBACK (xfce_clock_fuzzy_update), fuzzy);
 
   return GTK_WIDGET (fuzzy);
