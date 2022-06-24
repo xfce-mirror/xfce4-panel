@@ -23,9 +23,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-07 00:47+0200\n"
+"POT-Creation-Date: 2022-06-02 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Sabri Ünal <libreajans@gmail.com>, 2022\n"
+"Last-Translator: Demiray Muhterem <mdemiray@msn.com>, 2018-2020,2022\n"
 "Language-Team: Turkish (http://www.transifex.com/xfce/xfce4-panel/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,7 +49,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "paneller;ayarlar;tercihler;yeğler;görev çubuğu;otomatik gizle;kendiliğinden gizle;uygulama menüsü;başlat;düğmeler;başlatıcı;bildirim alanı;durum;simgeler;eklentiler;uzantılar;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3047
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2962
 msgid "Panel"
 msgstr "Panel"
 
@@ -59,7 +59,7 @@ msgstr "Paneli özelleştir"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1080
-#: ../panel/panel-preferences-dialog.c:1321
+#: ../panel/panel-preferences-dialog.c:1318
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "'%s' ögesini silmek istediğinizden emin misiniz?"
@@ -70,53 +70,53 @@ msgid ""
 msgstr "Ögenin panelden kaldırılması, yapılandırmasının kaybedileceği anlamına da gelir."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:164
-#: ../panel/panel-preferences-dialog.c:1326
-#: ../plugins/applicationsmenu/applicationsmenu.c:601
+#: ../panel/panel-preferences-dialog.c:1323
+#: ../plugins/applicationsmenu/applicationsmenu.c:625
 #: ../plugins/directorymenu/directorymenu.c:472
-#: ../plugins/directorymenu/directorymenu.c:937
+#: ../plugins/directorymenu/directorymenu.c:932
 msgid "_Cancel"
 msgstr "_İptal"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1087
-#: ../libxfce4panel/xfce-panel-plugin.c:1262
+#: ../libxfce4panel/xfce-panel-plugin.c:1264
 #: ../panel/panel-plugin-external.c:450
-#: ../panel/panel-preferences-dialog.c:961
-#: ../panel/panel-preferences-dialog.c:1327
+#: ../panel/panel-preferences-dialog.c:958
+#: ../panel/panel-preferences-dialog.c:1324
 #: ../panel/panel-preferences-dialog.glade.h:59
 #: ../plugins/launcher/launcher-dialog.c:861
 msgid "_Remove"
 msgstr "_Kaldır"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1212
+#: ../libxfce4panel/xfce-panel-plugin.c:1214
 msgid "_Properties"
 msgstr "_Özellikler"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1227 ../panel/panel-window.c:3138
+#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3053
 msgid "_About"
 msgstr "_Hakkında"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1242
+#: ../libxfce4panel/xfce-panel-plugin.c:1244
 msgid "_Move"
 msgstr "_Taşı"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1283
+#: ../libxfce4panel/xfce-panel-plugin.c:1285
 msgid "Pane_l"
 msgstr "Pane_l"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1292 ../panel/panel-window.c:3060
+#: ../libxfce4panel/xfce-panel-plugin.c:1294 ../panel/panel-window.c:2975
 msgid "Add _New Items..."
 msgstr "_Yeni Öge Ekle..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1307 ../panel/panel-window.c:3075
+#: ../libxfce4panel/xfce-panel-plugin.c:1309 ../panel/panel-window.c:2990
 msgid "Panel Pr_eferences..."
 msgstr "Panel T_ercihleri..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:3107
+#: ../libxfce4panel/xfce-panel-plugin.c:1330 ../panel/panel-window.c:3022
 msgid "Log _Out"
 msgstr "Çıkış _Yap"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1348 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3127
+#: ../libxfce4panel/xfce-panel-plugin.c:1350 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3042
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -129,7 +129,7 @@ msgstr "Çıkış _Yap"
 msgid "_Help"
 msgstr "_Yardım"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1363
+#: ../libxfce4panel/xfce-panel-plugin.c:1365
 msgid "About"
 msgstr "Hakkında"
 
@@ -253,42 +253,42 @@ msgstr "Paneli başlatmak istiyor musunuz? Öyleyse, çıkışta oturumu kaydett
 msgid "No running instance of %s was found"
 msgstr "%s çalışan örneği bulunamadı"
 
-#: ../panel/panel-application.c:215
+#: ../panel/panel-application.c:219
 msgid "Failed to launch the migration application"
 msgstr "Geçiş uygulaması başlatılamadı"
 
-#: ../panel/panel-application.c:985
+#: ../panel/panel-application.c:989
 msgid "Create _Launcher"
 msgstr "_Başlatıcı Oluştur"
 
-#: ../panel/panel-application.c:986
+#: ../panel/panel-application.c:990
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Bu panelde yeni başlatıcı eklentisi oluşturur ve eklenen dosyaları menü ögeleri olarak ekler."
 
-#: ../panel/panel-application.c:988
+#: ../panel/panel-application.c:992
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "%d masaüstü dosyasından yeni başlatıcı oluştur"
 msgstr[1] "%d masaüstü dosyalarından yeni başlatıcı oluştur"
 
-#: ../panel/panel-application.c:1728
+#: ../panel/panel-application.c:1738
 msgid "Quit"
 msgstr "Çık"
 
-#: ../panel/panel-application.c:1729
+#: ../panel/panel-application.c:1739
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "X'i oturum yöneticisi olmadan başlattınız. Çık'ı tıklattığınızda X sunucusu kapanır."
 
-#: ../panel/panel-application.c:1730
+#: ../panel/panel-application.c:1740
 msgid "Are you sure you want to quit the panel?"
 msgstr "Paneli kapatmak istediğinizden emin misiniz?"
 
-#: ../panel/panel-application.c:1738
+#: ../panel/panel-application.c:1748
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" komutu çalıştırılamadı"
@@ -407,25 +407,25 @@ msgstr "Birincil"
 msgid "Monitor %d"
 msgstr "Monitör %d"
 
-#: ../panel/panel-preferences-dialog.c:962
+#: ../panel/panel-preferences-dialog.c:959
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Panel ve eklenti ayarları kalıcı olarak silinecek"
 
-#: ../panel/panel-preferences-dialog.c:963
+#: ../panel/panel-preferences-dialog.c:960
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "%d. paneli silmek istediğinize emin misiniz?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1163
+#: ../panel/panel-preferences-dialog.c:1160
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(dış)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1168
+#: ../panel/panel-preferences-dialog.c:1165
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -434,12 +434,12 @@ msgstr "İç ad: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1180
+#: ../panel/panel-preferences-dialog.c:1177
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "İç ad: %s-%d"
 
-#: ../panel/panel-preferences-dialog.c:1324
+#: ../panel/panel-preferences-dialog.c:1321
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Panelden ögeyi kaldırdığınızda tümüyle yitirilir."
 
@@ -711,7 +711,7 @@ msgstr "Deneyimli"
 msgid "Expert"
 msgstr "Uzman"
 
-#: ../panel/panel-window.c:3092
+#: ../panel/panel-window.c:3007
 msgid "_Lock Panel"
 msgstr "Pane_li Kilitle"
 
@@ -954,28 +954,32 @@ msgid "Button _title:"
 msgstr "Düğme _başlığı:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+msgid "Show button on one _line"
+msgstr "Düğmeyi bir _satırda göster"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "_Show button title"
 msgstr "_Düğme başlığını göster"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show application d_escription in tooltip"
 msgstr "Uygulama _tanımını ipucunda göster"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show ic_ons in menu"
 msgstr "Menüde _simgeleri göster"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show generic application n_ames"
 msgstr "Uygulamaların genel _adlarını göster"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
 msgstr "Menüde uygulamanın genel adını görmek için bu seçeneği seçin, örneğin \"Thunar\" yerine \"Dosya Yöneticisi\""
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
@@ -984,27 +988,27 @@ msgstr "Menüde uygulamanın genel adını görmek için bu seçeneği seçin, �
 msgid "Appearance"
 msgstr "Görünüm"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
 msgid "Use the _default menu"
 msgstr "_Öntanımlı menüyü kullan"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 msgid "Ed_it Menu"
 msgstr "Menüyü Dü_zenle"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "Use c_ustom menu file:"
 msgstr "Ki_şiselleştirilmiş menü dosyasını kullan:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:16
 msgid "Menu _file:"
 msgstr "Menü _dosyası:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:16
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:17
 msgid "Select A Menu File"
 msgstr "Menü Dosyası Seç"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:17
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:18
 msgid "Menu File"
 msgstr "Menü Dosyası"
 
@@ -1013,19 +1017,19 @@ msgstr "Menü Dosyası"
 msgid "Applications"
 msgstr "Uygulamalar"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:599
+#: ../plugins/applicationsmenu/applicationsmenu.c:623
 #: ../plugins/directorymenu/directorymenu.c:470
 msgid "Select An Icon"
 msgstr "Simge Seç"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:602
+#: ../plugins/applicationsmenu/applicationsmenu.c:626
 #: ../plugins/directorymenu/directorymenu.c:473
 msgid "_OK"
 msgstr "_Tamam"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:637
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2501
+#: ../plugins/applicationsmenu/applicationsmenu.c:661
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2475
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" komutu çalıştırılamadı."
@@ -1427,69 +1431,69 @@ msgstr "Saat kaç?"
 msgid "Directory Menu"
 msgstr "Dizin Menüsü"
 
-#: ../plugins/directorymenu/directorymenu.c:690
+#: ../plugins/directorymenu/directorymenu.c:688
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "\"%s\" uygulaması çalıştırılamadı"
 
-#: ../plugins/directorymenu/directorymenu.c:722
+#: ../plugins/directorymenu/directorymenu.c:720
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "\"%s\" için içerik sorgulama başarısız oldu"
 
-#: ../plugins/directorymenu/directorymenu.c:731
+#: ../plugins/directorymenu/directorymenu.c:729
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "\"%s\" için öntanımlı uygulama bulunamadı"
 
-#: ../plugins/directorymenu/directorymenu.c:747
+#: ../plugins/directorymenu/directorymenu.c:745
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "\"%s\" için öntanımlı uygulama çalıştırılamadı"
 
-#: ../plugins/directorymenu/directorymenu.c:843
+#: ../plugins/directorymenu/directorymenu.c:840
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr " \"%s\" kategorisi için seçilen uygulama çalıştırılamadı"
 
-#: ../plugins/directorymenu/directorymenu.c:926
+#: ../plugins/directorymenu/directorymenu.c:921
 msgid "Create New Folder"
 msgstr "Yeni Klasör Oluştur"
 
-#: ../plugins/directorymenu/directorymenu.c:931
+#: ../plugins/directorymenu/directorymenu.c:926
 msgid "Create New Text Document"
 msgstr "Yeni Metin Belgesi Oluştur"
 
-#: ../plugins/directorymenu/directorymenu.c:938
+#: ../plugins/directorymenu/directorymenu.c:933
 msgid "C_reate"
 msgstr "_Oluştur"
 
-#: ../plugins/directorymenu/directorymenu.c:939
+#: ../plugins/directorymenu/directorymenu.c:934
 msgid "Create & _Open"
 msgstr "Oluştur & _Aç"
 
-#: ../plugins/directorymenu/directorymenu.c:953
+#: ../plugins/directorymenu/directorymenu.c:948
 msgid "Enter the new name:"
 msgstr "Yeni ad gir:"
 
-#: ../plugins/directorymenu/directorymenu.c:989
+#: ../plugins/directorymenu/directorymenu.c:984
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Klasör oluşturulamadı: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1074
+#: ../plugins/directorymenu/directorymenu.c:1068
 msgid "Open Folder"
 msgstr "Dizini Aç"
 
-#: ../plugins/directorymenu/directorymenu.c:1091
+#: ../plugins/directorymenu/directorymenu.c:1085
 msgid "Open in Terminal"
 msgstr "Uçbirimde Aç"
 
-#: ../plugins/directorymenu/directorymenu.c:1108
+#: ../plugins/directorymenu/directorymenu.c:1102
 msgid "Create Folder..."
 msgstr "Klasör Oluştur..."
 
-#: ../plugins/directorymenu/directorymenu.c:1125
+#: ../plugins/directorymenu/directorymenu.c:1119
 msgid "Create Text Document..."
 msgstr "Metin Belgesi Oluştur..."
 
@@ -1550,11 +1554,11 @@ msgstr "Süz"
 msgid "Open launcher menu"
 msgstr "Başlatıcı menüsünü aç"
 
-#: ../plugins/launcher/launcher.c:1633
+#: ../plugins/launcher/launcher.c:1611
 msgid "Unnamed Item"
 msgstr "Adsız Öge"
 
-#: ../plugins/launcher/launcher.c:1821
+#: ../plugins/launcher/launcher.c:1795
 msgid "No items"
 msgstr "Öge yok"
 
@@ -1682,15 +1686,15 @@ msgstr "Gelişmiş"
 msgid "Program launcher with optional menu"
 msgstr "İsteğe bağlı menü ile program başlatıcısı"
 
-#: ../plugins/pager/pager.c:557 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:543 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "Çalışma Alanı _Ayarları..."
 
-#: ../plugins/pager/pager.c:645
+#: ../plugins/pager/pager.c:631
 msgid "Unable to open the workspace settings"
 msgstr "Çalışma alanı ayarları açılamadı"
 
-#: ../plugins/pager/pager-buttons.c:590 ../plugins/windowmenu/windowmenu.c:876
+#: ../plugins/pager/pager-buttons.c:598 ../plugins/windowmenu/windowmenu.c:876
 #, c-format
 msgid "Workspace %d"
 msgstr "Çalışma Alanı %d"
@@ -1721,6 +1725,10 @@ msgid "Switch workspaces using the mouse wheel"
 msgstr "Fare tekerleğini kullanarak çalışma alanlarını değiştir"
 
 #: ../plugins/pager/pager-dialog.glade.h:10
+msgid "Wrap around workspaces"
+msgstr "Çalışma alanlarını sarın"
+
+#: ../plugins/pager/pager-dialog.glade.h:11
 msgid "<b>Appearance</b>"
 msgstr "<b>Görünüm</b>"
 
@@ -2004,36 +2012,36 @@ msgstr "Tüm mo_nitörlerdeki pencereleri göster"
 msgid "Show only _minimized windows"
 msgstr "Yalnızca _küçültülmüş pencereleri göster"
 
-#: ../plugins/tasklist/tasklist-widget.c:3042
+#: ../plugins/tasklist/tasklist-widget.c:3051
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Yeni '%s' örneği başlatılamıyor"
 
-#: ../plugins/tasklist/tasklist-widget.c:3046
+#: ../plugins/tasklist/tasklist-widget.c:3055
 msgid "Error"
 msgstr "Hata"
 
-#: ../plugins/tasklist/tasklist-widget.c:3075
+#: ../plugins/tasklist/tasklist-widget.c:3084
 msgid "Launch New Instance"
 msgstr "Yeni Örnek Başlat"
 
-#: ../plugins/tasklist/tasklist-widget.c:3834
+#: ../plugins/tasklist/tasklist-widget.c:3840
 msgid "Mi_nimize All"
 msgstr "Tümünü _Küçült"
 
-#: ../plugins/tasklist/tasklist-widget.c:3842
+#: ../plugins/tasklist/tasklist-widget.c:3848
 msgid "Un_minimize All"
 msgstr "Küçültmeleri Geri Al"
 
-#: ../plugins/tasklist/tasklist-widget.c:3850
+#: ../plugins/tasklist/tasklist-widget.c:3856
 msgid "Ma_ximize All"
 msgstr "Tümünü _Büyüt"
 
-#: ../plugins/tasklist/tasklist-widget.c:3858
+#: ../plugins/tasklist/tasklist-widget.c:3864
 msgid "_Unmaximize All"
 msgstr "Büyültmeleri Geri Al"
 
-#: ../plugins/tasklist/tasklist-widget.c:3870
+#: ../plugins/tasklist/tasklist-widget.c:3876
 msgid "_Close All"
 msgstr "Tümünü _Kapat"
 
