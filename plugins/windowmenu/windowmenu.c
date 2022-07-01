@@ -967,6 +967,19 @@ window_menu_plugin_menu_window_item_activate (GtkWidget        *mi,
 
       return TRUE;
     }
+  else if (event->button == 4)
+    {
+      /* popup the window action menu */
+      menu = wnck_action_menu_new (window);
+      g_signal_connect (G_OBJECT (menu), "selection-done",
+          G_CALLBACK (window_menu_plugin_menu_actions_selection_done),
+          gtk_widget_get_parent (mi));
+      xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (menu),
+                                    mi, (GdkEvent *) event);
+      gtk_menu_shell_select_first(GTK_MENU_SHELL (menu), TRUE);
+
+      return TRUE;
+    }
 
   return FALSE;
 }
@@ -1126,36 +1139,43 @@ window_menu_plugin_menu_key_press_event (GtkWidget        *menu,
 
     case GDK_KEY_Menu:
       /* popup the window actions menu */
-      fake_event.button = 3;
+      fake_event.button = 4;
       break;
 
     default:
       return FALSE;
     }
 
-  /* popdown the menu, this will also emit the "deactivate" signal */
-  gtk_menu_shell_deactivate (GTK_MENU_SHELL (menu));
-
-  /* get the active menu item leave when no item if found */
-  mi = gtk_menu_get_active (GTK_MENU (menu));
-  panel_return_val_if_fail (mi == NULL || GTK_IS_MENU_ITEM (mi), FALSE);
-  if (mi == NULL)
-    return FALSE;
-
   if (fake_event.button == 1)
     {
       /* get the modifiers */
       modifiers = event->state & gtk_accelerator_get_default_mod_mask ();
 
-      if (modifiers == GDK_SHIFT_MASK)
+      if (modifiers & GDK_SHIFT_MASK)
         fake_event.button = 2;
-      else if (modifiers == GDK_CONTROL_MASK)
-        fake_event.button = 3;
+      else if (modifiers & GDK_CONTROL_MASK)
+        fake_event.button = 4;
     }
+
+  /* popdown the menu, this will also emit the "deactivate" signal */
+  if (fake_event.button != 4)
+    {
+      gtk_menu_shell_deactivate (GTK_MENU_SHELL (menu));
+      mi = gtk_menu_get_active (GTK_MENU (menu));
+    }
+  else
+    mi = gtk_menu_shell_get_selected_item (GTK_MENU_SHELL (menu));
+
+  /* get the active menu item leave when no item if found */
+  
+  panel_return_val_if_fail (mi == NULL || GTK_IS_MENU_ITEM (mi), FALSE);
+  if (mi == NULL)
+    return FALSE;
 
   /* complete the event */
   fake_event.type = GDK_BUTTON_RELEASE;
   fake_event.time = event->time;
+  fake_event.window = event->window;
 
   /* try the get the window and active an item */
   window = g_object_get_qdata (G_OBJECT (mi), window_quark);
@@ -1164,7 +1184,7 @@ window_menu_plugin_menu_key_press_event (GtkWidget        *menu,
   else
     gtk_menu_item_activate (GTK_MENU_ITEM (mi));
 
-  return FALSE;
+  return (fake_event.button == 4);
 }
 
 
