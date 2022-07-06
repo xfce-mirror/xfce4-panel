@@ -818,7 +818,7 @@ panel_application_plugin_insert (PanelApplication  *application,
                         GTK_WIDGET (provider), position);
 
   /* send all the needed info about the panel to the plugin */
-  panel_window_set_povider_info (window, provider, FALSE);
+  panel_window_set_provider_info (window, provider, FALSE);
 
   /* show the plugin */
   gtk_widget_show (provider);
@@ -967,7 +967,7 @@ panel_application_drag_data_received (PanelWindow      *window,
                                        "small", child_small, NULL);
 
               /* send all the needed panel information to the plugin */
-              panel_window_set_povider_info (window, provider, TRUE);
+              panel_window_set_provider_info (window, provider, TRUE);
 
               /* moved between panels, save everything */
               save_application = TRUE;

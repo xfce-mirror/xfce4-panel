@@ -676,7 +676,7 @@ panel_plugin_external_child_respawn (gpointer user_data)
 
   window = gtk_widget_get_toplevel (GTK_WIDGET (external));
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
-  panel_window_set_povider_info (PANEL_WINDOW (window), GTK_WIDGET (external), FALSE);
+  panel_window_set_provider_info (PANEL_WINDOW (window), GTK_WIDGET (external), FALSE);
 
   panel_plugin_external_child_spawn (external);
 

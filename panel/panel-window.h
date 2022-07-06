@@ -44,7 +44,7 @@ gint       panel_window_get_id                    (PanelWindow *window);
 
 gboolean   panel_window_has_position              (PanelWindow *window);
 
-void       panel_window_set_povider_info          (PanelWindow *window,
+void       panel_window_set_provider_info         (PanelWindow *window,
                                                    GtkWidget   *provider,
                                                    gboolean     moving_to_other_panel);
 

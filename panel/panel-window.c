@@ -3369,9 +3369,9 @@ panel_window_has_position (PanelWindow *window)
 
 
 void
-panel_window_set_povider_info (PanelWindow *window,
-                               GtkWidget   *provider,
-                               gboolean     moving_to_other_panel)
+panel_window_set_provider_info (PanelWindow *window,
+                                GtkWidget   *provider,
+                                gboolean     moving_to_other_panel)
 {
   PanelBaseWindow *base_window = PANEL_BASE_WINDOW (window);
 
