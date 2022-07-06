@@ -61,6 +61,8 @@ static void         panel_plugin_external_set_property            (GObject      
                                                                    guint                             prop_id,
                                                                    const GValue                     *value,
                                                                    GParamSpec                       *pspec);
+static void         panel_plugin_external_size_allocate           (GtkWidget                        *widget,
+                                                                   GtkAllocation                    *allocation);
 static void         panel_plugin_external_realize                 (GtkWidget                        *widget);
 static void         panel_plugin_external_unrealize               (GtkWidget                        *widget);
 static void         panel_plugin_external_plug_added              (GtkSocket                        *socket);
@@ -129,7 +131,12 @@ struct _PanelPluginExternalPrivate
 
   /* delayed spawning */
   guint       spawn_timeout_id;
+
+  /* silence allocation warnings */
+  guint       resize_timeout_id;
 };
+
+gulong global_resize_timeout_id = 0;
 
 enum
 {
@@ -161,6 +168,7 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
   gobject_class->get_property = panel_plugin_external_get_property;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
+  gtkwidget_class->size_allocate = panel_plugin_external_size_allocate;
   gtkwidget_class->realize = panel_plugin_external_realize;
   gtkwidget_class->unrealize = panel_plugin_external_unrealize;
 
@@ -211,6 +219,7 @@ panel_plugin_external_init (PanelPluginExternal *external)
   external->priv->embedded = FALSE;
   external->priv->pid = 0;
   external->priv->spawn_timeout_id = 0;
+  external->priv->resize_timeout_id = 0;
 
   /* signal to pass gtk_widget_set_sensitive() changes to the remote window */
   g_signal_connect (G_OBJECT (external), "notify::sensitive",
@@ -255,6 +264,12 @@ panel_plugin_external_finalize (GObject *object)
 
   if (external->priv->spawn_timeout_id != 0)
     g_source_remove (external->priv->spawn_timeout_id);
+
+  if (external->priv->resize_timeout_id != 0)
+    {
+      g_source_remove (external->priv->resize_timeout_id);
+      global_resize_timeout_id -= external->priv->resize_timeout_id;
+    }
 
   if (external->priv->watch_id != 0)
     {
@@ -342,6 +357,61 @@ panel_plugin_external_set_property (GObject      *object,
 
 
 static void
+panel_plugin_external_queue_resize (GtkWidget *widget,
+                                    gpointer   data)
+{
+  if (PANEL_IS_PLUGIN_EXTERNAL (data))
+    gtk_widget_queue_resize (data);
+}
+
+
+
+static gboolean
+panel_plugin_external_queue_resize_timeout (gpointer data)
+{
+  PanelPluginExternal *external = data;
+
+  if (! gdk_window_is_visible (gtk_socket_get_plug_window (data)))
+    return TRUE;
+
+  global_resize_timeout_id -= external->priv->resize_timeout_id;
+  external->priv->resize_timeout_id = 0;
+  if (global_resize_timeout_id == 0)
+    gtk_container_foreach (GTK_CONTAINER (gtk_widget_get_parent (data)),
+                           panel_plugin_external_queue_resize, data);
+
+  return FALSE;
+}
+
+
+
+static void
+panel_plugin_external_size_allocate (GtkWidget     *widget,
+                                     GtkAllocation *allocation)
+{
+  PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (widget);
+
+  if (global_resize_timeout_id != 0)
+    {
+      if (external->priv->resize_timeout_id != 0)
+        {
+          global_resize_timeout_id -= external->priv->resize_timeout_id;
+          g_source_remove (external->priv->resize_timeout_id);
+          external->priv->resize_timeout_id =
+            g_timeout_add_seconds (1, panel_plugin_external_queue_resize_timeout, external);
+          global_resize_timeout_id += external->priv->resize_timeout_id;
+        }
+
+      allocation->width = MAX (allocation->width, 16);
+      allocation->height = MAX (allocation->height, 16);
+    }
+
+  GTK_WIDGET_CLASS (panel_plugin_external_parent_class)->size_allocate (widget, allocation);
+}
+
+
+
+static void
 panel_plugin_external_realize (GtkWidget *widget)
 {
   PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (widget);
@@ -397,15 +467,15 @@ panel_plugin_external_plug_added (GtkSocket *socket)
   PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (socket);
 
   external->priv->embedded = TRUE;
+  external->priv->resize_timeout_id =
+    g_timeout_add_seconds (1, panel_plugin_external_queue_resize_timeout, external);
+  global_resize_timeout_id += external->priv->resize_timeout_id;
 
   panel_debug (PANEL_DEBUG_EXTERNAL,
                "%s-%d: child is embedded; %d properties in queue",
                panel_module_get_name (external->module),
                external->unique_id,
                g_slist_length (external->priv->queue));
-
-  /* silence allocation warning by requesting min panel size as default */
-  gtk_widget_set_size_request (GTK_WIDGET (socket), 16, 16);
 
   /* send queue to wrapper */
   panel_plugin_external_queue_send_to_child (external);
