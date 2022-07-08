@@ -1739,12 +1739,12 @@ panel_window_filter (GdkXEvent *xev,
   if (IS_HORIZONTAL (window))
     {
       position = xbutton_event->x;
-      limit = window->alloc.width;
+      limit = window->alloc.width * window->scale_factor;
     }
   else
     {
       position = xbutton_event->y;
-      limit = window->alloc.height;
+      limit = window->alloc.height * window->scale_factor;
     }
 
   /* leave when the pointer is not on the handles */
