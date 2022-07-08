@@ -2518,6 +2518,7 @@ xfce_tasklist_button_visible (XfceTasklistChild *child,
   XfceTasklist *tasklist = XFCE_TASKLIST (child->tasklist);
   gint          x, y, w, h;
   GdkWindow    *window;
+  guint         scale_factor;
 
   panel_return_val_if_fail (active_ws == NULL || WNCK_IS_WORKSPACE (active_ws), FALSE);
   panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), FALSE);
@@ -2531,6 +2532,13 @@ xfce_tasklist_button_visible (XfceTasklistChild *child,
 
       /* The window we are making a button for. */
       wnck_window_get_geometry (child->window, &x, &y, &w, &h);
+
+      /* apply scale factor */
+      scale_factor = gdk_window_get_scale_factor (window);
+      x /= scale_factor;
+      y /= scale_factor;
+      w /= scale_factor;
+      h /= scale_factor;
 
       /* Ask Gdk if they are on the same monitor. */
       if (gdk_display_get_monitor_at_window(tasklist->display, window) !=
