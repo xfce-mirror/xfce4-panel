@@ -2880,10 +2880,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
       else if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
         {
           /* start intelligent autohide by making the panel visible initially */
-          if (window->autohide_state != AUTOHIDE_VISIBLE)
-            {
-              panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
-            }
+          panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
         }
     }
   else if (window->autohide_window != NULL)
