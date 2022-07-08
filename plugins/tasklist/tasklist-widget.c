@@ -2112,7 +2112,10 @@ xfce_tasklist_update_monitor_geometry_idle (gpointer data)
   XfceTasklist *tasklist = XFCE_TASKLIST (data);
 
   panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), FALSE);
-  panel_return_val_if_fail (GDK_IS_DISPLAY (tasklist->display), FALSE);
+
+  /* can happen e.g. when the panel is associated with a disconnected device at startup */
+  if (tasklist->display == NULL)
+    return FALSE;
 
   tasklist->n_monitors = gdk_display_get_n_monitors (tasklist->display);
 
