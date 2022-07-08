@@ -2404,6 +2404,7 @@ xfce_tasklist_wireframe_update (XfceTasklist      *tasklist,
   XRectangle            xrect;
   GtkBorder             extents;
   GtkAllocation         alloc;
+  guint                 scale_factor;
 
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
   panel_return_if_fail (tasklist->show_wireframes == TRUE);
@@ -2474,10 +2475,11 @@ xfce_tasklist_wireframe_update (XfceTasklist      *tasklist,
    * interfere with the reception of pointer events (issue #543) */
   gtk_widget_get_allocation (child->button, &alloc);
   gdk_window_get_origin (gtk_widget_get_window (child->button), &x_root, &y_root);
-  xrect.x = x_root - x + alloc.x;
-  xrect.y = y_root - y + alloc.y;
-  xrect.width = alloc.width;
-  xrect.height = alloc.height;
+  scale_factor = gdk_window_get_scale_factor (gtk_widget_get_window (GTK_WIDGET (tasklist)));
+  xrect.x = (x_root + alloc.x) * scale_factor - x;
+  xrect.y = (y_root + alloc.y) * scale_factor - y;
+  xrect.width = alloc.width * scale_factor;
+  xrect.height = alloc.height * scale_factor;
 
   /* substruct rectangle from the window */
   XShapeCombineRectangles (dpy, tasklist->wireframe_window, ShapeBounding,
