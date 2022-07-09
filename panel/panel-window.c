@@ -2348,7 +2348,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
             continue;
 
           /* get other monitor geometry */
-          gdk_monitor_get_geometry (monitor, &b);
+          gdk_monitor_get_geometry (other_monitor, &b);
 
           /* check if this monitor prevents us from setting struts */
           if ((window->struts_edge == STRUTS_EDGE_LEFT && b.x < a.x)
