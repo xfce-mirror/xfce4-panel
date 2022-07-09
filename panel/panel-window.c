@@ -2180,7 +2180,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
                                     PanelWindow *window)
 {
   GdkRectangle  a = { 0 }, b;
-  gint          monitor_num, n_monitors, n;
+  gint          n_monitors, n;
   gint          dest_x, dest_y;
   gint          dest_w, dest_h;
   const gchar  *name;
@@ -2271,10 +2271,10 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
           /* check if we've stored the monitor number in the config or
            * should lookup the number from the randr output name */
           if (strncmp (window->output_name, "monitor-", 8) == 0
-              && sscanf (window->output_name, "monitor-%d", &monitor_num) == 1)
+              && sscanf (window->output_name, "monitor-%d", &n) == 1)
             {
               /* check if extracted monitor number is out of range */
-              monitor = gdk_display_get_monitor(window->display, monitor_num);
+              monitor = gdk_display_get_monitor(window->display, n);
               if (monitor != NULL)
                 {
                   gdk_monitor_get_geometry (monitor, &a);
