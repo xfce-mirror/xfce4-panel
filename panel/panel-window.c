@@ -1859,11 +1859,9 @@ panel_window_screen_struts_set (PanelWindow *window)
 {
   gulong         struts[N_STRUTS] = { 0, };
   GdkRectangle  *alloc = &window->alloc;
-  GdkMonitor    *monitor;
   guint          i;
   gboolean       update_struts = FALSE;
   gint           n;
-  gint           scale_factor = 1;
   const gchar   *strut_border[] = { "left", "right", "top", "bottom" };
   const gchar   *strut_xy[] = { "y", "y", "x", "x" };
 
@@ -1875,10 +1873,6 @@ panel_window_screen_struts_set (PanelWindow *window)
   if (!gtk_widget_get_realized (GTK_WIDGET (window)))
     return;
 
-  monitor = gdk_display_get_monitor_at_point (window->display, alloc->x, alloc->y);
-  if (monitor)
-    scale_factor = gdk_monitor_get_scale_factor(monitor);
-
   /* set the struts */
   /* Note that struts are relative to the screen edge! (NOT the monitor)
      This means we have no choice but to use deprecated GtkScreen calls.
@@ -1887,34 +1881,34 @@ panel_window_screen_struts_set (PanelWindow *window)
   if (window->struts_edge == STRUTS_EDGE_TOP)
     {
       /* the window is snapped on the top screen edge */
-      struts[STRUT_TOP] = (alloc->y + alloc->height) * scale_factor;
-      struts[STRUT_TOP_START_X] = alloc->x * scale_factor;
-      struts[STRUT_TOP_END_X] = (alloc->x + alloc->width - 1) * scale_factor;
+      struts[STRUT_TOP] = (alloc->y + alloc->height) * window->scale_factor;
+      struts[STRUT_TOP_START_X] = alloc->x * window->scale_factor;
+      struts[STRUT_TOP_END_X] = (alloc->x + alloc->width - 1) * window->scale_factor;
     }
   else if (window->struts_edge == STRUTS_EDGE_BOTTOM)
     {
       /* the window is snapped on the bottom screen edge */
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-      struts[STRUT_BOTTOM] = (gdk_screen_get_height(window->screen) - alloc->y) * scale_factor;
+      struts[STRUT_BOTTOM] = (gdk_screen_get_height (window->screen) - alloc->y) * window->scale_factor;
 G_GNUC_END_IGNORE_DEPRECATIONS
-      struts[STRUT_BOTTOM_START_X] = alloc->x * scale_factor;
-      struts[STRUT_BOTTOM_END_X] = (alloc->x + alloc->width - 1) * scale_factor;
+      struts[STRUT_BOTTOM_START_X] = alloc->x * window->scale_factor;
+      struts[STRUT_BOTTOM_END_X] = (alloc->x + alloc->width - 1) * window->scale_factor;
     }
   else if (window->struts_edge == STRUTS_EDGE_LEFT)
     {
       /* the window is snapped on the left screen edge */
-      struts[STRUT_LEFT] = (alloc->x + alloc->width) * scale_factor;
-      struts[STRUT_LEFT_START_Y] = alloc->y * scale_factor;
-      struts[STRUT_LEFT_END_Y] = (alloc->y + alloc->height - 1) * scale_factor;
+      struts[STRUT_LEFT] = (alloc->x + alloc->width) * window->scale_factor;
+      struts[STRUT_LEFT_START_Y] = alloc->y * window->scale_factor;
+      struts[STRUT_LEFT_END_Y] = (alloc->y + alloc->height - 1) * window->scale_factor;
     }
   else if (window->struts_edge == STRUTS_EDGE_RIGHT)
     {
       /* the window is snapped on the right screen edge */
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-      struts[STRUT_RIGHT] = (gdk_screen_get_width(window->screen) - alloc->x) * scale_factor;
+      struts[STRUT_RIGHT] = (gdk_screen_get_width (window->screen) - alloc->x) * window->scale_factor;
 G_GNUC_END_IGNORE_DEPRECATIONS
-      struts[STRUT_RIGHT_START_Y] = alloc->y * scale_factor;
-      struts[STRUT_RIGHT_END_Y] = (alloc->y + alloc->height - 1) * scale_factor;
+      struts[STRUT_RIGHT_START_Y] = alloc->y * window->scale_factor;
+      struts[STRUT_RIGHT_END_Y] = (alloc->y + alloc->height - 1) * window->scale_factor;
     }
 
   /* store the new struts */
