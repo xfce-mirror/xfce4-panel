@@ -27,7 +27,9 @@ libclock_la_SOURCES = \
 	clock-fuzzy.c \
 	clock-fuzzy.h \
 	clock-lcd.c \
-	clock-lcd.h
+	clock-lcd.h \
+	clock-sleep-monitor.c \
+	clock-sleep-monitor.h
 
 libclock_la_CFLAGS = \
 	$(GLIB_CFLAGS) \
