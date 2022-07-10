@@ -26,7 +26,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-02 00:47+0200\n"
+"POT-Creation-Date: 2022-07-10 12:48+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Andrei Stepanov, 2022\n"
 "Language-Team: Russian (http://www.transifex.com/xfce/xfce4-panel/language/ru/)\n"
@@ -52,7 +52,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "панели;настройки;панель задач;автоскрытие;меню приложений;пуск;кнопки;запуск;область уведомлений;статус;значки;модули;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2962
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3014
 msgid "Panel"
 msgstr "Панель"
 
@@ -74,15 +74,15 @@ msgstr "Удаление элемента с панели также означ�
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1323
-#: ../plugins/applicationsmenu/applicationsmenu.c:625
-#: ../plugins/directorymenu/directorymenu.c:472
-#: ../plugins/directorymenu/directorymenu.c:932
+#: ../plugins/applicationsmenu/applicationsmenu.c:610
+#: ../plugins/directorymenu/directorymenu.c:469
+#: ../plugins/directorymenu/directorymenu.c:936
 msgid "_Cancel"
 msgstr "_Отменить"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1087
-#: ../libxfce4panel/xfce-panel-plugin.c:1264
-#: ../panel/panel-plugin-external.c:450
+#: ../libxfce4panel/xfce-panel-plugin.c:1267
+#: ../panel/panel-plugin-external.c:523
 #: ../panel/panel-preferences-dialog.c:958
 #: ../panel/panel-preferences-dialog.c:1324
 #: ../panel/panel-preferences-dialog.glade.h:59
@@ -90,36 +90,36 @@ msgstr "_Отменить"
 msgid "_Remove"
 msgstr "_Удалить"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1214
+#: ../libxfce4panel/xfce-panel-plugin.c:1217
 msgid "_Properties"
 msgstr "_Свойства"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3053
+#: ../libxfce4panel/xfce-panel-plugin.c:1232 ../panel/panel-window.c:3105
 msgid "_About"
 msgstr "_О программе"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1244
+#: ../libxfce4panel/xfce-panel-plugin.c:1247
 msgid "_Move"
 msgstr "_Переместить"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1285
+#: ../libxfce4panel/xfce-panel-plugin.c:1288
 msgid "Pane_l"
 msgstr "Пане_ль"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1294 ../panel/panel-window.c:2975
+#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3027
 msgid "Add _New Items..."
 msgstr "_Добавить новые элементы..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1309 ../panel/panel-window.c:2990
+#: ../libxfce4panel/xfce-panel-plugin.c:1312 ../panel/panel-window.c:3042
 msgid "Panel Pr_eferences..."
 msgstr "_Параметры панели..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1330 ../panel/panel-window.c:3022
+#: ../libxfce4panel/xfce-panel-plugin.c:1333 ../panel/panel-window.c:3074
 msgid "Log _Out"
 msgstr "_Завершить сеанс"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1350 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3042
+#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3094
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -132,7 +132,7 @@ msgstr "_Завершить сеанс"
 msgid "_Help"
 msgstr "_Справка"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1365
+#: ../libxfce4panel/xfce-panel-plugin.c:1368
 msgid "About"
 msgstr "О программе"
 
@@ -256,21 +256,21 @@ msgstr "Хотите запустить панель? Если да, то сох
 msgid "No running instance of %s was found"
 msgstr "Не обнаружено запущенного экземпляра %s"
 
-#: ../panel/panel-application.c:219
+#: ../panel/panel-application.c:221
 msgid "Failed to launch the migration application"
 msgstr "Не удалось запустить программу миграции"
 
-#: ../panel/panel-application.c:989
+#: ../panel/panel-application.c:1002
 msgid "Create _Launcher"
 msgstr "Создать _значок запуска"
 
-#: ../panel/panel-application.c:990
+#: ../panel/panel-application.c:1003
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Это создаст новый модуль значка запуска на панели и вставит брошенные файлы как пункты меню."
 
-#: ../panel/panel-application.c:992
+#: ../panel/panel-application.c:1005
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -279,21 +279,21 @@ msgstr[1] "Создать новый значок запуска на панел
 msgstr[2] "Создать новый значок запуска на панели из %d desktop-файлов"
 msgstr[3] "Создать новый значок запуска из %d desktop-файлов"
 
-#: ../panel/panel-application.c:1738
+#: ../panel/panel-application.c:1751
 msgid "Quit"
 msgstr "Закрыть"
 
-#: ../panel/panel-application.c:1739
+#: ../panel/panel-application.c:1752
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Вы запустили X-сервер без менеджера сеансов. Щелчок на «Закрыть» остановит X-сервер."
 
-#: ../panel/panel-application.c:1740
+#: ../panel/panel-application.c:1753
 msgid "Are you sure you want to quit the panel?"
 msgstr "Вы действительно хотите завершить работу панели?"
 
-#: ../panel/panel-application.c:1748
+#: ../panel/panel-application.c:1761
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Не удалось выполнить команду «%s»"
@@ -381,12 +381,12 @@ msgstr "_Искать:"
 msgid "Enter search phrase here"
 msgstr "Введите фразу для поиска"
 
-#: ../panel/panel-plugin-external.c:443
+#: ../panel/panel-plugin-external.c:516
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "Модуль «%s» неожиданно пропал с панели. Хотите его перезапустить?"
 
-#: ../panel/panel-plugin-external.c:445
+#: ../panel/panel-plugin-external.c:518
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -394,7 +394,7 @@ msgid ""
 "permanently removed from the panel."
 msgstr "Модуль в течение %d секунд был перезапущен несколько раз. Если вы нажмёте «Выполнить», панель попробует запустить его снова, в противном случае он будет окончательно удалён с панели."
 
-#: ../panel/panel-plugin-external.c:449
+#: ../panel/panel-plugin-external.c:522
 msgid "_Execute"
 msgstr "_Выполнить"
 
@@ -716,7 +716,7 @@ msgstr "Опытный"
 msgid "Expert"
 msgstr "Эксперт"
 
-#: ../panel/panel-window.c:3007
+#: ../panel/panel-window.c:3059
 msgid "_Lock Panel"
 msgstr "_Закрепить панель"
 
@@ -1022,19 +1022,19 @@ msgstr "Файл меню"
 msgid "Applications"
 msgstr "Приложения"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:623
-#: ../plugins/directorymenu/directorymenu.c:470
+#: ../plugins/applicationsmenu/applicationsmenu.c:608
+#: ../plugins/directorymenu/directorymenu.c:467
 msgid "Select An Icon"
 msgstr "Выберите значок"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:626
-#: ../plugins/directorymenu/directorymenu.c:473
+#: ../plugins/applicationsmenu/applicationsmenu.c:611
+#: ../plugins/directorymenu/directorymenu.c:470
 msgid "_OK"
 msgstr "_ОК"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:661
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2475
+#: ../plugins/applicationsmenu/applicationsmenu.c:648
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Не удалось выполнить команду «%s»."
@@ -1430,75 +1430,75 @@ msgstr "двенадцать"
 msgid "What time is it?"
 msgstr "Который час?"
 
-#: ../plugins/directorymenu/directorymenu.c:301
+#: ../plugins/directorymenu/directorymenu.c:299
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Меню каталога"
 
-#: ../plugins/directorymenu/directorymenu.c:688
+#: ../plugins/directorymenu/directorymenu.c:692
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Не удалось запустить приложение «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:720
+#: ../plugins/directorymenu/directorymenu.c:724
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Не удалось получить тип содержимого для «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:729
+#: ../plugins/directorymenu/directorymenu.c:733
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Не найдено приложение по умолчанию для «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:745
+#: ../plugins/directorymenu/directorymenu.c:749
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Не удалось запустить приложение по умолчанию для «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:840
+#: ../plugins/directorymenu/directorymenu.c:844
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Не удалось запустить предпочитаемое приложение для категории «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:921
+#: ../plugins/directorymenu/directorymenu.c:925
 msgid "Create New Folder"
 msgstr "Создать новый каталог"
 
-#: ../plugins/directorymenu/directorymenu.c:926
+#: ../plugins/directorymenu/directorymenu.c:930
 msgid "Create New Text Document"
 msgstr "Создать новый текстовый документ"
 
-#: ../plugins/directorymenu/directorymenu.c:933
+#: ../plugins/directorymenu/directorymenu.c:937
 msgid "C_reate"
 msgstr "_Создать"
 
-#: ../plugins/directorymenu/directorymenu.c:934
+#: ../plugins/directorymenu/directorymenu.c:938
 msgid "Create & _Open"
 msgstr "Создать и _открыть"
 
-#: ../plugins/directorymenu/directorymenu.c:948
+#: ../plugins/directorymenu/directorymenu.c:952
 msgid "Enter the new name:"
 msgstr "Введите имя:"
 
-#: ../plugins/directorymenu/directorymenu.c:984
+#: ../plugins/directorymenu/directorymenu.c:988
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Не удалось создать каталог: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1068
+#: ../plugins/directorymenu/directorymenu.c:1072
 msgid "Open Folder"
 msgstr "Открыть папку"
 
-#: ../plugins/directorymenu/directorymenu.c:1085
+#: ../plugins/directorymenu/directorymenu.c:1089
 msgid "Open in Terminal"
 msgstr "Открыть в терминале"
 
-#: ../plugins/directorymenu/directorymenu.c:1102
+#: ../plugins/directorymenu/directorymenu.c:1106
 msgid "Create Folder..."
 msgstr "Создать каталог..."
 
-#: ../plugins/directorymenu/directorymenu.c:1119
+#: ../plugins/directorymenu/directorymenu.c:1123
 msgid "Create Text Document..."
 msgstr "Создать текстовый документ..."
 
@@ -1699,7 +1699,7 @@ msgstr "_Настройки рабочих мест..."
 msgid "Unable to open the workspace settings"
 msgstr "Не удалось открыть настройки рабочих мест"
 
-#: ../plugins/pager/pager-buttons.c:598 ../plugins/windowmenu/windowmenu.c:876
+#: ../plugins/pager/pager-buttons.c:598 ../plugins/windowmenu/windowmenu.c:880
 #, c-format
 msgid "Workspace %d"
 msgstr "Рабочее место %d"
@@ -2006,8 +2006,9 @@ msgid "Behaviour"
 msgstr "Поведение"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:28
-msgid "Show windows from _all workspaces or viewports"
-msgstr "Показывать _окна со всех рабочих мест или видов"
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:11
+msgid "Show windows from _all workspaces"
+msgstr "Отображать _окна со всех рабочих мест"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:29
 msgid "Show windows from all mo_nitors"
@@ -2017,36 +2018,36 @@ msgstr "Показывать окна со всех _мониторов"
 msgid "Show only _minimized windows"
 msgstr "Показывать только с_вёрнутые окна"
 
-#: ../plugins/tasklist/tasklist-widget.c:3051
+#: ../plugins/tasklist/tasklist-widget.c:3067
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Не удалось запустить новый экземпляр '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:3055
+#: ../plugins/tasklist/tasklist-widget.c:3071
 msgid "Error"
 msgstr "Ошибка"
 
-#: ../plugins/tasklist/tasklist-widget.c:3084
+#: ../plugins/tasklist/tasklist-widget.c:3100
 msgid "Launch New Instance"
 msgstr "Запустить новый экземпляр"
 
-#: ../plugins/tasklist/tasklist-widget.c:3840
+#: ../plugins/tasklist/tasklist-widget.c:3856
 msgid "Mi_nimize All"
 msgstr "Св_ернуть все"
 
-#: ../plugins/tasklist/tasklist-widget.c:3848
+#: ../plugins/tasklist/tasklist-widget.c:3864
 msgid "Un_minimize All"
 msgstr "Отменить сво_рачивание всех"
 
-#: ../plugins/tasklist/tasklist-widget.c:3856
+#: ../plugins/tasklist/tasklist-widget.c:3872
 msgid "Ma_ximize All"
 msgstr "Раз_вернуть все"
 
-#: ../plugins/tasklist/tasklist-widget.c:3864
+#: ../plugins/tasklist/tasklist-widget.c:3880
 msgid "_Unmaximize All"
 msgstr "Отменить _разворачивание всех"
 
-#: ../plugins/tasklist/tasklist-widget.c:3876
+#: ../plugins/tasklist/tasklist-widget.c:3892
 msgid "_Close All"
 msgstr "_Закрыть все"
 
@@ -2054,28 +2055,28 @@ msgstr "_Закрыть все"
 msgid "Switch between open windows using buttons"
 msgstr "Переключаться между открытыми окнами с помощью кнопок"
 
-#: ../plugins/windowmenu/windowmenu.c:673
+#: ../plugins/windowmenu/windowmenu.c:677
 msgid "Desktop"
 msgstr "Рабочий стол"
 
-#: ../plugins/windowmenu/windowmenu.c:1275
+#: ../plugins/windowmenu/windowmenu.c:1279
 msgid "No Windows"
 msgstr "Без окон"
 
-#: ../plugins/windowmenu/windowmenu.c:1290
+#: ../plugins/windowmenu/windowmenu.c:1294
 msgid "Urgent Windows"
 msgstr "Срочные окна"
 
-#: ../plugins/windowmenu/windowmenu.c:1333
+#: ../plugins/windowmenu/windowmenu.c:1337
 msgid "Add Workspace"
 msgstr "Добавить рабочее место"
 
-#: ../plugins/windowmenu/windowmenu.c:1356
+#: ../plugins/windowmenu/windowmenu.c:1360
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Удалить рабочее место «%s»"
 
-#: ../plugins/windowmenu/windowmenu.c:1358
+#: ../plugins/windowmenu/windowmenu.c:1362
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Удалить рабочее место %d"
@@ -2108,10 +2109,6 @@ msgstr "Отображать _названия рабочих мест"
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Enable _urgency notification"
 msgstr "Включить уведомления о _срочности"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:11
-msgid "Show windows from _all workspaces"
-msgstr "Отображать _окна со всех рабочих мест"
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
 msgid "Switch between open windows using a menu"
