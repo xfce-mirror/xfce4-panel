@@ -1,3 +1,62 @@
+4.17.2 (2022-07-10)
+======
+- Dependency Changes:
+  - GLib >= 2.66.0
+  - Libxfce4util >= 4.17.2
+
+- New APIs:
+  - libxfce4panel: Add new function `xfce_panel_set_image_from_source()` (!83)
+  - libxfce4panel: Add new function `xfce_panel_plugin_popup_menu()` (!80)
+
+- Deprecated APIs:
+  - libxfce4panel: Deprecate `xfce_panel_plugin_position_menu()` (!80)
+
+- Code Refactoring:
+  - cleanup: Remove useless variable
+  - cleanup: Use already defined panel scale factor
+  - cleanup: Fix old typo
+  - tasklist: Remove redundant function call
+  - refactoring: Consistency of plugin menu callbacks
+  - refactoring: Use `g_file_peek_path()` when appropriate
+  - Autohide refactoring (!77)
+  - Replace soon-to-be-deprecated exo-string functions (!79)
+
+- Bug Fixes:
+  - panel: Silence allocation warning for external plugins (V2) (#590, !89)
+  - panel: Compare monitor geometries in the right dimension (#54)
+  - panel: Do not compare monitor geometry to itself (#54)
+  - tasklist: Take window scaling into account when detecting window position (#505)
+  - panel: Be sure to save plugins before xfconf_shutdown()
+  - tasklist: Fix critical warning when starting on a disconnected device
+  - tasklist: Delay sorting if window list is in use (#594)
+  - libxfce4panel: Allow to show about dialog when prefs dialog is shown (#221)
+  - panel: Prevent compositing message from affecting dialog size (Fixes #591)
+  - libxfce4panel: Unblock autohide before removing the plugin (#592)
+  - Grab devices until the menu takes over for popup commands (#201, #585)
+  - Fix return value of "remote-event" signal handlers (#585)
+  - Avoid "no trigger event" warning for popup commands
+  - Guard against the return value of `gdk_seat_get_pointer()`
+  - panel: Ensure that handles are always grabbable (Fixes #227)
+  - Allow to set a custom icon in appmenu and dirmenu (#254, !83)
+  - Use RGBA visual only if compositing is enabled (Fixes #251)
+  - launcher: Fix wrong format specifier in config file name (Fixes #581)
+  - applicationsmenu: Add option to set "small" property (Fixes #31, #113)
+  - pager: Consistency fixes between "miniature view" and "buttons" (#74, #209, #253, #257, #274, !82)
+  - libxfce4panel: Make urgency blinking more visible (Fixes #259)
+  - tasklist: Sorting fixes (#29, #126, #323, !81)
+  - systray: Force dbus-menu update when item is invalidated (Fixes #567)
+  - libxfce4panel: Unregister menu also on "selection-done"
+  - applicationsmenu: Do post-processing on "selection-done"
+  - windowmenu: Do not popup menu item wnck menu at widget
+  - Fix plugin menu popup at pointer (#297)
+  - Add new function `xfce_panel_plugin_popup_menu()` (#147, !80)
+
+- Translation Updates:
+  Albanian, Basque, Bulgarian, Chinese (China), Chinese (Taiwan),
+  Dutch, Estonian, French, German, Greek, Italian, Japanese,
+  Lithuanian, Norwegian Bokmål, Polish, Portuguese, Portuguese
+  (Brazil), Russian, Serbian, Slovenian, Spanish, Turkish, Ukrainian
+
 4.17.1 (2022-05-22)
 ======
 - Dependency Changes:
