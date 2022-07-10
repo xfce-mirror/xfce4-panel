@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-07 00:47+0200\n"
+"POT-Creation-Date: 2022-06-02 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2017,2022\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/xfce/xfce4-panel/language/en_GB/)\n"
@@ -40,7 +40,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panels;settings;preferences;taskbar;autohide;application menu;start;buttons;launcher;notification area;status;icons;plugins;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3047
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2962
 msgid "Panel"
 msgstr "Panel"
 
@@ -50,7 +50,7 @@ msgstr "Customise the panel"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1080
-#: ../panel/panel-preferences-dialog.c:1321
+#: ../panel/panel-preferences-dialog.c:1318
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Are you sure that you want to remove \"%s\"?"
@@ -61,53 +61,53 @@ msgid ""
 msgstr "Removing the item from the panel also means its configuration will be lost."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:164
-#: ../panel/panel-preferences-dialog.c:1326
-#: ../plugins/applicationsmenu/applicationsmenu.c:601
+#: ../panel/panel-preferences-dialog.c:1323
+#: ../plugins/applicationsmenu/applicationsmenu.c:625
 #: ../plugins/directorymenu/directorymenu.c:472
-#: ../plugins/directorymenu/directorymenu.c:937
+#: ../plugins/directorymenu/directorymenu.c:932
 msgid "_Cancel"
 msgstr "_Cancel"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1087
-#: ../libxfce4panel/xfce-panel-plugin.c:1262
+#: ../libxfce4panel/xfce-panel-plugin.c:1264
 #: ../panel/panel-plugin-external.c:450
-#: ../panel/panel-preferences-dialog.c:961
-#: ../panel/panel-preferences-dialog.c:1327
+#: ../panel/panel-preferences-dialog.c:958
+#: ../panel/panel-preferences-dialog.c:1324
 #: ../panel/panel-preferences-dialog.glade.h:59
 #: ../plugins/launcher/launcher-dialog.c:861
 msgid "_Remove"
 msgstr "_Remove"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1212
+#: ../libxfce4panel/xfce-panel-plugin.c:1214
 msgid "_Properties"
 msgstr "_Properties"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1227 ../panel/panel-window.c:3138
+#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3053
 msgid "_About"
 msgstr "_About"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1242
+#: ../libxfce4panel/xfce-panel-plugin.c:1244
 msgid "_Move"
 msgstr "_Move"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1283
+#: ../libxfce4panel/xfce-panel-plugin.c:1285
 msgid "Pane_l"
 msgstr "Pane_l"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1292 ../panel/panel-window.c:3060
+#: ../libxfce4panel/xfce-panel-plugin.c:1294 ../panel/panel-window.c:2975
 msgid "Add _New Items..."
 msgstr "Add _New Items..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1307 ../panel/panel-window.c:3075
+#: ../libxfce4panel/xfce-panel-plugin.c:1309 ../panel/panel-window.c:2990
 msgid "Panel Pr_eferences..."
 msgstr "Panel Pr_eferences..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:3107
+#: ../libxfce4panel/xfce-panel-plugin.c:1330 ../panel/panel-window.c:3022
 msgid "Log _Out"
 msgstr "Log _Out"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1348 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3127
+#: ../libxfce4panel/xfce-panel-plugin.c:1350 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3042
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -120,7 +120,7 @@ msgstr "Log _Out"
 msgid "_Help"
 msgstr "_Help"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1363
+#: ../libxfce4panel/xfce-panel-plugin.c:1365
 msgid "About"
 msgstr "About"
 
@@ -244,42 +244,42 @@ msgstr "Do you want to start the panel? If you do, make sure you save the sessio
 msgid "No running instance of %s was found"
 msgstr "No running instance of %s was found"
 
-#: ../panel/panel-application.c:215
+#: ../panel/panel-application.c:219
 msgid "Failed to launch the migration application"
 msgstr "Failed to launch the migration application"
 
-#: ../panel/panel-application.c:985
+#: ../panel/panel-application.c:989
 msgid "Create _Launcher"
 msgstr "Create _Launcher"
 
-#: ../panel/panel-application.c:986
+#: ../panel/panel-application.c:990
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "This will create a new launcher plug-in on the panel and inserts the dropped files as menu items."
 
-#: ../panel/panel-application.c:988
+#: ../panel/panel-application.c:992
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Create new launcher from %d desktop file"
 msgstr[1] "Create new launcher from %d desktop files"
 
-#: ../panel/panel-application.c:1728
+#: ../panel/panel-application.c:1738
 msgid "Quit"
 msgstr "Quit"
 
-#: ../panel/panel-application.c:1729
+#: ../panel/panel-application.c:1739
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "You have started X without session manager. Clicking Quit will close the X server."
 
-#: ../panel/panel-application.c:1730
+#: ../panel/panel-application.c:1740
 msgid "Are you sure you want to quit the panel?"
 msgstr "Are you sure you want to quit the panel?"
 
-#: ../panel/panel-application.c:1738
+#: ../panel/panel-application.c:1748
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Failed to execute command \"%s\""
@@ -398,25 +398,25 @@ msgstr "Primary"
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:962
+#: ../panel/panel-preferences-dialog.c:959
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "The panel and plug-in configurations will be permanently removed"
 
-#: ../panel/panel-preferences-dialog.c:963
+#: ../panel/panel-preferences-dialog.c:960
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Are you sure you want to remove panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1163
+#: ../panel/panel-preferences-dialog.c:1160
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(external)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1168
+#: ../panel/panel-preferences-dialog.c:1165
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -425,12 +425,12 @@ msgstr "Internal name: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1180
+#: ../panel/panel-preferences-dialog.c:1177
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Internal name: %s-%d"
 
-#: ../panel/panel-preferences-dialog.c:1324
+#: ../panel/panel-preferences-dialog.c:1321
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "If you remove the item from the panel, it is permanently lost."
 
@@ -702,7 +702,7 @@ msgstr "Experienced"
 msgid "Expert"
 msgstr "Expert"
 
-#: ../panel/panel-window.c:3092
+#: ../panel/panel-window.c:3007
 msgid "_Lock Panel"
 msgstr "_Lock Panel"
 
@@ -945,28 +945,32 @@ msgid "Button _title:"
 msgstr "Button _title:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+msgid "Show button on one _line"
+msgstr "Show button on one _line"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "_Show button title"
 msgstr "_Show button title"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show application d_escription in tooltip"
 msgstr "Show application d_escription in tooltip"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show ic_ons in menu"
 msgstr "Show ic_ons in menu"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show generic application n_ames"
 msgstr "Show generic application n_ames"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
 msgstr "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
@@ -975,27 +979,27 @@ msgstr "Select this option to show the generic application name in the menu, for
 msgid "Appearance"
 msgstr "Appearance"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
 msgid "Use the _default menu"
 msgstr "Use the _default menu"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 msgid "Ed_it Menu"
 msgstr "Ed_it Menu"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "Use c_ustom menu file:"
 msgstr "Use c_ustom menu file:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:16
 msgid "Menu _file:"
 msgstr "Menu _file:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:16
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:17
 msgid "Select A Menu File"
 msgstr "Select A Menu File"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:17
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:18
 msgid "Menu File"
 msgstr "Menu File"
 
@@ -1004,19 +1008,19 @@ msgstr "Menu File"
 msgid "Applications"
 msgstr "Applications"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:599
+#: ../plugins/applicationsmenu/applicationsmenu.c:623
 #: ../plugins/directorymenu/directorymenu.c:470
 msgid "Select An Icon"
 msgstr "Select An Icon"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:602
+#: ../plugins/applicationsmenu/applicationsmenu.c:626
 #: ../plugins/directorymenu/directorymenu.c:473
 msgid "_OK"
 msgstr "_OK"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:637
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2501
+#: ../plugins/applicationsmenu/applicationsmenu.c:661
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2475
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Failed to execute command \"%s\"."
@@ -1418,69 +1422,69 @@ msgstr "What time is it?"
 msgid "Directory Menu"
 msgstr "Directory Menu"
 
-#: ../plugins/directorymenu/directorymenu.c:690
+#: ../plugins/directorymenu/directorymenu.c:688
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Failed to launch application \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:722
+#: ../plugins/directorymenu/directorymenu.c:720
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Failed to query content type for \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:731
+#: ../plugins/directorymenu/directorymenu.c:729
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "No default application found for \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:747
+#: ../plugins/directorymenu/directorymenu.c:745
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Failed to launch default application for \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:843
+#: ../plugins/directorymenu/directorymenu.c:840
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Failed to execute the preferred application for category \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:926
+#: ../plugins/directorymenu/directorymenu.c:921
 msgid "Create New Folder"
 msgstr "Create New Folder"
 
-#: ../plugins/directorymenu/directorymenu.c:931
+#: ../plugins/directorymenu/directorymenu.c:926
 msgid "Create New Text Document"
 msgstr "Create New Text Document"
 
-#: ../plugins/directorymenu/directorymenu.c:938
+#: ../plugins/directorymenu/directorymenu.c:933
 msgid "C_reate"
 msgstr "C_reate"
 
-#: ../plugins/directorymenu/directorymenu.c:939
+#: ../plugins/directorymenu/directorymenu.c:934
 msgid "Create & _Open"
 msgstr "Create & _Open"
 
-#: ../plugins/directorymenu/directorymenu.c:953
+#: ../plugins/directorymenu/directorymenu.c:948
 msgid "Enter the new name:"
 msgstr "Enter the new name:"
 
-#: ../plugins/directorymenu/directorymenu.c:989
+#: ../plugins/directorymenu/directorymenu.c:984
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Failed to create folder: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1074
+#: ../plugins/directorymenu/directorymenu.c:1068
 msgid "Open Folder"
 msgstr "Open Folder"
 
-#: ../plugins/directorymenu/directorymenu.c:1091
+#: ../plugins/directorymenu/directorymenu.c:1085
 msgid "Open in Terminal"
 msgstr "Open in Terminal"
 
-#: ../plugins/directorymenu/directorymenu.c:1108
+#: ../plugins/directorymenu/directorymenu.c:1102
 msgid "Create Folder..."
 msgstr "Create Folder..."
 
-#: ../plugins/directorymenu/directorymenu.c:1125
+#: ../plugins/directorymenu/directorymenu.c:1119
 msgid "Create Text Document..."
 msgstr "Create Text Document..."
 
@@ -1541,11 +1545,11 @@ msgstr "Filtering"
 msgid "Open launcher menu"
 msgstr "Open launcher menu"
 
-#: ../plugins/launcher/launcher.c:1633
+#: ../plugins/launcher/launcher.c:1611
 msgid "Unnamed Item"
 msgstr "Unnamed Item"
 
-#: ../plugins/launcher/launcher.c:1821
+#: ../plugins/launcher/launcher.c:1795
 msgid "No items"
 msgstr "No items"
 
@@ -1673,15 +1677,15 @@ msgstr "Advanced"
 msgid "Program launcher with optional menu"
 msgstr "Program launcher with optional menu"
 
-#: ../plugins/pager/pager.c:557 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:543 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "Workspace _Settings..."
 
-#: ../plugins/pager/pager.c:645
+#: ../plugins/pager/pager.c:631
 msgid "Unable to open the workspace settings"
 msgstr "Unable to open the workspace settings"
 
-#: ../plugins/pager/pager-buttons.c:590 ../plugins/windowmenu/windowmenu.c:876
+#: ../plugins/pager/pager-buttons.c:598 ../plugins/windowmenu/windowmenu.c:876
 #, c-format
 msgid "Workspace %d"
 msgstr "Workspace %d"
@@ -1712,6 +1716,10 @@ msgid "Switch workspaces using the mouse wheel"
 msgstr "Switch workspaces using the mouse wheel"
 
 #: ../plugins/pager/pager-dialog.glade.h:10
+msgid "Wrap around workspaces"
+msgstr "Wrap around workspaces"
+
+#: ../plugins/pager/pager-dialog.glade.h:11
 msgid "<b>Appearance</b>"
 msgstr "<b>Appearance</b>"
 
@@ -1995,36 +2003,36 @@ msgstr "Show windows from all mo_nitors"
 msgid "Show only _minimized windows"
 msgstr "Show only _minimised windows"
 
-#: ../plugins/tasklist/tasklist-widget.c:3042
+#: ../plugins/tasklist/tasklist-widget.c:3051
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Unable to start new instance of '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:3046
+#: ../plugins/tasklist/tasklist-widget.c:3055
 msgid "Error"
 msgstr "Error"
 
-#: ../plugins/tasklist/tasklist-widget.c:3075
+#: ../plugins/tasklist/tasklist-widget.c:3084
 msgid "Launch New Instance"
 msgstr "Launch New Instance"
 
-#: ../plugins/tasklist/tasklist-widget.c:3834
+#: ../plugins/tasklist/tasklist-widget.c:3840
 msgid "Mi_nimize All"
 msgstr "Mi_nimise All"
 
-#: ../plugins/tasklist/tasklist-widget.c:3842
+#: ../plugins/tasklist/tasklist-widget.c:3848
 msgid "Un_minimize All"
 msgstr "Un_minimise All"
 
-#: ../plugins/tasklist/tasklist-widget.c:3850
+#: ../plugins/tasklist/tasklist-widget.c:3856
 msgid "Ma_ximize All"
 msgstr "Ma_ximise All"
 
-#: ../plugins/tasklist/tasklist-widget.c:3858
+#: ../plugins/tasklist/tasklist-widget.c:3864
 msgid "_Unmaximize All"
 msgstr "_Unmaximise All"
 
-#: ../plugins/tasklist/tasklist-widget.c:3870
+#: ../plugins/tasklist/tasklist-widget.c:3876
 msgid "_Close All"
 msgstr "_Close All"
 
