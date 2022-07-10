@@ -234,7 +234,8 @@ void                  xfce_panel_plugin_position_menu       (GtkMenu           *
                                                              gint              *x,
                                                              gint              *y,
                                                              gboolean          *push_in,
-                                                             gpointer           panel_plugin);
+                                                             gpointer           panel_plugin)
+G_GNUC_DEPRECATED_FOR (xfce_panel_plugin_popup_menu());
 
 void                  xfce_panel_plugin_popup_menu          (XfcePanelPlugin   *plugin,
                                                              GtkMenu           *menu,

@@ -42,6 +42,9 @@ print <<EOF;
 # pragma GCC diagnostic ignored "-Wredundant-decls"
 #endif
 
+/* silence '-Wdeprecated-declarations' warnings from our own deprecations */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+
 EOF
 
 my $in_comment = 0;
@@ -156,6 +159,8 @@ EOF
   }
 
 print <<EOF;
+
+G_GNUC_END_IGNORE_DEPRECATIONS
 
 #if G_GNUC_CHECK_VERSION (4, 6)
 # pragma GCC diagnostic pop
