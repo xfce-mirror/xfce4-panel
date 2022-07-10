@@ -1058,7 +1058,24 @@ panel_preferences_dialog_compositing_clicked (GtkButton *button, gpointer user_d
     }
 }
 
+static gchar *
+get_panel_cmdline(gchar *program)
+{
+  gchar *path;
+  gchar *path_with_opts;
 
+  path = g_find_program_in_path (program);
+
+  if (path != NULL) {
+    path_with_opts = g_strjoin (" ", path, "--from-panel", NULL);
+
+    g_free (path);
+
+    path = path_with_opts;
+  }
+
+  return path;
+}
 
 static void
 panel_preferences_dialog_panel_switch (GtkWidget *widget, PanelPreferencesDialog *dialog)
@@ -1067,8 +1084,10 @@ panel_preferences_dialog_panel_switch (GtkWidget *widget, PanelPreferencesDialog
   gchar     *path_old;
   gchar     *path_new;
 
-  path_old = g_find_program_in_path ("xfpanel-switch");
-  path_new = g_find_program_in_path ("xfce4-panel-profiles");
+  /* xfce4-panel-profiles will reopen this app after it is closed. */
+  path_old = get_panel_cmdline ("xfpanel-switch");
+  path_new = get_panel_cmdline ("xfce4-panel-profiles");
+
   if (path_old == NULL && path_new == NULL)
     return;
 
