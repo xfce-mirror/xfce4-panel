@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-02 00:47+0200\n"
+"POT-Creation-Date: 2022-07-10 12:48+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2007,2020,2022\n"
 "Language-Team: Albanian (http://www.transifex.com/xfce/xfce4-panel/language/sq/)\n"
@@ -37,7 +37,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panele;rregullime;parapëlqime;shtyllë punësh;vetëfshihu;aplikacion menu;nisje;butona;nisës;zonë njoftimesh;gjendje;ikona;shtojca;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2962
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3014
 msgid "Panel"
 msgstr "Panel"
 
@@ -59,15 +59,15 @@ msgstr "Heqja e elementit prej panelit do të thotë se do të humbë edhe form�
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1323
-#: ../plugins/applicationsmenu/applicationsmenu.c:625
-#: ../plugins/directorymenu/directorymenu.c:472
-#: ../plugins/directorymenu/directorymenu.c:932
+#: ../plugins/applicationsmenu/applicationsmenu.c:610
+#: ../plugins/directorymenu/directorymenu.c:469
+#: ../plugins/directorymenu/directorymenu.c:936
 msgid "_Cancel"
 msgstr "_Anuloje"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1087
-#: ../libxfce4panel/xfce-panel-plugin.c:1264
-#: ../panel/panel-plugin-external.c:450
+#: ../libxfce4panel/xfce-panel-plugin.c:1267
+#: ../panel/panel-plugin-external.c:523
 #: ../panel/panel-preferences-dialog.c:958
 #: ../panel/panel-preferences-dialog.c:1324
 #: ../panel/panel-preferences-dialog.glade.h:59
@@ -75,36 +75,36 @@ msgstr "_Anuloje"
 msgid "_Remove"
 msgstr "_Hiqe"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1214
+#: ../libxfce4panel/xfce-panel-plugin.c:1217
 msgid "_Properties"
 msgstr "_Veti"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3053
+#: ../libxfce4panel/xfce-panel-plugin.c:1232 ../panel/panel-window.c:3105
 msgid "_About"
 msgstr "_Rreth"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1244
+#: ../libxfce4panel/xfce-panel-plugin.c:1247
 msgid "_Move"
 msgstr "_Zhvendose"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1285
+#: ../libxfce4panel/xfce-panel-plugin.c:1288
 msgid "Pane_l"
 msgstr "_Panel"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1294 ../panel/panel-window.c:2975
+#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3027
 msgid "Add _New Items..."
 msgstr "Shtoni Elemente të _Rinj…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1309 ../panel/panel-window.c:2990
+#: ../libxfce4panel/xfce-panel-plugin.c:1312 ../panel/panel-window.c:3042
 msgid "Panel Pr_eferences..."
 msgstr "_Parapëlqime Paneli…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1330 ../panel/panel-window.c:3022
+#: ../libxfce4panel/xfce-panel-plugin.c:1333 ../panel/panel-window.c:3074
 msgid "Log _Out"
 msgstr "_Dilni"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1350 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3042
+#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3094
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -117,7 +117,7 @@ msgstr "_Dilni"
 msgid "_Help"
 msgstr "_Ndihmë"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1365
+#: ../libxfce4panel/xfce-panel-plugin.c:1368
 msgid "About"
 msgstr "Rreth"
 
@@ -241,42 +241,42 @@ msgstr "Doni ta nisni panelin? Nëse po, sigurohuni se e ruani sesionin gjatë d
 msgid "No running instance of %s was found"
 msgstr "S’u gjet instancë %s në xhirim e sipër"
 
-#: ../panel/panel-application.c:219
+#: ../panel/panel-application.c:221
 msgid "Failed to launch the migration application"
 msgstr "S’u arrit të niset aplikacioni i migrimit"
 
-#: ../panel/panel-application.c:989
+#: ../panel/panel-application.c:1002
 msgid "Create _Launcher"
 msgstr "Krijo _Nisës"
 
-#: ../panel/panel-application.c:990
+#: ../panel/panel-application.c:1003
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Kjo do të krijojë te paneli një shtojcë të ri nisësi dhe i fut si elementë menuje kartelat e hedhura brenda saj."
 
-#: ../panel/panel-application.c:992
+#: ../panel/panel-application.c:1005
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Krijo nisës të ri prej %d kartele desktop"
 msgstr[1] "Krijo nisës të ri prej %d kartelash desktop"
 
-#: ../panel/panel-application.c:1738
+#: ../panel/panel-application.c:1751
 msgid "Quit"
 msgstr "Dilni"
 
-#: ../panel/panel-application.c:1739
+#: ../panel/panel-application.c:1752
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "E keni nisur X-in pa përgjegjës sesionesh. Klikimi mbi Dilni do ta mbyllë shërbyesin X."
 
-#: ../panel/panel-application.c:1740
+#: ../panel/panel-application.c:1753
 msgid "Are you sure you want to quit the panel?"
 msgstr "Jeni i sigurt se doni të dilet nga paneli?"
 
-#: ../panel/panel-application.c:1748
+#: ../panel/panel-application.c:1761
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "S’u arrit të përmbushet urdhri \"%s\""
@@ -364,12 +364,12 @@ msgstr "_Kërko:"
 msgid "Enter search phrase here"
 msgstr "Jepni këtu një togfjalësh kërkimi"
 
-#: ../panel/panel-plugin-external.c:443
+#: ../panel/panel-plugin-external.c:516
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "Shtojca \"%s\" e la papritmas panelin, doni të riniset?"
 
-#: ../panel/panel-plugin-external.c:445
+#: ../panel/panel-plugin-external.c:518
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -377,7 +377,7 @@ msgid ""
 "permanently removed from the panel."
 msgstr "Shtojca u nis më shumë se një herë në %d sekondat e fundit. Nëse shtypni Ekzekutoje, paneli do të provojë të rinisë shtojcën, përndryshe do të hiqet përgjithmonë nga paneli."
 
-#: ../panel/panel-plugin-external.c:449
+#: ../panel/panel-plugin-external.c:522
 msgid "_Execute"
 msgstr "_Kryeje"
 
@@ -699,7 +699,7 @@ msgstr "I sprovuar"
 msgid "Expert"
 msgstr "I regjur"
 
-#: ../panel/panel-window.c:3007
+#: ../panel/panel-window.c:3059
 msgid "_Lock Panel"
 msgstr "_Kyçe Panelin"
 
@@ -1005,19 +1005,19 @@ msgstr "Kartelë Menuje"
 msgid "Applications"
 msgstr "Aplikacione"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:623
-#: ../plugins/directorymenu/directorymenu.c:470
+#: ../plugins/applicationsmenu/applicationsmenu.c:608
+#: ../plugins/directorymenu/directorymenu.c:467
 msgid "Select An Icon"
 msgstr "Përzgjidhni Ikonë"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:626
-#: ../plugins/directorymenu/directorymenu.c:473
+#: ../plugins/applicationsmenu/applicationsmenu.c:611
+#: ../plugins/directorymenu/directorymenu.c:470
 msgid "_OK"
 msgstr "_OK"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:661
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2475
+#: ../plugins/applicationsmenu/applicationsmenu.c:648
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Dështoi përmbushja e urdhrit \"%s\"."
@@ -1413,75 +1413,75 @@ msgstr "dymbëdhjetë"
 msgid "What time is it?"
 msgstr "Sa është ora?"
 
-#: ../plugins/directorymenu/directorymenu.c:301
+#: ../plugins/directorymenu/directorymenu.c:299
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Menu Drejtorish"
 
-#: ../plugins/directorymenu/directorymenu.c:688
+#: ../plugins/directorymenu/directorymenu.c:692
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "S’u arrit të niset aplikacioni \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:720
+#: ../plugins/directorymenu/directorymenu.c:724
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "S’u arrit të kërkohej lloji i lëndës për \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:729
+#: ../plugins/directorymenu/directorymenu.c:733
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "S’u gjet aplikacion parazgjedhje për \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:745
+#: ../plugins/directorymenu/directorymenu.c:749
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "S’u arrit të niset aplikacioni parazgjedhje për \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:840
+#: ../plugins/directorymenu/directorymenu.c:844
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "S’u arrit të ekzekutohej aplikacioni i parapëlqyer për kategorinë \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:921
+#: ../plugins/directorymenu/directorymenu.c:925
 msgid "Create New Folder"
 msgstr "Krijo Dosje të Re"
 
-#: ../plugins/directorymenu/directorymenu.c:926
+#: ../plugins/directorymenu/directorymenu.c:930
 msgid "Create New Text Document"
 msgstr "Krijoni Dokument të Ri Tekst"
 
-#: ../plugins/directorymenu/directorymenu.c:933
+#: ../plugins/directorymenu/directorymenu.c:937
 msgid "C_reate"
 msgstr "_Krijoje"
 
-#: ../plugins/directorymenu/directorymenu.c:934
+#: ../plugins/directorymenu/directorymenu.c:938
 msgid "Create & _Open"
 msgstr "Krijoje & _Hape"
 
-#: ../plugins/directorymenu/directorymenu.c:948
+#: ../plugins/directorymenu/directorymenu.c:952
 msgid "Enter the new name:"
 msgstr "Jepni emrin e ri:"
 
-#: ../plugins/directorymenu/directorymenu.c:984
+#: ../plugins/directorymenu/directorymenu.c:988
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "S’u arrit të krijohej dosje: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1068
+#: ../plugins/directorymenu/directorymenu.c:1072
 msgid "Open Folder"
 msgstr "Hap Dosje"
 
-#: ../plugins/directorymenu/directorymenu.c:1085
+#: ../plugins/directorymenu/directorymenu.c:1089
 msgid "Open in Terminal"
 msgstr "Hape në Terminal"
 
-#: ../plugins/directorymenu/directorymenu.c:1102
+#: ../plugins/directorymenu/directorymenu.c:1106
 msgid "Create Folder..."
 msgstr "Krijoni Dosje…"
 
-#: ../plugins/directorymenu/directorymenu.c:1119
+#: ../plugins/directorymenu/directorymenu.c:1123
 msgid "Create Text Document..."
 msgstr "Krijoni Dokument Tekst…"
 
@@ -1682,7 +1682,7 @@ msgstr "_Rregullime Hapësire Pune…"
 msgid "Unable to open the workspace settings"
 msgstr "S’arrihet të hapen rregullimet e hapësirës së punës"
 
-#: ../plugins/pager/pager-buttons.c:598 ../plugins/windowmenu/windowmenu.c:876
+#: ../plugins/pager/pager-buttons.c:598 ../plugins/windowmenu/windowmenu.c:880
 #, c-format
 msgid "Workspace %d"
 msgstr "Hapësirë pune %d"
@@ -1989,8 +1989,9 @@ msgid "Behaviour"
 msgstr "Sjellje"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:28
-msgid "Show windows from _all workspaces or viewports"
-msgstr "Shfaq dritare prej krejt hapësirave të punës apo ekraneve"
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:11
+msgid "Show windows from _all workspaces"
+msgstr "Shfaq dritaret prej _krejt hapësirave të punës"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:29
 msgid "Show windows from all mo_nitors"
@@ -2000,36 +2001,36 @@ msgstr "Shfaq dritare prej krejt mo_nitorëve"
 msgid "Show only _minimized windows"
 msgstr "Shfaq vetëm dritare të _minimizuara"
 
-#: ../plugins/tasklist/tasklist-widget.c:3051
+#: ../plugins/tasklist/tasklist-widget.c:3067
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "S’arrihet të niset instancë e re e '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:3055
+#: ../plugins/tasklist/tasklist-widget.c:3071
 msgid "Error"
 msgstr "Gabim"
 
-#: ../plugins/tasklist/tasklist-widget.c:3084
+#: ../plugins/tasklist/tasklist-widget.c:3100
 msgid "Launch New Instance"
 msgstr "Nis Instancë të Re"
 
-#: ../plugins/tasklist/tasklist-widget.c:3840
+#: ../plugins/tasklist/tasklist-widget.c:3856
 msgid "Mi_nimize All"
 msgstr "Mi_nimizoji Krejt"
 
-#: ../plugins/tasklist/tasklist-widget.c:3848
+#: ../plugins/tasklist/tasklist-widget.c:3864
 msgid "Un_minimize All"
 msgstr "Ç_minimizoji Krejt"
 
-#: ../plugins/tasklist/tasklist-widget.c:3856
+#: ../plugins/tasklist/tasklist-widget.c:3872
 msgid "Ma_ximize All"
 msgstr "Ma_ksimizoji Krejt"
 
-#: ../plugins/tasklist/tasklist-widget.c:3864
+#: ../plugins/tasklist/tasklist-widget.c:3880
 msgid "_Unmaximize All"
 msgstr "Çmaksimi_zoji Krejt"
 
-#: ../plugins/tasklist/tasklist-widget.c:3876
+#: ../plugins/tasklist/tasklist-widget.c:3892
 msgid "_Close All"
 msgstr "_Mbylli Krejt"
 
@@ -2037,28 +2038,28 @@ msgstr "_Mbylli Krejt"
 msgid "Switch between open windows using buttons"
 msgstr "Hidhu nga njëra dritare e hapur në tjetrën duke përdorur butona"
 
-#: ../plugins/windowmenu/windowmenu.c:673
+#: ../plugins/windowmenu/windowmenu.c:677
 msgid "Desktop"
 msgstr "Desktop"
 
-#: ../plugins/windowmenu/windowmenu.c:1275
+#: ../plugins/windowmenu/windowmenu.c:1279
 msgid "No Windows"
 msgstr "Pa Dritare"
 
-#: ../plugins/windowmenu/windowmenu.c:1290
+#: ../plugins/windowmenu/windowmenu.c:1294
 msgid "Urgent Windows"
 msgstr "Dritare Urgjente"
 
-#: ../plugins/windowmenu/windowmenu.c:1333
+#: ../plugins/windowmenu/windowmenu.c:1337
 msgid "Add Workspace"
 msgstr "Shtoni Hapësirë Pune"
 
-#: ../plugins/windowmenu/windowmenu.c:1356
+#: ../plugins/windowmenu/windowmenu.c:1360
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Hiq Hapësirë Pune \"%s\""
 
-#: ../plugins/windowmenu/windowmenu.c:1358
+#: ../plugins/windowmenu/windowmenu.c:1362
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Hiq Hapësirë pune %d"
@@ -2091,10 +2092,6 @@ msgstr "Shfaq _emra hapësirash pune"
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Enable _urgency notification"
 msgstr "Aktivizo njoftim _urgjence"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:11
-msgid "Show windows from _all workspaces"
-msgstr "Shfaq dritaret prej _krejt hapësirave të punës"
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
 msgid "Switch between open windows using a menu"
