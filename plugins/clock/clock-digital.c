@@ -212,13 +212,14 @@ xfce_clock_digital_update (XfceClockDigital *digital,
 
 
 GtkWidget *
-xfce_clock_digital_new (ClockTime *time)
+xfce_clock_digital_new (ClockTime *time, ClockSleepMonitor *sleep_monitor)
 {
   XfceClockDigital *digital = g_object_new (XFCE_CLOCK_TYPE_DIGITAL, NULL);
 
   digital->time = time;
   digital->timeout = clock_time_timeout_new (clock_time_interval_from_format (digital->format),
                                              digital->time,
+                                             sleep_monitor,
                                              G_CALLBACK (xfce_clock_digital_update), digital);
 
   return GTK_WIDGET (digital);
