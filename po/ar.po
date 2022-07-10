@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 00:47+0100\n"
-"PO-Revision-Date: 2022-02-07 23:47+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
+"POT-Creation-Date: 2022-07-10 12:48+0200\n"
+"PO-Revision-Date: 2013-07-02 20:26+0000\n"
+"Last-Translator: 7f91df02564a1feba5fdc4d7b990b7f2_5fb95ff, 2021\n"
 "Language-Team: Arabic (http://www.transifex.com/xfce/xfce4-panel/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,7 +41,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "اللوحات;الإعدادات;التفضيلات;شريط المهام;الإخفاء التلقائي;قائمة التطبيقات;البدء;الأزرار;المشغل;منطقة الإشعارات;الحالة;الأيقونات;الإضافات;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2975
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3014
 msgid "Panel"
 msgstr "لوحة"
 
@@ -51,7 +51,7 @@ msgstr "خصص اللوحة"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1080
-#: ../panel/panel-preferences-dialog.c:1321
+#: ../panel/panel-preferences-dialog.c:1318
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "متأكد أنك تريد حذف \"%s\"؟"
@@ -61,54 +61,54 @@ msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "إزالة العنصر من اللوحة يعني أيضا أن إعدادات الضبط الخاصة به ستُفقد"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:163
-#: ../panel/panel-preferences-dialog.c:1326
-#: ../plugins/applicationsmenu/applicationsmenu.c:602
-#: ../plugins/directorymenu/directorymenu.c:473
-#: ../plugins/directorymenu/directorymenu.c:941
+#: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:164
+#: ../panel/panel-preferences-dialog.c:1323
+#: ../plugins/applicationsmenu/applicationsmenu.c:610
+#: ../plugins/directorymenu/directorymenu.c:469
+#: ../plugins/directorymenu/directorymenu.c:936
 msgid "_Cancel"
 msgstr "_إلغاء"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1087
-#: ../libxfce4panel/xfce-panel-plugin.c:1262
-#: ../panel/panel-plugin-external.c:450
-#: ../panel/panel-preferences-dialog.c:961
-#: ../panel/panel-preferences-dialog.c:1327
+#: ../libxfce4panel/xfce-panel-plugin.c:1267
+#: ../panel/panel-plugin-external.c:523
+#: ../panel/panel-preferences-dialog.c:958
+#: ../panel/panel-preferences-dialog.c:1324
 #: ../panel/panel-preferences-dialog.glade.h:59
-#: ../plugins/launcher/launcher-dialog.c:859
+#: ../plugins/launcher/launcher-dialog.c:861
 msgid "_Remove"
 msgstr "_حذف"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1212
+#: ../libxfce4panel/xfce-panel-plugin.c:1217
 msgid "_Properties"
 msgstr "_خصائص"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1227 ../panel/panel-window.c:3066
+#: ../libxfce4panel/xfce-panel-plugin.c:1232 ../panel/panel-window.c:3105
 msgid "_About"
 msgstr "_حول"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1242
+#: ../libxfce4panel/xfce-panel-plugin.c:1247
 msgid "_Move"
 msgstr "_انقل"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1283
+#: ../libxfce4panel/xfce-panel-plugin.c:1288
 msgid "Pane_l"
 msgstr "الش_ريط"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1292 ../panel/panel-window.c:2988
+#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3027
 msgid "Add _New Items..."
 msgstr "أضف عناصر _جديدة..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1307 ../panel/panel-window.c:3003
+#: ../libxfce4panel/xfce-panel-plugin.c:1312 ../panel/panel-window.c:3042
 msgid "Panel Pr_eferences..."
 msgstr "تفضيلات اللوحة..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:3035
+#: ../libxfce4panel/xfce-panel-plugin.c:1333 ../panel/panel-window.c:3074
 msgid "Log _Out"
 msgstr "تسجيل الخروج"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1348 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3055
+#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3094
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -116,12 +116,12 @@ msgstr "تسجيل الخروج"
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 #: ../plugins/pager/pager-dialog.glade.h:4
 #: ../plugins/separator/separator-dialog.glade.h:6
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "_Help"
 msgstr "_مساعدة"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1363
+#: ../libxfce4panel/xfce-panel-plugin.c:1368
 msgid "About"
 msgstr "حول"
 
@@ -245,21 +245,21 @@ msgstr "هل تريد تشغيل اللوحة؟ إذا قمت بذلك, تأكد
 msgid "No running instance of %s was found"
 msgstr "لم يتم العثور على مثيل %s قيد التشغيل"
 
-#: ../panel/panel-application.c:215
+#: ../panel/panel-application.c:221
 msgid "Failed to launch the migration application"
 msgstr "فشل إطلاق تطبيق الهجرة"
 
-#: ../panel/panel-application.c:985
+#: ../panel/panel-application.c:1002
 msgid "Create _Launcher"
 msgstr "أنش_ئ مُطْلِق"
 
-#: ../panel/panel-application.c:986
+#: ../panel/panel-application.c:1003
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "هذا سينشئ ملحق مطلقة في اللوحة و إدراج الملفات المحددة في قائمة العناصر."
 
-#: ../panel/panel-application.c:988
+#: ../panel/panel-application.c:1005
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -270,21 +270,21 @@ msgstr[3] "أنشئ مطلق جديد من %d ملفات سطح المكتب"
 msgstr[4] "أنشئ مطلق جديد من %d ملفات سطح المكتب"
 msgstr[5] "أنشئ مطلق جديد من %d ملفات سطح المكتب"
 
-#: ../panel/panel-application.c:1728
+#: ../panel/panel-application.c:1751
 msgid "Quit"
 msgstr "خروج"
 
-#: ../panel/panel-application.c:1729
+#: ../panel/panel-application.c:1752
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "لقد قمت بتشغيل X بدون مدير الجلسة. إضغط على الخروج لإعلاق خادم X."
 
-#: ../panel/panel-application.c:1730
+#: ../panel/panel-application.c:1753
 msgid "Are you sure you want to quit the panel?"
 msgstr "هل تريد حقا الخروج من اللوحة؟"
 
-#: ../panel/panel-application.c:1738
+#: ../panel/panel-application.c:1761
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "فشل تنفيد الأمر \"%s\""
@@ -305,45 +305,46 @@ msgstr "نوع التلميح غير صالح \"%s\". الأنواع الصال�
 msgid "Unable to open the e-mail address"
 msgstr "غير قادر على فتح عنوان البريد الإلكتروني"
 
-#: ../panel/panel-dialogs.c:83
+#: ../panel/panel-dialogs.c:84
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "لوحة بيئة سطح المكتب إكسفس"
 
-#: ../panel/panel-dialogs.c:87
+#: ../panel/panel-dialogs.c:88
 msgid "translator-credits"
 msgstr "Karim Oulad Chalha محمد الحرقان"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:14
+#: ../panel/panel-dialogs.c:162
 msgid "Add New Item"
 msgstr "أضف عنصر جديد"
 
-#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:201
+#: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:201
 #: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "_إضافة"
 
-#: ../panel/panel-dialogs.c:175
+#: ../panel/panel-dialogs.c:176
 msgid "Please choose a panel for the new plugin:"
 msgstr "المرجوا إختيار لوحة للملحق الجديد:"
 
-#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:896
+#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:896
 #, c-format
 msgid "Panel %d"
 msgstr "لوحة %d"
 
-#: ../panel/panel-dialogs.c:235
+#: ../panel/panel-dialogs.c:236
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr "لأن اللوحة قيد التشغيل في وضع kiosk، لا يسمح بإجراء تغييرات على إعداد اللوحة كمستخدم عادي"
 
-#: ../panel/panel-dialogs.c:237
+#: ../panel/panel-dialogs.c:238
 msgid "Modifying the panel is not allowed"
 msgstr "لا يسمح بتحرير اللوحة"
 
 #: ../panel/panel-item-dialog.c:195
+#: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Add New Items"
 msgstr "اضف عناصر جديدة"
 
@@ -357,7 +358,7 @@ msgstr "اضف عناصر جديدة"
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:5
 #: ../plugins/separator/separator-dialog.glade.h:5
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "_Close"
 msgstr "_أغلق"
@@ -371,12 +372,12 @@ msgstr "_بحث:"
 msgid "Enter search phrase here"
 msgstr "أدخل جملة البحث هنا"
 
-#: ../panel/panel-plugin-external.c:443
+#: ../panel/panel-plugin-external.c:516
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "الملحق \"%s\" غادَر اللوحة بشكل غير متوقع, هل تريد إعادة تشغيله؟"
 
-#: ../panel/panel-plugin-external.c:445
+#: ../panel/panel-plugin-external.c:518
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -384,7 +385,7 @@ msgid ""
 "permanently removed from the panel."
 msgstr "تم إعادة تشغيل الملحق اكثر من مرة في آخر %d ثانية. إذا ضغطت على تنفيذ سيتم إعادة تشغيله من على اللوحة وإلا سيتم حذفه نهائيا من اللوحة."
 
-#: ../panel/panel-plugin-external.c:449
+#: ../panel/panel-plugin-external.c:522
 msgid "_Execute"
 msgstr "_نفذ"
 
@@ -402,25 +403,25 @@ msgstr "رئيسي"
 msgid "Monitor %d"
 msgstr "مراقب %d"
 
-#: ../panel/panel-preferences-dialog.c:962
+#: ../panel/panel-preferences-dialog.c:959
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "سيتم حذف إعدادات اللوحة و الملحقات نهائياً"
 
-#: ../panel/panel-preferences-dialog.c:963
+#: ../panel/panel-preferences-dialog.c:960
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "متأكد أنك تريد إزالة اللوحة %d؟"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1163
+#: ../panel/panel-preferences-dialog.c:1160
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(الخارجية)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1168
+#: ../panel/panel-preferences-dialog.c:1165
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -429,12 +430,12 @@ msgstr "إسم داخلي: %s-%d\nمعرف العملية: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1180
+#: ../panel/panel-preferences-dialog.c:1177
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "إسم داخلي: : %s-%d"
 
-#: ../panel/panel-preferences-dialog.c:1324
+#: ../panel/panel-preferences-dialog.c:1321
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "إدا قمت بحذف العنصر من اللوحة, سيتم فقدانه نهائيا."
 
@@ -706,7 +707,7 @@ msgstr "متمرس"
 msgid "Expert"
 msgstr "خبير"
 
-#: ../panel/panel-window.c:3020
+#: ../panel/panel-window.c:3059
 msgid "_Lock Panel"
 msgstr "_إقفال اللوحة"
 
@@ -789,144 +790,144 @@ msgstr "عرض مربع حوار تأكيد بمهلة 30 ثانية لبعض ا
 msgid "_Actions"
 msgstr "_إجراءات"
 
-#: ../plugins/actions/actions.c:165
+#: ../plugins/actions/actions.c:167
 msgid "Log Out"
 msgstr "تسجيل الخروج"
 
-#: ../plugins/actions/actions.c:166
+#: ../plugins/actions/actions.c:168
 msgid "_Log Out"
 msgstr "_تسجيل الخروج"
 
-#: ../plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:169
 msgid "Are you sure you want to log out?"
 msgstr "أمتأكد أنك تريد الخروج؟"
 
-#: ../plugins/actions/actions.c:168
+#: ../plugins/actions/actions.c:170
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "تسجيل الخروج بعد %d ثانية."
 
-#: ../plugins/actions/actions.c:174
+#: ../plugins/actions/actions.c:176
 msgid "Log Out..."
 msgstr "تسجيل خروج..."
 
-#: ../plugins/actions/actions.c:175
+#: ../plugins/actions/actions.c:177
 msgid "Log _Out..."
 msgstr "تسجيل خروج..."
 
-#: ../plugins/actions/actions.c:182
+#: ../plugins/actions/actions.c:184
 msgid "Switch User"
 msgstr "تبديل المستخدم"
 
-#: ../plugins/actions/actions.c:183
+#: ../plugins/actions/actions.c:185
 msgid "_Switch User"
 msgstr "_تبديل المستخدم"
 
-#: ../plugins/actions/actions.c:190
+#: ../plugins/actions/actions.c:192
 msgid "Lock Screen"
 msgstr "اقفل الشاشة"
 
-#: ../plugins/actions/actions.c:191
+#: ../plugins/actions/actions.c:193
 msgid "Loc_k Screen"
 msgstr "اقفل الشاشة"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:200
 msgid "Hibernate"
 msgstr "أسبِت"
 
-#: ../plugins/actions/actions.c:199
+#: ../plugins/actions/actions.c:201
 msgid "_Hibernate"
 msgstr "_أسبِت"
 
-#: ../plugins/actions/actions.c:200
+#: ../plugins/actions/actions.c:202
 msgid "Do you want to suspend to disk?"
 msgstr "هل تريد تعليق على القرص؟"
 
-#: ../plugins/actions/actions.c:201
+#: ../plugins/actions/actions.c:203
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "الكمبيوتر يسبت بعد %d ثانية."
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:209
 msgid "Hybrid Sleep"
 msgstr ""
 
-#: ../plugins/actions/actions.c:208
+#: ../plugins/actions/actions.c:210
 msgid "_Hybrid Sleep"
 msgstr ""
 
-#: ../plugins/actions/actions.c:209
+#: ../plugins/actions/actions.c:211
 msgid "Do you want to hibernate and suspend the system?"
 msgstr ""
 
-#: ../plugins/actions/actions.c:210
+#: ../plugins/actions/actions.c:212
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr ""
 
-#: ../plugins/actions/actions.c:216
+#: ../plugins/actions/actions.c:218
 msgid "Suspend"
 msgstr "علّق"
 
-#: ../plugins/actions/actions.c:217
+#: ../plugins/actions/actions.c:219
 msgid "Sus_pend"
 msgstr "علّق"
 
-#: ../plugins/actions/actions.c:218
+#: ../plugins/actions/actions.c:220
 msgid "Do you want to suspend to RAM?"
 msgstr "هل تريد تعليق على الذاكرة؟"
 
-#: ../plugins/actions/actions.c:219
+#: ../plugins/actions/actions.c:221
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "تعليق الكمبيوتر بعد %d ثانية."
 
-#: ../plugins/actions/actions.c:225
+#: ../plugins/actions/actions.c:227
 msgid "Restart"
 msgstr "أعد البدأ"
 
-#: ../plugins/actions/actions.c:226
+#: ../plugins/actions/actions.c:228
 msgid "_Restart"
 msgstr "_إعادة تشغيل"
 
-#: ../plugins/actions/actions.c:227
+#: ../plugins/actions/actions.c:229
 msgid "Are you sure you want to restart?"
 msgstr "متأكد أنك تريد إعادة تشغيل؟"
 
-#: ../plugins/actions/actions.c:228
+#: ../plugins/actions/actions.c:230
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "إعادة تشغيل الكمبيوتر بعد %d ثانية."
 
-#: ../plugins/actions/actions.c:234
+#: ../plugins/actions/actions.c:236
 msgid "Shut Down"
 msgstr "غلق الجهاز"
 
-#: ../plugins/actions/actions.c:235
+#: ../plugins/actions/actions.c:237
 msgid "Shut _Down"
 msgstr "غلق الجهاز"
 
-#: ../plugins/actions/actions.c:236
+#: ../plugins/actions/actions.c:238
 msgid "Are you sure you want to shut down?"
 msgstr "متأكد أنك تريد إغلاق الجهاز؟"
 
-#: ../plugins/actions/actions.c:237
+#: ../plugins/actions/actions.c:239
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "إغلاق الكمبيوتر بعد %d ثانية."
 
-#: ../plugins/actions/actions.c:685
+#: ../plugins/actions/actions.c:688
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "فاصل"
 
-#: ../plugins/actions/actions.c:1110
+#: ../plugins/actions/actions.c:1122
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "فشل في تشغيل الإجراء \"%s\""
 
-#: ../plugins/actions/actions.c:1279
+#: ../plugins/actions/actions.c:1331
 msgid "Little Mouse"
 msgstr ""
 
@@ -949,57 +950,61 @@ msgid "Button _title:"
 msgstr "عنوان الزر:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+msgid "Show button on one _line"
+msgstr ""
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "_Show button title"
 msgstr "_عرض عنوان الزر"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show application d_escription in tooltip"
 msgstr "عرض وصف التطبيق في تلميح الأدوات"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show ic_ons in menu"
 msgstr "عرض أيقونات في القوائم"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show generic application n_ames"
 msgstr "عرض اسماء التطبيقات العامة"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
 msgstr "حدد هذا الخيار لعرض اسم التطبيق العام في القائمة، على سبيل المثال \"إدارة الملفات\" بدلاً من \"Thunar\""
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Appearance"
 msgstr "مظهر"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
 msgid "Use the _default menu"
 msgstr "استخدام قائمة ملف إفتراضية"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 msgid "Ed_it Menu"
 msgstr "حرّر القوائم"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "Use c_ustom menu file:"
 msgstr "استخدام قائمة ملف مخصصة:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:16
 msgid "Menu _file:"
 msgstr "ملف القائمة:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:16
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:17
 msgid "Select A Menu File"
 msgstr "اختر ملف قائمة"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:17
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:18
 msgid "Menu File"
 msgstr "ملف القائمة"
 
@@ -1008,19 +1013,19 @@ msgstr "ملف القائمة"
 msgid "Applications"
 msgstr "التطبيقات"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:600
-#: ../plugins/directorymenu/directorymenu.c:471
+#: ../plugins/applicationsmenu/applicationsmenu.c:608
+#: ../plugins/directorymenu/directorymenu.c:467
 msgid "Select An Icon"
 msgstr "اختر أيقونة"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/directorymenu/directorymenu.c:474
+#: ../plugins/applicationsmenu/applicationsmenu.c:611
+#: ../plugins/directorymenu/directorymenu.c:470
 msgid "_OK"
 msgstr "_موافق"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2519
+#: ../plugins/applicationsmenu/applicationsmenu.c:648
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "فشل تنفيد الأمر \"%s\"."
@@ -1416,7 +1421,7 @@ msgstr "الثانية عشر"
 msgid "What time is it?"
 msgstr "ماهى الساعة؟"
 
-#: ../plugins/directorymenu/directorymenu.c:301
+#: ../plugins/directorymenu/directorymenu.c:299
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
@@ -1442,49 +1447,49 @@ msgstr "لم يتم العثور على التطبيق الافتراضي \"%s\"
 msgid "Failed to launch default application for \"%s\""
 msgstr "فشل في إطلاق تطبيق \"%s\" الافتراضي"
 
-#: ../plugins/directorymenu/directorymenu.c:847
+#: ../plugins/directorymenu/directorymenu.c:844
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "فشل في تنفيذ التطبيق المفضل لفئة \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:930
+#: ../plugins/directorymenu/directorymenu.c:925
 msgid "Create New Folder"
 msgstr "أنشئ مجلد جديد"
 
-#: ../plugins/directorymenu/directorymenu.c:935
+#: ../plugins/directorymenu/directorymenu.c:930
 msgid "Create New Text Document"
 msgstr "إنشاء ملف نصي جديد"
 
-#: ../plugins/directorymenu/directorymenu.c:942
+#: ../plugins/directorymenu/directorymenu.c:937
 msgid "C_reate"
 msgstr "أن_شئ"
 
-#: ../plugins/directorymenu/directorymenu.c:943
+#: ../plugins/directorymenu/directorymenu.c:938
 msgid "Create & _Open"
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:957
+#: ../plugins/directorymenu/directorymenu.c:952
 msgid "Enter the new name:"
 msgstr "أدخل إسم جديد:"
 
-#: ../plugins/directorymenu/directorymenu.c:993
+#: ../plugins/directorymenu/directorymenu.c:988
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "فشل إنشاء المجلد: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1078
+#: ../plugins/directorymenu/directorymenu.c:1072
 msgid "Open Folder"
 msgstr "افتح المجلد"
 
-#: ../plugins/directorymenu/directorymenu.c:1095
+#: ../plugins/directorymenu/directorymenu.c:1089
 msgid "Open in Terminal"
 msgstr "افتح في الطرفية"
 
-#: ../plugins/directorymenu/directorymenu.c:1112
+#: ../plugins/directorymenu/directorymenu.c:1106
 msgid "Create Folder..."
 msgstr "إنشاء مجلد..."
 
-#: ../plugins/directorymenu/directorymenu.c:1129
+#: ../plugins/directorymenu/directorymenu.c:1123
 msgid "Create Text Document..."
 msgstr "إنشاء ملف نصي..."
 
@@ -1536,37 +1541,37 @@ msgid "_File Pattern:"
 msgstr "_نمط الملف:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:16
-#: ../plugins/tasklist/tasklist-dialog.glade.h:29
+#: ../plugins/tasklist/tasklist-dialog.glade.h:31
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
 msgstr "ترشيح"
 
-#: ../plugins/launcher/launcher.c:409
+#: ../plugins/launcher/launcher.c:403
 msgid "Open launcher menu"
 msgstr "فتح قائمة الإطلاق"
 
-#: ../plugins/launcher/launcher.c:1649
+#: ../plugins/launcher/launcher.c:1611
 msgid "Unnamed Item"
 msgstr "عنصر بدون اسم"
 
-#: ../plugins/launcher/launcher.c:1837
+#: ../plugins/launcher/launcher.c:1795
 msgid "No items"
 msgstr "لا توجد عناصر"
 
-#: ../plugins/launcher/launcher-dialog.c:792
+#: ../plugins/launcher/launcher-dialog.c:794
 msgid "Failed to open desktop item editor"
 msgstr "فشل في فتح محرر عناصر سطح المكتب"
 
-#: ../plugins/launcher/launcher-dialog.c:860
+#: ../plugins/launcher/launcher-dialog.c:862
 msgid "If you delete an item, it will be permanently removed"
 msgstr "إذا قمت بحذف عنصر، سيتم إزالته بشكل دائم"
 
-#: ../plugins/launcher/launcher-dialog.c:861
+#: ../plugins/launcher/launcher-dialog.c:863
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "متأكد أنك تريد حذف \"%s\"؟"
 
-#: ../plugins/launcher/launcher-dialog.c:862
+#: ../plugins/launcher/launcher-dialog.c:864
 msgid "Unnamed item"
 msgstr "عنصر بدون اسم"
 
@@ -1677,15 +1682,15 @@ msgstr "متقدِم"
 msgid "Program launcher with optional menu"
 msgstr "مُطْلِق البرامج مع قائمة اختيارية"
 
-#: ../plugins/pager/pager.c:557 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:543 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "إعدادات مساحة عمل..."
 
-#: ../plugins/pager/pager.c:645
+#: ../plugins/pager/pager.c:631
 msgid "Unable to open the workspace settings"
 msgstr "غير قادر على فتح إعدادات مساحة العمل"
 
-#: ../plugins/pager/pager-buttons.c:590 ../plugins/windowmenu/windowmenu.c:876
+#: ../plugins/pager/pager-buttons.c:598 ../plugins/windowmenu/windowmenu.c:880
 #, c-format
 msgid "Workspace %d"
 msgstr "مساحة عمل %d"
@@ -1716,6 +1721,10 @@ msgid "Switch workspaces using the mouse wheel"
 msgstr "تبديل مساحات العمل باستخدام  عجلة الفأرة"
 
 #: ../plugins/pager/pager-dialog.glade.h:10
+msgid "Wrap around workspaces"
+msgstr ""
+
+#: ../plugins/pager/pager-dialog.glade.h:11
 msgid "<b>Appearance</b>"
 msgstr "<b>مظهر</b>"
 
@@ -1915,112 +1924,121 @@ msgid "Minimize Window"
 msgstr "تصغير النافذة"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
+msgid "New Instance"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Timestamp"
 msgstr "الطابع الزمني"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+#: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "Group title and timestamp"
 msgstr "عنوان المجموعة والطابع الزمني"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:9
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Window title"
 msgstr "عنوان النافذة"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Group title and window title"
 msgstr "عنوان المجموعة وعنوان الإطار"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "None, allow drag-and-drop"
 msgstr "لا شيء، سماح بالسحب والإفلات"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Window Buttons"
 msgstr "أزرار النافذة"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show button _labels"
 msgstr "عرض تسمية الأزرار"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Show _flat buttons"
 msgstr "عرض أزرار مسطحة"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Show _handle"
 msgstr "عرض المقبض"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+msgid "Show _tooltips"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Sorting _order:"
 msgstr "ترتيب الفرز:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window _grouping:"
 msgstr "جمع النافذة:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "Mi_ddle click action:"
 msgstr "إجرا_ء الزر الأوسط:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:24
 msgid "Restore minimized windows to current _workspace"
 msgstr "استعادة الإطارات التي تم تصغيرها لمساحة العمل الحالية"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:23
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "D_raw window frame when hovering a button"
 msgstr "اعرض إطار نافذة عند المرور بالفارة على زر"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
+#: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "_Switch windows using the mouse wheel"
 msgstr "_التبديل بين النوافذ باستخدام عجلة الفارة"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+#: ../plugins/tasklist/tasklist-dialog.glade.h:27
 msgid "Behaviour"
 msgstr "السّلوك"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:26
-msgid "Show windows from _all workspaces or viewports"
-msgstr "عرض الإطارات من كل مساحات العمل والمشاهد"
+#: ../plugins/tasklist/tasklist-dialog.glade.h:28
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:11
+msgid "Show windows from _all workspaces"
+msgstr "عرض النوافذ من جميع مساحات العمل"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:27
+#: ../plugins/tasklist/tasklist-dialog.glade.h:29
 msgid "Show windows from all mo_nitors"
 msgstr "عرض النوافذ من جميع الشاشات"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:28
+#: ../plugins/tasklist/tasklist-dialog.glade.h:30
 msgid "Show only _minimized windows"
 msgstr "عرض فقط النوافذ المصغرة"
 
-#: ../plugins/tasklist/tasklist-widget.c:2992
+#: ../plugins/tasklist/tasklist-widget.c:3067
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:2996
+#: ../plugins/tasklist/tasklist-widget.c:3071
 msgid "Error"
 msgstr "خطأ"
 
-#: ../plugins/tasklist/tasklist-widget.c:3040
+#: ../plugins/tasklist/tasklist-widget.c:3100
 msgid "Launch New Instance"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3794
+#: ../plugins/tasklist/tasklist-widget.c:3856
 msgid "Mi_nimize All"
 msgstr "صغّر الكل"
 
-#: ../plugins/tasklist/tasklist-widget.c:3802
+#: ../plugins/tasklist/tasklist-widget.c:3864
 msgid "Un_minimize All"
 msgstr "ألغِ تص_غير الكل"
 
-#: ../plugins/tasklist/tasklist-widget.c:3810
+#: ../plugins/tasklist/tasklist-widget.c:3872
 msgid "Ma_ximize All"
 msgstr "ك_بّر الكل"
 
-#: ../plugins/tasklist/tasklist-widget.c:3818
+#: ../plugins/tasklist/tasklist-widget.c:3880
 msgid "_Unmaximize All"
 msgstr "_ألغِ تكبير الكل"
 
-#: ../plugins/tasklist/tasklist-widget.c:3830
+#: ../plugins/tasklist/tasklist-widget.c:3892
 msgid "_Close All"
 msgstr "_إغلاق الكل"
 
@@ -2028,28 +2046,28 @@ msgstr "_إغلاق الكل"
 msgid "Switch between open windows using buttons"
 msgstr "تحول بين النوافذ المفتوحة باستعمال أزرار"
 
-#: ../plugins/windowmenu/windowmenu.c:673
+#: ../plugins/windowmenu/windowmenu.c:677
 msgid "Desktop"
 msgstr "سطح المكتب"
 
-#: ../plugins/windowmenu/windowmenu.c:1277
+#: ../plugins/windowmenu/windowmenu.c:1279
 msgid "No Windows"
 msgstr "بدون نوافذ"
 
-#: ../plugins/windowmenu/windowmenu.c:1292
+#: ../plugins/windowmenu/windowmenu.c:1294
 msgid "Urgent Windows"
 msgstr "النوافذ العاجلة"
 
-#: ../plugins/windowmenu/windowmenu.c:1335
+#: ../plugins/windowmenu/windowmenu.c:1337
 msgid "Add Workspace"
 msgstr "إضافة مساحة العمل"
 
-#: ../plugins/windowmenu/windowmenu.c:1358
+#: ../plugins/windowmenu/windowmenu.c:1360
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "إزالة مساحة العمل \"%s\""
 
-#: ../plugins/windowmenu/windowmenu.c:1360
+#: ../plugins/windowmenu/windowmenu.c:1362
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "ازل مساحة العمل %d"
@@ -2082,10 +2100,6 @@ msgstr "عرض _اسماء مساحة العمل"
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Enable _urgency notification"
 msgstr "تمكين التنبيه العاجل"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:11
-msgid "Show windows from _all workspaces"
-msgstr "عرض النوافذ من جميع مساحات العمل"
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
 msgid "Switch between open windows using a menu"
