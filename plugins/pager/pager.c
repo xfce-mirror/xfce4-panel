@@ -513,10 +513,10 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 
       pager_plugin_screen_layout_changed (plugin);
 
-      g_signal_connect_swapped (G_OBJECT (screen), "monitors-changed",
-         G_CALLBACK (pager_plugin_screen_layout_changed), plugin);
-      g_signal_connect_swapped (G_OBJECT (screen), "size-changed",
-         G_CALLBACK (pager_plugin_screen_layout_changed), plugin);
+      g_signal_connect_object (G_OBJECT (screen), "monitors-changed",
+         G_CALLBACK (pager_plugin_screen_layout_changed), plugin, G_CONNECT_SWAPPED);
+      g_signal_connect_object (G_OBJECT (screen), "size-changed",
+         G_CALLBACK (pager_plugin_screen_layout_changed), plugin, G_CONNECT_SWAPPED);
     }
 }
 
