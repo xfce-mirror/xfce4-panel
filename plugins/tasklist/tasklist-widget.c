@@ -2574,7 +2574,7 @@ xfce_tasklist_button_compare (gconstpointer child_a,
   WnckClassGroup          *class_group_a, *class_group_b;
   const gchar             *name_a, *name_b;
   WnckWorkspace           *workspace_a, *workspace_b;
-  gint                     num_a, num_b;
+  gint                     num_a = -1, num_b = -1;
 
   panel_return_val_if_fail (a->type == CHILD_TYPE_GROUP
                             || WNCK_IS_WINDOW (a->window), 0);
@@ -2603,8 +2603,11 @@ xfce_tasklist_button_compare (gconstpointer child_a,
             workspace_b = wnck_screen_get_active_workspace (tasklist->screen);
 
           /* compare by workspace number */
-          num_a = wnck_workspace_get_number (workspace_a);
-          num_b = wnck_workspace_get_number (workspace_b);
+          if (workspace_a != NULL)
+            num_a = wnck_workspace_get_number (workspace_a);
+          if (workspace_b != NULL)
+            num_b = wnck_workspace_get_number (workspace_b);
+
           if (num_a != num_b)
             return num_a - num_b;
         }
