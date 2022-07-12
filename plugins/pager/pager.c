@@ -229,8 +229,6 @@ pager_plugin_get_property (GObject    *object,
 
     case PROP_MINIATURE_VIEW:
       g_value_set_boolean (value, plugin->miniature_view);
-
-      pager_plugin_screen_layout_changed (plugin);
       break;
 
     case PROP_ROWS:
@@ -269,6 +267,8 @@ pager_plugin_set_property (GObject      *object,
 
     case PROP_MINIATURE_VIEW:
       plugin->miniature_view = g_value_get_boolean (value);
+      if (plugin->wnck_screen != NULL)
+        pager_plugin_screen_layout_changed (plugin);
       break;
 
     case PROP_ROWS:
@@ -457,8 +457,6 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin)
   if (plugin->miniature_view)
     {
       plugin->pager = wnck_pager_new ();
-      wnck_pager_set_display_mode (WNCK_PAGER (plugin->pager), WNCK_PAGER_DISPLAY_CONTENT);
-      wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       plugin->ratio = (gfloat) gdk_screen_width () / (gfloat) gdk_screen_height ();
 G_GNUC_END_IGNORE_DEPRECATIONS
@@ -471,8 +469,10 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       g_signal_connect_swapped (G_OBJECT (plugin->pager), "scroll-event",
                                 G_CALLBACK (pager_plugin_scroll_event), plugin);
 
-      /* n_rows must be set after pager is anchored */
+      /* properties that change screen layout must be set after pager is anchored */
       gtk_container_add (GTK_CONTAINER (plugin), plugin->pager);
+      wnck_pager_set_display_mode (WNCK_PAGER (plugin->pager), WNCK_PAGER_DISPLAY_CONTENT);
+      wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
       if (!wnck_pager_set_n_rows (WNCK_PAGER (plugin->pager), plugin->rows))
         g_warning ("Setting the pager rows returned false. Maybe the setting is not applied.");
     }
@@ -490,6 +490,8 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   /* Poke the style-updated signal to set the correct background color for the newly
      created widget. Otherwise it may sometimes end up transparent. */
   pager_plugin_style_updated (plugin->pager, NULL);
+  g_signal_connect (G_OBJECT (plugin->pager), "style-updated",
+      G_CALLBACK (pager_plugin_style_updated), NULL);
 }
 
 
@@ -557,11 +559,9 @@ G_GNUC_END_IGNORE_DEPRECATIONS
                          xfce_panel_plugin_get_property_base (panel_plugin),
                          properties, FALSE);
 
+  pager_plugin_screen_changed (GTK_WIDGET (plugin), NULL);
   g_signal_connect (G_OBJECT (plugin), "screen-changed",
       G_CALLBACK (pager_plugin_screen_changed), NULL);
-  pager_plugin_screen_changed (GTK_WIDGET (plugin), NULL);
-  g_signal_connect (G_OBJECT (plugin->pager), "style-updated",
-      G_CALLBACK (pager_plugin_style_updated), NULL);
 }
 
 
