@@ -374,8 +374,6 @@ pager_buttons_rebuild_idle (gpointer user_data)
   /* set workspace layout so changing workspace and moving windows between workspaces
    * via keyboard shortcuts or dnd work correctly in all directions */
   pager->token = wnck_screen_try_set_workspace_layout (pager->wnck_screen, pager->token, rows, 0);
-  if (pager->token == 0)
-    g_warning ("Failed to set workspace layout: some moves between workspaces may not work.");
 
   panel_plugin = gtk_widget_get_ancestor (GTK_WIDGET (pager), XFCE_TYPE_PANEL_PLUGIN);
 

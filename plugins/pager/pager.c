@@ -108,9 +108,13 @@ struct _PagerPlugin
   guint          scrolling : 1;
   guint          wrap_workspaces : 1;
   guint          miniature_view : 1;
-  gint           rows;
+  guint          rows;
   gboolean       numbering;
   gfloat         ratio;
+
+  /* synchronize plugin with master plugin which manages workspace layout */
+  guint          sync_idle_id;
+  gboolean       sync_wait;
 };
 
 enum
@@ -122,6 +126,8 @@ enum
   PROP_ROWS,
   PROP_NUMBERING
 };
+
+static GSList *plugin_list = NULL;
 
 
 
@@ -201,10 +207,17 @@ pager_plugin_init (PagerPlugin *plugin)
   plugin->scrolling = TRUE;
   plugin->wrap_workspaces = FALSE;
   plugin->miniature_view = TRUE;
-  plugin->rows = 1;
   plugin->numbering = FALSE;
   plugin->ratio = 1.0;
   plugin->pager = NULL;
+  plugin->sync_idle_id = 0;
+  plugin->sync_wait = TRUE;
+  if (plugin_list == NULL)
+    plugin->rows = 1;
+  else
+    plugin->rows = XFCE_PAGER_PLUGIN (plugin_list->data)->rows;
+
+  plugin_list = g_slist_append (plugin_list, plugin);
 }
 
 
@@ -253,7 +266,8 @@ pager_plugin_set_property (GObject      *object,
                            const GValue *value,
                            GParamSpec   *pspec)
 {
-  PagerPlugin *plugin = XFCE_PAGER_PLUGIN (object);
+  PagerPlugin *plugin = XFCE_PAGER_PLUGIN (object), *master_plugin = plugin_list->data;
+  guint        rows;
 
   switch (prop_id)
     {
@@ -272,18 +286,37 @@ pager_plugin_set_property (GObject      *object,
       break;
 
     case PROP_ROWS:
-      plugin->rows = g_value_get_uint (value);
+      rows = g_value_get_uint (value);
+      if (rows == plugin->rows)
+        return;
 
-      if (plugin->pager != NULL)
+      plugin->rows = rows;
+      if (plugin->pager == NULL)
+        return;
+
+      if (plugin == master_plugin)
         {
+          /* set n_rows for master plugin and consequently workspace layout:
+           * this is delayed in both cases */
           if (plugin->miniature_view)
-            {
-              if (!wnck_pager_set_n_rows (WNCK_PAGER (plugin->pager), plugin->rows))
-                g_warning ("Failed to set the number of pager rows. You probably "
-                           "have more than 1 pager in your panel setup.");
-            }
+            wnck_pager_set_n_rows (WNCK_PAGER (plugin->pager), plugin->rows);
           else
             pager_buttons_set_n_rows (XFCE_PAGER_BUTTONS (plugin->pager), plugin->rows);
+
+          /* set n_rows for other plugins: this will queue a pager re-creation */
+          for (GSList *lp = plugin_list->next; lp != NULL; lp = lp->next)
+            g_object_set (lp->data, "rows", plugin->rows, NULL);
+        }
+      else
+        {
+          /* forward to master plugin first, else it is an internal call above */
+          if (master_plugin->rows != plugin->rows)
+            {
+              plugin->rows = 0;
+              g_object_set (master_plugin, "rows", rows, NULL);
+            }
+          else
+            pager_plugin_screen_layout_changed (plugin);
         }
       break;
 
@@ -434,6 +467,28 @@ pager_plugin_drag_end_event (GtkWidget      *widget,
 
 
 
+static gboolean
+pager_plugin_screen_layout_changed_idle (gpointer data)
+{
+  PagerPlugin *plugin = data, *master_plugin = plugin_list->data;
+
+  /* changing workspace layout in buttons-view is delayed twice: in our code
+   * and in Libwnck code */
+  if (! master_plugin->miniature_view && plugin->sync_wait)
+    {
+      plugin->sync_wait = FALSE;
+      return TRUE;
+    }
+
+  pager_plugin_screen_layout_changed (plugin);
+  plugin->sync_wait = TRUE;
+  plugin->sync_idle_id = 0;
+
+  return FALSE;
+}
+
+
+
 static void
 pager_plugin_screen_layout_changed (PagerPlugin *plugin)
 {
@@ -442,6 +497,15 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin)
 
   panel_return_if_fail (XFCE_IS_PAGER_PLUGIN (plugin));
   panel_return_if_fail (WNCK_IS_SCREEN (plugin->wnck_screen));
+
+  /* changing workspace layout is delayed in Libwnck code, so we have to give time
+   * to the master plugin request to be processed */
+  if (plugin != plugin_list->data && plugin->sync_idle_id == 0)
+    {
+      plugin->sync_idle_id =
+        g_idle_add_full (G_PRIORITY_LOW, pager_plugin_screen_layout_changed_idle, plugin, NULL);
+      return;
+    }
 
   if (G_UNLIKELY (plugin->pager != NULL))
     {
@@ -473,8 +537,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       gtk_container_add (GTK_CONTAINER (plugin), plugin->pager);
       wnck_pager_set_display_mode (WNCK_PAGER (plugin->pager), WNCK_PAGER_DISPLAY_CONTENT);
       wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
-      if (!wnck_pager_set_n_rows (WNCK_PAGER (plugin->pager), plugin->rows))
-        g_warning ("Setting the pager rows returned false. Maybe the setting is not applied.");
+      wnck_pager_set_n_rows (WNCK_PAGER (plugin->pager), plugin->rows);
     }
   else
     {
@@ -573,6 +636,10 @@ pager_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
   g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
       pager_plugin_screen_changed, NULL);
+
+  plugin_list = g_slist_remove (plugin_list, plugin);
+  if (plugin->sync_idle_id != 0)
+    g_source_remove (plugin->sync_idle_id);
 }
 
 
@@ -595,6 +662,9 @@ pager_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
 {
   PagerPlugin       *plugin = XFCE_PAGER_PLUGIN (panel_plugin);
   GtkOrientation     orientation;
+
+  if (plugin->pager == NULL)
+    return;
 
   orientation =
     (mode != XFCE_PANEL_PLUGIN_MODE_VERTICAL) ?
