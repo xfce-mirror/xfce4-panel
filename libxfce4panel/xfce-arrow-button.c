@@ -579,7 +579,7 @@ xfce_arrow_button_set_arrow_type (XfceArrowButton *button,
  * @button : a #XfceArrowButton
  *
  * Whether the button is blinking. If the blink timeout is finished
- * and the button is still highlighted, this functions returns %FALSE.
+ * and the button is still highlighted, this functions returns %TRUE.
  *
  * Returns: %TRUE when @button is blinking.
  *
@@ -589,7 +589,9 @@ gboolean
 xfce_arrow_button_get_blinking (XfceArrowButton *button)
 {
   g_return_val_if_fail (XFCE_IS_ARROW_BUTTON (button), FALSE);
-  return !!(button->priv->blinking_timeout_id != 0);
+  return button->priv->blinking_timeout_id != 0
+         || gtk_style_context_has_class (gtk_widget_get_style_context (GTK_WIDGET (button)),
+                                         GTK_STYLE_CLASS_SUGGESTED_ACTION);
 }
 
 
