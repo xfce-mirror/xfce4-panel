@@ -624,12 +624,43 @@ window_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
 
 
 static void
+window_menu_plugin_set_icon (WindowMenuPlugin *plugin,
+                             WnckWindow       *window)
+{
+  GdkPixbuf *pixbuf;
+  gint       icon_size;
+
+  panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
+  panel_return_if_fail (WNCK_IS_WINDOW (window));
+
+  if (! wnck_window_is_active (window))
+    return;
+
+  gtk_widget_set_tooltip_text (plugin->icon, wnck_window_get_name (window));
+
+  icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (plugin));
+  if (icon_size <= 31)
+    pixbuf = wnck_window_get_mini_icon (window);
+  else
+    pixbuf = wnck_window_get_icon (window);
+
+  if (G_LIKELY (pixbuf != NULL))
+    gtk_image_set_from_pixbuf (GTK_IMAGE (plugin->icon), pixbuf);
+  else
+    {
+      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->icon), "image-missing", icon_size);
+      gtk_image_set_pixel_size (GTK_IMAGE (plugin->icon), icon_size);
+    }
+}
+
+
+
+static void
 window_menu_plugin_active_window_changed (WnckScreen       *screen,
                                           WnckWindow       *previous_window,
                                           WindowMenuPlugin *plugin)
 {
   WnckWindow     *window;
-  GdkPixbuf      *pixbuf;
   gint            icon_size;
   GtkWidget      *icon = GTK_WIDGET (plugin->icon);
   WnckWindowType  type;
@@ -639,7 +670,6 @@ window_menu_plugin_active_window_changed (WnckScreen       *screen,
   panel_return_if_fail (WNCK_IS_SCREEN (screen));
   panel_return_if_fail (plugin->screen == screen);
 
-  icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (plugin));
   /* only do this when the icon is visible */
   if (plugin->button_style == BUTTON_STYLE_ICON)
     {
@@ -651,27 +681,14 @@ window_menu_plugin_active_window_changed (WnckScreen       *screen,
           if (type == WNCK_WINDOW_DESKTOP || type == WNCK_WINDOW_DOCK)
             goto show_desktop_icon;
 
-          /* get the window icon and set the tooltip */
-          gtk_widget_set_tooltip_text (GTK_WIDGET (icon),
-                                       wnck_window_get_name (window));
-
-          if (icon_size <= 31)
-            pixbuf = wnck_window_get_mini_icon (window);
-          else
-            pixbuf = wnck_window_get_icon (window);
-
-          if (G_LIKELY (pixbuf != NULL))
-            gtk_image_set_from_pixbuf (GTK_IMAGE (icon), pixbuf);
-          else {
-            gtk_image_set_from_icon_name (GTK_IMAGE (icon), "image-missing", icon_size);
-            gtk_image_set_pixel_size (GTK_IMAGE (icon), icon_size);
-          }
+          window_menu_plugin_set_icon (plugin, window);
         }
       else
         {
           show_desktop_icon:
 
           /* desktop is shown right now */
+          icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (plugin));
           gtk_image_set_from_icon_name (GTK_IMAGE (icon), "user-desktop", icon_size);
           gtk_image_set_pixel_size (GTK_IMAGE (icon), icon_size);
           gtk_widget_set_tooltip_text (GTK_WIDGET (icon), _("Desktop"));
@@ -722,9 +739,11 @@ window_menu_plugin_window_opened (WnckScreen       *screen,
   panel_return_if_fail (plugin->screen == screen);
   panel_return_if_fail (plugin->urgentcy_notification);
 
-  /* monitor the window's state */
+  /* monitor some window properties */
   g_signal_connect (G_OBJECT (window), "state-changed",
       G_CALLBACK (window_menu_plugin_window_state_changed), plugin);
+  g_signal_connect_swapped (G_OBJECT (window), "icon-changed",
+      G_CALLBACK (window_menu_plugin_set_icon), plugin);
 
   /* check if the window needs attention */
   if (wnck_window_needs_attention (window))
