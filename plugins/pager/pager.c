@@ -73,6 +73,7 @@ static void     pager_plugin_mode_changed                 (XfcePanelPlugin     *
                                                            XfcePanelPluginMode  mode);
 static void     pager_plugin_configure_workspace_settings (GtkWidget         *button);
 static void     pager_plugin_configure_plugin             (XfcePanelPlugin   *panel_plugin);
+static gpointer pager_plugin_get_master_plugin            (PagerPlugin       *plugin);
 static void     pager_plugin_screen_layout_changed        (PagerPlugin       *plugin);
 static void     pager_plugin_get_preferred_width          (GtkWidget           *widget,
                                                            gint                *minimum_width,
@@ -203,6 +204,8 @@ pager_plugin_class_init (PagerPluginClass *klass)
 static void
 pager_plugin_init (PagerPlugin *plugin)
 {
+  PagerPlugin *master_plugin;
+
   plugin->wnck_screen = NULL;
   plugin->scrolling = TRUE;
   plugin->wrap_workspaces = FALSE;
@@ -212,10 +215,12 @@ pager_plugin_init (PagerPlugin *plugin)
   plugin->pager = NULL;
   plugin->sync_idle_id = 0;
   plugin->sync_wait = TRUE;
-  if (plugin_list == NULL)
+
+  master_plugin = pager_plugin_get_master_plugin (plugin);
+  if (master_plugin == NULL)
     plugin->rows = 1;
   else
-    plugin->rows = XFCE_PAGER_PLUGIN (plugin_list->data)->rows;
+    plugin->rows = master_plugin->rows;
 
   plugin_list = g_slist_append (plugin_list, plugin);
 }
@@ -266,7 +271,7 @@ pager_plugin_set_property (GObject      *object,
                            const GValue *value,
                            GParamSpec   *pspec)
 {
-  PagerPlugin *plugin = XFCE_PAGER_PLUGIN (object), *master_plugin = plugin_list->data;
+  PagerPlugin *plugin = XFCE_PAGER_PLUGIN (object), *master_plugin;
   guint        rows;
 
   switch (prop_id)
@@ -294,6 +299,7 @@ pager_plugin_set_property (GObject      *object,
       if (plugin->pager == NULL)
         return;
 
+      master_plugin = pager_plugin_get_master_plugin (plugin);
       if (plugin == master_plugin)
         {
           /* set n_rows for master plugin and consequently workspace layout:
@@ -304,8 +310,10 @@ pager_plugin_set_property (GObject      *object,
             pager_buttons_set_n_rows (XFCE_PAGER_BUTTONS (plugin->pager), plugin->rows);
 
           /* set n_rows for other plugins: this will queue a pager re-creation */
-          for (GSList *lp = plugin_list->next; lp != NULL; lp = lp->next)
-            g_object_set (lp->data, "rows", plugin->rows, NULL);
+          for (GSList *lp = plugin_list; lp != NULL; lp = lp->next)
+            if (lp->data != plugin
+                && XFCE_PAGER_PLUGIN (lp->data)->wnck_screen == plugin->wnck_screen)
+              g_object_set (lp->data, "rows", plugin->rows, NULL);
         }
       else
         {
@@ -467,13 +475,27 @@ pager_plugin_drag_end_event (GtkWidget      *widget,
 
 
 
+static gpointer
+pager_plugin_get_master_plugin (PagerPlugin *plugin)
+{
+  /* one master plugin per WnckScreen */
+  for (GSList *lp = plugin_list; lp != NULL; lp = lp->next)
+    if (XFCE_PAGER_PLUGIN (lp->data)->wnck_screen == plugin->wnck_screen)
+      return lp->data;
+
+  return NULL;
+}
+
+
+
 static gboolean
 pager_plugin_screen_layout_changed_idle (gpointer data)
 {
-  PagerPlugin *plugin = data, *master_plugin = plugin_list->data;
+  PagerPlugin *plugin = data, *master_plugin;
 
   /* changing workspace layout in buttons-view is delayed twice: in our code
    * and in Libwnck code */
+  master_plugin = pager_plugin_get_master_plugin (plugin);
   if (! master_plugin->miniature_view && plugin->sync_wait)
     {
       plugin->sync_wait = FALSE;
@@ -500,7 +522,7 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin)
 
   /* changing workspace layout is delayed in Libwnck code, so we have to give time
    * to the master plugin request to be processed */
-  if (plugin != plugin_list->data && plugin->sync_idle_id == 0)
+  if (plugin != pager_plugin_get_master_plugin (plugin) && plugin->sync_idle_id == 0)
     {
       plugin->sync_idle_id =
         g_idle_add_full (G_PRIORITY_LOW, pager_plugin_screen_layout_changed_idle, plugin, NULL);
