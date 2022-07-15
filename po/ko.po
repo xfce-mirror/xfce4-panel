@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-10 12:48+0200\n"
+"POT-Creation-Date: 2022-07-15 12:48+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>, 2013-2014,2016-2020\n"
 "Language-Team: Korean (http://www.transifex.com/xfce/xfce4-panel/language/ko/)\n"
@@ -1364,50 +1364,124 @@ msgid "%1 o'clock"
 msgstr "%1 시 정각"
 
 #: ../plugins/clock/clock-fuzzy.c:137
+msgctxt "am"
 msgid "one"
 msgstr "한"
 
 #: ../plugins/clock/clock-fuzzy.c:138
+msgctxt "am"
 msgid "two"
 msgstr "두"
 
 #: ../plugins/clock/clock-fuzzy.c:139
+msgctxt "am"
 msgid "three"
 msgstr "세"
 
 #: ../plugins/clock/clock-fuzzy.c:140
+msgctxt "am"
 msgid "four"
 msgstr "네"
 
 #: ../plugins/clock/clock-fuzzy.c:141
+msgctxt "am"
 msgid "five"
 msgstr "다섯"
 
 #: ../plugins/clock/clock-fuzzy.c:142
+msgctxt "am"
 msgid "six"
 msgstr "여섯"
 
 #: ../plugins/clock/clock-fuzzy.c:143
+msgctxt "am"
 msgid "seven"
 msgstr "일곱"
 
 #: ../plugins/clock/clock-fuzzy.c:144
+msgctxt "am"
 msgid "eight"
 msgstr "여덟"
 
 #: ../plugins/clock/clock-fuzzy.c:145
+msgctxt "am"
 msgid "nine"
 msgstr "아홉"
 
 #: ../plugins/clock/clock-fuzzy.c:146
+msgctxt "am"
 msgid "ten"
 msgstr "열"
 
 #: ../plugins/clock/clock-fuzzy.c:147
+msgctxt "am"
 msgid "eleven"
 msgstr "열 한"
 
-#: ../plugins/clock/clock-fuzzy.c:148
+#. I18N: 12 AM is midnight
+#: ../plugins/clock/clock-fuzzy.c:149
+msgctxt "am"
+msgid "twelve"
+msgstr "열 두"
+
+#: ../plugins/clock/clock-fuzzy.c:154
+msgctxt "pm"
+msgid "one"
+msgstr "한"
+
+#: ../plugins/clock/clock-fuzzy.c:155
+msgctxt "pm"
+msgid "two"
+msgstr "두"
+
+#: ../plugins/clock/clock-fuzzy.c:156
+msgctxt "pm"
+msgid "three"
+msgstr "세"
+
+#: ../plugins/clock/clock-fuzzy.c:157
+msgctxt "pm"
+msgid "four"
+msgstr "네"
+
+#: ../plugins/clock/clock-fuzzy.c:158
+msgctxt "pm"
+msgid "five"
+msgstr "다섯"
+
+#: ../plugins/clock/clock-fuzzy.c:159
+msgctxt "pm"
+msgid "six"
+msgstr "여섯"
+
+#: ../plugins/clock/clock-fuzzy.c:160
+msgctxt "pm"
+msgid "seven"
+msgstr "일곱"
+
+#: ../plugins/clock/clock-fuzzy.c:161
+msgctxt "pm"
+msgid "eight"
+msgstr "여덟"
+
+#: ../plugins/clock/clock-fuzzy.c:162
+msgctxt "pm"
+msgid "nine"
+msgstr "아홉"
+
+#: ../plugins/clock/clock-fuzzy.c:163
+msgctxt "pm"
+msgid "ten"
+msgstr "열"
+
+#: ../plugins/clock/clock-fuzzy.c:164
+msgctxt "pm"
+msgid "eleven"
+msgstr "열 한"
+
+#. I18N: 12 PM is noon
+#: ../plugins/clock/clock-fuzzy.c:166
+msgctxt "pm"
 msgid "twelve"
 msgstr "열 두"
 
@@ -1676,15 +1750,15 @@ msgstr "고급"
 msgid "Program launcher with optional menu"
 msgstr "선택 메뉴가 있는 프로그램 실행 아이콘입니다"
 
-#: ../plugins/pager/pager.c:543 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:608 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "작업 공간 설정(_S)..."
 
-#: ../plugins/pager/pager.c:631
+#: ../plugins/pager/pager.c:701
 msgid "Unable to open the workspace settings"
 msgstr "작업 공간 설정을 열 수 없습니다"
 
-#: ../plugins/pager/pager-buttons.c:598 ../plugins/windowmenu/windowmenu.c:880
+#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:899
 #, c-format
 msgid "Workspace %d"
 msgstr "작업 공간 %d"
@@ -2003,36 +2077,36 @@ msgstr "모든 모니터의 창 표시(_N)"
 msgid "Show only _minimized windows"
 msgstr "숨겨둔 창만 표시(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3067
+#: ../plugins/tasklist/tasklist-widget.c:3065
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "새 '%s' 인스턴스를 시작할 수 없습니다"
 
-#: ../plugins/tasklist/tasklist-widget.c:3071
+#: ../plugins/tasklist/tasklist-widget.c:3069
 msgid "Error"
 msgstr "오류"
 
-#: ../plugins/tasklist/tasklist-widget.c:3100
+#: ../plugins/tasklist/tasklist-widget.c:3098
 msgid "Launch New Instance"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3856
+#: ../plugins/tasklist/tasklist-widget.c:3854
 msgid "Mi_nimize All"
 msgstr "모두 최소화(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3864
+#: ../plugins/tasklist/tasklist-widget.c:3862
 msgid "Un_minimize All"
 msgstr "모두 최소화 취소(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3872
+#: ../plugins/tasklist/tasklist-widget.c:3870
 msgid "Ma_ximize All"
 msgstr "모두 최대화(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3880
+#: ../plugins/tasklist/tasklist-widget.c:3878
 msgid "_Unmaximize All"
 msgstr "모두 최대화 취소(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3892
+#: ../plugins/tasklist/tasklist-widget.c:3890
 msgid "_Close All"
 msgstr "모두 닫기(_C)"
 
@@ -2040,28 +2114,28 @@ msgstr "모두 닫기(_C)"
 msgid "Switch between open windows using buttons"
 msgstr "단추를 사용하여 열려있는 창을 전환합니다"
 
-#: ../plugins/windowmenu/windowmenu.c:677
+#: ../plugins/windowmenu/windowmenu.c:694
 msgid "Desktop"
 msgstr "데스크톱"
 
-#: ../plugins/windowmenu/windowmenu.c:1279
+#: ../plugins/windowmenu/windowmenu.c:1298
 msgid "No Windows"
 msgstr "창 없음"
 
-#: ../plugins/windowmenu/windowmenu.c:1294
+#: ../plugins/windowmenu/windowmenu.c:1313
 msgid "Urgent Windows"
 msgstr "긴급 창"
 
-#: ../plugins/windowmenu/windowmenu.c:1337
+#: ../plugins/windowmenu/windowmenu.c:1356
 msgid "Add Workspace"
 msgstr "작업 공간 추가"
 
-#: ../plugins/windowmenu/windowmenu.c:1360
+#: ../plugins/windowmenu/windowmenu.c:1379
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "작업 공간 \"%s\" 제거"
 
-#: ../plugins/windowmenu/windowmenu.c:1362
+#: ../plugins/windowmenu/windowmenu.c:1381
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "작업 공간 %d번 제거"
