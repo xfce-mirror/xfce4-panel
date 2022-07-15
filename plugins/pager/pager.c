@@ -488,6 +488,33 @@ pager_plugin_get_master_plugin (PagerPlugin *plugin)
 
 
 
+static void
+pager_plugin_set_ratio (PagerPlugin *plugin)
+{
+  WnckWorkspace *workspace;
+
+  g_signal_handlers_disconnect_by_func (plugin->wnck_screen, pager_plugin_set_ratio, plugin);
+
+  workspace = wnck_screen_get_active_workspace (plugin->wnck_screen);
+  if (workspace == NULL)
+    {
+      /* this is the right signal to get relevant information about the virtual
+       * nature of active workspace, instead of "active-workspace-changed" */
+      g_signal_connect_swapped (plugin->wnck_screen, "window-manager-changed",
+                                G_CALLBACK (pager_plugin_set_ratio), plugin);
+      return;
+    }
+
+  if (wnck_workspace_is_virtual (workspace))
+    plugin->ratio = (gfloat) wnck_workspace_get_width (workspace)
+                    / (gfloat) wnck_workspace_get_height (workspace);
+  else
+    plugin->ratio = (gfloat) wnck_screen_get_width (plugin->wnck_screen)
+                    / (gfloat) wnck_screen_get_height (plugin->wnck_screen);
+}
+
+
+
 static gboolean
 pager_plugin_screen_layout_changed_idle (gpointer data)
 {
@@ -542,10 +569,9 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin)
 
   if (plugin->miniature_view)
     {
+      pager_plugin_set_ratio (plugin);
+
       plugin->pager = wnck_pager_new ();
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-      plugin->ratio = (gfloat) gdk_screen_width () / (gfloat) gdk_screen_height ();
-G_GNUC_END_IGNORE_DEPRECATIONS
       g_signal_connect_after (G_OBJECT (plugin->pager), "drag-begin",
                               G_CALLBACK (pager_plugin_drag_begin_event), plugin);
       g_signal_connect_after (G_OBJECT (plugin->pager), "drag-end",
