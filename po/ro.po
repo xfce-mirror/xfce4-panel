@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-10 12:48+0200\n"
+"POT-Creation-Date: 2022-07-15 12:48+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Mișu Moldovan <dumol@xfce.org>, 2015\n"
 "Language-Team: Romanian (http://www.transifex.com/xfce/xfce4-panel/language/ro/)\n"
@@ -1361,50 +1361,124 @@ msgid "%1 o'clock"
 msgstr "ora %1"
 
 #: ../plugins/clock/clock-fuzzy.c:137
+msgctxt "am"
 msgid "one"
 msgstr "unu"
 
 #: ../plugins/clock/clock-fuzzy.c:138
+msgctxt "am"
 msgid "two"
 msgstr "două"
 
 #: ../plugins/clock/clock-fuzzy.c:139
+msgctxt "am"
 msgid "three"
 msgstr "trei"
 
 #: ../plugins/clock/clock-fuzzy.c:140
+msgctxt "am"
 msgid "four"
 msgstr "patru"
 
 #: ../plugins/clock/clock-fuzzy.c:141
+msgctxt "am"
 msgid "five"
 msgstr "cinci"
 
 #: ../plugins/clock/clock-fuzzy.c:142
+msgctxt "am"
 msgid "six"
 msgstr "șase"
 
 #: ../plugins/clock/clock-fuzzy.c:143
+msgctxt "am"
 msgid "seven"
 msgstr "șapte"
 
 #: ../plugins/clock/clock-fuzzy.c:144
+msgctxt "am"
 msgid "eight"
 msgstr "opt"
 
 #: ../plugins/clock/clock-fuzzy.c:145
+msgctxt "am"
 msgid "nine"
 msgstr "nouă"
 
 #: ../plugins/clock/clock-fuzzy.c:146
+msgctxt "am"
 msgid "ten"
 msgstr "zece"
 
 #: ../plugins/clock/clock-fuzzy.c:147
+msgctxt "am"
 msgid "eleven"
 msgstr "unsprezece"
 
-#: ../plugins/clock/clock-fuzzy.c:148
+#. I18N: 12 AM is midnight
+#: ../plugins/clock/clock-fuzzy.c:149
+msgctxt "am"
+msgid "twelve"
+msgstr "douăsprezece"
+
+#: ../plugins/clock/clock-fuzzy.c:154
+msgctxt "pm"
+msgid "one"
+msgstr "unu"
+
+#: ../plugins/clock/clock-fuzzy.c:155
+msgctxt "pm"
+msgid "two"
+msgstr "două"
+
+#: ../plugins/clock/clock-fuzzy.c:156
+msgctxt "pm"
+msgid "three"
+msgstr "trei"
+
+#: ../plugins/clock/clock-fuzzy.c:157
+msgctxt "pm"
+msgid "four"
+msgstr "patru"
+
+#: ../plugins/clock/clock-fuzzy.c:158
+msgctxt "pm"
+msgid "five"
+msgstr "cinci"
+
+#: ../plugins/clock/clock-fuzzy.c:159
+msgctxt "pm"
+msgid "six"
+msgstr "șase"
+
+#: ../plugins/clock/clock-fuzzy.c:160
+msgctxt "pm"
+msgid "seven"
+msgstr "șapte"
+
+#: ../plugins/clock/clock-fuzzy.c:161
+msgctxt "pm"
+msgid "eight"
+msgstr "opt"
+
+#: ../plugins/clock/clock-fuzzy.c:162
+msgctxt "pm"
+msgid "nine"
+msgstr "nouă"
+
+#: ../plugins/clock/clock-fuzzy.c:163
+msgctxt "pm"
+msgid "ten"
+msgstr "zece"
+
+#: ../plugins/clock/clock-fuzzy.c:164
+msgctxt "pm"
+msgid "eleven"
+msgstr "unsprezece"
+
+#. I18N: 12 PM is noon
+#: ../plugins/clock/clock-fuzzy.c:166
+msgctxt "pm"
 msgid "twelve"
 msgstr "douăsprezece"
 
@@ -1673,15 +1747,15 @@ msgstr "Avansate"
 msgid "Program launcher with optional menu"
 msgstr "Lansator de programe cu meniu opțional"
 
-#: ../plugins/pager/pager.c:543 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:608 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "_Opțiuni pentru spațiile de lucru…"
 
-#: ../plugins/pager/pager.c:631
+#: ../plugins/pager/pager.c:701
 msgid "Unable to open the workspace settings"
 msgstr "Nu s-au putut deschide opțiunile pentru spațiile de lucru"
 
-#: ../plugins/pager/pager-buttons.c:598 ../plugins/windowmenu/windowmenu.c:880
+#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:899
 #, c-format
 msgid "Workspace %d"
 msgstr "Spațiul de lucru %d"
@@ -2000,36 +2074,36 @@ msgstr "Arată ferestrele pe _toate monitoarele"
 msgid "Show only _minimized windows"
 msgstr "Arată doar ferestrele _minimizate"
 
-#: ../plugins/tasklist/tasklist-widget.c:3067
+#: ../plugins/tasklist/tasklist-widget.c:3065
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3071
+#: ../plugins/tasklist/tasklist-widget.c:3069
 msgid "Error"
 msgstr "Eroare"
 
-#: ../plugins/tasklist/tasklist-widget.c:3100
+#: ../plugins/tasklist/tasklist-widget.c:3098
 msgid "Launch New Instance"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3856
+#: ../plugins/tasklist/tasklist-widget.c:3854
 msgid "Mi_nimize All"
 msgstr "Mi_nimizează tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3864
+#: ../plugins/tasklist/tasklist-widget.c:3862
 msgid "Un_minimize All"
 msgstr "Restaurea_ză tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3872
+#: ../plugins/tasklist/tasklist-widget.c:3870
 msgid "Ma_ximize All"
 msgstr "Ma_ximizează tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3880
+#: ../plugins/tasklist/tasklist-widget.c:3878
 msgid "_Unmaximize All"
 msgstr "_Demaximizează tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3892
+#: ../plugins/tasklist/tasklist-widget.c:3890
 msgid "_Close All"
 msgstr "În_chide tot"
 
@@ -2037,28 +2111,28 @@ msgstr "În_chide tot"
 msgid "Switch between open windows using buttons"
 msgstr "Schimbați fereastra activă utilizând butoane"
 
-#: ../plugins/windowmenu/windowmenu.c:677
+#: ../plugins/windowmenu/windowmenu.c:694
 msgid "Desktop"
 msgstr "Desktop"
 
-#: ../plugins/windowmenu/windowmenu.c:1279
+#: ../plugins/windowmenu/windowmenu.c:1298
 msgid "No Windows"
 msgstr "Nicio fereastră"
 
-#: ../plugins/windowmenu/windowmenu.c:1294
+#: ../plugins/windowmenu/windowmenu.c:1313
 msgid "Urgent Windows"
 msgstr "Ferestre urgente"
 
-#: ../plugins/windowmenu/windowmenu.c:1337
+#: ../plugins/windowmenu/windowmenu.c:1356
 msgid "Add Workspace"
 msgstr "Adăugare spațiu de lucru"
 
-#: ../plugins/windowmenu/windowmenu.c:1360
+#: ../plugins/windowmenu/windowmenu.c:1379
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Șterge spațiul de lucru „%s”"
 
-#: ../plugins/windowmenu/windowmenu.c:1362
+#: ../plugins/windowmenu/windowmenu.c:1381
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Șterge spațiul de lucru %d"
