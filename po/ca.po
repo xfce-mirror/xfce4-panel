@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-10 12:48+0200\n"
+"POT-Creation-Date: 2022-07-15 12:48+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2016-2020\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce4-panel/language/ca/)\n"
@@ -1363,50 +1363,124 @@ msgid "%1 o'clock"
 msgstr "%1 en punt"
 
 #: ../plugins/clock/clock-fuzzy.c:137
+msgctxt "am"
 msgid "one"
 msgstr "una"
 
 #: ../plugins/clock/clock-fuzzy.c:138
+msgctxt "am"
 msgid "two"
 msgstr "dues"
 
 #: ../plugins/clock/clock-fuzzy.c:139
+msgctxt "am"
 msgid "three"
 msgstr "tres"
 
 #: ../plugins/clock/clock-fuzzy.c:140
+msgctxt "am"
 msgid "four"
 msgstr "quatre"
 
 #: ../plugins/clock/clock-fuzzy.c:141
+msgctxt "am"
 msgid "five"
 msgstr "cinc"
 
 #: ../plugins/clock/clock-fuzzy.c:142
+msgctxt "am"
 msgid "six"
 msgstr "sis"
 
 #: ../plugins/clock/clock-fuzzy.c:143
+msgctxt "am"
 msgid "seven"
 msgstr "set"
 
 #: ../plugins/clock/clock-fuzzy.c:144
+msgctxt "am"
 msgid "eight"
 msgstr "vuit"
 
 #: ../plugins/clock/clock-fuzzy.c:145
+msgctxt "am"
 msgid "nine"
 msgstr "nou"
 
 #: ../plugins/clock/clock-fuzzy.c:146
+msgctxt "am"
 msgid "ten"
 msgstr "deu"
 
 #: ../plugins/clock/clock-fuzzy.c:147
+msgctxt "am"
 msgid "eleven"
 msgstr "onze"
 
-#: ../plugins/clock/clock-fuzzy.c:148
+#. I18N: 12 AM is midnight
+#: ../plugins/clock/clock-fuzzy.c:149
+msgctxt "am"
+msgid "twelve"
+msgstr "dotze"
+
+#: ../plugins/clock/clock-fuzzy.c:154
+msgctxt "pm"
+msgid "one"
+msgstr "una"
+
+#: ../plugins/clock/clock-fuzzy.c:155
+msgctxt "pm"
+msgid "two"
+msgstr "dues"
+
+#: ../plugins/clock/clock-fuzzy.c:156
+msgctxt "pm"
+msgid "three"
+msgstr "tres"
+
+#: ../plugins/clock/clock-fuzzy.c:157
+msgctxt "pm"
+msgid "four"
+msgstr "quatre"
+
+#: ../plugins/clock/clock-fuzzy.c:158
+msgctxt "pm"
+msgid "five"
+msgstr "cinc"
+
+#: ../plugins/clock/clock-fuzzy.c:159
+msgctxt "pm"
+msgid "six"
+msgstr "sis"
+
+#: ../plugins/clock/clock-fuzzy.c:160
+msgctxt "pm"
+msgid "seven"
+msgstr "set"
+
+#: ../plugins/clock/clock-fuzzy.c:161
+msgctxt "pm"
+msgid "eight"
+msgstr "vuit"
+
+#: ../plugins/clock/clock-fuzzy.c:162
+msgctxt "pm"
+msgid "nine"
+msgstr "nou"
+
+#: ../plugins/clock/clock-fuzzy.c:163
+msgctxt "pm"
+msgid "ten"
+msgstr "deu"
+
+#: ../plugins/clock/clock-fuzzy.c:164
+msgctxt "pm"
+msgid "eleven"
+msgstr "onze"
+
+#. I18N: 12 PM is noon
+#: ../plugins/clock/clock-fuzzy.c:166
+msgctxt "pm"
 msgid "twelve"
 msgstr "dotze"
 
@@ -1675,15 +1749,15 @@ msgstr "Avançat"
 msgid "Program launcher with optional menu"
 msgstr "Llançador de programes amb el menu opcional"
 
-#: ../plugins/pager/pager.c:543 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:608 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "Ajust_s de l'espai de treball..."
 
-#: ../plugins/pager/pager.c:631
+#: ../plugins/pager/pager.c:701
 msgid "Unable to open the workspace settings"
 msgstr "No es poden obrir els ajusts de l'espai de treball"
 
-#: ../plugins/pager/pager-buttons.c:598 ../plugins/windowmenu/windowmenu.c:880
+#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:899
 #, c-format
 msgid "Workspace %d"
 msgstr "Espai de treball %d"
@@ -2002,36 +2076,36 @@ msgstr "Mostra les finestres de tots els mo_nitors"
 msgid "Show only _minimized windows"
 msgstr "Mostra només les finestres _minimitzades"
 
-#: ../plugins/tasklist/tasklist-widget.c:3067
+#: ../plugins/tasklist/tasklist-widget.c:3065
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "No es pot iniciar una instància nova de '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:3071
+#: ../plugins/tasklist/tasklist-widget.c:3069
 msgid "Error"
 msgstr "Error"
 
-#: ../plugins/tasklist/tasklist-widget.c:3100
+#: ../plugins/tasklist/tasklist-widget.c:3098
 msgid "Launch New Instance"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3856
+#: ../plugins/tasklist/tasklist-widget.c:3854
 msgid "Mi_nimize All"
 msgstr "Mi_nimitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3864
+#: ../plugins/tasklist/tasklist-widget.c:3862
 msgid "Un_minimize All"
 msgstr "De_sminimitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3872
+#: ../plugins/tasklist/tasklist-widget.c:3870
 msgid "Ma_ximize All"
 msgstr "Ma_ximitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3880
+#: ../plugins/tasklist/tasklist-widget.c:3878
 msgid "_Unmaximize All"
 msgstr "Des_maximitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3892
+#: ../plugins/tasklist/tasklist-widget.c:3890
 msgid "_Close All"
 msgstr "_Tanca-ho tot"
 
@@ -2039,28 +2113,28 @@ msgstr "_Tanca-ho tot"
 msgid "Switch between open windows using buttons"
 msgstr "Canvieu entre les finestres obertes mitjançant botons"
 
-#: ../plugins/windowmenu/windowmenu.c:677
+#: ../plugins/windowmenu/windowmenu.c:694
 msgid "Desktop"
 msgstr "Escriptori"
 
-#: ../plugins/windowmenu/windowmenu.c:1279
+#: ../plugins/windowmenu/windowmenu.c:1298
 msgid "No Windows"
 msgstr "Sense finestres"
 
-#: ../plugins/windowmenu/windowmenu.c:1294
+#: ../plugins/windowmenu/windowmenu.c:1313
 msgid "Urgent Windows"
 msgstr "Finestres urgents"
 
-#: ../plugins/windowmenu/windowmenu.c:1337
+#: ../plugins/windowmenu/windowmenu.c:1356
 msgid "Add Workspace"
 msgstr "Afegeix un espai de treball"
 
-#: ../plugins/windowmenu/windowmenu.c:1360
+#: ../plugins/windowmenu/windowmenu.c:1379
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Suprimeix l'espai de treball «%s»"
 
-#: ../plugins/windowmenu/windowmenu.c:1362
+#: ../plugins/windowmenu/windowmenu.c:1381
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Suprimeix l'espai de treball %d"
