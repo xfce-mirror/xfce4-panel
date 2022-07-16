@@ -579,6 +579,13 @@ sn_item_signal_received (GDBusProxy *proxy,
     }
   else if (!g_strcmp0 (signal_name, "NewStatus"))
     {
+      finish_and_return_if_true (parameters == NULL);
+      if (! g_variant_check_format_string (parameters, "(s)", FALSE))
+        {
+          g_warning ("Could not parse properties for StatusNotifierItem.");
+          return;
+        }
+
       g_variant_get (parameters, "(s)", &status);
       exposed = sn_item_status_is_exposed (status);
       g_free (status);
