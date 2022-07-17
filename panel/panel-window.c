@@ -161,6 +161,8 @@ static void         panel_window_autohide_timeout_destroy             (gpointer 
 static void         panel_window_autohide_ease_out_timeout_destroy    (gpointer          user_data);
 static void         panel_window_autohide_queue                       (PanelWindow      *window,
                                                                        AutohideState     new_state);
+static void         panel_window_opacity_enter_queue                  (PanelWindow      *window,
+                                                                       gboolean          enter);
 static gboolean     panel_window_autohide_ease_out                    (gpointer          data);
 static void         panel_window_set_autohide_behavior                (PanelWindow      *window,
                                                                        AutohideBehavior  behavior);
@@ -345,6 +347,7 @@ struct _PanelWindow
   AutohideState        autohide_state;
   guint                autohide_timeout_id;
   guint                autohide_ease_out_id;
+  guint                opacity_timeout_id;
   gint                 autohide_block;
   gint                 autohide_size;
   guint                popdown_speed;
@@ -577,6 +580,7 @@ panel_window_init (PanelWindow *window)
   window->autohide_state = AUTOHIDE_VISIBLE;
   window->autohide_timeout_id = 0;
   window->autohide_ease_out_id = 0;
+  window->opacity_timeout_id = 0;
   window->autohide_block = 0;
   window->autohide_size = DEFAULT_AUTOHIDE_SIZE;
   window->popup_delay = DEFAULT_POPUP_DELAY;
@@ -910,6 +914,9 @@ panel_window_finalize (GObject *object)
   if (G_UNLIKELY (window->autohide_ease_out_id != 0))
     g_source_remove (window->autohide_ease_out_id);
 
+  if (G_UNLIKELY (window->opacity_timeout_id != 0))
+    g_source_remove (window->opacity_timeout_id);
+
   /* destroy the autohide window */
   if (window->autohide_window != NULL)
     gtk_widget_destroy (window->autohide_window);
@@ -1012,11 +1019,14 @@ panel_window_enter_notify_event (GtkWidget        *widget,
 
   /* update autohide status */
   if (event->detail != GDK_NOTIFY_INFERIOR
-      && window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER
       && window->autohide_block == 0)
-    panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
+    {
+      panel_window_opacity_enter_queue (window, TRUE);
+      if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
+        panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
+    }
 
-  return (*GTK_WIDGET_CLASS (panel_window_parent_class)->enter_notify_event) (widget, event);
+  return FALSE;
 }
 
 
@@ -1028,7 +1038,7 @@ panel_window_leave_notify_event (GtkWidget        *widget,
   if (event->detail != GDK_NOTIFY_INFERIOR)
     panel_window_drag_leave (widget, NULL, 0);
 
-  return (*GTK_WIDGET_CLASS (panel_window_parent_class)->leave_notify_event) (widget, event);
+  return FALSE;
 }
 
 
@@ -1073,9 +1083,13 @@ panel_window_drag_leave (GtkWidget      *widget,
 {
   PanelWindow *window = PANEL_WINDOW (widget);
 
+  if (window->autohide_block > 0)
+    return;
+
+  panel_window_opacity_enter_queue (window, FALSE);
+
   /* queue an autohide timeout if needed */
-  if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER
-      && window->autohide_block == 0)
+  if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
     {
       /* simulate a geometry change to check for overlapping windows with intelligent hiding */
       if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
@@ -1092,12 +1106,17 @@ static gboolean
 panel_window_motion_notify_event (GtkWidget      *widget,
                                   GdkEventMotion *event)
 {
-  PanelWindow  *window = PANEL_WINDOW (widget);
-  gint          pointer_x, pointer_y;
-  gint          window_x, window_y;
-  gint          high;
-  GdkScreen    *screen = NULL;
-  gboolean      retval = TRUE;
+  PanelWindow     *window = PANEL_WINDOW (widget);
+  PanelBaseWindow *base_window = PANEL_BASE_WINDOW (widget);
+  gint             pointer_x, pointer_y;
+  gint             window_x, window_y;
+  gint             high;
+  GdkScreen       *screen = NULL;
+  gboolean         retval = TRUE;
+
+  /* sometimes the panel does not receive enter events so let's fill this gap here */
+  if (base_window->is_composited && ! base_window->opacity_is_enter)
+    panel_window_opacity_enter_queue (window, TRUE);
 
   /* leave when the pointer is not grabbed */
   if (G_UNLIKELY (window->grab_time == 0))
@@ -2737,6 +2756,39 @@ panel_window_autohide_queue (PanelWindow   *window,
 
 
 static gboolean
+panel_window_opacity_enter_timeout (gpointer data)
+{
+  PanelWindow *window = data;
+
+  panel_base_window_opacity_enter (PANEL_BASE_WINDOW (window), FALSE);
+  window->opacity_timeout_id = 0;
+
+  return FALSE;
+}
+
+
+
+static void
+panel_window_opacity_enter_queue (PanelWindow *window,
+                                  gboolean     enter)
+{
+  if (window->opacity_timeout_id != 0)
+    {
+      g_source_remove (window->opacity_timeout_id);
+      window->opacity_timeout_id = 0;
+    }
+
+  /* avoid flickering by using the same timeout as for autohide when leaving */
+  if (enter)
+    panel_base_window_opacity_enter (PANEL_BASE_WINDOW (window), TRUE);
+  else
+    window->opacity_timeout_id =
+      g_timeout_add (DEFAULT_POPDOWN_DELAY, panel_window_opacity_enter_timeout, window);
+}
+
+
+
+static gboolean
 panel_window_autohide_drag_motion (GtkWidget        *widget,
                                    GdkDragContext   *context,
                                    gint              x,
@@ -3389,11 +3441,10 @@ panel_window_set_provider_info (PanelWindow *window,
           /* unset the background (PROVIDER_PROP_TYPE_ACTION_BACKGROUND_UNSET) */
           panel_plugin_external_set_background_color (PANEL_PLUGIN_EXTERNAL (provider), NULL);
         }
-      if (base_window->leave_opacity != 1.0 && base_window->is_composited)
-        {
-          panel_plugin_external_set_opacity (PANEL_PLUGIN_EXTERNAL (provider),
-              base_window->leave_opacity);
-        }
+
+      if (base_window->is_composited)
+        panel_plugin_external_set_opacity (PANEL_PLUGIN_EXTERNAL (provider),
+                                           gtk_widget_get_opacity (GTK_WIDGET (window)));
     }
 
   panel_window_plugin_set_mode (provider, window);
@@ -3415,8 +3466,11 @@ panel_window_freeze_autohide (PanelWindow *window)
   /* increase autohide block counter */
   window->autohide_block++;
 
-  if (window->autohide_block == 1
-      && window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
+  if (window->autohide_block > 1)
+    return;
+
+  panel_window_opacity_enter_queue (window, TRUE);
+  if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
     panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
 }
 
@@ -3425,33 +3479,39 @@ panel_window_freeze_autohide (PanelWindow *window)
 void
 panel_window_thaw_autohide (PanelWindow *window)
 {
+  GdkDevice *device;
+  GdkWindow *gdkwindow;
+  gboolean   outside = FALSE;
+
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (window->autohide_block > 0);
 
   /* decrease autohide block counter */
   window->autohide_block--;
 
-  if (window->autohide_block == 0
-      && window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
+  if (window->autohide_block > 0)
+    return;
+
+  /* check if pointer is outside the panel */
+  device = gdk_seat_get_pointer (gdk_display_get_default_seat (window->display));
+  if (device != NULL)
+    {
+      gdkwindow = gdk_device_get_window_at_position (device, NULL, NULL);
+      outside = (gdkwindow == NULL || gdk_window_get_effective_toplevel (gdkwindow)
+                                      != gtk_widget_get_window (GTK_WIDGET (window)));
+    }
+
+  if (outside)
+    panel_window_opacity_enter_queue (window, FALSE);
+
+  if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
     {
       /* simulate a geometry change to check for overlapping windows with intelligent hiding */
       if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
         panel_window_active_window_geometry_changed (window->wnck_active_window, window);
       /* otherwise hide the panel if the pointer is outside */
-      else
-        {
-          GdkDevice *device;
-          GdkWindow *gdkwindow;
-
-          device = gdk_seat_get_pointer (gdk_display_get_default_seat (window->display));
-          if (device == NULL)
-            return;
-
-          gdkwindow = gdk_device_get_window_at_position (device, NULL, NULL);
-          if (gdkwindow == NULL || gdk_window_get_effective_toplevel (gdkwindow)
-                                   != gtk_widget_get_window (GTK_WIDGET (window)))
-            panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
-        }
+      else if (outside)
+        panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
     }
 }
 

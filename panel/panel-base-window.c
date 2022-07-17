@@ -55,10 +55,6 @@ static void     panel_base_window_set_property                (GObject          
 static void     panel_base_window_finalize                    (GObject              *object);
 static void     panel_base_window_screen_changed              (GtkWidget            *widget,
                                                                GdkScreen            *previous_screen);
-static gboolean panel_base_window_enter_notify_event          (GtkWidget            *widget,
-                                                               GdkEventCrossing     *event);
-static gboolean panel_base_window_leave_notify_event          (GtkWidget            *widget,
-                                                               GdkEventCrossing     *event);
 static void     panel_base_window_composited_changed          (GdkScreen            *screen,
                                                                GtkWidget            *widget);
 static gboolean panel_base_window_active_timeout              (gpointer              user_data);
@@ -125,8 +121,6 @@ panel_base_window_class_init (PanelBaseWindowClass *klass)
   gobject_class->finalize = panel_base_window_finalize;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
-  gtkwidget_class->enter_notify_event = panel_base_window_enter_notify_event;
-  gtkwidget_class->leave_notify_event = panel_base_window_leave_notify_event;
   gtkwidget_class->screen_changed = panel_base_window_screen_changed;
 
   g_object_class_install_property (gobject_class,
@@ -205,6 +199,7 @@ panel_base_window_init (PanelBaseWindow *window)
   window->background_rgba = NULL;
   window->enter_opacity = 1.00;
   window->leave_opacity = 1.00;
+  window->opacity_is_enter = FALSE;
 
   window->priv->css_provider = gtk_css_provider_new ();
   window->priv->borders = PANEL_BORDER_NONE;
@@ -302,22 +297,33 @@ panel_base_window_set_property (GObject      *object,
   PanelBaseWindowPrivate *priv = window->priv;
   PanelBgStyle            bg_style;
   GFile                  *file;
+  gdouble                 opacity;
 
   switch (prop_id)
     {
     case PROP_ENTER_OPACITY:
-      /* set the new enter opacity */
-      window->enter_opacity = g_value_get_uint (value) / 100.00;
+      opacity = g_value_get_uint (value) / 100.00;
+      if (opacity != window->enter_opacity)
+        {
+          window->enter_opacity = opacity;
+          if (window->is_composited && window->opacity_is_enter)
+            {
+              gtk_widget_set_opacity (GTK_WIDGET (window), window->enter_opacity);
+              panel_base_window_set_plugin_data (window, panel_base_window_set_plugin_enter_opacity);
+            }
+        }
       break;
 
     case PROP_LEAVE_OPACITY:
-      /* set the new leave opacity */
-      window->leave_opacity = g_value_get_uint (value) / 100.00;
-      if (window->is_composited)
+      opacity = g_value_get_uint (value) / 100.00;
+      if (opacity != window->leave_opacity)
         {
-          gtk_widget_set_opacity (GTK_WIDGET (object), window->leave_opacity);
-          panel_base_window_set_plugin_data (window,
-                                             panel_base_window_set_plugin_leave_opacity);
+          window->leave_opacity = opacity;
+          if (window->is_composited && ! window->opacity_is_enter)
+            {
+              gtk_widget_set_opacity (GTK_WIDGET (window), window->leave_opacity);
+              panel_base_window_set_plugin_data (window, panel_base_window_set_plugin_leave_opacity);
+            }
         }
       break;
 
@@ -462,50 +468,6 @@ panel_base_window_screen_changed (GtkWidget *widget, GdkScreen *previous_screen)
 
 
 
-static gboolean
-panel_base_window_enter_notify_event (GtkWidget        *widget,
-                                      GdkEventCrossing *event)
-{
-  PanelBaseWindow *window = PANEL_BASE_WINDOW (widget);
-
-  /* switch to enter opacity when compositing is enabled
-   * and the two values are different */
-  if (event->detail != GDK_NOTIFY_INFERIOR
-      && PANEL_BASE_WINDOW (widget)->is_composited
-      && window->leave_opacity != window->enter_opacity)
-    {
-      gtk_widget_set_opacity (GTK_WIDGET (widget), window->enter_opacity);
-      panel_base_window_set_plugin_data (window,
-                                         panel_base_window_set_plugin_enter_opacity);
-    }
-
-  return FALSE;
-}
-
-
-
-static gboolean
-panel_base_window_leave_notify_event (GtkWidget        *widget,
-                                      GdkEventCrossing *event)
-{
-  PanelBaseWindow *window = PANEL_BASE_WINDOW (widget);
-
-  /* switch to leave opacity when compositing is enabled
-   * and the two values are different */
-  if (event->detail != GDK_NOTIFY_INFERIOR
-      && PANEL_BASE_WINDOW (widget)->is_composited
-      && window->leave_opacity != window->enter_opacity)
-    {
-      gtk_widget_set_opacity (GTK_WIDGET (widget), window->leave_opacity);
-      panel_base_window_set_plugin_data (window,
-                                         panel_base_window_set_plugin_leave_opacity);
-    }
-
-  return FALSE;
-}
-
-
-
 static void
 panel_base_window_composited_changed (GdkScreen *screen,
                                       GtkWidget *widget)
@@ -526,11 +488,11 @@ panel_base_window_composited_changed (GdkScreen *screen,
       gtk_widget_set_opacity (GTK_WIDGET (widget), window->leave_opacity);
       panel_base_window_set_plugin_data (window,
                                          panel_base_window_set_plugin_leave_opacity);
-
     }
   else
     {
       /* make sure to always disable the leave opacity without compositing */
+      window->opacity_is_enter = FALSE;
       gtk_widget_set_opacity (GTK_WIDGET (widget), 1.0);
       panel_base_window_set_plugin_data (window,
                                          panel_base_window_set_plugin_leave_opacity);
@@ -870,4 +832,29 @@ panel_base_window_get_borders (PanelBaseWindow *window)
     return PANEL_BORDER_NONE;
 
   return priv->borders;
+}
+
+
+
+void
+panel_base_window_opacity_enter (PanelBaseWindow *window,
+                                 gboolean         enter)
+{
+  if (! window->is_composited)
+    return;
+
+  window->opacity_is_enter = enter;
+  if (window->leave_opacity == window->enter_opacity)
+    return;
+
+  if (enter)
+    {
+      gtk_widget_set_opacity (GTK_WIDGET (window), window->enter_opacity);
+      panel_base_window_set_plugin_data (window, panel_base_window_set_plugin_enter_opacity);
+    }
+  else
+    {
+      gtk_widget_set_opacity (GTK_WIDGET (window), window->leave_opacity);
+      panel_base_window_set_plugin_data (window, panel_base_window_set_plugin_leave_opacity);
+    }
 }

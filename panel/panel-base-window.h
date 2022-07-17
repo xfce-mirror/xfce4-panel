@@ -74,6 +74,7 @@ struct _PanelBaseWindow
   /* transparency settings */
   gdouble                  enter_opacity;
   gdouble                  leave_opacity;
+  gboolean                 opacity_is_enter;
 };
 
 GType        panel_base_window_get_type                    (void) G_GNUC_CONST;
@@ -90,6 +91,8 @@ void         panel_base_window_orientation_changed         (PanelBaseWindow *win
 void         panel_base_window_set_borders                 (PanelBaseWindow *window,
                                                             PanelBorders     borders);
 PanelBorders panel_base_window_get_borders                 (PanelBaseWindow *window);
+void         panel_base_window_opacity_enter               (PanelBaseWindow *window,
+                                                            gboolean         enter);
 
 G_END_DECLS
 
