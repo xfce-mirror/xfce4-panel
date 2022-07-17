@@ -66,6 +66,8 @@ struct _ClockTimeTimeout
   guint       restart : 1;
   ClockTime  *time;
   guint       time_changed_id;
+  ClockSleepMonitor *sleep_monitor;
+  guint       woke_up_id;
 };
 
 enum
@@ -332,12 +334,14 @@ clock_time_timeout_sync (gpointer user_data)
 ClockTimeTimeout *
 clock_time_timeout_new (guint       interval,
                         ClockTime  *time,
+                        ClockSleepMonitor *sleep_monitor,
                         GCallback   c_handler,
                         gpointer    gobject)
 {
   ClockTimeTimeout *timeout;
 
   panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (time), NULL);
+  panel_return_val_if_fail (sleep_monitor == NULL || XFCE_IS_CLOCK_SLEEP_MONITOR (sleep_monitor), NULL);
 
   panel_return_val_if_fail (interval > 0, NULL);
 
@@ -352,6 +356,13 @@ clock_time_timeout_new (guint       interval,
                               c_handler, gobject);
 
   g_object_ref (G_OBJECT (timeout->time));
+
+  if (sleep_monitor) {
+    timeout->sleep_monitor = sleep_monitor;
+    timeout->woke_up_id = g_signal_connect_swapped (G_OBJECT (sleep_monitor), "woke-up",
+						    G_CALLBACK (clock_time_timeout_restart), timeout);
+    g_object_ref (G_OBJECT (sleep_monitor));
+  }
 
   clock_time_timeout_set_interval (timeout, interval);
 
@@ -419,6 +430,19 @@ clock_time_timeout_set_interval (ClockTimeTimeout *timeout,
 
 
 void
+clock_time_timeout_restart (ClockTimeTimeout *timeout)
+{
+  panel_return_if_fail (timeout != NULL);
+
+  g_signal_emit (G_OBJECT (timeout->time), clock_time_signals[TIME_CHANGED], 0);
+
+  timeout->restart = 1;
+  clock_time_timeout_set_interval(timeout, timeout->interval);
+}
+
+
+
+void
 clock_time_timeout_free (ClockTimeTimeout *timeout)
 {
   panel_return_if_fail (timeout != NULL);
@@ -430,8 +454,15 @@ clock_time_timeout_free (ClockTimeTimeout *timeout)
 
   g_object_unref (G_OBJECT (timeout->time));
 
+  if (timeout->sleep_monitor != NULL) {
+    if (timeout->woke_up_id != 0)
+      g_signal_handler_disconnect (timeout->sleep_monitor, timeout->woke_up_id);
+    g_object_unref (G_OBJECT (timeout->sleep_monitor));
+  }
+
   if (G_LIKELY (timeout->timeout_id != 0))
     g_source_remove (timeout->timeout_id);
+
   g_slice_free (ClockTimeTimeout, timeout);
 }
 
