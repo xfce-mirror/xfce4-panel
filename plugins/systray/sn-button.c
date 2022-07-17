@@ -120,7 +120,7 @@ sn_button_init (SnButton *button)
   gtk_css_provider_load_from_data (css_provider,
                                    "#sn-button {"
                                      "padding: 0px;"
-                                     "border-width: 1px;"
+                                     "border-width: 0px;"
                                    "}", -1, NULL);
   gtk_style_context_add_provider (GTK_STYLE_CONTEXT (gtk_widget_get_style_context (GTK_WIDGET (button))),
                                   GTK_STYLE_PROVIDER (css_provider),
