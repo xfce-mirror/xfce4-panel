@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-15 12:48+0200\n"
+"POT-Creation-Date: 2022-07-18 12:48+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2019-2020,2022\n"
 "Language-Team: Japanese (http://www.transifex.com/xfce/xfce4-panel/language/ja/)\n"
@@ -37,7 +37,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "パネル;設定;環境設定;タスクバー;自動非表示;アプリケーションメニュー;スタート;ボタン;ランチャー;通知領域;ステータス;アイコン;プラグイン;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3014
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3066
 msgid "Panel"
 msgstr "パネル"
 
@@ -79,7 +79,7 @@ msgstr "削除(_R)"
 msgid "_Properties"
 msgstr "プロパティ(_P)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1232 ../panel/panel-window.c:3105
+#: ../libxfce4panel/xfce-panel-plugin.c:1232 ../panel/panel-window.c:3157
 msgid "_About"
 msgstr "このプログラムについて(_A)"
 
@@ -91,20 +91,20 @@ msgstr "移動(_M)"
 msgid "Pane_l"
 msgstr "パネル(_L)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3027
+#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3079
 msgid "Add _New Items..."
 msgstr "新しいアイテムを追加する(_N)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1312 ../panel/panel-window.c:3042
+#: ../libxfce4panel/xfce-panel-plugin.c:1312 ../panel/panel-window.c:3094
 msgid "Panel Pr_eferences..."
 msgstr "パネルの設定(_E)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1333 ../panel/panel-window.c:3074
+#: ../libxfce4panel/xfce-panel-plugin.c:1333 ../panel/panel-window.c:3126
 msgid "Log _Out"
 msgstr "ログアウト(_O)"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3094
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3146
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -518,8 +518,8 @@ msgid ""
 msgstr "パネルの取っ手を非表示にして位置を固定する場合はこのオプションを選択してください。"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
-msgid "Don't _reserve space on borders"
-msgstr "パネル分のスペースを確保しない(_R)"
+msgid "Keep panel _above windows"
+msgstr "パネルをウィンドウの上に置く(_A)"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
@@ -698,7 +698,7 @@ msgstr "上級者"
 msgid "Expert"
 msgstr "達人"
 
-#: ../panel/panel-window.c:3059
+#: ../panel/panel-window.c:3111
 msgid "_Lock Panel"
 msgstr "パネルをロック(_L)"
 
@@ -1747,11 +1747,11 @@ msgstr "拡張"
 msgid "Program launcher with optional menu"
 msgstr "オプションでメニューが付くプログラムランチャーです。"
 
-#: ../plugins/pager/pager.c:608 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:656 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "ワークスペースの設定(_S)..."
 
-#: ../plugins/pager/pager.c:701
+#: ../plugins/pager/pager.c:749
 msgid "Unable to open the workspace settings"
 msgstr "ワークスペース設定を開くことができません"
 
