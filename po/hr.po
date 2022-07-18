@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-15 12:48+0200\n"
+"POT-Creation-Date: 2022-07-18 12:48+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Ivica  Kolić <ikoli@yahoo.com>, 2013-2015,2018-2020\n"
 "Language-Team: Croatian (http://www.transifex.com/xfce/xfce4-panel/language/hr/)\n"
@@ -37,7 +37,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr ""
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3014
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3066
 msgid "Panel"
 msgstr "Ploča"
 
@@ -79,7 +79,7 @@ msgstr "_Ukloni"
 msgid "_Properties"
 msgstr "_Svojstva"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1232 ../panel/panel-window.c:3105
+#: ../libxfce4panel/xfce-panel-plugin.c:1232 ../panel/panel-window.c:3157
 msgid "_About"
 msgstr "_O programu"
 
@@ -91,20 +91,20 @@ msgstr "_Premjesti"
 msgid "Pane_l"
 msgstr "Ploč_a"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3027
+#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3079
 msgid "Add _New Items..."
 msgstr "Dodaj _nove stavke..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1312 ../panel/panel-window.c:3042
+#: ../libxfce4panel/xfce-panel-plugin.c:1312 ../panel/panel-window.c:3094
 msgid "Panel Pr_eferences..."
 msgstr "Osobitosti pl_oče..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1333 ../panel/panel-window.c:3074
+#: ../libxfce4panel/xfce-panel-plugin.c:1333 ../panel/panel-window.c:3126
 msgid "Log _Out"
 msgstr "Odja_va"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3094
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3146
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -520,8 +520,8 @@ msgid ""
 msgstr "Izaberite ovu opciju kako bi sakrili ručke ploče i zaključali njenu poziciju."
 
 #: ../panel/panel-preferences-dialog.glade.h:24
-msgid "Don't _reserve space on borders"
-msgstr "Ne _rezerviraj prostor do granice ploče"
+msgid "Keep panel _above windows"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
@@ -700,7 +700,7 @@ msgstr "Iskusni"
 msgid "Expert"
 msgstr "Ekspert"
 
-#: ../panel/panel-window.c:3059
+#: ../panel/panel-window.c:3111
 msgid "_Lock Panel"
 msgstr "_Zaključaj ploču"
 
@@ -1749,11 +1749,11 @@ msgstr "Napredeno"
 msgid "Program launcher with optional menu"
 msgstr "Pokretač programa s neobaveznim izbornikom"
 
-#: ../plugins/pager/pager.c:608 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:656 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "Postavke _radnoga prostora..."
 
-#: ../plugins/pager/pager.c:701
+#: ../plugins/pager/pager.c:749
 msgid "Unable to open the workspace settings"
 msgstr "Nije moguće otvoriti postavke radnoga prostora"
 
