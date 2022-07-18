@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-15 12:48+0200\n"
+"POT-Creation-Date: 2022-07-18 12:48+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Daniel Muñiz Fontoira <dani@damufo.eu>, 2018-2020\n"
 "Language-Team: Galician (http://www.transifex.com/xfce/xfce4-panel/language/gl/)\n"
@@ -37,7 +37,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "paneis;configuracións;preferencias;barra de tarefas;autoagochar;menú de aplicación;inicio;botóns;iniciador;zona de notificación;estado;iconas;engadidos;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3014
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3066
 msgid "Panel"
 msgstr "Panel"
 
@@ -79,7 +79,7 @@ msgstr "_Retirar"
 msgid "_Properties"
 msgstr "_Propiedades"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1232 ../panel/panel-window.c:3105
+#: ../libxfce4panel/xfce-panel-plugin.c:1232 ../panel/panel-window.c:3157
 msgid "_About"
 msgstr "_Sobre"
 
@@ -91,20 +91,20 @@ msgstr "_Mover"
 msgid "Pane_l"
 msgstr "Pane_l"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3027
+#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3079
 msgid "Add _New Items..."
 msgstr "Engadir _novos elementos..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1312 ../panel/panel-window.c:3042
+#: ../libxfce4panel/xfce-panel-plugin.c:1312 ../panel/panel-window.c:3094
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferencias do panel..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1333 ../panel/panel-window.c:3074
+#: ../libxfce4panel/xfce-panel-plugin.c:1333 ../panel/panel-window.c:3126
 msgid "Log _Out"
 msgstr "Saír da _sesión"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3094
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3146
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -519,8 +519,8 @@ msgid ""
 msgstr "Seleccione esta opción para agochar as asas do panel e bloquear a súa posición."
 
 #: ../panel/panel-preferences-dialog.glade.h:24
-msgid "Don't _reserve space on borders"
-msgstr "Non _reservar espazo nos bordos"
+msgid "Keep panel _above windows"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
@@ -699,7 +699,7 @@ msgstr "Con experiencia"
 msgid "Expert"
 msgstr "Experto"
 
-#: ../panel/panel-window.c:3059
+#: ../panel/panel-window.c:3111
 msgid "_Lock Panel"
 msgstr "B_loquear o panel"
 
@@ -1748,11 +1748,11 @@ msgstr "Avanzado"
 msgid "Program launcher with optional menu"
 msgstr "Iniciador de programas con menú opcional"
 
-#: ../plugins/pager/pager.c:608 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:656 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "Opcións de e_spazo de traballo..."
 
-#: ../plugins/pager/pager.c:701
+#: ../plugins/pager/pager.c:749
 msgid "Unable to open the workspace settings"
 msgstr "Non se puido abrir as opcións do espazo de traballo"
 
