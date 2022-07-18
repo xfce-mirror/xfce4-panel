@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-15 12:48+0200\n"
+"POT-Creation-Date: 2022-07-18 12:48+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: 玉堂白鹤 <yjwork@qq.com>, 2015,2017-2020,2022\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/xfce/xfce4-panel/language/zh_CN/)\n"
@@ -48,7 +48,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panels;settings;preferences;taskbar;autohide;application menu;start;buttons;launcher;notification area;status;icons;plugins;面板;设置;首选项;任务栏;自动隐藏;应用程序菜单;开始;按钮;启动器;通知区域;状态;图标;插件; "
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3014
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3066
 msgid "Panel"
 msgstr "面板"
 
@@ -90,7 +90,7 @@ msgstr "移除(_R)"
 msgid "_Properties"
 msgstr "属性(_P)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1232 ../panel/panel-window.c:3105
+#: ../libxfce4panel/xfce-panel-plugin.c:1232 ../panel/panel-window.c:3157
 msgid "_About"
 msgstr "关于(_A)"
 
@@ -102,20 +102,20 @@ msgstr "移动(_M)"
 msgid "Pane_l"
 msgstr "面板(_L)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3027
+#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3079
 msgid "Add _New Items..."
 msgstr "添加新项目(_N)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1312 ../panel/panel-window.c:3042
+#: ../libxfce4panel/xfce-panel-plugin.c:1312 ../panel/panel-window.c:3094
 msgid "Panel Pr_eferences..."
 msgstr "面板首选项(_E)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1333 ../panel/panel-window.c:3074
+#: ../libxfce4panel/xfce-panel-plugin.c:1333 ../panel/panel-window.c:3126
 msgid "Log _Out"
 msgstr "注销(_O)"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3094
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3146
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -529,8 +529,8 @@ msgid ""
 msgstr "选择此项隐藏面板控制器并锁定其位置。"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
-msgid "Don't _reserve space on borders"
-msgstr "在边框处不保留空间(_R)"
+msgid "Keep panel _above windows"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
@@ -709,7 +709,7 @@ msgstr "高级"
 msgid "Expert"
 msgstr "专家"
 
-#: ../panel/panel-window.c:3059
+#: ../panel/panel-window.c:3111
 msgid "_Lock Panel"
 msgstr "锁定面板(_L)"
 
@@ -1758,11 +1758,11 @@ msgstr "高级"
 msgid "Program launcher with optional menu"
 msgstr "带可选菜单的程序启动器"
 
-#: ../plugins/pager/pager.c:608 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:656 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "工作区设置(_S)..."
 
-#: ../plugins/pager/pager.c:701
+#: ../plugins/pager/pager.c:749
 msgid "Unable to open the workspace settings"
 msgstr "未能打开工作区设置"
 
