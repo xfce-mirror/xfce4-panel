@@ -512,8 +512,9 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
 
   /* manage panel length */
   panel_preferences_dialog_length_max_notified (dialog);
-  g_signal_connect_swapped (dialog->active, "notify::length-max",
-                            G_CALLBACK (panel_preferences_dialog_length_max_notified), dialog);
+  g_signal_connect_object (dialog->active, "notify::length-max",
+                           G_CALLBACK (panel_preferences_dialog_length_max_notified),
+                           dialog, G_CONNECT_SWAPPED);
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "length");
   binding = g_object_bind_property_full (dialog->active, "length", object, "value",
                                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL,
