@@ -23,9 +23,6 @@
 #ifdef HAVE_STDIO_H
 #include <stdio.h>
 #endif
-#ifdef HAVE_MATH_H
-#include <math.h>
-#endif
 #ifdef HAVE_STRING_H
 #include <string.h>
 #endif
@@ -199,6 +196,7 @@ enum
   PROP_SCALE_FACTOR,
   PROP_NROWS,
   PROP_LENGTH,
+  PROP_LENGTH_MAX,
   PROP_LENGTH_ADJUST,
   PROP_POSITION_LOCKED,
   PROP_AUTOHIDE_BEHAVIOR,
@@ -328,6 +326,7 @@ struct _PanelWindow
   guint                icon_size;
   guint                scale_factor;
   gdouble              length;
+  guint                length_max;
   guint                length_adjust : 1;
   XfcePanelPluginMode  mode;
   guint                nrows;
@@ -463,10 +462,17 @@ panel_window_class_init (PanelWindowClass *klass)
                                                       1, 6, 1,
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
+  /* keep this property as a percentage for backwards compatibility */
   g_object_class_install_property (gobject_class,
                                    PROP_LENGTH,
-                                   g_param_spec_uint ("length", NULL, NULL,
-                                                      1, 100, 10,
+                                   g_param_spec_double ("length", NULL, NULL,
+                                                        1, 100, 10,
+                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_LENGTH_MAX,
+                                   g_param_spec_uint ("length-max", NULL, NULL,
+                                                      1, G_MAXUINT, 1,
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
@@ -571,6 +577,7 @@ panel_window_init (PanelWindow *window)
   window->dark_mode = FALSE;
   window->nrows = 1;
   window->length = 0.10;
+  window->length_max = 1;
   window->length_adjust = TRUE;
   window->snap_position = SNAP_POSITION_NONE;
   window->floating = TRUE;
@@ -648,7 +655,11 @@ panel_window_get_property (GObject    *object,
       break;
 
     case PROP_LENGTH:
-      g_value_set_uint (value,  rint (window->length * 100.00));
+      g_value_set_double (value, window->length * 100);
+      break;
+
+    case PROP_LENGTH_MAX:
+      g_value_set_uint (value, window->length_max);
       break;
 
     case PROP_LENGTH_ADJUST:
@@ -794,7 +805,7 @@ panel_window_set_property (GObject      *object,
       break;
 
     case PROP_LENGTH:
-      val_double = g_value_get_uint (value) / 100.00;
+      val_double = g_value_get_double (value) / 100;
       if (window->length != val_double)
         {
           if (window->length == 1.00 || val_double == 1.00)
@@ -806,6 +817,14 @@ panel_window_set_property (GObject      *object,
             panel_window_screen_update_borders (window);
 
           gtk_widget_queue_resize (GTK_WIDGET (window));
+        }
+      break;
+
+    case PROP_LENGTH_MAX:
+      val_uint = g_value_get_uint (value);
+      if (window->length_max != val_uint)
+        {
+          window->length_max = val_uint;
         }
       break;
 
@@ -2401,6 +2420,9 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
                "%p: working-area: screen=%p, x=%d, y=%d, w=%d, h=%d",
                window, screen,
                a.x, a.y, a.width, a.height);
+
+  /* update max length in pixels with notification */
+  g_object_set (window, "length-max", IS_HORIZONTAL (window) ? a.width : a.height, NULL);
 
   panel_window_screen_update_borders (window);
 

@@ -23,6 +23,9 @@
 #ifdef HAVE_STDLIB_H
 #include <stdlib.h>
 #endif
+#ifdef HAVE_MATH_H
+#include <math.h>
+#endif
 
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
@@ -65,6 +68,15 @@ static void                     panel_preferences_dialog_bg_style_changed       
 static void                     panel_preferences_dialog_bg_image_file_set      (GtkFileChooserButton   *button,
                                                                                  PanelPreferencesDialog *dialog);
 static void                     panel_preferences_dialog_bg_image_notified      (PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_length_max_notified    (PanelPreferencesDialog *dialog);
+static gboolean                 panel_preferences_dialog_length_transform_to    (GBinding               *binding,
+                                                                                 const GValue           *from_value,
+                                                                                 GValue                 *to_value,
+                                                                                 gpointer                user_data);
+static gboolean                 panel_preferences_dialog_length_transform_from  (GBinding               *binding,
+                                                                                 const GValue           *from_value,
+                                                                                 GValue                 *to_value,
+                                                                                 gpointer                user_data);
 static void                     panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobox,
                                                                                  PanelPreferencesDialog *dialog);
 static gboolean                 panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog,
@@ -424,6 +436,10 @@ panel_preferences_dialog_bindings_unbind (PanelPreferencesDialog *dialog)
 
       dialog->bg_image_notify_handler_id = 0;
     }
+
+  if (dialog->active != NULL)
+    g_signal_handlers_disconnect_by_func (dialog->active,
+                                          panel_preferences_dialog_length_max_notified, dialog);
 }
 
 
@@ -457,6 +473,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   gint         n_monitors = 1;
   GObject     *object;
   GObject     *store;
+  GBinding    *binding;
   gchar       *output_name = NULL;
   gboolean     selector_visible = TRUE;
   GtkTreeIter  iter;
@@ -479,7 +496,6 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   panel_preferences_dialog_bindings_add (dialog, "disable-struts", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "size", "value", 0);
   panel_preferences_dialog_bindings_add (dialog, "nrows", "value", 0);
-  panel_preferences_dialog_bindings_add (dialog, "length", "value", 0);
   panel_preferences_dialog_bindings_add (dialog, "length-adjust", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "enter-opacity", "value", 0);
   panel_preferences_dialog_bindings_add (dialog, "leave-opacity", "value", 0);
@@ -494,6 +510,17 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
       "notify::background-image", G_CALLBACK (panel_preferences_dialog_bg_image_notified), dialog);
   panel_preferences_dialog_bg_image_notified (dialog);
 
+  /* manage panel length */
+  panel_preferences_dialog_length_max_notified (dialog);
+  g_signal_connect_swapped (dialog->active, "notify::length-max",
+                            G_CALLBACK (panel_preferences_dialog_length_max_notified), dialog);
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "length");
+  binding = g_object_bind_property_full (dialog->active, "length", object, "value",
+                                         G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL,
+                                         panel_preferences_dialog_length_transform_to,
+                                         panel_preferences_dialog_length_transform_from,
+                                         dialog, NULL);
+  dialog->bindings = g_slist_prepend (dialog->bindings, binding);
 
   /* get run mode of the driver (multiple monitors or randr) */
   display = gtk_widget_get_display (GTK_WIDGET (dialog->active));
@@ -766,6 +793,73 @@ panel_preferences_dialog_bg_image_notified (PanelPreferencesDialog *dialog)
 
   g_signal_handlers_unblock_by_func (G_OBJECT (button),
       G_CALLBACK (panel_preferences_dialog_bg_image_file_set), dialog);
+}
+
+
+
+static void
+panel_preferences_dialog_length_max_notified (PanelPreferencesDialog *dialog)
+{
+  GObject *adjust;
+  gdouble  length;
+  guint    length_max;
+
+  panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
+  panel_return_if_fail (PANEL_IS_WINDOW (dialog->active));
+
+  adjust = gtk_builder_get_object (GTK_BUILDER (dialog), "length");
+  panel_return_if_fail (GTK_IS_ADJUSTMENT (adjust));
+
+  g_object_get (dialog->active, "length-max", &length_max, NULL);
+  gtk_adjustment_set_upper (GTK_ADJUSTMENT (adjust), length_max);
+  g_object_get (dialog->active, "length", &length, NULL);
+  gtk_adjustment_set_value (GTK_ADJUSTMENT (adjust), length_max * length / 100);
+}
+
+
+
+static gboolean
+panel_preferences_dialog_length_transform_to (GBinding     *binding,
+                                              const GValue *from_value,
+                                              GValue       *to_value,
+                                              gpointer      user_data)
+{
+  GObject *adjust;
+  gdouble  length, upper;
+
+  panel_return_val_if_fail (PANEL_IS_PREFERENCES_DIALOG (user_data), FALSE);
+
+  adjust = gtk_builder_get_object (user_data, "length");
+  panel_return_val_if_fail (GTK_IS_ADJUSTMENT (adjust), FALSE);
+
+  length = g_value_get_double (from_value);
+  upper = gtk_adjustment_get_upper (GTK_ADJUSTMENT (adjust));
+  g_value_set_double (to_value, rint (upper * length / 100));
+
+  return TRUE;
+}
+
+
+
+static gboolean
+panel_preferences_dialog_length_transform_from (GBinding     *binding,
+                                                const GValue *from_value,
+                                                GValue       *to_value,
+                                                gpointer      user_data)
+{
+  GObject *adjust;
+  gdouble  length, upper;
+
+  panel_return_val_if_fail (PANEL_IS_PREFERENCES_DIALOG (user_data), FALSE);
+
+  adjust = gtk_builder_get_object (user_data, "length");
+  panel_return_val_if_fail (GTK_IS_ADJUSTMENT (adjust), FALSE);
+
+  length = g_value_get_double (from_value);
+  upper = gtk_adjustment_get_upper (GTK_ADJUSTMENT (adjust));
+  g_value_set_double (to_value, 100 * length / upper);
+
+  return TRUE;
 }
 
 
