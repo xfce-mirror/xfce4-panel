@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-18 12:48+0200\n"
+"POT-Creation-Date: 2022-07-21 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>, 2013-2014,2016-2020\n"
 "Language-Team: Korean (http://www.transifex.com/xfce/xfce4-panel/language/ko/)\n"
@@ -40,7 +40,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panels;패널;창;settings;설정;preferences;기본설정;기본 설정;taskbar;작업표시줄;작업 표시줄;autohide;자동숨김;자동 숨김;application menu;프로그램메뉴;프로그램 메뉴;어플리케이션 메뉴;어플리케이션메뉴start;시작;buttons;버튼;보턴;단추;launcher;실행아이콘;실행 아이콘;notification area;알림영역;알림 영역;status;상태;icons;아이콘;plugins;플러그인;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3066
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3088
 msgid "Panel"
 msgstr "패널"
 
@@ -50,7 +50,7 @@ msgstr "패널 개별 설정"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1080
-#: ../panel/panel-preferences-dialog.c:1318
+#: ../panel/panel-preferences-dialog.c:1413
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "\"%s\"을(를) 정말로 없애시렵니까?"
@@ -61,7 +61,7 @@ msgid ""
 msgstr "항목을 패널에서 제거하면 설정도 지워집니다."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:164
-#: ../panel/panel-preferences-dialog.c:1323
+#: ../panel/panel-preferences-dialog.c:1418
 #: ../plugins/applicationsmenu/applicationsmenu.c:610
 #: ../plugins/directorymenu/directorymenu.c:469
 #: ../plugins/directorymenu/directorymenu.c:936
@@ -71,9 +71,9 @@ msgstr "취소(_C)"
 #: ../libxfce4panel/xfce-panel-plugin.c:1087
 #: ../libxfce4panel/xfce-panel-plugin.c:1267
 #: ../panel/panel-plugin-external.c:523
-#: ../panel/panel-preferences-dialog.c:958
-#: ../panel/panel-preferences-dialog.c:1324
-#: ../panel/panel-preferences-dialog.glade.h:59
+#: ../panel/panel-preferences-dialog.c:1053
+#: ../panel/panel-preferences-dialog.c:1419
+#: ../panel/panel-preferences-dialog.glade.h:58
 #: ../plugins/launcher/launcher-dialog.c:861
 msgid "_Remove"
 msgstr "제거(_R)"
@@ -82,7 +82,7 @@ msgstr "제거(_R)"
 msgid "_Properties"
 msgstr "속성(_P)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1232 ../panel/panel-window.c:3157
+#: ../libxfce4panel/xfce-panel-plugin.c:1232 ../panel/panel-window.c:3179
 msgid "_About"
 msgstr "정보(_A)"
 
@@ -94,20 +94,20 @@ msgstr "이동(_M)"
 msgid "Pane_l"
 msgstr "패널(_L)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3079
+#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3101
 msgid "Add _New Items..."
 msgstr "새 항목 추가(_N)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1312 ../panel/panel-window.c:3094
+#: ../libxfce4panel/xfce-panel-plugin.c:1312 ../panel/panel-window.c:3116
 msgid "Panel Pr_eferences..."
 msgstr "패널 기본 설정(_E)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1333 ../panel/panel-window.c:3126
+#: ../libxfce4panel/xfce-panel-plugin.c:1333 ../panel/panel-window.c:3148
 msgid "Log _Out"
 msgstr "로그아웃(_O)"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3146
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3168
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -313,7 +313,7 @@ msgid "Add New Item"
 msgstr "새 항목 추가"
 
 #: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:201
-#: ../panel/panel-preferences-dialog.glade.h:57
+#: ../panel/panel-preferences-dialog.glade.h:56
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "추가(_A)"
@@ -322,7 +322,7 @@ msgstr "추가(_A)"
 msgid "Please choose a panel for the new plugin:"
 msgstr "새 플러그인을 둘 패널을 선택하십시오:"
 
-#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:896
+#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:991
 #, c-format
 msgid "Panel %d"
 msgstr "패널 %d"
@@ -383,39 +383,39 @@ msgstr "최근 %d 초 안에 플러그인을 한 번 이상 다시 시작했습�
 msgid "_Execute"
 msgstr "실행(_E)"
 
-#: ../panel/panel-preferences-dialog.c:518
+#: ../panel/panel-preferences-dialog.c:546
 msgid "Automatic"
 msgstr "자동"
 
-#: ../panel/panel-preferences-dialog.c:528
+#: ../panel/panel-preferences-dialog.c:556
 msgid "Primary"
 msgstr "우선 순위"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:547
+#: ../panel/panel-preferences-dialog.c:575
 #, c-format
 msgid "Monitor %d"
 msgstr "모니터 %d"
 
-#: ../panel/panel-preferences-dialog.c:959
+#: ../panel/panel-preferences-dialog.c:1054
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "패널과 플러그인 환경설정을 완전히 제거합니다"
 
-#: ../panel/panel-preferences-dialog.c:960
+#: ../panel/panel-preferences-dialog.c:1055
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "패널 %d을(를) 정말로 없애시렵니까?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1160
+#: ../panel/panel-preferences-dialog.c:1255
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(외부)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1165
+#: ../panel/panel-preferences-dialog.c:1260
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -424,12 +424,12 @@ msgstr "내부 이름: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1177
+#: ../panel/panel-preferences-dialog.c:1272
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "내부 이름: %s-%d"
 
-#: ../panel/panel-preferences-dialog.c:1321
+#: ../panel/panel-preferences-dialog.c:1416
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "항목을 패널에서 제거하면 완전히 잃게 됩니다."
 
@@ -552,128 +552,127 @@ msgstr "열 높이(_S) (픽셀):"
 msgid "Num_ber of rows:"
 msgstr "줄 수(_B):"
 
-#: ../panel/panel-preferences-dialog.glade.h:33
-#, no-c-format
-msgid "L_ength (%):"
-msgstr "길이(%)(_E):"
+#: ../panel/panel-preferences-dialog.glade.h:32
+msgid "L_ength (pixels):"
+msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "A_utomatically increase the length"
 msgstr "길이를 자동으로 늘임(_U)"
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr "플러그인이 더 많은 공간을 필요로 한다면 패널의 길이를 자동으로 늘이는 이 옵션을 선택하십시오."
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "D_isplay"
 msgstr "표시(_I)"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Dark mode"
 msgstr "어두움 모드"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "<b>Background</b>"
 msgstr "<b>배경</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:38
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Style:"
 msgstr "스타일(_S):"
 
-#: ../panel/panel-preferences-dialog.glade.h:40
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "C_olor:"
 msgstr "색(_O):"
 
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Pick a Panel Color"
 msgstr "패널 색 선택"
 
-#: ../panel/panel-preferences-dialog.glade.h:42
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_File:"
 msgstr "파일(_F):"
 
-#: ../panel/panel-preferences-dialog.glade.h:43
+#: ../panel/panel-preferences-dialog.glade.h:42
 msgid "Select A Background Image"
 msgstr "배경 그림 선택"
 
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:43
 msgid "<b>Icons</b>"
 msgstr "<b>아이콘</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:45
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Adjust size au_tomatically"
 msgstr "크기 자동 조정(_T)"
 
-#: ../panel/panel-preferences-dialog.glade.h:46
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Fixed icon _size (pixels):"
 msgstr "아이콘 크기 고정(_S) (픽셀):"
 
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid "<b>Opacity</b>"
 msgstr "<b>투명도</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../panel/panel-preferences-dialog.glade.h:47
 msgid "Configure..."
 msgstr "설정..."
 
-#: ../panel/panel-preferences-dialog.glade.h:49
+#: ../panel/panel-preferences-dialog.glade.h:48
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr "<b>합성 비활성화 상태</b>\n패널의 투명도 설정을 위해 창 관리자에서 합성을 활성화합니다."
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:52
+#: ../panel/panel-preferences-dialog.glade.h:51
 msgid "_Enter:"
 msgstr "커서 내부 위치(_E):"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:54
+#: ../panel/panel-preferences-dialog.glade.h:53
 msgid "_Leave:"
 msgstr "커서 외부 위치(_L):"
 
-#: ../panel/panel-preferences-dialog.glade.h:55
+#: ../panel/panel-preferences-dialog.glade.h:54
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "마우스 포인터가 패널 위로 올라가지 않았을 때의 투명도입니다. 0은 완전히 투명해지고 100은 완전히 불투명해집니다."
 
-#: ../panel/panel-preferences-dialog.glade.h:56
+#: ../panel/panel-preferences-dialog.glade.h:55
 msgid "Appeara_nce"
 msgstr "모양새(_N)"
 
-#: ../panel/panel-preferences-dialog.glade.h:58
+#: ../panel/panel-preferences-dialog.glade.h:57
 msgid "Add new item to this panel"
 msgstr "패널에 새 항목 추가"
 
-#: ../panel/panel-preferences-dialog.glade.h:60
+#: ../panel/panel-preferences-dialog.glade.h:59
 msgid "Remove currently selected item"
 msgstr "현재 선택한 항목 제거"
 
-#: ../panel/panel-preferences-dialog.glade.h:61
+#: ../panel/panel-preferences-dialog.glade.h:60
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Edit the currently selected item"
 msgstr "현재 선택한 항목 편집"
 
-#: ../panel/panel-preferences-dialog.glade.h:62
+#: ../panel/panel-preferences-dialog.glade.h:61
 msgid "Show about information of the currently selected item"
 msgstr "현재 선택한 항목의 정보에 대해 표시"
 
-#: ../panel/panel-preferences-dialog.glade.h:63
+#: ../panel/panel-preferences-dialog.glade.h:62
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "Move currently selected item up by one row"
 msgstr "현재 선택한 목록을 한 줄 위로 옮기기"
 
-#: ../panel/panel-preferences-dialog.glade.h:64
+#: ../panel/panel-preferences-dialog.glade.h:63
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Move currently selected item down by one row"
 msgstr "현재 선택한 목록을 한 줄 아래로 옮기기"
 
-#: ../panel/panel-preferences-dialog.glade.h:65
+#: ../panel/panel-preferences-dialog.glade.h:64
 msgid "Ite_ms"
 msgstr "항목(_M)"
 
@@ -701,7 +700,7 @@ msgstr "숙련자"
 msgid "Expert"
 msgstr "전문가"
 
-#: ../panel/panel-window.c:3111
+#: ../panel/panel-window.c:3133
 msgid "_Lock Panel"
 msgstr "패널 고정(_L)"
 
