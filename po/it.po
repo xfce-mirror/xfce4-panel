@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-18 12:48+0200\n"
+"POT-Creation-Date: 2022-07-21 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Emanuele Petriglia <transifex@emanuelepetriglia.com>, 2019-2020,2022\n"
 "Language-Team: Italian (http://www.transifex.com/xfce/xfce4-panel/language/it/)\n"
@@ -46,7 +46,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "pannelli;impostazioni;preferenze;barra dei processi;nascondi automaticamente;menu applicazione;avvia;pulsanti;avvia;area di notifica;stato;icone;componenti aggiuntivi;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3066
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3088
 msgid "Panel"
 msgstr "Pannello"
 
@@ -56,7 +56,7 @@ msgstr "Personalizzazione del pannello"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1080
-#: ../panel/panel-preferences-dialog.c:1318
+#: ../panel/panel-preferences-dialog.c:1413
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Rimuovere davvero \"%s\"?"
@@ -67,7 +67,7 @@ msgid ""
 msgstr "Rimuovere un elemento dal pannello fa perdere la sua configurazione."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:164
-#: ../panel/panel-preferences-dialog.c:1323
+#: ../panel/panel-preferences-dialog.c:1418
 #: ../plugins/applicationsmenu/applicationsmenu.c:610
 #: ../plugins/directorymenu/directorymenu.c:469
 #: ../plugins/directorymenu/directorymenu.c:936
@@ -77,9 +77,9 @@ msgstr "A_nnulla"
 #: ../libxfce4panel/xfce-panel-plugin.c:1087
 #: ../libxfce4panel/xfce-panel-plugin.c:1267
 #: ../panel/panel-plugin-external.c:523
-#: ../panel/panel-preferences-dialog.c:958
-#: ../panel/panel-preferences-dialog.c:1324
-#: ../panel/panel-preferences-dialog.glade.h:59
+#: ../panel/panel-preferences-dialog.c:1053
+#: ../panel/panel-preferences-dialog.c:1419
+#: ../panel/panel-preferences-dialog.glade.h:58
 #: ../plugins/launcher/launcher-dialog.c:861
 msgid "_Remove"
 msgstr "_Rimuovi"
@@ -88,7 +88,7 @@ msgstr "_Rimuovi"
 msgid "_Properties"
 msgstr "_Proprietà"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1232 ../panel/panel-window.c:3157
+#: ../libxfce4panel/xfce-panel-plugin.c:1232 ../panel/panel-window.c:3179
 msgid "_About"
 msgstr "_Informazioni"
 
@@ -100,20 +100,20 @@ msgstr "_Sposta"
 msgid "Pane_l"
 msgstr "_Pannello"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3079
+#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3101
 msgid "Add _New Items..."
 msgstr "A_ggiungi nuovi elementi…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1312 ../panel/panel-window.c:3094
+#: ../libxfce4panel/xfce-panel-plugin.c:1312 ../panel/panel-window.c:3116
 msgid "Panel Pr_eferences..."
 msgstr "_Preferenze del pannello…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1333 ../panel/panel-window.c:3126
+#: ../libxfce4panel/xfce-panel-plugin.c:1333 ../panel/panel-window.c:3148
 msgid "Log _Out"
 msgstr "_Esci"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3146
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3168
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -321,7 +321,7 @@ msgid "Add New Item"
 msgstr "Aggiungi un nuovo elemento"
 
 #: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:201
-#: ../panel/panel-preferences-dialog.glade.h:57
+#: ../panel/panel-preferences-dialog.glade.h:56
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "_Aggiungi"
@@ -330,7 +330,7 @@ msgstr "_Aggiungi"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Selezionare un pannello per il nuovo componente aggiuntivo:"
 
-#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:896
+#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:991
 #, c-format
 msgid "Panel %d"
 msgstr "Pannello %d"
@@ -391,39 +391,39 @@ msgstr "Il componente aggiuntivo è stato riavviato più di una volta negli ulti
 msgid "_Execute"
 msgstr "_Esegui"
 
-#: ../panel/panel-preferences-dialog.c:518
+#: ../panel/panel-preferences-dialog.c:546
 msgid "Automatic"
 msgstr "Automatico"
 
-#: ../panel/panel-preferences-dialog.c:528
+#: ../panel/panel-preferences-dialog.c:556
 msgid "Primary"
 msgstr "Primario"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:547
+#: ../panel/panel-preferences-dialog.c:575
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:959
+#: ../panel/panel-preferences-dialog.c:1054
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Le configurazioni del pannello e dei componenti aggiuntivi saranno rimosse in modo permanente"
 
-#: ../panel/panel-preferences-dialog.c:960
+#: ../panel/panel-preferences-dialog.c:1055
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Rimuovere davvero il pannello %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1160
+#: ../panel/panel-preferences-dialog.c:1255
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(esterno)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1165
+#: ../panel/panel-preferences-dialog.c:1260
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -432,12 +432,12 @@ msgstr "Nome interno: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1177
+#: ../panel/panel-preferences-dialog.c:1272
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nome interno: %s-%d"
 
-#: ../panel/panel-preferences-dialog.c:1321
+#: ../panel/panel-preferences-dialog.c:1416
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Se si rimuove l'elemento dal pannello, verrà perso per sempre."
 
@@ -560,128 +560,127 @@ msgstr "Di_mensione riga (in pixel):"
 msgid "Num_ber of rows:"
 msgstr "Numero di _righe:"
 
-#: ../panel/panel-preferences-dialog.glade.h:33
-#, no-c-format
-msgid "L_ength (%):"
-msgstr "Lunghe_zza (%):"
+#: ../panel/panel-preferences-dialog.glade.h:32
+msgid "L_ength (pixels):"
+msgstr "Lungh_ezza (pixel):"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "A_utomatically increase the length"
 msgstr "Aumenta la lunghezza a_utomaticamente"
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr "Selezionare questa opzione per aumentare automaticamente la lunghezza del pannello se i componenti aggiuntivi richiedono più spazio."
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "D_isplay"
 msgstr "_Visualizzazione"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Dark mode"
 msgstr "Modalità scura"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "<b>Background</b>"
 msgstr "<b>Sfondo</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:38
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Style:"
 msgstr "_Stile:"
 
-#: ../panel/panel-preferences-dialog.glade.h:40
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "C_olor:"
 msgstr "C_olore:"
 
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Pick a Panel Color"
 msgstr "Selezionare un colore per il pannello"
 
-#: ../panel/panel-preferences-dialog.glade.h:42
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_File:"
 msgstr "_File:"
 
-#: ../panel/panel-preferences-dialog.glade.h:43
+#: ../panel/panel-preferences-dialog.glade.h:42
 msgid "Select A Background Image"
 msgstr "Selezionare un'immagine di sfondo"
 
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:43
 msgid "<b>Icons</b>"
 msgstr "<b>Icone</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:45
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Adjust size au_tomatically"
 msgstr "Regola la dimensione au_tomaticamente"
 
-#: ../panel/panel-preferences-dialog.glade.h:46
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Fixed icon _size (pixels):"
 msgstr "Dimensione fissa delle icone (in pixel):"
 
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid "<b>Opacity</b>"
 msgstr "<b>Opacità</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../panel/panel-preferences-dialog.glade.h:47
 msgid "Configure..."
 msgstr "Configura…"
 
-#: ../panel/panel-preferences-dialog.glade.h:49
+#: ../panel/panel-preferences-dialog.glade.h:48
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr "<b>Il compositore è attualmente disabilitato</b>\nAbilitare il compositore nel gestore delle finestre per variare l'opacità del pannello."
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:52
+#: ../panel/panel-preferences-dialog.glade.h:51
 msgid "_Enter:"
 msgstr "_A fuoco:"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:54
+#: ../panel/panel-preferences-dialog.glade.h:53
 msgid "_Leave:"
 msgstr "_Non a fuoco:"
 
-#: ../panel/panel-preferences-dialog.glade.h:55
+#: ../panel/panel-preferences-dialog.glade.h:54
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "Trasparenza quando il puntatore non è sul pannello: con 0 è completamente trasparente mentre con 100 completamente opaco."
 
-#: ../panel/panel-preferences-dialog.glade.h:56
+#: ../panel/panel-preferences-dialog.glade.h:55
 msgid "Appeara_nce"
 msgstr "_Aspetto"
 
-#: ../panel/panel-preferences-dialog.glade.h:58
+#: ../panel/panel-preferences-dialog.glade.h:57
 msgid "Add new item to this panel"
 msgstr "Aggiunge un nuovo elemento a questo pannello"
 
-#: ../panel/panel-preferences-dialog.glade.h:60
+#: ../panel/panel-preferences-dialog.glade.h:59
 msgid "Remove currently selected item"
 msgstr "Rimuove l'elemento selezionato"
 
-#: ../panel/panel-preferences-dialog.glade.h:61
+#: ../panel/panel-preferences-dialog.glade.h:60
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Edit the currently selected item"
 msgstr "Modifica l'elemento selezionato"
 
-#: ../panel/panel-preferences-dialog.glade.h:62
+#: ../panel/panel-preferences-dialog.glade.h:61
 msgid "Show about information of the currently selected item"
 msgstr "Mostra le informazioni dell'elemento selezionato"
 
-#: ../panel/panel-preferences-dialog.glade.h:63
+#: ../panel/panel-preferences-dialog.glade.h:62
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "Move currently selected item up by one row"
 msgstr "Sposta l'elemento selezionato una riga sopra"
 
-#: ../panel/panel-preferences-dialog.glade.h:64
+#: ../panel/panel-preferences-dialog.glade.h:63
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Move currently selected item down by one row"
 msgstr "Sposta l'elemento selezionato una riga sotto"
 
-#: ../panel/panel-preferences-dialog.glade.h:65
+#: ../panel/panel-preferences-dialog.glade.h:64
 msgid "Ite_ms"
 msgstr "_Elementi"
 
@@ -709,7 +708,7 @@ msgstr "Esperto"
 msgid "Expert"
 msgstr "Veterano"
 
-#: ../panel/panel-window.c:3111
+#: ../panel/panel-window.c:3133
 msgid "_Lock Panel"
 msgstr "_Blocca il pannello"
 
