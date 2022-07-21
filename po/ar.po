@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-18 12:48+0200\n"
+"POT-Creation-Date: 2022-07-21 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: 7f91df02564a1feba5fdc4d7b990b7f2_5fb95ff, 2021\n"
 "Language-Team: Arabic (http://www.transifex.com/xfce/xfce4-panel/language/ar/)\n"
@@ -41,7 +41,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "اللوحات;الإعدادات;التفضيلات;شريط المهام;الإخفاء التلقائي;قائمة التطبيقات;البدء;الأزرار;المشغل;منطقة الإشعارات;الحالة;الأيقونات;الإضافات;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3066
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3088
 msgid "Panel"
 msgstr "لوحة"
 
@@ -51,7 +51,7 @@ msgstr "خصص اللوحة"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1080
-#: ../panel/panel-preferences-dialog.c:1318
+#: ../panel/panel-preferences-dialog.c:1413
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "متأكد أنك تريد حذف \"%s\"؟"
@@ -62,7 +62,7 @@ msgid ""
 msgstr "إزالة العنصر من اللوحة يعني أيضا أن إعدادات الضبط الخاصة به ستُفقد"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:164
-#: ../panel/panel-preferences-dialog.c:1323
+#: ../panel/panel-preferences-dialog.c:1418
 #: ../plugins/applicationsmenu/applicationsmenu.c:610
 #: ../plugins/directorymenu/directorymenu.c:469
 #: ../plugins/directorymenu/directorymenu.c:936
@@ -72,9 +72,9 @@ msgstr "_إلغاء"
 #: ../libxfce4panel/xfce-panel-plugin.c:1087
 #: ../libxfce4panel/xfce-panel-plugin.c:1267
 #: ../panel/panel-plugin-external.c:523
-#: ../panel/panel-preferences-dialog.c:958
-#: ../panel/panel-preferences-dialog.c:1324
-#: ../panel/panel-preferences-dialog.glade.h:59
+#: ../panel/panel-preferences-dialog.c:1053
+#: ../panel/panel-preferences-dialog.c:1419
+#: ../panel/panel-preferences-dialog.glade.h:58
 #: ../plugins/launcher/launcher-dialog.c:861
 msgid "_Remove"
 msgstr "_حذف"
@@ -83,7 +83,7 @@ msgstr "_حذف"
 msgid "_Properties"
 msgstr "_خصائص"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1232 ../panel/panel-window.c:3157
+#: ../libxfce4panel/xfce-panel-plugin.c:1232 ../panel/panel-window.c:3179
 msgid "_About"
 msgstr "_حول"
 
@@ -95,20 +95,20 @@ msgstr "_انقل"
 msgid "Pane_l"
 msgstr "الش_ريط"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3079
+#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3101
 msgid "Add _New Items..."
 msgstr "أضف عناصر _جديدة..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1312 ../panel/panel-window.c:3094
+#: ../libxfce4panel/xfce-panel-plugin.c:1312 ../panel/panel-window.c:3116
 msgid "Panel Pr_eferences..."
 msgstr "تفضيلات اللوحة..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1333 ../panel/panel-window.c:3126
+#: ../libxfce4panel/xfce-panel-plugin.c:1333 ../panel/panel-window.c:3148
 msgid "Log _Out"
 msgstr "تسجيل الخروج"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3146
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3168
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -319,7 +319,7 @@ msgid "Add New Item"
 msgstr "أضف عنصر جديد"
 
 #: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:201
-#: ../panel/panel-preferences-dialog.glade.h:57
+#: ../panel/panel-preferences-dialog.glade.h:56
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "_إضافة"
@@ -328,7 +328,7 @@ msgstr "_إضافة"
 msgid "Please choose a panel for the new plugin:"
 msgstr "المرجوا إختيار لوحة للملحق الجديد:"
 
-#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:896
+#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:991
 #, c-format
 msgid "Panel %d"
 msgstr "لوحة %d"
@@ -389,39 +389,39 @@ msgstr "تم إعادة تشغيل الملحق اكثر من مرة في آخر
 msgid "_Execute"
 msgstr "_نفذ"
 
-#: ../panel/panel-preferences-dialog.c:518
+#: ../panel/panel-preferences-dialog.c:546
 msgid "Automatic"
 msgstr "تلقائي"
 
-#: ../panel/panel-preferences-dialog.c:528
+#: ../panel/panel-preferences-dialog.c:556
 msgid "Primary"
 msgstr "رئيسي"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:547
+#: ../panel/panel-preferences-dialog.c:575
 #, c-format
 msgid "Monitor %d"
 msgstr "مراقب %d"
 
-#: ../panel/panel-preferences-dialog.c:959
+#: ../panel/panel-preferences-dialog.c:1054
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "سيتم حذف إعدادات اللوحة و الملحقات نهائياً"
 
-#: ../panel/panel-preferences-dialog.c:960
+#: ../panel/panel-preferences-dialog.c:1055
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "متأكد أنك تريد إزالة اللوحة %d؟"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1160
+#: ../panel/panel-preferences-dialog.c:1255
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(الخارجية)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1165
+#: ../panel/panel-preferences-dialog.c:1260
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -430,12 +430,12 @@ msgstr "إسم داخلي: %s-%d\nمعرف العملية: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1177
+#: ../panel/panel-preferences-dialog.c:1272
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "إسم داخلي: : %s-%d"
 
-#: ../panel/panel-preferences-dialog.c:1321
+#: ../panel/panel-preferences-dialog.c:1416
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "إدا قمت بحذف العنصر من اللوحة, سيتم فقدانه نهائيا."
 
@@ -558,128 +558,127 @@ msgstr ""
 msgid "Num_ber of rows:"
 msgstr "عدد الصفوف:"
 
-#: ../panel/panel-preferences-dialog.glade.h:33
-#, no-c-format
-msgid "L_ength (%):"
-msgstr "طول (%):"
+#: ../panel/panel-preferences-dialog.glade.h:32
+msgid "L_ength (pixels):"
+msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "A_utomatically increase the length"
 msgstr "زيادة الطول تلقائياًً"
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr "حدد هذا الخيار لزيادة طول اللوحة تلقائياً إذا تطلبت الإضافات مساحة أكبر."
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "D_isplay"
 msgstr "عرض"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Dark mode"
 msgstr "الوضع الداكن"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "<b>Background</b>"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:38
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Style:"
 msgstr "_أسلوب:"
 
-#: ../panel/panel-preferences-dialog.glade.h:40
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "C_olor:"
 msgstr "لو_ن:"
 
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Pick a Panel Color"
 msgstr "انتقاء لون اللوحة"
 
-#: ../panel/panel-preferences-dialog.glade.h:42
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_File:"
 msgstr "_ملف:"
 
-#: ../panel/panel-preferences-dialog.glade.h:43
+#: ../panel/panel-preferences-dialog.glade.h:42
 msgid "Select A Background Image"
 msgstr "اختر صورة الخلفية"
 
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:43
 msgid "<b>Icons</b>"
 msgstr "<b>الأيقونات</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:45
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Adjust size au_tomatically"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:46
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Fixed icon _size (pixels):"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid "<b>Opacity</b>"
 msgstr "<b>العتمة</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../panel/panel-preferences-dialog.glade.h:47
 msgid "Configure..."
 msgstr "تعديل…"
 
-#: ../panel/panel-preferences-dialog.glade.h:49
+#: ../panel/panel-preferences-dialog.glade.h:48
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr ""
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:52
+#: ../panel/panel-preferences-dialog.glade.h:51
 msgid "_Enter:"
 msgstr "_إدخال:"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:54
+#: ../panel/panel-preferences-dialog.glade.h:53
 msgid "_Leave:"
 msgstr "_غادِر:"
 
-#: ../panel/panel-preferences-dialog.glade.h:55
+#: ../panel/panel-preferences-dialog.glade.h:54
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "شفاف، 0 شفاف تماما و 100 غير شفاف."
 
-#: ../panel/panel-preferences-dialog.glade.h:56
+#: ../panel/panel-preferences-dialog.glade.h:55
 msgid "Appeara_nce"
 msgstr "المظهر"
 
-#: ../panel/panel-preferences-dialog.glade.h:58
+#: ../panel/panel-preferences-dialog.glade.h:57
 msgid "Add new item to this panel"
 msgstr "إضافة عنصر جديد إلى هذه اللوحة"
 
-#: ../panel/panel-preferences-dialog.glade.h:60
+#: ../panel/panel-preferences-dialog.glade.h:59
 msgid "Remove currently selected item"
 msgstr "إزالة العنصر المحدد حاليا"
 
-#: ../panel/panel-preferences-dialog.glade.h:61
+#: ../panel/panel-preferences-dialog.glade.h:60
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Edit the currently selected item"
 msgstr "حرر العنصر المحدد حاليا"
 
-#: ../panel/panel-preferences-dialog.glade.h:62
+#: ../panel/panel-preferences-dialog.glade.h:61
 msgid "Show about information of the currently selected item"
 msgstr "عرض معلومات حول للعنصر المحدد حاليا"
 
-#: ../panel/panel-preferences-dialog.glade.h:63
+#: ../panel/panel-preferences-dialog.glade.h:62
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "Move currently selected item up by one row"
 msgstr "نقل العنصر المحدد حاليا للأعلى بصف واحد"
 
-#: ../panel/panel-preferences-dialog.glade.h:64
+#: ../panel/panel-preferences-dialog.glade.h:63
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Move currently selected item down by one row"
 msgstr "نقل العنصر المحدد حاليا إلى الأسفل بصف واحد"
 
-#: ../panel/panel-preferences-dialog.glade.h:65
+#: ../panel/panel-preferences-dialog.glade.h:64
 msgid "Ite_ms"
 msgstr "عنا_صر"
 
@@ -707,7 +706,7 @@ msgstr "متمرس"
 msgid "Expert"
 msgstr "خبير"
 
-#: ../panel/panel-window.c:3111
+#: ../panel/panel-window.c:3133
 msgid "_Lock Panel"
 msgstr "_إقفال اللوحة"
 
