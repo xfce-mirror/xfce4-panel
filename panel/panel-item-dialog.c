@@ -292,8 +292,6 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   gtk_tree_view_column_set_attributes (column, renderer, "sensitive", COLUMN_SENSITIVE, NULL);
   g_object_set (G_OBJECT (renderer), "ellipsize", PANGO_ELLIPSIZE_END, NULL);
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
-
-  panel_item_dialog_populate_store (dialog);
 }
 
 
@@ -841,6 +839,9 @@ panel_item_dialog_show (PanelWindow *window)
     {
       screen = gdk_screen_get_default ();
     }
+
+  /* populate store after setting the screen so that module usability is set correctly */
+  panel_item_dialog_populate_store (dialog_singleton);
 
   gtk_window_set_screen (GTK_WINDOW (dialog_singleton), screen);
 
