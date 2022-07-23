@@ -667,7 +667,7 @@ xfce_tasklist_get_window_icon (WnckWindow *window,
                                int         size,
                                int         type)
 {
-  GdkPixbuf *pixbuf;
+  GdkPixbuf *pixbuf, *theme_pixbuf;
 
   if (type == CHILD_TYPE_GROUP_MENU || size <= 31)
     pixbuf = wnck_window_get_mini_icon (window);
@@ -675,8 +675,14 @@ xfce_tasklist_get_window_icon (WnckWindow *window,
     pixbuf = wnck_window_get_icon (window);
 
   /* check if the icon is fallback, in that case just try with the theme */
+  theme_pixbuf = pixbuf;
   if (wnck_window_get_icon_is_fallback (window))
-    pixbuf = xfce_tasklist_get_window_icon_from_theme (window, pixbuf);
+    theme_pixbuf = xfce_tasklist_get_window_icon_from_theme (window, pixbuf);
+
+  if (theme_pixbuf == pixbuf && pixbuf != NULL)
+    g_object_ref (pixbuf);
+  else
+    pixbuf = theme_pixbuf;
 
   return pixbuf;
 }
@@ -2761,6 +2767,8 @@ xfce_tasklist_button_icon_changed (WnckWindow        *window,
 
   if (old_width != gdk_pixbuf_get_width (pixbuf) || old_height != gdk_pixbuf_get_height (pixbuf))
     force_box_layout_update (child);
+
+  g_object_unref (pixbuf);
 }
 
 
@@ -3548,7 +3556,10 @@ xfce_tasklist_button_drag_begin (GtkWidget         *button,
 
   pixbuf = xfce_tasklist_get_window_icon (child->window, 32, CHILD_TYPE_WINDOW);
   if (G_LIKELY (pixbuf != NULL))
-    gtk_drag_set_icon_pixbuf (context, pixbuf, 0, 0);
+    {
+      gtk_drag_set_icon_pixbuf (context, pixbuf, 0, 0);
+      g_object_unref (pixbuf);
+    }
 }
 
 
