@@ -1407,6 +1407,15 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 
 
 
+static gboolean
+window_menu_plugin_menu_reposition (gpointer data)
+{
+  gtk_menu_reposition (data);
+  return FALSE;
+}
+
+
+
 static void
 window_menu_plugin_menu (GtkWidget        *button,
                          WindowMenuPlugin *plugin)
@@ -1421,6 +1430,8 @@ window_menu_plugin_menu (GtkWidget        *button,
       && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
     return;
 
+  menu = window_menu_plugin_menu_new (plugin);
+
   /* Panel plugin remote events don't send actual GdkEvents, so construct a minimal one so that
    * gtk_menu_popup_at_pointer/rect can extract a location correctly from a GdkWindow */
   if (gtk_get_current_event () == NULL)
@@ -1428,10 +1439,13 @@ window_menu_plugin_menu (GtkWidget        *button,
       event = g_slice_new0 (GdkEventButton);
       event->type = GDK_BUTTON_PRESS;
       event->window = gdk_get_default_root_window ();
+
+      /* reposition menu if popped up at widget and panel was autohidden when it was shown */
+      if (button != NULL)
+        g_idle_add (window_menu_plugin_menu_reposition, menu);
     }
 
   /* popup the menu */
-  menu = window_menu_plugin_menu_new (plugin);
   g_signal_connect (G_OBJECT (menu), "deactivate",
       G_CALLBACK (window_menu_plugin_menu_deactivate), plugin);
 

@@ -67,6 +67,7 @@ struct _ApplicationsMenuPlugin
   gboolean         custom_menu;
   gchar           *custom_menu_file;
   gchar           *menu_editor;
+  guint            menu_reposition_idle_id;
 
   gulong           style_set_id;
   gulong           screen_changed_id;
@@ -473,6 +474,9 @@ applications_menu_plugin_free_data (XfcePanelPlugin *panel_plugin)
   ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (panel_plugin);
   GtkIconTheme           *icon_theme;
 
+  if (plugin->menu_reposition_idle_id != 0)
+    g_source_remove (plugin->menu_reposition_idle_id);
+
   if (plugin->menu != NULL)
     gtk_widget_destroy (plugin->menu);
 
@@ -840,6 +844,19 @@ applications_menu_plugin_set_garcon_menu (ApplicationsMenuPlugin *plugin)
 
 
 static gboolean
+applications_menu_plugin_menu_reposition (gpointer data)
+{
+  ApplicationsMenuPlugin *plugin = data;
+
+  gtk_menu_reposition (GTK_MENU (plugin->menu));
+  plugin->menu_reposition_idle_id = 0;
+
+  return FALSE;
+}
+
+
+
+static gboolean
 applications_menu_plugin_menu (GtkWidget              *button,
                                GdkEventButton         *event,
                                ApplicationsMenuPlugin *plugin)
@@ -863,6 +880,11 @@ applications_menu_plugin_menu (GtkWidget              *button,
       event = g_slice_new0 (GdkEventButton);
       event->type = GDK_BUTTON_PRESS;
       event->window = gdk_get_default_root_window ();
+
+      /* reposition menu if popped up at widget and panel was autohidden when it was shown */
+      if (button != NULL)
+        plugin->menu_reposition_idle_id =
+          g_idle_add (applications_menu_plugin_menu_reposition, plugin);
     }
 
   xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (plugin->menu),
