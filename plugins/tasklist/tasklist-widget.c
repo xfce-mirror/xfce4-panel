@@ -4329,6 +4329,24 @@ xfce_tasklist_group_button_name_changed_idle (gpointer data)
 
 
 static void
+xfce_tasklist_group_button_keep_dnd_position (XfceTasklistChild *group_child,
+                                              XfceTasklistChild *sibling,
+                                              XfceTasklistChild *moved)
+{
+  XfceTasklist *tasklist = group_child->tasklist;
+
+  tasklist->windows = g_list_remove (tasklist->windows, moved);
+  for (GList *lp = tasklist->windows; lp != NULL; lp = lp->next)
+    if (lp->data == sibling)
+      {
+        tasklist->windows = g_list_insert_before (tasklist->windows, lp, moved);
+        break;
+      }
+}
+
+
+
+static void
 xfce_tasklist_group_button_child_visible_changed (XfceTasklistChild *group_child)
 {
   XfceTasklistChild    *child;
@@ -4356,12 +4374,22 @@ xfce_tasklist_group_button_child_visible_changed (XfceTasklistChild *group_child
 
   if (visible_counter > 1)
     {
+      if (group_child->tasklist->sort_order == XFCE_TASKLIST_SORT_ORDER_DND
+          && ! gtk_widget_get_visible (group_child->button))
+        xfce_tasklist_group_button_keep_dnd_position (group_child, group_child->windows->data,
+                                                      group_child);
+
       /* show the button and take the windows */
       gtk_widget_show (group_child->button);
       type = CHILD_TYPE_GROUP_MENU;
     }
   else
     {
+      if (group_child->tasklist->sort_order == XFCE_TASKLIST_SORT_ORDER_DND
+          && gtk_widget_get_visible (group_child->button))
+        xfce_tasklist_group_button_keep_dnd_position (group_child, group_child,
+                                                      group_child->windows->data);
+
       /* hide the button and ungroup the buttons */
       gtk_widget_hide (group_child->button);
       type = CHILD_TYPE_WINDOW;
