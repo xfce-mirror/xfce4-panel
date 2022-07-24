@@ -340,7 +340,7 @@ static gint               xfce_tasklist_button_compare                   (gconst
                                                                           gpointer              user_data);
 static GtkWidget         *xfce_tasklist_button_proxy_menu_item           (XfceTasklistChild    *child,
                                                                           gboolean              allow_wireframe);
-static void               xfce_tasklist_button_activate                  (XfceTasklistChild    *child,
+static gboolean           xfce_tasklist_button_activate                  (XfceTasklistChild    *child,
                                                                           guint32               timestamp);
 static XfceTasklistChild *xfce_tasklist_button_new                       (WnckWindow           *window,
                                                                           XfceTasklist         *tasklist);
@@ -3210,8 +3210,7 @@ xfce_tasklist_button_button_release_event (GtkWidget         *button,
       if (event->button == 1)
         {
           /* press the button */
-          xfce_tasklist_button_activate (child, event->time);
-          return FALSE;
+          return ! xfce_tasklist_button_activate (child, event->time);
         }
       else if (event->button == 2)
         {
@@ -3376,7 +3375,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 
 
 
-static void
+static gboolean
 xfce_tasklist_button_activate (XfceTasklistChild *child,
                                guint32            timestamp)
 {
@@ -3394,8 +3393,10 @@ xfce_tasklist_button_activate (XfceTasklistChild *child,
     {
       /* minimize does not work when this is assigned to the
        * middle mouse button */
-      if (child->tasklist->middle_click != XFCE_TASKLIST_MIDDLE_CLICK_MINIMIZE_WINDOW)
-        wnck_window_minimize (child->window);
+      if (child->tasklist->middle_click == XFCE_TASKLIST_MIDDLE_CLICK_MINIMIZE_WINDOW)
+        return FALSE;
+
+      wnck_window_minimize (child->window);
     }
   else
     {
@@ -3499,6 +3500,8 @@ xfce_tasklist_button_activate (XfceTasklistChild *child,
 
       wnck_window_activate (child->window, timestamp);
     }
+
+  return TRUE;
 }
 
 
