@@ -1086,7 +1086,7 @@ xfce_tasklist_size_layout (XfceTasklist  *tasklist,
       for (li = tasklist->windows; li != NULL; li = li->next)
         {
           child = li->data;
-          if (gtk_widget_get_visible (child->button))
+          if (child->type == CHILD_TYPE_WINDOW && gtk_widget_get_visible (child->button))
             {
               windows_scored = g_slist_insert_sorted (windows_scored, child,
                                                       xfce_tasklist_size_sort_window);
@@ -1129,9 +1129,7 @@ xfce_tasklist_size_layout (XfceTasklist  *tasklist,
                lp = lp->next, n_buttons--)
             {
               child = lp->data;
-
-              if (child->type == CHILD_TYPE_WINDOW)
-                child->type = CHILD_TYPE_OVERFLOW_MENU;
+              child->type = CHILD_TYPE_OVERFLOW_MENU;
             }
 
           /* Try to position the arrow widget at the end of the allocation area  *
