@@ -3385,9 +3385,9 @@ xfce_tasklist_button_activate (XfceTasklistChild *child,
   gint           screen_width, screen_height;
   gint           viewport_x, viewport_y;
 
-  panel_return_if_fail (XFCE_IS_TASKLIST (child->tasklist));
-  panel_return_if_fail (WNCK_IS_WINDOW (child->window));
-  panel_return_if_fail (WNCK_IS_SCREEN (child->tasklist->screen));
+  panel_return_val_if_fail (XFCE_IS_TASKLIST (child->tasklist), FALSE);
+  panel_return_val_if_fail (WNCK_IS_WINDOW (child->window), FALSE);
+  panel_return_val_if_fail (WNCK_IS_SCREEN (child->tasklist->screen), FALSE);
 
   if (wnck_window_is_active (child->window))
     {
