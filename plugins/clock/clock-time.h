@@ -23,6 +23,8 @@
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
 
+#include "clock-sleep-monitor.h"
+
 G_BEGIN_DECLS
 
 #define CLOCK_INTERVAL_SECOND (1)
@@ -49,11 +51,14 @@ ClockTime          *clock_time_new                    (void);
 
 ClockTimeTimeout   *clock_time_timeout_new            (guint                interval,
                                                        ClockTime           *time,
+                                                       ClockSleepMonitor   *sleep_monitor,
                                                        GCallback            c_handler,
                                                        gpointer             gobject);
 
 void                clock_time_timeout_set_interval   (ClockTimeTimeout    *timeout,
                                                        guint                interval);
+
+void                clock_time_timeout_restart        (ClockTimeTimeout    *timeout);
 
 void                clock_time_timeout_free           (ClockTimeTimeout    *timeout);
 
