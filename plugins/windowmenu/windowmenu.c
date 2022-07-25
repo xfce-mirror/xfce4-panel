@@ -1029,9 +1029,7 @@ window_menu_plugin_menu_window_item_new (WnckWindow           *window,
     name = decorated = g_strdup_printf ("[%s]", name);
 
   /* create the menu item */
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  mi = gtk_image_menu_item_new_with_label (name);
-G_GNUC_END_IGNORE_DEPRECATIONS
+  mi = panel_image_menu_item_new_with_label (name);
   gtk_widget_set_tooltip_text (mi, tooltip);
   g_object_set_qdata (G_OBJECT (mi), window_quark, window);
   g_signal_connect (G_OBJECT (mi), "button-release-event",
@@ -1089,9 +1087,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 
           /* set the menu item label */
           image = gtk_image_new_from_pixbuf (pixbuf);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-          gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+          panel_image_menu_item_set_image (mi, image);
           gtk_widget_show (image);
 
           if (lucent != NULL)
@@ -1354,18 +1350,14 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
       gtk_widget_show (mi);
 
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-      mi = gtk_image_menu_item_new_with_label (_("Add Workspace"));
-G_GNUC_END_IGNORE_DEPRECATIONS
+      mi = panel_image_menu_item_new_with_label (_("Add Workspace"));
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
       g_signal_connect (G_OBJECT (mi), "activate",
           G_CALLBACK (window_menu_plugin_workspace_add), plugin);
       gtk_widget_show (mi);
 
       image = gtk_image_new_from_icon_name ("list-add", GTK_ICON_SIZE_MENU);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+      panel_image_menu_item_set_image (mi, image);
       gtk_widget_show (mi);
 
       if (G_LIKELY (workspace != NULL))
@@ -1382,9 +1374,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       else
         label = g_strdup_printf (_("Remove Workspace %d"), n_workspaces);
 
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-      mi = gtk_image_menu_item_new_with_label (label);
-G_GNUC_END_IGNORE_DEPRECATIONS
+      mi = panel_image_menu_item_new_with_label (label);
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
       gtk_widget_set_sensitive (mi, !!(n_workspaces > 1));
       g_signal_connect (G_OBJECT (mi), "activate",
@@ -1395,9 +1385,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       g_free (utf8);
 
       image = gtk_image_new_from_icon_name ("list-remove", GTK_ICON_SIZE_MENU);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+      panel_image_menu_item_set_image (mi, image);
       gtk_widget_show (mi);
     }
 

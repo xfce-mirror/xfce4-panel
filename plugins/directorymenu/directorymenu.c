@@ -1068,9 +1068,7 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
     return;
 
   if (plugin->open_folder) {
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-    mi = gtk_image_menu_item_new_with_label (_("Open Folder"));
-G_GNUC_END_IGNORE_DEPRECATIONS
+    mi = panel_image_menu_item_new_with_label (_("Open Folder"));
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
     g_signal_connect_data (G_OBJECT (mi), "activate",
         G_CALLBACK (directory_menu_plugin_menu_open_folder),
@@ -1078,16 +1076,12 @@ G_GNUC_END_IGNORE_DEPRECATIONS
     gtk_widget_show (mi);
 
     image = gtk_image_new_from_icon_name ("folder-open", GTK_ICON_SIZE_MENU);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+    panel_image_menu_item_set_image (mi, image);
     gtk_widget_show (image);
   }
 
   if (plugin->open_in_terminal) {
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-    mi = gtk_image_menu_item_new_with_label (_("Open in Terminal"));
-G_GNUC_END_IGNORE_DEPRECATIONS
+    mi = panel_image_menu_item_new_with_label (_("Open in Terminal"));
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
     g_signal_connect_data (G_OBJECT (mi), "activate",
         G_CALLBACK (directory_menu_plugin_menu_open_terminal),
@@ -1095,16 +1089,12 @@ G_GNUC_END_IGNORE_DEPRECATIONS
     gtk_widget_show (mi);
 
     image = gtk_image_new_from_icon_name ("utilities-terminal", GTK_ICON_SIZE_MENU);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+    panel_image_menu_item_set_image (mi, image);
     gtk_widget_show (image);
   }
 
   if (plugin->new_folder) {
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-    mi = gtk_image_menu_item_new_with_label (_("Create Folder..."));
-G_GNUC_END_IGNORE_DEPRECATIONS
+    mi = panel_image_menu_item_new_with_label (_("Create Folder..."));
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
     g_signal_connect_data (G_OBJECT (mi), "activate",
         G_CALLBACK (directory_menu_plugin_menu_new_folder),
@@ -1112,16 +1102,12 @@ G_GNUC_END_IGNORE_DEPRECATIONS
     gtk_widget_show (mi);
 
     image = gtk_image_new_from_icon_name ("folder-new", GTK_ICON_SIZE_MENU);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+    panel_image_menu_item_set_image (mi, image);
     gtk_widget_show (image);
   }
 
   if (plugin->new_document) {
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-    mi = gtk_image_menu_item_new_with_label (_("Create Text Document..."));
-G_GNUC_END_IGNORE_DEPRECATIONS
+    mi = panel_image_menu_item_new_with_label (_("Create Text Document..."));
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
     g_signal_connect_data (G_OBJECT (mi), "activate",
         G_CALLBACK (directory_menu_plugin_menu_new_document),
@@ -1129,9 +1115,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
     gtk_widget_show (mi);
 
     image = gtk_image_new_from_icon_name ("document-new", GTK_ICON_SIZE_MENU);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+    panel_image_menu_item_set_image (mi, image);
     gtk_widget_show (image);
   }
 
@@ -1235,9 +1219,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
             }
 #endif
 
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-          mi = gtk_image_menu_item_new_with_label (display_name);
-G_GNUC_END_IGNORE_DEPRECATIONS
+          mi = panel_image_menu_item_new_with_label (display_name);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
           gtk_widget_show (mi);
 
@@ -1246,9 +1228,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
           if (G_LIKELY (icon != NULL))
             {
               image = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_MENU);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-              gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+              panel_image_menu_item_set_image (mi, image);
               gtk_widget_show (image);
             }
 

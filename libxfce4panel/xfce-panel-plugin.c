@@ -1213,48 +1213,36 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
       if (!locked)
         {
           /* properties item */
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-          item = gtk_image_menu_item_new_with_mnemonic (_("_Properties"));
-G_GNUC_END_IGNORE_DEPRECATIONS
+          item = panel_image_menu_item_new_with_mnemonic (_("_Properties"));
           g_signal_connect_swapped (G_OBJECT (item), "activate",
               G_CALLBACK (xfce_panel_plugin_show_configure), plugin);
           g_object_set_qdata (G_OBJECT (menu), item_properties, item);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
           image = gtk_image_new_from_icon_name ("document-properties", GTK_ICON_SIZE_MENU);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-          gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+          panel_image_menu_item_set_image (item, image);
           if (PANEL_HAS_FLAG (plugin->priv->flags, PLUGIN_FLAG_SHOW_CONFIGURE))
             gtk_widget_show (item);
 
           /* about item */
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-          item = gtk_image_menu_item_new_with_mnemonic (_("_About"));
-G_GNUC_END_IGNORE_DEPRECATIONS
+          item = panel_image_menu_item_new_with_mnemonic (_("_About"));
           g_signal_connect_swapped (G_OBJECT (item), "activate",
               G_CALLBACK (xfce_panel_plugin_show_about), plugin);
           g_object_set_qdata (G_OBJECT (menu), item_about, item);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
           image = gtk_image_new_from_icon_name ("help-about", GTK_ICON_SIZE_MENU);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-          gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+          panel_image_menu_item_set_image (item, image);
           if (PANEL_HAS_FLAG (plugin->priv->flags, PLUGIN_FLAG_SHOW_ABOUT))
             gtk_widget_show (item);
 
           /* move item */
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-          item = gtk_image_menu_item_new_with_mnemonic (_("_Move"));
-G_GNUC_END_IGNORE_DEPRECATIONS
+          item = panel_image_menu_item_new_with_mnemonic (_("_Move"));
           g_signal_connect_swapped (G_OBJECT (item), "activate",
               G_CALLBACK (xfce_panel_plugin_menu_move), plugin);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
           gtk_widget_show (item);
 
           image = gtk_image_new_from_icon_name ("go-next", GTK_ICON_SIZE_MENU);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-          gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+          panel_image_menu_item_set_image (item, image);
           gtk_widget_show (image);
 
           /* separator */
@@ -1263,18 +1251,14 @@ G_GNUC_END_IGNORE_DEPRECATIONS
           gtk_widget_show (item);
 
           /* remove */
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-          item = gtk_image_menu_item_new_with_mnemonic (_("_Remove"));
-G_GNUC_END_IGNORE_DEPRECATIONS
+          item = panel_image_menu_item_new_with_mnemonic (_("_Remove"));
           g_signal_connect_object (G_OBJECT (item), "activate",
               G_CALLBACK (xfce_panel_plugin_menu_remove), plugin, G_CONNECT_SWAPPED);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
           gtk_widget_show (item);
 
           image = gtk_image_new_from_icon_name ("list-remove", GTK_ICON_SIZE_MENU);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-          gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+          panel_image_menu_item_set_image (item, image);
           gtk_widget_show (image);
 
           /* separator */
@@ -1293,33 +1277,25 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       if (!locked)
         {
           /* add new items */
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-          item = gtk_image_menu_item_new_with_mnemonic (_("Add _New Items..."));
-G_GNUC_END_IGNORE_DEPRECATIONS
+          item = panel_image_menu_item_new_with_mnemonic (_("Add _New Items..."));
           g_signal_connect_swapped (G_OBJECT (item), "activate",
               G_CALLBACK (xfce_panel_plugin_menu_add_items), plugin);
           gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
           gtk_widget_show (item);
 
           image = gtk_image_new_from_icon_name ("list-add", GTK_ICON_SIZE_MENU);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-          gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+          panel_image_menu_item_set_image (item, image);
           gtk_widget_show (image);
 
           /* customize panel */
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-          item = gtk_image_menu_item_new_with_mnemonic (_("Panel Pr_eferences..."));
-G_GNUC_END_IGNORE_DEPRECATIONS
+          item = panel_image_menu_item_new_with_mnemonic (_("Panel Pr_eferences..."));
           g_signal_connect_swapped (G_OBJECT (item), "activate",
               G_CALLBACK (xfce_panel_plugin_menu_panel_preferences), plugin);
           gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
           gtk_widget_show (item);
 
           image = gtk_image_new_from_icon_name ("preferences-system", GTK_ICON_SIZE_MENU);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-          gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+          panel_image_menu_item_set_image (item, image);
           gtk_widget_show (image);
 
           /* separator */
@@ -1329,18 +1305,14 @@ G_GNUC_END_IGNORE_DEPRECATIONS
         }
 
       /* logout item */
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-      item = gtk_image_menu_item_new_with_mnemonic (_("Log _Out"));
-G_GNUC_END_IGNORE_DEPRECATIONS
+      item = panel_image_menu_item_new_with_mnemonic (_("Log _Out"));
       g_signal_connect_swapped (G_OBJECT (item), "activate",
           G_CALLBACK (xfce_panel_plugin_menu_panel_logout), plugin);
       gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
       gtk_widget_show (item);
 
       image = gtk_image_new_from_icon_name ("system-log-out", GTK_ICON_SIZE_MENU);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+      panel_image_menu_item_set_image (item, image);
       gtk_widget_show (image);
 
       /* separator */
@@ -1349,33 +1321,25 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       gtk_widget_show (item);
 
       /* help item */
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-      item = gtk_image_menu_item_new_with_mnemonic (_("_Help"));
-G_GNUC_END_IGNORE_DEPRECATIONS
+      item = panel_image_menu_item_new_with_mnemonic (_("_Help"));
       g_signal_connect_swapped (G_OBJECT (item), "activate",
           G_CALLBACK (xfce_panel_plugin_menu_panel_help), plugin);
       gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
       gtk_widget_show (item);
 
       image = gtk_image_new_from_icon_name ("help-browser", GTK_ICON_SIZE_MENU);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+      panel_image_menu_item_set_image (item, image);
       gtk_widget_show (image);
 
       /* about item */
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-      item = gtk_image_menu_item_new_with_mnemonic (_("About"));
-G_GNUC_END_IGNORE_DEPRECATIONS
+      item = panel_image_menu_item_new_with_mnemonic (_("About"));
       g_signal_connect_swapped (G_OBJECT (item), "activate",
           G_CALLBACK (xfce_panel_plugin_menu_panel_about), plugin);
       gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
       gtk_widget_show (item);
 
       image = gtk_image_new_from_icon_name ("help-about", GTK_ICON_SIZE_MENU);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+      panel_image_menu_item_set_image (item, image);
       gtk_widget_show (image);
 
       /* set panel menu */

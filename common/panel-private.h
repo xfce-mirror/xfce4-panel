@@ -19,6 +19,8 @@
 #ifndef __PANEL_PRIVATE_H__
 #define __PANEL_PRIVATE_H__
 
+#include <gtk/gtk.h>
+
 /* support macros for debugging (improved macro for better position indication) */
 /*#ifndef NDEBUG*/
 #define panel_assert(expr)                 g_assert (expr)
@@ -76,5 +78,39 @@
 #define LIST_HAS_ONE_ENTRY(l)           ((l) != NULL && (l)->next == NULL)
 #define LIST_HAS_ONE_OR_NO_ENTRIES(l)   ((l) == NULL || (l)->next == NULL)
 #define LIST_HAS_TWO_OR_MORE_ENTRIES(l) ((l) != NULL && (l)->next != NULL)
+
+/* group deprecations we don't want to replace */
+static inline void
+panel_image_menu_item_set_image (GtkWidget *image_menu_item,
+                                 GtkWidget *image)
+{
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (image_menu_item), image);
+G_GNUC_END_IGNORE_DEPRECATIONS
+}
+
+static inline GtkWidget *
+panel_image_menu_item_new (void)
+{
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+  return gtk_image_menu_item_new ();
+G_GNUC_END_IGNORE_DEPRECATIONS
+}
+
+static inline GtkWidget *
+panel_image_menu_item_new_with_label (const gchar *label)
+{
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+  return gtk_image_menu_item_new_with_label (label);
+G_GNUC_END_IGNORE_DEPRECATIONS
+}
+
+static inline GtkWidget *
+panel_image_menu_item_new_with_mnemonic (const gchar *label)
+{
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+  return gtk_image_menu_item_new_with_mnemonic (label);
+G_GNUC_END_IGNORE_DEPRECATIONS
+}
 
 #endif /* !__PANEL_PRIVATE_H__ */

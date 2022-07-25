@@ -652,18 +652,14 @@ pager_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   xfce_panel_plugin_menu_show_configure (panel_plugin);
 
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  mi = gtk_image_menu_item_new_with_mnemonic (_("Workspace _Settings..."));
-G_GNUC_END_IGNORE_DEPRECATIONS
+  mi = panel_image_menu_item_new_with_mnemonic (_("Workspace _Settings..."));
   xfce_panel_plugin_menu_insert_item (panel_plugin, GTK_MENU_ITEM (mi));
   g_signal_connect (G_OBJECT (mi), "activate",
       G_CALLBACK (pager_plugin_configure_workspace_settings), NULL);
   gtk_widget_show (mi);
 
   image = gtk_image_new_from_icon_name ("org.xfce.panel.pager", GTK_ICON_SIZE_MENU);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+  panel_image_menu_item_set_image (mi, image);
   gtk_widget_show (image);
 
   panel_properties_bind (NULL, G_OBJECT (plugin),

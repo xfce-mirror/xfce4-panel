@@ -3318,9 +3318,7 @@ xfce_tasklist_button_proxy_menu_item (XfceTasklistChild *child,
   panel_return_val_if_fail (GTK_IS_LABEL (child->label), NULL);
   panel_return_val_if_fail (WNCK_IS_WINDOW (child->window), NULL);
 
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  mi = gtk_image_menu_item_new ();
-G_GNUC_END_IGNORE_DEPRECATIONS
+  mi = panel_image_menu_item_new ();
   g_object_bind_property (G_OBJECT (child->label), "label",
                           G_OBJECT (mi), "label",
                           G_BINDING_SYNC_CREATE);
@@ -3347,9 +3345,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
     }
 
   image = gtk_image_new ();
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+  panel_image_menu_item_set_image (mi, image);
   /* sync the minimized state css style class between the button and the menuitem */
   context_button = gtk_widget_get_style_context (GTK_WIDGET (child->icon));
   context_menuitem = gtk_widget_get_style_context (GTK_WIDGET (image));
@@ -3894,10 +3890,8 @@ xfce_tasklist_group_button_menu (XfceTasklistChild *group_child,
       gtk_widget_show (mi);
 
       image = gtk_image_new_from_icon_name ("window-minimize-symbolic", GTK_ICON_SIZE_MENU);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-      mi = gtk_image_menu_item_new_with_mnemonic (_("Mi_nimize All"));
-      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+      mi = panel_image_menu_item_new_with_mnemonic (_("Mi_nimize All"));
+      panel_image_menu_item_set_image (mi, image);
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
       g_signal_connect_swapped (G_OBJECT (mi), "activate",
           G_CALLBACK (xfce_tasklist_group_button_menu_minimize_all), group_child);
@@ -3910,10 +3904,8 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       gtk_widget_show (mi);
 
       image = gtk_image_new_from_icon_name ("window-maximize-symbolic", GTK_ICON_SIZE_MENU);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-      mi = gtk_image_menu_item_new_with_mnemonic (_("Ma_ximize All"));
-      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+      mi = panel_image_menu_item_new_with_mnemonic (_("Ma_ximize All"));
+      panel_image_menu_item_set_image (mi, image);
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
       g_signal_connect_swapped (G_OBJECT (mi), "activate",
           G_CALLBACK (xfce_tasklist_group_button_menu_maximize_all), group_child);
@@ -3930,10 +3922,8 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       gtk_widget_show (mi);
 
       image = gtk_image_new_from_icon_name ("window-close-symbolic", GTK_ICON_SIZE_MENU);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-      mi = gtk_image_menu_item_new_with_mnemonic(_("_Close All"));
-      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+      mi = panel_image_menu_item_new_with_mnemonic(_("_Close All"));
+      panel_image_menu_item_set_image (mi, image);
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
       g_signal_connect_swapped (G_OBJECT (mi), "activate",
           G_CALLBACK (xfce_tasklist_group_button_menu_close_all), group_child);
