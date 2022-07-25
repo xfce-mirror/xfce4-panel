@@ -1040,10 +1040,9 @@ static void
 panel_preferences_dialog_panel_remove (GtkWidget              *widget,
                                        PanelPreferencesDialog *dialog)
 {
-  gint       idx;
+  gint       id;
   GtkWidget *toplevel;
-  GSList    *windows;
-  gint       n_windows;
+  GSList    *windows, *window;
 
   /* leave if the window is locked */
   if (panel_window_get_locked (dialog->active))
@@ -1058,10 +1057,13 @@ panel_preferences_dialog_panel_remove (GtkWidget              *widget,
       /* release the bindings */
       panel_preferences_dialog_bindings_unbind (dialog);
 
-      /* get position of the panel */
+      /* get new panel id to be selected */
       windows = panel_application_get_windows (dialog->application);
-      idx = g_slist_index (windows, dialog->active);
-      n_windows = g_slist_length (windows) - 2;
+      window = g_slist_find (windows, dialog->active);
+      if (window->next != NULL)
+        id = panel_window_get_id (window->next->data);
+      else
+        id = panel_window_get_id (windows->data);
 
       /* remove the panel, plugins and configuration */
       panel_application_remove_window (dialog->application,
@@ -1069,7 +1071,7 @@ panel_preferences_dialog_panel_remove (GtkWidget              *widget,
       dialog->active = NULL;
 
       /* rebuild the selector */
-      panel_preferences_dialog_panel_combobox_rebuild (dialog, CLAMP (idx, 0, n_windows));
+      panel_preferences_dialog_panel_combobox_rebuild (dialog, id);
     }
 }
 
