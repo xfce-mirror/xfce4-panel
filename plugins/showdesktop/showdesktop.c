@@ -156,9 +156,7 @@ show_desktop_plugin_screen_changed (GtkWidget *widget,
 
   /* get the new wnck screen */
   screen = gtk_widget_get_screen (widget);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  wnck_screen = wnck_screen_get (gdk_screen_get_number (screen));
-G_GNUC_END_IGNORE_DEPRECATIONS
+  wnck_screen = wnck_screen_get (panel_screen_get_number (screen));
   panel_return_if_fail (WNCK_IS_SCREEN (wnck_screen));
 
   /* leave when the wnck screen did not change */

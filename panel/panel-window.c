@@ -1496,16 +1496,15 @@ panel_window_size_allocate (GtkWidget     *widget,
       /* slide out the panel window with popdown_speed, but ignore panels that are floating, i.e. not
          attached to a GdkScreen border (i.e. including panels which are on a monitor border, but
          at are at the same time between two monitors) */
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       if (IS_HORIZONTAL (window)
-          && (((y + h) == gdk_screen_get_height (window->screen))
+          && (((y + h) == panel_screen_get_height (window->screen))
                || (y == 0)))
         {
           window->popdown_progress = window->alloc.height;
           window->floating = FALSE;
         }
       else if (!IS_HORIZONTAL (window)
-               && (((x + w) == gdk_screen_get_width (window->screen))
+               && (((x + w) == panel_screen_get_width (window->screen))
                     || (x == 0)))
         {
           window->popdown_progress = window->alloc.width;
@@ -1513,7 +1512,6 @@ G_GNUC_BEGIN_IGNORE_DEPRECATIONS
         }
       else
         window->floating = TRUE;
-G_GNUC_END_IGNORE_DEPRECATIONS
 
       /* make the panel invisible without animation */
       if (window->floating
@@ -1926,9 +1924,7 @@ panel_window_screen_struts_set (PanelWindow *window)
   else if (window->struts_edge == STRUTS_EDGE_BOTTOM)
     {
       /* the window is snapped on the bottom screen edge */
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-      struts[STRUT_BOTTOM] = (gdk_screen_get_height (window->screen) - alloc->y) * window->scale_factor;
-G_GNUC_END_IGNORE_DEPRECATIONS
+      struts[STRUT_BOTTOM] = (panel_screen_get_height (window->screen) - alloc->y) * window->scale_factor;
       struts[STRUT_BOTTOM_START_X] = alloc->x * window->scale_factor;
       struts[STRUT_BOTTOM_END_X] = (alloc->x + alloc->width - 1) * window->scale_factor;
     }
@@ -1942,9 +1938,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   else if (window->struts_edge == STRUTS_EDGE_RIGHT)
     {
       /* the window is snapped on the right screen edge */
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-      struts[STRUT_RIGHT] = (gdk_screen_get_width (window->screen) - alloc->x) * window->scale_factor;
-G_GNUC_END_IGNORE_DEPRECATIONS
+      struts[STRUT_RIGHT] = (panel_screen_get_width (window->screen) - alloc->x) * window->scale_factor;
       struts[STRUT_RIGHT_START_Y] = alloc->y * window->scale_factor;
       struts[STRUT_RIGHT_END_Y] = (alloc->y + alloc->height - 1) * window->scale_factor;
     }
@@ -2163,10 +2157,8 @@ panel_window_display_layout_debug (GtkWidget *widget)
   display = gtk_widget_get_display (widget);
   screen = gtk_widget_get_screen(widget);
 
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  w = gdk_screen_get_width (screen);
-  h = gdk_screen_get_height (screen);
-G_GNUC_END_IGNORE_DEPRECATIONS
+  w = panel_screen_get_width (screen);
+  h = panel_screen_get_height (screen);
 
   g_string_append_printf (str, "screen-0[%p]=[%d,%d]", screen, w, h);
 
@@ -2663,10 +2655,8 @@ panel_window_autohide_ease_out (gpointer data)
     return FALSE;
 
   gtk_window_get_position (GTK_WINDOW (window), &x, &y);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  w = gdk_screen_get_width (window->screen);
-  h = gdk_screen_get_height (window->screen);
-G_GNUC_END_IGNORE_DEPRECATIONS
+  w = panel_screen_get_width (window->screen);
+  h = panel_screen_get_height (window->screen);
 
   if (IS_HORIZONTAL (window))
     {

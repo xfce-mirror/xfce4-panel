@@ -307,7 +307,7 @@ systray_manager_check_running (GdkScreen *screen)
 
   /* create the selection atom name */
   selection_name = g_strdup_printf ("_NET_SYSTEM_TRAY_S%d",
-                                    gdk_screen_get_number (screen));
+                                    panel_screen_get_number (screen));
 
   /* get the atom */
   selection_atom = gdk_x11_get_xatom_by_name_for_display (display,
@@ -350,9 +350,7 @@ systray_manager_register (SystrayManager  *manager,
   gtk_widget_add_events (invisible, GDK_PROPERTY_CHANGE_MASK | GDK_STRUCTURE_MASK);
 
   /* get the screen number */
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  screen_number = gdk_screen_get_number (screen);
-G_GNUC_END_IGNORE_DEPRECATIONS
+  screen_number = panel_screen_get_number (screen);
 
   /* create the selection atom name */
   selection_name = g_strdup_printf ("_NET_SYSTEM_TRAY_S%d", screen_number);

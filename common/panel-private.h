@@ -113,4 +113,28 @@ G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 G_GNUC_END_IGNORE_DEPRECATIONS
 }
 
+static inline gint
+panel_screen_get_number (GdkScreen *screen)
+{
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+  return gdk_screen_get_number (screen);
+G_GNUC_END_IGNORE_DEPRECATIONS
+}
+
+static inline gint
+panel_screen_get_width (GdkScreen *screen)
+{
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+  return gdk_screen_get_width (screen);
+G_GNUC_END_IGNORE_DEPRECATIONS
+}
+
+static inline gint
+panel_screen_get_height (GdkScreen *screen)
+{
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+  return gdk_screen_get_height (screen);
+G_GNUC_END_IGNORE_DEPRECATIONS
+}
+
 #endif /* !__PANEL_PRIVATE_H__ */
