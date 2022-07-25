@@ -3309,7 +3309,7 @@ xfce_tasklist_button_proxy_menu_item (XfceTasklistChild *child,
   GtkStyleContext *context_button;
   GtkStyleContext *context_menuitem;
   GtkCssProvider  *provider;
-  gchar           *css_string;
+  gchar           *label_text = NULL, *css_string;
   XfceTasklist    *tasklist = child->tasklist;
 
   panel_return_val_if_fail (XFCE_IS_TASKLIST (child->tasklist), NULL);
@@ -3334,6 +3334,17 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   panel_return_val_if_fail (GTK_IS_LABEL (label), NULL);
   gtk_label_set_max_width_chars (GTK_LABEL (label), tasklist->menu_max_width_chars);
   gtk_label_set_ellipsize (GTK_LABEL (label), tasklist->ellipsize_mode);
+
+  if (wnck_window_is_active (child->window))
+    label_text = g_strdup_printf ("<b><i>%s</i></b>", gtk_label_get_text (GTK_LABEL (label)));
+  else if (wnck_window_needs_attention (child->window))
+    label_text = g_strdup_printf ("<b>%s</b>", gtk_label_get_text (GTK_LABEL (label)));
+
+  if (label_text != NULL)
+    {
+      gtk_label_set_markup (GTK_LABEL (label), label_text);
+      g_free (label_text);
+    }
 
   image = gtk_image_new ();
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
