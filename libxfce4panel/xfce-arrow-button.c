@@ -614,7 +614,7 @@ xfce_arrow_button_set_blinking (XfceArrowButton *button,
 
   if (blinking)
     {
-      if (button->priv->blinking_timeout_id == 0)
+      if (! xfce_arrow_button_get_blinking (button))
         {
           GtkWidget *plugin;
 
