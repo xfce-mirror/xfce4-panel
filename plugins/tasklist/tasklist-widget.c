@@ -54,6 +54,8 @@
 #define ARROW_BUTTON_SIZE            (20)
 #define WIREFRAME_SIZE               (5) /* same as xfwm4 */
 #define DRAG_ACTIVATE_TIMEOUT        (500)
+#define URGENT_FLAGS                 (WNCK_WINDOW_STATE_DEMANDS_ATTENTION \
+                                      | WNCK_WINDOW_STATE_URGENT)
 
 
 
@@ -314,6 +316,10 @@ static void               xfce_tasklist_window_removed                   (WnckSc
                                                                           XfceTasklist         *tasklist);
 static void               xfce_tasklist_viewports_changed                (WnckScreen           *screen,
                                                                           XfceTasklist         *tasklist);
+static void               xfce_tasklist_button_state_changed             (WnckWindow           *window,
+                                                                          WnckWindowState       changed_state,
+                                                                          WnckWindowState       new_state,
+                                                                          XfceTasklistChild    *child);
 static void               xfce_tasklist_skipped_windows_state_changed    (WnckWindow           *window,
                                                                           WnckWindowState       changed_state,
                                                                           WnckWindowState       new_state,
@@ -1886,6 +1892,10 @@ xfce_tasklist_window_added (WnckScreen   *screen,
         }
     }
 
+  /* set urgency blinking if needed */
+  if (wnck_window_needs_attention (window))
+    xfce_tasklist_button_state_changed (window, URGENT_FLAGS, URGENT_FLAGS, child);
+
   gtk_widget_queue_resize (GTK_WIDGET (tasklist));
 }
 
@@ -2886,12 +2896,11 @@ xfce_tasklist_button_state_changed (WnckWindow        *window,
     }
 
   /* update the blinking state */
-  if (PANEL_HAS_FLAG (changed_state, WNCK_WINDOW_STATE_DEMANDS_ATTENTION)
-      || PANEL_HAS_FLAG (changed_state, WNCK_WINDOW_STATE_URGENT))
+  if (PANEL_HAS_FLAG (changed_state, URGENT_FLAGS))
     {
       /* only start blinking if the window requesting urgency
        * notification is not the active window */
-      blink = wnck_window_or_transient_needs_attention (window);
+      blink = PANEL_HAS_FLAG (new_state, URGENT_FLAGS);
       if (!blink || (blink && !wnck_window_is_active (window)))
         {
           /* if we have all_blinking set make sure we toggle visibility of the button
