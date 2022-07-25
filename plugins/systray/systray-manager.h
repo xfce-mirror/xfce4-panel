@@ -65,10 +65,10 @@ gboolean        systray_manager_register             (SystrayManager      *manag
 void            systray_manager_unregister           (SystrayManager      *manager);
 
 void            systray_manager_set_colors           (SystrayManager *manager,
-                                                      GdkColor       *fg,
-                                                      GdkColor       *error,
-                                                      GdkColor       *warning,
-                                                      GdkColor       *success);
+                                                      GdkRGBA        *fg,
+                                                      GdkRGBA        *error,
+                                                      GdkRGBA        *warning,
+                                                      GdkRGBA        *success);
 
 void            systray_manager_set_orientation      (SystrayManager      *manager,
                                                       GtkOrientation       orientation);

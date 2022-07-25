@@ -111,10 +111,10 @@ struct _SystrayManager
   GHashTable     *sockets;
 
   /* symbolic colors */
-  GdkColor fg;
-  GdkColor error;
-  GdkColor warning;
-  GdkColor success;
+  GdkRGBA fg;
+  GdkRGBA error;
+  GdkRGBA warning;
+  GdkRGBA success;
 
   /* orientation of the tray */
   GtkOrientation  orientation;
@@ -828,10 +828,10 @@ systray_manager_set_visual (SystrayManager *manager)
 
 void
 systray_manager_set_colors (SystrayManager *manager,
-                            GdkColor       *fg,
-                            GdkColor       *error,
-                            GdkColor       *warning,
-                            GdkColor       *success)
+                            GdkRGBA        *fg,
+                            GdkRGBA        *error,
+                            GdkRGBA        *warning,
+                            GdkRGBA        *success)
 {
   panel_return_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager));
 

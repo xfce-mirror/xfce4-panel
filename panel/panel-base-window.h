@@ -68,7 +68,6 @@ struct _PanelBaseWindow
 
   PanelBgStyle             background_style;
   GdkRGBA                 *background_rgba;
-  GdkColor                *background_color;
   gchar                   *background_image;
 
   /* transparency settings */

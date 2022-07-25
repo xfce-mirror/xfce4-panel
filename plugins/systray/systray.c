@@ -205,22 +205,16 @@ systray_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
   /* apply symbolic colors */
   if (G_LIKELY (plugin->manager != NULL)) {
     GtkStyleContext *context;
-    GdkRGBA rgba;
-    GdkColor color;
-    GdkColor fg;
-    GdkColor error;
-    GdkColor warning;
-    GdkColor success;
+    GdkRGBA rgba, fg, error, warning, success;
 
     context = gtk_widget_get_style_context (GTK_WIDGET (plugin->systray_box));
     gtk_style_context_get_color (context, GTK_STATE_FLAG_NORMAL, &rgba);
 
-    color.pixel = 0;
-    color.red = rgba.red * G_MAXUSHORT;
-    color.green = rgba.green * G_MAXUSHORT;
-    color.blue = rgba.blue * G_MAXUSHORT;
+    rgba.red *= G_MAXUSHORT;
+    rgba.green *= G_MAXUSHORT;
+    rgba.blue *= G_MAXUSHORT;
 
-    fg = error = warning = success = color;
+    fg = error = warning = success = rgba;
 
     systray_manager_set_colors (plugin->manager, &fg, &error, &warning, &success);
   }

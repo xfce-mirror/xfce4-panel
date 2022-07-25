@@ -77,9 +77,4 @@
 #define LIST_HAS_ONE_OR_NO_ENTRIES(l)   ((l) == NULL || (l)->next == NULL)
 #define LIST_HAS_TWO_OR_MORE_ENTRIES(l) ((l) != NULL && (l)->next != NULL)
 
-/* make this easier to read */
-#define PANEL_GDKCOLOR_TO_DOUBLE(gdk_color) gdk_color->red / 65535.00, \
-                                            gdk_color->green / 65535.00, \
-                                            gdk_color->blue / 65535.00
-
 #endif /* !__PANEL_PRIVATE_H__ */
