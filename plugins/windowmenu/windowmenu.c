@@ -428,7 +428,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       G_CALLBACK (window_menu_plugin_active_window_changed), plugin);
 
   if (plugin->urgentcy_notification)
-     window_menu_plugin_windows_connect (plugin, FALSE);
+    window_menu_plugin_windows_connect (plugin, TRUE);
 }
 
 
