@@ -1115,13 +1115,6 @@ xfce_tasklist_size_layout (XfceTasklist  *tasklist,
       /* yet still within the specified limits) */
       n_buttons_target = (alloc->width - ARROW_BUTTON_SIZE) / min_button_length * rows;
 
-#if 0
-      if (tasklist->grouping == XFCE_TASKLIST_GROUPING_AUTO)
-        {
-          /* try creating group buttons */
-        }
-#endif
-
       /* we now push the windows with the lowest score in the
        * overflow menu */
       if (n_buttons > n_buttons_target)
@@ -1907,8 +1900,6 @@ xfce_tasklist_window_removed (WnckScreen   *screen,
   GList             *li;
   GSList            *lp;
   XfceTasklistChild *child;
-  //GList             *windows, *lp;
-  //gboolean           remove_class_group = TRUE;
   guint              n;
 
   panel_return_if_fail (WNCK_IS_SCREEN (screen));
@@ -1936,20 +1927,6 @@ xfce_tasklist_window_removed (WnckScreen   *screen,
         {
           if (child->class_group != NULL)
             {
-              /* remove the class group from the internal list if this
-               * was the last window in the group */
-              /* TODO
-              windows = wnck_class_group_get_windows (child->class_group);
-              for (lp = windows; remove_class_group && lp != NULL; lp = lp->next)
-                if (!wnck_window_is_skip_tasklist (WNCK_WINDOW (lp->data)))
-                  remove_class_group = FALSE;
-
-              if (remove_class_group)
-                {
-                  tasklist->class_groups = g_slist_remove (tasklist->class_groups,
-                                                           child->class_group);
-                }*/
-
               panel_return_if_fail (WNCK_IS_CLASS_GROUP (child->class_group));
               g_object_unref (G_OBJECT (child->class_group));
             }
@@ -3393,7 +3370,6 @@ xfce_tasklist_button_proxy_menu_item (XfceTasklistChild *child,
   g_signal_connect (G_OBJECT (mi), "button-release-event",
       G_CALLBACK (xfce_tasklist_button_button_release_event), child);
 
-  /* TODO bold labels for urgent windows */
   /* TODO item dnd */
 
   return mi;
@@ -3558,28 +3534,8 @@ xfce_tasklist_button_drag_begin (GtkWidget         *button,
                                  XfceTasklistChild *child)
 {
   GdkPixbuf *pixbuf;
-  /* GdkPixmap *pixmap; */
 
   panel_return_if_fail (WNCK_IS_WINDOW (child->window));
-
-  /* not available in Gtk3 */
-#if 0
-  if (child->tasklist->show_labels)
-    {
-      /* FIXME Triggers specific repaint error (bug 11283) */
-      //pixmap = gtk_widget_get_snapshot (button, NULL);
-      pixmap = NULL;
-      if (pixmap != NULL)
-        {
-          gtk_drag_set_icon_pixmap (context,
-              gdk_drawable_get_colormap (GDK_DRAWABLE (pixmap)),
-              pixmap, NULL, 0, 0);
-          g_object_unref (G_OBJECT (pixmap));
-
-          return;
-        }
-    }
-#endif
 
   pixbuf = xfce_tasklist_get_window_icon (child->window, 32, CHILD_TYPE_WINDOW);
   if (G_LIKELY (pixbuf != NULL))
@@ -4461,10 +4417,6 @@ xfce_tasklist_group_button_child_destroyed (XfceTasklistChild *group_child,
 
   if ((group_child->tasklist->grouping == XFCE_TASKLIST_GROUPING_ALWAYS
        && n_children > 0))
-#if 0
-      || (group_child->tasklist->grouping == XFCE_TASKLIST_GROUPING_AUTO
-          && n_children > 1))
-#endif
     {
       xfce_tasklist_group_button_child_visible_changed (group_child);
     }

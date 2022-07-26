@@ -292,36 +292,6 @@ systray_manager_new (void)
 
 
 
-#if 0
-gboolean
-systray_manager_check_running (GdkScreen *screen)
-{
-  gchar      *selection_name;
-  GdkDisplay *display;
-  Atom        selection_atom;
-
-  panel_return_val_if_fail (GDK_IS_SCREEN (screen), FALSE);
-
-  /* get the display */
-  display = gdk_screen_get_display (screen);
-
-  /* create the selection atom name */
-  selection_name = g_strdup_printf ("_NET_SYSTEM_TRAY_S%d",
-                                    panel_screen_get_number (screen));
-
-  /* get the atom */
-  selection_atom = gdk_x11_get_xatom_by_name_for_display (display,
-                                                          selection_name);
-
-  g_free (selection_name);
-
-  /* return result */
-  return (XGetSelectionOwner (GDK_DISPLAY_XDISPLAY (display), selection_atom) != None);
-}
-#endif
-
-
-
 gboolean
 systray_manager_register (SystrayManager  *manager,
                           GdkScreen       *screen,
