@@ -54,6 +54,8 @@
 #define ARROW_BUTTON_SIZE            (20)
 #define WIREFRAME_SIZE               (5) /* same as xfwm4 */
 #define DRAG_ACTIVATE_TIMEOUT        (500)
+#define URGENT_FLAGS                 (WNCK_WINDOW_STATE_DEMANDS_ATTENTION \
+                                      | WNCK_WINDOW_STATE_URGENT)
 
 
 
@@ -314,6 +316,10 @@ static void               xfce_tasklist_window_removed                   (WnckSc
                                                                           XfceTasklist         *tasklist);
 static void               xfce_tasklist_viewports_changed                (WnckScreen           *screen,
                                                                           XfceTasklist         *tasklist);
+static void               xfce_tasklist_button_state_changed             (WnckWindow           *window,
+                                                                          WnckWindowState       changed_state,
+                                                                          WnckWindowState       new_state,
+                                                                          XfceTasklistChild    *child);
 static void               xfce_tasklist_skipped_windows_state_changed    (WnckWindow           *window,
                                                                           WnckWindowState       changed_state,
                                                                           WnckWindowState       new_state,
@@ -1886,6 +1892,10 @@ xfce_tasklist_window_added (WnckScreen   *screen,
         }
     }
 
+  /* set urgency blinking if needed */
+  if (wnck_window_needs_attention (window))
+    xfce_tasklist_button_state_changed (window, URGENT_FLAGS, URGENT_FLAGS, child);
+
   gtk_widget_queue_resize (GTK_WIDGET (tasklist));
 }
 
@@ -2830,7 +2840,7 @@ xfce_tasklist_button_state_changed (WnckWindow        *window,
   WnckScreen        *screen;
   XfceTasklist      *tasklist;
   WnckWorkspace     *active_ws;
-  XfceTasklistChild *group_child;
+  XfceTasklistChild *group_child, *temp_child;
 
   panel_return_if_fail (WNCK_IS_WINDOW (window));
   panel_return_if_fail (child->window == window);
@@ -2886,12 +2896,11 @@ xfce_tasklist_button_state_changed (WnckWindow        *window,
     }
 
   /* update the blinking state */
-  if (PANEL_HAS_FLAG (changed_state, WNCK_WINDOW_STATE_DEMANDS_ATTENTION)
-      || PANEL_HAS_FLAG (changed_state, WNCK_WINDOW_STATE_URGENT))
+  if (PANEL_HAS_FLAG (changed_state, URGENT_FLAGS))
     {
       /* only start blinking if the window requesting urgency
        * notification is not the active window */
-      blink = wnck_window_or_transient_needs_attention (window);
+      blink = PANEL_HAS_FLAG (new_state, URGENT_FLAGS);
       if (!blink || (blink && !wnck_window_is_active (window)))
         {
           /* if we have all_blinking set make sure we toggle visibility of the button
@@ -2904,19 +2913,31 @@ xfce_tasklist_button_state_changed (WnckWindow        *window,
               gtk_widget_show (child->button);
             }
 
+          /* update button blinking even if grouped so it is in right state when ungrouped */
+          xfce_arrow_button_set_blinking (XFCE_ARROW_BUTTON (child->button), blink);
 
-          /* make sure the group button can blink too */
-          if (child->type == CHILD_TYPE_GROUP_MENU)
+          /* also update group button blinking if needed */
+          if (child->tasklist->grouping !=  XFCE_TASKLIST_GROUPING_NEVER)
             {
               /* find the child for the group */
               g_hash_table_lookup_extended (child->tasklist->class_groups,
                                             child->class_group,
                                             NULL, (gpointer *) &group_child);
+
+              /* stop blinking only if no window in group needs attention */
+              if (! blink)
+                for (GSList *lp = group_child->windows; lp != NULL; lp = lp->next)
+                  {
+                    temp_child = lp->data;
+                    if (wnck_window_needs_attention (temp_child->window))
+                      {
+                        blink = TRUE;
+                        break;
+                      }
+                  }
+
               xfce_arrow_button_set_blinking (XFCE_ARROW_BUTTON (group_child->button), blink);
             }
-          /* otherwise just let the window button blink */
-          else
-            xfce_arrow_button_set_blinking (XFCE_ARROW_BUTTON (child->button), blink);
 
           if (child->tasklist->all_blinking
               && !xfce_tasklist_button_visible (child, active_ws))
@@ -3288,7 +3309,7 @@ xfce_tasklist_button_proxy_menu_item (XfceTasklistChild *child,
   GtkStyleContext *context_button;
   GtkStyleContext *context_menuitem;
   GtkCssProvider  *provider;
-  gchar           *css_string;
+  gchar           *label_text = NULL, *css_string;
   XfceTasklist    *tasklist = child->tasklist;
 
   panel_return_val_if_fail (XFCE_IS_TASKLIST (child->tasklist), NULL);
@@ -3313,6 +3334,17 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   panel_return_val_if_fail (GTK_IS_LABEL (label), NULL);
   gtk_label_set_max_width_chars (GTK_LABEL (label), tasklist->menu_max_width_chars);
   gtk_label_set_ellipsize (GTK_LABEL (label), tasklist->ellipsize_mode);
+
+  if (wnck_window_is_active (child->window))
+    label_text = g_strdup_printf ("<b><i>%s</i></b>", gtk_label_get_text (GTK_LABEL (label)));
+  else if (wnck_window_needs_attention (child->window))
+    label_text = g_strdup_printf ("<b>%s</b>", gtk_label_get_text (GTK_LABEL (label)));
+
+  if (label_text != NULL)
+    {
+      gtk_label_set_markup (GTK_LABEL (label), label_text);
+      g_free (label_text);
+    }
 
   image = gtk_image_new ();
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
@@ -4379,6 +4411,11 @@ xfce_tasklist_group_button_child_visible_changed (XfceTasklistChild *group_child
           && ! gtk_widget_get_visible (group_child->button))
         xfce_tasklist_group_button_keep_dnd_position (group_child, group_child->windows->data,
                                                       group_child);
+
+      /* update urgency blinking if needed */
+      xfce_tasklist_button_state_changed (child->window, URGENT_FLAGS,
+                                          wnck_window_needs_attention (child->window) ? URGENT_FLAGS : 0,
+                                          child);
 
       /* show the button and take the windows */
       gtk_widget_show (group_child->button);
