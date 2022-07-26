@@ -182,8 +182,8 @@ struct _XfceTasklist
   /* idle monitor geometry update */
   guint                 update_monitor_geometry_id;
 
-  /* button grouping mode */
-  XfceTasklistGrouping  grouping;
+  /* button grouping */
+  guint                 grouping : 1;
 
   /* sorting order of the buttons */
   XfceTasklistSortOrder sort_order;
@@ -382,7 +382,7 @@ static void               xfce_tasklist_set_show_wireframes              (XfceTa
 static void               xfce_tasklist_set_label_decorations            (XfceTasklist         *tasklist,
                                                                           gboolean              label_decorations);
 static void               xfce_tasklist_set_grouping                     (XfceTasklist         *tasklist,
-                                                                          XfceTasklistGrouping  grouping);
+                                                                          gboolean              grouping);
 
 
 G_DEFINE_TYPE (XfceTasklist, xfce_tasklist, GTK_TYPE_CONTAINER)
@@ -418,12 +418,10 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
 
   g_object_class_install_property (gobject_class,
                                    PROP_GROUPING,
-                                   g_param_spec_uint ("grouping",
-                                                      NULL, NULL,
-                                                      XFCE_TASKLIST_GROUPING_MIN,
-                                                      XFCE_TASKLIST_GROUPING_MAX + 1 /* TODO drop this later */,
-                                                      XFCE_TASKLIST_GROUPING_DEFAULT,
-                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+                                   g_param_spec_boolean ("grouping",
+                                                         NULL, NULL,
+                                                         FALSE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_INCLUDE_ALL_WORKSPACES,
@@ -623,7 +621,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->max_button_size = DEFAULT_BUTTON_SIZE;
   tasklist->minimized_icon_lucency = DEFAULT_ICON_LUCENCY;
   tasklist->ellipsize_mode = DEFAULT_ELLIPSIZE_MODE;
-  tasklist->grouping = XFCE_TASKLIST_GROUPING_DEFAULT;
+  tasklist->grouping = FALSE;
   tasklist->sort_order = XFCE_TASKLIST_SORT_ORDER_DEFAULT;
   tasklist->menu_max_width_chars = DEFAULT_MENU_MAX_WIDTH_CHARS;
   tasklist->class_groups = g_hash_table_new_full (g_direct_hash, g_direct_equal,
@@ -706,7 +704,7 @@ xfce_tasklist_get_property (GObject    *object,
   switch (prop_id)
     {
     case PROP_GROUPING:
-      g_value_set_uint (value, tasklist->grouping);
+      g_value_set_boolean (value, tasklist->grouping);
       break;
 
     case PROP_INCLUDE_ALL_WORKSPACES:
@@ -789,7 +787,7 @@ xfce_tasklist_set_property (GObject      *object,
   switch (prop_id)
     {
     case PROP_GROUPING:
-      xfce_tasklist_set_grouping (tasklist, g_value_get_uint (value));
+      xfce_tasklist_set_grouping (tasklist, g_value_get_boolean (value));
       break;
 
     case PROP_INCLUDE_ALL_WORKSPACES:
@@ -1860,7 +1858,7 @@ xfce_tasklist_window_added (WnckScreen   *screen,
                                             child->class_group,
                                             NULL, (gpointer *) &group_child);
 
-      if (G_UNLIKELY (tasklist->grouping == XFCE_TASKLIST_GROUPING_ALWAYS))
+      if (G_UNLIKELY (tasklist->grouping))
         {
 
           if (group_child == NULL)
@@ -2013,7 +2011,7 @@ xfce_tasklist_sort (XfceTasklist *tasklist,
       tasklist->windows = g_list_sort_with_data (tasklist->windows,
                                                  xfce_tasklist_button_compare,
                                                  tasklist);
-      if (sort_groups && tasklist->grouping != XFCE_TASKLIST_GROUPING_NEVER)
+      if (sort_groups && tasklist->grouping)
         for (GList *lp = tasklist->windows; lp != NULL; lp = lp->next)
           {
             XfceTasklistChild *child = lp->data;
@@ -2892,7 +2890,7 @@ xfce_tasklist_button_state_changed (WnckWindow        *window,
           xfce_arrow_button_set_blinking (XFCE_ARROW_BUTTON (child->button), blink);
 
           /* also update group button blinking if needed */
-          if (child->tasklist->grouping !=  XFCE_TASKLIST_GROUPING_NEVER)
+          if (child->tasklist->grouping)
             {
               /* find the child for the group */
               g_hash_table_lookup_extended (child->tasklist->class_groups,
@@ -4334,7 +4332,7 @@ xfce_tasklist_group_button_child_visible_changed (XfceTasklistChild *group_child
   panel_return_if_fail (group_child->type == CHILD_TYPE_GROUP);
   panel_return_if_fail (WNCK_IS_CLASS_GROUP (group_child->class_group));
   panel_return_if_fail (XFCE_IS_TASKLIST (group_child->tasklist));
-  panel_return_if_fail (group_child->tasklist->grouping != XFCE_TASKLIST_GROUPING_NEVER);
+  panel_return_if_fail (group_child->tasklist->grouping);
 
   /* the group id is defined below as that of the last added window */
   group_child->unique_id = 0;
@@ -4415,8 +4413,7 @@ xfce_tasklist_group_button_child_destroyed (XfceTasklistChild *group_child,
         n_children++;
     }
 
-  if ((group_child->tasklist->grouping == XFCE_TASKLIST_GROUPING_ALWAYS
-       && n_children > 0))
+  if (group_child->tasklist->grouping && n_children > 0)
     {
       xfce_tasklist_group_button_child_visible_changed (group_child);
     }
@@ -4712,14 +4709,12 @@ xfce_tasklist_set_label_decorations (XfceTasklist *tasklist,
 
 
 static void
-xfce_tasklist_set_grouping (XfceTasklist         *tasklist,
-                            XfceTasklistGrouping  grouping)
+xfce_tasklist_set_grouping (XfceTasklist *tasklist,
+                            gboolean      grouping)
 {
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
 
-  /* TODO avoid overflow, because we allows + 1 in the object */
-  if (grouping > XFCE_TASKLIST_GROUPING_MAX)
-    grouping = XFCE_TASKLIST_GROUPING_MAX;
+  grouping = !!grouping;
 
   if (tasklist->grouping != grouping)
     {

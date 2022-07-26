@@ -25,7 +25,6 @@ G_BEGIN_DECLS
 
 typedef struct _XfceTasklistClass     XfceTasklistClass;
 typedef struct _XfceTasklist          XfceTasklist;
-typedef enum   _XfceTasklistGrouping  XfceTasklistGrouping;
 typedef enum   _XfceTasklistSortOrder XfceTasklistSortOrder;
 typedef enum   _XfceTasklistMClick    XfceTasklistMClick;
 
@@ -37,16 +36,6 @@ typedef enum   _XfceTasklistMClick    XfceTasklistMClick;
 #define XFCE_TASKLIST_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_TASKLIST, XfceTasklistClass))
 
 
-
-enum _XfceTasklistGrouping
-{
-  XFCE_TASKLIST_GROUPING_NEVER,
-  XFCE_TASKLIST_GROUPING_ALWAYS,
-
-  XFCE_TASKLIST_GROUPING_MIN = XFCE_TASKLIST_GROUPING_NEVER,
-  XFCE_TASKLIST_GROUPING_MAX = XFCE_TASKLIST_GROUPING_ALWAYS,
-  XFCE_TASKLIST_GROUPING_DEFAULT = XFCE_TASKLIST_GROUPING_NEVER
-};
 
 enum _XfceTasklistSortOrder
 {
