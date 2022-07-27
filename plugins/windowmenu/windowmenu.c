@@ -786,13 +786,15 @@ window_menu_plugin_windows_disconnect (WindowMenuPlugin *plugin)
   g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->screen),
      window_menu_plugin_window_opened, plugin);
 
-  /* disconnect the state changed signal from all windows */
+  /* disconnect from all window signals */
   windows = wnck_screen_get_windows (plugin->screen);
   for (li = windows; li != NULL; li = li->next)
     {
       panel_return_if_fail (WNCK_IS_WINDOW (li->data));
       g_signal_handlers_disconnect_by_func (G_OBJECT (li->data),
           window_menu_plugin_window_state_changed, plugin);
+      g_signal_handlers_disconnect_by_func (G_OBJECT (li->data),
+          window_menu_plugin_set_icon, plugin);
     }
 
   /* stop blinking */
