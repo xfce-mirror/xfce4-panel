@@ -27,7 +27,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-21 00:47+0200\n"
+"POT-Creation-Date: 2022-07-27 12:48+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Igor Vornovskii, 2022\n"
 "Language-Team: Russian (http://www.transifex.com/xfce/xfce4-panel/language/ru/)\n"
@@ -53,7 +53,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "панели;настройки;панель задач;автоскрытие;меню приложений;пуск;кнопки;запуск;область уведомлений;статус;значки;модули;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3088
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3078
 msgid "Panel"
 msgstr "Панель"
 
@@ -63,7 +63,7 @@ msgstr "Настройка панели"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1080
-#: ../panel/panel-preferences-dialog.c:1413
+#: ../panel/panel-preferences-dialog.c:1415
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Вы действительно хотите удалить «%s»?"
@@ -74,53 +74,61 @@ msgid ""
 msgstr "Удаление элемента с панели также означает, что его настройки будут потеряны."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:164
-#: ../panel/panel-preferences-dialog.c:1418
-#: ../plugins/applicationsmenu/applicationsmenu.c:610
+#: ../panel/panel-preferences-dialog.c:1420
+#: ../plugins/applicationsmenu/applicationsmenu.c:614
 #: ../plugins/directorymenu/directorymenu.c:469
 #: ../plugins/directorymenu/directorymenu.c:936
 msgid "_Cancel"
 msgstr "_Отменить"
 
+#. remove
 #: ../libxfce4panel/xfce-panel-plugin.c:1087
-#: ../libxfce4panel/xfce-panel-plugin.c:1267
+#: ../libxfce4panel/xfce-panel-plugin.c:1254
 #: ../panel/panel-plugin-external.c:523
-#: ../panel/panel-preferences-dialog.c:1053
-#: ../panel/panel-preferences-dialog.c:1419
+#: ../panel/panel-preferences-dialog.c:1052
+#: ../panel/panel-preferences-dialog.c:1421
 #: ../panel/panel-preferences-dialog.glade.h:58
 #: ../plugins/launcher/launcher-dialog.c:861
 msgid "_Remove"
 msgstr "_Удалить"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1217
+#. properties item
+#: ../libxfce4panel/xfce-panel-plugin.c:1216
 msgid "_Properties"
 msgstr "_Свойства"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1232 ../panel/panel-window.c:3179
+#. about item
+#: ../libxfce4panel/xfce-panel-plugin.c:1227 ../panel/panel-window.c:3154
 msgid "_About"
 msgstr "_О программе"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1247
+#. move item
+#: ../libxfce4panel/xfce-panel-plugin.c:1238
 msgid "_Move"
 msgstr "_Переместить"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1288
+#: ../libxfce4panel/xfce-panel-plugin.c:1272
 msgid "Pane_l"
 msgstr "Пане_ль"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3101
+#. add new items
+#: ../libxfce4panel/xfce-panel-plugin.c:1280 ../panel/panel-window.c:3090
 msgid "Add _New Items..."
 msgstr "_Добавить новые элементы..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1312 ../panel/panel-window.c:3116
+#. customize panel
+#: ../libxfce4panel/xfce-panel-plugin.c:1291 ../panel/panel-window.c:3101
 msgid "Panel Pr_eferences..."
 msgstr "_Параметры панели..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1333 ../panel/panel-window.c:3148
+#. logout item
+#: ../libxfce4panel/xfce-panel-plugin.c:1308 ../panel/panel-window.c:3129
 msgid "Log _Out"
 msgstr "_Завершить сеанс"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3168
+#. help item
+#: ../libxfce4panel/xfce-panel-plugin.c:1324 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3145
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -128,12 +136,13 @@ msgstr "_Завершить сеанс"
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 #: ../plugins/pager/pager-dialog.glade.h:4
 #: ../plugins/separator/separator-dialog.glade.h:6
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "_Help"
 msgstr "_Справка"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1368
+#. about item
+#: ../libxfce4panel/xfce-panel-plugin.c:1335
 msgid "About"
 msgstr "О программе"
 
@@ -368,7 +377,7 @@ msgstr "Добавление новых элементов"
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:5
 #: ../plugins/separator/separator-dialog.glade.h:5
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "_Close"
 msgstr "_Закрыть"
@@ -413,25 +422,25 @@ msgstr "Основной"
 msgid "Monitor %d"
 msgstr "Дисплей %d"
 
-#: ../panel/panel-preferences-dialog.c:1054
+#: ../panel/panel-preferences-dialog.c:1053
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Выбранная панель и все её элементы будут безвозвратно удалены"
 
-#: ../panel/panel-preferences-dialog.c:1055
+#: ../panel/panel-preferences-dialog.c:1054
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Вы действительно хотите удалить панель %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1255
+#: ../panel/panel-preferences-dialog.c:1257
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(внешний)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1260
+#: ../panel/panel-preferences-dialog.c:1262
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -440,17 +449,16 @@ msgstr "Внутреннее имя: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1272
+#: ../panel/panel-preferences-dialog.c:1274
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Внутреннее имя: %s-%d"
 
-#: ../panel/panel-preferences-dialog.c:1416
+#: ../panel/panel-preferences-dialog.c:1418
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Если вы удалите этот элемент с панели, он будет потерян окончательно."
 
 #: ../panel/panel-preferences-dialog.glade.h:1
-#: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Never"
 msgstr "Никогда"
 
@@ -459,7 +467,6 @@ msgid "Intelligently"
 msgstr "Интеллектуально"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
-#: ../plugins/tasklist/tasklist-dialog.glade.h:2
 msgid "Always"
 msgstr "Всегда"
 
@@ -716,7 +723,7 @@ msgstr "Опытный"
 msgid "Expert"
 msgstr "Эксперт"
 
-#: ../panel/panel-window.c:3133
+#: ../panel/panel-window.c:3115
 msgid "_Lock Panel"
 msgstr "_Закрепить панель"
 
@@ -936,7 +943,7 @@ msgstr "Разделитель"
 msgid "Failed to run action \"%s\""
 msgstr "Не удалось выполнить действие «%s»"
 
-#: ../plugins/actions/actions.c:1331
+#: ../plugins/actions/actions.c:1327
 msgid "Little Mouse"
 msgstr "Маленькая мышь"
 
@@ -988,7 +995,7 @@ msgstr "Выберите этот параметр для показа обоб�
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Appearance"
 msgstr "Внешний вид"
@@ -1022,18 +1029,18 @@ msgstr "Файл меню"
 msgid "Applications"
 msgstr "Приложения"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:608
+#: ../plugins/applicationsmenu/applicationsmenu.c:612
 #: ../plugins/directorymenu/directorymenu.c:467
 msgid "Select An Icon"
 msgstr "Выберите значок"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:611
+#: ../plugins/applicationsmenu/applicationsmenu.c:615
 #: ../plugins/directorymenu/directorymenu.c:470
 msgid "_OK"
 msgstr "_ОК"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:648
+#: ../plugins/applicationsmenu/applicationsmenu.c:652
 #: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -1560,19 +1567,19 @@ msgstr "Введите имя:"
 msgid "Failed to create folder: %s"
 msgstr "Не удалось создать каталог: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1072
+#: ../plugins/directorymenu/directorymenu.c:1071
 msgid "Open Folder"
 msgstr "Открыть папку"
 
-#: ../plugins/directorymenu/directorymenu.c:1089
+#: ../plugins/directorymenu/directorymenu.c:1084
 msgid "Open in Terminal"
 msgstr "Открыть в терминале"
 
-#: ../plugins/directorymenu/directorymenu.c:1106
+#: ../plugins/directorymenu/directorymenu.c:1097
 msgid "Create Folder..."
 msgstr "Создать каталог..."
 
-#: ../plugins/directorymenu/directorymenu.c:1123
+#: ../plugins/directorymenu/directorymenu.c:1110
 msgid "Create Text Document..."
 msgstr "Создать текстовый документ..."
 
@@ -1624,7 +1631,7 @@ msgid "_File Pattern:"
 msgstr "Шаблон _файлов:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:16
-#: ../plugins/tasklist/tasklist-dialog.glade.h:31
+#: ../plugins/tasklist/tasklist-dialog.glade.h:28
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
 msgstr "Фильтрация"
@@ -1765,11 +1772,11 @@ msgstr "Расширенные"
 msgid "Program launcher with optional menu"
 msgstr "Кнопка запуска приложений с дополнительным меню"
 
-#: ../plugins/pager/pager.c:656 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:653 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "_Настройки рабочих мест..."
 
-#: ../plugins/pager/pager.c:749
+#: ../plugins/pager/pager.c:743
 msgid "Unable to open the workspace settings"
 msgstr "Не удалось открыть настройки рабочих мест"
 
@@ -1835,15 +1842,15 @@ msgstr "_Расширять"
 msgid "Adds a separator or space between panel items"
 msgstr "Добавляет разделитель или промежуток между элементами панели"
 
-#: ../plugins/showdesktop/showdesktop.c:242
+#: ../plugins/showdesktop/showdesktop.c:240
 msgid "Restore the minimized windows"
 msgstr "Восстановить свёрнутые окна"
 
-#: ../plugins/showdesktop/showdesktop.c:244
+#: ../plugins/showdesktop/showdesktop.c:242
 msgid "Minimize all open windows and show the desktop"
 msgstr "Скрыть окна и показать рабочий стол"
 
-#: ../plugins/showdesktop/showdesktop.c:247
+#: ../plugins/showdesktop/showdesktop.c:245
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Показать рабочий стол"
@@ -1965,17 +1972,17 @@ msgid "Unable to start the notification area"
 msgstr "Не удалось запустить область уведомлений"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:413
+#: ../plugins/systray/systray.c:407
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Скорее всего, другой элемент взял на себя функцию области уведомлений. Эта область не будет использоваться."
 
-#: ../plugins/systray/systray.c:415
+#: ../plugins/systray/systray.c:409
 msgid "The notification area lost selection"
 msgstr "Область уведомлений потеряла выбор"
 
-#: ../plugins/systray/systray-manager.c:432
+#: ../plugins/systray/systray-manager.c:400
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Не удалось запустить системный лоток на экране %d"
@@ -1990,105 +1997,101 @@ msgid ""
 "items"
 msgstr "Предоставляет элементы уведомления о состоянии (индикаторы приложений) и устаревшие элементы панели задач"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:3
-msgid "When space is limited"
-msgstr "При недостатке места"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:4
+#: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Nothing"
 msgstr "Ничего"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+#: ../plugins/tasklist/tasklist-dialog.glade.h:2
 msgid "Close Window"
 msgstr "Закрыть окно"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:6
+#: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "Minimize Window"
 msgstr "Свернуть окно"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:7
+#: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "New Instance"
 msgstr "Новый экземпляр"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+#: ../plugins/tasklist/tasklist-dialog.glade.h:5
 msgid "Timestamp"
 msgstr "Метка времени"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:9
+#: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Group title and timestamp"
 msgstr "Сгруппировать название и метку времени"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+#: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Window title"
 msgstr "Заголовок окна"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Group title and window title"
 msgstr "Сгруппировать название приложения и заголовок окна"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "None, allow drag-and-drop"
 msgstr "Отсутствует, использовать перетаскивание"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Window Buttons"
 msgstr "Кнопки окон"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show button _labels"
 msgstr "Показывать _подписи кнопок"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show _flat buttons"
 msgstr "Показывать плоские к_нопки"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show _handle"
 msgstr "Показывать _ручку"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show _tooltips"
 msgstr "Показать _всплывающие подсказки"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
 msgstr "Порядок сор_тировки:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
-msgid "Window _grouping:"
-msgstr "_Группировать окна:"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:23
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Mi_ddle click action:"
 msgstr "_Действие по щелчку средней кнопкой мыши:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+msgid "_Group windows by application"
+msgstr "_Группировать окна по приложениям"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Restore minimized windows to current _workspace"
 msgstr "Разворачивать свёрнутые окна на текущий ра_бочий стол"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "D_raw window frame when hovering a button"
 msgstr "Отображать р_амку окна под курсором мыши"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:26
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "_Switch windows using the mouse wheel"
 msgstr "Переключать окна с помощью _колёсика мыши"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:27
+#: ../plugins/tasklist/tasklist-dialog.glade.h:24
 msgid "Behaviour"
 msgstr "Поведение"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:28
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:11
 msgid "Show windows from _all workspaces"
 msgstr "Отображать _окна со всех рабочих мест"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:29
+#: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Show windows from all mo_nitors"
 msgstr "Показывать окна со всех _мониторов"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:30
+#: ../plugins/tasklist/tasklist-dialog.glade.h:27
 msgid "Show only _minimized windows"
 msgstr "Показывать только с_вёрнутые окна"
 
@@ -2105,23 +2108,23 @@ msgstr "Ошибка"
 msgid "Launch New Instance"
 msgstr "Запустить новый экземпляр"
 
-#: ../plugins/tasklist/tasklist-widget.c:3854
+#: ../plugins/tasklist/tasklist-widget.c:3845
 msgid "Mi_nimize All"
 msgstr "Св_ернуть все"
 
-#: ../plugins/tasklist/tasklist-widget.c:3862
+#: ../plugins/tasklist/tasklist-widget.c:3852
 msgid "Un_minimize All"
 msgstr "Отменить сво_рачивание всех"
 
-#: ../plugins/tasklist/tasklist-widget.c:3870
+#: ../plugins/tasklist/tasklist-widget.c:3859
 msgid "Ma_ximize All"
 msgstr "Раз_вернуть все"
 
-#: ../plugins/tasklist/tasklist-widget.c:3878
+#: ../plugins/tasklist/tasklist-widget.c:3866
 msgid "_Unmaximize All"
 msgstr "Отменить _разворачивание всех"
 
-#: ../plugins/tasklist/tasklist-widget.c:3890
+#: ../plugins/tasklist/tasklist-widget.c:3877
 msgid "_Close All"
 msgstr "_Закрыть все"
 
@@ -2129,28 +2132,28 @@ msgstr "_Закрыть все"
 msgid "Switch between open windows using buttons"
 msgstr "Переключаться между открытыми окнами с помощью кнопок"
 
-#: ../plugins/windowmenu/windowmenu.c:694
+#: ../plugins/windowmenu/windowmenu.c:692
 msgid "Desktop"
 msgstr "Рабочий стол"
 
-#: ../plugins/windowmenu/windowmenu.c:1298
+#: ../plugins/windowmenu/windowmenu.c:1294
 msgid "No Windows"
 msgstr "Без окон"
 
-#: ../plugins/windowmenu/windowmenu.c:1313
+#: ../plugins/windowmenu/windowmenu.c:1309
 msgid "Urgent Windows"
 msgstr "Срочные окна"
 
-#: ../plugins/windowmenu/windowmenu.c:1356
+#: ../plugins/windowmenu/windowmenu.c:1351
 msgid "Add Workspace"
 msgstr "Добавить рабочее место"
 
-#: ../plugins/windowmenu/windowmenu.c:1379
+#: ../plugins/windowmenu/windowmenu.c:1371
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Удалить рабочее место «%s»"
 
-#: ../plugins/windowmenu/windowmenu.c:1381
+#: ../plugins/windowmenu/windowmenu.c:1373
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Удалить рабочее место %d"
