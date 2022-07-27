@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-21 00:47+0200\n"
+"POT-Creation-Date: 2022-07-27 12:48+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: callkalpa <callkalpa@gmail.com>, 2010\n"
 "Language-Team: Sinhala (http://www.transifex.com/xfce/xfce4-panel/language/si/)\n"
@@ -35,7 +35,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr ""
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3088
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3078
 msgid "Panel"
 msgstr ""
 
@@ -45,7 +45,7 @@ msgstr ""
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1080
-#: ../panel/panel-preferences-dialog.c:1413
+#: ../panel/panel-preferences-dialog.c:1415
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "\"%s\" ඉවත් කිරීමට අවශ්‍ය බව ඔබට සහතිකද?"
@@ -56,53 +56,61 @@ msgid ""
 msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:164
-#: ../panel/panel-preferences-dialog.c:1418
-#: ../plugins/applicationsmenu/applicationsmenu.c:610
+#: ../panel/panel-preferences-dialog.c:1420
+#: ../plugins/applicationsmenu/applicationsmenu.c:614
 #: ../plugins/directorymenu/directorymenu.c:469
 #: ../plugins/directorymenu/directorymenu.c:936
 msgid "_Cancel"
 msgstr ""
 
+#. remove
 #: ../libxfce4panel/xfce-panel-plugin.c:1087
-#: ../libxfce4panel/xfce-panel-plugin.c:1267
+#: ../libxfce4panel/xfce-panel-plugin.c:1254
 #: ../panel/panel-plugin-external.c:523
-#: ../panel/panel-preferences-dialog.c:1053
-#: ../panel/panel-preferences-dialog.c:1419
+#: ../panel/panel-preferences-dialog.c:1052
+#: ../panel/panel-preferences-dialog.c:1421
 #: ../panel/panel-preferences-dialog.glade.h:58
 #: ../plugins/launcher/launcher-dialog.c:861
 msgid "_Remove"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1217
+#. properties item
+#: ../libxfce4panel/xfce-panel-plugin.c:1216
 msgid "_Properties"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1232 ../panel/panel-window.c:3179
+#. about item
+#: ../libxfce4panel/xfce-panel-plugin.c:1227 ../panel/panel-window.c:3154
 msgid "_About"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1247
+#. move item
+#: ../libxfce4panel/xfce-panel-plugin.c:1238
 msgid "_Move"
 msgstr "ගමන් කරවන්න (_M)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1288
+#: ../libxfce4panel/xfce-panel-plugin.c:1272
 msgid "Pane_l"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3101
+#. add new items
+#: ../libxfce4panel/xfce-panel-plugin.c:1280 ../panel/panel-window.c:3090
 msgid "Add _New Items..."
 msgstr "නව අයිතම එක් කරන්න... (_N)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1312 ../panel/panel-window.c:3116
+#. customize panel
+#: ../libxfce4panel/xfce-panel-plugin.c:1291 ../panel/panel-window.c:3101
 msgid "Panel Pr_eferences..."
 msgstr "පුවරු අභිප්‍රේත... (_e)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1333 ../panel/panel-window.c:3148
+#. logout item
+#: ../libxfce4panel/xfce-panel-plugin.c:1308 ../panel/panel-window.c:3129
 msgid "Log _Out"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1353 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3168
+#. help item
+#: ../libxfce4panel/xfce-panel-plugin.c:1324 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3145
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -110,12 +118,13 @@ msgstr ""
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 #: ../plugins/pager/pager-dialog.glade.h:4
 #: ../plugins/separator/separator-dialog.glade.h:6
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "_Help"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1368
+#. about item
+#: ../libxfce4panel/xfce-panel-plugin.c:1335
 msgid "About"
 msgstr ""
 
@@ -348,7 +357,7 @@ msgstr "නව අයිතම එක් කරන්න"
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:5
 #: ../plugins/separator/separator-dialog.glade.h:5
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "_Close"
 msgstr "වසන්න (_C)"
@@ -393,25 +402,25 @@ msgstr ""
 msgid "Monitor %d"
 msgstr "%d මොනිටරය"
 
-#: ../panel/panel-preferences-dialog.c:1054
+#: ../panel/panel-preferences-dialog.c:1053
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "පුවරු සහ ප්ලගින වින්‍යාස ස්ථිරවම ඉවත් කෙරෙනු ඇත"
 
-#: ../panel/panel-preferences-dialog.c:1055
+#: ../panel/panel-preferences-dialog.c:1054
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "%d පුවරුව ඉවත් කිරීමට අවශ්‍ය බව ඔබට සහතිකද?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1255
+#: ../panel/panel-preferences-dialog.c:1257
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1260
+#: ../panel/panel-preferences-dialog.c:1262
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -420,17 +429,16 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1272
+#: ../panel/panel-preferences-dialog.c:1274
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "අභ්‍යන්තර නාමය: %s-%d"
 
-#: ../panel/panel-preferences-dialog.c:1416
+#: ../panel/panel-preferences-dialog.c:1418
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "ඔබ පුවරුවෙන් අයිතමය මැකුවොත් එය ස්ථිරවම නැතිවෙයි."
 
 #: ../panel/panel-preferences-dialog.glade.h:1
-#: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Never"
 msgstr "කිසිදාක නැත"
 
@@ -439,7 +447,6 @@ msgid "Intelligently"
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:3
-#: ../plugins/tasklist/tasklist-dialog.glade.h:2
 msgid "Always"
 msgstr "සැමවිටම"
 
@@ -696,7 +703,7 @@ msgstr ""
 msgid "Expert"
 msgstr ""
 
-#: ../panel/panel-window.c:3133
+#: ../panel/panel-window.c:3115
 msgid "_Lock Panel"
 msgstr ""
 
@@ -916,7 +923,7 @@ msgstr "විභේදකය"
 msgid "Failed to run action \"%s\""
 msgstr ""
 
-#: ../plugins/actions/actions.c:1331
+#: ../plugins/actions/actions.c:1327
 msgid "Little Mouse"
 msgstr ""
 
@@ -968,7 +975,7 @@ msgstr "මෙනුවේ සාමාන්‍ය යෙදුම් නම �
 #: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Appearance"
 msgstr "පෙනුම"
@@ -1002,18 +1009,18 @@ msgstr "මෙනු ගොනුව"
 msgid "Applications"
 msgstr ""
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:608
+#: ../plugins/applicationsmenu/applicationsmenu.c:612
 #: ../plugins/directorymenu/directorymenu.c:467
 msgid "Select An Icon"
 msgstr "අයිකනයක් තෝරන්න"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:611
+#: ../plugins/applicationsmenu/applicationsmenu.c:615
 #: ../plugins/directorymenu/directorymenu.c:470
 msgid "_OK"
 msgstr ""
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:648
+#: ../plugins/applicationsmenu/applicationsmenu.c:652
 #: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -1540,19 +1547,19 @@ msgstr "නව නාමය ඇතුළත් කරන්න:"
 msgid "Failed to create folder: %s"
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:1072
+#: ../plugins/directorymenu/directorymenu.c:1071
 msgid "Open Folder"
 msgstr "බහලුම විවෘත කරන්න"
 
-#: ../plugins/directorymenu/directorymenu.c:1089
+#: ../plugins/directorymenu/directorymenu.c:1084
 msgid "Open in Terminal"
 msgstr "අග්‍රයේ විවෘත කරන්න"
 
-#: ../plugins/directorymenu/directorymenu.c:1106
+#: ../plugins/directorymenu/directorymenu.c:1097
 msgid "Create Folder..."
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:1123
+#: ../plugins/directorymenu/directorymenu.c:1110
 msgid "Create Text Document..."
 msgstr ""
 
@@ -1604,7 +1611,7 @@ msgid "_File Pattern:"
 msgstr "ගොනු විලාසය: (_F)"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:16
-#: ../plugins/tasklist/tasklist-dialog.glade.h:31
+#: ../plugins/tasklist/tasklist-dialog.glade.h:28
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
 msgstr "පෙරමින්"
@@ -1745,11 +1752,11 @@ msgstr "උසස්"
 msgid "Program launcher with optional menu"
 msgstr "විකල්ප මෙනුවක් සහිත යෙදුම් පුරනය"
 
-#: ../plugins/pager/pager.c:656 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:653 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "වැඩතලය සිටුවම්... (_S)"
 
-#: ../plugins/pager/pager.c:749
+#: ../plugins/pager/pager.c:743
 msgid "Unable to open the workspace settings"
 msgstr ""
 
@@ -1815,15 +1822,15 @@ msgstr "ප්‍රසාරණය කරන්න (_E)"
 msgid "Adds a separator or space between panel items"
 msgstr "පුවරු අයිතම අතරට විභේදයක් හෝ ඉඩක් එක් කරන්න"
 
-#: ../plugins/showdesktop/showdesktop.c:242
+#: ../plugins/showdesktop/showdesktop.c:240
 msgid "Restore the minimized windows"
 msgstr "හැකිලූ කවුළු ප්‍රතිෂ්ඨාපනය කරන්න"
 
-#: ../plugins/showdesktop/showdesktop.c:244
+#: ../plugins/showdesktop/showdesktop.c:242
 msgid "Minimize all open windows and show the desktop"
 msgstr "විවෘත කවුළු සියල්ල සඟවා වැඩතලය පෙන්වන්න"
 
-#: ../plugins/showdesktop/showdesktop.c:247
+#: ../plugins/showdesktop/showdesktop.c:245
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "වැඩතලය පෙන්වන්න"
@@ -1945,17 +1952,17 @@ msgid "Unable to start the notification area"
 msgstr ""
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:413
+#: ../plugins/systray/systray.c:407
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr ""
 
-#: ../plugins/systray/systray.c:415
+#: ../plugins/systray/systray.c:409
 msgid "The notification area lost selection"
 msgstr "දැනුම්දීම් ප්‍රදේශයට තේරීම නැති විය"
 
-#: ../plugins/systray/systray-manager.c:432
+#: ../plugins/systray/systray-manager.c:400
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "%d තිරය සඳහා තේරුම් කළමණාකරු ලබා ගැනීම අසමත් විය"
@@ -1970,105 +1977,101 @@ msgid ""
 "items"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:3
-msgid "When space is limited"
-msgstr "ඉඩ සීමිත වූ විට"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:4
+#: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Nothing"
 msgstr "කිසිවක් නැත"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+#: ../plugins/tasklist/tasklist-dialog.glade.h:2
 msgid "Close Window"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:6
+#: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "Minimize Window"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:7
+#: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "New Instance"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+#: ../plugins/tasklist/tasklist-dialog.glade.h:5
 msgid "Timestamp"
 msgstr "කාලමුද්‍රාව"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:9
+#: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Group title and timestamp"
 msgstr "මාතෘකාව සහ කාලමුද්‍රාව සමූහනය කරන්න"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+#: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Window title"
 msgstr "කවුළු මාතෘකාව"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Group title and window title"
 msgstr "මාතෘකාව සහ කවුළු මාතෘකාව සමූහනය කරන්න"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "None, allow drag-and-drop"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Window Buttons"
 msgstr "කවුළු බොත්තම්"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show button _labels"
 msgstr "බොත්තම් ලේබල පෙන්නන්න (_l)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show _flat buttons"
 msgstr "සමතල බොත්තම් පෙන්වන්න"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show _handle"
 msgstr "අල්ලුව පෙන්වන්න"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show _tooltips"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
 msgstr "සුබෙදුම් අනුපිළිවෙල: (_o)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
-msgid "Window _grouping:"
-msgstr "කවුළු සමූහනය: (_g)"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:23
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Mi_ddle click action:"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+msgid "_Group windows by application"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Restore minimized windows to current _workspace"
 msgstr "වත්මන් වැඩ තලයට හැකිලූ ගොනු ප්‍රතිෂ්ඨාපනය කරන්න"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "D_raw window frame when hovering a button"
 msgstr "බොත්තමක් මතින් යාමේදී කවුළු දාරය අඳින්න (_r)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:26
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "_Switch windows using the mouse wheel"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:27
+#: ../plugins/tasklist/tasklist-dialog.glade.h:24
 msgid "Behaviour"
 msgstr "හැසිරීම"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:28
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:11
 msgid "Show windows from _all workspaces"
 msgstr "සියළු වැඩතලයන්ගෙන් කවුළු පෙන්වන්න (_a)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:29
+#: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Show windows from all mo_nitors"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:30
+#: ../plugins/tasklist/tasklist-dialog.glade.h:27
 msgid "Show only _minimized windows"
 msgstr "හැකිලූ කවුළු පමණක් පෙන්නන්න"
 
@@ -2085,23 +2088,23 @@ msgstr "දෝෂය"
 msgid "Launch New Instance"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3854
+#: ../plugins/tasklist/tasklist-widget.c:3845
 msgid "Mi_nimize All"
 msgstr "සියල්ල හකුලන්න (_n)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3862
+#: ../plugins/tasklist/tasklist-widget.c:3852
 msgid "Un_minimize All"
 msgstr "සියල්ල දිග හරින්න (_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3870
+#: ../plugins/tasklist/tasklist-widget.c:3859
 msgid "Ma_ximize All"
 msgstr "සියල්ල විහිදන්න (_x)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3878
+#: ../plugins/tasklist/tasklist-widget.c:3866
 msgid "_Unmaximize All"
 msgstr "සියල්ල කුඩා කරන්න (_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3890
+#: ../plugins/tasklist/tasklist-widget.c:3877
 msgid "_Close All"
 msgstr "සියල්ල වසන්න (_C)"
 
@@ -2109,28 +2112,28 @@ msgstr "සියල්ල වසන්න (_C)"
 msgid "Switch between open windows using buttons"
 msgstr "බොත්තම් භාවිතයෙන් විවෘත කවුළු අතර මාරු වෙන්න"
 
-#: ../plugins/windowmenu/windowmenu.c:694
+#: ../plugins/windowmenu/windowmenu.c:692
 msgid "Desktop"
 msgstr "වැඩතලය"
 
-#: ../plugins/windowmenu/windowmenu.c:1298
+#: ../plugins/windowmenu/windowmenu.c:1294
 msgid "No Windows"
 msgstr "කවුළු නැත"
 
-#: ../plugins/windowmenu/windowmenu.c:1313
+#: ../plugins/windowmenu/windowmenu.c:1309
 msgid "Urgent Windows"
 msgstr "හදිසි කවුළු"
 
-#: ../plugins/windowmenu/windowmenu.c:1356
+#: ../plugins/windowmenu/windowmenu.c:1351
 msgid "Add Workspace"
 msgstr "වැඩතලයක් එක් කරන්න"
 
-#: ../plugins/windowmenu/windowmenu.c:1379
+#: ../plugins/windowmenu/windowmenu.c:1371
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "'%s' වැඩතලය ඉවත් කරන්න"
 
-#: ../plugins/windowmenu/windowmenu.c:1381
+#: ../plugins/windowmenu/windowmenu.c:1373
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "%d වැඩතලය ඉවත් කරන්න"
