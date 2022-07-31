@@ -41,6 +41,7 @@
 #include "clock-fuzzy.h"
 #include "clock-lcd.h"
 #include "clock-dialog_ui.h"
+#include "clock-sleep-monitor.h"
 
 /* TRANSLATORS: adjust this accordingly for your locale format */
 #define DEFAULT_TOOLTIP_FORMAT NC_("Date", "%A %d %B %Y")
@@ -157,6 +158,9 @@ struct _ClockPlugin
 
   gchar              *time_config_tool;
   ClockTime          *time;
+
+  /* may be NULL if no sleep monitor could be instatiated */
+  ClockSleepMonitor  *sleep_monitor;
 };
 
 typedef struct
@@ -276,6 +280,7 @@ clock_plugin_init (ClockPlugin *plugin)
   plugin->seat = NULL;
   plugin->seat_grabbed = FALSE;
   plugin->time = clock_time_new ();
+  plugin->sleep_monitor = clock_sleep_monitor_create();
 
   plugin->button = xfce_panel_create_toggle_button ();
   /* xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button); */
@@ -414,10 +419,11 @@ clock_plugin_enter_notify_event (GtkWidget        *widget,
   guint        interval;
 
   /* start the tooltip timeout if needed */
+  /* don't bother with hooking up the sleep monitor here */
   if (plugin->tooltip_timeout == NULL)
     {
       interval = clock_time_interval_from_format (plugin->tooltip_format);
-      plugin->tooltip_timeout = clock_time_timeout_new (interval, plugin->time,
+      plugin->tooltip_timeout = clock_time_timeout_new (interval, plugin->time, /*sleep_monitor*/ NULL,
                                                         G_CALLBACK (clock_plugin_tooltip), plugin);
     }
 
@@ -528,6 +534,9 @@ clock_plugin_free_data (XfcePanelPlugin *panel_plugin)
     gtk_widget_destroy (plugin->calendar_window);
 
   g_object_unref (G_OBJECT (plugin->time));
+
+  if (plugin->sleep_monitor != NULL)
+    g_object_unref (G_OBJECT (plugin->sleep_monitor));
 
   g_free (plugin->tooltip_format);
   g_free (plugin->time_config_tool);
@@ -1151,15 +1160,15 @@ clock_plugin_set_mode (ClockPlugin *plugin)
 
   /* create a new clock */
   if (plugin->mode == CLOCK_PLUGIN_MODE_ANALOG)
-    plugin->clock = xfce_clock_analog_new (plugin->time);
+    plugin->clock = xfce_clock_analog_new (plugin->time, plugin->sleep_monitor);
   else if (plugin->mode == CLOCK_PLUGIN_MODE_BINARY)
-    plugin->clock = xfce_clock_binary_new (plugin->time);
+    plugin->clock = xfce_clock_binary_new (plugin->time, plugin->sleep_monitor);
   else if (plugin->mode == CLOCK_PLUGIN_MODE_DIGITAL)
-    plugin->clock = xfce_clock_digital_new (plugin->time);
+    plugin->clock = xfce_clock_digital_new (plugin->time, plugin->sleep_monitor);
   else if (plugin->mode == CLOCK_PLUGIN_MODE_FUZZY)
-    plugin->clock = xfce_clock_fuzzy_new (plugin->time);
+    plugin->clock = xfce_clock_fuzzy_new (plugin->time, plugin->sleep_monitor);
   else
-    plugin->clock = xfce_clock_lcd_new (plugin->time);
+    plugin->clock = xfce_clock_lcd_new (plugin->time, plugin->sleep_monitor);
 
 
   if (plugin->rotate_vertically)
