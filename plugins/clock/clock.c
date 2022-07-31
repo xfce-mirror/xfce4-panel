@@ -202,7 +202,6 @@ enum
 /* define the plugin */
 XFCE_PANEL_DEFINE_PLUGIN (ClockPlugin, clock_plugin,
   clock_time_register_type,
-  clock_sleep_monitor_register_type,
   xfce_clock_analog_register_type,
   xfce_clock_binary_register_type,
   xfce_clock_digital_register_type,

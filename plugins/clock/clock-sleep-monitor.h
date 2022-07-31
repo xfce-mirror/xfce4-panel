@@ -21,14 +21,11 @@
 #include <glib.h>
 #include <glib-object.h>
 
-#include <libxfce4panel/libxfce4panel.h>
-
 G_BEGIN_DECLS
 
 typedef struct _ClockSleepMonitor ClockSleepMonitor;
 
 GType clock_sleep_monitor_get_type(void) G_GNUC_CONST;
-void clock_sleep_monitor_register_type(XfcePanelTypeModule *type_module);
 
 #define XFCE_TYPE_CLOCK_SLEEP_MONITOR (clock_sleep_monitor_get_type ())
 #define XFCE_CLOCK_SLEEP_MONITOR(object) (G_TYPE_CHECK_INSTANCE_CAST((object), XFCE_TYPE_CLOCK_SLEEP_MONITOR, ClockSleepMonitor))
