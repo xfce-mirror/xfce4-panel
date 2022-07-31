@@ -168,7 +168,7 @@ static void on_logind_signal(
   }
 
   if (!g_variant_check_format_string(parameters, format_string, FALSE)) {
-    g_error("unexpected format string: %s", g_variant_get_type_string(parameters));
+    g_critical("unexpected format string: %s", g_variant_get_type_string(parameters));
     return;
   }
 
@@ -183,7 +183,7 @@ static ClockSleepMonitor* clock_sleep_monitor_logind_create(void)
 {
   ClockSleepMonitorLogind* monitor;
 
-  g_info("trying to instantiate logind sleep monitor");
+  g_message("trying to instantiate logind sleep monitor");
 
   monitor = g_object_new(XFCE_TYPE_CLOCK_SLEEP_MONITOR_LOGIND, NULL);
   g_return_val_if_fail(monitor != NULL, NULL);
@@ -198,14 +198,14 @@ static ClockSleepMonitor* clock_sleep_monitor_logind_create(void)
       NULL,
       NULL);
   if (monitor->logind_proxy == NULL) {
-    g_info("could not get proxy for org.freedesktop.login1");
+    g_message("could not get proxy for org.freedesktop.login1");
     g_object_unref(G_OBJECT(monitor));
     return NULL;
   }
 
   monitor->logind_signal_id = g_signal_connect(monitor->logind_proxy, "g-signal", G_CALLBACK(on_logind_signal), monitor);
   if (monitor->logind_signal_id == 0) {
-    g_error("could not connect to logind signal");
+    g_critical("could not connect to logind signal");
     g_object_unref(G_OBJECT(monitor));
     return NULL;
   }
