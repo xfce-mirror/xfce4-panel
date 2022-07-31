@@ -186,8 +186,6 @@ static ClockSleepMonitor* clock_sleep_monitor_logind_create(void)
   g_message("trying to instantiate logind sleep monitor");
 
   monitor = g_object_new(XFCE_TYPE_CLOCK_SLEEP_MONITOR_LOGIND, NULL);
-  g_return_val_if_fail(monitor != NULL, NULL);
-
   monitor->logind_proxy = g_dbus_proxy_new_for_bus_sync(
       G_BUS_TYPE_SYSTEM,
       G_DBUS_PROXY_FLAGS_NONE,
