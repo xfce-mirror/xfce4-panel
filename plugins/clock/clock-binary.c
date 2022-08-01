@@ -265,7 +265,6 @@ xfce_clock_binary_draw_true_binary (XfceClockBinary *binary,
   gint              row, rows;
   static gint       binary_table[] = { 32, 16, 8, 4, 2, 1 };
   gint              col, cols = G_N_ELEMENTS (binary_table);
-  gint              remain_h, remain_w;
   gint              offset_x, offset_y;
   gint              w, h, x;
   gint              ticks;
@@ -282,11 +281,13 @@ xfce_clock_binary_draw_true_binary (XfceClockBinary *binary,
 
   time = clock_time_get_time (binary->time);
 
-  /* init sizes */
-  remain_h = alloc->height;
   offset_y = alloc->y;
 
   rows = binary->show_seconds ? 3 : 2;
+
+  w = alloc->width / cols;
+  h = alloc->height / rows;
+
   for (row = 0; row < rows; row++)
     {
       /* get the time this row represents */
@@ -297,18 +298,11 @@ xfce_clock_binary_draw_true_binary (XfceClockBinary *binary,
       else
         ticks = g_date_time_get_second (time);
 
-      /* reset sizes */
-      remain_w = alloc->width;
       offset_x = alloc->x;
-      h = remain_h / (rows - row);
-      remain_h -= h;
 
       for (col = 0; col < cols; col++)
         {
-          /* update sizes */
-          w = remain_w / (cols - col);
           x = offset_x;
-          remain_w -= w;
           offset_x += w;
 
           if (ticks >= binary_table[col])
@@ -349,7 +343,6 @@ xfce_clock_binary_draw_binary (XfceClockBinary *binary,
   gint              row, rows = G_N_ELEMENTS (binary_table) / 2;
   gint              col, cols;
   gint              digit;
-  gint              remain_h, remain_w;
   gint              offset_x, offset_y;
   gint              w, h, y;
   gint              ticks = 0;
@@ -366,11 +359,14 @@ xfce_clock_binary_draw_binary (XfceClockBinary *binary,
 
   time = clock_time_get_time (binary->time);
 
-  remain_w = alloc->width;
   offset_x = alloc->x;
 
   /* make sure the cols are all equal */
   cols = binary->show_seconds ? 6 : 4;
+
+  w = alloc->width / cols;
+  h = alloc->height / rows;
+
   for (col = 0; col < cols; col++)
     {
       /* get the time this row represents */
@@ -381,17 +377,10 @@ xfce_clock_binary_draw_binary (XfceClockBinary *binary,
       else if (col == 4)
         ticks = g_date_time_get_second (time);
 
-      /* reset sizes */
-      remain_h = alloc->height;
       offset_y = alloc->y;
-      w = remain_w / (cols - col);
-      remain_w -= w;
 
       for (row = 0; row < rows; row++)
         {
-          /* update sizes */
-          h = remain_h / (rows - row);
-          remain_h -= h;
           y = offset_y;
           offset_y += h;
 
@@ -432,8 +421,8 @@ xfce_clock_binary_draw (GtkWidget *widget,
   gint              col, cols;
   gint              row, rows;
   GtkAllocation     alloc;
-  gdouble           remain_w, x;
-  gdouble           remain_h, y;
+  gdouble           x;
+  gdouble           y;
   gint              w, h;
   gint              pad_x, pad_y;
   gint              diff;
@@ -476,8 +465,9 @@ xfce_clock_binary_draw (GtkWidget *widget,
       gdk_cairo_set_source_rgba (cr, &grid_rgba);
       cairo_set_line_width (cr, 1);
 
-      remain_w = alloc.width;
-      remain_h = alloc.height;
+      w = alloc.width / cols;
+      h = alloc.height / rows;
+
       x = alloc.x - 0.5;
       y = alloc.y - 0.5;
 
@@ -486,8 +476,7 @@ xfce_clock_binary_draw (GtkWidget *widget,
 
       for (col = 0; col < cols - 1; col++)
         {
-          w = remain_w / (cols - col);
-          x += w; remain_w -= w;
+          x += w;
           cairo_move_to (cr, x, alloc.y);
           cairo_rel_line_to (cr, 0, alloc.height);
           cairo_stroke (cr);
@@ -495,8 +484,7 @@ xfce_clock_binary_draw (GtkWidget *widget,
 
       for (row = 0; row < rows - 1; row++)
         {
-          h = remain_h / (rows - row);
-          y += h; remain_h -= h;
+          y += h;
           cairo_move_to (cr, alloc.x, y);
           cairo_rel_line_to (cr, alloc.width, 0);
           cairo_stroke (cr);
