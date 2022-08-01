@@ -347,8 +347,6 @@ xfce_clock_binary_draw (GtkWidget *widget,
   gint              col, cols;
   gint              row, rows;
   GtkAllocation     alloc;
-  gdouble           x;
-  gdouble           y;
   gint              w, h;
   gint              pad_x, pad_y;
   gint              diff;
@@ -414,19 +412,16 @@ xfce_clock_binary_draw (GtkWidget *widget,
       gdk_cairo_set_source_rgba (cr, &grid_rgba);
       cairo_set_line_width (cr, 1);
 
-      x = alloc.x - 0.5;
-      y = alloc.y - 0.5;
-
       for (col = 0; col <= cols; col++)
         {
-          cairo_move_to (cr, x + col * w, alloc.y - 1);
+          cairo_move_to (cr, alloc.x - 0.5 + col * w, alloc.y - 1);
           cairo_rel_line_to (cr, 0, alloc.height + 1);
           cairo_stroke (cr);
         }
 
       for (row = 0; row <= rows; row++)
         {
-          cairo_move_to (cr, alloc.x - 1, y + row * h);
+          cairo_move_to (cr, alloc.x - 1, alloc.y - 0.5 + row * h);
           cairo_rel_line_to (cr, alloc.width + 1, 0);
           cairo_stroke (cr);
         }
@@ -442,17 +437,11 @@ xfce_clock_binary_draw (GtkWidget *widget,
       for (row = 0; row < rows; row++)
         {
           if (table & (1 << (row * cols + col)))
-            {
-              gdk_cairo_set_source_rgba (cr, &active_rgba);
-            }
+            gdk_cairo_set_source_rgba (cr, &active_rgba);
           else if (binary->show_inactive)
-            {
-              gdk_cairo_set_source_rgba (cr, &inactive_rgba);
-            }
+            gdk_cairo_set_source_rgba (cr, &inactive_rgba);
           else
-            {
-              continue;
-            }
+            continue;
 
           /* draw the dot */
           cairo_rectangle (cr,
@@ -498,4 +487,3 @@ xfce_clock_binary_new (ClockTime *time)
 
   return GTK_WIDGET (binary);
 }
-
