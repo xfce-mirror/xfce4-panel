@@ -389,9 +389,11 @@ xfce_clock_binary_draw (GtkWidget *widget,
   w = alloc.width / cols;
   h = alloc.height / rows;
 
+  gtk_style_context_get_color (ctx, state_flags, &active_rgba);
+  grid_rgba = inactive_rgba = active_rgba;
+
   if (binary->show_grid)
     {
-      gtk_style_context_get_color (ctx, state_flags, &grid_rgba);
       grid_rgba.alpha = 0.4;
       gdk_cairo_set_source_rgba (cr, &grid_rgba);
       cairo_set_line_width (cr, 1);
@@ -419,8 +421,6 @@ xfce_clock_binary_draw (GtkWidget *widget,
   else
     xfce_clock_binary_draw_binary (binary, table);
 
-  gtk_style_context_get_color (ctx, state_flags, &inactive_rgba);
-  active_rgba = inactive_rgba;
   inactive_rgba.alpha = 0.2;
   active_rgba.alpha = 1.0;
 
