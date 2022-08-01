@@ -274,24 +274,12 @@ xfce_clock_binary_draw_true_binary (XfceClockBinary *binary,
 
   ctx = gtk_widget_get_style_context (GTK_WIDGET (binary));
 
-  if (G_UNLIKELY (gtk_widget_get_state_flags (GTK_WIDGET (binary)) & GTK_STATE_FLAG_INSENSITIVE))
-    {
-      gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (GTK_WIDGET (binary)),
-                                   &inactive_rgba);
-      inactive_rgba.alpha = 0.2;
-      gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (GTK_WIDGET (binary)),
-                                   &active_rgba);
-      active_rgba.alpha = 1.0;
-    }
-  else
-    {
-      gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (GTK_WIDGET (binary)),
-                                   &inactive_rgba);
-      inactive_rgba.alpha = 0.2;
-      gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (GTK_WIDGET (binary)),
-                                   &active_rgba);
-      active_rgba.alpha = 1.0;
-    }
+  gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (GTK_WIDGET (binary)),
+                               &inactive_rgba);
+  inactive_rgba.alpha = 0.2;
+  gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (GTK_WIDGET (binary)),
+                               &active_rgba);
+  active_rgba.alpha = 1.0;
 
   time = clock_time_get_time (binary->time);
 
@@ -371,24 +359,12 @@ xfce_clock_binary_draw_binary (XfceClockBinary *binary,
 
   ctx = gtk_widget_get_style_context (GTK_WIDGET (binary));
 
-  if (G_UNLIKELY (gtk_widget_get_state_flags (GTK_WIDGET (binary)) & GTK_STATE_FLAG_INSENSITIVE))
-    {
-      gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (GTK_WIDGET (binary)),
-                                   &inactive_rgba);
-      inactive_rgba.alpha = 0.2;
-      gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (GTK_WIDGET (binary)),
-                                   &active_rgba);
-      active_rgba.alpha = 1.0;
-    }
-  else
-    {
-      gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (GTK_WIDGET (binary)),
-                                   &inactive_rgba);
-      inactive_rgba.alpha = 0.2;
-      gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (GTK_WIDGET (binary)),
-                                   &active_rgba);
-      active_rgba.alpha = 1.0;
-    }
+  gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (GTK_WIDGET (binary)),
+                               &inactive_rgba);
+  inactive_rgba.alpha = 0.2;
+  gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (GTK_WIDGET (binary)),
+                               &active_rgba);
+  active_rgba.alpha = 1.0;
 
   time = clock_time_get_time (binary->time);
 
