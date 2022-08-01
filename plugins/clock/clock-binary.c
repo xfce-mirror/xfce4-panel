@@ -351,6 +351,7 @@ xfce_clock_binary_draw (GtkWidget *widget,
   gint              pad_x, pad_y;
   gint              diff;
   GtkStyleContext  *ctx;
+  GtkStateFlags     state_flags;
   GdkRGBA           active_rgba, inactive_rgba, grid_rgba;
   GtkBorder         padding;
   gint             *table;
@@ -360,7 +361,8 @@ xfce_clock_binary_draw (GtkWidget *widget,
   panel_return_val_if_fail (cr != NULL, FALSE);
 
   ctx = gtk_widget_get_style_context (widget);
-  gtk_style_context_get_padding (ctx, gtk_widget_get_state_flags (widget), &padding);
+  state_flags = gtk_widget_get_state_flags (widget);
+  gtk_style_context_get_padding (ctx, state_flags, &padding);
   pad_x = MAX (padding.left, padding.right);
   pad_y = MAX (padding.top, padding.bottom);
 
@@ -389,8 +391,7 @@ xfce_clock_binary_draw (GtkWidget *widget,
 
   if (binary->show_grid)
     {
-      gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (widget),
-                                   &grid_rgba);
+      gtk_style_context_get_color (ctx, state_flags, &grid_rgba);
       grid_rgba.alpha = 0.4;
       gdk_cairo_set_source_rgba (cr, &grid_rgba);
       cairo_set_line_width (cr, 1);
@@ -418,8 +419,7 @@ xfce_clock_binary_draw (GtkWidget *widget,
   else
     xfce_clock_binary_draw_binary (binary, table);
 
-  gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (widget),
-                               &inactive_rgba);
+  gtk_style_context_get_color (ctx, state_flags, &inactive_rgba);
   active_rgba = inactive_rgba;
   inactive_rgba.alpha = 0.2;
   active_rgba.alpha = 1.0;
