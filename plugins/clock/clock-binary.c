@@ -449,17 +449,14 @@ xfce_clock_binary_draw (GtkWidget *widget,
       x = alloc.x - 0.5;
       y = alloc.y - 0.5;
 
-      cairo_rectangle (cr, x, y, alloc.width, alloc.height);
-      cairo_stroke (cr);
-
-      for (col = 1; col < cols; col++)
+      for (col = 0; col <= cols; col++)
         {
           cairo_move_to (cr, x + col * w, alloc.y);
           cairo_rel_line_to (cr, 0, alloc.height);
           cairo_stroke (cr);
         }
 
-      for (row = 1; row < rows; row++)
+      for (row = 0; row <= rows; row++)
         {
           cairo_move_to (cr, alloc.x, y + row * h);
           cairo_rel_line_to (cr, alloc.width, 0);
