@@ -257,18 +257,14 @@ xfce_clock_binary_finalize (GObject *object)
 
 
 static void
-xfce_clock_binary_draw_true_binary (XfceClockBinary *binary,
-                                    gint            *table)
+xfce_clock_binary_draw_true_binary (gint            *table,
+                                    GDateTime       *time,
+                                    gint             rows,
+                                    gint             cols)
 {
-  GDateTime        *time;
-  gint              row, rows;
+  gint              row, col;
   static gint       binary_table[] = { 32, 16, 8, 4, 2, 1 };
-  gint              col, cols = G_N_ELEMENTS (binary_table);
   gint              ticks;
-
-  time = clock_time_get_time (binary->time);
-
-  rows = binary->show_seconds ? 3 : 2;
 
   for (row = 0; row < rows; row++)
     {
@@ -289,27 +285,20 @@ xfce_clock_binary_draw_true_binary (XfceClockBinary *binary,
             }
         }
     }
-
-  g_date_time_unref (time);
 }
 
 
 
 static void
-xfce_clock_binary_draw_binary (XfceClockBinary *binary,
-                               gint            *table)
+xfce_clock_binary_draw_binary (gint            *table,
+                               GDateTime       *time,
+                               gint             rows,
+                               gint             cols)
 {
   static gint       binary_table[] = { 80, 40, 20, 10, 8, 4, 2, 1 };
-  GDateTime        *time;
-  gint              row, rows = G_N_ELEMENTS (binary_table) / 2;
-  gint              col, cols;
+  gint              row, col;
   gint              digit;
   gint              ticks = 0;
-
-  time = clock_time_get_time (binary->time);
-
-  /* make sure the cols are all equal */
-  cols = binary->show_seconds ? 6 : 4;
 
   for (col = 0; col < cols; col++)
     {
@@ -331,8 +320,6 @@ xfce_clock_binary_draw_binary (XfceClockBinary *binary,
             }
         }
     }
-
-  g_date_time_unref (time);
 }
 
 
@@ -355,6 +342,7 @@ xfce_clock_binary_draw (GtkWidget *widget,
   GdkRGBA           active_rgba, inactive_rgba, grid_rgba;
   GtkBorder         padding;
   gint             *table;
+  GDateTime        *time;
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_BINARY (binary), FALSE);
   //panel_return_val_if_fail (gtk_widget_get_has_window (widget), FALSE);
@@ -416,10 +404,14 @@ xfce_clock_binary_draw (GtkWidget *widget,
         }
     }
 
+  time = clock_time_get_time (binary->time);
+
   if (binary->true_binary)
-    xfce_clock_binary_draw_true_binary (binary, table);
+    xfce_clock_binary_draw_true_binary (table, time, rows, cols);
   else
-    xfce_clock_binary_draw_binary (binary, table);
+    xfce_clock_binary_draw_binary (table, time, rows, cols);
+
+  g_date_time_unref (time);
 
   inactive_rgba.alpha = 0.2;
   active_rgba.alpha = 1.0;
