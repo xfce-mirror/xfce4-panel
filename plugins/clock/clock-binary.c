@@ -258,34 +258,17 @@ xfce_clock_binary_finalize (GObject *object)
 
 static void
 xfce_clock_binary_draw_true_binary (XfceClockBinary *binary,
-                                    cairo_t         *cr,
-                                    GtkAllocation   *alloc)
+                                    gint            *table)
 {
   GDateTime        *time;
   gint              row, rows;
   static gint       binary_table[] = { 32, 16, 8, 4, 2, 1 };
   gint              col, cols = G_N_ELEMENTS (binary_table);
-  gint              w, h;
   gint              ticks;
-  GtkStyleContext  *ctx;
-  GdkRGBA           active_rgba, inactive_rgba;
-  gint             *table;
-
-  ctx = gtk_widget_get_style_context (GTK_WIDGET (binary));
-
-  gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (GTK_WIDGET (binary)),
-                               &inactive_rgba);
-  active_rgba = inactive_rgba;
-  inactive_rgba.alpha = 0.2;
-  active_rgba.alpha = 1.0;
 
   time = clock_time_get_time (binary->time);
 
   rows = binary->show_seconds ? 3 : 2;
-  table = g_new0 (typeof(*table), cols);
-
-  w = alloc->width / cols;
-  h = alloc->height / rows;
 
   for (row = 0; row < rows; row++)
     {
@@ -307,30 +290,6 @@ xfce_clock_binary_draw_true_binary (XfceClockBinary *binary,
         }
     }
 
-  for (row = 0; row < rows; row++)
-    {
-      for (col = 0; col < cols; col++)
-        {
-          if (table[col] & (1 << row))
-            {
-              gdk_cairo_set_source_rgba (cr, &active_rgba);
-            }
-          else if (binary->show_inactive)
-            {
-              gdk_cairo_set_source_rgba (cr, &inactive_rgba);
-            }
-          else
-            {
-              continue;
-            }
-
-          /* draw the dot */
-          cairo_rectangle (cr, alloc->x + col * w, alloc->y + row * h, w - 1, h - 1);
-          cairo_fill (cr);
-        }
-    }
-
-  g_free (table);
   g_date_time_unref (time);
 }
 
@@ -338,36 +297,19 @@ xfce_clock_binary_draw_true_binary (XfceClockBinary *binary,
 
 static void
 xfce_clock_binary_draw_binary (XfceClockBinary *binary,
-                                     cairo_t         *cr,
-                                     GtkAllocation   *alloc)
+                                     gint            *table)
 {
   static gint       binary_table[] = { 80, 40, 20, 10, 8, 4, 2, 1 };
   GDateTime        *time;
   gint              row, rows = G_N_ELEMENTS (binary_table) / 2;
   gint              col, cols;
   gint              digit;
-  gint              w, h;
   gint              ticks = 0;
-  GtkStyleContext  *ctx;
-  GdkRGBA           active_rgba, inactive_rgba;
-  gint             *table;
-
-  ctx = gtk_widget_get_style_context (GTK_WIDGET (binary));
-
-  gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (GTK_WIDGET (binary)),
-                               &inactive_rgba);
-  active_rgba = inactive_rgba;
-  inactive_rgba.alpha = 0.2;
-  active_rgba.alpha = 1.0;
 
   time = clock_time_get_time (binary->time);
 
   /* make sure the cols are all equal */
   cols = binary->show_seconds ? 6 : 4;
-  table = g_new0 (typeof(*table), cols);
-
-  w = alloc->width / cols;
-  h = alloc->height / rows;
 
   for (col = 0; col < cols; col++)
     {
@@ -390,30 +332,6 @@ xfce_clock_binary_draw_binary (XfceClockBinary *binary,
         }
     }
 
-  for (col = 0; col < cols; col++)
-    {
-      for (row = 0; row < rows; row++)
-        {
-          if (table[col] & (1 << row))
-            {
-              gdk_cairo_set_source_rgba (cr, &active_rgba);
-            }
-          else if (binary->show_inactive)
-            {
-              gdk_cairo_set_source_rgba (cr, &inactive_rgba);
-            }
-          else
-            {
-              continue;
-            }
-
-          /* draw the dot */
-          cairo_rectangle (cr, alloc->x + col * w, alloc->y + row * h, w - 1, h - 1);
-          cairo_fill (cr);
-        }
-    }
-
-  g_free (table);
   g_date_time_unref (time);
 }
 
@@ -433,8 +351,9 @@ xfce_clock_binary_draw (GtkWidget *widget,
   gint              pad_x, pad_y;
   gint              diff;
   GtkStyleContext  *ctx;
-  GdkRGBA           grid_rgba;
+  GdkRGBA           active_rgba, inactive_rgba, grid_rgba;
   GtkBorder         padding;
+  gint             *table;
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_BINARY (binary), FALSE);
   //panel_return_val_if_fail (gtk_widget_get_has_window (widget), FALSE);
@@ -463,6 +382,11 @@ xfce_clock_binary_draw (GtkWidget *widget,
   alloc.height -= diff;
   alloc.y += diff / 2;
 
+  table = g_new0 (typeof(*table), cols);
+
+  w = alloc.width / cols;
+  h = alloc.height / rows;
+
   if (binary->show_grid)
     {
       gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (widget),
@@ -470,9 +394,6 @@ xfce_clock_binary_draw (GtkWidget *widget,
       grid_rgba.alpha = 0.4;
       gdk_cairo_set_source_rgba (cr, &grid_rgba);
       cairo_set_line_width (cr, 1);
-
-      w = alloc.width / cols;
-      h = alloc.height / rows;
 
       x = alloc.x - 0.5;
       y = alloc.y - 0.5;
@@ -493,9 +414,40 @@ xfce_clock_binary_draw (GtkWidget *widget,
     }
 
   if (binary->true_binary)
-    xfce_clock_binary_draw_true_binary (binary, cr, &alloc);
+    xfce_clock_binary_draw_true_binary (binary, table);
   else
-    xfce_clock_binary_draw_binary (binary, cr, &alloc);
+    xfce_clock_binary_draw_binary (binary, table);
+
+  gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (widget),
+                               &inactive_rgba);
+  active_rgba = inactive_rgba;
+  inactive_rgba.alpha = 0.2;
+  active_rgba.alpha = 1.0;
+
+  for (col = 0; col < cols; col++)
+    {
+      for (row = 0; row < rows; row++)
+        {
+          if (table[col] & (1 << row))
+            {
+              gdk_cairo_set_source_rgba (cr, &active_rgba);
+            }
+          else if (binary->show_inactive)
+            {
+              gdk_cairo_set_source_rgba (cr, &inactive_rgba);
+            }
+          else
+            {
+              continue;
+            }
+
+          /* draw the dot */
+          cairo_rectangle (cr, alloc.x + col * w, alloc.y + row * h, w - 1, h - 1);
+          cairo_fill (cr);
+        }
+    }
+
+  g_free (table);
 
   return FALSE;
 }
