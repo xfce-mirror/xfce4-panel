@@ -269,6 +269,7 @@ xfce_clock_binary_draw_true_binary (XfceClockBinary *binary,
   gint              ticks;
   GtkStyleContext  *ctx;
   GdkRGBA           active_rgba, inactive_rgba;
+  gint             *table;
 
   ctx = gtk_widget_get_style_context (GTK_WIDGET (binary));
 
@@ -281,6 +282,7 @@ xfce_clock_binary_draw_true_binary (XfceClockBinary *binary,
   time = clock_time_get_time (binary->time);
 
   rows = binary->show_seconds ? 3 : 2;
+  table = g_new0 (typeof(*table), cols);
 
   w = alloc->width / cols;
   h = alloc->height / rows;
@@ -299,8 +301,19 @@ xfce_clock_binary_draw_true_binary (XfceClockBinary *binary,
         {
           if (ticks >= binary_table[col])
             {
-              gdk_cairo_set_source_rgba (cr, &active_rgba);
+              table[col] |= 1 << row;
               ticks -= binary_table[col];
+            }
+        }
+    }
+
+  for (row = 0; row < rows; row++)
+    {
+      for (col = 0; col < cols; col++)
+        {
+          if (table[col] & (1 << row))
+            {
+              gdk_cairo_set_source_rgba (cr, &active_rgba);
             }
           else if (binary->show_inactive)
             {
@@ -317,6 +330,7 @@ xfce_clock_binary_draw_true_binary (XfceClockBinary *binary,
         }
     }
 
+  g_free (table);
   g_date_time_unref (time);
 }
 
@@ -336,6 +350,7 @@ xfce_clock_binary_draw_binary (XfceClockBinary *binary,
   gint              ticks = 0;
   GtkStyleContext  *ctx;
   GdkRGBA           active_rgba, inactive_rgba;
+  gint             *table;
 
   ctx = gtk_widget_get_style_context (GTK_WIDGET (binary));
 
@@ -349,6 +364,7 @@ xfce_clock_binary_draw_binary (XfceClockBinary *binary,
 
   /* make sure the cols are all equal */
   cols = binary->show_seconds ? 6 : 4;
+  table = g_new0 (typeof(*table), cols);
 
   w = alloc->width / cols;
   h = alloc->height / rows;
@@ -368,8 +384,19 @@ xfce_clock_binary_draw_binary (XfceClockBinary *binary,
           digit = row + (4 * (col % 2));
           if (ticks >= binary_table[digit])
             {
-              gdk_cairo_set_source_rgba (cr, &active_rgba);
+              table[col] |= 1 << row;
               ticks -= binary_table[digit];
+            }
+        }
+    }
+
+  for (col = 0; col < cols; col++)
+    {
+      for (row = 0; row < rows; row++)
+        {
+          if (table[col] & (1 << row))
+            {
+              gdk_cairo_set_source_rgba (cr, &active_rgba);
             }
           else if (binary->show_inactive)
             {
@@ -386,6 +413,7 @@ xfce_clock_binary_draw_binary (XfceClockBinary *binary,
         }
     }
 
+  g_free (table);
   g_date_time_unref (time);
 }
 
