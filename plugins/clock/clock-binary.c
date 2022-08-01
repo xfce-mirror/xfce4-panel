@@ -278,10 +278,9 @@ xfce_clock_binary_draw_true_binary (gint            *table,
 
       for (col = 0; col < cols; col++)
         {
-          if (ticks >= binary_table[col])
+          if (ticks & binary_table[col])
             {
               table[col] |= 1 << row;
-              ticks -= binary_table[col];
             }
         }
     }
