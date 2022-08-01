@@ -265,8 +265,7 @@ xfce_clock_binary_draw_true_binary (XfceClockBinary *binary,
   gint              row, rows;
   static gint       binary_table[] = { 32, 16, 8, 4, 2, 1 };
   gint              col, cols = G_N_ELEMENTS (binary_table);
-  gint              offset_x, offset_y;
-  gint              w, h, x;
+  gint              w, h;
   gint              ticks;
   GtkStyleContext  *ctx;
   GdkRGBA           active_rgba, inactive_rgba;
@@ -280,8 +279,6 @@ xfce_clock_binary_draw_true_binary (XfceClockBinary *binary,
   active_rgba.alpha = 1.0;
 
   time = clock_time_get_time (binary->time);
-
-  offset_y = alloc->y;
 
   rows = binary->show_seconds ? 3 : 2;
 
@@ -298,13 +295,8 @@ xfce_clock_binary_draw_true_binary (XfceClockBinary *binary,
       else
         ticks = g_date_time_get_second (time);
 
-      offset_x = alloc->x;
-
       for (col = 0; col < cols; col++)
         {
-          x = offset_x;
-          offset_x += w;
-
           if (ticks >= binary_table[col])
             {
               gdk_cairo_set_source_rgba (cr, &active_rgba);
@@ -320,12 +312,9 @@ xfce_clock_binary_draw_true_binary (XfceClockBinary *binary,
             }
 
           /* draw the dot */
-          cairo_rectangle (cr, x, offset_y, w - 1, h - 1);
+          cairo_rectangle (cr, alloc->x + col * w, alloc->y + row * h, w - 1, h - 1);
           cairo_fill (cr);
         }
-
-      /* advance offset */
-      offset_y += h;
     }
 
   g_date_time_unref (time);
@@ -343,8 +332,7 @@ xfce_clock_binary_draw_binary (XfceClockBinary *binary,
   gint              row, rows = G_N_ELEMENTS (binary_table) / 2;
   gint              col, cols;
   gint              digit;
-  gint              offset_x, offset_y;
-  gint              w, h, y;
+  gint              w, h;
   gint              ticks = 0;
   GtkStyleContext  *ctx;
   GdkRGBA           active_rgba, inactive_rgba;
@@ -358,8 +346,6 @@ xfce_clock_binary_draw_binary (XfceClockBinary *binary,
   active_rgba.alpha = 1.0;
 
   time = clock_time_get_time (binary->time);
-
-  offset_x = alloc->x;
 
   /* make sure the cols are all equal */
   cols = binary->show_seconds ? 6 : 4;
@@ -377,13 +363,8 @@ xfce_clock_binary_draw_binary (XfceClockBinary *binary,
       else if (col == 4)
         ticks = g_date_time_get_second (time);
 
-      offset_y = alloc->y;
-
       for (row = 0; row < rows; row++)
         {
-          y = offset_y;
-          offset_y += h;
-
           digit = row + (4 * (col % 2));
           if (ticks >= binary_table[digit])
             {
@@ -400,12 +381,9 @@ xfce_clock_binary_draw_binary (XfceClockBinary *binary,
             }
 
           /* draw the dot */
-          cairo_rectangle (cr, offset_x, y, w - 1, h - 1);
+          cairo_rectangle (cr, alloc->x + col * w, alloc->y + row * h, w - 1, h - 1);
           cairo_fill (cr);
         }
-
-      /* advance offset */
-      offset_x += w;
     }
 
   g_date_time_unref (time);
@@ -474,18 +452,16 @@ xfce_clock_binary_draw (GtkWidget *widget,
       cairo_rectangle (cr, x, y, alloc.width, alloc.height);
       cairo_stroke (cr);
 
-      for (col = 0; col < cols - 1; col++)
+      for (col = 1; col < cols; col++)
         {
-          x += w;
-          cairo_move_to (cr, x, alloc.y);
+          cairo_move_to (cr, x + col * w, alloc.y);
           cairo_rel_line_to (cr, 0, alloc.height);
           cairo_stroke (cr);
         }
 
-      for (row = 0; row < rows - 1; row++)
+      for (row = 1; row < rows; row++)
         {
-          y += h;
-          cairo_move_to (cr, alloc.x, y);
+          cairo_move_to (cr, alloc.x, y + row * h);
           cairo_rel_line_to (cr, alloc.width, 0);
           cairo_stroke (cr);
         }
