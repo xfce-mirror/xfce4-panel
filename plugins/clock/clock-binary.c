@@ -272,7 +272,7 @@ xfce_clock_binary_draw_true_binary (XfceClockBinary *binary,
   GtkStyleContext  *ctx;
   GdkRGBA           active_rgba, inactive_rgba;
 
-  ctx = gtk_widget_get_style_context (GTK_WIDGET (gtk_widget_get_parent (GTK_WIDGET (binary))));
+  ctx = gtk_widget_get_style_context (GTK_WIDGET (binary));
 
   if (G_UNLIKELY (gtk_widget_get_state_flags (GTK_WIDGET (binary)) & GTK_STATE_FLAG_INSENSITIVE))
     {
