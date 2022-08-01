@@ -263,7 +263,6 @@ xfce_clock_binary_draw_true_binary (gint            *table,
                                     gint             cols)
 {
   gint              row, col;
-  static gint       binary_table[] = { 32, 16, 8, 4, 2, 1 };
   gint              ticks;
 
   for (row = 0; row < rows; row++)
@@ -278,7 +277,7 @@ xfce_clock_binary_draw_true_binary (gint            *table,
 
       for (col = 0; col < cols; col++)
         {
-          if (ticks & binary_table[col])
+          if (ticks & (1 << (cols - 1 - col)))
             {
               table[col] |= 1 << row;
             }
