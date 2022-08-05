@@ -96,7 +96,7 @@ static void               launcher_plugin_menu_destroy                  (Launche
 static void               launcher_plugin_button_update                 (LauncherPlugin       *plugin);
 static void               launcher_plugin_button_update_action_menu     (LauncherPlugin       *plugin);
 static void               launcher_plugin_button_state_changed          (GtkWidget            *button_a,
-                                                                         GtkStateType         state,
+                                                                         GtkStateFlags         state,
                                                                          GtkWidget            *button_b);
 static gboolean           launcher_plugin_button_press_event            (GtkWidget            *button,
                                                                          GdkEventButton       *event,
@@ -408,9 +408,9 @@ launcher_plugin_init (LauncherPlugin *plugin)
   gtk_drag_dest_set (plugin->arrow, 0, NULL, 0, 0);
 
   /* sync button states */
-  g_signal_connect (G_OBJECT (plugin->button), "state-changed",
+  g_signal_connect (G_OBJECT (plugin->button), "state-flags-changed",
       G_CALLBACK (launcher_plugin_button_state_changed), plugin->arrow);
-  g_signal_connect (G_OBJECT (plugin->arrow), "state-changed",
+  g_signal_connect (G_OBJECT (plugin->arrow), "state-flags-changed",
       G_CALLBACK (launcher_plugin_button_state_changed), plugin->button);
 }
 
@@ -1891,12 +1891,12 @@ launcher_plugin_button_update_action_menu (LauncherPlugin *plugin)
 
 
 static void
-launcher_plugin_button_state_changed (GtkWidget    *button_a,
-                                      GtkStateType  state,
-                                      GtkWidget    *button_b)
+launcher_plugin_button_state_changed (GtkWidget     *button_a,
+                                      GtkStateFlags  state,
+                                      GtkWidget     *button_b)
 {
   if (gtk_widget_get_state_flags (button_a) != gtk_widget_get_state_flags (button_b)
-      && (gtk_widget_get_state_flags (button_a) & GTK_STATE_INSENSITIVE))
+      && (gtk_widget_get_state_flags (button_a) & GTK_STATE_FLAG_INSENSITIVE))
     gtk_widget_set_state_flags (button_b, gtk_widget_get_state_flags (button_a), TRUE);
 }
 
