@@ -277,16 +277,16 @@ xfce_clock_binary_draw_true_binary (gint            *table,
                                     gint             cols)
 {
   gint              row, col, ticks;
-  guint             n, p = seconds ? 10000 : 100;
+  guint             n, p;
 
   n = xfce_clock_binary_algo_value (time, seconds);
 
-  for (row = 0; row < rows; row++, p /= 100)
+  for (row = 0, p = 1; row < rows; row++, p *= 100)
     {
       ticks = n / p % 100;
       for (col = 0; col < cols; col++)
         {
-          if (ticks & (1 << (cols - 1 - col)))
+          if (ticks & (1 << col))
             table[col] |= 1 << row;
         }
     }
@@ -302,16 +302,16 @@ xfce_clock_binary_draw_binary (gint            *table,
                                gint             cols)
 {
   gint              row, col, ticks;
-  guint             n, p = seconds ? 100000 : 1000;
+  guint             n, p;
 
   n = xfce_clock_binary_algo_value (time, seconds);
 
-  for (col = 0; col < cols; col++, p /= 10)
+  for (col = 0, p = 1; col < cols; col++, p *= 10)
     {
       ticks = n / p % 10;
       for (row = 0; row < rows; row++)
         {
-          if (ticks & (1 << (rows - 1 - row)))
+          if (ticks & (1 << row))
             table[col] |= 1 << row;
         }
     }
@@ -429,7 +429,11 @@ xfce_clock_binary_draw (GtkWidget *widget,
             }
 
           /* draw the dot */
-          cairo_rectangle (cr, alloc.x + col * w, alloc.y + row * h, w - 1, h - 1);
+          cairo_rectangle (cr,
+                           alloc.x + (cols - 1 - col) * w,
+                           alloc.y + (rows - 1 - row) * h,
+                           w - 1, h - 1);
+
           cairo_fill (cr);
         }
     }
