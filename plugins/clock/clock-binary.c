@@ -287,13 +287,13 @@ xfce_clock_binary_algo_value (GDateTime *time,
 }
 
 static void
-xfce_clock_binary_draw_true_binary (gint            *table,
+xfce_clock_binary_draw_true_binary (gulong          *table,
                                     GDateTime       *time,
                                     gboolean         seconds,
                                     gint             rows,
                                     gint             cols)
 {
-  gint        row, col, ticks;
+  gint        row, ticks;
   guint       n, p;
 
   n = xfce_clock_binary_algo_value (time, seconds);
@@ -301,18 +301,14 @@ xfce_clock_binary_draw_true_binary (gint            *table,
   for (row = 0, p = 1; row < rows; row++, p *= 100)
     {
       ticks = n / p % 100;
-      for (col = 0; col < cols; col++)
-        {
-          if (ticks & (1 << col))
-            table[col] |= 1 << row;
-        }
+      *table |= ticks << (row * cols);
     }
 }
 
 
 
 static void
-xfce_clock_binary_draw_binary (gint            *table,
+xfce_clock_binary_draw_binary (gulong          *table,
                                GDateTime       *time,
                                gboolean         seconds,
                                gint             rows,
@@ -329,7 +325,7 @@ xfce_clock_binary_draw_binary (gint            *table,
       for (row = 0; row < rows; row++)
         {
           if (ticks & (1 << row))
-            table[col] |= 1 << row;
+            *table |= 1 << (row * cols + col);
         }
     }
 }
@@ -337,31 +333,20 @@ xfce_clock_binary_draw_binary (gint            *table,
 
 
 static void
-xfce_clock_binary_draw_time (gint      *table,
+xfce_clock_binary_draw_time (gulong    *table,
                              GDateTime *time,
-                             gboolean   seconds,
-                             gint       rows,
-                             gint       cols)
+                             gboolean   seconds)
 {
-  guint n, ticks, p;
-  gint row, col;
+  guint n;
 
   n = g_date_time_get_hour (time) * 60 * 60 +
     g_date_time_get_minute (time) * 60 +
     g_date_time_get_second (time);
 
-  ticks = (n * 512) / 675; // 2 ** 16 / (24 * 60 * 60)
+  *table = (n * 512) / 675; // 2 ** 16 / (24 * 60 * 60)
 
-  p = 1;
-  for (row = 0; row < rows; row++)
-    {
-      for (col = 0; col < cols; col++)
-        {
-          if (ticks & p)
-            table[col] |= 1 << row;
-          p <<= 1;
-        }
-    }
+  if (!seconds)
+    *table >>= 8;
 }
 
 
@@ -383,7 +368,7 @@ xfce_clock_binary_draw (GtkWidget *widget,
   GtkStateFlags     state_flags;
   GdkRGBA           active_rgba, inactive_rgba, grid_rgba;
   GtkBorder         padding;
-  gint             *table;
+  gulong            table = 0;
   GDateTime        *time;
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_BINARY (binary), FALSE);
@@ -429,8 +414,6 @@ xfce_clock_binary_draw (GtkWidget *widget,
   alloc.height -= diff;
   alloc.y += diff / 2;
 
-  table = g_new0 (typeof (*table), cols);
-
   w = alloc.width / cols;
   h = alloc.height / rows;
 
@@ -465,13 +448,13 @@ xfce_clock_binary_draw (GtkWidget *widget,
 
   switch (binary->mode) {
   case MODE_MAIN:
-    xfce_clock_binary_draw_binary (table, time, binary->show_seconds, rows, cols);
+    xfce_clock_binary_draw_binary (&table, time, binary->show_seconds, rows, cols);
     break;
   case MODE_TRUE:
-    xfce_clock_binary_draw_true_binary (table, time, binary->show_seconds, rows, cols);
+    xfce_clock_binary_draw_true_binary (&table, time, binary->show_seconds, rows, cols);
     break;
   case MODE_BINARY_TIME:
-    xfce_clock_binary_draw_time (table, time, binary->show_seconds, rows, cols);
+    xfce_clock_binary_draw_time (&table, time, binary->show_seconds, rows, cols);
     break;
   }
 
@@ -484,7 +467,7 @@ xfce_clock_binary_draw (GtkWidget *widget,
     {
       for (row = 0; row < rows; row++)
         {
-          if (table[col] & (1 << row))
+          if (table & (1 << (row * cols + col)))
             {
               gdk_cairo_set_source_rgba (cr, &active_rgba);
             }
@@ -506,8 +489,6 @@ xfce_clock_binary_draw (GtkWidget *widget,
           cairo_fill (cr);
         }
     }
-
-  g_free (table);
 
   return FALSE;
 }
