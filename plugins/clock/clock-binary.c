@@ -400,15 +400,15 @@ xfce_clock_binary_draw (GtkWidget *widget,
 
       for (col = 0; col <= cols; col++)
         {
-          cairo_move_to (cr, x + col * w, alloc.y);
-          cairo_rel_line_to (cr, 0, alloc.height);
+          cairo_move_to (cr, x + col * w, alloc.y - 1);
+          cairo_rel_line_to (cr, 0, alloc.height + 1);
           cairo_stroke (cr);
         }
 
       for (row = 0; row <= rows; row++)
         {
-          cairo_move_to (cr, alloc.x, y + row * h);
-          cairo_rel_line_to (cr, alloc.width, 0);
+          cairo_move_to (cr, alloc.x - 1, y + row * h);
+          cairo_rel_line_to (cr, alloc.width + 1, 0);
           cairo_stroke (cr);
         }
     }
