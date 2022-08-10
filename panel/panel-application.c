@@ -1204,21 +1204,30 @@ panel_application_get (void)
 
 
 
-void
+gboolean
 panel_application_load (PanelApplication  *application,
                         gboolean           disable_wm_check)
 {
 #ifdef GDK_WINDOWING_X11
+  Display    *display;
   WaitForWM  *wfwm;
   guint       i;
   gchar     **atom_names;
 
   if (!disable_wm_check)
     {
+      display = XOpenDisplay (NULL);
+      if (display == NULL)
+        {
+          g_message ("Unable to open display from environment variable DISPLAY='%s', exiting.",
+                     g_getenv ("DISPLAY"));
+          return FALSE;
+        }
+
       /* setup data for wm checking */
       wfwm = g_slice_new0 (WaitForWM);
       wfwm->application = application;
-      wfwm->dpy = XOpenDisplay (NULL);
+      wfwm->dpy = display;
       wfwm->have_wm = FALSE;
       wfwm->counter = 0;
 
@@ -1249,6 +1258,8 @@ panel_application_load (PanelApplication  *application,
   /* directly launch */
   panel_application_load_real (application);
 #endif
+
+  return TRUE;
 }
 
 

@@ -218,7 +218,8 @@ panel_dbus_name_acquired (GDBusConnection *connection,
                           gpointer         user_data)
 {
   application = panel_application_get ();
-  panel_application_load (application, opt_disable_wm_check);
+  if (! panel_application_load (application, opt_disable_wm_check))
+    gtk_main_quit ();
 }
 
 
