@@ -383,13 +383,14 @@ xfce_clock_analog_update (XfceClockAnalog *analog,
 
 
 GtkWidget *
-xfce_clock_analog_new (ClockTime *time)
+xfce_clock_analog_new (ClockTime *time, ClockSleepMonitor *sleep_monitor)
 {
   XfceClockAnalog *analog = g_object_new (XFCE_CLOCK_TYPE_ANALOG, NULL);
 
   analog->time = time;
   analog->timeout = clock_time_timeout_new (CLOCK_INTERVAL_MINUTE,
                                             analog->time,
+                                            sleep_monitor,
                                             G_CALLBACK (xfce_clock_analog_update), analog);
 
   return GTK_WIDGET (analog);

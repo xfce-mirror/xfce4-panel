@@ -472,13 +472,14 @@ xfce_clock_binary_update (XfceClockBinary     *binary,
 
 
 GtkWidget *
-xfce_clock_binary_new (ClockTime *time)
+xfce_clock_binary_new (ClockTime *time, ClockSleepMonitor *sleep_monitor)
 {
   XfceClockBinary *binary = g_object_new (XFCE_CLOCK_TYPE_BINARY, NULL);
 
   binary->time = time;
   binary->timeout = clock_time_timeout_new (CLOCK_INTERVAL_MINUTE,
                                             binary->time,
+                                            sleep_monitor,
                                             G_CALLBACK (xfce_clock_binary_update), binary);
 
   return GTK_WIDGET (binary);
