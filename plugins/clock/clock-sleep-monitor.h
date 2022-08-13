@@ -25,7 +25,7 @@ G_BEGIN_DECLS
 
 typedef struct _ClockSleepMonitor ClockSleepMonitor;
 
-GType clock_sleep_monitor_get_type(void) G_GNUC_CONST;
+GType clock_sleep_monitor_get_type (void) G_GNUC_CONST;
 
 #define XFCE_TYPE_CLOCK_SLEEP_MONITOR (clock_sleep_monitor_get_type ())
 #define XFCE_CLOCK_SLEEP_MONITOR(object) (G_TYPE_CHECK_INSTANCE_CAST((object), XFCE_TYPE_CLOCK_SLEEP_MONITOR, ClockSleepMonitor))
@@ -37,6 +37,6 @@ GType clock_sleep_monitor_get_type(void) G_GNUC_CONST;
  * The sleep monitor emits a signal `woke-up()` when it detects wakeup
  * from a sleep state.
  */
-ClockSleepMonitor* clock_sleep_monitor_create(void);
+ClockSleepMonitor* clock_sleep_monitor_create (void);
 
 G_END_DECLS
