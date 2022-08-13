@@ -103,7 +103,6 @@ struct _ClockSleepMonitorLogind
 {
   ClockSleepMonitor parent_instance;
   GDBusProxy *logind_proxy;
-  guint logind_signal_id;
 };
 
 struct _ClockSleepMonitorLogindClass
@@ -143,8 +142,7 @@ static void clock_sleep_monitor_logind_finalize (GObject *object)
 
   if (monitor->logind_proxy != NULL)
     {
-      if (monitor->logind_signal_id != 0)
-	g_signal_handler_disconnect (monitor->logind_proxy, monitor->logind_signal_id);
+      g_signal_handlers_disconnect_by_data (monitor->logind_proxy, monitor);
       g_object_unref (G_OBJECT (monitor->logind_proxy));
     }
 
@@ -179,6 +177,7 @@ static void on_logind_signal (
 static ClockSleepMonitor* clock_sleep_monitor_logind_create (void)
 {
   ClockSleepMonitorLogind* monitor;
+  guint handler_id;
 
   g_message ("trying to instantiate logind sleep monitor");
 
@@ -199,8 +198,8 @@ static ClockSleepMonitor* clock_sleep_monitor_logind_create (void)
       return NULL;
     }
 
-  monitor->logind_signal_id = g_signal_connect (monitor->logind_proxy, "g-signal", G_CALLBACK (on_logind_signal), monitor);
-  if (monitor->logind_signal_id == 0)
+  handler_id = g_signal_connect (monitor->logind_proxy, "g-signal", G_CALLBACK (on_logind_signal), monitor);
+  if (handler_id == 0)
     {
       g_critical ("could not connect to logind signal");
       g_object_unref (G_OBJECT (monitor));
