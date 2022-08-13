@@ -156,12 +156,10 @@ static void on_logind_signal (
     gchar *sender_name,
     gchar *signal_name,
     GVariant *parameters,
-    ClockSleepMonitorLogind *monitor)
+    ClockSleepMonitor *monitor)
 {
   const gchar *format_string = "(b)";
   gboolean going_to_sleep;
-
-  g_return_if_fail (XFCE_IS_CLOCK_SLEEP_MONITOR_LOGIND (monitor));
 
   if (strcmp (signal_name, "PrepareForSleep") != 0)
     return;
