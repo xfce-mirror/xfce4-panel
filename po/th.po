@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-27 12:48+0200\n"
+"POT-Creation-Date: 2022-08-13 12:48+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Theppitak Karoonboonyanan <theppitak@gmail.com>, 2013,2015,2017,2021\n"
 "Language-Team: Thai (http://www.transifex.com/xfce/xfce4-panel/language/th/)\n"
@@ -114,7 +114,7 @@ msgstr "_ออกจากระบบ"
 #: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3145
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
-#: ../plugins/clock/clock-dialog.glade.h:8
+#: ../plugins/clock/clock-dialog.glade.h:11
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 #: ../plugins/pager/pager-dialog.glade.h:4
@@ -178,73 +178,73 @@ msgid "Name %s lost on the message dbus, exiting."
 msgstr "ชื่อ %s สูญหายใน dbus ข้อความ ขอจบการทำงาน"
 
 #. parse context options
-#: ../panel/main.c:270
+#: ../panel/main.c:271
 msgid "[ARGUMENTS...]"
 msgstr "[อาร์กิวเมนต์...]"
 
-#: ../panel/main.c:277
+#: ../panel/main.c:278
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "สั่ง \"%s --help\" เพื่อดูวิธีใช้"
 
-#: ../panel/main.c:296
+#: ../panel/main.c:297
 msgid "The Xfce development team. All rights reserved."
 msgstr "The Xfce development team. All rights reserved."
 
-#: ../panel/main.c:297
+#: ../panel/main.c:298
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "หากพบปัญหา กรุณารายงานที่ <%s>"
 
 #. quit without error if an instance is running
-#: ../panel/main.c:395
+#: ../panel/main.c:396
 msgid "There is already a running instance"
 msgstr "มีอินสแตนซ์อื่นทำงานอยู่ก่อนแล้ว"
 
 #. spawn ourselfs again
-#: ../panel/main.c:403
+#: ../panel/main.c:404
 msgid "Restarting..."
 msgstr "กำลังเริ่มเปิดใหม่..."
 
-#: ../panel/main.c:418
+#: ../panel/main.c:419
 msgid "Failed to show the preferences dialog"
 msgstr "แสดงกล่องโต้ตอบปรับแต่งไม่สำเร็จ"
 
-#: ../panel/main.c:420
+#: ../panel/main.c:421
 msgid "Failed to show the add new items dialog"
 msgstr "แสดงกล่องโต้ตอบเพิ่มรายการใหม่ไม่สำเร็จ"
 
-#: ../panel/main.c:422
+#: ../panel/main.c:423
 msgid "Failed to save the panel configuration"
 msgstr "บันทึกค่าตั้งของพาเนลไม่สำเร็จ"
 
-#: ../panel/main.c:424
+#: ../panel/main.c:425
 msgid "Failed to add a plugin to the panel"
 msgstr "เพิ่มปลั๊กอินลงในพาเนลไม่สำเร็จ"
 
-#: ../panel/main.c:426
+#: ../panel/main.c:427
 msgid "Failed to restart the panel"
 msgstr "เริ่มเปิดพาเนลใหม่ไม่สำเร็จ"
 
-#: ../panel/main.c:428
+#: ../panel/main.c:429
 msgid "Failed to quit the panel"
 msgstr "จบการทำงานของพาเนลไม่สำเร็จ"
 
-#: ../panel/main.c:430
+#: ../panel/main.c:431
 msgid "Failed to send D-Bus message"
 msgstr "ส่งข้อความ D-Bus ไม่สำเร็จ"
 
-#: ../panel/main.c:440
+#: ../panel/main.c:441
 msgid "Execute"
 msgstr "เปิดทำงาน"
 
-#: ../panel/main.c:441
+#: ../panel/main.c:442
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "คุณต้องการจะเปิดทำงานพาเนลหรือไม่? ถ้าต้องการ ก็กรุณาตรวจสอบให้แน่ใจว่าคุณได้บันทึกวาระขณะออกจากระบบ เพื่อที่วาระจะได้เปิดทำงานพาเนลโดยอัตโนมัติเมื่อคุณเข้าระบบครั้งต่อไป"
 
-#: ../panel/main.c:444 ../panel/main.c:458
+#: ../panel/main.c:445 ../panel/main.c:459
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "ไม่พบอินสแตนซ์ของ %s ที่ทำงานอยู่"
@@ -269,21 +269,21 @@ msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "สร้างปุ่มเรียกโปรแกรมจากแฟ้มเดสก์ท็อป %d แฟ้ม"
 
-#: ../panel/panel-application.c:1751
+#: ../panel/panel-application.c:1762
 msgid "Quit"
 msgstr "ออก"
 
-#: ../panel/panel-application.c:1752
+#: ../panel/panel-application.c:1763
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "คุณได้เปิดทำงาน X โดยไม่มีโปรแกรมจัดการวาระ ถ้าคลิกปุ่ม \"ออก\" ก็จะเป็นการปิด X server"
 
-#: ../panel/panel-application.c:1753
+#: ../panel/panel-application.c:1764
 msgid "Are you sure you want to quit the panel?"
 msgstr "ยืนยันที่จะปิดพาเนลหรือไม่?"
 
-#: ../panel/panel-application.c:1761
+#: ../panel/panel-application.c:1772
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "เรียกทำงานคำสั่ง \"%s\" ไม่สำเร็จ"
@@ -352,7 +352,7 @@ msgstr "เพิ่มรายการใหม่"
 #: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:7
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#: ../plugins/clock/clock-dialog.glade.h:7
+#: ../plugins/clock/clock-dialog.glade.h:10
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:5
@@ -972,7 +972,7 @@ msgid ""
 msgstr "เลือกตัวเลือกนี้ถ้าต้องการแสดงชื่อทั่วไปของโปรแกรมในเมนู เช่น \"โปรแกรมจัดการแฟ้ม\" แทนที่จะเป็น \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-#: ../plugins/clock/clock-dialog.glade.h:17
+#: ../plugins/clock/clock-dialog.glade.h:20
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
@@ -1099,29 +1099,41 @@ msgid "LCD"
 msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.glade.h:6
+msgid "Decimal"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:7
+msgid "Sexagesimal"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:8
+msgid "Binary time"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:9
 #: ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "นาฬิกา"
 
-#: ../plugins/clock/clock-dialog.glade.h:9
+#: ../plugins/clock/clock-dialog.glade.h:12
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
 msgstr "ชื่อของเขตเวลาตามชื่อแฟ้มในฐานข้อมูล zoneinfo ตัวอย่างเช่น \"America/New_York\" หากปล่อยเป็นค่าว่างไว้จะหมายถึงเวลาท้องถิ่นของระบบ"
 
-#: ../plugins/clock/clock-dialog.glade.h:10
+#: ../plugins/clock/clock-dialog.glade.h:13
 msgid "Time_zone:"
 msgstr "เ_ขตเวลา:"
 
-#: ../plugins/clock/clock-dialog.glade.h:11
+#: ../plugins/clock/clock-dialog.glade.h:14
 msgid "Time and Date _Settings..."
 msgstr "ค่า_ตั้งเวลาและวันที่..."
 
-#: ../plugins/clock/clock-dialog.glade.h:12
+#: ../plugins/clock/clock-dialog.glade.h:15
 msgid "Time Settings"
 msgstr "ค่าตั้งเวลา"
 
-#: ../plugins/clock/clock-dialog.glade.h:14
+#: ../plugins/clock/clock-dialog.glade.h:17
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1130,53 +1142,53 @@ msgid ""
 "page for additional information."
 msgstr "รูปแบบซึ่งกำหนดส่วนต่างๆ ของวันที่และเวลาที่จะแทรกลงในพาเนล ตัวอย่างเช่น %Y จะถูกแทนที่ด้วยปี ค.ศ., %m แทนหมายเลขเดือน และ %d แทนวันที่ ในทำนองเดียวกัน แท็ก <b></b> จะทำให้ข้อความเป็นตัวหนา ดูข้อมูลเพิ่มเติมได้ที่หน้า \"วิธีใช้\""
 
-#: ../plugins/clock/clock-dialog.glade.h:15
+#: ../plugins/clock/clock-dialog.glade.h:18
 msgid "_Tooltip format:"
 msgstr "รูปแบบคำแ_นะนำเครื่องมือ:"
 
-#: ../plugins/clock/clock-dialog.glade.h:16
+#: ../plugins/clock/clock-dialog.glade.h:19
 msgid "_Layout:"
 msgstr "แ_บบนาฬิกา:"
 
-#: ../plugins/clock/clock-dialog.glade.h:18
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Sho_w AM/PM"
 msgstr "แสด_ง AM/PM"
 
-#: ../plugins/clock/clock-dialog.glade.h:19
+#: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Fl_ash time separators"
 msgstr "_กะพริบเครื่องหมายคั่นเวลา"
 
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:23
 msgid "24-_hour clock"
 msgstr "นาฬิกาแบบ 24 _ชั่วโมง"
 
-#: ../plugins/clock/clock-dialog.glade.h:21
-msgid "True _binary clock"
-msgstr "นาฬิกาฐาน_สองอย่างแท้จริง"
+#: ../plugins/clock/clock-dialog.glade.h:24
+msgid "Binary mode:"
+msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "Display _seconds"
 msgstr "แสดง_วินาที"
 
-#: ../plugins/clock/clock-dialog.glade.h:23
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "F_ormat:"
 msgstr "รูปแ_บบ:"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:28
 msgid "F_uzziness:"
 msgstr "ความ_คลุมเครือ:"
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:29
 msgid "Show _inactive dots"
 msgstr "แสดงจุดที่ไ_ม่แอคทีฟ"
 
-#: ../plugins/clock/clock-dialog.glade.h:27
+#: ../plugins/clock/clock-dialog.glade.h:30
 msgid "Show gri_d"
 msgstr "แสดงเส้น_ตะแกรง"
 
-#: ../plugins/clock/clock-dialog.glade.h:28
+#: ../plugins/clock/clock-dialog.glade.h:31
 msgid "Clock Options"
 msgstr "ตัวเลือกของนาฬิกา"
 
