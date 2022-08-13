@@ -67,7 +67,6 @@ struct _ClockTimeTimeout
   ClockTime  *time;
   guint       time_changed_id;
   ClockSleepMonitor *sleep_monitor;
-  guint       woke_up_id;
 };
 
 enum
@@ -360,8 +359,8 @@ clock_time_timeout_new (guint       interval,
   if (sleep_monitor != NULL)
     {
       timeout->sleep_monitor = sleep_monitor;
-      timeout->woke_up_id = g_signal_connect_swapped (G_OBJECT (sleep_monitor), "woke-up",
-						      G_CALLBACK (clock_time_timeout_restart), timeout);
+      g_signal_connect_swapped (G_OBJECT (sleep_monitor), "woke-up",
+				G_CALLBACK (clock_time_timeout_restart), timeout);
       g_object_ref (G_OBJECT (sleep_monitor));
     }
 
@@ -457,8 +456,7 @@ clock_time_timeout_free (ClockTimeTimeout *timeout)
 
   if (timeout->sleep_monitor != NULL)
     {
-      if (timeout->woke_up_id != 0)
-	g_signal_handler_disconnect (timeout->sleep_monitor, timeout->woke_up_id);
+      g_signal_handlers_disconnect_by_data (timeout->sleep_monitor, timeout);
       g_object_unref (G_OBJECT (timeout->sleep_monitor));
     }
 
