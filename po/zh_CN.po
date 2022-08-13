@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-27 12:48+0200\n"
+"POT-Creation-Date: 2022-08-13 12:48+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: 玉堂白鹤 <yjwork@qq.com>, 2015,2017-2020,2022\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/xfce/xfce4-panel/language/zh_CN/)\n"
@@ -126,7 +126,7 @@ msgstr "注销(_O)"
 #: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3145
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
-#: ../plugins/clock/clock-dialog.glade.h:8
+#: ../plugins/clock/clock-dialog.glade.h:11
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 #: ../plugins/pager/pager-dialog.glade.h:4
@@ -190,73 +190,73 @@ msgid "Name %s lost on the message dbus, exiting."
 msgstr "名称 %s 已遗失于消息总线，现将退出。"
 
 #. parse context options
-#: ../panel/main.c:270
+#: ../panel/main.c:271
 msgid "[ARGUMENTS...]"
 msgstr "[参数...]"
 
-#: ../panel/main.c:277
+#: ../panel/main.c:278
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "输入 “%s --help” 获取用法。"
 
-#: ../panel/main.c:296
+#: ../panel/main.c:297
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce 开发团队。保留所有权利。"
 
-#: ../panel/main.c:297
+#: ../panel/main.c:298
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "请向 <%s> 报告缺陷。"
 
 #. quit without error if an instance is running
-#: ../panel/main.c:395
+#: ../panel/main.c:396
 msgid "There is already a running instance"
 msgstr "已经有一个正在运行的实例"
 
 #. spawn ourselfs again
-#: ../panel/main.c:403
+#: ../panel/main.c:404
 msgid "Restarting..."
 msgstr "正在重启..."
 
-#: ../panel/main.c:418
+#: ../panel/main.c:419
 msgid "Failed to show the preferences dialog"
 msgstr "无法显示首选项对话框"
 
-#: ../panel/main.c:420
+#: ../panel/main.c:421
 msgid "Failed to show the add new items dialog"
 msgstr "无法显示添加新项目对话框"
 
-#: ../panel/main.c:422
+#: ../panel/main.c:423
 msgid "Failed to save the panel configuration"
 msgstr "无法保存面板配置"
 
-#: ../panel/main.c:424
+#: ../panel/main.c:425
 msgid "Failed to add a plugin to the panel"
 msgstr "无法在面板上添加插件"
 
-#: ../panel/main.c:426
+#: ../panel/main.c:427
 msgid "Failed to restart the panel"
 msgstr "无法重启面板"
 
-#: ../panel/main.c:428
+#: ../panel/main.c:429
 msgid "Failed to quit the panel"
 msgstr "无法退出面板"
 
-#: ../panel/main.c:430
+#: ../panel/main.c:431
 msgid "Failed to send D-Bus message"
 msgstr "无法发送 D-Bus 信息"
 
-#: ../panel/main.c:440
+#: ../panel/main.c:441
 msgid "Execute"
 msgstr "执行"
 
-#: ../panel/main.c:441
+#: ../panel/main.c:442
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "您要启动面板吗？如果是，您一定要在注销时保存会话，这样面板会在您下次登录时自动启动。"
 
-#: ../panel/main.c:444 ../panel/main.c:458
+#: ../panel/main.c:445 ../panel/main.c:459
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "未发现正在运行的 %s 实例"
@@ -281,21 +281,21 @@ msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "从 %d 个桌面文件创建新的启动器"
 
-#: ../panel/panel-application.c:1751
+#: ../panel/panel-application.c:1762
 msgid "Quit"
 msgstr "退出"
 
-#: ../panel/panel-application.c:1752
+#: ../panel/panel-application.c:1763
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "您启动了不带会话管理器的 X。点击退出将关闭此 X 服务器。"
 
-#: ../panel/panel-application.c:1753
+#: ../panel/panel-application.c:1764
 msgid "Are you sure you want to quit the panel?"
 msgstr "您确定要退出面板吗？"
 
-#: ../panel/panel-application.c:1761
+#: ../panel/panel-application.c:1772
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "无法执行命令 “%s”"
@@ -364,7 +364,7 @@ msgstr "添加新项目"
 #: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:7
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#: ../plugins/clock/clock-dialog.glade.h:7
+#: ../plugins/clock/clock-dialog.glade.h:10
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:5
@@ -984,7 +984,7 @@ msgid ""
 msgstr "选择此项在菜单中显示通用应用程序名称，比如用 “文件管理器” 而不是 “Thunar”"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-#: ../plugins/clock/clock-dialog.glade.h:17
+#: ../plugins/clock/clock-dialog.glade.h:20
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
@@ -1111,29 +1111,41 @@ msgid "LCD"
 msgstr "液晶式"
 
 #: ../plugins/clock/clock-dialog.glade.h:6
+msgid "Decimal"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:7
+msgid "Sexagesimal"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:8
+msgid "Binary time"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:9
 #: ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "时钟"
 
-#: ../plugins/clock/clock-dialog.glade.h:9
+#: ../plugins/clock/clock-dialog.glade.h:12
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
 msgstr "与一个时区的名称相对应的信息在时区数据库中。比如“美国/纽约”。留空代表使用本地时间。"
 
-#: ../plugins/clock/clock-dialog.glade.h:10
+#: ../plugins/clock/clock-dialog.glade.h:13
 msgid "Time_zone:"
 msgstr "时区："
 
-#: ../plugins/clock/clock-dialog.glade.h:11
+#: ../plugins/clock/clock-dialog.glade.h:14
 msgid "Time and Date _Settings..."
 msgstr "时间和日期设置(_S)..."
 
-#: ../plugins/clock/clock-dialog.glade.h:12
+#: ../plugins/clock/clock-dialog.glade.h:15
 msgid "Time Settings"
 msgstr "时间设置"
 
-#: ../plugins/clock/clock-dialog.glade.h:14
+#: ../plugins/clock/clock-dialog.glade.h:17
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1142,53 +1154,53 @@ msgid ""
 "page for additional information."
 msgstr "此格式描述要插入面板的日期和时间的部分。比如，用年替换 %Y ，同样用月和天替换 %m 和 %d 。<b></b> 请在“帮助”页面中参看额外信息。"
 
-#: ../plugins/clock/clock-dialog.glade.h:15
+#: ../plugins/clock/clock-dialog.glade.h:18
 msgid "_Tooltip format:"
 msgstr "工具提示格式(_T)："
 
-#: ../plugins/clock/clock-dialog.glade.h:16
+#: ../plugins/clock/clock-dialog.glade.h:19
 msgid "_Layout:"
 msgstr "布局(_L)："
 
-#: ../plugins/clock/clock-dialog.glade.h:18
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Sho_w AM/PM"
 msgstr "显示上午/下午(_W)"
 
-#: ../plugins/clock/clock-dialog.glade.h:19
+#: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Fl_ash time separators"
 msgstr "时间分隔符闪烁(_A)"
 
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:23
 msgid "24-_hour clock"
 msgstr "24 小时时钟(_H)"
 
-#: ../plugins/clock/clock-dialog.glade.h:21
-msgid "True _binary clock"
-msgstr "真实二进制时钟(_B)"
+#: ../plugins/clock/clock-dialog.glade.h:24
+msgid "Binary mode:"
+msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "Display _seconds"
 msgstr "显示秒(_S)"
 
-#: ../plugins/clock/clock-dialog.glade.h:23
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "F_ormat:"
 msgstr "格式(_O)："
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:28
 msgid "F_uzziness:"
 msgstr "模糊度(_U)："
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:29
 msgid "Show _inactive dots"
 msgstr "显示无效的点(_I)"
 
-#: ../plugins/clock/clock-dialog.glade.h:27
+#: ../plugins/clock/clock-dialog.glade.h:30
 msgid "Show gri_d"
 msgstr "显示网格(_D)"
 
-#: ../plugins/clock/clock-dialog.glade.h:28
+#: ../plugins/clock/clock-dialog.glade.h:31
 msgid "Clock Options"
 msgstr "时钟选项"
 
