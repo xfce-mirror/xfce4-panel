@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-27 12:48+0200\n"
+"POT-Creation-Date: 2022-08-13 12:48+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: heskjestad <cato@heskjestad.xyz>, 2022\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/xfce/xfce4-panel/language/nb/)\n"
@@ -120,7 +120,7 @@ msgstr "L_ogg ut"
 #: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3145
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
-#: ../plugins/clock/clock-dialog.glade.h:8
+#: ../plugins/clock/clock-dialog.glade.h:11
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 #: ../plugins/pager/pager-dialog.glade.h:4
@@ -184,73 +184,73 @@ msgid "Name %s lost on the message dbus, exiting."
 msgstr "Navnet %s gikk tapt på meldings-dbus, avslutter."
 
 #. parse context options
-#: ../panel/main.c:270
+#: ../panel/main.c:271
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTER…]"
 
-#: ../panel/main.c:277
+#: ../panel/main.c:278
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Skriv \"%s --help\" for bruksdetaljer."
 
-#: ../panel/main.c:296
+#: ../panel/main.c:297
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce utviklingsteam. Alle rettigheter reververt."
 
-#: ../panel/main.c:297
+#: ../panel/main.c:298
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Rapporter feil til <%s>."
 
 #. quit without error if an instance is running
-#: ../panel/main.c:395
+#: ../panel/main.c:396
 msgid "There is already a running instance"
 msgstr "Det kjører allerede en instans"
 
 #. spawn ourselfs again
-#: ../panel/main.c:403
+#: ../panel/main.c:404
 msgid "Restarting..."
 msgstr "Starter på nytt …"
 
-#: ../panel/main.c:418
+#: ../panel/main.c:419
 msgid "Failed to show the preferences dialog"
 msgstr "Klarte ikke vise innstillingsvindu"
 
-#: ../panel/main.c:420
+#: ../panel/main.c:421
 msgid "Failed to show the add new items dialog"
 msgstr "Klarte ikke vise vindu for å legge til nye elementer"
 
-#: ../panel/main.c:422
+#: ../panel/main.c:423
 msgid "Failed to save the panel configuration"
 msgstr "Klarte ikke lagre paneloppsett"
 
-#: ../panel/main.c:424
+#: ../panel/main.c:425
 msgid "Failed to add a plugin to the panel"
 msgstr "Klarte ikke legge til programtillegg til panelet"
 
-#: ../panel/main.c:426
+#: ../panel/main.c:427
 msgid "Failed to restart the panel"
 msgstr "Klarte ikke starte panelet på nytt"
 
-#: ../panel/main.c:428
+#: ../panel/main.c:429
 msgid "Failed to quit the panel"
 msgstr "Klarte ikke avslutte panelet"
 
-#: ../panel/main.c:430
+#: ../panel/main.c:431
 msgid "Failed to send D-Bus message"
 msgstr "Klarte ikke sende D-Bus melding"
 
-#: ../panel/main.c:440
+#: ../panel/main.c:441
 msgid "Execute"
 msgstr "Kjør"
 
-#: ../panel/main.c:441
+#: ../panel/main.c:442
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Ønsker du å starte panelet? Hvis ja, sørg for å lagre økten ved utlogging , slik at panelet startes automatisk neste gang du logger inn."
 
-#: ../panel/main.c:444 ../panel/main.c:458
+#: ../panel/main.c:445 ../panel/main.c:459
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Ingen aktive instanser av %s funnet"
@@ -276,21 +276,21 @@ msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Lag ny oppstarter fra %d skrivebordsfil"
 msgstr[1] "Lag ny oppstarter fra %d skrivebordsfiler"
 
-#: ../panel/panel-application.c:1751
+#: ../panel/panel-application.c:1762
 msgid "Quit"
 msgstr "Avslutt"
 
-#: ../panel/panel-application.c:1752
+#: ../panel/panel-application.c:1763
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Du har startet X uten en øktbehandler. Ved å klikke Avslutt lukkes X tjeneren."
 
-#: ../panel/panel-application.c:1753
+#: ../panel/panel-application.c:1764
 msgid "Are you sure you want to quit the panel?"
 msgstr "Er du sikker på at du vil avslutte panel?"
 
-#: ../panel/panel-application.c:1761
+#: ../panel/panel-application.c:1772
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Klarte ikke kjøre kommandoen «%s»"
@@ -359,7 +359,7 @@ msgstr "Legg til nye elementer"
 #: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:7
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#: ../plugins/clock/clock-dialog.glade.h:7
+#: ../plugins/clock/clock-dialog.glade.h:10
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:5
@@ -979,7 +979,7 @@ msgid ""
 msgstr "Velg denne for å vise generiske programnavn i menyen, for eksempel «Filbehandler» istedenfor «Thunar»"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-#: ../plugins/clock/clock-dialog.glade.h:17
+#: ../plugins/clock/clock-dialog.glade.h:20
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
@@ -1106,29 +1106,41 @@ msgid "LCD"
 msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.glade.h:6
+msgid "Decimal"
+msgstr "Desimal"
+
+#: ../plugins/clock/clock-dialog.glade.h:7
+msgid "Sexagesimal"
+msgstr "Seksagesimal"
+
+#: ../plugins/clock/clock-dialog.glade.h:8
+msgid "Binary time"
+msgstr "Binærtid"
+
+#: ../plugins/clock/clock-dialog.glade.h:9
 #: ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "Klokke"
 
-#: ../plugins/clock/clock-dialog.glade.h:9
+#: ../plugins/clock/clock-dialog.glade.h:12
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
 msgstr "Navn på tidssone som har sammenheng med fil i soneinfo-database, for eksempel «Amerika/New_York». La stå tom for å bruke lokal tid."
 
-#: ../plugins/clock/clock-dialog.glade.h:10
+#: ../plugins/clock/clock-dialog.glade.h:13
 msgid "Time_zone:"
 msgstr "Tids_sone:"
 
-#: ../plugins/clock/clock-dialog.glade.h:11
+#: ../plugins/clock/clock-dialog.glade.h:14
 msgid "Time and Date _Settings..."
 msgstr "Tid og dato-_innstillinger …"
 
-#: ../plugins/clock/clock-dialog.glade.h:12
+#: ../plugins/clock/clock-dialog.glade.h:15
 msgid "Time Settings"
 msgstr "Tidsinnstillinger"
 
-#: ../plugins/clock/clock-dialog.glade.h:14
+#: ../plugins/clock/clock-dialog.glade.h:17
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1137,53 +1149,53 @@ msgid ""
 "page for additional information."
 msgstr "Formatet beskriver dato og tids-delene som settes inn i filnavnet. For eksempel, %Y erstattes med året, %m med måneden og %d med dagen. Likeledes vil <b></b> formatering vil gjøre tekst halvfet. Se \"Hjelp\"-siden for ytterligere informasjon."
 
-#: ../plugins/clock/clock-dialog.glade.h:15
+#: ../plugins/clock/clock-dialog.glade.h:18
 msgid "_Tooltip format:"
 msgstr "Verk_tøytips format:"
 
-#: ../plugins/clock/clock-dialog.glade.h:16
+#: ../plugins/clock/clock-dialog.glade.h:19
 msgid "_Layout:"
 msgstr "_Utseende:"
 
-#: ../plugins/clock/clock-dialog.glade.h:18
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Sho_w AM/PM"
 msgstr "_Vis AM/PM"
 
-#: ../plugins/clock/clock-dialog.glade.h:19
+#: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Fl_ash time separators"
 msgstr "Bl_inkende tidsskiller"
 
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:23
 msgid "24-_hour clock"
 msgstr "24-_timers klokke"
 
-#: ../plugins/clock/clock-dialog.glade.h:21
-msgid "True _binary clock"
-msgstr "Ekte _binær klokke"
+#: ../plugins/clock/clock-dialog.glade.h:24
+msgid "Binary mode:"
+msgstr "Binærmodus:"
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "Display _seconds"
 msgstr "Vis _sekunder"
 
-#: ../plugins/clock/clock-dialog.glade.h:23
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "F_ormat:"
 msgstr "F_ormat:"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:28
 msgid "F_uzziness:"
 msgstr "F_uzziness:"
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:29
 msgid "Show _inactive dots"
 msgstr "Vis _inaktive prikker"
 
-#: ../plugins/clock/clock-dialog.glade.h:27
+#: ../plugins/clock/clock-dialog.glade.h:30
 msgid "Show gri_d"
 msgstr "Vis _rutenett"
 
-#: ../plugins/clock/clock-dialog.glade.h:28
+#: ../plugins/clock/clock-dialog.glade.h:31
 msgid "Clock Options"
 msgstr "Klokkeinnstillinger"
 
