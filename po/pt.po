@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-27 12:48+0200\n"
+"POT-Creation-Date: 2022-08-13 12:48+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>, 2019-2022\n"
 "Language-Team: Portuguese (http://www.transifex.com/xfce/xfce4-panel/language/pt/)\n"
@@ -118,7 +118,7 @@ msgstr "Sai_r"
 #: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3145
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
-#: ../plugins/clock/clock-dialog.glade.h:8
+#: ../plugins/clock/clock-dialog.glade.h:11
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 #: ../plugins/pager/pager-dialog.glade.h:4
@@ -182,73 +182,73 @@ msgid "Name %s lost on the message dbus, exiting."
 msgstr "O nome %s foi perdido na mensagem dbus; a sair."
 
 #. parse context options
-#: ../panel/main.c:270
+#: ../panel/main.c:271
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTOS...]"
 
-#: ../panel/main.c:277
+#: ../panel/main.c:278
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Digite \"%s --help\" para informações de utilização."
 
-#: ../panel/main.c:296
+#: ../panel/main.c:297
 msgid "The Xfce development team. All rights reserved."
 msgstr "A equipa de desenvolvimento Xfce. Todos os direitos reservados."
 
-#: ../panel/main.c:297
+#: ../panel/main.c:298
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Por favor reporte os erros em <%s>."
 
 #. quit without error if an instance is running
-#: ../panel/main.c:395
+#: ../panel/main.c:396
 msgid "There is already a running instance"
 msgstr "Já existe uma instância em execução"
 
 #. spawn ourselfs again
-#: ../panel/main.c:403
+#: ../panel/main.c:404
 msgid "Restarting..."
 msgstr "A reiniciar..."
 
-#: ../panel/main.c:418
+#: ../panel/main.c:419
 msgid "Failed to show the preferences dialog"
 msgstr "Falha ao mostrar o diálogo de preferências"
 
-#: ../panel/main.c:420
+#: ../panel/main.c:421
 msgid "Failed to show the add new items dialog"
 msgstr "Falha ao mostrar a caixa de adicionar novos itens"
 
-#: ../panel/main.c:422
+#: ../panel/main.c:423
 msgid "Failed to save the panel configuration"
 msgstr "Falha ao gravar a configuração do painel"
 
-#: ../panel/main.c:424
+#: ../panel/main.c:425
 msgid "Failed to add a plugin to the panel"
 msgstr "Falha ao adicionar botão ao painel"
 
-#: ../panel/main.c:426
+#: ../panel/main.c:427
 msgid "Failed to restart the panel"
 msgstr "Falha ao reiniciar o painel"
 
-#: ../panel/main.c:428
+#: ../panel/main.c:429
 msgid "Failed to quit the panel"
 msgstr "Falha ao fechar o painel"
 
-#: ../panel/main.c:430
+#: ../panel/main.c:431
 msgid "Failed to send D-Bus message"
 msgstr "Falha ao enviar a mensagem de D-Bus"
 
-#: ../panel/main.c:440
+#: ../panel/main.c:441
 msgid "Execute"
 msgstr "Executar"
 
-#: ../panel/main.c:441
+#: ../panel/main.c:442
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Deseja iniciar o painel? Se sim, garanta que grava a sessão ao sair para que na próxima sessão o painel seja iniciado automaticamente."
 
-#: ../panel/main.c:444 ../panel/main.c:458
+#: ../panel/main.c:445 ../panel/main.c:459
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Nenhuma instância de %s foi encontrada"
@@ -275,21 +275,21 @@ msgstr[0] "Criar novo lançador de %d ficheiro .desktop"
 msgstr[1] "Criar novo lançador de %d ficheiros desktop"
 msgstr[2] "Criar novo lançador de %d ficheiros desktop"
 
-#: ../panel/panel-application.c:1751
+#: ../panel/panel-application.c:1762
 msgid "Quit"
 msgstr "Sair"
 
-#: ../panel/panel-application.c:1752
+#: ../panel/panel-application.c:1763
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "O servidor X foi iniciado sem o gestor de sessões. Clicar em Sair fechará o servidor X."
 
-#: ../panel/panel-application.c:1753
+#: ../panel/panel-application.c:1764
 msgid "Are you sure you want to quit the panel?"
 msgstr "Sair realmente do painel?"
 
-#: ../panel/panel-application.c:1761
+#: ../panel/panel-application.c:1772
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Falha ao executar o comando \"%s\""
@@ -358,7 +358,7 @@ msgstr "Adicionar novos itens"
 #: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:7
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#: ../plugins/clock/clock-dialog.glade.h:7
+#: ../plugins/clock/clock-dialog.glade.h:10
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:5
@@ -978,7 +978,7 @@ msgid ""
 msgstr "Ativar esta opção para mostrar o nome da aplicação no menu, por exemplo \"Gestor de ficheiros\" em vez de \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-#: ../plugins/clock/clock-dialog.glade.h:17
+#: ../plugins/clock/clock-dialog.glade.h:20
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
@@ -1105,29 +1105,41 @@ msgid "LCD"
 msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.glade.h:6
+msgid "Decimal"
+msgstr "Decimal"
+
+#: ../plugins/clock/clock-dialog.glade.h:7
+msgid "Sexagesimal"
+msgstr "Sexagesimal"
+
+#: ../plugins/clock/clock-dialog.glade.h:8
+msgid "Binary time"
+msgstr "Hora binária"
+
+#: ../plugins/clock/clock-dialog.glade.h:9
 #: ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "Relógio"
 
-#: ../plugins/clock/clock-dialog.glade.h:9
+#: ../plugins/clock/clock-dialog.glade.h:12
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
 msgstr "Nome do fuso horário coincidente com a base de dados do sistema, por exemplo \"America/Nova_York\". Deixar em branco para utilizar a hora local."
 
-#: ../plugins/clock/clock-dialog.glade.h:10
+#: ../plugins/clock/clock-dialog.glade.h:13
 msgid "Time_zone:"
 msgstr "Fuso _horário:"
 
-#: ../plugins/clock/clock-dialog.glade.h:11
+#: ../plugins/clock/clock-dialog.glade.h:14
 msgid "Time and Date _Settings..."
 msgstr "Definiçõe_s de data e hora..."
 
-#: ../plugins/clock/clock-dialog.glade.h:12
+#: ../plugins/clock/clock-dialog.glade.h:15
 msgid "Time Settings"
 msgstr "Definições de hora"
 
-#: ../plugins/clock/clock-dialog.glade.h:14
+#: ../plugins/clock/clock-dialog.glade.h:17
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1136,53 +1148,53 @@ msgid ""
 "page for additional information."
 msgstr "Este formato descreve a data e hora a inserir no nome do ficheiro. Por exemplo, %Y será substituído pelo ano, %m pelo mês e %d pelo dia. <b>Etiquetas</b> semelhantes colocam o texto a negrito. Ver a página de \"Ajuda\" para informações adicionais."
 
-#: ../plugins/clock/clock-dialog.glade.h:15
+#: ../plugins/clock/clock-dialog.glade.h:18
 msgid "_Tooltip format:"
 msgstr "Forma_to de dica:"
 
-#: ../plugins/clock/clock-dialog.glade.h:16
+#: ../plugins/clock/clock-dialog.glade.h:19
 msgid "_Layout:"
 msgstr "_Esquema:"
 
-#: ../plugins/clock/clock-dialog.glade.h:18
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Sho_w AM/PM"
 msgstr "Mostra_r AM/PM"
 
-#: ../plugins/clock/clock-dialog.glade.h:19
+#: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Fl_ash time separators"
 msgstr "Separadores de hora inter_mitentes"
 
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:23
 msgid "24-_hour clock"
 msgstr "Relógio 24-_horas"
 
-#: ../plugins/clock/clock-dialog.glade.h:21
-msgid "True _binary clock"
-msgstr "Relógio _binário autêntico"
+#: ../plugins/clock/clock-dialog.glade.h:24
+msgid "Binary mode:"
+msgstr "Modo binário:"
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "Display _seconds"
 msgstr "Mostrar _segundos"
 
-#: ../plugins/clock/clock-dialog.glade.h:23
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "F_ormat:"
 msgstr "F_ormato:"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:28
 msgid "F_uzziness:"
 msgstr "Prec_isão:"
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:29
 msgid "Show _inactive dots"
 msgstr "Mostrar pontos _inativos"
 
-#: ../plugins/clock/clock-dialog.glade.h:27
+#: ../plugins/clock/clock-dialog.glade.h:30
 msgid "Show gri_d"
 msgstr "Mostrar grel_ha"
 
-#: ../plugins/clock/clock-dialog.glade.h:28
+#: ../plugins/clock/clock-dialog.glade.h:31
 msgid "Clock Options"
 msgstr "Opções do relógio"
 
