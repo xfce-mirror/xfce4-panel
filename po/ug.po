@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-27 12:48+0200\n"
+"POT-Creation-Date: 2022-08-13 12:48+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Gheyret Kenji <gheyret@yahoo.com>, 2013\n"
 "Language-Team: Uyghur (http://www.transifex.com/xfce/xfce4-panel/language/ug/)\n"
@@ -112,7 +112,7 @@ msgstr "تىزىمدىن چىق(_O)"
 #: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3145
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
-#: ../plugins/clock/clock-dialog.glade.h:8
+#: ../plugins/clock/clock-dialog.glade.h:11
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 #: ../plugins/pager/pager-dialog.glade.h:4
@@ -176,73 +176,73 @@ msgid "Name %s lost on the message dbus, exiting."
 msgstr ""
 
 #. parse context options
-#: ../panel/main.c:270
+#: ../panel/main.c:271
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTS...]"
 
-#: ../panel/main.c:277
+#: ../panel/main.c:278
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "ئىشلىتىش ئۇسۇلىنى كۆرۈش ئۈچۈن «%s --help» نى كىرگۈزسە بولىدۇ."
 
-#: ../panel/main.c:296
+#: ../panel/main.c:297
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce ئىجادىيەت گۇرۇپپىسى. نەشر ھوقۇقى ئۆزىمىزگە تەۋە."
 
-#: ../panel/main.c:297
+#: ../panel/main.c:298
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "كەمتۈكنى <%s> غا دوكلات قىلىڭ."
 
 #. quit without error if an instance is running
-#: ../panel/main.c:395
+#: ../panel/main.c:396
 msgid "There is already a running instance"
 msgstr "ئىجرا بولۇۋاتقان ئۈلگە مەۋجۇت"
 
 #. spawn ourselfs again
-#: ../panel/main.c:403
+#: ../panel/main.c:404
 msgid "Restarting..."
 msgstr "قايتا قوزغىلىۋاتىدۇ..."
 
-#: ../panel/main.c:418
+#: ../panel/main.c:419
 msgid "Failed to show the preferences dialog"
 msgstr "تەڭشەك سۆزلەشكۈسىنى كۆرسىتىش مەغلۇپ بولدى"
 
-#: ../panel/main.c:420
+#: ../panel/main.c:421
 msgid "Failed to show the add new items dialog"
 msgstr "يېڭى تۈر قوشۇش سۆزلەشكۈسىنى كۆرسىتىش مەغلۇپ بولدى"
 
-#: ../panel/main.c:422
+#: ../panel/main.c:423
 msgid "Failed to save the panel configuration"
 msgstr "كۆزنەك تەڭشىكىنى ساقلاش مەغلۇپ بولدى"
 
-#: ../panel/main.c:424
+#: ../panel/main.c:425
 msgid "Failed to add a plugin to the panel"
 msgstr "كۆزنەككە قىستۇرما قوشۇش مەغلۇپ بولدى"
 
-#: ../panel/main.c:426
+#: ../panel/main.c:427
 msgid "Failed to restart the panel"
 msgstr "كۆزنەكنى قايتا قوزغىتىش مەغلۇپ بولدى"
 
-#: ../panel/main.c:428
+#: ../panel/main.c:429
 msgid "Failed to quit the panel"
 msgstr "كۆزنەكنى توختىتىش مەغلۇپ بولدى"
 
-#: ../panel/main.c:430
+#: ../panel/main.c:431
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus ئۇچۇرىنى ئەۋەتىش مەغلۇپ بولدى"
 
-#: ../panel/main.c:440
+#: ../panel/main.c:441
 msgid "Execute"
 msgstr ""
 
-#: ../panel/main.c:441
+#: ../panel/main.c:442
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "كۆزنەكنى باشلىغۇڭىز بارمۇ؟ شۇنداق بولسا، چىقىدىغان چاغدا چوقۇم ئەڭگىمەنى ساقلىشىڭىز كېرەك. شۇنىڭ بىلەن كېيىنكى قېتىم كىرگەندە ئاپتوماتىك باشلىنىدۇ."
 
-#: ../panel/main.c:444 ../panel/main.c:458
+#: ../panel/main.c:445 ../panel/main.c:459
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "%s نىڭ ئىجرا بولۇۋاتقان ئۈلگىسى تېپىلمىدى"
@@ -268,21 +268,21 @@ msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] ""
 msgstr[1] "ئۈستەلئۈستى ھۆججىتى %d دىن ئىجراچى قۇرۇش"
 
-#: ../panel/panel-application.c:1751
+#: ../panel/panel-application.c:1762
 msgid "Quit"
 msgstr "ئاخىرلاشتۇر"
 
-#: ../panel/panel-application.c:1752
+#: ../panel/panel-application.c:1763
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "ئەڭگىمە باشقۇرغىنى ئىشلەتمەي X نى قوزغاتتىڭىز. ئاخىرلاشتۇر نى باسسىڭىز X مۇلازىمېتىرى ئاخىرلىشىدۇ."
 
-#: ../panel/panel-application.c:1753
+#: ../panel/panel-application.c:1764
 msgid "Are you sure you want to quit the panel?"
 msgstr "راستلا كۆزنەك(panel)نى ئاخىرلاشتۇرغۇڭىز بارمۇ؟"
 
-#: ../panel/panel-application.c:1761
+#: ../panel/panel-application.c:1772
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "«%s» نى ئىجرا قىلىش مەغلۇپ بولدى."
@@ -351,7 +351,7 @@ msgstr "يېڭى تۈر قوش قوشۇش"
 #: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:7
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#: ../plugins/clock/clock-dialog.glade.h:7
+#: ../plugins/clock/clock-dialog.glade.h:10
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:5
@@ -971,7 +971,7 @@ msgid ""
 msgstr "تىزىملىكتە پروگراممىنىڭ ئادەتتىكى ئاتىنى كۆرسەتمەكچى بولغاندا بۇنى تاللاڭ. مەسىلەن «سۇنار(Thunar)» ئەمەس «ھۆججەت باشقۇرغۇ» دەپ كۆرسەتمەكچى بولغاندا."
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-#: ../plugins/clock/clock-dialog.glade.h:17
+#: ../plugins/clock/clock-dialog.glade.h:20
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
@@ -1098,29 +1098,41 @@ msgid "LCD"
 msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.glade.h:6
+msgid "Decimal"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:7
+msgid "Sexagesimal"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:8
+msgid "Binary time"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:9
 #: ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "سائەت"
 
-#: ../plugins/clock/clock-dialog.glade.h:9
+#: ../plugins/clock/clock-dialog.glade.h:12
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
 msgstr "ۋاقىت رايونى ئۇچۇر ساندانىدىكى ھۆججەتكە ماس كېلىدىغان ۋاقىت رايونى ئاتى. مەسىلەن \"ئامېرىكا/نيۇيورك\" دېگەندەك. بوش قويسا يەرلىك  ۋاقىت ئىشلىتىلىدۇ."
 
-#: ../plugins/clock/clock-dialog.glade.h:10
+#: ../plugins/clock/clock-dialog.glade.h:13
 msgid "Time_zone:"
 msgstr "ۋاقىت رايونى(_Z):"
 
-#: ../plugins/clock/clock-dialog.glade.h:11
+#: ../plugins/clock/clock-dialog.glade.h:14
 msgid "Time and Date _Settings..."
 msgstr "ۋاقىت ۋە چېسلا تەڭشەكلىرى(_S)…"
 
-#: ../plugins/clock/clock-dialog.glade.h:12
+#: ../plugins/clock/clock-dialog.glade.h:15
 msgid "Time Settings"
 msgstr "ۋاقىت تەڭشەكلىرى"
 
-#: ../plugins/clock/clock-dialog.glade.h:14
+#: ../plugins/clock/clock-dialog.glade.h:17
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1129,53 +1141,53 @@ msgid ""
 "page for additional information."
 msgstr "تاختايغا قىستۇرىدىغان چېسلا ۋە ۋاقىتنىڭ پىچىمىنى  بەلگىلەپ بېرىدۇ. مەسىلەن: يىل %Y بىلەن، ئاي %m بىلەن، كۈن %d بىلەن ئىپادىلىنىدۇ. شۇنداقلا، تومراق كۆرسىتىش ئۈچۈن <b></b> نىڭ بىلەن قورشاپ قويسا بولىدۇ. باشقا ئۇچۇرلارنى بىلمەكچى بولسىڭىز ياردەم بېتىگە قاراڭ."
 
-#: ../plugins/clock/clock-dialog.glade.h:15
+#: ../plugins/clock/clock-dialog.glade.h:18
 msgid "_Tooltip format:"
 msgstr "كۆرسەتمە پىچىمى(_T):"
 
-#: ../plugins/clock/clock-dialog.glade.h:16
+#: ../plugins/clock/clock-dialog.glade.h:19
 msgid "_Layout:"
 msgstr "ئورۇنلاشتۇرۇلۇشى(_L)"
 
-#: ../plugins/clock/clock-dialog.glade.h:18
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Sho_w AM/PM"
 msgstr "AM/PM نى كۆرسەتسۇن(_W)"
 
-#: ../plugins/clock/clock-dialog.glade.h:19
+#: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Fl_ash time separators"
 msgstr "ۋاقىت ئايرىغۇچ چاقنىسۇن(_A)"
 
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:23
 msgid "24-_hour clock"
 msgstr "24-سائەت (_H)"
 
-#: ../plugins/clock/clock-dialog.glade.h:21
-msgid "True _binary clock"
-msgstr "ھەقىقىي رەقەملىك سائەت(_B)"
+#: ../plugins/clock/clock-dialog.glade.h:24
+msgid "Binary mode:"
+msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "Display _seconds"
 msgstr "سېكۇنت نى كۆرسەتسۇن(_S)"
 
-#: ../plugins/clock/clock-dialog.glade.h:23
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "F_ormat:"
 msgstr "فورماتى(_O)"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:28
 msgid "F_uzziness:"
 msgstr "مۈجمەللىكى(_U):"
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:29
 msgid "Show _inactive dots"
 msgstr "ئاكتىپ بولمىغان چېكىتلەرنى كۆرسەت(_I)"
 
-#: ../plugins/clock/clock-dialog.glade.h:27
+#: ../plugins/clock/clock-dialog.glade.h:30
 msgid "Show gri_d"
 msgstr "سېتكىلارنى كۆرسەت(_D)"
 
-#: ../plugins/clock/clock-dialog.glade.h:28
+#: ../plugins/clock/clock-dialog.glade.h:31
 msgid "Clock Options"
 msgstr "سائەت تاللانمىلىرى"
 
