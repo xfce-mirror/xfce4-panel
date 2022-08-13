@@ -182,10 +182,8 @@ panel_module_factory_load_modules_dir (PanelModuleFactory *factory,
       if (g_hash_table_lookup (factory->modules, internal_name) != NULL)
         {
           if (warn_if_known)
-            {
-              g_debug ("Another plugin already registered with "
-                       "the internal name \"%s\".", internal_name);
-            }
+            panel_debug (PANEL_DEBUG_MODULE_FACTORY, "Another plugin already registered with "
+                         "the internal name \"%s\".", internal_name);
 
           goto exists;
         }
@@ -432,7 +430,7 @@ panel_module_factory_new_plugin (PanelModuleFactory  *factory,
   module = g_hash_table_lookup (factory->modules, name);
   if (G_UNLIKELY (module == NULL))
     {
-      g_debug ("Module \"%s\" not found in the factory", name);
+      panel_debug (PANEL_DEBUG_MODULE_FACTORY, "Module \"%s\" not found in the factory", name);
       return NULL;
     }
 

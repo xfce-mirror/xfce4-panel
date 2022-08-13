@@ -214,7 +214,7 @@ systray_box_finalize (GObject *object)
     {
       /* free the child list */
       g_slist_free (box->children);
-      g_debug ("Not all icons has been removed from the systray.");
+      panel_debug (PANEL_DEBUG_SYSTRAY, "Not all icons has been removed from the systray.");
     }
 
   G_OBJECT_CLASS (systray_box_parent_class)->finalize (object);

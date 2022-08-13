@@ -29,6 +29,7 @@
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
+#include <common/panel-debug.h>
 #include <xfconf/xfconf.h>
 #ifdef XFCONF_LEGACY
 #include <dbus/dbus-glib.h>
@@ -973,7 +974,7 @@ sn_config_swap_known_items (SnConfig    *config,
   /* make sure that the list contains name1 followed by name2 */
   if (li == NULL || li->next == NULL || g_strcmp0 (li->next->data, name2) != 0)
     {
-      g_debug("Couldn't swap items: %s and %s", name1, name2);
+      panel_debug (PANEL_DEBUG_SYSTRAY, "Couldn't swap items: %s and %s", name1, name2);
       return;
     }
 
@@ -1011,7 +1012,7 @@ void sn_config_swap_known_legacy_items(SnConfig *config,
   /* make sure that the list contains name1 followed by name2 */
   if (li == NULL || li->next == NULL || g_strcmp0(li->next->data, name2) != 0)
   {
-    g_debug("Couldn't swap items: %s and %s", name1, name2);
+    panel_debug (PANEL_DEBUG_SYSTRAY, "Couldn't swap items: %s and %s", name1, name2);
     return;
   }
 
