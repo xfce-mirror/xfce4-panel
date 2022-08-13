@@ -141,12 +141,12 @@ static void clock_sleep_monitor_logind_finalize (GObject *object)
   ClockSleepMonitorLogind *monitor = XFCE_CLOCK_SLEEP_MONITOR_LOGIND (object);
   g_return_if_fail (monitor != NULL);
 
-  if (monitor->logind_proxy != NULL) {
-    if (monitor->logind_signal_id != 0) {
-      g_signal_handler_disconnect (monitor->logind_proxy, monitor->logind_signal_id);
+  if (monitor->logind_proxy != NULL)
+    {
+      if (monitor->logind_signal_id != 0)
+	g_signal_handler_disconnect (monitor->logind_proxy, monitor->logind_signal_id);
+      g_object_unref (G_OBJECT (monitor->logind_proxy));
     }
-    g_object_unref (G_OBJECT (monitor->logind_proxy));
-  }
 
   G_OBJECT_CLASS (clock_sleep_monitor_logind_parent_class)->finalize (object);
 }
@@ -163,20 +163,19 @@ static void on_logind_signal (
 
   g_return_if_fail (XFCE_IS_CLOCK_SLEEP_MONITOR_LOGIND (monitor));
 
-  if (strcmp (signal_name, "PrepareForSleep") != 0) {
+  if (strcmp (signal_name, "PrepareForSleep") != 0)
     return;
-  }
 
-  if (!g_variant_check_format_string (parameters, format_string, FALSE)) {
-    g_critical ("unexpected format string: %s", g_variant_get_type_string (parameters));
-    return;
-  }
+  if (!g_variant_check_format_string (parameters, format_string, FALSE))
+    {
+      g_critical ("unexpected format string: %s", g_variant_get_type_string (parameters));
+      return;
+    }
 
   g_variant_get (parameters, format_string, &going_to_sleep);
 
-  if (!going_to_sleep) {
+  if (!going_to_sleep)
     g_signal_emit (G_OBJECT (monitor), clock_sleep_monitor_woke_up_signal, 0);
-  }
 }
 
 static ClockSleepMonitor* clock_sleep_monitor_logind_create (void)
@@ -195,18 +194,20 @@ static ClockSleepMonitor* clock_sleep_monitor_logind_create (void)
       "org.freedesktop.login1.Manager",
       NULL,
       NULL);
-  if (monitor->logind_proxy == NULL) {
-    g_message ("could not get proxy for org.freedesktop.login1");
-    g_object_unref (G_OBJECT (monitor));
-    return NULL;
-  }
+  if (monitor->logind_proxy == NULL)
+    {
+      g_message ("could not get proxy for org.freedesktop.login1");
+      g_object_unref (G_OBJECT (monitor));
+      return NULL;
+    }
 
   monitor->logind_signal_id = g_signal_connect (monitor->logind_proxy, "g-signal", G_CALLBACK (on_logind_signal), monitor);
-  if (monitor->logind_signal_id == 0) {
-    g_critical ("could not connect to logind signal");
-    g_object_unref (G_OBJECT (monitor));
-    return NULL;
-  }
+  if (monitor->logind_signal_id == 0)
+    {
+      g_critical ("could not connect to logind signal");
+      g_object_unref (G_OBJECT (monitor));
+      return NULL;
+    }
 
   return XFCE_CLOCK_SLEEP_MONITOR (monitor);
 }
@@ -234,13 +235,11 @@ ClockSleepMonitor *clock_sleep_monitor_create (void)
   SleepMonitorFactory *factory_ptr = &sleep_monitor_factories[0];
   ClockSleepMonitor *monitor = NULL;
 
-  for (; monitor == NULL && *factory_ptr != NULL; factory_ptr++) {
+  for (; monitor == NULL && *factory_ptr != NULL; factory_ptr++)
     monitor = (*factory_ptr) ();
-  }
 
-  if (monitor == NULL && sleep_monitor_factories[0] != NULL) {
+  if (monitor == NULL && sleep_monitor_factories[0] != NULL)
     g_warning ("could not instantiate a sleep monitor");
-  }
 
   return monitor;
 }
