@@ -357,12 +357,13 @@ clock_time_timeout_new (guint       interval,
 
   g_object_ref (G_OBJECT (timeout->time));
 
-  if (sleep_monitor) {
-    timeout->sleep_monitor = sleep_monitor;
-    timeout->woke_up_id = g_signal_connect_swapped (G_OBJECT (sleep_monitor), "woke-up",
-						    G_CALLBACK (clock_time_timeout_restart), timeout);
-    g_object_ref (G_OBJECT (sleep_monitor));
-  }
+  if (sleep_monitor != NULL)
+    {
+      timeout->sleep_monitor = sleep_monitor;
+      timeout->woke_up_id = g_signal_connect_swapped (G_OBJECT (sleep_monitor), "woke-up",
+						      G_CALLBACK (clock_time_timeout_restart), timeout);
+      g_object_ref (G_OBJECT (sleep_monitor));
+    }
 
   clock_time_timeout_set_interval (timeout, interval);
 
@@ -437,7 +438,7 @@ clock_time_timeout_restart (ClockTimeTimeout *timeout)
   g_signal_emit (G_OBJECT (timeout->time), clock_time_signals[TIME_CHANGED], 0);
 
   timeout->restart = 1;
-  clock_time_timeout_set_interval(timeout, timeout->interval);
+  clock_time_timeout_set_interval (timeout, timeout->interval);
 }
 
 
@@ -454,11 +455,12 @@ clock_time_timeout_free (ClockTimeTimeout *timeout)
 
   g_object_unref (G_OBJECT (timeout->time));
 
-  if (timeout->sleep_monitor != NULL) {
-    if (timeout->woke_up_id != 0)
-      g_signal_handler_disconnect (timeout->sleep_monitor, timeout->woke_up_id);
-    g_object_unref (G_OBJECT (timeout->sleep_monitor));
-  }
+  if (timeout->sleep_monitor != NULL)
+    {
+      if (timeout->woke_up_id != 0)
+	g_signal_handler_disconnect (timeout->sleep_monitor, timeout->woke_up_id);
+      g_object_unref (G_OBJECT (timeout->sleep_monitor));
+    }
 
   if (G_LIKELY (timeout->timeout_id != 0))
     g_source_remove (timeout->timeout_id);
