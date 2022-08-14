@@ -515,7 +515,8 @@ xfce_clock_binary_update (XfceClockBinary     *binary,
 
 
 GtkWidget *
-xfce_clock_binary_new (ClockTime *time, ClockSleepMonitor *sleep_monitor)
+xfce_clock_binary_new (ClockTime *time,
+                       ClockSleepMonitor *sleep_monitor)
 {
   XfceClockBinary *binary = g_object_new (XFCE_CLOCK_TYPE_BINARY, NULL);
 

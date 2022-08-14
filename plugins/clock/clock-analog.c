@@ -383,7 +383,8 @@ xfce_clock_analog_update (XfceClockAnalog *analog,
 
 
 GtkWidget *
-xfce_clock_analog_new (ClockTime *time, ClockSleepMonitor *sleep_monitor)
+xfce_clock_analog_new (ClockTime *time,
+                       ClockSleepMonitor *sleep_monitor)
 {
   XfceClockAnalog *analog = g_object_new (XFCE_CLOCK_TYPE_ANALOG, NULL);
 

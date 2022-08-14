@@ -599,7 +599,8 @@ xfce_clock_lcd_update (XfceClockLcd *lcd,
 
 
 GtkWidget *
-xfce_clock_lcd_new (ClockTime *time, ClockSleepMonitor *sleep_monitor)
+xfce_clock_lcd_new (ClockTime *time,
+                    ClockSleepMonitor *sleep_monitor)
 {
   XfceClockLcd *lcd = g_object_new (XFCE_CLOCK_TYPE_LCD, NULL);
 
