@@ -35,7 +35,8 @@ GType      xfce_clock_lcd_get_type      (void) G_GNUC_CONST;
 
 void       xfce_clock_lcd_register_type (XfcePanelTypeModule *type_module);
 
-GtkWidget *xfce_clock_lcd_new           (ClockTime           *time) G_GNUC_MALLOC;
+GtkWidget *xfce_clock_lcd_new           (ClockTime           *time,
+                                         ClockSleepMonitor   *sleep_monitor) G_GNUC_MALLOC;
 
 G_END_DECLS
 
