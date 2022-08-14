@@ -360,7 +360,7 @@ clock_time_timeout_new (guint       interval,
     {
       timeout->sleep_monitor = sleep_monitor;
       g_signal_connect_swapped (G_OBJECT (sleep_monitor), "woke-up",
-				G_CALLBACK (clock_time_timeout_restart), timeout);
+                                G_CALLBACK (clock_time_timeout_restart), timeout);
       g_object_ref (G_OBJECT (sleep_monitor));
     }
 
