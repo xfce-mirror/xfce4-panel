@@ -220,7 +220,8 @@ static ClockSleepMonitor* clock_sleep_monitor_logind_create (void)
 
 typedef ClockSleepMonitor* (*SleepMonitorFactory) (void);
 
-static SleepMonitorFactory sleep_monitor_factories[] = {
+static SleepMonitorFactory sleep_monitor_factories[] =
+{
   #ifdef SLEEP_MONITOR_USE_LOGIND
   clock_sleep_monitor_logind_create,
   #endif
