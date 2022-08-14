@@ -365,7 +365,8 @@ xfce_clock_fuzzy_update (XfceClockFuzzy *fuzzy,
 
 
 GtkWidget *
-xfce_clock_fuzzy_new (ClockTime *time, ClockSleepMonitor *sleep_monitor)
+xfce_clock_fuzzy_new (ClockTime *time,
+                      ClockSleepMonitor *sleep_monitor)
 {
   XfceClockFuzzy *fuzzy = g_object_new (XFCE_CLOCK_TYPE_FUZZY, NULL);
 
