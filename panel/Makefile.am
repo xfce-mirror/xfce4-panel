@@ -8,7 +8,6 @@ AM_CPPFLAGS = \
 	-DHELPERDIR=\"$(HELPER_PATH_PREFIX)/xfce4/panel\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	-DDBUS_API_SUBJECT_TO_CHANGE \
-	-DWNCK_I_KNOW_THIS_IS_UNSTABLE \
 	$(PLATFORM_CPPFLAGS)
 
 bin_PROGRAMS = \
@@ -64,7 +63,6 @@ xfce4_panel_CFLAGS = \
 	$(LIBWNCK_CFLAGS) \
 	$(XFCONF_CFLAGS) \
 	$(LIBX11_CFLAGS) \
-	$(LIBWNCK_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 xfce4_panel_LDFLAGS = \
@@ -82,7 +80,6 @@ xfce4_panel_LDADD = \
 	$(LIBWNCK_LIBS) \
 	$(XFCONF_LIBS) \
 	$(LIBX11_LIBS) \
-	$(LIBWNCK_LIBS) \
 	-lm
 
 xfce4_panel_DEPENDENCIES = \
