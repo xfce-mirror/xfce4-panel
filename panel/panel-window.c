@@ -28,7 +28,6 @@
 #endif
 
 #ifdef GDK_WINDOWING_X11
-#include <gdk/gdkx.h>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #endif
@@ -611,7 +610,7 @@ panel_window_init (PanelWindow *window)
   /* set the screen */
   panel_window_screen_changed (GTK_WIDGET (window), NULL);
 
-  /* a workaround to force external plugins to fully re-render when scale factor changes */
+  /* a workaround to force external plugins to fully re-render on X11 when scale factor changes */
   g_signal_connect (window, "notify::scale-factor", G_CALLBACK (panel_window_force_redraw), NULL);
 }
 
@@ -842,6 +841,9 @@ panel_window_set_property (GObject      *object,
       break;
 
     case PROP_SPAN_MONITORS:
+      if (! GDK_IS_X11_DISPLAY (window->display))
+        break;
+
       val_bool = g_value_get_boolean (value);
       if (window->span_monitors != val_bool)
         {
@@ -1644,8 +1646,8 @@ panel_window_screen_changed (GtkWidget *widget,
                              GdkScreen *previous_screen)
 {
   PanelWindow *window = PANEL_WINDOW (widget);
-  WnckWindow  *wnck_window;
-  WnckScreen  *wnck_screen;
+  WnckWindow  *wnck_window = NULL;
+  WnckScreen  *wnck_screen = NULL;
   GdkScreen   *screen;
 
   if (G_LIKELY (GTK_WIDGET_CLASS (panel_window_parent_class)->screen_changed != NULL))
@@ -1674,8 +1676,12 @@ panel_window_screen_changed (GtkWidget *widget,
   panel_window_screen_layout_changed (screen, window);
 
   /* update wnck screen to be used for the autohide feature */
-  wnck_screen = panel_wnck_screen_get_default ();
-  wnck_window = wnck_screen_get_active_window (wnck_screen);
+  if (GDK_IS_X11_DISPLAY (window->display))
+    {
+      wnck_screen = panel_wnck_screen_get_default ();
+      wnck_window = wnck_screen_get_active_window (wnck_screen);
+    }
+
   panel_window_update_autohide_window (window, wnck_screen, wnck_window);
 }
 
@@ -1725,6 +1731,7 @@ panel_window_filter (GdkXEvent *xev,
                      GdkEvent  *gev,
                      gpointer   data)
 {
+#ifdef GDK_WINDOWING_X11
   PanelWindow    *window = data;
   GdkEventButton *event = (GdkEventButton *) gev;
   XEvent         *xevent = (XEvent *) xev;
@@ -1774,6 +1781,9 @@ panel_window_filter (GdkXEvent *xev,
   /* force the panel to process the event instead of its child widgets */
   return panel_window_button_press_event (GTK_WIDGET (window), event) ? GDK_FILTER_REMOVE
                                                                       : GDK_FILTER_CONTINUE;
+#else
+  return GDK_FILTER_CONTINUE;
+#endif
 }
 
 
@@ -1921,6 +1931,7 @@ panel_window_screen_struts_set (PanelWindow *window)
   if (!update_struts)
     return;
 
+#ifdef GDK_WINDOWING_X11
   /* don't crash on x errors */
   gdk_x11_display_error_trap_push (window->display);
 
@@ -1934,6 +1945,7 @@ panel_window_screen_struts_set (PanelWindow *window)
   /* release the trap */
   if (gdk_x11_display_error_trap_pop (window->display) != 0)
     g_critical ("Failed to set the struts");
+#endif
 
   if (panel_debug_has_domain (PANEL_DEBUG_YES))
     {
@@ -2401,7 +2413,6 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
 {
   GdkRectangle panel_area;
   GdkRectangle window_area;
-  gboolean     geometry_fixed = FALSE;
   gint         scale_factor;
 
   panel_return_if_fail (WNCK_IS_WINDOW (active_window));
@@ -2418,8 +2429,10 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
     {
       if (wnck_window_get_window_type (active_window) != WNCK_WINDOW_DESKTOP)
         {
+#ifdef GDK_WINDOWING_X11
           GdkWindow *gdkwindow;
           GtkBorder extents;
+          gboolean  geometry_fixed = FALSE;
 
           /* obtain position and dimensions from the active window */
           wnck_window_get_geometry (active_window,
@@ -2469,6 +2482,7 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
               XFree (data);
             }
           }
+#endif
 
           /* apply scale factor */
           scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (window));
@@ -3457,8 +3471,8 @@ panel_window_get_locked (PanelWindow *window)
 
 
 
-void
-panel_window_focus (PanelWindow *window)
+static void
+panel_window_focus_x11 (PanelWindow *window)
 {
 #ifdef GDK_WINDOWING_X11
   XClientMessageEvent event;
@@ -3484,10 +3498,21 @@ panel_window_focus (PanelWindow *window)
 
   if (gdk_x11_display_error_trap_pop (window->display) != 0)
     g_critical ("Failed to focus panel window");
-#else
-  /* our best guess on non-x11 clients */
-  gtk_window_present (GTK_WINDOW (window));
 #endif
+}
+
+
+
+void
+panel_window_focus (PanelWindow *window)
+{
+  if (GDK_IS_X11_DISPLAY (window->display))
+    panel_window_focus_x11 (window);
+  else
+    {
+      /* our best guess on non-x11 clients */
+      gtk_window_present (GTK_WINDOW (window));
+    }
 }
 
 
