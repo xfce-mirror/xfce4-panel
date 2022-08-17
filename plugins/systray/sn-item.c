@@ -577,8 +577,7 @@ sn_item_signal_received (GDBusProxy *proxy,
     }
   else if (!g_strcmp0 (signal_name, "NewStatus"))
     {
-      finish_and_return_if_true (parameters == NULL);
-      if (! g_variant_check_format_string (parameters, "(s)", FALSE))
+      if (parameters == NULL || ! g_variant_check_format_string (parameters, "(s)", FALSE))
         {
           g_warning ("Could not parse properties for StatusNotifierItem.");
           return;
@@ -729,8 +728,11 @@ sn_item_get_all_properties_result (GObject      *source_object,
   gboolean      update_menu = FALSE;
 
   properties = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
-  free_error_and_return_if_cancelled (error);
-  finish_and_return_if_true (properties == NULL);
+  if (properties == NULL)
+    {
+      free_error_and_return_if_cancelled (error);
+      return;
+    }
 
   #define string_empty_null(s) ((s) != NULL ? (s) : "")
 
