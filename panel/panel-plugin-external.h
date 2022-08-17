@@ -20,7 +20,18 @@
 #define __PANEL_PLUGIN_EXTERNAL_H__
 
 #include <gtk/gtk.h>
+#ifdef GDK_WINDOWING_X11
 #include <gtk/gtkx.h>
+#else
+typedef GtkWidget GtkSocket;
+typedef GtkWidgetClass GtkSocketClass;
+#define GTK_TYPE_SOCKET GTK_TYPE_WIDGET
+#define GTK_SOCKET GTK_WIDGET
+#define GTK_IS_SOCKET GTK_IS_WIDGET
+#define GTK_SOCKET_CLASS GTK_WIDGET_CLASS
+#define gtk_socket_get_id(socket) 0LU
+#define gtk_socket_get_plug_window(socket) NULL
+#endif
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 #include <panel/panel-module.h>
