@@ -1138,7 +1138,7 @@ panel_window_motion_notify_event (GtkWidget      *widget,
     panel_window_opacity_enter_queue (window, TRUE);
 
   /* leave when the pointer is not grabbed */
-  if (G_UNLIKELY (window->grab_time == 0))
+  if (G_LIKELY (window->grab_time == 0))
     return FALSE;
 
   /* get the pointer position from the event */
@@ -1239,7 +1239,8 @@ panel_window_button_press_event (GtkWidget      *widget,
                               GDK_SEAT_CAPABILITY_ALL_POINTING,
                               FALSE, cursor, (GdkEvent*)event, NULL, NULL);
 
-      g_object_unref (cursor);
+      if (cursor != NULL)
+        g_object_unref (cursor);
 
       /* set the grab info if the grab was successfully made */
       if (G_LIKELY (status == GDK_GRAB_SUCCESS))
@@ -2108,14 +2109,27 @@ panel_window_snap_edge_gravity (gint value,
 static SnapPosition
 panel_window_snap_position (PanelWindow *window)
 {
-  guint         snap_horz, snap_vert;
-  GdkRectangle *alloc = &window->alloc;
+  guint        snap_horz, snap_vert;
+  GdkRectangle alloc = window->alloc;
+  PanelBorders borders;
+
+  /* make the same calculation whether the panel is snapped or not (avoids flickering
+   * when the pointer moves slowly) */
+  borders = panel_base_window_get_borders (PANEL_BASE_WINDOW (window));
+  if (! PANEL_HAS_FLAG (borders, PANEL_BORDER_TOP))
+    alloc.height++;
+  if (! PANEL_HAS_FLAG (borders, PANEL_BORDER_BOTTOM))
+    alloc.height++;
+  if (! PANEL_HAS_FLAG (borders, PANEL_BORDER_LEFT))
+    alloc.width++;
+  if (! PANEL_HAS_FLAG (borders, PANEL_BORDER_RIGHT))
+    alloc.width++;
 
   /* get the snap offsets */
-  snap_horz = panel_window_snap_edge_gravity (alloc->x, window->area.x,
-      window->area.x + window->area.width - alloc->width);
-  snap_vert = panel_window_snap_edge_gravity (alloc->y, window->area.y,
-      window->area.y + window->area.height - alloc->height);
+  snap_horz = panel_window_snap_edge_gravity (alloc.x, window->area.x,
+      window->area.x + window->area.width - alloc.width);
+  snap_vert = panel_window_snap_edge_gravity (alloc.y, window->area.y,
+      window->area.y + window->area.height - alloc.height);
 
   /* detect the snap mode */
   if (snap_horz == EDGE_GRAVITY_START)
