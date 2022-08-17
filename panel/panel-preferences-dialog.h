@@ -20,7 +20,11 @@
 #define __PANEL_PREFERENCES_DIALOG_H__
 
 #include <gtk/gtk.h>
+#ifdef GDK_WINDOWING_X11
 #include <gtk/gtkx.h>
+#else
+typedef gulong Window;
+#endif
 #include <panel/panel-application.h>
 #include <panel/panel-window.h>
 

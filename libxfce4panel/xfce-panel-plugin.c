@@ -28,7 +28,9 @@
 #endif
 
 #include <gtk/gtk.h>
+#ifdef GDK_WINDOWING_X11
 #include <gtk/gtkx.h>
+#endif
 #include <glib.h>
 #include <libxfce4util/libxfce4util.h>
 
@@ -2516,13 +2518,16 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
                                    gint            *x,
                                    gint            *y)
 {
+#ifdef GDK_WINDOWING_X11
+  GtkWidget      *plug;
+  gint            px, py;
+#endif
   GtkRequisition  requisition;
   GdkScreen      *screen;
   GdkRectangle    geometry;
   GdkDisplay     *display;
   GdkMonitor     *monitor;
-  GtkWidget      *toplevel, *plug;
-  gint            px, py;
+  GtkWidget      *toplevel;
   GtkAllocation   alloc;
 
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
@@ -2550,6 +2555,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
   gtk_window_get_position (GTK_WINDOW (toplevel), x, y);
 
   /* correct position for external plugins */
+#ifdef GDK_WINDOWING_X11
   plug = gtk_widget_get_ancestor (attach_widget, GTK_TYPE_PLUG);
   if (plug != NULL)
     {
@@ -2558,6 +2564,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
        *x += px;
        *y += py;
     }
+#endif
 
   /* if the panel is hidden (auto hide is enabled) and we requested a
    * panel lock, wait for gtk to position the panel before we actually
