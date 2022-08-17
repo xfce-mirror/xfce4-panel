@@ -628,7 +628,8 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "span-monitors");
   panel_return_if_fail (GTK_IS_WIDGET (object));
   gtk_widget_set_sensitive (GTK_WIDGET (object), span_monitors_sensitive);
-  g_object_set (G_OBJECT (object), "visible", n_monitors > 1, NULL);
+  g_object_set (G_OBJECT (object), "visible",
+                n_monitors > 1 && GDK_IS_X11_DISPLAY (display), NULL);
 
   g_free (output_name);
 
@@ -1703,6 +1704,7 @@ panel_preferences_dialog_show_internal (PanelWindow *active,
       gtk_window_present (GTK_WINDOW (window));
       panel_application_take_dialog (dialog_singleton->application, GTK_WINDOW (window));
     }
+#ifdef GDK_WINDOWING_X11
   else
     {
       /* hide window */
@@ -1719,6 +1721,7 @@ panel_preferences_dialog_show_internal (PanelWindow *active,
       xfce_widget_reparent (GTK_WIDGET (plug_child), plug);
       gtk_widget_show (GTK_WIDGET (plug_child));
     }
+#endif
 }
 
 
