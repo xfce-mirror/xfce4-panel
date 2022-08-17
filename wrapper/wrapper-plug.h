@@ -20,7 +20,17 @@
 #define __WRAPPER_PLUG_H__
 
 #include <gtk/gtk.h>
+#ifdef GDK_WINDOWING_X11
 #include <gtk/gtkx.h>
+#else
+typedef GtkWidget GtkPlug;
+typedef GtkWidgetClass GtkPlugClass;
+typedef gulong Window;
+#define GTK_TYPE_PLUG GTK_TYPE_WIDGET
+#define GTK_PLUG GTK_WIDGET
+#define gtk_plug_construct(plug, socket_id)
+#endif
+
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 

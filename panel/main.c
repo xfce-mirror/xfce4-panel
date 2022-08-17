@@ -376,7 +376,8 @@ main (gint argc, gchar **argv)
 
   /* set EWMH source indication */
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  wnck_set_client_type (WNCK_CLIENT_TYPE_PAGER);
+  if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+    wnck_set_client_type (WNCK_CLIENT_TYPE_PAGER);
 G_GNUC_END_IGNORE_DEPRECATIONS
 
   gtk_main ();
