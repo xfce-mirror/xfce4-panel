@@ -628,7 +628,8 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "span-monitors");
   panel_return_if_fail (GTK_IS_WIDGET (object));
   gtk_widget_set_sensitive (GTK_WIDGET (object), span_monitors_sensitive);
-  g_object_set (G_OBJECT (object), "visible", n_monitors > 1, NULL);
+  g_object_set (G_OBJECT (object), "visible",
+                n_monitors > 1 && GDK_IS_X11_DISPLAY (display), NULL);
 
   g_free (output_name);
 
@@ -1616,6 +1617,7 @@ panel_preferences_dialog_item_selection_changed (GtkTreeSelection       *selecti
 
 
 
+#ifdef GDK_WINDOWING_X11
 static void
 panel_preferences_dialog_plug_deleted (GtkWidget *plug)
 {
@@ -1624,6 +1626,7 @@ panel_preferences_dialog_plug_deleted (GtkWidget *plug)
 
   g_object_unref (G_OBJECT (dialog_singleton));
 }
+#endif
 
 
 
@@ -1632,12 +1635,14 @@ panel_preferences_dialog_show_internal (PanelWindow *active,
                                         Window       socket_window)
 {
   gint         panel_id = 0;
-  GObject     *window, *combo;
+  GObject     *window, *widget;
   GdkScreen   *screen;
   GSList      *windows;
+#ifdef GDK_WINDOWING_X11
   GtkWidget   *plug;
   GObject     *plug_child;
   GtkWidget   *content_area;
+#endif
 
   panel_return_if_fail (active == NULL || PANEL_IS_WINDOW (active));
 
@@ -1661,14 +1666,33 @@ panel_preferences_dialog_show_internal (PanelWindow *active,
     }
 
   /* select the active window in the dialog */
-  combo = gtk_builder_get_object (GTK_BUILDER (dialog_singleton), "panel-combobox");
-  panel_return_if_fail (GTK_IS_WIDGET (combo));
+  widget = gtk_builder_get_object (GTK_BUILDER (dialog_singleton), "panel-combobox");
+  panel_return_if_fail (GTK_IS_WIDGET (widget));
   panel_id = panel_window_get_id (active);
   if (!panel_preferences_dialog_panel_combobox_rebuild (dialog_singleton, panel_id))
-    gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
+    gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 0);
+
+  /* select item in the dialog if needed */
+  if (GDK_IS_WAYLAND_DISPLAY (gdk_display_get_default ()))
+    {
+      const gchar *item = g_object_get_data (G_OBJECT (active), "prefs-dialog-item");
+      if (item != NULL)
+        {
+          GtkTreePath *path = gtk_tree_path_new_from_string (item);
+          widget = gtk_builder_get_object (GTK_BUILDER (dialog_singleton), "notebook");
+          panel_return_if_fail (GTK_IS_WIDGET (widget));
+          gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 2);
+          widget = gtk_builder_get_object (GTK_BUILDER (dialog_singleton), "item-treeview");
+          panel_return_if_fail (GTK_IS_WIDGET (widget));
+          gtk_tree_view_set_cursor (GTK_TREE_VIEW (widget), path, NULL, FALSE);
+          gtk_tree_path_free (path);
+          g_object_set_data (G_OBJECT (active), "prefs-dialog-item", NULL);
+        }
+    }
 
   window = gtk_builder_get_object (GTK_BUILDER (dialog_singleton), "dialog");
   panel_return_if_fail (GTK_IS_WIDGET (window));
+#ifdef GDK_WINDOWING_X11
   plug_child = gtk_builder_get_object (GTK_BUILDER (dialog_singleton), "plug-child");
   panel_return_if_fail (GTK_IS_WIDGET (plug_child));
 
@@ -1690,6 +1714,7 @@ panel_preferences_dialog_show_internal (PanelWindow *active,
           G_CALLBACK (panel_preferences_dialog_plug_deleted), NULL);
       gtk_widget_destroy (plug);
     }
+#endif
 
   if (socket_window == 0)
     {
@@ -1703,6 +1728,7 @@ panel_preferences_dialog_show_internal (PanelWindow *active,
       gtk_window_present (GTK_WINDOW (window));
       panel_application_take_dialog (dialog_singleton->application, GTK_WINDOW (window));
     }
+#ifdef GDK_WINDOWING_X11
   else
     {
       /* hide window */
@@ -1719,6 +1745,7 @@ panel_preferences_dialog_show_internal (PanelWindow *active,
       xfce_widget_reparent (GTK_WIDGET (plug_child), plug);
       gtk_widget_show (GTK_WIDGET (plug_child));
     }
+#endif
 }
 
 
