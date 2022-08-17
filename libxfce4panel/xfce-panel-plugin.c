@@ -28,7 +28,9 @@
 #endif
 
 #include <gtk/gtk.h>
+#ifdef GDK_WINDOWING_X11
 #include <gtk/gtkx.h>
+#endif
 #include <glib.h>
 #include <libxfce4util/libxfce4util.h>
 
@@ -1242,6 +1244,15 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
               G_CALLBACK (xfce_panel_plugin_menu_move), plugin);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
           gtk_widget_show (item);
+          if (GDK_IS_WAYLAND_DISPLAY (gdk_display_get_default ()))
+            {
+              /* FIXME: plugin dnd is broken on Wayland for non-obvious reason */
+              gchar *label = g_strconcat (gtk_menu_item_get_label (GTK_MENU_ITEM (item)),
+                                          "\n(Use the prefs dialog)", NULL);
+              gtk_menu_item_set_label (GTK_MENU_ITEM (item), label);
+              g_free (label);
+              gtk_widget_set_sensitive (item, FALSE);
+            }
 
           image = gtk_image_new_from_icon_name ("go-next", GTK_ICON_SIZE_MENU);
           panel_image_menu_item_set_image (item, image);
@@ -2515,13 +2526,16 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
                                    gint            *x,
                                    gint            *y)
 {
+#ifdef GDK_WINDOWING_X11
+  GtkWidget      *plug;
+  gint            px, py;
+#endif
   GtkRequisition  requisition;
   GdkScreen      *screen;
   GdkRectangle    geometry;
   GdkDisplay     *display;
   GdkMonitor     *monitor;
-  GtkWidget      *toplevel, *plug;
-  gint            px, py;
+  GtkWidget      *toplevel;
   GtkAllocation   alloc;
 
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
@@ -2549,6 +2563,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
   gtk_window_get_position (GTK_WINDOW (toplevel), x, y);
 
   /* correct position for external plugins */
+#ifdef GDK_WINDOWING_X11
   plug = gtk_widget_get_ancestor (attach_widget, GTK_TYPE_PLUG);
   if (plug != NULL)
     {
@@ -2557,6 +2572,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
        *x += px;
        *y += py;
     }
+#endif
 
   /* add the widgets allocation */
   gtk_widget_get_allocation (attach_widget, &alloc);
