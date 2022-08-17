@@ -31,7 +31,6 @@
 #endif
 
 #include <gdk/gdk.h>
-#include <gdk/gdkx.h>
 #include <libxfce4util/libxfce4util.h>
 
 #include <gio/gio.h>
@@ -65,8 +64,10 @@ static void         panel_plugin_external_size_allocate           (GtkWidget    
                                                                    GtkAllocation                    *allocation);
 static void         panel_plugin_external_realize                 (GtkWidget                        *widget);
 static void         panel_plugin_external_unrealize               (GtkWidget                        *widget);
+#ifdef GDK_WINDOWING_X11
 static void         panel_plugin_external_plug_added              (GtkSocket                        *socket);
 static gboolean     panel_plugin_external_plug_removed            (GtkSocket                        *socket);
+#endif
 static gboolean     panel_plugin_external_child_ask_restart       (PanelPluginExternal              *external);
 static void         panel_plugin_external_child_spawn             (PanelPluginExternal              *external);
 static void         panel_plugin_external_child_respawn_schedule  (PanelPluginExternal              *external);
@@ -160,7 +161,9 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
 {
   GObjectClass   *gobject_class;
   GtkWidgetClass *gtkwidget_class;
+#ifdef GDK_WINDOWING_X11
   GtkSocketClass *gtksocket_class;
+#endif
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = panel_plugin_external_finalize;
@@ -172,9 +175,11 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
   gtkwidget_class->realize = panel_plugin_external_realize;
   gtkwidget_class->unrealize = panel_plugin_external_unrealize;
 
+#ifdef GDK_WINDOWING_X11
   gtksocket_class = GTK_SOCKET_CLASS (klass);
   gtksocket_class->plug_added = panel_plugin_external_plug_added;
   gtksocket_class->plug_removed = panel_plugin_external_plug_removed;
+#endif
 
   g_object_class_install_property (gobject_class,
                                    PROP_UNIQUE_ID,
@@ -461,6 +466,7 @@ panel_plugin_external_unrealize (GtkWidget *widget)
 
 
 
+#ifdef GDK_WINDOWING_X11
 static void
 panel_plugin_external_plug_added (GtkSocket *socket)
 {
@@ -497,6 +503,7 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
 
   return TRUE;
 }
+#endif
 
 
 
