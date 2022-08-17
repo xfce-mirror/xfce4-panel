@@ -1212,7 +1212,7 @@ panel_application_load (PanelApplication  *application,
   guint       i;
   gchar     **atom_names;
 
-  if (!disable_wm_check)
+  if (!disable_wm_check && GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
     {
       display = XOpenDisplay (NULL);
       if (display == NULL)
