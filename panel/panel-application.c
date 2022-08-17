@@ -681,7 +681,22 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
       /* check the window locking, not that of the provider, because
        * the users might have worked around that and both should be identical */
       if (!panel_window_get_locked (window))
-        panel_application_plugin_move (GTK_WIDGET (provider), application);
+        {
+          /* widget dnd doesn't seem to work on Wayland without holding down a mouse button,
+           * which leads to an unsolvable problem in GTK 3 because the plugin can't catch
+           * the event before its child widgets (no "capture" phase as in GTK 4) */
+          if (GDK_IS_WAYLAND_DISPLAY (gdk_display_get_default ()))
+            {
+              gint item;
+              itembar = gtk_bin_get_child (GTK_BIN (window));
+              item = panel_itembar_get_child_index (PANEL_ITEMBAR (itembar), GTK_WIDGET (provider));
+              g_object_set_data_full (G_OBJECT (window), "prefs-dialog-item",
+                                      g_strdup_printf ("%d", item), g_free);
+              panel_preferences_dialog_show (window);
+            }
+          else
+            panel_application_plugin_move (GTK_WIDGET (provider), application);
+        }
       break;
 
     case PROVIDER_SIGNAL_EXPAND_PLUGIN:
@@ -1212,7 +1227,7 @@ panel_application_load (PanelApplication  *application,
   guint       i;
   gchar     **atom_names;
 
-  if (!disable_wm_check)
+  if (!disable_wm_check && GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
     {
       display = XOpenDisplay (NULL);
       if (display == NULL)
