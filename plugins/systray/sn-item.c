@@ -30,6 +30,7 @@
 #include <libdbusmenu-gtk/dbusmenu-gtk.h>
 #endif
 
+#include <common/panel-debug.h>
 #include "sn-item.h"
 
 
@@ -143,7 +144,12 @@ if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) \
     return; \
   } \
 if (error != NULL) \
-  g_error_free (error);
+  {  \
+    panel_debug (PANEL_DEBUG_SYSTRAY, "%s: Fatal error for item '%s': (domain '%s', code %d) %s", \
+                 G_STRLOC, XFCE_IS_SN_ITEM (item) ? item->id : "", \
+                 g_quark_to_string (error->domain), error->code, error->message); \
+    g_error_free (error); \
+  }
 
 
 
@@ -151,7 +157,11 @@ if (error != NULL) \
 if (condition) \
   { \
     if (G_IS_OBJECT (item)) \
-      g_signal_emit (item, sn_item_signals[FINISH], 0); \
+      { \
+        panel_debug (PANEL_DEBUG_SYSTRAY, "%s: Finishing on error for item '%s'", \
+                     G_STRLOC, item->id); \
+        g_signal_emit (item, sn_item_signals[FINISH], 0); \
+      } \
     return; \
   }
 
@@ -484,7 +494,9 @@ sn_item_start_failed (gpointer user_data)
 {
   SnItem *item = user_data;
 
-  /* start is failed, emit the signel in next loop iteration */
+  /* start is failed, emit the signal in next loop iteration */
+  panel_debug (PANEL_DEBUG_SYSTRAY, "%s: Finishing on error for item '%s'",
+               G_STRLOC, XFCE_IS_SN_ITEM (item) ? item->id : "");
   g_signal_emit (G_OBJECT (item), sn_item_signals[FINISH], 0);
 
   return G_SOURCE_REMOVE;
