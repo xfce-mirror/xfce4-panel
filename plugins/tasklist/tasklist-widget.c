@@ -3925,7 +3925,7 @@ xfce_tasklist_group_button_button_draw (GtkWidget         *widget,
       gdouble radius, x, y;
       gint icon_size;
       GdkPixbuf *icon_pixbuf;
-      GdkRectangle icon_pixbuf_rect;
+      GdkRectangle icon_pixbuf_rect = { 0 };
 
       gtk_widget_get_allocation (GTK_WIDGET (widget), &allocation);
       cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
@@ -3951,8 +3951,11 @@ xfce_tasklist_group_button_button_draw (GtkWidget         *widget,
         }
 
       icon_pixbuf = gtk_image_get_pixbuf (GTK_IMAGE (group_child->icon));
-      icon_pixbuf_rect.width = gdk_pixbuf_get_width (icon_pixbuf);
-      icon_pixbuf_rect.height = gdk_pixbuf_get_height (icon_pixbuf);
+      if (icon_pixbuf != NULL)
+        {
+          icon_pixbuf_rect.width = gdk_pixbuf_get_width (icon_pixbuf);
+          icon_pixbuf_rect.height = gdk_pixbuf_get_height (icon_pixbuf);
+        }
 
       pango_layout_get_pixel_extents (n_windows_layout, &ink_extent, &log_extent);
       icon_size = xfce_panel_plugin_get_icon_size (xfce_tasklist_get_panel_plugin (group_child->tasklist));
