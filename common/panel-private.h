@@ -20,6 +20,16 @@
 #define __PANEL_PRIVATE_H__
 
 #include <gtk/gtk.h>
+#ifdef GDK_WINDOWING_X11
+#include <gdk/gdkx.h>
+#else
+#define GDK_IS_X11_DISPLAY(display) FALSE
+#endif
+#ifdef GDK_WINDOWING_WAYLAND
+#include <gdk/gdkwayland.h>
+#else
+#define GDK_IS_WAYLAND_DISPLAY(display) FALSE
+#endif
 
 /* support macros for debugging (improved macro for better position indication) */
 /*#ifndef NDEBUG*/
