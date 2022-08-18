@@ -175,7 +175,8 @@ static void on_logind_signal (GDBusProxy *proxy,
 
 static ClockSleepMonitor* clock_sleep_monitor_logind_create (void)
 {
-  ClockSleepMonitorLogind* monitor;
+  ClockSleepMonitorLogind *monitor;
+  gchar *owner_name;
 
   g_message ("trying to instantiate logind sleep monitor");
 
@@ -195,6 +196,15 @@ static ClockSleepMonitor* clock_sleep_monitor_logind_create (void)
       g_object_unref (G_OBJECT (monitor));
       return NULL;
     }
+
+  owner_name = g_dbus_proxy_get_name_owner (monitor->logind_proxy);
+  if (owner_name == NULL)
+    {
+      g_message ("logind not active");
+      g_object_unref (G_OBJECT (monitor));
+      return NULL;
+    }
+  free (owner_name);
 
   g_signal_connect (monitor->logind_proxy, "g-signal", G_CALLBACK (on_logind_signal), monitor);
 
