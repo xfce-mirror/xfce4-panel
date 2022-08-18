@@ -176,7 +176,6 @@ static void on_logind_signal (GDBusProxy *proxy,
 static ClockSleepMonitor* clock_sleep_monitor_logind_create (void)
 {
   ClockSleepMonitorLogind* monitor;
-  guint handler_id;
 
   g_message ("trying to instantiate logind sleep monitor");
 
@@ -197,13 +196,7 @@ static ClockSleepMonitor* clock_sleep_monitor_logind_create (void)
       return NULL;
     }
 
-  handler_id = g_signal_connect (monitor->logind_proxy, "g-signal", G_CALLBACK (on_logind_signal), monitor);
-  if (handler_id == 0)
-    {
-      g_critical ("could not connect to logind signal");
-      g_object_unref (G_OBJECT (monitor));
-      return NULL;
-    }
+  g_signal_connect (monitor->logind_proxy, "g-signal", G_CALLBACK (on_logind_signal), monitor);
 
   return XFCE_CLOCK_SLEEP_MONITOR (monitor);
 }
