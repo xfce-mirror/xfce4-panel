@@ -204,7 +204,7 @@ static ClockSleepMonitor* clock_sleep_monitor_logind_create (void)
       g_object_unref (G_OBJECT (monitor));
       return NULL;
     }
-  free (owner_name);
+  g_free (owner_name);
 
   g_signal_connect (monitor->logind_proxy, "g-signal", G_CALLBACK (on_logind_signal), monitor);
 
