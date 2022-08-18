@@ -149,12 +149,11 @@ static void clock_sleep_monitor_logind_finalize (GObject *object)
   G_OBJECT_CLASS (clock_sleep_monitor_logind_parent_class)->finalize (object);
 }
 
-static void on_logind_signal (
-    GDBusProxy *proxy,
-    gchar *sender_name,
-    gchar *signal_name,
-    GVariant *parameters,
-    ClockSleepMonitor *monitor)
+static void on_logind_signal (GDBusProxy *proxy,
+                              gchar *sender_name,
+                              gchar *signal_name,
+                              GVariant *parameters,
+                              ClockSleepMonitor *monitor)
 {
   const gchar *format_string = "(b)";
   gboolean going_to_sleep;
