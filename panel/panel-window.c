@@ -612,7 +612,11 @@ panel_window_init (PanelWindow *window)
 
   /* initialize layer-shell if supported (includes Wayland display check) */
   if (gtk_layer_is_supported ())
-    gtk_layer_init_for_window (GTK_WINDOW (window));
+    {
+      gtk_layer_init_for_window (GTK_WINDOW (window));
+      gtk_layer_set_anchor (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+      gtk_layer_set_anchor (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+    }
 
   /* set the screen */
   panel_window_screen_changed (GTK_WIDGET (window), NULL);
@@ -1152,6 +1156,13 @@ panel_window_motion_notify_event (GtkWidget      *widget,
   /* get the pointer position from the event */
   pointer_x = event->x_root;
   pointer_y = event->y_root;
+  if (gtk_layer_is_supported ())
+    {
+      pointer_x += window->area.x + gtk_layer_get_margin (GTK_WINDOW (window),
+                                                          GTK_LAYER_SHELL_EDGE_LEFT);
+      pointer_y += window->area.y + gtk_layer_get_margin (GTK_WINDOW (window),
+                                                          GTK_LAYER_SHELL_EDGE_TOP);
+    }
 
   /* the 0x0 coordinate is a sign the cursor is on another screen then
    * the panel that is currently dragged */
@@ -1167,6 +1178,8 @@ panel_window_motion_notify_event (GtkWidget      *widget,
           window->grab_time = 0;
           panel_window_thaw_autohide (window);
           retval = FALSE;
+          if (gtk_layer_is_supported ())
+            gdk_window_set_cursor (event->window, NULL);
         }
     }
   /* check if the pointer moved to another monitor */
@@ -1192,8 +1205,8 @@ panel_window_motion_notify_event (GtkWidget      *widget,
   window_y = CLAMP (window_y, window->area.y, high);
 
   /* update the grab coordinates */
-  window->grab_x = pointer_x - window_x;
-  window->grab_y = pointer_y - window_y;
+  window->grab_x = CLAMP (pointer_x - window_x, 0, window->alloc.width);
+  window->grab_y = CLAMP (pointer_y - window_y, 0, window->alloc.height);
 
   /* update the base coordinates */
   window->base_x = window_x + window->alloc.width / 2;
@@ -1241,11 +1254,24 @@ panel_window_button_press_event (GtkWidget      *widget,
       cursor = gdk_cursor_new_for_display (window->display, GDK_FLEUR);
 
       /* grab the pointer for dragging the window */
-      seat = gdk_device_get_seat (event->device);
-
-      status = gdk_seat_grab (seat, event->window,
-                              GDK_SEAT_CAPABILITY_ALL_POINTING,
-                              FALSE, cursor, (GdkEvent*)event, NULL, NULL);
+      if (GDK_IS_X11_DISPLAY (window->display))
+        {
+          seat = gdk_device_get_seat (event->device);
+          status = gdk_seat_grab (seat, event->window,
+                                  GDK_SEAT_CAPABILITY_ALL_POINTING,
+                                  FALSE, cursor, (GdkEvent*)event, NULL, NULL);
+        }
+      else if (gtk_layer_is_supported ())
+        {
+          gdk_window_set_cursor (event->window, cursor);
+          status = GDK_GRAB_SUCCESS;
+        }
+      else
+        {
+          gtk_window_begin_move_drag (GTK_WINDOW (window), event->button,
+                                      event->x_root, event->y_root, event->time);
+          status = GDK_GRAB_FAILED;
+        }
 
       if (cursor != NULL)
         g_object_unref (cursor);
@@ -1291,6 +1317,8 @@ panel_window_button_release_event (GtkWidget      *widget,
       /* ungrab the pointer */
       gdk_seat_ungrab (gdk_device_get_seat (event->device));
       window->grab_time = 0;
+      if (gtk_layer_is_supported ())
+        gdk_window_set_cursor (event->window, NULL);
 
       /* store the new position */
       g_object_notify (G_OBJECT (widget), "position");
@@ -1552,7 +1580,15 @@ panel_window_size_allocate (GtkWidget     *widget,
       if (window->autohide_window != NULL)
         gtk_window_move (GTK_WINDOW (window->autohide_window), -9999, -9999);
 
-      gtk_window_move (GTK_WINDOW (window), window->alloc.x, window->alloc.y);
+      if (gtk_layer_is_supported ())
+        {
+          gtk_layer_set_margin (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_TOP,
+                                window->alloc.y - window->area.y);
+          gtk_layer_set_margin (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_LEFT,
+                                window->alloc.x - window->area.x);
+        }
+      else
+        gtk_window_move (GTK_WINDOW (window), window->alloc.x, window->alloc.y);
     }
 
   child = gtk_bin_get_child (GTK_BIN (widget));
@@ -2444,6 +2480,11 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
       if (window->struts_edge == STRUTS_EDGE_NONE)
         panel_debug (PANEL_DEBUG_POSITIONING,
                      "%p: unset struts edge; between monitors", window);
+
+      /* the compositor does not manage to display the panel on the right monitor
+       * by himself in general */
+      if (gtk_layer_is_supported ())
+        gtk_layer_set_monitor (GTK_WINDOW (window), monitor);
     }
 
   /* set the new working area of the panel */
