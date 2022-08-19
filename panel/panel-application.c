@@ -28,6 +28,7 @@
 #include <xfconf/xfconf.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
+#include <gtk-layer-shell/gtk-layer-shell.h>
 
 #ifdef GDK_WINDOWING_X11
 #include <X11/Xlib.h>
@@ -232,6 +233,14 @@ panel_application_init (PanelApplication *application)
   /* start the autosave timer for plugins */
   application->autosave_timer_id = g_timeout_add_seconds (60 * 10,
       panel_application_autosave_timer, application);
+
+  /* warn the user about restricted features on Wayland */
+  if (GDK_IS_WAYLAND_DISPLAY (gdk_display_get_default ()))
+    {
+      if (! gtk_layer_is_supported ())
+        g_warning ("Wayland detected without layer-shell support: Xfce4-panel might not look"
+                   " like a panel and many of its features will not be available");
+    }
 }
 
 

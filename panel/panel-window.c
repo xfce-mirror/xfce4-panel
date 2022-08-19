@@ -36,6 +36,8 @@
 
 #include <libxfce4ui/libxfce4ui.h>
 
+#include <gtk-layer-shell/gtk-layer-shell.h>
+
 #include <xfconf/xfconf.h>
 #include <common/panel-private.h>
 #include <common/panel-debug.h>
@@ -606,6 +608,13 @@ panel_window_init (PanelWindow *window)
 
   /* create a 'fake' drop zone for autohide drag motion */
   gtk_drag_dest_set (GTK_WIDGET (window), 0, NULL, 0, 0);
+
+  /* initialize layer-shell if supported (includes Wayland display check) */
+  if (gtk_layer_is_supported ())
+    {
+      gtk_layer_init_for_window (GTK_WINDOW (window));
+      gtk_layer_set_keyboard_mode (GTK_WINDOW (window), GTK_LAYER_SHELL_KEYBOARD_MODE_ON_DEMAND);
+    }
 
   /* set the screen */
   panel_window_screen_changed (GTK_WIDGET (window), NULL);
