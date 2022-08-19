@@ -140,6 +140,7 @@ static StrutsEgde   panel_window_screen_struts_edge                   (PanelWind
 static void         panel_window_screen_struts_set                    (PanelWindow      *window);
 static void         panel_window_screen_update_borders                (PanelWindow      *window);
 static SnapPosition panel_window_snap_position                        (PanelWindow      *window);
+static void         panel_window_layer_set_anchor                     (PanelWindow      *window);
 static void         panel_window_display_layout_debug                 (GtkWidget        *widget);
 static void         panel_window_screen_layout_changed                (GdkScreen        *screen,
                                                                        PanelWindow      *window);
@@ -614,8 +615,6 @@ panel_window_init (PanelWindow *window)
     {
       gtk_layer_init_for_window (GTK_WINDOW (window));
       gtk_layer_set_keyboard_mode (GTK_WINDOW (window), GTK_LAYER_SHELL_KEYBOARD_MODE_ON_DEMAND);
-      gtk_layer_set_anchor (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_TOP, TRUE);
-      gtk_layer_set_anchor (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
     }
 
   /* set the screen */
@@ -884,6 +883,9 @@ panel_window_set_property (GObject      *object,
           window->base_x = MAX (x, 0);
           window->base_y = MAX (y, 0);
 
+          if (gtk_layer_is_supported ())
+            panel_window_layer_set_anchor (window);
+
           panel_window_screen_layout_changed (window->screen, window);
 
           /* send the new screen position to the panel plugins */
@@ -1103,6 +1105,7 @@ panel_window_motion_notify_event (GtkWidget      *widget,
 {
   PanelWindow     *window = PANEL_WINDOW (widget);
   PanelBaseWindow *base_window = PANEL_BASE_WINDOW (widget);
+  SnapPosition     snap_position;
   gint             pointer_x, pointer_y;
   gint             window_x, window_y;
   gint             high;
@@ -1181,7 +1184,13 @@ panel_window_motion_notify_event (GtkWidget      *widget,
   window->alloc.y = window_y;
 
   /* update the snapping position */
-  window->snap_position = panel_window_snap_position (window);
+  snap_position = panel_window_snap_position (window);
+  if (snap_position != window->snap_position)
+    {
+      window->snap_position = snap_position;
+      if (gtk_layer_is_supported ())
+        panel_window_layer_set_anchor (window);
+    }
 
   /* update the working area */
   panel_window_screen_layout_changed (window->screen, window);
@@ -1410,6 +1419,20 @@ panel_window_get_preferred_height (GtkWidget *widget,
 
   if (natural_height != NULL)
     *natural_height = n_height;
+
+  /*
+   * Disable left/right or top/bottom anchor pairs during allocation, so that the panel
+   * is not stretched between the two anchors, preventing it from shrinking. Quite an
+   * ugly hack but it works until it gets better.
+   */
+  if (gtk_layer_is_supported () && window->snap_position != SNAP_POSITION_NONE)
+    {
+      GtkWindow *gtkwindow = GTK_WINDOW (widget);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
+    }
 }
 
 
@@ -1448,6 +1471,10 @@ panel_window_size_allocate (GtkWidget     *widget,
 
   gtk_widget_set_allocation (widget, alloc);
   window->alloc = *alloc;
+
+  /* re-enable anchor pairs, see above in get_preferred_height() */
+  if (gtk_layer_is_supported () && window->snap_position != SNAP_POSITION_NONE)
+    panel_window_layer_set_anchor (window);
 
   if (G_UNLIKELY (window->autohide_state == AUTOHIDE_HIDDEN
                   || window->autohide_state == AUTOHIDE_POPUP))
@@ -1548,8 +1575,14 @@ panel_window_size_allocate (GtkWidget     *widget,
         {
           gtk_layer_set_margin (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_TOP,
                                 window->alloc.y - window->area.y);
+          gtk_layer_set_margin (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_BOTTOM,
+                                window->area.y + window->area.height
+                                - window->alloc.y - window->alloc.height);
           gtk_layer_set_margin (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_LEFT,
                                 window->alloc.x - window->area.x);
+          gtk_layer_set_margin (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_RIGHT,
+                                window->area.x + window->area.width
+                                - window->alloc.x - window->alloc.width);
         }
       else
         gtk_window_move (GTK_WINDOW (window), window->alloc.x, window->alloc.y);
@@ -1923,6 +1956,31 @@ panel_window_screen_struts_set (PanelWindow *window)
   if (!gtk_widget_get_realized (GTK_WIDGET (window)))
     return;
 
+  if (gtk_layer_is_supported ())
+    {
+      switch (window->struts_edge)
+        {
+        case STRUTS_EDGE_TOP:
+        case STRUTS_EDGE_BOTTOM:
+          gtk_layer_set_exclusive_zone (GTK_WINDOW (window), window->alloc.height);
+          break;
+
+        case STRUTS_EDGE_LEFT:
+        case STRUTS_EDGE_RIGHT:
+          gtk_layer_set_exclusive_zone (GTK_WINDOW (window), window->alloc.width);
+          break;
+
+        default:
+          gtk_layer_set_exclusive_zone (GTK_WINDOW (window), 0);
+          break;
+        }
+
+      return;
+    }
+
+  if (! GDK_IS_X11_DISPLAY (window->display))
+    return;
+
   /* set the struts */
   /* Note that struts are relative to the screen edge! (NOT the monitor)
      This means we have no choice but to use deprecated GtkScreen calls.
@@ -2160,6 +2218,136 @@ panel_window_snap_position (PanelWindow *window)
     return SNAP_POSITION_S;
 
   return SNAP_POSITION_NONE;
+}
+
+
+
+static void
+panel_window_layer_set_anchor (PanelWindow *window)
+{
+  GtkWindow *gtkwindow = GTK_WINDOW (window);
+
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
+
+  /* only two anchors are needed to set the panel position, but three to set
+   * the exclusive zone */
+  switch (window->snap_position)
+    {
+    case SNAP_POSITION_NONE:
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
+      break;
+
+    case SNAP_POSITION_N:
+    case SNAP_POSITION_NC:
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+      if (IS_HORIZONTAL (window))
+        gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, TRUE);
+      else
+        gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
+      break;
+
+    case SNAP_POSITION_NW:
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+      if (IS_HORIZONTAL (window))
+        {
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, TRUE);
+        }
+      else
+        {
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, TRUE);
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
+        }
+      break;
+
+    case SNAP_POSITION_NE:
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, TRUE);
+      if (IS_HORIZONTAL (window))
+        {
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+        }
+      else
+        {
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, TRUE);
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, FALSE);
+        }
+      break;
+
+    case SNAP_POSITION_S:
+    case SNAP_POSITION_SC:
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, FALSE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+      if (IS_HORIZONTAL (window))
+        gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, TRUE);
+      else
+        gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
+      break;
+
+    case SNAP_POSITION_SW:
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+      if (IS_HORIZONTAL (window))
+        {
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, FALSE);
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, TRUE);
+        }
+      else
+        {
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
+        }
+      break;
+
+    case SNAP_POSITION_SE:
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, TRUE);
+      if (IS_HORIZONTAL (window))
+        {
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, FALSE);
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+        }
+      else
+        {
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, FALSE);
+        }
+      break;
+
+    case SNAP_POSITION_W:
+    case SNAP_POSITION_WC:
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
+      if (IS_HORIZONTAL (window))
+        gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
+      else
+        gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, TRUE);
+      break;
+
+    case SNAP_POSITION_E:
+    case SNAP_POSITION_EC:
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, FALSE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, TRUE);
+      if (IS_HORIZONTAL (window))
+        gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
+      else
+        gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, TRUE);
+      break;
+
+    default:
+      panel_assert_not_reached ();
+      break;
+    }
 }
 
 
