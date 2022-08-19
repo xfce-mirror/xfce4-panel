@@ -63,6 +63,7 @@ xfce4_panel_CFLAGS = \
 	$(LIBWNCK_CFLAGS) \
 	$(XFCONF_CFLAGS) \
 	$(LIBX11_CFLAGS) \
+	$(GTK_LAYER_SHELL_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 xfce4_panel_LDFLAGS = \
@@ -80,6 +81,7 @@ xfce4_panel_LDADD = \
 	$(LIBWNCK_LIBS) \
 	$(XFCONF_LIBS) \
 	$(LIBX11_LIBS) \
+	$(GTK_LAYER_SHELL_LIBS) \
 	-lm
 
 xfce4_panel_DEPENDENCIES = \
