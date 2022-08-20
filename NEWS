@@ -1,3 +1,22 @@
+4.16.5 (2022-08-20)
+======
+- systray: Help to keep status notifiers from vanishing (#102, #243, #599)
+- panel: Populate item dialog after setting dialog screen (Fixes #62)
+- systray: Perform sanity checks also for "NewStatus" signal (Fixes #602)
+- pager: Properly disconnect signal handler
+- tasklist: Guard against null workspace
+- panel: Be sure to save plugins before xfconf_shutdown()
+- tasklist: Fix critical warning when starting on a disconnected device
+- Update `.gitignore`
+- libxfce4panel: Destroy plugin prefs dialog on plugin "destroy" signal
+- build: Fix intltool lock file problem during make distcheck
+- prefs-dialog: Filter out irrelevant selection changes in "Items" tab
+- wrapper: Ensure that provider stays alive when processing "g-signal"
+- Revert "panel: Keep a reference on item during drag and drop"
+- tasklist: Fix wireframe for CSD windows (v2) (#562)
+- Translation Updates:
+  English (United Kingdom), Georgian, Greek, Panjabi (Punjabi), Russian
+
 4.16.4 (2022-04-16)
 ======
 - Update copyright year and standardize formatting
