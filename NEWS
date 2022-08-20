@@ -1,3 +1,60 @@
+4.17.3 (2022-08-20)
+======
+- New Features:
+  - clock: binary: Add new binary time mode (#235, !94)
+
+- Code Refactoring:
+  - cleanup: Use the same debug function everywhere
+  - clock: binary: Various refactoring and cleanups (!91, !92, !93)
+  - launcher: Replace deprecated GtkWidget::state-changed signal
+  - tasklist: Use a checkbox for button grouping
+  - cleanup: Remove dead code
+  - cleanup: Wrap some GdkScreen deprecations in one place
+  - cleanup: Wrap GtkImageMenuItem deprecations in one place
+  - cleanup: Remove deprecated GdkColor
+  - prefs-dialog: Rephrase "Don't reserve space on borders" (Fixes #217)
+  - tasklist: Simplify label text
+
+- Bug Fixes:
+  - clock: Implement sleep monitor (#58, !88)
+  - systray: Help to keep status notifiers from vanishing (#102, #243, #599)
+  - panel: Exit gracefully when display cannot be opened (Fixes #625)
+  - Urgency blinking fixes (!90)
+  - prefs-dialog: Always select another panel after removing one
+  - tasklist: Do not release button if left-click minimization is disabled
+  - tasklist: Properly exclude grouped windows from overflow menu
+  - tasklist: Keep dnd position when grouping/ungrouping windows (#323)
+  - Reposition menu for popup commands if necessary
+  - tasklist: Fix memory leak
+  - panel: Populate item dialog after setting dialog screen (Fixes #62)
+  - panel: Switch to pixels for the panel length in the prefs dialog (#99)
+  - panel: Rework enter/leave opacity management (#180)
+  - systray: Set button border width to 0 (Fixes #604)
+  - systray: Perform sanity checks also for "NewStatus" signal (Fixes #602)
+  - pager: Fix aspect ratio for viewport (Fixes #119)
+  - clock: Distinguish AM/PM hours in fuzzy clock for L10N (#77)
+  - libxfce4panel: Report a highlighted arrow button as blinking
+  - windowmenu: Update plugin icon on active window icon change (Fixes #37)
+  - pager: Synchronize workspace layout between plugin instances (#7)
+  - pager: Move some function calls to their right place
+  - pager: Properly disconnect signal handler
+  - tasklist: Guard against null workspace
+  - tasklist: Properly update active window when it changes workspace (#207)
+  - libxfce4panel: Warn about deprecated xfce_panel_plugin_position_menu()
+
+- Translation Updates:
+  Albanian, Amharic, Arabic, Armenian (Armenia), Asturian, Basque,
+  Belarusian, Bengali, Bulgarian, Catalan, Chinese (China), Chinese
+  (Hong Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch,
+  Eastern Armenian, English (Australia), English (United Kingdom),
+  Estonian, Finnish, French, Galician, Georgian, German, Greek, Hebrew,
+  Hungarian, Icelandic, Indonesian, Interlingue, Italian, Japanese,
+  Kazakh, Korean, Lithuanian, Malay, Norwegian Bokmål, Norwegian
+  Nynorsk, Occitan (post 1500), Panjabi (Punjabi), Polish, Portuguese,
+  Portuguese (Brazil), Romanian, Russian, Serbian, Sinhala, Slovak,
+  Slovenian, Spanish, Swedish, Thai, Turkish, Ukrainian, Uyghur,
+  Vietnamese
+
 4.17.2 (2022-07-10)
 ======
 - Dependency Changes:
