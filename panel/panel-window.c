@@ -1454,8 +1454,8 @@ panel_window_size_allocate (GtkWidget     *widget,
 
       /* position the autohide window */
       panel_window_size_allocate_set_xy (window, w, h, &x, &y);
-      panel_base_window_move_resize (PANEL_BASE_WINDOW (window->autohide_window),
-                                     x, y, w, h);
+      gtk_window_resize (GTK_WINDOW (window->autohide_window), w, h);
+      gtk_window_move (GTK_WINDOW (window->autohide_window), x, y);
 
       /* slide out the panel window with popdown_speed, but ignore panels that are floating, i.e. not
          attached to a GdkScreen border (i.e. including panels which are on a monitor border, but
@@ -1505,8 +1505,7 @@ panel_window_size_allocate (GtkWidget     *widget,
 
       /* move the autohide window offscreen */
       if (window->autohide_window != NULL)
-        panel_base_window_move_resize (PANEL_BASE_WINDOW (window->autohide_window),
-                                       -9999, -9999, -1, -1);
+        gtk_window_move (GTK_WINDOW (window->autohide_window), -9999, -9999);
 
       gtk_window_move (GTK_WINDOW (window), window->alloc.x, window->alloc.y);
     }
@@ -2823,8 +2822,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
                                 NULL);
 
           /* move the window offscreen */
-          panel_base_window_move_resize (PANEL_BASE_WINDOW (popup),
-                                         -9999, -9999, 3, 3);
+          gtk_window_move (GTK_WINDOW (popup), -9999, -9999);
 
           /* bind some properties to sync the two windows */
           for (i = 0; i < G_N_ELEMENTS (properties); i++)
