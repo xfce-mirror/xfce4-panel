@@ -218,3 +218,20 @@ panel_utils_destroy_later (GtkWidget *widget)
   g_idle_add_full (G_PRIORITY_HIGH, destroy_later, widget, NULL);
   g_object_ref_sink (G_OBJECT (widget));
 }
+
+
+
+/* we need to do this when GTK refuses to do it itself, for example to bring back a window
+ * that has been moved off-screen, see https://github.com/wmww/gtk-layer-shell/issues/143 */
+void
+panel_utils_wl_surface_commit (GtkWidget *widget)
+{
+  GdkWindow *window = gtk_widget_get_window (widget);
+  if (window != NULL)
+    {
+      /* yes, it can be null when the window is not */
+      struct wl_surface *wl_surface = gdk_wayland_window_get_wl_surface (window);
+      if (wl_surface != NULL)
+        wl_surface_commit (wl_surface);
+    }
+}
