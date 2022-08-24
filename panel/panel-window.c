@@ -135,6 +135,10 @@ static void         panel_window_size_allocate_set_xy                 (PanelWind
                                                                        gint              window_height,
                                                                        gint             *return_x,
                                                                        gint             *return_y);
+static void         panel_window_move                                 (PanelWindow      *window,
+                                                                       GtkWindow        *moved,
+                                                                       gint              x,
+                                                                       gint              y);
 static void         panel_window_screen_changed                       (GtkWidget        *widget,
                                                                        GdkScreen        *previous_screen);
 static void         panel_window_style_updated                        (GtkWidget        *widget);
@@ -596,7 +600,7 @@ panel_window_init (PanelWindow *window)
   window->popup_delay = DEFAULT_POPUP_DELAY;
   window->popdown_delay = DEFAULT_POPDOWN_DELAY;
   window->popdown_speed = DEFAULT_POPDOWN_SPEED;
-  window->popdown_progress = 0;
+  window->popdown_progress = - G_MAXINT;
   window->base_x = -1;
   window->base_y = -1;
   window->grab_time = 0;
@@ -1516,7 +1520,7 @@ panel_window_size_allocate (GtkWidget     *widget,
                   || window->autohide_state == AUTOHIDE_POPUP))
     {
       /* autohide timeout is already running, so let's wait with hiding the panel */
-      if (window->autohide_timeout_id != 0)
+      if (window->autohide_timeout_id != 0 || window->popdown_progress != - G_MAXINT)
         return;
 
       /* window is invisible */
@@ -1553,9 +1557,13 @@ panel_window_size_allocate (GtkWidget     *widget,
         }
 
       /* position the autohide window */
+      if (gtk_layer_is_supported ())
+        gtk_widget_set_size_request (window->autohide_window, w, h);
+      else
+        gtk_window_resize (GTK_WINDOW (window->autohide_window), w, h);
+
       panel_window_size_allocate_set_xy (window, w, h, &x, &y);
-      gtk_window_resize (GTK_WINDOW (window->autohide_window), w, h);
-      gtk_window_move (GTK_WINDOW (window->autohide_window), x, y);
+      panel_window_move (window, GTK_WINDOW (window->autohide_window), x, y);
 
       /* slide out the panel window with popdown_speed, but ignore panels that are floating, i.e. not
          attached to a GdkScreen border (i.e. including panels which are on a monitor border, but
@@ -1585,7 +1593,7 @@ panel_window_size_allocate (GtkWidget     *widget,
           if (window->autohide_ease_out_id != 0)
             g_source_remove (window->autohide_ease_out_id);
 
-          gtk_window_move (GTK_WINDOW (window), window->alloc.x, window->alloc.y);
+          panel_window_move (window, GTK_WINDOW (window), window->alloc.x, window->alloc.y);
         }
     }
   else
@@ -1605,23 +1613,9 @@ panel_window_size_allocate (GtkWidget     *widget,
 
       /* move the autohide window offscreen */
       if (window->autohide_window != NULL)
-        gtk_window_move (GTK_WINDOW (window->autohide_window), -9999, -9999);
+        panel_window_move (window, GTK_WINDOW (window->autohide_window), -9999, -9999);
 
-      if (gtk_layer_is_supported ())
-        {
-          gtk_layer_set_margin (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_TOP,
-                                window->alloc.y - window->area.y);
-          gtk_layer_set_margin (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_BOTTOM,
-                                window->area.y + window->area.height
-                                - window->alloc.y - window->alloc.height);
-          gtk_layer_set_margin (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_LEFT,
-                                window->alloc.x - window->area.x);
-          gtk_layer_set_margin (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_RIGHT,
-                                window->area.x + window->area.width
-                                - window->alloc.x - window->alloc.width);
-        }
-      else
-        gtk_window_move (GTK_WINDOW (window), window->alloc.x, window->alloc.y);
+      panel_window_move (window, GTK_WINDOW (window), window->alloc.x, window->alloc.y);
     }
 
   child = gtk_bin_get_child (GTK_BIN (widget));
@@ -1749,6 +1743,30 @@ panel_window_size_allocate_set_xy (PanelWindow *window,
       *return_y = window->area.y + (window->area.height - window_height) / 2;
       break;
     }
+}
+
+
+
+static void
+panel_window_move (PanelWindow *window,
+                   GtkWindow   *moved,
+                   gint         x,
+                   gint         y)
+{
+  if (gtk_layer_is_supported ())
+    {
+      gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_TOP, y - window->area.y);
+      gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_LEFT, x - window->area.x);
+      if (moved == GTK_WINDOW (window))
+        {
+          gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_BOTTOM,
+                                window->area.y + window->area.height - y - window->alloc.height);
+          gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_RIGHT,
+                                window->area.x + window->area.width - x - window->alloc.width);
+        }
+    }
+  else
+    gtk_window_move (moved, x, y);
 }
 
 
@@ -2665,7 +2683,11 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
       /* the compositor does not manage to display the panel on the right monitor
        * by himself in general */
       if (gtk_layer_is_supported ())
-        gtk_layer_set_monitor (GTK_WINDOW (window), monitor);
+        {
+          gtk_layer_set_monitor (GTK_WINDOW (window), monitor);
+          if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
+            gtk_layer_set_monitor (GTK_WINDOW (window->autohide_window), monitor);
+        }
     }
 
   /* set the new working area of the panel */
@@ -2923,7 +2945,16 @@ panel_window_autohide_ease_out (gpointer data)
   if (window->autohide_ease_out_id == 0)
     return FALSE;
 
-  gtk_window_get_position (GTK_WINDOW (window), &x, &y);
+  if (gtk_layer_is_supported ())
+    {
+      x = window->area.x + gtk_layer_get_margin (GTK_WINDOW (window),
+                                                 GTK_LAYER_SHELL_EDGE_LEFT);
+      y = window->area.y + gtk_layer_get_margin (GTK_WINDOW (window),
+                                                 GTK_LAYER_SHELL_EDGE_TOP);
+    }
+  else
+    gtk_window_get_position (GTK_WINDOW (window), &x, &y);
+
   w = panel_screen_get_width (window->screen);
   h = panel_screen_get_height (window->screen);
 
@@ -2969,7 +3000,7 @@ panel_window_autohide_ease_out (gpointer data)
     }
 
   window->popdown_progress--;
-  gtk_window_move (GTK_WINDOW (window), x, y);
+  panel_window_move (window, GTK_WINDOW (window), x, y);
 
   return ret;
 }
@@ -2979,7 +3010,10 @@ panel_window_autohide_ease_out (gpointer data)
 static void
 panel_window_autohide_ease_out_timeout_destroy (gpointer user_data)
 {
-  PANEL_WINDOW (user_data)->autohide_ease_out_id = 0;
+  PanelWindow *window = user_data;
+
+  window->autohide_ease_out_id = 0;
+  window->popdown_progress = - G_MAXINT;
 }
 
 
@@ -3162,7 +3196,28 @@ panel_window_set_autohide_behavior (PanelWindow *window,
                                 NULL);
 
           /* move the window offscreen */
-          gtk_window_move (GTK_WINDOW (popup), -9999, -9999);
+          if (gtk_layer_is_supported ())
+            {
+              gtk_layer_init_for_window (GTK_WINDOW (popup));
+              gtk_layer_set_anchor (GTK_WINDOW (popup), GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+              gtk_layer_set_anchor (GTK_WINDOW (popup), GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+              if (gtk_widget_get_realized (GTK_WIDGET (window)))
+                {
+                  GdkWindow  *gdkwindow;
+                  GdkMonitor *monitor;
+
+                  gdkwindow = gtk_widget_get_window (GTK_WIDGET (window));
+                  monitor = gdk_display_get_monitor_at_window (window->display, gdkwindow);
+                  gtk_layer_set_monitor (GTK_WINDOW (popup), monitor);
+                }
+
+              /* must be done once here before the window is mapped so that subsequent
+               * resizing is taken into account */
+              gtk_widget_set_size_request (popup, window->autohide_size, window->autohide_size);
+            }
+
+          window->autohide_window = popup;
+          panel_window_move (window, GTK_WINDOW (window->autohide_window), -9999, -9999);
 
           /* bind some properties to sync the two windows */
           for (i = 0; i < G_N_ELEMENTS (properties); i++)
@@ -3190,7 +3245,6 @@ panel_window_set_autohide_behavior (PanelWindow *window,
               G_CALLBACK (panel_window_autohide_drag_leave), window);
 
           /* show the window */
-          window->autohide_window = popup;
           gtk_widget_show (popup);
         }
 
