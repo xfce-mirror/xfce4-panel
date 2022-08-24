@@ -2112,14 +2112,33 @@ panel_window_snap_edge_gravity (gint value,
 static SnapPosition
 panel_window_snap_position (PanelWindow *window)
 {
-  guint         snap_horz, snap_vert;
-  GdkRectangle *alloc = &window->alloc;
+  guint        snap_horz, snap_vert;
+  GdkRectangle alloc = window->alloc;
+  PanelBorders borders;
+
+  /* make the same calculation whether the panel is snapped or not (avoids flickering
+   * when the pointer moves slowly) */
+  borders = panel_base_window_get_borders (PANEL_BASE_WINDOW (window));
+  if (! PANEL_HAS_FLAG (borders, PANEL_BORDER_TOP))
+    alloc.height++;
+  if (! PANEL_HAS_FLAG (borders, PANEL_BORDER_BOTTOM))
+    {
+      alloc.y--;
+      alloc.height++;
+    }
+  if (! PANEL_HAS_FLAG (borders, PANEL_BORDER_LEFT))
+    alloc.width++;
+  if (! PANEL_HAS_FLAG (borders, PANEL_BORDER_RIGHT))
+    {
+      alloc.x--;
+      alloc.width++;
+    }
 
   /* get the snap offsets */
-  snap_horz = panel_window_snap_edge_gravity (alloc->x, window->area.x,
-      window->area.x + window->area.width - alloc->width);
-  snap_vert = panel_window_snap_edge_gravity (alloc->y, window->area.y,
-      window->area.y + window->area.height - alloc->height);
+  snap_horz = panel_window_snap_edge_gravity (alloc.x, window->area.x,
+      window->area.x + window->area.width - alloc.width);
+  snap_vert = panel_window_snap_edge_gravity (alloc.y, window->area.y,
+      window->area.y + window->area.height - alloc.height);
 
   /* detect the snap mode */
   if (snap_horz == EDGE_GRAVITY_START)
