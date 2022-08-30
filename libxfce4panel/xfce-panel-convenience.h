@@ -23,8 +23,31 @@
 #define __XFCE_PANEL_CONVENIENCE_H__
 
 #include <gtk/gtk.h>
+#include <wayland-util.h>
 
 G_BEGIN_DECLS
+
+/**
+ * xfce_panel_wl_registry_bind:
+ * @interface: interface name as a token (not a string)
+ *
+ * A wrapper around
+ * [wl_registry_bind()](https://wayland.app/protocols/wayland#wl_registry:request:bind)
+ * that allows to bind global objects available from the Walyand compositor from their
+ * interface name. Beyond convenience, you should use this instead of getting your own
+ * `wl_registry` from the compositor, as it centralizes resource management (as the
+ * [documentation says](https://wayland.app/protocols/wayland#wl_display:request:get_registry),
+ * resources attached to a `wl_registry` are only released when the `wl_display` is
+ * disconnected).
+ *
+ * Returns: (allow-none) (transfer full): The new, client-created object bound to
+ *          the server, or %NULL if @interface is not supported.
+ **/
+#define xfce_panel_wl_registry_bind(interface) \
+  xfce_panel_wl_registry_bind_real (#interface, &interface##_interface)
+
+gpointer     xfce_panel_wl_registry_bind_real      (const gchar               *interface_name,
+                                                    const struct wl_interface *interface);
 
 GtkWidget   *xfce_panel_create_button              (void) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
