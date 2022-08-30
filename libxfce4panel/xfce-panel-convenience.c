@@ -151,6 +151,36 @@ xfce_panel_wayland_finalize (void)
 
 
 /**
+ * xfce_panel_wl_registry_bind:
+ * @interface: interface name as a token (not a string)
+ *
+ * A wrapper around wl_registry_bind() that allows to bind global objects available
+ * from the Walyand compositor from their interface name.
+ *
+ * Returns: (allow-none) (transfer full): the new, client-created object bound to
+ *          the server, or %NULL if @interface is not supported.
+ *
+ * Since: 4.19.0
+ **/
+gpointer
+xfce_panel_wl_registry_bind_real (const gchar               *interface_name,
+                                  const struct wl_interface *interface)
+{
+  WlBindingParam *param;
+
+  panel_return_val_if_fail (wl_registry != NULL, NULL);
+
+  param = g_hash_table_lookup (wl_binding_params, interface_name);
+  if (param != NULL)
+    return wl_registry_bind (wl_registry, param->id, interface,
+                             MIN ((uint32_t) interface->version, param->version));
+
+  return NULL;
+}
+
+
+
+/**
  * xfce_panel_create_button:
  *
  * Create regular #GtkButton with a few properties set to be useful in the
