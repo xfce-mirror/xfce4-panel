@@ -209,6 +209,9 @@ panel_application_init (PanelApplication *application)
   application->drop_occurred = FALSE;
   application->autohide_block = 0;
 
+  /* initialize Wayland registry */
+  xfce_panel_wayland_init ();
+
   /* get the xfconf channel (singleton) */
   application->xfconf = panel_properties_get_channel (G_OBJECT (application));
 
@@ -274,6 +277,9 @@ panel_application_finalize (GObject *object)
   g_slist_free (application->windows);
 
   g_object_unref (G_OBJECT (application->factory));
+
+  /* finalize Wayland registry */
+  xfce_panel_wayland_finalize ();
 
   /* this is a good reference if all the objects are released */
   panel_debug (PANEL_DEBUG_APPLICATION, "finalized");
