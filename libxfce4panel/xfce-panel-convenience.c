@@ -150,6 +150,24 @@ xfce_panel_wayland_finalize (void)
 
 
 
+gpointer
+xfce_panel_wl_registry_bind_real (const gchar               *interface_name,
+                                  const struct wl_interface *interface)
+{
+  WlBindingParam *param;
+
+  panel_return_val_if_fail (wl_registry != NULL, NULL);
+
+  param = g_hash_table_lookup (wl_binding_params, interface_name);
+  if (param != NULL)
+    return wl_registry_bind (wl_registry, param->id, interface,
+                             MIN ((uint32_t) interface->version, param->version));
+
+  return NULL;
+}
+
+
+
 /**
  * xfce_panel_create_button:
  *
