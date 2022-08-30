@@ -26,6 +26,10 @@
 
 G_BEGIN_DECLS
 
+void         xfce_panel_wayland_init               (void);
+
+void         xfce_panel_wayland_finalize           (void);
+
 GtkWidget   *xfce_panel_create_button              (void) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
 GtkWidget   *xfce_panel_create_toggle_button       (void) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
