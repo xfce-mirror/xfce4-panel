@@ -21,7 +21,7 @@
 
 #include <gtk/gtk.h>
 
-#define LIBXFCE4PANEL_INSIDE_LIBXFCE4PANEL_H
+#define _LIBXFCE4PANEL_INSIDE_LIBXFCE4PANEL_H
 
 #include <libxfce4panel/libxfce4panel-config.h>
 #include <libxfce4panel/libxfce4panel-enums.h>
@@ -32,6 +32,6 @@
 #include <libxfce4panel/xfce-panel-plugin.h>
 #include <libxfce4panel/xfce-panel-image.h>
 
-#undef LIBXFCE4PANEL_INSIDE_LIBXFCE4PANEL_H
+#undef _LIBXFCE4PANEL_INSIDE_LIBXFCE4PANEL_H
 
 #endif /* !__LIBXFCE4PANEL__ */
