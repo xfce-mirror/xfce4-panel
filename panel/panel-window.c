@@ -2376,6 +2376,25 @@ panel_window_active_window_changed (WnckScreen  *screen,
 
 
 
+static gboolean
+panel_window_pointer_is_outside (PanelWindow *window)
+{
+  GdkDevice *device;
+  GdkWindow *gdkwindow;
+
+  device = gdk_seat_get_pointer (gdk_display_get_default_seat (window->display));
+  if (device != NULL)
+    {
+      gdkwindow = gdk_device_get_window_at_position (device, NULL, NULL);
+      return gdkwindow == NULL || gdk_window_get_effective_toplevel (gdkwindow)
+                                  != gtk_widget_get_window (GTK_WIDGET (window));
+    }
+
+  return FALSE;
+}
+
+
+
 static void
 panel_window_active_window_geometry_changed (WnckWindow  *active_window,
                                              PanelWindow *window)
@@ -2472,23 +2491,9 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
            * with its coordinates */
           if (window->autohide_state != AUTOHIDE_HIDDEN)
             {
-              if (gdk_rectangle_intersect (&panel_area,  &window_area, NULL))
-                {
-                  GdkDevice *device;
-                  gint       pointer_x, pointer_y;
-
-                  device = gdk_seat_get_pointer (gdk_display_get_default_seat (window->display));
-                  if (device == NULL)
-                    return;
-
-                  /* check if the cursor is outside the panel area before proceeding */
-                  gdk_device_get_position (device, NULL, &pointer_x, &pointer_y);
-                  if (pointer_x <= panel_area.x
-                      || pointer_y <= panel_area.y
-                      || pointer_x >= panel_area.x + panel_area.width
-                      || pointer_y >= panel_area.y + panel_area.height)
-                    panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
-                }
+              if (gdk_rectangle_intersect (&panel_area,  &window_area, NULL)
+                  && panel_window_pointer_is_outside (window))
+                panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
             }
           else
             {
@@ -3403,9 +3408,7 @@ panel_window_freeze_autohide (PanelWindow *window)
 void
 panel_window_thaw_autohide (PanelWindow *window)
 {
-  GdkDevice *device;
-  GdkWindow *gdkwindow;
-  gboolean   outside = FALSE;
+  gboolean outside;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (window->autohide_block > 0);
@@ -3416,15 +3419,7 @@ panel_window_thaw_autohide (PanelWindow *window)
   if (window->autohide_block > 0)
     return;
 
-  /* check if pointer is outside the panel */
-  device = gdk_seat_get_pointer (gdk_display_get_default_seat (window->display));
-  if (device != NULL)
-    {
-      gdkwindow = gdk_device_get_window_at_position (device, NULL, NULL);
-      outside = (gdkwindow == NULL || gdk_window_get_effective_toplevel (gdkwindow)
-                                      != gtk_widget_get_window (GTK_WIDGET (window)));
-    }
-
+  outside = panel_window_pointer_is_outside (window);
   if (outside)
     panel_window_opacity_enter_queue (window, FALSE);
 
