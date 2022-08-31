@@ -126,6 +126,7 @@
     <title>Miscelleanous</title>
 
     <xi:include href="xml/convenience.xml"/>
+    <xi:include href="xml/macros.xml"/>
   </part>
 
   <index id="api-index-full">
@@ -135,6 +136,14 @@
   <index id="api-index-deprecated">
     <title>Index of deprecated symbols</title>
     <xi:include href="xml/api-index-deprecated.xml"><xi:fallback /></xi:include>
+  </index>
+  <index id="api-index-4-20">
+    <title>Index of new symbols in 4.20</title>
+    <xi:include href="xml/api-index-4.19.0.xml"><xi:fallback /></xi:include>
+  </index>
+  <index id="api-index-4-18">
+    <title>Index of new symbols in 4.18</title>
+    <xi:include href="xml/api-index-4.17.2.xml"><xi:fallback /></xi:include>
   </index>
   <index id="api-index-4-14">
     <title>Index of new symbols in 4.14</title>
