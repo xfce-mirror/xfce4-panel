@@ -38,6 +38,7 @@
 #include <libxfce4ui/libxfce4ui.h>
 
 #include <gtk-layer-shell/gtk-layer-shell.h>
+#include <protocols/wlr-foreign-toplevel-management-unstable-v1-client.h>
 
 #include <xfconf/xfconf.h>
 #include <common/panel-private.h>
@@ -190,6 +191,19 @@ static void         panel_window_plugin_set_nrows                     (GtkWidget
                                                                        gpointer          user_data);
 static void         panel_window_plugin_set_screen_position           (GtkWidget        *widget,
                                                                        gpointer          user_data);
+static void         panel_window_wl_toplevel_manager_toplevel         (void                                    *data,
+                                                                       struct zwlr_foreign_toplevel_manager_v1 *manager,
+                                                                       struct zwlr_foreign_toplevel_handle_v1  *toplevel);
+static void         panel_window_wl_toplevel_manager_finished         (void                                    *data,
+                                                                       struct zwlr_foreign_toplevel_manager_v1 *manager);
+static void         panel_window_wl_toplevel_state                    (void                                    *data,
+                                                                       struct zwlr_foreign_toplevel_handle_v1  *toplevel,
+                                                                       struct wl_array                         *state);
+static void         panel_window_wl_toplevel_closed                   (void                                    *data,
+                                                                       struct zwlr_foreign_toplevel_handle_v1  *toplevel);
+static void         panel_window_wl_toggle_notify                     (void                                    *data,
+                                                                       GObject                                 *object,
+                                                                       gboolean                                 is_last_ref);
 
 
 
@@ -374,6 +388,11 @@ struct _PanelWindow
   guint32              grab_time;
   gint                 grab_x;
   gint                 grab_y;
+
+  /* Wayland */
+  struct zwlr_foreign_toplevel_manager_v1 *wl_toplevel_manager;
+  GSList *wl_toplevels;
+  gboolean wl_active_is_maximized;
 };
 
 /* used for a full XfcePanelWindow name in the class, but not in the code */
@@ -387,6 +406,25 @@ static GdkAtom cardinal_atom = 0;
 static GdkAtom net_wm_strut_atom = 0;
 #endif
 static GdkAtom net_wm_strut_partial_atom = 0;
+
+static const struct zwlr_foreign_toplevel_manager_v1_listener wl_toplevel_manager_listener =
+{
+  panel_window_wl_toplevel_manager_toplevel,
+  panel_window_wl_toplevel_manager_finished
+};
+
+static void wl_unused (void) {};
+static const struct zwlr_foreign_toplevel_handle_v1_listener wl_toplevel_listener =
+{
+  (void (*) (void *, struct zwlr_foreign_toplevel_handle_v1 *, const char *)) wl_unused,
+  (void (*) (void *, struct zwlr_foreign_toplevel_handle_v1 *, const char *)) wl_unused,
+  (void (*) (void *, struct zwlr_foreign_toplevel_handle_v1 *, struct wl_output *)) wl_unused,
+  (void (*) (void *, struct zwlr_foreign_toplevel_handle_v1 *, struct wl_output *)) wl_unused,
+  panel_window_wl_toplevel_state,
+  (void (*) (void *, struct zwlr_foreign_toplevel_handle_v1 *)) wl_unused,
+  panel_window_wl_toplevel_closed,
+  (void (*) (void *, struct zwlr_foreign_toplevel_handle_v1 *, struct zwlr_foreign_toplevel_handle_v1 *)) wl_unused,
+};
 
 
 
@@ -2762,6 +2800,18 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
 
+  /* intellihide on Wayland: reduced to maximized active window */
+  if (window->wl_toplevel_manager != NULL)
+    {
+      if (window->wl_active_is_maximized)
+          && panel_window_pointer_is_outside (window))
+        panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
+      else
+        panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
+
+      return;
+    }
+
   /* ignore if for some reason the active window does not match the one we know */
   if (G_UNLIKELY (! PANEL_IS_X11_DISPLAY (window->display) || active_window == NULL
                   || window->wnck_active_window != active_window))
@@ -3176,6 +3226,11 @@ panel_window_set_autohide_behavior (PanelWindow *window,
   /* remember the new behavior */
   window->autohide_behavior = behavior;
 
+  /* reset Wayland toplevel manager if needed */
+  if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_INTELLIGENTLY
+      && window->wl_toplevel_manager != NULL)
+    panel_window_wl_toggle_notify (window->wl_toplevel_manager, G_OBJECT (window), FALSE);
+
   /* create an autohide window only if we are autohiding at all */
   if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
     {
@@ -3261,6 +3316,21 @@ panel_window_set_autohide_behavior (PanelWindow *window,
         {
           /* start intelligent autohide by making the panel visible initially */
           panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
+
+          if (gtk_layer_is_supported ())
+            {
+              window->wl_toplevel_manager =
+                xfce_panel_wl_registry_bind (zwlr_foreign_toplevel_manager_v1);
+              if (window->wl_toplevel_manager != NULL)
+                {
+                  g_object_add_toggle_ref (G_OBJECT (window), panel_window_wl_toggle_notify,
+                                           window->wl_toplevel_manager);
+                  zwlr_foreign_toplevel_manager_v1_add_listener (window->wl_toplevel_manager,
+                                                                 &wl_toplevel_manager_listener,
+                                                                 window);
+                  wl_display_roundtrip (gdk_wayland_display_get_wl_display (window->display));
+                }
+            }
         }
     }
   else if (window->autohide_window != NULL)
@@ -3678,6 +3748,87 @@ panel_window_plugin_set_screen_position (GtkWidget *widget,
 
   xfce_panel_plugin_provider_set_screen_position (XFCE_PANEL_PLUGIN_PROVIDER (widget),
                                                   position);
+}
+
+
+
+static void
+panel_window_wl_toplevel_manager_toplevel (void                                    *data,
+                                           struct zwlr_foreign_toplevel_manager_v1 *manager,
+                                           struct zwlr_foreign_toplevel_handle_v1  *toplevel)
+{
+  PanelWindow *window = data;
+
+  window->wl_toplevels = g_slist_prepend (window->wl_toplevels, toplevel);
+  zwlr_foreign_toplevel_handle_v1_add_listener (toplevel, &wl_toplevel_listener, window);
+  wl_display_roundtrip (gdk_wayland_display_get_wl_display (window->display));
+}
+
+
+
+static void
+panel_window_wl_toplevel_manager_finished (void                                    *data,
+                                           struct zwlr_foreign_toplevel_manager_v1 *manager)
+{
+  PanelWindow *window = data;
+
+  g_object_remove_toggle_ref (G_OBJECT (window), panel_window_wl_toggle_notify, manager);
+  g_slist_free_full (window->wl_toplevels,
+                     (GDestroyNotify) zwlr_foreign_toplevel_handle_v1_destroy);
+  window->wl_toplevels = NULL;
+  zwlr_foreign_toplevel_manager_v1_destroy (manager);
+}
+
+
+
+static void
+panel_window_wl_toplevel_state (void                                   *data,
+                                struct zwlr_foreign_toplevel_handle_v1 *toplevel,
+                                struct wl_array                        *states)
+{
+  PanelWindow *window = data;
+  enum zwlr_foreign_toplevel_handle_v1_state *state;
+  guint flags = 0;
+  gboolean wl_active_is_maximized;
+
+  wl_array_for_each (state, states)
+    flags |= 1 << *state;
+
+  if (PANEL_HAS_FLAG (flags, 1 << ZWLR_FOREIGN_TOPLEVEL_HANDLE_V1_STATE_ACTIVATED))
+    {
+      wl_active_is_maximized =
+        PANEL_HAS_FLAG (flags, 1 << ZWLR_FOREIGN_TOPLEVEL_HANDLE_V1_STATE_MAXIMIZED);
+      if (wl_active_is_maximized != window->wl_active_is_maximized)
+        {
+          window->wl_active_is_maximized = wl_active_is_maximized;
+          panel_window_active_window_geometry_changed (NULL, window);
+        }
+    }
+}
+
+
+
+static void
+panel_window_wl_toplevel_closed (void                                   *data,
+                                 struct zwlr_foreign_toplevel_handle_v1 *toplevel)
+{
+  PanelWindow *window = data;
+
+  window->wl_toplevels = g_slist_remove (window->wl_toplevels, toplevel);
+  zwlr_foreign_toplevel_handle_v1_destroy (toplevel);
+}
+
+
+
+static void
+panel_window_wl_toggle_notify (void     *data,
+                               GObject  *object,
+                               gboolean  is_last_ref)
+{
+  PanelWindow *window = PANEL_WINDOW (object);
+
+  zwlr_foreign_toplevel_manager_v1_stop (window->wl_toplevel_manager);
+  window->wl_toplevel_manager = NULL;
 }
 
 
