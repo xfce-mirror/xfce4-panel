@@ -64,6 +64,7 @@ xfce4_panel_CFLAGS = \
 	$(XFCONF_CFLAGS) \
 	$(LIBX11_CFLAGS) \
 	$(GTK_LAYER_SHELL_CFLAGS) \
+	$(WAYLAND_CLIENT_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 xfce4_panel_LDFLAGS = \
@@ -83,6 +84,7 @@ xfce4_panel_LDADD = \
 	$(XFCONF_LIBS) \
 	$(LIBX11_LIBS) \
 	$(GTK_LAYER_SHELL_LIBS) \
+	$(WAYLAND_CLIENT_LIBS) \
 	-lm
 
 xfce4_panel_DEPENDENCIES = \
