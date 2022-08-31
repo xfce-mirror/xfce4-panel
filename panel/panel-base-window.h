@@ -78,12 +78,6 @@ struct _PanelBaseWindow
 
 GType        panel_base_window_get_type                    (void) G_GNUC_CONST;
 
-void         panel_base_window_move_resize                 (PanelBaseWindow *window,
-                                                            gint             x,
-                                                            gint             y,
-                                                            gint             width,
-                                                            gint             height);
-
 void         panel_base_window_reset_background_css        (PanelBaseWindow *window);
 void         panel_base_window_orientation_changed         (PanelBaseWindow *window,
                                                             gint             mode);
