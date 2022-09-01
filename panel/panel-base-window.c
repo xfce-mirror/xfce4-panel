@@ -399,6 +399,10 @@ panel_base_window_set_property (GObject      *object,
         {
           if (priv->active_timeout_id == 0)
             {
+              /* save/restore style context is better than add/remove class to ensure
+               * the return to the original state with some themes */
+              gtk_style_context_save (gtk_widget_get_style_context (GTK_WIDGET (window)));
+
               /* start timeout for the marching ants selection */
               priv->active_timeout_id = gdk_threads_add_timeout_seconds_full (
                   G_PRIORITY_DEFAULT_IDLE, 1,
@@ -551,17 +555,12 @@ panel_base_window_active_timeout (gpointer user_data)
 static void
 panel_base_window_active_timeout_destroyed (gpointer user_data)
 {
-  PanelBaseWindow        *window = PANEL_BASE_WINDOW (user_data);
-  GtkStyleContext        *context;
+  PanelBaseWindow *window = user_data;
 
   window->priv->active_timeout_id = 0;
-  context = gtk_widget_get_style_context (GTK_WIDGET (window));
 
   /* Stop the marching ants */
-  if (gtk_style_context_has_class (context, MARCHING_ANTS_DASHED))
-    gtk_style_context_remove_class (context, MARCHING_ANTS_DASHED);
-  if (gtk_style_context_has_class (context, MARCHING_ANTS_DOTTED))
-    gtk_style_context_remove_class (context, MARCHING_ANTS_DOTTED);
+  gtk_style_context_restore (gtk_widget_get_style_context (GTK_WIDGET (window)));
 }
 
 
