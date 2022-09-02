@@ -780,23 +780,6 @@ panel_base_window_set_plugin_background_image (GtkWidget *widget,
 
 
 void
-panel_base_window_move_resize (PanelBaseWindow *window,
-                               gint             x,
-                               gint             y,
-                               gint             width,
-                               gint             height)
-{
-  panel_return_if_fail (PANEL_IS_BASE_WINDOW (window));
-
-  if (width > 0 && height > 0)
-    gtk_window_resize (GTK_WINDOW (window), width, height);
-
-  gtk_window_move (GTK_WINDOW (window), x, y);
-}
-
-
-
-void
 panel_base_window_set_borders (PanelBaseWindow *window,
                                PanelBorders     borders)
 {
