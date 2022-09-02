@@ -459,7 +459,7 @@ clock_plugin_button_press_event (GtkWidget      *widget,
 
           return TRUE;
         }
-      else if (event->type == GDK_2BUTTON_PRESS
+      else if (event->type == GDK_BUTTON_PRESS
                && !panel_str_is_empty (plugin->command))
         {
           /* launch command */
