@@ -654,7 +654,7 @@ clock_plugin_configure_plugin_mode_changed (GtkComboBox       *combo,
     const gchar *property;
   } names[] = {
     { "show-seconds", "show-seconds", "active" },
-    { "binary-mode", "binary-mode", "active" },
+    { "binary-box", "binary-mode", "active" },
     { "show-military", "show-military", "active" },
     { "flash-separators", "flash-separators", "active" },
     { "show-meridiem", "show-meridiem", "active" },
