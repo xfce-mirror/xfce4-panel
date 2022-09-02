@@ -274,7 +274,7 @@ clock_plugin_init (ClockPlugin *plugin)
   plugin->clock = NULL;
   plugin->tooltip_format = g_strdup (DEFAULT_TOOLTIP_FORMAT);
   plugin->tooltip_timeout = NULL;
-  plugin->command = NULL;
+  plugin->command = g_strdup ("");
   plugin->time_config_tool = g_strdup (DEFAULT_TIME_CONFIG_TOOL);
   plugin->rotate_vertically = TRUE;
   plugin->seat = NULL;
@@ -1104,6 +1104,11 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                                               GTK_COMBO_BOX (combo),
                                               GTK_ENTRY (object),
                                               tooltip_formats);
+
+  object = gtk_builder_get_object (builder, "command");
+  g_object_bind_property (G_OBJECT (plugin), "command",
+                          G_OBJECT (object), "text",
+                          G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
 
   object = gtk_builder_get_object (builder, "digital-format");
   g_signal_connect (G_OBJECT (object), "changed",
