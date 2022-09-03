@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-13 12:48+0200\n"
+"POT-Creation-Date: 2022-09-03 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Jan Ziak <0xe2.0x9a.0x9b@gmail.com>, 2021\n"
 "Language-Team: Slovak (http://www.transifex.com/xfce/xfce4-panel/language/sk/)\n"
@@ -982,7 +982,7 @@ msgid ""
 msgstr "Vyberte túto možnosť pre zobrazenie všeobecných názvov aplikácií v ponuke, napríklad  \"Správca súborov\" namiesto \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:23
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
@@ -1031,7 +1031,7 @@ msgstr "_OK"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:652
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2479
+#: ../plugins/clock/clock.c:964 ../plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Nepodarilo sa spustiť príkaz „%s“."
@@ -1071,20 +1071,20 @@ msgid "Show help options"
 msgstr "Zobraziť možnosti pomocníka"
 
 #. TRANSLATORS: adjust this accordingly for your locale format
-#: ../plugins/clock/clock.c:46
+#: ../plugins/clock/clock.c:47
 msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
 
-#: ../plugins/clock/clock.c:174
+#: ../plugins/clock/clock.c:178
 msgid "Week %V"
 msgstr "Týždeň %V"
 
-#: ../plugins/clock/clock.c:465
+#: ../plugins/clock/clock.c:471
 msgid "Failed to execute clock command"
 msgstr "Nepodarilo sa spustiť príkaz hodín"
 
-#: ../plugins/clock/clock.c:894
+#: ../plugins/clock/clock.c:903
 msgid "Custom Format"
 msgstr "Vlastný formát"
 
@@ -1143,7 +1143,21 @@ msgstr "Na_stavenia dátumu a času…"
 msgid "Time Settings"
 msgstr "Nastavenie času"
 
+#: ../plugins/clock/clock-dialog.glade.h:16
+msgid ""
+"If set, this command is run when the plugin is left-clicked, instead of "
+"displaying the default calendar."
+msgstr ""
+
 #: ../plugins/clock/clock-dialog.glade.h:17
+msgid "Co_mmand:"
+msgstr "_Príkaz"
+
+#: ../plugins/clock/clock-dialog.glade.h:18
+msgid "Calendar"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1152,53 +1166,53 @@ msgid ""
 "page for additional information."
 msgstr "Formát dátumu a času, ako bude vložený do panela. Napríklad, %Y bude nahradené rokom, %m mesiacom a %d zase dňom. Podobne, značky <b></b> urobia tučný text. Viď stránku „Pomocník” s ďalšími informáciami."
 
-#: ../plugins/clock/clock-dialog.glade.h:18
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "_Tooltip format:"
 msgstr "_Formát nápovedy:"
 
-#: ../plugins/clock/clock-dialog.glade.h:19
+#: ../plugins/clock/clock-dialog.glade.h:22
 msgid "_Layout:"
 msgstr "_Vzhľad:"
 
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:24
 msgid "Sho_w AM/PM"
 msgstr "Zobraziť vo formáte AM/PM (dopoludnia/popoludní)"
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "Fl_ash time separators"
 msgstr "Bli_kajúce oddeľovače času"
 
-#: ../plugins/clock/clock-dialog.glade.h:23
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "24-_hour clock"
 msgstr "24-_hodinový čas"
 
-#: ../plugins/clock/clock-dialog.glade.h:24
+#: ../plugins/clock/clock-dialog.glade.h:27
 msgid "Binary mode:"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:28
 msgid "Display _seconds"
 msgstr "Zobraziť _sekundy"
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:29
 msgid "F_ormat:"
 msgstr "_Formát:"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:28
+#: ../plugins/clock/clock-dialog.glade.h:31
 msgid "F_uzziness:"
 msgstr "_Približnosť:"
 
-#: ../plugins/clock/clock-dialog.glade.h:29
+#: ../plugins/clock/clock-dialog.glade.h:32
 msgid "Show _inactive dots"
 msgstr "Zobraziť _neaktívne bodky"
 
-#: ../plugins/clock/clock-dialog.glade.h:30
+#: ../plugins/clock/clock-dialog.glade.h:33
 msgid "Show gri_d"
 msgstr "Zobraziť _mriežku"
 
-#: ../plugins/clock/clock-dialog.glade.h:31
+#: ../plugins/clock/clock-dialog.glade.h:34
 msgid "Clock Options"
 msgstr "Možnosti hodín"
 
