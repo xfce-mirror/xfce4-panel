@@ -8,7 +8,6 @@ AM_CPPFLAGS = \
 	-DHELPERDIR=\"$(HELPER_PATH_PREFIX)/xfce4/panel\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	-DDBUS_API_SUBJECT_TO_CHANGE \
-	-DWNCK_I_KNOW_THIS_IS_UNSTABLE \
 	$(PLATFORM_CPPFLAGS)
 
 bin_PROGRAMS = \
@@ -64,7 +63,8 @@ xfce4_panel_CFLAGS = \
 	$(LIBWNCK_CFLAGS) \
 	$(XFCONF_CFLAGS) \
 	$(LIBX11_CFLAGS) \
-	$(LIBWNCK_CFLAGS) \
+	$(GTK_LAYER_SHELL_CFLAGS) \
+	$(WAYLAND_CLIENT_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 xfce4_panel_LDFLAGS = \
@@ -74,6 +74,7 @@ xfce4_panel_LDFLAGS = \
 xfce4_panel_LDADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la \
+	$(top_builddir)/protocols/libpanel-protocols.la \
 	$(GTK_LIBS) \
 	$(GMODULE_LIBS) \
 	$(GIO_UNIX_LIBS) \
@@ -82,12 +83,14 @@ xfce4_panel_LDADD = \
 	$(LIBWNCK_LIBS) \
 	$(XFCONF_LIBS) \
 	$(LIBX11_LIBS) \
-	$(LIBWNCK_LIBS) \
+	$(GTK_LAYER_SHELL_LIBS) \
+	$(WAYLAND_CLIENT_LIBS) \
 	-lm
 
 xfce4_panel_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
-	$(top_builddir)/common/libpanel-common.la
+	$(top_builddir)/common/libpanel-common.la \
+	$(top_builddir)/protocols/libpanel-protocols.la
 
 if MAINTAINER_MODE
 
