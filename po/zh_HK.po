@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-13 12:48+0200\n"
+"POT-Creation-Date: 2022-09-03 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Ivan <personal@live.hk>, 2020\n"
 "Language-Team: Chinese (Hong Kong) (http://www.transifex.com/xfce/xfce4-panel/language/zh_HK/)\n"
@@ -975,7 +975,7 @@ msgid ""
 msgstr "選取此選項以在選單內顯示通用應用程式名稱，舉例：「檔案管理員」而不是「Thunar」"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:23
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
@@ -1024,7 +1024,7 @@ msgstr "好(_O)"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:652
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2479
+#: ../plugins/clock/clock.c:964 ../plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "未能執行「%s」指令。"
@@ -1064,20 +1064,20 @@ msgid "Show help options"
 msgstr "顯示幫助選項"
 
 #. TRANSLATORS: adjust this accordingly for your locale format
-#: ../plugins/clock/clock.c:46
+#: ../plugins/clock/clock.c:47
 msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
 
-#: ../plugins/clock/clock.c:174
+#: ../plugins/clock/clock.c:178
 msgid "Week %V"
 msgstr "第 %V 週"
 
-#: ../plugins/clock/clock.c:465
+#: ../plugins/clock/clock.c:471
 msgid "Failed to execute clock command"
 msgstr "未能執行時鐘指令"
 
-#: ../plugins/clock/clock.c:894
+#: ../plugins/clock/clock.c:903
 msgid "Custom Format"
 msgstr "自訂格式"
 
@@ -1136,7 +1136,21 @@ msgstr "時間與日期設定值(_S)..."
 msgid "Time Settings"
 msgstr "時間設定值"
 
+#: ../plugins/clock/clock-dialog.glade.h:16
+msgid ""
+"If set, this command is run when the plugin is left-clicked, instead of "
+"displaying the default calendar."
+msgstr ""
+
 #: ../plugins/clock/clock-dialog.glade.h:17
+msgid "Co_mmand:"
+msgstr "指令(_M)："
+
+#: ../plugins/clock/clock-dialog.glade.h:18
+msgid "Calendar"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1145,53 +1159,53 @@ msgid ""
 "page for additional information."
 msgstr "要插入面板的時間格式，用來描述日期與時間。舉例來說，%Y 會以年份數字替換，%m 會被月份數字替換，而 %d 則是日數字。而 <b></b> 標籤則會使文字轉為粗體。請查看「幫助」頁面以瞭解更多資訊。"
 
-#: ../plugins/clock/clock-dialog.glade.h:18
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "_Tooltip format:"
 msgstr "提示框格式(_T)："
 
-#: ../plugins/clock/clock-dialog.glade.h:19
+#: ../plugins/clock/clock-dialog.glade.h:22
 msgid "_Layout:"
 msgstr "配置(_L)："
 
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:24
 msgid "Sho_w AM/PM"
 msgstr "顯示「上午／下午」(_W)"
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "Fl_ash time separators"
 msgstr "讓時間分隔符閃爍(_F)"
 
-#: ../plugins/clock/clock-dialog.glade.h:23
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "24-_hour clock"
 msgstr "24小時制時鐘(_H)"
 
-#: ../plugins/clock/clock-dialog.glade.h:24
+#: ../plugins/clock/clock-dialog.glade.h:27
 msgid "Binary mode:"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:28
 msgid "Display _seconds"
 msgstr "顯示秒數(_S)"
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:29
 msgid "F_ormat:"
 msgstr "格式(_O)："
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:28
+#: ../plugins/clock/clock-dialog.glade.h:31
 msgid "F_uzziness:"
 msgstr "模糊度(_U)："
 
-#: ../plugins/clock/clock-dialog.glade.h:29
+#: ../plugins/clock/clock-dialog.glade.h:32
 msgid "Show _inactive dots"
 msgstr "顯示非作用中的點(_I)"
 
-#: ../plugins/clock/clock-dialog.glade.h:30
+#: ../plugins/clock/clock-dialog.glade.h:33
 msgid "Show gri_d"
 msgstr "顯示格欄(_F)"
 
-#: ../plugins/clock/clock-dialog.glade.h:31
+#: ../plugins/clock/clock-dialog.glade.h:34
 msgid "Clock Options"
 msgstr "時鐘選項"
 
