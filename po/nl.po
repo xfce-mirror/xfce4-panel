@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-13 12:48+0200\n"
+"POT-Creation-Date: 2022-09-03 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>, 2013-2015,2017-2020,2022\n"
 "Language-Team: Dutch (http://www.transifex.com/xfce/xfce4-panel/language/nl/)\n"
@@ -973,7 +973,7 @@ msgid ""
 msgstr "Kies deze optie om de generieke naam in het menu weer te geven, bijvoorbeeld 'Bestandbeheerder' in plaats van 'Thunar'"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:23
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
@@ -1022,7 +1022,7 @@ msgstr "_Oké"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:652
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2479
+#: ../plugins/clock/clock.c:964 ../plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Kon opdracht '%s' niet uitvoeren."
@@ -1062,20 +1062,20 @@ msgid "Show help options"
 msgstr "Toon hulpopties"
 
 #. TRANSLATORS: adjust this accordingly for your locale format
-#: ../plugins/clock/clock.c:46
+#: ../plugins/clock/clock.c:47
 msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
 
-#: ../plugins/clock/clock.c:174
+#: ../plugins/clock/clock.c:178
 msgid "Week %V"
 msgstr "Week %V"
 
-#: ../plugins/clock/clock.c:465
+#: ../plugins/clock/clock.c:471
 msgid "Failed to execute clock command"
 msgstr "Kon de klokopdracht niet uitvoeren"
 
-#: ../plugins/clock/clock.c:894
+#: ../plugins/clock/clock.c:903
 msgid "Custom Format"
 msgstr "Aangepaste bestandopmaak"
 
@@ -1134,7 +1134,21 @@ msgstr "Tijd- en datuminstellingen..."
 msgid "Time Settings"
 msgstr "Tijdinstellingen"
 
+#: ../plugins/clock/clock-dialog.glade.h:16
+msgid ""
+"If set, this command is run when the plugin is left-clicked, instead of "
+"displaying the default calendar."
+msgstr ""
+
 #: ../plugins/clock/clock-dialog.glade.h:17
+msgid "Co_mmand:"
+msgstr "_Opdracht:"
+
+#: ../plugins/clock/clock-dialog.glade.h:18
+msgid "Calendar"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1143,53 +1157,53 @@ msgid ""
 "page for additional information."
 msgstr "De indeling beschrijft welke onderdelen van de tijd en datum in de bestandnaam worden gevoegd. Zo wordt bijvoorbeeld %Y vervangen door het jaartal, %m door de maand en %d door de dag. Zie de hulppagina voor meer informatie."
 
-#: ../plugins/clock/clock-dialog.glade.h:18
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "_Tooltip format:"
 msgstr "Opmaak van gereedschap_tip:"
 
-#: ../plugins/clock/clock-dialog.glade.h:19
+#: ../plugins/clock/clock-dialog.glade.h:22
 msgid "_Layout:"
 msgstr "_Vormgeving:"
 
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:24
 msgid "Sho_w AM/PM"
 msgstr "AM/PM t_onen"
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "Fl_ash time separators"
 msgstr "_Knipperende tijdscheidingstekens"
 
-#: ../plugins/clock/clock-dialog.glade.h:23
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "24-_hour clock"
 msgstr "24-_uurklok"
 
-#: ../plugins/clock/clock-dialog.glade.h:24
+#: ../plugins/clock/clock-dialog.glade.h:27
 msgid "Binary mode:"
 msgstr "Binaire modus:"
 
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:28
 msgid "Display _seconds"
 msgstr "_Seconden weergeven"
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:29
 msgid "F_ormat:"
 msgstr "In_deling:"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:28
+#: ../plugins/clock/clock-dialog.glade.h:31
 msgid "F_uzziness:"
 msgstr "Af_ronding"
 
-#: ../plugins/clock/clock-dialog.glade.h:29
+#: ../plugins/clock/clock-dialog.glade.h:32
 msgid "Show _inactive dots"
 msgstr "Toon _inactieve punten"
 
-#: ../plugins/clock/clock-dialog.glade.h:30
+#: ../plugins/clock/clock-dialog.glade.h:33
 msgid "Show gri_d"
 msgstr "Toon _raster"
 
-#: ../plugins/clock/clock-dialog.glade.h:31
+#: ../plugins/clock/clock-dialog.glade.h:34
 msgid "Clock Options"
 msgstr "Klok-opties"
 
