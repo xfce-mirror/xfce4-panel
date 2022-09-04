@@ -155,6 +155,11 @@ XDT_CHECK_PACKAGE([GMODULE], [gmodule-2.0], [2.66.0])
 XDT_CHECK_PACKAGE([CAIRO], [cairo], [1.0.0])
 XDT_CHECK_PACKAGE([LIBWNCK], [libwnck-3.0], [3.0])
 
+dnl wayland-scanner >= 1.15 is for private-code option to be present
+XDT_CHECK_PACKAGE([WAYLAND_SCANNER], [wayland-scanner], [1.15])
+XDT_CHECK_PACKAGE([WAYLAND_CLIENT], [wayland-client], [1.15])
+XDT_CHECK_PACKAGE([GTK_LAYER_SHELL], [gtk-layer-shell-0], [0.7])
+
 dnl *********************************************
 dnl *** Optional DBUSMENU for StatusNotifiers ***
 dnl *********************************************
@@ -288,6 +293,7 @@ plugins/tasklist/tasklist.desktop.in
 plugins/windowmenu/Makefile
 plugins/windowmenu/windowmenu.desktop.in
 po/Makefile.in
+protocols/Makefile
 ])
 AC_OUTPUT
 
