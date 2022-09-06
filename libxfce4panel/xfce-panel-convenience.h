@@ -23,8 +23,19 @@
 #define __XFCE_PANEL_CONVENIENCE_H__
 
 #include <gtk/gtk.h>
+#include <wayland-util.h>
 
 G_BEGIN_DECLS
+
+#define xfce_panel_wl_registry_bind(interface) \
+  xfce_panel_wl_registry_bind_real (#interface, &interface##_interface)
+
+void         xfce_panel_wayland_init               (void);
+
+void         xfce_panel_wayland_finalize           (void);
+
+gpointer     xfce_panel_wl_registry_bind_real      (const gchar               *interface_name,
+                                                    const struct wl_interface *interface);
 
 GtkWidget   *xfce_panel_create_button              (void) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 

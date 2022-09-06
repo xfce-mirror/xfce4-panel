@@ -20,6 +20,12 @@
 #define __PANEL_PRIVATE_H__
 
 #include <gtk/gtk.h>
+#ifdef GDK_WINDOWING_X11
+#include <gdk/gdkx.h>
+#endif
+#ifdef GDK_WINDOWING_WAYLAND
+#include <gdk/gdkwayland.h>
+#endif
 
 /* support macros for debugging (improved macro for better position indication) */
 /*#ifndef NDEBUG*/
@@ -136,5 +142,18 @@ G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   return gdk_screen_get_height (screen);
 G_GNUC_END_IGNORE_DEPRECATIONS
 }
+
+/* facilitate X11/Wayland management */
+#ifdef GDK_WINDOWING_X11
+#define PANEL_IS_X11_DISPLAY(display) GDK_IS_X11_DISPLAY (display)
+#else
+#define PANEL_IS_X11_DISPLAY(display) FALSE
+#endif
+#ifdef GDK_WINDOWING_WAYLAND
+#define PANEL_IS_WAYLAND_DISPLAY(display) GDK_IS_WAYLAND_DISPLAY (display)
+#else
+#define PANEL_IS_WAYLAND_DISPLAY(display) FALSE
+#endif
+
 
 #endif /* !__PANEL_PRIVATE_H__ */
