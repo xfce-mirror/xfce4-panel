@@ -148,6 +148,7 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "show-tooltips", G_TYPE_BOOLEAN },
     { "sort-order", G_TYPE_UINT },
     { "window-scrolling", G_TYPE_BOOLEAN },
+    { "blink-indefinitely", G_TYPE_BOOLEAN },
     { "wrap-windows", G_TYPE_BOOLEAN },
     { "include-all-blinking", G_TYPE_BOOLEAN },
     { "middle-click", G_TYPE_UINT },
@@ -265,6 +266,7 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   TASKLIST_DIALOG_BIND ("show-tooltips", "active")
   TASKLIST_DIALOG_BIND ("sort-order", "active")
   TASKLIST_DIALOG_BIND ("window-scrolling", "active")
+  TASKLIST_DIALOG_BIND ("blink-indefinitely", "active")
   TASKLIST_DIALOG_BIND ("middle-click", "active")
 
 #ifndef GDK_WINDOWING_X11
