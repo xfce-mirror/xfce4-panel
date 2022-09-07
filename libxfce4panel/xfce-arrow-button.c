@@ -102,6 +102,9 @@ struct _XfceArrowButtonPrivate
 
   /* button style overridden when blinking */
   GtkReliefStyle style;
+
+  /* blink indefinitely if %TRUE */
+  gboolean       blink_indefinitely;
 };
 
 
@@ -180,6 +183,7 @@ xfce_arrow_button_init (XfceArrowButton *button)
   button->priv->blinking_timeout_id = 0;
   button->priv->blinking_counter = 0;
   button->priv->style = GTK_RELIEF_NORMAL;
+  button->priv->blink_indefinitely = FALSE;
 
   /* set some widget properties */
   gtk_widget_set_has_window (GTK_WIDGET (button), FALSE);
@@ -485,6 +489,9 @@ xfce_arrow_button_blinking_timeout (gpointer user_data)
   else
     gtk_style_context_add_class (context, GTK_STYLE_CLASS_SUGGESTED_ACTION);
 
+  if (button->priv->blink_indefinitely)
+    return TRUE;
+
   return (button->priv->blinking_counter++ < MAX_BLINKING_COUNT);
 }
 
@@ -650,6 +657,24 @@ xfce_arrow_button_set_blinking (XfceArrowButton *button,
       /* restore button style */
       gtk_button_set_relief (GTK_BUTTON (button), button->priv->style);
     }
+}
+
+
+
+/**
+ * xfce_arrow_button_set_blink_indefinitely:
+ * @button : a #XfceArrowButton
+ * @on_off : %TRUE to blink indefinitely, %FALSE to not
+ *
+ * Set indefinite blinking for button.
+ *
+ * Since: 4.17
+ **/
+void
+xfce_arrow_button_set_blink_indefinitely (XfceArrowButton *button,
+                                          gboolean         on_off)
+{
+  button->priv->blink_indefinitely = on_off;
 }
 
 
