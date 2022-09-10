@@ -62,17 +62,20 @@ struct _XfceArrowButton
   XfceArrowButtonPrivate *priv;
 };
 
-GType         xfce_arrow_button_get_type       (void) G_GNUC_CONST;
+GType         xfce_arrow_button_get_type               (void) G_GNUC_CONST;
 
-GtkWidget    *xfce_arrow_button_new            (GtkArrowType     arrow_type) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+GtkWidget    *xfce_arrow_button_new                    (GtkArrowType     arrow_type) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
-GtkArrowType  xfce_arrow_button_get_arrow_type (XfceArrowButton *button);
-void          xfce_arrow_button_set_arrow_type (XfceArrowButton *button,
-                                                GtkArrowType     arrow_type);
+GtkArrowType  xfce_arrow_button_get_arrow_type         (XfceArrowButton *button);
+void          xfce_arrow_button_set_arrow_type         (XfceArrowButton *button,
+                                                        GtkArrowType     arrow_type);
 
-gboolean      xfce_arrow_button_get_blinking   (XfceArrowButton *button);
-void          xfce_arrow_button_set_blinking   (XfceArrowButton *button,
-                                                gboolean         blinking);
+gboolean      xfce_arrow_button_get_blinking           (XfceArrowButton *button);
+void          xfce_arrow_button_set_blinking           (XfceArrowButton *button,
+                                                        gboolean         blinking);
+
+void          xfce_arrow_button_set_blink_indefinitely (XfceArrowButton *button,
+                                                        gboolean         on_off);
 
 G_END_DECLS
 
