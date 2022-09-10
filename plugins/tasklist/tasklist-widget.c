@@ -92,6 +92,7 @@ enum
   PROP_SHOW_TOOLTIPS,
   PROP_SORT_ORDER,
   PROP_WINDOW_SCROLLING,
+  PROP_BLINK_INDEFINITELY,
   PROP_WRAP_WINDOWS,
   PROP_INCLUDE_ALL_BLINKING,
   PROP_MIDDLE_CLICK,
@@ -155,6 +156,9 @@ struct _XfceTasklist
 
   /* switch window with the mouse wheel */
   guint                 window_scrolling : 1;
+
+  /* blink button indefinitely for urgent windows */
+  guint                 blink_indefinitely : 1;
   guint                 wrap_windows : 1;
 
   /* whether we show blinking windows from all workspaces
@@ -502,6 +506,13 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_BLINK_INDEFINITELY,
+                                   g_param_spec_boolean ("blink-indefinitely",
+                                                         NULL, NULL,
+                                                         TRUE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_WRAP_WINDOWS,
                                    g_param_spec_boolean ("wrap-windows",
                                                          NULL, NULL,
@@ -606,6 +617,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->all_monitors = TRUE;
   tasklist->n_monitors = 0;
   tasklist->window_scrolling = TRUE;
+  tasklist->blink_indefinitely = FALSE;
   tasklist->wrap_windows = FALSE;
   tasklist->all_blinking = TRUE;
   tasklist->middle_click = XFCE_TASKLIST_MIDDLE_CLICK_DEFAULT;
@@ -750,6 +762,10 @@ xfce_tasklist_get_property (GObject    *object,
       g_value_set_boolean (value, tasklist->window_scrolling);
       break;
 
+    case PROP_BLINK_INDEFINITELY:
+      g_value_set_boolean (value, tasklist->blink_indefinitely);
+      break;
+
     case PROP_WRAP_WINDOWS:
       g_value_set_boolean (value, tasklist->wrap_windows);
       break;
@@ -838,6 +854,10 @@ xfce_tasklist_set_property (GObject      *object,
 
     case PROP_WINDOW_SCROLLING:
       tasklist->window_scrolling = g_value_get_boolean (value);
+      break;
+
+    case PROP_BLINK_INDEFINITELY:
+      tasklist->blink_indefinitely = g_value_get_boolean (value);
       break;
 
     case PROP_WRAP_WINDOWS:
@@ -2262,6 +2282,8 @@ xfce_tasklist_child_new (XfceTasklist *tasklist)
                                                   | GDK_SMOOTH_SCROLL_MASK);
   g_object_bind_property (tasklist, "show_tooltips", child->button, "has-tooltip",
                           G_BINDING_SYNC_CREATE);
+  if (tasklist->blink_indefinitely)
+    xfce_arrow_button_set_blink_indefinitely (XFCE_ARROW_BUTTON (child->button), TRUE);
 
   child->box = gtk_box_new (!xfce_tasklist_vertical (tasklist) ?
       GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL, 6);
