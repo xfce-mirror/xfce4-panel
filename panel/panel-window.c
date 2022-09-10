@@ -1742,6 +1742,9 @@ panel_window_style_updated (GtkWidget *widget)
   PanelWindow *window = PANEL_WINDOW (widget);
   PanelBaseWindow *base_window = PANEL_BASE_WINDOW (window);
 
+  /* let GTK update the widget style */
+  GTK_WIDGET_CLASS (panel_window_parent_class)->style_updated (widget);
+
   gtk_widget_style_get (GTK_WIDGET (widget),
                         "popup-delay", &window->popup_delay,
                         "popdown-delay", &window->popdown_delay,
