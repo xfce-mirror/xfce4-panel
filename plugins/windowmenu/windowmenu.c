@@ -97,8 +97,7 @@ static void      window_menu_plugin_set_property            (GObject            
                                                              guint               prop_id,
                                                              const GValue       *value,
                                                              GParamSpec         *pspec);
-static void      window_menu_plugin_style_set               (GtkWidget          *widget,
-                                                             GtkStyle           *previous_style);
+static void      window_menu_plugin_style_updated           (GtkWidget          *widget);
 static void      window_menu_plugin_screen_changed          (GtkWidget          *widget,
                                                              GdkScreen          *previous_screen);
 static void      window_menu_plugin_construct               (XfcePanelPlugin    *panel_plugin);
@@ -153,7 +152,7 @@ window_menu_plugin_class_init (WindowMenuPluginClass *klass)
   gobject_class->set_property = window_menu_plugin_set_property;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
-  gtkwidget_class->style_set = window_menu_plugin_style_set;
+  gtkwidget_class->style_updated = window_menu_plugin_style_updated;
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = window_menu_plugin_construct;
@@ -372,13 +371,12 @@ window_menu_plugin_set_property (GObject      *object,
 
 
 static void
-window_menu_plugin_style_set (GtkWidget *widget,
-                              GtkStyle  *previous_style)
+window_menu_plugin_style_updated (GtkWidget *widget)
 {
   WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (widget);
 
   /* let gtk update the widget style */
-  (*GTK_WIDGET_CLASS (window_menu_plugin_parent_class)->style_set) (widget, previous_style);
+  (*GTK_WIDGET_CLASS (window_menu_plugin_parent_class)->style_updated) (widget);
 
   /* read the style properties */
   gtk_widget_style_get (GTK_WIDGET (plugin),

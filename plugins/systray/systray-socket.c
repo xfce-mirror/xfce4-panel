@@ -70,8 +70,6 @@ static void     systray_socket_size_allocate (GtkWidget      *widget,
                                               GtkAllocation  *allocation);
 static gboolean systray_socket_draw          (GtkWidget      *widget,
                                               cairo_t        *cr);
-static void     systray_socket_style_set     (GtkWidget      *widget,
-                                              GtkStyle       *previous_style);
 
 
 
@@ -92,7 +90,6 @@ systray_socket_class_init (SystraySocketClass *klass)
   gtkwidget_class->realize = systray_socket_realize;
   gtkwidget_class->size_allocate = systray_socket_size_allocate;
   gtkwidget_class->draw = systray_socket_draw;
-  gtkwidget_class->style_set = systray_socket_style_set;
 }
 
 
@@ -232,14 +229,6 @@ systray_socket_draw (GtkWidget *widget,
     }
 
   return FALSE;
-}
-
-
-
-static void
-systray_socket_style_set (GtkWidget *widget,
-                          GtkStyle  *previous_style)
-{
 }
 
 

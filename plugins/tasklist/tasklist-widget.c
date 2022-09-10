@@ -282,8 +282,7 @@ static void               xfce_tasklist_get_preferred_height             (GtkWid
                                                                           gint                 *natural_height);
 static void               xfce_tasklist_size_allocate                    (GtkWidget            *widget,
                                                                           GtkAllocation        *allocation);
-static void               xfce_tasklist_style_set                        (GtkWidget            *widget,
-                                                                          GtkStyle             *previous_style);
+static void               xfce_tasklist_style_updated                    (GtkWidget            *widget);
 static void               xfce_tasklist_realize                          (GtkWidget            *widget);
 static void               xfce_tasklist_unrealize                        (GtkWidget            *widget);
 static gboolean           xfce_tasklist_scroll_event                     (GtkWidget            *widget,
@@ -405,7 +404,7 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
   gtkwidget_class->get_preferred_width = xfce_tasklist_get_preferred_width;
   gtkwidget_class->get_preferred_height = xfce_tasklist_get_preferred_height;
   gtkwidget_class->size_allocate = xfce_tasklist_size_allocate;
-  gtkwidget_class->style_set = xfce_tasklist_style_set;
+  gtkwidget_class->style_updated = xfce_tasklist_style_updated;
   gtkwidget_class->realize = xfce_tasklist_realize;
   gtkwidget_class->unrealize = xfce_tasklist_unrealize;
   gtkwidget_class->scroll_event = xfce_tasklist_scroll_event;
@@ -1298,8 +1297,7 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
 
 
 static void
-xfce_tasklist_style_set (GtkWidget *widget,
-                         GtkStyle  *previous_style)
+xfce_tasklist_style_updated (GtkWidget *widget)
 {
   XfceTasklist *tasklist = XFCE_TASKLIST (widget);
   gint          max_button_length;
@@ -1307,7 +1305,7 @@ xfce_tasklist_style_set (GtkWidget *widget,
   gint          min_button_length;
 
   /* let gtk update the widget style */
-  (*GTK_WIDGET_CLASS (xfce_tasklist_parent_class)->style_set) (widget, previous_style);
+  (*GTK_WIDGET_CLASS (xfce_tasklist_parent_class)->style_updated) (widget);
 
   /* read the style properties */
   gtk_widget_style_get (GTK_WIDGET (tasklist),

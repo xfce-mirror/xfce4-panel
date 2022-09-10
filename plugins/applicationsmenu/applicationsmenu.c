@@ -69,7 +69,7 @@ struct _ApplicationsMenuPlugin
   gchar           *menu_editor;
   guint            menu_reposition_idle_id;
 
-  gulong           style_set_id;
+  gulong           style_updated_id;
   gulong           screen_changed_id;
   gulong           theme_changed_id;
 };
@@ -254,8 +254,8 @@ applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
   g_signal_connect (G_OBJECT (plugin->menu), "selection-done",
       G_CALLBACK (applications_menu_plugin_menu_selection_done), plugin);
 
-  plugin->style_set_id = g_signal_connect_swapped (G_OBJECT (plugin->button), "style-set",
-                                                   G_CALLBACK (applications_menu_button_theme_changed), plugin);
+  plugin->style_updated_id = g_signal_connect_swapped (G_OBJECT (plugin->button), "style-updated",
+                                                       G_CALLBACK (applications_menu_button_theme_changed), plugin);
   plugin->screen_changed_id = g_signal_connect_swapped (G_OBJECT (plugin->button), "screen-changed",
                                                         G_CALLBACK (applications_menu_button_theme_changed), plugin);
   plugin->theme_changed_id = g_signal_connect_swapped (G_OBJECT (icon_theme), "changed",
@@ -480,10 +480,10 @@ applications_menu_plugin_free_data (XfcePanelPlugin *panel_plugin)
   if (plugin->menu != NULL)
     gtk_widget_destroy (plugin->menu);
 
-  if (plugin->style_set_id != 0)
+  if (plugin->style_updated_id != 0)
     {
-      g_signal_handler_disconnect (plugin->button, plugin->style_set_id);
-      plugin->style_set_id = 0;
+      g_signal_handler_disconnect (plugin->button, plugin->style_updated_id);
+      plugin->style_updated_id = 0;
     }
 
   if (plugin->screen_changed_id != 0)
