@@ -22,7 +22,38 @@
 G_BEGIN_DECLS
 
 /* TRANSLATORS: adjust this accordingly for your locale format */
-#define DEFAULT_DIGITAL_FORMAT NC_("Time", "%a %_d %b, %R")
+#define DEFAULT_DIGITAL_TIME_FORMAT NC_("Time", "%a %_d %b, %R")
+#define DEFAULT_DIGITAL_DATE_FORMAT NC_("Date", "%Y-%m-%d")
+
+static const gchar *digital_time_formats[] =
+{
+  DEFAULT_DIGITAL_TIME_FORMAT,
+  "%T",
+  "%r",
+  "%_H:%M",
+  "%H:%M",
+  "%I:%M %p",
+  "%H:%M:%S",
+  "%l:%M:%S %P",
+  NULL
+};
+
+static const gchar *digital_date_formats[] =
+{
+  DEFAULT_DIGITAL_DATE_FORMAT,
+  "%Y %B %d",
+  "%m/%d/%Y",
+  "%B %d, %Y",
+  "%b %d, %Y",
+  "%d/%m/%Y",
+  "%d %B %Y",
+  "%d %b %Y",
+  "%A, %B %d, %Y",
+  "%a, %b %d, %Y",
+  "%A, %d %B %Y",
+  "%a, %d %b %Y",
+  NULL
+};
 
 typedef enum
 {

@@ -179,16 +179,6 @@ static const gchar *tooltip_formats[] =
   NULL
 };
 
-static const gchar *digital_formats[] =
-{
-  DEFAULT_DIGITAL_FORMAT,
-  "%T",
-  "%r",
-  "%I:%M %p",
-  "%_H:%M",
-  NULL
-};
-
 enum
 {
   COLUMN_FORMAT,
@@ -1214,7 +1204,7 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   clock_plugin_configure_plugin_chooser_fill (plugin,
                                               GTK_COMBO_BOX (combo),
                                               GTK_ENTRY (object),
-                                              digital_formats);
+                                              digital_time_formats);
   object = gtk_builder_get_object (builder, "digital-time-font");
   g_signal_connect (G_OBJECT (object), "clicked",
                     G_CALLBACK (clock_plugin_font_chooser), NULL);
@@ -1226,7 +1216,7 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   clock_plugin_configure_plugin_chooser_fill (plugin,
                                               GTK_COMBO_BOX (combo),
                                               GTK_ENTRY (object),
-                                              digital_formats);
+                                              digital_date_formats);
   object = gtk_builder_get_object (builder, "digital-date-font");
   g_signal_connect (G_OBJECT (object), "clicked",
                     G_CALLBACK (clock_plugin_font_chooser), NULL);
