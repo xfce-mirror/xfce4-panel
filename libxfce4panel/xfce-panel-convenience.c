@@ -28,6 +28,7 @@
 #include <libxfce4util/libxfce4util.h>
 #include <gtk/gtk.h>
 
+#include <common/panel-private.h>
 #include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-panel-convenience.h>
 #include <libxfce4panel/libxfce4panel-alias.h>
@@ -43,6 +44,129 @@
  * This section describes a number of functions that were created
  * to help developers of Xfce Panel plugins.
  **/
+
+
+
+static void xfce_panel_wl_registry_global        (void               *data,
+                                                  struct wl_registry *registry,
+                                                  uint32_t            id,
+                                                  const char         *interface,
+                                                  uint32_t            version);
+static void xfce_panel_wl_registry_global_remove (void               *data,
+                                                  struct wl_registry *registry,
+                                                  uint32_t            id);
+
+
+
+typedef struct
+{
+  uint32_t id;
+  uint32_t version;
+} WlBindingParam;
+
+
+
+static struct wl_registry *wl_registry = NULL;
+static GHashTable *wl_binding_params = NULL;
+static const struct wl_registry_listener wl_registry_listener =
+{
+  xfce_panel_wl_registry_global,
+  xfce_panel_wl_registry_global_remove
+};
+
+
+
+static void
+xfce_panel_wl_registry_global (void               *data,
+                               struct wl_registry *registry,
+                               uint32_t            id,
+                               const char         *interface,
+                               uint32_t            version)
+{
+  WlBindingParam *param;
+
+  param = g_new (WlBindingParam, 1);
+  param->id = id;
+  param->version = version;
+
+  g_hash_table_insert (wl_binding_params, g_strdup (interface), param);
+}
+
+
+
+static void
+xfce_panel_wl_registry_global_remove (void               *data,
+                                      struct wl_registry *registry,
+                                      uint32_t            id)
+{
+  WlBindingParam *param;
+  GHashTableIter  iter;
+  gpointer        value;
+
+  g_hash_table_iter_init (&iter, wl_binding_params);
+  while (g_hash_table_iter_next (&iter, NULL, &value))
+    {
+      param = value;
+      if (param->id == id)
+        {
+          g_hash_table_iter_remove (&iter);
+          break;
+        }
+    }
+}
+
+
+
+void
+xfce_panel_wayland_init (void)
+{
+  struct wl_display *wl_display;
+  GdkDisplay        *display;
+
+  display = gdk_display_get_default ();
+  if (! PANEL_IS_WAYLAND_DISPLAY (display) || wl_registry != NULL)
+    return;
+
+  wl_binding_params = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+  wl_display = gdk_wayland_display_get_wl_display (display);
+  wl_registry = wl_display_get_registry (wl_display);
+  wl_registry_add_listener (wl_registry, &wl_registry_listener, NULL);
+  wl_display_roundtrip (wl_display);
+}
+
+
+
+void
+xfce_panel_wayland_finalize (void)
+{
+  if (wl_registry == NULL)
+    return;
+
+  wl_registry_destroy (wl_registry);
+  g_hash_table_destroy (wl_binding_params);
+  wl_registry = NULL;
+  wl_binding_params = NULL;
+}
+
+
+
+gpointer
+xfce_panel_wl_registry_bind_real (const gchar               *interface_name,
+                                  const struct wl_interface *interface)
+{
+  WlBindingParam *param;
+
+  panel_return_val_if_fail (wl_registry != NULL, NULL);
+
+  param = g_hash_table_lookup (wl_binding_params, interface_name);
+  if (param != NULL)
+    return wl_registry_bind (wl_registry, param->id, interface,
+                             MIN ((uint32_t) interface->version, param->version));
+
+  return NULL;
+}
+
+
 
 /**
  * xfce_panel_create_button:
