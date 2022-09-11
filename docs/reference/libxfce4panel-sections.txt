@@ -35,15 +35,12 @@ xfce_arrow_button_get_type
 
 <SECTION>
 <FILE>convenience</FILE>
-xfce_panel_wl_registry_bind
 xfce_panel_create_button
 xfce_panel_create_toggle_button
 xfce_panel_get_channel_name
 xfce_panel_pixbuf_from_source
 xfce_panel_pixbuf_from_source_at_size
 xfce_panel_set_image_from_source
-<SUBSECTION Private>
-xfce_panel_wl_registry_bind_real
 </SECTION>
 
 <SECTION>
@@ -138,6 +135,13 @@ XFCE_IS_PANEL_PLUGIN_CLASS
 XFCE_PANEL_PLUGIN_GET_CLASS
 <SUBSECTION Private>
 xfce_panel_plugin_get_type
+</SECTION>
+
+<SECTION>
+<FILE>xfwl-core-utils</FILE>
+xfwl_registry_bind
+<SUBSECTION Private>
+xfwl_registry_bind_real
 </SECTION>
 
 <SECTION>
