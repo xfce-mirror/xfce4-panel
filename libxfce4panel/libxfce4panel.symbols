@@ -64,7 +64,6 @@ xfce_arrow_button_set_blinking
 /* xfce-panel-convenience.h */
 #if IN_HEADER(__XFCE_PANEL_CONVENIENCE_H__)
 #if IN_SOURCE(__XFCE_PANEL_CONVENIENCE_C__)
-xfce_panel_wl_registry_bind_real
 xfce_panel_create_button G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT
 xfce_panel_create_toggle_button G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT
 xfce_panel_get_channel_name
@@ -155,5 +154,12 @@ xfce_panel_plugin_provider_show_about
 xfce_panel_plugin_provider_removed
 xfce_panel_plugin_provider_remote_event
 xfce_panel_plugin_provider_set_locked
+#endif
+#endif
+
+/* xfwl-core-utils.h */
+#if IN_HEADER(__XFWL_CORE_UTILS_H__)
+#if IN_SOURCE(__XFWL_CORE_UTILS_C__)
+xfwl_registry_bind_real
 #endif
 #endif
