@@ -144,6 +144,30 @@ xfwl_registry_bind
 xfwl_registry_bind_real
 </SECTION>
 
+<FILE>xfwl-foreign-toplevel</FILE>
+XfwlForeignToplevel
+XfwlForeignToplevelState
+xfwl_foreign_toplevel_get_wl_toplevel
+xfwl_foreign_toplevel_get_title
+xfwl_foreign_toplevel_get_app_id
+xfwl_foreign_toplevel_get_monitors
+xfwl_foreign_toplevel_get_state
+xfwl_foreign_toplevel_get_parent
+<SUBSECTION Standard>
+XFWL_TYPE_FOREIGN_TOPLEVEL
+</SECTION>
+
+<SECTION>
+<FILE>xfwl-foreign-toplevel-manager</FILE>
+XfwlForeignToplevelManager
+xfwl_foreign_toplevel_manager_get
+xfwl_foreign_toplevel_manager_get_wl_manager
+xfwl_foreign_toplevel_manager_get_toplevels
+xfwl_foreign_toplevel_manager_get_active
+<SUBSECTION Standard>
+XFWL_TYPE_FOREIGN_TOPLEVEL_MANAGER
+</SECTION>
+
 <SECTION>
 <FILE>macros</FILE>
 XFCE_PANEL_CHANNEL_NAME
