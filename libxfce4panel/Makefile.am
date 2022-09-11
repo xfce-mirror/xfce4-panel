@@ -31,7 +31,9 @@ libxfce4panel_headers = \
 	xfce-panel-plugin.h \
 	xfce-panel-plugin-provider.h \
 	xfce-panel-image.h \
-	xfwl-core-utils.h
+	xfwl-core-utils.h \
+	xfwl-foreign-toplevel.h \
+	xfwl-foreign-toplevel-manager.h
 
 libxfce4panel_includedir = \
 	$(includedir)/xfce4/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API)/libxfce4panel
@@ -49,7 +51,9 @@ libxfce4panel_2_0_la_SOURCES = \
 	xfce-panel-plugin.c \
 	xfce-panel-plugin-provider.c \
 	xfce-panel-image.c \
-	xfwl-core-utils.c
+	xfwl-core-utils.c \
+	xfwl-foreign-toplevel.c \
+	xfwl-foreign-toplevel-manager.c
 
 libxfce4panel_2_0_la_CFLAGS =	 \
 	$(GTK_CFLAGS) \
@@ -65,10 +69,14 @@ libxfce4panel_2_0_la_LDFLAGS = \
 	$(PLATFORM_LDFLAGS)
 
 libxfce4panel_2_0_la_LIBADD = \
+	$(top_builddir)/protocols/libpanel-protocols.la \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(WAYLAND_CLIENT_LIBS) \
 	-lm
+
+libxfce4panel_2_0_la_DEPENDENCIES = \
+	$(top_builddir)/protocols/libpanel-protocols.la
 
 #
 # Pkg-config file
@@ -98,13 +106,13 @@ libxfce4panel-enum-types.h: $(libxfce4panel_headers) Makefile
 	$(AM_V_GEN) ( cd $(srcdir) && glib-mkenums \
 		--fhead "#ifndef __LIBXFCE4PANEL_ENUM_TYPES_H__\n#define __LIBXFCE4PANEL_ENUM_TYPES_H__\n#include <glib-object.h>\nG_BEGIN_DECLS\n" \
 		--fprod "/* enumerations from \"@filename@\" */\n" \
-		--vhead "GType @enum_name@_get_type (void) G_GNUC_CONST;\n#define XFCE_TYPE_@ENUMSHORT@ (@enum_name@_get_type())\n" \
+		--vhead "GType @enum_name@_get_type (void) G_GNUC_CONST;\n#define @ENUMPREFIX@_TYPE_@ENUMSHORT@ (@enum_name@_get_type())\n" \
 		--ftail "G_END_DECLS\n\n#endif /* !__LIBXFCE4PANEL_ENUM_TYPES_H__ */" \
 		$(libxfce4panel_headers) ) > $@
 
 libxfce4panel-enum-types.c:  $(libxfce4panel_headers) Makefile
 	$(AM_V_GEN) ( cd $(srcdir) && glib-mkenums \
-		--fhead "#include <libxfce4panel/libxfce4panel-enums.h>\n#include <libxfce4panel/libxfce4panel-enum-types.h>\n#include <libxfce4panel/libxfce4panel-alias.h>" \
+		--fhead "#include <libxfce4panel/libxfce4panel-enums.h>\n#include <libxfce4panel/libxfce4panel-enum-types.h>\n#include <libxfce4panel/libxfce4panel-alias.h>\n#include <libxfce4panel/xfwl-foreign-toplevel.h>" \
 		--fprod "\n/* enumerations from \"@filename@\" */" \
 		--vhead "GType\n@enum_name@_get_type (void)\n{\n\tstatic GType type = 0;\n\tif (type == 0) {\n\tstatic const G@Type@Value values[] = {"\
 		--vprod "\t{ @VALUENAME@, \"@VALUENAME@\", \"@valuenick@\" }," \
