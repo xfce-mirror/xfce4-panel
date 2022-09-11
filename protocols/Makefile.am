@@ -38,3 +38,6 @@ BUILT_SOURCES = \
 
 EXTRA_DIST = \
 	wlr-foreign-toplevel-management-unstable-v1.xml
+
+# required for make distcheck
+dist-hook: all
