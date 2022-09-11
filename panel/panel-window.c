@@ -3240,7 +3240,7 @@ panel_window_wl_toplevel_manager_init (gpointer data)
 {
   PanelWindow *window = data;
 
-  window->wl_toplevel_manager = xfce_panel_wl_registry_bind (zwlr_foreign_toplevel_manager_v1);
+  window->wl_toplevel_manager = xfwl_registry_bind (zwlr_foreign_toplevel_manager_v1);
   if (window->wl_toplevel_manager != NULL)
     {
       window->wl_toplevels =
