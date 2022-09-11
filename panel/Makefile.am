@@ -64,7 +64,6 @@ xfce4_panel_CFLAGS = \
 	$(XFCONF_CFLAGS) \
 	$(LIBX11_CFLAGS) \
 	$(GTK_LAYER_SHELL_CFLAGS) \
-	$(WAYLAND_CLIENT_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 xfce4_panel_LDFLAGS = \
@@ -74,7 +73,6 @@ xfce4_panel_LDFLAGS = \
 xfce4_panel_LDADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la \
-	$(top_builddir)/protocols/libpanel-protocols.la \
 	$(GTK_LIBS) \
 	$(GMODULE_LIBS) \
 	$(GIO_UNIX_LIBS) \
@@ -84,13 +82,11 @@ xfce4_panel_LDADD = \
 	$(XFCONF_LIBS) \
 	$(LIBX11_LIBS) \
 	$(GTK_LAYER_SHELL_LIBS) \
-	$(WAYLAND_CLIENT_LIBS) \
 	-lm
 
 xfce4_panel_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
-	$(top_builddir)/common/libpanel-common.la \
-	$(top_builddir)/protocols/libpanel-protocols.la
+	$(top_builddir)/common/libpanel-common.la
 
 if MAINTAINER_MODE
 
