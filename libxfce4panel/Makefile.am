@@ -30,7 +30,8 @@ libxfce4panel_headers = \
 	xfce-panel-macros.h \
 	xfce-panel-plugin.h \
 	xfce-panel-plugin-provider.h \
-	xfce-panel-image.h
+	xfce-panel-image.h \
+	xfwl-core-utils.h
 
 libxfce4panel_includedir = \
 	$(includedir)/xfce4/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API)/libxfce4panel
@@ -47,7 +48,8 @@ libxfce4panel_2_0_la_SOURCES = \
 	xfce-panel-convenience.c \
 	xfce-panel-plugin.c \
 	xfce-panel-plugin-provider.c \
-	xfce-panel-image.c
+	xfce-panel-image.c \
+	xfwl-core-utils.c
 
 libxfce4panel_2_0_la_CFLAGS =	 \
 	$(GTK_CFLAGS) \
@@ -137,6 +139,7 @@ INTROSPECTION_SCANNER_ARGS = \
 	--identifier-prefix=LIBXFCE4PANEL \
 	--identifier-prefix=libxfce4panel \
 	--identifier-prefix=Plugin \
+	--identifier-prefix=Xfwl \
 	--c-include=libxfce4panel/libxfce4panel.h
 INTROSPECTION_COMPILER_ARGS = \
 	--includedir=$(srcdir) \
