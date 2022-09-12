@@ -1,3 +1,6 @@
+SUBDIRS = \
+	protocols
+
 DISTCLEANFILES =
 
 AM_CPPFLAGS = \
