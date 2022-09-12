@@ -16,7 +16,7 @@ SCAN_OPTIONS=--deprecated-guards="LIBXFCE4PANEL_DEPRECATED"
 DOC_SOURCE_DIR=$(top_srcdir)/libxfce4panel
 
 # Extra options to supply to gtkdoc-mkdb
-MKDB_OPTIONS=--output-format=xml --xml-mode
+MKDB_OPTIONS=--output-format=xml --xml-mode --ignore-files=protocols
 
 # Extra options to supply to gtkdoc-fixxref
 FIXXREF_OPTIONS=
@@ -27,6 +27,7 @@ CFILE_GLOB=
 
 # Header files to ignore when scanning
 IGNORE_HFILES= \
+	protocols \
 	libxfce4panel-alias.h \
 	libxfce4panel-marshal.h \
 	xfce-panel-plugin-provider.h \
