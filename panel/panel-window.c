@@ -38,7 +38,7 @@
 #include <libxfce4ui/libxfce4ui.h>
 
 #include <gtk-layer-shell/gtk-layer-shell.h>
-#include <protocols/wlr-foreign-toplevel-management-unstable-v1-client.h>
+#include <libxfce4panel/protocols/wlr-foreign-toplevel-management-unstable-v1-client.h>
 
 #include <xfconf/xfconf.h>
 #include <common/panel-private.h>
