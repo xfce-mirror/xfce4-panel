@@ -810,9 +810,6 @@ clock_plugin_digital_format_changed (GtkComboBox       *combo,
         gtk_widget_hide (GTK_WIDGET (object));
     }
 
-  /* make sure the new mode is set */
-  // if (dialog->plugin->mode != mode)
-  //   g_object_set (G_OBJECT (dialog->plugin), "mode", mode, NULL);
   panel_return_if_fail (G_IS_OBJECT (dialog->plugin->clock));
 }
 

@@ -190,7 +190,6 @@ xfce_clock_digital_init (XfceClockDigital *digital)
   gtk_box_pack_start  (GTK_BOX (digital->vbox), digital->date_label, TRUE, TRUE, 0);
 
   gtk_widget_show_all (digital->vbox);
-  // gtk_widget_show (digital->date_label);
 }
 
 
