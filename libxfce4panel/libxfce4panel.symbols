@@ -156,3 +156,35 @@ xfce_panel_plugin_provider_remote_event
 xfce_panel_plugin_provider_set_locked
 #endif
 #endif
+
+/* xfwl-core-utils.h */
+#if IN_HEADER(__XFWL_CORE_UTILS_H__)
+#if IN_SOURCE(__XFWL_CORE_UTILS_C__)
+xfwl_registry_bind_real
+#endif
+#endif
+
+/* xfwl-foreign-toplevel.h */
+#if IN_HEADER(__XFWL_FOREIGN_TOPLEVEL_H__)
+#if IN_SOURCE(__XFWL_FOREIGN_TOPLEVEL_C__)
+xfwl_foreign_toplevel_get_type G_GNUC_CONST
+xfwl_foreign_toplevel_state_get_type G_GNUC_CONST
+xfwl_foreign_toplevel_get_wl_toplevel
+xfwl_foreign_toplevel_get_title
+xfwl_foreign_toplevel_get_app_id
+xfwl_foreign_toplevel_get_monitors
+xfwl_foreign_toplevel_get_state
+xfwl_foreign_toplevel_get_parent
+#endif
+#endif
+
+/* xfwl-foreign-toplevel-manager.h */
+#if IN_HEADER(__XFWL_FOREIGN_TOPLEVEL_MANAGER_H__)
+#if IN_SOURCE(__XFWL_FOREIGN_TOPLEVEL_MANAGER_C__)
+xfwl_foreign_toplevel_manager_get_type G_GNUC_CONST
+xfwl_foreign_toplevel_manager_get
+xfwl_foreign_toplevel_manager_get_wl_manager
+xfwl_foreign_toplevel_manager_get_toplevels
+xfwl_foreign_toplevel_manager_get_active
+#endif
+#endif
