@@ -27,16 +27,16 @@
     </columns>
     <data>
       <row>
-        <col id="0" translatable="yes">Date Only</col>
+        <col id="0" translatable="yes">Date, then Time</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Time, then Date</col>
       </row>
       <row>
         <col id="0" translatable="yes">Time Only</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Date, then Time</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Time, then Date</col>
+        <col id="0" translatable="yes">Date Only</col>
       </row>
     </data>
   </object>
@@ -668,7 +668,7 @@
                           <object class="GtkLabel" id="label8">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="label" translatable="yes">F_ormat:</property>
+                            <property name="label" translatable="yes">_Layout</property>
                             <property name="use-underline">True</property>
                             <property name="xalign">0</property>
                           </object>
@@ -706,18 +706,6 @@
                               <packing>
                                 <property name="left-attach">0</property>
                                 <property name="top-attach">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="digital-date-font">
-                                <property name="label" translatable="yes">Text</property>
-                                <property name="visible">True</property>
-                                <property name="can-focus">True</property>
-                                <property name="receives-default">True</property>
-                              </object>
-                              <packing>
-                                <property name="left-attach">1</property>
-                                <property name="top-attach">1</property>
                               </packing>
                             </child>
                             <child>
@@ -767,6 +755,20 @@
                               </packing>
                             </child>
                             <child>
+                              <object class="GtkFontButton" id="digital-date-font">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="font">Sans 12</property>
+                                <property name="language">en-in</property>
+                                <property name="preview-text"/>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
                               <placeholder/>
                             </child>
                             <child>
@@ -788,7 +790,6 @@
                         <child>
                           <!-- n-columns=3 n-rows=4 -->
                           <object class="GtkGrid" id="digital-time">
-                            <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <child>
                               <object class="GtkLabel">
@@ -831,18 +832,6 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkButton" id="digital-time-font">
-                                <property name="label" translatable="yes">Text</property>
-                                <property name="visible">True</property>
-                                <property name="can-focus">True</property>
-                                <property name="receives-default">True</property>
-                              </object>
-                              <packing>
-                                <property name="left-attach">1</property>
-                                <property name="top-attach">1</property>
-                              </packing>
-                            </child>
-                            <child>
                               <object class="GtkEntry" id="digital-time-format">
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
@@ -875,6 +864,20 @@
                               </packing>
                             </child>
                             <child>
+                              <object class="GtkFontButton" id="digital-time-font">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="font">Sans 12</property>
+                                <property name="language">en-in</property>
+                                <property name="preview-text"/>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
                               <placeholder/>
                             </child>
                             <child>
@@ -894,7 +897,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBox" id="digital-format">
+                          <object class="GtkComboBox" id="digital-layout">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="hexpand">True</property>
@@ -912,7 +915,19 @@
                           </packing>
                         </child>
                         <child>
-                          <placeholder/>
+                          <object class="GtkEntry" id="digital-format">
+                            <property name="sensitive">False</property>
+                            <property name="can-focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="secondary-icon-name">help-contents</property>
+                            <property name="primary-icon-activatable">False</property>
+                            <property name="secondary-icon-tooltip-text" translatable="yes">The format describes the date and time parts to insert into the panel. For example, %Y will be substituted with the year, %m with the month and %d with the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See the "Help" page for additional information.</property>
+                            <property name="secondary-icon-tooltip-markup" translatable="yes">The format describes the date and time parts to insert into the panel. For example, %Y will be substituted with the year, %m with the month and %d with the day. Similarly, &amp;lt;b&amp;gt;&amp;lt;/b&amp;gt; tags will make the text bold. See the &amp;quot;Help&amp;quot; page for additional information.</property>
+                          </object>
+                          <packing>
+                            <property name="left-attach">2</property>
+                            <property name="top-attach">0</property>
+                          </packing>
                         </child>
                         <child>
                           <placeholder/>

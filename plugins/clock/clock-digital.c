@@ -39,9 +39,8 @@ static void     xfce_clock_digital_get_property  (GObject               *object,
 static void     xfce_clock_digital_finalize      (GObject               *object);
 static gboolean xfce_clock_digital_update        (XfceClockDigital      *digital,
                                                   ClockTime             *time);
-static void     xfce_clock_digital_update_font   (GtkWidget             *label,
-                                                  gchar                 *font);
-static void     xfce_clock_digital_update_format (XfceClockDigital      *digital);
+static void     xfce_clock_digital_update_font   (XfceClockDigital      *digital);
+static void     xfce_clock_digital_update_layout (XfceClockDigital      *digital);
 
 
 
@@ -49,13 +48,16 @@ static void     xfce_clock_digital_update_format (XfceClockDigital      *digital
 enum
 {
   PROP_0,
-  PROP_DIGITAL_FORMAT,
+  PROP_DIGITAL_LAYOUT,
   PROP_DIGITAL_TIME_FORMAT,
   PROP_DIGITAL_TIME_FONT,
   PROP_DIGITAL_DATE_FORMAT,
   PROP_DIGITAL_DATE_FONT,
   PROP_SIZE_RATIO,
-  PROP_ORIENTATION
+  PROP_ORIENTATION,
+
+  /* Property for easy backward compatibility, can be removed after some time */
+  PROP_DIGITAL_FORMAT,
 };
 
 struct _XfceClockDigitalClass
@@ -74,13 +76,20 @@ struct _XfceClockDigital
   ClockTime          *time;
   ClockTimeTimeout   *timeout;
 
-  ClockPluginDigitalFormat format;
+  ClockPluginDigitalFormat layout;
 
   gchar *date_format;
   gchar *date_font;
   gchar *time_format;
   gchar *time_font;
+
+  /* attribute for backward compatibility */
+  gchar *format;
 };
+
+
+
+#define DEFAULT_FONT "Bitstream Vera Sans 8"
 
 
 
@@ -114,13 +123,22 @@ xfce_clock_digital_class_init (XfceClockDigitalClass *klass)
                                                       | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_DIGITAL_FORMAT,
-                                   g_param_spec_uint ("digital-format",
+                                   PROP_DIGITAL_LAYOUT,
+                                   g_param_spec_uint ("digital-layout",
                                                       NULL, NULL,
                                                       CLOCK_PLUGIN_DIGITAL_FORMAT_MIN,
                                                       CLOCK_PLUGIN_DIGITAL_FORMAT_MAX,
                                                       CLOCK_PLUGIN_DIGITAL_FORMAT_DEFAULT,
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DIGITAL_FORMAT,
+                                   g_param_spec_string ("digital-format", NULL, NULL,
+                                                        DEFAULT_DIGITAL_FORMAT,
+                                                        G_PARAM_READWRITE
+                                                        | G_PARAM_STATIC_STRINGS));
+
 
   g_object_class_install_property (gobject_class,
                                    PROP_DIGITAL_TIME_FORMAT,
@@ -132,7 +150,7 @@ xfce_clock_digital_class_init (XfceClockDigitalClass *klass)
   g_object_class_install_property (gobject_class,
                                    PROP_DIGITAL_TIME_FONT,
                                    g_param_spec_string ("digital-time-font", NULL, NULL,
-                                                        DEFAULT_DIGITAL_TIME_FORMAT,
+                                                        DEFAULT_FONT,
                                                         G_PARAM_READWRITE
                                                         | G_PARAM_STATIC_STRINGS));
 
@@ -146,7 +164,7 @@ xfce_clock_digital_class_init (XfceClockDigitalClass *klass)
   g_object_class_install_property (gobject_class,
                                    PROP_DIGITAL_DATE_FONT,
                                    g_param_spec_string ("digital-date-font", NULL, NULL,
-                                                        DEFAULT_DIGITAL_DATE_FORMAT,
+                                                        DEFAULT_FONT,
                                                         G_PARAM_READWRITE
                                                         | G_PARAM_STATIC_STRINGS));
 }
@@ -172,8 +190,7 @@ xfce_clock_digital_init (XfceClockDigital *digital)
   gtk_box_pack_start  (GTK_BOX (digital->vbox), digital->date_label, TRUE, TRUE, 0);
 
   gtk_widget_show_all (digital->vbox);
-  gtk_widget_show (digital->time_label);
-  gtk_widget_show (digital->date_label);
+  // gtk_widget_show (digital->date_label);
 }
 
 
@@ -197,9 +214,14 @@ xfce_clock_digital_set_property (GObject      *object,
           0 : 270);
       break;
 
+    case PROP_DIGITAL_LAYOUT:
+      digital->layout = g_value_get_uint (value);
+      xfce_clock_digital_update_layout (digital);
+      break;
+
     case PROP_DIGITAL_FORMAT:
-      digital->format = g_value_get_uint (value);
-      xfce_clock_digital_update_format (digital);
+      g_free (digital->format);
+      digital->format = g_value_dup_string (value);
       break;
 
     case PROP_DIGITAL_DATE_FORMAT:
@@ -210,7 +232,7 @@ xfce_clock_digital_set_property (GObject      *object,
     case PROP_DIGITAL_DATE_FONT:
       g_free (digital->date_font);
       digital->date_font = g_value_dup_string (value);
-      xfce_clock_digital_update_font (digital->date_label, digital->date_font);
+      xfce_clock_digital_update_font (digital);
       break;
 
     case PROP_DIGITAL_TIME_FORMAT:
@@ -221,7 +243,7 @@ xfce_clock_digital_set_property (GObject      *object,
     case PROP_DIGITAL_TIME_FONT:
       g_free (digital->time_font);
       digital->time_font = g_value_dup_string (value);
-      xfce_clock_digital_update_font (digital->time_label, digital->time_font);
+      xfce_clock_digital_update_font (digital);
       break;
 
     default:
@@ -247,8 +269,8 @@ xfce_clock_digital_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_DIGITAL_FORMAT:
-        g_value_set_uint (value, digital->format);
+      case PROP_DIGITAL_LAYOUT:
+        g_value_set_uint (value, digital->layout);
         break;
 
       case PROP_DIGITAL_DATE_FORMAT:
@@ -256,14 +278,24 @@ xfce_clock_digital_get_property (GObject    *object,
         break;
 
       case PROP_DIGITAL_DATE_FONT:
+        if (digital->date_font == NULL)
+          digital->date_font = g_strdup (DEFAULT_FONT);
         g_value_set_string (value, digital->date_font);
         break;
 
       case PROP_DIGITAL_TIME_FORMAT:
+        /* Retrieving the previous stored in format if it is changed */
+        if (digital->format != NULL && g_strcmp0 (digital->format, "") != 0 && g_strcmp0 (digital->format, DEFAULT_DIGITAL_FORMAT) != 0)
+          {
+            digital->time_format = digital->format;
+            digital->format = g_strdup ("");
+          }
         g_value_set_string (value, digital->time_format);
         break;
 
       case PROP_DIGITAL_TIME_FONT:
+        if (digital->time_font == NULL)
+          digital->time_font = g_strdup (DEFAULT_FONT);
         g_value_set_string (value, digital->time_font);
         break;
 
@@ -287,6 +319,7 @@ xfce_clock_digital_finalize (GObject *object)
   /* stop the timeout */
   clock_time_timeout_free (digital->timeout);
 
+  g_free (digital->format);
   g_free (digital->date_font);
   g_free (digital->date_format);
   g_free (digital->time_font);
@@ -301,18 +334,20 @@ static gboolean
 xfce_clock_digital_update (XfceClockDigital *digital,
                            ClockTime        *time)
 {
-  gchar            *string;
+  gchar *string, *date_format, *time_format;
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_DIGITAL (digital), FALSE);
   panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (time), FALSE);
 
+  g_object_get (G_OBJECT (digital), "digital-date-format", &date_format, "digital-time-format", &time_format, NULL);
+
   /* set time string */
-  string = clock_time_strdup_strftime (digital->time, digital->time_format);
+  string = clock_time_strdup_strftime (digital->time, time_format);
   gtk_label_set_markup (GTK_LABEL (digital->time_label), string);
   g_free (string);
 
   /* set date string */
-  string = clock_time_strdup_strftime (digital->time, digital->date_format);
+  string = clock_time_strdup_strftime (digital->time, date_format);
   gtk_label_set_markup (GTK_LABEL (digital->date_label), string);
   g_free (string);
 
@@ -322,19 +357,19 @@ xfce_clock_digital_update (XfceClockDigital *digital,
 
 
 static void
-xfce_clock_digital_update_format (XfceClockDigital *digital)
+xfce_clock_digital_update_layout (XfceClockDigital *digital)
 {
   gtk_widget_hide (digital->date_label);
   gtk_widget_hide (digital->time_label);
-  if (digital->format == CLOCK_PLUGIN_DIGITAL_FORMAT_DATE)
+  if (digital->layout == CLOCK_PLUGIN_DIGITAL_FORMAT_DATE)
   {
     gtk_widget_show (digital->date_label);
   }
-  else if (digital->format == CLOCK_PLUGIN_DIGITAL_FORMAT_TIME)
+  else if (digital->layout == CLOCK_PLUGIN_DIGITAL_FORMAT_TIME)
   {
     gtk_widget_show (digital->time_label);
   }
-  else if (digital->format == CLOCK_PLUGIN_DIGITAL_FORMAT_DATE_TIME)
+  else if (digital->layout == CLOCK_PLUGIN_DIGITAL_FORMAT_DATE_TIME)
   {
     gtk_widget_show (digital->time_label);
     gtk_widget_show (digital->date_label);
@@ -353,18 +388,29 @@ xfce_clock_digital_update_format (XfceClockDigital *digital)
 
 
 static void
-xfce_clock_digital_update_font (GtkWidget *label,
-                                gchar    *font)
+xfce_clock_digital_update_font (XfceClockDigital *digital)
 {
   PangoAttrList *attr_list;
   PangoAttribute *attr;
   PangoFontDescription *font_desc;
+  gchar *date_font, *time_font;
+
+  g_object_get (G_OBJECT (digital), "digital-date-font", &date_font, "digital-time-font", &time_font, NULL);
 
   attr_list = pango_attr_list_new ();
-  font_desc = pango_font_description_from_string(font);
+  font_desc = pango_font_description_from_string(date_font);
   attr = pango_attr_font_desc_new (font_desc);
   pango_attr_list_insert (attr_list, attr);
-  gtk_label_set_attributes (GTK_LABEL (label), attr_list);
+  gtk_label_set_attributes (GTK_LABEL (digital->date_label), attr_list);
+  pango_font_description_free (font_desc);
+  pango_attr_list_unref (attr_list);
+
+  attr_list = pango_attr_list_new ();
+  font_desc = pango_font_description_from_string(time_font);
+  attr = pango_attr_font_desc_new (font_desc);
+  pango_attr_list_insert (attr_list, attr);
+  gtk_label_set_attributes (GTK_LABEL (digital->time_label), attr_list);
+  pango_font_description_free (font_desc);
   pango_attr_list_unref (attr_list);
 }
 
@@ -381,6 +427,9 @@ xfce_clock_digital_new (ClockTime *time,
                                              digital->time,
                                              sleep_monitor,
                                              G_CALLBACK (xfce_clock_digital_update), digital);
+  xfce_clock_digital_update (digital, time);
+  xfce_clock_digital_update_layout (digital);
+  xfce_clock_digital_update_font (digital);
 
   return GTK_WIDGET (digital);
 }
