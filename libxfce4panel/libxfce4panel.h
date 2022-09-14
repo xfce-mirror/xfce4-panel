@@ -31,6 +31,9 @@
 #include <libxfce4panel/xfce-panel-convenience.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 #include <libxfce4panel/xfce-panel-image.h>
+#include <libxfce4panel/xfwl-core-utils.h>
+#include <libxfce4panel/xfwl-foreign-toplevel.h>
+#include <libxfce4panel/xfwl-foreign-toplevel-manager.h>
 
 #undef _LIBXFCE4PANEL_INSIDE_LIBXFCE4PANEL_H
 
