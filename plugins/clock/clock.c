@@ -1110,10 +1110,10 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                           G_OBJECT (object), "text",
                           G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
 
-  object = gtk_builder_get_object (builder, "digital-format");
+  object = gtk_builder_get_object (builder, "digital-time-format");
   g_signal_connect (G_OBJECT (object), "changed",
                     G_CALLBACK (clock_plugin_validate_entry_text), plugin);
-  combo = gtk_builder_get_object (builder, "digital-chooser");
+  combo = gtk_builder_get_object (builder, "digital-time-chooser");
   clock_plugin_configure_plugin_chooser_fill (plugin,
                                               GTK_COMBO_BOX (combo),
                                               GTK_ENTRY (object),
