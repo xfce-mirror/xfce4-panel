@@ -659,10 +659,14 @@ clock_plugin_configure_plugin_mode_changed (GtkComboBox       *combo,
     { "flash-separators", "flash-separators", "active" },
     { "show-meridiem", "show-meridiem", "active" },
     { "digital-box", "digital-format", "text" },
+    { "digital-box", "digital-layout", "active" },
+    { "digital-box", "digital-date-format", "text" },
+    { "digital-box", "digital-time-format", "text" },
+    { "digital-box", "digital-date-font", "font-name" },
+    { "digital-box", "digital-time-font", "font-name" },
     { "fuzziness-box", "fuzziness", "value" },
     { "show-inactive", "show-inactive", "active" },
     { "show-grid", "show-grid", "active" },
-    { "digital-box", "digital-layout", "active" }
   };
 
   panel_return_if_fail (GTK_IS_COMBO_BOX (combo));
@@ -678,15 +682,15 @@ clock_plugin_configure_plugin_mode_changed (GtkComboBox       *combo,
       break;
 
     case CLOCK_PLUGIN_MODE_BINARY:
-      active = 1 << 1 | 1 << 2 | 1 << 8 | 1 << 9;
+      active = 1 << 1 | 1 << 2 | 1 << 13 | 1 << 14;
       break;
 
     case CLOCK_PLUGIN_MODE_DIGITAL:
-      active = 1 << 6 | 1 << 10;
+      active = 1 << 6 | 1 << 7 | 1 << 8 | 1 << 9 | 1 << 10 | 1 << 11;
       break;
 
     case CLOCK_PLUGIN_MODE_FUZZY:
-      active = 1 << 7;
+      active = 1 << 12;
       break;
 
     case CLOCK_PLUGIN_MODE_LCD:
@@ -1187,7 +1191,7 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 static void
 clock_plugin_set_mode (ClockPlugin *plugin)
 {
-  const PanelProperty properties[][5] =
+  const PanelProperty properties[][7] =
   {
     { /* analog */
       { "show-seconds", G_TYPE_BOOLEAN },
@@ -1203,6 +1207,10 @@ clock_plugin_set_mode (ClockPlugin *plugin)
     { /* digital */
       { "digital-format", G_TYPE_STRING },
       { "digital-layout", G_TYPE_UINT },
+      { "digital-time-format", G_TYPE_STRING },
+      { "digital-date-format", G_TYPE_STRING },
+      { "digital-time-font", G_TYPE_STRING },
+      { "digital-date-font", G_TYPE_STRING },
       { NULL },
     },
     { /* fuzzy */
