@@ -19,8 +19,7 @@
 #ifndef __XFWL_FOREIGN_TOPLEVEL_H__
 #define __XFWL_FOREIGN_TOPLEVEL_H__
 
-#include <glib.h>
-#include <glib-object.h>
+#include <gdk/gdk.h>
 
 G_BEGIN_DECLS
 
@@ -58,6 +57,28 @@ GList                                  *xfwl_foreign_toplevel_get_monitors    (X
 XfwlForeignToplevelState                xfwl_foreign_toplevel_get_state       (XfwlForeignToplevel *toplevel);
 
 XfwlForeignToplevel                    *xfwl_foreign_toplevel_get_parent      (XfwlForeignToplevel *toplevel);
+
+void                                    xfwl_foreign_toplevel_maximize        (XfwlForeignToplevel *toplevel);
+
+void                                    xfwl_foreign_toplevel_unmaximize      (XfwlForeignToplevel *toplevel);
+
+void                                    xfwl_foreign_toplevel_minimize        (XfwlForeignToplevel *toplevel);
+
+void                                    xfwl_foreign_toplevel_unminimize      (XfwlForeignToplevel *toplevel);
+
+void                                    xfwl_foreign_toplevel_activate        (XfwlForeignToplevel *toplevel,
+                                                                               GdkSeat             *seat);
+
+void                                    xfwl_foreign_toplevel_close           (XfwlForeignToplevel *toplevel);
+
+void                                    xfwl_foreign_toplevel_set_rectangle   (XfwlForeignToplevel *toplevel,
+                                                                               GdkWindow           *window,
+                                                                               const GdkRectangle  *rectangle);
+
+void                                    xfwl_foreign_toplevel_fullscreen      (XfwlForeignToplevel *toplevel,
+                                                                               GdkMonitor          *monitor);
+
+void                                    xfwl_foreign_toplevel_unfullscreen    (XfwlForeignToplevel *toplevel);
 
 G_END_DECLS
 
