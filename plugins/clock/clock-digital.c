@@ -60,12 +60,16 @@ enum
 
 struct _XfceClockDigitalClass
 {
- GtkLabelClass __parent__;
+  GtkBoxClass __parent__;
 };
 
 struct _XfceClockDigital
 {
-  GtkLabel __parent__;
+  GtkBox __parent__;
+
+  GtkWidget *vbox;
+  GtkWidget *time_label;
+  GtkWidget *date_label;
 
   ClockTime          *time;
   ClockTimeTimeout   *timeout;
@@ -87,7 +91,7 @@ struct _XfceClockDigital
 
 
 
-XFCE_PANEL_DEFINE_TYPE (XfceClockDigital, xfce_clock_digital, GTK_TYPE_LABEL)
+XFCE_PANEL_DEFINE_TYPE (XfceClockDigital, xfce_clock_digital, GTK_TYPE_BOX)
 
 
 
@@ -166,9 +170,24 @@ xfce_clock_digital_class_init (XfceClockDigitalClass *klass)
 static void
 xfce_clock_digital_init (XfceClockDigital *digital)
 {
-  digital->format = g_strdup (DEFAULT_DIGITAL_FORMAT);
+  digital->vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+  gtk_box_pack_start (GTK_BOX (digital), digital->vbox, TRUE, TRUE, 0);
 
-  gtk_label_set_justify (GTK_LABEL (digital), GTK_JUSTIFY_CENTER);
+  digital->time_label = gtk_label_new (NULL);
+  digital->date_label = gtk_label_new (NULL);
+
+  digital->time_format = g_strdup (DEFAULT_DIGITAL_TIME_FORMAT);
+  digital->date_format = g_strdup (DEFAULT_DIGITAL_DATE_FORMAT);
+
+  digital->format = g_strdup ("");
+
+  gtk_label_set_justify (GTK_LABEL (digital->time_label), GTK_JUSTIFY_CENTER);
+  gtk_label_set_justify (GTK_LABEL (digital->date_label), GTK_JUSTIFY_CENTER);
+
+  gtk_box_pack_start (GTK_BOX (digital->vbox), digital->time_label, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (digital->vbox), digital->date_label, TRUE, TRUE, 0);
+
+  gtk_widget_show_all (digital->vbox);
 }
 
 
@@ -184,7 +203,10 @@ xfce_clock_digital_set_property (GObject      *object,
   switch (prop_id)
   {
     case PROP_ORIENTATION:
-      gtk_label_set_angle (GTK_LABEL (object),
+      gtk_label_set_angle (GTK_LABEL (digital->time_label),
+          g_value_get_enum (value) == GTK_ORIENTATION_HORIZONTAL ?
+          0 : 270);
+      gtk_label_set_angle (GTK_LABEL (digital->date_label),
           g_value_get_enum (value) == GTK_ORIENTATION_HORIZONTAL ?
           0 : 270);
       break;
@@ -310,15 +332,25 @@ static gboolean
 xfce_clock_digital_update (XfceClockDigital *digital,
                            ClockTime        *time)
 {
-  gchar            *string;
+  gchar *string, *date_format, *time_format;
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_DIGITAL (digital), FALSE);
   panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (time), FALSE);
 
+  g_object_get (G_OBJECT (digital), "digital-date-format", &date_format, "digital-time-format", &time_format, NULL);
+
   /* set time string */
-  string = clock_time_strdup_strftime (digital->time, digital->format);
-  gtk_label_set_markup (GTK_LABEL (digital), string);
+  string = clock_time_strdup_strftime (digital->time, time_format);
+  gtk_label_set_markup (GTK_LABEL (digital->time_label), string);
   g_free (string);
+
+  /* set date string */
+  string = clock_time_strdup_strftime (digital->time, date_format);
+  gtk_label_set_markup (GTK_LABEL (digital->date_label), string);
+  g_free (string);
+
+  g_free (date_format);
+  g_free (time_format);
 
   return TRUE;
 }
