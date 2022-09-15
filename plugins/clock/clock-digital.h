@@ -22,6 +22,8 @@
 G_BEGIN_DECLS
 
 /* TRANSLATORS: adjust this accordingly for your locale format */
+#define DEFAULT_DIGITAL_TIME_FORMAT NC_("Time", "%R")
+#define DEFAULT_DIGITAL_DATE_FORMAT NC_("Date", "%Y-%m-%d")
 #define DEFAULT_DIGITAL_FORMAT NC_("Time", "%a %_d %b, %R")
 
 typedef enum
