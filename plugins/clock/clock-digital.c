@@ -39,6 +39,7 @@ static void     xfce_clock_digital_get_property (GObject               *object,
 static void     xfce_clock_digital_finalize     (GObject               *object);
 static gboolean xfce_clock_digital_update       (XfceClockDigital      *digital,
                                                  ClockTime             *time);
+static void     xfce_clock_digital_update_font  (XfceClockDigital      *digital);
 
 
 
@@ -223,6 +224,7 @@ xfce_clock_digital_set_property (GObject      *object,
     case PROP_DIGITAL_DATE_FONT:
       g_free (digital->date_font);
       digital->date_font = g_value_dup_string (value);
+      xfce_clock_digital_update_font (digital);
       break;
 
     case PROP_DIGITAL_DATE_FORMAT:
@@ -233,6 +235,7 @@ xfce_clock_digital_set_property (GObject      *object,
     case PROP_DIGITAL_TIME_FONT:
       g_free (digital->time_font);
       digital->time_font = g_value_dup_string (value);
+      xfce_clock_digital_update_font (digital);
       break;
 
     case PROP_DIGITAL_TIME_FORMAT:
@@ -355,6 +358,36 @@ xfce_clock_digital_update (XfceClockDigital *digital,
   return TRUE;
 }
 
+static void
+xfce_clock_digital_update_font (XfceClockDigital *digital)
+{
+  PangoAttrList *attr_list;
+  PangoAttribute *attr;
+  PangoFontDescription *font_desc;
+  gchar *date_font, *time_font;
+
+  g_object_get (G_OBJECT (digital), "digital-date-font", &date_font, "digital-time-font", &time_font, NULL);
+
+  attr_list = pango_attr_list_new ();
+  font_desc = pango_font_description_from_string (date_font);
+  attr = pango_attr_font_desc_new (font_desc);
+  pango_attr_list_insert (attr_list, attr);
+  gtk_label_set_attributes (GTK_LABEL (digital->date_label), attr_list);
+  pango_font_description_free (font_desc);
+  pango_attr_list_unref (attr_list);
+
+  attr_list = pango_attr_list_new ();
+  font_desc = pango_font_description_from_string (time_font);
+  attr = pango_attr_font_desc_new (font_desc);
+  pango_attr_list_insert (attr_list, attr);
+  gtk_label_set_attributes (GTK_LABEL (digital->time_label), attr_list);
+  pango_font_description_free (font_desc);
+  pango_attr_list_unref (attr_list);
+
+  g_free (date_font);
+  g_free (time_font);
+}
+
 
 
 GtkWidget *
@@ -368,6 +401,7 @@ xfce_clock_digital_new (ClockTime *time,
                                              digital->time,
                                              sleep_monitor,
                                              G_CALLBACK (xfce_clock_digital_update), digital);
+  xfce_clock_digital_update_font (digital);
 
   return GTK_WIDGET (digital);
 }
