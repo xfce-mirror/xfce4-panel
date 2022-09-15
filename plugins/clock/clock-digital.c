@@ -46,10 +46,16 @@ static gboolean xfce_clock_digital_update       (XfceClockDigital      *digital,
 enum
 {
   PROP_0,
-  PROP_DIGITAL_FORMAT,
+  PROP_DIGITAL_LAYOUT,
+  PROP_DIGITAL_TIME_FORMAT,
+  PROP_DIGITAL_TIME_FONT,
+  PROP_DIGITAL_DATE_FORMAT,
+  PROP_DIGITAL_DATE_FONT,
   PROP_SIZE_RATIO,
   PROP_ORIENTATION,
-  PROP_DIGITAL_LAYOUT,
+
+  /* Property for easy backward compatibility, can be removed after some time */
+  PROP_DIGITAL_FORMAT,
 };
 
 struct _XfceClockDigitalClass
@@ -66,8 +72,18 @@ struct _XfceClockDigital
 
   ClockPluginDigitalFormat layout;
 
+  gchar *date_format;
+  gchar *date_font;
+  gchar *time_format;
+  gchar *time_font;
+
+  /* attribute for backward compatibility */
   gchar *format;
 };
+
+
+
+#define DEFAULT_FONT "Sans Regular 8"
 
 
 
@@ -115,6 +131,34 @@ xfce_clock_digital_class_init (XfceClockDigitalClass *klass)
                                                         DEFAULT_DIGITAL_FORMAT,
                                                         G_PARAM_READWRITE
                                                         | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DIGITAL_DATE_FONT,
+                                   g_param_spec_string ("digital-date-font", NULL, NULL,
+                                                        DEFAULT_FONT,
+                                                        G_PARAM_READWRITE
+                                                        | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DIGITAL_DATE_FORMAT,
+                                   g_param_spec_string ("digital-date-format", NULL, NULL,
+                                                        DEFAULT_DIGITAL_DATE_FORMAT,
+                                                        G_PARAM_READWRITE
+                                                        | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DIGITAL_TIME_FONT,
+                                   g_param_spec_string ("digital-time-font", NULL, NULL,
+                                                        DEFAULT_FONT,
+                                                        G_PARAM_READWRITE
+                                                        | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DIGITAL_TIME_FORMAT,
+                                   g_param_spec_string ("digital-time-format", NULL, NULL,
+                                                        DEFAULT_DIGITAL_TIME_FORMAT,
+                                                        G_PARAM_READWRITE
+                                                        | G_PARAM_STATIC_STRINGS));
 }
 
 
@@ -123,6 +167,10 @@ static void
 xfce_clock_digital_init (XfceClockDigital *digital)
 {
   digital->format = g_strdup (DEFAULT_DIGITAL_FORMAT);
+  digital->date_font = g_strdup (DEFAULT_FONT);
+  digital->date_format = g_strdup (DEFAULT_DIGITAL_DATE_FORMAT);
+  digital->time_font = g_strdup (DEFAULT_FONT);
+  digital->time_format = g_strdup (DEFAULT_DIGITAL_TIME_FORMAT);
 
   gtk_label_set_justify (GTK_LABEL (digital), GTK_JUSTIFY_CENTER);
 }
@@ -154,6 +202,26 @@ xfce_clock_digital_set_property (GObject      *object,
       digital->layout = g_value_get_uint (value);
       break;
 
+    case PROP_DIGITAL_DATE_FONT:
+      g_free (digital->date_font);
+      digital->date_font = g_value_dup_string (value);
+      break;
+
+    case PROP_DIGITAL_DATE_FORMAT:
+      g_free (digital->date_format);
+      digital->date_format = g_value_dup_string (value);
+      break;
+
+    case PROP_DIGITAL_TIME_FONT:
+      g_free (digital->time_font);
+      digital->time_font = g_value_dup_string (value);
+      break;
+
+    case PROP_DIGITAL_TIME_FORMAT:
+      g_free (digital->time_format);
+      digital->time_format = g_value_dup_string (value);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -161,7 +229,7 @@ xfce_clock_digital_set_property (GObject      *object,
 
   /* reschedule the timeout and redraw */
   clock_time_timeout_set_interval (digital->timeout,
-      clock_time_interval_from_format (digital->format));
+      clock_time_interval_from_format (digital->time_format));
   xfce_clock_digital_update (digital, digital->time);
 }
 
@@ -185,6 +253,30 @@ xfce_clock_digital_get_property (GObject    *object,
         g_value_set_uint (value, digital->layout);
         break;
 
+    case PROP_DIGITAL_DATE_FORMAT:
+        g_value_set_string (value, digital->date_format);
+        break;
+
+    case PROP_DIGITAL_DATE_FONT:
+      g_value_set_string (value, digital->date_font);
+      break;
+
+    case PROP_DIGITAL_TIME_FORMAT:
+      /* backward compatibility: retrieving the previous stored in format if it is changed */
+      if (! xfce_str_is_empty (digital->format)
+          && g_strcmp0 (digital->format, DEFAULT_DIGITAL_FORMAT) != 0)
+        {
+          g_free (digital->time_format);
+          digital->time_format = digital->format;
+          digital->format = g_strdup (DEFAULT_DIGITAL_FORMAT);
+        }
+      g_value_set_string (value, digital->time_format);
+      break;
+
+    case PROP_DIGITAL_TIME_FONT:
+      g_value_set_string (value, digital->time_font);
+      break;
+
     case PROP_SIZE_RATIO:
       g_value_set_double (value, -1.0);
       break;
@@ -206,6 +298,10 @@ xfce_clock_digital_finalize (GObject *object)
   clock_time_timeout_free (digital->timeout);
 
   g_free (digital->format);
+  g_free (digital->date_font);
+  g_free (digital->date_format);
+  g_free (digital->time_font);
+  g_free (digital->time_format);
 
   (*G_OBJECT_CLASS (xfce_clock_digital_parent_class)->finalize) (object);
 }
@@ -238,7 +334,7 @@ xfce_clock_digital_new (ClockTime *time,
   XfceClockDigital *digital = g_object_new (XFCE_CLOCK_TYPE_DIGITAL, NULL);
 
   digital->time = time;
-  digital->timeout = clock_time_timeout_new (clock_time_interval_from_format (digital->format),
+  digital->timeout = clock_time_timeout_new (clock_time_interval_from_format (digital->time_format),
                                              digital->time,
                                              sleep_monitor,
                                              G_CALLBACK (xfce_clock_digital_update), digital);
