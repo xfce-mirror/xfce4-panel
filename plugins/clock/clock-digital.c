@@ -89,7 +89,7 @@ struct _XfceClockDigital
 
 
 
-#define DEFAULT_FONT "Bitstream Vera Sans 8"
+#define DEFAULT_FONT "Sans Regular 8"
 
 
 
