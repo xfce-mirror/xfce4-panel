@@ -173,7 +173,7 @@ static void
 xfce_clock_digital_init (XfceClockDigital *digital)
 {
   digital->vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-  gtk_box_pack_start  (GTK_BOX (digital), digital->vbox, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (digital), digital->vbox, TRUE, TRUE, 0);
 
   digital->time_label = gtk_label_new (NULL);
   digital->date_label = gtk_label_new (NULL);
@@ -184,8 +184,8 @@ xfce_clock_digital_init (XfceClockDigital *digital)
   gtk_label_set_justify (GTK_LABEL (digital->time_label), GTK_JUSTIFY_CENTER);
   gtk_label_set_justify (GTK_LABEL (digital->date_label), GTK_JUSTIFY_CENTER);
 
-  gtk_box_pack_start  (GTK_BOX (digital->vbox), digital->time_label, TRUE, TRUE, 0);
-  gtk_box_pack_start  (GTK_BOX (digital->vbox), digital->date_label, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (digital->vbox), digital->time_label, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (digital->vbox), digital->date_label, TRUE, TRUE, 0);
 
   gtk_widget_show_all (digital->vbox);
 }
@@ -399,7 +399,7 @@ xfce_clock_digital_update_font (XfceClockDigital *digital)
   g_object_get (G_OBJECT (digital), "digital-date-font", &date_font, "digital-time-font", &time_font, NULL);
 
   attr_list = pango_attr_list_new ();
-  font_desc = pango_font_description_from_string(date_font);
+  font_desc = pango_font_description_from_string (date_font);
   attr = pango_attr_font_desc_new (font_desc);
   pango_attr_list_insert (attr_list, attr);
   gtk_label_set_attributes (GTK_LABEL (digital->date_label), attr_list);
@@ -407,7 +407,7 @@ xfce_clock_digital_update_font (XfceClockDigital *digital)
   pango_attr_list_unref (attr_list);
 
   attr_list = pango_attr_list_new ();
-  font_desc = pango_font_description_from_string(time_font);
+  font_desc = pango_font_description_from_string (time_font);
   attr = pango_attr_font_desc_new (font_desc);
   pango_attr_list_insert (attr_list, attr);
   gtk_label_set_attributes (GTK_LABEL (digital->time_label), attr_list);
