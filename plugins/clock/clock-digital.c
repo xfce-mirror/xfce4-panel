@@ -296,6 +296,10 @@ xfce_clock_digital_finalize (GObject *object)
   clock_time_timeout_free (digital->timeout);
 
   g_free (digital->format);
+  g_free (digital->date_font);
+  g_free (digital->date_format);
+  g_free (digital->time_font);
+  g_free (digital->time_format);
 
   (*G_OBJECT_CLASS (xfce_clock_digital_parent_class)->finalize) (object);
 }
