@@ -515,3 +515,217 @@ xfwl_foreign_toplevel_get_parent (XfwlForeignToplevel *toplevel)
 
   return toplevel->parent;
 }
+
+
+
+/**
+ * xfwl_foreign_toplevel_maximize:
+ * @toplevel: an #XfwlForeignToplevel
+ *
+ * Requests that the toplevel be maximized. If the maximized state actually changes,
+ * this will be indicated by #XfwlForeignToplevel:state.
+ **/
+void
+xfwl_foreign_toplevel_maximize (XfwlForeignToplevel *toplevel)
+{
+  g_return_if_fail (XFWL_IS_FOREIGN_TOPLEVEL (toplevel));
+
+  zwlr_foreign_toplevel_handle_v1_set_maximized (toplevel->wl_toplevel);
+}
+
+
+
+/**
+ * xfwl_foreign_toplevel_unmaximize:
+ * @toplevel: an #XfwlForeignToplevel
+ *
+ * Requests that the toplevel be unmaximized. If the maximized state actually changes,
+ * this will be indicated by #XfwlForeignToplevel:state.
+ **/
+void
+xfwl_foreign_toplevel_unmaximize (XfwlForeignToplevel *toplevel)
+{
+  g_return_if_fail (XFWL_IS_FOREIGN_TOPLEVEL (toplevel));
+
+  zwlr_foreign_toplevel_handle_v1_unset_maximized (toplevel->wl_toplevel);
+}
+
+
+
+/**
+ * xfwl_foreign_toplevel_minimize:
+ * @toplevel: an #XfwlForeignToplevel
+ *
+ * Requests that the toplevel be minimized. If the minimized state actually changes,
+ * this will be indicated by #XfwlForeignToplevel:state.
+ **/
+void
+xfwl_foreign_toplevel_minimize (XfwlForeignToplevel *toplevel)
+{
+  g_return_if_fail (XFWL_IS_FOREIGN_TOPLEVEL (toplevel));
+
+  zwlr_foreign_toplevel_handle_v1_set_minimized (toplevel->wl_toplevel);
+}
+
+
+
+/**
+ * xfwl_foreign_toplevel_unminimize:
+ * @toplevel: an #XfwlForeignToplevel
+ *
+ * Requests that the toplevel be unminimized. If the minimized state actually changes,
+ * this will be indicated by #XfwlForeignToplevel:state.
+ **/
+void
+xfwl_foreign_toplevel_unminimize (XfwlForeignToplevel *toplevel)
+{
+  g_return_if_fail (XFWL_IS_FOREIGN_TOPLEVEL (toplevel));
+
+  zwlr_foreign_toplevel_handle_v1_unset_minimized (toplevel->wl_toplevel);
+}
+
+
+
+/**
+ * xfwl_foreign_toplevel_activate:
+ * @toplevel: an #XfwlForeignToplevel
+ *
+ * See xfwl_foreign_toplevel_activate_on_seat() for a %NULL seat.
+ **/
+void
+xfwl_foreign_toplevel_activate (XfwlForeignToplevel *toplevel)
+{
+  g_return_if_fail (XFWL_IS_FOREIGN_TOPLEVEL (toplevel));
+
+  xfwl_foreign_toplevel_activate_on_seat (toplevel, NULL);
+}
+
+
+
+/**
+ * xfwl_foreign_toplevel_activate_on_seat:
+ * @toplevel: an #XfwlForeignToplevel
+ * @seat: (nullable): the seat on which @toplevel should be activated or %NULL for
+ * the default seat on the default display
+ *
+ * Requests that the toplevel be activated on the given seat. There is no guarantee
+ * the toplevel will actually be activated. If so, this will be indicated by
+ * #XfwlForeignToplevel:state.
+ **/
+void
+xfwl_foreign_toplevel_activate_on_seat (XfwlForeignToplevel *toplevel,
+                                        GdkSeat *seat)
+{
+  g_return_if_fail (XFWL_IS_FOREIGN_TOPLEVEL (toplevel));
+  g_return_if_fail (seat == NULL || GDK_IS_SEAT (seat));
+
+  if (seat == NULL)
+    seat = gdk_display_get_default_seat (gdk_display_get_default ());
+
+  zwlr_foreign_toplevel_handle_v1_activate (toplevel->wl_toplevel,
+                                            gdk_wayland_seat_get_wl_seat (seat));
+}
+
+
+
+/**
+ * xfwl_foreign_toplevel_close:
+ * @toplevel: an #XfwlForeignToplevel
+ *
+ * Requests the toplevel to close itself. There is no guarantee the toplevel will
+ * actually be destroyed. If so, this will be indicated by #XfwlForeignToplevel::closed.
+ **/
+void
+xfwl_foreign_toplevel_close (XfwlForeignToplevel *toplevel)
+{
+  g_return_if_fail (XFWL_IS_FOREIGN_TOPLEVEL (toplevel));
+
+  zwlr_foreign_toplevel_handle_v1_close (toplevel->wl_toplevel);
+}
+
+
+
+/**
+ * xfwl_foreign_toplevel_set_rectangle:
+ * @toplevel: an #XfwlForeignToplevel
+ * @window: the window to which the coordinates in @rectangle are relative
+ * @rectangle: the place where the calling app represents @toplevel, e.g. a window
+ * button in a taskbar
+ *
+ * @rectangle corresponds to the place where the calling app represents @toplevel,
+ * e.g. a window button in a taskbar. It can be used by the compositor as a hint for
+ * some operations, e.g minimizing. It is however not required to set this, in which
+ * case the compositor is free to decide some default value.
+ *
+ * If more than one rectangle is specified, only the last one is considered. Setting
+ * `rectangle->width = rectangle->height = 0` removes the already-set rectangle.
+ **/
+void
+xfwl_foreign_toplevel_set_rectangle (XfwlForeignToplevel *toplevel,
+                                     GdkWindow *window,
+                                     const GdkRectangle *rectangle)
+{
+  g_return_if_fail (XFWL_IS_FOREIGN_TOPLEVEL (toplevel));
+  g_return_if_fail (GDK_IS_WINDOW (window));
+
+  zwlr_foreign_toplevel_handle_v1_set_rectangle (toplevel->wl_toplevel,
+                                                 gdk_wayland_window_get_wl_surface (window),
+                                                 rectangle->x, rectangle->y,
+                                                 rectangle->width, rectangle->height);
+}
+
+
+
+/**
+ * xfwl_foreign_toplevel_fullscreen:
+ * @toplevel: an #XfwlForeignToplevel
+ *
+ * See xfwl_foreign_toplevel_fullscreen_on_monitor() for a %NULL monitor.
+ **/
+void
+xfwl_foreign_toplevel_fullscreen (XfwlForeignToplevel *toplevel)
+{
+  g_return_if_fail (XFWL_IS_FOREIGN_TOPLEVEL (toplevel));
+
+  xfwl_foreign_toplevel_fullscreen_on_monitor (toplevel, NULL);
+}
+
+
+
+/**
+ * xfwl_foreign_toplevel_fullscreen_on_monitor:
+ * @toplevel: an #XfwlForeignToplevel
+ * @monitor: (nullable): the monitor on which @toplevel should be fullscreened or %NULL
+ * to let the compositor decide
+ *
+ * Requests that the toplevel be fullscreened on the given monitor. If the fullscreen
+ * state and/or the monitors the toplevel is visible on actually change, this will be
+ * indicated by the #XfwlForeignToplevel:state and #XfwlForeignToplevel:monitors.
+ **/
+void
+xfwl_foreign_toplevel_fullscreen_on_monitor (XfwlForeignToplevel *toplevel,
+                                             GdkMonitor *monitor)
+{
+  g_return_if_fail (XFWL_IS_FOREIGN_TOPLEVEL (toplevel));
+  g_return_if_fail (monitor == NULL || GDK_IS_MONITOR (monitor));
+
+  zwlr_foreign_toplevel_handle_v1_set_fullscreen (toplevel->wl_toplevel,
+    monitor == NULL ? NULL : gdk_wayland_monitor_get_wl_output (monitor));
+}
+
+
+
+/**
+ * xfwl_foreign_toplevel_unfullscreen:
+ * @toplevel: an #XfwlForeignToplevel
+ *
+ * Requests that the toplevel be unfullscreened. If the fullscreen state actually changes,
+ * this will be indicated by #XfwlForeignToplevel:state.
+ **/
+void
+xfwl_foreign_toplevel_unfullscreen (XfwlForeignToplevel *toplevel)
+{
+  g_return_if_fail (XFWL_IS_FOREIGN_TOPLEVEL (toplevel));
+
+  zwlr_foreign_toplevel_handle_v1_unset_fullscreen (toplevel->wl_toplevel);
+}
