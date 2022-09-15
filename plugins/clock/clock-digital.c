@@ -46,10 +46,16 @@ static gboolean xfce_clock_digital_update       (XfceClockDigital      *digital,
 enum
 {
   PROP_0,
-  PROP_DIGITAL_FORMAT,
+  PROP_DIGITAL_LAYOUT,
+  PROP_DIGITAL_TIME_FORMAT,
+  PROP_DIGITAL_TIME_FONT,
+  PROP_DIGITAL_DATE_FORMAT,
+  PROP_DIGITAL_DATE_FONT,
   PROP_SIZE_RATIO,
   PROP_ORIENTATION,
-  PROP_DIGITAL_LAYOUT,
+
+  /* Property for easy backward compatibility, can be removed after some time */
+  PROP_DIGITAL_FORMAT,
 };
 
 struct _XfceClockDigitalClass
@@ -66,8 +72,18 @@ struct _XfceClockDigital
 
   ClockPluginDigitalFormat layout;
 
+  gchar *date_format;
+  gchar *date_font;
+  gchar *time_format;
+  gchar *time_font;
+
+  /* attribute for backward compatibility */
   gchar *format;
 };
+
+
+
+#define DEFAULT_FONT "Bitstream Vera Sans 8"
 
 
 
@@ -115,6 +131,34 @@ xfce_clock_digital_class_init (XfceClockDigitalClass *klass)
                                                         DEFAULT_DIGITAL_FORMAT,
                                                         G_PARAM_READWRITE
                                                         | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DIGITAL_DATE_FONT,
+                                   g_param_spec_string ("digital-date-font", NULL, NULL,
+                                                        DEFAULT_FONT,
+                                                        G_PARAM_READWRITE
+                                                        | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DIGITAL_DATE_FORMAT,
+                                   g_param_spec_string ("digital-date-format", NULL, NULL,
+                                                        DEFAULT_DIGITAL_DATE_FORMAT,
+                                                        G_PARAM_READWRITE
+                                                        | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DIGITAL_TIME_FONT,
+                                   g_param_spec_string ("digital-time-font", NULL, NULL,
+                                                        DEFAULT_FONT,
+                                                        G_PARAM_READWRITE
+                                                        | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DIGITAL_TIME_FORMAT,
+                                   g_param_spec_string ("digital-time-format", NULL, NULL,
+                                                        DEFAULT_DIGITAL_TIME_FORMAT,
+                                                        G_PARAM_READWRITE
+                                                        | G_PARAM_STATIC_STRINGS));
 }
 
 
@@ -154,6 +198,26 @@ xfce_clock_digital_set_property (GObject      *object,
       digital->layout = g_value_get_uint (value);
       break;
 
+    case PROP_DIGITAL_DATE_FONT:
+      g_free (digital->date_font);
+      digital->date_font = g_value_dup_string (value);
+      break;
+
+    case PROP_DIGITAL_DATE_FORMAT:
+      g_free (digital->date_format);
+      digital->date_format = g_value_dup_string (value);
+      break;
+
+    case PROP_DIGITAL_TIME_FONT:
+      g_free (digital->time_font);
+      digital->time_font = g_value_dup_string (value);
+      break;
+
+    case PROP_DIGITAL_TIME_FORMAT:
+      g_free (digital->time_format);
+      digital->time_format = g_value_dup_string (value);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -177,21 +241,47 @@ xfce_clock_digital_get_property (GObject    *object,
 
   switch (prop_id)
     {
-    case PROP_DIGITAL_FORMAT:
-      g_value_set_string (value, digital->format);
-      break;
-
-    case PROP_DIGITAL_LAYOUT:
-        g_value_set_uint (value, digital->layout);
+      case PROP_DIGITAL_FORMAT:
+        g_value_set_string (value, digital->format);
         break;
 
-    case PROP_SIZE_RATIO:
-      g_value_set_double (value, -1.0);
-      break;
+      case PROP_DIGITAL_LAYOUT:
+          g_value_set_uint (value, digital->layout);
+          break;
 
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-      break;
+      case PROP_DIGITAL_DATE_FORMAT:
+          g_value_set_string (value, digital->date_format);
+          break;
+
+      case PROP_DIGITAL_DATE_FONT:
+        if (digital->date_font == NULL)
+          digital->date_font = g_strdup (DEFAULT_FONT);
+        g_value_set_string (value, digital->date_font);
+        break;
+
+      case PROP_DIGITAL_TIME_FORMAT:
+        /* Retrieving the previous stored in format if it is changed */
+        if (digital->format != NULL && g_strcmp0 (digital->format, "") != 0 && g_strcmp0 (digital->format, DEFAULT_DIGITAL_FORMAT) != 0)
+          {
+            digital->time_format = digital->format;
+            digital->format = g_strdup ("");
+          }
+        g_value_set_string (value, digital->time_format);
+        break;
+
+      case PROP_DIGITAL_TIME_FONT:
+        if (digital->time_font == NULL)
+          digital->time_font = g_strdup (DEFAULT_FONT);
+        g_value_set_string (value, digital->time_font);
+        break;
+
+      case PROP_SIZE_RATIO:
+        g_value_set_double (value, -1.0);
+        break;
+
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        break;
     }
 }
 
