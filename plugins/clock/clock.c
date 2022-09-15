@@ -179,13 +179,33 @@ static const gchar *tooltip_formats[] =
   NULL
 };
 
-static const gchar *digital_formats[] =
+static const gchar *digital_time_formats[] =
 {
-  DEFAULT_DIGITAL_FORMAT,
+  DEFAULT_DIGITAL_TIME_FORMAT,
   "%T",
   "%r",
-  "%I:%M %p",
   "%_H:%M",
+  "%H:%M",
+  "%I:%M %p",
+  "%H:%M:%S",
+  "%l:%M:%S %P",
+  NULL
+};
+
+static const gchar *digital_date_formats[] =
+{
+  DEFAULT_DIGITAL_DATE_FORMAT,
+  "%Y %B %d",
+  "%m/%d/%Y",
+  "%B %d, %Y",
+  "%b %d, %Y",
+  "%d/%m/%Y",
+  "%d %B %Y",
+  "%d %b %Y",
+  "%A, %B %d, %Y",
+  "%a, %b %d, %Y",
+  "%A, %d %B %Y",
+  "%a, %d %b %Y",
   NULL
 };
 
@@ -1186,7 +1206,18 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   clock_plugin_configure_plugin_chooser_fill (plugin,
                                               GTK_COMBO_BOX (combo),
                                               GTK_ENTRY (object),
-                                              digital_formats);
+                                              digital_time_formats);
+  object = gtk_builder_get_object (builder, "digital-time-font");
+
+  object = gtk_builder_get_object (builder, "digital-date-format");
+  g_signal_connect (G_OBJECT (object), "changed",
+                    G_CALLBACK (clock_plugin_validate_entry_text), plugin);
+  combo = gtk_builder_get_object (builder, "digital-date-chooser");
+  clock_plugin_configure_plugin_chooser_fill (plugin,
+                                              GTK_COMBO_BOX (combo),
+                                              GTK_ENTRY (object),
+                                              digital_date_formats);
+  object = gtk_builder_get_object (builder, "digital-date-font");
 
   gtk_widget_show (GTK_WIDGET (window));
 }
