@@ -181,6 +181,8 @@ xfce_clock_digital_init (XfceClockDigital *digital)
   digital->time_format = g_strdup (DEFAULT_DIGITAL_TIME_FORMAT);
   digital->date_format = g_strdup (DEFAULT_DIGITAL_DATE_FORMAT);
 
+  digital->format = g_strdup ("");
+
   gtk_label_set_justify (GTK_LABEL (digital->time_label), GTK_JUSTIFY_CENTER);
   gtk_label_set_justify (GTK_LABEL (digital->date_label), GTK_JUSTIFY_CENTER);
 
@@ -202,50 +204,50 @@ xfce_clock_digital_set_property (GObject      *object,
 
   switch (prop_id)
     {
-    case PROP_ORIENTATION:
-      gtk_label_set_angle (GTK_LABEL (digital->time_label),
-          g_value_get_enum (value) == GTK_ORIENTATION_HORIZONTAL ?
-          0 : 270);
-      gtk_label_set_angle (GTK_LABEL (digital->date_label),
-          g_value_get_enum (value) == GTK_ORIENTATION_HORIZONTAL ?
-          0 : 270);
-      break;
+      case PROP_ORIENTATION:
+        gtk_label_set_angle (GTK_LABEL (digital->time_label),
+            g_value_get_enum (value) == GTK_ORIENTATION_HORIZONTAL ?
+            0 : 270);
+        gtk_label_set_angle (GTK_LABEL (digital->date_label),
+            g_value_get_enum (value) == GTK_ORIENTATION_HORIZONTAL ?
+            0 : 270);
+        break;
 
-    case PROP_DIGITAL_FORMAT:
-      g_free (digital->format);
-      digital->format = g_value_dup_string (value);
-      break;
+      case PROP_DIGITAL_FORMAT:
+        g_free (digital->format);
+        digital->format = g_value_dup_string (value);
+        break;
 
-    case PROP_DIGITAL_LAYOUT:
-      digital->layout = g_value_get_uint (value);
-      xfce_clock_digital_update_layout (digital);
-      break;
+      case PROP_DIGITAL_LAYOUT:
+        digital->layout = g_value_get_uint (value);
+        xfce_clock_digital_update_layout (digital);
+        break;
 
-    case PROP_DIGITAL_DATE_FONT:
-      g_free (digital->date_font);
-      digital->date_font = g_value_dup_string (value);
-      xfce_clock_digital_update_font (digital);
-      break;
+      case PROP_DIGITAL_DATE_FONT:
+        g_free (digital->date_font);
+        digital->date_font = g_value_dup_string (value);
+        xfce_clock_digital_update_font (digital);
+        break;
 
-    case PROP_DIGITAL_DATE_FORMAT:
-      g_free (digital->date_format);
-      digital->date_format = g_value_dup_string (value);
-      break;
+      case PROP_DIGITAL_DATE_FORMAT:
+        g_free (digital->date_format);
+        digital->date_format = g_value_dup_string (value);
+        break;
 
-    case PROP_DIGITAL_TIME_FONT:
-      g_free (digital->time_font);
-      digital->time_font = g_value_dup_string (value);
-      xfce_clock_digital_update_font (digital);
-      break;
+      case PROP_DIGITAL_TIME_FONT:
+        g_free (digital->time_font);
+        digital->time_font = g_value_dup_string (value);
+        xfce_clock_digital_update_font (digital);
+        break;
 
-    case PROP_DIGITAL_TIME_FORMAT:
-      g_free (digital->time_format);
-      digital->time_format = g_value_dup_string (value);
-      break;
+      case PROP_DIGITAL_TIME_FORMAT:
+        g_free (digital->time_format);
+        digital->time_format = g_value_dup_string (value);
+        break;
 
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-      break;
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        break;
     }
 
   /* reschedule the timeout and redraw */
@@ -352,6 +354,9 @@ xfce_clock_digital_update (XfceClockDigital *digital,
   gtk_label_set_markup (GTK_LABEL (digital->date_label), string);
   g_free (string);
 
+  g_free (date_format);
+  g_free (time_format);
+
   return TRUE;
 }
 
@@ -435,5 +440,4 @@ xfce_clock_digital_new (ClockTime *time,
   xfce_clock_digital_update_layout (digital);
 
   return GTK_WIDGET (digital);
-
 }
