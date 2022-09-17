@@ -173,7 +173,7 @@ static void
 xfce_clock_digital_init (XfceClockDigital *digital)
 {
   digital->vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-  gtk_box_pack_start  (GTK_BOX (digital), digital->vbox, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (digital), digital->vbox, TRUE, TRUE, 0);
 
   digital->time_label = gtk_label_new (NULL);
   digital->date_label = gtk_label_new (NULL);
@@ -181,11 +181,13 @@ xfce_clock_digital_init (XfceClockDigital *digital)
   digital->time_format = g_strdup (DEFAULT_DIGITAL_TIME_FORMAT);
   digital->date_format = g_strdup (DEFAULT_DIGITAL_DATE_FORMAT);
 
+  digital->format = g_strdup ("");
+
   gtk_label_set_justify (GTK_LABEL (digital->time_label), GTK_JUSTIFY_CENTER);
   gtk_label_set_justify (GTK_LABEL (digital->date_label), GTK_JUSTIFY_CENTER);
 
-  gtk_box_pack_start  (GTK_BOX (digital->vbox), digital->time_label, TRUE, TRUE, 0);
-  gtk_box_pack_start  (GTK_BOX (digital->vbox), digital->date_label, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (digital->vbox), digital->time_label, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (digital->vbox), digital->date_label, TRUE, TRUE, 0);
 
   gtk_widget_show_all (digital->vbox);
 }
@@ -201,7 +203,7 @@ xfce_clock_digital_set_property (GObject      *object,
   XfceClockDigital *digital = XFCE_CLOCK_DIGITAL (object);
 
   switch (prop_id)
-    {
+  {
     case PROP_ORIENTATION:
       gtk_label_set_angle (GTK_LABEL (digital->time_label),
           g_value_get_enum (value) == GTK_ORIENTATION_HORIZONTAL ?
@@ -246,7 +248,7 @@ xfce_clock_digital_set_property (GObject      *object,
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
-    }
+  }
 
   /* reschedule the timeout and redraw */
   clock_time_timeout_set_interval (digital->timeout,
@@ -265,49 +267,49 @@ xfce_clock_digital_get_property (GObject    *object,
   XfceClockDigital *digital = XFCE_CLOCK_DIGITAL (object);
 
   switch (prop_id)
-    {
-      case PROP_DIGITAL_FORMAT:
-        g_value_set_string (value, digital->format);
+  {
+    case PROP_DIGITAL_FORMAT:
+      g_value_set_string (value, digital->format);
+      break;
+
+    case PROP_DIGITAL_LAYOUT:
+        g_value_set_uint (value, digital->layout);
         break;
 
-      case PROP_DIGITAL_LAYOUT:
-          g_value_set_uint (value, digital->layout);
-          break;
-
-      case PROP_DIGITAL_DATE_FORMAT:
-          g_value_set_string (value, digital->date_format);
-          break;
-
-      case PROP_DIGITAL_DATE_FONT:
-        if (digital->date_font == NULL)
-          digital->date_font = g_strdup (DEFAULT_FONT);
-        g_value_set_string (value, digital->date_font);
+    case PROP_DIGITAL_DATE_FORMAT:
+        g_value_set_string (value, digital->date_format);
         break;
 
-      case PROP_DIGITAL_TIME_FORMAT:
-        /* Retrieving the previous stored in format if it is changed */
-        if (digital->format != NULL && g_strcmp0 (digital->format, "") != 0 && g_strcmp0 (digital->format, DEFAULT_DIGITAL_FORMAT) != 0)
-          {
-            digital->time_format = digital->format;
-            digital->format = g_strdup ("");
-          }
-        g_value_set_string (value, digital->time_format);
-        break;
+    case PROP_DIGITAL_DATE_FONT:
+      if (digital->date_font == NULL)
+        digital->date_font = g_strdup (DEFAULT_FONT);
+      g_value_set_string (value, digital->date_font);
+      break;
 
-      case PROP_DIGITAL_TIME_FONT:
-        if (digital->time_font == NULL)
-          digital->time_font = g_strdup (DEFAULT_FONT);
-        g_value_set_string (value, digital->time_font);
-        break;
+    case PROP_DIGITAL_TIME_FORMAT:
+      /* Retrieving the previous stored in format if it is changed */
+      if (digital->format != NULL && g_strcmp0 (digital->format, "") != 0 && g_strcmp0 (digital->format, DEFAULT_DIGITAL_FORMAT) != 0)
+        {
+          digital->time_format = digital->format;
+          digital->format = g_strdup ("");
+        }
+      g_value_set_string (value, digital->time_format);
+      break;
 
-      case PROP_SIZE_RATIO:
-        g_value_set_double (value, -1.0);
-        break;
+    case PROP_DIGITAL_TIME_FONT:
+      if (digital->time_font == NULL)
+        digital->time_font = g_strdup (DEFAULT_FONT);
+      g_value_set_string (value, digital->time_font);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
-    }
+    case PROP_SIZE_RATIO:
+      g_value_set_double (value, -1.0);
+      break;
+
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+  }
 }
 
 
@@ -351,6 +353,9 @@ xfce_clock_digital_update (XfceClockDigital *digital,
   string = clock_time_strdup_strftime (digital->time, date_format);
   gtk_label_set_markup (GTK_LABEL (digital->date_label), string);
   g_free (string);
+
+  g_free (date_format);
+  g_free (time_format);
 
   return TRUE;
 }
@@ -399,7 +404,7 @@ xfce_clock_digital_update_font (XfceClockDigital *digital)
   g_object_get (G_OBJECT (digital), "digital-date-font", &date_font, "digital-time-font", &time_font, NULL);
 
   attr_list = pango_attr_list_new ();
-  font_desc = pango_font_description_from_string(date_font);
+  font_desc = pango_font_description_from_string (date_font);
   attr = pango_attr_font_desc_new (font_desc);
   pango_attr_list_insert (attr_list, attr);
   gtk_label_set_attributes (GTK_LABEL (digital->date_label), attr_list);
@@ -407,7 +412,7 @@ xfce_clock_digital_update_font (XfceClockDigital *digital)
   pango_attr_list_unref (attr_list);
 
   attr_list = pango_attr_list_new ();
-  font_desc = pango_font_description_from_string(time_font);
+  font_desc = pango_font_description_from_string (time_font);
   attr = pango_attr_font_desc_new (font_desc);
   pango_attr_list_insert (attr_list, attr);
   gtk_label_set_attributes (GTK_LABEL (digital->time_label), attr_list);
@@ -435,5 +440,4 @@ xfce_clock_digital_new (ClockTime *time,
   xfce_clock_digital_update_layout (digital);
 
   return GTK_WIDGET (digital);
-
 }
