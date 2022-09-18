@@ -179,13 +179,33 @@ static const gchar *tooltip_formats[] =
   NULL
 };
 
-static const gchar *digital_formats[] =
+static const gchar *digital_time_formats[] =
 {
-  DEFAULT_DIGITAL_FORMAT,
+  DEFAULT_DIGITAL_TIME_FORMAT,
   "%T",
   "%r",
-  "%I:%M %p",
   "%_H:%M",
+  "%H:%M",
+  "%I:%M %p",
+  "%H:%M:%S",
+  "%l:%M:%S %P",
+  NULL
+};
+
+static const gchar *digital_date_formats[] =
+{
+  DEFAULT_DIGITAL_DATE_FORMAT,
+  "%Y %B %d",
+  "%m/%d/%Y",
+  "%B %d, %Y",
+  "%b %d, %Y",
+  "%d/%m/%Y",
+  "%d %B %Y",
+  "%d %b %Y",
+  "%A, %B %d, %Y",
+  "%a, %b %d, %Y",
+  "%A, %d %B %Y",
+  "%a, %d %b %Y",
   NULL
 };
 
@@ -659,6 +679,11 @@ clock_plugin_configure_plugin_mode_changed (GtkComboBox       *combo,
     { "flash-separators", "flash-separators", "active" },
     { "show-meridiem", "show-meridiem", "active" },
     { "digital-box", "digital-format", "text" },
+    { "digital-box", "digital-layout", "active" },
+    { "digital-box", "digital-date-format", "text" },
+    { "digital-box", "digital-time-format", "text" },
+    { "digital-box", "digital-date-font", "font-name" },
+    { "digital-box", "digital-time-font", "font-name" },
     { "fuzziness-box", "fuzziness", "value" },
     { "show-inactive", "show-inactive", "active" },
     { "show-grid", "show-grid", "active" },
@@ -677,15 +702,15 @@ clock_plugin_configure_plugin_mode_changed (GtkComboBox       *combo,
       break;
 
     case CLOCK_PLUGIN_MODE_BINARY:
-      active = 1 << 1 | 1 << 2 | 1 << 8 | 1 << 9;
+      active = 1 << 1 | 1 << 2 | 1 << 13 | 1 << 14;
       break;
 
     case CLOCK_PLUGIN_MODE_DIGITAL:
-      active = 1 << 6;
+      active = 1 << 6 | 1 << 7 | 1 << 8 | 1 << 9 | 1 << 10 | 1 << 11;
       break;
 
     case CLOCK_PLUGIN_MODE_FUZZY:
-      active = 1 << 7;
+      active = 1 << 12;
       break;
 
     case CLOCK_PLUGIN_MODE_LCD:
@@ -726,6 +751,65 @@ clock_plugin_configure_plugin_mode_changed (GtkComboBox       *combo,
                                   G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
         }
     }
+}
+
+
+
+static void
+clock_plugin_digital_format_changed (GtkComboBox       *combo,
+                                     ClockPluginDialog *dialog)
+{
+  guint    i, active, mode;
+  GObject *object;
+  struct {
+    const gchar *widget;
+  } names[] = {
+    { "digital-date"},
+    { "digital-time"},
+  };
+
+  panel_return_if_fail (GTK_IS_COMBO_BOX (combo));
+  panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
+  panel_return_if_fail (XFCE_IS_CLOCK_PLUGIN (dialog->plugin));
+
+  /* the active items for each mode */
+  mode = gtk_combo_box_get_active (combo);
+  switch (mode)
+    {
+    case CLOCK_PLUGIN_DIGITAL_FORMAT_DATE:
+      active = 1 << 1;
+      break;
+
+    case CLOCK_PLUGIN_DIGITAL_FORMAT_TIME:
+      active = 1 << 2;
+      break;
+
+    case CLOCK_PLUGIN_DIGITAL_FORMAT_DATE_TIME:
+      active = 1 << 1 | 1 << 2;
+      break;
+
+    case CLOCK_PLUGIN_DIGITAL_FORMAT_TIME_DATE:
+      active = 1 << 1 | 1 << 2;
+      break;
+
+    default:
+      panel_assert_not_reached ();
+      active = 0;
+      break;
+    }
+
+  /* show or hide the dialog widgets */
+  for (i = 0; i < G_N_ELEMENTS (names); i++)
+    {
+      object = gtk_builder_get_object (dialog->builder, names[i].widget);
+      panel_return_if_fail (GTK_IS_WIDGET (object));
+      if (PANEL_HAS_FLAG (active, 1 << (i + 1)))
+        gtk_widget_show (GTK_WIDGET (object));
+      else
+        gtk_widget_hide (GTK_WIDGET (object));
+    }
+
+  panel_return_if_fail (G_IS_OBJECT (dialog->plugin->clock));
 }
 
 
@@ -1110,14 +1194,28 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                           G_OBJECT (object), "text",
                           G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
 
-  object = gtk_builder_get_object (builder, "digital-format");
+  object = gtk_builder_get_object (builder, "digital-layout");
+  g_signal_connect (G_OBJECT (object), "changed",
+      G_CALLBACK (clock_plugin_digital_format_changed), dialog);
+  clock_plugin_digital_format_changed (GTK_COMBO_BOX (object), dialog);
+
+  object = gtk_builder_get_object (builder, "digital-time-format");
   g_signal_connect (G_OBJECT (object), "changed",
                     G_CALLBACK (clock_plugin_validate_entry_text), plugin);
-  combo = gtk_builder_get_object (builder, "digital-chooser");
+  combo = gtk_builder_get_object (builder, "digital-time-chooser");
   clock_plugin_configure_plugin_chooser_fill (plugin,
                                               GTK_COMBO_BOX (combo),
                                               GTK_ENTRY (object),
-                                              digital_formats);
+                                              digital_time_formats);
+
+  object = gtk_builder_get_object (builder, "digital-date-format");
+  g_signal_connect (G_OBJECT (object), "changed",
+                    G_CALLBACK (clock_plugin_validate_entry_text), plugin);
+  combo = gtk_builder_get_object (builder, "digital-date-chooser");
+  clock_plugin_configure_plugin_chooser_fill (plugin,
+                                              GTK_COMBO_BOX (combo),
+                                              GTK_ENTRY (object),
+                                              digital_date_formats);
 
   gtk_widget_show (GTK_WIDGET (window));
 }
@@ -1127,7 +1225,7 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 static void
 clock_plugin_set_mode (ClockPlugin *plugin)
 {
-  const PanelProperty properties[][5] =
+  const PanelProperty properties[][7] =
   {
     { /* analog */
       { "show-seconds", G_TYPE_BOOLEAN },
@@ -1142,6 +1240,11 @@ clock_plugin_set_mode (ClockPlugin *plugin)
     },
     { /* digital */
       { "digital-format", G_TYPE_STRING },
+      { "digital-layout", G_TYPE_UINT },
+      { "digital-time-format", G_TYPE_STRING },
+      { "digital-date-format", G_TYPE_STRING },
+      { "digital-time-font", G_TYPE_STRING },
+      { "digital-date-font", G_TYPE_STRING },
       { NULL },
     },
     { /* fuzzy */
