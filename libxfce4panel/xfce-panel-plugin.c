@@ -1081,6 +1081,8 @@ xfce_panel_plugin_menu_remove (XfcePanelPlugin *plugin)
       xfce_panel_plugin_get_display_name (plugin));
   gtk_window_set_screen (GTK_WINDOW (dialog),
       gtk_widget_get_screen (GTK_WIDGET (plugin)));
+  gtk_window_set_title (GTK_WINDOW (dialog),
+      _("Remove Item"));
   gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
       _("Removing the item from the panel also means its configuration will be lost."));
   gtk_dialog_add_buttons (GTK_DIALOG (dialog), _("_Cancel"),
