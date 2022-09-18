@@ -1414,6 +1414,8 @@ panel_preferences_dialog_item_remove (GtkWidget              *button,
                                        GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
                                        _("Are you sure that you want to remove \"%s\"?"),
                                        panel_module_get_display_name (module));
+      gtk_window_set_title (GTK_WINDOW (widget),
+                            _("Remove item"));
       gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (widget),
                                                 _("If you remove the item from the panel, "
                                                   "it is permanently lost."));
