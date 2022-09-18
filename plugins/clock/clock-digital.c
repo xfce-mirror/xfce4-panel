@@ -48,7 +48,8 @@ enum
   PROP_0,
   PROP_DIGITAL_FORMAT,
   PROP_SIZE_RATIO,
-  PROP_ORIENTATION
+  PROP_ORIENTATION,
+  PROP_DIGITAL_LAYOUT,
 };
 
 struct _XfceClockDigitalClass
@@ -62,6 +63,8 @@ struct _XfceClockDigital
 
   ClockTime          *time;
   ClockTimeTimeout   *timeout;
+
+  ClockPluginDigitalFormat layout;
 
   gchar *format;
 };
@@ -88,6 +91,15 @@ xfce_clock_digital_class_init (XfceClockDigitalClass *klass)
                                                         -1, G_MAXDOUBLE, 0.0,
                                                         G_PARAM_READABLE
                                                         | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DIGITAL_LAYOUT,
+                                   g_param_spec_uint ("digital-layout",
+                                                      NULL, NULL,
+                                                      CLOCK_PLUGIN_DIGITAL_FORMAT_MIN,
+                                                      CLOCK_PLUGIN_DIGITAL_FORMAT_MAX,
+                                                      CLOCK_PLUGIN_DIGITAL_FORMAT_DEFAULT,
+                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_ORIENTATION,
@@ -138,6 +150,10 @@ xfce_clock_digital_set_property (GObject      *object,
       digital->format = g_value_dup_string (value);
       break;
 
+    case PROP_DIGITAL_LAYOUT:
+      digital->layout = g_value_get_uint (value);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -164,6 +180,10 @@ xfce_clock_digital_get_property (GObject    *object,
     case PROP_DIGITAL_FORMAT:
       g_value_set_string (value, digital->format);
       break;
+
+    case PROP_DIGITAL_LAYOUT:
+        g_value_set_uint (value, digital->layout);
+        break;
 
     case PROP_SIZE_RATIO:
       g_value_set_double (value, -1.0);
