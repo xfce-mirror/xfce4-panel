@@ -55,6 +55,8 @@ static void         xfwl_foreign_toplevel_manager_finished           (void      
 static void         xfwl_foreign_toplevel_manager_stop               (gpointer                                 data,
                                                                       GObject                                 *object,
                                                                       gboolean                                 is_last_ref);
+static void         xfwl_foreign_toplevel_manager_desktop_disconnect (gpointer                                 object,
+                                                                      gpointer                                 data);
 
 
 
@@ -64,6 +66,7 @@ enum
   PROP_WL_MANAGER,
   PROP_TOPLEVELS,
   PROP_ACTIVE,
+  PROP_SHOW_DESKTOP,
   N_PROPERTIES
 };
 
@@ -87,6 +90,11 @@ struct _XfwlForeignToplevelManager
   struct zwlr_foreign_toplevel_manager_v1 *wl_manager;
   GHashTable *toplevels;
   XfwlForeignToplevel *active;
+
+  /* show desktop */
+  guint show_desktop : 1;
+  XfwlForeignToplevel *was_active;
+  GList *minimized;
 };
 
 static guint manager_signals[N_SIGNALS];
@@ -126,6 +134,10 @@ xfwl_foreign_toplevel_manager_class_init (XfwlForeignToplevelManagerClass *klass
   manager_props[PROP_ACTIVE] =
     g_param_spec_object ("active", "Active", "The active toplevel", XFWL_TYPE_FOREIGN_TOPLEVEL,
                          G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
+
+  manager_props[PROP_SHOW_DESKTOP] =
+    g_param_spec_boolean ("show-desktop", "Show desktop", "Whether or not to show the desktop", FALSE,
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
   g_object_class_install_properties (gobject_class, N_PROPERTIES, manager_props);
 
@@ -185,6 +197,10 @@ xfwl_foreign_toplevel_manager_get_property (GObject *object,
       g_value_set_object (value, manager->active);
       break;
 
+    case PROP_SHOW_DESKTOP:
+      g_value_set_boolean (value, manager->show_desktop);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -205,6 +221,10 @@ xfwl_foreign_toplevel_manager_set_property (GObject *object,
     {
     case PROP_WL_MANAGER:
       manager->wl_manager = g_value_get_pointer (value);
+      break;
+
+    case PROP_SHOW_DESKTOP:
+      xfwl_foreign_toplevel_manager_set_show_desktop (manager, g_value_get_boolean (value));
       break;
 
     default:
@@ -244,6 +264,8 @@ xfwl_foreign_toplevel_manager_finalize (GObject *object)
 
   g_hash_table_destroy (manager->toplevels);
   zwlr_foreign_toplevel_manager_v1_destroy (manager->wl_manager);
+
+  g_list_free (manager->minimized);
 
   G_OBJECT_CLASS (xfwl_foreign_toplevel_manager_parent_class)->finalize (object);
 }
@@ -424,4 +446,158 @@ xfwl_foreign_toplevel_manager_get_active (XfwlForeignToplevelManager *manager)
   g_return_val_if_fail (XFWL_IS_FOREIGN_TOPLEVEL_MANAGER (manager), NULL);
 
   return manager->active;
+}
+
+
+
+/**
+ * xfwl_foreign_toplevel_manager_get_show_desktop:
+ * @manager: an #XfwlForeignToplevelManager
+ *
+ * Returns: %TRUE if the desktop is shown, %FALSE otherwise.
+ **/
+gboolean
+xfwl_foreign_toplevel_manager_get_show_desktop (XfwlForeignToplevelManager *manager)
+{
+  g_return_val_if_fail (XFWL_IS_FOREIGN_TOPLEVEL_MANAGER (manager), FALSE);
+
+  return manager->show_desktop;
+}
+
+
+
+static void
+xfwl_foreign_toplevel_manager_desktop_state (XfwlForeignToplevel *toplevel,
+                                             GParamSpec *pspec,
+                                             XfwlForeignToplevelManager *manager)
+{
+  XfwlForeignToplevelState state;
+  gboolean minimized;
+
+  state = xfwl_foreign_toplevel_get_state (toplevel);
+  minimized = (g_list_find (manager->minimized, toplevel) != NULL);
+
+  /* toplevel has been minimized */
+  if (state & XFWL_FOREIGN_TOPLEVEL_STATE_MINIMIZED && ! minimized)
+    manager->minimized = g_list_prepend (manager->minimized, toplevel);
+  /* toplevel has been unminimized */
+  else if (! (state & XFWL_FOREIGN_TOPLEVEL_STATE_MINIMIZED) && minimized)
+    {
+      xfwl_foreign_toplevel_manager_desktop_disconnect (toplevel, manager);
+      manager->minimized = g_list_remove (manager->minimized, toplevel);
+      if (manager->minimized == NULL)
+        {
+          if (manager->show_desktop)
+            {
+              manager->show_desktop = FALSE;
+              g_object_notify_by_pspec (G_OBJECT (manager), manager_props[PROP_SHOW_DESKTOP]);
+            }
+
+          if (manager->was_active != NULL)
+            xfwl_foreign_toplevel_activate (manager->was_active);
+        }
+    }
+}
+
+
+
+static void
+xfwl_foreign_toplevel_manager_desktop_closed (XfwlForeignToplevel *toplevel,
+                                              XfwlForeignToplevelManager *manager)
+{
+  manager->minimized = g_list_remove (manager->minimized, toplevel);
+  if (manager->minimized == NULL && manager->show_desktop)
+    {
+      manager->show_desktop = FALSE;
+      g_object_notify_by_pspec (G_OBJECT (manager), manager_props[PROP_SHOW_DESKTOP]);
+    }
+}
+
+
+
+static void
+xfwl_foreign_toplevel_manager_desktop_disconnect (gpointer object,
+                                                  gpointer data)
+{
+  g_signal_handlers_disconnect_by_func (object, xfwl_foreign_toplevel_manager_desktop_state, data);
+  g_signal_handlers_disconnect_by_func (object, xfwl_foreign_toplevel_manager_desktop_closed, data);
+}
+
+
+
+/**
+ * xfwl_foreign_toplevel_manager_set_show_desktop:
+ * @manager: an #XfwlForeignToplevelManager
+ * @show: %TRUE to show the desktop, %FALSE to restore the previous state
+ *
+ * Showing the desktop minimizes the toplevels not minimized at the time of the query.
+ * The reverse process unminimizes those same toplevels, if they have not already been
+ * unminimized or destroyed. The desktop show state can be tracked via
+ * #XfwlForeignToplevelManager:show-desktop.
+ *
+ * The state of the previously active window is restored upon unminimization, but there
+ * is no guarantee for the rest of the window stacking order.
+ *
+ * A request to switch to the current state is silently ignored.
+ **/
+void
+xfwl_foreign_toplevel_manager_set_show_desktop (XfwlForeignToplevelManager *manager,
+                                                gboolean show)
+{
+  GList *toplevels;
+  gboolean revert = TRUE;
+
+  g_return_if_fail (XFWL_IS_FOREIGN_TOPLEVEL_MANAGER (manager));
+
+  if (!!show == manager->show_desktop)
+    return;
+
+  manager->show_desktop = !!show;
+  g_object_notify_by_pspec (G_OBJECT (manager), manager_props[PROP_SHOW_DESKTOP]);
+
+  /* unminimize previously minimized toplevels */
+  if (! show)
+    {
+      for (GList *lp = manager->minimized; lp != NULL; lp = lp->next)
+        xfwl_foreign_toplevel_unminimize (lp->data);
+
+      return;
+    }
+
+  /* remove and disconnect from any previously minimized toplevel: probably there is none,
+   * but it is asynchronous and the compositor might have failed to unminimize some of them */
+  g_list_foreach (manager->minimized, xfwl_foreign_toplevel_manager_desktop_disconnect, manager);
+  g_list_free (manager->minimized);
+  manager->minimized = NULL;
+  manager->was_active = NULL;
+
+  /* request for showing the desktop and prepare reverse process */
+  toplevels = xfwl_foreign_toplevel_manager_get_toplevels (manager);
+  for (GList *lp = toplevels; lp != NULL; lp = lp->next)
+    {
+      XfwlForeignToplevelState state;
+
+      state = xfwl_foreign_toplevel_get_state (lp->data);
+      if (! (state & XFWL_FOREIGN_TOPLEVEL_STATE_MINIMIZED))
+        {
+          revert = FALSE;
+          g_signal_connect (lp->data, "notify::state",
+                            G_CALLBACK (xfwl_foreign_toplevel_manager_desktop_state), manager);
+          g_signal_connect (lp->data, "closed",
+                            G_CALLBACK (xfwl_foreign_toplevel_manager_desktop_closed), manager);
+          if (state & XFWL_FOREIGN_TOPLEVEL_STATE_ACTIVATED)
+            manager->was_active = lp->data;
+
+          xfwl_foreign_toplevel_minimize (lp->data);
+        }
+    }
+
+  /* there was no toplevel to minimize, revert state */
+  if (revert)
+    {
+      manager->show_desktop = FALSE;
+      g_object_notify_by_pspec (G_OBJECT (manager), manager_props[PROP_SHOW_DESKTOP]);
+    }
+
+  g_list_free (toplevels);
 }
