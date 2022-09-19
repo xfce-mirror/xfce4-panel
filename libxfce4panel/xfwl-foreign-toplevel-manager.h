@@ -36,6 +36,11 @@ GList                                   *xfwl_foreign_toplevel_manager_get_tople
 
 XfwlForeignToplevel                     *xfwl_foreign_toplevel_manager_get_active       (XfwlForeignToplevelManager *manager);
 
+gboolean                                 xfwl_foreign_toplevel_manager_get_show_desktop (XfwlForeignToplevelManager *manager);
+
+void                                     xfwl_foreign_toplevel_manager_set_show_desktop (XfwlForeignToplevelManager *manager,
+                                                                                         gboolean                    show);
+
 G_END_DECLS
 
 #endif /* !__XFWL_FOREIGN_TOPLEVEL_MANAGER_H__ */
