@@ -22,7 +22,25 @@
 G_BEGIN_DECLS
 
 /* TRANSLATORS: adjust this accordingly for your locale format */
+#define DEFAULT_DIGITAL_TIME_FORMAT NC_("Time", "%R")
+#define DEFAULT_DIGITAL_DATE_FORMAT NC_("Date", "%Y-%m-%d")
 #define DEFAULT_DIGITAL_FORMAT NC_("Time", "%a %_d %b, %R")
+
+typedef enum
+{
+
+  CLOCK_PLUGIN_DIGITAL_FORMAT_DATE_TIME = 0,
+  CLOCK_PLUGIN_DIGITAL_FORMAT_TIME_DATE,
+  CLOCK_PLUGIN_DIGITAL_FORMAT_DATE,
+  CLOCK_PLUGIN_DIGITAL_FORMAT_TIME,
+
+
+  /* defines */
+  CLOCK_PLUGIN_DIGITAL_FORMAT_MIN = CLOCK_PLUGIN_DIGITAL_FORMAT_DATE_TIME,
+  CLOCK_PLUGIN_DIGITAL_FORMAT_MAX = CLOCK_PLUGIN_DIGITAL_FORMAT_TIME,
+  CLOCK_PLUGIN_DIGITAL_FORMAT_DEFAULT = CLOCK_PLUGIN_DIGITAL_FORMAT_DATE_TIME,
+}
+ClockPluginDigitalFormat;
 
 typedef struct _XfceClockDigitalClass XfceClockDigitalClass;
 typedef struct _XfceClockDigital      XfceClockDigital;
