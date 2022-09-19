@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-03 00:47+0200\n"
+"POT-Creation-Date: 2022-09-19 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Marek Adamski, 2022\n"
 "Language-Team: Polish (http://www.transifex.com/xfce/xfce4-panel/language/pl/)\n"
@@ -50,7 +50,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panele;ustawienia;preferencje;pasek zadań;automatyczne ukrywanie;menu aplikacji;start;przyciski;aktywator;obszar powiadomień;stan;ikony;wtyczki;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3078
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3081
 msgid "Panel"
 msgstr "Panel"
 
@@ -66,12 +66,17 @@ msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Usunąć aplet „%s”?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1085
+#: ../panel/panel-preferences-dialog.c:1418
+msgid "Remove Item"
+msgstr "Usuń aplet"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1087
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "Usunięcie elementu z panelu oznacza również utratę jego konfiguracji."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:164
-#: ../panel/panel-preferences-dialog.c:1420
+#: ../libxfce4panel/xfce-panel-plugin.c:1088 ../panel/panel-dialogs.c:164
+#: ../panel/panel-preferences-dialog.c:1422
 #: ../plugins/applicationsmenu/applicationsmenu.c:614
 #: ../plugins/directorymenu/directorymenu.c:469
 #: ../plugins/directorymenu/directorymenu.c:936
@@ -79,53 +84,53 @@ msgid "_Cancel"
 msgstr "_Anuluj"
 
 #. remove
-#: ../libxfce4panel/xfce-panel-plugin.c:1087
-#: ../libxfce4panel/xfce-panel-plugin.c:1254
-#: ../panel/panel-plugin-external.c:523
+#: ../libxfce4panel/xfce-panel-plugin.c:1089
+#: ../libxfce4panel/xfce-panel-plugin.c:1256
+#: ../panel/panel-plugin-external.c:525
 #: ../panel/panel-preferences-dialog.c:1052
-#: ../panel/panel-preferences-dialog.c:1421
+#: ../panel/panel-preferences-dialog.c:1423
 #: ../panel/panel-preferences-dialog.glade.h:58
 #: ../plugins/launcher/launcher-dialog.c:861
 msgid "_Remove"
 msgstr "_Usuń"
 
 #. properties item
-#: ../libxfce4panel/xfce-panel-plugin.c:1216
+#: ../libxfce4panel/xfce-panel-plugin.c:1218
 msgid "_Properties"
 msgstr "_Właściwości"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1227 ../panel/panel-window.c:3154
+#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3157
 msgid "_About"
 msgstr "_O programie"
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1238
+#: ../libxfce4panel/xfce-panel-plugin.c:1240
 msgid "_Move"
 msgstr "_Przemieść"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1272
+#: ../libxfce4panel/xfce-panel-plugin.c:1274
 msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1280 ../panel/panel-window.c:3090
+#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:3093
 msgid "Add _New Items..."
 msgstr "_Dodaj aplet..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1291 ../panel/panel-window.c:3101
+#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:3104
 msgid "Panel Pr_eferences..."
 msgstr "_Ustawienia..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1308 ../panel/panel-window.c:3129
+#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3132
 msgid "Log _Out"
 msgstr "Za_kończ sesję"
 
 #. help item
-#: ../libxfce4panel/xfce-panel-plugin.c:1324 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3145
+#: ../libxfce4panel/xfce-panel-plugin.c:1326 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3148
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:11
@@ -139,7 +144,7 @@ msgid "_Help"
 msgstr "Pomo_c"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1335
+#: ../libxfce4panel/xfce-panel-plugin.c:1337
 msgid "About"
 msgstr "Informacje"
 
@@ -393,7 +398,11 @@ msgstr "Wprowadza wyszukiwany ciąg"
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "Aplet „%s” niespodziewanie zakończył działanie. Uruchomić go ponownie?"
 
-#: ../panel/panel-plugin-external.c:518
+#: ../panel/panel-plugin-external.c:519
+msgid "Plugin Restart"
+msgstr "Ponowne uruchomienie apletu"
+
+#: ../panel/panel-plugin-external.c:520
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -401,7 +410,7 @@ msgid ""
 "permanently removed from the panel."
 msgstr "W ciągu ostatnich %d sekund podjęto kilkukrotną próbę ponownego uruchomienia apletu. Ponowić próbę ponownego uruchomienia apletu czy usunąć aplet z panelu?"
 
-#: ../panel/panel-plugin-external.c:522
+#: ../panel/panel-plugin-external.c:524
 msgid "_Execute"
 msgstr "_Uruchom"
 
@@ -451,7 +460,7 @@ msgstr "Wewnętrzna nazwa: %s-%d\nPID: %d"
 msgid "Internal name: %s-%d"
 msgstr "Wewnętrzna nazwa: %s-%d"
 
-#: ../panel/panel-preferences-dialog.c:1418
+#: ../panel/panel-preferences-dialog.c:1420
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Aplet zostanie nieodwracalnie usunięty."
 
@@ -720,7 +729,7 @@ msgstr "Zaawansowany"
 msgid "Expert"
 msgstr "Ekspert"
 
-#: ../panel/panel-window.c:3115
+#: ../panel/panel-window.c:3118
 msgid "_Lock Panel"
 msgstr "_Zablokowanie panelu"
 
@@ -1803,7 +1812,7 @@ msgstr "U_stawienia obszarów roboczych..."
 msgid "Unable to open the workspace settings"
 msgstr "Nie można otworzyć preferencji obszarów roboczych"
 
-#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:899
+#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:897
 #, c-format
 msgid "Workspace %d"
 msgstr "Obszar roboczy %d"
@@ -2118,36 +2127,36 @@ msgstr "Okna wszystkich _ekranów"
 msgid "Show only _minimized windows"
 msgstr "Wyświetlanie tylko _zminimalizowanych okien"
 
-#: ../plugins/tasklist/tasklist-widget.c:3065
+#: ../plugins/tasklist/tasklist-widget.c:3063
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Nie można uruchomić nowego wystąpienia '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:3069
+#: ../plugins/tasklist/tasklist-widget.c:3067
 msgid "Error"
 msgstr "Błąd"
 
-#: ../plugins/tasklist/tasklist-widget.c:3098
+#: ../plugins/tasklist/tasklist-widget.c:3096
 msgid "Launch New Instance"
 msgstr "Uruchom nowe wystąpienie"
 
-#: ../plugins/tasklist/tasklist-widget.c:3845
+#: ../plugins/tasklist/tasklist-widget.c:3843
 msgid "Mi_nimize All"
 msgstr "Zm_inimalizuj wszystkie"
 
-#: ../plugins/tasklist/tasklist-widget.c:3852
+#: ../plugins/tasklist/tasklist-widget.c:3850
 msgid "Un_minimize All"
 msgstr "_Cofnij minimalizację wszystkich"
 
-#: ../plugins/tasklist/tasklist-widget.c:3859
+#: ../plugins/tasklist/tasklist-widget.c:3857
 msgid "Ma_ximize All"
 msgstr "Zm_aksymalizuj wszystkie"
 
-#: ../plugins/tasklist/tasklist-widget.c:3866
+#: ../plugins/tasklist/tasklist-widget.c:3864
 msgid "_Unmaximize All"
 msgstr "C_ofnij maksymalizację wszystkich"
 
-#: ../plugins/tasklist/tasklist-widget.c:3877
+#: ../plugins/tasklist/tasklist-widget.c:3875
 msgid "_Close All"
 msgstr "Za_mknij wszystkie"
 
@@ -2155,28 +2164,28 @@ msgstr "Za_mknij wszystkie"
 msgid "Switch between open windows using buttons"
 msgstr "Przełącza pomiędzy oknami przy pomocy przycisków"
 
-#: ../plugins/windowmenu/windowmenu.c:692
+#: ../plugins/windowmenu/windowmenu.c:690
 msgid "Desktop"
 msgstr "Pulpit"
 
-#: ../plugins/windowmenu/windowmenu.c:1294
+#: ../plugins/windowmenu/windowmenu.c:1292
 msgid "No Windows"
 msgstr "Brak okien"
 
-#: ../plugins/windowmenu/windowmenu.c:1309
+#: ../plugins/windowmenu/windowmenu.c:1307
 msgid "Urgent Windows"
 msgstr "Pilne okna"
 
-#: ../plugins/windowmenu/windowmenu.c:1351
+#: ../plugins/windowmenu/windowmenu.c:1349
 msgid "Add Workspace"
 msgstr "Dodaj obszar roboczy"
 
-#: ../plugins/windowmenu/windowmenu.c:1371
+#: ../plugins/windowmenu/windowmenu.c:1369
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Usuń obszar roboczy „%s”"
 
-#: ../plugins/windowmenu/windowmenu.c:1373
+#: ../plugins/windowmenu/windowmenu.c:1371
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Usuń obszar roboczy %d"
