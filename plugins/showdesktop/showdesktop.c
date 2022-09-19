@@ -57,6 +57,12 @@ static gboolean show_desktop_plugin_drag_motion             (GtkWidget          
                                                              gint                    y,
                                                              guint                   time,
                                                              ShowDesktopPlugin      *plugin);
+static void     show_desktop_plugin_wl_show_desktop         (ShowDesktopPlugin      *plugin);
+static gboolean show_desktop_plugin_get_showing_desktop     (ShowDesktopPlugin      *plugin,
+                                                             WnckScreen             *screen);
+static void     show_desktop_plugin_toggle_showing_desktop  (ShowDesktopPlugin      *plugin,
+                                                             WnckScreen             *screen,
+                                                             gboolean                show);
 
 
 
@@ -78,6 +84,9 @@ struct _ShowDesktopPlugin
 
   /* the wnck screen */
   WnckScreen *wnck_screen;
+
+  /* Wayland */
+  XfwlForeignToplevelManager *wl_toplevel_manager;
 };
 
 
@@ -106,10 +115,7 @@ show_desktop_plugin_init (ShowDesktopPlugin *plugin)
   GtkWidget *button;
 
   plugin->wnck_screen = NULL;
-
-  /* monitor screen changes */
-  g_signal_connect (G_OBJECT (plugin), "screen-changed",
-      G_CALLBACK (show_desktop_plugin_screen_changed), NULL);
+  plugin->wl_toplevel_manager = NULL;
 
   /* create the toggle button */
   button = plugin->button = xfce_panel_create_toggle_button ();
@@ -118,10 +124,23 @@ show_desktop_plugin_init (ShowDesktopPlugin *plugin)
   gtk_widget_set_name (button, "showdesktop-button");
   g_signal_connect (G_OBJECT (button), "toggled",
       G_CALLBACK (show_desktop_plugin_toggled), plugin);
-  g_signal_connect (G_OBJECT (button), "button-release-event",
-      G_CALLBACK (show_desktop_plugin_button_release_event), plugin);
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), button);
   gtk_widget_show (button);
+
+  if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+    {
+      g_signal_connect (G_OBJECT (plugin), "screen-changed",
+          G_CALLBACK (show_desktop_plugin_screen_changed), NULL);
+      g_signal_connect (G_OBJECT (button), "button-release-event",
+          G_CALLBACK (show_desktop_plugin_button_release_event), plugin);
+    }
+  else
+    {
+      plugin->wl_toplevel_manager = xfwl_foreign_toplevel_manager_get ();
+      if (plugin->wl_toplevel_manager != NULL)
+        g_signal_connect_object (plugin->wl_toplevel_manager, "notify::show-desktop",
+            G_CALLBACK (show_desktop_plugin_wl_show_desktop), plugin, G_CONNECT_SWAPPED);
+    }
 
   /* allow toggle the button when drag something.*/
   gtk_drag_dest_set (GTK_WIDGET (plugin->button), 0, NULL, 0, 0);
@@ -197,6 +216,9 @@ show_desktop_plugin_free_data (XfcePanelPlugin *panel_plugin)
   if (plugin->wnck_screen != NULL)
     g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->wnck_screen),
         show_desktop_plugin_showing_desktop_changed, plugin);
+
+  if (plugin->wl_toplevel_manager != NULL)
+    g_object_unref (plugin->wl_toplevel_manager);
 }
 
 
@@ -230,12 +252,11 @@ show_desktop_plugin_toggled (GtkToggleButton   *button,
 
   panel_return_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (plugin));
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
-  panel_return_if_fail (WNCK_IS_SCREEN (plugin->wnck_screen));
 
   /* toggle the desktop */
   active = gtk_toggle_button_get_active (button);
-  if (active != wnck_screen_get_showing_desktop (plugin->wnck_screen))
-    wnck_screen_toggle_showing_desktop (plugin->wnck_screen, active);
+  if (active != show_desktop_plugin_get_showing_desktop (plugin, plugin->wnck_screen))
+    show_desktop_plugin_toggle_showing_desktop (plugin, plugin->wnck_screen, active);
 
   if (active)
     text = _("Restore the minimized windows");
@@ -290,12 +311,11 @@ show_desktop_plugin_showing_desktop_changed (WnckScreen        *wnck_screen,
                                              ShowDesktopPlugin *plugin)
 {
   panel_return_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (plugin));
-  panel_return_if_fail (WNCK_IS_SCREEN (wnck_screen));
   panel_return_if_fail (plugin->wnck_screen == wnck_screen);
 
   /* update button to user action */
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button),
-      wnck_screen_get_showing_desktop (wnck_screen));
+      show_desktop_plugin_get_showing_desktop (plugin, wnck_screen));
 }
 
 
@@ -350,4 +370,40 @@ show_desktop_plugin_drag_motion (GtkWidget         *widget,
   gdk_drag_status (context, 0, time);
 
   return TRUE;
+}
+
+
+
+static void
+show_desktop_plugin_wl_show_desktop (ShowDesktopPlugin *plugin)
+{
+  show_desktop_plugin_showing_desktop_changed (NULL, plugin);
+}
+
+
+
+static gboolean
+show_desktop_plugin_get_showing_desktop (ShowDesktopPlugin *plugin,
+                                         WnckScreen        *screen)
+{
+  if (screen != NULL)
+    return wnck_screen_get_showing_desktop (screen);
+
+  if (plugin->wl_toplevel_manager != NULL)
+    return xfwl_foreign_toplevel_manager_get_show_desktop (plugin->wl_toplevel_manager);
+
+  return FALSE;
+}
+
+
+
+static void
+show_desktop_plugin_toggle_showing_desktop (ShowDesktopPlugin *plugin,
+                                            WnckScreen        *screen,
+                                            gboolean           show)
+{
+  if (screen != NULL)
+    wnck_screen_toggle_showing_desktop (screen, show);
+  else if (plugin->wl_toplevel_manager != NULL)
+    xfwl_foreign_toplevel_manager_set_show_desktop (plugin->wl_toplevel_manager, show);
 }
