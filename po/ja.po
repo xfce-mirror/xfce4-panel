@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-03 00:47+0200\n"
+"POT-Creation-Date: 2022-09-19 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2019-2020,2022\n"
+"Last-Translator: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 2016-2020,2022\n"
 "Language-Team: Japanese (http://www.transifex.com/xfce/xfce4-panel/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +37,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "パネル;設定;環境設定;タスクバー;自動非表示;アプリケーションメニュー;スタート;ボタン;ランチャー;通知領域;ステータス;アイコン;プラグイン;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3078
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3081
 msgid "Panel"
 msgstr "パネル"
 
@@ -53,12 +53,17 @@ msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "\"%s\" を削除しますか？"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1085
+#: ../panel/panel-preferences-dialog.c:1418
+msgid "Remove Item"
+msgstr "アイテムを削除"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1087
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "パネルからアイテムを削除すると、その設定も失われます。"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:164
-#: ../panel/panel-preferences-dialog.c:1420
+#: ../libxfce4panel/xfce-panel-plugin.c:1088 ../panel/panel-dialogs.c:164
+#: ../panel/panel-preferences-dialog.c:1422
 #: ../plugins/applicationsmenu/applicationsmenu.c:614
 #: ../plugins/directorymenu/directorymenu.c:469
 #: ../plugins/directorymenu/directorymenu.c:936
@@ -66,53 +71,53 @@ msgid "_Cancel"
 msgstr "キャンセル(_C)"
 
 #. remove
-#: ../libxfce4panel/xfce-panel-plugin.c:1087
-#: ../libxfce4panel/xfce-panel-plugin.c:1254
-#: ../panel/panel-plugin-external.c:523
+#: ../libxfce4panel/xfce-panel-plugin.c:1089
+#: ../libxfce4panel/xfce-panel-plugin.c:1256
+#: ../panel/panel-plugin-external.c:525
 #: ../panel/panel-preferences-dialog.c:1052
-#: ../panel/panel-preferences-dialog.c:1421
+#: ../panel/panel-preferences-dialog.c:1423
 #: ../panel/panel-preferences-dialog.glade.h:58
 #: ../plugins/launcher/launcher-dialog.c:861
 msgid "_Remove"
 msgstr "削除(_R)"
 
 #. properties item
-#: ../libxfce4panel/xfce-panel-plugin.c:1216
+#: ../libxfce4panel/xfce-panel-plugin.c:1218
 msgid "_Properties"
 msgstr "プロパティ(_P)"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1227 ../panel/panel-window.c:3154
+#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3157
 msgid "_About"
 msgstr "このプログラムについて(_A)"
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1238
+#: ../libxfce4panel/xfce-panel-plugin.c:1240
 msgid "_Move"
 msgstr "移動(_M)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1272
+#: ../libxfce4panel/xfce-panel-plugin.c:1274
 msgid "Pane_l"
 msgstr "パネル(_L)"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1280 ../panel/panel-window.c:3090
+#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:3093
 msgid "Add _New Items..."
 msgstr "新しいアイテムを追加する(_N)..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1291 ../panel/panel-window.c:3101
+#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:3104
 msgid "Panel Pr_eferences..."
 msgstr "パネルの設定(_E)..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1308 ../panel/panel-window.c:3129
+#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3132
 msgid "Log _Out"
 msgstr "ログアウト(_O)"
 
 #. help item
-#: ../libxfce4panel/xfce-panel-plugin.c:1324 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3145
+#: ../libxfce4panel/xfce-panel-plugin.c:1326 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3148
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:11
@@ -126,7 +131,7 @@ msgid "_Help"
 msgstr "ヘルプ(_H)"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1335
+#: ../libxfce4panel/xfce-panel-plugin.c:1337
 msgid "About"
 msgstr "このソフトウェアについて"
 
@@ -377,7 +382,11 @@ msgstr "検索フレーズを入力してください"
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "プラグイン \"%s\" は予期せずパネルから失われました。このプラグインを再起動しますか？"
 
-#: ../panel/panel-plugin-external.c:518
+#: ../panel/panel-plugin-external.c:519
+msgid "Plugin Restart"
+msgstr "プラグインを再起動"
+
+#: ../panel/panel-plugin-external.c:520
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -385,7 +394,7 @@ msgid ""
 "permanently removed from the panel."
 msgstr "プラグインは最近 %d 秒以内に 1 回以上再起動されました。「実行」を押すとパネルはプラグインの再起動を試みます。その他の場合はパネルから完全に削除されます。"
 
-#: ../panel/panel-plugin-external.c:522
+#: ../panel/panel-plugin-external.c:524
 msgid "_Execute"
 msgstr "実行(_E)"
 
@@ -435,7 +444,7 @@ msgstr "内部名: %s-%d\nPID: %d"
 msgid "Internal name: %s-%d"
 msgstr "内部名: %s-%d"
 
-#: ../panel/panel-preferences-dialog.c:1418
+#: ../panel/panel-preferences-dialog.c:1420
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "パネルから削除すると、このアイテムは完全に失われます。"
 
@@ -704,7 +713,7 @@ msgstr "上級者"
 msgid "Expert"
 msgstr "達人"
 
-#: ../panel/panel-window.c:3115
+#: ../panel/panel-window.c:3118
 msgid "_Lock Panel"
 msgstr "パネルをロック(_L)"
 
@@ -1787,7 +1796,7 @@ msgstr "ワークスペースの設定(_S)..."
 msgid "Unable to open the workspace settings"
 msgstr "ワークスペース設定を開くことができません"
 
-#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:899
+#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:897
 #, c-format
 msgid "Workspace %d"
 msgstr "ワークスペース %d"
@@ -2102,36 +2111,36 @@ msgstr "全モニターのウィンドウを表示する(_N)"
 msgid "Show only _minimized windows"
 msgstr "最小化されたウィンドウのみ表示する(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3065
+#: ../plugins/tasklist/tasklist-widget.c:3063
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "'%s' の新しいインスタンスを開始できません"
 
-#: ../plugins/tasklist/tasklist-widget.c:3069
+#: ../plugins/tasklist/tasklist-widget.c:3067
 msgid "Error"
 msgstr "エラー"
 
-#: ../plugins/tasklist/tasklist-widget.c:3098
+#: ../plugins/tasklist/tasklist-widget.c:3096
 msgid "Launch New Instance"
 msgstr "新しいインスタンスを起動"
 
-#: ../plugins/tasklist/tasklist-widget.c:3845
+#: ../plugins/tasklist/tasklist-widget.c:3843
 msgid "Mi_nimize All"
 msgstr "すべて最小化(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3852
+#: ../plugins/tasklist/tasklist-widget.c:3850
 msgid "Un_minimize All"
 msgstr "すべて元に戻す(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3859
+#: ../plugins/tasklist/tasklist-widget.c:3857
 msgid "Ma_ximize All"
 msgstr "すべて最大化(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3866
+#: ../plugins/tasklist/tasklist-widget.c:3864
 msgid "_Unmaximize All"
 msgstr "すべて元に戻す(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3877
+#: ../plugins/tasklist/tasklist-widget.c:3875
 msgid "_Close All"
 msgstr "すべて閉じる(_C)"
 
@@ -2139,28 +2148,28 @@ msgstr "すべて閉じる(_C)"
 msgid "Switch between open windows using buttons"
 msgstr "開いているウィンドウをボタンを使って切り替えます。"
 
-#: ../plugins/windowmenu/windowmenu.c:692
+#: ../plugins/windowmenu/windowmenu.c:690
 msgid "Desktop"
 msgstr "デスクトップ"
 
-#: ../plugins/windowmenu/windowmenu.c:1294
+#: ../plugins/windowmenu/windowmenu.c:1292
 msgid "No Windows"
 msgstr "ウィンドウなし"
 
-#: ../plugins/windowmenu/windowmenu.c:1309
+#: ../plugins/windowmenu/windowmenu.c:1307
 msgid "Urgent Windows"
 msgstr "緊急通知ウィンドウ"
 
-#: ../plugins/windowmenu/windowmenu.c:1351
+#: ../plugins/windowmenu/windowmenu.c:1349
 msgid "Add Workspace"
 msgstr "ワークスペースの追加"
 
-#: ../plugins/windowmenu/windowmenu.c:1371
+#: ../plugins/windowmenu/windowmenu.c:1369
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "ワークスペース \"%s\" の削除"
 
-#: ../plugins/windowmenu/windowmenu.c:1373
+#: ../plugins/windowmenu/windowmenu.c:1371
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "ワークスペース %d を削除"
