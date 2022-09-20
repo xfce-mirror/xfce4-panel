@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-03 00:47+0200\n"
+"POT-Creation-Date: 2022-09-20 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: 玉堂白鹤 <yjwork@qq.com>, 2015,2017-2020,2022\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/xfce/xfce4-panel/language/zh_CN/)\n"
@@ -48,7 +48,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panels;settings;preferences;taskbar;autohide;application menu;start;buttons;launcher;notification area;status;icons;plugins;面板;设置;首选项;任务栏;自动隐藏;应用程序菜单;开始;按钮;启动器;通知区域;状态;图标;插件; "
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3078
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3081
 msgid "Panel"
 msgstr "面板"
 
@@ -64,12 +64,17 @@ msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "您确定要移除 “%s” 吗？"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1085
+#: ../panel/panel-preferences-dialog.c:1418
+msgid "Remove Item"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1087
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "从面板上移除此项目，其配置也将丢失。"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1086 ../panel/panel-dialogs.c:164
-#: ../panel/panel-preferences-dialog.c:1420
+#: ../libxfce4panel/xfce-panel-plugin.c:1088 ../panel/panel-dialogs.c:164
+#: ../panel/panel-preferences-dialog.c:1422
 #: ../plugins/applicationsmenu/applicationsmenu.c:614
 #: ../plugins/directorymenu/directorymenu.c:469
 #: ../plugins/directorymenu/directorymenu.c:936
@@ -77,56 +82,56 @@ msgid "_Cancel"
 msgstr "取消(_C)"
 
 #. remove
-#: ../libxfce4panel/xfce-panel-plugin.c:1087
-#: ../libxfce4panel/xfce-panel-plugin.c:1254
-#: ../panel/panel-plugin-external.c:523
+#: ../libxfce4panel/xfce-panel-plugin.c:1089
+#: ../libxfce4panel/xfce-panel-plugin.c:1256
+#: ../panel/panel-plugin-external.c:525
 #: ../panel/panel-preferences-dialog.c:1052
-#: ../panel/panel-preferences-dialog.c:1421
+#: ../panel/panel-preferences-dialog.c:1423
 #: ../panel/panel-preferences-dialog.glade.h:58
 #: ../plugins/launcher/launcher-dialog.c:861
 msgid "_Remove"
 msgstr "移除(_R)"
 
 #. properties item
-#: ../libxfce4panel/xfce-panel-plugin.c:1216
+#: ../libxfce4panel/xfce-panel-plugin.c:1218
 msgid "_Properties"
 msgstr "属性(_P)"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1227 ../panel/panel-window.c:3154
+#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3157
 msgid "_About"
 msgstr "关于(_A)"
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1238
+#: ../libxfce4panel/xfce-panel-plugin.c:1240
 msgid "_Move"
 msgstr "移动(_M)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1272
+#: ../libxfce4panel/xfce-panel-plugin.c:1274
 msgid "Pane_l"
 msgstr "面板(_L)"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1280 ../panel/panel-window.c:3090
+#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:3093
 msgid "Add _New Items..."
 msgstr "添加新项目(_N)..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1291 ../panel/panel-window.c:3101
+#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:3104
 msgid "Panel Pr_eferences..."
 msgstr "面板首选项(_E)..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1308 ../panel/panel-window.c:3129
+#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3132
 msgid "Log _Out"
 msgstr "注销(_O)"
 
 #. help item
-#: ../libxfce4panel/xfce-panel-plugin.c:1324 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3145
+#: ../libxfce4panel/xfce-panel-plugin.c:1326 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3148
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
-#: ../plugins/clock/clock-dialog.glade.h:11
+#: ../plugins/clock/clock-dialog.glade.h:15
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 #: ../plugins/pager/pager-dialog.glade.h:4
@@ -137,7 +142,7 @@ msgid "_Help"
 msgstr "帮助(_H)"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1335
+#: ../libxfce4panel/xfce-panel-plugin.c:1337
 msgid "About"
 msgstr "关于"
 
@@ -364,7 +369,7 @@ msgstr "添加新项目"
 #: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:7
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#: ../plugins/clock/clock-dialog.glade.h:10
+#: ../plugins/clock/clock-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:5
@@ -388,7 +393,11 @@ msgstr "在此输入搜索词语"
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "插件 “%s” 意外地离开了面板，您要重启它吗？"
 
-#: ../panel/panel-plugin-external.c:518
+#: ../panel/panel-plugin-external.c:519
+msgid "Plugin Restart"
+msgstr ""
+
+#: ../panel/panel-plugin-external.c:520
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -396,7 +405,7 @@ msgid ""
 "permanently removed from the panel."
 msgstr "此插件在过去的 %d 秒内重启了不止一次。如果您点击执行，面板会尝试重启此插件，否则会从面板上永远移除它。"
 
-#: ../panel/panel-plugin-external.c:522
+#: ../panel/panel-plugin-external.c:524
 msgid "_Execute"
 msgstr "执行(_E)"
 
@@ -446,7 +455,7 @@ msgstr "内部名称：%s-%d\nPID：%d"
 msgid "Internal name: %s-%d"
 msgstr "内部名称：%s-%d"
 
-#: ../panel/panel-preferences-dialog.c:1418
+#: ../panel/panel-preferences-dialog.c:1420
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "如果您从面板上移除此项目，它将永远消失。"
 
@@ -715,7 +724,7 @@ msgstr "高级"
 msgid "Expert"
 msgstr "专家"
 
-#: ../panel/panel-window.c:3115
+#: ../panel/panel-window.c:3118
 msgid "_Lock Panel"
 msgstr "锁定面板(_L)"
 
@@ -984,7 +993,7 @@ msgid ""
 msgstr "选择此项在菜单中显示通用应用程序名称，比如用 “文件管理器” 而不是 “Thunar”"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-#: ../plugins/clock/clock-dialog.glade.h:23
+#: ../plugins/clock/clock-dialog.glade.h:27
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
@@ -1033,7 +1042,7 @@ msgstr "确定(_O)"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:652
-#: ../plugins/clock/clock.c:964 ../plugins/launcher/launcher.c:2479
+#: ../plugins/clock/clock.c:1035 ../plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "无法执行命令 “%s”。"
@@ -1082,84 +1091,100 @@ msgstr " %Y年%b%d日 %A"
 msgid "Week %V"
 msgstr "第 %V 周"
 
-#: ../plugins/clock/clock.c:471
+#: ../plugins/clock/clock.c:491
 msgid "Failed to execute clock command"
 msgstr "无法执行时钟命令"
 
-#: ../plugins/clock/clock.c:903
+#: ../plugins/clock/clock.c:974
 msgid "Custom Format"
 msgstr "自定义格式"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
-msgid "Analog"
-msgstr "指针式"
-
-#: ../plugins/clock/clock-dialog.glade.h:2
-msgid "Binary"
-msgstr "二进制"
-
-#: ../plugins/clock/clock-dialog.glade.h:3
-msgid "Digital"
-msgstr "数字式"
-
-#: ../plugins/clock/clock-dialog.glade.h:4
-msgid "Fuzzy"
-msgstr "模糊"
-
-#: ../plugins/clock/clock-dialog.glade.h:5
-msgid "LCD"
-msgstr "液晶式"
-
-#: ../plugins/clock/clock-dialog.glade.h:6
 msgid "Decimal"
 msgstr "十进制"
 
-#: ../plugins/clock/clock-dialog.glade.h:7
+#: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Sexagesimal"
 msgstr "六十进制"
 
-#: ../plugins/clock/clock-dialog.glade.h:8
+#: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Binary time"
 msgstr "二进制时间"
 
+#: ../plugins/clock/clock-dialog.glade.h:4
+msgid "Date, then time"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:5
+msgid "Time, then date"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:6
+msgid "Date Only"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:7
+msgid "Time Only"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:8
+msgid "Analog"
+msgstr "指针式"
+
 #: ../plugins/clock/clock-dialog.glade.h:9
+msgid "Binary"
+msgstr "二进制"
+
+#: ../plugins/clock/clock-dialog.glade.h:10
+msgid "Digital"
+msgstr "数字式"
+
+#: ../plugins/clock/clock-dialog.glade.h:11
+msgid "Fuzzy"
+msgstr "模糊"
+
+#: ../plugins/clock/clock-dialog.glade.h:12
+msgid "LCD"
+msgstr "液晶式"
+
+#: ../plugins/clock/clock-dialog.glade.h:13
 #: ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "时钟"
 
-#: ../plugins/clock/clock-dialog.glade.h:12
+#: ../plugins/clock/clock-dialog.glade.h:16
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
 msgstr "与一个时区的名称相对应的信息在时区数据库中。比如“美国/纽约”。留空代表使用本地时间。"
 
-#: ../plugins/clock/clock-dialog.glade.h:13
+#: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Time_zone:"
 msgstr "时区："
 
-#: ../plugins/clock/clock-dialog.glade.h:14
+#: ../plugins/clock/clock-dialog.glade.h:18
 msgid "Time and Date _Settings..."
 msgstr "时间和日期设置(_S)..."
 
-#: ../plugins/clock/clock-dialog.glade.h:15
+#: ../plugins/clock/clock-dialog.glade.h:19
 msgid "Time Settings"
 msgstr "时间设置"
 
-#: ../plugins/clock/clock-dialog.glade.h:16
+#: ../plugins/clock/clock-dialog.glade.h:20
 msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
 msgstr "如果设置，则在左键单击插件时运行此命令，而不是显示默认日历。"
 
-#: ../plugins/clock/clock-dialog.glade.h:17
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Co_mmand:"
 msgstr "命令(_M)："
 
-#: ../plugins/clock/clock-dialog.glade.h:18
+#: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Calendar"
 msgstr "日历"
 
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:24
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1168,58 +1193,89 @@ msgid ""
 "page for additional information."
 msgstr "此格式描述要插入面板的日期和时间的部分。比如，用年替换 %Y ，同样用月和天替换 %m 和 %d 。<b></b> 请在“帮助”页面中参看额外信息。"
 
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "_Tooltip format:"
 msgstr "工具提示格式(_T)："
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "_Layout:"
 msgstr "布局(_L)："
 
-#: ../plugins/clock/clock-dialog.glade.h:24
+#: ../plugins/clock/clock-dialog.glade.h:28
 msgid "Sho_w AM/PM"
 msgstr "显示上午/下午(_W)"
 
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:29
 msgid "Fl_ash time separators"
 msgstr "时间分隔符闪烁(_A)"
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:30
 msgid "24-_hour clock"
 msgstr "24 小时时钟(_H)"
 
-#: ../plugins/clock/clock-dialog.glade.h:27
+#: ../plugins/clock/clock-dialog.glade.h:31
 msgid "Binary mode:"
 msgstr "二进制模式:"
 
-#: ../plugins/clock/clock-dialog.glade.h:28
+#: ../plugins/clock/clock-dialog.glade.h:32
 msgid "Display _seconds"
 msgstr "显示秒(_S)"
 
-#: ../plugins/clock/clock-dialog.glade.h:29
-msgid "F_ormat:"
-msgstr "格式(_O)："
-
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:31
+#: ../plugins/clock/clock-dialog.glade.h:34
 msgid "F_uzziness:"
 msgstr "模糊度(_U)："
 
-#: ../plugins/clock/clock-dialog.glade.h:32
+#: ../plugins/clock/clock-dialog.glade.h:35
 msgid "Show _inactive dots"
 msgstr "显示无效的点(_I)"
 
-#: ../plugins/clock/clock-dialog.glade.h:33
+#: ../plugins/clock/clock-dialog.glade.h:36
 msgid "Show gri_d"
 msgstr "显示网格(_D)"
 
-#: ../plugins/clock/clock-dialog.glade.h:34
+#: ../plugins/clock/clock-dialog.glade.h:37
+msgid "Font:"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:38
+msgid "Format:"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:40
+#, no-c-format
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
+"the &quot;Help&quot; page for additional information."
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:41
+msgid "Date"
+msgstr "日期"
+
+#: ../plugins/clock/clock-dialog.glade.h:42
+msgid "Time"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:43
 msgid "Clock Options"
 msgstr "时钟选项"
 
 #. TRANSLATORS: adjust this accordingly for your locale format
 #: ../plugins/clock/clock-digital.h:25
+msgctxt "Time"
+msgid "%R"
+msgstr "%R"
+
+#: ../plugins/clock/clock-digital.h:26
+msgctxt "Date"
+msgid "%Y-%m-%d"
+msgstr ""
+
+#: ../plugins/clock/clock-digital.h:27
 msgctxt "Time"
 msgid "%a %_d %b, %R"
 msgstr "%a %_d %b, %R"
@@ -1798,7 +1854,7 @@ msgstr "工作区设置(_S)..."
 msgid "Unable to open the workspace settings"
 msgstr "未能打开工作区设置"
 
-#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:899
+#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:897
 #, c-format
 msgid "Workspace %d"
 msgstr "工作区 %d"
@@ -2113,36 +2169,36 @@ msgstr "从所有显示器显示窗口(_N)"
 msgid "Show only _minimized windows"
 msgstr "仅显示已最小化的窗口(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3065
+#: ../plugins/tasklist/tasklist-widget.c:3063
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "无法启动新实例 '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:3069
+#: ../plugins/tasklist/tasklist-widget.c:3067
 msgid "Error"
 msgstr "错误"
 
-#: ../plugins/tasklist/tasklist-widget.c:3098
+#: ../plugins/tasklist/tasklist-widget.c:3096
 msgid "Launch New Instance"
 msgstr "启动新实例"
 
-#: ../plugins/tasklist/tasklist-widget.c:3845
+#: ../plugins/tasklist/tasklist-widget.c:3843
 msgid "Mi_nimize All"
 msgstr "全部最小化(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3852
+#: ../plugins/tasklist/tasklist-widget.c:3850
 msgid "Un_minimize All"
 msgstr "最小化全部取消(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3859
+#: ../plugins/tasklist/tasklist-widget.c:3857
 msgid "Ma_ximize All"
 msgstr "全部最大化(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3866
+#: ../plugins/tasklist/tasklist-widget.c:3864
 msgid "_Unmaximize All"
 msgstr "最大化全部取消(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3877
+#: ../plugins/tasklist/tasklist-widget.c:3875
 msgid "_Close All"
 msgstr "全部关闭(_C)"
 
@@ -2150,28 +2206,28 @@ msgstr "全部关闭(_C)"
 msgid "Switch between open windows using buttons"
 msgstr "使用按钮在打开的窗口间切换"
 
-#: ../plugins/windowmenu/windowmenu.c:692
+#: ../plugins/windowmenu/windowmenu.c:690
 msgid "Desktop"
 msgstr "桌面"
 
-#: ../plugins/windowmenu/windowmenu.c:1294
+#: ../plugins/windowmenu/windowmenu.c:1292
 msgid "No Windows"
 msgstr "无窗口"
 
-#: ../plugins/windowmenu/windowmenu.c:1309
+#: ../plugins/windowmenu/windowmenu.c:1307
 msgid "Urgent Windows"
 msgstr "紧急窗口"
 
-#: ../plugins/windowmenu/windowmenu.c:1351
+#: ../plugins/windowmenu/windowmenu.c:1349
 msgid "Add Workspace"
 msgstr "添加工作区"
 
-#: ../plugins/windowmenu/windowmenu.c:1371
+#: ../plugins/windowmenu/windowmenu.c:1369
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "移除工作区 “%s”"
 
-#: ../plugins/windowmenu/windowmenu.c:1373
+#: ../plugins/windowmenu/windowmenu.c:1371
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "移除工作区 %d"
