@@ -1934,14 +1934,14 @@ xfce_tasklist_window_removed (WnckScreen   *screen,
 
 #ifdef GDK_WINDOWING_X11
           /* hide the wireframe */
-          if (G_UNLIKELY (n > 5 && tasklist->show_wireframes))
+          if (G_UNLIKELY (n > 6 && tasklist->show_wireframes))
             {
               xfce_tasklist_wireframe_hide (tasklist);
               n--;
             }
 #endif
 
-          panel_return_if_fail (n == 5);
+          panel_return_if_fail (n == 6);
 
           /* destroy the button, this will free the child data in the
            * container remove function */
@@ -3641,6 +3641,8 @@ xfce_tasklist_button_new (WnckWindow   *window,
 
   /* monitor window changes */
   g_signal_connect (G_OBJECT (window), "icon-changed",
+      G_CALLBACK (xfce_tasklist_button_icon_changed), child);
+  g_signal_connect (G_OBJECT (window), "class-changed",
       G_CALLBACK (xfce_tasklist_button_icon_changed), child);
   g_signal_connect (G_OBJECT (window), "name-changed",
       G_CALLBACK (xfce_tasklist_button_name_changed), child);
