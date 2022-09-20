@@ -2930,6 +2930,8 @@ xfce_tasklist_button_workspace_changed (WnckWindow        *window,
 
   xfce_tasklist_sort (tasklist, FALSE);
   xfce_tasklist_active_window_changed (tasklist->screen, window, tasklist);
+  if (!tasklist->all_workspaces)
+    xfce_tasklist_active_workspace_changed (tasklist->screen, NULL, tasklist);
 }
 
 
