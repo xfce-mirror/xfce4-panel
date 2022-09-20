@@ -207,6 +207,31 @@ sn_icon_box_new (SnItem   *item,
 
 
 
+static GdkPixbuf *
+sn_icon_box_load_icon (GtkWidget    *image,
+                       GtkIconTheme *icon_theme,
+                       const gchar  *icon_name,
+                       gint          icon_size,
+                       gboolean      prefer_symbolic)
+{
+  GtkIconInfo *info;
+  GdkPixbuf   *pixbuf = NULL;
+
+  info = gtk_icon_theme_lookup_icon (icon_theme, icon_name, icon_size,
+                                     prefer_symbolic ? GTK_ICON_LOOKUP_FORCE_SYMBOLIC : 0);
+  if (info != NULL)
+    {
+      pixbuf = gtk_icon_info_load_symbolic_for_context (info,
+                                                        gtk_widget_get_style_context (image),
+                                                        NULL, NULL);
+      g_object_unref (info);
+    }
+
+  return pixbuf;
+}
+
+
+
 static void
 sn_icon_box_apply_icon (GtkWidget    *image,
                         GtkIconTheme *icon_theme,
@@ -247,14 +272,12 @@ sn_icon_box_apply_icon (GtkWidget    *image,
         work_icon_name = g_strdup (icon_name);
 
       if (work_pixbuf == NULL && icon_theme_from_path != NULL)
-        work_pixbuf = gtk_icon_theme_load_icon (icon_theme_from_path, work_icon_name, icon_size,
-                                                prefer_symbolic ? GTK_ICON_LOOKUP_FORCE_SYMBOLIC : 0,
-                                                NULL);
+        work_pixbuf = sn_icon_box_load_icon (image, icon_theme_from_path,
+                                             work_icon_name, icon_size, prefer_symbolic);
 
       if (work_pixbuf == NULL)
-        work_pixbuf = gtk_icon_theme_load_icon (icon_theme, work_icon_name, icon_size,
-                                                prefer_symbolic ? GTK_ICON_LOOKUP_FORCE_SYMBOLIC : 0,
-                                                NULL);
+        work_pixbuf = sn_icon_box_load_icon (image, icon_theme, work_icon_name,
+                                             icon_size, prefer_symbolic);
 
       g_free (work_icon_name);
     }
