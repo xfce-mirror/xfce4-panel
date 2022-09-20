@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-19 00:47+0200\n"
+"POT-Creation-Date: 2022-09-20 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2007,2020,2022\n"
 "Language-Team: Albanian (http://www.transifex.com/xfce/xfce4-panel/language/sq/)\n"
@@ -120,7 +120,7 @@ msgstr "_Dilni"
 #: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3148
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
-#: ../plugins/clock/clock-dialog.glade.h:11
+#: ../plugins/clock/clock-dialog.glade.h:15
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 #: ../plugins/pager/pager-dialog.glade.h:4
@@ -359,7 +359,7 @@ msgstr "Shto Elemente të Rinj"
 #: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:7
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#: ../plugins/clock/clock-dialog.glade.h:10
+#: ../plugins/clock/clock-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:5
@@ -983,7 +983,7 @@ msgid ""
 msgstr "Përzgjidheni këtë mundësi për të shfaqur te menuja emrin e thjeshtë të aplikacionit, për shembull, \"Përgjegjës Kartelash\", në vend se \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-#: ../plugins/clock/clock-dialog.glade.h:23
+#: ../plugins/clock/clock-dialog.glade.h:27
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
@@ -1032,7 +1032,7 @@ msgstr "_OK"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:652
-#: ../plugins/clock/clock.c:964 ../plugins/launcher/launcher.c:2479
+#: ../plugins/clock/clock.c:1035 ../plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Dështoi përmbushja e urdhrit \"%s\"."
@@ -1081,84 +1081,100 @@ msgstr "%A %d %B %Y"
 msgid "Week %V"
 msgstr "Java %V"
 
-#: ../plugins/clock/clock.c:471
+#: ../plugins/clock/clock.c:491
 msgid "Failed to execute clock command"
 msgstr "S’u arrit të ekzekutohej urdhri “clock”"
 
-#: ../plugins/clock/clock.c:903
+#: ../plugins/clock/clock.c:974
 msgid "Custom Format"
 msgstr "Format Vetjak"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
-msgid "Analog"
-msgstr "Analoge"
-
-#: ../plugins/clock/clock-dialog.glade.h:2
-msgid "Binary"
-msgstr "Dyore"
-
-#: ../plugins/clock/clock-dialog.glade.h:3
-msgid "Digital"
-msgstr "Shifrore"
-
-#: ../plugins/clock/clock-dialog.glade.h:4
-msgid "Fuzzy"
-msgstr "E turbullt"
-
-#: ../plugins/clock/clock-dialog.glade.h:5
-msgid "LCD"
-msgstr "LCD"
-
-#: ../plugins/clock/clock-dialog.glade.h:6
 msgid "Decimal"
 msgstr "Dhjetore"
 
-#: ../plugins/clock/clock-dialog.glade.h:7
+#: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Sexagesimal"
-msgstr ""
+msgstr "Gjashtëdhjetësh"
 
-#: ../plugins/clock/clock-dialog.glade.h:8
+#: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Binary time"
 msgstr "Kohë dyore"
 
+#: ../plugins/clock/clock-dialog.glade.h:4
+msgid "Date, then time"
+msgstr "Datë, mandej kohë"
+
+#: ../plugins/clock/clock-dialog.glade.h:5
+msgid "Time, then date"
+msgstr "Kohë, mandej datë"
+
+#: ../plugins/clock/clock-dialog.glade.h:6
+msgid "Date Only"
+msgstr "Vetëm Datë"
+
+#: ../plugins/clock/clock-dialog.glade.h:7
+msgid "Time Only"
+msgstr "Vetëm Kohë"
+
+#: ../plugins/clock/clock-dialog.glade.h:8
+msgid "Analog"
+msgstr "Analoge"
+
 #: ../plugins/clock/clock-dialog.glade.h:9
+msgid "Binary"
+msgstr "Dyore"
+
+#: ../plugins/clock/clock-dialog.glade.h:10
+msgid "Digital"
+msgstr "Shifrore"
+
+#: ../plugins/clock/clock-dialog.glade.h:11
+msgid "Fuzzy"
+msgstr "E turbullt"
+
+#: ../plugins/clock/clock-dialog.glade.h:12
+msgid "LCD"
+msgstr "LCD"
+
+#: ../plugins/clock/clock-dialog.glade.h:13
 #: ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "Orë"
 
-#: ../plugins/clock/clock-dialog.glade.h:12
+#: ../plugins/clock/clock-dialog.glade.h:16
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
 msgstr "Emër i zonës kohore që i përgjigjet një kartele te baza e të dhënave “zoneinfo”, për shembull, \"Amerikë/Nju Jork\". Që të përdoret koha vendore, lëreni të zbrazët."
 
-#: ../plugins/clock/clock-dialog.glade.h:13
+#: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Time_zone:"
 msgstr "_Zonë kohore:"
 
-#: ../plugins/clock/clock-dialog.glade.h:14
+#: ../plugins/clock/clock-dialog.glade.h:18
 msgid "Time and Date _Settings..."
 msgstr "_Rregullime Date dhe Kohe…"
 
-#: ../plugins/clock/clock-dialog.glade.h:15
+#: ../plugins/clock/clock-dialog.glade.h:19
 msgid "Time Settings"
 msgstr "Rregullime Kohe"
 
-#: ../plugins/clock/clock-dialog.glade.h:16
+#: ../plugins/clock/clock-dialog.glade.h:20
 msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
 msgstr "Në u ujdistë, xhirohet ky urdhër, kur shtojca klikohet me të majtin, në vend se të shfaqet kalendari parazgjedhje."
 
-#: ../plugins/clock/clock-dialog.glade.h:17
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Co_mmand:"
 msgstr "_Urdhër:"
 
-#: ../plugins/clock/clock-dialog.glade.h:18
+#: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Calendar"
 msgstr "Kalendar"
 
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:24
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1167,58 +1183,89 @@ msgid ""
 "page for additional information."
 msgstr "Formati përshkruan pjesët e datës dhe kohës që duhen futur te paneli. Për shembull, %Y so të zëvendësohet me vitin, %m me muajin dhe %d me ditën. Po njësoj, etiketat <b></b> do ta kalojnë tekstin në shkronja të trasha. Për të dhëna shtesë, shihni faqen \"Ndihmë\"."
 
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "_Tooltip format:"
 msgstr "Format _ndihmëzash:"
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "_Layout:"
 msgstr "_Skemë:"
 
-#: ../plugins/clock/clock-dialog.glade.h:24
+#: ../plugins/clock/clock-dialog.glade.h:28
 msgid "Sho_w AM/PM"
 msgstr "_Shfaq AM/PM"
 
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:29
 msgid "Fl_ash time separators"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:30
 msgid "24-_hour clock"
 msgstr "Orë 24-_orëshe"
 
-#: ../plugins/clock/clock-dialog.glade.h:27
+#: ../plugins/clock/clock-dialog.glade.h:31
 msgid "Binary mode:"
 msgstr "Mënyrë dyore:"
 
-#: ../plugins/clock/clock-dialog.glade.h:28
+#: ../plugins/clock/clock-dialog.glade.h:32
 msgid "Display _seconds"
 msgstr "Shfaqi _sekondat"
 
-#: ../plugins/clock/clock-dialog.glade.h:29
-msgid "F_ormat:"
-msgstr "_Format:"
-
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:31
+#: ../plugins/clock/clock-dialog.glade.h:34
 msgid "F_uzziness:"
 msgstr "T_urbulli:"
 
-#: ../plugins/clock/clock-dialog.glade.h:32
+#: ../plugins/clock/clock-dialog.glade.h:35
 msgid "Show _inactive dots"
 msgstr "Shfaq pika _joaktive"
 
-#: ../plugins/clock/clock-dialog.glade.h:33
+#: ../plugins/clock/clock-dialog.glade.h:36
 msgid "Show gri_d"
 msgstr "Shfaq _rrjetë"
 
-#: ../plugins/clock/clock-dialog.glade.h:34
+#: ../plugins/clock/clock-dialog.glade.h:37
+msgid "Font:"
+msgstr "Shkronja:"
+
+#: ../plugins/clock/clock-dialog.glade.h:38
+msgid "Format:"
+msgstr "Format:"
+
+#: ../plugins/clock/clock-dialog.glade.h:40
+#, no-c-format
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
+"the &quot;Help&quot; page for additional information."
+msgstr "Formati përshkruan pjesë date dhe kohe për të futur te paneli. Për shembull, %Y përfaqëson vitin, %m muajin dhe %d ditën. Po njësoj,  etiketat &lt;b&gt;&lt;/b&gt; do ta bëjnë tekstin të trashë. Për hollësi shtesë, shihni faqen “Ndihmë”."
+
+#: ../plugins/clock/clock-dialog.glade.h:41
+msgid "Date"
+msgstr "Datë"
+
+#: ../plugins/clock/clock-dialog.glade.h:42
+msgid "Time"
+msgstr "Kohë"
+
+#: ../plugins/clock/clock-dialog.glade.h:43
 msgid "Clock Options"
 msgstr "Mundësi Ore"
 
 #. TRANSLATORS: adjust this accordingly for your locale format
 #: ../plugins/clock/clock-digital.h:25
+msgctxt "Time"
+msgid "%R"
+msgstr "%R"
+
+#: ../plugins/clock/clock-digital.h:26
+msgctxt "Date"
+msgid "%Y-%m-%d"
+msgstr ""
+
+#: ../plugins/clock/clock-digital.h:27
 msgctxt "Time"
 msgid "%a %_d %b, %R"
 msgstr "%a %_d %b, %R"
