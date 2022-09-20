@@ -183,7 +183,6 @@ static const gchar *digital_time_formats[] =
 {
   DEFAULT_DIGITAL_TIME_FORMAT,
   "%T",
-  "%r",
   "%_H:%M",
   "%H:%M",
   "%I:%M %p",
