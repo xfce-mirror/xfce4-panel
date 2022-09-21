@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-19 00:47+0200\n"
+"POT-Creation-Date: 2022-09-20 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Kiril Kirilov <cybercop_montana@abv.bg>, 2014-2015,2017-2020,2022\n"
 "Language-Team: Bulgarian (http://www.transifex.com/xfce/xfce4-panel/language/bg/)\n"
@@ -122,7 +122,7 @@ msgstr "Изход"
 #: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3148
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
-#: ../plugins/clock/clock-dialog.glade.h:11
+#: ../plugins/clock/clock-dialog.glade.h:15
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 #: ../plugins/pager/pager-dialog.glade.h:4
@@ -361,7 +361,7 @@ msgstr "Добавяне на нов елемент"
 #: ../panel/panel-tic-tac-toe.c:125
 #: ../plugins/actions/actions-dialog.glade.h:7
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#: ../plugins/clock/clock-dialog.glade.h:10
+#: ../plugins/clock/clock-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/pager/pager-dialog.glade.h:5
@@ -985,7 +985,7 @@ msgid ""
 msgstr "Изберете тази опция, за да се показват обобщаващи имена на на програмите в менюто, например „Файлов мениджър“ вместо „Thunar“"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-#: ../plugins/clock/clock-dialog.glade.h:23
+#: ../plugins/clock/clock-dialog.glade.h:27
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/separator/separator-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
@@ -1034,7 +1034,7 @@ msgstr "_ОК"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:652
-#: ../plugins/clock/clock.c:964 ../plugins/launcher/launcher.c:2479
+#: ../plugins/clock/clock.c:1035 ../plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Неуспех при изпълнението на команда „%s“."
@@ -1083,84 +1083,100 @@ msgstr "%A%d %B %Y"
 msgid "Week %V"
 msgstr "Седмица %V"
 
-#: ../plugins/clock/clock.c:471
+#: ../plugins/clock/clock.c:491
 msgid "Failed to execute clock command"
 msgstr "Неуспех при стартирането на часовника"
 
-#: ../plugins/clock/clock.c:903
+#: ../plugins/clock/clock.c:974
 msgid "Custom Format"
 msgstr "Потребителски формат"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
-msgid "Analog"
-msgstr "Аналогов"
-
-#: ../plugins/clock/clock-dialog.glade.h:2
-msgid "Binary"
-msgstr "Бинарен"
-
-#: ../plugins/clock/clock-dialog.glade.h:3
-msgid "Digital"
-msgstr "Цифров"
-
-#: ../plugins/clock/clock-dialog.glade.h:4
-msgid "Fuzzy"
-msgstr "Неточен"
-
-#: ../plugins/clock/clock-dialog.glade.h:5
-msgid "LCD"
-msgstr "LED"
-
-#: ../plugins/clock/clock-dialog.glade.h:6
 msgid "Decimal"
 msgstr "Десетична"
 
-#: ../plugins/clock/clock-dialog.glade.h:7
+#: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Sexagesimal"
 msgstr "Шестдесетична"
 
-#: ../plugins/clock/clock-dialog.glade.h:8
+#: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Binary time"
 msgstr "Бинарно време"
 
+#: ../plugins/clock/clock-dialog.glade.h:4
+msgid "Date, then time"
+msgstr "Дата, след това час"
+
+#: ../plugins/clock/clock-dialog.glade.h:5
+msgid "Time, then date"
+msgstr "Час, след това дата"
+
+#: ../plugins/clock/clock-dialog.glade.h:6
+msgid "Date Only"
+msgstr "Само дата"
+
+#: ../plugins/clock/clock-dialog.glade.h:7
+msgid "Time Only"
+msgstr "Само час"
+
+#: ../plugins/clock/clock-dialog.glade.h:8
+msgid "Analog"
+msgstr "Аналогов"
+
 #: ../plugins/clock/clock-dialog.glade.h:9
+msgid "Binary"
+msgstr "Бинарен"
+
+#: ../plugins/clock/clock-dialog.glade.h:10
+msgid "Digital"
+msgstr "Цифров"
+
+#: ../plugins/clock/clock-dialog.glade.h:11
+msgid "Fuzzy"
+msgstr "Неточен"
+
+#: ../plugins/clock/clock-dialog.glade.h:12
+msgid "LCD"
+msgstr "LED"
+
+#: ../plugins/clock/clock-dialog.glade.h:13
 #: ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "Часовник"
 
-#: ../plugins/clock/clock-dialog.glade.h:12
+#: ../plugins/clock/clock-dialog.glade.h:16
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
 msgstr "Наименованието на часовата зона съответства на файла с информацията за часовите зони в базата с данни, например „America/New_York“. Оставете празно, за да използвате местното време."
 
-#: ../plugins/clock/clock-dialog.glade.h:13
+#: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Time_zone:"
 msgstr "Часова зона:"
 
-#: ../plugins/clock/clock-dialog.glade.h:14
+#: ../plugins/clock/clock-dialog.glade.h:18
 msgid "Time and Date _Settings..."
 msgstr "Настройки на датата и часа..."
 
-#: ../plugins/clock/clock-dialog.glade.h:15
+#: ../plugins/clock/clock-dialog.glade.h:19
 msgid "Time Settings"
 msgstr "Настройки на времето"
 
-#: ../plugins/clock/clock-dialog.glade.h:16
+#: ../plugins/clock/clock-dialog.glade.h:20
 msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
 msgstr "Ако е зададена, тази команда се изпълнява при щракване с левия бутон върху добавката, вместо да показва календара по подразбиране."
 
-#: ../plugins/clock/clock-dialog.glade.h:17
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Co_mmand:"
 msgstr "Команда:"
 
-#: ../plugins/clock/clock-dialog.glade.h:18
+#: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Calendar"
 msgstr "Календар"
 
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:24
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1169,58 +1185,89 @@ msgid ""
 "page for additional information."
 msgstr "Форматът описва начина на показване на датата и часа в панела. Например, %Y ще бъде заменено с година, %m с месец, а %d с ден. По същия начин елементите <b></b> ще направят текста удебелен. За подробности, вижте страницата „Помощ“."
 
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "_Tooltip format:"
 msgstr "Формат на подсказките:"
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "_Layout:"
 msgstr "Оформление:"
 
-#: ../plugins/clock/clock-dialog.glade.h:24
+#: ../plugins/clock/clock-dialog.glade.h:28
 msgid "Sho_w AM/PM"
 msgstr "Показване на AM/PM"
 
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:29
 msgid "Fl_ash time separators"
 msgstr "Мигащи разделители"
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:30
 msgid "24-_hour clock"
 msgstr "24-часов формат"
 
-#: ../plugins/clock/clock-dialog.glade.h:27
+#: ../plugins/clock/clock-dialog.glade.h:31
 msgid "Binary mode:"
 msgstr "Бинарен режим:"
 
-#: ../plugins/clock/clock-dialog.glade.h:28
+#: ../plugins/clock/clock-dialog.glade.h:32
 msgid "Display _seconds"
 msgstr "Показване на секунди"
 
-#: ../plugins/clock/clock-dialog.glade.h:29
-msgid "F_ormat:"
-msgstr "Формат:"
-
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:31
+#: ../plugins/clock/clock-dialog.glade.h:34
 msgid "F_uzziness:"
 msgstr "Степен на неточност:"
 
-#: ../plugins/clock/clock-dialog.glade.h:32
+#: ../plugins/clock/clock-dialog.glade.h:35
 msgid "Show _inactive dots"
 msgstr "Показване на неактивни точки"
 
-#: ../plugins/clock/clock-dialog.glade.h:33
+#: ../plugins/clock/clock-dialog.glade.h:36
 msgid "Show gri_d"
 msgstr "Показване на мрежа"
 
-#: ../plugins/clock/clock-dialog.glade.h:34
+#: ../plugins/clock/clock-dialog.glade.h:37
+msgid "Font:"
+msgstr "Шрифт:"
+
+#: ../plugins/clock/clock-dialog.glade.h:38
+msgid "Format:"
+msgstr "Формат:"
+
+#: ../plugins/clock/clock-dialog.glade.h:40
+#, no-c-format
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
+"the &quot;Help&quot; page for additional information."
+msgstr "Форматът описва частите за дата и час, които да се вмъкнат в панела. Например %Y ще бъде заменено с годината, %m с месеца и  %d с деня. По същия начин &lt;b&gt;&lt;/b&gt; етикетите ще направят текста удебелен. Вижте &quot;Помощ&quot; страница за допълнителна информация."
+
+#: ../plugins/clock/clock-dialog.glade.h:41
+msgid "Date"
+msgstr "Дата"
+
+#: ../plugins/clock/clock-dialog.glade.h:42
+msgid "Time"
+msgstr "Час"
+
+#: ../plugins/clock/clock-dialog.glade.h:43
 msgid "Clock Options"
 msgstr "Настройки на часовника"
 
 #. TRANSLATORS: adjust this accordingly for your locale format
 #: ../plugins/clock/clock-digital.h:25
+msgctxt "Time"
+msgid "%R"
+msgstr "%R"
+
+#: ../plugins/clock/clock-digital.h:26
+msgctxt "Date"
+msgid "%Y-%m-%d"
+msgstr "%Y-%m-%d"
+
+#: ../plugins/clock/clock-digital.h:27
 msgctxt "Time"
 msgid "%a %_d %b, %R"
 msgstr "%a%_d %b, %R"
