@@ -138,6 +138,50 @@ xfce_panel_plugin_get_type
 </SECTION>
 
 <SECTION>
+<FILE>xfwl-core-utils</FILE>
+xfwl_registry_bind
+<SUBSECTION Private>
+xfwl_registry_bind_real
+</SECTION>
+
+<FILE>xfwl-foreign-toplevel</FILE>
+XfwlForeignToplevel
+XfwlForeignToplevelState
+xfwl_foreign_toplevel_get_wl_toplevel
+xfwl_foreign_toplevel_get_title
+xfwl_foreign_toplevel_get_app_id
+xfwl_foreign_toplevel_get_monitors
+xfwl_foreign_toplevel_get_state
+xfwl_foreign_toplevel_get_parent
+xfwl_foreign_toplevel_maximize
+xfwl_foreign_toplevel_unmaximize
+xfwl_foreign_toplevel_minimize
+xfwl_foreign_toplevel_unminimize
+xfwl_foreign_toplevel_activate
+xfwl_foreign_toplevel_activate_on_seat
+xfwl_foreign_toplevel_close
+xfwl_foreign_toplevel_set_rectangle
+xfwl_foreign_toplevel_fullscreen
+xfwl_foreign_toplevel_fullscreen_on_monitor
+xfwl_foreign_toplevel_unfullscreen
+<SUBSECTION Standard>
+XFWL_TYPE_FOREIGN_TOPLEVEL
+</SECTION>
+
+<SECTION>
+<FILE>xfwl-foreign-toplevel-manager</FILE>
+XfwlForeignToplevelManager
+xfwl_foreign_toplevel_manager_get
+xfwl_foreign_toplevel_manager_get_wl_manager
+xfwl_foreign_toplevel_manager_get_toplevels
+xfwl_foreign_toplevel_manager_get_active
+xfwl_foreign_toplevel_manager_get_show_desktop
+xfwl_foreign_toplevel_manager_set_show_desktop
+<SUBSECTION Standard>
+XFWL_TYPE_FOREIGN_TOPLEVEL_MANAGER
+</SECTION>
+
+<SECTION>
 <FILE>macros</FILE>
 XFCE_PANEL_CHANNEL_NAME
 </SECTION>
