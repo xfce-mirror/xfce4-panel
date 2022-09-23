@@ -26,10 +26,9 @@
 #include <string.h>
 #endif
 
-#include <gdk/gdkx.h>
-
 #include <libxfce4panel/libxfce4panel.h>
 
+#include <common/panel-private.h>
 #include "sn-button.h"
 #include "sn-icon-box.h"
 #include "sn-util.h"
@@ -111,7 +110,6 @@ sn_button_init (SnButton *button)
 {
   GtkCssProvider *css_provider;
   GdkEventMask    event_mask = GDK_SCROLL_MASK;
-  const gchar    *wm_name;
 
   gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
 
@@ -127,10 +125,16 @@ sn_button_init (SnButton *button)
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
   g_object_unref (css_provider);
 
+  event_mask |= GDK_SMOOTH_SCROLL_MASK;
+#ifdef GDK_WINDOWING_X11
   /* see https://gitlab.xfce.org/xfce/xfwm4/-/issues/641 */
-  wm_name = gdk_x11_screen_get_window_manager_name (gtk_widget_get_screen (GTK_WIDGET (button)));
-  if (g_strcmp0 (wm_name, "Xfwm4") != 0 && g_strcmp0 (wm_name, "unknown") != 0)
-    event_mask |= GDK_SMOOTH_SCROLL_MASK;
+  if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+    {
+      const gchar *wm_name = gdk_x11_screen_get_window_manager_name (gdk_screen_get_default ());
+      if (g_strcmp0 (wm_name, "Xfwm4") == 0 || g_strcmp0 (wm_name, "unknown") == 0)
+        event_mask &= ~GDK_SMOOTH_SCROLL_MASK;
+    }
+#endif
 
   gtk_widget_add_events (GTK_WIDGET (button), event_mask);
 
