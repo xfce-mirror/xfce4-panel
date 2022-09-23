@@ -119,10 +119,6 @@ sn_plugin_free (XfcePanelPlugin *panel_plugin)
   if (plugin->idle_startup != 0)
     g_source_remove (plugin->idle_startup);
 
-  /* disconnect screen changed signal */
-  g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
-      systray_plugin_screen_changed, NULL);
-
   g_slist_free_full (plugin->names_ordered, g_free);
   g_hash_table_destroy (plugin->names_hidden);
 
@@ -132,7 +128,12 @@ sn_plugin_free (XfcePanelPlugin *panel_plugin)
       g_object_unref (G_OBJECT (plugin->manager));
     }
 
-  gtk_container_remove (GTK_CONTAINER (plugin->box), plugin->systray_box);
+  if (plugin->systray_box != NULL)
+    {
+      gtk_container_remove (GTK_CONTAINER (plugin->box), plugin->systray_box);
+      g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
+          systray_plugin_screen_changed, NULL);
+    }
 
   /* Statusnotifier */
   /* remove children so they won't use unrefed SnItems and SnConfig */
@@ -157,8 +158,9 @@ sn_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                       size,
                       xfce_panel_plugin_get_nrows (panel_plugin),
                       xfce_panel_plugin_get_icon_size (panel_plugin));
-  systray_plugin_size_changed (panel_plugin,
-                               xfce_panel_plugin_get_size (panel_plugin));
+  if (plugin->systray_box != NULL)
+    systray_plugin_size_changed (panel_plugin,
+                                 xfce_panel_plugin_get_size (panel_plugin));
 
   return TRUE;
 }
@@ -178,7 +180,8 @@ sn_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
                 ? GTK_ORIENTATION_VERTICAL : GTK_ORIENTATION_HORIZONTAL;
 
   sn_config_set_orientation (plugin->config, panel_orientation, orientation);
-  systray_plugin_orientation_changed (panel_plugin, panel_orientation);
+  if (plugin->systray_box != NULL)
+    systray_plugin_orientation_changed (panel_plugin, panel_orientation);
 
   sn_plugin_size_changed (panel_plugin, xfce_panel_plugin_get_size (panel_plugin));
 }
@@ -292,7 +295,8 @@ sn_plugin_button_toggled (GtkWidget     *button,
 
   show_hidden = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
   sn_box_set_show_hidden (XFCE_SN_BOX (plugin->sn_box), show_hidden);
-  systray_box_set_show_hidden (XFCE_SYSTRAY_BOX (plugin->systray_box), show_hidden);
+  if (plugin->systray_box != NULL)
+    systray_box_set_show_hidden (XFCE_SYSTRAY_BOX (plugin->systray_box), show_hidden);
 
   orientation = xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin));
   if (orientation == GTK_ORIENTATION_HORIZONTAL)
@@ -325,21 +329,33 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
   gtk_widget_show (plugin->box);
 
   /* Add systray box */
-  plugin->systray_box = systray_box_new ();
-  gtk_box_pack_start (GTK_BOX (plugin->box), plugin->systray_box, TRUE, TRUE, 0);
-  g_signal_connect (G_OBJECT (plugin->systray_box), "draw",
-      G_CALLBACK (systray_plugin_box_draw), plugin);
-  gtk_container_set_border_width (GTK_CONTAINER (plugin->systray_box), 0);
-  gtk_widget_show (plugin->systray_box);
+  if (PANEL_IS_X11_DISPLAY (gdk_display_get_default ()))
+    {
+      plugin->systray_box = systray_box_new ();
+      gtk_box_pack_start (GTK_BOX (plugin->box), plugin->systray_box, TRUE, TRUE, 0);
+      g_signal_connect (G_OBJECT (plugin->systray_box), "draw",
+          G_CALLBACK (systray_plugin_box_draw), plugin);
+      gtk_container_set_border_width (GTK_CONTAINER (plugin->systray_box), 0);
+      gtk_widget_show (plugin->systray_box);
 
-  /* monitor screen changes */
-  g_signal_connect (G_OBJECT (plugin), "screen-changed",
-      G_CALLBACK (systray_plugin_screen_changed), NULL);
-  systray_plugin_screen_changed (GTK_WIDGET (plugin), NULL);
+      /* monitor screen changes */
+      g_signal_connect (G_OBJECT (plugin), "screen-changed",
+          G_CALLBACK (systray_plugin_screen_changed), NULL);
+      systray_plugin_screen_changed (GTK_WIDGET (plugin), NULL);
 
-  /* restart internally if compositing changed */
-  g_signal_connect_swapped (gdk_screen_get_default (), "composited-changed",
-     G_CALLBACK (systray_plugin_composited_changed), plugin);
+      /* restart internally if compositing changed */
+      g_signal_connect_swapped (gdk_screen_get_default (), "composited-changed",
+         G_CALLBACK (systray_plugin_composited_changed), plugin);
+
+      g_signal_connect_swapped (plugin->config, "configuration-changed",
+                                G_CALLBACK (gtk_widget_queue_resize), plugin->systray_box);
+      g_signal_connect (plugin->config, "configuration-changed",
+                                G_CALLBACK (systray_plugin_configuration_changed), plugin);
+      g_signal_connect (plugin->config, "legacy-items-list-changed",
+                                G_CALLBACK (systray_plugin_configuration_changed), plugin);
+      g_signal_connect (G_OBJECT(plugin->systray_box), "notify::has-hidden",
+                        G_CALLBACK(systray_has_hidden_cb), plugin);
+    }
 
   /* Add statusnotifier box */
   plugin->sn_box = sn_box_new (plugin->config);
@@ -347,13 +363,7 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
   gtk_widget_show (GTK_WIDGET (plugin->sn_box));
 
   g_signal_connect_swapped (plugin->config, "configuration-changed",
-                            G_CALLBACK (gtk_widget_queue_resize), plugin->systray_box);
-  g_signal_connect_swapped (plugin->config, "configuration-changed",
                             G_CALLBACK (gtk_widget_queue_resize), plugin->sn_box);
-  g_signal_connect (plugin->config, "configuration-changed",
-                            G_CALLBACK (systray_plugin_configuration_changed), plugin);
-  g_signal_connect (plugin->config, "legacy-items-list-changed",
-                            G_CALLBACK (systray_plugin_configuration_changed), plugin);
 
 #ifdef HAVE_DBUSMENU
   plugin->backend = sn_backend_new ();
@@ -370,8 +380,6 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
   g_signal_connect(G_OBJECT(plugin->button), "toggled",
                    G_CALLBACK(sn_plugin_button_toggled), plugin);
   gtk_button_set_relief(GTK_BUTTON(plugin->button), GTK_RELIEF_NONE);
-  g_signal_connect (G_OBJECT(plugin->systray_box), "notify::has-hidden",
-                    G_CALLBACK(systray_has_hidden_cb), plugin);
   g_signal_connect (G_OBJECT(plugin->sn_box), "notify::has-hidden",
                     G_CALLBACK(snbox_has_hidden_cb), plugin);
   xfce_panel_plugin_add_action_widget(XFCE_PANEL_PLUGIN(plugin), plugin->button);
