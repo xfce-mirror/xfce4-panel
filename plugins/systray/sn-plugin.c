@@ -279,39 +279,28 @@ snbox_has_hidden_cb (SnBox      *box,
 
 
 static void
-sn_plugin_button_set_arrow(SnPlugin *plugin)
+sn_plugin_button_toggled (GtkWidget *button,
+                          SnPlugin *plugin)
 {
   GtkArrowType arrow_type;
   gboolean show_hidden;
   GtkOrientation orientation;
 
-  panel_return_if_fail(XFCE_IS_SN_PLUGIN(plugin));
+  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
+  panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
+  panel_return_if_fail (plugin->button == button);
 
-  show_hidden = systray_box_get_show_hidden(XFCE_SYSTRAY_BOX(plugin->systray_box));
-  orientation = xfce_panel_plugin_get_orientation(XFCE_PANEL_PLUGIN(plugin));
+  show_hidden = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+  sn_box_set_show_hidden (XFCE_SN_BOX (plugin->sn_box), show_hidden);
+  systray_box_set_show_hidden (XFCE_SYSTRAY_BOX (plugin->systray_box), show_hidden);
+
+  orientation = xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin));
   if (orientation == GTK_ORIENTATION_HORIZONTAL)
     arrow_type = show_hidden ? GTK_ARROW_LEFT : GTK_ARROW_RIGHT;
   else
     arrow_type = show_hidden ? GTK_ARROW_UP : GTK_ARROW_DOWN;
 
-  xfce_arrow_button_set_arrow_type(XFCE_ARROW_BUTTON(plugin->button), arrow_type);
-}
-
-
-
-static void
-sn_plugin_button_toggled (GtkWidget     *button,
-                          SnPlugin      *plugin)
-{
-  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
-  panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
-  panel_return_if_fail (plugin->button == button);
-
-  systray_box_set_show_hidden (XFCE_SYSTRAY_BOX (plugin->systray_box),
-      gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)));
-  sn_box_set_show_hidden (XFCE_SN_BOX (plugin->sn_box),
-      gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)));
-  sn_plugin_button_set_arrow (plugin);
+  xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (plugin->button), arrow_type);
 }
 
 
