@@ -30,6 +30,7 @@
 
 #include <libxfce4panel/libxfce4panel.h>
 
+#include <common/panel-private.h>
 #include "sn-button.h"
 #include "sn-icon-box.h"
 #include "sn-util.h"
@@ -128,9 +129,13 @@ sn_button_init (SnButton *button)
   g_object_unref (css_provider);
 
   /* see https://gitlab.xfce.org/xfce/xfwm4/-/issues/641 */
-  wm_name = gdk_x11_screen_get_window_manager_name (gtk_widget_get_screen (GTK_WIDGET (button)));
-  if (g_strcmp0 (wm_name, "Xfwm4") != 0 && g_strcmp0 (wm_name, "unknown") != 0)
-    event_mask |= GDK_SMOOTH_SCROLL_MASK;
+  event_mask |= GDK_SMOOTH_SCROLL_MASK;
+  if (PANEL_IS_X11_DISPLAY (gdk_display_get_default ()))
+    {
+      wm_name = gdk_x11_screen_get_window_manager_name (gtk_widget_get_screen (GTK_WIDGET (button)));
+      if (g_strcmp0 (wm_name, "Xfwm4") == 0 || g_strcmp0 (wm_name, "unknown") == 0)
+        event_mask &= ~GDK_SMOOTH_SCROLL_MASK;
+    }
 
   gtk_widget_add_events (GTK_WIDGET (button), event_mask);
 
