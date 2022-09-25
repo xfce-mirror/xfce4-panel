@@ -51,9 +51,9 @@ GTKDOC_FLAGS = \
 	$(GTK_DOC_EXTRA_CFLAGS)
 
 GTKDOC_LIBS = \
+	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(GTK_LIBS) \
-	$(LIBXFCE4UTIL_LIBS) \
-	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la
+	$(LIBXFCE4UTIL_LIBS)
 
 include $(top_srcdir)/gtk-doc.make
 
