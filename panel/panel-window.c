@@ -1711,7 +1711,7 @@ panel_window_screen_changed (GtkWidget *widget,
   panel_window_screen_layout_changed (screen, window);
 
   /* update wnck screen to be used for the autohide feature */
-  wnck_screen = wnck_screen_get_default ();
+  wnck_screen = panel_wnck_screen_get_default ();
   wnck_window = wnck_screen_get_active_window (wnck_screen);
   panel_window_update_autohide_window (window, wnck_screen, wnck_window);
 }

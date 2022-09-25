@@ -375,7 +375,9 @@ main (gint argc, gchar **argv)
     signal (signums[i], panel_signal_handler);
 
   /* set EWMH source indication */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   wnck_set_client_type (WNCK_CLIENT_TYPE_PAGER);
+G_GNUC_END_IGNORE_DEPRECATIONS
 
   gtk_main ();
 

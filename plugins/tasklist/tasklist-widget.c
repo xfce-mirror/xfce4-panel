@@ -1606,7 +1606,7 @@ xfce_tasklist_connect_screen (XfceTasklist *tasklist)
   /* We need the screen number for Wnck. We could use wnck_screen_get_default
      but that might not be correct everywhere. */
   screen = gtk_widget_get_screen (GTK_WIDGET (tasklist));
-  tasklist->screen = wnck_screen_get (panel_screen_get_number (screen));
+  tasklist->screen = panel_wnck_screen_get (panel_screen_get_number (screen));
 
   /* add all existing windows on this screen */
   windows = wnck_screen_get_windows (tasklist->screen);

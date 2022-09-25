@@ -26,6 +26,7 @@
 #endif
 
 #include <gtk/gtk.h>
+#include <libwnck/libwnck.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
@@ -33,7 +34,6 @@
 #include <common/panel-utils.h>
 #include <common/panel-private.h>
 #include <common/panel-debug.h>
-#include <libwnck/libwnck.h>
 
 #include "pager.h"
 #include "pager-buttons.h"
@@ -571,7 +571,9 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin)
     {
       pager_plugin_set_ratio (plugin);
 
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       plugin->pager = wnck_pager_new ();
+G_GNUC_END_IGNORE_DEPRECATIONS
       g_signal_connect_after (G_OBJECT (plugin->pager), "drag-begin",
                               G_CALLBACK (pager_plugin_drag_begin_event), plugin);
       g_signal_connect_after (G_OBJECT (plugin->pager), "drag-end",
@@ -616,7 +618,7 @@ pager_plugin_screen_changed (GtkWidget *widget,
   WnckScreen  *wnck_screen;
 
   screen = gtk_widget_get_screen (widget);
-  wnck_screen = wnck_screen_get (panel_screen_get_number (screen));
+  wnck_screen = panel_wnck_screen_get (panel_screen_get_number (screen));
 
   if (plugin->wnck_screen != wnck_screen)
     {
