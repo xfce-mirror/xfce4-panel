@@ -36,7 +36,6 @@
 
 #ifdef GDK_WINDOWING_X11
 #include <X11/Xlib.h>
-#include <gdk/gdkx.h>
 #include <X11/extensions/shape.h>
 #endif
 
@@ -3247,11 +3246,13 @@ xfce_tasklist_button_enter_notify_event_disconnected (gpointer  data,
 
   panel_return_if_fail (WNCK_IS_WINDOW (child->window));
 
+#ifdef GDK_WINDOWING_X11
   /* we need to detach the geometry watch because that is connected
    * to the window we proxy and thus not disconnected when the
    * proxy dies */
   g_signal_handlers_disconnect_by_func (child->window,
       xfce_tasklist_button_geometry_changed, child);
+#endif
 
   g_object_unref (G_OBJECT (child->window));
 }
