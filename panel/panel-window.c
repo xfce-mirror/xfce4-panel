@@ -32,11 +32,10 @@
 #include <X11/Xatom.h>
 #endif
 
-#include <libwnck/libwnck.h>
-
 #include <libxfce4ui/libxfce4ui.h>
 
 #include <gtk-layer-shell/gtk-layer-shell.h>
+#include <libxfce4windowing/libxfce4windowing.h>
 
 #include <xfconf/xfconf.h>
 #include <common/panel-private.h>
@@ -151,14 +150,14 @@ static void         panel_window_layer_set_anchor                     (PanelWind
 static void         panel_window_display_layout_debug                 (GtkWidget        *widget);
 static void         panel_window_screen_layout_changed                (GdkScreen        *screen,
                                                                        PanelWindow      *window);
-static void         panel_window_active_window_changed                (WnckScreen       *screen,
-                                                                       WnckWindow       *previous_window,
+static void         panel_window_active_window_changed                (XfwScreen        *screen,
+                                                                       XfwWindow        *previous_window,
                                                                        PanelWindow      *window);
-static void         panel_window_active_window_geometry_changed       (WnckWindow       *active_window,
+static void         panel_window_active_window_geometry_changed       (XfwWindow        *active_window,
                                                                        PanelWindow      *window);
-static void         panel_window_active_window_state_changed          (WnckWindow       *active_window,
-                                                                       WnckWindowState   changed,
-                                                                       WnckWindowState   new,
+static void         panel_window_active_window_state_changed          (XfwWindow        *active_window,
+                                                                       XfwWindowState    changed,
+                                                                       XfwWindowState    new,
                                                                        PanelWindow      *window);
 static void         panel_window_autohide_timeout_destroy             (gpointer          user_data);
 static void         panel_window_autohide_ease_out_timeout_destroy    (gpointer          user_data);
@@ -170,8 +169,8 @@ static gboolean     panel_window_autohide_ease_out                    (gpointer 
 static void         panel_window_set_autohide_behavior                (PanelWindow      *window,
                                                                        AutohideBehavior  behavior);
 static void         panel_window_update_autohide_window               (PanelWindow      *window,
-                                                                       WnckScreen       *screen,
-                                                                       WnckWindow       *active_window);
+                                                                       XfwScreen        *screen,
+                                                                       XfwWindow        *active_window);
 static void         panel_window_menu_popup                           (PanelWindow      *window,
                                                                        GdkEventButton   *event,
                                                                        gboolean          show_tic_tac_toe);
@@ -343,8 +342,8 @@ struct _PanelWindow
   GdkRectangle         alloc;
 
   /* autohiding */
-  WnckScreen          *wnck_screen;
-  WnckWindow          *wnck_active_window;
+  XfwScreen           *xfw_screen;
+  XfwWindow           *xfw_active_window;
   GtkWidget           *autohide_window;
   AutohideBehavior     autohide_behavior;
   AutohideState        autohide_state;
@@ -575,8 +574,8 @@ panel_window_init (PanelWindow *window)
   window->locked = TRUE;
   window->screen = NULL;
   window->display = NULL;
-  window->wnck_screen = NULL;
-  window->wnck_active_window = NULL;
+  window->xfw_screen = NULL;
+  window->xfw_active_window = NULL;
   window->struts_edge = STRUTS_EDGE_NONE;
   window->struts_disabled = FALSE;
   window->mode = XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
@@ -1098,7 +1097,7 @@ panel_window_drag_leave (GtkWidget      *widget,
     {
       /* simulate a geometry change to check for overlapping windows with intelligent hiding */
       if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
-        panel_window_active_window_geometry_changed (window->wnck_active_window, window);
+        panel_window_active_window_geometry_changed (window->xfw_active_window, window);
       /* otherwise just hide the panel */
       else
         panel_window_autohide_queue (window, AUTOHIDE_POPDOWN_SLOW);
@@ -1766,8 +1765,8 @@ panel_window_screen_changed (GtkWidget *widget,
                              GdkScreen *previous_screen)
 {
   PanelWindow *window = PANEL_WINDOW (widget);
-  WnckWindow  *wnck_window = NULL;
-  WnckScreen  *wnck_screen = NULL;
+  XfwWindow   *xfw_window;
+  XfwScreen   *xfw_screen;
   GdkScreen   *screen;
 
   if (G_LIKELY (GTK_WIDGET_CLASS (panel_window_parent_class)->screen_changed != NULL))
@@ -1795,14 +1794,11 @@ panel_window_screen_changed (GtkWidget *widget,
   /* update the screen layout */
   panel_window_screen_layout_changed (screen, window);
 
-  /* update wnck screen to be used for the autohide feature */
-  if (GDK_IS_X11_DISPLAY (window->display))
-    {
-      wnck_screen = panel_wnck_screen_get_default ();
-      wnck_window = wnck_screen_get_active_window (wnck_screen);
-    }
+  /* update xfw screen to be used for the autohide feature */
+  xfw_screen = xfw_screen_get_default ();
+  xfw_window = xfw_screen_get_active_window (xfw_screen);
 
-  panel_window_update_autohide_window (window, wnck_screen, wnck_window);
+  panel_window_update_autohide_window (window, xfw_screen, xfw_window);
 }
 
 
@@ -2654,17 +2650,17 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
 
 
 static void
-panel_window_active_window_changed (WnckScreen  *screen,
-                                    WnckWindow  *previous_window,
+panel_window_active_window_changed (XfwScreen   *screen,
+                                    XfwWindow   *previous_window,
                                     PanelWindow *window)
 {
-  WnckWindow *active_window;
+  XfwWindow *active_window;
 
-  panel_return_if_fail (WNCK_IS_SCREEN (screen));
+  panel_return_if_fail (XFW_IS_SCREEN (screen));
   panel_return_if_fail (PANEL_IS_WINDOW (window));
 
   /* obtain new active window from the screen */
-  active_window = wnck_screen_get_active_window (screen);
+  active_window = xfw_screen_get_active_window (screen);
 
   /* update the active window to be used for the autohide feature */
   panel_window_update_autohide_window (window, screen, active_window);
@@ -2692,18 +2688,18 @@ panel_window_pointer_is_outside (PanelWindow *window)
 
 
 static void
-panel_window_active_window_geometry_changed (WnckWindow  *active_window,
+panel_window_active_window_geometry_changed (XfwWindow   *active_window,
                                              PanelWindow *window)
 {
   GdkRectangle panel_area;
   GdkRectangle window_area;
   gint         scale_factor;
 
-  panel_return_if_fail (WNCK_IS_WINDOW (active_window));
+  panel_return_if_fail (XFW_IS_WINDOW (active_window));
   panel_return_if_fail (PANEL_IS_WINDOW (window));
 
   /* ignore if for some reason the active window does not match the one we know */
-  if (G_UNLIKELY (window->wnck_active_window != active_window))
+  if (G_UNLIKELY (window->xfw_active_window != active_window))
     return;
 
   /* only react to active window geometry changes if we are doing
@@ -2711,7 +2707,7 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
   if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY
       && window->autohide_block == 0)
     {
-      if (wnck_window_get_window_type (active_window) != WNCK_WINDOW_DESKTOP)
+      if (xfw_window_get_window_type (active_window) != XFW_WINDOW_TYPE_DESKTOP)
         {
 #ifdef GDK_WINDOWING_X11
           GdkWindow *gdkwindow;
@@ -2719,14 +2715,12 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
           gboolean  geometry_fixed = FALSE;
 
           /* obtain position and dimensions from the active window */
-          wnck_window_get_geometry (active_window,
-                                    &window_area.x, &window_area.y,
-                                    &window_area.width, &window_area.height);
+          window_area = *(xfw_window_get_geometry (active_window));
 
           /* if a window uses client-side decorations, check the _GTK_FRAME_EXTENTS
            * application window property to get its actual size without the shadows */
           gdkwindow = gdk_x11_window_foreign_new_for_display (gdk_display_get_default (),
-                                                              wnck_window_get_xid (active_window));
+                                                              xfw_window_get_id (active_window));
           if (gdkwindow != NULL)
             {
               if (xfce_has_gtk_frame_extents (gdkwindow, &extents))
@@ -2744,7 +2738,7 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
           /* if a window is shaded, check the height of the window's
            * decoration as exposed through the _NET_FRAME_EXTENTS application
            * window property */
-          if (! geometry_fixed && wnck_window_is_shaded (active_window))
+          if (! geometry_fixed && xfw_window_is_shaded (active_window))
           {
             Display *display;
             Atom real_type;
@@ -2753,7 +2747,7 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
             guint32 *data;
 
             display = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
-            if (XGetWindowProperty (display, wnck_window_get_xid (active_window),
+            if (XGetWindowProperty (display, xfw_window_get_id (active_window),
                                     XInternAtom(display, "_NET_FRAME_EXTENTS", True),
                                     0, 4, FALSE, AnyPropertyType,
                                     &real_type, &real_format, &items_read, &items_left,
@@ -2812,14 +2806,14 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
 
 
 static void
-panel_window_active_window_state_changed (WnckWindow  *active_window,
-                                          WnckWindowState changed,
-                                          WnckWindowState new,
+panel_window_active_window_state_changed (XfwWindow *active_window,
+                                          XfwWindowState changed,
+                                          XfwWindowState new,
                                           PanelWindow *window)
 {
-  panel_return_if_fail (WNCK_IS_WINDOW (active_window));
+  panel_return_if_fail (XFW_IS_WINDOW (active_window));
 
-  if (changed & WNCK_WINDOW_STATE_SHADED)
+  if (changed & XFW_WINDOW_STATE_SHADED)
     panel_window_active_window_geometry_changed (active_window, window);
 }
 
@@ -3224,48 +3218,27 @@ panel_window_set_autohide_behavior (PanelWindow *window,
 
 static void
 panel_window_update_autohide_window (PanelWindow *window,
-                                     WnckScreen  *screen,
-                                     WnckWindow  *active_window)
+                                     XfwScreen   *screen,
+                                     XfwWindow   *active_window)
 {
   panel_return_if_fail (PANEL_IS_WINDOW (window));
-  panel_return_if_fail (screen == NULL || WNCK_IS_SCREEN (screen));
-  panel_return_if_fail (active_window == NULL || WNCK_IS_WINDOW (active_window));
+  panel_return_if_fail (screen == NULL || XFW_IS_SCREEN (screen));
+  panel_return_if_fail (active_window == NULL || XFW_IS_WINDOW (active_window));
 
-  /* update current screen */
-  if (screen != window->wnck_screen)
-    {
-      /* disconnect from previous screen */
-      if (G_LIKELY (window->wnck_screen != NULL))
-        {
-          g_signal_handlers_disconnect_by_func (window->wnck_screen,
-              panel_window_active_window_changed, window);
-        }
-
-      /* remember new screen */
-      window->wnck_screen = screen;
-
-      /* connect to the new screen */
-      if (screen != NULL)
-        {
-          g_signal_connect (G_OBJECT (screen), "active-window-changed",
-              G_CALLBACK (panel_window_active_window_changed), window);
-        }
-    }
-
-  /* update active window */
-  if (G_LIKELY (active_window != window->wnck_active_window))
+  /* first update active window, in case window->xfw_screen is released below */
+  if (G_LIKELY (active_window != window->xfw_active_window))
     {
       /* disconnect from previously active window */
-      if (G_LIKELY (window->wnck_active_window != NULL))
+      if (G_LIKELY (window->xfw_active_window != NULL))
         {
-          g_signal_handlers_disconnect_by_func (window->wnck_active_window,
+          g_signal_handlers_disconnect_by_func (window->xfw_active_window,
               panel_window_active_window_geometry_changed, window);
-          g_signal_handlers_disconnect_by_func (window->wnck_active_window,
+          g_signal_handlers_disconnect_by_func (window->xfw_active_window,
               panel_window_active_window_state_changed, window);
         }
 
       /* remember the new window */
-      window->wnck_active_window = active_window;
+      window->xfw_active_window = active_window;
 
       /* connect to the new window but only if it is not a desktop/root-type window */
       if (active_window != NULL)
@@ -3278,6 +3251,28 @@ panel_window_update_autohide_window (PanelWindow *window,
           /* simulate a geometry change for immediate hiding when the new active
            * window already overlaps the panel */
           panel_window_active_window_geometry_changed (active_window, window);
+        }
+    }
+
+  /* update current screen */
+  if (screen != window->xfw_screen)
+    {
+      /* disconnect from previous screen */
+      if (G_LIKELY (window->xfw_screen != NULL))
+        {
+          g_signal_handlers_disconnect_by_func (window->xfw_screen,
+              panel_window_active_window_changed, window);
+          g_object_unref (window->xfw_screen);
+        }
+
+      /* remember new screen */
+      window->xfw_screen = screen;
+
+      /* connect to the new screen */
+      if (screen != NULL)
+        {
+          g_signal_connect (G_OBJECT (screen), "active-window-changed",
+              G_CALLBACK (panel_window_active_window_changed), window);
         }
     }
 }
@@ -3761,7 +3756,7 @@ panel_window_thaw_autohide (PanelWindow *window)
     {
       /* simulate a geometry change to check for overlapping windows with intelligent hiding */
       if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
-        panel_window_active_window_geometry_changed (window->wnck_active_window, window);
+        panel_window_active_window_geometry_changed (window->xfw_active_window, window);
       /* otherwise hide the panel if the pointer is outside */
       else if (outside)
         panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
