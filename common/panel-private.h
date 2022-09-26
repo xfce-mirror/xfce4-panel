@@ -159,14 +159,6 @@ G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   return wnck_screen_get (index);
 G_GNUC_END_IGNORE_DEPRECATIONS
 }
-
-static inline WnckScreen *
-panel_wnck_screen_get_default (void)
-{
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  return wnck_screen_get_default ();
-G_GNUC_END_IGNORE_DEPRECATIONS
-}
 #endif
 
 #endif /* !__PANEL_PRIVATE_H__ */
