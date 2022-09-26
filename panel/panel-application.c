@@ -199,8 +199,9 @@ panel_application_class_init (PanelApplicationClass *klass)
 static void
 panel_application_init (PanelApplication *application)
 {
+  GdkDisplay *display;
   GError *error = NULL;
-  gint    configver;
+  gint configver;
 
   application->windows = NULL;
   application->dialogs = NULL;
@@ -235,11 +236,17 @@ panel_application_init (PanelApplication *application)
       panel_application_autosave_timer, application);
 
   /* warn the user about restricted features on Wayland */
-  if (GDK_IS_WAYLAND_DISPLAY (gdk_display_get_default ()))
+  display = gdk_display_get_default ();
+  if (GDK_IS_WAYLAND_DISPLAY (display))
     {
       if (! gtk_layer_is_supported ())
         g_warning ("Wayland detected without layer-shell support: Xfce4-panel might not look"
                    " like a panel and many of its features will not be available");
+      if (! gdk_wayland_display_query_registry (display, "zwlr_foreign_toplevel_manager_v1"))
+        g_warning ("Wayland detected without foreign-toplevel-management support (your"
+                   " compositor does not seem to support it): Some Xfce4-panel features will"
+                   " not work (e.g. intellihide), as well as some plugins (e.g. ShowDesktop,"
+                   " Tasklist, WindowMenu)");
     }
 }
 
