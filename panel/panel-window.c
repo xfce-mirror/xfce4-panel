@@ -159,6 +159,11 @@ static void         panel_window_active_window_state_changed          (XfwWindow
                                                                        XfwWindowState    changed,
                                                                        XfwWindowState    new,
                                                                        PanelWindow      *window);
+static void         panel_window_active_window_monitors               (XfwWindow        *active_window,
+                                                                       GParamSpec       *pspec,
+                                                                       PanelWindow      *window);
+static void         panel_window_xfw_window_closed                    (XfwWindow        *xfw_window,
+                                                                       PanelWindow      *window);
 static void         panel_window_autohide_timeout_destroy             (gpointer          user_data);
 static void         panel_window_autohide_ease_out_timeout_destroy    (gpointer          user_data);
 static void         panel_window_autohide_queue                       (PanelWindow      *window,
@@ -372,6 +377,9 @@ struct _PanelWindow
   guint32              grab_time;
   gint                 grab_x;
   gint                 grab_y;
+
+  /* Wayland */
+  gboolean             wl_active_is_maximized;
 };
 
 /* used for a full XfcePanelWindow name in the class, but not in the code */
@@ -604,6 +612,7 @@ panel_window_init (PanelWindow *window)
   window->grab_time = 0;
   window->grab_x = 0;
   window->grab_y = 0;
+  window->wl_active_is_maximized = FALSE;
 
   /* not resizable, so allocation will follow size request */
   gtk_window_set_resizable (GTK_WINDOW (window), FALSE);
@@ -2770,6 +2779,18 @@ panel_window_active_window_geometry_changed (XfwWindow   *active_window,
   if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY
       && window->autohide_block == 0)
     {
+      /* intellihide on Wayland: reduced to maximized active window */
+      if (GDK_IS_WAYLAND_DISPLAY (window->display))
+        {
+          if (window->wl_active_is_maximized
+              && panel_window_pointer_is_outside (window))
+            panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
+          else
+            panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
+
+          return;
+        }
+
       if (xfw_window_get_window_type (active_window) != XFW_WINDOW_TYPE_DESKTOP)
         {
 #ifdef GDK_WINDOWING_X11
@@ -2867,16 +2888,133 @@ panel_window_active_window_geometry_changed (XfwWindow   *active_window,
 
 
 
+static gboolean
+panel_window_xfw_window_on_panel_monitor (PanelWindow *window,
+                                          XfwWindow   *xfw_window)
+{
+  GList *monitors = NULL;
+
+  monitors = xfw_window_get_monitors (xfw_window);
+  if (window->span_monitors)
+    {
+      GdkMonitor *monitor = NULL, *p_monitor;
+      GtkAllocation alloc;
+      gint fixed_dim, step;
+
+      gtk_widget_get_allocation (GTK_WIDGET (window), &alloc);
+      if (IS_HORIZONTAL (window))
+        {
+          fixed_dim = window->area.y + alloc.height / 2
+                      + gtk_layer_get_margin (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_TOP);
+          step = alloc.width / 10;
+          for (gint x = 0; x <= alloc.width; x += step)
+            {
+              p_monitor = gdk_display_get_monitor_at_point (window->display, x, fixed_dim);
+              if (p_monitor != monitor)
+                {
+                  monitor = p_monitor;
+                  if (g_list_find (monitors, monitor))
+                    return TRUE;
+                }
+            }
+        }
+      else
+        {
+          fixed_dim = window->area.x + alloc.width / 2
+                      + gtk_layer_get_margin (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_LEFT);
+          step = alloc.height / 10;
+          for (gint y = 0; y <= alloc.height; y += step)
+            {
+              p_monitor = gdk_display_get_monitor_at_point (window->display, fixed_dim, y);
+              if (p_monitor != monitor)
+                {
+                  monitor = p_monitor;
+                  if (g_list_find (monitors, monitor))
+                    return TRUE;
+                }
+            }
+        }
+    }
+  else if (g_list_find (monitors, gtk_layer_get_monitor (GTK_WINDOW (window))))
+    return TRUE;
+
+  return FALSE;
+}
+
+
+
 static void
 panel_window_active_window_state_changed (XfwWindow      *active_window,
                                           XfwWindowState  changed,
                                           XfwWindowState  new,
                                           PanelWindow    *window)
 {
+  gboolean maximized;
+
   panel_return_if_fail (XFW_IS_WINDOW (active_window));
 
-  if (changed & XFW_WINDOW_STATE_SHADED)
-    panel_window_active_window_geometry_changed (active_window, window);
+  if (GDK_IS_X11_DISPLAY (window->display))
+    {
+      if (changed & XFW_WINDOW_STATE_SHADED)
+        panel_window_active_window_geometry_changed (active_window, window);
+
+      return;
+    }
+
+  maximized = new & XFW_WINDOW_STATE_MAXIMIZED;
+  if (maximized != window->wl_active_is_maximized
+      && panel_window_xfw_window_on_panel_monitor (window, active_window))
+    {
+      window->wl_active_is_maximized = maximized;
+      panel_window_active_window_geometry_changed (active_window, window);
+    }
+}
+
+
+
+static void
+panel_window_active_window_monitors (XfwWindow   *active_window,
+                                     GParamSpec  *pspec,
+                                     PanelWindow *window)
+{
+  panel_return_if_fail (XFW_IS_WINDOW (active_window));
+
+  panel_window_active_window_state_changed (active_window, 0,
+                                            xfw_window_get_state (active_window),
+                                            window);
+}
+
+
+
+static void
+panel_window_xfw_window_closed (XfwWindow   *xfw_window,
+                                PanelWindow *window)
+{
+  GList *windows, *lp;
+
+  panel_return_if_fail (XFW_IS_WINDOW (xfw_window));
+
+  if (! window->wl_active_is_maximized)
+    return;
+
+  /* see if there is a maximized window left on a monitor of interest */
+  windows = xfw_screen_get_windows (window->xfw_screen);
+  for (lp = windows; lp != NULL; lp = lp->next)
+    if (lp->data != xfw_window
+        && xfw_window_get_state (lp->data) & XFW_WINDOW_STATE_MAXIMIZED
+        && panel_window_xfw_window_on_panel_monitor (window, lp->data))
+      {
+        g_signal_handlers_disconnect_by_func (lp->data, panel_window_xfw_window_closed, window);
+        g_signal_connect_object (lp->data, "closed",
+                                 G_CALLBACK (panel_window_xfw_window_closed), window, 0);
+        break;
+      }
+
+  if (lp == NULL)
+    {
+      window->wl_active_is_maximized = FALSE;
+      panel_window_active_window_geometry_changed (window->xfw_active_window, window);
+    }
 }
 
 
@@ -3274,6 +3412,18 @@ panel_window_set_autohide_behavior (PanelWindow *window,
 
 
 
+static gboolean
+panel_window_active_window_monitors_idle (gpointer data)
+{
+  PanelWindow *window = data;
+
+  panel_window_active_window_monitors (window->xfw_active_window, NULL, window);
+
+  return FALSE;
+}
+
+
+
 static void
 panel_window_update_autohide_window (PanelWindow *window,
                                      XfwScreen   *screen,
@@ -3293,6 +3443,9 @@ panel_window_update_autohide_window (PanelWindow *window,
               panel_window_active_window_geometry_changed, window);
           g_signal_handlers_disconnect_by_func (window->xfw_active_window,
               panel_window_active_window_state_changed, window);
+          if (GDK_IS_WAYLAND_DISPLAY (window->display))
+            g_signal_handlers_disconnect_by_func (window->xfw_active_window,
+                panel_window_active_window_monitors, window);
         }
 
       /* remember the new window */
@@ -3305,10 +3458,28 @@ panel_window_update_autohide_window (PanelWindow *window,
               G_CALLBACK (panel_window_active_window_geometry_changed), window);
           g_signal_connect (G_OBJECT (active_window), "state-changed",
               G_CALLBACK (panel_window_active_window_state_changed), window);
+          if (GDK_IS_WAYLAND_DISPLAY (window->display))
+            {
+              g_signal_connect (G_OBJECT (active_window), "notify::monitors",
+                  G_CALLBACK (panel_window_active_window_monitors), window);
 
-          /* simulate a geometry change for immediate hiding when the new active
-           * window already overlaps the panel */
-          panel_window_active_window_geometry_changed (active_window, window);
+              /* wait for panel position to be initialized */
+              if (window->base_x == -1 && window->base_y == -1)
+                g_idle_add (panel_window_active_window_monitors_idle, window);
+              else
+                panel_window_active_window_monitors (window->xfw_active_window, NULL, window);
+
+              /* stay connected even if the window is not active anymore, because
+               * closing it can impact intellihide on Wayland */
+              g_signal_handlers_disconnect_by_func (active_window,
+                  panel_window_xfw_window_closed, window);
+              g_signal_connect_object (G_OBJECT (active_window), "closed",
+                  G_CALLBACK (panel_window_xfw_window_closed), window, 0);
+            }
+          else
+            /* simulate a geometry change for immediate hiding when the new active
+             * window already overlaps the panel */
+            panel_window_active_window_geometry_changed (active_window, window);
         }
     }
 
