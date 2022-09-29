@@ -21,7 +21,7 @@
 #include <config.h>
 #endif
 
-#include <libwnck/libwnck.h>
+#include <libxfce4windowing/libxfce4windowing.h>
 #include <libxfce4util/libxfce4util.h>
 #include <common/panel-private.h>
 #include <common/panel-utils.h>
@@ -45,7 +45,8 @@ static void     show_desktop_plugin_toggled                 (GtkToggleButton    
 static gboolean show_desktop_plugin_button_release_event    (GtkToggleButton        *button,
                                                              GdkEventButton         *event,
                                                              ShowDesktopPlugin      *plugin);
-static void     show_desktop_plugin_showing_desktop_changed (WnckScreen             *wnck_screen,
+static void     show_desktop_plugin_show_desktop_changed    (XfwScreen              *xfw_screen,
+                                                             GParamSpec             *pspec,
                                                              ShowDesktopPlugin      *plugin);
 static void     show_desktop_plugin_drag_leave              (GtkWidget              *widget,
                                                              GdkDragContext         *context,
@@ -76,8 +77,8 @@ struct _ShowDesktopPlugin
   /* Dnd timeout */
   guint       drag_timeout;
 
-  /* the wnck screen */
-  WnckScreen *wnck_screen;
+  /* the xfw screen */
+  XfwScreen *xfw_screen;
 };
 
 
@@ -105,7 +106,7 @@ show_desktop_plugin_init (ShowDesktopPlugin *plugin)
 {
   GtkWidget *button;
 
-  plugin->wnck_screen = NULL;
+  plugin->xfw_screen = NULL;
 
   /* monitor screen changes */
   g_signal_connect (G_OBJECT (plugin), "screen-changed",
@@ -150,34 +151,38 @@ show_desktop_plugin_screen_changed (GtkWidget *widget,
                                     GdkScreen *previous_screen)
 {
   ShowDesktopPlugin *plugin = XFCE_SHOW_DESKTOP_PLUGIN (widget);
-  WnckScreen        *wnck_screen;
-  GdkScreen         *screen;
+  XfwScreen         *xfw_screen;
 
   panel_return_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (widget));
 
-  /* get the new wnck screen */
-  screen = gtk_widget_get_screen (widget);
-  wnck_screen = panel_wnck_screen_get (panel_screen_get_number (screen));
-  panel_return_if_fail (WNCK_IS_SCREEN (wnck_screen));
+  /* get the new xfw screen */
+  xfw_screen = xfw_screen_get_default ();
+  panel_return_if_fail (XFW_IS_SCREEN (xfw_screen));
 
-  /* leave when the wnck screen did not change */
-  if (plugin->wnck_screen == wnck_screen)
-    return;
+  /* leave when the xfw screen did not change */
+  if (plugin->xfw_screen == xfw_screen)
+    {
+      g_object_unref (xfw_screen);
+      return;
+    }
 
-  /* disconnect signals from an existing wnck screen */
-  if (plugin->wnck_screen != NULL)
-    g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->wnck_screen),
-        show_desktop_plugin_showing_desktop_changed, plugin);
+  /* disconnect signals from an existing xfw screen */
+  if (plugin->xfw_screen != NULL)
+    {
+      g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->xfw_screen),
+          show_desktop_plugin_show_desktop_changed, plugin);
+      g_object_unref (plugin->xfw_screen);
+    }
 
-  /* set the new wnck screen */
-  plugin->wnck_screen = wnck_screen;
-  g_signal_connect (G_OBJECT (wnck_screen), "showing-desktop-changed",
-      G_CALLBACK (show_desktop_plugin_showing_desktop_changed), plugin);
+  /* set the new xfw screen */
+  plugin->xfw_screen = xfw_screen;
+  g_signal_connect (G_OBJECT (xfw_screen), "notify::show-desktop",
+      G_CALLBACK (show_desktop_plugin_show_desktop_changed), plugin);
 
   /* toggle the button to the current state or update the tooltip */
   if (G_UNLIKELY (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button)) !=
-        wnck_screen_get_showing_desktop (wnck_screen)))
-    show_desktop_plugin_showing_desktop_changed (wnck_screen, plugin);
+        xfw_screen_get_show_desktop (xfw_screen)))
+    show_desktop_plugin_show_desktop_changed (xfw_screen, NULL, plugin);
   else
     show_desktop_plugin_toggled (GTK_TOGGLE_BUTTON (plugin->button), plugin);
 }
@@ -194,9 +199,12 @@ show_desktop_plugin_free_data (XfcePanelPlugin *panel_plugin)
      show_desktop_plugin_screen_changed, NULL);
 
   /* disconnect handle */
-  if (plugin->wnck_screen != NULL)
-    g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->wnck_screen),
-        show_desktop_plugin_showing_desktop_changed, plugin);
+  if (plugin->xfw_screen != NULL)
+    {
+      g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->xfw_screen),
+          show_desktop_plugin_show_desktop_changed, plugin);
+      g_object_unref (plugin->xfw_screen);
+    }
 }
 
 
@@ -230,12 +238,12 @@ show_desktop_plugin_toggled (GtkToggleButton   *button,
 
   panel_return_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (plugin));
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
-  panel_return_if_fail (WNCK_IS_SCREEN (plugin->wnck_screen));
+  panel_return_if_fail (XFW_IS_SCREEN (plugin->xfw_screen));
 
   /* toggle the desktop */
   active = gtk_toggle_button_get_active (button);
-  if (active != wnck_screen_get_showing_desktop (plugin->wnck_screen))
-    wnck_screen_toggle_showing_desktop (plugin->wnck_screen, active);
+  if (active != xfw_screen_get_show_desktop (plugin->xfw_screen))
+    xfw_screen_set_show_desktop (plugin->xfw_screen, active);
 
   if (active)
     text = _("Restore the minimized windows");
@@ -253,30 +261,36 @@ show_desktop_plugin_button_release_event (GtkToggleButton   *button,
                                           GdkEventButton    *event,
                                           ShowDesktopPlugin *plugin)
 {
-  WnckWorkspace *active_ws;
-  GList         *windows, *li;
-  WnckWindow    *window;
+  XfwWorkspaceManager *manager;
+  XfwWorkspace *active_ws;
+  GList        *windows, *li;
+  XfwWindow    *window;
 
   panel_return_val_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (plugin), FALSE);
-  panel_return_val_if_fail (WNCK_IS_SCREEN (plugin->wnck_screen), FALSE);
+  panel_return_val_if_fail (XFW_IS_SCREEN (plugin->xfw_screen), FALSE);
 
   if (event->button == 2)
     {
-      active_ws = wnck_screen_get_active_workspace (plugin->wnck_screen);
-      windows = wnck_screen_get_windows (plugin->wnck_screen);
+      manager = xfw_screen_get_workspace_manager (plugin->xfw_screen);
+      li = xfw_workspace_manager_list_workspace_groups (manager);
+      if (li == NULL)
+        return FALSE;
+
+      active_ws = xfw_workspace_group_get_active_workspace (li->data);
+      windows = xfw_screen_get_windows (plugin->xfw_screen);
 
       for (li = windows; li != NULL; li = li->next)
         {
-          window = WNCK_WINDOW (li->data);
+          window = XFW_WINDOW (li->data);
 
-          if (wnck_window_get_workspace (window) != active_ws)
+          if (xfw_window_get_workspace (window) != active_ws)
             continue;
 
           /* toggle the shade state */
-          if (wnck_window_is_shaded (window))
-            wnck_window_unshade (window);
+          if (xfw_window_is_shaded (window))
+            xfw_window_set_shaded (window, FALSE, NULL);
           else
-            wnck_window_shade (window);
+            xfw_window_set_shaded (window, TRUE, NULL);
         }
     }
 
@@ -286,16 +300,17 @@ show_desktop_plugin_button_release_event (GtkToggleButton   *button,
 
 
 static void
-show_desktop_plugin_showing_desktop_changed (WnckScreen        *wnck_screen,
-                                             ShowDesktopPlugin *plugin)
+show_desktop_plugin_show_desktop_changed (XfwScreen         *xfw_screen,
+                                          GParamSpec        *pspec,
+                                          ShowDesktopPlugin *plugin)
 {
   panel_return_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (plugin));
-  panel_return_if_fail (WNCK_IS_SCREEN (wnck_screen));
-  panel_return_if_fail (plugin->wnck_screen == wnck_screen);
+  panel_return_if_fail (XFW_IS_SCREEN (xfw_screen));
+  panel_return_if_fail (plugin->xfw_screen == xfw_screen);
 
   /* update button to user action */
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button),
-      wnck_screen_get_showing_desktop (wnck_screen));
+      xfw_screen_get_show_desktop (xfw_screen));
 }
 
 
