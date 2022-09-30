@@ -23,7 +23,15 @@
 #define __SYSTRAY_SOCKET_H__
 
 #include <gtk/gtk.h>
+#ifdef GDK_WINDOWING_X11
 #include <gtk/gtkx.h>
+#else
+typedef GtkWidget GtkSocket;
+typedef GtkWidgetClass GtkSocketClass;
+typedef gulong Window;
+typedef gulong Atom;
+#define GTK_TYPE_SOCKET GTK_TYPE_WIDGET
+#endif
 
 typedef struct _SystraySocketClass SystraySocketClass;
 typedef struct _SystraySocket      SystraySocket;
