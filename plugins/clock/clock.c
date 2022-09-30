@@ -677,7 +677,6 @@ clock_plugin_configure_plugin_mode_changed (GtkComboBox       *combo,
     { "show-military", "show-military", "active" },
     { "flash-separators", "flash-separators", "active" },
     { "show-meridiem", "show-meridiem", "active" },
-    { "digital-box", "digital-format", "text" },
     { "digital-box", "digital-layout", "active" },
     { "digital-box", "digital-date-format", "text" },
     { "digital-box", "digital-time-format", "text" },
@@ -701,15 +700,15 @@ clock_plugin_configure_plugin_mode_changed (GtkComboBox       *combo,
       break;
 
     case CLOCK_PLUGIN_MODE_BINARY:
-      active = 1 << 1 | 1 << 2 | 1 << 13 | 1 << 14;
+      active = 1 << 1 | 1 << 2 | 1 << 12 | 1 << 13;
       break;
 
     case CLOCK_PLUGIN_MODE_DIGITAL:
-      active = 1 << 6 | 1 << 7 | 1 << 8 | 1 << 9 | 1 << 10 | 1 << 11;
+      active = 1 << 6 | 1 << 7 | 1 << 8 | 1 << 9 | 1 << 10;
       break;
 
     case CLOCK_PLUGIN_MODE_FUZZY:
-      active = 1 << 12;
+      active = 1 << 11;
       break;
 
     case CLOCK_PLUGIN_MODE_LCD:
@@ -1211,7 +1210,7 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 static void
 clock_plugin_set_mode (ClockPlugin *plugin)
 {
-  const PanelProperty properties[][7] =
+  const PanelProperty properties[][6] =
   {
     { /* analog */
       { "show-seconds", G_TYPE_BOOLEAN },
@@ -1225,7 +1224,6 @@ clock_plugin_set_mode (ClockPlugin *plugin)
       { NULL },
     },
     { /* digital */
-      { "digital-format", G_TYPE_STRING },
       { "digital-layout", G_TYPE_UINT },
       { "digital-time-format", G_TYPE_STRING },
       { "digital-date-format", G_TYPE_STRING },
