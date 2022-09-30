@@ -1313,8 +1313,6 @@ clock_plugin_calendar_show_event (GtkWidget   *calendar_window,
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
 
-  clock_plugin_reposition_calendar (plugin);
-
   time = clock_time_get_time (plugin->time);
   gtk_calendar_select_month (GTK_CALENDAR (plugin->calendar), g_date_time_get_month (time) - 1,
                              g_date_time_get_year (time));
@@ -1481,6 +1479,7 @@ clock_plugin_popup_calendar (ClockPlugin *plugin)
       gtk_widget_show (plugin->calendar);
     }
 
+  clock_plugin_reposition_calendar (plugin);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button), TRUE);
   gtk_widget_show (GTK_WIDGET (plugin->calendar_window));
   xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), TRUE);
