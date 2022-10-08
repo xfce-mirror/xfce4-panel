@@ -240,9 +240,6 @@ struct _XfceTasklistChild
    * simply increased for each new button */
   guint                   unique_id;
 
-  /* delay sorting so as not to change window list if it is in use */
-  guint                   sort_idle_id;
-
   /* last time this window was focused */
   gint64                  last_focused;
 
@@ -4285,22 +4282,6 @@ xfce_tasklist_group_button_remove (XfceTasklistChild *group_child)
   /* destroy the button, this will free the remaining child
    * data in the container remove function */
   gtk_widget_destroy (group_child->button);
-
-  if (group_child->sort_idle_id != 0)
-    g_source_remove (group_child->sort_idle_id);
-}
-
-
-
-static gboolean
-xfce_tasklist_group_button_name_changed_idle (gpointer data)
-{
-  XfceTasklistChild *group_child = data;
-
-  xfce_tasklist_group_button_name_changed (group_child->class_group, group_child);
-  group_child->sort_idle_id = 0;
-
-  return FALSE;
 }
 
 
@@ -4384,9 +4365,7 @@ xfce_tasklist_group_button_child_visible_changed (XfceTasklistChild *group_child
         child->type = type;
     }
 
-  if (group_child->sort_idle_id == 0)
-    group_child->sort_idle_id =
-      g_idle_add (xfce_tasklist_group_button_name_changed_idle, group_child);
+  xfce_tasklist_group_button_name_changed (group_child->class_group, group_child);
 }
 
 
