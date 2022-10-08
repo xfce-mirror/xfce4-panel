@@ -1775,7 +1775,7 @@ xfce_tasklist_active_workspace_changed (WnckScreen    *screen,
                                         WnckWorkspace *previous_workspace,
                                         XfceTasklist  *tasklist)
 {
-  GList             *li;
+  GList             *windows, *li;
   WnckWorkspace     *active_ws;
   XfceTasklistChild *child;
 
@@ -1792,9 +1792,12 @@ xfce_tasklist_active_workspace_changed (WnckScreen    *screen,
           && tasklist->all_workspaces))
     return;
 
-  /* walk all the children and update their visibility */
+  /* walk all the children and update their visibility: make a copy of the window list
+   * here because changing the buttons visibility can change the group buttons visibility,
+   * which in turn can change the list order */
   active_ws = wnck_screen_get_active_workspace (screen);
-  for (li = tasklist->windows; li != NULL; li = li->next)
+  windows = g_list_copy (tasklist->windows);
+  for (li = windows; li != NULL; li = li->next)
     {
       child = li->data;
 
@@ -1806,6 +1809,7 @@ xfce_tasklist_active_workspace_changed (WnckScreen    *screen,
             gtk_widget_hide (child->button);
         }
     }
+  g_list_free (windows);
 }
 
 
