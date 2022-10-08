@@ -4292,19 +4292,6 @@ xfce_tasklist_group_button_remove (XfceTasklistChild *group_child)
 
 
 
-static gboolean
-xfce_tasklist_group_button_name_changed_idle (gpointer data)
-{
-  XfceTasklistChild *group_child = data;
-
-  xfce_tasklist_group_button_name_changed (group_child->class_group, group_child);
-  group_child->sort_idle_id = 0;
-
-  return FALSE;
-}
-
-
-
 static void
 xfce_tasklist_group_button_keep_dnd_position (XfceTasklistChild *group_child,
                                               XfceTasklistChild *sibling,
@@ -4323,18 +4310,18 @@ xfce_tasklist_group_button_keep_dnd_position (XfceTasklistChild *group_child,
 
 
 
-static void
-xfce_tasklist_group_button_child_visible_changed (XfceTasklistChild *group_child)
+static gboolean
+xfce_tasklist_group_button_child_visible_changed_idle (gpointer data)
 {
-  XfceTasklistChild    *child;
+  XfceTasklistChild    *group_child = data, *child;
   GSList               *li;
   gint                  visible_counter = 0;
   XfceTasklistChildType type;
 
-  panel_return_if_fail (group_child->type == CHILD_TYPE_GROUP);
-  panel_return_if_fail (WNCK_IS_CLASS_GROUP (group_child->class_group));
-  panel_return_if_fail (XFCE_IS_TASKLIST (group_child->tasklist));
-  panel_return_if_fail (group_child->tasklist->grouping);
+  panel_return_val_if_fail (group_child->type == CHILD_TYPE_GROUP, FALSE);
+  panel_return_val_if_fail (WNCK_IS_CLASS_GROUP (group_child->class_group), FALSE);
+  panel_return_val_if_fail (XFCE_IS_TASKLIST (group_child->tasklist), FALSE);
+  panel_return_val_if_fail (group_child->tasklist->grouping, FALSE);
 
   /* the group id is defined below as that of the last added window */
   group_child->unique_id = 0;
@@ -4384,9 +4371,20 @@ xfce_tasklist_group_button_child_visible_changed (XfceTasklistChild *group_child
         child->type = type;
     }
 
+  xfce_tasklist_group_button_name_changed (group_child->class_group, group_child);
+  group_child->sort_idle_id = 0;
+
+  return FALSE;
+}
+
+
+
+static void
+xfce_tasklist_group_button_child_visible_changed (XfceTasklistChild *group_child)
+{
   if (group_child->sort_idle_id == 0)
     group_child->sort_idle_id =
-      g_idle_add (xfce_tasklist_group_button_name_changed_idle, group_child);
+      g_idle_add (xfce_tasklist_group_button_child_visible_changed_idle, group_child);
 }
 
 
