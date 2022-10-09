@@ -3895,7 +3895,7 @@ static void
 xfce_tasklist_group_button_menu_destroy (GtkWidget         *menu,
                                          XfceTasklistChild *group_child)
 {
-  GList *lp;
+  GSList *lp;
 
   panel_return_if_fail (XFCE_IS_TASKLIST (group_child->tasklist));
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (group_child->button));
