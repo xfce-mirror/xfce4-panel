@@ -3128,7 +3128,8 @@ xfce_tasklist_button_menu_destroy (GtkWidget         *menu,
   panel_return_if_fail (GTK_IS_WIDGET (menu));
 
   gtk_widget_destroy (menu);
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (child->button), FALSE);
+  if (! wnck_window_is_active (child->window))
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (child->button), FALSE);
 }
 
 
@@ -3894,12 +3895,23 @@ static void
 xfce_tasklist_group_button_menu_destroy (GtkWidget         *menu,
                                          XfceTasklistChild *group_child)
 {
+  GList *lp;
+
   panel_return_if_fail (XFCE_IS_TASKLIST (group_child->tasklist));
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (group_child->button));
   panel_return_if_fail (GTK_IS_WIDGET (menu));
 
   gtk_widget_destroy (menu);
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (group_child->button), FALSE);
+
+  /* restore button state if inactive */
+  for (lp = group_child->windows; lp != NULL; lp = lp->next)
+    {
+      XfceTasklistChild *child = lp->data;
+      if (wnck_window_is_active (child->window))
+        break;
+    }
+  if (lp == NULL)
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (group_child->button), FALSE);
 
 #ifdef GDK_WINDOWING_X11
   /* make sure the wireframe is hidden */
