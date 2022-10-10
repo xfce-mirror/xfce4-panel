@@ -594,7 +594,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
     }
   else
     {
-      plugin->pager = pager_buttons_new (wnck_screen_get_default ());
+      plugin->pager = pager_buttons_new (plugin->xfw_screen);
       pager_buttons_set_n_rows (XFCE_PAGER_BUTTONS (plugin->pager), plugin->rows);
       pager_buttons_set_orientation (XFCE_PAGER_BUTTONS (plugin->pager), orientation);
       pager_buttons_set_numbering (XFCE_PAGER_BUTTONS (plugin->pager), plugin->numbering);
