@@ -338,12 +338,9 @@ panel_module_new_from_desktop_file (const gchar *filename,
   /* read module location from the desktop file */
   module_name = xfce_rc_read_entry_untranslated (rc, "X-XFCE-Module", NULL);
   if (G_LIKELY (module_name != NULL) && (
-        GDK_IS_X11_DISPLAY (gdk_display_get_default ()) || (
-          /* Wayland-incompatible embedded plugins */
-          g_strstr_len ("pager", -1, module_name) == NULL
-          /* Wayland-incompatible non-embedded plugins */
-          && g_strstr_len ("clipman docklike embed statusnotifier wckmenu xkb", -1, module_name) == NULL
-        )
+        GDK_IS_X11_DISPLAY (gdk_display_get_default ())
+        /* Wayland-incompatible non-embedded plugins */
+        || g_strstr_len ("clipman docklike embed statusnotifier wckmenu xkb", -1, module_name) == NULL
       ))
     {
 #ifndef NDEBUG
