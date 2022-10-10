@@ -143,16 +143,6 @@ G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 G_GNUC_END_IGNORE_DEPRECATIONS
 }
 
-#ifdef WNCK_TYPE_SCREEN
-static inline WnckScreen *
-panel_wnck_screen_get (int index)
-{
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  return wnck_screen_get (index);
-G_GNUC_END_IGNORE_DEPRECATIONS
-}
-#endif
-
 /* facilitate X11/Wayland management */
 #ifndef GDK_WINDOWING_X11
 #define GDK_IS_X11_DISPLAY(display) FALSE
