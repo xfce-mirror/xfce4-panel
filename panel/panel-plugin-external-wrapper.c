@@ -32,7 +32,6 @@
 #endif
 
 #include <gdk/gdk.h>
-#include <gdk/gdkx.h>
 #include <libxfce4util/libxfce4util.h>
 
 #include <common/panel-private.h>
