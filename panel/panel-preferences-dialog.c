@@ -210,6 +210,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   panel_application_windows_blocked (dialog->application, TRUE);
 
   /* load the builder data into the object */
+  gtk_builder_set_translation_domain (GTK_BUILDER (dialog), GETTEXT_PACKAGE);
   gtk_builder_add_from_string (GTK_BUILDER (dialog), panel_preferences_dialog_ui,
                                panel_preferences_dialog_ui_length, NULL);
 
