@@ -349,8 +349,8 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
   systray_plugin_screen_changed (GTK_WIDGET (plugin), NULL);
 
   /* restart internally if compositing changed */
-  g_signal_connect_swapped (gdk_screen_get_default (), "composited-changed",
-     G_CALLBACK (systray_plugin_composited_changed), plugin);
+  g_signal_connect_object (gdk_screen_get_default (), "composited-changed",
+     G_CALLBACK (systray_plugin_composited_changed), plugin, G_CONNECT_SWAPPED);
 
   /* Add statusnotifier box */
   plugin->sn_box = sn_box_new (plugin->config);
