@@ -28,12 +28,13 @@
 #include <string.h>
 #endif
 
+#include <gdk/gdk.h>
+#include <gtk/gtk.h>
+
+#ifdef GDK_WINDOWING_X11
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
-
-#include <gdk/gdk.h>
-#include <gdk/gdkx.h>
-#include <gtk/gtk.h>
+#endif
 
 #include <common/panel-private.h>
 #include <common/panel-debug.h>
@@ -56,6 +57,7 @@
 
 
 
+#ifdef GDK_WINDOWING_X11
 static void            systray_manager_finalize                           (GObject             *object);
 static void            systray_manager_remove_socket                      (gpointer             key,
                                                                            gpointer             value,
@@ -82,6 +84,7 @@ static void            systray_manager_set_colors_property                (Systr
 static void            systray_manager_message_free                       (SystrayMessage      *message);
 static void            systray_manager_message_remove_from_list           (SystrayManager      *manager,
                                                                            XClientMessageEvent *xevent);
+#endif
 
 
 
@@ -162,10 +165,12 @@ XFCE_PANEL_DEFINE_TYPE (SystrayManager, systray_manager, G_TYPE_OBJECT)
 static void
 systray_manager_class_init (SystrayManagerClass *klass)
 {
+#ifdef GDK_WINDOWING_X11
   GObjectClass *gobject_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = systray_manager_finalize;
+#endif
 
   systray_manager_signals[ICON_ADDED] =
       g_signal_new (g_intern_static_string ("icon-added"),
@@ -245,6 +250,8 @@ systray_manager_init (SystrayManager *manager)
 }
 
 
+
+#ifdef GDK_WINDOWING_X11
 
 GQuark
 systray_manager_error_quark (void)
@@ -928,3 +935,21 @@ systray_manager_message_remove_from_list (SystrayManager      *manager,
         }
     }
 }
+
+#else /* ! GDK_WINDOWING_X11 */
+
+GQuark          systray_manager_error_quark          (void)                       { return 0; }
+SystrayManager *systray_manager_new                  (void)                       { return NULL; }
+gboolean        systray_manager_register             (SystrayManager *manager,
+                                                      GdkScreen      *screen,
+                                                      GError         **error)     { return FALSE; }
+void            systray_manager_unregister           (SystrayManager *manager)    {}
+void            systray_manager_set_colors           (SystrayManager *manager,
+                                                      GdkRGBA        *fg,
+                                                      GdkRGBA        *error,
+                                                      GdkRGBA        *warning,
+                                                      GdkRGBA        *success)    {}
+void            systray_manager_set_orientation      (SystrayManager *manager,
+                                                      GtkOrientation orientation) {}
+
+#endif
