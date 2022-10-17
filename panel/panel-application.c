@@ -54,7 +54,6 @@
 
 #define AUTOSAVE_INTERVAL   (10 * 60)
 #define MIGRATE_BIN         HELPERDIR G_DIR_SEPARATOR_S "migrate"
-#define PANELS_PROPERTY_BASE "/panels"
 
 
 
@@ -333,7 +332,7 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
   panel_return_if_fail (XFCONF_IS_CHANNEL (application->xfconf));
 
   /* create the property base */
-  property_base = g_strdup_printf ("%s/panel-%d", PANELS_PROPERTY_BASE, panel_window_get_id (window));
+  property_base = g_strdup_printf (PANELS_PROPERTY_BASE, panel_window_get_id (window));
 
   /* migrate old autohide property */
   panel_window_migrate_autohide_property (window, application->xfconf, property_base);
@@ -342,7 +341,7 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
   panel_properties_bind (application->xfconf, G_OBJECT (window),
                          property_base, properties, save_properties);
   panel_properties_bind (application->xfconf, G_OBJECT (window),
-                         PANELS_PROPERTY_BASE, global_properties, save_properties);
+                         PANELS_PROPERTY_PREFIX, global_properties, save_properties);
 
   /* set locking for this panel */
   panel_window_set_locked (window,
@@ -377,7 +376,7 @@ panel_application_load_real (PanelApplication *application)
 
   display = gdk_display_get_default ();
 
-  if (xfconf_channel_get_property (application->xfconf, "/panels", &val)
+  if (xfconf_channel_get_property (application->xfconf, PANELS_PROPERTY_PREFIX, &val)
       && (G_VALUE_HOLDS_UINT (&val)
           || G_VALUE_HOLDS (&val, G_TYPE_PTR_ARRAY)))
     {
@@ -412,7 +411,7 @@ panel_application_load_real (PanelApplication *application)
             }
 
           /* start the panel directly on the correct screen */
-          g_snprintf (buf, sizeof (buf), "/panels/panel-%d/output-name", panel_id);
+          g_snprintf (buf, sizeof (buf), PANELS_PROPERTY_BASE "/output-name", panel_id);
           output_name = xfconf_channel_get_string (application->xfconf, buf, NULL);
           if (output_name != NULL
               && strncmp (output_name, "screen-", 7) == 0
@@ -427,7 +426,7 @@ panel_application_load_real (PanelApplication *application)
           window = panel_application_new_window (application, screen, panel_id, FALSE);
 
           /* walk all the plugins on the panel */
-          g_snprintf (buf, sizeof (buf), "/panels/panel-%d/plugin-ids", panel_id);
+          g_snprintf (buf, sizeof (buf), PLUGIN_IDS_PROPERTY_BASE, panel_id);
           array = xfconf_channel_get_arrayv (application->xfconf, buf);
           if (array == NULL)
             continue;
@@ -440,7 +439,7 @@ panel_application_load_real (PanelApplication *application)
               unique_id = g_value_get_int (value);
 
               /* get the plugin name */
-              g_snprintf (buf, sizeof (buf), "/plugins/plugin-%d", unique_id);
+              g_snprintf (buf, sizeof (buf), PLUGINS_PROPERTY_BASE, unique_id);
               name = xfconf_channel_get_string (application->xfconf, buf, NULL);
 
               /* append the plugin to the panel */
@@ -630,7 +629,7 @@ panel_application_plugin_delete_config (PanelApplication *application,
   panel_return_if_fail (unique_id != -1);
 
   /* remove the xfconf property */
-  property = g_strdup_printf (PANEL_PLUGIN_PROPERTY_BASE, unique_id);
+  property = g_strdup_printf (PLUGINS_PROPERTY_BASE, unique_id);
   if (xfconf_channel_has_property (application->xfconf, property))
     xfconf_channel_reset_property (application->xfconf, property, TRUE);
   g_free (property);
@@ -1278,7 +1277,7 @@ panel_application_save (PanelApplication *application,
   panel_return_if_fail (XFCONF_IS_CHANNEL (channel));
 
   /* leave if the whole application is locked */
-  if (xfconf_channel_is_property_locked (channel, "/panels"))
+  if (xfconf_channel_is_property_locked (channel, PANELS_PROPERTY_PREFIX))
     return;
 
   if (PANEL_HAS_FLAG (save_types, SAVE_PANEL_IDS))
@@ -1303,7 +1302,7 @@ panel_application_save (PanelApplication *application,
   if (panels != NULL)
     {
       /* store the panel ids */
-      if (!xfconf_channel_set_arrayv (channel, "/panels", panels))
+      if (!xfconf_channel_set_arrayv (channel, PANELS_PROPERTY_PREFIX, panels))
         g_warning ("Failed to store the number of panels");
       xfconf_array_free (panels);
     }
@@ -1336,7 +1335,7 @@ panel_application_save_window (PanelApplication *application,
 
   panel_id = panel_window_get_id (window);
   panel_debug (PANEL_DEBUG_APPLICATION,
-               "saving /panels/panel-%d: ids=%s, providers=%s",
+               "saving " PANELS_PROPERTY_BASE ": ids=%s, providers=%s",
                panel_id,
                PANEL_DEBUG_BOOL (PANEL_HAS_FLAG (save_types, SAVE_PLUGIN_IDS)),
                PANEL_DEBUG_BOOL (PANEL_HAS_FLAG (save_types, SAVE_PLUGIN_PROVIDERS)));
@@ -1350,7 +1349,7 @@ panel_application_save_window (PanelApplication *application,
     {
       if (G_UNLIKELY (children == NULL))
         {
-          g_snprintf (buf, sizeof (buf), "/panels/panel-%d/plugin-ids", panel_id);
+          g_snprintf (buf, sizeof (buf), PLUGIN_IDS_PROPERTY_BASE, panel_id);
           if (xfconf_channel_has_property (channel, buf))
             xfconf_channel_reset_property (channel, buf, FALSE);
           return;
@@ -1375,7 +1374,7 @@ panel_application_save_window (PanelApplication *application,
           g_ptr_array_add (array, value);
 
           /* make sure the plugin type-name is store in the plugin item */
-          g_snprintf (buf, sizeof (buf), "/plugins/plugin-%d", plugin_id);
+          g_snprintf (buf, sizeof (buf), PLUGINS_PROPERTY_BASE, plugin_id);
           xfconf_channel_set_string (channel, buf, xfce_panel_plugin_provider_get_name (provider));
         }
 
@@ -1387,7 +1386,7 @@ panel_application_save_window (PanelApplication *application,
   if (array != NULL)
     {
       /* store the plugin ids for this panel */
-      g_snprintf (buf, sizeof (buf), "/panels/panel-%d/plugin-ids", panel_id);
+      g_snprintf (buf, sizeof (buf), PLUGIN_IDS_PROPERTY_BASE, panel_id);
       xfconf_channel_set_arrayv (channel, buf, array);
       xfconf_array_free (array);
     }
@@ -1543,7 +1542,7 @@ panel_application_new_window (PanelApplication *application,
   if (new_window)
     {
       /* remove the old xfconf properties to be sure */
-      property = g_strdup_printf ("/panels/panel-%d", panel_id);
+      property = g_strdup_printf (PANELS_PROPERTY_BASE, panel_id);
       xfconf_channel_reset_property (application->xfconf, property, TRUE);
       g_free (property);
     }
@@ -1633,7 +1632,7 @@ panel_application_remove_window (PanelApplication *application,
   gtk_widget_destroy (GTK_WIDGET (window));
 
   /* remove the panel settings */
-  property = g_strdup_printf ("/panels/panel-%d", panel_id);
+  property = g_strdup_printf (PANELS_PROPERTY_BASE, panel_id);
   xfconf_channel_reset_property (application->xfconf, property, TRUE);
   g_free (property);
 

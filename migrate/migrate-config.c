@@ -180,7 +180,7 @@ migrate_config (XfconfChannel  *channel,
   gchar       buf[50];
   gboolean    horizontal;
 
-  plugins = xfconf_channel_get_properties (channel, "/plugins");
+  plugins = xfconf_channel_get_properties (channel, PLUGINS_PROPERTY_PREFIX);
 
   /* migrate plugins to the new actions plugin */
   if (configver < 1)
@@ -195,16 +195,16 @@ migrate_config (XfconfChannel  *channel,
   /* migrate horizontal to mode property */
   if (configver < 2)
     {
-      n_panels = xfconf_channel_get_uint (channel, "/panels", 0);
+      n_panels = xfconf_channel_get_uint (channel, PANELS_PROPERTY_PREFIX, 0);
       for (n = 0; n < n_panels; n++)
         {
           /* read and remove old property */
-          g_snprintf (buf, sizeof (buf), "/panels/panel-%u/horizontal", n);
+          g_snprintf (buf, sizeof (buf), PANELS_PROPERTY_BASE "/horizontal", n);
           horizontal = xfconf_channel_get_bool (channel, buf, TRUE);
           xfconf_channel_reset_property (channel, buf, FALSE);
 
           /* set new mode */
-          g_snprintf (buf, sizeof (buf), "/panels/panel-%u/mode", n);
+          g_snprintf (buf, sizeof (buf), PANELS_PROPERTY_BASE "/mode", n);
           xfconf_channel_set_uint (channel, buf, horizontal ? 0 : 1);
         }
     }
