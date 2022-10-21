@@ -845,6 +845,45 @@ clock_plugin_validate_entry_tz (GtkEditable *entry,
 
 
 
+static gboolean
+clock_plugin_tz_match_func (GtkEntryCompletion *completion,
+                            const gchar *key,
+                            GtkTreeIter *iter,
+                            gpointer user_data)
+{
+  gchar *item = NULL;
+  gchar *normalized_string;
+  gchar *case_normalized_string;
+  GtkTreeModel *model;
+
+  gboolean ret = FALSE;
+
+  model = gtk_entry_completion_get_model (completion);
+
+  gtk_tree_model_get (model, iter, 0, &item, -1);
+
+  if (item != NULL)
+    {
+      normalized_string = g_utf8_normalize (item, -1, G_NORMALIZE_ALL);
+
+      if (normalized_string != NULL)
+        {
+          case_normalized_string = g_utf8_casefold (normalized_string, -1);
+
+          if (strstr (case_normalized_string, key))
+            ret = TRUE;
+
+          g_free (case_normalized_string);
+        }
+      g_free (normalized_string);
+    }
+  g_free (item);
+
+  return ret;
+}
+
+
+
 static void
 clock_plugin_configure_plugin_chooser_fill (ClockPlugin *plugin,
                                             GtkComboBox *combo,
@@ -1031,6 +1070,7 @@ clock_plugin_configure_zoneinfo_model (gpointer data)
 
   completion = gtk_entry_completion_new ();
   gtk_entry_completion_set_model (completion, GTK_TREE_MODEL (store));
+  gtk_entry_completion_set_match_func (completion, clock_plugin_tz_match_func, NULL, NULL);
   g_object_unref (G_OBJECT (store));
 
   gtk_entry_set_completion (GTK_ENTRY (object), completion);
