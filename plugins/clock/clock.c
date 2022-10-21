@@ -51,7 +51,7 @@
 
 /* Use the posix directory for the names. If people want a time based on posix or
  * right time, they can prepend that manually in the entry */
-#define ZONEINFO_DIR "/usr/share/zoneinfo/posix/"
+#define ZONEINFO_DIR "/usr/share/zoneinfo/"
 
 
 
