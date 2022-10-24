@@ -1088,6 +1088,9 @@ clock_plugin_configure_zoneinfo_model_insert (GtkListStore *store,
 
   panel_return_if_fail (GTK_IS_LIST_STORE (store));
 
+  if (g_str_has_suffix (parent, "posix") || g_str_has_suffix (parent, "right"))
+    return;
+
   dir = g_dir_open (parent, 0, NULL);
   if (dir == NULL)
     return;
