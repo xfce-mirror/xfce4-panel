@@ -1077,7 +1077,7 @@ panel_window_motion_notify_event (GtkWidget      *widget,
   gboolean      retval = TRUE;
 
   /* leave when the pointer is not grabbed */
-  if (G_UNLIKELY (window->grab_time == 0))
+  if (G_LIKELY (window->grab_time == 0))
     return FALSE;
 
   /* get the pointer position from the event */
