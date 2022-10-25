@@ -1154,7 +1154,7 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
               display_name = g_file_info_get_display_name (info);
               if (G_LIKELY (display_name != NULL))
                 for (li = plugin->patterns; !visible && li != NULL; li = li->next)
-                   if (g_pattern_match_string (li->data, display_name))
+                   if (g_pattern_spec_match_string (li->data, display_name))
                      visible = TRUE;
 
               if (!visible)
