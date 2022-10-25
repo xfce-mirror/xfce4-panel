@@ -60,14 +60,8 @@ static void         panel_plugin_external_set_property            (GObject      
                                                                    guint                             prop_id,
                                                                    const GValue                     *value,
                                                                    GParamSpec                       *pspec);
-static void         panel_plugin_external_size_allocate           (GtkWidget                        *widget,
-                                                                   GtkAllocation                    *allocation);
 static void         panel_plugin_external_realize                 (GtkWidget                        *widget);
 static void         panel_plugin_external_unrealize               (GtkWidget                        *widget);
-#ifdef GDK_WINDOWING_X11
-static void         panel_plugin_external_plug_added              (GtkSocket                        *socket);
-static gboolean     panel_plugin_external_plug_removed            (GtkSocket                        *socket);
-#endif
 static gboolean     panel_plugin_external_child_ask_restart       (PanelPluginExternal              *external);
 static void         panel_plugin_external_child_spawn             (PanelPluginExternal              *external);
 static void         panel_plugin_external_child_respawn_schedule  (PanelPluginExternal              *external);
@@ -77,11 +71,6 @@ static void         panel_plugin_external_child_watch             (GPid         
 static void         panel_plugin_external_child_watch_destroyed   (gpointer                          user_data);
 static void         panel_plugin_external_queue_free              (PanelPluginExternal              *external);
 static void         panel_plugin_external_queue_send_to_child     (PanelPluginExternal              *external);
-static void         panel_plugin_external_queue_add               (PanelPluginExternal              *external,
-                                                                   XfcePanelPluginProviderPropType   type,
-                                                                   const GValue                     *value);
-static void         panel_plugin_external_queue_add_action        (PanelPluginExternal              *external,
-                                                                   XfcePanelPluginProviderPropType   type);
 static const gchar *panel_plugin_external_get_name                (XfcePanelPluginProvider          *provider);
 static gint         panel_plugin_external_get_unique_id           (XfcePanelPluginProvider          *provider);
 static void         panel_plugin_external_set_size                (XfcePanelPluginProvider          *provider,
@@ -132,12 +121,7 @@ struct _PanelPluginExternalPrivate
 
   /* delayed spawning */
   guint       spawn_timeout_id;
-
-  /* silence allocation warnings */
-  guint       resize_timeout_id;
 };
-
-gulong global_resize_timeout_id = 0;
 
 enum
 {
@@ -149,7 +133,7 @@ enum
 
 
 
-G_DEFINE_ABSTRACT_TYPE_WITH_CODE (PanelPluginExternal, panel_plugin_external, GTK_TYPE_SOCKET,
+G_DEFINE_ABSTRACT_TYPE_WITH_CODE (PanelPluginExternal, panel_plugin_external, GTK_TYPE_BOX,
                                   G_ADD_PRIVATE (PanelPluginExternal)
                                   G_IMPLEMENT_INTERFACE (XFCE_TYPE_PANEL_PLUGIN_PROVIDER,
                                                          panel_plugin_external_provider_init))
@@ -161,9 +145,6 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
 {
   GObjectClass   *gobject_class;
   GtkWidgetClass *gtkwidget_class;
-#ifdef GDK_WINDOWING_X11
-  GtkSocketClass *gtksocket_class;
-#endif
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = panel_plugin_external_finalize;
@@ -171,15 +152,8 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
   gobject_class->get_property = panel_plugin_external_get_property;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
-  gtkwidget_class->size_allocate = panel_plugin_external_size_allocate;
   gtkwidget_class->realize = panel_plugin_external_realize;
   gtkwidget_class->unrealize = panel_plugin_external_unrealize;
-
-#ifdef GDK_WINDOWING_X11
-  gtksocket_class = GTK_SOCKET_CLASS (klass);
-  gtksocket_class->plug_added = panel_plugin_external_plug_added;
-  gtksocket_class->plug_removed = panel_plugin_external_plug_removed;
-#endif
 
   g_object_class_install_property (gobject_class,
                                    PROP_UNIQUE_ID,
@@ -224,7 +198,6 @@ panel_plugin_external_init (PanelPluginExternal *external)
   external->priv->embedded = FALSE;
   external->priv->pid = 0;
   external->priv->spawn_timeout_id = 0;
-  external->priv->resize_timeout_id = 0;
 
   /* signal to pass gtk_widget_set_sensitive() changes to the remote window */
   g_signal_connect (G_OBJECT (external), "notify::sensitive",
@@ -269,12 +242,6 @@ panel_plugin_external_finalize (GObject *object)
 
   if (external->priv->spawn_timeout_id != 0)
     g_source_remove (external->priv->spawn_timeout_id);
-
-  if (external->priv->resize_timeout_id != 0)
-    {
-      g_source_remove (external->priv->resize_timeout_id);
-      global_resize_timeout_id -= external->priv->resize_timeout_id;
-    }
 
   if (external->priv->watch_id != 0)
     {
@@ -362,66 +329,11 @@ panel_plugin_external_set_property (GObject      *object,
 
 
 static void
-panel_plugin_external_queue_resize (GtkWidget *widget,
-                                    gpointer   data)
-{
-  if (PANEL_IS_PLUGIN_EXTERNAL (data))
-    gtk_widget_queue_resize (data);
-}
-
-
-
-static gboolean
-panel_plugin_external_queue_resize_timeout (gpointer data)
-{
-  PanelPluginExternal *external = data;
-
-  if (! gdk_window_is_visible (gtk_socket_get_plug_window (data)))
-    return TRUE;
-
-  global_resize_timeout_id -= external->priv->resize_timeout_id;
-  external->priv->resize_timeout_id = 0;
-  if (global_resize_timeout_id == 0)
-    gtk_container_foreach (GTK_CONTAINER (gtk_widget_get_parent (data)),
-                           panel_plugin_external_queue_resize, data);
-
-  return FALSE;
-}
-
-
-
-static void
-panel_plugin_external_size_allocate (GtkWidget     *widget,
-                                     GtkAllocation *allocation)
-{
-  PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (widget);
-
-  if (global_resize_timeout_id != 0)
-    {
-      if (external->priv->resize_timeout_id != 0)
-        {
-          global_resize_timeout_id -= external->priv->resize_timeout_id;
-          g_source_remove (external->priv->resize_timeout_id);
-          external->priv->resize_timeout_id =
-            g_timeout_add_seconds (1, panel_plugin_external_queue_resize_timeout, external);
-          global_resize_timeout_id += external->priv->resize_timeout_id;
-        }
-
-      allocation->width = MAX (allocation->width, 16);
-      allocation->height = MAX (allocation->height, 16);
-    }
-
-  GTK_WIDGET_CLASS (panel_plugin_external_parent_class)->size_allocate (widget, allocation);
-}
-
-
-
-static void
 panel_plugin_external_realize (GtkWidget *widget)
 {
   PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (widget);
 
-  /* realize the socket first */
+  /* realize the widget first */
   (*GTK_WIDGET_CLASS (panel_plugin_external_parent_class)->realize) (widget);
 
   if (external->priv->pid == 0)
@@ -463,47 +375,6 @@ panel_plugin_external_unrealize (GtkWidget *widget)
 
   (*GTK_WIDGET_CLASS (panel_plugin_external_parent_class)->unrealize) (widget);
 }
-
-
-
-#ifdef GDK_WINDOWING_X11
-static void
-panel_plugin_external_plug_added (GtkSocket *socket)
-{
-  PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (socket);
-
-  external->priv->embedded = TRUE;
-  external->priv->resize_timeout_id =
-    g_timeout_add_seconds (1, panel_plugin_external_queue_resize_timeout, external);
-  global_resize_timeout_id += external->priv->resize_timeout_id;
-
-  panel_debug (PANEL_DEBUG_EXTERNAL,
-               "%s-%d: child is embedded; %d properties in queue",
-               panel_module_get_name (external->module),
-               external->unique_id,
-               g_slist_length (external->priv->queue));
-
-  /* send queue to wrapper */
-  panel_plugin_external_queue_send_to_child (external);
-}
-
-
-
-static gboolean
-panel_plugin_external_plug_removed (GtkSocket *socket)
-{
-  PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (socket);
-
-  external->priv->embedded = FALSE;
-
-  panel_debug (PANEL_DEBUG_EXTERNAL,
-               "%s-%d: child is unembedded",
-               panel_module_get_name (external->module),
-               external->unique_id);
-
-  return TRUE;
-}
-#endif
 
 
 
@@ -805,7 +676,7 @@ panel_plugin_external_child_watch (GPid     pid,
 
   /* reset the pid, it can't be embedded as well */
   external->priv->pid = 0;
-  external->priv->embedded = FALSE;
+  panel_plugin_external_set_embedded (external, FALSE);
 
   panel_debug (PANEL_DEBUG_EXTERNAL,
                "%s-%d: child exited with status %d",
@@ -911,45 +782,6 @@ panel_plugin_external_queue_send_to_child (PanelPluginExternal *external)
 
       panel_plugin_external_queue_free (external);
     }
-}
-
-
-
-static void
-panel_plugin_external_queue_add (PanelPluginExternal             *external,
-                                 XfcePanelPluginProviderPropType  type,
-                                 const GValue                    *value)
-{
-  PluginProperty *prop;
-
-  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
-  panel_return_if_fail (G_TYPE_CHECK_VALUE (value));
-
-  prop = g_slice_new0 (PluginProperty);
-  prop->type = type;
-  g_value_init (&prop->value, G_VALUE_TYPE (value));
-  g_value_copy (value, &prop->value);
-
-  external->priv->queue = g_slist_prepend (external->priv->queue, prop);
-
-  if (external->priv->embedded)
-    panel_plugin_external_queue_send_to_child (external);
-}
-
-
-
-static void
-panel_plugin_external_queue_add_action (PanelPluginExternal             *external,
-                                        XfcePanelPluginProviderPropType  type)
-{
-  GValue value = { 0, };
-
-  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
-
-  /* add to queue with noop boolean */
-  g_value_init (&value, G_TYPE_BOOLEAN);
-  panel_plugin_external_queue_add (external, type, &value);
-  g_value_unset (&value);
 }
 
 
@@ -1229,6 +1061,45 @@ panel_plugin_external_set_sensitive (PanelPluginExternal *external)
 
 
 void
+panel_plugin_external_queue_add (PanelPluginExternal             *external,
+                                 XfcePanelPluginProviderPropType  type,
+                                 const GValue                    *value)
+{
+  PluginProperty *prop;
+
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
+  panel_return_if_fail (G_TYPE_CHECK_VALUE (value));
+
+  prop = g_slice_new0 (PluginProperty);
+  prop->type = type;
+  g_value_init (&prop->value, G_VALUE_TYPE (value));
+  g_value_copy (value, &prop->value);
+
+  external->priv->queue = g_slist_prepend (external->priv->queue, prop);
+
+  if (external->priv->embedded)
+    panel_plugin_external_queue_send_to_child (external);
+}
+
+
+
+void
+panel_plugin_external_queue_add_action (PanelPluginExternal             *external,
+                                        XfcePanelPluginProviderPropType  type)
+{
+  GValue value = { 0, };
+
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
+
+  /* add to queue with noop boolean */
+  g_value_init (&value, G_TYPE_BOOLEAN);
+  panel_plugin_external_queue_add (external, type, &value);
+  g_value_unset (&value);
+}
+
+
+
+void
 panel_plugin_external_restart (PanelPluginExternal *external)
 {
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
@@ -1275,26 +1146,9 @@ void
 panel_plugin_external_set_background_color (PanelPluginExternal *external,
                                             const GdkRGBA       *color)
 {
-  GValue value = { 0, };
-
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
 
-  if (G_LIKELY (color != NULL))
-    {
-      g_value_init (&value, G_TYPE_STRING);
-      g_value_take_string (&value, gdk_rgba_to_string (color));
-
-      panel_plugin_external_queue_add (external,
-                                       PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR,
-                                       &value);
-
-      g_value_unset (&value);
-    }
-  else
-    {
-      panel_plugin_external_queue_add_action (external,
-                                              PROVIDER_PROP_TYPE_ACTION_BACKGROUND_UNSET);
-    }
+  PANEL_PLUGIN_EXTERNAL_GET_CLASS (external)->set_background_color (external, color);
 }
 
 
@@ -1303,25 +1157,38 @@ void
 panel_plugin_external_set_background_image (PanelPluginExternal *external,
                                             const gchar         *image)
 {
-  GValue value = { 0, };
-
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
 
-  if (G_UNLIKELY (image != NULL))
+  PANEL_PLUGIN_EXTERNAL_GET_CLASS (external)->set_background_image (external, image);
+}
+
+
+
+void
+panel_plugin_external_set_embedded (PanelPluginExternal *external,
+                                    gboolean embedded)
+{
+  if (external->priv->embedded == !!embedded)
+    return;
+
+  external->priv->embedded = embedded;
+  if (embedded)
     {
-      g_value_init (&value, G_TYPE_STRING);
-      g_value_set_string (&value, image);
+      panel_debug (PANEL_DEBUG_EXTERNAL,
+                   "%s-%d: child is embedded; %d properties in queue",
+                   panel_module_get_name (external->module),
+                   external->unique_id,
+                   g_slist_length (external->priv->queue));
 
-      panel_plugin_external_queue_add (external,
-                                       PROVIDER_PROP_TYPE_SET_BACKGROUND_IMAGE,
-                                       &value);
-
-      g_value_unset (&value);
+      /* send queue to wrapper */
+      panel_plugin_external_queue_send_to_child (external);
     }
   else
     {
-      panel_plugin_external_queue_add_action (external,
-                                              PROVIDER_PROP_TYPE_ACTION_BACKGROUND_UNSET);
+      panel_debug (PANEL_DEBUG_EXTERNAL,
+                   "%s-%d: child is unembedded",
+                   panel_module_get_name (external->module),
+                   external->unique_id);
     }
 }
 
