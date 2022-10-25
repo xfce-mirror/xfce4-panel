@@ -113,8 +113,6 @@ typedef enum /*< skip >*/
   PROVIDER_PROP_TYPE_SET_NROWS,               /* gint */
   PROVIDER_PROP_TYPE_SET_LOCKED,              /* gboolean */
   PROVIDER_PROP_TYPE_SET_SENSITIVE,           /* gboolean */
-  PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR,    /* string, wrapper only */
-  PROVIDER_PROP_TYPE_SET_BACKGROUND_IMAGE,    /* string, wrapper only */
   PROVIDER_PROP_TYPE_ACTION_REMOVED,          /* none */
   PROVIDER_PROP_TYPE_ACTION_SAVE,             /* none */
   PROVIDER_PROP_TYPE_ACTION_QUIT,             /* none */
@@ -123,7 +121,12 @@ typedef enum /*< skip >*/
   PROVIDER_PROP_TYPE_ACTION_SHOW_CONFIGURE,   /* none */
   PROVIDER_PROP_TYPE_ACTION_SHOW_ABOUT,       /* none */
   PROVIDER_PROP_TYPE_ACTION_ASK_REMOVE,       /* none */
-  PROVIDER_PROP_TYPE_SET_OPACITY              /* gdouble */
+
+  /* WrapperPlug, using the same enum and D-Bus signal for simplicity */
+  PROVIDER_PROP_TYPE_SET_OPACITY,             /* gdouble */
+  /* X11 only */
+  PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR,    /* string */
+  PROVIDER_PROP_TYPE_SET_BACKGROUND_IMAGE,    /* string */
 }
 XfcePanelPluginProviderPropType;
 
