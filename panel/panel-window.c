@@ -1177,7 +1177,8 @@ panel_window_button_press_event (GtkWidget      *widget,
                               GDK_SEAT_CAPABILITY_ALL_POINTING,
                               FALSE, cursor, (GdkEvent*)event, NULL, NULL);
 
-      g_object_unref (cursor);
+      if (cursor != NULL)
+        g_object_unref (cursor);
 
       /* set the grab info if the grab was successfully made */
       if (G_LIKELY (status == GDK_GRAB_SUCCESS))
