@@ -193,6 +193,8 @@ panel_plugin_external_wrapper_constructed (GObject *object)
       g_critical ("Failed to get D-Bus session bus: %s", error->message);
       g_error_free (error);
     }
+
+  G_OBJECT_CLASS (panel_plugin_external_wrapper_parent_class)->constructed (object);
 }
 
 
