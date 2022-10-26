@@ -23,6 +23,7 @@
 #include <gmodule.h>
 #include <glib/gstdio.h>
 #include <libxfce4util/libxfce4util.h>
+#include <gtk-layer-shell/gtk-layer-shell.h>
 
 #include <common/panel-private.h>
 #include <common/panel-debug.h>
@@ -368,8 +369,8 @@ panel_module_new_from_desktop_file (const gchar *filename,
           module->filename = path;
 
           /* run mode of the module, by default everything runs in
-           * the wrapper, unless defined otherwise */
-          if (GDK_IS_X11_DISPLAY (gdk_display_get_default ())
+           * the wrapper, unless defined otherwise or unsupported */
+          if ((GDK_IS_X11_DISPLAY (gdk_display_get_default ()) || gtk_layer_is_supported ())
               && (force_external || !xfce_rc_read_bool_entry (rc, "X-XFCE-Internal", FALSE)))
             {
               module->mode = WRAPPER;
