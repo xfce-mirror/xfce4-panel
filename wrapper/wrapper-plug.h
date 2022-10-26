@@ -20,6 +20,7 @@
 #define __WRAPPER_PLUG_H__
 
 #include <gtk/gtk.h>
+#include <libxfce4panel/xfce-panel-plugin-provider.h>
 
 G_BEGIN_DECLS
 
@@ -35,9 +36,16 @@ struct _WrapperPlugInterface
                                                 const gchar         *color);
     void        (*set_background_image)        (WrapperPlug         *plug,
                                                 const gchar         *image);
+
+    /* Wayland only */
+    void        (*set_monitor)                 (WrapperPlug         *plug,
+                                                gint                 monitor);
+    void        (*set_geometry)                (WrapperPlug         *plug,
+                                                const GdkRectangle  *geometry);
 };
 
-GtkWidget    *wrapper_plug_new                      (gulong                            socket_id);
+GtkWidget    *wrapper_plug_new                      (gulong                            socket_id,
+                                                     GDBusProxy                       *proxy);
 
 void          wrapper_plug_set_background_color     (WrapperPlug                      *plug,
                                                      const gchar                      *color);
@@ -45,6 +53,19 @@ void          wrapper_plug_set_background_color     (WrapperPlug                
 void          wrapper_plug_set_background_image     (WrapperPlug                      *plug,
                                                      const gchar                      *image);
 
+void          wrapper_plug_set_monitor              (WrapperPlug                      *plug,
+                                                     gint                              monitor);
+
+void          wrapper_plug_set_geometry             (WrapperPlug                      *plug,
+                                                     const GdkRectangle               *geometry);
+
+void          wrapper_plug_proxy_method_call        (GDBusProxy                       *proxy,
+                                                     const gchar                      *method,
+                                                     GVariant                         *variant);
+
+void          wrapper_plug_proxy_provider_signal    (XfcePanelPluginProvider          *provider,
+                                                     XfcePanelPluginProviderSignal     provider_signal,
+                                                     GDBusProxy                       *proxy);
 G_END_DECLS
 
 #endif /* ! __WRAPPER_PLUG_H__ */
