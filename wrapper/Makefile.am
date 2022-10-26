@@ -16,6 +16,8 @@ wrapper_2_0_SOURCES = \
 	wrapper-module.h \
 	wrapper-plug.c \
 	wrapper-plug.h \
+	wrapper-plug-wayland.c \
+	wrapper-plug-wayland.h \
 	wrapper-plug-x11.c \
 	wrapper-plug-x11.h
 
@@ -23,6 +25,7 @@ wrapper_2_0_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(GIO_CFLAGS) \
 	$(GMODULE_CFLAGS) \
+	$(GTK_LAYER_SHELL_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
@@ -35,6 +38,7 @@ wrapper_2_0_LDADD = \
 	$(GTK_LIBS) \
 	$(GIO_LIBS) \
 	$(GMODULE_LIBS) \
+	$(GTK_LAYER_SHELL_LIBS) \
 	$(LIBXFCE4UTIL_LIBS)
 
 wrapper_2_0_DEPENDENCIES = \
