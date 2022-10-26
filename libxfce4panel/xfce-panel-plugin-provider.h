@@ -127,6 +127,9 @@ typedef enum /*< skip >*/
   /* X11 only */
   PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR,    /* string */
   PROVIDER_PROP_TYPE_SET_BACKGROUND_IMAGE,    /* string */
+  /* Wayland only */
+  PROVIDER_PROP_TYPE_SET_MONITOR,             /* gint */
+  PROVIDER_PROP_TYPE_SET_GEOMETRY,            /* GdkRectangle */
 }
 XfcePanelPluginProviderPropType;
 
