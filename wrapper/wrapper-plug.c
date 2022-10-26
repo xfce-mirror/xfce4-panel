@@ -20,9 +20,12 @@
 #include <config.h>
 #endif
 
+#include <gtk-layer-shell/gtk-layer-shell.h>
+
 #include <common/panel-private.h>
 #include <wrapper/wrapper-plug.h>
 #include <wrapper/wrapper-plug-x11.h>
+#include <wrapper/wrapper-plug-wayland.h>
 
 
 
@@ -39,6 +42,7 @@ wrapper_plug_default_init (WrapperPlugInterface *iface)
 
 GtkWidget *
 wrapper_plug_new (gulong socket_id,
+                  gint unique_id,
                   GDBusProxy *proxy,
                   GError **error)
 {
@@ -48,6 +52,10 @@ wrapper_plug_new (gulong socket_id,
 #ifdef GDK_WINDOWING_X11
   if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
     return wrapper_plug_x11_new (socket_id, proxy);
+#endif
+#ifdef GDK_WINDOWING_WAYLAND
+  if (gtk_layer_is_supported ())
+    return wrapper_plug_wayland_new (unique_id, proxy, error);
 #endif
 
   g_set_error (error, 0, 0, "Running plugins as external is not supported on this windowing environment");
@@ -105,6 +113,28 @@ wrapper_plug_set_background_image (WrapperPlug *plug,
 
 
 void
+wrapper_plug_set_monitor (WrapperPlug *plug,
+                          gint monitor)
+{
+  panel_return_if_fail (WRAPPER_IS_PLUG (plug));
+
+  WRAPPER_PLUG_GET_IFACE (plug)->set_monitor (plug, monitor);
+}
+
+
+
+void
+wrapper_plug_set_geometry (WrapperPlug *plug,
+                           const GdkRectangle *geometry)
+{
+  panel_return_if_fail (WRAPPER_IS_PLUG (plug));
+
+  WRAPPER_PLUG_GET_IFACE (plug)->set_geometry (plug, geometry);
+}
+
+
+
+void
 wrapper_plug_proxy_method_call_sync (GDBusProxy *proxy,
                                      const gchar *method,
                                      GVariant *variant)
@@ -120,4 +150,38 @@ wrapper_plug_proxy_method_call_sync (GDBusProxy *proxy,
       g_warning ("%s call failed: %s", method, error->message);
       g_error_free (error);
     }
+}
+
+
+
+static void
+wrapper_plug_proxy_method_call_finish (GObject *source_object,
+                                       GAsyncResult *res,
+                                       gpointer data)
+{
+  GVariant *ret;
+  GError *error = NULL;
+  gchar *method = data;
+
+  ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
+  if (ret != NULL)
+    g_variant_unref (ret);
+  else
+    {
+      g_warning ("%s call failed: %s", method, error->message);
+      g_error_free (error);
+    }
+
+  g_free (method);
+}
+
+
+
+void
+wrapper_plug_proxy_method_call (GDBusProxy *proxy,
+                                const gchar *method,
+                                GVariant *variant)
+{
+  g_dbus_proxy_call (proxy, method, variant, G_DBUS_CALL_FLAGS_NONE, -1, NULL,
+                     wrapper_plug_proxy_method_call_finish, g_strdup (method));
 }
