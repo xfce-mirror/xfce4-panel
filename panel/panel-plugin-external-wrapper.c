@@ -80,6 +80,10 @@ static gboolean   panel_plugin_external_wrapper_dbus_remote_event_result (XfcePa
                                                                           guint                           handle,
                                                                           gboolean                        result,
                                                                           PanelPluginExternalWrapper     *wrapper);
+static gboolean   panel_plugin_external_wrapper_dbus_set                 (XfcePanelPluginWrapperExported *skeleton,
+                                                                          GDBusMethodInvocation          *invocation,
+                                                                          GVariant                       *parameters,
+                                                                          PanelPluginExternalWrapper     *wrapper);
 
 
 
@@ -174,6 +178,8 @@ panel_plugin_external_wrapper_constructed (GObject *object)
                             G_CALLBACK (panel_plugin_external_wrapper_dbus_provider_signal), object);
           g_signal_connect (priv->skeleton, "handle_remote_event_result",
                             G_CALLBACK (panel_plugin_external_wrapper_dbus_remote_event_result), object);
+          g_signal_connect (priv->skeleton, "handle-set",
+                            G_CALLBACK (panel_plugin_external_wrapper_dbus_set), object);
           panel_debug (PANEL_DEBUG_EXTERNAL, "register dbus path %s", path);
 
           priv->exported = TRUE;
@@ -398,6 +404,10 @@ panel_plugin_external_wrapper_dbus_provider_signal (XfcePanelPluginWrapperExport
       PANEL_PLUGIN_EXTERNAL (wrapper)->show_about = TRUE;
       break;
 
+    case PROVIDER_SIGNAL_EMBEDDED:
+      panel_plugin_external_set_embedded (PANEL_PLUGIN_EXTERNAL (wrapper), TRUE);
+      break;
+
     default:
       /* other signals are handled in panel-applications.c */
       xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (wrapper),
@@ -425,6 +435,44 @@ panel_plugin_external_wrapper_dbus_remote_event_result (XfcePanelPluginWrapperEx
                  handle, result);
 
   xfce_panel_plugin_wrapper_exported_complete_remote_event_result (skeleton, invocation);
+
+  return TRUE;
+}
+
+
+
+static gboolean
+panel_plugin_external_wrapper_dbus_set (XfcePanelPluginWrapperExported *skeleton,
+                                        GDBusMethodInvocation *invocation,
+                                        GVariant *parameters,
+                                        PanelPluginExternalWrapper *wrapper)
+{
+  XfcePanelPluginProvider *provider = XFCE_PANEL_PLUGIN_PROVIDER (wrapper);
+  XfcePanelPluginProviderPropType type;
+  GVariant *variant;
+  gint width, height;
+
+  panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (wrapper), FALSE);
+
+  g_variant_get (parameters, "(uv)", &type, &variant);
+  switch (type)
+    {
+    case PROVIDER_PROP_TYPE_SET_GEOMETRY:
+      g_variant_get_child (variant, 2, "i", &width);
+      g_variant_get_child (variant, 3, "i", &height);
+      gtk_widget_set_size_request (GTK_WIDGET (wrapper), width, height);
+      break;
+
+    default:
+      g_critical ("Received unknown plugin property %u for %s-%d",
+                  type, xfce_panel_plugin_provider_get_name (provider),
+                  xfce_panel_plugin_provider_get_unique_id (provider));
+      break;
+    }
+
+  g_variant_unref (variant);
+
+  xfce_panel_plugin_wrapper_exported_complete_set (skeleton, invocation);
 
   return TRUE;
 }

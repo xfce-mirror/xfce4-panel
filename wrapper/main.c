@@ -61,6 +61,7 @@ wrapper_gproxy_set (XfcePanelPluginProvider *provider,
   GVariantIter                    iter;
   GVariant                       *variant;
   XfcePanelPluginProviderPropType type;
+  GdkRectangle                    geom;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
   panel_return_if_fail (g_variant_is_of_type (parameters, G_VARIANT_TYPE_TUPLE));
@@ -119,6 +120,20 @@ wrapper_gproxy_set (XfcePanelPluginProvider *provider,
             wrapper_plug_set_background_image (WRAPPER_PLUG (plug), g_variant_get_string (variant, NULL));
           else /* PROVIDER_PROP_TYPE_ACTION_BACKGROUND_UNSET */
             wrapper_plug_set_background_color (WRAPPER_PLUG (plug), NULL);
+          break;
+
+        case PROVIDER_PROP_TYPE_SET_MONITOR:
+          plug = g_object_get_qdata (G_OBJECT (provider), plug_quark);
+          wrapper_plug_set_monitor (WRAPPER_PLUG (plug), g_variant_get_int32 (variant));
+          break;
+
+        case PROVIDER_PROP_TYPE_SET_GEOMETRY:
+          g_variant_get_child (variant, 0, "i", &geom.x);
+          g_variant_get_child (variant, 1, "i", &geom.y);
+          g_variant_get_child (variant, 2, "i", &geom.width);
+          g_variant_get_child (variant, 3, "i", &geom.height);
+          plug = g_object_get_qdata (G_OBJECT (provider), plug_quark);
+          wrapper_plug_set_geometry (WRAPPER_PLUG (plug), &geom);
           break;
 
         case PROVIDER_PROP_TYPE_ACTION_REMOVED:
@@ -247,36 +262,6 @@ wrapper_gproxy_g_signal (GDBusProxy *proxy,
     g_warning ("Unhandled signal name :%s", signal_name);
 }
 
-
-
-static void
-wrapper_gproxy_provider_signal (XfcePanelPluginProvider       *provider,
-                                XfcePanelPluginProviderSignal  provider_signal,
-                                GDBusProxy                    *proxy)
-{
-  GVariant *variant;
-  GError   *error = NULL;
-
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
-
-  variant = g_dbus_proxy_call_sync (proxy,
-                                    "ProviderSignal",
-                                    g_variant_new ("(u)",
-                                                   provider_signal),
-                                    G_DBUS_CALL_FLAGS_NONE,
-                                    -1,
-                                    NULL,
-                                    &error);
-
-  if (G_UNLIKELY (error != NULL ))
-    {
-      g_warning ("ProviderSignal call failed: %s", error->message);
-      g_error_free (error);
-    }
-
-  if (variant)
-    g_variant_unref (variant);
-}
 
 
 static void
@@ -409,7 +394,7 @@ main (gint argc, gchar **argv)
   if (G_LIKELY (provider != NULL))
     {
       /* create the wrapper plug */
-      plug = wrapper_plug_new (socket_id);
+      plug = wrapper_plug_new (socket_id, dbus_gproxy);
       gtk_container_add (GTK_CONTAINER (plug), GTK_WIDGET (provider));
       g_object_add_weak_pointer (G_OBJECT (plug), (gpointer *) &plug);
       gtk_widget_show (plug);
@@ -420,7 +405,7 @@ main (gint argc, gchar **argv)
 
       /* monitor provider signals */
       g_signal_connect (G_OBJECT (provider), "provider-signal",
-          G_CALLBACK (wrapper_gproxy_provider_signal), dbus_gproxy);
+          G_CALLBACK (wrapper_plug_proxy_provider_signal), dbus_gproxy);
 
       /* connect to service signals */
       gproxy_signal_id = g_signal_connect_object (dbus_gproxy, "g-signal",
