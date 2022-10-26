@@ -57,7 +57,7 @@ static void
 wrapper_gproxy_set (XfcePanelPluginProvider *provider,
                     GVariant                *parameters)
 {
-  WrapperPlug                    *plug;
+  GtkWidget                      *plug;
   GVariantIter                    iter;
   GVariant                       *variant;
   XfcePanelPluginProviderPropType type;
@@ -105,7 +105,7 @@ wrapper_gproxy_set (XfcePanelPluginProvider *provider,
 
         case PROVIDER_PROP_TYPE_SET_OPACITY:
           plug = g_object_get_qdata (G_OBJECT (provider), plug_quark);
-          wrapper_plug_set_opacity (plug, g_variant_get_double (variant));
+          gtk_widget_set_opacity (plug, g_variant_get_double (variant));
           break;
 
         case PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR:
@@ -114,11 +114,11 @@ wrapper_gproxy_set (XfcePanelPluginProvider *provider,
           plug = g_object_get_qdata (G_OBJECT (provider), plug_quark);
 
           if (type == PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR)
-            wrapper_plug_set_background_color (plug, g_variant_get_string (variant, NULL));
+            wrapper_plug_set_background_color (WRAPPER_PLUG (plug), g_variant_get_string (variant, NULL));
           else if (type == PROVIDER_PROP_TYPE_SET_BACKGROUND_IMAGE)
-            wrapper_plug_set_background_image (plug, g_variant_get_string (variant, NULL));
+            wrapper_plug_set_background_image (WRAPPER_PLUG (plug), g_variant_get_string (variant, NULL));
           else /* PROVIDER_PROP_TYPE_ACTION_BACKGROUND_UNSET */
-            wrapper_plug_set_background_color (plug, NULL);
+            wrapper_plug_set_background_color (WRAPPER_PLUG (plug), NULL);
           break;
 
         case PROVIDER_PROP_TYPE_ACTION_REMOVED:
@@ -308,7 +308,7 @@ main (gint argc, gchar **argv)
   GDBusConnection         *dbus_gconnection;
   GDBusProxy              *dbus_gproxy = NULL;
   WrapperModule           *module = NULL;
-  WrapperPlug             *plug;
+  GtkWidget               *plug;
   GtkWidget               *provider = NULL;
   gchar                   *path;
   guint                    gproxy_destroy_id = 0;
@@ -412,7 +412,7 @@ main (gint argc, gchar **argv)
       plug = wrapper_plug_new (socket_id);
       gtk_container_add (GTK_CONTAINER (plug), GTK_WIDGET (provider));
       g_object_add_weak_pointer (G_OBJECT (plug), (gpointer *) &plug);
-      gtk_widget_show (GTK_WIDGET (plug));
+      gtk_widget_show (plug);
 
       /* set plug data to provider */
       plug_quark = g_quark_from_static_string ("plug-quark");
@@ -438,7 +438,7 @@ main (gint argc, gchar **argv)
 
       /* destroy the plug and provider */
       if (plug != NULL)
-        gtk_widget_destroy (GTK_WIDGET (plug));
+        gtk_widget_destroy (plug);
 
       if (retval != PLUGIN_EXIT_SUCCESS_AND_RESTART)
         retval = PLUGIN_EXIT_SUCCESS;
