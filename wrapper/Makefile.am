@@ -10,7 +10,12 @@ wrapperdir = $(HELPER_PATH_PREFIX)/xfce4/panel
 wrapper_PROGRAMS = \
 	wrapper-2.0
 
+wrapper_built_sources = \
+	wrapper-external-exported.c \
+	wrapper-external-exported.h
+
 wrapper_2_0_SOURCES = \
+	$(wrapper_built_sources) \
 	main.c \
 	wrapper-module.c \
 	wrapper-module.h \
@@ -48,6 +53,14 @@ if MAINTAINER_MODE
 #wrapper-marshal.c: $(top_builddir)/panel/panel-marshal.list Makefile
 #	$(AM_V_GEN) echo "#include <wrapper/wrapper-marshal.h>" > $@ \
 #	&& glib-genmarshal --body --prefix=wrapper_marshal $< >> $@
+
+wrapper-external-exported.c:
+wrapper-external-exported.h: wrapper-external-infos.xml Makefile
+	$(AM_V_GEN) $(GDBUS_CODEGEN) \
+	--interface-prefix org.xfce.Panel.External \
+	--c-namespace WrapperExternal \
+	--generate-c-code wrapper-external-exported \
+	$(srcdir)/wrapper-external-infos.xml
 
 BUILT_SOURCES = \
 	$(wrapper_built_sources)
