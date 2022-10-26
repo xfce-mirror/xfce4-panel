@@ -23,6 +23,7 @@
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 #include <panel/panel-module.h>
+#include <panel/panel-window.h>
 
 G_BEGIN_DECLS
 
@@ -61,6 +62,10 @@ struct _PanelPluginExternalClass
                                       const GdkRGBA        *color);
   void       (*set_background_image) (PanelPluginExternal  *external,
                                       const gchar          *image);
+
+  /* Wayland only */
+  void       (*set_geometry)         (PanelPluginExternal  *external,
+                                      PanelWindow          *window);
 };
 
 struct _PanelPluginExternal
@@ -107,6 +112,9 @@ void         panel_plugin_external_set_background_color (PanelPluginExternal    
 
 void         panel_plugin_external_set_background_image (PanelPluginExternal              *external,
                                                          const gchar                      *image);
+
+void         panel_plugin_external_set_geometry         (PanelPluginExternal              *external,
+                                                         PanelWindow                      *window);
 
 void         panel_plugin_external_set_embedded         (PanelPluginExternal              *external,
                                                          gboolean                          embedded);
