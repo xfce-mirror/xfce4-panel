@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 Nick Schermer <nick@xfce.org>
+ * Copyright (C) 2022 Gaël Bonithon <gael@xfce.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,50 +20,31 @@
 #define __WRAPPER_PLUG_H__
 
 #include <gtk/gtk.h>
-#ifdef GDK_WINDOWING_X11
-#include <gtk/gtkx.h>
-#else
-typedef GtkWidget GtkPlug;
-typedef GtkWidgetClass GtkPlugClass;
-typedef gulong Window;
-#define GTK_TYPE_PLUG GTK_TYPE_WIDGET
-#define GTK_PLUG GTK_WIDGET
-#define gtk_plug_construct(plug, socket_id)
-#endif
-
-#include <libxfce4panel/libxfce4panel.h>
-#include <libxfce4panel/xfce-panel-plugin-provider.h>
 
 G_BEGIN_DECLS
 
-typedef struct _WrapperPlugClass WrapperPlugClass;
-typedef struct _WrapperPlug      WrapperPlug;
+#define WRAPPER_TYPE_PLUG (wrapper_plug_get_type ())
+G_DECLARE_INTERFACE (WrapperPlug, wrapper_plug, WRAPPER, PLUG, GtkWindow)
 
-#define WRAPPER_TYPE_PLUG            (wrapper_plug_get_type ())
-#define WRAPPER_PLUG(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), WRAPPER_TYPE_PLUG, WrapperPlug))
-#define WRAPPER_PLUG_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), WRAPPER_TYPE_PLUG, WrapperPlugClass))
-#define WRAPPER_IS_PLUG(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), WRAPPER_TYPE_PLUG))
-#define WRAPPER_IS_PLUG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), WRAPPER_TYPE_PLUG))
-#define WRAPPER_PLUG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), WRAPPER_TYPE_PLUG, WrapperPlugClass))
+struct _WrapperPlugInterface
+{
+    GTypeInterface g_iface;
 
-extern gchar *wrapper_name;
+    /* X11 only */
+    void        (*set_background_color)        (WrapperPlug         *plug,
+                                                const gchar         *color);
+    void        (*set_background_image)        (WrapperPlug         *plug,
+                                                const gchar         *image);
+};
 
-GType         wrapper_plug_get_type             (void) G_GNUC_CONST;
+GtkWidget    *wrapper_plug_new                      (gulong                            socket_id);
 
-WrapperPlug  *wrapper_plug_new                  (Window           socket_id);
+void          wrapper_plug_set_background_color     (WrapperPlug                      *plug,
+                                                     const gchar                      *color);
 
-void          wrapper_plug_set_opacity          (WrapperPlug     *plug,
-                                                 gdouble          opacity);
-
-void          wrapper_plug_set_background_alpha (WrapperPlug     *plug,
-                                                 gdouble          alpha);
-
-void          wrapper_plug_set_background_color (WrapperPlug     *plug,
-                                                 const gchar     *color_string);
-
-void          wrapper_plug_set_background_image (WrapperPlug     *plug,
-                                                 const gchar     *image);
+void          wrapper_plug_set_background_image     (WrapperPlug                      *plug,
+                                                     const gchar                      *image);
 
 G_END_DECLS
 
-#endif /* !__WRAPPER_PLUG_H__ */
+#endif /* ! __WRAPPER_PLUG_H__ */
