@@ -33,6 +33,7 @@
 
 #include <gdk/gdk.h>
 #include <libxfce4util/libxfce4util.h>
+#include <gtk-layer-shell/gtk-layer-shell.h>
 
 #include <common/panel-private.h>
 #include <common/panel-dbus.h>
@@ -45,6 +46,7 @@
 #include <panel/panel-plugin-external.h>
 #include <panel/panel-plugin-external-wrapper.h>
 #include <panel/panel-plugin-external-wrapper-x11.h>
+#include <panel/panel-plugin-external-wrapper-wayland.h>
 #include <panel/panel-plugin-external-wrapper-exported.h>
 #include <panel/panel-window.h>
 #include <panel/panel-dialogs.h>
@@ -274,6 +276,9 @@ panel_plugin_external_wrapper_gvalue_prop_to_gvariant (const GValue *value)
     case G_TYPE_STRING:
       type = G_VARIANT_TYPE_STRING;
       break;
+    case G_TYPE_VARIANT:
+      type = G_VARIANT_TYPE_TUPLE;
+      break;
     /* only throw a warning (instead of an assertion) here as otherwise invalid
        types sent to the panel via dbus would let the panel crash */
     default:
@@ -437,6 +442,13 @@ panel_plugin_external_wrapper_new (PanelModule  *module,
 #ifdef GDK_WINDOWING_X11
   if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
     return g_object_new (PANEL_TYPE_PLUGIN_EXTERNAL_WRAPPER_X11,
+                         "module", module,
+                         "unique-id", unique_id,
+                         "arguments", arguments, NULL);
+#endif
+#ifdef GDK_WINDOWING_WAYLAND
+  if (gtk_layer_is_supported ())
+    return g_object_new (PANEL_TYPE_PLUGIN_EXTERNAL_WRAPPER_WAYLAND,
                          "module", module,
                          "unique-id", unique_id,
                          "arguments", arguments, NULL);
