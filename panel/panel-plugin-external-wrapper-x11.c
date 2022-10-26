@@ -37,6 +37,8 @@ static void         panel_plugin_external_wrapper_x11_set_background_color    (P
                                                                                const GdkRGBA                    *color);
 static void         panel_plugin_external_wrapper_x11_set_background_image    (PanelPluginExternal              *external,
                                                                                const gchar                      *image);
+static void         panel_plugin_external_wrapper_x11_set_geometry            (PanelPluginExternal              *external,
+                                                                               PanelWindow                      *window);
 static void         panel_plugin_external_wrapper_x11_socket_size_allocate    (GtkWidget                        *widget,
                                                                                GtkAllocation                    *allocation);
 static void         panel_plugin_external_wrapper_x11_socket_plug_added       (GtkSocket                        *socket,
@@ -77,6 +79,7 @@ panel_plugin_external_wrapper_x11_class_init (PanelPluginExternalWrapperX11Class
   external_class->get_argv = panel_plugin_external_wrapper_x11_get_argv;
   external_class->set_background_color = panel_plugin_external_wrapper_x11_set_background_color;
   external_class->set_background_image = panel_plugin_external_wrapper_x11_set_background_image;
+  external_class->set_geometry = panel_plugin_external_wrapper_x11_set_geometry;
 
   /* GtkWidget::size-allocate is flagged G_SIGNAL_RUN_FIRST so we need to overwrite it */
   g_signal_override_class_handler ("size-allocate", GTK_TYPE_SOCKET,
@@ -179,6 +182,14 @@ panel_plugin_external_wrapper_x11_set_background_image (PanelPluginExternal *ext
       panel_plugin_external_queue_add_action (external,
                                               PROVIDER_PROP_TYPE_ACTION_BACKGROUND_UNSET);
     }
+}
+
+
+
+static void
+panel_plugin_external_wrapper_x11_set_geometry (PanelPluginExternal *external,
+                                                PanelWindow *window)
+{
 }
 
 
