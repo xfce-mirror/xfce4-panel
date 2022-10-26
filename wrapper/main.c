@@ -63,6 +63,7 @@ wrapper_gproxy_set (GDBusProxy *proxy,
   GVariantIter                    iter;
   GVariant                       *variant;
   XfcePanelPluginProviderPropType type;
+  GdkRectangle                    geom;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
   panel_return_if_fail (g_variant_is_of_type (parameters, G_VARIANT_TYPE_TUPLE));
@@ -121,6 +122,17 @@ wrapper_gproxy_set (GDBusProxy *proxy,
             wrapper_plug_set_background_image (WRAPPER_PLUG (plug), g_variant_get_string (variant, NULL));
           else /* PROVIDER_PROP_TYPE_ACTION_BACKGROUND_UNSET */
             wrapper_plug_set_background_color (WRAPPER_PLUG (plug), NULL);
+          break;
+
+        case PROVIDER_PROP_TYPE_SET_MONITOR:
+          plug = gtk_widget_get_parent (GTK_WIDGET (provider));
+          wrapper_plug_set_monitor (WRAPPER_PLUG (plug), g_variant_get_int32 (variant));
+          break;
+
+        case PROVIDER_PROP_TYPE_SET_GEOMETRY:
+          g_variant_get (variant, "(iiii)", &geom.x, &geom.y, &geom.width, &geom.height);
+          plug = gtk_widget_get_parent (GTK_WIDGET (provider));
+          wrapper_plug_set_geometry (WRAPPER_PLUG (plug), &geom);
           break;
 
         case PROVIDER_PROP_TYPE_ACTION_REMOVED:
@@ -338,7 +350,7 @@ main (gint argc, gchar **argv)
   if (G_LIKELY (provider != NULL))
     {
       /* create the wrapper plug */
-      plug = wrapper_plug_new (socket_id, dbus_gproxy, &error);
+      plug = wrapper_plug_new (socket_id, unique_id, dbus_gproxy, &error);
       if (plug == NULL)
         {
           gtk_widget_destroy (provider);
@@ -367,12 +379,12 @@ main (gint argc, gchar **argv)
       /* do not call gtk_main_quit() twice */
       g_signal_handler_disconnect (G_OBJECT (dbus_gproxy), gproxy_destroy_id);
 
+      if (retval != PLUGIN_EXIT_SUCCESS_AND_RESTART)
+        retval = plug == NULL || GPOINTER_TO_INT (g_object_get_data (G_OBJECT (plug), "exit-code"));
+
       /* destroy the plug and provider */
       if (plug != NULL)
         gtk_widget_destroy (plug);
-
-      if (retval != PLUGIN_EXIT_SUCCESS_AND_RESTART)
-        retval = PLUGIN_EXIT_SUCCESS;
     }
   else
     {
