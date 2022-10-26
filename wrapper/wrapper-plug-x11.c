@@ -163,6 +163,7 @@ wrapper_plug_x11_new (Window socket_id)
 
   plug = g_object_new (WRAPPER_TYPE_PLUG_X11, NULL);
   gtk_plug_construct (GTK_PLUG (plug), socket_id);
+  gtk_widget_show (plug);
 
   return plug;
 }

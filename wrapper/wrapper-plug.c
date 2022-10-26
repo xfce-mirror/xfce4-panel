@@ -20,9 +20,12 @@
 #include <config.h>
 #endif
 
+#include <gtk-layer-shell/gtk-layer-shell.h>
+
 #include <common/panel-private.h>
 #include <wrapper/wrapper-plug.h>
 #include <wrapper/wrapper-plug-x11.h>
+#include <wrapper/wrapper-plug-wayland.h>
 
 
 
@@ -38,11 +41,16 @@ wrapper_plug_default_init (WrapperPlugInterface *iface)
 
 
 GtkWidget *
-wrapper_plug_new (gulong socket_id)
+wrapper_plug_new (gulong socket_id,
+                  GDBusProxy *proxy)
 {
 #ifdef GDK_WINDOWING_X11
   if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
     return wrapper_plug_x11_new (socket_id);
+#endif
+#ifdef GDK_WINDOWING_WAYLAND
+  if (gtk_layer_is_supported ())
+    return wrapper_plug_wayland_new (proxy);
 #endif
 
   g_critical ("Running plugins as external is not supported on this windowing environment");
@@ -70,4 +78,59 @@ wrapper_plug_set_background_image (WrapperPlug *plug,
   panel_return_if_fail (WRAPPER_IS_PLUG (plug));
 
   WRAPPER_PLUG_GET_IFACE (plug)->set_background_image (plug, image);
+}
+
+
+
+void
+wrapper_plug_set_monitor (WrapperPlug *plug,
+                          gint monitor)
+{
+  panel_return_if_fail (WRAPPER_IS_PLUG (plug));
+
+  WRAPPER_PLUG_GET_IFACE (plug)->set_monitor (plug, monitor);
+}
+
+
+
+void
+wrapper_plug_set_geometry (WrapperPlug *plug,
+                           const GdkRectangle *geometry)
+{
+  panel_return_if_fail (WRAPPER_IS_PLUG (plug));
+
+  WRAPPER_PLUG_GET_IFACE (plug)->set_geometry (plug, geometry);
+}
+
+
+
+void
+wrapper_plug_proxy_method_call (GDBusProxy *proxy,
+                                const gchar *method,
+                                GVariant *variant)
+{
+  GVariant *ret;
+  GError *error = NULL;
+
+  ret = g_dbus_proxy_call_sync (proxy, method, variant, G_DBUS_CALL_FLAGS_NONE, -1, NULL, &error);
+
+  if (ret != NULL)
+    g_variant_unref (ret);
+  else
+    {
+      g_warning ("%s call failed: %s", method, error->message);
+      g_error_free (error);
+    }
+}
+
+
+
+void
+wrapper_plug_proxy_provider_signal (XfcePanelPluginProvider *provider,
+                                    XfcePanelPluginProviderSignal provider_signal,
+                                    GDBusProxy *proxy)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  wrapper_plug_proxy_method_call (proxy, "ProviderSignal", g_variant_new ("(u)", provider_signal));
 }
