@@ -373,8 +373,7 @@ panel_module_new_from_desktop_file (const gchar *filename,
 
           /* run mode of the module, by default everything runs in
            * the wrapper, unless defined otherwise */
-          if (GDK_IS_X11_DISPLAY (gdk_display_get_default ())
-              && (force_external || !xfce_rc_read_bool_entry (rc, "X-XFCE-Internal", FALSE)))
+          if (force_external || !xfce_rc_read_bool_entry (rc, "X-XFCE-Internal", FALSE))
             {
               module->mode = WRAPPER;
               g_free (module->api);
