@@ -1720,6 +1720,16 @@ panel_window_size_allocate_set_xy (PanelWindow *window,
 
 
 static void
+panel_window_move_plugin (GtkWidget *widget,
+                          gpointer data)
+{
+  if (PANEL_IS_PLUGIN_EXTERNAL (widget))
+    panel_plugin_external_set_geometry (PANEL_PLUGIN_EXTERNAL (widget), data);
+}
+
+
+
+static void
 panel_window_move (PanelWindow *window,
                    GtkWindow *moved,
                    gint x,
@@ -1735,6 +1745,10 @@ panel_window_move (PanelWindow *window,
                                 window->area.y + window->area.height - y - window->alloc.height);
           gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_RIGHT,
                                 window->area.x + window->area.width - x - window->alloc.width);
+
+          /* move external plugins */
+          gtk_container_foreach (GTK_CONTAINER (gtk_bin_get_child (GTK_BIN (window))),
+                                 panel_window_move_plugin, window);
         }
     }
   else
