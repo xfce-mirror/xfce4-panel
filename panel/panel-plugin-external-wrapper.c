@@ -33,6 +33,7 @@
 
 #include <gdk/gdk.h>
 #include <libxfce4util/libxfce4util.h>
+#include <gtk-layer-shell/gtk-layer-shell.h>
 
 #include <common/panel-private.h>
 #include <common/panel-dbus.h>
@@ -45,6 +46,7 @@
 #include <panel/panel-plugin-external.h>
 #include <panel/panel-plugin-external-wrapper.h>
 #include <panel/panel-plugin-external-wrapper-x11.h>
+#include <panel/panel-plugin-external-wrapper-wayland.h>
 #include <panel/panel-plugin-external-wrapper-exported.h>
 #include <panel/panel-window.h>
 #include <panel/panel-dialogs.h>
@@ -59,6 +61,10 @@
 #define get_instance_private(instance) \
   panel_plugin_external_wrapper_get_instance_private (PANEL_PLUGIN_EXTERNAL_WRAPPER (instance))
 
+static void       panel_plugin_external_wrapper_get_property             (GObject                        *object,
+                                                                          guint                           prop_id,
+                                                                          GValue                         *value,
+                                                                          GParamSpec                     *pspec);
 static void       panel_plugin_external_wrapper_constructed              (GObject                        *object);
 static void       panel_plugin_external_wrapper_finalize                 (GObject                        *object);
 static void       panel_plugin_external_wrapper_set_properties           (PanelPluginExternal            *external,
@@ -93,6 +99,12 @@ enum
   LAST_SIGNAL
 };
 
+enum
+{
+  PROP_0,
+  PROP_SKELETON,
+};
+
 
 
 static guint external_signals[LAST_SIGNAL];
@@ -110,6 +122,7 @@ panel_plugin_external_wrapper_class_init (PanelPluginExternalWrapperClass *klass
   PanelPluginExternalClass *plugin_external_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
+  gobject_class->get_property = panel_plugin_external_wrapper_get_property;
   gobject_class->finalize = panel_plugin_external_wrapper_finalize;
   gobject_class->constructed = panel_plugin_external_wrapper_constructed;
 
@@ -117,6 +130,11 @@ panel_plugin_external_wrapper_class_init (PanelPluginExternalWrapperClass *klass
   plugin_external_class->get_argv = panel_plugin_external_wrapper_get_argv;
   plugin_external_class->set_properties = panel_plugin_external_wrapper_set_properties;
   plugin_external_class->remote_event = panel_plugin_external_wrapper_remote_event;
+
+  g_object_class_install_property (gobject_class, PROP_SKELETON,
+                                   g_param_spec_object ("skeleton", NULL, NULL,
+                                                        XFCE_PANEL_PLUGIN_WRAPPER_TYPE_EXPORTED,
+                                                        G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
   external_signals[REMOTE_EVENT_RESULT] =
     g_signal_new (g_intern_static_string ("remote-event-result"),
@@ -133,6 +151,28 @@ panel_plugin_external_wrapper_class_init (PanelPluginExternalWrapperClass *klass
 static void
 panel_plugin_external_wrapper_init (PanelPluginExternalWrapper *wrapper)
 {
+}
+
+
+
+static void
+panel_plugin_external_wrapper_get_property (GObject *object,
+                                            guint prop_id,
+                                            GValue *value,
+                                            GParamSpec *pspec)
+{
+  PanelPluginExternalWrapperPrivate *priv = get_instance_private (object);
+
+  switch (prop_id)
+    {
+    case PROP_SKELETON:
+      g_value_set_object (value, priv->skeleton);
+      break;
+
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+    }
 }
 
 
@@ -263,6 +303,9 @@ panel_plugin_external_wrapper_gvalue_prop_to_gvariant (const GValue *value)
       break;
     case G_TYPE_STRING:
       type = G_VARIANT_TYPE_STRING;
+      break;
+    case G_TYPE_VARIANT:
+      type = G_VARIANT_TYPE_TUPLE;
       break;
     /* only throw a warning (instead of an assertion) here as otherwise invalid
        types sent to the panel via dbus would let the panel crash */
@@ -427,6 +470,13 @@ panel_plugin_external_wrapper_new (PanelModule  *module,
 #ifdef GDK_WINDOWING_X11
   if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
     return g_object_new (PANEL_TYPE_PLUGIN_EXTERNAL_WRAPPER_X11,
+                         "module", module,
+                         "unique-id", unique_id,
+                         "arguments", arguments, NULL);
+#endif
+#ifdef GDK_WINDOWING_WAYLAND
+  if (gtk_layer_is_supported ())
+    return g_object_new (PANEL_TYPE_PLUGIN_EXTERNAL_WRAPPER_WAYLAND,
                          "module", module,
                          "unique-id", unique_id,
                          "arguments", arguments, NULL);

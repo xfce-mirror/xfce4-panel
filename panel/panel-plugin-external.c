@@ -1165,6 +1165,17 @@ panel_plugin_external_set_background_image (PanelPluginExternal *external,
 
 
 void
+panel_plugin_external_set_geometry (PanelPluginExternal *external,
+                                    PanelWindow *window)
+{
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
+
+  PANEL_PLUGIN_EXTERNAL_GET_CLASS (external)->set_geometry (external, window);
+}
+
+
+
+void
 panel_plugin_external_set_embedded (PanelPluginExternal *external,
                                     gboolean embedded)
 {
