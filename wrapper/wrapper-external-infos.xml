@@ -1,0 +1,12 @@
+<node>
+  <interface name="org.xfce.Panel.External">
+    <annotation name="org.gtk.GDBus.C.Name" value="Exported" />
+
+    <signal name="SetRequisition">
+      <arg name="requisition" type="(ii)"/>
+    </signal>
+
+    <signal name="Embedded"></signal>
+
+  </interface>
+</node>
