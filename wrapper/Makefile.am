@@ -15,7 +15,9 @@ wrapper_2_0_SOURCES = \
 	wrapper-module.c \
 	wrapper-module.h \
 	wrapper-plug.c \
-	wrapper-plug.h
+	wrapper-plug.h \
+	wrapper-plug-x11.c \
+	wrapper-plug-x11.h
 
 wrapper_2_0_CFLAGS = \
 	$(GTK_CFLAGS) \
