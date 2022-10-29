@@ -20,7 +20,7 @@
 #define __PAGER_BUTTONS_H__
 
 #include <gtk/gtk.h>
-#include <libwnck/libwnck.h>
+#include <libxfce4windowing/libxfce4windowing.h>
 
 G_BEGIN_DECLS
 
@@ -38,7 +38,7 @@ GType      pager_buttons_get_type        (void) G_GNUC_CONST;
 
 void       pager_buttons_register_type   (XfcePanelTypeModule *type_module);
 
-GtkWidget *pager_buttons_new             (WnckScreen          *screen) G_GNUC_MALLOC;
+GtkWidget *pager_buttons_new             (XfwScreen           *screen) G_GNUC_MALLOC;
 
 void       pager_buttons_set_orientation (PagerButtons        *pager,
                                           GtkOrientation       orientation);
