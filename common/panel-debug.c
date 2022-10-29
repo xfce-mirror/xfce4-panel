@@ -55,7 +55,8 @@ static const GDebugKey panel_debug_keys[] =
   { "systray", PANEL_DEBUG_SYSTRAY },
   { "tasklist", PANEL_DEBUG_TASKLIST },
   { "pager", PANEL_DEBUG_PAGER },
-  { "itembar", PANEL_DEBUG_ITEMBAR }
+  { "itembar", PANEL_DEBUG_ITEMBAR },
+  { "clock", PANEL_DEBUG_CLOCK },
 };
 
 

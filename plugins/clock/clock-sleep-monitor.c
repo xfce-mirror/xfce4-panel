@@ -25,6 +25,7 @@
 #include <gio/gio.h>
 
 #include <libxfce4util/libxfce4util.h>
+#include <common/panel-debug.h>
 
 #include "clock-sleep-monitor.h"
 
@@ -178,7 +179,7 @@ static ClockSleepMonitor* clock_sleep_monitor_logind_create (void)
   ClockSleepMonitorLogind *monitor;
   gchar *owner_name;
 
-  g_message ("trying to instantiate logind sleep monitor");
+  panel_debug (PANEL_DEBUG_CLOCK, "trying to instantiate logind sleep monitor");
 
   monitor = g_object_new (XFCE_TYPE_CLOCK_SLEEP_MONITOR_LOGIND, NULL);
   monitor->logind_proxy = g_dbus_proxy_new_for_bus_sync (
