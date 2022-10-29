@@ -711,6 +711,7 @@ sn_dialog_build (SnDialog *dialog)
     return FALSE;
 
   dialog->builder = gtk_builder_new ();
+  gtk_builder_set_translation_domain (dialog->builder, GETTEXT_PACKAGE);
 
   /* load the builder data into the object */
   if (gtk_builder_add_from_string (dialog->builder, sn_dialog_ui,
