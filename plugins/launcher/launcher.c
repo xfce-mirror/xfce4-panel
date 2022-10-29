@@ -71,12 +71,11 @@ static gboolean           launcher_plugin_size_changed                  (XfcePan
 static void               launcher_plugin_configure_plugin              (XfcePanelPlugin      *panel_plugin);
 static void               launcher_plugin_screen_position_changed       (XfcePanelPlugin      *panel_plugin,
                                                                          XfceScreenPosition    position);
-static void               launcher_plugin_icon_theme_changed            (GtkIconTheme         *icon_theme,
-                                                                         LauncherPlugin       *plugin);
 static LauncherArrowType  launcher_plugin_default_arrow_type            (LauncherPlugin       *plugin);
 static void               launcher_plugin_pack_widgets                  (LauncherPlugin       *plugin);
-static GdkPixbuf         *launcher_plugin_tooltip_pixbuf                (GdkScreen            *screen,
+static cairo_surface_t   *launcher_plugin_tooltip_icon                  (GtkWidget            *widget,
                                                                          const gchar          *icon_name);
+static void               launcher_plugin_tooltip_icon_invalidate       (GObject              *object);
 static void               launcher_plugin_menu_deactivate               (GtkWidget            *menu,
                                                                          LauncherPlugin       *plugin);
 static void               launcher_plugin_menu_item_activate            (GtkMenuItem          *widget,
@@ -193,7 +192,6 @@ struct _LauncherPlugin
 
   GdkPixbuf         *pixbuf;
   gchar             *icon_name;
-  GdkPixbuf         *tooltip_cache;
 
   gulong             theme_change_id;
 
@@ -323,7 +321,6 @@ launcher_plugin_class_init (LauncherPluginClass *klass)
 static void
 launcher_plugin_init (LauncherPlugin *plugin)
 {
-  GtkIconTheme    *icon_theme;
   GtkCssProvider  *css_provider;
   GtkStyleContext *context;
   gchar           *css_string;
@@ -336,16 +333,10 @@ launcher_plugin_init (LauncherPlugin *plugin)
   plugin->action_menu = NULL;
   plugin->items = NULL;
   plugin->child = NULL;
-  plugin->tooltip_cache = NULL;
   plugin->pixbuf = NULL;
   plugin->icon_name = NULL;
   plugin->menu_timeout_id = 0;
   plugin->save_timeout_id = 0;
-
-  /* monitor the default icon theme for changes */
-  icon_theme = gtk_icon_theme_get_default ();
-  plugin->theme_change_id = g_signal_connect (G_OBJECT (icon_theme), "changed",
-      G_CALLBACK (launcher_plugin_icon_theme_changed), plugin);
 
   /* create the panel widgets */
   plugin->box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -372,6 +363,12 @@ launcher_plugin_init (LauncherPlugin *plugin)
       G_CALLBACK (launcher_plugin_button_drag_leave), plugin);
   g_signal_connect_after (G_OBJECT (plugin->button), "draw",
       G_CALLBACK (launcher_plugin_button_draw), plugin);
+
+  /* invalidate tooltip icon when needed */
+  plugin->theme_change_id = g_signal_connect_swapped (gtk_icon_theme_get_default (), "changed",
+      G_CALLBACK (launcher_plugin_tooltip_icon_invalidate), plugin->button);
+  g_signal_connect (plugin->button, "notify::scale-factor",
+      G_CALLBACK (launcher_plugin_tooltip_icon_invalidate), NULL);
 
   /* Make sure there aren't any constraints set on buttons by themes (Adwaita sets those minimum sizes) */
   context = gtk_widget_get_style_context (plugin->button);
@@ -1111,9 +1108,6 @@ launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
       g_signal_handler_disconnect (G_OBJECT (icon_theme), plugin->theme_change_id);
     }
 
-  /* release the cached tooltip */
-  if (plugin->tooltip_cache != NULL)
-    g_object_unref (G_OBJECT (plugin->tooltip_cache));
   /* release the cached pixbuf */
   if (plugin->pixbuf != NULL)
     g_object_unref (G_OBJECT (plugin->pixbuf));
@@ -1349,23 +1343,6 @@ launcher_plugin_screen_position_changed (XfcePanelPlugin    *panel_plugin,
 
 
 
-static void
-launcher_plugin_icon_theme_changed (GtkIconTheme   *icon_theme,
-                                    LauncherPlugin *plugin)
-{
-  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
-  panel_return_if_fail (GTK_IS_ICON_THEME (icon_theme));
-
-  /* invalid the icon cache */
-  if (plugin->tooltip_cache != NULL)
-    {
-      g_object_unref (G_OBJECT (plugin->tooltip_cache));
-      plugin->tooltip_cache = NULL;
-    }
-}
-
-
-
 static LauncherArrowType
 launcher_plugin_default_arrow_type (LauncherPlugin *plugin)
 {
@@ -1420,29 +1397,32 @@ launcher_plugin_pack_widgets (LauncherPlugin *plugin)
 
 
 
-static GdkPixbuf *
-launcher_plugin_tooltip_pixbuf (GdkScreen   *screen,
-                                const gchar *icon_name)
+cairo_surface_t *
+launcher_plugin_tooltip_icon (GtkWidget *widget,
+                              const gchar *icon_name)
 {
-  GtkIconTheme *theme;
-
-  panel_return_val_if_fail (screen == NULL || GDK_IS_SCREEN (screen), NULL);
+  cairo_surface_t *surface = NULL;
+  GdkPixbuf *pixbuf;
+  gint scale_factor, size;
 
   if (panel_str_is_empty (icon_name))
     return NULL;
 
-  /* load directly from a file */
+  scale_factor = gtk_widget_get_scale_factor (widget);
+  size = scale_factor * 32;
   if (G_UNLIKELY (g_path_is_absolute (icon_name)))
-    return gdk_pixbuf_new_from_file_at_scale (icon_name, 32, 32, TRUE, NULL);
-
-  if (G_LIKELY (screen != NULL))
-    theme = gtk_icon_theme_get_for_screen (screen);
+    pixbuf = gdk_pixbuf_new_from_file_at_scale (icon_name, size, size, TRUE, NULL);
   else
-    theme = gtk_icon_theme_get_default ();
+    pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (), icon_name, size,
+                                       GTK_ICON_LOOKUP_FORCE_SIZE, NULL);
 
-  return gtk_icon_theme_load_icon_for_scale (theme, icon_name, GTK_ICON_SIZE_DND,
-                                             GTK_ICON_SIZE_DND,
-                                             GTK_ICON_LOOKUP_FORCE_SIZE, NULL);
+  if (pixbuf != NULL)
+    {
+      surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
+      g_object_unref (pixbuf);
+    }
+
+  return surface;
 }
 
 
@@ -1630,6 +1610,12 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
           gtk_widget_set_has_tooltip (mi, TRUE);
           g_signal_connect (G_OBJECT (mi), "query-tooltip",
               G_CALLBACK (launcher_plugin_item_query_tooltip), item);
+
+          /* invalidate tooltip icon when needed */
+          g_signal_connect_object (gtk_icon_theme_get_default (), "changed",
+              G_CALLBACK (launcher_plugin_tooltip_icon_invalidate), mi, G_CONNECT_SWAPPED);
+          g_signal_connect (mi, "notify::scale-factor",
+              G_CALLBACK (launcher_plugin_tooltip_icon_invalidate), NULL);
         }
 
       /* depending on the menu position we prepend or append */
@@ -1761,12 +1747,8 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
 
-  /* invalate the tooltip icon cache */
-  if (plugin->tooltip_cache != NULL)
-    {
-      g_object_unref (G_OBJECT (plugin->tooltip_cache));
-      plugin->tooltip_cache = NULL;
-    }
+  /* invalidate cached icons */
+  launcher_plugin_tooltip_icon_invalidate (G_OBJECT (plugin));
   if (plugin->pixbuf != NULL)
     {
       g_object_unref (G_OBJECT (plugin->pixbuf));
@@ -1992,9 +1974,6 @@ launcher_plugin_button_query_tooltip (GtkWidget      *widget,
                                       GtkTooltip     *tooltip,
                                       LauncherPlugin *plugin)
 {
-  gboolean        result;
-  GarconMenuItem *item;
-
   panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
   panel_return_val_if_fail (!plugin->disable_tooltips, FALSE);
 
@@ -2004,24 +1983,7 @@ launcher_plugin_button_query_tooltip (GtkWidget      *widget,
       || plugin->items->data == NULL)
     return FALSE;
 
-  /* get the first item */
-  item = GARCON_MENU_ITEM (plugin->items->data);
-
-  /* handle the basic tooltip data */
-  result = launcher_plugin_item_query_tooltip (widget, x, y, keyboard_mode, tooltip, item);
-  if (G_LIKELY (result))
-    {
-      /* set the cached icon if not already set */
-      if (G_UNLIKELY (plugin->tooltip_cache == NULL))
-        plugin->tooltip_cache =
-            launcher_plugin_tooltip_pixbuf (gtk_widget_get_screen (widget),
-                                            garcon_menu_item_get_icon_name (item));
-
-      if (G_LIKELY (plugin->tooltip_cache != NULL))
-        gtk_tooltip_set_icon (tooltip, plugin->tooltip_cache);
-    }
-
-  return result;
+  return launcher_plugin_item_query_tooltip (widget, x, y, keyboard_mode, tooltip, plugin->items->data);
 }
 
 
@@ -2373,6 +2335,14 @@ launcher_plugin_arrow_drag_leave (GtkWidget      *widget,
 
 
 
+static void
+launcher_plugin_tooltip_icon_invalidate (GObject *object)
+{
+  g_object_set_data (object, "tooltip-icon", NULL);
+}
+
+
+
 static gboolean
 launcher_plugin_item_query_tooltip (GtkWidget      *widget,
                                     gint            x,
@@ -2381,9 +2351,10 @@ launcher_plugin_item_query_tooltip (GtkWidget      *widget,
                                     GtkTooltip     *tooltip,
                                     GarconMenuItem *item)
 {
-  gchar       *markup;
+  GtkWidget *box, *label, *image;
+  gchar *markup;
   const gchar *name, *comment;
-  GdkPixbuf   *pixbuf;
+  cairo_surface_t *surface;
 
   panel_return_val_if_fail (GARCON_IS_MENU_ITEM (item), FALSE);
 
@@ -2396,36 +2367,32 @@ launcher_plugin_item_query_tooltip (GtkWidget      *widget,
   if (!panel_str_is_empty (comment))
     {
       markup = g_markup_printf_escaped ("<b>%s</b>\n%s", name, comment);
-      gtk_tooltip_set_markup (tooltip, markup);
+      label = gtk_label_new (markup);
+      gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
       g_free (markup);
     }
   else
     {
-      gtk_tooltip_set_text (tooltip, name);
+      label = gtk_label_new (name);
     }
 
-  /* the button uses a custom cache because the button widget is never
-   * destroyed, for menu items we cache the pixbuf by attaching the
-   * data on the menu item widget */
-  if (GTK_IS_MENU_ITEM (widget))
+  surface = g_object_get_data (G_OBJECT (widget), "tooltip-icon");
+  if (G_UNLIKELY (surface == NULL))
     {
-      pixbuf = g_object_get_data (G_OBJECT (widget), "pixbuf-cache");
-      if (G_LIKELY (pixbuf != NULL))
+      surface = launcher_plugin_tooltip_icon (widget, garcon_menu_item_get_icon_name (item));
+      if (G_LIKELY (surface != NULL))
         {
-          gtk_tooltip_set_icon (tooltip, pixbuf);
+          g_object_set_data_full (G_OBJECT (widget), "tooltip-icon", surface,
+                                  (GDestroyNotify) cairo_surface_destroy);
         }
-      else
-        {
-          pixbuf = launcher_plugin_tooltip_pixbuf (gtk_widget_get_screen (widget),
-                                                   garcon_menu_item_get_icon_name (item));
-          if (G_LIKELY (pixbuf != NULL))
-            {
-              gtk_tooltip_set_icon (tooltip, pixbuf);
-              g_object_set_data_full (G_OBJECT (widget), "pixbuf-cache", pixbuf,
-                                      (GDestroyNotify) g_object_unref);
-            }
-        }
-     }
+    }
+
+  image = gtk_image_new_from_surface (surface);
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  gtk_box_pack_start (GTK_BOX (box), image, TRUE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (box), label, TRUE, FALSE, 0);
+  gtk_widget_show_all (box);
+  gtk_tooltip_set_custom (tooltip, box);
 
   return TRUE;
 }
