@@ -1313,6 +1313,9 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
     }
   }
 
+  /* destroy the menu to update its size */
+  launcher_plugin_menu_destroy (plugin);
+
   return TRUE;
 }
 
