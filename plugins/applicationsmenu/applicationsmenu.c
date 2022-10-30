@@ -550,7 +550,8 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
     icon_theme = gtk_icon_theme_get_for_screen (screen);
 
   xfce_panel_set_image_from_source (GTK_IMAGE (plugin->image), plugin->button_icon,
-                                    icon_theme, icon_size);
+                                    icon_theme, icon_size,
+                                    gtk_widget_get_scale_factor (GTK_WIDGET (plugin)));
 
   if (plugin->show_button_title &&
       mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
@@ -626,7 +627,8 @@ applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget              *
 
       image = gtk_image_new ();
       xfce_panel_set_image_from_source (GTK_IMAGE (image), plugin->button_icon,
-                                        NULL, DIALOG_ICON_SIZE);
+                                        NULL, DIALOG_ICON_SIZE,
+                                        gtk_widget_get_scale_factor (GTK_WIDGET (plugin)));
       gtk_container_remove (GTK_CONTAINER (button), gtk_bin_get_child (GTK_BIN (button)));
       gtk_container_add (GTK_CONTAINER (button), image);
       gtk_widget_show (image);
@@ -697,7 +699,8 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
   image = gtk_image_new ();
   xfce_panel_set_image_from_source (GTK_IMAGE (image), plugin->button_icon,
-                                    NULL, DIALOG_ICON_SIZE);
+                                    NULL, DIALOG_ICON_SIZE,
+                                    gtk_widget_get_scale_factor (GTK_WIDGET (plugin)));
   gtk_container_add (GTK_CONTAINER (object), image);
   gtk_widget_show (image);
 

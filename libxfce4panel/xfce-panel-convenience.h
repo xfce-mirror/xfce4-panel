@@ -44,7 +44,8 @@ GdkPixbuf   *xfce_panel_pixbuf_from_source         (const gchar  *source,
 void         xfce_panel_set_image_from_source      (GtkImage     *image,
                                                     const gchar  *source,
                                                     GtkIconTheme *icon_theme,
-                                                    gint          size);
+                                                    gint          size,
+                                                    gint          scale);
 
 G_END_DECLS
 

@@ -431,7 +431,8 @@ directory_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   size /= xfce_panel_plugin_get_nrows (panel_plugin);
   gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, size);
   icon_size = xfce_panel_plugin_get_icon_size (panel_plugin);
-  xfce_panel_set_image_from_source (GTK_IMAGE (plugin->icon), plugin->icon_name, NULL, icon_size);
+  xfce_panel_set_image_from_source (GTK_IMAGE (plugin->icon), plugin->icon_name, NULL, icon_size,
+                                    gtk_widget_get_scale_factor (GTK_WIDGET (plugin)));
 
   return TRUE;
 }
@@ -481,7 +482,8 @@ directory_menu_plugin_configure_plugin_icon_chooser (GtkWidget           *button
 
       image = gtk_image_new ();
       xfce_panel_set_image_from_source (GTK_IMAGE (image), plugin->icon_name,
-                                        NULL, DIALOG_ICON_SIZE);
+                                        NULL, DIALOG_ICON_SIZE,
+                                        gtk_widget_get_scale_factor (GTK_WIDGET (plugin)));
       gtk_container_remove (GTK_CONTAINER (button), gtk_bin_get_child (GTK_BIN (button)));
       gtk_container_add (GTK_CONTAINER (button), image);
       gtk_widget_show (image);
@@ -522,7 +524,8 @@ directory_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
   image = gtk_image_new ();
   xfce_panel_set_image_from_source (GTK_IMAGE (image), plugin->icon_name,
-                                    NULL, DIALOG_ICON_SIZE);
+                                    NULL, DIALOG_ICON_SIZE,
+                                    gtk_widget_get_scale_factor (GTK_WIDGET (plugin)));
   gtk_container_add (GTK_CONTAINER (object), image);
   gtk_widget_show (image);
 
