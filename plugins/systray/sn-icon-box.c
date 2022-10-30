@@ -200,6 +200,8 @@ sn_icon_box_new (SnItem   *item,
                                   G_CALLBACK (sn_icon_box_icon_changed), box);
   sn_signal_connect_weak_swapped (settings, "notify::gtk-icon-theme-name",
                                   G_CALLBACK (sn_icon_box_icon_changed), box);
+  sn_signal_connect_weak_swapped (box, "notify::scale-factor",
+                                  G_CALLBACK (sn_icon_box_icon_changed), box);
   sn_icon_box_icon_changed (GTK_WIDGET (box));
 
   return GTK_WIDGET (box);
@@ -243,10 +245,12 @@ sn_icon_box_apply_icon (GtkWidget    *image,
 {
   GdkPixbuf *work_pixbuf = NULL;
   gchar     *work_icon_name = NULL;
-  gint       width, height;
+  gint       width, height, scale_factor;
   gchar     *s1, *s2;
 
   gtk_image_clear (GTK_IMAGE (image));
+  scale_factor = gtk_widget_get_scale_factor (image);
+  icon_size *= scale_factor;
 
   if (icon_name != NULL)
     {
@@ -287,6 +291,8 @@ sn_icon_box_apply_icon (GtkWidget    *image,
 
   if (work_pixbuf != NULL)
     {
+      cairo_surface_t *surface;
+
       width = gdk_pixbuf_get_width (work_pixbuf);
       height = gdk_pixbuf_get_height (work_pixbuf);
 
@@ -309,7 +315,9 @@ sn_icon_box_apply_icon (GtkWidget    *image,
           work_pixbuf = icon_pixbuf;
         }
 
-      gtk_image_set_from_pixbuf (GTK_IMAGE (image), work_pixbuf);
+      surface = gdk_cairo_surface_create_from_pixbuf (work_pixbuf, scale_factor, NULL);
+      gtk_image_set_from_surface (GTK_IMAGE (image), surface);
+      cairo_surface_destroy (surface);
       g_object_unref (work_pixbuf);
     }
 }
