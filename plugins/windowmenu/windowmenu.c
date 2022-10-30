@@ -624,7 +624,7 @@ window_menu_plugin_set_icon (WindowMenuPlugin *plugin,
                              WnckWindow       *window)
 {
   GdkPixbuf *pixbuf;
-  gint       icon_size;
+  gint       icon_size, scale_factor;
 
   panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
   panel_return_if_fail (WNCK_IS_WINDOW (window));
@@ -635,13 +635,18 @@ window_menu_plugin_set_icon (WindowMenuPlugin *plugin,
   gtk_widget_set_tooltip_text (plugin->icon, wnck_window_get_name (window));
 
   icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (plugin));
-  if (icon_size <= 31)
+  scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (plugin));
+  if (icon_size * scale_factor <= 31)
     pixbuf = wnck_window_get_mini_icon (window);
   else
     pixbuf = wnck_window_get_icon (window);
 
   if (G_LIKELY (pixbuf != NULL))
-    gtk_image_set_from_pixbuf (GTK_IMAGE (plugin->icon), pixbuf);
+    {
+      cairo_surface_t *surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
+      gtk_image_set_from_surface (GTK_IMAGE (plugin->icon), surface);
+      cairo_surface_destroy (surface);
+    }
   else
     {
       gtk_image_set_from_icon_name (GTK_IMAGE (plugin->icon), "image-missing", icon_size);
@@ -1004,6 +1009,7 @@ window_menu_plugin_menu_window_item_new (WnckWindow           *window,
   gchar       *decorated = NULL;
   GtkWidget   *mi, *label, *image;
   GdkPixbuf   *pixbuf, *lucent = NULL, *scaled = NULL;
+  gint         scale_factor;
 
   panel_return_val_if_fail (WNCK_IS_WINDOW (window), NULL);
 
@@ -1056,6 +1062,9 @@ window_menu_plugin_menu_window_item_new (WnckWindow           *window,
     {
       /* get the window icon */
       pixbuf = wnck_window_get_mini_icon (window);
+      scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (plugin));
+      icon_w *= scale_factor;
+      icon_h *= scale_factor;
       if (pixbuf != NULL
           && (gdk_pixbuf_get_width (pixbuf) < icon_w
               || gdk_pixbuf_get_height (pixbuf) < icon_h))
@@ -1063,6 +1072,8 @@ window_menu_plugin_menu_window_item_new (WnckWindow           *window,
 
       if (pixbuf != NULL)
         {
+          cairo_surface_t *surface;
+
           /* scale the icon if needed */
           if (gdk_pixbuf_get_width (pixbuf) > icon_w
               || gdk_pixbuf_get_height (pixbuf) > icon_h)
@@ -1082,7 +1093,9 @@ window_menu_plugin_menu_window_item_new (WnckWindow           *window,
             }
 
           /* set the menu item label */
-          image = gtk_image_new_from_pixbuf (pixbuf);
+          surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
+          image = gtk_image_new_from_surface (surface);
+          cairo_surface_destroy (surface);
           panel_image_menu_item_set_image (mi, image);
           gtk_widget_show (image);
 
