@@ -76,6 +76,7 @@ static void               launcher_plugin_pack_widgets                  (Launche
 static cairo_surface_t   *launcher_plugin_tooltip_icon                  (GtkWidget            *widget,
                                                                          const gchar          *icon_name);
 static void               launcher_plugin_tooltip_icon_invalidate       (GObject              *object);
+static void               launcher_plugin_icon_invalidate               (LauncherPlugin       *plugin);
 static void               launcher_plugin_menu_deactivate               (GtkWidget            *menu,
                                                                          LauncherPlugin       *plugin);
 static void               launcher_plugin_menu_item_activate            (GtkMenuItem          *widget,
@@ -190,7 +191,7 @@ struct _LauncherPlugin
 
   GSList            *items;
 
-  GdkPixbuf         *pixbuf;
+  cairo_surface_t   *surface;
   gchar             *icon_name;
 
   gulong             theme_change_id;
@@ -333,7 +334,7 @@ launcher_plugin_init (LauncherPlugin *plugin)
   plugin->action_menu = NULL;
   plugin->items = NULL;
   plugin->child = NULL;
-  plugin->pixbuf = NULL;
+  plugin->surface = NULL;
   plugin->icon_name = NULL;
   plugin->menu_timeout_id = 0;
   plugin->save_timeout_id = 0;
@@ -369,6 +370,10 @@ launcher_plugin_init (LauncherPlugin *plugin)
       G_CALLBACK (launcher_plugin_tooltip_icon_invalidate), plugin->button);
   g_signal_connect (plugin->button, "notify::scale-factor",
       G_CALLBACK (launcher_plugin_tooltip_icon_invalidate), NULL);
+  g_signal_connect (plugin, "notify::scale-factor",
+      G_CALLBACK (launcher_plugin_icon_invalidate), NULL);
+  g_signal_connect (plugin, "notify::scale-factor",
+      G_CALLBACK (launcher_plugin_menu_destroy), NULL);
 
   /* Make sure there aren't any constraints set on buttons by themes (Adwaita sets those minimum sizes) */
   context = gtk_widget_get_style_context (plugin->button);
@@ -1109,8 +1114,8 @@ launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
     }
 
   /* release the cached pixbuf */
-  if (plugin->pixbuf != NULL)
-    g_object_unref (G_OBJECT (plugin->pixbuf));
+  if (plugin->surface != NULL)
+    cairo_surface_destroy (plugin->surface);
   if (plugin->icon_name != NULL)
     g_free (plugin->icon_name);
 }
@@ -1289,29 +1294,40 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
     }
 
   /* set the panel plugin size */
-  if (plugin->show_label) {
+  if (plugin->show_label)
     gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), -1, -1);
-  }
-  else {
-    gint             icon_size;
+  else
+    {
+      gint icon_size;
 
-    gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), p_width, p_height);
+      gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), p_width, p_height);
+      icon_size = xfce_panel_plugin_get_icon_size (panel_plugin);
 
-    icon_size = xfce_panel_plugin_get_icon_size (panel_plugin);
-    /* if the icon is a pixbuf we have to recreate and scale it */
-    if (plugin->pixbuf != NULL &&
-        plugin->icon_name != NULL) {
-      g_object_unref (plugin->pixbuf);
-      plugin->pixbuf = gdk_pixbuf_new_from_file_at_size (plugin->icon_name,
-                                                         icon_size, icon_size,
-                                                         NULL);
-      gtk_image_set_from_pixbuf (GTK_IMAGE (plugin->child), plugin->pixbuf);
+      /* if the icon is a pixbuf we have to recreate and scale it */
+      if (plugin->surface != NULL && plugin->icon_name != NULL)
+        {
+          GdkPixbuf *pixbuf;
+          gint scale_factor;
+
+          cairo_surface_destroy (plugin->surface);
+          plugin->surface = NULL;
+          scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (plugin));
+          pixbuf = gdk_pixbuf_new_from_file_at_size (plugin->icon_name,
+                                                     icon_size * scale_factor,
+                                                     icon_size * scale_factor,
+                                                     NULL);
+          if (pixbuf != NULL)
+            {
+              plugin->surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
+              g_object_unref (pixbuf);
+            }
+
+          gtk_image_set_from_surface (GTK_IMAGE (plugin->child), plugin->surface);
+        }
+      /* set the panel plugin icon size */
+      else
+        gtk_image_set_pixel_size (GTK_IMAGE (plugin->child), icon_size);
     }
-    /* set the panel plugin icon size */
-    else {
-      gtk_image_set_pixel_size (GTK_IMAGE (plugin->child), MIN (icon_size, icon_size));
-    }
-  }
 
   /* destroy the menu to update its size */
   launcher_plugin_menu_destroy (plugin);
@@ -1638,10 +1654,19 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
         }
       else if (g_path_is_absolute (icon_name))
         {
-          pixbuf = gdk_pixbuf_new_from_file_at_size (icon_name, icon_size, icon_size, NULL);
-          image = gtk_image_new_from_pixbuf (pixbuf);
+          gint scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (plugin));
+          pixbuf = gdk_pixbuf_new_from_file_at_size (icon_name,
+                                                     icon_size * scale_factor,
+                                                     icon_size * scale_factor,
+                                                     NULL);
+          image = gtk_image_new_from_surface (NULL);
           if (pixbuf != NULL)
-            g_object_unref (pixbuf);
+            {
+              cairo_surface_t *surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
+              gtk_image_set_from_surface (GTK_IMAGE (image), surface);
+              cairo_surface_destroy (surface);
+              g_object_unref (pixbuf);
+            }
         }
       else
         {
@@ -1751,11 +1776,8 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
 
   /* invalidate cached icons */
   launcher_plugin_tooltip_icon_invalidate (G_OBJECT (plugin));
-  if (plugin->pixbuf != NULL)
-    {
-      g_object_unref (G_OBJECT (plugin->pixbuf));
-      plugin->pixbuf = NULL;
-    }
+  launcher_plugin_icon_invalidate (plugin);
+
   /* get first item */
   if (G_LIKELY (plugin->items != NULL))
     item = GARCON_MENU_ITEM (plugin->items->data);
@@ -1785,18 +1807,32 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
       icon_name = garcon_menu_item_get_icon_name (item);
       if (!panel_str_is_empty (icon_name))
         {
-          if (g_path_is_absolute (icon_name)) {
-            /* remember the icon name for recreating the pixbuf when panel
-               size changes */
-            plugin->icon_name = g_strdup (icon_name);
-            plugin->pixbuf = gdk_pixbuf_new_from_file_at_size (icon_name, icon_size, icon_size, NULL);
-            gtk_image_set_from_pixbuf (GTK_IMAGE (plugin->child), plugin->pixbuf);
-          }
-          else {
-            gtk_image_set_from_icon_name (GTK_IMAGE (plugin->child), icon_name,
-                                          icon_size);
-            gtk_image_set_pixel_size (GTK_IMAGE (plugin->child), icon_size);
-          }
+          if (g_path_is_absolute (icon_name))
+            {
+              GdkPixbuf *pixbuf;
+              gint scale_factor;
+
+              /* remember the icon name for recreating the pixbuf when panel size changes */
+              g_free (plugin->icon_name);
+              plugin->icon_name = g_strdup (icon_name);
+              scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (plugin));
+              pixbuf = gdk_pixbuf_new_from_file_at_size (icon_name,
+                                                         icon_size * scale_factor,
+                                                         icon_size * scale_factor,
+                                                         NULL);
+              if (pixbuf != NULL)
+                {
+                  plugin->surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
+                  g_object_unref (pixbuf);
+                }
+
+              gtk_image_set_from_surface (GTK_IMAGE (plugin->child), plugin->surface);
+            }
+          else
+            {
+              gtk_image_set_from_icon_name (GTK_IMAGE (plugin->child), icon_name, icon_size);
+              gtk_image_set_pixel_size (GTK_IMAGE (plugin->child), icon_size);
+            }
         }
 
       panel_utils_set_atk_info (plugin->button,
@@ -2341,6 +2377,18 @@ static void
 launcher_plugin_tooltip_icon_invalidate (GObject *object)
 {
   g_object_set_data (object, "tooltip-icon", NULL);
+}
+
+
+
+static void
+launcher_plugin_icon_invalidate (LauncherPlugin *plugin)
+{
+  if (plugin->surface != NULL)
+    {
+      cairo_surface_destroy (plugin->surface);
+      plugin->surface = NULL;
+    }
 }
 
 
