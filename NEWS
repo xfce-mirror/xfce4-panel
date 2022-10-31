@@ -1,3 +1,69 @@
+4.17.4 (2022-10-31)
+======
+- Dependency Changes:
+  - GObject Introspection >= 1.66.0
+
+- New Features:
+  - clock: Improved time zone matching (!105)
+  - clock: [GSoC22] Merge DateTime with Clock plugin (!101)
+  - clock: Reveal calendar command in prefs dialog (Fixes #560)
+
+- Code Refactoring:
+  - systray: cleanup: Fix misleading variable name
+  - systray: cleanup: Remove dead code
+  - clock: Decrease verbosity
+  - panel: Remove duplicated PanelWindow:scale-factor property
+  - panel: Remove some duplicate build flags
+  - Ignore Libwnck 43.0 deprecations
+  - systray: Replace deprecated "GtkWidget::composited-changed" signal
+  - Replace deprecated "style-set" signal with "style-updated"
+
+- Bug Fixes:
+  - windowmenu: Take window scaling into account for icons
+  - tasklist: Take window scaling into account for icons
+  - systray: Take window scaling into account for status notifiers
+  - libxfce4panel: Add window scaling to xfce_panel_set_image_from_source()
+  - launcher: Take window scaling into account for icons from files
+  - launcher: Rebuild the menu when the panel size changes
+  - launcher: Do not overwrite button icon cache with menu item icons
+  - launcher: Fix tooltip icon management
+  - libxfce4panel: Fix a memory leak
+  - panel: Chain up to parent in constructed()
+  - tasklist: Add missing sanity check
+  - panel: Add missing sanity check
+  - panel: Fix test likeliness
+  - docs: Add libxfce4panel first
+  - clock: Fixed zone info directory (#646, !105)
+  - tasklist: Properly restore button state on GtkMenu::selection-done
+  - tasklist: Browse a copy of the window list if it is subject to change (#594)
+  - clock: Improve backward compatibility (#641)
+  - clock: Prevent visual glitch when showing calendar window (#466)
+  - Revert "clock: Prevent visual glitch when showing calendar window" (#641)
+  - tasklist: Update button visibility when sent to another workspace
+  - tasklist: Properly update fallback icon (Fixes #636)
+  - systray: Use theme colors for symbolic icons (#635)
+  - Add title to message dialogs (!102)
+  - docs: Do not track `libxfce4panel-overrides.txt`
+  - Bump GObject Introspection minim version to 1.66 (xfconf#8, !97)
+  - panel: Chain-up to parent in style_updated() (Fixes #490)
+  - clock: Fix widget visibility in prefs dialog
+  - docs: Fix "unused declarations" warning
+  - docs: Add missing link for api-index-4.18
+  - docs: Add missing "macros" section
+
+- Translation Updates:
+  , Albanian, Amharic, Arabic, Armenian (Armenia), Asturian, Basque,
+  Belarusian, Bengali, Bulgarian, Catalan, Chinese (China), Chinese
+  (Hong Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch,
+  Eastern Armenian, English (Australia), English (United Kingdom),
+  Estonian, Finnish, French, Galician, Georgian, German, Greek, Hebrew,
+  Hungarian, Icelandic, Indonesian, Interlingue, Italian, Japanese,
+  Kazakh, Korean, Lithuanian, Malay, Norwegian Bokmål, Norwegian
+  Nynorsk, Occitan (post 1500), Panjabi (Punjabi), Polish, Portuguese,
+  Portuguese (Brazil), Romanian, Russian, Serbian, Sinhala, Slovak,
+  Slovenian, Spanish, Swedish, Thai, Turkish, Ukrainian, Uyghur,
+  Vietnamese
+
 4.17.3 (2022-08-20)
 ======
 - New Features:
