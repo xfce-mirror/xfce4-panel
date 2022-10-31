@@ -224,42 +224,22 @@ systray_box_finalize (GObject *object)
 
 static void
 systray_box_size_get_max_child_size (SystrayBox *box,
-                                     gint        alloc_size,
                                      gint       *rows_ret,
                                      gint       *icon_size_ret,
                                      gint       *row_size_ret,
                                      gint       *offset_ret)
 {
-  GtkWidget        *widget = GTK_WIDGET (box);
-  gint              rows;
-  gint              icon_size;
-  gint              row_size;
-  gint              offset;
-  GtkStyleContext  *ctx;
-  GtkBorder         padding;
-
-  ctx = gtk_widget_get_style_context (widget);
-  gtk_style_context_get_padding (ctx, gtk_widget_get_state_flags (widget), &padding);
-
-  rows = box->nrows;
-  icon_size = box->size_max;
-  row_size = box->row_size;
-  offset = box->row_padding;
-
-  if (box->square_icons)
-    icon_size = row_size;
-
   if (rows_ret != NULL)
-    *rows_ret = rows;
+    *rows_ret = box->nrows;
 
   if (icon_size_ret != NULL)
-    *icon_size_ret = icon_size;
+    *icon_size_ret = box->square_icons ? box->row_size : box->size_max;
 
   if (row_size_ret != NULL)
-    *row_size_ret = row_size;
+    *row_size_ret = box->row_size;
 
   if (offset_ret != NULL)
-    *offset_ret = offset;
+    *offset_ret = box->row_padding;
 }
 
 
@@ -332,7 +312,7 @@ systray_box_get_preferred_length (GtkWidget      *widget,
   box->n_visible_children = 0;
 
   /* get some info about the n_rows we're going to allocate */
-  systray_box_size_get_max_child_size (box, box->size_alloc, &rows, &row_size, NULL, NULL);
+  systray_box_size_get_max_child_size (box, &rows, &row_size, NULL, NULL);
 
   for (li = box->children, cells = 0.00; li != NULL; li = li->next)
     {
@@ -468,7 +448,7 @@ systray_box_size_allocate (GtkWidget     *widget,
   alloc_size = box->horizontal ? allocation->height : allocation->width;
   spacing = box->square_icons ? 0 : SPACING;
 
-  systray_box_size_get_max_child_size (box, alloc_size, &rows, &icon_size, &row_size, &offset);
+  systray_box_size_get_max_child_size (box, &rows, &icon_size, &row_size, &offset);
 
   panel_debug_filtered (PANEL_DEBUG_SYSTRAY, "allocate rows=%d, icon_size=%d, w=%d, h=%d, horiz=%s, border=%d",
                         rows, icon_size, allocation->width, allocation->height,
