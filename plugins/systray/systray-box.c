@@ -299,7 +299,7 @@ systray_box_get_preferred_length (GtkWidget      *widget,
   gint              n_hidden_children = 0;
   gint              rows;
   gdouble           cols;
-  gint              row_size;
+  gint              icon_size;
   gdouble           cells;
   gint              min_seq_cells = -1;
   gdouble           ratio;
@@ -312,7 +312,7 @@ systray_box_get_preferred_length (GtkWidget      *widget,
   box->n_visible_children = 0;
 
   /* get some info about the n_rows we're going to allocate */
-  systray_box_size_get_max_child_size (box, &rows, &row_size, NULL, NULL);
+  systray_box_size_get_max_child_size (box, &rows, &icon_size, NULL, NULL);
 
   for (li = box->children, cells = 0.00; li != NULL; li = li->next)
     {
@@ -368,8 +368,8 @@ systray_box_get_preferred_length (GtkWidget      *widget,
     }
 
   panel_debug_filtered (PANEL_DEBUG_SYSTRAY,
-      "requested cells=%g, rows=%d, row_size=%d, children=%d",
-      cells, rows, row_size, box->n_visible_children);
+      "requested cells=%g, rows=%d, icon_size=%d, children=%d",
+      cells, rows, icon_size, box->n_visible_children);
 
   if (cells > 0.00)
     {
@@ -384,9 +384,9 @@ systray_box_get_preferred_length (GtkWidget      *widget,
         cols = MAX (min_seq_cells, cols);
 
       if (box->square_icons)
-        length = row_size * cols;
+        length = icon_size * cols;
       else
-        length = row_size * cols + (cols - 1) * SPACING;
+        length = icon_size * cols + (cols - 1) * SPACING;
     }
   else
     {
