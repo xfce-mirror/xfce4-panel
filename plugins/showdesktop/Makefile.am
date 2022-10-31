@@ -17,7 +17,7 @@ libshowdesktop_la_SOURCES = \
 libshowdesktop_la_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
-	$(LIBWNCK_CFLAGS) \
+	$(LIBXFCE4WINDOWING_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 libshowdesktop_la_LDFLAGS = \
@@ -32,7 +32,7 @@ libshowdesktop_la_LIBADD = \
 	$(top_builddir)/common/libpanel-common.la \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
-	$(LIBWNCK_LIBS)
+	$(LIBXFCE4WINDOWING_LIBS)
 
 libshowdesktop_la_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
