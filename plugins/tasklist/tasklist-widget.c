@@ -3538,13 +3538,17 @@ xfce_tasklist_button_drag_begin (GtkWidget         *button,
                                  XfceTasklistChild *child)
 {
   GdkPixbuf *pixbuf;
+  gint scale_factor;
 
   panel_return_if_fail (WNCK_IS_WINDOW (child->window));
 
-  pixbuf = xfce_tasklist_get_window_icon (child->window, 32, CHILD_TYPE_WINDOW);
+  scale_factor = gtk_widget_get_scale_factor (button);
+  pixbuf = xfce_tasklist_get_window_icon (child->window, scale_factor * 32, CHILD_TYPE_WINDOW);
   if (G_LIKELY (pixbuf != NULL))
     {
-      gtk_drag_set_icon_pixbuf (context, pixbuf, 0, 0);
+      cairo_surface_t *surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
+      gtk_drag_set_icon_surface (context, surface);
+      cairo_surface_destroy (surface);
       g_object_unref (pixbuf);
     }
 }
