@@ -57,7 +57,6 @@ xfce4_panel_SOURCES = \
 xfce4_panel_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(GMODULE_CFLAGS) \
-	$(GIO_UNIX_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
 	$(LIBWNCK_CFLAGS) \
@@ -74,7 +73,6 @@ xfce4_panel_LDADD = \
 	$(top_builddir)/common/libpanel-common.la \
 	$(GTK_LIBS) \
 	$(GMODULE_LIBS) \
-	$(GIO_UNIX_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
 	$(LIBWNCK_LIBS) \
