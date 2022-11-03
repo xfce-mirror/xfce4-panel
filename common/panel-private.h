@@ -20,6 +20,12 @@
 #define __PANEL_PRIVATE_H__
 
 #include <gtk/gtk.h>
+#ifdef GDK_WINDOWING_X11
+#include <gdk/gdkx.h>
+#endif
+#ifdef GDK_WINDOWING_WAYLAND
+#include <gdk/gdkwayland.h>
+#endif
 
 /* support macros for debugging (improved macro for better position indication) */
 /*#ifndef NDEBUG*/
@@ -137,22 +143,12 @@ G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 G_GNUC_END_IGNORE_DEPRECATIONS
 }
 
-#ifdef WNCK_TYPE_SCREEN
-static inline WnckScreen *
-panel_wnck_screen_get (int index)
-{
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  return wnck_screen_get (index);
-G_GNUC_END_IGNORE_DEPRECATIONS
-}
-
-static inline WnckScreen *
-panel_wnck_screen_get_default (void)
-{
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  return wnck_screen_get_default ();
-G_GNUC_END_IGNORE_DEPRECATIONS
-}
+/* facilitate X11/Wayland management */
+#ifndef GDK_WINDOWING_X11
+#define GDK_IS_X11_DISPLAY(display) FALSE
+#endif
+#ifndef GDK_WINDOWING_WAYLAND
+#define GDK_IS_WAYLAND_DISPLAY(display) FALSE
 #endif
 
 #endif /* !__PANEL_PRIVATE_H__ */
