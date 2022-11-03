@@ -288,6 +288,13 @@ dnl ***************************
 echo
 echo "Build Configuration:"
 echo
-echo "* Debug Support:          $enable_debug"
-echo "* GNU Visibility:         $have_gnuc_visibility"
+echo "* Debug support:                 $enable_debug"
+echo "* GNU Visibility support:        $have_gnuc_visibility"
+echo "* GObject Introspection support: $enable_introspection"
+echo "* Documentation support:         $enable_gtk_doc"
+if test "$DBUSMENU_FOUND" = "yes"; then
+echo "* D-Bus menu support:            yes"
+else
+echo "* D-Bus menu support:            no"
+fi
 echo
