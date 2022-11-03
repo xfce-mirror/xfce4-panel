@@ -1775,7 +1775,7 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
 
   /* invalidate cached icons */
-  launcher_plugin_tooltip_icon_invalidate (G_OBJECT (plugin));
+  launcher_plugin_tooltip_icon_invalidate (G_OBJECT (plugin->button));
   launcher_plugin_icon_invalidate (plugin);
 
   /* get first item */
