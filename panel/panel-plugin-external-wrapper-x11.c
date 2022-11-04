@@ -20,9 +20,6 @@
 #include <config.h>
 #endif
 
-#include <gtk/gtk.h>
-#ifdef GDK_WINDOWING_X11
-
 #include <gtk/gtkx.h>
 
 #include <common/panel-private.h>
@@ -282,5 +279,3 @@ panel_plugin_external_wrapper_x11_socket_plug_removed (GtkSocket *socket,
 
   return TRUE;
 }
-
-#endif /* ! GDK_WINDOWING_X11 */
