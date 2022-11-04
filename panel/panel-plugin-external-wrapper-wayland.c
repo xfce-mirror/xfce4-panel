@@ -20,9 +20,6 @@
 #include <config.h>
 #endif
 
-#include <gtk/gtk.h>
-#ifdef GDK_WINDOWING_WAYLAND
-
 #include <gtk-layer-shell/gtk-layer-shell.h>
 
 #include <common/panel-private.h>
@@ -370,5 +367,3 @@ panel_plugin_external_wrapper_wayland_pointer_is_outside (PanelPluginExternal *e
 
   return ret;
 }
-
-#endif /* ! GDK_WINDOWING_WAYLAND */
