@@ -20,9 +20,6 @@
 #include <config.h>
 #endif
 
-#include <gtk/gtk.h>
-#ifdef GDK_WINDOWING_X11
-
 #include <common/panel-private.h>
 #include <wrapper/wrapper-plug-x11.h>
 #include <wrapper/wrapper-plug.h>
@@ -200,5 +197,3 @@ wrapper_plug_x11_new (Window socket_id,
 
   return GTK_WIDGET (plug);
 }
-
-#endif /* ! GDK_WINDOWING_X11 */

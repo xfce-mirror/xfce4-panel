@@ -32,12 +32,15 @@
 #include <X11/Xatom.h>
 #endif
 
-#include <libxfce4ui/libxfce4ui.h>
-
+#ifdef HAVE_GTK_LAYER_SHELL
 #include <gtk-layer-shell/gtk-layer-shell.h>
+#else
+#define gtk_layer_is_supported() FALSE
+#endif
+#include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4windowing/libxfce4windowing.h>
-
 #include <xfconf/xfconf.h>
+
 #include <common/panel-private.h>
 #include <common/panel-debug.h>
 #include <common/panel-utils.h>
@@ -625,6 +628,7 @@ panel_window_init (PanelWindow *window)
   /* create a 'fake' drop zone for autohide drag motion */
   gtk_drag_dest_set (GTK_WIDGET (window), 0, NULL, 0, 0);
 
+#ifdef HAVE_GTK_LAYER_SHELL
   /* initialize layer-shell if supported (includes Wayland display check) */
   if (gtk_layer_is_supported ())
     {
@@ -632,6 +636,7 @@ panel_window_init (PanelWindow *window)
       gtk_layer_set_keyboard_mode (GTK_WINDOW (window), GTK_LAYER_SHELL_KEYBOARD_MODE_ON_DEMAND);
       gtk_layer_set_exclusive_zone (GTK_WINDOW (window), -1);
     }
+#endif
 
   /* set the screen */
   panel_window_screen_changed (GTK_WIDGET (window), NULL);
@@ -1436,6 +1441,7 @@ panel_window_get_preferred_height (GtkWidget *widget,
   if (natural_height != NULL)
     *natural_height = n_height;
 
+#ifdef HAVE_GTK_LAYER_SHELL
   /*
    * Disable left/right or top/bottom anchor pairs during allocation, so that the panel
    * is not stretched between the two anchors, preventing it from shrinking. Quite an
@@ -1449,6 +1455,7 @@ panel_window_get_preferred_height (GtkWidget *widget,
       gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
       gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
     }
+#endif
 }
 
 
@@ -1723,6 +1730,7 @@ panel_window_size_allocate_set_xy (PanelWindow *window,
 
 
 
+#ifdef HAVE_GTK_LAYER_SHELL
 static void
 panel_window_move_plugin (GtkWidget *widget,
                           gpointer data)
@@ -1730,6 +1738,7 @@ panel_window_move_plugin (GtkWidget *widget,
   if (PANEL_IS_PLUGIN_EXTERNAL (widget))
     panel_plugin_external_set_geometry (PANEL_PLUGIN_EXTERNAL (widget), data);
 }
+#endif
 
 
 
@@ -1739,6 +1748,7 @@ panel_window_move (PanelWindow *window,
                    gint x,
                    gint y)
 {
+#ifdef HAVE_GTK_LAYER_SHELL
   if (gtk_layer_is_supported ())
     {
       gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_TOP, y - window->area.y);
@@ -1758,6 +1768,7 @@ panel_window_move (PanelWindow *window,
       panel_utils_wl_surface_commit (GTK_WIDGET (moved));
     }
   else
+#endif
     gtk_window_move (moved, x, y);
 }
 
@@ -1768,6 +1779,7 @@ panel_window_get_position (PanelWindow *window,
                            gint *x,
                            gint *y)
 {
+#ifdef HAVE_GTK_LAYER_SHELL
   if (gtk_layer_is_supported ())
     {
       if (x != NULL)
@@ -1778,6 +1790,7 @@ panel_window_get_position (PanelWindow *window,
                                                     GTK_LAYER_SHELL_EDGE_TOP);
     }
   else
+#endif
     gtk_window_get_position (GTK_WINDOW (window), x, y);
 }
 
@@ -2019,6 +2032,7 @@ panel_window_screen_struts_set (PanelWindow *window)
   if (!gtk_widget_get_realized (GTK_WIDGET (window)))
     return;
 
+#ifdef HAVE_GTK_LAYER_SHELL
   if (gtk_layer_is_supported ())
     {
       switch (window->struts_edge)
@@ -2040,6 +2054,7 @@ panel_window_screen_struts_set (PanelWindow *window)
 
       return;
     }
+#endif
 
   if (! GDK_IS_X11_DISPLAY (window->display))
     return;
@@ -2288,6 +2303,7 @@ panel_window_snap_position (PanelWindow *window)
 static void
 panel_window_layer_set_anchor (PanelWindow *window)
 {
+#ifdef HAVE_GTK_LAYER_SHELL
   GtkWindow *gtkwindow = GTK_WINDOW (window);
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
@@ -2411,6 +2427,7 @@ panel_window_layer_set_anchor (PanelWindow *window)
       panel_assert_not_reached ();
       break;
     }
+#endif
 }
 
 
@@ -2638,6 +2655,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
             }
         }
 
+#ifdef HAVE_GTK_LAYER_SHELL
       /* the compositor does not manage to display the panel on the right monitor
        * by itself in general */
       if (gtk_layer_is_supported ())
@@ -2646,6 +2664,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
           if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
             gtk_layer_set_monitor (GTK_WINDOW (window->autohide_window), monitor);
         }
+#endif
     }
 
   /* set the new working area of the panel */
@@ -2920,8 +2939,10 @@ panel_window_xfw_window_on_panel_monitor (PanelWindow *window,
             }
         }
     }
+#ifdef HAVE_GTK_LAYER_SHELL
   else if (g_list_find (monitors, gtk_layer_get_monitor (GTK_WINDOW (window))))
     return TRUE;
+#endif
 
   return FALSE;
 }
@@ -3329,6 +3350,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
                                 "gravity", GDK_GRAVITY_STATIC,
                                 "name", "XfcePanelWindowHidden",
                                 NULL);
+#ifdef HAVE_GTK_LAYER_SHELL
           if (gtk_layer_is_supported ())
             {
               gtk_layer_init_for_window (GTK_WINDOW (popup));
@@ -3345,6 +3367,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
                * resizing is taken into account */
               gtk_widget_set_size_request (popup, window->autohide_size, window->autohide_size);
             }
+#endif
 
           /* move the window offscreen */
           window->autohide_window = popup;
