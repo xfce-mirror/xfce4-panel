@@ -36,7 +36,10 @@ libsystray_la_SOURCES = \
 	sn-plugin.c \
 	sn-plugin.h \
 	sn-util.c \
-	sn-util.h \
+	sn-util.h
+
+if HAVE_GTK_X11
+libsystray_la_SOURCES += \
 	systray.c \
 	systray.h \
 	systray-box.c \
@@ -45,6 +48,7 @@ libsystray_la_SOURCES = \
 	systray-manager.h \
 	systray-socket.c \
 	systray-socket.h
+endif
 
 libsystray_la_CFLAGS = \
 	$(LIBX11_CFLAGS) \
