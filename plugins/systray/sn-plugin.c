@@ -35,10 +35,12 @@
 #include <common/panel-utils.h>
 #include <common/panel-debug.h>
 
+#ifdef HAVE_GTK_X11
 #include "systray.h"
 #include "systray-box.h"
 #include "systray-socket.h"
 #include "systray-manager.h"
+#endif
 
 #include "sn-backend.h"
 #include "sn-box.h"
@@ -66,10 +68,13 @@ static void                  sn_plugin_configure_plugin              (XfcePanelP
 
 
 
-XFCE_PANEL_DEFINE_PLUGIN (SnPlugin, sn_plugin,
-                          systray_box_register_type,
+XFCE_PANEL_DEFINE_PLUGIN (SnPlugin, sn_plugin
+#ifdef HAVE_GTK_X11
+                          , systray_box_register_type,
                           systray_manager_register_type,
-                          systray_socket_register_type)
+                          systray_socket_register_type
+#endif
+                         )
 
 
 
@@ -92,11 +97,13 @@ static void
 sn_plugin_init (SnPlugin *plugin)
 {
   /* Systray init */
+#ifdef HAVE_GTK_X11
   plugin->manager = NULL;
+  plugin->systray_box = NULL;
+#endif
   plugin->idle_startup = 0;
   plugin->names_ordered = NULL;
   plugin->names_hidden = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-  plugin->systray_box = NULL;
 
   /* Statusnotifier init */
   plugin->item = NULL;
@@ -121,6 +128,7 @@ sn_plugin_free (XfcePanelPlugin *panel_plugin)
   g_slist_free_full (plugin->names_ordered, g_free);
   g_hash_table_destroy (plugin->names_hidden);
 
+#ifdef HAVE_GTK_X11
   if (G_LIKELY (plugin->manager != NULL))
     {
       systray_manager_unregister (plugin->manager);
@@ -133,6 +141,7 @@ sn_plugin_free (XfcePanelPlugin *panel_plugin)
       g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
           systray_plugin_screen_changed, NULL);
     }
+#endif
 
   /* Statusnotifier */
   /* remove children so they won't use unrefed SnItems and SnConfig */
@@ -157,9 +166,11 @@ sn_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                       size,
                       xfce_panel_plugin_get_nrows (panel_plugin),
                       xfce_panel_plugin_get_icon_size (panel_plugin));
+#ifdef HAVE_GTK_X11
   if (plugin->systray_box != NULL)
     systray_plugin_size_changed (panel_plugin,
                                  xfce_panel_plugin_get_size (panel_plugin));
+#endif
 
   return TRUE;
 }
@@ -179,8 +190,10 @@ sn_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
                 ? GTK_ORIENTATION_VERTICAL : GTK_ORIENTATION_HORIZONTAL;
 
   sn_config_set_orientation (plugin->config, panel_orientation, orientation);
+#ifdef HAVE_GTK_X11
   if (plugin->systray_box != NULL)
     systray_plugin_orientation_changed (panel_plugin, panel_orientation);
+#endif
 
   sn_plugin_size_changed (panel_plugin, xfce_panel_plugin_get_size (panel_plugin));
 }
@@ -259,6 +272,7 @@ update_button_visibility (SnPlugin *plugin)
 }
 
 
+#ifdef HAVE_GTK_X11
 static void
 systray_has_hidden_cb (SystrayBox *box,
                        GParamSpec *pspec,
@@ -267,6 +281,7 @@ systray_has_hidden_cb (SystrayBox *box,
   plugin->has_hidden_systray_items = systray_box_has_hidden_items (box);
   update_button_visibility (plugin);
 }
+#endif
 
 
 static void
@@ -294,8 +309,10 @@ sn_plugin_button_toggled (GtkWidget *button,
 
   show_hidden = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
   sn_box_set_show_hidden (XFCE_SN_BOX (plugin->sn_box), show_hidden);
+#ifdef HAVE_GTK_X11
   if (plugin->systray_box != NULL)
     systray_box_set_show_hidden (XFCE_SYSTRAY_BOX (plugin->systray_box), show_hidden);
+#endif
 
   orientation = xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin));
   if (orientation == GTK_ORIENTATION_HORIZONTAL)
@@ -313,7 +330,9 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
   SnPlugin *plugin = XFCE_SN_PLUGIN (panel_plugin);
 
+#ifdef HAVE_GTK_X11
   plugin->manager = NULL;
+#endif
   plugin->idle_startup = 0;
   plugin->names_ordered = NULL;
   plugin->names_hidden = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
@@ -327,6 +346,7 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
   gtk_container_add (GTK_CONTAINER (plugin), plugin->box);
   gtk_widget_show (plugin->box);
 
+#ifdef HAVE_GTK_X11
   /* Add systray box */
   if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
     {
@@ -355,6 +375,7 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
       g_signal_connect (G_OBJECT(plugin->systray_box), "notify::has-hidden",
                         G_CALLBACK(systray_has_hidden_cb), plugin);
     }
+#endif
 
   /* Add statusnotifier box */
   plugin->sn_box = sn_box_new (plugin->config);
