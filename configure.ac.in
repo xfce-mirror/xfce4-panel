@@ -118,11 +118,6 @@ dnl *** Check for i18n support ***
 dnl ******************************
 XDT_I18N([@LINGUAS@])
 
-dnl *******************************
-dnl *** Check for X11 installed ***
-dnl *******************************
-XDT_CHECK_LIBX11_REQUIRE()
-
 dnl ***********************************
 dnl *** Check for gdbus-codegen ***
 dnl ***********************************
@@ -150,11 +145,18 @@ XDT_CHECK_PACKAGE([GIO], [gio-2.0], [2.72.0])
 XDT_CHECK_PACKAGE([GIO_UNIX], [gio-unix-2.0], [2.72.0])
 XDT_CHECK_PACKAGE([GMODULE], [gmodule-2.0], [2.72.0])
 XDT_CHECK_PACKAGE([CAIRO], [cairo], [1.16.0])
-XDT_CHECK_PACKAGE([LIBWNCK], [libwnck-3.0], [3.0])
-
-XDT_CHECK_PACKAGE([GTK_LAYER_SHELL], [gtk-layer-shell-0], [0.7])
 XDT_CHECK_PACKAGE([LIBXFCE4WINDOWING], [libxfce4windowing-0], [4.17])
 XDT_CHECK_PACKAGE([LIBXFCE4WINDOWINGUI], [libxfce4windowingui-0], [4.17])
+
+dnl **********************************************
+dnl *** Optional X11/Wayland-specific packages ***
+dnl **********************************************
+XDT_CHECK_LIBX11()
+XDT_CHECK_OPTIONAL_PACKAGE([GTK_X11], [gtk+-x11-3.0], [3.22], [gtk-x11], [GTK X11 support])
+XDT_CHECK_OPTIONAL_PACKAGE([LIBWNCK], [libwnck-3.0], [3.0], [libwnck], [Libwnck support])
+XDT_CHECK_OPTIONAL_PACKAGE([GTK_LAYER_SHELL], [gtk-layer-shell-0], [0.7], [gtk-layer-shell], [GTK Layer Shell support])
+AM_CONDITIONAL([HAVE_GTK_X11], [test "$GTK_X11_FOUND" = "yes"])
+AM_CONDITIONAL([HAVE_GTK_LAYER_SHELL], [test "$GTK_LAYER_SHELL_FOUND" = "yes"])
 
 dnl *********************************************
 dnl *** Optional DBUSMENU for StatusNotifiers ***
@@ -300,5 +302,21 @@ if test "$DBUSMENU_FOUND" = "yes"; then
 echo "* D-Bus menu support:            yes"
 else
 echo "* D-Bus menu support:            no"
+fi
+echo "* Libx11 support:                $ac_cv_lib_X11_main"
+if test "$GTK_X11_FOUND" = "yes"; then
+echo "* GTK X11 support:               yes"
+else
+echo "* GTK X11 support:               no"
+fi
+if test "$LIBWNCK_FOUND" = "yes"; then
+echo "* Libwnck support:               yes"
+else
+echo "* Libwnck support:               no"
+fi
+if test "$GTK_LAYER_SHELL_FOUND" = "yes"; then
+echo "* GTK Layer Shell support:       yes"
+else
+echo "* GTK Layer Shell support:       no"
 fi
 echo
