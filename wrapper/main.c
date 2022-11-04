@@ -50,6 +50,9 @@
 
 static GQuark   plug_quark = 0;
 static gint     retval = PLUGIN_EXIT_FAILURE;
+#ifndef HAVE_GTK_X11
+typedef gulong Window;
+#endif
 
 
 
