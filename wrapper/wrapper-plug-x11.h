@@ -19,9 +19,6 @@
 #ifndef __WRAPPER_PLUG_X11_H__
 #define __WRAPPER_PLUG_X11_H__
 
-#include <gtk/gtk.h>
-#ifdef GDK_WINDOWING_X11
-
 #include <gtk/gtkx.h>
 
 G_BEGIN_DECLS
@@ -33,5 +30,4 @@ GtkWidget *wrapper_plug_x11_new (Window socket_id);
 
 G_END_DECLS
 
-#endif /* ! GDK_WINDOWING_X11 */
 #endif /* ! __WRAPPER_PLUG_X11_H__ */

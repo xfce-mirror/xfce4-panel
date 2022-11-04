@@ -20,9 +20,6 @@
 #include <config.h>
 #endif
 
-#include <gtk/gtk.h>
-#ifdef GDK_WINDOWING_WAYLAND
-
 #include <gtk-layer-shell/gtk-layer-shell.h>
 
 #include <common/panel-private.h>
@@ -209,5 +206,3 @@ GtkWidget *wrapper_plug_wayland_new (GDBusProxy *proxy)
 
   return plug;
 }
-
-#endif /* ! GDK_WINDOWING_WAYLAND */
