@@ -33,7 +33,13 @@
 
 #include <gdk/gdk.h>
 #include <libxfce4util/libxfce4util.h>
+#ifdef HAVE_GTK_X11
+#include <panel/panel-plugin-external-wrapper-x11.h>
+#endif
+#ifdef HAVE_GTK_LAYER_SHELL
 #include <gtk-layer-shell/gtk-layer-shell.h>
+#include <panel/panel-plugin-external-wrapper-wayland.h>
+#endif
 
 #include <common/panel-private.h>
 #include <common/panel-dbus.h>
@@ -45,8 +51,6 @@
 #include <panel/panel-module.h>
 #include <panel/panel-plugin-external.h>
 #include <panel/panel-plugin-external-wrapper.h>
-#include <panel/panel-plugin-external-wrapper-x11.h>
-#include <panel/panel-plugin-external-wrapper-wayland.h>
 #include <panel/panel-plugin-external-wrapper-exported.h>
 #include <panel/panel-window.h>
 #include <panel/panel-dialogs.h>
@@ -487,14 +491,14 @@ panel_plugin_external_wrapper_new (PanelModule  *module,
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
   panel_return_val_if_fail (unique_id != -1, NULL);
 
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_GTK_X11
   if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
     return g_object_new (PANEL_TYPE_PLUGIN_EXTERNAL_WRAPPER_X11,
                          "module", module,
                          "unique-id", unique_id,
                          "arguments", arguments, NULL);
 #endif
-#ifdef GDK_WINDOWING_WAYLAND
+#ifdef HAVE_GTK_LAYER_SHELL
   if (gtk_layer_is_supported ())
     return g_object_new (PANEL_TYPE_PLUGIN_EXTERNAL_WRAPPER_WAYLAND,
                          "module", module,
