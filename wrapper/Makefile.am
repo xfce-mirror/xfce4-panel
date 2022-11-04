@@ -15,11 +15,19 @@ wrapper_2_0_SOURCES = \
 	wrapper-module.c \
 	wrapper-module.h \
 	wrapper-plug.c \
-	wrapper-plug.h \
-	wrapper-plug-wayland.c \
-	wrapper-plug-wayland.h \
+	wrapper-plug.h
+
+if HAVE_GTK_X11
+wrapper_2_0_SOURCES += \
 	wrapper-plug-x11.c \
 	wrapper-plug-x11.h
+endif
+
+if HAVE_GTK_LAYER_SHELL
+wrapper_2_0_SOURCES += \
+	wrapper-plug-wayland.c \
+	wrapper-plug-wayland.h
+endif
 
 wrapper_2_0_CFLAGS = \
 	$(GTK_CFLAGS) \
