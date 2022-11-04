@@ -27,11 +27,6 @@
 #include <string.h>
 #endif
 
-#ifdef GDK_WINDOWING_X11
-#include <X11/Xlib.h>
-#include <X11/Xatom.h>
-#endif
-
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
 
@@ -65,14 +60,12 @@ struct _SystraySocket
 
 
 
-#ifdef GDK_WINDOWING_X11
 static void     systray_socket_finalize      (GObject        *object);
 static void     systray_socket_realize       (GtkWidget      *widget);
 static void     systray_socket_size_allocate (GtkWidget      *widget,
                                               GtkAllocation  *allocation);
 static gboolean systray_socket_draw          (GtkWidget      *widget,
                                               cairo_t        *cr);
-#endif
 
 
 
@@ -83,7 +76,6 @@ XFCE_PANEL_DEFINE_TYPE (SystraySocket, systray_socket, GTK_TYPE_SOCKET)
 static void
 systray_socket_class_init (SystraySocketClass *klass)
 {
-#ifdef GDK_WINDOWING_X11
   GtkWidgetClass *gtkwidget_class;
   GObjectClass   *gobject_class;
 
@@ -94,7 +86,6 @@ systray_socket_class_init (SystraySocketClass *klass)
   gtkwidget_class->realize = systray_socket_realize;
   gtkwidget_class->size_allocate = systray_socket_size_allocate;
   gtkwidget_class->draw = systray_socket_draw;
-#endif
 }
 
 
@@ -107,8 +98,6 @@ systray_socket_init (SystraySocket *socket)
 }
 
 
-
-#ifdef GDK_WINDOWING_X11
 
 static void
 systray_socket_finalize (GObject *object)
@@ -443,17 +432,3 @@ systray_socket_set_hidden (SystraySocket *socket,
 
   socket->hidden = hidden;
 }
-
-#else /* ! GDK_WINDOWING_X11 */
-
-GtkWidget       *systray_socket_new           (GdkScreen       *screen,
-                                               Window           window)    { return NULL; }
-void             systray_socket_force_redraw  (SystraySocket   *socket)    {}
-gboolean         systray_socket_is_composited (SystraySocket   *socket)    { return FALSE; }
-const gchar     *systray_socket_get_name      (SystraySocket   *socket)    { return NULL; }
-Window          *systray_socket_get_window    (SystraySocket   *socket)    { return NULL; }
-gboolean         systray_socket_get_hidden    (SystraySocket   *socket)    { return FALSE; }
-void             systray_socket_set_hidden    (SystraySocket   *socket,
-                                               gboolean         hidden)    {}
-
-#endif
