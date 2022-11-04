@@ -20,12 +20,16 @@
 #include <config.h>
 #endif
 
+#ifdef HAVE_GTK_X11
+#include <wrapper/wrapper-plug-x11.h>
+#endif
+#ifdef HAVE_GTK_LAYER_SHELL
 #include <gtk-layer-shell/gtk-layer-shell.h>
+#include <wrapper/wrapper-plug-wayland.h>
+#endif
 
 #include <common/panel-private.h>
 #include <wrapper/wrapper-plug.h>
-#include <wrapper/wrapper-plug-x11.h>
-#include <wrapper/wrapper-plug-wayland.h>
 
 
 
@@ -49,11 +53,11 @@ wrapper_plug_new (gulong socket_id,
   panel_return_val_if_fail (G_IS_DBUS_PROXY (proxy), NULL);
   panel_return_val_if_fail (error != NULL && *error == NULL, NULL);
 
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_GTK_X11
   if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
     return wrapper_plug_x11_new (socket_id, proxy);
 #endif
-#ifdef GDK_WINDOWING_WAYLAND
+#ifdef HAVE_GTK_LAYER_SHELL
   if (gtk_layer_is_supported ())
     return wrapper_plug_wayland_new (unique_id, proxy, error);
 #endif

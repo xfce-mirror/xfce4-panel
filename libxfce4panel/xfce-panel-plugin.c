@@ -28,12 +28,16 @@
 #endif
 
 #include <gtk/gtk.h>
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_GTK_X11
 #include <gtk/gtkx.h>
 #endif
 #include <glib.h>
 #include <libxfce4util/libxfce4util.h>
+#ifdef HAVE_GTK_LAYER_SHELL
 #include <gtk-layer-shell/gtk-layer-shell.h>
+#else
+#define gtk_layer_is_supported() FALSE
+#endif
 
 #include <common/panel-private.h>
 #include <libxfce4panel/xfce-panel-macros.h>
@@ -2494,6 +2498,7 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
       gdk_monitor_get_geometry (monitor, &geometry);
 
       /* get the plugin root origin */
+#ifdef HAVE_GTK_LAYER_SHELL
       if (gtk_layer_is_supported ())
         {
           GtkWindow *toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin)));
@@ -2501,6 +2506,7 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
           y = geometry.y + gtk_layer_get_margin (toplevel, GTK_LAYER_SHELL_EDGE_TOP);
         }
       else
+#endif
         gdk_window_get_root_origin (window, &x, &y);
 
       /* detect arrow type */
@@ -2542,7 +2548,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
                                    gint            *x,
                                    gint            *y)
 {
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_GTK_X11
   GtkWidget      *plug;
   gint            px, py;
 #endif
@@ -2576,6 +2582,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
 
   /* get the root position of the attach widget */
   toplevel = GTK_WINDOW (gtk_widget_get_toplevel (attach_widget));
+#ifdef HAVE_GTK_LAYER_SHELL
   if (gtk_layer_is_supported ())
     {
       monitor = gdk_display_get_monitor_at_window (gdk_display_get_default (),
@@ -2585,10 +2592,11 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
       *y = geometry.y + gtk_layer_get_margin (toplevel, GTK_LAYER_SHELL_EDGE_TOP);
     }
   else
+#endif
     gtk_window_get_position (toplevel, x, y);
 
   /* correct position for external plugins on X11 */
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_GTK_X11
   plug = gtk_widget_get_ancestor (attach_widget, GTK_TYPE_PLUG);
   if (plug != NULL)
     {
@@ -2884,6 +2892,7 @@ xfce_panel_plugin_popup_window_reposition (gpointer data)
   gint x, y;
 
   xfce_panel_plugin_position_widget (data, GTK_WIDGET (window), widget, &x, &y);
+#ifdef HAVE_GTK_LAYER_SHELL
   if (gtk_layer_is_supported ())
     {
       GdkRectangle geom;
@@ -2895,6 +2904,7 @@ xfce_panel_plugin_popup_window_reposition (gpointer data)
       gtk_layer_set_margin (window, GTK_LAYER_SHELL_EDGE_TOP, y - geom.y);
     }
   else
+#endif
     gtk_window_move (window, x, y);
 
   return FALSE;
@@ -2950,6 +2960,7 @@ xfce_panel_plugin_popup_window (XfcePanelPlugin *plugin,
   gtk_window_set_keep_above (window, TRUE);
   gtk_window_stick (window);
 
+#ifdef HAVE_GTK_LAYER_SHELL
   if (gtk_layer_is_supported ())
     {
       GdkMonitor *monitor;
@@ -2975,6 +2986,7 @@ xfce_panel_plugin_popup_window (XfcePanelPlugin *plugin,
       g_signal_connect (window, "notify::has-toplevel-focus",
                         G_CALLBACK (xfce_panel_plugin_popup_window_has_toplevel_focus), plugin);
     }
+#endif
 
   g_signal_connect (window, "hide",
                     G_CALLBACK (xfce_panel_plugin_popup_window_hide), plugin);
