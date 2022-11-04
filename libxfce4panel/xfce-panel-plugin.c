@@ -28,7 +28,7 @@
 #endif
 
 #include <gtk/gtk.h>
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_GTK_X11
 #include <gtk/gtkx.h>
 #endif
 #include <glib.h>
@@ -2516,7 +2516,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
                                    gint            *x,
                                    gint            *y)
 {
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_GTK_X11
   GtkWidget      *plug;
   gint            px, py;
 #endif
@@ -2553,7 +2553,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
   gtk_window_get_position (GTK_WINDOW (toplevel), x, y);
 
   /* correct position for external plugins */
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_GTK_X11
   plug = gtk_widget_get_ancestor (attach_widget, GTK_TYPE_PLUG);
   if (plug != NULL)
     {

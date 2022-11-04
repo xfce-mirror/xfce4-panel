@@ -28,9 +28,14 @@
 #include <xfconf/xfconf.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
-#include <gtk-layer-shell/gtk-layer-shell.h>
 
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_GTK_LAYER_SHELL
+#include <gtk-layer-shell/gtk-layer-shell.h>
+#else
+#define gtk_layer_is_supported() FALSE
+#endif
+
+#ifdef HAVE_LIBX11
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #endif
@@ -132,7 +137,7 @@ struct _PanelApplication
   /* autohide count at application level */
   gint                autohide_block;
 
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_LIBX11
   guint               wait_for_wm_timeout_id;
 #endif
 
@@ -143,7 +148,7 @@ struct _PanelApplication
   guint               drop_index;
 };
 
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_LIBX11
 typedef struct
 {
   PanelApplication *application;
@@ -278,7 +283,7 @@ panel_application_finalize (GObject *object)
 
   panel_return_if_fail (application->dialogs == NULL);
 
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_LIBX11
   /* stop autostart timeout */
   if (application->wait_for_wm_timeout_id != 0)
     g_source_remove (application->wait_for_wm_timeout_id);
@@ -496,7 +501,7 @@ panel_application_load_real (PanelApplication *application)
 
 
 
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_LIBX11
 static gboolean
 panel_application_wait_for_window_manager (gpointer data)
 {
@@ -1223,7 +1228,7 @@ gboolean
 panel_application_load (PanelApplication  *application,
                         gboolean           disable_wm_check)
 {
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_LIBX11
   Display    *display;
   WaitForWM  *wfwm;
   guint       i;
