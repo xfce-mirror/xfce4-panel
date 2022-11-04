@@ -47,16 +47,24 @@ xfce4_panel_SOURCES = \
 	panel-plugin-external.h \
 	panel-plugin-external-wrapper.c \
 	panel-plugin-external-wrapper.h \
-	panel-plugin-external-wrapper-wayland.c \
-	panel-plugin-external-wrapper-wayland.h \
-	panel-plugin-external-wrapper-x11.c \
-	panel-plugin-external-wrapper-x11.h \
 	panel-preferences-dialog.c \
 	panel-preferences-dialog.h \
 	panel-tic-tac-toe.c \
 	panel-tic-tac-toe.h \
 	panel-window.c \
 	panel-window.h
+
+if HAVE_GTK_X11
+xfce4_panel_SOURCES += \
+	panel-plugin-external-wrapper-x11.c \
+	panel-plugin-external-wrapper-x11.h
+endif
+
+if HAVE_GTK_LAYER_SHELL
+xfce4_panel_SOURCES += \
+	panel-plugin-external-wrapper-wayland.c \
+	panel-plugin-external-wrapper-wayland.h
+endif
 
 xfce4_panel_CFLAGS = \
 	$(GTK_CFLAGS) \
