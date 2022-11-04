@@ -23,7 +23,11 @@
 #include <gmodule.h>
 #include <glib/gstdio.h>
 #include <libxfce4util/libxfce4util.h>
+#ifdef HAVE_GTK_LAYER_SHELL
 #include <gtk-layer-shell/gtk-layer-shell.h>
+#else
+#define gtk_layer_is_supported() FALSE
+#endif
 
 #include <common/panel-private.h>
 #include <common/panel-debug.h>

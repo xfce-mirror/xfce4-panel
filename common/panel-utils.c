@@ -226,6 +226,7 @@ panel_utils_destroy_later (GtkWidget *widget)
 void
 panel_utils_wl_surface_commit (GtkWidget *widget)
 {
+#ifdef HAVE_WAYLAND_CLIENT
   GdkWindow *window = gtk_widget_get_window (widget);
   if (window != NULL)
     {
@@ -234,4 +235,5 @@ panel_utils_wl_surface_commit (GtkWidget *widget)
       if (wl_surface != NULL)
         wl_surface_commit (wl_surface);
     }
+#endif
 }

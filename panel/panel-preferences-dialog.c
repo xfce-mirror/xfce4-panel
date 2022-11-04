@@ -1617,7 +1617,7 @@ panel_preferences_dialog_item_selection_changed (GtkTreeSelection       *selecti
 
 
 
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_GTK_X11
 static void
 panel_preferences_dialog_plug_deleted (GtkWidget *plug)
 {
@@ -1638,7 +1638,7 @@ panel_preferences_dialog_show_internal (PanelWindow *active,
   GObject     *window, *combo;
   GdkScreen   *screen;
   GSList      *windows;
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_GTK_X11
   GtkWidget   *plug;
   GObject     *plug_child;
   GtkWidget   *content_area;
@@ -1674,7 +1674,7 @@ panel_preferences_dialog_show_internal (PanelWindow *active,
 
   window = gtk_builder_get_object (GTK_BUILDER (dialog_singleton), "dialog");
   panel_return_if_fail (GTK_IS_WIDGET (window));
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_GTK_X11
   plug_child = gtk_builder_get_object (GTK_BUILDER (dialog_singleton), "plug-child");
   panel_return_if_fail (GTK_IS_WIDGET (plug_child));
 
@@ -1710,7 +1710,7 @@ panel_preferences_dialog_show_internal (PanelWindow *active,
       gtk_window_present (GTK_WINDOW (window));
       panel_application_take_dialog (dialog_singleton->application, GTK_WINDOW (window));
     }
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_GTK_X11
   else
     {
       /* hide window */
