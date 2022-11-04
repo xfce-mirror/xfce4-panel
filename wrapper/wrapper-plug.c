@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 Nick Schermer <nick@xfce.org>
+ * Copyright (C) 2022 Gaël Bonithon <gael@xfce.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,150 +20,57 @@
 #include <config.h>
 #endif
 
-#ifdef HAVE_STRING_H
-#include <string.h>
+#ifdef HAVE_GTK_X11
+#include <wrapper/wrapper-plug-x11.h>
+#endif
+#ifdef HAVE_GTK_LAYER_SHELL
+#include <gtk-layer-shell/gtk-layer-shell.h>
+#include <wrapper/wrapper-plug-wayland.h>
 #endif
 
-#include <wrapper/wrapper-plug.h>
 #include <common/panel-private.h>
+#include <wrapper/wrapper-plug.h>
 
 
 
-static void     wrapper_plug_finalize         (GObject        *object);
-
-
-
-struct _WrapperPlugClass
-{
-  GtkPlugClass __parent__;
-};
-
-struct _WrapperPlug
-{
-  GtkPlug __parent__;
-
-  /* background information */
-  GtkStyleProvider *style_provider;
-};
-
-
-
-/* shared internal plugin name */
-gchar *wrapper_name = NULL;
-
-
-
-G_DEFINE_TYPE (WrapperPlug, wrapper_plug, GTK_TYPE_PLUG)
+G_DEFINE_INTERFACE (WrapperPlug, wrapper_plug, GTK_TYPE_WINDOW)
 
 
 
 static void
-wrapper_plug_class_init (WrapperPlugClass *klass)
+wrapper_plug_default_init (WrapperPlugInterface *iface)
 {
-  GObjectClass *gobject_class;
-
-  gobject_class = G_OBJECT_CLASS (klass);
-  gobject_class->finalize = wrapper_plug_finalize;
 }
 
 
 
-static void
-wrapper_plug_init (WrapperPlug *plug)
+GtkWidget *
+wrapper_plug_new (gulong socket_id,
+                  GDBusProxy *proxy)
 {
-  GdkVisual       *visual = NULL;
-  GdkScreen       *screen;
-  GtkStyleContext *context;
+#ifdef HAVE_GTK_X11
+  if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+    return wrapper_plug_x11_new (socket_id);
+#endif
+#ifdef HAVE_GTK_LAYER_SHELL
+  if (gtk_layer_is_supported ())
+    return wrapper_plug_wayland_new (proxy);
+#endif
 
-  gtk_widget_set_name (GTK_WIDGET (plug), "XfcePanelWindowWrapper");
+  g_critical ("Running plugins as external is not supported on this windowing environment");
 
-  /* set the colormap */
-  screen = gtk_window_get_screen (GTK_WINDOW (plug));
-  visual = gdk_screen_get_rgba_visual (screen);
-  if (visual != NULL && gdk_screen_is_composited (screen))
-    gtk_widget_set_visual (GTK_WIDGET (plug), visual);
-
-  /* set the panel class */
-  context = gtk_widget_get_style_context (GTK_WIDGET (plug));
-  gtk_style_context_add_class (context, "panel");
-  gtk_style_context_add_class (context, "xfce4-panel");
-
-  gtk_drag_dest_unset (GTK_WIDGET (plug));
-
-  /* add the style provider */
-  plug->style_provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
-
-  gtk_style_context_add_provider (context, plug->style_provider,
-                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-}
-
-
-
-static void
-wrapper_plug_finalize (GObject *object)
-{
-  g_object_unref (WRAPPER_PLUG (object)->style_provider);
-
-  G_OBJECT_CLASS (wrapper_plug_parent_class)->finalize (object);
-}
-
-
-
-WrapperPlug *
-wrapper_plug_new (Window socket_id)
-{
-  WrapperPlug *plug;
-
-  /* create new object */
-  plug = g_object_new (WRAPPER_TYPE_PLUG, NULL);
-
-  /* contruct the plug */
-  gtk_plug_construct (GTK_PLUG (plug), socket_id);
-
-  return plug;
-}
-
-
-
-void
-wrapper_plug_set_opacity (WrapperPlug *plug,
-                          gdouble      opacity)
-{
-
-  panel_return_if_fail (WRAPPER_IS_PLUG (plug));
-
-  if (gtk_widget_get_opacity (GTK_WIDGET (plug)) != opacity)
-    gtk_widget_set_opacity (GTK_WIDGET (plug), opacity);
+  return NULL;
 }
 
 
 
 void
 wrapper_plug_set_background_color (WrapperPlug *plug,
-                                   const gchar *color_string)
+                                   const gchar *color)
 {
-  GdkRGBA  color;
-  gchar   *css, *str;
-
   panel_return_if_fail (WRAPPER_IS_PLUG (plug));
 
-  /* interpret NULL color as user requesting the system theme, so reset the css here */
-  if (color_string == NULL)
-    {
-      gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (plug->style_provider), "", -1, NULL);
-      return;
-    }
-
-  if (gdk_rgba_parse (&color, color_string))
-    {
-      str = gdk_rgba_to_string (&color);
-      css = g_strdup_printf ("* { background: %s; }", str);
-
-      gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (plug->style_provider), css, -1, NULL);
-
-      g_free (css);
-      g_free (str);
-    }
+  WRAPPER_PLUG_GET_IFACE (plug)->set_background_color (plug, color);
 }
 
 
@@ -172,13 +79,62 @@ void
 wrapper_plug_set_background_image (WrapperPlug *plug,
                                    const gchar *image)
 {
-  gchar *css;
-
   panel_return_if_fail (WRAPPER_IS_PLUG (plug));
 
-  css = g_strdup_printf ("* { background: url(\"%s\"); }", image);
+  WRAPPER_PLUG_GET_IFACE (plug)->set_background_image (plug, image);
+}
 
-  gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (plug->style_provider), css, -1, NULL);
 
-  g_free (css);
+
+void
+wrapper_plug_set_monitor (WrapperPlug *plug,
+                          gint monitor)
+{
+  panel_return_if_fail (WRAPPER_IS_PLUG (plug));
+
+  WRAPPER_PLUG_GET_IFACE (plug)->set_monitor (plug, monitor);
+}
+
+
+
+void
+wrapper_plug_set_geometry (WrapperPlug *plug,
+                           const GdkRectangle *geometry)
+{
+  panel_return_if_fail (WRAPPER_IS_PLUG (plug));
+
+  WRAPPER_PLUG_GET_IFACE (plug)->set_geometry (plug, geometry);
+}
+
+
+
+void
+wrapper_plug_proxy_method_call (GDBusProxy *proxy,
+                                const gchar *method,
+                                GVariant *variant)
+{
+  GVariant *ret;
+  GError *error = NULL;
+
+  ret = g_dbus_proxy_call_sync (proxy, method, variant, G_DBUS_CALL_FLAGS_NONE, -1, NULL, &error);
+
+  if (ret != NULL)
+    g_variant_unref (ret);
+  else
+    {
+      g_warning ("%s call failed: %s", method, error->message);
+      g_error_free (error);
+    }
+}
+
+
+
+void
+wrapper_plug_proxy_provider_signal (XfcePanelPluginProvider *provider,
+                                    XfcePanelPluginProviderSignal provider_signal,
+                                    GDBusProxy *proxy)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  wrapper_plug_proxy_method_call (proxy, "ProviderSignal", g_variant_new ("(u)", provider_signal));
 }

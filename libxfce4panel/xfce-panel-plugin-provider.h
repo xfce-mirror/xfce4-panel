@@ -95,6 +95,7 @@ typedef enum /*< skip >*/
   PROVIDER_SIGNAL_PANEL_HELP,
   PROVIDER_SIGNAL_SHOW_CONFIGURE,
   PROVIDER_SIGNAL_SHOW_ABOUT,
+  PROVIDER_SIGNAL_EMBEDDED,
   PROVIDER_SIGNAL_FOCUS_PLUGIN,
   PROVIDER_SIGNAL_SHRINK_PLUGIN,
   PROVIDER_SIGNAL_UNSHRINK_PLUGIN
@@ -113,8 +114,11 @@ typedef enum /*< skip >*/
   PROVIDER_PROP_TYPE_SET_NROWS,               /* gint */
   PROVIDER_PROP_TYPE_SET_LOCKED,              /* gboolean */
   PROVIDER_PROP_TYPE_SET_SENSITIVE,           /* gboolean */
-  PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR,    /* string, wrapper only */
-  PROVIDER_PROP_TYPE_SET_BACKGROUND_IMAGE,    /* string, wrapper only */
+  PROVIDER_PROP_TYPE_SET_OPACITY,             /* gdouble, wrapper only */
+  PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR,    /* string, X11 only, wrapper only */
+  PROVIDER_PROP_TYPE_SET_BACKGROUND_IMAGE,    /* string, X11 only, wrapper only */
+  PROVIDER_PROP_TYPE_SET_MONITOR,             /* gint, Wayland only, unidirectional panel->wrapper */
+  PROVIDER_PROP_TYPE_SET_GEOMETRY,            /* GdkRectangle, Wayland only, bidirectional panel<->wrapper */
   PROVIDER_PROP_TYPE_ACTION_REMOVED,          /* none */
   PROVIDER_PROP_TYPE_ACTION_SAVE,             /* none */
   PROVIDER_PROP_TYPE_ACTION_QUIT,             /* none */
@@ -123,7 +127,6 @@ typedef enum /*< skip >*/
   PROVIDER_PROP_TYPE_ACTION_SHOW_CONFIGURE,   /* none */
   PROVIDER_PROP_TYPE_ACTION_SHOW_ABOUT,       /* none */
   PROVIDER_PROP_TYPE_ACTION_ASK_REMOVE,       /* none */
-  PROVIDER_PROP_TYPE_SET_OPACITY              /* gdouble */
 }
 XfcePanelPluginProviderPropType;
 
