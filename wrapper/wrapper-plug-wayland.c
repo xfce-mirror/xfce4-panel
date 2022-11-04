@@ -20,9 +20,6 @@
 #include <config.h>
 #endif
 
-#include <gtk/gtk.h>
-#ifdef GDK_WINDOWING_WAYLAND
-
 #include <gtk-layer-shell/gtk-layer-shell.h>
 #include <libxfce4windowing/libxfce4windowing.h>
 
@@ -495,5 +492,3 @@ wrapper_plug_wayland_new (gint unique_id,
 
   return GTK_WIDGET (plug);
 }
-
-#endif /* ! GDK_WINDOWING_WAYLAND */
