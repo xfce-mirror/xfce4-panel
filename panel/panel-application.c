@@ -229,9 +229,11 @@ panel_application_init (PanelApplication *application)
         }
     }
 
-  /* check if we need to force all plugins to run external */
-  if (xfconf_channel_get_bool (application->xfconf, "/force-all-external", FALSE))
-    panel_module_factory_force_all_external ();
+  /* check if we need to force all plugins to run internal/external */
+  if (xfconf_channel_get_bool (application->xfconf, "/force-all-internal", FALSE))
+    panel_module_factory_force_run_mode (PANEL_MODULE_RUN_MODE_INTERNAL);
+  else if (xfconf_channel_get_bool (application->xfconf, "/force-all-external", FALSE))
+    panel_module_factory_force_run_mode (PANEL_MODULE_RUN_MODE_EXTERNAL);
 
   /* get a factory reference so it never unloads */
   application->factory = panel_module_factory_get ();
