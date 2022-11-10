@@ -59,8 +59,11 @@
 /* relative plugin's rc filename (printf format) */
 #define PANEL_PLUGIN_RC_RELATIVE_PATH PANEL_PLUGIN_RELATIVE_PATH G_DIR_SEPARATOR_S "%s-%d.rc"
 
-/* xfconf property base (printf format) */
-#define PANEL_PLUGIN_PROPERTY_BASE "/plugins/plugin-%d"
+/* xfconf properties for panels and plugins */
+#define PANELS_PROPERTY_PREFIX "/panels"
+#define PANELS_PROPERTY_BASE PANELS_PROPERTY_PREFIX "/panel-%d"
+#define PLUGINS_PROPERTY_PREFIX "/plugins"
+#define PLUGINS_PROPERTY_BASE PLUGINS_PROPERTY_PREFIX "/plugin-%d"
 
 /* minimum time in seconds between automatic restarts of panel plugins
  * without asking the user what to do */
