@@ -377,7 +377,7 @@ panel_application_load_real (PanelApplication *application)
 
   display = gdk_display_get_default ();
 
-  if (xfconf_channel_get_property (application->xfconf, "/panels", &val)
+  if (xfconf_channel_get_property (application->xfconf, PANELS_PROPERTY_BASE, &val)
       && (G_VALUE_HOLDS_UINT (&val)
           || G_VALUE_HOLDS (&val, G_TYPE_PTR_ARRAY)))
     {
@@ -1278,7 +1278,7 @@ panel_application_save (PanelApplication *application,
   panel_return_if_fail (XFCONF_IS_CHANNEL (channel));
 
   /* leave if the whole application is locked */
-  if (xfconf_channel_is_property_locked (channel, "/panels"))
+  if (xfconf_channel_is_property_locked (channel, PANELS_PROPERTY_BASE))
     return;
 
   if (PANEL_HAS_FLAG (save_types, SAVE_PANEL_IDS))
@@ -1303,7 +1303,7 @@ panel_application_save (PanelApplication *application,
   if (panels != NULL)
     {
       /* store the panel ids */
-      if (!xfconf_channel_set_arrayv (channel, "/panels", panels))
+      if (!xfconf_channel_set_arrayv (channel, PANELS_PROPERTY_BASE, panels))
         g_warning ("Failed to store the number of panels");
       xfconf_array_free (panels);
     }
