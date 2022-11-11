@@ -29,6 +29,7 @@
 
 #include <gtk/gtk.h>
 #include <xfconf/xfconf.h>
+#include <common/panel-private.h>
 #include <migrate/migrate-config.h>
 
 
