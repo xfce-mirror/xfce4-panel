@@ -32,6 +32,7 @@
 
 #include <gtk/gtk.h>
 #include <xfconf/xfconf.h>
+#include <common/panel-private.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4panel/xfce-panel-macros.h>
@@ -73,7 +74,7 @@ main (gint argc, gchar **argv)
     }
 
   channel = xfconf_channel_get (XFCE_PANEL_CHANNEL_NAME);
-  if (!xfconf_channel_has_property (channel, "/panels"))
+  if (!xfconf_channel_has_property (channel, PANELS_PROPERTY_PREFIX))
     {
       /* lookup the default configuration */
       xfce_resource_push_path (XFCE_RESOURCE_CONFIG, XDGCONFIGDIR);
