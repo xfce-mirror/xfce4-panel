@@ -20,6 +20,7 @@
 #define __MIGRATE_CONFIG_H__
 
 #include <gtk/gtk.h>
+#include <common/panel-private.h>
 
 G_BEGIN_DECLS
 
