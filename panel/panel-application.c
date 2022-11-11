@@ -447,8 +447,6 @@ panel_application_load_real (PanelApplication *application)
                   || !panel_application_plugin_insert (application, window,
                                                        name, unique_id, NULL, -1))
                 {
-                  /* plugin could not be loaded, remove it from the channel */
-                  g_snprintf (buf, sizeof (buf), "/panels/plugin-%d", unique_id);
                   if (xfconf_channel_has_property (application->xfconf, buf))
                     xfconf_channel_reset_property (application->xfconf, buf, TRUE);
 
