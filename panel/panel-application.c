@@ -29,7 +29,13 @@
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
 
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_GTK_LAYER_SHELL
+#include <gtk-layer-shell/gtk-layer-shell.h>
+#else
+#define gtk_layer_is_supported() FALSE
+#endif
+
+#ifdef HAVE_LIBX11
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #endif
@@ -131,7 +137,7 @@ struct _PanelApplication
   /* autohide count at application level */
   gint                autohide_block;
 
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_LIBX11
   guint               wait_for_wm_timeout_id;
 #endif
 
@@ -142,7 +148,7 @@ struct _PanelApplication
   guint               drop_index;
 };
 
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_LIBX11
 typedef struct
 {
   PanelApplication *application;
@@ -199,8 +205,9 @@ panel_application_class_init (PanelApplicationClass *klass)
 static void
 panel_application_init (PanelApplication *application)
 {
+  GdkDisplay *display;
   GError *error = NULL;
-  gint    configver;
+  gint configver;
 
   application->windows = NULL;
   application->dialogs = NULL;
@@ -223,9 +230,11 @@ panel_application_init (PanelApplication *application)
         }
     }
 
-  /* check if we need to force all plugins to run external */
-  if (xfconf_channel_get_bool (application->xfconf, "/force-all-external", FALSE))
-    panel_module_factory_force_all_external ();
+  /* check if we need to force all plugins to run internal/external */
+  if (xfconf_channel_get_bool (application->xfconf, "/force-all-internal", FALSE))
+    panel_module_factory_force_run_mode (PANEL_MODULE_RUN_MODE_INTERNAL);
+  else if (xfconf_channel_get_bool (application->xfconf, "/force-all-external", FALSE))
+    panel_module_factory_force_run_mode (PANEL_MODULE_RUN_MODE_EXTERNAL);
 
   /* get a factory reference so it never unloads */
   application->factory = panel_module_factory_get ();
@@ -233,6 +242,19 @@ panel_application_init (PanelApplication *application)
   /* start the autosave timer for plugins */
   application->autosave_timer_id = g_timeout_add_seconds (60 * 10,
       panel_application_autosave_timer, application);
+
+  /* warn the user about restricted features on Wayland */
+  display = gdk_display_get_default ();
+  if (GDK_IS_WAYLAND_DISPLAY (display))
+    {
+      if (! gtk_layer_is_supported ())
+        g_warning ("Wayland detected without layer-shell support: Xfce4-panel might not look"
+                   " like a panel and many of its features will not be available");
+      if (! gdk_wayland_display_query_registry (display, "zwlr_foreign_toplevel_manager_v1"))
+        g_warning ("Wayland detected without foreign-toplevel-management support: Some"
+                   " Xfce4-panel features will not work (e.g. intellihide), as well as some"
+                   " plugins (e.g. ShowDesktop, Tasklist, WindowMenu)");
+    }
 }
 
 
@@ -263,7 +285,7 @@ panel_application_finalize (GObject *object)
 
   panel_return_if_fail (application->dialogs == NULL);
 
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_LIBX11
   /* stop autostart timeout */
   if (application->wait_for_wm_timeout_id != 0)
     g_source_remove (application->wait_for_wm_timeout_id);
@@ -481,7 +503,7 @@ panel_application_load_real (PanelApplication *application)
 
 
 
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_LIBX11
 static gboolean
 panel_application_wait_for_window_manager (gpointer data)
 {
@@ -1208,13 +1230,13 @@ gboolean
 panel_application_load (PanelApplication  *application,
                         gboolean           disable_wm_check)
 {
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_LIBX11
   Display    *display;
   WaitForWM  *wfwm;
   guint       i;
   gchar     **atom_names;
 
-  if (!disable_wm_check)
+  if (!disable_wm_check && GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
     {
       display = XOpenDisplay (NULL);
       if (display == NULL)

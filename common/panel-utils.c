@@ -93,6 +93,7 @@ panel_utils_builder_new (XfcePanelPlugin  *panel_plugin,
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (panel_plugin), NULL);
 
   builder = gtk_builder_new ();
+  gtk_builder_set_translation_domain (builder, GETTEXT_PACKAGE);
   if (gtk_builder_add_from_string (builder, buffer, length, &error))
     {
       dialog = gtk_builder_get_object (builder, "dialog");
