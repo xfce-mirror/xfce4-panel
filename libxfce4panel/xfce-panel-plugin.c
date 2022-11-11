@@ -1780,7 +1780,7 @@ xfce_panel_plugin_get_property_base (XfcePanelPlugin *plugin)
 
   /* create the propert if needed */
   if (plugin->priv->property_base == NULL)
-    plugin->priv->property_base = g_strdup_printf (PANEL_PLUGIN_PROPERTY_BASE,
+    plugin->priv->property_base = g_strdup_printf (PLUGINS_PROPERTY_BASE,
                                                    plugin->priv->unique_id);
 
   return plugin->priv->property_base;

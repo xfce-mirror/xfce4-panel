@@ -73,7 +73,7 @@ main (gint argc, gchar **argv)
     }
 
   channel = xfconf_channel_get (XFCE_PANEL_CHANNEL_NAME);
-  if (!xfconf_channel_has_property (channel, "/panels"))
+  if (!xfconf_channel_has_property (channel, PANELS_PROPERTY_PREFIX))
     {
       /* lookup the default configuration */
       xfce_resource_push_path (XFCE_RESOURCE_CONFIG, XDGCONFIGDIR);
