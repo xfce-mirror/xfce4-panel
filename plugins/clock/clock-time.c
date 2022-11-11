@@ -22,6 +22,7 @@
 #endif
 
 #include <glib.h>
+#include <common/panel-private.h>
 
 #include "clock-time.h"
 #include "clock.h"

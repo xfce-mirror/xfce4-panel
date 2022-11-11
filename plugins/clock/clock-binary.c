@@ -26,6 +26,7 @@
 
 #include <gtk/gtk.h>
 #include <cairo/cairo.h>
+#include <common/panel-private.h>
 
 #include "clock.h"
 #include "clock-time.h"

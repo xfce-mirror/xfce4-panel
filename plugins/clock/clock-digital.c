@@ -21,6 +21,7 @@
 #endif
 
 #include <gtk/gtk.h>
+#include <common/panel-private.h>
 #include <common/panel-xfconf.h>
 
 #include "clock.h"
