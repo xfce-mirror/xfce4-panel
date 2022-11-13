@@ -2502,10 +2502,12 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
  * relative to @attach_widget. If @attach_widget is NULL, the computed
  * position will be relative to @plugin.
  *
- * This function is intended for custom menu widgets.
- * For a regular #GtkMenu you should use xfce_panel_plugin_popup_menu() instead.
+ * This function is intended for custom menu widgets and should rarely be used
+ * since 4.19.0. For a regular #GtkMenu you should use xfce_panel_plugin_popup_menu()
+ * instead, and for a #GtkWindow xfce_panel_plugin_popup_window(), which take care
+ * of positioning for you, among other things.
  *
- * See also: xfce_panel_plugin_popup_menu().
+ * See also: xfce_panel_plugin_popup_menu() and xfce_panel_plugin_popup_window().
  **/
 void
 xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
@@ -2708,7 +2710,8 @@ xfce_panel_plugin_position_menu (GtkMenu  *menu,
  * xfce_panel_plugin_register_menu() for the @menu.
  *
  * For a custom widget that will be used as a popup menu, use
- * xfce_panel_plugin_position_widget() instead.
+ * xfce_panel_plugin_popup_window() instead if this widget is a #GtkWindow,
+ * or xfce_panel_plugin_position_widget().
  *
  * See also: gtk_menu_popup_at_widget() and gtk_menu_popup_at_pointer().
  *
@@ -2767,6 +2770,133 @@ xfce_panel_plugin_popup_menu (XfcePanelPlugin *plugin,
     gtk_menu_popup_at_widget (menu, widget, widget_anchor, menu_anchor, trigger_event);
   else
     gtk_menu_popup_at_pointer (menu, trigger_event);
+}
+
+
+
+static gboolean
+xfce_panel_plugin_popup_window_key_press_event (GtkWidget *window,
+                                                GdkEventKey *event,
+                                                XfcePanelPlugin *plugin)
+{
+  if (event->type == GDK_KEY_PRESS && event->keyval == GDK_KEY_Escape)
+    {
+      gtk_widget_hide (window);
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+
+
+static gboolean
+xfce_panel_plugin_popup_window_button_press_event (GtkWidget *window,
+                                                   GdkEventButton *event,
+                                                   XfcePanelPlugin *plugin)
+{
+  GdkWindow *gdkwindow = gdk_device_get_window_at_position (event->device, NULL, NULL);
+
+  if (gdkwindow == NULL
+      || gdk_window_get_effective_toplevel (gdkwindow) != gtk_widget_get_window (window))
+    {
+      gtk_widget_hide (window);
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+
+
+static void
+xfce_panel_plugin_popup_window_hide (GtkWidget *window,
+                                     XfcePanelPlugin *plugin)
+{
+  g_signal_handlers_disconnect_by_func (window,
+    xfce_panel_plugin_popup_window_button_press_event, plugin);
+  g_signal_handlers_disconnect_by_func (window,
+    xfce_panel_plugin_popup_window_key_press_event, plugin);
+  g_signal_handlers_disconnect_by_func (window,
+    xfce_panel_plugin_popup_window_hide, plugin);
+  xfce_panel_plugin_block_autohide (plugin, FALSE);
+  if (g_object_get_data (G_OBJECT (window), "seat-grabbed"))
+    {
+      gdk_seat_ungrab (gdk_display_get_default_seat (gdk_display_get_default ()));
+      g_object_set_data (G_OBJECT (window), "seat-grabbed", GINT_TO_POINTER (FALSE));
+    }
+}
+
+
+
+/**
+ * xfce_panel_plugin_popup_window:
+ * @plugin: an #XfcePanelPlugin.
+ * @window: a #GtkWindow.
+ * @widget: (allow-none): the #GtkWidget to align @window with or %NULL to use
+ * @plugin as @widget.
+ *
+ * Pops up @window at @widget if @widget is non-%NULL, otherwise pops up @window
+ * at @plugin. The user should not have to set any property of @window: this
+ * function takes care of setting the necessary properties to make @window appear
+ * as a menu widget.
+ *
+ * This function tries to produce for a #GtkWindow a behavior similar to that
+ * produced by xfce_panel_plugin_popup_menu() for a #GtkMenu. In particular,
+ * clicking outside the window or pressing Esc should hide it, and the function
+ * takes care to lock panel autohide when the window is shown.
+ *
+ * See also: xfce_panel_plugin_popup_menu() and xfce_panel_plugin_position_widget().
+ *
+ * Since: 4.19.0
+ **/
+void
+xfce_panel_plugin_popup_window (XfcePanelPlugin *plugin,
+                                GtkWindow *window,
+                                GtkWidget *widget)
+{
+  gboolean grabbed;
+  gint x, y;
+
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+  panel_return_if_fail (GTK_IS_WINDOW (window));
+  panel_return_if_fail (widget == NULL || GTK_IS_WIDGET (widget));
+
+  if (gtk_widget_get_visible (GTK_WIDGET (window)))
+    return;
+
+  gtk_window_set_type_hint (window, GDK_WINDOW_TYPE_HINT_UTILITY);
+  gtk_window_set_decorated (window, FALSE);
+  gtk_window_set_resizable (window, FALSE);
+  gtk_window_set_skip_taskbar_hint (window, TRUE);
+  gtk_window_set_skip_pager_hint (window, TRUE);
+  gtk_window_set_keep_above (window, TRUE);
+  gtk_window_stick (window);
+
+  g_signal_connect (window, "hide",
+                    G_CALLBACK (xfce_panel_plugin_popup_window_hide), plugin);
+  g_signal_connect (window, "button-press-event",
+                    G_CALLBACK (xfce_panel_plugin_popup_window_button_press_event), plugin);
+  g_signal_connect (window, "key-press-event",
+                    G_CALLBACK (xfce_panel_plugin_popup_window_key_press_event), plugin);
+
+  xfce_panel_plugin_position_widget (plugin, GTK_WIDGET (window), widget, &x, &y);
+  gtk_window_move (window, x, y);
+
+  xfce_panel_plugin_block_autohide (plugin, TRUE);
+  gtk_widget_show (GTK_WIDGET (window));
+
+  for (gint i = 0; i < G_USEC_PER_SEC / 10000 / 4; i++)
+    {
+      grabbed = gdk_seat_grab (gdk_display_get_default_seat (gdk_display_get_default ()),
+                               gtk_widget_get_window (GTK_WIDGET (window)),
+                               GDK_SEAT_CAPABILITY_ALL, TRUE,
+                               NULL, NULL, NULL, NULL) == GDK_GRAB_SUCCESS;
+      g_object_set_data (G_OBJECT (window), "seat-grabbed", GINT_TO_POINTER (grabbed));
+      if (grabbed)
+        break;
+      g_usleep (10000);
+    }
 }
 
 
