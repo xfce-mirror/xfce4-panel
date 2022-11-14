@@ -55,7 +55,6 @@
 
 
 #define SNAP_DISTANCE         (10)
-#define SET_OLD_WM_STRUTS     (FALSE)
 #define DEFAULT_POPUP_DELAY   (225)
 #define DEFAULT_POPDOWN_DELAY (350)
 #define DEFAULT_AUTOHIDE_SIZE (3)
@@ -372,9 +371,6 @@ typedef PanelWindowClass XfcePanelWindowClass;
 
 
 static GdkAtom cardinal_atom = 0;
-#if SET_OLD_WM_STRUTS
-static GdkAtom net_wm_strut_atom = 0;
-#endif
 static GdkAtom net_wm_strut_partial_atom = 0;
 
 
@@ -541,9 +537,6 @@ panel_window_class_init (PanelWindowClass *klass)
   /* initialize the atoms */
   cardinal_atom = gdk_atom_intern_static_string ("CARDINAL");
   net_wm_strut_partial_atom = gdk_atom_intern_static_string ("_NET_WM_STRUT_PARTIAL");
-#if SET_OLD_WM_STRUTS
-  net_wm_strut_atom = gdk_atom_intern_static_string ("_NET_WM_STRUT");
-#endif
 }
 
 
@@ -1938,14 +1931,6 @@ panel_window_screen_struts_set (PanelWindow *window)
                        net_wm_strut_partial_atom,
                        cardinal_atom, 32, GDK_PROP_MODE_REPLACE,
                        (guchar *) &struts, N_STRUTS);
-
-#if SET_OLD_WM_STRUTS
-  /* set the wm strut (old window managers) */
-  gdk_property_change (gtk_widget_get_window (GTK_WIDGET (window)),
-                       net_wm_strut_atom,
-                       cardinal_atom, 32, GDK_PROP_MODE_REPLACE,
-                       (guchar *) &struts, 4);
-#endif
 
   /* release the trap */
   if (gdk_x11_display_error_trap_pop (window->display) != 0)
