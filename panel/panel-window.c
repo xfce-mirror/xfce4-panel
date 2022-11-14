@@ -2181,10 +2181,8 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
 {
   GdkRectangle  a = { 0 }, b;
   gint          n_monitors, n;
-  gint          dest_x, dest_y;
-  gint          dest_w, dest_h;
   const gchar  *name;
-  GdkMonitor   *monitor, *other_monitor;
+  GdkMonitor   *monitor;
   StrutsEgde    struts_edge;
   gboolean      force_struts_update = FALSE;
 
@@ -2330,50 +2328,6 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
               return;
             }
         }
-
-      /* check if another monitor is preventing the active monitor
-       * from setting struts (ie. we can't set struts though another
-       * monitor's area) */
-      for (n = 0; n < n_monitors; n++)
-        {
-          /* stop if another window prevented us from settings struts */
-          if (window->struts_edge == STRUTS_EDGE_NONE)
-            break;
-
-          /* get other monitor */
-          other_monitor = gdk_display_get_monitor (window->display, n);
-
-          /* skip the active monitor */
-          if (monitor == other_monitor)
-            continue;
-
-          /* get other monitor geometry */
-          gdk_monitor_get_geometry (other_monitor, &b);
-
-          /* check if this monitor prevents us from setting struts */
-          if ((window->struts_edge == STRUTS_EDGE_LEFT && b.x < a.x)
-              || (window->struts_edge == STRUTS_EDGE_RIGHT
-                  && b.x + b.width > a.x + a.width))
-            {
-              dest_x = MAX (a.x, b.x);
-              dest_w = MIN (a.x + a.width, b.x + b.width) - dest_x;
-              if (dest_w > 0)
-                window->struts_edge = STRUTS_EDGE_NONE;
-            }
-          else if ((window->struts_edge == STRUTS_EDGE_TOP && b.y < a.y)
-                   || (window->struts_edge == STRUTS_EDGE_BOTTOM
-                       && b.y + b.height > a.y + a.height))
-            {
-              dest_y = MAX (a.y, b.y);
-              dest_h = MIN (a.y + a.height, b.y + b.height) - dest_y;
-              if (dest_h > 0)
-                window->struts_edge = STRUTS_EDGE_NONE;
-            }
-        }
-
-      if (window->struts_edge == STRUTS_EDGE_NONE)
-        panel_debug (PANEL_DEBUG_POSITIONING,
-                     "%p: unset struts edge; between monitors", window);
     }
 
   /* set the new working area of the panel */
