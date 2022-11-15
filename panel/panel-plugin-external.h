@@ -20,10 +20,10 @@
 #define __PANEL_PLUGIN_EXTERNAL_H__
 
 #include <gtk/gtk.h>
-#include <gtk/gtkx.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 #include <panel/panel-module.h>
+#include <panel/panel-window.h>
 
 G_BEGIN_DECLS
 
@@ -37,29 +37,40 @@ typedef struct _PanelPluginExternalPrivate PanelPluginExternalPrivate;
 #define PANEL_IS_PLUGIN_EXTERNAL(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PANEL_TYPE_PLUGIN_EXTERNAL))
 #define PANEL_IS_PLUGIN_EXTERNAL_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_PLUGIN_EXTERNAL))
 #define PANEL_PLUGIN_EXTERNAL_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_PLUGIN_EXTERNAL, PanelPluginExternalClass))
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (PanelPluginExternal, g_object_unref)
 
 struct _PanelPluginExternalClass
 {
-  GtkSocketClass __parent__;
+  GtkBoxClass __parent__;
 
   /* send panel values to the plugin or wrapper */
-  void       (*set_properties) (PanelPluginExternal *external,
-                                GSList              *properties);
+  void       (*set_properties)       (PanelPluginExternal *external,
+                                      GSList              *properties);
 
   /* complete startup array for the plugin */
-  gchar    **(*get_argv)       (PanelPluginExternal  *external,
-                                gchar               **arguments);
+  gchar    **(*get_argv)             (PanelPluginExternal  *external,
+                                      gchar               **arguments);
 
   /* handling of remote events */
-  gboolean   (*remote_event)   (PanelPluginExternal  *external,
-                                const gchar          *name,
-                                const GValue         *value,
-                                guint                *handle);
+  gboolean   (*remote_event)         (PanelPluginExternal  *external,
+                                      const gchar          *name,
+                                      const GValue         *value,
+                                      guint                *handle);
+
+  /* X11 only */
+  void       (*set_background_color) (PanelPluginExternal  *external,
+                                      const GdkRGBA        *color);
+  void       (*set_background_image) (PanelPluginExternal  *external,
+                                      const gchar          *image);
+
+  /* Wayland only */
+  void       (*set_geometry)         (PanelPluginExternal  *external,
+                                      PanelWindow          *window);
 };
 
 struct _PanelPluginExternal
 {
-  GtkSocket __parent__;
+  GtkBox __parent__;
 
   PanelPluginExternalPrivate *priv;
 
@@ -84,18 +95,31 @@ PluginProperty;
 
 GType        panel_plugin_external_get_type             (void) G_GNUC_CONST;
 
-void         panel_plugin_external_restart              (PanelPluginExternal  *external);
+void         panel_plugin_external_queue_add            (PanelPluginExternal              *external,
+                                                         XfcePanelPluginProviderPropType   type,
+                                                         const GValue                     *value);
 
-void         panel_plugin_external_set_opacity          (PanelPluginExternal *external,
-                                                         gdouble              opacity);
+void         panel_plugin_external_queue_add_action     (PanelPluginExternal              *external,
+                                                         XfcePanelPluginProviderPropType   type);
 
-void         panel_plugin_external_set_background_color (PanelPluginExternal  *external,
-                                                         const GdkRGBA        *color);
+void         panel_plugin_external_restart              (PanelPluginExternal              *external);
 
-void         panel_plugin_external_set_background_image (PanelPluginExternal  *external,
-                                                         const gchar          *image);
+void         panel_plugin_external_set_opacity          (PanelPluginExternal              *external,
+                                                         gdouble                           opacity);
 
-GPid         panel_plugin_external_get_pid              (PanelPluginExternal  *external);
+void         panel_plugin_external_set_background_color (PanelPluginExternal              *external,
+                                                         const GdkRGBA                    *color);
+
+void         panel_plugin_external_set_background_image (PanelPluginExternal              *external,
+                                                         const gchar                      *image);
+
+void         panel_plugin_external_set_geometry         (PanelPluginExternal              *external,
+                                                         PanelWindow                      *window);
+
+void         panel_plugin_external_set_embedded         (PanelPluginExternal              *external,
+                                                         gboolean                          embedded);
+
+GPid         panel_plugin_external_get_pid              (PanelPluginExternal              *external);
 
 G_END_DECLS
 
