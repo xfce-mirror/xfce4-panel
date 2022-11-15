@@ -33,6 +33,7 @@
 #endif
 #include <glib.h>
 #include <libxfce4util/libxfce4util.h>
+#include <gtk-layer-shell/gtk-layer-shell.h>
 
 #include <common/panel-private.h>
 #include <libxfce4panel/xfce-panel-macros.h>
@@ -2480,7 +2481,14 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
       gdk_monitor_get_geometry (monitor, &geometry);
 
       /* get the plugin root origin */
-      gdk_window_get_root_origin (window, &x, &y);
+      if (gtk_layer_is_supported ())
+        {
+          GtkWindow *toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin)));
+          x = geometry.x + gtk_layer_get_margin (toplevel, GTK_LAYER_SHELL_EDGE_LEFT);
+          y = geometry.y + gtk_layer_get_margin (toplevel, GTK_LAYER_SHELL_EDGE_TOP);
+        }
+      else
+        gdk_window_get_root_origin (window, &x, &y);
 
       /* detect arrow type */
       if (screen_position == XFCE_SCREEN_POSITION_FLOATING_H)
@@ -2527,7 +2535,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
   GdkRectangle    geometry;
   GdkDisplay     *display;
   GdkMonitor     *monitor;
-  GtkWidget      *toplevel;
+  GtkWindow      *toplevel;
   GtkAllocation   alloc;
 
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
@@ -2558,10 +2566,19 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
       gtk_main_iteration ();
 
   /* get the root position of the attach widget */
-  toplevel = gtk_widget_get_toplevel (attach_widget);
-  gtk_window_get_position (GTK_WINDOW (toplevel), x, y);
+  toplevel = GTK_WINDOW (gtk_widget_get_toplevel (attach_widget));
+  if (gtk_layer_is_supported ())
+    {
+      monitor = gdk_display_get_monitor_at_window (gdk_display_get_default (),
+                                                   gtk_widget_get_window (GTK_WIDGET (toplevel)));
+      gdk_monitor_get_geometry (monitor, &geometry);
+      *x = geometry.x + gtk_layer_get_margin (toplevel, GTK_LAYER_SHELL_EDGE_LEFT);
+      *y = geometry.y + gtk_layer_get_margin (toplevel, GTK_LAYER_SHELL_EDGE_TOP);
+    }
+  else
+    gtk_window_get_position (toplevel, x, y);
 
-  /* correct position for external plugins */
+  /* correct position for external plugins on X11 */
 #ifdef GDK_WINDOWING_X11
   plug = gtk_widget_get_ancestor (attach_widget, GTK_TYPE_PLUG);
   if (plug != NULL)
@@ -2845,6 +2862,11 @@ xfce_panel_plugin_popup_window_hide (GtkWidget *window,
  * clicking outside the window or pressing Esc should hide it, and the function
  * takes care to lock panel autohide when the window is shown.
  *
+ * However, it may be that, especially on Wayland and depending on the compositor
+ * used, hiding the window works more or less well. Also, @window positioning at
+ * @widget only works on Wayland if the compositor supports the layer-shell
+ * protocol, on which many of the panel features also depend.
+ *
  * See also: xfce_panel_plugin_popup_menu() and xfce_panel_plugin_position_widget().
  *
  * Since: 4.19.0
@@ -2872,6 +2894,32 @@ xfce_panel_plugin_popup_window (XfcePanelPlugin *plugin,
   gtk_window_set_keep_above (window, TRUE);
   gtk_window_stick (window);
 
+  if (gtk_layer_is_supported ())
+    {
+      GdkMonitor *monitor;
+      GtkWindow *toplevel;
+      gboolean anchored_top, anchored_left;
+
+      if (! gtk_layer_is_layer_window (window))
+        gtk_layer_init_for_window (window);
+
+      monitor = gdk_display_get_monitor_at_window (gdk_display_get_default (),
+                                                   gtk_widget_get_window (GTK_WIDGET (plugin)));
+      gtk_layer_set_monitor (window, monitor);
+
+      /* anchor the window and the panel to opposite monitor edges to avoid positioning
+       * conflicts due to the panel exclusive zone */
+      toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin)));
+      anchored_top = gtk_layer_get_anchor (toplevel, GTK_LAYER_SHELL_EDGE_TOP)
+                     && gtk_layer_get_margin (toplevel, GTK_LAYER_SHELL_EDGE_TOP) == 0;
+      anchored_left = gtk_layer_get_anchor (toplevel, GTK_LAYER_SHELL_EDGE_LEFT)
+                      && gtk_layer_get_margin (toplevel, GTK_LAYER_SHELL_EDGE_LEFT) == 0;
+      gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_TOP, ! anchored_top);
+      gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_BOTTOM, anchored_top);
+      gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_LEFT, ! anchored_left);
+      gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_RIGHT, anchored_left);
+    }
+
   g_signal_connect (window, "hide",
                     G_CALLBACK (xfce_panel_plugin_popup_window_hide), plugin);
   g_signal_connect (window, "button-press-event",
@@ -2882,7 +2930,20 @@ xfce_panel_plugin_popup_window (XfcePanelPlugin *plugin,
   /* block autohide first so we get the correct position if the panel is hidden */
   xfce_panel_plugin_block_autohide (plugin, TRUE);
   xfce_panel_plugin_position_widget (plugin, GTK_WIDGET (window), widget, &x, &y);
-  gtk_window_move (window, x, y);
+  if (gtk_layer_is_supported ())
+    {
+      GdkRectangle geom;
+      GtkRequisition req;
+
+      gdk_monitor_get_geometry (gtk_layer_get_monitor (window), &geom);
+      gtk_widget_get_preferred_size (GTK_WIDGET (window), &req, NULL);
+      gtk_layer_set_margin (window, GTK_LAYER_SHELL_EDGE_LEFT, x - geom.x);
+      gtk_layer_set_margin (window, GTK_LAYER_SHELL_EDGE_TOP, y - geom.y);
+      gtk_layer_set_margin (window, GTK_LAYER_SHELL_EDGE_RIGHT, geom.x + geom.width - x - req.width);
+      gtk_layer_set_margin (window, GTK_LAYER_SHELL_EDGE_BOTTOM, geom.y + geom.height - y - req.height);
+    }
+  else
+    gtk_window_move (window, x, y);
 
   gtk_widget_show (GTK_WIDGET (window));
 
