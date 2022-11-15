@@ -185,9 +185,9 @@ xfce_panel_plugin_provider_emit_signal (XfcePanelPluginProvider       *provider,
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  /* emit the signal only if the plugin has not already been unparented (see
-   * panel_itembar_unref()) */
-  if (gtk_widget_get_parent (GTK_WIDGET (provider)) != NULL)
+  /* emit the signal only if the plugin is in a complete widget hierarchy (see
+   * in particular panel_itembar_unref()) */
+  if (GTK_IS_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (provider))))
     g_signal_emit (provider, provider_signals[PROVIDER_SIGNAL], 0, provider_signal);
 }
 
