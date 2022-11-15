@@ -32,8 +32,14 @@
 #endif
 
 #include <gdk/gdk.h>
-#include <gdk/gdkx.h>
 #include <libxfce4util/libxfce4util.h>
+#ifdef HAVE_GTK_X11
+#include <panel/panel-plugin-external-wrapper-x11.h>
+#endif
+#ifdef HAVE_GTK_LAYER_SHELL
+#include <gtk-layer-shell/gtk-layer-shell.h>
+#include <panel/panel-plugin-external-wrapper-wayland.h>
+#endif
 
 #include <common/panel-private.h>
 #include <common/panel-dbus.h>
@@ -56,6 +62,9 @@
 
 
 
+#define get_instance_private(instance) \
+  panel_plugin_external_wrapper_get_instance_private (PANEL_PLUGIN_EXTERNAL_WRAPPER (instance))
+
 static void       panel_plugin_external_wrapper_constructed              (GObject                        *object);
 static void       panel_plugin_external_wrapper_finalize                 (GObject                        *object);
 static void       panel_plugin_external_wrapper_set_properties           (PanelPluginExternal            *external,
@@ -75,26 +84,21 @@ static gboolean   panel_plugin_external_wrapper_dbus_remote_event_result (XfcePa
                                                                           guint                           handle,
                                                                           gboolean                        result,
                                                                           PanelPluginExternalWrapper     *wrapper);
+static gboolean   panel_plugin_external_wrapper_dbus_set                 (XfcePanelPluginWrapperExported *skeleton,
+                                                                          GDBusMethodInvocation          *invocation,
+                                                                          GVariant                       *parameters,
+                                                                          PanelPluginExternalWrapper     *wrapper);
 
 
 
-
-struct _PanelPluginExternalWrapperClass
+typedef struct _PanelPluginExternalWrapperPrivate
 {
-  PanelPluginExternalClass __parent__;
-};
-
-struct _PanelPluginExternalWrapper
-{
-  PanelPluginExternal __parent__;
-
   XfcePanelPluginWrapperExported *skeleton;
 
   GDBusConnection                *connection;
 
   gboolean                        exported : 1;
-
-};
+} PanelPluginExternalWrapperPrivate;
 
 enum
 {
@@ -108,7 +112,7 @@ static guint external_signals[LAST_SIGNAL];
 
 
 
-G_DEFINE_TYPE (PanelPluginExternalWrapper, panel_plugin_external_wrapper, PANEL_TYPE_PLUGIN_EXTERNAL)
+G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (PanelPluginExternalWrapper, panel_plugin_external_wrapper, PANEL_TYPE_PLUGIN_EXTERNAL)
 
 
 
@@ -149,22 +153,20 @@ panel_plugin_external_wrapper_init (PanelPluginExternalWrapper *external)
 static void
 panel_plugin_external_wrapper_constructed (GObject *object)
 {
-  PanelPluginExternalWrapper *wrapper;
-  gchar                      *path;
-  GError                     *error = NULL;
+  PanelPluginExternalWrapperPrivate *priv = get_instance_private (object);
+  gchar *path;
+  GError *error = NULL;
 
-  wrapper = PANEL_PLUGIN_EXTERNAL_WRAPPER (object);
-
-  wrapper->connection = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL,  &error);
-  if (G_LIKELY (wrapper->connection != NULL))
+  priv->connection = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL,  &error);
+  if (G_LIKELY (priv->connection != NULL))
     {
-      wrapper->skeleton = xfce_panel_plugin_wrapper_exported_skeleton_new ();
+      priv->skeleton = xfce_panel_plugin_wrapper_exported_skeleton_new ();
 
       /* register the object in dbus, the wrapper will monitor this object */
       panel_return_if_fail (PANEL_PLUGIN_EXTERNAL (object)->unique_id != -1);
       path = g_strdup_printf (PANEL_DBUS_WRAPPER_PATH, PANEL_PLUGIN_EXTERNAL (object)->unique_id);
-      g_dbus_interface_skeleton_export (G_DBUS_INTERFACE_SKELETON (wrapper->skeleton),
-                                        wrapper->connection,
+      g_dbus_interface_skeleton_export (G_DBUS_INTERFACE_SKELETON (priv->skeleton),
+                                        priv->connection,
                                         path,
                                         &error);
 
@@ -172,24 +174,26 @@ panel_plugin_external_wrapper_constructed (GObject *object)
         {
           g_critical ("error wrapper path %s failed: %s", path, error->message);
           g_error_free (error);
-          wrapper->exported = FALSE;
+          priv->exported = FALSE;
         }
       else
         {
-          g_signal_connect (wrapper->skeleton, "handle_provider_signal",
-                            G_CALLBACK (panel_plugin_external_wrapper_dbus_provider_signal), wrapper);
-          g_signal_connect (wrapper->skeleton, "handle_remote_event_result",
-                            G_CALLBACK (panel_plugin_external_wrapper_dbus_remote_event_result), wrapper);
+          g_signal_connect (priv->skeleton, "handle_provider_signal",
+                            G_CALLBACK (panel_plugin_external_wrapper_dbus_provider_signal), object);
+          g_signal_connect (priv->skeleton, "handle_remote_event_result",
+                            G_CALLBACK (panel_plugin_external_wrapper_dbus_remote_event_result), object);
+          g_signal_connect (priv->skeleton, "handle-set",
+                            G_CALLBACK (panel_plugin_external_wrapper_dbus_set), object);
           panel_debug (PANEL_DEBUG_EXTERNAL, "register dbus path %s", path);
 
-          wrapper->exported = TRUE;
+          priv->exported = TRUE;
         }
 
       g_free (path);
     }
   else
     {
-      wrapper->exported = FALSE;
+      priv->exported = FALSE;
       g_critical ("Failed to get D-Bus session bus: %s", error->message);
       g_error_free (error);
     }
@@ -202,18 +206,16 @@ panel_plugin_external_wrapper_constructed (GObject *object)
 static void
 panel_plugin_external_wrapper_finalize (GObject *object)
 {
-  PanelPluginExternalWrapper *wrapper;
+  PanelPluginExternalWrapperPrivate *priv = get_instance_private (object);
 
-  wrapper = PANEL_PLUGIN_EXTERNAL_WRAPPER (object);
-
-  if (wrapper->exported)
+  if (priv->exported)
     {
-      g_object_unref (wrapper->skeleton);
-      g_object_unref (wrapper->connection);
+      g_object_unref (priv->skeleton);
+      g_object_unref (priv->connection);
     }
   /* Export failed, but we have gotten a connection */
-  else if (wrapper->connection)
-    g_object_unref (wrapper->connection);
+  else if (priv->connection)
+    g_object_unref (priv->connection);
 
   (*G_OBJECT_CLASS (panel_plugin_external_wrapper_parent_class)->finalize) (object);
 }
@@ -229,7 +231,6 @@ panel_plugin_external_wrapper_get_argv (PanelPluginExternal   *external,
 
   panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL_WRAPPER (external), NULL);
   panel_return_val_if_fail (PANEL_IS_MODULE (external->module), NULL);
-  panel_return_val_if_fail (GTK_IS_SOCKET (external), NULL);
 
   /* add the number of arguments to the argc count */
   if (G_UNLIKELY (arguments != NULL))
@@ -240,7 +241,6 @@ panel_plugin_external_wrapper_get_argv (PanelPluginExternal   *external,
   argv[PLUGIN_ARGV_0] = g_strjoin ("-", WRAPPER_BIN, panel_module_get_api (external->module), NULL);
   argv[PLUGIN_ARGV_FILENAME] = g_strdup (panel_module_get_filename (external->module));
   argv[PLUGIN_ARGV_UNIQUE_ID] = g_strdup_printf ("%d", external->unique_id);;
-  argv[PLUGIN_ARGV_SOCKET_ID] = g_strdup_printf ("%lu", gtk_socket_get_id (GTK_SOCKET (external)));;
   argv[PLUGIN_ARGV_NAME] = g_strdup (panel_module_get_name (external->module));
   argv[PLUGIN_ARGV_DISPLAY_NAME] = g_strdup (panel_module_get_display_name (external->module));
   argv[PLUGIN_ARGV_COMMENT] = g_strdup (panel_module_get_comment (external->module));
@@ -286,6 +286,9 @@ panel_plugin_external_wrapper_gvalue_prop_to_gvariant (const GValue *value)
     case G_TYPE_STRING:
       type = G_VARIANT_TYPE_STRING;
       break;
+    case G_TYPE_VARIANT:
+      type = G_VARIANT_TYPE_TUPLE;
+      break;
     /* only throw a warning (instead of an assertion) here as otherwise invalid
        types sent to the panel via dbus would let the panel crash */
     default:
@@ -304,12 +307,10 @@ static void
 panel_plugin_external_wrapper_set_properties (PanelPluginExternal *external,
                                               GSList              *properties)
 {
-  PanelPluginExternalWrapper *wrapper;
-  GVariantBuilder             builder;
-  PluginProperty             *property;
-  GSList                     *li;
-
-  wrapper = PANEL_PLUGIN_EXTERNAL_WRAPPER (external);
+  PanelPluginExternalWrapperPrivate *priv = get_instance_private (external);
+  GVariantBuilder builder;
+  PluginProperty *property;
+  GSList *li;
 
   g_variant_builder_init (&builder, G_VARIANT_TYPE_TUPLE);
 
@@ -334,9 +335,9 @@ panel_plugin_external_wrapper_set_properties (PanelPluginExternal *external,
     }
 
   /* send array to the wrapper */
-  g_dbus_connection_emit_signal (wrapper->connection,
+  g_dbus_connection_emit_signal (priv->connection,
                                  NULL,
-                                 g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (wrapper->skeleton)),
+                                 g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (priv->skeleton)),
                                  "org.xfce.Panel.Wrapper",
                                  "Set",
                                  g_variant_builder_end (&builder),
@@ -351,15 +352,13 @@ panel_plugin_external_wrapper_remote_event (PanelPluginExternal *external,
                                             const GValue        *value,
                                             guint               *handle)
 {
-  PanelPluginExternalWrapper  *wrapper;
-  GVariant                    *variant;
-  static guint                 handle_counter = 0;
+  PanelPluginExternalWrapperPrivate *priv = get_instance_private (external);
+  GVariant *variant;
+  static guint handle_counter = 0;
 
   panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL_WRAPPER (external), TRUE);
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (external), TRUE);
   panel_return_val_if_fail (value == NULL || G_IS_VALUE (value), FALSE);
-
-  wrapper = PANEL_PLUGIN_EXTERNAL_WRAPPER (external);
 
   if (G_UNLIKELY (handle_counter > G_MAXUINT - 2))
     handle_counter = 0;
@@ -375,9 +374,9 @@ panel_plugin_external_wrapper_remote_event (PanelPluginExternal *external,
       variant = g_variant_new_variant (g_variant_new_byte ('\0'));
     }
 
-  g_dbus_connection_emit_signal (wrapper->connection,
+  g_dbus_connection_emit_signal (priv->connection,
                                  NULL,
-                                 g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (wrapper->skeleton)),
+                                 g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (priv->skeleton)),
                                  "org.xfce.Panel.Wrapper",
                                  "RemoteEvent",
                                  g_variant_new ("(svu)",
@@ -407,6 +406,10 @@ panel_plugin_external_wrapper_dbus_provider_signal (XfcePanelPluginWrapperExport
 
     case PROVIDER_SIGNAL_SHOW_ABOUT:
       PANEL_PLUGIN_EXTERNAL (wrapper)->show_about = TRUE;
+      break;
+
+    case PROVIDER_SIGNAL_EMBEDDED:
+      panel_plugin_external_set_embedded (PANEL_PLUGIN_EXTERNAL (wrapper), TRUE);
       break;
 
     default:
@@ -442,6 +445,44 @@ panel_plugin_external_wrapper_dbus_remote_event_result (XfcePanelPluginWrapperEx
 
 
 
+static gboolean
+panel_plugin_external_wrapper_dbus_set (XfcePanelPluginWrapperExported *skeleton,
+                                        GDBusMethodInvocation *invocation,
+                                        GVariant *parameters,
+                                        PanelPluginExternalWrapper *wrapper)
+{
+  XfcePanelPluginProvider *provider = XFCE_PANEL_PLUGIN_PROVIDER (wrapper);
+  XfcePanelPluginProviderPropType type;
+  GVariant *variant;
+  gint width, height;
+
+  panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (wrapper), FALSE);
+
+  g_variant_get (parameters, "(uv)", &type, &variant);
+  switch (type)
+    {
+    case PROVIDER_PROP_TYPE_SET_GEOMETRY:
+      g_variant_get_child (variant, 2, "i", &width);
+      g_variant_get_child (variant, 3, "i", &height);
+      gtk_widget_set_size_request (GTK_WIDGET (wrapper), width, height);
+      break;
+
+    default:
+      g_critical ("Received unknown plugin property %u for %s-%d",
+                  type, xfce_panel_plugin_provider_get_name (provider),
+                  xfce_panel_plugin_provider_get_unique_id (provider));
+      break;
+    }
+
+  g_variant_unref (variant);
+
+  xfce_panel_plugin_wrapper_exported_complete_set (skeleton, invocation);
+
+  return TRUE;
+}
+
+
+
 GtkWidget *
 panel_plugin_external_wrapper_new (PanelModule  *module,
                                    gint          unique_id,
@@ -450,8 +491,22 @@ panel_plugin_external_wrapper_new (PanelModule  *module,
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
   panel_return_val_if_fail (unique_id != -1, NULL);
 
-  return g_object_new (PANEL_TYPE_PLUGIN_EXTERNAL_WRAPPER,
-                       "module", module,
-                       "unique-id", unique_id,
-                       "arguments", arguments, NULL);
+#ifdef HAVE_GTK_X11
+  if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+    return g_object_new (PANEL_TYPE_PLUGIN_EXTERNAL_WRAPPER_X11,
+                         "module", module,
+                         "unique-id", unique_id,
+                         "arguments", arguments, NULL);
+#endif
+#ifdef HAVE_GTK_LAYER_SHELL
+  if (gtk_layer_is_supported ())
+    return g_object_new (PANEL_TYPE_PLUGIN_EXTERNAL_WRAPPER_WAYLAND,
+                         "module", module,
+                         "unique-id", unique_id,
+                         "arguments", arguments, NULL);
+#endif
+
+  g_critical ("Running plugins as external is not supported on this windowing environment");
+
+  return NULL;
 }
