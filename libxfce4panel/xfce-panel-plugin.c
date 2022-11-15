@@ -2729,32 +2729,24 @@ xfce_panel_plugin_popup_menu (XfcePanelPlugin *plugin,
   /* check if conditions are met to pop up menu at widget */
   if (widget != NULL)
     {
-      switch (plugin->priv->screen_position)
+      switch (xfce_panel_plugin_arrow_type (plugin))
         {
-          case XFCE_SCREEN_POSITION_NW_H:
-          case XFCE_SCREEN_POSITION_N:
-          case XFCE_SCREEN_POSITION_NE_H:
+          case GTK_ARROW_DOWN:
             widget_anchor = GDK_GRAVITY_SOUTH_WEST;
             menu_anchor = GDK_GRAVITY_NORTH_WEST;
             break;
 
-          case XFCE_SCREEN_POSITION_NW_V:
-          case XFCE_SCREEN_POSITION_W:
-          case XFCE_SCREEN_POSITION_SW_V:
+          case GTK_ARROW_RIGHT:
             widget_anchor = GDK_GRAVITY_NORTH_EAST;
             menu_anchor = GDK_GRAVITY_NORTH_WEST;
             break;
 
-          case XFCE_SCREEN_POSITION_NE_V:
-          case XFCE_SCREEN_POSITION_E:
-          case XFCE_SCREEN_POSITION_SE_V:
+          case GTK_ARROW_LEFT:
             widget_anchor = GDK_GRAVITY_NORTH_WEST;
             menu_anchor = GDK_GRAVITY_NORTH_EAST;
             break;
 
-          case XFCE_SCREEN_POSITION_SW_H:
-          case XFCE_SCREEN_POSITION_S:
-          case XFCE_SCREEN_POSITION_SE_H:
+          case GTK_ARROW_UP:
             widget_anchor = GDK_GRAVITY_NORTH_WEST;
             menu_anchor = GDK_GRAVITY_SOUTH_WEST;
             break;
