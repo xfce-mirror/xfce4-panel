@@ -2749,6 +2749,11 @@ xfce_panel_plugin_popup_menu (XfcePanelPlugin *plugin,
   /* register the menu */
   xfce_panel_plugin_register_menu (plugin, menu);
 
+  /* since we requested a panel lock, wait for gtk to position the panel if it is hidden
+   * before popping up the menu */
+  while (gtk_events_pending ())
+    gtk_main_iteration ();
+
   /* pop up the menu */
   if (popup_at_widget)
     gtk_menu_popup_at_widget (menu, widget, widget_anchor, menu_anchor, trigger_event);
