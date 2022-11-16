@@ -2543,6 +2543,13 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
   /* get the menu/widget size request */
   gtk_widget_get_preferred_size (menu_widget, &requisition, NULL);
 
+  /* if the panel is hidden (auto hide is enabled) and we requested a
+   * panel lock, wait for gtk to position the panel before we actually
+   * use the coordinates */
+  if (plugin->priv->panel_lock > 0)
+    while (gtk_events_pending ())
+      gtk_main_iteration ();
+
   /* get the root position of the attach widget */
   toplevel = gtk_widget_get_toplevel (attach_widget);
   gtk_window_get_position (GTK_WINDOW (toplevel), x, y);
@@ -2555,26 +2562,6 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
                                 &px, &py, NULL, NULL);
        *x += px;
        *y += py;
-    }
-
-  /* if the panel is hidden (auto hide is enabled) and we requested a
-   * panel lock, wait for gtk to position the panel before we actually
-   * use the coordinates */
-  if (plugin->priv->panel_lock > 0)
-    {
-      gint64 end_t = g_get_monotonic_time () + G_USEC_PER_SEC / 2;
-
-      while (*x == -9999 && *y == -9999)
-        {
-          while (gtk_events_pending ())
-            gtk_main_iteration ();
-
-          gdk_window_get_position (gtk_widget_get_window (attach_widget), x, y);
-
-          /* don't try longer then 1/2 a second */
-          if (g_get_monotonic_time () > end_t)
-            break;
-        }
     }
 
   /* add the widgets allocation */
