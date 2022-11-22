@@ -2502,6 +2502,9 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
  * relative to @attach_widget. If @attach_widget is NULL, the computed
  * position will be relative to @plugin.
  *
+ * Note that if the panel is hidden (autohide), you should delay calling this
+ * function until the panel is shown, so that it returns the correct coordinates.
+ *
  * This function is intended for custom menu widgets.
  * For a regular #GtkMenu you should use xfce_panel_plugin_popup_menu() instead.
  *
@@ -2542,13 +2545,6 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
 
   /* get the menu/widget size request */
   gtk_widget_get_preferred_size (menu_widget, &requisition, NULL);
-
-  /* if the panel is hidden (auto hide is enabled) and we requested a
-   * panel lock, wait for gtk to position the panel before we actually
-   * use the coordinates */
-  if (plugin->priv->panel_lock > 0)
-    while (gtk_events_pending ())
-      gtk_main_iteration ();
 
   /* get the root position of the attach widget */
   toplevel = gtk_widget_get_toplevel (attach_widget);
@@ -2679,6 +2675,15 @@ xfce_panel_plugin_position_menu (GtkMenu  *menu,
 
 
 
+static gboolean
+xfce_panel_plugin_popup_menu_reposition (gpointer data)
+{
+  gtk_menu_reposition (data);
+  return FALSE;
+}
+
+
+
 /**
  * xfce_panel_plugin_popup_menu:
  * @plugin        : an #XfcePanelPlugin.
@@ -2749,10 +2754,8 @@ xfce_panel_plugin_popup_menu (XfcePanelPlugin *plugin,
   /* register the menu */
   xfce_panel_plugin_register_menu (plugin, menu);
 
-  /* since we requested a panel lock, wait for gtk to position the panel if it is hidden
-   * before popping up the menu */
-  while (gtk_events_pending ())
-    gtk_main_iteration ();
+  /* since we requested a panel lock, queue a menu repositioning in case the panel is hidden */
+  g_idle_add (xfce_panel_plugin_popup_menu_reposition, menu);
 
   /* pop up the menu */
   if (popup_at_widget)
