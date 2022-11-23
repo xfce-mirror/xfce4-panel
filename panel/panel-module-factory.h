@@ -43,7 +43,7 @@ GType               panel_module_factory_get_type            (void) G_GNUC_CONST
 
 PanelModuleFactory *panel_module_factory_get                 (void);
 
-void                panel_module_factory_force_all_external  (void);
+void                panel_module_factory_force_run_mode      (PanelModuleRunMode   mode);
 
 gboolean            panel_module_factory_has_launcher        (PanelModuleFactory  *factory);
 
