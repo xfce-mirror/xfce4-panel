@@ -66,7 +66,7 @@ msgstr "Θέλετε σίγουρα να αφαιρέσετε το \"%s\";"
 #: ../libxfce4panel/xfce-panel-plugin.c:1085
 #: ../panel/panel-preferences-dialog.c:1418
 msgid "Remove Item"
-msgstr ""
+msgstr "Αφαίρεση αντικειμένου"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1087
 msgid ""
@@ -148,7 +148,7 @@ msgstr "Περί"
 
 #: ../panel/main.c:81
 msgid "Show the 'Panel Preferences' dialog"
-msgstr "Εμφάνιση του διαλόγου 'Προτιμήσεις ταμπλό'"
+msgstr "Εμφάνιση του 'Προτιμήσεις ταμπλό'"
 
 #: ../panel/main.c:81 ../panel/main.c:82
 msgid "PANEL-NUMBER"
@@ -156,7 +156,7 @@ msgstr "ΑΡΙΘΜΟΣ-ΤΑΜΠΛΟ"
 
 #: ../panel/main.c:82
 msgid "Show the 'Add New Items' dialog"
-msgstr "Εμφάνιση του διαλόγου 'Προσθήκη νέων αντικειμένων'"
+msgstr "Εμφάνιση του 'Προσθήκη νέων αντικειμένων'"
 
 #: ../panel/main.c:83
 msgid "Save the panel configuration"
@@ -164,11 +164,11 @@ msgstr "Αποθήκευση της ρύθμισης παραμέτρων του
 
 #: ../panel/main.c:84
 msgid "Add a new plugin to the panel"
-msgstr "Προσθήκη ενός νέου αρθρώματος στο ταμπλό"
+msgstr "Προσθήκη ενός νέου πρόσθετου στο ταμπλό"
 
 #: ../panel/main.c:84
 msgid "PLUGIN-NAME"
-msgstr "ΟΝΟΜΑ-ΑΡΘΡΩΜΑΤΟΣ"
+msgstr "ΟΝΟΜΑ-ΠΡΟΣΘΕΤΟΥ"
 
 #: ../panel/main.c:85
 msgid "Restart the running panel instance"
@@ -225,11 +225,11 @@ msgstr "Επανεκκίνηση..."
 
 #: ../panel/main.c:419
 msgid "Failed to show the preferences dialog"
-msgstr "Αποτυχία εμφάνισης του διαλόγου προτιμήσεων"
+msgstr "Αποτυχία εμφάνισης των προτιμήσεων"
 
 #: ../panel/main.c:421
 msgid "Failed to show the add new items dialog"
-msgstr "Αποτυχία εμφάνισης του διαλόγου προσθήκης νέων αντικειμένων"
+msgstr "Αποτυχία εμφάνισης της προσθήκης νέων αντικειμένων"
 
 #: ../panel/main.c:423
 msgid "Failed to save the panel configuration"
@@ -237,7 +237,7 @@ msgstr "Αποτυχία αποθήκευσης της ρύθμισης παρα
 
 #: ../panel/main.c:425
 msgid "Failed to add a plugin to the panel"
-msgstr "Αποτυχία προσθήκης ενός νέου αρθρώματος στο ταμπλό"
+msgstr "Αποτυχία προσθήκης νέου πρόσθετου στο ταμπλό"
 
 #: ../panel/main.c:427
 msgid "Failed to restart the panel"
@@ -278,7 +278,7 @@ msgstr "Δημιουργία _εκκινητή"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Αυτό θα δημιουργήσει νέο εκκινητή στο ταμπλό και θα εισάγει τα τοποθετημένα αρχεία ως αντικείμενα του μενού."
+msgstr "Αυτό θα δημιουργήσει νέο πρόσθετο εκκινητή στο ταμπλό και θα εισάγει τα απορριφθέντα αρχεία ως αντικείμενα του μενού."
 
 #: ../panel/panel-application.c:1005
 #, c-format
@@ -309,7 +309,7 @@ msgstr "Αποτυχία εκτέλεσης της εντολής \"%s\""
 #: ../panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Προσδιορίστηκε μη έγκυρη σύνταξη του αρθρώματος: Χρησιμοποιήστε το ΟΝΟΜΑ-ΑΡΘΡΩΜΑΤΟΣ:ΟΝΟΜΑ[:ΤΥΠΟΣ:ΤΙΜΗ]."
+msgstr "Ορίσατε μη έγκυρη σύνταξη για το πρόσθετο: Χρησιμοποιήστε το ΟΝΟΜΑ-ΠΡΟΣΘΕΤΟΥ:ΟΝΟΜΑ[:ΤΥΠΟΣ:ΤΙΜΗ]."
 
 #: ../panel/panel-dbus-client.c:248
 #, c-format
@@ -343,7 +343,7 @@ msgstr "_Προσθήκη"
 
 #: ../panel/panel-dialogs.c:176
 msgid "Please choose a panel for the new plugin:"
-msgstr "Παρακαλώ επιλέξτε ένα ταμπλό για το νέο άρθρωμα:"
+msgstr "Παρακαλώ επιλέξτε ένα ταμπλό για το νέο πρόσθετο:"
 
 #: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:991
 #, c-format
@@ -392,11 +392,11 @@ msgstr "Εισάγετε εδώ τη φράση για αναζήτηση"
 #: ../panel/panel-plugin-external.c:516
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "Το άρθρωμα \"%s\" έφυγε απροσδόκητα από το ταμπλό, θέλετε να το επανεκκινήσετε;"
+msgstr "Το πρόσθετο \"%s\" έφυγε απροσδόκητα από το ταμπλό, θέλετε να το επανεκκινήσετε;"
 
 #: ../panel/panel-plugin-external.c:519
 msgid "Plugin Restart"
-msgstr ""
+msgstr "Επανεκκίνηση πρόσθετου"
 
 #: ../panel/panel-plugin-external.c:520
 #, c-format
@@ -404,7 +404,7 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Το άρθρωμα επανεκκινήθηκε περισσότερες από μία φορές τα τελευταία %d δευτερόλεπτα. Εάν πατήσετε εκτέλεση, το ταμπλό θα προσπαθήσει να επανεκκινήσει το άρθρωμα αλλιώς αυτό θα αφαιρεθεί οριστικά από το ταμπλό."
+msgstr "Το πρόσθετο επανεκκινήθηκε περισσότερες από μία φορές τα τελευταία %d δευτερόλεπτα. Εάν πατήσετε εκτέλεση, το ταμπλό θα προσπαθήσει να επανεκκινήσει το πρόσθετο αλλιώς αυτό θα αφαιρεθεί οριστικά από το ταμπλό."
 
 #: ../panel/panel-plugin-external.c:524
 msgid "_Execute"
@@ -426,7 +426,7 @@ msgstr "Οθόνη %d"
 
 #: ../panel/panel-preferences-dialog.c:1053
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "Οι ρυθμίσεις παραμέτρων του ταμπλό και των αρθρωμάτων θα αφαιρεθούν οριστικά."
+msgstr "Οι ρυθμίσεις παραμέτρων του ταμπλό και των προσθέτων θα αφαιρεθούν οριστικά."
 
 #: ../panel/panel-preferences-dialog.c:1054
 #, c-format
@@ -547,7 +547,7 @@ msgstr "Επιλέξτε το για να αποκρύψετε τις χειρο
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Keep panel _above windows"
-msgstr ""
+msgstr "Διατήρηση ταμπλό ε_πάνω από τα παράθυρα"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
@@ -579,7 +579,7 @@ msgstr "_Αριθμός γραμμών:"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "L_ength (pixels):"
-msgstr ""
+msgstr "Μήκος (pixels):"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "A_utomatically increase the length"
@@ -589,7 +589,7 @@ msgstr "Α_υτόματη αύξηση του μήκους"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Επιλέξτε το για να γίνεται αυτόματη αύξηση του μήκους του ταμπλό, όταν τα αρθρώματα ζητούν περισσότερο χώρο."
+msgstr "Επιλέξτε το για να γίνεται αυτόματη αύξηση του μήκους του ταμπλό, όταν τα πρόσθετα ζητούν περισσότερο χώρο."
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid "D_isplay"
@@ -969,7 +969,7 @@ msgstr "Τίτλος _κουμπιού:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Show button on one _line"
-msgstr ""
+msgstr "Εμφάνιση κουμπιού σε μία _γραμμή"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "_Show button title"
@@ -1102,31 +1102,31 @@ msgstr "Προσαρμοσμένη μορφή"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
 msgid "Decimal"
-msgstr ""
+msgstr "Δεκαδική"
 
 #: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Sexagesimal"
-msgstr ""
+msgstr "Εξηνταδική"
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Binary time"
-msgstr ""
+msgstr "Δυαδική ώρα"
 
 #: ../plugins/clock/clock-dialog.glade.h:4
 msgid "Date, then time"
-msgstr ""
+msgstr "Ημερομηνία και μετά ώρα"
 
 #: ../plugins/clock/clock-dialog.glade.h:5
 msgid "Time, then date"
-msgstr ""
+msgstr "Ώρα και μετά ημερομηνία"
 
 #: ../plugins/clock/clock-dialog.glade.h:6
 msgid "Date Only"
-msgstr ""
+msgstr "Ημερομηνία"
 
 #: ../plugins/clock/clock-dialog.glade.h:7
 msgid "Time Only"
-msgstr ""
+msgstr "Ώρα"
 
 #: ../plugins/clock/clock-dialog.glade.h:8
 msgid "Analog"
@@ -1175,7 +1175,7 @@ msgstr "Ρυθμίσεις ώρας"
 msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
-msgstr ""
+msgstr "Αν οριστεί, εκτελείται αυτή η εντολή όταν κάνετε αριστερό κλικ στο πρόσθετο, αντί να εμφανίζεται το προεπιλεγμένο ημερολόγιο."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Co_mmand:"
@@ -1183,7 +1183,7 @@ msgstr "Εν_τολή:"
 
 #: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Calendar"
-msgstr ""
+msgstr "Ημερολόγιο"
 
 #: ../plugins/clock/clock-dialog.glade.h:24
 #, no-c-format
@@ -1192,7 +1192,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "Το συγκεκριμένο καθορίζει τη μορφή ημερομηνίας και ώρας στο ταμπλό. Για παράδειγμα, το %Υ θα αντικατασταθεί από το έτος, το %m από το μήνα και το %d από τη μέρα. Ομοίως, τα <b><b/> θα κάνουν το κείμενο έντονο. Κοιτάξτε τη σελίδα Βοήθειας για επιπλέον πληροφορίες."
+msgstr "Η διαμόρφωση καθορίζει τη μορφή της ημερομηνίας και της ώρας στο ταμπλό. Για παράδειγμα, το %Υ θα δείξει το έτος, το %m το μήνα και το %d από τη ημέρα. Επίσης τα <b><b/> θα κάνουν το κείμενο έντονο. Για περισσότερες πληροφορίες δείτε τη σελίδα \"Βοήθειας\"."
 
 #: ../plugins/clock/clock-dialog.glade.h:25
 msgid "_Tooltip format:"
@@ -1216,7 +1216,7 @@ msgstr "_Χρήση 24ώρου ρολογιού"
 
 #: ../plugins/clock/clock-dialog.glade.h:31
 msgid "Binary mode:"
-msgstr ""
+msgstr "Δυαδική λειτουργία:"
 
 #: ../plugins/clock/clock-dialog.glade.h:32
 msgid "Display _seconds"
@@ -1238,11 +1238,11 @@ msgstr "Εμφάνιση πλέγμα_τος"
 
 #: ../plugins/clock/clock-dialog.glade.h:37
 msgid "Font:"
-msgstr ""
+msgstr "Γραμματοσειρά:"
 
 #: ../plugins/clock/clock-dialog.glade.h:38
 msgid "Format:"
-msgstr ""
+msgstr "Διαμόρφωση:"
 
 #: ../plugins/clock/clock-dialog.glade.h:40
 #, no-c-format
@@ -1251,7 +1251,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
 "the &quot;Help&quot; page for additional information."
-msgstr ""
+msgstr "Η διαμόρφωση καθορίζει τη μορφή της ημερομηνίας και την ώρας στο ταμπλό. Για παράδειγμα, το %Y θα δείξει το έτος, το %m το μήνα και το %d την ημέρα. Επίσης τα σύμβολα &lt;b&gt;&lt;/b&gt; θα κάνουν το κείμενο έντονο.  Για περισσότερες πληροφορίες δείτε τη σελίδα &quot;Help&quot;."
 
 #: ../plugins/clock/clock-dialog.glade.h:41
 msgid "Date"
@@ -1259,7 +1259,7 @@ msgstr "Ημερομηνία"
 
 #: ../plugins/clock/clock-dialog.glade.h:42
 msgid "Time"
-msgstr ""
+msgstr "Ώρα"
 
 #: ../plugins/clock/clock-dialog.glade.h:43
 msgid "Clock Options"
@@ -1274,7 +1274,7 @@ msgstr "%R"
 #: ../plugins/clock/clock-digital.h:26
 msgctxt "Date"
 msgid "%Y-%m-%d"
-msgstr ""
+msgstr "%Y-%m-%d"
 
 #: ../plugins/clock/clock-digital.h:27
 msgctxt "Time"
@@ -2064,7 +2064,7 @@ msgstr "Αποτυχία απόκτησης διαχείρισης για την
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Status Tray Plugin"
-msgstr "Πρόσθετο εμφάνιση αντικειμένων"
+msgstr "Πρόσθετο εμφάνισης αντικειμένων"
 
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid ""
@@ -2139,7 +2139,7 @@ msgstr "Ενέργεια με_σαίου κλικ:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "_Group windows by application"
-msgstr ""
+msgstr "_Ομαδοποίηση παραθύρων ανά εφαρμογή"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Restore minimized windows to current _workspace"
