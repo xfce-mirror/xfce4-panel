@@ -1175,6 +1175,16 @@ panel_plugin_external_set_geometry (PanelPluginExternal *external,
 
 
 
+gboolean
+panel_plugin_external_pointer_is_outside (PanelPluginExternal *external)
+{
+  panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external), FALSE);
+
+  return PANEL_PLUGIN_EXTERNAL_GET_CLASS (external)->pointer_is_outside (external);
+}
+
+
+
 void
 panel_plugin_external_set_embedded (PanelPluginExternal *external,
                                     gboolean embedded)

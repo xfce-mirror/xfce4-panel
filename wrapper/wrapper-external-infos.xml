@@ -8,5 +8,12 @@
 
     <signal name="Embedded"></signal>
 
+    <signal name="PointerEnter"></signal>
+    <signal name="PointerLeave"></signal>
+
+    <method name="PointerIsOutside">
+      <arg name="is_outside" type="b" direction="out"/>
+    </method>
+
   </interface>
 </node>
