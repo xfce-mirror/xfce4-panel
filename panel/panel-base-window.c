@@ -25,6 +25,7 @@
 #endif
 
 #include <gtk/gtk.h>
+#include <gtk-layer-shell/gtk-layer-shell.h>
 
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
@@ -837,6 +838,10 @@ panel_base_window_opacity_enter (PanelBaseWindow *window,
     }
   else
     {
+      /* needs a recheck when timeout is over on Wayland, see panel_window_pointer_is_outside() */
+      if (gtk_layer_is_supported () && ! panel_window_pointer_is_outside (PANEL_WINDOW (window)))
+        return;
+
       gtk_widget_set_opacity (GTK_WIDGET (window), window->leave_opacity);
       panel_base_window_set_plugin_data (window, panel_base_window_set_plugin_leave_opacity);
     }
