@@ -89,11 +89,7 @@ struct _PanelPluginExternalWrapper
   PanelPluginExternal __parent__;
 
   XfcePanelPluginWrapperExported *skeleton;
-
   GDBusConnection                *connection;
-
-  gboolean                        exported : 1;
-
 };
 
 enum
@@ -140,7 +136,7 @@ panel_plugin_external_wrapper_class_init (PanelPluginExternalWrapperClass *klass
 
 
 static void
-panel_plugin_external_wrapper_init (PanelPluginExternalWrapper *external)
+panel_plugin_external_wrapper_init (PanelPluginExternalWrapper *wrapper)
 {
 }
 
@@ -170,9 +166,8 @@ panel_plugin_external_wrapper_constructed (GObject *object)
 
       if (G_UNLIKELY (error != NULL))
         {
-          g_critical ("error wrapper path %s failed: %s", path, error->message);
+          g_critical ("Failed to export object at path %s: %s", path, error->message);
           g_error_free (error);
-          wrapper->exported = FALSE;
         }
       else
         {
@@ -180,16 +175,14 @@ panel_plugin_external_wrapper_constructed (GObject *object)
                             G_CALLBACK (panel_plugin_external_wrapper_dbus_provider_signal), wrapper);
           g_signal_connect (wrapper->skeleton, "handle_remote_event_result",
                             G_CALLBACK (panel_plugin_external_wrapper_dbus_remote_event_result), wrapper);
-          panel_debug (PANEL_DEBUG_EXTERNAL, "register dbus path %s", path);
 
-          wrapper->exported = TRUE;
+          panel_debug (PANEL_DEBUG_EXTERNAL, "Exported object at path %s", path);
         }
 
       g_free (path);
     }
   else
     {
-      wrapper->exported = FALSE;
       g_critical ("Failed to get D-Bus session bus: %s", error->message);
       g_error_free (error);
     }
@@ -206,13 +199,9 @@ panel_plugin_external_wrapper_finalize (GObject *object)
 
   wrapper = PANEL_PLUGIN_EXTERNAL_WRAPPER (object);
 
-  if (wrapper->exported)
-    {
-      g_object_unref (wrapper->skeleton);
-      g_object_unref (wrapper->connection);
-    }
-  /* Export failed, but we have gotten a connection */
-  else if (wrapper->connection)
+  if (wrapper->skeleton != NULL)
+    g_object_unref (wrapper->skeleton);
+  if (wrapper->connection != NULL)
     g_object_unref (wrapper->connection);
 
   (*G_OBJECT_CLASS (panel_plugin_external_wrapper_parent_class)->finalize) (object);
@@ -337,7 +326,7 @@ panel_plugin_external_wrapper_set_properties (PanelPluginExternal *external,
   g_dbus_connection_emit_signal (wrapper->connection,
                                  NULL,
                                  g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (wrapper->skeleton)),
-                                 "org.xfce.Panel.Wrapper",
+                                 PANEL_DBUS_WRAPPER_INTERFACE,
                                  "Set",
                                  g_variant_builder_end (&builder),
                                  NULL);
@@ -378,7 +367,7 @@ panel_plugin_external_wrapper_remote_event (PanelPluginExternal *external,
   g_dbus_connection_emit_signal (wrapper->connection,
                                  NULL,
                                  g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (wrapper->skeleton)),
-                                 "org.xfce.Panel.Wrapper",
+                                 PANEL_DBUS_WRAPPER_INTERFACE,
                                  "RemoteEvent",
                                  g_variant_new ("(svu)",
                                                 name,
@@ -386,7 +375,7 @@ panel_plugin_external_wrapper_remote_event (PanelPluginExternal *external,
                                                 *handle),
                                  NULL);
 
-  return TRUE;
+  return G_DBUS_METHOD_INVOCATION_HANDLED;
 }
 
 
@@ -418,7 +407,7 @@ panel_plugin_external_wrapper_dbus_provider_signal (XfcePanelPluginWrapperExport
 
   xfce_panel_plugin_wrapper_exported_complete_provider_signal (skeleton, invocation);
 
-  return TRUE;
+  return G_DBUS_METHOD_INVOCATION_HANDLED;
 }
 
 
@@ -437,7 +426,7 @@ panel_plugin_external_wrapper_dbus_remote_event_result (XfcePanelPluginWrapperEx
 
   xfce_panel_plugin_wrapper_exported_complete_remote_event_result (skeleton, invocation);
 
-  return TRUE;
+  return G_DBUS_METHOD_INVOCATION_HANDLED;
 }
 
 
