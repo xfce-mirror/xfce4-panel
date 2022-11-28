@@ -66,6 +66,7 @@ struct _PanelPluginExternalClass
   /* Wayland only */
   void       (*set_geometry)         (PanelPluginExternal  *external,
                                       PanelWindow          *window);
+  gboolean   (*pointer_is_outside)   (PanelPluginExternal  *external);
 };
 
 struct _PanelPluginExternal
@@ -115,6 +116,8 @@ void         panel_plugin_external_set_background_image (PanelPluginExternal    
 
 void         panel_plugin_external_set_geometry         (PanelPluginExternal              *external,
                                                          PanelWindow                      *window);
+
+gboolean     panel_plugin_external_pointer_is_outside   (PanelPluginExternal              *external);
 
 void         panel_plugin_external_set_embedded         (PanelPluginExternal              *external,
                                                          gboolean                          embedded);
