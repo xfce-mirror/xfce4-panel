@@ -35,6 +35,12 @@
 
 static void       wrapper_plug_wayland_iface_init                   (WrapperPlugInterface             *iface);
 static void       wrapper_plug_wayland_finalize                     (GObject                          *object);
+static gboolean   wrapper_plug_wayland_enter_notify_event           (GtkWidget                        *widget,
+                                                                     GdkEventCrossing                 *event);
+static gboolean   wrapper_plug_wayland_leave_notify_event           (GtkWidget                        *widget,
+                                                                     GdkEventCrossing                 *event);
+static gboolean   wrapper_plug_wayland_motion_notify_event          (GtkWidget                        *widget,
+                                                                     GdkEventMotion                   *event);
 static void       wrapper_plug_wayland_realize                      (GtkWidget                        *widget);
 static void       wrapper_plug_wayland_size_allocate                (GtkWidget                        *widget,
                                                                      GtkAllocation                    *allocation);
@@ -63,6 +69,7 @@ struct _WrapperPlugWayland
   GDBusConnection *connection;
   WrapperExternalExported *skeleton;
   guint watcher_id;
+  gboolean pointer_is_outside;
 };
 
 
@@ -83,6 +90,9 @@ wrapper_plug_wayland_class_init (WrapperPlugWaylandClass *klass)
   gobject_class->finalize = wrapper_plug_wayland_finalize;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
+  gtkwidget_class->enter_notify_event = wrapper_plug_wayland_enter_notify_event;
+  gtkwidget_class->leave_notify_event = wrapper_plug_wayland_leave_notify_event;
+  gtkwidget_class->motion_notify_event = wrapper_plug_wayland_motion_notify_event;
   gtkwidget_class->realize = wrapper_plug_wayland_realize;
   gtkwidget_class->size_allocate = wrapper_plug_wayland_size_allocate;
 
@@ -120,6 +130,9 @@ wrapper_plug_wayland_init (WrapperPlugWayland *plug)
   gtk_layer_set_exclusive_zone (GTK_WINDOW (plug), -1);
   gtk_layer_set_anchor (GTK_WINDOW (plug), GTK_LAYER_SHELL_EDGE_TOP, TRUE);
   gtk_layer_set_anchor (GTK_WINDOW (plug), GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+
+  /* to catch some pointer enter events that are sometimes not received */
+  gtk_widget_add_events (GTK_WIDGET (plug), GDK_POINTER_MOTION_MASK);
 }
 
 
@@ -135,6 +148,52 @@ wrapper_plug_wayland_finalize (GObject *object)
     g_bus_unwatch_name (plug->watcher_id);
 
   G_OBJECT_CLASS (wrapper_plug_wayland_parent_class)->finalize (object);
+}
+
+
+
+static gboolean
+wrapper_plug_wayland_enter_notify_event (GtkWidget *widget,
+                                         GdkEventCrossing *event)
+{
+  WrapperPlugWayland *plug = WRAPPER_PLUG_WAYLAND (widget);
+  const gchar *path = g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (plug->skeleton));
+
+  plug->pointer_is_outside = FALSE;
+  g_dbus_connection_emit_signal (plug->connection, NULL, path, PANEL_DBUS_EXTERNAL_INTERFACE,
+                                 "PointerEnter", NULL, NULL);
+
+  return FALSE;
+}
+
+
+
+static gboolean
+wrapper_plug_wayland_leave_notify_event (GtkWidget *widget,
+                                         GdkEventCrossing *event)
+{
+  WrapperPlugWayland *plug = WRAPPER_PLUG_WAYLAND (widget);
+  const gchar *path = g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (plug->skeleton));
+
+  plug->pointer_is_outside = TRUE;
+  g_dbus_connection_emit_signal (plug->connection, NULL, path, PANEL_DBUS_EXTERNAL_INTERFACE,
+                                 "PointerLeave", NULL, NULL);
+
+  return FALSE;
+}
+
+
+
+static gboolean
+wrapper_plug_wayland_motion_notify_event (GtkWidget *widget,
+                                          GdkEventMotion *event)
+{
+  WrapperPlugWayland *plug = WRAPPER_PLUG_WAYLAND (widget);
+
+  if (plug->pointer_is_outside)
+    wrapper_plug_wayland_enter_notify_event (widget, (GdkEventCrossing *) event);
+
+  return FALSE;
 }
 
 
@@ -251,6 +310,31 @@ wrapper_plug_wayland_set_geometry (WrapperPlug *plug,
 
   gtk_layer_set_margin (GTK_WINDOW (plug), GTK_LAYER_SHELL_EDGE_LEFT, geometry->x);
   gtk_layer_set_margin (GTK_WINDOW (plug), GTK_LAYER_SHELL_EDGE_TOP, geometry->y);
+}
+
+
+
+static gboolean
+wrapper_plug_wayland_handle_pointer_is_outside (WrapperExternalExported *skeleton,
+                                                GDBusMethodInvocation *invocation,
+                                                WrapperPlugWayland *plug)
+{
+  GdkDevice *device;
+  GdkWindow *window;
+
+  plug->pointer_is_outside = FALSE;
+  device = gdk_seat_get_pointer (gdk_display_get_default_seat (gdk_display_get_default ()));
+  if (device != NULL)
+    {
+      /* see panel_window_pointer_is_outside() about the reliability of this check on Wayland */
+      window = gdk_device_get_window_at_position (device, NULL, NULL);
+      plug->pointer_is_outside = window == NULL || gdk_window_get_effective_toplevel (window)
+                                                   != gtk_widget_get_window (GTK_WIDGET (plug));
+    }
+
+  wrapper_external_exported_complete_pointer_is_outside (skeleton, invocation, plug->pointer_is_outside);
+
+  return G_DBUS_METHOD_INVOCATION_HANDLED;
 }
 
 
