@@ -55,6 +55,17 @@ static void         panel_plugin_external_wrapper_wayland_proxy_embedded        
                                                                                    gchar                                *signal_name,
                                                                                    GVariant                             *parameters,
                                                                                    PanelPluginExternalWrapperWayland    *wrapper);
+static void         panel_plugin_external_wrapper_wayland_proxy_pointer_enter     (GDBusProxy                           *proxy,
+                                                                                   gchar                                *sender_name,
+                                                                                   gchar                                *signal_name,
+                                                                                   GVariant                             *parameters,
+                                                                                   PanelPluginExternalWrapperWayland    *wrapper);
+static void         panel_plugin_external_wrapper_wayland_proxy_pointer_leave     (GDBusProxy                           *proxy,
+                                                                                   gchar                                *sender_name,
+                                                                                   gchar                                *signal_name,
+                                                                                   GVariant                             *parameters,
+                                                                                   PanelPluginExternalWrapperWayland    *wrapper);
+static gboolean     panel_plugin_external_wrapper_wayland_pointer_is_outside      (PanelPluginExternal                  *external);
 
 
 
@@ -92,6 +103,7 @@ panel_plugin_external_wrapper_wayland_class_init (PanelPluginExternalWrapperWayl
   external_class->set_background_color = panel_plugin_external_wrapper_wayland_set_background_color;
   external_class->set_background_image = panel_plugin_external_wrapper_wayland_set_background_image;
   external_class->set_geometry = panel_plugin_external_wrapper_wayland_set_geometry;
+  external_class->pointer_is_outside = panel_plugin_external_wrapper_wayland_pointer_is_outside;
 }
 
 
@@ -133,6 +145,12 @@ panel_plugin_external_wrapper_wayland_constructed (GObject *object)
       /* when the plug is ready to receive its geometry, in particular */
       g_signal_connect (wrapper->proxy, "g-signal::Embedded",
                         G_CALLBACK (panel_plugin_external_wrapper_wayland_proxy_embedded), object);
+
+      /* forward pointer events from the plug to the panel */
+      g_signal_connect (wrapper->proxy, "g-signal::PointerEnter",
+                        G_CALLBACK (panel_plugin_external_wrapper_wayland_proxy_pointer_enter), object);
+      g_signal_connect (wrapper->proxy, "g-signal::PointerLeave",
+                        G_CALLBACK (panel_plugin_external_wrapper_wayland_proxy_pointer_leave), object);
 
       panel_debug (PANEL_DEBUG_EXTERNAL, "Created D-BUS proxy at path %s", path);
     }
@@ -280,6 +298,74 @@ panel_plugin_external_wrapper_wayland_proxy_embedded (GDBusProxy *proxy,
                                                       PanelPluginExternalWrapperWayland *wrapper)
 {
   panel_plugin_external_set_embedded (PANEL_PLUGIN_EXTERNAL (wrapper), TRUE);
+}
+
+
+
+static void
+panel_plugin_external_wrapper_wayland_proxy_pointer_enter (GDBusProxy *proxy,
+                                                           gchar *sender_name,
+                                                           gchar *signal_name,
+                                                           GVariant *parameters,
+                                                           PanelPluginExternalWrapperWayland *wrapper)
+{
+  GtkWidget *toplevel;
+  GdkEventCrossing event = { 0 };
+
+  toplevel = gtk_widget_get_toplevel (GTK_WIDGET (wrapper));
+  event.type = GDK_ENTER_NOTIFY;
+  event.window = gtk_widget_get_window (toplevel);
+  event.time = GDK_CURRENT_TIME;
+  event.mode = GDK_CROSSING_NORMAL;
+  event.detail = GDK_NOTIFY_NONLINEAR;
+  GTK_WIDGET_GET_CLASS (toplevel)->enter_notify_event (toplevel, &event);
+}
+
+
+
+static void
+panel_plugin_external_wrapper_wayland_proxy_pointer_leave (GDBusProxy *proxy,
+                                                           gchar *sender_name,
+                                                           gchar *signal_name,
+                                                           GVariant *parameters,
+                                                           PanelPluginExternalWrapperWayland *wrapper)
+{
+  GtkWidget *toplevel;
+  GdkEventCrossing event = { 0 };
+
+  toplevel = gtk_widget_get_toplevel (GTK_WIDGET (wrapper));
+  event.type = GDK_ENTER_NOTIFY;
+  event.window = gtk_widget_get_window (toplevel);
+  event.time = GDK_CURRENT_TIME;
+  event.mode = GDK_CROSSING_NORMAL;
+  event.detail = GDK_NOTIFY_NONLINEAR;
+  GTK_WIDGET_GET_CLASS (toplevel)->leave_notify_event (toplevel, &event);
+}
+
+
+
+static gboolean
+panel_plugin_external_wrapper_wayland_pointer_is_outside (PanelPluginExternal *external)
+{
+  PanelPluginExternalWrapperWayland *wrapper = PANEL_PLUGIN_EXTERNAL_WRAPPER_WAYLAND (external);
+  GVariant *retv;
+  GError *error = NULL;
+  gboolean ret = FALSE;
+
+  retv = g_dbus_proxy_call_sync (wrapper->proxy, "PointerIsOutside", NULL,
+                                 G_DBUS_CALL_FLAGS_NONE, -1, NULL, &error);
+  if (retv != NULL)
+    {
+      g_variant_get (retv, "(b)", &ret);
+      g_variant_unref (retv);
+    }
+  else
+    {
+      g_warning ("PointerIsOutside call failed: %s", error->message);
+      g_error_free (error);
+    }
+
+  return ret;
 }
 
 #endif /* ! GDK_WINDOWING_WAYLAND */
