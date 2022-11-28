@@ -2691,18 +2691,49 @@ panel_window_active_window_changed (XfwScreen   *screen,
 
 
 
-static gboolean
+gboolean
 panel_window_pointer_is_outside (PanelWindow *window)
 {
   GdkDevice *device;
   GdkWindow *gdkwindow;
+  gboolean is_outside;
 
   device = gdk_seat_get_pointer (gdk_display_get_default_seat (window->display));
   if (device != NULL)
     {
       gdkwindow = gdk_device_get_window_at_position (device, NULL, NULL);
-      return gdkwindow == NULL || gdk_window_get_effective_toplevel (gdkwindow)
-                                  != gtk_widget_get_window (GTK_WIDGET (window));
+      is_outside = gdkwindow == NULL || gdk_window_get_effective_toplevel (gdkwindow)
+                                        != gtk_widget_get_window (GTK_WIDGET (window));
+
+      /*
+       * Besides the fact that the above check has to be done for each external plugin
+       * on Wayland (synchronously via D-Bus), it is not reliable like on X11.
+       * If gdk_device_get_window_at_position() != NULL, then it can be trusted. But if
+       * it is NULL, the pointer may be above a GdkWindow of the application (panel or
+       * wrapper), because GTK has not yet received the information from the compositor.
+       * This can happen typically after a grab (so when a menu is shown), or if a GdkWindow
+       * has just been mapped. And unfortunately there doesn't seem to be an event or signal
+       * to connect to from which we can be sure that gdk_device_get_window_at_position()
+       * returns valid information in these cases.
+       * So the best we can do seems to be to recheck after a timeout. Since we already use
+       * timeouts to hide the panel or disable opacity on hover, we redo the check at that
+       * moment.
+       */
+      if (gtk_layer_is_supported () && is_outside)
+        {
+          GtkWidget *itembar = gtk_bin_get_child (GTK_BIN (window));
+          GList *lp, *plugins = gtk_container_get_children (GTK_CONTAINER (itembar));
+
+          for (lp = plugins; lp != NULL; lp = lp->next)
+            if (PANEL_IS_PLUGIN_EXTERNAL (lp->data)
+                && ! panel_plugin_external_pointer_is_outside (lp->data))
+              break;
+          g_list_free (plugins);
+
+          return lp == NULL;
+        }
+      else
+        return is_outside;
     }
 
   return FALSE;
@@ -2987,6 +3018,14 @@ panel_window_autohide_timeout (gpointer user_data)
     window->autohide_state = AUTOHIDE_HIDDEN;
   else if (window->autohide_state == AUTOHIDE_POPUP)
     window->autohide_state = AUTOHIDE_VISIBLE;
+
+  /* needs a recheck when timeout is over on Wayland, see panel_window_pointer_is_outside() */
+  if (gtk_layer_is_supported () && window->autohide_state == AUTOHIDE_HIDDEN
+      && ! panel_window_pointer_is_outside (window))
+    {
+      window->autohide_state = AUTOHIDE_VISIBLE;
+      return FALSE;
+    }
 
   /* move the windows around */
   if (gtk_layer_is_supported () && window->autohide_state == AUTOHIDE_VISIBLE)
