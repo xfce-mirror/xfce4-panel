@@ -39,6 +39,7 @@ static void         panel_plugin_external_wrapper_x11_set_background_image    (P
                                                                                const gchar                      *image);
 static void         panel_plugin_external_wrapper_x11_set_geometry            (PanelPluginExternal              *external,
                                                                                PanelWindow                      *window);
+static gboolean     panel_plugin_external_wrapper_x11_pointer_is_outside      (PanelPluginExternal              *external);
 static void         panel_plugin_external_wrapper_x11_socket_size_allocate    (GtkWidget                        *widget,
                                                                                GtkAllocation                    *allocation);
 static void         panel_plugin_external_wrapper_x11_socket_plug_added       (GtkSocket                        *socket,
@@ -80,6 +81,7 @@ panel_plugin_external_wrapper_x11_class_init (PanelPluginExternalWrapperX11Class
   external_class->set_background_color = panel_plugin_external_wrapper_x11_set_background_color;
   external_class->set_background_image = panel_plugin_external_wrapper_x11_set_background_image;
   external_class->set_geometry = panel_plugin_external_wrapper_x11_set_geometry;
+  external_class->pointer_is_outside = panel_plugin_external_wrapper_x11_pointer_is_outside;
 
   /* GtkWidget::size-allocate is flagged G_SIGNAL_RUN_FIRST so we need to overwrite it */
   g_signal_override_class_handler ("size-allocate", GTK_TYPE_SOCKET,
@@ -191,6 +193,15 @@ panel_plugin_external_wrapper_x11_set_geometry (PanelPluginExternal *external,
                                                 PanelWindow *window)
 {
   /* Wayland only */
+}
+
+
+
+static gboolean
+panel_plugin_external_wrapper_x11_pointer_is_outside (PanelPluginExternal *external)
+{
+  /* Wayland only */
+  return FALSE;
 }
 
 
