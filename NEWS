@@ -1,3 +1,23 @@
+4.17.5 (2022-11-30)
+======
+- Code Refactoring:
+  - panel: Remove dead code
+  - Define and use macros for Xfconf properties (!104)
+  - clock: Do not include `private.h` in headers
+
+- Bug Fixes:
+  - panel-desktop-handler: Add `OnlyShowIn=XFCE` key (!106)
+  - libxfce4panel: Fix menu positioning when the panel is hidden
+  - libxfce4panel: Fix menu widget positioning when the panel is hidden
+  - libxfce4panel: Strengthen sanity check for emitting "provider-signal"
+  - libxfce4panel: Make popup_penu() consistent with position_widget()
+  - panel: Remove limitation on setting struts in multi-monitor mode (#661)
+  - launcher: Fix tooltip icon invalidation on boutton update
+  - tasklist: Take window scaling into account for dnd
+
+- Translation Updates:
+  Greek, Kazakh, Korean, Portuguese (Brazil)
+
 4.17.4 (2022-10-31)
 ======
 - Dependency Changes:
