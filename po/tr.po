@@ -23,9 +23,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-20 00:47+0200\n"
+"POT-Creation-Date: 2022-11-28 15:00+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Demiray Muhterem <mdemiray@msn.com>, 2018-2020,2022\n"
+"Last-Translator: Sabri Ünal <libreajans@gmail.com>, 2022\n"
 "Language-Team: Turkish (http://www.transifex.com/xfce/xfce4-panel/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,7 +49,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "paneller;ayarlar;tercihler;yeğler;görev çubuğu;otomatik gizle;kendiliğinden gizle;uygulama menüsü;başlat;düğmeler;başlatıcı;bildirim alanı;durum;simgeler;eklentiler;uzantılar;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3081
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2989
 msgid "Panel"
 msgstr "Panel"
 
@@ -62,7 +62,7 @@ msgstr "Paneli özelleştir"
 #: ../panel/panel-preferences-dialog.c:1415
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "'%s' ögesini silmek istediğinizden emin misiniz?"
+msgstr "'%s' ögesini kaldırmak istediğinizden emin misiniz?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1085
 #: ../panel/panel-preferences-dialog.c:1418
@@ -76,9 +76,9 @@ msgstr "Ögenin panelden kaldırılması, yapılandırmasının kaybedileceği a
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1088 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1422
-#: ../plugins/applicationsmenu/applicationsmenu.c:614
-#: ../plugins/directorymenu/directorymenu.c:469
-#: ../plugins/directorymenu/directorymenu.c:936
+#: ../plugins/applicationsmenu/applicationsmenu.c:611
+#: ../plugins/directorymenu/directorymenu.c:470
+#: ../plugins/directorymenu/directorymenu.c:939
 msgid "_Cancel"
 msgstr "_İptal"
 
@@ -99,7 +99,7 @@ msgid "_Properties"
 msgstr "_Özellikler"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3157
+#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3065
 msgid "_About"
 msgstr "_Hakkında"
 
@@ -113,23 +113,23 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:3093
+#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:3001
 msgid "Add _New Items..."
 msgstr "_Yeni Öge Ekle..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:3104
+#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:3012
 msgid "Panel Pr_eferences..."
 msgstr "Panel T_ercihleri..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3132
+#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3040
 msgid "Log _Out"
 msgstr "Çıkış _Yap"
 
 #. help item
 #: ../libxfce4panel/xfce-panel-plugin.c:1326 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3148
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3056
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:15
@@ -215,94 +215,94 @@ msgid "Please report bugs to <%s>."
 msgstr "Lütfen hataları <%s> adresine bildirin."
 
 #. quit without error if an instance is running
-#: ../panel/main.c:396
+#: ../panel/main.c:398
 msgid "There is already a running instance"
 msgstr "Halihazırda çalışan panel örneği var"
 
 #. spawn ourselfs again
-#: ../panel/main.c:404
+#: ../panel/main.c:406
 msgid "Restarting..."
 msgstr "Yeniden Başlatıyor..."
 
-#: ../panel/main.c:419
+#: ../panel/main.c:421
 msgid "Failed to show the preferences dialog"
 msgstr "Tercihler penceresi gösterilemedi"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:423
 msgid "Failed to show the add new items dialog"
 msgstr "'Yeni Öge Ekle' penceresi gösterilemedi"
 
-#: ../panel/main.c:423
+#: ../panel/main.c:425
 msgid "Failed to save the panel configuration"
 msgstr "Panel ayarları kaydedilemedi"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:427
 msgid "Failed to add a plugin to the panel"
 msgstr "Panele eklenti yerleştirilemedi"
 
-#: ../panel/main.c:427
+#: ../panel/main.c:429
 msgid "Failed to restart the panel"
 msgstr "Panel yeniden başlatılamadı"
 
-#: ../panel/main.c:429
+#: ../panel/main.c:431
 msgid "Failed to quit the panel"
 msgstr "Panelden çıkılamadı"
 
-#: ../panel/main.c:431
+#: ../panel/main.c:433
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus iletisi gönderilemedi"
 
-#: ../panel/main.c:441
+#: ../panel/main.c:443
 msgid "Execute"
 msgstr "Çalıştır"
 
-#: ../panel/main.c:442
+#: ../panel/main.c:444
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Paneli başlatmak istiyor musunuz? Öyleyse, çıkışta oturumu kaydettiğinizden emin olun. Böylece sonraki girişinizde panel kendiliğinden başlayacak."
 
-#: ../panel/main.c:445 ../panel/main.c:459
+#: ../panel/main.c:447 ../panel/main.c:461
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "%s çalışan örneği bulunamadı"
 
-#: ../panel/panel-application.c:221
+#: ../panel/panel-application.c:220
 msgid "Failed to launch the migration application"
 msgstr "Geçiş uygulaması başlatılamadı"
 
-#: ../panel/panel-application.c:1002
+#: ../panel/panel-application.c:1000
 msgid "Create _Launcher"
 msgstr "_Başlatıcı Oluştur"
 
-#: ../panel/panel-application.c:1003
+#: ../panel/panel-application.c:1001
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Bu panelde yeni başlatıcı eklentisi oluşturur ve eklenen dosyaları menü ögeleri olarak ekler."
 
-#: ../panel/panel-application.c:1005
+#: ../panel/panel-application.c:1003
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "%d masaüstü dosyasından yeni başlatıcı oluştur"
 msgstr[1] "%d masaüstü dosyalarından yeni başlatıcı oluştur"
 
-#: ../panel/panel-application.c:1762
+#: ../panel/panel-application.c:1760
 msgid "Quit"
 msgstr "Çık"
 
-#: ../panel/panel-application.c:1763
+#: ../panel/panel-application.c:1761
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "X'i oturum yöneticisi olmadan başlattınız. Çık'ı tıklattığınızda X sunucusu kapanır."
 
-#: ../panel/panel-application.c:1764
+#: ../panel/panel-application.c:1762
 msgid "Are you sure you want to quit the panel?"
 msgstr "Paneli kapatmak istediğinizden emin misiniz?"
 
-#: ../panel/panel-application.c:1772
+#: ../panel/panel-application.c:1770
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" komutu çalıştırılamadı"
@@ -405,7 +405,7 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Eklenti, %d saniyede birden çok yeniden başlatıldı. Eğer Çalıştır'a bastıysanız, panel eklentiyi yeniden başlatmayı deneyecek, yoksa kalıcı olarak panelden kaldırılacak."
+msgstr "Eklenti, %d saniyede birden çok defa yeniden başlatıldı. Eğer Çalıştır'a bastıysanız, panel eklentiyi yeniden başlatmayı deneyecek, yoksa kalıcı olarak panelden kaldırılacak."
 
 #: ../panel/panel-plugin-external.c:524
 msgid "_Execute"
@@ -423,7 +423,7 @@ msgstr "Birincil"
 #: ../panel/panel-preferences-dialog.c:575
 #, c-format
 msgid "Monitor %d"
-msgstr "Monitör %d"
+msgstr "Ekran %d"
 
 #: ../panel/panel-preferences-dialog.c:1053
 msgid "The panel and plugin configurations will be permanently removed"
@@ -432,7 +432,7 @@ msgstr "Panel ve eklenti ayarları kalıcı olarak silinecek"
 #: ../panel/panel-preferences-dialog.c:1054
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
-msgstr "%d. paneli silmek istediğinize emin misiniz?"
+msgstr "%d. paneli kaldırmak istediğinize emin misiniz?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
@@ -726,23 +726,23 @@ msgstr "Deneyimli"
 msgid "Expert"
 msgstr "Uzman"
 
-#: ../panel/panel-window.c:3118
+#: ../panel/panel-window.c:3026
 msgid "_Lock Panel"
 msgstr "Pane_li Kilitle"
 
-#: ../migrate/main.c:110
+#: ../migrate/main.c:111
 msgid "Failed to load the default configuration"
 msgstr "Öntanımlı panel yapılandırması yüklenemedi"
 
-#: ../migrate/main.c:122
+#: ../migrate/main.c:123
 msgid "Panel config needs migration..."
 msgstr "Panel yapılandırılmasının taşınması gerekiyor..."
 
-#: ../migrate/main.c:126
+#: ../migrate/main.c:127
 msgid "Failed to migrate the existing configuration"
 msgstr "Var olan yapılandırmaya dönülmesi başarısız oldu"
 
-#: ../migrate/main.c:132
+#: ../migrate/main.c:133
 msgid "Panel configuration has been updated."
 msgstr "Panel yapılandırması güncellendi"
 
@@ -1032,19 +1032,19 @@ msgstr "Menü Dosyası"
 msgid "Applications"
 msgstr "Uygulamalar"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:612
-#: ../plugins/directorymenu/directorymenu.c:467
+#: ../plugins/applicationsmenu/applicationsmenu.c:609
+#: ../plugins/directorymenu/directorymenu.c:468
 msgid "Select An Icon"
 msgstr "Simge Seç"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:615
-#: ../plugins/directorymenu/directorymenu.c:470
+#: ../plugins/applicationsmenu/applicationsmenu.c:612
+#: ../plugins/directorymenu/directorymenu.c:471
 msgid "_OK"
 msgstr "_Tamam"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:652
-#: ../plugins/clock/clock.c:1035 ../plugins/launcher/launcher.c:2479
+#: ../plugins/applicationsmenu/applicationsmenu.c:650
+#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2496
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" komutu çalıştırılamadı."
@@ -1093,11 +1093,11 @@ msgstr "%A %d %B %Y"
 msgid "Week %V"
 msgstr "%V. Hafta"
 
-#: ../plugins/clock/clock.c:491
+#: ../plugins/clock/clock.c:490
 msgid "Failed to execute clock command"
 msgstr "Saat komutu başlatılamadı"
 
-#: ../plugins/clock/clock.c:974
+#: ../plugins/clock/clock.c:1011
 msgid "Custom Format"
 msgstr "Özel Biçim"
 
@@ -1282,303 +1282,303 @@ msgctxt "Time"
 msgid "%a %_d %b, %R"
 msgstr "%a%_d %b, %R"
 
-#: ../plugins/clock/clock-fuzzy.c:87
+#: ../plugins/clock/clock-fuzzy.c:88
 msgid "Night"
 msgstr "Gece"
 
-#: ../plugins/clock/clock-fuzzy.c:88
+#: ../plugins/clock/clock-fuzzy.c:89
 msgid "Early morning"
 msgstr "Seher"
 
-#: ../plugins/clock/clock-fuzzy.c:89
+#: ../plugins/clock/clock-fuzzy.c:90
 msgid "Morning"
 msgstr "Sabah"
 
-#: ../plugins/clock/clock-fuzzy.c:90
+#: ../plugins/clock/clock-fuzzy.c:91
 msgid "Almost noon"
 msgstr "Öğleden önce"
 
-#: ../plugins/clock/clock-fuzzy.c:91
+#: ../plugins/clock/clock-fuzzy.c:92
 msgid "Noon"
 msgstr "Öğlen"
 
-#: ../plugins/clock/clock-fuzzy.c:92
+#: ../plugins/clock/clock-fuzzy.c:93
 msgid "Afternoon"
 msgstr "Öğleden sonra"
 
-#: ../plugins/clock/clock-fuzzy.c:93
+#: ../plugins/clock/clock-fuzzy.c:94
 msgid "Evening"
 msgstr "Akşam"
 
-#: ../plugins/clock/clock-fuzzy.c:94
+#: ../plugins/clock/clock-fuzzy.c:95
 msgid "Late evening"
 msgstr "Gece"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: ../plugins/clock/clock-fuzzy.c:101
+#: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "%0 o'clock"
 msgstr "Saat %0"
 
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "five past %0"
 msgstr "%0'ı beş geçe"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "ten past %0"
 msgstr "%0'ı on geçe"
 
-#: ../plugins/clock/clock-fuzzy.c:104
+#: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "quarter past %0"
 msgstr "%0'ı çeyrek geçe"
 
-#: ../plugins/clock/clock-fuzzy.c:105
+#: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "twenty past %0"
 msgstr "%0'ı yirmi geçe"
 
-#: ../plugins/clock/clock-fuzzy.c:106
+#: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five past %0"
 msgstr "%0'ı yirmi beş geçe"
 
-#: ../plugins/clock/clock-fuzzy.c:107
+#: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "half past %0"
 msgstr "%0 buçuk"
 
-#: ../plugins/clock/clock-fuzzy.c:108
+#: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "twenty five to %1"
 msgstr "%1'e yirmi beş var"
 
-#: ../plugins/clock/clock-fuzzy.c:109
+#: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "twenty to %1"
 msgstr "%1'e yirmi var"
 
-#: ../plugins/clock/clock-fuzzy.c:110
+#: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "quarter to %1"
 msgstr "%1'e çeyrek var"
 
-#: ../plugins/clock/clock-fuzzy.c:111
+#: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "ten to %1"
 msgstr "%1'e on var"
 
-#: ../plugins/clock/clock-fuzzy.c:112
+#: ../plugins/clock/clock-fuzzy.c:113
 #, no-c-format
 msgid "five to %1"
 msgstr "%1'e beş var"
 
-#: ../plugins/clock/clock-fuzzy.c:113
+#: ../plugins/clock/clock-fuzzy.c:114
 #, no-c-format
 msgid "%1 o'clock"
 msgstr "%1"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: ../plugins/clock/clock-fuzzy.c:120
+#: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "%0"
 
-#: ../plugins/clock/clock-fuzzy.c:121
+#: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "%0'i beş geçiyor"
 
-#: ../plugins/clock/clock-fuzzy.c:122
+#: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "%0'i 10 geçiyor"
 
-#: ../plugins/clock/clock-fuzzy.c:123
+#: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "%0'i çeyrek geçiyor"
 
-#: ../plugins/clock/clock-fuzzy.c:124
+#: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "%0'i yirmi geçiyor"
 
-#: ../plugins/clock/clock-fuzzy.c:125
+#: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "%0'i yirmi beş geçiyor"
 
-#: ../plugins/clock/clock-fuzzy.c:126
+#: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "%0'i yarım saat geçiyor"
 
-#: ../plugins/clock/clock-fuzzy.c:127
+#: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "%1'e yirmi beş var"
 
-#: ../plugins/clock/clock-fuzzy.c:128
+#: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "%1'e yirmi var"
 
-#: ../plugins/clock/clock-fuzzy.c:129
+#: ../plugins/clock/clock-fuzzy.c:130
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "%1'e çeyrek var"
 
-#: ../plugins/clock/clock-fuzzy.c:130
+#: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "%1'e on var"
 
-#: ../plugins/clock/clock-fuzzy.c:131
+#: ../plugins/clock/clock-fuzzy.c:132
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "%1'e beş var"
 
-#: ../plugins/clock/clock-fuzzy.c:132
+#: ../plugins/clock/clock-fuzzy.c:133
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "%1"
 
-#: ../plugins/clock/clock-fuzzy.c:137
+#: ../plugins/clock/clock-fuzzy.c:138
 msgctxt "am"
 msgid "one"
 msgstr "bir"
 
-#: ../plugins/clock/clock-fuzzy.c:138
+#: ../plugins/clock/clock-fuzzy.c:139
 msgctxt "am"
 msgid "two"
 msgstr "iki"
 
-#: ../plugins/clock/clock-fuzzy.c:139
+#: ../plugins/clock/clock-fuzzy.c:140
 msgctxt "am"
 msgid "three"
 msgstr "üç"
 
-#: ../plugins/clock/clock-fuzzy.c:140
+#: ../plugins/clock/clock-fuzzy.c:141
 msgctxt "am"
 msgid "four"
 msgstr "dört"
 
-#: ../plugins/clock/clock-fuzzy.c:141
+#: ../plugins/clock/clock-fuzzy.c:142
 msgctxt "am"
 msgid "five"
 msgstr "beş"
 
-#: ../plugins/clock/clock-fuzzy.c:142
+#: ../plugins/clock/clock-fuzzy.c:143
 msgctxt "am"
 msgid "six"
 msgstr "altı"
 
-#: ../plugins/clock/clock-fuzzy.c:143
+#: ../plugins/clock/clock-fuzzy.c:144
 msgctxt "am"
 msgid "seven"
 msgstr "yedi"
 
-#: ../plugins/clock/clock-fuzzy.c:144
+#: ../plugins/clock/clock-fuzzy.c:145
 msgctxt "am"
 msgid "eight"
 msgstr "sekiz"
 
-#: ../plugins/clock/clock-fuzzy.c:145
+#: ../plugins/clock/clock-fuzzy.c:146
 msgctxt "am"
 msgid "nine"
 msgstr "dokuz"
 
-#: ../plugins/clock/clock-fuzzy.c:146
+#: ../plugins/clock/clock-fuzzy.c:147
 msgctxt "am"
 msgid "ten"
 msgstr "on"
 
-#: ../plugins/clock/clock-fuzzy.c:147
+#: ../plugins/clock/clock-fuzzy.c:148
 msgctxt "am"
 msgid "eleven"
 msgstr "on bir"
 
 #. I18N: 12 AM is midnight
-#: ../plugins/clock/clock-fuzzy.c:149
+#: ../plugins/clock/clock-fuzzy.c:150
 msgctxt "am"
 msgid "twelve"
 msgstr "on iki"
 
-#: ../plugins/clock/clock-fuzzy.c:154
+#: ../plugins/clock/clock-fuzzy.c:155
 msgctxt "pm"
 msgid "one"
 msgstr "bir"
 
-#: ../plugins/clock/clock-fuzzy.c:155
+#: ../plugins/clock/clock-fuzzy.c:156
 msgctxt "pm"
 msgid "two"
 msgstr "iki"
 
-#: ../plugins/clock/clock-fuzzy.c:156
+#: ../plugins/clock/clock-fuzzy.c:157
 msgctxt "pm"
 msgid "three"
 msgstr "üç"
 
-#: ../plugins/clock/clock-fuzzy.c:157
+#: ../plugins/clock/clock-fuzzy.c:158
 msgctxt "pm"
 msgid "four"
 msgstr "dört"
 
-#: ../plugins/clock/clock-fuzzy.c:158
+#: ../plugins/clock/clock-fuzzy.c:159
 msgctxt "pm"
 msgid "five"
 msgstr "beş"
 
-#: ../plugins/clock/clock-fuzzy.c:159
+#: ../plugins/clock/clock-fuzzy.c:160
 msgctxt "pm"
 msgid "six"
 msgstr "altı"
 
-#: ../plugins/clock/clock-fuzzy.c:160
+#: ../plugins/clock/clock-fuzzy.c:161
 msgctxt "pm"
 msgid "seven"
 msgstr "yedi"
 
-#: ../plugins/clock/clock-fuzzy.c:161
+#: ../plugins/clock/clock-fuzzy.c:162
 msgctxt "pm"
 msgid "eight"
 msgstr "sekiz"
 
-#: ../plugins/clock/clock-fuzzy.c:162
+#: ../plugins/clock/clock-fuzzy.c:163
 msgctxt "pm"
 msgid "nine"
 msgstr "dokuz"
 
-#: ../plugins/clock/clock-fuzzy.c:163
+#: ../plugins/clock/clock-fuzzy.c:164
 msgctxt "pm"
 msgid "ten"
 msgstr "on"
 
-#: ../plugins/clock/clock-fuzzy.c:164
+#: ../plugins/clock/clock-fuzzy.c:165
 msgctxt "pm"
 msgid "eleven"
 msgstr "on bir"
 
 #. I18N: 12 PM is noon
-#: ../plugins/clock/clock-fuzzy.c:166
+#: ../plugins/clock/clock-fuzzy.c:167
 msgctxt "pm"
 msgid "twelve"
 msgstr "on iki"
@@ -1593,69 +1593,69 @@ msgstr "Saat kaç?"
 msgid "Directory Menu"
 msgstr "Dizin Menüsü"
 
-#: ../plugins/directorymenu/directorymenu.c:692
+#: ../plugins/directorymenu/directorymenu.c:695
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "\"%s\" uygulaması çalıştırılamadı"
 
-#: ../plugins/directorymenu/directorymenu.c:724
+#: ../plugins/directorymenu/directorymenu.c:727
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "\"%s\" için içerik sorgulama başarısız oldu"
 
-#: ../plugins/directorymenu/directorymenu.c:733
+#: ../plugins/directorymenu/directorymenu.c:736
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "\"%s\" için öntanımlı uygulama bulunamadı"
 
-#: ../plugins/directorymenu/directorymenu.c:749
+#: ../plugins/directorymenu/directorymenu.c:752
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "\"%s\" için öntanımlı uygulama çalıştırılamadı"
 
-#: ../plugins/directorymenu/directorymenu.c:844
+#: ../plugins/directorymenu/directorymenu.c:847
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr " \"%s\" kategorisi için seçilen uygulama çalıştırılamadı"
 
-#: ../plugins/directorymenu/directorymenu.c:925
+#: ../plugins/directorymenu/directorymenu.c:928
 msgid "Create New Folder"
 msgstr "Yeni Klasör Oluştur"
 
-#: ../plugins/directorymenu/directorymenu.c:930
+#: ../plugins/directorymenu/directorymenu.c:933
 msgid "Create New Text Document"
 msgstr "Yeni Metin Belgesi Oluştur"
 
-#: ../plugins/directorymenu/directorymenu.c:937
+#: ../plugins/directorymenu/directorymenu.c:940
 msgid "C_reate"
 msgstr "_Oluştur"
 
-#: ../plugins/directorymenu/directorymenu.c:938
+#: ../plugins/directorymenu/directorymenu.c:941
 msgid "Create & _Open"
 msgstr "Oluştur & _Aç"
 
-#: ../plugins/directorymenu/directorymenu.c:952
+#: ../plugins/directorymenu/directorymenu.c:955
 msgid "Enter the new name:"
 msgstr "Yeni ad gir:"
 
-#: ../plugins/directorymenu/directorymenu.c:988
+#: ../plugins/directorymenu/directorymenu.c:991
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Klasör oluşturulamadı: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1071
+#: ../plugins/directorymenu/directorymenu.c:1074
 msgid "Open Folder"
 msgstr "Dizini Aç"
 
-#: ../plugins/directorymenu/directorymenu.c:1084
+#: ../plugins/directorymenu/directorymenu.c:1087
 msgid "Open in Terminal"
 msgstr "Uçbirimde Aç"
 
-#: ../plugins/directorymenu/directorymenu.c:1097
+#: ../plugins/directorymenu/directorymenu.c:1100
 msgid "Create Folder..."
 msgstr "Klasör Oluştur..."
 
-#: ../plugins/directorymenu/directorymenu.c:1110
+#: ../plugins/directorymenu/directorymenu.c:1113
 msgid "Create Text Document..."
 msgstr "Metin Belgesi Oluştur..."
 
@@ -1712,7 +1712,7 @@ msgstr "_Dosya Örüntüsü:"
 msgid "Filtering"
 msgstr "Süz"
 
-#: ../plugins/launcher/launcher.c:403
+#: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
 msgstr "Başlatıcı menüsünü aç"
 
@@ -1720,7 +1720,7 @@ msgstr "Başlatıcı menüsünü aç"
 msgid "Unnamed Item"
 msgstr "Adsız Öge"
 
-#: ../plugins/launcher/launcher.c:1795
+#: ../plugins/launcher/launcher.c:1801
 msgid "No items"
 msgstr "Öge yok"
 
@@ -1848,15 +1848,15 @@ msgstr "Gelişmiş"
 msgid "Program launcher with optional menu"
 msgstr "İsteğe bağlı menü ile program başlatıcısı"
 
-#: ../plugins/pager/pager.c:653 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:655 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "Çalışma Alanı _Ayarları..."
 
-#: ../plugins/pager/pager.c:743
+#: ../plugins/pager/pager.c:745
 msgid "Unable to open the workspace settings"
 msgstr "Çalışma alanı ayarları açılamadı"
 
-#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:897
+#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:902
 #, c-format
 msgid "Workspace %d"
 msgstr "Çalışma Alanı %d"
@@ -1918,15 +1918,15 @@ msgstr "_Genişlet"
 msgid "Adds a separator or space between panel items"
 msgstr "Panel ögeleri arasına ayırıcı veya boşluk ekler"
 
-#: ../plugins/showdesktop/showdesktop.c:240
+#: ../plugins/showdesktop/showdesktop.c:241
 msgid "Restore the minimized windows"
 msgstr "Gizlenmiş pencereleri geri getir"
 
-#: ../plugins/showdesktop/showdesktop.c:242
+#: ../plugins/showdesktop/showdesktop.c:243
 msgid "Minimize all open windows and show the desktop"
 msgstr "Tüm pencereleri küçült ve masaüstünü göster"
 
-#: ../plugins/showdesktop/showdesktop.c:245
+#: ../plugins/showdesktop/showdesktop.c:246
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Masaüstünü Göster"
@@ -2171,36 +2171,36 @@ msgstr "Tüm mo_nitörlerdeki pencereleri göster"
 msgid "Show only _minimized windows"
 msgstr "Yalnızca _küçültülmüş pencereleri göster"
 
-#: ../plugins/tasklist/tasklist-widget.c:3063
+#: ../plugins/tasklist/tasklist-widget.c:3070
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Yeni '%s' örneği başlatılamıyor"
 
-#: ../plugins/tasklist/tasklist-widget.c:3067
+#: ../plugins/tasklist/tasklist-widget.c:3074
 msgid "Error"
 msgstr "Hata"
 
-#: ../plugins/tasklist/tasklist-widget.c:3096
+#: ../plugins/tasklist/tasklist-widget.c:3103
 msgid "Launch New Instance"
 msgstr "Yeni Örnek Başlat"
 
-#: ../plugins/tasklist/tasklist-widget.c:3843
+#: ../plugins/tasklist/tasklist-widget.c:3857
 msgid "Mi_nimize All"
 msgstr "Tümünü _Küçült"
 
-#: ../plugins/tasklist/tasklist-widget.c:3850
+#: ../plugins/tasklist/tasklist-widget.c:3864
 msgid "Un_minimize All"
 msgstr "Küçültmeleri Geri Al"
 
-#: ../plugins/tasklist/tasklist-widget.c:3857
+#: ../plugins/tasklist/tasklist-widget.c:3871
 msgid "Ma_ximize All"
 msgstr "Tümünü _Büyüt"
 
-#: ../plugins/tasklist/tasklist-widget.c:3864
+#: ../plugins/tasklist/tasklist-widget.c:3878
 msgid "_Unmaximize All"
 msgstr "Büyültmeleri Geri Al"
 
-#: ../plugins/tasklist/tasklist-widget.c:3875
+#: ../plugins/tasklist/tasklist-widget.c:3889
 msgid "_Close All"
 msgstr "Tümünü _Kapat"
 
@@ -2208,28 +2208,28 @@ msgstr "Tümünü _Kapat"
 msgid "Switch between open windows using buttons"
 msgstr "Açık pencereler arasında düğmeleri kullanarak geçiş yap"
 
-#: ../plugins/windowmenu/windowmenu.c:690
+#: ../plugins/windowmenu/windowmenu.c:695
 msgid "Desktop"
 msgstr "Masaüstü"
 
-#: ../plugins/windowmenu/windowmenu.c:1292
+#: ../plugins/windowmenu/windowmenu.c:1305
 msgid "No Windows"
 msgstr "Pencere Yok"
 
-#: ../plugins/windowmenu/windowmenu.c:1307
+#: ../plugins/windowmenu/windowmenu.c:1320
 msgid "Urgent Windows"
 msgstr "Önemli Pencereler"
 
-#: ../plugins/windowmenu/windowmenu.c:1349
+#: ../plugins/windowmenu/windowmenu.c:1362
 msgid "Add Workspace"
 msgstr "Çalışma Alanı Ekle"
 
-#: ../plugins/windowmenu/windowmenu.c:1369
+#: ../plugins/windowmenu/windowmenu.c:1382
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "'%s' Çalışma Alanını Kaldır"
 
-#: ../plugins/windowmenu/windowmenu.c:1371
+#: ../plugins/windowmenu/windowmenu.c:1384
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "%d. Çalışma Alanını Kaldır"
