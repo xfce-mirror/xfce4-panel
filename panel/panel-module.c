@@ -23,6 +23,11 @@
 #include <gmodule.h>
 #include <glib/gstdio.h>
 #include <libxfce4util/libxfce4util.h>
+#ifdef HAVE_GTK_LAYER_SHELL
+#include <gtk-layer-shell/gtk-layer-shell.h>
+#else
+#define gtk_layer_is_supported() FALSE
+#endif
 
 #include <common/panel-private.h>
 #include <common/panel-debug.h>
@@ -37,7 +42,6 @@
 #define PANEL_PLUGINS_LIB_DIR_OLD (LIBDIR G_DIR_SEPARATOR_S "panel-plugins")
 
 
-typedef enum _PanelModuleRunMode PanelModuleRunMode;
 typedef enum _PanelModuleUnique  PanelModuleUnique;
 
 
@@ -54,13 +58,6 @@ static void      panel_module_plugin_destroyed (gpointer          user_data,
 struct _PanelModuleClass
 {
   GTypeModuleClass __parent__;
-};
-
-enum _PanelModuleRunMode
-{
-  UNKNOWN,    /* Unset */
-  INTERNAL,   /* plugin library will be loaded in the panel */
-  WRAPPER     /* external library with communication through PanelPluginExternal */
 };
 
 enum _PanelModuleUnique
@@ -134,7 +131,7 @@ panel_module_class_init (PanelModuleClass *klass)
 static void
 panel_module_init (PanelModule *module)
 {
-  module->mode = UNKNOWN;
+  module->mode = PANEL_MODULE_RUN_MODE_NONE;
   module->filename = NULL;
   module->display_name = NULL;
   module->comment = NULL;
@@ -188,7 +185,7 @@ panel_module_load (GTypeModule *type_module)
 
   panel_return_val_if_fail (PANEL_IS_MODULE (module), FALSE);
   panel_return_val_if_fail (G_IS_TYPE_MODULE (module), FALSE);
-  panel_return_val_if_fail (module->mode == INTERNAL, FALSE);
+  panel_return_val_if_fail (module->mode == PANEL_MODULE_RUN_MODE_INTERNAL, FALSE);
   panel_return_val_if_fail (module->library == NULL, FALSE);
   panel_return_val_if_fail (module->plugin_type == G_TYPE_NONE, FALSE);
   panel_return_val_if_fail (module->construct_func == NULL, FALSE);
@@ -215,7 +212,7 @@ panel_module_load (GTypeModule *type_module)
       panel_module_unload (type_module);
 
       /* from now on, run this plugin in a wrapper */
-      module->mode = WRAPPER;
+      module->mode = PANEL_MODULE_RUN_MODE_EXTERNAL;
       g_free (module->api);
       module->api = g_strdup (LIBXFCE4PANEL_VERSION_API);
 
@@ -255,7 +252,7 @@ panel_module_unload (GTypeModule *type_module)
 
   panel_return_if_fail (PANEL_IS_MODULE (module));
   panel_return_if_fail (G_IS_TYPE_MODULE (module));
-  panel_return_if_fail (module->mode == INTERNAL);
+  panel_return_if_fail (module->mode == PANEL_MODULE_RUN_MODE_INTERNAL);
   panel_return_if_fail (module->library != NULL);
   panel_return_if_fail (module->plugin_type != G_TYPE_NONE
                         || module->construct_func != NULL);
@@ -284,7 +281,7 @@ panel_module_plugin_destroyed (gpointer  user_data,
   module->use_count--;
 
   /* unuse the library if the plugin runs internal */
-  if (module->mode == INTERNAL)
+  if (module->mode == PANEL_MODULE_RUN_MODE_INTERNAL)
     g_type_module_unuse (G_TYPE_MODULE (module));
 
   /* emit signal unique signal in the factory */
@@ -297,7 +294,7 @@ panel_module_plugin_destroyed (gpointer  user_data,
 PanelModule *
 panel_module_new_from_desktop_file (const gchar *filename,
                                     const gchar *name,
-                                    gboolean     force_external)
+                                    PanelModuleRunMode forced_mode)
 {
   PanelModule *module = NULL;
   XfceRc      *rc;
@@ -368,15 +365,18 @@ panel_module_new_from_desktop_file (const gchar *filename,
           module->filename = path;
 
           /* run mode of the module, by default everything runs in
-           * the wrapper, unless defined otherwise */
-          if (force_external || !xfce_rc_read_bool_entry (rc, "X-XFCE-Internal", FALSE))
+           * the wrapper, unless defined otherwise or unsupported */
+          if (forced_mode != PANEL_MODULE_RUN_MODE_INTERNAL
+              && (GDK_IS_X11_DISPLAY (gdk_display_get_default ()) || gtk_layer_is_supported ())
+              && (forced_mode == PANEL_MODULE_RUN_MODE_EXTERNAL
+                  || !xfce_rc_read_bool_entry (rc, "X-XFCE-Internal", FALSE)))
             {
-              module->mode = WRAPPER;
+              module->mode = PANEL_MODULE_RUN_MODE_EXTERNAL;
               g_free (module->api);
               module->api = g_strdup (xfce_rc_read_entry (rc, "X-XFCE-API", LIBXFCE4PANEL_VERSION_API));
             }
           else
-            module->mode = INTERNAL;
+            module->mode = PANEL_MODULE_RUN_MODE_INTERNAL;
         }
       else
         {
@@ -389,7 +389,7 @@ panel_module_new_from_desktop_file (const gchar *filename,
   if (G_LIKELY (module != NULL))
     {
       g_type_module_set_name (G_TYPE_MODULE (module), name);
-      panel_assert (module->mode != UNKNOWN);
+      panel_assert (module->mode != PANEL_MODULE_RUN_MODE_NONE);
 
       /* read the remaining information */
       module->display_name = g_strdup (xfce_rc_read_entry (rc, "Name", name));
@@ -408,7 +408,7 @@ panel_module_new_from_desktop_file (const gchar *filename,
 
        panel_debug_filtered (PANEL_DEBUG_MODULE, "new module %s, filename=%s, internal=%s",
                              name, module->filename,
-                             PANEL_DEBUG_BOOL (module->mode == INTERNAL));
+                             PANEL_DEBUG_BOOL (module->mode == PANEL_MODULE_RUN_MODE_INTERNAL));
     }
 
   xfce_rc_close (rc);
@@ -431,7 +431,7 @@ panel_module_new_plugin (PanelModule  *module,
   panel_return_val_if_fail (G_IS_TYPE_MODULE (module), NULL);
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
   panel_return_val_if_fail (unique_id != -1, NULL);
-  panel_return_val_if_fail (module->mode != UNKNOWN, NULL);
+  panel_return_val_if_fail (module->mode != PANEL_MODULE_RUN_MODE_NONE, NULL);
 
   /* return null if the module is not usable (unique and already used) */
   if (G_UNLIKELY (!panel_module_is_usable (module, screen)))
@@ -439,7 +439,7 @@ panel_module_new_plugin (PanelModule  *module,
 
   switch (module->mode)
     {
-    case INTERNAL:
+    case PANEL_MODULE_RUN_MODE_INTERNAL:
       if (g_type_module_use (G_TYPE_MODULE (module)))
         {
           if (module->plugin_type != G_TYPE_NONE)
@@ -479,7 +479,7 @@ panel_module_new_plugin (PanelModule  *module,
        * note: next comment tells GCC7 to ignore the fallthrough */
       /* fall through */
 
-    case WRAPPER:
+    case PANEL_MODULE_RUN_MODE_EXTERNAL:
       plugin = panel_plugin_external_wrapper_new (module, unique_id, arguments);
       debug_type = "external-wrapper";
       break;
