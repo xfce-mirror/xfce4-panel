@@ -20,11 +20,13 @@
 #define __PANEL_DBUS_H__
 
 /* panel dbus names */
-#define PANEL_DBUS_NAME              "org.xfce.Panel"
-#define PANEL_DBUS_PATH              "/org/xfce/Panel"
-#define PANEL_DBUS_INTERFACE         PANEL_DBUS_NAME
-#define PANEL_DBUS_WRAPPER_PATH      PANEL_DBUS_PATH "/Wrapper/%d"
-#define PANEL_DBUS_WRAPPER_INTERFACE PANEL_DBUS_INTERFACE ".Wrapper"
+#define PANEL_DBUS_NAME               "org.xfce.Panel"
+#define PANEL_DBUS_PATH               "/org/xfce/Panel"
+#define PANEL_DBUS_WRAPPER_PATH       PANEL_DBUS_PATH "/Wrapper/%d"
+#define PANEL_DBUS_WRAPPER_INTERFACE  PANEL_DBUS_NAME ".Wrapper"
+#define PANEL_DBUS_PLUGIN_NAME        PANEL_DBUS_NAME "Plugin%d"
+#define PANEL_DBUS_PLUGIN_PATH        PANEL_DBUS_PATH "Plugin%d"
+#define PANEL_DBUS_EXTERNAL_INTERFACE PANEL_DBUS_NAME ".External"
 
 enum
 {
