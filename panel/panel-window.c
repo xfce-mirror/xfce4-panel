@@ -28,16 +28,19 @@
 #endif
 
 #ifdef GDK_WINDOWING_X11
-#include <gdk/gdkx.h>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #endif
 
-#include <libwnck/libwnck.h>
-
+#ifdef HAVE_GTK_LAYER_SHELL
+#include <gtk-layer-shell/gtk-layer-shell.h>
+#else
+#define gtk_layer_is_supported() FALSE
+#endif
 #include <libxfce4ui/libxfce4ui.h>
-
+#include <libxfce4windowing/libxfce4windowing.h>
 #include <xfconf/xfconf.h>
+
 #include <common/panel-private.h>
 #include <common/panel-debug.h>
 #include <common/panel-utils.h>
@@ -130,6 +133,13 @@ static void         panel_window_size_allocate_set_xy                 (PanelWind
                                                                        gint              window_height,
                                                                        gint             *return_x,
                                                                        gint             *return_y);
+static void         panel_window_move                                 (PanelWindow      *window,
+                                                                       GtkWindow        *moved,
+                                                                       gint              x,
+                                                                       gint              y);
+static void         panel_window_get_position                         (PanelWindow      *window,
+                                                                       gint             *x,
+                                                                       gint             *y);
 static void         panel_window_screen_changed                       (GtkWidget        *widget,
                                                                        GdkScreen        *previous_screen);
 static void         panel_window_style_updated                        (GtkWidget        *widget);
@@ -139,17 +149,23 @@ static StrutsEgde   panel_window_screen_struts_edge                   (PanelWind
 static void         panel_window_screen_struts_set                    (PanelWindow      *window);
 static void         panel_window_screen_update_borders                (PanelWindow      *window);
 static SnapPosition panel_window_snap_position                        (PanelWindow      *window);
+static void         panel_window_layer_set_anchor                     (PanelWindow      *window);
 static void         panel_window_display_layout_debug                 (GtkWidget        *widget);
 static void         panel_window_screen_layout_changed                (GdkScreen        *screen,
                                                                        PanelWindow      *window);
-static void         panel_window_active_window_changed                (WnckScreen       *screen,
-                                                                       WnckWindow       *previous_window,
+static void         panel_window_active_window_changed                (XfwScreen        *screen,
+                                                                       XfwWindow        *previous_window,
                                                                        PanelWindow      *window);
-static void         panel_window_active_window_geometry_changed       (WnckWindow       *active_window,
+static void         panel_window_active_window_geometry_changed       (XfwWindow        *active_window,
                                                                        PanelWindow      *window);
-static void         panel_window_active_window_state_changed          (WnckWindow       *active_window,
-                                                                       WnckWindowState   changed,
-                                                                       WnckWindowState   new,
+static void         panel_window_active_window_state_changed          (XfwWindow        *active_window,
+                                                                       XfwWindowState    changed,
+                                                                       XfwWindowState    new,
+                                                                       PanelWindow      *window);
+static void         panel_window_active_window_monitors               (XfwWindow        *active_window,
+                                                                       GParamSpec       *pspec,
+                                                                       PanelWindow      *window);
+static void         panel_window_xfw_window_closed                    (XfwWindow        *xfw_window,
                                                                        PanelWindow      *window);
 static void         panel_window_autohide_timeout_destroy             (gpointer          user_data);
 static void         panel_window_autohide_ease_out_timeout_destroy    (gpointer          user_data);
@@ -161,8 +177,8 @@ static gboolean     panel_window_autohide_ease_out                    (gpointer 
 static void         panel_window_set_autohide_behavior                (PanelWindow      *window,
                                                                        AutohideBehavior  behavior);
 static void         panel_window_update_autohide_window               (PanelWindow      *window,
-                                                                       WnckScreen       *screen,
-                                                                       WnckWindow       *active_window);
+                                                                       XfwScreen        *screen,
+                                                                       XfwWindow        *active_window);
 static void         panel_window_menu_popup                           (PanelWindow      *window,
                                                                        GdkEventButton   *event,
                                                                        gboolean          show_tic_tac_toe);
@@ -334,8 +350,8 @@ struct _PanelWindow
   GdkRectangle         alloc;
 
   /* autohiding */
-  WnckScreen          *wnck_screen;
-  WnckWindow          *wnck_active_window;
+  XfwScreen           *xfw_screen;
+  XfwWindow           *xfw_active_window;
   GtkWidget           *autohide_window;
   AutohideBehavior     autohide_behavior;
   AutohideState        autohide_state;
@@ -362,6 +378,9 @@ struct _PanelWindow
   guint32              grab_time;
   gint                 grab_x;
   gint                 grab_y;
+
+  /* Wayland */
+  gboolean             wl_active_is_maximized;
 };
 
 /* used for a full XfcePanelWindow name in the class, but not in the code */
@@ -566,8 +585,8 @@ panel_window_init (PanelWindow *window)
   window->locked = TRUE;
   window->screen = NULL;
   window->display = NULL;
-  window->wnck_screen = NULL;
-  window->wnck_active_window = NULL;
+  window->xfw_screen = NULL;
+  window->xfw_active_window = NULL;
   window->struts_edge = STRUTS_EDGE_NONE;
   window->struts_disabled = FALSE;
   window->mode = XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
@@ -592,12 +611,13 @@ panel_window_init (PanelWindow *window)
   window->popup_delay = DEFAULT_POPUP_DELAY;
   window->popdown_delay = DEFAULT_POPDOWN_DELAY;
   window->popdown_speed = DEFAULT_POPDOWN_SPEED;
-  window->popdown_progress = 0;
+  window->popdown_progress = - G_MAXINT;
   window->base_x = -1;
   window->base_y = -1;
   window->grab_time = 0;
   window->grab_x = 0;
   window->grab_y = 0;
+  window->wl_active_is_maximized = FALSE;
 
   /* not resizable, so allocation will follow size request */
   gtk_window_set_resizable (GTK_WINDOW (window), FALSE);
@@ -608,10 +628,16 @@ panel_window_init (PanelWindow *window)
   /* create a 'fake' drop zone for autohide drag motion */
   gtk_drag_dest_set (GTK_WIDGET (window), 0, NULL, 0, 0);
 
+#ifdef HAVE_GTK_LAYER_SHELL
+  /* initialize layer-shell if supported (includes Wayland display check) */
+  if (gtk_layer_is_supported ())
+    gtk_layer_init_for_window (GTK_WINDOW (window));
+#endif
+
   /* set the screen */
   panel_window_screen_changed (GTK_WIDGET (window), NULL);
 
-  /* a workaround to force external plugins to fully re-render when scale factor changes */
+  /* a workaround to force external plugins to fully re-render on X11 when scale factor changes */
   g_signal_connect (window, "notify::scale-factor", G_CALLBACK (panel_window_force_redraw), NULL);
 }
 
@@ -842,6 +868,9 @@ panel_window_set_property (GObject      *object,
       break;
 
     case PROP_SPAN_MONITORS:
+      if (! GDK_IS_X11_DISPLAY (window->display))
+        break;
+
       val_bool = g_value_get_boolean (value);
       if (window->span_monitors != val_bool)
         {
@@ -870,6 +899,9 @@ panel_window_set_property (GObject      *object,
           window->snap_position = CLAMP (snap_position, SNAP_POSITION_NONE, SNAP_POSITION_S);
           window->base_x = MAX (x, 0);
           window->base_y = MAX (y, 0);
+
+          if (gtk_layer_is_supported ())
+            panel_window_layer_set_anchor (window);
 
           panel_window_screen_layout_changed (window->screen, window);
 
@@ -1075,7 +1107,7 @@ panel_window_drag_leave (GtkWidget      *widget,
     {
       /* simulate a geometry change to check for overlapping windows with intelligent hiding */
       if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
-        panel_window_active_window_geometry_changed (window->wnck_active_window, window);
+        panel_window_active_window_geometry_changed (window->xfw_active_window, window);
       /* otherwise just hide the panel */
       else
         panel_window_autohide_queue (window, AUTOHIDE_POPDOWN_SLOW);
@@ -1090,6 +1122,7 @@ panel_window_motion_notify_event (GtkWidget      *widget,
 {
   PanelWindow     *window = PANEL_WINDOW (widget);
   PanelBaseWindow *base_window = PANEL_BASE_WINDOW (widget);
+  SnapPosition     snap_position;
   gint             pointer_x, pointer_y;
   gint             window_x, window_y;
   gint             high;
@@ -1107,6 +1140,13 @@ panel_window_motion_notify_event (GtkWidget      *widget,
   /* get the pointer position from the event */
   pointer_x = event->x_root;
   pointer_y = event->y_root;
+  if (gtk_layer_is_supported ())
+    {
+      gint x, y;
+      panel_window_get_position (window, &x, &y);
+      pointer_x += x;
+      pointer_y += y;
+    }
 
   /* the 0x0 coordinate is a sign the cursor is on another screen then
    * the panel that is currently dragged */
@@ -1122,6 +1162,8 @@ panel_window_motion_notify_event (GtkWidget      *widget,
           window->grab_time = 0;
           panel_window_thaw_autohide (window);
           retval = FALSE;
+          if (gtk_layer_is_supported ())
+            gdk_window_set_cursor (event->window, NULL);
         }
     }
   /* check if the pointer moved to another monitor */
@@ -1147,8 +1189,8 @@ panel_window_motion_notify_event (GtkWidget      *widget,
   window_y = CLAMP (window_y, window->area.y, high);
 
   /* update the grab coordinates */
-  window->grab_x = pointer_x - window_x;
-  window->grab_y = pointer_y - window_y;
+  window->grab_x = CLAMP (pointer_x - window_x, 0, window->alloc.width);
+  window->grab_y = CLAMP (pointer_y - window_y, 0, window->alloc.height);
 
   /* update the base coordinates */
   window->base_x = window_x + window->alloc.width / 2;
@@ -1159,7 +1201,13 @@ panel_window_motion_notify_event (GtkWidget      *widget,
   window->alloc.y = window_y;
 
   /* update the snapping position */
-  window->snap_position = panel_window_snap_position (window);
+  snap_position = panel_window_snap_position (window);
+  if (snap_position != window->snap_position)
+    {
+      window->snap_position = snap_position;
+      if (gtk_layer_is_supported ())
+        panel_window_layer_set_anchor (window);
+    }
 
   /* update the working area */
   panel_window_screen_layout_changed (window->screen, window);
@@ -1196,11 +1244,24 @@ panel_window_button_press_event (GtkWidget      *widget,
       cursor = gdk_cursor_new_for_display (window->display, GDK_FLEUR);
 
       /* grab the pointer for dragging the window */
-      seat = gdk_device_get_seat (event->device);
-
-      status = gdk_seat_grab (seat, event->window,
-                              GDK_SEAT_CAPABILITY_ALL_POINTING,
-                              FALSE, cursor, (GdkEvent*)event, NULL, NULL);
+      if (GDK_IS_X11_DISPLAY (window->display))
+        {
+          seat = gdk_device_get_seat (event->device);
+          status = gdk_seat_grab (seat, event->window,
+                                  GDK_SEAT_CAPABILITY_ALL_POINTING,
+                                  FALSE, cursor, (GdkEvent*)event, NULL, NULL);
+        }
+      else if (gtk_layer_is_supported ())
+        {
+          gdk_window_set_cursor (event->window, cursor);
+          status = GDK_GRAB_SUCCESS;
+        }
+      else
+        {
+          gtk_window_begin_move_drag (GTK_WINDOW (window), event->button,
+                                      event->x_root, event->y_root, event->time);
+          status = GDK_GRAB_FAILED;
+        }
 
       if (cursor != NULL)
         g_object_unref (cursor);
@@ -1246,6 +1307,8 @@ panel_window_button_release_event (GtkWidget      *widget,
       /* ungrab the pointer */
       gdk_seat_ungrab (gdk_device_get_seat (event->device));
       window->grab_time = 0;
+      if (gtk_layer_is_supported ())
+        gdk_window_set_cursor (event->window, NULL);
 
       /* store the new position */
       g_object_notify (G_OBJECT (widget), "position");
@@ -1373,6 +1436,22 @@ panel_window_get_preferred_height (GtkWidget *widget,
 
   if (natural_height != NULL)
     *natural_height = n_height;
+
+#ifdef HAVE_GTK_LAYER_SHELL
+  /*
+   * Disable left/right or top/bottom anchor pairs during allocation, so that the panel
+   * is not stretched between the two anchors, preventing it from shrinking. Quite an
+   * ugly hack but it works until it gets better.
+   */
+  if (gtk_layer_is_supported () && window->snap_position != SNAP_POSITION_NONE)
+    {
+      GtkWindow *gtkwindow = GTK_WINDOW (widget);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
+    }
+#endif
 }
 
 
@@ -1412,11 +1491,15 @@ panel_window_size_allocate (GtkWidget     *widget,
   gtk_widget_set_allocation (widget, alloc);
   window->alloc = *alloc;
 
+  /* re-enable anchor pairs, see above in get_preferred_height() */
+  if (gtk_layer_is_supported () && window->snap_position != SNAP_POSITION_NONE)
+    panel_window_layer_set_anchor (window);
+
   if (G_UNLIKELY (window->autohide_state == AUTOHIDE_HIDDEN
                   || window->autohide_state == AUTOHIDE_POPUP))
     {
       /* autohide timeout is already running, so let's wait with hiding the panel */
-      if (window->autohide_timeout_id != 0)
+      if (window->autohide_timeout_id != 0 || window->popdown_progress != - G_MAXINT)
         return;
 
       /* window is invisible */
@@ -1453,9 +1536,13 @@ panel_window_size_allocate (GtkWidget     *widget,
         }
 
       /* position the autohide window */
+      if (gtk_layer_is_supported ())
+        gtk_widget_set_size_request (window->autohide_window, w, h);
+      else
+        gtk_window_resize (GTK_WINDOW (window->autohide_window), w, h);
+
       panel_window_size_allocate_set_xy (window, w, h, &x, &y);
-      panel_base_window_move_resize (PANEL_BASE_WINDOW (window->autohide_window),
-                                     x, y, w, h);
+      panel_window_move (window, GTK_WINDOW (window->autohide_window), x, y);
 
       /* slide out the panel window with popdown_speed, but ignore panels that are floating, i.e. not
          attached to a GdkScreen border (i.e. including panels which are on a monitor border, but
@@ -1485,7 +1572,7 @@ panel_window_size_allocate (GtkWidget     *widget,
           if (window->autohide_ease_out_id != 0)
             g_source_remove (window->autohide_ease_out_id);
 
-          gtk_window_move (GTK_WINDOW (window), window->alloc.x, window->alloc.y);
+          panel_window_move (window, GTK_WINDOW (window), window->alloc.x, window->alloc.y);
         }
     }
   else
@@ -1505,10 +1592,9 @@ panel_window_size_allocate (GtkWidget     *widget,
 
       /* move the autohide window offscreen */
       if (window->autohide_window != NULL)
-        panel_base_window_move_resize (PANEL_BASE_WINDOW (window->autohide_window),
-                                       -9999, -9999, -1, -1);
+        panel_window_move (window, GTK_WINDOW (window->autohide_window), -9999, -9999);
 
-      gtk_window_move (GTK_WINDOW (window), window->alloc.x, window->alloc.y);
+      panel_window_move (window, GTK_WINDOW (window), window->alloc.x, window->alloc.y);
     }
 
   child = gtk_bin_get_child (GTK_BIN (widget));
@@ -1640,13 +1726,77 @@ panel_window_size_allocate_set_xy (PanelWindow *window,
 
 
 
+#ifdef HAVE_GTK_LAYER_SHELL
+static void
+panel_window_move_plugin (GtkWidget *widget,
+                          gpointer data)
+{
+  if (PANEL_IS_PLUGIN_EXTERNAL (widget))
+    panel_plugin_external_set_geometry (PANEL_PLUGIN_EXTERNAL (widget), data);
+}
+#endif
+
+
+
+static void
+panel_window_move (PanelWindow *window,
+                   GtkWindow *moved,
+                   gint x,
+                   gint y)
+{
+#ifdef HAVE_GTK_LAYER_SHELL
+  if (gtk_layer_is_supported ())
+    {
+      gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_TOP, y - window->area.y);
+      gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_LEFT, x - window->area.x);
+      if (moved == GTK_WINDOW (window))
+        {
+          gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_BOTTOM,
+                                window->area.y + window->area.height - y - window->alloc.height);
+          gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_RIGHT,
+                                window->area.x + window->area.width - x - window->alloc.width);
+
+          /* move external plugins */
+          gtk_container_foreach (GTK_CONTAINER (gtk_bin_get_child (GTK_BIN (window))),
+                                 panel_window_move_plugin, window);
+        }
+    }
+  else
+#endif
+    gtk_window_move (moved, x, y);
+}
+
+
+
+static void
+panel_window_get_position (PanelWindow *window,
+                           gint *x,
+                           gint *y)
+{
+#ifdef HAVE_GTK_LAYER_SHELL
+  if (gtk_layer_is_supported ())
+    {
+      if (x != NULL)
+        *x = window->area.x + gtk_layer_get_margin (GTK_WINDOW (window),
+                                                    GTK_LAYER_SHELL_EDGE_LEFT);
+      if (y != NULL)
+        *y = window->area.y + gtk_layer_get_margin (GTK_WINDOW (window),
+                                                    GTK_LAYER_SHELL_EDGE_TOP);
+    }
+  else
+#endif
+    gtk_window_get_position (GTK_WINDOW (window), x, y);
+}
+
+
+
 static void
 panel_window_screen_changed (GtkWidget *widget,
                              GdkScreen *previous_screen)
 {
   PanelWindow *window = PANEL_WINDOW (widget);
-  WnckWindow  *wnck_window;
-  WnckScreen  *wnck_screen;
+  XfwWindow   *xfw_window;
+  XfwScreen   *xfw_screen;
   GdkScreen   *screen;
 
   if (G_LIKELY (GTK_WIDGET_CLASS (panel_window_parent_class)->screen_changed != NULL))
@@ -1674,10 +1824,11 @@ panel_window_screen_changed (GtkWidget *widget,
   /* update the screen layout */
   panel_window_screen_layout_changed (screen, window);
 
-  /* update wnck screen to be used for the autohide feature */
-  wnck_screen = panel_wnck_screen_get_default ();
-  wnck_window = wnck_screen_get_active_window (wnck_screen);
-  panel_window_update_autohide_window (window, wnck_screen, wnck_window);
+  /* update xfw screen to be used for the autohide feature */
+  xfw_screen = xfw_screen_get_default ();
+  xfw_window = xfw_screen_get_active_window (xfw_screen);
+
+  panel_window_update_autohide_window (window, xfw_screen, xfw_window);
 }
 
 
@@ -1726,6 +1877,7 @@ panel_window_filter (GdkXEvent *xev,
                      GdkEvent  *gev,
                      gpointer   data)
 {
+#ifdef GDK_WINDOWING_X11
   PanelWindow    *window = data;
   GdkEventButton *event = (GdkEventButton *) gev;
   XEvent         *xevent = (XEvent *) xev;
@@ -1775,6 +1927,9 @@ panel_window_filter (GdkXEvent *xev,
   /* force the panel to process the event instead of its child widgets */
   return panel_window_button_press_event (GTK_WIDGET (window), event) ? GDK_FILTER_REMOVE
                                                                       : GDK_FILTER_CONTINUE;
+#else
+  return GDK_FILTER_CONTINUE;
+#endif
 }
 
 
@@ -1871,6 +2026,33 @@ panel_window_screen_struts_set (PanelWindow *window)
   if (!gtk_widget_get_realized (GTK_WIDGET (window)))
     return;
 
+#ifdef HAVE_GTK_LAYER_SHELL
+  if (gtk_layer_is_supported ())
+    {
+      switch (window->struts_edge)
+        {
+        case STRUTS_EDGE_TOP:
+        case STRUTS_EDGE_BOTTOM:
+          gtk_layer_set_exclusive_zone (GTK_WINDOW (window), window->alloc.height);
+          break;
+
+        case STRUTS_EDGE_LEFT:
+        case STRUTS_EDGE_RIGHT:
+          gtk_layer_set_exclusive_zone (GTK_WINDOW (window), window->alloc.width);
+          break;
+
+        default:
+          gtk_layer_set_exclusive_zone (GTK_WINDOW (window), 0);
+          break;
+        }
+
+      return;
+    }
+#endif
+
+  if (! GDK_IS_X11_DISPLAY (window->display))
+    return;
+
   /* set the struts */
   /* Note that struts are relative to the screen edge! (NOT the monitor)
      This means we have no choice but to use deprecated GtkScreen calls.
@@ -1922,6 +2104,7 @@ panel_window_screen_struts_set (PanelWindow *window)
   if (!update_struts)
     return;
 
+#ifdef GDK_WINDOWING_X11
   /* don't crash on x errors */
   gdk_x11_display_error_trap_push (window->display);
 
@@ -1935,6 +2118,7 @@ panel_window_screen_struts_set (PanelWindow *window)
   /* release the trap */
   if (gdk_x11_display_error_trap_pop (window->display) != 0)
     g_critical ("Failed to set the struts");
+#endif
 
   if (panel_debug_has_domain (PANEL_DEBUG_YES))
     {
@@ -2063,14 +2247,33 @@ panel_window_snap_edge_gravity (gint value,
 static SnapPosition
 panel_window_snap_position (PanelWindow *window)
 {
-  guint         snap_horz, snap_vert;
-  GdkRectangle *alloc = &window->alloc;
+  guint snap_horz, snap_vert;
+  GdkRectangle alloc = window->alloc;
+  PanelBorders borders;
+
+  /* make the same calculation whether the panel is snapped or not (avoids flickering
+   * when the pointer moves slowly) */
+  borders = panel_base_window_get_borders (PANEL_BASE_WINDOW (window));
+  if (! PANEL_HAS_FLAG (borders, PANEL_BORDER_TOP))
+    alloc.height++;
+  if (! PANEL_HAS_FLAG (borders, PANEL_BORDER_BOTTOM))
+    {
+      alloc.y--;
+      alloc.height++;
+    }
+  if (! PANEL_HAS_FLAG (borders, PANEL_BORDER_LEFT))
+    alloc.width++;
+  if (! PANEL_HAS_FLAG (borders, PANEL_BORDER_RIGHT))
+    {
+      alloc.x--;
+      alloc.width++;
+    }
 
   /* get the snap offsets */
-  snap_horz = panel_window_snap_edge_gravity (alloc->x, window->area.x,
-      window->area.x + window->area.width - alloc->width);
-  snap_vert = panel_window_snap_edge_gravity (alloc->y, window->area.y,
-      window->area.y + window->area.height - alloc->height);
+  snap_horz = panel_window_snap_edge_gravity (alloc.x, window->area.x,
+      window->area.x + window->area.width - alloc.width);
+  snap_vert = panel_window_snap_edge_gravity (alloc.y, window->area.y,
+      window->area.y + window->area.height - alloc.height);
 
   /* detect the snap mode */
   if (snap_horz == EDGE_GRAVITY_START)
@@ -2087,6 +2290,138 @@ panel_window_snap_position (PanelWindow *window)
     return SNAP_POSITION_S;
 
   return SNAP_POSITION_NONE;
+}
+
+
+
+static void
+panel_window_layer_set_anchor (PanelWindow *window)
+{
+#ifdef HAVE_GTK_LAYER_SHELL
+  GtkWindow *gtkwindow = GTK_WINDOW (window);
+
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
+
+  /* only two anchors are needed to set the panel position, but three to set
+   * the exclusive zone */
+  switch (window->snap_position)
+    {
+    case SNAP_POSITION_NONE:
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
+      break;
+
+    case SNAP_POSITION_N:
+    case SNAP_POSITION_NC:
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+      if (IS_HORIZONTAL (window))
+        gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, TRUE);
+      else
+        gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
+      break;
+
+    case SNAP_POSITION_NW:
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+      if (IS_HORIZONTAL (window))
+        {
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, TRUE);
+        }
+      else
+        {
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, TRUE);
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
+        }
+      break;
+
+    case SNAP_POSITION_NE:
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, TRUE);
+      if (IS_HORIZONTAL (window))
+        {
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+        }
+      else
+        {
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, TRUE);
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, FALSE);
+        }
+      break;
+
+    case SNAP_POSITION_S:
+    case SNAP_POSITION_SC:
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, FALSE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+      if (IS_HORIZONTAL (window))
+        gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, TRUE);
+      else
+        gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
+      break;
+
+    case SNAP_POSITION_SW:
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+      if (IS_HORIZONTAL (window))
+        {
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, FALSE);
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, TRUE);
+        }
+      else
+        {
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
+        }
+      break;
+
+    case SNAP_POSITION_SE:
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, TRUE);
+      if (IS_HORIZONTAL (window))
+        {
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, FALSE);
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+        }
+      else
+        {
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+          gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, FALSE);
+        }
+      break;
+
+    case SNAP_POSITION_W:
+    case SNAP_POSITION_WC:
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
+      if (IS_HORIZONTAL (window))
+        gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
+      else
+        gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, TRUE);
+      break;
+
+    case SNAP_POSITION_E:
+    case SNAP_POSITION_EC:
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, FALSE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, TRUE);
+      if (IS_HORIZONTAL (window))
+        gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
+      else
+        gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, TRUE);
+      break;
+
+    default:
+      panel_assert_not_reached ();
+      break;
+    }
+#endif
 }
 
 
@@ -2313,6 +2648,17 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
               return;
             }
         }
+
+#ifdef HAVE_GTK_LAYER_SHELL
+      /* the compositor does not manage to display the panel on the right monitor
+       * by itself in general */
+      if (gtk_layer_is_supported ())
+        {
+          gtk_layer_set_monitor (GTK_WINDOW (window), monitor);
+          if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
+            gtk_layer_set_monitor (GTK_WINDOW (window->autohide_window), monitor);
+        }
+#endif
     }
 
   /* set the new working area of the panel */
@@ -2340,17 +2686,17 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
 
 
 static void
-panel_window_active_window_changed (WnckScreen  *screen,
-                                    WnckWindow  *previous_window,
+panel_window_active_window_changed (XfwScreen   *screen,
+                                    XfwWindow   *previous_window,
                                     PanelWindow *window)
 {
-  WnckWindow *active_window;
+  XfwWindow *active_window;
 
-  panel_return_if_fail (WNCK_IS_SCREEN (screen));
+  panel_return_if_fail (XFW_IS_SCREEN (screen));
   panel_return_if_fail (PANEL_IS_WINDOW (window));
 
   /* obtain new active window from the screen */
-  active_window = wnck_screen_get_active_window (screen);
+  active_window = xfw_screen_get_active_window (screen);
 
   /* update the active window to be used for the autohide feature */
   panel_window_update_autohide_window (window, screen, active_window);
@@ -2358,20 +2704,69 @@ panel_window_active_window_changed (WnckScreen  *screen,
 
 
 
+gboolean
+panel_window_pointer_is_outside (PanelWindow *window)
+{
+  GdkDevice *device;
+  GdkWindow *gdkwindow;
+  gboolean is_outside;
+
+  device = gdk_seat_get_pointer (gdk_display_get_default_seat (window->display));
+  if (device != NULL)
+    {
+      gdkwindow = gdk_device_get_window_at_position (device, NULL, NULL);
+      is_outside = gdkwindow == NULL || gdk_window_get_effective_toplevel (gdkwindow)
+                                        != gtk_widget_get_window (GTK_WIDGET (window));
+
+      /*
+       * Besides the fact that the above check has to be done for each external plugin
+       * on Wayland (synchronously via D-Bus), it is not reliable like on X11.
+       * If gdk_device_get_window_at_position() != NULL, then it can be trusted. But if
+       * it is NULL, the pointer may be above a GdkWindow of the application (panel or
+       * wrapper), because GTK has not yet received the information from the compositor.
+       * This can happen typically after a grab (so when a menu is shown), or if a GdkWindow
+       * has just been mapped. And unfortunately there doesn't seem to be an event or signal
+       * to connect to from which we can be sure that gdk_device_get_window_at_position()
+       * returns valid information in these cases.
+       * So the best we can do seems to be to recheck after a timeout. Since we already use
+       * timeouts to hide the panel or disable opacity on hover, we redo the check at that
+       * moment.
+       */
+      if (gtk_layer_is_supported () && is_outside)
+        {
+          GtkWidget *itembar = gtk_bin_get_child (GTK_BIN (window));
+          GList *lp, *plugins = gtk_container_get_children (GTK_CONTAINER (itembar));
+
+          for (lp = plugins; lp != NULL; lp = lp->next)
+            if (PANEL_IS_PLUGIN_EXTERNAL (lp->data)
+                && ! panel_plugin_external_pointer_is_outside (lp->data))
+              break;
+          g_list_free (plugins);
+
+          return lp == NULL;
+        }
+      else
+        return is_outside;
+    }
+
+  return FALSE;
+}
+
+
+
 static void
-panel_window_active_window_geometry_changed (WnckWindow  *active_window,
+panel_window_active_window_geometry_changed (XfwWindow   *active_window,
                                              PanelWindow *window)
 {
   GdkRectangle panel_area;
   GdkRectangle window_area;
-  gboolean     geometry_fixed = FALSE;
   gint         scale_factor;
 
-  panel_return_if_fail (WNCK_IS_WINDOW (active_window));
+  panel_return_if_fail (active_window == NULL || XFW_IS_WINDOW (active_window));
   panel_return_if_fail (PANEL_IS_WINDOW (window));
 
   /* ignore if for some reason the active window does not match the one we know */
-  if (G_UNLIKELY (window->wnck_active_window != active_window))
+  if (G_UNLIKELY (window->xfw_active_window != active_window))
     return;
 
   /* only react to active window geometry changes if we are doing
@@ -2379,20 +2774,34 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
   if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY
       && window->autohide_block == 0)
     {
-      if (wnck_window_get_window_type (active_window) != WNCK_WINDOW_DESKTOP)
+      /* intellihide on Wayland: reduced to maximized active window */
+      if (gtk_layer_is_supported ())
         {
+          if (window->wl_active_is_maximized
+              && panel_window_pointer_is_outside (window))
+            panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
+          else
+            panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
+
+          return;
+        }
+      else if (active_window == NULL || GDK_IS_WAYLAND_DISPLAY (window->display))
+        return;
+
+      if (xfw_window_get_window_type (active_window) != XFW_WINDOW_TYPE_DESKTOP)
+        {
+#ifdef GDK_WINDOWING_X11
           GdkWindow *gdkwindow;
           GtkBorder extents;
+          gboolean  geometry_fixed = FALSE;
 
           /* obtain position and dimensions from the active window */
-          wnck_window_get_geometry (active_window,
-                                    &window_area.x, &window_area.y,
-                                    &window_area.width, &window_area.height);
+          window_area = *(xfw_window_get_geometry (active_window));
 
           /* if a window uses client-side decorations, check the _GTK_FRAME_EXTENTS
            * application window property to get its actual size without the shadows */
           gdkwindow = gdk_x11_window_foreign_new_for_display (gdk_display_get_default (),
-                                                              wnck_window_get_xid (active_window));
+                                                              xfw_window_get_id (active_window));
           if (gdkwindow != NULL)
             {
               if (xfce_has_gtk_frame_extents (gdkwindow, &extents))
@@ -2410,7 +2819,7 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
           /* if a window is shaded, check the height of the window's
            * decoration as exposed through the _NET_FRAME_EXTENTS application
            * window property */
-          if (! geometry_fixed && wnck_window_is_shaded (active_window))
+          if (! geometry_fixed && xfw_window_is_shaded (active_window))
           {
             Display *display;
             Atom real_type;
@@ -2419,7 +2828,7 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
             guint32 *data;
 
             display = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
-            if (XGetWindowProperty (display, wnck_window_get_xid (active_window),
+            if (XGetWindowProperty (display, xfw_window_get_id (active_window),
                                     XInternAtom(display, "_NET_FRAME_EXTENTS", True),
                                     0, 4, FALSE, AnyPropertyType,
                                     &real_type, &real_format, &items_read, &items_left,
@@ -2432,6 +2841,7 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
               XFree (data);
             }
           }
+#endif
 
           /* apply scale factor */
           scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (window));
@@ -2454,23 +2864,9 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
            * with its coordinates */
           if (window->autohide_state != AUTOHIDE_HIDDEN)
             {
-              if (gdk_rectangle_intersect (&panel_area,  &window_area, NULL))
-                {
-                  GdkDevice *device;
-                  gint       pointer_x, pointer_y;
-
-                  device = gdk_seat_get_pointer (gdk_display_get_default_seat (window->display));
-                  if (device == NULL)
-                    return;
-
-                  /* check if the cursor is outside the panel area before proceeding */
-                  gdk_device_get_position (device, NULL, &pointer_x, &pointer_y);
-                  if (pointer_x <= panel_area.x
-                      || pointer_y <= panel_area.y
-                      || pointer_x >= panel_area.x + panel_area.width
-                      || pointer_y >= panel_area.y + panel_area.height)
-                    panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
-                }
+              if (gdk_rectangle_intersect (&panel_area,  &window_area, NULL)
+                  && panel_window_pointer_is_outside (window))
+                panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
             }
           else
             {
@@ -2490,16 +2886,135 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
 
 
 
+static gboolean
+panel_window_xfw_window_on_panel_monitor (PanelWindow *window,
+                                          XfwWindow *xfw_window)
+{
+  GList *monitors = NULL;
+
+  monitors = xfw_window_get_monitors (xfw_window);
+  if (window->span_monitors)
+    {
+      GdkMonitor *monitor = NULL, *p_monitor;
+      GtkAllocation alloc;
+      gint fixed_dim, step;
+
+      gtk_widget_get_allocation (GTK_WIDGET (window), &alloc);
+      if (IS_HORIZONTAL (window))
+        {
+          panel_window_get_position (window, NULL, &fixed_dim);
+          fixed_dim += alloc.height / 2;
+          step = alloc.width / 10;
+          for (gint x = 0; x <= alloc.width; x += step)
+            {
+              p_monitor = gdk_display_get_monitor_at_point (window->display, x, fixed_dim);
+              if (p_monitor != monitor)
+                {
+                  monitor = p_monitor;
+                  if (g_list_find (monitors, monitor))
+                    return TRUE;
+                }
+            }
+        }
+      else
+        {
+          panel_window_get_position (window, &fixed_dim, NULL);
+          fixed_dim += alloc.width / 2;
+          step = alloc.height / 10;
+          for (gint y = 0; y <= alloc.height; y += step)
+            {
+              p_monitor = gdk_display_get_monitor_at_point (window->display, fixed_dim, y);
+              if (p_monitor != monitor)
+                {
+                  monitor = p_monitor;
+                  if (g_list_find (monitors, monitor))
+                    return TRUE;
+                }
+            }
+        }
+    }
+#ifdef HAVE_GTK_LAYER_SHELL
+  else if (g_list_find (monitors, gtk_layer_get_monitor (GTK_WINDOW (window))))
+    return TRUE;
+#endif
+
+  return FALSE;
+}
+
+
+
 static void
-panel_window_active_window_state_changed (WnckWindow  *active_window,
-                                          WnckWindowState changed,
-                                          WnckWindowState new,
+panel_window_active_window_state_changed (XfwWindow *active_window,
+                                          XfwWindowState changed,
+                                          XfwWindowState new,
                                           PanelWindow *window)
 {
-  panel_return_if_fail (WNCK_IS_WINDOW (active_window));
+  gboolean maximized;
 
-  if (changed & WNCK_WINDOW_STATE_SHADED)
-    panel_window_active_window_geometry_changed (active_window, window);
+  panel_return_if_fail (XFW_IS_WINDOW (active_window));
+
+  if (GDK_IS_X11_DISPLAY (window->display))
+    {
+      if (changed & XFW_WINDOW_STATE_SHADED)
+        panel_window_active_window_geometry_changed (active_window, window);
+
+      return;
+    }
+
+  maximized = new & XFW_WINDOW_STATE_MAXIMIZED;
+  if (maximized != window->wl_active_is_maximized
+      && panel_window_xfw_window_on_panel_monitor (window, active_window))
+    {
+      window->wl_active_is_maximized = maximized;
+      panel_window_active_window_geometry_changed (active_window, window);
+    }
+}
+
+
+
+static void
+panel_window_active_window_monitors (XfwWindow *active_window,
+                                     GParamSpec *pspec,
+                                     PanelWindow *window)
+{
+  panel_return_if_fail (XFW_IS_WINDOW (active_window));
+
+  panel_window_active_window_state_changed (active_window, 0,
+                                            xfw_window_get_state (active_window),
+                                            window);
+}
+
+
+
+static void
+panel_window_xfw_window_closed (XfwWindow *xfw_window,
+                                PanelWindow *window)
+{
+  GList *windows, *lp;
+
+  panel_return_if_fail (XFW_IS_WINDOW (xfw_window));
+
+  if (! window->wl_active_is_maximized)
+    return;
+
+  /* see if there is a maximized window left on a monitor of interest */
+  windows = xfw_screen_get_windows (window->xfw_screen);
+  for (lp = windows; lp != NULL; lp = lp->next)
+    if (lp->data != xfw_window
+        && xfw_window_get_state (lp->data) & XFW_WINDOW_STATE_MAXIMIZED
+        && panel_window_xfw_window_on_panel_monitor (window, lp->data))
+      {
+        g_signal_handlers_disconnect_by_func (lp->data, panel_window_xfw_window_closed, window);
+        g_signal_connect_object (lp->data, "closed",
+                                 G_CALLBACK (panel_window_xfw_window_closed), window, 0);
+        break;
+      }
+
+  if (lp == NULL)
+    {
+      window->wl_active_is_maximized = FALSE;
+      panel_window_active_window_geometry_changed (window->xfw_active_window, window);
+    }
 }
 
 
@@ -2518,6 +3033,14 @@ panel_window_autohide_timeout (gpointer user_data)
     window->autohide_state = AUTOHIDE_HIDDEN;
   else if (window->autohide_state == AUTOHIDE_POPUP)
     window->autohide_state = AUTOHIDE_VISIBLE;
+
+  /* needs a recheck when timeout is over on Wayland, see panel_window_pointer_is_outside() */
+  if (gtk_layer_is_supported () && window->autohide_state == AUTOHIDE_HIDDEN
+      && ! panel_window_pointer_is_outside (window))
+    {
+      window->autohide_state = AUTOHIDE_VISIBLE;
+      return FALSE;
+    }
 
   /* move the windows around */
   gtk_widget_queue_resize (GTK_WIDGET (window));
@@ -2538,7 +3061,10 @@ panel_window_autohide_timeout (gpointer user_data)
 static void
 panel_window_autohide_timeout_destroy (gpointer user_data)
 {
-  PANEL_WINDOW (user_data)->autohide_timeout_id = 0;
+  PanelWindow *window = user_data;
+
+  window->autohide_timeout_id = 0;
+  window->popdown_progress = - G_MAXINT;
 }
 
 
@@ -2565,7 +3091,7 @@ panel_window_autohide_ease_out (gpointer data)
   if (window->autohide_ease_out_id == 0)
     return FALSE;
 
-  gtk_window_get_position (GTK_WINDOW (window), &x, &y);
+  panel_window_get_position (window, &x, &y);
   w = panel_screen_get_width (window->screen);
   h = panel_screen_get_height (window->screen);
 
@@ -2611,7 +3137,7 @@ panel_window_autohide_ease_out (gpointer data)
     }
 
   window->popdown_progress--;
-  gtk_window_move (GTK_WINDOW (window), x, y);
+  panel_window_move (window, GTK_WINDOW (window), x, y);
 
   return ret;
 }
@@ -2621,7 +3147,10 @@ panel_window_autohide_ease_out (gpointer data)
 static void
 panel_window_autohide_ease_out_timeout_destroy (gpointer user_data)
 {
-  PANEL_WINDOW (user_data)->autohide_ease_out_id = 0;
+  PanelWindow *window = user_data;
+
+  window->autohide_ease_out_id = 0;
+  window->popdown_progress = - G_MAXINT;
 }
 
 
@@ -2802,10 +3331,28 @@ panel_window_set_autohide_behavior (PanelWindow *window,
                                 "gravity", GDK_GRAVITY_STATIC,
                                 "name", "XfcePanelWindowHidden",
                                 NULL);
+#ifdef HAVE_GTK_LAYER_SHELL
+          if (gtk_layer_is_supported ())
+            {
+              gtk_layer_init_for_window (GTK_WINDOW (popup));
+              gtk_layer_set_anchor (GTK_WINDOW (popup), GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+              gtk_layer_set_anchor (GTK_WINDOW (popup), GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+              if (gtk_widget_get_realized (GTK_WIDGET (window)))
+                {
+                  GdkWindow *gdkwindow = gtk_widget_get_window (GTK_WIDGET (window));
+                  GdkMonitor *monitor = gdk_display_get_monitor_at_window (window->display, gdkwindow);
+                  gtk_layer_set_monitor (GTK_WINDOW (popup), monitor);
+                }
+
+              /* must be done once here before the window is mapped so that subsequent
+               * resizing is taken into account */
+              gtk_widget_set_size_request (popup, window->autohide_size, window->autohide_size);
+            }
+#endif
 
           /* move the window offscreen */
-          panel_base_window_move_resize (PANEL_BASE_WINDOW (popup),
-                                         -9999, -9999, 3, 3);
+          window->autohide_window = popup;
+          panel_window_move (window, GTK_WINDOW (window->autohide_window), -9999, -9999);
 
           /* bind some properties to sync the two windows */
           for (i = 0; i < G_N_ELEMENTS (properties); i++)
@@ -2833,8 +3380,8 @@ panel_window_set_autohide_behavior (PanelWindow *window,
               G_CALLBACK (panel_window_autohide_drag_leave), window);
 
           /* show the window */
-          window->autohide_window = popup;
-          gtk_widget_show (popup);
+          if (GDK_IS_X11_DISPLAY (window->display) || gtk_layer_is_supported ())
+            gtk_widget_show (popup);
         }
 
       if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_ALWAYS)
@@ -2866,50 +3413,44 @@ panel_window_set_autohide_behavior (PanelWindow *window,
 
 
 
+static gboolean
+panel_window_active_window_monitors_idle (gpointer data)
+{
+  PanelWindow *window = data;
+
+  panel_window_active_window_monitors (window->xfw_active_window, NULL, window);
+
+  return FALSE;
+}
+
+
+
 static void
 panel_window_update_autohide_window (PanelWindow *window,
-                                     WnckScreen  *screen,
-                                     WnckWindow  *active_window)
+                                     XfwScreen   *screen,
+                                     XfwWindow   *active_window)
 {
   panel_return_if_fail (PANEL_IS_WINDOW (window));
-  panel_return_if_fail (screen == NULL || WNCK_IS_SCREEN (screen));
-  panel_return_if_fail (active_window == NULL || WNCK_IS_WINDOW (active_window));
+  panel_return_if_fail (screen == NULL || XFW_IS_SCREEN (screen));
+  panel_return_if_fail (active_window == NULL || XFW_IS_WINDOW (active_window));
 
-  /* update current screen */
-  if (screen != window->wnck_screen)
-    {
-      /* disconnect from previous screen */
-      if (G_LIKELY (window->wnck_screen != NULL))
-        {
-          g_signal_handlers_disconnect_by_func (window->wnck_screen,
-              panel_window_active_window_changed, window);
-        }
-
-      /* remember new screen */
-      window->wnck_screen = screen;
-
-      /* connect to the new screen */
-      if (screen != NULL)
-        {
-          g_signal_connect (G_OBJECT (screen), "active-window-changed",
-              G_CALLBACK (panel_window_active_window_changed), window);
-        }
-    }
-
-  /* update active window */
-  if (G_LIKELY (active_window != window->wnck_active_window))
+  /* first update active window, in case window->xfw_screen is released below */
+  if (G_LIKELY (active_window != window->xfw_active_window))
     {
       /* disconnect from previously active window */
-      if (G_LIKELY (window->wnck_active_window != NULL))
+      if (G_LIKELY (window->xfw_active_window != NULL))
         {
-          g_signal_handlers_disconnect_by_func (window->wnck_active_window,
+          g_signal_handlers_disconnect_by_func (window->xfw_active_window,
               panel_window_active_window_geometry_changed, window);
-          g_signal_handlers_disconnect_by_func (window->wnck_active_window,
+          g_signal_handlers_disconnect_by_func (window->xfw_active_window,
               panel_window_active_window_state_changed, window);
+          if (gtk_layer_is_supported ())
+            g_signal_handlers_disconnect_by_func (window->xfw_active_window,
+                panel_window_active_window_monitors, window);
         }
 
       /* remember the new window */
-      window->wnck_active_window = active_window;
+      window->xfw_active_window = active_window;
 
       /* connect to the new window but only if it is not a desktop/root-type window */
       if (active_window != NULL)
@@ -2918,10 +3459,50 @@ panel_window_update_autohide_window (PanelWindow *window,
               G_CALLBACK (panel_window_active_window_geometry_changed), window);
           g_signal_connect (G_OBJECT (active_window), "state-changed",
               G_CALLBACK (panel_window_active_window_state_changed), window);
+          if (gtk_layer_is_supported ())
+            {
+              g_signal_connect (G_OBJECT (active_window), "notify::monitors",
+                  G_CALLBACK (panel_window_active_window_monitors), window);
 
-          /* simulate a geometry change for immediate hiding when the new active
-           * window already overlaps the panel */
-          panel_window_active_window_geometry_changed (active_window, window);
+              /* wait for panel position to be initialized */
+              if (window->base_x == -1 && window->base_y == -1)
+                g_idle_add (panel_window_active_window_monitors_idle, window);
+              else
+                panel_window_active_window_monitors (window->xfw_active_window, NULL, window);
+
+              /* stay connected even if the window is not active anymore, because
+               * closing it can impact intellihide on Wayland */
+              g_signal_handlers_disconnect_by_func (active_window,
+                  panel_window_xfw_window_closed, window);
+              g_signal_connect_object (G_OBJECT (active_window), "closed",
+                  G_CALLBACK (panel_window_xfw_window_closed), window, 0);
+            }
+          else
+            /* simulate a geometry change for immediate hiding when the new active
+             * window already overlaps the panel */
+            panel_window_active_window_geometry_changed (active_window, window);
+        }
+    }
+
+  /* update current screen */
+  if (screen != window->xfw_screen)
+    {
+      /* disconnect from previous screen */
+      if (G_LIKELY (window->xfw_screen != NULL))
+        {
+          g_signal_handlers_disconnect_by_func (window->xfw_screen,
+              panel_window_active_window_changed, window);
+          g_object_unref (window->xfw_screen);
+        }
+
+      /* remember new screen */
+      window->xfw_screen = screen;
+
+      /* connect to the new screen */
+      if (screen != NULL)
+        {
+          g_signal_connect (G_OBJECT (screen), "active-window-changed",
+              G_CALLBACK (panel_window_active_window_changed), window);
         }
     }
 }
@@ -3386,9 +3967,7 @@ panel_window_freeze_autohide (PanelWindow *window)
 void
 panel_window_thaw_autohide (PanelWindow *window)
 {
-  GdkDevice *device;
-  GdkWindow *gdkwindow;
-  gboolean   outside = FALSE;
+  gboolean outside;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (window->autohide_block > 0);
@@ -3399,15 +3978,7 @@ panel_window_thaw_autohide (PanelWindow *window)
   if (window->autohide_block > 0)
     return;
 
-  /* check if pointer is outside the panel */
-  device = gdk_seat_get_pointer (gdk_display_get_default_seat (window->display));
-  if (device != NULL)
-    {
-      gdkwindow = gdk_device_get_window_at_position (device, NULL, NULL);
-      outside = (gdkwindow == NULL || gdk_window_get_effective_toplevel (gdkwindow)
-                                      != gtk_widget_get_window (GTK_WIDGET (window)));
-    }
-
+  outside = panel_window_pointer_is_outside (window);
   if (outside)
     panel_window_opacity_enter_queue (window, FALSE);
 
@@ -3415,7 +3986,7 @@ panel_window_thaw_autohide (PanelWindow *window)
     {
       /* simulate a geometry change to check for overlapping windows with intelligent hiding */
       if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
-        panel_window_active_window_geometry_changed (window->wnck_active_window, window);
+        panel_window_active_window_geometry_changed (window->xfw_active_window, window);
       /* otherwise hide the panel if the pointer is outside */
       else if (outside)
         panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
@@ -3445,8 +4016,8 @@ panel_window_get_locked (PanelWindow *window)
 
 
 
-void
-panel_window_focus (PanelWindow *window)
+static void
+panel_window_focus_x11 (PanelWindow *window)
 {
 #ifdef GDK_WINDOWING_X11
   XClientMessageEvent event;
@@ -3472,10 +4043,21 @@ panel_window_focus (PanelWindow *window)
 
   if (gdk_x11_display_error_trap_pop (window->display) != 0)
     g_critical ("Failed to focus panel window");
-#else
-  /* our best guess on non-x11 clients */
-  gtk_window_present (GTK_WINDOW (window));
 #endif
+}
+
+
+
+void
+panel_window_focus (PanelWindow *window)
+{
+  if (GDK_IS_X11_DISPLAY (window->display))
+    panel_window_focus_x11 (window);
+  else
+    {
+      /* our best guess on non-x11 clients */
+      gtk_window_present (GTK_WINDOW (window));
+    }
 }
 
 
