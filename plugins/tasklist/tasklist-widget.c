@@ -1563,7 +1563,7 @@ xfce_tasklist_arrow_button_toggled (GtkWidget    *button,
   if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
     {
       menu = gtk_menu_new ();
-      g_signal_connect (G_OBJECT (menu), "selection-done",
+      g_signal_connect (G_OBJECT (menu), "hide",
           G_CALLBACK (xfce_tasklist_arrow_button_menu_destroy), tasklist);
 
       for (li = tasklist->windows; li != NULL; li = li->next)
@@ -3168,7 +3168,7 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
     {
       menu = wnck_action_menu_new (child->window);
       xfce_tasklist_button_add_launch_new_instance_item (child, menu, FALSE);
-      g_signal_connect (G_OBJECT (menu), "selection-done",
+      g_signal_connect (G_OBJECT (menu), "hide",
           G_CALLBACK (xfce_tasklist_button_menu_destroy), child);
 
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
@@ -4081,7 +4081,7 @@ xfce_tasklist_group_button_button_press_event (GtkWidget         *button,
   if (event->button == 1 || event->button == 3)
     {
       menu = xfce_tasklist_group_button_menu (group_child, event->button == 3);
-      g_signal_connect (G_OBJECT (menu), "selection-done",
+      g_signal_connect (G_OBJECT (menu), "hide",
           G_CALLBACK (xfce_tasklist_group_button_menu_destroy), group_child);
 
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);

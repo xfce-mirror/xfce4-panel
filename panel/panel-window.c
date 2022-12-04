@@ -2972,8 +2972,8 @@ panel_window_menu_help (void)
 
 
 static void
-panel_window_menu_deactivate (GtkMenu     *menu,
-                              PanelWindow *window)
+panel_window_menu_hide (GtkMenu     *menu,
+                        PanelWindow *window)
 {
   panel_return_if_fail (GTK_IS_MENU (menu));
   panel_return_if_fail (PANEL_IS_WINDOW (window));
@@ -3005,8 +3005,8 @@ panel_window_menu_popup (PanelWindow    *window,
   gtk_menu_set_screen (GTK_MENU (menu),
       gtk_window_get_screen (GTK_WINDOW (window)));
   g_object_ref_sink (G_OBJECT (menu));
-  g_signal_connect (G_OBJECT (menu), "deactivate",
-      G_CALLBACK (panel_window_menu_deactivate), window);
+  g_signal_connect (G_OBJECT (menu), "hide",
+      G_CALLBACK (panel_window_menu_hide), window);
 
   item = gtk_menu_item_new_with_label (_("Panel"));
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
