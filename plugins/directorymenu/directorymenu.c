@@ -611,8 +611,8 @@ directory_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
 
 
 static void
-directory_menu_plugin_deactivate (GtkWidget           *menu,
-                                  DirectoryMenuPlugin *plugin)
+directory_menu_plugin_hide (GtkWidget           *menu,
+                            DirectoryMenuPlugin *plugin)
 {
   panel_return_if_fail (plugin->button == NULL || GTK_IS_TOGGLE_BUTTON (plugin->button));
   panel_return_if_fail (GTK_IS_MENU (menu));
@@ -1290,8 +1290,8 @@ directory_menu_plugin_menu (GtkWidget           *button,
     }
 
   menu = gtk_menu_new ();
-  g_signal_connect (G_OBJECT (menu), "deactivate",
-      G_CALLBACK (directory_menu_plugin_deactivate), plugin);
+  g_signal_connect (G_OBJECT (menu), "hide",
+      G_CALLBACK (directory_menu_plugin_hide), plugin);
 
   g_object_set_qdata_full (G_OBJECT (menu), menu_file,
                            g_object_ref (plugin->base_directory),

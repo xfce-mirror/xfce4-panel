@@ -79,7 +79,7 @@ struct _SnButton
 
   GtkWidget           *box;
 
-  guint                menu_deactivate_handler;
+  guint                menu_hide_handler;
   guint                menu_size_allocate_handler;
   guint                menu_size_allocate_idle_handler;
 };
@@ -143,7 +143,7 @@ sn_button_init (SnButton *button)
 
   button->box = NULL;
 
-  button->menu_deactivate_handler = 0;
+  button->menu_hide_handler = 0;
   button->menu_size_allocate_handler = 0;
   button->menu_size_allocate_idle_handler = 0;
 
@@ -210,8 +210,8 @@ sn_button_finalize (GObject *object)
 {
   SnButton *button = XFCE_SN_BUTTON (object);
 
-  if (button->menu_deactivate_handler != 0)
-    g_signal_handler_disconnect (button->menu, button->menu_deactivate_handler);
+  if (button->menu_hide_handler != 0)
+    g_signal_handler_disconnect (button->menu, button->menu_hide_handler);
 
   if (button->menu_size_allocate_handler != 0)
     g_signal_handler_disconnect (button->menu, button->menu_size_allocate_handler);
@@ -225,15 +225,15 @@ sn_button_finalize (GObject *object)
 
 
 static void
-sn_button_menu_deactivate (GtkWidget *widget,
-                           GtkMenu   *menu)
+sn_button_menu_hide (GtkWidget *widget,
+                     GtkMenu   *menu)
 {
   SnButton *button = XFCE_SN_BUTTON (widget);
 
-  if (button->menu_deactivate_handler != 0)
+  if (button->menu_hide_handler != 0)
   {
-    g_signal_handler_disconnect (menu, button->menu_deactivate_handler);
-    button->menu_deactivate_handler = 0;
+    g_signal_handler_disconnect (menu, button->menu_hide_handler);
+    button->menu_hide_handler = 0;
   }
 
   gtk_widget_unset_state_flags (widget, GTK_STATE_FLAG_ACTIVE);
@@ -266,9 +266,9 @@ sn_button_button_press (GtkWidget      *widget,
     {
       if (button->menu != NULL && sn_container_has_children (button->menu))
         {
-          button->menu_deactivate_handler = 
-            g_signal_connect_swapped (G_OBJECT (button->menu), "deactivate",
-                                      G_CALLBACK (sn_button_menu_deactivate), button);
+          button->menu_hide_handler =
+            g_signal_connect_swapped (G_OBJECT (button->menu), "hide",
+                                      G_CALLBACK (sn_button_menu_hide), button);
 
           xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (button->plugin),
                                         GTK_MENU (button->menu), widget, (GdkEvent *) event);
@@ -388,10 +388,10 @@ sn_button_unrealize (GtkWidget *widget)
    * The button could be hidden without being destroyed, as Blueman does for example when
    * the bluetooth service is stopped (see issue #391). As the menu is attached to the
    * button, care must be taken that it does not remain shown while the button is hidden.
-   * This also triggers the "deactivate" signal handler to cleanly end the menu display.
+   * This also triggers the "hide" signal handler to cleanly end the menu display.
    */
   if (button->menu != NULL && gtk_widget_get_visible (button->menu))
-    gtk_menu_shell_deactivate (GTK_MENU_SHELL (button->menu));
+    gtk_widget_hide (button->menu);
 
   GTK_WIDGET_CLASS (sn_button_parent_class)->unrealize (widget);
 }
@@ -434,10 +434,10 @@ sn_button_menu_changed (GtkWidget *widget,
 
   if (button->menu != NULL)
     {
-      if (button->menu_deactivate_handler != 0)
+      if (button->menu_hide_handler != 0)
         {
-          g_signal_handler_disconnect (button->menu, button->menu_deactivate_handler);
-          button->menu_deactivate_handler = 0;
+          g_signal_handler_disconnect (button->menu, button->menu_hide_handler);
+          button->menu_hide_handler = 0;
 
           gtk_widget_unset_state_flags (widget, GTK_STATE_FLAG_ACTIVE);
           gtk_menu_popdown (GTK_MENU (button->menu));

@@ -933,8 +933,8 @@ window_menu_plugin_menu_workspace_item_new (WnckWorkspace        *workspace,
 
 
 static void
-window_menu_plugin_menu_actions_selection_done (GtkWidget    *action_menu,
-                                                GtkMenuShell *menu)
+window_menu_plugin_menu_actions_hide (GtkWidget    *action_menu,
+                                      GtkMenuShell *menu)
 {
   panel_return_if_fail (GTK_IS_MENU_SHELL (menu));
   panel_return_if_fail (WNCK_IS_ACTION_MENU (action_menu));
@@ -981,8 +981,8 @@ window_menu_plugin_menu_window_item_activate (GtkWidget        *mi,
     {
       /* popup the window action menu */
       menu = wnck_action_menu_new (window);
-      g_signal_connect (G_OBJECT (menu), "selection-done",
-          G_CALLBACK (window_menu_plugin_menu_actions_selection_done),
+      g_signal_connect (G_OBJECT (menu), "hide",
+          G_CALLBACK (window_menu_plugin_menu_actions_hide),
           gtk_widget_get_parent (mi));
       xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (menu),
                                     NULL, (GdkEvent *) event);
@@ -1112,8 +1112,8 @@ window_menu_plugin_menu_window_item_new (WnckWindow           *window,
 
 
 static void
-window_menu_plugin_menu_deactivate (GtkWidget        *menu,
-                                    WindowMenuPlugin *plugin)
+window_menu_plugin_menu_hide (GtkWidget        *menu,
+                              WindowMenuPlugin *plugin)
 {
   panel_return_if_fail (plugin->button == NULL || GTK_IS_TOGGLE_BUTTON (plugin->button));
   panel_return_if_fail (GTK_IS_MENU (menu));
@@ -1159,8 +1159,8 @@ window_menu_plugin_menu_key_press_event (GtkWidget        *menu,
       return FALSE;
     }
 
-  /* popdown the menu, this will also emit the "deactivate" signal */
-  gtk_menu_shell_deactivate (GTK_MENU_SHELL (menu));
+  /* hide the menu, this will deactivate the button */
+  gtk_widget_hide (menu);
 
   /* get the active menu item leave when no item if found */
   mi = gtk_menu_get_active (GTK_MENU (menu));
@@ -1431,8 +1431,8 @@ window_menu_plugin_menu (GtkWidget        *button,
 
   /* popup the menu */
   menu = window_menu_plugin_menu_new (plugin);
-  g_signal_connect (G_OBJECT (menu), "deactivate",
-      G_CALLBACK (window_menu_plugin_menu_deactivate), plugin);
+  g_signal_connect (G_OBJECT (menu), "hide",
+      G_CALLBACK (window_menu_plugin_menu_hide), plugin);
 
   xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (menu),
                                 button, (GdkEvent *) event);
