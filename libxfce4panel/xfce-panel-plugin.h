@@ -242,6 +242,10 @@ void                  xfce_panel_plugin_popup_menu          (XfcePanelPlugin   *
                                                              GtkWidget         *widget,
                                                              const GdkEvent    *trigger_event);
 
+void                  xfce_panel_plugin_popup_window        (XfcePanelPlugin   *plugin,
+                                                             GtkWindow         *window,
+                                                             GtkWidget         *widget);
+
 void                  xfce_panel_plugin_focus_widget        (XfcePanelPlugin   *plugin,
                                                              GtkWidget         *widget);
 

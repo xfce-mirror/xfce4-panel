@@ -77,7 +77,7 @@ static cairo_surface_t   *launcher_plugin_tooltip_icon                  (GtkWidg
                                                                          const gchar          *icon_name);
 static void               launcher_plugin_tooltip_icon_invalidate       (GObject              *object);
 static void               launcher_plugin_icon_invalidate               (LauncherPlugin       *plugin);
-static void               launcher_plugin_menu_deactivate               (GtkWidget            *menu,
+static void               launcher_plugin_menu_hide                     (GtkWidget            *menu,
                                                                          LauncherPlugin       *plugin);
 static void               launcher_plugin_menu_item_activate            (GtkMenuItem          *widget,
                                                                          GarconMenuItem       *item);
@@ -1447,8 +1447,8 @@ launcher_plugin_tooltip_icon (GtkWidget *widget,
 
 
 static void
-launcher_plugin_menu_deactivate (GtkWidget      *menu,
-                                 LauncherPlugin *plugin)
+launcher_plugin_menu_hide (GtkWidget      *menu,
+                           LauncherPlugin *plugin)
 {
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
   panel_return_if_fail (plugin->menu == menu);
@@ -1589,8 +1589,8 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
   plugin->menu = gtk_menu_new ();
   gtk_menu_set_reserve_toggle_size (GTK_MENU (plugin->menu), FALSE);
   gtk_menu_attach_to_widget (GTK_MENU (plugin->menu), GTK_WIDGET (plugin), NULL);
-  g_signal_connect (G_OBJECT (plugin->menu), "deactivate",
-                    G_CALLBACK (launcher_plugin_menu_deactivate), plugin);
+  g_signal_connect (G_OBJECT (plugin->menu), "hide",
+                    G_CALLBACK (launcher_plugin_menu_hide), plugin);
 
   /* get the arrow type of the plugin */
   arrow_type = xfce_arrow_button_get_arrow_type (XFCE_ARROW_BUTTON (plugin->arrow));
