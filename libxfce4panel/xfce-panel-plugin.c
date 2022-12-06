@@ -1029,7 +1029,15 @@ xfce_panel_plugin_button_press_event (GtkWidget      *widget,
         gtk_widget_set_sensitive (item, plugin->priv->menu_blocked == 0);
 
       /* popup the menu */
-      gtk_menu_popup_at_pointer (menu, (GdkEvent *) event);
+      if (gtk_layer_is_supported ())
+        {
+          /* on Wayland the menu might be covered by external plugins when they are
+           * usable, i.e. if layer-shell is supported, so pop up it at widget */
+          xfce_panel_plugin_popup_menu (plugin, menu, widget, (GdkEvent *) event);
+        }
+      else
+        gtk_menu_popup_at_pointer (menu, (GdkEvent *) event);
+
       return TRUE;
     }
 
