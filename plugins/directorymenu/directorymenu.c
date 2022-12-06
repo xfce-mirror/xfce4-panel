@@ -22,16 +22,13 @@
 
 #include <exo/exo.h>
 #include <gio/gio.h>
+#include <gio/gdesktopappinfo.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <common/panel-xfconf.h>
 #include <common/panel-utils.h>
 #include <common/panel-private.h>
-
-#ifdef HAVE_GIO_UNIX
-#include <gio/gdesktopappinfo.h>
-#endif
 
 #include "directorymenu.h"
 #include "directorymenu-dialog_ui.h"
@@ -614,8 +611,8 @@ directory_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
 
 
 static void
-directory_menu_plugin_deactivate (GtkWidget           *menu,
-                                  DirectoryMenuPlugin *plugin)
+directory_menu_plugin_hide (GtkWidget           *menu,
+                            DirectoryMenuPlugin *plugin)
 {
   panel_return_if_fail (plugin->button == NULL || GTK_IS_TOGGLE_BUTTON (plugin->button));
   panel_return_if_fail (GTK_IS_MENU (menu));
@@ -669,7 +666,6 @@ directory_menu_plugin_menu_sort (gconstpointer a,
 
 
 
-#ifdef HAVE_GIO_UNIX
 static void
 directory_menu_plugin_menu_launch_desktop_file (GtkWidget *mi,
                                                 GAppInfo  *info)
@@ -699,7 +695,6 @@ directory_menu_plugin_menu_launch_desktop_file (GtkWidget *mi,
 
   g_object_unref (G_OBJECT (context));
 }
-#endif
 
 
 
@@ -1057,10 +1052,8 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
   GFile           *dir;
   gboolean         visible;
   GFileType        file_type;
-#ifdef HAVE_GIO_UNIX
   GDesktopAppInfo *desktopinfo;
   const gchar     *description;
-#endif
 
   panel_return_if_fail (XFCE_IS_DIRECTORY_MENU_PLUGIN (plugin));
   panel_return_if_fail (GTK_IS_MENU (menu));
@@ -1157,7 +1150,7 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
               display_name = g_file_info_get_display_name (info);
               if (G_LIKELY (display_name != NULL))
                 for (li = plugin->patterns; !visible && li != NULL; li = li->next)
-                   if (g_pattern_match_string (li->data, display_name))
+                   if (g_pattern_spec_match_string (li->data, display_name))
                      visible = TRUE;
 
               if (!visible)
@@ -1195,7 +1188,6 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
           file = g_file_get_child (dir, g_file_info_get_name (info));
           icon = NULL;
 
-#ifdef HAVE_GIO_UNIX
           /* for native desktop files we make an exception and try
            * to load them like a normal menu */
           desktopinfo = NULL;
@@ -1220,7 +1212,6 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
                     }
                 }
             }
-#endif
 
           mi = panel_image_menu_item_new_with_label (display_name);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
@@ -1247,7 +1238,6 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
               g_signal_connect_after (G_OBJECT (submenu), "hide",
                   G_CALLBACK (directory_menu_plugin_menu_unload), NULL);
             }
-#ifdef HAVE_GIO_UNIX
           else if (G_UNLIKELY (desktopinfo != NULL))
             {
               description = g_app_info_get_description (G_APP_INFO (desktopinfo));
@@ -1260,7 +1250,6 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
 
               g_object_unref (G_OBJECT (file));
             }
-#endif
           else
             {
               g_signal_connect_data (G_OBJECT (mi), "activate",
@@ -1301,8 +1290,8 @@ directory_menu_plugin_menu (GtkWidget           *button,
     }
 
   menu = gtk_menu_new ();
-  g_signal_connect (G_OBJECT (menu), "deactivate",
-      G_CALLBACK (directory_menu_plugin_deactivate), plugin);
+  g_signal_connect (G_OBJECT (menu), "hide",
+      G_CALLBACK (directory_menu_plugin_hide), plugin);
 
   g_object_set_qdata_full (G_OBJECT (menu), menu_file,
                            g_object_ref (plugin->base_directory),
