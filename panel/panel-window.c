@@ -3656,7 +3656,38 @@ panel_window_menu_popup (PanelWindow    *window,
       gtk_widget_show (item);
     }
 
-  gtk_menu_popup_at_pointer (GTK_MENU (menu), (GdkEvent *) event);
+  if (gtk_layer_is_supported ())
+    {
+      /* on Wayland the menu might be covered by external plugins when they are
+       * usable, i.e. if layer-shell is supported, so pop up it at rect */
+      GdkRectangle rect;
+      GdkGravity rect_anchor, menu_anchor;
+
+      if (IS_HORIZONTAL (window))
+        {
+          /* only set one typical case, for the others GTK should manage via anchor-hints */
+          rect.x = event->x;
+          rect.y = 0;
+          rect.width = window->alloc.width - event->x;
+          rect.height = window->alloc.height;
+          rect_anchor = GDK_GRAVITY_NORTH_WEST;
+          menu_anchor = GDK_GRAVITY_SOUTH_WEST;
+        }
+      else
+        {
+          rect.x = 0;
+          rect.y = event->y;
+          rect.width = window->alloc.width;
+          rect.height = window->alloc.height - event->y;
+          rect_anchor = GDK_GRAVITY_NORTH_WEST;
+          menu_anchor = GDK_GRAVITY_NORTH_EAST;
+        }
+
+      gtk_menu_popup_at_rect (GTK_MENU (menu), gtk_widget_get_window (GTK_WIDGET (window)),
+                              &rect, rect_anchor, menu_anchor, (GdkEvent *) event);
+    }
+  else
+    gtk_menu_popup_at_pointer (GTK_MENU (menu), (GdkEvent *) event);
 }
 
 
