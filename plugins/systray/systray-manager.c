@@ -28,12 +28,11 @@
 #include <string.h>
 #endif
 
+#include <gdk/gdk.h>
+#include <gtk/gtk.h>
+
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
-
-#include <gdk/gdk.h>
-#include <gdk/gdkx.h>
-#include <gtk/gtk.h>
 
 #include <common/panel-private.h>
 #include <common/panel-debug.h>
