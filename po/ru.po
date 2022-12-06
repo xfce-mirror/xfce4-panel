@@ -13,24 +13,25 @@
 # Andres <kovtunos@yandex.ru>, 2010
 # Anthony Ivanoff <a-i@bk.ru>, 2004-2005
 # Artem Zolochevskiy <artem.zolochevskiy@gmail.com>, 2011
-# Alexander Filёv, 2021
+# AlexanderFilev, 2021
 # Denis Koryavov <dkoryavov@yandex.ru>, 2009-2010
 # Dmitrij Smirnov <other@igus.lv>, 2010-2011
-# Alexander Filёv, 2014,2020
+# AlexanderFilev, 2014,2020
 # Igor <f2404@yandex.ru>, 2016-2020
 # Igor Vornovskii, 2022
 # ivmazurenko <ivmazurenko@yandex.ru>, 2020
 # Poul Ionkin <wizzard@nmg.lv>, 2003
 # Sergey Alyoshin <alyoshin.s@gmail.com>, 2014-2016
 # Sergey Fedoseev <fedoseev.sergey@gmail.com>, 2006
+# Артём Котлубай, 2022
 # Виктор, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-20 00:47+0200\n"
+"POT-Creation-Date: 2022-11-28 15:00+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Виктор, 2022\n"
+"Last-Translator: Артём Котлубай, 2022\n"
 "Language-Team: Russian (http://www.transifex.com/xfce/xfce4-panel/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,7 +55,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "панели;настройки;панель задач;автоскрытие;меню приложений;пуск;кнопки;запуск;область уведомлений;статус;значки;модули;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3081
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2989
 msgid "Panel"
 msgstr "Панель"
 
@@ -81,9 +82,9 @@ msgstr "Удаление элемента с панели также означ�
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1088 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1422
-#: ../plugins/applicationsmenu/applicationsmenu.c:614
-#: ../plugins/directorymenu/directorymenu.c:469
-#: ../plugins/directorymenu/directorymenu.c:936
+#: ../plugins/applicationsmenu/applicationsmenu.c:611
+#: ../plugins/directorymenu/directorymenu.c:470
+#: ../plugins/directorymenu/directorymenu.c:939
 msgid "_Cancel"
 msgstr "_Отменить"
 
@@ -104,7 +105,7 @@ msgid "_Properties"
 msgstr "_Свойства"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3157
+#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3065
 msgid "_About"
 msgstr "_О программе"
 
@@ -118,23 +119,23 @@ msgid "Pane_l"
 msgstr "Пане_ль"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:3093
+#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:3001
 msgid "Add _New Items..."
 msgstr "_Добавить новые элементы..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:3104
+#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:3012
 msgid "Panel Pr_eferences..."
 msgstr "_Параметры панели..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3132
+#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3040
 msgid "Log _Out"
 msgstr "_Завершить сеанс"
 
 #. help item
 #: ../libxfce4panel/xfce-panel-plugin.c:1326 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3148
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3056
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:15
@@ -220,73 +221,73 @@ msgid "Please report bugs to <%s>."
 msgstr "Об ошибках сообщайте, пожалуйста, на <%s>."
 
 #. quit without error if an instance is running
-#: ../panel/main.c:396
+#: ../panel/main.c:398
 msgid "There is already a running instance"
 msgstr "Экземпляр панели уже выполняется"
 
 #. spawn ourselfs again
-#: ../panel/main.c:404
+#: ../panel/main.c:406
 msgid "Restarting..."
 msgstr "Перезапуск..."
 
-#: ../panel/main.c:419
+#: ../panel/main.c:421
 msgid "Failed to show the preferences dialog"
 msgstr "Не удалось открыть диалоговое окно настроек"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:423
 msgid "Failed to show the add new items dialog"
 msgstr "Не удалось открыть диалоговое окно добавления элементов"
 
-#: ../panel/main.c:423
+#: ../panel/main.c:425
 msgid "Failed to save the panel configuration"
 msgstr "Не удалось сохранить конфигурацию панели"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:427
 msgid "Failed to add a plugin to the panel"
 msgstr "Не удалось добавить модуль на панель"
 
-#: ../panel/main.c:427
+#: ../panel/main.c:429
 msgid "Failed to restart the panel"
 msgstr "Не удалось перезапустить панель"
 
-#: ../panel/main.c:429
+#: ../panel/main.c:431
 msgid "Failed to quit the panel"
 msgstr "Не удалось закрыть панель"
 
-#: ../panel/main.c:431
+#: ../panel/main.c:433
 msgid "Failed to send D-Bus message"
 msgstr "Не удалось послать сообщение D-Bus"
 
-#: ../panel/main.c:441
+#: ../panel/main.c:443
 msgid "Execute"
 msgstr "Выполнить"
 
-#: ../panel/main.c:442
+#: ../panel/main.c:444
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Хотите запустить панель? Если да, то сохраните сеанс при выходе, чтобы панель была запущена автоматически при следующем входе в систему."
 
-#: ../panel/main.c:445 ../panel/main.c:459
+#: ../panel/main.c:447 ../panel/main.c:461
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Не обнаружено запущенного экземпляра %s"
 
-#: ../panel/panel-application.c:221
+#: ../panel/panel-application.c:220
 msgid "Failed to launch the migration application"
-msgstr "Не удалось запустить программу миграции"
+msgstr "Не удалось запустить приложение переноса настроек"
 
-#: ../panel/panel-application.c:1002
+#: ../panel/panel-application.c:1000
 msgid "Create _Launcher"
 msgstr "Создать _значок запуска"
 
-#: ../panel/panel-application.c:1003
+#: ../panel/panel-application.c:1001
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Это создаст новый модуль значка запуска на панели и вставит брошенные файлы как пункты меню."
 
-#: ../panel/panel-application.c:1005
+#: ../panel/panel-application.c:1003
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -295,21 +296,21 @@ msgstr[1] "Создать новый значок запуска на панел
 msgstr[2] "Создать новый значок запуска на панели из %d desktop-файлов"
 msgstr[3] "Создать новый значок запуска из %d desktop-файлов"
 
-#: ../panel/panel-application.c:1762
+#: ../panel/panel-application.c:1760
 msgid "Quit"
 msgstr "Закрыть"
 
-#: ../panel/panel-application.c:1763
+#: ../panel/panel-application.c:1761
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Вы запустили X-сервер без менеджера сеансов. Щелчок на «Закрыть» остановит X-сервер."
 
-#: ../panel/panel-application.c:1764
+#: ../panel/panel-application.c:1762
 msgid "Are you sure you want to quit the panel?"
 msgstr "Вы действительно хотите завершить работу панели?"
 
-#: ../panel/panel-application.c:1772
+#: ../panel/panel-application.c:1770
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Не удалось выполнить команду «%s»"
@@ -332,7 +333,7 @@ msgstr "Не удалось открыть адрес электронной п�
 
 #: ../panel/panel-dialogs.c:84
 msgid "The panel of the Xfce Desktop Environment"
-msgstr "Панель окружения Xfce"
+msgstr "Панель оболочки Xfce"
 
 #: ../panel/panel-dialogs.c:88
 msgid "translator-credits"
@@ -506,7 +507,7 @@ msgstr "Фоновое изображение"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "Panel Preferences"
-msgstr "Параметры панели"
+msgstr "Настройки панели"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Profiles:"
@@ -642,7 +643,7 @@ msgstr "Автоматически _подгонять размер"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Fixed icon _size (pixels):"
-msgstr "Фиксированный _размер значков (пикс.):"
+msgstr "Закреплённый _размер значков (пикс.):"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "<b>Opacity</b>"
@@ -656,7 +657,7 @@ msgstr "Настроить..."
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>Композитный режим отключен</b>\nЧтобы использовать прозрачность, включите композитный режим в диспетчере окон."
+msgstr "<b>Композитный режим отключён</b>\nЧтобы использовать прозрачность, включите композитный режим в диспетчере окон."
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:51
@@ -733,23 +734,23 @@ msgstr "Опытный"
 msgid "Expert"
 msgstr "Эксперт"
 
-#: ../panel/panel-window.c:3118
+#: ../panel/panel-window.c:3026
 msgid "_Lock Panel"
 msgstr "_Закрепить панель"
 
-#: ../migrate/main.c:110
+#: ../migrate/main.c:111
 msgid "Failed to load the default configuration"
 msgstr "Не удалось загрузить конфигурацию по умолчанию"
 
-#: ../migrate/main.c:122
+#: ../migrate/main.c:123
 msgid "Panel config needs migration..."
 msgstr "Требуется перенос настроек панели..."
 
-#: ../migrate/main.c:126
+#: ../migrate/main.c:127
 msgid "Failed to migrate the existing configuration"
 msgstr "Не удалось перенести имеющуюся конфигурацию"
 
-#: ../migrate/main.c:132
+#: ../migrate/main.c:133
 msgid "Panel configuration has been updated."
 msgstr "Конфигурация панели была обновлена."
 
@@ -1039,19 +1040,19 @@ msgstr "Файл меню"
 msgid "Applications"
 msgstr "Приложения"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:612
-#: ../plugins/directorymenu/directorymenu.c:467
+#: ../plugins/applicationsmenu/applicationsmenu.c:609
+#: ../plugins/directorymenu/directorymenu.c:468
 msgid "Select An Icon"
 msgstr "Выберите значок"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:615
-#: ../plugins/directorymenu/directorymenu.c:470
+#: ../plugins/applicationsmenu/applicationsmenu.c:612
+#: ../plugins/directorymenu/directorymenu.c:471
 msgid "_OK"
 msgstr "_ОК"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:652
-#: ../plugins/clock/clock.c:1035 ../plugins/launcher/launcher.c:2479
+#: ../plugins/applicationsmenu/applicationsmenu.c:650
+#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2496
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Не удалось выполнить команду «%s»."
@@ -1100,11 +1101,11 @@ msgstr "%A %d %B %Y"
 msgid "Week %V"
 msgstr "Неделя %V"
 
-#: ../plugins/clock/clock.c:491
+#: ../plugins/clock/clock.c:490
 msgid "Failed to execute clock command"
 msgstr "Не удалось запустить часы"
 
-#: ../plugins/clock/clock.c:974
+#: ../plugins/clock/clock.c:1011
 msgid "Custom Format"
 msgstr "Пользовательский формат"
 
@@ -1165,7 +1166,7 @@ msgstr "Часы"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Название часового пояса соответствует файлу в базе данных zoneinfo. Например, «Europe/Moscow». Оставьте пустым, чтобы использовать локальное время."
+msgstr "Название часового пояса соответствует файлу в базе данных zoneinfo. Например, «Europe/Moscow». Оставьте пустым, чтобы использовать местное время."
 
 #: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Time_zone:"
@@ -1289,303 +1290,303 @@ msgctxt "Time"
 msgid "%a %_d %b, %R"
 msgstr "%a %_d %b, %R"
 
-#: ../plugins/clock/clock-fuzzy.c:87
+#: ../plugins/clock/clock-fuzzy.c:88
 msgid "Night"
 msgstr "Ночь"
 
-#: ../plugins/clock/clock-fuzzy.c:88
+#: ../plugins/clock/clock-fuzzy.c:89
 msgid "Early morning"
 msgstr "Раннее утро"
 
-#: ../plugins/clock/clock-fuzzy.c:89
+#: ../plugins/clock/clock-fuzzy.c:90
 msgid "Morning"
 msgstr "Утро"
 
-#: ../plugins/clock/clock-fuzzy.c:90
+#: ../plugins/clock/clock-fuzzy.c:91
 msgid "Almost noon"
 msgstr "Почти полдень"
 
-#: ../plugins/clock/clock-fuzzy.c:91
+#: ../plugins/clock/clock-fuzzy.c:92
 msgid "Noon"
 msgstr "Полдень"
 
-#: ../plugins/clock/clock-fuzzy.c:92
+#: ../plugins/clock/clock-fuzzy.c:93
 msgid "Afternoon"
 msgstr "День"
 
-#: ../plugins/clock/clock-fuzzy.c:93
+#: ../plugins/clock/clock-fuzzy.c:94
 msgid "Evening"
 msgstr "Вечер"
 
-#: ../plugins/clock/clock-fuzzy.c:94
+#: ../plugins/clock/clock-fuzzy.c:95
 msgid "Late evening"
 msgstr "Поздний вечер"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: ../plugins/clock/clock-fuzzy.c:101
+#: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "%0 o'clock"
 msgstr "%0 часов ровно"
 
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "five past %0"
 msgstr "%0 ноль пять"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "ten past %0"
 msgstr "%0 десять"
 
-#: ../plugins/clock/clock-fuzzy.c:104
+#: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "quarter past %0"
 msgstr "%0 с четвертью"
 
-#: ../plugins/clock/clock-fuzzy.c:105
+#: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "twenty past %0"
 msgstr "%0 двадцать"
 
-#: ../plugins/clock/clock-fuzzy.c:106
+#: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five past %0"
 msgstr "%0 двадцать пять"
 
-#: ../plugins/clock/clock-fuzzy.c:107
+#: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "half past %0"
 msgstr "%0 тридцать"
 
-#: ../plugins/clock/clock-fuzzy.c:108
+#: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "twenty five to %1"
 msgstr "без двадцати пяти %1"
 
-#: ../plugins/clock/clock-fuzzy.c:109
+#: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "twenty to %1"
 msgstr "без двадцати %1"
 
-#: ../plugins/clock/clock-fuzzy.c:110
+#: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "quarter to %1"
 msgstr "без четверти %1"
 
-#: ../plugins/clock/clock-fuzzy.c:111
+#: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "ten to %1"
 msgstr "без десяти %1"
 
-#: ../plugins/clock/clock-fuzzy.c:112
+#: ../plugins/clock/clock-fuzzy.c:113
 #, no-c-format
 msgid "five to %1"
 msgstr "без пяти %1"
 
-#: ../plugins/clock/clock-fuzzy.c:113
+#: ../plugins/clock/clock-fuzzy.c:114
 #, no-c-format
 msgid "%1 o'clock"
 msgstr "%1 ровно"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: ../plugins/clock/clock-fuzzy.c:120
+#: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "%0 ровно"
 
-#: ../plugins/clock/clock-fuzzy.c:121
+#: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "%0 ноль пять"
 
-#: ../plugins/clock/clock-fuzzy.c:122
+#: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "%0 десять"
 
-#: ../plugins/clock/clock-fuzzy.c:123
+#: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "%0 с четвертью"
 
-#: ../plugins/clock/clock-fuzzy.c:124
+#: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "%0 двадцать"
 
-#: ../plugins/clock/clock-fuzzy.c:125
+#: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "%0 двадцать пять"
 
-#: ../plugins/clock/clock-fuzzy.c:126
+#: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "%0 тридцать"
 
-#: ../plugins/clock/clock-fuzzy.c:127
+#: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "без двадцати пяти %1"
 
-#: ../plugins/clock/clock-fuzzy.c:128
+#: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "без двадцати %1"
 
-#: ../plugins/clock/clock-fuzzy.c:129
+#: ../plugins/clock/clock-fuzzy.c:130
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "без четверти %1"
 
-#: ../plugins/clock/clock-fuzzy.c:130
+#: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "без десяти %1"
 
-#: ../plugins/clock/clock-fuzzy.c:131
+#: ../plugins/clock/clock-fuzzy.c:132
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "без пяти %1"
 
-#: ../plugins/clock/clock-fuzzy.c:132
+#: ../plugins/clock/clock-fuzzy.c:133
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "%1 ровно"
 
-#: ../plugins/clock/clock-fuzzy.c:137
+#: ../plugins/clock/clock-fuzzy.c:138
 msgctxt "am"
 msgid "one"
 msgstr "один"
 
-#: ../plugins/clock/clock-fuzzy.c:138
+#: ../plugins/clock/clock-fuzzy.c:139
 msgctxt "am"
 msgid "two"
 msgstr "два"
 
-#: ../plugins/clock/clock-fuzzy.c:139
+#: ../plugins/clock/clock-fuzzy.c:140
 msgctxt "am"
 msgid "three"
 msgstr "три"
 
-#: ../plugins/clock/clock-fuzzy.c:140
+#: ../plugins/clock/clock-fuzzy.c:141
 msgctxt "am"
 msgid "four"
 msgstr "четыре"
 
-#: ../plugins/clock/clock-fuzzy.c:141
+#: ../plugins/clock/clock-fuzzy.c:142
 msgctxt "am"
 msgid "five"
 msgstr "пять"
 
-#: ../plugins/clock/clock-fuzzy.c:142
+#: ../plugins/clock/clock-fuzzy.c:143
 msgctxt "am"
 msgid "six"
 msgstr "шесть"
 
-#: ../plugins/clock/clock-fuzzy.c:143
+#: ../plugins/clock/clock-fuzzy.c:144
 msgctxt "am"
 msgid "seven"
 msgstr "семь"
 
-#: ../plugins/clock/clock-fuzzy.c:144
+#: ../plugins/clock/clock-fuzzy.c:145
 msgctxt "am"
 msgid "eight"
 msgstr "восемь"
 
-#: ../plugins/clock/clock-fuzzy.c:145
+#: ../plugins/clock/clock-fuzzy.c:146
 msgctxt "am"
 msgid "nine"
 msgstr "девять"
 
-#: ../plugins/clock/clock-fuzzy.c:146
+#: ../plugins/clock/clock-fuzzy.c:147
 msgctxt "am"
 msgid "ten"
 msgstr "десять"
 
-#: ../plugins/clock/clock-fuzzy.c:147
+#: ../plugins/clock/clock-fuzzy.c:148
 msgctxt "am"
 msgid "eleven"
 msgstr "одиннадцать"
 
 #. I18N: 12 AM is midnight
-#: ../plugins/clock/clock-fuzzy.c:149
+#: ../plugins/clock/clock-fuzzy.c:150
 msgctxt "am"
 msgid "twelve"
 msgstr "двенадцать"
 
-#: ../plugins/clock/clock-fuzzy.c:154
+#: ../plugins/clock/clock-fuzzy.c:155
 msgctxt "pm"
 msgid "one"
 msgstr "один"
 
-#: ../plugins/clock/clock-fuzzy.c:155
+#: ../plugins/clock/clock-fuzzy.c:156
 msgctxt "pm"
 msgid "two"
 msgstr "два"
 
-#: ../plugins/clock/clock-fuzzy.c:156
+#: ../plugins/clock/clock-fuzzy.c:157
 msgctxt "pm"
 msgid "three"
 msgstr "три"
 
-#: ../plugins/clock/clock-fuzzy.c:157
+#: ../plugins/clock/clock-fuzzy.c:158
 msgctxt "pm"
 msgid "four"
 msgstr "четыре"
 
-#: ../plugins/clock/clock-fuzzy.c:158
+#: ../plugins/clock/clock-fuzzy.c:159
 msgctxt "pm"
 msgid "five"
 msgstr "пять"
 
-#: ../plugins/clock/clock-fuzzy.c:159
+#: ../plugins/clock/clock-fuzzy.c:160
 msgctxt "pm"
 msgid "six"
 msgstr "шесть"
 
-#: ../plugins/clock/clock-fuzzy.c:160
+#: ../plugins/clock/clock-fuzzy.c:161
 msgctxt "pm"
 msgid "seven"
 msgstr "семь"
 
-#: ../plugins/clock/clock-fuzzy.c:161
+#: ../plugins/clock/clock-fuzzy.c:162
 msgctxt "pm"
 msgid "eight"
 msgstr "восемь"
 
-#: ../plugins/clock/clock-fuzzy.c:162
+#: ../plugins/clock/clock-fuzzy.c:163
 msgctxt "pm"
 msgid "nine"
 msgstr "девять"
 
-#: ../plugins/clock/clock-fuzzy.c:163
+#: ../plugins/clock/clock-fuzzy.c:164
 msgctxt "pm"
 msgid "ten"
 msgstr "десять"
 
-#: ../plugins/clock/clock-fuzzy.c:164
+#: ../plugins/clock/clock-fuzzy.c:165
 msgctxt "pm"
 msgid "eleven"
 msgstr "одиннадцать"
 
 #. I18N: 12 PM is noon
-#: ../plugins/clock/clock-fuzzy.c:166
+#: ../plugins/clock/clock-fuzzy.c:167
 msgctxt "pm"
 msgid "twelve"
 msgstr "двенадцать"
@@ -1600,69 +1601,69 @@ msgstr "Который час?"
 msgid "Directory Menu"
 msgstr "Меню каталога"
 
-#: ../plugins/directorymenu/directorymenu.c:692
+#: ../plugins/directorymenu/directorymenu.c:695
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Не удалось запустить приложение «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:724
+#: ../plugins/directorymenu/directorymenu.c:727
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Не удалось получить тип содержимого для «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:733
+#: ../plugins/directorymenu/directorymenu.c:736
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Не найдено приложение по умолчанию для «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:749
+#: ../plugins/directorymenu/directorymenu.c:752
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Не удалось запустить приложение по умолчанию для «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:844
+#: ../plugins/directorymenu/directorymenu.c:847
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Не удалось запустить предпочитаемое приложение для категории «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:925
+#: ../plugins/directorymenu/directorymenu.c:928
 msgid "Create New Folder"
 msgstr "Создать новый каталог"
 
-#: ../plugins/directorymenu/directorymenu.c:930
+#: ../plugins/directorymenu/directorymenu.c:933
 msgid "Create New Text Document"
 msgstr "Создать новый текстовый документ"
 
-#: ../plugins/directorymenu/directorymenu.c:937
+#: ../plugins/directorymenu/directorymenu.c:940
 msgid "C_reate"
 msgstr "_Создать"
 
-#: ../plugins/directorymenu/directorymenu.c:938
+#: ../plugins/directorymenu/directorymenu.c:941
 msgid "Create & _Open"
 msgstr "Создать и _открыть"
 
-#: ../plugins/directorymenu/directorymenu.c:952
+#: ../plugins/directorymenu/directorymenu.c:955
 msgid "Enter the new name:"
 msgstr "Введите имя:"
 
-#: ../plugins/directorymenu/directorymenu.c:988
+#: ../plugins/directorymenu/directorymenu.c:991
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Не удалось создать каталог: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1071
+#: ../plugins/directorymenu/directorymenu.c:1074
 msgid "Open Folder"
 msgstr "Открыть папку"
 
-#: ../plugins/directorymenu/directorymenu.c:1084
+#: ../plugins/directorymenu/directorymenu.c:1087
 msgid "Open in Terminal"
 msgstr "Открыть в терминале"
 
-#: ../plugins/directorymenu/directorymenu.c:1097
+#: ../plugins/directorymenu/directorymenu.c:1100
 msgid "Create Folder..."
 msgstr "Создать каталог..."
 
-#: ../plugins/directorymenu/directorymenu.c:1110
+#: ../plugins/directorymenu/directorymenu.c:1113
 msgid "Create Text Document..."
 msgstr "Создать текстовый документ..."
 
@@ -1719,7 +1720,7 @@ msgstr "Шаблон _файлов:"
 msgid "Filtering"
 msgstr "Фильтрация"
 
-#: ../plugins/launcher/launcher.c:403
+#: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
 msgstr "Открыть меню запуска"
 
@@ -1727,7 +1728,7 @@ msgstr "Открыть меню запуска"
 msgid "Unnamed Item"
 msgstr "Элемент без названия"
 
-#: ../plugins/launcher/launcher.c:1795
+#: ../plugins/launcher/launcher.c:1801
 msgid "No items"
 msgstr "Без элементов"
 
@@ -1855,15 +1856,15 @@ msgstr "Расширенные"
 msgid "Program launcher with optional menu"
 msgstr "Кнопка запуска приложений с дополнительным меню"
 
-#: ../plugins/pager/pager.c:653 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:655 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "_Настройки рабочих мест..."
 
-#: ../plugins/pager/pager.c:743
+#: ../plugins/pager/pager.c:745
 msgid "Unable to open the workspace settings"
 msgstr "Не удалось открыть настройки рабочих мест"
 
-#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:897
+#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:902
 #, c-format
 msgid "Workspace %d"
 msgstr "Рабочее место %d"
@@ -1925,15 +1926,15 @@ msgstr "_Расширять"
 msgid "Adds a separator or space between panel items"
 msgstr "Добавляет разделитель или промежуток между элементами панели"
 
-#: ../plugins/showdesktop/showdesktop.c:240
+#: ../plugins/showdesktop/showdesktop.c:241
 msgid "Restore the minimized windows"
 msgstr "Восстановить свёрнутые окна"
 
-#: ../plugins/showdesktop/showdesktop.c:242
+#: ../plugins/showdesktop/showdesktop.c:243
 msgid "Minimize all open windows and show the desktop"
 msgstr "Скрыть окна и показать рабочий стол"
 
-#: ../plugins/showdesktop/showdesktop.c:245
+#: ../plugins/showdesktop/showdesktop.c:246
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Показать рабочий стол"
@@ -2178,36 +2179,36 @@ msgstr "Показывать окна со всех _мониторов"
 msgid "Show only _minimized windows"
 msgstr "Показывать только с_вёрнутые окна"
 
-#: ../plugins/tasklist/tasklist-widget.c:3063
+#: ../plugins/tasklist/tasklist-widget.c:3070
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Не удалось запустить новый экземпляр '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:3067
+#: ../plugins/tasklist/tasklist-widget.c:3074
 msgid "Error"
 msgstr "Ошибка"
 
-#: ../plugins/tasklist/tasklist-widget.c:3096
+#: ../plugins/tasklist/tasklist-widget.c:3103
 msgid "Launch New Instance"
 msgstr "Запустить новый экземпляр"
 
-#: ../plugins/tasklist/tasklist-widget.c:3843
+#: ../plugins/tasklist/tasklist-widget.c:3857
 msgid "Mi_nimize All"
 msgstr "Св_ернуть все"
 
-#: ../plugins/tasklist/tasklist-widget.c:3850
+#: ../plugins/tasklist/tasklist-widget.c:3864
 msgid "Un_minimize All"
 msgstr "Отменить сво_рачивание всех"
 
-#: ../plugins/tasklist/tasklist-widget.c:3857
+#: ../plugins/tasklist/tasklist-widget.c:3871
 msgid "Ma_ximize All"
 msgstr "Раз_вернуть все"
 
-#: ../plugins/tasklist/tasklist-widget.c:3864
+#: ../plugins/tasklist/tasklist-widget.c:3878
 msgid "_Unmaximize All"
 msgstr "Отменить _разворачивание всех"
 
-#: ../plugins/tasklist/tasklist-widget.c:3875
+#: ../plugins/tasklist/tasklist-widget.c:3889
 msgid "_Close All"
 msgstr "_Закрыть все"
 
@@ -2215,28 +2216,28 @@ msgstr "_Закрыть все"
 msgid "Switch between open windows using buttons"
 msgstr "Переключаться между открытыми окнами с помощью кнопок"
 
-#: ../plugins/windowmenu/windowmenu.c:690
+#: ../plugins/windowmenu/windowmenu.c:695
 msgid "Desktop"
 msgstr "Рабочий стол"
 
-#: ../plugins/windowmenu/windowmenu.c:1292
+#: ../plugins/windowmenu/windowmenu.c:1305
 msgid "No Windows"
 msgstr "Без окон"
 
-#: ../plugins/windowmenu/windowmenu.c:1307
+#: ../plugins/windowmenu/windowmenu.c:1320
 msgid "Urgent Windows"
 msgstr "Срочные окна"
 
-#: ../plugins/windowmenu/windowmenu.c:1349
+#: ../plugins/windowmenu/windowmenu.c:1362
 msgid "Add Workspace"
 msgstr "Добавить рабочее место"
 
-#: ../plugins/windowmenu/windowmenu.c:1369
+#: ../plugins/windowmenu/windowmenu.c:1382
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Удалить рабочее место «%s»"
 
-#: ../plugins/windowmenu/windowmenu.c:1371
+#: ../plugins/windowmenu/windowmenu.c:1384
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Удалить рабочее место %d"
