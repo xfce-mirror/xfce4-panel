@@ -28,9 +28,16 @@
 #endif
 
 #include <gtk/gtk.h>
+#ifdef HAVE_GTK_X11
 #include <gtk/gtkx.h>
+#endif
 #include <glib.h>
 #include <libxfce4util/libxfce4util.h>
+#ifdef HAVE_GTK_LAYER_SHELL
+#include <gtk-layer-shell/gtk-layer-shell.h>
+#else
+#define gtk_layer_is_supported() FALSE
+#endif
 
 #include <common/panel-private.h>
 #include <libxfce4panel/xfce-panel-macros.h>
@@ -1026,7 +1033,15 @@ xfce_panel_plugin_button_press_event (GtkWidget      *widget,
         gtk_widget_set_sensitive (item, plugin->priv->menu_blocked == 0);
 
       /* popup the menu */
-      gtk_menu_popup_at_pointer (menu, (GdkEvent *) event);
+      if (gtk_layer_is_supported ())
+        {
+          /* on Wayland the menu might be covered by external plugins when they are
+           * usable, i.e. if layer-shell is supported, so pop up it at widget */
+          xfce_panel_plugin_popup_menu (plugin, menu, widget, (GdkEvent *) event);
+        }
+      else
+        gtk_menu_popup_at_pointer (menu, (GdkEvent *) event);
+
       return TRUE;
     }
 
@@ -1242,6 +1257,15 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
               G_CALLBACK (xfce_panel_plugin_menu_move), plugin);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
           gtk_widget_show (item);
+          if (GDK_IS_WAYLAND_DISPLAY (gdk_display_get_default ()))
+            {
+              /* FIXME: plugin dnd is broken on Wayland for non-obvious reason */
+              gchar *label = g_strconcat (gtk_menu_item_get_label (GTK_MENU_ITEM (item)),
+                                          "\n(Use the prefs dialog)", NULL);
+              gtk_menu_item_set_label (GTK_MENU_ITEM (item), label);
+              g_free (label);
+              gtk_widget_set_sensitive (item, FALSE);
+            }
 
           image = gtk_image_new_from_icon_name ("go-next", GTK_ICON_SIZE_MENU);
           panel_image_menu_item_set_image (item, image);
@@ -2418,11 +2442,7 @@ xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
   g_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin));
 
   /* connect signal to menu to decrease counter */
-  g_signal_connect (G_OBJECT (menu), "deactivate",
-      G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
-  g_signal_connect (G_OBJECT (menu), "selection-done",
-      G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
-  g_signal_connect (G_OBJECT (menu), "destroy",
+  g_signal_connect (G_OBJECT (menu), "hide",
       G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
 
   /* tell panel it needs to lock */
@@ -2478,7 +2498,16 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
       gdk_monitor_get_geometry (monitor, &geometry);
 
       /* get the plugin root origin */
-      gdk_window_get_root_origin (window, &x, &y);
+#ifdef HAVE_GTK_LAYER_SHELL
+      if (gtk_layer_is_supported ())
+        {
+          GtkWindow *toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin)));
+          x = geometry.x + gtk_layer_get_margin (toplevel, GTK_LAYER_SHELL_EDGE_LEFT);
+          y = geometry.y + gtk_layer_get_margin (toplevel, GTK_LAYER_SHELL_EDGE_TOP);
+        }
+      else
+#endif
+        gdk_window_get_root_origin (window, &x, &y);
 
       /* detect arrow type */
       if (screen_position == XFCE_SCREEN_POSITION_FLOATING_H)
@@ -2505,10 +2534,12 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
  * Note that if the panel is hidden (autohide), you should delay calling this
  * function until the panel is shown, so that it returns the correct coordinates.
  *
- * This function is intended for custom menu widgets.
- * For a regular #GtkMenu you should use xfce_panel_plugin_popup_menu() instead.
+ * This function is intended for custom menu widgets and should rarely be used
+ * since 4.19.0. For a regular #GtkMenu you should use xfce_panel_plugin_popup_menu()
+ * instead, and for a #GtkWindow xfce_panel_plugin_popup_window(), which take care
+ * of positioning for you, among other things.
  *
- * See also: xfce_panel_plugin_popup_menu().
+ * See also: xfce_panel_plugin_popup_menu() and xfce_panel_plugin_popup_window().
  **/
 void
 xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
@@ -2517,13 +2548,16 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
                                    gint            *x,
                                    gint            *y)
 {
+#ifdef HAVE_GTK_X11
+  GtkWidget      *plug;
+  gint            px, py;
+#endif
   GtkRequisition  requisition;
   GdkScreen      *screen;
   GdkRectangle    geometry;
   GdkDisplay     *display;
   GdkMonitor     *monitor;
-  GtkWidget      *toplevel, *plug;
-  gint            px, py;
+  GtkWindow      *toplevel;
   GtkAllocation   alloc;
 
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
@@ -2547,10 +2581,22 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
   gtk_widget_get_preferred_size (menu_widget, &requisition, NULL);
 
   /* get the root position of the attach widget */
-  toplevel = gtk_widget_get_toplevel (attach_widget);
-  gtk_window_get_position (GTK_WINDOW (toplevel), x, y);
+  toplevel = GTK_WINDOW (gtk_widget_get_toplevel (attach_widget));
+#ifdef HAVE_GTK_LAYER_SHELL
+  if (gtk_layer_is_supported ())
+    {
+      monitor = gdk_display_get_monitor_at_window (gdk_display_get_default (),
+                                                   gtk_widget_get_window (GTK_WIDGET (toplevel)));
+      gdk_monitor_get_geometry (monitor, &geometry);
+      *x = geometry.x + gtk_layer_get_margin (toplevel, GTK_LAYER_SHELL_EDGE_LEFT);
+      *y = geometry.y + gtk_layer_get_margin (toplevel, GTK_LAYER_SHELL_EDGE_TOP);
+    }
+  else
+#endif
+    gtk_window_get_position (toplevel, x, y);
 
-  /* correct position for external plugins */
+  /* correct position for external plugins on X11 */
+#ifdef HAVE_GTK_X11
   plug = gtk_widget_get_ancestor (attach_widget, GTK_TYPE_PLUG);
   if (plug != NULL)
     {
@@ -2559,6 +2605,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
        *x += px;
        *y += py;
     }
+#endif
 
   /* add the widgets allocation */
   gtk_widget_get_allocation (attach_widget, &alloc);
@@ -2700,7 +2747,8 @@ xfce_panel_plugin_popup_menu_reposition (gpointer data)
  * xfce_panel_plugin_register_menu() for the @menu.
  *
  * For a custom widget that will be used as a popup menu, use
- * xfce_panel_plugin_position_widget() instead.
+ * xfce_panel_plugin_popup_window() instead if this widget is a #GtkWindow,
+ * or xfce_panel_plugin_position_widget().
  *
  * See also: gtk_menu_popup_at_widget() and gtk_menu_popup_at_pointer().
  *
@@ -2762,6 +2810,212 @@ xfce_panel_plugin_popup_menu (XfcePanelPlugin *plugin,
     gtk_menu_popup_at_widget (menu, widget, widget_anchor, menu_anchor, trigger_event);
   else
     gtk_menu_popup_at_pointer (menu, trigger_event);
+}
+
+
+
+static gboolean
+xfce_panel_plugin_popup_window_key_press_event (GtkWidget *window,
+                                                GdkEventKey *event,
+                                                XfcePanelPlugin *plugin)
+{
+  if (event->type == GDK_KEY_PRESS && event->keyval == GDK_KEY_Escape)
+    {
+      gtk_widget_hide (window);
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+
+
+static gboolean
+xfce_panel_plugin_popup_window_button_press_event (GtkWidget *window,
+                                                   GdkEventButton *event,
+                                                   XfcePanelPlugin *plugin)
+{
+  GdkWindow *gdkwindow = gdk_device_get_window_at_position (event->device, NULL, NULL);
+
+  if (gdkwindow == NULL
+      || gdk_window_get_effective_toplevel (gdkwindow) != gtk_widget_get_window (window))
+    {
+      gtk_widget_hide (window);
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+
+
+static void
+xfce_panel_plugin_popup_window_has_toplevel_focus (GObject *window,
+                                                   GParamSpec *pspec,
+                                                   XfcePanelPlugin *plugin)
+{
+  if (! gtk_window_has_toplevel_focus (GTK_WINDOW (window)))
+    gtk_widget_hide (GTK_WIDGET (window));
+}
+
+
+
+static void
+xfce_panel_plugin_popup_window_hide (GtkWidget *window,
+                                     XfcePanelPlugin *plugin)
+{
+  g_signal_handlers_disconnect_by_func (window,
+    xfce_panel_plugin_popup_window_button_press_event, plugin);
+  g_signal_handlers_disconnect_by_func (window,
+    xfce_panel_plugin_popup_window_key_press_event, plugin);
+  g_signal_handlers_disconnect_by_func (window,
+    xfce_panel_plugin_popup_window_hide, plugin);
+  if (gtk_layer_is_supported ())
+    g_signal_handlers_disconnect_by_func (window,
+      xfce_panel_plugin_popup_window_has_toplevel_focus, plugin);
+
+  xfce_panel_plugin_block_autohide (plugin, FALSE);
+  if (g_object_get_data (G_OBJECT (window), "seat-grabbed"))
+    {
+      gdk_seat_ungrab (gdk_display_get_default_seat (gdk_display_get_default ()));
+      g_object_set_data (G_OBJECT (window), "seat-grabbed", GINT_TO_POINTER (FALSE));
+    }
+}
+
+
+
+static gboolean
+xfce_panel_plugin_popup_window_reposition (gpointer data)
+{
+  GtkWindow *window = g_object_get_data (data, "window-reposition-window");
+  GtkWidget *widget = g_object_get_data (data, "window-reposition-widget");
+  gint x, y;
+
+  xfce_panel_plugin_position_widget (data, GTK_WIDGET (window), widget, &x, &y);
+#ifdef HAVE_GTK_LAYER_SHELL
+  if (gtk_layer_is_supported ())
+    {
+      GdkRectangle geom;
+      GtkRequisition req;
+
+      gdk_monitor_get_geometry (gtk_layer_get_monitor (window), &geom);
+      gtk_widget_get_preferred_size (GTK_WIDGET (window), &req, NULL);
+      gtk_layer_set_margin (window, GTK_LAYER_SHELL_EDGE_LEFT, x - geom.x);
+      gtk_layer_set_margin (window, GTK_LAYER_SHELL_EDGE_TOP, y - geom.y);
+    }
+  else
+#endif
+    gtk_window_move (window, x, y);
+
+  return FALSE;
+}
+
+
+
+/**
+ * xfce_panel_plugin_popup_window:
+ * @plugin: an #XfcePanelPlugin.
+ * @window: a #GtkWindow.
+ * @widget: (allow-none): the #GtkWidget to align @window with or %NULL to use
+ * @plugin as @widget.
+ *
+ * Pops up @window at @widget if @widget is non-%NULL, otherwise pops up @window
+ * at @plugin. The user should not have to set any property of @window: this
+ * function takes care of setting the necessary properties to make @window appear
+ * as a menu widget.
+ *
+ * This function tries to produce for a #GtkWindow a behavior similar to that
+ * produced by xfce_panel_plugin_popup_menu() for a #GtkMenu. In particular,
+ * clicking outside the window or pressing Esc should hide it, and the function
+ * takes care to lock panel autohide when the window is shown.
+ *
+ * However, it may be that, especially on Wayland and depending on the compositor
+ * used, hiding the window works more or less well. Also, @window positioning at
+ * @widget only works on Wayland if the compositor supports the layer-shell
+ * protocol, on which many of the panel features also depend.
+ *
+ * See also: xfce_panel_plugin_popup_menu() and xfce_panel_plugin_position_widget().
+ *
+ * Since: 4.19.0
+ **/
+void
+xfce_panel_plugin_popup_window (XfcePanelPlugin *plugin,
+                                GtkWindow *window,
+                                GtkWidget *widget)
+{
+  gboolean grabbed;
+
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+  panel_return_if_fail (GTK_IS_WINDOW (window));
+  panel_return_if_fail (widget == NULL || GTK_IS_WIDGET (widget));
+
+  if (gtk_widget_get_visible (GTK_WIDGET (window)))
+    return;
+
+  gtk_window_set_type_hint (window, GDK_WINDOW_TYPE_HINT_UTILITY);
+  gtk_window_set_decorated (window, FALSE);
+  gtk_window_set_resizable (window, FALSE);
+  gtk_window_set_skip_taskbar_hint (window, TRUE);
+  gtk_window_set_skip_pager_hint (window, TRUE);
+  gtk_window_set_keep_above (window, TRUE);
+  gtk_window_stick (window);
+
+#ifdef HAVE_GTK_LAYER_SHELL
+  if (gtk_layer_is_supported ())
+    {
+      GdkMonitor *monitor;
+
+      if (! gtk_layer_is_layer_window (window))
+        gtk_layer_init_for_window (window);
+
+      monitor = gdk_display_get_monitor_at_window (gdk_display_get_default (),
+                                                   gtk_widget_get_window (GTK_WIDGET (plugin)));
+      gtk_layer_set_monitor (window, monitor);
+      gtk_layer_set_exclusive_zone (window, -1);
+      gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+      gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
+      gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+      gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
+
+      /* this ensures, if the compositor implements it correctly, that at least the Esc key will
+       * hide the window, because the grab below does not always work correctly, even when it
+       * claims to have succeeded (especially for external plugins) */
+      gtk_layer_set_keyboard_mode (GTK_WINDOW (window), GTK_LAYER_SHELL_KEYBOARD_MODE_EXCLUSIVE);
+
+      /* still useful, even in exlusive mode above, for example during an Alt-TAB */
+      g_signal_connect (window, "notify::has-toplevel-focus",
+                        G_CALLBACK (xfce_panel_plugin_popup_window_has_toplevel_focus), plugin);
+    }
+#endif
+
+  g_signal_connect (window, "hide",
+                    G_CALLBACK (xfce_panel_plugin_popup_window_hide), plugin);
+  g_signal_connect (window, "button-press-event",
+                    G_CALLBACK (xfce_panel_plugin_popup_window_button_press_event), plugin);
+  g_signal_connect (window, "key-press-event",
+                    G_CALLBACK (xfce_panel_plugin_popup_window_key_press_event), plugin);
+
+  /* since we request a panel lock, queue a window repositioning in case the panel is hidden */
+  xfce_panel_plugin_block_autohide (plugin, TRUE);
+  g_object_set_data (G_OBJECT (plugin), "window-reposition-window", window);
+  g_object_set_data (G_OBJECT (plugin), "window-reposition-widget", widget);
+  xfce_panel_plugin_popup_window_reposition (plugin);
+  g_idle_add (xfce_panel_plugin_popup_window_reposition, plugin);
+
+  gtk_widget_show (GTK_WIDGET (window));
+
+  /* this little hack is required at least on X11 */
+  for (gint i = 0; i < G_USEC_PER_SEC / 10000 / 4; i++)
+    {
+      grabbed = gdk_seat_grab (gdk_display_get_default_seat (gdk_display_get_default ()),
+                               gtk_widget_get_window (GTK_WIDGET (window)),
+                               GDK_SEAT_CAPABILITY_ALL, TRUE,
+                               NULL, NULL, NULL, NULL) == GDK_GRAB_SUCCESS;
+      g_object_set_data (G_OBJECT (window), "seat-grabbed", GINT_TO_POINTER (grabbed));
+      if (grabbed)
+        break;
+      g_usleep (10000);
+    }
 }
 
 

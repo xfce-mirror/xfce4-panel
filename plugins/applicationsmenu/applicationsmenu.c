@@ -111,7 +111,7 @@ static gboolean  applications_menu_plugin_remote_event         (XfcePanelPlugin 
 static gboolean  applications_menu_plugin_menu                 (GtkWidget              *button,
                                                                 GdkEventButton         *event,
                                                                 ApplicationsMenuPlugin *plugin);
-static void      applications_menu_plugin_menu_selection_done  (GtkMenuShell           *menu,
+static void      applications_menu_plugin_menu_hide            (GtkWidget              *menu,
                                                                 ApplicationsMenuPlugin *plugin);
 static void      applications_menu_plugin_set_garcon_menu      (ApplicationsMenuPlugin *plugin);
 static void      applications_menu_button_theme_changed        (ApplicationsMenuPlugin *plugin);
@@ -247,11 +247,9 @@ applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
   plugin->show_button_title = TRUE;
   gtk_widget_show (plugin->label);
 
-  /* prepare the menu: some situations, such as cancelling a dnd, require connecting to
-   * "selection-done" instead of "deactivate" */
   plugin->menu = garcon_gtk_menu_new (NULL);
-  g_signal_connect (G_OBJECT (plugin->menu), "selection-done",
-      G_CALLBACK (applications_menu_plugin_menu_selection_done), plugin);
+  g_signal_connect (G_OBJECT (plugin->menu), "hide",
+      G_CALLBACK (applications_menu_plugin_menu_hide), plugin);
 
   plugin->style_updated_id = g_signal_connect_swapped (G_OBJECT (plugin->button), "style-updated",
                                                        G_CALLBACK (applications_menu_button_theme_changed), plugin);
@@ -789,8 +787,8 @@ applications_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
 
 
 static void
-applications_menu_plugin_menu_selection_done (GtkMenuShell           *menu,
-                                              ApplicationsMenuPlugin *plugin)
+applications_menu_plugin_menu_hide (GtkWidget              *menu,
+                                    ApplicationsMenuPlugin *plugin)
 {
   panel_return_if_fail (plugin->button == NULL || GTK_IS_TOGGLE_BUTTON (plugin->button));
   panel_return_if_fail (GTK_IS_MENU (menu));

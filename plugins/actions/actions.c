@@ -1430,8 +1430,8 @@ actions_plugin_default_array (void)
 
 
 static void
-actions_plugin_menu_deactivate (GtkWidget     *menu,
-                                ActionsPlugin *plugin)
+actions_plugin_menu_hide (GtkWidget     *menu,
+                          ActionsPlugin *plugin)
 {
   GtkWidget *button;
 
@@ -1467,8 +1467,8 @@ actions_plugin_menu (GtkWidget     *button,
   if (plugin->menu == NULL)
     {
       plugin->menu = gtk_menu_new ();
-      g_signal_connect (G_OBJECT (plugin->menu), "deactivate",
-          G_CALLBACK (actions_plugin_menu_deactivate), plugin);
+      g_signal_connect (G_OBJECT (plugin->menu), "hide",
+          G_CALLBACK (actions_plugin_menu_hide), plugin);
       g_object_add_weak_pointer (G_OBJECT (plugin->menu), (gpointer) &plugin->menu);
 
       allowed_types = actions_plugin_actions_allowed ();
