@@ -33,6 +33,7 @@
 #include <libxfce4panel/libxfce4panel.h>
 #include <common/panel-private.h>
 #include <common/panel-debug.h>
+#include <common/panel-utils.h>
 
 #ifdef GDK_WINDOWING_X11
 #include <X11/Xlib.h>
@@ -1541,7 +1542,7 @@ xfce_tasklist_arrow_button_menu_destroy (GtkWidget    *menu,
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (tasklist->arrow_button));
   panel_return_if_fail (GTK_IS_WIDGET (menu));
 
-  gtk_widget_destroy (menu);
+  panel_utils_destroy_later (menu);
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (tasklist->arrow_button), FALSE);
 
@@ -1569,7 +1570,7 @@ xfce_tasklist_arrow_button_toggled (GtkWidget    *button,
   if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
     {
       menu = gtk_menu_new ();
-      g_signal_connect (G_OBJECT (menu), "selection-done",
+      g_signal_connect (G_OBJECT (menu), "deactivate",
           G_CALLBACK (xfce_tasklist_arrow_button_menu_destroy), tasklist);
 
       for (li = tasklist->windows; li != NULL; li = li->next)
@@ -3138,7 +3139,7 @@ xfce_tasklist_button_menu_destroy (GtkWidget         *menu,
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (child->button));
   panel_return_if_fail (GTK_IS_WIDGET (menu));
 
-  gtk_widget_destroy (menu);
+  panel_utils_destroy_later (menu);
   if (! wnck_window_is_active (child->window))
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (child->button), FALSE);
 }
@@ -3175,7 +3176,7 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
     {
       menu = wnck_action_menu_new (child->window);
       xfce_tasklist_button_add_launch_new_instance_item (child, menu, FALSE);
-      g_signal_connect (G_OBJECT (menu), "selection-done",
+      g_signal_connect (G_OBJECT (menu), "deactivate",
           G_CALLBACK (xfce_tasklist_button_menu_destroy), child);
 
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
@@ -3916,7 +3917,7 @@ xfce_tasklist_group_button_menu_destroy (GtkWidget         *menu,
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (group_child->button));
   panel_return_if_fail (GTK_IS_WIDGET (menu));
 
-  gtk_widget_destroy (menu);
+  panel_utils_destroy_later (menu);
 
   /* restore button state if inactive */
   for (lp = group_child->windows; lp != NULL; lp = lp->next)
@@ -4087,7 +4088,7 @@ xfce_tasklist_group_button_button_press_event (GtkWidget         *button,
   if (event->button == 1 || event->button == 3)
     {
       menu = xfce_tasklist_group_button_menu (group_child, event->button == 3);
-      g_signal_connect (G_OBJECT (menu), "selection-done",
+      g_signal_connect (G_OBJECT (menu), "deactivate",
           G_CALLBACK (xfce_tasklist_group_button_menu_destroy), group_child);
 
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
