@@ -948,13 +948,13 @@ window_menu_plugin_menu_workspace_item_new (WnckWorkspace        *workspace,
 
 
 static void
-window_menu_plugin_menu_actions_selection_done (GtkWidget    *action_menu,
-                                                GtkMenuShell *menu)
+window_menu_plugin_menu_actions_deactivate (GtkWidget    *action_menu,
+                                            GtkMenuShell *menu)
 {
   panel_return_if_fail (GTK_IS_MENU_SHELL (menu));
   panel_return_if_fail (WNCK_IS_ACTION_MENU (action_menu));
 
-  gtk_widget_destroy (action_menu);
+  panel_utils_destroy_later (action_menu);
 
   /* deactive the window list menu */
   gtk_menu_shell_cancel (menu);
@@ -996,8 +996,8 @@ window_menu_plugin_menu_window_item_activate (GtkWidget        *mi,
     {
       /* popup the window action menu */
       menu = wnck_action_menu_new (window);
-      g_signal_connect (G_OBJECT (menu), "selection-done",
-          G_CALLBACK (window_menu_plugin_menu_actions_selection_done),
+      g_signal_connect (G_OBJECT (menu), "deactivate",
+          G_CALLBACK (window_menu_plugin_menu_actions_deactivate),
           gtk_widget_get_parent (mi));
       xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (menu),
                                     NULL, (GdkEvent *) event);
