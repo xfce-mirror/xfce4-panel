@@ -3165,7 +3165,7 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
       return TRUE;
     }
 
-  if (event->button == 3 && !GTK_IS_MENU_ITEM (button))
+  if (event->button == 3)
     {
       menu = wnck_action_menu_new (child->window);
       xfce_tasklist_button_add_launch_new_instance_item (child, menu, FALSE);
@@ -3177,11 +3177,6 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
 
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
       return TRUE;
-    }
-  else if (event->button == 3 && GTK_IS_MENU_ITEM (button))
-    {
-      xfce_tasklist_button_activate (child, event->time);
-      return FALSE;
     }
 
   return FALSE;
@@ -3208,7 +3203,7 @@ xfce_tasklist_button_button_release_event (GtkWidget         *button,
       && event->x >= 0 && event->x < allocation.width
       && event->y >= 0 && event->y < allocation.height)
     {
-      if (event->button == 1)
+      if (event->button == 1 && ! GTK_IS_MENU_ITEM (button))
         {
           /* press the button */
           return ! xfce_tasklist_button_activate (child, event->time);
@@ -3368,8 +3363,6 @@ xfce_tasklist_button_proxy_menu_item (XfceTasklistChild *child,
           xfce_tasklist_button_enter_notify_event_disconnected, 0);
     }
 
-  g_signal_connect (G_OBJECT (mi), "button-press-event",
-      G_CALLBACK (xfce_tasklist_button_button_press_event), child);
   g_signal_connect (G_OBJECT (mi), "activate",
       G_CALLBACK (xfce_tasklist_button_proxy_menu_item_activate), child);
   g_signal_connect (G_OBJECT (mi), "button-release-event",
