@@ -111,7 +111,7 @@ static gboolean  applications_menu_plugin_remote_event         (XfcePanelPlugin 
 static gboolean  applications_menu_plugin_menu                 (GtkWidget              *button,
                                                                 GdkEventButton         *event,
                                                                 ApplicationsMenuPlugin *plugin);
-static void      applications_menu_plugin_menu_selection_done  (GtkMenuShell           *menu,
+static void      applications_menu_plugin_menu_popdown         (GtkMenuShell           *menu,
                                                                 ApplicationsMenuPlugin *plugin);
 static void      applications_menu_plugin_set_garcon_menu      (ApplicationsMenuPlugin *plugin);
 static void      applications_menu_button_theme_changed        (ApplicationsMenuPlugin *plugin);
@@ -247,11 +247,8 @@ applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
   plugin->show_button_title = TRUE;
   gtk_widget_show (plugin->label);
 
-  /* prepare the menu: some situations, such as cancelling a dnd, require connecting to
-   * "selection-done" instead of "deactivate" */
+  /* prepare the menu */
   plugin->menu = garcon_gtk_menu_new (NULL);
-  g_signal_connect (G_OBJECT (plugin->menu), "selection-done",
-      G_CALLBACK (applications_menu_plugin_menu_selection_done), plugin);
 
   plugin->style_updated_id = g_signal_connect_swapped (G_OBJECT (plugin->button), "style-updated",
                                                        G_CALLBACK (applications_menu_button_theme_changed), plugin);
@@ -789,11 +786,13 @@ applications_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
 
 
 static void
-applications_menu_plugin_menu_selection_done (GtkMenuShell           *menu,
-                                              ApplicationsMenuPlugin *plugin)
+applications_menu_plugin_menu_popdown (GtkMenuShell           *menu,
+                                       ApplicationsMenuPlugin *plugin)
 {
   panel_return_if_fail (plugin->button == NULL || GTK_IS_TOGGLE_BUTTON (plugin->button));
   panel_return_if_fail (GTK_IS_MENU (menu));
+
+  g_signal_handlers_disconnect_by_func (menu, applications_menu_plugin_menu_popdown, plugin);
 
   /* button is NULL when we popup the menu under the cursor position */
   if (plugin->button != NULL)
@@ -867,6 +866,13 @@ applications_menu_plugin_menu (GtkWidget              *button,
       event->type = GDK_BUTTON_PRESS;
       event->window = gdk_get_default_root_window ();
     }
+
+  /* when cancelling a dnd only "selection-done" is emitted, whereas "deactivate" is more
+   * generic and it is the only signal emitted on Wayland when clicking outside the menu */
+  g_signal_connect (G_OBJECT (plugin->menu), "deactivate",
+      G_CALLBACK (applications_menu_plugin_menu_popdown), plugin);
+  g_signal_connect (G_OBJECT (plugin->menu), "selection-done",
+      G_CALLBACK (applications_menu_plugin_menu_popdown), plugin);
 
   xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (plugin->menu),
                                 button, (GdkEvent *) event);
