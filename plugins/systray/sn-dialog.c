@@ -30,6 +30,7 @@
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
 
+#include <common/panel-private.h>
 #include "sn-dialog.h"
 #include "sn-dialog-ui.h"
 
@@ -711,6 +712,7 @@ sn_dialog_build (SnDialog *dialog)
     return FALSE;
 
   dialog->builder = gtk_builder_new ();
+  gtk_builder_set_translation_domain (dialog->builder, GETTEXT_PACKAGE);
 
   /* load the builder data into the object */
   if (gtk_builder_add_from_string (dialog->builder, sn_dialog_ui,
@@ -848,6 +850,14 @@ sn_dialog_build (SnDialog *dialog)
       object = gtk_builder_get_object (dialog->builder, "items_stack_switcher");
       gtk_widget_hide (GTK_WIDGET (object));
 #endif
+
+      if (! GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+        {
+          object = gtk_builder_get_object (dialog->builder, "systray_frame");
+          gtk_widget_hide (GTK_WIDGET (object));
+          object = gtk_builder_get_object (dialog->builder, "items_stack_switcher");
+          gtk_widget_hide (GTK_WIDGET (object));
+        }
 
       g_object_weak_ref (G_OBJECT (dialog->dialog), sn_dialog_dialog_unref, dialog);
       return TRUE;

@@ -25,6 +25,11 @@
 #endif
 
 #include <gtk/gtk.h>
+#ifdef HAVE_GTK_LAYER_SHELL
+#include <gtk-layer-shell/gtk-layer-shell.h>
+#else
+#define gtk_layer_is_supported() FALSE
+#endif
 
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
@@ -781,23 +786,6 @@ panel_base_window_set_plugin_background_image (GtkWidget *widget,
 
 
 void
-panel_base_window_move_resize (PanelBaseWindow *window,
-                               gint             x,
-                               gint             y,
-                               gint             width,
-                               gint             height)
-{
-  panel_return_if_fail (PANEL_IS_BASE_WINDOW (window));
-
-  if (width > 0 && height > 0)
-    gtk_window_resize (GTK_WINDOW (window), width, height);
-
-  gtk_window_move (GTK_WINDOW (window), x, y);
-}
-
-
-
-void
 panel_base_window_set_borders (PanelBaseWindow *window,
                                PanelBorders     borders)
 {
@@ -854,6 +842,10 @@ panel_base_window_opacity_enter (PanelBaseWindow *window,
     }
   else
     {
+      /* needs a recheck when timeout is over on Wayland, see panel_window_pointer_is_outside() */
+      if (gtk_layer_is_supported () && ! panel_window_pointer_is_outside (PANEL_WINDOW (window)))
+        return;
+
       gtk_widget_set_opacity (GTK_WIDGET (window), window->leave_opacity);
       panel_base_window_set_plugin_data (window, panel_base_window_set_plugin_leave_opacity);
     }
