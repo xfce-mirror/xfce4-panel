@@ -35,13 +35,21 @@ typedef struct _PanelModule       PanelModule;
 #define PANEL_IS_MODULE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_MODULE))
 #define PANEL_MODULE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_MODULE, PanelModuleClass))
 
+typedef enum
+{
+  PANEL_MODULE_RUN_MODE_NONE,     /* unset */
+  PANEL_MODULE_RUN_MODE_INTERNAL, /* plugin library will be loaded in the panel */
+  PANEL_MODULE_RUN_MODE_EXTERNAL  /* plugin library will be loaded in the wrapper
+                                   * with communication through PanelPluginExternal */
+} PanelModuleRunMode;
+
 
 
 GType        panel_module_get_type                 (void) G_GNUC_CONST;
 
 PanelModule *panel_module_new_from_desktop_file    (const gchar             *filename,
                                                     const gchar             *name,
-                                                    gboolean                 force_external) G_GNUC_MALLOC;
+                                                    PanelModuleRunMode       forced_mode) G_GNUC_MALLOC;
 
 GtkWidget   *panel_module_new_plugin               (PanelModule             *module,
                                                     GdkScreen               *screen,
