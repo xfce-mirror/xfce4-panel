@@ -24,6 +24,7 @@
 #ifdef GDK_WINDOWING_WAYLAND
 
 #include <gtk-layer-shell/gtk-layer-shell.h>
+#include <libxfce4windowing/libxfce4windowing.h>
 
 #include <common/panel-private.h>
 #include <common/panel-dbus.h>
@@ -71,6 +72,7 @@ struct _WrapperPlugWayland
   WrapperExternalExported *skeleton;
   guint watcher_id;
   gboolean pointer_is_outside;
+  XfwScreen *xfw_screen;
 };
 
 
@@ -105,6 +107,48 @@ wrapper_plug_wayland_class_init (WrapperPlugWaylandClass *klass)
 
 
 static void
+wrapper_plug_wayland_window_state_changed (XfwWindow *window,
+                                           XfwWindowState changed_mask,
+                                           XfwWindowState new_state,
+                                           WrapperPlugWayland *plug)
+{
+  panel_return_if_fail (XFW_IS_WINDOW (window));
+  panel_return_if_fail (WRAPPER_IS_PLUG_WAYLAND (plug));
+
+  if (! (changed_mask & XFW_WINDOW_STATE_FULLSCREEN))
+    return;
+
+  if (xfw_window_is_fullscreen (window))
+    gtk_layer_set_layer (GTK_WINDOW (plug), GTK_LAYER_SHELL_LAYER_TOP);
+  else
+    gtk_layer_set_layer (GTK_WINDOW (plug), GTK_LAYER_SHELL_LAYER_OVERLAY);
+
+  /* to ensure that the layer change is taken into account */
+  gtk_widget_hide (GTK_WIDGET (plug));
+  gtk_widget_show (GTK_WIDGET (plug));
+}
+
+static void
+wrapper_plug_wayland_active_window_changed (XfwScreen *screen,
+                                            XfwWindow *previous_window,
+                                            WrapperPlugWayland *plug)
+{
+  XfwWindow *window;
+
+  panel_return_if_fail (XFW_IS_SCREEN (screen));
+  panel_return_if_fail (previous_window == NULL || XFW_IS_WINDOW (previous_window));
+  panel_return_if_fail (WRAPPER_IS_PLUG_WAYLAND (plug));
+
+  if (previous_window != NULL)
+    g_signal_handlers_disconnect_by_func (previous_window, wrapper_plug_wayland_window_state_changed, plug);
+
+  window = xfw_screen_get_active_window (screen);
+  if (window != NULL)
+    g_signal_connect_object (window, "state-changed",
+                             G_CALLBACK (wrapper_plug_wayland_window_state_changed), plug, 0);
+}
+
+static void
 wrapper_plug_wayland_init (WrapperPlugWayland *plug)
 {
   GtkStyleContext *context;
@@ -135,6 +179,11 @@ wrapper_plug_wayland_init (WrapperPlugWayland *plug)
 
   /* to catch some pointer enter events that are sometimes not received */
   gtk_widget_add_events (GTK_WIDGET (plug), GDK_POINTER_MOTION_MASK);
+
+  plug->xfw_screen = xfw_screen_get_default ();
+  wrapper_plug_wayland_active_window_changed (plug->xfw_screen, NULL, plug);
+  g_signal_connect_object (plug->xfw_screen, "active-window-changed",
+                           G_CALLBACK (wrapper_plug_wayland_active_window_changed), plug, 0);
 }
 
 
@@ -148,6 +197,7 @@ wrapper_plug_wayland_finalize (GObject *object)
     g_object_unref (plug->skeleton);
   if (plug->watcher_id != 0)
     g_bus_unwatch_name (plug->watcher_id);
+  g_object_unref (plug->xfw_screen);
 
   G_OBJECT_CLASS (wrapper_plug_wayland_parent_class)->finalize (object);
 }
