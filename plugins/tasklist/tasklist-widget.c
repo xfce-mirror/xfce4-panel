@@ -232,6 +232,9 @@ struct _XfceTasklistChild
   GtkWidget              *icon;
   GtkWidget              *label;
 
+  /* we use a surface for icon rendering so keep original pixbuf around */
+  GdkPixbuf              *pixbuf;
+
   /* drag motion window activate */
   guint                   motion_timeout_id;
   guint                   motion_timestamp;
@@ -1482,6 +1485,9 @@ xfce_tasklist_remove (GtkContainer *container,
           if (child->motion_timeout_id != 0)
             g_source_remove (child->motion_timeout_id);
 
+          if (child->pixbuf != NULL)
+            g_object_unref (child->pixbuf);
+
           g_slice_free (XfceTasklistChild, child);
 
           /* queue a resize if needed */
@@ -2277,6 +2283,7 @@ xfce_tasklist_child_new (XfceTasklist *tasklist)
                                 tasklist->minimized_icon_lucency % 100);
   gtk_css_provider_load_from_data (provider, css_string, -1, NULL);
   child->icon = gtk_image_new ();
+  child->pixbuf = NULL;
   gtk_style_context_add_provider (gtk_widget_get_style_context (child->icon),
                                   GTK_STYLE_PROVIDER (provider),
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
@@ -2696,7 +2703,7 @@ xfce_tasklist_button_icon_changed (WnckWindow        *window,
                                    XfceTasklistChild *child)
 {
   GtkStyleContext *context;
-  GdkPixbuf       *pixbuf, *old_pixbuf;
+  GdkPixbuf       *pixbuf;
   cairo_surface_t *surface;
   XfceTasklist    *tasklist = child->tasklist;
   gint             icon_size, scale_factor, old_width = -1, old_height = -1;
@@ -2719,6 +2726,7 @@ xfce_tasklist_button_icon_changed (WnckWindow        *window,
   /* leave when there is no valid pixbuf */
   if (G_UNLIKELY (pixbuf == NULL))
     {
+      g_clear_object (&child->pixbuf);
       gtk_image_clear (GTK_IMAGE (child->icon));
       force_box_layout_update (child);
       return;
@@ -2738,21 +2746,20 @@ xfce_tasklist_button_icon_changed (WnckWindow        *window,
         gtk_style_context_remove_class (context, "minimized");
     }
 
-  old_pixbuf = gtk_image_get_pixbuf (GTK_IMAGE (child->icon));
-  if (old_pixbuf)
+  if (child->pixbuf != NULL)
     {
-       old_width = gdk_pixbuf_get_width (old_pixbuf);
-       old_height = gdk_pixbuf_get_height (old_pixbuf);
+       old_width = gdk_pixbuf_get_width (child->pixbuf);
+       old_height = gdk_pixbuf_get_height (child->pixbuf);
+       g_object_unref (child->pixbuf);
     }
 
+  child->pixbuf = pixbuf;
   surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
   gtk_image_set_from_surface (GTK_IMAGE (child->icon), surface);
   cairo_surface_destroy (surface);
 
   if (old_width != gdk_pixbuf_get_width (pixbuf) || old_height != gdk_pixbuf_get_height (pixbuf))
     force_box_layout_update (child);
-
-  g_object_unref (pixbuf);
 }
 
 
@@ -3354,8 +3361,8 @@ xfce_tasklist_button_proxy_menu_item (XfceTasklistChild *child,
     }
 
   gtk_image_set_pixel_size (GTK_IMAGE (image), GTK_ICON_SIZE_MENU);
-  g_object_bind_property (G_OBJECT (child->icon), "pixbuf",
-                          G_OBJECT (image), "pixbuf",
+  g_object_bind_property (G_OBJECT (child->icon), "surface",
+                          G_OBJECT (image), "surface",
                           G_BINDING_SYNC_CREATE);
   gtk_widget_show (image);
 
@@ -3945,7 +3952,6 @@ xfce_tasklist_group_button_button_draw (GtkWidget         *widget,
       GdkRGBA fg, bg;
       gdouble radius, x, y;
       gint icon_size;
-      GdkPixbuf *icon_pixbuf;
       GdkRectangle icon_pixbuf_rect = { 0 };
 
       gtk_widget_get_allocation (GTK_WIDGET (widget), &allocation);
@@ -3971,11 +3977,10 @@ xfce_tasklist_group_button_button_draw (GtkWidget         *widget,
           pango_font_description_free (desc);
         }
 
-      icon_pixbuf = gtk_image_get_pixbuf (GTK_IMAGE (group_child->icon));
-      if (icon_pixbuf != NULL)
+      if (group_child->pixbuf != NULL)
         {
-          icon_pixbuf_rect.width = gdk_pixbuf_get_width (icon_pixbuf);
-          icon_pixbuf_rect.height = gdk_pixbuf_get_height (icon_pixbuf);
+          icon_pixbuf_rect.width = gdk_pixbuf_get_width (group_child->pixbuf);
+          icon_pixbuf_rect.height = gdk_pixbuf_get_height (group_child->pixbuf);
         }
 
       pango_layout_get_pixel_extents (n_windows_layout, &ink_extent, &log_extent);
@@ -4246,16 +4251,16 @@ xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
 
   if (G_LIKELY (pixbuf != NULL))
     {
-      GdkPixbuf *old_pixbuf;
       gint old_width = -1, old_height = -1;
 
-      old_pixbuf = gtk_image_get_pixbuf (GTK_IMAGE (group_child->icon));
-      if (old_pixbuf)
+      if (group_child->pixbuf != NULL)
         {
-          old_width = gdk_pixbuf_get_width (old_pixbuf);
-          old_height = gdk_pixbuf_get_height (old_pixbuf);
+          old_width = gdk_pixbuf_get_width (group_child->pixbuf);
+          old_height = gdk_pixbuf_get_height (group_child->pixbuf);
+          g_object_unref (group_child->pixbuf);
         }
 
+      group_child->pixbuf = g_object_ref (pixbuf);
       surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
       gtk_image_set_from_surface (GTK_IMAGE (group_child->icon), surface);
       cairo_surface_destroy (surface);
@@ -4265,6 +4270,7 @@ xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
     }
   else
     {
+      g_clear_object (&group_child->pixbuf);
       gtk_image_clear (GTK_IMAGE (group_child->icon));
       force_box_layout_update (group_child);
     }
