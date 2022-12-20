@@ -1,0 +1,19 @@
+<node>
+  <interface name="org.xfce.Panel.External">
+    <annotation name="org.gtk.GDBus.C.Name" value="Exported" />
+
+    <signal name="SetRequisition">
+      <arg name="requisition" type="(ii)"/>
+    </signal>
+
+    <signal name="Embedded"></signal>
+
+    <signal name="PointerEnter"></signal>
+    <signal name="PointerLeave"></signal>
+
+    <method name="PointerIsOutside">
+      <arg name="is_outside" type="b" direction="out"/>
+    </method>
+
+  </interface>
+</node>
