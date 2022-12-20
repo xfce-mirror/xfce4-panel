@@ -47,4 +47,6 @@ void        panel_utils_set_atk_info   (GtkWidget        *widget,
 
 void        panel_utils_destroy_later  (GtkWidget        *widget);
 
+void        panel_utils_wl_surface_commit (GtkWidget        *widget);
+
 #endif /* !__PANEL_BUILDER_H__ */
