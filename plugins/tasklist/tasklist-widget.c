@@ -3979,8 +3979,9 @@ xfce_tasklist_group_button_button_draw (GtkWidget         *widget,
 
       if (group_child->pixbuf != NULL)
         {
-          icon_pixbuf_rect.width = gdk_pixbuf_get_width (group_child->pixbuf);
-          icon_pixbuf_rect.height = gdk_pixbuf_get_height (group_child->pixbuf);
+          gint scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (group_child->tasklist));
+          icon_pixbuf_rect.width = gdk_pixbuf_get_width (group_child->pixbuf) / scale_factor;
+          icon_pixbuf_rect.height = gdk_pixbuf_get_height (group_child->pixbuf) / scale_factor;
         }
 
       pango_layout_get_pixel_extents (n_windows_layout, &ink_extent, &log_extent);
