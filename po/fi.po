@@ -6,15 +6,16 @@
 # Translators:
 # Xfce Bot <transifex@xfce.org>, 2021
 # Ammuu5, 2021
+# Jiri Grönroos <jiri.gronroos@iki.fi>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-07 00:47+0100\n"
+"POT-Creation-Date: 2022-11-28 15:00+0100\n"
 "PO-Revision-Date: 2020-12-28 17:37+0000\n"
-"Last-Translator: Ammuu5, 2021\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>, 2022\n"
 "Language-Team: Finnish (https://www.transifex.com/xfce/teams/16840/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,7 +40,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr ""
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2964
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2979
 msgid "Panel"
 msgstr "Paneeli"
 
@@ -48,19 +49,19 @@ msgid "Customize the panel"
 msgstr "Muokkaa paneelia"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1107
+#: ../libxfce4panel/xfce-panel-plugin.c:1078
 #: ../panel/panel-preferences-dialog.c:1321
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Haluatko varmasti poistaa kohteen ”%s”?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1112
+#: ../libxfce4panel/xfce-panel-plugin.c:1083
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr ""
 "Kohteen poistaminen paneelista tarkoittaa myös sen asetusten menettämistä."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1113 ../panel/panel-dialogs.c:163
+#: ../libxfce4panel/xfce-panel-plugin.c:1084 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1326
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
 #: ../plugins/directorymenu/directorymenu.c:473
@@ -68,9 +69,9 @@ msgstr ""
 msgid "_Cancel"
 msgstr "_Peru"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1114
-#: ../libxfce4panel/xfce-panel-plugin.c:1289
-#: ../panel/panel-plugin-external.c:443
+#: ../libxfce4panel/xfce-panel-plugin.c:1085
+#: ../libxfce4panel/xfce-panel-plugin.c:1260
+#: ../panel/panel-plugin-external.c:448
 #: ../panel/panel-preferences-dialog.c:961
 #: ../panel/panel-preferences-dialog.c:1327
 #: ../panel/panel-preferences-dialog.glade.h:59
@@ -78,36 +79,36 @@ msgstr "_Peru"
 msgid "_Remove"
 msgstr "_Poista"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1239
+#: ../libxfce4panel/xfce-panel-plugin.c:1210
 msgid "_Properties"
 msgstr "_Ominaisuudet"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1254 ../panel/panel-window.c:3052
+#: ../libxfce4panel/xfce-panel-plugin.c:1225 ../panel/panel-window.c:3070
 msgid "_About"
 msgstr "_Tietoja"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1269
+#: ../libxfce4panel/xfce-panel-plugin.c:1240
 msgid "_Move"
 msgstr "_Siirrä"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1310
+#: ../libxfce4panel/xfce-panel-plugin.c:1281
 msgid "Pane_l"
 msgstr "Panee_li"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1319 ../panel/panel-window.c:2977
+#: ../libxfce4panel/xfce-panel-plugin.c:1290 ../panel/panel-window.c:2992
 msgid "Add _New Items..."
 msgstr "Lisää _uusia kohteita…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1334 ../panel/panel-window.c:2992
+#: ../libxfce4panel/xfce-panel-plugin.c:1305 ../panel/panel-window.c:3007
 msgid "Panel Pr_eferences..."
 msgstr "Paneelin a_setukset…"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1355 ../panel/panel-window.c:3024
+#: ../libxfce4panel/xfce-panel-plugin.c:1326 ../panel/panel-window.c:3039
 msgid "Log _Out"
 msgstr "Kirjaudu ul_os"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1375 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3043
+#: ../libxfce4panel/xfce-panel-plugin.c:1346 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3059
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -120,7 +121,7 @@ msgstr "Kirjaudu ul_os"
 msgid "_Help"
 msgstr "_Ohje"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1390
+#: ../libxfce4panel/xfce-panel-plugin.c:1361
 msgid "About"
 msgstr "Tietoja"
 
@@ -167,72 +168,73 @@ msgstr "Älä odota ikkunanhallintaa käynnistyksessä"
 msgid "Print version information and exit"
 msgstr "Näytä versiotiedot ja poistu"
 
-#: ../panel/main.c:207
+#: ../panel/main.c:208
 #, c-format
 msgid "Name %s lost on the message dbus, exiting."
 msgstr "Nimi %s menetettiin viestintärajapinnalla, poistutaan."
 
 #. parse context options
-#: ../panel/main.c:268
+#: ../panel/main.c:270
 msgid "[ARGUMENTS...]"
 msgstr "[VALITSIMET…]"
 
-#: ../panel/main.c:275
+#: ../panel/main.c:277
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Saat ohjeita komennolla ”%s --help”."
 
-#: ../panel/main.c:294
+#: ../panel/main.c:296
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce:n kehitystiimi. Kaikki oikeudet pidätetään."
 
-#: ../panel/main.c:295
+#: ../panel/main.c:297
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Ilmoita vioista osoitteeseen <%s>."
 
-#: ../panel/main.c:361
+#. quit without error if an instance is running
+#: ../panel/main.c:395
 msgid "There is already a running instance"
 msgstr "Ohjelma on jo käynnissä"
 
 #. spawn ourselfs again
-#: ../panel/main.c:404
+#: ../panel/main.c:403
 msgid "Restarting..."
 msgstr "Käynnistetään uudelleen…"
 
-#: ../panel/main.c:419
+#: ../panel/main.c:418
 msgid "Failed to show the preferences dialog"
 msgstr "Asetusikkunan näyttäminen epäonnistui"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:420
 msgid "Failed to show the add new items dialog"
 msgstr "”Lisää uusia kohteita” -ikkunan näyttäminen epäonnistui"
 
-#: ../panel/main.c:423
+#: ../panel/main.c:422
 msgid "Failed to save the panel configuration"
 msgstr "Paneelin asetusten tallentaminen epäonnistui"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:424
 msgid "Failed to add a plugin to the panel"
 msgstr "Liitännäisen lisääminen paneeliin epäonnistui"
 
-#: ../panel/main.c:427
+#: ../panel/main.c:426
 msgid "Failed to restart the panel"
 msgstr "Paneelin käynnistäminen uudelleen epäonnistui"
 
-#: ../panel/main.c:429
+#: ../panel/main.c:428
 msgid "Failed to quit the panel"
 msgstr "Paneelin sulkeminen epäonnistui"
 
-#: ../panel/main.c:431
+#: ../panel/main.c:430
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus-viestin lähettäminen epäonnistui"
 
-#: ../panel/main.c:441
+#: ../panel/main.c:440
 msgid "Execute"
 msgstr "Suorita"
 
-#: ../panel/main.c:442
+#: ../panel/main.c:441
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
@@ -241,20 +243,20 @@ msgstr ""
 "tallennat istunnon kirjautuessasi ulos, jotta paneeli käynnistetään "
 "automaattisesti seuraavan kerran kun kirjaudut sisään."
 
-#: ../panel/main.c:445 ../panel/main.c:459
+#: ../panel/main.c:444 ../panel/main.c:458
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Käynnissä olevaa instanssia kohteelle %s ei löytynyt"
 
-#: ../panel/panel-application.c:215
+#: ../panel/panel-application.c:217
 msgid "Failed to launch the migration application"
 msgstr "Tuomissovelluksen käynnistäminen epäonnistui"
 
-#: ../panel/panel-application.c:984
+#: ../panel/panel-application.c:998
 msgid "Create _Launcher"
 msgstr "Luo kä_ynnistin"
 
-#: ../panel/panel-application.c:985
+#: ../panel/panel-application.c:999
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
@@ -262,18 +264,18 @@ msgstr ""
 "Tämä luo uuden käynnistinliitännäisen paneeliin ja lisää pudoteut tiedostot "
 "valikkokohteina."
 
-#: ../panel/panel-application.c:987
+#: ../panel/panel-application.c:1001
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Luo uusi käynnistin %d työpöytäkuvaketiedostosta"
 msgstr[1] "Luo uusi käynnistin %d työpöytäkuvaketiedostosta"
 
-#: ../panel/panel-application.c:1727
+#: ../panel/panel-application.c:1741
 msgid "Quit"
 msgstr "Lopeta"
 
-#: ../panel/panel-application.c:1728
+#: ../panel/panel-application.c:1742
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -281,11 +283,11 @@ msgstr ""
 "Olet käynnistänyt X:n ilman ikkunointimanageria. Painaessasi \"Quit\" "
 "X-palvelin suljetaan."
 
-#: ../panel/panel-application.c:1729
+#: ../panel/panel-application.c:1743
 msgid "Are you sure you want to quit the panel?"
 msgstr "Haluatko varmasti sulkea paneelin?"
 
-#: ../panel/panel-application.c:1737
+#: ../panel/panel-application.c:1751
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Komennon ”%s” suorittaminen epäonnistui."
@@ -310,37 +312,37 @@ msgstr ""
 msgid "Unable to open the e-mail address"
 msgstr "Sähköpostiosoitteen avaaminen ei onnistu"
 
-#: ../panel/panel-dialogs.c:83
+#: ../panel/panel-dialogs.c:84
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Xfce-työpöytäympäristön paneeli"
 
-#: ../panel/panel-dialogs.c:87
+#: ../panel/panel-dialogs.c:88
 msgid "translator-credits"
 msgstr ""
 "Juhani Numminen <juhaninumminen0@gmail.com>\n"
 "Pasi Lallinaho <pasi@shimmerproject.org>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:14
+#: ../panel/panel-dialogs.c:162 ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Add New Item"
 msgstr "Lisää uusi kohde"
 
-#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:201
+#: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:201
 #: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "_Lisää"
 
-#: ../panel/panel-dialogs.c:175
+#: ../panel/panel-dialogs.c:176
 msgid "Please choose a panel for the new plugin:"
 msgstr "Valitse paneeli uudelle liitännäiselle:"
 
-#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:896
+#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:896
 #, c-format
 msgid "Panel %d"
 msgstr "Paneeli %d"
 
-#: ../panel/panel-dialogs.c:235
+#: ../panel/panel-dialogs.c:236
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
@@ -348,7 +350,7 @@ msgstr ""
 "Koska paneelia ajetaan kioskitilassa, et voi tehdä muutoksia paneeliin "
 "normaalina käyttäjänä."
 
-#: ../panel/panel-dialogs.c:237
+#: ../panel/panel-dialogs.c:238
 msgid "Modifying the panel is not allowed"
 msgstr "Paneelin muokkaamista ei ole sallittu"
 
@@ -380,14 +382,14 @@ msgstr "_Etsi:"
 msgid "Enter search phrase here"
 msgstr "Kirjoita hakusana tähän"
 
-#: ../panel/panel-plugin-external.c:436
+#: ../panel/panel-plugin-external.c:441
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr ""
 "Liitännäinen ”%s” sulkeutui odottamattomasti, haluatko käynnistää sen "
 "uudelleen?"
 
-#: ../panel/panel-plugin-external.c:438
+#: ../panel/panel-plugin-external.c:443
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -398,7 +400,7 @@ msgstr ""
 " aikana. Jos painat Suorita, paneeli yrittää käynnistää liitännäisen "
 "uudelleen. Muussa tapauksessa se poistetaan lopullisesti paneelista."
 
-#: ../panel/panel-plugin-external.c:442
+#: ../panel/panel-plugin-external.c:447
 msgid "_Execute"
 msgstr "_Suorita"
 
@@ -732,7 +734,7 @@ msgstr "Kokenut"
 msgid "Expert"
 msgstr "Asiantuntija"
 
-#: ../panel/panel-window.c:3009
+#: ../panel/panel-window.c:3024
 msgid "_Lock Panel"
 msgstr "_Lukitse paneeli"
 
@@ -1049,7 +1051,7 @@ msgstr "_OK"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2509
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2517
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Komennon ”%s” suorittaminen epäonnistui."
@@ -1718,11 +1720,11 @@ msgstr "Lisäasetukset"
 msgid "Program launcher with optional menu"
 msgstr "Sovelluskäynnistin valinnaisella valikolla"
 
-#: ../plugins/pager/pager.c:550 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:541 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "Työtila-_asetukset..."
 
-#: ../plugins/pager/pager.c:638
+#: ../plugins/pager/pager.c:629
 msgid "Unable to open the workspace settings"
 msgstr "Työtila-asetuksia ei voitu avata"
 
@@ -1823,11 +1825,11 @@ msgstr ""
 
 #: ../plugins/systray/sn-dialog.glade.h:4
 msgid "_Fixed icon size (pixels):"
-msgstr ""
+msgstr "_Kiinteä kuvakekoko (pikseleissä):"
 
 #: ../plugins/systray/sn-dialog.glade.h:5
 msgid "Adjust size _automatically"
-msgstr ""
+msgstr "Säädä kokoa _automaattisesti"
 
 #: ../plugins/systray/sn-dialog.glade.h:6
 msgid "Icons"
@@ -1895,7 +1897,7 @@ msgstr ""
 
 #: ../plugins/systray/sn-dialog.glade.h:22
 msgid "Load symbolic icons if available"
-msgstr ""
+msgstr "Lataa symboliset kuvakkeet jos saatavilla"
 
 #: ../plugins/systray/sn-dialog.glade.h:23
 msgid "Features"
@@ -2034,36 +2036,36 @@ msgstr "Näytä ikkunat kaikista _näytöistä"
 msgid "Show only _minimized windows"
 msgstr "Näytä vain _pienennetyt ikkunat"
 
-#: ../plugins/tasklist/tasklist-widget.c:2969
+#: ../plugins/tasklist/tasklist-widget.c:2967
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:2973
+#: ../plugins/tasklist/tasklist-widget.c:2971
 msgid "Error"
 msgstr "Virhe"
 
-#: ../plugins/tasklist/tasklist-widget.c:3017
+#: ../plugins/tasklist/tasklist-widget.c:3015
 msgid "Launch New Instance..."
 msgstr "Käynnistä uusi instanssi..."
 
-#: ../plugins/tasklist/tasklist-widget.c:3766
+#: ../plugins/tasklist/tasklist-widget.c:3764
 msgid "Mi_nimize All"
 msgstr "_Pienennä kaikki"
 
-#: ../plugins/tasklist/tasklist-widget.c:3774
+#: ../plugins/tasklist/tasklist-widget.c:3772
 msgid "Un_minimize All"
 msgstr "_Palauta kaikki näkyviin"
 
-#: ../plugins/tasklist/tasklist-widget.c:3782
+#: ../plugins/tasklist/tasklist-widget.c:3780
 msgid "Ma_ximize All"
 msgstr "S_uurenna kaikki"
 
-#: ../plugins/tasklist/tasklist-widget.c:3790
+#: ../plugins/tasklist/tasklist-widget.c:3788
 msgid "_Unmaximize All"
 msgstr "Palauta kaikkien _koko"
 
-#: ../plugins/tasklist/tasklist-widget.c:3802
+#: ../plugins/tasklist/tasklist-widget.c:3800
 msgid "_Close All"
 msgstr "_Sulje kaikki"
 
@@ -2075,24 +2077,24 @@ msgstr "Vaihda avointen ikkunoiden välillä käyttäen painikkeita"
 msgid "Desktop"
 msgstr "Työpöytä"
 
-#: ../plugins/windowmenu/windowmenu.c:1273
+#: ../plugins/windowmenu/windowmenu.c:1274
 msgid "No Windows"
 msgstr "Ei ikkunoita"
 
-#: ../plugins/windowmenu/windowmenu.c:1288
+#: ../plugins/windowmenu/windowmenu.c:1289
 msgid "Urgent Windows"
 msgstr "Kiireelliset ikkunat"
 
-#: ../plugins/windowmenu/windowmenu.c:1331
+#: ../plugins/windowmenu/windowmenu.c:1332
 msgid "Add Workspace"
 msgstr "Lisää työtila"
 
-#: ../plugins/windowmenu/windowmenu.c:1354
+#: ../plugins/windowmenu/windowmenu.c:1355
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Poista työtila ”%s”"
 
-#: ../plugins/windowmenu/windowmenu.c:1356
+#: ../plugins/windowmenu/windowmenu.c:1357
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Poista työtila %d"
