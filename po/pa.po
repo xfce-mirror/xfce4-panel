@@ -1,19 +1,20 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Amanpreet Singh Alam <aalam@redhat.com>, 2004
-# A S Alam <aalam@users.sf.net>, 2007,2010
-# A S Alam <apbrar@gmail.com>, 2006
+# Xfce Bot <transifex@xfce.org>, 2022
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Xfce4-panel\n"
+"Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-20 00:47+0200\n"
-"PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: A S Alam <aalam@users.sf.net>, 2007,2010\n"
-"Language-Team: Panjabi (Punjabi) (http://www.transifex.com/xfce/xfce4-panel/language/pa/)\n"
+"POT-Creation-Date: 2022-12-22 12:35+0100\n"
+"PO-Revision-Date: 2022-12-22 11:35+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>, 2022\n"
+"Language-Team: Panjabi (Punjabi) (https://www.transifex.com/xfce/teams/16840/pa/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,7 +37,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr ""
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3081
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2989
 msgid "Panel"
 msgstr ""
 
@@ -63,9 +64,9 @@ msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1088 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1422
-#: ../plugins/applicationsmenu/applicationsmenu.c:614
-#: ../plugins/directorymenu/directorymenu.c:469
-#: ../plugins/directorymenu/directorymenu.c:936
+#: ../plugins/applicationsmenu/applicationsmenu.c:611
+#: ../plugins/directorymenu/directorymenu.c:470
+#: ../plugins/directorymenu/directorymenu.c:939
 msgid "_Cancel"
 msgstr "ਰੱਦ ਕਰੋ(_C)"
 
@@ -86,7 +87,7 @@ msgid "_Properties"
 msgstr ""
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3157
+#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3065
 msgid "_About"
 msgstr "ਇਸ ਬਾਰੇ(_A)"
 
@@ -100,23 +101,23 @@ msgid "Pane_l"
 msgstr ""
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:3093
+#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:3001
 msgid "Add _New Items..."
 msgstr "ਨਵੀਆਂ ਆਈਟਮਾਂ ਸ਼ਾਮਲ(_N)..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:3104
+#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:3012
 msgid "Panel Pr_eferences..."
 msgstr "ਪੈਨਲ ਪਸੰਦ(_e)..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3132
+#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3040
 msgid "Log _Out"
 msgstr ""
 
 #. help item
 #: ../libxfce4panel/xfce-panel-plugin.c:1326 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3148
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3056
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:15
@@ -202,94 +203,94 @@ msgid "Please report bugs to <%s>."
 msgstr "ਬੱਗ ਦੀ ਜਾਣਕਾਰੀ <%s> ਉੱਤੇ ਦਿਓ ਜੀ।"
 
 #. quit without error if an instance is running
-#: ../panel/main.c:396
+#: ../panel/main.c:398
 msgid "There is already a running instance"
 msgstr "ਪਹਿਲਾਂ ਹੀ ਇੱਕ ਇੰਸਟਾਂਸ ਚੱਲ ਰਿਹਾ ਹੈ"
 
 #. spawn ourselfs again
-#: ../panel/main.c:404
+#: ../panel/main.c:406
 msgid "Restarting..."
 msgstr "ਰੀ-ਸਟਾਰਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
 
-#: ../panel/main.c:419
+#: ../panel/main.c:421
 msgid "Failed to show the preferences dialog"
 msgstr "ਪਸੰਦ ਡਾਈਲਾਗ ਵੇਖਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:423
 msgid "Failed to show the add new items dialog"
 msgstr "ਨਵੀਆਂ ਆਈਟਮਾਂ ਸ਼ਾਮਲ ਡਾਈਲਾਗ ਵੇਖਾਉਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
-#: ../panel/main.c:423
+#: ../panel/main.c:425
 msgid "Failed to save the panel configuration"
 msgstr "ਪੈਨਲ ਸੰਰਚਨਾ ਸੰਭਾਲਣ ਲਈ ਫੇਲ੍ਹ"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:427
 msgid "Failed to add a plugin to the panel"
 msgstr "ਪਲੱਗਇਨ ਪੈਨਲ ਵਿੱਚ ਜੋੜਨ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
-#: ../panel/main.c:427
+#: ../panel/main.c:429
 msgid "Failed to restart the panel"
 msgstr "ਪੈਨਲ ਰੀ-ਸਟਾਰਟ ਕਰਨ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
-#: ../panel/main.c:429
+#: ../panel/main.c:431
 msgid "Failed to quit the panel"
 msgstr "ਪੈਨਲ ਬੰਦ ਕਰਨ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
-#: ../panel/main.c:431
+#: ../panel/main.c:433
 msgid "Failed to send D-Bus message"
 msgstr "ਡੀ-ਬੱਸ ਸੁਨੇਹਾ ਭੇਜਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
-#: ../panel/main.c:441
+#: ../panel/main.c:443
 msgid "Execute"
 msgstr ""
 
-#: ../panel/main.c:442
+#: ../panel/main.c:444
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr ""
 
-#: ../panel/main.c:445 ../panel/main.c:459
+#: ../panel/main.c:447 ../panel/main.c:461
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "%s ਦਾ ਕੋਈ ਵੀ ਚੱਲਦਾ ਮੌਕਾ ਨਹੀਂ ਲੱਭਿਆ"
 
-#: ../panel/panel-application.c:221
+#: ../panel/panel-application.c:220
 msgid "Failed to launch the migration application"
 msgstr "ਮਾਈਗਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਚਲਾਉਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
-#: ../panel/panel-application.c:1002
+#: ../panel/panel-application.c:1000
 msgid "Create _Launcher"
 msgstr ""
 
-#: ../panel/panel-application.c:1003
+#: ../panel/panel-application.c:1001
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr ""
 
-#: ../panel/panel-application.c:1005
+#: ../panel/panel-application.c:1003
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../panel/panel-application.c:1762
+#: ../panel/panel-application.c:1760
 msgid "Quit"
 msgstr "ਬੰਦ ਕਰੋ"
 
-#: ../panel/panel-application.c:1763
+#: ../panel/panel-application.c:1761
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr ""
 
-#: ../panel/panel-application.c:1764
+#: ../panel/panel-application.c:1762
 msgid "Are you sure you want to quit the panel?"
 msgstr ""
 
-#: ../panel/panel-application.c:1772
+#: ../panel/panel-application.c:1770
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" ਕਮਾਂਡ ਚਲਾਉਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
@@ -297,7 +298,8 @@ msgstr "\"%s\" ਕਮਾਂਡ ਚਲਾਉਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 #: ../panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "ਅਢੁੱਕਵਾਂ ਪਲੱਗਇਨ ਈਵੈਂਟ ਸੰਟੈਕਸ ਦਿੱਤਾ। ਵਰਤੋਂ PLUGIN-NAME:NAME[:TYPE:VALUE]"
+msgstr ""
+"ਅਢੁੱਕਵਾਂ ਪਲੱਗਇਨ ਈਵੈਂਟ ਸੰਟੈਕਸ ਦਿੱਤਾ। ਵਰਤੋਂ PLUGIN-NAME:NAME[:TYPE:VALUE]"
 
 #: ../panel/panel-dbus-client.c:248
 #, c-format
@@ -316,7 +318,10 @@ msgstr "Xfce ਡੈਸਕਟਾਪ ਇੰਵਾਇਰਨਮੈਂਟ ਦਾ ਪ�
 
 #: ../panel/panel-dialogs.c:88
 msgid "translator-credits"
-msgstr "ਅਮਨਪਰੀਤ ਸਿੰਘ ਆਲਮ\nਪੰਜਾਬੀ ਓਪਨਸੋਰਸ ਟੀਮ (POST)\nhttp://www.satuj.com"
+msgstr ""
+"ਅਮਨਪਰੀਤ ਸਿੰਘ ਆਲਮ\n"
+"ਪੰਜਾਬੀ ਓਪਨਸੋਰਸ ਟੀਮ (POST)\n"
+"http://www.satuj.com"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:162
@@ -342,7 +347,9 @@ msgstr "ਪੈਨਲ %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "ਕਿਉਂਕਿ ਪੈਨਲ kiosk ਮੋਡ ਵਿੱਚ ਚੱਲ ਰਿਹਾ ਹੈ, ਤੁਹਾਨੂੰ ਪੈਨਲ ਸੰਰਚਨਾ ਵਿੱਚ ਰੈਗੂਲਰ ਯੂਜ਼ਰ ਵਜੋਂ ਬਦਲਾਅ ਕਰਨ ਦੀ ਮਨਜ਼ੂਰੀ ਨਹੀਂ ਹੈ।"
+msgstr ""
+"ਕਿਉਂਕਿ ਪੈਨਲ kiosk ਮੋਡ ਵਿੱਚ ਚੱਲ ਰਿਹਾ ਹੈ, ਤੁਹਾਨੂੰ ਪੈਨਲ ਸੰਰਚਨਾ ਵਿੱਚ ਰੈਗੂਲਰ "
+"ਯੂਜ਼ਰ ਵਜੋਂ ਬਦਲਾਅ ਕਰਨ ਦੀ ਮਨਜ਼ੂਰੀ ਨਹੀਂ ਹੈ।"
 
 #: ../panel/panel-dialogs.c:238
 msgid "Modifying the panel is not allowed"
@@ -380,7 +387,9 @@ msgstr "ਖੋਜ ਸ਼ਬਦ ਇੱਥੇ ਦਿਓ"
 #: ../panel/panel-plugin-external.c:516
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "ਪਲੱਗਇਨ \"%s\" ਨੇ ਅਚਾਨਕ ਪੈਨਲ ਛੱਡ ਦਿੱਤਾ, ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਰੀ-ਸਟਾਰਟ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
+msgstr ""
+"ਪਲੱਗਇਨ \"%s\" ਨੇ ਅਚਾਨਕ ਪੈਨਲ ਛੱਡ ਦਿੱਤਾ, ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਰੀ-ਸਟਾਰਟ ਕਰਨਾ ਚਾਹੁੰਦੇ"
+" ਹੋ?"
 
 #: ../panel/panel-plugin-external.c:519
 msgid "Plugin Restart"
@@ -392,7 +401,10 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "ਪਲੱਗਇਨ ਪਿਛਲੇ %d ਸਕਿੰਟਾਂ ਵਿੱਚ ਇੱਕ ਤੋਂ ਵੱਧ ਵਾਰ ਰੀ-ਸਟਾਰਟ ਹੋ ਗਈ ਹੈ। ਜੇ ਤੁਸੀਂ ਚਲਾਉ ਨੂੰ ਦਬਾਇਆ ਤਾਂ ਪੈਨਲ ਪਲੱਗਇਨ ਨੂੰ ਰੀ-ਸਟਾਰਟ ਕਰੇਗਾ, ਨਹੀਂ ਤਾਂ ਇਸ ਨੂੰ ਪੈਨਲ ਵਿੱਚੋਂ ਪੱਕੇ ਤੌਰ ਉੱਤੇ ਹਟਾ ਦਿੱਤਾ ਜਾਵੇਗਾ।"
+msgstr ""
+"ਪਲੱਗਇਨ ਪਿਛਲੇ %d ਸਕਿੰਟਾਂ ਵਿੱਚ ਇੱਕ ਤੋਂ ਵੱਧ ਵਾਰ ਰੀ-ਸਟਾਰਟ ਹੋ ਗਈ ਹੈ। ਜੇ ਤੁਸੀਂ "
+"ਚਲਾਉ ਨੂੰ ਦਬਾਇਆ ਤਾਂ ਪੈਨਲ ਪਲੱਗਇਨ ਨੂੰ ਰੀ-ਸਟਾਰਟ ਕਰੇਗਾ, ਨਹੀਂ ਤਾਂ ਇਸ ਨੂੰ ਪੈਨਲ "
+"ਵਿੱਚੋਂ ਪੱਕੇ ਤੌਰ ਉੱਤੇ ਹਟਾ ਦਿੱਤਾ ਜਾਵੇਗਾ।"
 
 #: ../panel/panel-plugin-external.c:524
 msgid "_Execute"
@@ -713,23 +725,23 @@ msgstr "ਤਜਰਬੇਕਾਰ"
 msgid "Expert"
 msgstr "ਮਾਹਰ"
 
-#: ../panel/panel-window.c:3118
+#: ../panel/panel-window.c:3026
 msgid "_Lock Panel"
 msgstr ""
 
-#: ../migrate/main.c:110
+#: ../migrate/main.c:111
 msgid "Failed to load the default configuration"
 msgstr "ਡਿਫਾਲਟ ਸੰਰਚਨਾ ਲੋਡ ਕਰਨ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
-#: ../migrate/main.c:122
+#: ../migrate/main.c:123
 msgid "Panel config needs migration..."
 msgstr ""
 
-#: ../migrate/main.c:126
+#: ../migrate/main.c:127
 msgid "Failed to migrate the existing configuration"
 msgstr ""
 
-#: ../migrate/main.c:132
+#: ../migrate/main.c:133
 msgid "Panel configuration has been updated."
 msgstr ""
 
@@ -1019,19 +1031,19 @@ msgstr "ਮੇਨੂ ਫਾਇਲ"
 msgid "Applications"
 msgstr ""
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:612
-#: ../plugins/directorymenu/directorymenu.c:467
+#: ../plugins/applicationsmenu/applicationsmenu.c:609
+#: ../plugins/directorymenu/directorymenu.c:468
 msgid "Select An Icon"
 msgstr "ਆਈਕਾਨ ਚੁਣੋ"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:615
-#: ../plugins/directorymenu/directorymenu.c:470
+#: ../plugins/applicationsmenu/applicationsmenu.c:612
+#: ../plugins/directorymenu/directorymenu.c:471
 msgid "_OK"
 msgstr ""
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:652
-#: ../plugins/clock/clock.c:1035 ../plugins/launcher/launcher.c:2479
+#: ../plugins/applicationsmenu/applicationsmenu.c:650
+#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2496
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" ਕਮਾਂਡ ਚਲਾਉਣ ਲਈ ਫੇਲ੍ਹ ਹੈ।"
@@ -1080,11 +1092,11 @@ msgstr ""
 msgid "Week %V"
 msgstr "ਹਫ਼ਤਾ %V"
 
-#: ../plugins/clock/clock.c:491
+#: ../plugins/clock/clock.c:490
 msgid "Failed to execute clock command"
 msgstr "ਘੜੀ ਕਮਾਂਡ ਚਲਾਉਣ ਲਈ ਫੇਲ੍ਹ"
 
-#: ../plugins/clock/clock.c:974
+#: ../plugins/clock/clock.c:1011
 msgid "Custom Format"
 msgstr "ਕਸਟਮ ਫਾਰਮੈਟ"
 
@@ -1269,303 +1281,303 @@ msgctxt "Time"
 msgid "%a %_d %b, %R"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:87
+#: ../plugins/clock/clock-fuzzy.c:88
 msgid "Night"
 msgstr "ਰਾਤ"
 
-#: ../plugins/clock/clock-fuzzy.c:88
+#: ../plugins/clock/clock-fuzzy.c:89
 msgid "Early morning"
 msgstr "ਛੇਤੀ ਸਵੇਰ"
 
-#: ../plugins/clock/clock-fuzzy.c:89
+#: ../plugins/clock/clock-fuzzy.c:90
 msgid "Morning"
 msgstr "ਸਵੇਰ"
 
-#: ../plugins/clock/clock-fuzzy.c:90
+#: ../plugins/clock/clock-fuzzy.c:91
 msgid "Almost noon"
 msgstr "ਲਗਭਗ ਦੁਪੈਹਰ"
 
-#: ../plugins/clock/clock-fuzzy.c:91
+#: ../plugins/clock/clock-fuzzy.c:92
 msgid "Noon"
 msgstr "ਦੁਪੈਹਰ"
 
-#: ../plugins/clock/clock-fuzzy.c:92
+#: ../plugins/clock/clock-fuzzy.c:93
 msgid "Afternoon"
 msgstr "ਬਾਅਦ ਦੁਪੈਹਰ"
 
-#: ../plugins/clock/clock-fuzzy.c:93
+#: ../plugins/clock/clock-fuzzy.c:94
 msgid "Evening"
 msgstr "ਆਥਣ"
 
-#: ../plugins/clock/clock-fuzzy.c:94
+#: ../plugins/clock/clock-fuzzy.c:95
 msgid "Late evening"
 msgstr "ਦੇਰ ਆਥਣ"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: ../plugins/clock/clock-fuzzy.c:101
+#: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "%0 o'clock"
 msgstr "%0 ਵਜੇ"
 
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "five past %0"
 msgstr "%0 ਵੱਜ ਕੇ ਪੰਜ"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "ten past %0"
 msgstr "%0 ਵੱਜ ਕੇ ਦਸ"
 
-#: ../plugins/clock/clock-fuzzy.c:104
+#: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "quarter past %0"
 msgstr "ਸਵਾ %0"
 
-#: ../plugins/clock/clock-fuzzy.c:105
+#: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "twenty past %0"
 msgstr "%0 ਵੱਜ ਕੇ ਵੀਹ"
 
-#: ../plugins/clock/clock-fuzzy.c:106
+#: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five past %0"
 msgstr "%0 ਵੱਜ ਕੇ ਪੰਚੀ"
 
-#: ../plugins/clock/clock-fuzzy.c:107
+#: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "half past %0"
 msgstr "ਸਾਢੇ %0"
 
-#: ../plugins/clock/clock-fuzzy.c:108
+#: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "twenty five to %1"
 msgstr "%1 ਵੱਜਣ 'ਚ ਪੰਚੀ"
 
-#: ../plugins/clock/clock-fuzzy.c:109
+#: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "twenty to %1"
 msgstr "%1 ਵੱਜਣ 'ਚ ਵੀਹ"
 
-#: ../plugins/clock/clock-fuzzy.c:110
+#: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "quarter to %1"
 msgstr "ਪੌਣੇ %1"
 
-#: ../plugins/clock/clock-fuzzy.c:111
+#: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "ten to %1"
 msgstr "%1 ਵੱਜਣ 'ਚ ਦੱਸ"
 
-#: ../plugins/clock/clock-fuzzy.c:112
+#: ../plugins/clock/clock-fuzzy.c:113
 #, no-c-format
 msgid "five to %1"
 msgstr "%1 ਵੱਜਣ 'ਚ ਪੰਜ"
 
-#: ../plugins/clock/clock-fuzzy.c:113
+#: ../plugins/clock/clock-fuzzy.c:114
 #, no-c-format
 msgid "%1 o'clock"
 msgstr "%1 ਵਜੇ"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: ../plugins/clock/clock-fuzzy.c:120
+#: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "%0 o'clock"
 
-#: ../plugins/clock/clock-fuzzy.c:121
+#: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "%0 ਵੱਜ ਕੇ ਪੰਜ"
 
-#: ../plugins/clock/clock-fuzzy.c:122
+#: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "%0 ਵੱਜ ਕੇ ਦਸ"
 
-#: ../plugins/clock/clock-fuzzy.c:123
+#: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "ਸਵਾ %0"
 
-#: ../plugins/clock/clock-fuzzy.c:124
+#: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "%0 ਵੱਜ ਕੇ ਵੀਹ"
 
-#: ../plugins/clock/clock-fuzzy.c:125
+#: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "%0 ਵੱਜ ਕੇ ਪੰਚੀ"
 
-#: ../plugins/clock/clock-fuzzy.c:126
+#: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "ਸਾਢੇ %0"
 
-#: ../plugins/clock/clock-fuzzy.c:127
+#: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "%1 ਵੱਜਣ 'ਚ ਪੰਚੀ"
 
-#: ../plugins/clock/clock-fuzzy.c:128
+#: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "%1 ਵੱਜਣ 'ਚ ਵੀਹ"
 
-#: ../plugins/clock/clock-fuzzy.c:129
+#: ../plugins/clock/clock-fuzzy.c:130
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "ਪੌਣੇ %1"
 
-#: ../plugins/clock/clock-fuzzy.c:130
+#: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "%1 ਵੱਜਣ 'ਚ ਦੱਸ"
 
-#: ../plugins/clock/clock-fuzzy.c:131
+#: ../plugins/clock/clock-fuzzy.c:132
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "%1 ਵੱਜਣ 'ਚ ਪੰਜ"
 
-#: ../plugins/clock/clock-fuzzy.c:132
+#: ../plugins/clock/clock-fuzzy.c:133
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "%1 ਵਜੇ"
 
-#: ../plugins/clock/clock-fuzzy.c:137
+#: ../plugins/clock/clock-fuzzy.c:138
 msgctxt "am"
 msgid "one"
 msgstr "ਇੱਕ"
 
-#: ../plugins/clock/clock-fuzzy.c:138
+#: ../plugins/clock/clock-fuzzy.c:139
 msgctxt "am"
 msgid "two"
 msgstr "ਦੋ"
 
-#: ../plugins/clock/clock-fuzzy.c:139
+#: ../plugins/clock/clock-fuzzy.c:140
 msgctxt "am"
 msgid "three"
 msgstr "ਤਿੰਨ"
 
-#: ../plugins/clock/clock-fuzzy.c:140
+#: ../plugins/clock/clock-fuzzy.c:141
 msgctxt "am"
 msgid "four"
 msgstr "ਚਾਰ"
 
-#: ../plugins/clock/clock-fuzzy.c:141
+#: ../plugins/clock/clock-fuzzy.c:142
 msgctxt "am"
 msgid "five"
 msgstr "ਪੰਜ"
 
-#: ../plugins/clock/clock-fuzzy.c:142
+#: ../plugins/clock/clock-fuzzy.c:143
 msgctxt "am"
 msgid "six"
 msgstr "ਛੇ"
 
-#: ../plugins/clock/clock-fuzzy.c:143
+#: ../plugins/clock/clock-fuzzy.c:144
 msgctxt "am"
 msgid "seven"
 msgstr "ਸੱਤ"
 
-#: ../plugins/clock/clock-fuzzy.c:144
+#: ../plugins/clock/clock-fuzzy.c:145
 msgctxt "am"
 msgid "eight"
 msgstr "ਅੱਠ"
 
-#: ../plugins/clock/clock-fuzzy.c:145
+#: ../plugins/clock/clock-fuzzy.c:146
 msgctxt "am"
 msgid "nine"
 msgstr "ਨੌਂ"
 
-#: ../plugins/clock/clock-fuzzy.c:146
+#: ../plugins/clock/clock-fuzzy.c:147
 msgctxt "am"
 msgid "ten"
 msgstr "ਦੱਸ"
 
-#: ../plugins/clock/clock-fuzzy.c:147
+#: ../plugins/clock/clock-fuzzy.c:148
 msgctxt "am"
 msgid "eleven"
 msgstr "ਗਿਆਰਾਂ"
 
 #. I18N: 12 AM is midnight
-#: ../plugins/clock/clock-fuzzy.c:149
+#: ../plugins/clock/clock-fuzzy.c:150
 msgctxt "am"
 msgid "twelve"
 msgstr "ਬਾਰਾਂ"
 
-#: ../plugins/clock/clock-fuzzy.c:154
+#: ../plugins/clock/clock-fuzzy.c:155
 msgctxt "pm"
 msgid "one"
 msgstr "ਇੱਕ"
 
-#: ../plugins/clock/clock-fuzzy.c:155
+#: ../plugins/clock/clock-fuzzy.c:156
 msgctxt "pm"
 msgid "two"
 msgstr "ਦੋ"
 
-#: ../plugins/clock/clock-fuzzy.c:156
+#: ../plugins/clock/clock-fuzzy.c:157
 msgctxt "pm"
 msgid "three"
 msgstr "ਤਿੰਨ"
 
-#: ../plugins/clock/clock-fuzzy.c:157
+#: ../plugins/clock/clock-fuzzy.c:158
 msgctxt "pm"
 msgid "four"
 msgstr "ਚਾਰ"
 
-#: ../plugins/clock/clock-fuzzy.c:158
+#: ../plugins/clock/clock-fuzzy.c:159
 msgctxt "pm"
 msgid "five"
 msgstr "ਪੰਜ"
 
-#: ../plugins/clock/clock-fuzzy.c:159
+#: ../plugins/clock/clock-fuzzy.c:160
 msgctxt "pm"
 msgid "six"
 msgstr "ਛੇ"
 
-#: ../plugins/clock/clock-fuzzy.c:160
+#: ../plugins/clock/clock-fuzzy.c:161
 msgctxt "pm"
 msgid "seven"
 msgstr "ਸੱਤ"
 
-#: ../plugins/clock/clock-fuzzy.c:161
+#: ../plugins/clock/clock-fuzzy.c:162
 msgctxt "pm"
 msgid "eight"
 msgstr "ਅੱਠ"
 
-#: ../plugins/clock/clock-fuzzy.c:162
+#: ../plugins/clock/clock-fuzzy.c:163
 msgctxt "pm"
 msgid "nine"
 msgstr "ਨੌਂ"
 
-#: ../plugins/clock/clock-fuzzy.c:163
+#: ../plugins/clock/clock-fuzzy.c:164
 msgctxt "pm"
 msgid "ten"
 msgstr "ਦੱਸ"
 
-#: ../plugins/clock/clock-fuzzy.c:164
+#: ../plugins/clock/clock-fuzzy.c:165
 msgctxt "pm"
 msgid "eleven"
 msgstr "ਗਿਆਰਾਂ"
 
 #. I18N: 12 PM is noon
-#: ../plugins/clock/clock-fuzzy.c:166
+#: ../plugins/clock/clock-fuzzy.c:167
 msgctxt "pm"
 msgid "twelve"
 msgstr "ਬਾਰਾਂ"
@@ -1580,69 +1592,69 @@ msgstr "ਕੀ ਟਾਈਮ ਹੈ?"
 msgid "Directory Menu"
 msgstr "ਡਾਇਰੈਕਟਰੀ ਮੇਨੂ"
 
-#: ../plugins/directorymenu/directorymenu.c:692
+#: ../plugins/directorymenu/directorymenu.c:695
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "\"%s\" ਐਪਲੀਕੇਸ਼ਨ ਚਲਾਉਣ ਲਈ ਫੇਲ੍ਹ"
 
-#: ../plugins/directorymenu/directorymenu.c:724
+#: ../plugins/directorymenu/directorymenu.c:727
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "\"%s\" ਲਈ ਸਮੱਗਰੀ ਕਿਸਮ ਕਿਊਰੀ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
-#: ../plugins/directorymenu/directorymenu.c:733
+#: ../plugins/directorymenu/directorymenu.c:736
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "\"%s\" ਲਈ ਕੋਈ ਡਿਫਾਲਟ ਐਪਲੀਕੇਸ਼ਨ ਨਹੀਂ ਲੱਭੀ"
 
-#: ../plugins/directorymenu/directorymenu.c:749
+#: ../plugins/directorymenu/directorymenu.c:752
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "\"%s\" ਲਈ ਡਿਫਾਲਟ ਐਪਲੀਕੇਸ਼ਨ ਚਲਾਉਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
-#: ../plugins/directorymenu/directorymenu.c:844
+#: ../plugins/directorymenu/directorymenu.c:847
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "\"%s\" ਕੈਟਾਗਰੀ ਲਈ ਪਸੰਦੀਦਾ ਐਪਲੀਕੇਸ਼ਨ ਚਲਾਉਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
-#: ../plugins/directorymenu/directorymenu.c:925
+#: ../plugins/directorymenu/directorymenu.c:928
 msgid "Create New Folder"
 msgstr "ਨਵਾਂ ਫੋਲਡਰ ਬਣਾਓ"
 
-#: ../plugins/directorymenu/directorymenu.c:930
+#: ../plugins/directorymenu/directorymenu.c:933
 msgid "Create New Text Document"
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:937
+#: ../plugins/directorymenu/directorymenu.c:940
 msgid "C_reate"
 msgstr "ਬਣਾਓ(_r)"
 
-#: ../plugins/directorymenu/directorymenu.c:938
+#: ../plugins/directorymenu/directorymenu.c:941
 msgid "Create & _Open"
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:952
+#: ../plugins/directorymenu/directorymenu.c:955
 msgid "Enter the new name:"
 msgstr "ਨਵਾਂ ਨਾਂ ਦਿਓ:"
 
-#: ../plugins/directorymenu/directorymenu.c:988
+#: ../plugins/directorymenu/directorymenu.c:991
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:1071
+#: ../plugins/directorymenu/directorymenu.c:1074
 msgid "Open Folder"
 msgstr "ਫੋਲਡਰ ਖੋਲ੍ਹੋ"
 
-#: ../plugins/directorymenu/directorymenu.c:1084
+#: ../plugins/directorymenu/directorymenu.c:1087
 msgid "Open in Terminal"
 msgstr "ਟਰਮੀਨਲ 'ਚ ਖੋਲ੍ਹੋ"
 
-#: ../plugins/directorymenu/directorymenu.c:1097
+#: ../plugins/directorymenu/directorymenu.c:1100
 msgid "Create Folder..."
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:1110
+#: ../plugins/directorymenu/directorymenu.c:1113
 msgid "Create Text Document..."
 msgstr ""
 
@@ -1699,7 +1711,7 @@ msgstr "ਫਾਇਲ ਪੈਟਰਨ(_F):"
 msgid "Filtering"
 msgstr "ਫਿਲਟਰਿੰਗ"
 
-#: ../plugins/launcher/launcher.c:403
+#: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
 msgstr ""
 
@@ -1707,7 +1719,7 @@ msgstr ""
 msgid "Unnamed Item"
 msgstr "ਬਿਨ-ਨਾਂ ਆਈਟਮ"
 
-#: ../plugins/launcher/launcher.c:1795
+#: ../plugins/launcher/launcher.c:1801
 msgid "No items"
 msgstr "ਆਈਟਮਾਂ ਨਹੀਂ"
 
@@ -1835,15 +1847,15 @@ msgstr "ਤਕਨੀਕੀ"
 msgid "Program launcher with optional menu"
 msgstr "ਚੋਣਵੇਂ ਮੇਨੂ ਨਾਲ ਪਰੋਗਰਾਮ ਲਾਂਚਰ"
 
-#: ../plugins/pager/pager.c:653 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:655 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "ਵਰਕਸਪੇਸ ਸੈਟਿੰਗ(_S)..."
 
-#: ../plugins/pager/pager.c:743
+#: ../plugins/pager/pager.c:745
 msgid "Unable to open the workspace settings"
 msgstr ""
 
-#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:897
+#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:902
 #, c-format
 msgid "Workspace %d"
 msgstr "ਵਰਕਸਪੇਸ %d"
@@ -1905,15 +1917,15 @@ msgstr "ਫੈਲਾਓ(_E)"
 msgid "Adds a separator or space between panel items"
 msgstr "ਪੈਨਲ ਆਈਟਮਾਂ 'ਚ ਇੱਕ ਸਪਰੇਟਰ ਜਾਂ ਸਪੇਸ ਸ਼ਾਮਲ ਕਰੋ"
 
-#: ../plugins/showdesktop/showdesktop.c:240
+#: ../plugins/showdesktop/showdesktop.c:241
 msgid "Restore the minimized windows"
 msgstr "ਮਿੰਨੀਮਾਈਜ਼ ਕੀਤੀਆਂ ਵਿਡੋਜ਼ ਰੀ-ਸਟੋਰ ਕਰੋ"
 
-#: ../plugins/showdesktop/showdesktop.c:242
+#: ../plugins/showdesktop/showdesktop.c:243
 msgid "Minimize all open windows and show the desktop"
 msgstr "ਸਭ ਵਿੰਡੋਜ਼ ਮਿੰਨੀਮਾਈਜ਼ ਕਰੋ ਅਤੇ ਡੈਸਕਟਾਪ ਵੇਖੋ"
 
-#: ../plugins/showdesktop/showdesktop.c:245
+#: ../plugins/showdesktop/showdesktop.c:246
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "ਡੈਸਕਟਾਪ ਵੇਖੋ"
@@ -2158,36 +2170,36 @@ msgstr ""
 msgid "Show only _minimized windows"
 msgstr "ਕੇਵਲ ਮਿੰਨੀਮਾਈਜ਼ ਕੀਤੀਆਂ ਵਿੰਡੋਜ਼ ਵੇਖੋ(_m)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3063
+#: ../plugins/tasklist/tasklist-widget.c:3070
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3067
+#: ../plugins/tasklist/tasklist-widget.c:3074
 msgid "Error"
 msgstr "ਗਲਤੀ"
 
-#: ../plugins/tasklist/tasklist-widget.c:3096
+#: ../plugins/tasklist/tasklist-widget.c:3103
 msgid "Launch New Instance"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3843
+#: ../plugins/tasklist/tasklist-widget.c:3857
 msgid "Mi_nimize All"
 msgstr "ਸਭ ਮਿੰਨੀਮਾਈਜ਼(_n)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3850
+#: ../plugins/tasklist/tasklist-widget.c:3864
 msgid "Un_minimize All"
 msgstr "ਸਭ ਅਣ-ਮਿੰਨੀਮਾਈਜ਼(_m)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3857
+#: ../plugins/tasklist/tasklist-widget.c:3871
 msgid "Ma_ximize All"
 msgstr "ਸਭ ਮੈਕਸੀਮਮ(_x)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3864
+#: ../plugins/tasklist/tasklist-widget.c:3878
 msgid "_Unmaximize All"
 msgstr "ਸਭ ਅਣ-ਮੈਕਸੀਮਮ(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3875
+#: ../plugins/tasklist/tasklist-widget.c:3889
 msgid "_Close All"
 msgstr "ਸਭ ਬੰਦ ਕਰੋ(_C)"
 
@@ -2195,28 +2207,28 @@ msgstr "ਸਭ ਬੰਦ ਕਰੋ(_C)"
 msgid "Switch between open windows using buttons"
 msgstr "ਬਟਨਾਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਖੁੱਲ੍ਹੀਆਂ ਵਿੰਡੋਜ਼ ਵਿੱਚ ਸਵਿੱਚ ਕਰੋ"
 
-#: ../plugins/windowmenu/windowmenu.c:690
+#: ../plugins/windowmenu/windowmenu.c:695
 msgid "Desktop"
 msgstr "ਡੈਸਕਟਾਪ"
 
-#: ../plugins/windowmenu/windowmenu.c:1292
+#: ../plugins/windowmenu/windowmenu.c:1305
 msgid "No Windows"
 msgstr "ਕੋਈ ਵਿੰਡੋ ਨਹੀਂ"
 
-#: ../plugins/windowmenu/windowmenu.c:1307
+#: ../plugins/windowmenu/windowmenu.c:1320
 msgid "Urgent Windows"
 msgstr "ਜ਼ਰੂਰੀ ਵਿੰਡੋਜ਼"
 
-#: ../plugins/windowmenu/windowmenu.c:1349
+#: ../plugins/windowmenu/windowmenu.c:1362
 msgid "Add Workspace"
 msgstr "ਵਰਕਸਪੇਸ ਸ਼ਾਮਲ"
 
-#: ../plugins/windowmenu/windowmenu.c:1369
+#: ../plugins/windowmenu/windowmenu.c:1382
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "ਵਰਕਸਪੇਸ \"%s\" ਹਟਾਓ"
 
-#: ../plugins/windowmenu/windowmenu.c:1371
+#: ../plugins/windowmenu/windowmenu.c:1384
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "ਵਰਕਸਪੇਸ %d ਹਟਾਓ"
