@@ -1,21 +1,20 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Ivà Burgos <debian.public@gmail.com>, 2007
-# jolupa <jolupameister@gmail.com>, 2019
-# Davidmp <medipas@gmail.com>, 2015,2019
-# Robert Antoni Buj i Gelonch <rbuj@fedoraproject.org>, 2016-2020
-# Robert Antoni Buj i Gelonch <rbuj@fedoraproject.org>, 2016
+# Xfce Bot <transifex@xfce.org>, 2022
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Xfce4-panel\n"
+"Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-20 00:47+0200\n"
-"PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Robert Antoni Buj i Gelonch <rbuj@fedoraproject.org>, 2016-2020\n"
-"Language-Team: Catalan (http://www.transifex.com/xfce/xfce4-panel/language/ca/)\n"
+"POT-Creation-Date: 2022-12-22 12:35+0100\n"
+"PO-Revision-Date: 2022-12-22 11:35+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>, 2022\n"
+"Language-Team: Catalan (https://www.transifex.com/xfce/teams/16840/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,15 +29,20 @@ msgstr "Crea un llançador al tauler"
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop "
 "file"
-msgstr "Afegeix un nou llançador al tauler a partir de la informació d'aquest fitxer d'escriptori"
+msgstr ""
+"Afegeix un nou llançador al tauler a partir de la informació d'aquest fitxer"
+" d'escriptori"
 
 #: ../panel-preferences.desktop.in.h:1
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
-msgstr "taulers;ajusts;preferències;barra de tasques;ocultació;menú d'aplicacions;inici;botons;llançador;àrea de notificacions;estat;icones;connectors;"
+msgstr ""
+"taulers;ajusts;preferències;barra de tasques;ocultació;menú "
+"d'aplicacions;inici;botons;llançador;àrea de "
+"notificacions;estat;icones;connectors;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3081
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2989
 msgid "Panel"
 msgstr "Tauler"
 
@@ -61,13 +65,14 @@ msgstr ""
 #: ../libxfce4panel/xfce-panel-plugin.c:1087
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
-msgstr "Suprimir l’element del tauler, també significa perdre la seva configuració."
+msgstr ""
+"Suprimir l’element del tauler, també significa perdre la seva configuració."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1088 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1422
-#: ../plugins/applicationsmenu/applicationsmenu.c:614
-#: ../plugins/directorymenu/directorymenu.c:469
-#: ../plugins/directorymenu/directorymenu.c:936
+#: ../plugins/applicationsmenu/applicationsmenu.c:611
+#: ../plugins/directorymenu/directorymenu.c:470
+#: ../plugins/directorymenu/directorymenu.c:939
 msgid "_Cancel"
 msgstr "_Cancel·la"
 
@@ -88,7 +93,7 @@ msgid "_Properties"
 msgstr "_Propietats"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3157
+#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3065
 msgid "_About"
 msgstr "_Quant a"
 
@@ -102,23 +107,23 @@ msgid "Pane_l"
 msgstr "Tau_ler"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:3093
+#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:3001
 msgid "Add _New Items..."
 msgstr "Afegeix elements _nous..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:3104
+#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:3012
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferències del tauler..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3132
+#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3040
 msgid "Log _Out"
 msgstr "_Surt"
 
 #. help item
 #: ../libxfce4panel/xfce-panel-plugin.c:1326 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3148
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3056
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:15
@@ -204,94 +209,101 @@ msgid "Please report bugs to <%s>."
 msgstr "Envieu els errors a <%s>."
 
 #. quit without error if an instance is running
-#: ../panel/main.c:396
+#: ../panel/main.c:398
 msgid "There is already a running instance"
 msgstr "Ja hi ha una altra instància executant-se"
 
 #. spawn ourselfs again
-#: ../panel/main.c:404
+#: ../panel/main.c:406
 msgid "Restarting..."
 msgstr "S'està reiniciant..."
 
-#: ../panel/main.c:419
+#: ../panel/main.c:421
 msgid "Failed to show the preferences dialog"
 msgstr "Ha fallat la visualització del diàleg de preferències"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:423
 msgid "Failed to show the add new items dialog"
 msgstr "Ha fallat la visualització del diàleg d'afegiment d'elements nous"
 
-#: ../panel/main.c:423
+#: ../panel/main.c:425
 msgid "Failed to save the panel configuration"
 msgstr "Ha fallat el desament de la configuració del tauler"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:427
 msgid "Failed to add a plugin to the panel"
 msgstr "Ha fallat l'afegiment d'un connector al tauler"
 
-#: ../panel/main.c:427
+#: ../panel/main.c:429
 msgid "Failed to restart the panel"
 msgstr "Ha fallat el reinici del tauler"
 
-#: ../panel/main.c:429
+#: ../panel/main.c:431
 msgid "Failed to quit the panel"
 msgstr "Ha fallat la sortida del tauler"
 
-#: ../panel/main.c:431
+#: ../panel/main.c:433
 msgid "Failed to send D-Bus message"
 msgstr "Ha fallat l'enviament del missatge D-BUS"
 
-#: ../panel/main.c:441
+#: ../panel/main.c:443
 msgid "Execute"
 msgstr "Executa"
 
-#: ../panel/main.c:442
+#: ../panel/main.c:444
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "Voleu iniciar el tauler? Si és el cas, assegureu-vos que deseu la sessió quan sortiu per tal que el tauler s'iniciï automàticament el pròxim cop que inicieu la sessió."
+msgstr ""
+"Voleu iniciar el tauler? Si és el cas, assegureu-vos que deseu la sessió "
+"quan sortiu per tal que el tauler s'iniciï automàticament el pròxim cop que "
+"inicieu la sessió."
 
-#: ../panel/main.c:445 ../panel/main.c:459
+#: ../panel/main.c:447 ../panel/main.c:461
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "No s'ha trobat una instància en marxa de %s"
 
-#: ../panel/panel-application.c:221
+#: ../panel/panel-application.c:220
 msgid "Failed to launch the migration application"
 msgstr "Ha fallat el llançament de l'aplicació de migració"
 
-#: ../panel/panel-application.c:1002
+#: ../panel/panel-application.c:1000
 msgid "Create _Launcher"
 msgstr "Crea un _llançador"
 
-#: ../panel/panel-application.c:1003
+#: ../panel/panel-application.c:1001
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Això crearà un nou connector de llançador al tauler i inserirà els fitxers que es deixin caure com a elements de menú."
+msgstr ""
+"Això crearà un nou connector de llançador al tauler i inserirà els fitxers "
+"que es deixin caure com a elements de menú."
 
-#: ../panel/panel-application.c:1005
+#: ../panel/panel-application.c:1003
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Crea un nou llançador per %d fitxer d'escriptori"
 msgstr[1] "Crea un nou llançador per %d fitxers d'escriptori"
 
-#: ../panel/panel-application.c:1762
+#: ../panel/panel-application.c:1760
 msgid "Quit"
 msgstr "Surt"
 
-#: ../panel/panel-application.c:1763
+#: ../panel/panel-application.c:1761
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "Heu iniciat les X sense un gestor de sessions. Premeu Surt per a sortir del servidor de les X."
+msgstr ""
+"Heu iniciat les X sense un gestor de sessions. Premeu Surt per a sortir del "
+"servidor de les X."
 
-#: ../panel/panel-application.c:1764
+#: ../panel/panel-application.c:1762
 msgid "Are you sure you want to quit the panel?"
 msgstr "Esteu segur que voleu sortir del tauler?"
 
-#: ../panel/panel-application.c:1772
+#: ../panel/panel-application.c:1770
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Ha fallat l'execució de l'ordre «%s»"
@@ -299,14 +311,18 @@ msgstr "Ha fallat l'execució de l'ordre «%s»"
 #: ../panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "La sintaxi de l'esdeveniment per al connector no és vàlida. Utilitzeu PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr ""
+"La sintaxi de l'esdeveniment per al connector no és vàlida. Utilitzeu "
+"PLUGIN-NAME:NAME[:TYPE:VALUE]."
 
 #: ../panel/panel-dbus-client.c:248
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "Tipus invàlid \"%s\". Els tipus vàlids són: bool, double, int, string i uint."
+msgstr ""
+"Tipus invàlid \"%s\". Els tipus vàlids són: bool, double, int, string i "
+"uint."
 
 #: ../panel/panel-dialogs.c:58
 msgid "Unable to open the e-mail address"
@@ -318,7 +334,12 @@ msgstr "El tauler de l'entorn d'escriptori Xfce"
 
 #: ../panel/panel-dialogs.c:88
 msgid "translator-credits"
-msgstr "Carles Muñoz Gorriz <carlesmu@internuatas.org>, 2003-2004, 2008-2010.\nHarald Servat <redcrash@gmail.com>, 2010.\nIvà Burgos <debian.public@gmail.com>, 2007.\nPau Rul·lan Ferragut <paurullan@bulma.net>, 2005-2007.\nRobert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2016-2018."
+msgstr ""
+"Carles Muñoz Gorriz <carlesmu@internuatas.org>, 2003-2004, 2008-2010.\n"
+"Harald Servat <redcrash@gmail.com>, 2010.\n"
+"Ivà Burgos <debian.public@gmail.com>, 2007.\n"
+"Pau Rul·lan Ferragut <paurullan@bulma.net>, 2005-2007.\n"
+"Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2016-2018."
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:162
@@ -344,7 +365,9 @@ msgstr "Tauler %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "El tauler està executant-se en mode quiosc; no se us permet fer cap canvi a la configuració del tauler com a usuari convencional."
+msgstr ""
+"El tauler està executant-se en mode quiosc; no se us permet fer cap canvi a "
+"la configuració del tauler com a usuari convencional."
 
 #: ../panel/panel-dialogs.c:238
 msgid "Modifying the panel is not allowed"
@@ -382,7 +405,9 @@ msgstr "Introduïu la frase a cercar aquí"
 #: ../panel/panel-plugin-external.c:516
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "El connector del tauler \"%s\" ha finalitzat inesperadament. Voleu reiniciar-lo?"
+msgstr ""
+"El connector del tauler \"%s\" ha finalitzat inesperadament. Voleu "
+"reiniciar-lo?"
 
 #: ../panel/panel-plugin-external.c:519
 msgid "Plugin Restart"
@@ -394,7 +419,10 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "El connector s'ha reiniciat més d'un cop en els últims %d segons. Si premeu «Executa» el tauler intentarà reiniciar el connector, altrament serà eliminat permanentment del tauler."
+msgstr ""
+"El connector s'ha reiniciat més d'un cop en els últims %d segons. Si premeu "
+"«Executa» el tauler intentarà reiniciar el connector, altrament serà "
+"eliminat permanentment del tauler."
 
 #: ../panel/panel-plugin-external.c:524
 msgid "_Execute"
@@ -416,7 +444,8 @@ msgstr "Monitor %d"
 
 #: ../panel/panel-preferences-dialog.c:1053
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "El tauler i la configuració dels connectors seran eliminats permanentment."
+msgstr ""
+"El tauler i la configuració dels connectors seran eliminats permanentment."
 
 #: ../panel/panel-preferences-dialog.c:1054
 #, c-format
@@ -437,7 +466,9 @@ msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "Nom intern: %s-%d\nPID: %d"
+msgstr ""
+"Nom intern: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
@@ -533,7 +564,9 @@ msgstr "_Bloqueja el tauler"
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr "Seleccioneu aquesta opció per bloquejar la posició del tauler i ocultar els tiradors."
+msgstr ""
+"Seleccioneu aquesta opció per bloquejar la posició del tauler i ocultar els "
+"tiradors."
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Keep panel _above windows"
@@ -543,7 +576,10 @@ msgstr ""
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "Seleccioneu aquesta opció per maximitzar les finestres i que cobreixin el tauler. Això només funciona quan el tauler està adjuntat a una vora de la pantalla."
+msgstr ""
+"Seleccioneu aquesta opció per maximitzar les finestres i que cobreixin el "
+"tauler. Això només funciona quan el tauler està adjuntat a una vora de la "
+"pantalla."
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
@@ -579,7 +615,9 @@ msgstr "Incrementa _automàticament la longitud"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Seleccioneu aquesta opció per augmentar automàticament la longitud del tauler quan els connectors necessitin més espai."
+msgstr ""
+"Seleccioneu aquesta opció per augmentar automàticament la longitud del "
+"tauler quan els connectors necessitin més espai."
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid "D_isplay"
@@ -638,7 +676,9 @@ msgstr "Configura..."
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>La composició està inhabilitada actualment</b>\nHabiliteu la composició al gestor de finestres per als ajusts de l'opacitat al tauler."
+msgstr ""
+"<b>La composició està inhabilitada actualment</b>\n"
+"Habiliteu la composició al gestor de finestres per als ajusts de l'opacitat al tauler."
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:51
@@ -654,7 +694,9 @@ msgstr "_Sortida:"
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "Transparència quan el punter no està sobre el tauler, essent 0 completament transparent i 100 completament opac."
+msgstr ""
+"Transparència quan el punter no està sobre el tauler, essent 0 completament "
+"transparent i 100 completament opac."
 
 #: ../panel/panel-preferences-dialog.glade.h:55
 msgid "Appeara_nce"
@@ -715,23 +757,23 @@ msgstr "Experimentat"
 msgid "Expert"
 msgstr "Expert"
 
-#: ../panel/panel-window.c:3118
+#: ../panel/panel-window.c:3026
 msgid "_Lock Panel"
 msgstr "_Bloqueja el tauler"
 
-#: ../migrate/main.c:110
+#: ../migrate/main.c:111
 msgid "Failed to load the default configuration"
 msgstr "Ha fallat la càrrega de la configuració predeterminada"
 
-#: ../migrate/main.c:122
+#: ../migrate/main.c:123
 msgid "Panel config needs migration..."
 msgstr "La configuració del tauler necessita la migració..."
 
-#: ../migrate/main.c:126
+#: ../migrate/main.c:127
 msgid "Failed to migrate the existing configuration"
 msgstr "Ha fallat la migració de la configuració existent"
 
-#: ../migrate/main.c:132
+#: ../migrate/main.c:133
 msgid "Panel configuration has been updated."
 msgstr "La configuració del tauler s'ha actualitzat."
 
@@ -792,7 +834,9 @@ msgstr "_Mostra el diàleg de confirmació"
 #: ../plugins/actions/actions-dialog.glade.h:16
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Mostra un diàleg de confirmació amb un comptador de 30 segons per algunes accions."
+msgstr ""
+"Mostra un diàleg de confirmació amb un comptador de 30 segons per algunes "
+"accions."
 
 #: ../plugins/actions/actions-dialog.glade.h:17
 msgid "_Actions"
@@ -981,7 +1025,9 @@ msgstr "Mostra els noms _genèrics de les aplicacions"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Seleccioneu aquesta opció per veure el nom genèric de l'aplicació al menú, p. ex.: «Gestor de fitxers» en lloc de «Thunar»"
+msgstr ""
+"Seleccioneu aquesta opció per veure el nom genèric de l'aplicació al menú, "
+"p. ex.: «Gestor de fitxers» en lloc de «Thunar»"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 #: ../plugins/clock/clock-dialog.glade.h:27
@@ -1021,26 +1067,27 @@ msgstr "Fitxer del menú"
 msgid "Applications"
 msgstr "Aplicacions"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:612
-#: ../plugins/directorymenu/directorymenu.c:467
+#: ../plugins/applicationsmenu/applicationsmenu.c:609
+#: ../plugins/directorymenu/directorymenu.c:468
 msgid "Select An Icon"
 msgstr "Seleccioneu una icona"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:615
-#: ../plugins/directorymenu/directorymenu.c:470
+#: ../plugins/applicationsmenu/applicationsmenu.c:612
+#: ../plugins/directorymenu/directorymenu.c:471
 msgid "_OK"
 msgstr "D'ac_ord"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:652
-#: ../plugins/clock/clock.c:1035 ../plugins/launcher/launcher.c:2479
+#: ../plugins/applicationsmenu/applicationsmenu.c:650
+#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2496
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Ha fallat l'execució de l'ordre «%s»."
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr "Mostra un menú que conté les categories o les aplicacions instal·lades"
+msgstr ""
+"Mostra un menú que conté les categories o les aplicacions instal·lades"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -1082,11 +1129,11 @@ msgstr "%A, %-d %B de %Y"
 msgid "Week %V"
 msgstr "Setmana %V"
 
-#: ../plugins/clock/clock.c:491
+#: ../plugins/clock/clock.c:490
 msgid "Failed to execute clock command"
 msgstr "Ha fallat l'execució de l'ordre clock."
 
-#: ../plugins/clock/clock.c:974
+#: ../plugins/clock/clock.c:1011
 msgid "Custom Format"
 msgstr "Format personalitzat"
 
@@ -1147,7 +1194,10 @@ msgstr "Rellotge"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Nom d'una zona horària corresponent a un fitxer a la base de dades d'informació de zones, per exemple \"Amèrica / New_York \". Deixeu-ho en blanc per utilitzar l'hora local."
+msgstr ""
+"Nom d'una zona horària corresponent a un fitxer a la base de dades "
+"d'informació de zones, per exemple \"Amèrica / New_York \". Deixeu-ho en "
+"blanc per utilitzar l'hora local."
 
 #: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Time_zone:"
@@ -1182,7 +1232,11 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "El format descriu les parts de data i hora per inserir al tauler. Per exemple, %Y serà substituït per l'any,  %m amb el mes i %d amb el dia. De la mateixa manera, les  etiquetes <b></b> faran que el text estigui en negreta. Consulteu la pàgina d'ajuda per obtenir informació addicional."
+msgstr ""
+"El format descriu les parts de data i hora per inserir al tauler. Per "
+"exemple, %Y serà substituït per l'any,  %m amb el mes i %d amb el dia. De la"
+" mateixa manera, les  etiquetes <b></b> faran que el text estigui en "
+"negreta. Consulteu la pàgina d'ajuda per obtenir informació addicional."
 
 #: ../plugins/clock/clock-dialog.glade.h:25
 msgid "_Tooltip format:"
@@ -1271,303 +1325,303 @@ msgctxt "Time"
 msgid "%a %_d %b, %R"
 msgstr "%a %_d %b %R"
 
-#: ../plugins/clock/clock-fuzzy.c:87
+#: ../plugins/clock/clock-fuzzy.c:88
 msgid "Night"
 msgstr "Nit"
 
-#: ../plugins/clock/clock-fuzzy.c:88
+#: ../plugins/clock/clock-fuzzy.c:89
 msgid "Early morning"
 msgstr "Matinada"
 
-#: ../plugins/clock/clock-fuzzy.c:89
+#: ../plugins/clock/clock-fuzzy.c:90
 msgid "Morning"
 msgstr "Matí"
 
-#: ../plugins/clock/clock-fuzzy.c:90
+#: ../plugins/clock/clock-fuzzy.c:91
 msgid "Almost noon"
 msgstr "Migdia"
 
-#: ../plugins/clock/clock-fuzzy.c:91
+#: ../plugins/clock/clock-fuzzy.c:92
 msgid "Noon"
 msgstr "Migdia"
 
-#: ../plugins/clock/clock-fuzzy.c:92
+#: ../plugins/clock/clock-fuzzy.c:93
 msgid "Afternoon"
 msgstr "Tarda"
 
-#: ../plugins/clock/clock-fuzzy.c:93
+#: ../plugins/clock/clock-fuzzy.c:94
 msgid "Evening"
 msgstr "Vespre"
 
-#: ../plugins/clock/clock-fuzzy.c:94
+#: ../plugins/clock/clock-fuzzy.c:95
 msgid "Late evening"
 msgstr "Vespre"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: ../plugins/clock/clock-fuzzy.c:101
+#: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "%0 o'clock"
 msgstr "La %0 en punt"
 
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "five past %0"
 msgstr "%0 i cinc"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "ten past %0"
 msgstr "Un quart menys cinc de %1"
 
-#: ../plugins/clock/clock-fuzzy.c:104
+#: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "quarter past %0"
 msgstr "Un quart de %1"
 
-#: ../plugins/clock/clock-fuzzy.c:105
+#: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "twenty past %0"
 msgstr "Un quart i cinc de %1"
 
-#: ../plugins/clock/clock-fuzzy.c:106
+#: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five past %0"
 msgstr "Dos quarts menys cinc de %1"
 
-#: ../plugins/clock/clock-fuzzy.c:107
+#: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "half past %0"
 msgstr "Dos quarts de %1"
 
-#: ../plugins/clock/clock-fuzzy.c:108
+#: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "twenty five to %1"
 msgstr "Dos quarts i cinc de %1"
 
-#: ../plugins/clock/clock-fuzzy.c:109
+#: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "twenty to %1"
 msgstr "Tres quarts menys cinc de %1"
 
-#: ../plugins/clock/clock-fuzzy.c:110
+#: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "quarter to %1"
 msgstr "Tres quarts de %1"
 
-#: ../plugins/clock/clock-fuzzy.c:111
+#: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "ten to %1"
 msgstr "Tres quarts i cinc de %1"
 
-#: ../plugins/clock/clock-fuzzy.c:112
+#: ../plugins/clock/clock-fuzzy.c:113
 #, no-c-format
 msgid "five to %1"
 msgstr "%1 menys cinc"
 
-#: ../plugins/clock/clock-fuzzy.c:113
+#: ../plugins/clock/clock-fuzzy.c:114
 #, no-c-format
 msgid "%1 o'clock"
 msgstr "Les %1 en punt"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: ../plugins/clock/clock-fuzzy.c:120
+#: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "La %0 en punt"
 
-#: ../plugins/clock/clock-fuzzy.c:121
+#: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "%0 i cinc"
 
-#: ../plugins/clock/clock-fuzzy.c:122
+#: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "Un quart menys cinc de %1"
 
-#: ../plugins/clock/clock-fuzzy.c:123
+#: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "Un quart de %1"
 
-#: ../plugins/clock/clock-fuzzy.c:124
+#: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "Un quart i cinc de %1"
 
-#: ../plugins/clock/clock-fuzzy.c:125
+#: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "Dos quarts menys cinc de %1"
 
-#: ../plugins/clock/clock-fuzzy.c:126
+#: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "Dos quarts de %1"
 
-#: ../plugins/clock/clock-fuzzy.c:127
+#: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "Dos quarts i cinc de %1"
 
-#: ../plugins/clock/clock-fuzzy.c:128
+#: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "Tres quarts menys cinc de %1"
 
-#: ../plugins/clock/clock-fuzzy.c:129
+#: ../plugins/clock/clock-fuzzy.c:130
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "Tres quarts de %1"
 
-#: ../plugins/clock/clock-fuzzy.c:130
+#: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "Tres quarts i cinc de %1"
 
-#: ../plugins/clock/clock-fuzzy.c:131
+#: ../plugins/clock/clock-fuzzy.c:132
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "%1 menys cinc"
 
-#: ../plugins/clock/clock-fuzzy.c:132
+#: ../plugins/clock/clock-fuzzy.c:133
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "%1 en punt"
 
-#: ../plugins/clock/clock-fuzzy.c:137
+#: ../plugins/clock/clock-fuzzy.c:138
 msgctxt "am"
 msgid "one"
 msgstr "una"
 
-#: ../plugins/clock/clock-fuzzy.c:138
+#: ../plugins/clock/clock-fuzzy.c:139
 msgctxt "am"
 msgid "two"
 msgstr "dues"
 
-#: ../plugins/clock/clock-fuzzy.c:139
+#: ../plugins/clock/clock-fuzzy.c:140
 msgctxt "am"
 msgid "three"
 msgstr "tres"
 
-#: ../plugins/clock/clock-fuzzy.c:140
+#: ../plugins/clock/clock-fuzzy.c:141
 msgctxt "am"
 msgid "four"
 msgstr "quatre"
 
-#: ../plugins/clock/clock-fuzzy.c:141
+#: ../plugins/clock/clock-fuzzy.c:142
 msgctxt "am"
 msgid "five"
 msgstr "cinc"
 
-#: ../plugins/clock/clock-fuzzy.c:142
+#: ../plugins/clock/clock-fuzzy.c:143
 msgctxt "am"
 msgid "six"
 msgstr "sis"
 
-#: ../plugins/clock/clock-fuzzy.c:143
+#: ../plugins/clock/clock-fuzzy.c:144
 msgctxt "am"
 msgid "seven"
 msgstr "set"
 
-#: ../plugins/clock/clock-fuzzy.c:144
+#: ../plugins/clock/clock-fuzzy.c:145
 msgctxt "am"
 msgid "eight"
 msgstr "vuit"
 
-#: ../plugins/clock/clock-fuzzy.c:145
+#: ../plugins/clock/clock-fuzzy.c:146
 msgctxt "am"
 msgid "nine"
 msgstr "nou"
 
-#: ../plugins/clock/clock-fuzzy.c:146
+#: ../plugins/clock/clock-fuzzy.c:147
 msgctxt "am"
 msgid "ten"
 msgstr "deu"
 
-#: ../plugins/clock/clock-fuzzy.c:147
+#: ../plugins/clock/clock-fuzzy.c:148
 msgctxt "am"
 msgid "eleven"
 msgstr "onze"
 
 #. I18N: 12 AM is midnight
-#: ../plugins/clock/clock-fuzzy.c:149
+#: ../plugins/clock/clock-fuzzy.c:150
 msgctxt "am"
 msgid "twelve"
 msgstr "dotze"
 
-#: ../plugins/clock/clock-fuzzy.c:154
+#: ../plugins/clock/clock-fuzzy.c:155
 msgctxt "pm"
 msgid "one"
 msgstr "una"
 
-#: ../plugins/clock/clock-fuzzy.c:155
+#: ../plugins/clock/clock-fuzzy.c:156
 msgctxt "pm"
 msgid "two"
 msgstr "dues"
 
-#: ../plugins/clock/clock-fuzzy.c:156
+#: ../plugins/clock/clock-fuzzy.c:157
 msgctxt "pm"
 msgid "three"
 msgstr "tres"
 
-#: ../plugins/clock/clock-fuzzy.c:157
+#: ../plugins/clock/clock-fuzzy.c:158
 msgctxt "pm"
 msgid "four"
 msgstr "quatre"
 
-#: ../plugins/clock/clock-fuzzy.c:158
+#: ../plugins/clock/clock-fuzzy.c:159
 msgctxt "pm"
 msgid "five"
 msgstr "cinc"
 
-#: ../plugins/clock/clock-fuzzy.c:159
+#: ../plugins/clock/clock-fuzzy.c:160
 msgctxt "pm"
 msgid "six"
 msgstr "sis"
 
-#: ../plugins/clock/clock-fuzzy.c:160
+#: ../plugins/clock/clock-fuzzy.c:161
 msgctxt "pm"
 msgid "seven"
 msgstr "set"
 
-#: ../plugins/clock/clock-fuzzy.c:161
+#: ../plugins/clock/clock-fuzzy.c:162
 msgctxt "pm"
 msgid "eight"
 msgstr "vuit"
 
-#: ../plugins/clock/clock-fuzzy.c:162
+#: ../plugins/clock/clock-fuzzy.c:163
 msgctxt "pm"
 msgid "nine"
 msgstr "nou"
 
-#: ../plugins/clock/clock-fuzzy.c:163
+#: ../plugins/clock/clock-fuzzy.c:164
 msgctxt "pm"
 msgid "ten"
 msgstr "deu"
 
-#: ../plugins/clock/clock-fuzzy.c:164
+#: ../plugins/clock/clock-fuzzy.c:165
 msgctxt "pm"
 msgid "eleven"
 msgstr "onze"
 
 #. I18N: 12 PM is noon
-#: ../plugins/clock/clock-fuzzy.c:166
+#: ../plugins/clock/clock-fuzzy.c:167
 msgctxt "pm"
 msgid "twelve"
 msgstr "dotze"
@@ -1582,69 +1636,69 @@ msgstr "Quina hora és?"
 msgid "Directory Menu"
 msgstr "Menú dels directoris"
 
-#: ../plugins/directorymenu/directorymenu.c:692
+#: ../plugins/directorymenu/directorymenu.c:695
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Ha fallat el llançament de l'aplicació «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:724
+#: ../plugins/directorymenu/directorymenu.c:727
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Ha fallat la consulta del tipus de contingut per «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:733
+#: ../plugins/directorymenu/directorymenu.c:736
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "No s'ha trobat una aplicació predeterminada per «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:749
+#: ../plugins/directorymenu/directorymenu.c:752
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Ha fallat el llançament de l'aplicació predeterminada per «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:844
+#: ../plugins/directorymenu/directorymenu.c:847
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Ha fallat l'execució de l'aplicació preferida per a la categoria «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:925
+#: ../plugins/directorymenu/directorymenu.c:928
 msgid "Create New Folder"
 msgstr "Crea una carpeta nova"
 
-#: ../plugins/directorymenu/directorymenu.c:930
+#: ../plugins/directorymenu/directorymenu.c:933
 msgid "Create New Text Document"
 msgstr "Crea un document de text nou"
 
-#: ../plugins/directorymenu/directorymenu.c:937
+#: ../plugins/directorymenu/directorymenu.c:940
 msgid "C_reate"
 msgstr "C_rea"
 
-#: ../plugins/directorymenu/directorymenu.c:938
+#: ../plugins/directorymenu/directorymenu.c:941
 msgid "Create & _Open"
 msgstr "Crea i _obre"
 
-#: ../plugins/directorymenu/directorymenu.c:952
+#: ../plugins/directorymenu/directorymenu.c:955
 msgid "Enter the new name:"
 msgstr "Introduïu el nom nou:"
 
-#: ../plugins/directorymenu/directorymenu.c:988
+#: ../plugins/directorymenu/directorymenu.c:991
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Ha fallat la creació de la carpeta: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1071
+#: ../plugins/directorymenu/directorymenu.c:1074
 msgid "Open Folder"
 msgstr "Obre la carpeta"
 
-#: ../plugins/directorymenu/directorymenu.c:1084
+#: ../plugins/directorymenu/directorymenu.c:1087
 msgid "Open in Terminal"
 msgstr "Obre al terminal"
 
-#: ../plugins/directorymenu/directorymenu.c:1097
+#: ../plugins/directorymenu/directorymenu.c:1100
 msgid "Create Folder..."
 msgstr "Crea la carpeta..."
 
-#: ../plugins/directorymenu/directorymenu.c:1110
+#: ../plugins/directorymenu/directorymenu.c:1113
 msgid "Create Text Document..."
 msgstr "Crea el document de text..."
 
@@ -1689,7 +1743,11 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Introduïu una llista dels patrons que s'utilitzaran per determinar quins fitxers es mostren en un directori. Si especifiqueu més d'un patró, la llista dels elements ha d'estar separada amb punts i comes (p. ex.: «*.txt;*.doc»)."
+msgstr ""
+"Introduïu una llista dels patrons que s'utilitzaran per determinar quins "
+"fitxers es mostren en un directori. Si especifiqueu més d'un patró, la "
+"llista dels elements ha d'estar separada amb punts i comes (p. ex.: "
+"«*.txt;*.doc»)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:15
 msgid "_File Pattern:"
@@ -1701,7 +1759,7 @@ msgstr "Patrons de _fitxers:"
 msgid "Filtering"
 msgstr "Filtratge"
 
-#: ../plugins/launcher/launcher.c:403
+#: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
 msgstr "Obre el menú del llançador"
 
@@ -1709,7 +1767,7 @@ msgstr "Obre el menú del llançador"
 msgid "Unnamed Item"
 msgstr "Element sense nom"
 
-#: ../plugins/launcher/launcher.c:1795
+#: ../plugins/launcher/launcher.c:1801
 msgid "No items"
 msgstr "Sense elements"
 
@@ -1811,7 +1869,9 @@ msgstr "Inhabilita els quadres de _text emergents"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "Seleccioneu aquesta opció per inhabilitar els indicadors de funció quan us moveu sobre els botons del tauler o els elements del menú."
+msgstr ""
+"Seleccioneu aquesta opció per inhabilitar els indicadors de funció quan us "
+"moveu sobre els botons del tauler o els elements del menú."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:30
 msgid "Show _label instead of icon"
@@ -1823,7 +1883,9 @@ msgstr "Mostra l'últim _element utilitzat al tauler"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:32
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr "Seleccioneu aquesta opció per a moure l'element del menú que s'ha fet clic al tauler."
+msgstr ""
+"Seleccioneu aquesta opció per a moure l'element del menú que s'ha fet clic "
+"al tauler."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:33
 msgid "_Arrow button position:"
@@ -1837,15 +1899,15 @@ msgstr "Avançat"
 msgid "Program launcher with optional menu"
 msgstr "Llançador de programes amb el menu opcional"
 
-#: ../plugins/pager/pager.c:653 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:655 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "Ajust_s de l'espai de treball..."
 
-#: ../plugins/pager/pager.c:743
+#: ../plugins/pager/pager.c:745
 msgid "Unable to open the workspace settings"
 msgstr "No es poden obrir els ajusts de l'espai de treball"
 
-#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:897
+#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:902
 #, c-format
 msgid "Workspace %d"
 msgstr "Espai de treball %d"
@@ -1907,15 +1969,15 @@ msgstr "_Expandeix"
 msgid "Adds a separator or space between panel items"
 msgstr "Afegeix un espai o un separador entre elements del tauler"
 
-#: ../plugins/showdesktop/showdesktop.c:240
+#: ../plugins/showdesktop/showdesktop.c:241
 msgid "Restore the minimized windows"
 msgstr "Restaura les finestres minimitzades"
 
-#: ../plugins/showdesktop/showdesktop.c:242
+#: ../plugins/showdesktop/showdesktop.c:243
 msgid "Minimize all open windows and show the desktop"
 msgstr "Minimitza totes les finestres i mostra l'escriptori"
 
-#: ../plugins/showdesktop/showdesktop.c:245
+#: ../plugins/showdesktop/showdesktop.c:246
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Mostra l'escriptori"
@@ -1970,7 +2032,8 @@ msgstr "_Oculta els elements de manera predeterminada"
 
 #: ../plugins/systray/sn-dialog.glade.h:10
 msgid "When enabled, all new items will be marked as \"Hidden\""
-msgstr "Quan està habilitat, tots els elements nous es marcaran amb «Hidden», ocults"
+msgstr ""
+"Quan està habilitat, tots els elements nous es marcaran amb «Hidden», ocults"
 
 #: ../plugins/systray/sn-dialog.glade.h:11
 msgid "_Square items"
@@ -2010,7 +2073,8 @@ msgstr "El _menú és l'acció principal"
 
 #: ../plugins/systray/sn-dialog.glade.h:20
 msgid "Left click will always display the menu for item"
-msgstr "Fent clic amb el botó esquerre mostrarà sempre el menú per a l'element"
+msgstr ""
+"Fent clic amb el botó esquerre mostrarà sempre el menú per a l'element"
 
 #: ../plugins/systray/sn-dialog.glade.h:21
 msgid "_Request symbolic icons"
@@ -2041,7 +2105,9 @@ msgstr "No es pot iniciar l'àrea de les notificacions"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "El més probable és que un altre estri assumeixi la funció d'una àrea de notificació. Aquesta àrea no s'utilitzarà."
+msgstr ""
+"El més probable és que un altre estri assumeixi la funció d'una àrea de "
+"notificació. Aquesta àrea no s'utilitzarà."
 
 #: ../plugins/systray/systray.c:409
 msgid "The notification area lost selection"
@@ -2060,7 +2126,9 @@ msgstr "Connector de la safata de l'estat"
 msgid ""
 "Provides status notifier items (application indicators) and legacy systray "
 "items"
-msgstr "Proporciona elements de notificadors d'estat (indicadors d'aplicació) i elements de de la safata del sistema del llegat"
+msgstr ""
+"Proporciona elements de notificadors d'estat (indicadors d'aplicació) i "
+"elements de de la safata del sistema del llegat"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Nothing"
@@ -2160,36 +2228,36 @@ msgstr "Mostra les finestres de tots els mo_nitors"
 msgid "Show only _minimized windows"
 msgstr "Mostra només les finestres _minimitzades"
 
-#: ../plugins/tasklist/tasklist-widget.c:3063
+#: ../plugins/tasklist/tasklist-widget.c:3070
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "No es pot iniciar una instància nova de '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:3067
+#: ../plugins/tasklist/tasklist-widget.c:3074
 msgid "Error"
 msgstr "Error"
 
-#: ../plugins/tasklist/tasklist-widget.c:3096
+#: ../plugins/tasklist/tasklist-widget.c:3103
 msgid "Launch New Instance"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3843
+#: ../plugins/tasklist/tasklist-widget.c:3857
 msgid "Mi_nimize All"
 msgstr "Mi_nimitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3850
+#: ../plugins/tasklist/tasklist-widget.c:3864
 msgid "Un_minimize All"
 msgstr "De_sminimitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3857
+#: ../plugins/tasklist/tasklist-widget.c:3871
 msgid "Ma_ximize All"
 msgstr "Ma_ximitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3864
+#: ../plugins/tasklist/tasklist-widget.c:3878
 msgid "_Unmaximize All"
 msgstr "Des_maximitza-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3875
+#: ../plugins/tasklist/tasklist-widget.c:3889
 msgid "_Close All"
 msgstr "_Tanca-ho tot"
 
@@ -2197,28 +2265,28 @@ msgstr "_Tanca-ho tot"
 msgid "Switch between open windows using buttons"
 msgstr "Canvieu entre les finestres obertes mitjançant botons"
 
-#: ../plugins/windowmenu/windowmenu.c:690
+#: ../plugins/windowmenu/windowmenu.c:695
 msgid "Desktop"
 msgstr "Escriptori"
 
-#: ../plugins/windowmenu/windowmenu.c:1292
+#: ../plugins/windowmenu/windowmenu.c:1305
 msgid "No Windows"
 msgstr "Sense finestres"
 
-#: ../plugins/windowmenu/windowmenu.c:1307
+#: ../plugins/windowmenu/windowmenu.c:1320
 msgid "Urgent Windows"
 msgstr "Finestres urgents"
 
-#: ../plugins/windowmenu/windowmenu.c:1349
+#: ../plugins/windowmenu/windowmenu.c:1362
 msgid "Add Workspace"
 msgstr "Afegeix un espai de treball"
 
-#: ../plugins/windowmenu/windowmenu.c:1369
+#: ../plugins/windowmenu/windowmenu.c:1382
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Suprimeix l'espai de treball «%s»"
 
-#: ../plugins/windowmenu/windowmenu.c:1371
+#: ../plugins/windowmenu/windowmenu.c:1384
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Suprimeix l'espai de treball %d"
