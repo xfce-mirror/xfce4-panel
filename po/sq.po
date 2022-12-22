@@ -1,20 +1,20 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# monaco <akukaj@msn.com>, 2019
-# Besnik Bleta <besnik@programeshqip.org>, 2007
-# Besnik Bleta <besnik@programeshqip.org>, 2007,2020,2022
-# Besnik Bleta <besnik@programeshqip.org>, 2018-2020
+# Xfce Bot <transifex@xfce.org>, 2022
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Xfce4-panel\n"
+"Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-20 00:47+0200\n"
-"PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2007,2020,2022\n"
-"Language-Team: Albanian (http://www.transifex.com/xfce/xfce4-panel/language/sq/)\n"
+"POT-Creation-Date: 2022-12-22 12:35+0100\n"
+"PO-Revision-Date: 2022-12-22 11:35+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>, 2022\n"
+"Language-Team: Albanian (https://www.transifex.com/xfce/teams/16840/sq/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,15 +29,19 @@ msgstr "Krijoni Nisës te paneli"
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop "
 "file"
-msgstr "Shtoni te paneli një nisës të ri, bazuar në të dhëna të kësaj kartele desktopi"
+msgstr ""
+"Shtoni te paneli një nisës të ri, bazuar në të dhëna të kësaj kartele "
+"desktopi"
 
 #: ../panel-preferences.desktop.in.h:1
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
-msgstr "panele;rregullime;parapëlqime;shtyllë punësh;vetëfshihu;aplikacion menu;nisje;butona;nisës;zonë njoftimesh;gjendje;ikona;shtojca;"
+msgstr ""
+"panele;rregullime;parapëlqime;shtyllë punësh;vetëfshihu;aplikacion "
+"menu;nisje;butona;nisës;zonë njoftimesh;gjendje;ikona;shtojca;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3081
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2989
 msgid "Panel"
 msgstr "Panel"
 
@@ -60,13 +64,15 @@ msgstr "Hiqe Objektin"
 #: ../libxfce4panel/xfce-panel-plugin.c:1087
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
-msgstr "Heqja e elementit prej panelit do të thotë se do të humbë edhe formësimi për të."
+msgstr ""
+"Heqja e elementit prej panelit do të thotë se do të humbë edhe formësimi për"
+" të."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1088 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1422
-#: ../plugins/applicationsmenu/applicationsmenu.c:614
-#: ../plugins/directorymenu/directorymenu.c:469
-#: ../plugins/directorymenu/directorymenu.c:936
+#: ../plugins/applicationsmenu/applicationsmenu.c:611
+#: ../plugins/directorymenu/directorymenu.c:470
+#: ../plugins/directorymenu/directorymenu.c:939
 msgid "_Cancel"
 msgstr "_Anuloje"
 
@@ -87,7 +93,7 @@ msgid "_Properties"
 msgstr "_Veti"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3157
+#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3065
 msgid "_About"
 msgstr "_Rreth"
 
@@ -101,23 +107,23 @@ msgid "Pane_l"
 msgstr "_Panel"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:3093
+#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:3001
 msgid "Add _New Items..."
 msgstr "Shtoni Elemente të _Rinj…"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:3104
+#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:3012
 msgid "Panel Pr_eferences..."
 msgstr "_Parapëlqime Paneli…"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3132
+#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3040
 msgid "Log _Out"
 msgstr "_Dilni"
 
 #. help item
 #: ../libxfce4panel/xfce-panel-plugin.c:1326 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3148
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3056
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:15
@@ -203,94 +209,100 @@ msgid "Please report bugs to <%s>."
 msgstr "Ju lutem njoftoni të meta te <%s>."
 
 #. quit without error if an instance is running
-#: ../panel/main.c:396
+#: ../panel/main.c:398
 msgid "There is already a running instance"
 msgstr "Ka tashmë një instancë në xhirim e sipër"
 
 #. spawn ourselfs again
-#: ../panel/main.c:404
+#: ../panel/main.c:406
 msgid "Restarting..."
 msgstr "Po riniset…"
 
-#: ../panel/main.c:419
+#: ../panel/main.c:421
 msgid "Failed to show the preferences dialog"
 msgstr "S’u arrit të shfaqet dialogu i parapëlqimeve"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:423
 msgid "Failed to show the add new items dialog"
 msgstr "S’u arrit të shfaqe dialogu “shtoni elemente të rinj”"
 
-#: ../panel/main.c:423
+#: ../panel/main.c:425
 msgid "Failed to save the panel configuration"
 msgstr "S’u arrit të ruhet formësimi i panelit"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:427
 msgid "Failed to add a plugin to the panel"
 msgstr "S’u arrit të shtohet shtojcë te paneli"
 
-#: ../panel/main.c:427
+#: ../panel/main.c:429
 msgid "Failed to restart the panel"
 msgstr "S’u arrit të riniset paneli"
 
-#: ../panel/main.c:429
+#: ../panel/main.c:431
 msgid "Failed to quit the panel"
 msgstr "S’u arrit të braktiset paneli"
 
-#: ../panel/main.c:431
+#: ../panel/main.c:433
 msgid "Failed to send D-Bus message"
 msgstr "S’u arrit të dërgohet mesazh D-Bus"
 
-#: ../panel/main.c:441
+#: ../panel/main.c:443
 msgid "Execute"
 msgstr "Përmbushe"
 
-#: ../panel/main.c:442
+#: ../panel/main.c:444
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "Doni ta nisni panelin? Nëse po, sigurohuni se e ruani sesionin gjatë daljes, që paneli të niset vetvetiu herës tjetër që bëni hyrjen."
+msgstr ""
+"Doni ta nisni panelin? Nëse po, sigurohuni se e ruani sesionin gjatë daljes,"
+" që paneli të niset vetvetiu herës tjetër që bëni hyrjen."
 
-#: ../panel/main.c:445 ../panel/main.c:459
+#: ../panel/main.c:447 ../panel/main.c:461
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "S’u gjet instancë %s në xhirim e sipër"
 
-#: ../panel/panel-application.c:221
+#: ../panel/panel-application.c:220
 msgid "Failed to launch the migration application"
 msgstr "S’u arrit të niset aplikacioni i migrimit"
 
-#: ../panel/panel-application.c:1002
+#: ../panel/panel-application.c:1000
 msgid "Create _Launcher"
 msgstr "Krijo _Nisës"
 
-#: ../panel/panel-application.c:1003
+#: ../panel/panel-application.c:1001
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Kjo do të krijojë te paneli një shtojcë të ri nisësi dhe i fut si elementë menuje kartelat e hedhura brenda saj."
+msgstr ""
+"Kjo do të krijojë te paneli një shtojcë të ri nisësi dhe i fut si elementë "
+"menuje kartelat e hedhura brenda saj."
 
-#: ../panel/panel-application.c:1005
+#: ../panel/panel-application.c:1003
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Krijo nisës të ri prej %d kartele desktop"
 msgstr[1] "Krijo nisës të ri prej %d kartelash desktop"
 
-#: ../panel/panel-application.c:1762
+#: ../panel/panel-application.c:1760
 msgid "Quit"
 msgstr "Dilni"
 
-#: ../panel/panel-application.c:1763
+#: ../panel/panel-application.c:1761
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "E keni nisur X-in pa përgjegjës sesionesh. Klikimi mbi Dilni do ta mbyllë shërbyesin X."
+msgstr ""
+"E keni nisur X-in pa përgjegjës sesionesh. Klikimi mbi Dilni do ta mbyllë "
+"shërbyesin X."
 
-#: ../panel/panel-application.c:1764
+#: ../panel/panel-application.c:1762
 msgid "Are you sure you want to quit the panel?"
 msgstr "Jeni i sigurt se doni të dilet nga paneli?"
 
-#: ../panel/panel-application.c:1772
+#: ../panel/panel-application.c:1770
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "S’u arrit të përmbushet urdhri \"%s\""
@@ -298,14 +310,18 @@ msgstr "S’u arrit të përmbushet urdhri \"%s\""
 #: ../panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "U specifikua sintaksë e pavlefshme akti shtojce. Përdorni PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr ""
+"U specifikua sintaksë e pavlefshme akti shtojce. Përdorni PLUGIN-"
+"NAME:NAME[:TYPE:VALUE]."
 
 #: ../panel/panel-dbus-client.c:248
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "Lloj i pavlefshëm ndihmëze \"%s\". LLojet e vlefshëm janë <em>bool</em>, <em>double</em>, <em>int</em>, <em>string</em> dhe <em>uint</em>."
+msgstr ""
+"Lloj i pavlefshëm ndihmëze \"%s\". LLojet e vlefshëm janë <em>bool</em>, "
+"<em>double</em>, <em>int</em>, <em>string</em> dhe <em>uint</em>."
 
 #: ../panel/panel-dialogs.c:58
 msgid "Unable to open the e-mail address"
@@ -343,7 +359,9 @@ msgstr "Panel %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "Ngaqë paneli po xhiron nën mënyrën kioskë, nuk ju lejohet të bëni ndryshime te formësimi i panelit si përdorues i zakonshëm"
+msgstr ""
+"Ngaqë paneli po xhiron nën mënyrën kioskë, nuk ju lejohet të bëni ndryshime "
+"te formësimi i panelit si përdorues i zakonshëm"
 
 #: ../panel/panel-dialogs.c:238
 msgid "Modifying the panel is not allowed"
@@ -393,7 +411,10 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Shtojca u nis më shumë se një herë në %d sekondat e fundit. Nëse shtypni Ekzekutoje, paneli do të provojë të rinisë shtojcën, përndryshe do të hiqet përgjithmonë nga paneli."
+msgstr ""
+"Shtojca u nis më shumë se një herë në %d sekondat e fundit. Nëse shtypni "
+"Ekzekutoje, paneli do të provojë të rinisë shtojcën, përndryshe do të hiqet "
+"përgjithmonë nga paneli."
 
 #: ../panel/panel-plugin-external.c:524
 msgid "_Execute"
@@ -436,7 +457,9 @@ msgstr "%s <span color=\"grey\" size=\"small\">(e jashtme)</span>"
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "Emër i brendshëm: %s-%d\nPID: %d"
+msgstr ""
+"Emër i brendshëm: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
@@ -523,7 +546,8 @@ msgstr "Shtrije në m_onitorë"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr "Përzgjidheni këtë mundësi që paneli të shtrihet përgjatë disa monitorësh."
+msgstr ""
+"Përzgjidheni këtë mundësi që paneli të shtrihet përgjatë disa monitorësh."
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "_Lock panel"
@@ -532,7 +556,9 @@ msgstr "_Kyçe panelin"
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr "Përzgjidheni këtë mundësi që të fshihni dorëzat e panelit dhe për të kyçur pozicionin e tij."
+msgstr ""
+"Përzgjidheni këtë mundësi që të fshihni dorëzat e panelit dhe për të kyçur "
+"pozicionin e tij."
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Keep panel _above windows"
@@ -542,7 +568,10 @@ msgstr "Mbaje panelin _mbi dritaret"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "Përzgjidheni këtë mundësi nëse doni që dritaret e maksimizuara të mbulojnë zonën pas panelit. Kjo funksionon vetëm kur paneli i është bashkëngjitur një skaji të ekranit."
+msgstr ""
+"Përzgjidheni këtë mundësi nëse doni që dritaret e maksimizuara të mbulojnë "
+"zonën pas panelit. Kjo funksionon vetëm kur paneli i është bashkëngjitur një"
+" skaji të ekranit."
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
@@ -578,7 +607,9 @@ msgstr "Rrite a_utomatikisht gjatësinë"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Përzgjidheni këtë mundësi që të rritet vetvetiu gjatësia e panelit, nëse shtojcat lypin më tepër hapësirë."
+msgstr ""
+"Përzgjidheni këtë mundësi që të rritet vetvetiu gjatësia e panelit, nëse "
+"shtojcat lypin më tepër hapësirë."
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid "D_isplay"
@@ -637,7 +668,9 @@ msgstr "Formësojeni…"
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>Hartimi hëpërhë është i çaktivizuar</b>\nPër rregullime patejdukshmërie te paneli, aktivizoni hartimin te përgjegjësi i dritareve."
+msgstr ""
+"<b>Hartimi hëpërhë është i çaktivizuar</b>\n"
+"Për rregullime patejdukshmërie te paneli, aktivizoni hartimin te përgjegjësi i dritareve."
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:51
@@ -653,7 +686,9 @@ msgstr "_Dilni:"
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "Tejdukshmëri kur treguesi s’gjendet sipër panelit, me 0 për plotësisht i tejdukshëm dhe 100 plotësisht i marrtë."
+msgstr ""
+"Tejdukshmëri kur treguesi s’gjendet sipër panelit, me 0 për plotësisht i "
+"tejdukshëm dhe 100 plotësisht i marrtë."
 
 #: ../panel/panel-preferences-dialog.glade.h:55
 msgid "Appeara_nce"
@@ -714,23 +749,23 @@ msgstr "I sprovuar"
 msgid "Expert"
 msgstr "I regjur"
 
-#: ../panel/panel-window.c:3118
+#: ../panel/panel-window.c:3026
 msgid "_Lock Panel"
 msgstr "_Kyçe Panelin"
 
-#: ../migrate/main.c:110
+#: ../migrate/main.c:111
 msgid "Failed to load the default configuration"
 msgstr "S’u arrit të ngarkohej formësimin parazgjedhje"
 
-#: ../migrate/main.c:122
+#: ../migrate/main.c:123
 msgid "Panel config needs migration..."
 msgstr "Formësimi i panelit lyp migrim…"
 
-#: ../migrate/main.c:126
+#: ../migrate/main.c:127
 msgid "Failed to migrate the existing configuration"
 msgstr "S’u arrit të migrohej formësimi ekzistues"
 
-#: ../migrate/main.c:132
+#: ../migrate/main.c:133
 msgid "Panel configuration has been updated."
 msgstr "Formësimi i panelit u përditësua."
 
@@ -791,7 +826,9 @@ msgstr "_Shfaq dialog ripohimi"
 #: ../plugins/actions/actions-dialog.glade.h:16
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Për disa nga veprimet, shfaq një dialog ripohimi me një skadim prej 30 sekondash."
+msgstr ""
+"Për disa nga veprimet, shfaq një dialog ripohimi me një skadim prej 30 "
+"sekondash."
 
 #: ../plugins/actions/actions-dialog.glade.h:17
 msgid "_Actions"
@@ -980,7 +1017,9 @@ msgstr "Shfaq _emra të thjeshtë aplikacionesh"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Përzgjidheni këtë mundësi për të shfaqur te menuja emrin e thjeshtë të aplikacionit, për shembull, \"Përgjegjës Kartelash\", në vend se \"Thunar\""
+msgstr ""
+"Përzgjidheni këtë mundësi për të shfaqur te menuja emrin e thjeshtë të "
+"aplikacionit, për shembull, \"Përgjegjës Kartelash\", në vend se \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 #: ../plugins/clock/clock-dialog.glade.h:27
@@ -1020,19 +1059,19 @@ msgstr "Kartelë Menuje"
 msgid "Applications"
 msgstr "Aplikacione"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:612
-#: ../plugins/directorymenu/directorymenu.c:467
+#: ../plugins/applicationsmenu/applicationsmenu.c:609
+#: ../plugins/directorymenu/directorymenu.c:468
 msgid "Select An Icon"
 msgstr "Përzgjidhni Ikonë"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:615
-#: ../plugins/directorymenu/directorymenu.c:470
+#: ../plugins/applicationsmenu/applicationsmenu.c:612
+#: ../plugins/directorymenu/directorymenu.c:471
 msgid "_OK"
 msgstr "_OK"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:652
-#: ../plugins/clock/clock.c:1035 ../plugins/launcher/launcher.c:2479
+#: ../plugins/applicationsmenu/applicationsmenu.c:650
+#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2496
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Dështoi përmbushja e urdhrit \"%s\"."
@@ -1081,11 +1120,11 @@ msgstr "%A %d %B %Y"
 msgid "Week %V"
 msgstr "Java %V"
 
-#: ../plugins/clock/clock.c:491
+#: ../plugins/clock/clock.c:490
 msgid "Failed to execute clock command"
 msgstr "S’u arrit të ekzekutohej urdhri “clock”"
 
-#: ../plugins/clock/clock.c:974
+#: ../plugins/clock/clock.c:1011
 msgid "Custom Format"
 msgstr "Format Vetjak"
 
@@ -1146,7 +1185,10 @@ msgstr "Orë"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Emër i zonës kohore që i përgjigjet një kartele te baza e të dhënave “zoneinfo”, për shembull, \"Amerikë/Nju Jork\". Që të përdoret koha vendore, lëreni të zbrazët."
+msgstr ""
+"Emër i zonës kohore që i përgjigjet një kartele te baza e të dhënave "
+"“zoneinfo”, për shembull, \"Amerikë/Nju Jork\". Që të përdoret koha vendore,"
+" lëreni të zbrazët."
 
 #: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Time_zone:"
@@ -1164,7 +1206,9 @@ msgstr "Rregullime Kohe"
 msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
-msgstr "Në u ujdistë, xhirohet ky urdhër, kur shtojca klikohet me të majtin, në vend se të shfaqet kalendari parazgjedhje."
+msgstr ""
+"Në u ujdistë, xhirohet ky urdhër, kur shtojca klikohet me të majtin, në vend"
+" se të shfaqet kalendari parazgjedhje."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Co_mmand:"
@@ -1181,7 +1225,11 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "Formati përshkruan pjesët e datës dhe kohës që duhen futur te paneli. Për shembull, %Y so të zëvendësohet me vitin, %m me muajin dhe %d me ditën. Po njësoj, etiketat <b></b> do ta kalojnë tekstin në shkronja të trasha. Për të dhëna shtesë, shihni faqen \"Ndihmë\"."
+msgstr ""
+"Formati përshkruan pjesët e datës dhe kohës që duhen futur te paneli. Për "
+"shembull, %Y so të zëvendësohet me vitin, %m me muajin dhe %d me ditën. Po "
+"njësoj, etiketat <b></b> do ta kalojnë tekstin në shkronja të trasha. Për të"
+" dhëna shtesë, shihni faqen \"Ndihmë\"."
 
 #: ../plugins/clock/clock-dialog.glade.h:25
 msgid "_Tooltip format:"
@@ -1240,7 +1288,11 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
 "the &quot;Help&quot; page for additional information."
-msgstr "Formati përshkruan pjesë date dhe kohe për të futur te paneli. Për shembull, %Y përfaqëson vitin, %m muajin dhe %d ditën. Po njësoj,  etiketat &lt;b&gt;&lt;/b&gt; do ta bëjnë tekstin të trashë. Për hollësi shtesë, shihni faqen “Ndihmë”."
+msgstr ""
+"Formati përshkruan pjesë date dhe kohe për të futur te paneli. Për shembull,"
+" %Y përfaqëson vitin, %m muajin dhe %d ditën. Po njësoj,  etiketat "
+"&lt;b&gt;&lt;/b&gt; do ta bëjnë tekstin të trashë. Për hollësi shtesë, "
+"shihni faqen “Ndihmë”."
 
 #: ../plugins/clock/clock-dialog.glade.h:41
 msgid "Date"
@@ -1270,303 +1322,303 @@ msgctxt "Time"
 msgid "%a %_d %b, %R"
 msgstr "%a %_d %b, %R"
 
-#: ../plugins/clock/clock-fuzzy.c:87
+#: ../plugins/clock/clock-fuzzy.c:88
 msgid "Night"
 msgstr "Natë"
 
-#: ../plugins/clock/clock-fuzzy.c:88
+#: ../plugins/clock/clock-fuzzy.c:89
 msgid "Early morning"
 msgstr "Mëngjes herët"
 
-#: ../plugins/clock/clock-fuzzy.c:89
+#: ../plugins/clock/clock-fuzzy.c:90
 msgid "Morning"
 msgstr "Mëngjes"
 
-#: ../plugins/clock/clock-fuzzy.c:90
+#: ../plugins/clock/clock-fuzzy.c:91
 msgid "Almost noon"
 msgstr "Thuajse mesditë"
 
-#: ../plugins/clock/clock-fuzzy.c:91
+#: ../plugins/clock/clock-fuzzy.c:92
 msgid "Noon"
 msgstr "Mesditë"
 
-#: ../plugins/clock/clock-fuzzy.c:92
+#: ../plugins/clock/clock-fuzzy.c:93
 msgid "Afternoon"
 msgstr "Pasdite"
 
-#: ../plugins/clock/clock-fuzzy.c:93
+#: ../plugins/clock/clock-fuzzy.c:94
 msgid "Evening"
 msgstr "Mbrëmje"
 
-#: ../plugins/clock/clock-fuzzy.c:94
+#: ../plugins/clock/clock-fuzzy.c:95
 msgid "Late evening"
 msgstr "Vonë në mbrëmje"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: ../plugins/clock/clock-fuzzy.c:101
+#: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "%0 o'clock"
 msgstr "%0 fiks"
 
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "five past %0"
 msgstr "%0 e pesë"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "ten past %0"
 msgstr "%0 e dhjetë"
 
-#: ../plugins/clock/clock-fuzzy.c:104
+#: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "quarter past %0"
 msgstr "%0 e çerek"
 
-#: ../plugins/clock/clock-fuzzy.c:105
+#: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "twenty past %0"
 msgstr "%0 e njëzet"
 
-#: ../plugins/clock/clock-fuzzy.c:106
+#: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five past %0"
 msgstr "%0 e njëzetepesë"
 
-#: ../plugins/clock/clock-fuzzy.c:107
+#: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "half past %0"
 msgstr "%0 e gjysmë"
 
-#: ../plugins/clock/clock-fuzzy.c:108
+#: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "twenty five to %1"
 msgstr "%1 pa njëzetepesë"
 
-#: ../plugins/clock/clock-fuzzy.c:109
+#: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "twenty to %1"
 msgstr "%1 pa njëzet"
 
-#: ../plugins/clock/clock-fuzzy.c:110
+#: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "quarter to %1"
 msgstr "%1 pa çerek"
 
-#: ../plugins/clock/clock-fuzzy.c:111
+#: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "ten to %1"
 msgstr "%1 pa dhjetë"
 
-#: ../plugins/clock/clock-fuzzy.c:112
+#: ../plugins/clock/clock-fuzzy.c:113
 #, no-c-format
 msgid "five to %1"
 msgstr "%1 pa pesë"
 
-#: ../plugins/clock/clock-fuzzy.c:113
+#: ../plugins/clock/clock-fuzzy.c:114
 #, no-c-format
 msgid "%1 o'clock"
 msgstr "%1 fiks"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: ../plugins/clock/clock-fuzzy.c:120
+#: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "%0 fiks"
 
-#: ../plugins/clock/clock-fuzzy.c:121
+#: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "%0 e pesë"
 
-#: ../plugins/clock/clock-fuzzy.c:122
+#: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "%0 e dhjetë"
 
-#: ../plugins/clock/clock-fuzzy.c:123
+#: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "%0 e çerek"
 
-#: ../plugins/clock/clock-fuzzy.c:124
+#: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "%0 e njëzetë"
 
-#: ../plugins/clock/clock-fuzzy.c:125
+#: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "%0 e njëzetepesë"
 
-#: ../plugins/clock/clock-fuzzy.c:126
+#: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "%0 e gjysmë"
 
-#: ../plugins/clock/clock-fuzzy.c:127
+#: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "%1 pa njëzetepesë"
 
-#: ../plugins/clock/clock-fuzzy.c:128
+#: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "%1 pa njëzet"
 
-#: ../plugins/clock/clock-fuzzy.c:129
+#: ../plugins/clock/clock-fuzzy.c:130
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "%1 pa çerek"
 
-#: ../plugins/clock/clock-fuzzy.c:130
+#: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "%1 pa dhjetë"
 
-#: ../plugins/clock/clock-fuzzy.c:131
+#: ../plugins/clock/clock-fuzzy.c:132
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "%1 pa pesë"
 
-#: ../plugins/clock/clock-fuzzy.c:132
+#: ../plugins/clock/clock-fuzzy.c:133
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "%1 fiks"
 
-#: ../plugins/clock/clock-fuzzy.c:137
+#: ../plugins/clock/clock-fuzzy.c:138
 msgctxt "am"
 msgid "one"
 msgstr "një"
 
-#: ../plugins/clock/clock-fuzzy.c:138
+#: ../plugins/clock/clock-fuzzy.c:139
 msgctxt "am"
 msgid "two"
 msgstr "dy"
 
-#: ../plugins/clock/clock-fuzzy.c:139
+#: ../plugins/clock/clock-fuzzy.c:140
 msgctxt "am"
 msgid "three"
 msgstr "tre"
 
-#: ../plugins/clock/clock-fuzzy.c:140
+#: ../plugins/clock/clock-fuzzy.c:141
 msgctxt "am"
 msgid "four"
 msgstr "katër"
 
-#: ../plugins/clock/clock-fuzzy.c:141
+#: ../plugins/clock/clock-fuzzy.c:142
 msgctxt "am"
 msgid "five"
 msgstr "pesë"
 
-#: ../plugins/clock/clock-fuzzy.c:142
+#: ../plugins/clock/clock-fuzzy.c:143
 msgctxt "am"
 msgid "six"
 msgstr "gjashtë"
 
-#: ../plugins/clock/clock-fuzzy.c:143
+#: ../plugins/clock/clock-fuzzy.c:144
 msgctxt "am"
 msgid "seven"
 msgstr "shtatë"
 
-#: ../plugins/clock/clock-fuzzy.c:144
+#: ../plugins/clock/clock-fuzzy.c:145
 msgctxt "am"
 msgid "eight"
 msgstr "tetë"
 
-#: ../plugins/clock/clock-fuzzy.c:145
+#: ../plugins/clock/clock-fuzzy.c:146
 msgctxt "am"
 msgid "nine"
 msgstr "nëntë"
 
-#: ../plugins/clock/clock-fuzzy.c:146
+#: ../plugins/clock/clock-fuzzy.c:147
 msgctxt "am"
 msgid "ten"
 msgstr "dhjetë"
 
-#: ../plugins/clock/clock-fuzzy.c:147
+#: ../plugins/clock/clock-fuzzy.c:148
 msgctxt "am"
 msgid "eleven"
 msgstr "njëmbëdhjetë"
 
 #. I18N: 12 AM is midnight
-#: ../plugins/clock/clock-fuzzy.c:149
+#: ../plugins/clock/clock-fuzzy.c:150
 msgctxt "am"
 msgid "twelve"
 msgstr "dymbëdhjetë"
 
-#: ../plugins/clock/clock-fuzzy.c:154
+#: ../plugins/clock/clock-fuzzy.c:155
 msgctxt "pm"
 msgid "one"
 msgstr "një"
 
-#: ../plugins/clock/clock-fuzzy.c:155
+#: ../plugins/clock/clock-fuzzy.c:156
 msgctxt "pm"
 msgid "two"
 msgstr "dy"
 
-#: ../plugins/clock/clock-fuzzy.c:156
+#: ../plugins/clock/clock-fuzzy.c:157
 msgctxt "pm"
 msgid "three"
 msgstr "tre"
 
-#: ../plugins/clock/clock-fuzzy.c:157
+#: ../plugins/clock/clock-fuzzy.c:158
 msgctxt "pm"
 msgid "four"
 msgstr "katër"
 
-#: ../plugins/clock/clock-fuzzy.c:158
+#: ../plugins/clock/clock-fuzzy.c:159
 msgctxt "pm"
 msgid "five"
 msgstr "pesë"
 
-#: ../plugins/clock/clock-fuzzy.c:159
+#: ../plugins/clock/clock-fuzzy.c:160
 msgctxt "pm"
 msgid "six"
 msgstr "gjashtë"
 
-#: ../plugins/clock/clock-fuzzy.c:160
+#: ../plugins/clock/clock-fuzzy.c:161
 msgctxt "pm"
 msgid "seven"
 msgstr "shtatë"
 
-#: ../plugins/clock/clock-fuzzy.c:161
+#: ../plugins/clock/clock-fuzzy.c:162
 msgctxt "pm"
 msgid "eight"
 msgstr "tetë"
 
-#: ../plugins/clock/clock-fuzzy.c:162
+#: ../plugins/clock/clock-fuzzy.c:163
 msgctxt "pm"
 msgid "nine"
 msgstr "nëntë"
 
-#: ../plugins/clock/clock-fuzzy.c:163
+#: ../plugins/clock/clock-fuzzy.c:164
 msgctxt "pm"
 msgid "ten"
 msgstr "dhjetë"
 
-#: ../plugins/clock/clock-fuzzy.c:164
+#: ../plugins/clock/clock-fuzzy.c:165
 msgctxt "pm"
 msgid "eleven"
 msgstr "njëmbëdhjetë"
 
 #. I18N: 12 PM is noon
-#: ../plugins/clock/clock-fuzzy.c:166
+#: ../plugins/clock/clock-fuzzy.c:167
 msgctxt "pm"
 msgid "twelve"
 msgstr "dymbëdhjetë"
@@ -1581,69 +1633,69 @@ msgstr "Sa është ora?"
 msgid "Directory Menu"
 msgstr "Menu Drejtorish"
 
-#: ../plugins/directorymenu/directorymenu.c:692
+#: ../plugins/directorymenu/directorymenu.c:695
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "S’u arrit të niset aplikacioni \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:724
+#: ../plugins/directorymenu/directorymenu.c:727
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "S’u arrit të kërkohej lloji i lëndës për \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:733
+#: ../plugins/directorymenu/directorymenu.c:736
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "S’u gjet aplikacion parazgjedhje për \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:749
+#: ../plugins/directorymenu/directorymenu.c:752
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "S’u arrit të niset aplikacioni parazgjedhje për \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:844
+#: ../plugins/directorymenu/directorymenu.c:847
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "S’u arrit të ekzekutohej aplikacioni i parapëlqyer për kategorinë \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:925
+#: ../plugins/directorymenu/directorymenu.c:928
 msgid "Create New Folder"
 msgstr "Krijo Dosje të Re"
 
-#: ../plugins/directorymenu/directorymenu.c:930
+#: ../plugins/directorymenu/directorymenu.c:933
 msgid "Create New Text Document"
 msgstr "Krijoni Dokument të Ri Tekst"
 
-#: ../plugins/directorymenu/directorymenu.c:937
+#: ../plugins/directorymenu/directorymenu.c:940
 msgid "C_reate"
 msgstr "_Krijoje"
 
-#: ../plugins/directorymenu/directorymenu.c:938
+#: ../plugins/directorymenu/directorymenu.c:941
 msgid "Create & _Open"
 msgstr "Krijoje & _Hape"
 
-#: ../plugins/directorymenu/directorymenu.c:952
+#: ../plugins/directorymenu/directorymenu.c:955
 msgid "Enter the new name:"
 msgstr "Jepni emrin e ri:"
 
-#: ../plugins/directorymenu/directorymenu.c:988
+#: ../plugins/directorymenu/directorymenu.c:991
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "S’u arrit të krijohej dosje: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1071
+#: ../plugins/directorymenu/directorymenu.c:1074
 msgid "Open Folder"
 msgstr "Hap Dosje"
 
-#: ../plugins/directorymenu/directorymenu.c:1084
+#: ../plugins/directorymenu/directorymenu.c:1087
 msgid "Open in Terminal"
 msgstr "Hape në Terminal"
 
-#: ../plugins/directorymenu/directorymenu.c:1097
+#: ../plugins/directorymenu/directorymenu.c:1100
 msgid "Create Folder..."
 msgstr "Krijoni Dosje…"
 
-#: ../plugins/directorymenu/directorymenu.c:1110
+#: ../plugins/directorymenu/directorymenu.c:1113
 msgid "Create Text Document..."
 msgstr "Krijoni Dokument Tekst…"
 
@@ -1688,7 +1740,11 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Jepni një listë rregullsish që do të përdoren për të përcaktuar cilat kartela janë të dukshme në një drejtori. Nëse këtu specifikoni më shumë se një rregullsi, elementët e listës duhen ndarë me pikëpresje (p.sh., *.txt;*.doc)."
+msgstr ""
+"Jepni një listë rregullsish që do të përdoren për të përcaktuar cilat "
+"kartela janë të dukshme në një drejtori. Nëse këtu specifikoni më shumë se "
+"një rregullsi, elementët e listës duhen ndarë me pikëpresje (p.sh., "
+"*.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:15
 msgid "_File Pattern:"
@@ -1700,7 +1756,7 @@ msgstr "Rregullsi _Kartele:"
 msgid "Filtering"
 msgstr "Filtrim"
 
-#: ../plugins/launcher/launcher.c:403
+#: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
 msgstr "Hap menu nisësi"
 
@@ -1708,7 +1764,7 @@ msgstr "Hap menu nisësi"
 msgid "Unnamed Item"
 msgstr "Element i Paemërtuar"
 
-#: ../plugins/launcher/launcher.c:1795
+#: ../plugins/launcher/launcher.c:1801
 msgid "No items"
 msgstr "Pa elementë"
 
@@ -1810,7 +1866,9 @@ msgstr "Çaktivizoji _ndihmëzat"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "Përzgjidheni këtë mundësi që të çaktivizohen ndihmëzat kur kalohet sipër butonit të panelit ose elementëve të menusë."
+msgstr ""
+"Përzgjidheni këtë mundësi që të çaktivizohen ndihmëzat kur kalohet sipër "
+"butonit të panelit ose elementëve të menusë."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:30
 msgid "Show _label instead of icon"
@@ -1822,7 +1880,9 @@ msgstr "Shfaq elementin e fundit të _përdorur në panel"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:32
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr "Përzgjidheni këtë mundësi që ta kaloni në panel elementin e klikuar të menusë."
+msgstr ""
+"Përzgjidheni këtë mundësi që ta kaloni në panel elementin e klikuar të "
+"menusë."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:33
 msgid "_Arrow button position:"
@@ -1836,15 +1896,15 @@ msgstr "Të mëtejshme"
 msgid "Program launcher with optional menu"
 msgstr "Nisës programi me menu opsionale"
 
-#: ../plugins/pager/pager.c:653 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:655 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "_Rregullime Hapësire Pune…"
 
-#: ../plugins/pager/pager.c:743
+#: ../plugins/pager/pager.c:745
 msgid "Unable to open the workspace settings"
 msgstr "S’arrihet të hapen rregullimet e hapësirës së punës"
 
-#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:897
+#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:902
 #, c-format
 msgid "Workspace %d"
 msgstr "Hapësirë pune %d"
@@ -1906,15 +1966,15 @@ msgstr "_Zgjeroje"
 msgid "Adds a separator or space between panel items"
 msgstr "Shton një ndarës ose hapësirë mes elementësh paneli"
 
-#: ../plugins/showdesktop/showdesktop.c:240
+#: ../plugins/showdesktop/showdesktop.c:241
 msgid "Restore the minimized windows"
 msgstr "Rikthe dritaret e minimizuara"
 
-#: ../plugins/showdesktop/showdesktop.c:242
+#: ../plugins/showdesktop/showdesktop.c:243
 msgid "Minimize all open windows and show the desktop"
 msgstr "Minimizo krejt dritaret e hapura dhe shfaq desktopin"
 
-#: ../plugins/showdesktop/showdesktop.c:245
+#: ../plugins/showdesktop/showdesktop.c:246
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Shfaq Desktop"
@@ -1941,7 +2001,9 @@ msgstr "_Spastro Elementë të Njohur"
 
 #: ../plugins/systray/sn-dialog.glade.h:3
 msgid "Resets the list of items and their visibility settings"
-msgstr "Rikthen te parazgjedhjet listën e elementëve dhe rregullimet përkatëse për dukshmërinë"
+msgstr ""
+"Rikthen te parazgjedhjet listën e elementëve dhe rregullimet përkatëse për "
+"dukshmërinë"
 
 #: ../plugins/systray/sn-dialog.glade.h:4
 msgid "_Fixed icon size (pixels):"
@@ -1961,7 +2023,9 @@ msgstr "Sistemoji _elementet në një rresht të vetëm"
 
 #: ../plugins/systray/sn-dialog.glade.h:8
 msgid "If enabled, ensure that the items are laid out in a single row"
-msgstr "Në u aktivizoftë, garantoni që elementët janë sistemuar në një rresht të vetëm"
+msgstr ""
+"Në u aktivizoftë, garantoni që elementët janë sistemuar në një rresht të "
+"vetëm"
 
 #: ../plugins/systray/sn-dialog.glade.h:9
 msgid "_Hide items by default"
@@ -1969,7 +2033,9 @@ msgstr "Si parazgjedhje, _fshihi elementët"
 
 #: ../plugins/systray/sn-dialog.glade.h:10
 msgid "When enabled, all new items will be marked as \"Hidden\""
-msgstr "Kur është e aktivizuar, krejt elementët e rinj do të shënohen si “Të fshehur”"
+msgstr ""
+"Kur është e aktivizuar, krejt elementët e rinj do të shënohen si “Të "
+"fshehur”"
 
 #: ../plugins/systray/sn-dialog.glade.h:11
 msgid "_Square items"
@@ -2040,7 +2106,9 @@ msgstr "S’arrihet të niset zona e njoftimeve"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "Ka shumë mundësi që një tjetër widget të ketë marrë funksionin e një zone njoftimesh. Kjo zonë do të jetë e papërdorur."
+msgstr ""
+"Ka shumë mundësi që një tjetër widget të ketë marrë funksionin e një zone "
+"njoftimesh. Kjo zonë do të jetë e papërdorur."
 
 #: ../plugins/systray/systray.c:409
 msgid "The notification area lost selection"
@@ -2059,7 +2127,9 @@ msgstr "Shtojcë Paneli Gjendjesh"
 msgid ""
 "Provides status notifier items (application indicators) and legacy systray "
 "items"
-msgstr "Furnizon elementë njoftuesish gjendjesh (tregues aplikacionesh) dhe elementë paneli të dikurshëm sistemi"
+msgstr ""
+"Furnizon elementë njoftuesish gjendjesh (tregues aplikacionesh) dhe elementë"
+" paneli të dikurshëm sistemi"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Nothing"
@@ -2159,36 +2229,36 @@ msgstr "Shfaq dritare prej krejt mo_nitorëve"
 msgid "Show only _minimized windows"
 msgstr "Shfaq vetëm dritare të _minimizuara"
 
-#: ../plugins/tasklist/tasklist-widget.c:3063
+#: ../plugins/tasklist/tasklist-widget.c:3070
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "S’arrihet të niset instancë e re e '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:3067
+#: ../plugins/tasklist/tasklist-widget.c:3074
 msgid "Error"
 msgstr "Gabim"
 
-#: ../plugins/tasklist/tasklist-widget.c:3096
+#: ../plugins/tasklist/tasklist-widget.c:3103
 msgid "Launch New Instance"
 msgstr "Nis Instancë të Re"
 
-#: ../plugins/tasklist/tasklist-widget.c:3843
+#: ../plugins/tasklist/tasklist-widget.c:3857
 msgid "Mi_nimize All"
 msgstr "Mi_nimizoji Krejt"
 
-#: ../plugins/tasklist/tasklist-widget.c:3850
+#: ../plugins/tasklist/tasklist-widget.c:3864
 msgid "Un_minimize All"
 msgstr "Ç_minimizoji Krejt"
 
-#: ../plugins/tasklist/tasklist-widget.c:3857
+#: ../plugins/tasklist/tasklist-widget.c:3871
 msgid "Ma_ximize All"
 msgstr "Ma_ksimizoji Krejt"
 
-#: ../plugins/tasklist/tasklist-widget.c:3864
+#: ../plugins/tasklist/tasklist-widget.c:3878
 msgid "_Unmaximize All"
 msgstr "Çmaksimi_zoji Krejt"
 
-#: ../plugins/tasklist/tasklist-widget.c:3875
+#: ../plugins/tasklist/tasklist-widget.c:3889
 msgid "_Close All"
 msgstr "_Mbylli Krejt"
 
@@ -2196,28 +2266,28 @@ msgstr "_Mbylli Krejt"
 msgid "Switch between open windows using buttons"
 msgstr "Hidhu nga njëra dritare e hapur në tjetrën duke përdorur butona"
 
-#: ../plugins/windowmenu/windowmenu.c:690
+#: ../plugins/windowmenu/windowmenu.c:695
 msgid "Desktop"
 msgstr "Desktop"
 
-#: ../plugins/windowmenu/windowmenu.c:1292
+#: ../plugins/windowmenu/windowmenu.c:1305
 msgid "No Windows"
 msgstr "Pa Dritare"
 
-#: ../plugins/windowmenu/windowmenu.c:1307
+#: ../plugins/windowmenu/windowmenu.c:1320
 msgid "Urgent Windows"
 msgstr "Dritare Urgjente"
 
-#: ../plugins/windowmenu/windowmenu.c:1349
+#: ../plugins/windowmenu/windowmenu.c:1362
 msgid "Add Workspace"
 msgstr "Shtoni Hapësirë Pune"
 
-#: ../plugins/windowmenu/windowmenu.c:1369
+#: ../plugins/windowmenu/windowmenu.c:1382
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Hiq Hapësirë Pune \"%s\""
 
-#: ../plugins/windowmenu/windowmenu.c:1371
+#: ../plugins/windowmenu/windowmenu.c:1384
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Hiq Hapësirë pune %d"
