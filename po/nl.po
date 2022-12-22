@@ -1,19 +1,20 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Jasper Huijsmans <jasper@xfce.org>, 2005
-# Pjotr <pjotrvertaalt@gmail.com>, 2013-2015,2017-2020,2022
-# Pjotr pjotrvertaalt@gmail.com , 2011,2013
+# Xfce Bot <transifex@xfce.org>, 2022
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Xfce4-panel\n"
+"Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-20 00:47+0200\n"
-"PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Pjotr <pjotrvertaalt@gmail.com>, 2013-2015,2017-2020,2022\n"
-"Language-Team: Dutch (http://www.transifex.com/xfce/xfce4-panel/language/nl/)\n"
+"POT-Creation-Date: 2022-12-22 12:35+0100\n"
+"PO-Revision-Date: 2022-12-22 11:35+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>, 2022\n"
+"Language-Team: Dutch (https://www.transifex.com/xfce/teams/16840/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,15 +29,18 @@ msgstr "Maak starter op de werkbalk"
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop "
 "file"
-msgstr "Voeg een nieuwe starter toe aan de werkbalk, gebaseerd op de informatie van dit bureaubladbestand"
+msgstr ""
+"Voeg een nieuwe starter toe aan de werkbalk, gebaseerd op de informatie van "
+"dit bureaubladbestand"
 
 #: ../panel-preferences.desktop.in.h:1
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
-msgstr "werkbalken;panelen;werkbalk;paneel;instellingen;voorkeuren;taakbalk;menu;start;knoppen;starter;meldvak;status;invoegsels;pictogrammen;"
+msgstr ""
+"werkbalken;panelen;werkbalk;paneel;instellingen;voorkeuren;taakbalk;menu;start;knoppen;starter;meldvak;status;invoegsels;pictogrammen;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3081
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2989
 msgid "Panel"
 msgstr "Werkbalk"
 
@@ -59,13 +63,15 @@ msgstr "Element verwijderen"
 #: ../libxfce4panel/xfce-panel-plugin.c:1087
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
-msgstr "Verwijderen van het element uit de werkbalk houdt tevens in dat zijn instellingen verloren zullen gaan."
+msgstr ""
+"Verwijderen van het element uit de werkbalk houdt tevens in dat zijn "
+"instellingen verloren zullen gaan."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1088 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1422
-#: ../plugins/applicationsmenu/applicationsmenu.c:614
-#: ../plugins/directorymenu/directorymenu.c:469
-#: ../plugins/directorymenu/directorymenu.c:936
+#: ../plugins/applicationsmenu/applicationsmenu.c:611
+#: ../plugins/directorymenu/directorymenu.c:470
+#: ../plugins/directorymenu/directorymenu.c:939
 msgid "_Cancel"
 msgstr "_Afbreken"
 
@@ -86,7 +92,7 @@ msgid "_Properties"
 msgstr "Eigenscha_ppen"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3157
+#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3065
 msgid "_About"
 msgstr "_Over"
 
@@ -100,23 +106,23 @@ msgid "Pane_l"
 msgstr "_Werkbalk"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:3093
+#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:3001
 msgid "Add _New Items..."
 msgstr "_Nieuwe elementen toevoegen..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:3104
+#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:3012
 msgid "Panel Pr_eferences..."
 msgstr "Werkbalkvoork_euren..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3132
+#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3040
 msgid "Log _Out"
 msgstr "Af_melden"
 
 #. help item
 #: ../libxfce4panel/xfce-panel-plugin.c:1326 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3148
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3056
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:15
@@ -202,94 +208,103 @@ msgid "Please report bugs to <%s>."
 msgstr "Fouten graag melden bij <%s>."
 
 #. quit without error if an instance is running
-#: ../panel/main.c:396
+#: ../panel/main.c:398
 msgid "There is already a running instance"
 msgstr "Er is al een actieve functie"
 
 #. spawn ourselfs again
-#: ../panel/main.c:404
+#: ../panel/main.c:406
 msgid "Restarting..."
 msgstr "Aan het herstarten..."
 
-#: ../panel/main.c:419
+#: ../panel/main.c:421
 msgid "Failed to show the preferences dialog"
 msgstr "Kon de voorkeurendialoog niet weergeven"
 
-#: ../panel/main.c:421
-msgid "Failed to show the add new items dialog"
-msgstr "Kon het dialoogvenster voor het toevoegen van nieuwe elementen niet weergeven"
-
 #: ../panel/main.c:423
+msgid "Failed to show the add new items dialog"
+msgstr ""
+"Kon het dialoogvenster voor het toevoegen van nieuwe elementen niet "
+"weergeven"
+
+#: ../panel/main.c:425
 msgid "Failed to save the panel configuration"
 msgstr "Kon de werkbalkinstellingen niet opslaan"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:427
 msgid "Failed to add a plugin to the panel"
 msgstr "Kon het invoegsel niet aan de werkbalk toevoegen"
 
-#: ../panel/main.c:427
+#: ../panel/main.c:429
 msgid "Failed to restart the panel"
 msgstr "Kon de werkbalk niet herstarten"
 
-#: ../panel/main.c:429
+#: ../panel/main.c:431
 msgid "Failed to quit the panel"
 msgstr "Kon de werkbalk niet afsluiten"
 
-#: ../panel/main.c:431
+#: ../panel/main.c:433
 msgid "Failed to send D-Bus message"
 msgstr "Kon het D-Busbericht niet versturen"
 
-#: ../panel/main.c:441
+#: ../panel/main.c:443
 msgid "Execute"
 msgstr "Uitvoeren"
 
-#: ../panel/main.c:442
+#: ../panel/main.c:444
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "Wilt u de werkbalk starten? Zo ja, zorg er dan voor dat u de sessie opslaat bij afmelden, zodat de werkbalk automatisch wordt gestart wanneer u zich weer aanmeldt."
+msgstr ""
+"Wilt u de werkbalk starten? Zo ja, zorg er dan voor dat u de sessie opslaat "
+"bij afmelden, zodat de werkbalk automatisch wordt gestart wanneer u zich "
+"weer aanmeldt."
 
-#: ../panel/main.c:445 ../panel/main.c:459
+#: ../panel/main.c:447 ../panel/main.c:461
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Geen actieve functie van %s gevonden"
 
-#: ../panel/panel-application.c:221
+#: ../panel/panel-application.c:220
 msgid "Failed to launch the migration application"
 msgstr "Kon de migratietoepassing niet openen"
 
-#: ../panel/panel-application.c:1002
+#: ../panel/panel-application.c:1000
 msgid "Create _Launcher"
 msgstr "Maak starter"
 
-#: ../panel/panel-application.c:1003
+#: ../panel/panel-application.c:1001
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Dit zal een nieuw starter-invoegsel toevoegen aan de werkbalk en voegt de geplaatste bestanden in als menu-onderdelen."
+msgstr ""
+"Dit zal een nieuw starter-invoegsel toevoegen aan de werkbalk en voegt de "
+"geplaatste bestanden in als menu-onderdelen."
 
-#: ../panel/panel-application.c:1005
+#: ../panel/panel-application.c:1003
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Maak een nieuwe starter van %d bureaubladbestand"
 msgstr[1] "Maak een nieuwe starter van %d bureaubladbestanden"
 
-#: ../panel/panel-application.c:1762
+#: ../panel/panel-application.c:1760
 msgid "Quit"
 msgstr "Sluiten"
 
-#: ../panel/panel-application.c:1763
+#: ../panel/panel-application.c:1761
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "U hebt X (de grafische omgeving) gestart zonder sessiebeheerder. Wanneer u op sluiten klikt, dan zal dat de grafische omgeving afsluiten."
+msgstr ""
+"U hebt X (de grafische omgeving) gestart zonder sessiebeheerder. Wanneer u "
+"op sluiten klikt, dan zal dat de grafische omgeving afsluiten."
 
-#: ../panel/panel-application.c:1764
+#: ../panel/panel-application.c:1762
 msgid "Are you sure you want to quit the panel?"
 msgstr "Weet u zeker dat u de werkbalk wil afsluiten?"
 
-#: ../panel/panel-application.c:1772
+#: ../panel/panel-application.c:1770
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Kon de opdracht '%s' niet uitvoeren"
@@ -297,14 +312,17 @@ msgstr "Kon de opdracht '%s' niet uitvoeren"
 #: ../panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Ongeldig invoegsel-gebeurtenis-syntax gespecificeerd. Gebruik PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr ""
+"Ongeldig invoegsel-gebeurtenis-syntax gespecificeerd. Gebruik PLUGIN-"
+"NAME:NAME[:TYPE:VALUE]."
 
 #: ../panel/panel-dbus-client.c:248
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "Ongeldig type '%s'. Geldige types zijn bool, double, int, string en uint."
+msgstr ""
+"Ongeldig type '%s'. Geldige types zijn bool, double, int, string en uint."
 
 #: ../panel/panel-dialogs.c:58
 msgid "Unable to open the e-mail address"
@@ -316,7 +334,9 @@ msgstr "De werkbalk van de Xfce-werkomgeving"
 
 #: ../panel/panel-dialogs.c:88
 msgid "translator-credits"
-msgstr "Vincent Tunru <projects@vinnl.nl>\nPjotr pjotrvertaalt@gmail.com"
+msgstr ""
+"Vincent Tunru <projects@vinnl.nl>\n"
+"Pjotr pjotrvertaalt@gmail.com"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:162
@@ -342,7 +362,9 @@ msgstr "Werkbalk %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "Omdat de werkbalk in kioskmodus draait, kunt u als normale gebruiker de instellingen niet veranderen"
+msgstr ""
+"Omdat de werkbalk in kioskmodus draait, kunt u als normale gebruiker de "
+"instellingen niet veranderen"
 
 #: ../panel/panel-dialogs.c:238
 msgid "Modifying the panel is not allowed"
@@ -380,7 +402,9 @@ msgstr "Geef hier een zoekterm op"
 #: ../panel/panel-plugin-external.c:516
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "Het invoegsel '%s' heeft onverwacht de werkbalk verlaten, wilt u het herstarten?"
+msgstr ""
+"Het invoegsel '%s' heeft onverwacht de werkbalk verlaten, wilt u het "
+"herstarten?"
 
 #: ../panel/panel-plugin-external.c:519
 msgid "Plugin Restart"
@@ -392,7 +416,11 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Het invoegsel is meer dan één keer opnieuw opgestart in de afgelopen %d seconden. Druk op 'Uitvoeren' om te proberen het invoegsel opnieuw te starten, anders zal dit invoegsel blijvend van de werkbalk worden verwijderd."
+msgstr ""
+"Het invoegsel is meer dan één keer opnieuw opgestart in de afgelopen %d "
+"seconden. Druk op 'Uitvoeren' om te proberen het invoegsel opnieuw te "
+"starten, anders zal dit invoegsel blijvend van de werkbalk worden "
+"verwijderd."
 
 #: ../panel/panel-plugin-external.c:524
 msgid "_Execute"
@@ -414,7 +442,9 @@ msgstr "Beeldscherm %d"
 
 #: ../panel/panel-preferences-dialog.c:1053
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "De instellingen van de werkbalk en de invoegsels zullen blijvend verwijderd worden"
+msgstr ""
+"De instellingen van de werkbalk en de invoegsels zullen blijvend verwijderd "
+"worden"
 
 #: ../panel/panel-preferences-dialog.c:1054
 #, c-format
@@ -435,7 +465,9 @@ msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "Interne naam: %s-%d\nPID: %d"
+msgstr ""
+"Interne naam: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
@@ -446,7 +478,9 @@ msgstr "Interne naam: %s-%d"
 
 #: ../panel/panel-preferences-dialog.c:1420
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Als u een element van de werkbalk verwijdert, dan kan dit niet meer ongedaan worden gemaakt."
+msgstr ""
+"Als u een element van de werkbalk verwijdert, dan kan dit niet meer ongedaan"
+" worden gemaakt."
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 msgid "Never"
@@ -522,7 +556,8 @@ msgstr "Over meerdere _beeldschermen"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr "Selecteer deze optie om de werkbalk over meerdere schermen uit te strekken."
+msgstr ""
+"Selecteer deze optie om de werkbalk over meerdere schermen uit te strekken."
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "_Lock panel"
@@ -531,7 +566,9 @@ msgstr "Werkbalk _vergrendelen"
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr "Selecteer deze optie om de handgrepen van de werkbalk te verbergen en de positie vast te zetten."
+msgstr ""
+"Selecteer deze optie om de handgrepen van de werkbalk te verbergen en de "
+"positie vast te zetten."
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Keep panel _above windows"
@@ -541,7 +578,10 @@ msgstr "Behoud werkbalk _boven vensters"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "Selecteer deze optie indien u wil dat gemaximaliseerde vensters het gebied achter de werkbalk bedekken. Dit werkt alleen wanneer de werkbalk aan de rand van het scherm is vastgemaakt."
+msgstr ""
+"Selecteer deze optie indien u wil dat gemaximaliseerde vensters het gebied "
+"achter de werkbalk bedekken. Dit werkt alleen wanneer de werkbalk aan de "
+"rand van het scherm is vastgemaakt."
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
@@ -577,7 +617,9 @@ msgstr "Verleng de werkbalk a_utomatisch"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Kies deze optie om de lengte van de werkbalk automatisch te vergroten wanneer de invoegsels meer ruimte nodig hebben."
+msgstr ""
+"Kies deze optie om de lengte van de werkbalk automatisch te vergroten "
+"wanneer de invoegsels meer ruimte nodig hebben."
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid "D_isplay"
@@ -636,7 +678,9 @@ msgstr "Instellen..."
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>Beeldsamenstelling is thans uitgeschakeld</b>\nVoor doorzichtigheidsinstellingen in de werkbalk moet u beeldsamenstelling inschakelen in de vensterbeheerder."
+msgstr ""
+"<b>Beeldsamenstelling is thans uitgeschakeld</b>\n"
+"Voor doorzichtigheidsinstellingen in de werkbalk moet u beeldsamenstelling inschakelen in de vensterbeheerder."
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:51
@@ -652,7 +696,9 @@ msgstr "Ver_laten:"
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "Transparantie wanneer de muisaanwijzer NIET over de werkbalk gaat, tussen 0 (volledig transparant) en 100 (volledig ondoorzichtig)."
+msgstr ""
+"Transparantie wanneer de muisaanwijzer NIET over de werkbalk gaat, tussen 0 "
+"(volledig transparant) en 100 (volledig ondoorzichtig)."
 
 #: ../panel/panel-preferences-dialog.glade.h:55
 msgid "Appeara_nce"
@@ -713,23 +759,23 @@ msgstr "Ervaren"
 msgid "Expert"
 msgstr "Deskundige"
 
-#: ../panel/panel-window.c:3118
+#: ../panel/panel-window.c:3026
 msgid "_Lock Panel"
 msgstr "Werkbalk vergrendelen"
 
-#: ../migrate/main.c:110
+#: ../migrate/main.c:111
 msgid "Failed to load the default configuration"
 msgstr "Kon de standaardinstellingen niet laden"
 
-#: ../migrate/main.c:122
+#: ../migrate/main.c:123
 msgid "Panel config needs migration..."
 msgstr "Werkbalkconfiguratie heeft migratie nodig..."
 
-#: ../migrate/main.c:126
+#: ../migrate/main.c:127
 msgid "Failed to migrate the existing configuration"
 msgstr "Kon de bestaande instellingen niet overbrengen"
 
-#: ../migrate/main.c:132
+#: ../migrate/main.c:133
 msgid "Panel configuration has been updated."
 msgstr "Werkbalkconfiguratie is bijgewerkt."
 
@@ -790,7 +836,9 @@ msgstr "Toon bevestigingsdialoog"
 #: ../plugins/actions/actions-dialog.glade.h:16
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Toon een bevestigingsdialoog met een aftelling van 30 seconden voor sommige acties."
+msgstr ""
+"Toon een bevestigingsdialoog met een aftelling van 30 seconden voor sommige "
+"acties."
 
 #: ../plugins/actions/actions-dialog.glade.h:17
 msgid "_Actions"
@@ -869,7 +917,9 @@ msgstr "Wilt u het systeem zowel in slaapstand als in pauzestand brengen?"
 #: ../plugins/actions/actions.c:212
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
-msgstr "Over %d seconden wordt de computer zowel in slaapstand als in pauzestand gebracht."
+msgstr ""
+"Over %d seconden wordt de computer zowel in slaapstand als in pauzestand "
+"gebracht."
 
 #: ../plugins/actions/actions.c:218
 msgid "Suspend"
@@ -979,7 +1029,9 @@ msgstr "Toon generieke namen van toepassingen"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Kies deze optie om de generieke naam in het menu weer te geven, bijvoorbeeld 'Bestandbeheerder' in plaats van 'Thunar'"
+msgstr ""
+"Kies deze optie om de generieke naam in het menu weer te geven, bijvoorbeeld"
+" 'Bestandbeheerder' in plaats van 'Thunar'"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 #: ../plugins/clock/clock-dialog.glade.h:27
@@ -1019,19 +1071,19 @@ msgstr "Menubestand"
 msgid "Applications"
 msgstr "Toepassingen"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:612
-#: ../plugins/directorymenu/directorymenu.c:467
+#: ../plugins/applicationsmenu/applicationsmenu.c:609
+#: ../plugins/directorymenu/directorymenu.c:468
 msgid "Select An Icon"
 msgstr "Kies een pictogram"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:615
-#: ../plugins/directorymenu/directorymenu.c:470
+#: ../plugins/applicationsmenu/applicationsmenu.c:612
+#: ../plugins/directorymenu/directorymenu.c:471
 msgid "_OK"
 msgstr "_Oké"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:652
-#: ../plugins/clock/clock.c:1035 ../plugins/launcher/launcher.c:2479
+#: ../plugins/applicationsmenu/applicationsmenu.c:650
+#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2496
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Kon opdracht '%s' niet uitvoeren."
@@ -1080,11 +1132,11 @@ msgstr "%A %d %B %Y"
 msgid "Week %V"
 msgstr "Week %V"
 
-#: ../plugins/clock/clock.c:491
+#: ../plugins/clock/clock.c:490
 msgid "Failed to execute clock command"
 msgstr "Kon de klokopdracht niet uitvoeren"
 
-#: ../plugins/clock/clock.c:974
+#: ../plugins/clock/clock.c:1011
 msgid "Custom Format"
 msgstr "Aangepaste bestandopmaak"
 
@@ -1145,7 +1197,9 @@ msgstr "Klok"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Naam van de tijdzone, in overeenstemming met de tijdzone-gegevensbank van het systeem. Laat leeg om terug te vallen op de plaatselijke tijd."
+msgstr ""
+"Naam van de tijdzone, in overeenstemming met de tijdzone-gegevensbank van "
+"het systeem. Laat leeg om terug te vallen op de plaatselijke tijd."
 
 #: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Time_zone:"
@@ -1163,7 +1217,9 @@ msgstr "Tijdinstellingen"
 msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
-msgstr "Indien ingesteld, wordt deze opdracht uitgevoerd wanneer het invoegsel een linkerklik krijgt, in plaats van het tonen van de standaardkalender."
+msgstr ""
+"Indien ingesteld, wordt deze opdracht uitgevoerd wanneer het invoegsel een "
+"linkerklik krijgt, in plaats van het tonen van de standaardkalender."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Co_mmand:"
@@ -1180,7 +1236,11 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "De indeling beschrijft welke onderdelen van de tijd en datum in de bestandnaam worden gevoegd. Zo wordt bijvoorbeeld %Y vervangen door het jaartal, %m door de maand en %d door de dag. Zie de hulppagina voor meer informatie."
+msgstr ""
+"De indeling beschrijft welke onderdelen van de tijd en datum in de "
+"bestandnaam worden gevoegd. Zo wordt bijvoorbeeld %Y vervangen door het "
+"jaartal, %m door de maand en %d door de dag. Zie de hulppagina voor meer "
+"informatie."
 
 #: ../plugins/clock/clock-dialog.glade.h:25
 msgid "_Tooltip format:"
@@ -1239,7 +1299,12 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
 "the &quot;Help&quot; page for additional information."
-msgstr "De opmaak beschrijft de datum- en tijdelementen die in de werkbalk komen te staan. Bijvoorbeeld: %Y wordt vervangen door het jaar, %m door de maand en %d door de dag. Op vergelijkbare wijze maken de aanduidingen &lt;b&gt;&lt;/b&gt; de tekst vetgedrukt. Zie de pagina &quot;Hulp&quot; voor aanvullende informatie."
+msgstr ""
+"De opmaak beschrijft de datum- en tijdelementen die in de werkbalk komen te "
+"staan. Bijvoorbeeld: %Y wordt vervangen door het jaar, %m door de maand en "
+"%d door de dag. Op vergelijkbare wijze maken de aanduidingen "
+"&lt;b&gt;&lt;/b&gt; de tekst vetgedrukt. Zie de pagina &quot;Hulp&quot; voor"
+" aanvullende informatie."
 
 #: ../plugins/clock/clock-dialog.glade.h:41
 msgid "Date"
@@ -1269,303 +1334,303 @@ msgctxt "Time"
 msgid "%a %_d %b, %R"
 msgstr "%a %_d %b, %R"
 
-#: ../plugins/clock/clock-fuzzy.c:87
+#: ../plugins/clock/clock-fuzzy.c:88
 msgid "Night"
 msgstr "Nacht"
 
-#: ../plugins/clock/clock-fuzzy.c:88
+#: ../plugins/clock/clock-fuzzy.c:89
 msgid "Early morning"
 msgstr "Vroege ochtend"
 
-#: ../plugins/clock/clock-fuzzy.c:89
+#: ../plugins/clock/clock-fuzzy.c:90
 msgid "Morning"
 msgstr "Ochtend"
 
-#: ../plugins/clock/clock-fuzzy.c:90
+#: ../plugins/clock/clock-fuzzy.c:91
 msgid "Almost noon"
 msgstr "Bijna middag"
 
-#: ../plugins/clock/clock-fuzzy.c:91
+#: ../plugins/clock/clock-fuzzy.c:92
 msgid "Noon"
 msgstr "Middag"
 
-#: ../plugins/clock/clock-fuzzy.c:92
+#: ../plugins/clock/clock-fuzzy.c:93
 msgid "Afternoon"
 msgstr "Namiddag"
 
-#: ../plugins/clock/clock-fuzzy.c:93
+#: ../plugins/clock/clock-fuzzy.c:94
 msgid "Evening"
 msgstr "Avond"
 
-#: ../plugins/clock/clock-fuzzy.c:94
+#: ../plugins/clock/clock-fuzzy.c:95
 msgid "Late evening"
 msgstr "Laat op de avond"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: ../plugins/clock/clock-fuzzy.c:101
+#: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "%0 o'clock"
 msgstr "%0 uur"
 
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "five past %0"
 msgstr "vijf over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "ten past %0"
 msgstr "tien over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:104
+#: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "quarter past %0"
 msgstr "kwart over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:105
+#: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "twenty past %0"
 msgstr "tien voor half %1"
 
-#: ../plugins/clock/clock-fuzzy.c:106
+#: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five past %0"
 msgstr "vijf voor half %1"
 
-#: ../plugins/clock/clock-fuzzy.c:107
+#: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "half past %0"
 msgstr "half %1"
 
-#: ../plugins/clock/clock-fuzzy.c:108
+#: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "twenty five to %1"
 msgstr "vijf over half %1"
 
-#: ../plugins/clock/clock-fuzzy.c:109
+#: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "twenty to %1"
 msgstr "tien over half %1"
 
-#: ../plugins/clock/clock-fuzzy.c:110
+#: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "quarter to %1"
 msgstr "kwart voor %1"
 
-#: ../plugins/clock/clock-fuzzy.c:111
+#: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "ten to %1"
 msgstr "tien voor %1"
 
-#: ../plugins/clock/clock-fuzzy.c:112
+#: ../plugins/clock/clock-fuzzy.c:113
 #, no-c-format
 msgid "five to %1"
 msgstr "vijf voor %1"
 
-#: ../plugins/clock/clock-fuzzy.c:113
+#: ../plugins/clock/clock-fuzzy.c:114
 #, no-c-format
 msgid "%1 o'clock"
 msgstr "%1 uur"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: ../plugins/clock/clock-fuzzy.c:120
+#: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "%0 uur"
 
-#: ../plugins/clock/clock-fuzzy.c:121
+#: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "vijf over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:122
+#: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "tien over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:123
+#: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "kwart over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:124
+#: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "tien voor half %1"
 
-#: ../plugins/clock/clock-fuzzy.c:125
+#: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "vijf voor half %1"
 
-#: ../plugins/clock/clock-fuzzy.c:126
+#: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "half %1"
 
-#: ../plugins/clock/clock-fuzzy.c:127
+#: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "vijf over half %1"
 
-#: ../plugins/clock/clock-fuzzy.c:128
+#: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "tien over half %1"
 
-#: ../plugins/clock/clock-fuzzy.c:129
+#: ../plugins/clock/clock-fuzzy.c:130
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "kwart voor %1"
 
-#: ../plugins/clock/clock-fuzzy.c:130
+#: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "tien voor %1"
 
-#: ../plugins/clock/clock-fuzzy.c:131
+#: ../plugins/clock/clock-fuzzy.c:132
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "vijf voor %1"
 
-#: ../plugins/clock/clock-fuzzy.c:132
+#: ../plugins/clock/clock-fuzzy.c:133
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "%1 uur"
 
-#: ../plugins/clock/clock-fuzzy.c:137
+#: ../plugins/clock/clock-fuzzy.c:138
 msgctxt "am"
 msgid "one"
 msgstr "één"
 
-#: ../plugins/clock/clock-fuzzy.c:138
+#: ../plugins/clock/clock-fuzzy.c:139
 msgctxt "am"
 msgid "two"
 msgstr "twee"
 
-#: ../plugins/clock/clock-fuzzy.c:139
+#: ../plugins/clock/clock-fuzzy.c:140
 msgctxt "am"
 msgid "three"
 msgstr "drie"
 
-#: ../plugins/clock/clock-fuzzy.c:140
+#: ../plugins/clock/clock-fuzzy.c:141
 msgctxt "am"
 msgid "four"
 msgstr "vier"
 
-#: ../plugins/clock/clock-fuzzy.c:141
+#: ../plugins/clock/clock-fuzzy.c:142
 msgctxt "am"
 msgid "five"
 msgstr "vijf"
 
-#: ../plugins/clock/clock-fuzzy.c:142
+#: ../plugins/clock/clock-fuzzy.c:143
 msgctxt "am"
 msgid "six"
 msgstr "zes"
 
-#: ../plugins/clock/clock-fuzzy.c:143
+#: ../plugins/clock/clock-fuzzy.c:144
 msgctxt "am"
 msgid "seven"
 msgstr "zeven"
 
-#: ../plugins/clock/clock-fuzzy.c:144
+#: ../plugins/clock/clock-fuzzy.c:145
 msgctxt "am"
 msgid "eight"
 msgstr "acht"
 
-#: ../plugins/clock/clock-fuzzy.c:145
+#: ../plugins/clock/clock-fuzzy.c:146
 msgctxt "am"
 msgid "nine"
 msgstr "negen"
 
-#: ../plugins/clock/clock-fuzzy.c:146
+#: ../plugins/clock/clock-fuzzy.c:147
 msgctxt "am"
 msgid "ten"
 msgstr "tien"
 
-#: ../plugins/clock/clock-fuzzy.c:147
+#: ../plugins/clock/clock-fuzzy.c:148
 msgctxt "am"
 msgid "eleven"
 msgstr "elf"
 
 #. I18N: 12 AM is midnight
-#: ../plugins/clock/clock-fuzzy.c:149
+#: ../plugins/clock/clock-fuzzy.c:150
 msgctxt "am"
 msgid "twelve"
 msgstr "twaalf"
 
-#: ../plugins/clock/clock-fuzzy.c:154
+#: ../plugins/clock/clock-fuzzy.c:155
 msgctxt "pm"
 msgid "one"
 msgstr "één"
 
-#: ../plugins/clock/clock-fuzzy.c:155
+#: ../plugins/clock/clock-fuzzy.c:156
 msgctxt "pm"
 msgid "two"
 msgstr "twee"
 
-#: ../plugins/clock/clock-fuzzy.c:156
+#: ../plugins/clock/clock-fuzzy.c:157
 msgctxt "pm"
 msgid "three"
 msgstr "drie"
 
-#: ../plugins/clock/clock-fuzzy.c:157
+#: ../plugins/clock/clock-fuzzy.c:158
 msgctxt "pm"
 msgid "four"
 msgstr "vier"
 
-#: ../plugins/clock/clock-fuzzy.c:158
+#: ../plugins/clock/clock-fuzzy.c:159
 msgctxt "pm"
 msgid "five"
 msgstr "vijf"
 
-#: ../plugins/clock/clock-fuzzy.c:159
+#: ../plugins/clock/clock-fuzzy.c:160
 msgctxt "pm"
 msgid "six"
 msgstr "zes"
 
-#: ../plugins/clock/clock-fuzzy.c:160
+#: ../plugins/clock/clock-fuzzy.c:161
 msgctxt "pm"
 msgid "seven"
 msgstr "zeven"
 
-#: ../plugins/clock/clock-fuzzy.c:161
+#: ../plugins/clock/clock-fuzzy.c:162
 msgctxt "pm"
 msgid "eight"
 msgstr "acht"
 
-#: ../plugins/clock/clock-fuzzy.c:162
+#: ../plugins/clock/clock-fuzzy.c:163
 msgctxt "pm"
 msgid "nine"
 msgstr "negen"
 
-#: ../plugins/clock/clock-fuzzy.c:163
+#: ../plugins/clock/clock-fuzzy.c:164
 msgctxt "pm"
 msgid "ten"
 msgstr "tien"
 
-#: ../plugins/clock/clock-fuzzy.c:164
+#: ../plugins/clock/clock-fuzzy.c:165
 msgctxt "pm"
 msgid "eleven"
 msgstr "elf"
 
 #. I18N: 12 PM is noon
-#: ../plugins/clock/clock-fuzzy.c:166
+#: ../plugins/clock/clock-fuzzy.c:167
 msgctxt "pm"
 msgid "twelve"
 msgstr "twaalf"
@@ -1580,69 +1645,69 @@ msgstr "Hoe laat is het?"
 msgid "Directory Menu"
 msgstr "Mapmenu"
 
-#: ../plugins/directorymenu/directorymenu.c:692
+#: ../plugins/directorymenu/directorymenu.c:695
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Kon toepassing '%s' niet starten"
 
-#: ../plugins/directorymenu/directorymenu.c:724
+#: ../plugins/directorymenu/directorymenu.c:727
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Kon het type inhoud van '%s' niet achterhalen"
 
-#: ../plugins/directorymenu/directorymenu.c:733
+#: ../plugins/directorymenu/directorymenu.c:736
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Geen standaardtoepassing gevonden voor '%s'"
 
-#: ../plugins/directorymenu/directorymenu.c:749
+#: ../plugins/directorymenu/directorymenu.c:752
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Kon standaardtoepassing voor '%s' niet starten"
 
-#: ../plugins/directorymenu/directorymenu.c:844
+#: ../plugins/directorymenu/directorymenu.c:847
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Kon de voorkeurstoepassing voor de categorie '%s' niet starten"
 
-#: ../plugins/directorymenu/directorymenu.c:925
+#: ../plugins/directorymenu/directorymenu.c:928
 msgid "Create New Folder"
 msgstr "Maak nieuwe map"
 
-#: ../plugins/directorymenu/directorymenu.c:930
+#: ../plugins/directorymenu/directorymenu.c:933
 msgid "Create New Text Document"
 msgstr "Maak nieuw tekstdocument"
 
-#: ../plugins/directorymenu/directorymenu.c:937
+#: ../plugins/directorymenu/directorymenu.c:940
 msgid "C_reate"
 msgstr "_Maken"
 
-#: ../plugins/directorymenu/directorymenu.c:938
+#: ../plugins/directorymenu/directorymenu.c:941
 msgid "Create & _Open"
 msgstr "Maken en _openen"
 
-#: ../plugins/directorymenu/directorymenu.c:952
+#: ../plugins/directorymenu/directorymenu.c:955
 msgid "Enter the new name:"
 msgstr "Voer de nieuwe naam in:"
 
-#: ../plugins/directorymenu/directorymenu.c:988
+#: ../plugins/directorymenu/directorymenu.c:991
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Kon map niet maken: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1071
+#: ../plugins/directorymenu/directorymenu.c:1074
 msgid "Open Folder"
 msgstr "Map openen"
 
-#: ../plugins/directorymenu/directorymenu.c:1084
+#: ../plugins/directorymenu/directorymenu.c:1087
 msgid "Open in Terminal"
 msgstr "Openen in terminalvenster"
 
-#: ../plugins/directorymenu/directorymenu.c:1097
+#: ../plugins/directorymenu/directorymenu.c:1100
 msgid "Create Folder..."
 msgstr "Map maken..."
 
-#: ../plugins/directorymenu/directorymenu.c:1110
+#: ../plugins/directorymenu/directorymenu.c:1113
 msgid "Create Text Document..."
 msgstr "Tekstdocument maken..."
 
@@ -1687,7 +1752,11 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Geef een lijst in van patronen die gebruikt zullen worden om te bepalen welke bestanden er in een map worden weergegeven. Als hier meer dan één patroon wordt ingevoerd, dan dienen de individuele elementen in de lijst gescheiden te worden met behulp van puntkomma's (bijv. *.txt;*.doc)."
+msgstr ""
+"Geef een lijst in van patronen die gebruikt zullen worden om te bepalen "
+"welke bestanden er in een map worden weergegeven. Als hier meer dan één "
+"patroon wordt ingevoerd, dan dienen de individuele elementen in de lijst "
+"gescheiden te worden met behulp van puntkomma's (bijv. *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:15
 msgid "_File Pattern:"
@@ -1699,7 +1768,7 @@ msgstr "_Bestandpatroon:"
 msgid "Filtering"
 msgstr "Filteren"
 
-#: ../plugins/launcher/launcher.c:403
+#: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
 msgstr "Open startermenu"
 
@@ -1707,7 +1776,7 @@ msgstr "Open startermenu"
 msgid "Unnamed Item"
 msgstr "Naamloos element"
 
-#: ../plugins/launcher/launcher.c:1795
+#: ../plugins/launcher/launcher.c:1801
 msgid "No items"
 msgstr "Geen elementen"
 
@@ -1809,7 +1878,9 @@ msgstr "_Zweeftips uitschakelen"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "Selecteer deze optie om de zweeftips uit te schakelen, die verschijnen als de muisaanwijzer over knoppen of menu-elementen zweeft."
+msgstr ""
+"Selecteer deze optie om de zweeftips uit te schakelen, die verschijnen als "
+"de muisaanwijzer over knoppen of menu-elementen zweeft."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:30
 msgid "Show _label instead of icon"
@@ -1821,7 +1892,9 @@ msgstr "Toon laatstgebr_uikte element in de werkbalk"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:32
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr "Selecteer deze optie om het geselecteerde menu-element naar de werkbalk te verplaatsen"
+msgstr ""
+"Selecteer deze optie om het geselecteerde menu-element naar de werkbalk te "
+"verplaatsen"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:33
 msgid "_Arrow button position:"
@@ -1835,15 +1908,15 @@ msgstr "Geavanceerd"
 msgid "Program launcher with optional menu"
 msgstr "Programma-starter met optioneel menu"
 
-#: ../plugins/pager/pager.c:653 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:655 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "Werkbladinstellingen"
 
-#: ../plugins/pager/pager.c:743
+#: ../plugins/pager/pager.c:745
 msgid "Unable to open the workspace settings"
 msgstr "Kon de werkbladinstellingen niet openen"
 
-#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:897
+#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:902
 #, c-format
 msgid "Workspace %d"
 msgstr "Werkblad %d"
@@ -1905,15 +1978,15 @@ msgstr "_Uitvouwen"
 msgid "Adds a separator or space between panel items"
 msgstr "Voegt een scheidingslijn of witruimte tussen elementen in"
 
-#: ../plugins/showdesktop/showdesktop.c:240
+#: ../plugins/showdesktop/showdesktop.c:241
 msgid "Restore the minimized windows"
 msgstr "Herstel de geminimaliseerde vensters"
 
-#: ../plugins/showdesktop/showdesktop.c:242
+#: ../plugins/showdesktop/showdesktop.c:243
 msgid "Minimize all open windows and show the desktop"
 msgstr "Minimaliseer alle open vensters en toon het bureaublad"
 
-#: ../plugins/showdesktop/showdesktop.c:245
+#: ../plugins/showdesktop/showdesktop.c:246
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Bureaublad tonen"
@@ -1940,7 +2013,9 @@ msgstr "Bekende elementen _wissen"
 
 #: ../plugins/systray/sn-dialog.glade.h:3
 msgid "Resets the list of items and their visibility settings"
-msgstr "Zet de lijst van elementen en hun zichtbaarheidsinstellingen terug op de standaard"
+msgstr ""
+"Zet de lijst van elementen en hun zichtbaarheidsinstellingen terug op de "
+"standaard"
 
 #: ../plugins/systray/sn-dialog.glade.h:4
 msgid "_Fixed icon size (pixels):"
@@ -1960,7 +2035,9 @@ msgstr "Elementen rangschikken in een enkele rij"
 
 #: ../plugins/systray/sn-dialog.glade.h:8
 msgid "If enabled, ensure that the items are laid out in a single row"
-msgstr "Wanneer ingeschakeld zorgt dit ervoor dat de elementen worden getoond in een enkele rij"
+msgstr ""
+"Wanneer ingeschakeld zorgt dit ervoor dat de elementen worden getoond in een"
+" enkele rij"
 
 #: ../plugins/systray/sn-dialog.glade.h:9
 msgid "_Hide items by default"
@@ -1968,7 +2045,9 @@ msgstr "Elementen standaard verbergen"
 
 #: ../plugins/systray/sn-dialog.glade.h:10
 msgid "When enabled, all new items will be marked as \"Hidden\""
-msgstr "Wanneer ingeschakeld zullen alle nieuwe elementen worden gemarkeerd als 'verborgen\"."
+msgstr ""
+"Wanneer ingeschakeld zullen alle nieuwe elementen worden gemarkeerd als "
+"'verborgen\"."
 
 #: ../plugins/systray/sn-dialog.glade.h:11
 msgid "_Square items"
@@ -2039,7 +2118,9 @@ msgstr "Kon het meldingengebied niet starten"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "Waarschijnlijk heeft een ander onderdeel de functie van meldingengebied overgenomen. Dit gebied zal niet worden gebruikt."
+msgstr ""
+"Waarschijnlijk heeft een ander onderdeel de functie van meldingengebied "
+"overgenomen. Dit gebied zal niet worden gebruikt."
 
 #: ../plugins/systray/systray.c:409
 msgid "The notification area lost selection"
@@ -2058,7 +2139,9 @@ msgstr "Invoegsel voor statusvak"
 msgid ""
 "Provides status notifier items (application indicators) and legacy systray "
 "items"
-msgstr "Levert statusmeldingselementen (toepassingsindicatoren) en ouderwetse systeemvakelementen"
+msgstr ""
+"Levert statusmeldingselementen (toepassingsindicatoren) en ouderwetse "
+"systeemvakelementen"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Nothing"
@@ -2158,36 +2241,36 @@ msgstr "Toon vensters van alle _monitors"
 msgid "Show only _minimized windows"
 msgstr "Toon alleen ge_minimaliseerde vensters"
 
-#: ../plugins/tasklist/tasklist-widget.c:3063
+#: ../plugins/tasklist/tasklist-widget.c:3070
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Kan geen nieuwe instantie starten van '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:3067
+#: ../plugins/tasklist/tasklist-widget.c:3074
 msgid "Error"
 msgstr "Fout"
 
-#: ../plugins/tasklist/tasklist-widget.c:3096
+#: ../plugins/tasklist/tasklist-widget.c:3103
 msgid "Launch New Instance"
 msgstr "Nieuwe instantie starten"
 
-#: ../plugins/tasklist/tasklist-widget.c:3843
+#: ../plugins/tasklist/tasklist-widget.c:3857
 msgid "Mi_nimize All"
 msgstr "Alles mi_nimaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3850
+#: ../plugins/tasklist/tasklist-widget.c:3864
 msgid "Un_minimize All"
 msgstr "Alles _ONTminimaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3857
+#: ../plugins/tasklist/tasklist-widget.c:3871
 msgid "Ma_ximize All"
 msgstr "Alles ma_ximaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3864
+#: ../plugins/tasklist/tasklist-widget.c:3878
 msgid "_Unmaximize All"
 msgstr "Alles ONT_maximaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3875
+#: ../plugins/tasklist/tasklist-widget.c:3889
 msgid "_Close All"
 msgstr "Alles _sluiten"
 
@@ -2195,28 +2278,28 @@ msgstr "Alles _sluiten"
 msgid "Switch between open windows using buttons"
 msgstr "Wisselen tussen open vensters met behulp van knoppen"
 
-#: ../plugins/windowmenu/windowmenu.c:690
+#: ../plugins/windowmenu/windowmenu.c:695
 msgid "Desktop"
 msgstr "Bureaublad"
 
-#: ../plugins/windowmenu/windowmenu.c:1292
+#: ../plugins/windowmenu/windowmenu.c:1305
 msgid "No Windows"
 msgstr "Geen vensters"
 
-#: ../plugins/windowmenu/windowmenu.c:1307
+#: ../plugins/windowmenu/windowmenu.c:1320
 msgid "Urgent Windows"
 msgstr "Belangrijke vensters"
 
-#: ../plugins/windowmenu/windowmenu.c:1349
+#: ../plugins/windowmenu/windowmenu.c:1362
 msgid "Add Workspace"
 msgstr "Werkblad toevoegen"
 
-#: ../plugins/windowmenu/windowmenu.c:1369
+#: ../plugins/windowmenu/windowmenu.c:1382
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Verwijder werkblad '%s'"
 
-#: ../plugins/windowmenu/windowmenu.c:1371
+#: ../plugins/windowmenu/windowmenu.c:1384
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Verwijder werkblad %d"
