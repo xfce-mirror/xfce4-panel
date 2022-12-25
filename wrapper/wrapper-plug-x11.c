@@ -28,6 +28,8 @@
 
 static void       wrapper_plug_x11_finalize                   (GObject                          *object);
 static void       wrapper_plug_x11_iface_init                 (WrapperPlugInterface             *iface);
+static void       wrapper_plug_x11_child_size_allocate        (GtkWidget                        *widget,
+                                                               GtkAllocation                    *allocation);
 static void       wrapper_plug_x11_proxy_provider_signal      (WrapperPlug                      *plug,
                                                                XfcePanelPluginProviderSignal     provider_signal,
                                                                XfcePanelPluginProvider          *provider);
@@ -66,6 +68,10 @@ wrapper_plug_x11_class_init (WrapperPlugX11Class *klass)
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = wrapper_plug_x11_finalize;
+
+  /* GtkWidget::size-allocate is flagged G_SIGNAL_RUN_FIRST so we need to overwrite it */
+  g_signal_override_class_handler ("size-allocate", XFCE_TYPE_PANEL_PLUGIN,
+                                   G_CALLBACK (wrapper_plug_x11_child_size_allocate));
 }
 
 
@@ -107,6 +113,24 @@ wrapper_plug_x11_finalize (GObject *object)
   g_object_unref (WRAPPER_PLUG_X11 (object)->style_provider);
 
   G_OBJECT_CLASS (wrapper_plug_x11_parent_class)->finalize (object);
+}
+
+
+
+static void
+wrapper_plug_x11_child_size_allocate (GtkWidget *widget,
+                                      GtkAllocation *allocation)
+{
+  GtkRequisition size;
+
+  /* avoid allocation warnings */
+  gtk_widget_get_preferred_size (widget, NULL, &size);
+  if (allocation->width <= 1 && size.width > 1)
+    allocation->width = size.width;
+  if (allocation->height <= 1 && size.height > 1)
+    allocation->height = size.height;
+
+  g_signal_chain_from_overridden_handler (widget, allocation);
 }
 
 
