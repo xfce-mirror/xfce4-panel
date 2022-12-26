@@ -5,15 +5,16 @@
 # 
 # Translators:
 # Xfce Bot <transifex@xfce.org>, 2021
+# 玉堂白鹤 <yjwork@qq.com>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-07 00:47+0100\n"
+"POT-Creation-Date: 2022-11-28 15:00+0100\n"
 "PO-Revision-Date: 2020-12-28 17:37+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>, 2021\n"
+"Last-Translator: 玉堂白鹤 <yjwork@qq.com>, 2022\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/xfce/teams/16840/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,7 +42,7 @@ msgstr ""
 "area;status;icons;plugins;面板;设置;首选项;任务栏;自动隐藏;应用程序菜单;开始;按钮;启动器;通知区域;状态;图标;插件;"
 " "
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2964
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2979
 msgid "Panel"
 msgstr "面板"
 
@@ -50,18 +51,18 @@ msgid "Customize the panel"
 msgstr "自定义面板"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1107
+#: ../libxfce4panel/xfce-panel-plugin.c:1078
 #: ../panel/panel-preferences-dialog.c:1321
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "您确定要移除 “%s” 吗？"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1112
+#: ../libxfce4panel/xfce-panel-plugin.c:1083
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "从面板上移除此项目，其配置也将丢失。"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1113 ../panel/panel-dialogs.c:163
+#: ../libxfce4panel/xfce-panel-plugin.c:1084 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1326
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
 #: ../plugins/directorymenu/directorymenu.c:473
@@ -69,9 +70,9 @@ msgstr "从面板上移除此项目，其配置也将丢失。"
 msgid "_Cancel"
 msgstr "取消(_C)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1114
-#: ../libxfce4panel/xfce-panel-plugin.c:1289
-#: ../panel/panel-plugin-external.c:443
+#: ../libxfce4panel/xfce-panel-plugin.c:1085
+#: ../libxfce4panel/xfce-panel-plugin.c:1260
+#: ../panel/panel-plugin-external.c:448
 #: ../panel/panel-preferences-dialog.c:961
 #: ../panel/panel-preferences-dialog.c:1327
 #: ../panel/panel-preferences-dialog.glade.h:59
@@ -79,36 +80,36 @@ msgstr "取消(_C)"
 msgid "_Remove"
 msgstr "移除(_R)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1239
+#: ../libxfce4panel/xfce-panel-plugin.c:1210
 msgid "_Properties"
 msgstr "属性(_P)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1254 ../panel/panel-window.c:3052
+#: ../libxfce4panel/xfce-panel-plugin.c:1225 ../panel/panel-window.c:3070
 msgid "_About"
 msgstr "关于(_A)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1269
+#: ../libxfce4panel/xfce-panel-plugin.c:1240
 msgid "_Move"
 msgstr "移动(_M)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1310
+#: ../libxfce4panel/xfce-panel-plugin.c:1281
 msgid "Pane_l"
 msgstr "面板(_L)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1319 ../panel/panel-window.c:2977
+#: ../libxfce4panel/xfce-panel-plugin.c:1290 ../panel/panel-window.c:2992
 msgid "Add _New Items..."
 msgstr "添加新项目(_N)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1334 ../panel/panel-window.c:2992
+#: ../libxfce4panel/xfce-panel-plugin.c:1305 ../panel/panel-window.c:3007
 msgid "Panel Pr_eferences..."
 msgstr "面板首选项(_E)..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1355 ../panel/panel-window.c:3024
+#: ../libxfce4panel/xfce-panel-plugin.c:1326 ../panel/panel-window.c:3039
 msgid "Log _Out"
 msgstr "注销(_O)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1375 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3043
+#: ../libxfce4panel/xfce-panel-plugin.c:1346 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3059
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:8
@@ -121,7 +122,7 @@ msgstr "注销(_O)"
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1390
+#: ../libxfce4panel/xfce-panel-plugin.c:1361
 msgid "About"
 msgstr "关于"
 
@@ -168,117 +169,118 @@ msgstr "启动时不等待窗口管理器"
 msgid "Print version information and exit"
 msgstr "打印版本信息后退出"
 
-#: ../panel/main.c:207
+#: ../panel/main.c:208
 #, c-format
 msgid "Name %s lost on the message dbus, exiting."
 msgstr "名称 %s 已遗失于消息总线，现将退出。"
 
 #. parse context options
-#: ../panel/main.c:268
+#: ../panel/main.c:270
 msgid "[ARGUMENTS...]"
 msgstr "[参数...]"
 
-#: ../panel/main.c:275
+#: ../panel/main.c:277
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "输入 “%s --help” 获取用法。"
 
-#: ../panel/main.c:294
+#: ../panel/main.c:296
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce 开发团队。保留所有权利。"
 
-#: ../panel/main.c:295
+#: ../panel/main.c:297
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "请向 <%s> 报告缺陷。"
 
-#: ../panel/main.c:361
+#. quit without error if an instance is running
+#: ../panel/main.c:395
 msgid "There is already a running instance"
 msgstr "已经有一个正在运行的实例"
 
 #. spawn ourselfs again
-#: ../panel/main.c:404
+#: ../panel/main.c:403
 msgid "Restarting..."
 msgstr "正在重启..."
 
-#: ../panel/main.c:419
+#: ../panel/main.c:418
 msgid "Failed to show the preferences dialog"
 msgstr "无法显示首选项对话框"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:420
 msgid "Failed to show the add new items dialog"
 msgstr "无法显示添加新项目对话框"
 
-#: ../panel/main.c:423
+#: ../panel/main.c:422
 msgid "Failed to save the panel configuration"
 msgstr "无法保存面板配置"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:424
 msgid "Failed to add a plugin to the panel"
 msgstr "无法在面板上添加插件"
 
-#: ../panel/main.c:427
+#: ../panel/main.c:426
 msgid "Failed to restart the panel"
 msgstr "无法重启面板"
 
-#: ../panel/main.c:429
+#: ../panel/main.c:428
 msgid "Failed to quit the panel"
 msgstr "无法退出面板"
 
-#: ../panel/main.c:431
+#: ../panel/main.c:430
 msgid "Failed to send D-Bus message"
 msgstr "无法发送 D-Bus 信息"
 
-#: ../panel/main.c:441
+#: ../panel/main.c:440
 msgid "Execute"
 msgstr "执行"
 
-#: ../panel/main.c:442
+#: ../panel/main.c:441
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "您要启动面板吗？如果是，您一定要在注销时保存会话，这样面板会在您下次登录时自动启动。"
 
-#: ../panel/main.c:445 ../panel/main.c:459
+#: ../panel/main.c:444 ../panel/main.c:458
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "未发现正在运行的 %s 实例"
 
-#: ../panel/panel-application.c:215
+#: ../panel/panel-application.c:217
 msgid "Failed to launch the migration application"
 msgstr "无法启动迁移应用程序"
 
-#: ../panel/panel-application.c:984
+#: ../panel/panel-application.c:998
 msgid "Create _Launcher"
 msgstr "创建启动器(_L)"
 
-#: ../panel/panel-application.c:985
+#: ../panel/panel-application.c:999
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "这样会在面板上创建一个新的启动器插件并将放入的文件插入为菜单项目。"
 
-#: ../panel/panel-application.c:987
+#: ../panel/panel-application.c:1001
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "从 %d 个桌面文件创建新的启动器"
 
-#: ../panel/panel-application.c:1727
+#: ../panel/panel-application.c:1741
 msgid "Quit"
 msgstr "退出"
 
-#: ../panel/panel-application.c:1728
+#: ../panel/panel-application.c:1742
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "您启动了不带会话管理器的 X。点击退出将关闭此 X 服务器。"
 
-#: ../panel/panel-application.c:1729
+#: ../panel/panel-application.c:1743
 msgid "Are you sure you want to quit the panel?"
 msgstr "您确定要退出面板吗？"
 
-#: ../panel/panel-application.c:1737
+#: ../panel/panel-application.c:1751
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "无法执行命令 “%s”"
@@ -299,11 +301,11 @@ msgstr "无效的提示类型 “%s”。有效的类型是 bool、double、int�
 msgid "Unable to open the e-mail address"
 msgstr "无法打开电子邮件地址"
 
-#: ../panel/panel-dialogs.c:83
+#: ../panel/panel-dialogs.c:84
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Xfce 桌面环境的面板"
 
-#: ../panel/panel-dialogs.c:87
+#: ../panel/panel-dialogs.c:88
 msgid "translator-credits"
 msgstr ""
 "Yongtao Yang <yongtao.yang@telia.com>, 2004.\n"
@@ -317,32 +319,32 @@ msgstr ""
 "Chipong Luo <chipong.luo@yahoo.com>, 2011, 2012."
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:14
+#: ../panel/panel-dialogs.c:162 ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Add New Item"
 msgstr "添加新项目"
 
-#: ../panel/panel-dialogs.c:164 ../panel/panel-item-dialog.c:201
+#: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:201
 #: ../panel/panel-preferences-dialog.glade.h:57
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "添加(_A)"
 
-#: ../panel/panel-dialogs.c:175
+#: ../panel/panel-dialogs.c:176
 msgid "Please choose a panel for the new plugin:"
 msgstr "请为新插件挑选面板："
 
-#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:896
+#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:896
 #, c-format
 msgid "Panel %d"
 msgstr "面板 %d"
 
-#: ../panel/panel-dialogs.c:235
+#: ../panel/panel-dialogs.c:236
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr "因为面板在 kiosk 模式下运行，所以不允许作为普通用户的您更改面板配置。"
 
-#: ../panel/panel-dialogs.c:237
+#: ../panel/panel-dialogs.c:238
 msgid "Modifying the panel is not allowed"
 msgstr "不允许修改面板"
 
@@ -374,12 +376,12 @@ msgstr "搜索(_S)："
 msgid "Enter search phrase here"
 msgstr "在此输入搜索词语"
 
-#: ../panel/panel-plugin-external.c:436
+#: ../panel/panel-plugin-external.c:441
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "插件 “%s” 意外地离开了面板，您要重启它吗？"
 
-#: ../panel/panel-plugin-external.c:438
+#: ../panel/panel-plugin-external.c:443
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -387,7 +389,7 @@ msgid ""
 "permanently removed from the panel."
 msgstr "此插件在过去的 %d 秒内重启了不止一次。如果您点击执行，面板会尝试重启此插件，否则会从面板上永远移除它。"
 
-#: ../panel/panel-plugin-external.c:442
+#: ../panel/panel-plugin-external.c:447
 msgid "_Execute"
 msgstr "执行(_E)"
 
@@ -713,7 +715,7 @@ msgstr "高级"
 msgid "Expert"
 msgstr "专家"
 
-#: ../panel/panel-window.c:3009
+#: ../panel/panel-window.c:3024
 msgid "_Lock Panel"
 msgstr "锁定面板(_L)"
 
@@ -773,7 +775,7 @@ msgstr "自定义标题(_M):"
 #: ../plugins/actions/actions-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "General"
-msgstr "一般"
+msgstr "常规"
 
 #: ../plugins/actions/actions-dialog.glade.h:13
 msgid "Visible"
@@ -1027,7 +1029,7 @@ msgstr "确定(_O)"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:639
-#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2509
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2517
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "无法执行命令 “%s”。"
@@ -1685,11 +1687,11 @@ msgstr "高级"
 msgid "Program launcher with optional menu"
 msgstr "带可选菜单的程序启动器"
 
-#: ../plugins/pager/pager.c:550 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:541 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "工作区设置(_S)..."
 
-#: ../plugins/pager/pager.c:638
+#: ../plugins/pager/pager.c:629
 msgid "Unable to open the workspace settings"
 msgstr "未能打开工作区设置"
 
@@ -1999,36 +2001,36 @@ msgstr "从所有显示器显示窗口(_N)"
 msgid "Show only _minimized windows"
 msgstr "仅显示已最小化的窗口(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:2969
+#: ../plugins/tasklist/tasklist-widget.c:2967
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "无法启动新实例 '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:2973
+#: ../plugins/tasklist/tasklist-widget.c:2971
 msgid "Error"
 msgstr "错误"
 
-#: ../plugins/tasklist/tasklist-widget.c:3017
+#: ../plugins/tasklist/tasklist-widget.c:3015
 msgid "Launch New Instance..."
 msgstr "启动新实例..."
 
-#: ../plugins/tasklist/tasklist-widget.c:3766
+#: ../plugins/tasklist/tasklist-widget.c:3764
 msgid "Mi_nimize All"
 msgstr "全部最小化(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3774
+#: ../plugins/tasklist/tasklist-widget.c:3772
 msgid "Un_minimize All"
 msgstr "最小化全部取消(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3782
+#: ../plugins/tasklist/tasklist-widget.c:3780
 msgid "Ma_ximize All"
 msgstr "全部最大化(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3790
+#: ../plugins/tasklist/tasklist-widget.c:3788
 msgid "_Unmaximize All"
 msgstr "最大化全部取消(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3802
+#: ../plugins/tasklist/tasklist-widget.c:3800
 msgid "_Close All"
 msgstr "全部关闭(_C)"
 
@@ -2040,24 +2042,24 @@ msgstr "使用按钮在打开的窗口间切换"
 msgid "Desktop"
 msgstr "桌面"
 
-#: ../plugins/windowmenu/windowmenu.c:1273
+#: ../plugins/windowmenu/windowmenu.c:1274
 msgid "No Windows"
 msgstr "无窗口"
 
-#: ../plugins/windowmenu/windowmenu.c:1288
+#: ../plugins/windowmenu/windowmenu.c:1289
 msgid "Urgent Windows"
 msgstr "紧急窗口"
 
-#: ../plugins/windowmenu/windowmenu.c:1331
+#: ../plugins/windowmenu/windowmenu.c:1332
 msgid "Add Workspace"
 msgstr "添加工作区"
 
-#: ../plugins/windowmenu/windowmenu.c:1354
+#: ../plugins/windowmenu/windowmenu.c:1355
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "移除工作区 “%s”"
 
-#: ../plugins/windowmenu/windowmenu.c:1356
+#: ../plugins/windowmenu/windowmenu.c:1357
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "移除工作区 %d"
