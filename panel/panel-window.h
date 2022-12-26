@@ -63,6 +63,8 @@ void       panel_window_migrate_autohide_property (PanelWindow   *window,
                                                    XfconfChannel *xfconf,
                                                    const gchar   *property_base);
 
+gboolean   panel_window_pointer_is_outside        (PanelWindow *window);
+
 G_END_DECLS
 
 #endif /* !__PANEL_WINDOW_H__ */
