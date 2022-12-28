@@ -229,6 +229,18 @@ window_menu_plugin_class_init (WindowMenuPluginClass *klass)
 
 
 static void
+window_menu_plugin_scale_factor (WindowMenuPlugin *plugin)
+{
+  gint scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (plugin));
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+  wnck_set_default_icon_size (WNCK_DEFAULT_ICON_SIZE * scale_factor);
+  wnck_set_default_mini_icon_size (WNCK_DEFAULT_MINI_ICON_SIZE * scale_factor);
+G_GNUC_END_IGNORE_DEPRECATIONS
+}
+
+
+
+static void
 window_menu_plugin_init (WindowMenuPlugin *plugin)
 {
   plugin->button_style = BUTTON_STYLE_ICON;
@@ -253,6 +265,9 @@ window_menu_plugin_init (WindowMenuPlugin *plugin)
   plugin->icon = gtk_image_new_from_icon_name ("user-desktop", GTK_ICON_SIZE_BUTTON);
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
   gtk_widget_show (plugin->icon);
+
+  window_menu_plugin_scale_factor (plugin);
+  g_signal_connect (plugin, "notify::scale-factor", G_CALLBACK (window_menu_plugin_scale_factor), NULL);
 }
 
 
@@ -636,7 +651,7 @@ window_menu_plugin_set_icon (WindowMenuPlugin *plugin,
 
   icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (plugin));
   scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (plugin));
-  if (icon_size * scale_factor <= 31)
+  if (icon_size < WNCK_DEFAULT_ICON_SIZE)
     pixbuf = wnck_window_get_mini_icon (window);
   else
     pixbuf = wnck_window_get_icon (window);
