@@ -583,6 +583,18 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
 
 
 static void
+xfce_tasklist_scale_factor (XfceTasklist *tasklist)
+{
+  gint scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (tasklist));
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+  wnck_set_default_icon_size (WNCK_DEFAULT_ICON_SIZE * scale_factor);
+  wnck_set_default_mini_icon_size (WNCK_DEFAULT_MINI_ICON_SIZE * scale_factor);
+G_GNUC_END_IGNORE_DEPRECATIONS
+}
+
+
+
+static void
 xfce_tasklist_init (XfceTasklist *tasklist)
 {
   GtkStyleContext *context;
@@ -640,6 +652,9 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   g_signal_connect (G_OBJECT (tasklist->arrow_button), "toggled",
       G_CALLBACK (xfce_tasklist_arrow_button_toggled), tasklist);
   gtk_widget_show (tasklist->arrow_button);
+
+  xfce_tasklist_scale_factor (tasklist);
+  g_signal_connect (tasklist, "notify::scale-factor", G_CALLBACK (xfce_tasklist_scale_factor), NULL);
 }
 
 
@@ -672,7 +687,7 @@ xfce_tasklist_get_window_icon (WnckWindow *window,
 {
   GdkPixbuf *pixbuf, *theme_pixbuf;
 
-  if (type == CHILD_TYPE_GROUP_MENU || size <= 31)
+  if (type == CHILD_TYPE_GROUP_MENU || size < WNCK_DEFAULT_ICON_SIZE)
     pixbuf = wnck_window_get_mini_icon (window);
   else
     pixbuf = wnck_window_get_icon (window);
@@ -2722,7 +2737,7 @@ xfce_tasklist_button_icon_changed (WnckWindow        *window,
   context = gtk_widget_get_style_context (GTK_WIDGET (child->icon));
 
   /* get the window icon */
-  pixbuf = xfce_tasklist_get_window_icon (child->window, scale_factor * icon_size, child->type);
+  pixbuf = xfce_tasklist_get_window_icon (child->window, icon_size, child->type);
   /* leave when there is no valid pixbuf */
   if (G_UNLIKELY (pixbuf == NULL))
     {
@@ -3550,7 +3565,7 @@ xfce_tasklist_button_drag_begin (GtkWidget         *button,
   panel_return_if_fail (WNCK_IS_WINDOW (child->window));
 
   scale_factor = gtk_widget_get_scale_factor (button);
-  pixbuf = xfce_tasklist_get_window_icon (child->window, scale_factor * 32, CHILD_TYPE_WINDOW);
+  pixbuf = xfce_tasklist_get_window_icon (child->window, 32, CHILD_TYPE_WINDOW);
   if (G_LIKELY (pixbuf != NULL))
     {
       cairo_surface_t *surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
@@ -3987,7 +4002,7 @@ xfce_tasklist_group_button_button_draw (GtkWidget         *widget,
       pango_layout_get_pixel_extents (n_windows_layout, &ink_extent, &log_extent);
       icon_size = xfce_panel_plugin_get_icon_size (xfce_tasklist_get_panel_plugin (group_child->tasklist));
       radius = log_extent.height / 2;
-      if (group_child->tasklist->show_labels || icon_size <= 31)
+      if (group_child->tasklist->show_labels || icon_size < WNCK_DEFAULT_ICON_SIZE)
         {
           GdkPoint icon_coords = {};
           g_warn_if_fail (gtk_widget_translate_coordinates (group_child->icon, widget, 0, 0, &icon_coords.x, &icon_coords.y));
@@ -4220,7 +4235,7 @@ xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
   context = gtk_widget_get_style_context (GTK_WIDGET (group_child->icon));
 
   /* get the class group icon */
-  if (icon_size * scale_factor <= 31)
+  if (icon_size < WNCK_DEFAULT_ICON_SIZE)
     pixbuf = wnck_class_group_get_mini_icon (class_group);
   else
     pixbuf = wnck_class_group_get_icon (class_group);
