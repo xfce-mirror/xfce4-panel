@@ -5,15 +5,16 @@
 # 
 # Translators:
 # Xfce Bot <transifex@xfce.org>, 2022
+# Wallon Wallon, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-22 12:35+0100\n"
+"POT-Creation-Date: 2022-12-22 12:54+0100\n"
 "PO-Revision-Date: 2022-12-22 11:35+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>, 2022\n"
+"Last-Translator: Wallon Wallon, 2022\n"
 "Language-Team: French (https://www.transifex.com/xfce/teams/16840/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +41,7 @@ msgid ""
 msgstr ""
 "tableaux de bord;paramètres;préférences;barre des tâches;masquage "
 "automatique;menu des applications;démarrer;boutons;lanceur;zone de "
-"notification;état;icônes;greffons;"
+"notifications;état;icônes;greffons;"
 
 #: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2989
 msgid "Panel"
@@ -152,7 +153,7 @@ msgstr "NUMÉRO-TABLBORD"
 
 #: ../panel/main.c:82
 msgid "Show the 'Add New Items' dialog"
-msgstr "Afficher la boîte de dialogue « Ajouter de nouveaux éléments »."
+msgstr "Afficher la boîte de dialogue « Ajouter de nouveaux éléments »"
 
 #: ../panel/main.c:83
 msgid "Save the panel configuration"
@@ -257,14 +258,14 @@ msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr ""
-"Voulez-vous démarrer le tableau de bord ? Si oui, veillez à ce que la "
+"Voulez-vous démarrer le tableau de bord ? Si oui, veillez à ce que la "
 "session soit enregistrée lors de la déconnexion, de sorte que le tableau de "
 "bord soit relancé à la prochaine ouverture de session."
 
 #: ../panel/main.c:447 ../panel/main.c:461
 #, c-format
 msgid "No running instance of %s was found"
-msgstr "Aucune instance de %s n’a été trouvée"
+msgstr "Aucune instance en cours d'exécution de %s n’a été trouvée"
 
 #: ../panel/panel-application.c:220
 msgid "Failed to launch the migration application"
@@ -288,7 +289,7 @@ msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Créer un lanceur à partir de %d fichier desktop"
 msgstr[1] "Créer un lanceur à partir de %d fichiers desktop"
-msgstr[2] "Créer un lanceur à partir de %d fichiers desktop"
+msgstr[2] "Créer un nouveau lanceur à partir des fichiers desktop %d"
 
 #: ../panel/panel-application.c:1760
 msgid "Quit"
@@ -304,7 +305,7 @@ msgstr ""
 
 #: ../panel/panel-application.c:1762
 msgid "Are you sure you want to quit the panel?"
-msgstr "Voulez-vous vraiment quitter le tableau de bord ?"
+msgstr "Voulez-vous vraiment quitter le tableau de bord ?"
 
 #: ../panel/panel-application.c:1770
 #, c-format
@@ -324,8 +325,8 @@ msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
 msgstr ""
-"Type non valide trouvé : « %s ». Les types valides sont bool, double, int, "
-"string et uint."
+"Type non valide du symbole : « %s ». Les types valides sont bool, double, "
+"int, string et uint."
 
 #: ../panel/panel-dialogs.c:58
 msgid "Unable to open the e-mail address"
@@ -352,7 +353,7 @@ msgstr "_Ajouter"
 
 #: ../panel/panel-dialogs.c:176
 msgid "Please choose a panel for the new plugin:"
-msgstr "Veuillez sélectionner un tableau de bord pour le nouveau greffon :"
+msgstr "Veuillez choisir un tableau de bord pour le nouveau greffon :"
 
 #: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:991
 #, c-format
@@ -364,9 +365,9 @@ msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr ""
-"Le tableau de bord est en cours d’exécution en mode restreint, vous n’êtes "
-"donc pas autorisé à apporter des modifications à la configuration du tableau"
-" de bord en tant qu’utilisateur normal."
+"Le tableau de bord en cours d’exécution fonctionne en mode « kiosk » "
+"restreint, vous n’êtes donc pas autorisé à apporter des modifications à la "
+"configuration du tableau de bord en tant qu’utilisateur normal."
 
 #: ../panel/panel-dialogs.c:238
 msgid "Modifying the panel is not allowed"
@@ -395,7 +396,7 @@ msgstr "_Fermer"
 #: ../panel/panel-item-dialog.c:225
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
-msgstr "_Rechercher :"
+msgstr "_Chercher :"
 
 #: ../panel/panel-item-dialog.c:233
 msgid "Enter search phrase here"
@@ -405,8 +406,8 @@ msgstr "Saisir vos termes de recherche ici"
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr ""
-"Le greffon « %s » a quitté le tableau de bord de manière inattendue. Voulez-"
-"vous le redémarrer ?"
+"Le greffon « %s » a quitté le tableau de bord de manière inattendue. Voulez-"
+"vous le redémarrer ?"
 
 #: ../panel/panel-plugin-external.c:519
 msgid "Plugin Restart"
@@ -420,7 +421,7 @@ msgid ""
 "permanently removed from the panel."
 msgstr ""
 "Le greffon a redémarré plusieurs fois au cours des %d dernières secondes. Si"
-" vous cliquez sur « Exécuter », le tableau de bord essaiera de redémarrer le"
+" vous cliquez sur « Exécuter », le tableau de bord essaiera de redémarrer le"
 " greffon, sinon il sera définitivement supprimé du tableau de bord."
 
 #: ../panel/panel-plugin-external.c:524
@@ -450,7 +451,7 @@ msgstr ""
 #: ../panel/panel-preferences-dialog.c:1054
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
-msgstr "Voulez-vous vraiment supprimer le tableau de bord %d ?"
+msgstr "Voulez-vous vraiment supprimer le tableau de bord %d ?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
@@ -467,15 +468,15 @@ msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
 msgstr ""
-"Nom interne : %s-%d\n"
-"PID : %d"
+"Nom interne : %s-%d\n"
+"PID ou Process IDentifier : %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
 #: ../panel/panel-preferences-dialog.c:1274
 #, c-format
 msgid "Internal name: %s-%d"
-msgstr "Nom interne : %s-%d"
+msgstr "Nom interne : %s-%d"
 
 #: ../panel/panel-preferences-dialog.c:1420
 msgid "If you remove the item from the panel, it is permanently lost."
@@ -512,7 +513,7 @@ msgstr "Aucun (style par défaut)"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
 msgid "Solid color"
-msgstr "Couleur pleine"
+msgstr "Couleur unie"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "Background image"
@@ -524,7 +525,7 @@ msgstr "Préférences du tableau de bord"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Profiles:"
-msgstr "Profils :"
+msgstr "Profils :"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid "_Backup and restore"
@@ -548,7 +549,7 @@ msgstr "<b>Général</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid "M_ode:"
-msgstr "M_ode :"
+msgstr "M_ode :"
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Span mo_nitors"
@@ -586,11 +587,11 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
-msgstr "Masquer au_tomatiquement le tableau de bord :"
+msgstr "Masquer au_tomatiquement le tableau de bord :"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid "O_utput:"
-msgstr "S_ortie :"
+msgstr "S_ortie :"
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
@@ -600,15 +601,15 @@ msgstr "<b>Mesures</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Row _size (pixels):"
-msgstr "_Taille d’une ligne (pixels) :"
+msgstr "_Taille d’une ligne (pixels) :"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Num_ber of rows:"
-msgstr "Nombre _de lignes :"
+msgstr "Nombre _de lignes :"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "L_ength (pixels):"
-msgstr "Larg_eur  (pixels) :"
+msgstr "Larg_eur (pixels) :"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "A_utomatically increase the length"
@@ -637,11 +638,11 @@ msgstr "<b>Arrière-plan</b>"
 #: ../panel/panel-preferences-dialog.glade.h:38
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Style:"
-msgstr "_Style :"
+msgstr "_Style :"
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 msgid "C_olor:"
-msgstr "_Couleur :"
+msgstr "_Couleur :"
 
 #: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Pick a Panel Color"
@@ -649,7 +650,7 @@ msgstr "Sélectionner une couleur du tableau de bord"
 
 #: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_File:"
-msgstr "_Fichier :"
+msgstr "_Fichier :"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid "Select A Background Image"
@@ -665,7 +666,7 @@ msgstr "Ajuster la taille au_tomatiquement"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Fixed icon _size (pixels):"
-msgstr "Taille des icônes _fixe (pixels) :"
+msgstr "Taille _fixe des icônes (pixels) :"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "<b>Opacity</b>"
@@ -673,7 +674,7 @@ msgstr "<b>Opacité</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 msgid "Configure..."
-msgstr "Configurer…"
+msgstr "Configuration…"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 msgid ""
@@ -686,12 +687,12 @@ msgstr ""
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:51
 msgid "_Enter:"
-msgstr "_Survol :"
+msgstr "_Entrée :"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:53
 msgid "_Leave:"
-msgstr "_Normal :"
+msgstr "_Sortie :"
 
 #: ../panel/panel-preferences-dialog.glade.h:54
 msgid ""
@@ -803,19 +804,19 @@ msgstr "ID utilisateur"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
 msgid "Custom"
-msgstr "Personnalisé"
+msgstr "Personnaliser"
 
 #: ../plugins/actions/actions-dialog.glade.h:9
 msgid "Appeara_nce:"
-msgstr "Appar_ence :"
+msgstr "Appar_ence :"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "Title:"
-msgstr "Titre :"
+msgstr "Titre :"
 
 #: ../plugins/actions/actions-dialog.glade.h:11
 msgid "Custo_m title:"
-msgstr "Titre perso_nnalisé :"
+msgstr "Titre perso_nnalisé :"
 
 #: ../plugins/actions/actions-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:27
@@ -855,7 +856,7 @@ msgstr "_Déconnexion"
 
 #: ../plugins/actions/actions.c:169
 msgid "Are you sure you want to log out?"
-msgstr "Voulez-vous vraiment vous déconnecter ?"
+msgstr "Voulez-vous vraiment vous déconnecter ?"
 
 #: ../plugins/actions/actions.c:170
 #, c-format
@@ -896,7 +897,7 @@ msgstr "_Mise en veille prolongée"
 
 #: ../plugins/actions/actions.c:202
 msgid "Do you want to suspend to disk?"
-msgstr "Souhaitez-vous mettre en veille sur le disque ?"
+msgstr "Souhaitez-vous mettre en veille sur le disque ?"
 
 #: ../plugins/actions/actions.c:203
 #, c-format
@@ -914,7 +915,7 @@ msgstr "Mise en veille _hybride"
 #: ../plugins/actions/actions.c:211
 msgid "Do you want to hibernate and suspend the system?"
 msgstr ""
-"Voulez-vous mettre en veille et placer le système en veille prolongée ?"
+"Voulez-vous mettre en veille et placer le système en veille prolongée ?"
 
 #: ../plugins/actions/actions.c:212
 #, c-format
@@ -933,7 +934,7 @@ msgstr "Mi_se en veille"
 
 #: ../plugins/actions/actions.c:220
 msgid "Do you want to suspend to RAM?"
-msgstr "Souhaitez-vous mettre en veille en mémoire vive ?"
+msgstr "Souhaitez-vous mettre en veille en mémoire vive ?"
 
 #: ../plugins/actions/actions.c:221
 #, c-format
@@ -950,7 +951,7 @@ msgstr "_Redémarrer"
 
 #: ../plugins/actions/actions.c:229
 msgid "Are you sure you want to restart?"
-msgstr "Voulez-vous vraiment redémarrer ?"
+msgstr "Voulez-vous vraiment redémarrer ?"
 
 #: ../plugins/actions/actions.c:230
 #, c-format
