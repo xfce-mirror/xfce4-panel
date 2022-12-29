@@ -314,7 +314,7 @@ xfce_clock_digital_update (XfceClockDigital *digital,
 
   /* set time label */
   markup = clock_time_strdup_strftime (digital->time, digital->time_format);
-  if (pango_parse_markup (markup, -1, 0, &attr_list, &stripped, NULL, NULL))
+  if (markup != NULL && pango_parse_markup (markup, -1, 0, &attr_list, &stripped, NULL, NULL))
     {
       font_desc = pango_font_description_from_string (digital->time_font);
       attr = pango_attr_font_desc_new (font_desc);
@@ -329,7 +329,7 @@ xfce_clock_digital_update (XfceClockDigital *digital,
 
   /* set date label */
   markup = clock_time_strdup_strftime (digital->time, digital->date_format);
-  if (pango_parse_markup (markup, -1, 0, &attr_list, &stripped, NULL, NULL))
+  if (markup != NULL && pango_parse_markup (markup, -1, 0, &attr_list, &stripped, NULL, NULL))
     {
       font_desc = pango_font_description_from_string (digital->date_font);
       attr = pango_attr_font_desc_new (font_desc);
