@@ -5,15 +5,16 @@
 # 
 # Translators:
 # Xfce Bot <transifex@xfce.org>, 2022
+# Seong-ho Cho <darkcircle.0426@gmail.com>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-22 12:35+0100\n"
+"POT-Creation-Date: 2022-12-22 12:54+0100\n"
 "PO-Revision-Date: 2022-12-22 11:35+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>, 2022\n"
+"Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>, 2022\n"
 "Language-Team: Korean (https://www.transifex.com/xfce/teams/16840/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -59,7 +60,7 @@ msgstr "\"%s\"을(를) 정말로 없애시렵니까?"
 #: ../libxfce4panel/xfce-panel-plugin.c:1085
 #: ../panel/panel-preferences-dialog.c:1418
 msgid "Remove Item"
-msgstr ""
+msgstr "항목 제거"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1087
 msgid ""
@@ -392,7 +393,7 @@ msgstr "플러그인 \"%s\"을(를) 예기치 않게 패널에서 제거했습�
 
 #: ../panel/panel-plugin-external.c:519
 msgid "Plugin Restart"
-msgstr ""
+msgstr "플러그인 다시 시작"
 
 #: ../panel/panel-plugin-external.c:520
 #, c-format
@@ -547,7 +548,7 @@ msgstr "패널의 손잡이를 숨기고 위치를 고정하려면 이 옵션을
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Keep panel _above windows"
-msgstr ""
+msgstr "패널을 창 위로 고정(_A)"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
@@ -579,7 +580,7 @@ msgstr "줄 수(_B):"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "L_ength (pixels):"
-msgstr ""
+msgstr "길이(픽셀) (_E):"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "A_utomatically increase the length"
@@ -971,7 +972,7 @@ msgstr "단추 제목(_T):"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Show button on one _line"
-msgstr ""
+msgstr "단추를 한 줄로 표시"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "_Show button title"
@@ -1104,31 +1105,31 @@ msgstr "사용자 정의 형식"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
 msgid "Decimal"
-msgstr ""
+msgstr "10진"
 
 #: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Sexagesimal"
-msgstr ""
+msgstr "16진"
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Binary time"
-msgstr ""
+msgstr "이진 시간"
 
 #: ../plugins/clock/clock-dialog.glade.h:4
 msgid "Date, then time"
-msgstr ""
+msgstr "날짜 다음 시간"
 
 #: ../plugins/clock/clock-dialog.glade.h:5
 msgid "Time, then date"
-msgstr ""
+msgstr "시간 다음 날짜"
 
 #: ../plugins/clock/clock-dialog.glade.h:6
 msgid "Date Only"
-msgstr ""
+msgstr "날짜만"
 
 #: ../plugins/clock/clock-dialog.glade.h:7
 msgid "Time Only"
-msgstr ""
+msgstr "시간만"
 
 #: ../plugins/clock/clock-dialog.glade.h:8
 msgid "Analog"
@@ -1179,7 +1180,7 @@ msgstr "시간 설정"
 msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
-msgstr ""
+msgstr "설정하면, 이 플러그인에 왼쪽 단추를 눌렀을 때 기본 달력을 나타내는 대신 명령을 실행합니다."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Co_mmand:"
@@ -1187,7 +1188,7 @@ msgstr "명령(_M):"
 
 #: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Calendar"
-msgstr ""
+msgstr "달력"
 
 #: ../plugins/clock/clock-dialog.glade.h:24
 #, no-c-format
@@ -1223,7 +1224,7 @@ msgstr "24시간 시계(_H)"
 
 #: ../plugins/clock/clock-dialog.glade.h:31
 msgid "Binary mode:"
-msgstr ""
+msgstr "이진 모드:"
 
 #: ../plugins/clock/clock-dialog.glade.h:32
 msgid "Display _seconds"
@@ -1245,11 +1246,11 @@ msgstr "격자 표시(_D)"
 
 #: ../plugins/clock/clock-dialog.glade.h:37
 msgid "Font:"
-msgstr ""
+msgstr "글꼴:"
 
 #: ../plugins/clock/clock-dialog.glade.h:38
 msgid "Format:"
-msgstr ""
+msgstr "형식:"
 
 #: ../plugins/clock/clock-dialog.glade.h:40
 #, no-c-format
@@ -1259,6 +1260,9 @@ msgid ""
 " the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
 "the &quot;Help&quot; page for additional information."
 msgstr ""
+"이 형식은 패널에 들어갈 날짜 및 시간 부분을 설명합니다. 예를 들면 %Y는 연도, %m는 월 %d는 한 달 중 일 수를 나타냅니다. "
+"이와 비슷하게 &lt;b&gt;&lt;/b&gt; 태그를 사용하면 내용을 굵게 표시합니다. 추가 정보는 &quot;도움말&quot; "
+"페이지를 살펴보십시오."
 
 #: ../plugins/clock/clock-dialog.glade.h:41
 msgid "Date"
@@ -1266,7 +1270,7 @@ msgstr "날짜"
 
 #: ../plugins/clock/clock-dialog.glade.h:42
 msgid "Time"
-msgstr ""
+msgstr "시간"
 
 #: ../plugins/clock/clock-dialog.glade.h:43
 msgid "Clock Options"
@@ -1281,7 +1285,7 @@ msgstr "%R"
 #: ../plugins/clock/clock-digital.h:26
 msgctxt "Date"
 msgid "%Y-%m-%d"
-msgstr ""
+msgstr "%Y-%m-%d"
 
 #: ../plugins/clock/clock-digital.h:27
 msgctxt "Time"
@@ -1896,7 +1900,7 @@ msgstr "마우스 휠로 작업 공간 전환"
 
 #: ../plugins/pager/pager-dialog.glade.h:10
 msgid "Wrap around workspaces"
-msgstr ""
+msgstr "작업 공간 순환"
 
 #: ../plugins/pager/pager-dialog.glade.h:11
 msgid "<b>Appearance</b>"
@@ -2095,7 +2099,7 @@ msgstr "최소화"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "New Instance"
-msgstr ""
+msgstr "새 인스턴스"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
 msgid "Timestamp"
@@ -2136,7 +2140,7 @@ msgstr "손잡이 표시(_H)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show _tooltips"
-msgstr ""
+msgstr "풍선 도움말 표시(_T)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
@@ -2148,7 +2152,7 @@ msgstr "가운데 단추 누름 동작(_D):"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "_Group windows by application"
-msgstr ""
+msgstr "프로그램 단위로 창 묶기(_G)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Restore minimized windows to current _workspace"
@@ -2190,7 +2194,7 @@ msgstr "오류"
 
 #: ../plugins/tasklist/tasklist-widget.c:3103
 msgid "Launch New Instance"
-msgstr ""
+msgstr "새 인스턴스 실행"
 
 #: ../plugins/tasklist/tasklist-widget.c:3857
 msgid "Mi_nimize All"
