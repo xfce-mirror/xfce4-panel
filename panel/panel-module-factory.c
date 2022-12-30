@@ -81,8 +81,8 @@ struct _PanelModuleFactory
 
 
 
-static guint    factory_signals[LAST_SIGNAL];
-static gboolean force_all_external = FALSE;
+static guint factory_signals[LAST_SIGNAL];
+static PanelModuleRunMode force_all_run_mode = PANEL_MODULE_RUN_MODE_NONE;
 
 
 
@@ -191,7 +191,7 @@ panel_module_factory_load_modules_dir (PanelModuleFactory *factory,
       /* try to load the module */
       module = panel_module_new_from_desktop_file (filename,
                                                    internal_name,
-                                                   force_all_external);
+                                                   force_all_run_mode);
 
       if (G_LIKELY (module != NULL))
         {
@@ -305,16 +305,16 @@ panel_module_factory_get (void)
 
 
 void
-panel_module_factory_force_all_external (void)
+panel_module_factory_force_run_mode (PanelModuleRunMode mode)
 {
-  force_all_external = TRUE;
+  const gchar *mode_name = mode == PANEL_MODULE_RUN_MODE_INTERNAL ? "internal" : "external";
 
-  panel_debug (PANEL_DEBUG_MODULE_FACTORY,
-               "forcing all plugins to run external");
+  force_all_run_mode = mode;
+  panel_debug (PANEL_DEBUG_MODULE_FACTORY, "Forcing all plugins to run %s", mode_name);
 
 #ifndef NDEBUG
   if (!panel_debug_has_domain (PANEL_DEBUG_YES))
-    g_message ("Forcing all plugins to run external.");
+    g_message ("Forcing all plugins to run %s", mode_name);
 #endif
 }
 
