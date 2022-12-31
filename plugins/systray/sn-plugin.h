@@ -22,8 +22,9 @@
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel.h>
 
-#include "systray.h"
+#ifdef HAVE_GTK_X11
 #include "systray-manager.h"
+#endif
 
 #include "sn-backend.h"
 #include "sn-config.h"
@@ -49,8 +50,10 @@ struct _SnPlugin
 {
   XfcePanelPlugin      __parent__;
 
+#ifdef HAVE_GTK_X11
   /* Systray manager */
   SystrayManager *manager;
+#endif
 
   guint           idle_startup;
   gboolean        has_hidden_systray_items;
