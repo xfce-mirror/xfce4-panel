@@ -1432,8 +1432,8 @@ launcher_plugin_tooltip_icon (GtkWidget *widget,
   if (G_UNLIKELY (g_path_is_absolute (icon_name)))
     pixbuf = gdk_pixbuf_new_from_file_at_scale (icon_name, size, size, TRUE, NULL);
   else
-    pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (), icon_name, size,
-                                       GTK_ICON_LOOKUP_FORCE_SIZE, NULL);
+    pixbuf = gtk_icon_theme_load_icon_for_scale (gtk_icon_theme_get_default (), icon_name, 32,
+                                                 scale_factor, GTK_ICON_LOOKUP_FORCE_SIZE, NULL);
 
   if (pixbuf != NULL)
     {
