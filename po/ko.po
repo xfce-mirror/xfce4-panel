@@ -6,6 +6,7 @@
 # Translators:
 # Xfce Bot <transifex@xfce.org>, 2022
 # Seong-ho Cho <darkcircle.0426@gmail.com>, 2022
+# Seok Chae <seok.chae@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-22 12:54+0100\n"
 "PO-Revision-Date: 2022-12-22 11:35+0000\n"
-"Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>, 2022\n"
+"Last-Translator: Seok Chae <seok.chae@gmail.com>, 2023\n"
 "Language-Team: Korean (https://www.transifex.com/xfce/teams/16840/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,7 +56,7 @@ msgstr "패널 개별 설정"
 #: ../panel/panel-preferences-dialog.c:1415
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "\"%s\"을(를) 정말로 없애시렵니까?"
+msgstr "\"%s\"을(를) 정말로 삭제하시겠습니까?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1085
 #: ../panel/panel-preferences-dialog.c:1418
@@ -186,7 +187,7 @@ msgstr "버전 정보를 출력하고 끝내기"
 #: ../panel/main.c:208
 #, c-format
 msgid "Name %s lost on the message dbus, exiting."
-msgstr "메시지 dbus에서 %s를 찾을 수 없습니다, 마무리하겠습니다."
+msgstr "메시지 dbus에서 %s를 찾을 수 없어 종료합니다."
 
 #. parse context options
 #: ../panel/main.c:271
@@ -253,8 +254,7 @@ msgstr "실행"
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr ""
-"패널을 시작하시렵니까? 패널을 시작 하면 로그아웃시 세션을 저장하는지 확인하여 다음 로그인시 패널이 자동으로 시작하도록 합니다."
+msgstr "패널을 시작하시겠습니까? 패널을 시작하면 다음 로그인시 설정된 패널이 자동으로 시작됩니다."
 
 #: ../panel/main.c:447 ../panel/main.c:461
 #, c-format
@@ -293,7 +293,7 @@ msgstr "세션 매니저 없이 X를 시작했습니다. 나가기를 누르면 
 
 #: ../panel/panel-application.c:1762
 msgid "Are you sure you want to quit the panel?"
-msgstr "정말 패널을 종료하시렵니까?"
+msgstr "정말 패널을 종료하시겠습니까?"
 
 #: ../panel/panel-application.c:1770
 #, c-format
@@ -389,7 +389,7 @@ msgstr "검색 문구를 여기에 입력합니다"
 #: ../panel/panel-plugin-external.c:516
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "플러그인 \"%s\"을(를) 예기치 않게 패널에서 제거했습니다. 다시 시작 하시렵니까?"
+msgstr "플러그인 \"%s\"을(를) 예기치 않게 패널에서 제거했습니다. 다시 시작 하시겠습니까?"
 
 #: ../panel/panel-plugin-external.c:519
 msgid "Plugin Restart"
@@ -430,7 +430,7 @@ msgstr "패널과 플러그인 환경설정을 완전히 제거합니다"
 #: ../panel/panel-preferences-dialog.c:1054
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
-msgstr "패널 %d을(를) 정말로 없애시렵니까?"
+msgstr "패널 %d을(를) 정말로 삭제하시겠습니까?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
@@ -584,7 +584,7 @@ msgstr "길이(픽셀) (_E):"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "A_utomatically increase the length"
-msgstr "길이를 자동으로 늘임(_U)"
+msgstr "길이 자동 확장(_U)"
 
 #: ../panel/panel-preferences-dialog.glade.h:34
 msgid ""
@@ -598,7 +598,7 @@ msgstr "표시(_I)"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Dark mode"
-msgstr "어두움 모드"
+msgstr "다크 모드"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "<b>Background</b>"
@@ -821,7 +821,7 @@ msgstr "로그아웃(_L)"
 
 #: ../plugins/actions/actions.c:169
 msgid "Are you sure you want to log out?"
-msgstr "정말로 로그아웃 하시렵니까?"
+msgstr "정말로 로그아웃 하시겠습니까?"
 
 #: ../plugins/actions/actions.c:170
 #, c-format
@@ -862,7 +862,7 @@ msgstr "최대 절전(_H)"
 
 #: ../plugins/actions/actions.c:202
 msgid "Do you want to suspend to disk?"
-msgstr "디스크를 대기 상태로 두시렵니까?"
+msgstr "디스크 대기 모드로 전환하시겠습니까?"
 
 #: ../plugins/actions/actions.c:203
 #, c-format
@@ -879,7 +879,7 @@ msgstr "하이브리드 대기(_H)"
 
 #: ../plugins/actions/actions.c:211
 msgid "Do you want to hibernate and suspend the system?"
-msgstr "최대 절전 및 대기 상태로 진입하시렵니까?"
+msgstr "최대 절전 및 대기 상태로 전환하시겠습니까?"
 
 #: ../plugins/actions/actions.c:212
 #, c-format
@@ -896,7 +896,7 @@ msgstr "대기(_P)"
 
 #: ../plugins/actions/actions.c:220
 msgid "Do you want to suspend to RAM?"
-msgstr "RAM을 대기 상태로 두시렵니까?"
+msgstr "RAM 대기 모드로 전환하시겠습니까?"
 
 #: ../plugins/actions/actions.c:221
 #, c-format
@@ -913,7 +913,7 @@ msgstr "다시 시작(_R)"
 
 #: ../plugins/actions/actions.c:229
 msgid "Are you sure you want to restart?"
-msgstr "정말로 다시 시작 하시렵니까?"
+msgstr "정말로 다시 시작 하시겠습니까?"
 
 #: ../plugins/actions/actions.c:230
 #, c-format
@@ -930,7 +930,7 @@ msgstr "시스템 종료(_D)"
 
 #: ../plugins/actions/actions.c:238
 msgid "Are you sure you want to shut down?"
-msgstr "정말로 컴퓨터를 끄시렵니까?"
+msgstr "정말로 컴퓨터를 종료하시겠습니까?"
 
 #: ../plugins/actions/actions.c:239
 #, c-format
@@ -1747,7 +1747,7 @@ msgstr "항목을 삭제하면, 완전히 제거합니다"
 #: ../plugins/launcher/launcher-dialog.c:863
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr "\"%s\"을(를) 정말 제거하시렵니까?"
+msgstr "\"%s\"을(를) 정말 제거하시겠습니까?"
 
 #: ../plugins/launcher/launcher-dialog.c:864
 msgid "Unnamed item"
@@ -1953,7 +1953,7 @@ msgstr "정리"
 
 #: ../plugins/systray/sn-dialog.c:650
 msgid "Are you sure you want to clear the list of known items?"
-msgstr "알려진 항목 목록을 정말로 지우시렵니까?"
+msgstr "알려진 항목 목록을 정말로 지우시겠습니까?"
 
 #: ../plugins/systray/sn-dialog.glade.h:1
 msgid "Status Tray Items"
