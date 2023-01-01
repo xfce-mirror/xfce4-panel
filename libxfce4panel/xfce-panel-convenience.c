@@ -314,7 +314,7 @@ xfce_panel_pixbuf_from_source (const gchar  *source,
  *
  * See also: #XfcePanelImage
  *
- * Since: 4.17.2
+ * Since: 4.17.4
  **/
 void
 xfce_panel_set_image_from_source (GtkImage     *image,
