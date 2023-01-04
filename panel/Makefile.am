@@ -54,6 +54,18 @@ xfce4_panel_SOURCES = \
 	panel-window.c \
 	panel-window.h
 
+if HAVE_GTK_X11
+xfce4_panel_SOURCES += \
+	panel-plugin-external-wrapper-x11.c \
+	panel-plugin-external-wrapper-x11.h
+endif
+
+if HAVE_GTK_LAYER_SHELL
+xfce4_panel_SOURCES += \
+	panel-plugin-external-wrapper-wayland.c \
+	panel-plugin-external-wrapper-wayland.h
+endif
+
 xfce4_panel_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(GMODULE_CFLAGS) \
@@ -62,6 +74,8 @@ xfce4_panel_CFLAGS = \
 	$(LIBWNCK_CFLAGS) \
 	$(XFCONF_CFLAGS) \
 	$(LIBX11_CFLAGS) \
+	$(GTK_LAYER_SHELL_CFLAGS) \
+	$(LIBXFCE4WINDOWING_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 xfce4_panel_LDFLAGS = \
@@ -78,6 +92,8 @@ xfce4_panel_LDADD = \
 	$(LIBWNCK_LIBS) \
 	$(XFCONF_LIBS) \
 	$(LIBX11_LIBS) \
+	$(GTK_LAYER_SHELL_LIBS) \
+	$(LIBXFCE4WINDOWING_LIBS) \
 	-lm
 
 xfce4_panel_DEPENDENCIES = \
