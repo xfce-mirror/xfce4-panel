@@ -207,7 +207,7 @@ panel_dbus_name_lost (GDBusConnection *connection,
                       gpointer         user_data)
 {
   if (connection == NULL)
-    g_critical (_("Name %s lost on the message dbus, exiting."), name);
+    g_critical ("Name %s lost on the message dbus, exiting.", name);
 
   gtk_main_quit ();
 }
