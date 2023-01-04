@@ -293,7 +293,7 @@ typedef GTypeModule XfcePanelTypeModule;
  **/
 #define XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK(construct_func, check_func) \
   _XFCE_PANEL_PLUGIN_REGISTER_EXTENDED (construct_func, /* foo */, \
-    if (G_LIKELY ((*check_func) (xpp_screen) == TRUE)))
+    if (G_LIKELY ((*check_func) (xpp_screen))))
 
 
 

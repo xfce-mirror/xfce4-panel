@@ -2374,7 +2374,7 @@ xfce_tasklist_wireframe_update (XfceTasklist      *tasklist,
   guint                 scale_factor;
 
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
-  panel_return_if_fail (tasklist->show_wireframes == TRUE);
+  panel_return_if_fail (tasklist->show_wireframes);
   panel_return_if_fail (XFW_IS_WINDOW (child->window));
 
   gdpy = gtk_widget_get_display (GTK_WIDGET (tasklist));

@@ -310,7 +310,7 @@ main (gint argc, gchar **argv)
   /* check for a plugin preinit function */
   if (g_module_symbol (library, "xfce_panel_module_preinit", (gpointer) &preinit_func)
       && preinit_func != NULL
-      && (*preinit_func) (argc, argv) == FALSE)
+      && ! (*preinit_func) (argc, argv))
     {
       retval = PLUGIN_EXIT_PREINIT_FAILED;
       goto leave;

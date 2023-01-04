@@ -3065,8 +3065,7 @@ panel_window_autohide_timeout (gpointer user_data)
     gtk_widget_queue_resize (GTK_WIDGET (window));
 
   /* check whether the panel should be animated on autohide */
-  if (window->floating == FALSE
-      || window->popdown_speed > 0)
+  if (! window->floating || window->popdown_speed > 0)
     window->autohide_ease_out_id =
             g_timeout_add_full (G_PRIORITY_LOW, 25,
                                 panel_window_autohide_ease_out, window,

@@ -409,7 +409,7 @@ pager_plugin_scroll_event (GtkWidget      *widget,
   panel_return_val_if_fail (XFW_IS_SCREEN (plugin->xfw_screen), FALSE);
 
   /* leave when scrolling is not enabled */
-  if (plugin->scrolling == FALSE)
+  if (! plugin->scrolling)
     return TRUE;
 
   if (event->direction != GDK_SCROLL_SMOOTH)
@@ -439,7 +439,7 @@ pager_plugin_scroll_event (GtkWidget      *widget,
 
   n_workspaces = xfw_workspace_group_get_workspace_count (plugin->workspace_group) - 1;
 
-  if (plugin->wrap_workspaces == TRUE)
+  if (plugin->wrap_workspaces)
   {
     /* wrap around */
     if (active_n < 0)

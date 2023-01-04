@@ -947,9 +947,9 @@ clock_plugin_configure_plugin_chooser_fill (ClockPlugin *plugin,
 
           g_free (preview);
 
-          if (has_active == FALSE
-            && !panel_str_is_empty (active_format)
-            && strcmp (active_format, formats[i]) == 0)
+          if (! has_active
+              && ! panel_str_is_empty (active_format)
+              && strcmp (active_format, formats[i]) == 0)
             {
               gtk_combo_box_set_active_iter (combo, &iter);
               gtk_widget_hide (GTK_WIDGET (entry));
