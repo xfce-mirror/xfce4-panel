@@ -390,10 +390,10 @@ clock_time_timeout_set_interval (ClockTimeTimeout *timeout,
 
   if (next_interval > 0)
     {
-      /* start the sync timeout */
-      timeout->timeout_id = g_timeout_add_seconds_full (G_PRIORITY_DEFAULT, next_interval,
-                                                        clock_time_timeout_sync,
-                                                        timeout, NULL);
+      /* start the sync timeout: be more precise here, otherwise (next_interval - 1) seconds
+       * could pass before the synchronization, which finally results in a minute that lasts
+       * two minutes */
+      timeout->timeout_id = g_timeout_add (next_interval * 1000, clock_time_timeout_sync, timeout);
     }
   else
     {
