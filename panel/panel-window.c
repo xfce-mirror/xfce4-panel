@@ -143,7 +143,6 @@ static void         panel_window_get_position                         (PanelWind
 static void         panel_window_screen_changed                       (GtkWidget        *widget,
                                                                        GdkScreen        *previous_screen);
 static void         panel_window_style_updated                        (GtkWidget        *widget);
-static void         panel_window_update_dark_mode                     (gboolean          dark_mode);
 static void         panel_window_realize                              (GtkWidget        *widget);
 static StrutsEgde   panel_window_screen_struts_edge                   (PanelWindow      *window);
 static void         panel_window_screen_struts_set                    (PanelWindow      *window);
@@ -799,7 +798,10 @@ panel_window_set_property (GObject      *object,
         }
 
       /* set dark mode for the main application and plugins */
-      panel_window_update_dark_mode (window->dark_mode);
+      g_object_set (gtk_settings_get_default (),
+                    "gtk-application-prefer-dark-theme",
+                    window->dark_mode,
+                    NULL);
       panel_window_plugins_update (window, PLUGIN_PROP_DARK_MODE);
       break;
 
@@ -1837,24 +1839,6 @@ panel_window_screen_changed (GtkWidget *widget,
   panel_window_update_autohide_window (window, xfw_screen, xfw_window);
 }
 
-
-
-static void
-panel_window_update_dark_mode (gboolean dark_mode)
-{
-  GtkSettings *gtk_settings;
-
-  gtk_settings = gtk_settings_get_default ();
-
-  if (!dark_mode)
-    gtk_settings_reset_property (gtk_settings,
-                                 "gtk-application-prefer-dark-theme");
-
-  g_object_set (gtk_settings,
-                "gtk-application-prefer-dark-theme",
-                dark_mode,
-                NULL);
-}
 
 
 static void
