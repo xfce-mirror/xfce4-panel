@@ -436,7 +436,7 @@ clock_plugin_button_press_event (GtkWidget      *widget,
   if (event->button == 1 || event->button == 2)
     {
       if (event->type == GDK_BUTTON_PRESS &&
-          panel_str_is_empty (plugin->command))
+          xfce_str_is_empty (plugin->command))
         {
           /* toggle calendar window visibility */
           if (plugin->calendar_window == NULL
@@ -454,7 +454,7 @@ clock_plugin_button_press_event (GtkWidget      *widget,
           return TRUE;
         }
       else if (event->type == GDK_BUTTON_PRESS
-               && !panel_str_is_empty (plugin->command))
+               && !xfce_str_is_empty (plugin->command))
         {
           /* launch command */
           if (!xfce_spawn_command_line (gtk_widget_get_screen (widget),
@@ -948,7 +948,7 @@ clock_plugin_configure_plugin_chooser_fill (ClockPlugin *plugin,
           g_free (preview);
 
           if (! has_active
-              && ! panel_str_is_empty (active_format)
+              && ! xfce_str_is_empty (active_format)
               && strcmp (active_format, formats[i]) == 0)
             {
               gtk_combo_box_set_active_iter (combo, &iter);

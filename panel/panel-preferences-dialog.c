@@ -540,12 +540,12 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
 
   g_object_get (G_OBJECT (dialog->active), "output-name", &output_name, NULL);
 
-  if (n_monitors > 1 || !panel_str_is_empty (output_name))
+  if (n_monitors > 1 || !xfce_str_is_empty (output_name))
     {
       gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
                                          OUTPUT_NAME, "Automatic",
                                          OUTPUT_TITLE, _("Automatic"), -1);
-      if (panel_str_is_empty (output_name) ||
+      if (xfce_str_is_empty (output_name) ||
           g_strcmp0 (output_name, "Automatic") == 0)
         {
           gtk_combo_box_set_active_iter (GTK_COMBO_BOX (object), &iter);
@@ -568,7 +568,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
             {
               monitor = gdk_display_get_monitor(display, i);
               name = g_strdup(gdk_monitor_get_model (monitor));
-              if (panel_str_is_empty (name))
+              if (xfce_str_is_empty (name))
                 {
                   g_free (name);
 
@@ -598,7 +598,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
         }
 
       /* add the output from the config if still nothing has been selected */
-      if (!output_selected && !panel_str_is_empty (output_name))
+      if (!output_selected && !xfce_str_is_empty (output_name))
         {
           gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
                                              OUTPUT_NAME, output_name,

@@ -258,7 +258,7 @@ panel_dbus_service_add_new_item (XfcePanelExportedService *skeleton,
 
   application = panel_application_get ();
 
-  if (arguments != NULL && panel_str_is_empty (*arguments))
+  if (arguments != NULL && xfce_str_is_empty (*arguments))
     arguments = NULL;
 
   /* add new plugin (with or without arguments) */

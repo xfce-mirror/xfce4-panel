@@ -371,7 +371,7 @@ applications_menu_plugin_set_property (GObject      *object,
       gtk_label_set_text (GTK_LABEL (plugin->label),
           plugin->button_title != NULL ? plugin->button_title : "");
       gtk_widget_set_tooltip_text (plugin->button,
-          panel_str_is_empty (plugin->button_title) ? NULL : plugin->button_title);
+          xfce_str_is_empty (plugin->button_title) ? NULL : plugin->button_title);
 
       /* check if the label still fits */
       if (xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin)) == XFCE_PANEL_PLUGIN_MODE_DESKBAR
@@ -384,8 +384,8 @@ applications_menu_plugin_set_property (GObject      *object,
     case PROP_BUTTON_ICON:
       g_free (plugin->button_icon);
       plugin->button_icon =
-        panel_str_is_empty (g_value_get_string (value)) ? g_strdup (DEFAULT_ICON_NAME)
-                                                        : g_value_dup_string (value);
+        xfce_str_is_empty (g_value_get_string (value)) ? g_strdup (DEFAULT_ICON_NAME)
+                                                       : g_value_dup_string (value);
 
       force_a_resize = TRUE;
       break;
@@ -732,7 +732,7 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
   object = gtk_builder_get_object (builder, "custom-file");
   panel_return_if_fail (GTK_IS_FILE_CHOOSER_BUTTON (object));
-  if (!panel_str_is_empty (plugin->custom_menu_file))
+  if (!xfce_str_is_empty (plugin->custom_menu_file))
     gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (object), plugin->custom_menu_file);
   g_signal_connect (G_OBJECT (object), "file-set",
      G_CALLBACK (applications_menu_plugin_configure_plugin_file_set), plugin);

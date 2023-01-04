@@ -252,7 +252,7 @@ clock_time_interval_from_format (const gchar *format)
 {
   const gchar *p;
 
-  if (G_UNLIKELY (panel_str_is_empty (format)))
+  if (G_UNLIKELY (xfce_str_is_empty (format)))
       return CLOCK_INTERVAL_MINUTE;
 
   for (p = format; *p != '\0'; ++p)

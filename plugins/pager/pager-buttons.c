@@ -587,11 +587,11 @@ pager_buttons_workspace_button_label (XfwWorkspace *workspace,
 
   /* try to get an utf-8 valid name */
   name = xfw_workspace_get_name (workspace);
-  if (!panel_str_is_empty (name)
+  if (!xfce_str_is_empty (name)
       && !g_utf8_validate (name, -1, NULL))
     name = utf8 = g_locale_to_utf8 (name, -1, NULL, NULL, NULL);
 
-  if (panel_str_is_empty (name))
+  if (xfce_str_is_empty (name))
     name = name_fallback = g_strdup_printf (_("Workspace %d"),
                                             xfw_workspace_get_number (workspace) + 1);
 

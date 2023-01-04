@@ -326,7 +326,7 @@ static gboolean
 systray_plugin_names_get_hidden (SnPlugin      *plugin,
                                  const gchar   *name)
 {
-  if (panel_str_is_empty (name))
+  if (xfce_str_is_empty (name))
     return FALSE;
 
   /* lookup the name in the list */

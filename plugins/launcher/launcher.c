@@ -1424,7 +1424,7 @@ launcher_plugin_tooltip_icon (GtkWidget *widget,
   GdkPixbuf *pixbuf;
   gint scale_factor, size;
 
-  if (panel_str_is_empty (icon_name))
+  if (xfce_str_is_empty (icon_name))
     return NULL;
 
   scale_factor = gtk_widget_get_scale_factor (widget);
@@ -1608,7 +1608,7 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
       /* create the menu item */
       name = garcon_menu_item_get_name (item);
       mi = gtk_menu_item_new ();
-      label = gtk_label_new (panel_str_is_empty (name) ? _("Unnamed Item") : name);
+      label = gtk_label_new (xfce_str_is_empty (name) ? _("Unnamed Item") : name);
       gtk_label_set_xalign (GTK_LABEL (label), 0.0);
       box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
       gtk_box_pack_end (GTK_BOX (box), label, TRUE, TRUE, 0);
@@ -1647,7 +1647,7 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
       /* set the icon if one is set */
       icon_name = garcon_menu_item_get_icon_name (item);
 
-      if (panel_str_is_empty (icon_name))
+      if (xfce_str_is_empty (icon_name))
         {
           /* use an empty placeholder icon */
           image = gtk_image_new_from_icon_name ("", GTK_ICON_SIZE_DND);
@@ -1805,7 +1805,7 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
       panel_return_if_fail (GTK_IS_WIDGET (plugin->child));
 
       icon_name = garcon_menu_item_get_icon_name (item);
-      if (!panel_str_is_empty (icon_name))
+      if (!xfce_str_is_empty (icon_name))
         {
           if (g_path_is_absolute (icon_name))
             {
@@ -2410,11 +2410,11 @@ launcher_plugin_item_query_tooltip (GtkWidget      *widget,
 
   /* require atleast an item name */
   name = garcon_menu_item_get_name (item);
-  if (panel_str_is_empty (name))
+  if (xfce_str_is_empty (name))
     return FALSE;
 
   comment = garcon_menu_item_get_comment (item);
-  if (!panel_str_is_empty (comment))
+  if (!xfce_str_is_empty (comment))
     {
       markup = g_markup_printf_escaped ("<b>%s</b>\n%s", name, comment);
       label = gtk_label_new (markup);
@@ -2466,7 +2466,7 @@ launcher_plugin_item_exec_on_screen (GarconMenuItem *item,
 
   /* get the command */
   command = (gchar*) garcon_menu_item_get_command (item);
-  panel_return_val_if_fail (!panel_str_is_empty (command), FALSE);
+  panel_return_val_if_fail (!xfce_str_is_empty (command), FALSE);
 
   /* expand the field codes */
   icon = garcon_menu_item_get_icon_name (item);
@@ -2519,7 +2519,7 @@ launcher_plugin_item_exec (GarconMenuItem *item,
 
   /* leave when there is nothing to execute */
   command = garcon_menu_item_get_command (item);
-  if (panel_str_is_empty (command))
+  if (xfce_str_is_empty (command))
     return;
 
   if (G_UNLIKELY (uri_list != NULL
@@ -2562,7 +2562,7 @@ launcher_plugin_item_exec_from_clipboard (GarconMenuItem *item,
     text = gtk_clipboard_wait_for_text (clipboard);
 
   /* try the secondary keayboard if the text is empty */
-  if (panel_str_is_empty (text))
+  if (xfce_str_is_empty (text))
     {
       /* get the secondary clipboard text */
       clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
@@ -2570,7 +2570,7 @@ launcher_plugin_item_exec_from_clipboard (GarconMenuItem *item,
         text = gtk_clipboard_wait_for_text (clipboard);
     }
 
-  if (!panel_str_is_empty (text))
+  if (!xfce_str_is_empty (text))
     {
       /* create fake selection data */
       //data.data = (guchar *) text;      //HOWTO?
@@ -2615,7 +2615,7 @@ launcher_plugin_uri_list_extract (GtkSelectionData *data)
       /* create the list of uris */
       for (i = 0; array[i] != NULL; i++)
         {
-          if (!panel_str_is_empty (array[i]))
+          if (!xfce_str_is_empty (array[i]))
             list = g_slist_prepend (list, array[i]);
           else
             g_free (array[i]);
@@ -2634,7 +2634,7 @@ launcher_plugin_uri_list_extract (GtkSelectionData *data)
       for (i = 0; array[i] != NULL; i++)
         {
           /* skip empty strings */
-          if (!!panel_str_is_empty (array[i]))
+          if (!!xfce_str_is_empty (array[i]))
             continue;
 
           uri = NULL;

@@ -625,7 +625,7 @@ panel_application_plugin_move (GtkWidget        *item,
   module = panel_module_get_from_plugin_provider (XFCE_PANEL_PLUGIN_PROVIDER (item));
   icon_name = panel_module_get_icon_name (module);
   theme = gtk_icon_theme_get_for_screen (gtk_widget_get_screen (item));
-  if (!panel_str_is_empty (icon_name)
+  if (!xfce_str_is_empty (icon_name)
       && gtk_icon_theme_has_icon (theme, icon_name))
     gtk_drag_set_icon_name (context, icon_name, 0, 0);
   else
@@ -649,7 +649,7 @@ panel_application_plugin_delete_config (PanelApplication *application,
   gchar *filename, *path;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
-  panel_return_if_fail (!panel_str_is_empty (name));
+  panel_return_if_fail (!xfce_str_is_empty (name));
   panel_return_if_fail (unique_id != -1);
 
   /* remove the xfconf property */

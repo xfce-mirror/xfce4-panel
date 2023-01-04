@@ -2602,10 +2602,10 @@ xfce_tasklist_button_compare (gconstpointer child_a,
             name_b = xfw_application_get_name (app_b);
 
           /* if there is no app name, use the window name */
-          if (panel_str_is_empty (name_a)
+          if (xfce_str_is_empty (name_a)
               && a->window != NULL)
             name_a = xfw_window_get_name (a->window);
-          if (panel_str_is_empty (name_b)
+          if (xfce_str_is_empty (name_b)
               && b->window != NULL)
             name_b = xfw_window_get_name (b->window) ;
 

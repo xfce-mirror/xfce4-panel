@@ -892,11 +892,11 @@ window_menu_plugin_menu_workspace_item_new (XfwWorkspace *workspace,
 
   /* try to get an utf-8 valid name */
   name = xfw_workspace_get_name (workspace);
-  if (!panel_str_is_empty (name)
+  if (!xfce_str_is_empty (name)
       && !g_utf8_validate (name, -1, NULL))
     name = utf8 = g_locale_to_utf8 (name, -1, NULL, NULL, NULL);
 
-  if (panel_str_is_empty (name))
+  if (xfce_str_is_empty (name))
     name = name_num = g_strdup_printf (_("Workspace %d"),
         xfw_workspace_get_number (workspace) + 1);
 
@@ -1012,10 +1012,10 @@ window_menu_plugin_menu_window_item_new (XfwWindow            *window,
 
   /* try to get an utf-8 valid name */
   name = xfw_window_get_name (window);
-  if (!panel_str_is_empty (name) && !g_utf8_validate (name, -1, NULL))
+  if (!xfce_str_is_empty (name) && !g_utf8_validate (name, -1, NULL))
     name = utf8 = g_locale_to_utf8 (name, -1, NULL, NULL, NULL);
 
-  if (panel_str_is_empty (name))
+  if (xfce_str_is_empty (name))
     name = "?";
 
   /* store the tooltip text */
@@ -1369,12 +1369,12 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
         {
           /* try to get an utf-8 valid name */
           name = xfw_workspace_get_name (workspace);
-          if (!panel_str_is_empty (name) && !g_utf8_validate (name, -1, NULL))
+          if (!xfce_str_is_empty (name) && !g_utf8_validate (name, -1, NULL))
             name = utf8 = g_locale_to_utf8 (name, -1, NULL, NULL, NULL);
         }
 
       /* create label */
-      if (!panel_str_is_empty (name))
+      if (!xfce_str_is_empty (name))
         label = g_strdup_printf (_("Remove Workspace \"%s\""), name);
       else
         label = g_strdup_printf (_("Remove Workspace %d"), n_workspaces);

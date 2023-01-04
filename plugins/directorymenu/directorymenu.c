@@ -250,7 +250,7 @@ directory_menu_plugin_get_property (GObject    *object,
       break;
 
     case PROP_FILE_PATTERN:
-      g_value_set_string (value, panel_str_is_empty (plugin->file_pattern) ?
+      g_value_set_string (value, xfce_str_is_empty (plugin->file_pattern) ?
           "" : plugin->file_pattern);
       break;
 
@@ -283,7 +283,7 @@ directory_menu_plugin_set_property (GObject      *object,
     {
     case PROP_BASE_DIRECTORY:
       path = g_value_get_string (value);
-      if (panel_str_is_empty (path))
+      if (xfce_str_is_empty (path))
         path = g_get_home_dir ();
 
       if (plugin->base_directory != NULL)
@@ -301,8 +301,8 @@ directory_menu_plugin_set_property (GObject      *object,
     case PROP_ICON_NAME:
       g_free (plugin->icon_name);
       plugin->icon_name =
-        panel_str_is_empty (g_value_get_string (value)) ? g_strdup (DEFAULT_ICON_NAME)
-                                                        : g_value_dup_string (value);
+        xfce_str_is_empty (g_value_get_string (value)) ? g_strdup (DEFAULT_ICON_NAME)
+                                                       : g_value_dup_string (value);
       size = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
       directory_menu_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin), size);
       break;
@@ -333,7 +333,7 @@ directory_menu_plugin_set_property (GObject      *object,
       if (G_LIKELY (array != NULL))
         {
           for (i = 0; array[i] != NULL; i++)
-            if (!panel_str_is_empty (array[i]))
+            if (!xfce_str_is_empty (array[i]))
                 plugin->patterns = g_slist_prepend (plugin->patterns,
                     g_pattern_spec_new (array[i]));
 
@@ -1202,7 +1202,7 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
                   icon = g_app_info_get_icon (G_APP_INFO (desktopinfo));
 
                   /* ignore invalid or hidden files */
-                  if (panel_str_is_empty (display_name)
+                  if (xfce_str_is_empty (display_name)
                       || g_desktop_app_info_get_is_hidden (desktopinfo))
                     {
                       g_object_unref (G_OBJECT (desktopinfo));
@@ -1241,7 +1241,7 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
           else if (G_UNLIKELY (desktopinfo != NULL))
             {
               description = g_app_info_get_description (G_APP_INFO (desktopinfo));
-              if (!panel_str_is_empty (description))
+              if (!xfce_str_is_empty (description))
                 gtk_widget_set_tooltip_text (mi, description);
 
               g_signal_connect_data (G_OBJECT (mi), "activate",

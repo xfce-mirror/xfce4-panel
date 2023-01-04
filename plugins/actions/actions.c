@@ -693,7 +693,7 @@ actions_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
       /* get the value and check if it is within range */
       val = g_ptr_array_index (plugin->items, i);
       name = g_value_get_string (val);
-      if (panel_str_is_empty (name))
+      if (xfce_str_is_empty (name))
         continue;
 
       /* find the entry in the available actions */
@@ -1318,11 +1318,11 @@ actions_plugin_pack_idle (gpointer data)
           case BUTTON_TITLE_TYPE_FULLNAME:
             /* get a decent username, not the glib defaults */
             button_title = g_get_real_name ();
-            if (panel_str_is_empty (button_title)
+            if (xfce_str_is_empty (button_title)
                 || strcmp (button_title, "Unknown") == 0)
               {
                 button_title = g_get_user_name ();
-                if (panel_str_is_empty (button_title)
+                if (xfce_str_is_empty (button_title)
                     || strcmp (button_title, "username") == 0)
                   button_title = _("Little Mouse");
               }
@@ -1330,7 +1330,7 @@ actions_plugin_pack_idle (gpointer data)
 
           case BUTTON_TITLE_TYPE_USERNAME:
             button_title = g_get_user_name ();
-            if (panel_str_is_empty (button_title))
+            if (xfce_str_is_empty (button_title))
               button_title = "username";
             break;
 
