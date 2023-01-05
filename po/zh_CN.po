@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-28 15:00+0100\n"
+"POT-Creation-Date: 2023-01-05 00:46+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: 玉堂白鹤 <yjwork@qq.com>, 2015,2017-2020,2022\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/xfce/xfce4-panel/language/zh_CN/)\n"
@@ -48,7 +48,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panels;settings;preferences;taskbar;autohide;application menu;start;buttons;launcher;notification area;status;icons;plugins;面板;设置;首选项;任务栏;自动隐藏;应用程序菜单;开始;按钮;启动器;通知区域;状态;图标;插件; "
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2989
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3572
 msgid "Panel"
 msgstr "面板"
 
@@ -57,78 +57,78 @@ msgid "Customize the panel"
 msgstr "自定义面板"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1080
-#: ../panel/panel-preferences-dialog.c:1415
+#: ../libxfce4panel/xfce-panel-plugin.c:1095
+#: ../panel/panel-preferences-dialog.c:1417
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "您确定要移除 “%s” 吗？"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1085
-#: ../panel/panel-preferences-dialog.c:1418
+#: ../libxfce4panel/xfce-panel-plugin.c:1100
+#: ../panel/panel-preferences-dialog.c:1420
 msgid "Remove Item"
 msgstr "移除项目"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1087
+#: ../libxfce4panel/xfce-panel-plugin.c:1102
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "从面板上移除此项目，其配置也将丢失。"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1088 ../panel/panel-dialogs.c:164
-#: ../panel/panel-preferences-dialog.c:1422
-#: ../plugins/applicationsmenu/applicationsmenu.c:611
-#: ../plugins/directorymenu/directorymenu.c:470
-#: ../plugins/directorymenu/directorymenu.c:939
+#: ../libxfce4panel/xfce-panel-plugin.c:1103 ../panel/panel-dialogs.c:164
+#: ../panel/panel-preferences-dialog.c:1424
+#: ../plugins/applicationsmenu/applicationsmenu.c:608
+#: ../plugins/directorymenu/directorymenu.c:467
+#: ../plugins/directorymenu/directorymenu.c:934
 msgid "_Cancel"
 msgstr "取消(_C)"
 
 #. remove
-#: ../libxfce4panel/xfce-panel-plugin.c:1089
-#: ../libxfce4panel/xfce-panel-plugin.c:1256
-#: ../panel/panel-plugin-external.c:525
-#: ../panel/panel-preferences-dialog.c:1052
-#: ../panel/panel-preferences-dialog.c:1423
+#: ../libxfce4panel/xfce-panel-plugin.c:1104
+#: ../libxfce4panel/xfce-panel-plugin.c:1271
+#: ../panel/panel-plugin-external.c:403
+#: ../panel/panel-preferences-dialog.c:1054
+#: ../panel/panel-preferences-dialog.c:1425
 #: ../panel/panel-preferences-dialog.glade.h:58
-#: ../plugins/launcher/launcher-dialog.c:861
+#: ../plugins/launcher/launcher-dialog.c:860
 msgid "_Remove"
 msgstr "移除(_R)"
 
 #. properties item
-#: ../libxfce4panel/xfce-panel-plugin.c:1218
+#: ../libxfce4panel/xfce-panel-plugin.c:1233
 msgid "_Properties"
 msgstr "属性(_P)"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3065
+#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:3648
 msgid "_About"
 msgstr "关于(_A)"
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1240
+#: ../libxfce4panel/xfce-panel-plugin.c:1255
 msgid "_Move"
 msgstr "移动(_M)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1274
+#: ../libxfce4panel/xfce-panel-plugin.c:1289
 msgid "Pane_l"
 msgstr "面板(_L)"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:3001
+#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3584
 msgid "Add _New Items..."
 msgstr "添加新项目(_N)..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:3012
+#: ../libxfce4panel/xfce-panel-plugin.c:1308 ../panel/panel-window.c:3595
 msgid "Panel Pr_eferences..."
 msgstr "面板首选项(_E)..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3040
+#: ../libxfce4panel/xfce-panel-plugin.c:1325 ../panel/panel-window.c:3623
 msgid "Log _Out"
 msgstr "注销(_O)"
 
 #. help item
-#: ../libxfce4panel/xfce-panel-plugin.c:1326 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3056
+#: ../libxfce4panel/xfce-panel-plugin.c:1341 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3639
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:15
@@ -142,165 +142,160 @@ msgid "_Help"
 msgstr "帮助(_H)"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1337
+#: ../libxfce4panel/xfce-panel-plugin.c:1352
 msgid "About"
 msgstr "关于"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:83
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "显示 ‘面板首选项’ 对话框"
 
-#: ../panel/main.c:81 ../panel/main.c:82
+#: ../panel/main.c:83 ../panel/main.c:84
 msgid "PANEL-NUMBER"
 msgstr "面板-编号"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:84
 msgid "Show the 'Add New Items' dialog"
 msgstr "显示 ‘添加新项目’ 对话框"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:85
 msgid "Save the panel configuration"
 msgstr "保存面板配置"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:86
 msgid "Add a new plugin to the panel"
 msgstr "在面板上添加新插件"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:86
 msgid "PLUGIN-NAME"
 msgstr "面板-名称"
 
-#: ../panel/main.c:85
+#: ../panel/main.c:87
 msgid "Restart the running panel instance"
 msgstr "重启正在运行的面板实例"
 
-#: ../panel/main.c:86
+#: ../panel/main.c:88
 msgid "Quit the running panel instance"
 msgstr "退出正在运行的面板实例"
 
-#: ../panel/main.c:87
+#: ../panel/main.c:89
 msgid "Do not wait for a window manager on startup"
 msgstr "启动时不等待窗口管理器"
 
-#: ../panel/main.c:88
+#: ../panel/main.c:90
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "打印版本信息后退出"
 
-#: ../panel/main.c:208
-#, c-format
-msgid "Name %s lost on the message dbus, exiting."
-msgstr "名称 %s 已遗失于消息总线，现将退出。"
-
 #. parse context options
-#: ../panel/main.c:271
+#: ../panel/main.c:273
 msgid "[ARGUMENTS...]"
 msgstr "[参数...]"
 
-#: ../panel/main.c:278
+#: ../panel/main.c:280
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "输入 “%s --help” 获取用法。"
 
-#: ../panel/main.c:297
+#: ../panel/main.c:299
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce 开发团队。保留所有权利。"
 
-#: ../panel/main.c:298
+#: ../panel/main.c:300
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "请向 <%s> 报告缺陷。"
 
 #. quit without error if an instance is running
-#: ../panel/main.c:398
+#: ../panel/main.c:403
 msgid "There is already a running instance"
 msgstr "已经有一个正在运行的实例"
 
 #. spawn ourselfs again
-#: ../panel/main.c:406
+#: ../panel/main.c:411
 msgid "Restarting..."
 msgstr "正在重启..."
 
-#: ../panel/main.c:421
+#: ../panel/main.c:426
 msgid "Failed to show the preferences dialog"
 msgstr "无法显示首选项对话框"
 
-#: ../panel/main.c:423
+#: ../panel/main.c:428
 msgid "Failed to show the add new items dialog"
 msgstr "无法显示添加新项目对话框"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:430
 msgid "Failed to save the panel configuration"
 msgstr "无法保存面板配置"
 
-#: ../panel/main.c:427
+#: ../panel/main.c:432
 msgid "Failed to add a plugin to the panel"
 msgstr "无法在面板上添加插件"
 
-#: ../panel/main.c:429
+#: ../panel/main.c:434
 msgid "Failed to restart the panel"
 msgstr "无法重启面板"
 
-#: ../panel/main.c:431
+#: ../panel/main.c:436
 msgid "Failed to quit the panel"
 msgstr "无法退出面板"
 
-#: ../panel/main.c:433
+#: ../panel/main.c:438
 msgid "Failed to send D-Bus message"
 msgstr "无法发送 D-Bus 信息"
 
-#: ../panel/main.c:443
+#: ../panel/main.c:448
 msgid "Execute"
 msgstr "执行"
 
-#: ../panel/main.c:444
+#: ../panel/main.c:449
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "您要启动面板吗？如果是，您一定要在注销时保存会话，这样面板会在您下次登录时自动启动。"
 
-#: ../panel/main.c:447 ../panel/main.c:461
+#: ../panel/main.c:452 ../panel/main.c:466
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "未发现正在运行的 %s 实例"
 
-#: ../panel/panel-application.c:220
+#: ../panel/panel-application.c:227
 msgid "Failed to launch the migration application"
 msgstr "无法启动迁移应用程序"
 
-#: ../panel/panel-application.c:1000
+#: ../panel/panel-application.c:1040
 msgid "Create _Launcher"
 msgstr "创建启动器(_L)"
 
-#: ../panel/panel-application.c:1001
+#: ../panel/panel-application.c:1041
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "这样会在面板上创建一个新的启动器插件并将放入的文件插入为菜单项目。"
 
-#: ../panel/panel-application.c:1003
+#: ../panel/panel-application.c:1043
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "从 %d 个桌面文件创建新的启动器"
 
-#: ../panel/panel-application.c:1760
+#: ../panel/panel-application.c:1800
 msgid "Quit"
 msgstr "退出"
 
-#: ../panel/panel-application.c:1761
+#: ../panel/panel-application.c:1801
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "您启动了不带会话管理器的 X。点击退出将关闭此 X 服务器。"
 
-#: ../panel/panel-application.c:1762
+#: ../panel/panel-application.c:1802
 msgid "Are you sure you want to quit the panel?"
 msgstr "您确定要退出面板吗？"
 
-#: ../panel/panel-application.c:1770
+#: ../panel/panel-application.c:1810
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "无法执行命令 “%s”"
@@ -344,7 +339,7 @@ msgstr "添加(_A)"
 msgid "Please choose a panel for the new plugin:"
 msgstr "请为新插件挑选面板："
 
-#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:991
+#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:993
 #, c-format
 msgid "Panel %d"
 msgstr "面板 %d"
@@ -388,16 +383,16 @@ msgstr "搜索(_S)："
 msgid "Enter search phrase here"
 msgstr "在此输入搜索词语"
 
-#: ../panel/panel-plugin-external.c:516
+#: ../panel/panel-plugin-external.c:394
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "插件 “%s” 意外地离开了面板，您要重启它吗？"
 
-#: ../panel/panel-plugin-external.c:519
+#: ../panel/panel-plugin-external.c:397
 msgid "Plugin Restart"
 msgstr "插件重启"
 
-#: ../panel/panel-plugin-external.c:520
+#: ../panel/panel-plugin-external.c:398
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -405,43 +400,43 @@ msgid ""
 "permanently removed from the panel."
 msgstr "此插件在过去的 %d 秒内重启了不止一次。如果您点击执行，面板会尝试重启此插件，否则会从面板上永远移除它。"
 
-#: ../panel/panel-plugin-external.c:524
+#: ../panel/panel-plugin-external.c:402
 msgid "_Execute"
 msgstr "执行(_E)"
 
-#: ../panel/panel-preferences-dialog.c:546
+#: ../panel/panel-preferences-dialog.c:547
 msgid "Automatic"
 msgstr "自动"
 
-#: ../panel/panel-preferences-dialog.c:556
+#: ../panel/panel-preferences-dialog.c:557
 msgid "Primary"
 msgstr "主要的"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:575
+#: ../panel/panel-preferences-dialog.c:576
 #, c-format
 msgid "Monitor %d"
 msgstr "显示器 %d"
 
-#: ../panel/panel-preferences-dialog.c:1053
+#: ../panel/panel-preferences-dialog.c:1055
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "将永远移除面板和插件配置"
 
-#: ../panel/panel-preferences-dialog.c:1054
+#: ../panel/panel-preferences-dialog.c:1056
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "您确定要移除面板 %d 吗？"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1257
+#: ../panel/panel-preferences-dialog.c:1259
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(外部)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1262
+#: ../panel/panel-preferences-dialog.c:1264
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -450,12 +445,12 @@ msgstr "内部名称：%s-%d\nPID：%d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1274
+#: ../panel/panel-preferences-dialog.c:1276
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "内部名称：%s-%d"
 
-#: ../panel/panel-preferences-dialog.c:1420
+#: ../panel/panel-preferences-dialog.c:1422
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "如果您从面板上移除此项目，它将永远消失。"
 
@@ -724,7 +719,7 @@ msgstr "高级"
 msgid "Expert"
 msgstr "专家"
 
-#: ../panel/panel-window.c:3026
+#: ../panel/panel-window.c:3609
 msgid "_Lock Panel"
 msgstr "锁定面板(_L)"
 
@@ -1030,19 +1025,19 @@ msgstr "菜单文件"
 msgid "Applications"
 msgstr "所有应用程序"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:609
-#: ../plugins/directorymenu/directorymenu.c:468
+#: ../plugins/applicationsmenu/applicationsmenu.c:606
+#: ../plugins/directorymenu/directorymenu.c:465
 msgid "Select An Icon"
 msgstr "选择图标"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:612
-#: ../plugins/directorymenu/directorymenu.c:471
+#: ../plugins/applicationsmenu/applicationsmenu.c:609
+#: ../plugins/directorymenu/directorymenu.c:468
 msgid "_OK"
 msgstr "确定(_O)"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:650
-#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2496
+#: ../plugins/applicationsmenu/applicationsmenu.c:647
+#: ../plugins/clock/clock.c:1030 ../plugins/launcher/launcher.c:2496
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "无法执行命令 “%s”。"
@@ -1082,20 +1077,20 @@ msgid "Show help options"
 msgstr "显示帮助选项"
 
 #. TRANSLATORS: adjust this accordingly for your locale format
-#: ../plugins/clock/clock.c:47
+#: ../plugins/clock/clock.c:46
 msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr " %Y年%b%d日 %A"
 
-#: ../plugins/clock/clock.c:178
+#: ../plugins/clock/clock.c:155
 msgid "Week %V"
 msgstr "第 %V 周"
 
-#: ../plugins/clock/clock.c:490
+#: ../plugins/clock/clock.c:465
 msgid "Failed to execute clock command"
 msgstr "无法执行时钟命令"
 
-#: ../plugins/clock/clock.c:1011
+#: ../plugins/clock/clock.c:969
 msgid "Custom Format"
 msgstr "自定义格式"
 
@@ -1585,75 +1580,75 @@ msgstr "12"
 msgid "What time is it?"
 msgstr "现在几点？"
 
-#: ../plugins/directorymenu/directorymenu.c:299
+#: ../plugins/directorymenu/directorymenu.c:296
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "目录菜单"
 
-#: ../plugins/directorymenu/directorymenu.c:695
+#: ../plugins/directorymenu/directorymenu.c:691
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "无法启动应用程序 “%s”"
 
-#: ../plugins/directorymenu/directorymenu.c:727
+#: ../plugins/directorymenu/directorymenu.c:722
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "无法查询 “%s” 的内容类型"
 
-#: ../plugins/directorymenu/directorymenu.c:736
+#: ../plugins/directorymenu/directorymenu.c:731
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "未找到 “%s” 的默认应用程序"
 
-#: ../plugins/directorymenu/directorymenu.c:752
+#: ../plugins/directorymenu/directorymenu.c:747
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "无法启动 “%s” 的默认应用程序"
 
-#: ../plugins/directorymenu/directorymenu.c:847
+#: ../plugins/directorymenu/directorymenu.c:842
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "无法执行类别 “%s” 的首选应用程序"
 
-#: ../plugins/directorymenu/directorymenu.c:928
+#: ../plugins/directorymenu/directorymenu.c:923
 msgid "Create New Folder"
 msgstr "创建新文件夹"
 
-#: ../plugins/directorymenu/directorymenu.c:933
+#: ../plugins/directorymenu/directorymenu.c:928
 msgid "Create New Text Document"
 msgstr "创建新的文本文档"
 
-#: ../plugins/directorymenu/directorymenu.c:940
+#: ../plugins/directorymenu/directorymenu.c:935
 msgid "C_reate"
 msgstr "创建(_R)"
 
-#: ../plugins/directorymenu/directorymenu.c:941
+#: ../plugins/directorymenu/directorymenu.c:936
 msgid "Create & _Open"
 msgstr "创建并打开(_O)"
 
-#: ../plugins/directorymenu/directorymenu.c:955
+#: ../plugins/directorymenu/directorymenu.c:950
 msgid "Enter the new name:"
 msgstr "输入新名称:"
 
-#: ../plugins/directorymenu/directorymenu.c:991
+#: ../plugins/directorymenu/directorymenu.c:986
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "无法创建文件夹: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1074
+#: ../plugins/directorymenu/directorymenu.c:1067
 msgid "Open Folder"
 msgstr "打开文件夹"
 
-#: ../plugins/directorymenu/directorymenu.c:1087
+#: ../plugins/directorymenu/directorymenu.c:1080
 msgid "Open in Terminal"
 msgstr "在终端中打开"
 
-#: ../plugins/directorymenu/directorymenu.c:1100
+#: ../plugins/directorymenu/directorymenu.c:1093
 msgid "Create Folder..."
 msgstr "创建文件夹..."
 
-#: ../plugins/directorymenu/directorymenu.c:1113
+#: ../plugins/directorymenu/directorymenu.c:1106
 msgid "Create Text Document..."
 msgstr "创建文本文档..."
 
@@ -1722,20 +1717,20 @@ msgstr "未命名项目"
 msgid "No items"
 msgstr "无项目"
 
-#: ../plugins/launcher/launcher-dialog.c:794
+#: ../plugins/launcher/launcher-dialog.c:793
 msgid "Failed to open desktop item editor"
 msgstr "无法打开桌面项目编辑器"
 
-#: ../plugins/launcher/launcher-dialog.c:862
+#: ../plugins/launcher/launcher-dialog.c:861
 msgid "If you delete an item, it will be permanently removed"
 msgstr "如果您删除项目，将永远移除它"
 
-#: ../plugins/launcher/launcher-dialog.c:863
+#: ../plugins/launcher/launcher-dialog.c:862
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "您确定要移除 “%s” 吗？"
 
-#: ../plugins/launcher/launcher-dialog.c:864
+#: ../plugins/launcher/launcher-dialog.c:863
 msgid "Unnamed item"
 msgstr "未命名项目"
 
@@ -1846,15 +1841,15 @@ msgstr "高级"
 msgid "Program launcher with optional menu"
 msgstr "带可选菜单的程序启动器"
 
-#: ../plugins/pager/pager.c:655 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:680 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "工作区设置(_S)..."
 
-#: ../plugins/pager/pager.c:745
+#: ../plugins/pager/pager.c:774
 msgid "Unable to open the workspace settings"
 msgstr "未能打开工作区设置"
 
-#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:902
+#: ../plugins/pager/pager-buttons.c:595 ../plugins/windowmenu/windowmenu.c:900
 #, c-format
 msgid "Workspace %d"
 msgstr "工作区 %d"
@@ -1916,15 +1911,15 @@ msgstr "扩展(_E)"
 msgid "Adds a separator or space between panel items"
 msgstr "在面板项目间添加一个分隔符或空格"
 
-#: ../plugins/showdesktop/showdesktop.c:241
+#: ../plugins/showdesktop/showdesktop.c:249
 msgid "Restore the minimized windows"
 msgstr "恢复已最小化的窗口"
 
-#: ../plugins/showdesktop/showdesktop.c:243
+#: ../plugins/showdesktop/showdesktop.c:251
 msgid "Minimize all open windows and show the desktop"
 msgstr "最小化所有打开的窗口并显示桌面"
 
-#: ../plugins/showdesktop/showdesktop.c:246
+#: ../plugins/showdesktop/showdesktop.c:254
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "显示桌面"
@@ -1933,11 +1928,11 @@ msgstr "显示桌面"
 msgid "Hide all windows and show the desktop"
 msgstr "隐藏所有窗口并显示桌面"
 
-#: ../plugins/systray/sn-dialog.c:649
+#: ../plugins/systray/sn-dialog.c:650
 msgid "Clear"
 msgstr "清除"
 
-#: ../plugins/systray/sn-dialog.c:650
+#: ../plugins/systray/sn-dialog.c:651
 msgid "Are you sure you want to clear the list of known items?"
 msgstr "您确定要清除此已知项目列表吗？"
 
@@ -2041,22 +2036,22 @@ msgstr "状态通知程序"
 msgid "Systray Icons"
 msgstr "系统托盘图标"
 
-#: ../plugins/systray/systray.c:146
+#: ../plugins/systray/systray.c:145
 msgid "Unable to start the notification area"
 msgstr "未能启动通知区域"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:407
+#: ../plugins/systray/systray.c:406
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "很可能另一个控件取代了通知区域的功能。将不会使用此区域。"
 
-#: ../plugins/systray/systray.c:409
+#: ../plugins/systray/systray.c:408
 msgid "The notification area lost selection"
 msgstr "通知区域缺少选择区"
 
-#: ../plugins/systray/systray-manager.c:400
+#: ../plugins/systray/systray-manager.c:399
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "无法获取屏幕 %d 的管理器选择区"
@@ -2169,36 +2164,36 @@ msgstr "从所有显示器显示窗口(_N)"
 msgid "Show only _minimized windows"
 msgstr "仅显示已最小化的窗口(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3070
+#: ../plugins/tasklist/tasklist-widget.c:3058
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "无法启动新实例 '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:3074
+#: ../plugins/tasklist/tasklist-widget.c:3062
 msgid "Error"
 msgstr "错误"
 
-#: ../plugins/tasklist/tasklist-widget.c:3103
+#: ../plugins/tasklist/tasklist-widget.c:3091
 msgid "Launch New Instance"
 msgstr "启动新实例"
 
-#: ../plugins/tasklist/tasklist-widget.c:3857
+#: ../plugins/tasklist/tasklist-widget.c:3836
 msgid "Mi_nimize All"
 msgstr "全部最小化(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3864
+#: ../plugins/tasklist/tasklist-widget.c:3843
 msgid "Un_minimize All"
 msgstr "最小化全部取消(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3871
+#: ../plugins/tasklist/tasklist-widget.c:3850
 msgid "Ma_ximize All"
 msgstr "全部最大化(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3878
+#: ../plugins/tasklist/tasklist-widget.c:3857
 msgid "_Unmaximize All"
 msgstr "最大化全部取消(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3889
+#: ../plugins/tasklist/tasklist-widget.c:3868
 msgid "_Close All"
 msgstr "全部关闭(_C)"
 
@@ -2206,28 +2201,28 @@ msgstr "全部关闭(_C)"
 msgid "Switch between open windows using buttons"
 msgstr "使用按钮在打开的窗口间切换"
 
-#: ../plugins/windowmenu/windowmenu.c:695
+#: ../plugins/windowmenu/windowmenu.c:696
 msgid "Desktop"
 msgstr "桌面"
 
-#: ../plugins/windowmenu/windowmenu.c:1305
+#: ../plugins/windowmenu/windowmenu.c:1296
 msgid "No Windows"
 msgstr "无窗口"
 
-#: ../plugins/windowmenu/windowmenu.c:1320
+#: ../plugins/windowmenu/windowmenu.c:1311
 msgid "Urgent Windows"
 msgstr "紧急窗口"
 
-#: ../plugins/windowmenu/windowmenu.c:1362
+#: ../plugins/windowmenu/windowmenu.c:1356
 msgid "Add Workspace"
 msgstr "添加工作区"
 
-#: ../plugins/windowmenu/windowmenu.c:1382
+#: ../plugins/windowmenu/windowmenu.c:1378
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "移除工作区 “%s”"
 
-#: ../plugins/windowmenu/windowmenu.c:1384
+#: ../plugins/windowmenu/windowmenu.c:1380
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "移除工作区 %d"
