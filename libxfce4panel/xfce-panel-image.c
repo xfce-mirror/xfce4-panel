@@ -44,6 +44,10 @@
  * @short_description: Scalable image suitable for panel plugins
  * @include: libxfce4panel/libxfce4panel.h
  *
+ * > #XfcePanelImage has been deprecated since 4.18.1. It was mainly useful with
+ * > GTK 2, and is not really adapted to GTK 3. Use #GtkImage instead, and
+ * > xfce_panel_set_image_from_source().
+ *
  * The #XfcePanelImage is a widgets suitable for for example panel
  * buttons where the developer does not exacly know the size of the
  * image (due to theming and user setting).
@@ -155,6 +159,11 @@ xfce_panel_image_class_init (XfcePanelImageClass *klass)
   gtkwidget_class->draw = xfce_panel_image_draw;
   gtkwidget_class->style_updated = xfce_panel_image_style_updated;
 
+/**
+ * XfcePanelImage:source:
+ *
+ * Deprecated: 4.18.1: Use #GtkImage:storage-type instead.
+ **/
   g_object_class_install_property (gobject_class,
                                    PROP_SOURCE,
                                    g_param_spec_string ("source",
@@ -164,6 +173,11 @@ xfce_panel_image_class_init (XfcePanelImageClass *klass)
                                                         G_PARAM_READWRITE
                                                         | G_PARAM_STATIC_STRINGS));
 
+/**
+ * XfcePanelImage:pixbuf:
+ *
+ * Deprecated: 4.18.1: Use #GtkImage:pixbuf instead.
+ **/
   g_object_class_install_property (gobject_class,
                                    PROP_PIXBUF,
                                    g_param_spec_object ("pixbuf",
@@ -173,6 +187,11 @@ xfce_panel_image_class_init (XfcePanelImageClass *klass)
                                                         G_PARAM_READWRITE
                                                         | G_PARAM_STATIC_STRINGS));
 
+/**
+ * XfcePanelImage:size:
+ *
+ * Deprecated: 4.18.1: Use #GtkImage:pixel-size instead.
+ **/
   g_object_class_install_property (gobject_class,
                                    PROP_SIZE,
                                    g_param_spec_int ("size",
@@ -624,6 +643,8 @@ xfce_panel_image_scale_pixbuf (GdkPixbuf *source,
  * returns: a newly created XfcePanelImage widget.
  *
  * Since: 4.8
+ *
+ * Deprecated: 4.18.1: Use gtk_image_new() instead.
  **/
 GtkWidget *
 xfce_panel_image_new (void)
@@ -646,6 +667,8 @@ xfce_panel_image_new (void)
  * returns: a newly created XfcePanelImage widget.
  *
  * Since: 4.8
+ *
+ * Deprecated: 4.18.1: Use gtk_image_new_from_pixbuf() instead.
  **/
 GtkWidget *
 xfce_panel_image_new_from_pixbuf (GdkPixbuf *pixbuf)
@@ -672,6 +695,8 @@ xfce_panel_image_new_from_pixbuf (GdkPixbuf *pixbuf)
  * returns: a newly created XfcePanelImage widget.
  *
  * Since: 4.8
+ *
+ * Deprecated: 4.18.1: Use gtk_image_new() and xfce_panel_set_image_from_source() instead.
  **/
 GtkWidget *
 xfce_panel_image_new_from_source (const gchar *source)
@@ -692,6 +717,8 @@ xfce_panel_image_new_from_source (const gchar *source)
  * See xfce_panel_image_new_from_pixbuf() for details.
  *
  * Since: 4.8
+ *
+ * Deprecated: 4.18.1: Use gtk_image_set_from_pixbuf().
  **/
 void
 xfce_panel_image_set_from_pixbuf (XfcePanelImage *image,
@@ -720,6 +747,8 @@ xfce_panel_image_set_from_pixbuf (XfcePanelImage *image,
  * See xfce_panel_image_new_from_source() for details.
  *
  * Since: 4.8
+ *
+ * Deprecated: 4.18.1: Use xfce_panel_set_image_from_source() instead.
  **/
 void
 xfce_panel_image_set_from_source (XfcePanelImage *image,
@@ -747,6 +776,9 @@ xfce_panel_image_set_from_source (XfcePanelImage *image,
  * -1 to turn this off.
  *
  * Since: 4.8
+ *
+ * Deprecated: 4.18.1: Use gtk_image_set_pixel_size() or set the size from the
+ * #GtkImage storage type instead.
  **/
 void
 xfce_panel_image_set_size (XfcePanelImage *image,
@@ -774,6 +806,9 @@ xfce_panel_image_set_size (XfcePanelImage *image,
  * Returns: icon size in pixels of the image or -1.
  *
  * Since: 4.8
+ *
+ * Deprecated: 4.18.1: Use gtk_image_get_pixel_size() or get the size from the
+ * #GtkImage storage type instead.
  **/
 gint
 xfce_panel_image_get_size (XfcePanelImage *image)
@@ -791,6 +826,8 @@ xfce_panel_image_get_size (XfcePanelImage *image)
  * Resets the image to be empty.
  *
  * Since: 4.8
+ *
+ * Deprecated: 4.18.1: Use gtk_image_clear() instead.
  **/
 void
 xfce_panel_image_clear (XfcePanelImage *image)

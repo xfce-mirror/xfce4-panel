@@ -65,26 +65,35 @@ struct _XfcePanelImage
 #define XFCE_IS_PANEL_IMAGE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_PANEL_IMAGE))
 #define XFCE_PANEL_IMAGE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_PANEL_IMAGE, XfcePanelImageClass))
 
-GType      xfce_panel_image_get_type        (void) G_GNUC_CONST;
+GType      xfce_panel_image_get_type        (void)
+G_GNUC_CONST G_GNUC_DEPRECATED;
 
-GtkWidget *xfce_panel_image_new             (void) G_GNUC_MALLOC;
+GtkWidget *xfce_panel_image_new             (void)
+G_GNUC_MALLOC G_GNUC_DEPRECATED_FOR (gtk_image_new());
 
-GtkWidget *xfce_panel_image_new_from_pixbuf (GdkPixbuf      *pixbuf) G_GNUC_MALLOC;
+GtkWidget *xfce_panel_image_new_from_pixbuf (GdkPixbuf      *pixbuf)
+G_GNUC_MALLOC G_GNUC_DEPRECATED_FOR (gtk_image_new_from_pixbuf());
 
-GtkWidget *xfce_panel_image_new_from_source (const gchar    *source) G_GNUC_MALLOC;
+GtkWidget *xfce_panel_image_new_from_source (const gchar    *source)
+G_GNUC_MALLOC G_GNUC_DEPRECATED_FOR (gtk_image_new() and xfce_panel_set_image_from_source());
 
 void       xfce_panel_image_set_from_pixbuf (XfcePanelImage *image,
-                                             GdkPixbuf      *pixbuf);
+                                             GdkPixbuf      *pixbuf)
+G_GNUC_DEPRECATED_FOR (gtk_image_set_from_pixbuf());
 
 void       xfce_panel_image_set_from_source (XfcePanelImage *image,
-                                             const gchar    *source);
+                                             const gchar    *source)
+G_GNUC_DEPRECATED_FOR (xfce_panel_set_image_from_source());
 
 void       xfce_panel_image_set_size        (XfcePanelImage *image,
-                                             gint            size);
+                                             gint            size)
+G_GNUC_DEPRECATED_FOR (gtk_image_set_pixel_size());
 
-gint       xfce_panel_image_get_size        (XfcePanelImage *image);
+gint       xfce_panel_image_get_size        (XfcePanelImage *image)
+G_GNUC_DEPRECATED_FOR (gtk_image_get_pixel_size());
 
-void       xfce_panel_image_clear           (XfcePanelImage *image);
+void       xfce_panel_image_clear           (XfcePanelImage *image)
+G_GNUC_DEPRECATED_FOR (gtk_image_clear());
 
 G_END_DECLS
 
