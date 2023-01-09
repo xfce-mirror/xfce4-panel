@@ -3026,13 +3026,19 @@ xfce_tasklist_button_get_child_path (XfceTasklistChild *child)
 {
   XfwApplicationInstance *instance = xfw_application_get_instance (child->app, child->window);
   gchar *path = NULL;
-  if (instance != NULL && instance->pid > 0)
+
+  if (instance != NULL)
     {
-      gchar *link = g_strdup_printf ("/proc/%d/exe", instance->pid);
-      if (g_file_test (link, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_SYMLINK))
-        path = g_file_read_link (link, NULL);
-      g_free (link);
+      gint pid = xfw_application_instance_get_pid (instance);
+      if (pid > 0)
+        {
+          gchar *link = g_strdup_printf ("/proc/%d/exe", pid);
+          if (g_file_test (link, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_SYMLINK))
+            path = g_file_read_link (link, NULL);
+          g_free (link);
+        }
     }
+
   return path;
 }
 
