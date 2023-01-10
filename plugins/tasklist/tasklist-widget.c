@@ -4344,11 +4344,6 @@ xfce_tasklist_group_button_child_visible_changed (XfceTasklistChild *group_child
         xfce_tasklist_group_button_keep_dnd_position (group_child, group_child->windows->data,
                                                       group_child);
 
-      /* update urgency blinking if needed */
-      xfce_tasklist_button_state_changed (child->window, XFW_WINDOW_STATE_URGENT,
-                                          xfw_window_is_urgent (child->window) ? XFW_WINDOW_STATE_URGENT : 0,
-                                          child);
-
       /* show the button and take the windows */
       gtk_widget_show (group_child->button);
       type = CHILD_TYPE_GROUP_MENU;
@@ -4373,6 +4368,13 @@ xfce_tasklist_group_button_child_visible_changed (XfceTasklistChild *group_child
     }
 
   xfce_tasklist_group_button_name_changed (group_child->app, NULL, group_child);
+
+  /* update group button urgency blinking if needed: do this last as it may change window
+   * buttons visibility and therefore be recursive */
+  if (visible_counter > 1)
+    xfce_tasklist_button_state_changed (child->window, XFW_WINDOW_STATE_URGENT,
+                                        xfw_window_is_urgent (child->window) ? XFW_WINDOW_STATE_URGENT : 0,
+                                        child);
 }
 
 
