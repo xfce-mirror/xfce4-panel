@@ -1391,6 +1391,7 @@ xfce_tasklist_scroll_event (GtkWidget      *widget,
   XfceTasklistChild   *child = NULL;
   GList               *li, *lnew = NULL;
   GdkScrollDirection  scrolling_direction;
+  gboolean            wrap_windows = tasklist->wrap_windows;
 
   if (!tasklist->window_scrolling)
     return TRUE;
@@ -1401,7 +1402,7 @@ xfce_tasklist_scroll_event (GtkWidget      *widget,
       child = li->data;
 
       if (gtk_widget_get_visible (child->button)
-          && gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (child->button)))
+          && child->window != NULL && wnck_window_is_active (child->window))
         break;
     }
 
@@ -1428,30 +1429,54 @@ xfce_tasklist_scroll_event (GtkWidget      *widget,
     {
     case GDK_SCROLL_UP:
       /* find previous button on the tasklist */
-      for (lnew = g_list_previous (li); lnew != NULL; lnew = lnew->prev)
+      for (lnew = g_list_previous (li); ; lnew = lnew->prev)
         {
+          if (lnew == NULL)
+            {
+              /* wrap only once if the first button is reached */
+              if (wrap_windows)
+                {
+                  lnew = g_list_last (li);
+                  wrap_windows = FALSE;
+                  if (lnew == NULL)
+                    break;
+                }
+              else
+                break;
+            }
+
           child = lnew->data;
           if (child->window != NULL
               && gtk_widget_get_visible (child->button))
             break;
         }
 
-      /* wrap if the first button is reached */
-      lnew = (lnew == NULL && tasklist->wrap_windows) ? g_list_last (li) : lnew;
       break;
 
     case GDK_SCROLL_DOWN:
       /* find the next button on the tasklist */
-      for (lnew = g_list_next (li); lnew != NULL; lnew = lnew->next)
+      for (lnew = g_list_next (li); ; lnew = lnew->next)
         {
+          if (lnew == NULL)
+            {
+              /* wrap only once if the last button is reached */
+              if (wrap_windows)
+                {
+                  lnew = g_list_first (li);
+                  wrap_windows = FALSE;
+                  if (lnew == NULL)
+                    break;
+                }
+              else
+                break;
+            }
+
           child = lnew->data;
           if (child->window != NULL
               && gtk_widget_get_visible (child->button))
             break;
         }
 
-      /* wrap if the last button is reached */
-      lnew = (lnew == NULL && tasklist->wrap_windows) ? g_list_first (li) : lnew;
       break;
 
     case GDK_SCROLL_LEFT:
