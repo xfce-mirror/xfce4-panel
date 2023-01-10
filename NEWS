@@ -1,3 +1,64 @@
+4.19.0 (2023-01-10)
+======
+- Dependency Changes:
+  - GLib >= 2.72.0
+  - Libxfce4windowing >= 4.19.1
+  - build: Make all X11/Wayland-specific dependencies optional
+
+- New APIs:
+  - libxfce4panel: Add xfce_panel_plugin_popup_window()
+
+- Deprecated APIs:
+  - libxfce4panel: Deprecate XfcePanelImage
+
+- New Features:
+  - panel: Allow to force running plugins as internal
+  - Port to Wayland (!103)
+
+- Code Refactoring:
+  - cleanup: Remove useless function panel_window_update_dark_mode()
+  - cleanup: Replace panel_str_is_empty() with xfce_str_is_empty()
+  - cleanup: Do not use `== (TRUE|FALSE)` for boolean conditions
+  - cleanup: Do not translate warnings
+  - wrapper: Cleanup
+  - panel: ExternalWrapper cleanup
+  - clock: Use xfce_panel_plugin_popup_window()
+  - systray: cleanup: Consolidate `sn_plugin_button_toggled()`
+  - panel: Share code that checks if pointer is outside the panel
+  - panel: Remove useless function
+  - build: Print some more config infos
+  - build: gio-unix requirement cleanup
+  - build: Let xdt-depends.m4 macros set GLib macros
+
+- Bug Fixes:
+  - tasklist: Fix scrolling through window buttons (Fixes #692)
+  - tasklist: Fix group button visibility (#693)
+  - Silence allocation warning for external plugins (V3)
+  - tasklist: Do not duplicate menu item activation
+  - Connect to GtkMenuShell::deactivate instead of selection-done
+  - Set translation domain for GtkBuilders
+  - panel: Always include borders to compute snap position
+  - clock: Fix sync timeout
+  - docs: Fix version for xfce_panel_set_image_from_source()
+  - Load icons using icon theme scaling functions correctly
+  - clock: Add missing sanity check
+  - windowmenu: Adapt wnck default icon size when UI scale > 1 (Fixes #682)
+  - tasklist: Adapt wnck default icon size when UI scale > 1 (Fixes #681)
+  - tasklist: Fix window count positioning when UI scale > 1
+  - tasklist: Keep icon pixbuf around and use surface also for menu items (#676)
+  - clock: Do not override custom font formats (#675)
+
+- Translation Updates:
+  Albanian, Armenian (Armenia), Basque, Belarusian, Bulgarian, Catalan,
+  Chinese (China), Chinese (Hong Kong), Chinese (Taiwan), Croatian,
+  Czech, Danish, Dutch, Eastern Armenian, English (Australia), English
+  (United Kingdom), Estonian, Finnish, French, Galician, German, Greek,
+  Hebrew, Hungarian, Icelandic, Indonesian, Interlingue, Italian,
+  Japanese, Kazakh, Korean, Lithuanian, Malay, Norwegian Bokmål,
+  Occitan (post 1500), Polish, Portuguese, Portuguese (Brazil),
+  Russian, Serbian, Slovak, Slovenian, Spanish, Swedish, Thai, Turkish,
+  Ukrainian
+
 4.18.0 (2022-12-15)
 ======
 - build: Bump requirements for Xfce 4.18
