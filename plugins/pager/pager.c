@@ -114,6 +114,11 @@ struct _PagerPlugin
 
   XfwScreen     *xfw_screen;
   XfwWorkspaceGroup *workspace_group;
+#ifdef HAVE_LIBWNCK
+#if WNCK_CHECK_VERSION (43, 0, 0)
+  WnckHandle    *wnck_handle;
+#endif
+#endif
 
   /* settings */
   guint          scrolling : 1;
@@ -225,6 +230,11 @@ pager_plugin_init (PagerPlugin *plugin)
   plugin->pager = NULL;
   plugin->sync_idle_id = 0;
   plugin->sync_wait = TRUE;
+#ifdef HAVE_LIBWNCK
+#if WNCK_CHECK_VERSION (43, 0, 0)
+  plugin->wnck_handle = wnck_handle_new (WNCK_CLIENT_TYPE_PAGER);
+#endif
+#endif
 
   master_plugin = pager_plugin_get_master_plugin (plugin);
   if (master_plugin == NULL)
@@ -587,9 +597,13 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin)
     {
       pager_plugin_set_ratio (plugin);
 
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+#if WNCK_CHECK_VERSION (43, 0, 0)
+      /* using a handle allows in particular the pager not to be affected by a possible
+       * change of default wnck icon size in other plugins */
+      plugin->pager = wnck_pager_new_with_handle (plugin->wnck_handle);
+#else
       plugin->pager = wnck_pager_new ();
-G_GNUC_END_IGNORE_DEPRECATIONS
+#endif
       g_signal_connect_after (G_OBJECT (plugin->pager), "drag-begin",
                               G_CALLBACK (pager_plugin_drag_begin_event), plugin);
       g_signal_connect_after (G_OBJECT (plugin->pager), "drag-end",
@@ -705,6 +719,12 @@ pager_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
   g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
       pager_plugin_screen_changed, NULL);
+
+#ifdef HAVE_LIBWNCK
+#if WNCK_CHECK_VERSION (43, 0, 0)
+  g_object_unref (plugin->wnck_handle);
+#endif
+#endif
 
   plugin_list = g_slist_remove (plugin_list, plugin);
   if (plugin->sync_idle_id != 0)
