@@ -16,7 +16,7 @@
   <object class="GtkListStore" id="items-store">
     <columns>
       <!-- column-name icon -->
-      <column type="GdkPixbuf"/>
+      <column type="GIcon"/>
       <!-- column-name title -->
       <column type="gchararray"/>
       <!-- column-name hidden -->
@@ -28,7 +28,7 @@
   <object class="GtkListStore" id="legacy-items-store">
     <columns>
       <!-- column-name icon -->
-      <column type="GdkPixbuf"/>
+      <column type="GIcon"/>
       <!-- column-name title -->
       <column type="gchararray"/>
       <!-- column-name hidden -->
@@ -371,9 +371,11 @@
                                           <object class="GtkTreeViewColumn" id="treeviewcolumn-icon">
                                             <property name="min_width">24</property>
                                             <child>
-                                              <object class="GtkCellRendererPixbuf" id="cellrendererpixbuf1"/>
+                                              <object class="GtkCellRendererPixbuf" id="cellrendererpixbuf1">
+                                                <property name="stock-size">3</property> <!-- GTK_ICON_SIZE_LARGE_TOOLBAR -->
+                                              </object>
                                               <attributes>
-                                                <attribute name="pixbuf">0</attribute>
+                                                <attribute name="gicon">0</attribute>
                                               </attributes>
                                             </child>
                                           </object>
@@ -601,9 +603,11 @@
                                       <object class="GtkTreeViewColumn" id="treeviewcolumn-legacy-icon">
                                         <property name="min_width">24</property>
                                         <child>
-                                          <object class="GtkCellRendererPixbuf" id="cellrendererpixbuf2"/>
+                                          <object class="GtkCellRendererPixbuf" id="cellrendererpixbuf2">
+                                            <property name="stock-size">3</property> <!-- GTK_ICON_SIZE_LARGE_TOOLBAR -->
+                                          </object>
                                           <attributes>
-                                            <attribute name="pixbuf">0</attribute>
+                                            <attribute name="gicon">0</attribute>
                                           </attributes>
                                         </child>
                                       </object>
