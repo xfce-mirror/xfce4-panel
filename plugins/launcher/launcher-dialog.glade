@@ -6,7 +6,7 @@
   <object class="GtkListStore" id="add-store">
     <columns>
       <!-- column-name icon -->
-      <column type="GdkPixbuf"/>
+      <column type="GIcon"/>
       <!-- column-name name -->
       <column type="gchararray"/>
       <!-- column-name item -->
@@ -319,9 +319,11 @@
                       <object class="GtkTreeViewColumn" id="treeviewcolumn1">
                         <property name="spacing">2</property>
                         <child>
-                          <object class="GtkCellRendererPixbuf" id="addrenderericon"/>
+                          <object class="GtkCellRendererPixbuf" id="addrenderericon">
+                            <property name="stock-size">5</property> <!-- GTK_ICON_SIZE_DND -->
+                          </object>
                           <attributes>
-                            <attribute name="pixbuf">0</attribute>
+                            <attribute name="gicon">0</attribute>
                           </attributes>
                         </child>
                         <child>
@@ -363,7 +365,7 @@
   <object class="GtkListStore" id="item-store">
     <columns>
       <!-- column-name icon -->
-      <column type="GdkPixbuf"/>
+      <column type="GIcon"/>
       <!-- column-name name -->
       <column type="gchararray"/>
       <!-- column-name item -->
@@ -464,9 +466,11 @@
                           <object class="GtkTreeViewColumn" id="treeviewcolumn2">
                             <property name="spacing">2</property>
                             <child>
-                              <object class="GtkCellRendererPixbuf" id="itemrenderericon"/>
+                              <object class="GtkCellRendererPixbuf" id="itemrenderericon">
+                                <property name="stock-size">5</property> <!-- GTK_ICON_SIZE_DND -->
+                              </object>
                               <attributes>
-                                <attribute name="pixbuf">0</attribute>
+                                <attribute name="gicon">0</attribute>
                               </attributes>
                             </child>
                             <child>

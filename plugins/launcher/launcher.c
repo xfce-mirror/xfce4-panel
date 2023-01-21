@@ -73,7 +73,6 @@ static void               launcher_plugin_screen_position_changed       (XfcePan
                                                                          XfceScreenPosition    position);
 static LauncherArrowType  launcher_plugin_default_arrow_type            (LauncherPlugin       *plugin);
 static void               launcher_plugin_pack_widgets                  (LauncherPlugin       *plugin);
-static GIcon             *launcher_plugin_tooltip_icon                  (const gchar          *icon_name);
 static void               launcher_plugin_tooltip_icon_invalidate       (GObject              *object);
 static void               launcher_plugin_icon_invalidate               (LauncherPlugin       *plugin);
 static void               launcher_plugin_menu_deactivate               (GtkWidget            *menu,
