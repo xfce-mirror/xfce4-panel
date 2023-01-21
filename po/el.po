@@ -27,7 +27,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-05 00:46+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Ioannis LM, 2019,2022-2023\n"
+"Last-Translator: Stavros Giannouris <StavrosG2002@freemail.gr>, 2005\n"
 "Language-Team: Greek (http://www.transifex.com/xfce/xfce4-panel/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -200,7 +200,7 @@ msgstr "[ΟΡΙΣΜΑΤΑ...]"
 #: ../panel/main.c:280
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr "Για πληροφορίες χρήσης πληκτρολογήστε \"%s - help \"."
+msgstr "Για πληροφορίες χρήσης πληκτρολογήστε \"%s --help\"."
 
 #: ../panel/main.c:299
 msgid "The Xfce development team. All rights reserved."
@@ -223,31 +223,31 @@ msgstr "Επανεκκίνηση..."
 
 #: ../panel/main.c:426
 msgid "Failed to show the preferences dialog"
-msgstr "Αποτυχία εμφάνισης των προτιμήσεων"
+msgstr "Απέτυχε η εμφάνιση των προτιμήσεων"
 
 #: ../panel/main.c:428
 msgid "Failed to show the add new items dialog"
-msgstr "Αποτυχία εμφάνισης της προσθήκης νέων αντικειμένων"
+msgstr "Απέτυχε η εμφάνιση της προσθήκης νέων αντικειμένων"
 
 #: ../panel/main.c:430
 msgid "Failed to save the panel configuration"
-msgstr "Αποτυχία αποθήκευσης της ρύθμισης παραμέτρων του ταμπλό"
+msgstr "Απέτυχε η αποθήκευση ρύθμισης του ταμπλό"
 
 #: ../panel/main.c:432
 msgid "Failed to add a plugin to the panel"
-msgstr "Αποτυχία προσθήκης νέου πρόσθετου στο ταμπλό"
+msgstr "Απέτυχε η προσθήκη νέου πρόσθετου στο ταμπλό"
 
 #: ../panel/main.c:434
 msgid "Failed to restart the panel"
-msgstr "Αποτυχία επανεκκίνησης του ταμπλό"
+msgstr "Απέτυχε η επανεκκίνηση του ταμπλό"
 
 #: ../panel/main.c:436
 msgid "Failed to quit the panel"
-msgstr "Αποτυχία τερματισμού του ταμπλό"
+msgstr "Απέτυχε ο τερματισμός του ταμπλό"
 
 #: ../panel/main.c:438
 msgid "Failed to send D-Bus message"
-msgstr "Αποτυχία αποστολής μηνύματος D-BUS"
+msgstr "Απέτυχε η αποστολή μηνύματος D-BUS"
 
 #: ../panel/main.c:448
 msgid "Execute"
@@ -257,7 +257,7 @@ msgstr "Εκτέλεση"
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "Θέλετε να εκκινηθεί το ταμπλό; Αν το εκκινήσετε, αποθηκεύστε τη συνεδρία κατά την αποσύνδεσή σας, ώστε το ταμπλό να εκκινηθεί αυτόματα την επόμενη φορά που θα συνδεθείτε."
+msgstr "Θέλετε να εκκινηθεί το ταμπλό; Εάν το κάνετε, βεβαιωθείτε ότι έχετε αποθηκεύσει τη συνεδρία κατά την αποσύνδεσή σας, ώστε το ταμπλό να εκκινηθεί αυτόματα την επόμενη φορά που θα συνδεθείτε."
 
 #: ../panel/main.c:452 ../panel/main.c:466
 #, c-format
@@ -266,7 +266,7 @@ msgstr "Δεν βρέθηκε να τρέχει κάποια διεργασία 
 
 #: ../panel/panel-application.c:227
 msgid "Failed to launch the migration application"
-msgstr "Αποτυχία εκκίνησης της εφαρμογής μεταφοράς"
+msgstr "Απέτυχε η εκκίνηση εφαρμογής για τη μεταφορά"
 
 #: ../panel/panel-application.c:1040
 msgid "Create _Launcher"
@@ -293,7 +293,7 @@ msgstr "Τερματισμός"
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "Ξεκινήσατε το Xfce χωρίς διαχειριστή συνεδρίας. Επιλέγοντας Έξοδος θα κλείσει ο X server."
+msgstr "Ξεκινήσατε το Xfce χωρίς διαχειριστή συνεδρίας. Επιλέγοντας έξοδο θα κλείσει ο X server."
 
 #: ../panel/panel-application.c:1802
 msgid "Are you sure you want to quit the panel?"
@@ -302,7 +302,7 @@ msgstr "Θέλετε σίγουρα να κλείσετε το ταμπλό;"
 #: ../panel/panel-application.c:1810
 #, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "Αποτυχία εκτέλεσης της εντολής \"%s\""
+msgstr "Απέτυχε η εκτέλεση της εντολής \"%s\""
 
 #: ../panel/panel-dbus-client.c:218
 msgid ""
@@ -314,11 +314,11 @@ msgstr "Ορίσατε μη έγκυρη σύνταξη για το πρόσθε
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "Μη έγκυρος τύπος \"%s\". Έγκυροι τύποι είναι οι εξής: bool, double, int, string και uint."
+msgstr "Μη έγκυρος τύπος \"%s\". Οι έγκυροι τύποι είναι bool, double, int, string και uint."
 
 #: ../panel/panel-dialogs.c:58
 msgid "Unable to open the e-mail address"
-msgstr "Αδυναμία πρόσβασης στη συγκεκριμένη διεύθυνση e-mail"
+msgstr "Αδύνατη η πρόσβαση στη διεύθυνση e-mail"
 
 #: ../panel/panel-dialogs.c:84
 msgid "The panel of the Xfce Desktop Environment"
@@ -410,7 +410,7 @@ msgstr "_Εκτέλεση"
 
 #: ../panel/panel-preferences-dialog.c:547
 msgid "Automatic"
-msgstr "Αυτόματο"
+msgstr "Αυτόματα"
 
 #: ../panel/panel-preferences-dialog.c:557
 msgid "Primary"
@@ -729,15 +729,15 @@ msgstr "_Κλείδωμα ταμπλό"
 
 #: ../migrate/main.c:111
 msgid "Failed to load the default configuration"
-msgstr "Αποτυχία φόρτωσης της προκαθορισμένης ρύθμισης παραμέτρων"
+msgstr "Απέτυχε η φόρτωση της προκαθορισμένης ρύθμισης"
 
 #: ../migrate/main.c:123
 msgid "Panel config needs migration..."
-msgstr "Η ρύθμιση παραμέτρων του ταμπλό χρειάζεται προσαρμογή..."
+msgstr "Η ρύθμιση του ταμπλό χρειάζεται μεταφορά..."
 
 #: ../migrate/main.c:127
 msgid "Failed to migrate the existing configuration"
-msgstr "Αποτυχία μεταφοράς της υπάρχουσας ρύθμισης παραμέτρων"
+msgstr "Απέτυχε η μεταφορά της υπάρχουσας ρύθμισης"
 
 #: ../migrate/main.c:133
 msgid "Panel configuration has been updated."
@@ -800,7 +800,7 @@ msgstr "_Εμφάνιση παραθύρου επιβεβαίωσης"
 #: ../plugins/actions/actions-dialog.glade.h:16
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Εμφάνιση παραθύρου επιβεβαίωσης ενεργειών για 30 δευτερόλεπτα."
+msgstr "Εμφάνιση παραθύρου επιβεβαίωσης κάποιων ενεργειών για 30 δευτερόλεπτα."
 
 #: ../plugins/actions/actions-dialog.glade.h:17
 msgid "_Actions"
@@ -941,11 +941,11 @@ msgstr "Διαχωριστικό"
 #: ../plugins/actions/actions.c:1122
 #, c-format
 msgid "Failed to run action \"%s\""
-msgstr "Αποτυχία εκτέλεσης της ενέργειας \"%s\""
+msgstr "Απέτυχε η εκτέλεση της ενέργειας \"%s\""
 
 #: ../plugins/actions/actions.c:1327
 msgid "Little Mouse"
-msgstr ""
+msgstr "Μικρό ποντίκι"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
@@ -1044,7 +1044,7 @@ msgstr "_Εντάξει"
 #: ../plugins/clock/clock.c:1030 ../plugins/launcher/launcher.c:2496
 #, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "Αποτυχία εκτέλεσης της εντολής \"%s\"."
+msgstr "Απέτυχε η εκτέλεση της εντολής \"%s\"."
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
 msgid "Show a menu containing categories of installed applications"
@@ -1092,7 +1092,7 @@ msgstr "Εβδομάδα %V"
 
 #: ../plugins/clock/clock.c:465
 msgid "Failed to execute clock command"
-msgstr "Αποτυχία εκτέλεσης της εντολής για το ρολόι"
+msgstr "Απέτυχε η εκτέλεση της εντολής για το ρολόι"
 
 #: ../plugins/clock/clock.c:969
 msgid "Custom Format"
@@ -1249,7 +1249,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
 "the &quot;Help&quot; page for additional information."
-msgstr "Η διαμόρφωση καθορίζει τη μορφή της ημερομηνίας και την ώρας στο ταμπλό. Για παράδειγμα, το %Y θα δείξει το έτος, το %m το μήνα και το %d την ημέρα. Επίσης τα σύμβολα &lt;b&gt;&lt;/b&gt; θα κάνουν το κείμενο έντονο.  Για περισσότερες πληροφορίες δείτε τη σελίδα &quot;Help&quot;."
+msgstr "Η διαμόρφωση καθορίζει τη μορφή της ημερομηνίας και την ώρας στο ταμπλό. Για παράδειγμα, το %Y θα δείξει το έτος, το %m το μήνα και το %d την ημέρα. Επίσης τα σύμβολα &lt;b&gt;&lt;/b&gt; θα κάνουν το κείμενο έντονο. Για περισσότερες πληροφορίες δείτε τη σελίδα &quot;Help&quot;."
 
 #: ../plugins/clock/clock-dialog.glade.h:41
 msgid "Date"
@@ -1593,12 +1593,12 @@ msgstr "Μενού καταλόγου"
 #: ../plugins/directorymenu/directorymenu.c:691
 #, c-format
 msgid "Failed to launch application \"%s\""
-msgstr "Αποτυχία εκκίνησης της εφαρμογής \"%s\""
+msgstr "Απέτυχε η εκκίνηση της εφαρμογής \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:722
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr "Αποτυχία αναζήτησης τύπου περιεχομένου για το \"%s\""
+msgstr "Απέτυχε η αναζήτηση του τύπου περιεχομένου για το \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:731
 #, c-format
@@ -1608,12 +1608,12 @@ msgstr "Δεν βρέθηκε προκαθορισμένη εφαρμογή γι
 #: ../plugins/directorymenu/directorymenu.c:747
 #, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr "Αποτυχία εκκίνησης της προκαθορισμένης εφαρμογής για το \"%s\""
+msgstr "Απέτυχε η εκκίνηση της προκαθορισμένης εφαρμογής για το \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:842
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr "Αποτυχία εκτέλεσης της προτιμώμενης εφαρμογής για την κατηγορία \"%s\""
+msgstr "Απέτυχε η εκτέλεση της προτιμώμενης εφαρμογής για την κατηγορία \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:923
 msgid "Create New Folder"
@@ -1638,7 +1638,7 @@ msgstr "Εισάγετε νέο όνομα:"
 #: ../plugins/directorymenu/directorymenu.c:986
 #, c-format
 msgid "Failed to create folder: %s"
-msgstr "Αποτυχία δημιουργίας του φακέλου: %s"
+msgstr "Απέτυχε η δημιουργία του φακέλου: %s"
 
 #: ../plugins/directorymenu/directorymenu.c:1067
 msgid "Open Folder"
@@ -1723,7 +1723,7 @@ msgstr "Δε βρέθηκαν αντικείμενα"
 
 #: ../plugins/launcher/launcher-dialog.c:793
 msgid "Failed to open desktop item editor"
-msgstr "Αποτυχία ανοίγματος του επεξεργαστή αντικειμένου"
+msgstr "Απέτυχε το άνοιγμα του επεξεργαστή αντικειμένου"
 
 #: ../plugins/launcher/launcher-dialog.c:861
 msgid "If you delete an item, it will be permanently removed"
@@ -1851,7 +1851,7 @@ msgstr "Ρυθμίσεις _χώρου εργασίας..."
 
 #: ../plugins/pager/pager.c:774
 msgid "Unable to open the workspace settings"
-msgstr "Αδυναμία ανοίγματος των ρυθμίσεων των χώρων εργασίας"
+msgstr "Αδύνατη η πρόσβαση στις ρυθμίσεων των χώρων εργασίας"
 
 #: ../plugins/pager/pager-buttons.c:595 ../plugins/windowmenu/windowmenu.c:900
 #, c-format
@@ -1998,7 +1998,7 @@ msgstr "Αντικείμενο"
 
 #: ../plugins/systray/sn-dialog.glade.h:15
 msgid "Hidden"
-msgstr "Κρυμμένα"
+msgstr "Κρυμμένο"
 
 #: ../plugins/systray/sn-dialog.glade.h:16
 msgid "Move the selected item one row up"
@@ -2042,7 +2042,7 @@ msgstr "Εικονίδια συστήματος"
 
 #: ../plugins/systray/systray.c:145
 msgid "Unable to start the notification area"
-msgstr "Δεν ήταν δυνατή η εκκίνηση της περιοχής ειδοποιήσεων"
+msgstr "Αδύνατη η εκκίνηση της περιοχής ειδοποιήσεων"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:406
@@ -2058,7 +2058,7 @@ msgstr "Η περιοχή ειδοποιήσεων έχασε την επιλο�
 #: ../plugins/systray/systray-manager.c:399
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr "Αποτυχία απόκτησης διαχείρισης για την οθόνη %d"
+msgstr "Απέτυχε η απόκτηση διαχείρισης για την οθόνη %d"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Status Tray Plugin"
@@ -2171,7 +2171,7 @@ msgstr "Εμφάνιση μόνο ελαχιστοποι_ημένων παραθ
 #: ../plugins/tasklist/tasklist-widget.c:3058
 #, c-format
 msgid "Unable to start new instance of '%s'"
-msgstr "Αποτυχία έναρξης νέας διεργασίας του '%s'"
+msgstr "Αδύνατη η εκκίνηση νέας διεργασίας του '%s'"
 
 #: ../plugins/tasklist/tasklist-widget.c:3062
 msgid "Error"
