@@ -70,7 +70,7 @@ G_DEFINE_TYPE (SnDialog, sn_dialog, G_TYPE_OBJECT)
 
 enum
 {
-  COLUMN_PIXBUF,
+  COLUMN_ICON,
   COLUMN_TITLE,
   COLUMN_HIDDEN,
   COLUMN_TIP
@@ -140,7 +140,7 @@ sn_dialog_init (SnDialog *dialog)
 
 static void
 sn_dialog_add_item (SnDialog   *dialog,
-                    GdkPixbuf   *pixbuf,
+                    GIcon       *icon,
                     const gchar *name,
                     const gchar *title,
                     gboolean     hidden)
@@ -154,7 +154,7 @@ sn_dialog_add_item (SnDialog   *dialog,
   /* insert in the store */
   gtk_list_store_append (GTK_LIST_STORE (dialog->store), &iter);
   gtk_list_store_set (GTK_LIST_STORE (dialog->store), &iter,
-                      COLUMN_PIXBUF,  pixbuf,
+                      COLUMN_ICON,    icon,
                       COLUMN_TITLE,   title,
                       COLUMN_HIDDEN,  hidden,
                       COLUMN_TIP,     name,
@@ -165,7 +165,7 @@ sn_dialog_add_item (SnDialog   *dialog,
 
 static void
 sn_dialog_add_legacy_item(SnDialog *dialog,
-                   GdkPixbuf *pixbuf,
+                   GIcon *icon,
                    const gchar *name,
                    const gchar *title,
                    gboolean hidden)
@@ -179,7 +179,7 @@ sn_dialog_add_legacy_item(SnDialog *dialog,
   /* insert in the store */
   gtk_list_store_append(GTK_LIST_STORE(dialog->legacy_store), &iter);
   gtk_list_store_set(GTK_LIST_STORE(dialog->legacy_store), &iter,
-                     COLUMN_PIXBUF, pixbuf,
+                     COLUMN_ICON, icon,
                      COLUMN_TITLE, title,
                      COLUMN_HIDDEN, hidden,
                      COLUMN_TIP, name,
@@ -195,7 +195,7 @@ sn_dialog_update_names (SnDialog *dialog)
   const gchar *name;
   const gchar *title;
   const gchar *icon_name;
-  GdkPixbuf   *pixbuf;
+  GIcon       *icon;
   guint        i;
 
   g_return_if_fail (XFCE_IS_SN_DIALOG (dialog));
@@ -207,6 +207,7 @@ sn_dialog_update_names (SnDialog *dialog)
       name = li->data;
       title = name;
       icon_name = name;
+      icon = NULL;
 
       /* check if we have a better name for the application */
       for (i = 0; i < G_N_ELEMENTS (known_applications); i++)
@@ -219,14 +220,15 @@ sn_dialog_update_names (SnDialog *dialog)
             }
         }
 
-      pixbuf = xfce_panel_pixbuf_from_source (icon_name, NULL, 22);
+      if (gtk_icon_theme_has_icon (gtk_icon_theme_get_default (), icon_name))
+        icon = g_themed_icon_new (icon_name);
 
       /* insert item in the store */
-      sn_dialog_add_item (dialog, pixbuf, name, title,
+      sn_dialog_add_item (dialog, icon, name, title,
                           sn_config_is_hidden (dialog->config, name));
 
-      if (pixbuf != NULL)
-        g_object_unref (G_OBJECT (pixbuf));
+      if (icon != NULL)
+        g_object_unref (G_OBJECT (icon));
     }
 }
 
@@ -239,7 +241,7 @@ sn_dialog_update_legacy_names(SnDialog *dialog)
   const gchar *name;
   const gchar *title;
   const gchar *icon_name;
-  GdkPixbuf *pixbuf;
+  GIcon *icon;
   guint i;
 
   g_return_if_fail(XFCE_IS_SN_DIALOG(dialog));
@@ -251,6 +253,7 @@ sn_dialog_update_legacy_names(SnDialog *dialog)
     name = li->data;
     title = name;
     icon_name = name;
+    icon = NULL;
 
     /* check if we have a better name for the application */
     for (i = 0; i < G_N_ELEMENTS(known_legacy_applications); i++)
@@ -263,14 +266,15 @@ sn_dialog_update_legacy_names(SnDialog *dialog)
       }
     }
 
-    pixbuf = xfce_panel_pixbuf_from_source(icon_name, NULL, 22);
+    if (gtk_icon_theme_has_icon(gtk_icon_theme_get_default(), icon_name))
+      icon = g_themed_icon_new(icon_name);
 
     /* insert item in the store */
-    sn_dialog_add_legacy_item(dialog, pixbuf, name, title,
+    sn_dialog_add_legacy_item(dialog, icon, name, title,
                        sn_config_is_legacy_hidden(dialog->config, name));
 
-    if (pixbuf != NULL)
-      g_object_unref(G_OBJECT(pixbuf));
+    if (icon != NULL)
+      g_object_unref(G_OBJECT(icon));
   }
 }
 
@@ -423,7 +427,7 @@ sn_dialog_swap_rows (SnDialog   *dialog,
                      GtkTreeIter *iter_prev,
                      GtkTreeIter *iter)
 {
-  GdkPixbuf *pixbuf1, *pixbuf2;
+  GIcon     *icon1, *icon2;
   gchar     *title1, *title2;
   gboolean   hidden1, hidden2;
   gchar     *tip1, *tip2;
@@ -433,22 +437,22 @@ sn_dialog_swap_rows (SnDialog   *dialog,
   g_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
 
   gtk_tree_model_get (GTK_TREE_MODEL (dialog->store), iter_prev,
-                      COLUMN_PIXBUF,  &pixbuf1,
+                      COLUMN_ICON,    &icon1,
                       COLUMN_TITLE,   &title1,
                       COLUMN_HIDDEN,  &hidden1,
                       COLUMN_TIP,     &tip1, -1);
   gtk_tree_model_get (GTK_TREE_MODEL (dialog->store), iter,
-                      COLUMN_PIXBUF,  &pixbuf2,
+                      COLUMN_ICON,    &icon2,
                       COLUMN_TITLE,   &title2,
                       COLUMN_HIDDEN,  &hidden2,
                       COLUMN_TIP,     &tip2, -1);
   gtk_list_store_set (GTK_LIST_STORE (dialog->store), iter_prev,
-                      COLUMN_PIXBUF,  pixbuf2,
+                      COLUMN_ICON,    icon2,
                       COLUMN_TITLE,   title2,
                       COLUMN_HIDDEN,  hidden2,
                       COLUMN_TIP,     tip2, -1);
   gtk_list_store_set (GTK_LIST_STORE (dialog->store), iter,
-                      COLUMN_PIXBUF,  pixbuf1,
+                      COLUMN_ICON,    icon1,
                       COLUMN_TITLE,   title1,
                       COLUMN_HIDDEN,  hidden1,
                       COLUMN_TIP,     tip1, -1);
@@ -464,7 +468,7 @@ sn_dialog_legacy_swap_rows(SnDialog *dialog,
                            GtkTreeIter *iter_prev,
                            GtkTreeIter *iter)
 {
-  GdkPixbuf *pixbuf1, *pixbuf2;
+  GIcon *icon1, *icon2;
   gchar *title1, *title2;
   gboolean hidden1, hidden2;
   gchar *tip1, *tip2;
@@ -474,22 +478,22 @@ sn_dialog_legacy_swap_rows(SnDialog *dialog,
   g_return_if_fail(GTK_IS_LIST_STORE(dialog->legacy_store));
 
   gtk_tree_model_get(GTK_TREE_MODEL(dialog->legacy_store), iter_prev,
-                     COLUMN_PIXBUF, &pixbuf1,
+                     COLUMN_ICON, &icon1,
                      COLUMN_TITLE, &title1,
                      COLUMN_HIDDEN, &hidden1,
                      COLUMN_TIP, &tip1, -1);
   gtk_tree_model_get(GTK_TREE_MODEL(dialog->legacy_store), iter,
-                     COLUMN_PIXBUF, &pixbuf2,
+                     COLUMN_ICON, &icon2,
                      COLUMN_TITLE, &title2,
                      COLUMN_HIDDEN, &hidden2,
                      COLUMN_TIP, &tip2, -1);
   gtk_list_store_set(GTK_LIST_STORE(dialog->legacy_store), iter_prev,
-                     COLUMN_PIXBUF, pixbuf2,
+                     COLUMN_ICON, icon2,
                      COLUMN_TITLE, title2,
                      COLUMN_HIDDEN, hidden2,
                      COLUMN_TIP, tip2, -1);
   gtk_list_store_set(GTK_LIST_STORE(dialog->legacy_store), iter,
-                     COLUMN_PIXBUF, pixbuf1,
+                     COLUMN_ICON, icon1,
                      COLUMN_TITLE, title1,
                      COLUMN_HIDDEN, hidden1,
                      COLUMN_TIP, tip1, -1);
