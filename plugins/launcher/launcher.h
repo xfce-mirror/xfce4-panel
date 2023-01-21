@@ -59,6 +59,8 @@ gboolean    launcher_plugin_item_is_editable (LauncherPlugin      *plugin,
                                               GarconMenuItem      *item,
                                               gboolean            *can_delete);
 
+GIcon      *launcher_plugin_tooltip_icon     (const gchar         *icon_name);
+
 G_END_DECLS
 
 #endif /* !__LAUNCHER_H__ */

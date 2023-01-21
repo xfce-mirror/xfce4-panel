@@ -1042,9 +1042,7 @@ launcher_dialog_items_set_item (GtkTreeModel         *model,
 {
   const gchar *name, *comment;
   gchar       *markup;
-  GdkPixbuf   *icon = NULL;
-  const gchar *icon_name;
-  gint         w, h;
+  GIcon       *icon;
   gchar       *tooltip;
   GFile       *gfile;
 
@@ -1059,14 +1057,7 @@ launcher_dialog_items_set_item (GtkTreeModel         *model,
   else
     markup = g_markup_printf_escaped ("<b>%s</b>", name);
 
-  icon_name = garcon_menu_item_get_icon_name (item);
-  if (!xfce_str_is_empty (icon_name))
-    {
-      if (!gtk_icon_size_lookup (GTK_ICON_SIZE_DND, &w, &h))
-        w = h = 32;
-
-      icon = xfce_panel_pixbuf_from_source (icon_name, NULL, MIN (w, h));
-    }
+  icon = launcher_plugin_tooltip_icon (garcon_menu_item_get_icon_name (item));
 
   if (dialog != NULL)
     g_signal_handlers_block_by_func (G_OBJECT (model),
