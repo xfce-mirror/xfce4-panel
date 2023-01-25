@@ -766,7 +766,7 @@ systray_manager_set_visual (SystrayManager *manager)
 
   visual = gdk_screen_get_rgba_visual (screen);
   panel_debug (PANEL_DEBUG_SYSTRAY, "rgba visual is %p", visual);
-  if (visual != NULL && gdk_screen_is_composited (screen))
+  if (visual != NULL)
     {
       /* use the rgba visual */
       xvisual = GDK_VISUAL_XVISUAL (visual);
