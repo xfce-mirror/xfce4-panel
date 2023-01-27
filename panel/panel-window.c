@@ -876,10 +876,6 @@ panel_window_set_property (GObject      *object,
           /* send the new screen position to the panel plugins */
           panel_window_plugins_update (window, PLUGIN_PROP_SCREEN_POSITION);
         }
-      else
-        {
-          g_message ("Not a valid position defined: %s", val_string);
-        }
       break;
 
     case PROP_DISABLE_STRUTS:
