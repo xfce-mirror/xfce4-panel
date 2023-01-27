@@ -303,6 +303,7 @@ panel_base_window_set_property (GObject      *object,
   PanelBgStyle            bg_style;
   GFile                  *file;
   gdouble                 opacity;
+  const gchar            *str;
 
   switch (prop_id)
     {
@@ -379,11 +380,17 @@ panel_base_window_set_property (GObject      *object,
       break;
 
     case PROP_BACKGROUND_IMAGE:
-      /* store new uri, built and escaped through a GFile */
       g_free (window->background_image);
-      file = g_file_new_for_commandline_arg (g_value_get_string (value));
-      window->background_image = g_file_get_uri (file);
-      g_object_unref (file);
+      str = g_value_get_string (value);
+      if (str != NULL)
+        {
+          /* store new uri, built and escaped through a GFile */
+          file = g_file_new_for_commandline_arg (str);
+          window->background_image = g_file_get_uri (file);
+          g_object_unref (file);
+        }
+      else
+        window->background_image = NULL;
 
       if (window->background_style == PANEL_BG_STYLE_IMAGE)
         {
