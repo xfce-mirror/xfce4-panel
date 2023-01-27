@@ -128,6 +128,7 @@ panel_plugin_external_wrapper_wayland_constructed (GObject *object)
     return;
 
   connection = g_dbus_interface_skeleton_get_connection (G_DBUS_INTERFACE_SKELETON (skeleton));
+  g_object_unref (skeleton);
   if (connection == NULL)
     return;
 
