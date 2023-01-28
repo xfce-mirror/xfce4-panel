@@ -40,7 +40,9 @@
  *   Currently none, but could check for libraries, target OS.
  */
 
+#if defined(__linux__)
 #define SLEEP_MONITOR_USE_LOGIND 1
+#endif
 
 
 
