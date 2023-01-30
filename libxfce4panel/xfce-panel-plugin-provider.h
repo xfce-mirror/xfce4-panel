@@ -24,13 +24,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct _XfcePanelPluginProviderInterface XfcePanelPluginProviderInterface;
-typedef struct _XfcePanelPluginProvider          XfcePanelPluginProvider;
-
-#define XFCE_TYPE_PANEL_PLUGIN_PROVIDER               (xfce_panel_plugin_provider_get_type ())
-#define XFCE_PANEL_PLUGIN_PROVIDER(obj)               (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_PANEL_PLUGIN_PROVIDER, XfcePanelPluginProvider))
-#define XFCE_IS_PANEL_PLUGIN_PROVIDER(obj)            (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_PANEL_PLUGIN_PROVIDER))
-#define XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), XFCE_TYPE_PANEL_PLUGIN_PROVIDER, XfcePanelPluginProviderInterface))
+#define XFCE_TYPE_PANEL_PLUGIN_PROVIDER (xfce_panel_plugin_provider_get_type ())
+G_DECLARE_INTERFACE (XfcePanelPluginProvider, xfce_panel_plugin_provider, XFCE, PANEL_PLUGIN_PROVIDER, GObject)
 
 /* plugin module functions */
 typedef GtkWidget *(*PluginConstructFunc) (const gchar  *name,
@@ -160,8 +155,6 @@ enum
 };
 
 
-
-GType                 xfce_panel_plugin_provider_get_type            (void) G_GNUC_CONST;
 
 const gchar          *xfce_panel_plugin_provider_get_name            (XfcePanelPluginProvider       *provider);
 
