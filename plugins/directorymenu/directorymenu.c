@@ -500,7 +500,6 @@ directory_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   GObject             *dialog, *object;
 
   /* setup the dialog */
-  PANEL_UTILS_LINK_4UI
   builder = panel_utils_builder_new (panel_plugin, directorymenu_dialog_ui,
                                      directorymenu_dialog_ui_length, &dialog);
   if (G_UNLIKELY (builder == NULL))

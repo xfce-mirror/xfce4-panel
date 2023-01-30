@@ -1127,7 +1127,6 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   panel_return_if_fail (XFCE_IS_CLOCK_PLUGIN (plugin));
 
   /* setup the dialog */
-  PANEL_UTILS_LINK_4UI
   builder = panel_utils_builder_new (panel_plugin, clock_dialog_ui,
                                      clock_dialog_ui_length, &window);
   if (G_UNLIKELY (builder == NULL))

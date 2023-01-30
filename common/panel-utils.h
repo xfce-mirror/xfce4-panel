@@ -16,16 +16,11 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#ifndef __PANEL_BUILDER_H__
-#define __PANEL_BUILDER_H__
+#ifndef __PANEL_UTILS_H__
+#define __PANEL_UTILS_H__
 
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel.h>
-
-/* Hook to make sure GtkBuilder knows are the XfceTitledDialog object */
-#define PANEL_UTILS_LINK_4UI \
-  if (xfce_titled_dialog_get_type () == 0) \
-    return;
 
 void        _panel_utils_weak_notify   (gpointer          data,
                                         GObject          *where_the_object_was);
@@ -49,4 +44,4 @@ void        panel_utils_destroy_later  (GtkWidget        *widget);
 
 void        panel_utils_wl_surface_commit (GtkWidget        *widget);
 
-#endif /* !__PANEL_BUILDER_H__ */
+#endif /* !__PANEL_UTILS_H__ */

@@ -664,7 +664,6 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                                             "show-tooltips", "show-button-title", "small" };
 
   /* setup the dialog */
-  PANEL_UTILS_LINK_4UI
   builder = panel_utils_builder_new (panel_plugin, applicationsmenu_dialog_ui,
                                      applicationsmenu_dialog_ui_length, &dialog);
   if (G_UNLIKELY (builder == NULL))
