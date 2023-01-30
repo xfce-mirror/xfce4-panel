@@ -60,11 +60,6 @@ static gboolean              sn_button_query_tooltip                 (GtkWidget 
 
 
 
-struct _SnButtonClass
-{
-  GtkButtonClass       __parent__;
-};
-
 struct _SnButton
 {
   GtkButton            __parent__;

@@ -40,18 +40,6 @@
 
 
 
-#define DEFAULT_ICON_SIZE          22
-#define DEFAULT_SINGLE_ROW         FALSE
-#define DEFAULT_SQUARE_ICONS       FALSE
-#define DEFAULT_SYMBOLIC_ICONS     FALSE
-#define DEFAULT_MENU_IS_PRIMARY    FALSE
-#define DEFAULT_ORIENTATION        GTK_ORIENTATION_HORIZONTAL
-#define DEFAULT_PANEL_ORIENTATION  GTK_ORIENTATION_HORIZONTAL
-#define DEFAULT_PANEL_SIZE         28
-#define DEFAULT_HIDE_NEW_ITEMS     FALSE
-
-
-
 static void                  sn_config_finalize                      (GObject                 *object);
 
 static void                  sn_config_get_property                  (GObject                 *object,
@@ -65,11 +53,6 @@ static void                  sn_config_set_property                  (GObject   
                                                                       GParamSpec              *pspec);
 
 
-
-struct _SnConfigClass
-{
-  GObjectClass         __parent__;
-};
 
 struct _SnConfig
 {

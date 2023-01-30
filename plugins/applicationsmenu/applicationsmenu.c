@@ -24,8 +24,6 @@
 #include <garcon/garcon.h>
 #include <garcon-gtk/garcon-gtk.h>
 #include <libxfce4ui/libxfce4ui.h>
-#include <libxfce4util/libxfce4util.h>
-#include <libxfce4panel/libxfce4panel.h>
 #include <common/panel-xfconf.h>
 #include <common/panel-utils.h>
 #include <common/panel-private.h>
@@ -43,10 +41,6 @@
 #define DEFAULT_EDITOR    "menulibre"
 
 
-struct _ApplicationsMenuPluginClass
-{
-  XfcePanelPluginClass __parent__;
-};
 
 struct _ApplicationsMenuPlugin
 {

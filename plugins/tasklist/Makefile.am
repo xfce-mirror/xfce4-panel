@@ -16,6 +16,7 @@ libtasklist_built_sources = \
 libtasklist_la_SOURCES = \
 	$(libtasklist_built_sources) \
 	tasklist.c \
+	tasklist.h \
 	tasklist-widget.c \
 	tasklist-widget.h
 

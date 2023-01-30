@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include <gtk/gtk.h>
 #include <libxfce4windowing/libxfce4windowing.h>
 #include <libxfce4util/libxfce4util.h>
 #include <common/panel-private.h>
@@ -60,11 +61,6 @@ static gboolean show_desktop_plugin_drag_motion             (GtkWidget          
                                                              ShowDesktopPlugin      *plugin);
 
 
-
-struct _ShowDesktopPluginClass
-{
-  XfcePanelPluginClass __parent__;
-};
 
 struct _ShowDesktopPlugin
 {

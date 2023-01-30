@@ -24,7 +24,6 @@
 #include <math.h>
 #endif
 
-#include <gtk/gtk.h>
 #include <cairo/cairo.h>
 #include <common/panel-private.h>
 
@@ -67,11 +66,6 @@ enum
   MODE_DECIMAL,
   MODE_SEXAGESIMAL,
   MODE_BINARY_TIME
-};
-
-struct _XfceClockBinaryClass
-{
-  GtkImageClass __parent__;
 };
 
 struct _XfceClockBinary

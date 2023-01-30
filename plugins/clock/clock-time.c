@@ -21,7 +21,6 @@
 #include <config.h>
 #endif
 
-#include <glib.h>
 #include <common/panel-private.h>
 
 #include "clock-time.h"
@@ -45,11 +44,6 @@ enum
 {
   PROP_0,
   PROP_TIMEZONE
-};
-
-struct _ClockTimeClass
-{
-  GObjectClass        __parent__;
 };
 
 struct _ClockTime

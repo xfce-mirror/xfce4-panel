@@ -36,20 +36,11 @@
 
 
 
-#define DEFAULT_ICON_SIZE          22
-
-
-
 static gboolean              sn_dialog_build                         (SnDialog                *dialog);
 
 static void                  sn_dialog_finalize                      (GObject                 *object);
 
 
-
-struct _SnDialogClass
-{
-  GObjectClass         __parent__;
-};
 
 struct _SnDialog
 {

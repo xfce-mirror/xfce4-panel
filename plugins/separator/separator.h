@@ -20,24 +20,14 @@
 #ifndef __SEPARATOR_H__
 #define __SEPARATOR_H__
 
-#include <gtk/gtk.h>
+#include <libxfce4panel/libxfce4panel.h>
 
 G_BEGIN_DECLS
 
-typedef struct _SeparatorPluginClass SeparatorPluginClass;
-typedef struct _SeparatorPlugin      SeparatorPlugin;
-typedef enum   _SeparatorPluginStyle  SeparatorPluginStyle;
+#define XFCE_TYPE_SEPARATOR_PLUGIN (separator_plugin_get_type ())
+G_DECLARE_FINAL_TYPE (SeparatorPlugin, separator_plugin, XFCE, SEPARATOR_PLUGIN, XfcePanelPlugin)
 
-#define XFCE_TYPE_SEPARATOR_PLUGIN            (separator_plugin_get_type ())
-#define XFCE_SEPARATOR_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_SEPARATOR_PLUGIN, SeparatorPlugin))
-#define XFCE_SEPARATOR_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_SEPARATOR_PLUGIN, SeparatorPluginClass))
-#define XFCE_IS_SEPARATOR_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_SEPARATOR_PLUGIN))
-#define XFCE_IS_SEPARATOR_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_SEPARATOR_PLUGIN))
-#define XFCE_SEPARATOR_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_SEPARATOR_PLUGIN, SeparatorPluginClass))
-
-GType separator_plugin_get_type      (void) G_GNUC_CONST;
-
-void  separator_plugin_register_type (XfcePanelTypeModule *type_module);
+void separator_plugin_register_type (XfcePanelTypeModule *type_module);
 
 G_END_DECLS
 

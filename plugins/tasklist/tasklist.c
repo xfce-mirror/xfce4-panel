@@ -24,34 +24,15 @@
 #include <common/panel-xfconf.h>
 #include <common/panel-utils.h>
 #include <common/panel-private.h>
-#include <libxfce4panel/libxfce4panel.h>
 
+#include "tasklist.h"
 #include "tasklist-widget.h"
 #include "tasklist-dialog_ui.h"
 
 
-#define HANDLE_OFFSET (0.15)
-#define HANDLE_SIZE      (4)
+#define HANDLE_SIZE (4)
 
 
-/* TODO move to header */
-GType tasklist_plugin_get_type (void) G_GNUC_CONST;
-void tasklist_plugin_register_type (XfcePanelTypeModule *type_module);
-#define XFCE_TYPE_TASKLIST_PLUGIN            (tasklist_plugin_get_type ())
-#define XFCE_TASKLIST_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_TASKLIST_PLUGIN, TasklistPlugin))
-#define XFCE_TASKLIST_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_TASKLIST_PLUGIN, TasklistPluginClass))
-#define XFCE_IS_TASKLIST_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_TASKLIST_PLUGIN))
-#define XFCE_IS_TASKLIST_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_TASKLIST_PLUGIN))
-#define XFCE_TASKLIST_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_TASKLIST_PLUGIN, TasklistPluginClass))
-
-
-typedef struct _TasklistPluginClass TasklistPluginClass;
-struct _TasklistPluginClass
-{
-  XfcePanelPluginClass __parent__;
-};
-
-typedef struct _TasklistPlugin TasklistPlugin;
 struct _TasklistPlugin
 {
   XfcePanelPlugin __parent__;

@@ -20,9 +20,7 @@
 #include <config.h>
 #endif
 
-#include <gtk/gtk.h>
 #include <libxfce4ui/libxfce4ui.h>
-#include <libxfce4panel/libxfce4panel.h>
 #include <common/panel-private.h>
 
 #include "pager-buttons.h"
@@ -58,11 +56,6 @@ static void pager_buttons_viewport_button_toggled    (GtkWidget     *button,
                                                       PagerButtons  *pager);
 
 
-
-struct _PagerButtonsClass
-{
-  GtkGridClass    __parent__;
-};
 
 struct _PagerButtons
 {

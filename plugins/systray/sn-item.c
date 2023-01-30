@@ -59,11 +59,6 @@ static void                  sn_item_get_all_properties_result       (GObject   
 
 
 
-struct _SnItemClass
-{
-  GObjectClass         __parent__;
-};
-
 struct _SnItem
 {
   GObject              __parent__;

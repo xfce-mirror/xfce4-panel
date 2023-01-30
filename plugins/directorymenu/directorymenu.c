@@ -24,8 +24,6 @@
 #include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
 #include <libxfce4ui/libxfce4ui.h>
-#include <libxfce4util/libxfce4util.h>
-#include <libxfce4panel/libxfce4panel.h>
 #include <common/panel-xfconf.h>
 #include <common/panel-utils.h>
 #include <common/panel-private.h>
@@ -38,11 +36,6 @@
 
 #define DIALOG_RESPONSE_CREATE 0
 #define DIALOG_RESPONSE_OPEN 1
-
-struct _DirectoryMenuPluginClass
-{
-  XfcePanelPluginClass __parent__;
-};
 
 struct _DirectoryMenuPlugin
 {

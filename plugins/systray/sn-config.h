@@ -24,17 +24,18 @@
 
 G_BEGIN_DECLS
 
-typedef struct _SnConfigClass SnConfigClass;
-typedef struct _SnConfig      SnConfig;
+#define XFCE_TYPE_SN_CONFIG (sn_config_get_type ())
+G_DECLARE_FINAL_TYPE (SnConfig, sn_config, XFCE, SN_CONFIG, GObject)
 
-#define XFCE_TYPE_SN_CONFIG            (sn_config_get_type ())
-#define XFCE_SN_CONFIG(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_SN_CONFIG, SnConfig))
-#define XFCE_SN_CONFIG_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_SN_CONFIG, SnConfigClass))
-#define XFCE_IS_SN_CONFIG(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_SN_CONFIG))
-#define XFCE_IS_SN_CONFIG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_SN_CONFIG))
-#define XFCE_SN_CONFIG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_SN_CONFIG, SnConfigClass))
-
-GType                  sn_config_get_type                      (void) G_GNUC_CONST;
+#define DEFAULT_ICON_SIZE          22
+#define DEFAULT_SINGLE_ROW         FALSE
+#define DEFAULT_SQUARE_ICONS       FALSE
+#define DEFAULT_SYMBOLIC_ICONS     FALSE
+#define DEFAULT_MENU_IS_PRIMARY    FALSE
+#define DEFAULT_ORIENTATION        GTK_ORIENTATION_HORIZONTAL
+#define DEFAULT_PANEL_ORIENTATION  GTK_ORIENTATION_HORIZONTAL
+#define DEFAULT_PANEL_SIZE         28
+#define DEFAULT_HIDE_NEW_ITEMS     FALSE
 
 SnConfig              *sn_config_new                           (const gchar             *property_base);
 
@@ -107,20 +108,6 @@ void                   sn_config_swap_known_legacy_items       (SnConfig        
 
 gboolean               sn_config_items_clear                   (SnConfig                *config);
 gboolean               sn_config_legacy_items_clear            (SnConfig                *config);
-
-
-
-#define DEFAULT_ICON_SIZE          22
-#define DEFAULT_SINGLE_ROW         FALSE
-#define DEFAULT_SQUARE_ICONS       FALSE
-#define DEFAULT_SYMBOLIC_ICONS     FALSE
-#define DEFAULT_MENU_IS_PRIMARY    FALSE
-#define DEFAULT_ORIENTATION        GTK_ORIENTATION_HORIZONTAL
-#define DEFAULT_PANEL_ORIENTATION  GTK_ORIENTATION_HORIZONTAL
-#define DEFAULT_PANEL_SIZE         28
-#define DEFAULT_HIDE_NEW_ITEMS     FALSE
-
-
 
 G_END_DECLS
 

@@ -19,31 +19,14 @@
 #ifndef __CLOCK_H__
 #define __CLOCK_H__
 
-#include <gtk/gtk.h>
-#include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
 
 G_BEGIN_DECLS
 
-#define CLOCK_INTERVAL_SECOND (1)
-#define CLOCK_INTERVAL_MINUTE (60)
+#define XFCE_TYPE_CLOCK_PLUGIN (clock_plugin_get_type ())
+G_DECLARE_FINAL_TYPE (ClockPlugin, clock_plugin, XFCE, CLOCK_PLUGIN, XfcePanelPlugin)
 
-typedef struct _ClockPlugin        ClockPlugin;
-typedef struct _ClockPluginClass   ClockPluginClass;
-typedef struct _ClockPluginTimeout ClockPluginTimeout;
-
-#define XFCE_TYPE_CLOCK_PLUGIN            (clock_plugin_get_type ())
-#define XFCE_CLOCK_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_CLOCK_PLUGIN, ClockPlugin))
-#define XFCE_CLOCK_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_CLOCK_PLUGIN, ClockPluginClass))
-#define XFCE_IS_CLOCK_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_CLOCK_PLUGIN))
-#define XFCE_IS_CLOCK_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_CLOCK_PLUGIN))
-#define XFCE_CLOCK_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_CLOCK_PLUGIN, ClockPluginClass))
-
-
-
-GType               clock_plugin_get_type             (void) G_GNUC_CONST;
-
-void                clock_plugin_register_type        (XfcePanelTypeModule *type_module);
+void clock_plugin_register_type (XfcePanelTypeModule *type_module);
 
 G_END_DECLS
 

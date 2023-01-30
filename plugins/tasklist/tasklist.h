@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2010 Nick Schermer <nick@xfce.org>
+ * Copyright (c) 2023 Gaël Bonithon <gael@xfce.org>
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -16,18 +16,18 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#ifndef __ACTIONS_H__
-#define __ACTIONS_H__
+#ifndef __XFCE_TASKLIST_PLUGIN_H__
+#define __XFCE_TASKLIST_PLUGIN_H__
 
 #include <libxfce4panel/libxfce4panel.h>
 
 G_BEGIN_DECLS
 
-#define XFCE_TYPE_ACTIONS_PLUGIN (actions_plugin_get_type ())
-G_DECLARE_FINAL_TYPE (ActionsPlugin, actions_plugin, XFCE, ACTIONS_PLUGIN, XfcePanelPlugin)
+#define XFCE_TYPE_TASKLIST_PLUGIN (tasklist_plugin_get_type ())
+G_DECLARE_FINAL_TYPE (TasklistPlugin, tasklist_plugin, XFCE, TASKLIST_PLUGIN, XfcePanelPlugin)
 
-void actions_plugin_register_type (XfcePanelTypeModule *type_module);
+void tasklist_plugin_register_type (XfcePanelTypeModule *type_module);
 
 G_END_DECLS
 
-#endif /* !__ACTIONS_H__ */
+#endif /* !__XFCE_TASKLIST_PLUGIN_H__ */

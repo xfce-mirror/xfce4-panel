@@ -24,7 +24,6 @@
 #include <string.h>
 #endif
 
-#include <gtk/gtk.h>
 #include <common/panel-private.h>
 
 #include "clock.h"
@@ -65,11 +64,6 @@ enum
   PROP_FUZZINESS,
   PROP_SIZE_RATIO,
   PROP_ORIENTATION
-};
-
-struct _XfceClockFuzzyClass
-{
- GtkLabelClass __parent__;
 };
 
 struct _XfceClockFuzzy

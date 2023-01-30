@@ -19,21 +19,20 @@
 #ifndef __CLOCK_DIGITAL_H__
 #define __CLOCK_DIGITAL_H__
 
+#include <gtk/gtk.h>
+#include <libxfce4panel/libxfce4panel.h>
+
 G_BEGIN_DECLS
 
-/* TRANSLATORS: adjust this accordingly for your locale format */
 #define DEFAULT_DIGITAL_TIME_FORMAT NC_("Time", "%R")
 #define DEFAULT_DIGITAL_DATE_FORMAT NC_("Date", "%Y-%m-%d")
-#define DEFAULT_DIGITAL_FORMAT NC_("Time", "%a %_d %b, %R")
 
 typedef enum
 {
-
   CLOCK_PLUGIN_DIGITAL_FORMAT_DATE_TIME = 0,
   CLOCK_PLUGIN_DIGITAL_FORMAT_TIME_DATE,
   CLOCK_PLUGIN_DIGITAL_FORMAT_DATE,
   CLOCK_PLUGIN_DIGITAL_FORMAT_TIME,
-
 
   /* defines */
   CLOCK_PLUGIN_DIGITAL_FORMAT_MIN = CLOCK_PLUGIN_DIGITAL_FORMAT_DATE_TIME,
@@ -42,17 +41,8 @@ typedef enum
 }
 ClockPluginDigitalFormat;
 
-typedef struct _XfceClockDigitalClass XfceClockDigitalClass;
-typedef struct _XfceClockDigital      XfceClockDigital;
-
-#define XFCE_CLOCK_TYPE_DIGITAL            (xfce_clock_digital_get_type ())
-#define XFCE_CLOCK_DIGITAL(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_CLOCK_TYPE_DIGITAL, XfceClockDigital))
-#define XFCE_CLOCK_DIGITAL_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_CLOCK_TYPE_DIGITAL, XfceClockDigitalClass))
-#define XFCE_CLOCK_IS_DIGITAL(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_CLOCK_TYPE_DIGITAL))
-#define XFCE_CLOCK_IS_DIGITAL_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_CLOCK_TYPE_DIGITAL))
-#define XFCE_CLOCK_DIGITAL_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_CLOCK_TYPE_DIGITAL, XfceClockDigitalClass))
-
-GType      xfce_clock_digital_get_type      (void) G_GNUC_CONST;
+#define XFCE_CLOCK_TYPE_DIGITAL (xfce_clock_digital_get_type ())
+G_DECLARE_FINAL_TYPE (XfceClockDigital, xfce_clock_digital, XFCE_CLOCK, DIGITAL, GtkBox)
 
 void       xfce_clock_digital_register_type (XfcePanelTypeModule *type_module);
 

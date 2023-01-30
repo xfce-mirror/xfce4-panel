@@ -27,7 +27,6 @@
 #include <math.h>
 #endif
 
-#include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <common/panel-private.h>
 #include <common/panel-debug.h>
@@ -79,11 +78,6 @@ enum
 {
   PROP_0,
   PROP_HAS_HIDDEN
-};
-
-struct _SystrayBoxClass
-{
-  GtkContainerClass __parent__;
 };
 
 struct _SystrayBox
@@ -715,13 +709,13 @@ systray_box_compare_function (gconstpointer a,
   gpointer     value;
 
   /* sort hidden icons before visible ones */
-  hidden_a = systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (a));
-  hidden_b = systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (b));
+  hidden_a = systray_socket_get_hidden ((SystraySocket *) (a));
+  hidden_b = systray_socket_get_hidden ((SystraySocket *) (b));
   if (hidden_a != hidden_b)
     return hidden_a ? 1 : -1;
 
-  name_a = systray_socket_get_name (XFCE_SYSTRAY_SOCKET (a));
-  name_b = systray_socket_get_name (XFCE_SYSTRAY_SOCKET (b));
+  name_a = systray_socket_get_name ((SystraySocket *) (a));
+  name_b = systray_socket_get_name ((SystraySocket *) (b));
 
   if (name_a != NULL && g_hash_table_lookup_extended (box->names_ordered, name_a, NULL, &value))
     index_a = GPOINTER_TO_INT (value);

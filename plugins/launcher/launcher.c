@@ -24,14 +24,11 @@
 #include <string.h>
 #endif
 
-#include <gio/gio.h>
-#include <libxfce4util/libxfce4util.h>
+#include <gtk/gtk.h>
 #include <libxfce4ui/libxfce4ui.h>
-#include <garcon/garcon.h>
 #include <garcon-gtk/garcon-gtk.h>
 #include <xfconf/xfconf.h>
 
-#include <libxfce4panel/libxfce4panel.h>
 #include <common/panel-private.h>
 #include <common/panel-xfconf.h>
 #include <common/panel-utils.h>
@@ -170,11 +167,6 @@ static GSList            *launcher_plugin_uri_list_extract              (GtkSele
 static void               launcher_plugin_uri_list_free                 (GSList               *uri_list);
 
 
-
-struct _LauncherPluginClass
-{
-  XfcePanelPluginClass __parent__;
-};
 
 struct _LauncherPlugin
 {

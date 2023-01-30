@@ -39,11 +39,6 @@
 
 
 
-struct _SystraySocketClass
-{
-  GtkSocketClass __parent__;
-};
-
 struct _SystraySocket
 {
   GtkSocket __parent__;

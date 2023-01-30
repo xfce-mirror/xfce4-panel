@@ -111,11 +111,6 @@ typedef enum
 }
 ClockPluginMode;
 
-struct _ClockPluginClass
-{
-  XfcePanelPluginClass __parent__;
-};
-
 struct _ClockPlugin
 {
   XfcePanelPlugin __parent__;

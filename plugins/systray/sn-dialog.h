@@ -26,17 +26,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct _SnDialogClass SnDialogClass;
-typedef struct _SnDialog      SnDialog;
-
-#define XFCE_TYPE_SN_DIALOG            (sn_dialog_get_type ())
-#define XFCE_SN_DIALOG(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_SN_DIALOG, SnDialog))
-#define XFCE_SN_DIALOG_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_SN_DIALOG, SnDialogClass))
-#define XFCE_IS_SN_DIALOG(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_SN_DIALOG))
-#define XFCE_IS_SN_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_SN_DIALOG))
-#define XFCE_SN_DIALOG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_SN_DIALOG, SnDialogClass))
-
-GType                  sn_dialog_get_type                      (void) G_GNUC_CONST;
+#define XFCE_TYPE_SN_DIALOG (sn_dialog_get_type ())
+G_DECLARE_FINAL_TYPE (SnDialog, sn_dialog, XFCE, SN_DIALOG, GObject)
 
 SnDialog              *sn_dialog_new                           (SnConfig                *config,
                                                                 GdkScreen               *screen);

@@ -19,22 +19,12 @@
 #ifndef __SYSTRAY_BOX_H__
 #define __SYSTRAY_BOX_H__
 
-typedef struct _SystrayBoxClass SystrayBoxClass;
-typedef struct _SystrayBox      SystrayBox;
+#include <gtk/gtk.h>
 
-/* keep those in sync with the glade file too! */
-#define SIZE_MAX_MIN     (12)
-#define SIZE_MAX_MAX     (64)
-#define SIZE_MAX_DEFAULT (22)
+G_BEGIN_DECLS
 
-#define XFCE_TYPE_SYSTRAY_BOX            (systray_box_get_type ())
-#define XFCE_SYSTRAY_BOX(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_SYSTRAY_BOX, SystrayBox))
-#define XFCE_SYSTRAY_BOX_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_SYSTRAY_BOX, SystrayBoxClass))
-#define XFCE_IS_SYSTRAY_BOX(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_SYSTRAY_BOX))
-#define XFCE_IS_SYSTRAY_BOX_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_SYSTRAY_BOX))
-#define XFCE_SYSTRAY_BOX_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_SYSTRAY_BOX, SystrayBoxClass))
-
-GType      systray_box_get_type        (void) G_GNUC_CONST;
+#define XFCE_TYPE_SYSTRAY_BOX (systray_box_get_type ())
+G_DECLARE_FINAL_TYPE (SystrayBox, systray_box, XFCE, SYSTRAY_BOX, GtkContainer)
 
 void       systray_box_register_type   (XfcePanelTypeModule *module);
 
@@ -69,5 +59,7 @@ gboolean   systray_box_has_hidden_items (SystrayBox         *box);
 
 void       systray_box_set_single_row  (SystrayBox          *box,
                                         gboolean             single_row);
+
+G_END_DECLS
 
 #endif /* !__SYSTRAY_BOX_H__ */

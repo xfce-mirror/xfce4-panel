@@ -27,17 +27,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct _SnBoxClass SnBoxClass;
-typedef struct _SnBox      SnBox;
-
-#define XFCE_TYPE_SN_BOX            (sn_box_get_type ())
-#define XFCE_SN_BOX(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_SN_BOX, SnBox))
-#define XFCE_SN_BOX_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_SN_BOX, SnBoxClass))
-#define XFCE_IS_SN_BOX(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_SN_BOX))
-#define XFCE_IS_SN_BOX_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_SN_BOX))
-#define XFCE_SN_BOX_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_SN_BOX, SnBoxClass))
-
-GType                  sn_box_get_type                         (void) G_GNUC_CONST;
+#define XFCE_TYPE_SN_BOX (sn_box_get_type ())
+G_DECLARE_FINAL_TYPE (SnBox, sn_box, XFCE, SN_BOX, GtkContainer)
 
 void                   sn_box_remove_item                      (SnBox                   *box,
                                                                 SnItem                  *item);

@@ -53,6 +53,9 @@
 #define XFCE_SYSTRAY_MANAGER_ORIENTATION_HORIZONTAL 0
 #define XFCE_SYSTRAY_MANAGER_ORIENTATION_VERTICAL   1
 
+#define XFCE_SYSTRAY_MANAGER_ERROR (systray_manager_error_quark())
+
+typedef struct _SystrayMessage SystrayMessage;
 
 
 static void            systray_manager_finalize                           (GObject             *object);
@@ -86,17 +89,17 @@ static void            systray_manager_message_remove_from_list           (Systr
 
 enum
 {
+  XFCE_SYSTRAY_MANAGER_ERROR_SELECTION_FAILED
+};
+
+enum
+{
   ICON_ADDED,
   ICON_REMOVED,
   MESSAGE_SENT,
   MESSAGE_CANCELLED,
   LOST_SELECTION,
   LAST_SIGNAL
-};
-
-struct _SystrayManagerClass
-{
-  GObjectClass __parent__;
 };
 
 struct _SystrayManager

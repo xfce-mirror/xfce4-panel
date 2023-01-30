@@ -34,8 +34,6 @@
 #define pager_plugin_miniature_view_is_supported() FALSE
 #endif
 
-#include <libxfce4panel/libxfce4panel.h>
-#include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-xfconf.h>
 #include <common/panel-utils.h>
@@ -100,11 +98,6 @@ static void     pager_plugin_get_preferred_height_for_width (GtkWidget          
                                                              gint                *natural_height);
 
 
-
-struct _PagerPluginClass
-{
-  XfcePanelPluginClass __parent__;
-};
 
 struct _PagerPlugin
 {

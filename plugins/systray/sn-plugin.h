@@ -31,20 +31,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct _SnPluginClass SnPluginClass;
-typedef struct _SnPlugin      SnPlugin;
-
-#define XFCE_TYPE_SN_PLUGIN            (sn_plugin_get_type ())
-#define XFCE_SN_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_SN_PLUGIN, SnPlugin))
-#define XFCE_SN_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_SN_PLUGIN, SnPluginClass))
-#define XFCE_IS_SN_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_SN_PLUGIN))
-#define XFCE_IS_SN_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_SN_PLUGIN))
-#define XFCE_SN_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_SN_PLUGIN, SnPluginClass))
-
-struct _SnPluginClass
-{
-  XfcePanelPluginClass __parent__;
-};
+#define XFCE_TYPE_SN_PLUGIN (sn_plugin_get_type ())
+G_DECLARE_FINAL_TYPE (SnPlugin, sn_plugin, XFCE, SN_PLUGIN, XfcePanelPlugin)
 
 struct _SnPlugin
 {
@@ -78,8 +66,6 @@ struct _SnPlugin
 #endif
   SnConfig            *config;
 };
-
-GType                  sn_plugin_get_type                      (void) G_GNUC_CONST;
 
 void                   sn_plugin_register_type                 (XfcePanelTypeModule     *panel_type_module);
 

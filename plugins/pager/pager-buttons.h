@@ -21,20 +21,12 @@
 
 #include <gtk/gtk.h>
 #include <libxfce4windowing/libxfce4windowing.h>
+#include <libxfce4panel/libxfce4panel.h>
 
 G_BEGIN_DECLS
 
-typedef struct _PagerButtonsClass PagerButtonsClass;
-typedef struct _PagerButtons      PagerButtons;
-
-#define XFCE_TYPE_PAGER_BUTTONS            (pager_buttons_get_type ())
-#define XFCE_PAGER_BUTTONS(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_PAGER_BUTTONS, PagerButtons))
-#define XFCE_PAGER_BUTTONS_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_PAGER_BUTTONS, PagerButtonsClass))
-#define XFCE_IS_PAGER_BUTTONS(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_PAGER_BUTTONS))
-#define XFCE_IS_PAGER_BUTTONS_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_PAGER_BUTTONS))
-#define XFCE_PAGER_BUTTONS_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_PAGER_BUTTONS, PagerButtonsClass))
-
-GType      pager_buttons_get_type        (void) G_GNUC_CONST;
+#define XFCE_TYPE_PAGER_BUTTONS (pager_buttons_get_type ())
+G_DECLARE_FINAL_TYPE (PagerButtons, pager_buttons, XFCE, PAGER_BUTTONS, XfcePanelPlugin)
 
 void       pager_buttons_register_type   (XfcePanelTypeModule *type_module);
 

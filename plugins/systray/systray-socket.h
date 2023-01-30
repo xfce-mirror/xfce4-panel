@@ -25,17 +25,10 @@
 #include <gtk/gtk.h>
 #include <gtk/gtkx.h>
 
-typedef struct _SystraySocketClass SystraySocketClass;
-typedef struct _SystraySocket      SystraySocket;
+G_BEGIN_DECLS
 
-#define XFCE_TYPE_SYSTRAY_SOCKET            (systray_socket_get_type ())
-#define XFCE_SYSTRAY_SOCKET(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_SYSTRAY_SOCKET, SystraySocket))
-#define XFCE_SYSTRAY_SOCKET_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_SYSTRAY_SOCKET, SystraySocketClass))
-#define XFCE_IS_SYSTRAY_SOCKET(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_SYSTRAY_SOCKET))
-#define XFCE_IS_SYSTRAY_SOCKET_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_SYSTRAY_SOCKET))
-#define XFCE_SYSTRAY_SOCKET_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_SYSTRAY_SOCKET, SystraySocketClass))
-
-GType            systray_socket_get_type      (void) G_GNUC_CONST;
+#define XFCE_TYPE_SYSTRAY_SOCKET (systray_socket_get_type ())
+G_DECLARE_FINAL_TYPE (SystraySocket, systray_socket, XFCE, SYSTRAY_SOCKET, GtkSocket)
 
 void             systray_socket_register_type (GTypeModule     *type_module);
 
@@ -54,5 +47,7 @@ gboolean         systray_socket_get_hidden    (SystraySocket   *socket);
 
 void             systray_socket_set_hidden    (SystraySocket   *socket,
                                                gboolean         hidden);
+
+G_END_DECLS
 
 #endif /* !__SYSTRAY_SOCKET_H__ */

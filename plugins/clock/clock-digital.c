@@ -20,7 +20,6 @@
 #include <config.h>
 #endif
 
-#include <gtk/gtk.h>
 #include <common/panel-private.h>
 #include <common/panel-xfconf.h>
 
@@ -56,11 +55,6 @@ enum
   PROP_DIGITAL_DATE_FONT,
   PROP_SIZE_RATIO,
   PROP_ORIENTATION,
-};
-
-struct _XfceClockDigitalClass
-{
-  GtkBoxClass __parent__;
 };
 
 struct _XfceClockDigital

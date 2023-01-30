@@ -57,13 +57,6 @@ struct _ClockSleepMonitor
   GObject parent_instance;
 };
 
-struct _ClockSleepMonitorClass
-{
-  GObjectClass parent_class;
-};
-
-typedef struct _ClockSleepMonitorClass ClockSleepMonitorClass;
-
 G_DEFINE_TYPE (ClockSleepMonitor, clock_sleep_monitor, G_TYPE_OBJECT)
 
 static void clock_sleep_monitor_finalize (GObject *object);
@@ -106,19 +99,8 @@ struct _ClockSleepMonitorLogind
   GDBusProxy *logind_proxy;
 };
 
-struct _ClockSleepMonitorLogindClass
-{
-  ClockSleepMonitorClass parent_class;
-};
-
-typedef struct _ClockSleepMonitorLogind ClockSleepMonitorLogind;
-typedef struct _ClockSleepMonitorLogindClass ClockSleepMonitorLogindClass;
-
-GType clock_sleep_monitor_logind_get_type (void) G_GNUC_CONST;
-
 #define XFCE_TYPE_CLOCK_SLEEP_MONITOR_LOGIND (clock_sleep_monitor_logind_get_type ())
-#define XFCE_CLOCK_SLEEP_MONITOR_LOGIND(object) (G_TYPE_CHECK_INSTANCE_CAST ((object), XFCE_TYPE_CLOCK_SLEEP_MONITOR_LOGIND, ClockSleepMonitorLogind))
-#define XFCE_IS_CLOCK_SLEEP_MONITOR_LOGIND(object) (G_TYPE_CHECK_INSTANCE_TYPE ((object), XFCE_TYPE_CLOCK_SLEEP_MONITOR_LOGIND))
+G_DECLARE_FINAL_TYPE (ClockSleepMonitorLogind, clock_sleep_monitor_logind, XFCE, CLOCK_SLEEP_MONITOR_LOGIND, ClockSleepMonitor)
 
 G_DEFINE_TYPE (ClockSleepMonitorLogind, clock_sleep_monitor_logind, XFCE_TYPE_CLOCK_SLEEP_MONITOR)
 

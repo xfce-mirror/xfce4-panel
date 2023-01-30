@@ -23,17 +23,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct _SnItemClass SnItemClass;
-typedef struct _SnItem      SnItem;
-
-#define XFCE_TYPE_SN_ITEM            (sn_item_get_type ())
-#define XFCE_SN_ITEM(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_SN_ITEM, SnItem))
-#define XFCE_SN_ITEM_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_SN_ITEM, SnItemClass))
-#define XFCE_IS_SN_ITEM(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_SN_ITEM))
-#define XFCE_IS_SN_ITEM_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_SN_ITEM))
-#define XFCE_SN_ITEM_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_SN_ITEM, SnItemClass))
-
-GType                  sn_item_get_type                        (void) G_GNUC_CONST;
+#define XFCE_TYPE_SN_ITEM (sn_item_get_type ())
+G_DECLARE_FINAL_TYPE (SnItem, sn_item, XFCE, SN_ITEM, GObject)
 
 void                   sn_item_start                           (SnItem                  *item);
 
@@ -50,8 +41,8 @@ void                   sn_item_get_icon                        (SnItem          
                                                                 GdkPixbuf              **overlay_icon_pixbuf);
 
 void                   sn_item_get_tooltip                     (SnItem                  *item,
-	                                                           const gchar            **title,
-	                                                           const gchar            **subtitle);
+                                                                const gchar            **title,
+                                                                const gchar            **subtitle);
 
 gboolean               sn_item_is_menu_only                    (SnItem                  *item);
 

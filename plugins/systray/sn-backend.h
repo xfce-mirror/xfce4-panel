@@ -23,17 +23,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct _SnBackendClass SnBackendClass;
-typedef struct _SnBackend      SnBackend;
-
-#define XFCE_TYPE_SN_BACKEND            (sn_backend_get_type ())
-#define XFCE_SN_BACKEND(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_SN_BACKEND, SnBackend))
-#define XFCE_SN_BACKEND_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_SN_BACKEND, SnBackendClass))
-#define XFCE_IS_SN_BACKEND(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_SN_BACKEND))
-#define XFCE_IS_SN_BACKEND_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_SN_BACKEND))
-#define XFCE_SN_BACKEND_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_SN_BACKEND, SnBackendClass))
-
-GType                  sn_backend_get_type                     (void) G_GNUC_CONST;
+#define XFCE_TYPE_SN_BACKEND (sn_backend_get_type ())
+G_DECLARE_FINAL_TYPE (SnBackend, sn_backend, XFCE, SN_BACKEND, GObject)
 
 SnBackend             *sn_backend_new                          (void);
 

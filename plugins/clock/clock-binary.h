@@ -19,19 +19,13 @@
 #ifndef __CLOCK_BINARY_H__
 #define __CLOCK_BINARY_H__
 
+#include <gtk/gtk.h>
+#include <libxfce4panel/libxfce4panel.h>
+
 G_BEGIN_DECLS
 
-typedef struct _XfceClockBinaryClass XfceClockBinaryClass;
-typedef struct _XfceClockBinary      XfceClockBinary;
-
-#define XFCE_CLOCK_TYPE_BINARY            (xfce_clock_binary_get_type ())
-#define XFCE_CLOCK_BINARY(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_CLOCK_TYPE_BINARY, XfceClockBinary))
-#define XFCE_CLOCK_BINARY_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_CLOCK_TYPE_BINARY, XfceClockBinaryClass))
-#define XFCE_CLOCK_IS_BINARY(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_CLOCK_TYPE_BINARY))
-#define XFCE_CLOCK_IS_BINARY_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_CLOCK_TYPE_BINARY))
-#define XFCE_CLOCK_BINARY_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_CLOCK_TYPE_BINARY, XfceClockBinaryClass))
-
-GType      xfce_clock_binary_get_type      (void) G_GNUC_CONST;
+#define XFCE_CLOCK_TYPE_BINARY (xfce_clock_binary_get_type ())
+G_DECLARE_FINAL_TYPE (XfceClockBinary, xfce_clock_binary, XFCE_CLOCK, BINARY, GtkImage)
 
 void       xfce_clock_binary_register_type (XfcePanelTypeModule *type_module);
 

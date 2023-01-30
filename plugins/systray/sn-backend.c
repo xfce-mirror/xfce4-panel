@@ -91,11 +91,6 @@ static void                  sn_backend_host_clear_items             (SnBackend 
 
 
 
-struct _SnBackendClass
-{
-  GObjectClass         __parent__;
-};
-
 struct _SnBackend
 {
   GObject              __parent__;

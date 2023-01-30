@@ -22,11 +22,7 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <libxfce4panel/libxfce4panel.h>
-#include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
-
-#include <gio/gio.h>
 
 #include <common/panel-private.h>
 #include <common/panel-xfconf.h>
@@ -38,7 +34,6 @@
 
 
 #define DEFAULT_TITLE    _("Session Menu")
-#define DEFAULT_ICON_SIZE (16)
 #define DEFAULT_TIMEOUT   (30)
 
 
@@ -99,11 +94,6 @@ enum
   COLUMN_DISPLAY_NAME,
   COLUMN_NAME,
   COLUMN_TYPE
-};
-
-struct _ActionsPluginClass
-{
-  XfcePanelPluginClass __parent__;
 };
 
 struct _ActionsPlugin

@@ -19,19 +19,13 @@
 #ifndef __CLOCK_LCD_H__
 #define __CLOCK_LCD_H__
 
+#include <gtk/gtk.h>
+#include <libxfce4panel/libxfce4panel.h>
+
 G_BEGIN_DECLS
 
-typedef struct _XfceClockLcdClass XfceClockLcdClass;
-typedef struct _XfceClockLcd      XfceClockLcd;
-
-#define XFCE_CLOCK_TYPE_LCD            (xfce_clock_lcd_get_type ())
-#define XFCE_CLOCK_LCD(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_CLOCK_TYPE_LCD, XfceClockLcd))
-#define XFCE_CLOCK_LCD_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_CLOCK_TYPE_LCD, XfceClockLcdClass))
-#define XFCE_CLOCK_IS_LCD(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_CLOCK_TYPE_LCD))
-#define XFCE_CLOCK_IS_LCD_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_CLOCK_TYPE_LCD))
-#define XFCE_CLOCK_LCD_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_CLOCK_TYPE_LCD, XfceClockLcdClass))
-
-GType      xfce_clock_lcd_get_type      (void) G_GNUC_CONST;
+#define XFCE_CLOCK_TYPE_LCD (xfce_clock_lcd_get_type ())
+G_DECLARE_FINAL_TYPE (XfceClockLcd, xfce_clock_lcd, XFCE_CLOCK, LCD, GtkImage)
 
 void       xfce_clock_lcd_register_type (XfcePanelTypeModule *type_module);
 

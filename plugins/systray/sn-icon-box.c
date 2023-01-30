@@ -56,11 +56,6 @@ static void                  sn_icon_box_forall                      (GtkContain
                                                                       gpointer                 callback_data);
 
 
-struct _SnIconBoxClass
-{
-  GtkContainerClass    __parent__;
-};
-
 struct _SnIconBox
 {
   GtkContainer         __parent__;

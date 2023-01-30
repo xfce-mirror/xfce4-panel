@@ -27,7 +27,6 @@
 #include <math.h>
 #endif
 
-#include <gtk/gtk.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4windowing/libxfce4windowing.h>
 #include <libxfce4windowingui/libxfce4windowingui.h>
@@ -76,6 +75,31 @@
 
 
 
+typedef enum _XfceTasklistSortOrder
+{
+  XFCE_TASKLIST_SORT_ORDER_TIMESTAMP, /* sort by unique_id */
+  XFCE_TASKLIST_SORT_ORDER_GROUP_TIMESTAMP, /* sort by group and then by timestamp */
+  XFCE_TASKLIST_SORT_ORDER_TITLE, /* sort by window title */
+  XFCE_TASKLIST_SORT_ORDER_GROUP_TITLE, /* sort by group and then by title */
+  XFCE_TASKLIST_SORT_ORDER_DND, /* append and support dnd */
+
+  XFCE_TASKLIST_SORT_ORDER_MIN = XFCE_TASKLIST_SORT_ORDER_TIMESTAMP,
+  XFCE_TASKLIST_SORT_ORDER_MAX = XFCE_TASKLIST_SORT_ORDER_DND,
+  XFCE_TASKLIST_SORT_ORDER_DEFAULT = XFCE_TASKLIST_SORT_ORDER_GROUP_TIMESTAMP
+} XfceTasklistSortOrder;
+
+typedef enum _XfceTasklistMClick
+{
+  XFCE_TASKLIST_MIDDLE_CLICK_NOTHING, /* do nothing */
+  XFCE_TASKLIST_MIDDLE_CLICK_CLOSE_WINDOW, /* close the window */
+  XFCE_TASKLIST_MIDDLE_CLICK_MINIMIZE_WINDOW, /* minimize, never minimize with button 1 */
+  XFCE_TASKLIST_MIDDLE_CLICK_NEW_INSTANCE, /* launches a new instance of the window */
+
+  XFCE_TASKLIST_MIDDLE_CLICK_MIN = XFCE_TASKLIST_MIDDLE_CLICK_NOTHING,
+  XFCE_TASKLIST_MIDDLE_CLICK_MAX = XFCE_TASKLIST_MIDDLE_CLICK_NEW_INSTANCE,
+  XFCE_TASKLIST_MIDDLE_CLICK_DEFAULT = XFCE_TASKLIST_MIDDLE_CLICK_NOTHING
+} XfceTasklistMClick;
+
 enum
 {
   PROP_0,
@@ -95,11 +119,6 @@ enum
   PROP_INCLUDE_ALL_BLINKING,
   PROP_MIDDLE_CLICK,
   PROP_LABEL_DECORATIONS
-};
-
-struct _XfceTasklistClass
-{
-  GtkContainerClass __parent__;
 };
 
 struct _XfceTasklist
@@ -218,8 +237,7 @@ typedef enum
 }
 XfceTasklistChildType;
 
-typedef struct _XfceTasklistChild XfceTasklistChild;
-struct _XfceTasklistChild
+typedef struct _XfceTasklistChild
 {
   /* type of this button */
   XfceTasklistChildType  type;
@@ -254,7 +272,7 @@ struct _XfceTasklistChild
   /* xfw information */
   XfwWindow              *window;
   XfwApplication         *app;
-};
+} XfceTasklistChild;
 
 static const GtkTargetEntry source_targets[] =
 {

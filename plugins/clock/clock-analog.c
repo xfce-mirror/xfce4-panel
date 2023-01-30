@@ -24,7 +24,6 @@
 #include <math.h>
 #endif
 
-#include <gtk/gtk.h>
 #include <cairo/cairo.h>
 #include <common/panel-private.h>
 
@@ -72,11 +71,6 @@ enum
   PROP_SHOW_SECONDS,
   PROP_SIZE_RATIO,
   PROP_ORIENTATION
-};
-
-struct _XfceClockAnalogClass
-{
-  GtkImageClass __parent__;
 };
 
 struct _XfceClockAnalog

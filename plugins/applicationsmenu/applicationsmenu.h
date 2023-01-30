@@ -19,23 +19,14 @@
 #ifndef __XFCE_APPLICATIONS_MENU_PLUGIN_H__
 #define __XFCE_APPLICATIONS_MENU_PLUGIN_H__
 
-#include <gtk/gtk.h>
+#include <libxfce4panel/libxfce4panel.h>
 
 G_BEGIN_DECLS
 
-typedef struct _ApplicationsMenuPluginClass ApplicationsMenuPluginClass;
-typedef struct _ApplicationsMenuPlugin      ApplicationsMenuPlugin;
+#define XFCE_TYPE_APPLICATIONS_MENU_PLUGIN (applications_menu_plugin_get_type ())
+G_DECLARE_FINAL_TYPE (ApplicationsMenuPlugin, applications_menu_plugin, XFCE, APPLICATIONS_MENU_PLUGIN, XfcePanelPlugin)
 
-#define XFCE_TYPE_APPLICATIONS_MENU_PLUGIN            (applications_menu_plugin_get_type ())
-#define XFCE_APPLICATIONS_MENU_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_APPLICATIONS_MENU_PLUGIN, ApplicationsMenuPlugin))
-#define XFCE_APPLICATIONS_MENU_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_APPLICATIONS_MENU_PLUGIN, ApplicationsMenuPluginClass))
-#define XFCE_IS_APPLICATIONS_MENU_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_APPLICATIONS_MENU_PLUGIN))
-#define XFCE_IS_APPLICATIONS_MENU_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_APPLICATIONS_MENU_PLUGIN))
-#define XFCE_APPLICATIONS_MENU_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_APPLICATIONS_MENU_PLUGIN, ApplicationsMenuPluginClass))
-
-GType applications_menu_plugin_get_type      (void) G_GNUC_CONST;
-
-void  applications_menu_plugin_register_type (XfcePanelTypeModule *type_module);
+void applications_menu_plugin_register_type (XfcePanelTypeModule *type_module);
 
 G_END_DECLS
 

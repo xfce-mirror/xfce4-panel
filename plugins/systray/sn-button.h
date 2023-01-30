@@ -28,17 +28,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct _SnButtonClass SnButtonClass;
-typedef struct _SnButton      SnButton;
-
-#define XFCE_TYPE_SN_BUTTON            (sn_button_get_type ())
-#define XFCE_SN_BUTTON(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_SN_BUTTON, SnButton))
-#define XFCE_SN_BUTTON_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_SN_BUTTON, SnButtonClass))
-#define XFCE_IS_SN_BUTTON(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_SN_BUTTON))
-#define XFCE_IS_SN_BUTTON_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_SN_BUTTON))
-#define XFCE_SN_BUTTON_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_SN_BUTTON, SnButtonClass))
-
-GType                  sn_button_get_type                      (void) G_GNUC_CONST;
+#define XFCE_TYPE_SN_BUTTON (sn_button_get_type ())
+G_DECLARE_FINAL_TYPE (SnButton, sn_button, XFCE, SN_BUTTON, GtkButton)
 
 SnItem                *sn_button_get_item                      (SnButton                *button);
 

@@ -19,7 +19,7 @@
 #ifndef __CLOCK_TIME_H__
 #define __CLOCK_TIME_H__
 
-#include <glib.h>
+#include <glib-object.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
 
@@ -30,20 +30,10 @@ G_BEGIN_DECLS
 #define CLOCK_INTERVAL_SECOND (1)
 #define CLOCK_INTERVAL_MINUTE (60)
 
-typedef struct _ClockTime          ClockTime;
-typedef struct _ClockTimeClass     ClockTimeClass;
 typedef struct _ClockTimeTimeout   ClockTimeTimeout;
 
-#define XFCE_TYPE_CLOCK_TIME              (clock_time_get_type ())
-#define XFCE_CLOCK_TIME(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_CLOCK_TIME, ClockTime))
-#define XFCE_CLOCK_TIME_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_CLOCK_TIME, ClockTimeClass))
-#define XFCE_IS_CLOCK_TIME(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_CLOCK_TIME))
-#define XFCE_IS_CLOCK_TIME_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_CLOCK_TIME))
-#define XFCE_CLOCK_TIME_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_CLOCK_TIME, ClockTimeClass))
-
-
-
-GType               clock_time_get_type               (void) G_GNUC_CONST;
+#define XFCE_TYPE_CLOCK_TIME (clock_time_get_type ())
+G_DECLARE_FINAL_TYPE (ClockTime, clock_time, XFCE, CLOCK_TIME, GObject)
 
 void                clock_time_register_type          (XfcePanelTypeModule *type_module);
 

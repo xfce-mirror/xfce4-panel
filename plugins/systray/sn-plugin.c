@@ -49,7 +49,6 @@
 #include "sn-item.h"
 #include "sn-plugin.h"
 
-#define BUTTON_SIZE   (16)
 
 
 static void                  sn_plugin_construct                     (XfcePanelPlugin         *panel_plugin);

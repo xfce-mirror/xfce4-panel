@@ -22,9 +22,7 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
-#include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-private.h>
 #include <common/panel-xfconf.h>
@@ -61,7 +59,7 @@ static void     separator_plugin_orientation_changed       (XfcePanelPlugin     
 
 
 
-enum _SeparatorPluginStyle
+typedef enum _SeparatorPluginStyle
 {
   SEPARATOR_PLUGIN_STYLE_TRANSPARENT = 0,
   SEPARATOR_PLUGIN_STYLE_SEPARATOR,
@@ -73,13 +71,7 @@ enum _SeparatorPluginStyle
   SEPARATOR_PLUGIN_STYLE_MIN = SEPARATOR_PLUGIN_STYLE_TRANSPARENT,
   SEPARATOR_PLUGIN_STYLE_MAX = SEPARATOR_PLUGIN_STYLE_WRAP,
   SEPARATOR_PLUGIN_STYLE_DEFAULT = SEPARATOR_PLUGIN_STYLE_SEPARATOR
-};
-
-struct _SeparatorPluginClass
-{
-  /* parent class */
-  XfcePanelPluginClass __parent__;
-};
+} SeparatorPluginStyle;
 
 struct _SeparatorPlugin
 {

@@ -19,19 +19,13 @@
 #ifndef __CLOCK_ANALOG_H__
 #define __CLOCK_ANALOG_H__
 
+#include <gtk/gtk.h>
+#include <libxfce4panel/libxfce4panel.h>
+
 G_BEGIN_DECLS
 
-typedef struct _XfceClockAnalogClass XfceClockAnalogClass;
-typedef struct _XfceClockAnalog      XfceClockAnalog;
-
-#define XFCE_CLOCK_TYPE_ANALOG            (xfce_clock_analog_get_type ())
-#define XFCE_CLOCK_ANALOG(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_CLOCK_TYPE_ANALOG, XfceClockAnalog))
-#define XFCE_CLOCK_ANALOG_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_CLOCK_TYPE_ANALOG, XfceClockAnalogClass))
-#define XFCE_CLOCK_IS_ANALOG(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_CLOCK_TYPE_ANALOG))
-#define XFCE_CLOCK_IS_ANALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_CLOCK_TYPE_ANALOG))
-#define XFCE_CLOCK_ANALOG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_CLOCK_TYPE_ANALOG, XfceClockAnalogClass))
-
-GType      xfce_clock_analog_get_type      (void) G_GNUC_CONST;
+#define XFCE_CLOCK_TYPE_ANALOG (xfce_clock_analog_get_type ())
+G_DECLARE_FINAL_TYPE (XfceClockAnalog, xfce_clock_analog, XFCE_CLOCK, ANALOG, GtkImage)
 
 void       xfce_clock_analog_register_type (XfcePanelTypeModule *type_module);
 

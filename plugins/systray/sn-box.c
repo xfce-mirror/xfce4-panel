@@ -78,11 +78,6 @@ enum
   PROP_HAS_HIDDEN
 };
 
-struct _SnBoxClass
-{
-  GtkContainerClass    __parent__;
-};
-
 struct _SnBox
 {
   GtkContainer         __parent__;

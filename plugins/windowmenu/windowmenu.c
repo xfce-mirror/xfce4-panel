@@ -20,9 +20,9 @@
 #include <config.h>
 #endif
 
+#include <gtk/gtk.h>
 #include <exo/exo.h>
 #include <libxfce4ui/libxfce4ui.h>
-#include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4windowing/libxfce4windowing.h>
 #include <libxfce4windowingui/libxfce4windowingui.h>
 #include <common/panel-xfconf.h>
@@ -33,15 +33,9 @@
 #include "windowmenu.h"
 #include "windowmenu-dialog_ui.h"
 
-#define ARROW_BUTTON_SIZE       (12)
 #define DEFAULT_ICON_LUCENCY    (50)
 #define DEFAULT_MAX_WIDTH_CHARS (24)
 #define DEFAULT_ELLIPSIZE_MODE  (PANGO_ELLIPSIZE_MIDDLE)
-
-struct _WindowMenuPluginClass
-{
-  XfcePanelPluginClass __parent__;
-};
 
 struct _WindowMenuPlugin
 {

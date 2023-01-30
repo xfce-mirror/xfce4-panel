@@ -26,13 +26,6 @@
 
 G_BEGIN_DECLS
 
-typedef struct _SnPluginClass SnPluginClass;
-typedef struct _SnPlugin      SnPlugin;
-typedef struct _SystrayChild       SystrayChild;
-typedef enum   _SystrayChildState  SystrayChildState;
-
-GType systray_plugin_get_type      (void) G_GNUC_CONST;
-
 void  systray_plugin_box_draw            (GtkWidget             *box,
                                           cairo_t               *cr,
                                           gpointer               user_data);
