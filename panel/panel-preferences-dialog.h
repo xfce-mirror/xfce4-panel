@@ -30,17 +30,8 @@ typedef gulong Window;
 
 G_BEGIN_DECLS
 
-typedef struct _PanelPreferencesDialogClass PanelPreferencesDialogClass;
-typedef struct _PanelPreferencesDialog      PanelPreferencesDialog;
-
-#define PANEL_TYPE_PREFERENCES_DIALOG            (panel_preferences_dialog_get_type ())
-#define PANEL_PREFERENCES_DIALOG(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PANEL_TYPE_PREFERENCES_DIALOG, PanelPreferencesDialog))
-#define PANEL_PREFERENCES_DIALOG_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PANEL_TYPE_PREFERENCES_DIALOG, PanelPreferencesDialogClass))
-#define PANEL_IS_PREFERENCES_DIALOG(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PANEL_TYPE_PREFERENCES_DIALOG))
-#define PANEL_IS_PREFERENCES_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_PREFERENCES_DIALOG))
-#define PANEL_PREFERENCES_DIALOG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_PREFERENCES_DIALOG, PanelPreferencesDialogClass))
-
-GType      panel_preferences_dialog_get_type     (void) G_GNUC_CONST;
+#define PANEL_TYPE_PREFERENCES_DIALOG (panel_preferences_dialog_get_type ())
+G_DECLARE_FINAL_TYPE (PanelPreferencesDialog, panel_preferences_dialog, PANEL, PREFERENCES_DIALOG, GtkBuilder)
 
 void       panel_preferences_dialog_show         (PanelWindow *active);
 

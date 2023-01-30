@@ -46,7 +46,6 @@
 #include <common/panel-utils.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
-#include <panel/panel-base-window.h>
 #include <panel/panel-window.h>
 #include <panel/panel-item-dialog.h>
 #include <panel/panel-preferences-dialog.h>
@@ -301,11 +300,6 @@ enum
   STRUT_BOTTOM_START_X,
   STRUT_BOTTOM_END_X,
   N_STRUTS
-};
-
-struct _PanelWindowClass
-{
-  PanelBaseWindowClass __parent__;
 };
 
 struct _PanelWindow

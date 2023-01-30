@@ -24,9 +24,6 @@
 #include <string.h>
 #endif
 
-#include <libxfce4ui/libxfce4ui.h>
-#include <libxfce4util/libxfce4util.h>
-
 #include <common/panel-private.h>
 #include <common/panel-utils.h>
 #include <libxfce4panel/libxfce4panel.h>
@@ -40,8 +37,7 @@
 
 
 
-#define BORDER         (6)
-#define ITEMS_HELP_URL "http://www.xfce.org"
+#define BORDER (6)
 
 
 
@@ -97,11 +93,6 @@ static void         panel_item_dialog_text_renderer          (GtkTreeViewColumn 
                                                               gpointer            user_data);
 
 
-
-struct _PanelItemDialogClass
-{
-  XfceTitledDialogClass __parent__;
-};
 
 struct _PanelItemDialog
 {

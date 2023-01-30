@@ -21,19 +21,13 @@
 
 #include <gtk/gtk.h>
 
+/* includes libxfce4ui and the definition of glib_autoptr_clear_XfceTitledDialog */
+#include <panel/panel-tic-tac-toe.h>
+
 G_BEGIN_DECLS
 
-typedef struct _PanelItemDialogClass PanelItemDialogClass;
-typedef struct _PanelItemDialog      PanelItemDialog;
-
-#define PANEL_TYPE_ITEM_DIALOG            (panel_item_dialog_get_type ())
-#define PANEL_ITEM_DIALOG(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PANEL_TYPE_ITEM_DIALOG, PanelItemDialog))
-#define PANEL_ITEM_DIALOG_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PANEL_TYPE_ITEM_DIALOG, PanelItemDialogClass))
-#define PANEL_IS_ITEM_DIALOG(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PANEL_TYPE_ITEM_DIALOG))
-#define PANEL_IS_ITEM_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_ITEM_DIALOG))
-#define PANEL_ITEM_DIALOG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_ITEM_DIALOG, PanelItemDialogClass))
-
-GType      panel_item_dialog_get_type     (void) G_GNUC_CONST;
+#define PANEL_TYPE_ITEM_DIALOG (panel_item_dialog_get_type ())
+G_DECLARE_FINAL_TYPE (PanelItemDialog, panel_item_dialog, PANEL, ITEM_DIALOG, XfceTitledDialog)
 
 void       panel_item_dialog_show         (PanelWindow *active);
 

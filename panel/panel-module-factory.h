@@ -26,20 +26,11 @@
 
 G_BEGIN_DECLS
 
-typedef struct _PanelModuleFactoryClass PanelModuleFactoryClass;
-typedef struct _PanelModuleFactory      PanelModuleFactory;
-
-#define PANEL_TYPE_MODULE_FACTORY            (panel_module_factory_get_type ())
-#define PANEL_MODULE_FACTORY(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PANEL_TYPE_MODULE_FACTORY, PanelModuleFactory))
-#define PANEL_MODULE_FACTORY_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PANEL_TYPE_MODULE_FACTORY, PanelModuleFactoryClass))
-#define PANEL_IS_MODULE_FACTORY(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PANEL_TYPE_MODULE_FACTORY))
-#define PANEL_IS_MODULE_FACTORY_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_MODULE_FACTORY))
-#define PANEL_MODULE_FACTORY_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_MODULE_FACTORY, PanelModuleFactoryClass))
+#define PANEL_TYPE_MODULE_FACTORY (panel_module_factory_get_type ())
+G_DECLARE_FINAL_TYPE (PanelModuleFactory, panel_module_factory, PANEL, MODULE_FACTORY, GObject)
 
 #define LAUNCHER_PLUGIN_NAME  "launcher"
 #define SEPARATOR_PLUGIN_NAME "separator"
-
-GType               panel_module_factory_get_type            (void) G_GNUC_CONST;
 
 PanelModuleFactory *panel_module_factory_get                 (void);
 

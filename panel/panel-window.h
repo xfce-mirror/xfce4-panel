@@ -22,19 +22,12 @@
 #include <gtk/gtk.h>
 #include <xfconf/xfconf.h>
 
+#include <panel/panel-base-window.h>
+
 G_BEGIN_DECLS
 
-typedef struct _PanelWindowClass PanelWindowClass;
-typedef struct _PanelWindow      PanelWindow;
-
-#define PANEL_TYPE_WINDOW            (panel_window_get_type ())
-#define PANEL_WINDOW(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PANEL_TYPE_WINDOW, PanelWindow))
-#define PANEL_WINDOW_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PANEL_TYPE_WINDOW, PanelWindowClass))
-#define PANEL_IS_WINDOW(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PANEL_TYPE_WINDOW))
-#define PANEL_IS_WINDOW_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_WINDOW))
-#define PANEL_WINDOW_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_WINDOW, PanelWindowClass))
-
-GType      panel_window_get_type                  (void) G_GNUC_CONST;
+#define PANEL_TYPE_WINDOW (panel_window_get_type ())
+G_DECLARE_FINAL_TYPE (PanelWindow, panel_window, PANEL, WINDOW, PanelBaseWindow)
 
 GtkWidget *panel_window_new                       (GdkScreen   *screen,
                                                    gint         id,

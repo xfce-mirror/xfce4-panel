@@ -27,9 +27,6 @@
 #include <string.h>
 #endif
 
-#include <libxfce4ui/libxfce4ui.h>
-#include <libxfce4util/libxfce4util.h>
-
 #include <common/panel-private.h>
 #include <panel/panel-tic-tac-toe.h>
 
@@ -53,11 +50,6 @@ static void panel_tic_tac_toe_new_game       (PanelTicTacToe *dialog);
 #define winner_hex(winner,state)                  ((((winner) - 1) << 18) | (state))
 
 
-
-struct _PanelTicTacToeClass
-{
-  XfceTitledDialogClass __parent__;
-};
 
 struct _PanelTicTacToe
 {

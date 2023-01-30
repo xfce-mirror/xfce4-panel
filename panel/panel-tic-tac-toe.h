@@ -20,20 +20,15 @@
 #define __PANEL_TIC_TAC_TOE_H__
 
 #include <gtk/gtk.h>
+#include <libxfce4ui/libxfce4ui.h>
 
 G_BEGIN_DECLS
 
-typedef struct _PanelTicTacToeClass PanelTicTacToeClass;
-typedef struct _PanelTicTacToe      PanelTicTacToe;
-
-#define PANEL_TYPE_TIC_TAC_TOE            (panel_tic_tac_toe_get_type ())
-#define PANEL_TIC_TAC_TOE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PANEL_TYPE_TIC_TAC_TOE, PanelTicTacToe))
-#define PANEL_TIC_TAC_TOE_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PANEL_TYPE_TIC_TAC_TOE, PanelTicTacToeClass))
-#define PANEL_IS_TIC_TAC_TOE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PANEL_TYPE_TIC_TAC_TOE))
-#define PANEL_IS_TIC_TAC_TOE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_TIC_TAC_TOE))
-#define PANEL_TIC_TAC_TOE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_TIC_TAC_TOE, PanelTicTacToeClass))
-
-GType      panel_tic_tac_toe_get_type (void) G_GNUC_CONST;
+#define PANEL_TYPE_TIC_TAC_TOE (panel_tic_tac_toe_get_type ())
+#ifndef glib_autoptr_clear_XfceTitledDialog
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (XfceTitledDialog, g_object_unref)
+#endif
+G_DECLARE_FINAL_TYPE (PanelTicTacToe, panel_tic_tac_toe, PANEL, TIC_TAC_TOE, XfceTitledDialog)
 
 void       panel_tic_tac_toe_show     (void);
 

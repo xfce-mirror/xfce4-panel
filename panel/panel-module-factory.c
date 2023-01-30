@@ -60,11 +60,6 @@ enum
   LAST_SIGNAL
 };
 
-struct _PanelModuleFactoryClass
-{
-  GObjectClass __parent__;
-};
-
 struct _PanelModuleFactory
 {
   GObject  __parent__;

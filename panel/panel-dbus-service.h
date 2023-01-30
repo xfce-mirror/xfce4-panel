@@ -20,21 +20,10 @@
 #define __PANEL_DBUS_SERVICE_H__
 
 #include <glib.h>
-#include <common/panel-dbus.h>
+#include <panel/panel-gdbus-exported-service.h>
 
-typedef struct _PanelDBusServiceClass PanelDBusServiceClass;
-typedef struct _PanelDBusService      PanelDBusService;
-
-#define PANEL_TYPE_DBUS_SERVICE            (panel_dbus_service_get_type ())
-#define PANEL_DBUS_SERVICE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PANEL_TYPE_DBUS_SERVICE, PanelDBusService))
-#define PANEL_DBUS_CLASS_SERVICE(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PANEL_TYPE_DBUS_SERVICE, PanelDBusServiceClass))
-#define PANEL_IS_DBUS_SERVICE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PANEL_TYPE_DBUS_SERVICE))
-#define PANEL_IS_DBUS_SERVICE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_DBUS_SERVICE))
-#define PANEL_DBUS_SERVICE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_DBUS_SERVICE, PanelDBusServiceClass))
-
-
-
-GType               panel_dbus_service_get_type    (void) G_GNUC_CONST;
+#define PANEL_TYPE_DBUS_SERVICE (panel_dbus_service_get_type ())
+G_DECLARE_FINAL_TYPE (PanelDBusService, panel_dbus_service, PANEL, DBUS_SERVICE, XfcePanelExportedServiceSkeleton)
 
 PanelDBusService   *panel_dbus_service_get         (void);
 

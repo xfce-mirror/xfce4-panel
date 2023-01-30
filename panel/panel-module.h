@@ -25,15 +25,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct _PanelModuleClass  PanelModuleClass;
-typedef struct _PanelModule       PanelModule;
-
-#define PANEL_TYPE_MODULE            (panel_module_get_type ())
-#define PANEL_MODULE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PANEL_TYPE_MODULE, PanelModule))
-#define PANEL_MODULE_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PANEL_TYPE_MODULE, PanelModuleClass))
-#define PANEL_IS_MODULE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PANEL_TYPE_MODULE))
-#define PANEL_IS_MODULE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_MODULE))
-#define PANEL_MODULE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_MODULE, PanelModuleClass))
+#define PANEL_TYPE_MODULE (panel_module_get_type ())
+G_DECLARE_FINAL_TYPE (PanelModule, panel_module, PANEL, MODULE, GTypeModule)
 
 typedef enum
 {
@@ -44,8 +37,6 @@ typedef enum
 } PanelModuleRunMode;
 
 
-
-GType        panel_module_get_type                 (void) G_GNUC_CONST;
 
 PanelModule *panel_module_new_from_desktop_file    (const gchar             *filename,
                                                     const gchar             *name,

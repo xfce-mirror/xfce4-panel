@@ -23,17 +23,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct _PanelItembarClass PanelItembarClass;
-typedef struct _PanelItembar      PanelItembar;
-
-#define PANEL_TYPE_ITEMBAR            (panel_itembar_get_type ())
-#define PANEL_ITEMBAR(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PANEL_TYPE_ITEMBAR, PanelItembar))
-#define PANEL_ITEMBAR_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PANEL_TYPE_ITEMBAR, PanelItembarClass))
-#define PANEL_IS_ITEMBAR(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PANEL_TYPE_ITEMBAR))
-#define PANEL_IS_ITEMBAR_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_ITEMBAR))
-#define PANEL_ITEMBAR_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_ITEMBAR, PanelItembarClass))
-
-GType           panel_itembar_get_type                (void) G_GNUC_CONST;
+#define PANEL_TYPE_ITEMBAR (panel_itembar_get_type ())
+G_DECLARE_FINAL_TYPE (PanelItembar, panel_itembar, PANEL, ITEMBAR, GtkContainer)
 
 GtkWidget      *panel_itembar_new                     (void) G_GNUC_MALLOC;
 

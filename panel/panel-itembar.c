@@ -86,11 +86,6 @@ static PanelItembarChild *panel_itembar_get_child            (PanelItembar    *i
 
 
 
-struct _PanelItembarClass
-{
-  GtkContainerClass __parent__;
-};
-
 struct _PanelItembar
 {
   GtkContainer __parent__;

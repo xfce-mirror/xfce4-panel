@@ -109,11 +109,6 @@ enum
   PROP_ITEMS_CHANGED
 };
 
-struct _PanelApplicationClass
-{
-  GObjectClass __parent__;
-};
-
 struct _PanelApplication
 {
   GObject  __parent__;
@@ -239,7 +234,7 @@ panel_application_init (PanelApplication *application)
   application->factory = panel_module_factory_get ();
 
   /* start the autosave timer for plugins */
-  application->autosave_timer_id = g_timeout_add_seconds (60 * 10,
+  application->autosave_timer_id = g_timeout_add_seconds (AUTOSAVE_INTERVAL,
       panel_application_autosave_timer, application);
 
   /* warn the user about restricted features on Wayland */

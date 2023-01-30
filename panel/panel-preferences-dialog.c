@@ -46,8 +46,6 @@
 #include <panel/panel-preferences-dialog-ui.h>
 #include <panel/panel-plugin-external.h>
 
-#define PREFERENCES_HELP_URL "http://www.xfce.org"
-
 
 
 static void                     panel_preferences_dialog_finalize               (GObject                *object);
@@ -133,11 +131,6 @@ enum
 {
   OUTPUT_NAME,
   OUTPUT_TITLE
-};
-
-struct _PanelPreferencesDialogClass
-{
-  GtkBuilderClass __parent__;
 };
 
 struct _PanelPreferencesDialog

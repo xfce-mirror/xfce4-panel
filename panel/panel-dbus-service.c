@@ -38,8 +38,6 @@
 #include <panel/panel-item-dialog.h>
 #include <panel/panel-module-factory.h>
 
-#include <panel/panel-gdbus-exported-service.h>
-
 static void      panel_dbus_service_finalize                   (GObject                 *object);
 static void      panel_dbus_service_plugin_event_result        (XfcePanelPluginProvider *prev_provider,
                                                                 guint                    handle,
@@ -77,11 +75,6 @@ static gboolean  panel_dbus_service_terminate                  (XfcePanelExporte
 
 
 
-
-struct _PanelDBusServiceClass
-{
-  XfcePanelExportedServiceSkeletonClass __parent__;
-};
 
 struct _PanelDBusService
 {

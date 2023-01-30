@@ -55,11 +55,6 @@ static void      panel_module_plugin_destroyed (gpointer          user_data,
 
 
 
-struct _PanelModuleClass
-{
-  GTypeModuleClass __parent__;
-};
-
 enum _PanelModuleUnique
 {
   UNIQUE_FALSE,

@@ -24,15 +24,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct _PanelApplicationClass PanelApplicationClass;
-typedef struct _PanelApplication      PanelApplication;
-
-#define PANEL_TYPE_APPLICATION            (panel_application_get_type ())
-#define PANEL_APPLICATION(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PANEL_TYPE_APPLICATION, PanelApplication))
-#define PANEL_APPLICATION_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PANEL_TYPE_APPLICATION, PanelApplicationClass))
-#define PANEL_IS_APPLICATION(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PANEL_TYPE_APPLICATION))
-#define PANEL_IS_APPLICATION_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_APPLICATION))
-#define PANEL_APPLICATION_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_APPLICATION, PanelApplicationClass))
+#define PANEL_TYPE_APPLICATION (panel_application_get_type ())
+G_DECLARE_FINAL_TYPE (PanelApplication, panel_application, PANEL, APPLICATION, GObject)
 
 typedef enum
 {
@@ -43,8 +36,6 @@ typedef enum
 PanelSaveTypes;
 #define SAVE_EVERYTHING (SAVE_PLUGIN_PROVIDERS | SAVE_PLUGIN_IDS | SAVE_PANEL_IDS)
 
-
-GType             panel_application_get_type          (void) G_GNUC_CONST;
 
 PanelApplication *panel_application_get               (void);
 

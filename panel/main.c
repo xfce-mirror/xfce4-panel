@@ -47,6 +47,7 @@
 
 #include <common/panel-private.h>
 #include <common/panel-debug.h>
+#include <common/panel-dbus.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <panel/panel-application.h>
 #include <panel/panel-dbus-service.h>
