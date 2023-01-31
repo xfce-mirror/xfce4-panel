@@ -149,7 +149,7 @@ separator_plugin_get_property (GObject    *object,
                                GValue     *value,
                                GParamSpec *pspec)
 {
-  SeparatorPlugin *plugin = XFCE_SEPARATOR_PLUGIN (object);
+  SeparatorPlugin *plugin = SEPARATOR_PLUGIN (object);
   gboolean         expand;
 
   switch (prop_id)
@@ -177,7 +177,7 @@ separator_plugin_set_property (GObject      *object,
                                const GValue *value,
                                GParamSpec   *pspec)
 {
-  SeparatorPlugin *plugin = XFCE_SEPARATOR_PLUGIN (object);
+  SeparatorPlugin *plugin = SEPARATOR_PLUGIN (object);
 
   switch (prop_id)
     {
@@ -208,7 +208,7 @@ static gboolean
 separator_plugin_draw (GtkWidget *widget,
                        cairo_t   *cr)
 {
-  SeparatorPlugin  *plugin = XFCE_SEPARATOR_PLUGIN (widget);
+  SeparatorPlugin  *plugin = SEPARATOR_PLUGIN (widget);
   GtkAllocation     alloc;
   gdouble           x, y;
   guint             dotcount, i;
@@ -311,7 +311,7 @@ separator_plugin_draw (GtkWidget *widget,
 static void
 separator_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
-  SeparatorPlugin     *plugin = XFCE_SEPARATOR_PLUGIN (panel_plugin);
+  SeparatorPlugin     *plugin = SEPARATOR_PLUGIN (panel_plugin);
   const PanelProperty  properties[] =
   {
     { "style", G_TYPE_UINT },
@@ -354,12 +354,12 @@ separator_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 static void
 separator_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
-  SeparatorPlugin *plugin = XFCE_SEPARATOR_PLUGIN (panel_plugin);
+  SeparatorPlugin *plugin = SEPARATOR_PLUGIN (panel_plugin);
   GtkBuilder      *builder;
   GObject         *dialog;
   GObject         *style, *expand;
 
-  panel_return_if_fail (XFCE_IS_SEPARATOR_PLUGIN (plugin));
+  panel_return_if_fail (SEPARATOR_IS_PLUGIN (plugin));
 
   /* setup the dialog */
   builder = panel_utils_builder_new (panel_plugin, separator_dialog_ui,

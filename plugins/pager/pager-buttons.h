@@ -25,8 +25,8 @@
 
 G_BEGIN_DECLS
 
-#define XFCE_TYPE_PAGER_BUTTONS (pager_buttons_get_type ())
-G_DECLARE_FINAL_TYPE (PagerButtons, pager_buttons, XFCE, PAGER_BUTTONS, XfcePanelPlugin)
+#define PAGER_TYPE_BUTTONS (pager_buttons_get_type ())
+G_DECLARE_FINAL_TYPE (PagerButtons, pager_buttons, PAGER, BUTTONS, XfcePanelPlugin)
 
 void       pager_buttons_register_type   (XfcePanelTypeModule *type_module);
 

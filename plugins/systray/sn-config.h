@@ -24,8 +24,8 @@
 
 G_BEGIN_DECLS
 
-#define XFCE_TYPE_SN_CONFIG (sn_config_get_type ())
-G_DECLARE_FINAL_TYPE (SnConfig, sn_config, XFCE, SN_CONFIG, GObject)
+#define SN_TYPE_CONFIG (sn_config_get_type ())
+G_DECLARE_FINAL_TYPE (SnConfig, sn_config, SN, CONFIG, GObject)
 
 #define DEFAULT_ICON_SIZE          22
 #define DEFAULT_SINGLE_ROW         FALSE

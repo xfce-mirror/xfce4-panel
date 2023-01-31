@@ -168,7 +168,7 @@ sn_icon_box_new (SnItem   *item,
   SnIconBox   *box = g_object_new (XFCE_TYPE_SN_ICON_BOX, NULL);
   GtkSettings *settings;
 
-  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), NULL);
+  g_return_val_if_fail (SN_IS_CONFIG (config), NULL);
 
   box->item = item;
   box->config = config;

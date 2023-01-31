@@ -23,8 +23,8 @@
 
 G_BEGIN_DECLS
 
-#define XFCE_TYPE_PAGER_PLUGIN (pager_plugin_get_type ())
-G_DECLARE_FINAL_TYPE (PagerPlugin, pager_plugin, XFCE, PAGER_PLUGIN, XfcePanelPlugin)
+#define PAGER_TYPE_PLUGIN (pager_plugin_get_type ())
+G_DECLARE_FINAL_TYPE (PagerPlugin, pager_plugin, PAGER, PLUGIN, XfcePanelPlugin)
 
 void pager_plugin_register_type (XfcePanelTypeModule *type_module);
 

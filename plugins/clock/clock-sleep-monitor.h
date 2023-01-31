@@ -22,8 +22,8 @@
 
 G_BEGIN_DECLS
 
-#define XFCE_TYPE_CLOCK_SLEEP_MONITOR (clock_sleep_monitor_get_type ())
-G_DECLARE_FINAL_TYPE (ClockSleepMonitor, clock_sleep_monitor, XFCE, CLOCK_SLEEP_MONITOR, GObject)
+#define CLOCK_TYPE_SLEEP_MONITOR (clock_sleep_monitor_get_type ())
+G_DECLARE_FINAL_TYPE (ClockSleepMonitor, clock_sleep_monitor, CLOCK, SLEEP_MONITOR, GObject)
 
 /* Factory function that tries to instantiate a sleep monitor. Returns
  * NULL if no implementation could be found or instantiated.

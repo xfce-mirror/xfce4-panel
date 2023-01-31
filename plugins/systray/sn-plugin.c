@@ -117,7 +117,7 @@ sn_plugin_init (SnPlugin *plugin)
 static void
 sn_plugin_free (XfcePanelPlugin *panel_plugin)
 {
-  SnPlugin *plugin = XFCE_SN_PLUGIN (panel_plugin);
+  SnPlugin *plugin = SN_PLUGIN (panel_plugin);
 
   /* Systray */
   /* stop pending idle startup */
@@ -159,7 +159,7 @@ static gboolean
 sn_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                         gint             size)
 {
-  SnPlugin *plugin = XFCE_SN_PLUGIN (panel_plugin);
+  SnPlugin *plugin = SN_PLUGIN (panel_plugin);
 
   sn_config_set_size (plugin->config,
                       size,
@@ -180,7 +180,7 @@ static void
 sn_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
                         XfcePanelPluginMode  mode)
 {
-  SnPlugin       *plugin = XFCE_SN_PLUGIN (panel_plugin);
+  SnPlugin       *plugin = SN_PLUGIN (panel_plugin);
   GtkOrientation  orientation;
   GtkOrientation  panel_orientation;
 
@@ -215,7 +215,7 @@ sn_plugin_unblock_autohide (gpointer  data,
 static void
 sn_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
-  SnPlugin *plugin = XFCE_SN_PLUGIN (panel_plugin);
+  SnPlugin *plugin = SN_PLUGIN (panel_plugin);
   SnDialog *dialog;
 
   dialog = sn_dialog_new (plugin->config, gtk_widget_get_screen (GTK_WIDGET (plugin)));
@@ -258,7 +258,7 @@ static void
 sn_plugin_item_removed (SnPlugin *plugin,
                         SnItem   *item)
 {
-  sn_box_remove_item (XFCE_SN_BOX (plugin->sn_box), item);
+  sn_box_remove_item (SN_BOX (plugin->sn_box), item);
 }
 #endif
 
@@ -302,15 +302,15 @@ sn_plugin_button_toggled (GtkWidget *button,
   gboolean show_hidden;
   GtkOrientation orientation;
 
-  panel_return_if_fail (XFCE_IS_SN_PLUGIN (plugin));
+  panel_return_if_fail (SN_IS_PLUGIN (plugin));
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
   panel_return_if_fail (plugin->button == button);
 
   show_hidden = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
-  sn_box_set_show_hidden (XFCE_SN_BOX (plugin->sn_box), show_hidden);
+  sn_box_set_show_hidden (SN_BOX (plugin->sn_box), show_hidden);
 #ifdef HAVE_GTK_X11
   if (plugin->systray_box != NULL)
-    systray_box_set_show_hidden (XFCE_SYSTRAY_BOX (plugin->systray_box), show_hidden);
+    systray_box_set_show_hidden (SYSTRAY_BOX (plugin->systray_box), show_hidden);
 #endif
 
   orientation = xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin));
@@ -327,7 +327,7 @@ sn_plugin_button_toggled (GtkWidget *button,
 static void
 sn_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
-  SnPlugin *plugin = XFCE_SN_PLUGIN (panel_plugin);
+  SnPlugin *plugin = SN_PLUGIN (panel_plugin);
 
 #ifdef HAVE_GTK_X11
   plugin->manager = NULL;

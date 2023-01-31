@@ -27,8 +27,8 @@
 
 G_BEGIN_DECLS
 
-#define XFCE_TYPE_SYSTRAY_MANAGER  (systray_manager_get_type ())
-G_DECLARE_FINAL_TYPE (SystrayManager, systray_manager, XFCE, SYSTRAY_MANAGER, GObject)
+#define SYSTRAY_TYPE_MANAGER  (systray_manager_get_type ())
+G_DECLARE_FINAL_TYPE (SystrayManager, systray_manager, SYSTRAY, MANAGER, GObject)
 
 void            systray_manager_register_type        (XfcePanelTypeModule *type_module);
 

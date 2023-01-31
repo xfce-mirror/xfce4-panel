@@ -260,7 +260,7 @@ applications_menu_plugin_get_property (GObject    *object,
                                        GValue     *value,
                                        GParamSpec *pspec)
 {
-  ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (object);
+  ApplicationsMenuPlugin *plugin = APPLICATIONS_MENU_PLUGIN (object);
 
   switch (prop_id)
     {
@@ -322,7 +322,7 @@ applications_menu_plugin_set_property (GObject      *object,
                                        const GValue *value,
                                        GParamSpec   *pspec)
 {
-  ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (object);
+  ApplicationsMenuPlugin *plugin = APPLICATIONS_MENU_PLUGIN (object);
   gboolean                force_a_resize = FALSE;
 
   switch (prop_id)
@@ -420,7 +420,7 @@ applications_menu_plugin_set_property (GObject      *object,
 static void
 applications_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
-  ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (panel_plugin);
+  ApplicationsMenuPlugin *plugin = APPLICATIONS_MENU_PLUGIN (panel_plugin);
   const PanelProperty  properties[] =
   {
     { "show-generic-names", G_TYPE_BOOLEAN },
@@ -461,7 +461,7 @@ applications_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
 static void
 applications_menu_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
-  ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (panel_plugin);
+  ApplicationsMenuPlugin *plugin = APPLICATIONS_MENU_PLUGIN (panel_plugin);
   GtkIconTheme           *icon_theme;
 
   if (plugin->menu != NULL)
@@ -498,7 +498,7 @@ static gboolean
 applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                                        gint             size)
 {
-  ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (panel_plugin);
+  ApplicationsMenuPlugin *plugin = APPLICATIONS_MENU_PLUGIN (panel_plugin);
   XfcePanelPluginMode     mode;
   GtkRequisition          label_size;
   GtkOrientation          orientation;
@@ -560,7 +560,7 @@ static void
 applications_menu_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
                                        XfcePanelPluginMode  mode)
 {
-  ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (panel_plugin);
+  ApplicationsMenuPlugin *plugin = APPLICATIONS_MENU_PLUGIN (panel_plugin);
   gint                    angle;
 
   angle = (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL) ? 270 : 0;
@@ -579,7 +579,7 @@ applications_menu_plugin_configure_plugin_file_set (GtkFileChooserButton   *butt
   gchar *filename;
 
   panel_return_if_fail (GTK_IS_FILE_CHOOSER_BUTTON (button));
-  panel_return_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin));
+  panel_return_if_fail (APPLICATIONS_MENU_IS_PLUGIN (plugin));
 
   filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (button));
   g_object_set (G_OBJECT (plugin), "custom-menu-file", filename, NULL);
@@ -595,7 +595,7 @@ applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget              *
   GtkWidget *chooser, *image;
   gchar     *icon;
 
-  panel_return_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin));
+  panel_return_if_fail (APPLICATIONS_MENU_IS_PLUGIN (plugin));
 
   chooser = exo_icon_chooser_dialog_new (_("Select An Icon"),
                                          GTK_WINDOW (gtk_widget_get_toplevel (button)),
@@ -632,7 +632,7 @@ applications_menu_plugin_configure_plugin_edit (GtkWidget              *button,
 {
   GError      *error = NULL;
 
-  panel_return_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin));
+  panel_return_if_fail (APPLICATIONS_MENU_IS_PLUGIN (plugin));
   panel_return_if_fail (GTK_IS_WIDGET (button));
 
   if (!xfce_spawn_command_line (gtk_widget_get_screen (button), plugin->menu_editor,
@@ -648,7 +648,7 @@ applications_menu_plugin_configure_plugin_edit (GtkWidget              *button,
 static void
 applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
-  ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (panel_plugin);
+  ApplicationsMenuPlugin *plugin = APPLICATIONS_MENU_PLUGIN (panel_plugin);
   GtkBuilder             *builder;
   GtkWidget              *image;
   GObject                *dialog, *object, *object2;
@@ -740,7 +740,7 @@ applications_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
                                        const gchar     *name,
                                        const GValue    *value)
 {
-  ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (panel_plugin);
+  ApplicationsMenuPlugin *plugin = APPLICATIONS_MENU_PLUGIN (panel_plugin);
 
   panel_return_val_if_fail (value == NULL || G_IS_VALUE (value), FALSE);
 
@@ -801,7 +801,7 @@ applications_menu_plugin_set_garcon_menu (ApplicationsMenuPlugin *plugin)
   gchar      *filename;
   GFile      *file;
 
-  panel_return_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin));
+  panel_return_if_fail (APPLICATIONS_MENU_IS_PLUGIN (plugin));
   panel_return_if_fail (GARCON_GTK_IS_MENU (plugin->menu));
 
   /* load the custom menu if set */
@@ -839,7 +839,7 @@ applications_menu_plugin_menu (GtkWidget              *button,
                                GdkEventButton         *event,
                                ApplicationsMenuPlugin *plugin)
 {
-  panel_return_val_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin), FALSE);
+  panel_return_val_if_fail (APPLICATIONS_MENU_IS_PLUGIN (plugin), FALSE);
   panel_return_val_if_fail (button == NULL || plugin->button == button, FALSE);
 
   if (event != NULL /* remove event */

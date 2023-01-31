@@ -28,8 +28,8 @@
 
 G_BEGIN_DECLS
 
-#define XFCE_TYPE_SN_BUTTON (sn_button_get_type ())
-G_DECLARE_FINAL_TYPE (SnButton, sn_button, XFCE, SN_BUTTON, GtkButton)
+#define SN_TYPE_BUTTON (sn_button_get_type ())
+G_DECLARE_FINAL_TYPE (SnButton, sn_button, SN, BUTTON, GtkButton)
 
 SnItem                *sn_button_get_item                      (SnButton                *button);
 

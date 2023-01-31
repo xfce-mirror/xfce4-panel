@@ -23,8 +23,8 @@
 
 G_BEGIN_DECLS
 
-#define XFCE_TYPE_SN_BACKEND (sn_backend_get_type ())
-G_DECLARE_FINAL_TYPE (SnBackend, sn_backend, XFCE, SN_BACKEND, GObject)
+#define SN_TYPE_BACKEND (sn_backend_get_type ())
+G_DECLARE_FINAL_TYPE (SnBackend, sn_backend, SN, BACKEND, GObject)
 
 SnBackend             *sn_backend_new                          (void);
 

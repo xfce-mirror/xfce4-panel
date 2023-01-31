@@ -24,8 +24,8 @@
 
 G_BEGIN_DECLS
 
-#define XFCE_TYPE_LAUNCHER_PLUGIN (launcher_plugin_get_type ())
-G_DECLARE_FINAL_TYPE (LauncherPlugin, launcher_plugin, XFCE, LAUNCHER_PLUGIN, XfcePanelPlugin)
+#define LAUNCHER_TYPE_PLUGIN (launcher_plugin_get_type ())
+G_DECLARE_FINAL_TYPE (LauncherPlugin, launcher_plugin, LAUNCHER, PLUGIN, XfcePanelPlugin)
 
 typedef enum _LauncherArrowType
 {

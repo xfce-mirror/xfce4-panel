@@ -46,14 +46,14 @@
 
 
 
-#define XFCE_SYSTRAY_MANAGER_REQUEST_DOCK   0
-#define XFCE_SYSTRAY_MANAGER_BEGIN_MESSAGE  1
-#define XFCE_SYSTRAY_MANAGER_CANCEL_MESSAGE 2
+#define SYSTRAY_MANAGER_REQUEST_DOCK   0
+#define SYSTRAY_MANAGER_BEGIN_MESSAGE  1
+#define SYSTRAY_MANAGER_CANCEL_MESSAGE 2
 
-#define XFCE_SYSTRAY_MANAGER_ORIENTATION_HORIZONTAL 0
-#define XFCE_SYSTRAY_MANAGER_ORIENTATION_VERTICAL   1
+#define SYSTRAY_MANAGER_ORIENTATION_HORIZONTAL 0
+#define SYSTRAY_MANAGER_ORIENTATION_VERTICAL   1
 
-#define XFCE_SYSTRAY_MANAGER_ERROR (systray_manager_error_quark())
+#define SYSTRAY_MANAGER_ERROR (systray_manager_error_quark())
 
 typedef struct _SystrayMessage SystrayMessage;
 
@@ -89,7 +89,7 @@ static void            systray_manager_message_remove_from_list           (Systr
 
 enum
 {
-  XFCE_SYSTRAY_MANAGER_ERROR_SELECTION_FAILED
+  SYSTRAY_MANAGER_ERROR_SELECTION_FAILED
 };
 
 enum
@@ -264,7 +264,7 @@ systray_manager_error_quark (void)
 static void
 systray_manager_finalize (GObject *object)
 {
-  SystrayManager *manager = XFCE_SYSTRAY_MANAGER (object);
+  SystrayManager *manager = SYSTRAY_MANAGER (object);
 
   panel_return_if_fail (manager->invisible == NULL);
 
@@ -289,7 +289,7 @@ systray_manager_finalize (GObject *object)
 SystrayManager *
 systray_manager_new (void)
 {
-  return g_object_new (XFCE_TYPE_SYSTRAY_MANAGER, NULL);
+  return g_object_new (SYSTRAY_TYPE_MANAGER, NULL);
 }
 
 
@@ -310,7 +310,7 @@ systray_manager_register (SystrayManager  *manager,
   XClientMessageEvent  xevent;
   Window               root_window;
 
-  panel_return_val_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager), FALSE);
+  panel_return_val_if_fail (SYSTRAY_IS_MANAGER (manager), FALSE);
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
@@ -397,8 +397,8 @@ systray_manager_register (SystrayManager  *manager,
       gtk_widget_destroy (invisible);
 
       /* set an error */
-      g_set_error (error, XFCE_SYSTRAY_MANAGER_ERROR,
-                   XFCE_SYSTRAY_MANAGER_ERROR_SELECTION_FAILED,
+      g_set_error (error, SYSTRAY_MANAGER_ERROR,
+                   SYSTRAY_MANAGER_ERROR_SELECTION_FAILED,
                    _("Failed to acquire manager selection for screen %d"),
                    screen_number);
     }
@@ -413,10 +413,10 @@ systray_manager_remove_socket (gpointer key,
                                gpointer value,
                                gpointer user_data)
 {
-  SystrayManager *manager = XFCE_SYSTRAY_MANAGER (user_data);
+  SystrayManager *manager = SYSTRAY_MANAGER (user_data);
   GtkSocket      *socket = GTK_SOCKET (value);
 
-  panel_return_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager));
+  panel_return_if_fail (SYSTRAY_IS_MANAGER (manager));
   panel_return_if_fail (GTK_IS_SOCKET (socket));
 
   /* properly undock from the tray */
@@ -432,7 +432,7 @@ systray_manager_unregister (SystrayManager *manager)
   GtkWidget  *invisible = manager->invisible;
   GdkWindow  *owner;
 
-  panel_return_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager));
+  panel_return_if_fail (SYSTRAY_IS_MANAGER (manager));
 
   /* leave when there is no invisible window */
   if (G_UNLIKELY (invisible == NULL))
@@ -479,9 +479,9 @@ systray_manager_window_filter (GdkXEvent *xev,
                                gpointer   user_data)
 {
   XEvent         *xevent = (XEvent *)xev;
-  SystrayManager *manager = XFCE_SYSTRAY_MANAGER (user_data);
+  SystrayManager *manager = SYSTRAY_MANAGER (user_data);
 
-  panel_return_val_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager), GDK_FILTER_CONTINUE);
+  panel_return_val_if_fail (SYSTRAY_IS_MANAGER (manager), GDK_FILTER_CONTINUE);
 
   if (xevent->type == ClientMessage)
     {
@@ -511,24 +511,24 @@ systray_manager_handle_client_message_opcode (GdkXEvent *xevent,
                                               gpointer   user_data)
 {
   XClientMessageEvent *xev;
-  SystrayManager      *manager = XFCE_SYSTRAY_MANAGER (user_data);
+  SystrayManager      *manager = SYSTRAY_MANAGER (user_data);
 
-  panel_return_val_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager), GDK_FILTER_REMOVE);
+  panel_return_val_if_fail (SYSTRAY_IS_MANAGER (manager), GDK_FILTER_REMOVE);
 
   /* cast to x11 event */
   xev = (XClientMessageEvent *) xevent;
 
   switch (xev->data.l[1])
     {
-    case XFCE_SYSTRAY_MANAGER_REQUEST_DOCK:
+    case SYSTRAY_MANAGER_REQUEST_DOCK:
         systray_manager_handle_dock_request (manager, xev);
         return GDK_FILTER_REMOVE;
 
-    case XFCE_SYSTRAY_MANAGER_BEGIN_MESSAGE:
+    case SYSTRAY_MANAGER_BEGIN_MESSAGE:
         systray_manager_handle_begin_message (manager, xev);
         return GDK_FILTER_REMOVE;
 
-    case XFCE_SYSTRAY_MANAGER_CANCEL_MESSAGE:
+    case SYSTRAY_MANAGER_CANCEL_MESSAGE:
         systray_manager_handle_cancel_message (manager, xev);
         return GDK_FILTER_REMOVE;
 
@@ -547,13 +547,13 @@ systray_manager_handle_client_message_message_data (GdkXEvent *xevent,
                                                     gpointer   user_data)
 {
   XClientMessageEvent *xev = xevent;
-  SystrayManager      *manager = XFCE_SYSTRAY_MANAGER (user_data);
+  SystrayManager      *manager = SYSTRAY_MANAGER (user_data);
   GSList              *li;
   SystrayMessage      *message;
   glong                length;
   GtkSocket           *socket;
 
-  panel_return_val_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager), GDK_FILTER_REMOVE);
+  panel_return_val_if_fail (SYSTRAY_IS_MANAGER (manager), GDK_FILTER_REMOVE);
 
   /* try to find the pending message in the list */
   for (li = manager->messages; li != NULL; li = li->next)
@@ -605,7 +605,7 @@ systray_manager_handle_begin_message (SystrayManager      *manager,
   SystrayMessage *message;
   glong           length, timeout, id;
 
-  panel_return_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager));
+  panel_return_if_fail (SYSTRAY_IS_MANAGER (manager));
 
   /* try to find the window in the list of known tray icons */
   socket = g_hash_table_lookup (manager->sockets, GUINT_TO_POINTER (xevent->window));
@@ -656,7 +656,7 @@ systray_manager_handle_cancel_message (SystrayManager      *manager,
   GtkSocket       *socket;
   Window           window = xevent->data.l[2];
 
-  panel_return_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager));
+  panel_return_if_fail (SYSTRAY_IS_MANAGER (manager));
 
   /* remove the same message from the list */
   systray_manager_message_remove_from_list (manager, xevent);
@@ -680,7 +680,7 @@ systray_manager_handle_dock_request (SystrayManager      *manager,
   GdkScreen       *screen;
   Window           window = xevent->data.l[2];
 
-  panel_return_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager));
+  panel_return_if_fail (SYSTRAY_IS_MANAGER (manager));
   panel_return_if_fail (GTK_IS_INVISIBLE (manager->invisible));
 
   /* check if we already have this window */
@@ -726,13 +726,13 @@ static gboolean
 systray_manager_handle_undock_request (GtkSocket *socket,
                                        gpointer   user_data)
 {
-  SystrayManager  *manager = XFCE_SYSTRAY_MANAGER (user_data);
+  SystrayManager  *manager = SYSTRAY_MANAGER (user_data);
   Window          *window;
 
-  panel_return_val_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager), FALSE);
+  panel_return_val_if_fail (SYSTRAY_IS_MANAGER (manager), FALSE);
 
   /* remove the socket from the list */
-  window = systray_socket_get_window (XFCE_SYSTRAY_SOCKET (socket));
+  window = systray_socket_get_window (SYSTRAY_SOCKET (socket));
   g_hash_table_remove (manager->sockets, GUINT_TO_POINTER (*window));
 
   /* emit signal that the socket will be removed */
@@ -754,7 +754,7 @@ systray_manager_set_visual (SystrayManager *manager)
   gulong       data[1];
   GdkScreen   *screen;
 
-  panel_return_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager));
+  panel_return_if_fail (SYSTRAY_IS_MANAGER (manager));
   panel_return_if_fail (GTK_IS_INVISIBLE (manager->invisible));
   panel_return_if_fail (GDK_IS_WINDOW (gtk_widget_get_window (GTK_WIDGET (manager->invisible))));
 
@@ -797,7 +797,7 @@ systray_manager_set_colors (SystrayManager *manager,
                             GdkRGBA        *warning,
                             GdkRGBA        *success)
 {
-  panel_return_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager));
+  panel_return_if_fail (SYSTRAY_IS_MANAGER (manager));
 
   manager->fg = *fg;
   manager->error = *error;
@@ -855,7 +855,7 @@ systray_manager_set_orientation (SystrayManager *manager,
   Atom        orientation_atom;
   gulong      data[1];
 
-  panel_return_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager));
+  panel_return_if_fail (SYSTRAY_IS_MANAGER (manager));
   panel_return_if_fail (GTK_IS_INVISIBLE (manager->invisible));
   panel_return_if_fail (GDK_IS_WINDOW (gtk_widget_get_window (GTK_WIDGET (manager->invisible))));
 
@@ -871,8 +871,8 @@ systray_manager_set_orientation (SystrayManager *manager,
 
   /* set the data we're going to send to x */
   data[0] = (manager->orientation == GTK_ORIENTATION_HORIZONTAL ?
-             XFCE_SYSTRAY_MANAGER_ORIENTATION_HORIZONTAL
-             : XFCE_SYSTRAY_MANAGER_ORIENTATION_VERTICAL);
+             SYSTRAY_MANAGER_ORIENTATION_HORIZONTAL
+             : SYSTRAY_MANAGER_ORIENTATION_VERTICAL);
 
   /* change the x property */
   XChangeProperty (GDK_DISPLAY_XDISPLAY (display),
@@ -904,7 +904,7 @@ systray_manager_message_remove_from_list (SystrayManager      *manager,
   GSList         *li;
   SystrayMessage *message;
 
-  panel_return_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager));
+  panel_return_if_fail (SYSTRAY_IS_MANAGER (manager));
 
   /* seach for the same message in the list of pending messages */
   for (li = manager->messages; li != NULL; li = li->next)

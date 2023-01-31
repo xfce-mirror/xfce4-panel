@@ -332,7 +332,7 @@ actions_plugin_get_property (GObject    *object,
                              GValue     *value,
                              GParamSpec *pspec)
 {
-  ActionsPlugin *plugin = XFCE_ACTIONS_PLUGIN (object);
+  ActionsPlugin *plugin = ACTIONS_PLUGIN (object);
 
   switch (prop_id)
     {
@@ -371,7 +371,7 @@ actions_plugin_set_property (GObject      *object,
                              const GValue *value,
                              GParamSpec   *pspec)
 {
-  ActionsPlugin *plugin = XFCE_ACTIONS_PLUGIN (object);
+  ActionsPlugin *plugin = ACTIONS_PLUGIN (object);
 
   switch (prop_id)
     {
@@ -414,7 +414,7 @@ actions_plugin_set_property (GObject      *object,
 static void
 actions_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
-  ActionsPlugin       *plugin = XFCE_ACTIONS_PLUGIN (panel_plugin);
+  ActionsPlugin       *plugin = ACTIONS_PLUGIN (panel_plugin);
   const PanelProperty  properties[] =
   {
     { "items", G_TYPE_PTR_ARRAY },
@@ -445,7 +445,7 @@ actions_plugin_construct (XfcePanelPlugin *panel_plugin)
 static void
 actions_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
-  ActionsPlugin *plugin = XFCE_ACTIONS_PLUGIN (panel_plugin);
+  ActionsPlugin *plugin = ACTIONS_PLUGIN (panel_plugin);
 
   if (plugin->pack_idle_id != 0)
     g_source_remove (plugin->pack_idle_id);
@@ -463,7 +463,7 @@ static gboolean
 actions_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                              gint             size)
 {
-  ActionsPlugin *plugin = XFCE_ACTIONS_PLUGIN (panel_plugin);
+  ActionsPlugin *plugin = ACTIONS_PLUGIN (panel_plugin);
   GtkWidget     *box;
   GList         *children, *li;
   gint           max_size;
@@ -502,7 +502,7 @@ actions_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 static gboolean
 actions_plugin_configure_store (gpointer data)
 {
-  ActionsPlugin *plugin = XFCE_ACTIONS_PLUGIN (data);
+  ActionsPlugin *plugin = ACTIONS_PLUGIN (data);
   GtkTreeModel  *model;
   GtkTreeIter    iter;
   GPtrArray     *array;
@@ -565,7 +565,7 @@ actions_plugin_configure_visible_toggled (GtkCellRendererToggle *renderer,
   gboolean      visible;
   GtkTreeModel *model;
 
-  panel_return_if_fail (XFCE_IS_ACTIONS_PLUGIN (plugin));
+  panel_return_if_fail (ACTIONS_IS_PLUGIN (plugin));
 
   model = g_object_get_data (G_OBJECT (plugin), "items-store");
   panel_return_if_fail (GTK_IS_LIST_STORE (model));
@@ -612,7 +612,7 @@ actions_plugin_combo_title_changed_cb (GtkWidget *widget,
 static void
 actions_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
-  ActionsPlugin *plugin = XFCE_ACTIONS_PLUGIN (panel_plugin);
+  ActionsPlugin *plugin = ACTIONS_PLUGIN (panel_plugin);
   GtkBuilder    *builder;
   GObject       *dialog;
   GObject       *object;
@@ -628,7 +628,7 @@ actions_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   gchar         *sep_str;
   const gchar   *display_name;
 
-  panel_return_if_fail (XFCE_IS_ACTIONS_PLUGIN (plugin));
+  panel_return_if_fail (ACTIONS_IS_PLUGIN (plugin));
   panel_return_if_fail (plugin->items != NULL);
 
   /* setup the dialog */
@@ -748,7 +748,7 @@ static void
 actions_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
                              XfcePanelPluginMode  mode)
 {
-  actions_plugin_pack (XFCE_ACTIONS_PLUGIN (panel_plugin));
+  actions_plugin_pack (ACTIONS_PLUGIN (panel_plugin));
 }
 
 
@@ -757,7 +757,7 @@ static void
 actions_plugin_nrows_changed (XfcePanelPlugin *panel_plugin,
                               guint            rows)
 {
-  actions_plugin_pack (XFCE_ACTIONS_PLUGIN (panel_plugin));
+  actions_plugin_pack (ACTIONS_PLUGIN (panel_plugin));
 }
 
 
@@ -1203,7 +1203,7 @@ actions_plugin_action_menu_item (ActionsPlugin *plugin,
 static gboolean
 actions_plugin_pack_idle (gpointer data)
 {
-  ActionsPlugin       *plugin = XFCE_ACTIONS_PLUGIN (data);
+  ActionsPlugin       *plugin = ACTIONS_PLUGIN (data);
   GtkWidget           *label;
   GtkWidget           *button;
   GtkWidget           *widget;
@@ -1366,7 +1366,7 @@ actions_plugin_pack_idle (gpointer data)
 static void
 actions_plugin_pack_idle_destoyed (gpointer data)
 {
-  XFCE_ACTIONS_PLUGIN (data)->pack_idle_id = 0;
+  ACTIONS_PLUGIN (data)->pack_idle_id = 0;
 }
 
 
@@ -1424,7 +1424,7 @@ actions_plugin_menu_deactivate (GtkWidget     *menu,
 {
   GtkWidget *button;
 
-  panel_return_if_fail (XFCE_IS_ACTIONS_PLUGIN (plugin));
+  panel_return_if_fail (ACTIONS_IS_PLUGIN (plugin));
   panel_return_if_fail (GTK_IS_MENU (menu));
 
   /* button is NULL when we popup the menu under the cursor position */
@@ -1446,7 +1446,7 @@ actions_plugin_menu (GtkWidget     *button,
   ActionType    type;
   ActionType    allowed_types;
 
-  panel_return_if_fail (XFCE_IS_ACTIONS_PLUGIN (plugin));
+  panel_return_if_fail (ACTIONS_IS_PLUGIN (plugin));
   panel_return_if_fail (button != NULL);
 
   /* do not popup the menu if the button is being toggled off */

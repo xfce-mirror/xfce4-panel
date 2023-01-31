@@ -304,7 +304,7 @@ xfce_clock_digital_update (XfceClockDigital *digital,
   gchar *markup, *stripped;
 
   panel_return_if_fail (XFCE_CLOCK_IS_DIGITAL (digital));
-  panel_return_if_fail (XFCE_IS_CLOCK_TIME (time));
+  panel_return_if_fail (CLOCK_IS_TIME (time));
 
   /* set time label */
   markup = clock_time_strdup_strftime (digital->time, digital->time_format);

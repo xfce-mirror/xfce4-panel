@@ -257,7 +257,7 @@ window_menu_plugin_get_property (GObject    *object,
                                  GValue     *value,
                                  GParamSpec *pspec)
 {
-  WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (object);
+  WindowMenuPlugin *plugin = WINDOW_MENU_PLUGIN (object);
 
   switch (prop_id)
     {
@@ -295,12 +295,12 @@ window_menu_plugin_set_property (GObject      *object,
                                  const GValue *value,
                                  GParamSpec   *pspec)
 {
-  WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (object);
+  WindowMenuPlugin *plugin = WINDOW_MENU_PLUGIN (object);
   XfcePanelPlugin  *panel_plugin = XFCE_PANEL_PLUGIN (object);
   guint             button_style;
   gboolean          urgentcy_notification;
 
-  panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
+  panel_return_if_fail (WINDOW_MENU_IS_PLUGIN (plugin));
 
   switch (prop_id)
     {
@@ -367,7 +367,7 @@ window_menu_plugin_set_property (GObject      *object,
 static void
 window_menu_plugin_style_updated (GtkWidget *widget)
 {
-  WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (widget);
+  WindowMenuPlugin *plugin = WINDOW_MENU_PLUGIN (widget);
 
   /* let gtk update the widget style */
   (*GTK_WIDGET_CLASS (window_menu_plugin_parent_class)->style_updated) (widget);
@@ -386,7 +386,7 @@ static void
 window_menu_plugin_screen_changed (GtkWidget *widget,
                                    GdkScreen *previous_screen)
 {
-  WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (widget);
+  WindowMenuPlugin *plugin = WINDOW_MENU_PLUGIN (widget);
   XfwScreen *screen;
   XfwWorkspaceManager *manager;
 
@@ -430,7 +430,7 @@ window_menu_plugin_screen_changed (GtkWidget *widget,
 static void
 window_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
-  WindowMenuPlugin    *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
+  WindowMenuPlugin    *plugin = WINDOW_MENU_PLUGIN (panel_plugin);
   const PanelProperty  properties[] =
   {
     { "style", G_TYPE_UINT },
@@ -465,7 +465,7 @@ window_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
 static void
 window_menu_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
-  WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
+  WindowMenuPlugin *plugin = WINDOW_MENU_PLUGIN (panel_plugin);
 
   /* disconnect screen changed signal */
   g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
@@ -491,7 +491,7 @@ static void
 window_menu_plugin_screen_position_changed (XfcePanelPlugin    *panel_plugin,
                                             XfceScreenPosition  screen_position)
 {
-  WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
+  WindowMenuPlugin *plugin = WINDOW_MENU_PLUGIN (panel_plugin);
   GtkArrowType      arrow_type = GTK_ARROW_NONE;
 
   /* set the arrow direction if the arrow is visible */
@@ -508,7 +508,7 @@ static gboolean
 window_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                                  gint             size)
 {
-  WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
+  WindowMenuPlugin *plugin = WINDOW_MENU_PLUGIN (panel_plugin);
   gint              button_size;
 
   if (plugin->button_style == BUTTON_STYLE_ICON)
@@ -544,7 +544,7 @@ window_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 static void
 window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
-  WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
+  WindowMenuPlugin *plugin = WINDOW_MENU_PLUGIN (panel_plugin);
   GtkBuilder       *builder;
   GObject          *dialog, *object;
   guint             i;
@@ -578,7 +578,7 @@ window_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
                                  const gchar     *name,
                                  const GValue    *value)
 {
-  WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
+  WindowMenuPlugin *plugin = WINDOW_MENU_PLUGIN (panel_plugin);
 
   panel_return_val_if_fail (value == NULL || G_IS_VALUE (value), FALSE);
 
@@ -623,7 +623,7 @@ window_menu_plugin_set_icon (WindowMenuPlugin *plugin,
   GdkPixbuf *pixbuf;
   gint       icon_size, scale_factor;
 
-  panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
+  panel_return_if_fail (WINDOW_MENU_IS_PLUGIN (plugin));
   panel_return_if_fail (XFW_IS_WINDOW (window));
 
   if (! xfw_window_is_active (window))
@@ -660,7 +660,7 @@ window_menu_plugin_active_window_changed (XfwScreen        *screen,
   GtkWidget      *icon = GTK_WIDGET (plugin->icon);
   XfwWindowType   type;
 
-  panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
+  panel_return_if_fail (WINDOW_MENU_IS_PLUGIN (plugin));
   panel_return_if_fail (GTK_IMAGE (icon));
   panel_return_if_fail (XFW_IS_SCREEN (screen));
   panel_return_if_fail (plugin->screen == screen);
@@ -699,7 +699,7 @@ window_menu_plugin_window_state_changed (XfwWindow        *window,
                                          XfwWindowState    new_state,
                                          WindowMenuPlugin *plugin)
 {
-  panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
+  panel_return_if_fail (WINDOW_MENU_IS_PLUGIN (plugin));
   panel_return_if_fail (XFW_IS_WINDOW (window));
   panel_return_if_fail (plugin->urgentcy_notification);
   panel_return_if_fail (plugin->urgentcy_notification);
@@ -728,7 +728,7 @@ window_menu_plugin_window_opened (XfwScreen        *screen,
                                   XfwWindow        *window,
                                   WindowMenuPlugin *plugin)
 {
-  panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
+  panel_return_if_fail (WINDOW_MENU_IS_PLUGIN (plugin));
   panel_return_if_fail (XFW_IS_WINDOW (window));
   panel_return_if_fail (XFW_IS_SCREEN (screen));
   panel_return_if_fail (plugin->screen == screen);
@@ -753,7 +753,7 @@ window_menu_plugin_window_closed (XfwScreen        *screen,
                                   XfwWindow        *window,
                                   WindowMenuPlugin *plugin)
 {
-  panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
+  panel_return_if_fail (WINDOW_MENU_IS_PLUGIN (plugin));
   panel_return_if_fail (XFW_IS_WINDOW (window));
   panel_return_if_fail (XFW_IS_SCREEN (screen));
   panel_return_if_fail (plugin->screen == screen);
@@ -772,7 +772,7 @@ window_menu_plugin_windows_disconnect (WindowMenuPlugin *plugin)
 {
   GList *windows, *li;
 
-  panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
+  panel_return_if_fail (WINDOW_MENU_IS_PLUGIN (plugin));
   panel_return_if_fail (XFW_IS_SCREEN (plugin->screen));
 
   /* disconnect screen signals */
@@ -805,7 +805,7 @@ window_menu_plugin_windows_connect (WindowMenuPlugin *plugin,
 {
   GList *windows, *li;
 
-  panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
+  panel_return_if_fail (WINDOW_MENU_IS_PLUGIN (plugin));
   panel_return_if_fail (XFW_IS_SCREEN (plugin->screen));
   panel_return_if_fail (plugin->urgentcy_notification);
 
@@ -834,7 +834,7 @@ static void
 window_menu_plugin_workspace_add (GtkWidget        *mi,
                                   WindowMenuPlugin *plugin)
 {
-  panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
+  panel_return_if_fail (WINDOW_MENU_IS_PLUGIN (plugin));
   panel_return_if_fail (XFW_IS_WORKSPACE_GROUP (plugin->workspace_group));
 
   /* increase the number of workspaces */
@@ -848,7 +848,7 @@ window_menu_plugin_workspace_remove (GtkWidget        *mi,
                                      WindowMenuPlugin *plugin)
 {
   XfwWorkspace *workspace;
-  panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
+  panel_return_if_fail (WINDOW_MENU_IS_PLUGIN (plugin));
   panel_return_if_fail (XFW_IS_WORKSPACE_GROUP (plugin->workspace_group));
 
   /* decrease the number of workspaces */
@@ -881,7 +881,7 @@ window_menu_plugin_menu_workspace_item_new (XfwWorkspace *workspace,
   GtkWidget   *mi, *label;
 
   panel_return_val_if_fail (XFW_IS_WORKSPACE (workspace), NULL);
-  panel_return_val_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin), NULL);
+  panel_return_val_if_fail (WINDOW_MENU_IS_PLUGIN (plugin), NULL);
 
   /* try to get an utf-8 valid name */
   name = xfw_workspace_get_name (workspace);
@@ -1196,7 +1196,7 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
   gchar                *utf8 = NULL, *label;
   gint                  size;
 
-  panel_return_val_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin), NULL);
+  panel_return_val_if_fail (WINDOW_MENU_IS_PLUGIN (plugin), NULL);
   panel_return_val_if_fail (XFW_IS_SCREEN (plugin->screen), NULL);
 
   italic = pango_font_description_from_string ("italic");
@@ -1403,7 +1403,7 @@ window_menu_plugin_menu (GtkWidget        *button,
   GtkWidget      *menu;
   GdkEventButton *event = NULL;
 
-  panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
+  panel_return_if_fail (WINDOW_MENU_IS_PLUGIN (plugin));
   panel_return_if_fail (button == NULL || plugin->button == button);
 
   if (button != NULL

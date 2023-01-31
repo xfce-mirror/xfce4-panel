@@ -117,7 +117,7 @@ clock_time_init (ClockTime *time)
 static void
 clock_time_finalize (GObject *object)
 {
-  ClockTime *time = XFCE_CLOCK_TIME (object);
+  ClockTime *time = CLOCK_TIME (object);
 
   g_free (time->timezone_name);
 
@@ -135,7 +135,7 @@ clock_time_get_property (GObject    *object,
                          GValue     *value,
                          GParamSpec *pspec)
 {
-  ClockTime *time = XFCE_CLOCK_TIME (object);
+  ClockTime *time = CLOCK_TIME (object);
 
   switch (prop_id)
     {
@@ -157,7 +157,7 @@ clock_time_set_property (GObject      *object,
                          const GValue *value,
                          GParamSpec   *pspec)
 {
-  ClockTime     *time = XFCE_CLOCK_TIME (object);
+  ClockTime     *time = CLOCK_TIME (object);
   const gchar   *str_value;
 
   switch (prop_id)
@@ -205,7 +205,7 @@ clock_time_get_time (ClockTime *time)
 {
   GDateTime *date_time;
 
-  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (time), NULL);
+  panel_return_val_if_fail (CLOCK_IS_TIME (time), NULL);
 
   if (time->timezone != NULL)
     date_time = g_date_time_new_now (time->timezone);
@@ -224,7 +224,7 @@ clock_time_strdup_strftime (ClockTime       *time,
   GDateTime *date_time;
   gchar     *str;
 
-  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (time), NULL);
+  panel_return_val_if_fail (CLOCK_IS_TIME (time), NULL);
 
   date_time = clock_time_get_time (time);
   str = g_date_time_format (date_time, format);
@@ -334,8 +334,8 @@ clock_time_timeout_new (guint       interval,
 {
   ClockTimeTimeout *timeout;
 
-  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (time), NULL);
-  panel_return_val_if_fail (sleep_monitor == NULL || XFCE_IS_CLOCK_SLEEP_MONITOR (sleep_monitor), NULL);
+  panel_return_val_if_fail (CLOCK_IS_TIME (time), NULL);
+  panel_return_val_if_fail (sleep_monitor == NULL || CLOCK_IS_SLEEP_MONITOR (sleep_monitor), NULL);
 
   panel_return_val_if_fail (interval > 0, NULL);
 
@@ -466,5 +466,5 @@ clock_time_timeout_free (ClockTimeTimeout *timeout)
 ClockTime *
 clock_time_new (void)
 {
-  return g_object_new (XFCE_TYPE_CLOCK_TIME, NULL);
+  return g_object_new (CLOCK_TYPE_TIME, NULL);
 }

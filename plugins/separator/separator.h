@@ -24,8 +24,8 @@
 
 G_BEGIN_DECLS
 
-#define XFCE_TYPE_SEPARATOR_PLUGIN (separator_plugin_get_type ())
-G_DECLARE_FINAL_TYPE (SeparatorPlugin, separator_plugin, XFCE, SEPARATOR_PLUGIN, XfcePanelPlugin)
+#define SEPARATOR_TYPE_PLUGIN (separator_plugin_get_type ())
+G_DECLARE_FINAL_TYPE (SeparatorPlugin, separator_plugin, SEPARATOR, PLUGIN, XfcePanelPlugin)
 
 void separator_plugin_register_type (XfcePanelTypeModule *type_module);
 

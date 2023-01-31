@@ -114,7 +114,7 @@ tasklist_plugin_init (TasklistPlugin *plugin)
 static void
 tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
-  TasklistPlugin      *plugin = XFCE_TASKLIST_PLUGIN (panel_plugin);
+  TasklistPlugin      *plugin = TASKLIST_PLUGIN (panel_plugin);
   const PanelProperty  properties[] =
   {
     { "show-labels", G_TYPE_BOOLEAN },
@@ -154,7 +154,7 @@ static void
 tasklist_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
                               XfcePanelPluginMode  mode)
 {
-  TasklistPlugin *plugin = XFCE_TASKLIST_PLUGIN (panel_plugin);
+  TasklistPlugin *plugin = TASKLIST_PLUGIN (panel_plugin);
 
   /* set the new tasklist mode */
   xfce_tasklist_set_mode (XFCE_TASKLIST (plugin->tasklist), mode);
@@ -166,7 +166,7 @@ static gboolean
 tasklist_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                               gint             size)
 {
-  TasklistPlugin *plugin = XFCE_TASKLIST_PLUGIN (panel_plugin);
+  TasklistPlugin *plugin = TASKLIST_PLUGIN (panel_plugin);
 
   /* set the tasklist size */
   xfce_tasklist_set_size (XFCE_TASKLIST (plugin->tasklist), size);
@@ -180,7 +180,7 @@ static void
 tasklist_plugin_nrows_changed (XfcePanelPlugin *panel_plugin,
                                guint            nrows)
 {
-  TasklistPlugin *plugin = XFCE_TASKLIST_PLUGIN (panel_plugin);
+  TasklistPlugin *plugin = TASKLIST_PLUGIN (panel_plugin);
 
   /* set the tasklist nrows */
   xfce_tasklist_set_nrows (XFCE_TASKLIST (plugin->tasklist), nrows);
@@ -192,7 +192,7 @@ static void
 tasklist_plugin_screen_position_changed (XfcePanelPlugin    *panel_plugin,
                                          XfceScreenPosition  position)
 {
-  TasklistPlugin *plugin = XFCE_TASKLIST_PLUGIN (panel_plugin);
+  TasklistPlugin *plugin = TASKLIST_PLUGIN (panel_plugin);
 
   /* update monitor geometry; this function is also triggered when
    * the panel is moved to another monitor during runtime */
@@ -204,7 +204,7 @@ tasklist_plugin_screen_position_changed (XfcePanelPlugin    *panel_plugin,
 static void
 tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
-  TasklistPlugin *plugin = XFCE_TASKLIST_PLUGIN (panel_plugin);
+  TasklistPlugin *plugin = TASKLIST_PLUGIN (panel_plugin);
   GtkBuilder     *builder;
   GObject        *dialog;
   GObject        *object;
@@ -269,7 +269,7 @@ tasklist_plugin_handle_draw (GtkWidget      *widget,
   guint             i;
   GdkRGBA           fg_rgba;
 
-  panel_return_val_if_fail (XFCE_IS_TASKLIST_PLUGIN (plugin), FALSE);
+  panel_return_val_if_fail (TASKLIST_IS_PLUGIN (plugin), FALSE);
   panel_return_val_if_fail (plugin->handle == widget, FALSE);
 
   if (!gtk_widget_is_drawable (widget))

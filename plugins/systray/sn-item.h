@@ -23,8 +23,8 @@
 
 G_BEGIN_DECLS
 
-#define XFCE_TYPE_SN_ITEM (sn_item_get_type ())
-G_DECLARE_FINAL_TYPE (SnItem, sn_item, XFCE, SN_ITEM, GObject)
+#define SN_TYPE_ITEM (sn_item_get_type ())
+G_DECLARE_FINAL_TYPE (SnItem, sn_item, SN, ITEM, GObject)
 
 void                   sn_item_start                           (SnItem                  *item);
 

@@ -23,8 +23,8 @@
 
 G_BEGIN_DECLS
 
-#define XFCE_TYPE_SYSTRAY_BOX (systray_box_get_type ())
-G_DECLARE_FINAL_TYPE (SystrayBox, systray_box, XFCE, SYSTRAY_BOX, GtkContainer)
+#define SYSTRAY_TYPE_BOX (systray_box_get_type ())
+G_DECLARE_FINAL_TYPE (SystrayBox, systray_box, SYSTRAY, BOX, GtkContainer)
 
 void       systray_box_register_type   (XfcePanelTypeModule *module);
 

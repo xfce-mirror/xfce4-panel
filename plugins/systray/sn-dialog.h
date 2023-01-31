@@ -26,8 +26,8 @@
 
 G_BEGIN_DECLS
 
-#define XFCE_TYPE_SN_DIALOG (sn_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (SnDialog, sn_dialog, XFCE, SN_DIALOG, GObject)
+#define SN_TYPE_DIALOG (sn_dialog_get_type ())
+G_DECLARE_FINAL_TYPE (SnDialog, sn_dialog, SN, DIALOG, GObject)
 
 SnDialog              *sn_dialog_new                           (SnConfig                *config,
                                                                 GdkScreen               *screen);

@@ -27,8 +27,8 @@
 
 G_BEGIN_DECLS
 
-#define XFCE_TYPE_SYSTRAY_SOCKET (systray_socket_get_type ())
-G_DECLARE_FINAL_TYPE (SystraySocket, systray_socket, XFCE, SYSTRAY_SOCKET, GtkSocket)
+#define SYSTRAY_TYPE_SOCKET (systray_socket_get_type ())
+G_DECLARE_FINAL_TYPE (SystraySocket, systray_socket, SYSTRAY, SOCKET, GtkSocket)
 
 void             systray_socket_register_type (GTypeModule     *type_module);
 

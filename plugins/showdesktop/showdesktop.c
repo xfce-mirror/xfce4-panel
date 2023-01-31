@@ -146,10 +146,10 @@ static void
 show_desktop_plugin_screen_changed (GtkWidget *widget,
                                     GdkScreen *previous_screen)
 {
-  ShowDesktopPlugin *plugin = XFCE_SHOW_DESKTOP_PLUGIN (widget);
+  ShowDesktopPlugin *plugin = SHOW_DESKTOP_PLUGIN (widget);
   XfwScreen         *xfw_screen;
 
-  panel_return_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (widget));
+  panel_return_if_fail (SHOW_DESKTOP_IS_PLUGIN (widget));
 
   /* get the new xfw screen */
   xfw_screen = xfw_screen_get_default ();
@@ -188,7 +188,7 @@ show_desktop_plugin_screen_changed (GtkWidget *widget,
 static void
 show_desktop_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
-  ShowDesktopPlugin *plugin = XFCE_SHOW_DESKTOP_PLUGIN (panel_plugin);
+  ShowDesktopPlugin *plugin = SHOW_DESKTOP_PLUGIN (panel_plugin);
 
   /* disconnect screen changed signal */
   g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
@@ -209,10 +209,10 @@ static gboolean
 show_desktop_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                                   gint             size)
 {
-  ShowDesktopPlugin *plugin = XFCE_SHOW_DESKTOP_PLUGIN (panel_plugin);
+  ShowDesktopPlugin *plugin = SHOW_DESKTOP_PLUGIN (panel_plugin);
   gint  icon_size;
 
-  panel_return_val_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (panel_plugin), FALSE);
+  panel_return_val_if_fail (SHOW_DESKTOP_IS_PLUGIN (panel_plugin), FALSE);
 
   /* keep the button squared */
   size /= xfce_panel_plugin_get_nrows (panel_plugin);
@@ -232,7 +232,7 @@ show_desktop_plugin_toggled (GtkToggleButton   *button,
   gboolean     active;
   const gchar *text;
 
-  panel_return_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (plugin));
+  panel_return_if_fail (SHOW_DESKTOP_IS_PLUGIN (plugin));
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
   panel_return_if_fail (XFW_IS_SCREEN (plugin->xfw_screen));
 
@@ -262,7 +262,7 @@ show_desktop_plugin_button_release_event (GtkToggleButton   *button,
   GList *windows, *li;
   XfwWindow *window;
 
-  panel_return_val_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (plugin), FALSE);
+  panel_return_val_if_fail (SHOW_DESKTOP_IS_PLUGIN (plugin), FALSE);
   panel_return_val_if_fail (XFW_IS_SCREEN (plugin->xfw_screen), FALSE);
 
   if (event->button == 2)
@@ -300,7 +300,7 @@ show_desktop_plugin_show_desktop_changed (XfwScreen         *xfw_screen,
                                           GParamSpec        *pspec,
                                           ShowDesktopPlugin *plugin)
 {
-  panel_return_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (plugin));
+  panel_return_if_fail (SHOW_DESKTOP_IS_PLUGIN (plugin));
   panel_return_if_fail (XFW_IS_SCREEN (xfw_screen));
   panel_return_if_fail (plugin->xfw_screen == xfw_screen);
 

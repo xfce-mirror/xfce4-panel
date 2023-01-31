@@ -27,8 +27,8 @@
 
 G_BEGIN_DECLS
 
-#define XFCE_TYPE_SN_BOX (sn_box_get_type ())
-G_DECLARE_FINAL_TYPE (SnBox, sn_box, XFCE, SN_BOX, GtkContainer)
+#define SN_TYPE_BOX (sn_box_get_type ())
+G_DECLARE_FINAL_TYPE (SnBox, sn_box, SN, BOX, GtkContainer)
 
 void                   sn_box_remove_item                      (SnBox                   *box,
                                                                 SnItem                  *item);

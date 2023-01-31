@@ -23,8 +23,8 @@
 
 G_BEGIN_DECLS
 
-#define XFCE_TYPE_TASKLIST_PLUGIN (tasklist_plugin_get_type ())
-G_DECLARE_FINAL_TYPE (TasklistPlugin, tasklist_plugin, XFCE, TASKLIST_PLUGIN, XfcePanelPlugin)
+#define TASKLIST_TYPE_PLUGIN (tasklist_plugin_get_type ())
+G_DECLARE_FINAL_TYPE (TasklistPlugin, tasklist_plugin, TASKLIST, PLUGIN, XfcePanelPlugin)
 
 void tasklist_plugin_register_type (XfcePanelTypeModule *type_module);
 

@@ -141,7 +141,7 @@ if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) \
 if (error != NULL) \
   {  \
     panel_debug (PANEL_DEBUG_SYSTRAY, "%s: Fatal error for item '%s': (domain '%s', code %d) %s", \
-                 G_STRLOC, XFCE_IS_SN_ITEM (item) ? item->id : "", \
+                 G_STRLOC, SN_IS_ITEM (item) ? item->id : "", \
                  g_quark_to_string (error->domain), error->code, error->message); \
     g_error_free (error); \
   }
@@ -289,7 +289,7 @@ sn_item_init (SnItem *item)
 static void
 sn_item_finalize (GObject *object)
 {
-  SnItem *item = XFCE_SN_ITEM (object);
+  SnItem *item = SN_ITEM (object);
 
   g_object_unref (item->cancellable);
 
@@ -337,7 +337,7 @@ sn_item_get_property (GObject    *object,
                       GValue     *value,
                       GParamSpec *pspec)
 {
-  SnItem *item = XFCE_SN_ITEM (object);
+  SnItem *item = SN_ITEM (object);
 
   switch (prop_id)
     {
@@ -363,7 +363,7 @@ sn_item_set_property (GObject      *object,
                       const GValue *value,
                       GParamSpec   *pspec)
 {
-  SnItem *item = XFCE_SN_ITEM (object);
+  SnItem *item = SN_ITEM (object);
 
   switch (prop_id)
     {
@@ -491,7 +491,7 @@ sn_item_start_failed (gpointer user_data)
 
   /* start is failed, emit the signal in next loop iteration */
   panel_debug (PANEL_DEBUG_SYSTRAY, "%s: Finishing on error for item '%s'",
-               G_STRLOC, XFCE_IS_SN_ITEM (item) ? item->id : "");
+               G_STRLOC, SN_IS_ITEM (item) ? item->id : "");
   g_signal_emit (G_OBJECT (item), sn_item_signals[FINISH], 0);
 
   return G_SOURCE_REMOVE;
@@ -502,7 +502,7 @@ sn_item_start_failed (gpointer user_data)
 void
 sn_item_start (SnItem *item)
 {
-  g_return_if_fail (XFCE_IS_SN_ITEM (item));
+  g_return_if_fail (SN_IS_ITEM (item));
   g_return_if_fail (!item->started);
 
   if (!g_dbus_is_name (item->bus_name))
@@ -529,7 +529,7 @@ void
 sn_item_invalidate (SnItem   *item,
                     gboolean  force_update)
 {
-  g_return_if_fail (XFCE_IS_SN_ITEM (item));
+  g_return_if_fail (SN_IS_ITEM (item));
 
   /* leave if the properties proxy has not yet been created */
   if (item->properties_proxy == NULL)
@@ -941,7 +941,7 @@ sn_item_get_all_properties_result (GObject      *source_object,
 const gchar *
 sn_item_get_name (SnItem *item)
 {
-  g_return_val_if_fail (XFCE_IS_SN_ITEM (item), NULL);
+  g_return_val_if_fail (SN_IS_ITEM (item), NULL);
   g_return_val_if_fail (item->initialized, NULL);
 
   return item->id;
@@ -957,7 +957,7 @@ sn_item_get_icon (SnItem       *item,
                   const gchar **overlay_icon_name,
                   GdkPixbuf   **overlay_icon_pixbuf)
 {
-  g_return_if_fail (XFCE_IS_SN_ITEM (item));
+  g_return_if_fail (SN_IS_ITEM (item));
   g_return_if_fail (item->initialized);
 
   if (icon_name != NULL)
@@ -993,7 +993,7 @@ sn_item_get_tooltip (SnItem       *item,
 {
   gchar *stub;
 
-  g_return_if_fail (XFCE_IS_SN_ITEM (item));
+  g_return_if_fail (SN_IS_ITEM (item));
   g_return_if_fail (item->initialized);
 
   if (title == NULL)
@@ -1070,7 +1070,7 @@ sn_item_get_tooltip (SnItem       *item,
 gboolean
 sn_item_is_menu_only (SnItem *item)
 {
-  g_return_val_if_fail (XFCE_IS_SN_ITEM (item), FALSE);
+  g_return_val_if_fail (SN_IS_ITEM (item), FALSE);
   g_return_val_if_fail (item->initialized, FALSE);
 
   return item->item_is_menu;
@@ -1085,7 +1085,7 @@ sn_item_get_menu (SnItem *item)
   DbusmenuGtkMenu   *menu;
   DbusmenuGtkClient *client;
 
-  g_return_val_if_fail (XFCE_IS_SN_ITEM (item), NULL);
+  g_return_val_if_fail (SN_IS_ITEM (item), NULL);
   g_return_val_if_fail (item->initialized, NULL);
 
   if (item->cached_menu == NULL && item->menu_object_path != NULL)
@@ -1113,7 +1113,7 @@ sn_item_activate (SnItem *item,
                   gint    x_root,
                   gint    y_root)
 {
-  g_return_if_fail (XFCE_IS_SN_ITEM (item));
+  g_return_if_fail (SN_IS_ITEM (item));
   g_return_if_fail (item->initialized);
   g_return_if_fail (item->item_proxy != NULL);
 
@@ -1130,7 +1130,7 @@ sn_item_secondary_activate (SnItem *item,
                             gint    x_root,
                             gint    y_root)
 {
-  g_return_if_fail (XFCE_IS_SN_ITEM (item));
+  g_return_if_fail (SN_IS_ITEM (item));
   g_return_if_fail (item->initialized);
   g_return_if_fail (item->item_proxy != NULL);
 
@@ -1147,7 +1147,7 @@ sn_item_scroll (SnItem *item,
                 gint    delta_x,
                 gint    delta_y)
 {
-  g_return_if_fail (XFCE_IS_SN_ITEM (item));
+  g_return_if_fail (SN_IS_ITEM (item));
   g_return_if_fail (item->initialized);
   g_return_if_fail (item->item_proxy != NULL);
 

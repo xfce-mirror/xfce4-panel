@@ -359,7 +359,7 @@ launcher_dialog_add_response (GtkWidget            *widget,
   GList            *list, *li;
 
   panel_return_if_fail (GTK_IS_DIALOG (widget));
-  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (dialog->plugin));
+  panel_return_if_fail (LAUNCHER_IS_PLUGIN (dialog->plugin));
 
   if (response_id == 1)
     {
@@ -934,7 +934,7 @@ launcher_dialog_response (GtkWidget            *widget,
   GObject *add_dialog;
 
   panel_return_if_fail (GTK_IS_DIALOG (widget));
-  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (dialog->plugin));
+  panel_return_if_fail (LAUNCHER_IS_PLUGIN (dialog->plugin));
   panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
 
   if (G_UNLIKELY (response_id != 1))
@@ -1171,7 +1171,7 @@ launcher_dialog_show (LauncherPlugin *plugin)
   const gchar          *binding_names[] = { "disable-tooltips", "show-label",
                                             "move-first", "arrow-position" };
 
-  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
+  panel_return_if_fail (LAUNCHER_IS_PLUGIN (plugin));
 
   /* setup the dialog */
   builder = panel_utils_builder_new (XFCE_PANEL_PLUGIN (plugin), launcher_dialog_ui,

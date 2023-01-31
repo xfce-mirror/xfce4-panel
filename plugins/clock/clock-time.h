@@ -32,8 +32,8 @@ G_BEGIN_DECLS
 
 typedef struct _ClockTimeTimeout   ClockTimeTimeout;
 
-#define XFCE_TYPE_CLOCK_TIME (clock_time_get_type ())
-G_DECLARE_FINAL_TYPE (ClockTime, clock_time, XFCE, CLOCK_TIME, GObject)
+#define CLOCK_TYPE_TIME (clock_time_get_type ())
+G_DECLARE_FINAL_TYPE (ClockTime, clock_time, CLOCK, TIME, GObject)
 
 void                clock_time_register_type          (XfcePanelTypeModule *type_module);
 

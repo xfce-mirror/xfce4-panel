@@ -366,7 +366,7 @@ xfce_clock_analog_update (XfceClockAnalog *analog,
   GtkWidget *widget = GTK_WIDGET (analog);
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_ANALOG (analog), FALSE);
-  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (time), FALSE);
+  panel_return_val_if_fail (CLOCK_IS_TIME (time), FALSE);
 
   /* update if the widget if visible */
   if (G_LIKELY (gtk_widget_get_visible (widget)))

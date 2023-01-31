@@ -111,7 +111,7 @@ static guint sn_config_signals[LAST_SIGNAL] = { 0, };
 
 #ifdef XFCONF_LEGACY
 
-#define XFCE_TYPE_SN_CONFIG_VALUE_ARRAY (sn_config_value_array_get_type ())
+#define SN_TYPE_CONFIG_VALUE_ARRAY (sn_config_value_array_get_type ())
 
 static GType
 sn_config_value_array_get_type (void)
@@ -130,7 +130,7 @@ sn_config_value_array_get_type (void)
 
 #else
 
-#define XFCE_TYPE_SN_CONFIG_VALUE_ARRAY G_TYPE_PTR_ARRAY
+#define SN_TYPE_CONFIG_VALUE_ARRAY G_TYPE_PTR_ARRAY
 
 #endif
 
@@ -192,7 +192,7 @@ sn_config_class_init (SnConfigClass *klass)
                                    PROP_KNOWN_ITEMS,
                                    g_param_spec_boxed ("known-items",
                                                        NULL, NULL,
-                                                       XFCE_TYPE_SN_CONFIG_VALUE_ARRAY,
+                                                       SN_TYPE_CONFIG_VALUE_ARRAY,
                                                        G_PARAM_READWRITE |
                                                        G_PARAM_STATIC_STRINGS));
 
@@ -200,7 +200,7 @@ sn_config_class_init (SnConfigClass *klass)
                                    PROP_HIDDEN_ITEMS,
                                    g_param_spec_boxed ("hidden-items",
                                                        NULL, NULL,
-                                                       XFCE_TYPE_SN_CONFIG_VALUE_ARRAY,
+                                                       SN_TYPE_CONFIG_VALUE_ARRAY,
                                                        G_PARAM_READWRITE |
                                                        G_PARAM_STATIC_STRINGS));
 
@@ -208,7 +208,7 @@ sn_config_class_init (SnConfigClass *klass)
                                    PROP_KNOWN_LEGACY_ITEMS,
                                    g_param_spec_boxed ("known-legacy-items",
                                                        NULL, NULL,
-                                                       XFCE_TYPE_SN_CONFIG_VALUE_ARRAY,
+                                                       SN_TYPE_CONFIG_VALUE_ARRAY,
                                                        G_PARAM_READWRITE |
                                                        G_PARAM_STATIC_STRINGS));
 
@@ -216,7 +216,7 @@ sn_config_class_init (SnConfigClass *klass)
                                    PROP_HIDDEN_LEGACY_ITEMS,
                                    g_param_spec_boxed ("hidden-legacy-items",
                                                        NULL, NULL,
-                                                       XFCE_TYPE_SN_CONFIG_VALUE_ARRAY,
+                                                       SN_TYPE_CONFIG_VALUE_ARRAY,
                                                        G_PARAM_READWRITE |
                                                        G_PARAM_STATIC_STRINGS));
 
@@ -287,7 +287,7 @@ sn_config_init (SnConfig *config)
 static void
 sn_config_finalize (GObject *object)
 {
-  SnConfig *config = XFCE_SN_CONFIG (object);
+  SnConfig *config = SN_CONFIG (object);
 
   xfconf_shutdown ();
 
@@ -334,7 +334,7 @@ sn_config_get_property (GObject    *object,
                         GValue     *value,
                         GParamSpec *pspec)
 {
-  SnConfig  *config = XFCE_SN_CONFIG (object);
+  SnConfig  *config = SN_CONFIG (object);
   GPtrArray *array;
   GList     *li;
   GValue    *tmp;
@@ -419,7 +419,7 @@ sn_config_set_property (GObject      *object,
                         const GValue *value,
                         GParamSpec   *pspec)
 {
-  SnConfig     *config = XFCE_SN_CONFIG (object);
+  SnConfig     *config = SN_CONFIG (object);
   gint          val;
   GPtrArray    *array;
   const GValue *tmp;
@@ -561,7 +561,7 @@ sn_config_set_property (GObject      *object,
 gint
 sn_config_get_icon_size (SnConfig *config)
 {
-  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), DEFAULT_ICON_SIZE);
+  g_return_val_if_fail (SN_IS_CONFIG (config), DEFAULT_ICON_SIZE);
 
   if (config->icon_size > 0)
     return config->icon_size;
@@ -574,7 +574,7 @@ sn_config_get_icon_size (SnConfig *config)
 gboolean
 sn_config_get_icon_size_is_automatic (SnConfig *config)
 {
-  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), FALSE);
+  g_return_val_if_fail (SN_IS_CONFIG (config), FALSE);
 
   return config->icon_size == 0;
 }
@@ -638,7 +638,7 @@ sn_config_get_dimensions (SnConfig *config,
 gboolean
 sn_config_get_single_row (SnConfig *config)
 {
-  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), DEFAULT_SINGLE_ROW);
+  g_return_val_if_fail (SN_IS_CONFIG (config), DEFAULT_SINGLE_ROW);
 
   return config->single_row;
 }
@@ -648,7 +648,7 @@ sn_config_get_single_row (SnConfig *config)
 gboolean
 sn_config_get_square_icons (SnConfig *config)
 {
-  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), DEFAULT_SQUARE_ICONS);
+  g_return_val_if_fail (SN_IS_CONFIG (config), DEFAULT_SQUARE_ICONS);
 
   return config->square_icons;
 }
@@ -658,7 +658,7 @@ sn_config_get_square_icons (SnConfig *config)
 gboolean
 sn_config_get_symbolic_icons (SnConfig *config)
 {
-  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), DEFAULT_SYMBOLIC_ICONS);
+  g_return_val_if_fail (SN_IS_CONFIG (config), DEFAULT_SYMBOLIC_ICONS);
 
   return config->symbolic_icons;
 }
@@ -668,7 +668,7 @@ sn_config_get_symbolic_icons (SnConfig *config)
 gboolean
 sn_config_get_menu_is_primary (SnConfig *config)
 {
-  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), DEFAULT_MENU_IS_PRIMARY);
+  g_return_val_if_fail (SN_IS_CONFIG (config), DEFAULT_MENU_IS_PRIMARY);
 
   return config->menu_is_primary;
 }
@@ -682,7 +682,7 @@ sn_config_set_orientation (SnConfig       *config,
 {
   gboolean needs_update = FALSE;
 
-  g_return_if_fail (XFCE_IS_SN_CONFIG (config));
+  g_return_if_fail (SN_IS_CONFIG (config));
 
   if (config->orientation != orientation)
     {
@@ -705,7 +705,7 @@ sn_config_set_orientation (SnConfig       *config,
 GtkOrientation
 sn_config_get_orientation (SnConfig *config)
 {
-  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), DEFAULT_ORIENTATION);
+  g_return_val_if_fail (SN_IS_CONFIG (config), DEFAULT_ORIENTATION);
 
   return config->orientation;
 }
@@ -715,7 +715,7 @@ sn_config_get_orientation (SnConfig *config)
 GtkOrientation
 sn_config_get_panel_orientation (SnConfig *config)
 {
-  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), DEFAULT_PANEL_ORIENTATION);
+  g_return_val_if_fail (SN_IS_CONFIG (config), DEFAULT_PANEL_ORIENTATION);
 
   return config->panel_orientation;
 }
@@ -730,7 +730,7 @@ sn_config_set_size (SnConfig  *config,
 {
   gboolean needs_update = FALSE;
 
-  g_return_if_fail (XFCE_IS_SN_CONFIG (config));
+  g_return_if_fail (SN_IS_CONFIG (config));
 
   if (config->nrows != nrows)
     {
@@ -760,7 +760,7 @@ sn_config_set_size (SnConfig  *config,
 gint
 sn_config_get_nrows (SnConfig *config)
 {
-  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), 1);
+  g_return_val_if_fail (SN_IS_CONFIG (config), 1);
 
   return config->nrows;
 }
@@ -770,7 +770,7 @@ sn_config_get_nrows (SnConfig *config)
 gint
 sn_config_get_panel_size (SnConfig *config)
 {
-  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), DEFAULT_PANEL_SIZE);
+  g_return_val_if_fail (SN_IS_CONFIG (config), DEFAULT_PANEL_SIZE);
 
   return config->panel_size;
 }
@@ -781,7 +781,7 @@ gboolean
 sn_config_is_hidden (SnConfig    *config,
                      const gchar *name)
 {
-  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), FALSE);
+  g_return_val_if_fail (SN_IS_CONFIG (config), FALSE);
 
   return g_hash_table_lookup_extended (config->hidden_items, name, NULL, NULL);
 }
@@ -795,7 +795,7 @@ sn_config_set_hidden (SnConfig    *config,
 {
   gchar *name_copy;
 
-  g_return_if_fail (XFCE_IS_SN_CONFIG (config));
+  g_return_if_fail (SN_IS_CONFIG (config));
 
   if (hidden)
     {
@@ -816,7 +816,7 @@ gboolean
 sn_config_is_legacy_hidden (SnConfig    *config,
                             const gchar *name)
 {
-  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), FALSE);
+  g_return_val_if_fail (SN_IS_CONFIG (config), FALSE);
 
   return g_hash_table_lookup_extended (config->hidden_legacy_items, name, NULL, NULL);
 }
@@ -830,7 +830,7 @@ sn_config_set_legacy_hidden (SnConfig    *config,
 {
   gchar *name_copy;
 
-  g_return_if_fail (XFCE_IS_SN_CONFIG (config));
+  g_return_if_fail (SN_IS_CONFIG (config));
 
   if (hidden)
     {
@@ -850,7 +850,7 @@ sn_config_set_legacy_hidden (SnConfig    *config,
 GList*
 sn_config_get_known_items (SnConfig *config)
 {
-  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), NULL);
+  g_return_val_if_fail (SN_IS_CONFIG (config), NULL);
 
   return config->known_items;
 }
@@ -860,7 +860,7 @@ sn_config_get_known_items (SnConfig *config)
 GList*
 sn_config_get_known_legacy_items (SnConfig *config)
 {
-  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), NULL);
+  g_return_val_if_fail (SN_IS_CONFIG (config), NULL);
 
   return config->known_legacy_items;
 }
@@ -872,7 +872,7 @@ sn_config_get_hidden_legacy_items (SnConfig *config)
 {
   GList *list = NULL;
 
-  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), NULL);
+  g_return_val_if_fail (SN_IS_CONFIG (config), NULL);
 
   list = g_hash_table_get_values (config->hidden_legacy_items);
 
@@ -888,7 +888,7 @@ sn_config_add_known_item (SnConfig    *config,
   GList *li;
   gchar *name_copy;
 
-  g_return_if_fail (XFCE_IS_SN_CONFIG (config));
+  g_return_if_fail (SN_IS_CONFIG (config));
 
   /* check if item is already known */
   for(li = config->known_items; li != NULL; li = li->next)
@@ -917,7 +917,7 @@ sn_config_add_known_legacy_item (SnConfig    *config,
   GList *li;
   gchar *name_copy;
 
-  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), TRUE);
+  g_return_val_if_fail (SN_IS_CONFIG (config), TRUE);
 
   /* check if item is already known */
   for(li = config->known_legacy_items; li != NULL; li = li->next)
@@ -948,7 +948,7 @@ sn_config_swap_known_items (SnConfig    *config,
 {
   GList *li, *li_tmp;
 
-  g_return_if_fail (XFCE_IS_SN_CONFIG (config));
+  g_return_if_fail (SN_IS_CONFIG (config));
 
   for(li = config->known_items; li != NULL; li = li->next)
     if (g_strcmp0 (li->data, name1) == 0)
@@ -986,7 +986,7 @@ void sn_config_swap_known_legacy_items(SnConfig *config,
 {
   GList *li, *li_tmp;
 
-  g_return_if_fail(XFCE_IS_SN_CONFIG(config));
+  g_return_if_fail(SN_IS_CONFIG(config));
 
   for (li = config->known_legacy_items; li != NULL; li = li->next)
     if (g_strcmp0(li->data, name1) == 0)
@@ -1098,7 +1098,7 @@ sn_config_new (const gchar *property_base)
   XfconfChannel *channel;
   gchar         *property;
 
-  config = g_object_new (XFCE_TYPE_SN_CONFIG, NULL);
+  config = g_object_new (SN_TYPE_CONFIG, NULL);
 
   if (xfconf_init (NULL))
     {
@@ -1129,19 +1129,19 @@ sn_config_new (const gchar *property_base)
       g_free (property);
 
       property = g_strconcat (property_base, "/known-items", NULL);
-      xfconf_g_property_bind (channel, property, XFCE_TYPE_SN_CONFIG_VALUE_ARRAY, config, "known-items");
+      xfconf_g_property_bind (channel, property, SN_TYPE_CONFIG_VALUE_ARRAY, config, "known-items");
       g_free (property);
 
       property = g_strconcat (property_base, "/hidden-items", NULL);
-      xfconf_g_property_bind (channel, property, XFCE_TYPE_SN_CONFIG_VALUE_ARRAY, config, "hidden-items");
+      xfconf_g_property_bind (channel, property, SN_TYPE_CONFIG_VALUE_ARRAY, config, "hidden-items");
       g_free (property);
 
       property = g_strconcat (property_base, "/known-legacy-items", NULL);
-      xfconf_g_property_bind (channel, property, XFCE_TYPE_SN_CONFIG_VALUE_ARRAY, config, "known-legacy-items");
+      xfconf_g_property_bind (channel, property, SN_TYPE_CONFIG_VALUE_ARRAY, config, "known-legacy-items");
       g_free (property);
 
       property = g_strconcat (property_base, "/hidden-legacy-items", NULL);
-      xfconf_g_property_bind (channel, property, XFCE_TYPE_SN_CONFIG_VALUE_ARRAY, config, "hidden-legacy-items");
+      xfconf_g_property_bind (channel, property, SN_TYPE_CONFIG_VALUE_ARRAY, config, "hidden-legacy-items");
       g_free (property);
 
       g_signal_emit (G_OBJECT (config), sn_config_signals[CONFIGURATION_CHANGED], 0);

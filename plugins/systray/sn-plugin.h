@@ -31,8 +31,8 @@
 
 G_BEGIN_DECLS
 
-#define XFCE_TYPE_SN_PLUGIN (sn_plugin_get_type ())
-G_DECLARE_FINAL_TYPE (SnPlugin, sn_plugin, XFCE, SN_PLUGIN, XfcePanelPlugin)
+#define SN_TYPE_PLUGIN (sn_plugin_get_type ())
+G_DECLARE_FINAL_TYPE (SnPlugin, sn_plugin, SN, PLUGIN, XfcePanelPlugin)
 
 struct _SnPlugin
 {

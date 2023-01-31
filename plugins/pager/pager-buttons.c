@@ -163,7 +163,7 @@ pager_buttons_get_property (GObject    *object,
                             GValue     *value,
                             GParamSpec *pspec)
 {
-  PagerButtons *pager = XFCE_PAGER_BUTTONS (object);
+  PagerButtons *pager = PAGER_BUTTONS (object);
 
   switch (prop_id)
     {
@@ -193,7 +193,7 @@ pager_buttons_set_property (GObject      *object,
                             const GValue *value,
                             GParamSpec   *pspec)
 {
-  PagerButtons *pager = XFCE_PAGER_BUTTONS (object);
+  PagerButtons *pager = PAGER_BUTTONS (object);
   XfwWorkspaceManager *manager;
 
   switch (prop_id)
@@ -239,7 +239,7 @@ pager_buttons_set_property (GObject      *object,
 static void
 pager_buttons_finalize (GObject *object)
 {
-  PagerButtons *pager = XFCE_PAGER_BUTTONS (object);
+  PagerButtons *pager = PAGER_BUTTONS (object);
 
   if (pager->rebuild_id != 0)
     g_source_remove (pager->rebuild_id);
@@ -289,7 +289,7 @@ pager_buttons_button_press_event (GtkWidget      *button,
 static gboolean
 pager_buttons_rebuild_idle (gpointer user_data)
 {
-  PagerButtons  *pager = XFCE_PAGER_BUTTONS (user_data);
+  PagerButtons  *pager = PAGER_BUTTONS (user_data);
   GList         *li, *workspaces;
   XfwWorkspace  *active_ws;
   gint           n, n_workspaces;
@@ -308,7 +308,7 @@ pager_buttons_rebuild_idle (gpointer user_data)
   GdkScreen     *screen;
   guint          scale_factor;
 
-  panel_return_val_if_fail (XFCE_IS_PAGER_BUTTONS (pager), FALSE);
+  panel_return_val_if_fail (PAGER_IS_BUTTONS (pager), FALSE);
   panel_return_val_if_fail (XFW_IS_SCREEN (pager->xfw_screen), FALSE);
 
   gtk_container_foreach (GTK_CONTAINER (pager),
@@ -476,7 +476,7 @@ pager_buttons_rebuild_idle (gpointer user_data)
 static void
 pager_buttons_rebuild_idle_destroyed (gpointer user_data)
 {
-  XFCE_PAGER_BUTTONS (user_data)->rebuild_id = 0;
+  PAGER_BUTTONS (user_data)->rebuild_id = 0;
 }
 
 
@@ -484,7 +484,7 @@ pager_buttons_rebuild_idle_destroyed (gpointer user_data)
 static void
 pager_buttons_queue_rebuild (PagerButtons *pager)
 {
-  panel_return_if_fail (XFCE_IS_PAGER_BUTTONS (pager));
+  panel_return_if_fail (PAGER_IS_BUTTONS (pager));
 
   if (pager->rebuild_id == 0)
     {
@@ -506,7 +506,7 @@ pager_buttons_screen_workspace_changed (XfwWorkspaceGroup *group,
 
   panel_return_if_fail (XFW_IS_WORKSPACE_GROUP (group));
   panel_return_if_fail (previous_workspace == NULL || XFW_IS_WORKSPACE (previous_workspace));
-  panel_return_if_fail (XFCE_IS_PAGER_BUTTONS (pager));
+  panel_return_if_fail (PAGER_IS_BUTTONS (pager));
   panel_return_if_fail (pager->workspace_group == group);
 
   active_ws = xfw_workspace_group_get_active_workspace (group);
@@ -526,7 +526,7 @@ pager_buttons_screen_workspace_created (XfwWorkspaceGroup *group,
 {
   panel_return_if_fail (XFW_IS_WORKSPACE_GROUP (group));
   panel_return_if_fail (XFW_IS_WORKSPACE (created_workspace));
-  panel_return_if_fail (XFCE_IS_PAGER_BUTTONS (pager));
+  panel_return_if_fail (PAGER_IS_BUTTONS (pager));
   panel_return_if_fail (pager->workspace_group == group);
 
   pager_buttons_queue_rebuild (pager);
@@ -541,7 +541,7 @@ pager_buttons_screen_workspace_destroyed (XfwWorkspaceGroup *group,
 {
   panel_return_if_fail (XFW_IS_WORKSPACE_GROUP (group));
   panel_return_if_fail (XFW_IS_WORKSPACE (destroyed_workspace));
-  panel_return_if_fail (XFCE_IS_PAGER_BUTTONS (pager));
+  panel_return_if_fail (PAGER_IS_BUTTONS (pager));
   panel_return_if_fail (pager->workspace_group == group);
 
   pager_buttons_queue_rebuild (pager);
@@ -554,7 +554,7 @@ pager_buttons_screen_viewports_changed (XfwWorkspaceGroup *group,
                                         PagerButtons *pager)
 {
   panel_return_if_fail (XFW_IS_WORKSPACE_GROUP (group));
-  panel_return_if_fail (XFCE_IS_PAGER_BUTTONS (pager));
+  panel_return_if_fail (PAGER_IS_BUTTONS (pager));
   panel_return_if_fail (pager->workspace_group == group);
 
   /* yes we are extremely lazy here, but this event is
@@ -614,7 +614,7 @@ pager_buttons_workspace_button_toggled (GtkWidget     *button,
 
   if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
     {
-      pager = XFCE_PAGER_BUTTONS (gtk_widget_get_ancestor (button, XFCE_TYPE_PAGER_BUTTONS));
+      pager = PAGER_BUTTONS (gtk_widget_get_ancestor (button, PAGER_TYPE_BUTTONS));
       active_ws = xfw_workspace_group_get_active_workspace (pager->workspace_group);
       if (active_ws != workspace)
         xfw_workspace_activate (workspace, NULL);
@@ -630,7 +630,7 @@ pager_buttons_viewport_button_toggled (GtkWidget    *button,
   gint *vp_info;
 
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
-  panel_return_if_fail (XFCE_IS_PAGER_BUTTONS (pager));
+  panel_return_if_fail (PAGER_IS_BUTTONS (pager));
   panel_return_if_fail (XFW_IS_WORKSPACE_GROUP (pager->workspace_group));
 
   vp_info = g_object_get_data (G_OBJECT (button), "viewport-info");
@@ -648,7 +648,7 @@ pager_buttons_new (XfwScreen *screen)
 {
   panel_return_val_if_fail (XFW_IS_SCREEN (screen), NULL);
 
-  return g_object_new (XFCE_TYPE_PAGER_BUTTONS,
+  return g_object_new (PAGER_TYPE_BUTTONS,
                        "screen", screen, NULL);
 }
 
@@ -658,7 +658,7 @@ void
 pager_buttons_set_orientation (PagerButtons   *pager,
                                GtkOrientation  orientation)
 {
-  panel_return_if_fail (XFCE_IS_PAGER_BUTTONS (pager));
+  panel_return_if_fail (PAGER_IS_BUTTONS (pager));
 
   if (pager->orientation == orientation)
    return;
@@ -673,7 +673,7 @@ void
 pager_buttons_set_n_rows (PagerButtons *pager,
                           gint          rows)
 {
-  panel_return_if_fail (XFCE_IS_PAGER_BUTTONS (pager));
+  panel_return_if_fail (PAGER_IS_BUTTONS (pager));
 
   if (pager->rows == rows)
    return;
@@ -688,7 +688,7 @@ void
 pager_buttons_set_numbering (PagerButtons *pager,
                              gboolean      numbering)
 {
-  panel_return_if_fail (XFCE_IS_PAGER_BUTTONS (pager));
+  panel_return_if_fail (PAGER_IS_BUTTONS (pager));
 
   if (pager->numbering == numbering)
    return;

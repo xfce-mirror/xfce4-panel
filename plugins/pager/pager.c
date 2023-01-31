@@ -246,7 +246,7 @@ pager_plugin_get_property (GObject    *object,
                            GValue     *value,
                            GParamSpec *pspec)
 {
-  PagerPlugin *plugin = XFCE_PAGER_PLUGIN (object);
+  PagerPlugin *plugin = PAGER_PLUGIN (object);
 
   switch (prop_id)
     {
@@ -284,7 +284,7 @@ pager_plugin_set_property (GObject      *object,
                            const GValue *value,
                            GParamSpec   *pspec)
 {
-  PagerPlugin *plugin = XFCE_PAGER_PLUGIN (object), *master_plugin;
+  PagerPlugin *plugin = PAGER_PLUGIN (object), *master_plugin;
   guint        rows;
 
   switch (prop_id)
@@ -323,12 +323,12 @@ pager_plugin_set_property (GObject      *object,
             wnck_pager_set_n_rows (WNCK_PAGER (plugin->pager), plugin->rows);
           else
 #endif
-            pager_buttons_set_n_rows (XFCE_PAGER_BUTTONS (plugin->pager), plugin->rows);
+            pager_buttons_set_n_rows (PAGER_BUTTONS (plugin->pager), plugin->rows);
 
           /* set n_rows for other plugins: this will queue a pager re-creation */
           for (GSList *lp = plugin_list; lp != NULL; lp = lp->next)
             if (lp->data != plugin
-                && XFCE_PAGER_PLUGIN (lp->data)->xfw_screen == plugin->xfw_screen)
+                && PAGER_PLUGIN (lp->data)->xfw_screen == plugin->xfw_screen)
               g_object_set (lp->data, "rows", plugin->rows, NULL);
         }
       else
@@ -349,7 +349,7 @@ pager_plugin_set_property (GObject      *object,
 
       if (plugin->pager != NULL
           && !plugin->miniature_view)
-        pager_buttons_set_numbering (XFCE_PAGER_BUTTONS (plugin->pager), plugin->numbering);
+        pager_buttons_set_numbering (PAGER_BUTTONS (plugin->pager), plugin->numbering);
       break;
 
     default:
@@ -402,7 +402,7 @@ static gboolean
 pager_plugin_scroll_event (GtkWidget      *widget,
                            GdkEventScroll *event)
 {
-  PagerPlugin        *plugin = XFCE_PAGER_PLUGIN (widget);
+  PagerPlugin        *plugin = PAGER_PLUGIN (widget);
   XfwWorkspace       *active_ws;
   XfwWorkspace       *new_ws;
   gint                active_n;
@@ -473,7 +473,7 @@ pager_plugin_drag_begin_event (GtkWidget      *widget,
 {
   PagerPlugin *plugin = user_data;
 
-  panel_return_if_fail (XFCE_IS_PAGER_PLUGIN (plugin));
+  panel_return_if_fail (PAGER_IS_PLUGIN (plugin));
   xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), TRUE);
 }
 
@@ -486,7 +486,7 @@ pager_plugin_drag_end_event (GtkWidget      *widget,
 {
   PagerPlugin *plugin = user_data;
 
-  panel_return_if_fail (XFCE_IS_PAGER_PLUGIN (plugin));
+  panel_return_if_fail (PAGER_IS_PLUGIN (plugin));
   xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), FALSE);
 }
 
@@ -528,7 +528,7 @@ pager_plugin_get_master_plugin (PagerPlugin *plugin)
 {
   /* one master plugin per XfwScreen  */
   for (GSList *lp = plugin_list; lp != NULL; lp = lp->next)
-    if (XFCE_PAGER_PLUGIN (lp->data)->xfw_screen == plugin->xfw_screen)
+    if (PAGER_PLUGIN (lp->data)->xfw_screen == plugin->xfw_screen)
       return lp->data;
 
   return NULL;
@@ -565,7 +565,7 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin)
   XfcePanelPluginMode mode;
   GtkOrientation      orientation;
 
-  panel_return_if_fail (XFCE_IS_PAGER_PLUGIN (plugin));
+  panel_return_if_fail (PAGER_IS_PLUGIN (plugin));
   panel_return_if_fail (XFW_IS_SCREEN (plugin->xfw_screen));
 
   /* changing workspace layout is delayed in Libwnck code, so we have to give time
@@ -616,9 +616,9 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin)
 #endif
     {
       plugin->pager = pager_buttons_new (plugin->xfw_screen);
-      pager_buttons_set_n_rows (XFCE_PAGER_BUTTONS (plugin->pager), plugin->rows);
-      pager_buttons_set_orientation (XFCE_PAGER_BUTTONS (plugin->pager), orientation);
-      pager_buttons_set_numbering (XFCE_PAGER_BUTTONS (plugin->pager), plugin->numbering);
+      pager_buttons_set_n_rows (PAGER_BUTTONS (plugin->pager), plugin->rows);
+      pager_buttons_set_orientation (PAGER_BUTTONS (plugin->pager), orientation);
+      pager_buttons_set_numbering (PAGER_BUTTONS (plugin->pager), plugin->numbering);
       gtk_container_add (GTK_CONTAINER (plugin), plugin->pager);
     }
 
@@ -637,7 +637,7 @@ static void
 pager_plugin_screen_changed (GtkWidget *widget,
                              GdkScreen *previous_screen)
 {
-  PagerPlugin *plugin = XFCE_PAGER_PLUGIN (widget);
+  PagerPlugin *plugin = PAGER_PLUGIN (widget);
   GdkScreen *screen;
   XfwScreen *xfw_screen;
   XfwWorkspaceManager *manager;
@@ -670,7 +670,7 @@ pager_plugin_screen_changed (GtkWidget *widget,
 static void
 pager_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
-  PagerPlugin         *plugin = XFCE_PAGER_PLUGIN (panel_plugin);
+  PagerPlugin         *plugin = PAGER_PLUGIN (panel_plugin);
   GtkWidget           *mi, *image;
   const PanelProperty  properties[] =
   {
@@ -708,7 +708,7 @@ pager_plugin_construct (XfcePanelPlugin *panel_plugin)
 static void
 pager_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
-  PagerPlugin *plugin = XFCE_PAGER_PLUGIN (panel_plugin);
+  PagerPlugin *plugin = PAGER_PLUGIN (panel_plugin);
 
   g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
       pager_plugin_screen_changed, NULL);
@@ -744,7 +744,7 @@ static void
 pager_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
                            XfcePanelPluginMode  mode)
 {
-  PagerPlugin       *plugin = XFCE_PAGER_PLUGIN (panel_plugin);
+  PagerPlugin       *plugin = PAGER_PLUGIN (panel_plugin);
   GtkOrientation     orientation;
 
   if (plugin->pager == NULL)
@@ -759,7 +759,7 @@ pager_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
     wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
   else
 #endif
-    pager_buttons_set_orientation (XFCE_PAGER_BUTTONS (plugin->pager), orientation);
+    pager_buttons_set_orientation (PAGER_BUTTONS (plugin->pager), orientation);
 }
 
 
@@ -836,7 +836,7 @@ static void
 pager_plugin_configure_destroyed (gpointer  data,
                                   GObject  *where_the_object_was)
 {
-  PagerPlugin *plugin = XFCE_PAGER_PLUGIN (data);
+  PagerPlugin *plugin = PAGER_PLUGIN (data);
 
   g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->workspace_group),
                                         pager_plugin_configure_n_workspaces_changed,
@@ -848,11 +848,11 @@ pager_plugin_configure_destroyed (gpointer  data,
 static void
 pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
-  PagerPlugin *plugin = XFCE_PAGER_PLUGIN (panel_plugin);
+  PagerPlugin *plugin = PAGER_PLUGIN (panel_plugin);
   GtkBuilder  *builder;
   GObject     *dialog, *object;
 
-  panel_return_if_fail (XFCE_IS_PAGER_PLUGIN (plugin));
+  panel_return_if_fail (PAGER_IS_PLUGIN (plugin));
 
   /* setup the dialog */
   builder = panel_utils_builder_new (panel_plugin, pager_dialog_ui,
@@ -922,7 +922,7 @@ pager_plugin_get_preferred_width (GtkWidget *widget,
                                   gint      *minimum_width,
                                   gint      *natural_width)
 {
-  PagerPlugin         *plugin = XFCE_PAGER_PLUGIN (widget);
+  PagerPlugin         *plugin = PAGER_PLUGIN (widget);
   XfcePanelPluginMode  mode;
   gint                 n_workspaces, n_cols;
   gint                 min_width = 0;
@@ -954,7 +954,7 @@ pager_plugin_get_preferred_height (GtkWidget *widget,
                                    gint      *minimum_height,
                                    gint      *natural_height)
 {
-  PagerPlugin         *plugin = XFCE_PAGER_PLUGIN (widget);
+  PagerPlugin         *plugin = PAGER_PLUGIN (widget);
   XfcePanelPluginMode  mode;
   gint                 n_workspaces, n_cols;
   gint                 min_height = 0;

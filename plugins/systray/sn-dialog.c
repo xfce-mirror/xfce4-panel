@@ -139,7 +139,7 @@ sn_dialog_add_item (SnDialog   *dialog,
 {
   GtkTreeIter iter;
 
-  g_return_if_fail (XFCE_IS_SN_DIALOG (dialog));
+  g_return_if_fail (SN_IS_DIALOG (dialog));
   g_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
   g_return_if_fail (name == NULL || g_utf8_validate (name, -1, NULL));
 
@@ -164,7 +164,7 @@ sn_dialog_add_legacy_item(SnDialog *dialog,
 {
   GtkTreeIter iter;
 
-  g_return_if_fail(XFCE_IS_SN_DIALOG(dialog));
+  g_return_if_fail(SN_IS_DIALOG(dialog));
   g_return_if_fail(GTK_IS_LIST_STORE(dialog->legacy_store));
   g_return_if_fail(name == NULL || g_utf8_validate(name, -1, NULL));
 
@@ -190,8 +190,8 @@ sn_dialog_update_names (SnDialog *dialog)
   GIcon       *icon;
   guint        i;
 
-  g_return_if_fail (XFCE_IS_SN_DIALOG (dialog));
-  g_return_if_fail (XFCE_IS_SN_CONFIG (dialog->config));
+  g_return_if_fail (SN_IS_DIALOG (dialog));
+  g_return_if_fail (SN_IS_CONFIG (dialog->config));
   g_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
 
   for (li = sn_config_get_known_items (dialog->config); li != NULL; li = li->next)
@@ -236,8 +236,8 @@ sn_dialog_update_legacy_names(SnDialog *dialog)
   GIcon *icon;
   guint i;
 
-  g_return_if_fail(XFCE_IS_SN_DIALOG(dialog));
-  g_return_if_fail(XFCE_IS_SN_CONFIG(dialog->config));
+  g_return_if_fail(SN_IS_DIALOG(dialog));
+  g_return_if_fail(SN_IS_CONFIG(dialog->config));
   g_return_if_fail(GTK_IS_LIST_STORE(dialog->legacy_store));
 
   for (li = sn_config_get_known_legacy_items(dialog->config); li != NULL; li = li->next)
@@ -359,8 +359,8 @@ sn_dialog_hidden_toggled (GtkCellRendererToggle *renderer,
   gboolean     hidden;
   gchar       *name;
 
-  g_return_if_fail (XFCE_IS_SN_DIALOG (dialog));
-  g_return_if_fail (XFCE_IS_SN_CONFIG (dialog->config));
+  g_return_if_fail (SN_IS_DIALOG (dialog));
+  g_return_if_fail (SN_IS_CONFIG (dialog->config));
   g_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
 
   if (gtk_tree_model_get_iter_from_string (GTK_TREE_MODEL (dialog->store), &iter, path_string))
@@ -391,8 +391,8 @@ sn_dialog_legacy_hidden_toggled (GtkCellRendererToggle *renderer,
   gboolean     hidden;
   gchar       *name;
 
-  g_return_if_fail (XFCE_IS_SN_DIALOG (dialog));
-  g_return_if_fail (XFCE_IS_SN_CONFIG (dialog->config));
+  g_return_if_fail (SN_IS_DIALOG (dialog));
+  g_return_if_fail (SN_IS_CONFIG (dialog->config));
   g_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
 
   if (gtk_tree_model_get_iter_from_string (GTK_TREE_MODEL (dialog->legacy_store), &iter, path_string))
@@ -424,8 +424,8 @@ sn_dialog_swap_rows (SnDialog   *dialog,
   gboolean   hidden1, hidden2;
   gchar     *tip1, *tip2;
 
-  g_return_if_fail (XFCE_IS_SN_DIALOG (dialog));
-  g_return_if_fail (XFCE_IS_SN_CONFIG (dialog->config));
+  g_return_if_fail (SN_IS_DIALOG (dialog));
+  g_return_if_fail (SN_IS_CONFIG (dialog->config));
   g_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
 
   gtk_tree_model_get (GTK_TREE_MODEL (dialog->store), iter_prev,
@@ -465,8 +465,8 @@ sn_dialog_legacy_swap_rows(SnDialog *dialog,
   gboolean hidden1, hidden2;
   gchar *tip1, *tip2;
 
-  g_return_if_fail(XFCE_IS_SN_DIALOG(dialog));
-  g_return_if_fail(XFCE_IS_SN_CONFIG(dialog->config));
+  g_return_if_fail(SN_IS_DIALOG(dialog));
+  g_return_if_fail(SN_IS_CONFIG(dialog->config));
   g_return_if_fail(GTK_IS_LIST_STORE(dialog->legacy_store));
 
   gtk_tree_model_get(GTK_TREE_MODEL(dialog->legacy_store), iter_prev,
@@ -515,7 +515,7 @@ sn_dialog_item_up_clicked (GtkWidget *button,
   GtkTreeSelection *selection;
   GtkTreeIter       iter, iter_prev, iter_tmp;
 
-  g_return_if_fail (XFCE_IS_SN_DIALOG (dialog));
+  g_return_if_fail (SN_IS_DIALOG (dialog));
   g_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
 
   treeview = gtk_builder_get_object (dialog->builder, "items-treeview");
@@ -552,7 +552,7 @@ sn_dialog_legacy_item_up_clicked(GtkWidget *button,
   GtkTreeSelection *selection;
   GtkTreeIter iter, iter_prev, iter_tmp;
 
-  g_return_if_fail(XFCE_IS_SN_DIALOG(dialog));
+  g_return_if_fail(SN_IS_DIALOG(dialog));
   g_return_if_fail(GTK_IS_LIST_STORE(dialog->legacy_store));
 
   treeview = gtk_builder_get_object(dialog->builder, "legacy-items-treeview");
@@ -589,7 +589,7 @@ sn_dialog_item_down_clicked (GtkWidget *button,
   GtkTreeSelection *selection;
   GtkTreeIter       iter, iter_next;
 
-  g_return_if_fail (XFCE_IS_SN_DIALOG (dialog));
+  g_return_if_fail (SN_IS_DIALOG (dialog));
 
   treeview = gtk_builder_get_object (dialog->builder, "items-treeview");
   g_return_if_fail (GTK_IS_TREE_VIEW (treeview));
@@ -616,7 +616,7 @@ sn_dialog_legacy_item_down_clicked(GtkWidget *button,
   GtkTreeSelection *selection;
   GtkTreeIter iter, iter_next;
 
-  g_return_if_fail(XFCE_IS_SN_DIALOG(dialog));
+  g_return_if_fail(SN_IS_DIALOG(dialog));
 
   treeview = gtk_builder_get_object(dialog->builder, "legacy-items-treeview");
   g_return_if_fail(GTK_IS_TREE_VIEW(treeview));
@@ -639,7 +639,7 @@ static void
 sn_dialog_clear_clicked (GtkWidget *button,
                          SnDialog *dialog)
 {
-  g_return_if_fail (XFCE_IS_SN_DIALOG (dialog));
+  g_return_if_fail (SN_IS_DIALOG (dialog));
 
   if (xfce_dialog_confirm (GTK_WINDOW (gtk_widget_get_toplevel (button)),
                            "edit-clear", _("Clear"), NULL,
@@ -681,7 +681,7 @@ reveal_icon_size (GtkWidget  *widget,
   gboolean active;
   gint     icon_size;
 
-  g_return_if_fail (XFCE_IS_SN_DIALOG (dialog));
+  g_return_if_fail (SN_IS_DIALOG (dialog));
 
   active = gtk_switch_get_active (GTK_SWITCH (widget));
 
@@ -874,9 +874,9 @@ sn_dialog_new (SnConfig  *config,
 {
   SnDialog *dialog;
 
-  g_return_val_if_fail (XFCE_IS_SN_CONFIG (config), NULL);
+  g_return_val_if_fail (SN_IS_CONFIG (config), NULL);
 
-  dialog = g_object_new (XFCE_TYPE_SN_DIALOG, NULL);
+  dialog = g_object_new (SN_TYPE_DIALOG, NULL);
   dialog->config = config;
 
   if (sn_dialog_build (dialog))
@@ -897,7 +897,7 @@ sn_dialog_new (SnConfig  *config,
 static void
 sn_dialog_finalize (GObject *object)
 {
-  SnDialog *dialog = XFCE_SN_DIALOG (object);
+  SnDialog *dialog = SN_DIALOG (object);
 
   if (dialog->dialog != NULL)
     gtk_widget_destroy (dialog->dialog);
