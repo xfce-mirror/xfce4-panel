@@ -98,7 +98,7 @@ LcdPoint;
 
 
 
-XFCE_PANEL_DEFINE_TYPE (XfceClockLcd, xfce_clock_lcd, GTK_TYPE_IMAGE)
+G_DEFINE_TYPE (XfceClockLcd, xfce_clock_lcd, GTK_TYPE_IMAGE)
 
 
 

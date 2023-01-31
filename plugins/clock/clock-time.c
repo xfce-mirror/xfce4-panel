@@ -73,7 +73,7 @@ enum
 static guint clock_time_signals[LAST_SIGNAL] = { 0, };
 
 
-XFCE_PANEL_DEFINE_TYPE (ClockTime, clock_time, G_TYPE_OBJECT)
+G_DEFINE_TYPE (ClockTime, clock_time, G_TYPE_OBJECT)
 
 
 

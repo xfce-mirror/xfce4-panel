@@ -84,7 +84,7 @@ struct _XfceClockBinary
 
 
 
-XFCE_PANEL_DEFINE_TYPE (XfceClockBinary, xfce_clock_binary, GTK_TYPE_IMAGE)
+G_DEFINE_TYPE (XfceClockBinary, xfce_clock_binary, GTK_TYPE_IMAGE)
 
 
 

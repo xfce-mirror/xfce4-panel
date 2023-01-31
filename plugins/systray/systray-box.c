@@ -119,7 +119,7 @@ struct _SystrayBox
 
 
 
-XFCE_PANEL_DEFINE_TYPE (SystrayBox, systray_box, GTK_TYPE_CONTAINER)
+G_DEFINE_TYPE (SystrayBox, systray_box, GTK_TYPE_CONTAINER)
 
 
 

@@ -163,7 +163,7 @@ static const gchar *i18n_hour_pm_names[] =
 
 
 
-XFCE_PANEL_DEFINE_TYPE (XfceClockFuzzy, xfce_clock_fuzzy, GTK_TYPE_LABEL)
+G_DEFINE_TYPE (XfceClockFuzzy, xfce_clock_fuzzy, GTK_TYPE_LABEL)
 
 
 

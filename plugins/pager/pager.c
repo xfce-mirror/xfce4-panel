@@ -140,9 +140,7 @@ static GSList *plugin_list = NULL;
 
 
 
-/* define the plugin */
-XFCE_PANEL_DEFINE_PLUGIN_RESIDENT (PagerPlugin, pager_plugin,
-    pager_buttons_register_type)
+XFCE_PANEL_DEFINE_PLUGIN_RESIDENT (PagerPlugin, pager_plugin)
 
 
 

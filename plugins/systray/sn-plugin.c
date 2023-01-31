@@ -65,15 +65,7 @@ static void                  sn_plugin_configure_plugin              (XfcePanelP
 
 
 
-
-
-XFCE_PANEL_DEFINE_PLUGIN (SnPlugin, sn_plugin
-#ifdef HAVE_GTK_X11
-                          , systray_box_register_type,
-                          systray_manager_register_type,
-                          systray_socket_register_type
-#endif
-                         )
+XFCE_PANEL_DEFINE_PLUGIN (SnPlugin, sn_plugin)
 
 
 
