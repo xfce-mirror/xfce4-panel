@@ -36,11 +36,6 @@ static void     wrapper_module_unload  (GTypeModule *type_module);
 
 
 
-struct _WrapperModuleClass
-{
-  GTypeModuleClass __parent__;
-};
-
 struct _WrapperModule
 {
   GTypeModule __parent__;

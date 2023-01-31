@@ -24,17 +24,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct _WrapperModuleClass WrapperModuleClass;
-typedef struct _WrapperModule      WrapperModule;
-
-#define WRAPPER_TYPE_MODULE            (wrapper_module_get_type ())
-#define WRAPPER_MODULE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), WRAPPER_TYPE_MODULE, WrapperModule))
-#define WRAPPER_MODULE_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), WRAPPER_TYPE_MODULE, WrapperModuleClass))
-#define WRAPPER_IS_MODULE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), WRAPPER_TYPE_MODULE))
-#define WRAPPER_IS_MODULE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), WRAPPER_TYPE_MODULE))
-#define WRAPPER_MODULE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), WRAPPER_TYPE_MODULE, WrapperModuleClass))
-
-GType          wrapper_module_get_type     (void) G_GNUC_CONST;
+#define WRAPPER_TYPE_MODULE (wrapper_module_get_type ())
+G_DECLARE_FINAL_TYPE (WrapperModule, wrapper_module, WRAPPER, MODULE, GTypeModule)
 
 WrapperModule *wrapper_module_new          (GModule        *library) G_GNUC_MALLOC;
 
