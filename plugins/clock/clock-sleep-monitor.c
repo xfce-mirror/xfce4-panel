@@ -52,12 +52,11 @@
 
 static guint clock_sleep_monitor_woke_up_signal = 0;
 
-struct _ClockSleepMonitor
+typedef struct _ClockSleepMonitorPrivate
 {
-  GObject parent_instance;
-};
+} ClockSleepMonitorPrivate;
 
-G_DEFINE_TYPE (ClockSleepMonitor, clock_sleep_monitor, G_TYPE_OBJECT)
+G_DEFINE_ABSTRACT_TYPE (ClockSleepMonitor, clock_sleep_monitor, G_TYPE_OBJECT)
 
 static void clock_sleep_monitor_finalize (GObject *object);
 
