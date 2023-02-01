@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-05 00:46+0100\n"
+"POT-Creation-Date: 2023-02-01 00:46+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2017,2022\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/xfce/xfce4-panel/language/en_GB/)\n"
@@ -40,7 +40,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panels;settings;preferences;taskbar;autohide;application menu;start;buttons;launcher;notification area;status;icons;plugins;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3572
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3562
 msgid "Panel"
 msgstr "Panel"
 
@@ -50,13 +50,13 @@ msgstr "Customise the panel"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1095
-#: ../panel/panel-preferences-dialog.c:1417
+#: ../panel/panel-preferences-dialog.c:1410
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Are you sure that you want to remove \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1100
-#: ../panel/panel-preferences-dialog.c:1420
+#: ../panel/panel-preferences-dialog.c:1413
 msgid "Remove Item"
 msgstr "Remove Item"
 
@@ -66,10 +66,10 @@ msgid ""
 msgstr "Removing the item from the panel also means its configuration will be lost."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1103 ../panel/panel-dialogs.c:164
-#: ../panel/panel-preferences-dialog.c:1424
-#: ../plugins/applicationsmenu/applicationsmenu.c:608
-#: ../plugins/directorymenu/directorymenu.c:467
-#: ../plugins/directorymenu/directorymenu.c:934
+#: ../panel/panel-preferences-dialog.c:1417
+#: ../plugins/applicationsmenu/applicationsmenu.c:602
+#: ../plugins/directorymenu/directorymenu.c:460
+#: ../plugins/directorymenu/directorymenu.c:926
 msgid "_Cancel"
 msgstr "_Cancel"
 
@@ -77,8 +77,8 @@ msgstr "_Cancel"
 #: ../libxfce4panel/xfce-panel-plugin.c:1104
 #: ../libxfce4panel/xfce-panel-plugin.c:1271
 #: ../panel/panel-plugin-external.c:403
-#: ../panel/panel-preferences-dialog.c:1054
-#: ../panel/panel-preferences-dialog.c:1425
+#: ../panel/panel-preferences-dialog.c:1047
+#: ../panel/panel-preferences-dialog.c:1418
 #: ../panel/panel-preferences-dialog.glade.h:58
 #: ../plugins/launcher/launcher-dialog.c:860
 msgid "_Remove"
@@ -90,7 +90,7 @@ msgid "_Properties"
 msgstr "_Properties"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:3648
+#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:3638
 msgid "_About"
 msgstr "_About"
 
@@ -104,29 +104,29 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3584
+#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3574
 msgid "Add _New Items..."
 msgstr "Add _New Items..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1308 ../panel/panel-window.c:3595
+#: ../libxfce4panel/xfce-panel-plugin.c:1308 ../panel/panel-window.c:3585
 msgid "Panel Pr_eferences..."
 msgstr "Panel Pr_eferences..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1325 ../panel/panel-window.c:3623
+#: ../libxfce4panel/xfce-panel-plugin.c:1325 ../panel/panel-window.c:3613
 msgid "Log _Out"
 msgstr "Log _Out"
 
 #. help item
-#: ../libxfce4panel/xfce-panel-plugin.c:1341 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3639
+#: ../libxfce4panel/xfce-panel-plugin.c:1341 ../panel/panel-item-dialog.c:196
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3629
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:15
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 #: ../plugins/launcher/launcher-dialog.glade.h:20
-#: ../plugins/pager/pager-dialog.glade.h:4
+#: ../plugins/pager/pager-dialog.glade.h:5
 #: ../plugins/separator/separator-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
@@ -138,43 +138,43 @@ msgstr "_Help"
 msgid "About"
 msgstr "About"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Show the 'Panel Preferences' dialogue"
 
-#: ../panel/main.c:83 ../panel/main.c:84
+#: ../panel/main.c:84 ../panel/main.c:85
 msgid "PANEL-NUMBER"
 msgstr "PANEL-NUMBER"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
 msgid "Show the 'Add New Items' dialog"
 msgstr "Show the 'Add New Items' dialogue"
 
-#: ../panel/main.c:85
+#: ../panel/main.c:86
 msgid "Save the panel configuration"
 msgstr "Save the panel configuration"
 
-#: ../panel/main.c:86
+#: ../panel/main.c:87
 msgid "Add a new plugin to the panel"
 msgstr "Add a new plug-in to the panel"
 
-#: ../panel/main.c:86
+#: ../panel/main.c:87
 msgid "PLUGIN-NAME"
 msgstr "PLUGIN-NAME"
 
-#: ../panel/main.c:87
+#: ../panel/main.c:88
 msgid "Restart the running panel instance"
 msgstr "Restart the running panel instance"
 
-#: ../panel/main.c:88
+#: ../panel/main.c:89
 msgid "Quit the running panel instance"
 msgstr "Quit the running panel instance"
 
-#: ../panel/main.c:89
+#: ../panel/main.c:90
 msgid "Do not wait for a window manager on startup"
 msgstr "Do not wait for a window manager on startup"
 
-#: ../panel/main.c:90
+#: ../panel/main.c:91
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -182,113 +182,113 @@ msgid "Print version information and exit"
 msgstr "Print version information and exit"
 
 #. parse context options
-#: ../panel/main.c:273
+#: ../panel/main.c:274
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTS...]"
 
-#: ../panel/main.c:280
+#: ../panel/main.c:281
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Type \"%s --help\" for usage."
 
-#: ../panel/main.c:299
+#: ../panel/main.c:300
 msgid "The Xfce development team. All rights reserved."
 msgstr "The Xfce development team. All rights reserved."
 
-#: ../panel/main.c:300
+#: ../panel/main.c:301
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Please report bugs to <%s>."
 
 #. quit without error if an instance is running
-#: ../panel/main.c:403
+#: ../panel/main.c:404
 msgid "There is already a running instance"
 msgstr "There is already a running instance"
 
 #. spawn ourselfs again
-#: ../panel/main.c:411
+#: ../panel/main.c:412
 msgid "Restarting..."
 msgstr "Restarting..."
 
-#: ../panel/main.c:426
+#: ../panel/main.c:427
 msgid "Failed to show the preferences dialog"
 msgstr "Failed to show the preferences dialogue"
 
-#: ../panel/main.c:428
+#: ../panel/main.c:429
 msgid "Failed to show the add new items dialog"
 msgstr "Failed to show the add new items dialogue"
 
-#: ../panel/main.c:430
+#: ../panel/main.c:431
 msgid "Failed to save the panel configuration"
 msgstr "Failed to save the panel configuration"
 
-#: ../panel/main.c:432
+#: ../panel/main.c:433
 msgid "Failed to add a plugin to the panel"
 msgstr "Failed to add a plug-in to the panel"
 
-#: ../panel/main.c:434
+#: ../panel/main.c:435
 msgid "Failed to restart the panel"
 msgstr "Failed to restart the panel"
 
-#: ../panel/main.c:436
+#: ../panel/main.c:437
 msgid "Failed to quit the panel"
 msgstr "Failed to quit the panel"
 
-#: ../panel/main.c:438
+#: ../panel/main.c:439
 msgid "Failed to send D-Bus message"
 msgstr "Failed to send D-Bus message"
 
-#: ../panel/main.c:448
+#: ../panel/main.c:449
 msgid "Execute"
 msgstr "Execute"
 
-#: ../panel/main.c:449
+#: ../panel/main.c:450
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 
-#: ../panel/main.c:452 ../panel/main.c:466
+#: ../panel/main.c:453 ../panel/main.c:467
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "No running instance of %s was found"
 
-#: ../panel/panel-application.c:227
+#: ../panel/panel-application.c:222
 msgid "Failed to launch the migration application"
 msgstr "Failed to launch the migration application"
 
-#: ../panel/panel-application.c:1040
+#: ../panel/panel-application.c:1035
 msgid "Create _Launcher"
 msgstr "Create _Launcher"
 
-#: ../panel/panel-application.c:1041
+#: ../panel/panel-application.c:1036
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "This will create a new launcher plug-in on the panel and inserts the dropped files as menu items."
 
-#: ../panel/panel-application.c:1043
+#: ../panel/panel-application.c:1038
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Create new launcher from %d desktop file"
 msgstr[1] "Create new launcher from %d desktop files"
 
-#: ../panel/panel-application.c:1800
+#: ../panel/panel-application.c:1795
 msgid "Quit"
 msgstr "Quit"
 
-#: ../panel/panel-application.c:1801
+#: ../panel/panel-application.c:1796
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "You have started X without session manager. Clicking Quit will close the X server."
 
-#: ../panel/panel-application.c:1802
+#: ../panel/panel-application.c:1797
 msgid "Are you sure you want to quit the panel?"
 msgstr "Are you sure you want to quit the panel?"
 
-#: ../panel/panel-application.c:1810
+#: ../panel/panel-application.c:1805
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Failed to execute command \"%s\""
@@ -322,7 +322,7 @@ msgstr "Jeff Bailes <thepizzaking@gmail.com>, 2010"
 msgid "Add New Item"
 msgstr "Add New Item"
 
-#: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:201
+#: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:192
 #: ../panel/panel-preferences-dialog.glade.h:56
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
@@ -332,7 +332,7 @@ msgstr "_Add"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Please choose a panel for the new plug-in:"
 
-#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:993
+#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:986
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -347,32 +347,32 @@ msgstr "Because the panel is running in kiosk mode, you are not allowed to make 
 msgid "Modifying the panel is not allowed"
 msgstr "Modifying the panel is not allowed"
 
-#: ../panel/panel-item-dialog.c:195
+#: ../panel/panel-item-dialog.c:186
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Add New Items"
 msgstr "Add New Items"
 
-#: ../panel/panel-item-dialog.c:209
+#: ../panel/panel-item-dialog.c:200
 #: ../panel/panel-preferences-dialog.glade.h:11
-#: ../panel/panel-tic-tac-toe.c:125
+#: ../panel/panel-tic-tac-toe.c:117
 #: ../plugins/actions/actions-dialog.glade.h:7
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 #: ../plugins/launcher/launcher-dialog.glade.h:17
-#: ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager-dialog.glade.h:6
 #: ../plugins/separator/separator-dialog.glade.h:5
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "_Close"
 msgstr "_Close"
 
-#: ../panel/panel-item-dialog.c:225
+#: ../panel/panel-item-dialog.c:216
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "_Search:"
 
-#: ../panel/panel-item-dialog.c:233
+#: ../panel/panel-item-dialog.c:224
 msgid "Enter search phrase here"
 msgstr "Enter search phrase here"
 
@@ -397,39 +397,39 @@ msgstr "The plug-in restarted more than once in the last %d seconds. If you pres
 msgid "_Execute"
 msgstr "_Execute"
 
-#: ../panel/panel-preferences-dialog.c:547
+#: ../panel/panel-preferences-dialog.c:540
 msgid "Automatic"
 msgstr "Automatic"
 
-#: ../panel/panel-preferences-dialog.c:557
+#: ../panel/panel-preferences-dialog.c:550
 msgid "Primary"
 msgstr "Primary"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:576
+#: ../panel/panel-preferences-dialog.c:569
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:1055
+#: ../panel/panel-preferences-dialog.c:1048
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "The panel and plug-in configurations will be permanently removed"
 
-#: ../panel/panel-preferences-dialog.c:1056
+#: ../panel/panel-preferences-dialog.c:1049
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Are you sure you want to remove panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1259
+#: ../panel/panel-preferences-dialog.c:1252
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(external)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1264
+#: ../panel/panel-preferences-dialog.c:1257
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -438,12 +438,12 @@ msgstr "Internal name: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1276
+#: ../panel/panel-preferences-dialog.c:1269
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Internal name: %s-%d"
 
-#: ../panel/panel-preferences-dialog.c:1422
+#: ../panel/panel-preferences-dialog.c:1415
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "If you remove the item from the panel, it is permanently lost."
 
@@ -688,31 +688,31 @@ msgstr "Move currently selected item down by one row"
 msgid "Ite_ms"
 msgstr "Ite_ms"
 
-#: ../panel/panel-tic-tac-toe.c:123
+#: ../panel/panel-tic-tac-toe.c:115
 msgid "_New Game"
 msgstr "_New Game"
 
-#: ../panel/panel-tic-tac-toe.c:134
+#: ../panel/panel-tic-tac-toe.c:126
 msgid "_Level:"
 msgstr "_Level:"
 
-#: ../panel/panel-tic-tac-toe.c:140
+#: ../panel/panel-tic-tac-toe.c:132
 msgid "Novice"
 msgstr "Novice"
 
-#: ../panel/panel-tic-tac-toe.c:141
+#: ../panel/panel-tic-tac-toe.c:133
 msgid "Intermediate"
 msgstr "Intermediate"
 
-#: ../panel/panel-tic-tac-toe.c:142
+#: ../panel/panel-tic-tac-toe.c:134
 msgid "Experienced"
 msgstr "Experienced"
 
-#: ../panel/panel-tic-tac-toe.c:143
+#: ../panel/panel-tic-tac-toe.c:135
 msgid "Expert"
 msgstr "Expert"
 
-#: ../panel/panel-window.c:3609
+#: ../panel/panel-window.c:3599
 msgid "_Lock Panel"
 msgstr "_Lock Panel"
 
@@ -737,7 +737,7 @@ msgstr "Panel configuration has been updated."
 msgid "Action Buttons"
 msgstr "Action Buttons"
 
-#: ../plugins/actions/actions-dialog.glade.h:2 ../plugins/actions/actions.c:40
+#: ../plugins/actions/actions-dialog.glade.h:2 ../plugins/actions/actions.c:36
 msgid "Session Menu"
 msgstr "Session Menu"
 
@@ -795,144 +795,144 @@ msgstr "Show a confirmation dialogue with a 30 second timeout for some of the ac
 msgid "_Actions"
 msgstr "_Actions"
 
-#: ../plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:157
 msgid "Log Out"
 msgstr "Log Out"
 
-#: ../plugins/actions/actions.c:168
+#: ../plugins/actions/actions.c:158
 msgid "_Log Out"
 msgstr "_Log Out"
 
-#: ../plugins/actions/actions.c:169
+#: ../plugins/actions/actions.c:159
 msgid "Are you sure you want to log out?"
 msgstr "Are you sure you want to log out?"
 
-#: ../plugins/actions/actions.c:170
+#: ../plugins/actions/actions.c:160
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Logging out in %d seconds."
 
-#: ../plugins/actions/actions.c:176
+#: ../plugins/actions/actions.c:166
 msgid "Log Out..."
 msgstr "Log Out..."
 
-#: ../plugins/actions/actions.c:177
+#: ../plugins/actions/actions.c:167
 msgid "Log _Out..."
 msgstr "Log _Out..."
 
-#: ../plugins/actions/actions.c:184
+#: ../plugins/actions/actions.c:174
 msgid "Switch User"
 msgstr "Switch User"
 
-#: ../plugins/actions/actions.c:185
+#: ../plugins/actions/actions.c:175
 msgid "_Switch User"
 msgstr "_Switch User"
 
-#: ../plugins/actions/actions.c:192
+#: ../plugins/actions/actions.c:182
 msgid "Lock Screen"
 msgstr "Lock Screen"
 
-#: ../plugins/actions/actions.c:193
+#: ../plugins/actions/actions.c:183
 msgid "Loc_k Screen"
 msgstr "Loc_k Screen"
 
-#: ../plugins/actions/actions.c:200
+#: ../plugins/actions/actions.c:190
 msgid "Hibernate"
 msgstr "Hibernate"
 
-#: ../plugins/actions/actions.c:201
+#: ../plugins/actions/actions.c:191
 msgid "_Hibernate"
 msgstr "_Hibernate"
 
-#: ../plugins/actions/actions.c:202
+#: ../plugins/actions/actions.c:192
 msgid "Do you want to suspend to disk?"
 msgstr "Do you want to suspend to disk?"
 
-#: ../plugins/actions/actions.c:203
+#: ../plugins/actions/actions.c:193
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Hibernating computer in %d seconds."
 
-#: ../plugins/actions/actions.c:209
+#: ../plugins/actions/actions.c:199
 msgid "Hybrid Sleep"
 msgstr "Hybrid Sleep"
 
-#: ../plugins/actions/actions.c:210
+#: ../plugins/actions/actions.c:200
 msgid "_Hybrid Sleep"
 msgstr "_Hybrid Sleep"
 
-#: ../plugins/actions/actions.c:211
+#: ../plugins/actions/actions.c:201
 msgid "Do you want to hibernate and suspend the system?"
 msgstr "Do you want to hibernate and suspend the system?"
 
-#: ../plugins/actions/actions.c:212
+#: ../plugins/actions/actions.c:202
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr "Hibernating and Suspending computer in %d seconds."
 
-#: ../plugins/actions/actions.c:218
+#: ../plugins/actions/actions.c:208
 msgid "Suspend"
 msgstr "Suspend"
 
-#: ../plugins/actions/actions.c:219
+#: ../plugins/actions/actions.c:209
 msgid "Sus_pend"
 msgstr "Sus_pend"
 
-#: ../plugins/actions/actions.c:220
+#: ../plugins/actions/actions.c:210
 msgid "Do you want to suspend to RAM?"
 msgstr "Do you want to suspend to RAM?"
 
-#: ../plugins/actions/actions.c:221
+#: ../plugins/actions/actions.c:211
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Suspending computer in %d seconds."
 
-#: ../plugins/actions/actions.c:227
+#: ../plugins/actions/actions.c:217
 msgid "Restart"
 msgstr "Restart"
 
-#: ../plugins/actions/actions.c:228
+#: ../plugins/actions/actions.c:218
 msgid "_Restart"
 msgstr "_Restart"
 
-#: ../plugins/actions/actions.c:229
+#: ../plugins/actions/actions.c:219
 msgid "Are you sure you want to restart?"
 msgstr "Are you sure you want to restart?"
 
-#: ../plugins/actions/actions.c:230
+#: ../plugins/actions/actions.c:220
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Restarting computer in %d seconds."
 
-#: ../plugins/actions/actions.c:236
+#: ../plugins/actions/actions.c:226
 msgid "Shut Down"
 msgstr "Shut Down"
 
-#: ../plugins/actions/actions.c:237
+#: ../plugins/actions/actions.c:227
 msgid "Shut _Down"
 msgstr "Shut _Down"
 
-#: ../plugins/actions/actions.c:238
+#: ../plugins/actions/actions.c:228
 msgid "Are you sure you want to shut down?"
 msgstr "Are you sure you want to shut down?"
 
-#: ../plugins/actions/actions.c:239
+#: ../plugins/actions/actions.c:229
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Turning off computer in %d seconds."
 
-#: ../plugins/actions/actions.c:688
+#: ../plugins/actions/actions.c:677
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Separator"
 
-#: ../plugins/actions/actions.c:1122
+#: ../plugins/actions/actions.c:1111
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Failed to run action \"%s\""
 
-#: ../plugins/actions/actions.c:1327
+#: ../plugins/actions/actions.c:1316
 msgid "Little Mouse"
 msgstr "Little Mouse"
 
@@ -1014,23 +1014,23 @@ msgid "Menu File"
 msgstr "Menu File"
 
 #. I18N: default tooltip of the application menu
-#: ../plugins/applicationsmenu/applicationsmenu.c:39
+#: ../plugins/applicationsmenu/applicationsmenu.c:37
 msgid "Applications"
 msgstr "Applications"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:606
-#: ../plugins/directorymenu/directorymenu.c:465
+#: ../plugins/applicationsmenu/applicationsmenu.c:600
+#: ../plugins/directorymenu/directorymenu.c:458
 msgid "Select An Icon"
 msgstr "Select An Icon"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:609
-#: ../plugins/directorymenu/directorymenu.c:468
+#: ../plugins/applicationsmenu/applicationsmenu.c:603
+#: ../plugins/directorymenu/directorymenu.c:461
 msgid "_OK"
 msgstr "_OK"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:647
-#: ../plugins/clock/clock.c:1030 ../plugins/launcher/launcher.c:2496
+#: ../plugins/applicationsmenu/applicationsmenu.c:641
+#: ../plugins/clock/clock.c:1018 ../plugins/launcher/launcher.c:2466
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Failed to execute command \"%s\"."
@@ -1075,15 +1075,15 @@ msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
 
-#: ../plugins/clock/clock.c:155
+#: ../plugins/clock/clock.c:150
 msgid "Week %V"
 msgstr "Week %V"
 
-#: ../plugins/clock/clock.c:465
+#: ../plugins/clock/clock.c:453
 msgid "Failed to execute clock command"
 msgstr "Failed to execute clock command"
 
-#: ../plugins/clock/clock.c:969
+#: ../plugins/clock/clock.c:957
 msgid "Custom Format"
 msgstr "Custom Format"
 
@@ -1252,319 +1252,313 @@ msgstr "Time"
 msgid "Clock Options"
 msgstr "Clock Options"
 
-#. TRANSLATORS: adjust this accordingly for your locale format
-#: ../plugins/clock/clock-digital.h:25
+#: ../plugins/clock/clock-digital.h:27
 msgctxt "Time"
 msgid "%R"
 msgstr "%R"
 
-#: ../plugins/clock/clock-digital.h:26
+#: ../plugins/clock/clock-digital.h:28
 msgctxt "Date"
 msgid "%Y-%m-%d"
 msgstr "%Y-%m-%d"
 
-#: ../plugins/clock/clock-digital.h:27
-msgctxt "Time"
-msgid "%a %_d %b, %R"
-msgstr "%a %_d %b, %R"
-
-#: ../plugins/clock/clock-fuzzy.c:88
+#: ../plugins/clock/clock-fuzzy.c:82
 msgid "Night"
 msgstr "Night"
 
-#: ../plugins/clock/clock-fuzzy.c:89
+#: ../plugins/clock/clock-fuzzy.c:83
 msgid "Early morning"
 msgstr "Early morning"
 
-#: ../plugins/clock/clock-fuzzy.c:90
+#: ../plugins/clock/clock-fuzzy.c:84
 msgid "Morning"
 msgstr "Morning"
 
-#: ../plugins/clock/clock-fuzzy.c:91
+#: ../plugins/clock/clock-fuzzy.c:85
 msgid "Almost noon"
 msgstr "Almost noon"
 
-#: ../plugins/clock/clock-fuzzy.c:92
+#: ../plugins/clock/clock-fuzzy.c:86
 msgid "Noon"
 msgstr "Noon"
 
-#: ../plugins/clock/clock-fuzzy.c:93
+#: ../plugins/clock/clock-fuzzy.c:87
 msgid "Afternoon"
 msgstr "Afternoon"
 
-#: ../plugins/clock/clock-fuzzy.c:94
+#: ../plugins/clock/clock-fuzzy.c:88
 msgid "Evening"
 msgstr "Evening"
 
-#: ../plugins/clock/clock-fuzzy.c:95
+#: ../plugins/clock/clock-fuzzy.c:89
 msgid "Late evening"
 msgstr "Late evening"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:96
 #, no-c-format
 msgid "%0 o'clock"
 msgstr "%0 o'clock"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:97
 #, no-c-format
 msgid "five past %0"
 msgstr "five past %0"
 
-#: ../plugins/clock/clock-fuzzy.c:104
+#: ../plugins/clock/clock-fuzzy.c:98
 #, no-c-format
 msgid "ten past %0"
 msgstr "ten past %0"
 
-#: ../plugins/clock/clock-fuzzy.c:105
+#: ../plugins/clock/clock-fuzzy.c:99
 #, no-c-format
 msgid "quarter past %0"
 msgstr "quarter past %0"
 
-#: ../plugins/clock/clock-fuzzy.c:106
+#: ../plugins/clock/clock-fuzzy.c:100
 #, no-c-format
 msgid "twenty past %0"
 msgstr "twenty past %0"
 
-#: ../plugins/clock/clock-fuzzy.c:107
+#: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "twenty five past %0"
 msgstr "twenty five past %0"
 
-#: ../plugins/clock/clock-fuzzy.c:108
+#: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "half past %0"
 msgstr "half past %0"
 
-#: ../plugins/clock/clock-fuzzy.c:109
+#: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "twenty five to %1"
 msgstr "twenty five to %1"
 
-#: ../plugins/clock/clock-fuzzy.c:110
+#: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "twenty to %1"
 msgstr "twenty to %1"
 
-#: ../plugins/clock/clock-fuzzy.c:111
+#: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "quarter to %1"
 msgstr "quarter to %1"
 
-#: ../plugins/clock/clock-fuzzy.c:112
+#: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "ten to %1"
 msgstr "ten to %1"
 
-#: ../plugins/clock/clock-fuzzy.c:113
+#: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "five to %1"
 msgstr "five to %1"
 
-#: ../plugins/clock/clock-fuzzy.c:114
+#: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "%1 o'clock"
 msgstr "%1 o'clock"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: ../plugins/clock/clock-fuzzy.c:121
+#: ../plugins/clock/clock-fuzzy.c:115
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "%0 o'clock"
 
-#: ../plugins/clock/clock-fuzzy.c:122
+#: ../plugins/clock/clock-fuzzy.c:116
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "five past %0"
 
-#: ../plugins/clock/clock-fuzzy.c:123
+#: ../plugins/clock/clock-fuzzy.c:117
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "ten past %0"
 
-#: ../plugins/clock/clock-fuzzy.c:124
+#: ../plugins/clock/clock-fuzzy.c:118
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "quarter past %0"
 
-#: ../plugins/clock/clock-fuzzy.c:125
+#: ../plugins/clock/clock-fuzzy.c:119
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "twenty past %0"
 
-#: ../plugins/clock/clock-fuzzy.c:126
+#: ../plugins/clock/clock-fuzzy.c:120
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "twenty five past %0"
 
-#: ../plugins/clock/clock-fuzzy.c:127
+#: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "half past %0"
 
-#: ../plugins/clock/clock-fuzzy.c:128
+#: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "twenty five to %1"
 
-#: ../plugins/clock/clock-fuzzy.c:129
+#: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "twenty to %1"
 
-#: ../plugins/clock/clock-fuzzy.c:130
+#: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "quarter to %1"
 
-#: ../plugins/clock/clock-fuzzy.c:131
+#: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "ten to %1"
 
-#: ../plugins/clock/clock-fuzzy.c:132
+#: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "five to %1"
 
-#: ../plugins/clock/clock-fuzzy.c:133
+#: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "%1 o'clock"
 
-#: ../plugins/clock/clock-fuzzy.c:138
+#: ../plugins/clock/clock-fuzzy.c:132
 msgctxt "am"
 msgid "one"
 msgstr "one"
 
-#: ../plugins/clock/clock-fuzzy.c:139
+#: ../plugins/clock/clock-fuzzy.c:133
 msgctxt "am"
 msgid "two"
 msgstr "two"
 
-#: ../plugins/clock/clock-fuzzy.c:140
+#: ../plugins/clock/clock-fuzzy.c:134
 msgctxt "am"
 msgid "three"
 msgstr "three"
 
-#: ../plugins/clock/clock-fuzzy.c:141
+#: ../plugins/clock/clock-fuzzy.c:135
 msgctxt "am"
 msgid "four"
 msgstr "four"
 
-#: ../plugins/clock/clock-fuzzy.c:142
+#: ../plugins/clock/clock-fuzzy.c:136
 msgctxt "am"
 msgid "five"
 msgstr "five"
 
-#: ../plugins/clock/clock-fuzzy.c:143
+#: ../plugins/clock/clock-fuzzy.c:137
 msgctxt "am"
 msgid "six"
 msgstr "six"
 
-#: ../plugins/clock/clock-fuzzy.c:144
+#: ../plugins/clock/clock-fuzzy.c:138
 msgctxt "am"
 msgid "seven"
 msgstr "seven"
 
-#: ../plugins/clock/clock-fuzzy.c:145
+#: ../plugins/clock/clock-fuzzy.c:139
 msgctxt "am"
 msgid "eight"
 msgstr "eight"
 
-#: ../plugins/clock/clock-fuzzy.c:146
+#: ../plugins/clock/clock-fuzzy.c:140
 msgctxt "am"
 msgid "nine"
 msgstr "nine"
 
-#: ../plugins/clock/clock-fuzzy.c:147
+#: ../plugins/clock/clock-fuzzy.c:141
 msgctxt "am"
 msgid "ten"
 msgstr "ten"
 
-#: ../plugins/clock/clock-fuzzy.c:148
+#: ../plugins/clock/clock-fuzzy.c:142
 msgctxt "am"
 msgid "eleven"
 msgstr "eleven"
 
 #. I18N: 12 AM is midnight
-#: ../plugins/clock/clock-fuzzy.c:150
+#: ../plugins/clock/clock-fuzzy.c:144
 msgctxt "am"
 msgid "twelve"
 msgstr "twelve"
 
-#: ../plugins/clock/clock-fuzzy.c:155
+#: ../plugins/clock/clock-fuzzy.c:149
 msgctxt "pm"
 msgid "one"
 msgstr "one"
 
-#: ../plugins/clock/clock-fuzzy.c:156
+#: ../plugins/clock/clock-fuzzy.c:150
 msgctxt "pm"
 msgid "two"
 msgstr "two"
 
-#: ../plugins/clock/clock-fuzzy.c:157
+#: ../plugins/clock/clock-fuzzy.c:151
 msgctxt "pm"
 msgid "three"
 msgstr "three"
 
-#: ../plugins/clock/clock-fuzzy.c:158
+#: ../plugins/clock/clock-fuzzy.c:152
 msgctxt "pm"
 msgid "four"
 msgstr "four"
 
-#: ../plugins/clock/clock-fuzzy.c:159
+#: ../plugins/clock/clock-fuzzy.c:153
 msgctxt "pm"
 msgid "five"
 msgstr "five"
 
-#: ../plugins/clock/clock-fuzzy.c:160
+#: ../plugins/clock/clock-fuzzy.c:154
 msgctxt "pm"
 msgid "six"
 msgstr "six"
 
-#: ../plugins/clock/clock-fuzzy.c:161
+#: ../plugins/clock/clock-fuzzy.c:155
 msgctxt "pm"
 msgid "seven"
 msgstr "seven"
 
-#: ../plugins/clock/clock-fuzzy.c:162
+#: ../plugins/clock/clock-fuzzy.c:156
 msgctxt "pm"
 msgid "eight"
 msgstr "eight"
 
-#: ../plugins/clock/clock-fuzzy.c:163
+#: ../plugins/clock/clock-fuzzy.c:157
 msgctxt "pm"
 msgid "nine"
 msgstr "nine"
 
-#: ../plugins/clock/clock-fuzzy.c:164
+#: ../plugins/clock/clock-fuzzy.c:158
 msgctxt "pm"
 msgid "ten"
 msgstr "ten"
 
-#: ../plugins/clock/clock-fuzzy.c:165
+#: ../plugins/clock/clock-fuzzy.c:159
 msgctxt "pm"
 msgid "eleven"
 msgstr "eleven"
 
 #. I18N: 12 PM is noon
-#: ../plugins/clock/clock-fuzzy.c:167
+#: ../plugins/clock/clock-fuzzy.c:161
 msgctxt "pm"
 msgid "twelve"
 msgstr "twelve"
@@ -1573,75 +1567,75 @@ msgstr "twelve"
 msgid "What time is it?"
 msgstr "What time is it?"
 
-#: ../plugins/directorymenu/directorymenu.c:296
+#: ../plugins/directorymenu/directorymenu.c:289
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Directory Menu"
 
-#: ../plugins/directorymenu/directorymenu.c:691
+#: ../plugins/directorymenu/directorymenu.c:683
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Failed to launch application \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:722
+#: ../plugins/directorymenu/directorymenu.c:714
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Failed to query content type for \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:731
+#: ../plugins/directorymenu/directorymenu.c:723
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "No default application found for \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:747
+#: ../plugins/directorymenu/directorymenu.c:739
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Failed to launch default application for \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:842
+#: ../plugins/directorymenu/directorymenu.c:834
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Failed to execute the preferred application for category \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:923
+#: ../plugins/directorymenu/directorymenu.c:915
 msgid "Create New Folder"
 msgstr "Create New Folder"
 
-#: ../plugins/directorymenu/directorymenu.c:928
+#: ../plugins/directorymenu/directorymenu.c:920
 msgid "Create New Text Document"
 msgstr "Create New Text Document"
 
-#: ../plugins/directorymenu/directorymenu.c:935
+#: ../plugins/directorymenu/directorymenu.c:927
 msgid "C_reate"
 msgstr "C_reate"
 
-#: ../plugins/directorymenu/directorymenu.c:936
+#: ../plugins/directorymenu/directorymenu.c:928
 msgid "Create & _Open"
 msgstr "Create & _Open"
 
-#: ../plugins/directorymenu/directorymenu.c:950
+#: ../plugins/directorymenu/directorymenu.c:942
 msgid "Enter the new name:"
 msgstr "Enter the new name:"
 
-#: ../plugins/directorymenu/directorymenu.c:986
+#: ../plugins/directorymenu/directorymenu.c:978
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Failed to create folder: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1067
+#: ../plugins/directorymenu/directorymenu.c:1059
 msgid "Open Folder"
 msgstr "Open Folder"
 
-#: ../plugins/directorymenu/directorymenu.c:1080
+#: ../plugins/directorymenu/directorymenu.c:1072
 msgid "Open in Terminal"
 msgstr "Open in Terminal"
 
-#: ../plugins/directorymenu/directorymenu.c:1093
+#: ../plugins/directorymenu/directorymenu.c:1085
 msgid "Create Folder..."
 msgstr "Create Folder..."
 
-#: ../plugins/directorymenu/directorymenu.c:1106
+#: ../plugins/directorymenu/directorymenu.c:1098
 msgid "Create Text Document..."
 msgstr "Create Text Document..."
 
@@ -1698,15 +1692,15 @@ msgstr "_File Pattern:"
 msgid "Filtering"
 msgstr "Filtering"
 
-#: ../plugins/launcher/launcher.c:405
+#: ../plugins/launcher/launcher.c:393
 msgid "Open launcher menu"
 msgstr "Open launcher menu"
 
-#: ../plugins/launcher/launcher.c:1611
+#: ../plugins/launcher/launcher.c:1591
 msgid "Unnamed Item"
 msgstr "Unnamed Item"
 
-#: ../plugins/launcher/launcher.c:1801
+#: ../plugins/launcher/launcher.c:1779
 msgid "No items"
 msgstr "No items"
 
@@ -1834,15 +1828,15 @@ msgstr "Advanced"
 msgid "Program launcher with optional menu"
 msgstr "Program launcher with optional menu"
 
-#: ../plugins/pager/pager.c:680 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:685 ../plugins/pager/pager-dialog.glade.h:4
 msgid "Workspace _Settings..."
 msgstr "Workspace _Settings..."
 
-#: ../plugins/pager/pager.c:774
+#: ../plugins/pager/pager.c:785
 msgid "Unable to open the workspace settings"
 msgstr "Unable to open the workspace settings"
 
-#: ../plugins/pager/pager-buttons.c:595 ../plugins/windowmenu/windowmenu.c:900
+#: ../plugins/pager/pager-buttons.c:588 ../plugins/windowmenu/windowmenu.c:893
 #, c-format
 msgid "Workspace %d"
 msgstr "Workspace %d"
@@ -1904,15 +1898,15 @@ msgstr "_Expand"
 msgid "Adds a separator or space between panel items"
 msgstr "Adds a separator or space between panel items"
 
-#: ../plugins/showdesktop/showdesktop.c:249
+#: ../plugins/showdesktop/showdesktop.c:245
 msgid "Restore the minimized windows"
 msgstr "Restore the minimised windows"
 
-#: ../plugins/showdesktop/showdesktop.c:251
+#: ../plugins/showdesktop/showdesktop.c:247
 msgid "Minimize all open windows and show the desktop"
 msgstr "Minimise all open windows and show the desktop"
 
-#: ../plugins/showdesktop/showdesktop.c:254
+#: ../plugins/showdesktop/showdesktop.c:250
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Show Desktop"
@@ -1921,11 +1915,11 @@ msgstr "Show Desktop"
 msgid "Hide all windows and show the desktop"
 msgstr "Hide all windows and show the desktop"
 
-#: ../plugins/systray/sn-dialog.c:650
+#: ../plugins/systray/sn-dialog.c:645
 msgid "Clear"
 msgstr "Clear"
 
-#: ../plugins/systray/sn-dialog.c:651
+#: ../plugins/systray/sn-dialog.c:646
 msgid "Are you sure you want to clear the list of known items?"
 msgstr "Are you sure you want to clear the list of known items?"
 
@@ -2044,7 +2038,7 @@ msgstr "Most likely another widget took over the function of a notification area
 msgid "The notification area lost selection"
 msgstr "The notification area lost selection"
 
-#: ../plugins/systray/systray-manager.c:399
+#: ../plugins/systray/systray-manager.c:402
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Failed to acquire manager selection for screen %d"
@@ -2157,36 +2151,36 @@ msgstr "Show windows from all mo_nitors"
 msgid "Show only _minimized windows"
 msgstr "Show only _minimised windows"
 
-#: ../plugins/tasklist/tasklist-widget.c:3058
+#: ../plugins/tasklist/tasklist-widget.c:3107
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Unable to start new instance of '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:3062
+#: ../plugins/tasklist/tasklist-widget.c:3111
 msgid "Error"
 msgstr "Error"
 
-#: ../plugins/tasklist/tasklist-widget.c:3091
+#: ../plugins/tasklist/tasklist-widget.c:3140
 msgid "Launch New Instance"
 msgstr "Launch New Instance"
 
-#: ../plugins/tasklist/tasklist-widget.c:3836
+#: ../plugins/tasklist/tasklist-widget.c:3885
 msgid "Mi_nimize All"
 msgstr "Mi_nimise All"
 
-#: ../plugins/tasklist/tasklist-widget.c:3843
+#: ../plugins/tasklist/tasklist-widget.c:3892
 msgid "Un_minimize All"
 msgstr "Un_minimise All"
 
-#: ../plugins/tasklist/tasklist-widget.c:3850
+#: ../plugins/tasklist/tasklist-widget.c:3899
 msgid "Ma_ximize All"
 msgstr "Ma_ximise All"
 
-#: ../plugins/tasklist/tasklist-widget.c:3857
+#: ../plugins/tasklist/tasklist-widget.c:3906
 msgid "_Unmaximize All"
 msgstr "_Unmaximise All"
 
-#: ../plugins/tasklist/tasklist-widget.c:3868
+#: ../plugins/tasklist/tasklist-widget.c:3917
 msgid "_Close All"
 msgstr "_Close All"
 
@@ -2194,28 +2188,28 @@ msgstr "_Close All"
 msgid "Switch between open windows using buttons"
 msgstr "Switch between open windows using buttons"
 
-#: ../plugins/windowmenu/windowmenu.c:696
+#: ../plugins/windowmenu/windowmenu.c:689
 msgid "Desktop"
 msgstr "Desktop"
 
-#: ../plugins/windowmenu/windowmenu.c:1296
+#: ../plugins/windowmenu/windowmenu.c:1289
 msgid "No Windows"
 msgstr "No Windows"
 
-#: ../plugins/windowmenu/windowmenu.c:1311
+#: ../plugins/windowmenu/windowmenu.c:1304
 msgid "Urgent Windows"
 msgstr "Urgent Windows"
 
-#: ../plugins/windowmenu/windowmenu.c:1356
+#: ../plugins/windowmenu/windowmenu.c:1349
 msgid "Add Workspace"
 msgstr "Add Workspace"
 
-#: ../plugins/windowmenu/windowmenu.c:1378
+#: ../plugins/windowmenu/windowmenu.c:1371
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Remove Workspace \"%s\""
 
-#: ../plugins/windowmenu/windowmenu.c:1380
+#: ../plugins/windowmenu/windowmenu.c:1373
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Remove Workspace %d"
