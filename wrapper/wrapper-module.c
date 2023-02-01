@@ -46,7 +46,7 @@ struct _WrapperModule
 
 
 
-G_DEFINE_TYPE (WrapperModule, wrapper_module, G_TYPE_TYPE_MODULE)
+G_DEFINE_FINAL_TYPE (WrapperModule, wrapper_module, G_TYPE_TYPE_MODULE)
 
 
 
