@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-05 00:46+0100\n"
+"POT-Creation-Date: 2023-02-01 00:46+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: SZERVÁC  Libre art  Attila  Libre art, 2022\n"
 "Language-Team: Hungarian (http://www.transifex.com/xfce/xfce4-panel/language/hu/)\n"
@@ -39,7 +39,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr ""
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3572
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3562
 msgid "Panel"
 msgstr "Panel"
 
@@ -49,13 +49,13 @@ msgstr "A panel személyre szabása"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1095
-#: ../panel/panel-preferences-dialog.c:1417
+#: ../panel/panel-preferences-dialog.c:1410
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Biztosan eltávolítja a következőt: „%s”?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1100
-#: ../panel/panel-preferences-dialog.c:1420
+#: ../panel/panel-preferences-dialog.c:1413
 msgid "Remove Item"
 msgstr "Elem eltávolítása"
 
@@ -65,10 +65,10 @@ msgid ""
 msgstr "Ha eltávolítja az elemet a panelről akkor annak beállításai is elvesznek."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1103 ../panel/panel-dialogs.c:164
-#: ../panel/panel-preferences-dialog.c:1424
-#: ../plugins/applicationsmenu/applicationsmenu.c:608
-#: ../plugins/directorymenu/directorymenu.c:467
-#: ../plugins/directorymenu/directorymenu.c:934
+#: ../panel/panel-preferences-dialog.c:1417
+#: ../plugins/applicationsmenu/applicationsmenu.c:602
+#: ../plugins/directorymenu/directorymenu.c:460
+#: ../plugins/directorymenu/directorymenu.c:926
 msgid "_Cancel"
 msgstr "Mé_gse"
 
@@ -76,8 +76,8 @@ msgstr "Mé_gse"
 #: ../libxfce4panel/xfce-panel-plugin.c:1104
 #: ../libxfce4panel/xfce-panel-plugin.c:1271
 #: ../panel/panel-plugin-external.c:403
-#: ../panel/panel-preferences-dialog.c:1054
-#: ../panel/panel-preferences-dialog.c:1425
+#: ../panel/panel-preferences-dialog.c:1047
+#: ../panel/panel-preferences-dialog.c:1418
 #: ../panel/panel-preferences-dialog.glade.h:58
 #: ../plugins/launcher/launcher-dialog.c:860
 msgid "_Remove"
@@ -89,7 +89,7 @@ msgid "_Properties"
 msgstr "_Tulajdonságok"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:3648
+#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:3638
 msgid "_About"
 msgstr "_Névjegy"
 
@@ -103,29 +103,29 @@ msgid "Pane_l"
 msgstr "_Panel"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3584
+#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3574
 msgid "Add _New Items..."
 msgstr "Új _elemek hozzáadása…"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1308 ../panel/panel-window.c:3595
+#: ../libxfce4panel/xfce-panel-plugin.c:1308 ../panel/panel-window.c:3585
 msgid "Panel Pr_eferences..."
 msgstr "_Panel beállításai…"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1325 ../panel/panel-window.c:3623
+#: ../libxfce4panel/xfce-panel-plugin.c:1325 ../panel/panel-window.c:3613
 msgid "Log _Out"
 msgstr "_Kijelentkezés"
 
 #. help item
-#: ../libxfce4panel/xfce-panel-plugin.c:1341 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3639
+#: ../libxfce4panel/xfce-panel-plugin.c:1341 ../panel/panel-item-dialog.c:196
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3629
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:15
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 #: ../plugins/launcher/launcher-dialog.glade.h:20
-#: ../plugins/pager/pager-dialog.glade.h:4
+#: ../plugins/pager/pager-dialog.glade.h:5
 #: ../plugins/separator/separator-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
@@ -137,43 +137,43 @@ msgstr "_Súgó"
 msgid "About"
 msgstr "Névjegy"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "A „Panel beállításai” ablak megjelenítése"
 
-#: ../panel/main.c:83 ../panel/main.c:84
+#: ../panel/main.c:84 ../panel/main.c:85
 msgid "PANEL-NUMBER"
 msgstr "PANELSZÁM"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
 msgid "Show the 'Add New Items' dialog"
 msgstr "Az „Új elemek hozzáadása” ablak megjelenítése"
 
-#: ../panel/main.c:85
+#: ../panel/main.c:86
 msgid "Save the panel configuration"
 msgstr "Panel beállításainak mentése"
 
-#: ../panel/main.c:86
+#: ../panel/main.c:87
 msgid "Add a new plugin to the panel"
 msgstr "Új bővítmény hozzáadása a panelhez"
 
-#: ../panel/main.c:86
+#: ../panel/main.c:87
 msgid "PLUGIN-NAME"
 msgstr "BŐVÍTMÉNYNÉV"
 
-#: ../panel/main.c:87
+#: ../panel/main.c:88
 msgid "Restart the running panel instance"
 msgstr "A panel futó példányának újraindítása"
 
-#: ../panel/main.c:88
+#: ../panel/main.c:89
 msgid "Quit the running panel instance"
 msgstr "Kilépés a panel futó példányából"
 
-#: ../panel/main.c:89
+#: ../panel/main.c:90
 msgid "Do not wait for a window manager on startup"
 msgstr "Ne várjon az ablakkezelőre indításkor"
 
-#: ../panel/main.c:90
+#: ../panel/main.c:91
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -181,113 +181,113 @@ msgid "Print version information and exit"
 msgstr "Verzióinformációk kiírása és kilépés"
 
 #. parse context options
-#: ../panel/main.c:273
+#: ../panel/main.c:274
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTUMOK…]"
 
-#: ../panel/main.c:280
+#: ../panel/main.c:281
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Segítségért adja ki a „%s --help” parancsot."
 
-#: ../panel/main.c:299
+#: ../panel/main.c:300
 msgid "The Xfce development team. All rights reserved."
 msgstr "Az Xfce fejlesztőcsapata. Minden jog fenntartva."
 
-#: ../panel/main.c:300
+#: ../panel/main.c:301
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "A hibákat ide jelentse: <%s>."
 
 #. quit without error if an instance is running
-#: ../panel/main.c:403
+#: ../panel/main.c:404
 msgid "There is already a running instance"
 msgstr "Már fut egy példány"
 
 #. spawn ourselfs again
-#: ../panel/main.c:411
+#: ../panel/main.c:412
 msgid "Restarting..."
 msgstr "Újraindítás…"
 
-#: ../panel/main.c:426
+#: ../panel/main.c:427
 msgid "Failed to show the preferences dialog"
 msgstr "A beállítóablak megjelenítése meghiúsult"
 
-#: ../panel/main.c:428
+#: ../panel/main.c:429
 msgid "Failed to show the add new items dialog"
 msgstr "Az „Új elemek hozzáadása” ablak megjelenítése meghiúsult"
 
-#: ../panel/main.c:430
+#: ../panel/main.c:431
 msgid "Failed to save the panel configuration"
 msgstr "A panel beállításainak mentése meghiúsult"
 
-#: ../panel/main.c:432
+#: ../panel/main.c:433
 msgid "Failed to add a plugin to the panel"
 msgstr "A bővítmény panelhez adása meghiúsult"
 
-#: ../panel/main.c:434
+#: ../panel/main.c:435
 msgid "Failed to restart the panel"
 msgstr "A panel újraindítása meghiúsult"
 
-#: ../panel/main.c:436
+#: ../panel/main.c:437
 msgid "Failed to quit the panel"
 msgstr "A panelből való kilépés meghiúsult"
 
-#: ../panel/main.c:438
+#: ../panel/main.c:439
 msgid "Failed to send D-Bus message"
 msgstr "A D-Bus üzenet elküldése meghiúsult"
 
-#: ../panel/main.c:448
+#: ../panel/main.c:449
 msgid "Execute"
 msgstr "Végrehajtás"
 
-#: ../panel/main.c:449
+#: ../panel/main.c:450
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "El kívánja indítani a panelt? Ebben az esetben mentse a munkamenetet kilépéskor, így a panel a következő bejelentkezéskor automatikusan elindul."
 
-#: ../panel/main.c:452 ../panel/main.c:466
+#: ../panel/main.c:453 ../panel/main.c:467
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Nem található a(z) %s futó példánya"
 
-#: ../panel/panel-application.c:227
+#: ../panel/panel-application.c:222
 msgid "Failed to launch the migration application"
 msgstr "A költöztető alkalmazás indítása meghiúsult"
 
-#: ../panel/panel-application.c:1040
+#: ../panel/panel-application.c:1035
 msgid "Create _Launcher"
 msgstr "_Parancsikon létrehozása"
 
-#: ../panel/panel-application.c:1041
+#: ../panel/panel-application.c:1036
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Ez egy új indítóbővítményt hoz létre a panelen, a ráejtett fájlokat menüelemekként pedig veszi fel."
 
-#: ../panel/panel-application.c:1043
+#: ../panel/panel-application.c:1038
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Új parancsikon létrehozása %d asztali fájlból"
 msgstr[1] "Új parancsikon létrehozása %d asztali fájlból"
 
-#: ../panel/panel-application.c:1800
+#: ../panel/panel-application.c:1795
 msgid "Quit"
 msgstr "Kilépés"
 
-#: ../panel/panel-application.c:1801
+#: ../panel/panel-application.c:1796
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Az X-et munkamenet-kezelő nélkül indította. A Kilépés gombra kattintás bezárja az X kiszolgálót."
 
-#: ../panel/panel-application.c:1802
+#: ../panel/panel-application.c:1797
 msgid "Are you sure you want to quit the panel?"
 msgstr "Biztos, hogy be kívánja zárni a panelt?"
 
-#: ../panel/panel-application.c:1810
+#: ../panel/panel-application.c:1805
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "A parancs („%s”) indítása meghiúsult"
@@ -321,7 +321,7 @@ msgstr "Kelemen Gábor <kelemeng at gnome dot hu>"
 msgid "Add New Item"
 msgstr "Új elem felvétele"
 
-#: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:201
+#: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:192
 #: ../panel/panel-preferences-dialog.glade.h:56
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
@@ -331,7 +331,7 @@ msgstr "_Hozzáadás"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Válasszon panelt az új bővítményhez:"
 
-#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:993
+#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:986
 #, c-format
 msgid "Panel %d"
 msgstr "%d. panel"
@@ -346,32 +346,32 @@ msgstr "Mivel a panel kioszk módban fut, normál felhasználóként nem módos�
 msgid "Modifying the panel is not allowed"
 msgstr "A panel módosítása nem engedélyezett"
 
-#: ../panel/panel-item-dialog.c:195
+#: ../panel/panel-item-dialog.c:186
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Add New Items"
 msgstr "Új elemek felvétele"
 
-#: ../panel/panel-item-dialog.c:209
+#: ../panel/panel-item-dialog.c:200
 #: ../panel/panel-preferences-dialog.glade.h:11
-#: ../panel/panel-tic-tac-toe.c:125
+#: ../panel/panel-tic-tac-toe.c:117
 #: ../plugins/actions/actions-dialog.glade.h:7
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 #: ../plugins/launcher/launcher-dialog.glade.h:17
-#: ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager-dialog.glade.h:6
 #: ../plugins/separator/separator-dialog.glade.h:5
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "_Close"
 msgstr "_Bezárás"
 
-#: ../panel/panel-item-dialog.c:225
+#: ../panel/panel-item-dialog.c:216
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "_Keresés:"
 
-#: ../panel/panel-item-dialog.c:233
+#: ../panel/panel-item-dialog.c:224
 msgid "Enter search phrase here"
 msgstr "Adja meg a keresőkifejezést"
 
@@ -396,39 +396,39 @@ msgstr "A bővítmény többször is újraindult az elmúlt %d másodpercben. A 
 msgid "_Execute"
 msgstr "_Végrehajtás"
 
-#: ../panel/panel-preferences-dialog.c:547
+#: ../panel/panel-preferences-dialog.c:540
 msgid "Automatic"
 msgstr "Automatikus"
 
-#: ../panel/panel-preferences-dialog.c:557
+#: ../panel/panel-preferences-dialog.c:550
 msgid "Primary"
 msgstr "Elsődleges"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:576
+#: ../panel/panel-preferences-dialog.c:569
 #, c-format
 msgid "Monitor %d"
 msgstr "%d. monitor"
 
-#: ../panel/panel-preferences-dialog.c:1055
+#: ../panel/panel-preferences-dialog.c:1048
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "A panel és a bővítmények beállításai el lesznek távolítva"
 
-#: ../panel/panel-preferences-dialog.c:1056
+#: ../panel/panel-preferences-dialog.c:1049
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Biztos, hogy el kívánja távolítani a(z) %d. panelt?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1259
+#: ../panel/panel-preferences-dialog.c:1252
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(külső)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1264
+#: ../panel/panel-preferences-dialog.c:1257
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -437,12 +437,12 @@ msgstr "Belső név: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1276
+#: ../panel/panel-preferences-dialog.c:1269
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Belső név: %s-%d"
 
-#: ../panel/panel-preferences-dialog.c:1422
+#: ../panel/panel-preferences-dialog.c:1415
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Ha eltávolítja az elemet a panelről, az véglegesen elvész."
 
@@ -687,31 +687,31 @@ msgstr "A kiválasztott elem mozgatása egy sorral lejjebb"
 msgid "Ite_ms"
 msgstr "_Elemek"
 
-#: ../panel/panel-tic-tac-toe.c:123
+#: ../panel/panel-tic-tac-toe.c:115
 msgid "_New Game"
 msgstr "Ú_j játék"
 
-#: ../panel/panel-tic-tac-toe.c:134
+#: ../panel/panel-tic-tac-toe.c:126
 msgid "_Level:"
 msgstr "S_zint:"
 
-#: ../panel/panel-tic-tac-toe.c:140
+#: ../panel/panel-tic-tac-toe.c:132
 msgid "Novice"
 msgstr "Újonc"
 
-#: ../panel/panel-tic-tac-toe.c:141
+#: ../panel/panel-tic-tac-toe.c:133
 msgid "Intermediate"
 msgstr "Haladó"
 
-#: ../panel/panel-tic-tac-toe.c:142
+#: ../panel/panel-tic-tac-toe.c:134
 msgid "Experienced"
 msgstr "Gyakorlott"
 
-#: ../panel/panel-tic-tac-toe.c:143
+#: ../panel/panel-tic-tac-toe.c:135
 msgid "Expert"
 msgstr "Szakértő"
 
-#: ../panel/panel-window.c:3609
+#: ../panel/panel-window.c:3599
 msgid "_Lock Panel"
 msgstr "_Panel zárolása"
 
@@ -736,7 +736,7 @@ msgstr "A panel beállításai frissítésre kerültek."
 msgid "Action Buttons"
 msgstr "Műveletgombok"
 
-#: ../plugins/actions/actions-dialog.glade.h:2 ../plugins/actions/actions.c:40
+#: ../plugins/actions/actions-dialog.glade.h:2 ../plugins/actions/actions.c:36
 msgid "Session Menu"
 msgstr "Munkamenet menü"
 
@@ -794,144 +794,144 @@ msgstr "Megerősítési ablak megjelenítése 30 másodperces időkorláttal egy
 msgid "_Actions"
 msgstr "_Műveletek"
 
-#: ../plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:157
 msgid "Log Out"
 msgstr "Kijelentkezés"
 
-#: ../plugins/actions/actions.c:168
+#: ../plugins/actions/actions.c:158
 msgid "_Log Out"
 msgstr "_Kijelentkezés"
 
-#: ../plugins/actions/actions.c:169
+#: ../plugins/actions/actions.c:159
 msgid "Are you sure you want to log out?"
 msgstr "Biztos, hogy ki szeretne jelentkezni?"
 
-#: ../plugins/actions/actions.c:170
+#: ../plugins/actions/actions.c:160
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Kijelentkezés %d másodperc múlva."
 
-#: ../plugins/actions/actions.c:176
+#: ../plugins/actions/actions.c:166
 msgid "Log Out..."
 msgstr "Kijelentkezés…"
 
-#: ../plugins/actions/actions.c:177
+#: ../plugins/actions/actions.c:167
 msgid "Log _Out..."
 msgstr "_Kijelentkezés…"
 
-#: ../plugins/actions/actions.c:184
+#: ../plugins/actions/actions.c:174
 msgid "Switch User"
 msgstr "Felhasználóváltás"
 
-#: ../plugins/actions/actions.c:185
+#: ../plugins/actions/actions.c:175
 msgid "_Switch User"
 msgstr "Felhasználó_váltás"
 
-#: ../plugins/actions/actions.c:192
+#: ../plugins/actions/actions.c:182
 msgid "Lock Screen"
 msgstr "Képernyő zárolása"
 
-#: ../plugins/actions/actions.c:193
+#: ../plugins/actions/actions.c:183
 msgid "Loc_k Screen"
 msgstr "Képernyő _zárolása"
 
-#: ../plugins/actions/actions.c:200
+#: ../plugins/actions/actions.c:190
 msgid "Hibernate"
 msgstr "Hibernálás"
 
-#: ../plugins/actions/actions.c:201
+#: ../plugins/actions/actions.c:191
 msgid "_Hibernate"
 msgstr "_Hibernálás"
 
-#: ../plugins/actions/actions.c:202
+#: ../plugins/actions/actions.c:192
 msgid "Do you want to suspend to disk?"
 msgstr "Szeretné munkamenete állapotát a lemezre menteni?"
 
-#: ../plugins/actions/actions.c:203
+#: ../plugins/actions/actions.c:193
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "A számítógép hibernálása %d másodperc múlva."
 
-#: ../plugins/actions/actions.c:209
+#: ../plugins/actions/actions.c:199
 msgid "Hybrid Sleep"
 msgstr "Hibrid alvás"
 
-#: ../plugins/actions/actions.c:210
+#: ../plugins/actions/actions.c:200
 msgid "_Hybrid Sleep"
 msgstr "_Hibrid alvás"
 
-#: ../plugins/actions/actions.c:211
+#: ../plugins/actions/actions.c:201
 msgid "Do you want to hibernate and suspend the system?"
 msgstr "Biztos hibernálja és felfüggeszti a rendszert?"
 
-#: ../plugins/actions/actions.c:212
+#: ../plugins/actions/actions.c:202
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr "Számítógép hibernálása és felfüggesztése %d másodpercen belül."
 
-#: ../plugins/actions/actions.c:218
+#: ../plugins/actions/actions.c:208
 msgid "Suspend"
 msgstr "Felfüggesztés"
 
-#: ../plugins/actions/actions.c:219
+#: ../plugins/actions/actions.c:209
 msgid "Sus_pend"
 msgstr "_Felfüggesztés"
 
-#: ../plugins/actions/actions.c:220
+#: ../plugins/actions/actions.c:210
 msgid "Do you want to suspend to RAM?"
 msgstr "Szeretné munkamenete állapotát a memóriába menteni?"
 
-#: ../plugins/actions/actions.c:221
+#: ../plugins/actions/actions.c:211
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "A számítógép felfüggesztése %d másodperc múlva."
 
-#: ../plugins/actions/actions.c:227
+#: ../plugins/actions/actions.c:217
 msgid "Restart"
 msgstr "Újraindítás"
 
-#: ../plugins/actions/actions.c:228
+#: ../plugins/actions/actions.c:218
 msgid "_Restart"
 msgstr "Új_raindítás"
 
-#: ../plugins/actions/actions.c:229
+#: ../plugins/actions/actions.c:219
 msgid "Are you sure you want to restart?"
 msgstr "Biztos, hogy újra szeretné indítani a számítógépet?"
 
-#: ../plugins/actions/actions.c:230
+#: ../plugins/actions/actions.c:220
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "A számítógép újraindítása %d másodperc múlva."
 
-#: ../plugins/actions/actions.c:236
+#: ../plugins/actions/actions.c:226
 msgid "Shut Down"
 msgstr "Leállítás"
 
-#: ../plugins/actions/actions.c:237
+#: ../plugins/actions/actions.c:227
 msgid "Shut _Down"
 msgstr "_Leállítás"
 
-#: ../plugins/actions/actions.c:238
+#: ../plugins/actions/actions.c:228
 msgid "Are you sure you want to shut down?"
 msgstr "Biztos, hogy le kívánja állítani a számítógépet?"
 
-#: ../plugins/actions/actions.c:239
+#: ../plugins/actions/actions.c:229
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "A számítógép kikapcsolása %d másodperc múlva."
 
-#: ../plugins/actions/actions.c:688
+#: ../plugins/actions/actions.c:677
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Elválasztó"
 
-#: ../plugins/actions/actions.c:1122
+#: ../plugins/actions/actions.c:1111
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "A művelet („%s”) futtatása meghiúsult"
 
-#: ../plugins/actions/actions.c:1327
+#: ../plugins/actions/actions.c:1316
 msgid "Little Mouse"
 msgstr "Kis egér"
 
@@ -1013,23 +1013,23 @@ msgid "Menu File"
 msgstr "Menüfájl"
 
 #. I18N: default tooltip of the application menu
-#: ../plugins/applicationsmenu/applicationsmenu.c:39
+#: ../plugins/applicationsmenu/applicationsmenu.c:37
 msgid "Applications"
 msgstr "Alkalmazások"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:606
-#: ../plugins/directorymenu/directorymenu.c:465
+#: ../plugins/applicationsmenu/applicationsmenu.c:600
+#: ../plugins/directorymenu/directorymenu.c:458
 msgid "Select An Icon"
 msgstr "Válasszon ikont"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:609
-#: ../plugins/directorymenu/directorymenu.c:468
+#: ../plugins/applicationsmenu/applicationsmenu.c:603
+#: ../plugins/directorymenu/directorymenu.c:461
 msgid "_OK"
 msgstr "_OK"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:647
-#: ../plugins/clock/clock.c:1030 ../plugins/launcher/launcher.c:2496
+#: ../plugins/applicationsmenu/applicationsmenu.c:641
+#: ../plugins/clock/clock.c:1018 ../plugins/launcher/launcher.c:2466
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "A parancs („%s”) végrehajtása meghiúsult."
@@ -1074,15 +1074,15 @@ msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%Y. %B %d., %A"
 
-#: ../plugins/clock/clock.c:155
+#: ../plugins/clock/clock.c:150
 msgid "Week %V"
 msgstr "%V hét"
 
-#: ../plugins/clock/clock.c:465
+#: ../plugins/clock/clock.c:453
 msgid "Failed to execute clock command"
 msgstr "Az óra parancs végrehajtása meghiúsult"
 
-#: ../plugins/clock/clock.c:969
+#: ../plugins/clock/clock.c:957
 msgid "Custom Format"
 msgstr "Egyéni formátum"
 
@@ -1251,319 +1251,313 @@ msgstr "Idő"
 msgid "Clock Options"
 msgstr "Óra beállításai"
 
-#. TRANSLATORS: adjust this accordingly for your locale format
-#: ../plugins/clock/clock-digital.h:25
+#: ../plugins/clock/clock-digital.h:27
 msgctxt "Time"
 msgid "%R"
 msgstr "%R"
 
-#: ../plugins/clock/clock-digital.h:26
+#: ../plugins/clock/clock-digital.h:28
 msgctxt "Date"
 msgid "%Y-%m-%d"
 msgstr "%Y-%m-%d"
 
-#: ../plugins/clock/clock-digital.h:27
-msgctxt "Time"
-msgid "%a %_d %b, %R"
-msgstr "%a, %b %_d, %R"
-
-#: ../plugins/clock/clock-fuzzy.c:88
+#: ../plugins/clock/clock-fuzzy.c:82
 msgid "Night"
 msgstr "Éjszaka"
 
-#: ../plugins/clock/clock-fuzzy.c:89
+#: ../plugins/clock/clock-fuzzy.c:83
 msgid "Early morning"
 msgstr "Kora reggel"
 
-#: ../plugins/clock/clock-fuzzy.c:90
+#: ../plugins/clock/clock-fuzzy.c:84
 msgid "Morning"
 msgstr "Reggel"
 
-#: ../plugins/clock/clock-fuzzy.c:91
+#: ../plugins/clock/clock-fuzzy.c:85
 msgid "Almost noon"
 msgstr "Majdnem dél"
 
-#: ../plugins/clock/clock-fuzzy.c:92
+#: ../plugins/clock/clock-fuzzy.c:86
 msgid "Noon"
 msgstr "Dél"
 
-#: ../plugins/clock/clock-fuzzy.c:93
+#: ../plugins/clock/clock-fuzzy.c:87
 msgid "Afternoon"
 msgstr "Délután"
 
-#: ../plugins/clock/clock-fuzzy.c:94
+#: ../plugins/clock/clock-fuzzy.c:88
 msgid "Evening"
 msgstr "Este"
 
-#: ../plugins/clock/clock-fuzzy.c:95
+#: ../plugins/clock/clock-fuzzy.c:89
 msgid "Late evening"
 msgstr "Késő este"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:96
 #, no-c-format
 msgid "%0 o'clock"
 msgstr "%0 óra"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:97
 #, no-c-format
 msgid "five past %0"
 msgstr "öt perccel múlt %0"
 
-#: ../plugins/clock/clock-fuzzy.c:104
+#: ../plugins/clock/clock-fuzzy.c:98
 #, no-c-format
 msgid "ten past %0"
 msgstr "tíz perccel múlt %0"
 
-#: ../plugins/clock/clock-fuzzy.c:105
+#: ../plugins/clock/clock-fuzzy.c:99
 #, no-c-format
 msgid "quarter past %0"
 msgstr "negyed %1"
 
-#: ../plugins/clock/clock-fuzzy.c:106
+#: ../plugins/clock/clock-fuzzy.c:100
 #, no-c-format
 msgid "twenty past %0"
 msgstr "tíz perc múlva fél %1"
 
-#: ../plugins/clock/clock-fuzzy.c:107
+#: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "twenty five past %0"
 msgstr "öt perc múlva fél %1"
 
-#: ../plugins/clock/clock-fuzzy.c:108
+#: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "half past %0"
 msgstr "fél %1"
 
-#: ../plugins/clock/clock-fuzzy.c:109
+#: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "twenty five to %1"
 msgstr "öt perccel múlt fél %1"
 
-#: ../plugins/clock/clock-fuzzy.c:110
+#: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "twenty to %1"
 msgstr "tíz perccel múlt fél %1"
 
-#: ../plugins/clock/clock-fuzzy.c:111
+#: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "quarter to %1"
 msgstr "háromnegyed %1"
 
-#: ../plugins/clock/clock-fuzzy.c:112
+#: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "ten to %1"
 msgstr "tíz perc múlva %1"
 
-#: ../plugins/clock/clock-fuzzy.c:113
+#: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "five to %1"
 msgstr "öt perc múlva %1"
 
-#: ../plugins/clock/clock-fuzzy.c:114
+#: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "%1 o'clock"
 msgstr "%1 óra"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: ../plugins/clock/clock-fuzzy.c:121
+#: ../plugins/clock/clock-fuzzy.c:115
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "%0 óra"
 
-#: ../plugins/clock/clock-fuzzy.c:122
+#: ../plugins/clock/clock-fuzzy.c:116
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "öt perccel múlt %0"
 
-#: ../plugins/clock/clock-fuzzy.c:123
+#: ../plugins/clock/clock-fuzzy.c:117
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "tíz perccel múlt %0"
 
-#: ../plugins/clock/clock-fuzzy.c:124
+#: ../plugins/clock/clock-fuzzy.c:118
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "negyed %1"
 
-#: ../plugins/clock/clock-fuzzy.c:125
+#: ../plugins/clock/clock-fuzzy.c:119
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "tíz perc múlva fél %1"
 
-#: ../plugins/clock/clock-fuzzy.c:126
+#: ../plugins/clock/clock-fuzzy.c:120
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "öt perc múlva fél %1"
 
-#: ../plugins/clock/clock-fuzzy.c:127
+#: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "fél %1"
 
-#: ../plugins/clock/clock-fuzzy.c:128
+#: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "öt perccel múlt fél %1"
 
-#: ../plugins/clock/clock-fuzzy.c:129
+#: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "tíz perccel múlt fél %1"
 
-#: ../plugins/clock/clock-fuzzy.c:130
+#: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "háromnegyed %1"
 
-#: ../plugins/clock/clock-fuzzy.c:131
+#: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "tíz perc múlva %1"
 
-#: ../plugins/clock/clock-fuzzy.c:132
+#: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "öt perc múlva %1"
 
-#: ../plugins/clock/clock-fuzzy.c:133
+#: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "%1 óra"
 
-#: ../plugins/clock/clock-fuzzy.c:138
+#: ../plugins/clock/clock-fuzzy.c:132
 msgctxt "am"
 msgid "one"
 msgstr "egy"
 
-#: ../plugins/clock/clock-fuzzy.c:139
+#: ../plugins/clock/clock-fuzzy.c:133
 msgctxt "am"
 msgid "two"
 msgstr "kettő"
 
-#: ../plugins/clock/clock-fuzzy.c:140
+#: ../plugins/clock/clock-fuzzy.c:134
 msgctxt "am"
 msgid "three"
 msgstr "három"
 
-#: ../plugins/clock/clock-fuzzy.c:141
+#: ../plugins/clock/clock-fuzzy.c:135
 msgctxt "am"
 msgid "four"
 msgstr "négy"
 
-#: ../plugins/clock/clock-fuzzy.c:142
+#: ../plugins/clock/clock-fuzzy.c:136
 msgctxt "am"
 msgid "five"
 msgstr "öt"
 
-#: ../plugins/clock/clock-fuzzy.c:143
+#: ../plugins/clock/clock-fuzzy.c:137
 msgctxt "am"
 msgid "six"
 msgstr "hat"
 
-#: ../plugins/clock/clock-fuzzy.c:144
+#: ../plugins/clock/clock-fuzzy.c:138
 msgctxt "am"
 msgid "seven"
 msgstr "hét"
 
-#: ../plugins/clock/clock-fuzzy.c:145
+#: ../plugins/clock/clock-fuzzy.c:139
 msgctxt "am"
 msgid "eight"
 msgstr "nyolc"
 
-#: ../plugins/clock/clock-fuzzy.c:146
+#: ../plugins/clock/clock-fuzzy.c:140
 msgctxt "am"
 msgid "nine"
 msgstr "kilenc"
 
-#: ../plugins/clock/clock-fuzzy.c:147
+#: ../plugins/clock/clock-fuzzy.c:141
 msgctxt "am"
 msgid "ten"
 msgstr "tíz"
 
-#: ../plugins/clock/clock-fuzzy.c:148
+#: ../plugins/clock/clock-fuzzy.c:142
 msgctxt "am"
 msgid "eleven"
 msgstr "tizenegy"
 
 #. I18N: 12 AM is midnight
-#: ../plugins/clock/clock-fuzzy.c:150
+#: ../plugins/clock/clock-fuzzy.c:144
 msgctxt "am"
 msgid "twelve"
 msgstr "tizenkettő"
 
-#: ../plugins/clock/clock-fuzzy.c:155
+#: ../plugins/clock/clock-fuzzy.c:149
 msgctxt "pm"
 msgid "one"
 msgstr "egy"
 
-#: ../plugins/clock/clock-fuzzy.c:156
+#: ../plugins/clock/clock-fuzzy.c:150
 msgctxt "pm"
 msgid "two"
 msgstr "kettő"
 
-#: ../plugins/clock/clock-fuzzy.c:157
+#: ../plugins/clock/clock-fuzzy.c:151
 msgctxt "pm"
 msgid "three"
 msgstr "három"
 
-#: ../plugins/clock/clock-fuzzy.c:158
+#: ../plugins/clock/clock-fuzzy.c:152
 msgctxt "pm"
 msgid "four"
 msgstr "négy"
 
-#: ../plugins/clock/clock-fuzzy.c:159
+#: ../plugins/clock/clock-fuzzy.c:153
 msgctxt "pm"
 msgid "five"
 msgstr "öt"
 
-#: ../plugins/clock/clock-fuzzy.c:160
+#: ../plugins/clock/clock-fuzzy.c:154
 msgctxt "pm"
 msgid "six"
 msgstr "hat"
 
-#: ../plugins/clock/clock-fuzzy.c:161
+#: ../plugins/clock/clock-fuzzy.c:155
 msgctxt "pm"
 msgid "seven"
 msgstr "hét"
 
-#: ../plugins/clock/clock-fuzzy.c:162
+#: ../plugins/clock/clock-fuzzy.c:156
 msgctxt "pm"
 msgid "eight"
 msgstr "nyolc"
 
-#: ../plugins/clock/clock-fuzzy.c:163
+#: ../plugins/clock/clock-fuzzy.c:157
 msgctxt "pm"
 msgid "nine"
 msgstr "kilenc"
 
-#: ../plugins/clock/clock-fuzzy.c:164
+#: ../plugins/clock/clock-fuzzy.c:158
 msgctxt "pm"
 msgid "ten"
 msgstr "tíz"
 
-#: ../plugins/clock/clock-fuzzy.c:165
+#: ../plugins/clock/clock-fuzzy.c:159
 msgctxt "pm"
 msgid "eleven"
 msgstr "tizenegy"
 
 #. I18N: 12 PM is noon
-#: ../plugins/clock/clock-fuzzy.c:167
+#: ../plugins/clock/clock-fuzzy.c:161
 msgctxt "pm"
 msgid "twelve"
 msgstr "tizenkettő"
@@ -1572,75 +1566,75 @@ msgstr "tizenkettő"
 msgid "What time is it?"
 msgstr "Mennyi az idő?"
 
-#: ../plugins/directorymenu/directorymenu.c:296
+#: ../plugins/directorymenu/directorymenu.c:289
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Könyvtár menü"
 
-#: ../plugins/directorymenu/directorymenu.c:691
+#: ../plugins/directorymenu/directorymenu.c:683
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Az alkalmazás („%s”) indítása meghiúsult"
 
-#: ../plugins/directorymenu/directorymenu.c:722
+#: ../plugins/directorymenu/directorymenu.c:714
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "„%s” tartalomtípusának lekérése meghiúsult"
 
-#: ../plugins/directorymenu/directorymenu.c:731
+#: ../plugins/directorymenu/directorymenu.c:723
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Nem található alapértelmezett alkalmazás ehhez: „%s”"
 
-#: ../plugins/directorymenu/directorymenu.c:747
+#: ../plugins/directorymenu/directorymenu.c:739
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "„%s” alapértelmezett alkalmazásának indítása meghiúsult"
 
-#: ../plugins/directorymenu/directorymenu.c:842
+#: ../plugins/directorymenu/directorymenu.c:834
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "A kategória („%s”) alapértelmezett alkalmazásának indítása meghiúsult"
 
-#: ../plugins/directorymenu/directorymenu.c:923
+#: ../plugins/directorymenu/directorymenu.c:915
 msgid "Create New Folder"
 msgstr "Új mappa létrehozása"
 
-#: ../plugins/directorymenu/directorymenu.c:928
+#: ../plugins/directorymenu/directorymenu.c:920
 msgid "Create New Text Document"
 msgstr "Új szöveges dokumentum létrehozása"
 
-#: ../plugins/directorymenu/directorymenu.c:935
+#: ../plugins/directorymenu/directorymenu.c:927
 msgid "C_reate"
 msgstr "_Létrehozás"
 
-#: ../plugins/directorymenu/directorymenu.c:936
+#: ../plugins/directorymenu/directorymenu.c:928
 msgid "Create & _Open"
 msgstr "Létrehozás és &megnyitás"
 
-#: ../plugins/directorymenu/directorymenu.c:950
+#: ../plugins/directorymenu/directorymenu.c:942
 msgid "Enter the new name:"
 msgstr "Adja meg az új nevet:"
 
-#: ../plugins/directorymenu/directorymenu.c:986
+#: ../plugins/directorymenu/directorymenu.c:978
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Nem sikerült létrehozni a mappát: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1067
+#: ../plugins/directorymenu/directorymenu.c:1059
 msgid "Open Folder"
 msgstr "Mappa megnyitása"
 
-#: ../plugins/directorymenu/directorymenu.c:1080
+#: ../plugins/directorymenu/directorymenu.c:1072
 msgid "Open in Terminal"
 msgstr "Terminálban fusson"
 
-#: ../plugins/directorymenu/directorymenu.c:1093
+#: ../plugins/directorymenu/directorymenu.c:1085
 msgid "Create Folder..."
 msgstr "Mappa létrehozása..."
 
-#: ../plugins/directorymenu/directorymenu.c:1106
+#: ../plugins/directorymenu/directorymenu.c:1098
 msgid "Create Text Document..."
 msgstr "Szöveges dokumentum létrehozása..."
 
@@ -1697,15 +1691,15 @@ msgstr "_Fájlminta:"
 msgid "Filtering"
 msgstr "Szűrés"
 
-#: ../plugins/launcher/launcher.c:405
+#: ../plugins/launcher/launcher.c:393
 msgid "Open launcher menu"
 msgstr "Indítómenü megnyitása"
 
-#: ../plugins/launcher/launcher.c:1611
+#: ../plugins/launcher/launcher.c:1591
 msgid "Unnamed Item"
 msgstr "Névtelen elem"
 
-#: ../plugins/launcher/launcher.c:1801
+#: ../plugins/launcher/launcher.c:1779
 msgid "No items"
 msgstr "Nincs elem"
 
@@ -1833,15 +1827,15 @@ msgstr "Speciális"
 msgid "Program launcher with optional menu"
 msgstr "Programindító elhagyható menüvel"
 
-#: ../plugins/pager/pager.c:680 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:685 ../plugins/pager/pager-dialog.glade.h:4
 msgid "Workspace _Settings..."
 msgstr "M_unkaterület beállításai…"
 
-#: ../plugins/pager/pager.c:774
+#: ../plugins/pager/pager.c:785
 msgid "Unable to open the workspace settings"
 msgstr "A munkaterület beállításai nem nyithatók meg"
 
-#: ../plugins/pager/pager-buttons.c:595 ../plugins/windowmenu/windowmenu.c:900
+#: ../plugins/pager/pager-buttons.c:588 ../plugins/windowmenu/windowmenu.c:893
 #, c-format
 msgid "Workspace %d"
 msgstr "%d. munkaterület"
@@ -1903,15 +1897,15 @@ msgstr "Bő_vítés"
 msgid "Adds a separator or space between panel items"
 msgstr "Elválasztó vagy hely beszúrása a panelelemek közé"
 
-#: ../plugins/showdesktop/showdesktop.c:249
+#: ../plugins/showdesktop/showdesktop.c:245
 msgid "Restore the minimized windows"
 msgstr "Rejtett ablakok visszaállítása"
 
-#: ../plugins/showdesktop/showdesktop.c:251
+#: ../plugins/showdesktop/showdesktop.c:247
 msgid "Minimize all open windows and show the desktop"
 msgstr "Minden ablak minimalizálása, és az asztal megjelenítése"
 
-#: ../plugins/showdesktop/showdesktop.c:254
+#: ../plugins/showdesktop/showdesktop.c:250
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Asztal megjelenítése"
@@ -1920,11 +1914,11 @@ msgstr "Asztal megjelenítése"
 msgid "Hide all windows and show the desktop"
 msgstr "Minden ablak elrejtése, és az asztal megjelenítése"
 
-#: ../plugins/systray/sn-dialog.c:650
+#: ../plugins/systray/sn-dialog.c:645
 msgid "Clear"
 msgstr "Törlés"
 
-#: ../plugins/systray/sn-dialog.c:651
+#: ../plugins/systray/sn-dialog.c:646
 msgid "Are you sure you want to clear the list of known items?"
 msgstr ""
 
@@ -2043,7 +2037,7 @@ msgstr "Valószínűleg egy másik felületi elem átvette az értesítési ter�
 msgid "The notification area lost selection"
 msgstr "Az értesítési terület elvesztette a kiválasztást"
 
-#: ../plugins/systray/systray-manager.c:399
+#: ../plugins/systray/systray-manager.c:402
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "A kezelőkiválasztás megszerzése meghiúsult a(z) %d. képernyőhöz"
@@ -2156,36 +2150,36 @@ msgstr "Az összes m_onitor ablakainak megjelenítése"
 msgid "Show only _minimized windows"
 msgstr "_Csak minimalizált ablakok megjelenítése"
 
-#: ../plugins/tasklist/tasklist-widget.c:3058
+#: ../plugins/tasklist/tasklist-widget.c:3107
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3062
+#: ../plugins/tasklist/tasklist-widget.c:3111
 msgid "Error"
 msgstr "Hiba"
 
-#: ../plugins/tasklist/tasklist-widget.c:3091
+#: ../plugins/tasklist/tasklist-widget.c:3140
 msgid "Launch New Instance"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3836
+#: ../plugins/tasklist/tasklist-widget.c:3885
 msgid "Mi_nimize All"
 msgstr "Összes mi_nimalizálása"
 
-#: ../plugins/tasklist/tasklist-widget.c:3843
+#: ../plugins/tasklist/tasklist-widget.c:3892
 msgid "Un_minimize All"
 msgstr "Összes _eredeti méretű"
 
-#: ../plugins/tasklist/tasklist-widget.c:3850
+#: ../plugins/tasklist/tasklist-widget.c:3899
 msgid "Ma_ximize All"
 msgstr "Összes ma_ximalizálás"
 
-#: ../plugins/tasklist/tasklist-widget.c:3857
+#: ../plugins/tasklist/tasklist-widget.c:3906
 msgid "_Unmaximize All"
 msgstr "Összes _eredeti méretű"
 
-#: ../plugins/tasklist/tasklist-widget.c:3868
+#: ../plugins/tasklist/tasklist-widget.c:3917
 msgid "_Close All"
 msgstr "Összes _bezárása"
 
@@ -2193,28 +2187,28 @@ msgstr "Összes _bezárása"
 msgid "Switch between open windows using buttons"
 msgstr "Átváltás a nyitott ablakok között, gombok használatával"
 
-#: ../plugins/windowmenu/windowmenu.c:696
+#: ../plugins/windowmenu/windowmenu.c:689
 msgid "Desktop"
 msgstr "Asztal"
 
-#: ../plugins/windowmenu/windowmenu.c:1296
+#: ../plugins/windowmenu/windowmenu.c:1289
 msgid "No Windows"
 msgstr "Nincsenek ablakok"
 
-#: ../plugins/windowmenu/windowmenu.c:1311
+#: ../plugins/windowmenu/windowmenu.c:1304
 msgid "Urgent Windows"
 msgstr "Sürgős ablakok"
 
-#: ../plugins/windowmenu/windowmenu.c:1356
+#: ../plugins/windowmenu/windowmenu.c:1349
 msgid "Add Workspace"
 msgstr "Munkaterület hozzáadása"
 
-#: ../plugins/windowmenu/windowmenu.c:1378
+#: ../plugins/windowmenu/windowmenu.c:1371
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "„%s” munkaterület eltávolítása"
 
-#: ../plugins/windowmenu/windowmenu.c:1380
+#: ../plugins/windowmenu/windowmenu.c:1373
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "%d. munkaterület eltávolítása"
