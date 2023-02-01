@@ -163,7 +163,7 @@ struct _PanelPreferencesDialog
 
 
 
-G_DEFINE_TYPE (PanelPreferencesDialog, panel_preferences_dialog, GTK_TYPE_BUILDER)
+G_DEFINE_FINAL_TYPE (PanelPreferencesDialog, panel_preferences_dialog, GTK_TYPE_BUILDER)
 
 
 

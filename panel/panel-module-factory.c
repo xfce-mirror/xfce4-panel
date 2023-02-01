@@ -81,7 +81,7 @@ static PanelModuleRunMode force_all_run_mode = PANEL_MODULE_RUN_MODE_NONE;
 
 
 
-G_DEFINE_TYPE (PanelModuleFactory, panel_module_factory, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (PanelModuleFactory, panel_module_factory, G_TYPE_OBJECT)
 
 
 

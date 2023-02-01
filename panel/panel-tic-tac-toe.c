@@ -78,7 +78,7 @@ enum
 
 
 
-G_DEFINE_TYPE (PanelTicTacToe, panel_tic_tac_toe, XFCE_TYPE_TITLED_DIALOG)
+G_DEFINE_FINAL_TYPE (PanelTicTacToe, panel_tic_tac_toe, XFCE_TYPE_TITLED_DIALOG)
 
 
 

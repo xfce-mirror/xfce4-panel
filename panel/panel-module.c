@@ -100,7 +100,7 @@ static GQuark module_quark = 0;
 
 
 
-G_DEFINE_TYPE (PanelModule, panel_module, G_TYPE_TYPE_MODULE)
+G_DEFINE_FINAL_TYPE (PanelModule, panel_module, G_TYPE_TYPE_MODULE)
 
 
 

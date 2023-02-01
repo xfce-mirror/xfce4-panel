@@ -180,7 +180,7 @@ static const GtkTargetEntry drop_targets[] =
 
 
 
-G_DEFINE_TYPE (PanelApplication, panel_application, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (PanelApplication, panel_application, G_TYPE_OBJECT)
 
 
 

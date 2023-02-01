@@ -151,7 +151,7 @@ static guint itembar_signals[LAST_SIGNAL];
 
 
 
-G_DEFINE_TYPE (PanelItembar, panel_itembar, GTK_TYPE_CONTAINER)
+G_DEFINE_FINAL_TYPE (PanelItembar, panel_itembar, GTK_TYPE_CONTAINER)
 
 
 

@@ -130,7 +130,7 @@ static const GtkTargetEntry drop_targets[] =
 
 
 
-G_DEFINE_TYPE (PanelItemDialog, panel_item_dialog, XFCE_TYPE_TITLED_DIALOG)
+G_DEFINE_FINAL_TYPE (PanelItemDialog, panel_item_dialog, XFCE_TYPE_TITLED_DIALOG)
 
 
 

@@ -383,7 +383,7 @@ static GdkAtom net_wm_strut_partial_atom = 0;
 
 
 
-G_DEFINE_TYPE (PanelWindow, panel_window, PANEL_TYPE_BASE_WINDOW)
+G_DEFINE_FINAL_TYPE (PanelWindow, panel_window, PANEL_TYPE_BASE_WINDOW)
 
 
 

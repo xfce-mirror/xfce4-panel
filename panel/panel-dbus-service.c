@@ -103,7 +103,7 @@ static gboolean dbus_exit_restart = FALSE;
 
 
 
-G_DEFINE_TYPE (PanelDBusService, panel_dbus_service, XFCE_PANEL_TYPE_EXPORTED_SERVICE_SKELETON)
+G_DEFINE_FINAL_TYPE (PanelDBusService, panel_dbus_service, XFCE_PANEL_TYPE_EXPORTED_SERVICE_SKELETON)
 
 
 
