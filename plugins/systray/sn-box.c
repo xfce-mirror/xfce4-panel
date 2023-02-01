@@ -93,7 +93,7 @@ struct _SnBox
   gboolean             show_hidden;
 };
 
-G_DEFINE_TYPE (SnBox, sn_box, GTK_TYPE_CONTAINER)
+G_DEFINE_FINAL_TYPE (SnBox, sn_box, GTK_TYPE_CONTAINER)
 
 
 

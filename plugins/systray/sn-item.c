@@ -95,7 +95,7 @@ struct _SnItem
   GtkWidget           *cached_menu;
 };
 
-G_DEFINE_TYPE (SnItem, sn_item, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (SnItem, sn_item, G_TYPE_OBJECT)
 
 
 

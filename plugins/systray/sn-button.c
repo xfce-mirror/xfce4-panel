@@ -78,7 +78,7 @@ struct _SnButton
   guint                menu_size_allocate_idle_handler;
 };
 
-G_DEFINE_TYPE (SnButton, sn_button, GTK_TYPE_BUTTON)
+G_DEFINE_FINAL_TYPE (SnButton, sn_button, GTK_TYPE_BUTTON)
 
 
 

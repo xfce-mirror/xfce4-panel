@@ -77,7 +77,7 @@ struct _SnConfig
   gint                panel_icon_size;
 };
 
-G_DEFINE_TYPE (SnConfig, sn_config, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (SnConfig, sn_config, G_TYPE_OBJECT)
 
 
 

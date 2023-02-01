@@ -119,7 +119,7 @@ struct _SystrayBox
 
 
 
-G_DEFINE_TYPE (SystrayBox, systray_box, GTK_TYPE_CONTAINER)
+G_DEFINE_FINAL_TYPE (SystrayBox, systray_box, GTK_TYPE_CONTAINER)
 
 
 

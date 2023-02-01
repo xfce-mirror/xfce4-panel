@@ -67,7 +67,7 @@ struct _SnIconBox
   GtkWidget           *overlay;
 };
 
-G_DEFINE_TYPE (SnIconBox, sn_icon_box, GTK_TYPE_CONTAINER)
+G_DEFINE_FINAL_TYPE (SnIconBox, sn_icon_box, GTK_TYPE_CONTAINER)
 
 
 

@@ -405,7 +405,7 @@ static void               xfce_tasklist_set_grouping                     (XfceTa
                                                                           gboolean              grouping);
 
 
-G_DEFINE_TYPE (XfceTasklist, xfce_tasklist, GTK_TYPE_CONTAINER)
+G_DEFINE_FINAL_TYPE (XfceTasklist, xfce_tasklist, GTK_TYPE_CONTAINER)
 
 
 

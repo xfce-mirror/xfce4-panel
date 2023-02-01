@@ -56,7 +56,7 @@ struct _SnDialog
   SnConfig            *config;
 };
 
-G_DEFINE_TYPE (SnDialog, sn_dialog, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (SnDialog, sn_dialog, G_TYPE_OBJECT)
 
 
 

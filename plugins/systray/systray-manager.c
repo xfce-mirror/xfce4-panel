@@ -157,7 +157,7 @@ static guint  systray_manager_signals[LAST_SIGNAL];
 
 
 
-G_DEFINE_TYPE (SystrayManager, systray_manager, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (SystrayManager, systray_manager, G_TYPE_OBJECT)
 
 
 

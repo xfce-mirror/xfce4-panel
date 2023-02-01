@@ -102,7 +102,7 @@ struct _ClockSleepMonitorLogind
 #define CLOCK_TYPE_SLEEP_MONITOR_LOGIND (clock_sleep_monitor_logind_get_type ())
 G_DECLARE_FINAL_TYPE (ClockSleepMonitorLogind, clock_sleep_monitor_logind, CLOCK, SLEEP_MONITOR_LOGIND, ClockSleepMonitor)
 
-G_DEFINE_TYPE (ClockSleepMonitorLogind, clock_sleep_monitor_logind, CLOCK_TYPE_SLEEP_MONITOR)
+G_DEFINE_FINAL_TYPE (ClockSleepMonitorLogind, clock_sleep_monitor_logind, CLOCK_TYPE_SLEEP_MONITOR)
 
 static void clock_sleep_monitor_logind_finalize (GObject *object);
 

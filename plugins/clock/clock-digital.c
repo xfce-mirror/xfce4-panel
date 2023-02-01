@@ -82,7 +82,7 @@ struct _XfceClockDigital
 
 
 
-G_DEFINE_TYPE (XfceClockDigital, xfce_clock_digital, GTK_TYPE_BOX)
+G_DEFINE_FINAL_TYPE (XfceClockDigital, xfce_clock_digital, GTK_TYPE_BOX)
 
 
 

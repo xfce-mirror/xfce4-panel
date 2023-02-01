@@ -91,7 +91,7 @@ enum
 
 
 
-G_DEFINE_TYPE (PagerButtons, pager_buttons, GTK_TYPE_GRID)
+G_DEFINE_FINAL_TYPE (PagerButtons, pager_buttons, GTK_TYPE_GRID)
 
 
 

@@ -105,7 +105,7 @@ struct _SnBackend
   GCancellable        *host_cancellable;
 };
 
-G_DEFINE_TYPE (SnBackend, sn_backend, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (SnBackend, sn_backend, G_TYPE_OBJECT)
 
 
 

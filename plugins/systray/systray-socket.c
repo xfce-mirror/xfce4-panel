@@ -64,7 +64,7 @@ static gboolean systray_socket_draw          (GtkWidget      *widget,
 
 
 
-G_DEFINE_TYPE (SystraySocket, systray_socket, GTK_TYPE_SOCKET)
+G_DEFINE_FINAL_TYPE (SystraySocket, systray_socket, GTK_TYPE_SOCKET)
 
 
 

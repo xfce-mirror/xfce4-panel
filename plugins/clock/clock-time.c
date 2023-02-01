@@ -73,7 +73,7 @@ enum
 static guint clock_time_signals[LAST_SIGNAL] = { 0, };
 
 
-G_DEFINE_TYPE (ClockTime, clock_time, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (ClockTime, clock_time, G_TYPE_OBJECT)
 
 
 
