@@ -376,10 +376,6 @@ struct _PanelWindow
   gboolean             wl_active_is_maximized;
 };
 
-/* used for a full XfcePanelWindow name in the class, but not in the code */
-typedef PanelWindow      XfcePanelWindow;
-typedef PanelWindowClass XfcePanelWindowClass;
-
 
 
 static GdkAtom cardinal_atom = 0;
@@ -387,7 +383,7 @@ static GdkAtom net_wm_strut_partial_atom = 0;
 
 
 
-G_DEFINE_TYPE (XfcePanelWindow, panel_window, PANEL_TYPE_BASE_WINDOW)
+G_DEFINE_TYPE (PanelWindow, panel_window, PANEL_TYPE_BASE_WINDOW)
 
 
 
