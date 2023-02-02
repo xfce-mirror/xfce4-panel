@@ -23,50 +23,29 @@
 
 G_BEGIN_DECLS
 
-typedef struct _PanelBaseWindowClass   PanelBaseWindowClass;
-typedef struct _PanelBaseWindow        PanelBaseWindow;
-typedef struct _PanelBaseWindowPrivate PanelBaseWindowPrivate;
-typedef enum   _PanelBorders           PanelBorders;
-typedef enum   _PanelBgStyle           PanelBgStyle;
+#define PANEL_TYPE_BASE_WINDOW (panel_base_window_get_type ())
+G_DECLARE_DERIVABLE_TYPE (PanelBaseWindow, panel_base_window, PANEL, BASE_WINDOW, GtkWindow)
 
-#define PANEL_TYPE_BASE_WINDOW            (panel_base_window_get_type ())
-#define PANEL_BASE_WINDOW(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PANEL_TYPE_BASE_WINDOW, PanelBaseWindow))
-#define PANEL_BASE_WINDOW_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PANEL_TYPE_BASE_WINDOW, PanelBaseWindowClass))
-#define PANEL_IS_BASE_WINDOW(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PANEL_TYPE_BASE_WINDOW))
-#define PANEL_IS_BASE_WINDOW_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_BASE_WINDOW))
-#define PANEL_BASE_WINDOW_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_BASE_WINDOW, PanelBaseWindowClass))
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (PanelBaseWindow, g_object_unref)
-
-enum _PanelBorders
+typedef enum _PanelBorders
 {
   PANEL_BORDER_NONE   = 0,
   PANEL_BORDER_LEFT   = 1 << 0,
   PANEL_BORDER_RIGHT  = 1 << 1,
   PANEL_BORDER_TOP    = 1 << 2,
   PANEL_BORDER_BOTTOM = 1 << 3
-};
+} PanelBorders;
 
-enum _PanelBgStyle
+typedef enum _PanelBgStyle
 {
   PANEL_BG_STYLE_NONE,
   PANEL_BG_STYLE_COLOR,
   PANEL_BG_STYLE_IMAGE
-};
+} PanelBgStyle;
 
 struct _PanelBaseWindowClass
 {
   GtkWindowClass __parent__;
 };
-
-struct _PanelBaseWindow
-{
-  GtkWindow __parent__;
-
-  /*< private >*/
-  PanelBaseWindowPrivate *priv;
-};
-
-GType        panel_base_window_get_type                    (void) G_GNUC_CONST;
 
 void         panel_base_window_reset_background_css        (PanelBaseWindow *window);
 void         panel_base_window_orientation_changed         (PanelBaseWindow *window,
