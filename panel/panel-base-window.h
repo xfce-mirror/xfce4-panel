@@ -64,17 +64,6 @@ struct _PanelBaseWindow
 
   /*< private >*/
   PanelBaseWindowPrivate *priv;
-
-  guint                    is_composited : 1;
-
-  PanelBgStyle             background_style;
-  GdkRGBA                 *background_rgba;
-  gchar                   *background_image;
-
-  /* transparency settings */
-  gdouble                  enter_opacity;
-  gdouble                  leave_opacity;
-  gboolean                 opacity_is_enter;
 };
 
 GType        panel_base_window_get_type                    (void) G_GNUC_CONST;
@@ -87,6 +76,11 @@ void         panel_base_window_set_borders                 (PanelBaseWindow *win
 PanelBorders panel_base_window_get_borders                 (PanelBaseWindow *window);
 void         panel_base_window_opacity_enter               (PanelBaseWindow *window,
                                                             gboolean         enter);
+gboolean     panel_base_window_opacity_is_enter            (PanelBaseWindow *window);
+gboolean     panel_base_window_is_composited               (PanelBaseWindow *window);
+PanelBgStyle panel_base_window_get_background_style        (PanelBaseWindow *window);
+GdkRGBA     *panel_base_window_get_background_rgba         (PanelBaseWindow *window);
+gchar       *panel_base_window_get_background_image        (PanelBaseWindow *window);
 
 G_END_DECLS
 

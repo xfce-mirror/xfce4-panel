@@ -1122,7 +1122,8 @@ panel_window_motion_notify_event (GtkWidget      *widget,
   gboolean         retval = TRUE;
 
   /* sometimes the panel does not receive enter events so let's fill this gap here */
-  if (base_window->is_composited && ! base_window->opacity_is_enter)
+  if (panel_base_window_is_composited (base_window)
+      && ! panel_base_window_opacity_is_enter (base_window))
     panel_window_opacity_enter_queue (window, TRUE);
 
   /* leave when the pointer is not grabbed */
@@ -1842,7 +1843,7 @@ panel_window_style_updated (GtkWidget *widget)
                         "autohide-size", &window->autohide_size,
                         NULL);
   /* Make sure the background and borders are redrawn on Gtk theme changes */
-  if (base_window->background_style == PANEL_BG_STYLE_NONE)
+  if (panel_base_window_get_background_style (base_window) == PANEL_BG_STYLE_NONE)
     panel_base_window_reset_background_css (base_window);
 }
 
@@ -3933,15 +3934,16 @@ panel_window_set_provider_info (PanelWindow *window,
 
   if (PANEL_IS_PLUGIN_EXTERNAL (provider))
     {
-      if (base_window->background_style == PANEL_BG_STYLE_COLOR)
+      PanelBgStyle style = panel_base_window_get_background_style (base_window);
+      if (style == PANEL_BG_STYLE_COLOR)
         {
           panel_plugin_external_set_background_color (PANEL_PLUGIN_EXTERNAL (provider),
-              base_window->background_rgba);
+              panel_base_window_get_background_rgba (base_window));
         }
-      else if (base_window->background_style == PANEL_BG_STYLE_IMAGE)
+      else if (style == PANEL_BG_STYLE_IMAGE)
         {
           panel_plugin_external_set_background_image (PANEL_PLUGIN_EXTERNAL (provider),
-              base_window->background_image);
+              panel_base_window_get_background_image (base_window));
         }
       else if (moving_to_other_panel)
         {
@@ -3949,7 +3951,7 @@ panel_window_set_provider_info (PanelWindow *window,
           panel_plugin_external_set_background_color (PANEL_PLUGIN_EXTERNAL (provider), NULL);
         }
 
-      if (base_window->is_composited)
+      if (panel_base_window_is_composited (base_window))
         panel_plugin_external_set_opacity (PANEL_PLUGIN_EXTERNAL (provider),
                                            gtk_widget_get_opacity (GTK_WIDGET (window)));
     }

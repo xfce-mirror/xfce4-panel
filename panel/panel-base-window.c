@@ -101,8 +101,17 @@ struct _PanelBaseWindowPrivate
 {
   PanelBorders     borders;
 
+  /* transparency settings */
+  guint            is_composited : 1;
+  gdouble          enter_opacity;
+  gdouble          leave_opacity;
+  gboolean         opacity_is_enter;
+
   /* background css style provider */
   GtkCssProvider  *css_provider;
+  PanelBgStyle     background_style;
+  GdkRGBA         *background_rgba;
+  gchar           *background_image;
 
   /* active window timeout id */
   guint            active_timeout_id;
@@ -198,13 +207,13 @@ panel_base_window_init (PanelBaseWindow *window)
 
   window->priv = panel_base_window_get_instance_private (window);
 
-  window->is_composited = FALSE;
-  window->background_style = PANEL_BG_STYLE_NONE;
-  window->background_image = NULL;
-  window->background_rgba = NULL;
-  window->enter_opacity = 1.00;
-  window->leave_opacity = 1.00;
-  window->opacity_is_enter = FALSE;
+  window->priv->is_composited = FALSE;
+  window->priv->background_style = PANEL_BG_STYLE_NONE;
+  window->priv->background_image = NULL;
+  window->priv->background_rgba = NULL;
+  window->priv->enter_opacity = 1.00;
+  window->priv->leave_opacity = 1.00;
+  window->priv->opacity_is_enter = FALSE;
 
   window->priv->css_provider = gtk_css_provider_new ();
   window->priv->borders = PANEL_BORDER_NONE;
@@ -243,20 +252,20 @@ panel_base_window_get_property (GObject    *object,
   switch (prop_id)
     {
     case PROP_ENTER_OPACITY:
-      g_value_set_uint (value, rint (window->enter_opacity * 100.00));
+      g_value_set_uint (value, rint (window->priv->enter_opacity * 100.00));
       break;
 
     case PROP_LEAVE_OPACITY:
-      g_value_set_uint (value, rint (window->leave_opacity * 100.00));
+      g_value_set_uint (value, rint (window->priv->leave_opacity * 100.00));
       break;
 
     case PROP_BACKGROUND_STYLE:
-      g_value_set_uint (value, window->background_style);
+      g_value_set_uint (value, window->priv->background_style);
       break;
 
     case PROP_BACKGROUND_RGBA:
-      if (window->background_rgba != NULL)
-        g_value_set_boxed (value, window->background_rgba);
+      if (window->priv->background_rgba != NULL)
+        g_value_set_boxed (value, window->priv->background_rgba);
       else
         {
           ctx = gtk_widget_get_style_context (GTK_WIDGET (window));
@@ -269,7 +278,7 @@ panel_base_window_get_property (GObject    *object,
       break;
 
     case PROP_BACKGROUND_IMAGE:
-      g_value_set_string (value, window->background_image);
+      g_value_set_string (value, window->priv->background_image);
       break;
 
     case PROP_BORDERS:
@@ -281,7 +290,7 @@ panel_base_window_get_property (GObject    *object,
       break;
 
     case PROP_COMPOSITED:
-      g_value_set_boolean (value, window->is_composited);
+      g_value_set_boolean (value, window->priv->is_composited);
       break;
 
     default:
@@ -309,12 +318,12 @@ panel_base_window_set_property (GObject      *object,
     {
     case PROP_ENTER_OPACITY:
       opacity = g_value_get_uint (value) / 100.00;
-      if (opacity != window->enter_opacity)
+      if (opacity != window->priv->enter_opacity)
         {
-          window->enter_opacity = opacity;
-          if (window->is_composited && window->opacity_is_enter)
+          window->priv->enter_opacity = opacity;
+          if (window->priv->is_composited && window->priv->opacity_is_enter)
             {
-              gtk_widget_set_opacity (GTK_WIDGET (window), window->enter_opacity);
+              gtk_widget_set_opacity (GTK_WIDGET (window), window->priv->enter_opacity);
               panel_base_window_set_plugin_data (window, panel_base_window_set_plugin_enter_opacity);
             }
         }
@@ -322,12 +331,12 @@ panel_base_window_set_property (GObject      *object,
 
     case PROP_LEAVE_OPACITY:
       opacity = g_value_get_uint (value) / 100.00;
-      if (opacity != window->leave_opacity)
+      if (opacity != window->priv->leave_opacity)
         {
-          window->leave_opacity = opacity;
-          if (window->is_composited && ! window->opacity_is_enter)
+          window->priv->leave_opacity = opacity;
+          if (window->priv->is_composited && ! window->priv->opacity_is_enter)
             {
-              gtk_widget_set_opacity (GTK_WIDGET (window), window->leave_opacity);
+              gtk_widget_set_opacity (GTK_WIDGET (window), window->priv->leave_opacity);
               panel_base_window_set_plugin_data (window, panel_base_window_set_plugin_leave_opacity);
             }
         }
@@ -335,26 +344,26 @@ panel_base_window_set_property (GObject      *object,
 
     case PROP_BACKGROUND_STYLE:
       bg_style = g_value_get_uint (value);
-      if (window->background_style != bg_style)
+      if (window->priv->background_style != bg_style)
         {
-          window->background_style = bg_style;
+          window->priv->background_style = bg_style;
 
           /* send information to external plugins */
-          if (window->background_style == PANEL_BG_STYLE_IMAGE
-              && window->background_image != NULL)
+          if (window->priv->background_style == PANEL_BG_STYLE_IMAGE
+              && window->priv->background_image != NULL)
             {
               panel_base_window_set_background_image_css (window);
               panel_base_window_set_plugin_data (window,
                   panel_base_window_set_plugin_background_image);
             }
-          else if (window->background_style == PANEL_BG_STYLE_NONE)
+          else if (window->priv->background_style == PANEL_BG_STYLE_NONE)
             {
               panel_base_window_reset_background_css (window);
               panel_base_window_set_plugin_data (window,
                   panel_base_window_set_plugin_background_color);
             }
-          else if (window->background_style == PANEL_BG_STYLE_COLOR
-                   && window->background_rgba != NULL)
+          else if (window->priv->background_style == PANEL_BG_STYLE_COLOR
+                   && window->priv->background_rgba != NULL)
             {
               panel_base_window_set_background_color_css (window);
               panel_base_window_set_plugin_data (window,
@@ -367,11 +376,11 @@ panel_base_window_set_property (GObject      *object,
       break;
 
     case PROP_BACKGROUND_RGBA:
-      if (window->background_rgba != NULL)
-        gdk_rgba_free (window->background_rgba);
-      window->background_rgba = g_value_dup_boxed (value);
+      if (window->priv->background_rgba != NULL)
+        gdk_rgba_free (window->priv->background_rgba);
+      window->priv->background_rgba = g_value_dup_boxed (value);
 
-      if (window->background_style == PANEL_BG_STYLE_COLOR)
+      if (window->priv->background_style == PANEL_BG_STYLE_COLOR)
         {
           panel_base_window_set_background_color_css (window);
           panel_base_window_set_plugin_data (window,
@@ -380,19 +389,19 @@ panel_base_window_set_property (GObject      *object,
       break;
 
     case PROP_BACKGROUND_IMAGE:
-      g_free (window->background_image);
+      g_free (window->priv->background_image);
       str = g_value_get_string (value);
       if (str != NULL)
         {
           /* store new uri, built and escaped through a GFile */
           file = g_file_new_for_commandline_arg (str);
-          window->background_image = g_file_get_uri (file);
+          window->priv->background_image = g_file_get_uri (file);
           g_object_unref (file);
         }
       else
-        window->background_image = NULL;
+        window->priv->background_image = NULL;
 
-      if (window->background_style == PANEL_BG_STYLE_IMAGE)
+      if (window->priv->background_style == PANEL_BG_STYLE_IMAGE)
         {
           panel_base_window_set_background_image_css (window);
           panel_base_window_set_plugin_data (window,
@@ -446,9 +455,9 @@ panel_base_window_finalize (GObject *object)
     g_source_remove (window->priv->active_timeout_id);
 
   /* release bg colors data */
-  g_free (window->background_image);
-  if (window->background_rgba != NULL)
-    gdk_rgba_free (window->background_rgba);
+  g_free (window->priv->background_image);
+  if (window->priv->background_rgba != NULL)
+    gdk_rgba_free (window->priv->background_rgba);
   g_object_unref (window->priv->css_provider);
 
   (*G_OBJECT_CLASS (panel_base_window_parent_class)->finalize) (object);
@@ -472,12 +481,12 @@ panel_base_window_screen_changed (GtkWidget *widget, GdkScreen *previous_screen)
   if (visual != NULL)
     {
       gtk_widget_set_visual (widget, visual);
-      window->is_composited = gdk_screen_is_composited (screen);
+      window->priv->is_composited = gdk_screen_is_composited (screen);
     }
 
    panel_debug (PANEL_DEBUG_BASE_WINDOW,
                "%p: rgba visual=%p, compositing=%s", window,
-               visual, PANEL_DEBUG_BOOL (window->is_composited));
+               visual, PANEL_DEBUG_BOOL (window->priv->is_composited));
 }
 
 
@@ -487,35 +496,35 @@ panel_base_window_composited_changed (GdkScreen *screen,
                                       GtkWidget *widget)
 {
   PanelBaseWindow *window = PANEL_BASE_WINDOW (widget);
-  gboolean         was_composited = window->is_composited;
+  gboolean         was_composited = window->priv->is_composited;
   GdkWindow       *gdkwindow;
   GtkAllocation    allocation;
 
   /* set new compositing state */
-  window->is_composited = gdk_screen_is_composited (screen);
+  window->priv->is_composited = gdk_screen_is_composited (screen);
 
-  if (window->is_composited == was_composited)
+  if (window->priv->is_composited == was_composited)
     return;
 
-  if (window->is_composited)
+  if (window->priv->is_composited)
     {
-      gtk_widget_set_opacity (GTK_WIDGET (widget), window->leave_opacity);
+      gtk_widget_set_opacity (GTK_WIDGET (widget), window->priv->leave_opacity);
       panel_base_window_set_plugin_data (window,
                                          panel_base_window_set_plugin_leave_opacity);
     }
   else
     {
       /* make sure to always disable the leave opacity without compositing */
-      window->opacity_is_enter = FALSE;
+      window->priv->opacity_is_enter = FALSE;
       gtk_widget_set_opacity (GTK_WIDGET (widget), 1.0);
       panel_base_window_set_plugin_data (window,
                                          panel_base_window_set_plugin_leave_opacity);
     }
   panel_debug (PANEL_DEBUG_BASE_WINDOW,
                "%p: compositing=%s", window,
-               PANEL_DEBUG_BOOL (window->is_composited));
+               PANEL_DEBUG_BOOL (window->priv->is_composited));
 
-  if (window->is_composited != was_composited)
+  if (window->priv->is_composited != was_composited)
     g_object_notify (G_OBJECT (widget), "composited");
 
   /* make sure the entire window is redrawn */
@@ -585,9 +594,9 @@ panel_base_window_set_background_color_css (PanelBaseWindow *window)
 {
   gchar *css_string, *str;
 
-  panel_return_if_fail (window->background_rgba != NULL);
+  panel_return_if_fail (window->priv->background_rgba != NULL);
 
-  str = gdk_rgba_to_string (window->background_rgba);
+  str = gdk_rgba_to_string (window->priv->background_rgba);
   css_string = g_strdup_printf (".xfce4-panel.background { background: %s; "
                                                           "border-color: transparent; } %s",
                                 str, PANEL_BASE_CSS);
@@ -605,11 +614,11 @@ panel_base_window_set_background_image_css (PanelBaseWindow *window)
 {
   gchar *css_string;
 
-  panel_return_if_fail (window->background_image != NULL);
+  panel_return_if_fail (window->priv->background_image != NULL);
 
   css_string = g_strdup_printf (".xfce4-panel.background { background: url(\"%s\");"
                                                           "border-color: transparent; } %s",
-                                window->background_image, PANEL_BASE_CSS);
+                                window->priv->background_image, PANEL_BASE_CSS);
 
   panel_base_window_set_background_css (window, css_string);
 
@@ -729,7 +738,7 @@ panel_base_window_set_plugin_enter_opacity (GtkWidget *widget,
 {
   PanelBaseWindow *window = PANEL_BASE_WINDOW (user_data);
 
-  panel_base_window_set_plugin_opacity (widget, user_data, window->enter_opacity);
+  panel_base_window_set_plugin_opacity (widget, user_data, window->priv->enter_opacity);
 }
 
 
@@ -740,8 +749,8 @@ panel_base_window_set_plugin_leave_opacity (GtkWidget *widget,
 {
   PanelBaseWindow *window = PANEL_BASE_WINDOW (user_data);
 
-  if (window->is_composited)
-    panel_base_window_set_plugin_opacity (widget, user_data, window->leave_opacity);
+  if (window->priv->is_composited)
+    panel_base_window_set_plugin_opacity (widget, user_data, window->priv->leave_opacity);
   else
     panel_base_window_set_plugin_opacity (widget, user_data, 1.0);
 }
@@ -773,7 +782,7 @@ panel_base_window_set_plugin_background_color (GtkWidget *widget,
   panel_return_if_fail (PANEL_IS_BASE_WINDOW (user_data));
 
   /* send null if the style is not a bg color */
-  color = window->background_style == PANEL_BG_STYLE_COLOR ? window->background_rgba : NULL;
+  color = window->priv->background_style == PANEL_BG_STYLE_COLOR ? window->priv->background_rgba : NULL;
   if (PANEL_IS_PLUGIN_EXTERNAL (widget))
     panel_plugin_external_set_background_color (PANEL_PLUGIN_EXTERNAL (widget), color);
 }
@@ -789,7 +798,7 @@ panel_base_window_set_plugin_background_image (GtkWidget *widget,
 
   if (PANEL_IS_PLUGIN_EXTERNAL (widget))
     panel_plugin_external_set_background_image (PANEL_PLUGIN_EXTERNAL (widget),
-        PANEL_BASE_WINDOW (user_data)->background_image);
+        PANEL_BASE_WINDOW (user_data)->priv->background_image);
 }
 
 
@@ -807,7 +816,7 @@ panel_base_window_set_borders (PanelBaseWindow *window,
       priv->borders = borders;
       gtk_widget_queue_resize (GTK_WIDGET (window));
       /* Re-draw the borders if system colors are being used */
-      if (window->background_style == PANEL_BG_STYLE_NONE)
+      if (window->priv->background_style == PANEL_BG_STYLE_NONE)
         panel_base_window_reset_background_css (window);
     }
 }
@@ -825,7 +834,7 @@ panel_base_window_get_borders (PanelBaseWindow *window)
   if (priv->active_timeout_id != 0)
     return PANEL_BORDER_TOP | PANEL_BORDER_BOTTOM
            | PANEL_BORDER_LEFT | PANEL_BORDER_RIGHT;
-  else if (window->background_style != PANEL_BG_STYLE_NONE)
+  else if (window->priv->background_style != PANEL_BG_STYLE_NONE)
     return PANEL_BORDER_NONE;
 
   return priv->borders;
@@ -837,16 +846,18 @@ void
 panel_base_window_opacity_enter (PanelBaseWindow *window,
                                  gboolean         enter)
 {
-  if (! window->is_composited)
+  panel_return_if_fail (PANEL_IS_BASE_WINDOW (window));
+
+  if (! window->priv->is_composited)
     return;
 
-  window->opacity_is_enter = enter;
-  if (window->leave_opacity == window->enter_opacity)
+  window->priv->opacity_is_enter = enter;
+  if (window->priv->leave_opacity == window->priv->enter_opacity)
     return;
 
   if (enter)
     {
-      gtk_widget_set_opacity (GTK_WIDGET (window), window->enter_opacity);
+      gtk_widget_set_opacity (GTK_WIDGET (window), window->priv->enter_opacity);
       panel_base_window_set_plugin_data (window, panel_base_window_set_plugin_enter_opacity);
     }
   else
@@ -855,7 +866,57 @@ panel_base_window_opacity_enter (PanelBaseWindow *window,
       if (gtk_layer_is_supported () && ! panel_window_pointer_is_outside (PANEL_WINDOW (window)))
         return;
 
-      gtk_widget_set_opacity (GTK_WIDGET (window), window->leave_opacity);
+      gtk_widget_set_opacity (GTK_WIDGET (window), window->priv->leave_opacity);
       panel_base_window_set_plugin_data (window, panel_base_window_set_plugin_leave_opacity);
     }
+}
+
+
+
+gboolean
+panel_base_window_opacity_is_enter (PanelBaseWindow *window)
+{
+  panel_return_val_if_fail (PANEL_IS_BASE_WINDOW (window), FALSE);
+
+  return window->priv->opacity_is_enter;
+}
+
+
+
+gboolean
+panel_base_window_is_composited (PanelBaseWindow *window)
+{
+  panel_return_val_if_fail (PANEL_IS_BASE_WINDOW (window), FALSE);
+
+  return window->priv->is_composited;
+}
+
+
+
+PanelBgStyle
+panel_base_window_get_background_style (PanelBaseWindow *window)
+{
+  panel_return_val_if_fail (PANEL_IS_BASE_WINDOW (window), PANEL_BG_STYLE_NONE);
+
+  return window->priv->background_style;
+}
+
+
+
+GdkRGBA *
+panel_base_window_get_background_rgba (PanelBaseWindow *window)
+{
+  panel_return_val_if_fail (PANEL_IS_BASE_WINDOW (window), NULL);
+
+  return window->priv->background_rgba;
+}
+
+
+
+gchar *
+panel_base_window_get_background_image (PanelBaseWindow *window)
+{
+  panel_return_val_if_fail (PANEL_IS_BASE_WINDOW (window), NULL);
+
+  return window->priv->background_image;
 }
