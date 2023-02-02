@@ -120,6 +120,7 @@ panel_plugin_external_wrapper_wayland_constructed (GObject *object)
   GDBusConnection *connection;
   GError *error = NULL;
   gchar *path, *name;
+  gint unique_id;
 
   /* first let ExternalWrapper do its part of the D-Bus job */
   G_OBJECT_CLASS (panel_plugin_external_wrapper_wayland_parent_class)->constructed (object);
@@ -132,8 +133,9 @@ panel_plugin_external_wrapper_wayland_constructed (GObject *object)
   if (connection == NULL)
     return;
 
-  name = g_strdup_printf (PANEL_DBUS_PLUGIN_NAME, PANEL_PLUGIN_EXTERNAL (object)->unique_id);
-  path = g_strdup_printf (PANEL_DBUS_PLUGIN_PATH, PANEL_PLUGIN_EXTERNAL (object)->unique_id);
+  g_object_get (object, "unique-id", &unique_id, NULL);
+  name = g_strdup_printf (PANEL_DBUS_PLUGIN_NAME, unique_id);
+  path = g_strdup_printf (PANEL_DBUS_PLUGIN_PATH, unique_id);
   wrapper->proxy = g_dbus_proxy_new_sync (connection, G_DBUS_PROXY_FLAGS_NONE, NULL, name, path,
                                           PANEL_DBUS_EXTERNAL_INTERFACE, NULL, &error);
   if (wrapper->proxy != NULL)

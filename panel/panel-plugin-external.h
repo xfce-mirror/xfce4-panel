@@ -57,6 +57,11 @@ struct _PanelPluginExternalClass
                                       const GValue         *value,
                                       guint                *handle);
 
+  /* some info received on plugin startup by the
+   * implementations of the abstract object */
+  gboolean   (*get_show_configure)   (PanelPluginExternal  *external);
+  gboolean   (*get_show_about)       (PanelPluginExternal  *external);
+
   /* X11 only */
   void       (*set_background_color) (PanelPluginExternal  *external,
                                       const GdkRGBA        *color);
@@ -74,15 +79,6 @@ struct _PanelPluginExternal
   GtkBox __parent__;
 
   PanelPluginExternalPrivate *priv;
-
-  PanelModule                *module;
-
-  gint                        unique_id;
-
-  /* some info received on plugin startup by the
-   * implementations of the abstract object */
-  guint                       show_configure : 1;
-  guint                       show_about : 1;
 };
 
 typedef struct

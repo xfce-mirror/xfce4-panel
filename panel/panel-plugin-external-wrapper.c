@@ -62,8 +62,8 @@
 
 
 
-#define get_instance_private(instance) \
-  panel_plugin_external_wrapper_get_instance_private (PANEL_PLUGIN_EXTERNAL_WRAPPER (instance))
+#define get_instance_private(instance) ((PanelPluginExternalWrapperPrivate *) \
+  panel_plugin_external_wrapper_get_instance_private (PANEL_PLUGIN_EXTERNAL_WRAPPER (instance)))
 
 static void       panel_plugin_external_wrapper_get_property             (GObject                        *object,
                                                                           guint                           prop_id,
@@ -79,6 +79,8 @@ static gboolean   panel_plugin_external_wrapper_remote_event             (PanelP
                                                                           const gchar                    *name,
                                                                           const GValue                   *value,
                                                                           guint                          *handle);
+static gboolean   panel_plugin_external_wrapper_get_show_configure       (PanelPluginExternal            *external);
+static gboolean   panel_plugin_external_wrapper_get_show_about           (PanelPluginExternal            *external);
 static gboolean   panel_plugin_external_wrapper_dbus_provider_signal     (XfcePanelPluginWrapperExported *skeleton,
                                                                           GDBusMethodInvocation          *invocation,
                                                                           XfcePanelPluginProviderSignal   provider_signal,
@@ -95,6 +97,9 @@ typedef struct _PanelPluginExternalWrapperPrivate
 {
   XfcePanelPluginWrapperExported *skeleton;
   GDBusConnection                *connection;
+
+  guint show_configure : 1;
+  guint show_about : 1;
 } PanelPluginExternalWrapperPrivate;
 
 enum
@@ -134,6 +139,8 @@ panel_plugin_external_wrapper_class_init (PanelPluginExternalWrapperClass *klass
   plugin_external_class->get_argv = panel_plugin_external_wrapper_get_argv;
   plugin_external_class->set_properties = panel_plugin_external_wrapper_set_properties;
   plugin_external_class->remote_event = panel_plugin_external_wrapper_remote_event;
+  plugin_external_class->get_show_configure = panel_plugin_external_wrapper_get_show_configure;
+  plugin_external_class->get_show_about = panel_plugin_external_wrapper_get_show_about;
 
   g_object_class_install_property (gobject_class, PROP_SKELETON,
                                    g_param_spec_object ("skeleton", NULL, NULL,
@@ -187,6 +194,7 @@ panel_plugin_external_wrapper_constructed (GObject *object)
   PanelPluginExternalWrapperPrivate *priv = get_instance_private (object);
   gchar *path;
   GError *error = NULL;
+  gint unique_id;
 
   priv->connection = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL,  &error);
   if (G_LIKELY (priv->connection != NULL))
@@ -194,8 +202,8 @@ panel_plugin_external_wrapper_constructed (GObject *object)
       priv->skeleton = xfce_panel_plugin_wrapper_exported_skeleton_new ();
 
       /* register the object in dbus, the wrapper will monitor this object */
-      panel_return_if_fail (PANEL_PLUGIN_EXTERNAL (object)->unique_id != -1);
-      path = g_strdup_printf (PANEL_DBUS_WRAPPER_PATH, PANEL_PLUGIN_EXTERNAL (object)->unique_id);
+      g_object_get (object, "unique-id", &unique_id, NULL);
+      path = g_strdup_printf (PANEL_DBUS_WRAPPER_PATH, unique_id);
       g_dbus_interface_skeleton_export (G_DBUS_INTERFACE_SKELETON (priv->skeleton),
                                         priv->connection,
                                         path,
@@ -248,24 +256,28 @@ static gchar **
 panel_plugin_external_wrapper_get_argv (PanelPluginExternal   *external,
                                         gchar               **arguments)
 {
-  guint   i, argc = PLUGIN_ARGV_ARGUMENTS;
+  PanelModule *module;
+  guint i, argc = PLUGIN_ARGV_ARGUMENTS;
   gchar **argv;
+  gint unique_id;
 
   panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL_WRAPPER (external), NULL);
-  panel_return_val_if_fail (PANEL_IS_MODULE (external->module), NULL);
 
   /* add the number of arguments to the argc count */
   if (G_UNLIKELY (arguments != NULL))
     argc += g_strv_length (arguments);
 
   /* setup the basic argv */
+  g_object_get (external, "module", &module, NULL);
+  g_object_get (external, "unique-id", &unique_id, NULL);
   argv = g_new0 (gchar *, argc + 1);
-  argv[PLUGIN_ARGV_0] = g_strjoin ("-", WRAPPER_BIN, panel_module_get_api (external->module), NULL);
-  argv[PLUGIN_ARGV_FILENAME] = g_strdup (panel_module_get_filename (external->module));
-  argv[PLUGIN_ARGV_UNIQUE_ID] = g_strdup_printf ("%d", external->unique_id);;
-  argv[PLUGIN_ARGV_NAME] = g_strdup (panel_module_get_name (external->module));
-  argv[PLUGIN_ARGV_DISPLAY_NAME] = g_strdup (panel_module_get_display_name (external->module));
-  argv[PLUGIN_ARGV_COMMENT] = g_strdup (panel_module_get_comment (external->module));
+  argv[PLUGIN_ARGV_0] = g_strjoin ("-", WRAPPER_BIN, panel_module_get_api (module), NULL);
+  argv[PLUGIN_ARGV_FILENAME] = g_strdup (panel_module_get_filename (module));
+  argv[PLUGIN_ARGV_UNIQUE_ID] = g_strdup_printf ("%d", unique_id);;
+  argv[PLUGIN_ARGV_NAME] = g_strdup (panel_module_get_name (module));
+  argv[PLUGIN_ARGV_DISPLAY_NAME] = g_strdup (panel_module_get_display_name (module));
+  argv[PLUGIN_ARGV_COMMENT] = g_strdup (panel_module_get_comment (module));
+  g_object_unref (module);
 
   /* append the arguments */
   if (G_UNLIKELY (arguments != NULL))
@@ -333,6 +345,8 @@ panel_plugin_external_wrapper_set_properties (PanelPluginExternal *external,
   GVariantBuilder builder;
   PluginProperty *property;
   GSList *li;
+
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL_WRAPPER (external));
 
   g_variant_builder_init (&builder, G_VARIANT_TYPE_TUPLE);
 
@@ -411,23 +425,46 @@ panel_plugin_external_wrapper_remote_event (PanelPluginExternal *external,
 }
 
 
+
+static gboolean
+panel_plugin_external_wrapper_get_show_configure (PanelPluginExternal *external)
+{
+  panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL_WRAPPER (external), FALSE);
+
+  return get_instance_private (external)->show_configure;
+}
+
+
+
+static gboolean
+panel_plugin_external_wrapper_get_show_about (PanelPluginExternal *external)
+{
+  panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL_WRAPPER (external), FALSE);
+
+  return get_instance_private (external)->show_about;
+}
+
+
+
 static gboolean
 panel_plugin_external_wrapper_dbus_provider_signal (XfcePanelPluginWrapperExported *skeleton,
                                                     GDBusMethodInvocation          *invocation,
                                                     XfcePanelPluginProviderSignal   provider_signal,
                                                     PanelPluginExternalWrapper     *wrapper)
 {
+  PanelPluginExternalWrapperPrivate *priv = get_instance_private (wrapper);
+
   panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (wrapper), FALSE);
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (wrapper), FALSE);
 
   switch (provider_signal)
     {
     case PROVIDER_SIGNAL_SHOW_CONFIGURE:
-      PANEL_PLUGIN_EXTERNAL (wrapper)->show_configure = TRUE;
+      priv->show_configure = TRUE;
       break;
 
     case PROVIDER_SIGNAL_SHOW_ABOUT:
-      PANEL_PLUGIN_EXTERNAL (wrapper)->show_about = TRUE;
+      priv->show_about = TRUE;
       break;
 
     default:

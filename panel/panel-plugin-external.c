@@ -105,7 +105,9 @@ static void         panel_plugin_external_set_sensitive           (PanelPluginEx
 struct _PanelPluginExternalPrivate
 {
   /* startup arguments */
-  gchar     **arguments;
+  PanelModule *module;
+  gint         unique_id;
+  gchar      **arguments;
 
   guint       embedded : 1;
 
@@ -187,10 +189,8 @@ panel_plugin_external_init (PanelPluginExternal *external)
 {
   external->priv = panel_plugin_external_get_instance_private (external);
 
-  external->module = NULL;
-  external->show_configure = FALSE;
-  external->show_about = FALSE;
-  external->unique_id = -1;
+  external->priv->module = NULL;
+  external->priv->unique_id = -1;
 
   external->priv->arguments = NULL;
   external->priv->queue = NULL;
@@ -237,8 +237,8 @@ panel_plugin_external_finalize (GObject *object)
 
   panel_debug (PANEL_DEBUG_EXTERNAL,
                "%s-%d: plugin is being finalized",
-               panel_module_get_name (external->module),
-               external->unique_id);
+               panel_module_get_name (external->priv->module),
+               external->priv->unique_id);
 
   if (external->priv->spawn_timeout_id != 0)
     g_source_remove (external->priv->spawn_timeout_id);
@@ -261,7 +261,7 @@ panel_plugin_external_finalize (GObject *object)
   if (external->priv->restart_timer != NULL)
     g_timer_destroy (external->priv->restart_timer);
 
-  g_object_unref (G_OBJECT (external->module));
+  g_object_unref (G_OBJECT (external->priv->module));
 
   (*G_OBJECT_CLASS (panel_plugin_external_parent_class)->finalize) (object);
 }
@@ -279,7 +279,7 @@ panel_plugin_external_get_property (GObject    *object,
   switch (prop_id)
     {
     case PROP_UNIQUE_ID:
-      g_value_set_int (value, external->unique_id);
+      g_value_set_int (value, external->priv->unique_id);
       break;
 
     case PROP_ARGUMENTS:
@@ -287,7 +287,7 @@ panel_plugin_external_get_property (GObject    *object,
       break;
 
     case PROP_MODULE:
-      g_value_set_object (value, external->module);
+      g_value_set_object (value, external->priv->module);
       break;
 
     default:
@@ -309,7 +309,7 @@ panel_plugin_external_set_property (GObject      *object,
   switch (prop_id)
     {
     case PROP_UNIQUE_ID:
-      external->unique_id = g_value_get_int (value);
+      external->priv->unique_id = g_value_get_int (value);
       break;
 
     case PROP_ARGUMENTS:
@@ -317,7 +317,7 @@ panel_plugin_external_set_property (GObject      *object,
       break;
 
     case PROP_MODULE:
-      external->module = g_value_dup_object (value);
+      external->priv->module = g_value_dup_object (value);
       break;
 
     default:
@@ -370,8 +370,8 @@ panel_plugin_external_unrealize (GtkWidget *widget)
 
   panel_debug (PANEL_DEBUG_EXTERNAL,
                "%s-%d: plugin unrealized; quitting child",
-               panel_module_get_name (external->module),
-               external->unique_id);
+               panel_module_get_name (external->priv->module),
+               external->priv->unique_id);
 
   (*GTK_WIDGET_CLASS (panel_plugin_external_parent_class)->unrealize) (widget);
 }
@@ -426,11 +426,11 @@ panel_plugin_external_child_ask_restart (PanelPluginExternal *external)
       || g_timer_elapsed (external->priv->restart_timer, NULL) > PANEL_PLUGIN_AUTO_RESTART)
     {
       g_message ("Plugin %s-%d has been automatically restarted after crash.",
-                 panel_module_get_name (external->module),
-                 external->unique_id);
+                 panel_module_get_name (external->priv->module),
+                 external->priv->unique_id);
     }
   else if (!panel_plugin_external_child_ask_restart_dialog (GTK_WINDOW (toplevel),
-               panel_module_get_display_name (external->module)))
+               panel_module_get_display_name (external->priv->module)))
     {
       if (external->priv->watch_id != 0)
         {
@@ -521,7 +521,7 @@ panel_plugin_external_child_spawn (PanelPluginExternal *external)
                                           "-ex 'info registers' "
                                           "-args",
                                           program, g_get_tmp_dir (), timestamp / G_USEC_PER_SEC,
-                                          panel_module_get_name (external->module),
+                                          panel_module_get_name (external->priv->module),
                                           argv[PLUGIN_ARGV_UNIQUE_ID]);
             }
         }
@@ -534,7 +534,7 @@ panel_plugin_external_child_spawn (PanelPluginExternal *external)
                                           "--log-file='%s" G_DIR_SEPARATOR_S "%li_valgrind_%s_%s.log' "
                                           "--leak-check=full --show-reachable=yes -v ",
                                           program, g_get_tmp_dir (), timestamp / G_USEC_PER_SEC,
-                                          panel_module_get_name (external->module),
+                                          panel_module_get_name (external->priv->module),
                                           argv[PLUGIN_ARGV_UNIQUE_ID]);
             }
         }
@@ -558,8 +558,8 @@ panel_plugin_external_child_spawn (PanelPluginExternal *external)
         {
           panel_debug (PANEL_DEBUG_EXTERNAL,
                        "%s-%d: Failed to run the plugin in %s: %s",
-                       panel_module_get_name (external->module),
-                       external->unique_id, program,
+                       panel_module_get_name (external->priv->module),
+                       external->priv->unique_id, program,
                        cmd_line != NULL ? error->message : "debugger not found");
           g_error_free (error);
 
@@ -577,8 +577,8 @@ panel_plugin_external_child_spawn (PanelPluginExternal *external)
 
   panel_debug (PANEL_DEBUG_EXTERNAL,
                "%s-%d: child spawned; pid=%d, argc=%d",
-               panel_module_get_name (external->module),
-               external->unique_id, pid, g_strv_length (argv));
+               panel_module_get_name (external->priv->module),
+               external->priv->unique_id, pid, g_strv_length (argv));
 
   if (G_LIKELY (succeed))
     {
@@ -617,7 +617,7 @@ panel_plugin_external_child_respawn (gpointer user_data)
     {
       panel_debug (PANEL_DEBUG_EXTERNAL,
                    "%s-%d: still a child embedded, respawn delayed",
-                   panel_module_get_name (external->module), external->unique_id);
+                   panel_module_get_name (external->priv->module), external->priv->unique_id);
 
       return TRUE;
     }
@@ -653,7 +653,7 @@ panel_plugin_external_child_respawn_schedule (PanelPluginExternal *external)
     {
       panel_debug (PANEL_DEBUG_EXTERNAL,
                    "%s-%d: scheduled a respawn of the child",
-                   panel_module_get_name (external->module), external->unique_id);
+                   panel_module_get_name (external->priv->module), external->priv->unique_id);
 
       /* schedule a restart timeout */
       external->priv->spawn_timeout_id = g_timeout_add_full (G_PRIORITY_LOW, 100, panel_plugin_external_child_respawn,
@@ -680,8 +680,8 @@ panel_plugin_external_child_watch (GPid     pid,
 
   panel_debug (PANEL_DEBUG_EXTERNAL,
                "%s-%d: child exited with status %d",
-               panel_module_get_name (external->module),
-               external->unique_id, status);
+               panel_module_get_name (external->priv->module),
+               external->priv->unique_id, status);
 
   if (WIFEXITED (status))
     {
@@ -706,8 +706,8 @@ panel_plugin_external_child_watch (GPid     pid,
         case PLUGIN_EXIT_CHECK_FAILED:
         case PLUGIN_EXIT_NO_PROVIDER:
           g_warning ("Plugin %s-%d exited with status %d, removing from panel configuration",
-                     panel_module_get_name (external->module),
-                     external->unique_id, WEXITSTATUS (status));
+                     panel_module_get_name (external->priv->module),
+                     external->priv->unique_id, WEXITSTATUS (status));
 
           /* cleanup the plugin configuration (in PanelApplication) */
           xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (external),
@@ -792,7 +792,7 @@ panel_plugin_external_get_name (XfcePanelPluginProvider *provider)
   panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider), NULL);
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);
 
-  return panel_module_get_name (PANEL_PLUGIN_EXTERNAL (provider)->module);
+  return panel_module_get_name (PANEL_PLUGIN_EXTERNAL (provider)->priv->module);
 }
 
 
@@ -803,7 +803,7 @@ panel_plugin_external_get_unique_id (XfcePanelPluginProvider *provider)
   panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider), -1);
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), -1);
 
-  return PANEL_PLUGIN_EXTERNAL (provider)->unique_id;
+  return PANEL_PLUGIN_EXTERNAL (provider)->priv->unique_id;
 }
 
 
@@ -946,7 +946,7 @@ panel_plugin_external_get_show_configure (XfcePanelPluginProvider *provider)
   panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider), FALSE);
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), FALSE);
 
-  return PANEL_PLUGIN_EXTERNAL (provider)->show_configure;
+  return PANEL_PLUGIN_EXTERNAL_GET_CLASS (provider)->get_show_configure (PANEL_PLUGIN_EXTERNAL (provider));
 }
 
 
@@ -969,7 +969,7 @@ panel_plugin_external_get_show_about (XfcePanelPluginProvider *provider)
   panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider), FALSE);
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), FALSE);
 
-  return PANEL_PLUGIN_EXTERNAL (provider)->show_about;
+  return PANEL_PLUGIN_EXTERNAL_GET_CLASS (provider)->get_show_about (PANEL_PLUGIN_EXTERNAL (provider));
 }
 
 
@@ -1108,8 +1108,8 @@ panel_plugin_external_restart (PanelPluginExternal *external)
     {
       panel_debug (PANEL_DEBUG_EXTERNAL,
                    "%s-%d: child asked to restart; pid=%d",
-                   panel_module_get_name (external->module),
-                   external->unique_id, external->priv->pid);
+                   panel_module_get_name (external->priv->module),
+                   external->priv->unique_id, external->priv->pid);
 
       panel_plugin_external_queue_free (external);
 
@@ -1197,8 +1197,8 @@ panel_plugin_external_set_embedded (PanelPluginExternal *external,
     {
       panel_debug (PANEL_DEBUG_EXTERNAL,
                    "%s-%d: child is embedded; %d properties in queue",
-                   panel_module_get_name (external->module),
-                   external->unique_id,
+                   panel_module_get_name (external->priv->module),
+                   external->priv->unique_id,
                    g_slist_length (external->priv->queue));
 
       /* send queue to wrapper */
@@ -1208,8 +1208,8 @@ panel_plugin_external_set_embedded (PanelPluginExternal *external,
     {
       panel_debug (PANEL_DEBUG_EXTERNAL,
                    "%s-%d: child is unembedded",
-                   panel_module_get_name (external->module),
-                   external->unique_id);
+                   panel_module_get_name (external->priv->module),
+                   external->priv->unique_id);
     }
 }
 
