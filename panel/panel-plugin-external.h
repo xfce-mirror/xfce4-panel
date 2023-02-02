@@ -27,17 +27,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct _PanelPluginExternalClass   PanelPluginExternalClass;
-typedef struct _PanelPluginExternal        PanelPluginExternal;
-typedef struct _PanelPluginExternalPrivate PanelPluginExternalPrivate;
-
-#define PANEL_TYPE_PLUGIN_EXTERNAL            (panel_plugin_external_get_type ())
-#define PANEL_PLUGIN_EXTERNAL(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PANEL_TYPE_PLUGIN_EXTERNAL, PanelPluginExternal))
-#define PANEL_PLUGIN_EXTERNAL_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PANEL_TYPE_PLUGIN_EXTERNAL, PanelPluginExternalClass))
-#define PANEL_IS_PLUGIN_EXTERNAL(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PANEL_TYPE_PLUGIN_EXTERNAL))
-#define PANEL_IS_PLUGIN_EXTERNAL_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_PLUGIN_EXTERNAL))
-#define PANEL_PLUGIN_EXTERNAL_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_PLUGIN_EXTERNAL, PanelPluginExternalClass))
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (PanelPluginExternal, g_object_unref)
+#define PANEL_TYPE_PLUGIN_EXTERNAL (panel_plugin_external_get_type ())
+G_DECLARE_DERIVABLE_TYPE (PanelPluginExternal, panel_plugin_external, PANEL, PLUGIN_EXTERNAL, GtkBox)
 
 struct _PanelPluginExternalClass
 {
@@ -74,23 +65,12 @@ struct _PanelPluginExternalClass
   gboolean   (*pointer_is_outside)   (PanelPluginExternal  *external);
 };
 
-struct _PanelPluginExternal
-{
-  GtkBox __parent__;
-
-  PanelPluginExternalPrivate *priv;
-};
-
 typedef struct
 {
   XfcePanelPluginProviderPropType type;
   GValue                          value;
 }
 PluginProperty;
-
-
-
-GType        panel_plugin_external_get_type             (void) G_GNUC_CONST;
 
 void         panel_plugin_external_queue_add            (PanelPluginExternal              *external,
                                                          XfcePanelPluginProviderPropType   type,
