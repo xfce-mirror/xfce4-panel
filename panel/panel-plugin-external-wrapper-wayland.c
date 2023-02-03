@@ -236,11 +236,15 @@ panel_plugin_external_wrapper_wayland_set_geometry (PanelPluginExternal *externa
   GtkAllocation alloc;
   GdkRectangle *geom = &wrapper->geometry;
   GdkDisplay *display;
-  GdkMonitor *monitor;
+  GdkWindow *gdkwindow;
+  GdkMonitor *monitor = NULL;
   gint x, y;
 
   display = gdk_display_get_default ();
-  monitor = gdk_display_get_monitor_at_window (display, gtk_widget_get_window (GTK_WIDGET (external)));
+  gdkwindow = gtk_widget_get_window (GTK_WIDGET (external));
+  if (gdkwindow != NULL)
+    monitor = gdk_display_get_monitor_at_window (display, gdkwindow);
+
   if (monitor != wrapper->monitor)
     {
       GValue value = G_VALUE_INIT;
