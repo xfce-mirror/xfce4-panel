@@ -401,7 +401,8 @@ directory_menu_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
   DirectoryMenuPlugin *plugin = DIRECTORY_MENU_PLUGIN (panel_plugin);
 
-  g_object_unref (G_OBJECT (plugin->base_directory));
+  if (plugin->base_directory != NULL)
+    g_object_unref (G_OBJECT (plugin->base_directory));
   g_free (plugin->icon_name);
   g_free (plugin->file_pattern);
 
