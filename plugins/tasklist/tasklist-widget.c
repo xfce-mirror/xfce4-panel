@@ -3075,10 +3075,12 @@ xfce_tasklist_button_get_child_path (XfceTasklistChild *child)
       gint pid = xfw_application_instance_get_pid (instance);
       if (pid > 0)
         {
-          gchar *link = g_strdup_printf ("/proc/%d/exe", pid);
-          if (g_file_test (link, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_SYMLINK))
-            path = g_file_read_link (link, NULL);
-          g_free (link);
+          path = g_strdup_printf ("/proc/%d/exe", pid);
+          if (! g_file_test (path, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_SYMLINK))
+            {
+              g_free (path);
+              path = NULL;
+            }
         }
     }
 
