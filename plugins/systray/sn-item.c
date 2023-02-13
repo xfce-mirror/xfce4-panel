@@ -291,6 +291,7 @@ sn_item_finalize (GObject *object)
 {
   SnItem *item = SN_ITEM (object);
 
+  g_cancellable_cancel (item->cancellable);
   g_object_unref (item->cancellable);
 
   if (item->properties_proxy != NULL)
