@@ -535,6 +535,16 @@ panel_plugin_external_child_ask_restart_dialog (GtkWindow   *parent,
 
 
 static gboolean
+panel_plugin_external_remove (gpointer data)
+{
+  /* cleanup the plugin configuration (in PanelApplication) and destroy 'external' */
+  xfce_panel_plugin_provider_emit_signal (data, PROVIDER_SIGNAL_REMOVE_PLUGIN);
+  return FALSE;
+}
+
+
+
+static gboolean
 panel_plugin_external_child_ask_restart (PanelPluginExternal *external)
 {
   GtkWidget *toplevel;
@@ -565,10 +575,9 @@ panel_plugin_external_child_ask_restart (PanelPluginExternal *external)
                                NULL);
         }
 
-      /* cleanup the plugin configuration (in PanelApplication) and
-       * destroy the plugin */
-      xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (external),
-                                              PROVIDER_SIGNAL_REMOVE_PLUGIN);
+      /* delay this until we get out of any other idle func, as this triggers the
+       * finalization of 'external' */
+      g_idle_add_full (G_PRIORITY_HIGH, panel_plugin_external_remove, external, NULL);
 
       return FALSE;
     }
@@ -831,9 +840,9 @@ panel_plugin_external_child_watch (GPid     pid,
                      panel_module_get_name (external->module),
                      external->unique_id, WEXITSTATUS (status));
 
-          /* cleanup the plugin configuration (in PanelApplication) */
-          xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (external),
-                                                  PROVIDER_SIGNAL_REMOVE_PLUGIN);
+          /* delay this until we get out of any other idle func, as this triggers the
+           * finalization of 'external' */
+          g_idle_add_full (G_PRIORITY_HIGH, panel_plugin_external_remove, external, NULL);
 
           goto close_pid;
         }
@@ -864,8 +873,7 @@ close_pid:
 static void
 panel_plugin_external_child_watch_destroyed (gpointer user_data)
 {
-  if (PANEL_IS_PLUGIN_EXTERNAL (user_data))
-    PANEL_PLUGIN_EXTERNAL (user_data)->priv->watch_id = 0;
+  PANEL_PLUGIN_EXTERNAL (user_data)->priv->watch_id = 0;
 }
 
 
