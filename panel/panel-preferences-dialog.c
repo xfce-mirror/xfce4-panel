@@ -1150,24 +1150,24 @@ panel_preferences_dialog_compositing_clicked (GtkButton *button, gpointer user_d
     }
 }
 
-static gchar *
-get_panel_cmdline(gchar *program)
+
+
+static void
+panel_preferences_dialog_panel_switch_watch (GPid pid,
+                                             gint wait_status,
+                                             gpointer user_data)
 {
-  gchar *path;
-  gchar *path_with_opts;
+  if (! g_spawn_check_wait_status (wait_status, NULL))
+    {
+      gchar *path = g_find_program_in_path ("xfce4-panel-profiles");
+      g_spawn_command_line_async (path, NULL);
+      g_free (path);
+    }
 
-  path = g_find_program_in_path (program);
-
-  if (path != NULL) {
-    path_with_opts = g_strjoin (" ", path, "--from-panel", NULL);
-
-    g_free (path);
-
-    path = path_with_opts;
-  }
-
-  return path;
+  g_spawn_close_pid (pid);
 }
+
+
 
 static void
 panel_preferences_dialog_panel_switch (GtkWidget *widget, PanelPreferencesDialog *dialog)
@@ -1177,8 +1177,8 @@ panel_preferences_dialog_panel_switch (GtkWidget *widget, PanelPreferencesDialog
   gchar     *path_new;
 
   /* xfce4-panel-profiles will reopen this app after it is closed. */
-  path_old = get_panel_cmdline ("xfpanel-switch");
-  path_new = get_panel_cmdline ("xfce4-panel-profiles");
+  path_old = g_find_program_in_path ("xfpanel-switch");
+  path_new = g_find_program_in_path ("xfce4-panel-profiles");
 
   if (path_old == NULL && path_new == NULL)
     return;
@@ -1189,7 +1189,26 @@ panel_preferences_dialog_panel_switch (GtkWidget *widget, PanelPreferencesDialog
 
   /* first try the new name of the executable, then the old */
   if (path_new)
-    g_spawn_command_line_async (path_new, NULL);
+  {
+    gchar *path_with_opts = g_strjoin (" ", path_new, "--from-panel", NULL);
+    gchar **argv;
+    GPid pid;
+
+    if (g_shell_parse_argv (path_with_opts, NULL, &argv, NULL)
+        && g_spawn_async (NULL, argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD, NULL, NULL, &pid, NULL))
+      {
+        /* try with option "--from-panel" (xfce4-panel-profiles >= 1.0.11), we'll retry
+         * without option in the idle func if it fails */
+        g_child_watch_add (pid, panel_preferences_dialog_panel_switch_watch, NULL);
+      }
+    else
+      {
+        /* probably never reached, just in case */
+        g_spawn_command_line_async (path_new, NULL);
+      }
+
+    g_free (path_with_opts);
+  }
   else if (path_old)
     g_spawn_command_line_async (path_old, NULL);
 
