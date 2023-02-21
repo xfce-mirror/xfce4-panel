@@ -7,14 +7,14 @@
 # Kristjan Siimson <kristjan.siimson@gmail.com>, 2009
 # Mart Tõnso <mart.tonso@ttu.ee>, 2004
 # Peeter Vois <peeter.vois@proekspert.ee>, 2004,2006
-# Priit Jõerüüt <transifex@joeruut.com>, 2020-2022
+# Priit Jõerüüt <transifex@joeruut.com>, 2020-2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-05 00:46+0100\n"
+"POT-Creation-Date: 2023-02-01 00:46+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2022\n"
+"Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2023\n"
 "Language-Team: Estonian (http://www.transifex.com/xfce/xfce4-panel/language/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +38,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panels;settings;preferences;taskbar;autohide;application menu;start;buttons;launcher;notification area;status;icons;plugins;riba;ribad;paneel;paneelid;eelistused;seaded;seadistused;tegumiriba;teated;käivitaja;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3572
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3562
 msgid "Panel"
 msgstr "Riba"
 
@@ -48,13 +48,13 @@ msgstr "Kohanda riba"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1095
-#: ../panel/panel-preferences-dialog.c:1417
+#: ../panel/panel-preferences-dialog.c:1410
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Kas soovid kindlasti „%s“ eemaldada?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1100
-#: ../panel/panel-preferences-dialog.c:1420
+#: ../panel/panel-preferences-dialog.c:1413
 msgid "Remove Item"
 msgstr "Eemalda ese"
 
@@ -64,10 +64,10 @@ msgid ""
 msgstr "Eemaldades eseme ribalt kustutatakse ka tema seadistused."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1103 ../panel/panel-dialogs.c:164
-#: ../panel/panel-preferences-dialog.c:1424
-#: ../plugins/applicationsmenu/applicationsmenu.c:608
-#: ../plugins/directorymenu/directorymenu.c:467
-#: ../plugins/directorymenu/directorymenu.c:934
+#: ../panel/panel-preferences-dialog.c:1417
+#: ../plugins/applicationsmenu/applicationsmenu.c:602
+#: ../plugins/directorymenu/directorymenu.c:460
+#: ../plugins/directorymenu/directorymenu.c:926
 msgid "_Cancel"
 msgstr "_Loobu"
 
@@ -75,8 +75,8 @@ msgstr "_Loobu"
 #: ../libxfce4panel/xfce-panel-plugin.c:1104
 #: ../libxfce4panel/xfce-panel-plugin.c:1271
 #: ../panel/panel-plugin-external.c:403
-#: ../panel/panel-preferences-dialog.c:1054
-#: ../panel/panel-preferences-dialog.c:1425
+#: ../panel/panel-preferences-dialog.c:1047
+#: ../panel/panel-preferences-dialog.c:1418
 #: ../panel/panel-preferences-dialog.glade.h:58
 #: ../plugins/launcher/launcher-dialog.c:860
 msgid "_Remove"
@@ -88,7 +88,7 @@ msgid "_Properties"
 msgstr "_Omadused"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:3648
+#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:3638
 msgid "_About"
 msgstr "Te_ave"
 
@@ -102,29 +102,29 @@ msgid "Pane_l"
 msgstr "_Riba"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3584
+#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3574
 msgid "Add _New Items..."
 msgstr "Lisa _uusi esemeid..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1308 ../panel/panel-window.c:3595
+#: ../libxfce4panel/xfce-panel-plugin.c:1308 ../panel/panel-window.c:3585
 msgid "Panel Pr_eferences..."
 msgstr "Riba s_eadistused..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1325 ../panel/panel-window.c:3623
+#: ../libxfce4panel/xfce-panel-plugin.c:1325 ../panel/panel-window.c:3613
 msgid "Log _Out"
 msgstr "Logi _välja"
 
 #. help item
-#: ../libxfce4panel/xfce-panel-plugin.c:1341 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3639
+#: ../libxfce4panel/xfce-panel-plugin.c:1341 ../panel/panel-item-dialog.c:196
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3629
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:15
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 #: ../plugins/launcher/launcher-dialog.glade.h:20
-#: ../plugins/pager/pager-dialog.glade.h:4
+#: ../plugins/pager/pager-dialog.glade.h:5
 #: ../plugins/separator/separator-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
@@ -136,43 +136,43 @@ msgstr "A_bi"
 msgid "About"
 msgstr "Teave"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Näita „riba seadistused” dialoogi"
 
-#: ../panel/main.c:83 ../panel/main.c:84
+#: ../panel/main.c:84 ../panel/main.c:85
 msgid "PANEL-NUMBER"
 msgstr "RIBA-ARV"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
 msgid "Show the 'Add New Items' dialog"
 msgstr "Näita „Lisa uusi esemeid” dialoogi"
 
-#: ../panel/main.c:85
+#: ../panel/main.c:86
 msgid "Save the panel configuration"
 msgstr "Salvesta riba seadistused"
 
-#: ../panel/main.c:86
+#: ../panel/main.c:87
 msgid "Add a new plugin to the panel"
 msgstr "Lisa ribale uus plugin"
 
-#: ../panel/main.c:86
+#: ../panel/main.c:87
 msgid "PLUGIN-NAME"
 msgstr "PLUGINA-NIMI"
 
-#: ../panel/main.c:87
+#: ../panel/main.c:88
 msgid "Restart the running panel instance"
 msgstr "Taaskäivita kasutuselolev riba"
 
-#: ../panel/main.c:88
+#: ../panel/main.c:89
 msgid "Quit the running panel instance"
 msgstr "Sulge kasutuselolev riba"
 
-#: ../panel/main.c:89
+#: ../panel/main.c:90
 msgid "Do not wait for a window manager on startup"
 msgstr "Ära oota käivitamisel aknahaldurit"
 
-#: ../panel/main.c:90
+#: ../panel/main.c:91
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -180,113 +180,113 @@ msgid "Print version information and exit"
 msgstr "Trüki versioon ja välju"
 
 #. parse context options
-#: ../panel/main.c:273
+#: ../panel/main.c:274
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENDID...]"
 
-#: ../panel/main.c:280
+#: ../panel/main.c:281
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Trüki „%s --help” kasutusjuhisteks."
 
-#: ../panel/main.c:299
+#: ../panel/main.c:300
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce arendusmeeskond. Kõik õigused kaitstud."
 
-#: ../panel/main.c:300
+#: ../panel/main.c:301
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Palun teata vigadest <%s>."
 
 #. quit without error if an instance is running
-#: ../panel/main.c:403
+#: ../panel/main.c:404
 msgid "There is already a running instance"
 msgstr "Üks paneel juba töötab"
 
 #. spawn ourselfs again
-#: ../panel/main.c:411
+#: ../panel/main.c:412
 msgid "Restarting..."
 msgstr "Taaskäivitan..."
 
-#: ../panel/main.c:426
+#: ../panel/main.c:427
 msgid "Failed to show the preferences dialog"
 msgstr "Seadistuste dialoogi näitamine ebaõnnestus"
 
-#: ../panel/main.c:428
+#: ../panel/main.c:429
 msgid "Failed to show the add new items dialog"
 msgstr "Uute esemete lisamise dialoogi näitamine ebaõnnestus"
 
-#: ../panel/main.c:430
+#: ../panel/main.c:431
 msgid "Failed to save the panel configuration"
 msgstr "Riba sätete salvestamine ebaõnnestus"
 
-#: ../panel/main.c:432
+#: ../panel/main.c:433
 msgid "Failed to add a plugin to the panel"
 msgstr "Plugina lisamine ribale ebaõnnestus"
 
-#: ../panel/main.c:434
+#: ../panel/main.c:435
 msgid "Failed to restart the panel"
 msgstr "Riba taaskäivitamine ebaõnnestus"
 
-#: ../panel/main.c:436
+#: ../panel/main.c:437
 msgid "Failed to quit the panel"
 msgstr "Riba lõpetamine ebaõnnestus"
 
-#: ../panel/main.c:438
+#: ../panel/main.c:439
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus sõnumi saatmine ebaõnnestus"
 
-#: ../panel/main.c:448
+#: ../panel/main.c:449
 msgid "Execute"
 msgstr "Käivita"
 
-#: ../panel/main.c:449
+#: ../panel/main.c:450
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Kas soovite käivitada riba? Kui nii, siis salvestage kindlalt sessioon välja logimisel, et riba käivituks automaatselt järgmisel sisse logimisel."
 
-#: ../panel/main.c:452 ../panel/main.c:466
+#: ../panel/main.c:453 ../panel/main.c:467
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Ei leidnud ühtegi %s töötavat olekut"
 
-#: ../panel/panel-application.c:227
+#: ../panel/panel-application.c:222
 msgid "Failed to launch the migration application"
 msgstr "Migratsioonirakenduse käivitamine ebaõnnestus"
 
-#: ../panel/panel-application.c:1040
+#: ../panel/panel-application.c:1035
 msgid "Create _Launcher"
 msgstr "_Loo käivitaja"
 
-#: ../panel/panel-application.c:1041
+#: ../panel/panel-application.c:1036
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Sellega luuakse ribale uus käivitaja ja lisatud failid moodustavad menüü."
 
-#: ../panel/panel-application.c:1043
+#: ../panel/panel-application.c:1038
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Loo uus käivitaja %d töölaua failist"
 msgstr[1] "Loo uus käivitaja %d töölaua failist"
 
-#: ../panel/panel-application.c:1800
+#: ../panel/panel-application.c:1795
 msgid "Quit"
 msgstr "Lõpeta"
 
-#: ../panel/panel-application.c:1801
+#: ../panel/panel-application.c:1796
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Käivitasite X-i sessioonihaldurita. Klõpsates „Lõpeta” sulgete X serveri."
 
-#: ../panel/panel-application.c:1802
+#: ../panel/panel-application.c:1797
 msgid "Are you sure you want to quit the panel?"
 msgstr "Kas soovite kindlalt lõpetada riba?"
 
-#: ../panel/panel-application.c:1810
+#: ../panel/panel-application.c:1805
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Käsu \\„%s\\” täitmine ebaõnnestus"
@@ -320,7 +320,7 @@ msgstr "Priit Jõerüüt 2020-2022"
 msgid "Add New Item"
 msgstr "Lisa uus ese"
 
-#: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:201
+#: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:192
 #: ../panel/panel-preferences-dialog.glade.h:56
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
@@ -330,7 +330,7 @@ msgstr "Lis_a"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Palun valige uuele pluginale riba:"
 
-#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:993
+#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:986
 #, c-format
 msgid "Panel %d"
 msgstr "%d. ääreriba"
@@ -345,32 +345,32 @@ msgstr "Tavalise kasutajana ei ole teil õigust teha muudatusi riba sätetes, ku
 msgid "Modifying the panel is not allowed"
 msgstr "Riba muutmine ei ole lubatud"
 
-#: ../panel/panel-item-dialog.c:195
+#: ../panel/panel-item-dialog.c:186
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Add New Items"
 msgstr "Lisa uusi esemeid"
 
-#: ../panel/panel-item-dialog.c:209
+#: ../panel/panel-item-dialog.c:200
 #: ../panel/panel-preferences-dialog.glade.h:11
-#: ../panel/panel-tic-tac-toe.c:125
+#: ../panel/panel-tic-tac-toe.c:117
 #: ../plugins/actions/actions-dialog.glade.h:7
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #: ../plugins/clock/clock-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 #: ../plugins/launcher/launcher-dialog.glade.h:17
-#: ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager-dialog.glade.h:6
 #: ../plugins/separator/separator-dialog.glade.h:5
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "_Close"
 msgstr "_Sulge"
 
-#: ../panel/panel-item-dialog.c:225
+#: ../panel/panel-item-dialog.c:216
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "_Otsi:"
 
-#: ../panel/panel-item-dialog.c:233
+#: ../panel/panel-item-dialog.c:224
 msgid "Enter search phrase here"
 msgstr "Sisesta siia otsisõna"
 
@@ -395,39 +395,39 @@ msgstr "Plugin taaskäivitus mitu korda viimase %d sekundi jooksul. Kui vajutate
 msgid "_Execute"
 msgstr "_Käivita"
 
-#: ../panel/panel-preferences-dialog.c:547
+#: ../panel/panel-preferences-dialog.c:540
 msgid "Automatic"
 msgstr "Automaatne"
 
-#: ../panel/panel-preferences-dialog.c:557
+#: ../panel/panel-preferences-dialog.c:550
 msgid "Primary"
 msgstr "Esmane"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:576
+#: ../panel/panel-preferences-dialog.c:569
 #, c-format
 msgid "Monitor %d"
 msgstr "Kuvar %d"
 
-#: ../panel/panel-preferences-dialog.c:1055
+#: ../panel/panel-preferences-dialog.c:1048
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Riba ja plugina sätted eemaldatakse jäädavalt"
 
-#: ../panel/panel-preferences-dialog.c:1056
+#: ../panel/panel-preferences-dialog.c:1049
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Kas soovite kindlalt eemaldada riba %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1259
+#: ../panel/panel-preferences-dialog.c:1252
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(väline)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1264
+#: ../panel/panel-preferences-dialog.c:1257
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -436,12 +436,12 @@ msgstr "Sisemine nimi: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1276
+#: ../panel/panel-preferences-dialog.c:1269
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Sisemine nimetus: %s-%d"
 
-#: ../panel/panel-preferences-dialog.c:1422
+#: ../panel/panel-preferences-dialog.c:1415
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Kui sa eemaldad eseme ribalt, kaob ta sealt jäädavalt,\nkuid alati saad ta tagasi lisada."
 
@@ -686,31 +686,31 @@ msgstr "Liiguta valitud eset ühe rea võrra alla"
 msgid "Ite_ms"
 msgstr "_Esemed"
 
-#: ../panel/panel-tic-tac-toe.c:123
+#: ../panel/panel-tic-tac-toe.c:115
 msgid "_New Game"
 msgstr "_Uus mäng"
 
-#: ../panel/panel-tic-tac-toe.c:134
+#: ../panel/panel-tic-tac-toe.c:126
 msgid "_Level:"
 msgstr "_Tase:"
 
-#: ../panel/panel-tic-tac-toe.c:140
+#: ../panel/panel-tic-tac-toe.c:132
 msgid "Novice"
 msgstr "Algaja"
 
-#: ../panel/panel-tic-tac-toe.c:141
+#: ../panel/panel-tic-tac-toe.c:133
 msgid "Intermediate"
 msgstr "Keskpärane"
 
-#: ../panel/panel-tic-tac-toe.c:142
+#: ../panel/panel-tic-tac-toe.c:134
 msgid "Experienced"
 msgstr "Kogenud"
 
-#: ../panel/panel-tic-tac-toe.c:143
+#: ../panel/panel-tic-tac-toe.c:135
 msgid "Expert"
 msgstr "Asjatundja"
 
-#: ../panel/panel-window.c:3609
+#: ../panel/panel-window.c:3599
 msgid "_Lock Panel"
 msgstr "_Lukusta riba"
 
@@ -735,7 +735,7 @@ msgstr "Riba sätteid on uuendatud."
 msgid "Action Buttons"
 msgstr "Toimingute nupud"
 
-#: ../plugins/actions/actions-dialog.glade.h:2 ../plugins/actions/actions.c:40
+#: ../plugins/actions/actions-dialog.glade.h:2 ../plugins/actions/actions.c:36
 msgid "Session Menu"
 msgstr "Sessioonimenüü"
 
@@ -793,144 +793,144 @@ msgstr "Näita mõne tegevuse puhul 30 sekundilise ajapiiriga kinnitusdialoogi."
 msgid "_Actions"
 msgstr "_Tegevused"
 
-#: ../plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:157
 msgid "Log Out"
 msgstr "Logi välja"
 
-#: ../plugins/actions/actions.c:168
+#: ../plugins/actions/actions.c:158
 msgid "_Log Out"
 msgstr "_Logi välja"
 
-#: ../plugins/actions/actions.c:169
+#: ../plugins/actions/actions.c:159
 msgid "Are you sure you want to log out?"
 msgstr "Kas soovite kindlalt välja logida?"
 
-#: ../plugins/actions/actions.c:170
+#: ../plugins/actions/actions.c:160
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Väljalogimine %d sekundi pärast."
 
-#: ../plugins/actions/actions.c:176
+#: ../plugins/actions/actions.c:166
 msgid "Log Out..."
 msgstr "Logi välja..."
 
-#: ../plugins/actions/actions.c:177
+#: ../plugins/actions/actions.c:167
 msgid "Log _Out..."
 msgstr "Logi _välja..."
 
-#: ../plugins/actions/actions.c:184
+#: ../plugins/actions/actions.c:174
 msgid "Switch User"
 msgstr "Vaheta kasutajat"
 
-#: ../plugins/actions/actions.c:185
+#: ../plugins/actions/actions.c:175
 msgid "_Switch User"
 msgstr "Vaheta _kasutajat"
 
-#: ../plugins/actions/actions.c:192
+#: ../plugins/actions/actions.c:182
 msgid "Lock Screen"
 msgstr "Lukusta ekraan"
 
-#: ../plugins/actions/actions.c:193
+#: ../plugins/actions/actions.c:183
 msgid "Loc_k Screen"
 msgstr "L_ukusta ekraan"
 
-#: ../plugins/actions/actions.c:200
+#: ../plugins/actions/actions.c:190
 msgid "Hibernate"
 msgstr "Talleta kettale"
 
-#: ../plugins/actions/actions.c:201
+#: ../plugins/actions/actions.c:191
 msgid "_Hibernate"
 msgstr "T_alleta kettale"
 
-#: ../plugins/actions/actions.c:202
+#: ../plugins/actions/actions.c:192
 msgid "Do you want to suspend to disk?"
 msgstr "Kas soovid talletada kettale?"
 
-#: ../plugins/actions/actions.c:203
+#: ../plugins/actions/actions.c:193
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Talletan %d sekundi pärast kettale."
 
-#: ../plugins/actions/actions.c:209
+#: ../plugins/actions/actions.c:199
 msgid "Hybrid Sleep"
 msgstr "Hübriiduni"
 
-#: ../plugins/actions/actions.c:210
+#: ../plugins/actions/actions.c:200
 msgid "_Hybrid Sleep"
 msgstr "H_übriiduni"
 
-#: ../plugins/actions/actions.c:211
+#: ../plugins/actions/actions.c:201
 msgid "Do you want to hibernate and suspend the system?"
 msgstr "Kas soovid arvuti viimast olekut talletada kettale ja jätta uinakusse?"
 
-#: ../plugins/actions/actions.c:212
+#: ../plugins/actions/actions.c:202
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr "Talletan arvuti oleku %d sekundi pärast kettale."
 
-#: ../plugins/actions/actions.c:218
+#: ../plugins/actions/actions.c:208
 msgid "Suspend"
 msgstr "Tee uinak"
 
-#: ../plugins/actions/actions.c:219
+#: ../plugins/actions/actions.c:209
 msgid "Sus_pend"
 msgstr "Talleta _RAM-i"
 
-#: ../plugins/actions/actions.c:220
+#: ../plugins/actions/actions.c:210
 msgid "Do you want to suspend to RAM?"
 msgstr "Kas soovid talletada RAM-i?"
 
-#: ../plugins/actions/actions.c:221
+#: ../plugins/actions/actions.c:211
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Talletan %d sekundi pärast RAM-i."
 
-#: ../plugins/actions/actions.c:227
+#: ../plugins/actions/actions.c:217
 msgid "Restart"
 msgstr "Taaskäivita"
 
-#: ../plugins/actions/actions.c:228
+#: ../plugins/actions/actions.c:218
 msgid "_Restart"
 msgstr "Taa_skäivita"
 
-#: ../plugins/actions/actions.c:229
+#: ../plugins/actions/actions.c:219
 msgid "Are you sure you want to restart?"
 msgstr "Kas soovite kindlalt taaskäivitada?"
 
-#: ../plugins/actions/actions.c:230
+#: ../plugins/actions/actions.c:220
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Taaskäivitan %d sekundi pärast."
 
-#: ../plugins/actions/actions.c:236
+#: ../plugins/actions/actions.c:226
 msgid "Shut Down"
 msgstr "Lülita välja"
 
-#: ../plugins/actions/actions.c:237
+#: ../plugins/actions/actions.c:227
 msgid "Shut _Down"
 msgstr "L_ülita välja"
 
-#: ../plugins/actions/actions.c:238
+#: ../plugins/actions/actions.c:228
 msgid "Are you sure you want to shut down?"
 msgstr "Kas soovite kindlalt välja lülitada?"
 
-#: ../plugins/actions/actions.c:239
+#: ../plugins/actions/actions.c:229
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Lülitan %d sekundi pärast välja."
 
-#: ../plugins/actions/actions.c:688
+#: ../plugins/actions/actions.c:677
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Eraldaja"
 
-#: ../plugins/actions/actions.c:1122
+#: ../plugins/actions/actions.c:1111
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Ei õnnestunud käivitada tegevust „%s”"
 
-#: ../plugins/actions/actions.c:1327
+#: ../plugins/actions/actions.c:1316
 msgid "Little Mouse"
 msgstr "Pisike hiir"
 
@@ -1012,23 +1012,23 @@ msgid "Menu File"
 msgstr "Menüüfail"
 
 #. I18N: default tooltip of the application menu
-#: ../plugins/applicationsmenu/applicationsmenu.c:39
+#: ../plugins/applicationsmenu/applicationsmenu.c:37
 msgid "Applications"
 msgstr "Rakendused"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:606
-#: ../plugins/directorymenu/directorymenu.c:465
+#: ../plugins/applicationsmenu/applicationsmenu.c:600
+#: ../plugins/directorymenu/directorymenu.c:458
 msgid "Select An Icon"
 msgstr "Vali ikoon"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:609
-#: ../plugins/directorymenu/directorymenu.c:468
+#: ../plugins/applicationsmenu/applicationsmenu.c:603
+#: ../plugins/directorymenu/directorymenu.c:461
 msgid "_OK"
 msgstr "_OK"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:647
-#: ../plugins/clock/clock.c:1030 ../plugins/launcher/launcher.c:2496
+#: ../plugins/applicationsmenu/applicationsmenu.c:641
+#: ../plugins/clock/clock.c:1018 ../plugins/launcher/launcher.c:2466
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Käsu \\„%s\\” täitmine ebaõnnestus."
@@ -1073,15 +1073,15 @@ msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr ""
 
-#: ../plugins/clock/clock.c:155
+#: ../plugins/clock/clock.c:150
 msgid "Week %V"
 msgstr "Nädal %V"
 
-#: ../plugins/clock/clock.c:465
+#: ../plugins/clock/clock.c:453
 msgid "Failed to execute clock command"
 msgstr "Kella käsu täitmine ebaõnnestus"
 
-#: ../plugins/clock/clock.c:969
+#: ../plugins/clock/clock.c:957
 msgid "Custom Format"
 msgstr "Kohandatud vorm"
 
@@ -1160,7 +1160,7 @@ msgstr "Kellaaja seadistused"
 msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
-msgstr ""
+msgstr "Kui sa nii oled seadistanud, siis vasak hiireklõps kalendril käivitab selle käsu, mitte aga ei kuva kalendrit."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Co_mmand:"
@@ -1236,7 +1236,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
 "the &quot;Help&quot; page for additional information."
-msgstr ""
+msgstr "Vorming kirjeldab ribale sisetatavaid kuupäeva ja aja osasid. Näiteks %Y asendatakse aastaga, %m kuuga ning %d päevaga. Sarnaselt ka, <b></b>märgendid kuvavad paksu teksti. Lisainfot leiad abiteabe lehelt."
 
 #: ../plugins/clock/clock-dialog.glade.h:41
 msgid "Date"
@@ -1244,325 +1244,319 @@ msgstr "Kuupäev"
 
 #: ../plugins/clock/clock-dialog.glade.h:42
 msgid "Time"
-msgstr ""
+msgstr "Aeg"
 
 #: ../plugins/clock/clock-dialog.glade.h:43
 msgid "Clock Options"
 msgstr "Kella valikud"
 
-#. TRANSLATORS: adjust this accordingly for your locale format
-#: ../plugins/clock/clock-digital.h:25
-msgctxt "Time"
-msgid "%R"
-msgstr ""
-
-#: ../plugins/clock/clock-digital.h:26
-msgctxt "Date"
-msgid "%Y-%m-%d"
-msgstr ""
-
 #: ../plugins/clock/clock-digital.h:27
 msgctxt "Time"
-msgid "%a %_d %b, %R"
-msgstr ""
+msgid "%R"
+msgstr "%R"
 
-#: ../plugins/clock/clock-fuzzy.c:88
+#: ../plugins/clock/clock-digital.h:28
+msgctxt "Date"
+msgid "%Y-%m-%d"
+msgstr "%d.%m.%Y"
+
+#: ../plugins/clock/clock-fuzzy.c:82
 msgid "Night"
 msgstr "Öö"
 
-#: ../plugins/clock/clock-fuzzy.c:89
+#: ../plugins/clock/clock-fuzzy.c:83
 msgid "Early morning"
 msgstr "Varahommik"
 
-#: ../plugins/clock/clock-fuzzy.c:90
+#: ../plugins/clock/clock-fuzzy.c:84
 msgid "Morning"
 msgstr "Hommik"
 
-#: ../plugins/clock/clock-fuzzy.c:91
+#: ../plugins/clock/clock-fuzzy.c:85
 msgid "Almost noon"
 msgstr "Peaaegu keskpäev"
 
-#: ../plugins/clock/clock-fuzzy.c:92
+#: ../plugins/clock/clock-fuzzy.c:86
 msgid "Noon"
 msgstr "Keskpäev"
 
-#: ../plugins/clock/clock-fuzzy.c:93
+#: ../plugins/clock/clock-fuzzy.c:87
 msgid "Afternoon"
 msgstr "Pärastlõuna"
 
-#: ../plugins/clock/clock-fuzzy.c:94
+#: ../plugins/clock/clock-fuzzy.c:88
 msgid "Evening"
 msgstr "Õhtu"
 
-#: ../plugins/clock/clock-fuzzy.c:95
+#: ../plugins/clock/clock-fuzzy.c:89
 msgid "Late evening"
 msgstr "Hilisõhtu"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:96
 #, no-c-format
 msgid "%0 o'clock"
 msgstr "%0"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:97
 #, no-c-format
 msgid "five past %0"
 msgstr "%0 ja viis minutit"
 
-#: ../plugins/clock/clock-fuzzy.c:104
+#: ../plugins/clock/clock-fuzzy.c:98
 #, no-c-format
 msgid "ten past %0"
 msgstr "%0 ja kümme minutit"
 
-#: ../plugins/clock/clock-fuzzy.c:105
+#: ../plugins/clock/clock-fuzzy.c:99
 #, no-c-format
 msgid "quarter past %0"
 msgstr "veerand %1"
 
-#: ../plugins/clock/clock-fuzzy.c:106
+#: ../plugins/clock/clock-fuzzy.c:100
 #, no-c-format
 msgid "twenty past %0"
 msgstr "%0 ja kakskümmend minutit"
 
-#: ../plugins/clock/clock-fuzzy.c:107
+#: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "twenty five past %0"
 msgstr "%0 ja kakskümmend viis minutit"
 
-#: ../plugins/clock/clock-fuzzy.c:108
+#: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "half past %0"
 msgstr "pool %1"
 
-#: ../plugins/clock/clock-fuzzy.c:109
+#: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "twenty five to %1"
 msgstr "kahekümne viie pärast %1"
 
-#: ../plugins/clock/clock-fuzzy.c:110
+#: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "twenty to %1"
 msgstr "kahekümne pärast %1"
 
-#: ../plugins/clock/clock-fuzzy.c:111
+#: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "quarter to %1"
 msgstr "kolmveerand %1"
 
-#: ../plugins/clock/clock-fuzzy.c:112
+#: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "ten to %1"
 msgstr "kümne pärast %1"
 
-#: ../plugins/clock/clock-fuzzy.c:113
+#: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "five to %1"
 msgstr "viie pärast %1"
 
-#: ../plugins/clock/clock-fuzzy.c:114
+#: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "%1 o'clock"
 msgstr "%1"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: ../plugins/clock/clock-fuzzy.c:121
+#: ../plugins/clock/clock-fuzzy.c:115
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "%0"
 
-#: ../plugins/clock/clock-fuzzy.c:122
+#: ../plugins/clock/clock-fuzzy.c:116
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "%0 ja viis minutit"
 
-#: ../plugins/clock/clock-fuzzy.c:123
+#: ../plugins/clock/clock-fuzzy.c:117
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "%0 ja kümme minutit"
 
-#: ../plugins/clock/clock-fuzzy.c:124
+#: ../plugins/clock/clock-fuzzy.c:118
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "veerand %1"
 
-#: ../plugins/clock/clock-fuzzy.c:125
+#: ../plugins/clock/clock-fuzzy.c:119
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "%0 ja kakskümmend minutit"
 
-#: ../plugins/clock/clock-fuzzy.c:126
+#: ../plugins/clock/clock-fuzzy.c:120
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "%0 ja kakskümmend viis minutit"
 
-#: ../plugins/clock/clock-fuzzy.c:127
+#: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "pool %1"
 
-#: ../plugins/clock/clock-fuzzy.c:128
+#: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "kahekümne viie pärast %1"
 
-#: ../plugins/clock/clock-fuzzy.c:129
+#: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "kahekümne pärast %1"
 
-#: ../plugins/clock/clock-fuzzy.c:130
+#: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "kolmveerand %1"
 
-#: ../plugins/clock/clock-fuzzy.c:131
+#: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "kümne pärast %1"
 
-#: ../plugins/clock/clock-fuzzy.c:132
+#: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "viie pärast %1"
 
-#: ../plugins/clock/clock-fuzzy.c:133
+#: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "%1"
 
-#: ../plugins/clock/clock-fuzzy.c:138
+#: ../plugins/clock/clock-fuzzy.c:132
 msgctxt "am"
 msgid "one"
 msgstr "üks"
 
-#: ../plugins/clock/clock-fuzzy.c:139
+#: ../plugins/clock/clock-fuzzy.c:133
 msgctxt "am"
 msgid "two"
 msgstr "kaks"
 
-#: ../plugins/clock/clock-fuzzy.c:140
+#: ../plugins/clock/clock-fuzzy.c:134
 msgctxt "am"
 msgid "three"
 msgstr "kolm"
 
-#: ../plugins/clock/clock-fuzzy.c:141
+#: ../plugins/clock/clock-fuzzy.c:135
 msgctxt "am"
 msgid "four"
 msgstr "neli"
 
-#: ../plugins/clock/clock-fuzzy.c:142
+#: ../plugins/clock/clock-fuzzy.c:136
 msgctxt "am"
 msgid "five"
 msgstr "viis"
 
-#: ../plugins/clock/clock-fuzzy.c:143
+#: ../plugins/clock/clock-fuzzy.c:137
 msgctxt "am"
 msgid "six"
 msgstr "kuus"
 
-#: ../plugins/clock/clock-fuzzy.c:144
+#: ../plugins/clock/clock-fuzzy.c:138
 msgctxt "am"
 msgid "seven"
 msgstr "seitse"
 
-#: ../plugins/clock/clock-fuzzy.c:145
+#: ../plugins/clock/clock-fuzzy.c:139
 msgctxt "am"
 msgid "eight"
 msgstr "kaheksa"
 
-#: ../plugins/clock/clock-fuzzy.c:146
+#: ../plugins/clock/clock-fuzzy.c:140
 msgctxt "am"
 msgid "nine"
 msgstr "üheksa"
 
-#: ../plugins/clock/clock-fuzzy.c:147
+#: ../plugins/clock/clock-fuzzy.c:141
 msgctxt "am"
 msgid "ten"
 msgstr "kümme"
 
-#: ../plugins/clock/clock-fuzzy.c:148
+#: ../plugins/clock/clock-fuzzy.c:142
 msgctxt "am"
 msgid "eleven"
 msgstr "üksteist"
 
 #. I18N: 12 AM is midnight
-#: ../plugins/clock/clock-fuzzy.c:150
+#: ../plugins/clock/clock-fuzzy.c:144
 msgctxt "am"
 msgid "twelve"
 msgstr "kaksteist"
 
-#: ../plugins/clock/clock-fuzzy.c:155
+#: ../plugins/clock/clock-fuzzy.c:149
 msgctxt "pm"
 msgid "one"
 msgstr "üks"
 
-#: ../plugins/clock/clock-fuzzy.c:156
+#: ../plugins/clock/clock-fuzzy.c:150
 msgctxt "pm"
 msgid "two"
 msgstr "kaks"
 
-#: ../plugins/clock/clock-fuzzy.c:157
+#: ../plugins/clock/clock-fuzzy.c:151
 msgctxt "pm"
 msgid "three"
 msgstr "kolm"
 
-#: ../plugins/clock/clock-fuzzy.c:158
+#: ../plugins/clock/clock-fuzzy.c:152
 msgctxt "pm"
 msgid "four"
 msgstr "neli"
 
-#: ../plugins/clock/clock-fuzzy.c:159
+#: ../plugins/clock/clock-fuzzy.c:153
 msgctxt "pm"
 msgid "five"
 msgstr "viis"
 
-#: ../plugins/clock/clock-fuzzy.c:160
+#: ../plugins/clock/clock-fuzzy.c:154
 msgctxt "pm"
 msgid "six"
 msgstr "kuus"
 
-#: ../plugins/clock/clock-fuzzy.c:161
+#: ../plugins/clock/clock-fuzzy.c:155
 msgctxt "pm"
 msgid "seven"
 msgstr "seitse"
 
-#: ../plugins/clock/clock-fuzzy.c:162
+#: ../plugins/clock/clock-fuzzy.c:156
 msgctxt "pm"
 msgid "eight"
 msgstr "kaheksa"
 
-#: ../plugins/clock/clock-fuzzy.c:163
+#: ../plugins/clock/clock-fuzzy.c:157
 msgctxt "pm"
 msgid "nine"
 msgstr "üheksa"
 
-#: ../plugins/clock/clock-fuzzy.c:164
+#: ../plugins/clock/clock-fuzzy.c:158
 msgctxt "pm"
 msgid "ten"
 msgstr "kümme"
 
-#: ../plugins/clock/clock-fuzzy.c:165
+#: ../plugins/clock/clock-fuzzy.c:159
 msgctxt "pm"
 msgid "eleven"
 msgstr "üksteist"
 
 #. I18N: 12 PM is noon
-#: ../plugins/clock/clock-fuzzy.c:167
+#: ../plugins/clock/clock-fuzzy.c:161
 msgctxt "pm"
 msgid "twelve"
 msgstr "kaksteist"
@@ -1571,75 +1565,75 @@ msgstr "kaksteist"
 msgid "What time is it?"
 msgstr "Mis kell on?"
 
-#: ../plugins/directorymenu/directorymenu.c:296
+#: ../plugins/directorymenu/directorymenu.c:289
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Kataloogi menüü"
 
-#: ../plugins/directorymenu/directorymenu.c:691
+#: ../plugins/directorymenu/directorymenu.c:683
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Rakenduse „%s” käivitamine ebaõnnestus"
 
-#: ../plugins/directorymenu/directorymenu.c:722
+#: ../plugins/directorymenu/directorymenu.c:714
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Ei õnnestunud pärida „%s“ sisutüüpi"
 
-#: ../plugins/directorymenu/directorymenu.c:731
+#: ../plugins/directorymenu/directorymenu.c:723
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "„%s” jaoks ei leitud vaikimisi rakendust"
 
-#: ../plugins/directorymenu/directorymenu.c:747
+#: ../plugins/directorymenu/directorymenu.c:739
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "„%s” jaoks vaikimisi rakenduse käivitamine ebaõnnestus"
 
-#: ../plugins/directorymenu/directorymenu.c:842
+#: ../plugins/directorymenu/directorymenu.c:834
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Jaotise „%s“ eelistatud rakenduse käivitamine ei ebaõnnestunud."
 
-#: ../plugins/directorymenu/directorymenu.c:923
+#: ../plugins/directorymenu/directorymenu.c:915
 msgid "Create New Folder"
 msgstr "Loo uus kaust"
 
-#: ../plugins/directorymenu/directorymenu.c:928
+#: ../plugins/directorymenu/directorymenu.c:920
 msgid "Create New Text Document"
 msgstr "Loo uus tekstidokument"
 
-#: ../plugins/directorymenu/directorymenu.c:935
+#: ../plugins/directorymenu/directorymenu.c:927
 msgid "C_reate"
 msgstr "_Loo"
 
-#: ../plugins/directorymenu/directorymenu.c:936
+#: ../plugins/directorymenu/directorymenu.c:928
 msgid "Create & _Open"
 msgstr "Lo_o ja ava"
 
-#: ../plugins/directorymenu/directorymenu.c:950
+#: ../plugins/directorymenu/directorymenu.c:942
 msgid "Enter the new name:"
 msgstr "Sisesta uus nimi:"
 
-#: ../plugins/directorymenu/directorymenu.c:986
+#: ../plugins/directorymenu/directorymenu.c:978
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Kausta loomine ebaõnnestus: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1067
+#: ../plugins/directorymenu/directorymenu.c:1059
 msgid "Open Folder"
 msgstr "Ava kaust"
 
-#: ../plugins/directorymenu/directorymenu.c:1080
+#: ../plugins/directorymenu/directorymenu.c:1072
 msgid "Open in Terminal"
 msgstr "Ava terminalis"
 
-#: ../plugins/directorymenu/directorymenu.c:1093
+#: ../plugins/directorymenu/directorymenu.c:1085
 msgid "Create Folder..."
 msgstr "Loo kaust..."
 
-#: ../plugins/directorymenu/directorymenu.c:1106
+#: ../plugins/directorymenu/directorymenu.c:1098
 msgid "Create Text Document..."
 msgstr "Loo tekstidokument..."
 
@@ -1696,15 +1690,15 @@ msgstr "_Faili muster:"
 msgid "Filtering"
 msgstr "Sõelumine"
 
-#: ../plugins/launcher/launcher.c:405
+#: ../plugins/launcher/launcher.c:393
 msgid "Open launcher menu"
 msgstr "Ava käivitaja menüü"
 
-#: ../plugins/launcher/launcher.c:1611
+#: ../plugins/launcher/launcher.c:1591
 msgid "Unnamed Item"
 msgstr "Nimetu ese"
 
-#: ../plugins/launcher/launcher.c:1801
+#: ../plugins/launcher/launcher.c:1779
 msgid "No items"
 msgstr "Esemeid ei ole"
 
@@ -1832,15 +1826,15 @@ msgstr "Edasijõudnud"
 msgid "Program launcher with optional menu"
 msgstr "Rakenduse käivitaja valikulise menüüga"
 
-#: ../plugins/pager/pager.c:680 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:685 ../plugins/pager/pager-dialog.glade.h:4
 msgid "Workspace _Settings..."
 msgstr "Tööala _sätted..."
 
-#: ../plugins/pager/pager.c:774
+#: ../plugins/pager/pager.c:785
 msgid "Unable to open the workspace settings"
 msgstr "Ei saa avada tööala sätteid"
 
-#: ../plugins/pager/pager-buttons.c:595 ../plugins/windowmenu/windowmenu.c:900
+#: ../plugins/pager/pager-buttons.c:588 ../plugins/windowmenu/windowmenu.c:893
 #, c-format
 msgid "Workspace %d"
 msgstr "%d. tööala"
@@ -1902,15 +1896,15 @@ msgstr "_Paisuta"
 msgid "Adds a separator or space between panel items"
 msgstr "Lisab ribal paiknevate esemete vahele tühja ruumi või eraldaja"
 
-#: ../plugins/showdesktop/showdesktop.c:249
+#: ../plugins/showdesktop/showdesktop.c:245
 msgid "Restore the minimized windows"
 msgstr "Taasta vähendatud aknad"
 
-#: ../plugins/showdesktop/showdesktop.c:251
+#: ../plugins/showdesktop/showdesktop.c:247
 msgid "Minimize all open windows and show the desktop"
 msgstr "Vähenda kõik avatud aknad ja näita töölauda"
 
-#: ../plugins/showdesktop/showdesktop.c:254
+#: ../plugins/showdesktop/showdesktop.c:250
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Näita töölauda"
@@ -1919,11 +1913,11 @@ msgstr "Näita töölauda"
 msgid "Hide all windows and show the desktop"
 msgstr "Peida kõik aknad ja näita töölauda"
 
-#: ../plugins/systray/sn-dialog.c:650
+#: ../plugins/systray/sn-dialog.c:645
 msgid "Clear"
 msgstr "Puhasta"
 
-#: ../plugins/systray/sn-dialog.c:651
+#: ../plugins/systray/sn-dialog.c:646
 msgid "Are you sure you want to clear the list of known items?"
 msgstr "Kas sa oled kindel, et soovid teadaolevate esemete loendi kustutada?"
 
@@ -2042,7 +2036,7 @@ msgstr "Tõenäoliselt võttis mõni teine vidin üle teateala ülesande. Ala j�
 msgid "The notification area lost selection"
 msgstr "Teateala kaotas valiku"
 
-#: ../plugins/systray/systray-manager.c:399
+#: ../plugins/systray/systray-manager.c:402
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Ekraanile %d halduri valiku hankimine ebaõnnestus"
@@ -2155,36 +2149,36 @@ msgstr "Näita kõikide _kuvarite aknaid"
 msgid "Show only _minimized windows"
 msgstr "Näita ainult _vähendatud aknaid"
 
-#: ../plugins/tasklist/tasklist-widget.c:3058
+#: ../plugins/tasklist/tasklist-widget.c:3107
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "„%s“ uue koopia käivitamine ei õnnestu"
 
-#: ../plugins/tasklist/tasklist-widget.c:3062
+#: ../plugins/tasklist/tasklist-widget.c:3111
 msgid "Error"
 msgstr "Viga"
 
-#: ../plugins/tasklist/tasklist-widget.c:3091
+#: ../plugins/tasklist/tasklist-widget.c:3140
 msgid "Launch New Instance"
 msgstr "Käivita rakenduse uus koopia"
 
-#: ../plugins/tasklist/tasklist-widget.c:3836
+#: ../plugins/tasklist/tasklist-widget.c:3885
 msgid "Mi_nimize All"
 msgstr "_Vähenda kõik"
 
-#: ../plugins/tasklist/tasklist-widget.c:3843
+#: ../plugins/tasklist/tasklist-widget.c:3892
 msgid "Un_minimize All"
 msgstr "_Taasta kõik"
 
-#: ../plugins/tasklist/tasklist-widget.c:3850
+#: ../plugins/tasklist/tasklist-widget.c:3899
 msgid "Ma_ximize All"
 msgstr "_Suurenda kõik"
 
-#: ../plugins/tasklist/tasklist-widget.c:3857
+#: ../plugins/tasklist/tasklist-widget.c:3906
 msgid "_Unmaximize All"
 msgstr "T_aasta kõik"
 
-#: ../plugins/tasklist/tasklist-widget.c:3868
+#: ../plugins/tasklist/tasklist-widget.c:3917
 msgid "_Close All"
 msgstr "S_ulge kõik"
 
@@ -2192,28 +2186,28 @@ msgstr "S_ulge kõik"
 msgid "Switch between open windows using buttons"
 msgstr "Vaheta avatud aknaid nuppude abil"
 
-#: ../plugins/windowmenu/windowmenu.c:696
+#: ../plugins/windowmenu/windowmenu.c:689
 msgid "Desktop"
 msgstr "Töölaud"
 
-#: ../plugins/windowmenu/windowmenu.c:1296
+#: ../plugins/windowmenu/windowmenu.c:1289
 msgid "No Windows"
 msgstr "Aknaid ei ole"
 
-#: ../plugins/windowmenu/windowmenu.c:1311
+#: ../plugins/windowmenu/windowmenu.c:1304
 msgid "Urgent Windows"
 msgstr "Tähelepanu nõudev aken"
 
-#: ../plugins/windowmenu/windowmenu.c:1356
+#: ../plugins/windowmenu/windowmenu.c:1349
 msgid "Add Workspace"
 msgstr "Lisa tööala"
 
-#: ../plugins/windowmenu/windowmenu.c:1378
+#: ../plugins/windowmenu/windowmenu.c:1371
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Eemalda tööala \\„%s\\”"
 
-#: ../plugins/windowmenu/windowmenu.c:1380
+#: ../plugins/windowmenu/windowmenu.c:1373
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Eemalda tööala %d"
