@@ -2866,6 +2866,8 @@ static gboolean
 xfce_panel_plugin_popup_window_hide_idle (gpointer data)
 {
   gtk_widget_hide (data);
+  g_object_set_data (data, "window-hide-id", GUINT_TO_POINTER (0));
+
   return FALSE;
 }
 
@@ -2880,7 +2882,8 @@ xfce_panel_plugin_popup_window_has_toplevel_focus (GObject *window,
     {
       /* delay hiding so button-press event is consumed in between, otherwise we could
        * re-enter the plugin signal handler with a hidden window and show it again */
-      g_idle_add (xfce_panel_plugin_popup_window_hide_idle, window);
+      g_object_set_data (window, "window-hide-id",
+                         GUINT_TO_POINTER (g_idle_add (xfce_panel_plugin_popup_window_hide_idle, window)));
     }
 }
 
@@ -2890,6 +2893,8 @@ static void
 xfce_panel_plugin_popup_window_hide (GtkWidget *window,
                                      XfcePanelPlugin *plugin)
 {
+  guint id;
+
   g_signal_handlers_disconnect_by_func (window,
     xfce_panel_plugin_popup_window_button_press_event, plugin);
   g_signal_handlers_disconnect_by_func (window,
@@ -2899,6 +2904,19 @@ xfce_panel_plugin_popup_window_hide (GtkWidget *window,
   if (gtk_layer_is_supported ())
     g_signal_handlers_disconnect_by_func (window,
       xfce_panel_plugin_popup_window_has_toplevel_focus, plugin);
+
+  id = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (plugin), "window-reposition-id"));
+  if (id != 0)
+    {
+      g_source_remove (id);
+      g_object_set_data (G_OBJECT (plugin), "window-reposition-id", GUINT_TO_POINTER (0));
+    }
+  id = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (window), "window-hide-id"));
+  if (id != 0)
+    {
+      g_source_remove (id);
+      g_object_set_data (G_OBJECT (window), "window-hide-id", GUINT_TO_POINTER (0));
+    }
 
   xfce_panel_plugin_block_autohide (plugin, FALSE);
   if (g_object_get_data (G_OBJECT (window), "seat-grabbed"))
@@ -2932,6 +2950,8 @@ xfce_panel_plugin_popup_window_reposition (gpointer data)
   else
 #endif
     gtk_window_move (window, x, y);
+
+  g_object_set_data (data, "window-reposition-id", GUINT_TO_POINTER (0));
 
   return FALSE;
 }
@@ -3029,7 +3049,8 @@ xfce_panel_plugin_popup_window (XfcePanelPlugin *plugin,
   g_object_set_data (G_OBJECT (plugin), "window-reposition-window", window);
   g_object_set_data (G_OBJECT (plugin), "window-reposition-widget", widget);
   xfce_panel_plugin_popup_window_reposition (plugin);
-  g_idle_add (xfce_panel_plugin_popup_window_reposition, plugin);
+  g_object_set_data (G_OBJECT (plugin), "window-reposition-id",
+                     GUINT_TO_POINTER (g_idle_add (xfce_panel_plugin_popup_window_reposition, plugin)));
 
   gtk_widget_show (GTK_WIDGET (window));
 
