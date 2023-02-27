@@ -2236,7 +2236,6 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
         }
       else if (g_strcmp0 (window->output_name, "Primary") == 0)
         {
-          normal_monitor_positioning:
           /* get the primary monitor */
           monitor = gdk_display_get_primary_monitor (window->display);
           if (monitor == NULL)
@@ -2268,27 +2267,8 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
                   monitor = gdk_display_get_monitor(window->display, n);
                   name = gdk_monitor_get_model (monitor);
 
-                  /* check if this driver supports output names */
-                  if (G_UNLIKELY (name == NULL))
-                    {
-                      /* print a warnings why this went wrong */
-                      g_message ("An output is set on the panel window (%s), "
-                                 "but it looks  like the driver does not "
-                                 "support output names. Falling back to normal "
-                                 "monitor positioning, you have to set the output "
-                                 "again in the preferences to activate this feature.",
-                                 window->output_name);
-
-                      /* unset the output name */
-                      g_free (window->output_name);
-                      window->output_name = NULL;
-
-                      /* fall back to normal positioning */
-                      goto normal_monitor_positioning;
-                    }
-
                   /* check if this is the monitor we're looking for */
-                  if (strcasecmp (window->output_name, name) == 0)
+                  if (g_strcmp0 (window->output_name, name) == 0)
                     {
                       gdk_monitor_get_geometry (monitor, &a);
                       panel_return_if_fail (a.width > 0 && a.height > 0);
