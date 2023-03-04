@@ -2449,6 +2449,8 @@ xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
       G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
   g_signal_connect (G_OBJECT (menu), "destroy",
       G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
+  g_signal_connect (G_OBJECT (menu), "hide",
+      G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
 
   /* tell panel it needs to lock */
   xfce_panel_plugin_block_autohide (plugin, TRUE);
