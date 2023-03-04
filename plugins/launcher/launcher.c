@@ -1689,8 +1689,9 @@ launcher_plugin_menu_popup (gpointer user_data)
   xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (plugin->menu),
                                 plugin->button, NULL);
 
-  /* fallback to manual positioning, this is used with
-   * drag motion over the arrow button */
+  /* fallback to manual positioning, this is used with drag motion over the arrow button
+   * from e.g. Thunar, not from the app menu, where showing the menu does not work for
+   * some other reason: see https://gitlab.xfce.org/xfce/xfce4-panel/-/issues/205 */
   if (!gtk_widget_get_visible (plugin->menu))
     {
       /* make sure the size is allocated */
@@ -2296,6 +2297,13 @@ launcher_plugin_arrow_drag_leave_timeout (gpointer user_data)
   /* leave when the menu is destroyed */
   if (G_UNLIKELY (plugin->menu == NULL))
     return FALSE;
+
+  /* leave if the menu is already hidden */
+  if (! gtk_widget_get_visible (plugin->menu))
+    {
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->arrow), FALSE);
+      return FALSE;
+    }
 
   device = gdk_seat_get_pointer (gdk_display_get_default_seat (gtk_widget_get_display (menu)));
   if (device == NULL)
