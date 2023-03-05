@@ -3128,6 +3128,7 @@ static void
 panel_window_autohide_queue (PanelWindow   *window,
                              AutohideState  new_state)
 {
+  AutohideState old_state = window->autohide_state;
   guint delay;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
@@ -3154,7 +3155,15 @@ panel_window_autohide_queue (PanelWindow   *window,
   if (new_state == AUTOHIDE_VISIBLE)
     {
       /* queue a resize to make sure the panel is visible */
-      gtk_widget_queue_resize (GTK_WIDGET (window));
+      if ((old_state == AUTOHIDE_HIDDEN || old_state == AUTOHIDE_POPUP)
+          && gtk_layer_is_supported ())
+        {
+          /* see other remap in autohide_timeout() */
+          gtk_widget_hide (GTK_WIDGET (window));
+          gtk_widget_show (GTK_WIDGET (window));
+        }
+      else
+        gtk_widget_queue_resize (GTK_WIDGET (window));
     }
   else
     {
