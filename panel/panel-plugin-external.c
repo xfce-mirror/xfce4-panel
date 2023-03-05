@@ -1213,6 +1213,16 @@ panel_plugin_external_pointer_is_outside (PanelPluginExternal *external)
 
 
 
+gboolean
+panel_plugin_external_get_embedded (PanelPluginExternal *external)
+{
+  panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external), FALSE);
+
+  return get_instance_private (external)->embedded;
+}
+
+
+
 void
 panel_plugin_external_set_embedded (PanelPluginExternal *external,
                                     gboolean embedded)

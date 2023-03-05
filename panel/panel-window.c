@@ -2977,12 +2977,34 @@ panel_window_xfw_window_closed (XfwWindow *xfw_window,
 
 
 static gboolean
+panel_window_plugins_get_embedded (PanelWindow *window)
+{
+  GtkWidget *itembar = gtk_bin_get_child (GTK_BIN (window));
+  GList *lp, *plugins = gtk_container_get_children (GTK_CONTAINER (itembar));
+
+  for (lp = plugins; lp != NULL; lp = lp->next)
+    if (PANEL_IS_PLUGIN_EXTERNAL (lp->data)
+        && ! panel_plugin_external_get_embedded (lp->data))
+      break;
+  g_list_free (plugins);
+
+  return lp == NULL;
+}
+
+
+
+static gboolean
 panel_window_autohide_timeout (gpointer user_data)
 {
   PanelWindow *window = PANEL_WINDOW (user_data);
 
   panel_return_val_if_fail (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER, FALSE);
   panel_return_val_if_fail (window->autohide_block == 0, FALSE);
+
+  /* wait for all external plugins to be embedded on Wayland, othewise there may be a crash
+   * when remapping panel window in autohide_queue() */
+  if (gtk_layer_is_supported () && ! panel_window_plugins_get_embedded (window))
+    return TRUE;
 
   /* update the status */
   if (window->autohide_state == AUTOHIDE_POPDOWN

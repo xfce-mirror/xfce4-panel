@@ -95,6 +95,8 @@ void         panel_plugin_external_set_geometry         (PanelPluginExternal    
 
 gboolean     panel_plugin_external_pointer_is_outside   (PanelPluginExternal              *external);
 
+gboolean     panel_plugin_external_get_embedded         (PanelPluginExternal              *external);
+
 void         panel_plugin_external_set_embedded         (PanelPluginExternal              *external,
                                                          gboolean                          embedded);
 
