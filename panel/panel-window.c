@@ -1740,6 +1740,9 @@ panel_window_move (PanelWindow *window,
 #ifdef HAVE_GTK_LAYER_SHELL
   if (gtk_layer_is_supported ())
     {
+      gint old_margin_x = gtk_layer_get_margin (moved, GTK_LAYER_SHELL_EDGE_LEFT);
+      gint old_margin_y = gtk_layer_get_margin (moved, GTK_LAYER_SHELL_EDGE_TOP);
+
       gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_TOP, y - window->area.y);
       gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_LEFT, x - window->area.x);
       if (moved == GTK_WINDOW (window))
@@ -1754,7 +1757,10 @@ panel_window_move (PanelWindow *window,
                                  panel_window_move_plugin, window);
         }
 
-      panel_utils_wl_surface_commit (GTK_WIDGET (moved));
+      /* manual commit needed if window to be moved was off-screen */
+      if (old_margin_x <= window->alloc.width || old_margin_x >= window->area.width
+          || old_margin_y <= window->alloc.height || old_margin_y >= window->area.height)
+        panel_utils_wl_surface_commit (GTK_WIDGET (moved));
     }
   else
 #endif
