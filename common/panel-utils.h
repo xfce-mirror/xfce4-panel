@@ -44,4 +44,6 @@ void        panel_utils_destroy_later  (GtkWidget        *widget);
 
 void        panel_utils_wl_surface_commit (GtkWidget        *widget);
 
+void        panel_utils_widget_remap      (GtkWidget        *widget);
+
 #endif /* !__PANEL_UTILS_H__ */

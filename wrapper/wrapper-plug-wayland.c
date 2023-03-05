@@ -121,8 +121,7 @@ wrapper_plug_wayland_window_state_changed (XfwWindow *window,
     gtk_layer_set_layer (GTK_WINDOW (plug), GTK_LAYER_SHELL_LAYER_OVERLAY);
 
   /* to ensure that the layer change is taken into account */
-  gtk_widget_hide (GTK_WIDGET (plug));
-  gtk_widget_show (GTK_WIDGET (plug));
+  panel_utils_widget_remap (GTK_WIDGET (plug));
 }
 
 static void

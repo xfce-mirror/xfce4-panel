@@ -3036,9 +3036,8 @@ panel_window_autohide_timeout (gpointer user_data)
        * be remapped first. So let's remap it in general, which in particular results in
        * an effective queue_resize(), which in turn causes the window to be moved.
        * See also panel_utils_wl_surface_commit().
-      */
-      gtk_widget_hide (GTK_WIDGET (window));
-      gtk_widget_show (GTK_WIDGET (window));
+       */
+      panel_utils_widget_remap (GTK_WIDGET (window));
     }
   else
     gtk_widget_queue_resize (GTK_WIDGET (window));
@@ -3187,8 +3186,7 @@ panel_window_autohide_queue (PanelWindow   *window,
           && gtk_layer_is_supported ())
         {
           /* see other remap in autohide_timeout() */
-          gtk_widget_hide (GTK_WIDGET (window));
-          gtk_widget_show (GTK_WIDGET (window));
+          panel_utils_widget_remap (GTK_WIDGET (window));
         }
       else
         gtk_widget_queue_resize (GTK_WIDGET (window));

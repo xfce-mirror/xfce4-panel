@@ -221,8 +221,14 @@ panel_utils_destroy_later (GtkWidget *widget)
 
 
 
-/* we need to do this when GTK refuses to do it itself, for example to bring back a window
- * that has been moved off-screen, see https://github.com/wmww/gtk-layer-shell/issues/143 */
+/*
+ * We need to do this when GTK refuses to do it itself, for example to bring back a window
+ * that has been moved off-screen, see https://github.com/wmww/gtk-layer-shell/issues/143.
+ * This manual intervention should only be done if necessary though, as it can have side
+ * effects. It is not performed systematically in Gtk Layer Shell for this reason, and, for
+ * example, it causes the pointer to re-enter the autohide window when moved off screen,
+ * which, coupled with widget_remap() below, can cause the panel to flicker.
+ */
 void
 panel_utils_wl_surface_commit (GtkWidget *widget)
 {
@@ -236,4 +242,18 @@ panel_utils_wl_surface_commit (GtkWidget *widget)
         wl_surface_commit (wl_surface);
     }
 #endif
+}
+
+
+
+/*
+ * Like wl_surface_commit() above: use sparingly. It is about forcing GTK and/or the
+ * compositor to take into account a request (resizing, layer change), but this can
+ * have side effects.
+ */
+void
+panel_utils_widget_remap (GtkWidget *widget)
+{
+  gtk_widget_hide (GTK_WIDGET (widget));
+  gtk_widget_show (GTK_WIDGET (widget));
 }
