@@ -13,6 +13,21 @@ m4_define([libxfce4panel_version_api], [2.0])
 m4_define([xfce4_panel_config_version], [2])
 XDT_VERSION_INIT([4.19.0], [git])
 
+dnl minimum required versions
+m4_define([glib_minimum_version], [2.72.0])
+m4_define([gtk_minimum_version], [3.24.0])
+m4_define([libx11_minimum_version], [1.6.7])
+m4_define([cairo_minimum_version], [1.16])
+m4_define([gtk_layer_shell_minimum_version], [0.7.0])
+m4_define([libwnck_minimum_version], [3.0])
+m4_define([wayland_client_minimum_version], [1.15])
+m4_define([libxfce4util_minimum_version], [4.17.2])
+m4_define([libxfce4ui_minimum_version], [4.17.1])
+m4_define([libxfce4windowing_minimum_version], [4.19.1])
+m4_define([garcon_minimum_version], [4.17.0])
+m4_define([exo_minimum_version], [0.11.2])
+m4_define([xfconf_minimum_version], [4.13.2])
+
 dnl ***************************
 dnl *** Initialize autoconf ***
 dnl ***************************
@@ -115,31 +130,29 @@ XDT_CHECK_PACKAGE_BINARY([GDBUS_CODEGEN], [gio-2.0], [gdbus_codegen], [gdbus-cod
 dnl ***********************************
 dnl *** Check for required packages ***
 dnl ***********************************
-XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.17.2])
-XDT_CHECK_PACKAGE([GARCON], [garcon-1], [4.17.0])
-XDT_CHECK_PACKAGE([GARCON_GTK3], [garcon-gtk3-1], [4.17.0])
-XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-2], [4.17.1])
-XDT_CHECK_PACKAGE([XFCONF], [libxfconf-0], [4.13.2])
-XDT_CHECK_PACKAGE([GTK], [gtk+-3.0], [3.24.0])
-XDT_CHECK_PACKAGE([EXO], [exo-2], [0.11.2])
-XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [2.72.0])
-XDT_CHECK_PACKAGE([GIO], [gio-2.0], [2.72.0])
-XDT_CHECK_PACKAGE([GIO_UNIX], [gio-unix-2.0], [2.72.0])
-XDT_CHECK_PACKAGE([GMODULE], [gmodule-2.0], [2.72.0])
-XDT_CHECK_PACKAGE([CAIRO], [cairo], [1.16.0])
-XDT_CHECK_PACKAGE([LIBXFCE4WINDOWING], [libxfce4windowing-0], [4.19.1])
-XDT_CHECK_PACKAGE([LIBXFCE4WINDOWINGUI], [libxfce4windowingui-0], [4.19.1])
+XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [glib_minimum_version])
+XDT_CHECK_PACKAGE([GIO], [gio-2.0], [glib_minimum_version])
+XDT_CHECK_PACKAGE([GIO_UNIX], [gio-unix-2.0], [glib_minimum_version])
+XDT_CHECK_PACKAGE([GMODULE], [gmodule-2.0], [glib_minimum_version])
+XDT_CHECK_PACKAGE([GTK], [gtk+-3.0], [gtk_minimum_version])
+XDT_CHECK_PACKAGE([CAIRO], [cairo], [cairo_minimum_version])
+XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [libxfce4util_minimum_version])
+XDT_CHECK_PACKAGE([GARCON], [garcon-1], [garcon_minimum_version])
+XDT_CHECK_PACKAGE([GARCON_GTK3], [garcon-gtk3-1], [garcon_minimum_version])
+XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-2], [libxfce4util_minimum_version])
+XDT_CHECK_PACKAGE([XFCONF], [libxfconf-0], [xfconf_minimum_version])
+XDT_CHECK_PACKAGE([EXO], [exo-2], [exo_minimum_version])
+XDT_CHECK_PACKAGE([LIBXFCE4WINDOWING], [libxfce4windowing-0], [libxfce4windowing_minimum_version])
+XDT_CHECK_PACKAGE([LIBXFCE4WINDOWINGUI], [libxfce4windowingui-0], [libxfce4windowing_minimum_version])
 
 dnl **********************************************
 dnl *** Optional X11/Wayland-specific packages ***
 dnl **********************************************
-XDT_CHECK_OPTIONAL_PACKAGE([LIBX11], [x11], [1.6.7], [libx11], [Libx11 support])
-XDT_CHECK_OPTIONAL_PACKAGE([GTK_X11], [gtk+-x11-3.0], [3.22], [gtk-x11], [GTK X11 support])
-XDT_CHECK_OPTIONAL_PACKAGE([LIBWNCK], [libwnck-3.0], [3.0], [libwnck], [Libwnck support])
-XDT_CHECK_OPTIONAL_PACKAGE([WAYLAND_CLIENT], [wayland-client], [1.15], [wayland-client], [Wayland client support])
-XDT_CHECK_OPTIONAL_PACKAGE([GTK_LAYER_SHELL], [gtk-layer-shell-0], [0.7], [gtk-layer-shell], [GTK Layer Shell support])
-AM_CONDITIONAL([HAVE_GTK_X11], [test "$GTK_X11_FOUND" = "yes"])
-AM_CONDITIONAL([HAVE_GTK_LAYER_SHELL], [test "$GTK_LAYER_SHELL_FOUND" = "yes"])
+XDT_CHECK_OPTIONAL_PACKAGE([LIBX11], [x11], [libx11_minimum_version], [libx11], [Libx11 support])
+XDT_CHECK_OPTIONAL_PACKAGE([GTK_X11], [gtk+-x11-3.0], [gtk_minimum_version], [gtk-x11], [GTK X11 support])
+XDT_CHECK_OPTIONAL_PACKAGE([LIBWNCK], [libwnck-3.0], [libwnck_minimum_version], [libwnck], [Libwnck support])
+XDT_CHECK_OPTIONAL_PACKAGE([WAYLAND_CLIENT], [wayland-client], [wayland_client_minimum_version], [wayland-client], [Wayland client support])
+XDT_CHECK_OPTIONAL_PACKAGE([GTK_LAYER_SHELL], [gtk-layer-shell-0], [gtk_layer_shell_minimum_version], [gtk-layer-shell], [GTK Layer Shell support])
 
 dnl *********************************************
 dnl *** Optional DBUSMENU for StatusNotifiers ***
@@ -157,10 +170,12 @@ dnl *** Check for vapigen ***
 dnl *************************
 VAPIGEN_CHECK()
 
-dnl *************************
-dnl *** Check for gtk-doc ***
-dnl *************************
+dnl ***********************************************************
+dnl *** Check for gtk-doc and compensate for broken feature ***
+dnl ***********************************************************
 GTK_DOC_CHECK([1.9])
+XDT_SUPPORTED_FLAGS([GTK_DOC_EXTRA_CFLAGS], [-Wno-sign-compare])
+AC_SUBST([GTK_DOC_EXTRA_CFLAGS])
 
 dnl ***********************************
 dnl *** Check for debugging support ***
@@ -205,12 +220,6 @@ if test x"$have_gnuc_visibility" = x"yes"; then
   CPPFLAGS="$CPPFLAGS -DHAVE_GNUC_VISIBILITY"
 fi
 AM_CONDITIONAL([HAVE_GNUC_VISIBILITY], [test x"$have_gnuc_visibility" = x"yes"])
-
-dnl *************************************
-dnl *** Compensate for broken gtk-doc ***
-dnl *************************************
-XDT_SUPPORTED_FLAGS([GTK_DOC_EXTRA_CFLAGS], [-Wno-sign-compare])
-AC_SUBST([GTK_DOC_EXTRA_CFLAGS])
 
 dnl *********************************
 dnl *** Substitute platform flags ***
@@ -281,25 +290,9 @@ echo "* Debug support:                 $enable_debug"
 echo "* GNU Visibility support:        $have_gnuc_visibility"
 echo "* GObject Introspection support: $enable_introspection"
 echo "* Documentation support:         $enable_gtk_doc"
-if test "$DBUSMENU_FOUND" = "yes"; then
-echo "* D-Bus menu support:            yes"
-else
-echo "* D-Bus menu support:            no"
-fi
+echo "* D-Bus menu support:            ${DBUSMENU_FOUND:-no}"
 echo "* Libx11 support:                ${LIBX11_FOUND:-no}"
-if test "$GTK_X11_FOUND" = "yes"; then
-echo "* GTK X11 support:               yes"
-else
-echo "* GTK X11 support:               no"
-fi
-if test "$LIBWNCK_FOUND" = "yes"; then
-echo "* Libwnck support:               yes"
-else
-echo "* Libwnck support:               no"
-fi
-if test "$GTK_LAYER_SHELL_FOUND" = "yes"; then
-echo "* GTK Layer Shell support:       yes"
-else
-echo "* GTK Layer Shell support:       no"
-fi
+echo "* GTK X11 support:               ${GTK_X11_FOUND:-no}"
+echo "* Libwnck support:               ${LIBWNCK_FOUND:-no}"
+echo "* GTK Layer Shell support:       ${GTK_LAYER_SHELL_FOUND:-no}"
 echo
