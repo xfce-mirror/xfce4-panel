@@ -11,30 +11,16 @@ dnl ***************************
 m4_define([libxfce4panel_verinfo], [4:0:0]) dnl current:revision:age
 m4_define([libxfce4panel_version_api], [2.0])
 m4_define([xfce4_panel_config_version], [2])
-m4_define([xfce4_panel_version_major], [4])
-m4_define([xfce4_panel_version_minor], [19])
-m4_define([xfce4_panel_version_micro], [0])
-m4_define([xfce4_panel_version_nano],  []) dnl leave this empty to have no nano version
-m4_define([xfce4_panel_version_build], [@REVISION@])
-m4_define([xfce4_panel_version_tag], [git])
-m4_define([xfce4_panel_version], [xfce4_panel_version_major().xfce4_panel_version_minor().xfce4_panel_version_micro()ifelse(xfce4_panel_version_nano(), [], [], [.xfce4_panel_version_nano()])ifelse(xfce4_panel_version_tag(), [git], [xfce4_panel_version_tag()-xfce4_panel_version_build()], [xfce4_panel_version_tag()])])
-
-dnl *******************************************
-dnl *** Debugging support for GIT snapshots ***
-dnl *******************************************
-m4_define([panel_debug_default], [ifelse(xfce4_panel_version_tag(), [git], [yes], [minimum])])
+XDT_VERSION_INIT([4.19.0], [git])
 
 dnl ***************************
 dnl *** Initialize autoconf ***
 dnl ***************************
-AC_COPYRIGHT([Copyright (c) 2004-2023
-        The Xfce development team. All rights reserved.
-
-Written for Xfce by Jasper Huijsmans <jasper@xfce.org>
-and Nick Schermer <nick@xfce.org>.])
-AC_INIT([xfce4-panel],[xfce4_panel_version],[https://gitlab.xfce.org/xfce/xfce4-panel/-/issues],[xfce4-panel])
+AC_COPYRIGHT([Copyright (c) 2004-2023 The Xfce development team. All rights reserved.
+  Written for Xfce by Jasper Huijsmans <jasper@xfce.org> and Nick Schermer <nick@xfce.org>.])
+AC_INIT([xfce4-panel],[xdt_version],[https://gitlab.xfce.org/xfce/xfce4-panel/-/issues],[xfce4-panel])
 AC_PREREQ([2.69])
-AC_REVISION([xfce4_panel_version_build])
+AC_REVISION([xdt_version_build])
 
 dnl ***************************
 dnl *** Initialize automake ***
@@ -85,11 +71,11 @@ AC_SUBST([LIBXFCE4PANEL_VERINFO])
 dnl **************************
 dnl *** Substitute version ***
 dnl **************************
-LIBXFCE4PANEL_VERSION=xfce4_panel_version()
+LIBXFCE4PANEL_VERSION=xdt_version()
 LIBXFCE4PANEL_VERSION_API=libxfce4panel_version_api()
-LIBXFCE4PANEL_VERSION_MAJOR=xfce4_panel_version_major()
-LIBXFCE4PANEL_VERSION_MINOR=xfce4_panel_version_minor()
-LIBXFCE4PANEL_VERSION_MICRO=xfce4_panel_version_micro()
+LIBXFCE4PANEL_VERSION_MAJOR=xdt_version_major()
+LIBXFCE4PANEL_VERSION_MINOR=xdt_version_minor()
+LIBXFCE4PANEL_VERSION_MICRO=xdt_version_micro()
 AC_DEFINE([LIBXFCE4PANEL_VERSION_API], ["libxfce4panel_version_api()"], [libxfce4panel api version])
 AC_SUBST([LIBXFCE4PANEL_VERSION])
 AC_SUBST([LIBXFCE4PANEL_VERSION_API])
@@ -186,7 +172,7 @@ GTK_DOC_CHECK([1.9])
 dnl ***********************************
 dnl *** Check for debugging support ***
 dnl ***********************************
-XDT_FEATURE_DEBUG([panel_debug_default])
+XDT_FEATURE_DEBUG([xdt_debug_default])
 
 dnl **************************************
 dnl *** Check for linker optimizations ***
