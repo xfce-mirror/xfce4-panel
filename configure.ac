@@ -110,14 +110,7 @@ AM_GNU_GETTEXT_VERSION([0.19.8])
 dnl ***********************************
 dnl *** Check for gdbus-codegen ***
 dnl ***********************************
-AC_ARG_VAR([GDBUS_CODEGEN], [D-Bus code and documentation generator from XML D-Bus interface definitions])
-AC_PATH_PROG([GDBUS_CODEGEN], [gdbus-codegen], [no])
-if test x"$GDBUS_CODEGEN" = x"no"; then
-  AC_MSG_ERROR([could not find gdbus-codegen in \$PATH. You can run
-  ./configure GDBUS_CODEGEN=/path/to/gdbus-codegen to define
-  a custom location for it.])
-fi
-
+XDT_CHECK_PACKAGE_BINARY([GDBUS_CODEGEN], [gio-2.0], [gdbus_codegen], [gdbus-codegen])
 
 dnl ***********************************
 dnl *** Check for required packages ***
@@ -140,7 +133,7 @@ XDT_CHECK_PACKAGE([LIBXFCE4WINDOWINGUI], [libxfce4windowingui-0], [4.19.1])
 dnl **********************************************
 dnl *** Optional X11/Wayland-specific packages ***
 dnl **********************************************
-XDT_CHECK_LIBX11()
+XDT_CHECK_OPTIONAL_PACKAGE([LIBX11], [x11], [1.6.7], [libx11], [Libx11 support])
 XDT_CHECK_OPTIONAL_PACKAGE([GTK_X11], [gtk+-x11-3.0], [3.22], [gtk-x11], [GTK X11 support])
 XDT_CHECK_OPTIONAL_PACKAGE([LIBWNCK], [libwnck-3.0], [3.0], [libwnck], [Libwnck support])
 XDT_CHECK_OPTIONAL_PACKAGE([WAYLAND_CLIENT], [wayland-client], [1.15], [wayland-client], [Wayland client support])
@@ -293,7 +286,7 @@ echo "* D-Bus menu support:            yes"
 else
 echo "* D-Bus menu support:            no"
 fi
-echo "* Libx11 support:                $ac_cv_lib_X11_main"
+echo "* Libx11 support:                ${LIBX11_FOUND:-no}"
 if test "$GTK_X11_FOUND" = "yes"; then
 echo "* GTK X11 support:               yes"
 else
