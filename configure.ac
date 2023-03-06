@@ -11,30 +11,31 @@ dnl ***************************
 m4_define([libxfce4panel_verinfo], [4:0:0]) dnl current:revision:age
 m4_define([libxfce4panel_version_api], [2.0])
 m4_define([xfce4_panel_config_version], [2])
-m4_define([xfce4_panel_version_major], [4])
-m4_define([xfce4_panel_version_minor], [19])
-m4_define([xfce4_panel_version_micro], [0])
-m4_define([xfce4_panel_version_nano],  []) dnl leave this empty to have no nano version
-m4_define([xfce4_panel_version_build], [@REVISION@])
-m4_define([xfce4_panel_version_tag], [git])
-m4_define([xfce4_panel_version], [xfce4_panel_version_major().xfce4_panel_version_minor().xfce4_panel_version_micro()ifelse(xfce4_panel_version_nano(), [], [], [.xfce4_panel_version_nano()])ifelse(xfce4_panel_version_tag(), [git], [xfce4_panel_version_tag()-xfce4_panel_version_build()], [xfce4_panel_version_tag()])])
+XDT_VERSION_INIT([4.19.0], [git])
 
-dnl *******************************************
-dnl *** Debugging support for GIT snapshots ***
-dnl *******************************************
-m4_define([panel_debug_default], [ifelse(xfce4_panel_version_tag(), [git], [yes], [minimum])])
+dnl minimum required versions
+m4_define([glib_minimum_version], [2.72.0])
+m4_define([gtk_minimum_version], [3.24.0])
+m4_define([libx11_minimum_version], [1.6.7])
+m4_define([cairo_minimum_version], [1.16])
+m4_define([gtk_layer_shell_minimum_version], [0.7.0])
+m4_define([libwnck_minimum_version], [3.0])
+m4_define([wayland_client_minimum_version], [1.15])
+m4_define([libxfce4util_minimum_version], [4.17.2])
+m4_define([libxfce4ui_minimum_version], [4.17.1])
+m4_define([libxfce4windowing_minimum_version], [4.19.1])
+m4_define([garcon_minimum_version], [4.17.0])
+m4_define([exo_minimum_version], [0.11.2])
+m4_define([xfconf_minimum_version], [4.13.2])
 
 dnl ***************************
 dnl *** Initialize autoconf ***
 dnl ***************************
-AC_COPYRIGHT([Copyright (c) 2004-2023
-        The Xfce development team. All rights reserved.
-
-Written for Xfce by Jasper Huijsmans <jasper@xfce.org>
-and Nick Schermer <nick@xfce.org>.])
-AC_INIT([xfce4-panel],[xfce4_panel_version],[https://gitlab.xfce.org/xfce/xfce4-panel/-/issues],[xfce4-panel])
+AC_COPYRIGHT([Copyright (c) 2004-2023 The Xfce development team. All rights reserved.
+  Written for Xfce by Jasper Huijsmans <jasper@xfce.org> and Nick Schermer <nick@xfce.org>.])
+AC_INIT([xfce4-panel],[xdt_version],[https://gitlab.xfce.org/xfce/xfce4-panel/-/issues],[xfce4-panel])
 AC_PREREQ([2.69])
-AC_REVISION([xfce4_panel_version_build])
+AC_REVISION([xdt_version_build])
 
 dnl ***************************
 dnl *** Initialize automake ***
@@ -67,7 +68,6 @@ AC_PROG_CC()
 AM_PROG_CC_C_O()
 LT_PATH_LD([])
 AC_PROG_INSTALL()
-IT_PROG_INTLTOOL([0.35.0])
 AC_CHECK_PROGS([PERL], [perl5 perl])
 m4_ifdef([AC_PROG_SED], [AC_PROG_SED], [AC_CHECK_PROG(SED, sed, sed)])
 
@@ -86,11 +86,11 @@ AC_SUBST([LIBXFCE4PANEL_VERINFO])
 dnl **************************
 dnl *** Substitute version ***
 dnl **************************
-LIBXFCE4PANEL_VERSION=xfce4_panel_version()
+LIBXFCE4PANEL_VERSION=xdt_version()
 LIBXFCE4PANEL_VERSION_API=libxfce4panel_version_api()
-LIBXFCE4PANEL_VERSION_MAJOR=xfce4_panel_version_major()
-LIBXFCE4PANEL_VERSION_MINOR=xfce4_panel_version_minor()
-LIBXFCE4PANEL_VERSION_MICRO=xfce4_panel_version_micro()
+LIBXFCE4PANEL_VERSION_MAJOR=xdt_version_major()
+LIBXFCE4PANEL_VERSION_MINOR=xdt_version_minor()
+LIBXFCE4PANEL_VERSION_MICRO=xdt_version_micro()
 AC_DEFINE([LIBXFCE4PANEL_VERSION_API], ["libxfce4panel_version_api()"], [libxfce4panel api version])
 AC_SUBST([LIBXFCE4PANEL_VERSION])
 AC_SUBST([LIBXFCE4PANEL_VERSION_API])
@@ -116,48 +116,43 @@ AC_CHECK_FUNCS([bind_textdomain_codeset])
 dnl ******************************
 dnl *** Check for i18n support ***
 dnl ******************************
-XDT_I18N([@LINGUAS@])
+GETTEXT_PACKAGE="$PACKAGE"
+AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["$GETTEXT_PACKAGE"], [Name of default gettext domain])
+AC_SUBST([GETTEXT_PACKAGE])
+AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT_VERSION([0.19.8])
 
 dnl ***********************************
 dnl *** Check for gdbus-codegen ***
 dnl ***********************************
-AC_ARG_VAR([GDBUS_CODEGEN], [D-Bus code and documentation generator from XML D-Bus interface definitions])
-AC_PATH_PROG([GDBUS_CODEGEN], [gdbus-codegen], [no])
-if test x"$GDBUS_CODEGEN" = x"no"; then
-  AC_MSG_ERROR([could not find gdbus-codegen in \$PATH. You can run
-  ./configure GDBUS_CODEGEN=/path/to/gdbus-codegen to define
-  a custom location for it.])
-fi
-
+XDT_CHECK_PACKAGE_BINARY([GDBUS_CODEGEN], [gio-2.0], [gdbus_codegen], [gdbus-codegen])
 
 dnl ***********************************
 dnl *** Check for required packages ***
 dnl ***********************************
-XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.17.2])
-XDT_CHECK_PACKAGE([GARCON], [garcon-1], [4.17.0])
-XDT_CHECK_PACKAGE([GARCON_GTK3], [garcon-gtk3-1], [4.17.0])
-XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-2], [4.17.1])
-XDT_CHECK_PACKAGE([XFCONF], [libxfconf-0], [4.13.2])
-XDT_CHECK_PACKAGE([GTK], [gtk+-3.0], [3.24.0])
-XDT_CHECK_PACKAGE([EXO], [exo-2], [0.11.2])
-XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [2.72.0])
-XDT_CHECK_PACKAGE([GIO], [gio-2.0], [2.72.0])
-XDT_CHECK_PACKAGE([GIO_UNIX], [gio-unix-2.0], [2.72.0])
-XDT_CHECK_PACKAGE([GMODULE], [gmodule-2.0], [2.72.0])
-XDT_CHECK_PACKAGE([CAIRO], [cairo], [1.16.0])
-XDT_CHECK_PACKAGE([LIBXFCE4WINDOWING], [libxfce4windowing-0], [4.19.1])
-XDT_CHECK_PACKAGE([LIBXFCE4WINDOWINGUI], [libxfce4windowingui-0], [4.19.1])
+XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [glib_minimum_version])
+XDT_CHECK_PACKAGE([GIO], [gio-2.0], [glib_minimum_version])
+XDT_CHECK_PACKAGE([GIO_UNIX], [gio-unix-2.0], [glib_minimum_version])
+XDT_CHECK_PACKAGE([GMODULE], [gmodule-2.0], [glib_minimum_version])
+XDT_CHECK_PACKAGE([GTK], [gtk+-3.0], [gtk_minimum_version])
+XDT_CHECK_PACKAGE([CAIRO], [cairo], [cairo_minimum_version])
+XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [libxfce4util_minimum_version])
+XDT_CHECK_PACKAGE([GARCON], [garcon-1], [garcon_minimum_version])
+XDT_CHECK_PACKAGE([GARCON_GTK3], [garcon-gtk3-1], [garcon_minimum_version])
+XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-2], [libxfce4util_minimum_version])
+XDT_CHECK_PACKAGE([XFCONF], [libxfconf-0], [xfconf_minimum_version])
+XDT_CHECK_PACKAGE([EXO], [exo-2], [exo_minimum_version])
+XDT_CHECK_PACKAGE([LIBXFCE4WINDOWING], [libxfce4windowing-0], [libxfce4windowing_minimum_version])
+XDT_CHECK_PACKAGE([LIBXFCE4WINDOWINGUI], [libxfce4windowingui-0], [libxfce4windowing_minimum_version])
 
 dnl **********************************************
 dnl *** Optional X11/Wayland-specific packages ***
 dnl **********************************************
-XDT_CHECK_LIBX11()
-XDT_CHECK_OPTIONAL_PACKAGE([GTK_X11], [gtk+-x11-3.0], [3.22], [gtk-x11], [GTK X11 support])
-XDT_CHECK_OPTIONAL_PACKAGE([LIBWNCK], [libwnck-3.0], [3.0], [libwnck], [Libwnck support])
-XDT_CHECK_OPTIONAL_PACKAGE([WAYLAND_CLIENT], [wayland-client], [1.15], [wayland-client], [Wayland client support])
-XDT_CHECK_OPTIONAL_PACKAGE([GTK_LAYER_SHELL], [gtk-layer-shell-0], [0.7], [gtk-layer-shell], [GTK Layer Shell support])
-AM_CONDITIONAL([HAVE_GTK_X11], [test "$GTK_X11_FOUND" = "yes"])
-AM_CONDITIONAL([HAVE_GTK_LAYER_SHELL], [test "$GTK_LAYER_SHELL_FOUND" = "yes"])
+XDT_CHECK_OPTIONAL_PACKAGE([LIBX11], [x11], [libx11_minimum_version], [libx11], [Libx11 support])
+XDT_CHECK_OPTIONAL_PACKAGE([GTK_X11], [gtk+-x11-3.0], [gtk_minimum_version], [gtk-x11], [GTK X11 support])
+XDT_CHECK_OPTIONAL_PACKAGE([LIBWNCK], [libwnck-3.0], [libwnck_minimum_version], [libwnck], [Libwnck support])
+XDT_CHECK_OPTIONAL_PACKAGE([WAYLAND_CLIENT], [wayland-client], [wayland_client_minimum_version], [wayland-client], [Wayland client support])
+XDT_CHECK_OPTIONAL_PACKAGE([GTK_LAYER_SHELL], [gtk-layer-shell-0], [gtk_layer_shell_minimum_version], [gtk-layer-shell], [GTK Layer Shell support])
 
 dnl *********************************************
 dnl *** Optional DBUSMENU for StatusNotifiers ***
@@ -175,15 +170,17 @@ dnl *** Check for vapigen ***
 dnl *************************
 VAPIGEN_CHECK()
 
-dnl *************************
-dnl *** Check for gtk-doc ***
-dnl *************************
+dnl ***********************************************************
+dnl *** Check for gtk-doc and compensate for broken feature ***
+dnl ***********************************************************
 GTK_DOC_CHECK([1.9])
+XDT_SUPPORTED_FLAGS([GTK_DOC_EXTRA_CFLAGS], [-Wno-sign-compare])
+AC_SUBST([GTK_DOC_EXTRA_CFLAGS])
 
 dnl ***********************************
 dnl *** Check for debugging support ***
 dnl ***********************************
-XDT_FEATURE_DEBUG([panel_debug_default])
+XDT_FEATURE_DEBUG([xdt_debug_default])
 
 dnl **************************************
 dnl *** Check for linker optimizations ***
@@ -223,12 +220,6 @@ if test x"$have_gnuc_visibility" = x"yes"; then
   CPPFLAGS="$CPPFLAGS -DHAVE_GNUC_VISIBILITY"
 fi
 AM_CONDITIONAL([HAVE_GNUC_VISIBILITY], [test x"$have_gnuc_visibility" = x"yes"])
-
-dnl *************************************
-dnl *** Compensate for broken gtk-doc ***
-dnl *************************************
-XDT_SUPPORTED_FLAGS([GTK_DOC_EXTRA_CFLAGS], [-Wno-sign-compare])
-AC_SUBST([GTK_DOC_EXTRA_CFLAGS])
 
 dnl *********************************
 dnl *** Substitute platform flags ***
@@ -299,25 +290,9 @@ echo "* Debug support:                 $enable_debug"
 echo "* GNU Visibility support:        $have_gnuc_visibility"
 echo "* GObject Introspection support: $enable_introspection"
 echo "* Documentation support:         $enable_gtk_doc"
-if test "$DBUSMENU_FOUND" = "yes"; then
-echo "* D-Bus menu support:            yes"
-else
-echo "* D-Bus menu support:            no"
-fi
-echo "* Libx11 support:                $ac_cv_lib_X11_main"
-if test "$GTK_X11_FOUND" = "yes"; then
-echo "* GTK X11 support:               yes"
-else
-echo "* GTK X11 support:               no"
-fi
-if test "$LIBWNCK_FOUND" = "yes"; then
-echo "* Libwnck support:               yes"
-else
-echo "* Libwnck support:               no"
-fi
-if test "$GTK_LAYER_SHELL_FOUND" = "yes"; then
-echo "* GTK Layer Shell support:       yes"
-else
-echo "* GTK Layer Shell support:       no"
-fi
+echo "* D-Bus menu support:            ${DBUSMENU_FOUND:-no}"
+echo "* Libx11 support:                ${LIBX11_FOUND:-no}"
+echo "* GTK X11 support:               ${GTK_X11_FOUND:-no}"
+echo "* Libwnck support:               ${LIBWNCK_FOUND:-no}"
+echo "* GTK Layer Shell support:       ${GTK_LAYER_SHELL_FOUND:-no}"
 echo
