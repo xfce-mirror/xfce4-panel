@@ -22,6 +22,8 @@
 #include <gtk/gtk.h>
 #include <xfconf/xfconf.h>
 
+#include <common/panel-xfconf.h>
+
 G_BEGIN_DECLS
 
 typedef struct _PanelWindowClass PanelWindowClass;
@@ -34,34 +36,36 @@ typedef struct _PanelWindow      PanelWindow;
 #define PANEL_IS_WINDOW_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_WINDOW))
 #define PANEL_WINDOW_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_WINDOW, PanelWindowClass))
 
-GType      panel_window_get_type                  (void) G_GNUC_CONST;
+GType          panel_window_get_type                  (void) G_GNUC_CONST;
 
-GtkWidget *panel_window_new                       (GdkScreen   *screen,
-                                                   gint         id,
-                                                   gint         autohide_block) G_GNUC_MALLOC;
+GtkWidget     *panel_window_new                       (GdkScreen              *screen,
+                                                       gint                    id,
+                                                       gint                    autohide_block) G_GNUC_MALLOC;
 
-gint       panel_window_get_id                    (PanelWindow *window);
+gint           panel_window_get_id                    (PanelWindow            *window);
 
-gboolean   panel_window_has_position              (PanelWindow *window);
+gboolean       panel_window_has_position              (PanelWindow            *window);
 
-void       panel_window_set_provider_info         (PanelWindow *window,
-                                                   GtkWidget   *provider,
-                                                   gboolean     moving_to_other_panel);
+void           panel_window_set_provider_info         (PanelWindow            *window,
+                                                       GtkWidget              *provider,
+                                                       gboolean                moving_to_other_panel);
 
-void       panel_window_freeze_autohide           (PanelWindow *window);
+void           panel_window_freeze_autohide           (PanelWindow            *window);
 
-void       panel_window_thaw_autohide             (PanelWindow *window);
+void           panel_window_thaw_autohide             (PanelWindow            *window);
 
-void       panel_window_set_locked                (PanelWindow *window,
-                                                   gboolean     locked);
+void           panel_window_set_locked                (PanelWindow            *window,
+                                                       gboolean                locked);
 
-gboolean   panel_window_get_locked                (PanelWindow *window);
+gboolean       panel_window_get_locked                (PanelWindow            *window);
 
-void       panel_window_focus                     (PanelWindow *window);
+void           panel_window_focus                     (PanelWindow            *window);
 
-void       panel_window_migrate_autohide_property (PanelWindow   *window,
-                                                   XfconfChannel *xfconf,
-                                                   const gchar   *property_base);
+void           panel_window_migrate_old_properties    (PanelWindow            *window,
+                                                       XfconfChannel          *xfconf,
+                                                       const gchar            *property_base,
+                                                       const PanelProperty    *old_properties,
+                                                       const PanelProperty    *new_properties);
 
 G_END_DECLS
 
