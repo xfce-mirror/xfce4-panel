@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce4-panel.master package.
 # 
 # Translators:
 # beriain, 2018
@@ -16,8 +16,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-07 00:46+0100\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2023-03-07 12:47+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: beriain, 2019-2020,2022\n"
 "Language-Team: Basque (http://www.transifex.com/xfce/xfce4-panel/language/eu/)\n"
@@ -27,319 +27,348 @@ msgstr ""
 "Language: eu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: panel-desktop-handler.desktop.in:4
+msgid "Create Launcher on the panel"
+msgstr "Sortu abiarazle bat panelean"
+
+#: panel-desktop-handler.desktop.in:5
+msgid ""
+"Add a new launcher to the panel based on the information of this desktop "
+"file"
+msgstr "Gehitu abiarazle berri bat panelera mahaigain fitxategi honen argibideetan oinarriturik"
+
+#: panel-desktop-handler.desktop.in:7
+msgid "application-x-executable"
+msgstr ""
+
+#: panel-preferences.desktop.in:5
+msgid "org.xfce.panel"
+msgstr ""
+
+#: panel-preferences.desktop.in:8
+msgid ""
+"panels;settings;preferences;taskbar;autohide;application "
+"menu;start;buttons;launcher;notification area;status;icons;plugins;"
+msgstr "panelak;ezarpenak;hobespenak;tresnabarra;automatikoki ezkutatu;aplikazio menua;hasi;botoiak;abiarazlea;berri-emate area;egoera;ikonoak;pluginak;"
+
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3574
+msgid "Panel"
+msgstr "Panela"
+
+#: panel-preferences.desktop.in:16
+msgid "Customize the panel"
+msgstr "Pertsonalizatu panela"
+
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1095
-#: ../panel/panel-preferences-dialog.c:1449
+#: libxfce4panel/xfce-panel-plugin.c:1095
+#: panel/panel-preferences-dialog.c:1449
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Ziur al zaude \"%s\" idazmahaia ezabatu nahi duzula?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1100
-#: ../panel/panel-preferences-dialog.c:1452
+#: libxfce4panel/xfce-panel-plugin.c:1100
+#: panel/panel-preferences-dialog.c:1452
 msgid "Remove Item"
 msgstr "Elementua kendu"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1102
+#: libxfce4panel/xfce-panel-plugin.c:1102
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "Elementua paneletik kentzean bere konfigurazioa galduko da ere."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1103 ../panel/panel-dialogs.c:164
-#: ../panel/panel-preferences-dialog.c:1456
-#: ../plugins/applicationsmenu/applicationsmenu.c:602
-#: ../plugins/directorymenu/directorymenu.c:461
-#: ../plugins/directorymenu/directorymenu.c:927
+#: libxfce4panel/xfce-panel-plugin.c:1103 panel/panel-dialogs.c:164
+#: panel/panel-preferences-dialog.c:1456
+#: plugins/applicationsmenu/applicationsmenu.c:602
+#: plugins/directorymenu/directorymenu.c:461
+#: plugins/directorymenu/directorymenu.c:927
 msgid "_Cancel"
 msgstr "_Utzi"
 
 #. remove
-#: ../libxfce4panel/xfce-panel-plugin.c:1104
-#: ../libxfce4panel/xfce-panel-plugin.c:1271
-#: ../panel/panel-plugin-external.c:409
-#: ../panel/panel-preferences-dialog.c:1047
-#: ../panel/panel-preferences-dialog.c:1457
-#: ../plugins/launcher/launcher-dialog.c:860
+#: libxfce4panel/xfce-panel-plugin.c:1104
+#: libxfce4panel/xfce-panel-plugin.c:1271 panel/panel-plugin-external.c:409
+#: panel/panel-preferences-dialog.c:1047 panel/panel-preferences-dialog.c:1457
+#: plugins/launcher/launcher-dialog.c:860
 msgid "_Remove"
 msgstr "_Ezabatu"
 
 #. properties item
-#: ../libxfce4panel/xfce-panel-plugin.c:1233
+#: libxfce4panel/xfce-panel-plugin.c:1233
 msgid "_Properties"
 msgstr "_Propietateak"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:3650
+#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3650
 msgid "_About"
 msgstr "_Honi buruz"
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1255
+#: libxfce4panel/xfce-panel-plugin.c:1255
 msgid "_Move"
 msgstr "_Mugitu"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1289
+#: libxfce4panel/xfce-panel-plugin.c:1289
 msgid "Pane_l"
 msgstr "Pane_la"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3586
+#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3586
 msgid "Add _New Items..."
 msgstr "Gehitu elementu _berriak..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1308 ../panel/panel-window.c:3597
+#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3597
 msgid "Panel Pr_eferences..."
 msgstr "Panel hob_espenak..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1325 ../panel/panel-window.c:3625
+#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3625
 msgid "Log _Out"
 msgstr "Sai_oa itxi"
 
 #. help item
-#: ../libxfce4panel/xfce-panel-plugin.c:1341 ../panel/panel-item-dialog.c:196
-#: ../panel/panel-window.c:3641
+#: libxfce4panel/xfce-panel-plugin.c:1341 panel/panel-item-dialog.c:196
+#: panel/panel-window.c:3641
 msgid "_Help"
 msgstr "_Laguntza"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1352
+#: libxfce4panel/xfce-panel-plugin.c:1352
 msgid "About"
 msgstr "Honi buruz"
 
-#: ../panel/main.c:84
+#: panel/main.c:84
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Ikusi 'Pertsonalizatu panela' leihoa"
 
-#: ../panel/main.c:84 ../panel/main.c:85
+#: panel/main.c:84 panel/main.c:85
 msgid "PANEL-NUMBER"
 msgstr "PANEL-ZENBAKIA"
 
-#: ../panel/main.c:85
+#: panel/main.c:85
 msgid "Show the 'Add New Items' dialog"
 msgstr "Ikusi 'Gehitu elementu berriak' leihoa"
 
-#: ../panel/main.c:86
+#: panel/main.c:86
 msgid "Save the panel configuration"
 msgstr "Gorde panel konfigurazioa"
 
-#: ../panel/main.c:87
+#: panel/main.c:87
 msgid "Add a new plugin to the panel"
 msgstr "Gehitu plugin berri bat panelera"
 
-#: ../panel/main.c:87
+#: panel/main.c:87
 msgid "PLUGIN-NAME"
 msgstr "PLUGIN-IZENA"
 
-#: ../panel/main.c:88
+#: panel/main.c:88
 msgid "Restart the running panel instance"
 msgstr "Berrabiarazi abiarazitako panel instantzia"
 
-#: ../panel/main.c:89
+#: panel/main.c:89
 msgid "Quit the running panel instance"
 msgstr "Itxi abiarazitako panel instantzia"
 
-#: ../panel/main.c:90
+#: panel/main.c:90
 msgid "Do not wait for a window manager on startup"
 msgstr "Ez itxoin leiho kudeatzailerik abiaraztean"
 
-#: ../panel/main.c:91
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
+#: panel/main.c:91 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "Inprimatu bertsio argibideak eta irten"
 
 #. parse context options
-#: ../panel/main.c:274
+#: panel/main.c:274
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTUAK...]"
 
-#: ../panel/main.c:281
+#: panel/main.c:281
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Idatzi \"%s --help\" erabilera argibideentzat."
 
-#: ../panel/main.c:300
+#: panel/main.c:300
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce garapen taldea. Eskubide guztiak erreserbaturik."
 
-#: ../panel/main.c:301
+#: panel/main.c:301
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Mesedez programa erroreen berri <%s>-n eman."
 
 #. quit without error if an instance is running
-#: ../panel/main.c:404
+#: panel/main.c:404
 msgid "There is already a running instance"
 msgstr "Dagoeneko badago instantzia bat abiarazita"
 
 #. spawn ourselfs again
-#: ../panel/main.c:412
+#: panel/main.c:412
 msgid "Restarting..."
 msgstr "Berrabiarazi..."
 
-#: ../panel/main.c:427
+#: panel/main.c:427
 msgid "Failed to show the preferences dialog"
 msgstr "Huts hobespen leihoa bistaratzean"
 
-#: ../panel/main.c:429
+#: panel/main.c:429
 msgid "Failed to show the add new items dialog"
 msgstr "Huts elementu berriak gehitzeko leihoa bistaratzean"
 
-#: ../panel/main.c:431
+#: panel/main.c:431
 msgid "Failed to save the panel configuration"
 msgstr "Huts panel konfigurazioa gordetzean"
 
-#: ../panel/main.c:433
+#: panel/main.c:433
 msgid "Failed to add a plugin to the panel"
 msgstr "Huts panelera plugin bat gehitzean"
 
-#: ../panel/main.c:435
+#: panel/main.c:435
 msgid "Failed to restart the panel"
 msgstr "Huts panela berrabiaraztean"
 
-#: ../panel/main.c:437
+#: panel/main.c:437
 msgid "Failed to quit the panel"
 msgstr "Huts panela ixterakoan"
 
-#: ../panel/main.c:439
+#: panel/main.c:439
 msgid "Failed to send D-Bus message"
 msgstr "Huts D-Bus mezua bidaltzean"
 
-#: ../panel/main.c:449
+#: panel/main.c:449
 msgid "Execute"
 msgstr "Exekutatu"
 
-#: ../panel/main.c:450
+#: panel/main.c:450
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Panela abiarazi nahi dfuzu? Hala bada ziurtatu zaitez saioa gordetzen duzula ixterakoan, horrela saioa hastean panela automatikoki abiaraziko da."
 
-#: ../panel/main.c:453 ../panel/main.c:467
+#: panel/main.c:453 panel/main.c:467
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Ez da %s-ren instantzia abiarazirik topatu"
 
-#: ../panel/panel-application.c:222
+#: panel/panel-application.c:222
 msgid "Failed to launch the migration application"
 msgstr "Huts migrazio aplikazioa abiaraztean"
 
-#: ../panel/panel-application.c:1035
+#: panel/panel-application.c:1035
 msgid "Create _Launcher"
 msgstr "Sortu _abiarazlea"
 
-#: ../panel/panel-application.c:1036
+#: panel/panel-application.c:1036
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Honek abiarazle plugin berri  bat \r\nsortuko du panelean eta bertan\r\nipiniko fitxategiak menu elementu gisa."
 
-#: ../panel/panel-application.c:1038
+#: panel/panel-application.c:1038
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Sortu abiarazle berri bat %d mahaigain fitxategitik"
 msgstr[1] "Sortu abiarazle berri bat %d mahaigain fitxategietatik"
 
-#: ../panel/panel-application.c:1795
+#: panel/panel-application.c:1795
 msgid "Quit"
 msgstr "Itxi"
 
-#: ../panel/panel-application.c:1796
+#: panel/panel-application.c:1796
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "X saio kudeatzaile gabe abiarazi duzu, Itxi sakatzean X zerbitzaria itxiko du."
 
-#: ../panel/panel-application.c:1797
+#: panel/panel-application.c:1797
 msgid "Are you sure you want to quit the panel?"
 msgstr "Ziur al zaude panela ezabatu nahi duzula?"
 
-#: ../panel/panel-application.c:1805
+#: panel/panel-application.c:1805
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Ezin da \"%s\" komandoa exekutatu"
 
-#: ../panel/panel-dbus-client.c:218
+#: panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "Okerreko plugin gertaera sintaxia ezarria. Erabili PLUGIN-IZENA[:MOTA:BALIOA]."
 
-#: ../panel/panel-dbus-client.c:248
+#: panel/panel-dbus-client.c:248
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
 msgstr "Okerreko \"%s\" gomendio mota. Mota erabilgarriak bool, double, int, string eta uint dira."
 
-#: ../panel/panel-dialogs.c:58
+#: panel/panel-dialogs.c:58
 msgid "Unable to open the e-mail address"
 msgstr "Ezin izan da posta elektronikoko helbidea ireki"
 
-#: ../panel/panel-dialogs.c:84
+#: panel/panel-dialogs.c:84
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Xfce mahaigain inguruneko panela"
 
-#: ../panel/panel-dialogs.c:88
+#: panel/panel-dialogs.c:88
 msgid "translator-credits"
 msgstr "Piarres Beobide"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:162
+#: panel/panel-dialogs.c:162
 msgid "Add New Item"
 msgstr "Gehitu elementu berri bat"
 
-#: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:192
+#: panel/panel-dialogs.c:165 panel/panel-item-dialog.c:192
 msgid "_Add"
 msgstr "_Gehitu"
 
-#: ../panel/panel-dialogs.c:176
+#: panel/panel-dialogs.c:176
 msgid "Please choose a panel for the new plugin:"
 msgstr "Mesedez hautatu plugin berriarentzat panel bat:"
 
-#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:986
+#: panel/panel-dialogs.c:196 panel/panel-preferences-dialog.c:986
 #, c-format
 msgid "Panel %d"
 msgstr "%d panela"
 
-#: ../panel/panel-dialogs.c:236
+#: panel/panel-dialogs.c:236
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr "Panela kiosko moduan abiarazirik dagoenez ezin dizkiozu aldaketarik egin erabiltzaile arrunt gisa"
 
-#: ../panel/panel-dialogs.c:238
+#: panel/panel-dialogs.c:238
 msgid "Modifying the panel is not allowed"
 msgstr "Ez da onartzen panela eraldatzean"
 
-#: ../panel/panel-item-dialog.c:186
+#: panel/panel-item-dialog.c:186
 msgid "Add New Items"
 msgstr "Gehitu elementu berriak"
 
-#: ../panel/panel-item-dialog.c:200 ../panel/panel-tic-tac-toe.c:117
+#: panel/panel-item-dialog.c:200 panel/panel-tic-tac-toe.c:117
 msgid "_Close"
 msgstr "_Itxi"
 
-#: ../panel/panel-item-dialog.c:216
+#: panel/panel-item-dialog.c:216
 msgid "_Search:"
 msgstr "_Bilatu:"
 
-#: ../panel/panel-item-dialog.c:224
+#: panel/panel-item-dialog.c:224
 msgid "Enter search phrase here"
 msgstr "Idatzi bilaketa katea hemen"
 
-#: ../panel/panel-plugin-external.c:400
+#: panel/panel-plugin-external.c:400
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "\"%s\" pluginak panela ustekabean utzi du, berriz abiaraztea nahi al duzu?"
 
-#: ../panel/panel-plugin-external.c:403
+#: panel/panel-plugin-external.c:403
 msgid "Plugin Restart"
 msgstr "Plugina berrabiarazi"
 
-#: ../panel/panel-plugin-external.c:404
+#: panel/panel-plugin-external.c:404
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -347,43 +376,43 @@ msgid ""
 "permanently removed from the panel."
 msgstr "Plugin-a behin baino gehiago berrabiarazi da azken %d segundoetan. Abiarazi sakatuaz panela abiarazten saiatuko da bestela betirako kenduko da paneletik."
 
-#: ../panel/panel-plugin-external.c:408
+#: panel/panel-plugin-external.c:408
 msgid "_Execute"
 msgstr "_Exekutatu"
 
-#: ../panel/panel-preferences-dialog.c:540
+#: panel/panel-preferences-dialog.c:540
 msgid "Automatic"
 msgstr "Automatikoa"
 
-#: ../panel/panel-preferences-dialog.c:550
+#: panel/panel-preferences-dialog.c:550
 msgid "Primary"
 msgstr "Funtsezkoa"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:569
+#: panel/panel-preferences-dialog.c:569
 #, c-format
 msgid "Monitor %d"
 msgstr "%d monitorea"
 
-#: ../panel/panel-preferences-dialog.c:1048
+#: panel/panel-preferences-dialog.c:1048
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Panela eta plugin konfigurazioak betirako kenduko dira"
 
-#: ../panel/panel-preferences-dialog.c:1049
+#: panel/panel-preferences-dialog.c:1049
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Ziur al zaude %d panela ezabatu nahi duzula?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1291
+#: panel/panel-preferences-dialog.c:1291
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(kanpokoa)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1296
+#: panel/panel-preferences-dialog.c:1296
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -392,794 +421,914 @@ msgstr "Barne-izena: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1308
+#: panel/panel-preferences-dialog.c:1308
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Barne-izena: %s-%d"
 
-#: ../panel/panel-preferences-dialog.c:1454
+#: panel/panel-preferences-dialog.c:1454
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Elementua paneletik ezabatzen baduzu betirako galduko da."
 
-#: ../panel/panel-tic-tac-toe.c:115
+#: panel/panel-tic-tac-toe.c:115
 msgid "_New Game"
 msgstr "Joko _berria"
 
-#: ../panel/panel-tic-tac-toe.c:126
+#: panel/panel-tic-tac-toe.c:126
 msgid "_Level:"
 msgstr "Mai_la:"
 
-#: ../panel/panel-tic-tac-toe.c:132
+#: panel/panel-tic-tac-toe.c:132
 msgid "Novice"
 msgstr "Hasi-berria"
 
-#: ../panel/panel-tic-tac-toe.c:133
+#: panel/panel-tic-tac-toe.c:133
 msgid "Intermediate"
 msgstr "Ertaina"
 
-#: ../panel/panel-tic-tac-toe.c:134
+#: panel/panel-tic-tac-toe.c:134
 msgid "Experienced"
 msgstr "Esperientziaduna"
 
-#: ../panel/panel-tic-tac-toe.c:135
+#: panel/panel-tic-tac-toe.c:135
 msgid "Expert"
 msgstr "Espertoa"
 
-#: ../panel/panel-window.c:3574
-msgid "Panel"
-msgstr "Panela"
-
-#: ../panel/panel-window.c:3611
+#: panel/panel-window.c:3611
 msgid "_Lock Panel"
 msgstr "B_lokeatu panela"
 
-#: ../migrate/main.c:111
+#: migrate/main.c:111
 msgid "Failed to load the default configuration"
 msgstr "Huts lehenetsiriko konfigurazioa gordetzean"
 
-#: ../migrate/main.c:123
+#: migrate/main.c:123
 msgid "Panel config needs migration..."
 msgstr "Panel konfigurazioak migrazioa behar du..."
 
-#: ../migrate/main.c:127
+#: migrate/main.c:127
 msgid "Failed to migrate the existing configuration"
 msgstr "Huts dagoen konfigurazioa migratzean"
 
-#: ../migrate/main.c:133
+#: migrate/main.c:133
 msgid "Panel configuration has been updated."
 msgstr "Panel konfigurazioa eguneratua izan da."
 
-#: ../plugins/actions/actions.c:36
+#: plugins/actions/actions.c:36
 msgid "Session Menu"
 msgstr "Saio menua"
 
-#: ../plugins/actions/actions.c:157
+#: plugins/actions/actions.c:157
 msgid "Log Out"
 msgstr "Saioa itxi"
 
-#: ../plugins/actions/actions.c:158
+#: plugins/actions/actions.c:158
 msgid "_Log Out"
 msgstr "_Saioa itxi"
 
-#: ../plugins/actions/actions.c:159
+#: plugins/actions/actions.c:159
 msgid "Are you sure you want to log out?"
 msgstr "Ziur al zaude saioa itxi nahi duzula?"
 
-#: ../plugins/actions/actions.c:160
+#: plugins/actions/actions.c:160
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Saio ixten %d segundotan."
 
-#: ../plugins/actions/actions.c:166
+#: plugins/actions/actions.c:166
 msgid "Log Out..."
 msgstr "Saioa itxi..."
 
-#: ../plugins/actions/actions.c:167
+#: plugins/actions/actions.c:167
 msgid "Log _Out..."
 msgstr "Sai_oa itxi..."
 
-#: ../plugins/actions/actions.c:174
+#: plugins/actions/actions.c:174
 msgid "Switch User"
 msgstr "Aldatu erabiltzailea"
 
-#: ../plugins/actions/actions.c:175
+#: plugins/actions/actions.c:175
 msgid "_Switch User"
 msgstr "_Aldatu erabiltzailea"
 
-#: ../plugins/actions/actions.c:182
+#: plugins/actions/actions.c:182
 msgid "Lock Screen"
 msgstr "Blokeatu pantaila"
 
-#: ../plugins/actions/actions.c:183
+#: plugins/actions/actions.c:183
 msgid "Loc_k Screen"
 msgstr "Bl_okeatu pantaila"
 
-#: ../plugins/actions/actions.c:190
+#: plugins/actions/actions.c:190
 msgid "Hibernate"
 msgstr "Hibernatu"
 
-#: ../plugins/actions/actions.c:191
+#: plugins/actions/actions.c:191
 msgid "_Hibernate"
 msgstr "_Hibernatu"
 
-#: ../plugins/actions/actions.c:192
+#: plugins/actions/actions.c:192
 msgid "Do you want to suspend to disk?"
 msgstr "Diskora eseki nahi duzu?"
 
-#: ../plugins/actions/actions.c:193
+#: plugins/actions/actions.c:193
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Ordenagailua %d segundotan hibernatzen."
 
-#: ../plugins/actions/actions.c:199
+#: plugins/actions/actions.c:199
 msgid "Hybrid Sleep"
 msgstr "Lo hibridoa"
 
-#: ../plugins/actions/actions.c:200
+#: plugins/actions/actions.c:200
 msgid "_Hybrid Sleep"
 msgstr "_Lo hibridoa"
 
-#: ../plugins/actions/actions.c:201
+#: plugins/actions/actions.c:201
 msgid "Do you want to hibernate and suspend the system?"
 msgstr "Sistema hibernatu eta eseki nahi duzu?"
 
-#: ../plugins/actions/actions.c:202
+#: plugins/actions/actions.c:202
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr "Ordenagailua %d segundutan hibernatzen eta esekitzen."
 
-#: ../plugins/actions/actions.c:208
+#: plugins/actions/actions.c:208
 msgid "Suspend"
 msgstr "Eseki"
 
-#: ../plugins/actions/actions.c:209
+#: plugins/actions/actions.c:209
 msgid "Sus_pend"
 msgstr "Ese_ki"
 
-#: ../plugins/actions/actions.c:210
+#: plugins/actions/actions.c:210
 msgid "Do you want to suspend to RAM?"
 msgstr "RAM-era eseki nahi duzu?"
 
-#: ../plugins/actions/actions.c:211
+#: plugins/actions/actions.c:211
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Ordenagailua %d segundotan esekitzen."
 
-#: ../plugins/actions/actions.c:217
+#: plugins/actions/actions.c:217
 msgid "Restart"
 msgstr "Berrabiarazi"
 
-#: ../plugins/actions/actions.c:218
+#: plugins/actions/actions.c:218
 msgid "_Restart"
 msgstr "_Berrabiarazi"
 
-#: ../plugins/actions/actions.c:219
+#: plugins/actions/actions.c:219
 msgid "Are you sure you want to restart?"
 msgstr "Ziur al zaude berrabiarazi nahi duzula?"
 
-#: ../plugins/actions/actions.c:220
+#: plugins/actions/actions.c:220
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Ordegailua %d segundotan berrabiarazten."
 
-#: ../plugins/actions/actions.c:226
+#: plugins/actions/actions.c:226
 msgid "Shut Down"
 msgstr "Itzali"
 
-#: ../plugins/actions/actions.c:227
+#: plugins/actions/actions.c:227
 msgid "Shut _Down"
 msgstr "It_zali"
 
-#: ../plugins/actions/actions.c:228
+#: plugins/actions/actions.c:228
 msgid "Are you sure you want to shut down?"
 msgstr "Ziur zaude itzali nahi duzula?"
 
-#: ../plugins/actions/actions.c:229
+#: plugins/actions/actions.c:229
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Ordenagailua %d segundotan itzaltzen."
 
-#: ../plugins/actions/actions.c:677
+#: plugins/actions/actions.c:677 plugins/separator/separator.desktop.in.in:4
 msgid "Separator"
 msgstr "Bereizlea"
 
-#: ../plugins/actions/actions.c:1111
+#: plugins/actions/actions.c:1111
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Huts \"%s\" ekintza abiaraztean"
 
-#: ../plugins/actions/actions.c:1316
+#: plugins/actions/actions.c:1316
 msgid "Little Mouse"
 msgstr "Sagu txikia"
 
+#: plugins/actions/actions.desktop.in.in:4
+msgid "Action Buttons"
+msgstr "Ekintza botoiak"
+
+#: plugins/actions/actions.desktop.in.in:5
+msgid "Log out, lock or other system actions"
+msgstr "Saioa itxi, blokeatu beta beste zenbait sistema ekintza"
+
+#: plugins/actions/actions.desktop.in.in:6
+msgid "org.xfce.panel.actions"
+msgstr ""
+
 #. I18N: default tooltip of the application menu
-#: ../plugins/applicationsmenu/applicationsmenu.c:37
+#: plugins/applicationsmenu/applicationsmenu.c:37
 msgid "Applications"
 msgstr "Aplikazioak"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:600
-#: ../plugins/directorymenu/directorymenu.c:459
+#: plugins/applicationsmenu/applicationsmenu.c:600
+#: plugins/directorymenu/directorymenu.c:459
 msgid "Select An Icon"
 msgstr "Hautatu ikono bat"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/directorymenu/directorymenu.c:462
+#: plugins/applicationsmenu/applicationsmenu.c:603
+#: plugins/directorymenu/directorymenu.c:462
 msgid "_OK"
 msgstr "_ADOS"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:641
-#: ../plugins/clock/clock.c:1018 ../plugins/launcher/launcher.c:2483
+#: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1018
+#: plugins/launcher/launcher.c:2483
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Ezin da \"%s\" komandoa exekutatu."
 
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:27
+#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:4
+msgid "Applications Menu"
+msgstr "Aplikazioa menua"
+
+#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:5
+msgid "Show a menu containing categories of installed applications"
+msgstr "Ikusi instalatutako aplikazio kategoriak dituen menua"
+
+#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:6
+msgid "org.xfce.panel.applicationsmenu"
+msgstr ""
+
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:27
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:27
 msgid "Usage:"
 msgstr "Erabilera:"
 
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:28
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:28
 msgid "OPTION"
 msgstr "AUKERA"
 
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:30
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:30
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:30
 msgid "Options:"
 msgstr "Aukerak:"
 
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:31
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:31
 msgid "Popup menu at current mouse position"
 msgstr "Bistarazi menua saguaren uneko kokalekuan"
 
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:32
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:32
 msgid "Show help options"
 msgstr "Ikusi laguntza aukerak"
 
 #. TRANSLATORS: adjust this accordingly for your locale format
-#: ../plugins/clock/clock.c:46
+#: plugins/clock/clock.c:46
 msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
 
-#: ../plugins/clock/clock.c:150
+#: plugins/clock/clock.c:150
 msgid "Week %V"
 msgstr "%V astea"
 
-#: ../plugins/clock/clock.c:453
+#: plugins/clock/clock.c:453
 msgid "Failed to execute clock command"
 msgstr "Huts clock komandoa exekutatzean"
 
-#: ../plugins/clock/clock.c:957
+#: plugins/clock/clock.c:957
 msgid "Custom Format"
 msgstr "Pertsonalizatuko formatua"
 
-#: ../plugins/clock/clock-digital.h:27
+#: plugins/clock/clock-digital.h:27
 msgctxt "Time"
 msgid "%R"
 msgstr "%R"
 
-#: ../plugins/clock/clock-digital.h:28
+#: plugins/clock/clock-digital.h:28
 msgctxt "Date"
 msgid "%Y-%m-%d"
 msgstr "%Y-%m-%d"
 
-#: ../plugins/clock/clock-fuzzy.c:82
+#: plugins/clock/clock-fuzzy.c:82
 msgid "Night"
 msgstr "Gaua"
 
-#: ../plugins/clock/clock-fuzzy.c:83
+#: plugins/clock/clock-fuzzy.c:83
 msgid "Early morning"
 msgstr "Goizean goiz"
 
-#: ../plugins/clock/clock-fuzzy.c:84
+#: plugins/clock/clock-fuzzy.c:84
 msgid "Morning"
 msgstr "Goiza"
 
-#: ../plugins/clock/clock-fuzzy.c:85
+#: plugins/clock/clock-fuzzy.c:85
 msgid "Almost noon"
 msgstr "Eguerdia"
 
-#: ../plugins/clock/clock-fuzzy.c:86
+#: plugins/clock/clock-fuzzy.c:86
 msgid "Noon"
 msgstr "Eguerdia"
 
-#: ../plugins/clock/clock-fuzzy.c:87
+#: plugins/clock/clock-fuzzy.c:87
 msgid "Afternoon"
 msgstr "Arratsaldea"
 
-#: ../plugins/clock/clock-fuzzy.c:88
+#: plugins/clock/clock-fuzzy.c:88
 msgid "Evening"
 msgstr "Ilunsentia"
 
-#: ../plugins/clock/clock-fuzzy.c:89
+#: plugins/clock/clock-fuzzy.c:89
 msgid "Late evening"
 msgstr "Ilunsenti amaiera"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: ../plugins/clock/clock-fuzzy.c:96
+#: plugins/clock/clock-fuzzy.c:96
 #, no-c-format
 msgid "%0 o'clock"
 msgstr "%0 puntuan"
 
-#: ../plugins/clock/clock-fuzzy.c:97
+#: plugins/clock/clock-fuzzy.c:97
 #, no-c-format
 msgid "five past %0"
 msgstr "%0 eta bost"
 
-#: ../plugins/clock/clock-fuzzy.c:98
+#: plugins/clock/clock-fuzzy.c:98
 #, no-c-format
 msgid "ten past %0"
 msgstr "%0 eta hamar"
 
-#: ../plugins/clock/clock-fuzzy.c:99
+#: plugins/clock/clock-fuzzy.c:99
 #, no-c-format
 msgid "quarter past %0"
 msgstr "%0 eta laurden"
 
-#: ../plugins/clock/clock-fuzzy.c:100
+#: plugins/clock/clock-fuzzy.c:100
 #, no-c-format
 msgid "twenty past %0"
 msgstr "%0 eta hogei"
 
-#: ../plugins/clock/clock-fuzzy.c:101
+#: plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "twenty five past %0"
 msgstr "%0 eta hogeitabost"
 
-#: ../plugins/clock/clock-fuzzy.c:102
+#: plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "half past %0"
 msgstr "%0 eta erdi"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "twenty five to %1"
 msgstr "%1 hogeitabost gutxi"
 
-#: ../plugins/clock/clock-fuzzy.c:104
+#: plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "twenty to %1"
 msgstr "%1 hogei gutxi"
 
-#: ../plugins/clock/clock-fuzzy.c:105
+#: plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "quarter to %1"
 msgstr "%1 laurden gutxi"
 
-#: ../plugins/clock/clock-fuzzy.c:106
+#: plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "ten to %1"
 msgstr "%1 hamar gutxi"
 
-#: ../plugins/clock/clock-fuzzy.c:107
+#: plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "five to %1"
 msgstr "%1 bost gutxi"
 
-#: ../plugins/clock/clock-fuzzy.c:108
+#: plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "%1 o'clock"
 msgstr "%1 puntuan"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: ../plugins/clock/clock-fuzzy.c:115
+#: plugins/clock/clock-fuzzy.c:115
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "%0 puntuan"
 
-#: ../plugins/clock/clock-fuzzy.c:116
+#: plugins/clock/clock-fuzzy.c:116
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "%0 eta bost"
 
-#: ../plugins/clock/clock-fuzzy.c:117
+#: plugins/clock/clock-fuzzy.c:117
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "%0 eta hamar"
 
-#: ../plugins/clock/clock-fuzzy.c:118
+#: plugins/clock/clock-fuzzy.c:118
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "%0 eta laurden"
 
-#: ../plugins/clock/clock-fuzzy.c:119
+#: plugins/clock/clock-fuzzy.c:119
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "%0 eta hogei"
 
-#: ../plugins/clock/clock-fuzzy.c:120
+#: plugins/clock/clock-fuzzy.c:120
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "%0 eta hogeitabost"
 
-#: ../plugins/clock/clock-fuzzy.c:121
+#: plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "%0 eta erdi"
 
-#: ../plugins/clock/clock-fuzzy.c:122
+#: plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "%1 hogeitabost gutxi"
 
-#: ../plugins/clock/clock-fuzzy.c:123
+#: plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "%1 hogei gutxi"
 
-#: ../plugins/clock/clock-fuzzy.c:124
+#: plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "%1 laurden gutxi"
 
-#: ../plugins/clock/clock-fuzzy.c:125
+#: plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "%1 hamar gutxi"
 
-#: ../plugins/clock/clock-fuzzy.c:126
+#: plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "%1 bost gutxi"
 
-#: ../plugins/clock/clock-fuzzy.c:127
+#: plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "%1 puntuan"
 
-#: ../plugins/clock/clock-fuzzy.c:132
+#: plugins/clock/clock-fuzzy.c:132
 msgctxt "am"
 msgid "one"
 msgstr "ordubatak"
 
-#: ../plugins/clock/clock-fuzzy.c:133
+#: plugins/clock/clock-fuzzy.c:133
 msgctxt "am"
 msgid "two"
 msgstr "ordubiak"
 
-#: ../plugins/clock/clock-fuzzy.c:134
+#: plugins/clock/clock-fuzzy.c:134
 msgctxt "am"
 msgid "three"
 msgstr "hirurak"
 
-#: ../plugins/clock/clock-fuzzy.c:135
+#: plugins/clock/clock-fuzzy.c:135
 msgctxt "am"
 msgid "four"
 msgstr "laurak"
 
-#: ../plugins/clock/clock-fuzzy.c:136
+#: plugins/clock/clock-fuzzy.c:136
 msgctxt "am"
 msgid "five"
 msgstr "bostak"
 
-#: ../plugins/clock/clock-fuzzy.c:137
+#: plugins/clock/clock-fuzzy.c:137
 msgctxt "am"
 msgid "six"
 msgstr "seiak"
 
-#: ../plugins/clock/clock-fuzzy.c:138
+#: plugins/clock/clock-fuzzy.c:138
 msgctxt "am"
 msgid "seven"
 msgstr "zazpiak"
 
-#: ../plugins/clock/clock-fuzzy.c:139
+#: plugins/clock/clock-fuzzy.c:139
 msgctxt "am"
 msgid "eight"
 msgstr "zortziak"
 
-#: ../plugins/clock/clock-fuzzy.c:140
+#: plugins/clock/clock-fuzzy.c:140
 msgctxt "am"
 msgid "nine"
 msgstr "bederatziak"
 
-#: ../plugins/clock/clock-fuzzy.c:141
+#: plugins/clock/clock-fuzzy.c:141
 msgctxt "am"
 msgid "ten"
 msgstr "hamarrak"
 
-#: ../plugins/clock/clock-fuzzy.c:142
+#: plugins/clock/clock-fuzzy.c:142
 msgctxt "am"
 msgid "eleven"
 msgstr "hamaikak"
 
 #. I18N: 12 AM is midnight
-#: ../plugins/clock/clock-fuzzy.c:144
+#: plugins/clock/clock-fuzzy.c:144
 msgctxt "am"
 msgid "twelve"
 msgstr "hamabiak"
 
-#: ../plugins/clock/clock-fuzzy.c:149
+#: plugins/clock/clock-fuzzy.c:149
 msgctxt "pm"
 msgid "one"
 msgstr "ordubatak"
 
-#: ../plugins/clock/clock-fuzzy.c:150
+#: plugins/clock/clock-fuzzy.c:150
 msgctxt "pm"
 msgid "two"
 msgstr "ordubiak"
 
-#: ../plugins/clock/clock-fuzzy.c:151
+#: plugins/clock/clock-fuzzy.c:151
 msgctxt "pm"
 msgid "three"
 msgstr "hirurak"
 
-#: ../plugins/clock/clock-fuzzy.c:152
+#: plugins/clock/clock-fuzzy.c:152
 msgctxt "pm"
 msgid "four"
 msgstr "laurak"
 
-#: ../plugins/clock/clock-fuzzy.c:153
+#: plugins/clock/clock-fuzzy.c:153
 msgctxt "pm"
 msgid "five"
 msgstr "bostak"
 
-#: ../plugins/clock/clock-fuzzy.c:154
+#: plugins/clock/clock-fuzzy.c:154
 msgctxt "pm"
 msgid "six"
 msgstr "seiak"
 
-#: ../plugins/clock/clock-fuzzy.c:155
+#: plugins/clock/clock-fuzzy.c:155
 msgctxt "pm"
 msgid "seven"
 msgstr "zazpiak"
 
-#: ../plugins/clock/clock-fuzzy.c:156
+#: plugins/clock/clock-fuzzy.c:156
 msgctxt "pm"
 msgid "eight"
 msgstr "zortziak"
 
-#: ../plugins/clock/clock-fuzzy.c:157
+#: plugins/clock/clock-fuzzy.c:157
 msgctxt "pm"
 msgid "nine"
 msgstr "bederatziak"
 
-#: ../plugins/clock/clock-fuzzy.c:158
+#: plugins/clock/clock-fuzzy.c:158
 msgctxt "pm"
 msgid "ten"
 msgstr "hamarrak"
 
-#: ../plugins/clock/clock-fuzzy.c:159
+#: plugins/clock/clock-fuzzy.c:159
 msgctxt "pm"
 msgid "eleven"
 msgstr "hamaikak"
 
 #. I18N: 12 PM is noon
-#: ../plugins/clock/clock-fuzzy.c:161
+#: plugins/clock/clock-fuzzy.c:161
 msgctxt "pm"
 msgid "twelve"
 msgstr "hamabiak"
 
-#: ../plugins/directorymenu/directorymenu.c:289
+#: plugins/clock/clock.desktop.in.in:4
+msgid "Clock"
+msgstr "Ordularia"
+
+#: plugins/clock/clock.desktop.in.in:5
+msgid "What time is it?"
+msgstr "Zein ordu da?"
+
+#: plugins/clock/clock.desktop.in.in:6
+msgid "org.xfce.panel.clock"
+msgstr ""
+
+#: plugins/directorymenu/directorymenu.c:289
+#: plugins/directorymenu/directorymenu.desktop.in.in:4
 msgid "Directory Menu"
 msgstr "Direktorio menua"
 
-#: ../plugins/directorymenu/directorymenu.c:684
+#: plugins/directorymenu/directorymenu.c:684
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Huts \"%s\" aplikazioa abiaraztean"
 
-#: ../plugins/directorymenu/directorymenu.c:715
+#: plugins/directorymenu/directorymenu.c:715
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Huts \"%s\" eduki mota antzematean"
 
-#: ../plugins/directorymenu/directorymenu.c:724
+#: plugins/directorymenu/directorymenu.c:724
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Ez da lehenetsitako aplikaziorik aurkitu \"%s\"-rentzat"
 
-#: ../plugins/directorymenu/directorymenu.c:740
+#: plugins/directorymenu/directorymenu.c:740
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Huts \"%s\"-ren lehenetsitako aplikazioa abiaraztean"
 
-#: ../plugins/directorymenu/directorymenu.c:835
+#: plugins/directorymenu/directorymenu.c:835
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Huts \"%s\" kategoriaren lehenetsitako aplikazioa abiaraztean"
 
-#: ../plugins/directorymenu/directorymenu.c:916
+#: plugins/directorymenu/directorymenu.c:916
 msgid "Create New Folder"
 msgstr "Sortu karpeta berria"
 
-#: ../plugins/directorymenu/directorymenu.c:921
+#: plugins/directorymenu/directorymenu.c:921
 msgid "Create New Text Document"
 msgstr "Testu dokumentu berri bat sortu"
 
-#: ../plugins/directorymenu/directorymenu.c:928
+#: plugins/directorymenu/directorymenu.c:928
 msgid "C_reate"
 msgstr "So_rtu"
 
-#: ../plugins/directorymenu/directorymenu.c:929
+#: plugins/directorymenu/directorymenu.c:929
 msgid "Create & _Open"
 msgstr "Sortu eta ireki"
 
-#: ../plugins/directorymenu/directorymenu.c:943
+#: plugins/directorymenu/directorymenu.c:943
 msgid "Enter the new name:"
 msgstr "Sartu izen berria:"
 
-#: ../plugins/directorymenu/directorymenu.c:979
+#: plugins/directorymenu/directorymenu.c:979
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Ezin izan da karpeta sortu: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1060
+#: plugins/directorymenu/directorymenu.c:1060
 msgid "Open Folder"
 msgstr "Ireki karpeta"
 
-#: ../plugins/directorymenu/directorymenu.c:1073
+#: plugins/directorymenu/directorymenu.c:1073
 msgid "Open in Terminal"
 msgstr "Ireki terminalean"
 
-#: ../plugins/directorymenu/directorymenu.c:1086
+#: plugins/directorymenu/directorymenu.c:1086
 msgid "Create Folder..."
 msgstr "Karpeta sortu..."
 
-#: ../plugins/directorymenu/directorymenu.c:1099
+#: plugins/directorymenu/directorymenu.c:1099
 msgid "Create Text Document..."
 msgstr "Testu dokumentua sortu..."
 
-#: ../plugins/launcher/launcher.c:393
+#: plugins/directorymenu/directorymenu.desktop.in.in:5
+msgid "Show a directory tree in a menu"
+msgstr "Ikusi direktorio zuhaitza menu batean"
+
+#: plugins/directorymenu/directorymenu.desktop.in.in:6
+msgid "org.xfce.panel.directorymenu"
+msgstr ""
+
+#: plugins/launcher/launcher.c:393
 msgid "Open launcher menu"
 msgstr "Ireki abiarazle menua"
 
-#: ../plugins/launcher/launcher.c:1591
+#: plugins/launcher/launcher.c:1591
 msgid "Unnamed Item"
 msgstr "Elementu izengabea"
 
-#: ../plugins/launcher/launcher.c:1789
+#: plugins/launcher/launcher.c:1789
 msgid "No items"
 msgstr "Elementurik ez"
 
-#: ../plugins/launcher/launcher-dialog.c:793
+#: plugins/launcher/launcher-dialog.c:793
 msgid "Failed to open desktop item editor"
 msgstr "Huts mahaigain elementu editorea irekitzean"
 
-#: ../plugins/launcher/launcher-dialog.c:861
+#: plugins/launcher/launcher-dialog.c:861
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Elementu bat ezabatzen baduzu betirako kenduko da"
 
-#: ../plugins/launcher/launcher-dialog.c:862
+#: plugins/launcher/launcher-dialog.c:862
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Ziur al zaude \"%s\" ezabatu nahi duzula?"
 
-#: ../plugins/launcher/launcher-dialog.c:863
+#: plugins/launcher/launcher-dialog.c:863
 msgid "Unnamed item"
 msgstr "Elementu izengabea"
 
-#: ../plugins/pager/pager.c:685
+#: plugins/launcher/launcher.desktop.in.in:4
+msgid "Launcher"
+msgstr "Abiarazlea"
+
+#: plugins/launcher/launcher.desktop.in.in:5
+msgid "Program launcher with optional menu"
+msgstr "Programa abiarazlea aukerako menu batez"
+
+#: plugins/launcher/launcher.desktop.in.in:6
+msgid "org.xfce.panel.launcher"
+msgstr ""
+
+#: plugins/pager/pager.c:685
 msgid "Workspace _Settings..."
 msgstr "Lan-eremu _ezarpenak..."
 
-#: ../plugins/pager/pager.c:785
+#: plugins/pager/pager.c:785
 msgid "Unable to open the workspace settings"
 msgstr "Ezin da lan-eremu ezarpenak ireki"
 
-#: ../plugins/pager/pager-buttons.c:588 ../plugins/windowmenu/windowmenu.c:893
+#: plugins/pager/pager-buttons.c:588 plugins/windowmenu/windowmenu.c:893
 #, c-format
 msgid "Workspace %d"
 msgstr "%d idazmahaia"
 
-#: ../plugins/showdesktop/showdesktop.c:245
+#: plugins/pager/pager.desktop.in.in:4
+msgid "Workspace Switcher"
+msgstr "Idazmahaia aldatzailea"
+
+#: plugins/pager/pager.desktop.in.in:5
+msgid "Switch between virtual desktops"
+msgstr "Idazmahai birtualen artean aldatu"
+
+#: plugins/pager/pager.desktop.in.in:6
+msgid "org.xfce.panel.pager"
+msgstr ""
+
+#: plugins/separator/separator.desktop.in.in:5
+msgid "Adds a separator or space between panel items"
+msgstr "Panel elementuen artean lekua edo bereizle bat gehitu"
+
+#: plugins/separator/separator.desktop.in.in:6
+msgid "org.xfce.panel.separator"
+msgstr ""
+
+#: plugins/showdesktop/showdesktop.c:245
 msgid "Restore the minimized windows"
 msgstr "Berrezarri minimizatutako leihoak"
 
-#: ../plugins/showdesktop/showdesktop.c:247
+#: plugins/showdesktop/showdesktop.c:247
 msgid "Minimize all open windows and show the desktop"
 msgstr "Minimizatu leiho guztiak eta mahaigaina bistarazi"
 
-#: ../plugins/showdesktop/showdesktop.c:250
+#: plugins/showdesktop/showdesktop.c:250
+#: plugins/showdesktop/showdesktop.desktop.in.in:4
 msgid "Show Desktop"
 msgstr "Ikusi mahaigaina"
 
-#: ../plugins/systray/sn-dialog.c:645
+#: plugins/showdesktop/showdesktop.desktop.in.in:5
+msgid "Hide all windows and show the desktop"
+msgstr "Ezkutatu leiho guztiak eta mahaigaina bistarazi"
+
+#: plugins/showdesktop/showdesktop.desktop.in.in:6
+msgid "org.xfce.panel.showdesktop"
+msgstr ""
+
+#: plugins/systray/sn-dialog.c:645
 msgid "Clear"
 msgstr "Garbitu"
 
-#: ../plugins/systray/sn-dialog.c:646
+#: plugins/systray/sn-dialog.c:646
 msgid "Are you sure you want to clear the list of known items?"
 msgstr "Ziur al zaude elementu ezagunen zerrenda ezabatu nahi duzula?"
 
-#: ../plugins/systray/systray.c:145
+#: plugins/systray/systray.c:145
 msgid "Unable to start the notification area"
 msgstr "Ezin da larrialdi berri-ematea abiarazi"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:406
+#: plugins/systray/systray.c:406
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Ziurrenik beste widget batek berri-emate eremuaren kargu artu du. Eremu hau ez da erabiliko."
 
-#: ../plugins/systray/systray.c:408
+#: plugins/systray/systray.c:408
 msgid "The notification area lost selection"
 msgstr "Beri-emate eremuak hautapena galtzen du"
 
-#: ../plugins/systray/systray-manager.c:402
+#: plugins/systray/systray-manager.c:402
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Huts %d pantailaren kudeatzaile hautapena eskuratzerakoan"
 
-#: ../plugins/tasklist/tasklist-widget.c:3109
+#: plugins/systray/systray.desktop.in.in:5
+msgid "Status Tray Plugin"
+msgstr "Egoera erretilu plugina"
+
+#: plugins/systray/systray.desktop.in.in:6
+msgid ""
+"Provides status notifier items (application indicators) and legacy systray "
+"items"
+msgstr "Egoera berri-emailearen elementuak (aplikazio adierazleak) eta jasotako systray elementuak hornitzen ditu"
+
+#: plugins/systray/systray.desktop.in.in:7
+msgid "org.xfce.panel.statustray"
+msgstr ""
+
+#: plugins/tasklist/tasklist-widget.c:3109
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Ezin da '%s' instantzia berria hasi"
 
-#: ../plugins/tasklist/tasklist-widget.c:3113
+#: plugins/tasklist/tasklist-widget.c:3113
 msgid "Error"
 msgstr "Errorea"
 
-#: ../plugins/tasklist/tasklist-widget.c:3142
+#: plugins/tasklist/tasklist-widget.c:3142
 msgid "Launch New Instance"
 msgstr "Instantzia berria abiarazi"
 
-#: ../plugins/tasklist/tasklist-widget.c:3887
+#: plugins/tasklist/tasklist-widget.c:3887
 msgid "Mi_nimize All"
 msgstr "Mi_nimizatu dena"
 
-#: ../plugins/tasklist/tasklist-widget.c:3894
+#: plugins/tasklist/tasklist-widget.c:3894
 msgid "Un_minimize All"
 msgstr "De_sminimizatu dena"
 
-#: ../plugins/tasklist/tasklist-widget.c:3901
+#: plugins/tasklist/tasklist-widget.c:3901
 msgid "Ma_ximize All"
 msgstr "Ma_ximizatu dena"
 
-#: ../plugins/tasklist/tasklist-widget.c:3908
+#: plugins/tasklist/tasklist-widget.c:3908
 msgid "_Unmaximize All"
 msgstr "_Desmaximizatu dena"
 
-#: ../plugins/tasklist/tasklist-widget.c:3919
+#: plugins/tasklist/tasklist-widget.c:3919
 msgid "_Close All"
 msgstr "_Itxi dena"
 
-#: ../plugins/windowmenu/windowmenu.c:689
+#: plugins/tasklist/tasklist.desktop.in.in:4
+msgid "Window Buttons"
+msgstr "Leiho botoiak"
+
+#: plugins/tasklist/tasklist.desktop.in.in:5
+msgid "Switch between open windows using buttons"
+msgstr "Aldatu irekitako leihoen artean botoiak erabiliaz"
+
+#: plugins/tasklist/tasklist.desktop.in.in:6
+msgid "org.xfce.panel.tasklist"
+msgstr ""
+
+#: plugins/windowmenu/windowmenu.c:689
 msgid "Desktop"
 msgstr "Mahaigaina"
 
-#: ../plugins/windowmenu/windowmenu.c:1289
+#: plugins/windowmenu/windowmenu.c:1289
 msgid "No Windows"
 msgstr "Leihorik ez"
 
-#: ../plugins/windowmenu/windowmenu.c:1304
+#: plugins/windowmenu/windowmenu.c:1304
 msgid "Urgent Windows"
 msgstr "Leiho larriak"
 
-#: ../plugins/windowmenu/windowmenu.c:1349
+#: plugins/windowmenu/windowmenu.c:1349
 msgid "Add Workspace"
 msgstr "Gehitu lan-eremua"
 
-#: ../plugins/windowmenu/windowmenu.c:1371
+#: plugins/windowmenu/windowmenu.c:1371
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "\"%s\" lan-eremua ezabatu"
 
-#: ../plugins/windowmenu/windowmenu.c:1373
+#: plugins/windowmenu/windowmenu.c:1373
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "%d Idazmahaia ezabatu"
+
+#: plugins/windowmenu/windowmenu.desktop.in.in:4
+msgid "Window Menu"
+msgstr "Leiho menua"
+
+#: plugins/windowmenu/windowmenu.desktop.in.in:5
+msgid "Switch between open windows using a menu"
+msgstr "Aldatu irekitako leihoen artean menua erabiliaz"
+
+#: plugins/windowmenu/windowmenu.desktop.in.in:6
+msgid "org.xfce.panel.windowmenu"
+msgstr ""
