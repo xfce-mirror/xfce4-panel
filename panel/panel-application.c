@@ -348,14 +348,24 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
     { "dark-mode", G_TYPE_BOOLEAN },
     { NULL }
   };
+  const PanelProperty  old_properties[] =
+  {
+    { "autohide", G_TYPE_BOOLEAN },
+    { NULL }
+  };
+  const PanelProperty  new_properties[] =
+  {
+    { "autohide-behavior", G_TYPE_UINT },
+    { NULL }
+  };
 
   panel_return_if_fail (XFCONF_IS_CHANNEL (application->xfconf));
 
   /* create the property base */
   property_base = g_strdup_printf (PANELS_PROPERTY_BASE, panel_window_get_id (window));
 
-  /* migrate old autohide property */
-  panel_window_migrate_autohide_property (window, application->xfconf, property_base);
+  /* migrate old properties */
+  panel_window_migrate_old_properties (window, application->xfconf, property_base, old_properties, new_properties);
 
   /* bind all the properties */
   panel_properties_bind (application->xfconf, G_OBJECT (window),
