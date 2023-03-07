@@ -493,7 +493,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   panel_preferences_dialog_bindings_add (dialog, "span-monitors", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "position-locked", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "autohide-behavior", "active", 0);
-  panel_preferences_dialog_bindings_add (dialog, "disable-struts", "active", 0);
+  panel_preferences_dialog_bindings_add (dialog, "enable-struts", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "size", "value", 0);
   panel_preferences_dialog_bindings_add (dialog, "nrows", "value", 0);
   panel_preferences_dialog_bindings_add (dialog, "length-adjust", "active", 0);
@@ -700,7 +700,7 @@ panel_preferences_dialog_autohide_changed (GtkComboBox            *combobox,
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
   panel_return_if_fail (PANEL_WINDOW (dialog->active));
 
-  object = gtk_builder_get_object (GTK_BUILDER (dialog), "disable-struts");
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "enable-struts");
   panel_return_if_fail (GTK_IS_WIDGET (object));
 
   /* make "don't reserve space on borders" sensitive only when autohide is disabled */

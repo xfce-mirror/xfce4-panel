@@ -320,7 +320,7 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
     { "icon-size", G_TYPE_UINT },
     { "output-name", G_TYPE_STRING },
     { "position", G_TYPE_STRING },
-    { "disable-struts", G_TYPE_BOOLEAN },
+    { "enable-struts", G_TYPE_BOOLEAN },
     { NULL }
   };
   const PanelProperty  global_properties[] =
@@ -331,11 +331,13 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
   const PanelProperty  old_properties[] =
   {
     { "autohide", G_TYPE_BOOLEAN },
+    { "disable-struts", G_TYPE_BOOLEAN },
     { NULL }
   };
   const PanelProperty  new_properties[] =
   {
     { "autohide-behavior", G_TYPE_UINT },
+    { "enable-struts", G_TYPE_BOOLEAN },
     { NULL }
   };
 
