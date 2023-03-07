@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-01 00:46+0100\n"
+"POT-Creation-Date: 2023-03-07 00:46+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: beriain, 2019-2020,2022\n"
 "Language-Team: Basque (http://www.transifex.com/xfce/xfce4-panel/language/eu/)\n"
@@ -27,39 +27,15 @@ msgstr ""
 "Language: eu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../panel-desktop-handler.desktop.in.h:1
-msgid "Create Launcher on the panel"
-msgstr "Sortu abiarazle bat panelean"
-
-#: ../panel-desktop-handler.desktop.in.h:2
-msgid ""
-"Add a new launcher to the panel based on the information of this desktop "
-"file"
-msgstr "Gehitu abiarazle berri bat panelera mahaigain fitxategi honen argibideetan oinarriturik"
-
-#: ../panel-preferences.desktop.in.h:1
-msgid ""
-"panels;settings;preferences;taskbar;autohide;application "
-"menu;start;buttons;launcher;notification area;status;icons;plugins;"
-msgstr "panelak;ezarpenak;hobespenak;tresnabarra;automatikoki ezkutatu;aplikazio menua;hasi;botoiak;abiarazlea;berri-emate area;egoera;ikonoak;pluginak;"
-
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3562
-msgid "Panel"
-msgstr "Panela"
-
-#: ../panel-preferences.desktop.in.h:3
-msgid "Customize the panel"
-msgstr "Pertsonalizatu panela"
-
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1095
-#: ../panel/panel-preferences-dialog.c:1410
+#: ../panel/panel-preferences-dialog.c:1449
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Ziur al zaude \"%s\" idazmahaia ezabatu nahi duzula?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1100
-#: ../panel/panel-preferences-dialog.c:1413
+#: ../panel/panel-preferences-dialog.c:1452
 msgid "Remove Item"
 msgstr "Elementua kendu"
 
@@ -69,20 +45,19 @@ msgid ""
 msgstr "Elementua paneletik kentzean bere konfigurazioa galduko da ere."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1103 ../panel/panel-dialogs.c:164
-#: ../panel/panel-preferences-dialog.c:1417
+#: ../panel/panel-preferences-dialog.c:1456
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
-#: ../plugins/directorymenu/directorymenu.c:460
-#: ../plugins/directorymenu/directorymenu.c:926
+#: ../plugins/directorymenu/directorymenu.c:461
+#: ../plugins/directorymenu/directorymenu.c:927
 msgid "_Cancel"
 msgstr "_Utzi"
 
 #. remove
 #: ../libxfce4panel/xfce-panel-plugin.c:1104
 #: ../libxfce4panel/xfce-panel-plugin.c:1271
-#: ../panel/panel-plugin-external.c:403
+#: ../panel/panel-plugin-external.c:409
 #: ../panel/panel-preferences-dialog.c:1047
-#: ../panel/panel-preferences-dialog.c:1418
-#: ../panel/panel-preferences-dialog.glade.h:58
+#: ../panel/panel-preferences-dialog.c:1457
 #: ../plugins/launcher/launcher-dialog.c:860
 msgid "_Remove"
 msgstr "_Ezabatu"
@@ -93,7 +68,7 @@ msgid "_Properties"
 msgstr "_Propietateak"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:3638
+#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:3650
 msgid "_About"
 msgstr "_Honi buruz"
 
@@ -107,32 +82,23 @@ msgid "Pane_l"
 msgstr "Pane_la"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3574
+#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3586
 msgid "Add _New Items..."
 msgstr "Gehitu elementu _berriak..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1308 ../panel/panel-window.c:3585
+#: ../libxfce4panel/xfce-panel-plugin.c:1308 ../panel/panel-window.c:3597
 msgid "Panel Pr_eferences..."
 msgstr "Panel hob_espenak..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1325 ../panel/panel-window.c:3613
+#: ../libxfce4panel/xfce-panel-plugin.c:1325 ../panel/panel-window.c:3625
 msgid "Log _Out"
 msgstr "Sai_oa itxi"
 
 #. help item
 #: ../libxfce4panel/xfce-panel-plugin.c:1341 ../panel/panel-item-dialog.c:196
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3629
-#: ../plugins/actions/actions-dialog.glade.h:8
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
-#: ../plugins/clock/clock-dialog.glade.h:15
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-#: ../plugins/launcher/launcher-dialog.glade.h:20
-#: ../plugins/pager/pager-dialog.glade.h:5
-#: ../plugins/separator/separator-dialog.glade.h:6
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
+#: ../panel/panel-window.c:3641
 msgid "_Help"
 msgstr "_Laguntza"
 
@@ -326,8 +292,6 @@ msgid "Add New Item"
 msgstr "Gehitu elementu berri bat"
 
 #: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:192
-#: ../panel/panel-preferences-dialog.glade.h:56
-#: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "_Gehitu"
 
@@ -351,27 +315,14 @@ msgid "Modifying the panel is not allowed"
 msgstr "Ez da onartzen panela eraldatzean"
 
 #: ../panel/panel-item-dialog.c:186
-#: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Add New Items"
 msgstr "Gehitu elementu berriak"
 
-#: ../panel/panel-item-dialog.c:200
-#: ../panel/panel-preferences-dialog.glade.h:11
-#: ../panel/panel-tic-tac-toe.c:117
-#: ../plugins/actions/actions-dialog.glade.h:7
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#: ../plugins/clock/clock-dialog.glade.h:14
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
-#: ../plugins/launcher/launcher-dialog.glade.h:17
-#: ../plugins/pager/pager-dialog.glade.h:6
-#: ../plugins/separator/separator-dialog.glade.h:5
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
+#: ../panel/panel-item-dialog.c:200 ../panel/panel-tic-tac-toe.c:117
 msgid "_Close"
 msgstr "_Itxi"
 
 #: ../panel/panel-item-dialog.c:216
-#: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "_Bilatu:"
 
@@ -379,16 +330,16 @@ msgstr "_Bilatu:"
 msgid "Enter search phrase here"
 msgstr "Idatzi bilaketa katea hemen"
 
-#: ../panel/panel-plugin-external.c:394
+#: ../panel/panel-plugin-external.c:400
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "\"%s\" pluginak panela ustekabean utzi du, berriz abiaraztea nahi al duzu?"
 
-#: ../panel/panel-plugin-external.c:397
+#: ../panel/panel-plugin-external.c:403
 msgid "Plugin Restart"
 msgstr "Plugina berrabiarazi"
 
-#: ../panel/panel-plugin-external.c:398
+#: ../panel/panel-plugin-external.c:404
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -396,7 +347,7 @@ msgid ""
 "permanently removed from the panel."
 msgstr "Plugin-a behin baino gehiago berrabiarazi da azken %d segundoetan. Abiarazi sakatuaz panela abiarazten saiatuko da bestela betirako kenduko da paneletik."
 
-#: ../panel/panel-plugin-external.c:402
+#: ../panel/panel-plugin-external.c:408
 msgid "_Execute"
 msgstr "_Exekutatu"
 
@@ -425,14 +376,14 @@ msgstr "Ziur al zaude %d panela ezabatu nahi duzula?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1252
+#: ../panel/panel-preferences-dialog.c:1291
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(kanpokoa)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1257
+#: ../panel/panel-preferences-dialog.c:1296
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -441,255 +392,14 @@ msgstr "Barne-izena: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1269
+#: ../panel/panel-preferences-dialog.c:1308
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Barne-izena: %s-%d"
 
-#: ../panel/panel-preferences-dialog.c:1415
+#: ../panel/panel-preferences-dialog.c:1454
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Elementua paneletik ezabatzen baduzu betirako galduko da."
-
-#: ../panel/panel-preferences-dialog.glade.h:1
-msgid "Never"
-msgstr "Inoiz"
-
-#: ../panel/panel-preferences-dialog.glade.h:2
-msgid "Intelligently"
-msgstr "bizkorki"
-
-#: ../panel/panel-preferences-dialog.glade.h:3
-msgid "Always"
-msgstr "Beti"
-
-#: ../panel/panel-preferences-dialog.glade.h:4
-msgid "Horizontal"
-msgstr "Horizontala"
-
-#: ../panel/panel-preferences-dialog.glade.h:5
-msgid "Vertical"
-msgstr "Bertikala"
-
-#: ../panel/panel-preferences-dialog.glade.h:6
-msgid "Deskbar"
-msgstr "Mahaigain-barra"
-
-#: ../panel/panel-preferences-dialog.glade.h:7
-msgid "None (use system style)"
-msgstr "Batez (erabili sistema egoera)"
-
-#: ../panel/panel-preferences-dialog.glade.h:8
-msgid "Solid color"
-msgstr "Kolore solidoa"
-
-#: ../panel/panel-preferences-dialog.glade.h:9
-msgid "Background image"
-msgstr "Atzealdeko irudia"
-
-#: ../panel/panel-preferences-dialog.glade.h:10
-msgid "Panel Preferences"
-msgstr "Panel hobespenak"
-
-#: ../panel/panel-preferences-dialog.glade.h:13
-msgid "Profiles:"
-msgstr "Profilak:"
-
-#: ../panel/panel-preferences-dialog.glade.h:14
-msgid "_Backup and restore"
-msgstr "Babeskopia eta leheneratzea"
-
-#: ../panel/panel-preferences-dialog.glade.h:15
-msgid "Switch between panel presets"
-msgstr "Panel aurrezarpenen rtean aldatu"
-
-#: ../panel/panel-preferences-dialog.glade.h:16
-msgid "Add a new panel"
-msgstr "Gehitu panel berri bayt"
-
-#: ../panel/panel-preferences-dialog.glade.h:17
-msgid "Remove the currently selected panel"
-msgstr "Ezabatu hautaturik dagoen panela"
-
-#: ../panel/panel-preferences-dialog.glade.h:18
-msgid "<b>General</b>"
-msgstr "<b>Orokorra</b>"
-
-#: ../panel/panel-preferences-dialog.glade.h:19
-msgid "M_ode:"
-msgstr "M_odua:"
-
-#: ../panel/panel-preferences-dialog.glade.h:20
-msgid "Span mo_nitors"
-msgstr "Zabor-posta monitoreak"
-
-#: ../panel/panel-preferences-dialog.glade.h:21
-msgid "Select this option to extend the panel over multiple monitors."
-msgstr "Hautatu aukera hau panela monitore anitzetan hedatzeko."
-
-#: ../panel/panel-preferences-dialog.glade.h:22
-msgid "_Lock panel"
-msgstr "B_lokeatu panela"
-
-#: ../panel/panel-preferences-dialog.glade.h:23
-msgid ""
-"Select this option to hide the handles of the panel and lock its position."
-msgstr "Hautatu aukera hau panel kudeatzaileak ezkutatu eta bere kokalekua blokeatzeko."
-
-#: ../panel/panel-preferences-dialog.glade.h:24
-msgid "Keep panel _above windows"
-msgstr "Panela leihoen gainean mantendu"
-
-#: ../panel/panel-preferences-dialog.glade.h:25
-msgid ""
-"Select this option if you want maximized windows to cover the area behind "
-"the panel. This only works when the panel is attached to a screen edge."
-msgstr "Hautatu aukera hau handitutako leihoek panelaren eremua estaltzea nahi baduzu. Honek panela leiho ertz batera loturik dagoenean funtzionatzen du."
-
-#: ../panel/panel-preferences-dialog.glade.h:26
-msgid "Au_tomatically hide the panel:"
-msgstr "Panela automatikoki ezkutatu:"
-
-#: ../panel/panel-preferences-dialog.glade.h:27
-msgid "O_utput:"
-msgstr "I_rteera:"
-
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:29
-msgid "<b>Measurements</b>"
-msgstr "<b>Neurriak</b>"
-
-#: ../panel/panel-preferences-dialog.glade.h:30
-msgid "Row _size (pixels):"
-msgstr "Lerro _tamaina (pixeletan):"
-
-#: ../panel/panel-preferences-dialog.glade.h:31
-msgid "Num_ber of rows:"
-msgstr "_Lerro kopurua:"
-
-#: ../panel/panel-preferences-dialog.glade.h:32
-msgid "L_ength (pixels):"
-msgstr "L_uzera (pixeletan):"
-
-#: ../panel/panel-preferences-dialog.glade.h:33
-msgid "A_utomatically increase the length"
-msgstr "A_utomatikoki handitu luzera"
-
-#: ../panel/panel-preferences-dialog.glade.h:34
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
-msgstr "Aukera hau hautatu pluginak tamaina gehiago eskatzean panelaren luzera automatikoki hedatzeko."
-
-#: ../panel/panel-preferences-dialog.glade.h:35
-msgid "D_isplay"
-msgstr "Panta_ila"
-
-#: ../panel/panel-preferences-dialog.glade.h:36
-msgid "Dark mode"
-msgstr "Modu iluna"
-
-#: ../panel/panel-preferences-dialog.glade.h:37
-msgid "<b>Background</b>"
-msgstr "<b>Atzealdea</b>"
-
-#: ../panel/panel-preferences-dialog.glade.h:38
-#: ../plugins/separator/separator-dialog.glade.h:7
-msgid "_Style:"
-msgstr "E_stiloa:"
-
-#: ../panel/panel-preferences-dialog.glade.h:39
-msgid "C_olor:"
-msgstr "K_olorea:"
-
-#: ../panel/panel-preferences-dialog.glade.h:40
-msgid "Pick a Panel Color"
-msgstr "Klikatu panel kolore bat"
-
-#: ../panel/panel-preferences-dialog.glade.h:41
-msgid "_File:"
-msgstr "_Fitxategia:"
-
-#: ../panel/panel-preferences-dialog.glade.h:42
-msgid "Select A Background Image"
-msgstr "Hautatu atzealdeko irudi bat"
-
-#: ../panel/panel-preferences-dialog.glade.h:43
-msgid "<b>Icons</b>"
-msgstr "<b>Ikonoak</b>"
-
-#: ../panel/panel-preferences-dialog.glade.h:44
-msgid "Adjust size au_tomatically"
-msgstr "Neurria automatikoki doitu"
-
-#: ../panel/panel-preferences-dialog.glade.h:45
-msgid "Fixed icon _size (pixels):"
-msgstr "Ikonoen neurri zehatza (pixeletan):"
-
-#: ../panel/panel-preferences-dialog.glade.h:46
-msgid "<b>Opacity</b>"
-msgstr "<b>Opakutasuna</b>"
-
-#: ../panel/panel-preferences-dialog.glade.h:47
-msgid "Configure..."
-msgstr "Konfiguratu..."
-
-#: ../panel/panel-preferences-dialog.glade.h:48
-msgid ""
-"<b>Compositing is currently disabled</b>\n"
-"Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>Konposizioa ezgaituta dago une honetan</b>\nGaitu konposizioa leiho kudeatzailean panelaren opakutasun ezarpenetarako."
-
-#. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:51
-msgid "_Enter:"
-msgstr "_Sartu:"
-
-#. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:53
-msgid "_Leave:"
-msgstr "_Utzi:"
-
-#: ../panel/panel-preferences-dialog.glade.h:54
-msgid ""
-"Transparency when the pointer is not hovering over the panel, with 0 being "
-"fully transparent and 100 fully opaque."
-msgstr "Gardentasuna markatzailea panel gainean dabilenean, 0 erabiliaz guztiz gardena izango da eta 100 erabiliaz guztiz opakoa."
-
-#: ../panel/panel-preferences-dialog.glade.h:55
-msgid "Appeara_nce"
-msgstr "Itxu_ra"
-
-#: ../panel/panel-preferences-dialog.glade.h:57
-msgid "Add new item to this panel"
-msgstr "Gehitu elementu berri bat panel honetara"
-
-#: ../panel/panel-preferences-dialog.glade.h:59
-msgid "Remove currently selected item"
-msgstr "Ezabatu hautaturik dagoen elementua"
-
-#: ../panel/panel-preferences-dialog.glade.h:60
-#: ../plugins/launcher/launcher-dialog.glade.h:23
-msgid "Edit the currently selected item"
-msgstr "Editatu hautaturik dagoen elementua"
-
-#: ../panel/panel-preferences-dialog.glade.h:61
-msgid "Show about information of the currently selected item"
-msgstr "Hautaturiko elementuaren argibideak bistarazi"
-
-#: ../panel/panel-preferences-dialog.glade.h:62
-#: ../plugins/launcher/launcher-dialog.glade.h:21
-msgid "Move currently selected item up by one row"
-msgstr "Mugitu hautaturik dagoen elementua lerro bat gora"
-
-#: ../panel/panel-preferences-dialog.glade.h:63
-#: ../plugins/launcher/launcher-dialog.glade.h:22
-msgid "Move currently selected item down by one row"
-msgstr "Mugitu hautaturik dagoen elementua lerro bat behera"
-
-#: ../panel/panel-preferences-dialog.glade.h:64
-msgid "Ite_ms"
-msgstr "Ele_mentuak"
 
 #: ../panel/panel-tic-tac-toe.c:115
 msgid "_New Game"
@@ -715,7 +425,11 @@ msgstr "Esperientziaduna"
 msgid "Expert"
 msgstr "Espertoa"
 
-#: ../panel/panel-window.c:3599
+#: ../panel/panel-window.c:3574
+msgid "Panel"
+msgstr "Panela"
+
+#: ../panel/panel-window.c:3611
 msgid "_Lock Panel"
 msgstr "B_lokeatu panela"
 
@@ -735,68 +449,9 @@ msgstr "Huts dagoen konfigurazioa migratzean"
 msgid "Panel configuration has been updated."
 msgstr "Panel konfigurazioa eguneratua izan da."
 
-#: ../plugins/actions/actions-dialog.glade.h:1
-#: ../plugins/actions/actions.desktop.in.in.h:1
-msgid "Action Buttons"
-msgstr "Ekintza botoiak"
-
-#: ../plugins/actions/actions-dialog.glade.h:2 ../plugins/actions/actions.c:36
+#: ../plugins/actions/actions.c:36
 msgid "Session Menu"
 msgstr "Saio menua"
-
-#: ../plugins/actions/actions-dialog.glade.h:3
-msgid "Full Name"
-msgstr "Izen osoa"
-
-#: ../plugins/actions/actions-dialog.glade.h:4
-msgid "Username"
-msgstr "Erabiltzaile izena"
-
-#: ../plugins/actions/actions-dialog.glade.h:5
-msgid "User ID"
-msgstr "erabiltzaile ID"
-
-#: ../plugins/actions/actions-dialog.glade.h:6
-msgid "Custom"
-msgstr "Pertsonalizatua"
-
-#: ../plugins/actions/actions-dialog.glade.h:9
-msgid "Appeara_nce:"
-msgstr "Itxu_ra:"
-
-#: ../plugins/actions/actions-dialog.glade.h:10
-msgid "Title:"
-msgstr "Izenburua:"
-
-#: ../plugins/actions/actions-dialog.glade.h:11
-msgid "Custo_m title:"
-msgstr "Pertsonalizatutako izenburua:"
-
-#: ../plugins/actions/actions-dialog.glade.h:12
-#: ../plugins/launcher/launcher-dialog.glade.h:27
-msgid "General"
-msgstr "Orokorra"
-
-#: ../plugins/actions/actions-dialog.glade.h:13
-msgid "Visible"
-msgstr "Ikusgarria"
-
-#: ../plugins/actions/actions-dialog.glade.h:14
-msgid "Action"
-msgstr "Ekintza"
-
-#: ../plugins/actions/actions-dialog.glade.h:15
-msgid "_Show confirmation dialog"
-msgstr "_Ikusi berrespen leihoa"
-
-#: ../plugins/actions/actions-dialog.glade.h:16
-msgid ""
-"Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "30 segundoko denbora-muga duen berrespen leihoa bistarazi zenbait ekintzetan."
-
-#: ../plugins/actions/actions-dialog.glade.h:17
-msgid "_Actions"
-msgstr "_Ekintzak"
 
 #: ../plugins/actions/actions.c:157
 msgid "Log Out"
@@ -925,8 +580,6 @@ msgid "Turning off computer in %d seconds."
 msgstr "Ordenagailua %d segundotan itzaltzen."
 
 #: ../plugins/actions/actions.c:677
-#: ../plugins/separator/separator-dialog.glade.h:2
-#: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Bereizlea"
 
@@ -939,108 +592,27 @@ msgstr "Huts \"%s\" ekintza abiaraztean"
 msgid "Little Mouse"
 msgstr "Sagu txikia"
 
-#: ../plugins/actions/actions.desktop.in.in.h:2
-msgid "Log out, lock or other system actions"
-msgstr "Saioa itxi, blokeatu beta beste zenbait sistema ekintza"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
-#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:1
-msgid "Applications Menu"
-msgstr "Aplikazioa menua"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
-msgid "_Icon:"
-msgstr "_Ikonoa:"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
-msgid "Button _title:"
-msgstr "Botoi _titulua:"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
-msgid "Show button on one _line"
-msgstr "Botoia lerro bakarrean erakutsi"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
-msgid "_Show button title"
-msgstr "_Ikusi botoi izenburua"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid "Show application d_escription in tooltip"
-msgstr "Ikusi aplikazio d_eskribapena argibideetan"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
-msgid "Show ic_ons in menu"
-msgstr "Ikusi ik_onoak menuan"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
-msgid "Show generic application n_ames"
-msgstr "Ikusi aplikazio izen generikoak"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
-msgid ""
-"Select this option to show the generic application name in the menu, for "
-"example \"File Manager\" instead of \"Thunar\""
-msgstr "Aukera hau hautatu menuan aplikazioaren izen generikoa bistartzeko, adibidez \"Fitxategi kudeatzailea\" \"Thunar ordez\""
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-#: ../plugins/clock/clock-dialog.glade.h:27
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
-#: ../plugins/separator/separator-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
-msgid "Appearance"
-msgstr "Itxura"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
-msgid "Use the _default menu"
-msgstr "Erabili _lehenetsitako menu fitxategia"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
-msgid "Ed_it Menu"
-msgstr "Ed_itatu menua"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
-msgid "Use c_ustom menu file:"
-msgstr "Erabili _pertsonalizatutako menu fitxategia:"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:16
-msgid "Menu _file:"
-msgstr "Menu _fitxategia:"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:17
-msgid "Select A Menu File"
-msgstr "Hautatu menu fitxategi bat"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:18
-msgid "Menu File"
-msgstr "Menu fitxategia"
-
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu.c:37
 msgid "Applications"
 msgstr "Aplikazioak"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:600
-#: ../plugins/directorymenu/directorymenu.c:458
+#: ../plugins/directorymenu/directorymenu.c:459
 msgid "Select An Icon"
 msgstr "Hautatu ikono bat"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/directorymenu/directorymenu.c:461
+#: ../plugins/directorymenu/directorymenu.c:462
 msgid "_OK"
 msgstr "_ADOS"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:641
-#: ../plugins/clock/clock.c:1018 ../plugins/launcher/launcher.c:2466
+#: ../plugins/clock/clock.c:1018 ../plugins/launcher/launcher.c:2483
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Ezin da \"%s\" komandoa exekutatu."
-
-#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
-msgid "Show a menu containing categories of installed applications"
-msgstr "Ikusi instalatutako aplikazio kategoriak dituen menua"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -1089,171 +661,6 @@ msgstr "Huts clock komandoa exekutatzean"
 #: ../plugins/clock/clock.c:957
 msgid "Custom Format"
 msgstr "Pertsonalizatuko formatua"
-
-#: ../plugins/clock/clock-dialog.glade.h:1
-msgid "Decimal"
-msgstr "Hamartar"
-
-#: ../plugins/clock/clock-dialog.glade.h:2
-msgid "Sexagesimal"
-msgstr "Hirurogeitar"
-
-#: ../plugins/clock/clock-dialog.glade.h:3
-msgid "Binary time"
-msgstr "Ordu bitarra"
-
-#: ../plugins/clock/clock-dialog.glade.h:4
-msgid "Date, then time"
-msgstr "Data, ondoren ordua"
-
-#: ../plugins/clock/clock-dialog.glade.h:5
-msgid "Time, then date"
-msgstr "Ordua, ondoren data"
-
-#: ../plugins/clock/clock-dialog.glade.h:6
-msgid "Date Only"
-msgstr "Data soilik"
-
-#: ../plugins/clock/clock-dialog.glade.h:7
-msgid "Time Only"
-msgstr "Ordua soilik"
-
-#: ../plugins/clock/clock-dialog.glade.h:8
-msgid "Analog"
-msgstr "Analogikoa"
-
-#: ../plugins/clock/clock-dialog.glade.h:9
-msgid "Binary"
-msgstr "Bitarra"
-
-#: ../plugins/clock/clock-dialog.glade.h:10
-msgid "Digital"
-msgstr "Digitala"
-
-#: ../plugins/clock/clock-dialog.glade.h:11
-msgid "Fuzzy"
-msgstr "Nahasia"
-
-#: ../plugins/clock/clock-dialog.glade.h:12
-msgid "LCD"
-msgstr "LCD"
-
-#: ../plugins/clock/clock-dialog.glade.h:13
-#: ../plugins/clock/clock.desktop.in.in.h:1
-msgid "Clock"
-msgstr "Ordularia"
-
-#: ../plugins/clock/clock-dialog.glade.h:16
-msgid ""
-"Name of a timezone corresponding a file in the zoneinfo database, for "
-"example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Ordu-zonalde datubaseko ordu-zonalde izena, adibidez \"Amerika/New York\". Hutsik utzi ordu lokala erabiltzeko."
-
-#: ../plugins/clock/clock-dialog.glade.h:17
-msgid "Time_zone:"
-msgstr "Ordu-_zonaldea:"
-
-#: ../plugins/clock/clock-dialog.glade.h:18
-msgid "Time and Date _Settings..."
-msgstr "Ordu eta data e_zarpenak..."
-
-#: ../plugins/clock/clock-dialog.glade.h:19
-msgid "Time Settings"
-msgstr "Ordu ezarpernak"
-
-#: ../plugins/clock/clock-dialog.glade.h:20
-msgid ""
-"If set, this command is run when the plugin is left-clicked, instead of "
-"displaying the default calendar."
-msgstr "Ezarri bada, komando hau exekutatuko da pluginaren gainean ezkerreko klik egiten bada, egutegi lehenetsia erakutsi beharrean."
-
-#: ../plugins/clock/clock-dialog.glade.h:21
-msgid "Co_mmand:"
-msgstr "Ko_mandoa:"
-
-#: ../plugins/clock/clock-dialog.glade.h:22
-msgid "Calendar"
-msgstr "Egutegia"
-
-#: ../plugins/clock/clock-dialog.glade.h:24
-#, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with"
-" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
-"page for additional information."
-msgstr "Formatuak fitxategi izenean txertatuko diren data eta ordu zatiak zehazten ditu. Adibidez, %Y urteaz ordeztuko da, %m hilabeteaz eta %d egunaz. Antzeko moduan <b></b> etiketak testua lodituko du. Begiratu \"laguntza\" orrialdea argibide gehiagorako."
-
-#: ../plugins/clock/clock-dialog.glade.h:25
-msgid "_Tooltip format:"
-msgstr "A_holku formatua:"
-
-#: ../plugins/clock/clock-dialog.glade.h:26
-msgid "_Layout:"
-msgstr "_Ingurunea:"
-
-#: ../plugins/clock/clock-dialog.glade.h:28
-msgid "Sho_w AM/PM"
-msgstr "AM/_PM bistarazi"
-
-#: ../plugins/clock/clock-dialog.glade.h:29
-msgid "Fl_ash time separators"
-msgstr "Fl_ash ordu bereizleak"
-
-#: ../plugins/clock/clock-dialog.glade.h:30
-msgid "24-_hour clock"
-msgstr "24 _orduko ordularia"
-
-#: ../plugins/clock/clock-dialog.glade.h:31
-msgid "Binary mode:"
-msgstr "Bitar modua:"
-
-#: ../plugins/clock/clock-dialog.glade.h:32
-msgid "Display _seconds"
-msgstr "Bistarazi _segunduak"
-
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:34
-msgid "F_uzziness:"
-msgstr "La_usotasuna:"
-
-#: ../plugins/clock/clock-dialog.glade.h:35
-msgid "Show _inactive dots"
-msgstr "Ikusi puntu _inaktiboak"
-
-#: ../plugins/clock/clock-dialog.glade.h:36
-msgid "Show gri_d"
-msgstr "Ikusi _sareta"
-
-#: ../plugins/clock/clock-dialog.glade.h:37
-msgid "Font:"
-msgstr "Letra-tipoa:"
-
-#: ../plugins/clock/clock-dialog.glade.h:38
-msgid "Format:"
-msgstr "Formatua:"
-
-#: ../plugins/clock/clock-dialog.glade.h:40
-#, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with"
-" the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
-"the &quot;Help&quot; page for additional information."
-msgstr "Formatuak fitxategi izenean txertatuko diren data eta ordu zatiak zehazten ditu. Adibidez, %Y urteaz ordeztuko da, %m hilabeteaz eta %d egunaz. Antzeko moduan &lt;b&gt;&lt;/b&gt; etiketak testua lodituko du. Begiratu &quot;Laguntza&quot; orrialdea argibide gehiagorako."
-
-#: ../plugins/clock/clock-dialog.glade.h:41
-msgid "Date"
-msgstr "Data"
-
-#: ../plugins/clock/clock-dialog.glade.h:42
-msgid "Time"
-msgstr "Ordua"
-
-#: ../plugins/clock/clock-dialog.glade.h:43
-msgid "Clock Options"
-msgstr "Ordulari aukerak"
 
 #: ../plugins/clock/clock-digital.h:27
 msgctxt "Time"
@@ -1566,134 +973,75 @@ msgctxt "pm"
 msgid "twelve"
 msgstr "hamabiak"
 
-#: ../plugins/clock/clock.desktop.in.in.h:2
-msgid "What time is it?"
-msgstr "Zein ordu da?"
-
 #: ../plugins/directorymenu/directorymenu.c:289
-#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Direktorio menua"
 
-#: ../plugins/directorymenu/directorymenu.c:683
+#: ../plugins/directorymenu/directorymenu.c:684
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Huts \"%s\" aplikazioa abiaraztean"
 
-#: ../plugins/directorymenu/directorymenu.c:714
+#: ../plugins/directorymenu/directorymenu.c:715
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Huts \"%s\" eduki mota antzematean"
 
-#: ../plugins/directorymenu/directorymenu.c:723
+#: ../plugins/directorymenu/directorymenu.c:724
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Ez da lehenetsitako aplikaziorik aurkitu \"%s\"-rentzat"
 
-#: ../plugins/directorymenu/directorymenu.c:739
+#: ../plugins/directorymenu/directorymenu.c:740
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Huts \"%s\"-ren lehenetsitako aplikazioa abiaraztean"
 
-#: ../plugins/directorymenu/directorymenu.c:834
+#: ../plugins/directorymenu/directorymenu.c:835
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Huts \"%s\" kategoriaren lehenetsitako aplikazioa abiaraztean"
 
-#: ../plugins/directorymenu/directorymenu.c:915
+#: ../plugins/directorymenu/directorymenu.c:916
 msgid "Create New Folder"
 msgstr "Sortu karpeta berria"
 
-#: ../plugins/directorymenu/directorymenu.c:920
+#: ../plugins/directorymenu/directorymenu.c:921
 msgid "Create New Text Document"
 msgstr "Testu dokumentu berri bat sortu"
 
-#: ../plugins/directorymenu/directorymenu.c:927
+#: ../plugins/directorymenu/directorymenu.c:928
 msgid "C_reate"
 msgstr "So_rtu"
 
-#: ../plugins/directorymenu/directorymenu.c:928
+#: ../plugins/directorymenu/directorymenu.c:929
 msgid "Create & _Open"
 msgstr "Sortu eta ireki"
 
-#: ../plugins/directorymenu/directorymenu.c:942
+#: ../plugins/directorymenu/directorymenu.c:943
 msgid "Enter the new name:"
 msgstr "Sartu izen berria:"
 
-#: ../plugins/directorymenu/directorymenu.c:978
+#: ../plugins/directorymenu/directorymenu.c:979
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Ezin izan da karpeta sortu: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1059
+#: ../plugins/directorymenu/directorymenu.c:1060
 msgid "Open Folder"
 msgstr "Ireki karpeta"
 
-#: ../plugins/directorymenu/directorymenu.c:1072
+#: ../plugins/directorymenu/directorymenu.c:1073
 msgid "Open in Terminal"
 msgstr "Ireki terminalean"
 
-#: ../plugins/directorymenu/directorymenu.c:1085
+#: ../plugins/directorymenu/directorymenu.c:1086
 msgid "Create Folder..."
 msgstr "Karpeta sortu..."
 
-#: ../plugins/directorymenu/directorymenu.c:1098
+#: ../plugins/directorymenu/directorymenu.c:1099
 msgid "Create Text Document..."
 msgstr "Testu dokumentua sortu..."
-
-#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
-msgid "Show a directory tree in a menu"
-msgstr "Ikusi direktorio zuhaitza menu batean"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
-msgid "Select A Directory"
-msgstr "Hautatu A direktorioa"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
-msgid "_Base Directory:"
-msgstr "_Oinarri direktorioa:"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
-msgid "Show 'New Text _Document'"
-msgstr "Erakutsi 'Testu dokumentu berria'"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-msgid "Show '_New Folder'"
-msgstr "Erakutsi 'Karpeta berria'"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
-msgid "Show 'Open in _Terminal'"
-msgstr "Erakutsi 'Terminalean ireki'"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
-msgid "Show '_Open _Folder'"
-msgstr "Erakutsi 'Karpeta ireki'"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
-msgid "Menu"
-msgstr "Menua"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:13
-msgid "Show _hidden files"
-msgstr "Ikusi _ezkutatutako fitxategiak"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:14
-msgid ""
-"Enter a list of patterns that will be used to determine which files are "
-"visible in a directory. If you specify more than one pattern here, the list "
-"items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Idatzi direktorioan bistaraziko diren fitxategiak ezartzen dituen patroi zerrenda. Hemen patroi bat baino gehiago zehazten baduzu, zerrenda elementuak puntu eta gakoz bereizi behar dira (adib *.txt; *.doc)."
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:15
-msgid "_File Pattern:"
-msgstr "_Fitxategi patroia:"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:16
-#: ../plugins/tasklist/tasklist-dialog.glade.h:28
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
-msgid "Filtering"
-msgstr "Iragazten"
 
 #: ../plugins/launcher/launcher.c:393
 msgid "Open launcher menu"
@@ -1703,7 +1051,7 @@ msgstr "Ireki abiarazle menua"
 msgid "Unnamed Item"
 msgstr "Elementu izengabea"
 
-#: ../plugins/launcher/launcher.c:1779
+#: ../plugins/launcher/launcher.c:1789
 msgid "No items"
 msgstr "Elementurik ez"
 
@@ -1724,114 +1072,7 @@ msgstr "Ziur al zaude \"%s\" ezabatu nahi duzula?"
 msgid "Unnamed item"
 msgstr "Elementu izengabea"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:1
-msgid "Default"
-msgstr "Lehenetsia"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:2
-msgid "North"
-msgstr "Iparra"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:3
-msgid "West"
-msgstr "Mendebaldea"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:4
-msgid "East"
-msgstr "Ekialdea"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:5
-msgid "South"
-msgstr "Hegoa"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:6
-msgid "Inside Button"
-msgstr "Barne botoia"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:7
-msgid "Up"
-msgstr "Gora"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:8
-msgid "Down"
-msgstr "Behera"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:9
-msgid "_Edit Item"
-msgstr "_Editatu elementua"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:10
-msgid "D_elete Item"
-msgstr "_Ezabatu elementua"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:11
-msgid "Add Appli_cation"
-msgstr "Gehitu apli_kazioa"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:12
-msgid "New _Application"
-msgstr "_Aplikazio berria"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:13
-msgid "New _Link"
-msgstr "_Lotura berria"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:15
-msgid "Add one or more existing items to the launcher"
-msgstr "Gehitu dauden elementu bat edo gehiago abiarazlera"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:19
-#: ../plugins/launcher/launcher.desktop.in.in.h:1
-msgid "Launcher"
-msgstr "Abiarazlea"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:24
-msgid "Delete the currently selected item"
-msgstr "Ezabatu hautaturik dagoen elementua"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:25
-msgid "Add a new empty item"
-msgstr "Gehitu elementu berri hutsa"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:26
-msgid "Add a new hyperlink"
-msgstr "Hiperesteka berri bat gehitu"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:28
-msgid "Disable t_ooltips"
-msgstr "Desgaitu g_omendioak"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:29
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button"
-" or menu items."
-msgstr "Hautatu aukera hau menu elementu edo panel botoien gainean mugitzean gomendioak desgaitzeko."
-
-#: ../plugins/launcher/launcher-dialog.glade.h:30
-msgid "Show _label instead of icon"
-msgstr "Ikusi e_tiketa ikonoaren ordez"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:31
-msgid "Show last _used item in panel"
-msgstr "Ikusi azken _erabilitako elementua panelean"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:32
-msgid "Select this option to move the clicked menu item to the panel."
-msgstr "Hautatu aukera hau klikatutako menu elementua panelera mugitzeko."
-
-#: ../plugins/launcher/launcher-dialog.glade.h:33
-msgid "_Arrow button position:"
-msgstr "Ge_zi botoi kokalekua:"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:34
-msgid "Advanced"
-msgstr "Aurreratua"
-
-#: ../plugins/launcher/launcher.desktop.in.in.h:2
-msgid "Program launcher with optional menu"
-msgstr "Programa abiarazlea aukerako menu batez"
-
-#: ../plugins/pager/pager.c:685 ../plugins/pager/pager-dialog.glade.h:4
+#: ../plugins/pager/pager.c:685
 msgid "Workspace _Settings..."
 msgstr "Lan-eremu _ezarpenak..."
 
@@ -1844,63 +1085,6 @@ msgstr "Ezin da lan-eremu ezarpenak ireki"
 msgid "Workspace %d"
 msgstr "%d idazmahaia"
 
-#: ../plugins/pager/pager-dialog.glade.h:1
-msgid "Buttons"
-msgstr "Botoiak"
-
-#: ../plugins/pager/pager-dialog.glade.h:2
-msgid "Miniature View"
-msgstr "Miniatura ikuspegia"
-
-#: ../plugins/pager/pager-dialog.glade.h:3
-#: ../plugins/pager/pager.desktop.in.in.h:1
-msgid "Workspace Switcher"
-msgstr "Idazmahaia aldatzailea"
-
-#: ../plugins/pager/pager-dialog.glade.h:7
-msgid "Number of _rows:"
-msgstr "Lerro _kopurua:"
-
-#: ../plugins/pager/pager-dialog.glade.h:8
-msgid "Show workspace number"
-msgstr "Idazmahai zenbakia erakutsi"
-
-#: ../plugins/pager/pager-dialog.glade.h:9
-msgid "Switch workspaces using the mouse wheel"
-msgstr "Idazmahaiak saguaren gurpilarekin txandakatu"
-
-#: ../plugins/pager/pager-dialog.glade.h:10
-msgid "Wrap around workspaces"
-msgstr "Lan-eremu inguratzaileak"
-
-#: ../plugins/pager/pager-dialog.glade.h:11
-msgid "<b>Appearance</b>"
-msgstr "<b>Itxura</b>"
-
-#: ../plugins/pager/pager.desktop.in.in.h:2
-msgid "Switch between virtual desktops"
-msgstr "Idazmahai birtualen artean aldatu"
-
-#: ../plugins/separator/separator-dialog.glade.h:1
-msgid "Transparent"
-msgstr "Gardena"
-
-#: ../plugins/separator/separator-dialog.glade.h:3
-msgid "Handle"
-msgstr "Kudeatu"
-
-#: ../plugins/separator/separator-dialog.glade.h:4
-msgid "Dots"
-msgstr "Puntuak"
-
-#: ../plugins/separator/separator-dialog.glade.h:8
-msgid "_Expand"
-msgstr "_Zabaldu"
-
-#: ../plugins/separator/separator.desktop.in.in.h:2
-msgid "Adds a separator or space between panel items"
-msgstr "Panel elementuen artean lekua edo bereizle bat gehitu"
-
 #: ../plugins/showdesktop/showdesktop.c:245
 msgid "Restore the minimized windows"
 msgstr "Berrezarri minimizatutako leihoak"
@@ -1910,13 +1094,8 @@ msgid "Minimize all open windows and show the desktop"
 msgstr "Minimizatu leiho guztiak eta mahaigaina bistarazi"
 
 #: ../plugins/showdesktop/showdesktop.c:250
-#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Ikusi mahaigaina"
-
-#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
-msgid "Hide all windows and show the desktop"
-msgstr "Ezkutatu leiho guztiak eta mahaigaina bistarazi"
 
 #: ../plugins/systray/sn-dialog.c:645
 msgid "Clear"
@@ -1925,106 +1104,6 @@ msgstr "Garbitu"
 #: ../plugins/systray/sn-dialog.c:646
 msgid "Are you sure you want to clear the list of known items?"
 msgstr "Ziur al zaude elementu ezagunen zerrenda ezabatu nahi duzula?"
-
-#: ../plugins/systray/sn-dialog.glade.h:1
-msgid "Status Tray Items"
-msgstr "Egoera erretilu elementuak"
-
-#: ../plugins/systray/sn-dialog.glade.h:2
-msgid "C_lear Known Items"
-msgstr "G_arbitu elementu ezagunak"
-
-#: ../plugins/systray/sn-dialog.glade.h:3
-msgid "Resets the list of items and their visibility settings"
-msgstr "Berrezarri elementuen zerrenda eta haien ikuspen ezarpenak"
-
-#: ../plugins/systray/sn-dialog.glade.h:4
-msgid "_Fixed icon size (pixels):"
-msgstr "_Ikono finkoaren tamaina (pixelak):"
-
-#: ../plugins/systray/sn-dialog.glade.h:5
-msgid "Adjust size _automatically"
-msgstr "Tamaina _automatikoki doitu"
-
-#: ../plugins/systray/sn-dialog.glade.h:6
-msgid "Icons"
-msgstr "Ikonoak"
-
-#: ../plugins/systray/sn-dialog.glade.h:7
-msgid "Arrange _items in a single row"
-msgstr "Antolatu _elementuak errenkada bakarrean"
-
-#: ../plugins/systray/sn-dialog.glade.h:8
-msgid "If enabled, ensure that the items are laid out in a single row"
-msgstr "Gaituta badago, ziurtatu elementuak errenkada bakarrean ezartzen direla"
-
-#: ../plugins/systray/sn-dialog.glade.h:9
-msgid "_Hide items by default"
-msgstr "_Ezkutatu elementuak lehenespen gisa"
-
-#: ../plugins/systray/sn-dialog.glade.h:10
-msgid "When enabled, all new items will be marked as \"Hidden\""
-msgstr "Gaituta dagoenean, elementu berri guztiak \"Ezkutukoak\" gisa markatuko dira."
-
-#: ../plugins/systray/sn-dialog.glade.h:11
-msgid "_Square items"
-msgstr "_Elementu karratuak"
-
-#: ../plugins/systray/sn-dialog.glade.h:12
-msgid "Item buttons will take a square when it's possible"
-msgstr "Elementuaren botoiek lauki bat hartuko dute ahal denean"
-
-#: ../plugins/systray/sn-dialog.glade.h:13
-msgid "Behavior"
-msgstr "Portaera"
-
-#: ../plugins/systray/sn-dialog.glade.h:14
-msgid "Item"
-msgstr "Elementua"
-
-#: ../plugins/systray/sn-dialog.glade.h:15
-msgid "Hidden"
-msgstr "Ezkutukoa"
-
-#: ../plugins/systray/sn-dialog.glade.h:16
-msgid "Move the selected item one row up"
-msgstr "Mugitu hautatutako elementua errenkada bat gorantz"
-
-#: ../plugins/systray/sn-dialog.glade.h:17
-msgid "Move the selected item one row down"
-msgstr "Mugitu hautatutako elementua errenkada bat gorantz"
-
-#: ../plugins/systray/sn-dialog.glade.h:18
-msgid "Known Items"
-msgstr "Elementu ezagunak"
-
-#: ../plugins/systray/sn-dialog.glade.h:19
-msgid "_Menu is primary action"
-msgstr "_Menua funtsezko ekintza da"
-
-#: ../plugins/systray/sn-dialog.glade.h:20
-msgid "Left click will always display the menu for item"
-msgstr "Ezkerreko klikak beti erakutsiko du elementuarentzako menua"
-
-#: ../plugins/systray/sn-dialog.glade.h:21
-msgid "_Request symbolic icons"
-msgstr "_Eskatu ikono sinbolikoak"
-
-#: ../plugins/systray/sn-dialog.glade.h:22
-msgid "Load symbolic icons if available"
-msgstr "Kargatu ikono sinbolikoak erabilgarri badaude"
-
-#: ../plugins/systray/sn-dialog.glade.h:23
-msgid "Features"
-msgstr "Ezaugarriak"
-
-#: ../plugins/systray/sn-dialog.glade.h:24
-msgid "Status Notifiers"
-msgstr "Egoeraren berri-emaileak"
-
-#: ../plugins/systray/sn-dialog.glade.h:25
-msgid "Systray Icons"
-msgstr "Systray ikonoak"
 
 #: ../plugins/systray/systray.c:145
 msgid "Unable to start the notification area"
@@ -2046,150 +1125,38 @@ msgstr "Beri-emate eremuak hautapena galtzen du"
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Huts %d pantailaren kudeatzaile hautapena eskuratzerakoan"
 
-#: ../plugins/systray/systray.desktop.in.in.h:1
-msgid "Status Tray Plugin"
-msgstr "Egoera erretilu plugina"
-
-#: ../plugins/systray/systray.desktop.in.in.h:2
-msgid ""
-"Provides status notifier items (application indicators) and legacy systray "
-"items"
-msgstr "Egoera berri-emailearen elementuak (aplikazio adierazleak) eta jasotako systray elementuak hornitzen ditu"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:1
-msgid "Nothing"
-msgstr "Ezer ez"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:2
-msgid "Close Window"
-msgstr "Itxi Leihoa"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:3
-msgid "Minimize Window"
-msgstr "Txikitu Leihoa"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:4
-msgid "New Instance"
-msgstr "Instantzia berria"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:5
-msgid "Timestamp"
-msgstr "Data-marka"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:6
-msgid "Group title and timestamp"
-msgstr "Taldekatu izenburu eta data-markaz"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:7
-msgid "Window title"
-msgstr "Leiho izenburua"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:8
-msgid "Group title and window title"
-msgstr "Taldekatu izenburu eta leiho izenburuz"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:9
-msgid "None, allow drag-and-drop"
-msgstr "Batez, onartu arrastratu-eta-jaregin"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
-#: ../plugins/tasklist/tasklist.desktop.in.in.h:1
-msgid "Window Buttons"
-msgstr "Leiho botoiak"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
-msgid "Show button _labels"
-msgstr "Ikusi botoi e_tiketak"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
-msgid "Show _flat buttons"
-msgstr "Botoi _mugikorrak erabili"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
-msgid "Show _handle"
-msgstr "Ikusi _kudeatzailea"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
-msgid "Show _tooltips"
-msgstr "Argibideak erakutsi"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
-msgid "Sorting _order:"
-msgstr "Sailkatze ordena:"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
-msgid "Mi_ddle click action:"
-msgstr "Er_diko botoiaren ekintza:"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
-msgid "_Group windows by application"
-msgstr "Leihoak aplikazioen arabera taldekatu"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
-msgid "Restore minimized windows to current _workspace"
-msgstr "Berrezarri minimizaturiko leihoak uneko lan-eremuan"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
-msgid "D_raw window frame when hovering a button"
-msgstr "Ma_rraztu leiho markoa botoia nabarmentzean"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:23
-msgid "_Switch windows using the mouse wheel"
-msgstr "Idazmahai birtualak sagu _gurpilaren bidez txandakatu"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
-msgid "Behaviour"
-msgstr "Portamoldea"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:25
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:11
-msgid "Show windows from _all workspaces"
-msgstr "Ikusi lan-eremu guztietako leihoak"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:26
-msgid "Show windows from all mo_nitors"
-msgstr "Ikusi mo_nitore guztietako leihoak"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:27
-msgid "Show only _minimized windows"
-msgstr "Ikusi bakarrik _minimizatutako leihoak"
-
-#: ../plugins/tasklist/tasklist-widget.c:3107
+#: ../plugins/tasklist/tasklist-widget.c:3109
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Ezin da '%s' instantzia berria hasi"
 
-#: ../plugins/tasklist/tasklist-widget.c:3111
+#: ../plugins/tasklist/tasklist-widget.c:3113
 msgid "Error"
 msgstr "Errorea"
 
-#: ../plugins/tasklist/tasklist-widget.c:3140
+#: ../plugins/tasklist/tasklist-widget.c:3142
 msgid "Launch New Instance"
 msgstr "Instantzia berria abiarazi"
 
-#: ../plugins/tasklist/tasklist-widget.c:3885
+#: ../plugins/tasklist/tasklist-widget.c:3887
 msgid "Mi_nimize All"
 msgstr "Mi_nimizatu dena"
 
-#: ../plugins/tasklist/tasklist-widget.c:3892
+#: ../plugins/tasklist/tasklist-widget.c:3894
 msgid "Un_minimize All"
 msgstr "De_sminimizatu dena"
 
-#: ../plugins/tasklist/tasklist-widget.c:3899
+#: ../plugins/tasklist/tasklist-widget.c:3901
 msgid "Ma_ximize All"
 msgstr "Ma_ximizatu dena"
 
-#: ../plugins/tasklist/tasklist-widget.c:3906
+#: ../plugins/tasklist/tasklist-widget.c:3908
 msgid "_Unmaximize All"
 msgstr "_Desmaximizatu dena"
 
-#: ../plugins/tasklist/tasklist-widget.c:3917
+#: ../plugins/tasklist/tasklist-widget.c:3919
 msgid "_Close All"
 msgstr "_Itxi dena"
-
-#: ../plugins/tasklist/tasklist.desktop.in.in.h:2
-msgid "Switch between open windows using buttons"
-msgstr "Aldatu irekitako leihoen artean botoiak erabiliaz"
 
 #: ../plugins/windowmenu/windowmenu.c:689
 msgid "Desktop"
@@ -2216,36 +1183,3 @@ msgstr "\"%s\" lan-eremua ezabatu"
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "%d Idazmahaia ezabatu"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
-msgid "Icon"
-msgstr "Ikonoa"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
-msgid "Arrow"
-msgstr "Gezia"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
-#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:1
-msgid "Window Menu"
-msgstr "Leiho menua"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
-msgid "Button layout:"
-msgstr "Botoi diseinua:"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
-msgid "Show workspace a_ctions"
-msgstr "Ikusi idazmahai e_kintzak"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
-msgid "Show workspace _names"
-msgstr "Ikusi idazmahai ize_nak"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
-msgid "Enable _urgency notification"
-msgstr "Gait_u larrialdiko berri-ematea"
-
-#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
-msgid "Switch between open windows using a menu"
-msgstr "Aldatu irekitako leihoen artean menua erabiliaz"
