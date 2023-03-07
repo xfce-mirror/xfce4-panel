@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce4-panel.master package.
 # 
 # Translators:
 # Nikola Radovanović <cobisimo@gmail.com>, 2018
@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-07 00:46+0100\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2023-03-07 12:47+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Саша Петровић <salepetronije@gmail.com>, 2012-2014,2017,2019,2022\n"
 "Language-Team: Serbian (http://www.transifex.com/xfce/xfce4-panel/language/sr/)\n"
@@ -23,216 +23,245 @@ msgstr ""
 "Language: sr\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+#: panel-desktop-handler.desktop.in:4
+msgid "Create Launcher on the panel"
+msgstr "Направи покретач на полици"
+
+#: panel-desktop-handler.desktop.in:5
+msgid ""
+"Add a new launcher to the panel based on the information of this desktop "
+"file"
+msgstr "Додај нови покретач на полицу на основу података о овој датотеци радне површи"
+
+#: panel-desktop-handler.desktop.in:7
+msgid "application-x-executable"
+msgstr ""
+
+#: panel-preferences.desktop.in:5
+msgid "org.xfce.panel"
+msgstr ""
+
+#: panel-preferences.desktop.in:8
+msgid ""
+"panels;settings;preferences;taskbar;autohide;application "
+"menu;start;buttons;launcher;notification area;status;icons;plugins;"
+msgstr "полице;поставка;подешавања;својства;трака;самоскривај;изборник датотека;дугмад;покретач;обавештајна област;стање;сличице;прикључци;"
+
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3574
+msgid "Panel"
+msgstr "Полица"
+
+#: panel-preferences.desktop.in:16
+msgid "Customize the panel"
+msgstr "Прилагоди полицу"
+
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1095
-#: ../panel/panel-preferences-dialog.c:1449
+#: libxfce4panel/xfce-panel-plugin.c:1095
+#: panel/panel-preferences-dialog.c:1449
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Да ли сте сигурни да желите уклонити „%s“?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1100
-#: ../panel/panel-preferences-dialog.c:1452
+#: libxfce4panel/xfce-panel-plugin.c:1100
+#: panel/panel-preferences-dialog.c:1452
 msgid "Remove Item"
 msgstr "Уклони ставку"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1102
+#: libxfce4panel/xfce-panel-plugin.c:1102
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "Уклањање ставке са полице такође доводи до губитка њених поставки."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1103 ../panel/panel-dialogs.c:164
-#: ../panel/panel-preferences-dialog.c:1456
-#: ../plugins/applicationsmenu/applicationsmenu.c:602
-#: ../plugins/directorymenu/directorymenu.c:461
-#: ../plugins/directorymenu/directorymenu.c:927
+#: libxfce4panel/xfce-panel-plugin.c:1103 panel/panel-dialogs.c:164
+#: panel/panel-preferences-dialog.c:1456
+#: plugins/applicationsmenu/applicationsmenu.c:602
+#: plugins/directorymenu/directorymenu.c:461
+#: plugins/directorymenu/directorymenu.c:927
 msgid "_Cancel"
 msgstr "_Откажи"
 
 #. remove
-#: ../libxfce4panel/xfce-panel-plugin.c:1104
-#: ../libxfce4panel/xfce-panel-plugin.c:1271
-#: ../panel/panel-plugin-external.c:409
-#: ../panel/panel-preferences-dialog.c:1047
-#: ../panel/panel-preferences-dialog.c:1457
-#: ../plugins/launcher/launcher-dialog.c:860
+#: libxfce4panel/xfce-panel-plugin.c:1104
+#: libxfce4panel/xfce-panel-plugin.c:1271 panel/panel-plugin-external.c:409
+#: panel/panel-preferences-dialog.c:1047 panel/panel-preferences-dialog.c:1457
+#: plugins/launcher/launcher-dialog.c:860
 msgid "_Remove"
 msgstr "_Уклони"
 
 #. properties item
-#: ../libxfce4panel/xfce-panel-plugin.c:1233
+#: libxfce4panel/xfce-panel-plugin.c:1233
 msgid "_Properties"
 msgstr "_Својства"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:3650
+#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3650
 msgid "_About"
 msgstr "_О програму"
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1255
+#: libxfce4panel/xfce-panel-plugin.c:1255
 msgid "_Move"
 msgstr "_Премести"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1289
+#: libxfce4panel/xfce-panel-plugin.c:1289
 msgid "Pane_l"
 msgstr "Полиц_а"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3586
+#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3586
 msgid "Add _New Items..."
 msgstr "Додај _нове ставке..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1308 ../panel/panel-window.c:3597
+#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3597
 msgid "Panel Pr_eferences..."
 msgstr "Сво_јства полице..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1325 ../panel/panel-window.c:3625
+#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3625
 msgid "Log _Out"
 msgstr "Одја_ва"
 
 #. help item
-#: ../libxfce4panel/xfce-panel-plugin.c:1341 ../panel/panel-item-dialog.c:196
-#: ../panel/panel-window.c:3641
+#: libxfce4panel/xfce-panel-plugin.c:1341 panel/panel-item-dialog.c:196
+#: panel/panel-window.c:3641
 msgid "_Help"
 msgstr "_Помоћ"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1352
+#: libxfce4panel/xfce-panel-plugin.c:1352
 msgid "About"
 msgstr "О програму"
 
-#: ../panel/main.c:84
+#: panel/main.c:84
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Приказује прозорче „Својства полице“"
 
-#: ../panel/main.c:84 ../panel/main.c:85
+#: panel/main.c:84 panel/main.c:85
 msgid "PANEL-NUMBER"
 msgstr "БРОЈ-ПОЛИЦЕ"
 
-#: ../panel/main.c:85
+#: panel/main.c:85
 msgid "Show the 'Add New Items' dialog"
 msgstr "Приказује прозорче „Додај нове ставке“"
 
-#: ../panel/main.c:86
+#: panel/main.c:86
 msgid "Save the panel configuration"
 msgstr "Сачувај подешавања полице"
 
-#: ../panel/main.c:87
+#: panel/main.c:87
 msgid "Add a new plugin to the panel"
 msgstr "Додај нови прикључак на полицу"
 
-#: ../panel/main.c:87
+#: panel/main.c:87
 msgid "PLUGIN-NAME"
 msgstr "НАЗИВ-ПРИКЉУЧКА"
 
-#: ../panel/main.c:88
+#: panel/main.c:88
 msgid "Restart the running panel instance"
 msgstr "Поново покрени примерак покренуте полице"
 
-#: ../panel/main.c:89
+#: panel/main.c:89
 msgid "Quit the running panel instance"
 msgstr "Обустави примерак полице у погону"
 
-#: ../panel/main.c:90
+#: panel/main.c:90
 msgid "Do not wait for a window manager on startup"
 msgstr "Не чекај управника прозора при покретању"
 
-#: ../panel/main.c:91
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
+#: panel/main.c:91 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "Испиши податке о издању и изађи"
 
 #. parse context options
-#: ../panel/main.c:274
+#: panel/main.c:274
 msgid "[ARGUMENTS...]"
 msgstr "[АРГУМЕНТИ...]"
 
-#: ../panel/main.c:281
+#: panel/main.c:281
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Упишите „%s --help“ за коришћење."
 
-#: ../panel/main.c:300
+#: panel/main.c:300
 msgid "The Xfce development team. All rights reserved."
 msgstr "Развојна дружина ИксФЦЕ-а. Сва права су задржана."
 
-#: ../panel/main.c:301
+#: panel/main.c:301
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Молим, пријавите грешке на <%s>."
 
 #. quit without error if an instance is running
-#: ../panel/main.c:404
+#: panel/main.c:404
 msgid "There is already a running instance"
 msgstr "Један примерак је већ покренут"
 
 #. spawn ourselfs again
-#: ../panel/main.c:412
+#: panel/main.c:412
 msgid "Restarting..."
 msgstr "Поновно покрећем..."
 
-#: ../panel/main.c:427
+#: panel/main.c:427
 msgid "Failed to show the preferences dialog"
 msgstr "Нисам успео да прикажем прозорче подешавања"
 
-#: ../panel/main.c:429
+#: panel/main.c:429
 msgid "Failed to show the add new items dialog"
 msgstr "Нисам успео да прикажем прозорче за додавање нових ставки"
 
-#: ../panel/main.c:431
+#: panel/main.c:431
 msgid "Failed to save the panel configuration"
 msgstr "Нисам успео да сачувам подешавања полице"
 
-#: ../panel/main.c:433
+#: panel/main.c:433
 msgid "Failed to add a plugin to the panel"
 msgstr "Нисам успео да додам прикључак на полицу"
 
-#: ../panel/main.c:435
+#: panel/main.c:435
 msgid "Failed to restart the panel"
 msgstr "Нисам успео да поновно покренем полицу"
 
-#: ../panel/main.c:437
+#: panel/main.c:437
 msgid "Failed to quit the panel"
 msgstr "Нисам успео да напустим полицу"
 
-#: ../panel/main.c:439
+#: panel/main.c:439
 msgid "Failed to send D-Bus message"
 msgstr "Нисам успео да пошаљем поруку Д-сабирнице"
 
-#: ../panel/main.c:449
+#: panel/main.c:449
 msgid "Execute"
 msgstr "Изврши"
 
-#: ../panel/main.c:450
+#: panel/main.c:450
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Да ли желите да покренете полицу? Ако желите, будите сигурни да сте сачували седницу приликом одјављивања, тако да би полица била самостално покренута када се следећи пут пријавите."
 
-#: ../panel/main.c:453 ../panel/main.c:467
+#: panel/main.c:453 panel/main.c:467
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Није пронађен покренути примерак %s"
 
-#: ../panel/panel-application.c:222
+#: panel/panel-application.c:222
 msgid "Failed to launch the migration application"
 msgstr "Нисам успео да покренем програм за пресељење"
 
-#: ../panel/panel-application.c:1035
+#: panel/panel-application.c:1035
 msgid "Create _Launcher"
 msgstr "Направи _покретач"
 
-#: ../panel/panel-application.c:1036
+#: panel/panel-application.c:1036
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Ово ће направити нови прикључак покретача на полици и убацити спуштене датотеке као ставке изборника."
 
-#: ../panel/panel-application.c:1038
+#: panel/panel-application.c:1038
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -240,103 +269,103 @@ msgstr[0] "Направи нови покретач из %d датотеке р�
 msgstr[1] "Направи нови покретач из %d датотеке радне површи"
 msgstr[2] "Направи нови покретач из %d датотека радне површи"
 
-#: ../panel/panel-application.c:1795
+#: panel/panel-application.c:1795
 msgid "Quit"
 msgstr "Одустани"
 
-#: ../panel/panel-application.c:1796
+#: panel/panel-application.c:1796
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Покренули сте Икс без управника седниице. Клик на „Изађи“ ће затворити Икс-служитеља."
 
-#: ../panel/panel-application.c:1797
+#: panel/panel-application.c:1797
 msgid "Are you sure you want to quit the panel?"
 msgstr "Да ли сте сигурни да желите затворити полицу?"
 
-#: ../panel/panel-application.c:1805
+#: panel/panel-application.c:1805
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Нисам успео да извршим наредбу „%s“"
 
-#: ../panel/panel-dbus-client.c:218
+#: panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "Наведен је неисправан облик догађаја прикључка. Употребите НАЗИВ-ПРИКЉУЧКА:НАЗИВ[:ВРСТА:ВРЕДНОСТ]."
 
-#: ../panel/panel-dbus-client.c:248
+#: panel/panel-dbus-client.c:248
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
 msgstr "Неисправна врста наговештаја „%s“. Исправне врсте су „bool“, „double“, „int“, „string“ и „uint“."
 
-#: ../panel/panel-dialogs.c:58
+#: panel/panel-dialogs.c:58
 msgid "Unable to open the e-mail address"
 msgstr "Нисам успео отворити адресу е-поште"
 
-#: ../panel/panel-dialogs.c:84
+#: panel/panel-dialogs.c:84
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Полица радног окружења ИксФЦЕ-а"
 
-#: ../panel/panel-dialogs.c:88
+#: panel/panel-dialogs.c:88
 msgid "translator-credits"
 msgstr "Саша Петровић <salepetronije@gmail.com>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:162
+#: panel/panel-dialogs.c:162
 msgid "Add New Item"
 msgstr "Додај нову ставку"
 
-#: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:192
+#: panel/panel-dialogs.c:165 panel/panel-item-dialog.c:192
 msgid "_Add"
 msgstr "_Додај"
 
-#: ../panel/panel-dialogs.c:176
+#: panel/panel-dialogs.c:176
 msgid "Please choose a panel for the new plugin:"
 msgstr "Изаберите полицу за нови прикључак:"
 
-#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:986
+#: panel/panel-dialogs.c:196 panel/panel-preferences-dialog.c:986
 #, c-format
 msgid "Panel %d"
 msgstr "Полица %d"
 
-#: ../panel/panel-dialogs.c:236
+#: panel/panel-dialogs.c:236
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr "Зато што је полица ради у начину коша, вама није допуштено да уносите измене у подешавањима полице као обичан корисник"
 
-#: ../panel/panel-dialogs.c:238
+#: panel/panel-dialogs.c:238
 msgid "Modifying the panel is not allowed"
 msgstr "Измена полице није дозвољена"
 
-#: ../panel/panel-item-dialog.c:186
+#: panel/panel-item-dialog.c:186
 msgid "Add New Items"
 msgstr "Додај нове ставке"
 
-#: ../panel/panel-item-dialog.c:200 ../panel/panel-tic-tac-toe.c:117
+#: panel/panel-item-dialog.c:200 panel/panel-tic-tac-toe.c:117
 msgid "_Close"
 msgstr "_Затвори"
 
-#: ../panel/panel-item-dialog.c:216
+#: panel/panel-item-dialog.c:216
 msgid "_Search:"
 msgstr "_Тражи:"
 
-#: ../panel/panel-item-dialog.c:224
+#: panel/panel-item-dialog.c:224
 msgid "Enter search phrase here"
 msgstr "Унесите овде кључну реч претраге"
 
-#: ../panel/panel-plugin-external.c:400
+#: panel/panel-plugin-external.c:400
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "Прикључак „%s“ је неочекивано нестао са полице, да ли желите поново да га покренете?"
 
-#: ../panel/panel-plugin-external.c:403
+#: panel/panel-plugin-external.c:403
 msgid "Plugin Restart"
 msgstr "Препокретање прикључка"
 
-#: ../panel/panel-plugin-external.c:404
+#: panel/panel-plugin-external.c:404
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -344,43 +373,43 @@ msgid ""
 "permanently removed from the panel."
 msgstr "Прикључак се поново покретао више пута за %d секунде. Ако притиснете „Изврши“ полица ће покушати поново да покрене прикључак у супротном ће бити трајно уклоњен са полице."
 
-#: ../panel/panel-plugin-external.c:408
+#: panel/panel-plugin-external.c:408
 msgid "_Execute"
 msgstr "_Изврши"
 
-#: ../panel/panel-preferences-dialog.c:540
+#: panel/panel-preferences-dialog.c:540
 msgid "Automatic"
 msgstr "Самостално"
 
-#: ../panel/panel-preferences-dialog.c:550
+#: panel/panel-preferences-dialog.c:550
 msgid "Primary"
 msgstr "Главни"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:569
+#: panel/panel-preferences-dialog.c:569
 #, c-format
 msgid "Monitor %d"
 msgstr "Приказ %d"
 
-#: ../panel/panel-preferences-dialog.c:1048
+#: panel/panel-preferences-dialog.c:1048
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Поставке полице и прикључака ће бити трајно уклоњене"
 
-#: ../panel/panel-preferences-dialog.c:1049
+#: panel/panel-preferences-dialog.c:1049
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Да ли сте сигурни да желите да уклоните полицу %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1291
+#: panel/panel-preferences-dialog.c:1291
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(спољни)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1296
+#: panel/panel-preferences-dialog.c:1296
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -389,794 +418,914 @@ msgstr "Унутрашњи назив: %s-%d\nПЛБ: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1308
+#: panel/panel-preferences-dialog.c:1308
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Унутрашњи назив: %s-%d"
 
-#: ../panel/panel-preferences-dialog.c:1454
+#: panel/panel-preferences-dialog.c:1454
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Ако уклоните ставку са полице, биће заувек изгубљена."
 
-#: ../panel/panel-tic-tac-toe.c:115
+#: panel/panel-tic-tac-toe.c:115
 msgid "_New Game"
 msgstr "_Нова игра"
 
-#: ../panel/panel-tic-tac-toe.c:126
+#: panel/panel-tic-tac-toe.c:126
 msgid "_Level:"
 msgstr "_Ступањ:"
 
-#: ../panel/panel-tic-tac-toe.c:132
+#: panel/panel-tic-tac-toe.c:132
 msgid "Novice"
 msgstr "Новајлија"
 
-#: ../panel/panel-tic-tac-toe.c:133
+#: panel/panel-tic-tac-toe.c:133
 msgid "Intermediate"
 msgstr "Осредњи"
 
-#: ../panel/panel-tic-tac-toe.c:134
+#: panel/panel-tic-tac-toe.c:134
 msgid "Experienced"
 msgstr "Искусан"
 
-#: ../panel/panel-tic-tac-toe.c:135
+#: panel/panel-tic-tac-toe.c:135
 msgid "Expert"
 msgstr "Стручњак"
 
-#: ../panel/panel-window.c:3574
-msgid "Panel"
-msgstr "Полица"
-
-#: ../panel/panel-window.c:3611
+#: panel/panel-window.c:3611
 msgid "_Lock Panel"
 msgstr "_Закључај полицу"
 
-#: ../migrate/main.c:111
+#: migrate/main.c:111
 msgid "Failed to load the default configuration"
 msgstr "Нисам успео да учитам основна подешавања"
 
-#: ../migrate/main.c:123
+#: migrate/main.c:123
 msgid "Panel config needs migration..."
 msgstr "Подешавања полице захтевају пресељење..."
 
-#: ../migrate/main.c:127
+#: migrate/main.c:127
 msgid "Failed to migrate the existing configuration"
 msgstr "Нисам успео да извезем постојећа подешавања"
 
-#: ../migrate/main.c:133
+#: migrate/main.c:133
 msgid "Panel configuration has been updated."
 msgstr "Подешавања полице су освежена."
 
-#: ../plugins/actions/actions.c:36
+#: plugins/actions/actions.c:36
 msgid "Session Menu"
 msgstr "Изборник седнице"
 
-#: ../plugins/actions/actions.c:157
+#: plugins/actions/actions.c:157
 msgid "Log Out"
 msgstr "Одјава"
 
-#: ../plugins/actions/actions.c:158
+#: plugins/actions/actions.c:158
 msgid "_Log Out"
 msgstr "_Одјава"
 
-#: ../plugins/actions/actions.c:159
+#: plugins/actions/actions.c:159
 msgid "Are you sure you want to log out?"
 msgstr "Да ли сигурно желите да се одјавите?"
 
-#: ../plugins/actions/actions.c:160
+#: plugins/actions/actions.c:160
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Одјављујем се кроз %d секунде."
 
-#: ../plugins/actions/actions.c:166
+#: plugins/actions/actions.c:166
 msgid "Log Out..."
 msgstr "Одјављивање..."
 
-#: ../plugins/actions/actions.c:167
+#: plugins/actions/actions.c:167
 msgid "Log _Out..."
 msgstr "Одја_ви ме..."
 
-#: ../plugins/actions/actions.c:174
+#: plugins/actions/actions.c:174
 msgid "Switch User"
 msgstr "Промени корисника"
 
-#: ../plugins/actions/actions.c:175
+#: plugins/actions/actions.c:175
 msgid "_Switch User"
 msgstr "_Промени корисника"
 
-#: ../plugins/actions/actions.c:182
+#: plugins/actions/actions.c:182
 msgid "Lock Screen"
 msgstr "Закључај заслон"
 
-#: ../plugins/actions/actions.c:183
+#: plugins/actions/actions.c:183
 msgid "Loc_k Screen"
 msgstr "Закључа_ј заслон"
 
-#: ../plugins/actions/actions.c:190
+#: plugins/actions/actions.c:190
 msgid "Hibernate"
 msgstr "Замрзни"
 
-#: ../plugins/actions/actions.c:191
+#: plugins/actions/actions.c:191
 msgid "_Hibernate"
 msgstr "_Замрзни"
 
-#: ../plugins/actions/actions.c:192
+#: plugins/actions/actions.c:192
 msgid "Do you want to suspend to disk?"
 msgstr "Да ли желите да обуставите на диску?"
 
-#: ../plugins/actions/actions.c:193
+#: plugins/actions/actions.c:193
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Замрзавам рачунар за %d секунде."
 
-#: ../plugins/actions/actions.c:199
+#: plugins/actions/actions.c:199
 msgid "Hybrid Sleep"
 msgstr "Укрштено успављивање"
 
-#: ../plugins/actions/actions.c:200
+#: plugins/actions/actions.c:200
 msgid "_Hybrid Sleep"
 msgstr "Укрштено успављивање"
 
-#: ../plugins/actions/actions.c:201
+#: plugins/actions/actions.c:201
 msgid "Do you want to hibernate and suspend the system?"
 msgstr "Да ли желите замрзнути или обуставити рачунар?"
 
-#: ../plugins/actions/actions.c:202
+#: plugins/actions/actions.c:202
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr "Замрзавање и обустављање рачунара кроз %d секунди."
 
-#: ../plugins/actions/actions.c:208
+#: plugins/actions/actions.c:208
 msgid "Suspend"
 msgstr "Обустави"
 
-#: ../plugins/actions/actions.c:209
+#: plugins/actions/actions.c:209
 msgid "Sus_pend"
 msgstr "Обуст_ави"
 
-#: ../plugins/actions/actions.c:210
+#: plugins/actions/actions.c:210
 msgid "Do you want to suspend to RAM?"
 msgstr "Да ли желите да обуставите у РАМ?"
 
-#: ../plugins/actions/actions.c:211
+#: plugins/actions/actions.c:211
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Обустављам рачунар за %d секунде."
 
-#: ../plugins/actions/actions.c:217
+#: plugins/actions/actions.c:217
 msgid "Restart"
 msgstr "Поново покрени"
 
-#: ../plugins/actions/actions.c:218
+#: plugins/actions/actions.c:218
 msgid "_Restart"
 msgstr "_Поново покрени"
 
-#: ../plugins/actions/actions.c:219
+#: plugins/actions/actions.c:219
 msgid "Are you sure you want to restart?"
 msgstr "Да ли сте сигурни да желите поново да покренете рачунар?"
 
-#: ../plugins/actions/actions.c:220
+#: plugins/actions/actions.c:220
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Поново ћу покренути кроз %d секунде."
 
-#: ../plugins/actions/actions.c:226
+#: plugins/actions/actions.c:226
 msgid "Shut Down"
 msgstr "Искључивање"
 
-#: ../plugins/actions/actions.c:227
+#: plugins/actions/actions.c:227
 msgid "Shut _Down"
 msgstr "_Искључи"
 
-#: ../plugins/actions/actions.c:228
+#: plugins/actions/actions.c:228
 msgid "Are you sure you want to shut down?"
 msgstr "Да ли сте сигурни да желите да искључите рачунар?"
 
-#: ../plugins/actions/actions.c:229
+#: plugins/actions/actions.c:229
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Искључићу рачунар за %d секунде."
 
-#: ../plugins/actions/actions.c:677
+#: plugins/actions/actions.c:677 plugins/separator/separator.desktop.in.in:4
 msgid "Separator"
 msgstr "Раздвајач"
 
-#: ../plugins/actions/actions.c:1111
+#: plugins/actions/actions.c:1111
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Нисам успео да извршим радњу „%s“"
 
-#: ../plugins/actions/actions.c:1316
+#: plugins/actions/actions.c:1316
 msgid "Little Mouse"
 msgstr "Мали миш"
 
+#: plugins/actions/actions.desktop.in.in:4
+msgid "Action Buttons"
+msgstr "Дугмад радњи"
+
+#: plugins/actions/actions.desktop.in.in:5
+msgid "Log out, lock or other system actions"
+msgstr "Одјављивање, закључавање или друге системске радње"
+
+#: plugins/actions/actions.desktop.in.in:6
+msgid "org.xfce.panel.actions"
+msgstr ""
+
 #. I18N: default tooltip of the application menu
-#: ../plugins/applicationsmenu/applicationsmenu.c:37
+#: plugins/applicationsmenu/applicationsmenu.c:37
 msgid "Applications"
 msgstr "Програми"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:600
-#: ../plugins/directorymenu/directorymenu.c:459
+#: plugins/applicationsmenu/applicationsmenu.c:600
+#: plugins/directorymenu/directorymenu.c:459
 msgid "Select An Icon"
 msgstr "Изаберите сличицу"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/directorymenu/directorymenu.c:462
+#: plugins/applicationsmenu/applicationsmenu.c:603
+#: plugins/directorymenu/directorymenu.c:462
 msgid "_OK"
 msgstr "_У реду"
 
 #. show an error dialog
-#: ../plugins/applicationsmenu/applicationsmenu.c:641
-#: ../plugins/clock/clock.c:1018 ../plugins/launcher/launcher.c:2483
+#: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1018
+#: plugins/launcher/launcher.c:2483
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Нисам успео да извршим наредбу „%s“."
 
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:27
+#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:4
+msgid "Applications Menu"
+msgstr "Изборник програма"
+
+#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:5
+msgid "Show a menu containing categories of installed applications"
+msgstr "Прикажите изборник који садржи врсте уграђених програма"
+
+#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:6
+msgid "org.xfce.panel.applicationsmenu"
+msgstr ""
+
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:27
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:27
 msgid "Usage:"
 msgstr "Употреба:"
 
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:28
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:28
 msgid "OPTION"
 msgstr "МОГУЋНОСТ"
 
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:30
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:30
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:30
 msgid "Options:"
 msgstr "Могућности:"
 
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:31
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:31
 msgid "Popup menu at current mouse position"
 msgstr "Искачући изборник на тренутном положају миша"
 
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:32
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:32
 msgid "Show help options"
 msgstr "Прикажи могућности помоћи"
 
 #. TRANSLATORS: adjust this accordingly for your locale format
-#: ../plugins/clock/clock.c:46
+#: plugins/clock/clock.c:46
 msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
 
-#: ../plugins/clock/clock.c:150
+#: plugins/clock/clock.c:150
 msgid "Week %V"
 msgstr "Седмица %V"
 
-#: ../plugins/clock/clock.c:453
+#: plugins/clock/clock.c:453
 msgid "Failed to execute clock command"
 msgstr "Нисам успео да извршим наредбу часовника"
 
-#: ../plugins/clock/clock.c:957
+#: plugins/clock/clock.c:957
 msgid "Custom Format"
 msgstr "Произвољни облик"
 
-#: ../plugins/clock/clock-digital.h:27
+#: plugins/clock/clock-digital.h:27
 msgctxt "Time"
 msgid "%R"
 msgstr "%R"
 
-#: ../plugins/clock/clock-digital.h:28
+#: plugins/clock/clock-digital.h:28
 msgctxt "Date"
 msgid "%Y-%m-%d"
 msgstr "%Y-%m-%d"
 
-#: ../plugins/clock/clock-fuzzy.c:82
+#: plugins/clock/clock-fuzzy.c:82
 msgid "Night"
 msgstr "Ноћ"
 
-#: ../plugins/clock/clock-fuzzy.c:83
+#: plugins/clock/clock-fuzzy.c:83
 msgid "Early morning"
 msgstr "Рано јутро"
 
-#: ../plugins/clock/clock-fuzzy.c:84
+#: plugins/clock/clock-fuzzy.c:84
 msgid "Morning"
 msgstr "Јутро"
 
-#: ../plugins/clock/clock-fuzzy.c:85
+#: plugins/clock/clock-fuzzy.c:85
 msgid "Almost noon"
 msgstr "Близина поднева"
 
-#: ../plugins/clock/clock-fuzzy.c:86
+#: plugins/clock/clock-fuzzy.c:86
 msgid "Noon"
 msgstr "Подне"
 
-#: ../plugins/clock/clock-fuzzy.c:87
+#: plugins/clock/clock-fuzzy.c:87
 msgid "Afternoon"
 msgstr "Поподне"
 
-#: ../plugins/clock/clock-fuzzy.c:88
+#: plugins/clock/clock-fuzzy.c:88
 msgid "Evening"
 msgstr "Вече"
 
-#: ../plugins/clock/clock-fuzzy.c:89
+#: plugins/clock/clock-fuzzy.c:89
 msgid "Late evening"
 msgstr "Касно увече"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: ../plugins/clock/clock-fuzzy.c:96
+#: plugins/clock/clock-fuzzy.c:96
 #, no-c-format
 msgid "%0 o'clock"
 msgstr "%0 часова"
 
-#: ../plugins/clock/clock-fuzzy.c:97
+#: plugins/clock/clock-fuzzy.c:97
 #, no-c-format
 msgid "five past %0"
 msgstr "%0 и пет"
 
-#: ../plugins/clock/clock-fuzzy.c:98
+#: plugins/clock/clock-fuzzy.c:98
 #, no-c-format
 msgid "ten past %0"
 msgstr "%0 и десет"
 
-#: ../plugins/clock/clock-fuzzy.c:99
+#: plugins/clock/clock-fuzzy.c:99
 #, no-c-format
 msgid "quarter past %0"
 msgstr "%0 и четврт"
 
-#: ../plugins/clock/clock-fuzzy.c:100
+#: plugins/clock/clock-fuzzy.c:100
 #, no-c-format
 msgid "twenty past %0"
 msgstr "%0 и двадесет"
 
-#: ../plugins/clock/clock-fuzzy.c:101
+#: plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "twenty five past %0"
 msgstr "%0 и двадесет пет"
 
-#: ../plugins/clock/clock-fuzzy.c:102
+#: plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "half past %0"
 msgstr "пола %1"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "twenty five to %1"
 msgstr "двадесет пет до %1"
 
-#: ../plugins/clock/clock-fuzzy.c:104
+#: plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "twenty to %1"
 msgstr "двадесет до %1"
 
-#: ../plugins/clock/clock-fuzzy.c:105
+#: plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "quarter to %1"
 msgstr "четврт до %1"
 
-#: ../plugins/clock/clock-fuzzy.c:106
+#: plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "ten to %1"
 msgstr "десет до %1"
 
-#: ../plugins/clock/clock-fuzzy.c:107
+#: plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "five to %1"
 msgstr "пет до %1"
 
-#: ../plugins/clock/clock-fuzzy.c:108
+#: plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "%1 o'clock"
 msgstr "%1 сати"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: ../plugins/clock/clock-fuzzy.c:115
+#: plugins/clock/clock-fuzzy.c:115
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "%0 сати"
 
-#: ../plugins/clock/clock-fuzzy.c:116
+#: plugins/clock/clock-fuzzy.c:116
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "%0 и пет"
 
-#: ../plugins/clock/clock-fuzzy.c:117
+#: plugins/clock/clock-fuzzy.c:117
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "%0 и десет"
 
-#: ../plugins/clock/clock-fuzzy.c:118
+#: plugins/clock/clock-fuzzy.c:118
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "%0 и четврт"
 
-#: ../plugins/clock/clock-fuzzy.c:119
+#: plugins/clock/clock-fuzzy.c:119
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "%0 и двадесет"
 
-#: ../plugins/clock/clock-fuzzy.c:120
+#: plugins/clock/clock-fuzzy.c:120
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "%0 и двадесет пет"
 
-#: ../plugins/clock/clock-fuzzy.c:121
+#: plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "пола прошло %0"
 
-#: ../plugins/clock/clock-fuzzy.c:122
+#: plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "двадесет пет до %1"
 
-#: ../plugins/clock/clock-fuzzy.c:123
+#: plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "двадесет до %1"
 
-#: ../plugins/clock/clock-fuzzy.c:124
+#: plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "четврт до %1"
 
-#: ../plugins/clock/clock-fuzzy.c:125
+#: plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "десет до %1"
 
-#: ../plugins/clock/clock-fuzzy.c:126
+#: plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "пет до %1"
 
-#: ../plugins/clock/clock-fuzzy.c:127
+#: plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "%1 сат"
 
-#: ../plugins/clock/clock-fuzzy.c:132
+#: plugins/clock/clock-fuzzy.c:132
 msgctxt "am"
 msgid "one"
 msgstr "један"
 
-#: ../plugins/clock/clock-fuzzy.c:133
+#: plugins/clock/clock-fuzzy.c:133
 msgctxt "am"
 msgid "two"
 msgstr "два"
 
-#: ../plugins/clock/clock-fuzzy.c:134
+#: plugins/clock/clock-fuzzy.c:134
 msgctxt "am"
 msgid "three"
 msgstr "три"
 
-#: ../plugins/clock/clock-fuzzy.c:135
+#: plugins/clock/clock-fuzzy.c:135
 msgctxt "am"
 msgid "four"
 msgstr "четири"
 
-#: ../plugins/clock/clock-fuzzy.c:136
+#: plugins/clock/clock-fuzzy.c:136
 msgctxt "am"
 msgid "five"
 msgstr "пет"
 
-#: ../plugins/clock/clock-fuzzy.c:137
+#: plugins/clock/clock-fuzzy.c:137
 msgctxt "am"
 msgid "six"
 msgstr "шест"
 
-#: ../plugins/clock/clock-fuzzy.c:138
+#: plugins/clock/clock-fuzzy.c:138
 msgctxt "am"
 msgid "seven"
 msgstr "седам"
 
-#: ../plugins/clock/clock-fuzzy.c:139
+#: plugins/clock/clock-fuzzy.c:139
 msgctxt "am"
 msgid "eight"
 msgstr "осам"
 
-#: ../plugins/clock/clock-fuzzy.c:140
+#: plugins/clock/clock-fuzzy.c:140
 msgctxt "am"
 msgid "nine"
 msgstr "девет"
 
-#: ../plugins/clock/clock-fuzzy.c:141
+#: plugins/clock/clock-fuzzy.c:141
 msgctxt "am"
 msgid "ten"
 msgstr "десет"
 
-#: ../plugins/clock/clock-fuzzy.c:142
+#: plugins/clock/clock-fuzzy.c:142
 msgctxt "am"
 msgid "eleven"
 msgstr "једанаест"
 
 #. I18N: 12 AM is midnight
-#: ../plugins/clock/clock-fuzzy.c:144
+#: plugins/clock/clock-fuzzy.c:144
 msgctxt "am"
 msgid "twelve"
 msgstr "дванаест"
 
-#: ../plugins/clock/clock-fuzzy.c:149
+#: plugins/clock/clock-fuzzy.c:149
 msgctxt "pm"
 msgid "one"
 msgstr "један"
 
-#: ../plugins/clock/clock-fuzzy.c:150
+#: plugins/clock/clock-fuzzy.c:150
 msgctxt "pm"
 msgid "two"
 msgstr "два"
 
-#: ../plugins/clock/clock-fuzzy.c:151
+#: plugins/clock/clock-fuzzy.c:151
 msgctxt "pm"
 msgid "three"
 msgstr "три"
 
-#: ../plugins/clock/clock-fuzzy.c:152
+#: plugins/clock/clock-fuzzy.c:152
 msgctxt "pm"
 msgid "four"
 msgstr "четири"
 
-#: ../plugins/clock/clock-fuzzy.c:153
+#: plugins/clock/clock-fuzzy.c:153
 msgctxt "pm"
 msgid "five"
 msgstr "пет"
 
-#: ../plugins/clock/clock-fuzzy.c:154
+#: plugins/clock/clock-fuzzy.c:154
 msgctxt "pm"
 msgid "six"
 msgstr "шест"
 
-#: ../plugins/clock/clock-fuzzy.c:155
+#: plugins/clock/clock-fuzzy.c:155
 msgctxt "pm"
 msgid "seven"
 msgstr "седам"
 
-#: ../plugins/clock/clock-fuzzy.c:156
+#: plugins/clock/clock-fuzzy.c:156
 msgctxt "pm"
 msgid "eight"
 msgstr "осам"
 
-#: ../plugins/clock/clock-fuzzy.c:157
+#: plugins/clock/clock-fuzzy.c:157
 msgctxt "pm"
 msgid "nine"
 msgstr "девет"
 
-#: ../plugins/clock/clock-fuzzy.c:158
+#: plugins/clock/clock-fuzzy.c:158
 msgctxt "pm"
 msgid "ten"
 msgstr "десет"
 
-#: ../plugins/clock/clock-fuzzy.c:159
+#: plugins/clock/clock-fuzzy.c:159
 msgctxt "pm"
 msgid "eleven"
 msgstr "једанаест"
 
 #. I18N: 12 PM is noon
-#: ../plugins/clock/clock-fuzzy.c:161
+#: plugins/clock/clock-fuzzy.c:161
 msgctxt "pm"
 msgid "twelve"
 msgstr "дванаест"
 
-#: ../plugins/directorymenu/directorymenu.c:289
+#: plugins/clock/clock.desktop.in.in:4
+msgid "Clock"
+msgstr "Часовник"
+
+#: plugins/clock/clock.desktop.in.in:5
+msgid "What time is it?"
+msgstr "Колико је сати?"
+
+#: plugins/clock/clock.desktop.in.in:6
+msgid "org.xfce.panel.clock"
+msgstr ""
+
+#: plugins/directorymenu/directorymenu.c:289
+#: plugins/directorymenu/directorymenu.desktop.in.in:4
 msgid "Directory Menu"
 msgstr "Изборник датотека"
 
-#: ../plugins/directorymenu/directorymenu.c:684
+#: plugins/directorymenu/directorymenu.c:684
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Нисам успео да покренем програм „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:715
+#: plugins/directorymenu/directorymenu.c:715
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Нисам успео да пропитам врсту садржаја за „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:724
+#: plugins/directorymenu/directorymenu.c:724
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Нисам пронашао подразумевани програм за „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:740
+#: plugins/directorymenu/directorymenu.c:740
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Нисам успео да покренем подразумевани програм за „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:835
+#: plugins/directorymenu/directorymenu.c:835
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Нисам успео да извршим подразумевани програм за врсту „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:916
+#: plugins/directorymenu/directorymenu.c:916
 msgid "Create New Folder"
 msgstr "Образује нову фасциклу"
 
-#: ../plugins/directorymenu/directorymenu.c:921
+#: plugins/directorymenu/directorymenu.c:921
 msgid "Create New Text Document"
 msgstr "Направи нови писани документ"
 
-#: ../plugins/directorymenu/directorymenu.c:928
+#: plugins/directorymenu/directorymenu.c:928
 msgid "C_reate"
 msgstr "_Направи"
 
-#: ../plugins/directorymenu/directorymenu.c:929
+#: plugins/directorymenu/directorymenu.c:929
 msgid "Create & _Open"
 msgstr "Направи и _отвори"
 
-#: ../plugins/directorymenu/directorymenu.c:943
+#: plugins/directorymenu/directorymenu.c:943
 msgid "Enter the new name:"
 msgstr "Унесите нов назив:"
 
-#: ../plugins/directorymenu/directorymenu.c:979
+#: plugins/directorymenu/directorymenu.c:979
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Нисам успео да направим фасциклу: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1060
+#: plugins/directorymenu/directorymenu.c:1060
 msgid "Open Folder"
 msgstr "Отвори фасциклу"
 
-#: ../plugins/directorymenu/directorymenu.c:1073
+#: plugins/directorymenu/directorymenu.c:1073
 msgid "Open in Terminal"
 msgstr "Отвори у терминалу"
 
-#: ../plugins/directorymenu/directorymenu.c:1086
+#: plugins/directorymenu/directorymenu.c:1086
 msgid "Create Folder..."
 msgstr "Прави фасциклу..."
 
-#: ../plugins/directorymenu/directorymenu.c:1099
+#: plugins/directorymenu/directorymenu.c:1099
 msgid "Create Text Document..."
 msgstr "Прави писани документ..."
 
-#: ../plugins/launcher/launcher.c:393
+#: plugins/directorymenu/directorymenu.desktop.in.in:5
+msgid "Show a directory tree in a menu"
+msgstr "Прикажи стабло фасцикли у изборнику"
+
+#: plugins/directorymenu/directorymenu.desktop.in.in:6
+msgid "org.xfce.panel.directorymenu"
+msgstr ""
+
+#: plugins/launcher/launcher.c:393
 msgid "Open launcher menu"
 msgstr "Отворите изборник покретача"
 
-#: ../plugins/launcher/launcher.c:1591
+#: plugins/launcher/launcher.c:1591
 msgid "Unnamed Item"
 msgstr "Безимена ставка"
 
-#: ../plugins/launcher/launcher.c:1789
+#: plugins/launcher/launcher.c:1789
 msgid "No items"
 msgstr "Нема ставки"
 
-#: ../plugins/launcher/launcher-dialog.c:793
+#: plugins/launcher/launcher-dialog.c:793
 msgid "Failed to open desktop item editor"
 msgstr "Нисам успео да отворим уређивача ставки радне површи"
 
-#: ../plugins/launcher/launcher-dialog.c:861
+#: plugins/launcher/launcher-dialog.c:861
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Ако обришете неку ставку, иста ће бити трајно уклоњена"
 
-#: ../plugins/launcher/launcher-dialog.c:862
+#: plugins/launcher/launcher-dialog.c:862
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Да ли сте сигурни да желите да уклоните „%s“?"
 
-#: ../plugins/launcher/launcher-dialog.c:863
+#: plugins/launcher/launcher-dialog.c:863
 msgid "Unnamed item"
 msgstr "Безимена ставка"
 
-#: ../plugins/pager/pager.c:685
+#: plugins/launcher/launcher.desktop.in.in:4
+msgid "Launcher"
+msgstr "Покретач"
+
+#: plugins/launcher/launcher.desktop.in.in:5
+msgid "Program launcher with optional menu"
+msgstr "Покретач програма са могућим додатним изборником"
+
+#: plugins/launcher/launcher.desktop.in.in:6
+msgid "org.xfce.panel.launcher"
+msgstr ""
+
+#: plugins/pager/pager.c:685
 msgid "Workspace _Settings..."
 msgstr "_Поставке радног простора..."
 
-#: ../plugins/pager/pager.c:785
+#: plugins/pager/pager.c:785
 msgid "Unable to open the workspace settings"
 msgstr "Нисам успео да покренем поставке радног простора"
 
-#: ../plugins/pager/pager-buttons.c:588 ../plugins/windowmenu/windowmenu.c:893
+#: plugins/pager/pager-buttons.c:588 plugins/windowmenu/windowmenu.c:893
 #, c-format
 msgid "Workspace %d"
 msgstr "Радни простор %d"
 
-#: ../plugins/showdesktop/showdesktop.c:245
+#: plugins/pager/pager.desktop.in.in:4
+msgid "Workspace Switcher"
+msgstr "Измењивач радног простора"
+
+#: plugins/pager/pager.desktop.in.in:5
+msgid "Switch between virtual desktops"
+msgstr "Пребацујте се између нестварних радних површи"
+
+#: plugins/pager/pager.desktop.in.in:6
+msgid "org.xfce.panel.pager"
+msgstr ""
+
+#: plugins/separator/separator.desktop.in.in:5
+msgid "Adds a separator or space between panel items"
+msgstr "Додаје раздвајач или простор између ставки на полици"
+
+#: plugins/separator/separator.desktop.in.in:6
+msgid "org.xfce.panel.separator"
+msgstr ""
+
+#: plugins/showdesktop/showdesktop.c:245
 msgid "Restore the minimized windows"
 msgstr "Поврати умањене прозоре"
 
-#: ../plugins/showdesktop/showdesktop.c:247
+#: plugins/showdesktop/showdesktop.c:247
 msgid "Minimize all open windows and show the desktop"
 msgstr "Умањи све отворене прозоре и прикажи радну површ"
 
-#: ../plugins/showdesktop/showdesktop.c:250
+#: plugins/showdesktop/showdesktop.c:250
+#: plugins/showdesktop/showdesktop.desktop.in.in:4
 msgid "Show Desktop"
 msgstr "Прикажи радну површ"
 
-#: ../plugins/systray/sn-dialog.c:645
+#: plugins/showdesktop/showdesktop.desktop.in.in:5
+msgid "Hide all windows and show the desktop"
+msgstr "Сакриј све прозоре и прикажи радну површ"
+
+#: plugins/showdesktop/showdesktop.desktop.in.in:6
+msgid "org.xfce.panel.showdesktop"
+msgstr ""
+
+#: plugins/systray/sn-dialog.c:645
 msgid "Clear"
 msgstr "Очисти"
 
-#: ../plugins/systray/sn-dialog.c:646
+#: plugins/systray/sn-dialog.c:646
 msgid "Are you sure you want to clear the list of known items?"
 msgstr "Да ли сте сигурни да желите очистити списак познатих ставки?"
 
-#: ../plugins/systray/systray.c:145
+#: plugins/systray/systray.c:145
 msgid "Unable to start the notification area"
 msgstr "Не могу да покренем обавештајну област"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:406
+#: plugins/systray/systray.c:406
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Највероватније је друга справица преузела улогу обавештајне области. Ова област ће бити ван употребе."
 
-#: ../plugins/systray/systray.c:408
+#: plugins/systray/systray.c:408
 msgid "The notification area lost selection"
 msgstr "Обавештајна област је изгубила избор"
 
-#: ../plugins/systray/systray-manager.c:402
+#: plugins/systray/systray-manager.c:402
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Нисам успео да добијем управника избора за екран %d"
 
-#: ../plugins/tasklist/tasklist-widget.c:3109
+#: plugins/systray/systray.desktop.in.in:5
+msgid "Status Tray Plugin"
+msgstr "Прикључак системске траке"
+
+#: plugins/systray/systray.desktop.in.in:6
+msgid ""
+"Provides status notifier items (application indicators) and legacy systray "
+"items"
+msgstr "Омогућава ставке обавештења о стању (указиваче програма) и уобичајене ставке системске траке"
+
+#: plugins/systray/systray.desktop.in.in:7
+msgid "org.xfce.panel.statustray"
+msgstr ""
+
+#: plugins/tasklist/tasklist-widget.c:3109
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Нисам успео да покренем нови примерак „%s“"
 
-#: ../plugins/tasklist/tasklist-widget.c:3113
+#: plugins/tasklist/tasklist-widget.c:3113
 msgid "Error"
 msgstr "Грешка"
 
-#: ../plugins/tasklist/tasklist-widget.c:3142
+#: plugins/tasklist/tasklist-widget.c:3142
 msgid "Launch New Instance"
 msgstr "Покрени нови примерак"
 
-#: ../plugins/tasklist/tasklist-widget.c:3887
+#: plugins/tasklist/tasklist-widget.c:3887
 msgid "Mi_nimize All"
 msgstr "Ум_ањи све"
 
-#: ../plugins/tasklist/tasklist-widget.c:3894
+#: plugins/tasklist/tasklist-widget.c:3894
 msgid "Un_minimize All"
 msgstr "Поништи _умањење свих"
 
-#: ../plugins/tasklist/tasklist-widget.c:3901
+#: plugins/tasklist/tasklist-widget.c:3901
 msgid "Ma_ximize All"
 msgstr "Ув_ећај Све"
 
-#: ../plugins/tasklist/tasklist-widget.c:3908
+#: plugins/tasklist/tasklist-widget.c:3908
 msgid "_Unmaximize All"
 msgstr "Поништи у_већање свих"
 
-#: ../plugins/tasklist/tasklist-widget.c:3919
+#: plugins/tasklist/tasklist-widget.c:3919
 msgid "_Close All"
 msgstr "_Затвори све"
 
-#: ../plugins/windowmenu/windowmenu.c:689
+#: plugins/tasklist/tasklist.desktop.in.in:4
+msgid "Window Buttons"
+msgstr "Дугмад прозора"
+
+#: plugins/tasklist/tasklist.desktop.in.in:5
+msgid "Switch between open windows using buttons"
+msgstr "Мењајте отворене прозоре користећи дугмад"
+
+#: plugins/tasklist/tasklist.desktop.in.in:6
+msgid "org.xfce.panel.tasklist"
+msgstr ""
+
+#: plugins/windowmenu/windowmenu.c:689
 msgid "Desktop"
 msgstr "Радна површ"
 
-#: ../plugins/windowmenu/windowmenu.c:1289
+#: plugins/windowmenu/windowmenu.c:1289
 msgid "No Windows"
 msgstr "Без прозора"
 
-#: ../plugins/windowmenu/windowmenu.c:1304
+#: plugins/windowmenu/windowmenu.c:1304
 msgid "Urgent Windows"
 msgstr "Важни прозори"
 
-#: ../plugins/windowmenu/windowmenu.c:1349
+#: plugins/windowmenu/windowmenu.c:1349
 msgid "Add Workspace"
 msgstr "Додај радни простор"
 
-#: ../plugins/windowmenu/windowmenu.c:1371
+#: plugins/windowmenu/windowmenu.c:1371
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Уклони радни простор „%s“"
 
-#: ../plugins/windowmenu/windowmenu.c:1373
+#: plugins/windowmenu/windowmenu.c:1373
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Уклони радни простор %d"
+
+#: plugins/windowmenu/windowmenu.desktop.in.in:4
+msgid "Window Menu"
+msgstr "Изборник прозора"
+
+#: plugins/windowmenu/windowmenu.desktop.in.in:5
+msgid "Switch between open windows using a menu"
+msgstr "Мењајте отворене прозоре користећи изборник"
+
+#: plugins/windowmenu/windowmenu.desktop.in.in:6
+msgid "org.xfce.panel.windowmenu"
+msgstr ""
