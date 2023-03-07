@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-01 00:46+0100\n"
+"POT-Creation-Date: 2023-03-07 00:46+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2009,2013-2015,2017-2020,2022\n"
 "Language-Team: Kazakh (http://www.transifex.com/xfce/xfce4-panel/language/kk/)\n"
@@ -18,39 +18,15 @@ msgstr ""
 "Language: kk\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: ../panel-desktop-handler.desktop.in.h:1
-msgid "Create Launcher on the panel"
-msgstr "Панельде жөнелткішті жасау"
-
-#: ../panel-desktop-handler.desktop.in.h:2
-msgid ""
-"Add a new launcher to the panel based on the information of this desktop "
-"file"
-msgstr "Бұл desktop файлының ақпараты негізінде панельге жаңа жөнелткішті қосу"
-
-#: ../panel-preferences.desktop.in.h:1
-msgid ""
-"panels;settings;preferences;taskbar;autohide;application "
-"menu;start;buttons;launcher;notification area;status;icons;plugins;"
-msgstr "панельдер;баптаулар;қалаулар;тапсырмалар панелі;автожасыру;қолданбалар мәзірі;бастау;батырмалар;жөнелткіш;хабарлау аймағы;қалып-күй;таңбашалар;плагиндер;"
-
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:3562
-msgid "Panel"
-msgstr "Панель"
-
-#: ../panel-preferences.desktop.in.h:3
-msgid "Customize the panel"
-msgstr "Панельді баптау"
-
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1095
-#: ../panel/panel-preferences-dialog.c:1410
+#: ../panel/panel-preferences-dialog.c:1449
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "\"%s\" өшіруді шынымен қалайсыз ба?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1100
-#: ../panel/panel-preferences-dialog.c:1413
+#: ../panel/panel-preferences-dialog.c:1452
 msgid "Remove Item"
 msgstr "Нәрсені өшіру"
 
@@ -60,20 +36,19 @@ msgid ""
 msgstr "Элементті панельден өшірсеңіз, оның баптаулары да жойылады."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1103 ../panel/panel-dialogs.c:164
-#: ../panel/panel-preferences-dialog.c:1417
+#: ../panel/panel-preferences-dialog.c:1456
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
-#: ../plugins/directorymenu/directorymenu.c:460
-#: ../plugins/directorymenu/directorymenu.c:926
+#: ../plugins/directorymenu/directorymenu.c:461
+#: ../plugins/directorymenu/directorymenu.c:927
 msgid "_Cancel"
 msgstr "Ба_с тарту"
 
 #. remove
 #: ../libxfce4panel/xfce-panel-plugin.c:1104
 #: ../libxfce4panel/xfce-panel-plugin.c:1271
-#: ../panel/panel-plugin-external.c:403
+#: ../panel/panel-plugin-external.c:409
 #: ../panel/panel-preferences-dialog.c:1047
-#: ../panel/panel-preferences-dialog.c:1418
-#: ../panel/panel-preferences-dialog.glade.h:58
+#: ../panel/panel-preferences-dialog.c:1457
 #: ../plugins/launcher/launcher-dialog.c:860
 msgid "_Remove"
 msgstr "Өші_ру"
@@ -84,7 +59,7 @@ msgid "_Properties"
 msgstr "Қас_иеттері"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:3638
+#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:3650
 msgid "_About"
 msgstr "Осы т_уралы"
 
@@ -98,32 +73,23 @@ msgid "Pane_l"
 msgstr "Пане_ль"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3574
+#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:3586
 msgid "Add _New Items..."
 msgstr "Жаңа _элементтерді қосу..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1308 ../panel/panel-window.c:3585
+#: ../libxfce4panel/xfce-panel-plugin.c:1308 ../panel/panel-window.c:3597
 msgid "Panel Pr_eferences..."
 msgstr "Панель ба_птаулары..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1325 ../panel/panel-window.c:3613
+#: ../libxfce4panel/xfce-panel-plugin.c:1325 ../panel/panel-window.c:3625
 msgid "Log _Out"
 msgstr "Жүйеден ш_ығу"
 
 #. help item
 #: ../libxfce4panel/xfce-panel-plugin.c:1341 ../panel/panel-item-dialog.c:196
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3629
-#: ../plugins/actions/actions-dialog.glade.h:8
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
-#: ../plugins/clock/clock-dialog.glade.h:15
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-#: ../plugins/launcher/launcher-dialog.glade.h:20
-#: ../plugins/pager/pager-dialog.glade.h:5
-#: ../plugins/separator/separator-dialog.glade.h:6
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
+#: ../panel/panel-window.c:3641
 msgid "_Help"
 msgstr "Кө_мек"
 
@@ -317,8 +283,6 @@ msgid "Add New Item"
 msgstr "Жаңа элементті қосу"
 
 #: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:192
-#: ../panel/panel-preferences-dialog.glade.h:56
-#: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
 msgstr "Қ_осу"
 
@@ -342,27 +306,14 @@ msgid "Modifying the panel is not allowed"
 msgstr "Бұл панельді түзетуге рұқсат жоқ"
 
 #: ../panel/panel-item-dialog.c:186
-#: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Add New Items"
 msgstr "Жаңа элементтерді қосу"
 
-#: ../panel/panel-item-dialog.c:200
-#: ../panel/panel-preferences-dialog.glade.h:11
-#: ../panel/panel-tic-tac-toe.c:117
-#: ../plugins/actions/actions-dialog.glade.h:7
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#: ../plugins/clock/clock-dialog.glade.h:14
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
-#: ../plugins/launcher/launcher-dialog.glade.h:17
-#: ../plugins/pager/pager-dialog.glade.h:6
-#: ../plugins/separator/separator-dialog.glade.h:5
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
+#: ../panel/panel-item-dialog.c:200 ../panel/panel-tic-tac-toe.c:117
 msgid "_Close"
 msgstr "_Жабу"
 
 #: ../panel/panel-item-dialog.c:216
-#: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "І_здеу:"
 
@@ -370,16 +321,16 @@ msgstr "І_здеу:"
 msgid "Enter search phrase here"
 msgstr "Іздеу мәтінін осында енгізіңіз"
 
-#: ../panel/panel-plugin-external.c:394
+#: ../panel/panel-plugin-external.c:400
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "\"%s\" плагині күтпегенде панельден кетті, оны қайта қосу керек пе?"
 
-#: ../panel/panel-plugin-external.c:397
+#: ../panel/panel-plugin-external.c:403
 msgid "Plugin Restart"
 msgstr "Плагинді қайта іске қосу"
 
-#: ../panel/panel-plugin-external.c:398
+#: ../panel/panel-plugin-external.c:404
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -387,7 +338,7 @@ msgid ""
 "permanently removed from the panel."
 msgstr "Плагин соңғы %d секундта бірден көп рет қайта қосылған. Орындау батырмасын бассаңыз, панель ол плагинді қайта қосып көреді, олай болмаса, ол плагин панельден өшіріледі."
 
-#: ../panel/panel-plugin-external.c:402
+#: ../panel/panel-plugin-external.c:408
 msgid "_Execute"
 msgstr "Оры_ндау"
 
@@ -416,14 +367,14 @@ msgstr "%d панелін өшіруді шынымен қалайсыз ба?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1252
+#: ../panel/panel-preferences-dialog.c:1291
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(сыртқы)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1257
+#: ../panel/panel-preferences-dialog.c:1296
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -432,255 +383,14 @@ msgstr "Ішкі аты: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1269
+#: ../panel/panel-preferences-dialog.c:1308
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Ішкі аты: %s-%d"
 
-#: ../panel/panel-preferences-dialog.c:1415
+#: ../panel/panel-preferences-dialog.c:1454
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Элементті панельден өшірсеңіз, ол толығымен жойылады."
-
-#: ../panel/panel-preferences-dialog.glade.h:1
-msgid "Never"
-msgstr "Ешқашан"
-
-#: ../panel/panel-preferences-dialog.glade.h:2
-msgid "Intelligently"
-msgstr "Ақылды"
-
-#: ../panel/panel-preferences-dialog.glade.h:3
-msgid "Always"
-msgstr "Әрқашан"
-
-#: ../panel/panel-preferences-dialog.glade.h:4
-msgid "Horizontal"
-msgstr "Жатық"
-
-#: ../panel/panel-preferences-dialog.glade.h:5
-msgid "Vertical"
-msgstr "Тік"
-
-#: ../panel/panel-preferences-dialog.glade.h:6
-msgid "Deskbar"
-msgstr "Deskbar"
-
-#: ../panel/panel-preferences-dialog.glade.h:7
-msgid "None (use system style)"
-msgstr "Жоқ (жүйелік стиль)"
-
-#: ../panel/panel-preferences-dialog.glade.h:8
-msgid "Solid color"
-msgstr "Бүтін түс"
-
-#: ../panel/panel-preferences-dialog.glade.h:9
-msgid "Background image"
-msgstr "Фон суреті"
-
-#: ../panel/panel-preferences-dialog.glade.h:10
-msgid "Panel Preferences"
-msgstr "Панель баптаулары"
-
-#: ../panel/panel-preferences-dialog.glade.h:13
-msgid "Profiles:"
-msgstr "Профильдер:"
-
-#: ../panel/panel-preferences-dialog.glade.h:14
-msgid "_Backup and restore"
-msgstr "Қор кө_шірмесін жасау және қалпына келтіру"
-
-#: ../panel/panel-preferences-dialog.glade.h:15
-msgid "Switch between panel presets"
-msgstr "Панельдің сақталған баптаулары арасында ауысу"
-
-#: ../panel/panel-preferences-dialog.glade.h:16
-msgid "Add a new panel"
-msgstr "Жаңа панельді қосу"
-
-#: ../panel/panel-preferences-dialog.glade.h:17
-msgid "Remove the currently selected panel"
-msgstr "Ағымдағы таңдаулы тұрған панельді өшіру"
-
-#: ../panel/panel-preferences-dialog.glade.h:18
-msgid "<b>General</b>"
-msgstr "<b>Жалпы</b>"
-
-#: ../panel/panel-preferences-dialog.glade.h:19
-msgid "M_ode:"
-msgstr "Реж_имі:"
-
-#: ../panel/panel-preferences-dialog.glade.h:20
-msgid "Span mo_nitors"
-msgstr "Мо_ниторларды біріктіру"
-
-#: ../panel/panel-preferences-dialog.glade.h:21
-msgid "Select this option to extend the panel over multiple monitors."
-msgstr "Панельді бірнеше мониторға созу үшін бұл опцияны таңдаңыз."
-
-#: ../panel/panel-preferences-dialog.glade.h:22
-msgid "_Lock panel"
-msgstr "Пане_льді бұғаттау"
-
-#: ../panel/panel-preferences-dialog.glade.h:23
-msgid ""
-"Select this option to hide the handles of the panel and lock its position."
-msgstr "Тұтқаларын жасырып, панельді бұғаттау үшін бұл опцияны таңдаңыз."
-
-#: ../panel/panel-preferences-dialog.glade.h:24
-msgid "Keep panel _above windows"
-msgstr "Панельді терезелер ү_стінде ұстау"
-
-#: ../panel/panel-preferences-dialog.glade.h:25
-msgid ""
-"Select this option if you want maximized windows to cover the area behind "
-"the panel. This only works when the panel is attached to a screen edge."
-msgstr "Жазық етілген терезе панельдің артындағы орынды алу керек болса, бұл опцияны таңдаңыз. Бұл әрекет панель экран шетіне тіркеліп тұрса ғана істейді."
-
-#: ../panel/panel-preferences-dialog.glade.h:26
-msgid "Au_tomatically hide the panel:"
-msgstr "Панельді ав_тожасыру:"
-
-#: ../panel/panel-preferences-dialog.glade.h:27
-msgid "O_utput:"
-msgstr "_Шығыс:"
-
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:29
-msgid "<b>Measurements</b>"
-msgstr "<b>Өлшемдер</b>"
-
-#: ../panel/panel-preferences-dialog.glade.h:30
-msgid "Row _size (pixels):"
-msgstr "Жол ө_лшемі (пикс.):"
-
-#: ../panel/panel-preferences-dialog.glade.h:31
-msgid "Num_ber of rows:"
-msgstr "Жолдар са_ны:"
-
-#: ../panel/panel-preferences-dialog.glade.h:32
-msgid "L_ength (pixels):"
-msgstr "Ұ_зындығы (пиксель):"
-
-#: ../panel/panel-preferences-dialog.glade.h:33
-msgid "A_utomatically increase the length"
-msgstr "Панель е_нін автоөзгерту"
-
-#: ../panel/panel-preferences-dialog.glade.h:34
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
-msgstr "Таңдалған болса, панель ені плагиндер талап ететін еніне дейін автоөзгертіледі."
-
-#: ../panel/panel-preferences-dialog.glade.h:35
-msgid "D_isplay"
-msgstr "Көрс_ету"
-
-#: ../panel/panel-preferences-dialog.glade.h:36
-msgid "Dark mode"
-msgstr "Қараңғы режимі"
-
-#: ../panel/panel-preferences-dialog.glade.h:37
-msgid "<b>Background</b>"
-msgstr "<b>Фон</b>"
-
-#: ../panel/panel-preferences-dialog.glade.h:38
-#: ../plugins/separator/separator-dialog.glade.h:7
-msgid "_Style:"
-msgstr "_Стиль"
-
-#: ../panel/panel-preferences-dialog.glade.h:39
-msgid "C_olor:"
-msgstr "Тү_сі:"
-
-#: ../panel/panel-preferences-dialog.glade.h:40
-msgid "Pick a Panel Color"
-msgstr "Панель түсін таңдау"
-
-#: ../panel/panel-preferences-dialog.glade.h:41
-msgid "_File:"
-msgstr "_Файл:"
-
-#: ../panel/panel-preferences-dialog.glade.h:42
-msgid "Select A Background Image"
-msgstr "Фон суретін таңдаңыз"
-
-#: ../panel/panel-preferences-dialog.glade.h:43
-msgid "<b>Icons</b>"
-msgstr "<b>Таңбашалар</b>"
-
-#: ../panel/panel-preferences-dialog.glade.h:44
-msgid "Adjust size au_tomatically"
-msgstr "Өлшемін ав_токелтіру"
-
-#: ../panel/panel-preferences-dialog.glade.h:45
-msgid "Fixed icon _size (pixels):"
-msgstr "Бекітілген таңбаша өл_шемі (пиксель):"
-
-#: ../panel/panel-preferences-dialog.glade.h:46
-msgid "<b>Opacity</b>"
-msgstr "<b>Мөлдірсіздігі</b>"
-
-#: ../panel/panel-preferences-dialog.glade.h:47
-msgid "Configure..."
-msgstr "Баптау..."
-
-#: ../panel/panel-preferences-dialog.glade.h:48
-msgid ""
-"<b>Compositing is currently disabled</b>\n"
-"Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>Композитинг сөндірілген</b>\nПанельдегі мөлдірсіздік эффектері үшін терезелер басқарушысында композитингті іске қосыңыз."
-
-#. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:51
-msgid "_Enter:"
-msgstr "_Енгізу:"
-
-#. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:53
-msgid "_Leave:"
-msgstr "Қа_лдыру:"
-
-#: ../panel/panel-preferences-dialog.glade.h:54
-msgid ""
-"Transparency when the pointer is not hovering over the panel, with 0 being "
-"fully transparent and 100 fully opaque."
-msgstr "Курсор панельдің үстінде болмаған кезде панельдің мөлдірлілігі (0 - толығымен мөлдір, 100 - мүлдем мөлдір емес)"
-
-#: ../panel/panel-preferences-dialog.glade.h:55
-msgid "Appeara_nce"
-msgstr "Сыр_тқы түрі"
-
-#: ../panel/panel-preferences-dialog.glade.h:57
-msgid "Add new item to this panel"
-msgstr "Бұл панельге жаңа элементті қосу"
-
-#: ../panel/panel-preferences-dialog.glade.h:59
-msgid "Remove currently selected item"
-msgstr "Ағымдағы таңдаулы тұрған элементті өшіру"
-
-#: ../panel/panel-preferences-dialog.glade.h:60
-#: ../plugins/launcher/launcher-dialog.glade.h:23
-msgid "Edit the currently selected item"
-msgstr "Ағымдағы таңдаулы тұрған элементті баптау"
-
-#: ../panel/panel-preferences-dialog.glade.h:61
-msgid "Show about information of the currently selected item"
-msgstr "Таңдаулы тұрған элемент ақпаратын көрсету"
-
-#: ../panel/panel-preferences-dialog.glade.h:62
-#: ../plugins/launcher/launcher-dialog.glade.h:21
-msgid "Move currently selected item up by one row"
-msgstr "Таңдаулы тұрған элементті төмен жылжыту"
-
-#: ../panel/panel-preferences-dialog.glade.h:63
-#: ../plugins/launcher/launcher-dialog.glade.h:22
-msgid "Move currently selected item down by one row"
-msgstr "Таңдаулы тұрған элементті жоғары жылжыту"
-
-#: ../panel/panel-preferences-dialog.glade.h:64
-msgid "Ite_ms"
-msgstr "Э_лементтер"
 
 #: ../panel/panel-tic-tac-toe.c:115
 msgid "_New Game"
@@ -706,7 +416,11 @@ msgstr "Орташа"
 msgid "Expert"
 msgstr "Тәжірибелі"
 
-#: ../panel/panel-window.c:3599
+#: ../panel/panel-window.c:3574
+msgid "Panel"
+msgstr "Панель"
+
+#: ../panel/panel-window.c:3611
 msgid "_Lock Panel"
 msgstr "Пане_льді бұғаттау"
 
@@ -726,68 +440,9 @@ msgstr "Ағымдағы баптауларды көшіру сәтсіз аяқ
 msgid "Panel configuration has been updated."
 msgstr "Панель баптаулары жаңартылды."
 
-#: ../plugins/actions/actions-dialog.glade.h:1
-#: ../plugins/actions/actions.desktop.in.in.h:1
-msgid "Action Buttons"
-msgstr "Әрекеттер батырмалары"
-
-#: ../plugins/actions/actions-dialog.glade.h:2 ../plugins/actions/actions.c:36
+#: ../plugins/actions/actions.c:36
 msgid "Session Menu"
 msgstr "Сессия мәзірі"
-
-#: ../plugins/actions/actions-dialog.glade.h:3
-msgid "Full Name"
-msgstr "Толық аты"
-
-#: ../plugins/actions/actions-dialog.glade.h:4
-msgid "Username"
-msgstr "Пайдаланушы аты"
-
-#: ../plugins/actions/actions-dialog.glade.h:5
-msgid "User ID"
-msgstr "Пайдаланушы идентификаторы"
-
-#: ../plugins/actions/actions-dialog.glade.h:6
-msgid "Custom"
-msgstr "Таңдауыңызша"
-
-#: ../plugins/actions/actions-dialog.glade.h:9
-msgid "Appeara_nce:"
-msgstr "Сыр_тқы түрі:"
-
-#: ../plugins/actions/actions-dialog.glade.h:10
-msgid "Title:"
-msgstr "Атауы:"
-
-#: ../plugins/actions/actions-dialog.glade.h:11
-msgid "Custo_m title:"
-msgstr "_Таңдауыңызша атауы:"
-
-#: ../plugins/actions/actions-dialog.glade.h:12
-#: ../plugins/launcher/launcher-dialog.glade.h:27
-msgid "General"
-msgstr "Жалпы"
-
-#: ../plugins/actions/actions-dialog.glade.h:13
-msgid "Visible"
-msgstr "Көрінетін"
-
-#: ../plugins/actions/actions-dialog.glade.h:14
-msgid "Action"
-msgstr "Әрекет"
-
-#: ../plugins/actions/actions-dialog.glade.h:15
-msgid "_Show confirmation dialog"
-msgstr "Ра_стау сұхбатын көрсету"
-
-#: ../plugins/actions/actions-dialog.glade.h:16
-msgid ""
-"Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Кейбір әрекеттері үшін 30 сек бөгеуі бар растау сұхбатын көрсету."
-
-#: ../plugins/actions/actions-dialog.glade.h:17
-msgid "_Actions"
-msgstr "Әр_екеттер"
 
 #: ../plugins/actions/actions.c:157
 msgid "Log Out"
@@ -916,8 +571,6 @@ msgid "Turning off computer in %d seconds."
 msgstr "Компьютер %d секундтан кейін сөндіріледі."
 
 #: ../plugins/actions/actions.c:677
-#: ../plugins/separator/separator-dialog.glade.h:2
-#: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Ажыратқыш"
 
@@ -930,108 +583,27 @@ msgstr "\"%s\" әрекетін жөнелту сәтсіз"
 msgid "Little Mouse"
 msgstr "Кішкентай тышқан"
 
-#: ../plugins/actions/actions.desktop.in.in.h:2
-msgid "Log out, lock or other system actions"
-msgstr "Шығу, экранды бұғаттау не басқа жүйелік әрекеттер"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
-#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:1
-msgid "Applications Menu"
-msgstr "Қолданбалар мәзірі"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
-msgid "_Icon:"
-msgstr "Таңба_ша:"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
-msgid "Button _title:"
-msgstr "Батырма мә_тіні:"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
-msgid "Show button on one _line"
-msgstr "Батырмаларды бір жолда ұ_стау"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
-msgid "_Show button title"
-msgstr "Бат_ырма атауын көрсету"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid "Show application d_escription in tooltip"
-msgstr "Қолданба анықтамасын қалқымалы хабарламада көр_сету"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
-msgid "Show ic_ons in menu"
-msgstr "Мәзірде таңбашаларды көрсе_ту"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
-msgid "Show generic application n_ames"
-msgstr "Қолданбалардың негізгі а_тауларын көрсету"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
-msgid ""
-"Select this option to show the generic application name in the menu, for "
-"example \"File Manager\" instead of \"Thunar\""
-msgstr "Мәзірде қолданбалардың негізгі атауын көрсету үшін, мыс. \"Thunar\" орнына \"Файлдар басқарушысы\", бұл опцияны таңдаңыз"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-#: ../plugins/clock/clock-dialog.glade.h:27
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
-#: ../plugins/separator/separator-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
-msgid "Appearance"
-msgstr "Сыртқы түрі"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
-msgid "Use the _default menu"
-msgstr "_Бастапқы мәзірді қолдану"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
-msgid "Ed_it Menu"
-msgstr "Мә_зірді түзету"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
-msgid "Use c_ustom menu file:"
-msgstr "Өзіңіздің _мәзір файлын қолдану:"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:16
-msgid "Menu _file:"
-msgstr "Мәзір _файлы:"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:17
-msgid "Select A Menu File"
-msgstr "Мәзір файлын таңдаңыз"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:18
-msgid "Menu File"
-msgstr "Мәзір файлы"
-
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu.c:37
 msgid "Applications"
 msgstr "Қолданбалар"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:600
-#: ../plugins/directorymenu/directorymenu.c:458
+#: ../plugins/directorymenu/directorymenu.c:459
 msgid "Select An Icon"
 msgstr "Таңбашаны таңдаңыз"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/directorymenu/directorymenu.c:461
+#: ../plugins/directorymenu/directorymenu.c:462
 msgid "_OK"
 msgstr "_ОК"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:641
-#: ../plugins/clock/clock.c:1018 ../plugins/launcher/launcher.c:2466
+#: ../plugins/clock/clock.c:1018 ../plugins/launcher/launcher.c:2483
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" командасын орындау сәтсіз аяқталды"
-
-#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
-msgid "Show a menu containing categories of installed applications"
-msgstr "Құрамында орнатылған қолданбалар санаттары бар мәзірді көрсету"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -1080,171 +652,6 @@ msgstr "Clock командасын орындау сәтсіз аяқталды"
 #: ../plugins/clock/clock.c:957
 msgid "Custom Format"
 msgstr "Таңдауыңызша пішім"
-
-#: ../plugins/clock/clock-dialog.glade.h:1
-msgid "Decimal"
-msgstr "Ондық"
-
-#: ../plugins/clock/clock-dialog.glade.h:2
-msgid "Sexagesimal"
-msgstr "Алпыстық"
-
-#: ../plugins/clock/clock-dialog.glade.h:3
-msgid "Binary time"
-msgstr "Екілік уақыт"
-
-#: ../plugins/clock/clock-dialog.glade.h:4
-msgid "Date, then time"
-msgstr "Күн, сосын уақыт"
-
-#: ../plugins/clock/clock-dialog.glade.h:5
-msgid "Time, then date"
-msgstr "Уақыт, сосын күн"
-
-#: ../plugins/clock/clock-dialog.glade.h:6
-msgid "Date Only"
-msgstr "Тек күн"
-
-#: ../plugins/clock/clock-dialog.glade.h:7
-msgid "Time Only"
-msgstr "Тек уақыт"
-
-#: ../plugins/clock/clock-dialog.glade.h:8
-msgid "Analog"
-msgstr "Аналогты"
-
-#: ../plugins/clock/clock-dialog.glade.h:9
-msgid "Binary"
-msgstr "Бинарлы"
-
-#: ../plugins/clock/clock-dialog.glade.h:10
-msgid "Digital"
-msgstr "Цифрлық"
-
-#: ../plugins/clock/clock-dialog.glade.h:11
-msgid "Fuzzy"
-msgstr "Дәлсіз"
-
-#: ../plugins/clock/clock-dialog.glade.h:12
-msgid "LCD"
-msgstr "LCD"
-
-#: ../plugins/clock/clock-dialog.glade.h:13
-#: ../plugins/clock/clock.desktop.in.in.h:1
-msgid "Clock"
-msgstr "Сағат"
-
-#: ../plugins/clock/clock-dialog.glade.h:16
-msgid ""
-"Name of a timezone corresponding a file in the zoneinfo database, for "
-"example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Жүйелік уақыт белдеулер дерекқорына сәйкес уақыт белдеуінің атауы. Жергілікті уақытқа қайтару үшін бос қалдырыңыз."
-
-#: ../plugins/clock/clock-dialog.glade.h:17
-msgid "Time_zone:"
-msgstr "Уақыт _белдеуі:"
-
-#: ../plugins/clock/clock-dialog.glade.h:18
-msgid "Time and Date _Settings..."
-msgstr "Уақыт және күн ба_птаулары..."
-
-#: ../plugins/clock/clock-dialog.glade.h:19
-msgid "Time Settings"
-msgstr "Уақыт баптаулары"
-
-#: ../plugins/clock/clock-dialog.glade.h:20
-msgid ""
-"If set, this command is run when the plugin is left-clicked, instead of "
-"displaying the default calendar."
-msgstr "Орнатылған болса, плагин үстінде сол жақпен шерткен кезде, үнсіз келісім бойынша күнтізбенің орнына бұл команда орындалады."
-
-#: ../plugins/clock/clock-dialog.glade.h:21
-msgid "Co_mmand:"
-msgstr "Ко_манда:"
-
-#: ../plugins/clock/clock-dialog.glade.h:22
-msgid "Calendar"
-msgstr "Күнтізбе"
-
-#: ../plugins/clock/clock-dialog.glade.h:24
-#, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with"
-" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
-"page for additional information."
-msgstr "Бұл пішім файл атына қойылатын уақыт пен күнді сипаттайды. Мысалы, %Y ағымдағы жылмен, %m аймен ал %d күнмен алмастырылады. Көбірек білу үшін, date утилитасының құжаттамасын оқыңыз."
-
-#: ../plugins/clock/clock-dialog.glade.h:25
-msgid "_Tooltip format:"
-msgstr "_Хабарлама пішімі:"
-
-#: ../plugins/clock/clock-dialog.glade.h:26
-msgid "_Layout:"
-msgstr "_Жайма:"
-
-#: ../plugins/clock/clock-dialog.glade.h:28
-msgid "Sho_w AM/PM"
-msgstr "AM/PM көрс_ету"
-
-#: ../plugins/clock/clock-dialog.glade.h:29
-msgid "Fl_ash time separators"
-msgstr "У_ақыт ажырағыштардың жыпылықтауы"
-
-#: ../plugins/clock/clock-dialog.glade.h:30
-msgid "24-_hour clock"
-msgstr "24-сағ_аттық сағат"
-
-#: ../plugins/clock/clock-dialog.glade.h:31
-msgid "Binary mode:"
-msgstr "Екілік режимі:"
-
-#: ../plugins/clock/clock-dialog.glade.h:32
-msgid "Display _seconds"
-msgstr "_Секундтарды көрсету"
-
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:34
-msgid "F_uzziness:"
-msgstr "Қыз_ықтылығы:"
-
-#: ../plugins/clock/clock-dialog.glade.h:35
-msgid "Show _inactive dots"
-msgstr "Белсен_ді емес нүстелерді көрсету"
-
-#: ../plugins/clock/clock-dialog.glade.h:36
-msgid "Show gri_d"
-msgstr "_Торды көрсету"
-
-#: ../plugins/clock/clock-dialog.glade.h:37
-msgid "Font:"
-msgstr "Қаріп:"
-
-#: ../plugins/clock/clock-dialog.glade.h:38
-msgid "Format:"
-msgstr "Пішімі:"
-
-#: ../plugins/clock/clock-dialog.glade.h:40
-#, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with"
-" the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
-"the &quot;Help&quot; page for additional information."
-msgstr "Бұл пішім панельге қойылатын уақыт пен күнді сипаттайды. Мысалы, %Y ағымдағы жылмен, %m аймен ал %d күнмен алмастырылады. Соған ұқсас, &lt;b&gt;&lt;/b&gt; тегтері қаріпті жуан қылады. Көбірек білу үшін, &quot;Көмек&quot; бетін оқыңыз."
-
-#: ../plugins/clock/clock-dialog.glade.h:41
-msgid "Date"
-msgstr "Уақыты"
-
-#: ../plugins/clock/clock-dialog.glade.h:42
-msgid "Time"
-msgstr "Уақыт"
-
-#: ../plugins/clock/clock-dialog.glade.h:43
-msgid "Clock Options"
-msgstr "Сағат баптаулары"
 
 #: ../plugins/clock/clock-digital.h:27
 msgctxt "Time"
@@ -1557,134 +964,75 @@ msgctxt "pm"
 msgid "twelve"
 msgstr "он екі"
 
-#: ../plugins/clock/clock.desktop.in.in.h:2
-msgid "What time is it?"
-msgstr "Сағат қанша?"
-
 #: ../plugins/directorymenu/directorymenu.c:289
-#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Бумалар мәзірі"
 
-#: ../plugins/directorymenu/directorymenu.c:683
+#: ../plugins/directorymenu/directorymenu.c:684
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "\"%s\" қолданбасын жөнелту сәтсіз аяқталды"
 
-#: ../plugins/directorymenu/directorymenu.c:714
+#: ../plugins/directorymenu/directorymenu.c:715
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "\"%s\" үшін құрама түрін сұрау сәтсіз аяқталды"
 
-#: ../plugins/directorymenu/directorymenu.c:723
+#: ../plugins/directorymenu/directorymenu.c:724
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "\"%s\" үшін негізгі қолданба табылмады"
 
-#: ../plugins/directorymenu/directorymenu.c:739
+#: ../plugins/directorymenu/directorymenu.c:740
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "\"%s\" үшін негізгі қолданбаны жөнелту сәтсіз аяқталды"
 
-#: ../plugins/directorymenu/directorymenu.c:834
+#: ../plugins/directorymenu/directorymenu.c:835
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "\"%s\" санаты үшін таңдамалы қолданбаны жөнелту сәтсіз аяқталды"
 
-#: ../plugins/directorymenu/directorymenu.c:915
+#: ../plugins/directorymenu/directorymenu.c:916
 msgid "Create New Folder"
 msgstr "Жаңа буманы жасау"
 
-#: ../plugins/directorymenu/directorymenu.c:920
+#: ../plugins/directorymenu/directorymenu.c:921
 msgid "Create New Text Document"
 msgstr "Жаңа мәтіндік құжатты жасау"
 
-#: ../plugins/directorymenu/directorymenu.c:927
+#: ../plugins/directorymenu/directorymenu.c:928
 msgid "C_reate"
 msgstr "Жаса_у"
 
-#: ../plugins/directorymenu/directorymenu.c:928
+#: ../plugins/directorymenu/directorymenu.c:929
 msgid "Create & _Open"
 msgstr "Жасау және а_шу"
 
-#: ../plugins/directorymenu/directorymenu.c:942
+#: ../plugins/directorymenu/directorymenu.c:943
 msgid "Enter the new name:"
 msgstr "Жаңа атын енгізіңіз:"
 
-#: ../plugins/directorymenu/directorymenu.c:978
+#: ../plugins/directorymenu/directorymenu.c:979
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Буманы жасау сәтсіз аяқталды: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1059
+#: ../plugins/directorymenu/directorymenu.c:1060
 msgid "Open Folder"
 msgstr "Буманы ашу"
 
-#: ../plugins/directorymenu/directorymenu.c:1072
+#: ../plugins/directorymenu/directorymenu.c:1073
 msgid "Open in Terminal"
 msgstr "Терминалда ашу"
 
-#: ../plugins/directorymenu/directorymenu.c:1085
+#: ../plugins/directorymenu/directorymenu.c:1086
 msgid "Create Folder..."
 msgstr "Буманы жасау..."
 
-#: ../plugins/directorymenu/directorymenu.c:1098
+#: ../plugins/directorymenu/directorymenu.c:1099
 msgid "Create Text Document..."
 msgstr "Мәтіндік құжатты жасау..."
-
-#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
-msgid "Show a directory tree in a menu"
-msgstr "Мәзірде бумалар ағашын көрсету"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
-msgid "Select A Directory"
-msgstr "Буманы таңдау"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
-msgid "_Base Directory:"
-msgstr "_Негізгі бума:"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
-msgid "Show 'New Text _Document'"
-msgstr "\"Жаңа мәтіндік құ_жаты\" көрсету"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-msgid "Show '_New Folder'"
-msgstr "\"_Жаңа бума\" көрсету"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
-msgid "Show 'Open in _Terminal'"
-msgstr "\"_Терминалда ашу\" көрсету"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
-msgid "Show '_Open _Folder'"
-msgstr "\"_Буманы ашу\" көрсету"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
-msgid "Menu"
-msgstr "Мәзір"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:13
-msgid "Show _hidden files"
-msgstr "Жас_ырын файлдарды көрсету"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:14
-msgid ""
-"Enter a list of patterns that will be used to determine which files are "
-"visible in a directory. If you specify more than one pattern here, the list "
-"items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Бумада көрінетін файлдарды анықтайтын үлгілерді енгізіңіз. Бірден көп үлгі көрсетілсе, оларды нүктелі үтірмен ажыратыңыз (мыс. *.txt;*.doc)."
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:15
-msgid "_File Pattern:"
-msgstr "_Файл үлгісі:"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:16
-#: ../plugins/tasklist/tasklist-dialog.glade.h:28
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
-msgid "Filtering"
-msgstr "Сүзгілеу"
 
 #: ../plugins/launcher/launcher.c:393
 msgid "Open launcher menu"
@@ -1694,7 +1042,7 @@ msgstr "Жөнелткіш мәзірін ашу"
 msgid "Unnamed Item"
 msgstr "Атаусыз элемент"
 
-#: ../plugins/launcher/launcher.c:1779
+#: ../plugins/launcher/launcher.c:1789
 msgid "No items"
 msgstr "Элементтер жоқ"
 
@@ -1715,114 +1063,7 @@ msgstr "\"%s\" өшіруді шынымен қалайсыз ба?"
 msgid "Unnamed item"
 msgstr "Атаусыз элемент"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:1
-msgid "Default"
-msgstr "Бастапқысы"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:2
-msgid "North"
-msgstr "Солтүстік"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:3
-msgid "West"
-msgstr "Батыс"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:4
-msgid "East"
-msgstr "Шығыс"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:5
-msgid "South"
-msgstr "Оңтүстік"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:6
-msgid "Inside Button"
-msgstr "Батырма ішінде"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:7
-msgid "Up"
-msgstr "Жоғары"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:8
-msgid "Down"
-msgstr "Төмен"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:9
-msgid "_Edit Item"
-msgstr "Элементті тү_зету"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:10
-msgid "D_elete Item"
-msgstr "Эл_ементті өшіру"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:11
-msgid "Add Appli_cation"
-msgstr "Қ_олданбаны қосу"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:12
-msgid "New _Application"
-msgstr "Жаңа қ_олданба"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:13
-msgid "New _Link"
-msgstr "Жаңа сіл_теме"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:15
-msgid "Add one or more existing items to the launcher"
-msgstr "Жөнелткішке бір не бірнеше бар элементті қосу"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:19
-#: ../plugins/launcher/launcher.desktop.in.in.h:1
-msgid "Launcher"
-msgstr "Жөнелткіш"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:24
-msgid "Delete the currently selected item"
-msgstr "Ағымдағы таңдаулы тұрған элементті өшіру"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:25
-msgid "Add a new empty item"
-msgstr "Жаңа бос элементті қосу"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:26
-msgid "Add a new hyperlink"
-msgstr "Жаңа гиперсілтемені қосу"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:28
-msgid "Disable t_ooltips"
-msgstr "Хабарламаларды сөн_діру"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:29
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button"
-" or menu items."
-msgstr "Курсорды панель батырмасы не мәзір құрамасынан өткізген кездегі хабарламаларды сөндіру үшін бұл опцияны таңдаңыз."
-
-#: ../plugins/launcher/launcher-dialog.glade.h:30
-msgid "Show _label instead of icon"
-msgstr "Таңбаша орнына бе_лгіні көрсету"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:31
-msgid "Show last _used item in panel"
-msgstr "_Панельде соңғы қолданылған нәрсені көрсету"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:32
-msgid "Select this option to move the clicked menu item to the panel."
-msgstr "Шертілген мәзірді панельге жылжыту үшін бұл опцияны таңдаңыз."
-
-#: ../plugins/launcher/launcher-dialog.glade.h:33
-msgid "_Arrow button position:"
-msgstr "Сызық_ша батырма орналасуы:"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:34
-msgid "Advanced"
-msgstr "Кеңейтілген"
-
-#: ../plugins/launcher/launcher.desktop.in.in.h:2
-msgid "Program launcher with optional menu"
-msgstr "Қосымша мәзірі бар бағдарлама жіберуші"
-
-#: ../plugins/pager/pager.c:685 ../plugins/pager/pager-dialog.glade.h:4
+#: ../plugins/pager/pager.c:685
 msgid "Workspace _Settings..."
 msgstr "Жұмыс орын _баптаулары..."
 
@@ -1835,63 +1076,6 @@ msgstr "Жұмыс орындар баптауларын ашу мүмкін е�
 msgid "Workspace %d"
 msgstr "Жұмыс орны %d"
 
-#: ../plugins/pager/pager-dialog.glade.h:1
-msgid "Buttons"
-msgstr "Батырмалар"
-
-#: ../plugins/pager/pager-dialog.glade.h:2
-msgid "Miniature View"
-msgstr "Кіші көріністер"
-
-#: ../plugins/pager/pager-dialog.glade.h:3
-#: ../plugins/pager/pager.desktop.in.in.h:1
-msgid "Workspace Switcher"
-msgstr "Жұмыс орындар ауыстырғышы"
-
-#: ../plugins/pager/pager-dialog.glade.h:7
-msgid "Number of _rows:"
-msgstr "Қатарлар са_ны:"
-
-#: ../plugins/pager/pager-dialog.glade.h:8
-msgid "Show workspace number"
-msgstr "Жұмыс орны нөмірін көрсету"
-
-#: ../plugins/pager/pager-dialog.glade.h:9
-msgid "Switch workspaces using the mouse wheel"
-msgstr "Жұмыс орындар арасында тышқан дөңгелегі арқылы ауысу"
-
-#: ../plugins/pager/pager-dialog.glade.h:10
-msgid "Wrap around workspaces"
-msgstr "Жұмыс орындар арасында циклдық ауысу"
-
-#: ../plugins/pager/pager-dialog.glade.h:11
-msgid "<b>Appearance</b>"
-msgstr "<b>Сыртқы түрі</b>"
-
-#: ../plugins/pager/pager.desktop.in.in.h:2
-msgid "Switch between virtual desktops"
-msgstr "Виртуалды жұмыс үстелдерді ауыстырады"
-
-#: ../plugins/separator/separator-dialog.glade.h:1
-msgid "Transparent"
-msgstr "Мөлдір"
-
-#: ../plugins/separator/separator-dialog.glade.h:3
-msgid "Handle"
-msgstr "Тұтқа"
-
-#: ../plugins/separator/separator-dialog.glade.h:4
-msgid "Dots"
-msgstr "Нүктелер"
-
-#: ../plugins/separator/separator-dialog.glade.h:8
-msgid "_Expand"
-msgstr "Жа_ю"
-
-#: ../plugins/separator/separator.desktop.in.in.h:2
-msgid "Adds a separator or space between panel items"
-msgstr "Панель элементтері арасында орын не ажыратқышты қояды"
-
 #: ../plugins/showdesktop/showdesktop.c:245
 msgid "Restore the minimized windows"
 msgstr "Жасырын терезелерді қалпына келтіру"
@@ -1901,13 +1085,8 @@ msgid "Minimize all open windows and show the desktop"
 msgstr "Барлық ашық терезелерді қайырып, жұмыс үстелін көрсету"
 
 #: ../plugins/showdesktop/showdesktop.c:250
-#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Жұмыс үстелін көрсету"
-
-#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
-msgid "Hide all windows and show the desktop"
-msgstr "Барлық терезелерді жасырып, жұмыс үстелін көрсету"
 
 #: ../plugins/systray/sn-dialog.c:645
 msgid "Clear"
@@ -1916,106 +1095,6 @@ msgstr "Тазарту"
 #: ../plugins/systray/sn-dialog.c:646
 msgid "Are you sure you want to clear the list of known items?"
 msgstr "Белгілі нәрселер тізімін тазартуды шынымен қалайсыз ба?"
-
-#: ../plugins/systray/sn-dialog.glade.h:1
-msgid "Status Tray Items"
-msgstr "Қалып-күй трей нәрселері"
-
-#: ../plugins/systray/sn-dialog.glade.h:2
-msgid "C_lear Known Items"
-msgstr "Бел_гілі нәрселер тізімін тазарту"
-
-#: ../plugins/systray/sn-dialog.glade.h:3
-msgid "Resets the list of items and their visibility settings"
-msgstr "Нәрселер тізімін және көріну баптауларын тастайды"
-
-#: ../plugins/systray/sn-dialog.glade.h:4
-msgid "_Fixed icon size (pixels):"
-msgstr "Бекітілген таңбаша өл_шемі (пиксель):"
-
-#: ../plugins/systray/sn-dialog.glade.h:5
-msgid "Adjust size _automatically"
-msgstr "Өлшемін _автокелтіру"
-
-#: ../plugins/systray/sn-dialog.glade.h:6
-msgid "Icons"
-msgstr "Таңбашалар"
-
-#: ../plugins/systray/sn-dialog.glade.h:7
-msgid "Arrange _items in a single row"
-msgstr "_Нәрселерді бір жолға орналастыру"
-
-#: ../plugins/systray/sn-dialog.glade.h:8
-msgid "If enabled, ensure that the items are laid out in a single row"
-msgstr "Іске қосылған болса, нәрселер бір жолға орналастырылатынын қамтамасыз етеді"
-
-#: ../plugins/systray/sn-dialog.glade.h:9
-msgid "_Hide items by default"
-msgstr "Нәрселерді бастапқыда жас_ыру"
-
-#: ../plugins/systray/sn-dialog.glade.h:10
-msgid "When enabled, all new items will be marked as \"Hidden\""
-msgstr "Іске қосылған болса, барлық жаңа нәрселер \"Жасырын\" ретінде белгіленетін болады"
-
-#: ../plugins/systray/sn-dialog.glade.h:11
-msgid "_Square items"
-msgstr "Нәрселерден _шаршыны құрау"
-
-#: ../plugins/systray/sn-dialog.glade.h:12
-msgid "Item buttons will take a square when it's possible"
-msgstr "Нәрселер батырмалары мүмкін болған кезде шаршыны құрайды"
-
-#: ../plugins/systray/sn-dialog.glade.h:13
-msgid "Behavior"
-msgstr "Мінез-құлығы"
-
-#: ../plugins/systray/sn-dialog.glade.h:14
-msgid "Item"
-msgstr "Нәрсе"
-
-#: ../plugins/systray/sn-dialog.glade.h:15
-msgid "Hidden"
-msgstr "Жасырын"
-
-#: ../plugins/systray/sn-dialog.glade.h:16
-msgid "Move the selected item one row up"
-msgstr "Таңдалған нәрсені бір жолға жоғары жылжыту"
-
-#: ../plugins/systray/sn-dialog.glade.h:17
-msgid "Move the selected item one row down"
-msgstr "Таңдалған нәрсені бір жолға төмен жылжыту"
-
-#: ../plugins/systray/sn-dialog.glade.h:18
-msgid "Known Items"
-msgstr "Белгілі нәрселер"
-
-#: ../plugins/systray/sn-dialog.glade.h:19
-msgid "_Menu is primary action"
-msgstr "_Мәзір біріншілік әрекет"
-
-#: ../plugins/systray/sn-dialog.glade.h:20
-msgid "Left click will always display the menu for item"
-msgstr "Сол жақ шерту әрқашан нәрсенің мәзірін көрсетеді"
-
-#: ../plugins/systray/sn-dialog.glade.h:21
-msgid "_Request symbolic icons"
-msgstr "Символдық таңбашаларды сұ_рау"
-
-#: ../plugins/systray/sn-dialog.glade.h:22
-msgid "Load symbolic icons if available"
-msgstr "Қолжетімді болған кезде символдық таңбашаларды жүктеу"
-
-#: ../plugins/systray/sn-dialog.glade.h:23
-msgid "Features"
-msgstr "Мүмкіндіктер"
-
-#: ../plugins/systray/sn-dialog.glade.h:24
-msgid "Status Notifiers"
-msgstr "Қалып-күй хабарлаушылары"
-
-#: ../plugins/systray/sn-dialog.glade.h:25
-msgid "Systray Icons"
-msgstr "Жүйелік трей таңбашалары"
 
 #: ../plugins/systray/systray.c:145
 msgid "Unable to start the notification area"
@@ -2037,150 +1116,38 @@ msgstr "Хабарламалар орны таңдауды жоғалтқан"
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "%d экраны үшін таңдау менеджерін орындау қатесі"
 
-#: ../plugins/systray/systray.desktop.in.in.h:1
-msgid "Status Tray Plugin"
-msgstr "Қалып-күй трей плагині"
-
-#: ../plugins/systray/systray.desktop.in.in.h:2
-msgid ""
-"Provides status notifier items (application indicators) and legacy systray "
-"items"
-msgstr "Қалып-күй хабарлаушы нәрселерін (қолданбалар индикаторларын) және ескірген жүйелік трей нәрселерін ұсынады"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:1
-msgid "Nothing"
-msgstr "Ешнәрсе"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:2
-msgid "Close Window"
-msgstr "Терезені жабу"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:3
-msgid "Minimize Window"
-msgstr "Терезені қайыру"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:4
-msgid "New Instance"
-msgstr "Жаңа данасы"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:5
-msgid "Timestamp"
-msgstr "Уақыт шамасы"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:6
-msgid "Group title and timestamp"
-msgstr "Топ атауы мен уақыт шамасы"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:7
-msgid "Window title"
-msgstr "Терезе атауы"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:8
-msgid "Group title and window title"
-msgstr "Топ пен терезе атауы"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:9
-msgid "None, allow drag-and-drop"
-msgstr "Ешнәрсе, ұстап апару мен тастауды рұқсат ету"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
-#: ../plugins/tasklist/tasklist.desktop.in.in.h:1
-msgid "Window Buttons"
-msgstr "Терезе батырмалары"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
-msgid "Show button _labels"
-msgstr "Батырма_лар мәтінін көрсету"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
-msgid "Show _flat buttons"
-msgstr "Жал_пақ батырмаларды көрсету"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
-msgid "Show _handle"
-msgstr "_Тұтқасын көрсету"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
-msgid "Show _tooltips"
-msgstr "Қалқ_ымалы көмекті көрсету"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
-msgid "Sorting _order:"
-msgstr "Сұрыптау р_еті:"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
-msgid "Mi_ddle click action:"
-msgstr "Ор_та батырманы шерту әрекеті:"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
-msgid "_Group windows by application"
-msgstr "Терезелерді қолданба бойынша то_птау"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
-msgid "Restore minimized windows to current _workspace"
-msgstr "Қайырылған терезелерді ағы_мдағы үстелге қалпына келтіру"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
-msgid "D_raw window frame when hovering a button"
-msgstr "Б_атырмадан тышқан өткен кезде терезе шетін көрсету"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:23
-msgid "_Switch windows using the mouse wheel"
-msgstr "Терезелер арасында ты_шқан дөңгелегі арқылы ауысу"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
-msgid "Behaviour"
-msgstr "Мінез-құлығы"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:25
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:11
-msgid "Show windows from _all workspaces"
-msgstr "Барлық жұмыс орындар тере_зелерін көрсету"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:26
-msgid "Show windows from all mo_nitors"
-msgstr "Барлық м_ониторлар терезелерін көрсету"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:27
-msgid "Show only _minimized windows"
-msgstr "Тек қа_йырылған терезелерді көрсету"
-
-#: ../plugins/tasklist/tasklist-widget.c:3107
+#: ../plugins/tasklist/tasklist-widget.c:3109
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "\"%s\" жаңа данасын іске қосу мүмкін емес"
 
-#: ../plugins/tasklist/tasklist-widget.c:3111
+#: ../plugins/tasklist/tasklist-widget.c:3113
 msgid "Error"
 msgstr "Қате"
 
-#: ../plugins/tasklist/tasklist-widget.c:3140
+#: ../plugins/tasklist/tasklist-widget.c:3142
 msgid "Launch New Instance"
 msgstr "Жаңа данасын жөнелту"
 
-#: ../plugins/tasklist/tasklist-widget.c:3885
+#: ../plugins/tasklist/tasklist-widget.c:3887
 msgid "Mi_nimize All"
 msgstr "Барл_ығын қайыру"
 
-#: ../plugins/tasklist/tasklist-widget.c:3892
+#: ../plugins/tasklist/tasklist-widget.c:3894
 msgid "Un_minimize All"
 msgstr "Барлығы_н қайырудан қайтару"
 
-#: ../plugins/tasklist/tasklist-widget.c:3899
+#: ../plugins/tasklist/tasklist-widget.c:3901
 msgid "Ma_ximize All"
 msgstr "Бар_лығын жазық қылу"
 
-#: ../plugins/tasklist/tasklist-widget.c:3906
+#: ../plugins/tasklist/tasklist-widget.c:3908
 msgid "_Unmaximize All"
 msgstr "Барлығын _жазық емес қылу"
 
-#: ../plugins/tasklist/tasklist-widget.c:3917
+#: ../plugins/tasklist/tasklist-widget.c:3919
 msgid "_Close All"
 msgstr "Ба_рлығын жабу"
-
-#: ../plugins/tasklist/tasklist.desktop.in.in.h:2
-msgid "Switch between open windows using buttons"
-msgstr "Ашық терезелер арасында батырмалар арқылы ауысу"
 
 #: ../plugins/windowmenu/windowmenu.c:689
 msgid "Desktop"
@@ -2207,36 +1174,3 @@ msgstr "\"%s\" жұмыс орнын өшіру"
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "%d жұмыс орнын өшіру"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
-msgid "Icon"
-msgstr "Таңбаша"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
-msgid "Arrow"
-msgstr "Сызықша"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
-#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:1
-msgid "Window Menu"
-msgstr "Терезелер мәзірі"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
-msgid "Button layout:"
-msgstr "Батырмалардың орналасуы:"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
-msgid "Show workspace a_ctions"
-msgstr "Жұмыс орны әре_кеттерін көрсету"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
-msgid "Show workspace _names"
-msgstr "Жұмыс оры_ндардың аттарын көрсету"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
-msgid "Enable _urgency notification"
-msgstr "Шұғыл _хабарлауды іске қосу"
-
-#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
-msgid "Switch between open windows using a menu"
-msgstr "Ашық терезелер арасында мәзір арқылы ауысу"
