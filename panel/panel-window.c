@@ -214,7 +214,7 @@ enum
   PROP_SPAN_MONITORS,
   PROP_OUTPUT_NAME,
   PROP_POSITION,
-  PROP_DISABLE_STRUTS,
+  PROP_ENABLE_STRUTS,
   PROP_DARK_MODE
 };
 
@@ -321,7 +321,7 @@ struct _PanelWindow
   /* struts information */
   StrutsEgde           struts_edge;
   gulong               struts[N_STRUTS];
-  guint                struts_disabled : 1;
+  guint                struts_enabled : 1;
 
   /* dark mode */
   gboolean             dark_mode;
@@ -513,9 +513,9 @@ panel_window_class_init (PanelWindowClass *klass)
                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_DISABLE_STRUTS,
-                                   g_param_spec_boolean ("disable-struts", NULL, NULL,
-                                                         FALSE,
+                                   PROP_ENABLE_STRUTS,
+                                   g_param_spec_boolean ("enable-struts", NULL, NULL,
+                                                         TRUE,
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   gtk_widget_class_install_style_property (gtkwidget_class,
@@ -577,7 +577,7 @@ panel_window_init (PanelWindow *window)
   window->xfw_screen = NULL;
   window->xfw_active_window = NULL;
   window->struts_edge = STRUTS_EDGE_NONE;
-  window->struts_disabled = FALSE;
+  window->struts_enabled = TRUE;
   window->mode = XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
   window->size = 48;
   window->icon_size = 0;
@@ -711,8 +711,8 @@ panel_window_get_property (GObject    *object,
       g_value_take_string (value, position);
       break;
 
-    case PROP_DISABLE_STRUTS:
-      g_value_set_boolean (value, window->struts_disabled);
+    case PROP_ENABLE_STRUTS:
+      g_value_set_boolean (value, window->struts_enabled);
       break;
 
     default:
@@ -906,11 +906,11 @@ panel_window_set_property (GObject      *object,
         }
       break;
 
-    case PROP_DISABLE_STRUTS:
+    case PROP_ENABLE_STRUTS:
       val_bool = g_value_get_boolean (value);
-      if (val_bool != window->struts_disabled)
+      if (val_bool != window->struts_enabled)
         {
-          window->struts_disabled = val_bool;
+          window->struts_enabled = val_bool;
           panel_window_screen_layout_changed (window->screen, window);
         }
       break;
@@ -1946,7 +1946,7 @@ panel_window_screen_struts_edge (PanelWindow *window)
 
   /* no struts when autohide is active or they are disabled by the user */
   if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER
-      || window->struts_disabled)
+      || ! window->struts_enabled)
     return STRUTS_EDGE_NONE;
 
   /* return the screen edge on which the window is
@@ -4105,7 +4105,7 @@ panel_window_migrate_old_properties (PanelWindow *window,
                                      const PanelProperty *old_properties,
                                      const PanelProperty *new_properties)
 {
-  gboolean old_bool, migrated;
+  gboolean old_bool, new_bool, migrated;
   guint new_uint;
   gchar *old_property, *new_property;
 
@@ -4154,6 +4154,20 @@ panel_window_migrate_old_properties (PanelWindow *window,
       migrated = FALSE;
       switch (new_properties[i].type)
         {
+        case G_TYPE_BOOLEAN:
+          if (g_strcmp0 (new_properties[i].property, "enable-struts") == 0)
+            new_bool = ! old_bool;
+          else
+            {
+              g_warning ("Unrecognized new property '%s'", new_properties[i].property);
+              g_free (old_property);
+              g_free (new_property);
+              continue;
+            }
+
+          migrated = xfconf_channel_set_bool (xfconf, new_property, new_bool);
+          break;
+
         case G_TYPE_UINT:
           if (g_strcmp0 (new_properties[i].property, "autohide-behavior") == 0)
             new_uint = old_bool ? AUTOHIDE_BEHAVIOR_ALWAYS : AUTOHIDE_BEHAVIOR_NEVER;
