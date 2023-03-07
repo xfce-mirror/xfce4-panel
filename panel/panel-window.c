@@ -4099,50 +4099,86 @@ panel_window_focus (PanelWindow *window)
 
 
 void
-panel_window_migrate_autohide_property (PanelWindow   *window,
-                                        XfconfChannel *xfconf,
-                                        const gchar   *property_base)
+panel_window_migrate_old_properties (PanelWindow *window,
+                                     XfconfChannel *xfconf,
+                                     const gchar *property_base,
+                                     const PanelProperty *old_properties,
+                                     const PanelProperty *new_properties)
 {
-  gboolean autohide;
-  gchar   *old_property;
+  gboolean old_bool, migrated;
+  guint new_uint;
+  gchar *old_property, *new_property;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (XFCONF_IS_CHANNEL (xfconf));
   panel_return_if_fail (property_base != NULL && *property_base != '\0');
+  panel_return_if_fail (old_properties != NULL);
+  panel_return_if_fail (new_properties != NULL);
 
-  old_property = g_strdup_printf ("%s/autohide", property_base);
-
-  /* check if we have an old "autohide" property for this panel */
-  if (xfconf_channel_has_property (xfconf, old_property))
+  for (gint i = 0; old_properties[i].property != NULL && new_properties[i].property != NULL; i++)
     {
-      gchar *new_property = g_strdup_printf ("%s/autohide-behavior", property_base);
-
-      /* migrate from old "autohide" to new "autohide-behavior" if the latter
-       * isn't set already */
-      if (!xfconf_channel_has_property (xfconf, new_property))
+      /* no old property: nothing to do */
+      old_property = g_strdup_printf ("%s/%s", property_base, old_properties[i].property);
+      if (! xfconf_channel_has_property (xfconf, old_property))
         {
-          /* find out whether or not autohide was enabled in the old config */
-          autohide = xfconf_channel_get_bool (xfconf, old_property, FALSE);
-
-          /* set autohide behavior to always or never, depending on whether it
-           * was enabled in the old configuration */
-          if (xfconf_channel_set_uint (xfconf,
-                                       new_property,
-                                       autohide ? AUTOHIDE_BEHAVIOR_ALWAYS
-                                                : AUTOHIDE_BEHAVIOR_NEVER))
-            {
-              /* remove the old autohide property */
-              xfconf_channel_reset_property (xfconf, old_property, FALSE);
-            }
+          g_free (old_property);
+          continue;
         }
-      else
+
+      /* new property already set: simply remove old property */
+      new_property = g_strdup_printf ("%s/%s", property_base, new_properties[i].property);
+      if (xfconf_channel_has_property (xfconf, new_property))
         {
-          /* the new property is already set, simply remove the old property */
           xfconf_channel_reset_property (xfconf, old_property, FALSE);
+          g_free (old_property);
+          g_free (new_property);
+          continue;
         }
 
+      /* try to get old value depending on type */
+      switch (old_properties[i].type)
+        {
+        case G_TYPE_BOOLEAN:
+          old_bool = xfconf_channel_get_bool (xfconf, old_property, FALSE);
+          break;
+
+        default:
+          g_warning ("Unsupported property type '%s' for property '%s'",
+                     g_type_name (old_properties[i].type), old_properties[i].property);
+          g_free (old_property);
+          g_free (new_property);
+          continue;
+        }
+
+      /* try to migrate from old property to new property */
+      migrated = FALSE;
+      switch (new_properties[i].type)
+        {
+        case G_TYPE_UINT:
+          if (g_strcmp0 (new_properties[i].property, "autohide-behavior") == 0)
+            new_uint = old_bool ? AUTOHIDE_BEHAVIOR_ALWAYS : AUTOHIDE_BEHAVIOR_NEVER;
+          else
+            {
+              g_warning ("Unrecognized new property '%s'", new_properties[i].property);
+              g_free (old_property);
+              g_free (new_property);
+              continue;
+            }
+
+          migrated = xfconf_channel_set_uint (xfconf, new_property, new_uint);
+          break;
+
+        default:
+          g_warning ("Unsupported property type '%s' for property '%s'",
+                     g_type_name (new_properties[i].type), new_properties[i].property);
+          break;
+        }
+
+      /* remove old property */
+      if (migrated)
+        xfconf_channel_reset_property (xfconf, old_property, FALSE);
+
+      g_free (old_property);
       g_free (new_property);
     }
-
-  g_free (old_property);
 }
