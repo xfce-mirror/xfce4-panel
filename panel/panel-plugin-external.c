@@ -899,6 +899,12 @@ panel_plugin_external_set_mode (XfcePanelPluginProvider *provider,
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
+  /* PluginExternal is a GtkBox since 4.19.0 so it must be oriented with the panel to not
+   * allow the remote plug to expand in the wrong direction */
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (provider),
+                                  mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL ? GTK_ORIENTATION_HORIZONTAL
+                                                                            : GTK_ORIENTATION_VERTICAL);
+
   g_value_init (&value, G_TYPE_INT);
   g_value_set_int (&value, mode);
 
