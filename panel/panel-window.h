@@ -22,6 +22,7 @@
 #include <gtk/gtk.h>
 #include <xfconf/xfconf.h>
 
+#include <common/panel-xfconf.h>
 #include <panel/panel-base-window.h>
 
 G_BEGIN_DECLS
@@ -29,34 +30,36 @@ G_BEGIN_DECLS
 #define PANEL_TYPE_WINDOW (panel_window_get_type ())
 G_DECLARE_FINAL_TYPE (PanelWindow, panel_window, PANEL, WINDOW, PanelBaseWindow)
 
-GtkWidget *panel_window_new                       (GdkScreen   *screen,
-                                                   gint         id,
-                                                   gint         autohide_block) G_GNUC_MALLOC;
+GtkWidget     *panel_window_new                       (GdkScreen              *screen,
+                                                       gint                    id,
+                                                       gint                    autohide_block) G_GNUC_MALLOC;
 
-gint       panel_window_get_id                    (PanelWindow *window);
+gint           panel_window_get_id                    (PanelWindow            *window);
 
-gboolean   panel_window_has_position              (PanelWindow *window);
+gboolean       panel_window_has_position              (PanelWindow            *window);
 
-void       panel_window_set_provider_info         (PanelWindow *window,
-                                                   GtkWidget   *provider,
-                                                   gboolean     moving_to_other_panel);
+void           panel_window_set_provider_info         (PanelWindow            *window,
+                                                       GtkWidget              *provider,
+                                                       gboolean                moving_to_other_panel);
 
-void       panel_window_freeze_autohide           (PanelWindow *window);
+void           panel_window_freeze_autohide           (PanelWindow            *window);
 
-void       panel_window_thaw_autohide             (PanelWindow *window);
+void           panel_window_thaw_autohide             (PanelWindow            *window);
 
-void       panel_window_set_locked                (PanelWindow *window,
-                                                   gboolean     locked);
+void           panel_window_set_locked                (PanelWindow            *window,
+                                                       gboolean                locked);
 
-gboolean   panel_window_get_locked                (PanelWindow *window);
+gboolean       panel_window_get_locked                (PanelWindow            *window);
 
-void       panel_window_focus                     (PanelWindow *window);
+void           panel_window_focus                     (PanelWindow            *window);
 
-void       panel_window_migrate_autohide_property (PanelWindow   *window,
-                                                   XfconfChannel *xfconf,
-                                                   const gchar   *property_base);
+void           panel_window_migrate_old_properties    (PanelWindow            *window,
+                                                       XfconfChannel          *xfconf,
+                                                       const gchar            *property_base,
+                                                       const PanelProperty    *old_properties,
+                                                       const PanelProperty    *new_properties);
 
-gboolean   panel_window_pointer_is_outside        (PanelWindow *window);
+gboolean       panel_window_pointer_is_outside        (PanelWindow            *window);
 
 G_END_DECLS
 
