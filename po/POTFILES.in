@@ -22,6 +22,7 @@ panel/panel-module.c
 panel/panel-plugin-external.c
 panel/panel-plugin-external-wrapper.c
 panel/panel-preferences-dialog.c
+panel/panel-preferences-dialog.glade
 panel/panel-tic-tac-toe.c
 panel/panel-window.c
 
@@ -31,9 +32,11 @@ wrapper/wrapper-plug.c
 
 migrate/main.c
 
+plugins/actions/actions-dialog.glade
 plugins/actions/actions.c
 plugins/actions/actions.desktop.in.in
 
+plugins/applicationsmenu/applicationsmenu-dialog.glade
 plugins/applicationsmenu/applicationsmenu.c
 plugins/applicationsmenu/applicationsmenu.desktop.in.in
 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh
@@ -41,6 +44,7 @@ plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh
 plugins/clock/clock.c
 plugins/clock/clock-analog.c
 plugins/clock/clock-binary.c
+plugins/clock/clock-dialog.glade
 plugins/clock/clock-digital.c
 plugins/clock/clock-digital.h
 plugins/clock/clock-fuzzy.c
@@ -49,17 +53,21 @@ plugins/clock/clock.desktop.in.in
 
 plugins/directorymenu/directorymenu.c
 plugins/directorymenu/directorymenu.desktop.in.in
+plugins/directorymenu/directorymenu-dialog.glade
 plugins/directorymenu/xfce4-popup-directorymenu.sh
 
 plugins/launcher/launcher.c
 plugins/launcher/launcher-dialog.c
+plugins/launcher/launcher-dialog.glade
 plugins/launcher/launcher.desktop.in.in
 
 plugins/pager/pager.c
 plugins/pager/pager-buttons.c
+plugins/pager/pager-dialog.glade
 plugins/pager/pager.desktop.in.in
 
 plugins/separator/separator.c
+plugins/separator/separator-dialog.glade
 plugins/separator/separator.desktop.in.in
 
 plugins/showdesktop/showdesktop.c
@@ -69,6 +77,7 @@ plugins/systray/sn-box.c
 plugins/systray/sn-button.c
 plugins/systray/sn-config.c
 plugins/systray/sn-dialog.c
+plugins/systray/sn-dialog.glade
 plugins/systray/sn-plugin.c
 plugins/systray/systray.c
 plugins/systray/systray-box.c
@@ -78,9 +87,11 @@ plugins/systray/systray-socket.c
 plugins/systray/systray.desktop.in.in
 
 plugins/tasklist/tasklist.c
+plugins/tasklist/tasklist-dialog.glade
 plugins/tasklist/tasklist-widget.c
 plugins/tasklist/tasklist.desktop.in.in
 
 plugins/windowmenu/windowmenu.c
+plugins/windowmenu/windowmenu-dialog.glade
 plugins/windowmenu/windowmenu.desktop.in.in
 plugins/windowmenu/xfce4-popup-windowmenu.sh
