@@ -443,12 +443,12 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkCheckButton" id="disable-struts">
-                            <property name="label" translatable="yes">Keep panel _above windows</property>
+                          <object class="GtkCheckButton" id="enable-struts">
+                            <property name="label" translatable="yes">_Reserve space on screen edges for the panel</property>
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
                             <property name="receives-default">False</property>
-                            <property name="tooltip-text" translatable="yes">Select this option if you want maximized windows to cover the area behind the panel. This only works when the panel is attached to a screen edge.</property>
+                            <property name="tooltip-text" translatable="yes">Select this option if you don't want maximized windows to cover the area behind the panel. This only works when the panel is attached to a screen edge.</property>
                             <property name="margin-left">12</property>
                             <property name="use-underline">True</property>
                             <property name="draw-indicator">True</property>
