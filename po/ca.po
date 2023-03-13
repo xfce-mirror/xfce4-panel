@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2023-03-07 12:47+0100\n"
+"POT-Creation-Date: 2023-03-13 00:46+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Robert Antoni Buj i Gelonch <rbuj@fedoraproject.org>, 2016-2020\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce4-panel/language/ca/)\n"
@@ -83,6 +83,7 @@ msgstr "_Cancel·la"
 #: libxfce4panel/xfce-panel-plugin.c:1104
 #: libxfce4panel/xfce-panel-plugin.c:1271 panel/panel-plugin-external.c:409
 #: panel/panel-preferences-dialog.c:1047 panel/panel-preferences-dialog.c:1457
+#: panel/panel-preferences-dialog.glade:1207
 #: plugins/launcher/launcher-dialog.c:860
 msgid "_Remove"
 msgstr "_Suprimeix"
@@ -123,7 +124,16 @@ msgstr "_Surt"
 
 #. help item
 #: libxfce4panel/xfce-panel-plugin.c:1341 panel/panel-item-dialog.c:196
-#: panel/panel-window.c:3641
+#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3641
+#: plugins/actions/actions-dialog.glade:97
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
+#: plugins/clock/clock-dialog.glade:120
+#: plugins/directorymenu/directorymenu-dialog.glade:49
+#: plugins/launcher/launcher-dialog.glade:398
+#: plugins/pager/pager-dialog.glade:81
+#: plugins/separator/separator-dialog.glade:69
+#: plugins/tasklist/tasklist-dialog.glade:93
+#: plugins/windowmenu/windowmenu-dialog.glade:63
 msgid "_Help"
 msgstr "A_juda"
 
@@ -316,6 +326,8 @@ msgid "Add New Item"
 msgstr "Afegeix un element nou"
 
 #: panel/panel-dialogs.c:165 panel/panel-item-dialog.c:192
+#: panel/panel-preferences-dialog.glade:1190
+#: plugins/launcher/launcher-dialog.glade:219
 msgid "_Add"
 msgstr "_Afegeix"
 
@@ -338,15 +350,25 @@ msgstr "El tauler està executant-se en mode quiosc; no se us permet fer cap can
 msgid "Modifying the panel is not allowed"
 msgstr "No es permet la modificació del tauler"
 
-#: panel/panel-item-dialog.c:186
+#: panel/panel-item-dialog.c:186 plugins/launcher/launcher-dialog.glade:198
 msgid "Add New Items"
 msgstr "Afegeix elements nous"
 
-#: panel/panel-item-dialog.c:200 panel/panel-tic-tac-toe.c:117
+#: panel/panel-item-dialog.c:200 panel/panel-preferences-dialog.glade:157
+#: panel/panel-tic-tac-toe.c:117 plugins/actions/actions-dialog.glade:82
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:55
+#: plugins/clock/clock-dialog.glade:105
+#: plugins/directorymenu/directorymenu-dialog.glade:34
+#: plugins/launcher/launcher-dialog.glade:235
+#: plugins/launcher/launcher-dialog.glade:414
+#: plugins/pager/pager-dialog.glade:97
+#: plugins/separator/separator-dialog.glade:54
+#: plugins/tasklist/tasklist-dialog.glade:77
+#: plugins/windowmenu/windowmenu-dialog.glade:48
 msgid "_Close"
 msgstr "Tan_ca"
 
-#: panel/panel-item-dialog.c:216
+#: panel/panel-item-dialog.c:216 plugins/launcher/launcher-dialog.glade:272
 msgid "_Search:"
 msgstr "_Cerca:"
 
@@ -425,6 +447,248 @@ msgstr "Nom intern: %s-%d"
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Si suprimiu l'element del tauler, es perdrà permanentment."
 
+#: panel/panel-preferences-dialog.glade:13
+msgid "Never"
+msgstr "Mai"
+
+#: panel/panel-preferences-dialog.glade:16
+msgid "Intelligently"
+msgstr "Intel·ligentment"
+
+#: panel/panel-preferences-dialog.glade:19
+msgid "Always"
+msgstr "Sempre"
+
+#: panel/panel-preferences-dialog.glade:81
+msgid "Horizontal"
+msgstr "Horitzontal"
+
+#: panel/panel-preferences-dialog.glade:84
+msgid "Vertical"
+msgstr "Vertical "
+
+#: panel/panel-preferences-dialog.glade:87
+msgid "Deskbar"
+msgstr "Barra d'escriptori"
+
+#: panel/panel-preferences-dialog.glade:128
+msgid "None (use system style)"
+msgstr "Cap (utilitza l'estil del sistema)"
+
+#: panel/panel-preferences-dialog.glade:131
+msgid "Solid color"
+msgstr "Color sòlid"
+
+#: panel/panel-preferences-dialog.glade:134
+msgid "Background image"
+msgstr "Imatge de fons"
+
+#: panel/panel-preferences-dialog.glade:140
+msgid "Panel Preferences"
+msgstr "Preferències del tauler"
+
+#: panel/panel-preferences-dialog.glade:217
+msgid "Profiles:"
+msgstr "Perfils:"
+
+#: panel/panel-preferences-dialog.glade:245
+msgid "_Backup and restore"
+msgstr "_Copia de Seguretat i Restauració"
+
+#: panel/panel-preferences-dialog.glade:249
+msgid "Switch between panel presets"
+msgstr "Canvia entre els preestabliments del tauler"
+
+#: panel/panel-preferences-dialog.glade:293
+msgid "Add a new panel"
+msgstr "Afegeix un tauler nou"
+
+#: panel/panel-preferences-dialog.glade:318
+msgid "Remove the currently selected panel"
+msgstr "Suprimeix el tauler seleccionat actualment"
+
+#: panel/panel-preferences-dialog.glade:369
+#: panel/panel-preferences-dialog.glade:705
+msgid "<b>General</b>"
+msgstr "<b>General</b>"
+
+#: panel/panel-preferences-dialog.glade:384
+msgid "M_ode:"
+msgstr "M_ode:"
+
+#: panel/panel-preferences-dialog.glade:413
+msgid "Span mo_nitors"
+msgstr "Expandeix els mo_nitors"
+
+#: panel/panel-preferences-dialog.glade:417
+msgid "Select this option to extend the panel over multiple monitors."
+msgstr "Seleccioneu aquesta opció per estendre el tauler a diversos monitors."
+
+#: panel/panel-preferences-dialog.glade:430
+msgid "_Lock panel"
+msgstr "_Bloqueja el tauler"
+
+#: panel/panel-preferences-dialog.glade:434
+msgid ""
+"Select this option to hide the handles of the panel and lock its position."
+msgstr "Seleccioneu aquesta opció per bloquejar la posició del tauler i ocultar els tiradors."
+
+#: panel/panel-preferences-dialog.glade:447
+msgid "Keep panel _above windows"
+msgstr ""
+
+#: panel/panel-preferences-dialog.glade:451
+msgid ""
+"Select this option if you want maximized windows to cover the area behind "
+"the panel. This only works when the panel is attached to a screen edge."
+msgstr "Seleccioneu aquesta opció per maximitzar les finestres i que cobreixin el tauler. Això només funciona quan el tauler està adjuntat a una vora de la pantalla."
+
+#: panel/panel-preferences-dialog.glade:472
+msgid "Au_tomatically hide the panel:"
+msgstr "Amaga el tauler au_tomáticament"
+
+#: panel/panel-preferences-dialog.glade:513
+msgid "O_utput:"
+msgstr "_Sortida:"
+
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
+#: panel/panel-preferences-dialog.glade:557
+msgid "<b>Measurements</b>"
+msgstr "<b>Mesures</b>"
+
+#: panel/panel-preferences-dialog.glade:572
+msgid "Row _size (pixels):"
+msgstr "_Mida de la fila (píxels):"
+
+#: panel/panel-preferences-dialog.glade:586
+msgid "Num_ber of rows:"
+msgstr "_Nombre de files:"
+
+#: panel/panel-preferences-dialog.glade:600
+msgid "L_ength (pixels):"
+msgstr ""
+
+#: panel/panel-preferences-dialog.glade:625
+msgid "A_utomatically increase the length"
+msgstr "Incrementa _automàticament la longitud"
+
+#: panel/panel-preferences-dialog.glade:629
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr "Seleccioneu aquesta opció per augmentar automàticament la longitud del tauler quan els connectors necessitin més espai."
+
+#: panel/panel-preferences-dialog.glade:679
+msgid "D_isplay"
+msgstr "V_isualització"
+
+#: panel/panel-preferences-dialog.glade:720
+msgid "Dark mode"
+msgstr "Mode fosc"
+
+#: panel/panel-preferences-dialog.glade:760
+msgid "<b>Background</b>"
+msgstr "<b>Fons</b>"
+
+#: panel/panel-preferences-dialog.glade:775
+#: plugins/separator/separator-dialog.glade:119
+msgid "_Style:"
+msgstr "_Estil:"
+
+#: panel/panel-preferences-dialog.glade:807
+msgid "C_olor:"
+msgstr "C_olor:"
+
+#: panel/panel-preferences-dialog.glade:822
+msgid "Pick a Panel Color"
+msgstr "Tria un color del tauler"
+
+#: panel/panel-preferences-dialog.glade:835
+msgid "_File:"
+msgstr "_Fitxer:"
+
+#: panel/panel-preferences-dialog.glade:848
+msgid "Select A Background Image"
+msgstr "Seleccioneu una imatge per al fons"
+
+#: panel/panel-preferences-dialog.glade:875
+msgid "<b>Icons</b>"
+msgstr "<b>Icones</b>"
+
+#: panel/panel-preferences-dialog.glade:889
+msgid "Adjust size au_tomatically"
+msgstr "Ajusta la mida au_tomáticament"
+
+#: panel/panel-preferences-dialog.glade:926
+msgid "Fixed icon _size (pixels):"
+msgstr "_Mida de les icones fixa (píxels)"
+
+#: panel/panel-preferences-dialog.glade:969
+msgid "<b>Opacity</b>"
+msgstr "<b>Opacitat</b>"
+
+#: panel/panel-preferences-dialog.glade:995
+msgid "Configure..."
+msgstr "Configura..."
+
+#: panel/panel-preferences-dialog.glade:1033
+msgid ""
+"<b>Compositing is currently disabled</b>\n"
+"Enable compositing in the window manager for opacity settings in the panel."
+msgstr "<b>La composició està inhabilitada actualment</b>\nHabiliteu la composició al gestor de finestres per als ajusts de l'opacitat al tauler."
+
+#. I18N: label for the enter transparency slider
+#: panel/panel-preferences-dialog.glade:1073
+msgid "_Enter:"
+msgstr "_Entrada:"
+
+#. I18N: label for the leave transparency slider
+#: panel/panel-preferences-dialog.glade:1100
+msgid "_Leave:"
+msgstr "_Sortida:"
+
+#: panel/panel-preferences-dialog.glade:1113
+msgid ""
+"Transparency when the pointer is not hovering over the panel, with 0 being "
+"fully transparent and 100 fully opaque."
+msgstr "Transparència quan el punter no està sobre el tauler, essent 0 completament transparent i 100 completament opac."
+
+#: panel/panel-preferences-dialog.glade:1140
+msgid "Appeara_nce"
+msgstr "Apare_nça"
+
+#: panel/panel-preferences-dialog.glade:1195
+msgid "Add new item to this panel"
+msgstr "Afegeix un element nou a aquest tauler"
+
+#: panel/panel-preferences-dialog.glade:1212
+msgid "Remove currently selected item"
+msgstr "Suprimeix l'element seleccionat"
+
+#: panel/panel-preferences-dialog.glade:1228
+#: plugins/launcher/launcher-dialog.glade:559
+msgid "Edit the currently selected item"
+msgstr "Edita l'element seleccionat"
+
+#: panel/panel-preferences-dialog.glade:1249
+msgid "Show about information of the currently selected item"
+msgstr "Mostra la informació sobre l'element seleccionat actualment"
+
+#: panel/panel-preferences-dialog.glade:1292
+#: plugins/launcher/launcher-dialog.glade:509
+msgid "Move currently selected item up by one row"
+msgstr "Mou l'element seleccionat a una fila superior"
+
+#: panel/panel-preferences-dialog.glade:1313
+#: plugins/launcher/launcher-dialog.glade:529
+msgid "Move currently selected item down by one row"
+msgstr "Mou l'element seleccionat a una fila inferior"
+
+#: panel/panel-preferences-dialog.glade:1347
+msgid "Ite_ms"
+msgstr "Ele_ments"
+
 #: panel/panel-tic-tac-toe.c:115
 msgid "_New Game"
 msgstr "_Nou joc"
@@ -469,9 +733,69 @@ msgstr "Ha fallat la migració de la configuració existent"
 msgid "Panel configuration has been updated."
 msgstr "La configuració del tauler s'ha actualitzat."
 
-#: plugins/actions/actions.c:36
+#: plugins/actions/actions-dialog.glade:35
+#: plugins/actions/actions-dialog.glade:64
+#: plugins/actions/actions.desktop.in.in:4
+msgid "Action Buttons"
+msgstr "Botons d'accions"
+
+#: plugins/actions/actions-dialog.glade:38 plugins/actions/actions.c:36
 msgid "Session Menu"
 msgstr "Menú de sessió"
+
+#: plugins/actions/actions-dialog.glade:49
+msgid "Full Name"
+msgstr "Nom complet"
+
+#: plugins/actions/actions-dialog.glade:52
+msgid "Username"
+msgstr "Nom d'usuari"
+
+#: plugins/actions/actions-dialog.glade:55
+msgid "User ID"
+msgstr "Id. d'usuari"
+
+#: plugins/actions/actions-dialog.glade:58
+msgid "Custom"
+msgstr "Personalitzat"
+
+#: plugins/actions/actions-dialog.glade:162
+msgid "Appeara_nce:"
+msgstr "Apare_nça:"
+
+#: plugins/actions/actions-dialog.glade:188
+msgid "Title:"
+msgstr "Títol:"
+
+#: plugins/actions/actions-dialog.glade:201
+msgid "Custo_m title:"
+msgstr "Títol _personalitzat:"
+
+#: plugins/actions/actions-dialog.glade:255
+#: plugins/launcher/launcher-dialog.glade:667
+msgid "General"
+msgstr "General"
+
+#: plugins/actions/actions-dialog.glade:303
+msgid "Visible"
+msgstr "Visible"
+
+#: plugins/actions/actions-dialog.glade:314
+msgid "Action"
+msgstr "Acció"
+
+#: plugins/actions/actions-dialog.glade:334
+msgid "_Show confirmation dialog"
+msgstr "_Mostra el diàleg de confirmació"
+
+#: plugins/actions/actions-dialog.glade:338
+msgid ""
+"Show a confirmation dialog with a 30 second timeout for some of the actions."
+msgstr "Mostra un diàleg de confirmació amb un comptador de 30 segons per algunes accions."
+
+#: plugins/actions/actions-dialog.glade:354
+msgid "_Actions"
+msgstr "_Accions"
 
 #: plugins/actions/actions.c:157
 msgid "Log Out"
@@ -599,7 +923,9 @@ msgstr "Esteu segur que voleu apagar?"
 msgid "Turning off computer in %d seconds."
 msgstr "S'apagarà l'ordinador en %d segons."
 
-#: plugins/actions/actions.c:677 plugins/separator/separator.desktop.in.in:4
+#: plugins/actions/actions.c:677 plugins/separator/separator-dialog.glade:26
+#: plugins/separator/separator-dialog.glade:38
+#: plugins/separator/separator.desktop.in.in:4
 msgid "Separator"
 msgstr "Separador"
 
@@ -612,10 +938,6 @@ msgstr "Ha fallat l'execució de l'acció «%s»"
 msgid "Little Mouse"
 msgstr "Ratolí petit"
 
-#: plugins/actions/actions.desktop.in.in:4
-msgid "Action Buttons"
-msgstr "Botons d'accions"
-
 #: plugins/actions/actions.desktop.in.in:5
 msgid "Log out, lock or other system actions"
 msgstr "Tanca la sessió, bloqueja o altres accions del sistema"
@@ -623,6 +945,79 @@ msgstr "Tanca la sessió, bloqueja o altres accions del sistema"
 #: plugins/actions/actions.desktop.in.in:6
 msgid "org.xfce.panel.actions"
 msgstr ""
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:23
+#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:4
+msgid "Applications Menu"
+msgstr "Menú d'aplicacions"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:101
+#: plugins/directorymenu/directorymenu-dialog.glade:122
+msgid "_Icon:"
+msgstr "_Icona:"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:125
+msgid "Button _title:"
+msgstr "_Títol del botó:"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:136
+msgid "Show button on one _line"
+msgstr ""
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:151
+msgid "_Show button title"
+msgstr "_Mostra el títol del botó"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:166
+msgid "Show application d_escription in tooltip"
+msgstr "Mostra la d_escripció de l'aplicació a l'indicador de funció"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:182
+msgid "Show ic_ons in menu"
+msgstr "Mostra les ic_ones al menú"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:197
+msgid "Show generic application n_ames"
+msgstr "Mostra els noms _genèrics de les aplicacions"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:201
+msgid ""
+"Select this option to show the generic application name in the menu, for "
+"example \"File Manager\" instead of \"Thunar\""
+msgstr "Seleccioneu aquesta opció per veure el nom genèric de l'aplicació al menú, p. ex.: «Gestor de fitxers» en lloc de «Thunar»"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:229
+#: plugins/clock/clock-dialog.glade:388
+#: plugins/directorymenu/directorymenu-dialog.glade:150
+#: plugins/separator/separator-dialog.glade:177
+#: plugins/tasklist/tasklist-dialog.glade:257
+#: plugins/windowmenu/windowmenu-dialog.glade:206
+msgid "Appearance"
+msgstr "Aparença"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:267
+msgid "Use the _default menu"
+msgstr "Utilitza el menú pre_determinat"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:282
+msgid "Ed_it Menu"
+msgstr "Ed_ita el menú"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:304
+msgid "Use c_ustom menu file:"
+msgstr "_Utilitza el fitxer del menú personalitzat:"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:333
+msgid "Menu _file:"
+msgstr "_Fitxer del menú:"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:346
+msgid "Select A Menu File"
+msgstr "Selecciona un fitxer de menú"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:371
+msgid "Menu File"
+msgstr "Fitxer del menú"
 
 #. I18N: default tooltip of the application menu
 #: plugins/applicationsmenu/applicationsmenu.c:37
@@ -645,10 +1040,6 @@ msgstr "D'ac_ord"
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Ha fallat l'execució de l'ordre «%s»."
-
-#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:4
-msgid "Applications Menu"
-msgstr "Menú d'aplicacions"
 
 #: plugins/applicationsmenu/applicationsmenu.desktop.in.in:5
 msgid "Show a menu containing categories of installed applications"
@@ -705,6 +1096,169 @@ msgstr "Ha fallat l'execució de l'ordre clock."
 #: plugins/clock/clock.c:957
 msgid "Custom Format"
 msgstr "Format personalitzat"
+
+#: plugins/clock/clock-dialog.glade:13
+msgid "Decimal"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:16
+msgid "Sexagesimal"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:19
+msgid "Binary time"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:30
+msgid "Date, then time"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:33
+msgid "Time, then date"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:36
+msgid "Date Only"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:39
+msgid "Time Only"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:71
+msgid "Analog"
+msgstr "Analògic"
+
+#: plugins/clock/clock-dialog.glade:74
+msgid "Binary"
+msgstr "Binari"
+
+#: plugins/clock/clock-dialog.glade:77
+msgid "Digital"
+msgstr "Digital"
+
+#: plugins/clock/clock-dialog.glade:80
+msgid "Fuzzy"
+msgstr "Difús"
+
+#: plugins/clock/clock-dialog.glade:83
+msgid "LCD"
+msgstr "LCD"
+
+#: plugins/clock/clock-dialog.glade:89 plugins/clock/clock.desktop.in.in:4
+msgid "Clock"
+msgstr "Rellotge"
+
+#: plugins/clock/clock-dialog.glade:172
+msgid ""
+"Name of a timezone corresponding a file in the zoneinfo database, for "
+"example \"America/New_York\". Leave empty to use the localtime."
+msgstr "Nom d'una zona horària corresponent a un fitxer a la base de dades d'informació de zones, per exemple \"Amèrica / New_York \". Deixeu-ho en blanc per utilitzar l'hora local."
+
+#: plugins/clock/clock-dialog.glade:183
+msgid "Time_zone:"
+msgstr "_Zona horària:"
+
+#: plugins/clock/clock-dialog.glade:194
+msgid "Time and Date _Settings..."
+msgstr "Ajust_s de la data i l'hora..."
+
+#: plugins/clock/clock-dialog.glade:214
+msgid "Time Settings"
+msgstr "Ajusts de l'hora"
+
+#: plugins/clock/clock-dialog.glade:250
+msgid ""
+"If set, this command is run when the plugin is left-clicked, instead of "
+"displaying the default calendar."
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:261
+msgid "Co_mmand:"
+msgstr "_Ordre:"
+
+#: plugins/clock/clock-dialog.glade:277
+msgid "Calendar"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:312 plugins/clock/clock-dialog.glade:652
+#: plugins/clock/clock-dialog.glade:774
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"page for additional information."
+msgstr "El format descriu les parts de data i hora per inserir al tauler. Per exemple, %Y serà substituït per l'any,  %m amb el mes i %d amb el dia. De la mateixa manera, les  etiquetes <b></b> faran que el text estigui en negreta. Consulteu la pàgina d'ajuda per obtenir informació addicional."
+
+#: plugins/clock/clock-dialog.glade:341
+msgid "_Tooltip format:"
+msgstr "Forma_t de l'indicador de funció:"
+
+#: plugins/clock/clock-dialog.glade:354 plugins/clock/clock-dialog.glade:602
+msgid "_Layout:"
+msgstr "_Distribució:"
+
+#: plugins/clock/clock-dialog.glade:418
+msgid "Sho_w AM/PM"
+msgstr "_Mostra AM/PM"
+
+#: plugins/clock/clock-dialog.glade:433
+msgid "Fl_ash time separators"
+msgstr "Centellej_a els separadors de l'hora"
+
+#: plugins/clock/clock-dialog.glade:448
+msgid "24-_hour clock"
+msgstr "Rellotge de 24 _hores"
+
+#: plugins/clock/clock-dialog.glade:491
+msgid "Binary mode:"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:507
+msgid "Display _seconds"
+msgstr "Mostra els _segons"
+
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
+#: plugins/clock/clock-dialog.glade:528
+msgid "F_uzziness:"
+msgstr "D_ifús:"
+
+#: plugins/clock/clock-dialog.glade:562
+msgid "Show _inactive dots"
+msgstr "Mostra els punts _inactius"
+
+#: plugins/clock/clock-dialog.glade:577
+msgid "Show gri_d"
+msgstr "Mostra la _quadrícula"
+
+#: plugins/clock/clock-dialog.glade:623 plugins/clock/clock-dialog.glade:745
+msgid "Font:"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:636 plugins/clock/clock-dialog.glade:758
+msgid "Format:"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
+"the &quot;Help&quot; page for additional information."
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:682
+msgid "Date"
+msgstr "Data"
+
+#: plugins/clock/clock-dialog.glade:727
+msgid "Time"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:854
+msgid "Clock Options"
+msgstr "Opcions del rellotge"
 
 #: plugins/clock/clock-digital.h:27
 msgctxt "Time"
@@ -1017,10 +1571,6 @@ msgctxt "pm"
 msgid "twelve"
 msgstr "dotze"
 
-#: plugins/clock/clock.desktop.in.in:4
-msgid "Clock"
-msgstr "Rellotge"
-
 #: plugins/clock/clock.desktop.in.in:5
 msgid "What time is it?"
 msgstr "Quina hora és?"
@@ -1031,6 +1581,7 @@ msgstr ""
 
 #: plugins/directorymenu/directorymenu.c:289
 #: plugins/directorymenu/directorymenu.desktop.in.in:4
+#: plugins/directorymenu/directorymenu-dialog.glade:18
 msgid "Directory Menu"
 msgstr "Menú dels directoris"
 
@@ -1108,6 +1659,55 @@ msgstr "Mostra un arbre de directoris al menú"
 msgid "org.xfce.panel.directorymenu"
 msgstr ""
 
+#: plugins/directorymenu/directorymenu-dialog.glade:99
+msgid "Select A Directory"
+msgstr "Selecciona un directori"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:135
+msgid "_Base Directory:"
+msgstr "Directori _base:"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:179
+msgid "Show 'New Text _Document'"
+msgstr "Mostra «_Document de text nou»"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:194
+msgid "Show '_New Folder'"
+msgstr "Mostra «Carpeta _nova»"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:209
+msgid "Show 'Open in _Terminal'"
+msgstr "Mostra «Obre al terminal»"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:224
+msgid "Show '_Open _Folder'"
+msgstr "Mostra «Obre la carpeta»"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:243
+msgid "Menu"
+msgstr "Menú"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:272
+msgid "Show _hidden files"
+msgstr "Mostra els fitxers _ocults"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:289
+msgid ""
+"Enter a list of patterns that will be used to determine which files are "
+"visible in a directory. If you specify more than one pattern here, the list "
+"items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr "Introduïu una llista dels patrons que s'utilitzaran per determinar quins fitxers es mostren en un directori. Si especifiqueu més d'un patró, la llista dels elements ha d'estar separada amb punts i comes (p. ex.: «*.txt;*.doc»)."
+
+#: plugins/directorymenu/directorymenu-dialog.glade:301
+msgid "_File Pattern:"
+msgstr "Patrons de _fitxers:"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:316
+#: plugins/tasklist/tasklist-dialog.glade:492
+#: plugins/windowmenu/windowmenu-dialog.glade:260
+msgid "Filtering"
+msgstr "Filtratge"
+
 #: plugins/launcher/launcher.c:393
 msgid "Open launcher menu"
 msgstr "Obre el menú del llançador"
@@ -1137,9 +1737,109 @@ msgstr "Esteu segur que voleu suprimir «%s»?"
 msgid "Unnamed item"
 msgstr "Element sense nom"
 
+#: plugins/launcher/launcher-dialog.glade:30
+msgid "Default"
+msgstr "Predeterminat"
+
+#: plugins/launcher/launcher-dialog.glade:33
+msgid "North"
+msgstr "Nord"
+
+#: plugins/launcher/launcher-dialog.glade:36
+msgid "West"
+msgstr "Oest"
+
+#: plugins/launcher/launcher-dialog.glade:39
+msgid "East"
+msgstr "Est"
+
+#: plugins/launcher/launcher-dialog.glade:42
+msgid "South"
+msgstr "Sud"
+
+#: plugins/launcher/launcher-dialog.glade:45
+msgid "Inside Button"
+msgstr "Com a botó"
+
+#: plugins/launcher/launcher-dialog.glade:96
+msgid "Up"
+msgstr "Amunt"
+
+#: plugins/launcher/launcher-dialog.glade:105
+msgid "Down"
+msgstr "Avall"
+
+#: plugins/launcher/launcher-dialog.glade:120
+msgid "_Edit Item"
+msgstr "_Edita l'element"
+
+#: plugins/launcher/launcher-dialog.glade:130
+msgid "D_elete Item"
+msgstr "_Suprimeix l'element"
+
+#: plugins/launcher/launcher-dialog.glade:146
+msgid "Add Appli_cation"
+msgstr "Afegeix una _aplicació"
+
+#: plugins/launcher/launcher-dialog.glade:162
+msgid "New _Application"
+msgstr "_Aplicació nova"
+
+#: plugins/launcher/launcher-dialog.glade:172
+msgid "New _Link"
+msgstr "En_llaç nou"
+
+#: plugins/launcher/launcher-dialog.glade:205
+#: plugins/launcher/launcher-dialog.glade:599
+msgid "Add one or more existing items to the launcher"
+msgstr "Afegeix un o més elements al llançador"
+
+#: plugins/launcher/launcher-dialog.glade:379
 #: plugins/launcher/launcher.desktop.in.in:4
 msgid "Launcher"
 msgstr "Llançador"
+
+#: plugins/launcher/launcher-dialog.glade:579
+msgid "Delete the currently selected item"
+msgstr "Suprimeix l'element seleccionat"
+
+#: plugins/launcher/launcher-dialog.glade:619
+msgid "Add a new empty item"
+msgstr "Afegeix un element buit nou"
+
+#: plugins/launcher/launcher-dialog.glade:639
+msgid "Add a new hyperlink"
+msgstr "Afegeix un hiperenllaç nou"
+
+#: plugins/launcher/launcher-dialog.glade:682
+msgid "Disable t_ooltips"
+msgstr "Inhabilita els quadres de _text emergents"
+
+#: plugins/launcher/launcher-dialog.glade:686
+msgid ""
+"Select this option to disable the tooltips when moving over the panel button"
+" or menu items."
+msgstr "Seleccioneu aquesta opció per inhabilitar els indicadors de funció quan us moveu sobre els botons del tauler o els elements del menú."
+
+#: plugins/launcher/launcher-dialog.glade:698
+msgid "Show _label instead of icon"
+msgstr "Mostra una _etiqueta en lloc de la icona"
+
+#: plugins/launcher/launcher-dialog.glade:713
+msgid "Show last _used item in panel"
+msgstr "Mostra l'últim _element utilitzat al tauler"
+
+#: plugins/launcher/launcher-dialog.glade:717
+msgid "Select this option to move the clicked menu item to the panel."
+msgstr "Seleccioneu aquesta opció per a moure l'element del menú que s'ha fet clic al tauler."
+
+#: plugins/launcher/launcher-dialog.glade:736
+msgid "_Arrow button position:"
+msgstr "Botó de _fletxa:"
+
+#: plugins/launcher/launcher-dialog.glade:779
+msgid "Advanced"
+msgstr "Avançat"
 
 #: plugins/launcher/launcher.desktop.in.in:5
 msgid "Program launcher with optional menu"
@@ -1149,7 +1849,7 @@ msgstr "Llançador de programes amb el menu opcional"
 msgid "org.xfce.panel.launcher"
 msgstr ""
 
-#: plugins/pager/pager.c:685
+#: plugins/pager/pager.c:685 plugins/pager/pager-dialog.glade:64
 msgid "Workspace _Settings..."
 msgstr "Ajust_s de l'espai de treball..."
 
@@ -1162,9 +1862,37 @@ msgstr "No es poden obrir els ajusts de l'espai de treball"
 msgid "Workspace %d"
 msgstr "Espai de treball %d"
 
-#: plugins/pager/pager.desktop.in.in:4
+#: plugins/pager/pager-dialog.glade:15
+msgid "Buttons"
+msgstr "Botons"
+
+#: plugins/pager/pager-dialog.glade:19
+msgid "Miniature View"
+msgstr "Vista de miniatures"
+
+#: plugins/pager/pager-dialog.glade:48 plugins/pager/pager.desktop.in.in:4
 msgid "Workspace Switcher"
 msgstr "Canviador d'espais de treball"
+
+#: plugins/pager/pager-dialog.glade:131
+msgid "Number of _rows:"
+msgstr "Nombre de _files:"
+
+#: plugins/pager/pager-dialog.glade:197
+msgid "Show workspace number"
+msgstr "Mostra el número de l'espai de treball"
+
+#: plugins/pager/pager-dialog.glade:210
+msgid "Switch workspaces using the mouse wheel"
+msgstr "Canvia d'espai de treball amb la roda del ratolí"
+
+#: plugins/pager/pager-dialog.glade:224
+msgid "Wrap around workspaces"
+msgstr ""
+
+#: plugins/pager/pager-dialog.glade:241
+msgid "<b>Appearance</b>"
+msgstr "<b>Aparença</b>"
 
 #: plugins/pager/pager.desktop.in.in:5
 msgid "Switch between virtual desktops"
@@ -1173,6 +1901,22 @@ msgstr "Canvieu entre els escriptoris virtuals"
 #: plugins/pager/pager.desktop.in.in:6
 msgid "org.xfce.panel.pager"
 msgstr ""
+
+#: plugins/separator/separator-dialog.glade:23
+msgid "Transparent"
+msgstr "Transparent"
+
+#: plugins/separator/separator-dialog.glade:29
+msgid "Handle"
+msgstr "Gestor"
+
+#: plugins/separator/separator-dialog.glade:32
+msgid "Dots"
+msgstr "Punts"
+
+#: plugins/separator/separator-dialog.glade:156
+msgid "_Expand"
+msgstr "_Expandeix"
 
 #: plugins/separator/separator.desktop.in.in:5
 msgid "Adds a separator or space between panel items"
@@ -1211,6 +1955,106 @@ msgstr "Neteja"
 msgid "Are you sure you want to clear the list of known items?"
 msgstr "Esteu segur que voleu netejar la llista d’elements coneguts?"
 
+#: plugins/systray/sn-dialog.glade:48
+msgid "Status Tray Items"
+msgstr "Elements de la safata de l'estat"
+
+#: plugins/systray/sn-dialog.glade:80
+msgid "C_lear Known Items"
+msgstr "Neteja els e_lements coneguts"
+
+#: plugins/systray/sn-dialog.glade:84
+msgid "Resets the list of items and their visibility settings"
+msgstr "Restableix la llista d’elements i els seus ajusts de visibilitat"
+
+#: plugins/systray/sn-dialog.glade:144
+msgid "_Fixed icon size (pixels):"
+msgstr "Mida de la icona _fixa (píxels):"
+
+#: plugins/systray/sn-dialog.glade:185
+msgid "Adjust size _automatically"
+msgstr "Ajusta la mida _automàticament"
+
+#: plugins/systray/sn-dialog.glade:213
+msgid "Icons"
+msgstr "Icones"
+
+#: plugins/systray/sn-dialog.glade:246
+msgid "Arrange _items in a single row"
+msgstr "Organ_itza els elements en una sola fila"
+
+#: plugins/systray/sn-dialog.glade:250
+msgid "If enabled, ensure that the items are laid out in a single row"
+msgstr "Si està habilitat, els elements es distribueixen en una sola fila"
+
+#: plugins/systray/sn-dialog.glade:262
+msgid "_Hide items by default"
+msgstr "_Oculta els elements de manera predeterminada"
+
+#: plugins/systray/sn-dialog.glade:266
+msgid "When enabled, all new items will be marked as \"Hidden\""
+msgstr "Quan està habilitat, tots els elements nous es marcaran amb «Hidden», ocults"
+
+#: plugins/systray/sn-dialog.glade:278
+msgid "_Square items"
+msgstr "_Elements quadrats"
+
+#: plugins/systray/sn-dialog.glade:282
+msgid "Item buttons will take a square when it's possible"
+msgstr "Els botons dels element pendran forma rectangular quan sigui possible"
+
+#: plugins/systray/sn-dialog.glade:300
+msgid "Behavior"
+msgstr "Comportament"
+
+#: plugins/systray/sn-dialog.glade:386 plugins/systray/sn-dialog.glade:618
+msgid "Item"
+msgstr "Element"
+
+#: plugins/systray/sn-dialog.glade:398 plugins/systray/sn-dialog.glade:630
+msgid "Hidden"
+msgstr "Ocult"
+
+#: plugins/systray/sn-dialog.glade:426 plugins/systray/sn-dialog.glade:658
+msgid "Move the selected item one row up"
+msgstr "Mou l’element seleccionat una fila cap amunt"
+
+#: plugins/systray/sn-dialog.glade:446 plugins/systray/sn-dialog.glade:678
+msgid "Move the selected item one row down"
+msgstr "Mou l’element seleccionat una fila cap avall"
+
+#: plugins/systray/sn-dialog.glade:479 plugins/systray/sn-dialog.glade:711
+msgid "Known Items"
+msgstr "Elements coneguts"
+
+#: plugins/systray/sn-dialog.glade:512
+msgid "_Menu is primary action"
+msgstr "El _menú és l'acció principal"
+
+#: plugins/systray/sn-dialog.glade:516
+msgid "Left click will always display the menu for item"
+msgstr "Fent clic amb el botó esquerre mostrarà sempre el menú per a l'element"
+
+#: plugins/systray/sn-dialog.glade:528
+msgid "_Request symbolic icons"
+msgstr "_Sol·licita icones simbòliques"
+
+#: plugins/systray/sn-dialog.glade:532
+msgid "Load symbolic icons if available"
+msgstr "Carrega les icones simbòliques si estan disponibles"
+
+#: plugins/systray/sn-dialog.glade:550
+msgid "Features"
+msgstr "Característiques"
+
+#: plugins/systray/sn-dialog.glade:566
+msgid "Status Notifiers"
+msgstr "Notificacions de l'estat"
+
+#: plugins/systray/sn-dialog.glade:720
+msgid "Systray Icons"
+msgstr "Icones de la safata del sistema"
+
 #: plugins/systray/systray.c:145
 msgid "Unable to start the notification area"
 msgstr "No es pot iniciar l'àrea de les notificacions"
@@ -1245,6 +2089,104 @@ msgstr "Proporciona elements de notificadors d'estat (indicadors d'aplicació) i
 msgid "org.xfce.panel.statustray"
 msgstr ""
 
+#: plugins/tasklist/tasklist-dialog.glade:23
+msgid "Nothing"
+msgstr "Res"
+
+#: plugins/tasklist/tasklist-dialog.glade:26
+msgid "Close Window"
+msgstr "Tanca la finestra"
+
+#: plugins/tasklist/tasklist-dialog.glade:29
+msgid "Minimize Window"
+msgstr "Minimitza la finestra"
+
+#: plugins/tasklist/tasklist-dialog.glade:32
+msgid "New Instance"
+msgstr ""
+
+#: plugins/tasklist/tasklist-dialog.glade:43
+msgid "Timestamp"
+msgstr "Marca de temps"
+
+#: plugins/tasklist/tasklist-dialog.glade:46
+msgid "Group title and timestamp"
+msgstr "Agrupa el títol i la marca de temps"
+
+#: plugins/tasklist/tasklist-dialog.glade:49
+msgid "Window title"
+msgstr "Títol de la finestra"
+
+#: plugins/tasklist/tasklist-dialog.glade:52
+msgid "Group title and window title"
+msgstr "Agrupa el títol i el títol de la finestra"
+
+#: plugins/tasklist/tasklist-dialog.glade:55
+msgid "None, allow drag-and-drop"
+msgstr "Cap, permet arrossegar i deixar anar"
+
+#: plugins/tasklist/tasklist-dialog.glade:61
+#: plugins/tasklist/tasklist.desktop.in.in:4
+msgid "Window Buttons"
+msgstr "Botons de les finestres"
+
+#: plugins/tasklist/tasklist-dialog.glade:143
+msgid "Show button _labels"
+msgstr "Mostra les _etiquetes dels botons"
+
+#: plugins/tasklist/tasklist-dialog.glade:159
+msgid "Show _flat buttons"
+msgstr "Mostra botons _plans"
+
+#: plugins/tasklist/tasklist-dialog.glade:175
+msgid "Show _handle"
+msgstr "Mostra la _gestió"
+
+#: plugins/tasklist/tasklist-dialog.glade:191
+msgid "Show _tooltips"
+msgstr ""
+
+#: plugins/tasklist/tasklist-dialog.glade:214
+msgid "Sorting _order:"
+msgstr "_Ordenació:"
+
+#: plugins/tasklist/tasklist-dialog.glade:297
+msgid "Mi_ddle click action:"
+msgstr "Acció _del clic del mig:"
+
+#: plugins/tasklist/tasklist-dialog.glade:335
+msgid "_Group windows by application"
+msgstr ""
+
+#: plugins/tasklist/tasklist-dialog.glade:351
+msgid "Restore minimized windows to current _workspace"
+msgstr "Restaura les finestres minimitzades a l'espai de _treball actual"
+
+#: plugins/tasklist/tasklist-dialog.glade:367
+msgid "D_raw window frame when hovering a button"
+msgstr "Di_buixa el marc de la finestra en passar per sobre d'un botó"
+
+#: plugins/tasklist/tasklist-dialog.glade:383
+msgid "_Switch windows using the mouse wheel"
+msgstr "_Canvia de finestra amb la roda del ratolí"
+
+#: plugins/tasklist/tasklist-dialog.glade:405
+msgid "Behaviour"
+msgstr "Comportament"
+
+#: plugins/tasklist/tasklist-dialog.glade:438
+#: plugins/windowmenu/windowmenu-dialog.glade:239
+msgid "Show windows from _all workspaces"
+msgstr "Mostr_a les finestres de tots els espais de treball"
+
+#: plugins/tasklist/tasklist-dialog.glade:454
+msgid "Show windows from all mo_nitors"
+msgstr "Mostra les finestres de tots els mo_nitors"
+
+#: plugins/tasklist/tasklist-dialog.glade:470
+msgid "Show only _minimized windows"
+msgstr "Mostra només les finestres _minimitzades"
+
 #: plugins/tasklist/tasklist-widget.c:3109
 #, c-format
 msgid "Unable to start new instance of '%s'"
@@ -1277,10 +2219,6 @@ msgstr "Des_maximitza-ho tot"
 #: plugins/tasklist/tasklist-widget.c:3919
 msgid "_Close All"
 msgstr "_Tanca-ho tot"
-
-#: plugins/tasklist/tasklist.desktop.in.in:4
-msgid "Window Buttons"
-msgstr "Botons de les finestres"
 
 #: plugins/tasklist/tasklist.desktop.in.in:5
 msgid "Switch between open windows using buttons"
@@ -1316,9 +2254,34 @@ msgstr "Suprimeix l'espai de treball «%s»"
 msgid "Remove Workspace %d"
 msgstr "Suprimeix l'espai de treball %d"
 
+#: plugins/windowmenu/windowmenu-dialog.glade:23
+msgid "Icon"
+msgstr "Icona"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:26
+msgid "Arrow"
+msgstr "Fletxa"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:32
 #: plugins/windowmenu/windowmenu.desktop.in.in:4
 msgid "Window Menu"
 msgstr "Menú de les finestres"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:119
+msgid "Button layout:"
+msgstr "Distribució dels botons:"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:155
+msgid "Show workspace a_ctions"
+msgstr "_Mostra les accions dels espais de treball"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:170
+msgid "Show workspace _names"
+msgstr "Mostra els _noms dels espais de treball"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:185
+msgid "Enable _urgency notification"
+msgstr "Habilita la notificació d'_emergència"
 
 #: plugins/windowmenu/windowmenu.desktop.in.in:5
 msgid "Switch between open windows using a menu"
