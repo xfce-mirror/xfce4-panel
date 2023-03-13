@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2023-03-07 12:47+0100\n"
+"POT-Creation-Date: 2023-03-13 00:46+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: ზურაბი დავითაშვილი <zurabi@tuta.io>, 2020-2021\n"
 "Language-Team: Georgian (http://www.transifex.com/xfce/xfce4-panel/language/ka/)\n"
@@ -81,6 +81,7 @@ msgstr "გაუქმება"
 #: libxfce4panel/xfce-panel-plugin.c:1104
 #: libxfce4panel/xfce-panel-plugin.c:1271 panel/panel-plugin-external.c:409
 #: panel/panel-preferences-dialog.c:1047 panel/panel-preferences-dialog.c:1457
+#: panel/panel-preferences-dialog.glade:1207
 #: plugins/launcher/launcher-dialog.c:860
 msgid "_Remove"
 msgstr "მოცილება"
@@ -121,7 +122,16 @@ msgstr "გამოსვლა"
 
 #. help item
 #: libxfce4panel/xfce-panel-plugin.c:1341 panel/panel-item-dialog.c:196
-#: panel/panel-window.c:3641
+#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3641
+#: plugins/actions/actions-dialog.glade:97
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
+#: plugins/clock/clock-dialog.glade:120
+#: plugins/directorymenu/directorymenu-dialog.glade:49
+#: plugins/launcher/launcher-dialog.glade:398
+#: plugins/pager/pager-dialog.glade:81
+#: plugins/separator/separator-dialog.glade:69
+#: plugins/tasklist/tasklist-dialog.glade:93
+#: plugins/windowmenu/windowmenu-dialog.glade:63
 msgid "_Help"
 msgstr "დახმარება"
 
@@ -314,6 +324,8 @@ msgid "Add New Item"
 msgstr "ახალი საგნის დამატება"
 
 #: panel/panel-dialogs.c:165 panel/panel-item-dialog.c:192
+#: panel/panel-preferences-dialog.glade:1190
+#: plugins/launcher/launcher-dialog.glade:219
 msgid "_Add"
 msgstr "დამატება"
 
@@ -336,15 +348,25 @@ msgstr ""
 msgid "Modifying the panel is not allowed"
 msgstr ""
 
-#: panel/panel-item-dialog.c:186
+#: panel/panel-item-dialog.c:186 plugins/launcher/launcher-dialog.glade:198
 msgid "Add New Items"
 msgstr "ახალი საგნების დამატება"
 
-#: panel/panel-item-dialog.c:200 panel/panel-tic-tac-toe.c:117
+#: panel/panel-item-dialog.c:200 panel/panel-preferences-dialog.glade:157
+#: panel/panel-tic-tac-toe.c:117 plugins/actions/actions-dialog.glade:82
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:55
+#: plugins/clock/clock-dialog.glade:105
+#: plugins/directorymenu/directorymenu-dialog.glade:34
+#: plugins/launcher/launcher-dialog.glade:235
+#: plugins/launcher/launcher-dialog.glade:414
+#: plugins/pager/pager-dialog.glade:97
+#: plugins/separator/separator-dialog.glade:54
+#: plugins/tasklist/tasklist-dialog.glade:77
+#: plugins/windowmenu/windowmenu-dialog.glade:48
 msgid "_Close"
 msgstr "დახურვა"
 
-#: panel/panel-item-dialog.c:216
+#: panel/panel-item-dialog.c:216 plugins/launcher/launcher-dialog.glade:272
 msgid "_Search:"
 msgstr "ძებნა:"
 
@@ -423,6 +445,248 @@ msgstr "შიდა სახელი: %s-%d"
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "თუ თქვენ მოაცილებთ ამ საგანს პანელიდან, ის სამუდამოდ დაიკარგება."
 
+#: panel/panel-preferences-dialog.glade:13
+msgid "Never"
+msgstr "არასოდეს"
+
+#: panel/panel-preferences-dialog.glade:16
+msgid "Intelligently"
+msgstr "გონივრულად"
+
+#: panel/panel-preferences-dialog.glade:19
+msgid "Always"
+msgstr "ყოველთვის"
+
+#: panel/panel-preferences-dialog.glade:81
+msgid "Horizontal"
+msgstr "ჰორიზონტალური"
+
+#: panel/panel-preferences-dialog.glade:84
+msgid "Vertical"
+msgstr "ვერტიკალური"
+
+#: panel/panel-preferences-dialog.glade:87
+msgid "Deskbar"
+msgstr ""
+
+#: panel/panel-preferences-dialog.glade:128
+msgid "None (use system style)"
+msgstr "არცერთი (სისტემის სტილის გამოყენება)"
+
+#: panel/panel-preferences-dialog.glade:131
+msgid "Solid color"
+msgstr "მყარი ფერი"
+
+#: panel/panel-preferences-dialog.glade:134
+msgid "Background image"
+msgstr "ფონური გამოსახულება"
+
+#: panel/panel-preferences-dialog.glade:140
+msgid "Panel Preferences"
+msgstr "პანელის პარამეტრები"
+
+#: panel/panel-preferences-dialog.glade:217
+msgid "Profiles:"
+msgstr "პროფილები:"
+
+#: panel/panel-preferences-dialog.glade:245
+msgid "_Backup and restore"
+msgstr "დარეზერვება და აღდგენა"
+
+#: panel/panel-preferences-dialog.glade:249
+msgid "Switch between panel presets"
+msgstr ""
+
+#: panel/panel-preferences-dialog.glade:293
+msgid "Add a new panel"
+msgstr "ახალი პანელის დამატება"
+
+#: panel/panel-preferences-dialog.glade:318
+msgid "Remove the currently selected panel"
+msgstr "ამჟამად არჩეული პანელის მოცილება"
+
+#: panel/panel-preferences-dialog.glade:369
+#: panel/panel-preferences-dialog.glade:705
+msgid "<b>General</b>"
+msgstr "<b>ზოგადი</b>"
+
+#: panel/panel-preferences-dialog.glade:384
+msgid "M_ode:"
+msgstr "რეჟიმი:"
+
+#: panel/panel-preferences-dialog.glade:413
+msgid "Span mo_nitors"
+msgstr "მონიტორების გაერთიანება"
+
+#: panel/panel-preferences-dialog.glade:417
+msgid "Select this option to extend the panel over multiple monitors."
+msgstr ""
+
+#: panel/panel-preferences-dialog.glade:430
+msgid "_Lock panel"
+msgstr "პანელის ჩაკეტვა"
+
+#: panel/panel-preferences-dialog.glade:434
+msgid ""
+"Select this option to hide the handles of the panel and lock its position."
+msgstr ""
+
+#: panel/panel-preferences-dialog.glade:447
+msgid "Keep panel _above windows"
+msgstr ""
+
+#: panel/panel-preferences-dialog.glade:451
+msgid ""
+"Select this option if you want maximized windows to cover the area behind "
+"the panel. This only works when the panel is attached to a screen edge."
+msgstr ""
+
+#: panel/panel-preferences-dialog.glade:472
+msgid "Au_tomatically hide the panel:"
+msgstr "პანელის ავტომატურად დამალვა:"
+
+#: panel/panel-preferences-dialog.glade:513
+msgid "O_utput:"
+msgstr "_გამოტანა:"
+
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
+#: panel/panel-preferences-dialog.glade:557
+msgid "<b>Measurements</b>"
+msgstr "<b>გაზომვები</b>"
+
+#: panel/panel-preferences-dialog.glade:572
+msgid "Row _size (pixels):"
+msgstr "რიგის ზომა (პიქსელები):"
+
+#: panel/panel-preferences-dialog.glade:586
+msgid "Num_ber of rows:"
+msgstr "რიგების რაოდენობა:"
+
+#: panel/panel-preferences-dialog.glade:600
+msgid "L_ength (pixels):"
+msgstr ""
+
+#: panel/panel-preferences-dialog.glade:625
+msgid "A_utomatically increase the length"
+msgstr "სიგრძის ავტომატურად გაზრდა"
+
+#: panel/panel-preferences-dialog.glade:629
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr "აირჩიეთ ეს ვარიანტი, რათა ავტომატურად გაიზარდოს პანელის სიგრძე თუ მოდულები მოითხოვენ უფრო მეტ სივრცეს."
+
+#: panel/panel-preferences-dialog.glade:679
+msgid "D_isplay"
+msgstr "ეკრანი"
+
+#: panel/panel-preferences-dialog.glade:720
+msgid "Dark mode"
+msgstr "მუქი რეჟიმი"
+
+#: panel/panel-preferences-dialog.glade:760
+msgid "<b>Background</b>"
+msgstr "<b>ფონი</b>"
+
+#: panel/panel-preferences-dialog.glade:775
+#: plugins/separator/separator-dialog.glade:119
+msgid "_Style:"
+msgstr "სტილი:"
+
+#: panel/panel-preferences-dialog.glade:807
+msgid "C_olor:"
+msgstr "ფერი:"
+
+#: panel/panel-preferences-dialog.glade:822
+msgid "Pick a Panel Color"
+msgstr ""
+
+#: panel/panel-preferences-dialog.glade:835
+msgid "_File:"
+msgstr "ფაილი:"
+
+#: panel/panel-preferences-dialog.glade:848
+msgid "Select A Background Image"
+msgstr "ფონური გამოსახულების არჩევა"
+
+#: panel/panel-preferences-dialog.glade:875
+msgid "<b>Icons</b>"
+msgstr "<b>ხატულები</b>"
+
+#: panel/panel-preferences-dialog.glade:889
+msgid "Adjust size au_tomatically"
+msgstr "ზომის ავტომატურად დარეგულირება"
+
+#: panel/panel-preferences-dialog.glade:926
+msgid "Fixed icon _size (pixels):"
+msgstr ""
+
+#: panel/panel-preferences-dialog.glade:969
+msgid "<b>Opacity</b>"
+msgstr "<b>ბუნდოვნება</b>"
+
+#: panel/panel-preferences-dialog.glade:995
+msgid "Configure..."
+msgstr "კონფიგურაცია..."
+
+#: panel/panel-preferences-dialog.glade:1033
+msgid ""
+"<b>Compositing is currently disabled</b>\n"
+"Enable compositing in the window manager for opacity settings in the panel."
+msgstr ""
+
+#. I18N: label for the enter transparency slider
+#: panel/panel-preferences-dialog.glade:1073
+msgid "_Enter:"
+msgstr "შესვლა:"
+
+#. I18N: label for the leave transparency slider
+#: panel/panel-preferences-dialog.glade:1100
+msgid "_Leave:"
+msgstr "დატოვება:"
+
+#: panel/panel-preferences-dialog.glade:1113
+msgid ""
+"Transparency when the pointer is not hovering over the panel, with 0 being "
+"fully transparent and 100 fully opaque."
+msgstr ""
+
+#: panel/panel-preferences-dialog.glade:1140
+msgid "Appeara_nce"
+msgstr "გარეგნობა"
+
+#: panel/panel-preferences-dialog.glade:1195
+msgid "Add new item to this panel"
+msgstr "ახალი საგნის დამატება ამ პანელზე"
+
+#: panel/panel-preferences-dialog.glade:1212
+msgid "Remove currently selected item"
+msgstr "ამჯამად არჩეული საგნის მოცილება"
+
+#: panel/panel-preferences-dialog.glade:1228
+#: plugins/launcher/launcher-dialog.glade:559
+msgid "Edit the currently selected item"
+msgstr "ამჟამად არჩეული საგნის რედაქტირება"
+
+#: panel/panel-preferences-dialog.glade:1249
+msgid "Show about information of the currently selected item"
+msgstr "ამჯამად არჩეული საგნის შესახებ, ინფორმაციის ჩვენება"
+
+#: panel/panel-preferences-dialog.glade:1292
+#: plugins/launcher/launcher-dialog.glade:509
+msgid "Move currently selected item up by one row"
+msgstr ""
+
+#: panel/panel-preferences-dialog.glade:1313
+#: plugins/launcher/launcher-dialog.glade:529
+msgid "Move currently selected item down by one row"
+msgstr ""
+
+#: panel/panel-preferences-dialog.glade:1347
+msgid "Ite_ms"
+msgstr "საგნები"
+
 #: panel/panel-tic-tac-toe.c:115
 msgid "_New Game"
 msgstr "ახალი თამაში"
@@ -467,9 +731,69 @@ msgstr ""
 msgid "Panel configuration has been updated."
 msgstr "პანელის კონფიგურაცია განახლდა."
 
-#: plugins/actions/actions.c:36
+#: plugins/actions/actions-dialog.glade:35
+#: plugins/actions/actions-dialog.glade:64
+#: plugins/actions/actions.desktop.in.in:4
+msgid "Action Buttons"
+msgstr "მოქმედების ღილაკები"
+
+#: plugins/actions/actions-dialog.glade:38 plugins/actions/actions.c:36
 msgid "Session Menu"
 msgstr "სესიის მენიუ"
+
+#: plugins/actions/actions-dialog.glade:49
+msgid "Full Name"
+msgstr "სრული სახელი"
+
+#: plugins/actions/actions-dialog.glade:52
+msgid "Username"
+msgstr "მომხმარებლის სახელი"
+
+#: plugins/actions/actions-dialog.glade:55
+msgid "User ID"
+msgstr "მომხმარებლის ID"
+
+#: plugins/actions/actions-dialog.glade:58
+msgid "Custom"
+msgstr "განსხვავებული"
+
+#: plugins/actions/actions-dialog.glade:162
+msgid "Appeara_nce:"
+msgstr "გარეგნობა:"
+
+#: plugins/actions/actions-dialog.glade:188
+msgid "Title:"
+msgstr "სათაური:"
+
+#: plugins/actions/actions-dialog.glade:201
+msgid "Custo_m title:"
+msgstr "განსხვავებული სათაური:"
+
+#: plugins/actions/actions-dialog.glade:255
+#: plugins/launcher/launcher-dialog.glade:667
+msgid "General"
+msgstr "ზოგადი"
+
+#: plugins/actions/actions-dialog.glade:303
+msgid "Visible"
+msgstr "_ხილული"
+
+#: plugins/actions/actions-dialog.glade:314
+msgid "Action"
+msgstr "მოქმედება"
+
+#: plugins/actions/actions-dialog.glade:334
+msgid "_Show confirmation dialog"
+msgstr "დადასტურების დიალოგის ჩვენება"
+
+#: plugins/actions/actions-dialog.glade:338
+msgid ""
+"Show a confirmation dialog with a 30 second timeout for some of the actions."
+msgstr ""
+
+#: plugins/actions/actions-dialog.glade:354
+msgid "_Actions"
+msgstr "მოქმედებები"
 
 #: plugins/actions/actions.c:157
 msgid "Log Out"
@@ -597,7 +921,9 @@ msgstr "დარწმუნებული ხართ, რომ გსუ�
 msgid "Turning off computer in %d seconds."
 msgstr "კომპიუტერი გამოირთვება %d წამში."
 
-#: plugins/actions/actions.c:677 plugins/separator/separator.desktop.in.in:4
+#: plugins/actions/actions.c:677 plugins/separator/separator-dialog.glade:26
+#: plugins/separator/separator-dialog.glade:38
+#: plugins/separator/separator.desktop.in.in:4
 msgid "Separator"
 msgstr "გამყოფი"
 
@@ -610,10 +936,6 @@ msgstr ""
 msgid "Little Mouse"
 msgstr ""
 
-#: plugins/actions/actions.desktop.in.in:4
-msgid "Action Buttons"
-msgstr "მოქმედების ღილაკები"
-
 #: plugins/actions/actions.desktop.in.in:5
 msgid "Log out, lock or other system actions"
 msgstr "გამოსვლა, დაბლოკვა ან სისტემის სხვა მოქმედებები"
@@ -621,6 +943,79 @@ msgstr "გამოსვლა, დაბლოკვა ან სისტ�
 #: plugins/actions/actions.desktop.in.in:6
 msgid "org.xfce.panel.actions"
 msgstr ""
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:23
+#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:4
+msgid "Applications Menu"
+msgstr "პროგრამების მენიუ"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:101
+#: plugins/directorymenu/directorymenu-dialog.glade:122
+msgid "_Icon:"
+msgstr "ხატულა:"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:125
+msgid "Button _title:"
+msgstr "ღილაკის სათაური:"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:136
+msgid "Show button on one _line"
+msgstr ""
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:151
+msgid "_Show button title"
+msgstr "ღილაკის სათაურის ჩვენება"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:166
+msgid "Show application d_escription in tooltip"
+msgstr ""
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:182
+msgid "Show ic_ons in menu"
+msgstr "მენიუში ხატულების ჩვენება"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:197
+msgid "Show generic application n_ames"
+msgstr ""
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:201
+msgid ""
+"Select this option to show the generic application name in the menu, for "
+"example \"File Manager\" instead of \"Thunar\""
+msgstr ""
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:229
+#: plugins/clock/clock-dialog.glade:388
+#: plugins/directorymenu/directorymenu-dialog.glade:150
+#: plugins/separator/separator-dialog.glade:177
+#: plugins/tasklist/tasklist-dialog.glade:257
+#: plugins/windowmenu/windowmenu-dialog.glade:206
+msgid "Appearance"
+msgstr "გარეგნობა"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:267
+msgid "Use the _default menu"
+msgstr "ნაგულისხმები მენიუს გამოყენება"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:282
+msgid "Ed_it Menu"
+msgstr "მენიუს რედაქტირება"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:304
+msgid "Use c_ustom menu file:"
+msgstr "განსხვავებული მენიუს ფაილის გამოყენება:"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:333
+msgid "Menu _file:"
+msgstr "მენიუს ფაილი:"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:346
+msgid "Select A Menu File"
+msgstr "მენიუს ფაილის არჩევა"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:371
+msgid "Menu File"
+msgstr "მენიუს ფაილი"
 
 #. I18N: default tooltip of the application menu
 #: plugins/applicationsmenu/applicationsmenu.c:37
@@ -643,10 +1038,6 @@ msgstr "კარგი"
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" ბრძანების გაშვება ვერ მოხერხდა."
-
-#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:4
-msgid "Applications Menu"
-msgstr "პროგრამების მენიუ"
 
 #: plugins/applicationsmenu/applicationsmenu.desktop.in.in:5
 msgid "Show a menu containing categories of installed applications"
@@ -703,6 +1094,169 @@ msgstr ""
 #: plugins/clock/clock.c:957
 msgid "Custom Format"
 msgstr "განსხვავებული ფორმატი"
+
+#: plugins/clock/clock-dialog.glade:13
+msgid "Decimal"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:16
+msgid "Sexagesimal"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:19
+msgid "Binary time"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:30
+msgid "Date, then time"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:33
+msgid "Time, then date"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:36
+msgid "Date Only"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:39
+msgid "Time Only"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:71
+msgid "Analog"
+msgstr "ანალოგური"
+
+#: plugins/clock/clock-dialog.glade:74
+msgid "Binary"
+msgstr "ბინარული"
+
+#: plugins/clock/clock-dialog.glade:77
+msgid "Digital"
+msgstr "ციფრული"
+
+#: plugins/clock/clock-dialog.glade:80
+msgid "Fuzzy"
+msgstr "ბუნდოვანი"
+
+#: plugins/clock/clock-dialog.glade:83
+msgid "LCD"
+msgstr "LCD"
+
+#: plugins/clock/clock-dialog.glade:89 plugins/clock/clock.desktop.in.in:4
+msgid "Clock"
+msgstr "საათი"
+
+#: plugins/clock/clock-dialog.glade:172
+msgid ""
+"Name of a timezone corresponding a file in the zoneinfo database, for "
+"example \"America/New_York\". Leave empty to use the localtime."
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:183
+msgid "Time_zone:"
+msgstr "დროის სარტყელი:"
+
+#: plugins/clock/clock-dialog.glade:194
+msgid "Time and Date _Settings..."
+msgstr "დროის და თარიღის პარამეტრები..."
+
+#: plugins/clock/clock-dialog.glade:214
+msgid "Time Settings"
+msgstr "დროის პარამეტრები"
+
+#: plugins/clock/clock-dialog.glade:250
+msgid ""
+"If set, this command is run when the plugin is left-clicked, instead of "
+"displaying the default calendar."
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:261
+msgid "Co_mmand:"
+msgstr "ბრძა_ნება:"
+
+#: plugins/clock/clock-dialog.glade:277
+msgid "Calendar"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:312 plugins/clock/clock-dialog.glade:652
+#: plugins/clock/clock-dialog.glade:774
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"page for additional information."
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:341
+msgid "_Tooltip format:"
+msgstr "მინიშნების ფორმატი:"
+
+#: plugins/clock/clock-dialog.glade:354 plugins/clock/clock-dialog.glade:602
+msgid "_Layout:"
+msgstr "განლაგება:"
+
+#: plugins/clock/clock-dialog.glade:418
+msgid "Sho_w AM/PM"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:433
+msgid "Fl_ash time separators"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:448
+msgid "24-_hour clock"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:491
+msgid "Binary mode:"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:507
+msgid "Display _seconds"
+msgstr "წამების ჩვენება"
+
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
+#: plugins/clock/clock-dialog.glade:528
+msgid "F_uzziness:"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:562
+msgid "Show _inactive dots"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:577
+msgid "Show gri_d"
+msgstr "ბადის ჩვენება"
+
+#: plugins/clock/clock-dialog.glade:623 plugins/clock/clock-dialog.glade:745
+msgid "Font:"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:636 plugins/clock/clock-dialog.glade:758
+msgid "Format:"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
+"the &quot;Help&quot; page for additional information."
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:682
+msgid "Date"
+msgstr "თარიღი"
+
+#: plugins/clock/clock-dialog.glade:727
+msgid "Time"
+msgstr ""
+
+#: plugins/clock/clock-dialog.glade:854
+msgid "Clock Options"
+msgstr "საათის ვარიანტები"
 
 #: plugins/clock/clock-digital.h:27
 msgctxt "Time"
@@ -1015,10 +1569,6 @@ msgctxt "pm"
 msgid "twelve"
 msgstr "თორმეტი"
 
-#: plugins/clock/clock.desktop.in.in:4
-msgid "Clock"
-msgstr "საათი"
-
 #: plugins/clock/clock.desktop.in.in:5
 msgid "What time is it?"
 msgstr "რომელი საათია?"
@@ -1029,6 +1579,7 @@ msgstr ""
 
 #: plugins/directorymenu/directorymenu.c:289
 #: plugins/directorymenu/directorymenu.desktop.in.in:4
+#: plugins/directorymenu/directorymenu-dialog.glade:18
 msgid "Directory Menu"
 msgstr "კატალოგის მენიუ"
 
@@ -1106,6 +1657,55 @@ msgstr ""
 msgid "org.xfce.panel.directorymenu"
 msgstr ""
 
+#: plugins/directorymenu/directorymenu-dialog.glade:99
+msgid "Select A Directory"
+msgstr "კატალოგის არჩევა"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:135
+msgid "_Base Directory:"
+msgstr ""
+
+#: plugins/directorymenu/directorymenu-dialog.glade:179
+msgid "Show 'New Text _Document'"
+msgstr ""
+
+#: plugins/directorymenu/directorymenu-dialog.glade:194
+msgid "Show '_New Folder'"
+msgstr ""
+
+#: plugins/directorymenu/directorymenu-dialog.glade:209
+msgid "Show 'Open in _Terminal'"
+msgstr ""
+
+#: plugins/directorymenu/directorymenu-dialog.glade:224
+msgid "Show '_Open _Folder'"
+msgstr ""
+
+#: plugins/directorymenu/directorymenu-dialog.glade:243
+msgid "Menu"
+msgstr "მენიუ"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:272
+msgid "Show _hidden files"
+msgstr "დამალული ფაილების ჩვენება"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:289
+msgid ""
+"Enter a list of patterns that will be used to determine which files are "
+"visible in a directory. If you specify more than one pattern here, the list "
+"items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr ""
+
+#: plugins/directorymenu/directorymenu-dialog.glade:301
+msgid "_File Pattern:"
+msgstr "ფაილის ნიმუში:"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:316
+#: plugins/tasklist/tasklist-dialog.glade:492
+#: plugins/windowmenu/windowmenu-dialog.glade:260
+msgid "Filtering"
+msgstr "გაფილტვრა"
+
 #: plugins/launcher/launcher.c:393
 msgid "Open launcher menu"
 msgstr "გამშვების მენიუს გახსნა"
@@ -1135,9 +1735,109 @@ msgstr ""
 msgid "Unnamed item"
 msgstr "უსახელო საგანი"
 
+#: plugins/launcher/launcher-dialog.glade:30
+msgid "Default"
+msgstr "ნაგულისხმები"
+
+#: plugins/launcher/launcher-dialog.glade:33
+msgid "North"
+msgstr "ჩრდილოეთი"
+
+#: plugins/launcher/launcher-dialog.glade:36
+msgid "West"
+msgstr "დასავლეთი"
+
+#: plugins/launcher/launcher-dialog.glade:39
+msgid "East"
+msgstr "აღმოსავლეთი"
+
+#: plugins/launcher/launcher-dialog.glade:42
+msgid "South"
+msgstr "სამხრეთი"
+
+#: plugins/launcher/launcher-dialog.glade:45
+msgid "Inside Button"
+msgstr ""
+
+#: plugins/launcher/launcher-dialog.glade:96
+msgid "Up"
+msgstr "მაღლა"
+
+#: plugins/launcher/launcher-dialog.glade:105
+msgid "Down"
+msgstr "დაბლა"
+
+#: plugins/launcher/launcher-dialog.glade:120
+msgid "_Edit Item"
+msgstr "საგნის რედაქტირება"
+
+#: plugins/launcher/launcher-dialog.glade:130
+msgid "D_elete Item"
+msgstr "საგნის წაშლა"
+
+#: plugins/launcher/launcher-dialog.glade:146
+msgid "Add Appli_cation"
+msgstr "პროგრამის დამატება"
+
+#: plugins/launcher/launcher-dialog.glade:162
+msgid "New _Application"
+msgstr "ახალი პროგრამა"
+
+#: plugins/launcher/launcher-dialog.glade:172
+msgid "New _Link"
+msgstr "ახალი ბმული"
+
+#: plugins/launcher/launcher-dialog.glade:205
+#: plugins/launcher/launcher-dialog.glade:599
+msgid "Add one or more existing items to the launcher"
+msgstr ""
+
+#: plugins/launcher/launcher-dialog.glade:379
 #: plugins/launcher/launcher.desktop.in.in:4
 msgid "Launcher"
 msgstr "გამშვები"
+
+#: plugins/launcher/launcher-dialog.glade:579
+msgid "Delete the currently selected item"
+msgstr "ამჟამად არჩეული საგნის წაშლა"
+
+#: plugins/launcher/launcher-dialog.glade:619
+msgid "Add a new empty item"
+msgstr "ახალი ცარიელი საგნის დამატება"
+
+#: plugins/launcher/launcher-dialog.glade:639
+msgid "Add a new hyperlink"
+msgstr ""
+
+#: plugins/launcher/launcher-dialog.glade:682
+msgid "Disable t_ooltips"
+msgstr "მინიშნებების გამორთვა"
+
+#: plugins/launcher/launcher-dialog.glade:686
+msgid ""
+"Select this option to disable the tooltips when moving over the panel button"
+" or menu items."
+msgstr ""
+
+#: plugins/launcher/launcher-dialog.glade:698
+msgid "Show _label instead of icon"
+msgstr ""
+
+#: plugins/launcher/launcher-dialog.glade:713
+msgid "Show last _used item in panel"
+msgstr ""
+
+#: plugins/launcher/launcher-dialog.glade:717
+msgid "Select this option to move the clicked menu item to the panel."
+msgstr ""
+
+#: plugins/launcher/launcher-dialog.glade:736
+msgid "_Arrow button position:"
+msgstr ""
+
+#: plugins/launcher/launcher-dialog.glade:779
+msgid "Advanced"
+msgstr "დამატებითი"
 
 #: plugins/launcher/launcher.desktop.in.in:5
 msgid "Program launcher with optional menu"
@@ -1147,7 +1847,7 @@ msgstr ""
 msgid "org.xfce.panel.launcher"
 msgstr ""
 
-#: plugins/pager/pager.c:685
+#: plugins/pager/pager.c:685 plugins/pager/pager-dialog.glade:64
 msgid "Workspace _Settings..."
 msgstr "სამუშაო სივრცის პარამეტრები..."
 
@@ -1160,9 +1860,37 @@ msgstr ""
 msgid "Workspace %d"
 msgstr "სამუშაო სივრცე %d"
 
-#: plugins/pager/pager.desktop.in.in:4
+#: plugins/pager/pager-dialog.glade:15
+msgid "Buttons"
+msgstr "ღილაკები"
+
+#: plugins/pager/pager-dialog.glade:19
+msgid "Miniature View"
+msgstr ""
+
+#: plugins/pager/pager-dialog.glade:48 plugins/pager/pager.desktop.in.in:4
 msgid "Workspace Switcher"
 msgstr "სამუშაო სივრცეების გადამრთველი"
+
+#: plugins/pager/pager-dialog.glade:131
+msgid "Number of _rows:"
+msgstr "რიგების რაოდენობა:"
+
+#: plugins/pager/pager-dialog.glade:197
+msgid "Show workspace number"
+msgstr "სამუშაო სივრცის ნომერის ჩვენება"
+
+#: plugins/pager/pager-dialog.glade:210
+msgid "Switch workspaces using the mouse wheel"
+msgstr "სამუშაო სივრცეების შეცვლა თაგვის ბორბლის გამოყენებით"
+
+#: plugins/pager/pager-dialog.glade:224
+msgid "Wrap around workspaces"
+msgstr ""
+
+#: plugins/pager/pager-dialog.glade:241
+msgid "<b>Appearance</b>"
+msgstr "გარეგნობა"
 
 #: plugins/pager/pager.desktop.in.in:5
 msgid "Switch between virtual desktops"
@@ -1171,6 +1899,22 @@ msgstr "ვირტუალურ სამუშაო მაგიდებ�
 #: plugins/pager/pager.desktop.in.in:6
 msgid "org.xfce.panel.pager"
 msgstr ""
+
+#: plugins/separator/separator-dialog.glade:23
+msgid "Transparent"
+msgstr "გამჭვირვალე"
+
+#: plugins/separator/separator-dialog.glade:29
+msgid "Handle"
+msgstr ""
+
+#: plugins/separator/separator-dialog.glade:32
+msgid "Dots"
+msgstr "წერტილები"
+
+#: plugins/separator/separator-dialog.glade:156
+msgid "_Expand"
+msgstr "გაფართოება"
 
 #: plugins/separator/separator.desktop.in.in:5
 msgid "Adds a separator or space between panel items"
@@ -1209,6 +1953,106 @@ msgstr "გაწმენდა"
 msgid "Are you sure you want to clear the list of known items?"
 msgstr ""
 
+#: plugins/systray/sn-dialog.glade:48
+msgid "Status Tray Items"
+msgstr ""
+
+#: plugins/systray/sn-dialog.glade:80
+msgid "C_lear Known Items"
+msgstr ""
+
+#: plugins/systray/sn-dialog.glade:84
+msgid "Resets the list of items and their visibility settings"
+msgstr ""
+
+#: plugins/systray/sn-dialog.glade:144
+msgid "_Fixed icon size (pixels):"
+msgstr ""
+
+#: plugins/systray/sn-dialog.glade:185
+msgid "Adjust size _automatically"
+msgstr ""
+
+#: plugins/systray/sn-dialog.glade:213
+msgid "Icons"
+msgstr "ხატულები"
+
+#: plugins/systray/sn-dialog.glade:246
+msgid "Arrange _items in a single row"
+msgstr ""
+
+#: plugins/systray/sn-dialog.glade:250
+msgid "If enabled, ensure that the items are laid out in a single row"
+msgstr ""
+
+#: plugins/systray/sn-dialog.glade:262
+msgid "_Hide items by default"
+msgstr ""
+
+#: plugins/systray/sn-dialog.glade:266
+msgid "When enabled, all new items will be marked as \"Hidden\""
+msgstr ""
+
+#: plugins/systray/sn-dialog.glade:278
+msgid "_Square items"
+msgstr ""
+
+#: plugins/systray/sn-dialog.glade:282
+msgid "Item buttons will take a square when it's possible"
+msgstr ""
+
+#: plugins/systray/sn-dialog.glade:300
+msgid "Behavior"
+msgstr "ქცევა"
+
+#: plugins/systray/sn-dialog.glade:386 plugins/systray/sn-dialog.glade:618
+msgid "Item"
+msgstr "საგანი"
+
+#: plugins/systray/sn-dialog.glade:398 plugins/systray/sn-dialog.glade:630
+msgid "Hidden"
+msgstr "დამალული"
+
+#: plugins/systray/sn-dialog.glade:426 plugins/systray/sn-dialog.glade:658
+msgid "Move the selected item one row up"
+msgstr ""
+
+#: plugins/systray/sn-dialog.glade:446 plugins/systray/sn-dialog.glade:678
+msgid "Move the selected item one row down"
+msgstr ""
+
+#: plugins/systray/sn-dialog.glade:479 plugins/systray/sn-dialog.glade:711
+msgid "Known Items"
+msgstr ""
+
+#: plugins/systray/sn-dialog.glade:512
+msgid "_Menu is primary action"
+msgstr ""
+
+#: plugins/systray/sn-dialog.glade:516
+msgid "Left click will always display the menu for item"
+msgstr ""
+
+#: plugins/systray/sn-dialog.glade:528
+msgid "_Request symbolic icons"
+msgstr ""
+
+#: plugins/systray/sn-dialog.glade:532
+msgid "Load symbolic icons if available"
+msgstr ""
+
+#: plugins/systray/sn-dialog.glade:550
+msgid "Features"
+msgstr "თვისებები"
+
+#: plugins/systray/sn-dialog.glade:566
+msgid "Status Notifiers"
+msgstr ""
+
+#: plugins/systray/sn-dialog.glade:720
+msgid "Systray Icons"
+msgstr ""
+
 #: plugins/systray/systray.c:145
 msgid "Unable to start the notification area"
 msgstr ""
@@ -1243,6 +2087,104 @@ msgstr ""
 msgid "org.xfce.panel.statustray"
 msgstr ""
 
+#: plugins/tasklist/tasklist-dialog.glade:23
+msgid "Nothing"
+msgstr "არაფერი"
+
+#: plugins/tasklist/tasklist-dialog.glade:26
+msgid "Close Window"
+msgstr "ფანჯრის დახურვა"
+
+#: plugins/tasklist/tasklist-dialog.glade:29
+msgid "Minimize Window"
+msgstr "ფანჯრის ჩაკეცვა"
+
+#: plugins/tasklist/tasklist-dialog.glade:32
+msgid "New Instance"
+msgstr ""
+
+#: plugins/tasklist/tasklist-dialog.glade:43
+msgid "Timestamp"
+msgstr "დროის შტამპი"
+
+#: plugins/tasklist/tasklist-dialog.glade:46
+msgid "Group title and timestamp"
+msgstr ""
+
+#: plugins/tasklist/tasklist-dialog.glade:49
+msgid "Window title"
+msgstr "ფანჯრის სათაური"
+
+#: plugins/tasklist/tasklist-dialog.glade:52
+msgid "Group title and window title"
+msgstr ""
+
+#: plugins/tasklist/tasklist-dialog.glade:55
+msgid "None, allow drag-and-drop"
+msgstr ""
+
+#: plugins/tasklist/tasklist-dialog.glade:61
+#: plugins/tasklist/tasklist.desktop.in.in:4
+msgid "Window Buttons"
+msgstr "ფანჯრის ღილაკები"
+
+#: plugins/tasklist/tasklist-dialog.glade:143
+msgid "Show button _labels"
+msgstr ""
+
+#: plugins/tasklist/tasklist-dialog.glade:159
+msgid "Show _flat buttons"
+msgstr ""
+
+#: plugins/tasklist/tasklist-dialog.glade:175
+msgid "Show _handle"
+msgstr ""
+
+#: plugins/tasklist/tasklist-dialog.glade:191
+msgid "Show _tooltips"
+msgstr ""
+
+#: plugins/tasklist/tasklist-dialog.glade:214
+msgid "Sorting _order:"
+msgstr ""
+
+#: plugins/tasklist/tasklist-dialog.glade:297
+msgid "Mi_ddle click action:"
+msgstr "შუა ღილაკზე დაჭერის მოქმედება:"
+
+#: plugins/tasklist/tasklist-dialog.glade:335
+msgid "_Group windows by application"
+msgstr ""
+
+#: plugins/tasklist/tasklist-dialog.glade:351
+msgid "Restore minimized windows to current _workspace"
+msgstr ""
+
+#: plugins/tasklist/tasklist-dialog.glade:367
+msgid "D_raw window frame when hovering a button"
+msgstr ""
+
+#: plugins/tasklist/tasklist-dialog.glade:383
+msgid "_Switch windows using the mouse wheel"
+msgstr ""
+
+#: plugins/tasklist/tasklist-dialog.glade:405
+msgid "Behaviour"
+msgstr "ქცევა"
+
+#: plugins/tasklist/tasklist-dialog.glade:438
+#: plugins/windowmenu/windowmenu-dialog.glade:239
+msgid "Show windows from _all workspaces"
+msgstr "ფანჯრების ჩვენება ყველა სამუშაო სივრციდან"
+
+#: plugins/tasklist/tasklist-dialog.glade:454
+msgid "Show windows from all mo_nitors"
+msgstr "ყველა მონიტორიდან ფანჯრების ჩვენება"
+
+#: plugins/tasklist/tasklist-dialog.glade:470
+msgid "Show only _minimized windows"
+msgstr "მხოლოდ ჩაკეცილი ფანჯრების ჩვენება"
+
 #: plugins/tasklist/tasklist-widget.c:3109
 #, c-format
 msgid "Unable to start new instance of '%s'"
@@ -1275,10 +2217,6 @@ msgstr "ყველას შემცირება"
 #: plugins/tasklist/tasklist-widget.c:3919
 msgid "_Close All"
 msgstr "ყველას დახურვა"
-
-#: plugins/tasklist/tasklist.desktop.in.in:4
-msgid "Window Buttons"
-msgstr "ფანჯრის ღილაკები"
 
 #: plugins/tasklist/tasklist.desktop.in.in:5
 msgid "Switch between open windows using buttons"
@@ -1314,9 +2252,34 @@ msgstr "მოაცილე სამუშაო სივრცე \"%s\""
 msgid "Remove Workspace %d"
 msgstr "მოაცილე სამუშაო სივრცე %d"
 
+#: plugins/windowmenu/windowmenu-dialog.glade:23
+msgid "Icon"
+msgstr "ხატულა"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:26
+msgid "Arrow"
+msgstr "ისარი"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:32
 #: plugins/windowmenu/windowmenu.desktop.in.in:4
 msgid "Window Menu"
 msgstr "ფანჯრის მენიუ"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:119
+msgid "Button layout:"
+msgstr "ღილაკების განლაგება:"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:155
+msgid "Show workspace a_ctions"
+msgstr "სამუშაო სივრცის მოქმედებების ჩვენება"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:170
+msgid "Show workspace _names"
+msgstr "სამუშაო სივრცის სახელების ჩვენება"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:185
+msgid "Enable _urgency notification"
+msgstr "გადაუდებელი შეტყობინების ჩართვა"
 
 #: plugins/windowmenu/windowmenu.desktop.in.in:5
 msgid "Switch between open windows using a menu"
