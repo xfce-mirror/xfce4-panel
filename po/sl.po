@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2023-03-07 12:47+0100\n"
+"POT-Creation-Date: 2023-03-13 00:46+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Arnold Marko <arnold.marko@gmail.com>, 2019-2023\n"
 "Language-Team: Slovenian (http://www.transifex.com/xfce/xfce4-panel/language/sl/)\n"
@@ -85,6 +85,7 @@ msgstr "_Prekliči"
 #: libxfce4panel/xfce-panel-plugin.c:1104
 #: libxfce4panel/xfce-panel-plugin.c:1271 panel/panel-plugin-external.c:409
 #: panel/panel-preferences-dialog.c:1047 panel/panel-preferences-dialog.c:1457
+#: panel/panel-preferences-dialog.glade:1207
 #: plugins/launcher/launcher-dialog.c:860
 msgid "_Remove"
 msgstr "Odst_rani"
@@ -125,7 +126,16 @@ msgstr "_Odjava"
 
 #. help item
 #: libxfce4panel/xfce-panel-plugin.c:1341 panel/panel-item-dialog.c:196
-#: panel/panel-window.c:3641
+#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3641
+#: plugins/actions/actions-dialog.glade:97
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
+#: plugins/clock/clock-dialog.glade:120
+#: plugins/directorymenu/directorymenu-dialog.glade:49
+#: plugins/launcher/launcher-dialog.glade:398
+#: plugins/pager/pager-dialog.glade:81
+#: plugins/separator/separator-dialog.glade:69
+#: plugins/tasklist/tasklist-dialog.glade:93
+#: plugins/windowmenu/windowmenu-dialog.glade:63
 msgid "_Help"
 msgstr "_Pomoč"
 
@@ -320,6 +330,8 @@ msgid "Add New Item"
 msgstr "Dodaj nov predmet"
 
 #: panel/panel-dialogs.c:165 panel/panel-item-dialog.c:192
+#: panel/panel-preferences-dialog.glade:1190
+#: plugins/launcher/launcher-dialog.glade:219
 msgid "_Add"
 msgstr "Dod_aj"
 
@@ -342,15 +354,25 @@ msgstr "Ker je pano zagnan v kiosk načinu, kot navadni uporabnik nimate dovolje
 msgid "Modifying the panel is not allowed"
 msgstr "Spreminjanje panoja ni dovoljeno"
 
-#: panel/panel-item-dialog.c:186
+#: panel/panel-item-dialog.c:186 plugins/launcher/launcher-dialog.glade:198
 msgid "Add New Items"
 msgstr "Dodaj nove predmete"
 
-#: panel/panel-item-dialog.c:200 panel/panel-tic-tac-toe.c:117
+#: panel/panel-item-dialog.c:200 panel/panel-preferences-dialog.glade:157
+#: panel/panel-tic-tac-toe.c:117 plugins/actions/actions-dialog.glade:82
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:55
+#: plugins/clock/clock-dialog.glade:105
+#: plugins/directorymenu/directorymenu-dialog.glade:34
+#: plugins/launcher/launcher-dialog.glade:235
+#: plugins/launcher/launcher-dialog.glade:414
+#: plugins/pager/pager-dialog.glade:97
+#: plugins/separator/separator-dialog.glade:54
+#: plugins/tasklist/tasklist-dialog.glade:77
+#: plugins/windowmenu/windowmenu-dialog.glade:48
 msgid "_Close"
 msgstr "_Zapri"
 
-#: panel/panel-item-dialog.c:216
+#: panel/panel-item-dialog.c:216 plugins/launcher/launcher-dialog.glade:272
 msgid "_Search:"
 msgstr "_Poišči:"
 
@@ -429,6 +451,248 @@ msgstr "Interno ime: %s-%d"
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Če odstranite predmet s panoja, bo ta trajno izgubljen."
 
+#: panel/panel-preferences-dialog.glade:13
+msgid "Never"
+msgstr "Nikoli"
+
+#: panel/panel-preferences-dialog.glade:16
+msgid "Intelligently"
+msgstr "Inteligentno"
+
+#: panel/panel-preferences-dialog.glade:19
+msgid "Always"
+msgstr "Vedno"
+
+#: panel/panel-preferences-dialog.glade:81
+msgid "Horizontal"
+msgstr "Vodoravno"
+
+#: panel/panel-preferences-dialog.glade:84
+msgid "Vertical"
+msgstr "Navpično"
+
+#: panel/panel-preferences-dialog.glade:87
+msgid "Deskbar"
+msgstr "Deskbar"
+
+#: panel/panel-preferences-dialog.glade:128
+msgid "None (use system style)"
+msgstr "Brez (uporabi sistemski stil)"
+
+#: panel/panel-preferences-dialog.glade:131
+msgid "Solid color"
+msgstr "Polna barva"
+
+#: panel/panel-preferences-dialog.glade:134
+msgid "Background image"
+msgstr "Slika ozadja"
+
+#: panel/panel-preferences-dialog.glade:140
+msgid "Panel Preferences"
+msgstr "Nastavitve panoja"
+
+#: panel/panel-preferences-dialog.glade:217
+msgid "Profiles:"
+msgstr "Profili:"
+
+#: panel/panel-preferences-dialog.glade:245
+msgid "_Backup and restore"
+msgstr "_Varnostno kopiranje in obnova"
+
+#: panel/panel-preferences-dialog.glade:249
+msgid "Switch between panel presets"
+msgstr "Preklopi med predlogami panojev"
+
+#: panel/panel-preferences-dialog.glade:293
+msgid "Add a new panel"
+msgstr "Dodaj nov pano"
+
+#: panel/panel-preferences-dialog.glade:318
+msgid "Remove the currently selected panel"
+msgstr "Odstrani trenutno izbran pano"
+
+#: panel/panel-preferences-dialog.glade:369
+#: panel/panel-preferences-dialog.glade:705
+msgid "<b>General</b>"
+msgstr "<b>Splošno</b>"
+
+#: panel/panel-preferences-dialog.glade:384
+msgid "M_ode:"
+msgstr "_Način:"
+
+#: panel/panel-preferences-dialog.glade:413
+msgid "Span mo_nitors"
+msgstr "Razširi prek vseh zaslo_nov"
+
+#: panel/panel-preferences-dialog.glade:417
+msgid "Select this option to extend the panel over multiple monitors."
+msgstr "Z izbiro te možnosti se pano raztegne preko več zaslonov."
+
+#: panel/panel-preferences-dialog.glade:430
+msgid "_Lock panel"
+msgstr "_Zakleni pano"
+
+#: panel/panel-preferences-dialog.glade:434
+msgid ""
+"Select this option to hide the handles of the panel and lock its position."
+msgstr "Ta možnost skrije ročice panoja in onemogoči njegovo premikanje."
+
+#: panel/panel-preferences-dialog.glade:447
+msgid "Keep panel _above windows"
+msgstr "Zadrži pano n_ad okni"
+
+#: panel/panel-preferences-dialog.glade:451
+msgid ""
+"Select this option if you want maximized windows to cover the area behind "
+"the panel. This only works when the panel is attached to a screen edge."
+msgstr "Ta možnost povzroči, da se okna razpnejo tudi v prostor pod panojem. To deluje samo, ko se pano dotika roba zaslona."
+
+#: panel/panel-preferences-dialog.glade:472
+msgid "Au_tomatically hide the panel:"
+msgstr "S_amodejno skrij pano:"
+
+#: panel/panel-preferences-dialog.glade:513
+msgid "O_utput:"
+msgstr "_Izhod:"
+
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
+#: panel/panel-preferences-dialog.glade:557
+msgid "<b>Measurements</b>"
+msgstr "<b>Merila</b>"
+
+#: panel/panel-preferences-dialog.glade:572
+msgid "Row _size (pixels):"
+msgstr "Vrstica_velikost (pikslov):"
+
+#: panel/panel-preferences-dialog.glade:586
+msgid "Num_ber of rows:"
+msgstr "Število _vrstic:"
+
+#: panel/panel-preferences-dialog.glade:600
+msgid "L_ength (pixels):"
+msgstr "Dol_žina (pikslov):"
+
+#: panel/panel-preferences-dialog.glade:625
+msgid "A_utomatically increase the length"
+msgstr "Samodejn_o povečaj dolžino"
+
+#: panel/panel-preferences-dialog.glade:629
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr "S to možnostjo se pano samodejno podaljša, če vtičniki zahtevajo več prostora."
+
+#: panel/panel-preferences-dialog.glade:679
+msgid "D_isplay"
+msgstr "Pr_ikaz"
+
+#: panel/panel-preferences-dialog.glade:720
+msgid "Dark mode"
+msgstr "Temni način"
+
+#: panel/panel-preferences-dialog.glade:760
+msgid "<b>Background</b>"
+msgstr "<b>Ozadje</b>"
+
+#: panel/panel-preferences-dialog.glade:775
+#: plugins/separator/separator-dialog.glade:119
+msgid "_Style:"
+msgstr "_Slog:"
+
+#: panel/panel-preferences-dialog.glade:807
+msgid "C_olor:"
+msgstr "_Barva:"
+
+#: panel/panel-preferences-dialog.glade:822
+msgid "Pick a Panel Color"
+msgstr "Izberite barvo panoja"
+
+#: panel/panel-preferences-dialog.glade:835
+msgid "_File:"
+msgstr "_Datoteka:"
+
+#: panel/panel-preferences-dialog.glade:848
+msgid "Select A Background Image"
+msgstr "Izberite ozadno sliko"
+
+#: panel/panel-preferences-dialog.glade:875
+msgid "<b>Icons</b>"
+msgstr "<b>Ikone</b>"
+
+#: panel/panel-preferences-dialog.glade:889
+msgid "Adjust size au_tomatically"
+msgstr "Samodejno prilagodi velikos_t"
+
+#: panel/panel-preferences-dialog.glade:926
+msgid "Fixed icon _size (pixels):"
+msgstr "Fik_sna velikost ikon (pikslov)"
+
+#: panel/panel-preferences-dialog.glade:969
+msgid "<b>Opacity</b>"
+msgstr "<b>Pokrivnost</b>"
+
+#: panel/panel-preferences-dialog.glade:995
+msgid "Configure..."
+msgstr "Nastavi..."
+
+#: panel/panel-preferences-dialog.glade:1033
+msgid ""
+"<b>Compositing is currently disabled</b>\n"
+"Enable compositing in the window manager for opacity settings in the panel."
+msgstr "<b>Sestavljanje je trenutno onemogočeno</b>\nZa nastavljanje pokrivnost panoja vklopite sestavljanje v upravljalniku oken."
+
+#. I18N: label for the enter transparency slider
+#: panel/panel-preferences-dialog.glade:1073
+msgid "_Enter:"
+msgstr "Ob v_stopu:"
+
+#. I18N: label for the leave transparency slider
+#: panel/panel-preferences-dialog.glade:1100
+msgid "_Leave:"
+msgstr "Ob i_zstopu:"
+
+#: panel/panel-preferences-dialog.glade:1113
+msgid ""
+"Transparency when the pointer is not hovering over the panel, with 0 being "
+"fully transparent and 100 fully opaque."
+msgstr "Prozornost, ko kazalec NI nad panojem, pri čemer je 0 popolnoma prozorno in 100 popolnoma prekrivno."
+
+#: panel/panel-preferences-dialog.glade:1140
+msgid "Appeara_nce"
+msgstr "_Videz"
+
+#: panel/panel-preferences-dialog.glade:1195
+msgid "Add new item to this panel"
+msgstr "Dodaj nov predmet na pano"
+
+#: panel/panel-preferences-dialog.glade:1212
+msgid "Remove currently selected item"
+msgstr "Odstrani trenutno izbrani predmet"
+
+#: panel/panel-preferences-dialog.glade:1228
+#: plugins/launcher/launcher-dialog.glade:559
+msgid "Edit the currently selected item"
+msgstr "Uredi trenutno izbrani predmet"
+
+#: panel/panel-preferences-dialog.glade:1249
+msgid "Show about information of the currently selected item"
+msgstr "Prikaži podatke o trenutno izbranem predmetu"
+
+#: panel/panel-preferences-dialog.glade:1292
+#: plugins/launcher/launcher-dialog.glade:509
+msgid "Move currently selected item up by one row"
+msgstr "Premakni trenutno izbrani predmet eno vrstico gor"
+
+#: panel/panel-preferences-dialog.glade:1313
+#: plugins/launcher/launcher-dialog.glade:529
+msgid "Move currently selected item down by one row"
+msgstr "Premakni trenutno izbrani predmet eno vrstico dol"
+
+#: panel/panel-preferences-dialog.glade:1347
+msgid "Ite_ms"
+msgstr "Pred_meti"
+
 #: panel/panel-tic-tac-toe.c:115
 msgid "_New Game"
 msgstr "_Nova igra"
@@ -473,9 +737,69 @@ msgstr "Ni bilo mogoče preseliti obstoječih nastavitev pulta"
 msgid "Panel configuration has been updated."
 msgstr "Konfiguracija panoja je bila posodobljena."
 
-#: plugins/actions/actions.c:36
+#: plugins/actions/actions-dialog.glade:35
+#: plugins/actions/actions-dialog.glade:64
+#: plugins/actions/actions.desktop.in.in:4
+msgid "Action Buttons"
+msgstr "Gumbi dejanj"
+
+#: plugins/actions/actions-dialog.glade:38 plugins/actions/actions.c:36
 msgid "Session Menu"
 msgstr "Meni seje"
+
+#: plugins/actions/actions-dialog.glade:49
+msgid "Full Name"
+msgstr "Polno ime"
+
+#: plugins/actions/actions-dialog.glade:52
+msgid "Username"
+msgstr "Uporabniško ime"
+
+#: plugins/actions/actions-dialog.glade:55
+msgid "User ID"
+msgstr "Uporbniški ID"
+
+#: plugins/actions/actions-dialog.glade:58
+msgid "Custom"
+msgstr "Lastni format za datum"
+
+#: plugins/actions/actions-dialog.glade:162
+msgid "Appeara_nce:"
+msgstr "_Videz:"
+
+#: plugins/actions/actions-dialog.glade:188
+msgid "Title:"
+msgstr "Naslov:"
+
+#: plugins/actions/actions-dialog.glade:201
+msgid "Custo_m title:"
+msgstr "_Lastni naslov"
+
+#: plugins/actions/actions-dialog.glade:255
+#: plugins/launcher/launcher-dialog.glade:667
+msgid "General"
+msgstr "Splošno"
+
+#: plugins/actions/actions-dialog.glade:303
+msgid "Visible"
+msgstr "Vidno"
+
+#: plugins/actions/actions-dialog.glade:314
+msgid "Action"
+msgstr "Dejanje"
+
+#: plugins/actions/actions-dialog.glade:334
+msgid "_Show confirmation dialog"
+msgstr "Pri_kaži potrditveno okno"
+
+#: plugins/actions/actions-dialog.glade:338
+msgid ""
+"Show a confirmation dialog with a 30 second timeout for some of the actions."
+msgstr "Prikaži potrditveno okno s 30-sekundno zakasnitvijo za nekatera dejanja."
+
+#: plugins/actions/actions-dialog.glade:354
+msgid "_Actions"
+msgstr "_Dejanja"
 
 #: plugins/actions/actions.c:157
 msgid "Log Out"
@@ -603,7 +927,9 @@ msgstr "Ali ste prepričani, da želite izklopiti sistem?"
 msgid "Turning off computer in %d seconds."
 msgstr "Izklapljam čez %d sekund."
 
-#: plugins/actions/actions.c:677 plugins/separator/separator.desktop.in.in:4
+#: plugins/actions/actions.c:677 plugins/separator/separator-dialog.glade:26
+#: plugins/separator/separator-dialog.glade:38
+#: plugins/separator/separator.desktop.in.in:4
 msgid "Separator"
 msgstr "Ločilnik"
 
@@ -616,10 +942,6 @@ msgstr "Ni mogoče zagnati dejanja \"%s\"."
 msgid "Little Mouse"
 msgstr "Mala miška"
 
-#: plugins/actions/actions.desktop.in.in:4
-msgid "Action Buttons"
-msgstr "Gumbi dejanj"
-
 #: plugins/actions/actions.desktop.in.in:5
 msgid "Log out, lock or other system actions"
 msgstr "Odjava, zaklep zaslona in ostala sistemska dejanja"
@@ -627,6 +949,79 @@ msgstr "Odjava, zaklep zaslona in ostala sistemska dejanja"
 #: plugins/actions/actions.desktop.in.in:6
 msgid "org.xfce.panel.actions"
 msgstr ""
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:23
+#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:4
+msgid "Applications Menu"
+msgstr "Meni programov"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:101
+#: plugins/directorymenu/directorymenu-dialog.glade:122
+msgid "_Icon:"
+msgstr "_Ikona:"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:125
+msgid "Button _title:"
+msgstr "_Oznaka gumba:"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:136
+msgid "Show button on one _line"
+msgstr "Gumb prikaži v eni _vrstici"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:151
+msgid "_Show button title"
+msgstr "Pokaži oznako gum_ba"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:166
+msgid "Show application d_escription in tooltip"
+msgstr "Pokaži opis programa v namigu za orodje"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:182
+msgid "Show ic_ons in menu"
+msgstr "Prikaži ik_one v meniju"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:197
+msgid "Show generic application n_ames"
+msgstr "Prik_aži generična imena programov"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:201
+msgid ""
+"Select this option to show the generic application name in the menu, for "
+"example \"File Manager\" instead of \"Thunar\""
+msgstr "Z izbiro te možnosti so v meniju prikazana generična imena programov, npr. \"Upravljalnik datotek\" namesto \"Thunar\""
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:229
+#: plugins/clock/clock-dialog.glade:388
+#: plugins/directorymenu/directorymenu-dialog.glade:150
+#: plugins/separator/separator-dialog.glade:177
+#: plugins/tasklist/tasklist-dialog.glade:257
+#: plugins/windowmenu/windowmenu-dialog.glade:206
+msgid "Appearance"
+msgstr "Videz"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:267
+msgid "Use the _default menu"
+msgstr "Uporabi _privzeti meni"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:282
+msgid "Ed_it Menu"
+msgstr "_Uredi meni"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:304
+msgid "Use c_ustom menu file:"
+msgstr "_Uporabi prilagojeni meni:"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:333
+msgid "Menu _file:"
+msgstr "Menijska _datoteka:"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:346
+msgid "Select A Menu File"
+msgstr "Izberite menijsko datoteko"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:371
+msgid "Menu File"
+msgstr "Menijska datoteka"
 
 #. I18N: default tooltip of the application menu
 #: plugins/applicationsmenu/applicationsmenu.c:37
@@ -649,10 +1044,6 @@ msgstr "_V redu"
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Izvedba ukaza \"%s\" je spodletela."
-
-#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:4
-msgid "Applications Menu"
-msgstr "Meni programov"
 
 #: plugins/applicationsmenu/applicationsmenu.desktop.in.in:5
 msgid "Show a menu containing categories of installed applications"
@@ -709,6 +1100,169 @@ msgstr "Ni bilo mogoče zagnati urnega ukaza"
 #: plugins/clock/clock.c:957
 msgid "Custom Format"
 msgstr "Zapis po meri"
+
+#: plugins/clock/clock-dialog.glade:13
+msgid "Decimal"
+msgstr "Decimalno"
+
+#: plugins/clock/clock-dialog.glade:16
+msgid "Sexagesimal"
+msgstr "Seksagesimalno"
+
+#: plugins/clock/clock-dialog.glade:19
+msgid "Binary time"
+msgstr "Binarni čas"
+
+#: plugins/clock/clock-dialog.glade:30
+msgid "Date, then time"
+msgstr "Datum, nato čas"
+
+#: plugins/clock/clock-dialog.glade:33
+msgid "Time, then date"
+msgstr "Čas, nato datum"
+
+#: plugins/clock/clock-dialog.glade:36
+msgid "Date Only"
+msgstr "Samo datum"
+
+#: plugins/clock/clock-dialog.glade:39
+msgid "Time Only"
+msgstr "Samo čas"
+
+#: plugins/clock/clock-dialog.glade:71
+msgid "Analog"
+msgstr "Analogna"
+
+#: plugins/clock/clock-dialog.glade:74
+msgid "Binary"
+msgstr "Binarna"
+
+#: plugins/clock/clock-dialog.glade:77
+msgid "Digital"
+msgstr "Digitalna"
+
+#: plugins/clock/clock-dialog.glade:80
+msgid "Fuzzy"
+msgstr "Ohlapna"
+
+#: plugins/clock/clock-dialog.glade:83
+msgid "LCD"
+msgstr "LCD"
+
+#: plugins/clock/clock-dialog.glade:89 plugins/clock/clock.desktop.in.in:4
+msgid "Clock"
+msgstr "Ura"
+
+#: plugins/clock/clock-dialog.glade:172
+msgid ""
+"Name of a timezone corresponding a file in the zoneinfo database, for "
+"example \"America/New_York\". Leave empty to use the localtime."
+msgstr "Ime časovnega pasu, ki ustreza datoteki v zoneinfo zbirki, npr. \"Europe/Ljubljana\". Če pustite prazno, bo uporabljen lokalni sistemski čas."
+
+#: plugins/clock/clock-dialog.glade:183
+msgid "Time_zone:"
+msgstr "Časovni _pas:"
+
+#: plugins/clock/clock-dialog.glade:194
+msgid "Time and Date _Settings..."
+msgstr "_Nastavitve časa in datuma ..."
+
+#: plugins/clock/clock-dialog.glade:214
+msgid "Time Settings"
+msgstr "Nastavitve časa"
+
+#: plugins/clock/clock-dialog.glade:250
+msgid ""
+"If set, this command is run when the plugin is left-clicked, instead of "
+"displaying the default calendar."
+msgstr "Če je izbrano, se ta ukaz izvede ob levem kliku na vtičnik, namesto da bi se prikazal koledar."
+
+#: plugins/clock/clock-dialog.glade:261
+msgid "Co_mmand:"
+msgstr "_Ukaz:"
+
+#: plugins/clock/clock-dialog.glade:277
+msgid "Calendar"
+msgstr "Koledar"
+
+#: plugins/clock/clock-dialog.glade:312 plugins/clock/clock-dialog.glade:652
+#: plugins/clock/clock-dialog.glade:774
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"page for additional information."
+msgstr "Zapis določa, katere dele datuma in časa naj se doda na pano. Na primer, %Y bo nadomeščeno z letom, %m z mesecem, %d z dnem. Podobno bo besedilo znotraj <b></b> oznak poudarjeno. Glej stran \"Pomoč\" za dodatne informacije."
+
+#: plugins/clock/clock-dialog.glade:341
+msgid "_Tooltip format:"
+msgstr "Zapis orodnega nami_ga:"
+
+#: plugins/clock/clock-dialog.glade:354 plugins/clock/clock-dialog.glade:602
+msgid "_Layout:"
+msgstr "_Razporeditev:"
+
+#: plugins/clock/clock-dialog.glade:418
+msgid "Sho_w AM/PM"
+msgstr "Pokaži AM/PM"
+
+#: plugins/clock/clock-dialog.glade:433
+msgid "Fl_ash time separators"
+msgstr "Č_asovni ločilnik"
+
+#: plugins/clock/clock-dialog.glade:448
+msgid "24-_hour clock"
+msgstr "24-_urna ura"
+
+#: plugins/clock/clock-dialog.glade:491
+msgid "Binary mode:"
+msgstr "Binarni način:"
+
+#: plugins/clock/clock-dialog.glade:507
+msgid "Display _seconds"
+msgstr "Prikaži _sekunde"
+
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
+#: plugins/clock/clock-dialog.glade:528
+msgid "F_uzziness:"
+msgstr "Ohla_pnost:"
+
+#: plugins/clock/clock-dialog.glade:562
+msgid "Show _inactive dots"
+msgstr "Prikaž_i neaktivne pike"
+
+#: plugins/clock/clock-dialog.glade:577
+msgid "Show gri_d"
+msgstr "Prikaži m_režo"
+
+#: plugins/clock/clock-dialog.glade:623 plugins/clock/clock-dialog.glade:745
+msgid "Font:"
+msgstr "Pisava: "
+
+#: plugins/clock/clock-dialog.glade:636 plugins/clock/clock-dialog.glade:758
+msgid "Format:"
+msgstr "Format: "
+
+#: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
+"the &quot;Help&quot; page for additional information."
+msgstr "Format določa, katere dele datuma in časa naj se doda na pano. Na primer, %Y bo nadomeščeno z letom, %m z mesecem, %d z dnem. Podobno bo besedilo znotraj &lt;b&gt;&lt;/b&gt;  oznak poudarjeno. Glej stran&quot;Pomoč&quot; za dodatne informacije."
+
+#: plugins/clock/clock-dialog.glade:682
+msgid "Date"
+msgstr "Datum"
+
+#: plugins/clock/clock-dialog.glade:727
+msgid "Time"
+msgstr "Čas"
+
+#: plugins/clock/clock-dialog.glade:854
+msgid "Clock Options"
+msgstr "Možnosti ure"
 
 #: plugins/clock/clock-digital.h:27
 msgctxt "Time"
@@ -1021,10 +1575,6 @@ msgctxt "pm"
 msgid "twelve"
 msgstr "dvanajst"
 
-#: plugins/clock/clock.desktop.in.in:4
-msgid "Clock"
-msgstr "Ura"
-
 #: plugins/clock/clock.desktop.in.in:5
 msgid "What time is it?"
 msgstr "Koliko je ura?"
@@ -1035,6 +1585,7 @@ msgstr ""
 
 #: plugins/directorymenu/directorymenu.c:289
 #: plugins/directorymenu/directorymenu.desktop.in.in:4
+#: plugins/directorymenu/directorymenu-dialog.glade:18
 msgid "Directory Menu"
 msgstr "Meni map"
 
@@ -1112,6 +1663,55 @@ msgstr "V meniju prikaži drevesno strukturo map"
 msgid "org.xfce.panel.directorymenu"
 msgstr ""
 
+#: plugins/directorymenu/directorymenu-dialog.glade:99
+msgid "Select A Directory"
+msgstr "Izberite mapo"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:135
+msgid "_Base Directory:"
+msgstr "Os_novna mapa:"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:179
+msgid "Show 'New Text _Document'"
+msgstr "Prikaži 'Nov dokument_z_besedilom'"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:194
+msgid "Show '_New Folder'"
+msgstr "Prikaži '_Nova mapa'"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:209
+msgid "Show 'Open in _Terminal'"
+msgstr "Prikaži 'Odpri v _terminalu'"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:224
+msgid "Show '_Open _Folder'"
+msgstr "Prikaži '_Odpri _Mapo'"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:243
+msgid "Menu"
+msgstr "Meni"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:272
+msgid "Show _hidden files"
+msgstr "Pokaži _skrite datoteke"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:289
+msgid ""
+"Enter a list of patterns that will be used to determine which files are "
+"visible in a directory. If you specify more than one pattern here, the list "
+"items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr "Vnesite seznam vzorcev, ki bodo določali, katere datoteke naj bodo vidne v mapi. Če določite več kot en vzorec, morajo biti ti ločeni s podpičji (npr. *.txt;*.doc)."
+
+#: plugins/directorymenu/directorymenu-dialog.glade:301
+msgid "_File Pattern:"
+msgstr "V_zorec:"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:316
+#: plugins/tasklist/tasklist-dialog.glade:492
+#: plugins/windowmenu/windowmenu-dialog.glade:260
+msgid "Filtering"
+msgstr "Filtriranje"
+
 #: plugins/launcher/launcher.c:393
 msgid "Open launcher menu"
 msgstr "Odpri meni zaganjalnikov"
@@ -1141,9 +1741,109 @@ msgstr "Ali ste prepričani, da želite odstraniti \"%s\"?"
 msgid "Unnamed item"
 msgstr "Neimenovan predmet"
 
+#: plugins/launcher/launcher-dialog.glade:30
+msgid "Default"
+msgstr "Privzeto"
+
+#: plugins/launcher/launcher-dialog.glade:33
+msgid "North"
+msgstr "Sever"
+
+#: plugins/launcher/launcher-dialog.glade:36
+msgid "West"
+msgstr "Zahod"
+
+#: plugins/launcher/launcher-dialog.glade:39
+msgid "East"
+msgstr "Vzhod"
+
+#: plugins/launcher/launcher-dialog.glade:42
+msgid "South"
+msgstr "Jug"
+
+#: plugins/launcher/launcher-dialog.glade:45
+msgid "Inside Button"
+msgstr "Znotraj gumba"
+
+#: plugins/launcher/launcher-dialog.glade:96
+msgid "Up"
+msgstr "Gor"
+
+#: plugins/launcher/launcher-dialog.glade:105
+msgid "Down"
+msgstr "Dol"
+
+#: plugins/launcher/launcher-dialog.glade:120
+msgid "_Edit Item"
+msgstr "_Uredi predmet"
+
+#: plugins/launcher/launcher-dialog.glade:130
+msgid "D_elete Item"
+msgstr "_Izbriši predmet"
+
+#: plugins/launcher/launcher-dialog.glade:146
+msgid "Add Appli_cation"
+msgstr "_Dodaj program"
+
+#: plugins/launcher/launcher-dialog.glade:162
+msgid "New _Application"
+msgstr "_Nov program"
+
+#: plugins/launcher/launcher-dialog.glade:172
+msgid "New _Link"
+msgstr "Nova _povezava"
+
+#: plugins/launcher/launcher-dialog.glade:205
+#: plugins/launcher/launcher-dialog.glade:599
+msgid "Add one or more existing items to the launcher"
+msgstr "Dodaj enega ali več predmetov v zaganjalnik"
+
+#: plugins/launcher/launcher-dialog.glade:379
 #: plugins/launcher/launcher.desktop.in.in:4
 msgid "Launcher"
 msgstr "Zaganjalnik"
+
+#: plugins/launcher/launcher-dialog.glade:579
+msgid "Delete the currently selected item"
+msgstr "Odstrani izbrani predmet"
+
+#: plugins/launcher/launcher-dialog.glade:619
+msgid "Add a new empty item"
+msgstr "Dodaj nov predmet"
+
+#: plugins/launcher/launcher-dialog.glade:639
+msgid "Add a new hyperlink"
+msgstr "Dodaj novo spletno povezavo"
+
+#: plugins/launcher/launcher-dialog.glade:682
+msgid "Disable t_ooltips"
+msgstr "Onemogoči _orodne namige"
+
+#: plugins/launcher/launcher-dialog.glade:686
+msgid ""
+"Select this option to disable the tooltips when moving over the panel button"
+" or menu items."
+msgstr "S to možnostjo izklopite prikaz orodnih namigov ob pomiku nad gumb panoja ali predmet menija."
+
+#: plugins/launcher/launcher-dialog.glade:698
+msgid "Show _label instead of icon"
+msgstr "Prikaži _oznako namesto ikone"
+
+#: plugins/launcher/launcher-dialog.glade:713
+msgid "Show last _used item in panel"
+msgstr "Pokaži zadnji _uporabljeni predmet na panoju"
+
+#: plugins/launcher/launcher-dialog.glade:717
+msgid "Select this option to move the clicked menu item to the panel."
+msgstr "Izberite to možnost za premik kliknjenega predmeta iz menija na pano."
+
+#: plugins/launcher/launcher-dialog.glade:736
+msgid "_Arrow button position:"
+msgstr "Polož_aj puščice:"
+
+#: plugins/launcher/launcher-dialog.glade:779
+msgid "Advanced"
+msgstr "Napredno"
 
 #: plugins/launcher/launcher.desktop.in.in:5
 msgid "Program launcher with optional menu"
@@ -1153,7 +1853,7 @@ msgstr "Programski zaganjalnik, po možnosti z menijem"
 msgid "org.xfce.panel.launcher"
 msgstr ""
 
-#: plugins/pager/pager.c:685
+#: plugins/pager/pager.c:685 plugins/pager/pager-dialog.glade:64
 msgid "Workspace _Settings..."
 msgstr "Na_stavitve delovnih površin..."
 
@@ -1166,9 +1866,37 @@ msgstr "Ni mogoče odpreti nastavitev delovnih površin"
 msgid "Workspace %d"
 msgstr "Delovna površina %d"
 
-#: plugins/pager/pager.desktop.in.in:4
+#: plugins/pager/pager-dialog.glade:15
+msgid "Buttons"
+msgstr "Gumbi"
+
+#: plugins/pager/pager-dialog.glade:19
+msgid "Miniature View"
+msgstr "Miniaturni pogled"
+
+#: plugins/pager/pager-dialog.glade:48 plugins/pager/pager.desktop.in.in:4
 msgid "Workspace Switcher"
 msgstr "Preklopnik delovnih površin"
+
+#: plugins/pager/pager-dialog.glade:131
+msgid "Number of _rows:"
+msgstr "Število _vrstic:"
+
+#: plugins/pager/pager-dialog.glade:197
+msgid "Show workspace number"
+msgstr "Prikaži številko delovne površine"
+
+#: plugins/pager/pager-dialog.glade:210
+msgid "Switch workspaces using the mouse wheel"
+msgstr "Pokaži delovne površine z uporabo miškinega kolesca"
+
+#: plugins/pager/pager-dialog.glade:224
+msgid "Wrap around workspaces"
+msgstr "Ovij okoli delovnih površin"
+
+#: plugins/pager/pager-dialog.glade:241
+msgid "<b>Appearance</b>"
+msgstr "<b>Videz</b>"
 
 #: plugins/pager/pager.desktop.in.in:5
 msgid "Switch between virtual desktops"
@@ -1177,6 +1905,22 @@ msgstr "Preklopi med navideznimi namizji"
 #: plugins/pager/pager.desktop.in.in:6
 msgid "org.xfce.panel.pager"
 msgstr ""
+
+#: plugins/separator/separator-dialog.glade:23
+msgid "Transparent"
+msgstr "Prozorno"
+
+#: plugins/separator/separator-dialog.glade:29
+msgid "Handle"
+msgstr "Ročica"
+
+#: plugins/separator/separator-dialog.glade:32
+msgid "Dots"
+msgstr "Pike"
+
+#: plugins/separator/separator-dialog.glade:156
+msgid "_Expand"
+msgstr "_Razširi"
 
 #: plugins/separator/separator.desktop.in.in:5
 msgid "Adds a separator or space between panel items"
@@ -1215,6 +1959,106 @@ msgstr "Počisti"
 msgid "Are you sure you want to clear the list of known items?"
 msgstr "lite počistiti seznam znanih predmetov"
 
+#: plugins/systray/sn-dialog.glade:48
+msgid "Status Tray Items"
+msgstr "Predmeti statusne vrstice"
+
+#: plugins/systray/sn-dialog.glade:80
+msgid "C_lear Known Items"
+msgstr "Po_čisti znane predmete"
+
+#: plugins/systray/sn-dialog.glade:84
+msgid "Resets the list of items and their visibility settings"
+msgstr "Ponastavi seznam predmetov in njihove nastavitve vidnosti"
+
+#: plugins/systray/sn-dialog.glade:144
+msgid "_Fixed icon size (pixels):"
+msgstr "_Fiksna velikost ikon (v pikslih)"
+
+#: plugins/systray/sn-dialog.glade:185
+msgid "Adjust size _automatically"
+msgstr "Samodejno n_astavi velikost"
+
+#: plugins/systray/sn-dialog.glade:213
+msgid "Icons"
+msgstr "Ikone"
+
+#: plugins/systray/sn-dialog.glade:246
+msgid "Arrange _items in a single row"
+msgstr "Razporedi predmete v en_i vrstici"
+
+#: plugins/systray/sn-dialog.glade:250
+msgid "If enabled, ensure that the items are laid out in a single row"
+msgstr "Če je vklopljeno, poskrbi, da so predmeti razporejeni v eni sami vrstici"
+
+#: plugins/systray/sn-dialog.glade:262
+msgid "_Hide items by default"
+msgstr "Priv_zeto skrij predmete"
+
+#: plugins/systray/sn-dialog.glade:266
+msgid "When enabled, all new items will be marked as \"Hidden\""
+msgstr "Ko je vklopljeno, so vsi novi predmeti označeni kot \"skriti\""
+
+#: plugins/systray/sn-dialog.glade:278
+msgid "_Square items"
+msgstr "_Kvadratni pedmeti"
+
+#: plugins/systray/sn-dialog.glade:282
+msgid "Item buttons will take a square when it's possible"
+msgstr "Če je to mogoče, bodo predmeti prevzeli kvadratno obliko"
+
+#: plugins/systray/sn-dialog.glade:300
+msgid "Behavior"
+msgstr "Obnašanje"
+
+#: plugins/systray/sn-dialog.glade:386 plugins/systray/sn-dialog.glade:618
+msgid "Item"
+msgstr "Predmet"
+
+#: plugins/systray/sn-dialog.glade:398 plugins/systray/sn-dialog.glade:630
+msgid "Hidden"
+msgstr "Skrito"
+
+#: plugins/systray/sn-dialog.glade:426 plugins/systray/sn-dialog.glade:658
+msgid "Move the selected item one row up"
+msgstr "Premakni izbrani predmet vrstico navzgor"
+
+#: plugins/systray/sn-dialog.glade:446 plugins/systray/sn-dialog.glade:678
+msgid "Move the selected item one row down"
+msgstr "Premakni izbrani predmet vrstico navzdol"
+
+#: plugins/systray/sn-dialog.glade:479 plugins/systray/sn-dialog.glade:711
+msgid "Known Items"
+msgstr "Znani predmeti"
+
+#: plugins/systray/sn-dialog.glade:512
+msgid "_Menu is primary action"
+msgstr "_Meni je primarna akcija"
+
+#: plugins/systray/sn-dialog.glade:516
+msgid "Left click will always display the menu for item"
+msgstr "Levi klik bo vedno prikazal meni predmeta"
+
+#: plugins/systray/sn-dialog.glade:528
+msgid "_Request symbolic icons"
+msgstr "Zahteva_j simbolične ikone"
+
+#: plugins/systray/sn-dialog.glade:532
+msgid "Load symbolic icons if available"
+msgstr "Naloži simbolične ikone, če so na voljo"
+
+#: plugins/systray/sn-dialog.glade:550
+msgid "Features"
+msgstr "Funkcije"
+
+#: plugins/systray/sn-dialog.glade:566
+msgid "Status Notifiers"
+msgstr "Obvestilniki o stanju"
+
+#: plugins/systray/sn-dialog.glade:720
+msgid "Systray Icons"
+msgstr "Ikone sistemske vrstice"
+
 #: plugins/systray/systray.c:145
 msgid "Unable to start the notification area"
 msgstr "Ni bilo mogoče zagnati obvestilnega področja"
@@ -1249,6 +2093,104 @@ msgstr "Omogoča predmete za obvestilnik stanja (indikatorje aplikacij) in opuš
 msgid "org.xfce.panel.statustray"
 msgstr ""
 
+#: plugins/tasklist/tasklist-dialog.glade:23
+msgid "Nothing"
+msgstr "Nič"
+
+#: plugins/tasklist/tasklist-dialog.glade:26
+msgid "Close Window"
+msgstr "Zapri okno"
+
+#: plugins/tasklist/tasklist-dialog.glade:29
+msgid "Minimize Window"
+msgstr "Skrči okno"
+
+#: plugins/tasklist/tasklist-dialog.glade:32
+msgid "New Instance"
+msgstr "Nova instanca"
+
+#: plugins/tasklist/tasklist-dialog.glade:43
+msgid "Timestamp"
+msgstr "Časovni žig"
+
+#: plugins/tasklist/tasklist-dialog.glade:46
+msgid "Group title and timestamp"
+msgstr "Združi naslov in časovni žig"
+
+#: plugins/tasklist/tasklist-dialog.glade:49
+msgid "Window title"
+msgstr "Naziv okna"
+
+#: plugins/tasklist/tasklist-dialog.glade:52
+msgid "Group title and window title"
+msgstr "Združi naslov in naslov okna"
+
+#: plugins/tasklist/tasklist-dialog.glade:55
+msgid "None, allow drag-and-drop"
+msgstr "Ne združi, dovoli povleci-in-spusti"
+
+#: plugins/tasklist/tasklist-dialog.glade:61
+#: plugins/tasklist/tasklist.desktop.in.in:4
+msgid "Window Buttons"
+msgstr "Gumbi oken"
+
+#: plugins/tasklist/tasklist-dialog.glade:143
+msgid "Show button _labels"
+msgstr "Prikaži _oznake gumbov"
+
+#: plugins/tasklist/tasklist-dialog.glade:159
+msgid "Show _flat buttons"
+msgstr "Prikaži ploske gumbe"
+
+#: plugins/tasklist/tasklist-dialog.glade:175
+msgid "Show _handle"
+msgstr "Prikaži _ročico"
+
+#: plugins/tasklist/tasklist-dialog.glade:191
+msgid "Show _tooltips"
+msgstr "Pokaži _namige"
+
+#: plugins/tasklist/tasklist-dialog.glade:214
+msgid "Sorting _order:"
+msgstr "Raz_vrščanje:"
+
+#: plugins/tasklist/tasklist-dialog.glade:297
+msgid "Mi_ddle click action:"
+msgstr "_Dejanje ob srednjem kliku:"
+
+#: plugins/tasklist/tasklist-dialog.glade:335
+msgid "_Group windows by application"
+msgstr "_Združi okna aplikacije"
+
+#: plugins/tasklist/tasklist-dialog.glade:351
+msgid "Restore minimized windows to current _workspace"
+msgstr "Obnovi skrčena okna na _trenutno delovno površino"
+
+#: plugins/tasklist/tasklist-dialog.glade:367
+msgid "D_raw window frame when hovering a button"
+msgstr "Na_riši okvir okna ob prehodu gumba s kazalcem"
+
+#: plugins/tasklist/tasklist-dialog.glade:383
+msgid "_Switch windows using the mouse wheel"
+msgstr "Preklapljaj okna z miškinim kole_scem"
+
+#: plugins/tasklist/tasklist-dialog.glade:405
+msgid "Behaviour"
+msgstr "Obnašanje"
+
+#: plugins/tasklist/tasklist-dialog.glade:438
+#: plugins/windowmenu/windowmenu-dialog.glade:239
+msgid "Show windows from _all workspaces"
+msgstr "Pokaži okn_a z vseh delovnih površin"
+
+#: plugins/tasklist/tasklist-dialog.glade:454
+msgid "Show windows from all mo_nitors"
+msgstr "Pokaži okna z vseh zaslonov"
+
+#: plugins/tasklist/tasklist-dialog.glade:470
+msgid "Show only _minimized windows"
+msgstr "Po_kaži samo skrčena okna"
+
 #: plugins/tasklist/tasklist-widget.c:3109
 #, c-format
 msgid "Unable to start new instance of '%s'"
@@ -1281,10 +2223,6 @@ msgstr "Pomanjšaj razpeta"
 #: plugins/tasklist/tasklist-widget.c:3919
 msgid "_Close All"
 msgstr "_Zapri vse"
-
-#: plugins/tasklist/tasklist.desktop.in.in:4
-msgid "Window Buttons"
-msgstr "Gumbi oken"
 
 #: plugins/tasklist/tasklist.desktop.in.in:5
 msgid "Switch between open windows using buttons"
@@ -1320,9 +2258,34 @@ msgstr "Odstrani delovno površino \"%s\""
 msgid "Remove Workspace %d"
 msgstr "Odstrani delovno površino %d"
 
+#: plugins/windowmenu/windowmenu-dialog.glade:23
+msgid "Icon"
+msgstr "Ikona"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:26
+msgid "Arrow"
+msgstr "Puščica"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:32
 #: plugins/windowmenu/windowmenu.desktop.in.in:4
 msgid "Window Menu"
 msgstr "Meni oken"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:119
+msgid "Button layout:"
+msgstr "Razporeditev gumbov:"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:155
+msgid "Show workspace a_ctions"
+msgstr "Pokaži dejanja delovne po_vršine"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:170
+msgid "Show workspace _names"
+msgstr "Pokaži ime_na delovnih površin"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:185
+msgid "Enable _urgency notification"
+msgstr "Omogoči obvestilo o n_ujnosti"
 
 #: plugins/windowmenu/windowmenu.desktop.in.in:5
 msgid "Switch between open windows using a menu"
