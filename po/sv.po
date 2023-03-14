@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-22 12:54+0100\n"
+"POT-Creation-Date: 2023-03-14 00:47+0100\n"
 "PO-Revision-Date: 2022-12-22 11:35+0000\n"
 "Last-Translator: Luna Jernberg <bittin@cafe8bitar.se>, 2023\n"
 "Language-Team: Swedish (https://www.transifex.com/xfce/teams/16840/sv/)\n"
@@ -41,7 +41,7 @@ msgid ""
 msgstr ""
 "paneler;inställningar;inställningar;programfält;autodölj;programmeny;start;knappar;startare;aviseringsområde;status;ikoner;insticksprogram;"
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2989
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2965
 msgid "Panel"
 msgstr "Panel"
 
@@ -71,8 +71,8 @@ msgstr ""
 #: ../libxfce4panel/xfce-panel-plugin.c:1088 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1422
 #: ../plugins/applicationsmenu/applicationsmenu.c:611
-#: ../plugins/directorymenu/directorymenu.c:470
-#: ../plugins/directorymenu/directorymenu.c:939
+#: ../plugins/directorymenu/directorymenu.c:471
+#: ../plugins/directorymenu/directorymenu.c:940
 msgid "_Cancel"
 msgstr "_Avbryt"
 
@@ -93,7 +93,7 @@ msgid "_Properties"
 msgstr "Egenska_per"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3065
+#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3041
 msgid "_About"
 msgstr "_Om"
 
@@ -107,23 +107,23 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:3001
+#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:2977
 msgid "Add _New Items..."
 msgstr "Lägg till _nya objekt..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:3012
+#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:2988
 msgid "Panel Pr_eferences..."
 msgstr "Panelinstä_llningar..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3040
+#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3016
 msgid "Log _Out"
 msgstr "Logga _ut"
 
 #. help item
 #: ../libxfce4panel/xfce-panel-plugin.c:1326 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3056
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3032
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:15
@@ -271,11 +271,11 @@ msgstr "Ingen körande instans av %s hittades"
 msgid "Failed to launch the migration application"
 msgstr "Misslyckades med att starta migreringsprogrammet"
 
-#: ../panel/panel-application.c:1000
+#: ../panel/panel-application.c:1012
 msgid "Create _Launcher"
 msgstr "Skapa pro_gramstartare"
 
-#: ../panel/panel-application.c:1001
+#: ../panel/panel-application.c:1013
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
@@ -283,18 +283,18 @@ msgstr ""
 "Detta kommer att skapa ett nytt programstartsinsticksprogram på panelen och "
 "fogar in släppta filer som menyobjekt."
 
-#: ../panel/panel-application.c:1003
+#: ../panel/panel-application.c:1015
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Skapa en ny programstartare från skrivbordsfil %d"
 msgstr[1] "Skapa en ny programstartare från skrivbordsfiler %d"
 
-#: ../panel/panel-application.c:1760
+#: ../panel/panel-application.c:1772
 msgid "Quit"
 msgstr "Avsluta"
 
-#: ../panel/panel-application.c:1761
+#: ../panel/panel-application.c:1773
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -302,11 +302,11 @@ msgstr ""
 "Du har startat X utan en sessionshanterare. Klicka på Avsluta för att stänga"
 " X-servern."
 
-#: ../panel/panel-application.c:1762
+#: ../panel/panel-application.c:1774
 msgid "Are you sure you want to quit the panel?"
 msgstr "Är du säker på att du vill avsluta panelen?"
 
-#: ../panel/panel-application.c:1770
+#: ../panel/panel-application.c:1782
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Det gick inte att köra kommandot \"%s\""
@@ -569,16 +569,18 @@ msgstr ""
 "Välj detta alternativ för att dölja panelens handtag och låsa dess position."
 
 #: ../panel/panel-preferences-dialog.glade.h:24
-msgid "Keep panel _above windows"
-msgstr "Behåll panel _över fönster"
+msgid "_Reserve space on screen edges for the panel"
+msgstr "_Reservera utrymme på skärmkanterna för panelen"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
-"Select this option if you want maximized windows to cover the area behind "
-"the panel. This only works when the panel is attached to a screen edge."
+"Select this option if you don't want maximized windows to cover the area "
+"behind the panel. This only works when the panel is attached to a screen "
+"edge."
 msgstr ""
-"Välj detta alternativ om du vill att maximerade fönster ska täcka ytan bakom"
-" panelen. Detta fungerar bara då panelen är fäst vid en skärmkant."
+"Välj det här alternativet om du inte vill att maximerade fönster ska täcka "
+"området bakom panelen. Detta fungerar bara när panelen är fäst på en "
+"skärmkant."
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
@@ -756,7 +758,7 @@ msgstr "Erfaren"
 msgid "Expert"
 msgstr "Expert"
 
-#: ../panel/panel-window.c:3026
+#: ../panel/panel-window.c:3002
 msgid "_Lock Panel"
 msgstr "_Lås panel"
 
@@ -1067,18 +1069,18 @@ msgid "Applications"
 msgstr "Program"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:609
-#: ../plugins/directorymenu/directorymenu.c:468
+#: ../plugins/directorymenu/directorymenu.c:469
 msgid "Select An Icon"
 msgstr "Välj en ikon"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:612
-#: ../plugins/directorymenu/directorymenu.c:471
+#: ../plugins/directorymenu/directorymenu.c:472
 msgid "_OK"
 msgstr "_OK"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:650
-#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2496
+#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2491
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Det gick inte att köra kommandot \"%s\"."
@@ -1639,69 +1641,69 @@ msgstr "Vad är klockan?"
 msgid "Directory Menu"
 msgstr "Katalogmeny"
 
-#: ../plugins/directorymenu/directorymenu.c:695
+#: ../plugins/directorymenu/directorymenu.c:696
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Misslyckades med att starta programmet \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:727
+#: ../plugins/directorymenu/directorymenu.c:728
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Misslyckades att fråga om innehållstyp för \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:736
+#: ../plugins/directorymenu/directorymenu.c:737
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Inget standardprogram hittades för \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:752
+#: ../plugins/directorymenu/directorymenu.c:753
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Det gick inte att starta standardprogrammet för \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:847
+#: ../plugins/directorymenu/directorymenu.c:848
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Misslyckades köra det föredragna programmet för kategori \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:928
+#: ../plugins/directorymenu/directorymenu.c:929
 msgid "Create New Folder"
 msgstr "Skapa ny mapp"
 
-#: ../plugins/directorymenu/directorymenu.c:933
+#: ../plugins/directorymenu/directorymenu.c:934
 msgid "Create New Text Document"
 msgstr "Skapa nytt text dokument"
 
-#: ../plugins/directorymenu/directorymenu.c:940
+#: ../plugins/directorymenu/directorymenu.c:941
 msgid "C_reate"
 msgstr "S_kapa"
 
-#: ../plugins/directorymenu/directorymenu.c:941
+#: ../plugins/directorymenu/directorymenu.c:942
 msgid "Create & _Open"
 msgstr "Skapa & _Öppna"
 
-#: ../plugins/directorymenu/directorymenu.c:955
+#: ../plugins/directorymenu/directorymenu.c:956
 msgid "Enter the new name:"
 msgstr "Ange det nya namnet:"
 
-#: ../plugins/directorymenu/directorymenu.c:991
+#: ../plugins/directorymenu/directorymenu.c:992
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Misslyckades med att skapa mapp: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1074
+#: ../plugins/directorymenu/directorymenu.c:1075
 msgid "Open Folder"
 msgstr "Öppna mapp"
 
-#: ../plugins/directorymenu/directorymenu.c:1087
+#: ../plugins/directorymenu/directorymenu.c:1088
 msgid "Open in Terminal"
 msgstr "Öppna i terminal"
 
-#: ../plugins/directorymenu/directorymenu.c:1100
+#: ../plugins/directorymenu/directorymenu.c:1101
 msgid "Create Folder..."
 msgstr "Skapa mapp..."
 
-#: ../plugins/directorymenu/directorymenu.c:1113
+#: ../plugins/directorymenu/directorymenu.c:1114
 msgid "Create Text Document..."
 msgstr "Skapa text dokument..."
 
@@ -1761,15 +1763,15 @@ msgstr "_Filmönster:"
 msgid "Filtering"
 msgstr "Filtrering"
 
-#: ../plugins/launcher/launcher.c:405
+#: ../plugins/launcher/launcher.c:401
 msgid "Open launcher menu"
 msgstr "Öppna startmeny"
 
-#: ../plugins/launcher/launcher.c:1611
+#: ../plugins/launcher/launcher.c:1599
 msgid "Unnamed Item"
 msgstr "Namnlöst objekt"
 
-#: ../plugins/launcher/launcher.c:1801
+#: ../plugins/launcher/launcher.c:1797
 msgid "No items"
 msgstr "Inga objekt"
 
@@ -1899,15 +1901,15 @@ msgstr "Avancerat"
 msgid "Program launcher with optional menu"
 msgstr "Programstartare med meny som tillval"
 
-#: ../plugins/pager/pager.c:655 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:665 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "_Skrivbordsinställningar..."
 
-#: ../plugins/pager/pager.c:745
+#: ../plugins/pager/pager.c:759
 msgid "Unable to open the workspace settings"
 msgstr "Det gick inte att öppna skrivbordsinställningar"
 
-#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:902
+#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:917
 #, c-format
 msgid "Workspace %d"
 msgstr "Skrivbord %d"
@@ -1986,11 +1988,11 @@ msgstr "Visa skrivbordet"
 msgid "Hide all windows and show the desktop"
 msgstr "Dölj alla fönster och visa skrivbordet"
 
-#: ../plugins/systray/sn-dialog.c:649
+#: ../plugins/systray/sn-dialog.c:653
 msgid "Clear"
 msgstr "Töm"
 
-#: ../plugins/systray/sn-dialog.c:650
+#: ../plugins/systray/sn-dialog.c:654
 msgid "Are you sure you want to clear the list of known items?"
 msgstr "Är du säker på att du vill rensa listan över kända objekt?"
 
@@ -2226,36 +2228,36 @@ msgstr "Visa fönster från a_lla skärmar"
 msgid "Show only _minimized windows"
 msgstr "Visa endast _minimerade fönster"
 
-#: ../plugins/tasklist/tasklist-widget.c:3070
+#: ../plugins/tasklist/tasklist-widget.c:3119
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Det gick inte att starta en ny instans av '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:3074
+#: ../plugins/tasklist/tasklist-widget.c:3123
 msgid "Error"
 msgstr "Fel"
 
-#: ../plugins/tasklist/tasklist-widget.c:3103
+#: ../plugins/tasklist/tasklist-widget.c:3152
 msgid "Launch New Instance"
 msgstr "Starta ny instans"
 
-#: ../plugins/tasklist/tasklist-widget.c:3857
+#: ../plugins/tasklist/tasklist-widget.c:3899
 msgid "Mi_nimize All"
 msgstr "Mi_nimera alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3864
+#: ../plugins/tasklist/tasklist-widget.c:3906
 msgid "Un_minimize All"
 msgstr "Av_minimera alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3871
+#: ../plugins/tasklist/tasklist-widget.c:3913
 msgid "Ma_ximize All"
 msgstr "Ma_ximera alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3878
+#: ../plugins/tasklist/tasklist-widget.c:3920
 msgid "_Unmaximize All"
 msgstr "Avmax_imera alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3889
+#: ../plugins/tasklist/tasklist-widget.c:3931
 msgid "_Close All"
 msgstr "S_täng alla"
 
@@ -2263,28 +2265,28 @@ msgstr "S_täng alla"
 msgid "Switch between open windows using buttons"
 msgstr "Växla mellan öppna fönster med knappar"
 
-#: ../plugins/windowmenu/windowmenu.c:695
+#: ../plugins/windowmenu/windowmenu.c:710
 msgid "Desktop"
 msgstr "Skrivbord"
 
-#: ../plugins/windowmenu/windowmenu.c:1305
+#: ../plugins/windowmenu/windowmenu.c:1320
 msgid "No Windows"
 msgstr "Inga fönster"
 
-#: ../plugins/windowmenu/windowmenu.c:1320
+#: ../plugins/windowmenu/windowmenu.c:1335
 msgid "Urgent Windows"
 msgstr "Brådskande fönster"
 
-#: ../plugins/windowmenu/windowmenu.c:1362
+#: ../plugins/windowmenu/windowmenu.c:1377
 msgid "Add Workspace"
 msgstr "Lägg till skrivbord"
 
-#: ../plugins/windowmenu/windowmenu.c:1382
+#: ../plugins/windowmenu/windowmenu.c:1397
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Ta bort skrivbord \"%s\""
 
-#: ../plugins/windowmenu/windowmenu.c:1384
+#: ../plugins/windowmenu/windowmenu.c:1399
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Ta bort skrivbord %d"
