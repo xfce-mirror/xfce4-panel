@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2023-03-13 00:46+0100\n"
+"POT-Creation-Date: 2023-03-14 00:47+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Daniel Muñiz Fontoira <dani@damufo.eu>, 2018-2020\n"
 "Language-Team: Galician (http://www.transifex.com/xfce/xfce4-panel/language/gl/)\n"
@@ -259,38 +259,38 @@ msgstr "Non se atopou ningunha instancia en execución de %s"
 msgid "Failed to launch the migration application"
 msgstr "Produciuse un fallo ao iniciar a aplicación de migración"
 
-#: panel/panel-application.c:1035
+#: panel/panel-application.c:1047
 msgid "Create _Launcher"
 msgstr "Crear un _iniciador"
 
-#: panel/panel-application.c:1036
+#: panel/panel-application.c:1048
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Con isto créase un novo iniciador do engadido no panel e insíre os ficheiros que se soltan enriba del como elementos do menú."
 
-#: panel/panel-application.c:1038
+#: panel/panel-application.c:1050
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Crear un novo iniciador de %d ficheiro de escritorio"
 msgstr[1] "Crear un novo iniciador de %d ficheiros de escritorio"
 
-#: panel/panel-application.c:1795
+#: panel/panel-application.c:1807
 msgid "Quit"
 msgstr "Saír"
 
-#: panel/panel-application.c:1796
+#: panel/panel-application.c:1808
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Iniciou X sen un xestor de sesións. Ao premer Saír vai pechar o servidor de X."
 
-#: panel/panel-application.c:1797
+#: panel/panel-application.c:1809
 msgid "Are you sure you want to quit the panel?"
 msgstr "Desexa realmente saír do panel?"
 
-#: panel/panel-application.c:1805
+#: panel/panel-application.c:1817
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Produciuse un fallo ao executar a orde \"%s\""
@@ -533,14 +533,15 @@ msgid ""
 msgstr "Seleccione esta opción para agochar as asas do panel e bloquear a súa posición."
 
 #: panel/panel-preferences-dialog.glade:447
-msgid "Keep panel _above windows"
+msgid "_Reserve space on screen edges for the panel"
 msgstr ""
 
 #: panel/panel-preferences-dialog.glade:451
 msgid ""
-"Select this option if you want maximized windows to cover the area behind "
-"the panel. This only works when the panel is attached to a screen edge."
-msgstr "Seleccione esta opción se desexa que as xanelas maximizadas cubran a zona por detrás do panel. Isto só funciona cando o panel está ancorado a unha beira da pantalla."
+"Select this option if you don't want maximized windows to cover the area "
+"behind the panel. This only works when the panel is attached to a screen "
+"edge."
+msgstr ""
 
 #: panel/panel-preferences-dialog.glade:472
 msgid "Au_tomatically hide the panel:"
