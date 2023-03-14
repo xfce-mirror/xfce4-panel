@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2023-03-13 00:46+0100\n"
+"POT-Creation-Date: 2023-03-14 00:47+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Elishai Eliyahu <elishai@mailfence.com>, 2022\n"
 "Language-Team: Hebrew (http://www.transifex.com/xfce/xfce4-panel/language/he/)\n"
@@ -266,17 +266,17 @@ msgstr "אף מופע פועל של %s לא נמצא"
 msgid "Failed to launch the migration application"
 msgstr "נכשלה הפעלת תוכנת הנדידה"
 
-#: panel/panel-application.c:1035
+#: panel/panel-application.c:1047
 msgid "Create _Launcher"
 msgstr "צור _מפעיל"
 
-#: panel/panel-application.c:1036
+#: panel/panel-application.c:1048
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "פעולה זו תיצור תוסף מפעיל חדש על הלוח ותכניס את הקבצים שהושלכו כפריטים בתפריט."
 
-#: panel/panel-application.c:1038
+#: panel/panel-application.c:1050
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -285,21 +285,21 @@ msgstr[1] "צור מפעיל חדש מקבצי שולחן עבודה %d "
 msgstr[2] "צור מפעיל חדש מקבצי שולחן עבודה %d "
 msgstr[3] "צור מפעיל חדש מקבצי שולחן עבודה %d "
 
-#: panel/panel-application.c:1795
+#: panel/panel-application.c:1807
 msgid "Quit"
 msgstr "הפסק"
 
-#: panel/panel-application.c:1796
+#: panel/panel-application.c:1808
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "התחלת את X בלי מנהל סשן. לחיצה על יציאה תסגור את שרת ה-X."
 
-#: panel/panel-application.c:1797
+#: panel/panel-application.c:1809
 msgid "Are you sure you want to quit the panel?"
 msgstr "האם אתה בטוח כי ברצונך לצאת מהלוח?"
 
-#: panel/panel-application.c:1805
+#: panel/panel-application.c:1817
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "נכשל לבצע פקודה \"%s\""
@@ -542,14 +542,15 @@ msgid ""
 msgstr "בחר באפשרות זו כדי להסתיר את הידיות של הלוח ולנעול את מיקומו."
 
 #: panel/panel-preferences-dialog.glade:447
-msgid "Keep panel _above windows"
-msgstr "שמור לוח מ_על חלונות"
+msgid "_Reserve space on screen edges for the panel"
+msgstr ""
 
 #: panel/panel-preferences-dialog.glade:451
 msgid ""
-"Select this option if you want maximized windows to cover the area behind "
-"the panel. This only works when the panel is attached to a screen edge."
-msgstr "בחר באפשרות זו אם ברצונך שחלונות מוגדלים יכסו את השטח מאחורי הלוח. זה עובד רק כאשר הלוח מחובר לקצה המסך."
+"Select this option if you don't want maximized windows to cover the area "
+"behind the panel. This only works when the panel is attached to a screen "
+"edge."
+msgstr ""
 
 #: panel/panel-preferences-dialog.glade:472
 msgid "Au_tomatically hide the panel:"
