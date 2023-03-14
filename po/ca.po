@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2023-03-13 00:46+0100\n"
+"POT-Creation-Date: 2023-03-14 00:47+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Robert Antoni Buj i Gelonch <rbuj@fedoraproject.org>, 2016-2020\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce4-panel/language/ca/)\n"
@@ -260,38 +260,38 @@ msgstr "No s'ha trobat una instància en marxa de %s"
 msgid "Failed to launch the migration application"
 msgstr "Ha fallat el llançament de l'aplicació de migració"
 
-#: panel/panel-application.c:1035
+#: panel/panel-application.c:1047
 msgid "Create _Launcher"
 msgstr "Crea un _llançador"
 
-#: panel/panel-application.c:1036
+#: panel/panel-application.c:1048
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Això crearà un nou connector de llançador al tauler i inserirà els fitxers que es deixin caure com a elements de menú."
 
-#: panel/panel-application.c:1038
+#: panel/panel-application.c:1050
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Crea un nou llançador per %d fitxer d'escriptori"
 msgstr[1] "Crea un nou llançador per %d fitxers d'escriptori"
 
-#: panel/panel-application.c:1795
+#: panel/panel-application.c:1807
 msgid "Quit"
 msgstr "Surt"
 
-#: panel/panel-application.c:1796
+#: panel/panel-application.c:1808
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Heu iniciat les X sense un gestor de sessions. Premeu Surt per a sortir del servidor de les X."
 
-#: panel/panel-application.c:1797
+#: panel/panel-application.c:1809
 msgid "Are you sure you want to quit the panel?"
 msgstr "Esteu segur que voleu sortir del tauler?"
 
-#: panel/panel-application.c:1805
+#: panel/panel-application.c:1817
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Ha fallat l'execució de l'ordre «%s»"
@@ -534,14 +534,15 @@ msgid ""
 msgstr "Seleccioneu aquesta opció per bloquejar la posició del tauler i ocultar els tiradors."
 
 #: panel/panel-preferences-dialog.glade:447
-msgid "Keep panel _above windows"
+msgid "_Reserve space on screen edges for the panel"
 msgstr ""
 
 #: panel/panel-preferences-dialog.glade:451
 msgid ""
-"Select this option if you want maximized windows to cover the area behind "
-"the panel. This only works when the panel is attached to a screen edge."
-msgstr "Seleccioneu aquesta opció per maximitzar les finestres i que cobreixin el tauler. Això només funciona quan el tauler està adjuntat a una vora de la pantalla."
+"Select this option if you don't want maximized windows to cover the area "
+"behind the panel. This only works when the panel is attached to a screen "
+"edge."
+msgstr ""
 
 #: panel/panel-preferences-dialog.glade:472
 msgid "Au_tomatically hide the panel:"
