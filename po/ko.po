@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2023-03-13 00:46+0100\n"
+"POT-Creation-Date: 2023-03-14 00:47+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Seok Chae <seok.chae@gmail.com>, 2023\n"
 "Language-Team: Korean (http://www.transifex.com/xfce/xfce4-panel/language/ko/)\n"
@@ -263,37 +263,37 @@ msgstr "실행 중인 %s 인스턴스가 없습니다"
 msgid "Failed to launch the migration application"
 msgstr "마이그레이션 프로그램을 실행하는데 실패했습니다"
 
-#: panel/panel-application.c:1035
+#: panel/panel-application.c:1047
 msgid "Create _Launcher"
 msgstr "실행 아이콘 만들기(_L)"
 
-#: panel/panel-application.c:1036
+#: panel/panel-application.c:1048
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "패널에 새 실행 아이콘 플러그인을 만들고 파일을 메뉴 항목으로 넣습니다."
 
-#: panel/panel-application.c:1038
+#: panel/panel-application.c:1050
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "데스크톱 파일 %d개에 대한 새 실행 아이콘 만들기"
 
-#: panel/panel-application.c:1795
+#: panel/panel-application.c:1807
 msgid "Quit"
 msgstr "끝내기"
 
-#: panel/panel-application.c:1796
+#: panel/panel-application.c:1808
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "세션 매니저 없이 X를 시작했습니다. 나가기를 누르면 X 서버가 닫힙니다."
 
-#: panel/panel-application.c:1797
+#: panel/panel-application.c:1809
 msgid "Are you sure you want to quit the panel?"
 msgstr "정말 패널을 종료하시렵니까?"
 
-#: panel/panel-application.c:1805
+#: panel/panel-application.c:1817
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" 명령을 실행하지 못 했습니다."
@@ -536,14 +536,15 @@ msgid ""
 msgstr "패널의 손잡이를 숨기고 위치를 고정하려면 이 옵션을 선택하십시오."
 
 #: panel/panel-preferences-dialog.glade:447
-msgid "Keep panel _above windows"
-msgstr "패널을 창 위로 고정(_A)"
+msgid "_Reserve space on screen edges for the panel"
+msgstr ""
 
 #: panel/panel-preferences-dialog.glade:451
 msgid ""
-"Select this option if you want maximized windows to cover the area behind "
-"the panel. This only works when the panel is attached to a screen edge."
-msgstr "패널 뒤 영역을 덮어 창을 최대화하려면 이 옵션을 선택하십시오. 이는 패널이 화면의 모서리에 붙어있을 때만 동작합니다."
+"Select this option if you don't want maximized windows to cover the area "
+"behind the panel. This only works when the panel is attached to a screen "
+"edge."
+msgstr ""
 
 #: panel/panel-preferences-dialog.glade:472
 msgid "Au_tomatically hide the panel:"
