@@ -9,9 +9,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-22 12:35+0100\n"
+"POT-Creation-Date: 2023-03-14 00:47+0100\n"
 "PO-Revision-Date: 2022-12-22 11:35+0000\n"
 "Last-Translator: Xfce Bot <transifex@xfce.org>, 2022\n"
 "Language-Team: Hungarian (https://www.transifex.com/xfce/teams/16840/hu/)\n"
@@ -37,7 +37,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr ""
 
-#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2989
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2965
 msgid "Panel"
 msgstr "Panel"
 
@@ -66,8 +66,8 @@ msgstr ""
 #: ../libxfce4panel/xfce-panel-plugin.c:1088 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1422
 #: ../plugins/applicationsmenu/applicationsmenu.c:611
-#: ../plugins/directorymenu/directorymenu.c:470
-#: ../plugins/directorymenu/directorymenu.c:939
+#: ../plugins/directorymenu/directorymenu.c:471
+#: ../plugins/directorymenu/directorymenu.c:940
 msgid "_Cancel"
 msgstr "Mé_gse"
 
@@ -88,7 +88,7 @@ msgid "_Properties"
 msgstr "_Tulajdonságok"
 
 #. about item
-#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3065
+#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3041
 msgid "_About"
 msgstr "_Névjegy"
 
@@ -102,23 +102,23 @@ msgid "Pane_l"
 msgstr "_Panel"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:3001
+#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:2977
 msgid "Add _New Items..."
 msgstr "Új _elemek hozzáadása…"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:3012
+#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:2988
 msgid "Panel Pr_eferences..."
 msgstr "_Panel beállításai…"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3040
+#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3016
 msgid "Log _Out"
 msgstr "_Kijelentkezés"
 
 #. help item
 #: ../libxfce4panel/xfce-panel-plugin.c:1326 ../panel/panel-item-dialog.c:205
-#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3056
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3032
 #: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/clock/clock-dialog.glade.h:15
@@ -262,11 +262,11 @@ msgstr "Nem található a(z) %s futó példánya"
 msgid "Failed to launch the migration application"
 msgstr "A költöztető alkalmazás indítása meghiúsult"
 
-#: ../panel/panel-application.c:1000
+#: ../panel/panel-application.c:1012
 msgid "Create _Launcher"
 msgstr "_Parancsikon létrehozása"
 
-#: ../panel/panel-application.c:1001
+#: ../panel/panel-application.c:1013
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
@@ -274,18 +274,18 @@ msgstr ""
 "Ez egy új indítóbővítményt hoz létre a panelen, a ráejtett fájlokat "
 "menüelemekként pedig veszi fel."
 
-#: ../panel/panel-application.c:1003
+#: ../panel/panel-application.c:1015
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Új parancsikon létrehozása %d asztali fájlból"
 msgstr[1] "Új parancsikon létrehozása %d asztali fájlból"
 
-#: ../panel/panel-application.c:1760
+#: ../panel/panel-application.c:1772
 msgid "Quit"
 msgstr "Kilépés"
 
-#: ../panel/panel-application.c:1761
+#: ../panel/panel-application.c:1773
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -293,11 +293,11 @@ msgstr ""
 "Az X-et munkamenet-kezelő nélkül indította. A Kilépés gombra kattintás "
 "bezárja az X kiszolgálót."
 
-#: ../panel/panel-application.c:1762
+#: ../panel/panel-application.c:1774
 msgid "Are you sure you want to quit the panel?"
 msgstr "Biztos, hogy be kívánja zárni a panelt?"
 
-#: ../panel/panel-application.c:1770
+#: ../panel/panel-application.c:1782
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "A parancs („%s”) indítása meghiúsult"
@@ -553,16 +553,15 @@ msgid ""
 msgstr "A panel fogantyúinak elrejtése és pozíciójának zárolása"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
-msgid "Keep panel _above windows"
-msgstr "Panel az _ablakok felett"
+msgid "_Reserve space on screen edges for the panel"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
-"Select this option if you want maximized windows to cover the area behind "
-"the panel. This only works when the panel is attached to a screen edge."
+"Select this option if you don't want maximized windows to cover the area "
+"behind the panel. This only works when the panel is attached to a screen "
+"edge."
 msgstr ""
-"A teljes méretű ablakok lefedik-e a panel mögötti területet. Ez csak akkor "
-"működik, ha a panel a képernyő széléhez csatlakozik."
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
@@ -740,7 +739,7 @@ msgstr "Gyakorlott"
 msgid "Expert"
 msgstr "Szakértő"
 
-#: ../panel/panel-window.c:3026
+#: ../panel/panel-window.c:3002
 msgid "_Lock Panel"
 msgstr "_Panel zárolása"
 
@@ -1051,18 +1050,18 @@ msgid "Applications"
 msgstr "Alkalmazások"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:609
-#: ../plugins/directorymenu/directorymenu.c:468
+#: ../plugins/directorymenu/directorymenu.c:469
 msgid "Select An Icon"
 msgstr "Válasszon ikont"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:612
-#: ../plugins/directorymenu/directorymenu.c:471
+#: ../plugins/directorymenu/directorymenu.c:472
 msgid "_OK"
 msgstr "_OK"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:650
-#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2496
+#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2491
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "A parancs („%s”) végrehajtása meghiúsult."
@@ -1619,69 +1618,69 @@ msgstr "Mennyi az idő?"
 msgid "Directory Menu"
 msgstr "Könyvtár menü"
 
-#: ../plugins/directorymenu/directorymenu.c:695
+#: ../plugins/directorymenu/directorymenu.c:696
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Az alkalmazás („%s”) indítása meghiúsult"
 
-#: ../plugins/directorymenu/directorymenu.c:727
+#: ../plugins/directorymenu/directorymenu.c:728
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "„%s” tartalomtípusának lekérése meghiúsult"
 
-#: ../plugins/directorymenu/directorymenu.c:736
+#: ../plugins/directorymenu/directorymenu.c:737
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Nem található alapértelmezett alkalmazás ehhez: „%s”"
 
-#: ../plugins/directorymenu/directorymenu.c:752
+#: ../plugins/directorymenu/directorymenu.c:753
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "„%s” alapértelmezett alkalmazásának indítása meghiúsult"
 
-#: ../plugins/directorymenu/directorymenu.c:847
+#: ../plugins/directorymenu/directorymenu.c:848
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "A kategória („%s”) alapértelmezett alkalmazásának indítása meghiúsult"
 
-#: ../plugins/directorymenu/directorymenu.c:928
+#: ../plugins/directorymenu/directorymenu.c:929
 msgid "Create New Folder"
 msgstr "Új mappa létrehozása"
 
-#: ../plugins/directorymenu/directorymenu.c:933
+#: ../plugins/directorymenu/directorymenu.c:934
 msgid "Create New Text Document"
 msgstr "Új szöveges dokumentum létrehozása"
 
-#: ../plugins/directorymenu/directorymenu.c:940
+#: ../plugins/directorymenu/directorymenu.c:941
 msgid "C_reate"
 msgstr "_Létrehozás"
 
-#: ../plugins/directorymenu/directorymenu.c:941
+#: ../plugins/directorymenu/directorymenu.c:942
 msgid "Create & _Open"
 msgstr "Létrehozás és &megnyitás"
 
-#: ../plugins/directorymenu/directorymenu.c:955
+#: ../plugins/directorymenu/directorymenu.c:956
 msgid "Enter the new name:"
 msgstr "Adja meg az új nevet:"
 
-#: ../plugins/directorymenu/directorymenu.c:991
+#: ../plugins/directorymenu/directorymenu.c:992
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Nem sikerült létrehozni a mappát: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1074
+#: ../plugins/directorymenu/directorymenu.c:1075
 msgid "Open Folder"
 msgstr "Mappa megnyitása"
 
-#: ../plugins/directorymenu/directorymenu.c:1087
+#: ../plugins/directorymenu/directorymenu.c:1088
 msgid "Open in Terminal"
 msgstr "Terminálban fusson"
 
-#: ../plugins/directorymenu/directorymenu.c:1100
+#: ../plugins/directorymenu/directorymenu.c:1101
 msgid "Create Folder..."
 msgstr "Mappa létrehozása..."
 
-#: ../plugins/directorymenu/directorymenu.c:1113
+#: ../plugins/directorymenu/directorymenu.c:1114
 msgid "Create Text Document..."
 msgstr "Szöveges dokumentum létrehozása..."
 
@@ -1741,15 +1740,15 @@ msgstr "_Fájlminta:"
 msgid "Filtering"
 msgstr "Szűrés"
 
-#: ../plugins/launcher/launcher.c:405
+#: ../plugins/launcher/launcher.c:401
 msgid "Open launcher menu"
 msgstr "Indítómenü megnyitása"
 
-#: ../plugins/launcher/launcher.c:1611
+#: ../plugins/launcher/launcher.c:1599
 msgid "Unnamed Item"
 msgstr "Névtelen elem"
 
-#: ../plugins/launcher/launcher.c:1801
+#: ../plugins/launcher/launcher.c:1797
 msgid "No items"
 msgstr "Nincs elem"
 
@@ -1878,15 +1877,15 @@ msgstr "Speciális"
 msgid "Program launcher with optional menu"
 msgstr "Programindító elhagyható menüvel"
 
-#: ../plugins/pager/pager.c:655 ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.c:665 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "M_unkaterület beállításai…"
 
-#: ../plugins/pager/pager.c:745
+#: ../plugins/pager/pager.c:759
 msgid "Unable to open the workspace settings"
 msgstr "A munkaterület beállításai nem nyithatók meg"
 
-#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:902
+#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:917
 #, c-format
 msgid "Workspace %d"
 msgstr "%d. munkaterület"
@@ -1965,11 +1964,11 @@ msgstr "Asztal megjelenítése"
 msgid "Hide all windows and show the desktop"
 msgstr "Minden ablak elrejtése, és az asztal megjelenítése"
 
-#: ../plugins/systray/sn-dialog.c:649
+#: ../plugins/systray/sn-dialog.c:653
 msgid "Clear"
 msgstr "Törlés"
 
-#: ../plugins/systray/sn-dialog.c:650
+#: ../plugins/systray/sn-dialog.c:654
 msgid "Are you sure you want to clear the list of known items?"
 msgstr ""
 
@@ -2203,36 +2202,36 @@ msgstr "Az összes m_onitor ablakainak megjelenítése"
 msgid "Show only _minimized windows"
 msgstr "_Csak minimalizált ablakok megjelenítése"
 
-#: ../plugins/tasklist/tasklist-widget.c:3070
+#: ../plugins/tasklist/tasklist-widget.c:3119
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3074
+#: ../plugins/tasklist/tasklist-widget.c:3123
 msgid "Error"
 msgstr "Hiba"
 
-#: ../plugins/tasklist/tasklist-widget.c:3103
+#: ../plugins/tasklist/tasklist-widget.c:3152
 msgid "Launch New Instance"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3857
+#: ../plugins/tasklist/tasklist-widget.c:3899
 msgid "Mi_nimize All"
 msgstr "Összes mi_nimalizálása"
 
-#: ../plugins/tasklist/tasklist-widget.c:3864
+#: ../plugins/tasklist/tasklist-widget.c:3906
 msgid "Un_minimize All"
 msgstr "Összes _eredeti méretű"
 
-#: ../plugins/tasklist/tasklist-widget.c:3871
+#: ../plugins/tasklist/tasklist-widget.c:3913
 msgid "Ma_ximize All"
 msgstr "Összes ma_ximalizálás"
 
-#: ../plugins/tasklist/tasklist-widget.c:3878
+#: ../plugins/tasklist/tasklist-widget.c:3920
 msgid "_Unmaximize All"
 msgstr "Összes _eredeti méretű"
 
-#: ../plugins/tasklist/tasklist-widget.c:3889
+#: ../plugins/tasklist/tasklist-widget.c:3931
 msgid "_Close All"
 msgstr "Összes _bezárása"
 
@@ -2240,28 +2239,28 @@ msgstr "Összes _bezárása"
 msgid "Switch between open windows using buttons"
 msgstr "Átváltás a nyitott ablakok között, gombok használatával"
 
-#: ../plugins/windowmenu/windowmenu.c:695
+#: ../plugins/windowmenu/windowmenu.c:710
 msgid "Desktop"
 msgstr "Asztal"
 
-#: ../plugins/windowmenu/windowmenu.c:1305
+#: ../plugins/windowmenu/windowmenu.c:1320
 msgid "No Windows"
 msgstr "Nincsenek ablakok"
 
-#: ../plugins/windowmenu/windowmenu.c:1320
+#: ../plugins/windowmenu/windowmenu.c:1335
 msgid "Urgent Windows"
 msgstr "Sürgős ablakok"
 
-#: ../plugins/windowmenu/windowmenu.c:1362
+#: ../plugins/windowmenu/windowmenu.c:1377
 msgid "Add Workspace"
 msgstr "Munkaterület hozzáadása"
 
-#: ../plugins/windowmenu/windowmenu.c:1382
+#: ../plugins/windowmenu/windowmenu.c:1397
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "„%s” munkaterület eltávolítása"
 
-#: ../plugins/windowmenu/windowmenu.c:1384
+#: ../plugins/windowmenu/windowmenu.c:1399
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "%d. munkaterület eltávolítása"
