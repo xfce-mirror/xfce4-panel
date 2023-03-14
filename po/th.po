@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2023-03-13 00:46+0100\n"
+"POT-Creation-Date: 2023-03-14 00:47+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Theppitak Karoonboonyanan <theppitak@gmail.com>, 2013,2015,2017,2021\n"
 "Language-Team: Thai (http://www.transifex.com/xfce/xfce4-panel/language/th/)\n"
@@ -258,37 +258,37 @@ msgstr "ไม่พบอินสแตนซ์ของ %s ที่ทำ�
 msgid "Failed to launch the migration application"
 msgstr "เรียกโปรแกรมย้ายระบบไม่สำเร็จ"
 
-#: panel/panel-application.c:1035
+#: panel/panel-application.c:1047
 msgid "Create _Launcher"
 msgstr "สร้างปุ่_มเรียก"
 
-#: panel/panel-application.c:1036
+#: panel/panel-application.c:1048
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "นี่จะเป็นการสร้างปลั๊กอินปุ่มเรียกโปรแกรมลงในพาเนล และแทรกแฟ้มที่ปล่อยเข้าเป็นรายการเมนู"
 
-#: panel/panel-application.c:1038
+#: panel/panel-application.c:1050
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "สร้างปุ่มเรียกโปรแกรมจากแฟ้มเดสก์ท็อป %d แฟ้ม"
 
-#: panel/panel-application.c:1795
+#: panel/panel-application.c:1807
 msgid "Quit"
 msgstr "ออก"
 
-#: panel/panel-application.c:1796
+#: panel/panel-application.c:1808
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "คุณได้เปิดทำงาน X โดยไม่มีโปรแกรมจัดการวาระ ถ้าคลิกปุ่ม \"ออก\" ก็จะเป็นการปิด X server"
 
-#: panel/panel-application.c:1797
+#: panel/panel-application.c:1809
 msgid "Are you sure you want to quit the panel?"
 msgstr "ยืนยันที่จะปิดพาเนลหรือไม่?"
 
-#: panel/panel-application.c:1805
+#: panel/panel-application.c:1817
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "เรียกทำงานคำสั่ง \"%s\" ไม่สำเร็จ"
@@ -531,14 +531,15 @@ msgid ""
 msgstr "เลือกตัวเลือกนี้เพื่อซ่อนมือจับของพาเนลและตรึงตำแหน่งของพาเนลไว้"
 
 #: panel/panel-preferences-dialog.glade:447
-msgid "Keep panel _above windows"
+msgid "_Reserve space on screen edges for the panel"
 msgstr ""
 
 #: panel/panel-preferences-dialog.glade:451
 msgid ""
-"Select this option if you want maximized windows to cover the area behind "
-"the panel. This only works when the panel is attached to a screen edge."
-msgstr "เลือกตัวเลือกนี้ถ้าคุณต้องการให้หน้าต่างที่ขยายแผ่สามารถใช้เนื้อที่ครอบคลุมพื้นที่หลังพาเนลด้วย มีผลเมื่อพาเนลวางอยู่ติดขอบหน้าจอเท่านั้น"
+"Select this option if you don't want maximized windows to cover the area "
+"behind the panel. This only works when the panel is attached to a screen "
+"edge."
+msgstr ""
 
 #: panel/panel-preferences-dialog.glade:472
 msgid "Au_tomatically hide the panel:"
