@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2023-03-13 00:46+0100\n"
+"POT-Creation-Date: 2023-03-14 00:47+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: jc1 <jc1.quebecos@gmail.com>, 2013,2017,2022-2023\n"
 "Language-Team: French (http://www.transifex.com/xfce/xfce4-panel/language/fr/)\n"
@@ -267,17 +267,17 @@ msgstr "Aucune instance de %s n’a été trouvée"
 msgid "Failed to launch the migration application"
 msgstr "Impossible de lancer la procédure de migration"
 
-#: panel/panel-application.c:1035
+#: panel/panel-application.c:1047
 msgid "Create _Launcher"
 msgstr "Créer un _lanceur"
 
-#: panel/panel-application.c:1036
+#: panel/panel-application.c:1048
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Un nouveau greffon « Lanceur » va être créé sur le tableau de bord et un élément de menu y sera inséré pour chaque fichier déposé."
 
-#: panel/panel-application.c:1038
+#: panel/panel-application.c:1050
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -285,21 +285,21 @@ msgstr[0] "Créer un lanceur à partir de %d fichier desktop"
 msgstr[1] "Créer un lanceur à partir de %d fichiers desktop"
 msgstr[2] "Créer un lanceur à partir de %d fichiers desktop"
 
-#: panel/panel-application.c:1795
+#: panel/panel-application.c:1807
 msgid "Quit"
 msgstr "Quitter"
 
-#: panel/panel-application.c:1796
+#: panel/panel-application.c:1808
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Vous avez démarré le serveur X sans gestionnaire de session. Cliquer sur Quitter fermera le serveur X."
 
-#: panel/panel-application.c:1797
+#: panel/panel-application.c:1809
 msgid "Are you sure you want to quit the panel?"
 msgstr "Voulez-vous vraiment quitter le tableau de bord ?"
 
-#: panel/panel-application.c:1805
+#: panel/panel-application.c:1817
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Impossible d’exécuter la commande « %s »"
@@ -542,14 +542,15 @@ msgid ""
 msgstr "Sélectionner cette option pour masquer les poignées du tableau de bord et verrouiller sa position."
 
 #: panel/panel-preferences-dialog.glade:447
-msgid "Keep panel _above windows"
-msgstr "Gardez le panneau _au-dessus des fenêtres"
+msgid "_Reserve space on screen edges for the panel"
+msgstr ""
 
 #: panel/panel-preferences-dialog.glade:451
 msgid ""
-"Select this option if you want maximized windows to cover the area behind "
-"the panel. This only works when the panel is attached to a screen edge."
-msgstr "Sélectionner cette option si vous voulez que les fenêtres maximisées recouvrent la zone derrière le tableau de bord. Cela fonctionne uniquement lorsque le tableau de bord est rattaché à un bord de l’écran."
+"Select this option if you don't want maximized windows to cover the area "
+"behind the panel. This only works when the panel is attached to a screen "
+"edge."
+msgstr ""
 
 #: panel/panel-preferences-dialog.glade:472
 msgid "Au_tomatically hide the panel:"
