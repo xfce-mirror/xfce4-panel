@@ -50,7 +50,7 @@
  * Create regular #GtkButton with a few properties set to be useful in the
  * Xfce panel: Flat (%GTK_RELIEF_NONE), no focus on click and minimal padding.
  *
- * Returns: (transfer full): newly created #GtkButton.
+ * Returns: (transfer floating): newly created #GtkButton.
  **/
 GtkWidget *
 xfce_panel_create_button (void)
@@ -85,7 +85,7 @@ xfce_panel_create_button (void)
  * Create regular #GtkToggleButton with a few properties set to be useful in
  * Xfce panel: Flat (%GTK_RELIEF_NONE), no focus on click and minimal padding.
  *
- * Returns: (transfer full): newly created #GtkToggleButton.
+ * Returns: (transfer floating): newly created #GtkToggleButton.
  **/
 GtkWidget *
 xfce_panel_create_toggle_button (void)
