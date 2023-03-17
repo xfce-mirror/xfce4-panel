@@ -1873,14 +1873,6 @@ launcher_plugin_button_update_action_menu (LauncherPlugin *plugin)
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
   panel_return_if_fail (plugin->menu == NULL);
 
-  /* If there are >1 items in the launcher don't show the action menu */
-  if (LIST_HAS_TWO_OR_MORE_ENTRIES (plugin->items))
-    {
-      xfce_panel_plugin_menu_destroy (XFCE_PANEL_PLUGIN (plugin));
-      plugin->action_menu = NULL;
-      return;
-    }
-
   if (G_LIKELY (plugin->items != NULL))
     item = GARCON_MENU_ITEM (plugin->items->data);
 
