@@ -1,3 +1,29 @@
+4.18.3 (2023-03-28)
+======
+- launcher: Show action menu also when there are several items
+- Fix memory management of vala generated plugins
+- panel: Rephrase "Don't reserve space on borders" (V2)
+- panel: Make property migration generic
+- launcher: Avoid "no trigger event" warning when showing the menu
+- launcher: Guard access to the plugin menu GdkWindow
+- libxfce4panel: Unregister menu also on GtkWidget::hide
+- panel: Do not reset output name if a monitor does not have a model 
+name
+- libxfce4panel: Fix memory management of source for menu positioning
+- panel: Delay removal of ExternalPlugin to prevent use-after-free
+- systray: Cancel any async D-Bus operation in finalize()
+- tasklist: Do not try to resolve /proc/pid/exe to launch new instance
+- Translation Updates:
+  Albanian, Arabic, Armenian (Armenia), Asturian, Basque, Belarusian,
+  Bulgarian, Catalan, Chinese (China), Chinese (Hong Kong), Chinese
+  (Taiwan), Croatian, Czech, Danish, Dutch, Eastern Armenian, English
+  (Australia), English (United Kingdom), Estonian, Finnish, French,
+  Galician, German, Greek, Hebrew, Hungarian, Icelandic, Indonesian,
+  Italian, Japanese, Kazakh, Korean, Lithuanian, Malay, Norwegian
+  Bokmål, Norwegian Nynorsk, Occitan (post 1500), Polish, Portuguese,
+  Portuguese (Brazil), Romanian, Russian, Serbian, Slovak, Slovenian,
+  Spanish, Swedish, Thai, Turkish, Ukrainian, Uyghur, Vietnamese
+
 4.18.2 (2023-02-09)
 ======
 - directorymenu: Add missing sanity check
