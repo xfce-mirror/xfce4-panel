@@ -1,3 +1,76 @@
+4.19.1 (2023-03-28)
+======
+- launcher: Show action menu also when there are several items
+- Fix memory management of vala generated plugins
+- panel: Rephrase "Don't reserve space on borders" (V2)
+- panel: Make property migration generic
+- Remove POTFILES.skip
+- Put glade files back in POTFILES.in
+- autogen.sh: Properly quote arguments
+- panel: Properly set ExternalPlugin orientation
+- build: Use m4_defined min versions and cleanup
+- build: Use XDT_CHECK_PACKAGE_BINARY and replace XDT_CHECK_LIBX11
+- build: Use XDT_VERSION_INIT and get rid of configure.ac.in
+- build: Switch from intltool to gettext
+- wayland: Add panel_utils_widget_remap()
+- wayland: Commit wl_surface manually only if necessary
+- wayland: panel: Wait for all plugins to be embedded before hiding 
+panel
+- wayland: panel: Remap panel window when shown without autohide delay
+- wayland: panel: Send request only to embedded external plugins
+- launcher: Avoid "no trigger event" warning when showing the menu
+- launcher: Guard access to the plugin menu GdkWindow
+- libxfce4panel: Unregister menu also on GtkWidget::hide
+- panel: Do not reset output name if a monitor does not have a model 
+name
+- libxfce4panel: Fix memory management of sources for window positioning
+- libxfce4panel: Fix memory management of source for menu positioning
+- prefs-dialog: Launch xfce4-panel-profiles with '--from-panel'
+- panel: Delay removal of ExternalPlugin to prevent use-after-free
+- systray: Cancel any async D-Bus operation in finalize()
+- tasklist: Do not try to resolve /proc/pid/exe to launch new instance
+- directorymenu: Add missing sanity check
+- wayland: panel: Add missing sanity check
+- cleanup: panel: Use G_DECLARE_DERIVABLE_TYPE for BaseWindow
+- cleanup: panel: Make public members of BaseWindow private
+- cleanup: panel: Use G_DECLARE_DERIVABLE_TYPE for PluginExternal
+- cleanup: panel: Make public members of PluginExternal private
+- cleanup: wrapper: Use G_DEFINE_FINAL_TYPE
+- cleanup: clock: Use G_DECLARE_DERIVABLE_TYPE for SleepMonitor
+- cleanup: plugins: Use G_DEFINE_FINAL_TYPE
+- cleanup: panel: Use G_DEFINE_FINAL_TYPE
+- cleanup: panel: Keep consistent type names in G_DEFINE_TYPE
+- cleanup: Revert use of G_DECLARE_FINAL_TYPE for PanelBaseWindow
+- cleanup: Update glade files in Glade 3.40.0
+- cleanup: wrapper: Use G_DECLARE_FINAL_TYPE
+- cleanup: plugins: Do not define internal plugin types as dynamic
+- cleanup: plugins: Use consistent naming for structures and macros
+- cleanup: plugins: Use G_DECLARE_FINAL_TYPE
+- cleanup: panel: Use G_DECLARE_FINAL_TYPE
+- cleanup: libxfce4panel: Use GLib macros for type definition
+- cleanup: Remove PANEL_UTILS_LINK_4UI macro
+- wayland: panel: Properly release interface skeleton
+- panel: Properly handle null string as property default value
+- Revert "Use RGBA visual only if compositing is enabled (Fixes #251)"
+- Revert "systray: Do not require compositing to be enabled to use RGBA 
+visual"
+- systray: Fix blurry icons in prefs dialog when UI scale > 1
+- launcher: Fix blurry icons in prefs and add dialogs when UI scale > 1
+- launcher: Use GIcon for the tooltip icon
+- pager: Use WnckHandle if available
+- Translation Updates:
+  Albanian, Amharic, Arabic, Armenian (Armenia), Asturian, Basque,
+  Belarusian, Bengali, Bulgarian, Catalan, Chinese (China), Chinese
+  (Hong Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch,
+  Eastern Armenian, English (Australia), English (United Kingdom),
+  Estonian, Finnish, French, Galician, Georgian, German, Greek, Hebrew,
+  Hungarian, Icelandic, Indonesian, Interlingue, Italian, Japanese,
+  Kazakh, Korean, Lithuanian, Malay, Norwegian Bokmål, Norwegian
+  Nynorsk, Occitan (post 1500), Panjabi (Punjabi), Polish, Portuguese,
+  Portuguese (Brazil), Romanian, Russian, Serbian, Sinhala, Slovak,
+  Slovenian, Spanish, Swedish, Thai, Turkish, Ukrainian, Uyghur,
+  Vietnamese
+
 4.19.0 (2023-01-10)
 ======
 - Dependency Changes:
