@@ -87,6 +87,7 @@ struct _SnItem
   gchar               *icon_desc;
   gchar               *attention_desc;
 
+  gchar               *status;
   gchar               *icon_name;
   gchar               *attention_icon_name;
   gchar               *overlay_icon_name;
@@ -274,6 +275,7 @@ sn_item_init (SnItem *item)
   item->icon_desc = NULL;
   item->attention_desc = NULL;
 
+  item->status = NULL;
   item->icon_name = NULL;
   item->attention_icon_name = NULL;
   item->overlay_icon_name = NULL;
@@ -316,6 +318,7 @@ sn_item_finalize (GObject *object)
   g_free (item->icon_desc);
   g_free (item->attention_desc);
 
+  g_free (item->status);
   g_free (item->icon_name);
   g_free (item->attention_icon_name);
   g_free (item->overlay_icon_name);
@@ -563,14 +566,6 @@ sn_item_invalidate (SnItem   *item,
 
 
 
-static gboolean
-sn_item_status_is_exposed (const gchar *status)
-{
-  return !!g_strcmp0 (status, "Passive");
-}
-
-
-
 static void
 sn_item_signal_received (GDBusProxy *proxy,
                          gchar      *sender_name,
@@ -578,37 +573,7 @@ sn_item_signal_received (GDBusProxy *proxy,
                          GVariant   *parameters,
                          gpointer    user_data)
 {
-  SnItem   *item = user_data;
-  gchar    *status;
-  gboolean  exposed;
-
-  if (!g_strcmp0 (signal_name, "NewTitle") ||
-      !g_strcmp0 (signal_name, "NewIcon") ||
-      !g_strcmp0 (signal_name, "NewAttentionIcon") ||
-      !g_strcmp0 (signal_name, "NewOverlayIcon") ||
-      !g_strcmp0 (signal_name, "NewToolTip"))
-    {
-      sn_item_invalidate (item, FALSE);
-    }
-  else if (!g_strcmp0 (signal_name, "NewStatus"))
-    {
-      if (parameters == NULL || ! g_variant_check_format_string (parameters, "(s)", FALSE))
-        {
-          g_warning ("Could not parse properties for StatusNotifierItem.");
-          return;
-        }
-
-      g_variant_get (parameters, "(s)", &status);
-      exposed = sn_item_status_is_exposed (status);
-      g_free (status);
-
-      if (exposed != item->exposed)
-        {
-          item->exposed = exposed;
-          if (item->initialized)
-            g_signal_emit (G_OBJECT (item), sn_item_signals[exposed ? EXPOSE : SEAL], 0);
-        }
-    }
+  sn_item_invalidate (user_data, FALSE);
 }
 
 
@@ -737,7 +702,7 @@ sn_item_get_all_properties_result (GObject      *source_object,
   const gchar  *name;
   GVariant     *value;
 
-  const gchar  *cstr_val1, *item_status = NULL;
+  const gchar  *cstr_val1;
   gchar        *str_val1;
   gchar        *str_val2;
   gboolean      bool_val1;
@@ -795,8 +760,9 @@ sn_item_get_all_properties_result (GObject      *source_object,
       }
     else if (!g_strcmp0 (name, "Status"))
       {
-        item_status = cstr_val1 = g_variant_get_string (value, NULL);
-        bool_val1 = sn_item_status_is_exposed (cstr_val1);
+        cstr_val1 = g_variant_get_string (value, NULL);
+        update_new_string (cstr_val1, status, update_icon);
+        bool_val1 = g_strcmp0 (item->status, "Passive") != 0;
         if (bool_val1 != item->exposed)
           {
             item->exposed = bool_val1;
@@ -924,7 +890,7 @@ sn_item_get_all_properties_result (GObject      *source_object,
         {
           /* we prioritize the attention icon if it exists afterwards, but it may
            * exist here without the corresponding status, which is authentic */
-          if (g_strcmp0 (item_status, "NeedsAttention") != 0)
+          if (g_strcmp0 (item->status, "NeedsAttention") != 0)
             {
               g_clear_object (&item->attention_icon_pixbuf);
               g_free (item->attention_icon_name);
