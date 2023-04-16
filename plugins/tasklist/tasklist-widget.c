@@ -1473,6 +1473,15 @@ xfce_tasklist_scroll_event (GtkWidget      *widget,
 
 
 
+static gboolean
+xfce_tasklist_free_child (gpointer data)
+{
+  g_slice_free (XfceTasklistChild, data);
+  return FALSE;
+}
+
+
+
 static void
 xfce_tasklist_remove (GtkContainer *container,
                       GtkWidget    *widget)
@@ -1500,7 +1509,10 @@ xfce_tasklist_remove (GtkContainer *container,
           if (child->pixbuf != NULL)
             g_object_unref (child->pixbuf);
 
-          g_slice_free (XfceTasklistChild, child);
+          /* allow time for signal handlers connected to the destroy/dispose signals of
+           * child members to run, they could refer to these members via child, e.g.
+           * child->button as above to test for equality */
+          g_idle_add (xfce_tasklist_free_child, child);
 
           /* queue a resize if needed */
           if (G_LIKELY (was_visible))
