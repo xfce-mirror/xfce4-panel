@@ -376,6 +376,14 @@ struct _PanelWindow
   gboolean             wl_active_is_maximized;
 };
 
+/*
+ * Used for a full XfcePanelWindow name in the class, but not in the code.
+ * Not great, but removing this breaks backwards compatibility for autohide related style
+ * properties, so better to keep it until these properties are changed to real settings.
+ */
+typedef PanelWindow      XfcePanelWindow;
+typedef PanelWindowClass XfcePanelWindowClass;
+
 
 
 static GdkAtom cardinal_atom = 0;
@@ -383,7 +391,7 @@ static GdkAtom net_wm_strut_partial_atom = 0;
 
 
 
-G_DEFINE_FINAL_TYPE (PanelWindow, panel_window, PANEL_TYPE_BASE_WINDOW)
+G_DEFINE_FINAL_TYPE (XfcePanelWindow, panel_window, PANEL_TYPE_BASE_WINDOW)
 
 
 
