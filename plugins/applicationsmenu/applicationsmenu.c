@@ -847,6 +847,8 @@ applications_menu_plugin_menu (GtkWidget              *button,
                                GdkEventButton         *event,
                                ApplicationsMenuPlugin *plugin)
 {
+  GdkEvent *free_event = NULL;
+
   panel_return_val_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin), FALSE);
   panel_return_val_if_fail (button == NULL || plugin->button == button, FALSE);
 
@@ -863,13 +865,18 @@ applications_menu_plugin_menu (GtkWidget              *button,
    * gtk_menu_popup_at_pointer/rect can extract a location correctly from a GdkWindow */
   if (event == NULL)
     {
-      event = g_slice_new0 (GdkEventButton);
-      event->type = GDK_BUTTON_PRESS;
-      event->window = gdk_get_default_root_window ();
+      GdkSeat *seat = gdk_display_get_default_seat (gdk_display_get_default ());
+      free_event = gdk_event_new (GDK_BUTTON_PRESS);
+      free_event->button.window = g_object_ref (gdk_get_default_root_window ());
+      gdk_event_set_device (free_event, gdk_seat_get_pointer (seat));
+      event = (GdkEventButton *)free_event;
     }
 
   xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (plugin->menu),
                                 button, (GdkEvent *) event);
+
+  if (free_event != NULL)
+    gdk_event_free (free_event);
 
   return TRUE;
 }

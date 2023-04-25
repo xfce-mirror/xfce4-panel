@@ -1425,8 +1425,8 @@ static void
 window_menu_plugin_menu (GtkWidget        *button,
                          WindowMenuPlugin *plugin)
 {
-  GtkWidget      *menu;
-  GdkEventButton *event = NULL;
+  GtkWidget *menu;
+  GdkEvent  *event = NULL;
 
   panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
   panel_return_if_fail (button == NULL || plugin->button == button);
@@ -1437,11 +1437,13 @@ window_menu_plugin_menu (GtkWidget        *button,
 
   /* Panel plugin remote events don't send actual GdkEvents, so construct a minimal one so that
    * gtk_menu_popup_at_pointer/rect can extract a location correctly from a GdkWindow */
-  if (gtk_get_current_event () == NULL)
+  event = gtk_get_current_event ();
+  if (event == NULL)
     {
-      event = g_slice_new0 (GdkEventButton);
-      event->type = GDK_BUTTON_PRESS;
-      event->window = gdk_get_default_root_window ();
+      GdkSeat *seat = gdk_display_get_default_seat (gdk_display_get_default ());
+      event = gdk_event_new (GDK_BUTTON_PRESS);
+      event->button.window = g_object_ref (gdk_get_default_root_window ());
+      gdk_event_set_device (event, gdk_seat_get_pointer (seat));
     }
 
   /* popup the menu */
@@ -1451,4 +1453,6 @@ window_menu_plugin_menu (GtkWidget        *button,
 
   xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (menu),
                                 button, (GdkEvent *) event);
+
+  gdk_event_free (event);
 }
