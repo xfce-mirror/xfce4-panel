@@ -1672,7 +1672,7 @@ launcher_plugin_menu_popup (gpointer user_data)
 {
   LauncherPlugin *plugin = LAUNCHER_PLUGIN (user_data);
   gint            x, y;
-  GdkEventButton *event = NULL;
+  GdkEvent       *event = NULL;
 
   panel_return_val_if_fail (LAUNCHER_IS_PLUGIN (plugin), FALSE);
 
@@ -1687,16 +1687,20 @@ launcher_plugin_menu_popup (gpointer user_data)
     gtk_widget_set_state_flags (GTK_WIDGET (plugin->button), GTK_STATE_FLAG_CHECKED, TRUE);
 
   /* avoid warning when there is no current event */
-  if (gtk_get_current_event () == NULL)
+  event = gtk_get_current_event ();
+  if (event == NULL)
     {
-      event = g_slice_new0 (GdkEventButton);
-      event->type = GDK_BUTTON_PRESS;
-      event->window = gdk_get_default_root_window ();
+      GdkSeat *seat = gdk_display_get_default_seat (gdk_display_get_default ());
+      event = gdk_event_new (GDK_BUTTON_PRESS);
+      event->button.window = g_object_ref (gdk_get_default_root_window ());
+      gdk_event_set_device (event, gdk_seat_get_pointer (seat));
     }
 
   /* popup the menu */
   xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (plugin->menu),
-                                plugin->button, (GdkEvent *) event);
+                                plugin->button, event);
+
+  gdk_event_free (event);
 
   /* fallback to manual positioning, this is used with drag motion over the arrow button
    * from e.g. Thunar, not from the app menu, where showing the menu does not work for
