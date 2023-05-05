@@ -10,10 +10,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2023-03-14 00:47+0100\n"
+"POT-Creation-Date: 2023-05-05 10:50+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Moo, 2023\n"
-"Language-Team: Lithuanian (http://www.transifex.com/xfce/xfce4-panel/language/lt/)\n"
+"Language-Team: Lithuanian (http://app.transifex.com/xfce/xfce4-panel/language/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,21 +30,13 @@ msgid ""
 "file"
 msgstr "Pridėti naują leistuką į skydelį, remiantis šio darbalaukio failo informacija"
 
-#: panel-desktop-handler.desktop.in:7
-msgid "application-x-executable"
-msgstr "application-x-executable"
-
-#: panel-preferences.desktop.in:5
-msgid "org.xfce.panel"
-msgstr "org.xfce.panel"
-
 #: panel-preferences.desktop.in:8
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "skydeliai;nustatymai;nuostatos;užduočių juosta;uzduociu juosta;automatinis slėpimas;automatinis slepimas;automatiškai slėpti;automatiskai slepti;programų meniu;programu meniu;pradžia;pradzia;mygtukai;leistukas;paleidyklė;paleidykle;pranešimų sritis;pranesimu sritis;būsena;busena;piktogramos;įskiepiai;iskiepiai;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3574
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3582
 msgid "Panel"
 msgstr "Skydelis"
 
@@ -92,7 +84,7 @@ msgid "_Properties"
 msgstr "_Savybės"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3650
+#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3658
 msgid "_About"
 msgstr "_Apie"
 
@@ -106,23 +98,23 @@ msgid "Pane_l"
 msgstr "_Skydelis"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3586
+#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3594
 msgid "Add _New Items..."
 msgstr "Pridėti _naujų elementų..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3597
+#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3605
 msgid "Panel Pr_eferences..."
 msgstr "Skydelio _nuostatos..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3625
+#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3633
 msgid "Log _Out"
 msgstr "_Atsijungti"
 
 #. help item
 #: libxfce4panel/xfce-panel-plugin.c:1341 panel/panel-item-dialog.c:196
-#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3641
+#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3649
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
 #: plugins/clock/clock-dialog.glade:120
@@ -254,21 +246,21 @@ msgstr "Ar norite paleisti skydelį? Jei taip, įsitikinkite, kad atsijungdami �
 msgid "No running instance of %s was found"
 msgstr "Nerasta jokio veikiančio %s egzemplioriaus"
 
-#: panel/panel-application.c:222
+#: panel/panel-application.c:221
 msgid "Failed to launch the migration application"
 msgstr "Nepavyko paleisti perkėlimo programos"
 
-#: panel/panel-application.c:1047
+#: panel/panel-application.c:1048
 msgid "Create _Launcher"
 msgstr "Sukurti _leistuką"
 
-#: panel/panel-application.c:1048
+#: panel/panel-application.c:1049
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Tai skydelyje sukurs naują leistuko įskiepį ir įterps atvilktus failus kaip meniu elementus."
 
-#: panel/panel-application.c:1050
+#: panel/panel-application.c:1051
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -277,21 +269,21 @@ msgstr[1] "Sukurti naujus leistukus iš %d darbalaukio failų"
 msgstr[2] "Sukurti naujus leistukus iš %d darbalaukio failų"
 msgstr[3] "Sukurti naujus leistukus iš %d darbalaukio failų"
 
-#: panel/panel-application.c:1807
+#: panel/panel-application.c:1808
 msgid "Quit"
 msgstr "Baigti"
 
-#: panel/panel-application.c:1808
+#: panel/panel-application.c:1809
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Jūs paleidote X be seansų tvarkytuvės. Spustelėjus „Baigti”, X serveris bus užvertas."
 
-#: panel/panel-application.c:1809
+#: panel/panel-application.c:1810
 msgid "Are you sure you want to quit the panel?"
 msgstr "Ar tikrai norite baigti skydelio darbą?"
 
-#: panel/panel-application.c:1817
+#: panel/panel-application.c:1818
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Nepavyko įvykdyti komandos „%s”"
@@ -714,7 +706,7 @@ msgstr "Patyręs"
 msgid "Expert"
 msgstr "Ekspertas"
 
-#: panel/panel-window.c:3611
+#: panel/panel-window.c:3619
 msgid "_Lock Panel"
 msgstr "_Užrakinti skydelį"
 
@@ -943,10 +935,6 @@ msgstr "Pelytė"
 msgid "Log out, lock or other system actions"
 msgstr "Atsijungimas, užrakinimas ar kiti sistemos veiksmai"
 
-#: plugins/actions/actions.desktop.in.in:6
-msgid "org.xfce.panel.actions"
-msgstr "org.xfce.panel.actions"
-
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:23
 #: plugins/applicationsmenu/applicationsmenu.desktop.in.in:4
 msgid "Applications Menu"
@@ -1037,7 +1025,7 @@ msgstr "_Gerai"
 
 #. show an error dialog
 #: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1018
-#: plugins/launcher/launcher.c:2483
+#: plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Nepavyko paleisti komandos „%s”."
@@ -1045,10 +1033,6 @@ msgstr "Nepavyko paleisti komandos „%s”."
 #: plugins/applicationsmenu/applicationsmenu.desktop.in.in:5
 msgid "Show a menu containing categories of installed applications"
 msgstr "Rodyti meniu su įdiegtų programų kategorijomis"
-
-#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:6
-msgid "org.xfce.panel.applicationsmenu"
-msgstr "org.xfce.panel.applicationsmenu"
 
 #: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -1576,10 +1560,6 @@ msgstr "dvylikta"
 msgid "What time is it?"
 msgstr "Kiek dabar valandų?"
 
-#: plugins/clock/clock.desktop.in.in:6
-msgid "org.xfce.panel.clock"
-msgstr "org.xfce.panel.clock"
-
 #: plugins/directorymenu/directorymenu.c:289
 #: plugins/directorymenu/directorymenu.desktop.in.in:4
 #: plugins/directorymenu/directorymenu-dialog.glade:18
@@ -1656,10 +1636,6 @@ msgstr "Sukurti tekstinį dokumentą..."
 msgid "Show a directory tree in a menu"
 msgstr "Rodyti meniu katalogų medį"
 
-#: plugins/directorymenu/directorymenu.desktop.in.in:6
-msgid "org.xfce.panel.directorymenu"
-msgstr "org.xfce.panel.directorymenu"
-
 #: plugins/directorymenu/directorymenu-dialog.glade:99
 msgid "Select A Directory"
 msgstr "Pasirinkite katalogą"
@@ -1717,7 +1693,7 @@ msgstr "Atverti paleidimo meniu"
 msgid "Unnamed Item"
 msgstr "Nepavadintas elementas"
 
-#: plugins/launcher/launcher.c:1789
+#: plugins/launcher/launcher.c:1793
 msgid "No items"
 msgstr "Nėra elementų"
 
@@ -1846,10 +1822,6 @@ msgstr "Išplėstiniai"
 msgid "Program launcher with optional menu"
 msgstr "Programų leistukas su pasirinktiniu meniu"
 
-#: plugins/launcher/launcher.desktop.in.in:6
-msgid "org.xfce.panel.launcher"
-msgstr "org.xfce.panel.launcher"
-
 #: plugins/pager/pager.c:685 plugins/pager/pager-dialog.glade:64
 msgid "Workspace _Settings..."
 msgstr "Darbo srities _nustatymai..."
@@ -1899,10 +1871,6 @@ msgstr "<b>Išvaizda</b>"
 msgid "Switch between virtual desktops"
 msgstr "Perjungti tarp virtualių darbalaukių"
 
-#: plugins/pager/pager.desktop.in.in:6
-msgid "org.xfce.panel.pager"
-msgstr "org.xfce.panel.pager"
-
 #: plugins/separator/separator-dialog.glade:23
 msgid "Transparent"
 msgstr "Permatomas"
@@ -1923,10 +1891,6 @@ msgstr "_Išplėsti"
 msgid "Adds a separator or space between panel items"
 msgstr "Prideda skirtuką arba tarpą tarp skydelio elementų"
 
-#: plugins/separator/separator.desktop.in.in:6
-msgid "org.xfce.panel.separator"
-msgstr "org.xfce.panel.separator"
-
 #: plugins/showdesktop/showdesktop.c:245
 msgid "Restore the minimized windows"
 msgstr "Atkurti suskleistus langus"
@@ -1943,10 +1907,6 @@ msgstr "Rodyti darbalaukį"
 #: plugins/showdesktop/showdesktop.desktop.in.in:5
 msgid "Hide all windows and show the desktop"
 msgstr "Slėpti visus langus ir rodyti darbalaukį"
-
-#: plugins/showdesktop/showdesktop.desktop.in.in:6
-msgid "org.xfce.panel.showdesktop"
-msgstr "org.xfce.panel.showdesktop"
 
 #: plugins/systray/sn-dialog.c:645
 msgid "Clear"
@@ -2086,10 +2046,6 @@ msgid ""
 "items"
 msgstr "Pateikia būsenos pranešiklių elementus (programų indikatorius) bei liekamuosius sistemos dėklo elementus"
 
-#: plugins/systray/systray.desktop.in.in:7
-msgid "org.xfce.panel.statustray"
-msgstr "org.xfce.panel.statustray"
-
 #: plugins/tasklist/tasklist-dialog.glade:23
 msgid "Nothing"
 msgstr "Joks"
@@ -2188,46 +2144,42 @@ msgstr "Rodyti langus iš _visų ekranų"
 msgid "Show only _minimized windows"
 msgstr "Rodyti tik _suskleistus langus"
 
-#: plugins/tasklist/tasklist-widget.c:3109
+#: plugins/tasklist/tasklist-widget.c:3121
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Nepavyko paleisti naujo „%s“ egzemplioriaus"
 
-#: plugins/tasklist/tasklist-widget.c:3113
+#: plugins/tasklist/tasklist-widget.c:3125
 msgid "Error"
 msgstr "Klaida"
 
-#: plugins/tasklist/tasklist-widget.c:3142
+#: plugins/tasklist/tasklist-widget.c:3154
 msgid "Launch New Instance"
 msgstr "Paleisti naują egzempliorių"
 
-#: plugins/tasklist/tasklist-widget.c:3887
+#: plugins/tasklist/tasklist-widget.c:3899
 msgid "Mi_nimize All"
 msgstr "_Suskleisti visus"
 
-#: plugins/tasklist/tasklist-widget.c:3894
+#: plugins/tasklist/tasklist-widget.c:3906
 msgid "Un_minimize All"
 msgstr "Grąži_nti visus iš suskleidimo"
 
-#: plugins/tasklist/tasklist-widget.c:3901
+#: plugins/tasklist/tasklist-widget.c:3913
 msgid "Ma_ximize All"
 msgstr "Iš_skleisti visus"
 
-#: plugins/tasklist/tasklist-widget.c:3908
+#: plugins/tasklist/tasklist-widget.c:3920
 msgid "_Unmaximize All"
 msgstr "Grąži_nti visus iš išskleidimo"
 
-#: plugins/tasklist/tasklist-widget.c:3919
+#: plugins/tasklist/tasklist-widget.c:3931
 msgid "_Close All"
 msgstr "_Užverti visus"
 
 #: plugins/tasklist/tasklist.desktop.in.in:5
 msgid "Switch between open windows using buttons"
 msgstr "Perjunginėti tarp atvertų langų naudojant mygtukus"
-
-#: plugins/tasklist/tasklist.desktop.in.in:6
-msgid "org.xfce.panel.tasklist"
-msgstr "org.xfce.panel.tasklist"
 
 #: plugins/windowmenu/windowmenu.c:689
 msgid "Desktop"
@@ -2287,7 +2239,3 @@ msgstr "Įjungti _svarbius pranešimus"
 #: plugins/windowmenu/windowmenu.desktop.in.in:5
 msgid "Switch between open windows using a menu"
 msgstr "Perjunginėti tarp atvertų langų naudojant meniu"
-
-#: plugins/windowmenu/windowmenu.desktop.in.in:6
-msgid "org.xfce.panel.windowmenu"
-msgstr "org.xfce.panel.windowmenu"
