@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2023-03-14 00:47+0100\n"
+"POT-Creation-Date: 2023-05-05 10:50+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>, 2013-2014,2016-2020,2022-2023\n"
 "Language-Team: Korean (http://app.transifex.com/xfce/xfce4-panel/language/ko/)\n"
@@ -35,21 +35,13 @@ msgid ""
 "file"
 msgstr "이 데스크톱 파일의 정보에 기반하여 새 실행 아이콘을 패널에 등록합니다"
 
-#: panel-desktop-handler.desktop.in:7
-msgid "application-x-executable"
-msgstr "application-x-executable"
-
-#: panel-preferences.desktop.in:5
-msgid "org.xfce.panel"
-msgstr "org.xfce.panel"
-
 #: panel-preferences.desktop.in:8
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panels;패널;창;settings;설정;preferences;기본설정;기본 설정;taskbar;작업표시줄;작업 표시줄;autohide;자동숨김;자동 숨김;application menu;프로그램메뉴;프로그램 메뉴;어플리케이션 메뉴;어플리케이션메뉴start;시작;buttons;버튼;보턴;단추;launcher;실행아이콘;실행 아이콘;notification area;알림영역;알림 영역;status;상태;icons;아이콘;plugins;플러그인;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3574
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3582
 msgid "Panel"
 msgstr "패널"
 
@@ -97,7 +89,7 @@ msgid "_Properties"
 msgstr "속성(_P)"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3650
+#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3658
 msgid "_About"
 msgstr "정보(_A)"
 
@@ -111,23 +103,23 @@ msgid "Pane_l"
 msgstr "패널(_L)"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3586
+#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3594
 msgid "Add _New Items..."
 msgstr "새 항목 추가(_N)..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3597
+#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3605
 msgid "Panel Pr_eferences..."
 msgstr "패널 기본 설정(_E)..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3625
+#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3633
 msgid "Log _Out"
 msgstr "로그아웃(_O)"
 
 #. help item
 #: libxfce4panel/xfce-panel-plugin.c:1341 panel/panel-item-dialog.c:196
-#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3641
+#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3649
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
 #: plugins/clock/clock-dialog.glade:120
@@ -259,41 +251,41 @@ msgstr "패널을 시작하시렵니까? 패널을 시작 하면 로그아웃시
 msgid "No running instance of %s was found"
 msgstr "실행 중인 %s 인스턴스가 없습니다"
 
-#: panel/panel-application.c:222
+#: panel/panel-application.c:221
 msgid "Failed to launch the migration application"
 msgstr "마이그레이션 프로그램을 실행하는데 실패했습니다"
 
-#: panel/panel-application.c:1047
+#: panel/panel-application.c:1048
 msgid "Create _Launcher"
 msgstr "실행 아이콘 만들기(_L)"
 
-#: panel/panel-application.c:1048
+#: panel/panel-application.c:1049
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "패널에 새 실행 아이콘 플러그인을 만들고 파일을 메뉴 항목으로 넣습니다."
 
-#: panel/panel-application.c:1050
+#: panel/panel-application.c:1051
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "데스크톱 파일 %d개에 대한 새 실행 아이콘 만들기"
 
-#: panel/panel-application.c:1807
+#: panel/panel-application.c:1808
 msgid "Quit"
 msgstr "끝내기"
 
-#: panel/panel-application.c:1808
+#: panel/panel-application.c:1809
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "세션 매니저 없이 X를 시작했습니다. 나가기를 누르면 X 서버가 닫힙니다."
 
-#: panel/panel-application.c:1809
+#: panel/panel-application.c:1810
 msgid "Are you sure you want to quit the panel?"
 msgstr "정말 패널을 종료하시렵니까?"
 
-#: panel/panel-application.c:1817
+#: panel/panel-application.c:1818
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" 명령을 실행하지 못 했습니다."
@@ -716,7 +708,7 @@ msgstr "숙련자"
 msgid "Expert"
 msgstr "전문가"
 
-#: panel/panel-window.c:3611
+#: panel/panel-window.c:3619
 msgid "_Lock Panel"
 msgstr "패널 고정(_L)"
 
@@ -945,10 +937,6 @@ msgstr "작은 생쥐"
 msgid "Log out, lock or other system actions"
 msgstr "로그아웃, 잠금 또는 다른 시스템 동작을 수행합니다"
 
-#: plugins/actions/actions.desktop.in.in:6
-msgid "org.xfce.panel.actions"
-msgstr "org.xfce.panel.actions"
-
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:23
 #: plugins/applicationsmenu/applicationsmenu.desktop.in.in:4
 msgid "Applications Menu"
@@ -1039,7 +1027,7 @@ msgstr "확인(_O)"
 
 #. show an error dialog
 #: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1018
-#: plugins/launcher/launcher.c:2483
+#: plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" 명령 실행에 실패했습니다."
@@ -1047,10 +1035,6 @@ msgstr "\"%s\" 명령 실행에 실패했습니다."
 #: plugins/applicationsmenu/applicationsmenu.desktop.in.in:5
 msgid "Show a menu containing categories of installed applications"
 msgstr "설치한 프로그램의 분류가 들어있는 메뉴를 표시합니다"
-
-#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:6
-msgid "org.xfce.panel.applicationsmenu"
-msgstr "org.xfce.panel.applicationsmenu"
 
 #: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -1578,10 +1562,6 @@ msgstr "열 두"
 msgid "What time is it?"
 msgstr "몇 시죠?"
 
-#: plugins/clock/clock.desktop.in.in:6
-msgid "org.xfce.panel.clock"
-msgstr "org.xfce.panel.clock"
-
 #: plugins/directorymenu/directorymenu.c:289
 #: plugins/directorymenu/directorymenu.desktop.in.in:4
 #: plugins/directorymenu/directorymenu-dialog.glade:18
@@ -1658,10 +1638,6 @@ msgstr "텍스트 문서 만들기..."
 msgid "Show a directory tree in a menu"
 msgstr "메뉴에서 디렉터리 트리를 보여줍니다"
 
-#: plugins/directorymenu/directorymenu.desktop.in.in:6
-msgid "org.xfce.panel.directorymenu"
-msgstr "org.xfce.panel.directorymenu"
-
 #: plugins/directorymenu/directorymenu-dialog.glade:99
 msgid "Select A Directory"
 msgstr "디렉터리 선택"
@@ -1719,7 +1695,7 @@ msgstr "실행 아이콘 메뉴 열기"
 msgid "Unnamed Item"
 msgstr "이름 없는 항목"
 
-#: plugins/launcher/launcher.c:1789
+#: plugins/launcher/launcher.c:1793
 msgid "No items"
 msgstr "항목 없음"
 
@@ -1848,10 +1824,6 @@ msgstr "고급"
 msgid "Program launcher with optional menu"
 msgstr "선택 메뉴가 있는 프로그램 실행 아이콘입니다"
 
-#: plugins/launcher/launcher.desktop.in.in:6
-msgid "org.xfce.panel.launcher"
-msgstr "org.xfce.panel.launcher"
-
 #: plugins/pager/pager.c:685 plugins/pager/pager-dialog.glade:64
 msgid "Workspace _Settings..."
 msgstr "작업 공간 설정(_S)..."
@@ -1901,10 +1873,6 @@ msgstr "<b>모양새</b>"
 msgid "Switch between virtual desktops"
 msgstr "가상 데스크톱을 전환합니다"
 
-#: plugins/pager/pager.desktop.in.in:6
-msgid "org.xfce.panel.pager"
-msgstr "org.xfce.panel.pager"
-
 #: plugins/separator/separator-dialog.glade:23
 msgid "Transparent"
 msgstr "투명"
@@ -1925,10 +1893,6 @@ msgstr "확장(_E)"
 msgid "Adds a separator or space between panel items"
 msgstr "항목 사이에 빈 공간이나 구분선을 추가합니다"
 
-#: plugins/separator/separator.desktop.in.in:6
-msgid "org.xfce.panel.separator"
-msgstr "org.xfce.panel.separator"
-
 #: plugins/showdesktop/showdesktop.c:245
 msgid "Restore the minimized windows"
 msgstr "숨긴 창 복원"
@@ -1945,10 +1909,6 @@ msgstr "데스크톱 표시"
 #: plugins/showdesktop/showdesktop.desktop.in.in:5
 msgid "Hide all windows and show the desktop"
 msgstr "모든 창을 숨기고 데스크톱 표시합니다"
-
-#: plugins/showdesktop/showdesktop.desktop.in.in:6
-msgid "org.xfce.panel.showdesktop"
-msgstr "org.xfce.panel.showdesktop"
 
 #: plugins/systray/sn-dialog.c:645
 msgid "Clear"
@@ -2088,10 +2048,6 @@ msgid ""
 "items"
 msgstr "상태 알림 항목(프로그램 표시)과 구형 시스템 트레이 항목을 나타냅니다"
 
-#: plugins/systray/systray.desktop.in.in:7
-msgid "org.xfce.panel.statustray"
-msgstr "org.xfce.panel.statustray"
-
 #: plugins/tasklist/tasklist-dialog.glade:23
 msgid "Nothing"
 msgstr "아무것도 안 함"
@@ -2190,46 +2146,42 @@ msgstr "모든 모니터의 창 표시(_N)"
 msgid "Show only _minimized windows"
 msgstr "숨겨둔 창만 표시(_M)"
 
-#: plugins/tasklist/tasklist-widget.c:3109
+#: plugins/tasklist/tasklist-widget.c:3121
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "새 '%s' 인스턴스를 시작할 수 없습니다"
 
-#: plugins/tasklist/tasklist-widget.c:3113
+#: plugins/tasklist/tasklist-widget.c:3125
 msgid "Error"
 msgstr "오류"
 
-#: plugins/tasklist/tasklist-widget.c:3142
+#: plugins/tasklist/tasklist-widget.c:3154
 msgid "Launch New Instance"
 msgstr "새 인스턴스 실행"
 
-#: plugins/tasklist/tasklist-widget.c:3887
+#: plugins/tasklist/tasklist-widget.c:3899
 msgid "Mi_nimize All"
 msgstr "모두 최소화(_N)"
 
-#: plugins/tasklist/tasklist-widget.c:3894
+#: plugins/tasklist/tasklist-widget.c:3906
 msgid "Un_minimize All"
 msgstr "모두 최소화 취소(_M)"
 
-#: plugins/tasklist/tasklist-widget.c:3901
+#: plugins/tasklist/tasklist-widget.c:3913
 msgid "Ma_ximize All"
 msgstr "모두 최대화(_X)"
 
-#: plugins/tasklist/tasklist-widget.c:3908
+#: plugins/tasklist/tasklist-widget.c:3920
 msgid "_Unmaximize All"
 msgstr "모두 최대화 취소(_U)"
 
-#: plugins/tasklist/tasklist-widget.c:3919
+#: plugins/tasklist/tasklist-widget.c:3931
 msgid "_Close All"
 msgstr "모두 닫기(_C)"
 
 #: plugins/tasklist/tasklist.desktop.in.in:5
 msgid "Switch between open windows using buttons"
 msgstr "단추를 사용하여 열려있는 창을 전환합니다"
-
-#: plugins/tasklist/tasklist.desktop.in.in:6
-msgid "org.xfce.panel.tasklist"
-msgstr "org.xfce.panel.tasklist"
 
 #: plugins/windowmenu/windowmenu.c:689
 msgid "Desktop"
@@ -2289,7 +2241,3 @@ msgstr "긴급 알림 활성화(_U)"
 #: plugins/windowmenu/windowmenu.desktop.in.in:5
 msgid "Switch between open windows using a menu"
 msgstr "메뉴를 사용하여 열려있는 창을 전환합니다"
-
-#: plugins/windowmenu/windowmenu.desktop.in.in:6
-msgid "org.xfce.panel.windowmenu"
-msgstr "org.xfce.panel.windowmenu"
