@@ -14,10 +14,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2023-03-14 00:47+0100\n"
+"POT-Creation-Date: 2023-05-05 10:50+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Arnold Marko <arnold.marko@gmail.com>, 2019-2023\n"
-"Language-Team: Slovenian (http://www.transifex.com/xfce/xfce4-panel/language/sl/)\n"
+"Language-Team: Slovenian (http://app.transifex.com/xfce/xfce4-panel/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -34,21 +34,13 @@ msgid ""
 "file"
 msgstr "Doda zaganjalnik na pano na osnovi podatkov v tej namizni datoteki"
 
-#: panel-desktop-handler.desktop.in:7
-msgid "application-x-executable"
-msgstr ""
-
-#: panel-preferences.desktop.in:5
-msgid "org.xfce.panel"
-msgstr ""
-
 #: panel-preferences.desktop.in:8
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "pulti;panoji;nastavitve;lastnosti;taskbar;samodejno skrij;programski meni;start;gumbi;zaganjalnik;obvestilnik;status;ikone;vtičniki;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3574
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3582
 msgid "Panel"
 msgstr "Pano"
 
@@ -96,7 +88,7 @@ msgid "_Properties"
 msgstr "_Lastnosti"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3650
+#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3658
 msgid "_About"
 msgstr "O progr_amu"
 
@@ -110,23 +102,23 @@ msgid "Pane_l"
 msgstr "Pu_lt"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3586
+#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3594
 msgid "Add _New Items..."
 msgstr "Dodaj _nove predmete ..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3597
+#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3605
 msgid "Panel Pr_eferences..."
 msgstr "_Nastavitve panoja..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3625
+#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3633
 msgid "Log _Out"
 msgstr "_Odjava"
 
 #. help item
 #: libxfce4panel/xfce-panel-plugin.c:1341 panel/panel-item-dialog.c:196
-#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3641
+#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3649
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
 #: plugins/clock/clock-dialog.glade:120
@@ -258,21 +250,21 @@ msgstr "Ali želite zagnati pano? Če ga, poskrbite da ob izhodu shranite sejo, 
 msgid "No running instance of %s was found"
 msgstr "Noben primerek %s ni v teku"
 
-#: panel/panel-application.c:222
+#: panel/panel-application.c:221
 msgid "Failed to launch the migration application"
 msgstr "Ni mogoče zagnati programa za migracijo"
 
-#: panel/panel-application.c:1047
+#: panel/panel-application.c:1048
 msgid "Create _Launcher"
 msgstr "Ustvari _zaganjalnik"
 
-#: panel/panel-application.c:1048
+#: panel/panel-application.c:1049
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "To bo na pult dodalo nov zagonski vtičnik ter dodalo izbrane datoteke v meni, kot predmete."
 
-#: panel/panel-application.c:1050
+#: panel/panel-application.c:1051
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -281,21 +273,21 @@ msgstr[1] "Ustvari nov zaganjalnik iz %d namiznih datotek"
 msgstr[2] "Ustvari nov zaganjalnik iz %d namiznih datotek"
 msgstr[3] "Ustvari nov zaganjalnik iz %d namiznih datotek"
 
-#: panel/panel-application.c:1807
+#: panel/panel-application.c:1808
 msgid "Quit"
 msgstr "Končaj"
 
-#: panel/panel-application.c:1808
+#: panel/panel-application.c:1809
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "X ste zagnali brez upravljalnika seje. Klik na Končaj bo končal X strežnik."
 
-#: panel/panel-application.c:1809
+#: panel/panel-application.c:1810
 msgid "Are you sure you want to quit the panel?"
 msgstr "Ali ste prepričani, da želite zapreti pano?"
 
-#: panel/panel-application.c:1817
+#: panel/panel-application.c:1818
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Ni mogoče izvesti ukaza \"%s\""
@@ -539,14 +531,14 @@ msgstr "Ta možnost skrije ročice panoja in onemogoči njegovo premikanje."
 
 #: panel/panel-preferences-dialog.glade:447
 msgid "_Reserve space on screen edges for the panel"
-msgstr ""
+msgstr "Na _robovih zaslona ohrani prostor za pano"
 
 #: panel/panel-preferences-dialog.glade:451
 msgid ""
 "Select this option if you don't want maximized windows to cover the area "
 "behind the panel. This only works when the panel is attached to a screen "
 "edge."
-msgstr ""
+msgstr "To možnost izberite, če ne želite, da povečana okna prekrivajo območja za panojem. To deluje le v primeru, da je pano pripet na rob zaslona."
 
 #: panel/panel-preferences-dialog.glade:472
 msgid "Au_tomatically hide the panel:"
@@ -718,7 +710,7 @@ msgstr "Izkušeno"
 msgid "Expert"
 msgstr "Profesionalno"
 
-#: panel/panel-window.c:3611
+#: panel/panel-window.c:3619
 msgid "_Lock Panel"
 msgstr "_Zakleni pano"
 
@@ -947,10 +939,6 @@ msgstr "Mala miška"
 msgid "Log out, lock or other system actions"
 msgstr "Odjava, zaklep zaslona in ostala sistemska dejanja"
 
-#: plugins/actions/actions.desktop.in.in:6
-msgid "org.xfce.panel.actions"
-msgstr ""
-
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:23
 #: plugins/applicationsmenu/applicationsmenu.desktop.in.in:4
 msgid "Applications Menu"
@@ -1041,7 +1029,7 @@ msgstr "_V redu"
 
 #. show an error dialog
 #: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1018
-#: plugins/launcher/launcher.c:2483
+#: plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Izvedba ukaza \"%s\" je spodletela."
@@ -1049,10 +1037,6 @@ msgstr "Izvedba ukaza \"%s\" je spodletela."
 #: plugins/applicationsmenu/applicationsmenu.desktop.in.in:5
 msgid "Show a menu containing categories of installed applications"
 msgstr "Prikaži meni, ki vsebuje kategorije nameščenih programov"
-
-#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:6
-msgid "org.xfce.panel.applicationsmenu"
-msgstr ""
 
 #: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -1580,10 +1564,6 @@ msgstr "dvanajst"
 msgid "What time is it?"
 msgstr "Koliko je ura?"
 
-#: plugins/clock/clock.desktop.in.in:6
-msgid "org.xfce.panel.clock"
-msgstr ""
-
 #: plugins/directorymenu/directorymenu.c:289
 #: plugins/directorymenu/directorymenu.desktop.in.in:4
 #: plugins/directorymenu/directorymenu-dialog.glade:18
@@ -1660,10 +1640,6 @@ msgstr "Ustvari dokument z besedilom..."
 msgid "Show a directory tree in a menu"
 msgstr "V meniju prikaži drevesno strukturo map"
 
-#: plugins/directorymenu/directorymenu.desktop.in.in:6
-msgid "org.xfce.panel.directorymenu"
-msgstr ""
-
 #: plugins/directorymenu/directorymenu-dialog.glade:99
 msgid "Select A Directory"
 msgstr "Izberite mapo"
@@ -1721,7 +1697,7 @@ msgstr "Odpri meni zaganjalnikov"
 msgid "Unnamed Item"
 msgstr "Neimenovan predmet"
 
-#: plugins/launcher/launcher.c:1789
+#: plugins/launcher/launcher.c:1793
 msgid "No items"
 msgstr "Ni predmetov"
 
@@ -1850,10 +1826,6 @@ msgstr "Napredno"
 msgid "Program launcher with optional menu"
 msgstr "Programski zaganjalnik, po možnosti z menijem"
 
-#: plugins/launcher/launcher.desktop.in.in:6
-msgid "org.xfce.panel.launcher"
-msgstr ""
-
 #: plugins/pager/pager.c:685 plugins/pager/pager-dialog.glade:64
 msgid "Workspace _Settings..."
 msgstr "Na_stavitve delovnih površin..."
@@ -1903,10 +1875,6 @@ msgstr "<b>Videz</b>"
 msgid "Switch between virtual desktops"
 msgstr "Preklopi med navideznimi namizji"
 
-#: plugins/pager/pager.desktop.in.in:6
-msgid "org.xfce.panel.pager"
-msgstr ""
-
 #: plugins/separator/separator-dialog.glade:23
 msgid "Transparent"
 msgstr "Prozorno"
@@ -1927,10 +1895,6 @@ msgstr "_Razširi"
 msgid "Adds a separator or space between panel items"
 msgstr "Vstavi ločilnik ali presledek med predmete na panoju"
 
-#: plugins/separator/separator.desktop.in.in:6
-msgid "org.xfce.panel.separator"
-msgstr ""
-
 #: plugins/showdesktop/showdesktop.c:245
 msgid "Restore the minimized windows"
 msgstr "Obnovi skrčena okna"
@@ -1947,10 +1911,6 @@ msgstr "Prikaži namizje"
 #: plugins/showdesktop/showdesktop.desktop.in.in:5
 msgid "Hide all windows and show the desktop"
 msgstr "Skrij vsa okna in prikaži namizje"
-
-#: plugins/showdesktop/showdesktop.desktop.in.in:6
-msgid "org.xfce.panel.showdesktop"
-msgstr ""
 
 #: plugins/systray/sn-dialog.c:645
 msgid "Clear"
@@ -2090,10 +2050,6 @@ msgid ""
 "items"
 msgstr "Omogoča predmete za obvestilnik stanja (indikatorje aplikacij) in opuščene predmete sistemske vrstice"
 
-#: plugins/systray/systray.desktop.in.in:7
-msgid "org.xfce.panel.statustray"
-msgstr ""
-
 #: plugins/tasklist/tasklist-dialog.glade:23
 msgid "Nothing"
 msgstr "Nič"
@@ -2192,46 +2148,42 @@ msgstr "Pokaži okna z vseh zaslonov"
 msgid "Show only _minimized windows"
 msgstr "Po_kaži samo skrčena okna"
 
-#: plugins/tasklist/tasklist-widget.c:3109
+#: plugins/tasklist/tasklist-widget.c:3121
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Ne morem zagnati nove instance od '%s'"
 
-#: plugins/tasklist/tasklist-widget.c:3113
+#: plugins/tasklist/tasklist-widget.c:3125
 msgid "Error"
 msgstr "Napaka"
 
-#: plugins/tasklist/tasklist-widget.c:3142
+#: plugins/tasklist/tasklist-widget.c:3154
 msgid "Launch New Instance"
 msgstr "Zaženi novo instanco"
 
-#: plugins/tasklist/tasklist-widget.c:3887
+#: plugins/tasklist/tasklist-widget.c:3899
 msgid "Mi_nimize All"
 msgstr "S_krči vsa"
 
-#: plugins/tasklist/tasklist-widget.c:3894
+#: plugins/tasklist/tasklist-widget.c:3906
 msgid "Un_minimize All"
 msgstr "Povečaj skrčena"
 
-#: plugins/tasklist/tasklist-widget.c:3901
+#: plugins/tasklist/tasklist-widget.c:3913
 msgid "Ma_ximize All"
 msgstr "_Razpni vsa"
 
-#: plugins/tasklist/tasklist-widget.c:3908
+#: plugins/tasklist/tasklist-widget.c:3920
 msgid "_Unmaximize All"
 msgstr "Pomanjšaj razpeta"
 
-#: plugins/tasklist/tasklist-widget.c:3919
+#: plugins/tasklist/tasklist-widget.c:3931
 msgid "_Close All"
 msgstr "_Zapri vse"
 
 #: plugins/tasklist/tasklist.desktop.in.in:5
 msgid "Switch between open windows using buttons"
 msgstr "Preklapljaj med odprtimi okni s pomočjo gumbov"
-
-#: plugins/tasklist/tasklist.desktop.in.in:6
-msgid "org.xfce.panel.tasklist"
-msgstr ""
 
 #: plugins/windowmenu/windowmenu.c:689
 msgid "Desktop"
@@ -2291,7 +2243,3 @@ msgstr "Omogoči obvestilo o n_ujnosti"
 #: plugins/windowmenu/windowmenu.desktop.in.in:5
 msgid "Switch between open windows using a menu"
 msgstr "Preklapljaj med odprtimi okni s pomočjo menija"
-
-#: plugins/windowmenu/windowmenu.desktop.in.in:6
-msgid "org.xfce.panel.windowmenu"
-msgstr ""
