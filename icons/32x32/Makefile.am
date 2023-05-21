@@ -10,7 +10,7 @@ icons_DATA = \
 	org.xfce.panel.png		\
 	org.xfce.panel.separator.png	\
 	org.xfce.panel.showdesktop.png	\
-	org.xfce.panel.statustray.png	\
+	org.xfce.panel.systray.png	\
 	org.xfce.panel.tasklist.png	\
 	org.xfce.panel.windowmenu.png
 
