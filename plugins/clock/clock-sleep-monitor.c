@@ -40,7 +40,9 @@
  *   Currently none, but could check for libraries, target OS.
  */
 
+#if !defined(__FreeBSD__) && !defined(__NetBSD__) && !defined(__OpenBSD__)
 #define SLEEP_MONITOR_USE_LOGIND 1
+#endif
 
 
 
