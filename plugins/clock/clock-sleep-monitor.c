@@ -21,6 +21,7 @@
 #endif
 
 #include <string.h>
+#include <unistd.h>
 
 #include <gio/gio.h>
 
@@ -40,11 +41,11 @@
  *   Currently none, but could check for libraries, target OS.
  */
 
-#if !defined(__FreeBSD__) && !defined(__NetBSD__) && !defined(__OpenBSD__)
 #define SLEEP_MONITOR_USE_LOGIND 1
-#endif
+#define SLEEP_MONITOR_USE_CONSOLEKIT 1
 
 
+#define LOGIND_RUNNING() (access ("/run/systemd/seats/", F_OK) >= 0)
 
 /* Base class
  *
@@ -90,9 +91,7 @@ static void clock_sleep_monitor_finalize (GObject *object)
 
 
 
-/* Logind-based implementation */
-
-#ifdef SLEEP_MONITOR_USE_LOGIND
+#if defined (SLEEP_MONITOR_USE_LOGIND) || defined (SLEEP_MONITOR_USE_CONSOLEKIT)
 
 struct _ClockSleepMonitorLogind
 {
@@ -157,26 +156,31 @@ static void on_logind_signal (GDBusProxy *proxy,
     g_signal_emit (G_OBJECT (monitor), clock_sleep_monitor_woke_up_signal, 0);
 }
 
-static ClockSleepMonitor* clock_sleep_monitor_logind_create (void)
+static ClockSleepMonitor* clock_sleep_dbus_monitor_create (const gchar *name,
+                                                           const gchar *object_path,
+                                                           const gchar *interface_name)
 {
   ClockSleepMonitorLogind *monitor;
   gchar *owner_name;
-
-  panel_debug (PANEL_DEBUG_CLOCK, "trying to instantiate logind sleep monitor");
+#if 0
+  panel_debug (PANEL_DEBUG_CLOCK, "trying to instantiate sleep monitor %", name);
+#else
+  g_debug ("trying to instantiate sleep monitor %s", name);
+#endif
 
   monitor = g_object_new (CLOCK_TYPE_SLEEP_MONITOR_LOGIND, NULL);
   monitor->logind_proxy = g_dbus_proxy_new_for_bus_sync (
       G_BUS_TYPE_SYSTEM,
       G_DBUS_PROXY_FLAGS_NONE,
       NULL,
-      "org.freedesktop.login1",
-      "/org/freedesktop/login1",
-      "org.freedesktop.login1.Manager",
+      name,
+      object_path,
+      interface_name,
       NULL,
       NULL);
   if (monitor->logind_proxy == NULL)
     {
-      g_message ("could not get proxy for org.freedesktop.login1");
+      g_message ("could not get proxy for %s", name);
       g_object_unref (G_OBJECT (monitor));
       return NULL;
     }
@@ -184,7 +188,7 @@ static ClockSleepMonitor* clock_sleep_monitor_logind_create (void)
   owner_name = g_dbus_proxy_get_name_owner (monitor->logind_proxy);
   if (owner_name == NULL)
     {
-      g_message ("logind not active");
+      g_message ("d-bus service %s not active", name);
       g_object_unref (G_OBJECT (monitor));
       return NULL;
     }
@@ -194,9 +198,35 @@ static ClockSleepMonitor* clock_sleep_monitor_logind_create (void)
 
   return CLOCK_SLEEP_MONITOR (monitor);
 }
+#endif
+
+#ifdef SLEEP_MONITOR_USE_LOGIND
+/* Logind-based implementation */
+static ClockSleepMonitor* clock_sleep_monitor_logind_create (void)
+{
+  if (!LOGIND_RUNNING ())
+    {
+      panel_debug (PANEL_DEBUG_CLOCK, "logind not running");
+      return NULL;
+    }
+
+  return clock_sleep_dbus_monitor_create (
+      "org.freedesktop.login1",
+      "/org/freedesktop/login1",
+      "org.freedesktop.login1.Manager");
+}
 
 #endif /* defined SLEEP_MONITOR_USE_LOGIND */
 
+#ifdef SLEEP_MONITOR_USE_CONSOLEKIT
+static ClockSleepMonitor* clock_sleep_monitor_consolekit_create (void)
+{
+  return clock_sleep_dbus_monitor_create (
+      "org.freedesktop.ConsoleKit",
+      "/org/freedesktop/ConsoleKit/Manager",
+      "org.freedesktop.ConsoleKit.Manager");
+}
+#endif /* defined SLEEP_MONITOR_USE_CONSOLEKIT */
 
 
 /* Factory registration
@@ -210,6 +240,9 @@ static SleepMonitorFactory sleep_monitor_factories[] =
 {
   #ifdef SLEEP_MONITOR_USE_LOGIND
   clock_sleep_monitor_logind_create,
+  #endif
+  #ifdef SLEEP_MONITOR_USE_CONSOLEKIT
+  clock_sleep_monitor_consolekit_create,
   #endif
   NULL
 };
