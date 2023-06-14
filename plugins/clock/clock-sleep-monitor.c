@@ -253,7 +253,7 @@ ClockSleepMonitor *clock_sleep_monitor_create (void)
     monitor = (*factory_ptr) ();
 
   if (monitor == NULL && sleep_monitor_factories[0] != NULL)
-    g_warning ("could not instantiate a sleep monitor");
+    panel_debug (PANEL_DEBUG_CLOCK, "could not instantiate a sleep monitor");
 
   return monitor;
 }
