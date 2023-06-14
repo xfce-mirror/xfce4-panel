@@ -185,7 +185,7 @@ static ClockSleepMonitor* clock_sleep_dbus_monitor_create (const gchar *name,
   owner_name = g_dbus_proxy_get_name_owner (monitor->monitor_proxy);
   if (owner_name == NULL)
     {
-      g_message ("d-bus service %s not active", name);
+      panel_debug (PANEL_DEBUG_CLOCK, "d-bus service %s not active", name);
       g_object_unref (G_OBJECT (monitor));
       return NULL;
     }
