@@ -133,10 +133,10 @@ static void clock_sleep_dbus_monitor_finalize (GObject *object)
 }
 
 static void on_prepare_sleep_signal (GDBusProxy *proxy,
-                              gchar *sender_name,
-                              gchar *signal_name,
-                              GVariant *parameters,
-                              ClockSleepMonitor *monitor)
+                                     gchar *sender_name,
+                                     gchar *signal_name,
+                                     GVariant *parameters,
+                                     ClockSleepMonitor *monitor)
 {
   const gchar *format_string = "(b)";
   gboolean going_to_sleep;
