@@ -177,7 +177,7 @@ static ClockSleepMonitor* clock_sleep_dbus_monitor_create (const gchar *name,
       NULL);
   if (monitor->monitor_proxy == NULL)
     {
-      g_message ("could not get proxy for %s", name);
+      g_warning ("could not get proxy for %s", name);
       g_object_unref (G_OBJECT (monitor));
       return NULL;
     }
