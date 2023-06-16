@@ -64,6 +64,7 @@ struct _ClockTimeTimeout
 {
   guint       interval;
   guint       timeout_id;
+  guint       timeout_counter;
   guint       restart : 1;
   ClockTime  *time;
   guint       time_changed_id;
@@ -286,13 +287,21 @@ clock_time_timeout_running (gpointer user_data)
 
   g_signal_emit (G_OBJECT (timeout->time), clock_time_signals[TIME_CHANGED], 0);
 
-  /* check if the timeout still runs in time if updating once a minute */
+  /* check if the timeout still runs in time and sync again if necessary */
   if (timeout->interval == CLOCK_INTERVAL_MINUTE)
     {
-      /* sync again when we don't run on time */
+      /* accurate to the second */
       time = clock_time_get_time (timeout->time);
       timeout->restart = (g_date_time_get_second (time) != 0);
       g_date_time_unref (time);
+    }
+  else if (++timeout->timeout_counter == 10)
+    {
+      /* accurate to the tenth of a second */
+      time = clock_time_get_time (timeout->time);
+      timeout->restart = (g_date_time_get_microsecond (time) / 100000 != 0);
+      g_date_time_unref (time);
+      timeout->timeout_counter = 0;
     }
 
   return !timeout->restart;
@@ -321,9 +330,9 @@ clock_time_timeout_sync (gpointer user_data)
   g_signal_emit (G_OBJECT (timeout->time), clock_time_signals[TIME_CHANGED], 0);
 
   /* start the real timeout */
-  timeout->timeout_id = g_timeout_add_seconds_full (G_PRIORITY_DEFAULT, timeout->interval,
-                                                    clock_time_timeout_running, timeout,
-                                                    clock_time_timeout_destroyed);
+  timeout->timeout_id = g_timeout_add_full (G_PRIORITY_HIGH, timeout->interval * 1000,
+                                            clock_time_timeout_running, timeout,
+                                            clock_time_timeout_destroyed);
 
   /* stop the sync timeout */
   return FALSE;
@@ -395,36 +404,37 @@ clock_time_timeout_set_interval (ClockTimeTimeout *timeout,
   if (G_LIKELY (timeout->timeout_id != 0))
     g_source_remove (timeout->timeout_id);
   timeout->timeout_id = 0;
+  timeout->timeout_counter = 0;
 
   /* run function when not restarting */
   if (!restart)
     g_signal_emit (G_OBJECT (timeout->time), clock_time_signals[TIME_CHANGED], 0);
 
-  /* get the seconds to the next internal */
+  time = clock_time_get_time (timeout->time);
   if (interval == CLOCK_INTERVAL_MINUTE)
     {
-      time = clock_time_get_time (timeout->time);
-      next_interval = 60 - g_date_time_get_second (time);
-      g_date_time_unref (time);
+      /* get the seconds to the next minute */
+      next_interval = (60 - g_date_time_get_second (time)) * 1000;
     }
   else
     {
-      next_interval = 0;
+      /* get the milliseconds to the next second */
+      next_interval = 1000 - g_date_time_get_microsecond (time) / 1000;
     }
+  g_date_time_unref (time);
 
   if (next_interval > 0)
     {
-      /* start the sync timeout: be more precise here, otherwise (next_interval - 1) seconds
-       * could pass before the synchronization, which finally results in a minute that lasts
-       * two minutes */
-      timeout->timeout_id = g_timeout_add (next_interval * 1000, clock_time_timeout_sync, timeout);
+      /* start the sync timeout */
+      timeout->timeout_id = g_timeout_add_full (G_PRIORITY_HIGH, next_interval,
+                                                clock_time_timeout_sync, timeout, NULL);
     }
   else
     {
       /* directly start running the normal timeout */
-      timeout->timeout_id = g_timeout_add_seconds_full (G_PRIORITY_DEFAULT, interval,
-                                                        clock_time_timeout_running, timeout,
-                                                        clock_time_timeout_destroyed);
+      timeout->timeout_id = g_timeout_add_full (G_PRIORITY_HIGH, interval * 1000,
+                                                clock_time_timeout_running, timeout,
+                                                clock_time_timeout_destroyed);
     }
 }
 
