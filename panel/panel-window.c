@@ -560,6 +560,17 @@ panel_window_force_redraw (PanelWindow *window)
 
 
 static void
+panel_window_is_active_changed (PanelWindow *window)
+{
+  if (gtk_window_is_active (GTK_WINDOW (window)))
+    panel_window_freeze_autohide (window);
+  else
+    panel_window_thaw_autohide (window);
+}
+
+
+
+static void
 panel_window_init (PanelWindow *window)
 {
   window->id = -1;
@@ -613,6 +624,9 @@ panel_window_init (PanelWindow *window)
 
   /* a workaround to force external plugins to fully re-render when scale factor changes */
   g_signal_connect (window, "notify::scale-factor", G_CALLBACK (panel_window_force_redraw), NULL);
+
+  /* block autohide when the panel has input focus, e.g. via a GtkEntry in a plugin */
+  g_signal_connect (window, "notify::is-active", G_CALLBACK (panel_window_is_active_changed), NULL);
 }
 
 
