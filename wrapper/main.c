@@ -54,8 +54,27 @@ static gint     retval = PLUGIN_EXIT_FAILURE;
 
 
 static void
+wrapper_gproxy_name_owner_changed (GDBusProxy *proxy,
+                                   GParamSpec *pspec,
+                                   gpointer data)
+{
+   gchar *name_owner;
+
+   name_owner = g_dbus_proxy_get_name_owner (proxy);
+
+   /* we lost communication with the panel, silently close the wrapper */
+   if (name_owner == NULL)
+     gtk_main_quit ();
+
+   g_free (name_owner);
+}
+
+
+
+static void
 wrapper_gproxy_set (XfcePanelPluginProvider *provider,
-                    GVariant                *parameters)
+                    GVariant                *parameters,
+                    GDBusProxy              *proxy)
 {
   WrapperPlug                    *plug;
   GVariantIter                    iter;
@@ -133,6 +152,8 @@ wrapper_gproxy_set (XfcePanelPluginProvider *provider,
           retval = PLUGIN_EXIT_SUCCESS_AND_RESTART;
           /* fall through */
         case PROVIDER_PROP_TYPE_ACTION_QUIT:
+          /* do not call gtk_main_quit() twice */
+          g_signal_handlers_disconnect_by_func (proxy, wrapper_gproxy_name_owner_changed, NULL);
           gtk_main_quit ();
           break;
 
@@ -242,7 +263,7 @@ wrapper_gproxy_g_signal (GDBusProxy *proxy,
   if (g_strcmp0(signal_name, "RemoteEvent") == 0)
     wrapper_gproxy_remote_event (provider, proxy, parameters);
   else if (g_strcmp0(signal_name, "Set") == 0)
-    wrapper_gproxy_set (provider, parameters);
+    wrapper_gproxy_set (provider, parameters, proxy);
   else
     g_warning ("Unhandled signal name :%s", signal_name);
 }
@@ -279,23 +300,6 @@ wrapper_gproxy_provider_signal (XfcePanelPluginProvider       *provider,
 }
 
 
-static void
-wrapper_gproxy_name_owner_changed (GDBusProxy *proxy,
-                                   GParamSpec *pspec,
-                                   gpointer data)
-{
-   gchar *name_owner;
-
-   name_owner = g_dbus_proxy_get_name_owner (proxy);
-
-   /* we lost communication with the panel, silently close the wrapper */
-   if (name_owner == NULL)
-     gtk_main_quit ();
-
-   g_free (name_owner);
-}
-
-
 
 gint
 main (gint argc, gchar **argv)
@@ -311,8 +315,6 @@ main (gint argc, gchar **argv)
   WrapperPlug             *plug;
   GtkWidget               *provider = NULL;
   gchar                   *path;
-  guint                    gproxy_destroy_id = 0;
-  guint                    gproxy_signal_id = 0;
   GError                  *error = NULL;
   const gchar             *filename;
   gint                     unique_id;
@@ -393,7 +395,7 @@ main (gint argc, gchar **argv)
     goto leave;
 
   /* quit when the proxy is destroyed (panel segfault for example) */
-  gproxy_destroy_id = g_signal_connect (G_OBJECT (dbus_gproxy), "notify::g-name-owner",
+  g_signal_connect (G_OBJECT (dbus_gproxy), "notify::g-name-owner",
       G_CALLBACK (wrapper_gproxy_name_owner_changed), NULL);
 
   /* create the type module */
@@ -423,18 +425,14 @@ main (gint argc, gchar **argv)
           G_CALLBACK (wrapper_gproxy_provider_signal), dbus_gproxy);
 
       /* connect to service signals */
-      gproxy_signal_id = g_signal_connect_object (dbus_gproxy, "g-signal",
-                                                  G_CALLBACK (wrapper_gproxy_g_signal),
-                                                  provider, 0);
+      g_signal_connect_object (dbus_gproxy, "g-signal",
+                               G_CALLBACK (wrapper_gproxy_g_signal),
+                               provider, 0);
 
       /* show the plugin */
       gtk_widget_show (GTK_WIDGET (provider));
 
       gtk_main ();
-
-      /* disconnect signals */
-      g_signal_handler_disconnect (G_OBJECT (dbus_gproxy), gproxy_destroy_id);
-      g_signal_handler_disconnect (G_OBJECT (dbus_gproxy), gproxy_signal_id);
 
       /* destroy the plug and provider */
       if (plug != NULL)
@@ -450,13 +448,7 @@ main (gint argc, gchar **argv)
 
 leave:
   if (G_LIKELY (dbus_gproxy != NULL))
-    {
-      /* We are listening to destroy notify signal but we go no plugin provider */
-      if (G_LIKELY (gproxy_destroy_id != 0) && provider == NULL)
-        g_signal_handler_disconnect (G_OBJECT (dbus_gproxy), gproxy_destroy_id);
-
-      g_object_unref (G_OBJECT (dbus_gproxy));
-    }
+    g_object_unref (G_OBJECT (dbus_gproxy));
 
   if (G_LIKELY (module != NULL))
     g_object_unref (G_OBJECT (module));
