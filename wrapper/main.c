@@ -56,6 +56,24 @@ typedef gulong Window;
 
 
 static void
+wrapper_gproxy_name_owner_changed (GDBusProxy *proxy,
+                                   GParamSpec *pspec,
+                                   gpointer data)
+{
+   gchar *name_owner;
+
+   name_owner = g_dbus_proxy_get_name_owner (proxy);
+
+   /* we lost communication with the panel, silently close the wrapper */
+   if (name_owner == NULL)
+     gtk_main_quit ();
+
+   g_free (name_owner);
+}
+
+
+
+static void
 wrapper_gproxy_set (GDBusProxy *proxy,
                     gchar *sender_name,
                     gchar *signal_name,
@@ -150,6 +168,8 @@ wrapper_gproxy_set (GDBusProxy *proxy,
           retval = PLUGIN_EXIT_SUCCESS_AND_RESTART;
           /* fall through */
         case PROVIDER_PROP_TYPE_ACTION_QUIT:
+          /* do not call gtk_main_quit() twice */
+          g_signal_handlers_disconnect_by_func (proxy, wrapper_gproxy_name_owner_changed, NULL);
           gtk_main_quit ();
           break;
 
@@ -224,24 +244,6 @@ wrapper_gproxy_remote_event (GDBusProxy *proxy,
 
 
 
-static void
-wrapper_gproxy_name_owner_changed (GDBusProxy *proxy,
-                                   GParamSpec *pspec,
-                                   gpointer data)
-{
-   gchar *name_owner;
-
-   name_owner = g_dbus_proxy_get_name_owner (proxy);
-
-   /* we lost communication with the panel, silently close the wrapper */
-   if (name_owner == NULL)
-     gtk_main_quit ();
-
-   g_free (name_owner);
-}
-
-
-
 gint
 main (gint argc, gchar **argv)
 {
@@ -256,7 +258,6 @@ main (gint argc, gchar **argv)
   GtkWidget               *plug;
   GtkWidget               *provider = NULL;
   gchar                   *path;
-  guint                    gproxy_destroy_id = 0;
   GError                  *error = NULL;
   const gchar             *filename;
   gint                     unique_id;
@@ -337,7 +338,7 @@ main (gint argc, gchar **argv)
     goto leave;
 
   /* quit when the proxy is destroyed (panel segfault for example) */
-  gproxy_destroy_id = g_signal_connect (G_OBJECT (dbus_gproxy), "notify::g-name-owner",
+  g_signal_connect (G_OBJECT (dbus_gproxy), "notify::g-name-owner",
       G_CALLBACK (wrapper_gproxy_name_owner_changed), NULL);
 
   /* create the type module */
@@ -378,9 +379,6 @@ main (gint argc, gchar **argv)
       gtk_widget_show (GTK_WIDGET (provider));
 
       gtk_main ();
-
-      /* do not call gtk_main_quit() twice */
-      g_signal_handler_disconnect (G_OBJECT (dbus_gproxy), gproxy_destroy_id);
 
       if (retval != PLUGIN_EXIT_SUCCESS_AND_RESTART)
         retval = plug == NULL || GPOINTER_TO_INT (g_object_get_data (G_OBJECT (plug), "exit-code"));
