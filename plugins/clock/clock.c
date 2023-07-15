@@ -247,7 +247,7 @@ clock_plugin_class_init (ClockPluginClass *klass)
                                    PROP_SHOW_WEEK_NUMBERS,
                                    g_param_spec_boolean ("show-week-numbers",
                                                          NULL, NULL,
-                                                         FALSE,
+                                                         TRUE,
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
@@ -268,7 +268,7 @@ clock_plugin_init (ClockPlugin *plugin)
   plugin->tooltip_format = g_strdup (DEFAULT_TOOLTIP_FORMAT);
   plugin->tooltip_timeout = NULL;
   plugin->command = g_strdup ("");
-  plugin->show_week_numbers = FALSE;
+  plugin->show_week_numbers = TRUE;
   plugin->time_config_tool = g_strdup (DEFAULT_TIME_CONFIG_TOOL);
   plugin->rotate_vertically = TRUE;
   plugin->time = clock_time_new ();
