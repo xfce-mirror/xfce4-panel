@@ -83,6 +83,7 @@ static void     clock_plugin_configure_plugin          (XfcePanelPlugin       *p
 static void     clock_plugin_set_mode                  (ClockPlugin           *plugin);
 static void     clock_plugin_popup_calendar            (ClockPlugin           *plugin);
 static gboolean clock_plugin_tooltip                   (gpointer               user_data);
+static void     clock_plugin_set_calendar_options      (ClockPlugin           *plugin);
 
 
 
@@ -92,6 +93,7 @@ enum
   PROP_MODE,
   PROP_TOOLTIP_FORMAT,
   PROP_COMMAND,
+  PROP_SHOW_WEEK_NUMBERS,
   PROP_ROTATE_VERTICALLY,
   PROP_TIME_CONFIG_TOOL
 };
@@ -122,6 +124,7 @@ struct _ClockPlugin
   GtkWidget          *calendar;
 
   gchar              *command;
+  guint               show_week_numbers : 1;
   ClockPluginMode     mode;
   guint               rotate_vertically : 1;
 
@@ -241,6 +244,13 @@ clock_plugin_class_init (ClockPluginClass *klass)
                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_SHOW_WEEK_NUMBERS,
+                                   g_param_spec_boolean ("show-week-numbers",
+                                                         NULL, NULL,
+                                                         TRUE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_TIME_CONFIG_TOOL,
                                    g_param_spec_string ("time-config-tool",
                                                         NULL, NULL,
@@ -258,6 +268,7 @@ clock_plugin_init (ClockPlugin *plugin)
   plugin->tooltip_format = g_strdup (DEFAULT_TOOLTIP_FORMAT);
   plugin->tooltip_timeout = NULL;
   plugin->command = g_strdup ("");
+  plugin->show_week_numbers = TRUE;
   plugin->time_config_tool = g_strdup (DEFAULT_TIME_CONFIG_TOOL);
   plugin->rotate_vertically = TRUE;
   plugin->time = clock_time_new ();
@@ -301,6 +312,10 @@ clock_plugin_get_property (GObject    *object,
 
     case PROP_COMMAND:
       g_value_set_string (value, plugin->command);
+      break;
+
+    case PROP_SHOW_WEEK_NUMBERS:
+      g_value_set_boolean (value, plugin->show_week_numbers);
       break;
 
     case PROP_TIME_CONFIG_TOOL:
@@ -352,6 +367,12 @@ clock_plugin_set_property (GObject      *object,
        */
       if (plugin->calendar_window != NULL)
         gtk_widget_hide (plugin->calendar_window);
+      break;
+
+    case PROP_SHOW_WEEK_NUMBERS:
+      plugin->show_week_numbers = g_value_get_boolean (value);
+      if (plugin->calendar_window != NULL)
+        clock_plugin_set_calendar_options (plugin);
       break;
 
     case PROP_TIME_CONFIG_TOOL:
@@ -474,6 +495,7 @@ clock_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "mode", G_TYPE_UINT },
     { "tooltip-format", G_TYPE_STRING },
     { "command", G_TYPE_STRING },
+    { "show-week-numbers", G_TYPE_BOOLEAN },
     { "rotate-vertically", G_TYPE_BOOLEAN },
     { "time-config-tool", G_TYPE_STRING },
     { NULL }
@@ -1167,6 +1189,11 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                           G_OBJECT (object), "text",
                           G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
 
+  object = gtk_builder_get_object (builder, "show-week-numbers");
+  g_object_bind_property (G_OBJECT (plugin), "show-week-numbers",
+                          G_OBJECT (object), "active",
+                          G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
+
   object = gtk_builder_get_object (builder, "digital-layout");
   g_signal_connect (G_OBJECT (object), "changed",
       G_CALLBACK (clock_plugin_digital_layout_changed), dialog);
@@ -1318,10 +1345,7 @@ clock_plugin_popup_calendar (ClockPlugin *plugin)
                         G_CALLBACK (clock_plugin_calendar_hide), plugin);
 
       plugin->calendar = gtk_calendar_new ();
-      gtk_calendar_set_display_options (GTK_CALENDAR (plugin->calendar),
-                                        GTK_CALENDAR_SHOW_HEADING
-                                        | GTK_CALENDAR_SHOW_DAY_NAMES
-                                        | GTK_CALENDAR_SHOW_WEEK_NUMBERS);
+      clock_plugin_set_calendar_options (plugin);
       gtk_container_add (GTK_CONTAINER (plugin->calendar_window), plugin->calendar);
       gtk_widget_show (plugin->calendar);
     }
@@ -1349,4 +1373,24 @@ clock_plugin_tooltip (gpointer user_data)
 
   /* keep the timeout running */
   return TRUE;
+}
+
+
+
+static void
+clock_plugin_set_calendar_options (ClockPlugin *plugin)
+{
+  if (plugin->show_week_numbers) 
+    {
+        gtk_calendar_set_display_options (GTK_CALENDAR (plugin->calendar),
+                                          GTK_CALENDAR_SHOW_HEADING
+                                          | GTK_CALENDAR_SHOW_DAY_NAMES
+                                          | GTK_CALENDAR_SHOW_WEEK_NUMBERS);
+    }
+  else
+    {
+        gtk_calendar_set_display_options (GTK_CALENDAR (plugin->calendar),
+                                          GTK_CALENDAR_SHOW_HEADING
+                                          | GTK_CALENDAR_SHOW_DAY_NAMES);
+    }
 }
