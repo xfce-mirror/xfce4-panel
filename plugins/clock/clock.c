@@ -243,7 +243,6 @@ clock_plugin_class_init (ClockPluginClass *klass)
                                                         NULL, NULL, NULL,
                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
-
   g_object_class_install_property (gobject_class,
                                    PROP_SHOW_WEEK_NUMBERS,
                                    g_param_spec_boolean ("show-week-numbers",
@@ -373,7 +372,7 @@ clock_plugin_set_property (GObject      *object,
     case PROP_SHOW_WEEK_NUMBERS:
       plugin->show_week_numbers = g_value_get_boolean (value);
       if (plugin->calendar_window != NULL)
-        clock_plugin_set_calendar_options(plugin);
+        clock_plugin_set_calendar_options (plugin);
       break;
 
     case PROP_TIME_CONFIG_TOOL:
@@ -1346,7 +1345,7 @@ clock_plugin_popup_calendar (ClockPlugin *plugin)
                         G_CALLBACK (clock_plugin_calendar_hide), plugin);
 
       plugin->calendar = gtk_calendar_new ();
-      clock_plugin_set_calendar_options(plugin);
+      clock_plugin_set_calendar_options (plugin);
       gtk_container_add (GTK_CONTAINER (plugin->calendar_window), plugin->calendar);
       gtk_widget_show (plugin->calendar);
     }
