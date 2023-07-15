@@ -267,6 +267,30 @@
                         <property name="top-attach">0</property>
                       </packing>
                     </child>
+                    <child>
+                      <object class="GtkCheckButton" id="show-week-numbers">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="hexpand">False</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label" translatable="yes">_Show week numbers</property>
+                        <property name="use-underline">True</property>
+                        <property name="xalign">0</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">1</property>
+                        <property name="top-attach">1</property>
+                      </packing>
+                    </child>
                   </object>
                 </child>
                 <child type="label">
