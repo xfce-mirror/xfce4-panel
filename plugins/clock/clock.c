@@ -1380,17 +1380,9 @@ clock_plugin_tooltip (gpointer user_data)
 static void
 clock_plugin_set_calendar_options (ClockPlugin *plugin)
 {
-  if (plugin->show_week_numbers) 
-    {
-        gtk_calendar_set_display_options (GTK_CALENDAR (plugin->calendar),
-                                          GTK_CALENDAR_SHOW_HEADING
-                                          | GTK_CALENDAR_SHOW_DAY_NAMES
-                                          | GTK_CALENDAR_SHOW_WEEK_NUMBERS);
-    }
-  else
-    {
-        gtk_calendar_set_display_options (GTK_CALENDAR (plugin->calendar),
-                                          GTK_CALENDAR_SHOW_HEADING
-                                          | GTK_CALENDAR_SHOW_DAY_NAMES);
-    }
+  GtkCalendarDisplayOptions options = GTK_CALENDAR_SHOW_HEADING | GTK_CALENDAR_SHOW_DAY_NAMES;
+  if (plugin->show_week_numbers)
+    options |= GTK_CALENDAR_SHOW_WEEK_NUMBERS;
+  
+  gtk_calendar_set_display_options (GTK_CALENDAR (plugin->calendar), options);
 }
