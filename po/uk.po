@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2023-05-05 10:50+0200\n"
+"POT-Creation-Date: 2023-07-17 00:46+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Gordon Freeman, 2023\n"
 "Language-Team: Ukrainian (http://app.transifex.com/xfce/xfce4-panel/language/uk/)\n"
@@ -42,7 +42,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "панелі;налаштування;властивості;панель завдань;самоховання;меню програм;початок;кнопки;запускач;область сповіщень;стан;значки;втулки;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3582
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3596
 msgid "Panel"
 msgstr "Панель"
 
@@ -90,7 +90,7 @@ msgid "_Properties"
 msgstr "_Властивості"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3658
+#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3672
 msgid "_About"
 msgstr "_Про елемент"
 
@@ -104,23 +104,23 @@ msgid "Pane_l"
 msgstr "Пане_ль"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3594
+#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3608
 msgid "Add _New Items..."
 msgstr "Дода_ти нові елементи..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3605
+#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3619
 msgid "Panel Pr_eferences..."
 msgstr "Налашт_ування панелі..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3633
+#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3647
 msgid "Log _Out"
 msgstr "Вийти з _сеансу"
 
 #. help item
 #: libxfce4panel/xfce-panel-plugin.c:1341 panel/panel-item-dialog.c:196
-#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3649
+#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3663
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
 #: plugins/clock/clock-dialog.glade:120
@@ -712,7 +712,7 @@ msgstr "Досвідчений"
 msgid "Expert"
 msgstr "Експерт"
 
-#: panel/panel-window.c:3619
+#: panel/panel-window.c:3633
 msgid "_Lock Panel"
 msgstr "_Заблокувати панель"
 
@@ -982,7 +982,7 @@ msgid ""
 msgstr "Виберіть цю опцію щоб показати основну назву програми в меню, для прикладу \"Файловий менеджер\" замість \"Thunar\""
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:229
-#: plugins/clock/clock-dialog.glade:388
+#: plugins/clock/clock-dialog.glade:405
 #: plugins/directorymenu/directorymenu-dialog.glade:150
 #: plugins/separator/separator-dialog.glade:177
 #: plugins/tasklist/tasklist-dialog.glade:257
@@ -1030,7 +1030,7 @@ msgid "_OK"
 msgstr "_Гаразд"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1018
+#: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1040
 #: plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -1076,15 +1076,15 @@ msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
 
-#: plugins/clock/clock.c:150
+#: plugins/clock/clock.c:153
 msgid "Week %V"
 msgstr "Тиждень %V"
 
-#: plugins/clock/clock.c:453
+#: plugins/clock/clock.c:474
 msgid "Failed to execute clock command"
 msgstr "Не вдалось виконати команду годинника"
 
-#: plugins/clock/clock.c:957
+#: plugins/clock/clock.c:979
 msgid "Custom Format"
 msgstr "Довільний формат"
 
@@ -1168,12 +1168,16 @@ msgstr "Якщо встановлено, ця команда виконуєть�
 msgid "Co_mmand:"
 msgstr "Ко_манда:"
 
-#: plugins/clock/clock-dialog.glade:277
+#: plugins/clock/clock-dialog.glade:273
+msgid "_Show week numbers"
+msgstr "Показувати номери _тижнів"
+
+#: plugins/clock/clock-dialog.glade:294
 msgid "Calendar"
 msgstr "Календар"
 
-#: plugins/clock/clock-dialog.glade:312 plugins/clock/clock-dialog.glade:652
-#: plugins/clock/clock-dialog.glade:774
+#: plugins/clock/clock-dialog.glade:329 plugins/clock/clock-dialog.glade:669
+#: plugins/clock/clock-dialog.glade:791
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -1181,57 +1185,57 @@ msgid ""
 "page for additional information."
 msgstr "Формат описує вигляд дати та часу при їх вставлянні у панель. Наприклад, %Y буде замінено на рік, %m на місяць та %d на день. Теги<b></b> зроблять текст погрубленим. Додаткову інформацію дивіться на сторінці \"Допомога\"."
 
-#: plugins/clock/clock-dialog.glade:341
+#: plugins/clock/clock-dialog.glade:358
 msgid "_Tooltip format:"
 msgstr "Формат спливаючого повідомл_ення:"
 
-#: plugins/clock/clock-dialog.glade:354 plugins/clock/clock-dialog.glade:602
+#: plugins/clock/clock-dialog.glade:371 plugins/clock/clock-dialog.glade:619
 msgid "_Layout:"
 msgstr "Розкла_дка:"
 
-#: plugins/clock/clock-dialog.glade:418
+#: plugins/clock/clock-dialog.glade:435
 msgid "Sho_w AM/PM"
 msgstr "По_казувати AM/PM"
 
-#: plugins/clock/clock-dialog.glade:433
+#: plugins/clock/clock-dialog.glade:450
 msgid "Fl_ash time separators"
 msgstr "Б_лимаючий розділювач часу "
 
-#: plugins/clock/clock-dialog.glade:448
+#: plugins/clock/clock-dialog.glade:465
 msgid "24-_hour clock"
 msgstr "24-годинний фо_рмат годинника"
 
-#: plugins/clock/clock-dialog.glade:491
+#: plugins/clock/clock-dialog.glade:508
 msgid "Binary mode:"
 msgstr "Двійковий режим:"
 
-#: plugins/clock/clock-dialog.glade:507
+#: plugins/clock/clock-dialog.glade:524
 msgid "Display _seconds"
 msgstr "Показувати _секунди"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: plugins/clock/clock-dialog.glade:528
+#: plugins/clock/clock-dialog.glade:545
 msgid "F_uzziness:"
 msgstr "Прибли_зність:"
 
-#: plugins/clock/clock-dialog.glade:562
+#: plugins/clock/clock-dialog.glade:579
 msgid "Show _inactive dots"
 msgstr "Показати _неактивні крапки"
 
-#: plugins/clock/clock-dialog.glade:577
+#: plugins/clock/clock-dialog.glade:594
 msgid "Show gri_d"
 msgstr "Показувати розділю_вач"
 
-#: plugins/clock/clock-dialog.glade:623 plugins/clock/clock-dialog.glade:745
+#: plugins/clock/clock-dialog.glade:640 plugins/clock/clock-dialog.glade:762
 msgid "Font:"
 msgstr "Шрифт:"
 
-#: plugins/clock/clock-dialog.glade:636 plugins/clock/clock-dialog.glade:758
+#: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
 msgid "Format:"
 msgstr "Формат:"
 
-#: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
+#: plugins/clock/clock-dialog.glade:670 plugins/clock/clock-dialog.glade:792
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -1239,15 +1243,15 @@ msgid ""
 "the &quot;Help&quot; page for additional information."
 msgstr "Формат описує частини дати та часу, які потрібно вставити на панель. Наприклад, %Y буде замінено на рік, %m на місяць, %d на день. Аналогічно, теги &lt;b&gt;&lt;/b&gt; зроблять текст напівжирним. Додаткову інформацію дивіться на сторінці &quot;Довідка&quot;."
 
-#: plugins/clock/clock-dialog.glade:682
+#: plugins/clock/clock-dialog.glade:699
 msgid "Date"
 msgstr "Дата"
 
-#: plugins/clock/clock-dialog.glade:727
+#: plugins/clock/clock-dialog.glade:744
 msgid "Time"
 msgstr "Час"
 
-#: plugins/clock/clock-dialog.glade:854
+#: plugins/clock/clock-dialog.glade:871
 msgid "Clock Options"
 msgstr "Параметри годинника"
 
