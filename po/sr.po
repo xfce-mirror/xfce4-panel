@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2023-05-05 10:50+0200\n"
+"POT-Creation-Date: 2023-07-17 00:46+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Саша Петровић <salepetronije@gmail.com>, 2012-2014,2017,2019,2022\n"
 "Language-Team: Serbian (http://app.transifex.com/xfce/xfce4-panel/language/sr/)\n"
@@ -39,7 +39,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "полице;поставка;подешавања;својства;трака;самоскривај;изборник датотека;дугмад;покретач;обавештајна област;стање;сличице;прикључци;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3582
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3596
 msgid "Panel"
 msgstr "Полица"
 
@@ -87,7 +87,7 @@ msgid "_Properties"
 msgstr "_Својства"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3658
+#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3672
 msgid "_About"
 msgstr "_О програму"
 
@@ -101,23 +101,23 @@ msgid "Pane_l"
 msgstr "Полиц_а"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3594
+#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3608
 msgid "Add _New Items..."
 msgstr "Додај _нове ставке..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3605
+#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3619
 msgid "Panel Pr_eferences..."
 msgstr "Сво_јства полице..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3633
+#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3647
 msgid "Log _Out"
 msgstr "Одја_ва"
 
 #. help item
 #: libxfce4panel/xfce-panel-plugin.c:1341 panel/panel-item-dialog.c:196
-#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3649
+#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3663
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
 #: plugins/clock/clock-dialog.glade:120
@@ -708,7 +708,7 @@ msgstr "Искусан"
 msgid "Expert"
 msgstr "Стручњак"
 
-#: panel/panel-window.c:3619
+#: panel/panel-window.c:3633
 msgid "_Lock Panel"
 msgstr "_Закључај полицу"
 
@@ -978,7 +978,7 @@ msgid ""
 msgstr "Изаберите ову могућност за приказивање уопштеног назива програма у изборнику, на пример „Управник датотека“ уместо „Tунар“"
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:229
-#: plugins/clock/clock-dialog.glade:388
+#: plugins/clock/clock-dialog.glade:405
 #: plugins/directorymenu/directorymenu-dialog.glade:150
 #: plugins/separator/separator-dialog.glade:177
 #: plugins/tasklist/tasklist-dialog.glade:257
@@ -1026,7 +1026,7 @@ msgid "_OK"
 msgstr "_У реду"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1018
+#: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1040
 #: plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -1072,15 +1072,15 @@ msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
 
-#: plugins/clock/clock.c:150
+#: plugins/clock/clock.c:153
 msgid "Week %V"
 msgstr "Седмица %V"
 
-#: plugins/clock/clock.c:453
+#: plugins/clock/clock.c:474
 msgid "Failed to execute clock command"
 msgstr "Нисам успео да извршим наредбу часовника"
 
-#: plugins/clock/clock.c:957
+#: plugins/clock/clock.c:979
 msgid "Custom Format"
 msgstr "Произвољни облик"
 
@@ -1164,12 +1164,16 @@ msgstr "Уколико је подешено, ова наредба се изв�
 msgid "Co_mmand:"
 msgstr "На_редба:"
 
-#: plugins/clock/clock-dialog.glade:277
+#: plugins/clock/clock-dialog.glade:273
+msgid "_Show week numbers"
+msgstr "_Приказуј бројеве седмица"
+
+#: plugins/clock/clock-dialog.glade:294
 msgid "Calendar"
 msgstr "Календар"
 
-#: plugins/clock/clock-dialog.glade:312 plugins/clock/clock-dialog.glade:652
-#: plugins/clock/clock-dialog.glade:774
+#: plugins/clock/clock-dialog.glade:329 plugins/clock/clock-dialog.glade:669
+#: plugins/clock/clock-dialog.glade:791
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -1177,57 +1181,57 @@ msgid ""
 "page for additional information."
 msgstr "Облик описује делове приказа дана и времена који се умећу на полицу. На пример, %Y ће бити замењен годином, %m—месецом, %d—даном. Слично, ознаке <b></b> ће чинити писмо дебелим. Погледајте страницу „Помоћ“ ради додатних података."
 
-#: plugins/clock/clock-dialog.glade:341
+#: plugins/clock/clock-dialog.glade:358
 msgid "_Tooltip format:"
 msgstr "Облик _напомена:"
 
-#: plugins/clock/clock-dialog.glade:354 plugins/clock/clock-dialog.glade:602
+#: plugins/clock/clock-dialog.glade:371 plugins/clock/clock-dialog.glade:619
 msgid "_Layout:"
 msgstr "_Распоред:"
 
-#: plugins/clock/clock-dialog.glade:418
+#: plugins/clock/clock-dialog.glade:435
 msgid "Sho_w AM/PM"
 msgstr "Прикаж_и ПрП/ПоП"
 
-#: plugins/clock/clock-dialog.glade:433
+#: plugins/clock/clock-dialog.glade:450
 msgid "Fl_ash time separators"
 msgstr "Трепћући ра_здвајачи"
 
-#: plugins/clock/clock-dialog.glade:448
+#: plugins/clock/clock-dialog.glade:465
 msgid "24-_hour clock"
 msgstr "24-ни часовник"
 
-#: plugins/clock/clock-dialog.glade:491
+#: plugins/clock/clock-dialog.glade:508
 msgid "Binary mode:"
 msgstr "Бинарни начин:"
 
-#: plugins/clock/clock-dialog.glade:507
+#: plugins/clock/clock-dialog.glade:524
 msgid "Display _seconds"
 msgstr "Приказуј _секунде"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: plugins/clock/clock-dialog.glade:528
+#: plugins/clock/clock-dialog.glade:545
 msgid "F_uzziness:"
 msgstr "_Јасноћа:"
 
-#: plugins/clock/clock-dialog.glade:562
+#: plugins/clock/clock-dialog.glade:579
 msgid "Show _inactive dots"
 msgstr "Прикажи _мирујуће тачке"
 
-#: plugins/clock/clock-dialog.glade:577
+#: plugins/clock/clock-dialog.glade:594
 msgid "Show gri_d"
 msgstr "Прикажи мреж_у"
 
-#: plugins/clock/clock-dialog.glade:623 plugins/clock/clock-dialog.glade:745
+#: plugins/clock/clock-dialog.glade:640 plugins/clock/clock-dialog.glade:762
 msgid "Font:"
 msgstr "Словолик:"
 
-#: plugins/clock/clock-dialog.glade:636 plugins/clock/clock-dialog.glade:758
+#: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
 msgid "Format:"
 msgstr "Облик:"
 
-#: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
+#: plugins/clock/clock-dialog.glade:670 plugins/clock/clock-dialog.glade:792
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -1235,15 +1239,15 @@ msgid ""
 "the &quot;Help&quot; page for additional information."
 msgstr "Облик одређује делове датума и времена за уметање на полицу. На пример, %Y ће бити замењено годином, %m месецом и %d даном. Слично, ознаке &lt;b&gt;&lt;/b&gt; ће начинити писмо облим. Погледајте страницу &quot;Помоћ&quot; ради додатних података."
 
-#: plugins/clock/clock-dialog.glade:682
+#: plugins/clock/clock-dialog.glade:699
 msgid "Date"
 msgstr "Датум"
 
-#: plugins/clock/clock-dialog.glade:727
+#: plugins/clock/clock-dialog.glade:744
 msgid "Time"
 msgstr "Време"
 
-#: plugins/clock/clock-dialog.glade:854
+#: plugins/clock/clock-dialog.glade:871
 msgid "Clock Options"
 msgstr "Могућности часовника"
 
@@ -1718,7 +1722,7 @@ msgstr "Безимена ставка"
 
 #: plugins/launcher/launcher-dialog.glade:30
 msgid "Default"
-msgstr "Задато"
+msgstr "Подразумевано"
 
 #: plugins/launcher/launcher-dialog.glade:33
 msgid "North"
