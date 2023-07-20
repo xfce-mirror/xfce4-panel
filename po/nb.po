@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2023-05-05 10:50+0200\n"
+"POT-Creation-Date: 2023-07-17 00:46+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: heskjestad <cato@heskjestad.xyz>, 2022-2023\n"
 "Language-Team: Norwegian Bokmål (http://app.transifex.com/xfce/xfce4-panel/language/nb/)\n"
@@ -42,7 +42,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panel;innstillinger;oppsett;oppgavelinje;skjul;programmeny;start;knapper;programstarter;varslingsområde;status;ikoner;programtillegg;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3582
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3596
 msgid "Panel"
 msgstr "Panel"
 
@@ -90,7 +90,7 @@ msgid "_Properties"
 msgstr "_Egenskaper"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3658
+#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3672
 msgid "_About"
 msgstr "_Om"
 
@@ -104,23 +104,23 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3594
+#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3608
 msgid "Add _New Items..."
 msgstr "Legg til _nye elementer …"
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3605
+#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3619
 msgid "Panel Pr_eferences..."
 msgstr "Pan_elinnstillinger …"
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3633
+#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3647
 msgid "Log _Out"
 msgstr "L_ogg ut"
 
 #. help item
 #: libxfce4panel/xfce-panel-plugin.c:1341 panel/panel-item-dialog.c:196
-#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3649
+#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3663
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
 #: plugins/clock/clock-dialog.glade:120
@@ -710,7 +710,7 @@ msgstr "Erfaren"
 msgid "Expert"
 msgstr "Ekspert"
 
-#: panel/panel-window.c:3619
+#: panel/panel-window.c:3633
 msgid "_Lock Panel"
 msgstr "_Lås panel"
 
@@ -980,7 +980,7 @@ msgid ""
 msgstr "Velg denne for å vise generiske programnavn i menyen, for eksempel «Filbehandler» istedenfor «Thunar»"
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:229
-#: plugins/clock/clock-dialog.glade:388
+#: plugins/clock/clock-dialog.glade:405
 #: plugins/directorymenu/directorymenu-dialog.glade:150
 #: plugins/separator/separator-dialog.glade:177
 #: plugins/tasklist/tasklist-dialog.glade:257
@@ -1028,7 +1028,7 @@ msgid "_OK"
 msgstr "_OK"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1018
+#: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1040
 #: plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -1074,15 +1074,15 @@ msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A %B %d %Y"
 
-#: plugins/clock/clock.c:150
+#: plugins/clock/clock.c:153
 msgid "Week %V"
 msgstr "Uke %V"
 
-#: plugins/clock/clock.c:453
+#: plugins/clock/clock.c:474
 msgid "Failed to execute clock command"
 msgstr "Klarte ikke kjøre clock-kommandoen"
 
-#: plugins/clock/clock.c:957
+#: plugins/clock/clock.c:979
 msgid "Custom Format"
 msgstr "Selvvalgt format"
 
@@ -1166,12 +1166,16 @@ msgstr "Velg for å kjøre denne kommandoen når programtillegget venstreklikkes
 msgid "Co_mmand:"
 msgstr "Ko_mmando:"
 
-#: plugins/clock/clock-dialog.glade:277
+#: plugins/clock/clock-dialog.glade:273
+msgid "_Show week numbers"
+msgstr "_Vis ukenummer"
+
+#: plugins/clock/clock-dialog.glade:294
 msgid "Calendar"
 msgstr "Kalender"
 
-#: plugins/clock/clock-dialog.glade:312 plugins/clock/clock-dialog.glade:652
-#: plugins/clock/clock-dialog.glade:774
+#: plugins/clock/clock-dialog.glade:329 plugins/clock/clock-dialog.glade:669
+#: plugins/clock/clock-dialog.glade:791
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -1179,57 +1183,57 @@ msgid ""
 "page for additional information."
 msgstr "Formatet beskriver dato og tids-delene som settes inn i filnavnet. For eksempel, %Y erstattes med året, %m med måneden og %d med dagen. Likeledes vil <b></b> formatering vil gjøre tekst halvfet. Se \"Hjelp\"-siden for ytterligere informasjon."
 
-#: plugins/clock/clock-dialog.glade:341
+#: plugins/clock/clock-dialog.glade:358
 msgid "_Tooltip format:"
 msgstr "Verk_tøytips format:"
 
-#: plugins/clock/clock-dialog.glade:354 plugins/clock/clock-dialog.glade:602
+#: plugins/clock/clock-dialog.glade:371 plugins/clock/clock-dialog.glade:619
 msgid "_Layout:"
 msgstr "_Utseende:"
 
-#: plugins/clock/clock-dialog.glade:418
+#: plugins/clock/clock-dialog.glade:435
 msgid "Sho_w AM/PM"
 msgstr "_Vis AM/PM"
 
-#: plugins/clock/clock-dialog.glade:433
+#: plugins/clock/clock-dialog.glade:450
 msgid "Fl_ash time separators"
 msgstr "Bl_inkende tidsskiller"
 
-#: plugins/clock/clock-dialog.glade:448
+#: plugins/clock/clock-dialog.glade:465
 msgid "24-_hour clock"
 msgstr "24-_timers klokke"
 
-#: plugins/clock/clock-dialog.glade:491
+#: plugins/clock/clock-dialog.glade:508
 msgid "Binary mode:"
 msgstr "Binærmodus:"
 
-#: plugins/clock/clock-dialog.glade:507
+#: plugins/clock/clock-dialog.glade:524
 msgid "Display _seconds"
 msgstr "Vis _sekunder"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: plugins/clock/clock-dialog.glade:528
+#: plugins/clock/clock-dialog.glade:545
 msgid "F_uzziness:"
 msgstr "F_uzziness:"
 
-#: plugins/clock/clock-dialog.glade:562
+#: plugins/clock/clock-dialog.glade:579
 msgid "Show _inactive dots"
 msgstr "Vis _inaktive prikker"
 
-#: plugins/clock/clock-dialog.glade:577
+#: plugins/clock/clock-dialog.glade:594
 msgid "Show gri_d"
 msgstr "Vis _rutenett"
 
-#: plugins/clock/clock-dialog.glade:623 plugins/clock/clock-dialog.glade:745
+#: plugins/clock/clock-dialog.glade:640 plugins/clock/clock-dialog.glade:762
 msgid "Font:"
 msgstr "Skrift:"
 
-#: plugins/clock/clock-dialog.glade:636 plugins/clock/clock-dialog.glade:758
+#: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
 msgid "Format:"
 msgstr "Format:"
 
-#: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
+#: plugins/clock/clock-dialog.glade:670 plugins/clock/clock-dialog.glade:792
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -1237,15 +1241,15 @@ msgid ""
 "the &quot;Help&quot; page for additional information."
 msgstr "Formatet beskriver dato og tids-delene som settes inn i panelet. Eksempler: %Y vil erstattes med året, %m med måneden og %d med dagen. Likeledes vil taggene &lt;b&gt;&lt;/b&gt; gjøre teksten fet. Se «Hjelp»-siden for mer informasjon."
 
-#: plugins/clock/clock-dialog.glade:682
+#: plugins/clock/clock-dialog.glade:699
 msgid "Date"
 msgstr "Dato"
 
-#: plugins/clock/clock-dialog.glade:727
+#: plugins/clock/clock-dialog.glade:744
 msgid "Time"
 msgstr "Tid"
 
-#: plugins/clock/clock-dialog.glade:854
+#: plugins/clock/clock-dialog.glade:871
 msgid "Clock Options"
 msgstr "Klokkeinnstillinger"
 
