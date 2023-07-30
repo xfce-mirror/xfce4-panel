@@ -603,6 +603,9 @@ panel_item_dialog_populate_store (PanelItemDialog *dialog)
   panel_return_if_fail (PANEL_IS_MODULE_FACTORY (dialog->factory));
   panel_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
 
+  /* clear previous entries if needed */
+  gtk_list_store_clear (dialog->store);
+
   /* add all known modules in the factory */
   modules = panel_module_factory_get_modules (dialog->factory);
   for (li = modules, n = 0; li != NULL; li = li->next, n++)
