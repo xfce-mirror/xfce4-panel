@@ -380,6 +380,7 @@ launcher_plugin_init (LauncherPlugin *plugin)
                                   GTK_STYLE_PROVIDER (css_provider),
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
   g_free (css_string);
+  g_object_unref (css_provider);
 
   plugin->child = gtk_image_new ();
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->child);
