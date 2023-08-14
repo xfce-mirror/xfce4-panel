@@ -577,6 +577,7 @@ directory_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
                                     const GValue    *value)
 {
   DirectoryMenuPlugin *plugin = XFCE_DIRECTORY_MENU_PLUGIN (panel_plugin);
+  GtkWidget *invisible;
 
   panel_return_val_if_fail (value == NULL || G_IS_VALUE (value), FALSE);
 
@@ -585,14 +586,20 @@ directory_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
       || ! gtk_widget_get_visible (GTK_WIDGET (panel_plugin)))
     return FALSE;
 
+  invisible = gtk_invisible_new ();
+  gtk_widget_show (invisible);
+
   /* a menu is already shown, don't popup another one */
   if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button))
-      || ! panel_utils_device_grab (plugin->button))
-    return TRUE;
+      || ! panel_utils_device_grab (invisible))
+    {
+      gtk_widget_destroy (invisible);
+      return TRUE;
+    }
 
   /*
-   * The menu will take over the grab when it is shown, and in the rare cases that it is not,
-   * this is not a big deal. This way we are sure that other invocations of the command by
+   * The menu will take over the grab when it is shown or it will be lost when destroying
+   * invisible below. This way we are sure that other invocations of the command by
    * keyboard shortcut will not interfere.
    */
   if (value != NULL
@@ -607,6 +614,8 @@ directory_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
       /* popup menu at button */
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button), TRUE);
     }
+
+  gtk_widget_destroy (invisible);
 
   /* don't popup another menu */
   return TRUE;
@@ -1311,8 +1320,12 @@ directory_menu_plugin_menu (GtkWidget           *button,
                            g_object_ref (plugin->base_directory),
                            g_object_unref);
   directory_menu_plugin_menu_load (menu, plugin);
-  xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (menu),
-                                button, event);
+
+  /* do not block panel autohide if popup-command at pointer */
+  if (button == NULL)
+    gtk_menu_popup_at_pointer (GTK_MENU (menu), event);
+  else
+    xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin), GTK_MENU (menu), button, event);
 
   gdk_event_free (event);
 }
