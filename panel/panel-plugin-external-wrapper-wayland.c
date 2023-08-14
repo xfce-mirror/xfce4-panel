@@ -304,6 +304,13 @@ panel_plugin_external_wrapper_wayland_proxy_embedded (GDBusProxy *proxy,
                                                       GVariant *parameters,
                                                       PanelPluginExternalWrapperWayland *wrapper)
 {
+  /* reset geometry when child is respawned */
+  wrapper->monitor = NULL;
+  wrapper->geometry.x = 0;
+  wrapper->geometry.y = 0;
+  wrapper->geometry.width = 0;
+  wrapper->geometry.height = 0;
+
   panel_plugin_external_set_embedded (PANEL_PLUGIN_EXTERNAL (wrapper), TRUE);
 }
 
