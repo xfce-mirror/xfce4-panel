@@ -2259,16 +2259,16 @@ panel_window_snap_position (PanelWindow *window)
   /* make the same calculation whether the panel is snapped or not (avoids flickering
    * when the pointer moves slowly) */
   borders = panel_base_window_get_borders (PANEL_BASE_WINDOW (window));
-  if (! PANEL_HAS_FLAG (borders, PANEL_BORDER_TOP))
+  if (!PANEL_HAS_FLAG (borders, PANEL_BORDER_TOP) && PANEL_HAS_FLAG (borders, PANEL_BORDER_BOTTOM))
     alloc.height++;
-  if (! PANEL_HAS_FLAG (borders, PANEL_BORDER_BOTTOM))
+  else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_TOP) && !PANEL_HAS_FLAG (borders, PANEL_BORDER_BOTTOM))
     {
       alloc.y--;
       alloc.height++;
     }
-  if (! PANEL_HAS_FLAG (borders, PANEL_BORDER_LEFT))
+  if (!PANEL_HAS_FLAG (borders, PANEL_BORDER_LEFT) && PANEL_HAS_FLAG (borders, PANEL_BORDER_RIGHT))
     alloc.width++;
-  if (! PANEL_HAS_FLAG (borders, PANEL_BORDER_RIGHT))
+  else if (PANEL_HAS_FLAG (borders, PANEL_BORDER_LEFT) && !PANEL_HAS_FLAG (borders, PANEL_BORDER_RIGHT))
     {
       alloc.x--;
       alloc.width++;
