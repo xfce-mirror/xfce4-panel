@@ -27,6 +27,8 @@
 
 
 
+static void         panel_plugin_external_wrapper_x11_size_allocate           (GtkWidget                        *widget,
+                                                                               GtkAllocation                    *allocation);
 static gchar      **panel_plugin_external_wrapper_x11_get_argv                (PanelPluginExternal              *external,
                                                                                gchar                           **arguments);
 static void         panel_plugin_external_wrapper_x11_set_background_color    (PanelPluginExternal              *external,
@@ -48,6 +50,7 @@ struct _PanelPluginExternalWrapperX11
   PanelPluginExternalWrapper __parent__;
 
   GtkWidget *socket;
+  GdkRectangle geometry;
 };
 
 
@@ -59,7 +62,11 @@ G_DEFINE_FINAL_TYPE (PanelPluginExternalWrapperX11, panel_plugin_external_wrappe
 static void
 panel_plugin_external_wrapper_x11_class_init (PanelPluginExternalWrapperX11Class *klass)
 {
+  GtkWidgetClass *gtkwidget_class;
   PanelPluginExternalClass *external_class;
+
+  gtkwidget_class = GTK_WIDGET_CLASS (klass);
+  gtkwidget_class->size_allocate = panel_plugin_external_wrapper_x11_size_allocate;
 
   external_class = PANEL_PLUGIN_EXTERNAL_CLASS (klass);
   external_class->get_argv = panel_plugin_external_wrapper_x11_get_argv;
@@ -81,6 +88,21 @@ panel_plugin_external_wrapper_x11_init (PanelPluginExternalWrapperX11 *wrapper)
                     G_CALLBACK (panel_plugin_external_wrapper_x11_socket_plug_removed), wrapper);
   gtk_box_pack_start (GTK_BOX (wrapper), wrapper->socket, TRUE, FALSE, 0);
   gtk_widget_show (wrapper->socket);
+}
+
+
+
+static void
+panel_plugin_external_wrapper_x11_size_allocate (GtkWidget *widget,
+                                                 GtkAllocation *allocation)
+{
+  PanelBaseWindow *window = PANEL_BASE_WINDOW (gtk_widget_get_ancestor (widget, PANEL_TYPE_BASE_WINDOW));
+
+  GTK_WIDGET_CLASS (panel_plugin_external_wrapper_x11_parent_class)->size_allocate (widget, allocation);
+
+  if (panel_base_window_get_background_style (window) == PANEL_BG_STYLE_IMAGE
+      && panel_base_window_get_background_image (window) != NULL)
+    panel_plugin_external_wrapper_x11_set_geometry (PANEL_PLUGIN_EXTERNAL (widget), PANEL_WINDOW (window));
 }
 
 
@@ -157,7 +179,29 @@ static void
 panel_plugin_external_wrapper_x11_set_geometry (PanelPluginExternal *external,
                                                 PanelWindow *window)
 {
-  /* Wayland only */
+  PanelPluginExternalWrapperX11 *wrapper = PANEL_PLUGIN_EXTERNAL_WRAPPER_X11 (external);
+  GtkAllocation alloc;
+  GdkRectangle *geom = &wrapper->geometry;
+
+  gtk_widget_get_allocation (GTK_WIDGET (external), &alloc);
+  if (alloc.x != geom->x || alloc.y != geom->y || alloc.width != geom->width || alloc.height != geom->height)
+    {
+      PanelBorders borders = panel_base_window_get_borders (PANEL_BASE_WINDOW (window));
+      GValue value = G_VALUE_INIT;
+
+      *geom = alloc;
+
+      /* ignore borders (marching ants): background image is drawn inside */
+      if (PANEL_HAS_FLAG (borders, PANEL_BORDER_LEFT))
+        alloc.x--;
+      if (PANEL_HAS_FLAG (borders, PANEL_BORDER_TOP))
+        alloc.y--;
+
+      g_value_init (&value, G_TYPE_VARIANT);
+      g_value_set_variant (&value, g_variant_new ("(iiii)", alloc.x, alloc.y, alloc.width, alloc.height));
+      panel_plugin_external_queue_add (external, PROVIDER_PROP_TYPE_SET_GEOMETRY, &value);
+      g_value_unset (&value);
+    }
 }
 
 
@@ -175,6 +219,12 @@ static void
 panel_plugin_external_wrapper_x11_socket_plug_added (GtkSocket *socket,
                                                      PanelPluginExternalWrapperX11 *wrapper)
 {
+  /* reset geometry when child is respawned */
+  wrapper->geometry.x = 0;
+  wrapper->geometry.y = 0;
+  wrapper->geometry.width = 0;
+  wrapper->geometry.height = 0;
+
   panel_plugin_external_set_embedded (PANEL_PLUGIN_EXTERNAL (wrapper), TRUE);
 }
 

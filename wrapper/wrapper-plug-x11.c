@@ -40,6 +40,8 @@ static void       wrapper_plug_x11_set_background_color       (WrapperPlug      
                                                                const gchar                      *color);
 static void       wrapper_plug_x11_set_background_image       (WrapperPlug                      *plug,
                                                                const gchar                      *image);
+static void       wrapper_plug_x11_set_geometry               (WrapperPlug                      *plug,
+                                                               const GdkRectangle               *geometry);
 
 
 
@@ -78,19 +80,6 @@ wrapper_plug_x11_class_init (WrapperPlugX11Class *klass)
 
 
 static void
-wrapper_plug_x11_scale_factor_changed (WrapperPlugX11 *plug)
-{
-  if (plug->image != NULL)
-    {
-      gchar *image = g_strdup (plug->image);
-      wrapper_plug_x11_set_background_image (WRAPPER_PLUG (plug), image);
-      g_free (image);
-    }
-}
-
-
-
-static void
 wrapper_plug_x11_init (WrapperPlugX11 *plug)
 {
   GdkVisual *visual = NULL;
@@ -109,7 +98,6 @@ wrapper_plug_x11_init (WrapperPlugX11 *plug)
   context = gtk_widget_get_style_context (GTK_WIDGET (plug));
   gtk_style_context_add_class (context, "panel");
   gtk_style_context_add_class (context, "xfce4-panel");
-  g_signal_connect (plug, "notify::scale-factor", G_CALLBACK (wrapper_plug_x11_scale_factor_changed), NULL);
 
   gtk_drag_dest_unset (GTK_WIDGET (plug));
 
@@ -160,6 +148,7 @@ wrapper_plug_x11_iface_init (WrapperPlugInterface *iface)
   iface->proxy_remote_event_result = wrapper_plug_x11_proxy_remote_event_result;
   iface->set_background_color = wrapper_plug_x11_set_background_color;
   iface->set_background_image = wrapper_plug_x11_set_background_image;
+  iface->set_geometry = wrapper_plug_x11_set_geometry;
 }
 
 
@@ -220,26 +209,52 @@ wrapper_plug_x11_set_background_image (WrapperPlug *plug,
                                        const gchar *image)
 {
   WrapperPlugX11 *xplug = WRAPPER_PLUG_X11 (plug);
-  gchar *css_url, *css;
-  gint scale_factor;
+  GdkRectangle geom = { 0 };
 
   g_free (xplug->image);
   xplug->image = g_strdup (image);
 
-  /* do not scale background image with the panel */
-  scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (plug));
-  css_url = g_strdup_printf ("url(\"%s\")", image);
-  for (gint i = 1; i < scale_factor; i++)
-    {
-      gchar *temp = g_strdup_printf ("%s,url(\"%s\")", css_url, image);
-      g_free (css_url);
-      css_url = temp;
-    }
+  /*
+   * Normally, socket geometry should always be retrieved in this way (or better still via
+   * `gdk_window_get_position()`), but in practice this is only suitable for initialization.
+   * This is because :
+   * - The coordinates returned by this function may be outdated, and you'll need to mouse
+   *   over the plugin to trigger a socket allocation that updates this data (reproducible,
+   *   for example, by switching panel mode from vertical to deskbar).
+   * - It's even worse with `gdk_window_get_position()`.
+   * - The socket window scale factor is not updated when the UI scale factor is changed at
+   *   runtime.
+   * For all these reasons, sending geometry via D-Bus is simpler and more reliable.
+   */
+  gdk_window_get_geometry (gtk_plug_get_socket_window (GTK_PLUG (plug)), &geom.x, &geom.y, NULL, NULL);
+  wrapper_plug_x11_set_geometry (plug, &geom);
+}
 
-  css = g_strdup_printf ("* { background: -gtk-scaled(%s); }", css_url);
-  gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (xplug->style_provider), css, -1, NULL);
-  g_free (css);
-  g_free (css_url);
+
+
+static void
+wrapper_plug_x11_set_geometry (WrapperPlug *plug,
+                               const GdkRectangle *geometry)
+{
+  WrapperPlugX11 *xplug = WRAPPER_PLUG_X11 (plug);
+
+  if (xplug->image != NULL)
+    {
+      /* do not scale background image with the panel */
+      gint scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (plug));
+      gchar *css_url = g_strdup_printf ("url(\"%s\")", xplug->image);
+      for (gint i = 1; i < scale_factor; i++)
+        {
+          gchar *temp = g_strdup_printf ("%s,url(\"%s\")", css_url, xplug->image);
+          g_free (css_url);
+          css_url = temp;
+        }
+      gchar *css = g_strdup_printf ("* { background: -gtk-scaled(%s) %dpx %dpx; }",
+                                    css_url, -geometry->x, -geometry->y);
+      gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (xplug->style_provider), css, -1, NULL);
+      g_free (css);
+      g_free (css_url);
+    }
 }
 
 
