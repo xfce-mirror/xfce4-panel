@@ -44,6 +44,7 @@ struct _WrapperPlug
 
   /* background information */
   GtkStyleProvider *style_provider;
+  gchar *image;
 };
 
 
@@ -69,6 +70,19 @@ wrapper_plug_class_init (WrapperPlugClass *klass)
 
 
 static void
+wrapper_plug_scale_factor_changed (WrapperPlug *plug)
+{
+  if (plug->image != NULL)
+    {
+      gchar *image = g_strdup (plug->image);
+      wrapper_plug_set_background_image (WRAPPER_PLUG (plug), image);
+      g_free (image);
+    }
+}
+
+
+
+static void
 wrapper_plug_init (WrapperPlug *plug)
 {
   GdkVisual       *visual = NULL;
@@ -87,6 +101,7 @@ wrapper_plug_init (WrapperPlug *plug)
   context = gtk_widget_get_style_context (GTK_WIDGET (plug));
   gtk_style_context_add_class (context, "panel");
   gtk_style_context_add_class (context, "xfce4-panel");
+  g_signal_connect (plug, "notify::scale-factor", G_CALLBACK (wrapper_plug_scale_factor_changed), NULL);
 
   gtk_drag_dest_unset (GTK_WIDGET (plug));
 
@@ -102,7 +117,10 @@ wrapper_plug_init (WrapperPlug *plug)
 static void
 wrapper_plug_finalize (GObject *object)
 {
-  g_object_unref (WRAPPER_PLUG (object)->style_provider);
+  WrapperPlug *plug = WRAPPER_PLUG (object);
+
+  g_object_unref (plug->style_provider);
+  g_free (plug->image);
 
   G_OBJECT_CLASS (wrapper_plug_parent_class)->finalize (object);
 }
@@ -151,6 +169,8 @@ wrapper_plug_set_background_color (WrapperPlug *plug,
   if (color_string == NULL)
     {
       gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (plug->style_provider), "", -1, NULL);
+      g_free (plug->image);
+      plug->image = NULL;
       return;
     }
 
@@ -172,13 +192,26 @@ void
 wrapper_plug_set_background_image (WrapperPlug *plug,
                                    const gchar *image)
 {
-  gchar *css;
+  gchar *css_url, *css;
+  gint scale_factor;
 
   panel_return_if_fail (WRAPPER_IS_PLUG (plug));
 
-  css = g_strdup_printf ("* { background: url(\"%s\"); }", image);
+  g_free (plug->image);
+  plug->image = g_strdup (image);
 
+  /* do not scale background image with the panel */
+  scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (plug));
+  css_url = g_strdup_printf ("url(\"%s\")", image);
+  for (gint i = 1; i < scale_factor; i++)
+    {
+      gchar *temp = g_strdup_printf ("%s,url(\"%s\")", css_url, image);
+      g_free (css_url);
+      css_url = temp;
+    }
+
+  css = g_strdup_printf ("* { background: -gtk-scaled(%s); }", css_url);
   gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (plug->style_provider), css, -1, NULL);
-
   g_free (css);
+  g_free (css_url);
 }
