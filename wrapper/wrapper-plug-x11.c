@@ -238,23 +238,20 @@ wrapper_plug_x11_set_geometry (WrapperPlug *plug,
 {
   WrapperPlugX11 *xplug = WRAPPER_PLUG_X11 (plug);
 
-  if (xplug->image != NULL)
+  /* do not scale background image with the panel */
+  gint scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (plug));
+  gchar *css_url = g_strdup_printf ("url(\"%s\")", xplug->image);
+  for (gint i = 1; i < scale_factor; i++)
     {
-      /* do not scale background image with the panel */
-      gint scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (plug));
-      gchar *css_url = g_strdup_printf ("url(\"%s\")", xplug->image);
-      for (gint i = 1; i < scale_factor; i++)
-        {
-          gchar *temp = g_strdup_printf ("%s,url(\"%s\")", css_url, xplug->image);
-          g_free (css_url);
-          css_url = temp;
-        }
-      gchar *css = g_strdup_printf ("* { background: -gtk-scaled(%s) %dpx %dpx; }",
-                                    css_url, -geometry->x, -geometry->y);
-      gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (xplug->style_provider), css, -1, NULL);
-      g_free (css);
+      gchar *temp = g_strdup_printf ("%s,url(\"%s\")", css_url, xplug->image);
       g_free (css_url);
+      css_url = temp;
     }
+  gchar *css = g_strdup_printf ("* { background: -gtk-scaled(%s) %dpx %dpx; }",
+                                css_url, -geometry->x, -geometry->y);
+  gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (xplug->style_provider), css, -1, NULL);
+  g_free (css);
+  g_free (css_url);
 }
 
 
