@@ -204,6 +204,16 @@ panel_base_window_class_init (PanelBaseWindowClass *klass)
 
 
 static void
+panel_base_window_scale_factor_changed (PanelBaseWindow *window)
+{
+  PanelBaseWindowPrivate *priv = get_instance_private (window);
+  if (priv->background_style == PANEL_BG_STYLE_IMAGE && priv->background_image != NULL)
+    panel_base_window_set_background_image_css (window);
+}
+
+
+
+static void
 panel_base_window_init (PanelBaseWindow *window)
 {
   PanelBaseWindowPrivate *priv = get_instance_private (window);
@@ -237,6 +247,7 @@ panel_base_window_init (PanelBaseWindow *window)
   context = gtk_widget_get_style_context (GTK_WIDGET (window));
   gtk_style_context_add_class (context, "panel");
   gtk_style_context_add_class (context, "xfce4-panel");
+  g_signal_connect (window, "notify::scale-factor", G_CALLBACK (panel_base_window_scale_factor_changed), NULL);
 }
 
 
@@ -618,17 +629,29 @@ static void
 panel_base_window_set_background_image_css (PanelBaseWindow *window)
 {
   PanelBaseWindowPrivate *priv = get_instance_private (window);
-  gchar *css_string;
+  gchar *css_url, *css_string;
+  gint scale_factor;
 
   panel_return_if_fail (priv->background_image != NULL);
 
-  css_string = g_strdup_printf (".xfce4-panel.background { background: url(\"%s\");"
+  /* do not scale background image with the panel */
+  scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (window));
+  css_url = g_strdup_printf ("url(\"%s\")", priv->background_image);
+  for (gint i = 1; i < scale_factor; i++)
+    {
+      gchar *temp = g_strdup_printf ("%s,url(\"%s\")", css_url, priv->background_image);
+      g_free (css_url);
+      css_url = temp;
+    }
+
+  css_string = g_strdup_printf (".xfce4-panel.background { background: -gtk-scaled(%s);"
                                                           "border-color: transparent; } %s",
-                                priv->background_image, PANEL_BASE_CSS);
+                                css_url, PANEL_BASE_CSS);
 
   panel_base_window_set_background_css (window, css_string);
 
   g_free (css_string);
+  g_free (css_url);
 }
 
 
