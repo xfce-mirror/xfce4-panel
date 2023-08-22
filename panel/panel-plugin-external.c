@@ -479,21 +479,6 @@ panel_plugin_external_child_ask_restart (PanelPluginExternal *external)
 
 
 static void
-panel_plugin_external_child_spawn_child_setup (gpointer data)
-{
-  PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (data);
-  GdkDisplay          *display;
-  const gchar         *name;
-
-  /* this is what gdk_spawn_on_screen does */
-  display = gtk_widget_get_display (GTK_WIDGET (external));
-  name = gdk_display_get_name (display);
-  g_setenv ("DISPLAY", name, TRUE);
-}
-
-
-
-static void
 panel_plugin_external_child_spawn (PanelPluginExternal *external)
 {
   PanelPluginExternalPrivate *priv = get_instance_private (external);
@@ -588,9 +573,7 @@ panel_plugin_external_child_spawn (PanelPluginExternal *external)
     }
 
   /* spawn the proccess */
-  succeed = g_spawn_async (NULL, argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD,
-                           panel_plugin_external_child_spawn_child_setup,
-                           external, &pid, &error);
+  succeed = PANEL_PLUGIN_EXTERNAL_GET_CLASS (external)->spawn (external, argv, &pid, &error);
 
   panel_debug (PANEL_DEBUG_EXTERNAL,
                "%s-%d: child spawned; pid=%d, argc=%d",

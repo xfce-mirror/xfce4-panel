@@ -42,6 +42,12 @@ struct _PanelPluginExternalClass
   gchar    **(*get_argv)             (PanelPluginExternal  *external,
                                       gchar               **arguments);
 
+  /* spawn wrapper process according to windowing environment */
+  gboolean   (*spawn)                (PanelPluginExternal  *external,
+                                      gchar               **argv,
+                                      GPid                 *pid,
+                                      GError              **error);
+
   /* handling of remote events */
   gboolean   (*remote_event)         (PanelPluginExternal  *external,
                                       const gchar          *name,

@@ -36,6 +36,10 @@ static void         panel_plugin_external_wrapper_wayland_size_allocate         
                                                                                    GtkAllocation                        *allocation);
 static gchar      **panel_plugin_external_wrapper_wayland_get_argv                (PanelPluginExternal                  *external,
                                                                                    gchar                               **arguments);
+static gboolean     panel_plugin_external_wrapper_wayland_spawn                   (PanelPluginExternal                  *external,
+                                                                                   gchar                               **argv,
+                                                                                   GPid                                 *pid,
+                                                                                   GError                              **error);
 static void         panel_plugin_external_wrapper_wayland_set_background_color    (PanelPluginExternal                  *external,
                                                                                    const GdkRGBA                        *color);
 static void         panel_plugin_external_wrapper_wayland_set_background_image    (PanelPluginExternal                  *external,
@@ -97,6 +101,7 @@ panel_plugin_external_wrapper_wayland_class_init (PanelPluginExternalWrapperWayl
 
   external_class = PANEL_PLUGIN_EXTERNAL_CLASS (klass);
   external_class->get_argv = panel_plugin_external_wrapper_wayland_get_argv;
+  external_class->spawn = panel_plugin_external_wrapper_wayland_spawn;
   external_class->set_background_color = panel_plugin_external_wrapper_wayland_set_background_color;
   external_class->set_background_image = panel_plugin_external_wrapper_wayland_set_background_image;
   external_class->set_geometry = panel_plugin_external_wrapper_wayland_set_geometry;
@@ -191,6 +196,17 @@ panel_plugin_external_wrapper_wayland_size_allocate (GtkWidget *widget,
   GTK_WIDGET_CLASS (panel_plugin_external_wrapper_wayland_parent_class)->size_allocate (widget, allocation);
 
   panel_plugin_external_wrapper_wayland_set_geometry (PANEL_PLUGIN_EXTERNAL (widget), window);
+}
+
+
+
+static gboolean
+panel_plugin_external_wrapper_wayland_spawn (PanelPluginExternal *external,
+                                             gchar **argv,
+                                             GPid *pid,
+                                             GError **error)
+{
+  return g_spawn_async (NULL, argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD, NULL, NULL, pid, error);
 }
 
 

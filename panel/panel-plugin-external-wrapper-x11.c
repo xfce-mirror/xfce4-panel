@@ -31,6 +31,10 @@ static void         panel_plugin_external_wrapper_x11_size_allocate           (G
                                                                                GtkAllocation                    *allocation);
 static gchar      **panel_plugin_external_wrapper_x11_get_argv                (PanelPluginExternal              *external,
                                                                                gchar                           **arguments);
+static gboolean     panel_plugin_external_wrapper_x11_spawn                   (PanelPluginExternal              *external,
+                                                                               gchar                           **argv,
+                                                                               GPid                             *pid,
+                                                                               GError                          **error);
 static void         panel_plugin_external_wrapper_x11_set_background_color    (PanelPluginExternal              *external,
                                                                                const GdkRGBA                    *color);
 static void         panel_plugin_external_wrapper_x11_set_background_image    (PanelPluginExternal              *external,
@@ -70,6 +74,7 @@ panel_plugin_external_wrapper_x11_class_init (PanelPluginExternalWrapperX11Class
 
   external_class = PANEL_PLUGIN_EXTERNAL_CLASS (klass);
   external_class->get_argv = panel_plugin_external_wrapper_x11_get_argv;
+  external_class->spawn = panel_plugin_external_wrapper_x11_spawn;
   external_class->set_background_color = panel_plugin_external_wrapper_x11_set_background_color;
   external_class->set_background_image = panel_plugin_external_wrapper_x11_set_background_image;
   external_class->set_geometry = panel_plugin_external_wrapper_x11_set_geometry;
@@ -119,6 +124,34 @@ panel_plugin_external_wrapper_x11_get_argv (PanelPluginExternal *external,
     argv[PLUGIN_ARGV_SOCKET_ID] = g_strdup_printf ("%lu", gtk_socket_get_id (GTK_SOCKET (wrapper->socket)));
 
   return argv;
+}
+
+
+
+static void
+panel_plugin_external_wrapper_x11_spawn_child_setup (gpointer data)
+{
+  PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (data);
+  GdkDisplay          *display;
+  const gchar         *name;
+
+  /* this is what gdk_spawn_on_screen does */
+  display = gtk_widget_get_display (GTK_WIDGET (external));
+  name = gdk_display_get_name (display);
+  g_setenv ("DISPLAY", name, TRUE);
+}
+
+
+
+static gboolean
+panel_plugin_external_wrapper_x11_spawn (PanelPluginExternal *external,
+                                         gchar **argv,
+                                         GPid *pid,
+                                         GError **error)
+{
+  return g_spawn_async (NULL, argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD,
+                        panel_plugin_external_wrapper_x11_spawn_child_setup,
+                        external, pid, error);
 }
 
 
