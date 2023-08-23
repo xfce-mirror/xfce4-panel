@@ -157,6 +157,7 @@ wrapper_plug_wayland_init (WrapperPlugWayland *plug)
   context = gtk_widget_get_style_context (GTK_WIDGET (plug));
   gtk_style_context_add_class (context, "panel");
   gtk_style_context_add_class (context, "xfce4-panel");
+  gtk_widget_set_name (GTK_WIDGET (plug), "XfcePanelWindowWrapper");
 
   /* make plug background transparent so it appears as the panel background */
   provider = gtk_css_provider_new ();
