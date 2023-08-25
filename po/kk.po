@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the xfce4-panel.master package.
 # 
 # Translators:
-# Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2009,2013-2015,2017-2020,2022
+# Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2009,2013-2015,2017-2020,2022-2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2023-03-14 00:47+0100\n"
+"POT-Creation-Date: 2023-07-17 00:46+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2009,2013-2015,2017-2020,2022\n"
-"Language-Team: Kazakh (http://www.transifex.com/xfce/xfce4-panel/language/kk/)\n"
+"Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2009,2013-2015,2017-2020,2022-2023\n"
+"Language-Team: Kazakh (http://app.transifex.com/xfce/xfce4-panel/language/kk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,21 +28,13 @@ msgid ""
 "file"
 msgstr "Бұл desktop файлының ақпараты негізінде панельге жаңа жөнелткішті қосу"
 
-#: panel-desktop-handler.desktop.in:7
-msgid "application-x-executable"
-msgstr ""
-
-#: panel-preferences.desktop.in:5
-msgid "org.xfce.panel"
-msgstr ""
-
 #: panel-preferences.desktop.in:8
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "панельдер;баптаулар;қалаулар;тапсырмалар панелі;автожасыру;қолданбалар мәзірі;бастау;батырмалар;жөнелткіш;хабарлау аймағы;қалып-күй;таңбашалар;плагиндер;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3574
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3596
 msgid "Panel"
 msgstr "Панель"
 
@@ -90,7 +82,7 @@ msgid "_Properties"
 msgstr "Қас_иеттері"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3650
+#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3672
 msgid "_About"
 msgstr "Осы т_уралы"
 
@@ -104,23 +96,23 @@ msgid "Pane_l"
 msgstr "Пане_ль"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3586
+#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3608
 msgid "Add _New Items..."
 msgstr "Жаңа _элементтерді қосу..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3597
+#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3619
 msgid "Panel Pr_eferences..."
 msgstr "Панель ба_птаулары..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3625
+#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3647
 msgid "Log _Out"
 msgstr "Жүйеден ш_ығу"
 
 #. help item
 #: libxfce4panel/xfce-panel-plugin.c:1341 panel/panel-item-dialog.c:196
-#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3641
+#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3663
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
 #: plugins/clock/clock-dialog.glade:120
@@ -252,42 +244,42 @@ msgstr "Панельді іске қосуды қалайсыз ба? Олай �
 msgid "No running instance of %s was found"
 msgstr "%s үшін қосулы тұрған нұсқалары табылмады"
 
-#: panel/panel-application.c:222
+#: panel/panel-application.c:221
 msgid "Failed to launch the migration application"
 msgstr "Көшу қолданбасын жөнелту сәтсіз аяқталды"
 
-#: panel/panel-application.c:1047
+#: panel/panel-application.c:1048
 msgid "Create _Launcher"
 msgstr "Жө_нелткішті жасау"
 
-#: panel/panel-application.c:1048
+#: panel/panel-application.c:1049
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Бұл панельде жаңа жөнелткіш плагинін жасайды және тасталған файлдарды мәзір элементтері ретінде орнатады."
 
-#: panel/panel-application.c:1050
+#: panel/panel-application.c:1051
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "%d desktop фай(дар)дан жаңа жөнелткішті жасау"
 msgstr[1] "%d desktop фай(дар)дан жаңа жөнелткішті жасау"
 
-#: panel/panel-application.c:1807
+#: panel/panel-application.c:1808
 msgid "Quit"
 msgstr "Шығу"
 
-#: panel/panel-application.c:1808
+#: panel/panel-application.c:1809
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "X серверін сессия басқарушысыз іске қосқансыз. Шығу басылған кезде X сервері өз жұмысын аяқтайды."
 
-#: panel/panel-application.c:1809
+#: panel/panel-application.c:1810
 msgid "Are you sure you want to quit the panel?"
 msgstr "Панельдің жұмысын аяқтауды шынымен қалайсыз ба?"
 
-#: panel/panel-application.c:1817
+#: panel/panel-application.c:1818
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" командасын орындау сәтсіз аяқталды"
@@ -531,14 +523,14 @@ msgstr "Тұтқаларын жасырып, панельді бұғаттау �
 
 #: panel/panel-preferences-dialog.glade:447
 msgid "_Reserve space on screen edges for the panel"
-msgstr ""
+msgstr "Панель үшін экран шеттерінде орынды ал_ып қалу"
 
 #: panel/panel-preferences-dialog.glade:451
 msgid ""
 "Select this option if you don't want maximized windows to cover the area "
 "behind the panel. This only works when the panel is attached to a screen "
 "edge."
-msgstr ""
+msgstr "Жазық етілген терезе панельдің артындағы орынды алмауы керек болса, бұл опцияны таңдаңыз. Бұл әрекет панель экран шетіне тіркеліп тұрса ғана істейді."
 
 #: panel/panel-preferences-dialog.glade:472
 msgid "Au_tomatically hide the panel:"
@@ -710,7 +702,7 @@ msgstr "Орташа"
 msgid "Expert"
 msgstr "Тәжірибелі"
 
-#: panel/panel-window.c:3611
+#: panel/panel-window.c:3633
 msgid "_Lock Panel"
 msgstr "Пане_льді бұғаттау"
 
@@ -939,10 +931,6 @@ msgstr "Кішкентай тышқан"
 msgid "Log out, lock or other system actions"
 msgstr "Шығу, экранды бұғаттау не басқа жүйелік әрекеттер"
 
-#: plugins/actions/actions.desktop.in.in:6
-msgid "org.xfce.panel.actions"
-msgstr ""
-
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:23
 #: plugins/applicationsmenu/applicationsmenu.desktop.in.in:4
 msgid "Applications Menu"
@@ -984,7 +972,7 @@ msgid ""
 msgstr "Мәзірде қолданбалардың негізгі атауын көрсету үшін, мыс. \"Thunar\" орнына \"Файлдар басқарушысы\", бұл опцияны таңдаңыз"
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:229
-#: plugins/clock/clock-dialog.glade:388
+#: plugins/clock/clock-dialog.glade:405
 #: plugins/directorymenu/directorymenu-dialog.glade:150
 #: plugins/separator/separator-dialog.glade:177
 #: plugins/tasklist/tasklist-dialog.glade:257
@@ -1032,8 +1020,8 @@ msgid "_OK"
 msgstr "_ОК"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1018
-#: plugins/launcher/launcher.c:2483
+#: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1040
+#: plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" командасын орындау сәтсіз аяқталды"
@@ -1041,10 +1029,6 @@ msgstr "\"%s\" командасын орындау сәтсіз аяқталды
 #: plugins/applicationsmenu/applicationsmenu.desktop.in.in:5
 msgid "Show a menu containing categories of installed applications"
 msgstr "Құрамында орнатылған қолданбалар санаттары бар мәзірді көрсету"
-
-#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:6
-msgid "org.xfce.panel.applicationsmenu"
-msgstr ""
 
 #: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -1082,15 +1066,15 @@ msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
 
-#: plugins/clock/clock.c:150
+#: plugins/clock/clock.c:153
 msgid "Week %V"
 msgstr "Апта %V"
 
-#: plugins/clock/clock.c:453
+#: plugins/clock/clock.c:474
 msgid "Failed to execute clock command"
 msgstr "Clock командасын орындау сәтсіз аяқталды"
 
-#: plugins/clock/clock.c:957
+#: plugins/clock/clock.c:979
 msgid "Custom Format"
 msgstr "Таңдауыңызша пішім"
 
@@ -1174,12 +1158,16 @@ msgstr "Орнатылған болса, плагин үстінде сол жа
 msgid "Co_mmand:"
 msgstr "Ко_манда:"
 
-#: plugins/clock/clock-dialog.glade:277
+#: plugins/clock/clock-dialog.glade:273
+msgid "_Show week numbers"
+msgstr "Апта нөмірлерін көр_сету"
+
+#: plugins/clock/clock-dialog.glade:294
 msgid "Calendar"
 msgstr "Күнтізбе"
 
-#: plugins/clock/clock-dialog.glade:312 plugins/clock/clock-dialog.glade:652
-#: plugins/clock/clock-dialog.glade:774
+#: plugins/clock/clock-dialog.glade:329 plugins/clock/clock-dialog.glade:669
+#: plugins/clock/clock-dialog.glade:791
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -1187,57 +1175,57 @@ msgid ""
 "page for additional information."
 msgstr "Бұл пішім файл атына қойылатын уақыт пен күнді сипаттайды. Мысалы, %Y ағымдағы жылмен, %m аймен ал %d күнмен алмастырылады. Көбірек білу үшін, date утилитасының құжаттамасын оқыңыз."
 
-#: plugins/clock/clock-dialog.glade:341
+#: plugins/clock/clock-dialog.glade:358
 msgid "_Tooltip format:"
 msgstr "_Хабарлама пішімі:"
 
-#: plugins/clock/clock-dialog.glade:354 plugins/clock/clock-dialog.glade:602
+#: plugins/clock/clock-dialog.glade:371 plugins/clock/clock-dialog.glade:619
 msgid "_Layout:"
 msgstr "_Жайма:"
 
-#: plugins/clock/clock-dialog.glade:418
+#: plugins/clock/clock-dialog.glade:435
 msgid "Sho_w AM/PM"
 msgstr "AM/PM көрс_ету"
 
-#: plugins/clock/clock-dialog.glade:433
+#: plugins/clock/clock-dialog.glade:450
 msgid "Fl_ash time separators"
 msgstr "У_ақыт ажырағыштардың жыпылықтауы"
 
-#: plugins/clock/clock-dialog.glade:448
+#: plugins/clock/clock-dialog.glade:465
 msgid "24-_hour clock"
 msgstr "24-сағ_аттық сағат"
 
-#: plugins/clock/clock-dialog.glade:491
+#: plugins/clock/clock-dialog.glade:508
 msgid "Binary mode:"
 msgstr "Екілік режимі:"
 
-#: plugins/clock/clock-dialog.glade:507
+#: plugins/clock/clock-dialog.glade:524
 msgid "Display _seconds"
 msgstr "_Секундтарды көрсету"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: plugins/clock/clock-dialog.glade:528
+#: plugins/clock/clock-dialog.glade:545
 msgid "F_uzziness:"
 msgstr "Қыз_ықтылығы:"
 
-#: plugins/clock/clock-dialog.glade:562
+#: plugins/clock/clock-dialog.glade:579
 msgid "Show _inactive dots"
 msgstr "Белсен_ді емес нүстелерді көрсету"
 
-#: plugins/clock/clock-dialog.glade:577
+#: plugins/clock/clock-dialog.glade:594
 msgid "Show gri_d"
 msgstr "_Торды көрсету"
 
-#: plugins/clock/clock-dialog.glade:623 plugins/clock/clock-dialog.glade:745
+#: plugins/clock/clock-dialog.glade:640 plugins/clock/clock-dialog.glade:762
 msgid "Font:"
 msgstr "Қаріп:"
 
-#: plugins/clock/clock-dialog.glade:636 plugins/clock/clock-dialog.glade:758
+#: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
 msgid "Format:"
 msgstr "Пішімі:"
 
-#: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
+#: plugins/clock/clock-dialog.glade:670 plugins/clock/clock-dialog.glade:792
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -1245,15 +1233,15 @@ msgid ""
 "the &quot;Help&quot; page for additional information."
 msgstr "Бұл пішім панельге қойылатын уақыт пен күнді сипаттайды. Мысалы, %Y ағымдағы жылмен, %m аймен ал %d күнмен алмастырылады. Соған ұқсас, &lt;b&gt;&lt;/b&gt; тегтері қаріпті жуан қылады. Көбірек білу үшін, &quot;Көмек&quot; бетін оқыңыз."
 
-#: plugins/clock/clock-dialog.glade:682
+#: plugins/clock/clock-dialog.glade:699
 msgid "Date"
 msgstr "Уақыты"
 
-#: plugins/clock/clock-dialog.glade:727
+#: plugins/clock/clock-dialog.glade:744
 msgid "Time"
 msgstr "Уақыт"
 
-#: plugins/clock/clock-dialog.glade:854
+#: plugins/clock/clock-dialog.glade:871
 msgid "Clock Options"
 msgstr "Сағат баптаулары"
 
@@ -1572,10 +1560,6 @@ msgstr "он екі"
 msgid "What time is it?"
 msgstr "Сағат қанша?"
 
-#: plugins/clock/clock.desktop.in.in:6
-msgid "org.xfce.panel.clock"
-msgstr ""
-
 #: plugins/directorymenu/directorymenu.c:289
 #: plugins/directorymenu/directorymenu.desktop.in.in:4
 #: plugins/directorymenu/directorymenu-dialog.glade:18
@@ -1652,10 +1636,6 @@ msgstr "Мәтіндік құжатты жасау..."
 msgid "Show a directory tree in a menu"
 msgstr "Мәзірде бумалар ағашын көрсету"
 
-#: plugins/directorymenu/directorymenu.desktop.in.in:6
-msgid "org.xfce.panel.directorymenu"
-msgstr ""
-
 #: plugins/directorymenu/directorymenu-dialog.glade:99
 msgid "Select A Directory"
 msgstr "Буманы таңдау"
@@ -1713,7 +1693,7 @@ msgstr "Жөнелткіш мәзірін ашу"
 msgid "Unnamed Item"
 msgstr "Атаусыз элемент"
 
-#: plugins/launcher/launcher.c:1789
+#: plugins/launcher/launcher.c:1793
 msgid "No items"
 msgstr "Элементтер жоқ"
 
@@ -1842,10 +1822,6 @@ msgstr "Кеңейтілген"
 msgid "Program launcher with optional menu"
 msgstr "Қосымша мәзірі бар бағдарлама жіберуші"
 
-#: plugins/launcher/launcher.desktop.in.in:6
-msgid "org.xfce.panel.launcher"
-msgstr ""
-
 #: plugins/pager/pager.c:685 plugins/pager/pager-dialog.glade:64
 msgid "Workspace _Settings..."
 msgstr "Жұмыс орын _баптаулары..."
@@ -1895,10 +1871,6 @@ msgstr "<b>Сыртқы түрі</b>"
 msgid "Switch between virtual desktops"
 msgstr "Виртуалды жұмыс үстелдерді ауыстырады"
 
-#: plugins/pager/pager.desktop.in.in:6
-msgid "org.xfce.panel.pager"
-msgstr ""
-
 #: plugins/separator/separator-dialog.glade:23
 msgid "Transparent"
 msgstr "Мөлдір"
@@ -1919,10 +1891,6 @@ msgstr "Жа_ю"
 msgid "Adds a separator or space between panel items"
 msgstr "Панель элементтері арасында орын не ажыратқышты қояды"
 
-#: plugins/separator/separator.desktop.in.in:6
-msgid "org.xfce.panel.separator"
-msgstr ""
-
 #: plugins/showdesktop/showdesktop.c:245
 msgid "Restore the minimized windows"
 msgstr "Жасырын терезелерді қалпына келтіру"
@@ -1939,10 +1907,6 @@ msgstr "Жұмыс үстелін көрсету"
 #: plugins/showdesktop/showdesktop.desktop.in.in:5
 msgid "Hide all windows and show the desktop"
 msgstr "Барлық терезелерді жасырып, жұмыс үстелін көрсету"
-
-#: plugins/showdesktop/showdesktop.desktop.in.in:6
-msgid "org.xfce.panel.showdesktop"
-msgstr ""
 
 #: plugins/systray/sn-dialog.c:645
 msgid "Clear"
@@ -2082,10 +2046,6 @@ msgid ""
 "items"
 msgstr "Қалып-күй хабарлаушы нәрселерін (қолданбалар индикаторларын) және ескірген жүйелік трей нәрселерін ұсынады"
 
-#: plugins/systray/systray.desktop.in.in:7
-msgid "org.xfce.panel.statustray"
-msgstr ""
-
 #: plugins/tasklist/tasklist-dialog.glade:23
 msgid "Nothing"
 msgstr "Ешнәрсе"
@@ -2184,46 +2144,42 @@ msgstr "Барлық м_ониторлар терезелерін көрсету
 msgid "Show only _minimized windows"
 msgstr "Тек қа_йырылған терезелерді көрсету"
 
-#: plugins/tasklist/tasklist-widget.c:3109
+#: plugins/tasklist/tasklist-widget.c:3121
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "\"%s\" жаңа данасын іске қосу мүмкін емес"
 
-#: plugins/tasklist/tasklist-widget.c:3113
+#: plugins/tasklist/tasklist-widget.c:3125
 msgid "Error"
 msgstr "Қате"
 
-#: plugins/tasklist/tasklist-widget.c:3142
+#: plugins/tasklist/tasklist-widget.c:3154
 msgid "Launch New Instance"
 msgstr "Жаңа данасын жөнелту"
 
-#: plugins/tasklist/tasklist-widget.c:3887
+#: plugins/tasklist/tasklist-widget.c:3899
 msgid "Mi_nimize All"
 msgstr "Барл_ығын қайыру"
 
-#: plugins/tasklist/tasklist-widget.c:3894
+#: plugins/tasklist/tasklist-widget.c:3906
 msgid "Un_minimize All"
 msgstr "Барлығы_н қайырудан қайтару"
 
-#: plugins/tasklist/tasklist-widget.c:3901
+#: plugins/tasklist/tasklist-widget.c:3913
 msgid "Ma_ximize All"
 msgstr "Бар_лығын жазық қылу"
 
-#: plugins/tasklist/tasklist-widget.c:3908
+#: plugins/tasklist/tasklist-widget.c:3920
 msgid "_Unmaximize All"
 msgstr "Барлығын _жазық емес қылу"
 
-#: plugins/tasklist/tasklist-widget.c:3919
+#: plugins/tasklist/tasklist-widget.c:3931
 msgid "_Close All"
 msgstr "Ба_рлығын жабу"
 
 #: plugins/tasklist/tasklist.desktop.in.in:5
 msgid "Switch between open windows using buttons"
 msgstr "Ашық терезелер арасында батырмалар арқылы ауысу"
-
-#: plugins/tasklist/tasklist.desktop.in.in:6
-msgid "org.xfce.panel.tasklist"
-msgstr ""
 
 #: plugins/windowmenu/windowmenu.c:689
 msgid "Desktop"
@@ -2283,7 +2239,3 @@ msgstr "Шұғыл _хабарлауды іске қосу"
 #: plugins/windowmenu/windowmenu.desktop.in.in:5
 msgid "Switch between open windows using a menu"
 msgstr "Ашық терезелер арасында мәзір арқылы ауысу"
-
-#: plugins/windowmenu/windowmenu.desktop.in.in:6
-msgid "org.xfce.panel.windowmenu"
-msgstr ""
