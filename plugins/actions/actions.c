@@ -1415,7 +1415,7 @@ actions_plugin_default_array (void)
       "+logout"
     };
 
-  array = g_ptr_array_sized_new (G_N_ELEMENTS (defaults));
+  array = g_ptr_array_new_full (G_N_ELEMENTS (defaults), actions_plugin_free_array_element);
   for (i = 0; i < G_N_ELEMENTS (defaults); i++)
     {
       val = g_new0 (GValue, 1);
