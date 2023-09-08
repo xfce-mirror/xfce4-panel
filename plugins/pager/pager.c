@@ -509,14 +509,14 @@ pager_plugin_set_ratio (PagerPlugin *plugin)
       return;
     }
 
+  plugin->ratio = (gfloat) panel_screen_get_width (screen)
+                  / (gfloat) panel_screen_get_height (screen);
   if (xfw_workspace_get_state (workspace) & XFW_WORKSPACE_STATE_VIRTUAL)
     {
       GdkRectangle *rect = xfw_workspace_get_geometry (workspace);
-      plugin->ratio = (gfloat) rect->width / (gfloat) rect->height;
+      gint scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (plugin));
+      plugin->ratio *= rect->width / (panel_screen_get_width (screen) * scale_factor);
     }
-  else
-    plugin->ratio = (gfloat) panel_screen_get_width (screen)
-                    / (gfloat) panel_screen_get_height (screen);
 }
 #endif
 
