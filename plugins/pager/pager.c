@@ -821,7 +821,7 @@ pager_plugin_configure_n_workspaces_changed (XfwWorkspaceGroup *group,
         {
           /* number of rows * number of columns */
           dialog = GTK_WIDGET (gtk_builder_get_object (builder, "dialog"));
-          scale_factor = gdk_window_get_scale_factor (gtk_widget_get_window (dialog));
+          scale_factor = gtk_widget_get_scale_factor (dialog);
           rect = xfw_workspace_get_geometry (active_ws);
           upper = rect->width / (panel_screen_get_width (screen) * scale_factor)
                   * rect->height / (panel_screen_get_height (screen) * scale_factor);
