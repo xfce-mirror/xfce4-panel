@@ -512,12 +512,10 @@ pager_plugin_set_ratio (PagerPlugin *plugin)
       return;
     }
 
+  plugin->ratio = (gfloat) wnck_screen_get_width (plugin->wnck_screen)
+                  / (gfloat) wnck_screen_get_height (plugin->wnck_screen);
   if (wnck_workspace_is_virtual (workspace))
-    plugin->ratio = (gfloat) wnck_workspace_get_width (workspace)
-                    / (gfloat) wnck_workspace_get_height (workspace);
-  else
-    plugin->ratio = (gfloat) wnck_screen_get_width (plugin->wnck_screen)
-                    / (gfloat) wnck_screen_get_height (plugin->wnck_screen);
+    plugin->ratio *= wnck_workspace_get_width (workspace) / wnck_screen_get_width (plugin->wnck_screen);
 }
 
 
