@@ -82,7 +82,7 @@ static void     pager_plugin_configure_workspace_settings (GtkWidget         *bu
 static void     pager_plugin_configure_plugin             (XfcePanelPlugin   *panel_plugin);
 static gpointer pager_plugin_get_master_plugin            (PagerPlugin       *plugin);
 static void     pager_plugin_screen_layout_changed        (PagerPlugin       *plugin,
-                                                           GdkScreen         *screen);
+                                                           gpointer           screen);
 static void     pager_plugin_get_preferred_width          (GtkWidget           *widget,
                                                            gint                *minimum_width,
                                                            gint                *natural_width);
@@ -560,7 +560,7 @@ pager_plugin_screen_layout_changed_idle (gpointer data)
 
 static void
 pager_plugin_screen_layout_changed (PagerPlugin *plugin,
-                                    GdkScreen *screen)
+                                    gpointer screen)
 {
   XfcePanelPluginMode mode;
   GtkOrientation      orientation;
@@ -660,6 +660,8 @@ pager_plugin_screen_changed (GtkWidget *widget,
       g_signal_connect_object (G_OBJECT (screen), "monitors-changed",
          G_CALLBACK (pager_plugin_screen_layout_changed), plugin, G_CONNECT_SWAPPED);
       g_signal_connect_object (G_OBJECT (screen), "size-changed",
+         G_CALLBACK (pager_plugin_screen_layout_changed), plugin, G_CONNECT_SWAPPED);
+      g_signal_connect_object (G_OBJECT (xfw_screen), "window-manager-changed",
          G_CALLBACK (pager_plugin_screen_layout_changed), plugin, G_CONNECT_SWAPPED);
     }
   else
