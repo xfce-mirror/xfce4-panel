@@ -663,6 +663,8 @@ pager_plugin_screen_changed (GtkWidget *widget,
          G_CALLBACK (pager_plugin_screen_layout_changed), plugin, G_CONNECT_SWAPPED);
       g_signal_connect_object (G_OBJECT (xfw_screen), "window-manager-changed",
          G_CALLBACK (pager_plugin_screen_layout_changed), plugin, G_CONNECT_SWAPPED);
+      g_signal_connect_object (G_OBJECT (plugin->workspace_group), "viewports-changed",
+         G_CALLBACK (pager_plugin_screen_layout_changed), plugin, G_CONNECT_SWAPPED);
     }
   else
     g_object_unref (xfw_screen);
