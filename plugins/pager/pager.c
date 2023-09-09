@@ -773,31 +773,16 @@ pager_plugin_configure_n_workspaces_changed (WnckScreen    *wnck_screen,
                                              WnckWorkspace *workspace,
                                              GtkBuilder    *builder)
 {
-  GObject       *object;
-  gdouble        upper, value;
-  WnckWorkspace *active_ws;
+  GObject *object;
+  gdouble upper, value;
 
   panel_return_if_fail (WNCK_IS_SCREEN (wnck_screen));
   panel_return_if_fail (GTK_IS_BUILDER (builder));
 
   object = gtk_builder_get_object (builder, "rows");
-
   upper = wnck_screen_get_workspace_count (wnck_screen);
-  if (upper == 1)
-    {
-      /* check if we ware in viewport mode */
-      active_ws = wnck_screen_get_active_workspace (wnck_screen);
-      if (wnck_workspace_is_virtual (active_ws))
-        {
-          /* number of rows * number of columns */
-          upper = (wnck_workspace_get_width (active_ws) / wnck_screen_get_width (wnck_screen))
-                  * (wnck_workspace_get_height (active_ws) / wnck_screen_get_height (wnck_screen));
-        }
-    }
-
   value = MIN (gtk_adjustment_get_value (GTK_ADJUSTMENT (object)), upper);
-
-  g_object_set (G_OBJECT (object), "upper", upper, "value", value, NULL);
+  g_object_set (object, "upper", upper, "value", value, NULL);
 }
 
 
