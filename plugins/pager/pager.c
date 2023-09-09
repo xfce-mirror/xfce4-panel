@@ -801,38 +801,16 @@ pager_plugin_configure_n_workspaces_changed (XfwWorkspaceGroup *group,
                                              XfwWorkspace *workspace,
                                              GtkBuilder *builder)
 {
-  GObject       *object;
-  gdouble        upper, value;
-  XfwWorkspace  *active_ws;
-  guint          scale_factor;
-  GtkWidget     *dialog;
-  GdkRectangle  *rect;
-  GdkScreen     *screen = gdk_screen_get_default ();
+  GObject *object;
+  gdouble upper, value;
 
   panel_return_if_fail (XFW_IS_WORKSPACE_GROUP (group));
   panel_return_if_fail (GTK_IS_BUILDER (builder));
 
   object = gtk_builder_get_object (builder, "rows");
-
   upper = xfw_workspace_group_get_workspace_count (group);
-  if (upper == 1)
-    {
-      /* check if we ware in viewport mode */
-      active_ws = xfw_workspace_group_get_active_workspace (group);
-      if (xfw_workspace_get_state (active_ws) & XFW_WORKSPACE_STATE_VIRTUAL)
-        {
-          /* number of rows * number of columns */
-          dialog = GTK_WIDGET (gtk_builder_get_object (builder, "dialog"));
-          scale_factor = gtk_widget_get_scale_factor (dialog);
-          rect = xfw_workspace_get_geometry (active_ws);
-          upper = rect->width / (panel_screen_get_width (screen) * scale_factor)
-                  * rect->height / (panel_screen_get_height (screen) * scale_factor);
-        }
-    }
-
   value = MIN (gtk_adjustment_get_value (GTK_ADJUSTMENT (object)), upper);
-
-  g_object_set (G_OBJECT (object), "upper", upper, "value", value, NULL);
+  g_object_set (object, "upper", upper, "value", value, NULL);
 }
 
 
