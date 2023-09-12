@@ -403,7 +403,7 @@ msgstr "Pluginet \"%s\" forlod uventet panelet. Vil du genstarte det?"
 
 #: ../panel/panel-plugin-external.c:519
 msgid "Plugin Restart"
-msgstr ""
+msgstr "Genstart af plugin"
 
 #: ../panel/panel-plugin-external.c:520
 #, c-format
@@ -561,7 +561,7 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "_Reserve space on screen edges for the panel"
-msgstr ""
+msgstr "_Reservér plads på skærmens kanter til panelet"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
@@ -569,6 +569,8 @@ msgid ""
 "behind the panel. This only works when the panel is attached to a screen "
 "edge."
 msgstr ""
+"Vælg dette tilvalg hvis du vil maksimerede vinduer til at dække arealet bag "
+"panelet. Dette fungerer kun, når panelet er tilsluttet til et skærmhjørne."
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
@@ -1127,11 +1129,11 @@ msgstr "Tilpasset format"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
 msgid "Decimal"
-msgstr ""
+msgstr "Decimal"
 
 #: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Sexagesimal"
-msgstr ""
+msgstr "Seksagesimal"
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Binary time"
@@ -1203,6 +1205,8 @@ msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
 msgstr ""
+"Hvis indstillet, så køres kommandoen når pluginet venstreklikkes, i stedet "
+"for at vise standardkalenderen."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Co_mmand:"
@@ -1283,6 +1287,10 @@ msgid ""
 " the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
 "the &quot;Help&quot; page for additional information."
 msgstr ""
+"Formatet beskriver dele af dato og klokkeslæt som skal indsættes i panelet. "
+"Eksempelvis vil %Y blive erstattet med året, %m med måneden og %d med dagen."
+" Tilsvarende vil &lt;b&gt;&lt;/b&gt;-mærker give fed skrift. Læs siden "
+"&quot;Hjælp&quot; for yderligere information."
 
 #: ../plugins/clock/clock-dialog.glade.h:41
 msgid "Date"
@@ -1923,7 +1931,7 @@ msgstr "Skift arbejdsområde med musehjulet"
 
 #: ../plugins/pager/pager-dialog.glade.h:10
 msgid "Wrap around workspaces"
-msgstr ""
+msgstr "Start forfra når sidste arbejdsområde er nået"
 
 #: ../plugins/pager/pager-dialog.glade.h:11
 msgid "<b>Appearance</b>"
