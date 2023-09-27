@@ -1,3 +1,29 @@
+4.18.5 (2023-09-27)
+======
+- pager: Do not adapt upper value of spin button in viewport mode
+- pager: Update workspace layout also on window manager change
+- pager: Fix aspect ratio for viewport (V2)
+- actions: Fix memory leak
+- pager: Delay GdkScreen signal handlers
+- panel: Do not scale background image when UI scale > 1
+- popup-command: Do not block autohide when popped up at pointer
+- Fix memory leaks when using gtk_css_provider_new()
+- panel: Clear item list before repopulating item dialog
+- panel: Remove autosave timer for plugins
+- wrapper: Really ensure we don't call gtk_main_quit() twice
+- panel: Block autohide when the panel has input focus
+- clock: Fix sync timeout for seconds display
+- clock: Implement ConsoleKit sleep monitor
+- Add/Sharpen icons at 48-128px
+- Adjust 32px icon margins, new separator icon
+- Sharpen icons at 16px and 32px
+- Increase margins for 24px icons
+- Make 24px icons sharper
+- icons: Fix wrong exported sizes
+- Translation Updates:
+  Basque, Catalan, Danish, Estonian, French, Italian, Kazakh, Polish,
+  Russian, Slovenian, Spanish
+
 4.18.4 (2023-05-22)
 ======
 - icons: Scale at size 16x16 to 128x128 (Fixes #385)
