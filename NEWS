@@ -1,3 +1,53 @@
+4.19.2 (2023-09-27)
+======
+- pager: Do not adapt upper value of spin button in viewport mode
+- pager: Update workspace layout also on viewports change
+- pager: Get scale factor from widget
+- pager: Update workspace layout also on window manager change
+- pager: Fix aspect ratio for viewport (V2)
+- actions: Fix memory leak
+- wayland: wrapper: Set widget name for theming
+- panel: Spawn wrapper process according to windowing environment
+- pager: Delay GdkScreen signal handlers
+- x11: Remove useless sanity check
+- panel: Change panel border only if opposite border is set
+- x11: Adjust background image of external plugins to that of the panel
+- panel: Do not scale background image when UI scale > 1
+- wayland: Reset socket geometry when child is respawned
+- popup-command: Do not block autohide when popped up at pointer
+- Fix memory leaks when using gtk_css_provider_new()
+- panel: Clear item list before repopulating item dialog
+- panel: Remove autosave timer for plugins
+- Add option to toggle week numbers (fixes #686)
+- wrapper: Really ensure we don't call gtk_main_quit() twice
+- panel: Block autohide when the panel has input focus
+- clock: Fix sync timeout for seconds display
+- clock: Implement ConsoleKit sleep monitor
+- Add/Sharpen icons at 48-128px
+- Adjust 32px icon margins, new separator icon
+- Sharpen icons at 16px and 32px
+- Increase margins for 24px icons
+- Make 24px icons sharper
+- icons: Fix wrong exported sizes
+- icons: Scale at size 16x16 to 128x128 (Fixes #385)
+- icons: Fix centering of org.xfce.panel
+- icons: Rename org.xfce.panel.statustray to org.xfce.panel.systray
+- I18n: Update po/LINGUAS list
+- I18n: Update po/LINGUAS list
+- I18n: Update po/LINGUAS list
+- Fix memory leaks around gtk_get_current_event()
+- Revert "cleanup: panel: Keep consistent type names in G_DEFINE_TYPE"
+- tasklist: Fix use-after-free on tasklist child
+- build: Fix for Wayland backend disabled (Fixes #729)
+- systray: Update icon also on status change
+- Translation Updates:
+  Albanian, Basque, Bulgarian, Catalan, Chinese (China), Chinese
+  (Taiwan), Croatian, Danish, Dutch, English (United Kingdom),
+  Estonian, French, German, Greek, Hebrew, Indonesian, Italian,
+  Japanese, Kazakh, Korean, Lithuanian, Norwegian Bokmål, Occitan
+  (post 1500), Polish, Portuguese, Portuguese (Brazil), Russian,
+  Serbian, Slovenian, Spanish, Swedish, Turkish, Ukrainian
+
 4.19.1 (2023-03-28)
 ======
 - launcher: Show action menu also when there are several items
