@@ -3444,7 +3444,8 @@ panel_window_active_window_monitors_idle (gpointer data)
 {
   PanelWindow *window = data;
 
-  panel_window_active_window_monitors (window->xfw_active_window, NULL, window);
+  if (window->xfw_active_window != NULL)
+    panel_window_active_window_monitors (window->xfw_active_window, NULL, window);
 
   return FALSE;
 }
