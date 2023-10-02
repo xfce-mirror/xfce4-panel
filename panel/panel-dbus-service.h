@@ -22,6 +22,8 @@
 #include <glib.h>
 #include <panel/panel-gdbus-exported-service.h>
 
+G_BEGIN_DECLS
+
 #define PANEL_TYPE_DBUS_SERVICE (panel_dbus_service_get_type ())
 G_DECLARE_FINAL_TYPE (PanelDBusService, panel_dbus_service, PANEL, DBUS_SERVICE, XfcePanelExportedServiceSkeleton)
 
