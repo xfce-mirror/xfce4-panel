@@ -22,6 +22,8 @@
 #include <glib.h>
 #include <common/panel-dbus.h>
 
+G_BEGIN_DECLS
+
 typedef struct _PanelDBusServiceClass PanelDBusServiceClass;
 typedef struct _PanelDBusService      PanelDBusService;
 
