@@ -49,7 +49,7 @@
 
 
 static gint retval = PLUGIN_EXIT_FAILURE;
-#ifndef HAVE_GTK_X11
+#ifndef ENABLE_X11
 typedef gulong Window;
 #endif
 
