@@ -35,7 +35,7 @@
 #define gtk_layer_is_supported() FALSE
 #endif
 
-#ifdef HAVE_LIBX11
+#ifdef ENABLE_X11
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #endif
@@ -126,7 +126,7 @@ struct _PanelApplication
   /* autohide count at application level */
   gint                autohide_block;
 
-#ifdef HAVE_LIBX11
+#ifdef ENABLE_X11
   guint               wait_for_wm_timeout_id;
 #endif
 
@@ -137,7 +137,7 @@ struct _PanelApplication
   guint               drop_index;
 };
 
-#ifdef HAVE_LIBX11
+#ifdef ENABLE_X11
 typedef struct
 {
   PanelApplication *application;
@@ -227,7 +227,7 @@ panel_application_init (PanelApplication *application)
   /* get a factory reference so it never unloads */
   application->factory = panel_module_factory_get ();
 
-#ifdef GDK_WINDOWING_WAYLAND
+#ifdef ENABLE_WAYLAND
   /* warn the user about restricted features on Wayland */
   if (GDK_IS_WAYLAND_DISPLAY (gdk_display_get_default ()))
     {
@@ -269,7 +269,7 @@ panel_application_finalize (GObject *object)
 
   panel_return_if_fail (application->dialogs == NULL);
 
-#ifdef HAVE_LIBX11
+#ifdef ENABLE_X11
   /* stop autostart timeout */
   if (application->wait_for_wm_timeout_id != 0)
     g_source_remove (application->wait_for_wm_timeout_id);
@@ -485,7 +485,7 @@ panel_application_load_real (PanelApplication *application)
 
 
 
-#ifdef HAVE_LIBX11
+#ifdef ENABLE_X11
 static gboolean
 panel_application_wait_for_window_manager (gpointer data)
 {
@@ -1227,7 +1227,7 @@ gboolean
 panel_application_load (PanelApplication  *application,
                         gboolean           disable_wm_check)
 {
-#ifdef HAVE_LIBX11
+#ifdef ENABLE_X11
   Display    *display;
   WaitForWM  *wfwm;
   guint       i;

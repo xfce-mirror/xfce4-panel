@@ -38,7 +38,7 @@
 #include "launcher-dialog.h"
 #include "launcher-dialog_ui.h"
 
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11
 #define LAUNCHER_WIDGET_XID(widget) ((guint) GDK_WINDOW_XID (gdk_screen_get_root_window (gtk_widget_get_screen (GTK_WIDGET (widget)))))
 #else
 #define LAUNCHER_WIDGET_XID(widget) (0)

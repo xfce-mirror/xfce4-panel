@@ -148,10 +148,29 @@ XDT_CHECK_PACKAGE([LIBXFCE4WINDOWINGUI], [libxfce4windowingui-0], [libxfce4windo
 dnl **********************************************
 dnl *** Optional X11/Wayland-specific packages ***
 dnl **********************************************
-XDT_CHECK_OPTIONAL_PACKAGE([LIBX11], [x11], [libx11_minimum_version], [libx11], [Libx11 support])
-XDT_CHECK_OPTIONAL_PACKAGE([GTK_X11], [gtk+-x11-3.0], [gtk_minimum_version], [gtk-x11], [GTK X11 support])
-XDT_CHECK_OPTIONAL_PACKAGE([LIBWNCK], [libwnck-3.0], [libwnck_minimum_version], [libwnck], [Libwnck support])
-XDT_CHECK_OPTIONAL_PACKAGE([WAYLAND_CLIENT], [wayland-client], [wayland_client_minimum_version], [wayland-client], [Wayland client support])
+XDT_CHECK_OPTIONAL_FEATURE([X11],
+                           [x11],
+                           [
+                             XDT_FEATURE_DEPENDENCY([LIBX11], [x11], [libx11_minimum_version])
+                             XDT_FEATURE_DEPENDENCY([GDK_X11], [gdk-x11-3.0], [gtk_minimum_version])
+                             XDT_FEATURE_DEPENDENCY([GTK_X11], [gtk+-x11-3.0], [gtk_minimum_version])
+                             XDT_FEATURE_DEPENDENCY([LIBWNCK], [libwnck-3.0], [libwnck_minimum_version])
+                           ],
+                           [the X11 windowing system])
+XDT_CHECK_OPTIONAL_FEATURE([WAYLAND],
+                           [wayland],
+                           [
+                             XDT_FEATURE_DEPENDENCY([GDK_WAYLAND], [gdk-wayland-3.0], [gtk_minimum_version])
+                             XDT_FEATURE_DEPENDENCY([WAYLAND_CLIENT], [wayland-client], [wayland_client_minimum_version])
+                           ],
+                           [the Wayland windowing system])
+if test x"$ENABLE_X11" != x"yes" -a x"$ENABLE_WAYLAND" != x"yes"; then
+  AC_MSG_ERROR([Either both X11 and Wayland support was disabled, or required dependencies are missing. One of the two must be enabled.])
+fi
+if test x"$ENABLE_WAYLAND" != x"yes"; then
+  dnl Do not check for optional Wayland packages if Wayland is disabled
+  enable_gtk_layer_shell=no
+fi
 XDT_CHECK_OPTIONAL_PACKAGE([GTK_LAYER_SHELL], [gtk-layer-shell-0], [gtk_layer_shell_minimum_version], [gtk-layer-shell], [GTK Layer Shell support])
 
 dnl *********************************************
@@ -293,8 +312,9 @@ echo "* GNU Visibility support:        $have_gnuc_visibility"
 echo "* GObject Introspection support: $enable_introspection"
 echo "* Documentation support:         $enable_gtk_doc"
 echo "* D-Bus menu support:            ${DBUSMENU_FOUND:-no}"
-echo "* Libx11 support:                ${LIBX11_FOUND:-no}"
-echo "* GTK X11 support:               ${GTK_X11_FOUND:-no}"
-echo "* Libwnck support:               ${LIBWNCK_FOUND:-no}"
-echo "* GTK Layer Shell support:       ${GTK_LAYER_SHELL_FOUND:-no}"
+echo "* X11 support:                   ${ENABLE_X11:-no}"
+echo "* Wayland support:               ${ENABLE_WAYLAND:-no}"
+if test x"$ENABLE_WAYLAND" = x"yes"; then
+echo "  * GTK Layer Shell support:     ${GTK_LAYER_SHELL_FOUND:-no}"
+fi
 echo

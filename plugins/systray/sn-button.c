@@ -121,7 +121,7 @@ sn_button_init (SnButton *button)
   g_object_unref (css_provider);
 
   event_mask |= GDK_SMOOTH_SCROLL_MASK;
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11
   /* see https://gitlab.xfce.org/xfce/xfwm4/-/issues/641 */
   if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
     {

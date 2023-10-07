@@ -43,7 +43,7 @@ EXTRA_DIST = \
 DISTCLEANFILES = \
 	$(desktop_DATA)
 
-DISTCHECK_CONFIGURE_FLAGS = \
+AM_DISTCHECK_CONFIGURE_FLAGS = \
 	--enable-gtk-doc \
 	--enable-introspection \
 	--enable-vala=no

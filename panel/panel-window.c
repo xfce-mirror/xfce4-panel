@@ -27,7 +27,7 @@
 #include <string.h>
 #endif
 
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #endif
@@ -1882,7 +1882,7 @@ panel_window_filter (GdkXEvent *xev,
                      GdkEvent  *gev,
                      gpointer   data)
 {
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11
   PanelWindow    *window = data;
   GdkEventButton *event = (GdkEventButton *) gev;
   XEvent         *xevent = (XEvent *) xev;
@@ -2109,7 +2109,7 @@ panel_window_screen_struts_set (PanelWindow *window)
   if (!update_struts)
     return;
 
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11
   /* don't crash on x errors */
   gdk_x11_display_error_trap_push (window->display);
 
@@ -2775,7 +2775,7 @@ panel_window_active_window_geometry_changed (XfwWindow   *active_window,
 
       if (xfw_window_get_window_type (active_window) != XFW_WINDOW_TYPE_DESKTOP)
         {
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11
           GdkWindow *gdkwindow;
           GtkBorder extents;
           gboolean  geometry_fixed = FALSE;
@@ -4078,7 +4078,7 @@ panel_window_get_locked (PanelWindow *window)
 static void
 panel_window_focus_x11 (PanelWindow *window)
 {
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11
   XClientMessageEvent event;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
