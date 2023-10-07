@@ -54,7 +54,7 @@ xfce4_panel_SOURCES = \
 	panel-window.c \
 	panel-window.h
 
-if HAVE_GTK_X11
+if ENABLE_X11
 xfce4_panel_SOURCES += \
 	panel-plugin-external-wrapper-x11.c \
 	panel-plugin-external-wrapper-x11.h

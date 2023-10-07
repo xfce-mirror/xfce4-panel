@@ -232,7 +232,7 @@ panel_utils_destroy_later (GtkWidget *widget)
 void
 panel_utils_wl_surface_commit (GtkWidget *widget)
 {
-#ifdef HAVE_WAYLAND_CLIENT
+#ifdef ENABLE_WAYLAND
   GdkWindow *window = gtk_widget_get_window (widget);
   if (window != NULL)
     {

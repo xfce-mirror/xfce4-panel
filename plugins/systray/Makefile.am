@@ -38,7 +38,7 @@ libsystray_la_SOURCES = \
 	sn-util.c \
 	sn-util.h
 
-if HAVE_GTK_X11
+if ENABLE_X11
 libsystray_la_SOURCES += \
 	systray.c \
 	systray.h \

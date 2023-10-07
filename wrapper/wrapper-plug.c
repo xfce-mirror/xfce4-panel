@@ -20,7 +20,7 @@
 #include <config.h>
 #endif
 
-#ifdef HAVE_GTK_X11
+#ifdef ENABLE_X11
 #include <wrapper/wrapper-plug-x11.h>
 #endif
 #ifdef HAVE_GTK_LAYER_SHELL
@@ -53,7 +53,7 @@ wrapper_plug_new (gulong socket_id,
   panel_return_val_if_fail (G_IS_DBUS_PROXY (proxy), NULL);
   panel_return_val_if_fail (error != NULL && *error == NULL, NULL);
 
-#ifdef HAVE_GTK_X11
+#ifdef ENABLE_X11
   if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
     return wrapper_plug_x11_new (socket_id, proxy);
 #endif
