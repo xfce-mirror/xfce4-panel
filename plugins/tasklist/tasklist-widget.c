@@ -35,7 +35,7 @@
 #include <common/panel-debug.h>
 #include <common/panel-utils.h>
 
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11
 #include <X11/Xlib.h>
 #include <X11/extensions/shape.h>
 #endif
@@ -212,7 +212,7 @@ struct _XfceTasklist
   guint                 show_handle : 1;
   guint                 show_tooltips : 1;
 
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11
   /* wireframe window */
   Window                wireframe_window;
 #endif
@@ -349,7 +349,7 @@ static gboolean           xfce_tasklist_update_icon_geometries           (gpoint
 static void               xfce_tasklist_update_icon_geometries_destroyed (gpointer              data);
 
 /* wireframe */
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11
 static void               xfce_tasklist_wireframe_hide                   (XfceTasklist         *tasklist);
 static void               xfce_tasklist_wireframe_destroy                (XfceTasklist         *tasklist);
 static void               xfce_tasklist_wireframe_update                 (XfceTasklist         *tasklist,
@@ -632,7 +632,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->all_blinking = TRUE;
   tasklist->middle_click = XFCE_TASKLIST_MIDDLE_CLICK_DEFAULT;
   tasklist->label_decorations = FALSE;
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11
   tasklist->wireframe_window = 0;
 #endif
   tasklist->update_icon_geometries_id = 0;
@@ -857,7 +857,7 @@ xfce_tasklist_finalize (GObject *object)
   /* free the app hash table */
   g_hash_table_destroy (tasklist->apps);
 
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11
   /* destroy the wireframe window */
   xfce_tasklist_wireframe_destroy (tasklist);
 #endif
@@ -1569,7 +1569,7 @@ xfce_tasklist_arrow_button_menu_destroy (GtkWidget    *menu,
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (tasklist->arrow_button), FALSE);
 
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11
   /* make sure the wireframe is hidden */
   xfce_tasklist_wireframe_hide (tasklist);
 #endif
@@ -1964,7 +1964,7 @@ xfce_tasklist_window_removed (XfwScreen    *screen,
           n = g_signal_handlers_disconnect_matched (G_OBJECT (window),
               G_SIGNAL_MATCH_DATA, 0, 0, NULL, NULL, child);
 
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11
           /* hide the wireframe */
           if (G_UNLIKELY (n > 5 && tasklist->show_wireframes))
             {
@@ -2374,7 +2374,7 @@ xfce_tasklist_child_new (XfceTasklist *tasklist)
 /**
  * Wire Frame
  **/
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11
 static void
 xfce_tasklist_wireframe_hide (XfceTasklist *tasklist)
 {
@@ -3008,7 +3008,7 @@ xfce_tasklist_button_geometry_changed2 (XfwWindow         *window,
 
 
 
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11
 static void
 xfce_tasklist_button_geometry_changed (XfwWindow         *window,
                                        XfceTasklistChild *child)
@@ -3054,7 +3054,7 @@ xfce_tasklist_button_enter_notify_event (GtkWidget         *button,
   panel_return_val_if_fail (GTK_IS_WIDGET (button), FALSE);
   panel_return_val_if_fail (XFW_IS_WINDOW (child->window), FALSE);
 
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11
   /* leave when there is nothing to do */
   if (!child->tasklist->show_wireframes)
     return FALSE;
@@ -3298,7 +3298,7 @@ xfce_tasklist_button_enter_notify_event_disconnected (gpointer  data,
 
   panel_return_if_fail (XFW_IS_WINDOW (child->window));
 
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11
   /* we need to detach the geometry watch because that is connected
    * to the window we proxy and thus not disconnected when the
    * proxy dies */
@@ -3963,7 +3963,7 @@ xfce_tasklist_group_button_menu_destroy (GtkWidget         *menu,
   if (lp == NULL)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (group_child->button), FALSE);
 
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11
   /* make sure the wireframe is hidden */
   xfce_tasklist_wireframe_hide (group_child->tasklist);
 #endif
@@ -4721,7 +4721,7 @@ xfce_tasklist_set_show_wireframes (XfceTasklist *tasklist,
 
   tasklist->show_wireframes = !!show_wireframes;
 
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11
   /* destroy the window if needed */
   xfce_tasklist_wireframe_destroy (tasklist);
 #endif

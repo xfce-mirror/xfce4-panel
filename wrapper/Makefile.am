@@ -22,7 +22,7 @@ wrapper_2_0_SOURCES = \
 	wrapper-plug.c \
 	wrapper-plug.h
 
-if HAVE_GTK_X11
+if ENABLE_X11
 wrapper_2_0_SOURCES += \
 	wrapper-plug-x11.c \
 	wrapper-plug-x11.h

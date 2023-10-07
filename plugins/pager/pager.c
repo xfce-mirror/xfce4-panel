@@ -27,7 +27,7 @@
 
 #include <gtk/gtk.h>
 #include <libxfce4windowing/libxfce4windowing.h>
-#ifdef HAVE_LIBWNCK
+#ifdef ENABLE_X11
 #include <libwnck/libwnck.h>
 #define pager_plugin_miniature_view_is_supported() GDK_IS_X11_DISPLAY (gdk_display_get_default ())
 #else
@@ -60,7 +60,7 @@ static void     pager_plugin_set_property                 (GObject           *ob
                                                            GParamSpec        *pspec);
 static gboolean pager_plugin_scroll_event                 (GtkWidget         *widget,
                                                            GdkEventScroll    *event);
-#ifdef HAVE_LIBWNCK
+#ifdef ENABLE_X11
 static void     pager_plugin_drag_begin_event             (GtkWidget         *widget,
                                                            GdkDragContext    *context,
                                                            gpointer           user_data);
@@ -108,7 +108,7 @@ struct _PagerPlugin
 
   XfwScreen     *xfw_screen;
   XfwWorkspaceGroup *workspace_group;
-#ifdef HAVE_LIBWNCK
+#ifdef ENABLE_X11
 #if WNCK_CHECK_VERSION (43, 0, 0)
   WnckHandle    *wnck_handle;
 #endif
@@ -222,7 +222,7 @@ pager_plugin_init (PagerPlugin *plugin)
   plugin->pager = NULL;
   plugin->sync_idle_id = 0;
   plugin->sync_wait = TRUE;
-#ifdef HAVE_LIBWNCK
+#ifdef ENABLE_X11
 #if WNCK_CHECK_VERSION (43, 0, 0)
   plugin->wnck_handle = wnck_handle_new (WNCK_CLIENT_TYPE_PAGER);
 #endif
@@ -317,7 +317,7 @@ pager_plugin_set_property (GObject      *object,
         {
           /* set n_rows for master plugin and consequently workspace layout:
            * this is delayed in both cases */
-#ifdef HAVE_LIBWNCK
+#ifdef ENABLE_X11
           if (plugin->miniature_view)
             wnck_pager_set_n_rows (WNCK_PAGER (plugin->pager), plugin->rows);
           else
@@ -464,7 +464,7 @@ pager_plugin_scroll_event (GtkWidget      *widget,
 
 
 
-#ifdef HAVE_LIBWNCK
+#ifdef ENABLE_X11
 static void
 pager_plugin_drag_begin_event (GtkWidget      *widget,
                                GdkDragContext *context,
@@ -586,7 +586,7 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin,
     (mode != XFCE_PANEL_PLUGIN_MODE_VERTICAL) ?
     GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL;
 
-#ifdef HAVE_LIBWNCK
+#ifdef ENABLE_X11
   if (plugin->miniature_view)
     {
       pager_plugin_set_ratio (plugin);
@@ -718,7 +718,7 @@ pager_plugin_free_data (XfcePanelPlugin *panel_plugin)
   g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
       pager_plugin_screen_changed, NULL);
 
-#ifdef HAVE_LIBWNCK
+#ifdef ENABLE_X11
 #if WNCK_CHECK_VERSION (43, 0, 0)
   g_object_unref (plugin->wnck_handle);
 #endif
@@ -759,7 +759,7 @@ pager_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
     (mode != XFCE_PANEL_PLUGIN_MODE_VERTICAL) ?
     GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL;
 
-#ifdef HAVE_LIBWNCK
+#ifdef ENABLE_X11
   if (plugin->miniature_view)
     wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
   else

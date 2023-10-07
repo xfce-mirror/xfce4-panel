@@ -22,7 +22,7 @@
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel.h>
 
-#ifdef HAVE_GTK_X11
+#ifdef ENABLE_X11
 #include "systray-manager.h"
 #endif
 
@@ -38,7 +38,7 @@ struct _SnPlugin
 {
   XfcePanelPlugin      __parent__;
 
-#ifdef HAVE_GTK_X11
+#ifdef ENABLE_X11
   /* Systray manager */
   SystrayManager *manager;
 #endif
