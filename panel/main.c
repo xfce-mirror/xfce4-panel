@@ -380,7 +380,7 @@ main (gint argc, gchar **argv)
   /* set EWMH source indication */
 #ifdef ENABLE_X11
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+  if (WINDOWING_IS_X11 ())
     wnck_set_client_type (WNCK_CLIENT_TYPE_PAGER);
 G_GNUC_END_IGNORE_DEPRECATIONS
 #endif

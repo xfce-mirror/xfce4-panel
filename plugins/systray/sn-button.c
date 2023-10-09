@@ -123,7 +123,7 @@ sn_button_init (SnButton *button)
   event_mask |= GDK_SMOOTH_SCROLL_MASK;
 #ifdef ENABLE_X11
   /* see https://gitlab.xfce.org/xfce/xfwm4/-/issues/641 */
-  if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+  if (WINDOWING_IS_X11 ())
     {
       const gchar *wm_name = gdk_x11_screen_get_window_manager_name (gdk_screen_get_default ());
       if (g_strcmp0 (wm_name, "Xfwm4") == 0 || g_strcmp0 (wm_name, "unknown") == 0)

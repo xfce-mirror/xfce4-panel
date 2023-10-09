@@ -846,7 +846,7 @@ sn_dialog_build (SnDialog *dialog)
       gtk_widget_hide (GTK_WIDGET (object));
 #endif
 
-      if (! GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+      if (!WINDOWING_IS_X11 ())
         {
           object = gtk_builder_get_object (dialog->builder, "systray_frame");
           gtk_widget_hide (GTK_WIDGET (object));

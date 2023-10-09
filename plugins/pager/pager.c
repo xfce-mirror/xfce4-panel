@@ -29,9 +29,6 @@
 #include <libxfce4windowing/libxfce4windowing.h>
 #ifdef ENABLE_X11
 #include <libwnck/libwnck.h>
-#define pager_plugin_miniature_view_is_supported() GDK_IS_X11_DISPLAY (gdk_display_get_default ())
-#else
-#define pager_plugin_miniature_view_is_supported() FALSE
 #endif
 
 #include <libxfce4ui/libxfce4ui.h>
@@ -216,7 +213,7 @@ pager_plugin_init (PagerPlugin *plugin)
   plugin->xfw_screen = NULL;
   plugin->scrolling = TRUE;
   plugin->wrap_workspaces = FALSE;
-  plugin->miniature_view = pager_plugin_miniature_view_is_supported ();
+  plugin->miniature_view = WINDOWING_IS_X11 ();
   plugin->numbering = FALSE;
   plugin->ratio = 1.0;
   plugin->pager = NULL;
@@ -297,8 +294,7 @@ pager_plugin_set_property (GObject      *object,
       break;
 
     case PROP_MINIATURE_VIEW:
-      plugin->miniature_view = g_value_get_boolean (value)
-                               && pager_plugin_miniature_view_is_supported ();
+      plugin->miniature_view = g_value_get_boolean (value) && WINDOWING_IS_X11 ();
       if (plugin->xfw_screen != NULL)
         pager_plugin_screen_layout_changed (plugin, NULL);
       break;
@@ -860,7 +856,7 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_object_bind_property (G_OBJECT (plugin), "miniature-view",
                           G_OBJECT (object), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
-  gtk_widget_set_sensitive (GTK_WIDGET (object), pager_plugin_miniature_view_is_supported ());
+  gtk_widget_set_sensitive (GTK_WIDGET (object), WINDOWING_IS_X11 ());
 
   object = gtk_builder_get_object (builder, "rows");
   panel_return_if_fail (GTK_IS_ADJUSTMENT (object));

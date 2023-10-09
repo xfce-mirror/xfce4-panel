@@ -886,7 +886,7 @@ panel_window_set_property (GObject      *object,
       break;
 
     case PROP_SPAN_MONITORS:
-      if (! GDK_IS_X11_DISPLAY (window->display))
+      if (!WINDOWING_IS_X11 ())
         break;
 
       val_bool = g_value_get_boolean (value);
@@ -1259,7 +1259,7 @@ panel_window_button_press_event (GtkWidget      *widget,
       cursor = gdk_cursor_new_for_display (window->display, GDK_FLEUR);
 
       /* grab the pointer for dragging the window */
-      if (GDK_IS_X11_DISPLAY (window->display))
+      if (WINDOWING_IS_X11 ())
         {
           seat = gdk_device_get_seat (event->device);
           status = gdk_seat_grab (seat, event->window,
@@ -2055,7 +2055,7 @@ panel_window_screen_struts_set (PanelWindow *window)
     }
 #endif
 
-  if (! GDK_IS_X11_DISPLAY (window->display))
+  if (!WINDOWING_IS_X11 ())
     return;
 
   /* set the struts */
@@ -2770,7 +2770,7 @@ panel_window_active_window_geometry_changed (XfwWindow   *active_window,
 
           return;
         }
-      else if (active_window == NULL || GDK_IS_WAYLAND_DISPLAY (window->display))
+      else if (active_window == NULL || WINDOWING_IS_WAYLAND ())
         return;
 
       if (xfw_window_get_window_type (active_window) != XFW_WINDOW_TYPE_DESKTOP)
@@ -2938,7 +2938,7 @@ panel_window_active_window_state_changed (XfwWindow *active_window,
 
   panel_return_if_fail (XFW_IS_WINDOW (active_window));
 
-  if (GDK_IS_X11_DISPLAY (window->display))
+  if (WINDOWING_IS_X11 ())
     {
       if (changed & XFW_WINDOW_STATE_SHADED)
         panel_window_active_window_geometry_changed (active_window, window);
@@ -3406,7 +3406,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
               G_CALLBACK (panel_window_autohide_drag_leave), window);
 
           /* show the window */
-          if (GDK_IS_X11_DISPLAY (window->display) || gtk_layer_is_supported ())
+          if (WINDOWING_IS_X11 () || gtk_layer_is_supported ())
             gtk_widget_show (popup);
         }
 
@@ -4110,7 +4110,7 @@ panel_window_focus_x11 (PanelWindow *window)
 void
 panel_window_focus (PanelWindow *window)
 {
-  if (GDK_IS_X11_DISPLAY (window->display))
+  if (WINDOWING_IS_X11 ())
     panel_window_focus_x11 (window);
   else
     {

@@ -509,7 +509,7 @@ panel_plugin_external_wrapper_new (PanelModule  *module,
   panel_return_val_if_fail (unique_id != -1, NULL);
 
 #ifdef ENABLE_X11
-  if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+  if (WINDOWING_IS_X11 ())
     return g_object_new (PANEL_TYPE_PLUGIN_EXTERNAL_WRAPPER_X11,
                          "module", module,
                          "unique-id", unique_id,

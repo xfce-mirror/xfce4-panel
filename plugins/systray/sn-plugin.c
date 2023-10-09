@@ -339,7 +339,7 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
 
 #ifdef ENABLE_X11
   /* Add systray box */
-  if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+  if (WINDOWING_IS_X11 ())
     {
       plugin->systray_box = systray_box_new ();
       gtk_box_pack_start (GTK_BOX (plugin->box), plugin->systray_box, TRUE, TRUE, 0);

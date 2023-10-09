@@ -621,8 +621,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "span-monitors");
   panel_return_if_fail (GTK_IS_WIDGET (object));
   gtk_widget_set_sensitive (GTK_WIDGET (object), span_monitors_sensitive);
-  g_object_set (G_OBJECT (object), "visible",
-                n_monitors > 1 && GDK_IS_X11_DISPLAY (display), NULL);
+  g_object_set (G_OBJECT (object), "visible", n_monitors > 1 && WINDOWING_IS_X11 (), NULL);
 
   g_free (output_name);
 
@@ -1705,7 +1704,7 @@ panel_preferences_dialog_show_internal (PanelWindow *active,
     gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 0);
 
   /* select item in the dialog if needed */
-  if (GDK_IS_WAYLAND_DISPLAY (gdk_display_get_default ()))
+  if (WINDOWING_IS_WAYLAND ())
     {
       const gchar *item = g_object_get_data (G_OBJECT (active), "prefs-dialog-item");
       if (item != NULL)

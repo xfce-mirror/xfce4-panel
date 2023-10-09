@@ -229,7 +229,7 @@ panel_application_init (PanelApplication *application)
 
 #ifdef ENABLE_WAYLAND
   /* warn the user about restricted features on Wayland */
-  if (GDK_IS_WAYLAND_DISPLAY (gdk_display_get_default ()))
+  if (WINDOWING_IS_WAYLAND ())
     {
       if (! gtk_layer_is_supported ())
         g_warning ("Wayland detected without layer-shell support (either because of your"
@@ -691,7 +691,7 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
           /* widget dnd doesn't seem to work on Wayland without holding down a mouse button,
            * which leads to an unsolvable problem in GTK 3 because the plugin can't catch
            * the event before its child widgets (no "capture" phase as in GTK 4) */
-          if (GDK_IS_WAYLAND_DISPLAY (gdk_display_get_default ()))
+          if (WINDOWING_IS_WAYLAND ())
             {
               gint item;
               itembar = gtk_bin_get_child (GTK_BIN (window));
@@ -1233,7 +1233,7 @@ panel_application_load (PanelApplication  *application,
   guint       i;
   gchar     **atom_names;
 
-  if (!disable_wm_check && GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+  if (!disable_wm_check && WINDOWING_IS_X11 ())
     {
       display = XOpenDisplay (NULL);
       if (display == NULL)

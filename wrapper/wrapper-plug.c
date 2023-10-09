@@ -54,7 +54,7 @@ wrapper_plug_new (gulong socket_id,
   panel_return_val_if_fail (error != NULL && *error == NULL, NULL);
 
 #ifdef ENABLE_X11
-  if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+  if (WINDOWING_IS_X11 ())
     return wrapper_plug_x11_new (socket_id, proxy);
 #endif
 #ifdef HAVE_GTK_LAYER_SHELL
