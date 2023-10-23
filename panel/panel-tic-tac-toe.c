@@ -110,7 +110,9 @@ panel_tic_tac_toe_init (PanelTicTacToe *dialog)
   gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
   gtk_window_set_icon_name (GTK_WINDOW (dialog), "applications-games");
 
+#if !LIBXFCE4UI_CHECK_VERSION (4, 19, 3)
   xfce_titled_dialog_create_action_area (XFCE_TITLED_DIALOG (dialog));
+#endif
 
   button = xfce_gtk_button_new_mixed ("document-new", _("_New Game"));
   xfce_titled_dialog_add_action_widget (XFCE_TITLED_DIALOG (dialog), button, GTK_RESPONSE_ACCEPT);
