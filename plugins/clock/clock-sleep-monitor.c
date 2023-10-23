@@ -104,7 +104,7 @@ static void clock_sleep_monitor_finalize (GObject *object)
 struct _ClockSleepDBusMonitor
 {
   ClockSleepMonitor parent_instance;
-  GDBusProxy *monitor_proxy;
+  GDBusProxy *proxy;
 };
 
 struct _ClockSleepDBusMonitorClass
@@ -142,10 +142,10 @@ static void clock_sleep_dbus_monitor_finalize (GObject *object)
   ClockSleepDBusMonitor *monitor = XFCE_CLOCK_SLEEP_DBUS_MONITOR (object);
   g_return_if_fail (monitor != NULL);
 
-  if (monitor->monitor_proxy != NULL)
+  if (monitor->proxy != NULL)
     {
-      g_signal_handlers_disconnect_by_data (monitor->monitor_proxy, monitor);
-      g_object_unref (G_OBJECT (monitor->monitor_proxy));
+      g_signal_handlers_disconnect_by_data (monitor->proxy, monitor);
+      g_object_unref (G_OBJECT (monitor->proxy));
     }
 
   G_OBJECT_CLASS (clock_sleep_dbus_monitor_parent_class)->finalize (object);
@@ -175,74 +175,83 @@ static void on_prepare_sleep_signal (GDBusProxy *proxy,
     g_signal_emit (G_OBJECT (monitor), clock_sleep_monitor_woke_up_signal, 0);
 }
 
-static ClockSleepMonitor* clock_sleep_dbus_monitor_create (const gchar *name,
-                                                           const gchar *object_path,
-                                                           const gchar *interface_name)
+static void
+proxy_ready (GObject *source_object,
+             GAsyncResult *res,
+             gpointer data)
+{
+  ClockSleepDBusMonitor *monitor = data;
+  GError *error = NULL;
+  GDBusProxy *proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+
+  if (proxy != NULL)
+    {
+      if (monitor->proxy != NULL)
+        {
+          panel_debug (PANEL_DEBUG_CLOCK, "dropping proxy for %s", g_dbus_proxy_get_name (proxy));
+          g_object_unref (proxy);
+        }
+      else
+        {
+          gchar *owner_name = g_dbus_proxy_get_name_owner (proxy);
+          if (owner_name == NULL)
+            {
+              panel_debug (PANEL_DEBUG_CLOCK, "d-bus service %s not active", g_dbus_proxy_get_name (proxy));
+              g_object_unref (proxy);
+              return;
+            }
+          g_free (owner_name);
+
+          panel_debug (PANEL_DEBUG_CLOCK, "keeping proxy for %s", g_dbus_proxy_get_name (proxy));
+          g_signal_connect (proxy, "g-signal", G_CALLBACK (on_prepare_sleep_signal), monitor);
+          monitor->proxy = proxy;
+        }
+    }
+  else
+    {
+      panel_debug (PANEL_DEBUG_CLOCK, "could not get proxy: %s", error->message);
+      g_error_free (error);
+    }
+}
+
+static ClockSleepMonitor* clock_sleep_dbus_monitor_create (void)
 {
   ClockSleepDBusMonitor *monitor;
-  gchar *owner_name;
 
-  panel_debug (PANEL_DEBUG_CLOCK, "trying to instantiate sleep monitor %s", name);
+  panel_debug (PANEL_DEBUG_CLOCK, "trying to instantiate d-bus sleep monitor");
 
   monitor = g_object_new (XFCE_TYPE_CLOCK_SLEEP_DBUS_MONITOR, NULL);
-  monitor->monitor_proxy = g_dbus_proxy_new_for_bus_sync (
+
+  if (!LOGIND_RUNNING ())
+    panel_debug (PANEL_DEBUG_CLOCK, "logind not running");
+  else
+    g_dbus_proxy_new_for_bus (
       G_BUS_TYPE_SYSTEM,
       G_DBUS_PROXY_FLAGS_NONE,
       NULL,
-      name,
-      object_path,
-      interface_name,
+      "org.freedesktop.login1",
+      "/org/freedesktop/login1",
+      "org.freedesktop.login1.Manager",
       NULL,
-      NULL);
-  if (monitor->monitor_proxy == NULL)
-    {
-      g_warning ("could not get proxy for %s", name);
-      g_object_unref (G_OBJECT (monitor));
-      return NULL;
-    }
+      proxy_ready,
+      monitor);
 
-  owner_name = g_dbus_proxy_get_name_owner (monitor->monitor_proxy);
-  if (owner_name == NULL)
-    {
-      panel_debug (PANEL_DEBUG_CLOCK, "d-bus service %s not active", name);
-      g_object_unref (G_OBJECT (monitor));
-      return NULL;
-    }
-  g_free (owner_name);
-
-  g_signal_connect (monitor->monitor_proxy, "g-signal",
-                    G_CALLBACK (on_prepare_sleep_signal), monitor);
+  g_dbus_proxy_new_for_bus (
+    G_BUS_TYPE_SYSTEM,
+    G_DBUS_PROXY_FLAGS_NONE,
+    NULL,
+    "org.freedesktop.ConsoleKit",
+    "/org/freedesktop/ConsoleKit/Manager",
+    "org.freedesktop.ConsoleKit.Manager",
+    NULL,
+    proxy_ready,
+    monitor);
 
   return XFCE_CLOCK_SLEEP_MONITOR (monitor);
 }
-#endif
 
-#ifdef SLEEP_MONITOR_USE_LOGIND
-/* Logind-based implementation */
-static ClockSleepMonitor* clock_sleep_monitor_logind_create (void)
-{
-  if (!LOGIND_RUNNING ())
-    {
-      panel_debug (PANEL_DEBUG_CLOCK, "logind not running");
-      return NULL;
-    }
+#endif /* defined (SLEEP_MONITOR_USE_LOGIND) || defined (SLEEP_MONITOR_USE_CONSOLEKIT) */
 
-  return clock_sleep_dbus_monitor_create (
-      "org.freedesktop.login1",
-      "/org/freedesktop/login1",
-      "org.freedesktop.login1.Manager");
-}
-#endif /* defined SLEEP_MONITOR_USE_LOGIND */
-
-#ifdef SLEEP_MONITOR_USE_CONSOLEKIT
-static ClockSleepMonitor* clock_sleep_monitor_consolekit_create (void)
-{
-  return clock_sleep_dbus_monitor_create (
-      "org.freedesktop.ConsoleKit",
-      "/org/freedesktop/ConsoleKit/Manager",
-      "org.freedesktop.ConsoleKit.Manager");
-}
-#endif /* defined SLEEP_MONITOR_USE_CONSOLEKIT */
 
 
 /* Factory registration
@@ -254,12 +263,9 @@ typedef ClockSleepMonitor* (*SleepMonitorFactory) (void);
 
 static SleepMonitorFactory sleep_monitor_factories[] =
 {
-  #ifdef SLEEP_MONITOR_USE_LOGIND
-  clock_sleep_monitor_logind_create,
-  #endif
-  #ifdef SLEEP_MONITOR_USE_CONSOLEKIT
-  clock_sleep_monitor_consolekit_create,
-  #endif
+#if defined (SLEEP_MONITOR_USE_LOGIND) || defined (SLEEP_MONITOR_USE_CONSOLEKIT)
+  clock_sleep_dbus_monitor_create,
+#endif
   NULL
 };
 
