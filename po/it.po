@@ -15,6 +15,7 @@
 # Luca Marrocco <buildup@libero.it>, 2005
 # Marco <marco.sting@gmail.com>, 2013
 # Marco <marcxosm@gmail.com>, 2017
+# nortio <savi.napolitano@gmail.com>, 2023
 # Vincenzo Reale <vinx.reale@gmail.com>, 2020
 msgid ""
 msgstr ""
@@ -22,7 +23,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
 "POT-Creation-Date: 2023-07-17 00:46+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Emanuele Petriglia <transifex@emanuelepetriglia.com>, 2019-2020,2022-2023\n"
+"Last-Translator: nortio <savi.napolitano@gmail.com>, 2023\n"
 "Language-Team: Italian (http://app.transifex.com/xfce/xfce4-panel/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,7 +53,7 @@ msgstr "Pannello"
 
 #: panel-preferences.desktop.in:16
 msgid "Customize the panel"
-msgstr "Personalizzare il pannello"
+msgstr "Personalizza il pannello"
 
 #. I18N: %s is the name of the plugin
 #: libxfce4panel/xfce-panel-plugin.c:1095
@@ -543,7 +544,7 @@ msgid ""
 "Select this option if you don't want maximized windows to cover the area "
 "behind the panel. This only works when the panel is attached to a screen "
 "edge."
-msgstr "Selezionare questa opzione per non far occupare alle finestre massimizzate lo spazio dietro al pannello. Questa impostazione funziona solamente quando il pannello è attaccato al bordo dello schermo."
+msgstr "Seleziona questa opzione per non far occupare alle finestre massimizzate lo spazio dietro al pannello. Questa impostazione funziona solamente quando il pannello è attaccato ad un bordo dello schermo."
 
 #: panel/panel-preferences-dialog.glade:472
 msgid "Au_tomatically hide the panel:"
@@ -771,12 +772,12 @@ msgstr "Titolo:"
 
 #: plugins/actions/actions-dialog.glade:201
 msgid "Custo_m title:"
-msgstr "Titolo personali_zzato"
+msgstr "Titolo personali_zzato:"
 
 #: plugins/actions/actions-dialog.glade:255
 #: plugins/launcher/launcher-dialog.glade:667
 msgid "General"
-msgstr "Generale"
+msgstr "Generali"
 
 #: plugins/actions/actions-dialog.glade:303
 msgid "Visible"
@@ -960,7 +961,7 @@ msgstr "_Titolo del pulsante:"
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:136
 msgid "Show button on one _line"
-msgstr "Mostra pulsante su una _linea"
+msgstr "Mostra il pulsante su una _linea"
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:151
 msgid "_Show button title"
@@ -982,7 +983,7 @@ msgstr "Mostra i no_mi generici delle applicazioni"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Selezionare questa opzione per mostrare il nome generico dell'applicazione nel menu, per esempio \"Gestore dei file\" invece di \"Thunar\""
+msgstr "Seleziona questa opzione per mostrare il nome generico dell'applicazione nel menu, ad esempio \"Gestore dei file\" invece di \"Thunar\""
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:229
 #: plugins/clock/clock-dialog.glade:405
@@ -1011,7 +1012,7 @@ msgstr "_File del menu:"
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:346
 msgid "Select A Menu File"
-msgstr "Selezionare un file del menu"
+msgstr "Seleziona un file del menu"
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:371
 msgid "Menu File"
@@ -1147,7 +1148,7 @@ msgstr "Orologio"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Nome del fuso orario corrispondente al database dei fusi orari di sistema, per esempio \"America/New_York\". Lasciare vuoto per usare l'ora locale."
+msgstr "Nome del fuso orario contenuto nel database dei fusi orari di sistema, ad esempio \"America/New_York\". Lascia vuoto per utilizzare l'ora locale."
 
 #: plugins/clock/clock-dialog.glade:183
 msgid "Time_zone:"
@@ -1186,7 +1187,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "Il formato descrive le parti della data e dell'ora che verrano mostrate nel pannello. Per esempio, \"%Y\" verrà sostituito con l'anno, \"%m\" con il mese e \"%d\" con il giorno. Analogamente, le etichette \"<b></b>\" renderanno in grassetto il testo. Consultare la pagina \"Aiuto\" per maggiori informazioni."
+msgstr "Il formato descrive le parti della data e dell'ora che verrano mostrate nel pannello. Ad esempio, \"%Y\" verrà sostituito con l'anno, \"%m\" con il mese e \"%d\" con il giorno. Analogamente, le etichette \"<b></b>\" renderanno in grassetto il testo. Consultare la pagina \"Aiuto\" per maggiori informazioni."
 
 #: plugins/clock/clock-dialog.glade:358
 msgid "_Tooltip format:"
@@ -1244,7 +1245,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
 "the &quot;Help&quot; page for additional information."
-msgstr "Il formato descrive le parti della data e dell'ora che verrano mostrate nel pannello. Per esempio, \"%Y\" verrà sostituito con l'anno, \"%m\" con il mese e \"%d\" con il giorno. Analogamente, le etichette &lt;b&gt;&lt;/b&gt; renderanno in grassetto il testo. Consultare la pagina &quot;Aiuto&quot; per maggiori informazioni."
+msgstr "Il formato descrive le parti della data e dell'ora che verrano mostrate nel pannello. Ad esempio, \"%Y\" verrà sostituito con l'anno, \"%m\" con il mese e \"%d\" con il giorno. Analogamente, le etichette &lt;b&gt;&lt;/b&gt; renderanno in grassetto il testo. Consultare la pagina &quot;Aiuto&quot; per maggiori informazioni."
 
 #: plugins/clock/clock-dialog.glade:699
 msgid "Date"
@@ -1651,7 +1652,7 @@ msgstr "Mostra l'albero delle cartelle in un menu"
 
 #: plugins/directorymenu/directorymenu-dialog.glade:99
 msgid "Select A Directory"
-msgstr "Selezionare una cartella"
+msgstr "Seleziona una cartella"
 
 #: plugins/directorymenu/directorymenu-dialog.glade:135
 msgid "_Base Directory:"
@@ -1659,7 +1660,7 @@ msgstr "Cartella _principale:"
 
 #: plugins/directorymenu/directorymenu-dialog.glade:179
 msgid "Show 'New Text _Document'"
-msgstr "Mostra 'nuovo _documento di testo'"
+msgstr "Mostra 'Nuovo _Documento di Testo'"
 
 #: plugins/directorymenu/directorymenu-dialog.glade:194
 msgid "Show '_New Folder'"
@@ -1686,7 +1687,7 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Inserire un elenco di schemi che determineranno quali file dovranno essere visibili nella cartella. Se si specifica più di uno schema, gli elementi della lista dovranno essere separati con il punto e virgola (es. *.txt;*.doc)."
+msgstr "Inserisci un elenco di schemi che determineranno quali file dovranno essere visibili nella cartella. Se si specifica più di uno schema, gli elementi della lista dovranno essere separati con il punto e virgola (es. *.txt;*.doc)."
 
 #: plugins/directorymenu/directorymenu-dialog.glade:301
 msgid "_File Pattern:"
@@ -1799,7 +1800,7 @@ msgstr "Aggiunge un nuovo elemento vuoto"
 
 #: plugins/launcher/launcher-dialog.glade:639
 msgid "Add a new hyperlink"
-msgstr "Aggiungi un nuovo link ipertestuale"
+msgstr "Aggiunge un nuovo link ipertestuale"
 
 #: plugins/launcher/launcher-dialog.glade:682
 msgid "Disable t_ooltips"
@@ -1809,7 +1810,7 @@ msgstr "Disabilita i su_ggerimenti"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "Selezionare questa opzione per disabilitare i suggerimenti quando il puntatore è su un pulsante del pannello o su un elemento del menu."
+msgstr "Seleziona questa opzione per disabilitare i suggerimenti quando il puntatore è su un pulsante del pannello o su un elemento del menu."
 
 #: plugins/launcher/launcher-dialog.glade:698
 msgid "Show _label instead of icon"
@@ -1821,7 +1822,7 @@ msgstr "Mostra nel pannello l'_ultimo elemento utilizzato"
 
 #: plugins/launcher/launcher-dialog.glade:717
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr "Selezionare questa opzione per spostare l'elemento selezionato sul pannello."
+msgstr "Seleziona questa opzione per spostare l'elemento selezionato sul pannello."
 
 #: plugins/launcher/launcher-dialog.glade:736
 msgid "_Arrow button position:"
@@ -1959,7 +1960,7 @@ msgstr "Ordina gli _elementi in una singola riga"
 
 #: plugins/systray/sn-dialog.glade:250
 msgid "If enabled, ensure that the items are laid out in a single row"
-msgstr "Se abilitata, assicurarsi che gli elementi siano disposti in una singola riga"
+msgstr "Se abilitata, assicura che gli elementi siano disposti in una singola riga"
 
 #: plugins/systray/sn-dialog.glade:262
 msgid "_Hide items by default"
@@ -1971,7 +1972,7 @@ msgstr "Quando abilitata, tutti i nuovi elementi saranno marcati come \"Nascosto
 
 #: plugins/systray/sn-dialog.glade:278
 msgid "_Square items"
-msgstr "_Adatta elementi"
+msgstr "_Adatta elementi in un quadrato"
 
 #: plugins/systray/sn-dialog.glade:282
 msgid "Item buttons will take a square when it's possible"
@@ -1987,7 +1988,7 @@ msgstr "Elemento"
 
 #: plugins/systray/sn-dialog.glade:398 plugins/systray/sn-dialog.glade:630
 msgid "Hidden"
-msgstr "Nascosti"
+msgstr "Nascosto"
 
 #: plugins/systray/sn-dialog.glade:426 plugins/systray/sn-dialog.glade:658
 msgid "Move the selected item one row up"
@@ -2023,7 +2024,7 @@ msgstr "Funzionalità"
 
 #: plugins/systray/sn-dialog.glade:566
 msgid "Status Notifiers"
-msgstr "Stato dei notificatori"
+msgstr "Notificatori di stato"
 
 #: plugins/systray/sn-dialog.glade:720
 msgid "Systray Icons"
@@ -2065,11 +2066,11 @@ msgstr "Non fare niente"
 
 #: plugins/tasklist/tasklist-dialog.glade:26
 msgid "Close Window"
-msgstr "Chiude la finestra"
+msgstr "Chiudere la finestra"
 
 #: plugins/tasklist/tasklist-dialog.glade:29
 msgid "Minimize Window"
-msgstr "Minimizza la finestra"
+msgstr "Minimizzare la finestra"
 
 #: plugins/tasklist/tasklist-dialog.glade:32
 msgid "New Instance"
