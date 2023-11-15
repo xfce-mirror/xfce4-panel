@@ -5,17 +5,17 @@
 # 
 # Translators:
 # Xfce Bot <transifex@xfce.org>, 2021
-# Caarmi, 2022
+# Caarmi, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-28 15:00+0100\n"
+"POT-Creation-Date: 2023-05-30 00:48+0200\n"
 "PO-Revision-Date: 2020-12-28 17:37+0000\n"
-"Last-Translator: Caarmi, 2022\n"
-"Language-Team: Interlingue (https://www.transifex.com/xfce/teams/16840/ie/)\n"
+"Last-Translator: Caarmi, 2023\n"
+"Language-Team: Interlingue (https://app.transifex.com/xfce/teams/16840/ie/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -64,8 +64,8 @@ msgstr "Si on remove li element del panel, su configuration va esser perdit."
 #: ../libxfce4panel/xfce-panel-plugin.c:1084 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1326
 #: ../plugins/applicationsmenu/applicationsmenu.c:602
-#: ../plugins/directorymenu/directorymenu.c:473
-#: ../plugins/directorymenu/directorymenu.c:938
+#: ../plugins/directorymenu/directorymenu.c:474
+#: ../plugins/directorymenu/directorymenu.c:939
 msgid "_Cancel"
 msgstr "_Anullar"
 
@@ -1030,12 +1030,12 @@ msgid "Applications"
 msgstr "Applicationes"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:600
-#: ../plugins/directorymenu/directorymenu.c:471
+#: ../plugins/directorymenu/directorymenu.c:472
 msgid "Select An Icon"
 msgstr "Selecte un icone"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/directorymenu/directorymenu.c:474
+#: ../plugins/directorymenu/directorymenu.c:475
 msgid "_OK"
 msgstr "_OK"
 
@@ -1450,70 +1450,70 @@ msgstr "Quel hora es?"
 msgid "Directory Menu"
 msgstr "Menú de fólder"
 
-#: ../plugins/directorymenu/directorymenu.c:689
+#: ../plugins/directorymenu/directorymenu.c:690
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Ne successat lansar li application «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:721
+#: ../plugins/directorymenu/directorymenu.c:722
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Ne successat obtener li tip de contenete de «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:730
+#: ../plugins/directorymenu/directorymenu.c:731
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Null application predefinit trovat por «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:746
+#: ../plugins/directorymenu/directorymenu.c:747
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Ne successat lansar li application predefinit por «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:844
+#: ../plugins/directorymenu/directorymenu.c:845
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr ""
 "Ne successat executer li application predefinit por li categorie «%s»."
 
-#: ../plugins/directorymenu/directorymenu.c:927
+#: ../plugins/directorymenu/directorymenu.c:928
 msgid "Create New Folder"
 msgstr "Crear un nov fólder"
 
-#: ../plugins/directorymenu/directorymenu.c:932
+#: ../plugins/directorymenu/directorymenu.c:933
 msgid "Create New Text Document"
 msgstr "Crear un nov textual document"
 
-#: ../plugins/directorymenu/directorymenu.c:939
+#: ../plugins/directorymenu/directorymenu.c:940
 msgid "C_reate"
 msgstr "C_rear"
 
-#: ../plugins/directorymenu/directorymenu.c:940
+#: ../plugins/directorymenu/directorymenu.c:941
 msgid "Create & _Open"
 msgstr "Crear e &aperter"
 
-#: ../plugins/directorymenu/directorymenu.c:954
+#: ../plugins/directorymenu/directorymenu.c:955
 msgid "Enter the new name:"
 msgstr "Li nov nómine:"
 
-#: ../plugins/directorymenu/directorymenu.c:990
+#: ../plugins/directorymenu/directorymenu.c:991
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Ne successat crear un fólder: %s"
 
-#: ../plugins/directorymenu/directorymenu.c:1075
+#: ../plugins/directorymenu/directorymenu.c:1076
 msgid "Open Folder"
 msgstr "Aperter li fólder"
 
-#: ../plugins/directorymenu/directorymenu.c:1092
+#: ../plugins/directorymenu/directorymenu.c:1093
 msgid "Open in Terminal"
 msgstr "Aperter in li Terminal"
 
-#: ../plugins/directorymenu/directorymenu.c:1109
+#: ../plugins/directorymenu/directorymenu.c:1110
 msgid "Create Folder..."
 msgstr "Crear un fólder..."
 
-#: ../plugins/directorymenu/directorymenu.c:1126
+#: ../plugins/directorymenu/directorymenu.c:1127
 msgid "Create Text Document..."
 msgstr "Crear un textual document..."
 
@@ -1889,7 +1889,7 @@ msgstr "Cargar li simbolic icones si disponibil"
 
 #: ../plugins/systray/sn-dialog.glade.h:23
 msgid "Features"
-msgstr ""
+msgstr "Caracteristicas"
 
 #: ../plugins/systray/sn-dialog.glade.h:24
 msgid "Status Notifiers"
@@ -2024,36 +2024,36 @@ msgstr "Monstrar fenestres de omni mo_nitores"
 msgid "Show only _minimized windows"
 msgstr "Monstrar solmen _minimisat fenestres"
 
-#: ../plugins/tasklist/tasklist-widget.c:2967
+#: ../plugins/tasklist/tasklist-widget.c:2992
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Ne successat lansar un nov instantie de «%s»"
 
-#: ../plugins/tasklist/tasklist-widget.c:2971
+#: ../plugins/tasklist/tasklist-widget.c:2996
 msgid "Error"
 msgstr "Errore"
 
-#: ../plugins/tasklist/tasklist-widget.c:3015
+#: ../plugins/tasklist/tasklist-widget.c:3040
 msgid "Launch New Instance..."
 msgstr "Lansar un nov instantie..."
 
-#: ../plugins/tasklist/tasklist-widget.c:3764
+#: ../plugins/tasklist/tasklist-widget.c:3782
 msgid "Mi_nimize All"
 msgstr "Mi_nimisar omni"
 
-#: ../plugins/tasklist/tasklist-widget.c:3772
+#: ../plugins/tasklist/tasklist-widget.c:3790
 msgid "Un_minimize All"
 msgstr "De_minimisar omni"
 
-#: ../plugins/tasklist/tasklist-widget.c:3780
+#: ../plugins/tasklist/tasklist-widget.c:3798
 msgid "Ma_ximize All"
 msgstr "Ma_ximisar omni"
 
-#: ../plugins/tasklist/tasklist-widget.c:3788
+#: ../plugins/tasklist/tasklist-widget.c:3806
 msgid "_Unmaximize All"
 msgstr "D_emaximisar omni"
 
-#: ../plugins/tasklist/tasklist-widget.c:3800
+#: ../plugins/tasklist/tasklist-widget.c:3818
 msgid "_Close All"
 msgstr "_Clúder omni"
 
