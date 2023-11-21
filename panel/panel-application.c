@@ -1764,23 +1764,30 @@ panel_application_get_locked (PanelApplication *application)
 void
 panel_application_logout (void)
 {
-  XfceSMClient *sm_client;
-  GError       *error = NULL;
-  const gchar  *command = "xfce4-session-logout";
+  GError *error = NULL;
+  const gchar *command = "xfce4-session-logout";
 
+#ifdef ENABLE_X11
   /* first try to session client to logout else fallback and spawn xfce4-session-logout */
-  sm_client = xfce_sm_client_get ();
-  if (xfce_sm_client_is_connected (sm_client))
+  if (WINDOWING_IS_X11 ())
     {
-      xfce_sm_client_request_shutdown (sm_client, XFCE_SM_CLIENT_SHUTDOWN_HINT_ASK);
-
-      return;
+      XfceSMClient *sm_client = xfce_sm_client_get ();
+      if (xfce_sm_client_is_connected (sm_client))
+        {
+          xfce_sm_client_request_shutdown (sm_client, XFCE_SM_CLIENT_SHUTDOWN_HINT_ASK);
+          return;
+        }
     }
-  else if (g_getenv ("SESSION_MANAGER") == NULL)
+#endif
+
+  if (g_getenv ("SESSION_MANAGER") == NULL)
     {
-      if (xfce_dialog_confirm (NULL, "application-exit", _("Quit"),
-          _("You have started X without session manager. Clicking Quit will close the X server."),
-          _("Are you sure you want to quit the panel?")))
+      const gchar *text = NULL;
+      if (WINDOWING_IS_X11 ())
+        text = _("You have started X without session manager. Clicking Quit will close the X server.");
+
+      if (xfce_dialog_confirm (NULL, "application-exit", _("Quit"), text,
+                               _("Are you sure you want to quit the panel?")))
         command = "xfce4-panel --quit";
       else
         return;
