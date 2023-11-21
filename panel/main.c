@@ -147,6 +147,7 @@ panel_signal_handler (gint signum)
 
 
 
+#ifdef ENABLE_X11
 static void
 panel_sm_client_quit (XfceSMClient *sm_client)
 {
@@ -158,6 +159,7 @@ panel_sm_client_quit (XfceSMClient *sm_client)
 
   gtk_main_quit ();
 }
+#endif
 
 
 
@@ -238,7 +240,9 @@ main (gint argc, gchar **argv)
   guint             i;
   const gint        signums[] = { SIGINT, SIGQUIT, SIGTERM, SIGABRT, SIGUSR1 };
   const gchar      *error_msg;
+#ifdef ENABLE_X11
   XfceSMClient     *sm_client;
+#endif
 
   panel_debug (PANEL_DEBUG_MAIN,
                "version %s on gtk+ %d.%d.%d (%d.%d.%d), glib %d.%d.%d (%d.%d.%d)",
@@ -274,7 +278,10 @@ main (gint argc, gchar **argv)
   context = g_option_context_new (_("[ARGUMENTS...]"));
   g_option_context_add_main_entries (context, option_entries, GETTEXT_PACKAGE);
   g_option_context_add_group (context, gtk_get_option_group (TRUE));
-  g_option_context_add_group (context, xfce_sm_client_get_option_group (argc, argv));
+#ifdef ENABLE_X11
+  if (WINDOWING_IS_X11 ())
+    g_option_context_add_group (context, xfce_sm_client_get_option_group (argc, argv));
+#endif
   if (!g_option_context_parse (context, &argc, &argv, &error))
     {
       g_print ("%s: %s.\n", PACKAGE_NAME, error->message);
@@ -360,18 +367,21 @@ main (gint argc, gchar **argv)
   /* start dbus service */
   dbus_service = panel_dbus_service_get ();
 
+#ifdef ENABLE_X11
   /* start session management */
-  sm_client = xfce_sm_client_get ();
-  xfce_sm_client_set_restart_style (sm_client, XFCE_SM_CLIENT_RESTART_IMMEDIATELY);
-  xfce_sm_client_set_priority (sm_client, XFCE_SM_CLIENT_PRIORITY_CORE);
-  g_signal_connect (G_OBJECT (sm_client), "quit",
-      G_CALLBACK (panel_sm_client_quit), NULL);
-  if (!xfce_sm_client_connect (sm_client, &error))
+  if (WINDOWING_IS_X11 ())
     {
-      g_printerr ("%s: Failed to connect to session manager: %s\n",
-                  G_LOG_DOMAIN, error->message);
-      g_clear_error (&error);
+      sm_client = xfce_sm_client_get ();
+      xfce_sm_client_set_restart_style (sm_client, XFCE_SM_CLIENT_RESTART_IMMEDIATELY);
+      xfce_sm_client_set_priority (sm_client, XFCE_SM_CLIENT_PRIORITY_CORE);
+      g_signal_connect (G_OBJECT (sm_client), "quit", G_CALLBACK (panel_sm_client_quit), NULL);
+      if (!xfce_sm_client_connect (sm_client, &error))
+        {
+          g_warning ("Failed to connect to session manager: %s", error->message);
+          g_clear_error (&error);
+        }
     }
+#endif
 
   /* setup signal handlers to properly quit the main loop */
   for (i = 0; i < G_N_ELEMENTS (signums); i++)
@@ -404,7 +414,10 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       g_print ("%s: %s\n\n", G_LOG_DOMAIN, _("There is already a running instance"));
     }
 
-  g_object_unref (G_OBJECT (sm_client));
+#ifdef ENABLE_X11
+  if (WINDOWING_IS_X11 ())
+    g_object_unref (G_OBJECT (sm_client));
+#endif
 
   if (panel_dbus_service_get_restart ())
     {
