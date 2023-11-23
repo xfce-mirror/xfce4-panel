@@ -1775,10 +1775,8 @@ panel_application_logout (void)
       if (xfce_sm_client_is_connected (sm_client))
         {
           xfce_sm_client_request_shutdown (sm_client, XFCE_SM_CLIENT_SHUTDOWN_HINT_ASK);
-          g_object_unref (sm_client);
           return;
         }
-      g_object_unref (sm_client);
     }
 #endif
 

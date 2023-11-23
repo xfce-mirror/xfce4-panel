@@ -474,7 +474,6 @@ panel_dbus_service_exit_panel (gboolean restart)
     {
       XfceSMClient *sm_client = xfce_sm_client_get ();
       xfce_sm_client_set_restart_style (sm_client, XFCE_SM_CLIENT_RESTART_NORMAL);
-      g_object_unref (sm_client);
     }
 #endif
 

@@ -241,7 +241,7 @@ main (gint argc, gchar **argv)
   const gint        signums[] = { SIGINT, SIGQUIT, SIGTERM, SIGABRT, SIGUSR1 };
   const gchar      *error_msg;
 #ifdef ENABLE_X11
-  XfceSMClient     *sm_client;
+  XfceSMClient     *sm_client = NULL;
 #endif
 
   panel_debug (PANEL_DEBUG_MAIN,
