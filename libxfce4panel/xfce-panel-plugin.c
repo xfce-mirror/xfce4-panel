@@ -1681,7 +1681,8 @@ xfce_panel_plugin_set_locked (XfcePanelPluginProvider *provider,
       plugin->priv->locked = locked;
 
       /* destroy the menu if it exists */
-      xfce_panel_plugin_menu_destroy (plugin);
+      if (plugin->priv->locked)
+        xfce_panel_plugin_menu_destroy (plugin);
     }
 }
 
@@ -2313,12 +2314,12 @@ xfce_panel_plugin_menu_destroy (XfcePanelPlugin *plugin)
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
   panel_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin));
 
+  g_slist_free_full (plugin->priv->menu_items, g_object_unref);
+  plugin->priv->menu_items = NULL;
+
   /* ignore the request for destruction if the menu is popped up */
   if (plugin->priv->menu != NULL && !gtk_widget_get_visible (GTK_WIDGET (plugin->priv->menu)))
     {
-      g_slist_free_full (plugin->priv->menu_items, g_object_unref);
-      plugin->priv->menu_items = NULL;
-
       gtk_menu_detach (GTK_MENU (plugin->priv->menu));
       plugin->priv->menu = NULL;
     }
