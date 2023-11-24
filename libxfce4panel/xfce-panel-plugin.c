@@ -1037,6 +1037,7 @@ xfce_panel_plugin_button_press_event (GtkWidget      *widget,
         {
           /* on Wayland the menu might be covered by external plugins when they are
            * usable, i.e. if layer-shell is supported, so pop up it at widget */
+          xfce_panel_plugin_unregister_menu (menu, plugin);
           xfce_panel_plugin_popup_menu (plugin, menu, widget, (GdkEvent *) event);
         }
       else
