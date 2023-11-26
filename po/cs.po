@@ -5,16 +5,17 @@
 # 
 # Translators:
 # Xfce Bot <transifex@xfce.org>, 2022
+# Martin Šiška, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-14 00:47+0100\n"
+"POT-Creation-Date: 2023-05-30 00:48+0200\n"
 "PO-Revision-Date: 2022-12-22 11:35+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>, 2022\n"
-"Language-Team: Czech (https://www.transifex.com/xfce/teams/16840/cs/)\n"
+"Last-Translator: Martin Šiška, 2023\n"
+"Language-Team: Czech (https://app.transifex.com/xfce/teams/16840/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -59,7 +60,7 @@ msgstr "Opravdu chcete odstranit „%s“?"
 #: ../libxfce4panel/xfce-panel-plugin.c:1085
 #: ../panel/panel-preferences-dialog.c:1418
 msgid "Remove Item"
-msgstr ""
+msgstr "Odebrat položku"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1087
 msgid ""
@@ -403,7 +404,7 @@ msgstr "Zásuvný modul %s neočekávaně opustil panel, chcete jej restartovat?
 
 #: ../panel/panel-plugin-external.c:519
 msgid "Plugin Restart"
-msgstr ""
+msgstr "Restartovat zásuvný modul"
 
 #: ../panel/panel-plugin-external.c:520
 #, c-format
@@ -559,7 +560,7 @@ msgstr "Pro skrytí úchytek panelu a uzamčení jeho pozice vyberte tuto volbu.
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "_Reserve space on screen edges for the panel"
-msgstr ""
+msgstr "Rezervovat prostor pro panel na okrajích obrazovky"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
@@ -567,6 +568,9 @@ msgid ""
 "behind the panel. This only works when the panel is attached to a screen "
 "edge."
 msgstr ""
+"Zvolte tuto možnost, pokud nechcete, aby zvětšená zaplnila prostor za "
+"panelem. Tato možnost funguje jen pokud je panel připevněn o okraji "
+"obrazovky."
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
@@ -592,7 +596,7 @@ msgstr "Poče_t řádků:"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "L_ength (pixels):"
-msgstr ""
+msgstr "Délka (v pixelech):"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "A_utomatically increase the length"
@@ -990,7 +994,7 @@ msgstr "Titulek _tlačítka:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Show button on one _line"
-msgstr ""
+msgstr "Ukázat tlačítko na jednom řádku"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "_Show button title"
@@ -1066,7 +1070,7 @@ msgstr "_OK"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:650
-#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2491
+#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2487
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Nepodařilo se spustit příkaz %s."
@@ -1125,31 +1129,31 @@ msgstr "Vlastní formát"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
 msgid "Decimal"
-msgstr ""
+msgstr "Desetinný"
 
 #: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Sexagesimal"
-msgstr ""
+msgstr "V šedesátkové soustavě"
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Binary time"
-msgstr ""
+msgstr "Binární"
 
 #: ../plugins/clock/clock-dialog.glade.h:4
 msgid "Date, then time"
-msgstr ""
+msgstr "Datum, potom čas"
 
 #: ../plugins/clock/clock-dialog.glade.h:5
 msgid "Time, then date"
-msgstr ""
+msgstr "Čas, potom datum"
 
 #: ../plugins/clock/clock-dialog.glade.h:6
 msgid "Date Only"
-msgstr ""
+msgstr "Pouze datum"
 
 #: ../plugins/clock/clock-dialog.glade.h:7
 msgid "Time Only"
-msgstr ""
+msgstr "Pouze čas"
 
 #: ../plugins/clock/clock-dialog.glade.h:8
 msgid "Analog"
@@ -1208,7 +1212,7 @@ msgstr "_Příkaz:"
 
 #: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Calendar"
-msgstr ""
+msgstr "Kalendář"
 
 #: ../plugins/clock/clock-dialog.glade.h:24
 #, no-c-format
@@ -1244,7 +1248,7 @@ msgstr "24hodinový cyklus"
 
 #: ../plugins/clock/clock-dialog.glade.h:31
 msgid "Binary mode:"
-msgstr ""
+msgstr "Binární"
 
 #: ../plugins/clock/clock-dialog.glade.h:32
 msgid "Display _seconds"
@@ -1266,11 +1270,11 @@ msgstr "Zobrazit _mřížku"
 
 #: ../plugins/clock/clock-dialog.glade.h:37
 msgid "Font:"
-msgstr ""
+msgstr "Písmo:"
 
 #: ../plugins/clock/clock-dialog.glade.h:38
 msgid "Format:"
-msgstr ""
+msgstr "Formát:"
 
 #: ../plugins/clock/clock-dialog.glade.h:40
 #, no-c-format
@@ -1287,7 +1291,7 @@ msgstr "Datum"
 
 #: ../plugins/clock/clock-dialog.glade.h:42
 msgid "Time"
-msgstr ""
+msgstr "Čas"
 
 #: ../plugins/clock/clock-dialog.glade.h:43
 msgid "Clock Options"
@@ -1750,7 +1754,7 @@ msgstr "Otevřít nabídku spouštěče"
 msgid "Unnamed Item"
 msgstr "Nepojmenovaná položka"
 
-#: ../plugins/launcher/launcher.c:1797
+#: ../plugins/launcher/launcher.c:1801
 msgid "No items"
 msgstr "Žádné položky"
 
@@ -2209,36 +2213,36 @@ msgstr "Zobrazit okna _na všech monitorech"
 msgid "Show only _minimized windows"
 msgstr "Zobrazit pouze _minimalizovaná okna"
 
-#: ../plugins/tasklist/tasklist-widget.c:3119
+#: ../plugins/tasklist/tasklist-widget.c:3131
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Nelze spustit novou instanci aplikace %s"
 
-#: ../plugins/tasklist/tasklist-widget.c:3123
+#: ../plugins/tasklist/tasklist-widget.c:3135
 msgid "Error"
 msgstr "Chyba"
 
-#: ../plugins/tasklist/tasklist-widget.c:3152
+#: ../plugins/tasklist/tasklist-widget.c:3164
 msgid "Launch New Instance"
 msgstr "Spustit novou instanci"
 
-#: ../plugins/tasklist/tasklist-widget.c:3899
+#: ../plugins/tasklist/tasklist-widget.c:3911
 msgid "Mi_nimize All"
 msgstr "Mi_nimalizovat vše"
 
-#: ../plugins/tasklist/tasklist-widget.c:3906
+#: ../plugins/tasklist/tasklist-widget.c:3918
 msgid "Un_minimize All"
 msgstr "Obnovit vše z _minima"
 
-#: ../plugins/tasklist/tasklist-widget.c:3913
+#: ../plugins/tasklist/tasklist-widget.c:3925
 msgid "Ma_ximize All"
 msgstr "Ma_ximalizovat vše"
 
-#: ../plugins/tasklist/tasklist-widget.c:3920
+#: ../plugins/tasklist/tasklist-widget.c:3932
 msgid "_Unmaximize All"
 msgstr "_Obnovit vše z maxima"
 
-#: ../plugins/tasklist/tasklist-widget.c:3931
+#: ../plugins/tasklist/tasklist-widget.c:3943
 msgid "_Close All"
 msgstr "_Zavřít vše"
 
