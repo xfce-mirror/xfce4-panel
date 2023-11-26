@@ -5,6 +5,7 @@
 # Translators:
 # Alois Nešpor <info@aloisnespor.info>, 2013-2014,2019
 # k3dar, 2022
+# Martin Šiška, 2023
 # Michal Várady <miko.vaji@gmail.com>, 2013-2015,2017-2020
 # Pavel Borecki <pavel.borecki@gmail.com>, 2018
 # Petr Šimáček <petr.simacek@gmail.com>, 2015
@@ -13,10 +14,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2023-03-14 00:47+0100\n"
+"POT-Creation-Date: 2023-07-17 00:46+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: k3dar, 2022\n"
-"Language-Team: Czech (http://www.transifex.com/xfce/xfce4-panel/language/cs/)\n"
+"Last-Translator: Martin Šiška, 2023\n"
+"Language-Team: Czech (http://app.transifex.com/xfce/xfce4-panel/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -33,21 +34,13 @@ msgid ""
 "file"
 msgstr "Přidat nový spouštěč na panel na základě informací z tohoto souboru plochy"
 
-#: panel-desktop-handler.desktop.in:7
-msgid "application-x-executable"
-msgstr ""
-
-#: panel-preferences.desktop.in:5
-msgid "org.xfce.panel"
-msgstr ""
-
 #: panel-preferences.desktop.in:8
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panely;nastavení;předvolby;panel úloh;automatické skrytí;nabídka aplikace;spustit;tlačítka;spouštěč;oznamovací oblast;stav;ikony;zásuvné moduly;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3574
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3596
 msgid "Panel"
 msgstr "Panel"
 
@@ -65,7 +58,7 @@ msgstr "Opravdu chcete odstranit „%s“?"
 #: libxfce4panel/xfce-panel-plugin.c:1100
 #: panel/panel-preferences-dialog.c:1452
 msgid "Remove Item"
-msgstr ""
+msgstr "Odebrat položku"
 
 #: libxfce4panel/xfce-panel-plugin.c:1102
 msgid ""
@@ -95,7 +88,7 @@ msgid "_Properties"
 msgstr "_Vlastnosti"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3650
+#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3672
 msgid "_About"
 msgstr "_O aplikaci"
 
@@ -109,23 +102,23 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3586
+#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3608
 msgid "Add _New Items..."
 msgstr "Přidat _nové položky…"
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3597
+#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3619
 msgid "Panel Pr_eferences..."
 msgstr "Na_stavení panelu…"
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3625
+#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3647
 msgid "Log _Out"
 msgstr "Od_hlásit se"
 
 #. help item
 #: libxfce4panel/xfce-panel-plugin.c:1341 panel/panel-item-dialog.c:196
-#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3641
+#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3663
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
 #: plugins/clock/clock-dialog.glade:120
@@ -257,21 +250,21 @@ msgstr "Chcete spustit panel? Pokud ano, ujistěte se, že se relace při odhlá
 msgid "No running instance of %s was found"
 msgstr "Nebyla nalezena žádná spuštěná instance %s"
 
-#: panel/panel-application.c:222
+#: panel/panel-application.c:221
 msgid "Failed to launch the migration application"
 msgstr "Nepodařilo se spustit migraci aplikace"
 
-#: panel/panel-application.c:1047
+#: panel/panel-application.c:1048
 msgid "Create _Launcher"
 msgstr "Vytvořit _spouštěč"
 
-#: panel/panel-application.c:1048
+#: panel/panel-application.c:1049
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Tato akce vytvoří nový spouštěč zásuvného modulu na panelu a přesunuté soubory vloží jako položky nabídky."
 
-#: panel/panel-application.c:1050
+#: panel/panel-application.c:1051
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -280,21 +273,21 @@ msgstr[1] "Vytvořit nový spouštěč z %d souborů na ploše"
 msgstr[2] "Vytvořit nový spouštěč z %d souborů na ploše"
 msgstr[3] "Vytvořit nový spouštěč z %d souborů na ploše"
 
-#: panel/panel-application.c:1807
+#: panel/panel-application.c:1808
 msgid "Quit"
 msgstr "Ukončit"
 
-#: panel/panel-application.c:1808
+#: panel/panel-application.c:1809
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Spustili jste X server bez správce relace. Kliknutím Ukončit bude ukončen X server."
 
-#: panel/panel-application.c:1809
+#: panel/panel-application.c:1810
 msgid "Are you sure you want to quit the panel?"
 msgstr "Opravdu chcete panel ukončit?"
 
-#: panel/panel-application.c:1817
+#: panel/panel-application.c:1818
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Nepodařilo se spustit příkaz \"%s\""
@@ -386,7 +379,7 @@ msgstr "Zásuvný modul %s neočekávaně opustil panel, chcete jej restartovat?
 
 #: panel/panel-plugin-external.c:403
 msgid "Plugin Restart"
-msgstr ""
+msgstr "Restartovat zásuvný modul"
 
 #: panel/panel-plugin-external.c:404
 #, c-format
@@ -538,14 +531,14 @@ msgstr "Pro skrytí úchytek panelu a uzamčení jeho pozice vyberte tuto volbu.
 
 #: panel/panel-preferences-dialog.glade:447
 msgid "_Reserve space on screen edges for the panel"
-msgstr ""
+msgstr "Rezervovat prostor pro panel na okrajích obrazovky"
 
 #: panel/panel-preferences-dialog.glade:451
 msgid ""
 "Select this option if you don't want maximized windows to cover the area "
 "behind the panel. This only works when the panel is attached to a screen "
 "edge."
-msgstr ""
+msgstr "Pokud chcete, aby maximalizovaná okna pokrývala oblast za panelem, vyberte tuto volbu. Tato funkce pracuje pouze pokud je panel přichycen k okraji obrazovky."
 
 #: panel/panel-preferences-dialog.glade:472
 msgid "Au_tomatically hide the panel:"
@@ -571,7 +564,7 @@ msgstr "Poče_t řádků:"
 
 #: panel/panel-preferences-dialog.glade:600
 msgid "L_ength (pixels):"
-msgstr ""
+msgstr "Délka (v pixelech):"
 
 #: panel/panel-preferences-dialog.glade:625
 msgid "A_utomatically increase the length"
@@ -717,7 +710,7 @@ msgstr "Zkušený"
 msgid "Expert"
 msgstr "Expert"
 
-#: panel/panel-window.c:3611
+#: panel/panel-window.c:3633
 msgid "_Lock Panel"
 msgstr "_Uzamknout panel"
 
@@ -946,10 +939,6 @@ msgstr "Malá myš"
 msgid "Log out, lock or other system actions"
 msgstr "Odhlášení, uzamknutí a další systémové akce"
 
-#: plugins/actions/actions.desktop.in.in:6
-msgid "org.xfce.panel.actions"
-msgstr ""
-
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:23
 #: plugins/applicationsmenu/applicationsmenu.desktop.in.in:4
 msgid "Applications Menu"
@@ -966,7 +955,7 @@ msgstr "Titulek _tlačítka:"
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:136
 msgid "Show button on one _line"
-msgstr ""
+msgstr "Ukázat tlačítko na jednom řádku"
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:151
 msgid "_Show button title"
@@ -991,7 +980,7 @@ msgid ""
 msgstr "Tuto volbu zaškrtněte pokud chcete, aby se v nabídce zobrazovaly obecné názvy aplikací, například „Správce souborů“ místo „Thunar“"
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:229
-#: plugins/clock/clock-dialog.glade:388
+#: plugins/clock/clock-dialog.glade:405
 #: plugins/directorymenu/directorymenu-dialog.glade:150
 #: plugins/separator/separator-dialog.glade:177
 #: plugins/tasklist/tasklist-dialog.glade:257
@@ -1039,8 +1028,8 @@ msgid "_OK"
 msgstr "_OK"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1018
-#: plugins/launcher/launcher.c:2483
+#: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1040
+#: plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Nepodařilo se spustit příkaz %s."
@@ -1048,10 +1037,6 @@ msgstr "Nepodařilo se spustit příkaz %s."
 #: plugins/applicationsmenu/applicationsmenu.desktop.in.in:5
 msgid "Show a menu containing categories of installed applications"
 msgstr "Zobrazit nabídku obsahující kategorie nainstalovaných aplikací"
-
-#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:6
-msgid "org.xfce.panel.applicationsmenu"
-msgstr ""
 
 #: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -1089,45 +1074,45 @@ msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A, %d. %B %Y"
 
-#: plugins/clock/clock.c:150
+#: plugins/clock/clock.c:153
 msgid "Week %V"
 msgstr "%V. týden"
 
-#: plugins/clock/clock.c:453
+#: plugins/clock/clock.c:474
 msgid "Failed to execute clock command"
 msgstr "Nepodařilo se spustit příkaz hodin"
 
-#: plugins/clock/clock.c:957
+#: plugins/clock/clock.c:979
 msgid "Custom Format"
 msgstr "Vlastní formát"
 
 #: plugins/clock/clock-dialog.glade:13
 msgid "Decimal"
-msgstr ""
+msgstr "Dekadická"
 
 #: plugins/clock/clock-dialog.glade:16
 msgid "Sexagesimal"
-msgstr ""
+msgstr "Hexagesimální"
 
 #: plugins/clock/clock-dialog.glade:19
 msgid "Binary time"
-msgstr ""
+msgstr "Binární"
 
 #: plugins/clock/clock-dialog.glade:30
 msgid "Date, then time"
-msgstr ""
+msgstr "Datum, potom čas"
 
 #: plugins/clock/clock-dialog.glade:33
 msgid "Time, then date"
-msgstr ""
+msgstr "Čas, potom datum"
 
 #: plugins/clock/clock-dialog.glade:36
 msgid "Date Only"
-msgstr ""
+msgstr "Pouze datum"
 
 #: plugins/clock/clock-dialog.glade:39
 msgid "Time Only"
-msgstr ""
+msgstr "Pouze čas"
 
 #: plugins/clock/clock-dialog.glade:71
 msgid "Analog"
@@ -1181,12 +1166,16 @@ msgstr ""
 msgid "Co_mmand:"
 msgstr "_Příkaz:"
 
-#: plugins/clock/clock-dialog.glade:277
-msgid "Calendar"
-msgstr ""
+#: plugins/clock/clock-dialog.glade:273
+msgid "_Show week numbers"
+msgstr "Ukázat čísla týdnů"
 
-#: plugins/clock/clock-dialog.glade:312 plugins/clock/clock-dialog.glade:652
-#: plugins/clock/clock-dialog.glade:774
+#: plugins/clock/clock-dialog.glade:294
+msgid "Calendar"
+msgstr "Kalendář"
+
+#: plugins/clock/clock-dialog.glade:329 plugins/clock/clock-dialog.glade:669
+#: plugins/clock/clock-dialog.glade:791
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -1194,57 +1183,57 @@ msgid ""
 "page for additional information."
 msgstr "Formát popisuje části data a času vložených do názvu panelu. Například %Y bude nahrazeno rokem, %m měsícem a %d dnem. Podobným způsobem změní tagy <b></b> text na tučný. Více informací získáte na stránce nápovědy."
 
-#: plugins/clock/clock-dialog.glade:341
+#: plugins/clock/clock-dialog.glade:358
 msgid "_Tooltip format:"
 msgstr "Formát _tipu:"
 
-#: plugins/clock/clock-dialog.glade:354 plugins/clock/clock-dialog.glade:602
+#: plugins/clock/clock-dialog.glade:371 plugins/clock/clock-dialog.glade:619
 msgid "_Layout:"
 msgstr "_Rozložení:"
 
-#: plugins/clock/clock-dialog.glade:418
+#: plugins/clock/clock-dialog.glade:435
 msgid "Sho_w AM/PM"
 msgstr "Zobrazovat AM a PM"
 
-#: plugins/clock/clock-dialog.glade:433
+#: plugins/clock/clock-dialog.glade:450
 msgid "Fl_ash time separators"
 msgstr "B_likání oddělovačů"
 
-#: plugins/clock/clock-dialog.glade:448
+#: plugins/clock/clock-dialog.glade:465
 msgid "24-_hour clock"
 msgstr "24hodinový cyklus"
 
-#: plugins/clock/clock-dialog.glade:491
+#: plugins/clock/clock-dialog.glade:508
 msgid "Binary mode:"
-msgstr ""
+msgstr "Binární"
 
-#: plugins/clock/clock-dialog.glade:507
+#: plugins/clock/clock-dialog.glade:524
 msgid "Display _seconds"
 msgstr "Zobrazovat _sekundy"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: plugins/clock/clock-dialog.glade:528
+#: plugins/clock/clock-dialog.glade:545
 msgid "F_uzziness:"
 msgstr "_Přesnost:"
 
-#: plugins/clock/clock-dialog.glade:562
+#: plugins/clock/clock-dialog.glade:579
 msgid "Show _inactive dots"
 msgstr "Zobrazit _neaktivní tečky"
 
-#: plugins/clock/clock-dialog.glade:577
+#: plugins/clock/clock-dialog.glade:594
 msgid "Show gri_d"
 msgstr "Zobrazit _mřížku"
 
-#: plugins/clock/clock-dialog.glade:623 plugins/clock/clock-dialog.glade:745
+#: plugins/clock/clock-dialog.glade:640 plugins/clock/clock-dialog.glade:762
 msgid "Font:"
-msgstr ""
-
-#: plugins/clock/clock-dialog.glade:636 plugins/clock/clock-dialog.glade:758
-msgid "Format:"
-msgstr ""
+msgstr "Písmo:"
 
 #: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
+msgid "Format:"
+msgstr "Formát:"
+
+#: plugins/clock/clock-dialog.glade:670 plugins/clock/clock-dialog.glade:792
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -1252,15 +1241,15 @@ msgid ""
 "the &quot;Help&quot; page for additional information."
 msgstr ""
 
-#: plugins/clock/clock-dialog.glade:682
+#: plugins/clock/clock-dialog.glade:699
 msgid "Date"
 msgstr "Datum"
 
-#: plugins/clock/clock-dialog.glade:727
+#: plugins/clock/clock-dialog.glade:744
 msgid "Time"
-msgstr ""
+msgstr "Čas"
 
-#: plugins/clock/clock-dialog.glade:854
+#: plugins/clock/clock-dialog.glade:871
 msgid "Clock Options"
 msgstr "Možnosti hodin"
 
@@ -1579,10 +1568,6 @@ msgstr "dvanáct"
 msgid "What time is it?"
 msgstr "Kolik je hodin?"
 
-#: plugins/clock/clock.desktop.in.in:6
-msgid "org.xfce.panel.clock"
-msgstr ""
-
 #: plugins/directorymenu/directorymenu.c:289
 #: plugins/directorymenu/directorymenu.desktop.in.in:4
 #: plugins/directorymenu/directorymenu-dialog.glade:18
@@ -1659,10 +1644,6 @@ msgstr "Vytvořit textový dokument..."
 msgid "Show a directory tree in a menu"
 msgstr "Zobrazí adresářový strom v nabídce"
 
-#: plugins/directorymenu/directorymenu.desktop.in.in:6
-msgid "org.xfce.panel.directorymenu"
-msgstr ""
-
 #: plugins/directorymenu/directorymenu-dialog.glade:99
 msgid "Select A Directory"
 msgstr "Vyberte adresář"
@@ -1720,7 +1701,7 @@ msgstr "Otevřít nabídku spouštěče"
 msgid "Unnamed Item"
 msgstr "Nepojmenovaná položka"
 
-#: plugins/launcher/launcher.c:1789
+#: plugins/launcher/launcher.c:1793
 msgid "No items"
 msgstr "Žádné položky"
 
@@ -1849,10 +1830,6 @@ msgstr "Pokročilé"
 msgid "Program launcher with optional menu"
 msgstr "Spouštěč programu s volitelnou nabídkou"
 
-#: plugins/launcher/launcher.desktop.in.in:6
-msgid "org.xfce.panel.launcher"
-msgstr ""
-
 #: plugins/pager/pager.c:685 plugins/pager/pager-dialog.glade:64
 msgid "Workspace _Settings..."
 msgstr "_Nastavení pracovní plochy…"
@@ -1902,10 +1879,6 @@ msgstr "<b>Vzhled</b>"
 msgid "Switch between virtual desktops"
 msgstr "Přepínání mezi virtuálními prostředními"
 
-#: plugins/pager/pager.desktop.in.in:6
-msgid "org.xfce.panel.pager"
-msgstr ""
-
 #: plugins/separator/separator-dialog.glade:23
 msgid "Transparent"
 msgstr "Průhledný"
@@ -1926,10 +1899,6 @@ msgstr "_Rozšířit"
 msgid "Adds a separator or space between panel items"
 msgstr "Přidá oddělovač nebo prostor mezi položkami panelu"
 
-#: plugins/separator/separator.desktop.in.in:6
-msgid "org.xfce.panel.separator"
-msgstr ""
-
 #: plugins/showdesktop/showdesktop.c:245
 msgid "Restore the minimized windows"
 msgstr "Obnovit minimalizovaná okna"
@@ -1946,10 +1915,6 @@ msgstr "Zobrazit plochu"
 #: plugins/showdesktop/showdesktop.desktop.in.in:5
 msgid "Hide all windows and show the desktop"
 msgstr "Skrýt všechna okna a zobrazit plochu"
-
-#: plugins/showdesktop/showdesktop.desktop.in.in:6
-msgid "org.xfce.panel.showdesktop"
-msgstr ""
 
 #: plugins/systray/sn-dialog.c:645
 msgid "Clear"
@@ -2089,10 +2054,6 @@ msgid ""
 "items"
 msgstr "Poskytuje položky oznamovače stavu (indikátory aplikací) a legacy položky systémové oblasti."
 
-#: plugins/systray/systray.desktop.in.in:7
-msgid "org.xfce.panel.statustray"
-msgstr ""
-
 #: plugins/tasklist/tasklist-dialog.glade:23
 msgid "Nothing"
 msgstr "Nic"
@@ -2191,46 +2152,42 @@ msgstr "Zobrazit okna _na všech monitorech"
 msgid "Show only _minimized windows"
 msgstr "Zobrazit pouze _minimalizovaná okna"
 
-#: plugins/tasklist/tasklist-widget.c:3109
+#: plugins/tasklist/tasklist-widget.c:3121
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Nelze spustit novou instanci aplikace %s"
 
-#: plugins/tasklist/tasklist-widget.c:3113
+#: plugins/tasklist/tasklist-widget.c:3125
 msgid "Error"
 msgstr "Chyba"
 
-#: plugins/tasklist/tasklist-widget.c:3142
+#: plugins/tasklist/tasklist-widget.c:3154
 msgid "Launch New Instance"
 msgstr "Spustit novou instanci"
 
-#: plugins/tasklist/tasklist-widget.c:3887
+#: plugins/tasklist/tasklist-widget.c:3899
 msgid "Mi_nimize All"
 msgstr "Mi_nimalizovat vše"
 
-#: plugins/tasklist/tasklist-widget.c:3894
+#: plugins/tasklist/tasklist-widget.c:3906
 msgid "Un_minimize All"
 msgstr "Obnovit vše z _minima"
 
-#: plugins/tasklist/tasklist-widget.c:3901
+#: plugins/tasklist/tasklist-widget.c:3913
 msgid "Ma_ximize All"
 msgstr "Ma_ximalizovat vše"
 
-#: plugins/tasklist/tasklist-widget.c:3908
+#: plugins/tasklist/tasklist-widget.c:3920
 msgid "_Unmaximize All"
 msgstr "_Obnovit vše z maxima"
 
-#: plugins/tasklist/tasklist-widget.c:3919
+#: plugins/tasklist/tasklist-widget.c:3931
 msgid "_Close All"
 msgstr "_Zavřít vše"
 
 #: plugins/tasklist/tasklist.desktop.in.in:5
 msgid "Switch between open windows using buttons"
 msgstr "Přepnout mezi otevřenými okny pomocí tlačítek"
-
-#: plugins/tasklist/tasklist.desktop.in.in:6
-msgid "org.xfce.panel.tasklist"
-msgstr ""
 
 #: plugins/windowmenu/windowmenu.c:689
 msgid "Desktop"
@@ -2290,7 +2247,3 @@ msgstr "Povolit oznámení o _urgenci"
 #: plugins/windowmenu/windowmenu.desktop.in.in:5
 msgid "Switch between open windows using a menu"
 msgstr "Přepnout mezi otevřenými okny pomocí nabídky"
-
-#: plugins/windowmenu/windowmenu.desktop.in.in:6
-msgid "org.xfce.panel.windowmenu"
-msgstr ""
