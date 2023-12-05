@@ -274,6 +274,9 @@ main (gint argc, gchar **argv)
 
   g_setenv ("GDK_CORE_DEVICE_EVENTS", "1", TRUE);
 
+  /* we need to do this right now to be able to determine the windowing system used below */
+  gtk_init (&argc, &argv);
+
   /* parse context options */
   context = g_option_context_new (_("[ARGUMENTS...]"));
   g_option_context_add_main_entries (context, option_entries, GETTEXT_PACKAGE);
@@ -292,8 +295,6 @@ main (gint argc, gchar **argv)
       return EXIT_FAILURE;
     }
   g_option_context_free (context);
-
-  gtk_init (&argc, &argv);
 
   if (opt_version)
     {
