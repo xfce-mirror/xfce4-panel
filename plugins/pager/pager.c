@@ -916,7 +916,7 @@ pager_plugin_get_preferred_width (GtkWidget *widget,
     min_width = nat_width = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
   else if (plugin->miniature_view)
     {
-      n_workspaces = xfw_workspace_group_get_workspace_count (plugin->workspace_group);
+      n_workspaces = plugin->workspace_group != NULL ? xfw_workspace_group_get_workspace_count (plugin->workspace_group) : 1;
       n_cols = MAX (1, (n_workspaces + plugin->rows - 1) / plugin->rows);
       min_width = nat_width = (gint) (xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)) / plugin->rows * plugin->ratio * n_cols);
     }
@@ -947,7 +947,7 @@ pager_plugin_get_preferred_height (GtkWidget *widget,
     min_height = nat_height = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
   else if (plugin->miniature_view)
     {
-      n_workspaces = xfw_workspace_group_get_workspace_count (plugin->workspace_group);
+      n_workspaces = plugin->workspace_group != NULL ? xfw_workspace_group_get_workspace_count (plugin->workspace_group) : 1;
       n_cols = MAX (1, (n_workspaces + plugin->rows - 1) / plugin->rows);
       if (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
         min_height = nat_height = (gint) (xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)) / plugin->rows / plugin->ratio * n_cols);
