@@ -566,7 +566,6 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin,
   if (G_UNLIKELY (plugin->pager != NULL))
     {
       gtk_widget_destroy (GTK_WIDGET (plugin->pager));
-      wnck_screen_force_update (plugin->wnck_screen);
     }
 
   mode = xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin));
