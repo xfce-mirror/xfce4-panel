@@ -40,8 +40,8 @@ struct _WrapperModule
 {
   GTypeModule __parent__;
 
-  /* module library */
   GModule *library;
+  GType plugin_type;
 };
 
 
@@ -69,7 +69,7 @@ wrapper_module_class_init (WrapperModuleClass *klass)
 static void
 wrapper_module_init (WrapperModule *module)
 {
-  /* foo */
+  module->plugin_type = G_TYPE_NONE;
 }
 
 
@@ -77,7 +77,16 @@ wrapper_module_init (WrapperModule *module)
 static void
 wrapper_module_dispose (GObject *object)
 {
-  /* do nothing */
+  WrapperModule *module = WRAPPER_MODULE (object);
+
+  if (module->plugin_type != G_TYPE_NONE)
+    {
+      /* a module containing type implementations must exist forever */
+      g_object_ref (module);
+      return;
+    }
+
+  G_OBJECT_CLASS (wrapper_module_parent_class)->dispose (object);
 }
 
 
@@ -123,7 +132,6 @@ wrapper_module_new_provider (WrapperModule  *module,
   GtkWidget           *plugin = NULL;
   PluginConstructFunc  construct_func;
   PluginInitFunc       init_func;
-  GType                type;
 
   panel_return_val_if_fail (WRAPPER_IS_MODULE (module), NULL);
   panel_return_val_if_fail (module->library != NULL, NULL);
@@ -135,10 +143,10 @@ wrapper_module_new_provider (WrapperModule  *module,
       (gpointer) &init_func) && init_func != NULL)
     {
       /* initialize the plugin */
-      type = (init_func) (G_TYPE_MODULE (module), NULL);
+      module->plugin_type = (init_func) (G_TYPE_MODULE (module), NULL);
 
       /* create the object */
-      plugin = g_object_new (type,
+      plugin = g_object_new (module->plugin_type,
                              "name", name,
                              "unique-id", unique_id,
                              "display-name", display_name,
