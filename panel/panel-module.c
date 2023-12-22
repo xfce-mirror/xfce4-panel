@@ -43,7 +43,6 @@ typedef enum _PanelModuleUnique  PanelModuleUnique;
 
 
 static void      panel_module_dispose          (GObject          *object);
-static void      panel_module_finalize         (GObject          *object);
 static gboolean  panel_module_load             (GTypeModule      *type_module);
 static void      panel_module_unload           (GTypeModule      *type_module);
 static void      panel_module_plugin_destroyed (gpointer          user_data,
@@ -120,7 +119,6 @@ panel_module_class_init (PanelModuleClass *klass)
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->dispose = panel_module_dispose;
-  gobject_class->finalize = panel_module_finalize;
 
   gtype_module_class = G_TYPE_MODULE_CLASS (klass);
   gtype_module_class->load = panel_module_load;
@@ -152,28 +150,25 @@ panel_module_init (PanelModule *module)
 static void
 panel_module_dispose (GObject *object)
 {
-  /* Do nothing to avoid problems with dispose in GTypeModule when
-   * types are registered.
-   *
-   * For us this is not a problem since the modules are released when
-   * everything is destroyed. So we really want that last unref before
-   * closing the application. */
-}
-
-
-
-static void
-panel_module_finalize (GObject *object)
-{
   PanelModule *module = PANEL_MODULE (object);
 
-  g_free (module->filename);
-  g_free (module->display_name);
-  g_free (module->comment);
-  g_free (module->icon_name);
-  g_free (module->api);
+  if (module->api != NULL)
+    {
+      g_free (module->filename);
+      g_free (module->display_name);
+      g_free (module->comment);
+      g_free (module->icon_name);
+      g_free (module->api);
+      module->api = NULL;
+      if (module->plugin_type != G_TYPE_NONE)
+        {
+          /* a module containing type implementations must exist forever */
+          g_object_ref (module);
+          return;
+        }
+    }
 
-  (*G_OBJECT_CLASS (panel_module_parent_class)->finalize) (object);
+  G_OBJECT_CLASS (panel_module_parent_class)->dispose (object);
 }
 
 
