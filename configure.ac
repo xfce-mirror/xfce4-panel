@@ -111,7 +111,6 @@ dnl **********************************
 AC_CHECK_HEADERS([stdlib.h unistd.h locale.h stdio.h errno.h time.h string.h \
                   math.h sys/types.h sys/wait.h memory.h signal.h sys/prctl.h \
                   libintl.h])
-AC_CHECK_FUNCS([bind_textdomain_codeset])
 
 dnl ******************************
 dnl *** Check for i18n support ***
@@ -121,6 +120,10 @@ AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["$GETTEXT_PACKAGE"], [Name of default get
 AC_SUBST([GETTEXT_PACKAGE])
 AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION([0.19.8])
+AC_SEARCH_LIBS([bind_textdomain_codeset], [intl],
+  [AC_DEFINE([HAVE_BIND_TEXTDOMAIN_CODESET], [1], [Define to 1 if you have the 'bind_textdomain_codeset' function.])],
+  [])
+
 
 dnl ***********************************
 dnl *** Check for gdbus-codegen ***
