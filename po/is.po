@@ -3,17 +3,17 @@
 # This file is distributed under the same license as the xfce4-panel.master package.
 # 
 # Translators:
-# Sveinn í Felli <sv1@fellsnet.is>, 2014-2015,2017-2018
+# Sveinn í Felli <sv1@fellsnet.is>, 2014-2015,2017-2018,2024
 # Sveinn í Felli <sv1@fellsnet.is>, 2018-2019
 # Sveinn í Felli <sv1@fellsnet.is>, 2010,2012-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2023-03-14 00:47+0100\n"
+"POT-Creation-Date: 2023-07-17 00:46+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>, 2018-2019\n"
-"Language-Team: Icelandic (http://www.transifex.com/xfce/xfce4-panel/language/is/)\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>, 2014-2015,2017-2018,2024\n"
+"Language-Team: Icelandic (http://app.transifex.com/xfce/xfce4-panel/language/is/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,21 +30,13 @@ msgid ""
 "file"
 msgstr "Bæta við nýjum ræsi á þessa skjástiku, byggt á upplýsingum frá þessari skjáborðsskrá"
 
-#: panel-desktop-handler.desktop.in:7
-msgid "application-x-executable"
-msgstr ""
-
-#: panel-preferences.desktop.in:5
-msgid "org.xfce.panel"
-msgstr ""
-
 #: panel-preferences.desktop.in:8
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr ""
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3574
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3596
 msgid "Panel"
 msgstr "Skjástika"
 
@@ -62,7 +54,7 @@ msgstr "Ertu viss að þú viljir fjarlægja \"%s\"?"
 #: libxfce4panel/xfce-panel-plugin.c:1100
 #: panel/panel-preferences-dialog.c:1452
 msgid "Remove Item"
-msgstr ""
+msgstr "Fjarlægja atriði"
 
 #: libxfce4panel/xfce-panel-plugin.c:1102
 msgid ""
@@ -92,7 +84,7 @@ msgid "_Properties"
 msgstr "Ei_ginleikar"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3650
+#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3672
 msgid "_About"
 msgstr "_Um hugbúnaðinn"
 
@@ -106,23 +98,23 @@ msgid "Pane_l"
 msgstr "Skjásti_ka"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3586
+#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3608
 msgid "Add _New Items..."
 msgstr "Bæta við _nýjum atriðum..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3597
+#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3619
 msgid "Panel Pr_eferences..."
 msgstr "_Kjörstillingar skjástiku..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3625
+#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3647
 msgid "Log _Out"
 msgstr "_Skrá út"
 
 #. help item
 #: libxfce4panel/xfce-panel-plugin.c:1341 panel/panel-item-dialog.c:196
-#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3641
+#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3663
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
 #: plugins/clock/clock-dialog.glade:120
@@ -254,42 +246,42 @@ msgstr "Viltu ræsa skjástikuna? Ef svo er, gakktu úr skugga um að þú visti
 msgid "No running instance of %s was found"
 msgstr "Fann ekkert eintak af %s í gangi"
 
-#: panel/panel-application.c:222
+#: panel/panel-application.c:221
 msgid "Failed to launch the migration application"
 msgstr "Mistókst að ræsa yfirfærsluforritið"
 
-#: panel/panel-application.c:1047
+#: panel/panel-application.c:1048
 msgid "Create _Launcher"
 msgstr "Bú_a til forritaræsi..."
 
-#: panel/panel-application.c:1048
+#: panel/panel-application.c:1049
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Þetta býr til nýtt ræsiíforrit á skjástikunni og setur skrárnar sem sleppt er þar sem valmyndafærslur."
 
-#: panel/panel-application.c:1050
+#: panel/panel-application.c:1051
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Búa til nýjan ræsi úr %d skjáborðsskrá"
 msgstr[1] "Búa til nýjan ræsi úr %d skjáborðsskrám"
 
-#: panel/panel-application.c:1807
+#: panel/panel-application.c:1808
 msgid "Quit"
 msgstr "Hætta"
 
-#: panel/panel-application.c:1808
+#: panel/panel-application.c:1809
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Þú ræstir X án setustjórnunar. Ef smellt er á \"Hætta\" verður X-þjóninum lokað."
 
-#: panel/panel-application.c:1809
+#: panel/panel-application.c:1810
 msgid "Are you sure you want to quit the panel?"
 msgstr "Ertu viss um að þú viljir slökkva á skjástiku?"
 
-#: panel/panel-application.c:1817
+#: panel/panel-application.c:1818
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Gat ekki keyrt skipunina \"%s\""
@@ -483,7 +475,7 @@ msgstr "Bakgrunnsmynd"
 
 #: panel/panel-preferences-dialog.glade:140
 msgid "Panel Preferences"
-msgstr ""
+msgstr "Kjörstillingar skjástiku"
 
 #: panel/panel-preferences-dialog.glade:217
 msgid "Profiles:"
@@ -491,7 +483,7 @@ msgstr ""
 
 #: panel/panel-preferences-dialog.glade:245
 msgid "_Backup and restore"
-msgstr ""
+msgstr "Öryggisa_frita og endurheimta"
 
 #: panel/panel-preferences-dialog.glade:249
 msgid "Switch between panel presets"
@@ -544,7 +536,7 @@ msgstr ""
 
 #: panel/panel-preferences-dialog.glade:472
 msgid "Au_tomatically hide the panel:"
-msgstr ""
+msgstr "Fela skjás_tikuna sjálfvirkt:"
 
 #: panel/panel-preferences-dialog.glade:513
 msgid "O_utput:"
@@ -558,7 +550,7 @@ msgstr "<b>Málsetning</b>"
 
 #: panel/panel-preferences-dialog.glade:572
 msgid "Row _size (pixels):"
-msgstr ""
+msgstr "_Stærð raða (mynddílar):"
 
 #: panel/panel-preferences-dialog.glade:586
 msgid "Num_ber of rows:"
@@ -566,7 +558,7 @@ msgstr "_Fjöldi raða:"
 
 #: panel/panel-preferences-dialog.glade:600
 msgid "L_ength (pixels):"
-msgstr ""
+msgstr "L_engd (mynddílar):"
 
 #: panel/panel-preferences-dialog.glade:625
 msgid "A_utomatically increase the length"
@@ -584,7 +576,7 @@ msgstr "B_irting"
 
 #: panel/panel-preferences-dialog.glade:720
 msgid "Dark mode"
-msgstr ""
+msgstr "Dökkur hamur"
 
 #: panel/panel-preferences-dialog.glade:760
 msgid "<b>Background</b>"
@@ -617,11 +609,11 @@ msgstr "<b>Táknmyndir</b>"
 
 #: panel/panel-preferences-dialog.glade:889
 msgid "Adjust size au_tomatically"
-msgstr ""
+msgstr "Aðlaga s_tærð sjálfvirkt"
 
 #: panel/panel-preferences-dialog.glade:926
 msgid "Fixed icon _size (pixels):"
-msgstr ""
+msgstr "Föst _stærð táknmyndar (mynddílar):"
 
 #: panel/panel-preferences-dialog.glade:969
 msgid "<b>Opacity</b>"
@@ -712,7 +704,7 @@ msgstr "Vanur"
 msgid "Expert"
 msgstr "Snillingur"
 
-#: panel/panel-window.c:3611
+#: panel/panel-window.c:3633
 msgid "_Lock Panel"
 msgstr "Læsa skjástiku"
 
@@ -744,15 +736,15 @@ msgstr "Setuvalmynd"
 
 #: plugins/actions/actions-dialog.glade:49
 msgid "Full Name"
-msgstr ""
+msgstr "Fullt nafn"
 
 #: plugins/actions/actions-dialog.glade:52
 msgid "Username"
-msgstr ""
+msgstr "Notandanafn"
 
 #: plugins/actions/actions-dialog.glade:55
 msgid "User ID"
-msgstr ""
+msgstr "Auðkenni notanda"
 
 #: plugins/actions/actions-dialog.glade:58
 msgid "Custom"
@@ -764,11 +756,11 @@ msgstr "Út_lit:"
 
 #: plugins/actions/actions-dialog.glade:188
 msgid "Title:"
-msgstr ""
+msgstr "Titill:"
 
 #: plugins/actions/actions-dialog.glade:201
 msgid "Custo_m title:"
-msgstr ""
+msgstr "Sérs_niðinn titill:"
 
 #: plugins/actions/actions-dialog.glade:255
 #: plugins/launcher/launcher-dialog.glade:667
@@ -941,10 +933,6 @@ msgstr ""
 msgid "Log out, lock or other system actions"
 msgstr "Skrá út, læsa eða aðrar kerfisaðgerðir"
 
-#: plugins/actions/actions.desktop.in.in:6
-msgid "org.xfce.panel.actions"
-msgstr ""
-
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:23
 #: plugins/applicationsmenu/applicationsmenu.desktop.in.in:4
 msgid "Applications Menu"
@@ -986,7 +974,7 @@ msgid ""
 msgstr "Veldu þennan möguleika til að birta almenn heiti forrita í valmynd, til dæmis \"Skráastjóri\" í stað \"Thunar\""
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:229
-#: plugins/clock/clock-dialog.glade:388
+#: plugins/clock/clock-dialog.glade:405
 #: plugins/directorymenu/directorymenu-dialog.glade:150
 #: plugins/separator/separator-dialog.glade:177
 #: plugins/tasklist/tasklist-dialog.glade:257
@@ -1034,8 +1022,8 @@ msgid "_OK"
 msgstr "Í _lagi"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1018
-#: plugins/launcher/launcher.c:2483
+#: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1040
+#: plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Gat ekki keyrt skipun \"%s\"."
@@ -1043,10 +1031,6 @@ msgstr "Gat ekki keyrt skipun \"%s\"."
 #: plugins/applicationsmenu/applicationsmenu.desktop.in.in:5
 msgid "Show a menu containing categories of installed applications"
 msgstr "Birta valmynd með flokkum uppsettra forrita"
-
-#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:6
-msgid "org.xfce.panel.applicationsmenu"
-msgstr ""
 
 #: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -1084,15 +1068,15 @@ msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A %d. %B %Y"
 
-#: plugins/clock/clock.c:150
+#: plugins/clock/clock.c:153
 msgid "Week %V"
 msgstr "Vika %V"
 
-#: plugins/clock/clock.c:453
+#: plugins/clock/clock.c:474
 msgid "Failed to execute clock command"
 msgstr "Gat ekki keyrt klukkuskipun"
 
-#: plugins/clock/clock.c:957
+#: plugins/clock/clock.c:979
 msgid "Custom Format"
 msgstr "Sérsnið"
 
@@ -1176,12 +1160,16 @@ msgstr ""
 msgid "Co_mmand:"
 msgstr "Skipu_n:"
 
-#: plugins/clock/clock-dialog.glade:277
-msgid "Calendar"
+#: plugins/clock/clock-dialog.glade:273
+msgid "_Show week numbers"
 msgstr ""
 
-#: plugins/clock/clock-dialog.glade:312 plugins/clock/clock-dialog.glade:652
-#: plugins/clock/clock-dialog.glade:774
+#: plugins/clock/clock-dialog.glade:294
+msgid "Calendar"
+msgstr "Dagatal"
+
+#: plugins/clock/clock-dialog.glade:329 plugins/clock/clock-dialog.glade:669
+#: plugins/clock/clock-dialog.glade:791
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -1189,57 +1177,57 @@ msgid ""
 "page for additional information."
 msgstr "Sniðið lýsir hlutum dagsetninga og tíma sem settir verða á skjástikuna. Til dæmis verður %Y skipt út fyrir ártal, %m verður mánuður og %d verður dagsetning. Á svipaðan hátt gera <b></b> merki innlagðan texta feitletraðan. Skoðaðu síðuna \"Hjálp\" til að fá vitneskju um meira."
 
-#: plugins/clock/clock-dialog.glade:341
+#: plugins/clock/clock-dialog.glade:358
 msgid "_Tooltip format:"
 msgstr "S_nið ábendinga:"
 
-#: plugins/clock/clock-dialog.glade:354 plugins/clock/clock-dialog.glade:602
+#: plugins/clock/clock-dialog.glade:371 plugins/clock/clock-dialog.glade:619
 msgid "_Layout:"
 msgstr "_Framsetning:"
 
-#: plugins/clock/clock-dialog.glade:418
+#: plugins/clock/clock-dialog.glade:435
 msgid "Sho_w AM/PM"
 msgstr "Sýna FH/_EH"
 
-#: plugins/clock/clock-dialog.glade:433
+#: plugins/clock/clock-dialog.glade:450
 msgid "Fl_ash time separators"
 msgstr "Blikka tíma_aðgreinum"
 
-#: plugins/clock/clock-dialog.glade:448
+#: plugins/clock/clock-dialog.glade:465
 msgid "24-_hour clock"
 msgstr "24 _klst. klukka"
 
-#: plugins/clock/clock-dialog.glade:491
+#: plugins/clock/clock-dialog.glade:508
 msgid "Binary mode:"
 msgstr ""
 
-#: plugins/clock/clock-dialog.glade:507
+#: plugins/clock/clock-dialog.glade:524
 msgid "Display _seconds"
 msgstr "_Sýna sekúndur"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: plugins/clock/clock-dialog.glade:528
+#: plugins/clock/clock-dialog.glade:545
 msgid "F_uzziness:"
 msgstr "Ó_nákvæmni:"
 
-#: plugins/clock/clock-dialog.glade:562
+#: plugins/clock/clock-dialog.glade:579
 msgid "Show _inactive dots"
 msgstr "Sýna _óvirka punkta"
 
-#: plugins/clock/clock-dialog.glade:577
+#: plugins/clock/clock-dialog.glade:594
 msgid "Show gri_d"
 msgstr "Sýna _hnitanet"
 
-#: plugins/clock/clock-dialog.glade:623 plugins/clock/clock-dialog.glade:745
+#: plugins/clock/clock-dialog.glade:640 plugins/clock/clock-dialog.glade:762
 msgid "Font:"
-msgstr ""
-
-#: plugins/clock/clock-dialog.glade:636 plugins/clock/clock-dialog.glade:758
-msgid "Format:"
-msgstr ""
+msgstr "Letur:"
 
 #: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
+msgid "Format:"
+msgstr "Snið:"
+
+#: plugins/clock/clock-dialog.glade:670 plugins/clock/clock-dialog.glade:792
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -1247,15 +1235,15 @@ msgid ""
 "the &quot;Help&quot; page for additional information."
 msgstr ""
 
-#: plugins/clock/clock-dialog.glade:682
+#: plugins/clock/clock-dialog.glade:699
 msgid "Date"
 msgstr "Dagsetning"
 
-#: plugins/clock/clock-dialog.glade:727
+#: plugins/clock/clock-dialog.glade:744
 msgid "Time"
-msgstr ""
+msgstr "Tími"
 
-#: plugins/clock/clock-dialog.glade:854
+#: plugins/clock/clock-dialog.glade:871
 msgid "Clock Options"
 msgstr "Eiginleikar klukku"
 
@@ -1267,7 +1255,7 @@ msgstr "%R"
 #: plugins/clock/clock-digital.h:28
 msgctxt "Date"
 msgid "%Y-%m-%d"
-msgstr ""
+msgstr "%Y-%m-%d"
 
 #: plugins/clock/clock-fuzzy.c:82
 msgid "Night"
@@ -1574,10 +1562,6 @@ msgstr "tólf"
 msgid "What time is it?"
 msgstr "Hvað er klukkan?"
 
-#: plugins/clock/clock.desktop.in.in:6
-msgid "org.xfce.panel.clock"
-msgstr ""
-
 #: plugins/directorymenu/directorymenu.c:289
 #: plugins/directorymenu/directorymenu.desktop.in.in:4
 #: plugins/directorymenu/directorymenu-dialog.glade:18
@@ -1615,7 +1599,7 @@ msgstr "Búa til nýja möppu"
 
 #: plugins/directorymenu/directorymenu.c:921
 msgid "Create New Text Document"
-msgstr ""
+msgstr "Búa til nýtt textaskjal"
 
 #: plugins/directorymenu/directorymenu.c:928
 msgid "C_reate"
@@ -1623,7 +1607,7 @@ msgstr "_Búa til"
 
 #: plugins/directorymenu/directorymenu.c:929
 msgid "Create & _Open"
-msgstr ""
+msgstr "Útbúa _og opna"
 
 #: plugins/directorymenu/directorymenu.c:943
 msgid "Enter the new name:"
@@ -1632,7 +1616,7 @@ msgstr "Skrifaðu inn nýtt heiti:"
 #: plugins/directorymenu/directorymenu.c:979
 #, c-format
 msgid "Failed to create folder: %s"
-msgstr ""
+msgstr "Mistókst að búa til möppu: %s"
 
 #: plugins/directorymenu/directorymenu.c:1060
 msgid "Open Folder"
@@ -1644,19 +1628,15 @@ msgstr "Opna í skjáhermi"
 
 #: plugins/directorymenu/directorymenu.c:1086
 msgid "Create Folder..."
-msgstr ""
+msgstr "Búa til möppu..."
 
 #: plugins/directorymenu/directorymenu.c:1099
 msgid "Create Text Document..."
-msgstr ""
+msgstr "Búa til textaskjal..."
 
 #: plugins/directorymenu/directorymenu.desktop.in.in:5
 msgid "Show a directory tree in a menu"
 msgstr "Birta möppugreinar í valmynd"
-
-#: plugins/directorymenu/directorymenu.desktop.in.in:6
-msgid "org.xfce.panel.directorymenu"
-msgstr ""
 
 #: plugins/directorymenu/directorymenu-dialog.glade:99
 msgid "Select A Directory"
@@ -1668,19 +1648,19 @@ msgstr "_Grunnmappa:"
 
 #: plugins/directorymenu/directorymenu-dialog.glade:179
 msgid "Show 'New Text _Document'"
-msgstr ""
+msgstr "_Birta 'Nýtt textaskjal'"
 
 #: plugins/directorymenu/directorymenu-dialog.glade:194
 msgid "Show '_New Folder'"
-msgstr ""
+msgstr "Birta '_Ný mappa'"
 
 #: plugins/directorymenu/directorymenu-dialog.glade:209
 msgid "Show 'Open in _Terminal'"
-msgstr ""
+msgstr "Bir_ta 'Opna í skjáhermi'"
 
 #: plugins/directorymenu/directorymenu-dialog.glade:224
 msgid "Show '_Open _Folder'"
-msgstr ""
+msgstr "Birta '_Opna möppu'"
 
 #: plugins/directorymenu/directorymenu-dialog.glade:243
 msgid "Menu"
@@ -1715,7 +1695,7 @@ msgstr "Opna keyrsluvalmynd"
 msgid "Unnamed Item"
 msgstr "Nafnlaust atriði"
 
-#: plugins/launcher/launcher.c:1789
+#: plugins/launcher/launcher.c:1793
 msgid "No items"
 msgstr "Engin atriði"
 
@@ -1844,10 +1824,6 @@ msgstr "Nánar"
 msgid "Program launcher with optional menu"
 msgstr "Forritaræsir með mögulegri valmynd"
 
-#: plugins/launcher/launcher.desktop.in.in:6
-msgid "org.xfce.panel.launcher"
-msgstr ""
-
 #: plugins/pager/pager.c:685 plugins/pager/pager-dialog.glade:64
 msgid "Workspace _Settings..."
 msgstr "_Stillingar vinnusvæða..."
@@ -1867,7 +1843,7 @@ msgstr "Hnappar"
 
 #: plugins/pager/pager-dialog.glade:19
 msgid "Miniature View"
-msgstr ""
+msgstr "Smækkuð sýn"
 
 #: plugins/pager/pager-dialog.glade:48 plugins/pager/pager.desktop.in.in:4
 msgid "Workspace Switcher"
@@ -1879,11 +1855,11 @@ msgstr "Fjöldi _raða:"
 
 #: plugins/pager/pager-dialog.glade:197
 msgid "Show workspace number"
-msgstr ""
+msgstr "Birta númer vinnusvæða"
 
 #: plugins/pager/pager-dialog.glade:210
 msgid "Switch workspaces using the mouse wheel"
-msgstr ""
+msgstr "Skipta milli vinnusvæða með músarhjóli"
 
 #: plugins/pager/pager-dialog.glade:224
 msgid "Wrap around workspaces"
@@ -1896,10 +1872,6 @@ msgstr "<b>Útlit</b>"
 #: plugins/pager/pager.desktop.in.in:5
 msgid "Switch between virtual desktops"
 msgstr "Skipta milli sýndarskjáborða"
-
-#: plugins/pager/pager.desktop.in.in:6
-msgid "org.xfce.panel.pager"
-msgstr ""
 
 #: plugins/separator/separator-dialog.glade:23
 msgid "Transparent"
@@ -1921,10 +1893,6 @@ msgstr "Þ_enja"
 msgid "Adds a separator or space between panel items"
 msgstr "Bætir við aðgreini eða bili á milli atriða á stiku"
 
-#: plugins/separator/separator.desktop.in.in:6
-msgid "org.xfce.panel.separator"
-msgstr ""
-
 #: plugins/showdesktop/showdesktop.c:245
 msgid "Restore the minimized windows"
 msgstr "Endurheimta lágmarkaða glugga"
@@ -1941,10 +1909,6 @@ msgstr "Sýna skjáborðið"
 #: plugins/showdesktop/showdesktop.desktop.in.in:5
 msgid "Hide all windows and show the desktop"
 msgstr "Fela alla glugga og sýna skjáborðið"
-
-#: plugins/showdesktop/showdesktop.desktop.in.in:6
-msgid "org.xfce.panel.showdesktop"
-msgstr ""
 
 #: plugins/systray/sn-dialog.c:645
 msgid "Clear"
@@ -2024,7 +1988,7 @@ msgstr ""
 
 #: plugins/systray/sn-dialog.glade:479 plugins/systray/sn-dialog.glade:711
 msgid "Known Items"
-msgstr ""
+msgstr "Þekkt atriði"
 
 #: plugins/systray/sn-dialog.glade:512
 msgid "_Menu is primary action"
@@ -2082,10 +2046,6 @@ msgstr ""
 msgid ""
 "Provides status notifier items (application indicators) and legacy systray "
 "items"
-msgstr ""
-
-#: plugins/systray/systray.desktop.in.in:7
-msgid "org.xfce.panel.statustray"
 msgstr ""
 
 #: plugins/tasklist/tasklist-dialog.glade:23
@@ -2186,46 +2146,42 @@ msgstr "Sýna _glugga frá öllum skjám"
 msgid "Show only _minimized windows"
 msgstr "Sýna einungis _lágmarkaða glugga"
 
-#: plugins/tasklist/tasklist-widget.c:3109
+#: plugins/tasklist/tasklist-widget.c:3121
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:3113
+#: plugins/tasklist/tasklist-widget.c:3125
 msgid "Error"
 msgstr "Villa"
 
-#: plugins/tasklist/tasklist-widget.c:3142
+#: plugins/tasklist/tasklist-widget.c:3154
 msgid "Launch New Instance"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:3887
+#: plugins/tasklist/tasklist-widget.c:3899
 msgid "Mi_nimize All"
 msgstr "_Lágmarka alla"
 
-#: plugins/tasklist/tasklist-widget.c:3894
+#: plugins/tasklist/tasklist-widget.c:3906
 msgid "Un_minimize All"
 msgstr "Stæ_kka alla"
 
-#: plugins/tasklist/tasklist-widget.c:3901
+#: plugins/tasklist/tasklist-widget.c:3913
 msgid "Ma_ximize All"
 msgstr "_Hámarka alla"
 
-#: plugins/tasklist/tasklist-widget.c:3908
+#: plugins/tasklist/tasklist-widget.c:3920
 msgid "_Unmaximize All"
 msgstr "_Minnka alla"
 
-#: plugins/tasklist/tasklist-widget.c:3919
+#: plugins/tasklist/tasklist-widget.c:3931
 msgid "_Close All"
 msgstr "Loka _öllu"
 
 #: plugins/tasklist/tasklist.desktop.in.in:5
 msgid "Switch between open windows using buttons"
 msgstr "Skipta á milli opinna glugga með hnöppum"
-
-#: plugins/tasklist/tasklist.desktop.in.in:6
-msgid "org.xfce.panel.tasklist"
-msgstr ""
 
 #: plugins/windowmenu/windowmenu.c:689
 msgid "Desktop"
@@ -2285,7 +2241,3 @@ msgstr "Virkja áríðandi tilkynningar"
 #: plugins/windowmenu/windowmenu.desktop.in.in:5
 msgid "Switch between open windows using a menu"
 msgstr "Skipta á milli opinna glugga með valmynd"
-
-#: plugins/windowmenu/windowmenu.desktop.in.in:6
-msgid "org.xfce.panel.windowmenu"
-msgstr ""
