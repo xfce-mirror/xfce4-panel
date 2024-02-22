@@ -247,11 +247,12 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   TASKLIST_DIALOG_BIND ("window-scrolling", "active")
   TASKLIST_DIALOG_BIND ("middle-click", "active")
 
-#ifndef ENABLE_X11
-  /* not functional in x11, so avoid confusion */
-  object = gtk_builder_get_object (builder, "show-wireframes");
-  gtk_widget_hide (GTK_WIDGET (object));
-#endif
+  if (!WINDOWING_IS_X11 ())
+    {
+      /* not functional in x11, so avoid confusion */
+      object = gtk_builder_get_object (builder, "show-wireframes");
+      gtk_widget_hide (GTK_WIDGET (object));
+    }
 
   gtk_widget_show (GTK_WIDGET (dialog));
 }

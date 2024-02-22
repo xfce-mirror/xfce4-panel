@@ -790,7 +790,7 @@ xfce_tasklist_set_property (GObject      *object,
       break;
 
     case PROP_SHOW_WIREFRAMES:
-      xfce_tasklist_set_show_wireframes (tasklist, g_value_get_boolean (value));
+      xfce_tasklist_set_show_wireframes (tasklist, WINDOWING_IS_X11 () && g_value_get_boolean (value));
       break;
 
     case PROP_SHOW_HANDLE:
