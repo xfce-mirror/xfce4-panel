@@ -1022,7 +1022,7 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
     {
       /* get the plugin arguments list */
       uris = xfce_panel_plugin_get_arguments (panel_plugin);
-      if (G_LIKELY (uris != NULL))
+      if (G_LIKELY (uris != NULL && *uris != NULL))
         {
           /* create array with all the uris */
           array = g_ptr_array_new ();
