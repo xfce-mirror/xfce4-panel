@@ -327,11 +327,6 @@ main (gint argc, gchar **argv)
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 
-#ifdef G_ENABLE_DEBUG
-  /* terminate the program on warnings and critical messages */
-  g_log_set_always_fatal (G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING);
-#endif
-
   /* check if we have all the reuiqred arguments */
   if (G_UNLIKELY (argc < PLUGIN_ARGV_ARGUMENTS))
     {
