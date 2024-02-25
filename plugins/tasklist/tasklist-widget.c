@@ -38,6 +38,9 @@
 #ifdef ENABLE_X11
 #include <X11/Xlib.h>
 #include <X11/extensions/shape.h>
+#include <libxfce4windowing/xfw-x11.h>
+#else
+#define xfw_window_x11_get_xid(window) 0LU
 #endif
 
 
@@ -2439,7 +2442,7 @@ xfce_tasklist_wireframe_update (XfceTasklist      *tasklist,
   rect = *(xfw_window_get_geometry (child->window));
 
   /* check if we're dealing with a CSD window */
-  gdkwindow = gdk_x11_window_foreign_new_for_display (gdpy, xfw_window_get_id (child->window));
+  gdkwindow = gdk_x11_window_foreign_new_for_display (gdpy, xfw_window_x11_get_xid (child->window));
   if (gdkwindow != NULL)
     {
       if (xfce_has_gtk_frame_extents (gdkwindow, &extents))
@@ -3567,7 +3570,7 @@ xfce_tasklist_button_drag_data_get (GtkWidget         *button,
 
   panel_return_if_fail (XFW_IS_WINDOW (child->window));
 
-  xid = xfw_window_get_id (child->window);
+  xid = xfw_window_x11_get_xid (child->window);
   gtk_selection_data_set (selection_data,
                           gtk_selection_data_get_target (selection_data),
                           8, (guchar *)&xid, sizeof (gulong));
@@ -3638,7 +3641,7 @@ xfce_tasklist_button_drag_data_received (GtkWidget         *button,
           && child != child2 /* drop on the same button */
           && g_list_next (li) != sibling /* drop start of next button */
           && child->window != NULL
-          && xfw_window_get_id (child->window) == xid)
+          && xfw_window_x11_get_xid (child->window) == xid)
         {
           /* swap items */
           tasklist->windows = g_list_delete_link (tasklist->windows, li);

@@ -41,9 +41,7 @@
 #include <gio/gio.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
-#ifdef ENABLE_X11
-#include <libwnck/libwnck.h>
-#endif
+#include <libxfce4windowing/libxfce4windowing.h>
 
 #include <common/panel-private.h>
 #include <common/panel-debug.h>
@@ -383,12 +381,7 @@ main (gint argc, gchar **argv)
     signal (signums[i], panel_signal_handler);
 
   /* set EWMH source indication */
-#ifdef ENABLE_X11
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  if (WINDOWING_IS_X11 ())
-    wnck_set_client_type (WNCK_CLIENT_TYPE_PAGER);
-G_GNUC_END_IGNORE_DEPRECATIONS
-#endif
+  xfw_set_client_type (XFW_CLIENT_TYPE_PAGER);
 
   gtk_main ();
 
