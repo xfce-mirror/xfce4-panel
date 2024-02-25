@@ -840,9 +840,9 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
     return;
 
   /* signals to monitor number of workspace changes */
-  g_signal_connect (G_OBJECT (plugin->workspace_group), "workspace-created",
+  g_signal_connect (G_OBJECT (plugin->workspace_group), "workspace-added",
       G_CALLBACK (pager_plugin_configure_n_workspaces_changed), builder);
-  g_signal_connect (G_OBJECT (plugin->workspace_group), "workspace-destroyed",
+  g_signal_connect (G_OBJECT (plugin->workspace_group), "workspace-removed",
       G_CALLBACK (pager_plugin_configure_n_workspaces_changed), builder);
   g_object_weak_ref (G_OBJECT (builder), pager_plugin_configure_destroyed, plugin);
 

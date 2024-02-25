@@ -206,9 +206,9 @@ pager_buttons_set_property (GObject      *object,
 
       g_signal_connect (G_OBJECT (pager->workspace_group), "active-workspace-changed",
           G_CALLBACK (pager_buttons_screen_workspace_changed), pager);
-      g_signal_connect (G_OBJECT (pager->workspace_group), "workspace-created",
+      g_signal_connect (G_OBJECT (pager->workspace_group), "workspace-added",
           G_CALLBACK (pager_buttons_screen_workspace_created), pager);
-      g_signal_connect (G_OBJECT (pager->workspace_group), "workspace-destroyed",
+      g_signal_connect (G_OBJECT (pager->workspace_group), "workspace-removed",
           G_CALLBACK (pager_buttons_screen_workspace_destroyed), pager);
       g_signal_connect (G_OBJECT (pager->workspace_group), "viewports-changed",
           G_CALLBACK (pager_buttons_screen_viewports_changed), pager);
