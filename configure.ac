@@ -23,7 +23,7 @@ m4_define([libwnck_minimum_version], [3.0])
 m4_define([wayland_client_minimum_version], [1.15])
 m4_define([libxfce4util_minimum_version], [4.17.2])
 m4_define([libxfce4ui_minimum_version], [4.17.1])
-m4_define([libxfce4windowing_minimum_version], [4.19.1])
+m4_define([libxfce4windowing_minimum_version], [4.19.3])
 m4_define([garcon_minimum_version], [4.17.0])
 m4_define([exo_minimum_version], [0.11.2])
 m4_define([xfconf_minimum_version], [4.13.2])
@@ -158,6 +158,7 @@ XDT_CHECK_OPTIONAL_FEATURE([X11],
                              XDT_FEATURE_DEPENDENCY([GDK_X11], [gdk-x11-3.0], [gtk_minimum_version])
                              XDT_FEATURE_DEPENDENCY([GTK_X11], [gtk+-x11-3.0], [gtk_minimum_version])
                              XDT_FEATURE_DEPENDENCY([LIBWNCK], [libwnck-3.0], [libwnck_minimum_version])
+                             XDT_FEATURE_DEPENDENCY([LIBXFCE4WINDOWING_X11], [libxfce4windowing-x11-0], [libxfce4windowing_minimum_version])
                            ],
                            [the X11 windowing system])
 XDT_CHECK_OPTIONAL_FEATURE([WAYLAND],
