@@ -2,7 +2,6 @@
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"xfce4-panel\" \
-	-DWNCK_I_KNOW_THIS_IS_UNSTABLE \
 	-DDATADIR=\"$(datadir)/xfce4\" \
 	-DLIBDIR=\"$(libdir)/xfce4\" \
 	-DHELPERDIR=\"$(HELPER_PATH_PREFIX)/xfce4/panel\" \
@@ -71,7 +70,6 @@ xfce4_panel_CFLAGS = \
 	$(GMODULE_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
-	$(LIBWNCK_CFLAGS) \
 	$(XFCONF_CFLAGS) \
 	$(LIBX11_CFLAGS) \
 	$(GTK_LAYER_SHELL_CFLAGS) \
@@ -89,7 +87,6 @@ xfce4_panel_LDADD = \
 	$(GMODULE_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
-	$(LIBWNCK_LIBS) \
 	$(XFCONF_LIBS) \
 	$(LIBX11_LIBS) \
 	$(GTK_LAYER_SHELL_LIBS) \
