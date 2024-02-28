@@ -30,6 +30,7 @@
 #ifdef ENABLE_X11
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
+#include <libxfce4windowing/xfw-x11.h>
 #endif
 
 #ifdef HAVE_GTK_LAYER_SHELL
@@ -2786,7 +2787,7 @@ panel_window_active_window_geometry_changed (XfwWindow   *active_window,
           /* if a window uses client-side decorations, check the _GTK_FRAME_EXTENTS
            * application window property to get its actual size without the shadows */
           gdkwindow = gdk_x11_window_foreign_new_for_display (gdk_display_get_default (),
-                                                              xfw_window_get_id (active_window));
+                                                              xfw_window_x11_get_xid (active_window));
           if (gdkwindow != NULL)
             {
               if (xfce_has_gtk_frame_extents (gdkwindow, &extents))
@@ -2813,7 +2814,7 @@ panel_window_active_window_geometry_changed (XfwWindow   *active_window,
             guint32 *data;
 
             display = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
-            if (XGetWindowProperty (display, xfw_window_get_id (active_window),
+            if (XGetWindowProperty (display, xfw_window_x11_get_xid (active_window),
                                     XInternAtom(display, "_NET_FRAME_EXTENTS", True),
                                     0, 4, FALSE, AnyPropertyType,
                                     &real_type, &real_format, &items_read, &items_left,
