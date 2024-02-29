@@ -2,7 +2,6 @@
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"libtasklist\" \
-	-DWNCK_I_KNOW_THIS_IS_UNSTABLE \
 	$(PLATFORM_CPPFLAGS)
 
 plugindir = $(libdir)/xfce4/panel/plugins
@@ -26,7 +25,6 @@ libtasklist_la_CFLAGS = \
 	$(XFCONF_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
-	$(LIBWNCK_CFLAGS) \
 	$(LIBXFCE4WINDOWING_CFLAGS) \
 	$(LIBXFCE4WINDOWINGUI_CFLAGS) \
 	$(LIBX11_CFLAGS) \
@@ -46,7 +44,6 @@ libtasklist_la_LIBADD = \
 	$(EXO_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
-	$(LIBWNCK_LIBS) \
 	$(LIBXFCE4WINDOWING_LIBS) \
 	$(LIBXFCE4WINDOWINGUI_LIBS) \
 	$(LIBX11_LIBS) -lXext \
