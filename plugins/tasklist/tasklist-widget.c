@@ -2541,9 +2541,6 @@ xfce_tasklist_button_visible (XfceTasklistChild *child,
                               XfwWorkspace      *active_ws)
 {
   XfceTasklist *tasklist = XFCE_TASKLIST (child->tasklist);
-  GdkRectangle  rect;
-  GdkWindow    *window;
-  guint         scale_factor;
 
   panel_return_val_if_fail (active_ws == NULL || XFW_IS_WORKSPACE (active_ws), FALSE);
   panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), FALSE);
@@ -2552,24 +2549,11 @@ xfce_tasklist_button_visible (XfceTasklistChild *child,
 
   if (xfce_tasklist_filter_monitors (tasklist))
     {
-      /* The tasklist itself. */
-      window = gtk_widget_get_window (GTK_WIDGET (tasklist));
+      GdkWindow *window = gtk_widget_get_window (GTK_WIDGET (tasklist));
+      GdkMonitor *monitor = gdk_display_get_monitor_at_window (tasklist->display, window);
+      GList *monitors = xfw_window_get_monitors (child->window);
 
-      /* The window we are making a button for. */
-      rect = *(xfw_window_get_geometry (child->window));
-
-      /* apply scale factor */
-      scale_factor = gdk_window_get_scale_factor (window);
-      rect.x /= scale_factor;
-      rect.y /= scale_factor;
-      rect.width /= scale_factor;
-      rect.height /= scale_factor;
-
-      /* Ask Gdk if they are on the same monitor. */
-      if (gdk_display_get_monitor_at_window (tasklist->display, window) !=
-          gdk_display_get_monitor_at_point (tasklist->display,
-                                            rect.x + rect.width / 2,
-                                            rect.y + rect.height / 2))
+      if (!g_list_find (monitors, monitor))
          return FALSE;
     }
 
