@@ -1,5 +1,5 @@
 dnl
-dnl Copyright (c) 2004-2023 The Xfce development team
+dnl Copyright (c) 2004-2024 The Xfce development team
 dnl
 dnl 2005-2007 Jasper Huijsmans <jasper@xfce.org>
 dnl 2006-2008 Nick Schermer <nick@xfce.org>
@@ -31,7 +31,7 @@ m4_define([xfconf_minimum_version], [4.13.2])
 dnl ***************************
 dnl *** Initialize autoconf ***
 dnl ***************************
-AC_COPYRIGHT([Copyright (c) 2004-2023 The Xfce development team. All rights reserved.
+AC_COPYRIGHT([Copyright (c) 2004-2024 The Xfce development team. All rights reserved.
   Written for Xfce by Jasper Huijsmans <jasper@xfce.org> and Nick Schermer <nick@xfce.org>.])
 AC_INIT([xfce4-panel],[xdt_version],[https://gitlab.xfce.org/xfce/xfce4-panel/-/issues],[xfce4-panel])
 AC_PREREQ([2.69])
