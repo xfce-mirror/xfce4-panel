@@ -417,8 +417,7 @@ panel_plugin_external_child_ask_restart_dialog (GtkWindow *parent,
                                     PANEL_PLUGIN_AUTO_RESTART);
 
   dialog = xfce_message_dialog_new (parent, _("Plugin Restart"), "dialog-question", primary_text,
-                                    secondary_text, _("_Execute"), GTK_RESPONSE_OK, _("_Remove"), GTK_RESPONSE_CLOSE, NULL);
-
+                                    secondary_text, _("_Execute"), GTK_RESPONSE_OK, _("_Remove"), GTK_RESPONSE_REJECT, NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 
@@ -427,7 +426,7 @@ panel_plugin_external_child_ask_restart_dialog (GtkWindow *parent,
   g_free (primary_text);
   g_free (secondary_text);
 
-  return (response == GTK_RESPONSE_OK);
+  return (response != GTK_RESPONSE_REJECT);
 }
 
 
