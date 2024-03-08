@@ -2508,7 +2508,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
   GdkRectangle  a = { 0 }, b;
   gint          n_monitors, n;
   const gchar  *name;
-  GdkMonitor   *monitor;
+  GdkMonitor   *monitor = NULL;
   StrutsEgde    struts_edge;
   gboolean      force_struts_update = FALSE;
 
