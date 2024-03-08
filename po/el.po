@@ -12,7 +12,7 @@
 # Efstathios Iosifidis <iosifidis@opensuse.org>, 2012
 # Evaggelos Balaskas <ebal@ebal.gr>, 2008-2010
 # Ioannis LM, 2019,2022
-# Ioannis LM, 2019,2022-2023
+# Ioannis LM, 2019,2022-2024
 # nonviotale <nonviotale@gmail.com>, 2013
 # Panagiotis Tabakis, 2015-2016
 # Panagiotis Tabakis, 2016
@@ -25,9 +25,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2023-05-05 10:50+0200\n"
+"POT-Creation-Date: 2023-07-17 00:46+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Ioannis LM, 2019,2022-2023\n"
+"Last-Translator: Ioannis LM, 2019,2022-2024\n"
 "Language-Team: Greek (http://app.transifex.com/xfce/xfce4-panel/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,7 +51,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "ταμπλό;ρυθμίσεις;προτιμήσεις;γραμμή εργασιών;αυτόματη απόκρυψη;μενού εφαρμογής;έναρξη;κουμπιά;εκκινητής;περιοχή ειδοποιήσεων;εμφάνιση;εικονίδια;πρόσθετα;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3582
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3596
 msgid "Panel"
 msgstr "Ταμπλό"
 
@@ -99,7 +99,7 @@ msgid "_Properties"
 msgstr "_Ιδιότητες"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3658
+#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3672
 msgid "_About"
 msgstr "_Περί"
 
@@ -113,23 +113,23 @@ msgid "Pane_l"
 msgstr "Ταμπ_λό"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3594
+#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3608
 msgid "Add _New Items..."
 msgstr "Προσθήκη _νέων αντικειμένων..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3605
+#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3619
 msgid "Panel Pr_eferences..."
 msgstr "Π_ροτιμήσεις ταμπλό..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3633
+#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3647
 msgid "Log _Out"
 msgstr "Απ_οσύνδεση"
 
 #. help item
 #: libxfce4panel/xfce-panel-plugin.c:1341 panel/panel-item-dialog.c:196
-#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3649
+#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3663
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
 #: plugins/clock/clock-dialog.glade:120
@@ -540,18 +540,18 @@ msgstr "Επιλέξτε το για να αποκρύψετε τις χειρο
 
 #: panel/panel-preferences-dialog.glade:447
 msgid "_Reserve space on screen edges for the panel"
-msgstr "Δια_τήρηση χώρου στις άκρες της οθόνης για το ταμπλό"
+msgstr "Δια_τήρηση χώρου για το ταμπλό στις άκρες της οθόνης"
 
 #: panel/panel-preferences-dialog.glade:451
 msgid ""
 "Select this option if you don't want maximized windows to cover the area "
 "behind the panel. This only works when the panel is attached to a screen "
 "edge."
-msgstr "Επιλέξτε το εάν δεν θέλετε τα μεγιστοποιημένα παράθυρα να καλύπτουν την περιοχή πίσω από το ταμπλό. Αυτό δουλεύει μόνο όταν το ταμπλό είναι προσαρτημένο στην άκρη της οθόνης."
+msgstr "Επιλέξτε το εάν θέλετε τα μεγιστοποιημένα παράθυρα να μη καλύπτουν την περιοχή πίσω από το ταμπλό. Αυτό δουλεύει μόνο όταν το ταμπλό είναι προσαρτημένο στην άκρη της οθόνης."
 
 #: panel/panel-preferences-dialog.glade:472
 msgid "Au_tomatically hide the panel:"
-msgstr "Αυτόματη απόκρυψη ταμπλό:"
+msgstr "Αυτόματη απόκρυ_ψη ταμπλό:"
 
 #: panel/panel-preferences-dialog.glade:513
 msgid "O_utput:"
@@ -573,7 +573,7 @@ msgstr "_Αριθμός γραμμών:"
 
 #: panel/panel-preferences-dialog.glade:600
 msgid "L_ength (pixels):"
-msgstr "Μήκος (pixels):"
+msgstr "Μήκ_ος (pixels):"
 
 #: panel/panel-preferences-dialog.glade:625
 msgid "A_utomatically increase the length"
@@ -719,7 +719,7 @@ msgstr "Πεπειραμένος"
 msgid "Expert"
 msgstr "Έμπειρος"
 
-#: panel/panel-window.c:3619
+#: panel/panel-window.c:3633
 msgid "_Lock Panel"
 msgstr "_Κλείδωμα ταμπλό"
 
@@ -989,7 +989,7 @@ msgid ""
 msgstr "Επιλέξτε το για να εμφανίζονται τα γενικά ονόματα των εφαρμογών στο μενού, για παράδειγμα \"Διαχειριστής αρχείων\" αντί του \"Thunar\""
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:229
-#: plugins/clock/clock-dialog.glade:388
+#: plugins/clock/clock-dialog.glade:405
 #: plugins/directorymenu/directorymenu-dialog.glade:150
 #: plugins/separator/separator-dialog.glade:177
 #: plugins/tasklist/tasklist-dialog.glade:257
@@ -1037,7 +1037,7 @@ msgid "_OK"
 msgstr "_Εντάξει"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1018
+#: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1040
 #: plugins/launcher/launcher.c:2479
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -1083,15 +1083,15 @@ msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
 
-#: plugins/clock/clock.c:150
+#: plugins/clock/clock.c:153
 msgid "Week %V"
 msgstr "Εβδομάδα %V"
 
-#: plugins/clock/clock.c:453
+#: plugins/clock/clock.c:474
 msgid "Failed to execute clock command"
 msgstr "Απέτυχε η εκτέλεση της εντολής για το ρολόι"
 
-#: plugins/clock/clock.c:957
+#: plugins/clock/clock.c:979
 msgid "Custom Format"
 msgstr "Προσαρμοσμένη μορφή"
 
@@ -1175,12 +1175,16 @@ msgstr "Αν οριστεί, εκτελείται αυτή η εντολή ότ�
 msgid "Co_mmand:"
 msgstr "Ε_ντολή:"
 
-#: plugins/clock/clock-dialog.glade:277
+#: plugins/clock/clock-dialog.glade:273
+msgid "_Show week numbers"
+msgstr "Εμφάνισ_η αριθμών εβδομάδας"
+
+#: plugins/clock/clock-dialog.glade:294
 msgid "Calendar"
 msgstr "Ημερολόγιο"
 
-#: plugins/clock/clock-dialog.glade:312 plugins/clock/clock-dialog.glade:652
-#: plugins/clock/clock-dialog.glade:774
+#: plugins/clock/clock-dialog.glade:329 plugins/clock/clock-dialog.glade:669
+#: plugins/clock/clock-dialog.glade:791
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -1188,57 +1192,57 @@ msgid ""
 "page for additional information."
 msgstr "Η διαμόρφωση καθορίζει τη μορφή της ημερομηνίας και της ώρας στο ταμπλό. Για παράδειγμα, το %Υ θα δείξει το έτος, το %m το μήνα και το %d την ημέρα. Επίσης τα σύμβολα <b><b/> θα κάνουν το κείμενο έντονο. Για περισσότερες πληροφορίες δείτε τη σελίδα \"Βοήθειας\"."
 
-#: plugins/clock/clock-dialog.glade:341
+#: plugins/clock/clock-dialog.glade:358
 msgid "_Tooltip format:"
 msgstr "Μορφή ανα_δυόμενου κειμένου:"
 
-#: plugins/clock/clock-dialog.glade:354 plugins/clock/clock-dialog.glade:602
+#: plugins/clock/clock-dialog.glade:371 plugins/clock/clock-dialog.glade:619
 msgid "_Layout:"
 msgstr "_Διάταξη:"
 
-#: plugins/clock/clock-dialog.glade:418
+#: plugins/clock/clock-dialog.glade:435
 msgid "Sho_w AM/PM"
 msgstr "Προ_βολή ΠΜ/ΜΜ"
 
-#: plugins/clock/clock-dialog.glade:433
+#: plugins/clock/clock-dialog.glade:450
 msgid "Fl_ash time separators"
-msgstr "Ο δι_αχωριστής ώρας αναβοσβήνει"
+msgstr "Το δι_αχωριστικό ώρας αναβοσβήνει"
 
-#: plugins/clock/clock-dialog.glade:448
+#: plugins/clock/clock-dialog.glade:465
 msgid "24-_hour clock"
 msgstr "_Χρήση 24ώρου ρολογιού"
 
-#: plugins/clock/clock-dialog.glade:491
+#: plugins/clock/clock-dialog.glade:508
 msgid "Binary mode:"
 msgstr "Δυαδική λειτουργία:"
 
-#: plugins/clock/clock-dialog.glade:507
+#: plugins/clock/clock-dialog.glade:524
 msgid "Display _seconds"
 msgstr "Εμφάνιση δε_υτερολέπτων"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: plugins/clock/clock-dialog.glade:528
+#: plugins/clock/clock-dialog.glade:545
 msgid "F_uzziness:"
 msgstr "Α_σάφεια:"
 
-#: plugins/clock/clock-dialog.glade:562
+#: plugins/clock/clock-dialog.glade:579
 msgid "Show _inactive dots"
 msgstr "Εμφάν_ιση ανενεργών κουκκίδων"
 
-#: plugins/clock/clock-dialog.glade:577
+#: plugins/clock/clock-dialog.glade:594
 msgid "Show gri_d"
 msgstr "Εμφάνιση πλέγμα_τος"
 
-#: plugins/clock/clock-dialog.glade:623 plugins/clock/clock-dialog.glade:745
+#: plugins/clock/clock-dialog.glade:640 plugins/clock/clock-dialog.glade:762
 msgid "Font:"
 msgstr "Γραμματοσειρά:"
 
-#: plugins/clock/clock-dialog.glade:636 plugins/clock/clock-dialog.glade:758
+#: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
 msgid "Format:"
 msgstr "Διαμόρφωση:"
 
-#: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
+#: plugins/clock/clock-dialog.glade:670 plugins/clock/clock-dialog.glade:792
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -1246,15 +1250,15 @@ msgid ""
 "the &quot;Help&quot; page for additional information."
 msgstr "Η διαμόρφωση καθορίζει τη μορφή της ημερομηνίας και την ώρας στο ταμπλό. Για παράδειγμα, το %Y θα δείξει το έτος, το %m το μήνα και το %d την ημέρα. Επίσης τα σύμβολα &lt;b&gt;&lt;/b&gt; θα κάνουν το κείμενο έντονο. Για περισσότερες πληροφορίες δείτε τη σελίδα &quot;Help&quot;."
 
-#: plugins/clock/clock-dialog.glade:682
+#: plugins/clock/clock-dialog.glade:699
 msgid "Date"
 msgstr "Ημερομηνία"
 
-#: plugins/clock/clock-dialog.glade:727
+#: plugins/clock/clock-dialog.glade:744
 msgid "Time"
 msgstr "Ώρα"
 
-#: plugins/clock/clock-dialog.glade:854
+#: plugins/clock/clock-dialog.glade:871
 msgid "Clock Options"
 msgstr "Επιλογές ρολογιού"
 
