@@ -760,11 +760,17 @@ panel_window_set_property (GObject      *object,
   gboolean             update = FALSE;
   gint                 x, y, snap_position;
   XfcePanelPluginMode  val_mode;
+  GtkStyleContext     *context = gtk_widget_get_style_context (GTK_WIDGET(window));
 
   switch (prop_id)
     {
     case PROP_ID:
       window->id = g_value_get_int (value);
+
+      gchar *style_class = g_strdup_printf ("%s-%d","panel",window->id);
+      gtk_style_context_add_class (context, style_class);
+      
+      g_free (style_class);
       break;
 
     case PROP_MODE:
@@ -2508,7 +2514,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
   GdkRectangle  a = { 0 }, b;
   gint          n_monitors, n;
   const gchar  *name;
-  GdkMonitor   *monitor = NULL;
+  GdkMonitor   *monitor;
   StrutsEgde    struts_edge;
   gboolean      force_struts_update = FALSE;
 
@@ -2518,11 +2524,6 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
 
   /* leave when the screen position if not set */
   if (window->base_x == -1 && window->base_y == -1)
-    return;
-
-  /* n_monitors == 0 should be a temporary state, it can happen on Wayland */
-  n_monitors = gdk_display_get_n_monitors (window->display);
-  if (n_monitors == 0)
     return;
 
   /* print the display layout when debugging is enabled */
@@ -2535,6 +2536,10 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
   if (window->struts_edge != struts_edge && struts_edge == STRUTS_EDGE_NONE)
     force_struts_update = TRUE;
   window->struts_edge = struts_edge;
+
+  /* get the number of monitors */
+  n_monitors = gdk_display_get_n_monitors (window->display);
+  panel_return_if_fail (n_monitors > 0);
 
   panel_debug (PANEL_DEBUG_POSITIONING,
                "%p: screen=%p, monitors=%d, output-name=%s, span-monitors=%s, base=%d,%d",
