@@ -769,6 +769,8 @@ panel_window_set_property (GObject      *object,
 
       gchar *style_class = g_strdup_printf ("%s-%d","panel",window->id);
       gtk_style_context_add_class (context, style_class);
+      
+      g_free (style_class);
       break;
 
     case PROP_MODE:
