@@ -799,7 +799,6 @@ panel_itembar_draw (GtkWidget *widget,
   GtkAllocation   *allocation = g_malloc (sizeof (GtkAllocation));
   GtkStyleContext *context;
   GtkBorder        margin;
-  GtkBorder        border;
   gboolean         result;
   GdkRectangle     rect;
   gint             row_size;
@@ -807,7 +806,6 @@ panel_itembar_draw (GtkWidget *widget,
   gtk_widget_get_allocation (widget, allocation);
 
   context = gtk_widget_get_style_context (widget);
-  gtk_style_context_get_border (context, gtk_widget_get_state_flags (widget), &border);
   gtk_style_context_get_margin (context, gtk_widget_get_state_flags (widget), &margin);
 
   gtk_render_background (context, cr,
