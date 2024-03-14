@@ -311,6 +311,7 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
     { "background-style", G_TYPE_UINT },
     { "background-rgba", GDK_TYPE_RGBA },
     { "background-image", G_TYPE_STRING },
+    { "border-width", G_TYPE_UINT },
     { "icon-size", G_TYPE_UINT },
     { "output-name", G_TYPE_STRING },
     { "position", G_TYPE_STRING },
@@ -1529,7 +1530,7 @@ panel_application_new_window (PanelApplication *application,
   GtkWidget          *itembar;
   gchar              *property;
   gint                idx;
-  static const gchar *props[] = { "mode", "size", "nrows", "icon-size", "dark-mode" };
+  static const gchar *props[] = { "mode", "size", "nrows", "icon-size", "dark-mode", "border-width" };
   guint               i;
   gchar              *position;
   static gint         unqiue_id_counter = 1;
@@ -1571,6 +1572,7 @@ panel_application_new_window (PanelApplication *application,
   itembar = panel_itembar_new ();
   for (i = 0; i < G_N_ELEMENTS (props); i++)
     g_object_bind_property (G_OBJECT (window), props[i], G_OBJECT (itembar), props[i], G_BINDING_DEFAULT);
+
   gtk_container_add (GTK_CONTAINER (window), itembar);
   gtk_widget_show (itembar);
 
