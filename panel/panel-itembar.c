@@ -796,7 +796,7 @@ panel_itembar_draw (GtkWidget *widget,
                     cairo_t   *cr)
 {
   PanelItembar    *itembar = PANEL_ITEMBAR (widget);
-  GtkAllocation   *allocation = g_malloc (sizeof (GtkAllocation));
+  GtkAllocation    allocation;
   GtkStyleContext *context;
   GtkBorder        margin;
   gboolean         result;
