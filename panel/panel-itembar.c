@@ -172,7 +172,6 @@ panel_itembar_class_init (PanelItembarClass *klass)
   gtkwidget_class->get_preferred_height = panel_itembar_get_preferred_height;
   gtkwidget_class->size_allocate = panel_itembar_size_allocate;
   gtkwidget_class->draw = panel_itembar_draw;
-  gtk_widget_class_set_css_name (gtkwidget_class, "itembar");
   
   gtkcontainer_class = GTK_CONTAINER_CLASS (klass);
   gtkcontainer_class->add = panel_itembar_add;
