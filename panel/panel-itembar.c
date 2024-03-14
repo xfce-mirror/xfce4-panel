@@ -803,18 +803,18 @@ panel_itembar_draw (GtkWidget *widget,
   GdkRectangle     rect;
   gint             row_size;
 
-  gtk_widget_get_allocation (widget, allocation);
+  gtk_widget_get_allocation (widget, &allocation);
 
   context = gtk_widget_get_style_context (widget);
   gtk_style_context_get_margin (context, gtk_widget_get_state_flags (widget), &margin);
 
   gtk_render_background (context, cr,
-                         allocation->x + margin.left, allocation->y + margin.top,
-                         allocation->width - margin.left - margin.right, allocation->height - margin.top - margin.bottom);
+                         allocation.x + margin.left, allocation.y + margin.top,
+                         allocation.width - margin.left - margin.right, allocation.height - margin.top - margin.bottom);
   
   gtk_render_frame (context, cr,
-                    allocation->x + margin.left, allocation->y + margin.top,
-                    allocation->width - margin.left - margin.right, allocation->height - margin.top - margin.bottom);
+                    allocation.x + margin.left, allocation.y + margin.top,
+                    allocation.width - margin.left - margin.right, allocation.height - margin.top - margin.bottom);
 
   result = (*GTK_WIDGET_CLASS (panel_itembar_parent_class)->draw) (widget, cr);
 
