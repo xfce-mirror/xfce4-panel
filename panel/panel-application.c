@@ -1572,7 +1572,6 @@ panel_application_new_window (PanelApplication *application,
   itembar = panel_itembar_new ();
   for (i = 0; i < G_N_ELEMENTS (props); i++)
     g_object_bind_property (G_OBJECT (window), props[i], G_OBJECT (itembar), props[i], G_BINDING_DEFAULT);
-
   gtk_container_add (GTK_CONTAINER (window), itembar);
   gtk_widget_show (itembar);
 
