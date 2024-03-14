@@ -760,17 +760,11 @@ panel_window_set_property (GObject      *object,
   gboolean             update = FALSE;
   gint                 x, y, snap_position;
   XfcePanelPluginMode  val_mode;
-  GtkStyleContext     *context = gtk_widget_get_style_context (GTK_WIDGET(window));
 
   switch (prop_id)
     {
     case PROP_ID:
       window->id = g_value_get_int (value);
-
-      gchar *style_class = g_strdup_printf ("%s-%d","panel",window->id);
-      gtk_style_context_add_class (context, style_class);
-      
-      g_free (style_class);
       break;
 
     case PROP_MODE:
