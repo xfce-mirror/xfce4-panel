@@ -172,7 +172,7 @@ panel_itembar_class_init (PanelItembarClass *klass)
   gtkwidget_class->get_preferred_height = panel_itembar_get_preferred_height;
   gtkwidget_class->size_allocate = panel_itembar_size_allocate;
   gtkwidget_class->draw = panel_itembar_draw;
-
+  
   gtkcontainer_class = GTK_CONTAINER_CLASS (klass);
   gtkcontainer_class->add = panel_itembar_add;
   gtkcontainer_class->remove = panel_itembar_remove;
@@ -252,6 +252,7 @@ panel_itembar_class_init (PanelItembarClass *klass)
 static void
 panel_itembar_init (PanelItembar *itembar)
 {
+  GtkStyleContext *context;
   itembar->children = NULL;
   itembar->mode = XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
   itembar->size = 30;
@@ -260,6 +261,9 @@ panel_itembar_init (PanelItembar *itembar)
   itembar->nrows = 1;
   itembar->highlight_index = -1;
   itembar->highlight_length = -1;
+
+  context = gtk_widget_get_style_context (GTK_WIDGET (itembar));
+  gtk_style_context_add_class (context, "itembar");
 
   gtk_widget_set_has_window (GTK_WIDGET (itembar), FALSE);
 
@@ -790,10 +794,30 @@ static gboolean
 panel_itembar_draw (GtkWidget *widget,
                     cairo_t   *cr)
 {
-  PanelItembar *itembar = PANEL_ITEMBAR (widget);
-  gboolean      result;
-  GdkRectangle  rect;
-  gint          row_size;
+  PanelItembar    *itembar = PANEL_ITEMBAR (widget);
+  GtkAllocation    allocation;
+  gint             border_width;
+  GtkStyleContext *context;
+  GtkBorder        margin;
+  gboolean         result;
+  GdkRectangle     rect;
+  gint             row_size;
+
+  gtk_widget_get_allocation (widget, &allocation);
+
+  
+  border_width = gtk_container_get_border_width (GTK_CONTAINER (widget));
+
+  context = gtk_widget_get_style_context (widget);
+  gtk_style_context_get_margin (context, gtk_widget_get_state_flags (widget), &margin);
+
+  gtk_render_background (context, cr,
+                         allocation.x + border_width + margin.left, allocation.y + border_width + margin.top,
+                         allocation.width - (2 * border_width) - margin.left - margin.right, allocation.height - (2 * border_width ) - margin.top - margin.bottom);
+  
+  gtk_render_frame (context, cr,
+                    allocation.x + border_width + margin.left, allocation.y + border_width + margin.top,
+                    allocation.width - (2 * border_width) - margin.left - margin.right, allocation.height - (2 * border_width ) - margin.top - margin.bottom);
 
   result = (*GTK_WIDGET_CLASS (panel_itembar_parent_class)->draw) (widget, cr);
 
@@ -801,8 +825,8 @@ panel_itembar_draw (GtkWidget *widget,
     {
       row_size = (itembar->highlight_small) ? itembar->size : itembar->size * itembar->nrows;
 
-      rect.x = itembar->highlight_x;
-      rect.y = itembar->highlight_y;
+      rect.x = itembar->highlight_x + border_width;
+      rect.y = itembar->highlight_y + border_width;
 
       if ((IS_HORIZONTAL (itembar) && !itembar->highlight_small) ||
           (!IS_HORIZONTAL (itembar) && itembar->highlight_small))
