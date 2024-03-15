@@ -796,6 +796,7 @@ panel_itembar_draw (GtkWidget *widget,
 {
   PanelItembar    *itembar = PANEL_ITEMBAR (widget);
   GtkAllocation    allocation;
+  gint             border_width;
   GtkStyleContext *context;
   GtkBorder        margin;
   gboolean         result;
@@ -804,16 +805,19 @@ panel_itembar_draw (GtkWidget *widget,
 
   gtk_widget_get_allocation (widget, &allocation);
 
+  
+  border_width = gtk_container_get_border_width (GTK_CONTAINER (widget));
+
   context = gtk_widget_get_style_context (widget);
   gtk_style_context_get_margin (context, gtk_widget_get_state_flags (widget), &margin);
 
   gtk_render_background (context, cr,
-                         allocation.x + margin.left, allocation.y + margin.top,
-                         allocation.width - margin.left - margin.right, allocation.height - margin.top - margin.bottom);
+                         allocation.x + border_width + margin.left, allocation.y + border_width + margin.top,
+                         allocation.width - (2 * border_width) - margin.left - margin.right, allocation.height - (2 * border_width ) - margin.top - margin.bottom);
   
   gtk_render_frame (context, cr,
-                    allocation.x + margin.left, allocation.y + margin.top,
-                    allocation.width - margin.left - margin.right, allocation.height - margin.top - margin.bottom);
+                    allocation.x + border_width + margin.left, allocation.y + border_width + margin.top,
+                    allocation.width - (2 * border_width) - margin.left - margin.right, allocation.height - (2 * border_width ) - margin.top - margin.bottom);
 
   result = (*GTK_WIDGET_CLASS (panel_itembar_parent_class)->draw) (widget, cr);
 
@@ -821,8 +825,8 @@ panel_itembar_draw (GtkWidget *widget,
     {
       row_size = (itembar->highlight_small) ? itembar->size : itembar->size * itembar->nrows;
 
-      rect.x = itembar->highlight_x;
-      rect.y = itembar->highlight_y;
+      rect.x = itembar->highlight_x + border_width;
+      rect.y = itembar->highlight_y + border_width;
 
       if ((IS_HORIZONTAL (itembar) && !itembar->highlight_small) ||
           (!IS_HORIZONTAL (itembar) && itembar->highlight_small))
