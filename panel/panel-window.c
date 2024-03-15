@@ -1644,12 +1644,12 @@ panel_window_size_allocate (GtkWidget     *widget,
           if (IS_HORIZONTAL (window))
             {
               child_alloc.width -= 2 * HANDLE_SIZE_TOTAL;
-              child_alloc.x += HANDLE_SIZE_TOTAL;
+              child_alloc.x += HANDLE_SIZE_TOTAL / 2;
             }
           else
             {
               child_alloc.height -= 2 * HANDLE_SIZE_TOTAL;
-              child_alloc.y += HANDLE_SIZE_TOTAL;
+              child_alloc.y += HANDLE_SIZE_TOTAL / 2;
             }
         }
 
