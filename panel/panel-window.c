@@ -1502,6 +1502,7 @@ panel_window_size_allocate (GtkWidget     *widget,
   GtkAllocation  child_alloc;
   gint           w, h, x, y;
   PanelBorders   borders;
+  guint          border_width;
   GtkWidget     *child;
 
   gtk_widget_set_allocation (widget, alloc);
@@ -1616,10 +1617,12 @@ panel_window_size_allocate (GtkWidget     *widget,
   child = gtk_bin_get_child (GTK_BIN (widget));
   if (G_LIKELY (child != NULL))
     {
-      child_alloc.x = 0;
-      child_alloc.y = 0;
-      child_alloc.width = alloc->width;
-      child_alloc.height = alloc->height;
+      border_width = gtk_container_get_border_width (GTK_CONTAINER (widget));
+
+      child_alloc.x = 0 + border_width;
+      child_alloc.y = 0 + border_width;
+      child_alloc.width = alloc->width - border_width;
+      child_alloc.height = alloc->height - border_width;
 
       /* set position against the borders */
       borders = panel_base_window_get_borders (PANEL_BASE_WINDOW (window));
