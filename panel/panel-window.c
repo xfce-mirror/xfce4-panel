@@ -753,6 +753,8 @@ panel_window_set_property (GObject      *object,
                            GParamSpec   *pspec)
 {
   PanelWindow         *window = PANEL_WINDOW (object);
+  GtkStyleContext     *context;
+
   gboolean             val_bool;
   guint                val_uint;
   gdouble              val_double;
@@ -765,6 +767,14 @@ panel_window_set_property (GObject      *object,
     {
     case PROP_ID:
       window->id = g_value_get_int (value);
+
+      gchar *style_class = g_strdup_printf ("%s-%d", "panel", window->id);
+
+      context = gtk_widget_get_style_context (GTK_WIDGET (window));
+      gtk_style_context_add_class (context, style_class);
+
+      g_free (style_class);
+
       break;
 
     case PROP_MODE:
