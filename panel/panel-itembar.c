@@ -180,6 +180,7 @@ panel_itembar_class_init (PanelItembarClass *klass)
   gtkcontainer_class->child_type = panel_itembar_child_type;
   gtkcontainer_class->get_child_property = panel_itembar_get_child_property;
   gtkcontainer_class->set_child_property = panel_itembar_set_child_property;
+  gtk_container_class_handle_border_width (gtkcontainer_class);
 
   itembar_signals[CHANGED] =
     g_signal_new (g_intern_static_string ("changed"),
@@ -340,7 +341,6 @@ panel_itembar_get_preferred_length (GtkWidget      *widget,
   PanelItembar      *itembar = PANEL_ITEMBAR (widget);
   GSList            *li;
   PanelItembarChild *child;
-  gint               border_width;
   gint               row_max_size, row_max_size_min;
   gint               col_count;
   gint               total_len, total_len_min;
@@ -411,10 +411,6 @@ panel_itembar_get_preferred_length (GtkWidget      *widget,
     }
 
   /* return the total size */
-  border_width = gtk_container_get_border_width (GTK_CONTAINER (widget)) * 2;
-  total_len += border_width;
-  total_len_min += border_width;
-
   if (natural_length != NULL)
     *natural_length = total_len;
 
@@ -438,8 +434,7 @@ panel_itembar_get_preferred_width (GtkWidget *widget,
     }
   else
     {
-      size = itembar->size * itembar->nrows +
-        gtk_container_get_border_width (GTK_CONTAINER (widget)) * 2;
+      size = itembar->size * itembar->nrows;
 
       if (minimum_width != NULL)
         *minimum_width = size;
@@ -461,8 +456,7 @@ panel_itembar_get_preferred_height (GtkWidget *widget,
 
   if (IS_HORIZONTAL (itembar))
     {
-      size = itembar->size * itembar->nrows +
-        gtk_container_get_border_width (GTK_CONTAINER (widget)) * 2;
+      size = itembar->size * itembar->nrows;
 
       if (minimum_height != NULL)
         *minimum_height = size;
@@ -486,7 +480,6 @@ panel_itembar_size_allocate (GtkWidget     *widget,
   GSList            *lp, *ltemp;
   PanelItembarChild *child;
   GtkAllocation      child_alloc;
-  gint               border_width;
   gint               expand_len_avail, expand_len_req;
   gint               shrink_len_avail, shrink_len_req;
   gint               itembar_len;
@@ -507,12 +500,10 @@ panel_itembar_size_allocate (GtkWidget     *widget,
    * panel window, so take over the assigned allocation */
   gtk_widget_set_allocation (widget, allocation);
 
-  border_width = gtk_container_get_border_width (GTK_CONTAINER (widget));
-
   if (IS_HORIZONTAL (itembar))
-    itembar_len = allocation->width - 2 * border_width;
+    itembar_len = allocation->width;
   else
-    itembar_len = allocation->height - 2 * border_width;
+    itembar_len = allocation->height;
 
   /* init the remaining space for expanding plugins */
   expand_len_avail = itembar_len;
@@ -603,8 +594,8 @@ panel_itembar_size_allocate (GtkWidget     *widget,
     }
 
   /* init coordinates for first child */
-  x = x_init = allocation->x + border_width;
-  y = y_init = allocation->y + border_width;
+  x = x_init = allocation->x;
+  y = y_init = allocation->y;
 
   /* init counters for small child packing */
   row_max_size = 0;
