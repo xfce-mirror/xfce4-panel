@@ -61,6 +61,7 @@ static void     panel_base_window_set_property                (GObject          
                                                                guint                 prop_id,
                                                                const GValue         *value,
                                                                GParamSpec           *pspec);
+static void     panel_base_window_constructed                 (GObject              *object);
 static void     panel_base_window_finalize                    (GObject              *object);
 static void     panel_base_window_screen_changed              (GtkWidget            *widget,
                                                                GdkScreen            *previous_screen);
@@ -136,6 +137,7 @@ panel_base_window_class_init (PanelBaseWindowClass *klass)
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->get_property = panel_base_window_get_property;
   gobject_class->set_property = panel_base_window_set_property;
+  gobject_class->constructed = panel_base_window_constructed;
   gobject_class->finalize = panel_base_window_finalize;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
@@ -217,7 +219,6 @@ static void
 panel_base_window_init (PanelBaseWindow *window)
 {
   PanelBaseWindowPrivate *priv = get_instance_private (window);
-  GtkStyleContext *context;
   GdkScreen *screen;
 
   priv->is_composited = FALSE;
@@ -243,10 +244,6 @@ panel_base_window_init (PanelBaseWindow *window)
   /* set colormap */
   panel_base_window_screen_changed (GTK_WIDGET (window), NULL);
 
-  /* set the panel class */
-  context = gtk_widget_get_style_context (GTK_WIDGET (window));
-  gtk_style_context_add_class (context, "panel");
-  gtk_style_context_add_class (context, "xfce4-panel");
   g_signal_connect (window, "notify::scale-factor", G_CALLBACK (panel_base_window_scale_factor_changed), NULL);
 }
 
@@ -457,6 +454,36 @@ panel_base_window_set_property (GObject      *object,
     }
 }
 
+
+
+static void
+panel_base_window_constructed (GObject *object)
+{
+  PanelBaseWindow        *window;
+  gchar                  *style_class;
+  GtkStyleContext        *context;
+  gchar                  *id;
+
+  window = PANEL_BASE_WINDOW (object);
+
+  if (PANEL_IS_WINDOW (window))
+    id = g_strdup_printf ("%i", panel_window_get_id (PANEL_WINDOW (window)));
+  else
+    id = g_strdup_printf ("%s", "hidden");
+
+  style_class = g_strdup_printf ("%s-%s", "panel", id);
+
+  /* set panel class */
+  context = gtk_widget_get_style_context ( GTK_WIDGET (window));
+  gtk_style_context_add_class (context, "panel");
+  gtk_style_context_add_class (context, "xfce4-panel");
+  gtk_style_context_add_class (context, style_class);
+
+  g_free (id);
+  g_free (style_class);
+
+  (*G_OBJECT_CLASS (panel_base_window_parent_class)->constructed) (object);
+}
 
 
 static void
