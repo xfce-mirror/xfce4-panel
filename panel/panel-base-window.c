@@ -92,6 +92,7 @@ static void     panel_base_window_set_plugin_background_image (GtkWidget        
 enum
 {
   PROP_0,
+  PROP_ID,
   PROP_ENTER_OPACITY,
   PROP_LEAVE_OPACITY,
   PROP_BORDERS,
@@ -104,6 +105,10 @@ enum
 
 typedef struct _PanelBaseWindowPrivate
 {
+  /* unique id of this panel */
+  gint             id;
+
+  /* borders */
   PanelBorders     borders;
 
   /* transparency settings */
@@ -142,6 +147,13 @@ panel_base_window_class_init (PanelBaseWindowClass *klass)
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->screen_changed = panel_base_window_screen_changed;
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_ID,
+                                   g_param_spec_int ("id", NULL, NULL,
+                                                     0, G_MAXINT, 0,
+                                                     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS
+                                                     | G_PARAM_CONSTRUCT_ONLY));
 
   g_object_class_install_property (gobject_class,
                                    PROP_ENTER_OPACITY,
@@ -219,8 +231,10 @@ static void
 panel_base_window_init (PanelBaseWindow *window)
 {
   PanelBaseWindowPrivate *priv = get_instance_private (window);
+  GtkStyleContext *context;
   GdkScreen *screen;
 
+  priv->id = -1;
   priv->is_composited = FALSE;
   priv->background_style = PANEL_BG_STYLE_NONE;
   priv->background_image = NULL;
@@ -244,6 +258,10 @@ panel_base_window_init (PanelBaseWindow *window)
   /* set colormap */
   panel_base_window_screen_changed (GTK_WIDGET (window), NULL);
 
+  /* set the panel class */
+  context = gtk_widget_get_style_context (GTK_WIDGET (window));
+  gtk_style_context_add_class (context, "panel");
+  gtk_style_context_add_class (context, "xfce4-panel");
   g_signal_connect (window, "notify::scale-factor", G_CALLBACK (panel_base_window_scale_factor_changed), NULL);
 }
 
@@ -262,6 +280,10 @@ panel_base_window_get_property (GObject    *object,
 
   switch (prop_id)
     {
+    case PROP_ID:
+      g_value_set_int (value, priv->id);
+      break;
+
     case PROP_ENTER_OPACITY:
       g_value_set_uint (value, rint (priv->enter_opacity * 100.00));
       break;
@@ -327,6 +349,10 @@ panel_base_window_set_property (GObject      *object,
 
   switch (prop_id)
     {
+    case PROP_ID:
+      priv->id = g_value_get_int (value);
+      break;
+
     case PROP_ENTER_OPACITY:
       opacity = g_value_get_uint (value) / 100.00;
       if (opacity != priv->enter_opacity)
@@ -454,24 +480,21 @@ panel_base_window_set_property (GObject      *object,
     }
 }
 
-
-
 static void
 panel_base_window_constructed (GObject *object)
 {
+  PanelBaseWindowPrivate *priv = get_instance_private (object);
+
   PanelBaseWindow        *window;
   gchar                  *style_class;
   GtkStyleContext        *context;
-  gchar                  *id;
 
   window = PANEL_BASE_WINDOW (object);
 
   if (PANEL_IS_WINDOW (window))
-    id = g_strdup_printf ("%i", panel_window_get_id (PANEL_WINDOW (window)));
+    style_class = g_strdup_printf ("%s-%d", "panel", priv->id);
   else
-    id = g_strdup_printf ("%s", "hidden");
-
-  style_class = g_strdup_printf ("%s-%s", "panel", id);
+    style_class = g_strdup_printf ("%s-%d-%s", "panel", priv->id, "hidden");
 
   /* set panel class */
   context = gtk_widget_get_style_context ( GTK_WIDGET (window));
@@ -479,12 +502,10 @@ panel_base_window_constructed (GObject *object)
   gtk_style_context_add_class (context, "xfce4-panel");
   gtk_style_context_add_class (context, style_class);
 
-  g_free (id);
   g_free (style_class);
 
   (*G_OBJECT_CLASS (panel_base_window_parent_class)->constructed) (object);
 }
-
 
 static void
 panel_base_window_finalize (GObject *object)
@@ -628,8 +649,6 @@ panel_base_window_active_timeout_destroyed (gpointer user_data)
   if (gtk_style_context_has_class (context, MARCHING_ANTS_DOTTED))
     gtk_style_context_remove_class (context, MARCHING_ANTS_DOTTED);
 }
-
-
 
 static void
 panel_base_window_set_background_color_css (PanelBaseWindow *window)
