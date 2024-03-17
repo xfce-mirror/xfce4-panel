@@ -406,14 +406,14 @@ panel_plugin_external_child_ask_restart_dialog (GtkWindow   *parent,
                                             "the plugin otherwise it will be permanently removed from the panel."),
                                             PANEL_PLUGIN_AUTO_RESTART);
   gtk_dialog_add_buttons (GTK_DIALOG (dialog), _("_Execute"), GTK_RESPONSE_OK,
-                          _("_Remove"), GTK_RESPONSE_CLOSE, NULL);
+                          _("_Remove"), GTK_RESPONSE_REJECT, NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 
   response = gtk_dialog_run (GTK_DIALOG (dialog));
   gtk_widget_destroy (dialog);
 
-  return (response == GTK_RESPONSE_OK);
+  return (response != GTK_RESPONSE_REJECT);
 }
 
 
