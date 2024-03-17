@@ -6,16 +6,16 @@
 # Kiril Kirilov <cybercop_montana@abv.bg>, 2012
 # Ivailo Panamski <ipanamski@gmail.com>, 2018
 # Kiril Kirilov <cybercop_montana@abv.bg>, 2012
-# Kiril Kirilov <cybercop_montana@abv.bg>, 2014-2015,2017-2020,2022-2023
+# Kiril Kirilov <cybercop_montana@abv.bg>, 2014-2015,2017-2020,2022-2024
 # Любомир Василев, 2015
 # Красимир Беров, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2023-07-17 00:46+0200\n"
+"POT-Creation-Date: 2024-03-16 12:46+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Kiril Kirilov <cybercop_montana@abv.bg>, 2014-2015,2017-2020,2022-2023\n"
+"Last-Translator: Kiril Kirilov <cybercop_montana@abv.bg>, 2014-2015,2017-2020,2022-2024\n"
 "Language-Team: Bulgarian (http://app.transifex.com/xfce/xfce4-panel/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,7 +39,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "панели;настройки;предпочитания;лента на задачите;автоматично скриване;меню на програмите;бутони;стартер;зона за уведомяване;състояние;икони;добавки;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3596
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3599
 msgid "Panel"
 msgstr "Панел"
 
@@ -48,76 +48,76 @@ msgid "Customize the panel"
 msgstr "Персонализация на панела"
 
 #. I18N: %s is the name of the plugin
-#: libxfce4panel/xfce-panel-plugin.c:1095
+#: libxfce4panel/xfce-panel-plugin.c:1096
 #: panel/panel-preferences-dialog.c:1449
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Сигурни ли сте, че искате да премахнете „%s“?"
 
-#: libxfce4panel/xfce-panel-plugin.c:1100
+#: libxfce4panel/xfce-panel-plugin.c:1101
 #: panel/panel-preferences-dialog.c:1452
 msgid "Remove Item"
 msgstr "Премахване на елемент"
 
-#: libxfce4panel/xfce-panel-plugin.c:1102
+#: libxfce4panel/xfce-panel-plugin.c:1103
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "При премахване на елемента от панела, конфигурацията му също ще бъде изгубена."
 
-#: libxfce4panel/xfce-panel-plugin.c:1103 panel/panel-dialogs.c:164
+#: libxfce4panel/xfce-panel-plugin.c:1104 panel/panel-dialogs.c:164
 #: panel/panel-preferences-dialog.c:1456
 #: plugins/applicationsmenu/applicationsmenu.c:602
 #: plugins/directorymenu/directorymenu.c:461
-#: plugins/directorymenu/directorymenu.c:927
+#: plugins/directorymenu/directorymenu.c:936
 msgid "_Cancel"
 msgstr "_Отказ"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1104
-#: libxfce4panel/xfce-panel-plugin.c:1271 panel/panel-plugin-external.c:409
+#: libxfce4panel/xfce-panel-plugin.c:1105
+#: libxfce4panel/xfce-panel-plugin.c:1272 panel/panel-plugin-external.c:409
 #: panel/panel-preferences-dialog.c:1047 panel/panel-preferences-dialog.c:1457
-#: panel/panel-preferences-dialog.glade:1207
+#: panel/panel-preferences-dialog.glade:1240
 #: plugins/launcher/launcher-dialog.c:860
 msgid "_Remove"
 msgstr "_Премахване"
 
 #. properties item
-#: libxfce4panel/xfce-panel-plugin.c:1233
+#: libxfce4panel/xfce-panel-plugin.c:1234
 msgid "_Properties"
 msgstr "_Свойства"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3672
+#: libxfce4panel/xfce-panel-plugin.c:1245 panel/panel-window.c:3675
 msgid "_About"
 msgstr "_Относно"
 
 #. move item
-#: libxfce4panel/xfce-panel-plugin.c:1255
+#: libxfce4panel/xfce-panel-plugin.c:1256
 msgid "_Move"
 msgstr "_Преместване"
 
-#: libxfce4panel/xfce-panel-plugin.c:1289
+#: libxfce4panel/xfce-panel-plugin.c:1290
 msgid "Pane_l"
 msgstr "Панел"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3608
+#: libxfce4panel/xfce-panel-plugin.c:1298 panel/panel-window.c:3611
 msgid "Add _New Items..."
 msgstr "Добавяне на нови елементи..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3619
+#: libxfce4panel/xfce-panel-plugin.c:1309 panel/panel-window.c:3622
 msgid "Panel Pr_eferences..."
 msgstr "Настройки на панела..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3647
+#: libxfce4panel/xfce-panel-plugin.c:1326 panel/panel-window.c:3650
 msgid "Log _Out"
 msgstr "Изход"
 
 #. help item
-#: libxfce4panel/xfce-panel-plugin.c:1341 panel/panel-item-dialog.c:196
-#: panel/panel-preferences-dialog.glade:172 panel/panel-window.c:3663
+#: libxfce4panel/xfce-panel-plugin.c:1342 panel/panel-item-dialog.c:198
+#: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3666
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
 #: plugins/clock/clock-dialog.glade:120
@@ -131,58 +131,58 @@ msgid "_Help"
 msgstr "_Помощ"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1352
+#: libxfce4panel/xfce-panel-plugin.c:1353
 msgid "About"
 msgstr "Относно"
 
-#: panel/main.c:84
+#: panel/main.c:82
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Показване на прозореца „Настройки на панела“"
 
-#: panel/main.c:84 panel/main.c:85
+#: panel/main.c:82 panel/main.c:83
 msgid "PANEL-NUMBER"
 msgstr "НОМЕР НА ПАНЕЛ"
 
-#: panel/main.c:85
+#: panel/main.c:83
 msgid "Show the 'Add New Items' dialog"
 msgstr "Показване на прозореца „Добавяне на нови елементи“"
 
-#: panel/main.c:86
+#: panel/main.c:84
 msgid "Save the panel configuration"
 msgstr "Запазване на конфигурацията на панела"
 
-#: panel/main.c:87
+#: panel/main.c:85
 msgid "Add a new plugin to the panel"
 msgstr "Добавяне на нова добавка в панела"
 
-#: panel/main.c:87
+#: panel/main.c:85
 msgid "PLUGIN-NAME"
 msgstr "ИМЕ НА ДОБАВКА"
 
-#: panel/main.c:88
+#: panel/main.c:86
 msgid "Restart the running panel instance"
 msgstr "Рестартиране на текущо стартираният панел"
 
-#: panel/main.c:89
+#: panel/main.c:87
 msgid "Quit the running panel instance"
 msgstr "Изключване на текущо стартираният панел"
 
-#: panel/main.c:90
+#: panel/main.c:88
 msgid "Do not wait for a window manager on startup"
 msgstr "Не изчаквай мениджъра на прозорци при стартиране"
 
-#: panel/main.c:91 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: panel/main.c:89 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "Показване на сведения за изданието и изход"
 
 #. parse context options
-#: panel/main.c:274
+#: panel/main.c:273
 msgid "[ARGUMENTS...]"
 msgstr "[ПАРАМЕТРИ...]"
 
-#: panel/main.c:281
+#: panel/main.c:283
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Напишете „%s --help“ за показване на потребителското ръководство."
@@ -197,94 +197,94 @@ msgid "Please report bugs to <%s>."
 msgstr "Моля, докладвайте грешки на <%s>."
 
 #. quit without error if an instance is running
-#: panel/main.c:404
+#: panel/main.c:402
 msgid "There is already a running instance"
 msgstr "Вече има стартирано копие"
 
 #. spawn ourselfs again
-#: panel/main.c:412
+#: panel/main.c:413
 msgid "Restarting..."
 msgstr "Рестартиране..."
 
-#: panel/main.c:427
+#: panel/main.c:428
 msgid "Failed to show the preferences dialog"
 msgstr "Не може да бъде показан диалогът с настройките"
 
-#: panel/main.c:429
+#: panel/main.c:430
 msgid "Failed to show the add new items dialog"
 msgstr "Не може да бъде показан диалогът за добавяне на нови елементи"
 
-#: panel/main.c:431
+#: panel/main.c:432
 msgid "Failed to save the panel configuration"
 msgstr "Не могат да бъдат запазени настройките на панела"
 
-#: panel/main.c:433
+#: panel/main.c:434
 msgid "Failed to add a plugin to the panel"
 msgstr "Неуспешно добавяне на добавка в панела"
 
-#: panel/main.c:435
+#: panel/main.c:436
 msgid "Failed to restart the panel"
 msgstr "Не може да бъде рестартиран панела"
 
-#: panel/main.c:437
+#: panel/main.c:438
 msgid "Failed to quit the panel"
 msgstr "Не може да бъде изключен панела"
 
-#: panel/main.c:439
+#: panel/main.c:440
 msgid "Failed to send D-Bus message"
 msgstr "Не може да бъде изпратено съобщение на D-Bus"
 
-#: panel/main.c:449
+#: panel/main.c:450
 msgid "Execute"
 msgstr "Изпълнение"
 
-#: panel/main.c:450
+#: panel/main.c:451
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Искате ли да стартирате панела? Ако искате, запазете сесията преди да излезете. Панелът ще стартира автоматично при следващото влизане."
 
-#: panel/main.c:453 panel/main.c:467
+#: panel/main.c:454 panel/main.c:468
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Не е намерено стартирано копие на %s"
 
-#: panel/panel-application.c:221
+#: panel/panel-application.c:216
 msgid "Failed to launch the migration application"
 msgstr "Не може да бъде стартирана миграцията на програмата"
 
-#: panel/panel-application.c:1048
+#: panel/panel-application.c:1022
 msgid "Create _Launcher"
 msgstr "Създаване на стартер"
 
-#: panel/panel-application.c:1049
+#: panel/panel-application.c:1023
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Това ще създаде нов стартер в панела и ще добави довлачените файлове като елементи в менюто."
 
-#: panel/panel-application.c:1051
+#: panel/panel-application.c:1025
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Създаване на нов стартер от %d десктоп файл"
 msgstr[1] "Създаване на нов стартер от %d десктоп файла"
 
-#: panel/panel-application.c:1808
-msgid "Quit"
-msgstr "Изход"
-
-#: panel/panel-application.c:1809
+#: panel/panel-application.c:1788
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Вие сте стартирали X-сървъра без мениджъра на сесиите. Кликнете на Изключване да затворите X сървъра."
 
-#: panel/panel-application.c:1810
+#: panel/panel-application.c:1790
+msgid "Quit"
+msgstr "Изход"
+
+#: panel/panel-application.c:1791
 msgid "Are you sure you want to quit the panel?"
 msgstr "Наистина ли искате да изключите панела?"
 
-#: panel/panel-application.c:1818
+#: panel/panel-application.c:1799
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Не може да бъде стартирана команда „%s“"
@@ -318,8 +318,8 @@ msgstr "Kiril Kirilov (Cybercop) <cybercop_montana@abv.bg>"
 msgid "Add New Item"
 msgstr "Добавяне на нов елемент"
 
-#: panel/panel-dialogs.c:165 panel/panel-item-dialog.c:192
-#: panel/panel-preferences-dialog.glade:1190
+#: panel/panel-dialogs.c:165 panel/panel-item-dialog.c:194
+#: panel/panel-preferences-dialog.glade:1223
 #: plugins/launcher/launcher-dialog.glade:219
 msgid "_Add"
 msgstr "_Добавяне"
@@ -347,8 +347,8 @@ msgstr "Не е разрешено да се правят промени в па
 msgid "Add New Items"
 msgstr "Добавяне на нов елемент"
 
-#: panel/panel-item-dialog.c:200 panel/panel-preferences-dialog.glade:157
-#: panel/panel-tic-tac-toe.c:117 plugins/actions/actions-dialog.glade:82
+#: panel/panel-item-dialog.c:202 panel/panel-preferences-dialog.glade:163
+#: panel/panel-tic-tac-toe.c:119 plugins/actions/actions-dialog.glade:82
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:55
 #: plugins/clock/clock-dialog.glade:105
 #: plugins/directorymenu/directorymenu-dialog.glade:34
@@ -361,11 +361,11 @@ msgstr "Добавяне на нов елемент"
 msgid "_Close"
 msgstr "_Затваряне"
 
-#: panel/panel-item-dialog.c:216 plugins/launcher/launcher-dialog.glade:272
+#: panel/panel-item-dialog.c:218 plugins/launcher/launcher-dialog.glade:272
 msgid "_Search:"
 msgstr "Търсене:"
 
-#: panel/panel-item-dialog.c:224
+#: panel/panel-item-dialog.c:226
 msgid "Enter search phrase here"
 msgstr "Въведете дума за търсене тук"
 
@@ -390,16 +390,16 @@ msgstr "Добавката е била стартирана няколко пъ�
 msgid "_Execute"
 msgstr "_Изпълнение"
 
-#: panel/panel-preferences-dialog.c:540
+#: panel/panel-preferences-dialog.c:541
 msgid "Automatic"
 msgstr "Автоматично"
 
-#: panel/panel-preferences-dialog.c:550
+#: panel/panel-preferences-dialog.c:551
 msgid "Primary"
 msgstr "Главен"
 
 #. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:569
+#: panel/panel-preferences-dialog.c:570
 #, c-format
 msgid "Monitor %d"
 msgstr "Монитор %d"
@@ -464,266 +464,270 @@ msgstr "Вертикално"
 msgid "Deskbar"
 msgstr "Работни ленти"
 
-#: panel/panel-preferences-dialog.glade:128
+#: panel/panel-preferences-dialog.glade:134
 msgid "None (use system style)"
 msgstr "Без (използване на системен стил)"
 
-#: panel/panel-preferences-dialog.glade:131
+#: panel/panel-preferences-dialog.glade:137
 msgid "Solid color"
 msgstr "Плътен цвят"
 
-#: panel/panel-preferences-dialog.glade:134
+#: panel/panel-preferences-dialog.glade:140
 msgid "Background image"
 msgstr "Изображение за фон"
 
-#: panel/panel-preferences-dialog.glade:140
+#: panel/panel-preferences-dialog.glade:146
 msgid "Panel Preferences"
 msgstr "Настройки на панела"
 
-#: panel/panel-preferences-dialog.glade:217
+#: panel/panel-preferences-dialog.glade:223
 msgid "Profiles:"
 msgstr "Профили:"
 
-#: panel/panel-preferences-dialog.glade:245
+#: panel/panel-preferences-dialog.glade:251
 msgid "_Backup and restore"
 msgstr "_Резервно копие и възстановяване"
 
-#: panel/panel-preferences-dialog.glade:249
+#: panel/panel-preferences-dialog.glade:255
 msgid "Switch between panel presets"
 msgstr "Превключване между зададените конфигурации на панела"
 
-#: panel/panel-preferences-dialog.glade:293
+#: panel/panel-preferences-dialog.glade:299
 msgid "Add a new panel"
 msgstr "Добавяне на нов панел"
 
-#: panel/panel-preferences-dialog.glade:318
+#: panel/panel-preferences-dialog.glade:324
 msgid "Remove the currently selected panel"
 msgstr "Премахване на текущо избран панел"
 
-#: panel/panel-preferences-dialog.glade:369
-#: panel/panel-preferences-dialog.glade:705
+#: panel/panel-preferences-dialog.glade:375
+#: panel/panel-preferences-dialog.glade:738
 msgid "<b>General</b>"
 msgstr "<b>Общи</b>"
 
-#: panel/panel-preferences-dialog.glade:384
+#: panel/panel-preferences-dialog.glade:390
 msgid "M_ode:"
 msgstr "Режим:"
 
-#: panel/panel-preferences-dialog.glade:413
+#: panel/panel-preferences-dialog.glade:419
 msgid "Span mo_nitors"
 msgstr "Обединяване на екрани"
 
-#: panel/panel-preferences-dialog.glade:417
+#: panel/panel-preferences-dialog.glade:423
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Изберете тази опция, за да се разшири панела на няколко монитора."
 
-#: panel/panel-preferences-dialog.glade:430
+#: panel/panel-preferences-dialog.glade:436
 msgid "_Lock panel"
 msgstr "Заключване на панела"
 
-#: panel/panel-preferences-dialog.glade:434
+#: panel/panel-preferences-dialog.glade:440
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr "Изберете тази опция, за да се скрият ръкохватките и да се заключи позицията на панела."
 
-#: panel/panel-preferences-dialog.glade:447
+#: panel/panel-preferences-dialog.glade:453
 msgid "_Reserve space on screen edges for the panel"
 msgstr "_Запазване на място по краищата на екрана за панела"
 
-#: panel/panel-preferences-dialog.glade:451
+#: panel/panel-preferences-dialog.glade:457
 msgid ""
 "Select this option if you don't want maximized windows to cover the area "
 "behind the panel. This only works when the panel is attached to a screen "
 "edge."
 msgstr "Изберете тази опция, ако не искате увеличените прозорци да покриват областта зад панела. Това работи само, когато панелът е прикрепен към ръба на екрана."
 
-#: panel/panel-preferences-dialog.glade:472
+#: panel/panel-preferences-dialog.glade:478
 msgid "Au_tomatically hide the panel:"
 msgstr "_Автоматично скриване на панела:"
 
-#: panel/panel-preferences-dialog.glade:513
+#: panel/panel-preferences-dialog.glade:519
 msgid "O_utput:"
 msgstr "Изход:"
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
-#: panel/panel-preferences-dialog.glade:557
+#: panel/panel-preferences-dialog.glade:563
 msgid "<b>Measurements</b>"
 msgstr "<b>Размери</b>"
 
-#: panel/panel-preferences-dialog.glade:572
+#: panel/panel-preferences-dialog.glade:578
 msgid "Row _size (pixels):"
 msgstr "Размер на ред (пиксели):"
 
-#: panel/panel-preferences-dialog.glade:586
+#: panel/panel-preferences-dialog.glade:592
 msgid "Num_ber of rows:"
 msgstr "Брой редове:"
 
-#: panel/panel-preferences-dialog.glade:600
+#: panel/panel-preferences-dialog.glade:606
 msgid "L_ength (pixels):"
 msgstr "Дължина (пиксели):"
 
-#: panel/panel-preferences-dialog.glade:625
+#: panel/panel-preferences-dialog.glade:635
+msgid "Border width (pixels):"
+msgstr "Ширина на границата (пиксели):"
+
+#: panel/panel-preferences-dialog.glade:658
 msgid "A_utomatically increase the length"
 msgstr "Автоматично разширяване на дължината"
 
-#: panel/panel-preferences-dialog.glade:629
+#: panel/panel-preferences-dialog.glade:662
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr "Изберете тази опция за автоматично увеличаване ширината на панела, ако добавките се нуждаят от повече място."
 
-#: panel/panel-preferences-dialog.glade:679
+#: panel/panel-preferences-dialog.glade:712
 msgid "D_isplay"
 msgstr "Екран"
 
-#: panel/panel-preferences-dialog.glade:720
+#: panel/panel-preferences-dialog.glade:753
 msgid "Dark mode"
 msgstr "Тъмен режим"
 
-#: panel/panel-preferences-dialog.glade:760
+#: panel/panel-preferences-dialog.glade:793
 msgid "<b>Background</b>"
 msgstr "<b>Фон</b>"
 
-#: panel/panel-preferences-dialog.glade:775
+#: panel/panel-preferences-dialog.glade:808
 #: plugins/separator/separator-dialog.glade:119
 msgid "_Style:"
 msgstr "Стил:"
 
-#: panel/panel-preferences-dialog.glade:807
+#: panel/panel-preferences-dialog.glade:840
 msgid "C_olor:"
 msgstr "Цвят:"
 
-#: panel/panel-preferences-dialog.glade:822
+#: panel/panel-preferences-dialog.glade:855
 msgid "Pick a Panel Color"
 msgstr "Избор на цвят на панела"
 
-#: panel/panel-preferences-dialog.glade:835
+#: panel/panel-preferences-dialog.glade:868
 msgid "_File:"
 msgstr "_Файл:"
 
-#: panel/panel-preferences-dialog.glade:848
+#: panel/panel-preferences-dialog.glade:881
 msgid "Select A Background Image"
 msgstr "Избор на изображение за фон"
 
-#: panel/panel-preferences-dialog.glade:875
+#: panel/panel-preferences-dialog.glade:908
 msgid "<b>Icons</b>"
 msgstr "<b>Икони</b>"
 
-#: panel/panel-preferences-dialog.glade:889
+#: panel/panel-preferences-dialog.glade:922
 msgid "Adjust size au_tomatically"
 msgstr "Автоматично задаване на размера"
 
-#: panel/panel-preferences-dialog.glade:926
+#: panel/panel-preferences-dialog.glade:959
 msgid "Fixed icon _size (pixels):"
 msgstr "Фиксиран размер на иконите (пиксели):"
 
-#: panel/panel-preferences-dialog.glade:969
+#: panel/panel-preferences-dialog.glade:1002
 msgid "<b>Opacity</b>"
 msgstr "<b>Непрозрачност</b>"
 
-#: panel/panel-preferences-dialog.glade:995
+#: panel/panel-preferences-dialog.glade:1028
 msgid "Configure..."
 msgstr "Конфигуриране..."
 
-#: panel/panel-preferences-dialog.glade:1033
+#: panel/panel-preferences-dialog.glade:1066
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr "<b>В момента, композирането е изключено</b>\nВключете композирането в мениджъра на прозорците за настройване прозрачността на панела."
 
 #. I18N: label for the enter transparency slider
-#: panel/panel-preferences-dialog.glade:1073
+#: panel/panel-preferences-dialog.glade:1106
 msgid "_Enter:"
 msgstr "Влизане:"
 
 #. I18N: label for the leave transparency slider
-#: panel/panel-preferences-dialog.glade:1100
+#: panel/panel-preferences-dialog.glade:1133
 msgid "_Leave:"
 msgstr "Напускане:"
 
-#: panel/panel-preferences-dialog.glade:1113
+#: panel/panel-preferences-dialog.glade:1146
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "Прозрачност, когато показалецът на мишката не се намира над панела (0 — пълна прозрачност, 100 — непрозрачно)."
 
-#: panel/panel-preferences-dialog.glade:1140
+#: panel/panel-preferences-dialog.glade:1173
 msgid "Appeara_nce"
 msgstr "Външен вид"
 
-#: panel/panel-preferences-dialog.glade:1195
+#: panel/panel-preferences-dialog.glade:1228
 msgid "Add new item to this panel"
 msgstr "Добавяне на нов елемент в този панел"
 
-#: panel/panel-preferences-dialog.glade:1212
+#: panel/panel-preferences-dialog.glade:1245
 msgid "Remove currently selected item"
 msgstr "Премахване на текущо избран елемент"
 
-#: panel/panel-preferences-dialog.glade:1228
+#: panel/panel-preferences-dialog.glade:1261
 #: plugins/launcher/launcher-dialog.glade:559
 msgid "Edit the currently selected item"
 msgstr "Редактиране на текущо избраният елемент"
 
-#: panel/panel-preferences-dialog.glade:1249
+#: panel/panel-preferences-dialog.glade:1282
 msgid "Show about information of the currently selected item"
 msgstr "Показване на сведения за текущо избраният елемент."
 
-#: panel/panel-preferences-dialog.glade:1292
+#: panel/panel-preferences-dialog.glade:1325
 #: plugins/launcher/launcher-dialog.glade:509
 msgid "Move currently selected item up by one row"
 msgstr "Преместване на избраният елемент с един ред нагоре"
 
-#: panel/panel-preferences-dialog.glade:1313
+#: panel/panel-preferences-dialog.glade:1346
 #: plugins/launcher/launcher-dialog.glade:529
 msgid "Move currently selected item down by one row"
 msgstr "Преместване на избраният елемент с един ред надолу"
 
-#: panel/panel-preferences-dialog.glade:1347
+#: panel/panel-preferences-dialog.glade:1380
 msgid "Ite_ms"
 msgstr "Елементи"
 
-#: panel/panel-tic-tac-toe.c:115
+#: panel/panel-tic-tac-toe.c:117
 msgid "_New Game"
 msgstr "Нова игра"
 
-#: panel/panel-tic-tac-toe.c:126
+#: panel/panel-tic-tac-toe.c:128
 msgid "_Level:"
 msgstr "Ниво:"
 
-#: panel/panel-tic-tac-toe.c:132
+#: panel/panel-tic-tac-toe.c:134
 msgid "Novice"
 msgstr "Новак"
 
-#: panel/panel-tic-tac-toe.c:133
+#: panel/panel-tic-tac-toe.c:135
 msgid "Intermediate"
 msgstr "Любител"
 
-#: panel/panel-tic-tac-toe.c:134
+#: panel/panel-tic-tac-toe.c:136
 msgid "Experienced"
 msgstr "Опитен"
 
-#: panel/panel-tic-tac-toe.c:135
+#: panel/panel-tic-tac-toe.c:137
 msgid "Expert"
 msgstr "Експерт"
 
-#: panel/panel-window.c:3633
+#: panel/panel-window.c:3636
 msgid "_Lock Panel"
 msgstr "Заключване на панел"
 
-#: migrate/main.c:111
+#: migrate/main.c:106
 msgid "Failed to load the default configuration"
 msgstr "Не може да бъде заредена конфигурация по подразбиране"
 
-#: migrate/main.c:123
+#: migrate/main.c:118
 msgid "Panel config needs migration..."
 msgstr "Конфигурацията на панела трябва да бъде пренесена..."
 
-#: migrate/main.c:127
+#: migrate/main.c:122
 msgid "Failed to migrate the existing configuration"
 msgstr "Не може да бъде пренесена съществуващата конфигурация"
 
-#: migrate/main.c:133
+#: migrate/main.c:128
 msgid "Panel configuration has been updated."
 msgstr "Конфигурацията на панела ще бъде обновена."
 
@@ -1026,7 +1030,7 @@ msgstr "_ОК"
 
 #. show an error dialog
 #: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1040
-#: plugins/launcher/launcher.c:2479
+#: plugins/launcher/launcher.c:2480
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Неуспех при изпълнението на команда „%s“."
@@ -1571,69 +1575,69 @@ msgstr "Колко е часът?"
 msgid "Directory Menu"
 msgstr "Меню на директория"
 
-#: plugins/directorymenu/directorymenu.c:684
+#: plugins/directorymenu/directorymenu.c:693
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Неуспешно стартиране на програмата „%s“"
 
-#: plugins/directorymenu/directorymenu.c:715
+#: plugins/directorymenu/directorymenu.c:724
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Неуспешно запитване за типа на съдържанието на „%s“"
 
-#: plugins/directorymenu/directorymenu.c:724
+#: plugins/directorymenu/directorymenu.c:733
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Не е намерена програма по подразбиране за „%s“"
 
-#: plugins/directorymenu/directorymenu.c:740
+#: plugins/directorymenu/directorymenu.c:749
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Неуспешно стартиране на програмата по подразбиране за „%s“"
 
-#: plugins/directorymenu/directorymenu.c:835
+#: plugins/directorymenu/directorymenu.c:844
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Неуспешно изпълнение на предпочитаната програма за категория „%s“"
 
-#: plugins/directorymenu/directorymenu.c:916
+#: plugins/directorymenu/directorymenu.c:925
 msgid "Create New Folder"
 msgstr "Създаване на нова папка"
 
-#: plugins/directorymenu/directorymenu.c:921
+#: plugins/directorymenu/directorymenu.c:930
 msgid "Create New Text Document"
 msgstr "Създаване на нов текстов документ"
 
-#: plugins/directorymenu/directorymenu.c:928
+#: plugins/directorymenu/directorymenu.c:937
 msgid "C_reate"
 msgstr "_Създаване"
 
-#: plugins/directorymenu/directorymenu.c:929
+#: plugins/directorymenu/directorymenu.c:938
 msgid "Create & _Open"
 msgstr "Създаване и _Отваряне"
 
-#: plugins/directorymenu/directorymenu.c:943
+#: plugins/directorymenu/directorymenu.c:952
 msgid "Enter the new name:"
 msgstr "Въведете новото име:"
 
-#: plugins/directorymenu/directorymenu.c:979
+#: plugins/directorymenu/directorymenu.c:988
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Неуспешно създаване на папка: %s"
 
-#: plugins/directorymenu/directorymenu.c:1060
+#: plugins/directorymenu/directorymenu.c:1069
 msgid "Open Folder"
 msgstr "Отваряне на папка"
 
-#: plugins/directorymenu/directorymenu.c:1073
+#: plugins/directorymenu/directorymenu.c:1082
 msgid "Open in Terminal"
 msgstr "Отваряне в терминал"
 
-#: plugins/directorymenu/directorymenu.c:1086
+#: plugins/directorymenu/directorymenu.c:1095
 msgid "Create Folder..."
 msgstr "Създаване на папка..."
 
-#: plugins/directorymenu/directorymenu.c:1099
+#: plugins/directorymenu/directorymenu.c:1108
 msgid "Create Text Document..."
 msgstr "Създаване на текстов документ..."
 
@@ -1690,15 +1694,15 @@ msgstr "Шаблон на файл:"
 msgid "Filtering"
 msgstr "Филтриране"
 
-#: plugins/launcher/launcher.c:393
+#: plugins/launcher/launcher.c:394
 msgid "Open launcher menu"
 msgstr "Отваряне на стартер на меню"
 
-#: plugins/launcher/launcher.c:1591
+#: plugins/launcher/launcher.c:1592
 msgid "Unnamed Item"
 msgstr "Елемент без име"
 
-#: plugins/launcher/launcher.c:1793
+#: plugins/launcher/launcher.c:1794
 msgid "No items"
 msgstr "Няма елементи"
 
@@ -1827,15 +1831,15 @@ msgstr "Разширени"
 msgid "Program launcher with optional menu"
 msgstr "Стартер на програма с допълнително меню"
 
-#: plugins/pager/pager.c:685 plugins/pager/pager-dialog.glade:64
+#: plugins/pager/pager.c:688 plugins/pager/pager-dialog.glade:64
 msgid "Workspace _Settings..."
 msgstr "Настройка на работните места..."
 
-#: plugins/pager/pager.c:785
+#: plugins/pager/pager.c:788
 msgid "Unable to open the workspace settings"
 msgstr "Не могат да бъдат отворени настройките на работните места"
 
-#: plugins/pager/pager-buttons.c:588 plugins/windowmenu/windowmenu.c:893
+#: plugins/pager/pager-buttons.c:588 plugins/windowmenu/windowmenu.c:902
 #, c-format
 msgid "Workspace %d"
 msgstr "Работно място %d"
@@ -2149,36 +2153,36 @@ msgstr "Показване на прозорците от всички мони�
 msgid "Show only _minimized windows"
 msgstr "Показване само на минимизираните прозорци"
 
-#: plugins/tasklist/tasklist-widget.c:3121
+#: plugins/tasklist/tasklist-widget.c:3109
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Не може да бъде стартирано ново копие на \"%s\""
 
-#: plugins/tasklist/tasklist-widget.c:3125
+#: plugins/tasklist/tasklist-widget.c:3113
 msgid "Error"
 msgstr "Грешка"
 
-#: plugins/tasklist/tasklist-widget.c:3154
+#: plugins/tasklist/tasklist-widget.c:3142
 msgid "Launch New Instance"
 msgstr "Стартиране на ново копие"
 
-#: plugins/tasklist/tasklist-widget.c:3899
+#: plugins/tasklist/tasklist-widget.c:3887
 msgid "Mi_nimize All"
 msgstr "Минимизиране на всички"
 
-#: plugins/tasklist/tasklist-widget.c:3906
+#: plugins/tasklist/tasklist-widget.c:3894
 msgid "Un_minimize All"
 msgstr "Деминимизиране на всички"
 
-#: plugins/tasklist/tasklist-widget.c:3913
+#: plugins/tasklist/tasklist-widget.c:3901
 msgid "Ma_ximize All"
 msgstr "Максимизиране на всички"
 
-#: plugins/tasklist/tasklist-widget.c:3920
+#: plugins/tasklist/tasklist-widget.c:3908
 msgid "_Unmaximize All"
 msgstr "Демаксимизиране на всички"
 
-#: plugins/tasklist/tasklist-widget.c:3931
+#: plugins/tasklist/tasklist-widget.c:3919
 msgid "_Close All"
 msgstr "Затваряне на всички"
 
@@ -2186,28 +2190,28 @@ msgstr "Затваряне на всички"
 msgid "Switch between open windows using buttons"
 msgstr "Превключване между отворените прозорци с помощта на бутоните"
 
-#: plugins/windowmenu/windowmenu.c:689
+#: plugins/windowmenu/windowmenu.c:698
 msgid "Desktop"
 msgstr "Работен плот"
 
-#: plugins/windowmenu/windowmenu.c:1289
+#: plugins/windowmenu/windowmenu.c:1298
 msgid "No Windows"
 msgstr "Няма прозорци"
 
-#: plugins/windowmenu/windowmenu.c:1304
+#: plugins/windowmenu/windowmenu.c:1313
 msgid "Urgent Windows"
 msgstr "Спешни прозорци"
 
-#: plugins/windowmenu/windowmenu.c:1349
+#: plugins/windowmenu/windowmenu.c:1358
 msgid "Add Workspace"
 msgstr "Добавяне на работно място"
 
-#: plugins/windowmenu/windowmenu.c:1371
+#: plugins/windowmenu/windowmenu.c:1380
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Премахване на работно място „%s“"
 
-#: plugins/windowmenu/windowmenu.c:1373
+#: plugins/windowmenu/windowmenu.c:1382
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Премахване на работно място %d"
