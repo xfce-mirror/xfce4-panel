@@ -89,6 +89,7 @@ static void         panel_window_set_property               (GObject          *o
                                                              guint             prop_id,
                                                              const GValue     *value,
                                                              GParamSpec       *pspec);
+static void         panel_window_constructed                (GObject          *object);
 static void         panel_window_finalize                   (GObject          *object);
 static gboolean     panel_window_draw                       (GtkWidget        *widget,
                                                              cairo_t          *cr);
@@ -405,6 +406,7 @@ panel_window_class_init (PanelWindowClass *klass)
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->get_property = panel_window_get_property;
   gobject_class->set_property = panel_window_set_property;
+  gobject_class->constructed = panel_window_constructed;
   gobject_class->finalize = panel_window_finalize;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
@@ -944,6 +946,22 @@ panel_window_set_property (GObject      *object,
     }
 }
 
+static void
+panel_window_constructed (GObject *object)
+{
+  PanelWindow     *window = PANEL_WINDOW (object);
+  GtkStyleContext *context;
+  gchar           *style_class;
+
+  context = gtk_widget_get_style_context (GTK_WIDGET (window));
+  style_class = g_strdup_printf ("%s-%d", "panel", window->id);
+
+  gtk_style_context_add_class (context, style_class);
+
+  g_free (style_class);
+
+  (*G_OBJECT_CLASS (panel_window_parent_class)->constructed) (object);
+}
 
 
 static void
@@ -3349,6 +3367,9 @@ panel_window_set_autohide_behavior (PanelWindow *window,
        * autohide" without recreating the window */
       if (window->autohide_window == NULL)
         {
+          GtkStyleContext *context;
+          gchar           *style_class;
+
           /* create the window */
           panel_return_if_fail (window->autohide_window == NULL);
           popup = g_object_new (PANEL_TYPE_BASE_WINDOW,
@@ -3359,6 +3380,13 @@ panel_window_set_autohide_behavior (PanelWindow *window,
                                 "gravity", GDK_GRAVITY_STATIC,
                                 "name", "XfcePanelWindowHidden",
                                 NULL);
+
+          context = gtk_widget_get_style_context (GTK_WIDGET (popup));
+          style_class = g_strdup_printf ("%s-%d-%s", "panel", window->id, "hidden");
+          gtk_style_context_add_class (context, style_class);
+
+          g_free (style_class);
+
 #ifdef HAVE_GTK_LAYER_SHELL
           if (gtk_layer_is_supported ())
             {
