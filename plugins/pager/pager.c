@@ -221,7 +221,8 @@ pager_plugin_init (PagerPlugin *plugin)
   plugin->sync_wait = TRUE;
 #ifdef ENABLE_X11
 #if WNCK_CHECK_VERSION (43, 0, 0)
-  plugin->wnck_handle = wnck_handle_new (WNCK_CLIENT_TYPE_PAGER);
+  if (WINDOWING_IS_X11 ())
+    plugin->wnck_handle = wnck_handle_new (WNCK_CLIENT_TYPE_PAGER);
 #endif
 #endif
 
@@ -716,7 +717,8 @@ pager_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
 #ifdef ENABLE_X11
 #if WNCK_CHECK_VERSION (43, 0, 0)
-  g_object_unref (plugin->wnck_handle);
+  if (plugin->wnck_handle != NULL)
+    g_object_unref (plugin->wnck_handle);
 #endif
 #endif
 
