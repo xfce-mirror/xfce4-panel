@@ -1278,7 +1278,7 @@ panel_window_button_press_event (GtkWidget      *widget,
       panel_return_val_if_fail (window->grab_time == 0, FALSE);
 
       /* create a cursor */
-      cursor = gdk_cursor_new_for_display (window->display, GDK_FLEUR);
+      cursor = gdk_cursor_new_from_name (window->display, "move");
 
       /* grab the pointer for dragging the window */
       if (WINDOWING_IS_X11 ())
