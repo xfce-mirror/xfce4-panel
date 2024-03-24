@@ -377,7 +377,7 @@ sn_box_measure_and_allocate (GtkWidget *widget,
     }
   else
     {
-      hx_size = MIN (icon_size, panel_size);
+      hx_size = MAX (1, MIN (icon_size, panel_size));
       nrows = single_row ? 1 : MAX (1, panel_size / hx_size);
       hy_size = panel_size / nrows;
     }
