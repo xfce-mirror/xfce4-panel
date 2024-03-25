@@ -1376,7 +1376,7 @@ actions_plugin_pack (ActionsPlugin *plugin)
 {
   if (plugin->pack_idle_id == 0)
     {
-      plugin->pack_idle_id = g_idle_add_full (G_PRIORITY_DEFAULT_IDLE, actions_plugin_pack_idle,
+      plugin->pack_idle_id = g_idle_add_full (G_PRIORITY_HIGH, actions_plugin_pack_idle,
                                               plugin, actions_plugin_pack_idle_destoyed);
     }
 }
