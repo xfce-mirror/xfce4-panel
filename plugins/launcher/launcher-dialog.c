@@ -38,12 +38,6 @@
 #include "launcher-dialog.h"
 #include "launcher-dialog_ui.h"
 
-#ifdef ENABLE_X11
-#define LAUNCHER_WIDGET_XID(widget) ((guint) GDK_WINDOW_XID (gdk_screen_get_root_window (gtk_widget_get_screen (GTK_WIDGET (widget)))))
-#else
-#define LAUNCHER_WIDGET_XID(widget) (0)
-#endif
-
 
 
 typedef struct
@@ -772,15 +766,12 @@ launcher_dialog_item_desktop_item_edit (GtkWidget            *widget,
   /* build command */
   if (uri != NULL)
     {
-      command = g_strdup_printf ("exo-desktop-item-edit --xid=0x%x '%s'",
-                                 LAUNCHER_WIDGET_XID (widget), uri);
+      command = g_strdup_printf ("exo-desktop-item-edit '%s'", uri);
     }
   else
     {
       filename = launcher_plugin_unique_filename (dialog->plugin);
-      command = g_strdup_printf ("exo-desktop-item-edit -t %s -c --xid=0x%x '%s'",
-                                 type, LAUNCHER_WIDGET_XID (widget),
-                                 filename);
+      command = g_strdup_printf ("exo-desktop-item-edit -t %s -c '%s'", type, filename);
       g_free (filename);
     }
 
