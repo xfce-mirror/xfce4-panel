@@ -40,6 +40,7 @@ typedef enum
 
 PanelModule *panel_module_new_from_desktop_file    (const gchar             *filename,
                                                     const gchar             *name,
+                                                    const gchar             *lib_dir,
                                                     PanelModuleRunMode       forced_mode) G_GNUC_MALLOC;
 
 GtkWidget   *panel_module_new_plugin               (PanelModule             *module,

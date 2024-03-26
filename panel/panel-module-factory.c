@@ -38,14 +38,10 @@
 #include <panel/panel-module.h>
 #include <panel/panel-module-factory.h>
 
-#define PANEL_PLUGINS_DATA_DIR     (DATADIR G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "plugins")
-#define PANEL_PLUGINS_DATA_DIR_OLD (DATADIR G_DIR_SEPARATOR_S "panel-plugins")
-
 
 
 static void     panel_module_factory_finalize        (GObject                  *object);
-static void     panel_module_factory_load_modules    (PanelModuleFactory       *factory,
-                                                      gboolean                  warn_if_known);
+static void     panel_module_factory_load_modules    (PanelModuleFactory       *factory);
 static gboolean panel_module_factory_modules_cleanup (gpointer                  key,
                                                       gpointer                  value,
                                                       gpointer                  user_data);
@@ -115,7 +111,7 @@ panel_module_factory_init (PanelModuleFactory *factory)
                                             g_free, g_object_unref);
 
   /* load all the modules */
-  panel_module_factory_load_modules (factory, TRUE);
+  panel_module_factory_load_modules (factory);
 }
 
 
@@ -135,8 +131,8 @@ panel_module_factory_finalize (GObject *object)
 
 static void
 panel_module_factory_load_modules_dir (PanelModuleFactory *factory,
-                                       const gchar        *path,
-                                       gboolean            warn_if_known)
+                                       const gchar        *datadir,
+                                       const gchar        *libdir)
 {
   GDir        *dir;
   const gchar *name, *p;
@@ -145,11 +141,11 @@ panel_module_factory_load_modules_dir (PanelModuleFactory *factory,
   gchar       *internal_name;
 
   /* try to open the directory */
-  dir = g_dir_open (path, 0, NULL);
+  dir = g_dir_open (datadir, 0, NULL);
   if (G_UNLIKELY (dir == NULL))
     return;
 
-  panel_debug (PANEL_DEBUG_MODULE_FACTORY, "reading %s", path);
+  panel_debug (PANEL_DEBUG_MODULE_FACTORY, "reading %s", datadir);
 
   /* walk the directory */
   for (;;)
@@ -164,7 +160,7 @@ panel_module_factory_load_modules_dir (PanelModuleFactory *factory,
         continue;
 
       /* create the full .desktop filename */
-      filename = g_build_filename (path, name, NULL);
+      filename = g_build_filename (datadir, name, NULL);
 
       /* find the dot in the name, this cannot
        * fail since it passed the .desktop suffix check */
@@ -175,17 +171,12 @@ panel_module_factory_load_modules_dir (PanelModuleFactory *factory,
 
       /* check if the modules name is already loaded */
       if (g_hash_table_lookup (factory->modules, internal_name) != NULL)
-        {
-          if (warn_if_known)
-            panel_debug (PANEL_DEBUG_MODULE_FACTORY, "Another plugin already registered with "
-                         "the internal name \"%s\".", internal_name);
-
-          goto exists;
-        }
+        goto exists;
 
       /* try to load the module */
       module = panel_module_new_from_desktop_file (filename,
                                                    internal_name,
+                                                   libdir,
                                                    force_all_run_mode);
 
       if (G_LIKELY (module != NULL))
@@ -212,14 +203,82 @@ panel_module_factory_load_modules_dir (PanelModuleFactory *factory,
 
 
 static void
-panel_module_factory_load_modules (PanelModuleFactory *factory,
-                                   gboolean            warn_if_known)
+panel_module_factory_load_modules (PanelModuleFactory *factory)
 {
+  const gchar *plugin_dir_suffix = G_DIR_SEPARATOR_S "xfce4" G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "plugins";
+  GList *datadirs = NULL, *libdirs = NULL;
+  gboolean build_dirs_added = FALSE;
+
   panel_return_if_fail (PANEL_IS_MODULE_FACTORY (factory));
 
-  /* load from the new and old location */
-  panel_module_factory_load_modules_dir (factory, PANEL_PLUGINS_DATA_DIR, warn_if_known);
-  panel_module_factory_load_modules_dir (factory, PANEL_PLUGINS_DATA_DIR_OLD, warn_if_known);
+  /* if DATADIR and LIBDIR have same PREFIX, try to derive plugin directories from XDG_DATA_DIRS */
+  if (g_str_has_prefix (DATADIR, PREFIX) && g_str_has_prefix (LIBDIR, PREFIX))
+    {
+      gsize build_prefix_len = strlen (PREFIX);
+      const gchar *datadir_suffix = DATADIR + build_prefix_len;
+      const gchar *libdir_suffix = LIBDIR + build_prefix_len;
+
+      if (g_str_has_prefix (datadir_suffix, G_DIR_SEPARATOR_S) && g_str_has_prefix (libdir_suffix, G_DIR_SEPARATOR_S))
+        {
+          const gchar *const *sys_datadirs = g_get_system_data_dirs ();
+          const gchar *user_datadir = g_get_user_data_dir ();
+          GHashTable *unique = g_hash_table_new (g_str_hash, g_str_equal);
+
+          for (const gchar *const *p = sys_datadirs; *p != NULL; p++)
+            {
+              if (g_hash_table_add (unique, (gpointer) *p) && g_str_has_suffix (*p, datadir_suffix))
+                {
+                  gsize prefix_len = g_strrstr_len (*p, -1, datadir_suffix) - *p;
+                  gchar *prefix = g_strndup (*p, prefix_len);
+                  gchar *datadir = g_strconcat (*p, plugin_dir_suffix, NULL);
+                  gchar *libdir = g_strconcat (prefix, libdir_suffix, plugin_dir_suffix, NULL);
+                  datadirs = g_list_prepend (datadirs, datadir);
+                  libdirs = g_list_prepend (libdirs, libdir);
+                  if (!build_dirs_added && g_strcmp0 (prefix, PREFIX))
+                    build_dirs_added = TRUE;
+                  g_free (prefix);
+                }
+            }
+
+          g_hash_table_destroy (unique);
+          datadirs = g_list_reverse (datadirs);
+          libdirs = g_list_reverse (libdirs);
+
+          if (!build_dirs_added)
+            {
+              gchar *datadir = g_strconcat (DATADIR, plugin_dir_suffix, NULL);
+              gchar *libdir = g_strconcat (LIBDIR, plugin_dir_suffix, NULL);
+              datadirs = g_list_prepend (datadirs, datadir);
+              libdirs = g_list_prepend (libdirs, libdir);
+              build_dirs_added = TRUE;
+            }
+
+          if (g_str_has_suffix (user_datadir, datadir_suffix))
+            {
+              gsize prefix_len = g_strrstr_len (user_datadir, -1, datadir_suffix) - user_datadir;
+              gchar *prefix = g_strndup (user_datadir, prefix_len);
+              gchar *datadir = g_strconcat (user_datadir, plugin_dir_suffix, NULL);
+              gchar *libdir = g_strconcat (prefix, libdir_suffix, plugin_dir_suffix, NULL);
+              datadirs = g_list_prepend (datadirs, datadir);
+              libdirs = g_list_prepend (libdirs, libdir);
+              g_free (prefix);
+            }
+        }
+    }
+
+  if (!build_dirs_added)
+    {
+      gchar *datadir = g_strconcat (DATADIR, plugin_dir_suffix, NULL);
+      gchar *libdir = g_strconcat (LIBDIR, plugin_dir_suffix, NULL);
+      datadirs = g_list_prepend (datadirs, datadir);
+      libdirs = g_list_prepend (libdirs, libdir);
+    }
+
+  for (GList *lp = datadirs, *lq = libdirs; lp != NULL && lq != NULL; lp = lp->next, lq = lq->next)
+    panel_module_factory_load_modules_dir (factory, lp->data, lq->data);
+
+  g_list_free_full (datadirs, g_free);
+  g_list_free_full (libdirs, g_free);
 }
 
 
@@ -343,7 +402,7 @@ panel_module_factory_get_modules (PanelModuleFactory *factory)
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), NULL);
 
   /* add new modules to the hash table */
-  panel_module_factory_load_modules (factory, FALSE);
+  panel_module_factory_load_modules (factory);
 
   /* remove modules that are not found on the harddisk */
   g_hash_table_foreach_remove (factory->modules,

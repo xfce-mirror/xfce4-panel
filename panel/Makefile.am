@@ -2,8 +2,9 @@
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"xfce4-panel\" \
-	-DDATADIR=\"$(datadir)/xfce4\" \
-	-DLIBDIR=\"$(libdir)/xfce4\" \
+	-DPREFIX=\"$(prefix)\" \
+	-DDATADIR=\"$(datadir)\" \
+	-DLIBDIR=\"$(libdir)\" \
 	-DHELPERDIR=\"$(HELPER_PATH_PREFIX)/xfce4/panel\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	-DDBUS_API_SUBJECT_TO_CHANGE \

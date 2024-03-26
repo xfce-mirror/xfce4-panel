@@ -38,8 +38,6 @@
 #include <panel/panel-module-factory.h>
 #include <panel/panel-plugin-external-wrapper.h>
 
-#define PANEL_PLUGINS_LIB_DIR (LIBDIR G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "plugins")
-#define PANEL_PLUGINS_LIB_DIR_OLD (LIBDIR G_DIR_SEPARATOR_S "panel-plugins")
 
 
 typedef enum _PanelModuleUnique  PanelModuleUnique;
@@ -284,6 +282,7 @@ panel_module_plugin_destroyed (gpointer  user_data,
 PanelModule *
 panel_module_new_from_desktop_file (const gchar *filename,
                                     const gchar *name,
+                                    const gchar *libdir,
                                     PanelModuleRunMode forced_mode)
 {
   PanelModule *module = NULL;
@@ -326,16 +325,8 @@ panel_module_new_from_desktop_file (const gchar *filename,
   module_name = xfce_rc_read_entry_untranslated (rc, "X-XFCE-Module", NULL);
   if (G_LIKELY (module_name != NULL))
     {
-      path = g_module_build_path (PANEL_PLUGINS_LIB_DIR, module_name);
+      path = g_module_build_path (libdir, module_name);
       found = g_file_test (path, G_FILE_TEST_EXISTS);
-
-      if (!found)
-        {
-          /* deprecated location for module plugin directories */
-          g_free (path);
-          path = g_module_build_path (PANEL_PLUGINS_LIB_DIR_OLD, module_name);
-          found = g_file_test (path, G_FILE_TEST_EXISTS);
-        }
 
       if (G_LIKELY (found))
         {
@@ -359,8 +350,11 @@ panel_module_new_from_desktop_file (const gchar *filename,
         }
       else
         {
-          g_critical ("Plugin %s: There was no module found at \"%s\"",
-                      name, path);
+          if (g_strcmp0 (libdir, LIBDIR))
+            g_critical ("Plugin %s: There was no module found at \"%s\"", name, path);
+          else
+            panel_debug_filtered (PANEL_DEBUG_MODULE, "Plugin %s: There was no module found at \"%s\"", name, path);
+
           g_free (path);
         }
     }
