@@ -33,27 +33,11 @@ panel_properties_store_value (XfconfChannel *channel,
                               GObject       *object,
                               const gchar   *object_property)
 {
-  GValue       value = { 0, };
-  GdkRGBA     *rgba;
-#ifndef NDEBUG
-  GParamSpec *pspec;
-#endif
+  GValue value = { 0, };
+  GdkRGBA *rgba;
 
   panel_return_if_fail (G_IS_OBJECT (object));
   panel_return_if_fail (XFCONF_IS_CHANNEL (channel));
-
-#ifndef NDEBUG
-  /* check if the types match */
-  pspec = g_object_class_find_property (G_OBJECT_GET_CLASS (object), object_property);
-  panel_assert (pspec != NULL);
-  if (G_PARAM_SPEC_VALUE_TYPE (pspec) != xfconf_property_type)
-    {
-      g_critical ("Object and Xfconf properties don't match! %s::%s. %s != %s",
-                  G_OBJECT_TYPE_NAME (object), xfconf_property,
-                  g_type_name (xfconf_property_type),
-                  g_type_name (G_PARAM_SPEC_VALUE_TYPE (pspec)));
-    }
-#endif
 
   /* write the property to the xfconf channel */
   g_value_init (&value, xfconf_property_type);

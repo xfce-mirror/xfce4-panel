@@ -306,11 +306,8 @@ panel_module_factory_force_run_mode (PanelModuleRunMode mode)
 
   force_all_run_mode = mode;
   panel_debug (PANEL_DEBUG_MODULE_FACTORY, "Forcing all plugins to run %s", mode_name);
-
-#ifndef NDEBUG
   if (!panel_debug_has_domain (PANEL_DEBUG_YES))
     g_message ("Forcing all plugins to run %s", mode_name);
-#endif
 }
 
 

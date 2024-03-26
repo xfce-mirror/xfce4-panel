@@ -34,7 +34,6 @@
 #endif
 
 /* support macros for debugging (improved macro for better position indication) */
-/*#ifndef NDEBUG*/
 #define panel_assert(expr)                 g_assert (expr)
 #define panel_assert_not_reached()         g_assert_not_reached ()
 #define panel_return_if_fail(expr)         G_STMT_START { \
@@ -53,12 +52,6 @@
              #expr); \
       return (val); \
     }; }G_STMT_END
-/*#else
-#define panel_assert(expr)                 G_STMT_START{ (void)0; }G_STMT_END
-#define panel_assert_not_reached()         G_STMT_START{ (void)0; }G_STMT_END
-#define panel_return_if_fail(expr)         G_STMT_START{ (void)0; }G_STMT_END
-#define panel_return_val_if_fail(expr,val) G_STMT_START{ (void)0; }G_STMT_END
-#endif*/
 
 /* handling flags */
 #define PANEL_SET_FLAG(flags,flag) G_STMT_START{ ((flags) |= (flag)); }G_STMT_END

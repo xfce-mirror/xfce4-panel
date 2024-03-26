@@ -326,17 +326,6 @@ panel_module_new_from_desktop_file (const gchar *filename,
   module_name = xfce_rc_read_entry_untranslated (rc, "X-XFCE-Module", NULL);
   if (G_LIKELY (module_name != NULL))
     {
-#ifndef NDEBUG
-      if (xfce_rc_has_entry (rc, "X-XFCE-Module-Path"))
-        {
-          /* show a messsage if the old module path key still exists */
-          g_message ("Plugin %s: The \"X-XFCE-Module-Path\" key is "
-                     "ignored in \"%s\", the panel will look for the "
-                     "module in %s. See bug #5455 why this decision was made",
-                     name, filename, PANEL_PLUGINS_LIB_DIR);
-        }
-#endif
-
       path = g_module_build_path (PANEL_PLUGINS_LIB_DIR, module_name);
       found = g_file_test (path, G_FILE_TEST_EXISTS);
 
