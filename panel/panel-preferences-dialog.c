@@ -1155,18 +1155,10 @@ panel_preferences_dialog_compositing_clicked (GtkButton *button, gpointer user_d
 static void
 panel_preferences_dialog_panel_switch (GtkWidget *widget, PanelPreferencesDialog *dialog)
 {
-  GtkWidget *toplevel;
-  gchar     *path_old;
-  gchar     *path_new;
-
-  path_old = g_find_program_in_path ("xfpanel-switch");
-  path_new = g_find_program_in_path ("xfce4-panel-profiles");
+  gchar *path_old = g_find_program_in_path ("xfpanel-switch");
+  gchar *path_new = g_find_program_in_path ("xfce4-panel-profiles");
   if (path_old == NULL && path_new == NULL)
     return;
-
-  /* close the preferences dialog */
-  toplevel = gtk_widget_get_toplevel (widget);
-  panel_preferences_dialog_response (toplevel, 0, dialog);
 
   /* first try the new name of the executable, then the old */
   if (path_new)
