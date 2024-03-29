@@ -205,7 +205,7 @@ panel_application_init (PanelApplication *application)
   application->autohide_block = 0;
 
   /* get the xfconf channel (singleton) */
-  application->xfconf = panel_properties_get_channel (G_OBJECT (application));
+  application->xfconf = xfconf_channel_get (XFCE_PANEL_CHANNEL_NAME);
 
   /* check if we need to migrate configuration */
   configver = xfconf_channel_get_int (application->xfconf, "/configver", -1);

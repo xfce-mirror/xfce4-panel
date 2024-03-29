@@ -349,6 +349,13 @@ main (gint argc, gchar **argv)
 
   launch_panel:
 
+  if (!xfconf_init (&error))
+    {
+      g_critical ("Failed to initialize Xfconf: %s", error->message);
+      g_error_free (error);
+      return EXIT_FAILURE;
+    }
+
   g_bus_own_name (G_BUS_TYPE_SESSION,
                   PANEL_DBUS_NAME,
                   G_BUS_NAME_OWNER_FLAGS_NONE,
@@ -413,6 +420,8 @@ main (gint argc, gchar **argv)
       g_print ("%s: %s\n\n", G_LOG_DOMAIN, _("Restarting..."));
       g_spawn_command_line_async (argv[0], NULL);
     }
+
+  xfconf_shutdown ();
 
   return EXIT_SUCCESS;
 
