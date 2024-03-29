@@ -359,6 +359,39 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
 
 
 
+static gboolean
+panel_application_remove_plugin_dialog (GtkWindow *parent,
+                                        const gchar *plugin_name)
+{
+  gint response;
+  GtkWidget *dialog = gtk_message_dialog_new (
+    parent,
+    GTK_DIALOG_DESTROY_WITH_PARENT,
+    GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
+    _("Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel configuration?"),
+    plugin_name);
+  gtk_window_set_title (GTK_WINDOW (dialog), _("Plugin loading failure"));
+  gtk_message_dialog_format_secondary_markup (
+    GTK_MESSAGE_DIALOG (dialog),
+    _("This plugin is in the current xfce4-panel configuration but could not be loaded, probably "
+      "due to an installation issue. If you know what you're doing, you can remove it permanently, "
+      "otherwise you'd better quit and make a backup of the current configuration using %s, before "
+      "checking your installation and trying to start xfce4-panel again."),
+    "<a href=\"https://gitlab.xfce.org/apps/xfce4-panel-profiles\">xfce4-panel-profiles</a>");
+  gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+                          _("_Remove"), GTK_RESPONSE_OK,
+                          _("_Quit"), GTK_RESPONSE_CANCEL, NULL);
+  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL);
+  gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
+
+  response = gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_widget_destroy (dialog);
+
+  return response == GTK_RESPONSE_OK;
+}
+
+
+
 static void
 panel_application_load_real (PanelApplication *application)
 {
@@ -454,16 +487,19 @@ panel_application_load_real (PanelApplication *application)
                   || !panel_application_plugin_insert (application, window,
                                                        name, unique_id, NULL, -1))
                 {
-                  /* plugin could not be loaded, remove it from the channel */
-                  if (xfconf_channel_has_property (application->xfconf, buf))
-                    xfconf_channel_reset_property (application->xfconf, buf, TRUE);
-
-                  /* show warnings */
-                  g_message ("Plugin \"%s-%d\" was not found and has been "
-                             "removed from the configuration", name, unique_id);
-
-                  /* save configuration change after loading */
-                  save_changed_ids = TRUE;
+                  /* plugin could not be loaded, ask the user what to do */
+                  if (panel_application_remove_plugin_dialog (GTK_WINDOW (window), name))
+                    {
+                      save_changed_ids = TRUE;
+                      if (xfconf_channel_has_property (application->xfconf, buf))
+                        xfconf_channel_reset_property (application->xfconf, buf, TRUE);
+                    }
+                  else
+                    {
+                      save_changed_ids = FALSE;
+                      j = array->len;
+                      gtk_main_quit ();
+                    }
                 }
 
               g_free (name);
