@@ -350,7 +350,7 @@ panel_module_new_from_desktop_file (const gchar *filename,
         }
       else
         {
-          if (g_strcmp0 (libdir, LIBDIR))
+          if (g_strcmp0 (libdir, LIBDIR) == 0)
             g_critical ("Plugin %s: There was no module found at \"%s\"", name, path);
           else
             panel_debug_filtered (PANEL_DEBUG_MODULE, "Plugin %s: There was no module found at \"%s\"", name, path);
