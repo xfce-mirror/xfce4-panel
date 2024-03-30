@@ -110,6 +110,7 @@ struct _ActionsPlugin
   guint           pack_idle_id;
   guint           watch_id;
   GDBusProxy     *proxy;
+  const gchar    *switch_user_cmd;
 };
 
 typedef enum
@@ -929,7 +930,8 @@ actions_plugin_action_dbus_xfsm (ActionsPlugin *plugin,
         }
       else if (g_strcmp0 (method, "Suspend") == 0
                || g_strcmp0 (method, "Hibernate") == 0
-               || g_strcmp0 (method, "HybridSleep") == 0)
+               || g_strcmp0 (method, "HybridSleep") == 0
+               || g_strcmp0 (method, "SwitchUser") == 0)
         {
           retval = g_dbus_proxy_call_sync (plugin->proxy, method,
                                            NULL,
@@ -959,6 +961,11 @@ actions_plugin_action_dbus_xfsm (ActionsPlugin *plugin,
           g_variant_unref (retval);
           return TRUE;
         }
+    }
+  else
+    {
+      if (g_strcmp0 (method, "SwitchUser") == 0)
+        return g_spawn_command_line_async (plugin->switch_user_cmd, error);
     }
 
   return FALSE;
@@ -1003,30 +1010,15 @@ actions_plugin_actions_allowed (ActionsPlugin *plugin)
   ActionType allow_mask = ACTION_TYPE_SEPARATOR;
   gchar *path;
 
-  /* check for commands we use */
-  path = g_find_program_in_path ("dm-tool");
-  if (path != NULL)
-    PANEL_SET_FLAG (allow_mask, ACTION_TYPE_SWITCH_USER);
-  else
-  {
-    /* check for gdmflexiserver if dm-tool is not present */
-    g_free (path);
-    path = g_find_program_in_path ("gdmflexiserver");
-    if (path != NULL)
-      PANEL_SET_FLAG (allow_mask, ACTION_TYPE_SWITCH_USER);
-  }
-  g_free (path);
-
+  /* xfce4-session */
   path = g_find_program_in_path ("xflock4");
   if (path != NULL)
     PANEL_SET_FLAG (allow_mask, ACTION_TYPE_LOCK_SCREEN);
   g_free (path);
 
-  /* xfce4-session */
   if (G_LIKELY (plugin->proxy != NULL))
     {
-      /* when xfce4-session is connected, we can logout */
-      PANEL_SET_FLAG (allow_mask, ACTION_TYPE_LOGOUT | ACTION_TYPE_LOGOUT_DIALOG);
+      PANEL_SET_FLAG (allow_mask, ACTION_TYPE_LOGOUT | ACTION_TYPE_LOGOUT_DIALOG | ACTION_TYPE_SWITCH_USER);
 
       if (actions_plugin_action_dbus_can (plugin->proxy, "CanShutdown"))
         PANEL_SET_FLAG (allow_mask, ACTION_TYPE_SHUTDOWN);
@@ -1042,7 +1034,27 @@ actions_plugin_actions_allowed (ActionsPlugin *plugin)
 
       if (actions_plugin_action_dbus_can (plugin->proxy, "CanHybridSleep"))
         PANEL_SET_FLAG (allow_mask, ACTION_TYPE_HYBRID_SLEEP);
+
+      return allow_mask;
     }
+
+  /* fallback methods */
+  path = g_find_program_in_path ("dm-tool");
+  if (path != NULL)
+    {
+      PANEL_SET_FLAG (allow_mask, ACTION_TYPE_SWITCH_USER);
+      plugin->switch_user_cmd = "dm-tool switch-to-greeter";
+    }
+  else
+  {
+    path = g_find_program_in_path ("gdmflexiserver");
+    if (path != NULL)
+      {
+        PANEL_SET_FLAG (allow_mask, ACTION_TYPE_SWITCH_USER);
+        plugin->switch_user_cmd = "gdmflexiserver";
+      }
+  }
+  g_free (path);
 
   return allow_mask;
 }
@@ -1058,7 +1070,6 @@ actions_plugin_action_activate (GtkWidget      *widget,
   gboolean       unattended = FALSE;
   GError        *error = NULL;
   gboolean       succeed = FALSE;
-  gchar         *path;
 
   entry = g_object_get_qdata (G_OBJECT (widget), action_quark);
   panel_return_if_fail (entry != NULL);
@@ -1107,12 +1118,8 @@ actions_plugin_action_activate (GtkWidget      *widget,
       break;
 
     case ACTION_TYPE_SWITCH_USER:
-      path = g_find_program_in_path ("dm-tool");
-      if (path != NULL)
-        succeed = g_spawn_command_line_async ("dm-tool switch-to-greeter", &error);
-      else
-        succeed = g_spawn_command_line_async ("gdmflexiserver", &error);
-      g_free (path);
+      succeed = actions_plugin_action_dbus_xfsm (plugin, "SwitchUser", FALSE,
+                                                 FALSE, &error);
       break;
 
     case ACTION_TYPE_LOCK_SCREEN:
