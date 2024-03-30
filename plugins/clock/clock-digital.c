@@ -384,8 +384,9 @@ xfce_clock_digital_anchored (XfceClockDigital *digital)
   g_signal_handlers_disconnect_by_func (digital, xfce_clock_digital_anchored, NULL);
 
   plugin = gtk_widget_get_ancestor (GTK_WIDGET (digital), XFCE_TYPE_PANEL_PLUGIN);
-  channel = xfconf_channel_get (XFCE_PANEL_CHANNEL_NAME);
+  channel = panel_properties_get_channel (G_OBJECT (plugin));
   prop_base = xfce_panel_plugin_get_property_base (XFCE_PANEL_PLUGIN (plugin));
+  panel_return_if_fail (channel != NULL);
 
   /* see if any of the new properties are set */
   for (guint n = 0; n < G_N_ELEMENTS (props); n++)

@@ -65,6 +65,29 @@ panel_properties_store_value (XfconfChannel *channel,
 
 
 
+XfconfChannel *
+panel_properties_get_channel (GObject *object_for_weak_ref)
+{
+  GError        *error = NULL;
+  XfconfChannel *channel;
+
+  panel_return_val_if_fail (G_IS_OBJECT (object_for_weak_ref), NULL);
+
+  if (!xfconf_init (&error))
+    {
+      g_critical ("Failed to initialize Xfconf: %s", error->message);
+      g_error_free (error);
+      return NULL;
+    }
+
+  channel = xfconf_channel_get (XFCE_PANEL_CHANNEL_NAME);
+  g_object_weak_ref (object_for_weak_ref, (GWeakNotify) xfconf_shutdown, NULL);
+
+  return channel;
+}
+
+
+
 void
 panel_properties_bind (XfconfChannel       *channel,
                        GObject             *object,
@@ -81,7 +104,8 @@ panel_properties_bind (XfconfChannel       *channel,
   panel_return_if_fail (properties != NULL);
 
   if (G_LIKELY (channel == NULL))
-    channel = xfconf_channel_get (XFCE_PANEL_CHANNEL_NAME);
+    channel = panel_properties_get_channel (object);
+  panel_return_if_fail (channel != NULL);
 
   /* walk the properties array */
   for (prop = properties; prop->property != NULL; prop++)
