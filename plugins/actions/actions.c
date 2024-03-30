@@ -914,7 +914,7 @@ actions_plugin_action_dbus_xfsm (ActionsPlugin *plugin,
 {
   if (G_LIKELY (plugin->proxy != NULL))
     {
-      GVariant *retval;
+      GVariant *retval = NULL;
 
       if (g_strcmp0 (method, "Logout") == 0)
         {
@@ -938,15 +938,20 @@ actions_plugin_action_dbus_xfsm (ActionsPlugin *plugin,
                                            NULL,
                                            error);
         }
-      else
+      else if (g_strcmp0 (method, "Restart") == 0
+               || g_strcmp0 (method, "Shutdown") == 0)
         {
           retval = g_dbus_proxy_call_sync (plugin->proxy, method,
                                            g_variant_new ("(b)",
-                                                          show_dialog),
+                                                          allow_save),
                                            G_DBUS_CALL_FLAGS_NONE,
                                            -1,
                                            NULL,
                                            error);
+        }
+      else
+        {
+          g_warn_if_reached ();
         }
 
       if (retval)
