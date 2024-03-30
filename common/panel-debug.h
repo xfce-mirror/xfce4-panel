@@ -45,6 +45,7 @@ typedef enum
   PANEL_DEBUG_PAGER            = 1 << 15,
   PANEL_DEBUG_ITEMBAR          = 1 << 16,
   PANEL_DEBUG_CLOCK            = 1 << 17,
+  PANEL_DEBUG_ACTIONS          = 1 << 18,
 }
 PanelDebugFlag;
 

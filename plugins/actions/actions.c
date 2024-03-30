@@ -27,6 +27,7 @@
 #include <common/panel-private.h>
 #include <common/panel-xfconf.h>
 #include <common/panel-utils.h>
+#include <common/panel-debug.h>
 
 #include "actions.h"
 #include "actions-dialog_ui.h"
@@ -107,6 +108,8 @@ struct _ActionsPlugin
   GtkWidget      *menu;
   guint           ask_confirmation : 1;
   guint           pack_idle_id;
+  guint           watch_id;
+  GDBusProxy     *proxy;
 };
 
 typedef enum
@@ -304,6 +307,50 @@ actions_plugin_class_init (ActionsPluginClass *klass)
 }
 
 
+static void
+name_appeared (GDBusConnection *connection,
+               const gchar *name,
+               const gchar *name_owner,
+               gpointer user_data)
+{
+  ActionsPlugin *plugin = user_data;
+  GError *error = NULL;
+
+  panel_debug (PANEL_DEBUG_ACTIONS, "%s started up, owned by %s", name, name_owner);
+
+  plugin->proxy = g_dbus_proxy_new_sync (connection,
+                                         G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+                                         NULL,
+                                         "org.xfce.SessionManager",
+                                         "/org/xfce/SessionManager",
+                                         "org.xfce.Session.Manager",
+                                         NULL,
+                                         &error);
+  if (error != NULL)
+    {
+      g_warning ("Failed to get proxy for %s: %s", name, error->message);
+      g_error_free (error);
+    }
+
+  actions_plugin_pack (plugin);
+}
+
+
+
+static void
+name_vanished (GDBusConnection *connection,
+               const gchar *name,
+               gpointer user_data)
+{
+  ActionsPlugin *plugin = user_data;
+
+  panel_debug (PANEL_DEBUG_ACTIONS, "%s vanished", name);
+
+  g_clear_object (&plugin->proxy);
+  actions_plugin_pack (plugin);
+}
+
+
 
 static void
 actions_plugin_init (ActionsPlugin *plugin)
@@ -311,6 +358,13 @@ actions_plugin_init (ActionsPlugin *plugin)
   plugin->type = APPEARANCE_TYPE_MENU;
   plugin->button_title = BUTTON_TITLE_TYPE_FULLNAME;
   plugin->ask_confirmation = TRUE;
+  plugin->watch_id = g_bus_watch_name (G_BUS_TYPE_SESSION,
+                                       "org.xfce.SessionManager",
+                                       G_BUS_NAME_WATCHER_FLAGS_NONE,
+                                       name_appeared,
+                                       name_vanished,
+                                       plugin,
+                                       NULL);
 }
 
 
@@ -455,6 +509,11 @@ actions_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
   if (plugin->menu != NULL)
     gtk_widget_destroy (plugin->menu);
+
+  if (plugin->proxy != NULL)
+    g_object_unref (plugin->proxy);
+
+  g_bus_unwatch_name (plugin->watch_id);
 }
 
 
@@ -846,41 +905,20 @@ actions_plugin_action_confirmation (ActionsPlugin *plugin,
 
 
 
-static GDBusProxy *
-actions_plugin_action_dbus_proxy_session (GDBusConnection *conn)
-{
-  return g_dbus_proxy_new_sync (conn,
-                                G_DBUS_PROXY_FLAGS_NONE,
-                                NULL,
-                                "org.xfce.SessionManager",
-                                "/org/xfce/SessionManager",
-                                "org.xfce.Session.Manager",
-                                NULL,
-                                NULL);
-}
-
-
-
 static gboolean
-actions_plugin_action_dbus_xfsm (const gchar  *method,
+actions_plugin_action_dbus_xfsm (ActionsPlugin *plugin,
+                                 const gchar  *method,
                                  gboolean      show_dialog,
                                  gboolean      allow_save,
                                  GError      **error)
 {
-  GDBusConnection *conn;
-  GDBusProxy      *proxy;
-  GVariant        *retval;
-
-  conn = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, error);
-  if (conn == NULL)
-    return FALSE;
-
-  proxy = actions_plugin_action_dbus_proxy_session (conn);
-  if (G_LIKELY (proxy != NULL))
+  if (G_LIKELY (plugin->proxy != NULL))
     {
+      GVariant *retval;
+
       if (g_strcmp0 (method, "Logout") == 0)
         {
-          retval = g_dbus_proxy_call_sync (proxy, method,
+          retval = g_dbus_proxy_call_sync (plugin->proxy, method,
                                            g_variant_new ("(bb)",
                                                           show_dialog,
                                                           allow_save),
@@ -893,7 +931,7 @@ actions_plugin_action_dbus_xfsm (const gchar  *method,
                || g_strcmp0 (method, "Hibernate") == 0
                || g_strcmp0 (method, "HybridSleep") == 0)
         {
-          retval = g_dbus_proxy_call_sync (proxy, method,
+          retval = g_dbus_proxy_call_sync (plugin->proxy, method,
                                            NULL,
                                            G_DBUS_CALL_FLAGS_NONE,
                                            -1,
@@ -902,7 +940,7 @@ actions_plugin_action_dbus_xfsm (const gchar  *method,
         }
       else
         {
-          retval = g_dbus_proxy_call_sync (proxy, method,
+          retval = g_dbus_proxy_call_sync (plugin->proxy, method,
                                            g_variant_new ("(b)",
                                                           show_dialog),
                                            G_DBUS_CALL_FLAGS_NONE,
@@ -910,8 +948,6 @@ actions_plugin_action_dbus_xfsm (const gchar  *method,
                                            NULL,
                                            error);
         }
-
-      g_object_unref (G_OBJECT (proxy));
 
       if (retval)
         {
@@ -957,13 +993,10 @@ actions_plugin_action_dbus_can (GDBusProxy  *proxy,
 
 
 static ActionType
-actions_plugin_actions_allowed (void)
+actions_plugin_actions_allowed (ActionsPlugin *plugin)
 {
-  GDBusConnection *conn;
-  ActionType       allow_mask = ACTION_TYPE_SEPARATOR;
-  gchar           *path;
-  GDBusProxy      *proxy;
-  GError          *error = NULL;
+  ActionType allow_mask = ACTION_TYPE_SEPARATOR;
+  gchar *path;
 
   /* check for commands we use */
   path = g_find_program_in_path ("dm-tool");
@@ -984,39 +1017,26 @@ actions_plugin_actions_allowed (void)
     PANEL_SET_FLAG (allow_mask, ACTION_TYPE_LOCK_SCREEN);
   g_free (path);
 
-  /* session bus for querying the managers */
-  conn = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
-  if (conn != NULL)
+  /* xfce4-session */
+  if (G_LIKELY (plugin->proxy != NULL))
     {
-      /* xfce4-session */
-      proxy = actions_plugin_action_dbus_proxy_session (conn);
-      if (G_LIKELY (proxy != NULL))
-        {
-          /* when xfce4-session is connected, we can logout */
-          PANEL_SET_FLAG (allow_mask, ACTION_TYPE_LOGOUT | ACTION_TYPE_LOGOUT_DIALOG);
+      /* when xfce4-session is connected, we can logout */
+      PANEL_SET_FLAG (allow_mask, ACTION_TYPE_LOGOUT | ACTION_TYPE_LOGOUT_DIALOG);
 
-          if (actions_plugin_action_dbus_can (proxy, "CanShutdown"))
-            PANEL_SET_FLAG (allow_mask, ACTION_TYPE_SHUTDOWN);
+      if (actions_plugin_action_dbus_can (plugin->proxy, "CanShutdown"))
+        PANEL_SET_FLAG (allow_mask, ACTION_TYPE_SHUTDOWN);
 
-          if (actions_plugin_action_dbus_can (proxy, "CanRestart"))
-            PANEL_SET_FLAG (allow_mask, ACTION_TYPE_RESTART);
+      if (actions_plugin_action_dbus_can (plugin->proxy, "CanRestart"))
+        PANEL_SET_FLAG (allow_mask, ACTION_TYPE_RESTART);
 
-          if (actions_plugin_action_dbus_can (proxy, "CanSuspend"))
-            PANEL_SET_FLAG (allow_mask, ACTION_TYPE_SUSPEND);
+      if (actions_plugin_action_dbus_can (plugin->proxy, "CanSuspend"))
+        PANEL_SET_FLAG (allow_mask, ACTION_TYPE_SUSPEND);
 
-          if (actions_plugin_action_dbus_can (proxy, "CanHibernate"))
-            PANEL_SET_FLAG (allow_mask, ACTION_TYPE_HIBERNATE);
+      if (actions_plugin_action_dbus_can (plugin->proxy, "CanHibernate"))
+        PANEL_SET_FLAG (allow_mask, ACTION_TYPE_HIBERNATE);
 
-          if (actions_plugin_action_dbus_can (proxy, "CanHybridSleep"))
-            PANEL_SET_FLAG (allow_mask, ACTION_TYPE_HYBRID_SLEEP);
-
-          g_object_unref (G_OBJECT (proxy));
-        }
-    }
-  else
-    {
-      g_critical ("Unable to open DBus session bus: %s", error->message);
-      g_error_free (error);
+      if (actions_plugin_action_dbus_can (plugin->proxy, "CanHybridSleep"))
+        PANEL_SET_FLAG (allow_mask, ACTION_TYPE_HYBRID_SLEEP);
     }
 
   return allow_mask;
@@ -1053,37 +1073,37 @@ actions_plugin_action_activate (GtkWidget      *widget,
   switch (entry->type)
     {
     case ACTION_TYPE_LOGOUT:
-      succeed = actions_plugin_action_dbus_xfsm ("Logout", FALSE,
+      succeed = actions_plugin_action_dbus_xfsm (plugin, "Logout", FALSE,
                                                  allow_save, &error);
       break;
 
     case ACTION_TYPE_LOGOUT_DIALOG:
-      succeed = actions_plugin_action_dbus_xfsm ("Logout", TRUE,
+      succeed = actions_plugin_action_dbus_xfsm (plugin, "Logout", TRUE,
                                                  allow_save, &error);
       break;
 
     case ACTION_TYPE_RESTART:
-      succeed = actions_plugin_action_dbus_xfsm ("Restart", FALSE,
+      succeed = actions_plugin_action_dbus_xfsm (plugin, "Restart", FALSE,
                                                  allow_save, &error);
       break;
 
     case ACTION_TYPE_SHUTDOWN:
-      succeed = actions_plugin_action_dbus_xfsm ("Shutdown", FALSE,
+      succeed = actions_plugin_action_dbus_xfsm (plugin, "Shutdown", FALSE,
                                                  allow_save, &error);
       break;
 
     case ACTION_TYPE_HIBERNATE:
-      succeed = actions_plugin_action_dbus_xfsm ("Hibernate", FALSE,
+      succeed = actions_plugin_action_dbus_xfsm (plugin, "Hibernate", FALSE,
                                                  FALSE, &error);
       break;
 
     case ACTION_TYPE_HYBRID_SLEEP:
-      succeed = actions_plugin_action_dbus_xfsm ("HybridSleep", FALSE,
+      succeed = actions_plugin_action_dbus_xfsm (plugin, "HybridSleep", FALSE,
                                                  FALSE, &error);
       break;
 
     case ACTION_TYPE_SUSPEND:
-      succeed = actions_plugin_action_dbus_xfsm ("Suspend", FALSE,
+      succeed = actions_plugin_action_dbus_xfsm (plugin, "Suspend", FALSE,
                                                  FALSE, &error);
       break;
 
@@ -1231,7 +1251,7 @@ actions_plugin_pack_idle (gpointer data)
   if (plugin->items == NULL)
     plugin->items = actions_plugin_default_array ();
 
-  allowed_types = actions_plugin_actions_allowed ();
+  allowed_types = actions_plugin_actions_allowed (plugin);
 
   if (plugin->type == APPEARANCE_TYPE_BUTTONS)
     {
@@ -1460,7 +1480,7 @@ actions_plugin_menu (GtkWidget     *button,
           G_CALLBACK (actions_plugin_menu_deactivate), plugin);
       g_object_add_weak_pointer (G_OBJECT (plugin->menu), (gpointer) &plugin->menu);
 
-      allowed_types = actions_plugin_actions_allowed ();
+      allowed_types = actions_plugin_actions_allowed (plugin);
 
       for (i = 0; i < plugin->items->len; i++)
         {
