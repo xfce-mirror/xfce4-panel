@@ -111,6 +111,7 @@ struct _ActionsPlugin
   guint           watch_id;
   GDBusProxy     *proxy;
   const gchar    *switch_user_cmd;
+  const gchar    *lock_session_cmd;
 };
 
 typedef enum
@@ -964,8 +965,18 @@ actions_plugin_action_dbus_xfsm (ActionsPlugin *plugin,
     }
   else
     {
+      if (g_strcmp0 (method, "Logout") == 0)
+        return g_spawn_command_line_async ("loginctl terminate-session ''", error);
+      if (g_strcmp0 (method, "Suspend") == 0)
+        return g_spawn_command_line_async ("systemctl suspend", error);
       if (g_strcmp0 (method, "SwitchUser") == 0)
         return g_spawn_command_line_async (plugin->switch_user_cmd, error);
+      if (g_strcmp0 (method, "Restart") == 0)
+        return g_spawn_command_line_async ("shutdown --reboot", error);
+      if (g_strcmp0 (method, "Shutdown") == 0)
+        return g_spawn_command_line_async ("shutdown --poweroff", error);
+
+      g_warn_if_reached ();
     }
 
   return FALSE;
@@ -1013,7 +1024,10 @@ actions_plugin_actions_allowed (ActionsPlugin *plugin)
   /* xfce4-session */
   path = g_find_program_in_path ("xflock4");
   if (path != NULL)
-    PANEL_SET_FLAG (allow_mask, ACTION_TYPE_LOCK_SCREEN);
+    {
+      PANEL_SET_FLAG (allow_mask, ACTION_TYPE_LOCK_SCREEN);
+      plugin->lock_session_cmd = "xflock4";
+    }
   g_free (path);
 
   if (G_LIKELY (plugin->proxy != NULL))
@@ -1039,6 +1053,14 @@ actions_plugin_actions_allowed (ActionsPlugin *plugin)
     }
 
   /* fallback methods */
+  path = g_find_program_in_path ("loginctl");
+  if (path != NULL)
+    {
+      PANEL_SET_FLAG (allow_mask, ACTION_TYPE_LOCK_SCREEN | ACTION_TYPE_LOGOUT);
+      plugin->lock_session_cmd = "loginctl lock-session";
+      g_free (path);
+    }
+
   path = g_find_program_in_path ("dm-tool");
   if (path != NULL)
     {
@@ -1055,6 +1077,20 @@ actions_plugin_actions_allowed (ActionsPlugin *plugin)
       }
   }
   g_free (path);
+
+  path = g_find_program_in_path ("shutdown");
+  if (path != NULL)
+    {
+      PANEL_SET_FLAG (allow_mask, ACTION_TYPE_SHUTDOWN | ACTION_TYPE_RESTART);
+      g_free (path);
+    }
+
+  path = g_find_program_in_path ("systemctl");
+  if (path != NULL)
+    {
+      PANEL_SET_FLAG (allow_mask, ACTION_TYPE_SUSPEND);
+      g_free (path);
+    }
 
   return allow_mask;
 }
@@ -1123,7 +1159,7 @@ actions_plugin_action_activate (GtkWidget      *widget,
       break;
 
     case ACTION_TYPE_LOCK_SCREEN:
-      succeed = g_spawn_command_line_async ("xflock4", &error);
+      succeed = g_spawn_command_line_async (plugin->lock_session_cmd, &error);
       break;
 
     default:
