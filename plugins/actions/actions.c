@@ -1049,11 +1049,10 @@ actions_plugin_action_activate (GtkWidget      *widget,
                                 ActionsPlugin  *plugin)
 {
   ActionEntry   *entry;
+  /* unattended shutdown, don't save the session to avoid blocking the logout */
   gboolean       unattended = FALSE;
   GError        *error = NULL;
   gboolean       succeed = FALSE;
-  XfconfChannel *channel;
-  gboolean       allow_save;
   gchar         *path;
 
   entry = g_object_get_qdata (G_OBJECT (widget), action_quark);
@@ -1065,31 +1064,26 @@ actions_plugin_action_activate (GtkWidget      *widget,
       && !actions_plugin_action_confirmation (plugin, entry, &unattended))
     return;
 
-  channel = xfconf_channel_get ("xfce4-session");
-  allow_save = xfconf_channel_get_bool (channel, "/general/SaveOnExit", FALSE);
-  /* unattended shutdown, don't save the session to avoid blocking the logout */
-  allow_save = allow_save && !unattended;
-
   switch (entry->type)
     {
     case ACTION_TYPE_LOGOUT:
       succeed = actions_plugin_action_dbus_xfsm (plugin, "Logout", FALSE,
-                                                 allow_save, &error);
+                                                 !unattended, &error);
       break;
 
     case ACTION_TYPE_LOGOUT_DIALOG:
       succeed = actions_plugin_action_dbus_xfsm (plugin, "Logout", TRUE,
-                                                 allow_save, &error);
+                                                 !unattended, &error);
       break;
 
     case ACTION_TYPE_RESTART:
       succeed = actions_plugin_action_dbus_xfsm (plugin, "Restart", FALSE,
-                                                 allow_save, &error);
+                                                 !unattended, &error);
       break;
 
     case ACTION_TYPE_SHUTDOWN:
       succeed = actions_plugin_action_dbus_xfsm (plugin, "Shutdown", FALSE,
-                                                 allow_save, &error);
+                                                 !unattended, &error);
       break;
 
     case ACTION_TYPE_HIBERNATE:
