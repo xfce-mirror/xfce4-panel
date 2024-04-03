@@ -40,7 +40,7 @@ msgstr "Додати новий запускач до панелі на осно
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
-msgstr "панелі;налаштування;властивості;панель завдань;самоховання;меню програм;початок;кнопки;запускач;область сповіщень;стан;значки;втулки;"
+msgstr "панелі;налаштування;властивості;панель завдань;самоховання;меню програм;початок;кнопки;запускач;область сповіщень;стан;значки;розширення;"
 
 #: panel-preferences.desktop.in:15 panel/panel-window.c:3630
 msgid "Panel"
@@ -262,11 +262,11 @@ msgstr "Не вдалось запустити програму міграції
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
-msgstr ""
+msgstr "Розширення \"%s\" не було завантажено, бажаєте його видалити з конфігурації панелі xfce4?"
 
 #: panel/panel-application.c:373
 msgid "Plugin loading failure"
-msgstr ""
+msgstr "Збій завантаження розширення"
 
 #: panel/panel-application.c:376
 #, c-format
@@ -276,7 +276,7 @@ msgid ""
 "doing, you can remove it permanently, otherwise you'd better quit and make a"
 " backup of the current configuration using %s, before checking your "
 "installation and trying to start xfce4-panel again."
-msgstr ""
+msgstr "Це розширення є у поточній конфігурації панелі xfce4, але його не вдалося завантажити, ймовірно, через проблему з установкою. Якщо ви знаєте, що робите, ви можете видалити його назавжди, інакше вам краще вийти і зробити резервну копію поточної конфігурації за допомогою %s, перед тим, як перевірити установку і спробувати запустити панель xfce4 ще раз."
 
 #: panel/panel-application.c:383
 msgid "_Quit"
@@ -290,7 +290,7 @@ msgstr "Створити _запускач"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Це створить новий запускач додатку на панелі і вставить кинуті файли як пункти меню."
+msgstr "Це створить новий запускач розширення на панелі і вставить кинуті файли як пункти меню."
 
 #: panel/panel-application.c:1061
 #, c-format
@@ -323,7 +323,7 @@ msgstr "Не вдалось виконати команду \"%s\""
 #: panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Присвоєно неправильну подію плагіну. Використовуйте ПЛАГІН-НАЗВА:НАЗВА[:ТИП:ЗНАЧЕННЯ]."
+msgstr "Присвоєно неправильну подію розширенню. Використовуйте РОЗШИРЕННЯ-НАЗВА:НАЗВА[:ТИП:ЗНАЧЕННЯ]."
 
 #: panel/panel-dbus-client.c:248
 #, c-format
@@ -407,7 +407,7 @@ msgstr "Розширення \"%s\" раптово зникло з панелі,
 
 #: panel/panel-plugin-external.c:403
 msgid "Plugin Restart"
-msgstr "Перезавантажити втулку"
+msgstr "Перезавантажити розширення"
 
 #: panel/panel-plugin-external.c:404
 #, c-format
@@ -606,7 +606,7 @@ msgstr "А_втоматично збільшувати довжину"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Виберіть цю опцію щоб автоматично збільшувати довжину панелі, якщо плагіни потребують більше місця."
+msgstr "Виберіть цю опцію щоб автоматично збільшувати довжину панелі, якщо розширення потребують більше місця."
 
 #: panel/panel-preferences-dialog.glade:712
 msgid "D_isplay"
@@ -1192,7 +1192,7 @@ msgstr "Налаштування часу"
 msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
-msgstr "Якщо встановлено, ця команда виконується під час натискання лівою кнопкою миші на втулці, замість відображення календаря за замовчуванням."
+msgstr "Якщо встановлено, ця команда виконується під час натискання лівою кнопкою миші на розширенні, замість відображення календаря за замовчуванням."
 
 #: plugins/clock/clock-dialog.glade:261
 msgid "Co_mmand:"
@@ -2078,7 +2078,7 @@ msgstr "Не вдалось отримати управління виділен
 
 #: plugins/systray/systray.desktop.in.in:5
 msgid "Status Tray Plugin"
-msgstr "Втулки лотка стану"
+msgstr "Розширення лотка стану"
 
 #: plugins/systray/systray.desktop.in.in:6
 msgid ""
