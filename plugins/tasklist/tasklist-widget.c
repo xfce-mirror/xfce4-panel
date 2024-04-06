@@ -936,23 +936,20 @@ xfce_tasklist_get_preferred_length (GtkWidget *widget,
   gint               rows, cols;
   gint               n_windows;
   GtkRequisition     child_req;
-  gint               length;
+  gint               length = 0;
   GList             *li;
   XfceTasklistChild *child;
-  gint               child_height = 0;
+  gint               child_size = tasklist->size / tasklist->nrows;
+  gint               child_length = 0;
   gdouble            nrows_ratio = tasklist->nrows_ratio;
 
   for (li = tasklist->windows, n_windows = 0; li != NULL; li = li->next)
     {
       child = li->data;
-
       if (gtk_widget_get_visible (child->button))
         {
           gtk_widget_get_preferred_size (child->button, NULL, &child_req);
-
-          /* child_height = MAX (child_height, child_req.height); */
-          child_height = MAX (child_height, tasklist->size / tasklist->nrows);
-
+          child_length = MAX (child_length, xfce_tasklist_horizontal (tasklist) ? child_req.width : child_req.height);
           if (child->type == CHILD_TYPE_GROUP_MENU)
             continue;
 
@@ -963,32 +960,31 @@ xfce_tasklist_get_preferred_length (GtkWidget *widget,
   tasklist->n_windows = n_windows;
   tasklist->nrows_ratio = 1;
 
-  if (n_windows == 0)
-    {
-      length = 0;
-    }
-  else
+  if (n_windows != 0)
     {
       rows = MAX (tasklist->nrows, 1);
       if (tasklist->show_labels)
         {
           rows = MAX (rows, tasklist->size / tasklist->max_button_size);
-          child_height = MIN (child_height, tasklist->max_button_size);
           tasklist->nrows_ratio = (gdouble) tasklist->nrows / (gdouble) rows;
+          child_size = MIN (child_size, tasklist->max_button_size);
+          child_length = MIN (child_length, tasklist->max_button_length);
         }
 
       cols = n_windows / rows;
       if (cols * rows < n_windows)
         cols++;
 
-      if (!tasklist->show_labels)
-        length = (tasklist->size / rows) * cols;
+      if (tasklist->show_labels)
+        {
+          if (xfce_tasklist_deskbar (tasklist))
+            length = child_size * n_windows;
+          else
+            length = cols * child_length;
+        }
       else
-        length = cols * tasklist->max_button_length;
+        length = (tasklist->size / rows) * cols;
     }
-
-  if (xfce_tasklist_deskbar (tasklist) && tasklist->show_labels)
-    length = child_height * n_windows;
 
   if (tasklist->nrows_ratio != nrows_ratio)
     for (li = tasklist->windows; li != NULL; li = li->next)
