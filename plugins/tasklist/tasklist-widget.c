@@ -49,15 +49,25 @@
 
 
 
-#define DEFAULT_BUTTON_SIZE          (32)
-#define DEFAULT_MAX_BUTTON_LENGTH    (200)
-#define DEFAULT_MIN_BUTTON_LENGTH    (DEFAULT_MAX_BUTTON_LENGTH / 4)
-#define DEFAULT_ICON_LUCENCY         (50)
-#define DEFAULT_ELLIPSIZE_MODE       (PANGO_ELLIPSIZE_END)
-#define DEFAULT_MENU_MAX_WIDTH_CHARS (24)
-#define ARROW_BUTTON_SIZE            (20)
-#define WIREFRAME_SIZE               (5) /* same as xfwm4 */
-#define DRAG_ACTIVATE_TIMEOUT        (500)
+#define MIN_MAX_BUTTON_SIZE            (-1)
+#define MAX_MAX_BUTTON_SIZE            (G_MAXINT)
+#define DEFAULT_MAX_BUTTON_SIZE        (32)
+#define MIN_MAX_BUTTON_LENGTH          (-1)
+#define MAX_MAX_BUTTON_LENGTH          (G_MAXINT)
+#define DEFAULT_MAX_BUTTON_LENGTH      (200)
+#define MIN_MIN_BUTTON_LENGTH          (0)
+#define MAX_MIN_BUTTON_LENGTH          (G_MAXINT)
+#define DEFAULT_MIN_BUTTON_LENGTH      (DEFAULT_MAX_BUTTON_LENGTH / 4)
+#define MIN_MINIMIZED_ICON_LUCENCY     (0)
+#define MAX_MINIMIZED_ICON_LUCENCY     (100)
+#define DEFAULT_MINIMIZED_ICON_LUCENCY (50)
+#define DEFAULT_ELLIPSIZE_MODE         (PANGO_ELLIPSIZE_END)
+#define MIN_MENU_MAX_WIDTH_CHARS       (0)
+#define MAX_MENU_MAX_WIDTH_CHARS       (G_MAXINT)
+#define DEFAULT_MENU_MAX_WIDTH_CHARS   (24)
+#define ARROW_BUTTON_SIZE              (20)
+#define WIREFRAME_SIZE                 (5) /* same as xfwm4 */
+#define DRAG_ACTIVATE_TIMEOUT          (500)
 
 
 
@@ -560,7 +570,7 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                            g_param_spec_int ("max-button-length",
                                                              NULL,
                                                              "The maximum length of a window button",
-                                                             -1, G_MAXINT,
+                                                             MIN_MAX_BUTTON_LENGTH, MAX_MAX_BUTTON_LENGTH,
                                                              DEFAULT_MAX_BUTTON_LENGTH,
                                                              G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
@@ -568,7 +578,7 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                            g_param_spec_int ("min-button-length",
                                                              NULL,
                                                              "The minimum length of a window button",
-                                                             1, G_MAXINT,
+                                                             MIN_MIN_BUTTON_LENGTH, MAX_MIN_BUTTON_LENGTH,
                                                              DEFAULT_MIN_BUTTON_LENGTH,
                                                              G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
@@ -576,8 +586,8 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                            g_param_spec_int ("max-button-size",
                                                              NULL,
                                                              "The maximum size of a window button",
-                                                             1, G_MAXINT,
-                                                             DEFAULT_BUTTON_SIZE,
+                                                             MIN_MAX_BUTTON_SIZE, MAX_MAX_BUTTON_SIZE,
+                                                             DEFAULT_MAX_BUTTON_SIZE,
                                                              G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
   gtk_widget_class_install_style_property (gtkwidget_class,
@@ -592,14 +602,14 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                            g_param_spec_int ("minimized-icon-lucency",
                                                              NULL,
                                                              "Lucent percentage of minimized icons",
-                                                             0, 100,
-                                                             DEFAULT_ICON_LUCENCY,
+                                                             MIN_MINIMIZED_ICON_LUCENCY, MAX_MINIMIZED_ICON_LUCENCY,
+                                                             DEFAULT_MINIMIZED_ICON_LUCENCY,
                                                              G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
   gtk_widget_class_install_style_property (gtkwidget_class,
                                            g_param_spec_int ("menu-max-width-chars",
                                                              NULL,
                                                              "Maximum chars in the overflow menu labels",
-                                                             0, G_MAXINT,
+                                                             MIN_MENU_MAX_WIDTH_CHARS, MAX_MENU_MAX_WIDTH_CHARS,
                                                              DEFAULT_MENU_MAX_WIDTH_CHARS,
                                                              G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
@@ -643,8 +653,8 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->update_monitor_geometry_id = 0;
   tasklist->max_button_length = DEFAULT_MAX_BUTTON_LENGTH;
   tasklist->min_button_length = DEFAULT_MIN_BUTTON_LENGTH;
-  tasklist->max_button_size = DEFAULT_BUTTON_SIZE;
-  tasklist->minimized_icon_lucency = DEFAULT_ICON_LUCENCY;
+  tasklist->max_button_size = DEFAULT_MAX_BUTTON_SIZE;
+  tasklist->minimized_icon_lucency = DEFAULT_MINIMIZED_ICON_LUCENCY;
   tasklist->ellipsize_mode = DEFAULT_ELLIPSIZE_MODE;
   tasklist->grouping = FALSE;
   tasklist->sort_order = XFCE_TASKLIST_SORT_ORDER_DEFAULT;
@@ -960,7 +970,7 @@ xfce_tasklist_get_preferred_length (GtkWidget *widget,
   else
     {
       rows = MAX (tasklist->nrows, 1);
-      if (tasklist->show_labels && tasklist->max_button_size > 0)
+      if (tasklist->show_labels)
         {
           rows = MAX (rows, tasklist->size / tasklist->max_button_size);
           child_height = MIN (child_height, tasklist->max_button_size);
@@ -973,10 +983,8 @@ xfce_tasklist_get_preferred_length (GtkWidget *widget,
 
       if (!tasklist->show_labels)
         length = (tasklist->size / rows) * cols;
-      else if (tasklist->max_button_length != -1)
-        length = cols * tasklist->max_button_length;
       else
-        length = cols * DEFAULT_MAX_BUTTON_LENGTH;
+        length = cols * tasklist->max_button_length;
     }
 
   if (xfce_tasklist_deskbar (tasklist) && tasklist->show_labels)
@@ -1036,7 +1044,7 @@ xfce_tasklist_size_layout (XfceTasklist  *tasklist,
   /* if we're in deskbar mode, there are no columns */
   if (xfce_tasklist_deskbar (tasklist) && tasklist->show_labels)
     rows = 1;
-  else if (tasklist->show_labels && tasklist->max_button_size > 0)
+  else if (tasklist->show_labels)
     rows = MAX (tasklist->nrows, tasklist->size / tasklist->max_button_size);
   else
     rows = tasklist->nrows;
@@ -1089,10 +1097,8 @@ xfce_tasklist_size_layout (XfceTasklist  *tasklist,
 
       if (xfce_tasklist_deskbar (tasklist) || !tasklist->show_labels)
         max_button_length = min_button_length;
-      else if (tasklist->max_button_length != -1)
-        max_button_length = tasklist->max_button_length;
       else
-        max_button_length = DEFAULT_MAX_BUTTON_LENGTH;
+        max_button_length = tasklist->max_button_length;
 
       n_buttons = tasklist->n_windows;
       /* Matches the existing behavior (with a bug fix) */
@@ -1236,8 +1242,7 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
                   if (cols < 1)
                     cols = 1;
                   w = area_width / cols--;
-                  if (tasklist->max_button_length > 0
-                      && w > tasklist->max_button_length)
+                  if (w > tasklist->max_button_length)
                     w = tasklist->max_button_length;
                 }
               else /* buttons without labels */
@@ -1291,9 +1296,7 @@ static void
 xfce_tasklist_style_updated (GtkWidget *widget)
 {
   XfceTasklist *tasklist = XFCE_TASKLIST (widget);
-  gint          max_button_length;
-  gint          max_button_size;
-  gint          min_button_length;
+  gint max_button_length, min_button_length, max_button_size, minimized_icon_lucency, menu_max_width_chars;
 
   /* let gtk update the widget style */
   (*GTK_WIDGET_CLASS (xfce_tasklist_parent_class)->style_updated) (widget);
@@ -1304,31 +1307,28 @@ xfce_tasklist_style_updated (GtkWidget *widget)
                         "min-button-length", &min_button_length,
                         "ellipsize-mode", &tasklist->ellipsize_mode,
                         "max-button-size", &max_button_size,
-                        "minimized-icon-lucency", &tasklist->minimized_icon_lucency,
-                        "menu-max-width-chars", &tasklist->menu_max_width_chars,
+                        "minimized-icon-lucency", &minimized_icon_lucency,
+                        "menu-max-width-chars", &menu_max_width_chars,
                         NULL);
 
-  /* update the widget */
-  if (tasklist->max_button_length != max_button_length
-      || tasklist->max_button_size != max_button_size
-      || tasklist->min_button_length != min_button_length)
-    {
-      if (max_button_length > 0)
-        {
-          /* prevent abuse of the min/max button length */
-          tasklist->max_button_length = MAX (min_button_length, max_button_length);
-          tasklist->min_button_length = MIN (min_button_length, max_button_length);
-        }
-      else
-        {
-          tasklist->max_button_length = max_button_length;
-          tasklist->min_button_length = min_button_length;
-        }
+  /* GTK doesn't do this by itself unfortunately, unlike GObject */
+  max_button_length = CLAMP (max_button_length, MIN_MAX_BUTTON_LENGTH, MAX_MAX_BUTTON_LENGTH);
+  min_button_length = CLAMP (min_button_length, MIN_MIN_BUTTON_LENGTH, MAX_MIN_BUTTON_LENGTH);
+  tasklist->max_button_size = CLAMP (max_button_size, MIN_MAX_BUTTON_SIZE, MAX_MAX_BUTTON_SIZE);
+  tasklist->minimized_icon_lucency = CLAMP (minimized_icon_lucency, MIN_MINIMIZED_ICON_LUCENCY, MAX_MINIMIZED_ICON_LUCENCY);
+  tasklist->menu_max_width_chars = CLAMP (menu_max_width_chars, MIN_MENU_MAX_WIDTH_CHARS, MAX_MENU_MAX_WIDTH_CHARS);
 
-      tasklist->max_button_size = max_button_size;
+  if (max_button_length == -1)
+    max_button_length = MAX_MAX_BUTTON_LENGTH;
 
-      gtk_widget_queue_resize (widget);
-    }
+  /* prevent abuse of the min/max button length */
+  tasklist->max_button_length = MAX (min_button_length, max_button_length);
+  tasklist->min_button_length = MIN (min_button_length, max_button_length);
+
+  if (tasklist->max_button_size == -1)
+    tasklist->max_button_size = MAX_MAX_BUTTON_SIZE;
+
+  gtk_widget_queue_resize (widget);
 }
 
 
