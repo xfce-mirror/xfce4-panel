@@ -60,6 +60,7 @@
 #define SNAP_DISTANCE         (10)
 #define DEFAULT_POPUP_DELAY   (225)
 #define DEFAULT_POPDOWN_DELAY (350)
+#define MIN_AUTOHIDE_SIZE     (1)
 #define DEFAULT_AUTOHIDE_SIZE (3)
 #define DEFAULT_POPDOWN_SPEED (25)
 #define HANDLE_SPACING        (4)
@@ -354,13 +355,13 @@ struct _PanelWindow
   guint                autohide_ease_out_id;
   guint                opacity_timeout_id;
   gint                 autohide_block;
-  gint                 autohide_size;
+  guint                autohide_size;
   guint                popdown_speed;
   gint                 popdown_progress;
 
   /* popup/down delay from gtk style */
-  gint                 popup_delay;
-  gint                 popdown_delay;
+  guint                popup_delay;
+  guint                popdown_delay;
 
   /* whether the window position is locked */
   guint                position_locked : 1;
@@ -530,28 +531,28 @@ panel_window_class_init (PanelWindowClass *klass)
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   gtk_widget_class_install_style_property (gtkwidget_class,
-                                           g_param_spec_int ("popup-delay",
-                                                             NULL,
-                                                             "Time before the panel will unhide on an enter event",
-                                                             1, G_MAXINT,
-                                                             DEFAULT_POPUP_DELAY,
-                                                             G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
+                                           g_param_spec_uint ("popup-delay",
+                                                              NULL,
+                                                              "Time before the panel will unhide on an enter event",
+                                                              0, G_MAXUINT,
+                                                              DEFAULT_POPUP_DELAY,
+                                                              G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
   gtk_widget_class_install_style_property (gtkwidget_class,
-                                           g_param_spec_int ("popdown-delay",
-                                                             NULL,
-                                                             "Time before the panel will hide on a leave event",
-                                                             1, G_MAXINT,
-                                                             DEFAULT_POPDOWN_DELAY,
-                                                             G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
+                                           g_param_spec_uint ("popdown-delay",
+                                                              NULL,
+                                                              "Time before the panel will hide on a leave event",
+                                                              0, G_MAXUINT,
+                                                              DEFAULT_POPDOWN_DELAY,
+                                                              G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
   gtk_widget_class_install_style_property (gtkwidget_class,
-                                           g_param_spec_int ("autohide-size",
-                                                             NULL,
+                                           g_param_spec_uint ("autohide-size",
+                                                              NULL,
                                                              "Size of hidden panel",
-                                                             1, G_MAXINT,
-                                                             DEFAULT_AUTOHIDE_SIZE,
-                                                             G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
+                                                              MIN_AUTOHIDE_SIZE, G_MAXUINT,
+                                                              DEFAULT_AUTOHIDE_SIZE,
+                                                              G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
   /* initialize the atoms */
   cardinal_atom = gdk_atom_intern_static_string ("CARDINAL");
@@ -1892,6 +1893,10 @@ panel_window_style_updated (GtkWidget *widget)
                         "popdown-delay", &window->popdown_delay,
                         "autohide-size", &window->autohide_size,
                         NULL);
+
+  /* GTK doesn't do this by itself unfortunately, unlike GObject */
+  window->autohide_size = MAX (window->autohide_size, MIN_AUTOHIDE_SIZE);
+
   /* Make sure the background and borders are redrawn on Gtk theme changes */
   if (panel_base_window_get_background_style (base_window) == PANEL_BG_STYLE_NONE)
     panel_base_window_reset_background_css (base_window);
