@@ -33,9 +33,13 @@
 #include "windowmenu.h"
 #include "windowmenu-dialog_ui.h"
 
-#define DEFAULT_ICON_LUCENCY    (50)
-#define DEFAULT_MAX_WIDTH_CHARS (24)
-#define DEFAULT_ELLIPSIZE_MODE  (PANGO_ELLIPSIZE_MIDDLE)
+#define MIN_MINIMIZED_ICON_LUCENCY     (0)
+#define MAX_MINIMIZED_ICON_LUCENCY     (100)
+#define DEFAULT_MINIMIZED_ICON_LUCENCY (50)
+#define MIN_MAX_WIDTH_CHARS            (-1)
+#define MAX_MAX_WIDTH_CHARS            (G_MAXINT)
+#define DEFAULT_MAX_WIDTH_CHARS        (24)
+#define DEFAULT_ELLIPSIZE_MODE         (PANGO_ELLIPSIZE_MIDDLE)
 
 struct _WindowMenuPlugin
 {
@@ -197,8 +201,8 @@ window_menu_plugin_class_init (WindowMenuPluginClass *klass)
                                            g_param_spec_int ("minimized-icon-lucency",
                                                              NULL,
                                                              "Lucent percentage of minimized icons",
-                                                             0, 100,
-                                                             DEFAULT_ICON_LUCENCY,
+                                                             MIN_MINIMIZED_ICON_LUCENCY, MAX_MINIMIZED_ICON_LUCENCY,
+                                                             DEFAULT_MINIMIZED_ICON_LUCENCY,
                                                              G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
   gtk_widget_class_install_style_property (gtkwidget_class,
@@ -213,7 +217,7 @@ window_menu_plugin_class_init (WindowMenuPluginClass *klass)
                                            g_param_spec_int ("max-width-chars",
                                                              NULL,
                                                              "Maximum length of window/workspace name",
-                                                             1, G_MAXINT,
+                                                             MIN_MAX_WIDTH_CHARS, MAX_MAX_WIDTH_CHARS,
                                                              DEFAULT_MAX_WIDTH_CHARS,
                                                              G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
@@ -231,7 +235,7 @@ window_menu_plugin_init (WindowMenuPlugin *plugin)
   plugin->urgentcy_notification = TRUE;
   plugin->all_workspaces = TRUE;
   plugin->urgent_windows = 0;
-  plugin->minimized_icon_lucency = DEFAULT_ICON_LUCENCY;
+  plugin->minimized_icon_lucency = DEFAULT_MINIMIZED_ICON_LUCENCY;
   plugin->ellipsize_mode = DEFAULT_ELLIPSIZE_MODE;
   plugin->max_width_chars = DEFAULT_MAX_WIDTH_CHARS;
 
@@ -378,6 +382,10 @@ window_menu_plugin_style_updated (GtkWidget *widget)
                         "ellipsize-mode", &plugin->ellipsize_mode,
                         "max-width-chars", &plugin->max_width_chars,
                         NULL);
+
+  /* GTK doesn't do this by itself unfortunately, unlike GObject */
+  plugin->minimized_icon_lucency = CLAMP (plugin->minimized_icon_lucency, MIN_MINIMIZED_ICON_LUCENCY, MAX_MINIMIZED_ICON_LUCENCY);
+  plugin->max_width_chars = CLAMP (plugin->max_width_chars, MIN_MINIMIZED_ICON_LUCENCY, MAX_MINIMIZED_ICON_LUCENCY);
 }
 
 
