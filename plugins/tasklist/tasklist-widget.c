@@ -968,7 +968,7 @@ xfce_tasklist_get_preferred_length (GtkWidget *widget,
           rows = MAX (rows, tasklist->size / tasklist->max_button_size);
           tasklist->nrows_ratio = (gdouble) tasklist->nrows / (gdouble) rows;
           child_size = MIN (child_size, tasklist->max_button_size);
-          child_length = MIN (child_length, tasklist->max_button_length);
+          child_length = CLAMP (child_length, tasklist->min_button_length, tasklist->max_button_length);
         }
 
       cols = n_windows / rows;
