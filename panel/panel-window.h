@@ -25,6 +25,18 @@
 #include <common/panel-xfconf.h>
 #include <panel/panel-base-window.h>
 
+#define DEFAULT_MODE XFCE_PANEL_PLUGIN_MODE_HORIZONTAL
+#define MIN_SIZE 16
+#define MAX_SIZE 128
+#define DEFAULT_SIZE 48
+#define MIN_ICON_SIZE 0
+#define MAX_ICON_SIZE 256
+#define DEFAULT_ICON_SIZE 0
+#define DEFAULT_DARK_MODE FALSE
+#define MIN_NROWS 1
+#define MAX_NROWS 6
+#define DEFAULT_NROWS 1
+
 G_BEGIN_DECLS
 
 #define PANEL_TYPE_WINDOW (panel_window_get_type ())

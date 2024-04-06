@@ -440,31 +440,31 @@ panel_window_class_init (PanelWindowClass *klass)
                                    PROP_MODE,
                                    g_param_spec_enum ("mode", NULL, NULL,
                                                       XFCE_TYPE_PANEL_PLUGIN_MODE,
-                                                      XFCE_PANEL_PLUGIN_MODE_HORIZONTAL,
+                                                      DEFAULT_MODE,
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_SIZE,
                                    g_param_spec_uint ("size", NULL, NULL,
-                                                      16, 128, 48,
+                                                      MIN_SIZE, MAX_SIZE, DEFAULT_SIZE,
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_ICON_SIZE,
                                    g_param_spec_uint ("icon-size", NULL, NULL,
-                                                      0, 256, 0,
+                                                      MIN_ICON_SIZE, MAX_ICON_SIZE, DEFAULT_ICON_SIZE,
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_DARK_MODE,
                                    g_param_spec_boolean ("dark-mode", NULL, NULL,
-                                                         FALSE,
+                                                         DEFAULT_DARK_MODE,
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_NROWS,
                                    g_param_spec_uint ("nrows", NULL, NULL,
-                                                      1, 6, 1,
+                                                      MIN_NROWS, MAX_NROWS, DEFAULT_NROWS,
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   /* keep this property as a percentage for backwards compatibility */
