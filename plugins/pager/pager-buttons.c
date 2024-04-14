@@ -578,7 +578,7 @@ pager_buttons_workspace_button_label (XfwWorkspace *workspace,
 
   numbering = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (label), "numbering"));
 
-  /* try to get an utf-8 valid name */
+  /* try to get a utf-8 valid name */
   name = xfw_workspace_get_name (workspace);
   if (!xfce_str_is_empty (name)
       && !g_utf8_validate (name, -1, NULL))
