@@ -402,7 +402,7 @@ window_menu_plugin_screen_changed (GtkWidget *widget,
   screen = xfw_screen_get_default ();
   panel_return_if_fail (XFW_IS_SCREEN (screen));
 
-  /* leave when we same xfw screen was picked */
+  /* leave when the same xfw screen was picked */
   if (plugin->screen == screen)
     {
       g_object_unref (screen);
@@ -719,7 +719,6 @@ window_menu_plugin_window_state_changed (XfwWindow        *window,
   panel_return_if_fail (WINDOW_MENU_IS_PLUGIN (plugin));
   panel_return_if_fail (XFW_IS_WINDOW (window));
   panel_return_if_fail (plugin->urgentcy_notification);
-  panel_return_if_fail (plugin->urgentcy_notification);
 
   /* only response to urgency changes and urgency notify is enabled */
   if (!PANEL_HAS_FLAG (changed_mask, XFW_WINDOW_STATE_URGENT))
@@ -900,7 +899,7 @@ window_menu_plugin_menu_workspace_item_new (XfwWorkspace *workspace,
   panel_return_val_if_fail (XFW_IS_WORKSPACE (workspace), NULL);
   panel_return_val_if_fail (WINDOW_MENU_IS_PLUGIN (plugin), NULL);
 
-  /* try to get an utf-8 valid name */
+  /* try to get a utf-8 valid name */
   name = xfw_workspace_get_name (workspace);
   if (!xfce_str_is_empty (name)
       && !g_utf8_validate (name, -1, NULL))
@@ -1020,7 +1019,7 @@ window_menu_plugin_menu_window_item_new (XfwWindow            *window,
 
   panel_return_val_if_fail (XFW_IS_WINDOW (window), NULL);
 
-  /* try to get an utf-8 valid name */
+  /* try to get a utf-8 valid name */
   name = xfw_window_get_name (window);
   if (!xfce_str_is_empty (name) && !g_utf8_validate (name, -1, NULL))
     name = utf8 = g_locale_to_utf8 (name, -1, NULL, NULL, NULL);
@@ -1377,7 +1376,7 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
 
       if (G_LIKELY (workspace != NULL))
         {
-          /* try to get an utf-8 valid name */
+          /* try to get a utf-8 valid name */
           name = xfw_workspace_get_name (workspace);
           if (!xfce_str_is_empty (name) && !g_utf8_validate (name, -1, NULL))
             name = utf8 = g_locale_to_utf8 (name, -1, NULL, NULL, NULL);
