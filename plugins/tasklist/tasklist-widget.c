@@ -659,9 +659,6 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->grouping = FALSE;
   tasklist->sort_order = XFCE_TASKLIST_SORT_ORDER_DEFAULT;
   tasklist->menu_max_width_chars = DEFAULT_MENU_MAX_WIDTH_CHARS;
-  tasklist->apps = g_hash_table_new_full (g_direct_hash, g_direct_equal,
-                                          (GDestroyNotify) g_object_unref,
-                                          (GDestroyNotify) xfce_tasklist_group_button_remove);
 
   /* add style class for the tasklist widget */
   context = gtk_widget_get_style_context (GTK_WIDGET (tasklist));
@@ -867,9 +864,6 @@ xfce_tasklist_finalize (GObject *object)
     g_source_remove (tasklist->update_icon_geometries_id);
   if (tasklist->update_monitor_geometry_id != 0)
     g_source_remove (tasklist->update_monitor_geometry_id);
-
-  /* free the app hash table */
-  g_hash_table_destroy (tasklist->apps);
 
 #ifdef ENABLE_X11
   /* destroy the wireframe window */
@@ -1626,6 +1620,10 @@ xfce_tasklist_connect_screen (XfceTasklist *tasklist)
   panel_return_if_fail (tasklist->screen == NULL);
   panel_return_if_fail (tasklist->display == NULL);
 
+  if (tasklist->grouping)
+    tasklist->apps = g_hash_table_new_full (g_direct_hash, g_direct_equal,
+                                            NULL, (GDestroyNotify) xfce_tasklist_group_button_remove);
+
   /* set the display and screen */
   tasklist->display = gtk_widget_get_display (GTK_WIDGET (tasklist));
   tasklist->screen = xfw_screen_get_default ();
@@ -1690,7 +1688,11 @@ xfce_tasklist_disconnect_screen (XfceTasklist *tasklist)
   panel_return_if_fail (n == 2);
 
   /* delete all known apps (and their buttons) */
-  g_hash_table_remove_all (tasklist->apps);
+  if (tasklist->apps != NULL)
+    {
+      g_hash_table_destroy (tasklist->apps);
+      tasklist->apps = NULL;
+    }
 
   /* disconnect from all skipped windows */
   for (li = tasklist->skipped_windows; li != NULL; li = lnext)
@@ -1851,8 +1853,6 @@ xfce_tasklist_window_added (XfwScreen    *screen,
                             XfceTasklist *tasklist)
 {
   XfceTasklistChild *child;
-  XfceTasklistChild *group_child = NULL;
-  gboolean           found;
 
   panel_return_if_fail (XFW_IS_SCREEN (screen));
   panel_return_if_fail (XFW_IS_WINDOW (window));
@@ -1877,38 +1877,18 @@ xfce_tasklist_window_added (XfwScreen    *screen,
   if (xfce_tasklist_button_visible (child, xfw_workspace_group_get_active_workspace (tasklist->workspace_group)))
     gtk_widget_show (child->button);
 
-  if (G_LIKELY (child->app != NULL))
+  if (tasklist->grouping)
     {
-      /* we need to ref the app else the value returned from
-       * xfw_window_get_application() is null */
-      panel_return_if_fail (XFW_IS_APPLICATION (child->app));
-      g_object_ref (G_OBJECT (child->app));
-
-      found = g_hash_table_lookup_extended (tasklist->apps,
-                                            child->app,
-                                            NULL, (gpointer *) &group_child);
-
-      if (G_UNLIKELY (tasklist->grouping))
+      XfceTasklistChild *group_child = g_hash_table_lookup (tasklist->apps, child->app);
+      if (group_child == NULL)
         {
-
-          if (group_child == NULL)
-            {
-              /* create group button for this window and add it */
-              group_child = xfce_tasklist_group_button_new (child->app, tasklist);
-              g_hash_table_insert (tasklist->apps,
-                                   g_object_ref (child->app),
-                                   group_child);
-            }
-
-          /* add window to the group button */
-          xfce_tasklist_group_button_add_window (group_child, child);
+          /* create group button for this window and add it */
+          group_child = xfce_tasklist_group_button_new (child->app, tasklist);
+          g_hash_table_insert (tasklist->apps, child->app, group_child);
         }
-      else if (!found)
-        {
-          /* add group in hash table without button */
-          g_hash_table_insert (tasklist->apps,
-                               g_object_ref (child->app), NULL);
-        }
+
+      /* add window to the group button */
+      xfce_tasklist_group_button_add_window (group_child, child);
     }
 
   /* set urgency blinking if needed */
@@ -1953,12 +1933,6 @@ xfce_tasklist_window_removed (XfwScreen    *screen,
 
       if (child->window == window)
         {
-          if (child->app != NULL)
-            {
-              panel_return_if_fail (XFW_IS_APPLICATION (child->app));
-              g_object_unref (G_OBJECT (child->app));
-            }
-
           /* disconnect from all the window watch functions */
           panel_return_if_fail (XFW_IS_WINDOW (window));
           n = g_signal_handlers_disconnect_matched (G_OBJECT (window),
@@ -2844,7 +2818,7 @@ xfce_tasklist_button_state_changed (XfwWindow         *window,
   XfwScreen         *screen;
   XfceTasklist      *tasklist;
   XfwWorkspace      *active_ws;
-  XfceTasklistChild *group_child, *temp_child;
+  XfceTasklistChild *temp_child;
 
   panel_return_if_fail (XFW_IS_WINDOW (window));
   panel_return_if_fail (child->window == window);
@@ -2884,17 +2858,10 @@ xfce_tasklist_button_state_changed (XfwWindow         *window,
         {
           /* update the icon opacity */
           xfce_tasklist_button_icon_changed (window, child);
-          if (child->app != NULL)
+          if (child->tasklist->grouping)
             {
-              /* find the child for the group */
-              g_hash_table_lookup_extended (child->tasklist->apps,
-                                            child->app,
-                                            NULL, (gpointer *) &group_child);
-
-              if (group_child
-                  && group_child->type == CHILD_TYPE_GROUP) {
-                xfce_tasklist_group_button_icon_changed (child->app, group_child);
-              }
+              XfceTasklistChild *group_child = g_hash_table_lookup (child->tasklist->apps, child->app);
+              xfce_tasklist_group_button_icon_changed (child->app, group_child);
             }
         }
     }
@@ -2924,9 +2891,7 @@ xfce_tasklist_button_state_changed (XfwWindow         *window,
           if (child->tasklist->grouping)
             {
               /* find the child for the group */
-              g_hash_table_lookup_extended (child->tasklist->apps,
-                                            child->app,
-                                            NULL, (gpointer *) &group_child);
+              XfceTasklistChild *group_child = g_hash_table_lookup (child->tasklist->apps, child->app);
 
               /* stop blinking only if no window in group needs attention */
               if (! blink)
@@ -4444,16 +4409,13 @@ xfce_tasklist_group_button_child_destroyed (XfceTasklistChild *group_child,
         n_children++;
     }
 
-  if (group_child->tasklist->grouping && n_children > 0)
+  if (n_children > 0)
     {
       xfce_tasklist_group_button_child_visible_changed (group_child);
     }
   else
     {
-      /* self destroy */
-      g_object_ref (G_OBJECT (group_child->app));
-      g_hash_table_replace (group_child->tasklist->apps,
-                            group_child->app, NULL);
+      g_hash_table_remove (group_child->tasklist->apps, group_child->app);
     }
 }
 
