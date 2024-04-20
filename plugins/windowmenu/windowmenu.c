@@ -719,7 +719,6 @@ window_menu_plugin_window_state_changed (XfwWindow        *window,
   panel_return_if_fail (WINDOW_MENU_IS_PLUGIN (plugin));
   panel_return_if_fail (XFW_IS_WINDOW (window));
   panel_return_if_fail (plugin->urgentcy_notification);
-  panel_return_if_fail (plugin->urgentcy_notification);
 
   /* only response to urgency changes and urgency notify is enabled */
   if (!PANEL_HAS_FLAG (changed_mask, XFW_WINDOW_STATE_URGENT))
