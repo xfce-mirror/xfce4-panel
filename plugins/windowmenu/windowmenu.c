@@ -57,7 +57,7 @@ struct _WindowMenuPlugin
   guint               button_style : 1;
   guint               workspace_actions : 1;
   guint               workspace_names : 1;
-  guint               urgentcy_notification : 1;
+  guint               urgency_notification : 1;
   guint               all_workspaces : 1;
 
   /* urgent window counter */
@@ -75,7 +75,7 @@ enum
   PROP_STYLE,
   PROP_WORKSPACE_ACTIONS,
   PROP_WORKSPACE_NAMES,
-  PROP_URGENTCY_NOTIFICATION,
+  PROP_URGENCY_NOTIFICATION,
   PROP_ALL_WORKSPACES
 };
 
@@ -184,8 +184,8 @@ window_menu_plugin_class_init (WindowMenuPluginClass *klass)
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_URGENTCY_NOTIFICATION,
-                                   g_param_spec_boolean ("urgentcy-notification",
+                                   PROP_URGENCY_NOTIFICATION,
+                                   g_param_spec_boolean ("urgency-notification",
                                                          NULL, NULL,
                                                          TRUE,
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
@@ -232,7 +232,7 @@ window_menu_plugin_init (WindowMenuPlugin *plugin)
   plugin->button_style = BUTTON_STYLE_ICON;
   plugin->workspace_actions = FALSE;
   plugin->workspace_names = TRUE;
-  plugin->urgentcy_notification = TRUE;
+  plugin->urgency_notification = TRUE;
   plugin->all_workspaces = TRUE;
   plugin->urgent_windows = 0;
   plugin->minimized_icon_lucency = DEFAULT_MINIMIZED_ICON_LUCENCY;
@@ -277,8 +277,8 @@ window_menu_plugin_get_property (GObject    *object,
       g_value_set_boolean (value, plugin->workspace_names);
       break;
 
-    case PROP_URGENTCY_NOTIFICATION:
-      g_value_set_boolean (value, plugin->urgentcy_notification);
+    case PROP_URGENCY_NOTIFICATION:
+      g_value_set_boolean (value, plugin->urgency_notification);
       break;
 
     case PROP_ALL_WORKSPACES:
@@ -302,7 +302,7 @@ window_menu_plugin_set_property (GObject      *object,
   WindowMenuPlugin *plugin = WINDOW_MENU_PLUGIN (object);
   XfcePanelPlugin  *panel_plugin = XFCE_PANEL_PLUGIN (object);
   guint             button_style;
-  gboolean          urgentcy_notification;
+  gboolean          urgency_notification;
 
   panel_return_if_fail (WINDOW_MENU_IS_PLUGIN (plugin));
 
@@ -339,16 +339,16 @@ window_menu_plugin_set_property (GObject      *object,
       plugin->workspace_names = g_value_get_boolean (value);
       break;
 
-    case PROP_URGENTCY_NOTIFICATION:
-      urgentcy_notification = g_value_get_boolean (value);
-      if (plugin->urgentcy_notification != urgentcy_notification)
+    case PROP_URGENCY_NOTIFICATION:
+      urgency_notification = g_value_get_boolean (value);
+      if (plugin->urgency_notification != urgency_notification)
         {
-          plugin->urgentcy_notification = urgentcy_notification;
+          plugin->urgency_notification = urgency_notification;
 
           if (plugin->screen != NULL)
             {
               /* (dis)connect window signals */
-              if (plugin->urgentcy_notification)
+              if (plugin->urgency_notification)
                 window_menu_plugin_windows_connect (plugin, TRUE);
               else
                 window_menu_plugin_windows_disconnect (plugin);
@@ -429,7 +429,7 @@ window_menu_plugin_screen_changed (GtkWidget *widget,
   g_signal_connect (G_OBJECT (plugin->screen), "active-window-changed",
       G_CALLBACK (window_menu_plugin_active_window_changed), plugin);
 
-  if (plugin->urgentcy_notification)
+  if (plugin->urgency_notification)
     window_menu_plugin_windows_connect (plugin, TRUE);
 }
 
@@ -444,7 +444,7 @@ window_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "style", G_TYPE_UINT },
     { "workspace-actions", G_TYPE_BOOLEAN },
     { "workspace-names", G_TYPE_BOOLEAN },
-    { "urgentcy-notification", G_TYPE_BOOLEAN },
+    { "urgency-notification", G_TYPE_BOOLEAN },
     { "all-workspaces", G_TYPE_BOOLEAN },
     { NULL }
   };
@@ -557,7 +557,7 @@ window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   GObject          *dialog, *object;
   guint             i;
   const gchar      *names[] = { "workspace-actions", "workspace-names",
-                                "urgentcy-notification", "all-workspaces",
+                                "urgency-notification", "all-workspaces",
                                 "style" };
 
   /* setup the dialog */
@@ -718,8 +718,8 @@ window_menu_plugin_window_state_changed (XfwWindow        *window,
 {
   panel_return_if_fail (WINDOW_MENU_IS_PLUGIN (plugin));
   panel_return_if_fail (XFW_IS_WINDOW (window));
-  panel_return_if_fail (plugin->urgentcy_notification);
-  panel_return_if_fail (plugin->urgentcy_notification);
+  panel_return_if_fail (plugin->urgency_notification);
+  panel_return_if_fail (plugin->urgency_notification);
 
   /* only response to urgency changes and urgency notify is enabled */
   if (!PANEL_HAS_FLAG (changed_mask, XFW_WINDOW_STATE_URGENT))
@@ -749,7 +749,7 @@ window_menu_plugin_window_opened (XfwScreen        *screen,
   panel_return_if_fail (XFW_IS_WINDOW (window));
   panel_return_if_fail (XFW_IS_SCREEN (screen));
   panel_return_if_fail (plugin->screen == screen);
-  panel_return_if_fail (plugin->urgentcy_notification);
+  panel_return_if_fail (plugin->urgency_notification);
 
   /* monitor some window properties */
   g_signal_connect (G_OBJECT (window), "state-changed",
@@ -774,7 +774,7 @@ window_menu_plugin_window_closed (XfwScreen        *screen,
   panel_return_if_fail (XFW_IS_WINDOW (window));
   panel_return_if_fail (XFW_IS_SCREEN (screen));
   panel_return_if_fail (plugin->screen == screen);
-  panel_return_if_fail (plugin->urgentcy_notification);
+  panel_return_if_fail (plugin->urgency_notification);
 
   /* check if we need to update the urgency counter */
   if (xfw_window_is_urgent (window))
@@ -824,7 +824,7 @@ window_menu_plugin_windows_connect (WindowMenuPlugin *plugin,
 
   panel_return_if_fail (WINDOW_MENU_IS_PLUGIN (plugin));
   panel_return_if_fail (XFW_IS_SCREEN (plugin->screen));
-  panel_return_if_fail (plugin->urgentcy_notification);
+  panel_return_if_fail (plugin->urgency_notification);
 
   g_signal_connect (G_OBJECT (plugin->screen), "window-opened",
       G_CALLBACK (window_menu_plugin_window_opened), plugin);
