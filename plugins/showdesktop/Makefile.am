@@ -11,11 +11,15 @@ plugin_LTLIBRARIES = \
 
 libshowdesktop_la_SOURCES = \
 	showdesktop.c \
-	showdesktop.h
+	showdesktop.h \
+	showdesktop-dialogs.c \
+	showdesktop-dialogs.h
 
 libshowdesktop_la_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
+	$(LIBXFCE4UI_CFLAGS) \
+	$(XFCONF_CFLAGS) \
 	$(LIBXFCE4WINDOWING_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
@@ -31,6 +35,8 @@ libshowdesktop_la_LIBADD = \
 	$(top_builddir)/common/libpanel-common.la \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
+	$(LIBXFCE4UI_LIBS) \
+	$(XFCONF_LIBS) \
 	$(LIBXFCE4WINDOWING_LIBS)
 
 libshowdesktop_la_DEPENDENCIES = \
