@@ -90,7 +90,7 @@ struct _ShowDesktopPlugin
   guint       drag_timeout;
 
   /* mouse hover timeout */
-  gboolean show_on_hover;
+  gboolean shown_on_hover;
   guint enter_timeout_id;
   gboolean is_preview;
 
@@ -155,8 +155,10 @@ show_desktop_plugin_init (ShowDesktopPlugin *plugin)
   gtk_widget_show (button);
 
   /* allow toggle the button when mouse hover long time.*/
-  g_signal_connect(G_OBJECT(plugin->button), "enter", G_CALLBACK(show_desktop_plugin_enter), plugin);
-  g_signal_connect(G_OBJECT(plugin->button), "leave", G_CALLBACK(show_desktop_plugin_leave), plugin);
+  g_signal_connect(G_OBJECT(plugin->button), "enter-notify-event",
+      G_CALLBACK(show_desktop_plugin_enter), plugin);
+  g_signal_connect(G_OBJECT(plugin->button), "leave-notify-event",
+      G_CALLBACK(show_desktop_plugin_leave), plugin);
 
   /* allow toggle the button when drag something.*/
   gtk_drag_dest_set (GTK_WIDGET (plugin->button), 0, NULL, 0, 0);
@@ -451,7 +453,7 @@ show_desktop_plugin_enter (GtkToggleButton*   widget,
 {
   gboolean active;
 
-  if (!plugin->show_on_hover)
+  if (!plugin->shown_on_hover)
     return FALSE;
 
   active = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(plugin->button));
@@ -470,7 +472,7 @@ static gboolean
 show_desktop_plugin_leave (GtkToggleButton* button,
                            GdkEventCrossing event,
                            ShowDesktopPlugin* plugin){
-  if (!plugin->show_on_hover)
+  if (!plugin->shown_on_hover)
     return FALSE;
 
   if (plugin->is_preview)
@@ -498,7 +500,7 @@ show_desktop_plugin_set_property (GObject      *object,
 
   switch (prop_id) {
     case PROP_SHOW_ON_HOVER:
-      plugin->show_on_hover = g_value_get_boolean(value);
+      plugin->shown_on_hover = g_value_get_boolean(value);
       break;
 
     default:
@@ -519,7 +521,7 @@ show_desktop_plugin_get_property (GObject    *object,
 
   switch (prop_id) {
     case PROP_SHOW_ON_HOVER:
-      g_value_set_boolean(value, plugin->show_on_hover);
+      g_value_set_boolean(value, plugin->shown_on_hover);
       break;
 
     default:
