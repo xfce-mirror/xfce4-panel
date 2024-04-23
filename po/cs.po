@@ -5,7 +5,8 @@
 # 
 # Translators:
 # Xfce Bot <transifex@xfce.org>, 2022
-# Martin Šiška, 2023
+# b537cbea55af75c3f49fe8b21c4cf8ea_f0ce149, 2023
+# Martin Šiška <martin-siska@email.cz>, 2024
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-30 00:48+0200\n"
 "PO-Revision-Date: 2022-12-22 11:35+0000\n"
-"Last-Translator: Martin Šiška, 2023\n"
+"Last-Translator: Martin Šiška <martin-siska@email.cz>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/xfce/teams/16840/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1205,6 +1206,8 @@ msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
 msgstr ""
+"Pokud je tato možnost zvolena, při kliknutí levého tlačítka myši je spuštěn "
+"vlastní příkaz, namísto zobrazení výchozího kalendáře."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Co_mmand:"
@@ -1284,6 +1287,10 @@ msgid ""
 " the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
 "the &quot;Help&quot; page for additional information."
 msgstr ""
+"Formát popisuje části data a času, které se mají vložit do panelu. Například"
+" %Y se zobrazí jako rok, %m jako měsíc a %d jako den. Podobně "
+"&lt;b&gt;&lt;/b&gt; tagy učiní text tučným. Viz &quot;Help&quot; stránku pro"
+" další informace."
 
 #: ../plugins/clock/clock-dialog.glade.h:41
 msgid "Date"
@@ -1306,7 +1313,7 @@ msgstr "%R"
 #: ../plugins/clock/clock-digital.h:26
 msgctxt "Date"
 msgid "%Y-%m-%d"
-msgstr ""
+msgstr "%Y-%m-%d"
 
 #: ../plugins/clock/clock-digital.h:27
 msgctxt "Time"
@@ -1926,7 +1933,7 @@ msgstr "Přepnout pracovní plochy pomocí kolečka myši"
 
 #: ../plugins/pager/pager-dialog.glade.h:10
 msgid "Wrap around workspaces"
-msgstr ""
+msgstr "Obtéct okolo pracovních ploch"
 
 #: ../plugins/pager/pager-dialog.glade.h:11
 msgid "<b>Appearance</b>"
@@ -2129,7 +2136,7 @@ msgstr "Minimalizovat okno"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "New Instance"
-msgstr ""
+msgstr "Spustit novou instanci"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
 msgid "Timestamp"
@@ -2170,7 +2177,7 @@ msgstr "Zobrazit úc_hytku"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show _tooltips"
-msgstr ""
+msgstr "Zobrazit _popisky"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
@@ -2182,7 +2189,7 @@ msgstr "Akce prostře_dního tlačítka:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "_Group windows by application"
-msgstr ""
+msgstr "_Seskupit okna podle aplikace"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Restore minimized windows to current _workspace"
