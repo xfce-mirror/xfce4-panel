@@ -6,6 +6,7 @@
 # Alois Nešpor <info@aloisnespor.info>, 2013-2014,2019
 # k3dar, 2022
 # b537cbea55af75c3f49fe8b21c4cf8ea_f0ce149, 2023
+# Martin Šiška <martin-siska@email.cz>, 2024
 # Michal Várady <miko.vaji@gmail.com>, 2013-2015,2017-2020
 # Pavel Borecki <pavel.borecki@gmail.com>, 2018
 # Petr Šimáček <petr.simacek@gmail.com>, 2015
@@ -16,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
 "POT-Creation-Date: 2024-03-30 00:47+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: b537cbea55af75c3f49fe8b21c4cf8ea_f0ce149, 2023\n"
+"Last-Translator: Martin Šiška <martin-siska@email.cz>, 2024\n"
 "Language-Team: Czech (http://app.transifex.com/xfce/xfce4-panel/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -260,11 +261,11 @@ msgstr "Nepodařilo se spustit migraci aplikace"
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
-msgstr ""
+msgstr "Nepodařilo se načíst zásuvný modul \"%s\", přejete si jej odebrat z nastavení panelu?"
 
 #: panel/panel-application.c:373
 msgid "Plugin loading failure"
-msgstr ""
+msgstr "Nepodařilo se načíst zásuvný modul"
 
 #: panel/panel-application.c:376
 #, c-format
@@ -274,7 +275,7 @@ msgid ""
 "doing, you can remove it permanently, otherwise you'd better quit and make a"
 " backup of the current configuration using %s, before checking your "
 "installation and trying to start xfce4-panel again."
-msgstr ""
+msgstr "Tento zásuvný modul je v současném nastavení panelu, ale nepodařilo se jej načíst, pravděpodobně kvůli chybě v instalaci. Pokud víte, co děláte, můžete jej trvale odebrat, v opačném případě byste měli úlohu panelu ukončit a vytvořit zálohu současného nastavení pomocí %s, předtím, než zkontrolujete instalaci a pokusíte se panel zapnout znovu."
 
 #: panel/panel-application.c:383
 msgid "_Quit"
@@ -594,7 +595,7 @@ msgstr "Délka (v pixelech):"
 
 #: panel/panel-preferences-dialog.glade:635
 msgid "Border width (pixels):"
-msgstr ""
+msgstr "Šířka okraje (v pixelech):"
 
 #: panel/panel-preferences-dialog.glade:658
 msgid "A_utomatically increase the length"
@@ -1190,7 +1191,7 @@ msgstr "Nastavení času"
 msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
-msgstr ""
+msgstr "Pokud je tato možnost zvolena, při kliknutí levého tlačítka myši je spuštěn vlastní příkaz, namísto zobrazení výchozího kalendáře."
 
 #: plugins/clock/clock-dialog.glade:261
 msgid "Co_mmand:"
@@ -1269,7 +1270,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
 "the &quot;Help&quot; page for additional information."
-msgstr ""
+msgstr "Formát popisuje části data a času, které se mají vložit do panelu. Například %Y se zobrazí jako rok, %m jako měsíc a %d jako den. Podobně &lt;b&gt;&lt;/b&gt; tagy učiní text tučným. Viz &quot;Help&quot; stránku pro další informace."
 
 #: plugins/clock/clock-dialog.glade:699
 msgid "Date"
@@ -1291,7 +1292,7 @@ msgstr "%R"
 #: plugins/clock/clock-digital.h:28
 msgctxt "Date"
 msgid "%Y-%m-%d"
-msgstr ""
+msgstr "%Y-%m-%d"
 
 #: plugins/clock/clock-fuzzy.c:82
 msgid "Night"
@@ -1899,7 +1900,7 @@ msgstr "Přepnout pracovní plochy pomocí kolečka myši"
 
 #: plugins/pager/pager-dialog.glade:224
 msgid "Wrap around workspaces"
-msgstr ""
+msgstr "Obtéct okolo pracovních ploch"
 
 #: plugins/pager/pager-dialog.glade:241
 msgid "<b>Appearance</b>"
@@ -2098,7 +2099,7 @@ msgstr "Minimalizovat okno"
 
 #: plugins/tasklist/tasklist-dialog.glade:32
 msgid "New Instance"
-msgstr ""
+msgstr "Spustit novou instanci"
 
 #: plugins/tasklist/tasklist-dialog.glade:43
 msgid "Timestamp"
@@ -2139,7 +2140,7 @@ msgstr "Zobrazit úc_hytku"
 
 #: plugins/tasklist/tasklist-dialog.glade:191
 msgid "Show _tooltips"
-msgstr ""
+msgstr "Zobrazit _popisky"
 
 #: plugins/tasklist/tasklist-dialog.glade:214
 msgid "Sorting _order:"
@@ -2151,7 +2152,7 @@ msgstr "Akce prostře_dního tlačítka:"
 
 #: plugins/tasklist/tasklist-dialog.glade:335
 msgid "_Group windows by application"
-msgstr ""
+msgstr "_Seskupit okna podle aplikace"
 
 #: plugins/tasklist/tasklist-dialog.glade:351
 msgid "Restore minimized windows to current _workspace"
