@@ -32,47 +32,54 @@
 
 
 
-static void                  sn_button_finalize                      (GObject                 *object);
+static void
+sn_button_finalize (GObject *object);
 
-static gboolean              sn_button_button_press                  (GtkWidget               *widget,
-                                                                      GdkEventButton          *event);
+static gboolean
+sn_button_button_press (GtkWidget *widget,
+                        GdkEventButton *event);
 
-static gboolean              sn_button_button_release                (GtkWidget               *widget,
-                                                                      GdkEventButton          *event);
+static gboolean
+sn_button_button_release (GtkWidget *widget,
+                          GdkEventButton *event);
 
-static gboolean              sn_button_scroll_event                  (GtkWidget               *widget,
-                                                                      GdkEventScroll          *event);
+static gboolean
+sn_button_scroll_event (GtkWidget *widget,
+                        GdkEventScroll *event);
 
-static void                  sn_button_unrealize                     (GtkWidget               *widget);
+static void
+sn_button_unrealize (GtkWidget *widget);
 
-static void                  sn_button_menu_changed                  (GtkWidget               *widget,
-                                                                      SnItem                  *item);
+static void
+sn_button_menu_changed (GtkWidget *widget,
+                        SnItem *item);
 
-static gboolean              sn_button_query_tooltip                 (GtkWidget               *widget,
-                                                                      gint                     x,
-                                                                      gint                     y,
-                                                                      gboolean                 keyboard_mode,
-                                                                      GtkTooltip              *tooltip,
-                                                                      gpointer                 user_data);
+static gboolean
+sn_button_query_tooltip (GtkWidget *widget,
+                         gint x,
+                         gint y,
+                         gboolean keyboard_mode,
+                         GtkTooltip *tooltip,
+                         gpointer user_data);
 
 
 
 struct _SnButton
 {
-  GtkButton            __parent__;
+  GtkButton __parent__;
 
-  SnItem              *item;
-  SnPlugin            *plugin;
-  SnConfig            *config;
+  SnItem *item;
+  SnPlugin *plugin;
+  SnConfig *config;
 
-  GtkWidget           *menu;
-  gboolean             menu_only;
+  GtkWidget *menu;
+  gboolean menu_only;
 
-  GtkWidget           *box;
+  GtkWidget *box;
 
-  guint                menu_deactivate_handler;
-  guint                menu_size_allocate_handler;
-  guint                menu_size_allocate_idle_handler;
+  guint menu_deactivate_handler;
+  guint menu_size_allocate_handler;
+  guint menu_size_allocate_idle_handler;
 };
 
 G_DEFINE_FINAL_TYPE (SnButton, sn_button, GTK_TYPE_BUTTON)
@@ -82,7 +89,7 @@ G_DEFINE_FINAL_TYPE (SnButton, sn_button, GTK_TYPE_BUTTON)
 static void
 sn_button_class_init (SnButtonClass *klass)
 {
-  GObjectClass   *object_class;
+  GObjectClass *object_class;
   GtkWidgetClass *widget_class;
 
   object_class = G_OBJECT_CLASS (klass);
@@ -101,17 +108,15 @@ static void
 sn_button_init (SnButton *button)
 {
   GtkCssProvider *css_provider;
-  GdkEventMask    event_mask = GDK_SCROLL_MASK;
+  GdkEventMask event_mask = GDK_SCROLL_MASK;
 
   gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
 
   gtk_widget_set_name (GTK_WIDGET (button), "sn-button");
   css_provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_data (css_provider,
-                                   "#sn-button {"
-                                     "padding: 0px;"
-                                     "border-width: 0px;"
-                                   "}", -1, NULL);
+                                   "#sn-button { padding: 0px; border-width: 0px; }",
+                                   -1, NULL);
   gtk_style_context_add_provider (GTK_STYLE_CONTEXT (gtk_widget_get_style_context (GTK_WIDGET (button))),
                                   GTK_STYLE_PROVIDER (css_provider),
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
@@ -170,7 +175,7 @@ sn_button_get_name (SnButton *button)
 
 
 GtkWidget *
-sn_button_new (SnItem   *item,
+sn_button_new (SnItem *item,
                SnPlugin *plugin,
                SnConfig *config)
 {
@@ -222,15 +227,15 @@ sn_button_finalize (GObject *object)
 
 static void
 sn_button_menu_deactivate (GtkWidget *widget,
-                           GtkMenu   *menu)
+                           GtkMenu *menu)
 {
   SnButton *button = SN_BUTTON (widget);
 
   if (button->menu_deactivate_handler != 0)
-  {
-    g_signal_handler_disconnect (menu, button->menu_deactivate_handler);
-    button->menu_deactivate_handler = 0;
-  }
+    {
+      g_signal_handler_disconnect (menu, button->menu_deactivate_handler);
+      button->menu_deactivate_handler = 0;
+    }
 
   gtk_widget_unset_state_flags (widget, GTK_STATE_FLAG_ACTIVE);
 }
@@ -238,11 +243,11 @@ sn_button_menu_deactivate (GtkWidget *widget,
 
 
 static gboolean
-sn_button_button_press (GtkWidget      *widget,
+sn_button_button_press (GtkWidget *widget,
                         GdkEventButton *event)
 {
   SnButton *button = SN_BUTTON (widget);
-  gboolean  menu_is_primary;
+  gboolean menu_is_primary;
 
   menu_is_primary = sn_config_get_menu_is_primary (button->config);
 
@@ -262,9 +267,9 @@ sn_button_button_press (GtkWidget      *widget,
     {
       if (button->menu != NULL && sn_container_has_children (button->menu))
         {
-          button->menu_deactivate_handler = 
-            g_signal_connect_swapped (G_OBJECT (button->menu), "deactivate",
-                                      G_CALLBACK (sn_button_menu_deactivate), button);
+          button->menu_deactivate_handler
+            = g_signal_connect_swapped (G_OBJECT (button->menu), "deactivate",
+                                        G_CALLBACK (sn_button_menu_deactivate), button);
 
           xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (button->plugin),
                                         GTK_MENU (button->menu), widget, (GdkEvent *) event);
@@ -288,15 +293,15 @@ sn_button_button_press (GtkWidget      *widget,
 
 
 static gboolean
-sn_button_button_release (GtkWidget      *widget,
+sn_button_button_release (GtkWidget *widget,
                           GdkEventButton *event)
 {
   SnButton *button = SN_BUTTON (widget);
-  gboolean  menu_is_primary;
+  gboolean menu_is_primary;
 
   /* leave if button release happens outside of systray item */
-  if (event->x < 0 || event->x > gdk_window_get_width (event->window) ||
-      event->y < 0 || event->y > gdk_window_get_height (event->window))
+  if (event->x < 0 || event->x > gdk_window_get_width (event->window)
+      || event->y < 0 || event->y > gdk_window_get_height (event->window))
     return FALSE;
 
   menu_is_primary = sn_config_get_menu_is_primary (button->config);
@@ -324,16 +329,16 @@ sn_button_button_release (GtkWidget      *widget,
 
 
 static gboolean
-sn_button_scroll_event (GtkWidget      *widget,
+sn_button_scroll_event (GtkWidget *widget,
                         GdkEventScroll *event)
 {
   SnButton *button = SN_BUTTON (widget);
-  gdouble   delta_x, delta_y;
+  gdouble delta_x, delta_y;
 
   /* see reference to https://gitlab.xfce.org/xfce/xfwm4/-/issues/641 in init() */
   if (gtk_widget_get_events (widget) & GDK_SMOOTH_SCROLL_MASK)
     {
-      if (!gdk_event_get_scroll_deltas ((GdkEvent *)event, &delta_x, &delta_y))
+      if (!gdk_event_get_scroll_deltas ((GdkEvent *) event, &delta_x, &delta_y))
         {
           delta_x = event->delta_x;
           delta_y = event->delta_y;
@@ -344,29 +349,29 @@ sn_button_scroll_event (GtkWidget      *widget,
       delta_x = delta_y = 0;
       switch (event->direction)
         {
-          case GDK_SCROLL_UP:
-            delta_y = -1;
-            break;
-          case GDK_SCROLL_DOWN:
-            delta_y = 1;
-            break;
-          case GDK_SCROLL_RIGHT:
-            delta_x = -1;
-            break;
-          case GDK_SCROLL_LEFT:
-            delta_x = 1;
-            break;
-          default:
-            break;
+        case GDK_SCROLL_UP:
+          delta_y = -1;
+          break;
+        case GDK_SCROLL_DOWN:
+          delta_y = 1;
+          break;
+        case GDK_SCROLL_RIGHT:
+          delta_x = -1;
+          break;
+        case GDK_SCROLL_LEFT:
+          delta_x = 1;
+          break;
+        default:
+          break;
         }
     }
 
   if (delta_x != 0 || delta_y != 0)
     {
-      delta_x = (delta_x == 0 ? 0 : delta_x > 0 ? 1 : -1) *
-                MAX (ABS (delta_x) + 0.5, 1);
-      delta_y = (delta_y == 0 ? 0 : delta_y > 0 ? 1 : -1) *
-                MAX (ABS (delta_y) + 0.5, 1);
+      delta_x = (delta_x == 0 ? 0 : (delta_x > 0 ? 1 : -1))
+                * MAX (ABS (delta_x) + 0.5, 1);
+      delta_y = (delta_y == 0 ? 0 : (delta_y > 0 ? 1 : -1))
+                * MAX (ABS (delta_y) + 0.5, 1);
       sn_item_scroll (button->item, (gint) delta_x, (gint) delta_y);
     }
 
@@ -415,8 +420,7 @@ sn_button_menu_size_changed (GtkWidget *widget)
   /* defer gtk_menu_reposition call since it may not work in size event handler */
   if (button->menu_size_allocate_idle_handler == 0)
     {
-      button->menu_size_allocate_idle_handler =
-        g_idle_add (sn_button_menu_size_changed_idle, button);
+      button->menu_size_allocate_idle_handler = g_idle_add (sn_button_menu_size_changed_idle, button);
     }
 }
 
@@ -424,7 +428,7 @@ sn_button_menu_size_changed (GtkWidget *widget)
 
 static void
 sn_button_menu_changed (GtkWidget *widget,
-                        SnItem    *item)
+                        SnItem *item)
 {
   SnButton *button = SN_BUTTON (widget);
 
@@ -461,27 +465,27 @@ sn_button_menu_changed (GtkWidget *widget,
     {
       gtk_menu_attach_to_widget (GTK_MENU (button->menu), GTK_WIDGET (button), NULL);
       /* restore menu position to its corner if size was changed */
-      button->menu_size_allocate_handler =
-        g_signal_connect_swapped (button->menu, "size-allocate",
-                                  G_CALLBACK (sn_button_menu_size_changed), button);
+      button->menu_size_allocate_handler
+        = g_signal_connect_swapped (button->menu, "size-allocate",
+                                    G_CALLBACK (sn_button_menu_size_changed), button);
     }
 }
 
 
 
 static gboolean
-sn_button_query_tooltip (GtkWidget  *widget,
-                         gint        x,
-                         gint        y,
-                         gboolean    keyboard_mode,
+sn_button_query_tooltip (GtkWidget *widget,
+                         gint x,
+                         gint y,
+                         gboolean keyboard_mode,
                          GtkTooltip *tooltip,
-                         gpointer    user_data)
+                         gpointer user_data)
 {
-  SnButton    *button = SN_BUTTON (widget);
+  SnButton *button = SN_BUTTON (widget);
   const gchar *tooltip_title;
   const gchar *tooltip_subtitle;
-  gchar       *tooltip_title_escaped;
-  gchar       *full;
+  gchar *tooltip_title_escaped;
+  gchar *full;
 
   sn_item_get_tooltip (button->item, &tooltip_title, &tooltip_subtitle);
 

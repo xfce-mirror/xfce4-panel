@@ -27,11 +27,14 @@ G_BEGIN_DECLS
 #define PANEL_TYPE_ITEM_DIALOG (panel_item_dialog_get_type ())
 G_DECLARE_FINAL_TYPE (PanelItemDialog, panel_item_dialog, PANEL, ITEM_DIALOG, XfceTitledDialog)
 
-void       panel_item_dialog_show         (PanelWindow *active);
+void
+panel_item_dialog_show (PanelWindow *active);
 
-void       panel_item_dialog_show_from_id (gint         panel_id);
+void
+panel_item_dialog_show_from_id (gint panel_id);
 
-gboolean   panel_item_dialog_visible      (void);
+gboolean
+panel_item_dialog_visible (void);
 
 G_END_DECLS
 

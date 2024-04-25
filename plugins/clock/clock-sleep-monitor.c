@@ -58,37 +58,39 @@ typedef struct _ClockSleepMonitorPrivate
 
 G_DEFINE_ABSTRACT_TYPE (ClockSleepMonitor, clock_sleep_monitor, G_TYPE_OBJECT)
 
-static void clock_sleep_monitor_finalize (GObject *object);
+static void
+clock_sleep_monitor_finalize (GObject *object);
 
-static void clock_sleep_monitor_class_init (ClockSleepMonitorClass *klass)
+static void
+clock_sleep_monitor_class_init (ClockSleepMonitorClass *klass)
 {
   GObjectClass *gobject_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = clock_sleep_monitor_finalize;
 
-  clock_sleep_monitor_woke_up_signal =
-    g_signal_new (
-      g_intern_static_string ("woke-up"),
-      G_TYPE_FROM_CLASS (gobject_class),
-      G_SIGNAL_RUN_LAST,
-      0, NULL, NULL,
-      g_cclosure_marshal_VOID__VOID,
-      G_TYPE_NONE, 0);
+  clock_sleep_monitor_woke_up_signal = g_signal_new (g_intern_static_string ("woke-up"),
+                                                     G_TYPE_FROM_CLASS (gobject_class),
+                                                     G_SIGNAL_RUN_LAST,
+                                                     0, NULL, NULL,
+                                                     g_cclosure_marshal_VOID__VOID,
+                                                     G_TYPE_NONE, 0);
 }
 
-static void clock_sleep_monitor_init (ClockSleepMonitor *monitor)
+static void
+clock_sleep_monitor_init (ClockSleepMonitor *monitor)
 {
 }
 
-static void clock_sleep_monitor_finalize (GObject *object)
+static void
+clock_sleep_monitor_finalize (GObject *object)
 {
   G_OBJECT_CLASS (clock_sleep_monitor_parent_class)->finalize (object);
 }
 
 
 
-#if defined (SLEEP_MONITOR_USE_LOGIND) || defined (SLEEP_MONITOR_USE_CONSOLEKIT)
+#if defined(SLEEP_MONITOR_USE_LOGIND) || defined(SLEEP_MONITOR_USE_CONSOLEKIT)
 
 struct _ClockSleepDBusMonitor
 {
@@ -101,9 +103,11 @@ G_DECLARE_FINAL_TYPE (ClockSleepDBusMonitor, clock_sleep_dbus_monitor, CLOCK, SL
 
 G_DEFINE_FINAL_TYPE (ClockSleepDBusMonitor, clock_sleep_dbus_monitor, CLOCK_TYPE_SLEEP_MONITOR)
 
-static void clock_sleep_dbus_monitor_finalize (GObject *object);
+static void
+clock_sleep_dbus_monitor_finalize (GObject *object);
 
-static void clock_sleep_dbus_monitor_class_init (ClockSleepDBusMonitorClass *klass)
+static void
+clock_sleep_dbus_monitor_class_init (ClockSleepDBusMonitorClass *klass)
 {
   GObjectClass *gobject_class;
 
@@ -111,11 +115,13 @@ static void clock_sleep_dbus_monitor_class_init (ClockSleepDBusMonitorClass *kla
   gobject_class->finalize = clock_sleep_dbus_monitor_finalize;
 }
 
-static void clock_sleep_dbus_monitor_init (ClockSleepDBusMonitor *monitor)
+static void
+clock_sleep_dbus_monitor_init (ClockSleepDBusMonitor *monitor)
 {
 }
 
-static void clock_sleep_dbus_monitor_finalize (GObject *object)
+static void
+clock_sleep_dbus_monitor_finalize (GObject *object)
 {
   ClockSleepDBusMonitor *monitor = CLOCK_SLEEP_DBUS_MONITOR (object);
   g_return_if_fail (monitor != NULL);
@@ -129,11 +135,12 @@ static void clock_sleep_dbus_monitor_finalize (GObject *object)
   G_OBJECT_CLASS (clock_sleep_dbus_monitor_parent_class)->finalize (object);
 }
 
-static void on_prepare_sleep_signal (GDBusProxy *proxy,
-                                     gchar *sender_name,
-                                     gchar *signal_name,
-                                     GVariant *parameters,
-                                     ClockSleepMonitor *monitor)
+static void
+on_prepare_sleep_signal (GDBusProxy *proxy,
+                         gchar *sender_name,
+                         gchar *signal_name,
+                         GVariant *parameters,
+                         ClockSleepMonitor *monitor)
 {
   const gchar *format_string = "(b)";
   gboolean going_to_sleep;
@@ -192,7 +199,8 @@ proxy_ready (GObject *source_object,
     }
 }
 
-static ClockSleepMonitor* clock_sleep_dbus_monitor_create (void)
+static ClockSleepMonitor *
+clock_sleep_dbus_monitor_create (void)
 {
   ClockSleepDBusMonitor *monitor;
 
@@ -237,17 +245,17 @@ static ClockSleepMonitor* clock_sleep_dbus_monitor_create (void)
  * Collect available implementations in a reasonable order.
  */
 
-typedef ClockSleepMonitor* (*SleepMonitorFactory) (void);
+typedef ClockSleepMonitor *(*SleepMonitorFactory) (void);
 
-static SleepMonitorFactory sleep_monitor_factories[] =
-{
-#if defined (SLEEP_MONITOR_USE_LOGIND) || defined (SLEEP_MONITOR_USE_CONSOLEKIT)
+static SleepMonitorFactory sleep_monitor_factories[] = {
+#if defined(SLEEP_MONITOR_USE_LOGIND) || defined(SLEEP_MONITOR_USE_CONSOLEKIT)
   clock_sleep_dbus_monitor_create,
 #endif
   NULL
 };
 
-ClockSleepMonitor *clock_sleep_monitor_create (void)
+ClockSleepMonitor *
+clock_sleep_monitor_create (void)
 {
   SleepMonitorFactory *factory_ptr = &sleep_monitor_factories[0];
   ClockSleepMonitor *monitor = NULL;

@@ -29,10 +29,10 @@
 
 static void
 panel_properties_store_value (XfconfChannel *channel,
-                              const gchar   *xfconf_property,
-                              GType          xfconf_property_type,
-                              GObject       *object,
-                              const gchar   *object_property)
+                              const gchar *xfconf_property,
+                              GType xfconf_property_type,
+                              GObject *object,
+                              const gchar *object_property)
 {
   GValue value = G_VALUE_INIT;
   GdkRGBA *rgba;
@@ -46,7 +46,7 @@ panel_properties_store_value (XfconfChannel *channel,
 
   if (G_LIKELY (xfconf_property_type != GDK_TYPE_RGBA))
     {
-        xfconf_channel_set_property (channel, xfconf_property, &value);
+      xfconf_channel_set_property (channel, xfconf_property, &value);
     }
   else
     {
@@ -69,7 +69,7 @@ panel_properties_store_value (XfconfChannel *channel,
 XfconfChannel *
 panel_properties_get_channel (GObject *object_for_weak_ref)
 {
-  GError        *error = NULL;
+  GError *error = NULL;
   XfconfChannel *channel;
 
   panel_return_val_if_fail (G_IS_OBJECT (object_for_weak_ref), NULL);
@@ -90,14 +90,14 @@ panel_properties_get_channel (GObject *object_for_weak_ref)
 
 
 void
-panel_properties_bind (XfconfChannel       *channel,
-                       GObject             *object,
-                       const gchar         *property_base,
+panel_properties_bind (XfconfChannel *channel,
+                       GObject *object,
+                       const gchar *property_base,
                        const PanelProperty *properties,
-                       gboolean             save_properties)
+                       gboolean save_properties)
 {
   const PanelProperty *prop;
-  gchar               *property;
+  gchar *property;
 
   panel_return_if_fail (channel == NULL || XFCONF_IS_CHANNEL (channel));
   panel_return_if_fail (G_IS_OBJECT (object));

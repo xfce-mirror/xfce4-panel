@@ -33,8 +33,8 @@
 
 static gboolean
 panel_dialogs_show_about_email_hook (GtkAboutDialog *dialog,
-                                     const gchar    *uri,
-                                     gpointer        data)
+                                     const gchar *uri,
+                                     gpointer data)
 {
   GError *error = NULL;
 
@@ -74,7 +74,7 @@ panel_dialogs_show_about (void)
   authors[4] = g_strdup ("Tic-Tac-Toe <tictactoe@xfce.org>");
 
   about_dialog = gtk_about_dialog_new ();
-  gtk_about_dialog_set_authors (GTK_ABOUT_DIALOG (about_dialog), (const gchar**) authors);
+  gtk_about_dialog_set_authors (GTK_ABOUT_DIALOG (about_dialog), (const gchar **) authors);
   g_strfreev (authors);
   gtk_about_dialog_set_comments (GTK_ABOUT_DIALOG (about_dialog), _("The panel of the Xfce Desktop Environment"));
   gtk_about_dialog_set_copyright (GTK_ABOUT_DIALOG (about_dialog), "Copyright \302\251 2004-2024 The Xfce development team");
@@ -106,8 +106,8 @@ enum
 static gint
 panel_dialogs_choose_panel_combo_get_id (GtkComboBox *combo)
 {
-  gint          panel_id = -1;
-  GtkTreeIter   iter;
+  gint panel_id = -1;
+  GtkTreeIter iter;
   GtkTreeModel *model;
 
   if (gtk_combo_box_get_active_iter (combo, &iter))
@@ -122,7 +122,7 @@ panel_dialogs_choose_panel_combo_get_id (GtkComboBox *combo)
 
 
 static void
-panel_dialogs_choose_panel_combo_changed (GtkComboBox      *combo,
+panel_dialogs_choose_panel_combo_changed (GtkComboBox *combo,
                                           PanelApplication *application)
 {
   gint panel_id;
@@ -131,8 +131,7 @@ panel_dialogs_choose_panel_combo_changed (GtkComboBox      *combo,
   panel_return_if_fail (GTK_IS_COMBO_BOX (combo));
 
   panel_id = panel_dialogs_choose_panel_combo_get_id (combo);
-  panel_application_window_select (application,
-      panel_application_get_window (application, panel_id));
+  panel_application_window_select (application, panel_application_get_window (application, panel_id));
 }
 
 
@@ -140,24 +139,22 @@ panel_dialogs_choose_panel_combo_changed (GtkComboBox      *combo,
 gint
 panel_dialogs_choose_panel (PanelApplication *application)
 {
-  GtkWidget       *dialog;
-  GtkWidget       *vbox;
-  GtkWidget       *label;
-  GtkWidget       *combo;
-  gchar           *name;
-  GtkListStore    *store;
+  GtkWidget *dialog;
+  GtkWidget *vbox;
+  GtkWidget *label;
+  GtkWidget *combo;
+  gchar *name;
+  GtkListStore *store;
   GtkCellRenderer *renderer;
-  GSList          *windows, *li;
-  gint             i;
-  gint             panel_id;
+  GSList *windows, *li;
+  gint i;
+  gint panel_id;
 
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), -1);
 
   /* setup the dialog */
-  dialog = gtk_dialog_new_with_buttons (_("Add New Item"), NULL,
-                                        0,
-                                        _("_Cancel"), GTK_RESPONSE_CANCEL,
-                                        _("_Add"), GTK_RESPONSE_OK, NULL);
+  dialog = gtk_dialog_new_with_buttons (
+    _("Add New Item"), NULL, 0, _("_Cancel"), GTK_RESPONSE_CANCEL, _("_Add"), GTK_RESPONSE_OK, NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
   gtk_window_set_icon_name (GTK_WINDOW (dialog), "list-add");
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
@@ -197,7 +194,7 @@ panel_dialogs_choose_panel (PanelApplication *application)
 
   /* select first panel (changed will start marching ants) */
   g_signal_connect (G_OBJECT (combo), "changed",
-       G_CALLBACK (panel_dialogs_choose_panel_combo_changed), application);
+                    G_CALLBACK (panel_dialogs_choose_panel_combo_changed), application);
   gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
 
   /* run the dialog */
@@ -219,7 +216,7 @@ gboolean
 panel_dialogs_kiosk_warning (void)
 {
   PanelApplication *application;
-  gboolean          locked;
+  gboolean locked;
 
   application = panel_application_get ();
   locked = panel_application_get_locked (application);
@@ -227,10 +224,9 @@ panel_dialogs_kiosk_warning (void)
 
   if (locked)
     {
-      xfce_dialog_show_warning (NULL,
-          _("Because the panel is running in kiosk mode, you are not allowed "
-            "to make changes to the panel configuration as a regular user"),
-          _("Modifying the panel is not allowed"));
+      const gchar *text = _("Because the panel is running in kiosk mode, you are not allowed "
+                            "to make changes to the panel configuration as a regular user");
+      xfce_dialog_show_warning (NULL, text, _("Modifying the panel is not allowed"));
     }
 
   return locked;
