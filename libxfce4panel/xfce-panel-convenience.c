@@ -55,9 +55,9 @@
 GtkWidget *
 xfce_panel_create_button (void)
 {
-  GtkWidget       *button = gtk_button_new ();
+  GtkWidget *button = gtk_button_new ();
   GtkStyleContext *context;
-  GtkCssProvider  *provider;
+  GtkCssProvider *provider;
 
   gtk_widget_set_can_default (GTK_WIDGET (button), FALSE);
   gtk_widget_set_can_focus (GTK_WIDGET (button), FALSE);
@@ -92,7 +92,7 @@ GtkWidget *
 xfce_panel_create_toggle_button (void)
 {
   GtkStyleContext *context;
-  GtkCssProvider  *provider;
+  GtkCssProvider *provider;
 
   GtkWidget *button = gtk_toggle_button_new ();
 
@@ -150,21 +150,21 @@ xfce_panel_get_channel_name (void)
 
 
 static GdkPixbuf *
-xfce_panel_pixbuf_from_source_at_size_and_scale (const gchar  *source,
+xfce_panel_pixbuf_from_source_at_size_and_scale (const gchar *source,
                                                  GtkIconTheme *icon_theme,
-                                                 gint          dest_width,
-                                                 gint          dest_height,
-                                                 gint          scale)
+                                                 gint dest_width,
+                                                 gint dest_height,
+                                                 gint scale)
 {
   GdkPixbuf *pixbuf = NULL;
-  gchar     *p;
-  gchar     *name;
-  gchar     *filename;
-  gint       src_w, src_h;
-  gdouble    ratio;
+  gchar *p;
+  gchar *name;
+  gchar *filename;
+  gint src_w, src_h;
+  gdouble ratio;
   GdkPixbuf *dest;
-  GError    *error = NULL;
-  gint       size = MIN (dest_width, dest_height);
+  GError *error = NULL;
+  gint size = MIN (dest_width, dest_height);
 
   g_return_val_if_fail (source != NULL, NULL);
   g_return_val_if_fail (icon_theme == NULL || GTK_IS_ICON_THEME (icon_theme), NULL);
@@ -239,7 +239,7 @@ xfce_panel_pixbuf_from_source_at_size_and_scale (const gchar  *source,
           ratio = MIN ((gdouble) dest_width / (gdouble) src_w,
                        (gdouble) dest_height / (gdouble) src_h);
 
-          dest_width  = rint (src_w * ratio);
+          dest_width = rint (src_w * ratio);
           dest_height = rint (src_h * ratio);
 
           dest = gdk_pixbuf_scale_simple (pixbuf,
@@ -283,10 +283,10 @@ xfce_panel_pixbuf_from_source_at_size_and_scale (const gchar  *source,
  * Since: 4.10
  **/
 GdkPixbuf *
-xfce_panel_pixbuf_from_source_at_size (const gchar  *source,
+xfce_panel_pixbuf_from_source_at_size (const gchar *source,
                                        GtkIconTheme *icon_theme,
-                                       gint          dest_width,
-                                       gint          dest_height)
+                                       gint dest_width,
+                                       gint dest_height)
 {
   return xfce_panel_pixbuf_from_source_at_size_and_scale (source, icon_theme, dest_width, dest_height, 1);
 }
@@ -309,9 +309,9 @@ xfce_panel_pixbuf_from_source_at_size (const gchar  *source,
  * Since: 4.8
  **/
 GdkPixbuf *
-xfce_panel_pixbuf_from_source (const gchar  *source,
+xfce_panel_pixbuf_from_source (const gchar *source,
                                GtkIconTheme *icon_theme,
-                               gint          size)
+                               gint size)
 {
   return xfce_panel_pixbuf_from_source_at_size (source, icon_theme, size, size);
 }
@@ -333,11 +333,11 @@ xfce_panel_pixbuf_from_source (const gchar  *source,
  * Since: 4.17.4
  **/
 void
-xfce_panel_set_image_from_source (GtkImage     *image,
-                                  const gchar  *source,
+xfce_panel_set_image_from_source (GtkImage *image,
+                                  const gchar *source,
                                   GtkIconTheme *icon_theme,
-                                  gint          size,
-                                  gint          scale)
+                                  gint size,
+                                  gint scale)
 {
   GdkPixbuf *pixbuf;
 

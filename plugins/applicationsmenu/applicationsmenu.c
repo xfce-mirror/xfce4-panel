@@ -35,11 +35,11 @@
 
 
 /* I18N: default tooltip of the application menu */
-#define DEFAULT_TITLE     _("Applications")
+#define DEFAULT_TITLE _("Applications")
 #define DEFAULT_ICON_NAME "org.xfce.panel.applicationsmenu"
 #define DEFAULT_ICON_SIZE (16)
-#define DIALOG_ICON_SIZE  (48)
-#define DEFAULT_EDITOR    "menulibre"
+#define DIALOG_ICON_SIZE (48)
+#define DEFAULT_EDITOR "menulibre"
 
 
 
@@ -47,25 +47,25 @@ struct _ApplicationsMenuPlugin
 {
   XfcePanelPlugin __parent__;
 
-  GtkWidget       *button;
-  GtkWidget       *box;
-  GtkWidget       *image;
-  GtkWidget       *label;
-  GtkWidget       *menu;
+  GtkWidget *button;
+  GtkWidget *box;
+  GtkWidget *image;
+  GtkWidget *label;
+  GtkWidget *menu;
 
-  guint            is_constructed : 1;
+  guint is_constructed : 1;
 
-  guint            show_button_title : 1;
-  guint            small : 1;
-  gchar           *button_title;
-  gchar           *button_icon;
-  gboolean         custom_menu;
-  gchar           *custom_menu_file;
-  gchar           *menu_editor;
+  guint show_button_title : 1;
+  guint small : 1;
+  gchar *button_title;
+  gchar *button_icon;
+  gboolean custom_menu;
+  gchar *custom_menu_file;
+  gchar *menu_editor;
 
-  gulong           style_updated_id;
-  gulong           screen_changed_id;
-  gulong           theme_changed_id;
+  gulong style_updated_id;
+  gulong screen_changed_id;
+  gulong theme_changed_id;
 };
 
 enum
@@ -85,31 +85,43 @@ enum
 
 
 
-static void      applications_menu_plugin_get_property         (GObject                *object,
-                                                                guint                   prop_id,
-                                                                GValue                 *value,
-                                                                GParamSpec             *pspec);
-static void      applications_menu_plugin_set_property         (GObject                *object,
-                                                                guint                   prop_id,
-                                                                const GValue           *value,
-                                                                GParamSpec             *pspec);
-static void      applications_menu_plugin_construct            (XfcePanelPlugin        *panel_plugin);
-static void      applications_menu_plugin_free_data            (XfcePanelPlugin        *panel_plugin);
-static gboolean  applications_menu_plugin_size_changed         (XfcePanelPlugin        *panel_plugin,
-                                                                gint                    size);
-static void      applications_menu_plugin_mode_changed         (XfcePanelPlugin        *panel_plugin,
-                                                                XfcePanelPluginMode     mode);
-static void      applications_menu_plugin_configure_plugin     (XfcePanelPlugin        *panel_plugin);
-static gboolean  applications_menu_plugin_remote_event         (XfcePanelPlugin        *panel_plugin,
-                                                                const gchar            *name,
-                                                                const GValue           *value);
-static gboolean  applications_menu_plugin_menu                 (GtkWidget              *button,
-                                                                GdkEventButton         *event,
-                                                                ApplicationsMenuPlugin *plugin);
-static void      applications_menu_plugin_menu_popdown         (GtkMenuShell           *menu,
-                                                                ApplicationsMenuPlugin *plugin);
-static void      applications_menu_plugin_set_garcon_menu      (ApplicationsMenuPlugin *plugin);
-static void      applications_menu_button_theme_changed        (ApplicationsMenuPlugin *plugin);
+static void
+applications_menu_plugin_get_property (GObject *object,
+                                       guint prop_id,
+                                       GValue *value,
+                                       GParamSpec *pspec);
+static void
+applications_menu_plugin_set_property (GObject *object,
+                                       guint prop_id,
+                                       const GValue *value,
+                                       GParamSpec *pspec);
+static void
+applications_menu_plugin_construct (XfcePanelPlugin *panel_plugin);
+static void
+applications_menu_plugin_free_data (XfcePanelPlugin *panel_plugin);
+static gboolean
+applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
+                                       gint size);
+static void
+applications_menu_plugin_mode_changed (XfcePanelPlugin *panel_plugin,
+                                       XfcePanelPluginMode mode);
+static void
+applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin);
+static gboolean
+applications_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
+                                       const gchar *name,
+                                       const GValue *value);
+static gboolean
+applications_menu_plugin_menu (GtkWidget *button,
+                               GdkEventButton *event,
+                               ApplicationsMenuPlugin *plugin);
+static void
+applications_menu_plugin_menu_popdown (GtkMenuShell *menu,
+                                       ApplicationsMenuPlugin *plugin);
+static void
+applications_menu_plugin_set_garcon_menu (ApplicationsMenuPlugin *plugin);
+static void
+applications_menu_button_theme_changed (ApplicationsMenuPlugin *plugin);
 
 
 
@@ -122,7 +134,7 @@ static void
 applications_menu_plugin_class_init (ApplicationsMenuPluginClass *klass)
 {
   XfcePanelPluginClass *plugin_class;
-  GObjectClass         *gobject_class;
+  GObjectClass *gobject_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->get_property = applications_menu_plugin_get_property;
@@ -225,7 +237,7 @@ applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
   gtk_button_set_relief (GTK_BUTTON (plugin->button), GTK_RELIEF_NONE);
   gtk_widget_set_tooltip_text (plugin->button, DEFAULT_TITLE);
   g_signal_connect (G_OBJECT (plugin->button), "button-press-event",
-      G_CALLBACK (applications_menu_plugin_menu), plugin);
+                    G_CALLBACK (applications_menu_plugin_menu), plugin);
 
   plugin->box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
   gtk_container_set_border_width (GTK_CONTAINER (plugin->box), 0);
@@ -256,9 +268,9 @@ applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
 
 
 static void
-applications_menu_plugin_get_property (GObject    *object,
-                                       guint       prop_id,
-                                       GValue     *value,
+applications_menu_plugin_get_property (GObject *object,
+                                       guint prop_id,
+                                       GValue *value,
                                        GParamSpec *pspec)
 {
   ApplicationsMenuPlugin *plugin = APPLICATIONS_MENU_PLUGIN (object);
@@ -266,18 +278,15 @@ applications_menu_plugin_get_property (GObject    *object,
   switch (prop_id)
     {
     case PROP_SHOW_GENERIC_NAMES:
-      g_value_set_boolean (value,
-          garcon_gtk_menu_get_show_generic_names (GARCON_GTK_MENU (plugin->menu)));
+      g_value_set_boolean (value, garcon_gtk_menu_get_show_generic_names (GARCON_GTK_MENU (plugin->menu)));
       break;
 
     case PROP_SHOW_MENU_ICONS:
-      g_value_set_boolean (value,
-          garcon_gtk_menu_get_show_menu_icons (GARCON_GTK_MENU (plugin->menu)));
+      g_value_set_boolean (value, garcon_gtk_menu_get_show_menu_icons (GARCON_GTK_MENU (plugin->menu)));
       break;
 
     case PROP_SHOW_TOOLTIPS:
-      g_value_set_boolean (value,
-          garcon_gtk_menu_get_show_tooltips (GARCON_GTK_MENU (plugin->menu)));
+      g_value_set_boolean (value, garcon_gtk_menu_get_show_tooltips (GARCON_GTK_MENU (plugin->menu)));
       break;
 
     case PROP_SHOW_BUTTON_TITLE:
@@ -289,8 +298,7 @@ applications_menu_plugin_get_property (GObject    *object,
       break;
 
     case PROP_BUTTON_TITLE:
-      g_value_set_string (value, plugin->button_title == NULL ?
-          DEFAULT_TITLE : plugin->button_title);
+      g_value_set_string (value, plugin->button_title == NULL ? DEFAULT_TITLE : plugin->button_title);
       break;
 
     case PROP_BUTTON_ICON:
@@ -318,13 +326,13 @@ applications_menu_plugin_get_property (GObject    *object,
 
 
 static void
-applications_menu_plugin_set_property (GObject      *object,
-                                       guint         prop_id,
+applications_menu_plugin_set_property (GObject *object,
+                                       guint prop_id,
                                        const GValue *value,
-                                       GParamSpec   *pspec)
+                                       GParamSpec *pspec)
 {
   ApplicationsMenuPlugin *plugin = APPLICATIONS_MENU_PLUGIN (object);
-  gboolean                force_a_resize = FALSE;
+  gboolean force_a_resize = FALSE;
 
   switch (prop_id)
     {
@@ -336,7 +344,7 @@ applications_menu_plugin_set_property (GObject      *object,
     case PROP_SHOW_MENU_ICONS:
       garcon_gtk_menu_set_show_menu_icons (GARCON_GTK_MENU (plugin->menu),
                                            g_value_get_boolean (value));
-       break;
+      break;
 
     case PROP_SHOW_TOOLTIPS:
       garcon_gtk_menu_set_show_tooltips (GARCON_GTK_MENU (plugin->menu),
@@ -350,23 +358,23 @@ applications_menu_plugin_set_property (GObject      *object,
       else
         gtk_widget_hide (plugin->label);
       applications_menu_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
-          xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
+                                             xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
       return;
 
     case PROP_SMALL:
       plugin->small = g_value_get_boolean (value);
       xfce_panel_plugin_set_small (XFCE_PANEL_PLUGIN (plugin), plugin->small);
       applications_menu_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
-          xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
+                                             xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
       break;
 
     case PROP_BUTTON_TITLE:
       g_free (plugin->button_title);
       plugin->button_title = g_value_dup_string (value);
       gtk_label_set_text (GTK_LABEL (plugin->label),
-          plugin->button_title != NULL ? plugin->button_title : "");
+                          plugin->button_title != NULL ? plugin->button_title : "");
       gtk_widget_set_tooltip_text (plugin->button,
-          xfce_str_is_empty (plugin->button_title) ? NULL : plugin->button_title);
+                                   xfce_str_is_empty (plugin->button_title) ? NULL : plugin->button_title);
 
       /* check if the label still fits */
       if (xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin)) == XFCE_PANEL_PLUGIN_MODE_DESKBAR
@@ -378,9 +386,8 @@ applications_menu_plugin_set_property (GObject      *object,
 
     case PROP_BUTTON_ICON:
       g_free (plugin->button_icon);
-      plugin->button_icon =
-        xfce_str_is_empty (g_value_get_string (value)) ? g_strdup (DEFAULT_ICON_NAME)
-                                                       : g_value_dup_string (value);
+      plugin->button_icon = xfce_str_is_empty (g_value_get_string (value)) ? g_strdup (DEFAULT_ICON_NAME)
+                                                                           : g_value_dup_string (value);
 
       force_a_resize = TRUE;
       break;
@@ -412,7 +419,7 @@ applications_menu_plugin_set_property (GObject      *object,
   if (force_a_resize)
     {
       applications_menu_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
-          xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
+                                             xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
     }
 }
 
@@ -422,8 +429,7 @@ static void
 applications_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
   ApplicationsMenuPlugin *plugin = APPLICATIONS_MENU_PLUGIN (panel_plugin);
-  const PanelProperty  properties[] =
-  {
+  const PanelProperty properties[] = {
     { "show-generic-names", G_TYPE_BOOLEAN },
     { "show-menu-icons", G_TYPE_BOOLEAN },
     { "show-button-title", G_TYPE_BOOLEAN },
@@ -448,12 +454,11 @@ applications_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
   applications_menu_plugin_set_garcon_menu (plugin);
 
   if (!plugin->menu_editor)
-      plugin->menu_editor = DEFAULT_EDITOR;
+    plugin->menu_editor = DEFAULT_EDITOR;
 
   gtk_widget_show (plugin->button);
 
-  applications_menu_plugin_size_changed (panel_plugin,
-      xfce_panel_plugin_get_size (panel_plugin));
+  applications_menu_plugin_size_changed (panel_plugin, xfce_panel_plugin_get_size (panel_plugin));
   plugin->is_constructed = TRUE;
 }
 
@@ -463,7 +468,7 @@ static void
 applications_menu_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
   ApplicationsMenuPlugin *plugin = APPLICATIONS_MENU_PLUGIN (panel_plugin);
-  GtkIconTheme           *icon_theme;
+  GtkIconTheme *icon_theme;
 
   if (plugin->menu != NULL)
     gtk_widget_destroy (plugin->menu);
@@ -497,18 +502,18 @@ applications_menu_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
 static gboolean
 applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
-                                       gint             size)
+                                       gint size)
 {
   ApplicationsMenuPlugin *plugin = APPLICATIONS_MENU_PLUGIN (panel_plugin);
-  XfcePanelPluginMode     mode;
-  GtkRequisition          label_size;
-  GtkOrientation          orientation;
-  gint                    border_thickness;
-  gint                    icon_size;
-  GdkScreen              *screen;
-  GtkIconTheme           *icon_theme = NULL;
-  GtkStyleContext        *ctx;
-  GtkBorder               padding, border;
+  XfcePanelPluginMode mode;
+  GtkRequisition label_size;
+  GtkOrientation orientation;
+  gint border_thickness;
+  gint icon_size;
+  GdkScreen *screen;
+  GtkIconTheme *icon_theme = NULL;
+  GtkStyleContext *ctx;
+  GtkBorder padding, border;
 
   gtk_box_set_child_packing (GTK_BOX (plugin->box), plugin->image,
                              !plugin->show_button_title,
@@ -530,7 +535,7 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                           padding.top + padding.bottom + border.top + border.bottom);
 
   icon_size = xfce_panel_plugin_get_icon_size (panel_plugin);
-  if (! plugin->small)
+  if (!plugin->small)
     icon_size *= xfce_panel_plugin_get_nrows (panel_plugin);
 
   screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
@@ -541,8 +546,7 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                                     icon_theme, icon_size,
                                     gtk_widget_get_scale_factor (GTK_WIDGET (plugin)));
 
-  if (plugin->show_button_title &&
-      mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
+  if (plugin->show_button_title && mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
     {
       /* check if the label (minimum size) fits next to the icon */
       gtk_widget_get_preferred_size (GTK_WIDGET (plugin->label), &label_size, NULL);
@@ -558,23 +562,22 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 
 
 static void
-applications_menu_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
-                                       XfcePanelPluginMode  mode)
+applications_menu_plugin_mode_changed (XfcePanelPlugin *panel_plugin,
+                                       XfcePanelPluginMode mode)
 {
   ApplicationsMenuPlugin *plugin = APPLICATIONS_MENU_PLUGIN (panel_plugin);
-  gint                    angle;
+  gint angle;
 
   angle = (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL) ? 270 : 0;
   gtk_label_set_angle (GTK_LABEL (plugin->label), angle);
 
-  applications_menu_plugin_size_changed (panel_plugin,
-      xfce_panel_plugin_get_size (panel_plugin));
+  applications_menu_plugin_size_changed (panel_plugin, xfce_panel_plugin_get_size (panel_plugin));
 }
 
 
 
 static void
-applications_menu_plugin_configure_plugin_file_set (GtkFileChooserButton   *button,
+applications_menu_plugin_configure_plugin_file_set (GtkFileChooserButton *button,
                                                     ApplicationsMenuPlugin *plugin)
 {
   gchar *filename;
@@ -590,19 +593,17 @@ applications_menu_plugin_configure_plugin_file_set (GtkFileChooserButton   *butt
 
 
 static void
-applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget              *button,
+applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget *button,
                                                         ApplicationsMenuPlugin *plugin)
 {
+  GtkWindow *parent = GTK_WINDOW (gtk_widget_get_toplevel (button));
   GtkWidget *chooser, *image;
-  gchar     *icon;
+  gchar *icon;
 
   panel_return_if_fail (APPLICATIONS_MENU_IS_PLUGIN (plugin));
 
-  chooser = exo_icon_chooser_dialog_new (_("Select An Icon"),
-                                         GTK_WINDOW (gtk_widget_get_toplevel (button)),
-                                         _("_Cancel"), GTK_RESPONSE_CANCEL,
-                                         _("_OK"), GTK_RESPONSE_ACCEPT,
-                                         NULL);
+  chooser = exo_icon_chooser_dialog_new (
+    _("Select An Icon"), parent, _("_Cancel"), GTK_RESPONSE_CANCEL, _("_OK"), GTK_RESPONSE_ACCEPT, NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_ACCEPT);
 
   exo_icon_chooser_dialog_set_icon (EXO_ICON_CHOOSER_DIALOG (chooser), plugin->button_icon);
@@ -628,10 +629,10 @@ applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget              *
 
 
 static void
-applications_menu_plugin_configure_plugin_edit (GtkWidget              *button,
+applications_menu_plugin_configure_plugin_edit (GtkWidget *button,
                                                 ApplicationsMenuPlugin *plugin)
 {
-  GError      *error = NULL;
+  GError *error = NULL;
 
   panel_return_if_fail (APPLICATIONS_MENU_IS_PLUGIN (plugin));
   panel_return_if_fail (GTK_IS_WIDGET (button));
@@ -650,13 +651,13 @@ static void
 applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   ApplicationsMenuPlugin *plugin = APPLICATIONS_MENU_PLUGIN (panel_plugin);
-  GtkBuilder             *builder;
-  GtkWidget              *image;
-  GObject                *dialog, *object, *object2;
-  guint                   i;
-  gchar                  *path;
-  const gchar            *check_names[] = { "show-generic-names", "show-menu-icons",
-                                            "show-tooltips", "show-button-title", "small" };
+  GtkBuilder *builder;
+  GtkWidget *image;
+  GObject *dialog, *object, *object2;
+  guint i;
+  gchar *path;
+  const gchar *check_names[] = { "show-generic-names", "show-menu-icons",
+                                 "show-tooltips", "show-button-title", "small" };
 
   /* setup the dialog */
   builder = panel_utils_builder_new (panel_plugin, applicationsmenu_dialog_ui,
@@ -682,7 +683,7 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   object = gtk_builder_get_object (builder, "icon-button");
   panel_return_if_fail (GTK_IS_BUTTON (object));
   g_signal_connect (G_OBJECT (object), "clicked",
-     G_CALLBACK (applications_menu_plugin_configure_plugin_icon_chooser), plugin);
+                    G_CALLBACK (applications_menu_plugin_configure_plugin_icon_chooser), plugin);
 
   image = gtk_image_new ();
   xfce_panel_set_image_from_source (GTK_IMAGE (image), plugin->button_icon,
@@ -703,7 +704,7 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                               G_OBJECT (object), "sensitive",
                               G_BINDING_SYNC_CREATE);
       g_signal_connect (G_OBJECT (object), "clicked",
-          G_CALLBACK (applications_menu_plugin_configure_plugin_edit), plugin);
+                        G_CALLBACK (applications_menu_plugin_configure_plugin_edit), plugin);
     }
   else
     {
@@ -729,7 +730,7 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   if (!xfce_str_is_empty (plugin->custom_menu_file))
     gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (object), plugin->custom_menu_file);
   g_signal_connect (G_OBJECT (object), "file-set",
-     G_CALLBACK (applications_menu_plugin_configure_plugin_file_set), plugin);
+                    G_CALLBACK (applications_menu_plugin_configure_plugin_file_set), plugin);
 
   gtk_widget_show (GTK_WIDGET (dialog));
 }
@@ -738,8 +739,8 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
 static gboolean
 applications_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
-                                       const gchar     *name,
-                                       const GValue    *value)
+                                       const gchar *name,
+                                       const GValue *value)
 {
   ApplicationsMenuPlugin *plugin = APPLICATIONS_MENU_PLUGIN (panel_plugin);
   GtkWidget *invisible;
@@ -748,7 +749,7 @@ applications_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
 
   /* try next plugin or indicate that it failed */
   if (strcmp (name, "popup") != 0
-      || ! gtk_widget_get_visible (GTK_WIDGET (panel_plugin)))
+      || !gtk_widget_get_visible (GTK_WIDGET (panel_plugin)))
     return FALSE;
 
   invisible = gtk_invisible_new ();
@@ -756,7 +757,7 @@ applications_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
 
   /* a menu is already shown, don't popup another one */
   if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button))
-      || ! panel_utils_device_grab (invisible))
+      || !panel_utils_device_grab (invisible))
     {
       gtk_widget_destroy (invisible);
       return TRUE;
@@ -789,7 +790,7 @@ applications_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
 
 
 static void
-applications_menu_plugin_menu_popdown (GtkMenuShell           *menu,
+applications_menu_plugin_menu_popdown (GtkMenuShell *menu,
                                        ApplicationsMenuPlugin *plugin)
 {
   panel_return_if_fail (plugin->button == NULL || GTK_IS_TOGGLE_BUTTON (plugin->button));
@@ -831,8 +832,8 @@ applications_menu_plugin_set_garcon_menu (ApplicationsMenuPlugin *plugin)
 
 
 static gboolean
-applications_menu_plugin_menu (GtkWidget              *button,
-                               GdkEventButton         *event,
+applications_menu_plugin_menu (GtkWidget *button,
+                               GdkEventButton *event,
                                ApplicationsMenuPlugin *plugin)
 {
   GdkEvent *free_event = NULL;
@@ -857,15 +858,15 @@ applications_menu_plugin_menu (GtkWidget              *button,
       free_event = gdk_event_new (GDK_BUTTON_PRESS);
       free_event->button.window = g_object_ref (gdk_get_default_root_window ());
       gdk_event_set_device (free_event, gdk_seat_get_pointer (seat));
-      event = (GdkEventButton *)free_event;
+      event = (GdkEventButton *) free_event;
     }
 
   /* when cancelling a dnd only "selection-done" is emitted, whereas "deactivate" is more
    * generic and it is the only signal emitted on Wayland when clicking outside the menu */
   g_signal_connect (G_OBJECT (plugin->menu), "deactivate",
-      G_CALLBACK (applications_menu_plugin_menu_popdown), plugin);
+                    G_CALLBACK (applications_menu_plugin_menu_popdown), plugin);
   g_signal_connect (G_OBJECT (plugin->menu), "selection-done",
-      G_CALLBACK (applications_menu_plugin_menu_popdown), plugin);
+                    G_CALLBACK (applications_menu_plugin_menu_popdown), plugin);
 
   /* do not block panel autohide if popup-command at pointer */
   if (button == NULL)
@@ -887,6 +888,5 @@ applications_menu_button_theme_changed (ApplicationsMenuPlugin *plugin)
 {
   XfcePanelPlugin *panel_plugin = XFCE_PANEL_PLUGIN (plugin);
 
-  applications_menu_plugin_size_changed (panel_plugin,
-      xfce_panel_plugin_get_size (panel_plugin));
+  applications_menu_plugin_size_changed (panel_plugin, xfce_panel_plugin_get_size (panel_plugin));
 }

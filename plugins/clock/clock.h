@@ -26,7 +26,8 @@ G_BEGIN_DECLS
 #define CLOCK_TYPE_PLUGIN (clock_plugin_get_type ())
 G_DECLARE_FINAL_TYPE (ClockPlugin, clock_plugin, CLOCK, PLUGIN, XfcePanelPlugin)
 
-void clock_plugin_register_type (XfcePanelTypeModule *type_module);
+void
+clock_plugin_register_type (XfcePanelTypeModule *type_module);
 
 G_END_DECLS
 

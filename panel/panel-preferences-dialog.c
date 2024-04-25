@@ -39,73 +39,104 @@
 
 
 
-static void                     panel_preferences_dialog_finalize               (GObject                *object);
-static void                     panel_preferences_dialog_response               (GtkWidget              *window,
-                                                                                 gint                    response_id,
-                                                                                 PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_bindings_unbind        (PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_bindings_add           (PanelPreferencesDialog *dialog,
-                                                                                 const gchar            *property1,
-                                                                                 const gchar            *property2,
-                                                                                 GBindingFlags           flags);
-static void                     panel_preferences_dialog_bindings_update        (PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_output_changed         (GtkComboBox            *combobox,
-                                                                                 PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_autohide_changed       (GtkComboBox            *combobox,
-                                                                                 PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_bg_style_changed       (PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_bg_image_file_set      (GtkFileChooserButton   *button,
-                                                                                 PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_bg_image_notified      (PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_length_max_notified    (PanelPreferencesDialog *dialog);
-static gboolean                 panel_preferences_dialog_length_transform_to    (GBinding               *binding,
-                                                                                 const GValue           *from_value,
-                                                                                 GValue                 *to_value,
-                                                                                 gpointer                user_data);
-static gboolean                 panel_preferences_dialog_length_transform_from  (GBinding               *binding,
-                                                                                 const GValue           *from_value,
-                                                                                 GValue                 *to_value,
-                                                                                 gpointer                user_data);
-static void                     panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobox,
-                                                                                 PanelPreferencesDialog *dialog);
-static gboolean                 panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog,
-                                                                                 gint                    panel_id);
-static void                     panel_preferences_dialog_panel_add              (GtkWidget              *widget,
-                                                                                 PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_panel_remove           (GtkWidget              *widget,
-                                                                                 PanelPreferencesDialog *dialog);
-static gboolean                 panel_preferences_dialog_icon_size_state_set    (GtkSwitch              *widget,
-                                                                                 gboolean                state,
-                                                                                 PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_icon_size_changed      (GtkSpinButton          *button,
-                                                                                 PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_compositing_clicked    (GtkButton              *button,
-                                                                                 gpointer                user_data);
-static void                     panel_preferences_dialog_panel_switch           (GtkWidget              *widget,
-                                                                                 PanelPreferencesDialog *dialog);
-static XfcePanelPluginProvider *panel_preferences_dialog_item_get_selected      (PanelPreferencesDialog *dialog,
-                                                                                 GtkTreeIter            *return_iter);
-static void                     panel_preferences_dialog_item_store_rebuild     (GtkWidget              *itembar,
-                                                                                 PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_item_move              (GtkWidget              *button,
-                                                                                 PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_item_remove            (GtkWidget              *button,
-                                                                                 PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_item_add               (GtkWidget              *button,
-                                                                                 PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_item_properties        (GtkWidget              *button,
-                                                                                 PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_item_about             (GtkWidget              *button,
-                                                                                 PanelPreferencesDialog *dialog);
-static gboolean                 panel_preferences_dialog_treeview_clicked       (GtkTreeView            *treeview,
-                                                                                 GdkEventButton         *event,
-                                                                                 PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_item_row_changed       (GtkTreeModel           *model,
-                                                                                 GtkTreePath            *path,
-                                                                                 GtkTreeIter            *iter,
-                                                                                 PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_item_selection_changed (GtkTreeSelection       *selection,
-                                                                                 PanelPreferencesDialog *dialog);
+static void
+panel_preferences_dialog_finalize (GObject *object);
+static void
+panel_preferences_dialog_response (GtkWidget *window,
+                                   gint response_id,
+                                   PanelPreferencesDialog *dialog);
+static void
+panel_preferences_dialog_bindings_unbind (PanelPreferencesDialog *dialog);
+static void
+panel_preferences_dialog_bindings_add (PanelPreferencesDialog *dialog,
+                                       const gchar *property1,
+                                       const gchar *property2,
+                                       GBindingFlags flags);
+static void
+panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog);
+static void
+panel_preferences_dialog_output_changed (GtkComboBox *combobox,
+                                         PanelPreferencesDialog *dialog);
+static void
+panel_preferences_dialog_autohide_changed (GtkComboBox *combobox,
+                                           PanelPreferencesDialog *dialog);
+static void
+panel_preferences_dialog_bg_style_changed (PanelPreferencesDialog *dialog);
+static void
+panel_preferences_dialog_bg_image_file_set (GtkFileChooserButton *button,
+                                            PanelPreferencesDialog *dialog);
+static void
+panel_preferences_dialog_bg_image_notified (PanelPreferencesDialog *dialog);
+static void
+panel_preferences_dialog_length_max_notified (PanelPreferencesDialog *dialog);
+static gboolean
+panel_preferences_dialog_length_transform_to (GBinding *binding,
+                                              const GValue *from_value,
+                                              GValue *to_value,
+                                              gpointer user_data);
+static gboolean
+panel_preferences_dialog_length_transform_from (GBinding *binding,
+                                                const GValue *from_value,
+                                                GValue *to_value,
+                                                gpointer user_data);
+static void
+panel_preferences_dialog_panel_combobox_changed (GtkComboBox *combobox,
+                                                 PanelPreferencesDialog *dialog);
+static gboolean
+panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog,
+                                                 gint panel_id);
+static void
+panel_preferences_dialog_panel_add (GtkWidget *widget,
+                                    PanelPreferencesDialog *dialog);
+static void
+panel_preferences_dialog_panel_remove (GtkWidget *widget,
+                                       PanelPreferencesDialog *dialog);
+static gboolean
+panel_preferences_dialog_icon_size_state_set (GtkSwitch *widget,
+                                              gboolean state,
+                                              PanelPreferencesDialog *dialog);
+static void
+panel_preferences_dialog_icon_size_changed (GtkSpinButton *button,
+                                            PanelPreferencesDialog *dialog);
+static void
+panel_preferences_dialog_compositing_clicked (GtkButton *button,
+                                              gpointer user_data);
+static void
+panel_preferences_dialog_panel_switch (GtkWidget *widget,
+                                       PanelPreferencesDialog *dialog);
+static XfcePanelPluginProvider *
+panel_preferences_dialog_item_get_selected (PanelPreferencesDialog *dialog,
+                                            GtkTreeIter *return_iter);
+static void
+panel_preferences_dialog_item_store_rebuild (GtkWidget *itembar,
+                                             PanelPreferencesDialog *dialog);
+static void
+panel_preferences_dialog_item_move (GtkWidget *button,
+                                    PanelPreferencesDialog *dialog);
+static void
+panel_preferences_dialog_item_remove (GtkWidget *button,
+                                      PanelPreferencesDialog *dialog);
+static void
+panel_preferences_dialog_item_add (GtkWidget *button,
+                                   PanelPreferencesDialog *dialog);
+static void
+panel_preferences_dialog_item_properties (GtkWidget *button,
+                                          PanelPreferencesDialog *dialog);
+static void
+panel_preferences_dialog_item_about (GtkWidget *button,
+                                     PanelPreferencesDialog *dialog);
+static gboolean
+panel_preferences_dialog_treeview_clicked (GtkTreeView *treeview,
+                                           GdkEventButton *event,
+                                           PanelPreferencesDialog *dialog);
+static void
+panel_preferences_dialog_item_row_changed (GtkTreeModel *model,
+                                           GtkTreePath *path,
+                                           GtkTreeIter *iter,
+                                           PanelPreferencesDialog *dialog);
+static void
+panel_preferences_dialog_item_selection_changed (GtkTreeSelection *selection,
+                                                 PanelPreferencesDialog *dialog);
 
 
 
@@ -126,30 +157,30 @@ enum
 
 struct _PanelPreferencesDialog
 {
-  GtkBuilder  __parent__;
+  GtkBuilder __parent__;
 
   PanelApplication *application;
 
   /* currently selected window in the selector */
-  PanelWindow      *active;
+  PanelWindow *active;
 
   /* GBinding's between dialog <-> window */
-  GSList           *bindings;
+  GSList *bindings;
 
   /* store for the items list */
-  GtkListStore     *store;
+  GtkListStore *store;
 
   /* changed signal for the active panel's itembar */
-  gulong            items_changed_handler_id;
+  gulong items_changed_handler_id;
 
   /* background image watch */
-  gulong            bg_image_notify_handler_id;
+  gulong bg_image_notify_handler_id;
 
   /* changed signal for the output selector */
-  gulong            output_changed_handler_id;
+  gulong output_changed_handler_id;
 
   /* plug in which the dialog is embedded */
-  GtkWidget        *socket_plug;
+  GtkWidget *socket_plug;
 };
 
 
@@ -176,16 +207,16 @@ panel_preferences_dialog_class_init (PanelPreferencesDialogClass *klass)
 static void
 panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
 {
-  GObject           *window;
-  GObject           *object;
-  GObject           *info;
-  GObject           *treeview;
+  GObject *window;
+  GObject *object;
+  GObject *info;
+  GObject *treeview;
   GtkTreeViewColumn *column;
-  GtkCellRenderer   *renderer;
-  GtkTreeSelection  *selection;
-  gchar             *path_old;
-  gchar             *path_new;
-  gchar             *xfwm4_tweaks;
+  GtkCellRenderer *renderer;
+  GtkTreeSelection *selection;
+  gchar *path_old;
+  gchar *path_new;
+  gchar *xfwm4_tweaks;
 
   dialog->bindings = NULL;
   dialog->application = panel_application_get ();
@@ -202,9 +233,9 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   window = gtk_builder_get_object (GTK_BUILDER (dialog), "dialog");
   panel_return_if_fail (GTK_IS_WIDGET (window));
   g_signal_connect (G_OBJECT (window), "response",
-      G_CALLBACK (panel_preferences_dialog_response), dialog);
+                    G_CALLBACK (panel_preferences_dialog_response), dialog);
 
-#define connect_signal(name,detail_signal,c_handler) \
+#define connect_signal(name, detail_signal, c_handler) \
   object = gtk_builder_get_object (GTK_BUILDER (dialog), name); \
   panel_return_if_fail (G_IS_OBJECT (object)); \
   g_signal_connect (G_OBJECT (object), detail_signal, G_CALLBACK (c_handler), dialog);
@@ -228,7 +259,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "background-style");
   panel_return_if_fail (G_IS_OBJECT (object));
   g_signal_connect_swapped (G_OBJECT (object), "changed",
-      G_CALLBACK (panel_preferences_dialog_bg_style_changed), dialog);
+                            G_CALLBACK (panel_preferences_dialog_bg_style_changed), dialog);
 
   /* icon size switch, handling enabling/disabling of custom icon sizes */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "icon-size-spinbutton");
@@ -243,7 +274,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "composited");
   panel_return_if_fail (G_IS_OBJECT (object));
   g_signal_connect_swapped (G_OBJECT (object), "notify::visible",
-      G_CALLBACK (panel_preferences_dialog_bg_style_changed), dialog);
+                            G_CALLBACK (panel_preferences_dialog_bg_style_changed), dialog);
 
   info = gtk_builder_get_object (GTK_BUILDER (dialog), "composited-info");
   panel_return_if_fail (G_IS_OBJECT (info));
@@ -262,7 +293,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "background-image");
   panel_return_if_fail (GTK_IS_FILE_CHOOSER_BUTTON (object));
   g_signal_connect (G_OBJECT (object), "file-set",
-    G_CALLBACK (panel_preferences_dialog_bg_image_file_set), dialog);
+                    G_CALLBACK (panel_preferences_dialog_bg_image_file_set), dialog);
 
   /* items treeview and buttons */
   connect_signal ("item-up", "clicked", panel_preferences_dialog_item_move);
@@ -285,17 +316,17 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), GTK_TREE_MODEL (dialog->store));
   gtk_tree_view_set_tooltip_column (GTK_TREE_VIEW (treeview), ITEM_COLUMN_TOOLTIP);
   g_signal_connect (G_OBJECT (treeview), "button-press-event",
-      G_CALLBACK (panel_preferences_dialog_treeview_clicked), dialog);
+                    G_CALLBACK (panel_preferences_dialog_treeview_clicked), dialog);
 
   gtk_tree_view_set_reorderable (GTK_TREE_VIEW (treeview), TRUE);
   g_signal_connect (G_OBJECT (dialog->store), "row-changed",
-      G_CALLBACK (panel_preferences_dialog_item_row_changed), dialog);
+                    G_CALLBACK (panel_preferences_dialog_item_row_changed), dialog);
 
   /* setup tree selection */
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
   gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
   g_signal_connect (G_OBJECT (selection), "changed",
-      G_CALLBACK (panel_preferences_dialog_item_selection_changed), dialog);
+                    G_CALLBACK (panel_preferences_dialog_item_selection_changed), dialog);
 
   /* icon renderer */
   renderer = gtk_cell_renderer_pixbuf_new ();
@@ -315,16 +346,15 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   /* connect the output changed signal */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "output-name");
   panel_return_if_fail (GTK_IS_COMBO_BOX (object));
-  dialog->output_changed_handler_id =
-      g_signal_connect (G_OBJECT (object), "changed",
-                        G_CALLBACK (panel_preferences_dialog_output_changed),
-                        dialog);
+  dialog->output_changed_handler_id
+    = g_signal_connect (G_OBJECT (object), "changed",
+                        G_CALLBACK (panel_preferences_dialog_output_changed), dialog);
 
   /* connect the autohide behavior changed signal */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "autohide-behavior");
   panel_return_if_fail (GTK_IS_COMBO_BOX (object));
   g_signal_connect (G_OBJECT (object), "changed",
-      G_CALLBACK (panel_preferences_dialog_autohide_changed), dialog);
+                    G_CALLBACK (panel_preferences_dialog_autohide_changed), dialog);
 }
 
 
@@ -333,7 +363,7 @@ static void
 panel_preferences_dialog_finalize (GObject *object)
 {
   PanelPreferencesDialog *dialog = PANEL_PREFERENCES_DIALOG (object);
-  GtkWidget              *itembar;
+  GtkWidget *itembar;
 
   /* unblock autohide */
   panel_application_windows_blocked (dialog->application, FALSE);
@@ -352,13 +382,13 @@ panel_preferences_dialog_finalize (GObject *object)
           /* disconnect changed signal */
           itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
           g_signal_handler_disconnect (G_OBJECT (itembar),
-              dialog->items_changed_handler_id);
+                                       dialog->items_changed_handler_id);
         }
 
       if (dialog->bg_image_notify_handler_id != 0)
         {
           g_signal_handler_disconnect (G_OBJECT (dialog->active),
-              dialog->bg_image_notify_handler_id);
+                                       dialog->bg_image_notify_handler_id);
         }
     }
 
@@ -375,8 +405,8 @@ panel_preferences_dialog_finalize (GObject *object)
 
 
 static void
-panel_preferences_dialog_response (GtkWidget              *window,
-                                   gint                    response_id,
+panel_preferences_dialog_response (GtkWidget *window,
+                                   gint response_id,
                                    PanelPreferencesDialog *dialog)
 {
   panel_return_if_fail (GTK_IS_DIALOG (window));
@@ -416,7 +446,7 @@ panel_preferences_dialog_bindings_unbind (PanelPreferencesDialog *dialog)
       if (dialog->active != NULL)
         {
           g_signal_handler_disconnect (G_OBJECT (dialog->active),
-              dialog->bg_image_notify_handler_id);
+                                       dialog->bg_image_notify_handler_id);
         }
 
       dialog->bg_image_notify_handler_id = 0;
@@ -431,12 +461,12 @@ panel_preferences_dialog_bindings_unbind (PanelPreferencesDialog *dialog)
 
 static void
 panel_preferences_dialog_bindings_add (PanelPreferencesDialog *dialog,
-                                       const gchar            *property1,
-                                       const gchar            *property2,
-                                       GBindingFlags           flags)
+                                       const gchar *property1,
+                                       const gchar *property2,
+                                       GBindingFlags flags)
 {
   GBinding *binding;
-  GObject  *object;
+  GObject *object;
 
   /* get the object from the builder */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), property1);
@@ -453,20 +483,20 @@ panel_preferences_dialog_bindings_add (PanelPreferencesDialog *dialog,
 static void
 panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
 {
-  GdkDisplay  *display;
-  GdkMonitor  *monitor;
-  gint         n_monitors = 1;
-  GObject     *object;
-  GObject     *store;
-  GBinding    *binding;
-  gchar       *output_name = NULL;
-  gboolean     selector_visible = TRUE;
-  GtkTreeIter  iter;
-  gboolean     output_selected = FALSE;
-  gint         n = 0, i;
-  gchar       *name, *title;
-  gboolean     span_monitors_sensitive = FALSE;
-  gboolean     icon_size_set;
+  GdkDisplay *display;
+  GdkMonitor *monitor;
+  gint n_monitors = 1;
+  GObject *object;
+  GObject *store;
+  GBinding *binding;
+  gchar *output_name = NULL;
+  gboolean selector_visible = TRUE;
+  GtkTreeIter iter;
+  gboolean output_selected = FALSE;
+  gint n = 0, i;
+  gchar *name, *title;
+  gboolean span_monitors_sensitive = FALSE;
+  gboolean icon_size_set;
 
   /* leave when there is no active panel */
   panel_return_if_fail (G_IS_OBJECT (dialog->active));
@@ -492,8 +522,9 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   panel_preferences_dialog_bindings_add (dialog, "border-width", "value", 0);
 
   /* watch image changes from the panel */
-  dialog->bg_image_notify_handler_id = g_signal_connect_swapped (G_OBJECT (dialog->active),
-      "notify::background-image", G_CALLBACK (panel_preferences_dialog_bg_image_notified), dialog);
+  dialog->bg_image_notify_handler_id
+    = g_signal_connect_swapped (G_OBJECT (dialog->active), "notify::background-image",
+                                G_CALLBACK (panel_preferences_dialog_bg_image_notified), dialog);
   panel_preferences_dialog_bg_image_notified (dialog);
 
   /* manage panel length */
@@ -530,8 +561,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
       gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
                                          OUTPUT_NAME, "Automatic",
                                          OUTPUT_TITLE, _("Automatic"), -1);
-      if (xfce_str_is_empty (output_name) ||
-          g_strcmp0 (output_name, "Automatic") == 0)
+      if (xfce_str_is_empty (output_name) || g_strcmp0 (output_name, "Automatic") == 0)
         {
           gtk_combo_box_set_active_iter (GTK_COMBO_BOX (object), &iter);
           output_selected = TRUE;
@@ -551,8 +581,8 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
         {
           for (i = 0; i < n_monitors; i++)
             {
-              monitor = gdk_display_get_monitor(display, i);
-              name = g_strdup(gdk_monitor_get_model (monitor));
+              monitor = gdk_display_get_monitor (display, i);
+              name = g_strdup (gdk_monitor_get_model (monitor));
               if (xfce_str_is_empty (name))
                 {
                   g_free (name);
@@ -573,7 +603,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
               if (!output_selected
                   && g_strcmp0 (name, output_name) == 0)
                 {
-                  gtk_combo_box_set_active_iter  (GTK_COMBO_BOX (object), &iter);
+                  gtk_combo_box_set_active_iter (GTK_COMBO_BOX (object), &iter);
                   output_selected = TRUE;
                 }
 
@@ -588,7 +618,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
           gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
                                              OUTPUT_NAME, output_name,
                                              OUTPUT_TITLE, output_name, -1);
-          gtk_combo_box_set_active_iter  (GTK_COMBO_BOX (object), &iter);
+          gtk_combo_box_set_active_iter (GTK_COMBO_BOX (object), &iter);
         }
     }
   else
@@ -643,13 +673,13 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
 
 
 static void
-panel_preferences_dialog_output_changed (GtkComboBox            *combobox,
+panel_preferences_dialog_output_changed (GtkComboBox *combobox,
                                          PanelPreferencesDialog *dialog)
 {
-  GtkTreeIter   iter;
+  GtkTreeIter iter;
   GtkTreeModel *model;
-  gchar        *output_name = NULL;
-  GObject      *object;
+  gchar *output_name = NULL;
+  GObject *object;
 
   panel_return_if_fail (GTK_IS_COMBO_BOX (combobox));
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
@@ -664,8 +694,7 @@ panel_preferences_dialog_output_changed (GtkComboBox            *combobox,
       /* monitor spanning does not work when an output is selected */
       object = gtk_builder_get_object (GTK_BUILDER (dialog), "span-monitors");
       panel_return_if_fail (GTK_IS_WIDGET (object));
-      if (output_name == NULL ||
-          g_strcmp0 ("Automatic", output_name) == 0)
+      if (output_name == NULL || g_strcmp0 ("Automatic", output_name) == 0)
         gtk_widget_set_sensitive (GTK_WIDGET (object), TRUE);
       else
         gtk_widget_set_sensitive (GTK_WIDGET (object), FALSE);
@@ -677,7 +706,7 @@ panel_preferences_dialog_output_changed (GtkComboBox            *combobox,
 
 
 static void
-panel_preferences_dialog_autohide_changed (GtkComboBox            *combobox,
+panel_preferences_dialog_autohide_changed (GtkComboBox *combobox,
                                            PanelPreferencesDialog *dialog)
 {
   GObject *object;
@@ -701,9 +730,9 @@ panel_preferences_dialog_autohide_changed (GtkComboBox            *combobox,
 static void
 panel_preferences_dialog_bg_style_changed (PanelPreferencesDialog *dialog)
 {
-  gint      active;
-  GObject  *object;
-  gboolean  composited;
+  gint active;
+  GObject *object;
+  gboolean composited;
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
   panel_return_if_fail (PANEL_WINDOW (dialog->active));
@@ -737,7 +766,7 @@ panel_preferences_dialog_bg_style_changed (PanelPreferencesDialog *dialog)
 
 
 static void
-panel_preferences_dialog_bg_image_file_set (GtkFileChooserButton   *button,
+panel_preferences_dialog_bg_image_file_set (GtkFileChooserButton *button,
                                             PanelPreferencesDialog *dialog)
 {
   gchar *uri;
@@ -746,15 +775,13 @@ panel_preferences_dialog_bg_image_file_set (GtkFileChooserButton   *button,
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
   panel_return_if_fail (PANEL_IS_WINDOW (dialog->active));
 
-  g_signal_handler_block (G_OBJECT (dialog->active),
-      dialog->bg_image_notify_handler_id);
+  g_signal_handler_block (G_OBJECT (dialog->active), dialog->bg_image_notify_handler_id);
 
   uri = gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (button));
   g_object_set (G_OBJECT (dialog->active), "background-image", uri, NULL);
   g_free (uri);
 
-  g_signal_handler_unblock (G_OBJECT (dialog->active),
-      dialog->bg_image_notify_handler_id);
+  g_signal_handler_unblock (G_OBJECT (dialog->active), dialog->bg_image_notify_handler_id);
 }
 
 
@@ -762,7 +789,7 @@ panel_preferences_dialog_bg_image_file_set (GtkFileChooserButton   *button,
 static void
 panel_preferences_dialog_bg_image_notified (PanelPreferencesDialog *dialog)
 {
-  gchar   *uri;
+  gchar *uri;
   GObject *button;
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
@@ -771,15 +798,15 @@ panel_preferences_dialog_bg_image_notified (PanelPreferencesDialog *dialog)
   button = gtk_builder_get_object (GTK_BUILDER (dialog), "background-image");
   panel_return_if_fail (GTK_IS_FILE_CHOOSER_BUTTON (button));
 
-  g_signal_handlers_block_by_func (G_OBJECT (button),
-      G_CALLBACK (panel_preferences_dialog_bg_image_file_set), dialog);
+  g_signal_handlers_block_by_func (
+    G_OBJECT (button), G_CALLBACK (panel_preferences_dialog_bg_image_file_set), dialog);
 
   g_object_get (G_OBJECT (dialog->active), "background-image", &uri, NULL);
   gtk_file_chooser_set_uri (GTK_FILE_CHOOSER (button), uri != NULL ? uri : "");
   g_free (uri);
 
-  g_signal_handlers_unblock_by_func (G_OBJECT (button),
-      G_CALLBACK (panel_preferences_dialog_bg_image_file_set), dialog);
+  g_signal_handlers_unblock_by_func (
+    G_OBJECT (button), G_CALLBACK (panel_preferences_dialog_bg_image_file_set), dialog);
 }
 
 
@@ -788,8 +815,8 @@ static void
 panel_preferences_dialog_length_max_notified (PanelPreferencesDialog *dialog)
 {
   GObject *adjust;
-  gdouble  length;
-  guint    length_max;
+  gdouble length;
+  guint length_max;
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
   panel_return_if_fail (PANEL_IS_WINDOW (dialog->active));
@@ -806,13 +833,13 @@ panel_preferences_dialog_length_max_notified (PanelPreferencesDialog *dialog)
 
 
 static gboolean
-panel_preferences_dialog_length_transform_to (GBinding     *binding,
+panel_preferences_dialog_length_transform_to (GBinding *binding,
                                               const GValue *from_value,
-                                              GValue       *to_value,
-                                              gpointer      user_data)
+                                              GValue *to_value,
+                                              gpointer user_data)
 {
   GObject *adjust;
-  gdouble  length, upper;
+  gdouble length, upper;
 
   panel_return_val_if_fail (PANEL_IS_PREFERENCES_DIALOG (user_data), FALSE);
 
@@ -829,13 +856,13 @@ panel_preferences_dialog_length_transform_to (GBinding     *binding,
 
 
 static gboolean
-panel_preferences_dialog_length_transform_from (GBinding     *binding,
+panel_preferences_dialog_length_transform_from (GBinding *binding,
                                                 const GValue *from_value,
-                                                GValue       *to_value,
-                                                gpointer      user_data)
+                                                GValue *to_value,
+                                                gpointer user_data)
 {
   GObject *adjust;
-  gdouble  length, upper;
+  gdouble length, upper;
 
   panel_return_val_if_fail (PANEL_IS_PREFERENCES_DIALOG (user_data), FALSE);
 
@@ -854,10 +881,9 @@ panel_preferences_dialog_length_transform_from (GBinding     *binding,
 static void
 panel_preferences_dialog_panel_sensitive (PanelPreferencesDialog *dialog)
 {
-
-  GObject  *object;
-  gboolean  locked = TRUE;
-  GSList   *windows;
+  GObject *object;
+  gboolean locked = TRUE;
+  GSList *windows;
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
@@ -867,13 +893,11 @@ panel_preferences_dialog_panel_sensitive (PanelPreferencesDialog *dialog)
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-remove");
   panel_return_if_fail (GTK_IS_WIDGET (object));
   windows = panel_application_get_windows (dialog->application);
-  gtk_widget_set_sensitive (GTK_WIDGET (object),
-      !locked && g_slist_length (windows) > 1);
+  gtk_widget_set_sensitive (GTK_WIDGET (object), !locked && g_slist_length (windows) > 1);
 
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-add");
   panel_return_if_fail (GTK_IS_WIDGET (object));
-  gtk_widget_set_sensitive (GTK_WIDGET (object),
-      !panel_application_get_locked (dialog->application));
+  gtk_widget_set_sensitive (GTK_WIDGET (object), !panel_application_get_locked (dialog->application));
 
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "notebook");
   panel_return_if_fail (GTK_IS_WIDGET (object));
@@ -887,13 +911,13 @@ panel_preferences_dialog_panel_sensitive (PanelPreferencesDialog *dialog)
 
 
 static void
-panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobox,
+panel_preferences_dialog_panel_combobox_changed (GtkComboBox *combobox,
                                                  PanelPreferencesDialog *dialog)
 {
-  gint          panel_id;
-  GtkWidget    *itembar;
+  gint panel_id;
+  GtkWidget *itembar;
   GtkTreeModel *model;
-  GtkTreeIter   iter;
+  GtkTreeIter iter;
 
   panel_return_if_fail (GTK_IS_COMBO_BOX (combobox));
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
@@ -926,10 +950,9 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobo
   if (G_LIKELY (dialog->active != NULL))
     {
       itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
-      dialog->items_changed_handler_id =
-          g_signal_connect (G_OBJECT (itembar), "changed",
-                            G_CALLBACK (panel_preferences_dialog_item_store_rebuild),
-                            dialog);
+      dialog->items_changed_handler_id
+        = g_signal_connect (G_OBJECT (itembar), "changed",
+                            G_CALLBACK (panel_preferences_dialog_item_store_rebuild), dialog);
 
       /* rebind the dialog bindings */
       panel_preferences_dialog_bindings_update (dialog);
@@ -945,15 +968,15 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobo
 
 static gboolean
 panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog,
-                                                 gint                    panel_id)
+                                                 gint panel_id)
 {
-  GObject     *store, *combo;
-  gint         i;
-  GSList      *windows, *li;
-  gchar       *name;
-  gint         id;
-  GtkTreeIter  iter;
-  gboolean     selected = FALSE;
+  GObject *store, *combo;
+  gint i;
+  GSList *windows, *li;
+  gchar *name;
+  gint id;
+  GtkTreeIter iter;
+  gboolean selected = FALSE;
 
   /* get the combo box and model */
   store = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-store");
@@ -962,8 +985,7 @@ panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog,
   panel_return_val_if_fail (GTK_IS_COMBO_BOX (combo), FALSE);
 
   /* block signal */
-  g_signal_handlers_block_by_func (combo,
-      panel_preferences_dialog_panel_combobox_changed, dialog);
+  g_signal_handlers_block_by_func (combo, panel_preferences_dialog_panel_combobox_changed, dialog);
 
   /* empty the combo box */
   gtk_list_store_clear (GTK_LIST_STORE (store));
@@ -988,8 +1010,7 @@ panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog,
     }
 
   /* unblock signal */
-  g_signal_handlers_unblock_by_func (combo,
-      panel_preferences_dialog_panel_combobox_changed, dialog);
+  g_signal_handlers_unblock_by_func (combo, panel_preferences_dialog_panel_combobox_changed, dialog);
 
   if (selected)
     panel_preferences_dialog_panel_combobox_changed (GTK_COMBO_BOX (combo), dialog);
@@ -1002,15 +1023,15 @@ panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog,
 
 
 static void
-panel_preferences_dialog_panel_add (GtkWidget              *widget,
+panel_preferences_dialog_panel_add (GtkWidget *widget,
                                     PanelPreferencesDialog *dialog)
 {
   PanelWindow *window;
-  gint         panel_id;
+  gint panel_id;
 
   /* create new window */
   window = panel_application_new_window (dialog->application,
-      gtk_widget_get_screen (widget), -1, TRUE);
+                                         gtk_widget_get_screen (widget), -1, TRUE);
 
   /* show window */
   gtk_widget_show (GTK_WIDGET (window));
@@ -1023,22 +1044,23 @@ panel_preferences_dialog_panel_add (GtkWidget              *widget,
 
 
 static void
-panel_preferences_dialog_panel_remove (GtkWidget              *widget,
+panel_preferences_dialog_panel_remove (GtkWidget *widget,
                                        PanelPreferencesDialog *dialog)
 {
-  gint       id;
+  gint id;
   GtkWidget *toplevel;
-  GSList    *windows, *window;
+  GSList *windows, *window;
+  const gchar *text = _("The panel and plugin configurations will be permanently removed");
+  const gchar *label = _("_Remove");
 
   /* leave if the window is locked */
   if (panel_window_get_locked (dialog->active))
     return;
 
   toplevel = gtk_widget_get_toplevel (widget);
-  if (xfce_dialog_confirm (GTK_WINDOW (toplevel), "list-remove", _("_Remove"),
-          _("The panel and plugin configurations will be permanently removed"),
-          _("Are you sure you want to remove panel %d?"),
-          panel_window_get_id (dialog->active)))
+  if (xfce_dialog_confirm (GTK_WINDOW (toplevel), "list-remove", label, text,
+                           _("Are you sure you want to remove panel %d?"),
+                           panel_window_get_id (dialog->active)))
     {
       /* release the bindings */
       panel_preferences_dialog_bindings_unbind (dialog);
@@ -1064,11 +1086,11 @@ panel_preferences_dialog_panel_remove (GtkWidget              *widget,
 
 
 static gboolean
-panel_preferences_dialog_icon_size_state_set (GtkSwitch              *widget,
-                                              gboolean                state,
+panel_preferences_dialog_icon_size_state_set (GtkSwitch *widget,
+                                              gboolean state,
                                               PanelPreferencesDialog *dialog)
 {
-  GObject   *spinbutton, *revealer;
+  GObject *spinbutton, *revealer;
 
   panel_return_val_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog), FALSE);
   spinbutton = gtk_builder_get_object (GTK_BUILDER (dialog), "icon-size-spinbutton");
@@ -1097,10 +1119,10 @@ panel_preferences_dialog_icon_size_state_set (GtkSwitch              *widget,
 
 
 static void
-panel_preferences_dialog_icon_size_changed (GtkSpinButton          *button,
+panel_preferences_dialog_icon_size_changed (GtkSpinButton *button,
                                             PanelPreferencesDialog *dialog)
 {
-  GObject   *object;
+  GObject *object;
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "icon-size-switch");
@@ -1110,7 +1132,7 @@ panel_preferences_dialog_icon_size_changed (GtkSpinButton          *button,
      of the spinbutton has to be 0. however, we want to set 16px as the reasonable lower limit for icons. */
   if (gtk_spin_button_get_value_as_int (button) < 16
       && gtk_switch_get_state (GTK_SWITCH (object)))
-      gtk_spin_button_set_value (button, 16.0);
+    gtk_spin_button_set_value (button, 16.0);
 }
 
 
@@ -1118,9 +1140,9 @@ panel_preferences_dialog_icon_size_changed (GtkSpinButton          *button,
 static void
 panel_preferences_dialog_compositing_clicked (GtkButton *button, gpointer user_data)
 {
-  gchar    *command;
+  gchar *command;
   GAppInfo *app_info = NULL;
-  GError   *error = NULL;
+  GError *error = NULL;
 
   command = g_find_program_in_path ("xfwm4-tweaks-settings");
   if (command != NULL)
@@ -1165,13 +1187,13 @@ panel_preferences_dialog_panel_switch (GtkWidget *widget, PanelPreferencesDialog
 
 static XfcePanelPluginProvider *
 panel_preferences_dialog_item_get_selected (PanelPreferencesDialog *dialog,
-                                            GtkTreeIter            *return_iter)
+                                            GtkTreeIter *return_iter)
 {
-  GObject                 *treeview;
+  GObject *treeview;
   XfcePanelPluginProvider *provider = NULL;
-  GtkTreeModel            *model;
-  GtkTreeIter              iter;
-  GtkTreeSelection        *selection;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  GtkTreeSelection *selection;
 
   panel_return_val_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog), NULL);
 
@@ -1197,17 +1219,17 @@ panel_preferences_dialog_item_get_selected (PanelPreferencesDialog *dialog,
 
 
 static void
-panel_preferences_dialog_item_store_rebuild (GtkWidget              *itembar,
+panel_preferences_dialog_item_store_rebuild (GtkWidget *itembar,
                                              PanelPreferencesDialog *dialog)
 {
-  GList                   *items, *li;
-  guint                    i;
-  PanelModule             *module;
-  gchar                   *tooltip, *display_name;
+  GList *items, *li;
+  guint i;
+  PanelModule *module;
+  gchar *tooltip, *display_name;
   XfcePanelPluginProvider *selected_provider;
-  GtkTreeIter              iter;
-  GtkTreePath             *path;
-  GObject                 *treeview;
+  GtkTreeIter iter;
+  GtkTreePath *path;
+  GObject *treeview;
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
   panel_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
@@ -1219,7 +1241,7 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget              *itembar,
   gtk_list_store_clear (dialog->store);
 
   g_signal_handlers_block_by_func (G_OBJECT (dialog->store),
-      G_CALLBACK (panel_preferences_dialog_item_row_changed), dialog);
+                                   G_CALLBACK (panel_preferences_dialog_item_row_changed), dialog);
 
   /* add items to the store */
   items = gtk_container_get_children (GTK_CONTAINER (itembar));
@@ -1280,23 +1302,23 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget              *itembar,
   g_list_free (items);
 
   g_signal_handlers_unblock_by_func (G_OBJECT (dialog->store),
-      G_CALLBACK (panel_preferences_dialog_item_row_changed), dialog);
+                                     G_CALLBACK (panel_preferences_dialog_item_row_changed), dialog);
 }
 
 
 
 static void
-panel_preferences_dialog_item_move (GtkWidget              *button,
+panel_preferences_dialog_item_move (GtkWidget *button,
                                     PanelPreferencesDialog *dialog)
 {
-  GObject                 *treeview, *object;
-  GtkTreeSelection        *selection;
-  GtkTreeIter              iter_a, iter_b;
+  GObject *treeview, *object;
+  GtkTreeSelection *selection;
+  GtkTreeIter iter_a, iter_b;
   XfcePanelPluginProvider *provider;
-  GtkWidget               *itembar;
-  gint                     position;
-  gint                     direction;
-  GtkTreePath             *path;
+  GtkWidget *itembar;
+  gint position;
+  gint direction;
+  GtkTreePath *path;
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
@@ -1363,7 +1385,6 @@ panel_preferences_dialog_item_move (GtkWidget              *button,
           /* make the new selected position visible if moved out of area */
           gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (treeview), path, NULL, FALSE, 0, 0);
           gtk_tree_view_set_cursor (GTK_TREE_VIEW (treeview), path, NULL, FALSE);
-
         }
       gtk_tree_path_free (path);
     }
@@ -1372,12 +1393,12 @@ panel_preferences_dialog_item_move (GtkWidget              *button,
 
 
 static void
-panel_preferences_dialog_item_remove (GtkWidget              *button,
+panel_preferences_dialog_item_remove (GtkWidget *button,
                                       PanelPreferencesDialog *dialog)
 {
   XfcePanelPluginProvider *provider;
-  GtkWidget               *widget, *toplevel;
-  PanelModule             *module;
+  GtkWidget *widget, *toplevel;
+  PanelModule *module;
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
@@ -1397,8 +1418,8 @@ panel_preferences_dialog_item_remove (GtkWidget              *button,
       gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (widget),
                                                 _("If you remove the item from the panel, "
                                                   "it is permanently lost."));
-      gtk_dialog_add_buttons (GTK_DIALOG (widget), _("_Cancel"), GTK_RESPONSE_NO,
-                              _("_Remove"), GTK_RESPONSE_YES, NULL);
+      gtk_dialog_add_buttons (
+        GTK_DIALOG (widget), _("_Cancel"), GTK_RESPONSE_NO, _("_Remove"), GTK_RESPONSE_YES, NULL);
       gtk_dialog_set_default_response (GTK_DIALOG (widget), GTK_RESPONSE_NO);
 
       /* run the dialog */
@@ -1415,7 +1436,7 @@ panel_preferences_dialog_item_remove (GtkWidget              *button,
 
 
 static void
-panel_preferences_dialog_item_add (GtkWidget              *button,
+panel_preferences_dialog_item_add (GtkWidget *button,
                                    PanelPreferencesDialog *dialog)
 {
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
@@ -1426,7 +1447,7 @@ panel_preferences_dialog_item_add (GtkWidget              *button,
 
 
 static void
-panel_preferences_dialog_item_properties (GtkWidget              *button,
+panel_preferences_dialog_item_properties (GtkWidget *button,
                                           PanelPreferencesDialog *dialog)
 {
   XfcePanelPluginProvider *provider;
@@ -1441,7 +1462,7 @@ panel_preferences_dialog_item_properties (GtkWidget              *button,
 
 
 static void
-panel_preferences_dialog_item_about (GtkWidget              *button,
+panel_preferences_dialog_item_about (GtkWidget *button,
                                      PanelPreferencesDialog *dialog)
 {
   XfcePanelPluginProvider *provider;
@@ -1456,8 +1477,8 @@ panel_preferences_dialog_item_about (GtkWidget              *button,
 
 
 static gboolean
-panel_preferences_dialog_treeview_clicked (GtkTreeView            *treeview,
-                                           GdkEventButton         *event,
+panel_preferences_dialog_treeview_clicked (GtkTreeView *treeview,
+                                           GdkEventButton *event,
                                            PanelPreferencesDialog *dialog)
 {
   gint x, y;
@@ -1484,15 +1505,15 @@ panel_preferences_dialog_treeview_clicked (GtkTreeView            *treeview,
 
 
 static void
-panel_preferences_dialog_item_row_changed (GtkTreeModel           *model,
-                                           GtkTreePath            *path,
-                                           GtkTreeIter            *iter,
+panel_preferences_dialog_item_row_changed (GtkTreeModel *model,
+                                           GtkTreePath *path,
+                                           GtkTreeIter *iter,
                                            PanelPreferencesDialog *dialog)
 {
   XfcePanelPluginProvider *provider = NULL;
-  gint                     position;
-  GtkWidget               *itembar;
-  gint                     store_position;
+  gint position;
+  GtkWidget *itembar;
+  gint store_position;
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
   panel_return_if_fail (GTK_TREE_MODEL (dialog->store) == model);
@@ -1528,19 +1549,17 @@ panel_preferences_dialog_item_row_changed (GtkTreeModel           *model,
 
 
 static void
-panel_preferences_dialog_item_selection_changed (GtkTreeSelection       *selection,
+panel_preferences_dialog_item_selection_changed (GtkTreeSelection *selection,
                                                  PanelPreferencesDialog *dialog)
 {
   XfcePanelPluginProvider *provider;
-  GtkWidget               *itembar;
-  gint                     position;
-  gint                     items;
-  gboolean                 active;
-  GObject                 *object;
-  guint                    i;
-  const gchar             *button_names[] = { "item-remove", "item-up",
-                                              "item-down", "item-about",
-                                              "item-properties" };
+  GtkWidget *itembar;
+  gint position;
+  gint items;
+  gboolean active;
+  GObject *object;
+  guint i;
+  const gchar *button_names[] = { "item-remove", "item-up", "item-down", "item-about", "item-properties" };
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
@@ -1598,7 +1617,7 @@ static void
 panel_preferences_dialog_plug_deleted (GtkWidget *plug)
 {
   g_signal_handlers_disconnect_by_func (G_OBJECT (plug),
-      G_CALLBACK (panel_preferences_dialog_plug_deleted), NULL);
+                                        G_CALLBACK (panel_preferences_dialog_plug_deleted), NULL);
 
   g_object_unref (G_OBJECT (dialog_singleton));
 }
@@ -1608,16 +1627,16 @@ panel_preferences_dialog_plug_deleted (GtkWidget *plug)
 
 static void
 panel_preferences_dialog_show_internal (PanelWindow *active,
-                                        Window       socket_window)
+                                        Window socket_window)
 {
-  gint         panel_id = 0;
-  GObject     *window, *widget;
-  GdkScreen   *screen;
-  GSList      *windows;
+  gint panel_id = 0;
+  GObject *window, *widget;
+  GdkScreen *screen;
+  GSList *windows;
 #ifdef ENABLE_X11
-  GtkWidget   *plug;
-  GObject     *plug_child;
-  GtkWidget   *content_area;
+  GtkWidget *plug;
+  GObject *plug_child;
+  GtkWidget *content_area;
 #endif
 
   panel_return_if_fail (active == NULL || PANEL_IS_WINDOW (active));
@@ -1687,7 +1706,7 @@ panel_preferences_dialog_show_internal (PanelWindow *active,
       dialog_singleton->socket_plug = NULL;
 
       g_signal_handlers_disconnect_by_func (G_OBJECT (plug),
-          G_CALLBACK (panel_preferences_dialog_plug_deleted), NULL);
+                                            G_CALLBACK (panel_preferences_dialog_plug_deleted), NULL);
       gtk_widget_destroy (plug);
     }
 #endif
@@ -1713,7 +1732,7 @@ panel_preferences_dialog_show_internal (PanelWindow *active,
       /* create a new plug */
       plug = gtk_plug_new (socket_window);
       g_signal_connect (G_OBJECT (plug), "delete-event",
-          G_CALLBACK (panel_preferences_dialog_plug_deleted), NULL);
+                        G_CALLBACK (panel_preferences_dialog_plug_deleted), NULL);
       dialog_singleton->socket_plug = plug;
       gtk_widget_show (plug);
 
@@ -1736,11 +1755,11 @@ panel_preferences_dialog_show (PanelWindow *active)
 
 
 void
-panel_preferences_dialog_show_from_id (gint         panel_id,
-                                       Window       socket_window)
+panel_preferences_dialog_show_from_id (gint panel_id,
+                                       Window socket_window)
 {
   PanelApplication *application;
-  PanelWindow      *window;
+  PanelWindow *window;
 
   application = panel_application_get ();
   window = panel_application_get_window (application, panel_id);

@@ -30,10 +30,12 @@ G_BEGIN_DECLS
 #define XFCE_CLOCK_TYPE_FUZZY (xfce_clock_fuzzy_get_type ())
 G_DECLARE_FINAL_TYPE (XfceClockFuzzy, xfce_clock_fuzzy, XFCE_CLOCK, FUZZY, GtkLabel)
 
-void       xfce_clock_fuzzy_register_type (XfcePanelTypeModule *type_module);
+void
+xfce_clock_fuzzy_register_type (XfcePanelTypeModule *type_module);
 
-GtkWidget *xfce_clock_fuzzy_new           (ClockTime           *time,
-                                           ClockSleepMonitor   *sleep_monitor) G_GNUC_MALLOC;
+GtkWidget *
+xfce_clock_fuzzy_new (ClockTime *time,
+                      ClockSleepMonitor *sleep_monitor) G_GNUC_MALLOC;
 
 G_END_DECLS
 

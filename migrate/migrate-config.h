@@ -24,9 +24,10 @@
 
 G_BEGIN_DECLS
 
-gboolean migrate_config (XfconfChannel  *channel,
-                         gint            configver,
-                         GError        **error);
+gboolean
+migrate_config (XfconfChannel *channel,
+                gint configver,
+                GError **error);
 
 G_END_DECLS
 

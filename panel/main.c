@@ -38,39 +38,39 @@
 
 static PanelApplication *application = NULL;
 
-static gint       opt_preferences = -1;
-static gint       opt_add_items = -1;
-static gboolean   opt_save = FALSE;
-static gchar     *opt_add = NULL;
-static gboolean   opt_restart = FALSE;
-static gboolean   opt_quit = FALSE;
-static gboolean   opt_version = FALSE;
-static gboolean   opt_disable_wm_check = FALSE;
-static gchar     *opt_plugin_event = NULL;
-static gchar    **opt_arguments = NULL;
-static guint      opt_socket_id = 0;
+static gint opt_preferences = -1;
+static gint opt_add_items = -1;
+static gboolean opt_save = FALSE;
+static gchar *opt_add = NULL;
+static gboolean opt_restart = FALSE;
+static gboolean opt_quit = FALSE;
+static gboolean opt_version = FALSE;
+static gboolean opt_disable_wm_check = FALSE;
+static gchar *opt_plugin_event = NULL;
+static gchar **opt_arguments = NULL;
+static guint opt_socket_id = 0;
 
 
 
-static gboolean panel_callback_handler (const gchar  *name,
-                                        const gchar  *value,
-                                        gpointer      user_data,
-                                        GError      **error);
+static gboolean
+panel_callback_handler (const gchar *name,
+                        const gchar *value,
+                        gpointer user_data,
+                        GError **error);
 
 
 
 /* command line options */
 #define PANEL_CALLBACK_OPTION G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, panel_callback_handler
-static GOptionEntry option_entries[] =
-{
-  { "preferences", 'p', PANEL_CALLBACK_OPTION, N_("Show the 'Panel Preferences' dialog"), N_("PANEL-NUMBER") },
-  { "add-items", 'a', PANEL_CALLBACK_OPTION, N_("Show the 'Add New Items' dialog"), N_("PANEL-NUMBER") },
-  { "save", 's', 0, G_OPTION_ARG_NONE, &opt_save, N_("Save the panel configuration"), NULL },
-  { "add", '\0', 0, G_OPTION_ARG_STRING, &opt_add, N_("Add a new plugin to the panel"), N_("PLUGIN-NAME") },
-  { "restart", 'r', 0, G_OPTION_ARG_NONE, &opt_restart, N_("Restart the running panel instance"), NULL },
-  { "quit", 'q', 0, G_OPTION_ARG_NONE, &opt_quit, N_("Quit the running panel instance"), NULL },
-  { "disable-wm-check", 'd', 0, G_OPTION_ARG_NONE, &opt_disable_wm_check, N_("Do not wait for a window manager on startup"), NULL },
-  { "version", 'V', 0, G_OPTION_ARG_NONE, &opt_version, N_("Print version information and exit"), NULL },
+static GOptionEntry option_entries[] = {
+  { "preferences", 'p', PANEL_CALLBACK_OPTION, N_ ("Show the 'Panel Preferences' dialog"), N_ ("PANEL-NUMBER") },
+  { "add-items", 'a', PANEL_CALLBACK_OPTION, N_ ("Show the 'Add New Items' dialog"), N_ ("PANEL-NUMBER") },
+  { "save", 's', 0, G_OPTION_ARG_NONE, &opt_save, N_ ("Save the panel configuration"), NULL },
+  { "add", '\0', 0, G_OPTION_ARG_STRING, &opt_add, N_ ("Add a new plugin to the panel"), N_ ("PLUGIN-NAME") },
+  { "restart", 'r', 0, G_OPTION_ARG_NONE, &opt_restart, N_ ("Restart the running panel instance"), NULL },
+  { "quit", 'q', 0, G_OPTION_ARG_NONE, &opt_quit, N_ ("Quit the running panel instance"), NULL },
+  { "disable-wm-check", 'd', 0, G_OPTION_ARG_NONE, &opt_disable_wm_check, N_ ("Do not wait for a window manager on startup"), NULL },
+  { "version", 'V', 0, G_OPTION_ARG_NONE, &opt_version, N_ ("Print version information and exit"), NULL },
   { "plugin-event", '\0', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_plugin_event, NULL, NULL },
   { "socket-id", '\0', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_INT, &opt_socket_id, NULL, NULL },
   { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &opt_arguments, NULL, NULL },
@@ -80,10 +80,10 @@ static GOptionEntry option_entries[] =
 
 
 static gboolean
-panel_callback_handler (const gchar  *name,
-                        const gchar  *value,
-                        gpointer      user_data,
-                        GError      **error)
+panel_callback_handler (const gchar *name,
+                        const gchar *value,
+                        gpointer user_data,
+                        GError **error)
 {
   panel_return_val_if_fail (name != NULL, FALSE);
 
@@ -148,7 +148,7 @@ panel_sm_client_quit (XfceSMClient *sm_client)
 static void
 panel_debug_notify_proxy (void)
 {
-  gchar       *path;
+  gchar *path;
   const gchar *proxy_cmd;
 
   if (G_UNLIKELY (panel_debug_has_domain (PANEL_DEBUG_GDB)))
@@ -188,8 +188,8 @@ panel_debug_notify_proxy (void)
 
 static void
 panel_dbus_name_lost (GDBusConnection *connection,
-                      const gchar     *name,
-                      gpointer         user_data)
+                      const gchar *name,
+                      gpointer user_data)
 {
   if (connection == NULL)
     g_critical ("Name %s lost on the message dbus, exiting.", name);
@@ -201,11 +201,11 @@ panel_dbus_name_lost (GDBusConnection *connection,
 
 static void
 panel_dbus_name_acquired (GDBusConnection *connection,
-                          const gchar     *name,
-                          gpointer         user_data)
+                          const gchar *name,
+                          gpointer user_data)
 {
   application = panel_application_get ();
-  if (! panel_application_load (application, opt_disable_wm_check))
+  if (!panel_application_load (application, opt_disable_wm_check))
     gtk_main_quit ();
 }
 
@@ -214,16 +214,16 @@ panel_dbus_name_acquired (GDBusConnection *connection,
 gint
 main (gint argc, gchar **argv)
 {
-  GOptionContext   *context;
-  GError           *error = NULL;
+  GOptionContext *context;
+  GError *error = NULL;
   PanelDBusService *dbus_service;
-  gboolean          succeed = FALSE;
-  gboolean          remote_succeed;
-  guint             i;
-  const gint        signums[] = { SIGINT, SIGQUIT, SIGTERM, SIGABRT, SIGUSR1 };
-  const gchar      *error_msg;
+  gboolean succeed = FALSE;
+  gboolean remote_succeed;
+  guint i;
+  const gint signums[] = { SIGINT, SIGQUIT, SIGTERM, SIGABRT, SIGUSR1 };
+  const gchar *error_msg;
 #ifdef ENABLE_X11
-  XfceSMClient     *sm_client = NULL;
+  XfceSMClient *sm_client = NULL;
 #endif
 
   panel_debug (PANEL_DEBUG_MAIN,
@@ -331,7 +331,7 @@ main (gint argc, gchar **argv)
       goto dbus_return;
     }
 
-  launch_panel:
+launch_panel:
 
   if (!xfconf_init (&error))
     {
@@ -438,13 +438,13 @@ dbus_return:
           /* normally start the panel */
           if (opt_preferences >= 0 || opt_restart)
             {
+              const gchar *primary = _("No running instance of %s was found");
+              const gchar *secondary = _("Do you want to start the panel? If you do, make sure "
+                                         "you save the session on logout, so the panel is "
+                                         "automatically started the next time you login.");
               g_clear_error (&error);
 
-              if (xfce_dialog_confirm (NULL, "system-run", _("Execute"),
-                                       _("Do you want to start the panel? If you do, make sure "
-                                         "you save the session on logout, so the panel is "
-                                         "automatically started the next time you login."),
-                                       _("No running instance of %s was found"), G_LOG_DOMAIN))
+              if (xfce_dialog_confirm (NULL, "system-run", _("Execute"), secondary, primary, G_LOG_DOMAIN))
                 {
                   panel_debug (PANEL_DEBUG_MAIN, "user confirmed to start the panel");
                   goto launch_panel;

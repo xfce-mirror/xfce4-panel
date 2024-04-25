@@ -30,10 +30,12 @@ G_BEGIN_DECLS
 #define XFCE_CLOCK_TYPE_ANALOG (xfce_clock_analog_get_type ())
 G_DECLARE_FINAL_TYPE (XfceClockAnalog, xfce_clock_analog, XFCE_CLOCK, ANALOG, GtkImage)
 
-void       xfce_clock_analog_register_type (XfcePanelTypeModule *type_module);
+void
+xfce_clock_analog_register_type (XfcePanelTypeModule *type_module);
 
-GtkWidget *xfce_clock_analog_new           (ClockTime           *time,
-                                            ClockSleepMonitor   *sleep_monitor) G_GNUC_MALLOC;
+GtkWidget *
+xfce_clock_analog_new (ClockTime *time,
+                       ClockSleepMonitor *sleep_monitor) G_GNUC_MALLOC;
 
 G_END_DECLS
 

@@ -26,8 +26,9 @@ G_BEGIN_DECLS
 #define WRAPPER_TYPE_PLUG_X11 (wrapper_plug_x11_get_type ())
 G_DECLARE_FINAL_TYPE (WrapperPlugX11, wrapper_plug_x11, WRAPPER, PLUG_X11, GtkPlug)
 
-GtkWidget *wrapper_plug_x11_new (Window socket_id,
-                                 GDBusProxy *proxy);
+GtkWidget *
+wrapper_plug_x11_new (Window socket_id,
+                      GDBusProxy *proxy);
 
 G_END_DECLS
 

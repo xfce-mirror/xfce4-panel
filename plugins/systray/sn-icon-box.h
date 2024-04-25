@@ -29,8 +29,9 @@ G_BEGIN_DECLS
 #define XFCE_TYPE_SN_ICON_BOX (sn_icon_box_get_type ())
 G_DECLARE_FINAL_TYPE (SnIconBox, sn_icon_box, XFCE, SN_ICON_BOX, GtkContainer)
 
-GtkWidget             *sn_icon_box_new                         (SnItem                  *item,
-                                                                SnConfig                *config);
+GtkWidget *
+sn_icon_box_new (SnItem *item,
+                 SnConfig *config);
 
 G_END_DECLS
 

@@ -23,7 +23,9 @@
 
 G_BEGIN_DECLS
 
-gboolean migrate_default (const gchar *filename, GError **error);
+gboolean
+migrate_default (const gchar *filename,
+                 GError **error);
 
 G_END_DECLS
 
