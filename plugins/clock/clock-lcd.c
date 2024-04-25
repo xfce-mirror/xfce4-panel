@@ -29,34 +29,41 @@
 
 #define RELATIVE_SPACE (0.10)
 #define RELATIVE_DIGIT (5 * RELATIVE_SPACE)
-#define RELATIVE_DOTS  (3 * RELATIVE_SPACE)
+#define RELATIVE_DOTS (3 * RELATIVE_SPACE)
 
 
 
-static void      xfce_clock_lcd_set_property (GObject           *object,
-                                              guint              prop_id,
-                                              const GValue      *value,
-                                              GParamSpec        *pspec);
-static void      xfce_clock_lcd_get_property (GObject           *object,
-                                              guint              prop_id,
-                                              GValue            *value,
-                                              GParamSpec        *pspec);
-static void      xfce_clock_lcd_finalize     (GObject           *object);
-static gboolean  xfce_clock_lcd_draw         (GtkWidget         *widget,
-                                              cairo_t           *cr);
-static gdouble   xfce_clock_lcd_get_ratio    (XfceClockLcd      *lcd);
-static gdouble   xfce_clock_lcd_draw_dots    (cairo_t           *cr,
-                                              gdouble            size,
-                                              gdouble            offset_x,
-                                              gdouble            offset_y);
-static gdouble   xfce_clock_lcd_draw_digit   (cairo_t           *cr,
-                                              guint              number,
-                                              gdouble            size,
-                                              gdouble            offset_x,
-                                              gdouble            offset_y);
-static gboolean  xfce_clock_lcd_update       (XfceClockLcd      *lcd,
-                                              ClockTime         *time);
-
+static void
+xfce_clock_lcd_set_property (GObject *object,
+                             guint prop_id,
+                             const GValue *value,
+                             GParamSpec *pspec);
+static void
+xfce_clock_lcd_get_property (GObject *object,
+                             guint prop_id,
+                             GValue *value,
+                             GParamSpec *pspec);
+static void
+xfce_clock_lcd_finalize (GObject *object);
+static gboolean
+xfce_clock_lcd_draw (GtkWidget *widget,
+                     cairo_t *cr);
+static gdouble
+xfce_clock_lcd_get_ratio (XfceClockLcd *lcd);
+static gdouble
+xfce_clock_lcd_draw_dots (cairo_t *cr,
+                          gdouble size,
+                          gdouble offset_x,
+                          gdouble offset_y);
+static gdouble
+xfce_clock_lcd_draw_digit (cairo_t *cr,
+                           guint number,
+                           gdouble size,
+                           gdouble offset_x,
+                           gdouble offset_y);
+static gboolean
+xfce_clock_lcd_update (XfceClockLcd *lcd,
+                       ClockTime *time);
 
 
 
@@ -75,22 +82,21 @@ struct _XfceClockLcd
 {
   GtkImage __parent__;
 
-  ClockTimeTimeout   *timeout;
+  ClockTimeTimeout *timeout;
 
-  guint               show_seconds : 1;
-  guint               show_military : 1; /* 24-hour clock */
-  guint               show_meridiem : 1; /* am/pm */
-  guint               flash_separators : 1;
+  guint show_seconds : 1;
+  guint show_military : 1; /* 24-hour clock */
+  guint show_meridiem : 1; /* am/pm */
+  guint flash_separators : 1;
 
-  ClockTime          *time;
+  ClockTime *time;
 };
 
 typedef struct
 {
   gdouble x;
   gdouble y;
-}
-LcdPoint;
+} LcdPoint;
 
 
 
@@ -101,7 +107,7 @@ G_DEFINE_FINAL_TYPE (XfceClockLcd, xfce_clock_lcd, GTK_TYPE_IMAGE)
 static void
 xfce_clock_lcd_class_init (XfceClockLcdClass *klass)
 {
-  GObjectClass   *gobject_class;
+  GObjectClass *gobject_class;
   GtkWidgetClass *gtkwidget_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
@@ -117,7 +123,7 @@ xfce_clock_lcd_class_init (XfceClockLcdClass *klass)
                                    g_param_spec_double ("size-ratio", NULL, NULL,
                                                         -1, G_MAXDOUBLE, -1.0,
                                                         G_PARAM_READABLE
-                                                        | G_PARAM_STATIC_STRINGS));
+                                                          | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_ORIENTATION,
@@ -125,35 +131,35 @@ xfce_clock_lcd_class_init (XfceClockLcdClass *klass)
                                                       GTK_TYPE_ORIENTATION,
                                                       GTK_ORIENTATION_HORIZONTAL,
                                                       G_PARAM_WRITABLE
-                                                      | G_PARAM_STATIC_STRINGS));
+                                                        | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_SHOW_SECONDS,
                                    g_param_spec_boolean ("show-seconds", NULL, NULL,
                                                          FALSE,
                                                          G_PARAM_READWRITE
-                                                         | G_PARAM_STATIC_STRINGS));
+                                                           | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_SHOW_MILITARY,
                                    g_param_spec_boolean ("show-military", NULL, NULL,
                                                          FALSE,
                                                          G_PARAM_READWRITE
-                                                         | G_PARAM_STATIC_STRINGS));
+                                                           | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_SHOW_MERIDIEM,
                                    g_param_spec_boolean ("show-meridiem", NULL, NULL,
                                                          TRUE,
                                                          G_PARAM_READWRITE
-                                                         | G_PARAM_STATIC_STRINGS));
+                                                           | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_FLASH_SEPARATORS,
                                    g_param_spec_boolean ("flash-separators", NULL, NULL,
                                                          FALSE,
                                                          G_PARAM_READWRITE
-                                                         | G_PARAM_STATIC_STRINGS));
+                                                           | G_PARAM_STATIC_STRINGS));
 }
 
 
@@ -170,13 +176,13 @@ xfce_clock_lcd_init (XfceClockLcd *lcd)
 
 
 static void
-xfce_clock_lcd_set_property (GObject      *object,
-                             guint         prop_id,
+xfce_clock_lcd_set_property (GObject *object,
+                             guint prop_id,
                              const GValue *value,
-                             GParamSpec   *pspec)
+                             GParamSpec *pspec)
 {
   XfceClockLcd *lcd = XFCE_CLOCK_LCD (object);
-  gboolean      show_seconds;
+  gboolean show_seconds;
 
   switch (prop_id)
     {
@@ -209,20 +215,20 @@ xfce_clock_lcd_set_property (GObject      *object,
   /* reschedule the timeout and resize */
   show_seconds = lcd->show_seconds || lcd->flash_separators;
   clock_time_timeout_set_interval (lcd->timeout,
-      show_seconds ? CLOCK_INTERVAL_SECOND : CLOCK_INTERVAL_MINUTE);
+                                   show_seconds ? CLOCK_INTERVAL_SECOND : CLOCK_INTERVAL_MINUTE);
   gtk_widget_queue_resize (GTK_WIDGET (lcd));
 }
 
 
 
 static void
-xfce_clock_lcd_get_property (GObject    *object,
-                             guint       prop_id,
-                             GValue     *value,
+xfce_clock_lcd_get_property (GObject *object,
+                             guint prop_id,
+                             GValue *value,
                              GParamSpec *pspec)
 {
   XfceClockLcd *lcd = XFCE_CLOCK_LCD (object);
-  gdouble       ratio;
+  gdouble ratio;
 
   switch (prop_id)
     {
@@ -268,17 +274,17 @@ xfce_clock_lcd_finalize (GObject *object)
 
 static gboolean
 xfce_clock_lcd_draw (GtkWidget *widget,
-                     cairo_t   *cr)
+                     cairo_t *cr)
 {
   XfceClockLcd *lcd = XFCE_CLOCK_LCD (widget);
-  gdouble       offset_x, offset_y;
-  gint          ticks, i;
-  gdouble       size;
-  gdouble       ratio;
-  GDateTime    *time;
+  gdouble offset_x, offset_y;
+  gint ticks, i;
+  gdouble size;
+  gdouble ratio;
+  GDateTime *time;
   GtkAllocation allocation;
   GtkStyleContext *ctx;
-  GdkRGBA          fg_rgba;
+  GdkRGBA fg_rgba;
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_LCD (lcd), FALSE);
   panel_return_val_if_fail (cr != NULL, FALSE);
@@ -391,8 +397,8 @@ xfce_clock_lcd_draw (GtkWidget *widget,
 static gdouble
 xfce_clock_lcd_get_ratio (XfceClockLcd *lcd)
 {
-  gdouble    ratio;
-  gint       ticks;
+  gdouble ratio;
+  gint ticks;
   GDateTime *time;
 
   /* get the local time */
@@ -428,9 +434,9 @@ xfce_clock_lcd_get_ratio (XfceClockLcd *lcd)
 
 static gdouble
 xfce_clock_lcd_draw_dots (cairo_t *cr,
-                          gdouble  size,
-                          gdouble  offset_x,
-                          gdouble  offset_y)
+                          gdouble size,
+                          gdouble offset_x,
+                          gdouble offset_y)
 {
   gint i;
 
@@ -468,31 +474,30 @@ xfce_clock_lcd_draw_dots (cairo_t *cr,
  */
 static gdouble
 xfce_clock_lcd_draw_digit (cairo_t *cr,
-                           guint    number,
-                           gdouble  size,
-                           gdouble  offset_x,
-                           gdouble  offset_y)
+                           guint number,
+                           gdouble size,
+                           gdouble offset_x,
+                           gdouble offset_y)
 {
-  guint   i, j;
-  gint    segment;
+  guint i, j;
+  gint segment;
   gdouble x, y;
   gdouble rel_x, rel_y;
 
   /* coordicates to draw for each segment */
   const LcdPoint segment_points[][6] = {
-    /* 1 */ { { 0, 0 }, { 0.5, 0 }, { 0.4, 0.1 }, { 0.1, 0.1 }, { -1, }, { -1, } },
-    /* 2 */ { { 0.4, 0.1 }, { 0.5, 0.0 }, { 0.5, 0.5 }, { 0.4, 0.45 }, { -1, },  { -1, } },
-    /* 3 */ { { 0.4, 0.55 }, { 0.5, 0.5 }, { 0.5, 1 }, { 0.4, 0.9 }, { -1, },  { -1, } },
-    /* 4 */ { { 0.1, 0.9 }, { 0.4, 0.9 }, { 0.5, 1 }, { 0.0, 1 }, { -1, },  { -1, } },
-    /* 5 */ { { 0.0, 0.5 }, { 0.1, 0.55 }, { 0.1, 0.90 }, { 0.0, 1}, { -1, },  { -1, } },
-    /* 6 */ { { 0.0, 0.0 }, { 0.1, 0.1 }, { 0.1, 0.45 }, { 0.0, 0.5 }, { -1, },  { -1, } },
+    /* 1 */ { { 0, 0 }, { 0.5, 0 }, { 0.4, 0.1 }, { 0.1, 0.1 }, { -1, /**/ }, { -1, /**/ } },
+    /* 2 */ { { 0.4, 0.1 }, { 0.5, 0.0 }, { 0.5, 0.5 }, { 0.4, 0.45 }, { -1, /**/ }, { -1, /**/ } },
+    /* 3 */ { { 0.4, 0.55 }, { 0.5, 0.5 }, { 0.5, 1 }, { 0.4, 0.9 }, { -1, /**/ }, { -1, /**/ } },
+    /* 4 */ { { 0.1, 0.9 }, { 0.4, 0.9 }, { 0.5, 1 }, { 0.0, 1 }, { -1, /**/ }, { -1, /**/ } },
+    /* 5 */ { { 0.0, 0.5 }, { 0.1, 0.55 }, { 0.1, 0.90 }, { 0.0, 1 }, { -1, /**/ }, { -1, /**/ } },
+    /* 6 */ { { 0.0, 0.0 }, { 0.1, 0.1 }, { 0.1, 0.45 }, { 0.0, 0.5 }, { -1, /**/ }, { -1, /**/ } },
     /* 7 */ { { 0.0, 0.5 }, { 0.1, 0.45 }, { 0.4, 0.45 }, { 0.5, 0.5 }, { 0.4, 0.55 }, { 0.1, 0.55 } },
   };
 
   /* space line, mirrored to other side */
   const LcdPoint clear_points[] = {
-    { 0, 0 }, { 0.25, 0.25 }, { 0.25, 0.375 }, { 0, 0.5 },
-    { 0.25, 0.625 }, { 0.25, 0.75 }, { 0, 1 }
+    { 0, 0 }, { 0.25, 0.25 }, { 0.25, 0.375 }, { 0, 0.5 }, { 0.25, 0.625 }, { 0.25, 0.75 }, { 0, 1 }
   };
 
   /* segment to draw for each number: 0, 1, ..., 9, A, P */
@@ -574,7 +579,7 @@ xfce_clock_lcd_draw_digit (cairo_t *cr,
 
 static gboolean
 xfce_clock_lcd_update (XfceClockLcd *lcd,
-                       ClockTime    *time)
+                       ClockTime *time)
 {
   GtkWidget *widget = GTK_WIDGET (lcd);
 

@@ -47,15 +47,15 @@ wrapper_gproxy_name_owner_changed (GDBusProxy *proxy,
                                    GParamSpec *pspec,
                                    gpointer data)
 {
-   gchar *name_owner;
+  gchar *name_owner;
 
-   name_owner = g_dbus_proxy_get_name_owner (proxy);
+  name_owner = g_dbus_proxy_get_name_owner (proxy);
 
-   /* we lost communication with the panel, silently close the wrapper */
-   if (name_owner == NULL)
-     gtk_main_quit ();
+  /* we lost communication with the panel, silently close the wrapper */
+  if (name_owner == NULL)
+    gtk_main_quit ();
 
-   g_free (name_owner);
+  g_free (name_owner);
 }
 
 
@@ -67,11 +67,11 @@ wrapper_gproxy_set (GDBusProxy *proxy,
                     GVariant *parameters,
                     XfcePanelPluginProvider *provider)
 {
-  GtkWidget                      *plug;
-  GVariantIter                    iter;
-  GVariant                       *variant;
+  GtkWidget *plug;
+  GVariantIter iter;
+  GVariant *variant;
   XfcePanelPluginProviderPropType type;
-  GdkRectangle                    geom;
+  GdkRectangle geom;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
   panel_return_if_fail (g_variant_is_of_type (parameters, G_VARIANT_TYPE_TUPLE));
@@ -192,26 +192,25 @@ wrapper_gproxy_remote_event (GDBusProxy *proxy,
                              GVariant *parameters,
                              XfcePanelPluginProvider *provider)
 {
-  WrapperPlug  *plug;
-  GVariant     *variant;
-  guint         handle;
-  const gchar  *name;
-  gboolean      result;
-  GValue        real_value = { 0 };
+  WrapperPlug *plug;
+  GVariant *variant;
+  guint handle;
+  const gchar *name;
+  gboolean result;
+  GValue real_value = { 0 };
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  if (G_LIKELY (g_variant_is_of_type (parameters, G_VARIANT_TYPE("(svu)"))))
+  if (G_LIKELY (g_variant_is_of_type (parameters, G_VARIANT_TYPE ("(svu)"))))
     {
       g_variant_get (parameters, "(&svu)", &name, &variant, &handle);
-      if ( g_variant_is_of_type (variant, G_VARIANT_TYPE_BYTE) &&
-           g_variant_get_byte (variant) == '\0')
+      if (g_variant_is_of_type (variant, G_VARIANT_TYPE_BYTE) && g_variant_get_byte (variant) == '\0')
         {
           result = xfce_panel_plugin_provider_remote_event (provider, name, NULL, NULL);
         }
       else
         {
-          g_dbus_gvariant_to_gvalue(variant, &real_value);
+          g_dbus_gvariant_to_gvalue (variant, &real_value);
           result = xfce_panel_plugin_provider_remote_event (provider, name, &real_value, NULL);
           g_value_unset (&real_value);
         }
@@ -224,35 +223,35 @@ wrapper_gproxy_remote_event (GDBusProxy *proxy,
   else
     {
       g_warning ("property changed handler expects (svu) type, but %s received",
-                 g_variant_get_type_string(parameters));
+                 g_variant_get_type_string (parameters));
     }
-
 }
 
 
 
 gint
-main (gint argc, gchar **argv)
+main (gint argc,
+      gchar **argv)
 {
 #if defined(HAVE_SYS_PRCTL_H) && defined(PR_SET_NAME)
-  gchar                    process_name[16];
+  gchar process_name[16];
 #endif
-  GModule                 *library = NULL;
-  XfcePanelPluginPreInit   preinit_func;
-  GDBusConnection         *dbus_gconnection;
-  GDBusProxy              *dbus_gproxy = NULL;
-  WrapperModule           *module = NULL;
-  GtkWidget               *plug;
-  GtkWidget               *provider = NULL;
-  gchar                   *path;
-  GError                  *error = NULL;
-  const gchar             *filename;
-  gint                     unique_id;
-  Window                   socket_id;
-  const gchar             *name;
-  const gchar             *display_name;
-  const gchar             *comment;
-  gchar                  **arguments;
+  GModule *library = NULL;
+  XfcePanelPluginPreInit preinit_func;
+  GDBusConnection *dbus_gconnection;
+  GDBusProxy *dbus_gproxy = NULL;
+  WrapperModule *module = NULL;
+  GtkWidget *plug;
+  GtkWidget *provider = NULL;
+  gchar *path;
+  GError *error = NULL;
+  const gchar *filename;
+  gint unique_id;
+  Window socket_id;
+  const gchar *name;
+  const gchar *display_name;
+  const gchar *comment;
+  gchar **arguments;
 
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
@@ -293,7 +292,7 @@ main (gint argc, gchar **argv)
   /* check for a plugin preinit function */
   if (g_module_symbol (library, "xfce_panel_module_preinit", (gpointer) &preinit_func)
       && preinit_func != NULL
-      && ! (*preinit_func) (argc, argv))
+      && !(*preinit_func) (argc, argv))
     {
       retval = PLUGIN_EXIT_PREINIT_FAILED;
       goto leave;
@@ -321,7 +320,7 @@ main (gint argc, gchar **argv)
 
   /* quit when the proxy is destroyed (panel segfault for example) */
   g_signal_connect (G_OBJECT (dbus_gproxy), "notify::g-name-owner",
-      G_CALLBACK (wrapper_gproxy_name_owner_changed), NULL);
+                    G_CALLBACK (wrapper_gproxy_name_owner_changed), NULL);
 
   /* create the type module */
   module = wrapper_module_new (library);
@@ -349,7 +348,7 @@ main (gint argc, gchar **argv)
 
       /* monitor provider signals */
       g_signal_connect_swapped (G_OBJECT (provider), "provider-signal",
-          G_CALLBACK (wrapper_plug_proxy_provider_signal), plug);
+                                G_CALLBACK (wrapper_plug_proxy_provider_signal), plug);
 
       /* connect to service signals */
       g_signal_connect_object (dbus_gproxy, "g-signal::Set",

@@ -26,7 +26,8 @@ G_BEGIN_DECLS
 #define DIRECTORY_MENU_TYPE_PLUGIN (directory_menu_plugin_get_type ())
 G_DECLARE_FINAL_TYPE (DirectoryMenuPlugin, directory_menu_plugin, DIRECTORY_MENU, PLUGIN, XfcePanelPlugin)
 
-void directory_menu_plugin_register_type (XfcePanelTypeModule *type_module);
+void
+directory_menu_plugin_register_type (XfcePanelTypeModule *type_module);
 
 G_END_DECLS
 

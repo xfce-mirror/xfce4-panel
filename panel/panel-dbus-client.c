@@ -59,12 +59,12 @@ panel_dbus_client_get_proxy (GError **error)
 
 
 gboolean
-panel_dbus_client_display_preferences_dialog (guint         active,
-                                              guint         socket_id,
-                                              GError      **error)
+panel_dbus_client_display_preferences_dialog (guint active,
+                                              guint socket_id,
+                                              GError **error)
 {
   XfcePanelExportedService *dbus_proxy;
-  gboolean                  result;
+  gboolean result;
 
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
@@ -86,11 +86,11 @@ panel_dbus_client_display_preferences_dialog (guint         active,
 
 
 gboolean
-panel_dbus_client_display_items_dialog (guint    active,
+panel_dbus_client_display_items_dialog (guint active,
                                         GError **error)
 {
   XfcePanelExportedService *dbus_proxy;
-  gboolean                  result;
+  gboolean result;
 
 
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
@@ -115,7 +115,7 @@ gboolean
 panel_dbus_client_save (GError **error)
 {
   XfcePanelExportedService *dbus_proxy;
-  gboolean                  result;
+  gboolean result;
 
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
@@ -133,14 +133,13 @@ panel_dbus_client_save (GError **error)
 
 
 gboolean
-panel_dbus_client_add_new_item (const gchar  *plugin_name,
-                                gchar       **arguments,
-                                GError      **error)
+panel_dbus_client_add_new_item (const gchar *plugin_name,
+                                gchar **arguments,
+                                GError **error)
 {
-
   XfcePanelExportedService *dbus_proxy;
-  gboolean                  result;
-  const gchar              *empty_arguments[] = {"", NULL};
+  gboolean result;
+  const gchar *empty_arguments[] = { "", NULL };
 
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
@@ -186,16 +185,16 @@ panel_dbus_client_gtype_from_string (const gchar *str)
 
 
 gboolean
-panel_dbus_client_plugin_event (const gchar  *plugin_event,
-                                gboolean     *return_succeed,
-                                GError      **error)
+panel_dbus_client_plugin_event (const gchar *plugin_event,
+                                gboolean *return_succeed,
+                                GError **error)
 {
-  XfcePanelExportedService  *dbus_proxy;
-  gchar                    **tokens;
-  GType                      type;
-  guint                      n_tokens;
-  gboolean                   result = FALSE;
-  GVariant                  *variant = NULL;
+  XfcePanelExportedService *dbus_proxy;
+  gchar **tokens;
+  GType type;
+  guint n_tokens;
+  gboolean result = FALSE;
+  GVariant *variant = NULL;
 
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
@@ -258,7 +257,7 @@ panel_dbus_client_plugin_event (const gchar  *plugin_event,
   result = xfce_panel_exported_service_call_plugin_event_sync (dbus_proxy,
                                                                tokens[PLUGIN_NAME],
                                                                tokens[NAME],
-                                                               g_variant_new_variant(variant),
+                                                               g_variant_new_variant (variant),
                                                                return_succeed,
                                                                NULL,
                                                                error);
@@ -272,11 +271,11 @@ out:
 
 
 gboolean
-panel_dbus_client_terminate (gboolean   restart,
-                             GError   **error)
+panel_dbus_client_terminate (gboolean restart,
+                             GError **error)
 {
   XfcePanelExportedService *dbus_proxy;
-  gboolean                  result;
+  gboolean result;
 
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 

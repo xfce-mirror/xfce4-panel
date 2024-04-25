@@ -23,26 +23,31 @@
 
 G_BEGIN_DECLS
 
-typedef struct _PanelProperty PanelProperty;
-struct _PanelProperty
+typedef struct _PanelProperty
 {
   const gchar *property;
-  GType        type;
-};
+  GType type;
+} PanelProperty;
 
 
 
-XfconfChannel *panel_properties_get_channel          (GObject             *object_for_weak_ref);
+XfconfChannel *
+panel_properties_get_channel (GObject *object_for_weak_ref);
 
-void           panel_properties_bind                 (XfconfChannel       *channel,
-                                                      GObject             *object,
-                                                      const gchar         *property_base,
-                                                      const PanelProperty *properties,
-                                                      gboolean             save_properties);
+void
+panel_properties_bind (XfconfChannel *channel,
+                       GObject *object,
+                       const gchar *property_base,
+                       const PanelProperty *properties,
+                       gboolean save_properties);
 
-void           panel_properties_unbind               (GObject             *object);
+void
+panel_properties_unbind (GObject *object);
 
-GType          panel_properties_value_array_get_type (void) G_GNUC_CONST;
+GType
+panel_properties_value_array_get_type (void) G_GNUC_CONST;
+
+G_END_DECLS
 
 G_END_DECLS
 
