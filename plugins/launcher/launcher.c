@@ -32,134 +32,177 @@
 #include <libxfce4ui/libxfce4ui.h>
 #include <xfconf/xfconf.h>
 
-#define ARROW_BUTTON_SIZE              (12)
-#define MENU_POPUP_DELAY               (225)
+#define ARROW_BUTTON_SIZE (12)
+#define MENU_POPUP_DELAY (225)
 #define NO_ARROW_INSIDE_BUTTON(plugin) ((plugin)->arrow_position != LAUNCHER_ARROW_INTERNAL \
                                         || LIST_HAS_ONE_OR_NO_ENTRIES ((plugin)->items))
-#define ARROW_INSIDE_BUTTON(plugin)    (!NO_ARROW_INSIDE_BUTTON (plugin))
-#define RELATIVE_CONFIG_PATH           PANEL_PLUGIN_RELATIVE_PATH G_DIR_SEPARATOR_S "%s-%d"
+#define ARROW_INSIDE_BUTTON(plugin) (!NO_ARROW_INSIDE_BUTTON (plugin))
+#define RELATIVE_CONFIG_PATH PANEL_PLUGIN_RELATIVE_PATH G_DIR_SEPARATOR_S "%s-%d"
 
 
 
-static void               launcher_plugin_get_property                  (GObject              *object,
-                                                                         guint                 prop_id,
-                                                                         GValue               *value,
-                                                                         GParamSpec           *pspec);
-static void               launcher_plugin_set_property                  (GObject              *object,
-                                                                         guint                 prop_id,
-                                                                         const GValue         *value,
-                                                                         GParamSpec           *pspec);
-static void               launcher_plugin_construct                     (XfcePanelPlugin      *panel_plugin);
-static void               launcher_plugin_free_data                     (XfcePanelPlugin      *panel_plugin);
-static void               launcher_plugin_removed                       (XfcePanelPlugin      *panel_plugin);
-static gboolean           launcher_plugin_remote_event                  (XfcePanelPlugin      *panel_plugin,
-                                                                         const gchar          *name,
-                                                                         const GValue         *value);
-static gboolean           launcher_plugin_save_delayed_timeout          (gpointer              user_data);
-static void               launcher_plugin_save_delayed                  (LauncherPlugin       *plugin);
-static void               launcher_plugin_mode_changed                  (XfcePanelPlugin      *panel_plugin,
-                                                                         XfcePanelPluginMode   mode);
-static gboolean           launcher_plugin_size_changed                  (XfcePanelPlugin      *panel_plugin,
-                                                                         gint                  size);
-static void               launcher_plugin_configure_plugin              (XfcePanelPlugin      *panel_plugin);
-static void               launcher_plugin_screen_position_changed       (XfcePanelPlugin      *panel_plugin,
-                                                                         XfceScreenPosition    position);
-static LauncherArrowType  launcher_plugin_default_arrow_type            (LauncherPlugin       *plugin);
-static void               launcher_plugin_pack_widgets                  (LauncherPlugin       *plugin);
-static void               launcher_plugin_tooltip_icon_invalidate       (GObject              *object);
-static void               launcher_plugin_icon_invalidate               (LauncherPlugin       *plugin);
-static void               launcher_plugin_menu_deactivate               (GtkWidget            *menu,
-                                                                         LauncherPlugin       *plugin);
-static void               launcher_plugin_menu_item_activate            (GtkMenuItem          *widget,
-                                                                         GarconMenuItem       *item);
-static void               launcher_plugin_menu_item_drag_data_received  (GtkWidget            *widget,
-                                                                         GdkDragContext       *context,
-                                                                         gint                  x,
-                                                                         gint                  y,
-                                                                         GtkSelectionData     *data,
-                                                                         guint                 info,
-                                                                         guint                 drag_time,
-                                                                         GarconMenuItem       *item);
-static void               launcher_plugin_menu_construct                (LauncherPlugin       *plugin);
-static void               launcher_plugin_menu_popup_destroyed          (gpointer              user_data);
-static gboolean           launcher_plugin_menu_popup                    (gpointer              user_data);
-static void               launcher_plugin_menu_destroy                  (LauncherPlugin       *plugin);
-static void               launcher_plugin_button_update                 (LauncherPlugin       *plugin);
-static void               launcher_plugin_button_update_action_menu     (LauncherPlugin       *plugin);
-static void               launcher_plugin_button_state_changed          (GtkWidget            *button_a,
-                                                                         GtkStateFlags         state,
-                                                                         GtkWidget            *button_b);
-static gboolean           launcher_plugin_button_press_event            (GtkWidget            *button,
-                                                                         GdkEventButton       *event,
-                                                                         LauncherPlugin       *plugin);
-static gboolean           launcher_plugin_button_release_event          (GtkWidget            *button,
-                                                                         GdkEventButton       *event,
-                                                                         LauncherPlugin       *plugin);
-static gboolean           launcher_plugin_button_query_tooltip          (GtkWidget            *widget,
-                                                                         gint                  x,
-                                                                         gint                  y,
-                                                                         gboolean              keyboard_mode,
-                                                                         GtkTooltip           *tooltip,
-                                                                         LauncherPlugin       *plugin);
-static void               launcher_plugin_button_drag_data_received     (GtkWidget            *widget,
-                                                                         GdkDragContext       *context,
-                                                                         gint                  x,
-                                                                         gint                  y,
-                                                                         GtkSelectionData     *selection_data,
-                                                                         guint                 info,
-                                                                         guint                 drag_time,
-                                                                         LauncherPlugin       *plugin);
-static gboolean           launcher_plugin_button_drag_motion            (GtkWidget            *widget,
-                                                                         GdkDragContext       *context,
-                                                                         gint                  x,
-                                                                         gint                  y,
-                                                                         guint                 drag_time,
-                                                                         LauncherPlugin       *plugin);
-static gboolean           launcher_plugin_button_drag_drop              (GtkWidget            *widget,
-                                                                         GdkDragContext       *context,
-                                                                         gint                  x,
-                                                                         gint                  y,
-                                                                         guint                 drag_time,
-                                                                         LauncherPlugin       *plugin);
-static void               launcher_plugin_button_drag_leave             (GtkWidget            *widget,
-                                                                         GdkDragContext       *context,
-                                                                         guint                 drag_time,
-                                                                         LauncherPlugin       *plugin);
-static gboolean           launcher_plugin_button_draw                   (GtkWidget            *widget,
-                                                                         cairo_t              *cr,
-                                                                         LauncherPlugin       *plugin);
-static void               launcher_plugin_arrow_visibility              (LauncherPlugin       *plugin);
-static gboolean           launcher_plugin_arrow_press_event             (GtkWidget            *button,
-                                                                         GdkEventButton       *event,
-                                                                         LauncherPlugin       *plugin);
-static gboolean           launcher_plugin_arrow_drag_motion             (GtkWidget            *widget,
-                                                                         GdkDragContext       *context,
-                                                                         gint                  x,
-                                                                         gint                  y,
-                                                                         guint                 drag_time,
-                                                                         LauncherPlugin       *plugin);
-static void               launcher_plugin_arrow_drag_leave              (GtkWidget            *widget,
-                                                                         GdkDragContext       *context,
-                                                                         guint                 drag_time,
-                                                                         LauncherPlugin       *plugin);
-static gboolean           launcher_plugin_item_query_tooltip            (GtkWidget            *widget,
-                                                                         gint                  x,
-                                                                         gint                  y,
-                                                                         gboolean              keyboard_mode,
-                                                                         GtkTooltip           *tooltip,
-                                                                         GarconMenuItem       *item);
-static gboolean           launcher_plugin_item_exec_on_screen           (GarconMenuItem       *item,
-                                                                         guint32               event_time,
-                                                                         GdkScreen            *screen,
-                                                                         GSList               *uri_list);
-static void               launcher_plugin_item_exec                     (GarconMenuItem       *item,
-                                                                         guint32               event_time,
-                                                                         GdkScreen            *screen,
-                                                                         GSList               *uri_list);
-static void               launcher_plugin_item_exec_from_clipboard      (GarconMenuItem       *item,
-                                                                         guint32               event_time,
-                                                                         GdkScreen            *screen);
-static GSList            *launcher_plugin_uri_list_extract              (GtkSelectionData     *data);
+static void
+launcher_plugin_get_property (GObject *object,
+                              guint prop_id,
+                              GValue *value,
+                              GParamSpec *pspec);
+static void
+launcher_plugin_set_property (GObject *object,
+                              guint prop_id,
+                              const GValue *value,
+                              GParamSpec *pspec);
+static void
+launcher_plugin_construct (XfcePanelPlugin *panel_plugin);
+static void
+launcher_plugin_free_data (XfcePanelPlugin *panel_plugin);
+static void
+launcher_plugin_removed (XfcePanelPlugin *panel_plugin);
+static gboolean
+launcher_plugin_remote_event (XfcePanelPlugin *panel_plugin,
+                              const gchar *name,
+                              const GValue *value);
+static gboolean
+launcher_plugin_save_delayed_timeout (gpointer user_data);
+static void
+launcher_plugin_save_delayed (LauncherPlugin *plugin);
+static void
+launcher_plugin_mode_changed (XfcePanelPlugin *panel_plugin,
+                              XfcePanelPluginMode mode);
+static gboolean
+launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
+                              gint size);
+static void
+launcher_plugin_configure_plugin (XfcePanelPlugin *panel_plugin);
+static void
+launcher_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
+                                         XfceScreenPosition position);
+static LauncherArrowType
+launcher_plugin_default_arrow_type (LauncherPlugin *plugin);
+static void
+launcher_plugin_pack_widgets (LauncherPlugin *plugin);
+static void
+launcher_plugin_tooltip_icon_invalidate (GObject *object);
+static void
+launcher_plugin_icon_invalidate (LauncherPlugin *plugin);
+static void
+launcher_plugin_menu_deactivate (GtkWidget *menu,
+                                 LauncherPlugin *plugin);
+static void
+launcher_plugin_menu_item_activate (GtkMenuItem *widget,
+                                    GarconMenuItem *item);
+static void
+launcher_plugin_menu_item_drag_data_received (GtkWidget *widget,
+                                              GdkDragContext *context,
+                                              gint x,
+                                              gint y,
+                                              GtkSelectionData *data,
+                                              guint info,
+                                              guint drag_time,
+                                              GarconMenuItem *item);
+static void
+launcher_plugin_menu_construct (LauncherPlugin *plugin);
+static void
+launcher_plugin_menu_popup_destroyed (gpointer user_data);
+static gboolean
+launcher_plugin_menu_popup (gpointer user_data);
+static void
+launcher_plugin_menu_destroy (LauncherPlugin *plugin);
+static void
+launcher_plugin_button_update (LauncherPlugin *plugin);
+static void
+launcher_plugin_button_update_action_menu (LauncherPlugin *plugin);
+static void
+launcher_plugin_button_state_changed (GtkWidget *button_a,
+                                      GtkStateFlags state,
+                                      GtkWidget *button_b);
+static gboolean
+launcher_plugin_button_press_event (GtkWidget *button,
+                                    GdkEventButton *event,
+                                    LauncherPlugin *plugin);
+static gboolean
+launcher_plugin_button_release_event (GtkWidget *button,
+                                      GdkEventButton *event,
+                                      LauncherPlugin *plugin);
+static gboolean
+launcher_plugin_button_query_tooltip (GtkWidget *widget,
+                                      gint x,
+                                      gint y,
+                                      gboolean keyboard_mode,
+                                      GtkTooltip *tooltip,
+                                      LauncherPlugin *plugin);
+static void
+launcher_plugin_button_drag_data_received (GtkWidget *widget,
+                                           GdkDragContext *context,
+                                           gint x,
+                                           gint y,
+                                           GtkSelectionData *selection_data,
+                                           guint info,
+                                           guint drag_time,
+                                           LauncherPlugin *plugin);
+static gboolean
+launcher_plugin_button_drag_motion (GtkWidget *widget,
+                                    GdkDragContext *context,
+                                    gint x,
+                                    gint y,
+                                    guint drag_time,
+                                    LauncherPlugin *plugin);
+static gboolean
+launcher_plugin_button_drag_drop (GtkWidget *widget,
+                                  GdkDragContext *context,
+                                  gint x,
+                                  gint y,
+                                  guint drag_time,
+                                  LauncherPlugin *plugin);
+static void
+launcher_plugin_button_drag_leave (GtkWidget *widget,
+                                   GdkDragContext *context,
+                                   guint drag_time,
+                                   LauncherPlugin *plugin);
+static gboolean
+launcher_plugin_button_draw (GtkWidget *widget,
+                             cairo_t *cr,
+                             LauncherPlugin *plugin);
+static void
+launcher_plugin_arrow_visibility (LauncherPlugin *plugin);
+static gboolean
+launcher_plugin_arrow_press_event (GtkWidget *button,
+                                   GdkEventButton *event,
+                                   LauncherPlugin *plugin);
+static gboolean
+launcher_plugin_arrow_drag_motion (GtkWidget *widget,
+                                   GdkDragContext *context,
+                                   gint x,
+                                   gint y,
+                                   guint drag_time,
+                                   LauncherPlugin *plugin);
+static void
+launcher_plugin_arrow_drag_leave (GtkWidget *widget,
+                                  GdkDragContext *context,
+                                  guint drag_time,
+                                  LauncherPlugin *plugin);
+static gboolean
+launcher_plugin_item_query_tooltip (GtkWidget *widget,
+                                    gint x,
+                                    gint y,
+                                    gboolean keyboard_mode,
+                                    GtkTooltip *tooltip,
+                                    GarconMenuItem *item);
+static gboolean
+launcher_plugin_item_exec_on_screen (GarconMenuItem *item,
+                                     guint32 event_time,
+                                     GdkScreen *screen,
+                                     GSList *uri_list);
+static void
+launcher_plugin_item_exec (GarconMenuItem *item,
+                           guint32 event_time,
+                           GdkScreen *screen,
+                           GSList *uri_list);
+static void
+launcher_plugin_item_exec_from_clipboard (GarconMenuItem *item,
+                                          guint32 event_time,
+                                          GdkScreen *screen);
+static GSList *
+launcher_plugin_uri_list_extract (GtkSelectionData *data);
 
 
 
@@ -167,31 +210,31 @@ struct _LauncherPlugin
 {
   XfcePanelPlugin __parent__;
 
-  GtkWidget         *box;
-  GtkWidget         *button;
-  GtkWidget         *arrow;
-  GtkWidget         *child;
-  GtkWidget         *menu;
-  GtkWidget         *action_menu;
+  GtkWidget *box;
+  GtkWidget *button;
+  GtkWidget *arrow;
+  GtkWidget *child;
+  GtkWidget *menu;
+  GtkWidget *action_menu;
 
-  GSList            *items;
+  GSList *items;
 
-  cairo_surface_t   *surface;
-  gchar             *icon_name;
+  cairo_surface_t *surface;
+  gchar *icon_name;
 
-  gulong             theme_change_id;
+  gulong theme_change_id;
 
-  guint              menu_timeout_id;
+  guint menu_timeout_id;
 
-  guint              disable_tooltips : 1;
-  guint              move_first : 1;
-  guint              show_label : 1;
-  LauncherArrowType  arrow_position;
+  guint disable_tooltips : 1;
+  guint move_first : 1;
+  guint show_label : 1;
+  LauncherArrowType arrow_position;
 
-  GFile             *config_directory;
-  GFileMonitor      *config_monitor;
+  GFile *config_directory;
+  GFileMonitor *config_monitor;
 
-  guint              save_timeout_id;
+  guint save_timeout_id;
 };
 
 enum
@@ -217,15 +260,14 @@ XFCE_PANEL_DEFINE_PLUGIN_RESIDENT (LauncherPlugin, launcher_plugin)
 
 
 /* quark to attach the plugin to menu items */
-static GQuark      launcher_plugin_quark = 0;
-static guint       launcher_signals[LAST_SIGNAL];
+static GQuark launcher_plugin_quark = 0;
+static guint launcher_signals[LAST_SIGNAL];
 
 
 
 /* target types for dropping in the launcher plugin */
-static const GtkTargetEntry drop_targets[] =
-{
-  { "text/uri-list", 0, 0, },
+static const GtkTargetEntry drop_targets[] = {
+  { "text/uri-list", 0, 0 },
   { "STRING", 0, 0 },
   { "UTF8_STRING", 0, 0 },
   { "text/plain", 0, 0 },
@@ -236,7 +278,7 @@ static const GtkTargetEntry drop_targets[] =
 static void
 launcher_plugin_class_init (LauncherPluginClass *klass)
 {
-  GObjectClass         *gobject_class;
+  GObjectClass *gobject_class;
   XfcePanelPluginClass *plugin_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
@@ -290,13 +332,12 @@ launcher_plugin_class_init (LauncherPluginClass *klass)
                                                       LAUNCHER_ARROW_DEFAULT,
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
-  launcher_signals[ITEMS_CHANGED] =
-    g_signal_new (g_intern_static_string ("items-changed"),
-                  G_TYPE_FROM_CLASS (klass),
-                  G_SIGNAL_RUN_FIRST,
-                  0, NULL, NULL,
-                  g_cclosure_marshal_VOID__VOID,
-                  G_TYPE_NONE, 0);
+  launcher_signals[ITEMS_CHANGED] = g_signal_new (g_intern_static_string ("items-changed"),
+                                                  G_TYPE_FROM_CLASS (klass),
+                                                  G_SIGNAL_RUN_FIRST,
+                                                  0, NULL, NULL,
+                                                  g_cclosure_marshal_VOID__VOID,
+                                                  G_TYPE_NONE, 0);
 
   /* initialize the quark */
   launcher_plugin_quark = g_quark_from_static_string ("xfce-launcher-plugin");
@@ -307,9 +348,9 @@ launcher_plugin_class_init (LauncherPluginClass *klass)
 static void
 launcher_plugin_init (LauncherPlugin *plugin)
 {
-  GtkCssProvider  *css_provider;
+  GtkCssProvider *css_provider;
   GtkStyleContext *context;
-  gchar           *css_string;
+  gchar *css_string;
 
   plugin->disable_tooltips = FALSE;
   plugin->move_first = FALSE;
@@ -334,29 +375,30 @@ launcher_plugin_init (LauncherPlugin *plugin)
   gtk_widget_set_has_tooltip (plugin->button, TRUE);
   gtk_widget_set_name (plugin->button, "launcher-button");
   g_signal_connect (G_OBJECT (plugin->button), "button-press-event",
-      G_CALLBACK (launcher_plugin_button_press_event), plugin);
+                    G_CALLBACK (launcher_plugin_button_press_event), plugin);
   g_signal_connect (G_OBJECT (plugin->button), "button-release-event",
-      G_CALLBACK (launcher_plugin_button_release_event), plugin);
+                    G_CALLBACK (launcher_plugin_button_release_event), plugin);
   g_signal_connect (G_OBJECT (plugin->button), "query-tooltip",
-      G_CALLBACK (launcher_plugin_button_query_tooltip), plugin);
+                    G_CALLBACK (launcher_plugin_button_query_tooltip), plugin);
   g_signal_connect (G_OBJECT (plugin->button), "drag-data-received",
-      G_CALLBACK (launcher_plugin_button_drag_data_received), plugin);
+                    G_CALLBACK (launcher_plugin_button_drag_data_received), plugin);
   g_signal_connect (G_OBJECT (plugin->button), "drag-motion",
-      G_CALLBACK (launcher_plugin_button_drag_motion), plugin);
+                    G_CALLBACK (launcher_plugin_button_drag_motion), plugin);
   g_signal_connect (G_OBJECT (plugin->button), "drag-drop",
-      G_CALLBACK (launcher_plugin_button_drag_drop), plugin);
+                    G_CALLBACK (launcher_plugin_button_drag_drop), plugin);
   g_signal_connect (G_OBJECT (plugin->button), "drag-leave",
-      G_CALLBACK (launcher_plugin_button_drag_leave), plugin);
+                    G_CALLBACK (launcher_plugin_button_drag_leave), plugin);
   g_signal_connect_after (G_OBJECT (plugin->button), "draw",
-      G_CALLBACK (launcher_plugin_button_draw), plugin);
+                          G_CALLBACK (launcher_plugin_button_draw), plugin);
 
   /* invalidate tooltip icon when needed */
-  plugin->theme_change_id = g_signal_connect_swapped (gtk_icon_theme_get_default (), "changed",
-      G_CALLBACK (launcher_plugin_tooltip_icon_invalidate), plugin->button);
+  plugin->theme_change_id
+    = g_signal_connect_swapped (gtk_icon_theme_get_default (), "changed",
+                                G_CALLBACK (launcher_plugin_tooltip_icon_invalidate), plugin->button);
   g_signal_connect (plugin, "notify::scale-factor",
-      G_CALLBACK (launcher_plugin_icon_invalidate), NULL);
+                    G_CALLBACK (launcher_plugin_icon_invalidate), NULL);
   g_signal_connect (plugin, "notify::scale-factor",
-      G_CALLBACK (launcher_plugin_menu_destroy), NULL);
+                    G_CALLBACK (launcher_plugin_menu_destroy), NULL);
 
   /* Make sure there aren't any constraints set on buttons by themes (Adwaita sets those minimum sizes) */
   context = gtk_widget_get_style_context (plugin->button);
@@ -378,13 +420,13 @@ launcher_plugin_init (LauncherPlugin *plugin)
   gtk_button_set_relief (GTK_BUTTON (plugin->arrow), GTK_RELIEF_NONE);
   gtk_widget_set_name (plugin->button, "launcher-arrow");
   g_signal_connect (G_OBJECT (plugin->arrow), "button-press-event",
-      G_CALLBACK (launcher_plugin_arrow_press_event), plugin);
+                    G_CALLBACK (launcher_plugin_arrow_press_event), plugin);
   g_signal_connect (G_OBJECT (plugin->arrow), "drag-motion",
-      G_CALLBACK (launcher_plugin_arrow_drag_motion), plugin);
+                    G_CALLBACK (launcher_plugin_arrow_drag_motion), plugin);
   g_signal_connect (G_OBJECT (plugin->button), "drag-drop",
-      G_CALLBACK (launcher_plugin_button_drag_drop), plugin);
+                    G_CALLBACK (launcher_plugin_button_drag_drop), plugin);
   g_signal_connect (G_OBJECT (plugin->arrow), "drag-leave",
-      G_CALLBACK (launcher_plugin_arrow_drag_leave), plugin);
+                    G_CALLBACK (launcher_plugin_arrow_drag_leave), plugin);
 
   panel_utils_set_atk_info (plugin->arrow, _("Open launcher menu"), NULL);
 
@@ -395,9 +437,9 @@ launcher_plugin_init (LauncherPlugin *plugin)
 
   /* sync button states */
   g_signal_connect (G_OBJECT (plugin->button), "state-flags-changed",
-      G_CALLBACK (launcher_plugin_button_state_changed), plugin->arrow);
+                    G_CALLBACK (launcher_plugin_button_state_changed), plugin->arrow);
   g_signal_connect (G_OBJECT (plugin->arrow), "state-flags-changed",
-      G_CALLBACK (launcher_plugin_button_state_changed), plugin->button);
+                    G_CALLBACK (launcher_plugin_button_state_changed), plugin->button);
 }
 
 
@@ -405,7 +447,7 @@ launcher_plugin_init (LauncherPlugin *plugin)
 static void
 launcher_free_array_element (gpointer data)
 {
-  GValue *value = (GValue *)data;
+  GValue *value = (GValue *) data;
 
   g_value_unset (value);
   g_free (value);
@@ -414,16 +456,16 @@ launcher_free_array_element (gpointer data)
 
 
 static void
-launcher_plugin_get_property (GObject    *object,
-                              guint       prop_id,
-                              GValue     *value,
+launcher_plugin_get_property (GObject *object,
+                              guint prop_id,
+                              GValue *value,
                               GParamSpec *pspec)
 {
   LauncherPlugin *plugin = LAUNCHER_PLUGIN (object);
-  GPtrArray      *array;
-  GValue         *tmp;
-  GSList         *li;
-  GFile          *item_file;
+  GPtrArray *array;
+  GValue *tmp;
+  GSList *li;
+  GFile *item_file;
 
   switch (prop_id)
     {
@@ -501,15 +543,15 @@ launcher_plugin_item_changed (GarconMenuItem *item,
 
 
 static gboolean
-launcher_plugin_item_duplicate (GFile   *src_file,
-                                GFile   *dst_file,
+launcher_plugin_item_duplicate (GFile *src_file,
+                                GFile *dst_file,
                                 GError **error)
 {
   GKeyFile *key_file;
-  gchar    *contents = NULL;
-  gsize     length;
-  gboolean  result = FALSE;
-  gchar    *uri;
+  gchar *contents = NULL;
+  gsize length;
+  gboolean result = FALSE;
+  gchar *uri;
 
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
@@ -543,15 +585,15 @@ err1:
 
 static GarconMenuItem *
 launcher_plugin_item_load (LauncherPlugin *plugin,
-                           const gchar    *str,
-                           gboolean       *desktop_id_return,
-                           gboolean       *location_changed)
+                           const gchar *str,
+                           gboolean *desktop_id_return,
+                           gboolean *location_changed)
 {
-  GFile          *src_file, *dst_file;
-  gchar          *src_path, *dst_path;
-  GSList         *li, *lnext;
+  GFile *src_file, *dst_file;
+  gchar *src_path, *dst_path;
+  GSList *li, *lnext;
   GarconMenuItem *item = NULL;
-  GError         *error = NULL;
+  GError *error = NULL;
 
   panel_return_val_if_fail (LAUNCHER_IS_PLUGIN (plugin), NULL);
   panel_return_val_if_fail (str != NULL, NULL);
@@ -583,8 +625,8 @@ launcher_plugin_item_load (LauncherPlugin *plugin,
           else
             {
               src_path = g_file_get_parse_name (src_file);
-              g_warning ("Failed to create duplicate of desktop file \"%s\" "
-                          "to \"%s\": %s", src_path, dst_path, error->message);
+              g_warning ("Failed to create duplicate of desktop file \"%s\" to \"%s\": %s",
+                         src_path, dst_path, error->message);
               g_error_free (error);
               g_free (src_path);
 
@@ -600,8 +642,8 @@ launcher_plugin_item_load (LauncherPlugin *plugin,
         {
           /* nothing we can do with this file */
           src_path = g_file_get_parse_name (src_file);
-          g_warning ("Failed to load desktop file \"%s\". It will be removed "
-                     "from the configuration", src_path);
+          g_warning ("Failed to load desktop file \"%s\". It will be removed from the configuration",
+                     src_path);
           g_free (src_path);
           g_object_unref (G_OBJECT (src_file));
 
@@ -648,10 +690,10 @@ launcher_plugin_item_load (LauncherPlugin *plugin,
 static void
 launcher_plugin_items_delete_configs (LauncherPlugin *plugin)
 {
-  GSList   *li;
-  GFile    *file;
-  gboolean  succeed = TRUE;
-  GError   *error = NULL;
+  GSList *li;
+  GFile *file;
+  gboolean succeed = TRUE;
+  GError *error = NULL;
 
   panel_return_if_fail (G_IS_FILE (plugin->config_directory));
 
@@ -677,19 +719,19 @@ launcher_plugin_items_delete_configs (LauncherPlugin *plugin)
 
 static void
 launcher_plugin_items_load (LauncherPlugin *plugin,
-                            GPtrArray      *array)
+                            GPtrArray *array)
 {
-  guint           i;
-  const GValue   *value;
-  const gchar    *str;
+  guint i;
+  const GValue *value;
+  const gchar *str;
   GarconMenuItem *item;
   GarconMenuItem *pool_item;
-  GSList         *items = NULL;
-  GHashTable     *pool = NULL;
-  gboolean        desktop_id;
-  gchar          *uri;
-  gboolean        items_modified = FALSE;
-  gboolean        location_changed;
+  GSList *items = NULL;
+  GHashTable *pool = NULL;
+  gboolean desktop_id;
+  gchar *uri;
+  gboolean items_modified = FALSE;
+  gboolean location_changed;
 
   panel_return_if_fail (LAUNCHER_IS_PLUGIN (plugin));
   panel_return_if_fail (array != NULL);
@@ -752,7 +794,7 @@ launcher_plugin_items_load (LauncherPlugin *plugin,
       panel_assert (GARCON_IS_MENU_ITEM (item));
       items = g_slist_append (items, item);
       g_signal_connect (G_OBJECT (item), "changed",
-          G_CALLBACK (launcher_plugin_item_changed), plugin);
+                        G_CALLBACK (launcher_plugin_item_changed), plugin);
     }
 
   if (G_UNLIKELY (pool != NULL))
@@ -773,13 +815,13 @@ launcher_plugin_items_load (LauncherPlugin *plugin,
 
 
 static void
-launcher_plugin_set_property (GObject      *object,
-                              guint         prop_id,
+launcher_plugin_set_property (GObject *object,
+                              guint prop_id,
                               const GValue *value,
-                              GParamSpec   *pspec)
+                              GParamSpec *pspec)
 {
   LauncherPlugin *plugin = LAUNCHER_PLUGIN (object);
-  GPtrArray      *array;
+  GPtrArray *array;
 
   panel_return_if_fail (G_IS_FILE (plugin->config_directory));
 
@@ -839,7 +881,7 @@ launcher_plugin_set_property (GObject      *object,
 
       /* update size */
       launcher_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
-          xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
+                                    xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
 
       /* update the button */
       launcher_plugin_button_update (plugin);
@@ -857,7 +899,7 @@ update_arrow:
 
       /* update the plugin size */
       launcher_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
-          xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
+                                    xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
       break;
 
     default:
@@ -869,21 +911,21 @@ update_arrow:
 
 
 static void
-launcher_plugin_file_changed (GFileMonitor      *monitor,
-                              GFile             *changed_file,
-                              GFile             *other_file,
-                              GFileMonitorEvent  event_type,
-                              LauncherPlugin    *plugin)
+launcher_plugin_file_changed (GFileMonitor *monitor,
+                              GFile *changed_file,
+                              GFile *other_file,
+                              GFileMonitorEvent event_type,
+                              LauncherPlugin *plugin)
 {
-  GSList         *li, *lnext;
+  GSList *li, *lnext;
   GarconMenuItem *item;
-  GFile          *item_file;
-  gboolean        found;
-  GError         *error = NULL;
-  gchar          *base_name;
-  gboolean        result;
-  gboolean        exists;
-  gboolean        update_plugin = FALSE;
+  GFile *item_file;
+  gboolean found;
+  GError *error = NULL;
+  gchar *base_name;
+  gboolean result;
+  gboolean exists;
+  gboolean update_plugin = FALSE;
 
   panel_return_if_fail (LAUNCHER_IS_PLUGIN (plugin));
   panel_return_if_fail (plugin->config_monitor == monitor);
@@ -940,7 +982,7 @@ launcher_plugin_file_changed (GFileMonitor      *monitor,
         {
           plugin->items = g_slist_append (plugin->items, item);
           g_signal_connect (G_OBJECT (item), "changed",
-              G_CALLBACK (launcher_plugin_item_changed), plugin);
+                            G_CALLBACK (launcher_plugin_item_changed), plugin);
           update_plugin = TRUE;
         }
     }
@@ -964,15 +1006,14 @@ launcher_plugin_file_changed (GFileMonitor      *monitor,
 static void
 launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
-  LauncherPlugin      *plugin = LAUNCHER_PLUGIN (panel_plugin);
-  const gchar * const *uris;
-  guint                i;
-  GPtrArray           *array;
-  GValue              *value;
-  gchar               *file, *path;
-  GError              *error = NULL;
-  const PanelProperty  properties[] =
-  {
+  LauncherPlugin *plugin = LAUNCHER_PLUGIN (panel_plugin);
+  const gchar *const *uris;
+  guint i;
+  GPtrArray *array;
+  GValue *value;
+  gchar *file, *path;
+  GError *error = NULL;
+  const PanelProperty properties[] = {
     { "show-label", G_TYPE_BOOLEAN },
     { "items", G_TYPE_PTR_ARRAY },
     { "disable-tooltips", G_TYPE_BOOLEAN },
@@ -1055,7 +1096,7 @@ static void
 launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
   LauncherPlugin *plugin = LAUNCHER_PLUGIN (panel_plugin);
-  GtkIconTheme   *icon_theme;
+  GtkIconTheme *icon_theme;
 
   /* stop monitoring */
   if (plugin->config_monitor != NULL)
@@ -1098,7 +1139,7 @@ static void
 launcher_plugin_removed (XfcePanelPlugin *panel_plugin)
 {
   LauncherPlugin *plugin = LAUNCHER_PLUGIN (panel_plugin);
-  GError         *error = NULL;
+  GError *error = NULL;
 
   panel_return_if_fail (G_IS_FILE (plugin->config_directory));
 
@@ -1130,8 +1171,8 @@ launcher_plugin_removed (XfcePanelPlugin *panel_plugin)
 
 static gboolean
 launcher_plugin_remote_event (XfcePanelPlugin *panel_plugin,
-                              const gchar     *name,
-                              const GValue    *value)
+                              const gchar *name,
+                              const GValue *value)
 {
   LauncherPlugin *plugin = LAUNCHER_PLUGIN (panel_plugin);
 
@@ -1186,14 +1227,14 @@ launcher_plugin_save_delayed (LauncherPlugin *plugin)
     g_source_remove (plugin->save_timeout_id);
 
   plugin->save_timeout_id = gdk_threads_add_timeout_seconds_full (G_PRIORITY_LOW, 1,
-      launcher_plugin_save_delayed_timeout, plugin,
-      launcher_plugin_save_delayed_timeout_destroyed);
+                                                                  launcher_plugin_save_delayed_timeout, plugin,
+                                                                  launcher_plugin_save_delayed_timeout_destroyed);
 }
 
 
 
 static void
-launcher_plugin_mode_changed (XfcePanelPlugin    *panel_plugin,
+launcher_plugin_mode_changed (XfcePanelPlugin *panel_plugin,
                               XfcePanelPluginMode mode)
 {
   /* update label orientation */
@@ -1204,24 +1245,24 @@ launcher_plugin_mode_changed (XfcePanelPlugin    *panel_plugin,
 
   /* update the arrow button */
   launcher_plugin_screen_position_changed (panel_plugin,
-      xfce_panel_plugin_get_screen_position (panel_plugin));
+                                           xfce_panel_plugin_get_screen_position (panel_plugin));
 
   /* update the plugin size */
   launcher_plugin_size_changed (panel_plugin,
-      xfce_panel_plugin_get_size (panel_plugin));
+                                xfce_panel_plugin_get_size (panel_plugin));
 }
 
 
 
 static gboolean
 launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
-                              gint             size)
+                              gint size)
 {
-  LauncherPlugin    *plugin = LAUNCHER_PLUGIN (panel_plugin);
-  gint               p_width, p_height;
-  gint               a_width, a_height;
-  gboolean           horizontal;
-  LauncherArrowType  arrow_position;
+  LauncherPlugin *plugin = LAUNCHER_PLUGIN (panel_plugin);
+  gint p_width, p_height;
+  gint a_width, a_height;
+  gboolean horizontal;
+  LauncherArrowType arrow_position;
 
   /* initialize the plugin size */
   size /= xfce_panel_plugin_get_nrows (panel_plugin);
@@ -1232,8 +1273,7 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   if (gtk_widget_get_visible (plugin->arrow))
     {
       /* if the panel is horizontal */
-      horizontal = !!(xfce_panel_plugin_get_orientation (panel_plugin) ==
-          GTK_ORIENTATION_HORIZONTAL);
+      horizontal = !!(xfce_panel_plugin_get_orientation (panel_plugin) == GTK_ORIENTATION_HORIZONTAL);
 
       /* translate default direction */
       arrow_position = launcher_plugin_default_arrow_type (plugin);
@@ -1260,9 +1300,8 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
           break;
         }
 
-        /* set the arrow size */
-        gtk_widget_set_size_request (plugin->arrow, a_width, a_height);
-
+      /* set the arrow size */
+      gtk_widget_set_size_request (plugin->arrow, a_width, a_height);
     }
 
   /* set the panel plugin size */
@@ -1319,14 +1358,14 @@ launcher_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
 
 static void
-launcher_plugin_screen_position_changed (XfcePanelPlugin    *panel_plugin,
-                                         XfceScreenPosition  position)
+launcher_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
+                                         XfceScreenPosition position)
 {
   LauncherPlugin *plugin = LAUNCHER_PLUGIN (panel_plugin);
 
   /* set the new arrow direction */
   xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (plugin->arrow),
-      xfce_panel_plugin_arrow_type (panel_plugin));
+                                    xfce_panel_plugin_arrow_type (panel_plugin));
 
   /* destroy the menu to update sort order */
   launcher_plugin_menu_destroy (plugin);
@@ -1338,7 +1377,7 @@ static LauncherArrowType
 launcher_plugin_default_arrow_type (LauncherPlugin *plugin)
 {
   LauncherArrowType pos = plugin->arrow_position;
-  gboolean          rtl;
+  gboolean rtl;
 
   panel_return_val_if_fail (LAUNCHER_IS_PLUGIN (plugin), LAUNCHER_ARROW_NORTH);
 
@@ -1347,8 +1386,7 @@ launcher_plugin_default_arrow_type (LauncherPlugin *plugin)
       /* get the plugin direction */
       rtl = !!(gtk_widget_get_direction (GTK_WIDGET (plugin)) == GTK_TEXT_DIR_RTL);
 
-      if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
-              GTK_ORIENTATION_HORIZONTAL)
+      if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_HORIZONTAL)
         pos = rtl ? LAUNCHER_ARROW_WEST : LAUNCHER_ARROW_EAST;
       else
         pos = rtl ? LAUNCHER_ARROW_NORTH : LAUNCHER_ARROW_SOUTH;
@@ -1375,15 +1413,17 @@ launcher_plugin_pack_widgets (LauncherPlugin *plugin)
   panel_assert (pos != LAUNCHER_ARROW_DEFAULT);
 
   /* set the position of the arrow button in the box */
-  gtk_box_set_child_packing (GTK_BOX (plugin->box), plugin->arrow, TRUE, TRUE, 0,
-                      (pos == LAUNCHER_ARROW_SOUTH || pos == LAUNCHER_ARROW_EAST) ? GTK_PACK_END : GTK_PACK_START);
-  gtk_box_set_child_packing (GTK_BOX (plugin->box), plugin->button, FALSE, FALSE, 0,
-                      (pos == LAUNCHER_ARROW_SOUTH || pos == LAUNCHER_ARROW_EAST) ? GTK_PACK_START : GTK_PACK_END);
+  gtk_box_set_child_packing (
+    GTK_BOX (plugin->box), plugin->arrow, TRUE, TRUE, 0,
+    (pos == LAUNCHER_ARROW_SOUTH || pos == LAUNCHER_ARROW_EAST) ? GTK_PACK_END : GTK_PACK_START);
+  gtk_box_set_child_packing (
+    GTK_BOX (plugin->box), plugin->button, FALSE, FALSE, 0,
+    (pos == LAUNCHER_ARROW_SOUTH || pos == LAUNCHER_ARROW_EAST) ? GTK_PACK_START : GTK_PACK_END);
 
   /* set the orientation */
-  gtk_orientable_set_orientation (GTK_ORIENTABLE (plugin->box),
-      !!(pos == LAUNCHER_ARROW_WEST || pos == LAUNCHER_ARROW_EAST) ?
-          GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL);
+  gtk_orientable_set_orientation (
+    GTK_ORIENTABLE (plugin->box),
+    (pos == LAUNCHER_ARROW_WEST || pos == LAUNCHER_ARROW_EAST) ? GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL);
 }
 
 
@@ -1411,7 +1451,7 @@ launcher_plugin_tooltip_icon (const gchar *icon_name)
 
 
 static void
-launcher_plugin_menu_deactivate (GtkWidget      *menu,
+launcher_plugin_menu_deactivate (GtkWidget *menu,
                                  LauncherPlugin *plugin)
 {
   panel_return_if_fail (LAUNCHER_IS_PLUGIN (plugin));
@@ -1432,13 +1472,13 @@ launcher_plugin_menu_deactivate (GtkWidget      *menu,
 
 
 static void
-launcher_plugin_menu_item_activate (GtkMenuItem      *widget,
-                                    GarconMenuItem   *item)
+launcher_plugin_menu_item_activate (GtkMenuItem *widget,
+                                    GarconMenuItem *item)
 {
   LauncherPlugin *plugin;
-  GdkScreen      *screen;
-  GdkEvent       *event;
-  guint32         event_time;
+  GdkScreen *screen;
+  GdkEvent *event;
+  guint32 event_time;
 
   panel_return_if_fail (GTK_IS_MENU_ITEM (widget));
   panel_return_if_fail (GARCON_IS_MENU_ITEM (item));
@@ -1481,17 +1521,17 @@ launcher_plugin_menu_item_activate (GtkMenuItem      *widget,
 
 
 static void
-launcher_plugin_menu_item_drag_data_received (GtkWidget          *widget,
-                                              GdkDragContext     *context,
-                                              gint                x,
-                                              gint                y,
-                                              GtkSelectionData   *data,
-                                              guint               info,
-                                              guint               drag_time,
-                                              GarconMenuItem     *item)
+launcher_plugin_menu_item_drag_data_received (GtkWidget *widget,
+                                              GdkDragContext *context,
+                                              gint x,
+                                              gint y,
+                                              GtkSelectionData *data,
+                                              guint info,
+                                              guint drag_time,
+                                              GarconMenuItem *item)
 {
   LauncherPlugin *plugin;
-  GSList         *uri_list;
+  GSList *uri_list;
 
   panel_return_if_fail (GTK_IS_MENU_ITEM (widget));
   panel_return_if_fail (GARCON_IS_MENU_ITEM (item));
@@ -1536,14 +1576,14 @@ launcher_plugin_menu_item_drag_data_received (GtkWidget          *widget,
 static void
 launcher_plugin_menu_construct (LauncherPlugin *plugin)
 {
-  GtkArrowType    arrow_type;
-  guint           n;
+  GtkArrowType arrow_type;
+  guint n;
   GarconMenuItem *item;
-  GtkWidget      *mi, *box, *label, *image;
-  GdkPixbuf      *pixbuf;
-  const gchar    *name, *icon_name;
-  GSList         *li;
-  gint            icon_size;
+  GtkWidget *mi, *box, *label, *image;
+  GdkPixbuf *pixbuf;
+  const gchar *name, *icon_name;
+  GSList *li;
+  gint icon_size;
 
   panel_return_if_fail (LAUNCHER_IS_PLUGIN (plugin));
   panel_return_if_fail (plugin->menu == NULL);
@@ -1582,22 +1622,22 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
       gtk_drag_dest_set (mi, GTK_DEST_DEFAULT_ALL, drop_targets,
                          G_N_ELEMENTS (drop_targets), GDK_ACTION_COPY);
       g_signal_connect (G_OBJECT (mi), "activate",
-          G_CALLBACK (launcher_plugin_menu_item_activate), item);
+                        G_CALLBACK (launcher_plugin_menu_item_activate), item);
       g_signal_connect (G_OBJECT (mi), "drag-data-received",
-          G_CALLBACK (launcher_plugin_menu_item_drag_data_received), item);
+                        G_CALLBACK (launcher_plugin_menu_item_drag_data_received), item);
       g_signal_connect (G_OBJECT (mi), "drag-leave",
-          G_CALLBACK (launcher_plugin_arrow_drag_leave), plugin);
+                        G_CALLBACK (launcher_plugin_arrow_drag_leave), plugin);
 
       /* only connect the tooltip signal if tips are enabled */
       if (!plugin->disable_tooltips)
         {
           gtk_widget_set_has_tooltip (mi, TRUE);
           g_signal_connect (G_OBJECT (mi), "query-tooltip",
-              G_CALLBACK (launcher_plugin_item_query_tooltip), item);
+                            G_CALLBACK (launcher_plugin_item_query_tooltip), item);
 
           /* invalidate tooltip icon when needed */
           g_signal_connect_object (gtk_icon_theme_get_default (), "changed",
-              G_CALLBACK (launcher_plugin_tooltip_icon_invalidate), mi, G_CONNECT_SWAPPED);
+                                   G_CALLBACK (launcher_plugin_tooltip_icon_invalidate), mi, G_CONNECT_SWAPPED);
         }
 
       /* depending on the menu position we prepend or append */
@@ -1646,7 +1686,7 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
 static void
 launcher_plugin_menu_popup_destroyed (gpointer user_data)
 {
-   LAUNCHER_PLUGIN (user_data)->menu_timeout_id = 0;
+  LAUNCHER_PLUGIN (user_data)->menu_timeout_id = 0;
 }
 
 
@@ -1655,8 +1695,8 @@ static gboolean
 launcher_plugin_menu_popup (gpointer user_data)
 {
   LauncherPlugin *plugin = LAUNCHER_PLUGIN (user_data);
-  gint            x, y;
-  GdkEvent       *event = NULL;
+  gint x, y;
+  GdkEvent *event = NULL;
 
   panel_return_val_if_fail (LAUNCHER_IS_PLUGIN (plugin), FALSE);
 
@@ -1743,10 +1783,10 @@ launcher_plugin_menu_destroy (LauncherPlugin *plugin)
 static void
 launcher_plugin_button_update (LauncherPlugin *plugin)
 {
-  GarconMenuItem      *item = NULL;
-  const gchar         *icon_name;
-  XfcePanelPluginMode  mode;
-  gint                 icon_size;
+  GarconMenuItem *item = NULL;
+  const gchar *icon_name;
+  XfcePanelPluginMode mode;
+  gint icon_size;
 
   panel_return_if_fail (LAUNCHER_IS_PLUGIN (plugin));
 
@@ -1774,7 +1814,7 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
       gtk_label_set_angle (GTK_LABEL (plugin->child),
                            (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL) ? 270 : 0);
       gtk_label_set_text (GTK_LABEL (plugin->child),
-          item != NULL ? garcon_menu_item_get_name (item) : _("No items"));
+                          item != NULL ? garcon_menu_item_get_name (item) : _("No items"));
     }
   else if (G_LIKELY (item != NULL))
     {
@@ -1812,8 +1852,8 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
         }
 
       panel_utils_set_atk_info (plugin->button,
-          garcon_menu_item_get_name (item),
-          garcon_menu_item_get_comment (item));
+                                garcon_menu_item_get_name (item),
+                                garcon_menu_item_get_comment (item));
     }
   else
     {
@@ -1848,7 +1888,7 @@ static void
 launcher_plugin_button_update_action_menu (LauncherPlugin *plugin)
 {
   GarconMenuItem *item = NULL;
-  GList          *list;
+  GList *list;
 
   panel_return_if_fail (LAUNCHER_IS_PLUGIN (plugin));
   panel_return_if_fail (plugin->menu == NULL);
@@ -1879,9 +1919,9 @@ launcher_plugin_button_update_action_menu (LauncherPlugin *plugin)
 
 
 static void
-launcher_plugin_button_state_changed (GtkWidget     *button_a,
-                                      GtkStateFlags  state,
-                                      GtkWidget     *button_b)
+launcher_plugin_button_state_changed (GtkWidget *button_a,
+                                      GtkStateFlags state,
+                                      GtkWidget *button_b)
 {
   if (gtk_widget_get_state_flags (button_a) != gtk_widget_get_state_flags (button_b)
       && (gtk_widget_get_state_flags (button_a) & GTK_STATE_FLAG_INSENSITIVE))
@@ -1891,7 +1931,7 @@ launcher_plugin_button_state_changed (GtkWidget     *button_a,
 
 
 static gboolean
-launcher_plugin_button_press_event (GtkWidget      *button,
+launcher_plugin_button_press_event (GtkWidget *button,
                                     GdkEventButton *event,
                                     LauncherPlugin *plugin)
 {
@@ -1919,11 +1959,10 @@ launcher_plugin_button_press_event (GtkWidget      *button,
            && LIST_HAS_TWO_OR_MORE_ENTRIES (plugin->items))
     {
       /* start the popup timeout */
-      plugin->menu_timeout_id =
-        gdk_threads_add_timeout_full (G_PRIORITY_DEFAULT_IDLE,
-                                      MENU_POPUP_DELAY,
-                                      launcher_plugin_menu_popup, plugin,
-                                      launcher_plugin_menu_popup_destroyed);
+      plugin->menu_timeout_id = gdk_threads_add_timeout_full (G_PRIORITY_DEFAULT_IDLE,
+                                                              MENU_POPUP_DELAY,
+                                                              launcher_plugin_menu_popup, plugin,
+                                                              launcher_plugin_menu_popup_destroyed);
     }
 
   return FALSE;
@@ -1932,12 +1971,12 @@ launcher_plugin_button_press_event (GtkWidget      *button,
 
 
 static gboolean
-launcher_plugin_button_release_event (GtkWidget      *button,
+launcher_plugin_button_release_event (GtkWidget *button,
                                       GdkEventButton *event,
                                       LauncherPlugin *plugin)
 {
   GarconMenuItem *item;
-  GdkScreen      *screen;
+  GdkScreen *screen;
 
   panel_return_val_if_fail (LAUNCHER_IS_PLUGIN (plugin), FALSE);
 
@@ -1951,8 +1990,8 @@ launcher_plugin_button_release_event (GtkWidget      *button,
     return FALSE;
 
   /* leave if button release happens outside of launcher */
-  if (event->x < 0 || event->x > gdk_window_get_width (event->window) ||
-      event->y < 0 || event->y > gdk_window_get_height (event->window))
+  if (event->x < 0 || event->x > gdk_window_get_width (event->window)
+      || event->y < 0 || event->y > gdk_window_get_height (event->window))
     return FALSE;
 
   /* get the menu item and the screen */
@@ -1973,11 +2012,11 @@ launcher_plugin_button_release_event (GtkWidget      *button,
 
 
 static gboolean
-launcher_plugin_button_query_tooltip (GtkWidget      *widget,
-                                      gint            x,
-                                      gint            y,
-                                      gboolean        keyboard_mode,
-                                      GtkTooltip     *tooltip,
+launcher_plugin_button_query_tooltip (GtkWidget *widget,
+                                      gint x,
+                                      gint y,
+                                      gboolean keyboard_mode,
+                                      GtkTooltip *tooltip,
                                       LauncherPlugin *plugin)
 {
   panel_return_val_if_fail (LAUNCHER_IS_PLUGIN (plugin), FALSE);
@@ -1995,14 +2034,14 @@ launcher_plugin_button_query_tooltip (GtkWidget      *widget,
 
 
 static void
-launcher_plugin_button_drag_data_received (GtkWidget        *widget,
-                                           GdkDragContext   *context,
-                                           gint              x,
-                                           gint              y,
+launcher_plugin_button_drag_data_received (GtkWidget *widget,
+                                           GdkDragContext *context,
+                                           gint x,
+                                           gint y,
                                            GtkSelectionData *selection_data,
-                                           guint             info,
-                                           guint             drag_time,
-                                           LauncherPlugin   *plugin)
+                                           guint info,
+                                           guint drag_time,
+                                           LauncherPlugin *plugin)
 {
   GSList *uri_list;
 
@@ -2033,16 +2072,16 @@ launcher_plugin_button_drag_data_received (GtkWidget        *widget,
 
 static GdkAtom
 launcher_plugin_supported_drop (GdkDragContext *context,
-                                GtkWidget      *widget)
+                                GtkWidget *widget)
 {
-  GList           *li;
-  GdkAtom          target;
-  guint            i;
-  GdkModifierType  modifiers = 0;
+  GList *li;
+  GdkAtom target;
+  guint i;
+  GdkModifierType modifiers = 0;
 
   /* do not handle drops if control is pressed */
   gdk_window_get_device_position (gtk_widget_get_window (widget),
-                                  gdk_drag_context_get_device(context),
+                                  gdk_drag_context_get_device (context),
                                   NULL, NULL, &modifiers);
   if (PANEL_HAS_FLAG (modifiers, GDK_CONTROL_MASK))
     return GDK_NONE;
@@ -2062,11 +2101,11 @@ launcher_plugin_supported_drop (GdkDragContext *context,
 
 
 static gboolean
-launcher_plugin_button_drag_motion (GtkWidget      *widget,
+launcher_plugin_button_drag_motion (GtkWidget *widget,
                                     GdkDragContext *context,
-                                    gint            x,
-                                    gint            y,
-                                    guint           drag_time,
+                                    gint x,
+                                    gint y,
+                                    guint drag_time,
                                     LauncherPlugin *plugin)
 {
   panel_return_val_if_fail (LAUNCHER_IS_PLUGIN (plugin), FALSE);
@@ -2098,11 +2137,11 @@ launcher_plugin_button_drag_motion (GtkWidget      *widget,
 
 
 static gboolean
-launcher_plugin_button_drag_drop (GtkWidget      *widget,
+launcher_plugin_button_drag_drop (GtkWidget *widget,
                                   GdkDragContext *context,
-                                  gint            x,
-                                  gint            y,
-                                  guint           drag_time,
+                                  gint x,
+                                  gint y,
+                                  guint drag_time,
                                   LauncherPlugin *plugin)
 {
   GdkAtom target;
@@ -2119,9 +2158,9 @@ launcher_plugin_button_drag_drop (GtkWidget      *widget,
 
 
 static void
-launcher_plugin_button_drag_leave (GtkWidget      *widget,
+launcher_plugin_button_drag_leave (GtkWidget *widget,
                                    GdkDragContext *context,
-                                   guint           drag_time,
+                                   guint drag_time,
                                    LauncherPlugin *plugin)
 {
   panel_return_if_fail (LAUNCHER_IS_PLUGIN (plugin));
@@ -2136,16 +2175,16 @@ launcher_plugin_button_drag_leave (GtkWidget      *widget,
 
 
 static gboolean
-launcher_plugin_button_draw (GtkWidget      *widget,
-                             cairo_t        *cr,
+launcher_plugin_button_draw (GtkWidget *widget,
+                             cairo_t *cr,
                              LauncherPlugin *plugin)
 {
-  GtkArrowType      arrow_type;
-  gdouble           angle;
-  gint              size, x, y, offset;
-  GtkAllocation     allocation;
-  GtkStyleContext  *ctx;
-  GtkBorder         padding;
+  GtkArrowType arrow_type;
+  gdouble angle;
+  gint size, x, y, offset;
+  GtkAllocation allocation;
+  GtkStyleContext *ctx;
+  GtkBorder padding;
 
   panel_return_val_if_fail (LAUNCHER_IS_PLUGIN (plugin), FALSE);
 
@@ -2210,7 +2249,7 @@ launcher_plugin_arrow_visibility (LauncherPlugin *plugin)
   panel_return_if_fail (LAUNCHER_IS_PLUGIN (plugin));
 
   if (plugin->arrow_position != LAUNCHER_ARROW_INTERNAL
-       && LIST_HAS_TWO_OR_MORE_ENTRIES (plugin->items))
+      && LIST_HAS_TWO_OR_MORE_ENTRIES (plugin->items))
     gtk_widget_show (plugin->arrow);
   else
     gtk_widget_hide (plugin->arrow);
@@ -2219,7 +2258,7 @@ launcher_plugin_arrow_visibility (LauncherPlugin *plugin)
 
 
 static gboolean
-launcher_plugin_arrow_press_event (GtkWidget      *button,
+launcher_plugin_arrow_press_event (GtkWidget *button,
                                    GdkEventButton *event,
                                    LauncherPlugin *plugin)
 {
@@ -2237,13 +2276,12 @@ launcher_plugin_arrow_press_event (GtkWidget      *button,
 
 
 
-
 static gboolean
-launcher_plugin_arrow_drag_motion (GtkWidget      *widget,
+launcher_plugin_arrow_drag_motion (GtkWidget *widget,
                                    GdkDragContext *context,
-                                   gint            x,
-                                   gint            y,
-                                   guint           drag_time,
+                                   gint x,
+                                   gint y,
+                                   guint drag_time,
                                    LauncherPlugin *plugin)
 {
   panel_return_val_if_fail (LAUNCHER_IS_PLUGIN (plugin), FALSE);
@@ -2260,10 +2298,9 @@ launcher_plugin_arrow_drag_motion (GtkWidget      *widget,
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->arrow), TRUE);
 
       /* start the popup timeout */
-      plugin->menu_timeout_id =
-        gdk_threads_add_timeout_full (G_PRIORITY_DEFAULT_IDLE, MENU_POPUP_DELAY,
-                                      launcher_plugin_menu_popup, plugin,
-                                      launcher_plugin_menu_popup_destroyed);
+      plugin->menu_timeout_id = gdk_threads_add_timeout_full (G_PRIORITY_DEFAULT_IDLE, MENU_POPUP_DELAY,
+                                                              launcher_plugin_menu_popup, plugin,
+                                                              launcher_plugin_menu_popup_destroyed);
     }
 
   return TRUE;
@@ -2275,10 +2312,10 @@ static gboolean
 launcher_plugin_arrow_drag_leave_timeout (gpointer user_data)
 {
   LauncherPlugin *plugin = LAUNCHER_PLUGIN (user_data);
-  gint            pointer_x, pointer_y;
-  GtkWidget      *menu = plugin->menu;
-  gint            menu_x, menu_y, menu_w, menu_h;
-  GdkDevice      *device;
+  gint pointer_x, pointer_y;
+  GtkWidget *menu = plugin->menu;
+  gint menu_x, menu_y, menu_w, menu_h;
+  GdkDevice *device;
 
   panel_return_val_if_fail (LAUNCHER_IS_PLUGIN (plugin), FALSE);
   panel_return_val_if_fail (menu == NULL || gtk_widget_get_has_window (menu), FALSE);
@@ -2288,7 +2325,7 @@ launcher_plugin_arrow_drag_leave_timeout (gpointer user_data)
     return FALSE;
 
   /* leave if the menu is already hidden */
-  if (! gtk_widget_get_visible (plugin->menu))
+  if (!gtk_widget_get_visible (plugin->menu))
     {
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->arrow), FALSE);
       return FALSE;
@@ -2324,9 +2361,9 @@ launcher_plugin_arrow_drag_leave_timeout (gpointer user_data)
 
 
 static void
-launcher_plugin_arrow_drag_leave (GtkWidget      *widget,
+launcher_plugin_arrow_drag_leave (GtkWidget *widget,
                                   GdkDragContext *context,
-                                  guint           drag_time,
+                                  guint drag_time,
                                   LauncherPlugin *plugin)
 {
   panel_return_if_fail (LAUNCHER_IS_PLUGIN (plugin));
@@ -2369,11 +2406,11 @@ launcher_plugin_icon_invalidate (LauncherPlugin *plugin)
 
 
 static gboolean
-launcher_plugin_item_query_tooltip (GtkWidget      *widget,
-                                    gint            x,
-                                    gint            y,
-                                    gboolean        keyboard_mode,
-                                    GtkTooltip     *tooltip,
+launcher_plugin_item_query_tooltip (GtkWidget *widget,
+                                    gint x,
+                                    gint y,
+                                    gboolean keyboard_mode,
+                                    GtkTooltip *tooltip,
                                     GarconMenuItem *item)
 {
   gchar *markup;
@@ -2418,21 +2455,21 @@ launcher_plugin_item_query_tooltip (GtkWidget      *widget,
 
 static gboolean
 launcher_plugin_item_exec_on_screen (GarconMenuItem *item,
-                                     guint32         event_time,
-                                     GdkScreen      *screen,
-                                     GSList         *uri_list)
+                                     guint32 event_time,
+                                     GdkScreen *screen,
+                                     GSList *uri_list)
 {
-  GError      *error = NULL;
-  gchar      **argv;
-  gboolean     succeed = FALSE;
-  gchar       *command, *uri;
+  GError *error = NULL;
+  gchar **argv;
+  gboolean succeed = FALSE;
+  gchar *command, *uri;
   const gchar *icon;
 
   panel_return_val_if_fail (GARCON_IS_MENU_ITEM (item), FALSE);
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), FALSE);
 
   /* get the command */
-  command = (gchar*) garcon_menu_item_get_command (item);
+  command = (gchar *) garcon_menu_item_get_command (item);
   panel_return_val_if_fail (!xfce_str_is_empty (command), FALSE);
 
   /* expand the field codes */
@@ -2473,12 +2510,12 @@ launcher_plugin_item_exec_on_screen (GarconMenuItem *item,
 
 static void
 launcher_plugin_item_exec (GarconMenuItem *item,
-                           guint32         event_time,
-                           GdkScreen      *screen,
-                           GSList         *uri_list)
+                           guint32 event_time,
+                           GdkScreen *screen,
+                           GSList *uri_list)
 {
-  GSList      *li, fake;
-  gboolean     proceed = TRUE;
+  GSList *li, fake;
+  gboolean proceed = TRUE;
   const gchar *command;
 
   panel_return_if_fail (GARCON_IS_MENU_ITEM (item));
@@ -2490,8 +2527,8 @@ launcher_plugin_item_exec (GarconMenuItem *item,
     return;
 
   if (G_UNLIKELY (uri_list != NULL
-      && strstr (command, "%F") == NULL
-      && strstr (command, "%U") == NULL))
+                  && strstr (command, "%F") == NULL
+                  && strstr (command, "%U") == NULL))
     {
       fake.next = NULL;
 
@@ -2512,11 +2549,11 @@ launcher_plugin_item_exec (GarconMenuItem *item,
 
 static void
 launcher_plugin_item_exec_from_clipboard (GarconMenuItem *item,
-                                          guint32         event_time,
-                                          GdkScreen      *screen)
+                                          guint32 event_time,
+                                          GdkScreen *screen)
 {
-  GtkClipboard     *clipboard;
-  gchar            *text = NULL;
+  GtkClipboard *clipboard;
+  gchar *text = NULL;
 
   panel_return_if_fail (GARCON_IS_MENU_ITEM (item));
   panel_return_if_fail (GDK_IS_SCREEN (screen));
@@ -2543,10 +2580,10 @@ launcher_plugin_item_exec_from_clipboard (GarconMenuItem *item,
 static GSList *
 launcher_plugin_uri_list_extract (GtkSelectionData *data)
 {
-  GSList  *list = NULL;
-  gchar  **array;
-  guint    i;
-  gchar   *uri;
+  GSList *list = NULL;
+  gchar **array;
+  guint i;
+  gchar *uri;
 
   /* leave if there is no data */
   if (gtk_selection_data_get_length (data) <= 0)
@@ -2611,7 +2648,7 @@ launcher_plugin_get_items (LauncherPlugin *plugin)
   panel_return_val_if_fail (LAUNCHER_IS_PLUGIN (plugin), NULL);
 
   /* set extra reference and return a copy of the list */
-  g_slist_foreach (plugin->items, (GFunc) (void (*)(void)) g_object_ref, NULL);
+  g_slist_foreach (plugin->items, (GFunc) (void (*) (void)) g_object_ref, NULL);
   return g_slist_copy (plugin->items);
 }
 
@@ -2620,8 +2657,8 @@ launcher_plugin_get_items (LauncherPlugin *plugin)
 gchar *
 launcher_plugin_unique_filename (LauncherPlugin *plugin)
 {
-  gchar        *filename, *path;
-  static guint  counter = 0;
+  gchar *filename, *path;
+  static guint counter = 0;
 
   panel_return_val_if_fail (LAUNCHER_IS_PLUGIN (plugin), NULL);
 
@@ -2634,7 +2671,6 @@ launcher_plugin_unique_filename (LauncherPlugin *plugin)
   g_free (filename);
 
   return path;
-
 }
 
 
@@ -2643,10 +2679,10 @@ static void
 launcher_plugin_garcon_menu_pool_add (GarconMenu *menu,
                                       GHashTable *pool)
 {
-  GList          *li, *items;
-  GList          *menus;
+  GList *li, *items;
+  GList *menus;
   GarconMenuItem *item;
-  const gchar    *desktop_id;
+  const gchar *desktop_id;
 
   panel_return_if_fail (GARCON_IS_MENU (menu));
 
@@ -2684,7 +2720,7 @@ launcher_plugin_garcon_menu_pool (void)
 {
   GHashTable *pool;
   GarconMenu *menu;
-  GError     *error = NULL;
+  GError *error = NULL;
 
   /* always return a hash table, even if it's empty */
   pool = g_hash_table_new_full (g_str_hash, g_str_equal,
@@ -2719,10 +2755,10 @@ launcher_plugin_garcon_menu_pool (void)
 gboolean
 launcher_plugin_item_is_editable (LauncherPlugin *plugin,
                                   GarconMenuItem *item,
-                                  gboolean       *can_delete)
+                                  gboolean *can_delete)
 {
-  GFile     *item_file;
-  gboolean   editable = FALSE;
+  GFile *item_file;
+  gboolean editable = FALSE;
   GFileInfo *file_info;
 
   panel_return_val_if_fail (LAUNCHER_IS_PLUGIN (plugin), FALSE);
@@ -2733,8 +2769,7 @@ launcher_plugin_item_is_editable (LauncherPlugin *plugin,
     goto out;
 
   file_info = g_file_query_info (item_file,
-                                 G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE ","
-                                 G_FILE_ATTRIBUTE_ACCESS_CAN_DELETE,
+                                 G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE "," G_FILE_ATTRIBUTE_ACCESS_CAN_DELETE,
                                  G_FILE_QUERY_INFO_NONE, NULL, NULL);
   if (G_LIKELY (file_info != NULL))
     {

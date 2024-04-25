@@ -37,44 +37,57 @@
 
 
 
-#define SYSTRAY_MANAGER_REQUEST_DOCK   0
-#define SYSTRAY_MANAGER_BEGIN_MESSAGE  1
+#define SYSTRAY_MANAGER_REQUEST_DOCK 0
+#define SYSTRAY_MANAGER_BEGIN_MESSAGE 1
 #define SYSTRAY_MANAGER_CANCEL_MESSAGE 2
 
 #define SYSTRAY_MANAGER_ORIENTATION_HORIZONTAL 0
-#define SYSTRAY_MANAGER_ORIENTATION_VERTICAL   1
+#define SYSTRAY_MANAGER_ORIENTATION_VERTICAL 1
 
-#define SYSTRAY_MANAGER_ERROR (systray_manager_error_quark())
+#define SYSTRAY_MANAGER_ERROR (systray_manager_error_quark ())
 
 typedef struct _SystrayMessage SystrayMessage;
 
 
-static void            systray_manager_finalize                           (GObject             *object);
-static void            systray_manager_remove_socket                      (gpointer             key,
-                                                                           gpointer             value,
-                                                                           gpointer             user_data);
-static GdkFilterReturn systray_manager_window_filter                      (GdkXEvent           *xev,
-                                                                           GdkEvent            *event,
-                                                                           gpointer             user_data);
-static GdkFilterReturn systray_manager_handle_client_message_opcode       (GdkXEvent           *xevent,
-                                                                           GdkEvent            *event,
-                                                                           gpointer             user_data);
-static GdkFilterReturn systray_manager_handle_client_message_message_data (GdkXEvent           *xevent,
-                                                                           GdkEvent            *event,
-                                                                           gpointer             user_data);
-static void            systray_manager_handle_begin_message               (SystrayManager      *manager,
-                                                                           XClientMessageEvent *xevent);
-static void            systray_manager_handle_cancel_message              (SystrayManager      *manager,
-                                                                           XClientMessageEvent *xevent);
-static void            systray_manager_handle_dock_request                (SystrayManager      *manager,
-                                                                           XClientMessageEvent *xevent);
-static gboolean        systray_manager_handle_undock_request              (GtkSocket           *socket,
-                                                                           gpointer             user_data);
-static void            systray_manager_set_visual                         (SystrayManager      *manager);
-static void            systray_manager_set_colors_property                (SystrayManager      *manager);
-static void            systray_manager_message_free                       (SystrayMessage      *message);
-static void            systray_manager_message_remove_from_list           (SystrayManager      *manager,
-                                                                           XClientMessageEvent *xevent);
+static void
+systray_manager_finalize (GObject *object);
+static void
+systray_manager_remove_socket (gpointer key,
+                               gpointer value,
+                               gpointer user_data);
+static GdkFilterReturn
+systray_manager_window_filter (GdkXEvent *xev,
+                               GdkEvent *event,
+                               gpointer user_data);
+static GdkFilterReturn
+systray_manager_handle_client_message_opcode (GdkXEvent *xevent,
+                                              GdkEvent *event,
+                                              gpointer user_data);
+static GdkFilterReturn
+systray_manager_handle_client_message_message_data (GdkXEvent *xevent,
+                                                    GdkEvent *event,
+                                                    gpointer user_data);
+static void
+systray_manager_handle_begin_message (SystrayManager *manager,
+                                      XClientMessageEvent *xevent);
+static void
+systray_manager_handle_cancel_message (SystrayManager *manager,
+                                       XClientMessageEvent *xevent);
+static void
+systray_manager_handle_dock_request (SystrayManager *manager,
+                                     XClientMessageEvent *xevent);
+static gboolean
+systray_manager_handle_undock_request (GtkSocket *socket,
+                                       gpointer user_data);
+static void
+systray_manager_set_visual (SystrayManager *manager);
+static void
+systray_manager_set_colors_property (SystrayManager *manager);
+static void
+systray_manager_message_free (SystrayMessage *message);
+static void
+systray_manager_message_remove_from_list (SystrayManager *manager,
+                                          XClientMessageEvent *xevent);
 
 
 
@@ -98,10 +111,10 @@ struct _SystrayManager
   GObject __parent__;
 
   /* invisible window */
-  GtkWidget      *invisible;
+  GtkWidget *invisible;
 
   /* list of client sockets */
-  GHashTable     *sockets;
+  GHashTable *sockets;
 
   /* symbolic colors */
   GdkRGBA fg;
@@ -110,41 +123,41 @@ struct _SystrayManager
   GdkRGBA success;
 
   /* orientation of the tray */
-  GtkOrientation  orientation;
+  GtkOrientation orientation;
 
   /* list of pending messages */
-  GSList         *messages;
+  GSList *messages;
 
   /* _net_system_tray_opcode atom */
-  Atom            opcode_atom;
+  Atom opcode_atom;
 
   /* _net_system_tray_message_data atom */
-  Atom            data_atom;
+  Atom data_atom;
 
   /* _net_system_tray_s%d atom */
-  GdkAtom         selection_atom;
+  GdkAtom selection_atom;
 };
 
 struct _SystrayMessage
 {
   /* message string */
-  gchar          *string;
+  gchar *string;
 
   /* message id */
-  glong           id;
+  glong id;
 
   /* x11 window */
-  Window          window;
+  Window window;
 
   /* numb3rs */
-  glong           length;
-  glong           remaining_length;
-  glong           timeout;
+  glong length;
+  glong remaining_length;
+  glong timeout;
 };
 
 
 
-static guint  systray_manager_signals[LAST_SIGNAL];
+static guint systray_manager_signals[LAST_SIGNAL];
 
 
 
@@ -160,53 +173,40 @@ systray_manager_class_init (SystrayManagerClass *klass)
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = systray_manager_finalize;
 
-  systray_manager_signals[ICON_ADDED] =
-      g_signal_new (g_intern_static_string ("icon-added"),
-                    G_OBJECT_CLASS_TYPE (klass),
-                    G_SIGNAL_RUN_LAST,
-                    0, NULL, NULL,
-                    g_cclosure_marshal_VOID__OBJECT,
-                    G_TYPE_NONE, 1,
-                    GTK_TYPE_SOCKET);
+  systray_manager_signals[ICON_ADDED] = g_signal_new (g_intern_static_string ("icon-added"),
+                                                      G_OBJECT_CLASS_TYPE (klass),
+                                                      G_SIGNAL_RUN_LAST,
+                                                      0, NULL, NULL,
+                                                      g_cclosure_marshal_VOID__OBJECT,
+                                                      G_TYPE_NONE, 1, GTK_TYPE_SOCKET);
 
-  systray_manager_signals[ICON_REMOVED] =
-      g_signal_new (g_intern_static_string ("icon-removed"),
-                    G_OBJECT_CLASS_TYPE (klass),
-                    G_SIGNAL_RUN_LAST,
-                    0, NULL, NULL,
-                    g_cclosure_marshal_VOID__OBJECT,
-                    G_TYPE_NONE, 1,
-                    GTK_TYPE_SOCKET);
+  systray_manager_signals[ICON_REMOVED] = g_signal_new (g_intern_static_string ("icon-removed"),
+                                                        G_OBJECT_CLASS_TYPE (klass),
+                                                        G_SIGNAL_RUN_LAST,
+                                                        0, NULL, NULL,
+                                                        g_cclosure_marshal_VOID__OBJECT,
+                                                        G_TYPE_NONE, 1, GTK_TYPE_SOCKET);
 
-  systray_manager_signals[MESSAGE_SENT] =
-      g_signal_new (g_intern_static_string ("message-sent"),
-                    G_OBJECT_CLASS_TYPE (klass),
-                    G_SIGNAL_RUN_LAST,
-                    0, NULL, NULL,
-                    _systray_marshal_VOID__OBJECT_STRING_LONG_LONG,
-                    G_TYPE_NONE, 4,
-                    GTK_TYPE_SOCKET,
-                    G_TYPE_STRING,
-                    G_TYPE_LONG,
-                    G_TYPE_LONG);
+  systray_manager_signals[MESSAGE_SENT] = g_signal_new (g_intern_static_string ("message-sent"),
+                                                        G_OBJECT_CLASS_TYPE (klass),
+                                                        G_SIGNAL_RUN_LAST,
+                                                        0, NULL, NULL,
+                                                        _systray_marshal_VOID__OBJECT_STRING_LONG_LONG,
+                                                        G_TYPE_NONE, 4, GTK_TYPE_SOCKET, G_TYPE_STRING, G_TYPE_LONG, G_TYPE_LONG);
 
-  systray_manager_signals[MESSAGE_CANCELLED] =
-      g_signal_new (g_intern_static_string ("message-cancelled"),
-                    G_OBJECT_CLASS_TYPE (klass),
-                    G_SIGNAL_RUN_LAST,
-                    0, NULL, NULL,
-                    _systray_marshal_VOID__OBJECT_LONG,
-                    G_TYPE_NONE, 2,
-                    GTK_TYPE_SOCKET,
-                    G_TYPE_LONG);
+  systray_manager_signals[MESSAGE_CANCELLED] = g_signal_new (g_intern_static_string ("message-cancelled"),
+                                                             G_OBJECT_CLASS_TYPE (klass),
+                                                             G_SIGNAL_RUN_LAST,
+                                                             0, NULL, NULL,
+                                                             _systray_marshal_VOID__OBJECT_LONG,
+                                                             G_TYPE_NONE, 2, GTK_TYPE_SOCKET, G_TYPE_LONG);
 
-  systray_manager_signals[LOST_SELECTION] =
-      g_signal_new (g_intern_static_string ("lost-selection"),
-                    G_OBJECT_CLASS_TYPE (klass),
-                    G_SIGNAL_RUN_LAST,
-                    0, NULL, NULL,
-                    g_cclosure_marshal_VOID__VOID,
-                    G_TYPE_NONE, 0);
+  systray_manager_signals[LOST_SELECTION] = g_signal_new (g_intern_static_string ("lost-selection"),
+                                                          G_OBJECT_CLASS_TYPE (klass),
+                                                          G_SIGNAL_RUN_LAST,
+                                                          0, NULL, NULL,
+                                                          g_cclosure_marshal_VOID__VOID,
+                                                          G_TYPE_NONE, 0);
 }
 
 
@@ -279,20 +279,20 @@ systray_manager_new (void)
 
 
 gboolean
-systray_manager_register (SystrayManager  *manager,
-                          GdkScreen       *screen,
-                          GError         **error)
+systray_manager_register (SystrayManager *manager,
+                          GdkScreen *screen,
+                          GError **error)
 {
-  GdkDisplay          *display;
-  gchar               *selection_name;
-  gboolean             succeed;
-  gint                 screen_number;
-  GtkWidget           *invisible;
-  guint32              timestamp;
-  GdkAtom              opcode_atom;
-  GdkAtom              data_atom;
-  XClientMessageEvent  xevent;
-  Window               root_window;
+  GdkDisplay *display;
+  gchar *selection_name;
+  gboolean succeed;
+  gint screen_number;
+  GtkWidget *invisible;
+  guint32 timestamp;
+  GdkAtom opcode_atom;
+  GdkAtom data_atom;
+  XClientMessageEvent xevent;
+  Window root_window;
 
   panel_return_val_if_fail (SYSTRAY_IS_MANAGER (manager), FALSE);
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), FALSE);
@@ -356,7 +356,7 @@ systray_manager_register (SystrayManager  *manager,
 
       /* send the message */
       XSendEvent (GDK_DISPLAY_XDISPLAY (display), root_window,
-                  False, StructureNotifyMask, (XEvent *)&xevent);
+                  False, StructureNotifyMask, (XEvent *) &xevent);
 
       /* system_tray_request_dock, system_tray_begin_message, system_tray_cancel_message and selectionclear */
       gdk_window_add_filter (gtk_widget_get_window (GTK_WIDGET (invisible)),
@@ -398,7 +398,7 @@ systray_manager_remove_socket (gpointer key,
                                gpointer user_data)
 {
   SystrayManager *manager = SYSTRAY_MANAGER (user_data);
-  GtkSocket      *socket = GTK_SOCKET (value);
+  GtkSocket *socket = GTK_SOCKET (value);
 
   panel_return_if_fail (SYSTRAY_IS_MANAGER (manager));
   panel_return_if_fail (GTK_IS_SOCKET (socket));
@@ -413,8 +413,8 @@ void
 systray_manager_unregister (SystrayManager *manager)
 {
   GdkDisplay *display;
-  GtkWidget  *invisible = manager->invisible;
-  GdkWindow  *owner;
+  GtkWidget *invisible = manager->invisible;
+  GdkWindow *owner;
 
   panel_return_if_fail (SYSTRAY_IS_MANAGER (manager));
 
@@ -441,11 +441,10 @@ systray_manager_unregister (SystrayManager *manager)
 
   /* remove window filter */
   gdk_window_remove_filter (gtk_widget_get_window (GTK_WIDGET (invisible)),
-      systray_manager_window_filter, manager);
+                            systray_manager_window_filter, manager);
 
   /* remove all sockets from the hash table */
-  g_hash_table_foreach (manager->sockets,
-      systray_manager_remove_socket, manager);
+  g_hash_table_foreach (manager->sockets, systray_manager_remove_socket, manager);
 
   /* destroy and unref the invisible window */
   manager->invisible = NULL;
@@ -459,10 +458,10 @@ systray_manager_unregister (SystrayManager *manager)
 
 static GdkFilterReturn
 systray_manager_window_filter (GdkXEvent *xev,
-                               GdkEvent  *event,
-                               gpointer   user_data)
+                               GdkEvent *event,
+                               gpointer user_data)
 {
-  XEvent         *xevent = (XEvent *)xev;
+  XEvent *xevent = (XEvent *) xev;
   SystrayManager *manager = SYSTRAY_MANAGER (user_data);
 
   panel_return_val_if_fail (SYSTRAY_IS_MANAGER (manager), GDK_FILTER_CONTINUE);
@@ -491,11 +490,11 @@ systray_manager_window_filter (GdkXEvent *xev,
 
 static GdkFilterReturn
 systray_manager_handle_client_message_opcode (GdkXEvent *xevent,
-                                              GdkEvent  *event,
-                                              gpointer   user_data)
+                                              GdkEvent *event,
+                                              gpointer user_data)
 {
   XClientMessageEvent *xev;
-  SystrayManager      *manager = SYSTRAY_MANAGER (user_data);
+  SystrayManager *manager = SYSTRAY_MANAGER (user_data);
 
   panel_return_val_if_fail (SYSTRAY_IS_MANAGER (manager), GDK_FILTER_REMOVE);
 
@@ -505,19 +504,19 @@ systray_manager_handle_client_message_opcode (GdkXEvent *xevent,
   switch (xev->data.l[1])
     {
     case SYSTRAY_MANAGER_REQUEST_DOCK:
-        systray_manager_handle_dock_request (manager, xev);
-        return GDK_FILTER_REMOVE;
+      systray_manager_handle_dock_request (manager, xev);
+      return GDK_FILTER_REMOVE;
 
     case SYSTRAY_MANAGER_BEGIN_MESSAGE:
-        systray_manager_handle_begin_message (manager, xev);
-        return GDK_FILTER_REMOVE;
+      systray_manager_handle_begin_message (manager, xev);
+      return GDK_FILTER_REMOVE;
 
     case SYSTRAY_MANAGER_CANCEL_MESSAGE:
-        systray_manager_handle_cancel_message (manager, xev);
-        return GDK_FILTER_REMOVE;
+      systray_manager_handle_cancel_message (manager, xev);
+      return GDK_FILTER_REMOVE;
 
     default:
-        break;
+      break;
     }
 
   return GDK_FILTER_CONTINUE;
@@ -527,15 +526,15 @@ systray_manager_handle_client_message_opcode (GdkXEvent *xevent,
 
 static GdkFilterReturn
 systray_manager_handle_client_message_message_data (GdkXEvent *xevent,
-                                                    GdkEvent  *event,
-                                                    gpointer   user_data)
+                                                    GdkEvent *event,
+                                                    gpointer user_data)
 {
   XClientMessageEvent *xev = xevent;
-  SystrayManager      *manager = SYSTRAY_MANAGER (user_data);
-  GSList              *li;
-  SystrayMessage      *message;
-  glong                length;
-  GtkSocket           *socket;
+  SystrayManager *manager = SYSTRAY_MANAGER (user_data);
+  GSList *li;
+  SystrayMessage *message;
+  glong length;
+  GtkSocket *socket;
 
   panel_return_val_if_fail (SYSTRAY_IS_MANAGER (manager), GDK_FILTER_REMOVE);
 
@@ -582,12 +581,12 @@ systray_manager_handle_client_message_message_data (GdkXEvent *xevent,
 
 
 static void
-systray_manager_handle_begin_message (SystrayManager      *manager,
+systray_manager_handle_begin_message (SystrayManager *manager,
                                       XClientMessageEvent *xevent)
 {
-  GtkSocket      *socket;
+  GtkSocket *socket;
   SystrayMessage *message;
-  glong           length, timeout, id;
+  glong length, timeout, id;
 
   panel_return_if_fail (SYSTRAY_IS_MANAGER (manager));
 
@@ -618,13 +617,13 @@ systray_manager_handle_begin_message (SystrayManager      *manager,
       message = g_slice_new0 (SystrayMessage);
 
       /* set message data */
-      message->window           = xevent->window;
-      message->timeout          = timeout;
-      message->length           = length;
-      message->id               = id;
+      message->window = xevent->window;
+      message->timeout = timeout;
+      message->length = length;
+      message->id = id;
       message->remaining_length = length;
-      message->string           = g_malloc (length + 1);
-      message->string[length]   = '\0';
+      message->string = g_malloc (length + 1);
+      message->string[length] = '\0';
 
       /* add this message to the list of pending messages */
       manager->messages = g_slist_prepend (manager->messages, message);
@@ -634,11 +633,11 @@ systray_manager_handle_begin_message (SystrayManager      *manager,
 
 
 static void
-systray_manager_handle_cancel_message (SystrayManager      *manager,
+systray_manager_handle_cancel_message (SystrayManager *manager,
                                        XClientMessageEvent *xevent)
 {
-  GtkSocket       *socket;
-  Window           window = xevent->data.l[2];
+  GtkSocket *socket;
+  Window window = xevent->data.l[2];
 
   panel_return_if_fail (SYSTRAY_IS_MANAGER (manager));
 
@@ -657,12 +656,12 @@ systray_manager_handle_cancel_message (SystrayManager      *manager,
 
 
 static void
-systray_manager_handle_dock_request (SystrayManager      *manager,
+systray_manager_handle_dock_request (SystrayManager *manager,
                                      XClientMessageEvent *xevent)
 {
-  GtkWidget       *socket;
-  GdkScreen       *screen;
-  Window           window = xevent->data.l[2];
+  GtkWidget *socket;
+  GdkScreen *screen;
+  Window window = xevent->data.l[2];
 
   panel_return_if_fail (SYSTRAY_IS_MANAGER (manager));
   panel_return_if_fail (GTK_IS_INVISIBLE (manager->invisible));
@@ -686,7 +685,7 @@ systray_manager_handle_dock_request (SystrayManager      *manager,
     {
       /* signal to monitor if the client is removed from the socket */
       g_signal_connect (G_OBJECT (socket), "plug-removed",
-          G_CALLBACK (systray_manager_handle_undock_request), manager);
+                        G_CALLBACK (systray_manager_handle_undock_request), manager);
 
       /* register the xembed client window id for this socket */
       gtk_socket_add_id (GTK_SOCKET (socket), window);
@@ -708,10 +707,10 @@ systray_manager_handle_dock_request (SystrayManager      *manager,
 
 static gboolean
 systray_manager_handle_undock_request (GtkSocket *socket,
-                                       gpointer   user_data)
+                                       gpointer user_data)
 {
-  SystrayManager  *manager = SYSTRAY_MANAGER (user_data);
-  Window          *window;
+  SystrayManager *manager = SYSTRAY_MANAGER (user_data);
+  Window *window;
 
   panel_return_val_if_fail (SYSTRAY_IS_MANAGER (manager), FALSE);
 
@@ -731,12 +730,12 @@ systray_manager_handle_undock_request (GtkSocket *socket,
 static void
 systray_manager_set_visual (SystrayManager *manager)
 {
-  GdkDisplay  *display;
-  GdkVisual   *visual;
-  Visual      *xvisual;
-  Atom         visual_atom;
-  gulong       data[1];
-  GdkScreen   *screen;
+  GdkDisplay *display;
+  GdkVisual *visual;
+  Visual *xvisual;
+  Atom visual_atom;
+  gulong data[1];
+  GdkScreen *screen;
 
   panel_return_if_fail (SYSTRAY_IS_MANAGER (manager));
   panel_return_if_fail (GTK_IS_INVISIBLE (manager->invisible));
@@ -747,8 +746,7 @@ systray_manager_set_visual (SystrayManager *manager)
   screen = gtk_invisible_get_screen (GTK_INVISIBLE (manager->invisible));
 
   /* get the xatom for the visual property */
-  visual_atom = gdk_x11_get_xatom_by_name_for_display (display,
-      "_NET_SYSTEM_TRAY_VISUAL");
+  visual_atom = gdk_x11_get_xatom_by_name_for_display (display, "_NET_SYSTEM_TRAY_VISUAL");
 
   visual = gdk_screen_get_rgba_visual (screen);
   panel_debug (PANEL_DEBUG_SYSTRAY, "rgba visual is %p", visual);
@@ -776,10 +774,10 @@ systray_manager_set_visual (SystrayManager *manager)
 
 void
 systray_manager_set_colors (SystrayManager *manager,
-                            GdkRGBA        *fg,
-                            GdkRGBA        *error,
-                            GdkRGBA        *warning,
-                            GdkRGBA        *success)
+                            GdkRGBA *fg,
+                            GdkRGBA *error,
+                            GdkRGBA *warning,
+                            GdkRGBA *success)
 {
   panel_return_if_fail (SYSTRAY_IS_MANAGER (manager));
 
@@ -796,10 +794,10 @@ systray_manager_set_colors (SystrayManager *manager,
 static void
 systray_manager_set_colors_property (SystrayManager *manager)
 {
-  GdkWindow  *window;
+  GdkWindow *window;
   GdkDisplay *display;
-  Atom        atom;
-  gulong      data[12];
+  Atom atom;
+  gulong data[12];
 
   g_return_if_fail (manager->invisible != NULL);
   window = gtk_widget_get_window (manager->invisible);
@@ -833,11 +831,11 @@ systray_manager_set_colors_property (SystrayManager *manager)
 
 void
 systray_manager_set_orientation (SystrayManager *manager,
-                                 GtkOrientation  orientation)
+                                 GtkOrientation orientation)
 {
   GdkDisplay *display;
-  Atom        orientation_atom;
-  gulong      data[1];
+  Atom orientation_atom;
+  gulong data[1];
 
   panel_return_if_fail (SYSTRAY_IS_MANAGER (manager));
   panel_return_if_fail (GTK_IS_INVISIBLE (manager->invisible));
@@ -850,13 +848,11 @@ systray_manager_set_orientation (SystrayManager *manager,
   display = gtk_widget_get_display (manager->invisible);
 
   /* get the xatom for the orientation property */
-  orientation_atom = gdk_x11_get_xatom_by_name_for_display (display,
-      "_NET_SYSTEM_TRAY_ORIENTATION");
+  orientation_atom = gdk_x11_get_xatom_by_name_for_display (display, "_NET_SYSTEM_TRAY_ORIENTATION");
 
   /* set the data we're going to send to x */
-  data[0] = (manager->orientation == GTK_ORIENTATION_HORIZONTAL ?
-             SYSTRAY_MANAGER_ORIENTATION_HORIZONTAL
-             : SYSTRAY_MANAGER_ORIENTATION_VERTICAL);
+  data[0] = (manager->orientation == GTK_ORIENTATION_HORIZONTAL ? SYSTRAY_MANAGER_ORIENTATION_HORIZONTAL
+                                                                : SYSTRAY_MANAGER_ORIENTATION_VERTICAL);
 
   /* change the x property */
   XChangeProperty (GDK_DISPLAY_XDISPLAY (display),
@@ -882,10 +878,10 @@ systray_manager_message_free (SystrayMessage *message)
 
 
 static void
-systray_manager_message_remove_from_list (SystrayManager      *manager,
+systray_manager_message_remove_from_list (SystrayManager *manager,
                                           XClientMessageEvent *xevent)
 {
-  GSList         *li;
+  GSList *li;
   SystrayMessage *message;
 
   panel_return_if_fail (SYSTRAY_IS_MANAGER (manager));

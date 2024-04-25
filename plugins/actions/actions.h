@@ -26,7 +26,8 @@ G_BEGIN_DECLS
 #define ACTIONS_TYPE_PLUGIN (actions_plugin_get_type ())
 G_DECLARE_FINAL_TYPE (ActionsPlugin, actions_plugin, ACTIONS, PLUGIN, XfcePanelPlugin)
 
-void actions_plugin_register_type (XfcePanelTypeModule *type_module);
+void
+actions_plugin_register_type (XfcePanelTypeModule *type_module);
 
 G_END_DECLS
 

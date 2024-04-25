@@ -32,9 +32,10 @@ struct _PanelPluginExternalWrapperClass
   PanelPluginExternalClass __parent__;
 };
 
-GtkWidget *panel_plugin_external_wrapper_new      (PanelModule  *module,
-                                                   gint          unique_id,
-                                                   gchar       **arguments) G_GNUC_MALLOC;
+GtkWidget *
+panel_plugin_external_wrapper_new (PanelModule *module,
+                                   gint unique_id,
+                                   gchar **arguments) G_GNUC_MALLOC;
 
 G_END_DECLS
 

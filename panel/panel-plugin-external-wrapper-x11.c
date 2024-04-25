@@ -28,25 +28,34 @@
 
 
 
-static void         panel_plugin_external_wrapper_x11_size_allocate           (GtkWidget                        *widget,
-                                                                               GtkAllocation                    *allocation);
-static gchar      **panel_plugin_external_wrapper_x11_get_argv                (PanelPluginExternal              *external,
-                                                                               gchar                           **arguments);
-static gboolean     panel_plugin_external_wrapper_x11_spawn                   (PanelPluginExternal              *external,
-                                                                               gchar                           **argv,
-                                                                               GPid                             *pid,
-                                                                               GError                          **error);
-static void         panel_plugin_external_wrapper_x11_set_background_color    (PanelPluginExternal              *external,
-                                                                               const GdkRGBA                    *color);
-static void         panel_plugin_external_wrapper_x11_set_background_image    (PanelPluginExternal              *external,
-                                                                               const gchar                      *image);
-static void         panel_plugin_external_wrapper_x11_set_geometry            (PanelPluginExternal              *external,
-                                                                               PanelWindow                      *window);
-static gboolean     panel_plugin_external_wrapper_x11_pointer_is_outside      (PanelPluginExternal              *external);
-static void         panel_plugin_external_wrapper_x11_socket_plug_added       (GtkSocket                        *socket,
-                                                                               PanelPluginExternalWrapperX11    *wrapper);
-static gboolean     panel_plugin_external_wrapper_x11_socket_plug_removed     (GtkSocket                        *socket,
-                                                                               PanelPluginExternalWrapperX11    *wrapper);
+static void
+panel_plugin_external_wrapper_x11_size_allocate (GtkWidget *widget,
+                                                 GtkAllocation *allocation);
+static gchar **
+panel_plugin_external_wrapper_x11_get_argv (PanelPluginExternal *external,
+                                            gchar **arguments);
+static gboolean
+panel_plugin_external_wrapper_x11_spawn (PanelPluginExternal *external,
+                                         gchar **argv,
+                                         GPid *pid,
+                                         GError **error);
+static void
+panel_plugin_external_wrapper_x11_set_background_color (PanelPluginExternal *external,
+                                                        const GdkRGBA *color);
+static void
+panel_plugin_external_wrapper_x11_set_background_image (PanelPluginExternal *external,
+                                                        const gchar *image);
+static void
+panel_plugin_external_wrapper_x11_set_geometry (PanelPluginExternal *external,
+                                                PanelWindow *window);
+static gboolean
+panel_plugin_external_wrapper_x11_pointer_is_outside (PanelPluginExternal *external);
+static void
+panel_plugin_external_wrapper_x11_socket_plug_added (GtkSocket *socket,
+                                                     PanelPluginExternalWrapperX11 *wrapper);
+static gboolean
+panel_plugin_external_wrapper_x11_socket_plug_removed (GtkSocket *socket,
+                                                       PanelPluginExternalWrapperX11 *wrapper);
 
 
 
@@ -133,8 +142,8 @@ static void
 panel_plugin_external_wrapper_x11_spawn_child_setup (gpointer data)
 {
   PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (data);
-  GdkDisplay          *display;
-  const gchar         *name;
+  GdkDisplay *display;
+  const gchar *name;
 
   /* this is what gdk_spawn_on_screen does */
   display = gtk_widget_get_display (GTK_WIDGET (external));

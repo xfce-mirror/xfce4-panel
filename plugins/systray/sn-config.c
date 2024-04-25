@@ -35,41 +35,44 @@
 
 
 
-static void                  sn_config_finalize                      (GObject                 *object);
+static void
+sn_config_finalize (GObject *object);
 
-static void                  sn_config_get_property                  (GObject                 *object,
-                                                                      guint                    prop_id,
-                                                                      GValue                  *value,
-                                                                      GParamSpec              *pspec);
+static void
+sn_config_get_property (GObject *object,
+                        guint prop_id,
+                        GValue *value,
+                        GParamSpec *pspec);
 
-static void                  sn_config_set_property                  (GObject                 *object,
-                                                                      guint                    prop_id,
-                                                                      const GValue            *value,
-                                                                      GParamSpec              *pspec);
+static void
+sn_config_set_property (GObject *object,
+                        guint prop_id,
+                        const GValue *value,
+                        GParamSpec *pspec);
 
 
 
 struct _SnConfig
 {
-  GObject             __parent__;
+  GObject __parent__;
 
-  gint                icon_size;
-  gboolean            single_row;
-  gboolean            square_icons;
-  gboolean            symbolic_icons;
-  gboolean            menu_is_primary;
-  gboolean            hide_new_items;
-  GList              *known_items;
-  GHashTable         *hidden_items;
-  GList              *known_legacy_items;
-  GHashTable         *hidden_legacy_items;
+  gint icon_size;
+  gboolean single_row;
+  gboolean square_icons;
+  gboolean symbolic_icons;
+  gboolean menu_is_primary;
+  gboolean hide_new_items;
+  GList *known_items;
+  GHashTable *hidden_items;
+  GList *known_legacy_items;
+  GHashTable *hidden_legacy_items;
 
   /* not xfconf properties but it is still convenient to have them here */
-  GtkOrientation      orientation;
-  GtkOrientation      panel_orientation;
-  gint                nrows;
-  gint                panel_size;
-  gint                panel_icon_size;
+  GtkOrientation orientation;
+  GtkOrientation panel_orientation;
+  gint nrows;
+  gint panel_size;
+  gint panel_icon_size;
 };
 
 G_DEFINE_FINAL_TYPE (SnConfig, sn_config, G_TYPE_OBJECT)
@@ -119,115 +122,100 @@ sn_config_class_init (SnConfigClass *klass)
                                    PROP_ICON_SIZE,
                                    g_param_spec_int ("icon-size", NULL, NULL,
                                                      0, 64, DEFAULT_ICON_SIZE,
-                                                     G_PARAM_READWRITE |
-                                                     G_PARAM_STATIC_STRINGS));
+                                                     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
                                    PROP_SINGLE_ROW,
                                    g_param_spec_boolean ("single-row", NULL, NULL,
                                                          DEFAULT_SINGLE_ROW,
-                                                         G_PARAM_READWRITE |
-                                                         G_PARAM_STATIC_STRINGS));
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
                                    PROP_SQUARE_ICONS,
                                    g_param_spec_boolean ("square-icons", NULL, NULL,
                                                          DEFAULT_SQUARE_ICONS,
-                                                         G_PARAM_READWRITE |
-                                                         G_PARAM_STATIC_STRINGS));
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
                                    PROP_SYMBOLIC_ICONS,
                                    g_param_spec_boolean ("symbolic-icons", NULL, NULL,
                                                          DEFAULT_SYMBOLIC_ICONS,
-                                                         G_PARAM_READWRITE |
-                                                         G_PARAM_STATIC_STRINGS));
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
                                    PROP_MENU_IS_PRIMARY,
                                    g_param_spec_boolean ("menu-is-primary", NULL, NULL,
                                                          DEFAULT_MENU_IS_PRIMARY,
-                                                         G_PARAM_READWRITE |
-                                                         G_PARAM_STATIC_STRINGS));
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
                                    PROP_HIDE_NEW_ITEMS,
                                    g_param_spec_boolean ("hide-new-items", NULL, NULL,
                                                          DEFAULT_HIDE_NEW_ITEMS,
-                                                         G_PARAM_READWRITE |
-                                                         G_PARAM_STATIC_STRINGS));
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
                                    PROP_KNOWN_ITEMS,
                                    g_param_spec_boxed ("known-items",
                                                        NULL, NULL,
                                                        G_TYPE_PTR_ARRAY,
-                                                       G_PARAM_READWRITE |
-                                                       G_PARAM_STATIC_STRINGS));
+                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
                                    PROP_HIDDEN_ITEMS,
                                    g_param_spec_boxed ("hidden-items",
                                                        NULL, NULL,
                                                        G_TYPE_PTR_ARRAY,
-                                                       G_PARAM_READWRITE |
-                                                       G_PARAM_STATIC_STRINGS));
+                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
                                    PROP_KNOWN_LEGACY_ITEMS,
                                    g_param_spec_boxed ("known-legacy-items",
                                                        NULL, NULL,
                                                        G_TYPE_PTR_ARRAY,
-                                                       G_PARAM_READWRITE |
-                                                       G_PARAM_STATIC_STRINGS));
+                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
                                    PROP_HIDDEN_LEGACY_ITEMS,
                                    g_param_spec_boxed ("hidden-legacy-items",
                                                        NULL, NULL,
                                                        G_TYPE_PTR_ARRAY,
-                                                       G_PARAM_READWRITE |
-                                                       G_PARAM_STATIC_STRINGS));
+                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
-  sn_config_signals[CONFIGURATION_CHANGED] =
-    g_signal_new (g_intern_static_string ("configuration-changed"),
-                  G_TYPE_FROM_CLASS (object_class),
-                  G_SIGNAL_RUN_LAST,
-                  0, NULL, NULL,
-                  g_cclosure_marshal_VOID__VOID,
-                  G_TYPE_NONE, 0);
+  sn_config_signals[CONFIGURATION_CHANGED] = g_signal_new (g_intern_static_string ("configuration-changed"),
+                                                           G_TYPE_FROM_CLASS (object_class),
+                                                           G_SIGNAL_RUN_LAST,
+                                                           0, NULL, NULL,
+                                                           g_cclosure_marshal_VOID__VOID,
+                                                           G_TYPE_NONE, 0);
 
-  sn_config_signals[ICONS_CHANGED] =
-    g_signal_new (g_intern_static_string ("icons-changed"),
-                  G_TYPE_FROM_CLASS (object_class),
-                  G_SIGNAL_RUN_LAST,
-                  0, NULL, NULL,
-                  g_cclosure_marshal_VOID__VOID,
-                  G_TYPE_NONE, 0);
+  sn_config_signals[ICONS_CHANGED] = g_signal_new (g_intern_static_string ("icons-changed"),
+                                                   G_TYPE_FROM_CLASS (object_class),
+                                                   G_SIGNAL_RUN_LAST,
+                                                   0, NULL, NULL,
+                                                   g_cclosure_marshal_VOID__VOID,
+                                                   G_TYPE_NONE, 0);
 
-  sn_config_signals[ITEM_LIST_CHANGED] =
-    g_signal_new (g_intern_static_string ("items-list-changed"),
-                  G_TYPE_FROM_CLASS (object_class),
-                  G_SIGNAL_RUN_LAST,
-                  0, NULL, NULL,
-                  g_cclosure_marshal_VOID__VOID,
-                  G_TYPE_NONE, 0);
+  sn_config_signals[ITEM_LIST_CHANGED] = g_signal_new (g_intern_static_string ("items-list-changed"),
+                                                       G_TYPE_FROM_CLASS (object_class),
+                                                       G_SIGNAL_RUN_LAST,
+                                                       0, NULL, NULL,
+                                                       g_cclosure_marshal_VOID__VOID,
+                                                       G_TYPE_NONE, 0);
 
-  sn_config_signals[COLLECT_KNOWN_ITEMS] =
-    g_signal_new (g_intern_static_string ("collect-known-items"),
-                  G_TYPE_FROM_CLASS (object_class),
-                  G_SIGNAL_RUN_LAST,
-                  0, NULL, NULL,
-                  g_cclosure_marshal_generic,
-                  G_TYPE_NONE, 1, G_TYPE_POINTER);
+  sn_config_signals[COLLECT_KNOWN_ITEMS] = g_signal_new (g_intern_static_string ("collect-known-items"),
+                                                         G_TYPE_FROM_CLASS (object_class),
+                                                         G_SIGNAL_RUN_LAST,
+                                                         0, NULL, NULL,
+                                                         g_cclosure_marshal_generic,
+                                                         G_TYPE_NONE, 1, G_TYPE_POINTER);
 
-  sn_config_signals[LEGACY_ITEM_LIST_CHANGED] =
-    g_signal_new (g_intern_static_string ("legacy-items-list-changed"),
-                  G_TYPE_FROM_CLASS (object_class),
-                  G_SIGNAL_RUN_LAST,
-                  0, NULL, NULL,
-                  g_cclosure_marshal_VOID__VOID,
-                  G_TYPE_NONE, 0);
+  sn_config_signals[LEGACY_ITEM_LIST_CHANGED] = g_signal_new (g_intern_static_string ("legacy-items-list-changed"),
+                                                              G_TYPE_FROM_CLASS (object_class),
+                                                              G_SIGNAL_RUN_LAST,
+                                                              0, NULL, NULL,
+                                                              g_cclosure_marshal_VOID__VOID,
+                                                              G_TYPE_NONE, 0);
 }
 
 
@@ -235,20 +223,20 @@ sn_config_class_init (SnConfigClass *klass)
 static void
 sn_config_init (SnConfig *config)
 {
-  config->icon_size            = DEFAULT_ICON_SIZE;
-  config->single_row           = DEFAULT_SINGLE_ROW;
-  config->square_icons         = DEFAULT_SQUARE_ICONS;
-  config->symbolic_icons       = DEFAULT_SYMBOLIC_ICONS;
-  config->hide_new_items       = DEFAULT_HIDE_NEW_ITEMS;
-  config->known_items          = NULL;
-  config->hidden_items         = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-  config->known_legacy_items   = NULL;
-  config->hidden_legacy_items  = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+  config->icon_size = DEFAULT_ICON_SIZE;
+  config->single_row = DEFAULT_SINGLE_ROW;
+  config->square_icons = DEFAULT_SQUARE_ICONS;
+  config->symbolic_icons = DEFAULT_SYMBOLIC_ICONS;
+  config->hide_new_items = DEFAULT_HIDE_NEW_ITEMS;
+  config->known_items = NULL;
+  config->hidden_items = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+  config->known_legacy_items = NULL;
+  config->hidden_legacy_items = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
-  config->orientation          = DEFAULT_ORIENTATION;
-  config->panel_orientation    = DEFAULT_PANEL_ORIENTATION;
-  config->nrows                = 1;
-  config->panel_size           = DEFAULT_PANEL_SIZE;
+  config->orientation = DEFAULT_ORIENTATION;
+  config->panel_orientation = DEFAULT_PANEL_ORIENTATION;
+  config->nrows = 1;
+  config->panel_size = DEFAULT_PANEL_SIZE;
 }
 
 
@@ -274,7 +262,7 @@ sn_config_finalize (GObject *object)
 static void
 sn_config_free_array_element (gpointer data)
 {
-  GValue *value = (GValue *)data;
+  GValue *value = (GValue *) data;
 
   g_value_unset (value);
   g_free (value);
@@ -298,15 +286,15 @@ sn_config_collect_keys (gpointer key,
 
 
 static void
-sn_config_get_property (GObject    *object,
-                        guint       prop_id,
-                        GValue     *value,
+sn_config_get_property (GObject *object,
+                        guint prop_id,
+                        GValue *value,
                         GParamSpec *pspec)
 {
-  SnConfig  *config = SN_CONFIG (object);
+  SnConfig *config = SN_CONFIG (object);
   GPtrArray *array;
-  GList     *li;
-  GValue    *tmp;
+  GList *li;
+  GValue *tmp;
 
   switch (prop_id)
     {
@@ -383,17 +371,17 @@ sn_config_get_property (GObject    *object,
 
 
 static void
-sn_config_set_property (GObject      *object,
-                        guint         prop_id,
+sn_config_set_property (GObject *object,
+                        guint prop_id,
                         const GValue *value,
-                        GParamSpec   *pspec)
+                        GParamSpec *pspec)
 {
-  SnConfig     *config = SN_CONFIG (object);
-  gint          val;
-  GPtrArray    *array;
+  SnConfig *config = SN_CONFIG (object);
+  gint val;
+  GPtrArray *array;
   const GValue *tmp;
-  gchar        *name;
-  guint         i;
+  gchar *name;
+  guint i;
 
   switch (prop_id)
     {
@@ -552,31 +540,31 @@ sn_config_get_icon_size_is_automatic (SnConfig *config)
 
 void
 sn_config_get_dimensions (SnConfig *config,
-                          gint     *ret_icon_size,
-                          gint     *ret_n_rows,
-                          gint     *ret_row_size,
-                          gint     *ret_padding)
+                          gint *ret_icon_size,
+                          gint *ret_n_rows,
+                          gint *ret_row_size,
+                          gint *ret_padding)
 {
   gint panel_size, config_nrows, icon_size, hx_size, hy_size, nrows, row_size, padding;
   gboolean single_row, square_icons;
 
-  panel_size = sn_config_get_panel_size(config);
-  config_nrows = sn_config_get_nrows(config);
-  icon_size = sn_config_get_icon_size(config);
-  single_row = sn_config_get_single_row(config);
-  square_icons = sn_config_get_square_icons(config);
+  panel_size = sn_config_get_panel_size (config);
+  config_nrows = sn_config_get_nrows (config);
+  icon_size = sn_config_get_icon_size (config);
+  single_row = sn_config_get_single_row (config);
+  square_icons = sn_config_get_square_icons (config);
   if (square_icons)
-  {
-    nrows = single_row ? 1 : MAX(1, config_nrows);
-    hx_size = hy_size = panel_size / nrows;
-  }
+    {
+      nrows = single_row ? 1 : MAX (1, config_nrows);
+      hx_size = hy_size = panel_size / nrows;
+    }
   else
-  {
-    hx_size = MIN(icon_size + 2, panel_size);
-    nrows = single_row ? 1 : MAX(1, panel_size / hx_size);
-    hy_size = panel_size / nrows;
-  }
-  icon_size = MIN(icon_size, MIN(hx_size, hy_size));
+    {
+      hx_size = MIN (icon_size + 2, panel_size);
+      nrows = single_row ? 1 : MAX (1, panel_size / hx_size);
+      hy_size = panel_size / nrows;
+    }
+  icon_size = MIN (icon_size, MIN (hx_size, hy_size));
 
   if (icon_size % 2 != 0)
     {
@@ -645,9 +633,9 @@ sn_config_get_menu_is_primary (SnConfig *config)
 
 
 void
-sn_config_set_orientation (SnConfig       *config,
-                           GtkOrientation  panel_orientation,
-                           GtkOrientation  orientation)
+sn_config_set_orientation (SnConfig *config,
+                           GtkOrientation panel_orientation,
+                           GtkOrientation orientation)
 {
   gboolean needs_update = FALSE;
 
@@ -692,10 +680,10 @@ sn_config_get_panel_orientation (SnConfig *config)
 
 
 void
-sn_config_set_size (SnConfig  *config,
-                    gint       panel_size,
-                    gint       nrows,
-                    gint       icon_size)
+sn_config_set_size (SnConfig *config,
+                    gint panel_size,
+                    gint nrows,
+                    gint icon_size)
 {
   gboolean needs_update = FALSE;
 
@@ -747,7 +735,7 @@ sn_config_get_panel_size (SnConfig *config)
 
 
 gboolean
-sn_config_is_hidden (SnConfig    *config,
+sn_config_is_hidden (SnConfig *config,
                      const gchar *name)
 {
   g_return_val_if_fail (SN_IS_CONFIG (config), FALSE);
@@ -758,9 +746,9 @@ sn_config_is_hidden (SnConfig    *config,
 
 
 void
-sn_config_set_hidden (SnConfig    *config,
+sn_config_set_hidden (SnConfig *config,
                       const gchar *name,
-                      gboolean     hidden)
+                      gboolean hidden)
 {
   gchar *name_copy;
 
@@ -782,7 +770,7 @@ sn_config_set_hidden (SnConfig    *config,
 
 
 gboolean
-sn_config_is_legacy_hidden (SnConfig    *config,
+sn_config_is_legacy_hidden (SnConfig *config,
                             const gchar *name)
 {
   g_return_val_if_fail (SN_IS_CONFIG (config), FALSE);
@@ -793,9 +781,9 @@ sn_config_is_legacy_hidden (SnConfig    *config,
 
 
 void
-sn_config_set_legacy_hidden (SnConfig    *config,
-                              const gchar *name,
-                              gboolean     hidden)
+sn_config_set_legacy_hidden (SnConfig *config,
+                             const gchar *name,
+                             gboolean hidden)
 {
   gchar *name_copy;
 
@@ -816,7 +804,7 @@ sn_config_set_legacy_hidden (SnConfig    *config,
 
 
 
-GList*
+GList *
 sn_config_get_known_items (SnConfig *config)
 {
   g_return_val_if_fail (SN_IS_CONFIG (config), NULL);
@@ -826,7 +814,7 @@ sn_config_get_known_items (SnConfig *config)
 
 
 
-GList*
+GList *
 sn_config_get_known_legacy_items (SnConfig *config)
 {
   g_return_val_if_fail (SN_IS_CONFIG (config), NULL);
@@ -836,7 +824,7 @@ sn_config_get_known_legacy_items (SnConfig *config)
 
 
 
-GList*
+GList *
 sn_config_get_hidden_legacy_items (SnConfig *config)
 {
   GList *list = NULL;
@@ -851,7 +839,7 @@ sn_config_get_hidden_legacy_items (SnConfig *config)
 
 
 void
-sn_config_add_known_item (SnConfig    *config,
+sn_config_add_known_item (SnConfig *config,
                           const gchar *name)
 {
   GList *li;
@@ -860,7 +848,7 @@ sn_config_add_known_item (SnConfig    *config,
   g_return_if_fail (SN_IS_CONFIG (config));
 
   /* check if item is already known */
-  for(li = config->known_items; li != NULL; li = li->next)
+  for (li = config->known_items; li != NULL; li = li->next)
     if (g_strcmp0 (li->data, name) == 0)
       return;
 
@@ -880,7 +868,7 @@ sn_config_add_known_item (SnConfig    *config,
 
 
 gboolean
-sn_config_add_known_legacy_item (SnConfig    *config,
+sn_config_add_known_legacy_item (SnConfig *config,
                                  const gchar *name)
 {
   GList *li;
@@ -889,7 +877,7 @@ sn_config_add_known_legacy_item (SnConfig    *config,
   g_return_val_if_fail (SN_IS_CONFIG (config), TRUE);
 
   /* check if item is already known */
-  for(li = config->known_legacy_items; li != NULL; li = li->next)
+  for (li = config->known_legacy_items; li != NULL; li = li->next)
     if (g_strcmp0 (li->data, name) == 0)
       return g_hash_table_contains (config->hidden_legacy_items, name);
 
@@ -911,7 +899,7 @@ sn_config_add_known_legacy_item (SnConfig    *config,
 
 
 void
-sn_config_swap_known_items (SnConfig    *config,
+sn_config_swap_known_items (SnConfig *config,
                             const gchar *name1,
                             const gchar *name2)
 {
@@ -919,7 +907,7 @@ sn_config_swap_known_items (SnConfig    *config,
 
   g_return_if_fail (SN_IS_CONFIG (config));
 
-  for(li = config->known_items; li != NULL; li = li->next)
+  for (li = config->known_items; li != NULL; li = li->next)
     if (g_strcmp0 (li->data, name1) == 0)
       break;
 
@@ -936,7 +924,7 @@ sn_config_swap_known_items (SnConfig    *config,
 
   /* not strictly necessary (in testing the list contents was preserved)
    * but searching for the index again should be safer */
-  for(li = config->known_items; li != NULL; li = li->next)
+  for (li = config->known_items; li != NULL; li = li->next)
     if (g_strcmp0 (li->data, name1) == 0)
       break;
 
@@ -949,40 +937,41 @@ sn_config_swap_known_items (SnConfig    *config,
 
 
 
-void sn_config_swap_known_legacy_items(SnConfig *config,
-                                       const gchar *name1,
-                                       const gchar *name2)
+void
+sn_config_swap_known_legacy_items (SnConfig *config,
+                                   const gchar *name1,
+                                   const gchar *name2)
 {
   GList *li, *li_tmp;
 
-  g_return_if_fail(SN_IS_CONFIG(config));
+  g_return_if_fail (SN_IS_CONFIG (config));
 
   for (li = config->known_legacy_items; li != NULL; li = li->next)
-    if (g_strcmp0(li->data, name1) == 0)
+    if (g_strcmp0 (li->data, name1) == 0)
       break;
 
   /* make sure that the list contains name1 followed by name2 */
-  if (li == NULL || li->next == NULL || g_strcmp0(li->next->data, name2) != 0)
-  {
-    panel_debug (PANEL_DEBUG_SYSTRAY, "Couldn't swap items: %s and %s", name1, name2);
-    return;
-  }
+  if (li == NULL || li->next == NULL || g_strcmp0 (li->next->data, name2) != 0)
+    {
+      panel_debug (PANEL_DEBUG_SYSTRAY, "Couldn't swap items: %s and %s", name1, name2);
+      return;
+    }
 
   /* li_tmp will contain only the removed element (name2) */
   li_tmp = li->next;
-  config->known_legacy_items = g_list_remove_link(config->known_legacy_items, li_tmp);
+  config->known_legacy_items = g_list_remove_link (config->known_legacy_items, li_tmp);
 
   /* not strictly necessary (in testing the list contents was preserved)
    * but searching for the index again should be safer */
   for (li = config->known_legacy_items; li != NULL; li = li->next)
-    if (g_strcmp0(li->data, name1) == 0)
+    if (g_strcmp0 (li->data, name1) == 0)
       break;
 
-  config->known_legacy_items = g_list_insert_before(config->known_legacy_items, li, li_tmp->data);
-  g_list_free(li_tmp);
+  config->known_legacy_items = g_list_insert_before (config->known_legacy_items, li, li_tmp->data);
+  g_list_free (li_tmp);
 
-  g_object_notify(G_OBJECT(config), "known-legacy-items");
-  g_signal_emit(G_OBJECT(config), sn_config_signals[LEGACY_ITEM_LIST_CHANGED], 0);
+  g_object_notify (G_OBJECT (config), "known-legacy-items");
+  g_signal_emit (G_OBJECT (config), sn_config_signals[LEGACY_ITEM_LIST_CHANGED], 0);
 }
 
 
@@ -1002,8 +991,8 @@ gboolean
 sn_config_items_clear (SnConfig *config)
 {
   GHashTable *collected_known_items;
-  guint       initial_size;
-  GList      *new_list, *li;
+  guint initial_size;
+  GList *new_list, *li;
 
   collected_known_items = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
@@ -1044,16 +1033,16 @@ sn_config_items_clear (SnConfig *config)
 
 
 gboolean
-sn_config_legacy_items_clear(SnConfig *config)
+sn_config_legacy_items_clear (SnConfig *config)
 {
-  g_list_free_full(config->known_legacy_items, g_free);
+  g_list_free_full (config->known_legacy_items, g_free);
   config->known_legacy_items = NULL;
   g_hash_table_remove_all (config->hidden_legacy_items);
 
-  g_object_notify(G_OBJECT(config), "known-legacy-items");
-  g_object_notify(G_OBJECT(config), "hidden-legacy-items");
+  g_object_notify (G_OBJECT (config), "known-legacy-items");
+  g_object_notify (G_OBJECT (config), "hidden-legacy-items");
 
-  g_signal_emit(G_OBJECT(config), sn_config_signals[LEGACY_ITEM_LIST_CHANGED], 0);
+  g_signal_emit (G_OBJECT (config), sn_config_signals[LEGACY_ITEM_LIST_CHANGED], 0);
 
   return TRUE;
 }
@@ -1063,9 +1052,9 @@ sn_config_legacy_items_clear(SnConfig *config)
 SnConfig *
 sn_config_new (const gchar *property_base)
 {
-  SnConfig      *config;
+  SnConfig *config;
   XfconfChannel *channel;
-  gchar         *property;
+  gchar *property;
 
   config = g_object_new (SN_TYPE_CONFIG, NULL);
 

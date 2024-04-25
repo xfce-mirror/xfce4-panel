@@ -38,18 +38,16 @@
 typedef struct
 {
   LauncherPlugin *plugin;
-  GtkBuilder     *builder;
-  guint           idle_populate_id;
-  GSList         *items;
-}
-LauncherPluginDialog;
+  GtkBuilder *builder;
+  guint idle_populate_id;
+  GSList *items;
+} LauncherPluginDialog;
 
 typedef struct
 {
   LauncherPluginDialog *dialog;
-  GarconMenuItem       *item;
-}
-LauncherChangedHandler;
+  GarconMenuItem *item;
+} LauncherChangedHandler;
 
 enum
 {
@@ -62,21 +60,28 @@ enum
 
 
 
-static void     launcher_dialog_items_set_item         (GtkTreeModel         *model,
-                                                        GtkTreeIter          *iter,
-                                                        GarconMenuItem       *item,
-                                                        LauncherPluginDialog *dialog);
-static void     launcher_dialog_tree_save              (LauncherPluginDialog *dialog);
-static void     launcher_dialog_tree_selection_changed (GtkTreeSelection     *selection,
-                                                        LauncherPluginDialog *dialog);
-static gboolean launcher_dialog_press_event            (LauncherPluginDialog *dialog,
-                                                        const gchar          *object_name);
-static void     launcher_dialog_items_unload           (LauncherPluginDialog *dialog);
-static void     launcher_dialog_items_load             (LauncherPluginDialog *dialog);
-static void     launcher_dialog_item_desktop_item_edit (GtkWidget            *widget,
-                                                        const gchar          *type,
-                                                        const gchar          *uri,
-                                                        LauncherPluginDialog *dialog);
+static void
+launcher_dialog_items_set_item (GtkTreeModel *model,
+                                GtkTreeIter *iter,
+                                GarconMenuItem *item,
+                                LauncherPluginDialog *dialog);
+static void
+launcher_dialog_tree_save (LauncherPluginDialog *dialog);
+static void
+launcher_dialog_tree_selection_changed (GtkTreeSelection *selection,
+                                        LauncherPluginDialog *dialog);
+static gboolean
+launcher_dialog_press_event (LauncherPluginDialog *dialog,
+                             const gchar *object_name);
+static void
+launcher_dialog_items_unload (LauncherPluginDialog *dialog);
+static void
+launcher_dialog_items_load (LauncherPluginDialog *dialog);
+static void
+launcher_dialog_item_desktop_item_edit (GtkWidget *widget,
+                                        const gchar *type,
+                                        const gchar *uri,
+                                        LauncherPluginDialog *dialog);
 
 
 
@@ -87,19 +92,16 @@ enum
   DROP_TARGET_ROW
 };
 
-static const GtkTargetEntry add_drag_targets[] =
-{
+static const GtkTargetEntry add_drag_targets[] = {
   { "text/uri-list", 0, 0 }
 };
 
-static const GtkTargetEntry list_drop_targets[] =
-{
+static const GtkTargetEntry list_drop_targets[] = {
   { "text/uri-list", 0, DROP_TARGET_URI },
   { "GTK_TREE_MODEL_ROW", GTK_TARGET_SAME_WIDGET, DROP_TARGET_ROW }
 };
 
-static const GtkTargetEntry list_drag_targets[] =
-{
+static const GtkTargetEntry list_drag_targets[] = {
   { "GTK_TREE_MODEL_ROW", GTK_TARGET_SAME_WIDGET, 0 }
 };
 
@@ -107,15 +109,15 @@ static const GtkTargetEntry list_drag_targets[] =
 
 static gboolean
 launcher_dialog_add_visible_function (GtkTreeModel *model,
-                                      GtkTreeIter  *iter,
-                                      gpointer      user_data)
+                                      GtkTreeIter *iter,
+                                      gpointer user_data)
 {
-  gchar       *string, *escaped;
-  gboolean     visible = FALSE;
+  gchar *string, *escaped;
+  gboolean visible = FALSE;
   const gchar *text;
-  gchar       *normalized;
-  gchar       *text_casefolded;
-  gchar       *name_casefolded;
+  gchar *normalized;
+  gchar *text_casefolded;
+  gchar *name_casefolded;
 
   /* get the search string from the item */
   text = gtk_entry_get_text (GTK_ENTRY (user_data));
@@ -171,9 +173,9 @@ launcher_dialog_add_store_insert (gpointer key,
                                   gpointer value,
                                   gpointer user_data)
 {
-  GtkTreeIter     iter;
+  GtkTreeIter iter;
   GarconMenuItem *item = GARCON_MENU_ITEM (value);
-  GtkTreeModel   *model = GTK_TREE_MODEL (user_data);
+  GtkTreeModel *model = GTK_TREE_MODEL (user_data);
 
   panel_return_if_fail (GARCON_IS_MENU_ITEM (item));
   panel_return_if_fail (GTK_IS_LIST_STORE (model));
@@ -188,8 +190,8 @@ static gboolean
 launcher_dialog_add_populate_model_idle (gpointer user_data)
 {
   LauncherPluginDialog *dialog = user_data;
-  GObject              *store;
-  GHashTable           *pool;
+  GObject *store;
+  GHashTable *pool;
 
   panel_return_val_if_fail (GTK_IS_BUILDER (dialog->builder), FALSE);
 
@@ -229,28 +231,28 @@ launcher_dialog_add_populate_model (LauncherPluginDialog *dialog)
   /* fire an idle menu system load */
   if (G_LIKELY (dialog->idle_populate_id == 0))
     dialog->idle_populate_id = gdk_threads_add_idle_full (
-        G_PRIORITY_DEFAULT_IDLE,
-        launcher_dialog_add_populate_model_idle,
-        dialog, launcher_dialog_add_populate_model_idle_destroyed);
+      G_PRIORITY_DEFAULT_IDLE,
+      launcher_dialog_add_populate_model_idle,
+      dialog, launcher_dialog_add_populate_model_idle_destroyed);
 }
 
 
 
 static void
-launcher_dialog_add_drag_data_get (GtkWidget            *treeview,
-                                   GdkDragContext       *drag_context,
-                                   GtkSelectionData     *data,
-                                   guint                 info,
-                                   guint                 timestamp,
+launcher_dialog_add_drag_data_get (GtkWidget *treeview,
+                                   GdkDragContext *drag_context,
+                                   GtkSelectionData *data,
+                                   guint info,
+                                   guint timestamp,
                                    LauncherPluginDialog *dialog)
 {
-  GtkTreeSelection  *selection;
-  GList             *rows, *li;
-  GtkTreeModel      *model;
-  gchar            **uris;
-  GarconMenuItem    *item;
-  guint              i;
-  GtkTreeIter        iter;
+  GtkTreeSelection *selection;
+  GList *rows, *li;
+  GtkTreeModel *model;
+  gchar **uris;
+  GarconMenuItem *item;
+  guint i;
+  GtkTreeIter iter;
 
   panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
   panel_return_if_fail (GTK_IS_TREE_VIEW (treeview));
@@ -282,11 +284,11 @@ launcher_dialog_add_drag_data_get (GtkWidget            *treeview,
 
 
 static void
-launcher_dialog_add_selection_changed (GtkTreeSelection     *selection,
+launcher_dialog_add_selection_changed (GtkTreeSelection *selection,
                                        LauncherPluginDialog *dialog)
 {
-  GObject  *object;
-  gboolean  sensitive;
+  GObject *object;
+  gboolean sensitive;
 
   panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
   panel_return_if_fail (GTK_IS_TREE_SELECTION (selection));
@@ -299,8 +301,8 @@ launcher_dialog_add_selection_changed (GtkTreeSelection     *selection,
 
 
 static gboolean
-launcher_dialog_add_button_press_event (GtkTreeView          *treeview,
-                                        GdkEventButton       *event,
+launcher_dialog_add_button_press_event (GtkTreeView *treeview,
+                                        GdkEventButton *event,
                                         LauncherPluginDialog *dialog)
 {
   panel_return_val_if_fail (GTK_IS_BUILDER (dialog->builder), FALSE);
@@ -319,8 +321,8 @@ launcher_dialog_add_button_press_event (GtkTreeView          *treeview,
 
 
 static gboolean
-launcher_dialog_add_key_press_event (GtkTreeView          *treeview,
-                                     GdkEventKey          *event,
+launcher_dialog_add_key_press_event (GtkTreeView *treeview,
+                                     GdkEventKey *event,
                                      LauncherPluginDialog *dialog)
 {
   panel_return_val_if_fail (GTK_IS_BUILDER (dialog->builder), FALSE);
@@ -336,16 +338,16 @@ launcher_dialog_add_key_press_event (GtkTreeView          *treeview,
 
 
 static void
-launcher_dialog_add_response (GtkWidget            *widget,
-                              gint                  response_id,
+launcher_dialog_add_response (GtkWidget *widget,
+                              gint response_id,
                               LauncherPluginDialog *dialog)
 {
-  GObject          *treeview, *store;
+  GObject *treeview, *store;
   GtkTreeSelection *selection;
-  GtkTreeModel     *item_model, *add_model;
-  GtkTreeIter       iter, sibling, tmp;
-  GarconMenuItem   *item;
-  GList            *list, *li;
+  GtkTreeModel *item_model, *add_model;
+  GtkTreeIter iter, sibling, tmp;
+  GarconMenuItem *item;
+  GList *list, *li;
 
   panel_return_if_fail (GTK_IS_DIALOG (widget));
   panel_return_if_fail (LAUNCHER_IS_PLUGIN (dialog->plugin));
@@ -418,12 +420,12 @@ launcher_dialog_add_response (GtkWidget            *widget,
 
 static gboolean
 launcher_dialog_tree_save_foreach (GtkTreeModel *model,
-                                   GtkTreePath  *path,
-                                   GtkTreeIter  *iter,
-                                   gpointer      user_data)
+                                   GtkTreePath *path,
+                                   GtkTreeIter *iter,
+                                   gpointer user_data)
 {
-  GPtrArray      *array = user_data;
-  GValue         *value;
+  GPtrArray *array = user_data;
+  GValue *value;
   GarconMenuItem *item;
 
   /* get the desktop id of the item from the store */
@@ -448,7 +450,7 @@ launcher_dialog_tree_save_foreach (GtkTreeModel *model,
 static void
 launcher_dialog_tree_save (LauncherPluginDialog *dialog)
 {
-  GObject   *store;
+  GObject *store;
   GPtrArray *array;
 
   store = gtk_builder_get_object (dialog->builder, "item-store");
@@ -458,10 +460,10 @@ launcher_dialog_tree_save (LauncherPluginDialog *dialog)
                           launcher_dialog_tree_save_foreach, array);
 
   g_signal_handlers_block_by_func (G_OBJECT (dialog->plugin),
-          G_CALLBACK (launcher_dialog_items_load), dialog);
+                                   G_CALLBACK (launcher_dialog_items_load), dialog);
   g_object_set (dialog->plugin, "items", array, NULL);
-    g_signal_handlers_unblock_by_func (G_OBJECT (dialog->plugin),
-          G_CALLBACK (launcher_dialog_items_load), dialog);
+  g_signal_handlers_unblock_by_func (G_OBJECT (dialog->plugin),
+                                     G_CALLBACK (launcher_dialog_items_load), dialog);
 
   xfconf_array_free (array);
 }
@@ -476,23 +478,23 @@ launcher_dialog_tree_save_cb (gpointer user_data)
 }
 
 static void
-launcher_dialog_tree_drag_data_received (GtkWidget            *treeview,
-                                         GdkDragContext       *context,
-                                         gint                  x,
-                                         gint                  y,
-                                         GtkSelectionData     *data,
-                                         guint                 info,
-                                         guint                 timestamp,
+launcher_dialog_tree_drag_data_received (GtkWidget *treeview,
+                                         GdkDragContext *context,
+                                         gint x,
+                                         gint y,
+                                         GtkSelectionData *data,
+                                         guint info,
+                                         guint timestamp,
                                          LauncherPluginDialog *dialog)
 {
-  GtkTreePath              *path;
-  GtkTreeViewDropPosition   drop_pos;
-  gchar                   **uris;
-  GtkTreeIter               iter;
-  GtkTreeModel             *model;
-  gint                      position;
-  GarconMenuItem           *item;
-  guint                     i;
+  GtkTreePath *path;
+  GtkTreeViewDropPosition drop_pos;
+  gchar **uris;
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  gint position;
+  GarconMenuItem *item;
+  guint i;
 
   panel_return_if_fail (GTK_IS_TREE_VIEW (treeview));
   panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
@@ -553,18 +555,18 @@ launcher_dialog_tree_drag_data_received (GtkWidget            *treeview,
 
 
 static void
-launcher_dialog_tree_selection_changed (GtkTreeSelection     *selection,
+launcher_dialog_tree_selection_changed (GtkTreeSelection *selection,
                                         LauncherPluginDialog *dialog)
 {
-  GObject        *object;
-  GtkTreeModel   *model;
-  GtkTreeIter     iter;
-  gint            n_children = -1;
-  gint            position = 0;
-  GtkTreePath    *path;
-  gboolean        sensitive;
+  GObject *object;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  gint n_children = -1;
+  gint position = 0;
+  GtkTreePath *path;
+  gboolean sensitive;
   GarconMenuItem *item = NULL;
-  gboolean        editable = FALSE;
+  gboolean editable = FALSE;
 
   panel_return_if_fail (GTK_IS_TREE_SELECTION (selection));
   panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
@@ -627,7 +629,7 @@ launcher_dialog_tree_selection_changed (GtkTreeSelection     *selection,
 
 static gboolean
 launcher_dialog_press_event (LauncherPluginDialog *dialog,
-                             const gchar          *object_name)
+                             const gchar *object_name)
 {
   GObject *object;
 
@@ -647,7 +649,7 @@ launcher_dialog_press_event (LauncherPluginDialog *dialog,
 
 
 static gboolean
-launcher_dialog_tree_popup_menu (GtkWidget            *treeview,
+launcher_dialog_tree_popup_menu (GtkWidget *treeview,
                                  LauncherPluginDialog *dialog)
 {
   GObject *menu;
@@ -664,7 +666,7 @@ launcher_dialog_tree_popup_menu (GtkWidget            *treeview,
 
 
 static void
-launcher_dialog_tree_popup_menu_activated (GtkWidget            *mi,
+launcher_dialog_tree_popup_menu_activated (GtkWidget *mi,
                                            LauncherPluginDialog *dialog)
 {
   const gchar *name;
@@ -699,8 +701,8 @@ launcher_dialog_tree_popup_menu_activated (GtkWidget            *mi,
 
 
 static gboolean
-launcher_dialog_tree_button_press_event (GtkTreeView          *treeview,
-                                         GdkEventButton       *event,
+launcher_dialog_tree_button_press_event (GtkTreeView *treeview,
+                                         GdkEventButton *event,
                                          LauncherPluginDialog *dialog)
 {
   panel_return_val_if_fail (GTK_IS_BUILDER (dialog->builder), FALSE);
@@ -726,8 +728,8 @@ launcher_dialog_tree_button_press_event (GtkTreeView          *treeview,
 
 
 static gboolean
-launcher_dialog_tree_key_press_event (GtkTreeView          *treeview,
-                                      GdkEventKey          *event,
+launcher_dialog_tree_key_press_event (GtkTreeView *treeview,
+                                      GdkEventKey *event,
                                       LauncherPluginDialog *dialog)
 {
   panel_return_val_if_fail (GTK_IS_BUILDER (dialog->builder), FALSE);
@@ -743,15 +745,15 @@ launcher_dialog_tree_key_press_event (GtkTreeView          *treeview,
 
 
 static void
-launcher_dialog_item_desktop_item_edit (GtkWidget            *widget,
-                                        const gchar          *type,
-                                        const gchar          *uri,
+launcher_dialog_item_desktop_item_edit (GtkWidget *widget,
+                                        const gchar *type,
+                                        const gchar *uri,
                                         LauncherPluginDialog *dialog)
 {
-  gchar     *filename;
-  gchar     *command;
+  gchar *filename;
+  gchar *command;
   GdkScreen *screen;
-  GError    *error = NULL;
+  GError *error = NULL;
   GtkWidget *toplevel;
 
   panel_return_if_fail (GTK_IS_WIDGET (widget));
@@ -776,7 +778,7 @@ launcher_dialog_item_desktop_item_edit (GtkWidget            *widget,
     {
       toplevel = gtk_widget_get_toplevel (widget);
       xfce_dialog_show_error (GTK_WINDOW (toplevel), error,
-          _("Failed to open desktop item editor"));
+                              _("Failed to open desktop item editor"));
       g_error_free (error);
     }
 
@@ -786,7 +788,7 @@ launcher_dialog_item_desktop_item_edit (GtkWidget            *widget,
 
 
 static void
-launcher_dialog_item_link_button_clicked (GtkWidget            *button,
+launcher_dialog_item_link_button_clicked (GtkWidget *button,
                                           LauncherPluginDialog *dialog)
 {
   launcher_dialog_item_desktop_item_edit (button, "Link", NULL, dialog);
@@ -795,21 +797,21 @@ launcher_dialog_item_link_button_clicked (GtkWidget            *button,
 
 
 static void
-launcher_dialog_item_button_clicked (GtkWidget            *button,
+launcher_dialog_item_button_clicked (GtkWidget *button,
                                      LauncherPluginDialog *dialog)
 {
-  const gchar      *name;
-  const gchar      *display_name = NULL;
-  GObject          *object;
-  GObject          *treeview;
+  const gchar *name;
+  const gchar *display_name = NULL;
+  GObject *object;
+  GObject *treeview;
   GtkTreeSelection *selection;
-  GtkTreeModel     *model;
-  GtkTreeIter       iter_a, iter_b;
-  GtkTreePath      *path;
-  gchar            *uri;
-  GarconMenuItem   *item;
-  GtkWidget        *toplevel;
-  gboolean          save_items = TRUE;
+  GtkTreeModel *model;
+  GtkTreeIter iter_a, iter_b;
+  GtkTreePath *path;
+  gchar *uri;
+  GarconMenuItem *item;
+  GtkWidget *toplevel;
+  gboolean save_items = TRUE;
 
   panel_return_if_fail (GTK_IS_BUILDABLE (button));
   panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
@@ -836,6 +838,10 @@ launcher_dialog_item_button_clicked (GtkWidget            *button,
 
       if (strcmp (name, "item-delete") == 0)
         {
+          const gchar *label = _("_Remove");
+          const gchar *text = _("If you delete an item, it will be permanently removed");
+          const gchar *_name;
+
           /* get item name */
           gtk_tree_model_get (model, &iter_a, COL_ITEM, &item, -1);
           if (G_LIKELY (item != NULL))
@@ -843,10 +849,9 @@ launcher_dialog_item_button_clicked (GtkWidget            *button,
 
           /* ask the user */
           toplevel = gtk_widget_get_toplevel (button);
-          if (xfce_dialog_confirm (GTK_WINDOW (toplevel), "edit-delete", _("_Remove"),
-                  _("If you delete an item, it will be permanently removed"),
-                  _("Are you sure you want to remove \"%s\"?"),
-                  xfce_str_is_empty (display_name) ? _("Unnamed item") : display_name))
+          _name = xfce_str_is_empty (display_name) ? _("Unnamed item") : display_name;
+          if (xfce_dialog_confirm (GTK_WINDOW (toplevel), "edit-delete", label, text,
+                                   _("Are you sure you want to remove \"%s\"?"), _name))
             {
               /* remove the item from the store */
               gtk_list_store_remove (GTK_LIST_STORE (model), &iter_a);
@@ -913,8 +918,8 @@ launcher_dialog_item_button_clicked (GtkWidget            *button,
 
 
 static void
-launcher_dialog_response (GtkWidget            *widget,
-                          gint                  response_id,
+launcher_dialog_response (GtkWidget *widget,
+                          gint response_id,
                           LauncherPluginDialog *dialog)
 {
   GObject *add_dialog;
@@ -931,7 +936,7 @@ launcher_dialog_response (GtkWidget            *widget,
 
       /* disconnect from items-changed signal */
       g_signal_handlers_disconnect_by_func (G_OBJECT (dialog->plugin),
-          G_CALLBACK (launcher_dialog_items_load), dialog);
+                                            G_CALLBACK (launcher_dialog_items_load), dialog);
 
       /* disconnect from the menu items */
       launcher_dialog_items_unload (dialog);
@@ -951,12 +956,12 @@ launcher_dialog_response (GtkWidget            *widget,
 
 static gboolean
 launcher_dialog_item_changed_foreach (GtkTreeModel *model,
-                                      GtkTreePath  *path,
-                                      GtkTreeIter  *iter,
-                                      gpointer      user_data)
+                                      GtkTreePath *path,
+                                      GtkTreeIter *iter,
+                                      gpointer user_data)
 {
-  GarconMenuItem         *item;
-  gboolean                found;
+  GarconMenuItem *item;
+  gboolean found;
   LauncherChangedHandler *handler = user_data;
 
   panel_return_val_if_fail (GARCON_IS_MENU_ITEM (handler->item), TRUE);
@@ -976,11 +981,11 @@ launcher_dialog_item_changed_foreach (GtkTreeModel *model,
 
 
 static void
-launcher_dialog_item_changed (GarconMenuItem       *item,
+launcher_dialog_item_changed (GarconMenuItem *item,
                               LauncherPluginDialog *dialog)
 {
-  GObject                *treeview;
-  GtkTreeModel           *model;
+  GObject *treeview;
+  GtkTreeModel *model;
   LauncherChangedHandler *handler;
 
   panel_return_if_fail (GARCON_IS_MENU_ITEM (item));
@@ -999,13 +1004,13 @@ launcher_dialog_item_changed (GarconMenuItem       *item,
 
 
 static void
-launcher_dialog_tree_row_changed (GtkTreeModel         *model,
-                                  GtkTreePath          *path,
-                                  GtkTreeIter          *iter,
+launcher_dialog_tree_row_changed (GtkTreeModel *model,
+                                  GtkTreePath *path,
+                                  GtkTreeIter *iter,
                                   LauncherPluginDialog *dialog)
 {
   GtkTreeSelection *selection;
-  GObject          *treeview;
+  GObject *treeview;
 
   panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
 
@@ -1021,16 +1026,16 @@ launcher_dialog_tree_row_changed (GtkTreeModel         *model,
 
 
 static void
-launcher_dialog_items_set_item (GtkTreeModel         *model,
-                                GtkTreeIter          *iter,
-                                GarconMenuItem       *item,
+launcher_dialog_items_set_item (GtkTreeModel *model,
+                                GtkTreeIter *iter,
+                                GarconMenuItem *item,
                                 LauncherPluginDialog *dialog)
 {
   const gchar *name, *comment;
-  gchar       *markup;
-  GIcon       *icon;
-  gchar       *tooltip;
-  GFile       *gfile;
+  gchar *markup;
+  GIcon *icon;
+  gchar *tooltip;
+  GFile *gfile;
 
   panel_return_if_fail (GTK_IS_LIST_STORE (model));
   panel_return_if_fail (GARCON_IS_MENU_ITEM (item));
@@ -1047,7 +1052,7 @@ launcher_dialog_items_set_item (GtkTreeModel         *model,
 
   if (dialog != NULL)
     g_signal_handlers_block_by_func (G_OBJECT (model),
-        G_CALLBACK (launcher_dialog_tree_row_changed), dialog);
+                                     G_CALLBACK (launcher_dialog_tree_row_changed), dialog);
 
   gfile = garcon_menu_item_get_file (item);
   tooltip = g_file_get_parse_name (gfile);
@@ -1062,7 +1067,7 @@ launcher_dialog_items_set_item (GtkTreeModel         *model,
 
   if (dialog != NULL)
     g_signal_handlers_unblock_by_func (G_OBJECT (model),
-        G_CALLBACK (launcher_dialog_tree_row_changed), dialog);
+                                       G_CALLBACK (launcher_dialog_tree_row_changed), dialog);
 
   if (G_LIKELY (icon != NULL))
     g_object_unref (G_OBJECT (icon));
@@ -1081,7 +1086,7 @@ launcher_dialog_items_unload (LauncherPluginDialog *dialog)
     {
       panel_return_if_fail (GARCON_IS_MENU_ITEM (li->data));
       g_signal_handlers_disconnect_by_func (G_OBJECT (li->data),
-          G_CALLBACK (launcher_dialog_item_changed), dialog);
+                                            G_CALLBACK (launcher_dialog_item_changed), dialog);
       g_object_unref (G_OBJECT (li->data));
     }
 
@@ -1094,12 +1099,12 @@ launcher_dialog_items_unload (LauncherPluginDialog *dialog)
 static void
 launcher_dialog_items_load (LauncherPluginDialog *dialog)
 {
-  GObject          *treeview;
+  GObject *treeview;
   GtkTreeSelection *selection;
-  GtkTreeModel     *model;
-  GSList           *li;
-  GtkTreeIter       iter;
-  GtkTreePath      *path;
+  GtkTreeModel *model;
+  GSList *li;
+  GtkTreeIter iter;
+  GtkTreePath *path;
 
   /* get the treeview */
   treeview = gtk_builder_get_object (dialog->builder, "item-treeview");
@@ -1122,7 +1127,7 @@ launcher_dialog_items_load (LauncherPluginDialog *dialog)
       gtk_list_store_append (GTK_LIST_STORE (model), &iter);
       launcher_dialog_items_set_item (model, &iter, GARCON_MENU_ITEM (li->data), dialog);
       g_signal_connect (G_OBJECT (li->data), "changed",
-          G_CALLBACK (launcher_dialog_item_changed), dialog);
+                        G_CALLBACK (launcher_dialog_item_changed), dialog);
     }
 
   if (G_LIKELY (path != NULL))
@@ -1144,18 +1149,18 @@ void
 launcher_dialog_show (LauncherPlugin *plugin)
 {
   LauncherPluginDialog *dialog;
-  GtkBuilder           *builder;
-  GObject              *window, *object, *item;
-  guint                 i;
-  GtkTreeSelection     *selection;
-  const gchar          *button_names[] = { "item-add", "item-delete",
-                                           "item-move-up", "item-move-down",
-                                           "item-edit", "item-new" };
-  const gchar          *mi_names[] = { "mi-edit", "mi-delete",
-                                       "mi-application", "mi-link", "mi-add",
-                                       "mi-move-up", "mi-move-down" };
-  const gchar          *binding_names[] = { "disable-tooltips", "show-label",
-                                            "move-first", "arrow-position" };
+  GtkBuilder *builder;
+  GObject *window, *object, *item;
+  guint i;
+  GtkTreeSelection *selection;
+  const gchar *button_names[] = { "item-add", "item-delete",
+                                  "item-move-up", "item-move-down",
+                                  "item-edit", "item-new" };
+  const gchar *mi_names[] = { "mi-edit", "mi-delete",
+                              "mi-application", "mi-link", "mi-add",
+                              "mi-move-up", "mi-move-down" };
+  const gchar *binding_names[] = { "disable-tooltips", "show-label",
+                                   "move-first", "arrow-position" };
 
   panel_return_if_fail (LAUNCHER_IS_PLUGIN (plugin));
 
@@ -1172,7 +1177,7 @@ launcher_dialog_show (LauncherPlugin *plugin)
   dialog->items = NULL;
 
   g_signal_connect (G_OBJECT (window), "response",
-      G_CALLBACK (launcher_dialog_response), dialog);
+                    G_CALLBACK (launcher_dialog_response), dialog);
 
   /* connect item buttons */
   for (i = 0; i < G_N_ELEMENTS (button_names); i++)
@@ -1180,7 +1185,7 @@ launcher_dialog_show (LauncherPlugin *plugin)
       object = gtk_builder_get_object (builder, button_names[i]);
       panel_return_if_fail (GTK_IS_WIDGET (object));
       g_signal_connect (G_OBJECT (object), "clicked",
-          G_CALLBACK (launcher_dialog_item_button_clicked), dialog);
+                        G_CALLBACK (launcher_dialog_item_button_clicked), dialog);
     }
   object = gtk_builder_get_object (builder, "item-link");
   g_signal_connect (G_OBJECT (object), "clicked",
@@ -1192,32 +1197,32 @@ launcher_dialog_show (LauncherPlugin *plugin)
       object = gtk_builder_get_object (builder, mi_names[i]);
       panel_return_if_fail (GTK_IS_WIDGET (object));
       g_signal_connect (G_OBJECT (object), "activate",
-          G_CALLBACK (launcher_dialog_tree_popup_menu_activated), dialog);
+                        G_CALLBACK (launcher_dialog_tree_popup_menu_activated), dialog);
     }
 
   object = gtk_builder_get_object (dialog->builder, "item-store");
   g_signal_connect (G_OBJECT (object), "row-changed",
-      G_CALLBACK (launcher_dialog_tree_row_changed), dialog);
+                    G_CALLBACK (launcher_dialog_tree_row_changed), dialog);
 
   /* setup treeview selection */
   object = gtk_builder_get_object (builder, "item-treeview");
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (object));
-  gtk_tree_view_enable_model_drag_dest (GTK_TREE_VIEW (object),
-      list_drop_targets, G_N_ELEMENTS (list_drop_targets), GDK_ACTION_COPY);
-  gtk_tree_view_enable_model_drag_source (GTK_TREE_VIEW (object), GDK_BUTTON1_MASK,
-      list_drag_targets, G_N_ELEMENTS (list_drag_targets), GDK_ACTION_MOVE);
+  gtk_tree_view_enable_model_drag_dest (GTK_TREE_VIEW (object), list_drop_targets,
+                                        G_N_ELEMENTS (list_drop_targets), GDK_ACTION_COPY);
+  gtk_tree_view_enable_model_drag_source (GTK_TREE_VIEW (object), GDK_BUTTON1_MASK, list_drag_targets,
+                                          G_N_ELEMENTS (list_drag_targets), GDK_ACTION_MOVE);
   gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
   g_signal_connect (G_OBJECT (object), "drag-data-received",
-      G_CALLBACK (launcher_dialog_tree_drag_data_received), dialog);
+                    G_CALLBACK (launcher_dialog_tree_drag_data_received), dialog);
   g_signal_connect (G_OBJECT (selection), "changed",
-      G_CALLBACK (launcher_dialog_tree_selection_changed), dialog);
+                    G_CALLBACK (launcher_dialog_tree_selection_changed), dialog);
   launcher_dialog_tree_selection_changed (selection, dialog);
   g_signal_connect (G_OBJECT (object), "button-press-event",
-      G_CALLBACK (launcher_dialog_tree_button_press_event), dialog);
+                    G_CALLBACK (launcher_dialog_tree_button_press_event), dialog);
   g_signal_connect (G_OBJECT (object), "key-press-event",
-      G_CALLBACK (launcher_dialog_tree_key_press_event), dialog);
+                    G_CALLBACK (launcher_dialog_tree_key_press_event), dialog);
   g_signal_connect (G_OBJECT (object), "popup-menu",
-      G_CALLBACK (launcher_dialog_tree_popup_menu), dialog);
+                    G_CALLBACK (launcher_dialog_tree_popup_menu), dialog);
 
   /* connect bindings to the advanced properties */
   for (i = 0; i < G_N_ELEMENTS (binding_names); i++)
@@ -1232,11 +1237,11 @@ launcher_dialog_show (LauncherPlugin *plugin)
   /* setup responses for the add dialog */
   object = gtk_builder_get_object (builder, "dialog-add");
   gtk_window_set_screen (GTK_WINDOW (object),
-      gtk_window_get_screen (GTK_WINDOW (window)));
+                         gtk_window_get_screen (GTK_WINDOW (window)));
   g_signal_connect (G_OBJECT (object), "response",
-      G_CALLBACK (launcher_dialog_add_response), dialog);
+                    G_CALLBACK (launcher_dialog_add_response), dialog);
   g_signal_connect (G_OBJECT (object), "delete-event",
-      G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
   /* setup sorting in the add dialog */
   object = gtk_builder_get_object (builder, "add-store");
@@ -1246,30 +1251,30 @@ launcher_dialog_show (LauncherPlugin *plugin)
   /* allow selecting multiple items in the add dialog */
   object = gtk_builder_get_object (builder, "add-treeview");
   gtk_drag_source_set (GTK_WIDGET (object), GDK_BUTTON1_MASK,
-      add_drag_targets, G_N_ELEMENTS (add_drag_targets), GDK_ACTION_COPY);
+                       add_drag_targets, G_N_ELEMENTS (add_drag_targets), GDK_ACTION_COPY);
   g_signal_connect (G_OBJECT (object), "drag-data-get",
-      G_CALLBACK (launcher_dialog_add_drag_data_get), dialog);
+                    G_CALLBACK (launcher_dialog_add_drag_data_get), dialog);
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (object));
   gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
   g_signal_connect (G_OBJECT (selection), "changed",
-      G_CALLBACK (launcher_dialog_add_selection_changed), dialog);
+                    G_CALLBACK (launcher_dialog_add_selection_changed), dialog);
   g_signal_connect (G_OBJECT (object), "button-press-event",
-      G_CALLBACK (launcher_dialog_add_button_press_event), dialog);
+                    G_CALLBACK (launcher_dialog_add_button_press_event), dialog);
   g_signal_connect (G_OBJECT (object), "key-press-event",
-      G_CALLBACK (launcher_dialog_add_key_press_event), dialog);
+                    G_CALLBACK (launcher_dialog_add_key_press_event), dialog);
 
   /* setup search filter in the add dialog */
   object = gtk_builder_get_object (builder, "add-store-filter");
   item = gtk_builder_get_object (builder, "add-search");
   gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (object),
-      launcher_dialog_add_visible_function, item, NULL);
+                                          launcher_dialog_add_visible_function, item, NULL);
   g_signal_connect_swapped (G_OBJECT (item), "changed",
-      G_CALLBACK (gtk_tree_model_filter_refilter), object);
+                            G_CALLBACK (gtk_tree_model_filter_refilter), object);
 
   /* load the plugin items */
   launcher_dialog_items_load (dialog);
   g_signal_connect_swapped (G_OBJECT (plugin), "items-changed",
-      G_CALLBACK (launcher_dialog_items_load), dialog);
+                            G_CALLBACK (launcher_dialog_items_load), dialog);
 
   /* show the dialog */
   gtk_widget_show (GTK_WIDGET (window));

@@ -27,18 +27,21 @@
 
 
 
-static void     xfce_clock_fuzzy_set_property (GObject               *object,
-                                               guint                  prop_id,
-                                               const GValue          *value,
-                                               GParamSpec            *pspec);
-static void     xfce_clock_fuzzy_get_property (GObject               *object,
-                                               guint                  prop_id,
-                                               GValue                *value,
-                                               GParamSpec            *pspec);
-static void     xfce_clock_fuzzy_finalize     (GObject               *object);
-static gboolean xfce_clock_fuzzy_update       (XfceClockFuzzy        *fuzzy,
-                                               ClockTime             *time);
-
+static void
+xfce_clock_fuzzy_set_property (GObject *object,
+                               guint prop_id,
+                               const GValue *value,
+                               GParamSpec *pspec);
+static void
+xfce_clock_fuzzy_get_property (GObject *object,
+                               guint prop_id,
+                               GValue *value,
+                               GParamSpec *pspec);
+static void
+xfce_clock_fuzzy_finalize (GObject *object);
+static gboolean
+xfce_clock_fuzzy_update (XfceClockFuzzy *fuzzy,
+                         ClockTime *time);
 
 
 
@@ -65,95 +68,90 @@ struct _XfceClockFuzzy
 {
   GtkLabel __parent__;
 
-  ClockTimeTimeout   *timeout;
+  ClockTimeTimeout *timeout;
 
-  guint               fuzziness;
+  guint fuzziness;
 
-  ClockTime          *time;
+  ClockTime *time;
 };
 
-static const gchar *i18n_day_sectors[] =
-{
-  N_("Night"),
-  N_("Early morning"),
-  N_("Morning"),
-  N_("Almost noon"),
-  N_("Noon"),
-  N_("Afternoon"),
-  N_("Evening"),
-  N_("Late evening")
+static const gchar *i18n_day_sectors[] = {
+  N_ ("Night"),
+  N_ ("Early morning"),
+  N_ ("Morning"),
+  N_ ("Almost noon"),
+  N_ ("Noon"),
+  N_ ("Afternoon"),
+  N_ ("Evening"),
+  N_ ("Late evening")
 };
 
-static const gchar *i18n_hour_sectors[] =
-{
+static const gchar *i18n_hour_sectors[] = {
   /* I18N: %0 will be replaced with the preceding hour, %1 with
    * the comming hour */
-  /* xgettext:no-c-format */ N_("%0 o'clock"),
-  /* xgettext:no-c-format */ N_("five past %0"),
-  /* xgettext:no-c-format */ N_("ten past %0"),
-  /* xgettext:no-c-format */ N_("quarter past %0"),
-  /* xgettext:no-c-format */ N_("twenty past %0"),
-  /* xgettext:no-c-format */ N_("twenty five past %0"),
-  /* xgettext:no-c-format */ N_("half past %0"),
-  /* xgettext:no-c-format */ N_("twenty five to %1"),
-  /* xgettext:no-c-format */ N_("twenty to %1"),
-  /* xgettext:no-c-format */ N_("quarter to %1"),
-  /* xgettext:no-c-format */ N_("ten to %1"),
-  /* xgettext:no-c-format */ N_("five to %1"),
-  /* xgettext:no-c-format */ N_("%1 o'clock")
+  /* xgettext:no-c-format */ N_ ("%0 o'clock"),
+  /* xgettext:no-c-format */ N_ ("five past %0"),
+  /* xgettext:no-c-format */ N_ ("ten past %0"),
+  /* xgettext:no-c-format */ N_ ("quarter past %0"),
+  /* xgettext:no-c-format */ N_ ("twenty past %0"),
+  /* xgettext:no-c-format */ N_ ("twenty five past %0"),
+  /* xgettext:no-c-format */ N_ ("half past %0"),
+  /* xgettext:no-c-format */ N_ ("twenty five to %1"),
+  /* xgettext:no-c-format */ N_ ("twenty to %1"),
+  /* xgettext:no-c-format */ N_ ("quarter to %1"),
+  /* xgettext:no-c-format */ N_ ("ten to %1"),
+  /* xgettext:no-c-format */ N_ ("five to %1"),
+  /* xgettext:no-c-format */ N_ ("%1 o'clock")
 };
 
-static const gchar *i18n_hour_sectors_one[] =
-{
+static const gchar *i18n_hour_sectors_one[] = {
   /* I18N: some languages have a singular form for the first hour,
    * other languages should just use the same strings as above */
-  /* xgettext:no-c-format */ NC_("one", "%0 o'clock"),
-  /* xgettext:no-c-format */ NC_("one", "five past %0"),
-  /* xgettext:no-c-format */ NC_("one", "ten past %0"),
-  /* xgettext:no-c-format */ NC_("one", "quarter past %0"),
-  /* xgettext:no-c-format */ NC_("one", "twenty past %0"),
-  /* xgettext:no-c-format */ NC_("one", "twenty five past %0"),
-  /* xgettext:no-c-format */ NC_("one", "half past %0"),
-  /* xgettext:no-c-format */ NC_("one", "twenty five to %1"),
-  /* xgettext:no-c-format */ NC_("one", "twenty to %1"),
-  /* xgettext:no-c-format */ NC_("one", "quarter to %1"),
-  /* xgettext:no-c-format */ NC_("one", "ten to %1"),
-  /* xgettext:no-c-format */ NC_("one", "five to %1"),
-  /* xgettext:no-c-format */ NC_("one", "%1 o'clock")
+  /* xgettext:no-c-format */ NC_ ("one", "%0 o'clock"),
+  /* xgettext:no-c-format */ NC_ ("one", "five past %0"),
+  /* xgettext:no-c-format */ NC_ ("one", "ten past %0"),
+  /* xgettext:no-c-format */ NC_ ("one", "quarter past %0"),
+  /* xgettext:no-c-format */ NC_ ("one", "twenty past %0"),
+  /* xgettext:no-c-format */ NC_ ("one", "twenty five past %0"),
+  /* xgettext:no-c-format */ NC_ ("one", "half past %0"),
+  /* xgettext:no-c-format */ NC_ ("one", "twenty five to %1"),
+  /* xgettext:no-c-format */ NC_ ("one", "twenty to %1"),
+  /* xgettext:no-c-format */ NC_ ("one", "quarter to %1"),
+  /* xgettext:no-c-format */ NC_ ("one", "ten to %1"),
+  /* xgettext:no-c-format */ NC_ ("one", "five to %1"),
+  /* xgettext:no-c-format */ NC_ ("one", "%1 o'clock")
 };
 
-static const gchar *i18n_hour_am_names[] =
-{
-  NC_("am", "one"),
-  NC_("am", "two"),
-  NC_("am", "three"),
-  NC_("am", "four"),
-  NC_("am", "five"),
-  NC_("am", "six"),
-  NC_("am", "seven"),
-  NC_("am", "eight"),
-  NC_("am", "nine"),
-  NC_("am", "ten"),
-  NC_("am", "eleven"),
+static const gchar *i18n_hour_am_names[] = {
+  NC_ ("am", "one"),
+  NC_ ("am", "two"),
+  NC_ ("am", "three"),
+  NC_ ("am", "four"),
+  NC_ ("am", "five"),
+  NC_ ("am", "six"),
+  NC_ ("am", "seven"),
+  NC_ ("am", "eight"),
+  NC_ ("am", "nine"),
+  NC_ ("am", "ten"),
+  NC_ ("am", "eleven"),
   /* I18N: 12 AM is midnight */
-  NC_("am", "twelve")
+  NC_ ("am", "twelve")
 };
 
-static const gchar *i18n_hour_pm_names[] =
-{
-  NC_("pm", "one"),
-  NC_("pm", "two"),
-  NC_("pm", "three"),
-  NC_("pm", "four"),
-  NC_("pm", "five"),
-  NC_("pm", "six"),
-  NC_("pm", "seven"),
-  NC_("pm", "eight"),
-  NC_("pm", "nine"),
-  NC_("pm", "ten"),
-  NC_("pm", "eleven"),
+static const gchar *i18n_hour_pm_names[] = {
+  NC_ ("pm", "one"),
+  NC_ ("pm", "two"),
+  NC_ ("pm", "three"),
+  NC_ ("pm", "four"),
+  NC_ ("pm", "five"),
+  NC_ ("pm", "six"),
+  NC_ ("pm", "seven"),
+  NC_ ("pm", "eight"),
+  NC_ ("pm", "nine"),
+  NC_ ("pm", "ten"),
+  NC_ ("pm", "eleven"),
   /* I18N: 12 PM is noon */
-  NC_("pm", "twelve")
+  NC_ ("pm", "twelve")
 };
 
 
@@ -177,7 +175,7 @@ xfce_clock_fuzzy_class_init (XfceClockFuzzyClass *klass)
                                    g_param_spec_double ("size-ratio", NULL, NULL,
                                                         -1, G_MAXDOUBLE, -1.00,
                                                         G_PARAM_READABLE
-                                                        | G_PARAM_STATIC_STRINGS));
+                                                          | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_ORIENTATION,
@@ -185,7 +183,7 @@ xfce_clock_fuzzy_class_init (XfceClockFuzzyClass *klass)
                                                       GTK_TYPE_ORIENTATION,
                                                       GTK_ORIENTATION_HORIZONTAL,
                                                       G_PARAM_WRITABLE
-                                                      | G_PARAM_STATIC_STRINGS));
+                                                        | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_FUZZINESS,
@@ -194,7 +192,7 @@ xfce_clock_fuzzy_class_init (XfceClockFuzzyClass *klass)
                                                       FUZZINESS_MAX,
                                                       FUZZINESS_DEFAULT,
                                                       G_PARAM_READWRITE
-                                                      | G_PARAM_STATIC_STRINGS));
+                                                        | G_PARAM_STATIC_STRINGS));
 }
 
 
@@ -210,20 +208,19 @@ xfce_clock_fuzzy_init (XfceClockFuzzy *fuzzy)
 
 
 static void
-xfce_clock_fuzzy_set_property (GObject      *object,
-                               guint         prop_id,
+xfce_clock_fuzzy_set_property (GObject *object,
+                               guint prop_id,
                                const GValue *value,
-                               GParamSpec   *pspec)
+                               GParamSpec *pspec)
 {
   XfceClockFuzzy *fuzzy = XFCE_CLOCK_FUZZY (object);
-  guint           fuzziness;
+  guint fuzziness;
 
   switch (prop_id)
     {
     case PROP_ORIENTATION:
       gtk_label_set_angle (GTK_LABEL (object),
-          g_value_get_enum (value) == GTK_ORIENTATION_HORIZONTAL ?
-          0 : 270);
+                           g_value_get_enum (value) == GTK_ORIENTATION_HORIZONTAL ? 0 : 270);
       break;
 
     case PROP_FUZZINESS:
@@ -244,9 +241,9 @@ xfce_clock_fuzzy_set_property (GObject      *object,
 
 
 static void
-xfce_clock_fuzzy_get_property (GObject    *object,
-                               guint       prop_id,
-                               GValue     *value,
+xfce_clock_fuzzy_get_property (GObject *object,
+                               guint prop_id,
+                               GValue *value,
                                GParamSpec *pspec)
 {
   XfceClockFuzzy *fuzzy = XFCE_CLOCK_FUZZY (object);
@@ -282,16 +279,16 @@ xfce_clock_fuzzy_finalize (GObject *object)
 
 static gboolean
 xfce_clock_fuzzy_update (XfceClockFuzzy *fuzzy,
-                         ClockTime      *time)
+                         ClockTime *time)
 {
-  GDateTime      *date_time;
-  gint            sector;
-  gint            minute, hour;
-  GString        *string;
-  const gchar    *time_format;
-  gchar          *p;
-  gchar           pattern[3];
-  gboolean        is_pm;
+  GDateTime *date_time;
+  gint sector;
+  gint minute, hour;
+  GString *string;
+  const gchar *time_format;
+  gchar *p;
+  gchar pattern[3];
+  gboolean is_pm;
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_FUZZY (fuzzy), FALSE);
 
@@ -342,7 +339,7 @@ xfce_clock_fuzzy_update (XfceClockFuzzy *fuzzy,
           p = strchr (time_format, '%');
           panel_assert (p != NULL && g_ascii_isdigit (*(p + 1)));
         }
-      
+
       string = g_string_new (NULL);
 
       /* replace the %? with the hour name */
@@ -371,7 +368,6 @@ xfce_clock_fuzzy_update (XfceClockFuzzy *fuzzy,
 
   return TRUE;
 }
-
 
 
 

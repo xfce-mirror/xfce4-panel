@@ -26,7 +26,8 @@ G_BEGIN_DECLS
 #define WINDOW_MENU_TYPE_PLUGIN (window_menu_plugin_get_type ())
 G_DECLARE_FINAL_TYPE (WindowMenuPlugin, window_menu_plugin, WINDOW_MENU, PLUGIN, XfcePanelPlugin)
 
-void window_menu_plugin_register_type (XfcePanelTypeModule *type_module);
+void
+window_menu_plugin_register_type (XfcePanelTypeModule *type_module);
 
 G_END_DECLS
 

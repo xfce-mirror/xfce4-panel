@@ -37,41 +37,43 @@ G_DECLARE_FINAL_TYPE (SnPlugin, sn_plugin, SN, PLUGIN, XfcePanelPlugin)
 
 struct _SnPlugin
 {
-  XfcePanelPlugin      __parent__;
+  XfcePanelPlugin __parent__;
 
 #ifdef ENABLE_X11
   /* Systray manager */
   SystrayManager *manager;
 #endif
 
-  guint           idle_startup;
-  gboolean        has_hidden_systray_items;
-  gboolean        has_hidden_sn_items;
+  guint idle_startup;
+  gboolean has_hidden_systray_items;
+  gboolean has_hidden_sn_items;
 
   /* Widgets */
-  GtkWidget           *box;
-  GtkWidget           *systray_box;
-  GtkWidget           *button;
-  GtkWidget           *item;
-  GtkWidget           *sn_box;
+  GtkWidget *box;
+  GtkWidget *systray_box;
+  GtkWidget *button;
+  GtkWidget *item;
+  GtkWidget *sn_box;
 
   /* Systray settings */
-  GSList         *names_ordered;
-  GHashTable     *names_hidden;
+  GSList *names_ordered;
+  GHashTable *names_hidden;
 
-  GtkBuilder     *configure_builder;
+  GtkBuilder *configure_builder;
 
   /* Statusnotifier settings */
 #ifdef HAVE_DBUSMENU
-  SnBackend           *backend;
+  SnBackend *backend;
 #endif
-  SnConfig            *config;
+  SnConfig *config;
 };
 
-void                   sn_plugin_register_type                 (XfcePanelTypeModule     *panel_type_module);
+void
+sn_plugin_register_type (XfcePanelTypeModule *panel_type_module);
 
-gboolean               sn_plugin_legacy_item_added             (SnPlugin                *plugin,
-                                                                const gchar             *name);
+gboolean
+sn_plugin_legacy_item_added (SnPlugin *plugin,
+                             const gchar *name);
 
 G_END_DECLS
 

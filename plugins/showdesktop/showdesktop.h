@@ -26,7 +26,8 @@ G_BEGIN_DECLS
 #define SHOW_DESKTOP_TYPE_PLUGIN (show_desktop_plugin_get_type ())
 G_DECLARE_FINAL_TYPE (ShowDesktopPlugin, show_desktop_plugin, SHOW_DESKTOP, PLUGIN, XfcePanelPlugin)
 
-void show_desktop_plugin_register_type (XfcePanelTypeModule *type_module);
+void
+show_desktop_plugin_register_type (XfcePanelTypeModule *type_module);
 
 G_END_DECLS
 

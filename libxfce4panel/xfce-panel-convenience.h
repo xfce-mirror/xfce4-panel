@@ -26,26 +26,32 @@
 
 G_BEGIN_DECLS
 
-GtkWidget   *xfce_panel_create_button              (void) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+GtkWidget *
+xfce_panel_create_button (void) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
-GtkWidget   *xfce_panel_create_toggle_button       (void) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+GtkWidget *
+xfce_panel_create_toggle_button (void) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
-const gchar *xfce_panel_get_channel_name           (void);
+const gchar *
+xfce_panel_get_channel_name (void);
 
-GdkPixbuf   *xfce_panel_pixbuf_from_source_at_size (const gchar  *source,
-                                                    GtkIconTheme *icon_theme,
-                                                    gint          dest_width,
-                                                    gint          dest_height) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+GdkPixbuf *
+xfce_panel_pixbuf_from_source_at_size (const gchar *source,
+                                       GtkIconTheme *icon_theme,
+                                       gint dest_width,
+                                       gint dest_height) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
-GdkPixbuf   *xfce_panel_pixbuf_from_source         (const gchar  *source,
-                                                    GtkIconTheme *icon_theme,
-                                                    gint          size) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+GdkPixbuf *
+xfce_panel_pixbuf_from_source (const gchar *source,
+                               GtkIconTheme *icon_theme,
+                               gint size) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
-void         xfce_panel_set_image_from_source      (GtkImage     *image,
-                                                    const gchar  *source,
-                                                    GtkIconTheme *icon_theme,
-                                                    gint          size,
-                                                    gint          scale);
+void
+xfce_panel_set_image_from_source (GtkImage *image,
+                                  const gchar *source,
+                                  GtkIconTheme *icon_theme,
+                                  gint size,
+                                  gint scale);
 
 G_END_DECLS
 

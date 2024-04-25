@@ -36,6 +36,7 @@ struct _ClockSleepMonitorClass
  * The sleep monitor emits a signal `woke-up()` when it detects wakeup
  * from a sleep state.
  */
-ClockSleepMonitor* clock_sleep_monitor_create (void);
+ClockSleepMonitor *
+clock_sleep_monitor_create (void);
 
 G_END_DECLS
