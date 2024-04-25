@@ -18,25 +18,22 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
+#include "panel/panel-application.h"
+#include "panel/panel-dbus-service.h"
+#include "panel/panel-item-dialog.h"
+#include "panel/panel-module-factory.h"
+#include "panel/panel-preferences-dialog.h"
+
+#include "common/panel-dbus.h"
+#include "common/panel-private.h"
+#include "libxfce4panel/libxfce4panel.h"
 
 #include <gio/gio.h>
-#include <common/panel-private.h>
-#include <common/panel-dbus.h>
-#include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
-#include <libxfce4panel/libxfce4panel.h>
-
-#include <panel/panel-dbus-service.h>
-#include <panel/panel-application.h>
-#include <panel/panel-preferences-dialog.h>
-#include <panel/panel-item-dialog.h>
-#include <panel/panel-module-factory.h>
+#include <libxfce4util/libxfce4util.h>
 
 static void      panel_dbus_service_finalize                   (GObject                 *object);
 static void      panel_dbus_service_plugin_event_result        (XfcePanelPluginProvider *prev_provider,

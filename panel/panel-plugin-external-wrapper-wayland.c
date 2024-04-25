@@ -17,16 +17,17 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#include <gtk-layer-shell/gtk-layer-shell.h>
+#include "panel/panel-plugin-external-wrapper-exported.h"
+#include "panel/panel-plugin-external-wrapper-wayland.h"
 
-#include <common/panel-private.h>
-#include <common/panel-debug.h>
-#include <common/panel-dbus.h>
-#include <panel/panel-plugin-external-wrapper-wayland.h>
-#include <panel/panel-plugin-external-wrapper-exported.h>
+#include "common/panel-dbus.h"
+#include "common/panel-debug.h"
+#include "common/panel-private.h"
+
+#include <gtk-layer-shell/gtk-layer-shell.h>
 
 
 

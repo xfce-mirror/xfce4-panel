@@ -18,18 +18,19 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#include <gtk/gtk.h>
-#include <libxfce4panel/xfce-panel-plugin-provider.h>
-#include <libxfce4ui/libxfce4ui.h>
-#include <common/panel-private.h>
-#include <common/panel-xfconf.h>
-#include <common/panel-utils.h>
-
-#include "separator.h"
 #include "separator-dialog_ui.h"
+#include "separator.h"
+
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
+#include "common/panel-xfconf.h"
+#include "libxfce4panel/xfce-panel-plugin-provider.h"
+
+#include <gtk/gtk.h>
+#include <libxfce4ui/libxfce4ui.h>
 
 
 #define SEPARATOR_OFFSET (0.15)

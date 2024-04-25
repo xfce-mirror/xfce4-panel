@@ -18,28 +18,25 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_MATH_H
-#include <math.h>
-#endif
+#include "pager-buttons.h"
+#include "pager-dialog_ui.h"
+#include "pager.h"
+
+#include "common/panel-debug.h"
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
+#include "common/panel-xfconf.h"
 
 #include <gtk/gtk.h>
+#include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4windowing/libxfce4windowing.h>
+
 #ifdef ENABLE_X11
 #include <libwnck/libwnck.h>
 #endif
-
-#include <libxfce4ui/libxfce4ui.h>
-#include <common/panel-xfconf.h>
-#include <common/panel-utils.h>
-#include <common/panel-private.h>
-#include <common/panel-debug.h>
-
-#include "pager.h"
-#include "pager-buttons.h"
-#include "pager-dialog_ui.h"
 
 
 

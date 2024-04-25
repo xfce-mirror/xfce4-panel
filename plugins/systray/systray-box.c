@@ -17,23 +17,15 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
-#ifdef HAVE_MATH_H
-#include <math.h>
-#endif
-
-#include <libxfce4panel/libxfce4panel.h>
-#include <common/panel-private.h>
-#include <common/panel-debug.h>
-
+#include "sn-config.h"
 #include "systray-box.h"
 #include "systray-socket.h"
-#include "sn-config.h"
+
+#include "common/panel-debug.h"
+#include "common/panel-private.h"
 
 #define SPACING    (2)
 #define OFFSCREEN  (-9999)

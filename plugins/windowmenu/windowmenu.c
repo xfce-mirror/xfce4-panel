@@ -17,21 +17,22 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#include <gtk/gtk.h>
+#include "windowmenu-dialog_ui.h"
+#include "windowmenu.h"
+
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
+#include "common/panel-xfconf.h"
+
 #include <exo/exo.h>
+#include <gdk/gdkkeysyms.h>
+#include <gtk/gtk.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4windowing/libxfce4windowing.h>
 #include <libxfce4windowingui/libxfce4windowingui.h>
-#include <common/panel-xfconf.h>
-#include <common/panel-utils.h>
-#include <gdk/gdkkeysyms.h>
-#include <common/panel-private.h>
-
-#include "windowmenu.h"
-#include "windowmenu-dialog_ui.h"
 
 #define MIN_MINIMIZED_ICON_LUCENCY     (0)
 #define MAX_MINIMIZED_ICON_LUCENCY     (100)

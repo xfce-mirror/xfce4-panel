@@ -17,18 +17,15 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#include <string.h>
-#include <unistd.h>
+#include "clock-sleep-monitor.h"
+
+#include "common/panel-debug.h"
 
 #include <gio/gio.h>
-
 #include <libxfce4util/libxfce4util.h>
-#include <common/panel-debug.h>
-
-#include "clock-sleep-monitor.h"
 
 
 

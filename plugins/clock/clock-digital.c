@@ -17,15 +17,14 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#include <common/panel-private.h>
-#include <common/panel-xfconf.h>
-
-#include "clock.h"
-#include "clock-time.h"
 #include "clock-digital.h"
+#include "clock.h"
+
+#include "common/panel-private.h"
+#include "common/panel-xfconf.h"
 
 
 

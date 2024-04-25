@@ -17,19 +17,20 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#include <exo/exo.h>
-#include <gio/gio.h>
-#include <gio/gdesktopappinfo.h>
-#include <libxfce4ui/libxfce4ui.h>
-#include <common/panel-xfconf.h>
-#include <common/panel-utils.h>
-#include <common/panel-private.h>
-
-#include "directorymenu.h"
 #include "directorymenu-dialog_ui.h"
+#include "directorymenu.h"
+
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
+#include "common/panel-xfconf.h"
+
+#include <exo/exo.h>
+#include <gio/gdesktopappinfo.h>
+#include <gio/gio.h>
+#include <libxfce4ui/libxfce4ui.h>
 
 #define DEFAULT_ICON_NAME "folder"
 #define DIALOG_ICON_SIZE 48

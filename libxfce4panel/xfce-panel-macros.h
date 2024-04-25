@@ -21,10 +21,10 @@
 #ifndef __XFCE_PANEL_MACROS_H__
 #define __XFCE_PANEL_MACROS_H__
 
-#include <glib.h>
 #include <glib-object.h>
-#include <libxfce4panel/xfce-panel-plugin.h>
+#include <glib.h>
 #include <libxfce4panel/xfce-panel-convenience.h>
+#include <libxfce4panel/xfce-panel-plugin.h>
 
 G_BEGIN_DECLS
 

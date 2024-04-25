@@ -19,6 +19,10 @@
 #ifndef __PANEL_DEBUG_H__
 #define __PANEL_DEBUG_H__
 
+#include <glib.h>
+
+G_BEGIN_DECLS
+
 #define PANEL_DEBUG_BOOL(bool) ((bool) ? "true" : "false")
 
 typedef enum
@@ -58,5 +62,7 @@ void     panel_debug              (PanelDebugFlag  domain,
 void     panel_debug_filtered     (PanelDebugFlag  domain,
                                    const gchar    *message,
                                    ...) G_GNUC_PRINTF (2, 3);
+
+G_END_DECLS
 
 #endif /* !__PANEL_DEBUG_H__ */

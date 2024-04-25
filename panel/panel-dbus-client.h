@@ -20,7 +20,6 @@
 #define __PANEL_DBUS_CLIENT_H__
 
 #include <glib.h>
-#include <gdk/gdk.h>
 
 G_BEGIN_DECLS
 
@@ -47,4 +46,3 @@ gboolean  panel_dbus_client_terminate                  (gboolean      restart,
 G_END_DECLS
 
 #endif /* !__PANEL_DBUS_CLIENT_H__ */
-

@@ -17,23 +17,19 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
+#include "panel/panel-application.h"
+#include "panel/panel-dialogs.h"
+#include "panel/panel-item-dialog.h"
+#include "panel/panel-module-factory.h"
+#include "panel/panel-module.h"
+#include "panel/panel-preferences-dialog.h"
 
-#include <common/panel-private.h>
-#include <common/panel-utils.h>
-#include <libxfce4panel/libxfce4panel.h>
-
-#include <panel/panel-application.h>
-#include <panel/panel-item-dialog.h>
-#include <panel/panel-dialogs.h>
-#include <panel/panel-module.h>
-#include <panel/panel-module-factory.h>
-#include <panel/panel-preferences-dialog.h>
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
+#include "libxfce4panel/libxfce4panel.h"
 
 
 

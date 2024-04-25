@@ -19,19 +19,18 @@
 
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-#ifdef HAVE_STRING_H
-#include <string.h>
+#include "config.h"
 #endif
 
+#include "sn-item.h"
+
+#include "common/panel-debug.h"
+
 #include <gio/gio.h>
+
 #ifdef HAVE_DBUSMENU
 #include <libdbusmenu-gtk/dbusmenu-gtk.h>
 #endif
-
-#include <common/panel-debug.h>
-#include "sn-item.h"
 
 
 

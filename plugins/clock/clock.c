@@ -18,29 +18,26 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_MATH_H
-#include <math.h>
-#endif
-
-#include <gtk/gtk.h>
-#include <libxfce4ui/libxfce4ui.h>
-#include <libxfce4panel/libxfce4panel.h>
-#include <common/panel-private.h>
-#include <common/panel-xfconf.h>
-#include <common/panel-utils.h>
-
-#include "clock.h"
-#include "clock-time.h"
 #include "clock-analog.h"
 #include "clock-binary.h"
+#include "clock-dialog_ui.h"
 #include "clock-digital.h"
 #include "clock-fuzzy.h"
 #include "clock-lcd.h"
-#include "clock-dialog_ui.h"
 #include "clock-sleep-monitor.h"
+#include "clock-time.h"
+#include "clock.h"
+
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
+#include "common/panel-xfconf.h"
+#include "libxfce4panel/libxfce4panel.h"
+
+#include <gtk/gtk.h>
+#include <libxfce4ui/libxfce4ui.h>
 
 /* TRANSLATORS: adjust this accordingly for your locale format */
 #define DEFAULT_TOOLTIP_FORMAT NC_("Date", "%A %d %B %Y")

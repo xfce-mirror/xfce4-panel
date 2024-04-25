@@ -17,36 +17,20 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_SYS_TYPES_H
-#include <sys/types.h>
-#endif
-#ifdef HAVE_SIGNAL_H
-#include <signal.h>
-#endif
-#ifdef HAVE_SYS_WAIT_H
-#include <sys/wait.h>
-#endif
+#include "panel/panel-dialogs.h"
+#include "panel/panel-module.h"
+#include "panel/panel-plugin-external.h"
 
-#include <gdk/gdk.h>
-#include <libxfce4util/libxfce4util.h>
+#include "common/panel-dbus.h"
+#include "common/panel-debug.h"
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
 
 #include <gio/gio.h>
-
-#include <common/panel-private.h>
-#include <common/panel-dbus.h>
-#include <common/panel-debug.h>
-#include <common/panel-utils.h>
-
-#include <libxfce4panel/libxfce4panel.h>
-#include <libxfce4panel/xfce-panel-plugin-provider.h>
-
-#include <panel/panel-module.h>
-#include <panel/panel-plugin-external.h>
-#include <panel/panel-window.h>
-#include <panel/panel-dialogs.h>
+#include <libxfce4util/libxfce4util.h>
 
 
 

@@ -20,10 +20,10 @@
 #ifndef __SN_BOX_H__
 #define __SN_BOX_H__
 
-#include <gtk/gtk.h>
-
 #include "sn-config.h"
 #include "sn-item.h"
+
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
@@ -38,6 +38,6 @@ gboolean               sn_box_has_hidden_items                 (SnBox           
 void                   sn_box_set_show_hidden                  (SnBox                   *box,
                                                                 gboolean                 show_hidden);
 
-    G_END_DECLS
+G_END_DECLS
 
 #endif /* !__SN_BOX_H__ */

@@ -17,20 +17,21 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#include <exo/exo.h>
-#include <garcon/garcon.h>
-#include <garcon-gtk/garcon-gtk.h>
-#include <libxfce4ui/libxfce4ui.h>
-#include <common/panel-xfconf.h>
-#include <common/panel-utils.h>
-#include <common/panel-private.h>
-#include <common/panel-debug.h>
-
-#include "applicationsmenu.h"
 #include "applicationsmenu-dialog_ui.h"
+#include "applicationsmenu.h"
+
+#include "common/panel-debug.h"
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
+#include "common/panel-xfconf.h"
+
+#include <exo/exo.h>
+#include <garcon-gtk/garcon-gtk.h>
+#include <garcon/garcon.h>
+#include <libxfce4ui/libxfce4ui.h>
 
 
 /* I18N: default tooltip of the application menu */

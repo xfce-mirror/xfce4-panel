@@ -17,18 +17,19 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
+
+#include "wrapper/wrapper-external-exported.h"
+#include "wrapper/wrapper-plug-wayland.h"
+#include "wrapper/wrapper-plug.h"
+
+#include "common/panel-dbus.h"
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
 
 #include <gtk-layer-shell/gtk-layer-shell.h>
 #include <libxfce4windowing/libxfce4windowing.h>
-
-#include <common/panel-private.h>
-#include <common/panel-dbus.h>
-#include <common/panel-utils.h>
-#include <wrapper/wrapper-plug-wayland.h>
-#include <wrapper/wrapper-plug.h>
-#include <wrapper/wrapper-external-exported.h>
 
 
 

@@ -17,24 +17,20 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
+#include "launcher-dialog.h"
+#include "launcher.h"
 
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
+#include "common/panel-xfconf.h"
+
+#include <garcon-gtk/garcon-gtk.h>
 #include <gtk/gtk.h>
 #include <libxfce4ui/libxfce4ui.h>
-#include <garcon-gtk/garcon-gtk.h>
 #include <xfconf/xfconf.h>
-
-#include <common/panel-private.h>
-#include <common/panel-xfconf.h>
-#include <common/panel-utils.h>
-
-#include "launcher.h"
-#include "launcher-dialog.h"
 
 #define ARROW_BUTTON_SIZE              (12)
 #define MENU_POPUP_DELAY               (225)

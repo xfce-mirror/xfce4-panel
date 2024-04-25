@@ -19,10 +19,12 @@
 #ifndef __SYSTRAY_H__
 #define __SYSTRAY_H__
 
-#include <gtk/gtk.h>
-#include <libxfce4panel/libxfce4panel.h>
 #include "sn-config.h"
 #include "sn-plugin.h"
+
+#include "libxfce4panel/libxfce4panel.h"
+
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

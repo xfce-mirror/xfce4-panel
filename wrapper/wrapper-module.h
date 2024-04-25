@@ -19,8 +19,9 @@
 #ifndef __WRAPPER_MODULE_H__
 #define __WRAPPER_MODULE_H__
 
+#include "libxfce4panel/xfce-panel-plugin-provider.h"
+
 #include <gtk/gtk.h>
-#include <libxfce4panel/xfce-panel-plugin-provider.h>
 
 G_BEGIN_DECLS
 

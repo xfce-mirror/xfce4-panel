@@ -17,34 +17,25 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STDLIB_H
-#include <stdlib.h>
-#endif
-#ifdef HAVE_MATH_H
-#include <math.h>
-#endif
+#include "panel/panel-application.h"
+#include "panel/panel-dialogs.h"
+#include "panel/panel-item-dialog.h"
+#include "panel/panel-itembar.h"
+#include "panel/panel-module.h"
+#include "panel/panel-plugin-external.h"
+#include "panel/panel-preferences-dialog-ui.h"
+#include "panel/panel-preferences-dialog.h"
 
-#include <libxfce4util/libxfce4util.h>
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
+#include "libxfce4panel/libxfce4panel.h"
+#include "libxfce4panel/xfce-panel-plugin-provider.h"
+
 #include <libxfce4ui/libxfce4ui.h>
-
-#include <common/panel-private.h>
-#include <common/panel-utils.h>
-
-#include <libxfce4panel/libxfce4panel.h>
-#include <libxfce4panel/xfce-panel-plugin-provider.h>
-
-#include <panel/panel-window.h>
-#include <panel/panel-application.h>
-#include <panel/panel-dialogs.h>
-#include <panel/panel-module.h>
-#include <panel/panel-itembar.h>
-#include <panel/panel-item-dialog.h>
-#include <panel/panel-preferences-dialog.h>
-#include <panel/panel-preferences-dialog-ui.h>
-#include <panel/panel-plugin-external.h>
+#include <libxfce4util/libxfce4util.h>
 
 
 

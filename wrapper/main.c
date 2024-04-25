@@ -18,33 +18,20 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_SYS_PRCTL_H
-#include <sys/prctl.h>
-#endif
-#ifdef HAVE_STDIO_H
-#include <stdio.h>
-#endif
-#ifdef HAVE_STDLIB_H
-#include <stdlib.h>
-#endif
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
+#include "wrapper/wrapper-module.h"
+#include "wrapper/wrapper-plug.h"
+
+#include "common/panel-dbus.h"
+#include "common/panel-private.h"
+#include "libxfce4panel/libxfce4panel.h"
+#include "libxfce4panel/xfce-panel-plugin-provider.h"
 
 #include <gio/gio.h>
-
 #include <gtk/gtk.h>
-#include <common/panel-private.h>
-#include <common/panel-dbus.h>
 #include <libxfce4util/libxfce4util.h>
-#include <libxfce4panel/libxfce4panel.h>
-#include <libxfce4panel/xfce-panel-plugin-provider.h>
-
-#include <wrapper/wrapper-plug.h>
-#include <wrapper/wrapper-module.h>
 
 
 

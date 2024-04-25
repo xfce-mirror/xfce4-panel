@@ -19,15 +19,16 @@
 #ifndef __SN_PLUGIN_H__
 #define __SN_PLUGIN_H__
 
-#include <gtk/gtk.h>
-#include <libxfce4panel/libxfce4panel.h>
+#include "sn-backend.h"
+#include "sn-config.h"
 
 #ifdef ENABLE_X11
 #include "systray-manager.h"
 #endif
 
-#include "sn-backend.h"
-#include "sn-config.h"
+#include "libxfce4panel/libxfce4panel.h"
+
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

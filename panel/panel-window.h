@@ -19,11 +19,12 @@
 #ifndef __PANEL_WINDOW_H__
 #define __PANEL_WINDOW_H__
 
+#include "panel/panel-base-window.h"
+
+#include "common/panel-xfconf.h"
+
 #include <gtk/gtk.h>
 #include <xfconf/xfconf.h>
-
-#include <common/panel-xfconf.h>
-#include <panel/panel-base-window.h>
 
 #define DEFAULT_MODE XFCE_PANEL_PLUGIN_MODE_HORIZONTAL
 #define MIN_SIZE 16

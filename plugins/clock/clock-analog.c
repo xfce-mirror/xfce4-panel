@@ -17,19 +17,15 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_MATH_H
-#include <math.h>
-#endif
+#include "clock-analog.h"
+#include "clock.h"
+
+#include "common/panel-private.h"
 
 #include <cairo/cairo.h>
-#include <common/panel-private.h>
-
-#include "clock.h"
-#include "clock-time.h"
-#include "clock-analog.h"
 
 #define CLOCK_SCALE 0.08
 #define TICKS_TO_RADIANS(x)   (G_PI - (G_PI / 30.0) * (x))

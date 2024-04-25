@@ -20,9 +20,9 @@
 #ifndef __SN_DIALOG_H__
 #define __SN_DIALOG_H__
 
-#include <gtk/gtk.h>
-
 #include "sn-config.h"
+
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

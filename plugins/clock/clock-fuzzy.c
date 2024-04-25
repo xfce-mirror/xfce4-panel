@@ -17,18 +17,13 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
-
-#include <common/panel-private.h>
-
-#include "clock.h"
-#include "clock-time.h"
 #include "clock-fuzzy.h"
+#include "clock.h"
+
+#include "common/panel-private.h"
 
 
 

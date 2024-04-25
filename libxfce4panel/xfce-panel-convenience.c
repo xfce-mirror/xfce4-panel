@@ -18,19 +18,19 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
+
+#include "libxfce4panel/xfce-panel-convenience.h"
+#include "libxfce4panel/xfce-panel-macros.h"
+
+#include "libxfce4panel/libxfce4panel-alias.h"
 
 #ifdef HAVE_MATH_H
 #include <math.h>
 #endif
 
 #include <libxfce4util/libxfce4util.h>
-#include <gtk/gtk.h>
-
-#include <libxfce4panel/xfce-panel-macros.h>
-#include <libxfce4panel/xfce-panel-convenience.h>
-#include <libxfce4panel/libxfce4panel-alias.h>
 
 
 
@@ -356,4 +356,4 @@ xfce_panel_set_image_from_source (GtkImage     *image,
 
 
 #define __XFCE_PANEL_CONVENIENCE_C__
-#include <libxfce4panel/libxfce4panel-aliasdef.c>
+#include "libxfce4panel/libxfce4panel-aliasdef.c"

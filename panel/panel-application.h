@@ -19,8 +19,9 @@
 #ifndef __PANEL_APPLICATION_H__
 #define __PANEL_APPLICATION_H__
 
+#include "panel/panel-window.h"
+
 #include <gtk/gtk.h>
-#include <panel/panel-window.h>
 
 G_BEGIN_DECLS
 
