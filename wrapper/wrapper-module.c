@@ -26,10 +26,12 @@
 
 
 
-static void     wrapper_module_dispose (GObject     *object);
-static gboolean wrapper_module_load    (GTypeModule *type_module);
-static void     wrapper_module_unload  (GTypeModule *type_module);
-
+static void
+wrapper_module_dispose (GObject *object);
+static gboolean
+wrapper_module_load (GTypeModule *type_module);
+static void
+wrapper_module_unload (GTypeModule *type_module);
 
 
 
@@ -118,17 +120,17 @@ wrapper_module_new (GModule *library)
 
 
 GtkWidget *
-wrapper_module_new_provider (WrapperModule  *module,
-                             GdkScreen      *screen,
-                             const gchar    *name,
-                             gint            unique_id,
-                             const gchar    *display_name,
-                             const gchar    *comment,
-                             gchar         **arguments)
+wrapper_module_new_provider (WrapperModule *module,
+                             GdkScreen *screen,
+                             const gchar *name,
+                             gint unique_id,
+                             const gchar *display_name,
+                             const gchar *comment,
+                             gchar **arguments)
 {
-  GtkWidget           *plugin = NULL;
-  PluginConstructFunc  construct_func;
-  PluginInitFunc       init_func;
+  GtkWidget *plugin = NULL;
+  PluginConstructFunc construct_func;
+  PluginInitFunc init_func;
 
   panel_return_val_if_fail (WRAPPER_IS_MODULE (module), NULL);
   panel_return_val_if_fail (module->library != NULL, NULL);
@@ -136,8 +138,8 @@ wrapper_module_new_provider (WrapperModule  *module,
   g_type_module_use (G_TYPE_MODULE (module));
 
   /* try to link the contruct or init function */
-  if (g_module_symbol (module->library, "xfce_panel_module_init",
-      (gpointer) &init_func) && init_func != NULL)
+  if (g_module_symbol (module->library, "xfce_panel_module_init", (gpointer) &init_func)
+      && init_func != NULL)
     {
       /* initialize the plugin */
       module->plugin_type = (init_func) (G_TYPE_MODULE (module), NULL);
@@ -150,8 +152,8 @@ wrapper_module_new_provider (WrapperModule  *module,
                              "comment", comment,
                              "arguments", arguments, NULL);
     }
-  else if (g_module_symbol (module->library, "xfce_panel_module_construct",
-           (gpointer) &construct_func) && construct_func != NULL)
+  else if (g_module_symbol (module->library, "xfce_panel_module_construct", (gpointer) &construct_func)
+           && construct_func != NULL)
     {
       /* create a new panel plugin */
       plugin = (*construct_func) (name, unique_id,

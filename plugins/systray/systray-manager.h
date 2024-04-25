@@ -29,29 +29,36 @@
 
 G_BEGIN_DECLS
 
-#define SYSTRAY_TYPE_MANAGER  (systray_manager_get_type ())
+#define SYSTRAY_TYPE_MANAGER (systray_manager_get_type ())
 G_DECLARE_FINAL_TYPE (SystrayManager, systray_manager, SYSTRAY, MANAGER, GObject)
 
-void            systray_manager_register_type        (XfcePanelTypeModule *type_module);
+void
+systray_manager_register_type (XfcePanelTypeModule *type_module);
 
-GQuark          systray_manager_error_quark          (void);
+GQuark
+systray_manager_error_quark (void);
 
-SystrayManager *systray_manager_new                  (void) G_GNUC_MALLOC;
+SystrayManager *
+systray_manager_new (void) G_GNUC_MALLOC;
 
-gboolean        systray_manager_register             (SystrayManager      *manager,
-                                                      GdkScreen            *screen,
-                                                      GError              **error);
+gboolean
+systray_manager_register (SystrayManager *manager,
+                          GdkScreen *screen,
+                          GError **error);
 
-void            systray_manager_unregister           (SystrayManager      *manager);
+void
+systray_manager_unregister (SystrayManager *manager);
 
-void            systray_manager_set_colors           (SystrayManager *manager,
-                                                      GdkRGBA        *fg,
-                                                      GdkRGBA        *error,
-                                                      GdkRGBA        *warning,
-                                                      GdkRGBA        *success);
+void
+systray_manager_set_colors (SystrayManager *manager,
+                            GdkRGBA *fg,
+                            GdkRGBA *error,
+                            GdkRGBA *warning,
+                            GdkRGBA *success);
 
-void            systray_manager_set_orientation      (SystrayManager      *manager,
-                                                      GtkOrientation       orientation);
+void
+systray_manager_set_orientation (SystrayManager *manager,
+                                 GtkOrientation orientation);
 
 G_END_DECLS
 

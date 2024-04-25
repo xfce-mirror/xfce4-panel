@@ -29,8 +29,9 @@ G_BEGIN_DECLS
 #define SN_TYPE_DIALOG (sn_dialog_get_type ())
 G_DECLARE_FINAL_TYPE (SnDialog, sn_dialog, SN, DIALOG, GObject)
 
-SnDialog              *sn_dialog_new                           (SnConfig                *config,
-                                                                GdkScreen               *screen);
+SnDialog *
+sn_dialog_new (SnConfig *config,
+               GdkScreen *screen);
 
 G_END_DECLS
 

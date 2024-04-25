@@ -26,7 +26,8 @@ G_BEGIN_DECLS
 #define APPLICATIONS_MENU_TYPE_PLUGIN (applications_menu_plugin_get_type ())
 G_DECLARE_FINAL_TYPE (ApplicationsMenuPlugin, applications_menu_plugin, APPLICATIONS_MENU, PLUGIN, XfcePanelPlugin)
 
-void applications_menu_plugin_register_type (XfcePanelTypeModule *type_module);
+void
+applications_menu_plugin_register_type (XfcePanelTypeModule *type_module);
 
 G_END_DECLS
 

@@ -30,76 +30,91 @@
 
 
 
-static void                  sn_backend_finalize                     (GObject                 *object);
+static void
+sn_backend_finalize (GObject *object);
 
-static void                  sn_backend_watcher_bus_acquired         (GDBusConnection         *connection,
-                                                                      const gchar             *name,
-                                                                      gpointer                 user_data);
+static void
+sn_backend_watcher_bus_acquired (GDBusConnection *connection,
+                                 const gchar *name,
+                                 gpointer user_data);
 
-static void                  sn_backend_watcher_name_lost            (GDBusConnection         *connection,
-                                                                      const gchar             *name,
-                                                                      gpointer                 user_data);
+static void
+sn_backend_watcher_name_lost (GDBusConnection *connection,
+                              const gchar *name,
+                              gpointer user_data);
 
-static gboolean              sn_backend_watcher_register_item        (SnWatcher               *watcher_skeleton,
-                                                                      GDBusMethodInvocation   *invocation,
-                                                                      const gchar             *service,
-                                                                      SnBackend               *backend);
+static gboolean
+sn_backend_watcher_register_item (SnWatcher *watcher_skeleton,
+                                  GDBusMethodInvocation *invocation,
+                                  const gchar *service,
+                                  SnBackend *backend);
 
-static gboolean              sn_backend_watcher_register_host        (SnWatcher               *watcher_skeleton,
-                                                                      GDBusMethodInvocation   *invocation,
-                                                                      const gchar             *service);
+static gboolean
+sn_backend_watcher_register_host (SnWatcher *watcher_skeleton,
+                                  GDBusMethodInvocation *invocation,
+                                  const gchar *service);
 
-static void                  sn_backend_watcher_update_items         (SnBackend               *backend);
+static void
+sn_backend_watcher_update_items (SnBackend *backend);
 
-static void                  sn_backend_watcher_clear_items          (SnBackend               *backend);
+static void
+sn_backend_watcher_clear_items (SnBackend *backend);
 
-static void                  sn_backend_host_name_appeared           (GDBusConnection         *connection,
-                                                                      const gchar             *name,
-                                                                      const gchar             *name_owner,
-                                                                      gpointer                 user_data);
+static void
+sn_backend_host_name_appeared (GDBusConnection *connection,
+                               const gchar *name,
+                               const gchar *name_owner,
+                               gpointer user_data);
 
-static void                  sn_backend_host_name_vanished           (GDBusConnection        *connection,
-                                                                      const gchar            *name,
-                                                                      gpointer                user_data);
+static void
+sn_backend_host_name_vanished (GDBusConnection *connection,
+                               const gchar *name,
+                               gpointer user_data);
 
-static void                  sn_backend_host_item_registered         (SnWatcher               *host_proxy,
-                                                                      const gchar             *service,
-                                                                      SnBackend               *backend);
+static void
+sn_backend_host_item_registered (SnWatcher *host_proxy,
+                                 const gchar *service,
+                                 SnBackend *backend);
 
-static void                  sn_backend_host_item_unregistered       (SnWatcher               *host_proxy,
-                                                                      const gchar             *service,
-                                                                      SnBackend               *backend);
+static void
+sn_backend_host_item_unregistered (SnWatcher *host_proxy,
+                                   const gchar *service,
+                                   SnBackend *backend);
 
-static void                  sn_backend_host_items_changed           (GDBusProxy              *proxy,
-                                                                      GVariant                *changed_properties,
-                                                                      GStrv                    invalidated_properties,
-                                                                      gpointer                 user_data);
+static void
+sn_backend_host_items_changed (GDBusProxy *proxy,
+                               GVariant *changed_properties,
+                               GStrv invalidated_properties,
+                               gpointer user_data);
 
-static void                  sn_backend_host_add_item                (SnBackend               *backend,
-                                                                      const gchar             *service,
-                                                                      const gchar             *bus_name,
-                                                                      const gchar             *object_path);
+static void
+sn_backend_host_add_item (SnBackend *backend,
+                          const gchar *service,
+                          const gchar *bus_name,
+                          const gchar *object_path);
 
-static void                  sn_backend_host_remove_item             (SnBackend               *backend,
-                                                                      SnItem                  *item,
-                                                                      gboolean                 remove_from_table);
+static void
+sn_backend_host_remove_item (SnBackend *backend,
+                             SnItem *item,
+                             gboolean remove_from_table);
 
-static void                  sn_backend_host_clear_items             (SnBackend               *backend);
+static void
+sn_backend_host_clear_items (SnBackend *backend);
 
 
 
 struct _SnBackend
 {
-  GObject              __parent__;
+  GObject __parent__;
 
-  guint                watcher_bus_owner_id;
-  SnWatcher           *watcher_skeleton;
-  GHashTable          *watcher_items;
+  guint watcher_bus_owner_id;
+  SnWatcher *watcher_skeleton;
+  GHashTable *watcher_items;
 
-  guint                host_bus_watcher_id;
-  SnWatcher           *host_proxy;
-  GHashTable          *host_items;
-  GCancellable        *host_cancellable;
+  guint host_bus_watcher_id;
+  SnWatcher *host_proxy;
+  GHashTable *host_items;
+  GCancellable *host_cancellable;
 };
 
 G_DEFINE_FINAL_TYPE (SnBackend, sn_backend, G_TYPE_OBJECT)
@@ -119,30 +134,27 @@ static guint sn_backend_signals[LAST_SIGNAL] = { 0 };
 
 typedef struct
 {
-  const gchar         *key;
-  SnBackend           *backend;
-  GDBusConnection     *connection;
-  gulong               handler;
-}
-ItemConnectionContext;
+  const gchar *key;
+  SnBackend *backend;
+  GDBusConnection *connection;
+  gulong handler;
+} ItemConnectionContext;
 
 
 
 typedef struct
 {
-  gint                 index;
-  gchar              **out;
-}
-CollectItemKeysContext;
+  gint index;
+  gchar **out;
+} CollectItemKeysContext;
 
 
 
 typedef struct
 {
-  SnBackend           *backend;
-  const gchar *const  *items;
-}
-RemoveComparingContext;
+  SnBackend *backend;
+  const gchar *const *items;
+} RemoveComparingContext;
 
 
 
@@ -154,21 +166,19 @@ sn_backend_class_init (SnBackendClass *klass)
   object_class = G_OBJECT_CLASS (klass);
   object_class->finalize = sn_backend_finalize;
 
-  sn_backend_signals[ITEM_ADDED] =
-    g_signal_new (g_intern_static_string ("item-added"),
-                  G_TYPE_FROM_CLASS (object_class),
-                  G_SIGNAL_RUN_LAST,
-                  0, NULL, NULL,
-                  g_cclosure_marshal_VOID__OBJECT,
-                  G_TYPE_NONE, 1, SN_TYPE_ITEM);
+  sn_backend_signals[ITEM_ADDED] = g_signal_new (g_intern_static_string ("item-added"),
+                                                 G_TYPE_FROM_CLASS (object_class),
+                                                 G_SIGNAL_RUN_LAST,
+                                                 0, NULL, NULL,
+                                                 g_cclosure_marshal_VOID__OBJECT,
+                                                 G_TYPE_NONE, 1, SN_TYPE_ITEM);
 
-  sn_backend_signals[ITEM_REMOVED] =
-    g_signal_new (g_intern_static_string ("item-removed"),
-                  G_TYPE_FROM_CLASS (object_class),
-                  G_SIGNAL_RUN_LAST,
-                  0, NULL, NULL,
-                  g_cclosure_marshal_VOID__OBJECT,
-                  G_TYPE_NONE, 1, SN_TYPE_ITEM);
+  sn_backend_signals[ITEM_REMOVED] = g_signal_new (g_intern_static_string ("item-removed"),
+                                                   G_TYPE_FROM_CLASS (object_class),
+                                                   G_SIGNAL_RUN_LAST,
+                                                   0, NULL, NULL,
+                                                   g_cclosure_marshal_VOID__OBJECT,
+                                                   G_TYPE_NONE, 1, SN_TYPE_ITEM);
 }
 
 
@@ -232,32 +242,30 @@ sn_backend_start (SnBackend *backend)
   g_return_if_fail (backend->watcher_bus_owner_id == 0);
   g_return_if_fail (backend->host_bus_watcher_id == 0);
 
-  backend->watcher_bus_owner_id =
-    g_bus_own_name (G_BUS_TYPE_SESSION,
-                    "org.kde.StatusNotifierWatcher",
-                    G_BUS_NAME_OWNER_FLAGS_NONE,
-                    sn_backend_watcher_bus_acquired,
-                    NULL, sn_backend_watcher_name_lost,
-                    backend, NULL);
+  backend->watcher_bus_owner_id = g_bus_own_name (G_BUS_TYPE_SESSION,
+                                                  "org.kde.StatusNotifierWatcher",
+                                                  G_BUS_NAME_OWNER_FLAGS_NONE,
+                                                  sn_backend_watcher_bus_acquired,
+                                                  NULL, sn_backend_watcher_name_lost,
+                                                  backend, NULL);
 
-  backend->host_bus_watcher_id =
-    g_bus_watch_name (G_BUS_TYPE_SESSION,
-                      "org.kde.StatusNotifierWatcher",
-                      G_BUS_NAME_WATCHER_FLAGS_NONE,
-                      sn_backend_host_name_appeared,
-                      sn_backend_host_name_vanished,
-                      backend, NULL);
+  backend->host_bus_watcher_id = g_bus_watch_name (G_BUS_TYPE_SESSION,
+                                                   "org.kde.StatusNotifierWatcher",
+                                                   G_BUS_NAME_WATCHER_FLAGS_NONE,
+                                                   sn_backend_host_name_appeared,
+                                                   sn_backend_host_name_vanished,
+                                                   backend, NULL);
 }
 
 
 
 static void
 sn_backend_watcher_bus_acquired (GDBusConnection *connection,
-                                 const gchar     *name,
-                                 gpointer         user_data)
+                                 const gchar *name,
+                                 gpointer user_data)
 {
   SnBackend *backend = user_data;
-  GError    *error = NULL;
+  GError *error = NULL;
 
   if (backend->watcher_skeleton != NULL)
     g_object_unref (backend->watcher_skeleton);
@@ -289,8 +297,8 @@ sn_backend_watcher_bus_acquired (GDBusConnection *connection,
 
 static void
 sn_backend_watcher_name_lost (GDBusConnection *connection,
-                              const gchar     *name,
-                              gpointer         user_data)
+                              const gchar *name,
+                              gpointer user_data)
 {
   SnBackend *backend = user_data;
 
@@ -304,17 +312,17 @@ sn_backend_watcher_name_lost (GDBusConnection *connection,
 
 static void
 sn_backend_watcher_name_owner_changed (GDBusConnection *connection,
-                                       const gchar     *sender_name,
-                                       const gchar     *object_path,
-                                       const gchar     *interface_name,
-                                       const gchar     *signal_name,
-                                       GVariant        *parameters,
-                                       gpointer         user_data)
+                                       const gchar *sender_name,
+                                       const gchar *object_path,
+                                       const gchar *interface_name,
+                                       const gchar *signal_name,
+                                       GVariant *parameters,
+                                       gpointer user_data)
 {
   ItemConnectionContext *context = user_data;
-  SnBackend             *backend = context->backend;
-  gchar                 *key;
-  gchar                 *new_owner;
+  SnBackend *backend = context->backend;
+  gchar *key;
+  gchar *new_owner;
 
   g_variant_get (parameters, "(sss)", NULL, NULL, &new_owner);
   if (new_owner == NULL || strlen (new_owner) == 0)
@@ -334,16 +342,16 @@ sn_backend_watcher_name_owner_changed (GDBusConnection *connection,
 
 
 static gboolean
-sn_backend_watcher_register_item (SnWatcher             *watcher_skeleton,
+sn_backend_watcher_register_item (SnWatcher *watcher_skeleton,
                                   GDBusMethodInvocation *invocation,
-                                  const gchar           *service,
-                                  SnBackend             *backend)
+                                  const gchar *service,
+                                  SnBackend *backend)
 {
-  const gchar           *bus_name;
-  const gchar           *object_path;
-  const gchar           *sender;
-  gchar                 *key;
-  GDBusConnection       *connection;
+  const gchar *bus_name;
+  const gchar *object_path;
+  const gchar *sender;
+  gchar *key;
+  GDBusConnection *connection;
   ItemConnectionContext *context;
 
   sender = g_dbus_method_invocation_get_sender (invocation);
@@ -384,16 +392,15 @@ sn_backend_watcher_register_item (SnWatcher             *watcher_skeleton,
   context->key = key;
   context->backend = backend;
   context->connection = connection;
-  context->handler =
-    g_dbus_connection_signal_subscribe (connection,
-                                        "org.freedesktop.DBus",
-                                        "org.freedesktop.DBus",
-                                        "NameOwnerChanged",
-                                        "/org/freedesktop/DBus",
-                                        bus_name,
-                                        G_DBUS_SIGNAL_FLAGS_NONE,
-                                        sn_backend_watcher_name_owner_changed,
-                                        context, NULL);
+  context->handler = g_dbus_connection_signal_subscribe (connection,
+                                                         "org.freedesktop.DBus",
+                                                         "org.freedesktop.DBus",
+                                                         "NameOwnerChanged",
+                                                         "/org/freedesktop/DBus",
+                                                         bus_name,
+                                                         G_DBUS_SIGNAL_FLAGS_NONE,
+                                                         sn_backend_watcher_name_owner_changed,
+                                                         context, NULL);
 
   g_hash_table_insert (backend->watcher_items, key, context);
 
@@ -409,9 +416,9 @@ sn_backend_watcher_register_item (SnWatcher             *watcher_skeleton,
 
 
 static gboolean
-sn_backend_watcher_register_host (SnWatcher             *watcher_skeleton,
+sn_backend_watcher_register_host (SnWatcher *watcher_skeleton,
                                   GDBusMethodInvocation *invocation,
-                                  const gchar           *service)
+                                  const gchar *service)
 {
   sn_watcher_complete_register_status_notifier_host (watcher_skeleton, invocation);
 
@@ -444,7 +451,7 @@ sn_backend_watcher_update_items (SnBackend *backend)
                             sn_backend_watcher_collect_item_keys,
                             &context);
       sn_watcher_set_registered_status_notifier_items (backend->watcher_skeleton,
-                                                       (gpointer)context.out);
+                                                       (gpointer) context.out);
       g_free (context.out);
     }
 }
@@ -474,13 +481,13 @@ sn_backend_watcher_clear_items (SnBackend *backend)
 
 
 static gboolean
-sn_backend_host_parse_name_path (const gchar  *service,
-                                 gchar       **bus_name,
-                                 gchar       **object_path)
+sn_backend_host_parse_name_path (const gchar *service,
+                                 gchar **bus_name,
+                                 gchar **object_path)
 {
   const gchar *substring;
-  gchar       *bus_name_val;
-  gint         index;
+  gchar *bus_name_val;
+  gint index;
 
   substring = strstr (service, "/");
 
@@ -506,15 +513,15 @@ sn_backend_host_parse_name_path (const gchar  *service,
 
 
 static void
-sn_backend_host_callback (GObject      *source_object,
+sn_backend_host_callback (GObject *source_object,
                           GAsyncResult *res,
-                          gpointer      user_data)
+                          gpointer user_data)
 {
-  SnBackend          *backend = user_data;
-  gchar              *bus_name;
-  gchar              *object_path;
+  SnBackend *backend = user_data;
+  gchar *bus_name;
+  gchar *object_path;
   const gchar *const *items;
-  gint                i;
+  gint i;
 
   backend->host_proxy = sn_watcher_proxy_new_finish (res, NULL);
 
@@ -548,9 +555,9 @@ sn_backend_host_callback (GObject      *source_object,
 
 static void
 sn_backend_host_name_appeared (GDBusConnection *connection,
-                               const gchar     *name,
-                               const gchar     *name_owner,
-                               gpointer         user_data)
+                               const gchar *name,
+                               const gchar *name_owner,
+                               gpointer user_data)
 {
   SnBackend *backend = user_data;
 
@@ -566,8 +573,8 @@ sn_backend_host_name_appeared (GDBusConnection *connection,
 
 static void
 sn_backend_host_name_vanished (GDBusConnection *connection,
-                               const gchar     *name,
-                               gpointer         user_data)
+                               const gchar *name,
+                               gpointer user_data)
 {
   SnBackend *backend = user_data;
 
@@ -583,7 +590,7 @@ sn_backend_host_name_vanished (GDBusConnection *connection,
 
 
 static void
-sn_backend_host_item_expose (SnItem    *item,
+sn_backend_host_item_expose (SnItem *item,
                              SnBackend *backend)
 {
   g_signal_emit (G_OBJECT (backend), sn_backend_signals[ITEM_ADDED], 0, item);
@@ -592,7 +599,7 @@ sn_backend_host_item_expose (SnItem    *item,
 
 
 static void
-sn_backend_host_item_seal (SnItem    *item,
+sn_backend_host_item_seal (SnItem *item,
                            SnBackend *backend)
 {
   g_signal_emit (G_OBJECT (backend), sn_backend_signals[ITEM_REMOVED], 0, item);
@@ -601,7 +608,7 @@ sn_backend_host_item_seal (SnItem    *item,
 
 
 static void
-sn_backend_host_item_finish (SnItem    *item,
+sn_backend_host_item_finish (SnItem *item,
                              SnBackend *backend)
 {
   sn_backend_host_remove_item (backend, item, TRUE);
@@ -610,9 +617,9 @@ sn_backend_host_item_finish (SnItem    *item,
 
 
 static void
-sn_backend_host_item_registered (SnWatcher   *host_proxy,
+sn_backend_host_item_registered (SnWatcher *host_proxy,
                                  const gchar *service,
-                                 SnBackend   *backend)
+                                 SnBackend *backend)
 {
   gchar *bus_name;
   gchar *object_path;
@@ -629,9 +636,9 @@ sn_backend_host_item_registered (SnWatcher   *host_proxy,
 
 
 static void
-sn_backend_host_item_unregistered (SnWatcher   *host_proxy,
+sn_backend_host_item_unregistered (SnWatcher *host_proxy,
                                    const gchar *service,
-                                   SnBackend   *backend)
+                                   SnBackend *backend)
 {
   SnItem *item;
 
@@ -648,8 +655,8 @@ sn_backend_host_items_changed_remove_item (gpointer key,
                                            gpointer user_data)
 {
   RemoveComparingContext *context = user_data;
-  SnItem                 *item = value;
-  gint                    i;
+  SnItem *item = value;
+  gint i;
 
   for (i = 0; context->items[i] != NULL; i++)
     {
@@ -666,16 +673,16 @@ sn_backend_host_items_changed_remove_item (gpointer key,
 
 static void
 sn_backend_host_items_changed (GDBusProxy *proxy,
-                               GVariant   *changed_properties,
-                               GStrv       invalidated_properties,
-                               gpointer    user_data)
+                               GVariant *changed_properties,
+                               GStrv invalidated_properties,
+                               gpointer user_data)
 {
-  SnBackend              *backend = user_data;
-  const gchar *const     *items;
-  gchar                  *bus_name;
-  gchar                  *object_path;
-  gint                    i;
-  RemoveComparingContext  context;
+  SnBackend *backend = user_data;
+  const gchar *const *items;
+  gchar *bus_name;
+  gchar *object_path;
+  gint i;
+  RemoveComparingContext context;
 
   items = sn_watcher_get_registered_status_notifier_items (backend->host_proxy);
   if (items != NULL)
@@ -711,7 +718,7 @@ sn_backend_host_items_changed (GDBusProxy *proxy,
 
 
 static void
-sn_backend_host_add_item (SnBackend   *backend,
+sn_backend_host_add_item (SnBackend *backend,
                           const gchar *service,
                           const gchar *bus_name,
                           const gchar *object_path)
@@ -745,10 +752,10 @@ sn_backend_host_add_item (SnBackend   *backend,
 
 static void
 sn_backend_host_remove_item (SnBackend *backend,
-                             SnItem    *item,
-                             gboolean   remove_from_table)
+                             SnItem *item,
+                             gboolean remove_from_table)
 {
-  gchar   *key;
+  gchar *key;
   gboolean exposed;
 
   g_object_get (item,
@@ -775,7 +782,7 @@ sn_backend_host_clear_item (gpointer key,
                             gpointer user_data)
 {
   SnBackend *backend = user_data;
-  SnItem    *item = value;
+  SnItem *item = value;
 
   sn_backend_host_remove_item (backend, item, FALSE);
 

@@ -28,18 +28,24 @@
 
 G_BEGIN_DECLS
 
-void  systray_plugin_box_draw            (GtkWidget             *box,
-                                          cairo_t               *cr,
-                                          gpointer               user_data);
-void  systray_plugin_screen_changed      (GtkWidget             *widget,
-                                          GdkScreen             *previous_screen);
-void  systray_plugin_composited_changed  (GtkWidget             *widget);
-void  systray_plugin_configuration_changed  (SnConfig           *config,
-                                             SnPlugin           *plugin);
-void  systray_plugin_orientation_changed (XfcePanelPlugin       *panel_plugin,
-                                          GtkOrientation         orientation);
-gboolean systray_plugin_size_changed     (XfcePanelPlugin       *panel_plugin,
-                                          gint                   size);
+void
+systray_plugin_box_draw (GtkWidget *box,
+                         cairo_t *cr,
+                         gpointer user_data);
+void
+systray_plugin_screen_changed (GtkWidget *widget,
+                               GdkScreen *previous_screen);
+void
+systray_plugin_composited_changed (GtkWidget *widget);
+void
+systray_plugin_configuration_changed (SnConfig *config,
+                                      SnPlugin *plugin);
+void
+systray_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
+                                    GtkOrientation orientation);
+gboolean
+systray_plugin_size_changed (XfcePanelPlugin *panel_plugin,
+                             gint size);
 G_END_DECLS
 
 #endif /* !__SYSTRAY_H__ */

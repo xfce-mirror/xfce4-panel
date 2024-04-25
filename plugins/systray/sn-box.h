@@ -30,13 +30,17 @@ G_BEGIN_DECLS
 #define SN_TYPE_BOX (sn_box_get_type ())
 G_DECLARE_FINAL_TYPE (SnBox, sn_box, SN, BOX, GtkContainer)
 
-void                   sn_box_remove_item                      (SnBox                   *box,
-                                                                SnItem                  *item);
+void
+sn_box_remove_item (SnBox *box,
+                    SnItem *item);
 
-GtkWidget             *sn_box_new                              (SnConfig                *config);
-gboolean               sn_box_has_hidden_items                 (SnBox                   *box);
-void                   sn_box_set_show_hidden                  (SnBox                   *box,
-                                                                gboolean                 show_hidden);
+GtkWidget *
+sn_box_new (SnConfig *config);
+gboolean
+sn_box_has_hidden_items (SnBox *box);
+void
+sn_box_set_show_hidden (SnBox *box,
+                        gboolean show_hidden);
 
 G_END_DECLS
 

@@ -33,10 +33,9 @@
 typedef struct
 {
   XfconfChannel *channel;
-  GSList        *path;
-  GPtrArray     *array;
-}
-ConfigParser;
+  GSList *path;
+  GPtrArray *array;
+} ConfigParser;
 
 
 
@@ -64,7 +63,7 @@ migrate_default_gtype_from_string (const gchar *type)
 
 
 static void
-migrate_default_set_value (GValue      *value,
+migrate_default_set_value (GValue *value,
                            const gchar *string)
 {
   switch (G_VALUE_TYPE (value))
@@ -88,7 +87,6 @@ migrate_default_set_value (GValue      *value,
     case G_TYPE_BOOLEAN:
       g_value_set_boolean (value, strcmp (string, "true") == 0);
       break;
-
     }
 }
 
@@ -97,7 +95,7 @@ migrate_default_set_value (GValue      *value,
 static gchar *
 migrate_default_property_path (ConfigParser *parser)
 {
-  GSList  *li;
+  GSList *li;
   GString *path;
 
   path = g_string_new (NULL);
@@ -114,22 +112,22 @@ migrate_default_property_path (ConfigParser *parser)
 
 
 static void
-migrate_default_start_element_handler (GMarkupParseContext  *context,
-                                       const gchar          *element_name,
-                                       const gchar         **attribute_names,
-                                       const gchar         **attribute_values,
-                                       gpointer              user_data,
-                                       GError              **error)
+migrate_default_start_element_handler (GMarkupParseContext *context,
+                                       const gchar *element_name,
+                                       const gchar **attribute_names,
+                                       const gchar **attribute_values,
+                                       gpointer user_data,
+                                       GError **error)
 {
   ConfigParser *parser = user_data;
-  guint         i;
-  const gchar  *channel_name;
-  const gchar  *prop_name, *prop_value, *prop_type;
-  GType         type;
-  gchar        *prop_path;
-  GValue        value = G_VALUE_INIT;
-  const gchar  *value_value, *value_type;
-  GValue       *value2;
+  guint i;
+  const gchar *channel_name;
+  const gchar *prop_name, *prop_value, *prop_type;
+  GType type;
+  gchar *prop_path;
+  GValue value = G_VALUE_INIT;
+  const gchar *value_value, *value_type;
+  GValue *value2;
 
   if (strcmp (element_name, "channel") == 0)
     {
@@ -285,25 +283,25 @@ migrate_default_start_element_handler (GMarkupParseContext  *context,
 
 
 static void
-migrate_default_end_element_handler (GMarkupParseContext  *context,
-                                     const gchar          *element_name,
-                                     gpointer              user_data,
-                                     GError              **error)
+migrate_default_end_element_handler (GMarkupParseContext *context,
+                                     const gchar *element_name,
+                                     gpointer user_data,
+                                     GError **error)
 {
   ConfigParser *parser = user_data;
-  GSList       *li;
-  gchar        *prop_path;
+  GSList *li;
+  gchar *prop_path;
 
   if (strcmp (element_name, "channel") == 0)
     {
       if (G_LIKELY (parser->channel != NULL))
         parser->channel = NULL;
 
-     if (parser->path != NULL)
-       {
-         g_set_error_literal (error, G_MARKUP_ERROR_UNKNOWN_ELEMENT, G_MARKUP_ERROR,
-                              "Property path still contains items");
-       }
+      if (parser->path != NULL)
+        {
+          g_set_error_literal (error, G_MARKUP_ERROR_UNKNOWN_ELEMENT, G_MARKUP_ERROR,
+                               "Property path still contains items");
+        }
     }
   else if (strcmp (element_name, "property") == 0)
     {
@@ -326,7 +324,7 @@ migrate_default_end_element_handler (GMarkupParseContext  *context,
       else
         {
           g_set_error_literal (error, G_MARKUP_ERROR_UNKNOWN_ELEMENT, G_MARKUP_ERROR,
-                              "Element could no be popped from the path");
+                               "Element could no be popped from the path");
         }
     }
   else if (strcmp (element_name, "value") == 0)
@@ -342,8 +340,7 @@ migrate_default_end_element_handler (GMarkupParseContext  *context,
 
 
 
-static GMarkupParser markup_parser =
-{
+static GMarkupParser markup_parser = {
   migrate_default_start_element_handler,
   migrate_default_end_element_handler,
   NULL,
@@ -354,14 +351,14 @@ static GMarkupParser markup_parser =
 
 
 gboolean
-migrate_default (const gchar    *filename,
-                 GError        **error)
+migrate_default (const gchar *filename,
+                 GError **error)
 {
-  gsize                length;
-  gchar               *contents;
+  gsize length;
+  gchar *contents;
   GMarkupParseContext *context;
-  ConfigParser        *parser;
-  gboolean             succeed = FALSE;
+  ConfigParser *parser;
+  gboolean succeed = FALSE;
 
   g_return_val_if_fail (filename != NULL, FALSE);
   g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
