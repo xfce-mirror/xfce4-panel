@@ -17,27 +17,23 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_MATH_H
-#include <math.h>
-#endif
+#include "panel/panel-base-window.h"
+#include "panel/panel-plugin-external.h"
+#include "panel/panel-window.h"
 
-#include <gtk/gtk.h>
+#include "common/panel-debug.h"
+#include "common/panel-private.h"
+#include "libxfce4panel/libxfce4panel.h"
+#include "libxfce4panel/xfce-panel-plugin-provider.h"
+
 #ifdef HAVE_GTK_LAYER_SHELL
 #include <gtk-layer-shell/gtk-layer-shell.h>
 #else
 #define gtk_layer_is_supported() FALSE
 #endif
-
-#include <libxfce4panel/libxfce4panel.h>
-#include <libxfce4panel/xfce-panel-plugin-provider.h>
-#include <common/panel-private.h>
-#include <common/panel-debug.h>
-#include <panel/panel-base-window.h>
-#include <panel/panel-window.h>
-#include <panel/panel-plugin-external.h>
 
 
 

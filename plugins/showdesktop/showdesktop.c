@@ -18,16 +18,17 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#include <gtk/gtk.h>
-#include <libxfce4windowing/libxfce4windowing.h>
-#include <libxfce4util/libxfce4util.h>
-#include <common/panel-private.h>
-#include <common/panel-utils.h>
-
 #include "showdesktop.h"
+
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
+
+#include <gtk/gtk.h>
+#include <libxfce4util/libxfce4util.h>
+#include <libxfce4windowing/libxfce4windowing.h>
 
 
 

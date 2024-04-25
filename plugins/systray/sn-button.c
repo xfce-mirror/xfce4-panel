@@ -20,18 +20,15 @@
 
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-#ifdef HAVE_STRING_H
-#include <string.h>
+#include "config.h"
 #endif
 
-#include <libxfce4panel/libxfce4panel.h>
-
-#include <common/panel-private.h>
 #include "sn-button.h"
 #include "sn-icon-box.h"
 #include "sn-util.h"
+
+#include "common/panel-private.h"
+#include "libxfce4panel/libxfce4panel.h"
 
 
 

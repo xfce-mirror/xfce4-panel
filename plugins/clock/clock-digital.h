@@ -19,8 +19,11 @@
 #ifndef __CLOCK_DIGITAL_H__
 #define __CLOCK_DIGITAL_H__
 
+#include "clock-time.h"
+
+#include "libxfce4panel/libxfce4panel.h"
+
 #include <gtk/gtk.h>
-#include <libxfce4panel/libxfce4panel.h>
 
 G_BEGIN_DECLS
 

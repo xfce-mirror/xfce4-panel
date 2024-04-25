@@ -17,13 +17,14 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#include <gtk/gtkx.h>
+#include "panel/panel-plugin-external-wrapper-x11.h"
 
-#include <common/panel-private.h>
-#include <panel/panel-plugin-external-wrapper-x11.h>
+#include "common/panel-private.h"
+
+#include <gtk/gtkx.h>
 
 
 

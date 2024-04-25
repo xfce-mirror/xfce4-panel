@@ -19,6 +19,8 @@
 #ifndef __SYSTRAY_BOX_H__
 #define __SYSTRAY_BOX_H__
 
+#include "libxfce4panel/libxfce4panel.h"
+
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS

@@ -19,8 +19,9 @@
 #ifndef __PANEL_DBUS_SERVICE_H__
 #define __PANEL_DBUS_SERVICE_H__
 
+#include "panel/panel-gdbus-exported-service.h"
+
 #include <glib.h>
-#include <panel/panel-gdbus-exported-service.h>
 
 G_BEGIN_DECLS
 

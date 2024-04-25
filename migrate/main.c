@@ -17,28 +17,19 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STDIO_H
-#include <stdio.h>
-#endif
-#ifdef HAVE_STDLIB_H
-#include <stdlib.h>
-#endif
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
+#include "migrate/migrate-config.h"
+#include "migrate/migrate-default.h"
+
+#include "common/panel-private.h"
+#include "libxfce4panel/xfce-panel-macros.h"
 
 #include <gtk/gtk.h>
-#include <xfconf/xfconf.h>
-#include <common/panel-private.h>
-#include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
-#include <libxfce4panel/xfce-panel-macros.h>
-
-#include <migrate/migrate-config.h>
-#include <migrate/migrate-default.h>
+#include <libxfce4util/libxfce4util.h>
+#include <xfconf/xfconf.h>
 
 
 

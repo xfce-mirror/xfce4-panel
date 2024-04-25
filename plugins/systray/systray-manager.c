@@ -21,28 +21,19 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
-
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
-
-#include <gdk/gdk.h>
-#include <gtk/gtk.h>
-
-#include <X11/Xlib.h>
-#include <X11/Xatom.h>
-
-#include <common/panel-private.h>
-#include <common/panel-debug.h>
-
-#include <libxfce4panel/libxfce4panel.h>
-#include <libxfce4util/libxfce4util.h>
 
 #include "systray-manager.h"
-#include "systray-socket.h"
 #include "systray-marshal.h"
+#include "systray-socket.h"
+
+#include "common/panel-debug.h"
+#include "common/panel-private.h"
+
+#include <X11/Xatom.h>
+#include <X11/Xlib.h>
+#include <libxfce4util/libxfce4util.h>
 
 
 

@@ -17,20 +17,12 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STDLIB_H
-#include <stdlib.h>
-#endif
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
+#include "migrate/migrate-config.h"
 
-#include <gtk/gtk.h>
-#include <xfconf/xfconf.h>
-#include <common/panel-private.h>
-#include <migrate/migrate-config.h>
+#include "common/panel-private.h"
 
 
 

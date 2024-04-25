@@ -18,39 +18,23 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STDIO_H
-#include <stdio.h>
-#endif
-#ifdef HAVE_STDLIB_H
-#include <stdlib.h>
-#endif
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
-#endif
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
-#ifdef HAVE_SIGNAL_H
-#include <signal.h>
-#endif
+#include "panel/panel-application.h"
+#include "panel/panel-dbus-client.h"
+#include "panel/panel-dbus-service.h"
+#include "panel/panel-preferences-dialog.h"
 
-#include <glib.h>
+#include "common/panel-dbus.h"
+#include "common/panel-debug.h"
+#include "common/panel-private.h"
+#include "libxfce4panel/libxfce4panel.h"
+
 #include <gio/gio.h>
-#include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
+#include <libxfce4util/libxfce4util.h>
 #include <libxfce4windowing/libxfce4windowing.h>
-
-#include <common/panel-private.h>
-#include <common/panel-debug.h>
-#include <common/panel-dbus.h>
-#include <libxfce4panel/libxfce4panel.h>
-#include <panel/panel-application.h>
-#include <panel/panel-dbus-service.h>
-#include <panel/panel-dbus-client.h>
-#include <panel/panel-preferences-dialog.h>
 
 static PanelApplication *application = NULL;
 

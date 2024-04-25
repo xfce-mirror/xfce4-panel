@@ -19,10 +19,8 @@
 #ifndef __PANEL_ITEM_DIALOG_H__
 #define __PANEL_ITEM_DIALOG_H__
 
-#include <gtk/gtk.h>
-
 /* includes libxfce4ui and the definition of glib_autoptr_clear_XfceTitledDialog */
-#include <panel/panel-tic-tac-toe.h>
+#include "panel/panel-tic-tac-toe.h"
 
 G_BEGIN_DECLS
 
@@ -38,4 +36,3 @@ gboolean   panel_item_dialog_visible      (void);
 G_END_DECLS
 
 #endif /* !__PANEL_ITEM_DIALOG_H__ */
-

@@ -19,6 +19,8 @@
 #ifndef __XFCE_TASKLIST_H__
 #define __XFCE_TASKLIST_H__
 
+#include "libxfce4panel/libxfce4panel.h"
+
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS

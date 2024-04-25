@@ -20,7 +20,7 @@
 #ifndef __SEPARATOR_H__
 #define __SEPARATOR_H__
 
-#include <libxfce4panel/libxfce4panel.h>
+#include "libxfce4panel/libxfce4panel.h"
 
 G_BEGIN_DECLS
 
