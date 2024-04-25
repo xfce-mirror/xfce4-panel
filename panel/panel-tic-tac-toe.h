@@ -29,7 +29,8 @@ G_DEFINE_AUTOPTR_CLEANUP_FUNC (XfceTitledDialog, g_object_unref)
 #endif
 G_DECLARE_FINAL_TYPE (PanelTicTacToe, panel_tic_tac_toe, PANEL, TIC_TAC_TOE, XfceTitledDialog)
 
-void       panel_tic_tac_toe_show     (void);
+void
+panel_tic_tac_toe_show (void);
 
 G_END_DECLS
 

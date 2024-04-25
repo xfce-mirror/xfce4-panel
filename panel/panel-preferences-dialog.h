@@ -33,12 +33,15 @@ G_BEGIN_DECLS
 #define PANEL_TYPE_PREFERENCES_DIALOG (panel_preferences_dialog_get_type ())
 G_DECLARE_FINAL_TYPE (PanelPreferencesDialog, panel_preferences_dialog, PANEL, PREFERENCES_DIALOG, GtkBuilder)
 
-void       panel_preferences_dialog_show         (PanelWindow *active);
+void
+panel_preferences_dialog_show (PanelWindow *active);
 
-void       panel_preferences_dialog_show_from_id (gint         panel_id,
-                                                  Window       socket_window);
+void
+panel_preferences_dialog_show_from_id (gint panel_id,
+                                       Window socket_window);
 
-gboolean   panel_preferences_dialog_visible      (void);
+gboolean
+panel_preferences_dialog_visible (void);
 
 G_END_DECLS
 

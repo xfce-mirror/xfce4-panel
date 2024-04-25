@@ -28,16 +28,20 @@ G_BEGIN_DECLS
 #define XFCE_TYPE_TASKLIST (xfce_tasklist_get_type ())
 G_DECLARE_FINAL_TYPE (XfceTasklist, xfce_tasklist, XFCE, TASKLIST, GtkContainer)
 
-void  xfce_tasklist_set_mode                (XfceTasklist        *tasklist,
-                                             XfcePanelPluginMode  mode);
+void
+xfce_tasklist_set_mode (XfceTasklist *tasklist,
+                        XfcePanelPluginMode mode);
 
-void  xfce_tasklist_set_size                (XfceTasklist   *tasklist,
-                                             gint            size);
+void
+xfce_tasklist_set_size (XfceTasklist *tasklist,
+                        gint size);
 
-void  xfce_tasklist_set_nrows               (XfceTasklist   *tasklist,
-                                             gint            nrows);
+void
+xfce_tasklist_set_nrows (XfceTasklist *tasklist,
+                         gint nrows);
 
-void  xfce_tasklist_update_monitor_geometry (XfceTasklist   *tasklist);
+void
+xfce_tasklist_update_monitor_geometry (XfceTasklist *tasklist);
 
 G_END_DECLS
 

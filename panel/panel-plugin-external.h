@@ -36,78 +36,88 @@ struct _PanelPluginExternalClass
   GtkBoxClass __parent__;
 
   /* send panel values to the plugin or wrapper */
-  void       (*set_properties)       (PanelPluginExternal *external,
-                                      GSList              *properties);
+  void (*set_properties) (PanelPluginExternal *external,
+                          GSList *properties);
 
   /* complete startup array for the plugin */
-  gchar    **(*get_argv)             (PanelPluginExternal  *external,
-                                      gchar               **arguments);
+  gchar **(*get_argv) (PanelPluginExternal *external,
+                       gchar **arguments);
 
   /* spawn wrapper process according to windowing environment */
-  gboolean   (*spawn)                (PanelPluginExternal  *external,
-                                      gchar               **argv,
-                                      GPid                 *pid,
-                                      GError              **error);
+  gboolean (*spawn) (PanelPluginExternal *external,
+                     gchar **argv,
+                     GPid *pid,
+                     GError **error);
 
   /* handling of remote events */
-  gboolean   (*remote_event)         (PanelPluginExternal  *external,
-                                      const gchar          *name,
-                                      const GValue         *value,
-                                      guint                *handle);
+  gboolean (*remote_event) (PanelPluginExternal *external,
+                            const gchar *name,
+                            const GValue *value,
+                            guint *handle);
 
   /* some info received on plugin startup by the
    * implementations of the abstract object */
-  gboolean   (*get_show_configure)   (PanelPluginExternal  *external);
-  gboolean   (*get_show_about)       (PanelPluginExternal  *external);
+  gboolean (*get_show_configure) (PanelPluginExternal *external);
+  gboolean (*get_show_about) (PanelPluginExternal *external);
 
   /* X11 only */
-  void       (*set_background_color) (PanelPluginExternal  *external,
-                                      const GdkRGBA        *color);
-  void       (*set_background_image) (PanelPluginExternal  *external,
-                                      const gchar          *image);
+  void (*set_background_color) (PanelPluginExternal *external,
+                                const GdkRGBA *color);
+  void (*set_background_image) (PanelPluginExternal *external,
+                                const gchar *image);
 
   /* Wayland only */
-  void       (*set_geometry)         (PanelPluginExternal  *external,
-                                      PanelWindow          *window);
-  gboolean   (*pointer_is_outside)   (PanelPluginExternal  *external);
+  void (*set_geometry) (PanelPluginExternal *external,
+                        PanelWindow *window);
+  gboolean (*pointer_is_outside) (PanelPluginExternal *external);
 };
 
 typedef struct
 {
   XfcePanelPluginProviderPropType type;
-  GValue                          value;
-}
-PluginProperty;
+  GValue value;
+} PluginProperty;
 
-void         panel_plugin_external_queue_add            (PanelPluginExternal              *external,
-                                                         XfcePanelPluginProviderPropType   type,
-                                                         const GValue                     *value);
+void
+panel_plugin_external_queue_add (PanelPluginExternal *external,
+                                 XfcePanelPluginProviderPropType type,
+                                 const GValue *value);
 
-void         panel_plugin_external_queue_add_action     (PanelPluginExternal              *external,
-                                                         XfcePanelPluginProviderPropType   type);
+void
+panel_plugin_external_queue_add_action (PanelPluginExternal *external,
+                                        XfcePanelPluginProviderPropType type);
 
-void         panel_plugin_external_restart              (PanelPluginExternal              *external);
+void
+panel_plugin_external_restart (PanelPluginExternal *external);
 
-void         panel_plugin_external_set_opacity          (PanelPluginExternal              *external,
-                                                         gdouble                           opacity);
+void
+panel_plugin_external_set_opacity (PanelPluginExternal *external,
+                                   gdouble opacity);
 
-void         panel_plugin_external_set_background_color (PanelPluginExternal              *external,
-                                                         const GdkRGBA                    *color);
+void
+panel_plugin_external_set_background_color (PanelPluginExternal *external,
+                                            const GdkRGBA *color);
 
-void         panel_plugin_external_set_background_image (PanelPluginExternal              *external,
-                                                         const gchar                      *image);
+void
+panel_plugin_external_set_background_image (PanelPluginExternal *external,
+                                            const gchar *image);
 
-void         panel_plugin_external_set_geometry         (PanelPluginExternal              *external,
-                                                         PanelWindow                      *window);
+void
+panel_plugin_external_set_geometry (PanelPluginExternal *external,
+                                    PanelWindow *window);
 
-gboolean     panel_plugin_external_pointer_is_outside   (PanelPluginExternal              *external);
+gboolean
+panel_plugin_external_pointer_is_outside (PanelPluginExternal *external);
 
-gboolean     panel_plugin_external_get_embedded         (PanelPluginExternal              *external);
+gboolean
+panel_plugin_external_get_embedded (PanelPluginExternal *external);
 
-void         panel_plugin_external_set_embedded         (PanelPluginExternal              *external,
-                                                         gboolean                          embedded);
+void
+panel_plugin_external_set_embedded (PanelPluginExternal *external,
+                                    gboolean embedded);
 
-GPid         panel_plugin_external_get_pid              (PanelPluginExternal              *external);
+GPid
+panel_plugin_external_get_pid (PanelPluginExternal *external);
 
 G_END_DECLS
 

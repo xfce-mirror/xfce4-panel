@@ -31,43 +31,56 @@
 
 
 
-static void         panel_plugin_external_wrapper_wayland_constructed             (GObject                              *object);
-static void         panel_plugin_external_wrapper_wayland_finalize                (GObject                              *object);
-static void         panel_plugin_external_wrapper_wayland_size_allocate           (GtkWidget                            *widget,
-                                                                                   GtkAllocation                        *allocation);
-static gchar      **panel_plugin_external_wrapper_wayland_get_argv                (PanelPluginExternal                  *external,
-                                                                                   gchar                               **arguments);
-static gboolean     panel_plugin_external_wrapper_wayland_spawn                   (PanelPluginExternal                  *external,
-                                                                                   gchar                               **argv,
-                                                                                   GPid                                 *pid,
-                                                                                   GError                              **error);
-static void         panel_plugin_external_wrapper_wayland_set_background_color    (PanelPluginExternal                  *external,
-                                                                                   const GdkRGBA                        *color);
-static void         panel_plugin_external_wrapper_wayland_set_background_image    (PanelPluginExternal                  *external,
-                                                                                   const gchar                          *image);
-static void         panel_plugin_external_wrapper_wayland_set_geometry            (PanelPluginExternal                  *external,
-                                                                                   PanelWindow                          *window);
-static void         panel_plugin_external_wrapper_wayland_proxy_set_requisition   (GDBusProxy                           *proxy,
-                                                                                   gchar                                *sender_name,
-                                                                                   gchar                                *signal_name,
-                                                                                   GVariant                             *parameters,
-                                                                                   PanelPluginExternalWrapperWayland    *wrapper);
-static void         panel_plugin_external_wrapper_wayland_proxy_embedded          (GDBusProxy                           *proxy,
-                                                                                   gchar                                *sender_name,
-                                                                                   gchar                                *signal_name,
-                                                                                   GVariant                             *parameters,
-                                                                                   PanelPluginExternalWrapperWayland    *wrapper);
-static void         panel_plugin_external_wrapper_wayland_proxy_pointer_enter     (GDBusProxy                           *proxy,
-                                                                                   gchar                                *sender_name,
-                                                                                   gchar                                *signal_name,
-                                                                                   GVariant                             *parameters,
-                                                                                   PanelPluginExternalWrapperWayland    *wrapper);
-static void         panel_plugin_external_wrapper_wayland_proxy_pointer_leave     (GDBusProxy                           *proxy,
-                                                                                   gchar                                *sender_name,
-                                                                                   gchar                                *signal_name,
-                                                                                   GVariant                             *parameters,
-                                                                                   PanelPluginExternalWrapperWayland    *wrapper);
-static gboolean     panel_plugin_external_wrapper_wayland_pointer_is_outside      (PanelPluginExternal                  *external);
+static void
+panel_plugin_external_wrapper_wayland_constructed (GObject *object);
+static void
+panel_plugin_external_wrapper_wayland_finalize (GObject *object);
+static void
+panel_plugin_external_wrapper_wayland_size_allocate (GtkWidget *widget,
+                                                     GtkAllocation *allocation);
+static gchar **
+panel_plugin_external_wrapper_wayland_get_argv (PanelPluginExternal *external,
+                                                gchar **arguments);
+static gboolean
+panel_plugin_external_wrapper_wayland_spawn (PanelPluginExternal *external,
+                                             gchar **argv,
+                                             GPid *pid,
+                                             GError **error);
+static void
+panel_plugin_external_wrapper_wayland_set_background_color (PanelPluginExternal *external,
+                                                            const GdkRGBA *color);
+static void
+panel_plugin_external_wrapper_wayland_set_background_image (PanelPluginExternal *external,
+                                                            const gchar *image);
+static void
+panel_plugin_external_wrapper_wayland_set_geometry (PanelPluginExternal *external,
+                                                    PanelWindow *window);
+static void
+panel_plugin_external_wrapper_wayland_proxy_set_requisition (GDBusProxy *proxy,
+                                                             gchar *sender_name,
+                                                             gchar *signal_name,
+                                                             GVariant *parameters,
+                                                             PanelPluginExternalWrapperWayland *wrapper);
+static void
+panel_plugin_external_wrapper_wayland_proxy_embedded (GDBusProxy *proxy,
+                                                      gchar *sender_name,
+                                                      gchar *signal_name,
+                                                      GVariant *parameters,
+                                                      PanelPluginExternalWrapperWayland *wrapper);
+static void
+panel_plugin_external_wrapper_wayland_proxy_pointer_enter (GDBusProxy *proxy,
+                                                           gchar *sender_name,
+                                                           gchar *signal_name,
+                                                           GVariant *parameters,
+                                                           PanelPluginExternalWrapperWayland *wrapper);
+static void
+panel_plugin_external_wrapper_wayland_proxy_pointer_leave (GDBusProxy *proxy,
+                                                           gchar *sender_name,
+                                                           gchar *signal_name,
+                                                           GVariant *parameters,
+                                                           PanelPluginExternalWrapperWayland *wrapper);
+static gboolean
+panel_plugin_external_wrapper_wayland_pointer_is_outside (PanelPluginExternal *external);
 
 
 

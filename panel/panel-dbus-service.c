@@ -35,41 +35,49 @@
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4util/libxfce4util.h>
 
-static void      panel_dbus_service_finalize                   (GObject                 *object);
-static void      panel_dbus_service_plugin_event_result        (XfcePanelPluginProvider *prev_provider,
-                                                                guint                    handle,
-                                                                gboolean                 result,
-                                                                PanelDBusService        *service);
+static void
+panel_dbus_service_finalize (GObject *object);
+static void
+panel_dbus_service_plugin_event_result (XfcePanelPluginProvider *prev_provider,
+                                        guint handle,
+                                        gboolean result,
+                                        PanelDBusService *service);
 
-static gboolean  panel_dbus_service_display_preferences_dialog (XfcePanelExportedService *skeleton,
-                                                                GDBusMethodInvocation    *invocation,
-                                                                guint                     active,
-                                                                guint                     socket_id,
-                                                                PanelDBusService         *service);
-static gboolean  panel_dbus_service_display_items_dialog       (XfcePanelExportedService *skeleton,
-                                                                GDBusMethodInvocation    *invocation,
-                                                                guint                     active,
-                                                                PanelDBusService         *service);
-static gboolean  panel_dbus_service_save                       (XfcePanelExportedService *skeleton,
-                                                                GDBusMethodInvocation    *invocation,
-                                                                PanelDBusService         *service);
-static gboolean  panel_dbus_service_add_new_item               (XfcePanelExportedService *skeleton,
-                                                                GDBusMethodInvocation    *invocation,
-                                                                const gchar              *plugin_name,
-                                                                gchar                   **arguments,
-                                                                PanelDBusService         *service);
-static void      panel_dbus_service_plugin_event_free          (gpointer                  data);
-static gboolean  panel_dbus_service_plugin_event               (XfcePanelExportedService *skeleton,
-                                                                GDBusMethodInvocation    *invocation,
-                                                                const gchar              *plugin_name,
-                                                                const gchar              *name,
-                                                                GVariant                 *variant,
-                                                                PanelDBusService         *service);
-static gboolean  panel_dbus_service_terminate                  (XfcePanelExportedService *skeleton,
-                                                                GDBusMethodInvocation    *invocation,
-                                                                gboolean                  restart,
-                                                                PanelDBusService         *service);
-
+static gboolean
+panel_dbus_service_display_preferences_dialog (XfcePanelExportedService *skeleton,
+                                               GDBusMethodInvocation *invocation,
+                                               guint active,
+                                               guint socket_id,
+                                               PanelDBusService *service);
+static gboolean
+panel_dbus_service_display_items_dialog (XfcePanelExportedService *skeleton,
+                                         GDBusMethodInvocation *invocation,
+                                         guint active,
+                                         PanelDBusService *service);
+static gboolean
+panel_dbus_service_save (XfcePanelExportedService *skeleton,
+                         GDBusMethodInvocation *invocation,
+                         PanelDBusService *service);
+static gboolean
+panel_dbus_service_add_new_item (XfcePanelExportedService *skeleton,
+                                 GDBusMethodInvocation *invocation,
+                                 const gchar *plugin_name,
+                                 gchar **arguments,
+                                 PanelDBusService *service);
+static void
+panel_dbus_service_plugin_event_free (gpointer data);
+static gboolean
+panel_dbus_service_plugin_event (XfcePanelExportedService *skeleton,
+                                 GDBusMethodInvocation *invocation,
+                                 const gchar *plugin_name,
+                                 const gchar *name,
+                                 GVariant *variant,
+                                 PanelDBusService *service);
+static gboolean
+panel_dbus_service_terminate (XfcePanelExportedService *skeleton,
+                              GDBusMethodInvocation *invocation,
+                              gboolean restart,
+                              PanelDBusService *service);
 
 
 
@@ -81,17 +89,16 @@ struct _PanelDBusService
   GDBusConnection *connection;
 
   /* queue for remote-events */
-  GHashTable      *remote_events;
+  GHashTable *remote_events;
 };
 
 typedef struct
 {
-  guint   handle;
-  gchar  *name;
-  GValue  value;
+  guint handle;
+  gchar *name;
+  GValue value;
   GSList *plugins;
-}
-PluginEvent;
+} PluginEvent;
 
 
 
@@ -111,7 +118,6 @@ panel_dbus_service_class_init (PanelDBusServiceClass *klass)
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = panel_dbus_service_finalize;
-
 }
 
 
@@ -132,17 +138,17 @@ panel_dbus_service_init (PanelDBusService *service)
                                                       &error)))
         {
           g_signal_connect (service, "handle_add_new_item",
-                            G_CALLBACK(panel_dbus_service_add_new_item), service);
+                            G_CALLBACK (panel_dbus_service_add_new_item), service);
           g_signal_connect (service, "handle_display_items_dialog",
-                            G_CALLBACK(panel_dbus_service_display_items_dialog), service);
+                            G_CALLBACK (panel_dbus_service_display_items_dialog), service);
           g_signal_connect (service, "handle_display_preferences_dialog",
-                            G_CALLBACK(panel_dbus_service_display_preferences_dialog), service);
+                            G_CALLBACK (panel_dbus_service_display_preferences_dialog), service);
           g_signal_connect (service, "handle_plugin_event",
-                            G_CALLBACK(panel_dbus_service_plugin_event), service);
+                            G_CALLBACK (panel_dbus_service_plugin_event), service);
           g_signal_connect (service, "handle_save",
-                            G_CALLBACK(panel_dbus_service_save), service);
+                            G_CALLBACK (panel_dbus_service_save), service);
           g_signal_connect (service, "handle_terminate",
-                            G_CALLBACK(panel_dbus_service_terminate), service);
+                            G_CALLBACK (panel_dbus_service_terminate), service);
         }
       else
         {
@@ -177,17 +183,17 @@ panel_dbus_service_finalize (GObject *object)
 
 static gboolean
 panel_dbus_service_display_preferences_dialog (XfcePanelExportedService *skeleton,
-                                               GDBusMethodInvocation    *invocation,
-                                               guint                     active,
-                                               guint                     socket_id,
-                                               PanelDBusService         *service)
+                                               GDBusMethodInvocation *invocation,
+                                               guint active,
+                                               guint socket_id,
+                                               PanelDBusService *service)
 {
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
 
   /* show the preferences dialog */
   panel_preferences_dialog_show_from_id (active, socket_id);
 
-  xfce_panel_exported_service_complete_display_preferences_dialog(skeleton, invocation);
+  xfce_panel_exported_service_complete_display_preferences_dialog (skeleton, invocation);
 
   return TRUE;
 }
@@ -196,9 +202,9 @@ panel_dbus_service_display_preferences_dialog (XfcePanelExportedService *skeleto
 
 static gboolean
 panel_dbus_service_display_items_dialog (XfcePanelExportedService *skeleton,
-                                         GDBusMethodInvocation    *invocation,
-                                         guint                     active,
-                                         PanelDBusService         *service)
+                                         GDBusMethodInvocation *invocation,
+                                         guint active,
+                                         PanelDBusService *service)
 {
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
 
@@ -214,8 +220,8 @@ panel_dbus_service_display_items_dialog (XfcePanelExportedService *skeleton,
 
 static gboolean
 panel_dbus_service_save (XfcePanelExportedService *skeleton,
-                         GDBusMethodInvocation    *invocation,
-                         PanelDBusService         *service)
+                         GDBusMethodInvocation *invocation,
+                         PanelDBusService *service)
 {
   PanelApplication *application;
 
@@ -236,10 +242,10 @@ panel_dbus_service_save (XfcePanelExportedService *skeleton,
 
 static gboolean
 panel_dbus_service_add_new_item (XfcePanelExportedService *skeleton,
-                                 GDBusMethodInvocation    *invocation,
-                                 const gchar              *plugin_name,
-                                 gchar                   **arguments,
-                                 PanelDBusService         *service)
+                                 GDBusMethodInvocation *invocation,
+                                 const gchar *plugin_name,
+                                 gchar **arguments,
+                                 PanelDBusService *service)
 {
   PanelApplication *application;
 
@@ -260,26 +266,25 @@ panel_dbus_service_add_new_item (XfcePanelExportedService *skeleton,
                                                      invocation);
 
   return TRUE;
-
 }
 
 
 
 static gboolean
 panel_dbus_service_plugin_event (XfcePanelExportedService *skeleton,
-                                 GDBusMethodInvocation    *invocation,
-                                 const gchar              *plugin_name,
-                                 const gchar              *name,
-                                 GVariant                 *variant,
-                                 PanelDBusService         *service)
+                                 GDBusMethodInvocation *invocation,
+                                 const gchar *plugin_name,
+                                 const gchar *name,
+                                 GVariant *variant,
+                                 PanelDBusService *service)
 {
-  GSList             *plugins, *li, *lnext;
+  GSList *plugins, *li, *lnext;
   PanelModuleFactory *factory;
-  PluginEvent        *event;
-  guint               handle;
-  gboolean            result;
-  GValue              value = G_VALUE_INIT;
-  gboolean            plugin_replied = FALSE;
+  PluginEvent *event;
+  guint handle;
+  gboolean result;
+  GValue value = G_VALUE_INIT;
+  gboolean plugin_replied = FALSE;
 
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
   panel_return_val_if_fail (plugin_name != NULL, FALSE);
@@ -317,7 +322,7 @@ panel_dbus_service_plugin_event (XfcePanelExportedService *skeleton,
 
           g_hash_table_insert (service->remote_events, &event->handle, event);
           g_signal_connect (G_OBJECT (li->data), "remote-event-result",
-              G_CALLBACK (panel_dbus_service_plugin_event_result), service);
+                            G_CALLBACK (panel_dbus_service_plugin_event_result), service);
 
           /* not entirely sure the event is handled, but at least suitable
            * plugins were found */
@@ -342,16 +347,15 @@ panel_dbus_service_plugin_event (XfcePanelExportedService *skeleton,
   xfce_panel_exported_service_complete_plugin_event (skeleton, invocation, plugin_replied);
 
   return TRUE;
-
 }
 
 
 
 static gboolean
 panel_dbus_service_terminate (XfcePanelExportedService *skeleton,
-                              GDBusMethodInvocation    *invocation,
-                              gboolean                  restart,
-                              PanelDBusService         *service)
+                              GDBusMethodInvocation *invocation,
+                              gboolean restart,
+                              PanelDBusService *service)
 {
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
 
@@ -361,7 +365,6 @@ panel_dbus_service_terminate (XfcePanelExportedService *skeleton,
                                                   invocation);
 
   return TRUE;
-
 }
 
 
@@ -381,18 +384,18 @@ panel_dbus_service_plugin_event_free (gpointer data)
 
 static void
 panel_dbus_service_plugin_event_result (XfcePanelPluginProvider *prev_provider,
-                                        guint                    handle,
-                                        gboolean                 result,
-                                        PanelDBusService        *service)
+                                        guint handle,
+                                        gboolean result,
+                                        PanelDBusService *service)
 {
-  PluginEvent             *event;
-  GSList                  *li, *lnext;
+  PluginEvent *event;
+  GSList *li, *lnext;
   XfcePanelPluginProvider *provider;
-  guint                    new_handle;
-  gboolean                 new_result;
+  guint new_handle;
+  gboolean new_result;
 
   g_signal_handlers_disconnect_by_func (G_OBJECT (prev_provider),
-      G_CALLBACK (panel_dbus_service_plugin_event_result), service);
+                                        G_CALLBACK (panel_dbus_service_plugin_event_result), service);
 
   event = g_hash_table_lookup (service->remote_events, &handle);
   if (G_LIKELY (event != NULL))
@@ -423,7 +426,7 @@ panel_dbus_service_plugin_event_result (XfcePanelPluginProvider *prev_provider,
                   event->handle = new_handle;
                   g_hash_table_insert (service->remote_events, &event->handle, event);
                   g_signal_connect (G_OBJECT (provider), "remote-event-result",
-                      G_CALLBACK (panel_dbus_service_plugin_event_result), service);
+                                    G_CALLBACK (panel_dbus_service_plugin_event_result), service);
 
                   /* leave and wait for reply */
                   return;
