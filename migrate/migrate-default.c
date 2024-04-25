@@ -132,7 +132,7 @@ migrate_default_start_element_handler (GMarkupParseContext  *context,
   const gchar  *prop_name, *prop_value, *prop_type;
   GType         type;
   gchar        *prop_path;
-  GValue        value = { 0, };
+  GValue        value = G_VALUE_INIT;
   const gchar  *value_value, *value_type;
   GValue       *value2;
 

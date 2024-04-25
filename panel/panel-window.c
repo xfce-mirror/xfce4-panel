@@ -2042,7 +2042,7 @@ panel_window_screen_struts_edge (PanelWindow *window)
 static void
 panel_window_screen_struts_set (PanelWindow *window)
 {
-  gulong         struts[N_STRUTS] = { 0, };
+  gulong         struts[N_STRUTS] = { 0 };
   GdkRectangle  *alloc = &window->alloc;
   guint          i;
   gboolean       update_struts = FALSE;

@@ -1133,7 +1133,7 @@ window_menu_plugin_menu_key_press_event (GtkWidget        *menu,
                                          WindowMenuPlugin *plugin)
 {
   GtkWidget      *mi = NULL;
-  GdkEventButton  fake_event = { 0, };
+  GdkEventButton  fake_event = { 0 };
   guint           modifiers;
   XfwWindow      *window;
 

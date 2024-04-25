@@ -164,7 +164,6 @@ static void               launcher_plugin_item_exec_from_clipboard      (GarconM
                                                                          guint32               event_time,
                                                                          GdkScreen            *screen);
 static GSList            *launcher_plugin_uri_list_extract              (GtkSelectionData     *data);
-static void               launcher_plugin_uri_list_free                 (GSList               *uri_list);
 
 
 
@@ -681,19 +680,6 @@ launcher_plugin_items_delete_configs (LauncherPlugin *plugin)
 
 
 static void
-launcher_plugin_items_free (LauncherPlugin *plugin)
-{
-  if (G_LIKELY (plugin->items != NULL))
-    {
-      g_slist_foreach (plugin->items, (GFunc) (void (*)(void)) g_object_unref, NULL);
-      g_slist_free (plugin->items);
-      plugin->items = NULL;
-    }
-}
-
-
-
-static void
 launcher_plugin_items_load (LauncherPlugin *plugin,
                             GPtrArray      *array)
 {
@@ -780,7 +766,7 @@ launcher_plugin_items_load (LauncherPlugin *plugin,
   launcher_plugin_items_delete_configs (plugin);
 
   /* release the old menu items and set new one */
-  launcher_plugin_items_free (plugin);
+  g_slist_free_full (plugin->items, (GDestroyNotify) g_object_unref);
   plugin->items = items;
 
   /* store the new item list */
@@ -816,7 +802,8 @@ launcher_plugin_set_property (GObject      *object,
       else
         {
           launcher_plugin_items_delete_configs (plugin);
-          launcher_plugin_items_free (plugin);
+          g_slist_free_full (plugin->items, (GDestroyNotify) g_object_unref);
+          plugin->items = NULL;
         }
 
       /* emit signal */
@@ -1090,7 +1077,7 @@ launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
   /* destroy the menu and timeout */
   launcher_plugin_menu_destroy (plugin);
 
-  launcher_plugin_items_free (plugin);
+  g_slist_free_full (plugin->items, (GDestroyNotify) g_object_unref);
 
   if (plugin->config_directory != NULL)
     g_object_unref (G_OBJECT (plugin->config_directory));
@@ -1526,7 +1513,7 @@ launcher_plugin_menu_item_drag_data_received (GtkWidget          *widget,
                                  gtk_widget_get_screen (widget),
                                  uri_list);
 
-      launcher_plugin_uri_list_free (uri_list);
+      g_slist_free_full (uri_list, g_free);
     }
 
   /* hide the menu */
@@ -2039,7 +2026,7 @@ launcher_plugin_button_drag_data_received (GtkWidget        *widget,
                                  gtk_widget_get_screen (widget),
                                  uri_list);
 
-      launcher_plugin_uri_list_free (uri_list);
+      g_slist_free_full (uri_list, g_free);
     }
 
   /* finish the drag */
@@ -2534,8 +2521,6 @@ launcher_plugin_item_exec_from_clipboard (GarconMenuItem *item,
 {
   GtkClipboard     *clipboard;
   gchar            *text = NULL;
-  //GSList           *uri_list;
-  //GtkSelectionData  data;
 
   panel_return_if_fail (GARCON_IS_MENU_ITEM (item));
   panel_return_if_fail (GDK_IS_SCREEN (screen));
@@ -2552,23 +2537,6 @@ launcher_plugin_item_exec_from_clipboard (GarconMenuItem *item,
       clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
       if (G_LIKELY (clipboard))
         text = gtk_clipboard_wait_for_text (clipboard);
-    }
-
-  if (!xfce_str_is_empty (text))
-    {
-      /* create fake selection data */
-      //data.data = (guchar *) text;      //HOWTO?
-      //data.length = strlen (text);
-      //data.target = GDK_NONE;
-
-      /* extract the uris from the selection data */
-      //uri_list = launcher_plugin_uri_list_extract (&data);
-
-      /* launch with the uri list */
-      //launcher_plugin_item_exec (item, event_time,
-      //                           screen, uri_list);
-
-      //launcher_plugin_uri_list_free (uri_list);
     }
 
   g_free (text);
@@ -2637,18 +2605,6 @@ launcher_plugin_uri_list_extract (GtkSelectionData *data)
     }
 
   return g_slist_reverse (list);
-}
-
-
-
-static void
-launcher_plugin_uri_list_free (GSList *uri_list)
-{
-  if (uri_list != NULL)
-    {
-      g_slist_foreach (uri_list, (GFunc) (void (*)(void)) g_free, NULL);
-      g_slist_free (uri_list);
-    }
 }
 
 

@@ -367,7 +367,6 @@ xfce_clock_binary_draw (GtkWidget *widget,
   GDateTime        *time;
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_BINARY (binary), FALSE);
-  //panel_return_val_if_fail (gtk_widget_get_has_window (widget), FALSE);
   panel_return_val_if_fail (cr != NULL, FALSE);
 
   ctx = gtk_widget_get_style_context (widget);
@@ -523,4 +522,3 @@ xfce_clock_binary_new (ClockTime *time,
 
   return GTK_WIDGET (binary);
 }
-

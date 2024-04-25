@@ -276,8 +276,7 @@ panel_application_finalize (GObject *object)
 #endif
 
   /* destroy all panels */
-  g_slist_foreach (application->windows, (GFunc) (void (*)(void)) gtk_widget_destroy, NULL);
-  g_slist_free (application->windows);
+  g_slist_free_full (application->windows, (GDestroyNotify) gtk_widget_destroy);
 
   g_object_unref (G_OBJECT (application->factory));
 
@@ -406,7 +405,7 @@ panel_application_load_real (PanelApplication *application)
   gchar        *output_name;
   gint          screen_num;
   GdkDisplay   *display;
-  GValue        val = { 0, };
+  GValue        val = G_VALUE_INIT;
   GPtrArray    *panels;
   gint          panel_id;
   gboolean      save_changed_ids = FALSE;

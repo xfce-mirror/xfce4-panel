@@ -71,7 +71,7 @@ enum
   LAST_SIGNAL
 };
 
-static guint clock_time_signals[LAST_SIGNAL] = { 0, };
+static guint clock_time_signals[LAST_SIGNAL] = { 0 };
 
 
 G_DEFINE_FINAL_TYPE (ClockTime, clock_time, G_TYPE_OBJECT)
@@ -170,7 +170,7 @@ clock_time_set_property (GObject      *object,
           g_free (time->timezone_name);
           if (time->timezone != NULL)
             g_time_zone_unref (time->timezone);
-          if (str_value == NULL || g_strcmp0 (str_value, "") == 0)
+          if (xfce_str_is_empty (str_value))
             {
               time->timezone_name = g_strdup (DEFAULT_TIMEZONE);
               time->timezone = NULL;
@@ -227,8 +227,7 @@ clock_time_strdup_strftime (ClockTime       *time,
   g_date_time_unref (date_time);
 
   /* Explicitely return NULL if a format specifier fails */
-  if (!str ||
-      g_strcmp0 (str, "") == 0)
+  if (xfce_str_is_empty (str))
     return NULL;
   else
     return str;

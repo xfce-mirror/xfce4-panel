@@ -281,7 +281,7 @@ panel_dbus_service_plugin_event (XfcePanelExportedService *skeleton,
   PluginEvent        *event;
   guint               handle;
   gboolean            result;
-  GValue              value = { 0, };
+  GValue              value = G_VALUE_INIT;
   gboolean            plugin_replied = FALSE;
 
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
