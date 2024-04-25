@@ -17,19 +17,26 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STDIO_H
-#include <stdio.h>
-#endif
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
+#include "panel/panel-dbus-service.h"
+#include "panel/panel-dialogs.h"
+#include "panel/panel-item-dialog.h"
+#include "panel/panel-plugin-external.h"
+#include "panel/panel-preferences-dialog.h"
+#include "panel/panel-tic-tac-toe.h"
+#include "panel/panel-window.h"
+
+#include "common/panel-debug.h"
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
+#include "libxfce4panel/libxfce4panel.h"
+#include "libxfce4panel/xfce-panel-plugin-provider.h"
 
 #ifdef ENABLE_X11
-#include <X11/Xlib.h>
 #include <X11/Xatom.h>
+#include <X11/Xlib.h>
 #include <libxfce4windowing/xfw-x11.h>
 #endif
 
@@ -38,22 +45,9 @@
 #else
 #define gtk_layer_is_supported() FALSE
 #endif
+
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4windowing/libxfce4windowing.h>
-#include <xfconf/xfconf.h>
-
-#include <common/panel-private.h>
-#include <common/panel-debug.h>
-#include <common/panel-utils.h>
-#include <libxfce4panel/libxfce4panel.h>
-#include <libxfce4panel/xfce-panel-plugin-provider.h>
-#include <panel/panel-window.h>
-#include <panel/panel-item-dialog.h>
-#include <panel/panel-preferences-dialog.h>
-#include <panel/panel-dialogs.h>
-#include <panel/panel-dbus-service.h>
-#include <panel/panel-plugin-external.h>
-#include <panel/panel-tic-tac-toe.h>
 
 
 

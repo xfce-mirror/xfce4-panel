@@ -19,35 +19,29 @@
 
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-#ifdef HAVE_STRING_H
-#include <string.h>
+#include "config.h"
 #endif
 
-#include <gdk/gdk.h>
-#include <gtk/gtk.h>
-
-#include <libxfce4util/libxfce4util.h>
-#include <libxfce4ui/libxfce4ui.h>
-#include <common/panel-private.h>
-#include <common/panel-xfconf.h>
-#include <common/panel-utils.h>
-#include <common/panel-debug.h>
-
-#ifdef ENABLE_X11
-#include "systray.h"
-#include "systray-box.h"
-#include "systray-socket.h"
-#include "systray-manager.h"
-#endif
-
-#include "sn-backend.h"
 #include "sn-box.h"
 #include "sn-button.h"
 #include "sn-dialog.h"
 #include "sn-item.h"
 #include "sn-plugin.h"
+
+#ifdef ENABLE_X11
+#include "systray-box.h"
+#include "systray-manager.h"
+#include "systray-socket.h"
+#include "systray.h"
+#endif
+
+#include "common/panel-debug.h"
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
+#include "common/panel-xfconf.h"
+
+#include <libxfce4ui/libxfce4ui.h>
+#include <libxfce4util/libxfce4util.h>
 
 
 

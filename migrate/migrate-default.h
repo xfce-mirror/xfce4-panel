@@ -19,8 +19,7 @@
 #ifndef __XFCE_DEFAULT_H__
 #define __XFCE_DEFAULT_H__
 
-#include <gtk/gtk.h>
-#include <xfconf/xfconf.h>
+#include <glib.h>
 
 G_BEGIN_DECLS
 
@@ -29,4 +28,3 @@ gboolean migrate_default (const gchar *filename, GError **error);
 G_END_DECLS
 
 #endif /* !__XFCE_DEFAULT_H__ */
-

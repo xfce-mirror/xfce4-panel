@@ -18,13 +18,13 @@
 
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
-
-#include <common/panel-private.h>
 
 #include "clock-time.h"
 #include "clock.h"
+
+#include "common/panel-private.h"
 
 static void                 clock_time_finalize       (GObject          *object);
 static void                 clock_time_get_property   (GObject          *object,

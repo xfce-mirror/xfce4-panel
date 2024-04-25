@@ -20,11 +20,11 @@
 #ifndef __SN_BUTTON_H__
 #define __SN_BUTTON_H__
 
-#include <gtk/gtk.h>
-
 #include "sn-config.h"
 #include "sn-item.h"
 #include "sn-plugin.h"
+
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

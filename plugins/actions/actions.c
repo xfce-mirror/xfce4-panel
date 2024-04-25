@@ -18,19 +18,19 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
+
+#include "actions-dialog_ui.h"
+#include "actions.h"
+
+#include "common/panel-debug.h"
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
+#include "common/panel-xfconf.h"
 
 #include <gtk/gtk.h>
 #include <libxfce4ui/libxfce4ui.h>
-
-#include <common/panel-private.h>
-#include <common/panel-xfconf.h>
-#include <common/panel-utils.h>
-#include <common/panel-debug.h>
-
-#include "actions.h"
-#include "actions-dialog_ui.h"
 
 
 

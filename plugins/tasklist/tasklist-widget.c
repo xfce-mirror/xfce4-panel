@@ -17,23 +17,18 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
-#ifdef HAVE_MATH_H
-#include <math.h>
-#endif
+#include "tasklist-widget.h"
+
+#include "common/panel-debug.h"
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
 
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4windowing/libxfce4windowing.h>
 #include <libxfce4windowingui/libxfce4windowingui.h>
-#include <libxfce4panel/libxfce4panel.h>
-#include <common/panel-private.h>
-#include <common/panel-debug.h>
-#include <common/panel-utils.h>
 
 #ifdef ENABLE_X11
 #include <X11/Xlib.h>
@@ -44,8 +39,9 @@
 #define tasklist_window_get_xid(window) 0LU
 #endif
 
-
-#include "tasklist-widget.h"
+#ifdef HAVE_MATH_H
+#include <math.h>
+#endif
 
 
 

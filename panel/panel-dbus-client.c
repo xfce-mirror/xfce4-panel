@@ -18,24 +18,20 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STDLIB_H
-#include <stdlib.h>
-#endif
+#include "panel/panel-dbus-client.h"
+#include "panel/panel-dbus-service.h"
+#include "panel/panel-gdbus-exported-service.h"
+
+#include "common/panel-dbus.h"
+#include "common/panel-private.h"
+#include "libxfce4panel/libxfce4panel.h"
+#include "libxfce4panel/xfce-panel-plugin-provider.h"
 
 #include <gio/gio.h>
 #include <libxfce4util/libxfce4util.h>
-#include <common/panel-private.h>
-#include <common/panel-dbus.h>
-#include <libxfce4panel/libxfce4panel.h>
-#include <libxfce4panel/xfce-panel-plugin-provider.h>
-
-#include <panel/panel-dbus-client.h>
-#include <panel/panel-dbus-service.h>
-
-#include <panel/panel-gdbus-exported-service.h>
 
 
 enum

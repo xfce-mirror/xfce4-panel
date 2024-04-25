@@ -17,26 +17,16 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
+#include "panel/panel-module-factory.h"
 
-#ifdef HAVE_TIME_H
-#include <time.h>
-#endif
+#include "common/panel-debug.h"
+#include "common/panel-private.h"
+#include "libxfce4panel/libxfce4panel.h"
 
 #include <libxfce4util/libxfce4util.h>
-
-#include <common/panel-private.h>
-#include <common/panel-debug.h>
-
-#include <libxfce4panel/libxfce4panel.h>
-
-#include <panel/panel-module.h>
-#include <panel/panel-module-factory.h>
 
 
 

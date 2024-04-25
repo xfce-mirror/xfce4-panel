@@ -17,22 +17,17 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
+#include "panel/panel-dialogs.h"
+#include "panel/panel-tic-tac-toe.h"
 
-#include <libxfce4util/libxfce4util.h>
+#include "common/panel-private.h"
+#include "libxfce4panel/libxfce4panel.h"
+
 #include <libxfce4ui/libxfce4ui.h>
-
-#include <common/panel-private.h>
-#include <libxfce4panel/libxfce4panel.h>
-
-#include <panel/panel-dialogs.h>
-#include <panel/panel-application.h>
-#include <panel/panel-tic-tac-toe.h>
+#include <libxfce4util/libxfce4util.h>
 
 
 

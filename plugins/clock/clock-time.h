@@ -19,11 +19,12 @@
 #ifndef __CLOCK_TIME_H__
 #define __CLOCK_TIME_H__
 
+#include "clock-sleep-monitor.h"
+
+#include "libxfce4panel/libxfce4panel.h"
+
 #include <glib-object.h>
 #include <libxfce4util/libxfce4util.h>
-#include <libxfce4panel/libxfce4panel.h>
-
-#include "clock-sleep-monitor.h"
 
 G_BEGIN_DECLS
 

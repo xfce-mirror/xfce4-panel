@@ -17,12 +17,13 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#include <common/panel-private.h>
-#include <wrapper/wrapper-plug-x11.h>
-#include <wrapper/wrapper-plug.h>
+#include "wrapper/wrapper-plug-x11.h"
+#include "wrapper/wrapper-plug.h"
+
+#include "common/panel-private.h"
 
 
 

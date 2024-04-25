@@ -17,34 +17,29 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_LIBINTL_H
-#include <libintl.h>
-#endif
-#ifdef HAVE_LOCALE_H
-#include <locale.h>
-#endif
+#include "libxfce4panel/libxfce4panel-marshal.h"
+#include "libxfce4panel/xfce-panel-macros.h"
+#include "libxfce4panel/xfce-panel-plugin-provider.h"
+#include "libxfce4panel/xfce-panel-plugin.h"
 
-#include <gtk/gtk.h>
+#include "libxfce4panel/libxfce4panel-alias.h"
+
+#include "common/panel-private.h"
+
 #ifdef ENABLE_X11
 #include <gtk/gtkx.h>
 #endif
-#include <glib.h>
-#include <libxfce4util/libxfce4util.h>
+
 #ifdef HAVE_GTK_LAYER_SHELL
 #include <gtk-layer-shell/gtk-layer-shell.h>
 #else
 #define gtk_layer_is_supported() FALSE
 #endif
 
-#include <common/panel-private.h>
-#include <libxfce4panel/xfce-panel-macros.h>
-#include <libxfce4panel/xfce-panel-plugin.h>
-#include <libxfce4panel/xfce-panel-plugin-provider.h>
-#include <libxfce4panel/libxfce4panel-marshal.h>
-#include <libxfce4panel/libxfce4panel-alias.h>
+#include <libxfce4util/libxfce4util.h>
 
 
 
@@ -3209,4 +3204,4 @@ xfce_panel_plugin_save_location (XfcePanelPlugin *plugin,
 
 
 #define __XFCE_PANEL_PLUGIN_C__
-#include <libxfce4panel/libxfce4panel-aliasdef.c>
+#include "libxfce4panel/libxfce4panel-aliasdef.c"

@@ -19,8 +19,9 @@
 #ifndef __LAUNCHER_H__
 #define __LAUNCHER_H__
 
+#include "libxfce4panel/libxfce4panel.h"
+
 #include <garcon/garcon.h>
-#include <libxfce4panel/libxfce4panel.h>
 
 G_BEGIN_DECLS
 

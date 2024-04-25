@@ -17,17 +17,30 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STDLIB_H
-#include <stdlib.h>
-#endif
+#include "panel/panel-application.h"
+#include "panel/panel-base-window.h"
+#include "panel/panel-dbus-service.h"
+#include "panel/panel-dialogs.h"
+#include "panel/panel-item-dialog.h"
+#include "panel/panel-itembar.h"
+#include "panel/panel-module-factory.h"
+#include "panel/panel-plugin-external.h"
+#include "panel/panel-preferences-dialog.h"
+
+#include "common/panel-debug.h"
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
+#include "common/panel-xfconf.h"
+#include "libxfce4panel/libxfce4panel.h"
+#include "libxfce4panel/xfce-panel-plugin-provider.h"
 
 #include <glib/gstdio.h>
-#include <xfconf/xfconf.h>
-#include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
+#include <libxfce4util/libxfce4util.h>
+#include <xfconf/xfconf.h>
 
 #ifdef HAVE_GTK_LAYER_SHELL
 #include <gtk-layer-shell/gtk-layer-shell.h>
@@ -36,27 +49,9 @@
 #endif
 
 #ifdef ENABLE_X11
-#include <X11/Xlib.h>
 #include <X11/Xatom.h>
+#include <X11/Xlib.h>
 #endif
-
-#include <common/panel-private.h>
-#include <common/panel-xfconf.h>
-#include <common/panel-debug.h>
-#include <common/panel-utils.h>
-#include <libxfce4panel/libxfce4panel.h>
-#include <libxfce4panel/xfce-panel-plugin-provider.h>
-
-#include <panel/panel-dbus-service.h>
-#include <panel/panel-base-window.h>
-#include <panel/panel-window.h>
-#include <panel/panel-application.h>
-#include <panel/panel-itembar.h>
-#include <panel/panel-module-factory.h>
-#include <panel/panel-preferences-dialog.h>
-#include <panel/panel-item-dialog.h>
-#include <panel/panel-dialogs.h>
-#include <panel/panel-plugin-external.h>
 
 #define MIGRATE_BIN HELPERDIR G_DIR_SEPARATOR_S "migrate"
 

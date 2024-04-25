@@ -19,9 +19,10 @@
 #ifndef __PAGER_BUTTONS_H__
 #define __PAGER_BUTTONS_H__
 
+#include "libxfce4panel/libxfce4panel.h"
+
 #include <gtk/gtk.h>
 #include <libxfce4windowing/libxfce4windowing.h>
-#include <libxfce4panel/libxfce4panel.h>
 
 G_BEGIN_DECLS
 

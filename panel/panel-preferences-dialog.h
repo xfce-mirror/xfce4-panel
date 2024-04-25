@@ -19,14 +19,14 @@
 #ifndef __PANEL_PREFERENCES_DIALOG_H__
 #define __PANEL_PREFERENCES_DIALOG_H__
 
+#include "panel/panel-window.h"
+
 #include <gtk/gtk.h>
 #ifdef ENABLE_X11
 #include <gtk/gtkx.h>
 #else
 typedef gulong Window;
 #endif
-#include <panel/panel-application.h>
-#include <panel/panel-window.h>
 
 G_BEGIN_DECLS
 

@@ -19,17 +19,14 @@
 
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
-
-#include <gio/gio.h>
 
 #include "sn-backend.h"
 #include "sn-item.h"
 #include "sn-watcher.h"
+
+#include <gio/gio.h>
 
 
 

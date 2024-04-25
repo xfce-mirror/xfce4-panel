@@ -19,8 +19,7 @@
 #ifndef __PANEL_DIALOGS_H__
 #define __PANEL_DIALOGS_H__
 
-#include <gtk/gtk.h>
-#include <panel/panel-application.h>
+#include "panel/panel-application.h"
 
 G_BEGIN_DECLS
 
@@ -33,4 +32,3 @@ gboolean panel_dialogs_kiosk_warning  (void);
 G_END_DECLS
 
 #endif /* !__PANEL_DIALOGS_H__ */
-

@@ -19,7 +19,7 @@
 #ifndef __XFCE_DIRECTORY_MENU_PLUGIN_H__
 #define __XFCE_DIRECTORY_MENU_PLUGIN_H__
 
-#include <libxfce4panel/libxfce4panel.h>
+#include "libxfce4panel/libxfce4panel.h"
 
 G_BEGIN_DECLS
 

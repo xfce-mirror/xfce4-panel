@@ -17,13 +17,14 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#include <libxfce4ui/libxfce4ui.h>
-#include <common/panel-private.h>
-
 #include "pager-buttons.h"
+
+#include "common/panel-private.h"
+
+#include <libxfce4ui/libxfce4ui.h>
 
 
 

@@ -19,8 +19,11 @@
 #ifndef __PANEL_UTILS_H__
 #define __PANEL_UTILS_H__
 
+#include "libxfce4panel/libxfce4panel.h"
+
 #include <gtk/gtk.h>
-#include <libxfce4panel/libxfce4panel.h>
+
+G_BEGIN_DECLS
 
 void        _panel_utils_weak_notify   (gpointer          data,
                                         GObject          *where_the_object_was);
@@ -45,5 +48,7 @@ void        panel_utils_destroy_later  (GtkWidget        *widget);
 void        panel_utils_wl_surface_commit (GtkWidget        *widget);
 
 void        panel_utils_widget_remap      (GtkWidget        *widget);
+
+G_END_DECLS
 
 #endif /* !__PANEL_UTILS_H__ */

@@ -17,26 +17,21 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
-
-#include <libxfce4ui/libxfce4ui.h>
-#include <libxfce4util/libxfce4util.h>
-#include <garcon/garcon.h>
-#include <xfconf/xfconf.h>
-#include <gio/gio.h>
-#include <gdk/gdkkeysyms.h>
-
-#include <common/panel-private.h>
-#include <common/panel-utils.h>
-
-#include "launcher.h"
 #include "launcher-dialog.h"
 #include "launcher-dialog_ui.h"
+
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
+
+#include <garcon/garcon.h>
+#include <gdk/gdkkeysyms.h>
+#include <gio/gio.h>
+#include <libxfce4ui/libxfce4ui.h>
+#include <libxfce4util/libxfce4util.h>
+#include <xfconf/xfconf.h>
 
 
 

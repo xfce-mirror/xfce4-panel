@@ -17,19 +17,15 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_MATH_H
-#include <math.h>
-#endif
+#include "clock-binary.h"
+#include "clock.h"
+
+#include "common/panel-private.h"
 
 #include <cairo/cairo.h>
-#include <common/panel-private.h>
-
-#include "clock.h"
-#include "clock-time.h"
-#include "clock-binary.h"
 
 
 
