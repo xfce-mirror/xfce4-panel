@@ -120,7 +120,7 @@ enum
   LAST_SIGNAL
 };
 
-static guint sn_item_signals[LAST_SIGNAL] = { 0, };
+static guint sn_item_signals[LAST_SIGNAL] = { 0 };
 
 
 

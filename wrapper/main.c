@@ -210,7 +210,7 @@ wrapper_gproxy_remote_event (GDBusProxy *proxy,
   guint         handle;
   const gchar  *name;
   gboolean      result;
-  GValue        real_value = { 0, };
+  GValue        real_value = { 0 };
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 

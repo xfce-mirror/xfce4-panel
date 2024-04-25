@@ -116,7 +116,7 @@ enum
   LAST_SIGNAL
 };
 
-static guint sn_backend_signals[LAST_SIGNAL] = { 0, };
+static guint sn_backend_signals[LAST_SIGNAL] = { 0 };
 
 
 

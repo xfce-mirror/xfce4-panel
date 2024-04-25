@@ -807,8 +807,6 @@ static void
 applications_menu_plugin_set_garcon_menu (ApplicationsMenuPlugin *plugin)
 {
   GarconMenu *menu = NULL;
-  gchar      *filename;
-  GFile      *file;
 
   panel_return_if_fail (APPLICATIONS_MENU_IS_PLUGIN (plugin));
   panel_return_if_fail (GARCON_GTK_IS_MENU (plugin->menu));
@@ -825,18 +823,6 @@ applications_menu_plugin_set_garcon_menu (ApplicationsMenuPlugin *plugin)
 
   /* set the menu */
   garcon_gtk_menu_set_menu (GARCON_GTK_MENU (plugin->menu), menu);
-
-  /* debugging information */
-  if (0)
-    {
-  file = garcon_menu_get_file (menu);
-  filename = g_file_get_parse_name (file);
-  g_object_unref (G_OBJECT (file));
-
-  panel_debug (PANEL_DEBUG_APPLICATIONSMENU,
-               "menu from \"%s\"", filename);
-  g_free (filename);
-    }
 
   g_object_unref (G_OBJECT (menu));
 }

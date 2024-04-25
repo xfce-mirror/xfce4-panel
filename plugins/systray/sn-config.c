@@ -31,9 +31,6 @@
 #include <libxfce4panel/xfce-panel-plugin.h>
 #include <common/panel-debug.h>
 #include <xfconf/xfconf.h>
-#ifdef XFCONF_LEGACY
-#include <dbus/dbus-glib.h>
-#endif
 
 #include "sn-plugin.h"
 #include "sn-config.h"
@@ -106,33 +103,7 @@ enum
   LAST_SIGNAL
 };
 
-static guint sn_config_signals[LAST_SIGNAL] = { 0, };
-
-
-#ifdef XFCONF_LEGACY
-
-#define SN_TYPE_CONFIG_VALUE_ARRAY (sn_config_value_array_get_type ())
-
-static GType
-sn_config_value_array_get_type (void)
-{
-  static volatile gsize type__volatile = 0;
-  GType                 type;
-
-  if (g_once_init_enter (&type__volatile))
-    {
-      type = dbus_g_type_get_collection ("GPtrArray", G_TYPE_VALUE);
-      g_once_init_leave (&type__volatile, type);
-    }
-
-  return type__volatile;
-}
-
-#else
-
-#define SN_TYPE_CONFIG_VALUE_ARRAY G_TYPE_PTR_ARRAY
-
-#endif
+static guint sn_config_signals[LAST_SIGNAL] = { 0 };
 
 
 
@@ -192,7 +163,7 @@ sn_config_class_init (SnConfigClass *klass)
                                    PROP_KNOWN_ITEMS,
                                    g_param_spec_boxed ("known-items",
                                                        NULL, NULL,
-                                                       SN_TYPE_CONFIG_VALUE_ARRAY,
+                                                       G_TYPE_PTR_ARRAY,
                                                        G_PARAM_READWRITE |
                                                        G_PARAM_STATIC_STRINGS));
 
@@ -200,7 +171,7 @@ sn_config_class_init (SnConfigClass *klass)
                                    PROP_HIDDEN_ITEMS,
                                    g_param_spec_boxed ("hidden-items",
                                                        NULL, NULL,
-                                                       SN_TYPE_CONFIG_VALUE_ARRAY,
+                                                       G_TYPE_PTR_ARRAY,
                                                        G_PARAM_READWRITE |
                                                        G_PARAM_STATIC_STRINGS));
 
@@ -208,7 +179,7 @@ sn_config_class_init (SnConfigClass *klass)
                                    PROP_KNOWN_LEGACY_ITEMS,
                                    g_param_spec_boxed ("known-legacy-items",
                                                        NULL, NULL,
-                                                       SN_TYPE_CONFIG_VALUE_ARRAY,
+                                                       G_TYPE_PTR_ARRAY,
                                                        G_PARAM_READWRITE |
                                                        G_PARAM_STATIC_STRINGS));
 
@@ -216,7 +187,7 @@ sn_config_class_init (SnConfigClass *klass)
                                    PROP_HIDDEN_LEGACY_ITEMS,
                                    g_param_spec_boxed ("hidden-legacy-items",
                                                        NULL, NULL,
-                                                       SN_TYPE_CONFIG_VALUE_ARRAY,
+                                                       G_TYPE_PTR_ARRAY,
                                                        G_PARAM_READWRITE |
                                                        G_PARAM_STATIC_STRINGS));
 
@@ -1129,19 +1100,19 @@ sn_config_new (const gchar *property_base)
       g_free (property);
 
       property = g_strconcat (property_base, "/known-items", NULL);
-      xfconf_g_property_bind (channel, property, SN_TYPE_CONFIG_VALUE_ARRAY, config, "known-items");
+      xfconf_g_property_bind (channel, property, G_TYPE_PTR_ARRAY, config, "known-items");
       g_free (property);
 
       property = g_strconcat (property_base, "/hidden-items", NULL);
-      xfconf_g_property_bind (channel, property, SN_TYPE_CONFIG_VALUE_ARRAY, config, "hidden-items");
+      xfconf_g_property_bind (channel, property, G_TYPE_PTR_ARRAY, config, "hidden-items");
       g_free (property);
 
       property = g_strconcat (property_base, "/known-legacy-items", NULL);
-      xfconf_g_property_bind (channel, property, SN_TYPE_CONFIG_VALUE_ARRAY, config, "known-legacy-items");
+      xfconf_g_property_bind (channel, property, G_TYPE_PTR_ARRAY, config, "known-legacy-items");
       g_free (property);
 
       property = g_strconcat (property_base, "/hidden-legacy-items", NULL);
-      xfconf_g_property_bind (channel, property, SN_TYPE_CONFIG_VALUE_ARRAY, config, "hidden-legacy-items");
+      xfconf_g_property_bind (channel, property, G_TYPE_PTR_ARRAY, config, "hidden-legacy-items");
       g_free (property);
 
       g_signal_emit (G_OBJECT (config), sn_config_signals[CONFIGURATION_CHANGED], 0);

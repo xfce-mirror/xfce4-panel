@@ -33,7 +33,7 @@ panel_properties_store_value (XfconfChannel *channel,
                               GObject       *object,
                               const gchar   *object_property)
 {
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
   GdkRGBA *rgba;
 
   panel_return_if_fail (G_IS_OBJECT (object));

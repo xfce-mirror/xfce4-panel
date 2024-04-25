@@ -817,7 +817,7 @@ static void
 panel_plugin_external_set_size (XfcePanelPluginProvider *provider,
                                 gint                     size)
 {
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
@@ -837,7 +837,7 @@ static void
 panel_plugin_external_set_icon_size (XfcePanelPluginProvider *provider,
                                      gint                     icon_size)
 {
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
@@ -857,7 +857,7 @@ static void
 panel_plugin_external_set_dark_mode (XfcePanelPluginProvider *provider,
                                      gboolean                 dark_mode)
 {
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
@@ -877,7 +877,7 @@ static void
 panel_plugin_external_set_mode (XfcePanelPluginProvider *provider,
                                 XfcePanelPluginMode      mode)
 {
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
@@ -903,7 +903,7 @@ static void
 panel_plugin_external_set_nrows (XfcePanelPluginProvider *provider,
                                  guint                    rows)
 {
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
@@ -923,7 +923,7 @@ static void
 panel_plugin_external_set_screen_position (XfcePanelPluginProvider *provider,
                                            XfceScreenPosition       screen_position)
 {
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
@@ -1025,7 +1025,7 @@ static void
 panel_plugin_external_set_locked (XfcePanelPluginProvider *provider,
                                   gboolean                 locked)
 {
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
@@ -1056,7 +1056,7 @@ panel_plugin_external_ask_remove (XfcePanelPluginProvider *provider)
 static void
 panel_plugin_external_set_sensitive (PanelPluginExternal *external)
 {
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
 
@@ -1099,7 +1099,7 @@ void
 panel_plugin_external_queue_add_action (PanelPluginExternal             *external,
                                         XfcePanelPluginProviderPropType  type)
 {
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
 
@@ -1140,7 +1140,7 @@ void
 panel_plugin_external_set_opacity (PanelPluginExternal *external,
                                    gdouble              opacity)
 {
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
 

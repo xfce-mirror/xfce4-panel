@@ -271,15 +271,8 @@ systray_manager_finalize (GObject *object)
   /* destroy the hash table */
   g_hash_table_destroy (manager->sockets);
 
-  if (manager->messages)
-    {
-      /* cleanup all pending messages */
-      g_slist_foreach (manager->messages,
-                       (GFunc) (void (*)(void)) systray_manager_message_free, NULL);
-
-      /* free the list */
-      g_slist_free (manager->messages);
-    }
+  /* cleanup all pending messages */
+  g_slist_free_full (manager->messages, (GDestroyNotify) systray_manager_message_free);
 
   G_OBJECT_CLASS (systray_manager_parent_class)->finalize (object);
 }
