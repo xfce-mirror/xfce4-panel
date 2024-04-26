@@ -20,24 +20,28 @@
 #ifndef __SN_BOX_H__
 #define __SN_BOX_H__
 
-#include <gtk/gtk.h>
-
 #include "sn-config.h"
 #include "sn-item.h"
+
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
 #define SN_TYPE_BOX (sn_box_get_type ())
 G_DECLARE_FINAL_TYPE (SnBox, sn_box, SN, BOX, GtkContainer)
 
-void                   sn_box_remove_item                      (SnBox                   *box,
-                                                                SnItem                  *item);
+void
+sn_box_remove_item (SnBox *box,
+                    SnItem *item);
 
-GtkWidget             *sn_box_new                              (SnConfig                *config);
-gboolean               sn_box_has_hidden_items                 (SnBox                   *box);
-void                   sn_box_set_show_hidden                  (SnBox                   *box,
-                                                                gboolean                 show_hidden);
+GtkWidget *
+sn_box_new (SnConfig *config);
+gboolean
+sn_box_has_hidden_items (SnBox *box);
+void
+sn_box_set_show_hidden (SnBox *box,
+                        gboolean show_hidden);
 
-    G_END_DECLS
+G_END_DECLS
 
 #endif /* !__SN_BOX_H__ */

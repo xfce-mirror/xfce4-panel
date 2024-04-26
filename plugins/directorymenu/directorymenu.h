@@ -19,14 +19,15 @@
 #ifndef __XFCE_DIRECTORY_MENU_PLUGIN_H__
 #define __XFCE_DIRECTORY_MENU_PLUGIN_H__
 
-#include <libxfce4panel/libxfce4panel.h>
+#include "libxfce4panel/libxfce4panel.h"
 
 G_BEGIN_DECLS
 
 #define DIRECTORY_MENU_TYPE_PLUGIN (directory_menu_plugin_get_type ())
 G_DECLARE_FINAL_TYPE (DirectoryMenuPlugin, directory_menu_plugin, DIRECTORY_MENU, PLUGIN, XfcePanelPlugin)
 
-void directory_menu_plugin_register_type (XfcePanelTypeModule *type_module);
+void
+directory_menu_plugin_register_type (XfcePanelTypeModule *type_module);
 
 G_END_DECLS
 

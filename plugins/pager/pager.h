@@ -19,14 +19,15 @@
 #ifndef __PAGER_H__
 #define __PAGER_H__
 
-#include <libxfce4panel/libxfce4panel.h>
+#include "libxfce4panel/libxfce4panel.h"
 
 G_BEGIN_DECLS
 
 #define PAGER_TYPE_PLUGIN (pager_plugin_get_type ())
 G_DECLARE_FINAL_TYPE (PagerPlugin, pager_plugin, PAGER, PLUGIN, XfcePanelPlugin)
 
-void pager_plugin_register_type (XfcePanelTypeModule *type_module);
+void
+pager_plugin_register_type (XfcePanelTypeModule *type_module);
 
 G_END_DECLS
 

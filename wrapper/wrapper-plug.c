@@ -17,19 +17,21 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
+
+#include "wrapper/wrapper-plug.h"
 
 #ifdef ENABLE_X11
-#include <wrapper/wrapper-plug-x11.h>
-#endif
-#ifdef HAVE_GTK_LAYER_SHELL
-#include <gtk-layer-shell/gtk-layer-shell.h>
-#include <wrapper/wrapper-plug-wayland.h>
+#include "wrapper/wrapper-plug-x11.h"
 #endif
 
-#include <common/panel-private.h>
-#include <wrapper/wrapper-plug.h>
+#ifdef HAVE_GTK_LAYER_SHELL
+#include "wrapper/wrapper-plug-wayland.h"
+#include <gtk-layer-shell/gtk-layer-shell.h>
+#endif
+
+#include "common/panel-private.h"
 
 
 

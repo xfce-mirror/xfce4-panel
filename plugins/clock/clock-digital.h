@@ -19,13 +19,16 @@
 #ifndef __CLOCK_DIGITAL_H__
 #define __CLOCK_DIGITAL_H__
 
+#include "clock-time.h"
+
+#include "libxfce4panel/libxfce4panel.h"
+
 #include <gtk/gtk.h>
-#include <libxfce4panel/libxfce4panel.h>
 
 G_BEGIN_DECLS
 
-#define DEFAULT_DIGITAL_TIME_FORMAT NC_("Time", "%R")
-#define DEFAULT_DIGITAL_DATE_FORMAT NC_("Date", "%Y-%m-%d")
+#define DEFAULT_DIGITAL_TIME_FORMAT NC_ ("Time", "%R")
+#define DEFAULT_DIGITAL_DATE_FORMAT NC_ ("Date", "%Y-%m-%d")
 
 typedef enum
 {
@@ -38,16 +41,17 @@ typedef enum
   CLOCK_PLUGIN_DIGITAL_FORMAT_MIN = CLOCK_PLUGIN_DIGITAL_FORMAT_DATE_TIME,
   CLOCK_PLUGIN_DIGITAL_FORMAT_MAX = CLOCK_PLUGIN_DIGITAL_FORMAT_TIME,
   CLOCK_PLUGIN_DIGITAL_FORMAT_DEFAULT = CLOCK_PLUGIN_DIGITAL_FORMAT_DATE_TIME,
-}
-ClockPluginDigitalFormat;
+} ClockPluginDigitalFormat;
 
 #define XFCE_CLOCK_TYPE_DIGITAL (xfce_clock_digital_get_type ())
 G_DECLARE_FINAL_TYPE (XfceClockDigital, xfce_clock_digital, XFCE_CLOCK, DIGITAL, GtkBox)
 
-void       xfce_clock_digital_register_type (XfcePanelTypeModule *type_module);
+void
+xfce_clock_digital_register_type (XfcePanelTypeModule *type_module);
 
-GtkWidget *xfce_clock_digital_new           (ClockTime           *time,
-                                             ClockSleepMonitor   *sleep_monitor) G_GNUC_MALLOC;
+GtkWidget *
+xfce_clock_digital_new (ClockTime *time,
+                        ClockSleepMonitor *sleep_monitor) G_GNUC_MALLOC;
 
 G_END_DECLS
 
