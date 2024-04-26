@@ -30,23 +30,31 @@ G_BEGIN_DECLS
 #define SYSTRAY_TYPE_SOCKET (systray_socket_get_type ())
 G_DECLARE_FINAL_TYPE (SystraySocket, systray_socket, SYSTRAY, SOCKET, GtkSocket)
 
-void             systray_socket_register_type (GTypeModule     *type_module);
+void
+systray_socket_register_type (GTypeModule *type_module);
 
-GtkWidget       *systray_socket_new           (GdkScreen       *screen,
-                                               Window           window) G_GNUC_MALLOC;
+GtkWidget *
+systray_socket_new (GdkScreen *screen,
+                    Window window) G_GNUC_MALLOC;
 
-void             systray_socket_force_redraw  (SystraySocket   *socket);
+void
+systray_socket_force_redraw (SystraySocket *socket);
 
-gboolean         systray_socket_is_composited (SystraySocket   *socket);
+gboolean
+systray_socket_is_composited (SystraySocket *socket);
 
-const gchar     *systray_socket_get_name      (SystraySocket   *socket);
+const gchar *
+systray_socket_get_name (SystraySocket *socket);
 
-Window          *systray_socket_get_window    (SystraySocket   *socket);
+Window *
+systray_socket_get_window (SystraySocket *socket);
 
-gboolean         systray_socket_get_hidden    (SystraySocket   *socket);
+gboolean
+systray_socket_get_hidden (SystraySocket *socket);
 
-void             systray_socket_set_hidden    (SystraySocket   *socket,
-                                               gboolean         hidden);
+void
+systray_socket_set_hidden (SystraySocket *socket,
+                           gboolean hidden);
 
 G_END_DECLS
 

@@ -23,17 +23,20 @@
 
 G_BEGIN_DECLS
 
-gulong                 sn_signal_connect_weak                  (gpointer                 instance,
-                                                                const gchar             *detailed_signal,
-                                                                GCallback                c_handler,
-                                                                gpointer                 data);
+gulong
+sn_signal_connect_weak (gpointer instance,
+                        const gchar *detailed_signal,
+                        GCallback c_handler,
+                        gpointer data);
 
-gulong                 sn_signal_connect_weak_swapped          (gpointer                 instance,
-                                                                const gchar             *detailed_signal,
-                                                                GCallback                c_handler,
-                                                                gpointer                 data);
+gulong
+sn_signal_connect_weak_swapped (gpointer instance,
+                                const gchar *detailed_signal,
+                                GCallback c_handler,
+                                gpointer data);
 
-gboolean               sn_container_has_children               (GtkWidget               *widget);
+gboolean
+sn_container_has_children (GtkWidget *widget);
 
 G_END_DECLS
 

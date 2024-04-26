@@ -17,23 +17,19 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
+#include "panel/panel-application.h"
+#include "panel/panel-dialogs.h"
+#include "panel/panel-item-dialog.h"
+#include "panel/panel-module-factory.h"
+#include "panel/panel-module.h"
+#include "panel/panel-preferences-dialog.h"
 
-#include <common/panel-private.h>
-#include <common/panel-utils.h>
-#include <libxfce4panel/libxfce4panel.h>
-
-#include <panel/panel-application.h>
-#include <panel/panel-item-dialog.h>
-#include <panel/panel-dialogs.h>
-#include <panel/panel-module.h>
-#include <panel/panel-module-factory.h>
-#include <panel/panel-preferences-dialog.h>
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
+#include "libxfce4panel/libxfce4panel.h"
 
 
 
@@ -41,73 +37,88 @@
 
 
 
-static void         panel_item_dialog_finalize               (GObject            *object);
-static void         panel_item_dialog_response               (GtkDialog          *dialog,
-                                                              gint                response_id);
-static void         panel_item_dialog_unique_changed         (PanelModuleFactory *factory,
-                                                              PanelModule        *module,
-                                                              PanelItemDialog    *dialog);
-static gboolean     panel_item_dialog_unique_changed_foreach (GtkTreeModel       *model,
-                                                              GtkTreePath        *path,
-                                                              GtkTreeIter        *iter,
-                                                              gpointer            user_data);
-static gboolean     panel_item_dialog_separator_func         (GtkTreeModel       *model,
-                                                              GtkTreeIter        *iter,
-                                                              gpointer            user_data);
-static void         panel_item_dialog_selection_changed      (GtkTreeSelection   *selection,
-                                                              PanelItemDialog    *dialog);
-static PanelModule *panel_item_dialog_get_selected_module    (GtkTreeView        *treeview);
-static void         panel_item_dialog_row_activated          (GtkTreeView        *treeview,
-                                                              GtkTreePath        *path,
-                                                              GtkTreeViewColumn  *column,
-                                                              gpointer            user_data);
-static void         panel_item_dialog_drag_begin             (GtkWidget          *treeview,
-                                                              GdkDragContext     *context,
-                                                              PanelItemDialog    *dialog);
-static void         panel_item_dialog_drag_data_get          (GtkWidget          *treeview,
-                                                              GdkDragContext     *context,
-                                                              GtkSelectionData   *selection_data,
-                                                              guint               info,
-                                                              guint               drag_time,
-                                                              PanelItemDialog    *dialog);
-static void         panel_item_dialog_drag_data_received     (GtkWidget          *treeview,
-                                                              GdkDragContext     *context,
-                                                              gint                x,
-                                                              gint                y,
-                                                              GtkSelectionData   *selection_data,
-                                                              guint               info,
-                                                              guint               drag_time,
-                                                              PanelItemDialog    *dialog);
-static void         panel_item_dialog_populate_store         (PanelItemDialog    *dialog);
-static gint         panel_item_dialog_compare_func           (GtkTreeModel       *model,
-                                                              GtkTreeIter        *a,
-                                                              GtkTreeIter        *b,
-                                                              gpointer            user_data);
-static gboolean     panel_item_dialog_visible_func           (GtkTreeModel       *model,
-                                                              GtkTreeIter        *iter,
-                                                              gpointer            user_data);
-static void         panel_item_dialog_text_renderer          (GtkTreeViewColumn  *column,
-                                                              GtkCellRenderer    *renderer,
-                                                              GtkTreeModel       *model,
-                                                              GtkTreeIter        *iter,
-                                                              gpointer            user_data);
+static void
+panel_item_dialog_finalize (GObject *object);
+static void
+panel_item_dialog_response (GtkDialog *dialog,
+                            gint response_id);
+static void
+panel_item_dialog_unique_changed (PanelModuleFactory *factory,
+                                  PanelModule *module,
+                                  PanelItemDialog *dialog);
+static gboolean
+panel_item_dialog_unique_changed_foreach (GtkTreeModel *model,
+                                          GtkTreePath *path,
+                                          GtkTreeIter *iter,
+                                          gpointer user_data);
+static gboolean
+panel_item_dialog_separator_func (GtkTreeModel *model,
+                                  GtkTreeIter *iter,
+                                  gpointer user_data);
+static void
+panel_item_dialog_selection_changed (GtkTreeSelection *selection,
+                                     PanelItemDialog *dialog);
+static PanelModule *
+panel_item_dialog_get_selected_module (GtkTreeView *treeview);
+static void
+panel_item_dialog_row_activated (GtkTreeView *treeview,
+                                 GtkTreePath *path,
+                                 GtkTreeViewColumn *column,
+                                 gpointer user_data);
+static void
+panel_item_dialog_drag_begin (GtkWidget *treeview,
+                              GdkDragContext *context,
+                              PanelItemDialog *dialog);
+static void
+panel_item_dialog_drag_data_get (GtkWidget *treeview,
+                                 GdkDragContext *context,
+                                 GtkSelectionData *selection_data,
+                                 guint info,
+                                 guint drag_time,
+                                 PanelItemDialog *dialog);
+static void
+panel_item_dialog_drag_data_received (GtkWidget *treeview,
+                                      GdkDragContext *context,
+                                      gint x,
+                                      gint y,
+                                      GtkSelectionData *selection_data,
+                                      guint info,
+                                      guint drag_time,
+                                      PanelItemDialog *dialog);
+static void
+panel_item_dialog_populate_store (PanelItemDialog *dialog);
+static gint
+panel_item_dialog_compare_func (GtkTreeModel *model,
+                                GtkTreeIter *a,
+                                GtkTreeIter *b,
+                                gpointer user_data);
+static gboolean
+panel_item_dialog_visible_func (GtkTreeModel *model,
+                                GtkTreeIter *iter,
+                                gpointer user_data);
+static void
+panel_item_dialog_text_renderer (GtkTreeViewColumn *column,
+                                 GtkCellRenderer *renderer,
+                                 GtkTreeModel *model,
+                                 GtkTreeIter *iter,
+                                 gpointer user_data);
 
 
 
 struct _PanelItemDialog
 {
-  XfceTitledDialog  __parent__;
+  XfceTitledDialog __parent__;
 
-  PanelApplication   *application;
+  PanelApplication *application;
 
   PanelModuleFactory *factory;
 
-  PanelWindow        *active;
+  PanelWindow *active;
 
   /* pointers to list */
-  GtkListStore       *store;
-  GtkTreeView        *treeview;
-  GtkWidget          *add_button;
+  GtkListStore *store;
+  GtkTreeView *treeview;
+  GtkWidget *add_button;
 };
 
 enum
@@ -118,13 +129,11 @@ enum
   N_COLUMNS
 };
 
-static const GtkTargetEntry drag_targets[] =
-{
+static const GtkTargetEntry drag_targets[] = {
   { "xfce-panel/plugin-name", 0, 0 }
 };
 
-static const GtkTargetEntry drop_targets[] =
-{
+static const GtkTargetEntry drop_targets[] = {
   { "xfce-panel/plugin-widget", GTK_TARGET_SAME_APP, 0 }
 };
 
@@ -141,7 +150,7 @@ static PanelItemDialog *dialog_singleton = NULL;
 static void
 panel_item_dialog_class_init (PanelItemDialogClass *klass)
 {
-  GObjectClass   *gobject_class;
+  GObjectClass *gobject_class;
   GtkDialogClass *gtkdialog_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
@@ -156,18 +165,18 @@ panel_item_dialog_class_init (PanelItemDialogClass *klass)
 static void
 panel_item_dialog_init (PanelItemDialog *dialog)
 {
-  GtkWidget         *main_vbox;
-  GtkWidget         *hbox;
-  GtkWidget         *button;
-  GtkWidget         *label;
-  GtkWidget         *entry;
-  GtkWidget         *scroll;
-  GtkWidget         *treeview;
-  GtkWidget         *icon;
-  GtkTreeModel      *filter;
+  GtkWidget *main_vbox;
+  GtkWidget *hbox;
+  GtkWidget *button;
+  GtkWidget *label;
+  GtkWidget *entry;
+  GtkWidget *scroll;
+  GtkWidget *treeview;
+  GtkWidget *icon;
+  GtkTreeModel *filter;
   GtkTreeViewColumn *column;
-  GtkCellRenderer   *renderer;
-  GtkTreeSelection  *selection;
+  GtkCellRenderer *renderer;
+  GtkTreeSelection *selection;
 
   dialog->application = panel_application_get ();
 
@@ -181,13 +190,13 @@ panel_item_dialog_init (PanelItemDialog *dialog)
 
   /* monitor unique changes */
   g_signal_connect (G_OBJECT (dialog->factory), "unique-changed",
-      G_CALLBACK (panel_item_dialog_unique_changed), dialog);
+                    G_CALLBACK (panel_item_dialog_unique_changed), dialog);
 
   gtk_window_set_title (GTK_WINDOW (dialog), _("Add New Items"));
   gtk_window_set_icon_name (GTK_WINDOW (dialog), "list-add");
   gtk_window_set_default_size (GTK_WINDOW (dialog), 400, 500);
   gtk_window_set_type_hint (GTK_WINDOW (dialog), GDK_WINDOW_TYPE_HINT_NORMAL);
-#if !LIBXFCE4UI_CHECK_VERSION (4, 19, 3)
+#if !LIBXFCE4UI_CHECK_VERSION(4, 19, 3)
   xfce_titled_dialog_create_action_area (XFCE_TITLED_DIALOG (dialog));
 #endif
 
@@ -268,7 +277,7 @@ panel_item_dialog_init (PanelItemDialog *dialog)
 
   /* remove plugin when dropping it back in the treeview */
   gtk_drag_dest_set (GTK_WIDGET (treeview), GTK_DEST_DEFAULT_ALL,
-      drop_targets, G_N_ELEMENTS (drop_targets), GDK_ACTION_MOVE);
+                     drop_targets, G_N_ELEMENTS (drop_targets), GDK_ACTION_MOVE);
   g_signal_connect (G_OBJECT (treeview), "drag-data-received", G_CALLBACK (panel_item_dialog_drag_data_received), dialog);
 
   /* icon renderer */
@@ -295,8 +304,7 @@ panel_item_dialog_finalize (GObject *object)
   PanelItemDialog *dialog = PANEL_ITEM_DIALOG (object);
 
   /* disconnect unique-changed signal */
-  g_signal_handlers_disconnect_by_func (G_OBJECT (dialog->factory),
-      panel_item_dialog_unique_changed, dialog);
+  g_signal_handlers_disconnect_by_func (dialog->factory, panel_item_dialog_unique_changed, dialog);
 
   /* make the windows sensitive again */
   panel_application_windows_blocked (dialog->application, FALSE);
@@ -312,10 +320,10 @@ panel_item_dialog_finalize (GObject *object)
 
 static void
 panel_item_dialog_response (GtkDialog *gtk_dialog,
-                            gint       response_id)
+                            gint response_id)
 {
   PanelItemDialog *dialog = PANEL_ITEM_DIALOG (gtk_dialog);
-  PanelModule     *module;
+  PanelModule *module;
 
   panel_return_if_fail (PANEL_IS_ITEM_DIALOG (dialog));
   panel_return_if_fail (GTK_IS_TREE_VIEW (dialog->treeview));
@@ -330,9 +338,8 @@ panel_item_dialog_response (GtkDialog *gtk_dialog,
       module = panel_item_dialog_get_selected_module (dialog->treeview);
       if (G_LIKELY (module != NULL))
         {
-          panel_application_add_new_item (dialog->application,
-              dialog->active,
-              panel_module_get_name (module), NULL);
+          panel_application_add_new_item (dialog->application, dialog->active,
+                                          panel_module_get_name (module), NULL);
           g_object_unref (G_OBJECT (module));
         }
     }
@@ -349,8 +356,8 @@ panel_item_dialog_response (GtkDialog *gtk_dialog,
 
 static void
 panel_item_dialog_unique_changed (PanelModuleFactory *factory,
-                                  PanelModule        *module,
-                                  PanelItemDialog    *dialog)
+                                  PanelModule *module,
+                                  PanelItemDialog *dialog)
 {
   panel_return_if_fail (PANEL_IS_MODULE_FACTORY (factory));
   panel_return_if_fail (PANEL_IS_MODULE (module));
@@ -360,7 +367,7 @@ panel_item_dialog_unique_changed (PanelModuleFactory *factory,
   /* search the module and update its sensitivity */
   g_object_set_data (G_OBJECT (dialog->store), "dialog", dialog);
   gtk_tree_model_foreach (GTK_TREE_MODEL (dialog->store),
-      panel_item_dialog_unique_changed_foreach, module);
+                          panel_item_dialog_unique_changed_foreach, module);
   g_object_set_data (G_OBJECT (dialog->store), "dialog", NULL);
 
   /* update button sensitivity */
@@ -371,13 +378,13 @@ panel_item_dialog_unique_changed (PanelModuleFactory *factory,
 
 static gboolean
 panel_item_dialog_unique_changed_foreach (GtkTreeModel *model,
-                                          GtkTreePath  *path,
-                                          GtkTreeIter  *iter,
-                                          gpointer      user_data)
+                                          GtkTreePath *path,
+                                          GtkTreeIter *iter,
+                                          gpointer user_data)
 {
   PanelModule *module;
-  gboolean     result;
-  GtkWidget   *dialog;
+  gboolean result;
+  GtkWidget *dialog;
 
   panel_return_val_if_fail (PANEL_IS_MODULE (user_data), FALSE);
 
@@ -397,9 +404,10 @@ panel_item_dialog_unique_changed_foreach (GtkTreeModel *model,
       panel_return_val_if_fail (PANEL_IS_ITEM_DIALOG (dialog), FALSE);
 
       /* update the module unique status */
-      gtk_list_store_set (GTK_LIST_STORE (model), iter,
-                          COLUMN_SENSITIVE, panel_module_is_usable (module,
-                              gtk_widget_get_screen (dialog)), -1);
+      gtk_list_store_set (
+        GTK_LIST_STORE (model), iter,
+        COLUMN_SENSITIVE, panel_module_is_usable (module, gtk_widget_get_screen (dialog)),
+        -1);
     }
 
   g_object_unref (G_OBJECT (module));
@@ -412,8 +420,8 @@ panel_item_dialog_unique_changed_foreach (GtkTreeModel *model,
 
 static gboolean
 panel_item_dialog_separator_func (GtkTreeModel *model,
-                                  GtkTreeIter  *iter,
-                                  gpointer      user_data)
+                                  GtkTreeIter *iter,
+                                  gpointer user_data)
 {
   PanelModule *module;
 
@@ -430,10 +438,10 @@ panel_item_dialog_separator_func (GtkTreeModel *model,
 
 static void
 panel_item_dialog_selection_changed (GtkTreeSelection *selection,
-                                     PanelItemDialog  *dialog)
+                                     PanelItemDialog *dialog)
 {
   PanelModule *module;
-  gboolean     sensitive = FALSE;
+  gboolean sensitive = FALSE;
 
   panel_return_if_fail (PANEL_IS_ITEM_DIALOG (dialog));
   panel_return_if_fail (GTK_IS_TREE_SELECTION (selection));
@@ -454,9 +462,9 @@ static PanelModule *
 panel_item_dialog_get_selected_module (GtkTreeView *treeview)
 {
   GtkTreeSelection *selection;
-  GtkTreeModel     *model;
-  GtkTreeIter       iter;
-  PanelModule      *module = NULL;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  PanelModule *module = NULL;
 
   panel_return_val_if_fail (GTK_IS_TREE_VIEW (treeview), NULL);
 
@@ -499,12 +507,12 @@ panel_item_dialog_row_activated (GtkTreeView *treeview,
 
 
 static void
-panel_item_dialog_drag_begin (GtkWidget       *treeview,
-                              GdkDragContext  *context,
+panel_item_dialog_drag_begin (GtkWidget *treeview,
+                              GdkDragContext *context,
                               PanelItemDialog *dialog)
 {
-  PanelModule  *module;
-  const gchar  *icon_name;
+  PanelModule *module;
+  const gchar *icon_name;
   GtkIconTheme *theme;
 
   panel_return_if_fail (GTK_IS_TREE_VIEW (treeview));
@@ -538,12 +546,12 @@ panel_item_dialog_drag_begin (GtkWidget       *treeview,
 
 
 static void
-panel_item_dialog_drag_data_get (GtkWidget        *treeview,
-                                 GdkDragContext   *context,
+panel_item_dialog_drag_data_get (GtkWidget *treeview,
+                                 GdkDragContext *context,
                                  GtkSelectionData *selection_data,
-                                 guint             drag_info,
-                                 guint             drag_time,
-                                 PanelItemDialog  *dialog)
+                                 guint drag_info,
+                                 guint drag_time,
+                                 PanelItemDialog *dialog)
 {
   PanelModule *module;
   const gchar *internal_name;
@@ -558,7 +566,7 @@ panel_item_dialog_drag_data_get (GtkWidget        *treeview,
       /* set the internal module name as selection data */
       internal_name = panel_module_get_name (module);
       gtk_selection_data_set (selection_data, gtk_selection_data_get_target (selection_data), 8,
-          (guchar *) internal_name, strlen (internal_name));
+                              (guchar *) internal_name, strlen (internal_name));
       g_object_unref (G_OBJECT (module));
     }
 }
@@ -566,14 +574,14 @@ panel_item_dialog_drag_data_get (GtkWidget        *treeview,
 
 
 static void
-panel_item_dialog_drag_data_received (GtkWidget        *treeview,
-                                      GdkDragContext   *context,
-                                      gint              x,
-                                      gint              y,
+panel_item_dialog_drag_data_received (GtkWidget *treeview,
+                                      GdkDragContext *context,
+                                      gint x,
+                                      gint y,
                                       GtkSelectionData *selection_data,
-                                      guint             info,
-                                      guint             drag_time,
-                                      PanelItemDialog  *dialog)
+                                      guint info,
+                                      guint drag_time,
+                                      PanelItemDialog *dialog)
 {
   GtkWidget *widget;
 
@@ -596,9 +604,9 @@ panel_item_dialog_drag_data_received (GtkWidget        *treeview,
 static void
 panel_item_dialog_populate_store (PanelItemDialog *dialog)
 {
-  GList       *modules, *li;
-  gint         n;
-  GtkTreeIter  iter;
+  GList *modules, *li;
+  gint n;
+  GtkTreeIter iter;
   PanelModule *module;
 
   panel_return_if_fail (PANEL_IS_ITEM_DIALOG (dialog));
@@ -614,11 +622,12 @@ panel_item_dialog_populate_store (PanelItemDialog *dialog)
     {
       module = PANEL_MODULE (li->data);
 
-      gtk_list_store_insert_with_values (dialog->store, &iter, n,
-          COLUMN_MODULE, module,
-          COLUMN_ICON_NAME, panel_module_get_icon_name (module),
-          COLUMN_SENSITIVE, panel_module_is_usable (module,
-              gtk_widget_get_screen (GTK_WIDGET (dialog))), -1);
+      gtk_list_store_insert_with_values (
+        dialog->store, &iter, n,
+        COLUMN_MODULE, module,
+        COLUMN_ICON_NAME, panel_module_get_icon_name (module),
+        COLUMN_SENSITIVE, panel_module_is_usable (module, gtk_widget_get_screen (GTK_WIDGET (dialog))),
+        -1);
     }
 
   g_list_free (modules);
@@ -633,15 +642,15 @@ panel_item_dialog_populate_store (PanelItemDialog *dialog)
 
 static gint
 panel_item_dialog_compare_func (GtkTreeModel *model,
-                                GtkTreeIter  *a,
-                                GtkTreeIter  *b,
-                                gpointer      user_data)
+                                GtkTreeIter *a,
+                                GtkTreeIter *b,
+                                gpointer user_data)
 {
   PanelModule *module_a;
   PanelModule *module_b;
   const gchar *name_a;
   const gchar *name_b;
-  gint         result;
+  gint result;
 
   /* get modules a name */
   gtk_tree_model_get (model, a, COLUMN_MODULE, &module_a, -1);
@@ -652,26 +661,22 @@ panel_item_dialog_compare_func (GtkTreeModel *model,
       /* don't move the separator */
       result = 0;
     }
-  else if (g_strcmp0 (LAUNCHER_PLUGIN_NAME,
-                      panel_module_get_name (module_a)) == 0)
+  else if (g_strcmp0 (LAUNCHER_PLUGIN_NAME, panel_module_get_name (module_a)) == 0)
     {
       /* move the launcher to the first position */
       result = -1;
     }
-  else if (g_strcmp0 (LAUNCHER_PLUGIN_NAME,
-                      panel_module_get_name (module_b)) == 0)
+  else if (g_strcmp0 (LAUNCHER_PLUGIN_NAME, panel_module_get_name (module_b)) == 0)
     {
       /* move the launcher to the first position */
       result = 1;
     }
-  else if (g_strcmp0 (SEPARATOR_PLUGIN_NAME,
-                      panel_module_get_name (module_a)) == 0)
+  else if (g_strcmp0 (SEPARATOR_PLUGIN_NAME, panel_module_get_name (module_a)) == 0)
     {
       /* move the separator to the second position */
       result = -1;
     }
-  else if (g_strcmp0 (SEPARATOR_PLUGIN_NAME,
-                      panel_module_get_name (module_b)) == 0)
+  else if (g_strcmp0 (SEPARATOR_PLUGIN_NAME, panel_module_get_name (module_b)) == 0)
     {
       /* move the separator to the second position */
       result = 1;
@@ -703,18 +708,17 @@ panel_item_dialog_compare_func (GtkTreeModel *model,
 
 static gboolean
 panel_item_dialog_visible_func (GtkTreeModel *model,
-                                GtkTreeIter  *iter,
-                                gpointer      user_data)
+                                GtkTreeIter *iter,
+                                gpointer user_data)
 {
-
-  GtkEntry    *entry = GTK_ENTRY (user_data);
+  GtkEntry *entry = GTK_ENTRY (user_data);
   const gchar *text, *name, *comment;
   PanelModule *module;
-  gchar       *normalized;
-  gchar       *text_casefolded;
-  gchar       *name_casefolded;
-  gchar       *comment_casefolded;
-  gboolean     visible = FALSE;
+  gchar *normalized;
+  gchar *text_casefolded;
+  gchar *name_casefolded;
+  gchar *comment_casefolded;
+  gboolean visible = FALSE;
 
   /* search string from dialog */
   text = gtk_entry_get_text (entry);
@@ -773,13 +777,13 @@ panel_item_dialog_visible_func (GtkTreeModel *model,
 
 static void
 panel_item_dialog_text_renderer (GtkTreeViewColumn *column,
-                                 GtkCellRenderer   *renderer,
-                                 GtkTreeModel      *model,
-                                 GtkTreeIter       *iter,
-                                 gpointer           user_data)
+                                 GtkCellRenderer *renderer,
+                                 GtkTreeModel *model,
+                                 GtkTreeIter *iter,
+                                 gpointer user_data)
 {
   PanelModule *module;
-  gchar       *markup;
+  gchar *markup;
   const gchar *name, *comment;
 
   gtk_tree_model_get (model, iter, COLUMN_MODULE, &module, -1);
@@ -804,7 +808,7 @@ panel_item_dialog_text_renderer (GtkTreeViewColumn *column,
 void
 panel_item_dialog_show (PanelWindow *window)
 {
-  GdkScreen        *screen;
+  GdkScreen *screen;
   PanelApplication *application;
 
   panel_return_if_fail (window == NULL || PANEL_IS_WINDOW (window));
@@ -851,7 +855,7 @@ void
 panel_item_dialog_show_from_id (gint panel_id)
 {
   PanelApplication *application;
-  PanelWindow      *window;
+  PanelWindow *window;
 
   application = panel_application_get ();
   window = panel_application_get_window (application, panel_id);

@@ -17,23 +17,19 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_LOCALE_H
-#include <locale.h>
-#endif
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
 
 #include <libxfce4ui/libxfce4ui.h>
-
-#include <common/panel-private.h>
-#include <common/panel-utils.h>
 
 
 
 void
-_panel_utils_weak_notify (gpointer  data,
-                          GObject  *where_the_object_was)
+_panel_utils_weak_notify (gpointer data,
+                          GObject *where_the_object_was)
 {
   if (XFCE_IS_PANEL_PLUGIN (data))
     xfce_panel_plugin_unblock_menu (data);
@@ -44,7 +40,7 @@ _panel_utils_weak_notify (gpointer  data,
 
 
 static void
-panel_utils_help_button_clicked (GtkWidget       *button,
+panel_utils_help_button_clicked (GtkWidget *button,
                                  XfcePanelPlugin *panel_plugin)
 {
   GtkWidget *toplevel;
@@ -54,8 +50,8 @@ panel_utils_help_button_clicked (GtkWidget       *button,
 
   toplevel = gtk_widget_get_toplevel (button);
   panel_utils_show_help (GTK_WINDOW (toplevel),
-      xfce_panel_plugin_get_name (panel_plugin),
-      NULL);
+                         xfce_panel_plugin_get_name (panel_plugin),
+                         NULL);
 }
 
 
@@ -81,14 +77,14 @@ panel_utils_unblock_autohide (XfcePanelPlugin *panel_plugin)
 
 
 GtkBuilder *
-panel_utils_builder_new (XfcePanelPlugin  *panel_plugin,
-                         const gchar      *buffer,
-                         gsize             length,
-                         GObject         **dialog_return)
+panel_utils_builder_new (XfcePanelPlugin *panel_plugin,
+                         const gchar *buffer,
+                         gsize length,
+                         GObject **dialog_return)
 {
-  GError     *error = NULL;
+  GError *error = NULL;
   GtkBuilder *builder;
-  GObject    *dialog, *button;
+  GObject *dialog, *button;
 
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (panel_plugin), NULL);
 
@@ -106,19 +102,19 @@ panel_utils_builder_new (XfcePanelPlugin  *panel_plugin,
           g_object_weak_ref (G_OBJECT (dialog), _panel_utils_weak_notify, panel_plugin);
 
           g_signal_connect_swapped (dialog, "show",
-              G_CALLBACK (panel_utils_block_autohide), panel_plugin);
+                                    G_CALLBACK (panel_utils_block_autohide), panel_plugin);
           g_signal_connect_swapped (dialog, "hide",
-              G_CALLBACK (panel_utils_unblock_autohide), panel_plugin);
+                                    G_CALLBACK (panel_utils_unblock_autohide), panel_plugin);
 
           button = gtk_builder_get_object (builder, "close-button");
           if (G_LIKELY (button != NULL))
             g_signal_connect_swapped (G_OBJECT (button), "clicked",
-                G_CALLBACK (gtk_widget_destroy), dialog);
+                                      G_CALLBACK (gtk_widget_destroy), dialog);
 
           button = gtk_builder_get_object (builder, "help-button");
           if (G_LIKELY (button != NULL))
             g_signal_connect (G_OBJECT (button), "clicked",
-                G_CALLBACK (panel_utils_help_button_clicked), panel_plugin);
+                              G_CALLBACK (panel_utils_help_button_clicked), panel_plugin);
 
           if (G_LIKELY (dialog_return != NULL))
             *dialog_return = dialog;
@@ -144,7 +140,7 @@ panel_utils_builder_new (XfcePanelPlugin  *panel_plugin,
 
 
 void
-panel_utils_show_help (GtkWindow   *parent,
+panel_utils_show_help (GtkWindow *parent,
                        const gchar *page,
                        const gchar *offset)
 {
@@ -156,10 +152,10 @@ panel_utils_show_help (GtkWindow   *parent,
 gboolean
 panel_utils_device_grab (GtkWidget *widget)
 {
-  GdkScreen  *screen = gtk_widget_get_screen (widget);
+  GdkScreen *screen = gtk_widget_get_screen (widget);
   GdkDisplay *display = gdk_screen_get_display (screen);
-  GdkSeat    *seat = gdk_display_get_default_seat (display);
-  GdkWindow  *window = gdk_window_get_effective_toplevel (gtk_widget_get_window (widget));
+  GdkSeat *seat = gdk_display_get_default_seat (display);
+  GdkWindow *window = gdk_window_get_effective_toplevel (gtk_widget_get_window (widget));
 
   return xfce_gdk_device_grab (seat, window, GDK_SEAT_CAPABILITY_ALL, NULL);
 }
@@ -167,13 +163,13 @@ panel_utils_device_grab (GtkWidget *widget)
 
 
 void
-panel_utils_set_atk_info (GtkWidget   *widget,
+panel_utils_set_atk_info (GtkWidget *widget,
                           const gchar *name,
                           const gchar *description)
 {
-  static gboolean  initialized = FALSE;
-  static gboolean  atk_enabled = TRUE;
-  AtkObject       *object;
+  static gboolean initialized = FALSE;
+  static gboolean atk_enabled = TRUE;
+  AtkObject *object;
 
   panel_return_if_fail (GTK_IS_WIDGET (widget));
 

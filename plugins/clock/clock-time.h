@@ -19,45 +19,55 @@
 #ifndef __CLOCK_TIME_H__
 #define __CLOCK_TIME_H__
 
+#include "clock-sleep-monitor.h"
+
+#include "libxfce4panel/libxfce4panel.h"
+
 #include <glib-object.h>
 #include <libxfce4util/libxfce4util.h>
-#include <libxfce4panel/libxfce4panel.h>
-
-#include "clock-sleep-monitor.h"
 
 G_BEGIN_DECLS
 
 #define CLOCK_INTERVAL_SECOND (1)
 #define CLOCK_INTERVAL_MINUTE (60)
 
-typedef struct _ClockTimeTimeout   ClockTimeTimeout;
+typedef struct _ClockTimeTimeout ClockTimeTimeout;
 
 #define CLOCK_TYPE_TIME (clock_time_get_type ())
 G_DECLARE_FINAL_TYPE (ClockTime, clock_time, CLOCK, TIME, GObject)
 
-void                clock_time_register_type          (XfcePanelTypeModule *type_module);
+void
+clock_time_register_type (XfcePanelTypeModule *type_module);
 
-ClockTime          *clock_time_new                    (void);
+ClockTime *
+clock_time_new (void);
 
-ClockTimeTimeout   *clock_time_timeout_new            (guint                interval,
-                                                       ClockTime           *time,
-                                                       ClockSleepMonitor   *sleep_monitor,
-                                                       GCallback            c_handler,
-                                                       gpointer             gobject);
+ClockTimeTimeout *
+clock_time_timeout_new (guint interval,
+                        ClockTime *time,
+                        ClockSleepMonitor *sleep_monitor,
+                        GCallback c_handler,
+                        gpointer gobject);
 
-void                clock_time_timeout_set_interval   (ClockTimeTimeout    *timeout,
-                                                       guint                interval);
+void
+clock_time_timeout_set_interval (ClockTimeTimeout *timeout,
+                                 guint interval);
 
-void                clock_time_timeout_restart        (ClockTimeTimeout    *timeout);
+void
+clock_time_timeout_restart (ClockTimeTimeout *timeout);
 
-void                clock_time_timeout_free           (ClockTimeTimeout    *timeout);
+void
+clock_time_timeout_free (ClockTimeTimeout *timeout);
 
-GDateTime          *clock_time_get_time               (ClockTime           *time);
+GDateTime *
+clock_time_get_time (ClockTime *time);
 
-gchar              *clock_time_strdup_strftime        (ClockTime           *time,
-                                                       const gchar         *format);
+gchar *
+clock_time_strdup_strftime (ClockTime *time,
+                            const gchar *format);
 
-guint               clock_time_interval_from_format   (const gchar         *format);
+guint
+clock_time_interval_from_format (const gchar *format);
 
 G_END_DECLS
 

@@ -19,49 +19,48 @@
 
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-#ifdef HAVE_STRING_H
-#include <string.h>
+#include "config.h"
 #endif
 
-#include <gdk/gdk.h>
-#include <gtk/gtk.h>
-
-#include <libxfce4util/libxfce4util.h>
-#include <libxfce4ui/libxfce4ui.h>
-#include <common/panel-private.h>
-#include <common/panel-xfconf.h>
-#include <common/panel-utils.h>
-#include <common/panel-debug.h>
-
-#ifdef ENABLE_X11
-#include "systray.h"
-#include "systray-box.h"
-#include "systray-socket.h"
-#include "systray-manager.h"
-#endif
-
-#include "sn-backend.h"
 #include "sn-box.h"
 #include "sn-button.h"
 #include "sn-dialog.h"
 #include "sn-item.h"
 #include "sn-plugin.h"
 
+#ifdef ENABLE_X11
+#include "systray-box.h"
+#include "systray-manager.h"
+#include "systray-socket.h"
+#include "systray.h"
+#endif
+
+#include "common/panel-debug.h"
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
+#include "common/panel-xfconf.h"
+
+#include <libxfce4ui/libxfce4ui.h>
+#include <libxfce4util/libxfce4util.h>
 
 
-static void                  sn_plugin_construct                     (XfcePanelPlugin         *panel_plugin);
 
-static void                  sn_plugin_free                          (XfcePanelPlugin         *panel_plugin);
+static void
+sn_plugin_construct (XfcePanelPlugin *panel_plugin);
 
-static gboolean              sn_plugin_size_changed                  (XfcePanelPlugin         *panel_plugin,
-                                                                      gint                     size);
+static void
+sn_plugin_free (XfcePanelPlugin *panel_plugin);
 
-static void                  sn_plugin_mode_changed                  (XfcePanelPlugin         *panel_plugin,
-                                                                      XfcePanelPluginMode      mode);
+static gboolean
+sn_plugin_size_changed (XfcePanelPlugin *panel_plugin,
+                        gint size);
 
-static void                  sn_plugin_configure_plugin              (XfcePanelPlugin         *panel_plugin);
+static void
+sn_plugin_mode_changed (XfcePanelPlugin *panel_plugin,
+                        XfcePanelPluginMode mode);
+
+static void
+sn_plugin_configure_plugin (XfcePanelPlugin *panel_plugin);
 
 
 
@@ -130,7 +129,7 @@ sn_plugin_free (XfcePanelPlugin *panel_plugin)
     {
       gtk_container_remove (GTK_CONTAINER (plugin->box), plugin->systray_box);
       g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
-          systray_plugin_screen_changed, NULL);
+                                            systray_plugin_screen_changed, NULL);
     }
 #endif
 
@@ -149,7 +148,7 @@ sn_plugin_free (XfcePanelPlugin *panel_plugin)
 
 static gboolean
 sn_plugin_size_changed (XfcePanelPlugin *panel_plugin,
-                        gint             size)
+                        gint size)
 {
   SnPlugin *plugin = SN_PLUGIN (panel_plugin);
 
@@ -169,16 +168,16 @@ sn_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 
 
 static void
-sn_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
-                        XfcePanelPluginMode  mode)
+sn_plugin_mode_changed (XfcePanelPlugin *panel_plugin,
+                        XfcePanelPluginMode mode)
 {
-  SnPlugin       *plugin = SN_PLUGIN (panel_plugin);
-  GtkOrientation  orientation;
-  GtkOrientation  panel_orientation;
+  SnPlugin *plugin = SN_PLUGIN (panel_plugin);
+  GtkOrientation orientation;
+  GtkOrientation panel_orientation;
 
   panel_orientation = xfce_panel_plugin_get_orientation (panel_plugin);
-  orientation = mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL
-                ? GTK_ORIENTATION_VERTICAL : GTK_ORIENTATION_HORIZONTAL;
+  orientation = mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL ? GTK_ORIENTATION_VERTICAL
+                                                        : GTK_ORIENTATION_HORIZONTAL;
 
   sn_config_set_orientation (plugin->config, panel_orientation, orientation);
 #ifdef ENABLE_X11
@@ -192,8 +191,8 @@ sn_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
 
 
 static void
-sn_plugin_unblock_autohide (gpointer  data,
-                            GObject  *where_the_object_was)
+sn_plugin_unblock_autohide (gpointer data,
+                            GObject *where_the_object_was)
 {
   XfcePanelPlugin *panel_plugin = data;
 
@@ -223,7 +222,7 @@ sn_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 #ifdef HAVE_DBUSMENU
 static void
 sn_plugin_item_added (SnPlugin *plugin,
-                      SnItem   *item)
+                      SnItem *item)
 {
   GtkWidget *button;
 
@@ -239,7 +238,7 @@ sn_plugin_item_added (SnPlugin *plugin,
 
 
 gboolean
-sn_plugin_legacy_item_added (SnPlugin    *plugin,
+sn_plugin_legacy_item_added (SnPlugin *plugin,
                              const gchar *name)
 {
   return sn_config_add_known_legacy_item (plugin->config, name);
@@ -248,7 +247,7 @@ sn_plugin_legacy_item_added (SnPlugin    *plugin,
 #ifdef HAVE_DBUSMENU
 static void
 sn_plugin_item_removed (SnPlugin *plugin,
-                        SnItem   *item)
+                        SnItem *item)
 {
   sn_box_remove_item (SN_BOX (plugin->sn_box), item);
 }
@@ -259,7 +258,7 @@ static void
 update_button_visibility (SnPlugin *plugin)
 {
   gboolean visible = plugin->has_hidden_systray_items || plugin->has_hidden_sn_items;
-  gtk_widget_set_visible(GTK_WIDGET(plugin->button), visible);
+  gtk_widget_set_visible (GTK_WIDGET (plugin->button), visible);
 }
 
 
@@ -267,7 +266,7 @@ update_button_visibility (SnPlugin *plugin)
 static void
 systray_has_hidden_cb (SystrayBox *box,
                        GParamSpec *pspec,
-                       SnPlugin   *plugin)
+                       SnPlugin *plugin)
 {
   plugin->has_hidden_systray_items = systray_box_has_hidden_items (box);
   update_button_visibility (plugin);
@@ -276,9 +275,9 @@ systray_has_hidden_cb (SystrayBox *box,
 
 
 static void
-snbox_has_hidden_cb (SnBox      *box,
+snbox_has_hidden_cb (SnBox *box,
                      GParamSpec *pspec,
-                     SnPlugin   *plugin)
+                     SnPlugin *plugin)
 {
   plugin->has_hidden_sn_items = sn_box_has_hidden_items (box);
   update_button_visibility (plugin);
@@ -344,27 +343,27 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
       plugin->systray_box = systray_box_new ();
       gtk_box_pack_start (GTK_BOX (plugin->box), plugin->systray_box, TRUE, TRUE, 0);
       g_signal_connect (G_OBJECT (plugin->systray_box), "draw",
-          G_CALLBACK (systray_plugin_box_draw), plugin);
+                        G_CALLBACK (systray_plugin_box_draw), plugin);
       gtk_container_set_border_width (GTK_CONTAINER (plugin->systray_box), 0);
       gtk_widget_show (plugin->systray_box);
 
       /* monitor screen changes */
       g_signal_connect (G_OBJECT (plugin), "screen-changed",
-          G_CALLBACK (systray_plugin_screen_changed), NULL);
+                        G_CALLBACK (systray_plugin_screen_changed), NULL);
       systray_plugin_screen_changed (GTK_WIDGET (plugin), NULL);
 
       /* restart internally if compositing changed */
       g_signal_connect_object (gdk_screen_get_default (), "composited-changed",
-         G_CALLBACK (systray_plugin_composited_changed), plugin, G_CONNECT_SWAPPED);
+                               G_CALLBACK (systray_plugin_composited_changed), plugin, G_CONNECT_SWAPPED);
 
       g_signal_connect_swapped (plugin->config, "configuration-changed",
                                 G_CALLBACK (gtk_widget_queue_resize), plugin->systray_box);
       g_signal_connect (plugin->config, "configuration-changed",
-                                G_CALLBACK (systray_plugin_configuration_changed), plugin);
+                        G_CALLBACK (systray_plugin_configuration_changed), plugin);
       g_signal_connect (plugin->config, "legacy-items-list-changed",
-                                G_CALLBACK (systray_plugin_configuration_changed), plugin);
-      g_signal_connect (G_OBJECT(plugin->systray_box), "notify::has-hidden",
-                        G_CALLBACK(systray_has_hidden_cb), plugin);
+                        G_CALLBACK (systray_plugin_configuration_changed), plugin);
+      g_signal_connect (G_OBJECT (plugin->systray_box), "notify::has-hidden",
+                        G_CALLBACK (systray_has_hidden_cb), plugin);
     }
 #endif
 
@@ -386,12 +385,12 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
 #endif
 
   /* Systray arrow button */
-  plugin->button = xfce_arrow_button_new(GTK_ARROW_RIGHT);
-  gtk_box_pack_start(GTK_BOX(plugin->box), plugin->button, FALSE, FALSE, 0);
-  g_signal_connect(G_OBJECT(plugin->button), "toggled",
-                   G_CALLBACK(sn_plugin_button_toggled), plugin);
-  gtk_button_set_relief(GTK_BUTTON(plugin->button), GTK_RELIEF_NONE);
-  g_signal_connect (G_OBJECT(plugin->sn_box), "notify::has-hidden",
-                    G_CALLBACK(snbox_has_hidden_cb), plugin);
-  xfce_panel_plugin_add_action_widget(XFCE_PANEL_PLUGIN(plugin), plugin->button);
+  plugin->button = xfce_arrow_button_new (GTK_ARROW_RIGHT);
+  gtk_box_pack_start (GTK_BOX (plugin->box), plugin->button, FALSE, FALSE, 0);
+  g_signal_connect (G_OBJECT (plugin->button), "toggled",
+                    G_CALLBACK (sn_plugin_button_toggled), plugin);
+  gtk_button_set_relief (GTK_BUTTON (plugin->button), GTK_RELIEF_NONE);
+  g_signal_connect (G_OBJECT (plugin->sn_box), "notify::has-hidden",
+                    G_CALLBACK (snbox_has_hidden_cb), plugin);
+  xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button);
 }

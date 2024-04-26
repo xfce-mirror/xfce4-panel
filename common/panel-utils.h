@@ -19,31 +19,44 @@
 #ifndef __PANEL_UTILS_H__
 #define __PANEL_UTILS_H__
 
+#include "libxfce4panel/libxfce4panel.h"
+
 #include <gtk/gtk.h>
-#include <libxfce4panel/libxfce4panel.h>
 
-void        _panel_utils_weak_notify   (gpointer          data,
-                                        GObject          *where_the_object_was);
+G_BEGIN_DECLS
 
-GtkBuilder *panel_utils_builder_new    (XfcePanelPlugin  *panel_plugin,
-                                        const gchar      *buffer,
-                                        gsize             length,
-                                        GObject         **dialog_return) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+void
+_panel_utils_weak_notify (gpointer data,
+                          GObject *where_the_object_was);
 
-void        panel_utils_show_help      (GtkWindow        *parent,
-                                        const gchar      *page,
-                                        const gchar      *offset);
+GtkBuilder *
+panel_utils_builder_new (XfcePanelPlugin *panel_plugin,
+                         const gchar *buffer,
+                         gsize length,
+                         GObject **dialog_return) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
-gboolean    panel_utils_device_grab    (GtkWidget        *widget);
+void
+panel_utils_show_help (GtkWindow *parent,
+                       const gchar *page,
+                       const gchar *offset);
 
-void        panel_utils_set_atk_info   (GtkWidget        *widget,
-                                        const gchar      *name,
-                                        const gchar      *description);
+gboolean
+panel_utils_device_grab (GtkWidget *widget);
 
-void        panel_utils_destroy_later  (GtkWidget        *widget);
+void
+panel_utils_set_atk_info (GtkWidget *widget,
+                          const gchar *name,
+                          const gchar *description);
 
-void        panel_utils_wl_surface_commit (GtkWidget        *widget);
+void
+panel_utils_destroy_later (GtkWidget *widget);
 
-void        panel_utils_widget_remap      (GtkWidget        *widget);
+void
+panel_utils_wl_surface_commit (GtkWidget *widget);
+
+void
+panel_utils_widget_remap (GtkWidget *widget);
+
+G_END_DECLS
 
 #endif /* !__PANEL_UTILS_H__ */
