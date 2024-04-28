@@ -17,17 +17,18 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#include <libxfce4ui/libxfce4ui.h>
-#include <common/panel-xfconf.h>
-#include <common/panel-utils.h>
-#include <common/panel-private.h>
-
-#include "tasklist.h"
-#include "tasklist-widget.h"
 #include "tasklist-dialog_ui.h"
+#include "tasklist-widget.h"
+#include "tasklist.h"
+
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
+#include "common/panel-xfconf.h"
+
+#include <libxfce4ui/libxfce4ui.h>
 
 
 #define HANDLE_SIZE (4)
@@ -38,25 +39,32 @@ struct _TasklistPlugin
   XfcePanelPlugin __parent__;
 
   /* the tasklist widget */
-  GtkWidget     *tasklist;
-  GtkWidget     *handle;
+  GtkWidget *tasklist;
+  GtkWidget *handle;
 };
 
 
 
-static void     tasklist_plugin_construct               (XfcePanelPlugin    *panel_plugin);
-static void     tasklist_plugin_mode_changed            (XfcePanelPlugin    *panel_plugin,
-                                                         XfcePanelPluginMode mode);
-static gboolean tasklist_plugin_size_changed            (XfcePanelPlugin    *panel_plugin,
-                                                         gint                size);
-static void     tasklist_plugin_nrows_changed           (XfcePanelPlugin    *panel_plugin,
-                                                         guint               nrows);
-static void     tasklist_plugin_screen_position_changed (XfcePanelPlugin    *panel_plugin,
-                                                         XfceScreenPosition  position);
-static void     tasklist_plugin_configure_plugin        (XfcePanelPlugin    *panel_plugin);
-static gboolean tasklist_plugin_handle_draw             (GtkWidget          *widget,
-                                                         cairo_t            *cr,
-                                                         TasklistPlugin     *plugin);
+static void
+tasklist_plugin_construct (XfcePanelPlugin *panel_plugin);
+static void
+tasklist_plugin_mode_changed (XfcePanelPlugin *panel_plugin,
+                              XfcePanelPluginMode mode);
+static gboolean
+tasklist_plugin_size_changed (XfcePanelPlugin *panel_plugin,
+                              gint size);
+static void
+tasklist_plugin_nrows_changed (XfcePanelPlugin *panel_plugin,
+                               guint nrows);
+static void
+tasklist_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
+                                         XfceScreenPosition position);
+static void
+tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin);
+static gboolean
+tasklist_plugin_handle_draw (GtkWidget *widget,
+                             cairo_t *cr,
+                             TasklistPlugin *plugin);
 
 
 
@@ -97,7 +105,7 @@ tasklist_plugin_init (TasklistPlugin *plugin)
   plugin->handle = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_box_pack_start (GTK_BOX (box), plugin->handle, FALSE, FALSE, 0);
   g_signal_connect (G_OBJECT (plugin->handle), "draw",
-      G_CALLBACK (tasklist_plugin_handle_draw), plugin);
+                    G_CALLBACK (tasklist_plugin_handle_draw), plugin);
   gtk_widget_set_size_request (plugin->handle, 8, 8);
   gtk_widget_show (plugin->handle);
 
@@ -114,9 +122,8 @@ tasklist_plugin_init (TasklistPlugin *plugin)
 static void
 tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
-  TasklistPlugin      *plugin = TASKLIST_PLUGIN (panel_plugin);
-  const PanelProperty  properties[] =
-  {
+  TasklistPlugin *plugin = TASKLIST_PLUGIN (panel_plugin);
+  const PanelProperty properties[] = {
     { "show-labels", G_TYPE_BOOLEAN },
     { "grouping", G_TYPE_BOOLEAN },
     { "include-all-workspaces", G_TYPE_BOOLEAN },
@@ -151,8 +158,8 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
 
 
 static void
-tasklist_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
-                              XfcePanelPluginMode  mode)
+tasklist_plugin_mode_changed (XfcePanelPlugin *panel_plugin,
+                              XfcePanelPluginMode mode)
 {
   TasklistPlugin *plugin = TASKLIST_PLUGIN (panel_plugin);
 
@@ -164,7 +171,7 @@ tasklist_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
 
 static gboolean
 tasklist_plugin_size_changed (XfcePanelPlugin *panel_plugin,
-                              gint             size)
+                              gint size)
 {
   TasklistPlugin *plugin = TASKLIST_PLUGIN (panel_plugin);
 
@@ -178,7 +185,7 @@ tasklist_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 
 static void
 tasklist_plugin_nrows_changed (XfcePanelPlugin *panel_plugin,
-                               guint            nrows)
+                               guint nrows)
 {
   TasklistPlugin *plugin = TASKLIST_PLUGIN (panel_plugin);
 
@@ -189,8 +196,8 @@ tasklist_plugin_nrows_changed (XfcePanelPlugin *panel_plugin,
 
 
 static void
-tasklist_plugin_screen_position_changed (XfcePanelPlugin    *panel_plugin,
-                                         XfceScreenPosition  position)
+tasklist_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
+                                         XfceScreenPosition position)
 {
   TasklistPlugin *plugin = TASKLIST_PLUGIN (panel_plugin);
 
@@ -205,9 +212,9 @@ static void
 tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   TasklistPlugin *plugin = TASKLIST_PLUGIN (panel_plugin);
-  GtkBuilder     *builder;
-  GObject        *dialog;
-  GObject        *object;
+  GtkBuilder *builder;
+  GObject *dialog;
+  GObject *object;
 
   /* setup the dialog */
   builder = panel_utils_builder_new (panel_plugin, tasklist_dialog_ui,
@@ -221,17 +228,17 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_object_bind_property (G_OBJECT (plugin->tasklist), (name), \
                           G_OBJECT (object), (property), \
                           G_BINDING_BIDIRECTIONAL \
-                          | G_BINDING_SYNC_CREATE);
+                            | G_BINDING_SYNC_CREATE);
 
 #define TASKLIST_DIALOG_BIND_INV(name, property) \
   object = gtk_builder_get_object (builder, (name)); \
   panel_return_if_fail (G_IS_OBJECT (object)); \
   g_object_bind_property (G_OBJECT (plugin->tasklist), \
-                          name,  G_OBJECT (object), \
+                          name, G_OBJECT (object), \
                           property, \
                           G_BINDING_BIDIRECTIONAL \
-                          | G_BINDING_SYNC_CREATE \
-                          | G_BINDING_INVERT_BOOLEAN);
+                            | G_BINDING_SYNC_CREATE \
+                            | G_BINDING_INVERT_BOOLEAN);
 
   TASKLIST_DIALOG_BIND ("show-labels", "active")
   TASKLIST_DIALOG_BIND ("grouping", "active")
@@ -260,15 +267,15 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
 
 static gboolean
-tasklist_plugin_handle_draw (GtkWidget      *widget,
-                             cairo_t        *cr,
+tasklist_plugin_handle_draw (GtkWidget *widget,
+                             cairo_t *cr,
                              TasklistPlugin *plugin)
 {
-  GtkAllocation     allocation;
-  GtkStyleContext  *ctx;
-  gdouble           x, y;
-  guint             i;
-  GdkRGBA           fg_rgba;
+  GtkAllocation allocation;
+  GtkStyleContext *ctx;
+  gdouble x, y;
+  guint i;
+  GdkRGBA fg_rgba;
 
   panel_return_val_if_fail (TASKLIST_IS_PLUGIN (plugin), FALSE);
   panel_return_val_if_fail (plugin->handle == widget, FALSE);
@@ -291,8 +298,7 @@ tasklist_plugin_handle_draw (GtkWidget      *widget,
   /* draw the handle */
   for (i = 0; i < 3; i++)
     {
-      if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
-          GTK_ORIENTATION_HORIZONTAL)
+      if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_HORIZONTAL)
         {
           cairo_move_to (cr, x, y + (i * HANDLE_SIZE) - (HANDLE_SIZE / 2));
           cairo_line_to (cr, x + HANDLE_SIZE, y + (i * HANDLE_SIZE) - (HANDLE_SIZE / 2));

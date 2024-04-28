@@ -17,29 +17,21 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STDLIB_H
-#include <stdlib.h>
-#endif
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
+#include "migrate/migrate-config.h"
 
-#include <gtk/gtk.h>
-#include <xfconf/xfconf.h>
-#include <common/panel-private.h>
-#include <migrate/migrate-config.h>
+#include "common/panel-private.h"
 
 
 
 static guint
 migrate_config_strchr_count (const gchar *haystack,
-                             const gchar  needle)
+                             const gchar needle)
 {
   const gchar *p;
-  guint        count = 0;
+  guint count = 0;
 
   if (G_UNLIKELY (haystack != NULL))
     {
@@ -59,7 +51,7 @@ migrate_config_session_menu (gpointer key,
                              gpointer channel)
 {
   const GValue *gvalue = value;
-  const gchar  *prop = key;
+  const gchar *prop = key;
 
   /* skip non root plugin properties */
   if (!G_VALUE_HOLDS_STRING (gvalue)
@@ -116,12 +108,12 @@ migrate_config_action_48 (gpointer key,
                           gpointer channel)
 {
   const GValue *gvalue = value;
-  const gchar  *prop = key;
-  gchar         str[64];
-  gint          first_action_int;
-  gint          second_action_int;
-  const gchar  *first_action;
-  const gchar  *second_action;
+  const gchar *prop = key;
+  gchar str[64];
+  gint first_action_int;
+  gint second_action_int;
+  const gchar *first_action;
+  const gchar *second_action;
 
   /* skip non root plugin properties */
   if (!G_VALUE_HOLDS_STRING (gvalue)
@@ -172,14 +164,14 @@ migrate_config_action_48 (gpointer key,
 
 
 gboolean
-migrate_config (XfconfChannel  *channel,
-                gint            configver,
-                GError        **error)
+migrate_config (XfconfChannel *channel,
+                gint configver,
+                GError **error)
 {
   GHashTable *plugins;
-  guint       n, n_panels;
-  gchar       buf[50];
-  gboolean    horizontal;
+  guint n, n_panels;
+  gchar buf[50];
+  gboolean horizontal;
 
   plugins = xfconf_channel_get_properties (channel, PLUGINS_PROPERTY_PREFIX);
 

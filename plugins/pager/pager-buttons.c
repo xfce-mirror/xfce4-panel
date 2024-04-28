@@ -17,60 +17,72 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
-
-#include <libxfce4ui/libxfce4ui.h>
-#include <common/panel-private.h>
 
 #include "pager-buttons.h"
 
+#include "common/panel-private.h"
+
+#include <libxfce4ui/libxfce4ui.h>
 
 
-static void pager_buttons_get_property               (GObject       *object,
-                                                      guint          prop_id,
-                                                      GValue        *value,
-                                                      GParamSpec    *pspec);
-static void pager_buttons_set_property               (GObject       *object,
-                                                      guint          prop_id,
-                                                      const GValue  *value,
-                                                      GParamSpec    *pspec);
-static void pager_buttons_finalize                   (GObject       *object);
-static void pager_buttons_queue_rebuild              (PagerButtons  *pager);
-static void pager_buttons_screen_workspace_changed   (XfwWorkspaceGroup *group,
-                                                      XfwWorkspace  *previous_workspace,
-                                                      PagerButtons  *pager);
-static void pager_buttons_screen_workspace_created   (XfwWorkspaceGroup *group,
-                                                      XfwWorkspace  *created_workspace,
-                                                      PagerButtons  *pager);
-static void pager_buttons_screen_workspace_destroyed (XfwWorkspaceGroup *group,
-                                                      XfwWorkspace  *destroyed_workspace,
-                                                      PagerButtons  *pager);
-static void pager_buttons_screen_viewports_changed   (XfwWorkspaceGroup *group,
-                                                      PagerButtons  *pager);
-static void pager_buttons_workspace_button_toggled   (GtkWidget     *button,
-                                                      XfwWorkspace  *workspace);
-static void pager_buttons_workspace_button_label     (XfwWorkspace  *workspace,
-                                                      GtkWidget     *label);
-static void pager_buttons_viewport_button_toggled    (GtkWidget     *button,
-                                                      PagerButtons  *pager);
+
+static void
+pager_buttons_get_property (GObject *object,
+                            guint prop_id,
+                            GValue *value,
+                            GParamSpec *pspec);
+static void
+pager_buttons_set_property (GObject *object,
+                            guint prop_id,
+                            const GValue *value,
+                            GParamSpec *pspec);
+static void
+pager_buttons_finalize (GObject *object);
+static void
+pager_buttons_queue_rebuild (PagerButtons *pager);
+static void
+pager_buttons_screen_workspace_changed (XfwWorkspaceGroup *group,
+                                        XfwWorkspace *previous_workspace,
+                                        PagerButtons *pager);
+static void
+pager_buttons_screen_workspace_created (XfwWorkspaceGroup *group,
+                                        XfwWorkspace *created_workspace,
+                                        PagerButtons *pager);
+static void
+pager_buttons_screen_workspace_destroyed (XfwWorkspaceGroup *group,
+                                          XfwWorkspace *destroyed_workspace,
+                                          PagerButtons *pager);
+static void
+pager_buttons_screen_viewports_changed (XfwWorkspaceGroup *group,
+                                        PagerButtons *pager);
+static void
+pager_buttons_workspace_button_toggled (GtkWidget *button,
+                                        XfwWorkspace *workspace);
+static void
+pager_buttons_workspace_button_label (XfwWorkspace *workspace,
+                                      GtkWidget *label);
+static void
+pager_buttons_viewport_button_toggled (GtkWidget *button,
+                                       PagerButtons *pager);
 
 
 
 struct _PagerButtons
 {
-  GtkGrid         __parent__;
+  GtkGrid __parent__;
 
-  GSList         *buttons;
+  GSList *buttons;
 
-  guint           rebuild_id;
+  guint rebuild_id;
 
-  XfwScreen      *xfw_screen;
+  XfwScreen *xfw_screen;
   XfwWorkspaceGroup *workspace_group;
 
-  gint            rows;
-  gboolean        numbering;
-  GtkOrientation  orientation;
+  gint rows;
+  gboolean numbering;
+  GtkOrientation orientation;
 };
 
 enum
@@ -107,31 +119,27 @@ pager_buttons_class_init (PagerButtonsClass *klass)
 
   g_object_class_install_property (gobject_class,
                                    PROP_SCREEN,
-                                   g_param_spec_object ("screen",
-                                                         NULL, NULL,
-                                                         XFW_TYPE_SCREEN,
-                                                         G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS
-                                                         | G_PARAM_CONSTRUCT_ONLY));
+                                   g_param_spec_object ("screen", NULL, NULL,
+                                                        XFW_TYPE_SCREEN,
+                                                        G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS
+                                                          | G_PARAM_CONSTRUCT_ONLY));
 
   g_object_class_install_property (gobject_class,
                                    PROP_ROWS,
-                                   g_param_spec_int ("rows",
-                                                     NULL, NULL,
+                                   g_param_spec_int ("rows", NULL, NULL,
                                                      1, 100, 1,
                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_ORIENTATION,
-                                   g_param_spec_enum ("orientation",
-                                                     NULL, NULL,
-                                                     GTK_TYPE_ORIENTATION,
-                                                     GTK_ORIENTATION_HORIZONTAL,
-                                                     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+                                   g_param_spec_enum ("orientation", NULL, NULL,
+                                                      GTK_TYPE_ORIENTATION,
+                                                      GTK_ORIENTATION_HORIZONTAL,
+                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_NUMBERING,
-                                   g_param_spec_boolean ("numbering",
-                                                         NULL, NULL,
+                                   g_param_spec_boolean ("numbering", NULL, NULL,
                                                          FALSE,
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 }
@@ -158,9 +166,9 @@ pager_buttons_init (PagerButtons *pager)
 
 
 static void
-pager_buttons_get_property (GObject    *object,
-                            guint       prop_id,
-                            GValue     *value,
+pager_buttons_get_property (GObject *object,
+                            guint prop_id,
+                            GValue *value,
                             GParamSpec *pspec)
 {
   PagerButtons *pager = PAGER_BUTTONS (object);
@@ -188,10 +196,10 @@ pager_buttons_get_property (GObject    *object,
 
 
 static void
-pager_buttons_set_property (GObject      *object,
-                            guint         prop_id,
+pager_buttons_set_property (GObject *object,
+                            guint prop_id,
                             const GValue *value,
-                            GParamSpec   *pspec)
+                            GParamSpec *pspec)
 {
   PagerButtons *pager = PAGER_BUTTONS (object);
   XfwWorkspaceManager *manager;
@@ -205,13 +213,13 @@ pager_buttons_set_property (GObject      *object,
       pager->workspace_group = xfw_workspace_manager_list_workspace_groups (manager)->data;
 
       g_signal_connect (G_OBJECT (pager->workspace_group), "active-workspace-changed",
-          G_CALLBACK (pager_buttons_screen_workspace_changed), pager);
+                        G_CALLBACK (pager_buttons_screen_workspace_changed), pager);
       g_signal_connect (G_OBJECT (pager->workspace_group), "workspace-added",
-          G_CALLBACK (pager_buttons_screen_workspace_created), pager);
+                        G_CALLBACK (pager_buttons_screen_workspace_created), pager);
       g_signal_connect (G_OBJECT (pager->workspace_group), "workspace-removed",
-          G_CALLBACK (pager_buttons_screen_workspace_destroyed), pager);
+                        G_CALLBACK (pager_buttons_screen_workspace_destroyed), pager);
       g_signal_connect (G_OBJECT (pager->workspace_group), "viewports-changed",
-          G_CALLBACK (pager_buttons_screen_viewports_changed), pager);
+                        G_CALLBACK (pager_buttons_screen_viewports_changed), pager);
 
       pager_buttons_queue_rebuild (pager);
       break;
@@ -247,13 +255,13 @@ pager_buttons_finalize (GObject *object)
   if (G_LIKELY (pager->xfw_screen != NULL))
     {
       g_signal_handlers_disconnect_by_func (G_OBJECT (pager->workspace_group),
-          G_CALLBACK (pager_buttons_screen_workspace_changed), pager);
+                                            G_CALLBACK (pager_buttons_screen_workspace_changed), pager);
       g_signal_handlers_disconnect_by_func (G_OBJECT (pager->workspace_group),
-          G_CALLBACK (pager_buttons_screen_workspace_created), pager);
+                                            G_CALLBACK (pager_buttons_screen_workspace_created), pager);
       g_signal_handlers_disconnect_by_func (G_OBJECT (pager->workspace_group),
-          G_CALLBACK (pager_buttons_screen_workspace_destroyed), pager);
+                                            G_CALLBACK (pager_buttons_screen_workspace_destroyed), pager);
       g_signal_handlers_disconnect_by_func (G_OBJECT (pager->workspace_group),
-          G_CALLBACK (pager_buttons_screen_viewports_changed), pager);
+                                            G_CALLBACK (pager_buttons_screen_viewports_changed), pager);
 
       g_object_unref (G_OBJECT (pager->xfw_screen));
     }
@@ -266,7 +274,7 @@ pager_buttons_finalize (GObject *object)
 
 
 static gboolean
-pager_buttons_button_press_event (GtkWidget      *button,
+pager_buttons_button_press_event (GtkWidget *button,
                                   GdkEventButton *event)
 {
   guint modifiers;
@@ -289,30 +297,30 @@ pager_buttons_button_press_event (GtkWidget      *button,
 static gboolean
 pager_buttons_rebuild_idle (gpointer user_data)
 {
-  PagerButtons  *pager = PAGER_BUTTONS (user_data);
-  GList         *li, *workspaces;
-  XfwWorkspace  *active_ws;
-  gint           n, n_workspaces;
-  gint           rows, cols;
-  gint           row, col;
-  GtkWidget     *button;
-  XfwWorkspace  *workspace = NULL;
-  GtkWidget     *panel_plugin;
-  GtkWidget     *label;
-  gint           screen_width = 0, screen_height = 0;
-  gboolean       viewport_mode = FALSE;
-  gint           n_viewports = 0;
-  gint          *vp_info;
-  gchar          text[8];
-  GdkRectangle  *rect = NULL;
-  GdkScreen     *screen;
-  guint          scale_factor;
+  PagerButtons *pager = PAGER_BUTTONS (user_data);
+  GList *li, *workspaces;
+  XfwWorkspace *active_ws;
+  gint n, n_workspaces;
+  gint rows, cols;
+  gint row, col;
+  GtkWidget *button;
+  XfwWorkspace *workspace = NULL;
+  GtkWidget *panel_plugin;
+  GtkWidget *label;
+  gint screen_width = 0, screen_height = 0;
+  gboolean viewport_mode = FALSE;
+  gint n_viewports = 0;
+  gint *vp_info;
+  gchar text[8];
+  GdkRectangle *rect = NULL;
+  GdkScreen *screen;
+  guint scale_factor;
 
   panel_return_val_if_fail (PAGER_IS_BUTTONS (pager), FALSE);
   panel_return_val_if_fail (XFW_IS_SCREEN (pager->xfw_screen), FALSE);
 
   gtk_container_foreach (GTK_CONTAINER (pager),
-      (GtkCallback) (void (*)(void)) gtk_widget_destroy, NULL);
+                         (GtkCallback) (void (*) (void)) gtk_widget_destroy, NULL);
 
   g_slist_free (pager->buttons);
   pager->buttons = NULL;
@@ -326,7 +334,7 @@ pager_buttons_rebuild_idle (gpointer user_data)
 
   /* check if the user uses 1 workspace with viewports */
   if (G_UNLIKELY (n_workspaces == 1
-      && xfw_workspace_get_state (workspaces->data) & XFW_WORKSPACE_STATE_VIRTUAL))
+                  && xfw_workspace_get_state (workspaces->data) & XFW_WORKSPACE_STATE_VIRTUAL))
     {
       workspace = XFW_WORKSPACE (workspaces->data);
       rect = xfw_workspace_get_geometry (workspace);
@@ -358,7 +366,7 @@ pager_buttons_rebuild_idle (gpointer user_data)
     }
   else
     {
-      workspace_layout:
+workspace_layout:
 
       rows = CLAMP (1, pager->rows, n_workspaces);
       cols = n_workspaces / rows;
@@ -388,9 +396,9 @@ pager_buttons_rebuild_idle (gpointer user_data)
               && rect->y >= vp_info[VIEWPORT_Y] && rect->y < vp_info[VIEWPORT_Y] + screen_height)
             gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
           g_signal_connect (G_OBJECT (button), "toggled",
-              G_CALLBACK (pager_buttons_viewport_button_toggled), pager);
+                            G_CALLBACK (pager_buttons_viewport_button_toggled), pager);
           g_signal_connect (G_OBJECT (button), "button-press-event",
-              G_CALLBACK (pager_buttons_button_press_event), NULL);
+                            G_CALLBACK (pager_buttons_button_press_event), NULL);
           xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (panel_plugin), button);
           gtk_widget_show (button);
 
@@ -400,7 +408,7 @@ pager_buttons_rebuild_idle (gpointer user_data)
           g_snprintf (text, sizeof (text), "%d", n + 1);
           label = gtk_label_new (text);
           gtk_label_set_angle (GTK_LABEL (label),
-              pager->orientation == GTK_ORIENTATION_HORIZONTAL ? 0 : 270);
+                               pager->orientation == GTK_ORIENTATION_HORIZONTAL ? 0 : 270);
           gtk_container_add (GTK_CONTAINER (button), label);
           gtk_widget_show (label);
 
@@ -430,19 +438,19 @@ pager_buttons_rebuild_idle (gpointer user_data)
           if (workspace == active_ws)
             gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
           g_signal_connect (G_OBJECT (button), "toggled",
-              G_CALLBACK (pager_buttons_workspace_button_toggled), workspace);
+                            G_CALLBACK (pager_buttons_workspace_button_toggled), workspace);
           g_signal_connect (G_OBJECT (button), "button-press-event",
-              G_CALLBACK (pager_buttons_button_press_event), NULL);
+                            G_CALLBACK (pager_buttons_button_press_event), NULL);
           xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (panel_plugin), button);
           gtk_widget_show (button);
 
           label = gtk_label_new (NULL);
           g_object_set_data (G_OBJECT (label), "numbering", GINT_TO_POINTER (pager->numbering));
           g_signal_connect_object (G_OBJECT (workspace), "name-changed",
-              G_CALLBACK (pager_buttons_workspace_button_label), label, 0);
+                                   G_CALLBACK (pager_buttons_workspace_button_label), label, 0);
           pager_buttons_workspace_button_label (workspace, label);
           gtk_label_set_angle (GTK_LABEL (label),
-              pager->orientation == GTK_ORIENTATION_HORIZONTAL ? 0 : 270);
+                               pager->orientation == GTK_ORIENTATION_HORIZONTAL ? 0 : 270);
           gtk_container_add (GTK_CONTAINER (button), label);
           gtk_widget_show (label);
 
@@ -466,7 +474,7 @@ pager_buttons_rebuild_idle (gpointer user_data)
 
   pager->buttons = g_slist_reverse (pager->buttons);
 
-  leave:
+leave:
 
   return FALSE;
 }
@@ -500,9 +508,9 @@ pager_buttons_screen_workspace_changed (XfwWorkspaceGroup *group,
                                         XfwWorkspace *previous_workspace,
                                         PagerButtons *pager)
 {
-  gint           active = -1, n;
-  XfwWorkspace  *active_ws;
-  GSList        *li;
+  gint active = -1, n;
+  XfwWorkspace *active_ws;
+  GSList *li;
 
   panel_return_if_fail (XFW_IS_WORKSPACE_GROUP (group));
   panel_return_if_fail (previous_workspace == NULL || XFW_IS_WORKSPACE (previous_workspace));
@@ -570,8 +578,8 @@ pager_buttons_workspace_button_label (XfwWorkspace *workspace,
                                       GtkWidget *label)
 {
   const gchar *name;
-  gchar       *utf8 = NULL, *name_fallback = NULL, *name_num = NULL;
-  gboolean     numbering;
+  gchar *utf8 = NULL, *name_fallback = NULL, *name_num = NULL;
+  gboolean numbering;
 
   panel_return_if_fail (XFW_IS_WORKSPACE (workspace));
   panel_return_if_fail (GTK_IS_LABEL (label));
@@ -603,8 +611,8 @@ pager_buttons_workspace_button_label (XfwWorkspace *workspace,
 
 
 static void
-pager_buttons_workspace_button_toggled (GtkWidget     *button,
-                                        XfwWorkspace  *workspace)
+pager_buttons_workspace_button_toggled (GtkWidget *button,
+                                        XfwWorkspace *workspace)
 {
   PagerButtons *pager;
   XfwWorkspace *active_ws;
@@ -624,7 +632,7 @@ pager_buttons_workspace_button_toggled (GtkWidget     *button,
 
 
 static void
-pager_buttons_viewport_button_toggled (GtkWidget    *button,
+pager_buttons_viewport_button_toggled (GtkWidget *button,
                                        PagerButtons *pager)
 {
   gint *vp_info;
@@ -655,13 +663,13 @@ pager_buttons_new (XfwScreen *screen)
 
 
 void
-pager_buttons_set_orientation (PagerButtons   *pager,
-                               GtkOrientation  orientation)
+pager_buttons_set_orientation (PagerButtons *pager,
+                               GtkOrientation orientation)
 {
   panel_return_if_fail (PAGER_IS_BUTTONS (pager));
 
   if (pager->orientation == orientation)
-   return;
+    return;
 
   pager->orientation = orientation;
   pager_buttons_queue_rebuild (pager);
@@ -671,12 +679,12 @@ pager_buttons_set_orientation (PagerButtons   *pager,
 
 void
 pager_buttons_set_n_rows (PagerButtons *pager,
-                          gint          rows)
+                          gint rows)
 {
   panel_return_if_fail (PAGER_IS_BUTTONS (pager));
 
   if (pager->rows == rows)
-   return;
+    return;
 
   pager->rows = rows;
   pager_buttons_queue_rebuild (pager);
@@ -686,12 +694,12 @@ pager_buttons_set_n_rows (PagerButtons *pager,
 
 void
 pager_buttons_set_numbering (PagerButtons *pager,
-                             gboolean      numbering)
+                             gboolean numbering)
 {
   panel_return_if_fail (PAGER_IS_BUTTONS (pager));
 
   if (pager->numbering == numbering)
-   return;
+    return;
 
   pager->numbering = numbering;
   pager_buttons_queue_rebuild (pager);

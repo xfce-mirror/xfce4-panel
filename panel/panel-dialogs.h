@@ -19,18 +19,19 @@
 #ifndef __PANEL_DIALOGS_H__
 #define __PANEL_DIALOGS_H__
 
-#include <gtk/gtk.h>
-#include <panel/panel-application.h>
+#include "panel/panel-application.h"
 
 G_BEGIN_DECLS
 
-void     panel_dialogs_show_about     (void);
+void
+panel_dialogs_show_about (void);
 
-gint     panel_dialogs_choose_panel   (PanelApplication *application);
+gint
+panel_dialogs_choose_panel (PanelApplication *application);
 
-gboolean panel_dialogs_kiosk_warning  (void);
+gboolean
+panel_dialogs_kiosk_warning (void);
 
 G_END_DECLS
 
 #endif /* !__PANEL_DIALOGS_H__ */
-

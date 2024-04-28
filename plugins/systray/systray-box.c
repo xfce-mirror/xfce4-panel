@@ -17,60 +17,63 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
-#ifdef HAVE_MATH_H
-#include <math.h>
-#endif
-
-#include <libxfce4panel/libxfce4panel.h>
-#include <common/panel-private.h>
-#include <common/panel-debug.h>
-
+#include "sn-config.h"
 #include "systray-box.h"
 #include "systray-socket.h"
-#include "sn-config.h"
 
-#define SPACING    (2)
-#define OFFSCREEN  (-9999)
+#include "common/panel-debug.h"
+#include "common/panel-private.h"
+
+#define SPACING (2)
+#define OFFSCREEN (-9999)
 
 /* some icon implementations request a 1x1 size for invisible icons */
 #define REQUISITION_IS_INVISIBLE(child_req) ((child_req).width <= 1 && (child_req).height <= 1)
 
 
 
-static void     systray_box_get_property          (GObject         *object,
-                                                   guint            prop_id,
-                                                   GValue          *value,
-                                                   GParamSpec      *pspec);
-static void     systray_box_finalize              (GObject         *object);
-static void     systray_box_get_preferred_length  (GtkWidget       *widget,
-                                                   gint            *minimum_length,
-                                                   gint            *natural_length);
-static void     systray_box_get_preferred_width   (GtkWidget       *widget,
-                                                   gint            *minimum_width,
-                                                   gint            *natural_width);
-static void     systray_box_get_preferred_height  (GtkWidget       *widget,
-                                                   gint            *minimum_height,
-                                                   gint            *natural_height);
-static void     systray_box_size_allocate         (GtkWidget       *widget,
-                                                   GtkAllocation   *allocation);
-static void     systray_box_add                   (GtkContainer    *container,
-                                                   GtkWidget       *child);
-static void     systray_box_remove                (GtkContainer    *container,
-                                                   GtkWidget       *child);
-static void     systray_box_forall                (GtkContainer    *container,
-                                                   gboolean         include_internals,
-                                                   GtkCallback      callback,
-                                                   gpointer         callback_data);
-static GType    systray_box_child_type            (GtkContainer    *container);
-static gint     systray_box_compare_function      (gconstpointer    a,
-                                                   gconstpointer    b,
-                                                   gpointer         user_data);
+static void
+systray_box_get_property (GObject *object,
+                          guint prop_id,
+                          GValue *value,
+                          GParamSpec *pspec);
+static void
+systray_box_finalize (GObject *object);
+static void
+systray_box_get_preferred_length (GtkWidget *widget,
+                                  gint *minimum_length,
+                                  gint *natural_length);
+static void
+systray_box_get_preferred_width (GtkWidget *widget,
+                                 gint *minimum_width,
+                                 gint *natural_width);
+static void
+systray_box_get_preferred_height (GtkWidget *widget,
+                                  gint *minimum_height,
+                                  gint *natural_height);
+static void
+systray_box_size_allocate (GtkWidget *widget,
+                           GtkAllocation *allocation);
+static void
+systray_box_add (GtkContainer *container,
+                 GtkWidget *child);
+static void
+systray_box_remove (GtkContainer *container,
+                    GtkWidget *child);
+static void
+systray_box_forall (GtkContainer *container,
+                    gboolean include_internals,
+                    GtkCallback callback,
+                    gpointer callback_data);
+static GType
+systray_box_child_type (GtkContainer *container);
+static gint
+systray_box_compare_function (gconstpointer a,
+                              gconstpointer b,
+                              gpointer user_data);
 
 
 
@@ -82,39 +85,39 @@ enum
 
 struct _SystrayBox
 {
-  GtkContainer  __parent__;
+  GtkContainer __parent__;
 
   /* all the icons packed in this box */
-  GSList       *children;
+  GSList *children;
 
   /* table of item indexes */
-  GHashTable   *names_ordered;
+  GHashTable *names_ordered;
 
   /* orientation of the box */
-  guint         horizontal : 1;
+  guint horizontal : 1;
 
   /* hidden children counter */
-  gint          n_hidden_children;
-  gint          n_visible_children;
+  gint n_hidden_children;
+  gint n_visible_children;
 
   /* whether hidden icons are visible */
-  guint         show_hidden : 1;
+  guint show_hidden : 1;
 
   /* dimensions */
-  gint          size_max;
-  gint          nrows;
-  gint          row_size;
-  gint          row_padding;
+  gint size_max;
+  gint nrows;
+  gint row_size;
+  gint row_padding;
 
   /* whether icons are squared */
-  guint         square_icons : 1;
+  guint square_icons : 1;
 
   /* whether icons are in a single row */
-  guint         single_row : 1;
+  guint single_row : 1;
 
   /* allocated size by the plugin */
-  gint          size_alloc_init;
-  gint          size_alloc;
+  gint size_alloc_init;
+  gint size_alloc;
 };
 
 
@@ -126,8 +129,8 @@ G_DEFINE_FINAL_TYPE (SystrayBox, systray_box, GTK_TYPE_CONTAINER)
 static void
 systray_box_class_init (SystrayBoxClass *klass)
 {
-  GObjectClass      *gobject_class;
-  GtkWidgetClass    *gtkwidget_class;
+  GObjectClass *gobject_class;
+  GtkWidgetClass *gtkwidget_class;
   GtkContainerClass *gtkcontainer_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
@@ -175,10 +178,10 @@ systray_box_init (SystrayBox *box)
 
 
 static void
-systray_box_get_property (GObject      *object,
-                          guint         prop_id,
-                          GValue       *value,
-                          GParamSpec   *pspec)
+systray_box_get_property (GObject *object,
+                          guint prop_id,
+                          GValue *value,
+                          GParamSpec *pspec)
 {
   SystrayBox *box = SYSTRAY_BOX (object);
 
@@ -218,10 +221,10 @@ systray_box_finalize (GObject *object)
 
 static void
 systray_box_size_get_max_child_size (SystrayBox *box,
-                                     gint       *rows_ret,
-                                     gint       *icon_size_ret,
-                                     gint       *row_size_ret,
-                                     gint       *offset_ret)
+                                     gint *rows_ret,
+                                     gint *icon_size_ret,
+                                     gint *row_size_ret,
+                                     gint *offset_ret)
 {
   if (rows_ret != NULL)
     *rows_ret = box->nrows;
@@ -239,9 +242,9 @@ systray_box_size_get_max_child_size (SystrayBox *box,
 
 
 static void
-systray_box_get_preferred_width   (GtkWidget       *widget,
-                                   gint            *minimum_width,
-                                   gint            *natural_width)
+systray_box_get_preferred_width (GtkWidget *widget,
+                                 gint *minimum_width,
+                                 gint *natural_width)
 {
   SystrayBox *box = SYSTRAY_BOX (widget);
 
@@ -261,9 +264,9 @@ systray_box_get_preferred_width   (GtkWidget       *widget,
 
 
 static void
-systray_box_get_preferred_height  (GtkWidget       *widget,
-                                   gint            *minimum_height,
-                                   gint            *natural_height)
+systray_box_get_preferred_height (GtkWidget *widget,
+                                  gint *minimum_height,
+                                  gint *natural_height)
 {
   SystrayBox *box = SYSTRAY_BOX (widget);
 
@@ -283,25 +286,25 @@ systray_box_get_preferred_height  (GtkWidget       *widget,
 
 
 static void
-systray_box_get_preferred_length (GtkWidget      *widget,
-                                  gint           *minimum_length,
-                                  gint           *natural_length)
+systray_box_get_preferred_length (GtkWidget *widget,
+                                  gint *minimum_length,
+                                  gint *natural_length)
 {
-  SystrayBox       *box = SYSTRAY_BOX (widget);
-  GtkWidget        *child;
-  GtkRequisition    child_req;
-  gint              n_hidden_children = 0;
-  gint              rows;
-  gdouble           cols;
-  gint              icon_size;
-  gdouble           cells;
-  gint              min_seq_cells = -1;
-  gdouble           ratio;
-  GSList           *li;
-  gboolean          hidden;
-  gint              length;
-  GtkStyleContext  *ctx;
-  GtkBorder         padding;
+  SystrayBox *box = SYSTRAY_BOX (widget);
+  GtkWidget *child;
+  GtkRequisition child_req;
+  gint n_hidden_children = 0;
+  gint rows;
+  gdouble cols;
+  gint icon_size;
+  gdouble cells;
+  gint min_seq_cells = -1;
+  gdouble ratio;
+  GSList *li;
+  gboolean hidden;
+  gint length;
+  GtkStyleContext *ctx;
+  GtkBorder padding;
 
   box->n_visible_children = 0;
 
@@ -362,8 +365,8 @@ systray_box_get_preferred_length (GtkWidget      *widget,
     }
 
   panel_debug_filtered (PANEL_DEBUG_SYSTRAY,
-      "requested cells=%g, rows=%d, icon_size=%d, children=%d",
-      cells, rows, icon_size, box->n_visible_children);
+                        "requested cells=%g, rows=%d, icon_size=%d, children=%d",
+                        cells, rows, icon_size, box->n_visible_children);
 
   if (cells > 0.00)
     {
@@ -391,8 +394,8 @@ systray_box_get_preferred_length (GtkWidget      *widget,
   if (box->n_hidden_children != n_hidden_children)
     {
       panel_debug_filtered (PANEL_DEBUG_SYSTRAY,
-          "hidden children changed (%d -> %d)",
-          n_hidden_children, box->n_hidden_children);
+                            "hidden children changed (%d -> %d)",
+                            n_hidden_children, box->n_hidden_children);
 
       box->n_hidden_children = n_hidden_children;
       g_object_notify (G_OBJECT (box), "has-hidden");
@@ -401,7 +404,7 @@ systray_box_get_preferred_length (GtkWidget      *widget,
   /* add border size */
   ctx = gtk_widget_get_style_context (widget);
   gtk_style_context_get_padding (ctx, gtk_widget_get_state_flags (widget), &padding);
-  length += MAX (padding.left+padding.right, padding.top+padding.bottom);
+  length += MAX (padding.left + padding.right, padding.top + padding.bottom);
 
   if (minimum_length != NULL)
     *minimum_length = length;
@@ -413,26 +416,26 @@ systray_box_get_preferred_length (GtkWidget      *widget,
 
 
 static void
-systray_box_size_allocate (GtkWidget     *widget,
+systray_box_size_allocate (GtkWidget *widget,
                            GtkAllocation *allocation)
 {
-  SystrayBox       *box = SYSTRAY_BOX (widget);
-  GtkWidget        *child;
-  GtkAllocation     child_alloc;
-  GtkRequisition    child_req;
-  gint              rows;
-  gint              icon_size;
-  gint              row_size;
-  gdouble           ratio;
-  gint              x, x_start, x_end;
-  gint              y, y_start, y_end;
-  gint              offset;
-  GSList           *li;
-  gint              alloc_size;
-  gint              idx;
-  GtkStyleContext  *ctx;
-  GtkBorder         padding;
-  gint              spacing;
+  SystrayBox *box = SYSTRAY_BOX (widget);
+  GtkWidget *child;
+  GtkAllocation child_alloc;
+  GtkRequisition child_req;
+  gint rows;
+  gint icon_size;
+  gint row_size;
+  gdouble ratio;
+  gint x, x_start, x_end;
+  gint y, y_start, y_end;
+  gint offset;
+  GSList *li;
+  gint alloc_size;
+  gint idx;
+  GtkStyleContext *ctx;
+  GtkBorder padding;
+  gint spacing;
 
   gtk_widget_set_allocation (widget, allocation);
 
@@ -461,7 +464,7 @@ systray_box_size_allocate (GtkWidget     *widget,
   else
     x_start += offset;
 
-  restart_allocation:
+restart_allocation:
 
   x = x_start;
   y = y_start;
@@ -572,8 +575,8 @@ systray_box_size_allocate (GtkWidget     *widget,
                       icon_size--;
 
                       panel_debug_filtered (PANEL_DEBUG_SYSTRAY,
-                          "y overflow (%d > %d), restart with icon_size=%d",
-                          y, y_end, icon_size);
+                                            "y overflow (%d > %d), restart with icon_size=%d",
+                                            y, y_end, icon_size);
 
                       goto restart_allocation;
                     }
@@ -590,8 +593,8 @@ systray_box_size_allocate (GtkWidget     *widget,
                       icon_size--;
 
                       panel_debug_filtered (PANEL_DEBUG_SYSTRAY,
-                          "x overflow (%d > %d), restart with icon_size=%d",
-                          x, x_end, icon_size);
+                                            "x overflow (%d > %d), restart with icon_size=%d",
+                                            x, x_end, icon_size);
 
                       goto restart_allocation;
                     }
@@ -608,8 +611,8 @@ systray_box_size_allocate (GtkWidget     *widget,
         }
 
       panel_debug_filtered (PANEL_DEBUG_SYSTRAY, "allocated %s[%p] at (%d,%d;%d,%d)",
-          systray_socket_get_name (SYSTRAY_SOCKET (child)), child,
-          child_alloc.x, child_alloc.y, child_alloc.width, child_alloc.height);
+                            systray_socket_get_name (SYSTRAY_SOCKET (child)), child,
+                            child_alloc.x, child_alloc.y, child_alloc.width, child_alloc.height);
 
       gtk_widget_size_allocate (child, &child_alloc);
     }
@@ -626,7 +629,7 @@ systray_box_size_allocate (GtkWidget     *widget,
 
 static void
 systray_box_add (GtkContainer *container,
-                 GtkWidget    *child)
+                 GtkWidget *child)
 {
   SystrayBox *box = SYSTRAY_BOX (container);
 
@@ -635,8 +638,8 @@ systray_box_add (GtkContainer *container,
   panel_return_if_fail (gtk_widget_get_parent (child) == NULL);
 
   box->children = g_slist_insert_sorted_with_data (box->children, child,
-                                                    systray_box_compare_function,
-                                                    box);
+                                                   systray_box_compare_function,
+                                                   box);
 
   gtk_widget_set_parent (child, GTK_WIDGET (box));
 
@@ -647,10 +650,10 @@ systray_box_add (GtkContainer *container,
 
 static void
 systray_box_remove (GtkContainer *container,
-                    GtkWidget    *child)
+                    GtkWidget *child)
 {
   SystrayBox *box = SYSTRAY_BOX (container);
-  GSList     *li;
+  GSList *li;
 
   /* search the child */
   li = g_slist_find (box->children, child);
@@ -671,12 +674,12 @@ systray_box_remove (GtkContainer *container,
 
 static void
 systray_box_forall (GtkContainer *container,
-                    gboolean      include_internals,
-                    GtkCallback   callback,
-                    gpointer      callback_data)
+                    gboolean include_internals,
+                    GtkCallback callback,
+                    gpointer callback_data)
 {
   SystrayBox *box = SYSTRAY_BOX (container);
-  GSList     *li, *lnext;
+  GSList *li, *lnext;
 
   /* run callback for all children */
   for (li = box->children; li != NULL; li = lnext)
@@ -700,13 +703,13 @@ systray_box_child_type (GtkContainer *container)
 static gint
 systray_box_compare_function (gconstpointer a,
                               gconstpointer b,
-                              gpointer      user_data)
+                              gpointer user_data)
 {
-  SystrayBox  *box = user_data;
+  SystrayBox *box = user_data;
   const gchar *name_a, *name_b;
-  gint         index_a = -1, index_b = -1;
-  gboolean     hidden_a, hidden_b;
-  gpointer     value;
+  gint index_a = -1, index_b = -1;
+  gboolean hidden_a, hidden_b;
+  gpointer value;
 
   /* sort hidden icons before visible ones */
   hidden_a = systray_socket_get_hidden ((SystraySocket *) (a));
@@ -745,8 +748,8 @@ systray_box_new (void)
 
 
 void
-systray_box_set_orientation (SystrayBox     *box,
-                             GtkOrientation  orientation)
+systray_box_set_orientation (SystrayBox *box,
+                             GtkOrientation orientation)
 {
   gboolean horizontal;
 
@@ -766,10 +769,10 @@ systray_box_set_orientation (SystrayBox     *box,
 
 void
 systray_box_set_dimensions (SystrayBox *box,
-                            gint        icon_size,
-                            gint        n_rows,
-                            gint        row_size,
-                            gint        padding)
+                            gint icon_size,
+                            gint n_rows,
+                            gint row_size,
+                            gint padding)
 {
   panel_return_if_fail (SYSTRAY_IS_BOX (box));
 
@@ -791,7 +794,7 @@ systray_box_set_dimensions (SystrayBox *box,
 
 void
 systray_box_set_size_alloc (SystrayBox *box,
-                            gint        size_alloc)
+                            gint size_alloc)
 {
   panel_return_if_fail (SYSTRAY_IS_BOX (box));
 
@@ -809,7 +812,7 @@ systray_box_set_size_alloc (SystrayBox *box,
 
 void
 systray_box_set_show_hidden (SystrayBox *box,
-                             gboolean    show_hidden)
+                             gboolean show_hidden)
 {
   panel_return_if_fail (SYSTRAY_IS_BOX (box));
 
@@ -836,7 +839,7 @@ systray_box_get_show_hidden (SystrayBox *box)
 
 void
 systray_box_set_squared (SystrayBox *box,
-                         gboolean    square_icons)
+                         gboolean square_icons)
 {
   panel_return_if_fail (SYSTRAY_IS_BOX (box));
 
@@ -863,10 +866,10 @@ systray_box_get_squared (SystrayBox *box)
 
 void
 systray_box_update (SystrayBox *box,
-                    GSList     *names_ordered)
+                    GSList *names_ordered)
 {
   GSList *li;
-  gint    i;
+  gint i;
 
   panel_return_if_fail (SYSTRAY_IS_BOX (box));
 
@@ -876,8 +879,8 @@ systray_box_update (SystrayBox *box,
     g_hash_table_replace (box->names_ordered, g_strdup (li->data), GINT_TO_POINTER (i));
 
   box->children = g_slist_sort_with_data (box->children,
-                                           systray_box_compare_function,
-                                           box);
+                                          systray_box_compare_function,
+                                          box);
 
   /* update the box, so we update the has-hidden property */
   gtk_widget_queue_resize (GTK_WIDGET (box));
@@ -895,7 +898,7 @@ systray_box_has_hidden_items (SystrayBox *box)
 
 void
 systray_box_set_single_row (SystrayBox *box,
-                            gboolean    single_row)
+                            gboolean single_row)
 {
   box->single_row = single_row;
   gtk_widget_queue_resize (GTK_WIDGET (box));

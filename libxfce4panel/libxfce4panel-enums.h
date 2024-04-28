@@ -50,8 +50,7 @@ typedef enum /*<enum,prefix=XFCE_PANEL_PLUGIN_MODE >*/
   XFCE_PANEL_PLUGIN_MODE_HORIZONTAL,
   XFCE_PANEL_PLUGIN_MODE_VERTICAL,
   XFCE_PANEL_PLUGIN_MODE_DESKBAR
-}
-XfcePanelPluginMode;
+} XfcePanelPluginMode;
 
 /**
  * XfceScreenPosition
@@ -79,33 +78,32 @@ XfcePanelPluginMode;
  **/
 typedef enum /*<enum,prefix=XFCE_SCREEN_POSITION >*/
 {
-    XFCE_SCREEN_POSITION_NONE,
+  XFCE_SCREEN_POSITION_NONE,
 
-    /* top */
-    XFCE_SCREEN_POSITION_NW_H,          /* North West Horizontal */
-    XFCE_SCREEN_POSITION_N,             /* North                 */
-    XFCE_SCREEN_POSITION_NE_H,          /* North East Horizontal */
+  /* top */
+  XFCE_SCREEN_POSITION_NW_H, /* North West Horizontal */
+  XFCE_SCREEN_POSITION_N, /* North */
+  XFCE_SCREEN_POSITION_NE_H, /* North East Horizontal */
 
-    /* left */
-    XFCE_SCREEN_POSITION_NW_V,          /* North West Vertical   */
-    XFCE_SCREEN_POSITION_W,             /* West                  */
-    XFCE_SCREEN_POSITION_SW_V,          /* South West Vertical   */
+  /* left */
+  XFCE_SCREEN_POSITION_NW_V, /* North West Vertical */
+  XFCE_SCREEN_POSITION_W, /* West */
+  XFCE_SCREEN_POSITION_SW_V, /* South West Vertical */
 
-    /* right */
-    XFCE_SCREEN_POSITION_NE_V,          /* North East Vertical   */
-    XFCE_SCREEN_POSITION_E,             /* East                  */
-    XFCE_SCREEN_POSITION_SE_V,          /* South East Vertical   */
+  /* right */
+  XFCE_SCREEN_POSITION_NE_V, /* North East Vertical */
+  XFCE_SCREEN_POSITION_E, /* East */
+  XFCE_SCREEN_POSITION_SE_V, /* South East Vertical */
 
-    /* bottom */
-    XFCE_SCREEN_POSITION_SW_H,          /* South West Horizontal */
-    XFCE_SCREEN_POSITION_S,             /* South                 */
-    XFCE_SCREEN_POSITION_SE_H,          /* South East Horizontal */
+  /* bottom */
+  XFCE_SCREEN_POSITION_SW_H, /* South West Horizontal */
+  XFCE_SCREEN_POSITION_S, /* South */
+  XFCE_SCREEN_POSITION_SE_H, /* South East Horizontal */
 
-    /* floating */
-    XFCE_SCREEN_POSITION_FLOATING_H,    /* Floating Horizontal */
-    XFCE_SCREEN_POSITION_FLOATING_V     /* Floating Vertical */
-}
-XfceScreenPosition;
+  /* floating */
+  XFCE_SCREEN_POSITION_FLOATING_H, /* Floating Horizontal */
+  XFCE_SCREEN_POSITION_FLOATING_V /* Floating Vertical */
+} XfceScreenPosition;
 
 /**
  * xfce_screen_position_is_horizontal:
@@ -115,10 +113,10 @@ XfceScreenPosition;
  *
  * Returns: %TRUE if horizontal, %FALSE otherwise
  **/
-#define xfce_screen_position_is_horizontal(position)   \
-    (position <= XFCE_SCREEN_POSITION_NE_H ||          \
-     (position >= XFCE_SCREEN_POSITION_SW_H &&         \
-      position <= XFCE_SCREEN_POSITION_FLOATING_H))
+#define xfce_screen_position_is_horizontal(position) \
+  (position <= XFCE_SCREEN_POSITION_NE_H \
+   || (position >= XFCE_SCREEN_POSITION_SW_H \
+       && position <= XFCE_SCREEN_POSITION_FLOATING_H))
 
 /**
  * xfce_screen_position_get_orientation:
@@ -129,8 +127,7 @@ XfceScreenPosition;
  * Returns: the #GtkOrientation corresponding to @position.
  **/
 #define xfce_screen_position_get_orientation(position) \
-    (xfce_screen_position_is_horizontal (position) ? \
-        GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL)
+  (xfce_screen_position_is_horizontal (position) ? GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL)
 
 /**
  * xfce_screen_position_is_floating:
@@ -141,8 +138,7 @@ XfceScreenPosition;
  * Returns: %TRUE if floating, %FALSE otherwise.
  **/
 #define xfce_screen_position_is_floating(position) \
-    (position >= XFCE_SCREEN_POSITION_FLOATING_H || \
-     position == XFCE_SCREEN_POSITION_NONE)
+  (position >= XFCE_SCREEN_POSITION_FLOATING_H || position == XFCE_SCREEN_POSITION_NONE)
 
 /**
  * xfce_screen_position_is_top:
@@ -154,8 +150,7 @@ XfceScreenPosition;
  * Returns: %TRUE if on the top of the screen, %FALSE otherwise
  **/
 #define xfce_screen_position_is_top(position) \
-    (position >= XFCE_SCREEN_POSITION_NW_H && \
-     position <= XFCE_SCREEN_POSITION_NE_H)
+  (position >= XFCE_SCREEN_POSITION_NW_H && position <= XFCE_SCREEN_POSITION_NE_H)
 
 /**
  * xfce_screen_position_is_left:
@@ -167,8 +162,7 @@ XfceScreenPosition;
  * Returns: %TRUE if on the left of the screen, %FALSE otherwise
  **/
 #define xfce_screen_position_is_left(position) \
-    (position >= XFCE_SCREEN_POSITION_NW_V && \
-     position <= XFCE_SCREEN_POSITION_SW_V)
+  (position >= XFCE_SCREEN_POSITION_NW_V && position <= XFCE_SCREEN_POSITION_SW_V)
 
 /**
  * xfce_screen_position_is_right:
@@ -180,8 +174,7 @@ XfceScreenPosition;
  * Returns: %TRUE if on the right of the screen, %FALSE otherwise
  **/
 #define xfce_screen_position_is_right(position) \
-    (position >= XFCE_SCREEN_POSITION_NE_V && \
-     position <= XFCE_SCREEN_POSITION_SE_V)
+  (position >= XFCE_SCREEN_POSITION_NE_V && position <= XFCE_SCREEN_POSITION_SE_V)
 
 /**
  * xfce_screen_position_is_bottom:
@@ -193,8 +186,7 @@ XfceScreenPosition;
  * Returns: %TRUE if on the bottom of the screen, %FALSE otherwise
  **/
 #define xfce_screen_position_is_bottom(position) \
-    (position >= XFCE_SCREEN_POSITION_SW_H && \
-     position <= XFCE_SCREEN_POSITION_SE_H)
+  (position >= XFCE_SCREEN_POSITION_SW_H && position <= XFCE_SCREEN_POSITION_SE_H)
 
 G_END_DECLS
 

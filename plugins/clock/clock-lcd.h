@@ -19,18 +19,23 @@
 #ifndef __CLOCK_LCD_H__
 #define __CLOCK_LCD_H__
 
+#include "clock-time.h"
+
+#include "libxfce4panel/libxfce4panel.h"
+
 #include <gtk/gtk.h>
-#include <libxfce4panel/libxfce4panel.h>
 
 G_BEGIN_DECLS
 
 #define XFCE_CLOCK_TYPE_LCD (xfce_clock_lcd_get_type ())
 G_DECLARE_FINAL_TYPE (XfceClockLcd, xfce_clock_lcd, XFCE_CLOCK, LCD, GtkImage)
 
-void       xfce_clock_lcd_register_type (XfcePanelTypeModule *type_module);
+void
+xfce_clock_lcd_register_type (XfcePanelTypeModule *type_module);
 
-GtkWidget *xfce_clock_lcd_new           (ClockTime           *time,
-                                         ClockSleepMonitor   *sleep_monitor) G_GNUC_MALLOC;
+GtkWidget *
+xfce_clock_lcd_new (ClockTime *time,
+                    ClockSleepMonitor *sleep_monitor) G_GNUC_MALLOC;
 
 G_END_DECLS
 
