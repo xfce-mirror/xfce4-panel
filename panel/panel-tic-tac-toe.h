@@ -19,7 +19,6 @@
 #ifndef __PANEL_TIC_TAC_TOE_H__
 #define __PANEL_TIC_TAC_TOE_H__
 
-#include <gtk/gtk.h>
 #include <libxfce4ui/libxfce4ui.h>
 
 G_BEGIN_DECLS
@@ -30,9 +29,9 @@ G_DEFINE_AUTOPTR_CLEANUP_FUNC (XfceTitledDialog, g_object_unref)
 #endif
 G_DECLARE_FINAL_TYPE (PanelTicTacToe, panel_tic_tac_toe, PANEL, TIC_TAC_TOE, XfceTitledDialog)
 
-void       panel_tic_tac_toe_show     (void);
+void
+panel_tic_tac_toe_show (void);
 
 G_END_DECLS
 
 #endif /* !__PANEL_TIC_TAC_TOE_H__ */
-

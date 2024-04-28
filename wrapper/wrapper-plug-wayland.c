@@ -17,44 +17,57 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
+
+#include "wrapper/wrapper-external-exported.h"
+#include "wrapper/wrapper-plug-wayland.h"
+#include "wrapper/wrapper-plug.h"
+
+#include "common/panel-dbus.h"
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
 
 #include <gtk-layer-shell/gtk-layer-shell.h>
 #include <libxfce4windowing/libxfce4windowing.h>
 
-#include <common/panel-private.h>
-#include <common/panel-dbus.h>
-#include <common/panel-utils.h>
-#include <wrapper/wrapper-plug-wayland.h>
-#include <wrapper/wrapper-plug.h>
-#include <wrapper/wrapper-external-exported.h>
 
 
-
-static void       wrapper_plug_wayland_iface_init                   (WrapperPlugInterface             *iface);
-static void       wrapper_plug_wayland_finalize                     (GObject                          *object);
-static gboolean   wrapper_plug_wayland_enter_notify_event           (GtkWidget                        *widget,
-                                                                     GdkEventCrossing                 *event);
-static gboolean   wrapper_plug_wayland_leave_notify_event           (GtkWidget                        *widget,
-                                                                     GdkEventCrossing                 *event);
-static gboolean   wrapper_plug_wayland_motion_notify_event          (GtkWidget                        *widget,
-                                                                     GdkEventMotion                   *event);
-static void       wrapper_plug_wayland_realize                      (GtkWidget                        *widget);
-static void       wrapper_plug_wayland_size_allocate                (GtkWidget                        *widget,
-                                                                     GtkAllocation                    *allocation);
-static void       wrapper_plug_wayland_child_size_allocate          (GtkWidget                        *widget,
-                                                                     GtkAllocation                    *allocation);
-static void       wrapper_plug_wayland_proxy_provider_signal        (WrapperPlug                      *plug,
-                                                                     XfcePanelPluginProviderSignal     provider_signal,
-                                                                     XfcePanelPluginProvider          *provider);
-static void       wrapper_plug_wayland_proxy_remote_event_result    (WrapperPlug                      *plug,
-                                                                     guint                             handle,
-                                                                     gboolean                          result);
-static void       wrapper_plug_wayland_set_monitor                  (WrapperPlug                      *plug,
-                                                                     gint                              monitor);
-static void       wrapper_plug_wayland_set_geometry                 (WrapperPlug                      *plug,
-                                                                     const GdkRectangle               *geometry);
+static void
+wrapper_plug_wayland_iface_init (WrapperPlugInterface *iface);
+static void
+wrapper_plug_wayland_finalize (GObject *object);
+static gboolean
+wrapper_plug_wayland_enter_notify_event (GtkWidget *widget,
+                                         GdkEventCrossing *event);
+static gboolean
+wrapper_plug_wayland_leave_notify_event (GtkWidget *widget,
+                                         GdkEventCrossing *event);
+static gboolean
+wrapper_plug_wayland_motion_notify_event (GtkWidget *widget,
+                                          GdkEventMotion *event);
+static void
+wrapper_plug_wayland_realize (GtkWidget *widget);
+static void
+wrapper_plug_wayland_size_allocate (GtkWidget *widget,
+                                    GtkAllocation *allocation);
+static void
+wrapper_plug_wayland_child_size_allocate (GtkWidget *widget,
+                                          GtkAllocation *allocation);
+static void
+wrapper_plug_wayland_proxy_provider_signal (WrapperPlug *plug,
+                                            XfcePanelPluginProviderSignal provider_signal,
+                                            XfcePanelPluginProvider *provider);
+static void
+wrapper_plug_wayland_proxy_remote_event_result (WrapperPlug *plug,
+                                                guint handle,
+                                                gboolean result);
+static void
+wrapper_plug_wayland_set_monitor (WrapperPlug *plug,
+                                  gint monitor);
+static void
+wrapper_plug_wayland_set_geometry (WrapperPlug *plug,
+                                   const GdkRectangle *geometry);
 
 
 
@@ -112,7 +125,7 @@ wrapper_plug_wayland_window_state_changed (XfwWindow *window,
   panel_return_if_fail (XFW_IS_WINDOW (window));
   panel_return_if_fail (WRAPPER_IS_PLUG_WAYLAND (plug));
 
-  if (! (changed_mask & XFW_WINDOW_STATE_FULLSCREEN))
+  if (!(changed_mask & XFW_WINDOW_STATE_FULLSCREEN))
     return;
 
   if (xfw_window_is_fullscreen (window))
@@ -387,8 +400,9 @@ wrapper_plug_wayland_handle_pointer_is_outside (WrapperExternalExported *skeleto
     {
       /* see panel_window_pointer_is_outside() about the reliability of this check on Wayland */
       window = gdk_device_get_window_at_position (device, NULL, NULL);
-      plug->pointer_is_outside = window == NULL || gdk_window_get_effective_toplevel (window)
-                                                   != gtk_widget_get_window (GTK_WIDGET (plug));
+      plug->pointer_is_outside = window == NULL
+                                 || gdk_window_get_effective_toplevel (window)
+                                      != gtk_widget_get_window (GTK_WIDGET (plug));
     }
 
   wrapper_external_exported_complete_pointer_is_outside (skeleton, invocation, plug->pointer_is_outside);
@@ -479,7 +493,7 @@ wrapper_plug_wayland_new (gint unique_id,
   g_task_set_task_data (task, name, NULL);
   g_task_run_in_thread_sync (task, wrapper_plug_wayland_own_name);
   g_object_unref (task);
-  if (! g_object_get_data (G_OBJECT (connection), "name-acquired"))
+  if (!g_object_get_data (G_OBJECT (connection), "name-acquired"))
     {
       g_set_error (error, 0, 0, "Failed to acquire name %s on D-Bus", name);
       g_free (name);

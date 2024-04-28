@@ -19,81 +19,85 @@
 
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-#ifdef HAVE_STRING_H
-#include <string.h>
+#include "config.h"
 #endif
 
+#include "sn-item.h"
+
+#include "common/panel-debug.h"
+
 #include <gio/gio.h>
+
 #ifdef HAVE_DBUSMENU
 #include <libdbusmenu-gtk/dbusmenu-gtk.h>
 #endif
 
-#include <common/panel-debug.h>
-#include "sn-item.h"
 
 
+static void
+sn_item_finalize (GObject *object);
 
-static void                  sn_item_finalize                        (GObject                 *object);
+static void
+sn_item_get_property (GObject *object,
+                      guint prop_id,
+                      GValue *value,
+                      GParamSpec *pspec);
 
-static void                  sn_item_get_property                    (GObject                 *object,
-                                                                      guint                    prop_id,
-                                                                      GValue                  *value,
-                                                                      GParamSpec              *pspec);
+static void
+sn_item_set_property (GObject *object,
+                      guint prop_id,
+                      const GValue *value,
+                      GParamSpec *pspec);
 
-static void                  sn_item_set_property                    (GObject                 *object,
-                                                                      guint                    prop_id,
-                                                                      const GValue            *value,
-                                                                      GParamSpec              *pspec);
+static void
+sn_item_signal_received (GDBusProxy *proxy,
+                         gchar *sender_name,
+                         gchar *signal_name,
+                         GVariant *parameters,
+                         gpointer user_data);
 
-static void                  sn_item_signal_received                 (GDBusProxy              *proxy,
-                                                                      gchar                   *sender_name,
-                                                                      gchar                   *signal_name,
-                                                                      GVariant                *parameters,
-                                                                      gpointer                 user_data);
-
-static void                  sn_item_get_all_properties_result       (GObject                 *source_object,
-                                                                      GAsyncResult            *res,
-                                                                      gpointer                 user_data);
+static void
+sn_item_get_all_properties_result (GObject *source_object,
+                                   GAsyncResult *res,
+                                   gpointer user_data);
 
 
 
 struct _SnItem
 {
-  GObject              __parent__;
+  GObject __parent__;
 
-  gboolean             started;
-  gboolean             initialized;
-  gboolean             exposed;
+  gboolean started;
+  gboolean initialized;
+  gboolean exposed;
 
-  GCancellable        *cancellable;
-  GDBusProxy          *item_proxy;
-  GDBusProxy          *properties_proxy;
+  GCancellable *cancellable;
+  GDBusProxy *item_proxy;
+  GDBusProxy *properties_proxy;
 
-  gchar               *bus_name;
-  gchar               *object_path;
-  gchar               *key;
+  gchar *bus_name;
+  gchar *object_path;
+  gchar *key;
 
-  gchar               *id;
-  gchar               *title;
-  gchar               *tooltip_title;
-  gchar               *tooltip_subtitle;
-  gchar               *icon_desc;
-  gchar               *attention_desc;
+  gchar *id;
+  gchar *title;
+  gchar *tooltip_title;
+  gchar *tooltip_subtitle;
+  gchar *icon_desc;
+  gchar *attention_desc;
 
-  gchar               *status;
-  gchar               *icon_name;
-  gchar               *attention_icon_name;
-  gchar               *overlay_icon_name;
-  GdkPixbuf           *icon_pixbuf;
-  GdkPixbuf           *attention_icon_pixbuf;
-  GdkPixbuf           *overlay_icon_pixbuf;
-  gchar               *icon_theme_path;
+  gchar *status;
+  gchar *icon_name;
+  gchar *attention_icon_name;
+  gchar *overlay_icon_name;
+  GdkPixbuf *icon_pixbuf;
+  GdkPixbuf *attention_icon_pixbuf;
+  GdkPixbuf *overlay_icon_pixbuf;
+  gchar *icon_theme_path;
 
-  gboolean             item_is_menu;
-  gchar               *menu_object_path;
-  GtkWidget           *cached_menu;
+  gboolean item_is_menu;
+  gchar *menu_object_path;
+  GtkWidget *cached_menu;
 };
 
 G_DEFINE_FINAL_TYPE (SnItem, sn_item, G_TYPE_OBJECT)
@@ -120,46 +124,45 @@ enum
   LAST_SIGNAL
 };
 
-static guint sn_item_signals[LAST_SIGNAL] = { 0, };
+static guint sn_item_signals[LAST_SIGNAL] = { 0 };
 
 
 
 typedef struct
 {
-  GDBusConnection     *connection;
-  guint                handler;
-}
-SubscriptionContext;
+  GDBusConnection *connection;
+  guint handler;
+} SubscriptionContext;
 
 
 
 #define free_error_and_return_if_cancelled(error) \
-if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) \
-  { \
-    g_error_free (error); \
-    return; \
-  } \
-if (error != NULL) \
-  {  \
-    panel_debug (PANEL_DEBUG_SYSTRAY, "%s: Fatal error for item '%s': (domain '%s', code %d) %s", \
-                 G_STRLOC, SN_IS_ITEM (item) ? item->id : "", \
-                 g_quark_to_string (error->domain), error->code, error->message); \
-    g_error_free (error); \
-  }
+  if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) \
+    { \
+      g_error_free (error); \
+      return; \
+    } \
+  if (error != NULL) \
+    { \
+      panel_debug (PANEL_DEBUG_SYSTRAY, "%s: Fatal error for item '%s': (domain '%s', code %d) %s", \
+                   G_STRLOC, SN_IS_ITEM (item) ? item->id : "", \
+                   g_quark_to_string (error->domain), error->code, error->message); \
+      g_error_free (error); \
+    }
 
 
 
 #define finish_and_return_if_true(condition) \
-if (condition) \
-  { \
-    if (G_IS_OBJECT (item)) \
-      { \
-        panel_debug (PANEL_DEBUG_SYSTRAY, "%s: Finishing on error for item '%s'", \
-                     G_STRLOC, item->id); \
-        g_signal_emit (item, sn_item_signals[FINISH], 0); \
-      } \
-    return; \
-  }
+  if (condition) \
+    { \
+      if (G_IS_OBJECT (item)) \
+        { \
+          panel_debug (PANEL_DEBUG_SYSTRAY, "%s: Finishing on error for item '%s'", \
+                       G_STRLOC, item->id); \
+          g_signal_emit (item, sn_item_signals[FINISH], 0); \
+        } \
+      return; \
+    }
 
 
 
@@ -176,74 +179,64 @@ sn_item_class_init (SnItemClass *klass)
   g_object_class_install_property (object_class,
                                    PROP_BUS_NAME,
                                    g_param_spec_string ("bus-name", NULL, NULL, NULL,
-                                                        G_PARAM_WRITABLE |
-                                                        G_PARAM_STATIC_STRINGS));
+                                                        G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
                                    PROP_OBJECT_PATH,
                                    g_param_spec_string ("object-path", NULL, NULL, NULL,
-                                                        G_PARAM_WRITABLE |
-                                                        G_PARAM_STATIC_STRINGS));
+                                                        G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
                                    PROP_KEY,
                                    g_param_spec_string ("key", NULL, NULL, NULL,
-                                                        G_PARAM_READWRITE |
-                                                        G_PARAM_STATIC_STRINGS));
+                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
                                    PROP_EXPOSED,
                                    g_param_spec_boolean ("exposed", NULL, NULL, FALSE,
-                                                        G_PARAM_READABLE |
-                                                        G_PARAM_STATIC_STRINGS));
+                                                         G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
-  sn_item_signals[EXPOSE] =
-    g_signal_new (g_intern_static_string ("expose"),
-                  G_TYPE_FROM_CLASS (object_class),
-                  G_SIGNAL_RUN_LAST,
-                  0, NULL, NULL,
-                  g_cclosure_marshal_VOID__VOID,
-                  G_TYPE_NONE, 0);
+  sn_item_signals[EXPOSE] = g_signal_new (g_intern_static_string ("expose"),
+                                          G_TYPE_FROM_CLASS (object_class),
+                                          G_SIGNAL_RUN_LAST,
+                                          0, NULL, NULL,
+                                          g_cclosure_marshal_VOID__VOID,
+                                          G_TYPE_NONE, 0);
 
-  sn_item_signals[SEAL] =
-    g_signal_new (g_intern_static_string ("seal"),
-                  G_TYPE_FROM_CLASS (object_class),
-                  G_SIGNAL_RUN_LAST,
-                  0, NULL, NULL,
-                  g_cclosure_marshal_VOID__VOID,
-                  G_TYPE_NONE, 0);
+  sn_item_signals[SEAL] = g_signal_new (g_intern_static_string ("seal"),
+                                        G_TYPE_FROM_CLASS (object_class),
+                                        G_SIGNAL_RUN_LAST,
+                                        0, NULL, NULL,
+                                        g_cclosure_marshal_VOID__VOID,
+                                        G_TYPE_NONE, 0);
 
-  sn_item_signals[FINISH] =
-    g_signal_new (g_intern_static_string ("finish"),
-                  G_TYPE_FROM_CLASS (object_class),
-                  G_SIGNAL_RUN_LAST,
-                  0, NULL, NULL,
-                  g_cclosure_marshal_VOID__VOID,
-                  G_TYPE_NONE, 0);
+  sn_item_signals[FINISH] = g_signal_new (g_intern_static_string ("finish"),
+                                          G_TYPE_FROM_CLASS (object_class),
+                                          G_SIGNAL_RUN_LAST,
+                                          0, NULL, NULL,
+                                          g_cclosure_marshal_VOID__VOID,
+                                          G_TYPE_NONE, 0);
 
-  sn_item_signals[TOOLTIP_CHANGED] =
-    g_signal_new (g_intern_static_string ("tooltip-changed"),
-                  G_TYPE_FROM_CLASS (object_class),
-                  G_SIGNAL_RUN_LAST,
-                  0, NULL, NULL,
-                  g_cclosure_marshal_VOID__VOID,
-                  G_TYPE_NONE, 0);
+  sn_item_signals[TOOLTIP_CHANGED] = g_signal_new (g_intern_static_string ("tooltip-changed"),
+                                                   G_TYPE_FROM_CLASS (object_class),
+                                                   G_SIGNAL_RUN_LAST,
+                                                   0, NULL, NULL,
+                                                   g_cclosure_marshal_VOID__VOID,
+                                                   G_TYPE_NONE, 0);
 
-  sn_item_signals[ICON_CHANGED] =
-    g_signal_new (g_intern_static_string ("icon-changed"),
-                  G_TYPE_FROM_CLASS (object_class),
-                  G_SIGNAL_RUN_LAST,
-                  0, NULL, NULL,
-                  g_cclosure_marshal_VOID__VOID,
-                  G_TYPE_NONE, 0);
+  sn_item_signals[ICON_CHANGED] = g_signal_new (g_intern_static_string ("icon-changed"),
+                                                G_TYPE_FROM_CLASS (object_class),
+                                                G_SIGNAL_RUN_LAST,
+                                                0, NULL, NULL,
+                                                g_cclosure_marshal_VOID__VOID,
+                                                G_TYPE_NONE, 0);
 
-  sn_item_signals[MENU_CHANGED] =
-    g_signal_new (g_intern_static_string ("menu-changed"),
-                  G_TYPE_FROM_CLASS (object_class),
-                  G_SIGNAL_RUN_LAST,
-                  0, NULL, NULL,
-                  g_cclosure_marshal_VOID__VOID,
-                  G_TYPE_NONE, 0);
+  sn_item_signals[MENU_CHANGED] = g_signal_new (g_intern_static_string ("menu-changed"),
+                                                G_TYPE_FROM_CLASS (object_class),
+                                                G_SIGNAL_RUN_LAST,
+                                                0, NULL, NULL,
+                                                g_cclosure_marshal_VOID__VOID,
+                                                G_TYPE_NONE, 0);
 }
 
 
@@ -336,9 +329,9 @@ sn_item_finalize (GObject *object)
 
 
 static void
-sn_item_get_property (GObject    *object,
-                      guint       prop_id,
-                      GValue     *value,
+sn_item_get_property (GObject *object,
+                      guint prop_id,
+                      GValue *value,
                       GParamSpec *pspec)
 {
   SnItem *item = SN_ITEM (object);
@@ -362,10 +355,10 @@ sn_item_get_property (GObject    *object,
 
 
 static void
-sn_item_set_property (GObject      *object,
-                      guint         prop_id,
+sn_item_set_property (GObject *object,
+                      guint prop_id,
                       const GValue *value,
-                      GParamSpec   *pspec)
+                      GParamSpec *pspec)
 {
   SnItem *item = SN_ITEM (object);
 
@@ -395,8 +388,8 @@ sn_item_set_property (GObject      *object,
 
 
 static void
-sn_item_subscription_context_unsubscribe (gpointer  data,
-                                          GObject  *where_the_object_was)
+sn_item_subscription_context_unsubscribe (gpointer data,
+                                          GObject *where_the_object_was)
 {
   SubscriptionContext *context = data;
 
@@ -408,16 +401,16 @@ sn_item_subscription_context_unsubscribe (gpointer  data,
 
 static void
 sn_item_name_owner_changed (GDBusConnection *connection,
-                            const gchar     *sender_name,
-                            const gchar     *object_path,
-                            const gchar     *interface_name,
-                            const gchar     *signal_name,
-                            GVariant        *parameters,
-                            gpointer         user_data)
+                            const gchar *sender_name,
+                            const gchar *object_path,
+                            const gchar *interface_name,
+                            const gchar *signal_name,
+                            GVariant *parameters,
+                            gpointer user_data)
 {
-  SnItem   *item = user_data;
-  gchar    *new_owner;
-  gboolean  finish;
+  SnItem *item = user_data;
+  gchar *new_owner;
+  gboolean finish;
 
   g_variant_get (parameters, "(sss)", NULL, NULL, &new_owner);
   finish = new_owner == NULL || strlen (new_owner) == 0;
@@ -429,9 +422,9 @@ sn_item_name_owner_changed (GDBusConnection *connection,
 
 
 static void
-sn_item_properties_callback (GObject      *source_object,
+sn_item_properties_callback (GObject *source_object,
                              GAsyncResult *res,
-                             gpointer      user_data)
+                             gpointer user_data)
 {
   SnItem *item = user_data;
   GError *error = NULL;
@@ -448,12 +441,12 @@ sn_item_properties_callback (GObject      *source_object,
 
 
 static void
-sn_item_item_callback (GObject      *source_object,
+sn_item_item_callback (GObject *source_object,
                        GAsyncResult *res,
-                       gpointer      user_data)
+                       gpointer user_data)
 {
-  SnItem              *item = user_data;
-  GError              *error = NULL;
+  SnItem *item = user_data;
+  GError *error = NULL;
   SubscriptionContext *context;
 
   item->item_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
@@ -462,16 +455,15 @@ sn_item_item_callback (GObject      *source_object,
 
   context = g_new0 (SubscriptionContext, 1);
   context->connection = g_dbus_proxy_get_connection (item->item_proxy);
-  context->handler =
-    g_dbus_connection_signal_subscribe (g_dbus_proxy_get_connection (item->item_proxy),
-                                        "org.freedesktop.DBus",
-                                        "org.freedesktop.DBus",
-                                        "NameOwnerChanged",
-                                        "/org/freedesktop/DBus",
-                                        g_dbus_proxy_get_name (item->item_proxy),
-                                        G_DBUS_SIGNAL_FLAGS_NONE,
-                                        sn_item_name_owner_changed,
-                                        item, NULL);
+  context->handler = g_dbus_connection_signal_subscribe (g_dbus_proxy_get_connection (item->item_proxy),
+                                                         "org.freedesktop.DBus",
+                                                         "org.freedesktop.DBus",
+                                                         "NameOwnerChanged",
+                                                         "/org/freedesktop/DBus",
+                                                         g_dbus_proxy_get_name (item->item_proxy),
+                                                         G_DBUS_SIGNAL_FLAGS_NONE,
+                                                         sn_item_name_owner_changed,
+                                                         item, NULL);
   g_object_weak_ref (G_OBJECT (item->item_proxy),
                      sn_item_subscription_context_unsubscribe, context);
 
@@ -530,8 +522,8 @@ sn_item_start (SnItem *item)
 
 
 void
-sn_item_invalidate (SnItem   *item,
-                    gboolean  force_update)
+sn_item_invalidate (SnItem *item,
+                    gboolean force_update)
 {
   g_return_if_fail (SN_IS_ITEM (item));
 
@@ -563,10 +555,10 @@ sn_item_invalidate (SnItem   *item,
 
 static void
 sn_item_signal_received (GDBusProxy *proxy,
-                         gchar      *sender_name,
-                         gchar      *signal_name,
-                         GVariant   *parameters,
-                         gpointer    user_data)
+                         gchar *sender_name,
+                         gchar *signal_name,
+                         GVariant *parameters,
+                         gpointer user_data)
 {
   sn_item_invalidate (user_data, FALSE);
 }
@@ -578,8 +570,8 @@ sn_item_pixbuf_equals (GdkPixbuf *p1,
                        GdkPixbuf *p2)
 {
   guchar *p1p, *p2p;
-  guint   p1l, p2l;
-  guint   i;
+  guint p1l, p2l;
+  guint i;
 
   if (p1 == p2 || (p1 == NULL && p2 == NULL))
     return TRUE;
@@ -603,8 +595,8 @@ sn_item_pixbuf_equals (GdkPixbuf *p1,
 
 
 static void
-sn_item_free (guchar   *pixels,
-              gpointer  data)
+sn_item_free (guchar *pixels,
+              gpointer data)
 {
   g_free (pixels);
 }
@@ -614,15 +606,15 @@ sn_item_free (guchar   *pixels,
 static GdkPixbuf *
 sn_item_extract_pixbuf (GVariant *variant)
 {
-  GVariantIter  *iter;
-  gint           width, height;
-  gint           lwidth = 0, lheight = 0;
-  GVariant      *array_value;
-  gconstpointer  data;
-  guchar        *array = NULL;
-  gsize          size;
-  guchar         alpha;
-  gint           i;
+  GVariantIter *iter;
+  gint width, height;
+  gint lwidth = 0, lheight = 0;
+  GVariant *array_value;
+  gconstpointer data;
+  guchar *array = NULL;
+  gsize size;
+  guchar alpha;
+  gint i;
 
   if (variant == NULL)
     return NULL;
@@ -634,12 +626,11 @@ sn_item_extract_pixbuf (GVariant *variant)
 
   while (g_variant_iter_loop (iter, "(ii@ay)", &width, &height, &array_value))
     {
-      if (width > 0 && height > 0 && array_value != NULL &&
-          width * height > lwidth * lheight)
+      if (width > 0 && height > 0 && array_value != NULL && width * height > lwidth * lheight)
         {
           size = g_variant_get_size (array_value);
           /* sanity check */
-          if (size == (gsize)(4 * width * height))
+          if (size == (gsize) (4 * width * height))
             {
               /* find the largest image */
               data = g_variant_get_data (array_value);
@@ -680,27 +671,27 @@ sn_item_extract_pixbuf (GVariant *variant)
 
 
 static void
-sn_item_get_all_properties_result (GObject      *source_object,
+sn_item_get_all_properties_result (GObject *source_object,
                                    GAsyncResult *res,
-                                   gpointer      user_data)
+                                   gpointer user_data)
 {
-  SnItem       *item = user_data;
-  GError       *error = NULL;
-  GVariant     *properties;
+  SnItem *item = user_data;
+  GError *error = NULL;
+  GVariant *properties;
   GVariantIter *iter = NULL;
-  const gchar  *name;
-  GVariant     *value;
+  const gchar *name;
+  GVariant *value;
 
-  const gchar  *cstr_val1;
-  gchar        *str_val1;
-  gchar        *str_val2;
-  gboolean      bool_val1;
-  GdkPixbuf    *pb_val1;
+  const gchar *cstr_val1;
+  gchar *str_val1;
+  gchar *str_val2;
+  gboolean bool_val1;
+  GdkPixbuf *pb_val1;
 
-  gboolean      update_exposed = FALSE;
-  gboolean      update_tooltip = FALSE;
-  gboolean      update_icon = FALSE;
-  gboolean      update_menu = FALSE;
+  gboolean update_exposed = FALSE;
+  gboolean update_tooltip = FALSE;
+  gboolean update_icon = FALSE;
+  gboolean update_menu = FALSE;
 
   properties = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
   if (properties == NULL)
@@ -709,19 +700,19 @@ sn_item_get_all_properties_result (GObject      *source_object,
       return;
     }
 
-  #define string_empty_null(s) ((s) != NULL ? (s) : "")
+#define string_empty_null(s) ((s) != NULL ? (s) : "")
 
-  #define update_new_string(val, entry, update_what) \
+#define update_new_string(val, entry, update_what) \
   if (g_strcmp0 (string_empty_null (val), string_empty_null (item->entry))) \
     { \
       g_free (item->entry); \
-      item->entry = \
-        val != NULL && strlen (val != NULL ? val : "") > 0 \
-        ? g_strdup (val) : NULL; \
+      item->entry = val != NULL && strlen (val != NULL ? val : "") > 0 \
+                      ? g_strdup (val) \
+                      : NULL; \
       update_what = TRUE; \
     }
 
-  #define update_new_pixbuf(val, entry, update_what) \
+#define update_new_pixbuf(val, entry, update_what) \
   if (!sn_item_pixbuf_equals (val, item->entry)) \
     { \
       if (item->entry != NULL) \
@@ -734,125 +725,126 @@ sn_item_get_all_properties_result (GObject      *source_object,
       g_object_unref (val); \
     }
 
-  if (! g_variant_check_format_string (properties, "(a{sv})", FALSE))
+  if (!g_variant_check_format_string (properties, "(a{sv})", FALSE))
     {
       g_warning ("Could not parse properties for StatusNotifierItem.");
       return;
     }
   g_variant_get (properties, "(a{sv})", &iter);
 
-  while (g_variant_iter_loop (iter, "{&sv}", &name, &value)) {
-    if (!g_strcmp0 (name, "Id"))
-      {
-        if (item->id == NULL)
-          item->id = g_variant_dup_string (value, NULL);
-      }
-    else if (!g_strcmp0 (name, "Status"))
-      {
-        cstr_val1 = g_variant_get_string (value, NULL);
-        update_new_string (cstr_val1, status, update_icon);
-        bool_val1 = g_strcmp0 (item->status, "Passive") != 0;
-        if (bool_val1 != item->exposed)
-          {
-            item->exposed = bool_val1;
-            update_exposed = TRUE;
-          }
-      }
-    else if (!g_strcmp0 (name, "Title"))
-      {
-        cstr_val1 = g_variant_get_string (value, NULL);
-        update_new_string (cstr_val1, title, update_tooltip);
-      }
-    else if (!g_strcmp0 (name, "ToolTip"))
-      {
-        cstr_val1 = g_variant_get_type_string (value);
-        if (!g_strcmp0 (cstr_val1, "(sa(iiay)ss)"))
-          {
-            g_variant_get (value, "(sa(iiay)ss)", NULL, NULL, &str_val1, &str_val2);
-            update_new_string (str_val1, tooltip_title, update_tooltip);
-            update_new_string (str_val2, tooltip_subtitle, update_tooltip);
-            g_free (str_val1);
-            g_free (str_val2);
-          }
-        else if (!g_strcmp0 (cstr_val1, "s"))
-          {
-            cstr_val1 = g_variant_get_string (value, NULL);
-            update_new_string (cstr_val1, tooltip_title, update_tooltip);
-            update_new_string (NULL, tooltip_subtitle, update_tooltip);
-          }
-        else
-          {
-            update_new_string (NULL, tooltip_title, update_tooltip);
-            update_new_string (NULL, tooltip_subtitle, update_tooltip);
-          }
-      }
-    else if (!g_strcmp0 (name, "ItemIsMenu"))
-      {
-        bool_val1 = g_variant_get_boolean (value);
-        if (bool_val1 != item->item_is_menu)
-          {
-            item->item_is_menu = bool_val1;
-            update_menu = TRUE;
-          }
-      }
-    else if (!g_strcmp0 (name, "Menu"))
-      {
-        cstr_val1 = g_variant_get_string (value, NULL);
-        update_new_string (cstr_val1, menu_object_path, update_menu);
-      }
-    else if (!g_strcmp0 (name, "IconThemePath"))
-      {
-        cstr_val1 = g_variant_get_string (value, NULL);
-        update_new_string (cstr_val1, icon_theme_path, update_icon);
-      }
-    else if (!g_strcmp0 (name, "IconName"))
-      {
-        cstr_val1 = g_variant_get_string (value, NULL);
-        update_new_string (cstr_val1, icon_name, update_icon);
-      }
-    else if (!g_strcmp0 (name, "IconPixmap"))
-      {
-        pb_val1 = sn_item_extract_pixbuf (value);
-        update_new_pixbuf (pb_val1, icon_pixbuf, update_icon);
-      }
-    else if (!g_strcmp0 (name, "IconAccessibleDesc"))
-      {
-        cstr_val1 = g_variant_get_string (value, NULL);
-        update_new_string (cstr_val1, icon_desc, update_tooltip);
-      }
-    else if (!g_strcmp0 (name, "AttentionIconName"))
-      {
-        cstr_val1 = g_variant_get_string (value, NULL);
-        update_new_string (cstr_val1, attention_icon_name, update_icon);
-      }
-    else if (!g_strcmp0 (name, "AttentionIconPixmap"))
-      {
-        pb_val1 = sn_item_extract_pixbuf (value);
-        update_new_pixbuf (pb_val1, attention_icon_pixbuf, update_icon);
-      }
-    else if (!g_strcmp0 (name, "AttentionAccessibleDesc"))
-      {
-        cstr_val1 = g_variant_get_string (value, NULL);
-        update_new_string (cstr_val1, attention_desc, update_tooltip);
-      }
-    else if (!g_strcmp0 (name, "OverlayIconName"))
-      {
-        cstr_val1 = g_variant_get_string (value, NULL);
-        update_new_string (cstr_val1, overlay_icon_name, update_icon);
-      }
-    else if (!g_strcmp0 (name, "OverlayIconPixmap"))
-      {
-        pb_val1 = sn_item_extract_pixbuf (value);
-        update_new_pixbuf (pb_val1, overlay_icon_pixbuf, update_icon);
-      }
-  }
+  while (g_variant_iter_loop (iter, "{&sv}", &name, &value))
+    {
+      if (!g_strcmp0 (name, "Id"))
+        {
+          if (item->id == NULL)
+            item->id = g_variant_dup_string (value, NULL);
+        }
+      else if (!g_strcmp0 (name, "Status"))
+        {
+          cstr_val1 = g_variant_get_string (value, NULL);
+          update_new_string (cstr_val1, status, update_icon);
+          bool_val1 = g_strcmp0 (item->status, "Passive") != 0;
+          if (bool_val1 != item->exposed)
+            {
+              item->exposed = bool_val1;
+              update_exposed = TRUE;
+            }
+        }
+      else if (!g_strcmp0 (name, "Title"))
+        {
+          cstr_val1 = g_variant_get_string (value, NULL);
+          update_new_string (cstr_val1, title, update_tooltip);
+        }
+      else if (!g_strcmp0 (name, "ToolTip"))
+        {
+          cstr_val1 = g_variant_get_type_string (value);
+          if (!g_strcmp0 (cstr_val1, "(sa(iiay)ss)"))
+            {
+              g_variant_get (value, "(sa(iiay)ss)", NULL, NULL, &str_val1, &str_val2);
+              update_new_string (str_val1, tooltip_title, update_tooltip);
+              update_new_string (str_val2, tooltip_subtitle, update_tooltip);
+              g_free (str_val1);
+              g_free (str_val2);
+            }
+          else if (!g_strcmp0 (cstr_val1, "s"))
+            {
+              cstr_val1 = g_variant_get_string (value, NULL);
+              update_new_string (cstr_val1, tooltip_title, update_tooltip);
+              update_new_string (NULL, tooltip_subtitle, update_tooltip);
+            }
+          else
+            {
+              update_new_string (NULL, tooltip_title, update_tooltip);
+              update_new_string (NULL, tooltip_subtitle, update_tooltip);
+            }
+        }
+      else if (!g_strcmp0 (name, "ItemIsMenu"))
+        {
+          bool_val1 = g_variant_get_boolean (value);
+          if (bool_val1 != item->item_is_menu)
+            {
+              item->item_is_menu = bool_val1;
+              update_menu = TRUE;
+            }
+        }
+      else if (!g_strcmp0 (name, "Menu"))
+        {
+          cstr_val1 = g_variant_get_string (value, NULL);
+          update_new_string (cstr_val1, menu_object_path, update_menu);
+        }
+      else if (!g_strcmp0 (name, "IconThemePath"))
+        {
+          cstr_val1 = g_variant_get_string (value, NULL);
+          update_new_string (cstr_val1, icon_theme_path, update_icon);
+        }
+      else if (!g_strcmp0 (name, "IconName"))
+        {
+          cstr_val1 = g_variant_get_string (value, NULL);
+          update_new_string (cstr_val1, icon_name, update_icon);
+        }
+      else if (!g_strcmp0 (name, "IconPixmap"))
+        {
+          pb_val1 = sn_item_extract_pixbuf (value);
+          update_new_pixbuf (pb_val1, icon_pixbuf, update_icon);
+        }
+      else if (!g_strcmp0 (name, "IconAccessibleDesc"))
+        {
+          cstr_val1 = g_variant_get_string (value, NULL);
+          update_new_string (cstr_val1, icon_desc, update_tooltip);
+        }
+      else if (!g_strcmp0 (name, "AttentionIconName"))
+        {
+          cstr_val1 = g_variant_get_string (value, NULL);
+          update_new_string (cstr_val1, attention_icon_name, update_icon);
+        }
+      else if (!g_strcmp0 (name, "AttentionIconPixmap"))
+        {
+          pb_val1 = sn_item_extract_pixbuf (value);
+          update_new_pixbuf (pb_val1, attention_icon_pixbuf, update_icon);
+        }
+      else if (!g_strcmp0 (name, "AttentionAccessibleDesc"))
+        {
+          cstr_val1 = g_variant_get_string (value, NULL);
+          update_new_string (cstr_val1, attention_desc, update_tooltip);
+        }
+      else if (!g_strcmp0 (name, "OverlayIconName"))
+        {
+          cstr_val1 = g_variant_get_string (value, NULL);
+          update_new_string (cstr_val1, overlay_icon_name, update_icon);
+        }
+      else if (!g_strcmp0 (name, "OverlayIconPixmap"))
+        {
+          pb_val1 = sn_item_extract_pixbuf (value);
+          update_new_pixbuf (pb_val1, overlay_icon_pixbuf, update_icon);
+        }
+    }
 
   g_variant_iter_free (iter);
   g_variant_unref (properties);
 
-  #undef update_new_pixbuf
-  #undef update_new_string
-  #undef string_empty_null
+#undef update_new_pixbuf
+#undef update_new_string
+#undef string_empty_null
 
   if (!item->initialized)
     {
@@ -911,12 +903,12 @@ sn_item_get_name (SnItem *item)
 
 
 void
-sn_item_get_icon (SnItem       *item,
+sn_item_get_icon (SnItem *item,
                   const gchar **theme_path,
                   const gchar **icon_name,
-                  GdkPixbuf   **icon_pixbuf,
+                  GdkPixbuf **icon_pixbuf,
                   const gchar **overlay_icon_name,
-                  GdkPixbuf   **overlay_icon_pixbuf)
+                  GdkPixbuf **overlay_icon_pixbuf)
 {
   g_return_if_fail (SN_IS_ITEM (item));
   g_return_if_fail (item->initialized);
@@ -924,15 +916,15 @@ sn_item_get_icon (SnItem       *item,
   if (icon_name != NULL)
     {
       *icon_name = item->attention_icon_name != NULL
-                   ? item->attention_icon_name
-                   : item->icon_name;
+                     ? item->attention_icon_name
+                     : item->icon_name;
     }
 
   if (icon_pixbuf != NULL)
     {
       *icon_pixbuf = item->attention_icon_pixbuf != NULL
-                   ? item->attention_icon_pixbuf
-                   : item->icon_pixbuf;
+                       ? item->attention_icon_pixbuf
+                       : item->icon_pixbuf;
     }
 
   if (overlay_icon_name != NULL)
@@ -948,7 +940,7 @@ sn_item_get_icon (SnItem       *item,
 
 
 void
-sn_item_get_tooltip (SnItem       *item,
+sn_item_get_tooltip (SnItem *item,
                      const gchar **title,
                      const gchar **subtitle)
 {
@@ -958,11 +950,11 @@ sn_item_get_tooltip (SnItem       *item,
   g_return_if_fail (item->initialized);
 
   if (title == NULL)
-    title = (gpointer)&stub;
+    title = (gpointer) &stub;
   if (subtitle == NULL)
-    subtitle = (gpointer)&stub;
+    subtitle = (gpointer) &stub;
 
-  #define sn_subtitle(subtitle) (g_strcmp0 (subtitle, *title) ? subtitle : NULL)
+#define sn_subtitle(subtitle) (g_strcmp0 (subtitle, *title) ? subtitle : NULL)
 
   if (item->tooltip_title != NULL && item->tooltip_subtitle != NULL)
     {
@@ -1007,12 +999,12 @@ sn_item_get_tooltip (SnItem       *item,
           *subtitle = NULL;
         }
     }
-  else if (item->tooltip_title != NULL )
+  else if (item->tooltip_title != NULL)
     {
       *title = item->tooltip_title;
       *subtitle = NULL;
     }
-  else if (item->title != NULL )
+  else if (item->title != NULL)
     {
       *title = item->title;
       *subtitle = NULL;
@@ -1023,7 +1015,7 @@ sn_item_get_tooltip (SnItem       *item,
       *subtitle = NULL;
     }
 
-  #undef sn_subtitle
+#undef sn_subtitle
 }
 
 
@@ -1042,8 +1034,8 @@ sn_item_is_menu_only (SnItem *item)
 GtkWidget *
 sn_item_get_menu (SnItem *item)
 {
-  #ifdef HAVE_DBUSMENU
-  DbusmenuGtkMenu   *menu;
+#ifdef HAVE_DBUSMENU
+  DbusmenuGtkMenu *menu;
   DbusmenuGtkClient *client;
 
   g_return_val_if_fail (SN_IS_ITEM (item), NULL);
@@ -1062,17 +1054,17 @@ sn_item_get_menu (SnItem *item)
     }
 
   return item->cached_menu;
-  #else
+#else
   return NULL;
-  #endif
+#endif
 }
 
 
 
 void
 sn_item_activate (SnItem *item,
-                  gint    x_root,
-                  gint    y_root)
+                  gint x_root,
+                  gint y_root)
 {
   g_return_if_fail (SN_IS_ITEM (item));
   g_return_if_fail (item->initialized);
@@ -1088,8 +1080,8 @@ sn_item_activate (SnItem *item,
 
 void
 sn_item_secondary_activate (SnItem *item,
-                            gint    x_root,
-                            gint    y_root)
+                            gint x_root,
+                            gint y_root)
 {
   g_return_if_fail (SN_IS_ITEM (item));
   g_return_if_fail (item->initialized);
@@ -1105,8 +1097,8 @@ sn_item_secondary_activate (SnItem *item,
 
 void
 sn_item_scroll (SnItem *item,
-                gint    delta_x,
-                gint    delta_y)
+                gint delta_x,
+                gint delta_y)
 {
   g_return_if_fail (SN_IS_ITEM (item));
   g_return_if_fail (item->initialized);

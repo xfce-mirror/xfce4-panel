@@ -19,8 +19,9 @@
 #ifndef __LAUNCHER_H__
 #define __LAUNCHER_H__
 
+#include "libxfce4panel/libxfce4panel.h"
+
 #include <garcon/garcon.h>
-#include <libxfce4panel/libxfce4panel.h>
 
 G_BEGIN_DECLS
 
@@ -37,19 +38,25 @@ typedef enum _LauncherArrowType
   LAUNCHER_ARROW_INTERNAL
 } LauncherArrowType;
 
-void        launcher_plugin_register_type    (XfcePanelTypeModule *type_module);
+void
+launcher_plugin_register_type (XfcePanelTypeModule *type_module);
 
-GSList     *launcher_plugin_get_items        (LauncherPlugin      *plugin);
+GSList *
+launcher_plugin_get_items (LauncherPlugin *plugin);
 
-gchar      *launcher_plugin_unique_filename  (LauncherPlugin      *plugin);
+gchar *
+launcher_plugin_unique_filename (LauncherPlugin *plugin);
 
-GHashTable *launcher_plugin_garcon_menu_pool (void);
+GHashTable *
+launcher_plugin_garcon_menu_pool (void);
 
-gboolean    launcher_plugin_item_is_editable (LauncherPlugin      *plugin,
-                                              GarconMenuItem      *item,
-                                              gboolean            *can_delete);
+gboolean
+launcher_plugin_item_is_editable (LauncherPlugin *plugin,
+                                  GarconMenuItem *item,
+                                  gboolean *can_delete);
 
-GIcon      *launcher_plugin_tooltip_icon     (const gchar         *icon_name);
+GIcon *
+launcher_plugin_tooltip_icon (const gchar *icon_name);
 
 G_END_DECLS
 

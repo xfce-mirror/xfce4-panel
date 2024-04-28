@@ -19,18 +19,23 @@
 #ifndef __CLOCK_BINARY_H__
 #define __CLOCK_BINARY_H__
 
+#include "clock-time.h"
+
+#include "libxfce4panel/libxfce4panel.h"
+
 #include <gtk/gtk.h>
-#include <libxfce4panel/libxfce4panel.h>
 
 G_BEGIN_DECLS
 
 #define XFCE_CLOCK_TYPE_BINARY (xfce_clock_binary_get_type ())
 G_DECLARE_FINAL_TYPE (XfceClockBinary, xfce_clock_binary, XFCE_CLOCK, BINARY, GtkImage)
 
-void       xfce_clock_binary_register_type (XfcePanelTypeModule *type_module);
+void
+xfce_clock_binary_register_type (XfcePanelTypeModule *type_module);
 
-GtkWidget *xfce_clock_binary_new           (ClockTime           *time,
-                                            ClockSleepMonitor   *sleep_monitor) G_GNUC_MALLOC;
+GtkWidget *
+xfce_clock_binary_new (ClockTime *time,
+                       ClockSleepMonitor *sleep_monitor) G_GNUC_MALLOC;
 
 G_END_DECLS
 

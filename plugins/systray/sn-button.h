@@ -20,24 +20,27 @@
 #ifndef __SN_BUTTON_H__
 #define __SN_BUTTON_H__
 
-#include <gtk/gtk.h>
-
 #include "sn-config.h"
 #include "sn-item.h"
 #include "sn-plugin.h"
+
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
 #define SN_TYPE_BUTTON (sn_button_get_type ())
 G_DECLARE_FINAL_TYPE (SnButton, sn_button, SN, BUTTON, GtkButton)
 
-SnItem                *sn_button_get_item                      (SnButton                *button);
+SnItem *
+sn_button_get_item (SnButton *button);
 
-const gchar           *sn_button_get_name                      (SnButton                *button);
+const gchar *
+sn_button_get_name (SnButton *button);
 
-GtkWidget             *sn_button_new                           (SnItem                  *item,
-                                                                SnPlugin                *plugin,
-                                                                SnConfig                *config);
+GtkWidget *
+sn_button_new (SnItem *item,
+               SnPlugin *plugin,
+               SnConfig *config);
 
 G_END_DECLS
 

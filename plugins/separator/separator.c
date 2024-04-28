@@ -18,44 +18,52 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#include <gtk/gtk.h>
-#include <libxfce4panel/xfce-panel-plugin-provider.h>
-#include <libxfce4ui/libxfce4ui.h>
-#include <common/panel-private.h>
-#include <common/panel-xfconf.h>
-#include <common/panel-utils.h>
-
-#include "separator.h"
 #include "separator-dialog_ui.h"
+#include "separator.h"
+
+#include "common/panel-private.h"
+#include "common/panel-utils.h"
+#include "common/panel-xfconf.h"
+#include "libxfce4panel/xfce-panel-plugin-provider.h"
+
+#include <gtk/gtk.h>
+#include <libxfce4ui/libxfce4ui.h>
 
 
 #define SEPARATOR_OFFSET (0.15)
-#define SEPARATOR_SIZE   (8)
-#define DOTS_OFFSET      (4)
-#define DOTS_SIZE        (3)
-#define HANDLE_SIZE      (4)
+#define SEPARATOR_SIZE (8)
+#define DOTS_OFFSET (4)
+#define DOTS_SIZE (3)
+#define HANDLE_SIZE (4)
 
 
 
-static void     separator_plugin_get_property              (GObject               *object,
-                                                            guint                  prop_id,
-                                                            GValue                *value,
-                                                            GParamSpec            *pspec);
-static void     separator_plugin_set_property              (GObject               *object,
-                                                            guint                  prop_id,
-                                                            const GValue          *value,
-                                                            GParamSpec            *pspec);
-static gboolean separator_plugin_draw                      (GtkWidget             *widget,
-                                                            cairo_t               *cr);
-static void     separator_plugin_construct                 (XfcePanelPlugin       *panel_plugin);
-static gboolean separator_plugin_size_changed              (XfcePanelPlugin       *panel_plugin,
-                                                            gint                   size);
-static void     separator_plugin_configure_plugin          (XfcePanelPlugin       *panel_plugin);
-static void     separator_plugin_orientation_changed       (XfcePanelPlugin       *panel_plugin,
-                                                            GtkOrientation         orientation);
+static void
+separator_plugin_get_property (GObject *object,
+                               guint prop_id,
+                               GValue *value,
+                               GParamSpec *pspec);
+static void
+separator_plugin_set_property (GObject *object,
+                               guint prop_id,
+                               const GValue *value,
+                               GParamSpec *pspec);
+static gboolean
+separator_plugin_draw (GtkWidget *widget,
+                       cairo_t *cr);
+static void
+separator_plugin_construct (XfcePanelPlugin *panel_plugin);
+static gboolean
+separator_plugin_size_changed (XfcePanelPlugin *panel_plugin,
+                               gint size);
+static void
+separator_plugin_configure_plugin (XfcePanelPlugin *panel_plugin);
+static void
+separator_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
+                                      GtkOrientation orientation);
 
 
 
@@ -79,7 +87,7 @@ struct _SeparatorPlugin
   XfcePanelPlugin __parent__;
 
   /* separator style */
-  SeparatorPluginStyle  style;
+  SeparatorPluginStyle style;
 };
 
 enum
@@ -100,8 +108,8 @@ static void
 separator_plugin_class_init (SeparatorPluginClass *klass)
 {
   XfcePanelPluginClass *plugin_class;
-  GObjectClass         *gobject_class;
-  GtkWidgetClass       *widget_class;
+  GObjectClass *gobject_class;
+  GtkWidgetClass *widget_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->set_property = separator_plugin_set_property;
@@ -144,13 +152,13 @@ separator_plugin_init (SeparatorPlugin *plugin)
 
 
 static void
-separator_plugin_get_property (GObject    *object,
-                               guint       prop_id,
-                               GValue     *value,
+separator_plugin_get_property (GObject *object,
+                               guint prop_id,
+                               GValue *value,
                                GParamSpec *pspec)
 {
   SeparatorPlugin *plugin = SEPARATOR_PLUGIN (object);
-  gboolean         expand;
+  gboolean expand;
 
   switch (prop_id)
     {
@@ -172,10 +180,10 @@ separator_plugin_get_property (GObject    *object,
 
 
 static void
-separator_plugin_set_property (GObject      *object,
-                               guint         prop_id,
+separator_plugin_set_property (GObject *object,
+                               guint prop_id,
                                const GValue *value,
-                               GParamSpec   *pspec)
+                               GParamSpec *pspec)
 {
   SeparatorPlugin *plugin = SEPARATOR_PLUGIN (object);
 
@@ -206,14 +214,14 @@ separator_plugin_set_property (GObject      *object,
 
 static gboolean
 separator_plugin_draw (GtkWidget *widget,
-                       cairo_t   *cr)
+                       cairo_t *cr)
 {
-  SeparatorPlugin  *plugin = SEPARATOR_PLUGIN (widget);
-  GtkAllocation     alloc;
-  gdouble           x, y;
-  guint             dotcount, i;
-  GtkStyleContext  *ctx;
-  GdkRGBA           fg_rgba;
+  SeparatorPlugin *plugin = SEPARATOR_PLUGIN (widget);
+  GtkAllocation alloc;
+  gdouble x, y;
+  guint dotcount, i;
+  GtkStyleContext *ctx;
+  GdkRGBA fg_rgba;
 
   gtk_widget_get_allocation (widget, &alloc);
 
@@ -232,8 +240,7 @@ separator_plugin_draw (GtkWidget *widget,
 
     case SEPARATOR_PLUGIN_STYLE_SEPARATOR:
 
-      if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
-          GTK_ORIENTATION_HORIZONTAL)
+      if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_HORIZONTAL)
         {
           gtk_render_line (ctx, cr,
                            (gdouble) (alloc.width - 1.0) / 2.0,
@@ -258,8 +265,7 @@ separator_plugin_draw (GtkWidget *widget,
       /* draw the handle */
       for (i = 0; i < 3; i++)
         {
-          if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
-              GTK_ORIENTATION_HORIZONTAL)
+          if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_HORIZONTAL)
             {
               cairo_move_to (cr, x, y + (i * HANDLE_SIZE) - (HANDLE_SIZE / 2));
               cairo_line_to (cr, x + HANDLE_SIZE, y + (i * HANDLE_SIZE) - (HANDLE_SIZE / 2));
@@ -276,28 +282,26 @@ separator_plugin_draw (GtkWidget *widget,
     case SEPARATOR_PLUGIN_STYLE_DOTS:
       x = (alloc.width - DOTS_SIZE) / 2;
       y = (alloc.height - DOTS_SIZE) / 2;
-      if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
-          GTK_ORIENTATION_HORIZONTAL)
+      if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_HORIZONTAL)
         {
-          dotcount = MAX(alloc.height / (DOTS_SIZE + DOTS_OFFSET), 1);
+          dotcount = MAX (alloc.height / (DOTS_SIZE + DOTS_OFFSET), 1);
           y = (alloc.height / (double) dotcount - DOTS_SIZE) / 2;
         }
       else
         {
-          dotcount = MAX(alloc.width / (DOTS_SIZE + DOTS_OFFSET), 1);
+          dotcount = MAX (alloc.width / (DOTS_SIZE + DOTS_OFFSET), 1);
           x = (alloc.width / (double) dotcount - DOTS_SIZE) / 2;
         }
 
       /* draw the dots */
       for (i = 0; i < dotcount; i++)
         {
-          if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
-              GTK_ORIENTATION_HORIZONTAL)
-              cairo_arc (cr, x , y + (i * (alloc.height / (double) dotcount)) + (DOTS_SIZE / 2),
-                         DOTS_SIZE / 2, 0, 2 * 3.14);
+          if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_HORIZONTAL)
+            cairo_arc (cr, x, y + (i * (alloc.height / (double) dotcount)) + (DOTS_SIZE / 2),
+                       DOTS_SIZE / 2, 0, 2 * 3.14);
           else
-              cairo_arc (cr, x + (i * (alloc.width / (double) dotcount)) + (DOTS_SIZE / 2), y,
-                         DOTS_SIZE / 2, 0, 2 * 3.14);
+            cairo_arc (cr, x + (i * (alloc.width / (double) dotcount)) + (DOTS_SIZE / 2), y,
+                       DOTS_SIZE / 2, 0, 2 * 3.14);
           cairo_fill (cr);
         }
       break;
@@ -311,9 +315,8 @@ separator_plugin_draw (GtkWidget *widget,
 static void
 separator_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
-  SeparatorPlugin     *plugin = SEPARATOR_PLUGIN (panel_plugin);
-  const PanelProperty  properties[] =
-  {
+  SeparatorPlugin *plugin = SEPARATOR_PLUGIN (panel_plugin);
+  const PanelProperty properties[] = {
     { "style", G_TYPE_UINT },
     { "expand", G_TYPE_BOOLEAN },
     { NULL }
@@ -335,11 +338,10 @@ separator_plugin_construct (XfcePanelPlugin *panel_plugin)
 
 static gboolean
 separator_plugin_size_changed (XfcePanelPlugin *panel_plugin,
-                               gint             size)
+                               gint size)
 {
   /* set the minimum separator size */
-  if (xfce_panel_plugin_get_orientation (panel_plugin) ==
-      GTK_ORIENTATION_HORIZONTAL)
+  if (xfce_panel_plugin_get_orientation (panel_plugin) == GTK_ORIENTATION_HORIZONTAL)
     gtk_widget_set_size_request (GTK_WIDGET (panel_plugin),
                                  SEPARATOR_SIZE, size);
   else
@@ -355,9 +357,9 @@ static void
 separator_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   SeparatorPlugin *plugin = SEPARATOR_PLUGIN (panel_plugin);
-  GtkBuilder      *builder;
-  GObject         *dialog;
-  GObject         *style, *expand;
+  GtkBuilder *builder;
+  GObject *dialog;
+  GObject *style, *expand;
 
   panel_return_if_fail (SEPARATOR_IS_PLUGIN (plugin));
 
@@ -384,7 +386,7 @@ separator_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
 static void
 separator_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
-                                      GtkOrientation   orientation)
+                                      GtkOrientation orientation)
 {
   /* for a size change to set the widget size request properly */
   separator_plugin_size_changed (panel_plugin,

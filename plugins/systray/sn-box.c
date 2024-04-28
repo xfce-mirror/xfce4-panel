@@ -20,55 +20,63 @@
 
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
-
-#include <libxfce4panel/libxfce4panel.h>
 
 #include "sn-box.h"
 #include "sn-button.h"
 #include "sn-util.h"
 
+#include "libxfce4panel/libxfce4panel.h"
 
 
-static void                  sn_box_get_property                     (GObject                 *object,
-                                                                      guint                    prop_id,
-                                                                      GValue                  *value,
-                                                                      GParamSpec              *pspec);
-static void                  sn_box_finalize                         (GObject                 *object);
 
-static void                  sn_box_collect_known_items              (SnBox                   *box,
-                                                                      GHashTable              *result);
+static void
+sn_box_get_property (GObject *object,
+                     guint prop_id,
+                     GValue *value,
+                     GParamSpec *pspec);
+static void
+sn_box_finalize (GObject *object);
 
-static void                  sn_box_list_changed                     (SnBox                   *box,
-                                                                      SnConfig                *config);
+static void
+sn_box_collect_known_items (SnBox *box,
+                            GHashTable *result);
 
-static void                  sn_box_add                              (GtkContainer            *container,
-                                                                      GtkWidget               *child);
+static void
+sn_box_list_changed (SnBox *box,
+                     SnConfig *config);
 
-static void                  sn_box_remove                           (GtkContainer            *container,
-                                                                      GtkWidget               *child);
+static void
+sn_box_add (GtkContainer *container,
+            GtkWidget *child);
 
-static void                  sn_box_forall                           (GtkContainer            *container,
-                                                                      gboolean                 include_internals,
-                                                                      GtkCallback              callback,
-                                                                      gpointer                 callback_data);
+static void
+sn_box_remove (GtkContainer *container,
+               GtkWidget *child);
 
-static GType                 sn_box_child_type                       (GtkContainer            *container);
+static void
+sn_box_forall (GtkContainer *container,
+               gboolean include_internals,
+               GtkCallback callback,
+               gpointer callback_data);
 
-static void                  sn_box_get_preferred_width              (GtkWidget               *widget,
-                                                                      gint                    *minimal_width,
-                                                                      gint                    *natural_width);
+static GType
+sn_box_child_type (GtkContainer *container);
 
-static void                  sn_box_get_preferred_height             (GtkWidget               *widget,
-                                                                      gint                    *minimal_height,
-                                                                      gint                    *natural_height);
+static void
+sn_box_get_preferred_width (GtkWidget *widget,
+                            gint *minimal_width,
+                            gint *natural_width);
 
-static void                  sn_box_size_allocate                    (GtkWidget               *widget,
-                                                                     GtkAllocation            *allocation);
+static void
+sn_box_get_preferred_height (GtkWidget *widget,
+                             gint *minimal_height,
+                             gint *natural_height);
+
+static void
+sn_box_size_allocate (GtkWidget *widget,
+                      GtkAllocation *allocation);
 
 
 
@@ -80,17 +88,17 @@ enum
 
 struct _SnBox
 {
-  GtkContainer         __parent__;
+  GtkContainer __parent__;
 
-  SnConfig            *config;
+  SnConfig *config;
 
   /* in theory it's possible to have multiple items with same name */
-  GHashTable          *children;
+  GHashTable *children;
 
   /* hidden children counter */
-  gint                 n_hidden_children;
-  gint                 n_visible_children;
-  gboolean             show_hidden;
+  gint n_hidden_children;
+  gint n_visible_children;
+  gboolean show_hidden;
 };
 
 G_DEFINE_FINAL_TYPE (SnBox, sn_box, GTK_TYPE_CONTAINER)
@@ -100,8 +108,8 @@ G_DEFINE_FINAL_TYPE (SnBox, sn_box, GTK_TYPE_CONTAINER)
 static void
 sn_box_class_init (SnBoxClass *klass)
 {
-  GObjectClass      *object_class;
-  GtkWidgetClass    *widget_class;
+  GObjectClass *object_class;
+  GtkWidgetClass *widget_class;
   GtkContainerClass *container_class;
 
   object_class = G_OBJECT_CLASS (klass);
@@ -142,23 +150,23 @@ sn_box_init (SnBox *box)
 
 
 static void
-sn_box_get_property(GObject *object,
-                    guint prop_id,
-                    GValue *value,
-                    GParamSpec *pspec)
+sn_box_get_property (GObject *object,
+                     guint prop_id,
+                     GValue *value,
+                     GParamSpec *pspec)
 {
-  SnBox *box = SN_BOX(object);
+  SnBox *box = SN_BOX (object);
 
   switch (prop_id)
-  {
-  case PROP_HAS_HIDDEN:
-    g_value_set_boolean(value, box->n_hidden_children > 0);
-    break;
+    {
+    case PROP_HAS_HIDDEN:
+      g_value_set_boolean (value, box->n_hidden_children > 0);
+      break;
 
-  default:
-    G_OBJECT_WARN_INVALID_PROPERTY_ID(object, prop_id, pspec);
-    break;
-  }
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+    }
 }
 
 
@@ -194,11 +202,11 @@ sn_box_new (SnConfig *config)
 
 static void
 sn_box_collect_known_items_callback (GtkWidget *widget,
-                                     gpointer   user_data)
+                                     gpointer user_data)
 {
-  SnButton   *button = SN_BUTTON (widget);
+  SnButton *button = SN_BUTTON (widget);
   GHashTable *table = user_data;
-  gchar      *name;
+  gchar *name;
 
   name = g_strdup (sn_button_get_name (button));
   g_hash_table_replace (table, name, name);
@@ -207,7 +215,7 @@ sn_box_collect_known_items_callback (GtkWidget *widget,
 
 
 static void
-sn_box_collect_known_items (SnBox      *box,
+sn_box_collect_known_items (SnBox *box,
                             GHashTable *result)
 {
   gtk_container_foreach (GTK_CONTAINER (box),
@@ -217,12 +225,12 @@ sn_box_collect_known_items (SnBox      *box,
 
 
 static void
-sn_box_list_changed (SnBox    *box,
+sn_box_list_changed (SnBox *box,
                      SnConfig *config)
 {
   SnButton *button;
-  GList    *known_items, *li, *li_int, *li_tmp;
-  gint      n_hidden_children = 0, n_visible_children = 0;
+  GList *known_items, *li, *li_int, *li_tmp;
+  gint n_hidden_children = 0, n_visible_children = 0;
 
   g_return_if_fail (SN_IS_BOX (box));
   g_return_if_fail (SN_IS_CONFIG (config));
@@ -237,7 +245,7 @@ sn_box_list_changed (SnBox    *box,
           if (!sn_config_is_hidden (box->config,
                                     sn_button_get_name (button)))
             {
-              gtk_widget_map (GTK_WIDGET(button));
+              gtk_widget_map (GTK_WIDGET (button));
               n_visible_children++;
             }
           else
@@ -247,7 +255,7 @@ sn_box_list_changed (SnBox    *box,
             }
         }
     }
-  
+
   box->n_visible_children = n_visible_children;
   if (box->n_hidden_children != n_hidden_children)
     {
@@ -262,11 +270,11 @@ sn_box_list_changed (SnBox    *box,
 
 static void
 sn_box_add (GtkContainer *container,
-            GtkWidget    *child)
+            GtkWidget *child)
 {
-  SnBox       *box = SN_BOX (container);
-  SnButton    *button = SN_BUTTON (child);
-  GList       *li;
+  SnBox *box = SN_BOX (container);
+  SnButton *button = SN_BUTTON (child);
+  GList *li;
   const gchar *name;
 
   g_return_if_fail (SN_IS_BOX (box));
@@ -287,11 +295,11 @@ sn_box_add (GtkContainer *container,
 
 static void
 sn_box_remove (GtkContainer *container,
-               GtkWidget    *child)
+               GtkWidget *child)
 {
-  SnBox       *box = SN_BOX (container);
-  SnButton    *button = SN_BUTTON (child);
-  GList       *li, *li_tmp;
+  SnBox *box = SN_BOX (container);
+  SnButton *button = SN_BUTTON (child);
+  GList *li, *li_tmp;
   const gchar *name;
 
   /* search the child */
@@ -314,13 +322,13 @@ sn_box_remove (GtkContainer *container,
 
 static void
 sn_box_forall (GtkContainer *container,
-               gboolean      include_internals,
-               GtkCallback   callback,
-               gpointer      callback_data)
+               gboolean include_internals,
+               GtkCallback callback,
+               gpointer callback_data)
 {
-  SnBox    *box = SN_BOX (container);
+  SnBox *box = SN_BOX (container);
   SnButton *button;
-  GList    *known_items, *li, *li_int, *li_tmp;
+  GList *known_items, *li, *li_int, *li_tmp;
 
   /* run callback for all children */
   known_items = sn_config_get_known_items (box->config);
@@ -347,21 +355,21 @@ sn_box_child_type (GtkContainer *container)
 
 static void
 sn_box_measure_and_allocate (GtkWidget *widget,
-                             gint      *minimum_length,
-                             gint      *natural_length,
-                             gboolean   allocate,
-                             gint       x0,
-                             gint       y0,
-                             gboolean   horizontal)
+                             gint *minimum_length,
+                             gint *natural_length,
+                             gboolean allocate,
+                             gint x0,
+                             gint y0,
+                             gboolean horizontal)
 {
-  SnBox          *box = SN_BOX (widget);
-  SnButton       *button;
-  GList          *known_items, *li, *li_int, *li_tmp;
-  gint            panel_size, config_nrows, icon_size, hx_size, hy_size, nrows;
-  gboolean        single_row, single_horizontal, square_icons, rect_child;
-  gint            total_length, column_length, item_length, row;
-  GtkRequisition  child_req;
-  GtkAllocation   child_alloc;
+  SnBox *box = SN_BOX (widget);
+  SnButton *button;
+  GList *known_items, *li, *li_int, *li_tmp;
+  gint panel_size, config_nrows, icon_size, hx_size, hy_size, nrows;
+  gboolean single_row, single_horizontal, square_icons, rect_child;
+  gint total_length, column_length, item_length, row;
+  GtkRequisition child_req;
+  GtkAllocation child_alloc;
 
   gint n_hidden_children = 0, n_visible_children = 0;
 
@@ -477,21 +485,21 @@ sn_box_measure_and_allocate (GtkWidget *widget,
 
   box->n_visible_children = n_visible_children;
   if (box->n_hidden_children != n_hidden_children)
-  {
-    box->n_hidden_children = n_hidden_children;
-    g_object_notify(G_OBJECT(box), "has-hidden");
-  }
+    {
+      box->n_hidden_children = n_hidden_children;
+      g_object_notify (G_OBJECT (box), "has-hidden");
+    }
 }
 
 
 
 static void
 sn_box_get_preferred_width (GtkWidget *widget,
-                            gint      *minimum_width,
-                            gint      *natural_width)
+                            gint *minimum_width,
+                            gint *natural_width)
 {
   SnBox *box = SN_BOX (widget);
-  gint   panel_size;
+  gint panel_size;
 
   if (sn_config_get_panel_orientation (box->config) == GTK_ORIENTATION_HORIZONTAL)
     {
@@ -512,11 +520,11 @@ sn_box_get_preferred_width (GtkWidget *widget,
 
 static void
 sn_box_get_preferred_height (GtkWidget *widget,
-                             gint      *minimum_height,
-                             gint      *natural_height)
+                             gint *minimum_height,
+                             gint *natural_height)
 {
   SnBox *box = SN_BOX (widget);
-  gint   panel_size;
+  gint panel_size;
 
   if (sn_config_get_panel_orientation (box->config) == GTK_ORIENTATION_VERTICAL)
     {
@@ -536,7 +544,7 @@ sn_box_get_preferred_height (GtkWidget *widget,
 
 
 static void
-sn_box_size_allocate (GtkWidget     *widget,
+sn_box_size_allocate (GtkWidget *widget,
                       GtkAllocation *allocation)
 {
   SnBox *box = SN_BOX (widget);
@@ -545,18 +553,17 @@ sn_box_size_allocate (GtkWidget     *widget,
 
   sn_box_measure_and_allocate (widget, NULL, NULL,
                                TRUE, allocation->x, allocation->y,
-                               sn_config_get_panel_orientation (box->config) ==
-                               GTK_ORIENTATION_HORIZONTAL);
+                               sn_config_get_panel_orientation (box->config) == GTK_ORIENTATION_HORIZONTAL);
 }
 
 
 
 void
-sn_box_remove_item (SnBox  *box,
+sn_box_remove_item (SnBox *box,
                     SnItem *item)
 {
   SnButton *button;
-  GList    *known_items, *li, *li_int, *li_tmp;
+  GList *known_items, *li, *li_int, *li_tmp;
 
   g_return_if_fail (SN_IS_BOX (box));
 
@@ -584,8 +591,8 @@ sn_box_has_hidden_items (SnBox *box)
 }
 
 void
-sn_box_set_show_hidden (SnBox      *box,
-                        gboolean    show_hidden)
+sn_box_set_show_hidden (SnBox *box,
+                        gboolean show_hidden)
 {
   g_return_if_fail (SN_IS_BOX (box));
 

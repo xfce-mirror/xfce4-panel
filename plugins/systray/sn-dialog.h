@@ -20,17 +20,18 @@
 #ifndef __SN_DIALOG_H__
 #define __SN_DIALOG_H__
 
-#include <gtk/gtk.h>
-
 #include "sn-config.h"
+
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
 #define SN_TYPE_DIALOG (sn_dialog_get_type ())
 G_DECLARE_FINAL_TYPE (SnDialog, sn_dialog, SN, DIALOG, GObject)
 
-SnDialog              *sn_dialog_new                           (SnConfig                *config,
-                                                                GdkScreen               *screen);
+SnDialog *
+sn_dialog_new (SnConfig *config,
+               GdkScreen *screen);
 
 G_END_DECLS
 
