@@ -19,21 +19,20 @@
 
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-#ifdef HAVE_STRING_H
-#include <string.h>
+#include "config.h"
 #endif
 
 #include "sn-util.h"
 
 
 
-static void                  sn_weak_handler_destroy_data            (gpointer                 data,
-                                                                      GObject                 *where_the_object_was);
+static void
+sn_weak_handler_destroy_data (gpointer data,
+                              GObject *where_the_object_was);
 
-static void                  sn_weak_handler_destroy_instance        (gpointer                 data,
-                                                                      GObject                 *where_the_object_was);
+static void
+sn_weak_handler_destroy_instance (gpointer data,
+                                  GObject *where_the_object_was);
 
 
 
@@ -41,15 +40,14 @@ typedef struct
 {
   gpointer instance;
   gpointer data;
-  gulong   handler;
-}
-WeakHandler;
+  gulong handler;
+} WeakHandler;
 
 
 
 static void
-sn_weak_handler_destroy_data (gpointer  data,
-                              GObject  *where_the_object_was)
+sn_weak_handler_destroy_data (gpointer data,
+                              GObject *where_the_object_was)
 {
   WeakHandler *weak_handler = data;
 
@@ -65,8 +63,8 @@ sn_weak_handler_destroy_data (gpointer  data,
 
 
 static void
-sn_weak_handler_destroy_instance (gpointer  data,
-                                  GObject  *where_the_object_was)
+sn_weak_handler_destroy_instance (gpointer data,
+                                  GObject *where_the_object_was)
 {
   WeakHandler *weak_handler = data;
 
@@ -80,13 +78,13 @@ sn_weak_handler_destroy_instance (gpointer  data,
 
 
 static gulong
-sn_signal_connect_weak_internal (gpointer      instance,
-                                 const gchar  *detailed_signal,
-                                 GCallback     c_handler,
-                                 gpointer      data,
+sn_signal_connect_weak_internal (gpointer instance,
+                                 const gchar *detailed_signal,
+                                 GCallback c_handler,
+                                 gpointer data,
                                  GConnectFlags connect_flags)
 {
-  gulong       handler;
+  gulong handler;
   WeakHandler *weak_handler;
 
   g_return_val_if_fail (G_IS_OBJECT (data), 0);
@@ -116,10 +114,10 @@ sn_signal_connect_weak_internal (gpointer      instance,
 
 
 gulong
-sn_signal_connect_weak (gpointer     instance,
+sn_signal_connect_weak (gpointer instance,
                         const gchar *detailed_signal,
-                        GCallback    c_handler,
-                        gpointer     data)
+                        GCallback c_handler,
+                        gpointer data)
 {
   return sn_signal_connect_weak_internal (instance, detailed_signal,
                                           c_handler, data, 0);
@@ -128,10 +126,10 @@ sn_signal_connect_weak (gpointer     instance,
 
 
 gulong
-sn_signal_connect_weak_swapped (gpointer     instance,
+sn_signal_connect_weak_swapped (gpointer instance,
                                 const gchar *detailed_signal,
-                                GCallback    c_handler,
-                                gpointer     data)
+                                GCallback c_handler,
+                                gpointer data)
 {
   return sn_signal_connect_weak_internal (instance, detailed_signal,
                                           c_handler, data, G_CONNECT_SWAPPED);
@@ -141,7 +139,7 @@ sn_signal_connect_weak_swapped (gpointer     instance,
 
 static void
 sn_container_has_children_callback (GtkWidget *widget,
-                                    gpointer   user_data)
+                                    gpointer user_data)
 {
   gboolean *has_children = user_data;
   *has_children = TRUE;

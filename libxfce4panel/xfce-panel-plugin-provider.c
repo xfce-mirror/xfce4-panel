@@ -17,16 +17,15 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#include <gtk/gtk.h>
+#include "libxfce4panel/xfce-panel-macros.h"
+#include "libxfce4panel/xfce-panel-plugin-provider.h"
 
-#include <common/panel-private.h>
+#include "libxfce4panel/libxfce4panel-alias.h"
 
-#include <libxfce4panel/xfce-panel-macros.h>
-#include <libxfce4panel/xfce-panel-plugin-provider.h>
-#include <libxfce4panel/libxfce4panel-alias.h>
+#include "common/panel-private.h"
 
 
 
@@ -47,13 +46,12 @@ G_DEFINE_INTERFACE (XfcePanelPluginProvider, xfce_panel_plugin_provider, G_TYPE_
 static void
 xfce_panel_plugin_provider_default_init (XfcePanelPluginProviderInterface *klass)
 {
-  provider_signals[PROVIDER_SIGNAL] =
-    g_signal_new (g_intern_static_string ("provider-signal"),
-                  G_TYPE_FROM_CLASS (klass),
-                  G_SIGNAL_RUN_LAST,
-                  0, NULL, NULL,
-                  g_cclosure_marshal_VOID__UINT,
-                  G_TYPE_NONE, 1, G_TYPE_UINT);
+  provider_signals[PROVIDER_SIGNAL] = g_signal_new (g_intern_static_string ("provider-signal"),
+                                                    G_TYPE_FROM_CLASS (klass),
+                                                    G_SIGNAL_RUN_LAST,
+                                                    0, NULL, NULL,
+                                                    g_cclosure_marshal_VOID__UINT,
+                                                    G_TYPE_NONE, 1, G_TYPE_UINT);
 }
 
 
@@ -80,7 +78,7 @@ xfce_panel_plugin_provider_get_unique_id (XfcePanelPluginProvider *provider)
 
 void
 xfce_panel_plugin_provider_set_size (XfcePanelPluginProvider *provider,
-                                     gint                     size)
+                                     gint size)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
@@ -91,7 +89,7 @@ xfce_panel_plugin_provider_set_size (XfcePanelPluginProvider *provider,
 
 void
 xfce_panel_plugin_provider_set_icon_size (XfcePanelPluginProvider *provider,
-                                          gint                     icon_size)
+                                          gint icon_size)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
@@ -102,7 +100,7 @@ xfce_panel_plugin_provider_set_icon_size (XfcePanelPluginProvider *provider,
 
 void
 xfce_panel_plugin_provider_set_dark_mode (XfcePanelPluginProvider *provider,
-                                          gboolean                 dark_mode)
+                                          gboolean dark_mode)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
@@ -113,7 +111,7 @@ xfce_panel_plugin_provider_set_dark_mode (XfcePanelPluginProvider *provider,
 
 void
 xfce_panel_plugin_provider_set_mode (XfcePanelPluginProvider *provider,
-                                     XfcePanelPluginMode      mode)
+                                     XfcePanelPluginMode mode)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
@@ -124,7 +122,7 @@ xfce_panel_plugin_provider_set_mode (XfcePanelPluginProvider *provider,
 
 void
 xfce_panel_plugin_provider_set_nrows (XfcePanelPluginProvider *provider,
-                                      guint                    rows)
+                                      guint rows)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
@@ -135,7 +133,7 @@ xfce_panel_plugin_provider_set_nrows (XfcePanelPluginProvider *provider,
 
 void
 xfce_panel_plugin_provider_set_screen_position (XfcePanelPluginProvider *provider,
-                                                XfceScreenPosition       screen_position)
+                                                XfceScreenPosition screen_position)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
@@ -155,8 +153,8 @@ xfce_panel_plugin_provider_save (XfcePanelPluginProvider *provider)
 
 
 void
-xfce_panel_plugin_provider_emit_signal (XfcePanelPluginProvider       *provider,
-                                        XfcePanelPluginProviderSignal  provider_signal)
+xfce_panel_plugin_provider_emit_signal (XfcePanelPluginProvider *provider,
+                                        XfcePanelPluginProviderSignal provider_signal)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
@@ -220,9 +218,9 @@ xfce_panel_plugin_provider_removed (XfcePanelPluginProvider *provider)
 
 gboolean
 xfce_panel_plugin_provider_remote_event (XfcePanelPluginProvider *provider,
-                                         const gchar             *name,
-                                         const GValue            *value,
-                                         guint                   *handle)
+                                         const gchar *name,
+                                         const GValue *value,
+                                         guint *handle)
 {
   const GValue *real_value = value;
 
@@ -247,7 +245,7 @@ xfce_panel_plugin_provider_remote_event (XfcePanelPluginProvider *provider,
 
 void
 xfce_panel_plugin_provider_set_locked (XfcePanelPluginProvider *provider,
-                                       gboolean                 locked)
+                                       gboolean locked)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
@@ -266,4 +264,4 @@ xfce_panel_plugin_provider_ask_remove (XfcePanelPluginProvider *provider)
 
 
 #define __XFCE_PANEL_PLUGIN_PROVIDER_C__
-#include <libxfce4panel/libxfce4panel-aliasdef.c>
+#include "libxfce4panel/libxfce4panel-aliasdef.c"

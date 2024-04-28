@@ -17,31 +17,40 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#include <common/panel-private.h>
-#include <wrapper/wrapper-plug-x11.h>
-#include <wrapper/wrapper-plug.h>
+#include "wrapper/wrapper-plug-x11.h"
+#include "wrapper/wrapper-plug.h"
+
+#include "common/panel-private.h"
 
 
 
-static void       wrapper_plug_x11_finalize                   (GObject                          *object);
-static void       wrapper_plug_x11_iface_init                 (WrapperPlugInterface             *iface);
-static void       wrapper_plug_x11_child_size_allocate        (GtkWidget                        *widget,
-                                                               GtkAllocation                    *allocation);
-static void       wrapper_plug_x11_proxy_provider_signal      (WrapperPlug                      *plug,
-                                                               XfcePanelPluginProviderSignal     provider_signal,
-                                                               XfcePanelPluginProvider          *provider);
-static void       wrapper_plug_x11_proxy_remote_event_result  (WrapperPlug                      *plug,
-                                                               guint                             handle,
-                                                               gboolean                          result);
-static void       wrapper_plug_x11_set_background_color       (WrapperPlug                      *plug,
-                                                               const gchar                      *color);
-static void       wrapper_plug_x11_set_background_image       (WrapperPlug                      *plug,
-                                                               const gchar                      *image);
-static void       wrapper_plug_x11_set_geometry               (WrapperPlug                      *plug,
-                                                               const GdkRectangle               *geometry);
+static void
+wrapper_plug_x11_finalize (GObject *object);
+static void
+wrapper_plug_x11_iface_init (WrapperPlugInterface *iface);
+static void
+wrapper_plug_x11_child_size_allocate (GtkWidget *widget,
+                                      GtkAllocation *allocation);
+static void
+wrapper_plug_x11_proxy_provider_signal (WrapperPlug *plug,
+                                        XfcePanelPluginProviderSignal provider_signal,
+                                        XfcePanelPluginProvider *provider);
+static void
+wrapper_plug_x11_proxy_remote_event_result (WrapperPlug *plug,
+                                            guint handle,
+                                            gboolean result);
+static void
+wrapper_plug_x11_set_background_color (WrapperPlug *plug,
+                                       const gchar *color);
+static void
+wrapper_plug_x11_set_background_image (WrapperPlug *plug,
+                                       const gchar *image);
+static void
+wrapper_plug_x11_set_geometry (WrapperPlug *plug,
+                               const GdkRectangle *geometry);
 
 
 
