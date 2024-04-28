@@ -30,6 +30,10 @@
 
 #include <libxfce4util/libxfce4util.h>
 
+#ifdef HAVE_MATH_H
+#include <math.h>
+#endif
+
 
 
 /**
