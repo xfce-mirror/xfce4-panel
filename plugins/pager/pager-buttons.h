@@ -19,27 +19,33 @@
 #ifndef __PAGER_BUTTONS_H__
 #define __PAGER_BUTTONS_H__
 
+#include "libxfce4panel/libxfce4panel.h"
+
 #include <gtk/gtk.h>
 #include <libxfce4windowing/libxfce4windowing.h>
-#include <libxfce4panel/libxfce4panel.h>
 
 G_BEGIN_DECLS
 
 #define PAGER_TYPE_BUTTONS (pager_buttons_get_type ())
 G_DECLARE_FINAL_TYPE (PagerButtons, pager_buttons, PAGER, BUTTONS, XfcePanelPlugin)
 
-void       pager_buttons_register_type   (XfcePanelTypeModule *type_module);
+void
+pager_buttons_register_type (XfcePanelTypeModule *type_module);
 
-GtkWidget *pager_buttons_new             (XfwScreen           *screen) G_GNUC_MALLOC;
+GtkWidget *
+pager_buttons_new (XfwScreen *screen) G_GNUC_MALLOC;
 
-void       pager_buttons_set_orientation (PagerButtons        *pager,
-                                          GtkOrientation       orientation);
+void
+pager_buttons_set_orientation (PagerButtons *pager,
+                               GtkOrientation orientation);
 
-void       pager_buttons_set_n_rows      (PagerButtons        *pager,
-                                          gint                 rows);
+void
+pager_buttons_set_n_rows (PagerButtons *pager,
+                          gint rows);
 
-void       pager_buttons_set_numbering   (PagerButtons        *pager,
-                                          gboolean             numbering);
+void
+pager_buttons_set_numbering (PagerButtons *pager,
+                             gboolean numbering);
 
 G_END_DECLS
 

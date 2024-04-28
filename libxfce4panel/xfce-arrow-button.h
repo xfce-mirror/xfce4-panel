@@ -27,15 +27,15 @@
 G_BEGIN_DECLS
 
 typedef struct _XfceArrowButtonPrivate XfceArrowButtonPrivate;
-typedef struct _XfceArrowButtonClass   XfceArrowButtonClass;
-typedef struct _XfceArrowButton        XfceArrowButton;
+typedef struct _XfceArrowButtonClass XfceArrowButtonClass;
+typedef struct _XfceArrowButton XfceArrowButton;
 
-#define XFCE_TYPE_ARROW_BUTTON            (xfce_arrow_button_get_type ())
-#define XFCE_ARROW_BUTTON(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_ARROW_BUTTON, XfceArrowButton))
-#define XFCE_ARROW_BUTTON_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_ARROW_BUTTON, XfceArrowButtonClass))
-#define XFCE_IS_ARROW_BUTTON(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_ARROW_BUTTON))
+#define XFCE_TYPE_ARROW_BUTTON (xfce_arrow_button_get_type ())
+#define XFCE_ARROW_BUTTON(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_ARROW_BUTTON, XfceArrowButton))
+#define XFCE_ARROW_BUTTON_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_ARROW_BUTTON, XfceArrowButtonClass))
+#define XFCE_IS_ARROW_BUTTON(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_ARROW_BUTTON))
 #define XFCE_IS_ARROW_BUTTON_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_ARROW_BUTTON))
-#define XFCE_ARROW_BUTTON_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_ARROW_BUTTON, XfceArrowButtonClass))
+#define XFCE_ARROW_BUTTON_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_ARROW_BUTTON, XfceArrowButtonClass))
 
 struct _XfceArrowButtonClass
 {
@@ -44,7 +44,7 @@ struct _XfceArrowButtonClass
 
   /*< signals >*/
   void (*arrow_type_changed) (XfceArrowButton *button,
-                              GtkArrowType     type);
+                              GtkArrowType type);
 };
 
 /**
@@ -62,17 +62,23 @@ struct _XfceArrowButton
   XfceArrowButtonPrivate *priv;
 };
 
-GType         xfce_arrow_button_get_type       (void) G_GNUC_CONST;
+GType
+xfce_arrow_button_get_type (void) G_GNUC_CONST;
 
-GtkWidget    *xfce_arrow_button_new            (GtkArrowType     arrow_type) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+GtkWidget *
+xfce_arrow_button_new (GtkArrowType arrow_type) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
-GtkArrowType  xfce_arrow_button_get_arrow_type (XfceArrowButton *button);
-void          xfce_arrow_button_set_arrow_type (XfceArrowButton *button,
-                                                GtkArrowType     arrow_type);
+GtkArrowType
+xfce_arrow_button_get_arrow_type (XfceArrowButton *button);
+void
+xfce_arrow_button_set_arrow_type (XfceArrowButton *button,
+                                  GtkArrowType arrow_type);
 
-gboolean      xfce_arrow_button_get_blinking   (XfceArrowButton *button);
-void          xfce_arrow_button_set_blinking   (XfceArrowButton *button,
-                                                gboolean         blinking);
+gboolean
+xfce_arrow_button_get_blinking (XfceArrowButton *button);
+void
+xfce_arrow_button_set_blinking (XfceArrowButton *button,
+                                gboolean blinking);
 
 G_END_DECLS
 

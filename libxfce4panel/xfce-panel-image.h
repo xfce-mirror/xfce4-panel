@@ -27,8 +27,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct _XfcePanelImageClass   XfcePanelImageClass;
-typedef struct _XfcePanelImage        XfcePanelImage;
+typedef struct _XfcePanelImageClass XfcePanelImageClass;
+typedef struct _XfcePanelImage XfcePanelImage;
 typedef struct _XfcePanelImagePrivate XfcePanelImagePrivate;
 
 struct _XfcePanelImageClass
@@ -58,42 +58,51 @@ struct _XfcePanelImage
   XfcePanelImagePrivate *priv;
 };
 
-#define XFCE_TYPE_PANEL_IMAGE            (xfce_panel_image_get_type ())
-#define XFCE_PANEL_IMAGE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_PANEL_IMAGE, XfcePanelImage))
-#define XFCE_PANEL_IMAGE_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_PANEL_IMAGE, XfcePanelImageClass))
-#define XFCE_IS_PANEL_IMAGE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_PANEL_IMAGE))
+#define XFCE_TYPE_PANEL_IMAGE (xfce_panel_image_get_type ())
+#define XFCE_PANEL_IMAGE(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_PANEL_IMAGE, XfcePanelImage))
+#define XFCE_PANEL_IMAGE_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_PANEL_IMAGE, XfcePanelImageClass))
+#define XFCE_IS_PANEL_IMAGE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_PANEL_IMAGE))
 #define XFCE_IS_PANEL_IMAGE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_PANEL_IMAGE))
-#define XFCE_PANEL_IMAGE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_PANEL_IMAGE, XfcePanelImageClass))
+#define XFCE_PANEL_IMAGE_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_PANEL_IMAGE, XfcePanelImageClass))
 
-GType      xfce_panel_image_get_type        (void)
-G_GNUC_CONST G_GNUC_DEPRECATED;
+GType
+xfce_panel_image_get_type (void)
+  G_GNUC_CONST G_GNUC_DEPRECATED;
 
-GtkWidget *xfce_panel_image_new             (void)
-G_GNUC_MALLOC G_GNUC_DEPRECATED_FOR (gtk_image_new());
+GtkWidget *
+xfce_panel_image_new (void)
+  G_GNUC_MALLOC G_GNUC_DEPRECATED_FOR (gtk_image_new ());
 
-GtkWidget *xfce_panel_image_new_from_pixbuf (GdkPixbuf      *pixbuf)
-G_GNUC_MALLOC G_GNUC_DEPRECATED_FOR (gtk_image_new_from_pixbuf());
+GtkWidget *
+xfce_panel_image_new_from_pixbuf (GdkPixbuf *pixbuf)
+  G_GNUC_MALLOC G_GNUC_DEPRECATED_FOR (gtk_image_new_from_pixbuf ());
 
-GtkWidget *xfce_panel_image_new_from_source (const gchar    *source)
-G_GNUC_MALLOC G_GNUC_DEPRECATED_FOR (gtk_image_new() and xfce_panel_set_image_from_source());
+GtkWidget *
+xfce_panel_image_new_from_source (const gchar *source)
+  G_GNUC_MALLOC G_GNUC_DEPRECATED_FOR (gtk_image_new () and xfce_panel_set_image_from_source ());
 
-void       xfce_panel_image_set_from_pixbuf (XfcePanelImage *image,
-                                             GdkPixbuf      *pixbuf)
-G_GNUC_DEPRECATED_FOR (gtk_image_set_from_pixbuf());
+void
+xfce_panel_image_set_from_pixbuf (XfcePanelImage *image,
+                                  GdkPixbuf *pixbuf)
+  G_GNUC_DEPRECATED_FOR (gtk_image_set_from_pixbuf ());
 
-void       xfce_panel_image_set_from_source (XfcePanelImage *image,
-                                             const gchar    *source)
-G_GNUC_DEPRECATED_FOR (xfce_panel_set_image_from_source());
+void
+xfce_panel_image_set_from_source (XfcePanelImage *image,
+                                  const gchar *source)
+  G_GNUC_DEPRECATED_FOR (xfce_panel_set_image_from_source ());
 
-void       xfce_panel_image_set_size        (XfcePanelImage *image,
-                                             gint            size)
-G_GNUC_DEPRECATED_FOR (gtk_image_set_pixel_size());
+void
+xfce_panel_image_set_size (XfcePanelImage *image,
+                           gint size)
+  G_GNUC_DEPRECATED_FOR (gtk_image_set_pixel_size ());
 
-gint       xfce_panel_image_get_size        (XfcePanelImage *image)
-G_GNUC_DEPRECATED_FOR (gtk_image_get_pixel_size());
+gint
+xfce_panel_image_get_size (XfcePanelImage *image)
+  G_GNUC_DEPRECATED_FOR (gtk_image_get_pixel_size ());
 
-void       xfce_panel_image_clear           (XfcePanelImage *image)
-G_GNUC_DEPRECATED_FOR (gtk_image_clear());
+void
+xfce_panel_image_clear (XfcePanelImage *image)
+  G_GNUC_DEPRECATED_FOR (gtk_image_clear ());
 
 G_END_DECLS
 

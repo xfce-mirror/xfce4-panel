@@ -20,40 +20,39 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
+#include "panel/panel-tic-tac-toe.h"
 
-#include <common/panel-private.h>
-#include <panel/panel-tic-tac-toe.h>
+#include "common/panel-private.h"
 
 
 
-static void panel_tic_tac_toe_response       (GtkDialog      *dialog,
-                                              gint            response_id);
-static void panel_tic_tac_toe_move           (PanelTicTacToe *dialog);
-static void panel_tic_tac_toe_button_clicked (GtkWidget      *button,
-                                              PanelTicTacToe *dialog);
-static void panel_tic_tac_toe_new_game       (PanelTicTacToe *dialog);
+static void
+panel_tic_tac_toe_response (GtkDialog *dialog,
+                            gint response_id);
+static void
+panel_tic_tac_toe_move (PanelTicTacToe *dialog);
+static void
+panel_tic_tac_toe_button_clicked (GtkWidget *button,
+                                  PanelTicTacToe *dialog);
+static void
+panel_tic_tac_toe_new_game (PanelTicTacToe *dialog);
 
 
 
-#define cells_to_hex(c1,c2,c3,c4,c5,c6,c7,c8,c9)  (c1 << 0 | c2 << 1 | c3 << 2 | \
-                                                   c4 << 3 | c5 << 4 | c6 << 5 | \
-                                                   c7 << 6 | c8 << 7 | c9 << 8)
-#define cells_to_hex2(c1,c2,c3,c4,c5,c6,c7,c8,c9) (c1 << 0 | c2 << 2 | c3 << 4 | \
-                                                   c4 << 6 | c5 << 8 | c6 << 10 | \
-                                                   c7 << 12 | c8 << 14 | c9 << 16)
-#define winner_hex(winner,state)                  ((((winner) - 1) << 18) | (state))
+#define cells_to_hex(c1, c2, c3, c4, c5, c6, c7, c8, c9) \
+  (c1 << 0 | c2 << 1 | c3 << 2 | c4 << 3 | c5 << 4 | c6 << 5 | c7 << 6 | c8 << 7 | c9 << 8)
+#define cells_to_hex2(c1, c2, c3, c4, c5, c6, c7, c8, c9) \
+  (c1 << 0 | c2 << 2 | c3 << 4 | c4 << 6 | c5 << 8 | c6 << 10 | c7 << 12 | c8 << 14 | c9 << 16)
+#define winner_hex(winner, state) ((((winner) - 1) << 18) | (state))
 
 
 
 struct _PanelTicTacToe
 {
-  XfceTitledDialog  __parent__;
+  XfceTitledDialog __parent__;
 
   GtkWidget *buttons[9];
   GtkWidget *labels[9];
@@ -70,10 +69,10 @@ enum
 
 enum
 {
-  ONE      = 1,
+  ONE = 1,
   PLAYER_O = 2,
   PLAYER_X = 3,
-  TIE      = 4
+  TIE = 4
 };
 
 
@@ -99,9 +98,9 @@ panel_tic_tac_toe_init (PanelTicTacToe *dialog)
   GtkWidget *button;
   GtkWidget *grid;
   GtkWidget *separator;
-  guint      i;
+  guint i;
   GtkWidget *label;
-  guint      row, col;
+  guint row, col;
   GtkWidget *vbox;
   GtkWidget *combo;
   GtkWidget *hbox;
@@ -110,7 +109,7 @@ panel_tic_tac_toe_init (PanelTicTacToe *dialog)
   gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
   gtk_window_set_icon_name (GTK_WINDOW (dialog), "applications-games");
 
-#if !LIBXFCE4UI_CHECK_VERSION (4, 19, 3)
+#if !LIBXFCE4UI_CHECK_VERSION(4, 19, 3)
   xfce_titled_dialog_create_action_area (XFCE_TITLED_DIALOG (dialog));
 #endif
 
@@ -159,7 +158,7 @@ panel_tic_tac_toe_init (PanelTicTacToe *dialog)
       gtk_widget_set_can_default (button, FALSE);
       gtk_widget_set_can_focus (button, FALSE);
       g_signal_connect (G_OBJECT (button), "clicked",
-          G_CALLBACK (panel_tic_tac_toe_button_clicked), dialog);
+                        G_CALLBACK (panel_tic_tac_toe_button_clicked), dialog);
 
       label = dialog->labels[i] = gtk_label_new ("");
       gtk_container_add (GTK_CONTAINER (button), label);
@@ -179,7 +178,7 @@ panel_tic_tac_toe_init (PanelTicTacToe *dialog)
 
 static void
 panel_tic_tac_toe_response (GtkDialog *gtk_dialog,
-                            gint       response_id)
+                            gint response_id)
 {
   panel_return_if_fail (PANEL_IS_TIC_TAC_TOE (gtk_dialog));
 
@@ -200,9 +199,8 @@ static gint
 panel_tic_tac_toe_has_winner (gint state)
 {
   guint i;
-  gint  player_x, player_o, tie;
-  gint  matches[] =
-  {
+  gint player_x, player_o, tie;
+  gint matches[] = {
     /* horizontal */
     cells_to_hex2 (ONE, ONE, ONE, 0, 0, 0, 0, 0, 0),
     cells_to_hex2 (0, 0, 0, ONE, ONE, ONE, 0, 0, 0),
@@ -254,9 +252,10 @@ panel_tic_tac_toe_best_opening (gint state,
   if (state == 0)
     return possible_initial_moves;
 
-  mask = state & cells_to_hex2 (PLAYER_O, PLAYER_O, PLAYER_O,
-                                PLAYER_O, PLAYER_O, PLAYER_O,
-                                PLAYER_O, PLAYER_O, PLAYER_O);
+  mask = state
+         & cells_to_hex2 (PLAYER_O, PLAYER_O, PLAYER_O,
+                          PLAYER_O, PLAYER_O, PLAYER_O,
+                          PLAYER_O, PLAYER_O, PLAYER_O);
 
   /* user took the center, pick a corner */
   if (mask == cells_to_hex2 (0, 0, 0, 0, PLAYER_O, 0, 0, 0, 0))
@@ -431,21 +430,20 @@ panel_tic_tac_toe_get_move (gint state,
           rate = -999;
           for (i = 0; i < 9; i++)
             {
-               if ((legal_moves & (1 << i)) == 0)
-                 continue;
+              if ((legal_moves & (1 << i)) == 0)
+                continue;
 
-               value = panel_tic_tac_toe_get_move_rate (state, i, player, player, 15, 1);
-               if (value > rate)
-                 {
-                   /* found a better game, reset moves */
-                   rate = value;
-                   moves = 0;
-                 }
+              value = panel_tic_tac_toe_get_move_rate (state, i, player, player, 15, 1);
+              if (value > rate)
+                {
+                  /* found a better game, reset moves */
+                  rate = value;
+                  moves = 0;
+                }
 
-               /* add the moves with the current rating */
-               if (rate == value)
-                 moves |= (1 << i);
-
+              /* add the moves with the current rating */
+              if (rate == value)
+                moves |= (1 << i);
             }
           break;
 
@@ -486,10 +484,10 @@ panel_tic_tac_toe_get_move (gint state,
 static gint
 panel_tic_tac_toe_get_state (PanelTicTacToe *dialog)
 {
-  gint         state = 0;
-  gint         i;
+  gint state = 0;
+  gint i;
   const gchar *text;
-  gint         value;
+  gint value;
 
   panel_return_val_if_fail (PANEL_IS_TIC_TAC_TOE (dialog), 0);
 
@@ -529,20 +527,18 @@ panel_tic_tac_toe_move (PanelTicTacToe *dialog)
       gtk_widget_set_sensitive (dialog->buttons[move], FALSE);
       gtk_label_set_text (GTK_LABEL (dialog->labels[move]), "X");
     }
-
-
 }
 
 
 
 static void
 panel_tic_tac_toe_highlight_winner (PanelTicTacToe *dialog,
-                                    gint            winner)
+                                    gint winner)
 {
   PangoAttribute *attr;
-  PangoAttrList  *attrs;
-  gint            i;
-  gint            tie;
+  PangoAttrList *attrs;
+  gint i;
+  gint tie;
 
   panel_return_if_fail (PANEL_IS_TIC_TAC_TOE (dialog));
 
@@ -582,12 +578,12 @@ panel_tic_tac_toe_highlight_winner (PanelTicTacToe *dialog,
 
 
 static void
-panel_tic_tac_toe_button_clicked (GtkWidget      *button,
+panel_tic_tac_toe_button_clicked (GtkWidget *button,
                                   PanelTicTacToe *dialog)
 {
   GtkWidget *label;
-  gint       state;
-  gint       winner;
+  gint state;
+  gint winner;
 
   panel_return_if_fail (PANEL_IS_TIC_TAC_TOE (dialog));
 
@@ -608,9 +604,9 @@ panel_tic_tac_toe_button_clicked (GtkWidget      *button,
 static void
 panel_tic_tac_toe_new_game (PanelTicTacToe *dialog)
 {
-  PangoAttrList  *attrs, *attrs_dup;
+  PangoAttrList *attrs, *attrs_dup;
   PangoAttribute *attr;
-  gint            i;
+  gint i;
 
   attrs = pango_attr_list_new ();
   attr = pango_attr_weight_new (PANGO_WEIGHT_BOLD);

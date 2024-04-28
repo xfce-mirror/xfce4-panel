@@ -17,36 +17,30 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
+#include "panel/panel-module-factory.h"
 
-#ifdef HAVE_TIME_H
-#include <time.h>
-#endif
+#include "common/panel-debug.h"
+#include "common/panel-private.h"
+#include "libxfce4panel/libxfce4panel.h"
 
 #include <libxfce4util/libxfce4util.h>
 
-#include <common/panel-private.h>
-#include <common/panel-debug.h>
-
-#include <libxfce4panel/libxfce4panel.h>
-
-#include <panel/panel-module.h>
-#include <panel/panel-module-factory.h>
 
 
-
-static void     panel_module_factory_finalize        (GObject                  *object);
-static void     panel_module_factory_load_modules    (PanelModuleFactory       *factory);
-static gboolean panel_module_factory_modules_cleanup (gpointer                  key,
-                                                      gpointer                  value,
-                                                      gpointer                  user_data);
-static void     panel_module_factory_remove_plugin   (gpointer                  user_data,
-                                                      GObject                  *where_the_object_was);
+static void
+panel_module_factory_finalize (GObject *object);
+static void
+panel_module_factory_load_modules (PanelModuleFactory *factory);
+static gboolean
+panel_module_factory_modules_cleanup (gpointer key,
+                                      gpointer value,
+                                      gpointer user_data);
+static void
+panel_module_factory_remove_plugin (gpointer user_data,
+                                    GObject *where_the_object_was);
 
 
 
@@ -58,16 +52,16 @@ enum
 
 struct _PanelModuleFactory
 {
-  GObject  __parent__;
+  GObject __parent__;
 
   /* relation for name -> PanelModule */
   GHashTable *modules;
 
   /* all plugins in all windows */
-  GSList     *plugins;
+  GSList *plugins;
 
   /* if the factory contains the launcher plugin */
-  guint       has_launcher : 1;
+  guint has_launcher : 1;
 };
 
 
@@ -92,13 +86,12 @@ panel_module_factory_class_init (PanelModuleFactoryClass *klass)
   /**
    * Emitted when the unique status of one of the modules changed.
    **/
-  factory_signals[UNIQUE_CHANGED] =
-    g_signal_new (g_intern_static_string ("unique-changed"),
-                  G_TYPE_FROM_CLASS (gobject_class),
-                  G_SIGNAL_RUN_LAST,
-                  0, NULL, NULL,
-                  g_cclosure_marshal_VOID__OBJECT,
-                  G_TYPE_NONE, 1, PANEL_TYPE_MODULE);
+  factory_signals[UNIQUE_CHANGED] = g_signal_new (g_intern_static_string ("unique-changed"),
+                                                  G_TYPE_FROM_CLASS (gobject_class),
+                                                  G_SIGNAL_RUN_LAST,
+                                                  0, NULL, NULL,
+                                                  g_cclosure_marshal_VOID__OBJECT,
+                                                  G_TYPE_NONE, 1, PANEL_TYPE_MODULE);
 }
 
 
@@ -131,14 +124,14 @@ panel_module_factory_finalize (GObject *object)
 
 static void
 panel_module_factory_load_modules_dir (PanelModuleFactory *factory,
-                                       const gchar        *datadir,
-                                       const gchar        *libdir)
+                                       const gchar *datadir,
+                                       const gchar *libdir)
 {
-  GDir        *dir;
+  GDir *dir;
   const gchar *name, *p;
-  gchar       *filename;
+  gchar *filename;
   PanelModule *module;
-  gchar       *internal_name;
+  gchar *internal_name;
 
   /* try to open the directory */
   dir = g_dir_open (datadir, 0, NULL);
@@ -190,7 +183,7 @@ panel_module_factory_load_modules_dir (PanelModuleFactory *factory,
         }
       else
         {
-          exists:
+exists:
           g_free (internal_name);
         }
 
@@ -289,8 +282,8 @@ panel_module_factory_modules_cleanup (gpointer key,
                                       gpointer user_data)
 {
   PanelModuleFactory *factory = PANEL_MODULE_FACTORY (user_data);
-  PanelModule        *module = PANEL_MODULE (value);
-  gboolean            remove_from_table;
+  PanelModule *module = PANEL_MODULE (value);
+  gboolean remove_from_table;
 
   panel_return_val_if_fail (PANEL_IS_MODULE (module), TRUE);
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), TRUE);
@@ -300,8 +293,7 @@ panel_module_factory_modules_cleanup (gpointer key,
 
   /* if we're going to remove this item, check if it is the launcher */
   if (remove_from_table
-      && g_strcmp0 (LAUNCHER_PLUGIN_NAME,
-                    panel_module_get_name (module)) == 0)
+      && g_strcmp0 (LAUNCHER_PLUGIN_NAME, panel_module_get_name (module)) == 0)
     factory->has_launcher = FALSE;
 
   return remove_from_table;
@@ -310,8 +302,8 @@ panel_module_factory_modules_cleanup (gpointer key,
 
 
 static void
-panel_module_factory_remove_plugin (gpointer  user_data,
-                                    GObject  *where_the_object_was)
+panel_module_factory_remove_plugin (gpointer user_data,
+                                    GObject *where_the_object_was)
 {
   PanelModuleFactory *factory = PANEL_MODULE_FACTORY (user_data);
 
@@ -323,13 +315,12 @@ panel_module_factory_remove_plugin (gpointer  user_data,
 
 static inline gboolean
 panel_module_factory_unique_id_exists (PanelModuleFactory *factory,
-                                       gint                unique_id)
+                                       gint unique_id)
 {
   GSList *li;
 
   for (li = factory->plugins; li != NULL; li = li->next)
-    if (xfce_panel_plugin_provider_get_unique_id (
-        XFCE_PANEL_PLUGIN_PROVIDER (li->data)) == unique_id)
+    if (xfce_panel_plugin_provider_get_unique_id (li->data) == unique_id)
       return TRUE;
 
   return FALSE;
@@ -391,7 +382,6 @@ panel_module_factory_emit_unique_changed (PanelModule *module)
   factory = panel_module_factory_get ();
   g_signal_emit (G_OBJECT (factory), factory_signals[UNIQUE_CHANGED], 0, module);
   g_object_unref (G_OBJECT (factory));
-
 }
 
 
@@ -405,8 +395,7 @@ panel_module_factory_get_modules (PanelModuleFactory *factory)
   panel_module_factory_load_modules (factory);
 
   /* remove modules that are not found on the harddisk */
-  g_hash_table_foreach_remove (factory->modules,
-      panel_module_factory_modules_cleanup, factory);
+  g_hash_table_foreach_remove (factory->modules, panel_module_factory_modules_cleanup, factory);
 
   return g_hash_table_get_values (factory->modules);
 }
@@ -415,7 +404,7 @@ panel_module_factory_get_modules (PanelModuleFactory *factory)
 
 gboolean
 panel_module_factory_has_module (PanelModuleFactory *factory,
-                                 const gchar        *name)
+                                 const gchar *name)
 {
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), FALSE);
   panel_return_val_if_fail (name != NULL, FALSE);
@@ -427,10 +416,10 @@ panel_module_factory_has_module (PanelModuleFactory *factory,
 
 GSList *
 panel_module_factory_get_plugins (PanelModuleFactory *factory,
-                                  const gchar        *plugin_name)
+                                  const gchar *plugin_name)
 {
   GSList *li, *plugins = NULL;
-  gchar  *unique_name;
+  gchar *unique_name;
 
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), NULL);
   panel_return_val_if_fail (plugin_name != NULL, NULL);
@@ -462,16 +451,16 @@ panel_module_factory_get_plugins (PanelModuleFactory *factory,
 
 
 GtkWidget *
-panel_module_factory_new_plugin (PanelModuleFactory  *factory,
-                                 const gchar         *name,
-                                 GdkScreen           *screen,
-                                 gint                 unique_id,
-                                 gchar              **arguments,
-                                 gint                *return_unique_id)
+panel_module_factory_new_plugin (PanelModuleFactory *factory,
+                                 const gchar *name,
+                                 GdkScreen *screen,
+                                 gint unique_id,
+                                 gchar **arguments,
+                                 gint *return_unique_id)
 {
   PanelModule *module;
-  GtkWidget   *provider;
-  static gint  unique_id_counter = 0;
+  GtkWidget *provider;
+  static gint unique_id_counter = 0;
 
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), NULL);
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);

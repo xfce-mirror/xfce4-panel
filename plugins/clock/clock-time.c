@@ -18,23 +18,26 @@
 
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
-
-#include <common/panel-private.h>
 
 #include "clock-time.h"
 #include "clock.h"
 
-static void                 clock_time_finalize       (GObject          *object);
-static void                 clock_time_get_property   (GObject          *object,
-                                                       guint             prop_id,
-                                                       GValue           *value,
-                                                       GParamSpec       *pspec);
-static void                 clock_time_set_property   (GObject          *object,
-                                                       guint             prop_id,
-                                                       const GValue     *value,
-                                                       GParamSpec       *pspec);
+#include "common/panel-private.h"
+
+static void
+clock_time_finalize (GObject *object);
+static void
+clock_time_get_property (GObject *object,
+                         guint prop_id,
+                         GValue *value,
+                         GParamSpec *pspec);
+static void
+clock_time_set_property (GObject *object,
+                         guint prop_id,
+                         const GValue *value,
+                         GParamSpec *pspec);
 
 
 
@@ -48,20 +51,20 @@ enum
 
 struct _ClockTime
 {
-  GObject             __parent__;
+  GObject __parent__;
 
-  gchar              *timezone_name;
-  GTimeZone          *timezone;
+  gchar *timezone_name;
+  GTimeZone *timezone;
 };
 
 struct _ClockTimeTimeout
 {
-  guint       interval;
-  guint       timeout_id;
-  guint       timeout_counter;
-  guint       restart : 1;
-  ClockTime  *time;
-  guint       time_changed_id;
+  guint interval;
+  guint timeout_id;
+  guint timeout_counter;
+  guint restart : 1;
+  ClockTime *time;
+  guint time_changed_id;
   ClockSleepMonitor *sleep_monitor;
 };
 
@@ -71,7 +74,7 @@ enum
   LAST_SIGNAL
 };
 
-static guint clock_time_signals[LAST_SIGNAL] = { 0, };
+static guint clock_time_signals[LAST_SIGNAL] = { 0 };
 
 
 G_DEFINE_FINAL_TYPE (ClockTime, clock_time, G_TYPE_OBJECT)
@@ -81,7 +84,7 @@ G_DEFINE_FINAL_TYPE (ClockTime, clock_time, G_TYPE_OBJECT)
 static void
 clock_time_class_init (ClockTimeClass *klass)
 {
-  GObjectClass      *gobject_class;
+  GObjectClass *gobject_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = clock_time_finalize;
@@ -95,13 +98,12 @@ clock_time_class_init (ClockTimeClass *klass)
                                                         DEFAULT_TIMEZONE,
                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
-  clock_time_signals[TIME_CHANGED] =
-    g_signal_new (g_intern_static_string ("time-changed"),
-                  G_TYPE_FROM_CLASS (gobject_class),
-                  G_SIGNAL_RUN_LAST,
-                  0, NULL, NULL,
-                  g_cclosure_marshal_VOID__VOID,
-                  G_TYPE_NONE, 0);
+  clock_time_signals[TIME_CHANGED] = g_signal_new (g_intern_static_string ("time-changed"),
+                                                   G_TYPE_FROM_CLASS (gobject_class),
+                                                   G_SIGNAL_RUN_LAST,
+                                                   0, NULL, NULL,
+                                                   g_cclosure_marshal_VOID__VOID,
+                                                   G_TYPE_NONE, 0);
 }
 
 
@@ -131,9 +133,9 @@ clock_time_finalize (GObject *object)
 
 
 static void
-clock_time_get_property (GObject    *object,
-                         guint       prop_id,
-                         GValue     *value,
+clock_time_get_property (GObject *object,
+                         guint prop_id,
+                         GValue *value,
                          GParamSpec *pspec)
 {
   ClockTime *time = CLOCK_TIME (object);
@@ -153,13 +155,13 @@ clock_time_get_property (GObject    *object,
 
 
 static void
-clock_time_set_property (GObject      *object,
-                         guint         prop_id,
+clock_time_set_property (GObject *object,
+                         guint prop_id,
                          const GValue *value,
-                         GParamSpec   *pspec)
+                         GParamSpec *pspec)
 {
-  ClockTime     *time = CLOCK_TIME (object);
-  const gchar   *str_value;
+  ClockTime *time = CLOCK_TIME (object);
+  const gchar *str_value;
 
   switch (prop_id)
     {
@@ -170,7 +172,7 @@ clock_time_set_property (GObject      *object,
           g_free (time->timezone_name);
           if (time->timezone != NULL)
             g_time_zone_unref (time->timezone);
-          if (str_value == NULL || g_strcmp0 (str_value, "") == 0)
+          if (xfce_str_is_empty (str_value))
             {
               time->timezone_name = g_strdup (DEFAULT_TIMEZONE);
               time->timezone = NULL;
@@ -213,11 +215,11 @@ clock_time_get_time (ClockTime *time)
 
 
 gchar *
-clock_time_strdup_strftime (ClockTime       *time,
-                            const gchar     *format)
+clock_time_strdup_strftime (ClockTime *time,
+                            const gchar *format)
 {
   GDateTime *date_time;
-  gchar     *str;
+  gchar *str;
 
   panel_return_val_if_fail (CLOCK_IS_TIME (time), NULL);
 
@@ -227,8 +229,7 @@ clock_time_strdup_strftime (ClockTime       *time,
   g_date_time_unref (date_time);
 
   /* Explicitely return NULL if a format specifier fails */
-  if (!str ||
-      g_strcmp0 (str, "") == 0)
+  if (xfce_str_is_empty (str))
     return NULL;
   else
     return str;
@@ -242,7 +243,7 @@ clock_time_interval_from_format (const gchar *format)
   const gchar *p;
 
   if (G_UNLIKELY (xfce_str_is_empty (format)))
-      return CLOCK_INTERVAL_MINUTE;
+    return CLOCK_INTERVAL_MINUTE;
 
   for (p = format; *p != '\0'; ++p)
     {
@@ -271,7 +272,7 @@ static gboolean
 clock_time_timeout_running (gpointer user_data)
 {
   ClockTimeTimeout *timeout = user_data;
-  GDateTime        *time;
+  GDateTime *time;
 
   g_signal_emit (G_OBJECT (timeout->time), clock_time_signals[TIME_CHANGED], 0);
 
@@ -329,11 +330,11 @@ clock_time_timeout_sync (gpointer user_data)
 
 
 ClockTimeTimeout *
-clock_time_timeout_new (guint       interval,
-                        ClockTime  *time,
+clock_time_timeout_new (guint interval,
+                        ClockTime *time,
                         ClockSleepMonitor *sleep_monitor,
-                        GCallback   c_handler,
-                        gpointer    gobject)
+                        GCallback c_handler,
+                        gpointer gobject)
 {
   ClockTimeTimeout *timeout;
 
@@ -348,9 +349,8 @@ clock_time_timeout_new (guint       interval,
   timeout->restart = FALSE;
   timeout->time = time;
 
-  timeout->time_changed_id =
-    g_signal_connect_swapped (G_OBJECT (time), "time-changed",
-                              c_handler, gobject);
+  timeout->time_changed_id = g_signal_connect_swapped (G_OBJECT (time), "time-changed",
+                                                       c_handler, gobject);
 
   g_object_ref (G_OBJECT (timeout->time));
 
@@ -371,11 +371,11 @@ clock_time_timeout_new (guint       interval,
 
 void
 clock_time_timeout_set_interval (ClockTimeTimeout *timeout,
-                                 guint             interval)
+                                 guint interval)
 {
   GDateTime *time;
-  guint      next_interval;
-  gboolean   restart;
+  guint next_interval;
+  gboolean restart;
 
   panel_return_if_fail (timeout != NULL);
   panel_return_if_fail (interval > 0);

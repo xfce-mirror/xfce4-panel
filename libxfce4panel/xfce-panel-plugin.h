@@ -27,8 +27,8 @@
 G_BEGIN_DECLS
 
 typedef struct _XfcePanelPluginPrivate XfcePanelPluginPrivate;
-typedef struct _XfcePanelPluginClass   XfcePanelPluginClass;
-typedef struct _XfcePanelPlugin        XfcePanelPlugin;
+typedef struct _XfcePanelPluginClass XfcePanelPluginClass;
+typedef struct _XfcePanelPlugin XfcePanelPlugin;
 
 /**
  * XfcePanelPluginFunc:
@@ -55,7 +55,7 @@ typedef void (*XfcePanelPluginFunc) (XfcePanelPlugin *plugin);
  *
  * Since: 4.6
  **/
-typedef gboolean (*XfcePanelPluginPreInit) (gint    argc,
+typedef gboolean (*XfcePanelPluginPreInit) (gint argc,
                                             gchar **argv);
 
 /**
@@ -70,12 +70,12 @@ typedef gboolean (*XfcePanelPluginPreInit) (gint    argc,
  **/
 typedef gboolean (*XfcePanelPluginCheck) (GdkScreen *screen);
 
-#define XFCE_TYPE_PANEL_PLUGIN            (xfce_panel_plugin_get_type ())
-#define XFCE_PANEL_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_PANEL_PLUGIN, XfcePanelPlugin))
-#define XFCE_PANEL_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_PANEL_PLUGIN, XfcePanelPluginClass))
-#define XFCE_IS_PANEL_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_PANEL_PLUGIN))
+#define XFCE_TYPE_PANEL_PLUGIN (xfce_panel_plugin_get_type ())
+#define XFCE_PANEL_PLUGIN(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_PANEL_PLUGIN, XfcePanelPlugin))
+#define XFCE_PANEL_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_PANEL_PLUGIN, XfcePanelPluginClass))
+#define XFCE_IS_PANEL_PLUGIN(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_PANEL_PLUGIN))
 #define XFCE_IS_PANEL_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_PANEL_PLUGIN))
-#define XFCE_PANEL_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_PANEL_PLUGIN, XfcePanelPluginClass))
+#define XFCE_PANEL_PLUGIN_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_PANEL_PLUGIN, XfcePanelPluginClass))
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (XfcePanelPlugin, g_object_unref)
 
 /**
@@ -109,29 +109,29 @@ struct _XfcePanelPluginClass
 
   /*< public >*/
   /* for object oriented plugins only */
-  void     (*construct)               (XfcePanelPlugin    *plugin);
+  void (*construct) (XfcePanelPlugin *plugin);
 
   /* signals */
-  void     (*screen_position_changed) (XfcePanelPlugin    *plugin,
-                                       XfceScreenPosition  position);
-  gboolean (*size_changed)            (XfcePanelPlugin    *plugin,
-                                       gint                size);
-  void     (*orientation_changed)     (XfcePanelPlugin    *plugin,
-                                       GtkOrientation      orientation);
-  void     (*free_data)               (XfcePanelPlugin    *plugin);
-  void     (*save)                    (XfcePanelPlugin    *plugin);
-  void     (*about)                   (XfcePanelPlugin    *plugin);
-  void     (*configure_plugin)        (XfcePanelPlugin    *plugin);
-  void     (*removed)                 (XfcePanelPlugin    *plugin);
-  gboolean (*remote_event)            (XfcePanelPlugin    *plugin,
-                                       const gchar        *name,
-                                       const GValue       *value);
+  void (*screen_position_changed) (XfcePanelPlugin *plugin,
+                                   XfceScreenPosition position);
+  gboolean (*size_changed) (XfcePanelPlugin *plugin,
+                            gint size);
+  void (*orientation_changed) (XfcePanelPlugin *plugin,
+                               GtkOrientation orientation);
+  void (*free_data) (XfcePanelPlugin *plugin);
+  void (*save) (XfcePanelPlugin *plugin);
+  void (*about) (XfcePanelPlugin *plugin);
+  void (*configure_plugin) (XfcePanelPlugin *plugin);
+  void (*removed) (XfcePanelPlugin *plugin);
+  gboolean (*remote_event) (XfcePanelPlugin *plugin,
+                            const gchar *name,
+                            const GValue *value);
 
   /* new in 4.10 */
-  void     (*mode_changed)            (XfcePanelPlugin    *plugin,
-                                       XfcePanelPluginMode mode);
-  void     (*nrows_changed)           (XfcePanelPlugin    *plugin,
-                                       guint               rows);
+  void (*mode_changed) (XfcePanelPlugin *plugin,
+                        XfcePanelPluginMode mode);
+  void (*nrows_changed) (XfcePanelPlugin *plugin,
+                         guint rows);
 
   /*< private >*/
   void (*reserved1) (void);
@@ -156,107 +156,146 @@ struct _XfcePanelPlugin
 
 
 
-GType                 xfce_panel_plugin_get_type            (void) G_GNUC_CONST;
+GType
+xfce_panel_plugin_get_type (void) G_GNUC_CONST;
 
-const gchar          *xfce_panel_plugin_get_name            (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+const gchar *
+xfce_panel_plugin_get_name (XfcePanelPlugin *plugin) G_GNUC_PURE;
 
-const gchar          *xfce_panel_plugin_get_display_name    (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+const gchar *
+xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin) G_GNUC_PURE;
 
-const gchar          *xfce_panel_plugin_get_comment         (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+const gchar *
+xfce_panel_plugin_get_comment (XfcePanelPlugin *plugin) G_GNUC_PURE;
 
-gint                  xfce_panel_plugin_get_unique_id       (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+gint
+xfce_panel_plugin_get_unique_id (XfcePanelPlugin *plugin) G_GNUC_PURE;
 
-const gchar          *xfce_panel_plugin_get_property_base   (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+const gchar *
+xfce_panel_plugin_get_property_base (XfcePanelPlugin *plugin) G_GNUC_PURE;
 
-const gchar * const  *xfce_panel_plugin_get_arguments       (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+const gchar *const *
+xfce_panel_plugin_get_arguments (XfcePanelPlugin *plugin) G_GNUC_PURE;
 
-gint                  xfce_panel_plugin_get_size            (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+gint
+xfce_panel_plugin_get_size (XfcePanelPlugin *plugin) G_GNUC_PURE;
 
-gboolean              xfce_panel_plugin_get_expand          (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+gboolean
+xfce_panel_plugin_get_expand (XfcePanelPlugin *plugin) G_GNUC_PURE;
 
-void                  xfce_panel_plugin_set_expand          (XfcePanelPlugin   *plugin,
-                                                             gboolean           expand);
+void
+xfce_panel_plugin_set_expand (XfcePanelPlugin *plugin,
+                              gboolean expand);
 
-gboolean              xfce_panel_plugin_get_shrink          (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+gboolean
+xfce_panel_plugin_get_shrink (XfcePanelPlugin *plugin) G_GNUC_PURE;
 
-void                  xfce_panel_plugin_set_shrink          (XfcePanelPlugin   *plugin,
-                                                             gboolean           shrink);
+void
+xfce_panel_plugin_set_shrink (XfcePanelPlugin *plugin,
+                              gboolean shrink);
 
-gboolean              xfce_panel_plugin_get_small           (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+gboolean
+xfce_panel_plugin_get_small (XfcePanelPlugin *plugin) G_GNUC_PURE;
 
-void                  xfce_panel_plugin_set_small           (XfcePanelPlugin   *plugin,
-                                                             gboolean           small);
+void
+xfce_panel_plugin_set_small (XfcePanelPlugin *plugin,
+                             gboolean small);
 
-gint                  xfce_panel_plugin_get_icon_size       (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+gint
+xfce_panel_plugin_get_icon_size (XfcePanelPlugin *plugin) G_GNUC_PURE;
 
-GtkOrientation        xfce_panel_plugin_get_orientation     (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+GtkOrientation
+xfce_panel_plugin_get_orientation (XfcePanelPlugin *plugin) G_GNUC_PURE;
 
-XfcePanelPluginMode   xfce_panel_plugin_get_mode            (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+XfcePanelPluginMode
+xfce_panel_plugin_get_mode (XfcePanelPlugin *plugin) G_GNUC_PURE;
 
-guint                 xfce_panel_plugin_get_nrows           (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+guint
+xfce_panel_plugin_get_nrows (XfcePanelPlugin *plugin) G_GNUC_PURE;
 
-XfceScreenPosition    xfce_panel_plugin_get_screen_position (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+XfceScreenPosition
+xfce_panel_plugin_get_screen_position (XfcePanelPlugin *plugin) G_GNUC_PURE;
 
-void                  xfce_panel_plugin_take_window         (XfcePanelPlugin   *plugin,
-                                                             GtkWindow         *window);
+void
+xfce_panel_plugin_take_window (XfcePanelPlugin *plugin,
+                               GtkWindow *window);
 
-void                  xfce_panel_plugin_add_action_widget   (XfcePanelPlugin   *plugin,
-                                                             GtkWidget         *widget);
+void
+xfce_panel_plugin_add_action_widget (XfcePanelPlugin *plugin,
+                                     GtkWidget *widget);
 
-void                  xfce_panel_plugin_menu_insert_item    (XfcePanelPlugin   *plugin,
-                                                             GtkMenuItem       *item);
+void
+xfce_panel_plugin_menu_insert_item (XfcePanelPlugin *plugin,
+                                    GtkMenuItem *item);
 
-void                  xfce_panel_plugin_menu_show_configure (XfcePanelPlugin   *plugin);
+void
+xfce_panel_plugin_menu_show_configure (XfcePanelPlugin *plugin);
 
-void                  xfce_panel_plugin_menu_show_about     (XfcePanelPlugin   *plugin);
+void
+xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin);
 
-void                  xfce_panel_plugin_menu_destroy        (XfcePanelPlugin   *plugin);
+void
+xfce_panel_plugin_menu_destroy (XfcePanelPlugin *plugin);
 
-gboolean              xfce_panel_plugin_get_locked          (XfcePanelPlugin   *plugin);
+gboolean
+xfce_panel_plugin_get_locked (XfcePanelPlugin *plugin);
 
-void                  xfce_panel_plugin_remove              (XfcePanelPlugin   *plugin);
+void
+xfce_panel_plugin_remove (XfcePanelPlugin *plugin);
 
-void                  xfce_panel_plugin_block_menu          (XfcePanelPlugin   *plugin);
+void
+xfce_panel_plugin_block_menu (XfcePanelPlugin *plugin);
 
-void                  xfce_panel_plugin_unblock_menu        (XfcePanelPlugin   *plugin);
+void
+xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin);
 
-void                  xfce_panel_plugin_register_menu       (XfcePanelPlugin   *plugin,
-                                                             GtkMenu           *menu);
+void
+xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
+                                 GtkMenu *menu);
 
-GtkArrowType          xfce_panel_plugin_arrow_type          (XfcePanelPlugin   *plugin);
+GtkArrowType
+xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin);
 
-void                  xfce_panel_plugin_position_widget     (XfcePanelPlugin   *plugin,
-                                                             GtkWidget         *menu_widget,
-                                                             GtkWidget         *attach_widget,
-                                                             gint              *x,
-                                                             gint              *y);
+void
+xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
+                                   GtkWidget *menu_widget,
+                                   GtkWidget *attach_widget,
+                                   gint *x,
+                                   gint *y);
 
-void                  xfce_panel_plugin_position_menu       (GtkMenu           *menu,
-                                                             gint              *x,
-                                                             gint              *y,
-                                                             gboolean          *push_in,
-                                                             gpointer           panel_plugin)
-G_GNUC_DEPRECATED_FOR (xfce_panel_plugin_popup_menu());
+void
+xfce_panel_plugin_position_menu (GtkMenu *menu,
+                                 gint *x,
+                                 gint *y,
+                                 gboolean *push_in,
+                                 gpointer panel_plugin)
+  G_GNUC_DEPRECATED_FOR (xfce_panel_plugin_popup_menu ());
 
-void                  xfce_panel_plugin_popup_menu          (XfcePanelPlugin   *plugin,
-                                                             GtkMenu           *menu,
-                                                             GtkWidget         *widget,
-                                                             const GdkEvent    *trigger_event);
+void
+xfce_panel_plugin_popup_menu (XfcePanelPlugin *plugin,
+                              GtkMenu *menu,
+                              GtkWidget *widget,
+                              const GdkEvent *trigger_event);
 
-void                  xfce_panel_plugin_popup_window        (XfcePanelPlugin   *plugin,
-                                                             GtkWindow         *window,
-                                                             GtkWidget         *widget);
+void
+xfce_panel_plugin_popup_window (XfcePanelPlugin *plugin,
+                                GtkWindow *window,
+                                GtkWidget *widget);
 
-void                  xfce_panel_plugin_focus_widget        (XfcePanelPlugin   *plugin,
-                                                             GtkWidget         *widget);
+void
+xfce_panel_plugin_focus_widget (XfcePanelPlugin *plugin,
+                                GtkWidget *widget);
 
-void                  xfce_panel_plugin_block_autohide      (XfcePanelPlugin   *plugin,
-                                                             gboolean           blocked);
+void
+xfce_panel_plugin_block_autohide (XfcePanelPlugin *plugin,
+                                  gboolean blocked);
 
-gchar                *xfce_panel_plugin_lookup_rc_file      (XfcePanelPlugin   *plugin) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+gchar *
+xfce_panel_plugin_lookup_rc_file (XfcePanelPlugin *plugin) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
-gchar                *xfce_panel_plugin_save_location       (XfcePanelPlugin   *plugin,
-                                                             gboolean           create) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+gchar *
+xfce_panel_plugin_save_location (XfcePanelPlugin *plugin,
+                                 gboolean create) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
 G_END_DECLS
 

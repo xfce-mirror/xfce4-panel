@@ -19,11 +19,8 @@
 #ifndef __PANEL_PLUGIN_EXTERNAL_WRAPPER_H__
 #define __PANEL_PLUGIN_EXTERNAL_WRAPPER_H__
 
-#include <gtk/gtk.h>
-#include <libxfce4panel/libxfce4panel.h>
-#include <libxfce4panel/xfce-panel-plugin-provider.h>
-#include <panel/panel-module.h>
-#include <panel/panel-plugin-external.h>
+#include "panel/panel-module.h"
+#include "panel/panel-plugin-external.h"
 
 G_BEGIN_DECLS
 
@@ -35,9 +32,10 @@ struct _PanelPluginExternalWrapperClass
   PanelPluginExternalClass __parent__;
 };
 
-GtkWidget *panel_plugin_external_wrapper_new      (PanelModule  *module,
-                                                   gint          unique_id,
-                                                   gchar       **arguments) G_GNUC_MALLOC;
+GtkWidget *
+panel_plugin_external_wrapper_new (PanelModule *module,
+                                   gint unique_id,
+                                   gchar **arguments) G_GNUC_MALLOC;
 
 G_END_DECLS
 

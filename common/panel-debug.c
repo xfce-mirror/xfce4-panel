@@ -17,16 +17,11 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
-
-#include <glib.h>
-#include <common/panel-debug.h>
-#include <common/panel-private.h>
+#include "common/panel-debug.h"
+#include "common/panel-private.h"
 
 
 
@@ -35,8 +30,7 @@ static PanelDebugFlag panel_debug_flags = 0;
 
 
 /* additional debug levels */
-static const GDebugKey panel_debug_keys[] =
-{
+static const GDebugKey panel_debug_keys[] = {
   /* external plugin proxy modes */
   { "gdb", PANEL_DEBUG_GDB },
   { "valgrind", PANEL_DEBUG_VALGRIND },
@@ -92,13 +86,13 @@ panel_debug_init (void)
 
 
 static void
-panel_debug_print (PanelDebugFlag  domain,
-                   const gchar    *message,
-                   va_list         args)
+panel_debug_print (PanelDebugFlag domain,
+                   const gchar *message,
+                   va_list args)
 {
-  gchar       *string;
+  gchar *string;
   const gchar *domain_name = NULL;
-  guint        i;
+  guint i;
 
   /* lookup domain name */
   for (i = 0; i < G_N_ELEMENTS (panel_debug_keys); i++)
@@ -128,8 +122,8 @@ panel_debug_has_domain (PanelDebugFlag domain)
 
 
 void
-panel_debug (PanelDebugFlag  domain,
-             const gchar    *message,
+panel_debug (PanelDebugFlag domain,
+             const gchar *message,
              ...)
 {
   va_list args;
@@ -149,8 +143,8 @@ panel_debug (PanelDebugFlag  domain,
 
 
 void
-panel_debug_filtered (PanelDebugFlag  domain,
-                      const gchar    *message,
+panel_debug_filtered (PanelDebugFlag domain,
+                      const gchar *message,
                       ...)
 {
   va_list args;
