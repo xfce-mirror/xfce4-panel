@@ -21,6 +21,7 @@
 
 #include "launcher.h"
 
-void launcher_dialog_show (LauncherPlugin *plugin);
+void
+launcher_dialog_show (LauncherPlugin *plugin);
 
 #endif /* !__XFCE_LAUNCHER_DIALOG_H__ */

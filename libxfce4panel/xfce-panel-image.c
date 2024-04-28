@@ -17,24 +17,18 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_MATH_H
-#include <math.h>
-#endif
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
+#include "libxfce4panel/xfce-panel-convenience.h"
+#include "libxfce4panel/xfce-panel-image.h"
+#include "libxfce4panel/xfce-panel-macros.h"
 
-#include <gtk/gtk.h>
+#include "libxfce4panel/libxfce4panel-alias.h"
+
+#include "common/panel-private.h"
+
 #include <libxfce4util/libxfce4util.h>
-
-#include <common/panel-private.h>
-#include <libxfce4panel/xfce-panel-macros.h>
-#include <libxfce4panel/xfce-panel-image.h>
-#include <libxfce4panel/xfce-panel-convenience.h>
-#include <libxfce4panel/libxfce4panel-alias.h>
 
 
 
@@ -66,11 +60,16 @@
 /* design limit for the panel, to reduce the uncached pixbuf size */
 #define MAX_PIXBUF_SIZE (128)
 
-#define xfce_panel_image_unref_null(obj)   G_STMT_START { if ((obj) != NULL) \
-                                             { \
-                                               g_object_unref (G_OBJECT (obj)); \
-                                               (obj) = NULL; \
-                                             } } G_STMT_END
+#define xfce_panel_image_unref_null(obj) \
+  G_STMT_START \
+  { \
+    if ((obj) != NULL) \
+      { \
+        g_object_unref (G_OBJECT (obj)); \
+        (obj) = NULL; \
+      } \
+  } \
+  G_STMT_END
 
 
 
@@ -83,20 +82,20 @@ struct _XfcePanelImagePrivate
   GdkPixbuf *cache;
 
   /* source name */
-  gchar     *source;
+  gchar *source;
 
   /* fixed size */
-  gint       size;
+  gint size;
 
   /* whether we round to fixed icon sizes */
-  guint      force_icon_sizes : 1;
+  guint force_icon_sizes : 1;
 
   /* cached width and height */
-  gint       width;
-  gint       height;
+  gint width;
+  gint height;
 
   /* idle load timeout */
-  guint      idle_load_id;
+  guint idle_load_id;
 };
 
 enum
@@ -109,31 +108,42 @@ enum
 
 
 
-static void       xfce_panel_image_get_property         (GObject         *object,
-                                                         guint            prop_id,
-                                                         GValue          *value,
-                                                         GParamSpec      *pspec);
-static void       xfce_panel_image_set_property         (GObject         *object,
-                                                         guint            prop_id,
-                                                         const GValue    *value,
-                                                         GParamSpec      *pspec);
-static void       xfce_panel_image_finalize             (GObject         *object);
-static void       xfce_panel_image_get_preferred_width  (GtkWidget       *widget,
-                                                         gint            *minimum_width,
-                                                         gint            *natural_width);
-static void       xfce_panel_image_get_preferred_height (GtkWidget       *widget,
-                                                         gint            *minimum_height,
-                                                         gint            *natural_height);
-static void       xfce_panel_image_size_allocate        (GtkWidget       *widget,
-                                                         GtkAllocation   *allocation);
-static gboolean   xfce_panel_image_draw                 (GtkWidget       *widget,
-                                                         cairo_t         *cr);
-static void       xfce_panel_image_style_updated        (GtkWidget       *widget);
-static gboolean   xfce_panel_image_load                 (gpointer         data);
-static void       xfce_panel_image_load_destroy         (gpointer         data);
-static GdkPixbuf *xfce_panel_image_scale_pixbuf         (GdkPixbuf       *source,
-                                                         gint             dest_width,
-                                                         gint             dest_height);
+static void
+xfce_panel_image_get_property (GObject *object,
+                               guint prop_id,
+                               GValue *value,
+                               GParamSpec *pspec);
+static void
+xfce_panel_image_set_property (GObject *object,
+                               guint prop_id,
+                               const GValue *value,
+                               GParamSpec *pspec);
+static void
+xfce_panel_image_finalize (GObject *object);
+static void
+xfce_panel_image_get_preferred_width (GtkWidget *widget,
+                                      gint *minimum_width,
+                                      gint *natural_width);
+static void
+xfce_panel_image_get_preferred_height (GtkWidget *widget,
+                                       gint *minimum_height,
+                                       gint *natural_height);
+static void
+xfce_panel_image_size_allocate (GtkWidget *widget,
+                                GtkAllocation *allocation);
+static gboolean
+xfce_panel_image_draw (GtkWidget *widget,
+                       cairo_t *cr);
+static void
+xfce_panel_image_style_updated (GtkWidget *widget);
+static gboolean
+xfce_panel_image_load (gpointer data);
+static void
+xfce_panel_image_load_destroy (gpointer data);
+static GdkPixbuf *
+xfce_panel_image_scale_pixbuf (GdkPixbuf *source,
+                               gint dest_width,
+                               gint dest_height);
 
 
 
@@ -144,7 +154,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (XfcePanelImage, xfce_panel_image, GTK_TYPE_WIDGET)
 static void
 xfce_panel_image_class_init (XfcePanelImageClass *klass)
 {
-  GObjectClass   *gobject_class;
+  GObjectClass *gobject_class;
   GtkWidgetClass *gtkwidget_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
@@ -159,55 +169,51 @@ xfce_panel_image_class_init (XfcePanelImageClass *klass)
   gtkwidget_class->draw = xfce_panel_image_draw;
   gtkwidget_class->style_updated = xfce_panel_image_style_updated;
 
-/**
- * XfcePanelImage:source:
- *
- * Deprecated: 4.18.1: Use #GtkImage:storage-type instead.
- **/
+  /**
+   * XfcePanelImage:source:
+   *
+   * Deprecated: 4.18.1: Use #GtkImage:storage-type instead.
+   **/
   g_object_class_install_property (gobject_class,
                                    PROP_SOURCE,
                                    g_param_spec_string ("source",
                                                         "Source",
                                                         "Icon or filename",
                                                         NULL,
-                                                        G_PARAM_READWRITE
-                                                        | G_PARAM_STATIC_STRINGS));
+                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
-/**
- * XfcePanelImage:pixbuf:
- *
- * Deprecated: 4.18.1: Use #GtkImage:pixbuf instead.
- **/
+  /**
+   * XfcePanelImage:pixbuf:
+   *
+   * Deprecated: 4.18.1: Use #GtkImage:pixbuf instead.
+   **/
   g_object_class_install_property (gobject_class,
                                    PROP_PIXBUF,
                                    g_param_spec_object ("pixbuf",
                                                         "Pixbuf",
                                                         "Pixbuf image",
                                                         GDK_TYPE_PIXBUF,
-                                                        G_PARAM_READWRITE
-                                                        | G_PARAM_STATIC_STRINGS));
+                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
-/**
- * XfcePanelImage:size:
- *
- * Deprecated: 4.18.1: Use #GtkImage:pixel-size instead.
- **/
+  /**
+   * XfcePanelImage:size:
+   *
+   * Deprecated: 4.18.1: Use #GtkImage:pixel-size instead.
+   **/
   g_object_class_install_property (gobject_class,
                                    PROP_SIZE,
                                    g_param_spec_int ("size",
                                                      "Size",
                                                      "Pixel size of the image",
                                                      -1, MAX_PIXBUF_SIZE, -1,
-                                                     G_PARAM_READWRITE
-                                                     | G_PARAM_STATIC_STRINGS));
+                                                     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   gtk_widget_class_install_style_property (gtkwidget_class,
                                            g_param_spec_boolean ("force-gtk-icon-sizes",
                                                                  NULL,
                                                                  "Force the image to fix to GtkIconSizes",
                                                                  FALSE,
-                                                                 G_PARAM_READWRITE
-                                                                 | G_PARAM_STATIC_STRINGS));
+                                                                 G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 }
 
 
@@ -231,9 +237,9 @@ xfce_panel_image_init (XfcePanelImage *image)
 
 
 static void
-xfce_panel_image_get_property (GObject    *object,
-                               guint       prop_id,
-                               GValue     *value,
+xfce_panel_image_get_property (GObject *object,
+                               guint prop_id,
+                               GValue *value,
                                GParamSpec *pspec)
 {
   XfcePanelImagePrivate *priv = XFCE_PANEL_IMAGE (object)->priv;
@@ -261,10 +267,10 @@ xfce_panel_image_get_property (GObject    *object,
 
 
 static void
-xfce_panel_image_set_property (GObject      *object,
-                               guint         prop_id,
+xfce_panel_image_set_property (GObject *object,
+                               guint prop_id,
                                const GValue *value,
-                               GParamSpec   *pspec)
+                               GParamSpec *pspec)
 {
   switch (prop_id)
     {
@@ -312,16 +318,14 @@ xfce_panel_image_finalize (GObject *object)
 static gint
 xfce_panel_image_padding_correction (GtkWidget *widget)
 {
-  GtkWidget             *parent;
-  GtkStyleContext       *context;
-  gint                   focus_width;
-  gint                   focus_pad;
-  gint                   correction;
+  GtkWidget *parent;
+  GtkStyleContext *context;
+  gint focus_width;
+  gint focus_pad;
+  gint correction;
 
   parent = gtk_widget_get_parent (widget);
-  if (parent != NULL &&
-      GTK_IS_BUTTON (parent) &&
-      !gtk_widget_get_can_focus (parent))
+  if (parent != NULL && GTK_IS_BUTTON (parent) && !gtk_widget_get_can_focus (parent))
     {
       context = gtk_widget_get_style_context (parent);
       gtk_style_context_get_style (context,
@@ -343,12 +347,12 @@ xfce_panel_image_padding_correction (GtkWidget *widget)
 
 static void
 xfce_panel_image_get_preferred_width (GtkWidget *widget,
-                                      gint      *minimum_width,
-                                      gint      *natural_width)
+                                      gint *minimum_width,
+                                      gint *natural_width)
 {
   XfcePanelImagePrivate *priv = XFCE_PANEL_IMAGE (widget)->priv;
-  GtkAllocation          alloc;
-  gint                   width, width_min;
+  GtkAllocation alloc;
+  gint width, width_min;
 
   if (priv->size > 0)
     width = priv->size;
@@ -381,12 +385,12 @@ xfce_panel_image_get_preferred_width (GtkWidget *widget,
 
 static void
 xfce_panel_image_get_preferred_height (GtkWidget *widget,
-                                       gint      *minimum_height,
-                                       gint      *natural_height)
+                                       gint *minimum_height,
+                                       gint *natural_height)
 {
   XfcePanelImagePrivate *priv = XFCE_PANEL_IMAGE (widget)->priv;
-  GtkAllocation          alloc;
-  gint                   height;
+  GtkAllocation alloc;
+  gint height;
 
   if (priv->size > 0)
     height = priv->size;
@@ -413,7 +417,7 @@ xfce_panel_image_get_preferred_height (GtkWidget *widget,
 
 
 static void
-xfce_panel_image_size_allocate (GtkWidget     *widget,
+xfce_panel_image_size_allocate (GtkWidget *widget,
                                 GtkAllocation *allocation)
 {
   XfcePanelImagePrivate *priv = XFCE_PANEL_IMAGE (widget)->priv;
@@ -424,8 +428,7 @@ xfce_panel_image_size_allocate (GtkWidget     *widget,
   if ((priv->pixbuf != NULL || priv->source != NULL)
       && allocation->width > 0
       && allocation->height > 0
-      && (allocation->width != priv->width
-      || allocation->height != priv->height))
+      && (allocation->width != priv->width || allocation->height != priv->height))
     {
       /* store the new size */
       priv->width = allocation->width;
@@ -452,17 +455,17 @@ xfce_panel_image_size_allocate (GtkWidget     *widget,
 
 static gboolean
 xfce_panel_image_draw (GtkWidget *widget,
-                       cairo_t   *cr)
+                       cairo_t *cr)
 {
   XfcePanelImagePrivate *priv = XFCE_PANEL_IMAGE (widget)->priv;
-  gint                   source_width, source_height;
-  gint                   dest_x, dest_y;
-  GdkPixbuf             *rendered = NULL;
-  GdkPixbuf             *pixbuf = priv->cache;
-  GtkStyleContext       *context;
-  GdkScreen             *screen;
-  GtkIconTheme          *icon_theme;
-  GtkIconInfo           *icon_info;
+  gint source_width, source_height;
+  gint dest_x, dest_y;
+  GdkPixbuf *rendered = NULL;
+  GdkPixbuf *pixbuf = priv->cache;
+  GtkStyleContext *context;
+  GdkScreen *screen;
+  GtkIconTheme *icon_theme;
+  GtkIconInfo *icon_info;
 
   if (G_LIKELY (pixbuf != NULL))
     {
@@ -503,7 +506,7 @@ static void
 xfce_panel_image_style_updated (GtkWidget *widget)
 {
   XfcePanelImagePrivate *priv = XFCE_PANEL_IMAGE (widget)->priv;
-  gboolean               force;
+  gboolean force;
 
   /* let gtk update the widget style */
   (*GTK_WIDGET_CLASS (xfce_panel_image_parent_class)->style_updated) (widget);
@@ -537,17 +540,15 @@ static gboolean
 xfce_panel_image_load (gpointer data)
 {
   XfcePanelImagePrivate *priv = XFCE_PANEL_IMAGE (data)->priv;
-  GdkPixbuf             *pixbuf;
-  GdkScreen             *screen;
-  GtkIconTheme          *icon_theme = NULL;
-  gint                   dest_w, dest_h;
+  GdkPixbuf *pixbuf;
+  GdkScreen *screen;
+  GtkIconTheme *icon_theme = NULL;
+  gint dest_w, dest_h;
 
   dest_w = priv->width;
   dest_h = priv->height;
 
-  if (G_UNLIKELY (priv->force_icon_sizes
-      && dest_w < 32
-      && dest_w == dest_h))
+  if (G_UNLIKELY (priv->force_icon_sizes && dest_w < 32 && dest_w == dest_h))
     {
       /* we use some hardcoded values here for convienence,
        * above 32 pixels svg icons will kick in */
@@ -600,12 +601,12 @@ xfce_panel_image_load_destroy (gpointer data)
 
 static GdkPixbuf *
 xfce_panel_image_scale_pixbuf (GdkPixbuf *source,
-                               gint       dest_width,
-                               gint       dest_height)
+                               gint dest_width,
+                               gint dest_height)
 {
   gdouble ratio;
-  gint    source_width;
-  gint    source_height;
+  gint source_width;
+  gint source_height;
 
   panel_return_val_if_fail (GDK_IS_PIXBUF (source), NULL);
 
@@ -625,7 +626,7 @@ xfce_panel_image_scale_pixbuf (GdkPixbuf *source,
   ratio = MIN ((gdouble) dest_width / (gdouble) source_width,
                (gdouble) dest_height / (gdouble) source_height);
 
-  dest_width  = rint (source_width * ratio);
+  dest_width = rint (source_width * ratio);
   dest_height = rint (source_height * ratio);
 
   return gdk_pixbuf_scale_simple (source, MAX (dest_width, 1),
@@ -722,7 +723,7 @@ xfce_panel_image_new_from_source (const gchar *source)
  **/
 void
 xfce_panel_image_set_from_pixbuf (XfcePanelImage *image,
-                                  GdkPixbuf      *pixbuf)
+                                  GdkPixbuf *pixbuf)
 {
   g_return_if_fail (XFCE_IS_PANEL_IMAGE (image));
   g_return_if_fail (pixbuf == NULL || GDK_IS_PIXBUF (pixbuf));
@@ -730,8 +731,7 @@ xfce_panel_image_set_from_pixbuf (XfcePanelImage *image,
   xfce_panel_image_clear (image);
 
   /* set the new pixbuf, scale it to the maximum size if needed */
-  image->priv->pixbuf = xfce_panel_image_scale_pixbuf (pixbuf,
-      MAX_PIXBUF_SIZE, MAX_PIXBUF_SIZE);
+  image->priv->pixbuf = xfce_panel_image_scale_pixbuf (pixbuf, MAX_PIXBUF_SIZE, MAX_PIXBUF_SIZE);
 
   gtk_widget_queue_resize (GTK_WIDGET (image));
 }
@@ -752,7 +752,7 @@ xfce_panel_image_set_from_pixbuf (XfcePanelImage *image,
  **/
 void
 xfce_panel_image_set_from_source (XfcePanelImage *image,
-                                  const gchar    *source)
+                                  const gchar *source)
 {
   g_return_if_fail (XFCE_IS_PANEL_IMAGE (image));
   g_return_if_fail (source == NULL || *source != '\0');
@@ -782,9 +782,8 @@ xfce_panel_image_set_from_source (XfcePanelImage *image,
  **/
 void
 xfce_panel_image_set_size (XfcePanelImage *image,
-                           gint            size)
+                           gint size)
 {
-
   g_return_if_fail (XFCE_IS_PANEL_IMAGE (image));
 
   if (G_LIKELY (image->priv->size != size))
@@ -841,8 +840,8 @@ xfce_panel_image_clear (XfcePanelImage *image)
 
   if (priv->source != NULL)
     {
-     g_free (priv->source);
-     priv->source = NULL;
+      g_free (priv->source);
+      priv->source = NULL;
     }
 
   xfce_panel_image_unref_null (priv->pixbuf);
@@ -856,4 +855,4 @@ xfce_panel_image_clear (XfcePanelImage *image)
 
 
 #define __XFCE_PANEL_IMAGE_C__
-#include <libxfce4panel/libxfce4panel-aliasdef.c>
+#include "libxfce4panel/libxfce4panel-aliasdef.c"

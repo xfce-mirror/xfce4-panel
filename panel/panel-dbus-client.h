@@ -20,31 +20,35 @@
 #define __PANEL_DBUS_CLIENT_H__
 
 #include <glib.h>
-#include <gdk/gdk.h>
 
 G_BEGIN_DECLS
 
-gboolean  panel_dbus_client_display_preferences_dialog (guint         active,
-                                                        guint         socket_id,
-                                                        GError      **error);
+gboolean
+panel_dbus_client_display_preferences_dialog (guint active,
+                                              guint socket_id,
+                                              GError **error);
 
-gboolean  panel_dbus_client_display_items_dialog       (guint         active,
-                                                        GError      **error);
+gboolean
+panel_dbus_client_display_items_dialog (guint active,
+                                        GError **error);
 
-gboolean  panel_dbus_client_save                       (GError      **error);
+gboolean
+panel_dbus_client_save (GError **error);
 
-gboolean  panel_dbus_client_add_new_item               (const gchar  *plugin_name,
-                                                        gchar       **arguments,
-                                                        GError      **error);
+gboolean
+panel_dbus_client_add_new_item (const gchar *plugin_name,
+                                gchar **arguments,
+                                GError **error);
 
-gboolean  panel_dbus_client_plugin_event               (const gchar  *plugin_event,
-                                                        gboolean     *return_succeed,
-                                                        GError      **error);
+gboolean
+panel_dbus_client_plugin_event (const gchar *plugin_event,
+                                gboolean *return_succeed,
+                                GError **error);
 
-gboolean  panel_dbus_client_terminate                  (gboolean      restart,
-                                                        GError      **error);
+gboolean
+panel_dbus_client_terminate (gboolean restart,
+                             GError **error);
 
 G_END_DECLS
 
 #endif /* !__PANEL_DBUS_CLIENT_H__ */
-

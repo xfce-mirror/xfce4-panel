@@ -17,44 +17,36 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
 
-#ifdef HAVE_STDIO_H
-#include <stdio.h>
-#endif
-#ifdef HAVE_STDLIB_H
-#include <stdlib.h>
-#endif
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
+#include "migrate/migrate-config.h"
+#include "migrate/migrate-default.h"
+
+#include "common/panel-private.h"
+#include "libxfce4panel/xfce-panel-macros.h"
 
 #include <gtk/gtk.h>
-#include <xfconf/xfconf.h>
-#include <common/panel-private.h>
-#include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
-#include <libxfce4panel/xfce-panel-macros.h>
-
-#include <migrate/migrate-config.h>
-#include <migrate/migrate-default.h>
+#include <libxfce4util/libxfce4util.h>
+#include <xfconf/xfconf.h>
 
 
 
 #define DEFAULT_CONFIG_FILENAME "xfce4" G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "default.xml"
-#define DEFAULT_CONFIG_PATH     XDGCONFIGDIR G_DIR_SEPARATOR_S DEFAULT_CONFIG_FILENAME
+#define DEFAULT_CONFIG_PATH XDGCONFIGDIR G_DIR_SEPARATOR_S DEFAULT_CONFIG_FILENAME
 
 
 gint
-main (gint argc, gchar **argv)
+main (gint argc,
+      gchar **argv)
 {
-  GError        *error = NULL;
-  gint           retval = EXIT_SUCCESS;
+  GError *error = NULL;
+  gint retval = EXIT_SUCCESS;
   XfconfChannel *channel;
-  gint           configver;
-  gchar         *filename_default;
-  gboolean       migrate_vendor_default;
+  gint configver;
+  gchar *filename_default;
+  gboolean migrate_vendor_default;
 
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
@@ -98,7 +90,7 @@ main (gint argc, gchar **argv)
 
       if (filename_default != NULL)
         {
-          migrate_default:
+migrate_default:
 
           /* apply default config */
           if (!migrate_default (filename_default, &error))
