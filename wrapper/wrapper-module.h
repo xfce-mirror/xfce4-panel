@@ -19,23 +19,26 @@
 #ifndef __WRAPPER_MODULE_H__
 #define __WRAPPER_MODULE_H__
 
+#include "libxfce4panel/xfce-panel-plugin-provider.h"
+
 #include <gtk/gtk.h>
-#include <libxfce4panel/xfce-panel-plugin-provider.h>
 
 G_BEGIN_DECLS
 
 #define WRAPPER_TYPE_MODULE (wrapper_module_get_type ())
 G_DECLARE_FINAL_TYPE (WrapperModule, wrapper_module, WRAPPER, MODULE, GTypeModule)
 
-WrapperModule *wrapper_module_new          (GModule        *library) G_GNUC_MALLOC;
+WrapperModule *
+wrapper_module_new (GModule *library) G_GNUC_MALLOC;
 
-GtkWidget     *wrapper_module_new_provider (WrapperModule  *module,
-                                            GdkScreen      *screen,
-                                            const gchar    *name,
-                                            gint            unique_id,
-                                            const gchar    *display_name,
-                                            const gchar    *comment,
-                                            gchar         **arguments) G_GNUC_MALLOC;
+GtkWidget *
+wrapper_module_new_provider (WrapperModule *module,
+                             GdkScreen *screen,
+                             const gchar *name,
+                             gint unique_id,
+                             const gchar *display_name,
+                             const gchar *comment,
+                             gchar **arguments) G_GNUC_MALLOC;
 
 G_END_DECLS
 

@@ -20,22 +20,14 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
-
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
-
-#include <gdk/gdk.h>
-#include <gtk/gtk.h>
-
-#include <libxfce4panel/libxfce4panel.h>
-
-#include <common/panel-private.h>
-#include <common/panel-debug.h>
 
 #include "systray-socket.h"
+
+#include "common/panel-debug.h"
+#include "common/panel-private.h"
+#include "libxfce4panel/libxfce4panel.h"
 
 
 
@@ -44,23 +36,27 @@ struct _SystraySocket
   GtkSocket __parent__;
 
   /* plug window */
-  Window           window;
+  Window window;
 
-  gchar           *name;
+  gchar *name;
 
-  guint            is_composited : 1;
-  guint            parent_relative_bg : 1;
-  guint            hidden : 1;
+  guint is_composited : 1;
+  guint parent_relative_bg : 1;
+  guint hidden : 1;
 };
 
 
 
-static void     systray_socket_finalize      (GObject        *object);
-static void     systray_socket_realize       (GtkWidget      *widget);
-static void     systray_socket_size_allocate (GtkWidget      *widget,
-                                              GtkAllocation  *allocation);
-static gboolean systray_socket_draw          (GtkWidget      *widget,
-                                              cairo_t        *cr);
+static void
+systray_socket_finalize (GObject *object);
+static void
+systray_socket_realize (GtkWidget *widget);
+static void
+systray_socket_size_allocate (GtkWidget *widget,
+                              GtkAllocation *allocation);
+static gboolean
+systray_socket_draw (GtkWidget *widget,
+                     cairo_t *cr);
 
 
 
@@ -72,7 +68,7 @@ static void
 systray_socket_class_init (SystraySocketClass *klass)
 {
   GtkWidgetClass *gtkwidget_class;
-  GObjectClass   *gobject_class;
+  GObjectClass *gobject_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = systray_socket_finalize;
@@ -110,8 +106,8 @@ static void
 systray_socket_realize (GtkWidget *widget)
 {
   SystraySocket *socket = SYSTRAY_SOCKET (widget);
-  GdkRGBA        transparent = { 0.0, 0.0, 0.0, 0.0 };
-  GdkWindow     *window;
+  GdkRGBA transparent = { 0.0, 0.0, 0.0, 0.0 };
+  GdkWindow *window;
 
   GTK_WIDGET_CLASS (systray_socket_parent_class)->realize (widget);
 
@@ -119,19 +115,18 @@ systray_socket_realize (GtkWidget *widget)
 
   if (socket->is_composited)
     {
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+      G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       gdk_window_set_background_rgba (window, &transparent);
       gdk_window_set_composited (window, TRUE);
-G_GNUC_END_IGNORE_DEPRECATIONS
+      G_GNUC_END_IGNORE_DEPRECATIONS
 
       socket->parent_relative_bg = FALSE;
     }
-  else if (gtk_widget_get_visual (widget) ==
-           gdk_window_get_visual (gdk_window_get_parent (window)))
+  else if (gtk_widget_get_visual (widget) == gdk_window_get_visual (gdk_window_get_parent (window)))
     {
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+      G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       gdk_window_set_background_pattern (window, NULL);
-G_GNUC_END_IGNORE_DEPRECATIONS
+      G_GNUC_END_IGNORE_DEPRECATIONS
 
       socket->parent_relative_bg = TRUE;
     }
@@ -140,40 +135,39 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       socket->parent_relative_bg = FALSE;
     }
 
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+  G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   gdk_window_set_composited (window, socket->is_composited);
-G_GNUC_END_IGNORE_DEPRECATIONS
+  G_GNUC_END_IGNORE_DEPRECATIONS
 
-  gtk_widget_set_app_paintable (widget,
-      socket->parent_relative_bg || socket->is_composited);
+  gtk_widget_set_app_paintable (widget, socket->parent_relative_bg || socket->is_composited);
 
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+  G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   gtk_widget_set_double_buffered (widget, socket->parent_relative_bg);
-G_GNUC_END_IGNORE_DEPRECATIONS
+  G_GNUC_END_IGNORE_DEPRECATIONS
 
   panel_debug_filtered (PANEL_DEBUG_SYSTRAY,
-      "socket %s[%p] (composited=%s, relative-bg=%s",
-      systray_socket_get_name (socket), socket,
-      PANEL_DEBUG_BOOL (socket->is_composited),
-      PANEL_DEBUG_BOOL (socket->parent_relative_bg));
+                        "socket %s[%p] (composited=%s, relative-bg=%s",
+                        systray_socket_get_name (socket), socket,
+                        PANEL_DEBUG_BOOL (socket->is_composited),
+                        PANEL_DEBUG_BOOL (socket->parent_relative_bg));
 }
 
 
 
 static void
-systray_socket_size_allocate (GtkWidget     *widget,
+systray_socket_size_allocate (GtkWidget *widget,
                               GtkAllocation *allocation)
 {
   SystraySocket *socket = SYSTRAY_SOCKET (widget);
-  GtkAllocation  widget_allocation;
-  gboolean       moved;
-  gboolean       resized;
+  GtkAllocation widget_allocation;
+  gboolean moved;
+  gboolean resized;
 
   gtk_widget_get_allocation (widget, &widget_allocation);
   moved = allocation->x != widget_allocation.x
-       || allocation->y != widget_allocation.y;
+          || allocation->y != widget_allocation.y;
   resized = allocation->width != widget_allocation.width
-          ||allocation->height != widget_allocation.height;
+            || allocation->height != widget_allocation.height;
 
   if ((moved || resized)
       && gtk_widget_get_mapped (widget))
@@ -200,7 +194,7 @@ systray_socket_size_allocate (GtkWidget     *widget,
 
 static gboolean
 systray_socket_draw (GtkWidget *widget,
-                     cairo_t   *cr)
+                     cairo_t *cr)
 {
   SystraySocket *socket = SYSTRAY_SOCKET (widget);
 
@@ -225,16 +219,16 @@ systray_socket_draw (GtkWidget *widget,
 
 
 GtkWidget *
-systray_socket_new (GdkScreen       *screen,
-                    Window           window)
+systray_socket_new (GdkScreen *screen,
+                    Window window)
 {
-  SystraySocket     *socket;
-  GdkDisplay        *display;
-  XWindowAttributes  attr;
-  gint               result;
-  GdkVisual         *visual;
-  gint               red_prec, green_prec, blue_prec;
-  gboolean           supports_composite = FALSE;
+  SystraySocket *socket;
+  GdkDisplay *display;
+  XWindowAttributes attr;
+  gint result;
+  GdkVisual *visual;
+  gint red_prec, green_prec, blue_prec;
+  gboolean supports_composite = FALSE;
 
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
 
@@ -264,9 +258,9 @@ systray_socket_new (GdkScreen       *screen,
   gdk_visual_get_red_pixel_details (visual, NULL, NULL, &red_prec);
   gdk_visual_get_green_pixel_details (visual, NULL, NULL, &green_prec);
   gdk_visual_get_blue_pixel_details (visual, NULL, NULL, &blue_prec);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+  G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   supports_composite = gdk_display_supports_composite (gdk_screen_get_display (screen));
-G_GNUC_END_IGNORE_DEPRECATIONS
+  G_GNUC_END_IGNORE_DEPRECATIONS
   if (red_prec + blue_prec + green_prec < gdk_visual_get_depth (visual)
       && supports_composite)
     socket->is_composited = TRUE;
@@ -279,10 +273,10 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 void
 systray_socket_force_redraw (SystraySocket *socket)
 {
-  GtkWidget     *widget = GTK_WIDGET (socket);
-  XEvent         xev;
-  GdkDisplay    *display;
-  GtkAllocation  allocation;
+  GtkWidget *widget = GTK_WIDGET (socket);
+  XEvent xev;
+  GdkDisplay *display;
+  GtkAllocation allocation;
 
   panel_return_if_fail (SYSTRAY_IS_SOCKET (socket));
 
@@ -327,17 +321,17 @@ systray_socket_is_composited (SystraySocket *socket)
 
 static gchar *
 systray_socket_get_name_prop (SystraySocket *socket,
-                              const gchar   *prop_name,
-                              const gchar   *type_name)
+                              const gchar *prop_name,
+                              const gchar *type_name)
 {
   GdkDisplay *display;
-  Atom        req_type, type;
-  gint        result;
-  gchar      *val;
-  gint        format;
-  gulong      nitems;
-  gulong      bytes_after;
-  gchar      *name = NULL;
+  Atom req_type, type;
+  gint result;
+  gchar *val;
+  gint format;
+  gulong nitems;
+  gulong bytes_after;
+  gchar *name = NULL;
 
   panel_return_val_if_fail (SYSTRAY_IS_SOCKET (socket), NULL);
   panel_return_val_if_fail (type_name != NULL && prop_name != NULL, NULL);
@@ -368,10 +362,10 @@ systray_socket_get_name_prop (SystraySocket *socket,
       && format == 8
       && nitems > 0
       && g_utf8_validate (val, nitems, NULL))
-   {
-     /* lowercase the result */
-     name = g_utf8_strdown (val, nitems);
-   }
+    {
+      /* lowercase the result */
+      name = g_utf8_strdown (val, nitems);
+    }
 
   XFree (val);
 
@@ -421,7 +415,7 @@ systray_socket_get_hidden (SystraySocket *socket)
 
 void
 systray_socket_set_hidden (SystraySocket *socket,
-                           gboolean       hidden)
+                           gboolean hidden)
 {
   panel_return_if_fail (SYSTRAY_IS_SOCKET (socket));
 

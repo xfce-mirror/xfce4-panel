@@ -26,27 +26,34 @@ G_BEGIN_DECLS
 #define PANEL_TYPE_ITEMBAR (panel_itembar_get_type ())
 G_DECLARE_FINAL_TYPE (PanelItembar, panel_itembar, PANEL, ITEMBAR, GtkContainer)
 
-GtkWidget      *panel_itembar_new                     (void) G_GNUC_MALLOC;
+GtkWidget *
+panel_itembar_new (void) G_GNUC_MALLOC;
 
-void            panel_itembar_insert                  (PanelItembar *itembar,
-                                                       GtkWidget    *widget,
-                                                       gint          position);
+void
+panel_itembar_insert (PanelItembar *itembar,
+                      GtkWidget *widget,
+                      gint position);
 
-void            panel_itembar_reorder_child           (PanelItembar *itembar,
-                                                       GtkWidget    *widget,
-                                                       gint          position);
+void
+panel_itembar_reorder_child (PanelItembar *itembar,
+                             GtkWidget *widget,
+                             gint position);
 
-gint            panel_itembar_get_child_index         (PanelItembar *itembar,
-                                                       GtkWidget    *widget);
+gint
+panel_itembar_get_child_index (PanelItembar *itembar,
+                               GtkWidget *widget);
 
-guint           panel_itembar_get_n_children          (PanelItembar *itembar);
+guint
+panel_itembar_get_n_children (PanelItembar *itembar);
 
-guint           panel_itembar_get_drop_index          (PanelItembar *itembar,
-                                                       gint          x,
-                                                       gint          y);
+guint
+panel_itembar_get_drop_index (PanelItembar *itembar,
+                              gint x,
+                              gint y);
 
-void            panel_itembar_set_drop_highlight_item (PanelItembar *itembar,
-                                                       gint          idx);
+void
+panel_itembar_set_drop_highlight_item (PanelItembar *itembar,
+                                       gint idx);
 
 G_END_DECLS
 

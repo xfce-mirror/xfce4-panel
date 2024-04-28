@@ -19,7 +19,7 @@
 #ifndef __PANEL_PLUGIN_EXTERNAL_WRAPPER_WAYLAND_H__
 #define __PANEL_PLUGIN_EXTERNAL_WRAPPER_WAYLAND_H__
 
-#include <panel/panel-plugin-external-wrapper.h>
+#include "panel/panel-plugin-external-wrapper.h"
 
 G_BEGIN_DECLS
 
