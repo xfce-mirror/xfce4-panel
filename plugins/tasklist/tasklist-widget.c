@@ -1101,7 +1101,7 @@ xfce_tasklist_size_layout (XfceTasklist *tasklist,
   else if (!tasklist->show_labels)
     min_button_length = alloc->height / tasklist->nrows;
   else
-    min_button_length = tasklist->min_button_length;
+    min_button_length = MIN (tasklist->min_button_length, tasklist->max_button_length / 4);
 
   *arrow_position = -1; /* not visible */
 
