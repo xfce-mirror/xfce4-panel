@@ -26,9 +26,10 @@ G_BEGIN_DECLS
 #define WRAPPER_TYPE_PLUG_WAYLAND (wrapper_plug_wayland_get_type ())
 G_DECLARE_FINAL_TYPE (WrapperPlugWayland, wrapper_plug_wayland, WRAPPER, PLUG_WAYLAND, GtkWindow)
 
-GtkWidget *wrapper_plug_wayland_new (gint unique_id,
-                                     GDBusProxy *proxy,
-                                     GError **error);
+GtkWidget *
+wrapper_plug_wayland_new (gint unique_id,
+                          GDBusProxy *proxy,
+                          GError **error);
 
 G_END_DECLS
 

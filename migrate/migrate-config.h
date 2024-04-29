@@ -19,15 +19,16 @@
 #ifndef __MIGRATE_CONFIG_H__
 #define __MIGRATE_CONFIG_H__
 
-#include <gtk/gtk.h>
+#include <glib.h>
+#include <xfconf/xfconf.h>
 
 G_BEGIN_DECLS
 
-gboolean migrate_config (XfconfChannel  *channel,
-                         gint            configver,
-                         GError        **error);
+gboolean
+migrate_config (XfconfChannel *channel,
+                gint configver,
+                GError **error);
 
 G_END_DECLS
 
 #endif /* !__MIGRATE_CONFIG_H__ */
-
