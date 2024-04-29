@@ -39,6 +39,13 @@ G_DECLARE_FINAL_TYPE (SnConfig, sn_config, SN, CONFIG, GObject)
 #define DEFAULT_PANEL_SIZE 28
 #define DEFAULT_HIDE_NEW_ITEMS FALSE
 
+typedef enum _SnItemType
+{
+  SN_ITEM_TYPE_DEFAULT,
+  SN_ITEM_TYPE_LEGACY,
+  N_SN_ITEM_TYPES,
+} SnItemType;
+
 SnConfig *
 sn_config_new (XfcePanelPlugin *panel_plugin);
 
@@ -92,47 +99,32 @@ sn_config_get_dimensions (SnConfig *config,
 
 gboolean
 sn_config_is_hidden (SnConfig *config,
+                     SnItemType type,
                      const gchar *name);
 
 void
 sn_config_set_hidden (SnConfig *config,
+                      SnItemType type,
                       const gchar *name,
                       gboolean filtered);
 
-gboolean
-sn_config_is_legacy_hidden (SnConfig *config,
-                            const gchar *name);
-
-void
-sn_config_set_legacy_hidden (SnConfig *config,
-                             const gchar *name,
-                             gboolean filtered);
-
 GList *
-sn_config_get_known_items (SnConfig *config);
+sn_config_get_known_items (SnConfig *config,
+                           SnItemType type);
 
-void
+gboolean
 sn_config_add_known_item (SnConfig *config,
+                          SnItemType type,
                           const gchar *name);
 
 GList *
-sn_config_get_known_legacy_items (SnConfig *config);
-GList *
 sn_config_get_hidden_legacy_items (SnConfig *config);
-
-gboolean
-sn_config_add_known_legacy_item (SnConfig *config,
-                                 const gchar *name);
 
 void
 sn_config_swap_known_items (SnConfig *config,
+                            SnItemType type,
                             const gchar *name1,
                             const gchar *name2);
-void
-sn_config_swap_known_legacy_items (SnConfig *config,
-                                   const gchar *name1,
-                                   const gchar *name2);
-
 gboolean
 sn_config_items_clear (SnConfig *config);
 gboolean

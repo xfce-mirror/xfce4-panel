@@ -130,6 +130,7 @@ sn_dialog_init (SnDialog *dialog)
 
 static void
 sn_dialog_add_item (SnDialog *dialog,
+                    GObject *store,
                     GIcon *icon,
                     const gchar *name,
                     const gchar *title,
@@ -138,12 +139,12 @@ sn_dialog_add_item (SnDialog *dialog,
   GtkTreeIter iter;
 
   g_return_if_fail (SN_IS_DIALOG (dialog));
-  g_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
+  g_return_if_fail (GTK_IS_LIST_STORE (store));
   g_return_if_fail (name == NULL || g_utf8_validate (name, -1, NULL));
 
   /* insert in the store */
-  gtk_list_store_append (GTK_LIST_STORE (dialog->store), &iter);
-  gtk_list_store_set (GTK_LIST_STORE (dialog->store), &iter,
+  gtk_list_store_append (GTK_LIST_STORE (store), &iter);
+  gtk_list_store_set (GTK_LIST_STORE (store), &iter,
                       COLUMN_ICON, icon,
                       COLUMN_TITLE, title,
                       COLUMN_HIDDEN, hidden,
@@ -154,45 +155,20 @@ sn_dialog_add_item (SnDialog *dialog,
 
 
 static void
-sn_dialog_add_legacy_item (SnDialog *dialog,
-                           GIcon *icon,
-                           const gchar *name,
-                           const gchar *title,
-                           gboolean hidden)
+sn_dialog_update_names (SnDialog *dialog,
+                        GObject *store,
+                        SnItemType type)
 {
-  GtkTreeIter iter;
-
-  g_return_if_fail (SN_IS_DIALOG (dialog));
-  g_return_if_fail (GTK_IS_LIST_STORE (dialog->legacy_store));
-  g_return_if_fail (name == NULL || g_utf8_validate (name, -1, NULL));
-
-  /* insert in the store */
-  gtk_list_store_append (GTK_LIST_STORE (dialog->legacy_store), &iter);
-  gtk_list_store_set (GTK_LIST_STORE (dialog->legacy_store), &iter,
-                      COLUMN_ICON, icon,
-                      COLUMN_TITLE, title,
-                      COLUMN_HIDDEN, hidden,
-                      COLUMN_TIP, name,
-                      -1);
-}
-
-
-
-static void
-sn_dialog_update_names (SnDialog *dialog)
-{
-  GList *li;
   const gchar *name;
   const gchar *title;
   const gchar *icon_name;
   GIcon *icon;
-  guint i;
 
   g_return_if_fail (SN_IS_DIALOG (dialog));
   g_return_if_fail (SN_IS_CONFIG (dialog->config));
-  g_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
+  g_return_if_fail (GTK_IS_LIST_STORE (store));
 
-  for (li = sn_config_get_known_items (dialog->config); li != NULL; li = li->next)
+  for (GList *li = sn_config_get_known_items (dialog->config, type); li != NULL; li = li->next)
     {
       name = li->data;
       title = name;
@@ -200,13 +176,28 @@ sn_dialog_update_names (SnDialog *dialog)
       icon = NULL;
 
       /* check if we have a better name for the application */
-      for (i = 0; i < G_N_ELEMENTS (known_applications); i++)
+      if (type == SN_ITEM_TYPE_DEFAULT)
         {
-          if (strcmp (name, known_applications[i][0]) == 0)
+          for (guint i = 0; i < G_N_ELEMENTS (known_applications); i++)
             {
-              icon_name = known_applications[i][1];
-              title = known_applications[i][2];
-              break;
+              if (strcmp (name, known_applications[i][0]) == 0)
+                {
+                  icon_name = known_applications[i][1];
+                  title = known_applications[i][2];
+                  break;
+                }
+            }
+        }
+      else
+        {
+          for (guint i = 0; i < G_N_ELEMENTS (known_legacy_applications); i++)
+            {
+              if (strcmp (name, known_legacy_applications[i][0]) == 0)
+                {
+                  icon_name = known_legacy_applications[i][1];
+                  title = known_legacy_applications[i][2];
+                  break;
+                }
             }
         }
 
@@ -214,54 +205,8 @@ sn_dialog_update_names (SnDialog *dialog)
         icon = g_themed_icon_new (icon_name);
 
       /* insert item in the store */
-      sn_dialog_add_item (dialog, icon, name, title,
-                          sn_config_is_hidden (dialog->config, name));
-
-      if (icon != NULL)
-        g_object_unref (G_OBJECT (icon));
-    }
-}
-
-
-
-static void
-sn_dialog_update_legacy_names (SnDialog *dialog)
-{
-  GList *li;
-  const gchar *name;
-  const gchar *title;
-  const gchar *icon_name;
-  GIcon *icon;
-  guint i;
-
-  g_return_if_fail (SN_IS_DIALOG (dialog));
-  g_return_if_fail (SN_IS_CONFIG (dialog->config));
-  g_return_if_fail (GTK_IS_LIST_STORE (dialog->legacy_store));
-
-  for (li = sn_config_get_known_legacy_items (dialog->config); li != NULL; li = li->next)
-    {
-      name = li->data;
-      title = name;
-      icon_name = name;
-      icon = NULL;
-
-      /* check if we have a better name for the application */
-      for (i = 0; i < G_N_ELEMENTS (known_legacy_applications); i++)
-        {
-          if (strcmp (name, known_legacy_applications[i][0]) == 0)
-            {
-              icon_name = known_legacy_applications[i][1];
-              title = known_legacy_applications[i][2];
-              break;
-            }
-        }
-
-      if (gtk_icon_theme_has_icon (gtk_icon_theme_get_default (), icon_name))
-        icon = g_themed_icon_new (icon_name);
-
-      /* insert item in the store */
-      sn_dialog_add_legacy_item (dialog, icon, name, title,
-                                 sn_config_is_legacy_hidden (dialog->config, name));
+      sn_dialog_add_item (dialog, store, icon, name, title,
+                          sn_config_is_hidden (dialog->config, type, name));
 
       if (icon != NULL)
         g_object_unref (G_OBJECT (icon));
@@ -281,6 +226,9 @@ sn_dialog_selection_changed (GtkTreeSelection *selection,
   gint count = 0, position = -1, depth;
   gboolean item_up_sensitive, item_down_sensitive;
   GObject *object;
+  GObject *treeview = G_OBJECT (gtk_tree_selection_get_tree_view (selection));
+  SnItemType type = treeview == gtk_builder_get_object (dialog->builder, "items-treeview") ? SN_ITEM_TYPE_DEFAULT
+                                                                                           : SN_ITEM_TYPE_LEGACY;
 
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
     {
@@ -298,11 +246,13 @@ sn_dialog_selection_changed (GtkTreeSelection *selection,
   item_up_sensitive = position > 0;
   item_down_sensitive = position + 1 < count;
 
-  object = gtk_builder_get_object (dialog->builder, "item-up");
+  object = gtk_builder_get_object (
+    dialog->builder, type == SN_ITEM_TYPE_DEFAULT ? "item-up" : "legacy-item-up");
   if (GTK_IS_BUTTON (object))
     gtk_widget_set_sensitive (GTK_WIDGET (object), item_up_sensitive);
 
-  object = gtk_builder_get_object (dialog->builder, "item-down");
+  object = gtk_builder_get_object (
+    dialog->builder, type == SN_ITEM_TYPE_DEFAULT ? "item-down" : "legacy-item-down");
   if (GTK_IS_BUTTON (object))
     gtk_widget_set_sensitive (GTK_WIDGET (object), item_down_sensitive);
 }
@@ -310,92 +260,34 @@ sn_dialog_selection_changed (GtkTreeSelection *selection,
 
 
 static void
-sn_dialog_legacy_selection_changed (GtkTreeSelection *selection,
-                                    SnDialog *dialog)
-{
-  GtkTreeModel *model;
-  GtkTreeIter iter;
-  GtkTreePath *path;
-  gint *indices;
-  gint count = 0, position = -1, depth;
-  gboolean item_up_sensitive, item_down_sensitive;
-  GObject *object;
-
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-    {
-      path = gtk_tree_model_get_path (model, &iter);
-      indices = gtk_tree_path_get_indices_with_depth (path, &depth);
-
-      if (indices != NULL && depth > 0)
-        position = indices[0];
-
-      count = gtk_tree_model_iter_n_children (model, NULL);
-
-      gtk_tree_path_free (path);
-    }
-
-  item_up_sensitive = position > 0;
-  item_down_sensitive = position + 1 < count;
-
-  object = gtk_builder_get_object (dialog->builder, "item-up");
-  if (GTK_IS_BUTTON (object))
-    gtk_widget_set_sensitive (GTK_WIDGET (object), item_up_sensitive);
-
-  object = gtk_builder_get_object (dialog->builder, "item-down");
-  if (GTK_IS_BUTTON (object))
-    gtk_widget_set_sensitive (GTK_WIDGET (object), item_down_sensitive);
-}
-
-
-
-static void
-sn_dialog_hidden_toggled (GtkCellRendererToggle *renderer,
+sn_dialog_hidden_toggled (GObject *renderer,
                           const gchar *path_string,
                           SnDialog *dialog)
 {
+  GObject *store;
   GtkTreeIter iter;
   gboolean hidden;
   gchar *name;
+  SnItemType type;
 
   g_return_if_fail (SN_IS_DIALOG (dialog));
   g_return_if_fail (SN_IS_CONFIG (dialog->config));
   g_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
 
-  if (gtk_tree_model_get_iter_from_string (GTK_TREE_MODEL (dialog->store), &iter, path_string))
+  if (renderer == gtk_builder_get_object (dialog->builder, "hidden-toggle"))
     {
-      gtk_tree_model_get (GTK_TREE_MODEL (dialog->store), &iter,
-                          COLUMN_HIDDEN, &hidden,
-                          COLUMN_TIP, &name, -1);
-
-      /* insert value (we need to update it) */
-      hidden = !hidden;
-
-      /* update box and store with new state */
-      sn_config_set_hidden (dialog->config, name, hidden);
-      gtk_list_store_set (GTK_LIST_STORE (dialog->store), &iter, COLUMN_HIDDEN, hidden, -1);
-
-      g_free (name);
+      store = dialog->store;
+      type = SN_ITEM_TYPE_DEFAULT;
     }
-}
-
-
-
-static void
-sn_dialog_legacy_hidden_toggled (GtkCellRendererToggle *renderer,
-                                 const gchar *path_string,
-                                 SnDialog *dialog)
-{
-  GtkTreeIter iter;
-  gboolean hidden;
-  gchar *name;
-
-  g_return_if_fail (SN_IS_DIALOG (dialog));
-  g_return_if_fail (SN_IS_CONFIG (dialog->config));
-  g_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
-
-  if (gtk_tree_model_get_iter_from_string (GTK_TREE_MODEL (dialog->legacy_store), &iter, path_string))
+  else
     {
-      gtk_tree_model_get (GTK_TREE_MODEL (dialog->legacy_store), &iter,
+      store = dialog->legacy_store;
+      type = SN_ITEM_TYPE_LEGACY;
+    }
+
+  if (gtk_tree_model_get_iter_from_string (GTK_TREE_MODEL (store), &iter, path_string))
+    {
+      gtk_tree_model_get (GTK_TREE_MODEL (store), &iter,
                           COLUMN_HIDDEN, &hidden,
                           COLUMN_TIP, &name, -1);
 
@@ -403,8 +295,8 @@ sn_dialog_legacy_hidden_toggled (GtkCellRendererToggle *renderer,
       hidden = !hidden;
 
       /* update box and store with new state */
-      sn_config_set_legacy_hidden (dialog->config, name, hidden);
-      gtk_list_store_set (GTK_LIST_STORE (dialog->legacy_store), &iter, COLUMN_HIDDEN, hidden, -1);
+      sn_config_set_hidden (dialog->config, type, name, hidden);
+      gtk_list_store_set (GTK_LIST_STORE (store), &iter, COLUMN_HIDDEN, hidden, -1);
 
       g_free (name);
     }
@@ -414,6 +306,8 @@ sn_dialog_legacy_hidden_toggled (GtkCellRendererToggle *renderer,
 
 static void
 sn_dialog_swap_rows (SnDialog *dialog,
+                     GObject *store,
+                     SnItemType type,
                      GtkTreeIter *iter_prev,
                      GtkTreeIter *iter)
 {
@@ -424,72 +318,31 @@ sn_dialog_swap_rows (SnDialog *dialog,
 
   g_return_if_fail (SN_IS_DIALOG (dialog));
   g_return_if_fail (SN_IS_CONFIG (dialog->config));
-  g_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
+  g_return_if_fail (GTK_IS_LIST_STORE (store));
 
-  gtk_tree_model_get (GTK_TREE_MODEL (dialog->store), iter_prev,
+  gtk_tree_model_get (GTK_TREE_MODEL (store), iter_prev,
                       COLUMN_ICON, &icon1,
                       COLUMN_TITLE, &title1,
                       COLUMN_HIDDEN, &hidden1,
                       COLUMN_TIP, &tip1, -1);
-  gtk_tree_model_get (GTK_TREE_MODEL (dialog->store), iter,
+  gtk_tree_model_get (GTK_TREE_MODEL (store), iter,
                       COLUMN_ICON, &icon2,
                       COLUMN_TITLE, &title2,
                       COLUMN_HIDDEN, &hidden2,
                       COLUMN_TIP, &tip2, -1);
-  gtk_list_store_set (GTK_LIST_STORE (dialog->store), iter_prev,
+  gtk_list_store_set (GTK_LIST_STORE (store), iter_prev,
                       COLUMN_ICON, icon2,
                       COLUMN_TITLE, title2,
                       COLUMN_HIDDEN, hidden2,
                       COLUMN_TIP, tip2, -1);
-  gtk_list_store_set (GTK_LIST_STORE (dialog->store), iter,
+  gtk_list_store_set (GTK_LIST_STORE (store), iter,
                       COLUMN_ICON, icon1,
                       COLUMN_TITLE, title1,
                       COLUMN_HIDDEN, hidden1,
                       COLUMN_TIP, tip1, -1);
 
   /* do a matching operation on SnConfig */
-  sn_config_swap_known_items (dialog->config, tip1, tip2);
-}
-
-
-
-static void
-sn_dialog_legacy_swap_rows (SnDialog *dialog,
-                            GtkTreeIter *iter_prev,
-                            GtkTreeIter *iter)
-{
-  GIcon *icon1, *icon2;
-  gchar *title1, *title2;
-  gboolean hidden1, hidden2;
-  gchar *tip1, *tip2;
-
-  g_return_if_fail (SN_IS_DIALOG (dialog));
-  g_return_if_fail (SN_IS_CONFIG (dialog->config));
-  g_return_if_fail (GTK_IS_LIST_STORE (dialog->legacy_store));
-
-  gtk_tree_model_get (GTK_TREE_MODEL (dialog->legacy_store), iter_prev,
-                      COLUMN_ICON, &icon1,
-                      COLUMN_TITLE, &title1,
-                      COLUMN_HIDDEN, &hidden1,
-                      COLUMN_TIP, &tip1, -1);
-  gtk_tree_model_get (GTK_TREE_MODEL (dialog->legacy_store), iter,
-                      COLUMN_ICON, &icon2,
-                      COLUMN_TITLE, &title2,
-                      COLUMN_HIDDEN, &hidden2,
-                      COLUMN_TIP, &tip2, -1);
-  gtk_list_store_set (GTK_LIST_STORE (dialog->legacy_store), iter_prev,
-                      COLUMN_ICON, icon2,
-                      COLUMN_TITLE, title2,
-                      COLUMN_HIDDEN, hidden2,
-                      COLUMN_TIP, tip2, -1);
-  gtk_list_store_set (GTK_LIST_STORE (dialog->legacy_store), iter,
-                      COLUMN_ICON, icon1,
-                      COLUMN_TITLE, title1,
-                      COLUMN_HIDDEN, hidden1,
-                      COLUMN_TIP, tip1, -1);
-
-  /* do a matching operation on SnConfig */
-  sn_config_swap_known_legacy_items (dialog->config, tip1, tip2);
+  sn_config_swap_known_items (dialog->config, type, tip1, tip2);
 }
 
 
@@ -506,18 +359,28 @@ sn_dialog_iter_equal (GtkTreeIter *iter1,
 
 
 static void
-sn_dialog_item_up_clicked (GtkWidget *button,
+sn_dialog_item_up_clicked (GObject *button,
                            SnDialog *dialog)
 {
-  GObject *treeview;
+  GObject *store, *treeview;
   GtkTreeSelection *selection;
   GtkTreeIter iter, iter_prev, iter_tmp;
+  SnItemType type;
 
   g_return_if_fail (SN_IS_DIALOG (dialog));
-  g_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
 
-  treeview = gtk_builder_get_object (dialog->builder, "items-treeview");
-  g_return_if_fail (GTK_IS_TREE_VIEW (treeview));
+  if (button == gtk_builder_get_object (dialog->builder, "item-up"))
+    {
+      store = dialog->store;
+      treeview = gtk_builder_get_object (dialog->builder, "items-treeview");
+      type = SN_ITEM_TYPE_DEFAULT;
+    }
+  else
+    {
+      store = dialog->legacy_store;
+      treeview = gtk_builder_get_object (dialog->builder, "legacy-items-treeview");
+      type = SN_ITEM_TYPE_LEGACY;
+    }
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
   if (!gtk_tree_selection_get_selected (selection, NULL, &iter))
@@ -525,109 +388,56 @@ sn_dialog_item_up_clicked (GtkWidget *button,
 
   /* gtk_tree_model_iter_previous available from Gtk3 */
   /* so we have to search for it starting from the first iter */
-  if (!gtk_tree_model_get_iter_first (GTK_TREE_MODEL (dialog->store), &iter_prev))
+  if (!gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter_prev))
     return;
 
   iter_tmp = iter_prev;
   while (!sn_dialog_iter_equal (&iter_tmp, &iter))
     {
       iter_prev = iter_tmp;
-      if (!gtk_tree_model_iter_next (GTK_TREE_MODEL (dialog->store), &iter_tmp))
+      if (!gtk_tree_model_iter_next (GTK_TREE_MODEL (store), &iter_tmp))
         return;
     }
 
-  sn_dialog_swap_rows (dialog, &iter_prev, &iter);
+  sn_dialog_swap_rows (dialog, store, type, &iter_prev, &iter);
   gtk_tree_selection_select_iter (selection, &iter_prev);
 }
 
 
 
 static void
-sn_dialog_legacy_item_up_clicked (GtkWidget *button,
-                                  SnDialog *dialog)
-{
-  GObject *treeview;
-  GtkTreeSelection *selection;
-  GtkTreeIter iter, iter_prev, iter_tmp;
-
-  g_return_if_fail (SN_IS_DIALOG (dialog));
-  g_return_if_fail (GTK_IS_LIST_STORE (dialog->legacy_store));
-
-  treeview = gtk_builder_get_object (dialog->builder, "legacy-items-treeview");
-  g_return_if_fail (GTK_IS_TREE_VIEW (treeview));
-
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
-  if (!gtk_tree_selection_get_selected (selection, NULL, &iter))
-    return;
-
-  /* gtk_tree_model_iter_previous available from Gtk3 */
-  /* so we have to search for it starting from the first iter */
-  if (!gtk_tree_model_get_iter_first (GTK_TREE_MODEL (dialog->legacy_store), &iter_prev))
-    return;
-
-  iter_tmp = iter_prev;
-  while (!sn_dialog_iter_equal (&iter_tmp, &iter))
-    {
-      iter_prev = iter_tmp;
-      if (!gtk_tree_model_iter_next (GTK_TREE_MODEL (dialog->legacy_store), &iter_tmp))
-        return;
-    }
-
-  sn_dialog_legacy_swap_rows (dialog, &iter_prev, &iter);
-  gtk_tree_selection_select_iter (selection, &iter_prev);
-}
-
-
-
-static void
-sn_dialog_item_down_clicked (GtkWidget *button,
+sn_dialog_item_down_clicked (GObject *button,
                              SnDialog *dialog)
 {
-  GObject *treeview;
+  GObject *store, *treeview;
   GtkTreeSelection *selection;
   GtkTreeIter iter, iter_next;
+  SnItemType type;
 
   g_return_if_fail (SN_IS_DIALOG (dialog));
 
-  treeview = gtk_builder_get_object (dialog->builder, "items-treeview");
-  g_return_if_fail (GTK_IS_TREE_VIEW (treeview));
+  if (button == gtk_builder_get_object (dialog->builder, "item-down"))
+    {
+      store = dialog->store;
+      treeview = gtk_builder_get_object (dialog->builder, "items-treeview");
+      type = SN_ITEM_TYPE_DEFAULT;
+    }
+  else
+    {
+      store = dialog->legacy_store;
+      treeview = gtk_builder_get_object (dialog->builder, "legacy-items-treeview");
+      type = SN_ITEM_TYPE_LEGACY;
+    }
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
   if (!gtk_tree_selection_get_selected (selection, NULL, &iter))
     return;
 
   iter_next = iter;
-  if (!gtk_tree_model_iter_next (GTK_TREE_MODEL (dialog->store), &iter_next))
+  if (!gtk_tree_model_iter_next (GTK_TREE_MODEL (store), &iter_next))
     return;
 
-  sn_dialog_swap_rows (dialog, &iter, &iter_next);
-  gtk_tree_selection_select_iter (selection, &iter_next);
-}
-
-
-
-static void
-sn_dialog_legacy_item_down_clicked (GtkWidget *button,
-                                    SnDialog *dialog)
-{
-  GObject *treeview;
-  GtkTreeSelection *selection;
-  GtkTreeIter iter, iter_next;
-
-  g_return_if_fail (SN_IS_DIALOG (dialog));
-
-  treeview = gtk_builder_get_object (dialog->builder, "legacy-items-treeview");
-  g_return_if_fail (GTK_IS_TREE_VIEW (treeview));
-
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
-  if (!gtk_tree_selection_get_selected (selection, NULL, &iter))
-    return;
-
-  iter_next = iter;
-  if (!gtk_tree_model_iter_next (GTK_TREE_MODEL (dialog->legacy_store), &iter_next))
-    return;
-
-  sn_dialog_legacy_swap_rows (dialog, &iter, &iter_next);
+  sn_dialog_swap_rows (dialog, store, type, &iter, &iter_next);
   gtk_tree_selection_select_iter (selection, &iter_next);
 }
 
@@ -647,12 +457,12 @@ sn_dialog_clear_clicked (GtkWidget *button,
       if (sn_config_items_clear (dialog->config))
         {
           gtk_list_store_clear (GTK_LIST_STORE (dialog->store));
-          sn_dialog_update_names (dialog);
+          sn_dialog_update_names (dialog, dialog->store, SN_ITEM_TYPE_DEFAULT);
         }
       if (sn_config_legacy_items_clear (dialog->config))
         {
           gtk_list_store_clear (GTK_LIST_STORE (dialog->legacy_store));
-          sn_dialog_update_legacy_names (dialog);
+          sn_dialog_update_names (dialog, dialog->legacy_store, SN_ITEM_TYPE_LEGACY);
         }
     }
 }
@@ -777,7 +587,7 @@ sn_dialog_build (SnDialog *dialog)
 
       dialog->store = gtk_builder_get_object (dialog->builder, "items-store");
       g_return_val_if_fail (GTK_IS_LIST_STORE (dialog->store), FALSE);
-      sn_dialog_update_names (dialog);
+      sn_dialog_update_names (dialog, dialog->store, SN_ITEM_TYPE_DEFAULT);
 
       object = gtk_builder_get_object (dialog->builder, "items-treeview");
       g_return_val_if_fail (GTK_IS_TREE_VIEW (object), FALSE);
@@ -805,7 +615,7 @@ sn_dialog_build (SnDialog *dialog)
 
       dialog->legacy_store = gtk_builder_get_object (dialog->builder, "legacy-items-store");
       g_return_val_if_fail (GTK_IS_LIST_STORE (dialog->legacy_store), FALSE);
-      sn_dialog_update_legacy_names (dialog);
+      sn_dialog_update_names (dialog, dialog->legacy_store, SN_ITEM_TYPE_LEGACY);
 
       object = gtk_builder_get_object (dialog->builder, "legacy-items-treeview");
       g_return_val_if_fail (GTK_IS_TREE_VIEW (object), FALSE);
@@ -813,23 +623,23 @@ sn_dialog_build (SnDialog *dialog)
 
       selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (object));
       g_signal_connect (G_OBJECT (selection), "changed",
-                        G_CALLBACK (sn_dialog_legacy_selection_changed), dialog);
+                        G_CALLBACK (sn_dialog_selection_changed), dialog);
       sn_dialog_selection_changed (selection, dialog);
 
       object = gtk_builder_get_object (dialog->builder, "legacy-hidden-toggle");
       g_return_val_if_fail (GTK_IS_CELL_RENDERER_TOGGLE (object), FALSE);
       g_signal_connect (G_OBJECT (object), "toggled",
-                        G_CALLBACK (sn_dialog_legacy_hidden_toggled), dialog);
+                        G_CALLBACK (sn_dialog_hidden_toggled), dialog);
 
       object = gtk_builder_get_object (dialog->builder, "legacy-item-up");
       g_return_val_if_fail (GTK_IS_BUTTON (object), FALSE);
       g_signal_connect (G_OBJECT (object), "clicked",
-                        G_CALLBACK (sn_dialog_legacy_item_up_clicked), dialog);
+                        G_CALLBACK (sn_dialog_item_up_clicked), dialog);
 
       object = gtk_builder_get_object (dialog->builder, "legacy-item-down");
       g_return_val_if_fail (GTK_IS_BUTTON (object), FALSE);
       g_signal_connect (G_OBJECT (object), "clicked",
-                        G_CALLBACK (sn_dialog_legacy_item_down_clicked), dialog);
+                        G_CALLBACK (sn_dialog_item_down_clicked), dialog);
 
       object = gtk_builder_get_object (dialog->builder, "items-clear");
       g_return_val_if_fail (GTK_IS_BUTTON (object), FALSE);
