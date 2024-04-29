@@ -27,7 +27,7 @@
 #include "sn-plugin.h"
 
 #include "common/panel-debug.h"
-#include "libxfce4panel/xfce-panel-plugin.h"
+#include "common/panel-xfconf.h"
 
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4util/libxfce4util.h>
@@ -245,8 +245,6 @@ static void
 sn_config_finalize (GObject *object)
 {
   SnConfig *config = SN_CONFIG (object);
-
-  xfconf_shutdown ();
 
   g_list_free_full (config->known_items, g_free);
   g_hash_table_destroy (config->hidden_items);
@@ -1050,60 +1048,27 @@ sn_config_legacy_items_clear (SnConfig *config)
 
 
 SnConfig *
-sn_config_new (const gchar *property_base)
+sn_config_new (XfcePanelPlugin *plugin)
 {
-  SnConfig *config;
-  XfconfChannel *channel;
-  gchar *property;
+  SnConfig *config = g_object_new (SN_TYPE_CONFIG, NULL);
+  const PanelProperty properties[] = {
+    { "icon-size", G_TYPE_INT },
+    { "single-row", G_TYPE_BOOLEAN },
+    { "square-icons", G_TYPE_BOOLEAN },
+    { "symbolic-icons", G_TYPE_BOOLEAN },
+    { "menu-is-primary", G_TYPE_BOOLEAN },
+    { "hide-new-items", G_TYPE_BOOLEAN },
+    { "known-items", G_TYPE_PTR_ARRAY },
+    { "hidden-items", G_TYPE_PTR_ARRAY },
+    { "known-legacy-items", G_TYPE_PTR_ARRAY },
+    { "hidden-legacy-items", G_TYPE_PTR_ARRAY },
+    { NULL }
+  };
 
-  config = g_object_new (SN_TYPE_CONFIG, NULL);
-
-  if (xfconf_init (NULL))
-    {
-      channel = xfconf_channel_get ("xfce4-panel");
-
-      property = g_strconcat (property_base, "/icon-size", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_INT, config, "icon-size");
-      g_free (property);
-
-      property = g_strconcat (property_base, "/single-row", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_BOOLEAN, config, "single-row");
-      g_free (property);
-
-      property = g_strconcat (property_base, "/square-icons", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_BOOLEAN, config, "square-icons");
-      g_free (property);
-
-      property = g_strconcat (property_base, "/symbolic-icons", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_BOOLEAN, config, "symbolic-icons");
-      g_free (property);
-
-      property = g_strconcat (property_base, "/menu-is-primary", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_BOOLEAN, config, "menu-is-primary");
-      g_free (property);
-
-      property = g_strconcat (property_base, "/hide-new-items", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_BOOLEAN, config, "hide-new-items");
-      g_free (property);
-
-      property = g_strconcat (property_base, "/known-items", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_PTR_ARRAY, config, "known-items");
-      g_free (property);
-
-      property = g_strconcat (property_base, "/hidden-items", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_PTR_ARRAY, config, "hidden-items");
-      g_free (property);
-
-      property = g_strconcat (property_base, "/known-legacy-items", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_PTR_ARRAY, config, "known-legacy-items");
-      g_free (property);
-
-      property = g_strconcat (property_base, "/hidden-legacy-items", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_PTR_ARRAY, config, "hidden-legacy-items");
-      g_free (property);
-
-      g_signal_emit (G_OBJECT (config), sn_config_signals[CONFIGURATION_CHANGED], 0);
-    }
+  panel_properties_bind (NULL, G_OBJECT (config),
+                         xfce_panel_plugin_get_property_base (plugin),
+                         properties, FALSE);
+  g_signal_emit (G_OBJECT (config), sn_config_signals[CONFIGURATION_CHANGED], 0);
 
   return config;
 }

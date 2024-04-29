@@ -329,7 +329,7 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   xfce_panel_plugin_menu_show_configure (panel_plugin);
 
-  plugin->config = sn_config_new (xfce_panel_plugin_get_property_base (panel_plugin));
+  plugin->config = sn_config_new (panel_plugin);
 
   /* Container for both plugins */
   plugin->box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1);

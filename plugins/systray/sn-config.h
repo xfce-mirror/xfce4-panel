@@ -20,6 +20,8 @@
 #ifndef __SN_CONFIG_H__
 #define __SN_CONFIG_H__
 
+#include "libxfce4panel/xfce-panel-plugin.h"
+
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
@@ -38,7 +40,7 @@ G_DECLARE_FINAL_TYPE (SnConfig, sn_config, SN, CONFIG, GObject)
 #define DEFAULT_HIDE_NEW_ITEMS FALSE
 
 SnConfig *
-sn_config_new (const gchar *property_base);
+sn_config_new (XfcePanelPlugin *panel_plugin);
 
 void
 sn_config_set_orientation (SnConfig *config,
