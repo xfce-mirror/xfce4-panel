@@ -85,11 +85,13 @@ show_desktop_plugin_set_property (GObject *object,
                                   guint prop_id,
                                   const GValue *value,
                                   GParamSpec *pspec);
-static void show_desktop_plugin_get_property (GObject *object,
-                                              guint prop_id,
-                                              GValue *value,
-                                              GParamSpec *pspec);
-static void showdesktop_configure (XfcePanelPlugin *panel_plugin);
+static void
+show_desktop_plugin_get_property (GObject *object,
+                                  guint prop_id,
+                                  GValue *value,
+                                  GParamSpec *pspec);
+static void
+showdesktop_configure (XfcePanelPlugin *panel_plugin);
 
 
 struct _ShowDesktopPlugin
@@ -129,7 +131,7 @@ static void
 show_desktop_plugin_class_init (ShowDesktopPluginClass *klass)
 {
   XfcePanelPluginClass *plugin_class;
-  GObjectClass* gobject_class =  G_OBJECT_CLASS(klass);
+  GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = show_desktop_plugin_construct;
@@ -139,7 +141,7 @@ show_desktop_plugin_class_init (ShowDesktopPluginClass *klass)
 
   gobject_class->set_property = show_desktop_plugin_set_property;
   gobject_class->get_property = show_desktop_plugin_get_property;
-  g_object_class_install_property(G_OBJECT_CLASS(plugin_class), PROP_SHOW_ON_HOVER,g_param_spec_boolean("show-on-hover", NULL, NULL, TRUE,G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS) );
+  g_object_class_install_property (G_OBJECT_CLASS (plugin_class), PROP_SHOW_ON_HOVER, g_param_spec_boolean ("show-on-hover", NULL, NULL, TRUE, G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 }
 
 
@@ -168,10 +170,10 @@ show_desktop_plugin_init (ShowDesktopPlugin *plugin)
   gtk_widget_show (button);
 
   /* allow toggle the button when mouse hover long time.*/
-  g_signal_connect(G_OBJECT(plugin->button), "enter-notify-event",
-                   G_CALLBACK(show_desktop_plugin_enter), plugin);
-  g_signal_connect(G_OBJECT(plugin->button), "leave-notify-event",
-                   G_CALLBACK(show_desktop_plugin_leave), plugin);
+  g_signal_connect (G_OBJECT (plugin->button), "enter-notify-event",
+                    G_CALLBACK (show_desktop_plugin_enter), plugin);
+  g_signal_connect (G_OBJECT (plugin->button), "leave-notify-event",
+                    G_CALLBACK (show_desktop_plugin_leave), plugin);
 
   /* allow toggle the button when drag something.*/
   gtk_drag_dest_set (GTK_WIDGET (plugin->button), 0, NULL, 0, 0);
@@ -190,12 +192,11 @@ show_desktop_plugin_init (ShowDesktopPlugin *plugin)
 static void
 show_desktop_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
-  const PanelProperty  properties[] =
-  {
+  const PanelProperty properties[] = {
     { "show-on-hover", G_TYPE_BOOLEAN },
     { NULL }
   };
-  
+
   xfce_panel_plugin_set_small (panel_plugin, TRUE);
 
   xfce_panel_plugin_menu_show_configure (panel_plugin);
@@ -203,7 +204,6 @@ show_desktop_plugin_construct (XfcePanelPlugin *panel_plugin)
   panel_properties_bind (xfconf_channel_get ("xfce4-panel"), G_OBJECT (panel_plugin),
                          xfce_panel_plugin_get_property_base (panel_plugin),
                          properties, FALSE);
-  
 }
 
 
@@ -269,7 +269,7 @@ show_desktop_plugin_free_data (XfcePanelPlugin *panel_plugin)
     }
 
   if (plugin->enter_timeout_id != 0)
-    g_source_remove(plugin->enter_timeout_id);
+    g_source_remove (plugin->enter_timeout_id);
 }
 
 
@@ -444,7 +444,7 @@ show_desktop_plugin_enter_timeout (gpointer data)
 {
   ShowDesktopPlugin *plugin = (ShowDesktopPlugin *) data;
 
-  gboolean active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(plugin->button));
+  gboolean active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button));
 
   plugin->enter_timeout_id = 0;
   if (!active)
@@ -459,21 +459,21 @@ show_desktop_plugin_enter_timeout (gpointer data)
 
 
 static gboolean
-show_desktop_plugin_enter (GtkToggleButton*   widget,
-                           GdkEventCrossing   event,
-                           ShowDesktopPlugin* plugin)
+show_desktop_plugin_enter (GtkToggleButton *widget,
+                           GdkEventCrossing event,
+                           ShowDesktopPlugin *plugin)
 {
   gboolean active;
 
   if (!plugin->shown_on_hover)
     return FALSE;
 
-  active = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(plugin->button));
+  active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button));
   if (plugin->enter_timeout_id == 0 && !active)
     {
-      plugin->enter_timeout_id = g_timeout_add(HOVER_ACTIVATE_TIMEOUT,
-                                               show_desktop_plugin_enter_timeout,
-                                               plugin);
+      plugin->enter_timeout_id = g_timeout_add (HOVER_ACTIVATE_TIMEOUT,
+                                                show_desktop_plugin_enter_timeout,
+                                                plugin);
     }
   return FALSE;
 }
@@ -481,9 +481,10 @@ show_desktop_plugin_enter (GtkToggleButton*   widget,
 
 
 static gboolean
-show_desktop_plugin_leave (GtkToggleButton* button,
+show_desktop_plugin_leave (GtkToggleButton *button,
                            GdkEventCrossing event,
-                           ShowDesktopPlugin* plugin){
+                           ShowDesktopPlugin *plugin)
+{
   if (!plugin->shown_on_hover)
     return FALSE;
 
@@ -503,43 +504,45 @@ show_desktop_plugin_leave (GtkToggleButton* button,
 
 
 static void
-show_desktop_plugin_set_property (GObject      *object,
-                                 guint         prop_id,
-                                 const GValue *value,
-                                 GParamSpec   *pspec)
+show_desktop_plugin_set_property (GObject *object,
+                                  guint prop_id,
+                                  const GValue *value,
+                                  GParamSpec *pspec)
 {
-  ShowDesktopPlugin* plugin = SHOW_DESKTOP_PLUGIN(object);
+  ShowDesktopPlugin *plugin = SHOW_DESKTOP_PLUGIN (object);
 
-  switch (prop_id) {
+  switch (prop_id)
+    {
     case PROP_SHOW_ON_HOVER:
-      plugin->shown_on_hover = g_value_get_boolean(value);
+      plugin->shown_on_hover = g_value_get_boolean (value);
       break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
-  }
+    }
 }
 
 
 
 static void
-show_desktop_plugin_get_property (GObject    *object,
-                                 guint       prop_id,
-                                 GValue     *value,
-                                 GParamSpec *pspec)
+show_desktop_plugin_get_property (GObject *object,
+                                  guint prop_id,
+                                  GValue *value,
+                                  GParamSpec *pspec)
 {
-  ShowDesktopPlugin* plugin = SHOW_DESKTOP_PLUGIN(object);
+  ShowDesktopPlugin *plugin = SHOW_DESKTOP_PLUGIN (object);
 
-  switch (prop_id) {
+  switch (prop_id)
+    {
     case PROP_SHOW_ON_HOVER:
-      g_value_set_boolean(value, plugin->shown_on_hover);
+      g_value_set_boolean (value, plugin->shown_on_hover);
       break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
-  }
+    }
 }
 
 
@@ -547,19 +550,19 @@ show_desktop_plugin_get_property (GObject    *object,
 void
 showdesktop_configure (XfcePanelPlugin *panel_plugin)
 {
-  ShowDesktopPlugin *plugin = SHOW_DESKTOP_PLUGIN(panel_plugin);
-  GtkBuilder      *builder;
-  GObject         *dialog;
-  GObject         *show_on_mouse_hover;
+  ShowDesktopPlugin *plugin = SHOW_DESKTOP_PLUGIN (panel_plugin);
+  GtkBuilder *builder;
+  GObject *dialog;
+  GObject *show_on_mouse_hover;
 
-  panel_return_if_fail (SHOW_DESKTOP_IS_PLUGIN(plugin));
+  panel_return_if_fail (SHOW_DESKTOP_IS_PLUGIN (plugin));
 
   /* setup the dialog */
   builder = panel_utils_builder_new (panel_plugin, showdesktop_dialog_ui,
                                      showdesktop_dialog_ui_length, &dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
-  
+
   show_on_mouse_hover = gtk_builder_get_object (builder, "show-on-hover");
   g_object_bind_property (G_OBJECT (plugin), "show-on-hover",
                           G_OBJECT (show_on_mouse_hover), "active",
