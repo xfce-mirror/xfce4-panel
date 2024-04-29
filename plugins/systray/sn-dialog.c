@@ -29,6 +29,7 @@
 #include "common/panel-private.h"
 #include "libxfce4panel/libxfce4panel.h"
 
+#include <gio/gdesktopappinfo.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4util/libxfce4util.h>
 
@@ -66,41 +67,6 @@ enum
   COLUMN_TITLE,
   COLUMN_HIDDEN,
   COLUMN_TIP
-};
-
-
-
-/* known applications to improve the icon and name */
-static const gchar *known_applications[][3] = {
-  /* application name, icon-name, understandable name */
-  { "blueman", "blueman", "Blueman Applet" },
-  { "nm-applet", "network-workgroup", "Network Manager Applet" },
-  { "Skype1", "skypeforlinux", "Skype" },
-  { "chrome_status_icon_1", "google-chrome", "Google Chrome" },
-  { "Telegram Desktop", "telegram", "Telegram Desktop" },
-  { "redshift", "redshift", "Redshift" },
-  { "vlc", "vlc", "VLC Player" },
-  { "zoom", "Zoom", "Zoom" },
-};
-
-static const gchar *known_legacy_applications[][3] = {
-  /* application name, icon-name, understandable name */
-  { "audacious2", "audacious", "Audacious" },
-  { "drop-down terminal", "utilities-terminal", "Xfce Dropdown Terminal" },
-  { "networkmanager applet", "network-workgroup", "Network Manager Applet" },
-  { "parole", "parole", "Parole Media Player" },
-  { "task manager", "org.xfce.taskmanager", "Xfce Taskmanager" },
-  { "thunar", "Thunar", "Thunar Progress Dialog" },
-  { "wicd-client.py", "wicd-gtk", "Wicd" },
-  { "workrave tray icon", NULL, "Workrave Applet" },
-  { "workrave", NULL, "Workrave" },
-  { "xfce terminal", "utilities-terminal", "Xfce Terminal" },
-  { "xfce4-power-manager", "xfpm-ac-adapter", "Xfce Power Manager" },
-  { "redshift-gtk", "redshift", "Redshift" },
-  { "skypeforlinux", "skypeforlinux", "Skype" },
-  { "blueman-applet", "blueman", "Blueman Applet" },
-  { "system-config-printer", "printer", "Printing Service" },
-  { "network", "network-workgroup", "Network Manager Applet" },
 };
 
 
@@ -159,50 +125,45 @@ sn_dialog_update_names (SnDialog *dialog,
                         GObject *store,
                         SnItemType type)
 {
-  const gchar *name;
-  const gchar *title;
-  const gchar *icon_name;
-  GIcon *icon;
-
   g_return_if_fail (SN_IS_DIALOG (dialog));
   g_return_if_fail (SN_IS_CONFIG (dialog->config));
   g_return_if_fail (GTK_IS_LIST_STORE (store));
 
   for (GList *li = sn_config_get_known_items (dialog->config, type); li != NULL; li = li->next)
     {
-      name = li->data;
-      title = name;
-      icon_name = name;
-      icon = NULL;
+      const gchar *name = li->data;
+      gchar *title = li->data;
+      gchar *icon_name = li->data;
+      GIcon *icon = NULL;
+      gchar *desktop_id = g_strdup_printf ("%s.desktop", name);
+      GDesktopAppInfo *app_info = g_desktop_app_info_new (desktop_id);
+      g_free (desktop_id);
 
-      /* check if we have a better name for the application */
-      if (type == SN_ITEM_TYPE_DEFAULT)
+      if (app_info == NULL)
         {
-          for (guint i = 0; i < G_N_ELEMENTS (known_applications); i++)
-            {
-              if (strcmp (name, known_applications[i][0]) == 0)
-                {
-                  icon_name = known_applications[i][1];
-                  title = known_applications[i][2];
-                  break;
-                }
-            }
+          gchar ***desktop_ids = g_desktop_app_info_search (name);
+          if (desktop_ids[0] != NULL)
+            app_info = g_desktop_app_info_new (desktop_ids[0][0]);
+
+          for (gchar ***p = desktop_ids; *p != NULL; p++)
+            g_strfreev (*p);
+          g_free (desktop_ids);
         }
-      else
+      if (app_info != NULL)
         {
-          for (guint i = 0; i < G_N_ELEMENTS (known_legacy_applications); i++)
-            {
-              if (strcmp (name, known_legacy_applications[i][0]) == 0)
-                {
-                  icon_name = known_legacy_applications[i][1];
-                  title = known_legacy_applications[i][2];
-                  break;
-                }
-            }
+          title = g_desktop_app_info_get_locale_string (app_info, G_KEY_FILE_DESKTOP_KEY_NAME);
+          icon_name = g_desktop_app_info_get_string (app_info, G_KEY_FILE_DESKTOP_KEY_ICON);
+          g_object_unref (app_info);
         }
 
       if (gtk_icon_theme_has_icon (gtk_icon_theme_get_default (), icon_name))
         icon = g_themed_icon_new (icon_name);
+      else
+        {
+          GFile *file = g_file_new_for_path (icon_name);
+          icon = g_file_icon_new (file);
+          g_object_unref (file);
+        }
 
       /* insert item in the store */
       sn_dialog_add_item (dialog, store, icon, name, title,
@@ -210,6 +171,11 @@ sn_dialog_update_names (SnDialog *dialog,
 
       if (icon != NULL)
         g_object_unref (G_OBJECT (icon));
+      if (app_info != NULL)
+        {
+          g_free (title);
+          g_free (icon_name);
+        }
     }
 }
 
