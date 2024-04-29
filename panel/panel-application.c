@@ -58,8 +58,6 @@
 
 
 static void
-panel_application_dispose (GObject *object);
-static void
 panel_application_finalize (GObject *object);
 static void
 panel_application_plugin_move (GtkWidget *item,
@@ -186,7 +184,6 @@ panel_application_class_init (PanelApplicationClass *klass)
   GObjectClass *gobject_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
-  gobject_class->dispose = panel_application_dispose;
   gobject_class->finalize = panel_application_finalize;
 }
 
@@ -250,25 +247,13 @@ panel_application_init (PanelApplication *application)
 
 
 static void
-panel_application_dispose (GObject *object)
-{
-  PanelApplication *application = PANEL_APPLICATION (object);
-
-  /* save plugins: xfconf_shutdown() is called via a weak ref i.e. on dispose(),
-   * so this should be done here to avoid any use-after-free */
-  panel_application_save (application, SAVE_PLUGIN_PROVIDERS);
-
-  (*G_OBJECT_CLASS (panel_application_parent_class)->dispose) (object);
-}
-
-
-
-static void
 panel_application_finalize (GObject *object)
 {
   PanelApplication *application = PANEL_APPLICATION (object);
 
   panel_return_if_fail (application->dialogs == NULL);
+
+  panel_application_save (application, SAVE_PLUGIN_PROVIDERS);
 
 #ifdef ENABLE_X11
   /* stop autostart timeout */
