@@ -1339,6 +1339,14 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget *itembar,
 
   g_signal_handlers_unblock_by_func (G_OBJECT (dialog->store),
                                      G_CALLBACK (panel_preferences_dialog_item_row_changed), dialog);
+
+  /* scroll to selection */
+  selected = gtk_tree_selection_get_selected_rows (selection, NULL);
+  if (selected != NULL)
+    {
+      gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (treeview), selected->data, NULL, TRUE, 0, 0);
+      g_list_free (selected);
+    }
 }
 
 
@@ -1433,10 +1441,11 @@ panel_preferences_dialog_item_remove (GtkWidget *button,
                                       PanelPreferencesDialog *dialog)
 {
   GList *selected = NULL;
+  GtkTreeIter iter;
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
-  panel_preferences_dialog_item_get_selected (dialog, NULL, &selected);
+  panel_preferences_dialog_item_get_selected (dialog, &iter, &selected);
   if (G_LIKELY (selected != NULL))
     {
       GtkWidget *widget;
@@ -1470,6 +1479,24 @@ panel_preferences_dialog_item_remove (GtkWidget *button,
       /* run the dialog */
       if (gtk_dialog_run (GTK_DIALOG (widget)) == GTK_RESPONSE_YES)
         {
+          /* update selection so the view can be scrolled to selection when reloaded */
+          GObject *treeview = gtk_builder_get_object (GTK_BUILDER (dialog), "item-treeview");
+          GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+          gboolean update_selection = TRUE;
+          if (!gtk_tree_model_iter_previous (GTK_TREE_MODEL (dialog->store), &iter))
+            {
+              GList *paths = gtk_tree_selection_get_selected_rows (selection, NULL);
+              gtk_tree_model_get_iter (GTK_TREE_MODEL (dialog->store), &iter, g_list_last (paths)->data);
+              g_list_free_full (paths, (GDestroyNotify) gtk_tree_path_free);
+              if (!gtk_tree_model_iter_next (GTK_TREE_MODEL (dialog->store), &iter))
+                update_selection = FALSE;
+            }
+          if (update_selection)
+            {
+              gtk_tree_selection_unselect_all (selection);
+              gtk_tree_selection_select_iter (selection, &iter);
+            }
+
           gtk_widget_hide (widget);
           for (GList *lp = selected; lp != NULL; lp = lp->next)
             xfce_panel_plugin_provider_emit_signal (lp->data, PROVIDER_SIGNAL_REMOVE_PLUGIN);
