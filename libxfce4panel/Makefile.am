@@ -102,7 +102,7 @@ libxfce4panel-enum-types.h: $(libxfce4panel_headers) Makefile
 
 libxfce4panel-enum-types.c:  $(libxfce4panel_headers) Makefile
 	$(AM_V_GEN) ( cd $(srcdir) && glib-mkenums \
-		--fhead "#include <libxfce4panel/libxfce4panel-enums.h>\n#include <libxfce4panel/libxfce4panel-enum-types.h>\n#include <libxfce4panel/libxfce4panel-alias.h>" \
+		--fhead "#include <libxfce4panel/libxfce4panel-enums.h>\n#include <libxfce4panel/libxfce4panel-enum-types.h>\n\n#include <libxfce4panel/libxfce4panel-alias.h>" \
 		--fprod "\n/* enumerations from \"@filename@\" */" \
 		--vhead "GType\n@enum_name@_get_type (void)\n{\n\tstatic GType type = 0;\n\tif (type == 0) {\n\tstatic const G@Type@Value values[] = {"\
 		--vprod "\t{ @VALUENAME@, \"@VALUENAME@\", \"@valuenick@\" }," \
