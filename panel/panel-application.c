@@ -118,6 +118,7 @@ struct _PanelApplication
 
   /* xfconf channel */
   XfconfChannel *xfconf;
+  guint save_idle_id;
 
   /* internal list of all the panel windows */
   GSList *windows;
@@ -679,6 +680,21 @@ panel_application_plugin_remove (GtkWidget *widget,
 
 
 
+static gboolean
+save_plugins_ids (gpointer window)
+{
+  PanelApplication *application = panel_application_get ();
+  if (application != NULL)
+    {
+      panel_application_save_window (application, window, SAVE_PLUGIN_IDS);
+      application->save_idle_id = 0;
+      g_object_unref (application);
+    }
+  return FALSE;
+}
+
+
+
 static void
 panel_application_plugin_provider_signal (XfcePanelPluginProvider *provider,
                                           XfcePanelPluginProviderSignal provider_signal,
@@ -779,8 +795,9 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider *provider,
           panel_application_plugin_delete_config (application, name, unique_id);
           g_free (name);
 
-          /* save new ids */
-          panel_application_save_window (application, window, SAVE_PLUGIN_IDS);
+          /* save new ids (idled to avoid xfconf warning when removing several items) */
+          if (application->save_idle_id == 0)
+            application->save_idle_id = g_idle_add (save_plugins_ids, window);
         }
       break;
 

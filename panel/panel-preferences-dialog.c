@@ -110,7 +110,8 @@ panel_preferences_dialog_panel_switch (GtkWidget *widget,
                                        PanelPreferencesDialog *dialog);
 static XfcePanelPluginProvider *
 panel_preferences_dialog_item_get_selected (PanelPreferencesDialog *dialog,
-                                            GtkTreeIter *return_iter);
+                                            GtkTreeIter *return_iter,
+                                            GList **return_list);
 static void
 panel_preferences_dialog_item_store_rebuild (GtkWidget *itembar,
                                              PanelPreferencesDialog *dialog);
@@ -333,7 +334,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
 
   /* setup tree selection */
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
-  gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
+  gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
   g_signal_connect (G_OBJECT (selection), "changed",
                     G_CALLBACK (panel_preferences_dialog_item_selection_changed), dialog);
 
@@ -1207,7 +1208,8 @@ panel_preferences_dialog_panel_switch (GtkWidget *widget, PanelPreferencesDialog
 
 static XfcePanelPluginProvider *
 panel_preferences_dialog_item_get_selected (PanelPreferencesDialog *dialog,
-                                            GtkTreeIter *return_iter)
+                                            GtkTreeIter *return_iter,
+                                            GList **return_list)
 {
   GObject *treeview;
   XfcePanelPluginProvider *provider = NULL;
@@ -1222,15 +1224,32 @@ panel_preferences_dialog_item_get_selected (PanelPreferencesDialog *dialog,
   panel_return_val_if_fail (GTK_IS_WIDGET (treeview), NULL);
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
 
-  /* get the selection item */
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+  /* get the selection items */
+  if (gtk_tree_selection_count_selected_rows (selection) > 0)
     {
-      /* get the selected provider */
+      /* get the first selected provider */
+      GList *paths = gtk_tree_selection_get_selected_rows (selection, &model);
+      gtk_tree_model_get_iter (model, &iter, paths->data);
       gtk_tree_model_get (model, &iter, ITEM_COLUMN_PROVIDER, &provider, -1);
-      panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);
-
-      if (return_iter)
+      if (return_iter != NULL)
         *return_iter = iter;
+
+      /* get the list of selected providers */
+      if (return_list != NULL)
+        {
+          *return_list = NULL;
+          *return_list = g_list_prepend (*return_list, provider);
+          for (GList *lp = paths->next; lp != NULL; lp = lp->next)
+            {
+              gtk_tree_model_get_iter (model, &iter, lp->data);
+              gtk_tree_model_get (model, &iter, ITEM_COLUMN_PROVIDER, &provider, -1);
+              *return_list = g_list_prepend (*return_list, provider);
+            }
+
+          *return_list = g_list_reverse (*return_list);
+        }
+
+      g_list_free_full (paths, (GDestroyNotify) gtk_tree_path_free);
     }
 
   return provider;
@@ -1242,21 +1261,23 @@ static void
 panel_preferences_dialog_item_store_rebuild (GtkWidget *itembar,
                                              PanelPreferencesDialog *dialog)
 {
-  GList *items, *li;
+  GList *selected = NULL, *items, *li;
   guint i;
   PanelModule *module;
   gchar *tooltip, *display_name;
-  XfcePanelPluginProvider *selected_provider;
   GtkTreeIter iter;
-  GtkTreePath *path;
   GObject *treeview;
+  GtkTreeSelection *selection;
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
   panel_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
   panel_return_if_fail (PANEL_IS_ITEMBAR (itembar));
 
   /* memorize selected item */
-  selected_provider = panel_preferences_dialog_item_get_selected (dialog, NULL);
+  panel_preferences_dialog_item_get_selected (dialog, NULL, &selected);
+  treeview = gtk_builder_get_object (GTK_BUILDER (dialog), "item-treeview");
+  panel_return_if_fail (GTK_IS_WIDGET (treeview));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
 
   gtk_list_store_clear (dialog->store);
 
@@ -1306,20 +1327,15 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget *itembar,
                                          ITEM_COLUMN_PROVIDER, li->data, -1);
 
       /* reconstruct selection */
-      if (selected_provider == li->data)
-        {
-          path = gtk_tree_model_get_path (GTK_TREE_MODEL (dialog->store), &iter);
-          treeview = gtk_builder_get_object (GTK_BUILDER (dialog), "item-treeview");
-          if (GTK_IS_WIDGET (treeview))
-            gtk_tree_view_set_cursor (GTK_TREE_VIEW (treeview), path, NULL, FALSE);
-          gtk_tree_path_free (path);
-        }
+      if (g_list_find (selected, li->data))
+        gtk_tree_selection_select_iter (selection, &iter);
 
       g_free (tooltip);
       g_free (display_name);
     }
 
   g_list_free (items);
+  g_list_free (selected);
 
   g_signal_handlers_unblock_by_func (G_OBJECT (dialog->store),
                                      G_CALLBACK (panel_preferences_dialog_item_row_changed), dialog);
@@ -1347,7 +1363,7 @@ panel_preferences_dialog_item_move (GtkWidget *button,
   panel_return_if_fail (GTK_IS_WIDGET (object));
   direction = G_OBJECT (button) == object ? -1 : 1;
 
-  provider = panel_preferences_dialog_item_get_selected (dialog, &iter_a);
+  provider = panel_preferences_dialog_item_get_selected (dialog, &iter_a, NULL);
   if (G_LIKELY (provider != NULL))
     {
       /* get the provider position on the panel */
@@ -1416,28 +1432,37 @@ static void
 panel_preferences_dialog_item_remove (GtkWidget *button,
                                       PanelPreferencesDialog *dialog)
 {
-  XfcePanelPluginProvider *provider;
-  GtkWidget *widget, *toplevel;
-  PanelModule *module;
+  GList *selected = NULL;
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
-  provider = panel_preferences_dialog_item_get_selected (dialog, NULL);
-  if (G_LIKELY (provider != NULL))
+  panel_preferences_dialog_item_get_selected (dialog, NULL, &selected);
+  if (G_LIKELY (selected != NULL))
     {
-      module = panel_module_get_from_plugin_provider (provider);
+      GtkWidget *widget;
+      gchar *primary;
+      const gchar *secondary;
+      guint n_selected = g_list_length (selected);
+      if (n_selected == 1)
+        {
+          PanelModule *module = panel_module_get_from_plugin_provider (selected->data);
+          primary = g_strdup_printf (_("Are you sure that you want to remove \"%s\"?"),
+                                     panel_module_get_display_name (module));
+          secondary = _("If you remove the item from the panel, it is permanently lost.");
+        }
+      else
+        {
+          primary = g_strdup_printf (_("Are you sure that you want to remove these %d items?"),
+                                     n_selected);
+          secondary = _("If you remove them from the panel, they are permanently lost.");
+        }
 
-      /* create question dialog (same code is also in xfce-panel-plugin.c) */
-      toplevel = gtk_widget_get_toplevel (button);
-      widget = gtk_message_dialog_new (GTK_WINDOW (toplevel), GTK_DIALOG_MODAL,
-                                       GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
-                                       _("Are you sure that you want to remove \"%s\"?"),
-                                       panel_module_get_display_name (module));
-      gtk_window_set_title (GTK_WINDOW (widget),
-                            _("Remove Item"));
-      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (widget),
-                                                _("If you remove the item from the panel, "
-                                                  "it is permanently lost."));
+      /* create question dialog (similar code is also in xfce-panel-plugin.c) */
+      widget = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (button)),
+                                       GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION,
+                                       GTK_BUTTONS_NONE, "%s", primary);
+      gtk_window_set_title (GTK_WINDOW (widget), _("Remove Item"));
+      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (widget), "%s", secondary);
       gtk_dialog_add_buttons (
         GTK_DIALOG (widget), _("_Cancel"), GTK_RESPONSE_NO, _("_Remove"), GTK_RESPONSE_YES, NULL);
       gtk_dialog_set_default_response (GTK_DIALOG (widget), GTK_RESPONSE_NO);
@@ -1446,10 +1471,12 @@ panel_preferences_dialog_item_remove (GtkWidget *button,
       if (gtk_dialog_run (GTK_DIALOG (widget)) == GTK_RESPONSE_YES)
         {
           gtk_widget_hide (widget);
-          xfce_panel_plugin_provider_emit_signal (provider, PROVIDER_SIGNAL_REMOVE_PLUGIN);
+          for (GList *lp = selected; lp != NULL; lp = lp->next)
+            xfce_panel_plugin_provider_emit_signal (lp->data, PROVIDER_SIGNAL_REMOVE_PLUGIN);
         }
 
       gtk_widget_destroy (widget);
+      g_list_free (selected);
     }
 }
 
@@ -1474,7 +1501,7 @@ panel_preferences_dialog_item_properties (GtkWidget *button,
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
-  provider = panel_preferences_dialog_item_get_selected (dialog, NULL);
+  provider = panel_preferences_dialog_item_get_selected (dialog, NULL, NULL);
   if (G_LIKELY (provider != NULL))
     xfce_panel_plugin_provider_show_configure (provider);
 }
@@ -1489,7 +1516,7 @@ panel_preferences_dialog_item_about (GtkWidget *button,
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
-  provider = panel_preferences_dialog_item_get_selected (dialog, NULL);
+  provider = panel_preferences_dialog_item_get_selected (dialog, NULL, NULL);
   if (G_LIKELY (provider != NULL))
     xfce_panel_plugin_provider_show_about (provider);
 }
@@ -1572,27 +1599,43 @@ static void
 panel_preferences_dialog_item_selection_changed (GtkTreeSelection *selection,
                                                  PanelPreferencesDialog *dialog)
 {
-  XfcePanelPluginProvider *provider;
+  GList *selected = NULL;
   GtkWidget *itembar;
   gint position;
   gint items;
   gboolean active;
   GObject *object;
-  guint i;
-  const gchar *button_names[] = { "item-remove", "item-up", "item-down", "item-about", "item-properties" };
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
-  provider = panel_preferences_dialog_item_get_selected (dialog, NULL);
-  if (G_LIKELY (provider != NULL))
+  panel_preferences_dialog_item_get_selected (dialog, NULL, &selected);
+  if (G_LIKELY (selected != NULL))
     {
       /* leave if the selection change is irrelevant */
-      itembar = gtk_widget_get_parent (GTK_WIDGET (provider));
+      itembar = gtk_widget_get_parent (GTK_WIDGET (selected->data));
       if (itembar != gtk_bin_get_child (GTK_BIN (dialog->active)))
-        return;
+        {
+          g_list_free (selected);
+          return;
+        }
+
+      if (g_list_length (selected) > 1)
+        {
+          /* make all items insensitive, except for the remove button */
+          const gchar *button_names[] = { "item-add", "item-up", "item-down",
+                                          "item-about", "item-properties" };
+          for (guint i = 0; i < G_N_ELEMENTS (button_names); i++)
+            {
+              object = gtk_builder_get_object (GTK_BUILDER (dialog), button_names[i]);
+              panel_return_if_fail (GTK_IS_WIDGET (object));
+              gtk_widget_set_sensitive (GTK_WIDGET (object), FALSE);
+            }
+          g_list_free (selected);
+          return;
+        }
 
       /* get the current position and the items on the bar */
-      position = panel_itembar_get_child_index (PANEL_ITEMBAR (itembar), GTK_WIDGET (provider));
+      position = panel_itembar_get_child_index (PANEL_ITEMBAR (itembar), GTK_WIDGET (selected->data));
       items = panel_itembar_get_n_children (PANEL_ITEMBAR (itembar)) - 1;
 
       /* update sensitivity of buttons */
@@ -1610,18 +1653,22 @@ panel_preferences_dialog_item_selection_changed (GtkTreeSelection *selection,
 
       object = gtk_builder_get_object (GTK_BUILDER (dialog), "item-properties");
       panel_return_if_fail (GTK_IS_WIDGET (object));
-      active = xfce_panel_plugin_provider_get_show_configure (provider);
+      active = xfce_panel_plugin_provider_get_show_configure (selected->data);
       gtk_widget_set_sensitive (GTK_WIDGET (object), active);
 
       object = gtk_builder_get_object (GTK_BUILDER (dialog), "item-about");
       panel_return_if_fail (GTK_IS_WIDGET (object));
-      active = xfce_panel_plugin_provider_get_show_about (provider);
+      active = xfce_panel_plugin_provider_get_show_about (selected->data);
       gtk_widget_set_sensitive (GTK_WIDGET (object), active);
+
+      g_list_free (selected);
     }
   else
     {
       /* make all items insensitive, except for the add button */
-      for (i = 0; i < G_N_ELEMENTS (button_names); i++)
+      const gchar *button_names[] = { "item-remove", "item-up", "item-down",
+                                      "item-about", "item-properties" };
+      for (guint i = 0; i < G_N_ELEMENTS (button_names); i++)
         {
           object = gtk_builder_get_object (GTK_BUILDER (dialog), button_names[i]);
           panel_return_if_fail (GTK_IS_WIDGET (object));
