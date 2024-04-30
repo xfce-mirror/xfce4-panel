@@ -134,6 +134,10 @@ static gboolean
 panel_preferences_dialog_treeview_clicked (GtkTreeView *treeview,
                                            GdkEventButton *event,
                                            PanelPreferencesDialog *dialog);
+static gboolean
+panel_preferences_dialog_treeview_box_key_released (GtkBox *box,
+                                                    GdkEventKey *event,
+                                                    PanelPreferencesDialog *dialog);
 static void
 panel_preferences_dialog_item_row_changed (GtkTreeModel *model,
                                            GtkTreePath *path,
@@ -327,6 +331,9 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   gtk_tree_view_set_tooltip_column (GTK_TREE_VIEW (treeview), ITEM_COLUMN_TOOLTIP);
   g_signal_connect (G_OBJECT (treeview), "button-press-event",
                     G_CALLBACK (panel_preferences_dialog_treeview_clicked), dialog);
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "hbox4");
+  g_signal_connect (G_OBJECT (object), "key-release-event",
+                    G_CALLBACK (panel_preferences_dialog_treeview_box_key_released), dialog);
 
   gtk_tree_view_set_reorderable (GTK_TREE_VIEW (treeview), TRUE);
   g_signal_connect (G_OBJECT (dialog->store), "row-changed",
@@ -1571,6 +1578,22 @@ panel_preferences_dialog_treeview_clicked (GtkTreeView *treeview,
     {
       panel_preferences_dialog_item_properties (NULL, dialog);
       return TRUE;
+    }
+
+  return FALSE;
+}
+
+
+
+static gboolean
+panel_preferences_dialog_treeview_box_key_released (GtkBox *box,
+                                                    GdkEventKey *event,
+                                                    PanelPreferencesDialog *dialog)
+{
+  if (event->keyval == GDK_KEY_Delete)
+    {
+      GObject *button = gtk_builder_get_object (GTK_BUILDER (dialog), "item-remove");
+      gtk_button_clicked (GTK_BUTTON (button));
     }
 
   return FALSE;
