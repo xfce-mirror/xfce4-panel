@@ -82,6 +82,10 @@ panel_preferences_dialog_length_transform_from (GBinding *binding,
 static void
 panel_preferences_dialog_panel_combobox_changed (GtkComboBox *combobox,
                                                  PanelPreferencesDialog *dialog);
+static void
+panel_preferences_dialog_monitors_changed (GdkDisplay *display,
+                                           GdkMonitor *monitor,
+                                           PanelPreferencesDialog *dialog);
 static gboolean
 panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog,
                                                  gint panel_id);
@@ -207,6 +211,7 @@ panel_preferences_dialog_class_init (PanelPreferencesDialogClass *klass)
 static void
 panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
 {
+  GdkDisplay *display = gdk_display_get_default ();
   GObject *window;
   GObject *object;
   GObject *info;
@@ -244,6 +249,10 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   connect_signal ("panel-add", "clicked", panel_preferences_dialog_panel_add);
   connect_signal ("panel-remove", "clicked", panel_preferences_dialog_panel_remove);
   connect_signal ("panel-combobox", "changed", panel_preferences_dialog_panel_combobox_changed);
+  g_signal_connect_object (display, "monitor-added",
+                           G_CALLBACK (panel_preferences_dialog_monitors_changed), dialog, 0);
+  g_signal_connect_object (display, "monitor-removed",
+                           G_CALLBACK (panel_preferences_dialog_monitors_changed), dialog, 0);
 
   /* check if xfce4-panel-profiles or panel-switch are installed and if either is show the button */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-profiles");
@@ -962,6 +971,17 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox *combobox,
     }
 
   panel_preferences_dialog_panel_sensitive (dialog);
+}
+
+
+
+static void
+panel_preferences_dialog_monitors_changed (GdkDisplay *display,
+                                           GdkMonitor *monitor,
+                                           PanelPreferencesDialog *dialog)
+{
+  GObject *combobox = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-combobox");
+  panel_preferences_dialog_panel_combobox_changed (GTK_COMBO_BOX (combobox), dialog);
 }
 
 
