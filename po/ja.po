@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-03-30 00:47+0100\n"
+"POT-Creation-Date: 2024-05-01 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 2016-2020,2022,2024\n"
+"Last-Translator: UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2019-2020,2022-2024\n"
 "Language-Team: Japanese (http://app.transifex.com/xfce/xfce4-panel/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +37,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "パネル;設定;環境設定;タスクバー;自動非表示;アプリケーションメニュー;スタート;ボタン;ランチャー;通知領域;ステータス;アイコン;プラグイン;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3630
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3676
 msgid "Panel"
 msgstr "パネル"
 
@@ -46,77 +46,77 @@ msgid "Customize the panel"
 msgstr "パネルをカスタマイズする"
 
 #. I18N: %s is the name of the plugin
-#: libxfce4panel/xfce-panel-plugin.c:1096
-#: panel/panel-preferences-dialog.c:1402
+#: libxfce4panel/xfce-panel-plugin.c:1094
+#: panel/panel-preferences-dialog.c:1465
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "\"%s\" を削除しますか？"
 
-#: libxfce4panel/xfce-panel-plugin.c:1101
-#: panel/panel-preferences-dialog.c:1405
+#: libxfce4panel/xfce-panel-plugin.c:1099
+#: panel/panel-preferences-dialog.c:1480
 msgid "Remove Item"
 msgstr "アイテムを削除"
 
-#: libxfce4panel/xfce-panel-plugin.c:1103
+#: libxfce4panel/xfce-panel-plugin.c:1102
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "パネルからアイテムを削除すると、その設定も失われます。"
 
-#: libxfce4panel/xfce-panel-plugin.c:1104 panel/panel-dialogs.c:164
-#: panel/panel-preferences-dialog.c:1409
-#: plugins/applicationsmenu/applicationsmenu.c:602
-#: plugins/directorymenu/directorymenu.c:461
-#: plugins/directorymenu/directorymenu.c:936
+#: libxfce4panel/xfce-panel-plugin.c:1103 panel/panel-dialogs.c:157
+#: panel/panel-preferences-dialog.c:1483
+#: plugins/applicationsmenu/applicationsmenu.c:606
+#: plugins/directorymenu/directorymenu.c:466
+#: plugins/directorymenu/directorymenu.c:938
 msgid "_Cancel"
 msgstr "キャンセル(_C)"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1105
-#: libxfce4panel/xfce-panel-plugin.c:1272 panel/panel-application.c:382
-#: panel/panel-plugin-external.c:409 panel/panel-preferences-dialog.c:1047
-#: panel/panel-preferences-dialog.c:1410
+#: libxfce4panel/xfce-panel-plugin.c:1104
+#: libxfce4panel/xfce-panel-plugin.c:1271 panel/panel-application.c:363
+#: panel/panel-plugin-external.c:421 panel/panel-preferences-dialog.c:1082
+#: panel/panel-preferences-dialog.c:1483
 #: panel/panel-preferences-dialog.glade:1240
-#: plugins/launcher/launcher-dialog.c:851
+#: plugins/launcher/launcher-dialog.c:841
 msgid "_Remove"
 msgstr "削除(_R)"
 
 #. properties item
-#: libxfce4panel/xfce-panel-plugin.c:1234
+#: libxfce4panel/xfce-panel-plugin.c:1233
 msgid "_Properties"
 msgstr "プロパティ(_P)"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1245 panel/panel-window.c:3706
+#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3751
 msgid "_About"
 msgstr "このプログラムについて(_A)"
 
 #. move item
-#: libxfce4panel/xfce-panel-plugin.c:1256
+#: libxfce4panel/xfce-panel-plugin.c:1255
 msgid "_Move"
 msgstr "移動(_M)"
 
-#: libxfce4panel/xfce-panel-plugin.c:1290
+#: libxfce4panel/xfce-panel-plugin.c:1289
 msgid "Pane_l"
 msgstr "パネル(_L)"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1298 panel/panel-window.c:3642
+#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3688
 msgid "Add _New Items..."
 msgstr "新しいアイテムを追加する(_N)..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1309 panel/panel-window.c:3653
+#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3699
 msgid "Panel Pr_eferences..."
 msgstr "パネルの設定(_E)..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1326 panel/panel-window.c:3681
+#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3726
 msgid "Log _Out"
 msgstr "ログアウト(_O)"
 
 #. help item
-#: libxfce4panel/xfce-panel-plugin.c:1342 panel/panel-item-dialog.c:198
-#: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3697
+#: libxfce4panel/xfce-panel-plugin.c:1341 panel/panel-item-dialog.c:207
+#: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3742
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
 #: plugins/clock/clock-dialog.glade:120
@@ -130,140 +130,140 @@ msgid "_Help"
 msgstr "ヘルプ(_H)"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1353
+#: libxfce4panel/xfce-panel-plugin.c:1352
 msgid "About"
 msgstr "このソフトウェアについて"
 
-#: panel/main.c:82
+#: panel/main.c:66
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "'パネルの設定' ダイアログを表示する"
 
-#: panel/main.c:82 panel/main.c:83
+#: panel/main.c:66 panel/main.c:67
 msgid "PANEL-NUMBER"
 msgstr "PANEL-NUMBER"
 
-#: panel/main.c:83
+#: panel/main.c:67
 msgid "Show the 'Add New Items' dialog"
 msgstr "'新しいアイテムを追加する' ダイアログを表示する"
 
-#: panel/main.c:84
+#: panel/main.c:68
 msgid "Save the panel configuration"
 msgstr "パネルの設定を保存する"
 
-#: panel/main.c:85
+#: panel/main.c:69
 msgid "Add a new plugin to the panel"
 msgstr "パネルに新しいプラグインを追加する"
 
-#: panel/main.c:85
+#: panel/main.c:69
 msgid "PLUGIN-NAME"
 msgstr "PLUGIN-NAME"
 
-#: panel/main.c:86
+#: panel/main.c:70
 msgid "Restart the running panel instance"
 msgstr "動作中のパネルインスタンスを再起動する"
 
-#: panel/main.c:87
+#: panel/main.c:71
 msgid "Quit the running panel instance"
 msgstr "動作中のパネルインスタンスを終了する"
 
-#: panel/main.c:88
+#: panel/main.c:72
 msgid "Do not wait for a window manager on startup"
 msgstr "ウィンドウマネージャーの起動を待たない"
 
-#: panel/main.c:89 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: panel/main.c:73 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "バージョン情報を表示して終了する"
 
 #. parse context options
-#: panel/main.c:273
+#: panel/main.c:258
 msgid "[ARGUMENTS...]"
 msgstr "[引数...]"
 
-#: panel/main.c:283
+#: panel/main.c:268
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "\"%s --help\" と入力すると使用方法が表示されます。"
 
-#: panel/main.c:300
+#: panel/main.c:285
 msgid "The Xfce development team. All rights reserved."
 msgstr "The Xfce development team. All rights reserved."
 
-#: panel/main.c:301
+#: panel/main.c:286
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "バグは <%s> まで報告してください。"
 
 #. quit without error if an instance is running
-#: panel/main.c:409
+#: panel/main.c:394
 msgid "There is already a running instance"
 msgstr "すでに実行中のインスタンスがあります"
 
 #. spawn ourselfs again
-#: panel/main.c:420
+#: panel/main.c:405
 msgid "Restarting..."
 msgstr "再起動しています..."
 
-#: panel/main.c:437
+#: panel/main.c:422
 msgid "Failed to show the preferences dialog"
 msgstr "設定ダイアログの表示に失敗しました"
 
-#: panel/main.c:439
+#: panel/main.c:424
 msgid "Failed to show the add new items dialog"
 msgstr "'新しいアイテムの追加' ダイアログの表示に失敗しました"
 
-#: panel/main.c:441
+#: panel/main.c:426
 msgid "Failed to save the panel configuration"
 msgstr "パネルの設定の保存に失敗しました"
 
-#: panel/main.c:443
+#: panel/main.c:428
 msgid "Failed to add a plugin to the panel"
 msgstr "パネルへのプラグインの追加に失敗しました"
 
-#: panel/main.c:445
+#: panel/main.c:430
 msgid "Failed to restart the panel"
 msgstr "パネルの再起動に失敗しました"
 
-#: panel/main.c:447
+#: panel/main.c:432
 msgid "Failed to quit the panel"
 msgstr "パネルの終了に失敗しました"
 
-#: panel/main.c:449
+#: panel/main.c:434
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus メッセージの送信に失敗しました"
 
-#: panel/main.c:459
-msgid "Execute"
-msgstr "実行"
+#: panel/main.c:442 panel/main.c:462
+#, c-format
+msgid "No running instance of %s was found"
+msgstr "動作中の %s インスタンスが見つかりませんでした"
 
-#: panel/main.c:460
+#: panel/main.c:443
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "パネルを起動しますか？起動した場合、ログアウト時にセッションを保存すれば次回ログイン時にパネルは自動的に起動されます。"
 
-#: panel/main.c:463 panel/main.c:477
-#, c-format
-msgid "No running instance of %s was found"
-msgstr "動作中の %s インスタンスが見つかりませんでした"
+#: panel/main.c:448
+msgid "Execute"
+msgstr "実行"
 
-#: panel/panel-application.c:216
+#: panel/panel-application.c:215
 msgid "Failed to launch the migration application"
 msgstr "移行アプリケーションの起動に失敗しました"
 
-#: panel/panel-application.c:371
+#: panel/panel-application.c:352
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr "\"%s\" プライグインはロードできませんでした。xfce4-panel の構成から削除しますか?"
 
-#: panel/panel-application.c:373
+#: panel/panel-application.c:354
 msgid "Plugin loading failure"
 msgstr "プラグインのロード失敗"
 
-#: panel/panel-application.c:376
+#: panel/panel-application.c:357
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -273,105 +273,104 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr "このプラグインは現在の xfce4-panel 構成で設定されていますが、おそらくインストール時の問題が原因でロードできませんでした。何をしようとしているのかわかっている場合は、永久に削除できますが、そうでない場合はインストール内容確認とxfce4-panel を再起動する前に終了し、 %sを使用して現在の設定をバックアップする ことをお勧めします。"
 
-#: panel/panel-application.c:383
+#: panel/panel-application.c:363
 msgid "_Quit"
 msgstr "終了(_Q)"
 
-#: panel/panel-application.c:1058
-msgid "Create _Launcher"
-msgstr "ランチャーを作成(_L)"
-
-#: panel/panel-application.c:1059
+#: panel/panel-application.c:1051
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "パネル上に新しいランチャーを作成し、ドロップしたファイルをメニューアイテムとして挿入します。"
 
-#: panel/panel-application.c:1061
+#: panel/panel-application.c:1054
+msgid "Create _Launcher"
+msgstr "ランチャーを作成(_L)"
+
+#: panel/panel-application.c:1055
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "%d 個のデスクトップファイルから新しいランチャーを作成します"
 
-#: panel/panel-application.c:1824
+#: panel/panel-application.c:1816
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "セッションマネージャーなしでXを起動しました。「終了」をクリックするとXサーバーを閉じます。"
 
-#: panel/panel-application.c:1826
+#: panel/panel-application.c:1819
 msgid "Quit"
 msgstr "終了"
 
-#: panel/panel-application.c:1827
+#: panel/panel-application.c:1819
 msgid "Are you sure you want to quit the panel?"
 msgstr "パネルを終了しますか？"
 
-#: panel/panel-application.c:1835
+#: panel/panel-application.c:1827
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "コマンド \"%s\" の実行に失敗しました"
 
-#: panel/panel-dbus-client.c:218
+#: panel/panel-dbus-client.c:213
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "不正なプラグインイベント構文が指定されています。PLUGIN-NAME:NAME[:TYPE:VALUE] と指定してください。"
 
-#: panel/panel-dbus-client.c:248
+#: panel/panel-dbus-client.c:243
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
 msgstr "\"%s\" は不正なヒントタイプです。正しいタイプは bool、double、int、string および uint です。"
 
-#: panel/panel-dialogs.c:58
+#: panel/panel-dialogs.c:53
 msgid "Unable to open the e-mail address"
 msgstr "E-mail アドレスを開くことができません"
 
-#: panel/panel-dialogs.c:84
+#: panel/panel-dialogs.c:79
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Xfce デスクトップ環境のパネルです。"
 
-#: panel/panel-dialogs.c:88
+#: panel/panel-dialogs.c:83
 msgid "translator-credits"
 msgstr "Daichi Kawahata <daichi@xfce.org>, 2005-2007.\nMasato Hashimoto <cabezon.hashimoto@gmail.com>, 2010-2012."
 
-#. setup the dialog
-#: panel/panel-dialogs.c:162
+#: panel/panel-dialogs.c:157
 msgid "Add New Item"
 msgstr "新しいアイテムを追加する"
 
-#: panel/panel-dialogs.c:165 panel/panel-item-dialog.c:194
+#: panel/panel-dialogs.c:157 panel/panel-item-dialog.c:203
 #: panel/panel-preferences-dialog.glade:1223
 #: plugins/launcher/launcher-dialog.glade:219
 msgid "_Add"
 msgstr "追加(_A)"
 
-#: panel/panel-dialogs.c:176
+#: panel/panel-dialogs.c:168
 msgid "Please choose a panel for the new plugin:"
 msgstr "新しいプラグインのパネルを選択してください:"
 
-#: panel/panel-dialogs.c:196 panel/panel-preferences-dialog.c:986
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1027
 #, c-format
 msgid "Panel %d"
 msgstr "パネル %d"
 
-#: panel/panel-dialogs.c:236
+#: panel/panel-dialogs.c:227
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr "パネルはキオスクモードで動作しているため、一般ユーザーがパネルの設定を変更することは許可されません。"
 
-#: panel/panel-dialogs.c:238
+#: panel/panel-dialogs.c:229
 msgid "Modifying the panel is not allowed"
 msgstr "パネルの変更は許可されていません"
 
-#: panel/panel-item-dialog.c:186 plugins/launcher/launcher-dialog.glade:198
+#: panel/panel-item-dialog.c:195 plugins/launcher/launcher-dialog.glade:198
 msgid "Add New Items"
 msgstr "新しいアイテムを追加する"
 
-#: panel/panel-item-dialog.c:202 panel/panel-preferences-dialog.glade:163
-#: panel/panel-tic-tac-toe.c:119 plugins/actions/actions-dialog.glade:82
+#: panel/panel-item-dialog.c:211 panel/panel-preferences-dialog.glade:163
+#: panel/panel-tic-tac-toe.c:118 plugins/actions/actions-dialog.glade:82
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:55
 #: plugins/clock/clock-dialog.glade:105
 #: plugins/directorymenu/directorymenu-dialog.glade:34
@@ -384,24 +383,24 @@ msgstr "新しいアイテムを追加する"
 msgid "_Close"
 msgstr "閉じる(_C)"
 
-#: panel/panel-item-dialog.c:218 plugins/launcher/launcher-dialog.glade:272
+#: panel/panel-item-dialog.c:227 plugins/launcher/launcher-dialog.glade:272
 msgid "_Search:"
 msgstr "検索(_S):"
 
-#: panel/panel-item-dialog.c:226
+#: panel/panel-item-dialog.c:235
 msgid "Enter search phrase here"
 msgstr "検索フレーズを入力してください"
 
-#: panel/panel-plugin-external.c:400
+#: panel/panel-plugin-external.c:412
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "プラグイン \"%s\" は予期せずパネルから失われました。このプラグインを再起動しますか？"
 
-#: panel/panel-plugin-external.c:403
+#: panel/panel-plugin-external.c:415
 msgid "Plugin Restart"
 msgstr "プラグインを再起動"
 
-#: panel/panel-plugin-external.c:404
+#: panel/panel-plugin-external.c:416
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -409,43 +408,43 @@ msgid ""
 "permanently removed from the panel."
 msgstr "プラグインは最近 %d 秒以内に 1 回以上再起動されました。「実行」を押すとパネルはプラグインの再起動を試みます。その他の場合はパネルから完全に削除されます。"
 
-#: panel/panel-plugin-external.c:408
+#: panel/panel-plugin-external.c:421
 msgid "_Execute"
 msgstr "実行(_E)"
 
-#: panel/panel-preferences-dialog.c:541
+#: panel/panel-preferences-dialog.c:580
 msgid "Automatic"
 msgstr "自動"
 
-#: panel/panel-preferences-dialog.c:551
+#: panel/panel-preferences-dialog.c:589
 msgid "Primary"
 msgstr "プライマリー"
 
 #. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:570
+#: panel/panel-preferences-dialog.c:608
 #, c-format
 msgid "Monitor %d"
 msgstr "モニター %d"
 
-#: panel/panel-preferences-dialog.c:1048
+#: panel/panel-preferences-dialog.c:1081
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "パネルとプラグインの設定は完全に削除されます"
 
-#: panel/panel-preferences-dialog.c:1049
+#: panel/panel-preferences-dialog.c:1090
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "パネル %d を削除しますか？"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1244
+#: panel/panel-preferences-dialog.c:1305
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(外部)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1249
+#: panel/panel-preferences-dialog.c:1310
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -454,14 +453,23 @@ msgstr "内部名: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1261
+#: panel/panel-preferences-dialog.c:1322
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "内部名: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1407
+#: panel/panel-preferences-dialog.c:1467
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "パネルから削除すると、このアイテムは完全に失われます。"
+
+#: panel/panel-preferences-dialog.c:1471
+#, c-format
+msgid "Are you sure that you want to remove these %d items?"
+msgstr "これら %d 個のアイテムを削除してもよろしいですか？"
+
+#: panel/panel-preferences-dialog.c:1473
+msgid "If you remove them from the panel, they are permanently lost."
+msgstr "パネルからそれらを削除すると、それらは永久に失われます。"
 
 #: panel/panel-preferences-dialog.glade:13
 msgid "Never"
@@ -710,47 +718,47 @@ msgstr "現在選択されているアイテムを一つ下へ移動します"
 msgid "Ite_ms"
 msgstr "アイテム(_M)"
 
-#: panel/panel-tic-tac-toe.c:117
+#: panel/panel-tic-tac-toe.c:116
 msgid "_New Game"
 msgstr "新しいゲーム(_N)"
 
-#: panel/panel-tic-tac-toe.c:128
+#: panel/panel-tic-tac-toe.c:127
 msgid "_Level:"
 msgstr "レベル(_L):"
 
-#: panel/panel-tic-tac-toe.c:134
+#: panel/panel-tic-tac-toe.c:133
 msgid "Novice"
 msgstr "新米"
 
-#: panel/panel-tic-tac-toe.c:135
+#: panel/panel-tic-tac-toe.c:134
 msgid "Intermediate"
 msgstr "中級者"
 
-#: panel/panel-tic-tac-toe.c:136
+#: panel/panel-tic-tac-toe.c:135
 msgid "Experienced"
 msgstr "上級者"
 
-#: panel/panel-tic-tac-toe.c:137
+#: panel/panel-tic-tac-toe.c:136
 msgid "Expert"
 msgstr "達人"
 
-#: panel/panel-window.c:3667
+#: panel/panel-window.c:3713
 msgid "_Lock Panel"
 msgstr "パネルをロック(_L)"
 
-#: migrate/main.c:106
+#: migrate/main.c:98
 msgid "Failed to load the default configuration"
 msgstr "デフォルト設定の読み込みに失敗しました"
 
-#: migrate/main.c:118
+#: migrate/main.c:110
 msgid "Panel config needs migration..."
 msgstr "パネルの設定は移行が必要です..."
 
-#: migrate/main.c:122
+#: migrate/main.c:114
 msgid "Failed to migrate the existing configuration"
 msgstr "既存の設定の移行に失敗しました"
 
-#: migrate/main.c:128
+#: migrate/main.c:120
 msgid "Panel configuration has been updated."
 msgstr "パネルの設定は更新されました。"
 
@@ -760,7 +768,7 @@ msgstr "パネルの設定は更新されました。"
 msgid "Action Buttons"
 msgstr "アクションボタン"
 
-#: plugins/actions/actions-dialog.glade:38 plugins/actions/actions.c:36
+#: plugins/actions/actions-dialog.glade:38 plugins/actions/actions.c:37
 msgid "Session Menu"
 msgstr "セッションメニュー"
 
@@ -818,144 +826,144 @@ msgstr "一部のアクションが選択されたとき、30 秒待機する確
 msgid "_Actions"
 msgstr "アクション(_A)"
 
-#: plugins/actions/actions.c:157
+#: plugins/actions/actions.c:166
 msgid "Log Out"
 msgstr "ログアウト"
 
-#: plugins/actions/actions.c:158
+#: plugins/actions/actions.c:167
 msgid "_Log Out"
 msgstr "ログアウト(_L)"
 
-#: plugins/actions/actions.c:159
+#: plugins/actions/actions.c:168
 msgid "Are you sure you want to log out?"
 msgstr "ログアウトしますか？"
 
-#: plugins/actions/actions.c:160
+#: plugins/actions/actions.c:169
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "%d 秒後にログアウトします。"
 
-#: plugins/actions/actions.c:166
+#: plugins/actions/actions.c:174
 msgid "Log Out..."
 msgstr "ログアウト..."
 
-#: plugins/actions/actions.c:167
+#: plugins/actions/actions.c:175
 msgid "Log _Out..."
 msgstr "ログアウト(_O)..."
 
-#: plugins/actions/actions.c:174
+#: plugins/actions/actions.c:181
 msgid "Switch User"
 msgstr "ユーザーの切り替え"
 
-#: plugins/actions/actions.c:175
+#: plugins/actions/actions.c:182
 msgid "_Switch User"
 msgstr "ユーザーの切り替え(_S)"
 
-#: plugins/actions/actions.c:182
+#: plugins/actions/actions.c:188
 msgid "Lock Screen"
 msgstr "画面をロック"
 
-#: plugins/actions/actions.c:183
+#: plugins/actions/actions.c:189
 msgid "Loc_k Screen"
 msgstr "画面をロック(_K)"
 
-#: plugins/actions/actions.c:190
+#: plugins/actions/actions.c:195
 msgid "Hibernate"
 msgstr "ハイバネート"
 
-#: plugins/actions/actions.c:191
+#: plugins/actions/actions.c:196
 msgid "_Hibernate"
 msgstr "ハイバネート(_H)"
 
-#: plugins/actions/actions.c:192
+#: plugins/actions/actions.c:197
 msgid "Do you want to suspend to disk?"
 msgstr "現在の状態をディスクに保存してシステムをサスペンドしますか？"
 
-#: plugins/actions/actions.c:193
+#: plugins/actions/actions.c:198
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "%d 秒後にコンピューターをハイバネートします。"
 
-#: plugins/actions/actions.c:199
+#: plugins/actions/actions.c:203
 msgid "Hybrid Sleep"
 msgstr "ハイブリッドスリープ"
 
-#: plugins/actions/actions.c:200
+#: plugins/actions/actions.c:204
 msgid "_Hybrid Sleep"
 msgstr "ハイブリッドスリープ(_H)"
 
-#: plugins/actions/actions.c:201
+#: plugins/actions/actions.c:205
 msgid "Do you want to hibernate and suspend the system?"
 msgstr "システムをハイバネートおよびサスペンドしますか？"
 
-#: plugins/actions/actions.c:202
+#: plugins/actions/actions.c:206
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr "あと %d 秒でコンピューターをハイバネートおよびサスペンドします。"
 
-#: plugins/actions/actions.c:208
+#: plugins/actions/actions.c:211
 msgid "Suspend"
 msgstr "サスペンド"
 
-#: plugins/actions/actions.c:209
+#: plugins/actions/actions.c:212
 msgid "Sus_pend"
 msgstr "サスペンド(_P)"
 
-#: plugins/actions/actions.c:210
+#: plugins/actions/actions.c:213
 msgid "Do you want to suspend to RAM?"
 msgstr "現在の状態を RAM に保存してシステムをサスペンドしますか？"
 
-#: plugins/actions/actions.c:211
+#: plugins/actions/actions.c:214
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "%d 秒後にコンピューターをサスペンドします。"
 
-#: plugins/actions/actions.c:217
+#: plugins/actions/actions.c:219
 msgid "Restart"
 msgstr "再起動"
 
-#: plugins/actions/actions.c:218
+#: plugins/actions/actions.c:220
 msgid "_Restart"
 msgstr "再起動(_R)"
 
-#: plugins/actions/actions.c:219
+#: plugins/actions/actions.c:221
 msgid "Are you sure you want to restart?"
 msgstr "再起動しますか？"
 
-#: plugins/actions/actions.c:220
+#: plugins/actions/actions.c:222
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "%d 秒後にコンピューターを再起動します。"
 
-#: plugins/actions/actions.c:226
+#: plugins/actions/actions.c:227
 msgid "Shut Down"
 msgstr "シャットダウン"
 
-#: plugins/actions/actions.c:227
+#: plugins/actions/actions.c:228
 msgid "Shut _Down"
 msgstr "シャットダウン(_D)"
 
-#: plugins/actions/actions.c:228
+#: plugins/actions/actions.c:229
 msgid "Are you sure you want to shut down?"
 msgstr "シャットダウンしますか？"
 
-#: plugins/actions/actions.c:229
+#: plugins/actions/actions.c:230
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "%d 秒後にコンピューターを停止します。"
 
-#: plugins/actions/actions.c:677 plugins/separator/separator-dialog.glade:26
+#: plugins/actions/actions.c:731 plugins/separator/separator-dialog.glade:26
 #: plugins/separator/separator-dialog.glade:38
 #: plugins/separator/separator.desktop.in.in:4
 msgid "Separator"
 msgstr "セパレーター"
 
-#: plugins/actions/actions.c:1111
+#: plugins/actions/actions.c:1165
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "アクション \"%s\" の実行に失敗しました"
 
-#: plugins/actions/actions.c:1316
+#: plugins/actions/actions.c:1369
 msgid "Little Mouse"
 msgstr "リトルマウス"
 
@@ -1037,23 +1045,23 @@ msgid "Menu File"
 msgstr "メニューファイル"
 
 #. I18N: default tooltip of the application menu
-#: plugins/applicationsmenu/applicationsmenu.c:37
+#: plugins/applicationsmenu/applicationsmenu.c:38
 msgid "Applications"
 msgstr "アプリケーション"
 
-#: plugins/applicationsmenu/applicationsmenu.c:600
-#: plugins/directorymenu/directorymenu.c:459
+#: plugins/applicationsmenu/applicationsmenu.c:606
+#: plugins/directorymenu/directorymenu.c:466
 msgid "Select An Icon"
 msgstr "アイコンを選択してください"
 
-#: plugins/applicationsmenu/applicationsmenu.c:603
-#: plugins/directorymenu/directorymenu.c:462
+#: plugins/applicationsmenu/applicationsmenu.c:606
+#: plugins/directorymenu/directorymenu.c:466
 msgid "_OK"
 msgstr "OK(_O)"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1040
-#: plugins/launcher/launcher.c:2480
+#: plugins/applicationsmenu/applicationsmenu.c:643 plugins/clock/clock.c:1044
+#: plugins/launcher/launcher.c:2500
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "コマンド \"%s\" の実行に失敗しました"
@@ -1093,20 +1101,20 @@ msgid "Show help options"
 msgstr "ヘルプオプションを表示する"
 
 #. TRANSLATORS: adjust this accordingly for your locale format
-#: plugins/clock/clock.c:46
+#: plugins/clock/clock.c:43
 msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%Y 年 %B  %d 日 %A  "
 
-#: plugins/clock/clock.c:153
+#: plugins/clock/clock.c:162
 msgid "Week %V"
 msgstr "第 %V 週"
 
-#: plugins/clock/clock.c:474
+#: plugins/clock/clock.c:480
 msgid "Failed to execute clock command"
 msgstr "時計コマンドの実行に失敗しました"
 
-#: plugins/clock/clock.c:979
+#: plugins/clock/clock.c:983
 msgid "Custom Format"
 msgstr "カスタム"
 
@@ -1277,313 +1285,313 @@ msgstr "時刻"
 msgid "Clock Options"
 msgstr "時計のオプション"
 
-#: plugins/clock/clock-digital.h:27
+#: plugins/clock/clock-digital.h:30
 msgctxt "Time"
 msgid "%R"
 msgstr "%R"
 
-#: plugins/clock/clock-digital.h:28
+#: plugins/clock/clock-digital.h:31
 msgctxt "Date"
 msgid "%Y-%m-%d"
 msgstr "%Y-%m-%d"
 
-#: plugins/clock/clock-fuzzy.c:82
+#: plugins/clock/clock-fuzzy.c:79
 msgid "Night"
 msgstr "深夜"
 
-#: plugins/clock/clock-fuzzy.c:83
+#: plugins/clock/clock-fuzzy.c:80
 msgid "Early morning"
 msgstr "早朝"
 
-#: plugins/clock/clock-fuzzy.c:84
+#: plugins/clock/clock-fuzzy.c:81
 msgid "Morning"
 msgstr "朝"
 
-#: plugins/clock/clock-fuzzy.c:85
+#: plugins/clock/clock-fuzzy.c:82
 msgid "Almost noon"
 msgstr "午前中"
 
-#: plugins/clock/clock-fuzzy.c:86
+#: plugins/clock/clock-fuzzy.c:83
 msgid "Noon"
 msgstr "お昼すぎ"
 
-#: plugins/clock/clock-fuzzy.c:87
+#: plugins/clock/clock-fuzzy.c:84
 msgid "Afternoon"
 msgstr "午後"
 
-#: plugins/clock/clock-fuzzy.c:88
+#: plugins/clock/clock-fuzzy.c:85
 msgid "Evening"
 msgstr "夜"
 
-#: plugins/clock/clock-fuzzy.c:89
+#: plugins/clock/clock-fuzzy.c:86
 msgid "Late evening"
 msgstr "夜おそく"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: plugins/clock/clock-fuzzy.c:96
+#: plugins/clock/clock-fuzzy.c:92
 #, no-c-format
 msgid "%0 o'clock"
 msgstr "%0 時ごろ"
 
-#: plugins/clock/clock-fuzzy.c:97
+#: plugins/clock/clock-fuzzy.c:93
 #, no-c-format
 msgid "five past %0"
 msgstr "%0 時 5 分ごろ"
 
-#: plugins/clock/clock-fuzzy.c:98
+#: plugins/clock/clock-fuzzy.c:94
 #, no-c-format
 msgid "ten past %0"
 msgstr "%0 時 10 分ごろ"
 
-#: plugins/clock/clock-fuzzy.c:99
+#: plugins/clock/clock-fuzzy.c:95
 #, no-c-format
 msgid "quarter past %0"
 msgstr "%0 時 15 分ごろ"
 
-#: plugins/clock/clock-fuzzy.c:100
+#: plugins/clock/clock-fuzzy.c:96
 #, no-c-format
 msgid "twenty past %0"
 msgstr "%0 時 20 分ごろ"
 
-#: plugins/clock/clock-fuzzy.c:101
+#: plugins/clock/clock-fuzzy.c:97
 #, no-c-format
 msgid "twenty five past %0"
 msgstr "%0 時 25 分ごろ"
 
-#: plugins/clock/clock-fuzzy.c:102
+#: plugins/clock/clock-fuzzy.c:98
 #, no-c-format
 msgid "half past %0"
 msgstr "%0 時半ごろ"
 
-#: plugins/clock/clock-fuzzy.c:103
+#: plugins/clock/clock-fuzzy.c:99
 #, no-c-format
 msgid "twenty five to %1"
 msgstr "%1 時 25 分前ごろ"
 
-#: plugins/clock/clock-fuzzy.c:104
+#: plugins/clock/clock-fuzzy.c:100
 #, no-c-format
 msgid "twenty to %1"
 msgstr "%1 時 20 分前ごろ"
 
-#: plugins/clock/clock-fuzzy.c:105
+#: plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "quarter to %1"
 msgstr "%1 時 15 分前ごろ"
 
-#: plugins/clock/clock-fuzzy.c:106
+#: plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "ten to %1"
 msgstr "%1 時 10 分前ごろ"
 
-#: plugins/clock/clock-fuzzy.c:107
+#: plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "five to %1"
 msgstr "%1 時 5 分前ごろ"
 
-#: plugins/clock/clock-fuzzy.c:108
+#: plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "%1 o'clock"
 msgstr "%1 時ごろ"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: plugins/clock/clock-fuzzy.c:115
+#: plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "%0 時ごろ"
 
-#: plugins/clock/clock-fuzzy.c:116
+#: plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "%0 時 5 分ごろ"
 
-#: plugins/clock/clock-fuzzy.c:117
+#: plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "%0 時 10 分ごろ"
 
-#: plugins/clock/clock-fuzzy.c:118
+#: plugins/clock/clock-fuzzy.c:113
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "%0 時 15 分ごろ"
 
-#: plugins/clock/clock-fuzzy.c:119
+#: plugins/clock/clock-fuzzy.c:114
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "%0 時 20 分ごろ"
 
-#: plugins/clock/clock-fuzzy.c:120
+#: plugins/clock/clock-fuzzy.c:115
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "%0 時 25 分ごろ"
 
-#: plugins/clock/clock-fuzzy.c:121
+#: plugins/clock/clock-fuzzy.c:116
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "%0 時半ごろ"
 
-#: plugins/clock/clock-fuzzy.c:122
+#: plugins/clock/clock-fuzzy.c:117
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "%1 時 25 分前ごろ"
 
-#: plugins/clock/clock-fuzzy.c:123
+#: plugins/clock/clock-fuzzy.c:118
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "%1 時 20 分前ごろ"
 
-#: plugins/clock/clock-fuzzy.c:124
+#: plugins/clock/clock-fuzzy.c:119
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "%1 時 15 分前ごろ"
 
-#: plugins/clock/clock-fuzzy.c:125
+#: plugins/clock/clock-fuzzy.c:120
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "%1 時 10 分前ごろ"
 
-#: plugins/clock/clock-fuzzy.c:126
+#: plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "%1 時 5 分前ごろ"
 
-#: plugins/clock/clock-fuzzy.c:127
+#: plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "%1 時ごろ"
 
-#: plugins/clock/clock-fuzzy.c:132
+#: plugins/clock/clock-fuzzy.c:126
 msgctxt "am"
 msgid "one"
 msgstr "1"
 
-#: plugins/clock/clock-fuzzy.c:133
+#: plugins/clock/clock-fuzzy.c:127
 msgctxt "am"
 msgid "two"
 msgstr "2"
 
-#: plugins/clock/clock-fuzzy.c:134
+#: plugins/clock/clock-fuzzy.c:128
 msgctxt "am"
 msgid "three"
 msgstr "3"
 
-#: plugins/clock/clock-fuzzy.c:135
+#: plugins/clock/clock-fuzzy.c:129
 msgctxt "am"
 msgid "four"
 msgstr "4"
 
-#: plugins/clock/clock-fuzzy.c:136
+#: plugins/clock/clock-fuzzy.c:130
 msgctxt "am"
 msgid "five"
 msgstr "5"
 
-#: plugins/clock/clock-fuzzy.c:137
+#: plugins/clock/clock-fuzzy.c:131
 msgctxt "am"
 msgid "six"
 msgstr "6"
 
-#: plugins/clock/clock-fuzzy.c:138
+#: plugins/clock/clock-fuzzy.c:132
 msgctxt "am"
 msgid "seven"
 msgstr "7"
 
-#: plugins/clock/clock-fuzzy.c:139
+#: plugins/clock/clock-fuzzy.c:133
 msgctxt "am"
 msgid "eight"
 msgstr "8"
 
-#: plugins/clock/clock-fuzzy.c:140
+#: plugins/clock/clock-fuzzy.c:134
 msgctxt "am"
 msgid "nine"
 msgstr "9"
 
-#: plugins/clock/clock-fuzzy.c:141
+#: plugins/clock/clock-fuzzy.c:135
 msgctxt "am"
 msgid "ten"
 msgstr "10"
 
-#: plugins/clock/clock-fuzzy.c:142
+#: plugins/clock/clock-fuzzy.c:136
 msgctxt "am"
 msgid "eleven"
 msgstr "11"
 
 #. I18N: 12 AM is midnight
-#: plugins/clock/clock-fuzzy.c:144
+#: plugins/clock/clock-fuzzy.c:138
 msgctxt "am"
 msgid "twelve"
 msgstr "12"
 
-#: plugins/clock/clock-fuzzy.c:149
+#: plugins/clock/clock-fuzzy.c:142
 msgctxt "pm"
 msgid "one"
 msgstr "1"
 
-#: plugins/clock/clock-fuzzy.c:150
+#: plugins/clock/clock-fuzzy.c:143
 msgctxt "pm"
 msgid "two"
 msgstr "2"
 
-#: plugins/clock/clock-fuzzy.c:151
+#: plugins/clock/clock-fuzzy.c:144
 msgctxt "pm"
 msgid "three"
 msgstr "3"
 
-#: plugins/clock/clock-fuzzy.c:152
+#: plugins/clock/clock-fuzzy.c:145
 msgctxt "pm"
 msgid "four"
 msgstr "4"
 
-#: plugins/clock/clock-fuzzy.c:153
+#: plugins/clock/clock-fuzzy.c:146
 msgctxt "pm"
 msgid "five"
 msgstr "5"
 
-#: plugins/clock/clock-fuzzy.c:154
+#: plugins/clock/clock-fuzzy.c:147
 msgctxt "pm"
 msgid "six"
 msgstr "6"
 
-#: plugins/clock/clock-fuzzy.c:155
+#: plugins/clock/clock-fuzzy.c:148
 msgctxt "pm"
 msgid "seven"
 msgstr "7"
 
-#: plugins/clock/clock-fuzzy.c:156
+#: plugins/clock/clock-fuzzy.c:149
 msgctxt "pm"
 msgid "eight"
 msgstr "8"
 
-#: plugins/clock/clock-fuzzy.c:157
+#: plugins/clock/clock-fuzzy.c:150
 msgctxt "pm"
 msgid "nine"
 msgstr "9"
 
-#: plugins/clock/clock-fuzzy.c:158
+#: plugins/clock/clock-fuzzy.c:151
 msgctxt "pm"
 msgid "ten"
 msgstr "10"
 
-#: plugins/clock/clock-fuzzy.c:159
+#: plugins/clock/clock-fuzzy.c:152
 msgctxt "pm"
 msgid "eleven"
 msgstr "11"
 
 #. I18N: 12 PM is noon
-#: plugins/clock/clock-fuzzy.c:161
+#: plugins/clock/clock-fuzzy.c:154
 msgctxt "pm"
 msgid "twelve"
 msgstr "12"
@@ -1592,46 +1600,46 @@ msgstr "12"
 msgid "What time is it?"
 msgstr "いま何時ですか？"
 
-#: plugins/directorymenu/directorymenu.c:289
+#: plugins/directorymenu/directorymenu.c:298
 #: plugins/directorymenu/directorymenu.desktop.in.in:4
 #: plugins/directorymenu/directorymenu-dialog.glade:18
 msgid "Directory Menu"
 msgstr "ディレクトリメニュー"
 
-#: plugins/directorymenu/directorymenu.c:693
+#: plugins/directorymenu/directorymenu.c:696
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "アプリケーション \"%s\" の起動に失敗しました"
 
-#: plugins/directorymenu/directorymenu.c:724
+#: plugins/directorymenu/directorymenu.c:727
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "\"%s\" のコンテンツタイプの問い合わせに失敗しました"
 
-#: plugins/directorymenu/directorymenu.c:733
+#: plugins/directorymenu/directorymenu.c:736
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "\"%s\" のデフォルトアプリケーションが見つかりませんでした"
 
-#: plugins/directorymenu/directorymenu.c:749
+#: plugins/directorymenu/directorymenu.c:752
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "\"%s\" のデフォルトアプリケーションを起動できませんでした"
 
-#: plugins/directorymenu/directorymenu.c:844
+#: plugins/directorymenu/directorymenu.c:846
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "カテゴリ \"%s\" の規定のアプリケーションの実行に失敗しました"
 
-#: plugins/directorymenu/directorymenu.c:925
+#: plugins/directorymenu/directorymenu.c:927
 msgid "Create New Folder"
 msgstr "新しいフォルダーを作成する"
 
-#: plugins/directorymenu/directorymenu.c:930
+#: plugins/directorymenu/directorymenu.c:932
 msgid "Create New Text Document"
 msgstr "新しいテキストドキュメントを作成する"
 
-#: plugins/directorymenu/directorymenu.c:937
+#: plugins/directorymenu/directorymenu.c:938
 msgid "C_reate"
 msgstr "作成(_R)"
 
@@ -1639,11 +1647,11 @@ msgstr "作成(_R)"
 msgid "Create & _Open"
 msgstr "作成して開く(_O)"
 
-#: plugins/directorymenu/directorymenu.c:952
+#: plugins/directorymenu/directorymenu.c:951
 msgid "Enter the new name:"
 msgstr "新しい名前を入力してください:"
 
-#: plugins/directorymenu/directorymenu.c:988
+#: plugins/directorymenu/directorymenu.c:987
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "フォルダーの作成に失敗しました: %s"
@@ -1652,15 +1660,15 @@ msgstr "フォルダーの作成に失敗しました: %s"
 msgid "Open Folder"
 msgstr "フォルダーを開く"
 
-#: plugins/directorymenu/directorymenu.c:1082
+#: plugins/directorymenu/directorymenu.c:1083
 msgid "Open in Terminal"
 msgstr "ターミナルで開く"
 
-#: plugins/directorymenu/directorymenu.c:1095
+#: plugins/directorymenu/directorymenu.c:1097
 msgid "Create Folder..."
 msgstr "フォルダーを作成する..."
 
-#: plugins/directorymenu/directorymenu.c:1108
+#: plugins/directorymenu/directorymenu.c:1111
 msgid "Create Text Document..."
 msgstr "テキストドキュメントを作成する..."
 
@@ -1717,34 +1725,34 @@ msgstr "ファイルのパターン(_F):"
 msgid "Filtering"
 msgstr "フィルター"
 
-#: plugins/launcher/launcher.c:394
+#: plugins/launcher/launcher.c:431
 msgid "Open launcher menu"
 msgstr "ランチャーメニューを開く"
 
-#: plugins/launcher/launcher.c:1592
+#: plugins/launcher/launcher.c:1615
 msgid "Unnamed Item"
 msgstr "未設定"
 
-#: plugins/launcher/launcher.c:1794
+#: plugins/launcher/launcher.c:1817
 msgid "No items"
 msgstr "アイテムなし"
 
-#: plugins/launcher/launcher-dialog.c:784
+#: plugins/launcher/launcher-dialog.c:781
 msgid "Failed to open desktop item editor"
 msgstr "デスクトップアイテムエディターを開けませんでした"
 
-#: plugins/launcher/launcher-dialog.c:852
+#: plugins/launcher/launcher-dialog.c:842
 msgid "If you delete an item, it will be permanently removed"
 msgstr "アイテムを削除すると、完全に失われます"
 
-#: plugins/launcher/launcher-dialog.c:853
+#: plugins/launcher/launcher-dialog.c:852
+msgid "Unnamed item"
+msgstr "未設定"
+
+#: plugins/launcher/launcher-dialog.c:854
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "\"%s\" を削除しますか？"
-
-#: plugins/launcher/launcher-dialog.c:854
-msgid "Unnamed item"
-msgstr "未設定"
 
 #: plugins/launcher/launcher-dialog.glade:30
 msgid "Default"
@@ -1854,15 +1862,15 @@ msgstr "詳細"
 msgid "Program launcher with optional menu"
 msgstr "オプションでメニューが付くプログラムランチャーです。"
 
-#: plugins/pager/pager.c:689 plugins/pager/pager-dialog.glade:64
+#: plugins/pager/pager.c:703 plugins/pager/pager-dialog.glade:64
 msgid "Workspace _Settings..."
 msgstr "ワークスペースの設定(_S)..."
 
-#: plugins/pager/pager.c:790
+#: plugins/pager/pager.c:802
 msgid "Unable to open the workspace settings"
 msgstr "ワークスペース設定を開くことができません"
 
-#: plugins/pager/pager-buttons.c:588 plugins/windowmenu/windowmenu.c:902
+#: plugins/pager/pager-buttons.c:596 plugins/windowmenu/windowmenu.c:920
 #, c-format
 msgid "Workspace %d"
 msgstr "ワークスペース %d"
@@ -1923,15 +1931,15 @@ msgstr "拡張する(_E)"
 msgid "Adds a separator or space between panel items"
 msgstr "パネルのアイテム間に区切りか空間を加えます。"
 
-#: plugins/showdesktop/showdesktop.c:245
+#: plugins/showdesktop/showdesktop.c:255
 msgid "Restore the minimized windows"
 msgstr "最小化されたウィンドウを元に戻します"
 
-#: plugins/showdesktop/showdesktop.c:247
+#: plugins/showdesktop/showdesktop.c:257
 msgid "Minimize all open windows and show the desktop"
 msgstr "すべてのウィンドウを最小化してデスクトップを表示します"
 
-#: plugins/showdesktop/showdesktop.c:250
+#: plugins/showdesktop/showdesktop.c:260
 #: plugins/showdesktop/showdesktop.desktop.in.in:4
 msgid "Show Desktop"
 msgstr "デスクトップ表示"
@@ -1940,11 +1948,11 @@ msgstr "デスクトップ表示"
 msgid "Hide all windows and show the desktop"
 msgstr "すべてのウィンドウを隠してデスクトップを表示します。"
 
-#: plugins/systray/sn-dialog.c:645
+#: plugins/systray/sn-dialog.c:416
 msgid "Clear"
 msgstr "クリア"
 
-#: plugins/systray/sn-dialog.c:646
+#: plugins/systray/sn-dialog.c:421
 msgid "Are you sure you want to clear the list of known items?"
 msgstr "既知のアイテムリストをクリアしてもよろしいですか?"
 
@@ -2048,22 +2056,22 @@ msgstr "ステータス通知"
 msgid "Systray Icons"
 msgstr "システムトレイアイコン"
 
-#: plugins/systray/systray.c:145
+#: plugins/systray/systray.c:149
 msgid "Unable to start the notification area"
 msgstr "通知エリアが起動できません"
 
 #. create fake error and show it
-#: plugins/systray/systray.c:406
+#: plugins/systray/systray.c:409
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "おそらく他のウィジェットが通知エリアの機能を占有しています。この通知エリアは使用されません。"
 
-#: plugins/systray/systray.c:408
+#: plugins/systray/systray.c:411
 msgid "The notification area lost selection"
 msgstr "通知エリアはセレクションを失いました"
 
-#: plugins/systray/systray-manager.c:402
+#: plugins/systray/systray-manager.c:386
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "スクリーン %d の管理セレクションの取得に失敗しました"
@@ -2189,23 +2197,23 @@ msgstr "エラー"
 msgid "Launch New Instance"
 msgstr "新しいインスタンスを起動"
 
-#: plugins/tasklist/tasklist-widget.c:3887
+#: plugins/tasklist/tasklist-widget.c:3886
 msgid "Mi_nimize All"
 msgstr "すべて最小化(_N)"
 
-#: plugins/tasklist/tasklist-widget.c:3894
+#: plugins/tasklist/tasklist-widget.c:3893
 msgid "Un_minimize All"
 msgstr "すべて元に戻す(_M)"
 
-#: plugins/tasklist/tasklist-widget.c:3901
+#: plugins/tasklist/tasklist-widget.c:3900
 msgid "Ma_ximize All"
 msgstr "すべて最大化(_X)"
 
-#: plugins/tasklist/tasklist-widget.c:3908
+#: plugins/tasklist/tasklist-widget.c:3907
 msgid "_Unmaximize All"
 msgstr "すべて元に戻す(_U)"
 
-#: plugins/tasklist/tasklist-widget.c:3919
+#: plugins/tasklist/tasklist-widget.c:3918
 msgid "_Close All"
 msgstr "すべて閉じる(_C)"
 
@@ -2213,28 +2221,28 @@ msgstr "すべて閉じる(_C)"
 msgid "Switch between open windows using buttons"
 msgstr "開いているウィンドウをボタンを使って切り替えます。"
 
-#: plugins/windowmenu/windowmenu.c:698
+#: plugins/windowmenu/windowmenu.c:721
 msgid "Desktop"
 msgstr "デスクトップ"
 
-#: plugins/windowmenu/windowmenu.c:1298
+#: plugins/windowmenu/windowmenu.c:1315
 msgid "No Windows"
 msgstr "ウィンドウなし"
 
-#: plugins/windowmenu/windowmenu.c:1313
+#: plugins/windowmenu/windowmenu.c:1330
 msgid "Urgent Windows"
 msgstr "緊急通知ウィンドウ"
 
-#: plugins/windowmenu/windowmenu.c:1358
+#: plugins/windowmenu/windowmenu.c:1375
 msgid "Add Workspace"
 msgstr "ワークスペースの追加"
 
-#: plugins/windowmenu/windowmenu.c:1380
+#: plugins/windowmenu/windowmenu.c:1397
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "ワークスペース \"%s\" の削除"
 
-#: plugins/windowmenu/windowmenu.c:1382
+#: plugins/windowmenu/windowmenu.c:1399
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "ワークスペース %d を削除"
