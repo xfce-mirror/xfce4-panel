@@ -27,7 +27,7 @@
 #include "sn-plugin.h"
 
 #include "common/panel-debug.h"
-#include "libxfce4panel/xfce-panel-plugin.h"
+#include "common/panel-xfconf.h"
 
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4util/libxfce4util.h>
@@ -62,10 +62,8 @@ struct _SnConfig
   gboolean symbolic_icons;
   gboolean menu_is_primary;
   gboolean hide_new_items;
-  GList *known_items;
-  GHashTable *hidden_items;
-  GList *known_legacy_items;
-  GHashTable *hidden_legacy_items;
+  GList *known_items[N_SN_ITEM_TYPES];
+  GHashTable *hidden_items[N_SN_ITEM_TYPES];
 
   /* not xfconf properties but it is still convenient to have them here */
   GtkOrientation orientation;
@@ -228,10 +226,11 @@ sn_config_init (SnConfig *config)
   config->square_icons = DEFAULT_SQUARE_ICONS;
   config->symbolic_icons = DEFAULT_SYMBOLIC_ICONS;
   config->hide_new_items = DEFAULT_HIDE_NEW_ITEMS;
-  config->known_items = NULL;
-  config->hidden_items = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-  config->known_legacy_items = NULL;
-  config->hidden_legacy_items = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+  for (gint n = 0; n < N_SN_ITEM_TYPES; n++)
+    {
+      config->known_items[n] = NULL;
+      config->hidden_items[n] = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+    }
 
   config->orientation = DEFAULT_ORIENTATION;
   config->panel_orientation = DEFAULT_PANEL_ORIENTATION;
@@ -246,13 +245,11 @@ sn_config_finalize (GObject *object)
 {
   SnConfig *config = SN_CONFIG (object);
 
-  xfconf_shutdown ();
-
-  g_list_free_full (config->known_items, g_free);
-  g_hash_table_destroy (config->hidden_items);
-
-  g_list_free_full (config->known_legacy_items, g_free);
-  g_hash_table_destroy (config->hidden_legacy_items);
+  for (gint n = 0; n < N_SN_ITEM_TYPES; n++)
+    {
+      g_list_free_full (config->known_items[n], g_free);
+      g_hash_table_destroy (config->hidden_items[n]);
+    }
 
   G_OBJECT_CLASS (sn_config_parent_class)->finalize (object);
 }
@@ -324,7 +321,7 @@ sn_config_get_property (GObject *object,
 
     case PROP_KNOWN_ITEMS:
       array = g_ptr_array_new_full (1, sn_config_free_array_element);
-      for (li = config->known_items; li != NULL; li = li->next)
+      for (li = config->known_items[SN_ITEM_TYPE_DEFAULT]; li != NULL; li = li->next)
         {
           tmp = g_new0 (GValue, 1);
           g_value_init (tmp, G_TYPE_STRING);
@@ -337,14 +334,14 @@ sn_config_get_property (GObject *object,
 
     case PROP_HIDDEN_ITEMS:
       array = g_ptr_array_new_full (1, sn_config_free_array_element);
-      g_hash_table_foreach (config->hidden_items, sn_config_collect_keys, array);
+      g_hash_table_foreach (config->hidden_items[SN_ITEM_TYPE_DEFAULT], sn_config_collect_keys, array);
       g_value_set_boxed (value, array);
       g_ptr_array_unref (array);
       break;
 
     case PROP_KNOWN_LEGACY_ITEMS:
       array = g_ptr_array_new_full (1, sn_config_free_array_element);
-      for (li = config->known_legacy_items; li != NULL; li = li->next)
+      for (li = config->known_items[SN_ITEM_TYPE_LEGACY]; li != NULL; li = li->next)
         {
           tmp = g_new0 (GValue, 1);
           g_value_init (tmp, G_TYPE_STRING);
@@ -357,7 +354,7 @@ sn_config_get_property (GObject *object,
 
     case PROP_HIDDEN_LEGACY_ITEMS:
       array = g_ptr_array_new_full (1, sn_config_free_array_element);
-      g_hash_table_foreach (config->hidden_legacy_items, sn_config_collect_keys, array);
+      g_hash_table_foreach (config->hidden_items[SN_ITEM_TYPE_LEGACY], sn_config_collect_keys, array);
       g_value_set_boxed (value, array);
       g_ptr_array_unref (array);
       break;
@@ -442,8 +439,8 @@ sn_config_set_property (GObject *object,
       break;
 
     case PROP_KNOWN_ITEMS:
-      g_list_free_full (config->known_items, g_free);
-      config->known_items = NULL;
+      g_list_free_full (config->known_items[SN_ITEM_TYPE_DEFAULT], g_free);
+      config->known_items[SN_ITEM_TYPE_DEFAULT] = NULL;
       array = g_value_get_boxed (value);
       if (G_LIKELY (array != NULL))
         {
@@ -452,14 +449,15 @@ sn_config_set_property (GObject *object,
               tmp = g_ptr_array_index (array, i);
               g_assert (G_VALUE_HOLDS_STRING (tmp));
               name = g_value_dup_string (tmp);
-              config->known_items = g_list_append (config->known_items, name);
+              config->known_items[SN_ITEM_TYPE_DEFAULT]
+                = g_list_append (config->known_items[SN_ITEM_TYPE_DEFAULT], name);
             }
         }
       g_signal_emit (G_OBJECT (config), sn_config_signals[ITEM_LIST_CHANGED], 0);
       break;
 
     case PROP_HIDDEN_ITEMS:
-      g_hash_table_remove_all (config->hidden_items);
+      g_hash_table_remove_all (config->hidden_items[SN_ITEM_TYPE_DEFAULT]);
       array = g_value_get_boxed (value);
       if (G_LIKELY (array != NULL))
         {
@@ -468,15 +466,15 @@ sn_config_set_property (GObject *object,
               tmp = g_ptr_array_index (array, i);
               g_assert (G_VALUE_HOLDS_STRING (tmp));
               name = g_value_dup_string (tmp);
-              g_hash_table_replace (config->hidden_items, name, name);
+              g_hash_table_replace (config->hidden_items[SN_ITEM_TYPE_DEFAULT], name, name);
             }
         }
       g_signal_emit (G_OBJECT (config), sn_config_signals[ITEM_LIST_CHANGED], 0);
       break;
 
     case PROP_KNOWN_LEGACY_ITEMS:
-      g_list_free_full (config->known_legacy_items, g_free);
-      config->known_legacy_items = NULL;
+      g_list_free_full (config->known_items[SN_ITEM_TYPE_LEGACY], g_free);
+      config->known_items[SN_ITEM_TYPE_LEGACY] = NULL;
       array = g_value_get_boxed (value);
       if (G_LIKELY (array != NULL))
         {
@@ -485,14 +483,15 @@ sn_config_set_property (GObject *object,
               tmp = g_ptr_array_index (array, i);
               g_assert (G_VALUE_HOLDS_STRING (tmp));
               name = g_value_dup_string (tmp);
-              config->known_legacy_items = g_list_append (config->known_legacy_items, name);
+              config->known_items[SN_ITEM_TYPE_LEGACY]
+                = g_list_append (config->known_items[SN_ITEM_TYPE_LEGACY], name);
             }
         }
       g_signal_emit (G_OBJECT (config), sn_config_signals[LEGACY_ITEM_LIST_CHANGED], 0);
       break;
 
     case PROP_HIDDEN_LEGACY_ITEMS:
-      g_hash_table_remove_all (config->hidden_legacy_items);
+      g_hash_table_remove_all (config->hidden_items[SN_ITEM_TYPE_LEGACY]);
       array = g_value_get_boxed (value);
       if (G_LIKELY (array != NULL))
         {
@@ -501,7 +500,7 @@ sn_config_set_property (GObject *object,
               tmp = g_ptr_array_index (array, i);
               g_assert (G_VALUE_HOLDS_STRING (tmp));
               name = g_value_dup_string (tmp);
-              g_hash_table_replace (config->hidden_legacy_items, name, name);
+              g_hash_table_replace (config->hidden_items[SN_ITEM_TYPE_LEGACY], name, name);
             }
         }
       g_signal_emit (G_OBJECT (config), sn_config_signals[LEGACY_ITEM_LIST_CHANGED], 0);
@@ -736,17 +735,19 @@ sn_config_get_panel_size (SnConfig *config)
 
 gboolean
 sn_config_is_hidden (SnConfig *config,
+                     SnItemType type,
                      const gchar *name)
 {
   g_return_val_if_fail (SN_IS_CONFIG (config), FALSE);
 
-  return g_hash_table_lookup_extended (config->hidden_items, name, NULL, NULL);
+  return g_hash_table_lookup_extended (config->hidden_items[type], name, NULL, NULL);
 }
 
 
 
 void
 sn_config_set_hidden (SnConfig *config,
+                      SnItemType type,
                       const gchar *name,
                       gboolean hidden)
 {
@@ -757,69 +758,34 @@ sn_config_set_hidden (SnConfig *config,
   if (hidden)
     {
       name_copy = g_strdup (name);
-      g_hash_table_replace (config->hidden_items, name_copy, name_copy);
+      g_hash_table_replace (config->hidden_items[type], name_copy, name_copy);
     }
   else
     {
-      g_hash_table_remove (config->hidden_items, name);
+      g_hash_table_remove (config->hidden_items[type], name);
     }
-  g_object_notify (G_OBJECT (config), "hidden-items");
-  g_signal_emit (G_OBJECT (config), sn_config_signals[ITEM_LIST_CHANGED], 0);
-}
 
-
-
-gboolean
-sn_config_is_legacy_hidden (SnConfig *config,
-                            const gchar *name)
-{
-  g_return_val_if_fail (SN_IS_CONFIG (config), FALSE);
-
-  return g_hash_table_lookup_extended (config->hidden_legacy_items, name, NULL, NULL);
-}
-
-
-
-void
-sn_config_set_legacy_hidden (SnConfig *config,
-                             const gchar *name,
-                             gboolean hidden)
-{
-  gchar *name_copy;
-
-  g_return_if_fail (SN_IS_CONFIG (config));
-
-  if (hidden)
+  if (type == SN_ITEM_TYPE_DEFAULT)
     {
-      name_copy = g_strdup (name);
-      g_hash_table_replace (config->hidden_legacy_items, name_copy, name_copy);
+      g_object_notify (G_OBJECT (config), "hidden-items");
+      g_signal_emit (G_OBJECT (config), sn_config_signals[ITEM_LIST_CHANGED], 0);
     }
   else
     {
-      g_hash_table_remove (config->hidden_legacy_items, name);
+      g_object_notify (G_OBJECT (config), "hidden-legacy-items");
+      g_signal_emit (G_OBJECT (config), sn_config_signals[LEGACY_ITEM_LIST_CHANGED], 0);
     }
-  g_object_notify (G_OBJECT (config), "hidden-legacy-items");
-  g_signal_emit (G_OBJECT (config), sn_config_signals[LEGACY_ITEM_LIST_CHANGED], 0);
 }
 
 
 
 GList *
-sn_config_get_known_items (SnConfig *config)
+sn_config_get_known_items (SnConfig *config,
+                           SnItemType type)
 {
   g_return_val_if_fail (SN_IS_CONFIG (config), NULL);
 
-  return config->known_items;
-}
-
-
-
-GList *
-sn_config_get_known_legacy_items (SnConfig *config)
-{
-  g_return_val_if_fail (SN_IS_CONFIG (config), NULL);
-
-  return config->known_legacy_items;
+  return config->known_items[type];
 }
 
 
@@ -831,67 +797,47 @@ sn_config_get_hidden_legacy_items (SnConfig *config)
 
   g_return_val_if_fail (SN_IS_CONFIG (config), NULL);
 
-  list = g_hash_table_get_values (config->hidden_legacy_items);
+  list = g_hash_table_get_values (config->hidden_items[SN_ITEM_TYPE_LEGACY]);
 
   return list;
 }
 
 
 
-void
+gboolean
 sn_config_add_known_item (SnConfig *config,
+                          SnItemType type,
                           const gchar *name)
 {
   GList *li;
   gchar *name_copy;
 
-  g_return_if_fail (SN_IS_CONFIG (config));
+  g_return_val_if_fail (SN_IS_CONFIG (config), FALSE);
 
   /* check if item is already known */
-  for (li = config->known_items; li != NULL; li = li->next)
+  for (li = config->known_items[type]; li != NULL; li = li->next)
     if (g_strcmp0 (li->data, name) == 0)
-      return;
+      return g_hash_table_contains (config->hidden_items[type], name);
 
-  config->known_items = g_list_prepend (config->known_items, g_strdup (name));
+  config->known_items[type] = g_list_prepend (config->known_items[type], g_strdup (name));
 
   if (config->hide_new_items)
     {
       name_copy = g_strdup (name);
-      g_hash_table_replace (config->hidden_items, name_copy, name_copy);
-      g_object_notify (G_OBJECT (config), "hidden-items");
+      g_hash_table_replace (config->hidden_items[type], name_copy, name_copy);
+      g_object_notify (G_OBJECT (config), type == SN_ITEM_TYPE_DEFAULT ? "hidden-items" : "hidden-legacy-items");
     }
 
-  g_object_notify (G_OBJECT (config), "known-items");
-  g_signal_emit (G_OBJECT (config), sn_config_signals[ITEM_LIST_CHANGED], 0);
-}
-
-
-
-gboolean
-sn_config_add_known_legacy_item (SnConfig *config,
-                                 const gchar *name)
-{
-  GList *li;
-  gchar *name_copy;
-
-  g_return_val_if_fail (SN_IS_CONFIG (config), TRUE);
-
-  /* check if item is already known */
-  for (li = config->known_legacy_items; li != NULL; li = li->next)
-    if (g_strcmp0 (li->data, name) == 0)
-      return g_hash_table_contains (config->hidden_legacy_items, name);
-
-  config->known_legacy_items = g_list_prepend (config->known_legacy_items, g_strdup (name));
-
-  if (config->hide_new_items)
+  if (type == SN_ITEM_TYPE_DEFAULT)
     {
-      name_copy = g_strdup (name);
-      g_hash_table_replace (config->hidden_legacy_items, name_copy, name_copy);
-      g_object_notify (G_OBJECT (config), "hidden-legacy-items");
+      g_object_notify (G_OBJECT (config), "known-items");
+      g_signal_emit (G_OBJECT (config), sn_config_signals[ITEM_LIST_CHANGED], 0);
     }
-
-  g_object_notify (G_OBJECT (config), "known-legacy-items");
-  g_signal_emit (G_OBJECT (config), sn_config_signals[LEGACY_ITEM_LIST_CHANGED], 0);
+  else
+    {
+      g_object_notify (G_OBJECT (config), "known-legacy-items");
+      g_signal_emit (G_OBJECT (config), sn_config_signals[LEGACY_ITEM_LIST_CHANGED], 0);
+    }
 
   return config->hide_new_items;
 }
@@ -900,6 +846,7 @@ sn_config_add_known_legacy_item (SnConfig *config,
 
 void
 sn_config_swap_known_items (SnConfig *config,
+                            SnItemType type,
                             const gchar *name1,
                             const gchar *name2)
 {
@@ -907,7 +854,7 @@ sn_config_swap_known_items (SnConfig *config,
 
   g_return_if_fail (SN_IS_CONFIG (config));
 
-  for (li = config->known_items; li != NULL; li = li->next)
+  for (li = config->known_items[type]; li != NULL; li = li->next)
     if (g_strcmp0 (li->data, name1) == 0)
       break;
 
@@ -920,58 +867,27 @@ sn_config_swap_known_items (SnConfig *config,
 
   /* li_tmp will contain only the removed element (name2) */
   li_tmp = li->next;
-  config->known_items = g_list_remove_link (config->known_items, li_tmp);
+  config->known_items[type] = g_list_remove_link (config->known_items[type], li_tmp);
 
   /* not strictly necessary (in testing the list contents was preserved)
    * but searching for the index again should be safer */
-  for (li = config->known_items; li != NULL; li = li->next)
+  for (li = config->known_items[type]; li != NULL; li = li->next)
     if (g_strcmp0 (li->data, name1) == 0)
       break;
 
-  config->known_items = g_list_insert_before (config->known_items, li, li_tmp->data);
+  config->known_items[type] = g_list_insert_before (config->known_items[type], li, li_tmp->data);
   g_list_free (li_tmp);
 
-  g_object_notify (G_OBJECT (config), "known-items");
-  g_signal_emit (G_OBJECT (config), sn_config_signals[ITEM_LIST_CHANGED], 0);
-}
-
-
-
-void
-sn_config_swap_known_legacy_items (SnConfig *config,
-                                   const gchar *name1,
-                                   const gchar *name2)
-{
-  GList *li, *li_tmp;
-
-  g_return_if_fail (SN_IS_CONFIG (config));
-
-  for (li = config->known_legacy_items; li != NULL; li = li->next)
-    if (g_strcmp0 (li->data, name1) == 0)
-      break;
-
-  /* make sure that the list contains name1 followed by name2 */
-  if (li == NULL || li->next == NULL || g_strcmp0 (li->next->data, name2) != 0)
+  if (type == SN_ITEM_TYPE_DEFAULT)
     {
-      panel_debug (PANEL_DEBUG_SYSTRAY, "Couldn't swap items: %s and %s", name1, name2);
-      return;
+      g_object_notify (G_OBJECT (config), "known-items");
+      g_signal_emit (G_OBJECT (config), sn_config_signals[ITEM_LIST_CHANGED], 0);
     }
-
-  /* li_tmp will contain only the removed element (name2) */
-  li_tmp = li->next;
-  config->known_legacy_items = g_list_remove_link (config->known_legacy_items, li_tmp);
-
-  /* not strictly necessary (in testing the list contents was preserved)
-   * but searching for the index again should be safer */
-  for (li = config->known_legacy_items; li != NULL; li = li->next)
-    if (g_strcmp0 (li->data, name1) == 0)
-      break;
-
-  config->known_legacy_items = g_list_insert_before (config->known_legacy_items, li, li_tmp->data);
-  g_list_free (li_tmp);
-
-  g_object_notify (G_OBJECT (config), "known-legacy-items");
-  g_signal_emit (G_OBJECT (config), sn_config_signals[LEGACY_ITEM_LIST_CHANGED], 0);
+  else
+    {
+      g_object_notify (G_OBJECT (config), "known-legacy-items");
+      g_signal_emit (G_OBJECT (config), sn_config_signals[LEGACY_ITEM_LIST_CHANGED], 0);
+    }
 }
 
 
@@ -999,24 +915,24 @@ sn_config_items_clear (SnConfig *config)
   g_signal_emit (G_OBJECT (config), sn_config_signals[COLLECT_KNOWN_ITEMS],
                  0, collected_known_items);
 
-  initial_size = g_list_length (config->known_items);
+  initial_size = g_list_length (config->known_items[SN_ITEM_TYPE_DEFAULT]);
   new_list = NULL;
-  for (li = config->known_items; li != NULL; li = li->next)
+  for (li = config->known_items[SN_ITEM_TYPE_DEFAULT]; li != NULL; li = li->next)
     {
       if (g_hash_table_contains (collected_known_items, li->data))
         {
           new_list = g_list_append (new_list, g_strdup (li->data));
         }
     }
-  g_list_free_full (config->known_items, g_free);
-  config->known_items = new_list;
+  g_list_free_full (config->known_items[SN_ITEM_TYPE_DEFAULT], g_free);
+  config->known_items[SN_ITEM_TYPE_DEFAULT] = new_list;
 
-  g_hash_table_foreach_remove (config->hidden_items,
+  g_hash_table_foreach_remove (config->hidden_items[SN_ITEM_TYPE_DEFAULT],
                                sn_config_items_clear_callback,
                                collected_known_items);
   g_hash_table_destroy (collected_known_items);
 
-  if (initial_size != g_list_length (config->known_items))
+  if (initial_size != g_list_length (config->known_items[SN_ITEM_TYPE_DEFAULT]))
     {
       g_object_notify (G_OBJECT (config), "known-items");
       g_object_notify (G_OBJECT (config), "hidden-items");
@@ -1035,9 +951,9 @@ sn_config_items_clear (SnConfig *config)
 gboolean
 sn_config_legacy_items_clear (SnConfig *config)
 {
-  g_list_free_full (config->known_legacy_items, g_free);
-  config->known_legacy_items = NULL;
-  g_hash_table_remove_all (config->hidden_legacy_items);
+  g_list_free_full (config->known_items[SN_ITEM_TYPE_LEGACY], g_free);
+  config->known_items[SN_ITEM_TYPE_LEGACY] = NULL;
+  g_hash_table_remove_all (config->hidden_items[SN_ITEM_TYPE_LEGACY]);
 
   g_object_notify (G_OBJECT (config), "known-legacy-items");
   g_object_notify (G_OBJECT (config), "hidden-legacy-items");
@@ -1050,60 +966,27 @@ sn_config_legacy_items_clear (SnConfig *config)
 
 
 SnConfig *
-sn_config_new (const gchar *property_base)
+sn_config_new (XfcePanelPlugin *plugin)
 {
-  SnConfig *config;
-  XfconfChannel *channel;
-  gchar *property;
+  SnConfig *config = g_object_new (SN_TYPE_CONFIG, NULL);
+  const PanelProperty properties[] = {
+    { "icon-size", G_TYPE_INT },
+    { "single-row", G_TYPE_BOOLEAN },
+    { "square-icons", G_TYPE_BOOLEAN },
+    { "symbolic-icons", G_TYPE_BOOLEAN },
+    { "menu-is-primary", G_TYPE_BOOLEAN },
+    { "hide-new-items", G_TYPE_BOOLEAN },
+    { "known-items", G_TYPE_PTR_ARRAY },
+    { "hidden-items", G_TYPE_PTR_ARRAY },
+    { "known-legacy-items", G_TYPE_PTR_ARRAY },
+    { "hidden-legacy-items", G_TYPE_PTR_ARRAY },
+    { NULL }
+  };
 
-  config = g_object_new (SN_TYPE_CONFIG, NULL);
-
-  if (xfconf_init (NULL))
-    {
-      channel = xfconf_channel_get ("xfce4-panel");
-
-      property = g_strconcat (property_base, "/icon-size", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_INT, config, "icon-size");
-      g_free (property);
-
-      property = g_strconcat (property_base, "/single-row", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_BOOLEAN, config, "single-row");
-      g_free (property);
-
-      property = g_strconcat (property_base, "/square-icons", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_BOOLEAN, config, "square-icons");
-      g_free (property);
-
-      property = g_strconcat (property_base, "/symbolic-icons", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_BOOLEAN, config, "symbolic-icons");
-      g_free (property);
-
-      property = g_strconcat (property_base, "/menu-is-primary", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_BOOLEAN, config, "menu-is-primary");
-      g_free (property);
-
-      property = g_strconcat (property_base, "/hide-new-items", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_BOOLEAN, config, "hide-new-items");
-      g_free (property);
-
-      property = g_strconcat (property_base, "/known-items", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_PTR_ARRAY, config, "known-items");
-      g_free (property);
-
-      property = g_strconcat (property_base, "/hidden-items", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_PTR_ARRAY, config, "hidden-items");
-      g_free (property);
-
-      property = g_strconcat (property_base, "/known-legacy-items", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_PTR_ARRAY, config, "known-legacy-items");
-      g_free (property);
-
-      property = g_strconcat (property_base, "/hidden-legacy-items", NULL);
-      xfconf_g_property_bind (channel, property, G_TYPE_PTR_ARRAY, config, "hidden-legacy-items");
-      g_free (property);
-
-      g_signal_emit (G_OBJECT (config), sn_config_signals[CONFIGURATION_CHANGED], 0);
-    }
+  panel_properties_bind (NULL, G_OBJECT (config),
+                         xfce_panel_plugin_get_property_base (plugin),
+                         properties, FALSE);
+  g_signal_emit (G_OBJECT (config), sn_config_signals[CONFIGURATION_CHANGED], 0);
 
   return config;
 }

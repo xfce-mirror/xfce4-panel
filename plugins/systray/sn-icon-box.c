@@ -217,10 +217,13 @@ sn_icon_box_load_icon (GtkWidget *image,
 {
   GtkIconInfo *info;
   GdkPixbuf *pixbuf = NULL;
+  GtkIconLookupFlags flags = GTK_ICON_LOOKUP_FORCE_SIZE;
+  if (prefer_symbolic)
+    flags |= GTK_ICON_LOOKUP_FORCE_SYMBOLIC;
 
   info = gtk_icon_theme_lookup_icon_for_scale (icon_theme, icon_name, icon_size,
                                                gtk_widget_get_scale_factor (image),
-                                               prefer_symbolic ? GTK_ICON_LOOKUP_FORCE_SYMBOLIC : 0);
+                                               flags);
   if (info != NULL)
     {
       pixbuf = gtk_icon_info_load_symbolic_for_context (info,
@@ -296,7 +299,7 @@ sn_icon_box_apply_icon (GtkWidget *image,
       scale_factor = gtk_widget_get_scale_factor (image);
       icon_size *= scale_factor;
 
-      if (width > icon_size || height > icon_size)
+      if (width > icon_size || height > icon_size || (width < icon_size && height < icon_size))
         {
           /* scale pixbuf */
           if (height < width)

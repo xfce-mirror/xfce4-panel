@@ -235,14 +235,14 @@ sn_box_list_changed (SnBox *box,
   g_return_if_fail (SN_IS_BOX (box));
   g_return_if_fail (SN_IS_CONFIG (config));
 
-  known_items = sn_config_get_known_items (box->config);
+  known_items = sn_config_get_known_items (box->config, SN_ITEM_TYPE_DEFAULT);
   for (li = known_items; li != NULL; li = li->next)
     {
       li_int = g_hash_table_lookup (box->children, li->data);
       for (li_tmp = li_int; li_tmp != NULL; li_tmp = li_tmp->next)
         {
           button = li_tmp->data;
-          if (!sn_config_is_hidden (box->config,
+          if (!sn_config_is_hidden (box->config, SN_ITEM_TYPE_DEFAULT,
                                     sn_button_get_name (button)))
             {
               gtk_widget_map (GTK_WIDGET (button));
@@ -331,7 +331,7 @@ sn_box_forall (GtkContainer *container,
   GList *known_items, *li, *li_int, *li_tmp;
 
   /* run callback for all children */
-  known_items = sn_config_get_known_items (box->config);
+  known_items = sn_config_get_known_items (box->config, SN_ITEM_TYPE_DEFAULT);
   for (li = known_items; li != NULL; li = li->next)
     {
       li_int = g_hash_table_lookup (box->children, li->data);
@@ -394,14 +394,14 @@ sn_box_measure_and_allocate (GtkWidget *widget,
   column_length = 0;
   row = 0;
 
-  known_items = sn_config_get_known_items (box->config);
+  known_items = sn_config_get_known_items (box->config, SN_ITEM_TYPE_DEFAULT);
   for (li = known_items; li != NULL; li = li->next)
     {
       li_int = g_hash_table_lookup (box->children, li->data);
       for (li_tmp = li_int; li_tmp != NULL; li_tmp = li_tmp->next)
         {
           button = li_tmp->data;
-          if (sn_config_is_hidden (box->config,
+          if (sn_config_is_hidden (box->config, SN_ITEM_TYPE_DEFAULT,
                                    sn_button_get_name (button)))
             {
               n_hidden_children++;
@@ -567,7 +567,7 @@ sn_box_remove_item (SnBox *box,
 
   g_return_if_fail (SN_IS_BOX (box));
 
-  known_items = sn_config_get_known_items (box->config);
+  known_items = sn_config_get_known_items (box->config, SN_ITEM_TYPE_DEFAULT);
   for (li = known_items; li != NULL; li = li->next)
     {
       li_int = g_hash_table_lookup (box->children, li->data);

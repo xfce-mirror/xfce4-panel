@@ -228,7 +228,7 @@ sn_plugin_item_added (SnPlugin *plugin,
 
   button = sn_button_new (item, plugin, plugin->config);
 
-  sn_config_add_known_item (plugin->config, sn_item_get_name (item));
+  sn_config_add_known_item (plugin->config, SN_ITEM_TYPE_DEFAULT, sn_item_get_name (item));
 
   gtk_container_add (GTK_CONTAINER (plugin->sn_box), button);
   gtk_widget_show (button);
@@ -241,7 +241,7 @@ gboolean
 sn_plugin_legacy_item_added (SnPlugin *plugin,
                              const gchar *name)
 {
-  return sn_config_add_known_legacy_item (plugin->config, name);
+  return sn_config_add_known_item (plugin->config, SN_ITEM_TYPE_LEGACY, name);
 }
 
 #ifdef HAVE_DBUSMENU
@@ -329,7 +329,7 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   xfce_panel_plugin_menu_show_configure (panel_plugin);
 
-  plugin->config = sn_config_new (xfce_panel_plugin_get_property_base (panel_plugin));
+  plugin->config = sn_config_new (panel_plugin);
 
   /* Container for both plugins */
   plugin->box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1);

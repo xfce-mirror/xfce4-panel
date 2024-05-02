@@ -86,7 +86,7 @@ systray_plugin_configuration_changed (SnConfig *config,
     plugin->names_ordered = NULL;
 
     /* add new values */
-    list = sn_config_get_known_legacy_items (config);
+    list = sn_config_get_known_items (config, SN_ITEM_TYPE_LEGACY);
     for (l = list; l != NULL; l = l->next)
       {
         name = g_strdup (l->data);
