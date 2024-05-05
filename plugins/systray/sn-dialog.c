@@ -156,14 +156,14 @@ sn_dialog_update_names (SnDialog *dialog,
           g_object_unref (app_info);
         }
 
-      if (gtk_icon_theme_has_icon (gtk_icon_theme_get_default (), icon_name))
-        icon = g_themed_icon_new (icon_name);
-      else
+      if (g_path_is_absolute (icon_name))
         {
           GFile *file = g_file_new_for_path (icon_name);
           icon = g_file_icon_new (file);
           g_object_unref (file);
         }
+      else
+        icon = g_themed_icon_new (icon_name);
 
       /* insert item in the store */
       sn_dialog_add_item (dialog, store, icon, name, title,

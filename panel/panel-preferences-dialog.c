@@ -151,7 +151,7 @@ panel_preferences_dialog_item_selection_changed (GtkTreeSelection *selection,
 
 enum
 {
-  ITEM_COLUMN_ICON_NAME,
+  ITEM_COLUMN_ICON,
   ITEM_COLUMN_DISPLAY_NAME,
   ITEM_COLUMN_TOOLTIP,
   ITEM_COLUMN_PROVIDER,
@@ -319,7 +319,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
 
   /* create store for panel items */
   dialog->store = gtk_list_store_new (N_ITEM_COLUMNS,
-                                      G_TYPE_STRING, /* ITEM_COLUMN_ICON_NAME */
+                                      G_TYPE_ICON, /* ITEM_COLUMN_ICON */
                                       G_TYPE_STRING, /* ITEM_COLUMN_DISPLAY_NAME */
                                       G_TYPE_STRING, /* ITEM_COLUMN_TOOLTIP */
                                       G_TYPE_OBJECT); /* ITEM_COLUMN_PROVIDER */
@@ -347,8 +347,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
 
   /* icon renderer */
   renderer = gtk_cell_renderer_pixbuf_new ();
-  column = gtk_tree_view_column_new_with_attributes ("", renderer, "icon-name",
-                                                     ITEM_COLUMN_ICON_NAME, NULL);
+  column = gtk_tree_view_column_new_with_attributes ("", renderer, "gicon", ITEM_COLUMN_ICON, NULL);
   g_object_set (G_OBJECT (renderer), "stock-size", GTK_ICON_SIZE_LARGE_TOOLBAR, NULL);
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 
@@ -1264,6 +1263,73 @@ panel_preferences_dialog_item_get_selected (PanelPreferencesDialog *dialog,
 
 
 
+static gboolean
+get_launcher_data (XfcePanelPluginProvider *provider,
+                   PanelModule *module,
+                   gchar **display_name,
+                   GIcon **icon)
+{
+  XfconfChannel *channel = xfconf_channel_get (XFCE_PANEL_CHANNEL_NAME);
+  gchar *prop = g_strdup_printf (PLUGINS_PROPERTY_BASE "/items",
+                                 xfce_panel_plugin_provider_get_unique_id (provider));
+  gboolean success = FALSE;
+
+  if (xfconf_channel_has_property (channel, prop))
+    {
+      gchar **desktop_files = xfconf_channel_get_string_list (channel, prop);
+      if (desktop_files[0] != NULL)
+        {
+          gchar *dirname = g_strdup_printf (PANEL_PLUGIN_RELATIVE_PATH G_DIR_SEPARATOR_S "%s-%d",
+                                            xfce_panel_plugin_provider_get_name (provider),
+                                            xfce_panel_plugin_provider_get_unique_id (provider));
+          gchar *filename = g_build_filename (dirname, desktop_files[0], NULL);
+          gchar *path = xfce_resource_save_location (XFCE_RESOURCE_CONFIG, filename, FALSE);
+          GKeyFile *keyfile = g_key_file_new ();
+
+          if (g_key_file_load_from_file (keyfile, path, G_KEY_FILE_NONE, NULL))
+            {
+              *display_name = g_key_file_get_locale_string (keyfile, G_KEY_FILE_DESKTOP_GROUP,
+                                                            G_KEY_FILE_DESKTOP_KEY_NAME, NULL, NULL);
+              if (*display_name != NULL)
+                {
+                  gchar *icon_name = g_key_file_get_string (keyfile, G_KEY_FILE_DESKTOP_GROUP,
+                                                            G_KEY_FILE_DESKTOP_KEY_ICON, NULL);
+                  if (icon_name != NULL)
+                    {
+                      if (g_path_is_absolute (icon_name))
+                        {
+                          GFile *file = g_file_new_for_path (icon_name);
+                          *icon = g_file_icon_new (file);
+                          g_object_unref (file);
+                        }
+                      else
+                        *icon = g_themed_icon_new (icon_name);
+
+                      g_free (icon_name);
+                    }
+                  else
+                    *icon = g_themed_icon_new (panel_module_get_icon_name (module));
+
+                  success = TRUE;
+                }
+            }
+
+          g_key_file_free (keyfile);
+          g_free (path);
+          g_free (filename);
+          g_free (dirname);
+        }
+
+      g_strfreev (desktop_files);
+    }
+
+  g_free (prop);
+
+  return success;
+}
+
+
+
 static void
 panel_preferences_dialog_item_store_rebuild (GtkWidget *itembar,
                                              PanelPreferencesDialog *dialog)
@@ -1271,7 +1337,8 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget *itembar,
   GList *selected = NULL, *items, *li;
   guint i;
   PanelModule *module;
-  gchar *tooltip, *display_name;
+  gchar *tooltip, *display_name, *_display_name;
+  GIcon *icon;
   GtkTreeIter iter;
   GObject *treeview;
   GtkTreeSelection *selection;
@@ -1298,12 +1365,20 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget *itembar,
       /* get the panel module from the plugin */
       module = panel_module_get_from_plugin_provider (li->data);
 
+      /* treat launchers as a special case */
+      if (g_strcmp0 (xfce_panel_plugin_provider_get_name (li->data), "launcher") != 0
+          || !get_launcher_data (li->data, module, &_display_name, &icon))
+        {
+          _display_name = g_strdup (panel_module_get_display_name (module));
+          icon = g_themed_icon_new (panel_module_get_icon_name (module));
+        }
+
       if (PANEL_IS_PLUGIN_EXTERNAL (li->data))
         {
           /* I18N: append (external) in the preferences dialog if the plugin
            * runs external */
           display_name = g_strdup_printf (_("%s <span color=\"grey\" size=\"small\">(external)</span>"),
-                                          panel_module_get_display_name (module));
+                                          _display_name);
 
           /* I18N: tooltip in preferences dialog when hovering an item in the list
            * for external plugins */
@@ -1315,7 +1390,7 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget *itembar,
         }
       else
         {
-          display_name = g_strdup (panel_module_get_display_name (module));
+          display_name = g_strdup (_display_name);
 
           /* I18N: tooltip in preferences dialog when hovering an item in the list
            * for internal plugins */
@@ -1325,8 +1400,8 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget *itembar,
         }
 
       gtk_list_store_insert_with_values (dialog->store, &iter, i,
-                                         ITEM_COLUMN_ICON_NAME,
-                                         panel_module_get_icon_name (module),
+                                         ITEM_COLUMN_ICON,
+                                         icon,
                                          ITEM_COLUMN_DISPLAY_NAME,
                                          display_name,
                                          ITEM_COLUMN_TOOLTIP,
@@ -1338,7 +1413,9 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget *itembar,
         gtk_tree_selection_select_iter (selection, &iter);
 
       g_free (tooltip);
+      g_free (_display_name);
       g_free (display_name);
+      g_object_unref (icon);
     }
 
   g_list_free (items);
