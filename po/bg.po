@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-05-01 00:47+0200\n"
+"POT-Creation-Date: 2024-05-06 12:49+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Kiril Kirilov <cybercop_montana@abv.bg>, 2014-2015,2017-2020,2022-2024\n"
 "Language-Team: Bulgarian (http://app.transifex.com/xfce/xfce4-panel/language/bg/)\n"
@@ -49,13 +49,13 @@ msgstr "Персонализация на панела"
 
 #. I18N: %s is the name of the plugin
 #: libxfce4panel/xfce-panel-plugin.c:1094
-#: panel/panel-preferences-dialog.c:1465
+#: panel/panel-preferences-dialog.c:1542
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Сигурни ли сте, че искате да премахнете „%s“?"
 
 #: libxfce4panel/xfce-panel-plugin.c:1099
-#: panel/panel-preferences-dialog.c:1480
+#: panel/panel-preferences-dialog.c:1557
 msgid "Remove Item"
 msgstr "Премахване на елемент"
 
@@ -65,7 +65,7 @@ msgid ""
 msgstr "При премахване на елемента от панела, конфигурацията му също ще бъде изгубена."
 
 #: libxfce4panel/xfce-panel-plugin.c:1103 panel/panel-dialogs.c:157
-#: panel/panel-preferences-dialog.c:1483
+#: panel/panel-preferences-dialog.c:1560
 #: plugins/applicationsmenu/applicationsmenu.c:606
 #: plugins/directorymenu/directorymenu.c:466
 #: plugins/directorymenu/directorymenu.c:938
@@ -74,9 +74,9 @@ msgstr "_Отказ"
 
 #. remove
 #: libxfce4panel/xfce-panel-plugin.c:1104
-#: libxfce4panel/xfce-panel-plugin.c:1271 panel/panel-application.c:363
-#: panel/panel-plugin-external.c:421 panel/panel-preferences-dialog.c:1082
-#: panel/panel-preferences-dialog.c:1483
+#: libxfce4panel/xfce-panel-plugin.c:1271 panel/panel-application.c:362
+#: panel/panel-plugin-external.c:421 panel/panel-preferences-dialog.c:1081
+#: panel/panel-preferences-dialog.c:1560
 #: panel/panel-preferences-dialog.glade:1240
 #: plugins/launcher/launcher-dialog.c:841
 msgid "_Remove"
@@ -126,6 +126,7 @@ msgstr "Изход"
 #: plugins/launcher/launcher-dialog.glade:398
 #: plugins/pager/pager-dialog.glade:81
 #: plugins/separator/separator-dialog.glade:69
+#: plugins/showdesktop/showdesktop-dialog.glade:49
 #: plugins/tasklist/tasklist-dialog.glade:93
 #: plugins/windowmenu/windowmenu-dialog.glade:63
 msgid "_Help"
@@ -250,22 +251,22 @@ msgstr "Искате ли да стартирате панела? Ако иск�
 msgid "Execute"
 msgstr "Изпълнение"
 
-#: panel/panel-application.c:215
+#: panel/panel-application.c:214
 msgid "Failed to launch the migration application"
 msgstr "Не може да бъде стартирана миграцията на програмата"
 
-#: panel/panel-application.c:352
+#: panel/panel-application.c:351
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr "Добавката „%s“ не може да бъде заредена, искате ли да я премахнете от конфигурацията на xfce4-panel?"
 
-#: panel/panel-application.c:354
+#: panel/panel-application.c:353
 msgid "Plugin loading failure"
 msgstr "Зареждането на добавката е неуспешно"
 
-#: panel/panel-application.c:357
+#: panel/panel-application.c:356
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -275,42 +276,42 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr "Този плъгин е в текущата конфигурация на xfce4-panel, но не може да бъде зареден, вероятно поради проблем с инсталацията. Ако знаете какво правите, можете да го премахнете за постоянно, в противен случай по-добре излезте и направете резервно копие на текущата конфигурация с помощта на %s, преди да проверите инсталацията си и да опитате да стартирате xfce4-panel отново."
 
-#: panel/panel-application.c:363
+#: panel/panel-application.c:362
 msgid "_Quit"
 msgstr "_"
 
-#: panel/panel-application.c:1051
+#: panel/panel-application.c:1034
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Това ще създаде нов стартер в панела и ще добави довлачените файлове като елементи в менюто."
 
-#: panel/panel-application.c:1054
+#: panel/panel-application.c:1037
 msgid "Create _Launcher"
 msgstr "Създаване на стартер"
 
-#: panel/panel-application.c:1055
+#: panel/panel-application.c:1038
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Създаване на нов стартер от %d десктоп файл"
 msgstr[1] "Създаване на нов стартер от %d десктоп файла"
 
-#: panel/panel-application.c:1816
+#: panel/panel-application.c:1799
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Вие сте стартирали X-сървъра без мениджъра на сесиите. Кликнете на Изключване да затворите X сървъра."
 
-#: panel/panel-application.c:1819
+#: panel/panel-application.c:1802
 msgid "Quit"
 msgstr "Изход"
 
-#: panel/panel-application.c:1819
+#: panel/panel-application.c:1802
 msgid "Are you sure you want to quit the panel?"
 msgstr "Наистина ли искате да изключите панела?"
 
-#: panel/panel-application.c:1827
+#: panel/panel-application.c:1810
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Не може да бъде стартирана команда „%s“"
@@ -353,7 +354,7 @@ msgstr "_Добавяне"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Моля, изберете панел за новата добавка:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1027
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1026
 #, c-format
 msgid "Panel %d"
 msgstr "Панел %d"
@@ -381,6 +382,7 @@ msgstr "Добавяне на нов елемент"
 #: plugins/launcher/launcher-dialog.glade:414
 #: plugins/pager/pager-dialog.glade:97
 #: plugins/separator/separator-dialog.glade:54
+#: plugins/showdesktop/showdesktop-dialog.glade:34
 #: plugins/tasklist/tasklist-dialog.glade:77
 #: plugins/windowmenu/windowmenu-dialog.glade:48
 msgid "_Close"
@@ -415,39 +417,39 @@ msgstr "Добавката е била стартирана няколко пъ�
 msgid "_Execute"
 msgstr "_Изпълнение"
 
-#: panel/panel-preferences-dialog.c:580
+#: panel/panel-preferences-dialog.c:579
 msgid "Automatic"
 msgstr "Автоматично"
 
-#: panel/panel-preferences-dialog.c:589
+#: panel/panel-preferences-dialog.c:588
 msgid "Primary"
 msgstr "Главен"
 
 #. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:608
+#: panel/panel-preferences-dialog.c:607
 #, c-format
 msgid "Monitor %d"
 msgstr "Монитор %d"
 
-#: panel/panel-preferences-dialog.c:1081
+#: panel/panel-preferences-dialog.c:1080
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Избраният панел ще бъде напълно премахнат заедно с всичките му елементи"
 
-#: panel/panel-preferences-dialog.c:1090
+#: panel/panel-preferences-dialog.c:1089
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Наистина ли искате да премахнете панел %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1305
+#: panel/panel-preferences-dialog.c:1380
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(external)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1310
+#: panel/panel-preferences-dialog.c:1385
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -456,21 +458,21 @@ msgstr "Вътрешно име: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1322
+#: panel/panel-preferences-dialog.c:1397
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Вътрешно име: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1467
+#: panel/panel-preferences-dialog.c:1544
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Ако премахнете този елемент от панела, той ще бъде изгубен окончателно."
 
-#: panel/panel-preferences-dialog.c:1471
+#: panel/panel-preferences-dialog.c:1548
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Сигурни ли сте, че искате да премахнете тези %d елемента?"
 
-#: panel/panel-preferences-dialog.c:1473
+#: panel/panel-preferences-dialog.c:1550
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Ако ги премахнете от панела, те ще бъдат изгубени безвъзвратно."
 
@@ -1934,18 +1936,28 @@ msgstr "Разширяване"
 msgid "Adds a separator or space between panel items"
 msgstr "Добавя разделител или разстояние между елементите в панела"
 
-#: plugins/showdesktop/showdesktop.c:255
+#: plugins/showdesktop/showdesktop.c:321
 msgid "Restore the minimized windows"
 msgstr "Възстановяване на минимизираните прозорци"
 
-#: plugins/showdesktop/showdesktop.c:257
+#: plugins/showdesktop/showdesktop.c:323
 msgid "Minimize all open windows and show the desktop"
 msgstr "Минимизиране на всички прозорци и показване на работният плот"
 
-#: plugins/showdesktop/showdesktop.c:260
+#: plugins/showdesktop/showdesktop.c:326
+#: plugins/showdesktop/showdesktop-dialog.glade:18
 #: plugins/showdesktop/showdesktop.desktop.in.in:4
 msgid "Show Desktop"
 msgstr "Показване на работният плот"
+
+#: plugins/showdesktop/showdesktop-dialog.glade:92
+msgid "_Show on mouse hover"
+msgstr "Показване при _задържане на показалеца на мишката"
+
+#: plugins/showdesktop/showdesktop-dialog.glade:113
+#: plugins/systray/sn-dialog.glade:300
+msgid "Behavior"
+msgstr "Поведение"
 
 #: plugins/showdesktop/showdesktop.desktop.in.in:5
 msgid "Hide all windows and show the desktop"
@@ -2006,10 +2018,6 @@ msgstr "Квадратни елементи"
 #: plugins/systray/sn-dialog.glade:282
 msgid "Item buttons will take a square when it's possible"
 msgstr "Бутоните на елементите ще станат квадратни, когато това е възможно"
-
-#: plugins/systray/sn-dialog.glade:300
-msgid "Behavior"
-msgstr "Поведение"
 
 #: plugins/systray/sn-dialog.glade:386 plugins/systray/sn-dialog.glade:618
 msgid "Item"
