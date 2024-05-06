@@ -449,7 +449,7 @@ show_desktop_plugin_enter_timeout (gpointer data)
 {
   ShowDesktopPlugin *plugin = (ShowDesktopPlugin *) data;
 
-  if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button))
+  if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button)))
     {
       plugin->shown_on_hover = TRUE;
       xfw_screen_set_show_desktop (plugin->xfw_screen, TRUE);
