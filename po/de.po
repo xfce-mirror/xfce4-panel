@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-05-01 00:47+0200\n"
+"POT-Creation-Date: 2024-05-06 12:49+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Andreas Eitel <github-aneitel@online.de>, 2018-2020,2022-2024\n"
 "Language-Team: German (http://app.transifex.com/xfce/xfce4-panel/language/de/)\n"
@@ -54,13 +54,13 @@ msgstr "Leiste einrichten"
 
 #. I18N: %s is the name of the plugin
 #: libxfce4panel/xfce-panel-plugin.c:1094
-#: panel/panel-preferences-dialog.c:1465
+#: panel/panel-preferences-dialog.c:1542
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Soll »%s« wirklich entfernt werden?"
 
 #: libxfce4panel/xfce-panel-plugin.c:1099
-#: panel/panel-preferences-dialog.c:1480
+#: panel/panel-preferences-dialog.c:1557
 msgid "Remove Item"
 msgstr "Element entfernen"
 
@@ -70,7 +70,7 @@ msgid ""
 msgstr "Wenn Sie das Element aus der Leiste entfernen, geht auch seine Konfiguration verloren."
 
 #: libxfce4panel/xfce-panel-plugin.c:1103 panel/panel-dialogs.c:157
-#: panel/panel-preferences-dialog.c:1483
+#: panel/panel-preferences-dialog.c:1560
 #: plugins/applicationsmenu/applicationsmenu.c:606
 #: plugins/directorymenu/directorymenu.c:466
 #: plugins/directorymenu/directorymenu.c:938
@@ -79,9 +79,9 @@ msgstr "_Abbrechen"
 
 #. remove
 #: libxfce4panel/xfce-panel-plugin.c:1104
-#: libxfce4panel/xfce-panel-plugin.c:1271 panel/panel-application.c:363
-#: panel/panel-plugin-external.c:421 panel/panel-preferences-dialog.c:1082
-#: panel/panel-preferences-dialog.c:1483
+#: libxfce4panel/xfce-panel-plugin.c:1271 panel/panel-application.c:362
+#: panel/panel-plugin-external.c:421 panel/panel-preferences-dialog.c:1081
+#: panel/panel-preferences-dialog.c:1560
 #: panel/panel-preferences-dialog.glade:1240
 #: plugins/launcher/launcher-dialog.c:841
 msgid "_Remove"
@@ -131,6 +131,7 @@ msgstr "_Abmelden"
 #: plugins/launcher/launcher-dialog.glade:398
 #: plugins/pager/pager-dialog.glade:81
 #: plugins/separator/separator-dialog.glade:69
+#: plugins/showdesktop/showdesktop-dialog.glade:49
 #: plugins/tasklist/tasklist-dialog.glade:93
 #: plugins/windowmenu/windowmenu-dialog.glade:63
 msgid "_Help"
@@ -255,22 +256,22 @@ msgstr "Möchten Sie die Leiste starten? Ist das der Fall, so stellen Sie bitte 
 msgid "Execute"
 msgstr "Ausführen"
 
-#: panel/panel-application.c:215
+#: panel/panel-application.c:214
 msgid "Failed to launch the migration application"
 msgstr "Anwendung zum Migrieren der Leisteneinstellungen konnte nicht gestartet werden"
 
-#: panel/panel-application.c:352
+#: panel/panel-application.c:351
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr "Die Erweiterung \"%s\" konnte nicht geladen werden, möchten Sie es aus der xfce4-panel Konfiguration entfernen?"
 
-#: panel/panel-application.c:354
+#: panel/panel-application.c:353
 msgid "Plugin loading failure"
 msgstr "Laden der Erweiterung fehlgeschlagen"
 
-#: panel/panel-application.c:357
+#: panel/panel-application.c:356
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -280,42 +281,42 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr "Diese Erweiterung ist in der aktuellen xfce4-Panel-Konfiguration enthalten, konnte aber nicht geladen werden, wahrscheinlich aufgrund eines Installationsproblems. Wenn Sie wissen, was Sie tun, können Sie es dauerhaft entfernen. Andernfalls sollten Sie das Programm beenden und eine Sicherungskopie der aktuellen Konfiguration mit %s erstellen, bevor Sie Ihre Installation überprüfen und versuchen, xfce4-panel erneut zu starten."
 
-#: panel/panel-application.c:363
+#: panel/panel-application.c:362
 msgid "_Quit"
 msgstr "_Beenden"
 
-#: panel/panel-application.c:1051
+#: panel/panel-application.c:1034
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Das erzeugt eine neue Startererweiterung auf der Leiste und fügt die abgelegten Dateien als Menüpunkte hinzu."
 
-#: panel/panel-application.c:1054
+#: panel/panel-application.c:1037
 msgid "Create _Launcher"
 msgstr "Starter an_legen"
 
-#: panel/panel-application.c:1055
+#: panel/panel-application.c:1038
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Neuen Starter aus %d Schreibtischdatei erstellen"
 msgstr[1] "Neuen Starter aus %d Schreibtischdateien erstellen"
 
-#: panel/panel-application.c:1816
+#: panel/panel-application.c:1799
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Sie haben X ohne Sitzungsverwaltung gestartet. Wenn Sie jetzt »Beenden« klicken, beendet das den X-Server."
 
-#: panel/panel-application.c:1819
+#: panel/panel-application.c:1802
 msgid "Quit"
 msgstr "Beenden"
 
-#: panel/panel-application.c:1819
+#: panel/panel-application.c:1802
 msgid "Are you sure you want to quit the panel?"
 msgstr "Soll die Leiste wirklich beendet werden?"
 
-#: panel/panel-application.c:1827
+#: panel/panel-application.c:1810
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Befehl »%s« konnte nicht ausgeführt werden"
@@ -358,7 +359,7 @@ msgstr "_Hinzufügen"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Bitte eine Leiste für das neue Element auswählen:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1027
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1026
 #, c-format
 msgid "Panel %d"
 msgstr "Leiste %d"
@@ -386,6 +387,7 @@ msgstr "Neue Elemente hinzufügen"
 #: plugins/launcher/launcher-dialog.glade:414
 #: plugins/pager/pager-dialog.glade:97
 #: plugins/separator/separator-dialog.glade:54
+#: plugins/showdesktop/showdesktop-dialog.glade:34
 #: plugins/tasklist/tasklist-dialog.glade:77
 #: plugins/windowmenu/windowmenu-dialog.glade:48
 msgid "_Close"
@@ -420,39 +422,39 @@ msgstr "Das Element wurde in den letzten %d Sekunden mehr als einmal neu gestart
 msgid "_Execute"
 msgstr "_Ausführen"
 
-#: panel/panel-preferences-dialog.c:580
+#: panel/panel-preferences-dialog.c:579
 msgid "Automatic"
 msgstr "Automatisch"
 
-#: panel/panel-preferences-dialog.c:589
+#: panel/panel-preferences-dialog.c:588
 msgid "Primary"
 msgstr "Haupt"
 
 #. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:608
+#: panel/panel-preferences-dialog.c:607
 #, c-format
 msgid "Monitor %d"
 msgstr "Bildschirm %d"
 
-#: panel/panel-preferences-dialog.c:1081
+#: panel/panel-preferences-dialog.c:1080
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Die Einstellungen der Leiste und der Erweiterungen werden dauerhaft entfernt."
 
-#: panel/panel-preferences-dialog.c:1090
+#: panel/panel-preferences-dialog.c:1089
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Soll die Leiste %d wirklich entfernt werden?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1305
+#: panel/panel-preferences-dialog.c:1380
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1310
+#: panel/panel-preferences-dialog.c:1385
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -461,21 +463,21 @@ msgstr "Interner Name: %s-%d\nProzesskennung: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1322
+#: panel/panel-preferences-dialog.c:1397
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Interner Name: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1467
+#: panel/panel-preferences-dialog.c:1544
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Wenn Sie dieses Element von der Leiste entfernen, ist es dauerhaft verloren."
 
-#: panel/panel-preferences-dialog.c:1471
+#: panel/panel-preferences-dialog.c:1548
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Sind Sie sicher, dass Sie diese %d Elemente entfernen möchten?"
 
-#: panel/panel-preferences-dialog.c:1473
+#: panel/panel-preferences-dialog.c:1550
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Wenn Sie sie von der Leiste entfernen, gehen sie endgültig verloren."
 
@@ -1939,18 +1941,28 @@ msgstr "_Ausdehnen"
 msgid "Adds a separator or space between panel items"
 msgstr "Fügt ein Trennelement oder Platz zwischen Leistenelementen ein"
 
-#: plugins/showdesktop/showdesktop.c:255
+#: plugins/showdesktop/showdesktop.c:321
 msgid "Restore the minimized windows"
 msgstr "Versteckte Fenster wiederherstellen"
 
-#: plugins/showdesktop/showdesktop.c:257
+#: plugins/showdesktop/showdesktop.c:323
 msgid "Minimize all open windows and show the desktop"
 msgstr "Geöffnete Fenster verstecken und Schreibtisch anzeigen"
 
-#: plugins/showdesktop/showdesktop.c:260
+#: plugins/showdesktop/showdesktop.c:326
+#: plugins/showdesktop/showdesktop-dialog.glade:18
 #: plugins/showdesktop/showdesktop.desktop.in.in:4
 msgid "Show Desktop"
 msgstr "Schreibtisch anzeigen"
+
+#: plugins/showdesktop/showdesktop-dialog.glade:92
+msgid "_Show on mouse hover"
+msgstr "Beim Mau_sover anzeigen"
+
+#: plugins/showdesktop/showdesktop-dialog.glade:113
+#: plugins/systray/sn-dialog.glade:300
+msgid "Behavior"
+msgstr "Verhalten"
 
 #: plugins/showdesktop/showdesktop.desktop.in.in:5
 msgid "Hide all windows and show the desktop"
@@ -2011,10 +2023,6 @@ msgstr "_Quadratische Elemente"
 #: plugins/systray/sn-dialog.glade:282
 msgid "Item buttons will take a square when it's possible"
 msgstr "Element-Buttons werden quadratisch dargestellt, wenn möglich"
-
-#: plugins/systray/sn-dialog.glade:300
-msgid "Behavior"
-msgstr "Verhalten"
 
 #: plugins/systray/sn-dialog.glade:386 plugins/systray/sn-dialog.glade:618
 msgid "Item"
