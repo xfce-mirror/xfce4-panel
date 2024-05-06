@@ -201,7 +201,7 @@ show_desktop_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   xfce_panel_plugin_menu_show_configure (panel_plugin);
 
-  panel_properties_bind (xfconf_channel_get ("xfce4-panel"), G_OBJECT (panel_plugin),
+  panel_properties_bind (NULL, G_OBJECT (panel_plugin),
                          xfce_panel_plugin_get_property_base (panel_plugin),
                          properties, FALSE);
 }
