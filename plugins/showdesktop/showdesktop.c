@@ -94,6 +94,7 @@ static void
 showdesktop_configure (XfcePanelPlugin *panel_plugin);
 
 
+
 struct _ShowDesktopPlugin
 {
   XfcePanelPlugin __parent__;
@@ -141,7 +142,13 @@ show_desktop_plugin_class_init (ShowDesktopPluginClass *klass)
 
   gobject_class->set_property = show_desktop_plugin_set_property;
   gobject_class->get_property = show_desktop_plugin_get_property;
-  g_object_class_install_property (gobject_class, PROP_SHOW_ON_HOVER, g_param_spec_boolean ("show-on-hover", NULL, NULL, FALSE, G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_CONSTRUCT));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_SHOW_ON_HOVER,
+                                   g_param_spec_boolean ("show-on-hover",
+                                                         NULL, NULL,
+                                                         FALSE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_CONSTRUCT));
 }
 
 
@@ -198,9 +205,7 @@ show_desktop_plugin_construct (XfcePanelPlugin *panel_plugin)
   };
 
   xfce_panel_plugin_set_small (panel_plugin, TRUE);
-
   xfce_panel_plugin_menu_show_configure (panel_plugin);
-
   panel_properties_bind (NULL, G_OBJECT (panel_plugin),
                          xfce_panel_plugin_get_property_base (panel_plugin),
                          properties, FALSE);
@@ -444,14 +449,13 @@ show_desktop_plugin_enter_timeout (gpointer data)
 {
   ShowDesktopPlugin *plugin = (ShowDesktopPlugin *) data;
 
-  gboolean active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button));
-
-  plugin->enter_timeout_id = 0;
-  if (!active)
+  if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button))
     {
       plugin->shown_on_hover = TRUE;
       xfw_screen_set_show_desktop (plugin->xfw_screen, TRUE);
     }
+
+  plugin->enter_timeout_id = 0;
 
   return FALSE;
 }
@@ -475,6 +479,7 @@ show_desktop_plugin_enter (GtkToggleButton *widget,
                                                 show_desktop_plugin_enter_timeout,
                                                 plugin);
     }
+
   return FALSE;
 }
 
@@ -493,11 +498,13 @@ show_desktop_plugin_leave (GtkToggleButton *button,
       plugin->shown_on_hover = FALSE;
       xfw_screen_set_show_desktop (plugin->xfw_screen, FALSE);
     }
+
   if (plugin->enter_timeout_id != 0)
     {
       g_source_remove (plugin->enter_timeout_id);
       plugin->enter_timeout_id = 0;
     }
+
   return FALSE;
 }
 
