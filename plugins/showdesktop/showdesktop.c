@@ -108,7 +108,7 @@ struct _ShowDesktopPlugin
   /* mouse hover timeout */
   gboolean show_on_hover;
   guint enter_timeout_id;
-  gboolean is_preview;
+  gboolean shown_on_hover;
 
   /* the xfw screen */
   XfwScreen *xfw_screen;
@@ -305,7 +305,7 @@ show_desktop_plugin_toggled (GtkToggleButton *button,
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
   panel_return_if_fail (XFW_IS_SCREEN (plugin->xfw_screen));
 
-  plugin->is_preview = FALSE;
+  plugin->shown_on_hover = FALSE;
 
   /* toggle the desktop */
   active = gtk_toggle_button_get_active (button);
@@ -375,7 +375,7 @@ show_desktop_plugin_show_desktop_changed (XfwScreen *xfw_screen,
   panel_return_if_fail (XFW_IS_SCREEN (xfw_screen));
   panel_return_if_fail (plugin->xfw_screen == xfw_screen);
 
-  if (plugin->is_preview)
+  if (plugin->shown_on_hover)
     return;
 
   /* update button to user action */
@@ -449,7 +449,7 @@ show_desktop_plugin_enter_timeout (gpointer data)
   plugin->enter_timeout_id = 0;
   if (!active)
     {
-      plugin->is_preview = TRUE;
+      plugin->shown_on_hover = TRUE;
       xfw_screen_set_show_desktop (plugin->xfw_screen, TRUE);
     }
 
@@ -488,9 +488,9 @@ show_desktop_plugin_leave (GtkToggleButton *button,
   if (!plugin->show_on_hover)
     return FALSE;
 
-  if (plugin->is_preview)
+  if (plugin->shown_on_hover)
     {
-      plugin->is_preview = FALSE;
+      plugin->shown_on_hover = FALSE;
       xfw_screen_set_show_desktop (plugin->xfw_screen, FALSE);
     }
   if (plugin->enter_timeout_id != 0)
