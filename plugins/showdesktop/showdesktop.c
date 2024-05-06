@@ -74,11 +74,11 @@ show_desktop_plugin_drag_motion (GtkWidget *widget,
                                  ShowDesktopPlugin *plugin);
 static gboolean
 show_desktop_plugin_enter (GtkToggleButton *widget,
-                           GdkEventCrossing event,
+                           GdkEventCrossing *event,
                            ShowDesktopPlugin *plugin);
 static gboolean
 show_desktop_plugin_leave (GtkToggleButton *widget,
-                           GdkEventCrossing event,
+                           GdkEventCrossing *event,
                            ShowDesktopPlugin *plugin);
 static void
 show_desktop_plugin_set_property (GObject *object,
@@ -460,7 +460,7 @@ show_desktop_plugin_enter_timeout (gpointer data)
 
 static gboolean
 show_desktop_plugin_enter (GtkToggleButton *widget,
-                           GdkEventCrossing event,
+                           GdkEventCrossing *event,
                            ShowDesktopPlugin *plugin)
 {
   gboolean active;
@@ -482,7 +482,7 @@ show_desktop_plugin_enter (GtkToggleButton *widget,
 
 static gboolean
 show_desktop_plugin_leave (GtkToggleButton *button,
-                           GdkEventCrossing event,
+                           GdkEventCrossing *event,
                            ShowDesktopPlugin *plugin)
 {
   if (!plugin->shown_on_hover)
