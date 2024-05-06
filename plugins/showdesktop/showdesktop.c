@@ -467,13 +467,11 @@ show_desktop_plugin_enter (GtkToggleButton *widget,
                            GdkEventCrossing *event,
                            ShowDesktopPlugin *plugin)
 {
-  gboolean active;
-
   if (!plugin->show_on_hover)
     return FALSE;
 
-  active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button));
-  if (plugin->enter_timeout_id == 0 && !active)
+  if (plugin->enter_timeout_id == 0
+      && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button)))
     {
       plugin->enter_timeout_id = g_timeout_add (HOVER_ACTIVATE_TIMEOUT,
                                                 show_desktop_plugin_enter_timeout,
