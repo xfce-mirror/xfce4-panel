@@ -106,7 +106,7 @@ struct _ShowDesktopPlugin
   guint drag_timeout;
 
   /* mouse hover timeout */
-  gboolean shown_on_hover;
+  gboolean show_on_hover;
   guint enter_timeout_id;
   gboolean is_preview;
 
@@ -465,7 +465,7 @@ show_desktop_plugin_enter (GtkToggleButton *widget,
 {
   gboolean active;
 
-  if (!plugin->shown_on_hover)
+  if (!plugin->show_on_hover)
     return FALSE;
 
   active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button));
@@ -485,7 +485,7 @@ show_desktop_plugin_leave (GtkToggleButton *button,
                            GdkEventCrossing *event,
                            ShowDesktopPlugin *plugin)
 {
-  if (!plugin->shown_on_hover)
+  if (!plugin->show_on_hover)
     return FALSE;
 
   if (plugin->is_preview)
@@ -514,7 +514,7 @@ show_desktop_plugin_set_property (GObject *object,
   switch (prop_id)
     {
     case PROP_SHOW_ON_HOVER:
-      plugin->shown_on_hover = g_value_get_boolean (value);
+      plugin->show_on_hover = g_value_get_boolean (value);
       break;
 
     default:
@@ -536,7 +536,7 @@ show_desktop_plugin_get_property (GObject *object,
   switch (prop_id)
     {
     case PROP_SHOW_ON_HOVER:
-      g_value_set_boolean (value, plugin->shown_on_hover);
+      g_value_set_boolean (value, plugin->show_on_hover);
       break;
 
     default:
