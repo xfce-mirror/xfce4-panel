@@ -94,6 +94,7 @@ static void
 showdesktop_configure (XfcePanelPlugin *panel_plugin);
 
 
+
 struct _ShowDesktopPlugin
 {
   XfcePanelPlugin __parent__;
@@ -141,7 +142,13 @@ show_desktop_plugin_class_init (ShowDesktopPluginClass *klass)
 
   gobject_class->set_property = show_desktop_plugin_set_property;
   gobject_class->get_property = show_desktop_plugin_get_property;
-  g_object_class_install_property (gobject_class, PROP_SHOW_ON_HOVER, g_param_spec_boolean ("show-on-hover", NULL, NULL, FALSE, G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_CONSTRUCT));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_SHOW_ON_HOVER,
+                                   g_param_spec_boolean ("show-on-hover",
+                                                         NULL, NULL,
+                                                         FALSE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_CONSTRUCT));
 }
 
 
