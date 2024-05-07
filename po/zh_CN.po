@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-05-01 00:47+0200\n"
+"POT-Creation-Date: 2024-05-06 12:49+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: 玉堂白鹤 <yjwork@qq.com>, 2015,2017-2020,2022-2024\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/xfce/xfce4-panel/language/zh_CN/)\n"
@@ -60,13 +60,13 @@ msgstr "自定义面板"
 
 #. I18N: %s is the name of the plugin
 #: libxfce4panel/xfce-panel-plugin.c:1094
-#: panel/panel-preferences-dialog.c:1465
+#: panel/panel-preferences-dialog.c:1542
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "您确定要移除 “%s” 吗？"
 
 #: libxfce4panel/xfce-panel-plugin.c:1099
-#: panel/panel-preferences-dialog.c:1480
+#: panel/panel-preferences-dialog.c:1557
 msgid "Remove Item"
 msgstr "移除项目"
 
@@ -76,7 +76,7 @@ msgid ""
 msgstr "从面板上移除此项目，其配置也将丢失。"
 
 #: libxfce4panel/xfce-panel-plugin.c:1103 panel/panel-dialogs.c:157
-#: panel/panel-preferences-dialog.c:1483
+#: panel/panel-preferences-dialog.c:1560
 #: plugins/applicationsmenu/applicationsmenu.c:606
 #: plugins/directorymenu/directorymenu.c:466
 #: plugins/directorymenu/directorymenu.c:938
@@ -85,9 +85,9 @@ msgstr "取消(_C)"
 
 #. remove
 #: libxfce4panel/xfce-panel-plugin.c:1104
-#: libxfce4panel/xfce-panel-plugin.c:1271 panel/panel-application.c:363
-#: panel/panel-plugin-external.c:421 panel/panel-preferences-dialog.c:1082
-#: panel/panel-preferences-dialog.c:1483
+#: libxfce4panel/xfce-panel-plugin.c:1271 panel/panel-application.c:362
+#: panel/panel-plugin-external.c:421 panel/panel-preferences-dialog.c:1081
+#: panel/panel-preferences-dialog.c:1560
 #: panel/panel-preferences-dialog.glade:1240
 #: plugins/launcher/launcher-dialog.c:841
 msgid "_Remove"
@@ -137,6 +137,7 @@ msgstr "注销(_O)"
 #: plugins/launcher/launcher-dialog.glade:398
 #: plugins/pager/pager-dialog.glade:81
 #: plugins/separator/separator-dialog.glade:69
+#: plugins/showdesktop/showdesktop-dialog.glade:49
 #: plugins/tasklist/tasklist-dialog.glade:93
 #: plugins/windowmenu/windowmenu-dialog.glade:63
 msgid "_Help"
@@ -261,22 +262,22 @@ msgstr "您要启动面板吗？如果是，您一定要在注销时保存会话
 msgid "Execute"
 msgstr "执行"
 
-#: panel/panel-application.c:215
+#: panel/panel-application.c:214
 msgid "Failed to launch the migration application"
 msgstr "无法启动迁移应用程序"
 
-#: panel/panel-application.c:352
+#: panel/panel-application.c:351
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr "无法加载插件 \"%s\"，是否要将其从 xfce4 面板配置中删除？"
 
-#: panel/panel-application.c:354
+#: panel/panel-application.c:353
 msgid "Plugin loading failure"
 msgstr "插件加载失败"
 
-#: panel/panel-application.c:357
+#: panel/panel-application.c:356
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -286,41 +287,41 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr "该插件位于当前的 xfce4 面板配置中，但可能由于安装问题而无法加载。如果您知道自己在做什么，您可以永久删除它，否则您最好退出并使用%s备份当前配置，然后检查您的安装并尝试再次启动 xfce4 面板。"
 
-#: panel/panel-application.c:363
+#: panel/panel-application.c:362
 msgid "_Quit"
 msgstr "退出(_Q)"
 
-#: panel/panel-application.c:1051
+#: panel/panel-application.c:1034
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "这样会在面板上创建一个新的启动器插件并将放入的文件插入为菜单项目。"
 
-#: panel/panel-application.c:1054
+#: panel/panel-application.c:1037
 msgid "Create _Launcher"
 msgstr "创建启动器(_L)"
 
-#: panel/panel-application.c:1055
+#: panel/panel-application.c:1038
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "从 %d 个桌面文件创建新的启动器"
 
-#: panel/panel-application.c:1816
+#: panel/panel-application.c:1799
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "您启动了不带会话管理器的 X。点击退出将关闭此 X 服务器。"
 
-#: panel/panel-application.c:1819
+#: panel/panel-application.c:1802
 msgid "Quit"
 msgstr "退出"
 
-#: panel/panel-application.c:1819
+#: panel/panel-application.c:1802
 msgid "Are you sure you want to quit the panel?"
 msgstr "您确定要退出面板吗？"
 
-#: panel/panel-application.c:1827
+#: panel/panel-application.c:1810
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "无法执行命令 “%s”"
@@ -363,7 +364,7 @@ msgstr "添加(_A)"
 msgid "Please choose a panel for the new plugin:"
 msgstr "请为新插件挑选面板："
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1027
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1026
 #, c-format
 msgid "Panel %d"
 msgstr "面板 %d"
@@ -391,6 +392,7 @@ msgstr "添加新项目"
 #: plugins/launcher/launcher-dialog.glade:414
 #: plugins/pager/pager-dialog.glade:97
 #: plugins/separator/separator-dialog.glade:54
+#: plugins/showdesktop/showdesktop-dialog.glade:34
 #: plugins/tasklist/tasklist-dialog.glade:77
 #: plugins/windowmenu/windowmenu-dialog.glade:48
 msgid "_Close"
@@ -425,39 +427,39 @@ msgstr "此插件在过去的 %d 秒内重启了不止一次。如果您点击�
 msgid "_Execute"
 msgstr "执行(_E)"
 
-#: panel/panel-preferences-dialog.c:580
+#: panel/panel-preferences-dialog.c:579
 msgid "Automatic"
 msgstr "自动"
 
-#: panel/panel-preferences-dialog.c:589
+#: panel/panel-preferences-dialog.c:588
 msgid "Primary"
 msgstr "主要的"
 
 #. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:608
+#: panel/panel-preferences-dialog.c:607
 #, c-format
 msgid "Monitor %d"
 msgstr "显示器 %d"
 
-#: panel/panel-preferences-dialog.c:1081
+#: panel/panel-preferences-dialog.c:1080
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "将永远移除面板和插件配置"
 
-#: panel/panel-preferences-dialog.c:1090
+#: panel/panel-preferences-dialog.c:1089
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "您确定要移除面板 %d 吗？"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1305
+#: panel/panel-preferences-dialog.c:1380
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(外部)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1310
+#: panel/panel-preferences-dialog.c:1385
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -466,21 +468,21 @@ msgstr "内部名称：%s-%d\nPID：%d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1322
+#: panel/panel-preferences-dialog.c:1397
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "内部名称：%s-%d"
 
-#: panel/panel-preferences-dialog.c:1467
+#: panel/panel-preferences-dialog.c:1544
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "如果您从面板上移除此项目，它将永远消失。"
 
-#: panel/panel-preferences-dialog.c:1471
+#: panel/panel-preferences-dialog.c:1548
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "您确定要移除这%d个项目吗？"
 
-#: panel/panel-preferences-dialog.c:1473
+#: panel/panel-preferences-dialog.c:1550
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "如果将它们从面板中移除，它们将永久丢失。"
 
@@ -1944,18 +1946,28 @@ msgstr "扩展(_E)"
 msgid "Adds a separator or space between panel items"
 msgstr "在面板项目间添加一个分隔符或空格"
 
-#: plugins/showdesktop/showdesktop.c:255
+#: plugins/showdesktop/showdesktop.c:321
 msgid "Restore the minimized windows"
 msgstr "恢复已最小化的窗口"
 
-#: plugins/showdesktop/showdesktop.c:257
+#: plugins/showdesktop/showdesktop.c:323
 msgid "Minimize all open windows and show the desktop"
 msgstr "最小化所有打开的窗口并显示桌面"
 
-#: plugins/showdesktop/showdesktop.c:260
+#: plugins/showdesktop/showdesktop.c:326
+#: plugins/showdesktop/showdesktop-dialog.glade:18
 #: plugins/showdesktop/showdesktop.desktop.in.in:4
 msgid "Show Desktop"
 msgstr "显示桌面"
+
+#: plugins/showdesktop/showdesktop-dialog.glade:92
+msgid "_Show on mouse hover"
+msgstr "鼠标悬停时显示(_S)"
+
+#: plugins/showdesktop/showdesktop-dialog.glade:113
+#: plugins/systray/sn-dialog.glade:300
+msgid "Behavior"
+msgstr "行为"
 
 #: plugins/showdesktop/showdesktop.desktop.in.in:5
 msgid "Hide all windows and show the desktop"
@@ -2016,10 +2028,6 @@ msgstr "方形项目(_S)"
 #: plugins/systray/sn-dialog.glade:282
 msgid "Item buttons will take a square when it's possible"
 msgstr "项目按钮将在可能的情况下以正方形显示"
-
-#: plugins/systray/sn-dialog.glade:300
-msgid "Behavior"
-msgstr "行为"
 
 #: plugins/systray/sn-dialog.glade:386 plugins/systray/sn-dialog.glade:618
 msgid "Item"
