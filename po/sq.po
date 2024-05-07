@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-05-01 00:47+0200\n"
+"POT-Creation-Date: 2024-05-06 12:49+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2007,2020,2022-2024\n"
 "Language-Team: Albanian (http://app.transifex.com/xfce/xfce4-panel/language/sq/)\n"
@@ -47,13 +47,13 @@ msgstr "Përshtateni panelin"
 
 #. I18N: %s is the name of the plugin
 #: libxfce4panel/xfce-panel-plugin.c:1094
-#: panel/panel-preferences-dialog.c:1465
+#: panel/panel-preferences-dialog.c:1542
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Jeni i sigurt se doni të hiqet \"%s\"?"
 
 #: libxfce4panel/xfce-panel-plugin.c:1099
-#: panel/panel-preferences-dialog.c:1480
+#: panel/panel-preferences-dialog.c:1557
 msgid "Remove Item"
 msgstr "Hiqe Objektin"
 
@@ -63,7 +63,7 @@ msgid ""
 msgstr "Heqja e elementit prej panelit do të thotë se do të humbë edhe formësimi për të."
 
 #: libxfce4panel/xfce-panel-plugin.c:1103 panel/panel-dialogs.c:157
-#: panel/panel-preferences-dialog.c:1483
+#: panel/panel-preferences-dialog.c:1560
 #: plugins/applicationsmenu/applicationsmenu.c:606
 #: plugins/directorymenu/directorymenu.c:466
 #: plugins/directorymenu/directorymenu.c:938
@@ -72,9 +72,9 @@ msgstr "_Anuloje"
 
 #. remove
 #: libxfce4panel/xfce-panel-plugin.c:1104
-#: libxfce4panel/xfce-panel-plugin.c:1271 panel/panel-application.c:363
-#: panel/panel-plugin-external.c:421 panel/panel-preferences-dialog.c:1082
-#: panel/panel-preferences-dialog.c:1483
+#: libxfce4panel/xfce-panel-plugin.c:1271 panel/panel-application.c:362
+#: panel/panel-plugin-external.c:421 panel/panel-preferences-dialog.c:1081
+#: panel/panel-preferences-dialog.c:1560
 #: panel/panel-preferences-dialog.glade:1240
 #: plugins/launcher/launcher-dialog.c:841
 msgid "_Remove"
@@ -124,6 +124,7 @@ msgstr "_Dilni"
 #: plugins/launcher/launcher-dialog.glade:398
 #: plugins/pager/pager-dialog.glade:81
 #: plugins/separator/separator-dialog.glade:69
+#: plugins/showdesktop/showdesktop-dialog.glade:49
 #: plugins/tasklist/tasklist-dialog.glade:93
 #: plugins/windowmenu/windowmenu-dialog.glade:63
 msgid "_Help"
@@ -248,22 +249,22 @@ msgstr "Doni ta nisni panelin? Nëse po, sigurohuni se e ruani sesionin gjatë d
 msgid "Execute"
 msgstr "Përmbushe"
 
-#: panel/panel-application.c:215
+#: panel/panel-application.c:214
 msgid "Failed to launch the migration application"
 msgstr "S’u arrit të niset aplikacioni i migrimit"
 
-#: panel/panel-application.c:352
+#: panel/panel-application.c:351
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr "Shtojca “%s” s’u ngarkua dot, doni të hiqet prej formësimit të xfce4-panel-it?"
 
-#: panel/panel-application.c:354
+#: panel/panel-application.c:353
 msgid "Plugin loading failure"
 msgstr "Dështim ngarkimi shtojce"
 
-#: panel/panel-application.c:357
+#: panel/panel-application.c:356
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -273,42 +274,42 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr "Kjo shtojcë gjendet në formësimin e tanishëm për xfce4-panel-in, por s’u ngarkua dot, sipas gjasash për shkak të një problemi instalimi. Nëse e dini se ç’bëni, mund ta hiqni fare, përndryshe, më mirë ta mbyllni programin dhe të bëni një kopjeruajtje të formësimit të tanishëm, duke përdorur %s, para se të kontrolloni instalimin tuaj dhe të riprovoni të nisni xfce4-panel-in."
 
-#: panel/panel-application.c:363
+#: panel/panel-application.c:362
 msgid "_Quit"
 msgstr "_Dil"
 
-#: panel/panel-application.c:1051
+#: panel/panel-application.c:1034
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Kjo do të krijojë te paneli një shtojcë të ri nisësi dhe i fut si elementë menuje kartelat e hedhura brenda saj."
 
-#: panel/panel-application.c:1054
+#: panel/panel-application.c:1037
 msgid "Create _Launcher"
 msgstr "Krijo _Nisës"
 
-#: panel/panel-application.c:1055
+#: panel/panel-application.c:1038
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Krijo nisës të ri prej %d kartele desktop"
 msgstr[1] "Krijo nisës të ri prej %d kartelash desktop"
 
-#: panel/panel-application.c:1816
+#: panel/panel-application.c:1799
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "E keni nisur X-in pa përgjegjës sesionesh. Klikimi mbi Dilni do ta mbyllë shërbyesin X."
 
-#: panel/panel-application.c:1819
+#: panel/panel-application.c:1802
 msgid "Quit"
 msgstr "Dilni"
 
-#: panel/panel-application.c:1819
+#: panel/panel-application.c:1802
 msgid "Are you sure you want to quit the panel?"
 msgstr "Jeni i sigurt se doni të dilet nga paneli?"
 
-#: panel/panel-application.c:1827
+#: panel/panel-application.c:1810
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "S’u arrit të përmbushet urdhri \"%s\""
@@ -351,7 +352,7 @@ msgstr "_Shto"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Ju lutemi, zgjidhni një panel për shtojcën e re:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1027
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1026
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -379,6 +380,7 @@ msgstr "Shto Elemente të Rinj"
 #: plugins/launcher/launcher-dialog.glade:414
 #: plugins/pager/pager-dialog.glade:97
 #: plugins/separator/separator-dialog.glade:54
+#: plugins/showdesktop/showdesktop-dialog.glade:34
 #: plugins/tasklist/tasklist-dialog.glade:77
 #: plugins/windowmenu/windowmenu-dialog.glade:48
 msgid "_Close"
@@ -413,39 +415,39 @@ msgstr "Shtojca u nis më shumë se një herë në %d sekondat e fundit. Nëse s
 msgid "_Execute"
 msgstr "_Kryeje"
 
-#: panel/panel-preferences-dialog.c:580
+#: panel/panel-preferences-dialog.c:579
 msgid "Automatic"
 msgstr "Automatike"
 
-#: panel/panel-preferences-dialog.c:589
+#: panel/panel-preferences-dialog.c:588
 msgid "Primary"
 msgstr "Parësor"
 
 #. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:608
+#: panel/panel-preferences-dialog.c:607
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: panel/panel-preferences-dialog.c:1081
+#: panel/panel-preferences-dialog.c:1080
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Formësimet e panelit dhe shtojcës do të hiqen përgjithmonë"
 
-#: panel/panel-preferences-dialog.c:1090
+#: panel/panel-preferences-dialog.c:1089
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Jeni i sigurt se doni të hiqet paneli %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1305
+#: panel/panel-preferences-dialog.c:1380
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(e jashtme)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1310
+#: panel/panel-preferences-dialog.c:1385
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -454,21 +456,21 @@ msgstr "Emër i brendshëm: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1322
+#: panel/panel-preferences-dialog.c:1397
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Emër i brendshëm: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1467
+#: panel/panel-preferences-dialog.c:1544
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Nëse e hiqni elementin prej panelit, humbet përgjithnjë."
 
-#: panel/panel-preferences-dialog.c:1471
+#: panel/panel-preferences-dialog.c:1548
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Jeni i sigurt se doni të hiqen këta %d objekte?"
 
-#: panel/panel-preferences-dialog.c:1473
+#: panel/panel-preferences-dialog.c:1550
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Nëse i hiqni nga paneli, humbasin përgjithnjë."
 
@@ -1932,18 +1934,28 @@ msgstr "_Zgjeroje"
 msgid "Adds a separator or space between panel items"
 msgstr "Shton një ndarës ose hapësirë mes elementësh paneli"
 
-#: plugins/showdesktop/showdesktop.c:255
+#: plugins/showdesktop/showdesktop.c:321
 msgid "Restore the minimized windows"
 msgstr "Rikthe dritaret e minimizuara"
 
-#: plugins/showdesktop/showdesktop.c:257
+#: plugins/showdesktop/showdesktop.c:323
 msgid "Minimize all open windows and show the desktop"
 msgstr "Minimizo krejt dritaret e hapura dhe shfaq desktopin"
 
-#: plugins/showdesktop/showdesktop.c:260
+#: plugins/showdesktop/showdesktop.c:326
+#: plugins/showdesktop/showdesktop-dialog.glade:18
 #: plugins/showdesktop/showdesktop.desktop.in.in:4
 msgid "Show Desktop"
 msgstr "Shfaq Desktop"
+
+#: plugins/showdesktop/showdesktop-dialog.glade:92
+msgid "_Show on mouse hover"
+msgstr "_Shfaqe kur i kalohet kursori përsipër"
+
+#: plugins/showdesktop/showdesktop-dialog.glade:113
+#: plugins/systray/sn-dialog.glade:300
+msgid "Behavior"
+msgstr "Sjellje"
 
 #: plugins/showdesktop/showdesktop.desktop.in.in:5
 msgid "Hide all windows and show the desktop"
@@ -2004,10 +2016,6 @@ msgstr "Vëru _katror elementëve"
 #: plugins/systray/sn-dialog.glade:282
 msgid "Item buttons will take a square when it's possible"
 msgstr "Butonave të elementëve do t’u vihet një katror, kur është e mundshme"
-
-#: plugins/systray/sn-dialog.glade:300
-msgid "Behavior"
-msgstr "Sjellje"
 
 #: plugins/systray/sn-dialog.glade:386 plugins/systray/sn-dialog.glade:618
 msgid "Item"
