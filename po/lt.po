@@ -5,17 +5,17 @@
 # 
 # Translators:
 # Xfce Bot <transifex@xfce.org>, 2022
-# Moo, 2023
+# Moo, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-14 00:47+0100\n"
+"POT-Creation-Date: 2023-05-30 00:48+0200\n"
 "PO-Revision-Date: 2022-12-22 11:35+0000\n"
-"Last-Translator: Moo, 2023\n"
-"Language-Team: Lithuanian (https://www.transifex.com/xfce/teams/16840/lt/)\n"
+"Last-Translator: Moo, 2024\n"
+"Language-Team: Lithuanian (https://app.transifex.com/xfce/teams/16840/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,14 +24,14 @@ msgstr ""
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Create Launcher on the panel"
-msgstr "Sukurti leistuką ant skydelio"
+msgstr "Sukurti paleidyklę ant skydelio"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop "
 "file"
 msgstr ""
-"Pridėti naują leistuką į skydelį, remiantis šio darbalaukio failo "
+"Pridėti naują paleidyklę į skydelį, remiantis šio darbalaukio failo "
 "informacija"
 
 #: ../panel-preferences.desktop.in.h:1
@@ -274,24 +274,24 @@ msgstr "Nepavyko paleisti atkėlimo programos"
 
 #: ../panel/panel-application.c:1012
 msgid "Create _Launcher"
-msgstr "Sukurti _leistuką"
+msgstr "Sukurti pa_leidyklę"
 
 #: ../panel/panel-application.c:1013
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr ""
-"Tai skydelyje sukurs naują leistuko įskiepį ir įterps atvilktus failus kaip "
-"meniu elementus."
+"Tai skydelyje sukurs naują paleidyklės įskiepį ir įterps atvilktus failus "
+"kaip meniu elementus."
 
 #: ../panel/panel-application.c:1015
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
-msgstr[0] "Sukurti naują leistuką iš %d darbalaukio failo"
-msgstr[1] "Sukurti naujus leistukus iš %d darbalaukio failų"
-msgstr[2] "Sukurti naujus leistukus iš %d darbalaukio failų"
-msgstr[3] "Sukurti naujus leistukus iš %d darbalaukio failų"
+msgstr[0] "Sukurti naują paleidyklę iš %d darbalaukio failo"
+msgstr[1] "Sukurti naujas paleidykles iš %d darbalaukio failų"
+msgstr[2] "Sukurti naujas paleidykles iš %d darbalaukio failų"
+msgstr[3] "Sukurti naujas paleidykles iš %d darbalaukio failo"
 
 #: ../panel/panel-application.c:1772
 msgid "Quit"
@@ -1083,7 +1083,7 @@ msgstr "_Gerai"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:650
-#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2491
+#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2487
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Nepavyko paleisti komandos „%s”."
@@ -1775,7 +1775,7 @@ msgstr "Atverti paleidimo meniu"
 msgid "Unnamed Item"
 msgstr "Nepavadintas elementas"
 
-#: ../plugins/launcher/launcher.c:1797
+#: ../plugins/launcher/launcher.c:1801
 msgid "No items"
 msgstr "Nėra elementų"
 
@@ -1850,12 +1850,12 @@ msgstr "Nauja _nuoroda"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "Add one or more existing items to the launcher"
-msgstr "Į leistuką pridėti vieną ar kelis esamus elementus"
+msgstr "Į paleidyklę pridėti vieną ar kelis esamus elementus"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
-msgstr "Leistukas"
+msgstr "Paleidyklė"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "Delete the currently selected item"
@@ -1904,7 +1904,7 @@ msgstr "Išplėstiniai"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr "Programų leistukas su pasirinktiniu meniu"
+msgstr "Programų paleidyklė su pasirinktiniu meniu"
 
 #: ../plugins/pager/pager.c:665 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
@@ -2234,36 +2234,36 @@ msgstr "Rodyti langus iš _visų ekranų"
 msgid "Show only _minimized windows"
 msgstr "Rodyti tik _suskleistus langus"
 
-#: ../plugins/tasklist/tasklist-widget.c:3119
+#: ../plugins/tasklist/tasklist-widget.c:3131
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Nepavyko paleisti naujo „%s“ egzemplioriaus"
 
-#: ../plugins/tasklist/tasklist-widget.c:3123
+#: ../plugins/tasklist/tasklist-widget.c:3135
 msgid "Error"
 msgstr "Klaida"
 
-#: ../plugins/tasklist/tasklist-widget.c:3152
+#: ../plugins/tasklist/tasklist-widget.c:3164
 msgid "Launch New Instance"
 msgstr "Paleisti naują egzempliorių"
 
-#: ../plugins/tasklist/tasklist-widget.c:3899
+#: ../plugins/tasklist/tasklist-widget.c:3911
 msgid "Mi_nimize All"
 msgstr "_Suskleisti visus"
 
-#: ../plugins/tasklist/tasklist-widget.c:3906
+#: ../plugins/tasklist/tasklist-widget.c:3918
 msgid "Un_minimize All"
 msgstr "Grąži_nti visus iš suskleidimo"
 
-#: ../plugins/tasklist/tasklist-widget.c:3913
+#: ../plugins/tasklist/tasklist-widget.c:3925
 msgid "Ma_ximize All"
 msgstr "Iš_skleisti visus"
 
-#: ../plugins/tasklist/tasklist-widget.c:3920
+#: ../plugins/tasklist/tasklist-widget.c:3932
 msgid "_Unmaximize All"
 msgstr "Grąži_nti visus iš išskleidimo"
 
-#: ../plugins/tasklist/tasklist-widget.c:3931
+#: ../plugins/tasklist/tasklist-widget.c:3943
 msgid "_Close All"
 msgstr "_Užverti visus"
 
