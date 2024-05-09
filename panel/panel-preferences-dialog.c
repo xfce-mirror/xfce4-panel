@@ -362,9 +362,9 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   /* connect the output changed signal */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "output-name");
   panel_return_if_fail (GTK_IS_COMBO_BOX (object));
-  dialog->output_changed_handler_id
-    = g_signal_connect (G_OBJECT (object), "changed",
-                        G_CALLBACK (panel_preferences_dialog_output_changed), dialog);
+  dialog->output_changed_handler_id =
+    g_signal_connect (G_OBJECT (object), "changed",
+                      G_CALLBACK (panel_preferences_dialog_output_changed), dialog);
 
   /* connect the autohide behavior changed signal */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "autohide-behavior");
@@ -538,9 +538,9 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   panel_preferences_dialog_bindings_add (dialog, "border-width", "value", 0);
 
   /* watch image changes from the panel */
-  dialog->bg_image_notify_handler_id
-    = g_signal_connect_swapped (G_OBJECT (dialog->active), "notify::background-image",
-                                G_CALLBACK (panel_preferences_dialog_bg_image_notified), dialog);
+  dialog->bg_image_notify_handler_id =
+    g_signal_connect_swapped (G_OBJECT (dialog->active), "notify::background-image",
+                              G_CALLBACK (panel_preferences_dialog_bg_image_notified), dialog);
   panel_preferences_dialog_bg_image_notified (dialog);
 
   /* manage panel length */
@@ -966,9 +966,9 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox *combobox,
   if (G_LIKELY (dialog->active != NULL))
     {
       itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
-      dialog->items_changed_handler_id
-        = g_signal_connect (G_OBJECT (itembar), "changed",
-                            G_CALLBACK (panel_preferences_dialog_item_store_rebuild), dialog);
+      dialog->items_changed_handler_id =
+        g_signal_connect (G_OBJECT (itembar), "changed",
+                          G_CALLBACK (panel_preferences_dialog_item_store_rebuild), dialog);
 
       /* rebind the dialog bindings */
       panel_preferences_dialog_bindings_update (dialog);

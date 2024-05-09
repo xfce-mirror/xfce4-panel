@@ -4859,8 +4859,8 @@ xfce_tasklist_update_monitor_geometry (XfceTasklist *tasklist)
 {
   if (tasklist->update_monitor_geometry_id == 0)
     {
-      tasklist->update_monitor_geometry_id
-        = gdk_threads_add_idle_full (G_PRIORITY_LOW, xfce_tasklist_update_monitor_geometry_idle,
-                                     tasklist, xfce_tasklist_update_monitor_geometry_idle_destroy);
+      tasklist->update_monitor_geometry_id =
+        gdk_threads_add_idle_full (G_PRIORITY_LOW, xfce_tasklist_update_monitor_geometry_idle,
+                                   tasklist, xfce_tasklist_update_monitor_geometry_idle_destroy);
     }
 }

@@ -1278,9 +1278,9 @@ panel_application_load (PanelApplication *application,
       g_strfreev (atom_names);
 
       /* setup timeout to check for a window manager */
-      application->wait_for_wm_timeout_id
-        = gdk_threads_add_timeout_full (G_PRIORITY_DEFAULT_IDLE, 50, panel_application_wait_for_window_manager,
-                                        wfwm, panel_application_wait_for_window_manager_destroyed);
+      application->wait_for_wm_timeout_id =
+        gdk_threads_add_timeout_full (G_PRIORITY_DEFAULT_IDLE, 50, panel_application_wait_for_window_manager,
+                                      wfwm, panel_application_wait_for_window_manager_destroyed);
     }
   else
     {
