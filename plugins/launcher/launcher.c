@@ -392,9 +392,9 @@ launcher_plugin_init (LauncherPlugin *plugin)
                           G_CALLBACK (launcher_plugin_button_draw), plugin);
 
   /* invalidate tooltip icon when needed */
-  plugin->theme_change_id
-    = g_signal_connect_swapped (gtk_icon_theme_get_default (), "changed",
-                                G_CALLBACK (launcher_plugin_tooltip_icon_invalidate), plugin->button);
+  plugin->theme_change_id =
+    g_signal_connect_swapped (gtk_icon_theme_get_default (), "changed",
+                              G_CALLBACK (launcher_plugin_tooltip_icon_invalidate), plugin->button);
   g_signal_connect (plugin, "notify::scale-factor",
                     G_CALLBACK (launcher_plugin_icon_invalidate), NULL);
   g_signal_connect (plugin, "notify::scale-factor",
