@@ -630,10 +630,10 @@ xfce_arrow_button_set_blinking (XfceArrowButton *button,
           gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NORMAL);
 
           /* start blinking timeout */
-          button->priv->blinking_timeout_id
-            = gdk_threads_add_timeout_full (G_PRIORITY_DEFAULT_IDLE, 500,
-                                            xfce_arrow_button_blinking_timeout, button,
-                                            xfce_arrow_button_blinking_timeout_destroyed);
+          button->priv->blinking_timeout_id =
+            gdk_threads_add_timeout_full (G_PRIORITY_DEFAULT_IDLE, 500,
+                                          xfce_arrow_button_blinking_timeout, button,
+                                          xfce_arrow_button_blinking_timeout_destroyed);
           xfce_arrow_button_blinking_timeout (button);
         }
     }

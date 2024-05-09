@@ -3330,8 +3330,8 @@ panel_window_opacity_enter_queue (PanelWindow *window,
   if (enter)
     panel_base_window_opacity_enter (PANEL_BASE_WINDOW (window), TRUE);
   else
-    window->opacity_timeout_id
-      = g_timeout_add (DEFAULT_POPDOWN_DELAY, panel_window_opacity_enter_timeout, window);
+    window->opacity_timeout_id =
+      g_timeout_add (DEFAULT_POPDOWN_DELAY, panel_window_opacity_enter_timeout, window);
 }
 
 

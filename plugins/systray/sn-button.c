@@ -267,9 +267,9 @@ sn_button_button_press (GtkWidget *widget,
     {
       if (button->menu != NULL && sn_container_has_children (button->menu))
         {
-          button->menu_deactivate_handler
-            = g_signal_connect_swapped (G_OBJECT (button->menu), "deactivate",
-                                        G_CALLBACK (sn_button_menu_deactivate), button);
+          button->menu_deactivate_handler =
+            g_signal_connect_swapped (G_OBJECT (button->menu), "deactivate",
+                                      G_CALLBACK (sn_button_menu_deactivate), button);
 
           xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (button->plugin),
                                         GTK_MENU (button->menu), widget, (GdkEvent *) event);
@@ -465,9 +465,9 @@ sn_button_menu_changed (GtkWidget *widget,
     {
       gtk_menu_attach_to_widget (GTK_MENU (button->menu), GTK_WIDGET (button), NULL);
       /* restore menu position to its corner if size was changed */
-      button->menu_size_allocate_handler
-        = g_signal_connect_swapped (button->menu, "size-allocate",
-                                    G_CALLBACK (sn_button_menu_size_changed), button);
+      button->menu_size_allocate_handler =
+        g_signal_connect_swapped (button->menu, "size-allocate",
+                                  G_CALLBACK (sn_button_menu_size_changed), button);
     }
 }
 
