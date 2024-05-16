@@ -1,3 +1,79 @@
+4.19.4 (2024-05-16)
+======
+- clang-format: Break after assignment operator
+- Add missing glade file to POTFILES.in
+- showdesktop: Add the ability to show the desktop on mouse hover
+- prefs-dialog: Improve launcher display in item list
+- systray: Avoid GTK warning about pixbuf not loadable
+- panel: Leave a harmless xfconf warning
+- clang-format: Insert a newline at end of file if missing
+- libxfce4panel: Add line break in generate code for clang-format
+- prefs-dialog: Bind Del key to remove button
+- prefs-dialog: Scroll to selection when item view is reloaded
+- prefs-dialog: Allow several items to be removed at once
+- prefs-dialog: Update widgets on GdkDisplay::monitor-(added|removed)
+- systray: Always scale icons
+- systray: Reduce icon size in prefs dialog
+- systray: Improve app data search in prefs dialog
+- systray: Avoid duplicate code around legacy items
+- systray: Use panel_properties_bind()
+- panel: Save settings in finalize()
+- tasklist: Fix min button length before overflow menu
+- tasklist: Fix default button length
+- build: Add missing math.h include
+- Apply .clang-format file
+- Clean up and sort includes
+- Various preliminary cleanup
+- clang-format: Add file
+- windowmenu: Remove a duplicate check
+- Remove dead code
+- tasklist: Sanitize XfwApplication management
+- Minor spelling/grammar corrections in comments
+- POTFILES.in: Remove untranslated file
+- panel: Define constants common to window and itembar
+- windowmenu: Clamp style properties
+- tasklist: Allow -1 for menu-max-width-chars
+- panel: Restrict admissible values of style properties
+- tasklist: Fix use of min-button-length
+- tasklist: Fix use of max-button-length
+- tasklist: Clamp style properties
+- actions: Add some fallback methods if there is no session proxy
+- actions: Ask xfce4-session to switch user if possible
+- actions: Fix wrong parameter allow_save for Shutdown and Restart
+- actions: Let xfce4-session manage its settings internally
+- actions: Rework D-Bus proxy management
+- Reintroduce panel_properties_get_channel()
+- Ask user what to do in case of plugin loading failure
+- Check for xfconf init in main.c and exit on failure
+- Fix wrong string comparison
+- prefs-dialog: Do not close when opening panel-profiles
+- Revert "prefs-dialog: Launch xfce4-panel-profiles with '--from-panel'"
+- Try to derive plugin dirs from XDG_DATA_DIRS
+- Remove NDEBUG compiler switchs
+- launcher: Delete unprotected X11 code at runtime
+- actions: Populate plugin earlier
+- systray: Avoid floating point exception
+- panel: Use gdk_cursor_new_from_name() to be more cross-platform
+- wayland: pager: Add missing runtime check
+- panel: Implement per window CSS customization
+- panel: Add border width option
+- itembar: Let GtkContainer handle border width
+- panel: Fix -Wmaybe-uninitialized warning
+- panel: Return silently when n_monitors == 0
+- tasklist: Do not call xfw_window_x11_get_xid() on Wayland
+- Translation Updates:
+  Albanian, Amharic, Arabic, Armenian (Armenia), Asturian, Basque,
+  Belarusian, Bengali, Bulgarian, Catalan, Chinese (China), Chinese
+  (Hong Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch,
+  Eastern Armenian, English (Australia), English (United Kingdom),
+  Estonian, Finnish, French, Galician, Georgian, German, Greek, Hebrew,
+  Hungarian, Icelandic, Indonesian, Interlingue, Italian, Japanese,
+  Kazakh, Korean, Lithuanian, Malay, Norwegian Bokmål, Norwegian
+  Nynorsk, Occitan (post 1500), Panjabi (Punjabi), Polish, Portuguese,
+  Portuguese (Brazil), Romanian, Russian, Serbian, Sinhala, Slovak,
+  Slovenian, Spanish, Swedish, Thai, Turkish, Ukrainian, Uyghur,
+  Vietnamese
+
 4.19.3 (2024-02-29)
 ======
 - Update copyright year
