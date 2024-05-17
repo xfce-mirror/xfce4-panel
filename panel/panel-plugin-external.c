@@ -20,6 +20,10 @@
 #include "config.h"
 #endif
 
+#ifdef HAVE_SYS_WAIT_H
+#include <sys/wait.h>
+#endif
+
 #include "panel/panel-dialogs.h"
 #include "panel/panel-module.h"
 #include "panel/panel-plugin-external.h"
