@@ -32,7 +32,9 @@
 #include <gio/gio.h>
 #include <libxfce4util/libxfce4util.h>
 
-
+#ifdef HAVE_SYS_WAIT_H
+#include <sys/wait.h>
+#endif
 
 #define get_instance_private(instance) \
   ((PanelPluginExternalPrivate *) panel_plugin_external_get_instance_private (PANEL_PLUGIN_EXTERNAL (instance)))
