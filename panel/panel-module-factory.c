@@ -208,8 +208,8 @@ panel_module_factory_load_modules (PanelModuleFactory *factory)
   if (g_str_has_prefix (DATADIR, PREFIX) && g_str_has_prefix (LIBDIR, PREFIX))
     {
       gsize build_prefix_len = strlen (PREFIX);
-      const gchar *datadir_suffix = DATADIR + build_prefix_len;
-      const gchar *libdir_suffix = LIBDIR + build_prefix_len;
+      const gchar *datadir_suffix = (const gchar *) DATADIR + build_prefix_len;
+      const gchar *libdir_suffix = (const gchar *) LIBDIR + build_prefix_len;
 
       if (g_str_has_prefix (datadir_suffix, G_DIR_SEPARATOR_S) && g_str_has_prefix (libdir_suffix, G_DIR_SEPARATOR_S))
         {
