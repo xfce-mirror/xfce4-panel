@@ -27,6 +27,10 @@
 #include "common/panel-debug.h"
 #include "common/panel-private.h"
 
+#ifdef HAVE_MATH_H
+#include <math.h>
+#endif
+
 #define SPACING (2)
 #define OFFSCREEN (-9999)
 

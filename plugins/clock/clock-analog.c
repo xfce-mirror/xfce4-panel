@@ -27,6 +27,10 @@
 
 #include <cairo/cairo.h>
 
+#ifdef HAVE_MATH_H
+#include <math.h>
+#endif
+
 #define CLOCK_SCALE 0.08
 #define TICKS_TO_RADIANS(x) (G_PI - (G_PI / 30.0) * (x))
 #define HOURS_TO_RADIANS(x, y) (G_PI - (G_PI / 6.0) * (((x) > 12 ? (x) - 12 : (x)) + (y) / 60.0))

@@ -29,6 +29,10 @@
 #include "libxfce4panel/libxfce4panel.h"
 #include "libxfce4panel/xfce-panel-plugin-provider.h"
 
+#ifdef HAVE_MATH_H
+#include <math.h>
+#endif
+
 #define IS_HORIZONTAL(itembar) ((itembar)->mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 #define HIGHLIGHT_SIZE 2
 

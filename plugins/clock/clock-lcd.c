@@ -27,6 +27,10 @@
 
 #include <cairo/cairo.h>
 
+#ifdef HAVE_MATH_H
+#include <math.h>
+#endif
+
 #define RELATIVE_SPACE (0.10)
 #define RELATIVE_DIGIT (5 * RELATIVE_SPACE)
 #define RELATIVE_DOTS (3 * RELATIVE_SPACE)

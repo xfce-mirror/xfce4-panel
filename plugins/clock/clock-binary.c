@@ -27,7 +27,9 @@
 
 #include <cairo/cairo.h>
 
-
+#ifdef HAVE_MATH_H
+#include <math.h>
+#endif
 
 static void
 xfce_clock_binary_set_property (GObject *object,

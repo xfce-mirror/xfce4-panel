@@ -39,6 +39,10 @@
 #include <gtk/gtk.h>
 #include <libxfce4ui/libxfce4ui.h>
 
+#ifdef HAVE_MATH_H
+#include <math.h>
+#endif
+
 /* TRANSLATORS: adjust this accordingly for your locale format */
 #define DEFAULT_TOOLTIP_FORMAT NC_ ("Date", "%A %d %B %Y")
 

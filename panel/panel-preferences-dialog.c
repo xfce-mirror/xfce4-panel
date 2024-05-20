@@ -37,7 +37,9 @@
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4util/libxfce4util.h>
 
-
+#ifdef HAVE_MATH_H
+#include<math.h>
+#endif
 
 static void
 panel_preferences_dialog_finalize (GObject *object);

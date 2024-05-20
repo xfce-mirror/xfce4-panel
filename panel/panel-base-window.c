@@ -35,7 +35,9 @@
 #define gtk_layer_is_supported() FALSE
 #endif
 
-
+#ifdef HAVE_MATH_H
+#include <math.h>
+#endif
 
 #define PANEL_BASE_CSS ".xfce4-panel.background { border-style: solid; }" \
                        ".xfce4-panel.background button { background: transparent; padding: 0; }" \
