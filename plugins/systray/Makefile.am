@@ -52,6 +52,7 @@ endif
 
 libsystray_la_CFLAGS = \
 	$(LIBX11_CFLAGS) \
+	$(GIO_UNIX_CFLAGS) \
 	$(GTK_CFLAGS) \
 	$(XFCONF_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
@@ -70,6 +71,7 @@ libsystray_la_LIBADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la \
 	$(LIBX11_LIBS) \
+	$(GIO_UNIX_LIBS) \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
