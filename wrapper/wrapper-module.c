@@ -20,7 +20,7 @@
 #include "config.h"
 #endif
 
-#include "wrapper/wrapper-module.h"
+#include "wrapper-module.h"
 
 #include "common/panel-private.h"
 

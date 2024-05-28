@@ -1,0 +1,22 @@
+---
+BasedOnStyle: InheritParentConfig
+
+IncludeCategories:
+  - Regex: '"config\.h"'
+    Priority: -1
+    CaseSensitive: true
+  - Regex: '"libxfce4panel-alias\.h"'
+    Priority: 0
+    SortPriority: 2
+    CaseSensitive: true
+  - Regex: '"[^/]*"'
+    Priority: 0
+    SortPriority: 1
+    CaseSensitive: true
+  - Regex: '".*"'
+    Priority: 3
+    CaseSensitive: true
+  - Regex: '<.*>'
+    Priority: 4
+    CaseSensitive: false
+...

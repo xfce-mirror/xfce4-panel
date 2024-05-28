@@ -20,14 +20,14 @@
 #include "config.h"
 #endif
 
-#include "panel/panel-application.h"
-#include "panel/panel-dialogs.h"
-#include "panel/panel-item-dialog.h"
-#include "panel/panel-itembar.h"
-#include "panel/panel-module.h"
-#include "panel/panel-plugin-external.h"
-#include "panel/panel-preferences-dialog-ui.h"
-#include "panel/panel-preferences-dialog.h"
+#include "panel-application.h"
+#include "panel-dialogs.h"
+#include "panel-item-dialog.h"
+#include "panel-itembar.h"
+#include "panel-module.h"
+#include "panel-plugin-external.h"
+#include "panel-preferences-dialog-ui.h"
+#include "panel-preferences-dialog.h"
 
 #include "common/panel-private.h"
 #include "common/panel-utils.h"
@@ -38,7 +38,7 @@
 #include <libxfce4util/libxfce4util.h>
 
 #ifdef HAVE_MATH_H
-#include<math.h>
+#include <math.h>
 #endif
 
 static void

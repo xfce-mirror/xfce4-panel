@@ -19,7 +19,7 @@
 #ifndef __PANEL_DBUS_SERVICE_H__
 #define __PANEL_DBUS_SERVICE_H__
 
-#include "panel/panel-gdbus-exported-service.h"
+#include "panel-gdbus-exported-service.h"
 
 #include <glib.h>
 

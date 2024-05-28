@@ -20,8 +20,8 @@
 #include "config.h"
 #endif
 
-#include "panel/panel-dialogs.h"
-#include "panel/panel-tic-tac-toe.h"
+#include "panel-dialogs.h"
+#include "panel-tic-tac-toe.h"
 
 #include "common/panel-private.h"
 #include "libxfce4panel/libxfce4panel.h"

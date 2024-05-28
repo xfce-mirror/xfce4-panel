@@ -20,9 +20,9 @@
 #include "config.h"
 #endif
 
-#include "panel/panel-base-window.h"
-#include "panel/panel-plugin-external.h"
-#include "panel/panel-window.h"
+#include "panel-base-window.h"
+#include "panel-plugin-external.h"
+#include "panel-window.h"
 
 #include "common/panel-debug.h"
 #include "common/panel-private.h"

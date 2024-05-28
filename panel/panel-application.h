@@ -19,7 +19,7 @@
 #ifndef __PANEL_APPLICATION_H__
 #define __PANEL_APPLICATION_H__
 
-#include "panel/panel-window.h"
+#include "panel-window.h"
 
 #include <gtk/gtk.h>
 

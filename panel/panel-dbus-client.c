@@ -21,9 +21,9 @@
 #include "config.h"
 #endif
 
-#include "panel/panel-dbus-client.h"
-#include "panel/panel-dbus-service.h"
-#include "panel/panel-gdbus-exported-service.h"
+#include "panel-dbus-client.h"
+#include "panel-dbus-service.h"
+#include "panel-gdbus-exported-service.h"
 
 #include "common/panel-dbus.h"
 #include "common/panel-private.h"

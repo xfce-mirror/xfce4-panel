@@ -20,7 +20,7 @@
 #include "config.h"
 #endif
 
-#include "migrate/migrate-config.h"
+#include "migrate-config.h"
 
 #include "common/panel-private.h"
 

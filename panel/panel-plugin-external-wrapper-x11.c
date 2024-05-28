@@ -20,7 +20,7 @@
 #include "config.h"
 #endif
 
-#include "panel/panel-plugin-external-wrapper-x11.h"
+#include "panel-plugin-external-wrapper-x11.h"
 
 #include "common/panel-private.h"
 

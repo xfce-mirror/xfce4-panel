@@ -19,7 +19,7 @@
 #ifndef __PANEL_PLUGIN_EXTERNAL_H__
 #define __PANEL_PLUGIN_EXTERNAL_H__
 
-#include "panel/panel-window.h"
+#include "panel-window.h"
 
 #include "libxfce4panel/libxfce4panel.h"
 #include "libxfce4panel/xfce-panel-plugin-provider.h"

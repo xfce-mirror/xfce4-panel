@@ -20,8 +20,8 @@
 #include "config.h"
 #endif
 
-#include "migrate/migrate-config.h"
-#include "migrate/migrate-default.h"
+#include "migrate-config.h"
+#include "migrate-default.h"
 
 #include "common/panel-private.h"
 #include "libxfce4panel/xfce-panel-macros.h"

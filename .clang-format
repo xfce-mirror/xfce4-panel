@@ -10,6 +10,21 @@ BinPackParameters: false
 BreakBeforeBinaryOperators: NonAssignment
 ColumnLimit: 0
 ContinuationIndentWidth: 2
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '"config\.h"'
+    Priority: -1
+    CaseSensitive: true
+  - Regex: '"[^/]*"'
+    Priority: 0
+    SortPriority: 1
+    CaseSensitive: true
+  - Regex: '".*"'
+    Priority: 2
+    CaseSensitive: true
+  - Regex: '<.*>'
+    Priority: 3
+    CaseSensitive: true
 IndentGotoLabels: false
 InsertNewlineAtEOF: true
 KeepEmptyLinesAtTheStartOfBlocks: false

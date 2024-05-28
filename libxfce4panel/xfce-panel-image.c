@@ -20,11 +20,10 @@
 #include "config.h"
 #endif
 
-#include "libxfce4panel/xfce-panel-convenience.h"
-#include "libxfce4panel/xfce-panel-image.h"
-#include "libxfce4panel/xfce-panel-macros.h"
-
-#include "libxfce4panel/libxfce4panel-alias.h"
+#include "xfce-panel-convenience.h"
+#include "xfce-panel-image.h"
+#include "xfce-panel-macros.h"
+#include "libxfce4panel-alias.h"
 
 #include "common/panel-private.h"
 
@@ -859,4 +858,4 @@ xfce_panel_image_clear (XfcePanelImage *image)
 
 
 #define __XFCE_PANEL_IMAGE_C__
-#include "libxfce4panel/libxfce4panel-aliasdef.c"
+#include "libxfce4panel-aliasdef.c"
