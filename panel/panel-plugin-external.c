@@ -20,9 +20,9 @@
 #include "config.h"
 #endif
 
-#include "panel/panel-dialogs.h"
-#include "panel/panel-module.h"
-#include "panel/panel-plugin-external.h"
+#include "panel-dialogs.h"
+#include "panel-module.h"
+#include "panel-plugin-external.h"
 
 #include "common/panel-dbus.h"
 #include "common/panel-debug.h"

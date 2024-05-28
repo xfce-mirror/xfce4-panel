@@ -20,8 +20,8 @@
 #include "config.h"
 #endif
 
-#include "panel/panel-plugin-external-wrapper-exported.h"
-#include "panel/panel-plugin-external-wrapper-wayland.h"
+#include "panel-plugin-external-wrapper-exported.h"
+#include "panel-plugin-external-wrapper-wayland.h"
 
 #include "common/panel-dbus.h"
 #include "common/panel-debug.h"

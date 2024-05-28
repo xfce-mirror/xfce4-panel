@@ -20,7 +20,7 @@
 #define __PANEL_ITEM_DIALOG_H__
 
 /* includes libxfce4ui and the definition of glib_autoptr_clear_XfceTitledDialog */
-#include "panel/panel-tic-tac-toe.h"
+#include "panel-tic-tac-toe.h"
 
 G_BEGIN_DECLS
 

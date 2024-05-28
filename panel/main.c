@@ -21,10 +21,10 @@
 #include "config.h"
 #endif
 
-#include "panel/panel-application.h"
-#include "panel/panel-dbus-client.h"
-#include "panel/panel-dbus-service.h"
-#include "panel/panel-preferences-dialog.h"
+#include "panel-application.h"
+#include "panel-dbus-client.h"
+#include "panel-dbus-service.h"
+#include "panel-preferences-dialog.h"
 
 #include "common/panel-dbus.h"
 #include "common/panel-debug.h"

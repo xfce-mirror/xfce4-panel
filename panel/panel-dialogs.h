@@ -19,7 +19,7 @@
 #ifndef __PANEL_DIALOGS_H__
 #define __PANEL_DIALOGS_H__
 
-#include "panel/panel-application.h"
+#include "panel-application.h"
 
 G_BEGIN_DECLS
 

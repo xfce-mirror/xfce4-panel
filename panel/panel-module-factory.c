@@ -20,7 +20,7 @@
 #include "config.h"
 #endif
 
-#include "panel/panel-module-factory.h"
+#include "panel-module-factory.h"
 
 #include "common/panel-debug.h"
 #include "common/panel-private.h"

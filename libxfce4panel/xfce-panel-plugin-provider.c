@@ -20,10 +20,10 @@
 #include "config.h"
 #endif
 
-#include "libxfce4panel/xfce-panel-macros.h"
-#include "libxfce4panel/xfce-panel-plugin-provider.h"
+#include "xfce-panel-macros.h"
+#include "xfce-panel-plugin-provider.h"
 
-#include "libxfce4panel/libxfce4panel-alias.h"
+#include "libxfce4panel-alias.h"
 
 #include "common/panel-private.h"
 
@@ -264,4 +264,4 @@ xfce_panel_plugin_provider_ask_remove (XfcePanelPluginProvider *provider)
 
 
 #define __XFCE_PANEL_PLUGIN_PROVIDER_C__
-#include "libxfce4panel/libxfce4panel-aliasdef.c"
+#include "libxfce4panel-aliasdef.c"

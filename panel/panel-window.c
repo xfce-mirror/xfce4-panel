@@ -20,13 +20,13 @@
 #include "config.h"
 #endif
 
-#include "panel/panel-dbus-service.h"
-#include "panel/panel-dialogs.h"
-#include "panel/panel-item-dialog.h"
-#include "panel/panel-plugin-external.h"
-#include "panel/panel-preferences-dialog.h"
-#include "panel/panel-tic-tac-toe.h"
-#include "panel/panel-window.h"
+#include "panel-dbus-service.h"
+#include "panel-dialogs.h"
+#include "panel-item-dialog.h"
+#include "panel-plugin-external.h"
+#include "panel-preferences-dialog.h"
+#include "panel-tic-tac-toe.h"
+#include "panel-window.h"
 
 #include "common/panel-debug.h"
 #include "common/panel-private.h"

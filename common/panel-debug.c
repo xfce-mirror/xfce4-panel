@@ -20,8 +20,8 @@
 #include "config.h"
 #endif
 
-#include "common/panel-debug.h"
-#include "common/panel-private.h"
+#include "panel-debug.h"
+#include "panel-private.h"
 
 
 

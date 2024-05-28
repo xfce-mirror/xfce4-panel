@@ -23,7 +23,7 @@
 #include "config.h"
 #endif
 
-#include "panel/panel-tic-tac-toe.h"
+#include "panel-tic-tac-toe.h"
 
 #include "common/panel-private.h"
 

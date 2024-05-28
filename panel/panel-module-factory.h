@@ -19,7 +19,7 @@
 #ifndef __PANEL_MODULE_FACTORY_H__
 #define __PANEL_MODULE_FACTORY_H__
 
-#include "panel/panel-module.h"
+#include "panel-module.h"
 
 #include "libxfce4panel/libxfce4panel.h"
 #include "libxfce4panel/xfce-panel-plugin-provider.h"

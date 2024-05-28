@@ -20,8 +20,8 @@
 #include "config.h"
 #endif
 
-#include "common/panel-private.h"
-#include "common/panel-utils.h"
+#include "panel-private.h"
+#include "panel-utils.h"
 
 #include <libxfce4ui/libxfce4ui.h>
 

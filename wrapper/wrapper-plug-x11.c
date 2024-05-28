@@ -20,8 +20,8 @@
 #include "config.h"
 #endif
 
-#include "wrapper/wrapper-plug-x11.h"
-#include "wrapper/wrapper-plug.h"
+#include "wrapper-plug-x11.h"
+#include "wrapper-plug.h"
 
 #include "common/panel-private.h"
 

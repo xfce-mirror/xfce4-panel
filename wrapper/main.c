@@ -21,8 +21,8 @@
 #include "config.h"
 #endif
 
-#include "wrapper/wrapper-module.h"
-#include "wrapper/wrapper-plug.h"
+#include "wrapper-module.h"
+#include "wrapper-plug.h"
 
 #include "common/panel-dbus.h"
 #include "common/panel-private.h"

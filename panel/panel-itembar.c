@@ -21,8 +21,8 @@
 #include "config.h"
 #endif
 
-#include "panel/panel-itembar.h"
-#include "panel/panel-window.h"
+#include "panel-itembar.h"
+#include "panel-window.h"
 
 #include "common/panel-debug.h"
 #include "common/panel-private.h"

@@ -19,7 +19,7 @@
 #ifndef __PANEL_WINDOW_H__
 #define __PANEL_WINDOW_H__
 
-#include "panel/panel-base-window.h"
+#include "panel-base-window.h"
 
 #include "common/panel-xfconf.h"
 

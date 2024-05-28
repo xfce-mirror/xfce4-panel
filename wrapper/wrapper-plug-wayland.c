@@ -20,9 +20,9 @@
 #include "config.h"
 #endif
 
-#include "wrapper/wrapper-external-exported.h"
-#include "wrapper/wrapper-plug-wayland.h"
-#include "wrapper/wrapper-plug.h"
+#include "wrapper-external-exported.h"
+#include "wrapper-plug-wayland.h"
+#include "wrapper-plug.h"
 
 #include "common/panel-dbus.h"
 #include "common/panel-private.h"

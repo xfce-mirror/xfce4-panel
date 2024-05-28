@@ -20,9 +20,9 @@
 #include "config.h"
 #endif
 
-#include "libxfce4panel/libxfce4panel-config.h"
+#include "libxfce4panel-config.h"
 
-#include "libxfce4panel/libxfce4panel-alias.h"
+#include "libxfce4panel-alias.h"
 
 
 
@@ -142,4 +142,4 @@ libxfce4panel_check_version (guint required_major,
 
 
 #define __LIBXFCE4PANEL_CONFIG_C__
-#include "libxfce4panel/libxfce4panel-aliasdef.c"
+#include "libxfce4panel-aliasdef.c"

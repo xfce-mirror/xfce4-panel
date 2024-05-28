@@ -20,14 +20,14 @@
 #include "config.h"
 #endif
 
-#include "wrapper/wrapper-plug.h"
+#include "wrapper-plug.h"
 
 #ifdef ENABLE_X11
-#include "wrapper/wrapper-plug-x11.h"
+#include "wrapper-plug-x11.h"
 #endif
 
 #ifdef HAVE_GTK_LAYER_SHELL
-#include "wrapper/wrapper-plug-wayland.h"
+#include "wrapper-plug-wayland.h"
 #include <gtk-layer-shell/gtk-layer-shell.h>
 #endif
 

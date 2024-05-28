@@ -19,8 +19,8 @@
 #ifndef __PANEL_PLUGIN_EXTERNAL_WRAPPER_H__
 #define __PANEL_PLUGIN_EXTERNAL_WRAPPER_H__
 
-#include "panel/panel-module.h"
-#include "panel/panel-plugin-external.h"
+#include "panel-module.h"
+#include "panel-plugin-external.h"
 
 G_BEGIN_DECLS
 

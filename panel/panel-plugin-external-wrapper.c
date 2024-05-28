@@ -21,17 +21,18 @@
 #include "config.h"
 #endif
 
-#include "panel/panel-dialogs.h"
-#include "panel/panel-marshal.h"
-#include "panel/panel-plugin-external-wrapper-exported.h"
-#include "panel/panel-plugin-external-wrapper.h"
-#include "panel/panel-window.h"
+#include "panel-dialogs.h"
+#include "panel-marshal.h"
+#include "panel-plugin-external-wrapper-exported.h"
+#include "panel-plugin-external-wrapper.h"
+#include "panel-window.h"
 
 #ifdef ENABLE_X11
-#include "panel/panel-plugin-external-wrapper-x11.h"
+#include "panel-plugin-external-wrapper-x11.h"
 #endif
+
 #ifdef HAVE_GTK_LAYER_SHELL
-#include "panel/panel-plugin-external-wrapper-wayland.h"
+#include "panel-plugin-external-wrapper-wayland.h"
 #include <gtk-layer-shell/gtk-layer-shell.h>
 #endif
 
