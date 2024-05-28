@@ -22,7 +22,6 @@
 
 #include "xfce-panel-macros.h"
 #include "xfce-panel-plugin-provider.h"
-
 #include "libxfce4panel-alias.h"
 
 #include "common/panel-private.h"

@@ -23,7 +23,6 @@
 
 #include "xfce-panel-convenience.h"
 #include "xfce-panel-macros.h"
-
 #include "libxfce4panel-alias.h"
 
 #include <libxfce4util/libxfce4util.h>

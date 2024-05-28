@@ -28,6 +28,7 @@
 
 #ifdef HAVE_GTK_LAYER_SHELL
 #include "wrapper-plug-wayland.h"
+
 #include <gtk-layer-shell/gtk-layer-shell.h>
 #endif
 

@@ -21,7 +21,6 @@
 #endif
 
 #include "libxfce4panel-config.h"
-
 #include "libxfce4panel-alias.h"
 
 
