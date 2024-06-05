@@ -4367,6 +4367,7 @@ xfce_tasklist_group_button_child_visible_changed (XfceTasklistChild *group_child
   panel_return_if_fail (XFW_IS_APPLICATION (group_child->app));
   panel_return_if_fail (XFCE_IS_TASKLIST (group_child->tasklist));
   panel_return_if_fail (group_child->tasklist->grouping);
+  panel_return_if_fail (group_child->windows != NULL);
 
   /* the group id is defined below as that of the last added window */
   group_child->unique_id = 0;
