@@ -816,6 +816,23 @@ actions_plugin_nrows_changed (XfcePanelPlugin *panel_plugin,
 
 
 
+static GtkWidget *
+actions_plugin_gtk_container_get_nth_child (GtkContainer *container,
+                                            gint index)
+{
+  panel_return_val_if_fail (GTK_IS_CONTAINER (container), NULL);
+
+  GList *children;
+  GtkWidget *child;
+  children = gtk_container_get_children (container);
+  child = g_list_nth_data (children, index);
+  g_list_free (children);
+
+  return child;
+}
+
+
+
 static gboolean
 actions_plugin_action_confirmation_time (gpointer data)
 {
@@ -833,9 +850,12 @@ actions_plugin_action_confirmation_time (gpointer data)
     }
   else
     {
-      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (timeout->dialog),
-                                                _(timeout->entry->status),
-                                                timeout->time_left);
+      GtkWidget *child_box, *label_box, *secondary_label;
+      child_box = actions_plugin_gtk_container_get_nth_child (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (timeout->dialog))), 0);
+      label_box = actions_plugin_gtk_container_get_nth_child (GTK_CONTAINER (child_box), 1);
+      secondary_label = actions_plugin_gtk_container_get_nth_child (GTK_CONTAINER (label_box), 1);
+      if (GTK_IS_LABEL (secondary_label))
+        gtk_label_set_text (GTK_LABEL (secondary_label), g_strdup_printf (_(timeout->entry->status), timeout->time_left));
     }
 
   return --timeout->time_left >= 0;
@@ -849,32 +869,26 @@ actions_plugin_action_confirmation (ActionsPlugin *plugin,
                                     gboolean *unattended)
 {
   GtkWidget *dialog;
-  GtkWidget *button;
   gint result;
-  GtkWidget *image;
+  const gchar *icon_name;
   ActionTimeout *timeout;
   guint timeout_id;
 
   panel_return_val_if_fail (entry->question != NULL, FALSE);
   panel_return_val_if_fail (entry->status != NULL, FALSE);
 
-  dialog = gtk_message_dialog_new (NULL, 0,
-                                   GTK_MESSAGE_QUESTION, GTK_BUTTONS_CANCEL,
-                                   "%s", _(entry->question));
+  if (gtk_icon_theme_has_icon (gtk_icon_theme_get_default (), entry->icon_name))
+    icon_name = entry->icon_name;
+  else
+    icon_name = entry->fallback_icon_name;
+
+  dialog = xfce_message_dialog_new (NULL, _(entry->display_name), "dialog-question", _(entry->question),
+                                    g_strdup_printf (_(entry->status), DEFAULT_TIMEOUT), _("_Cancel"), GTK_RESPONSE_CANCEL,
+                                    XFCE_BUTTON_TYPE_MIXED, icon_name, _(entry->mnemonic), GTK_RESPONSE_ACCEPT,
+                                    NULL);
   gtk_window_set_keep_above (GTK_WINDOW (dialog), TRUE);
   gtk_window_stick (GTK_WINDOW (dialog));
   gtk_window_set_skip_taskbar_hint (GTK_WINDOW (dialog), TRUE);
-  gtk_window_set_title (GTK_WINDOW (dialog), _(entry->display_name));
-
-  button = gtk_dialog_add_button (GTK_DIALOG (dialog), _(entry->mnemonic), GTK_RESPONSE_ACCEPT);
-  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
-
-  if (gtk_icon_theme_has_icon (gtk_icon_theme_get_default (), entry->icon_name))
-    image = gtk_image_new_from_icon_name (entry->icon_name, GTK_ICON_SIZE_BUTTON);
-  else
-    image = gtk_image_new_from_icon_name (entry->fallback_icon_name, GTK_ICON_SIZE_BUTTON);
-
-  gtk_button_set_image (GTK_BUTTON (button), image);
 
   timeout = g_slice_new0 (ActionTimeout);
   timeout->entry = entry;
