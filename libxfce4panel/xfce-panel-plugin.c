@@ -38,6 +38,7 @@
 #define gtk_layer_is_supported() FALSE
 #endif
 
+#include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4util/libxfce4util.h>
 
 
@@ -1080,33 +1081,17 @@ xfce_panel_plugin_menu_move (XfcePanelPlugin *plugin)
 static void
 xfce_panel_plugin_menu_remove (XfcePanelPlugin *plugin)
 {
-  GtkWidget *dialog;
-
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
 
   xfce_panel_plugin_block_autohide (plugin, TRUE);
 
-  /* create question dialog (same code is also in panel-preferences-dialog.c) */
-  dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
-                                   GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
-                                   /* I18N: %s is the name of the plugin */
-                                   _("Are you sure that you want to remove \"%s\"?"),
-                                   xfce_panel_plugin_get_display_name (plugin));
-  gtk_window_set_screen (GTK_WINDOW (dialog),
-                         gtk_widget_get_screen (GTK_WIDGET (plugin)));
-  gtk_window_set_title (GTK_WINDOW (dialog),
-                        _("Remove Item"));
-  gtk_message_dialog_format_secondary_text (
-    GTK_MESSAGE_DIALOG (dialog),
-    _("Removing the item from the panel also means its configuration will be lost."));
-  gtk_dialog_add_buttons (GTK_DIALOG (dialog), _("_Cancel"),
-                          GTK_RESPONSE_NO, _("_Remove"), GTK_RESPONSE_YES, NULL);
-  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_NO);
+  const gchar *label = _("Remove");
+  const gchar *text = _("Removing the item from the panel also means its configuration will be lost.");
 
-  if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
+  /* create question dialog (similar code is also in panel-preferences-dialog.c) */
+  if (xfce_dialog_confirm (NULL, "list-remove", label, text,
+                           _("Are you sure that you want to remove \"%s\"?"), xfce_panel_plugin_get_display_name (plugin)))
     {
-      gtk_widget_hide (dialog);
-
       /* send signal to unlock the panel before removing the plugin */
       xfce_panel_plugin_block_autohide (plugin, FALSE);
 
@@ -1115,8 +1100,6 @@ xfce_panel_plugin_menu_remove (XfcePanelPlugin *plugin)
     }
   else
     xfce_panel_plugin_block_autohide (plugin, FALSE);
-
-  gtk_widget_destroy (dialog);
 }
 
 
