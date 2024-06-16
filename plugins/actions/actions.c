@@ -153,6 +153,7 @@ typedef struct
 {
   ActionEntry *entry;
   GtkWidget *dialog;
+  GtkLabel *label;
   gint time_left;
   guint unattended : 1;
 } ActionTimeout;
@@ -831,11 +832,11 @@ actions_plugin_action_confirmation_time (gpointer data)
       gtk_dialog_response (GTK_DIALOG (timeout->dialog),
                            GTK_RESPONSE_ACCEPT);
     }
-  else
+  else if (timeout->label != NULL)
     {
-      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (timeout->dialog),
-                                                _(timeout->entry->status),
-                                                timeout->time_left);
+      gchar *new_label_text = g_strdup_printf (_(timeout->entry->status), timeout->time_left);
+      gtk_label_set_text (GTK_LABEL (timeout->label), new_label_text);
+      g_free (new_label_text);
     }
 
   return --timeout->time_left >= 0;
@@ -849,37 +850,35 @@ actions_plugin_action_confirmation (ActionsPlugin *plugin,
                                     gboolean *unattended)
 {
   GtkWidget *dialog;
-  GtkWidget *button;
   gint result;
-  GtkWidget *image;
+  const gchar *icon_name;
   ActionTimeout *timeout;
   guint timeout_id;
+  gchar *initial_label_text;
 
   panel_return_val_if_fail (entry->question != NULL, FALSE);
   panel_return_val_if_fail (entry->status != NULL, FALSE);
 
-  dialog = gtk_message_dialog_new (NULL, 0,
-                                   GTK_MESSAGE_QUESTION, GTK_BUTTONS_CANCEL,
-                                   "%s", _(entry->question));
+  if (gtk_icon_theme_has_icon (gtk_icon_theme_get_default (), entry->icon_name))
+    icon_name = entry->icon_name;
+  else
+    icon_name = entry->fallback_icon_name;
+
+  initial_label_text = g_strdup_printf (_(entry->status), DEFAULT_TIMEOUT);
+
+  dialog = xfce_message_dialog_new (NULL, _(entry->display_name), "dialog-question", _(entry->question),
+                                    initial_label_text, _("_Cancel"), GTK_RESPONSE_CANCEL,
+                                    XFCE_BUTTON_TYPE_MIXED, icon_name, _(entry->mnemonic), GTK_RESPONSE_ACCEPT,
+                                    NULL);
   gtk_window_set_keep_above (GTK_WINDOW (dialog), TRUE);
   gtk_window_stick (GTK_WINDOW (dialog));
   gtk_window_set_skip_taskbar_hint (GTK_WINDOW (dialog), TRUE);
-  gtk_window_set_title (GTK_WINDOW (dialog), _(entry->display_name));
-
-  button = gtk_dialog_add_button (GTK_DIALOG (dialog), _(entry->mnemonic), GTK_RESPONSE_ACCEPT);
-  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
-
-  if (gtk_icon_theme_has_icon (gtk_icon_theme_get_default (), entry->icon_name))
-    image = gtk_image_new_from_icon_name (entry->icon_name, GTK_ICON_SIZE_BUTTON);
-  else
-    image = gtk_image_new_from_icon_name (entry->fallback_icon_name, GTK_ICON_SIZE_BUTTON);
-
-  gtk_button_set_image (GTK_BUTTON (button), image);
 
   timeout = g_slice_new0 (ActionTimeout);
   timeout->entry = entry;
-  timeout->time_left = DEFAULT_TIMEOUT;
   timeout->dialog = dialog;
+  timeout->label = panel_utils_gtk_dialog_find_label_by_text (GTK_DIALOG (dialog), initial_label_text);
+  timeout->time_left = DEFAULT_TIMEOUT;
   timeout->unattended = FALSE;
 
   /* first second looks out of sync with a second timer */
@@ -893,6 +892,7 @@ actions_plugin_action_confirmation (ActionsPlugin *plugin,
 
   g_source_remove (timeout_id);
   gtk_widget_destroy (dialog);
+  g_free (initial_label_text);
   g_slice_free (ActionTimeout, timeout);
 
   return result == GTK_RESPONSE_ACCEPT;
