@@ -27,6 +27,14 @@
 
 
 
+typedef struct _PanelUtilsGtkLabelData
+{
+  const gchar *label_text;
+  GtkLabel *label;
+} PanelUtilsGtkLabelData;
+
+
+
 void
 _panel_utils_weak_notify (gpointer data,
                           GObject *where_the_object_was)
@@ -252,4 +260,53 @@ panel_utils_widget_remap (GtkWidget *widget)
 {
   gtk_widget_hide (GTK_WIDGET (widget));
   gtk_widget_show (GTK_WIDGET (widget));
+}
+
+
+
+static void
+panel_utils_gtk_dialog_find_label_by_text_cb (GtkWidget *widget,
+                                              gpointer data)
+{
+  PanelUtilsGtkLabelData *label_data = data;
+
+  panel_return_if_fail (widget);
+  panel_return_if_fail (label_data && label_data->label_text);
+
+  if (GTK_IS_LABEL (widget) && g_strcmp0 (label_data->label_text, gtk_label_get_text (GTK_LABEL (widget))) == 0)
+    {
+      if (label_data->label)
+        g_warning ("%s: Found multiple labels with text value '%s'", G_STRFUNC, label_data->label_text);
+      else
+        label_data->label = GTK_LABEL (widget);
+    }
+  else if (GTK_IS_BOX (widget))
+    gtk_container_foreach (GTK_CONTAINER (widget), panel_utils_gtk_dialog_find_label_by_text_cb, data);
+}
+
+
+
+/*
+ * Recursively searches the given GtkDialog and obtains a GtkLabel that has the given text.
+ */
+GtkLabel *
+panel_utils_gtk_dialog_find_label_by_text (GtkDialog *dialog,
+                                           const gchar *label_text)
+{
+  PanelUtilsGtkLabelData *label_data;
+  GtkLabel *label;
+
+  panel_return_val_if_fail (GTK_IS_DIALOG (dialog), NULL);
+
+  label_data = g_new0 (PanelUtilsGtkLabelData, 1);
+  label_data->label_text = label_text;
+  label_data->label = NULL;
+
+  gtk_container_foreach (GTK_CONTAINER (dialog), panel_utils_gtk_dialog_find_label_by_text_cb, label_data);
+  if (label_data->label == NULL)
+    g_warning ("%s: Could not find a label with the given text '%s'", G_STRFUNC, label_text);
+
+  label = label_data->label;
+  g_free (label_data);
+  return label;
 }
