@@ -25,6 +25,8 @@
 
 G_BEGIN_DECLS
 
+typedef struct _PanelUtilsGtkLabelData PanelUtilsGtkLabelData;
+
 void
 _panel_utils_weak_notify (gpointer data,
                           GObject *where_the_object_was);
@@ -56,6 +58,10 @@ panel_utils_wl_surface_commit (GtkWidget *widget);
 
 void
 panel_utils_widget_remap (GtkWidget *widget);
+
+GtkLabel *
+panel_utils_gtk_dialog_find_label_by_text (GtkDialog *dialog,
+                                           const gchar *label_text);
 
 G_END_DECLS
 
