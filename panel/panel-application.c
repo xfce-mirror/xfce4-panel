@@ -344,27 +344,29 @@ panel_application_remove_plugin_dialog (GtkWindow *parent,
                                         const gchar *plugin_name)
 {
   gint response;
-  GtkWidget *dialog = gtk_message_dialog_new (
-    parent,
-    GTK_DIALOG_DESTROY_WITH_PARENT,
-    GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
-    _("Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel configuration?"),
-    plugin_name);
-  gtk_window_set_title (GTK_WINDOW (dialog), _("Plugin loading failure"));
-  gtk_message_dialog_format_secondary_markup (
-    GTK_MESSAGE_DIALOG (dialog),
+  gchar *primary_text, *secondary_text;
+  primary_text = g_strdup_printf (_("Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel configuration?"), plugin_name);
+  secondary_text = g_strdup_printf (
     _("This plugin is in the current xfce4-panel configuration but could not be loaded, probably "
       "due to an installation issue. If you know what you're doing, you can remove it permanently, "
       "otherwise you'd better quit and make a backup of the current configuration using %s, before "
       "checking your installation and trying to start xfce4-panel again."),
-    "<a href=\"https://gitlab.xfce.org/apps/xfce4-panel-profiles\">xfce4-panel-profiles</a>");
-  gtk_dialog_add_buttons (
-    GTK_DIALOG (dialog), _("_Remove"), GTK_RESPONSE_OK, _("_Quit"), GTK_RESPONSE_CANCEL, NULL);
+                                    "<a href=\"https://gitlab.xfce.org/apps/xfce4-panel-profiles\">xfce4-panel-profiles</a>");
+
+  GtkWidget *dialog = xfce_message_dialog_new (parent, _("Plugin loading failure"), "dialog-question", primary_text,
+                                               secondary_text, _("_Remove"), GTK_RESPONSE_OK, _("_Quit"), GTK_RESPONSE_CANCEL,
+                                               NULL);
+
+  GtkLabel *label = panel_utils_gtk_dialog_find_label_by_text (GTK_DIALOG (dialog), secondary_text);
+  gtk_label_set_use_markup (label, TRUE);
+
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL);
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 
   response = gtk_dialog_run (GTK_DIALOG (dialog));
   gtk_widget_destroy (dialog);
+  g_free (primary_text);
+  g_free (secondary_text);
 
   return response == GTK_RESPONSE_OK;
 }
