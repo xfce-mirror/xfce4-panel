@@ -51,6 +51,7 @@ libxfce4panel_2_0_la_SOURCES = \
 
 libxfce4panel_2_0_la_CFLAGS =	 \
 	$(GTK_CFLAGS) \
+	$(LIBXFCE4UI_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(GTK_LAYER_SHELL_CFLAGS) \
 	$(PLATFORM_CFLAGS)
@@ -64,6 +65,7 @@ libxfce4panel_2_0_la_LDFLAGS = \
 
 libxfce4panel_2_0_la_LIBADD = \
 	$(GTK_LIBS) \
+	$(LIBXFCE4UI_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(GTK_LAYER_SHELL_LIBS) \
 	-lm
