@@ -154,7 +154,6 @@ typedef struct
   ActionEntry *entry;
   GtkWidget *dialog;
   GtkLabel *label;
-  gchar *initial_label_text;
   gint time_left;
   guint unattended : 1;
 } ActionTimeout;
@@ -845,28 +844,6 @@ actions_plugin_action_confirmation_time (gpointer data)
 
 
 
-static void
-actions_plugin_action_confirmation_dialog_get_label (GtkWidget *widget,
-                                                     gpointer data)
-{
-  ActionTimeout *timeout = data;
-
-  panel_return_if_fail (widget);
-  panel_return_if_fail (timeout && timeout->initial_label_text);
-
-  if (GTK_IS_LABEL (widget) && g_strcmp0 (timeout->initial_label_text, gtk_label_get_text (GTK_LABEL (widget))) == 0)
-    {
-      if (timeout->label)
-        g_warning ("%s: Found multiple labels with text value '%s'", G_STRFUNC, timeout->initial_label_text);
-      else
-        timeout->label = GTK_LABEL (widget);
-    }
-  else if (GTK_IS_BOX (widget))
-    gtk_container_foreach (GTK_CONTAINER (widget), actions_plugin_action_confirmation_dialog_get_label, data);
-}
-
-
-
 static gboolean
 actions_plugin_action_confirmation (ActionsPlugin *plugin,
                                     ActionEntry *entry,
@@ -877,6 +854,7 @@ actions_plugin_action_confirmation (ActionsPlugin *plugin,
   const gchar *icon_name;
   ActionTimeout *timeout;
   guint timeout_id;
+  gchar *initial_label_text;
 
   panel_return_val_if_fail (entry->question != NULL, FALSE);
   panel_return_val_if_fail (entry->status != NULL, FALSE);
@@ -886,26 +864,22 @@ actions_plugin_action_confirmation (ActionsPlugin *plugin,
   else
     icon_name = entry->fallback_icon_name;
 
-  timeout = g_slice_new0 (ActionTimeout);
-  timeout->entry = entry;
-  timeout->time_left = DEFAULT_TIMEOUT;
-  timeout->label = NULL;
-  timeout->initial_label_text = g_strdup_printf (_(entry->status), DEFAULT_TIMEOUT);
-  timeout->unattended = FALSE;
+  initial_label_text = g_strdup_printf (_(entry->status), DEFAULT_TIMEOUT);
 
   dialog = xfce_message_dialog_new (NULL, _(entry->display_name), "dialog-question", _(entry->question),
-                                    timeout->initial_label_text, _("_Cancel"), GTK_RESPONSE_CANCEL,
+                                    initial_label_text, _("_Cancel"), GTK_RESPONSE_CANCEL,
                                     XFCE_BUTTON_TYPE_MIXED, icon_name, _(entry->mnemonic), GTK_RESPONSE_ACCEPT,
                                     NULL);
   gtk_window_set_keep_above (GTK_WINDOW (dialog), TRUE);
   gtk_window_stick (GTK_WINDOW (dialog));
   gtk_window_set_skip_taskbar_hint (GTK_WINDOW (dialog), TRUE);
 
+  timeout = g_slice_new0 (ActionTimeout);
+  timeout->entry = entry;
   timeout->dialog = dialog;
-  /* obtain timeout->label, used in actions_plugin_action_confirmation_time */
-  gtk_container_foreach (GTK_CONTAINER (dialog), actions_plugin_action_confirmation_dialog_get_label, timeout);
-  if (timeout->label == NULL)
-    g_warning ("%s: Could not find a label with the given text '%s'", G_STRFUNC, timeout->initial_label_text);
+  timeout->label = panel_utils_gtk_dialog_find_label_by_text (GTK_DIALOG (dialog), initial_label_text);
+  timeout->time_left = DEFAULT_TIMEOUT;
+  timeout->unattended = FALSE;
 
   /* first second looks out of sync with a second timer */
   timeout_id = g_timeout_add (1000, actions_plugin_action_confirmation_time, timeout);
@@ -918,7 +892,7 @@ actions_plugin_action_confirmation (ActionsPlugin *plugin,
 
   g_source_remove (timeout_id);
   gtk_widget_destroy (dialog);
-  g_free (timeout->initial_label_text);
+  g_free (initial_label_text);
   g_slice_free (ActionTimeout, timeout);
 
   return result == GTK_RESPONSE_ACCEPT;
