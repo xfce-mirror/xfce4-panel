@@ -30,6 +30,7 @@
 #include "common/panel-utils.h"
 
 #include <gio/gio.h>
+#include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4util/libxfce4util.h>
 
 #ifdef HAVE_SYS_WAIT_H
@@ -402,30 +403,29 @@ static gboolean
 panel_plugin_external_child_ask_restart_dialog (GtkWindow *parent,
                                                 const gchar *plugin_name)
 {
+  gchar *primary_text, *secondary_text;
   GtkWidget *dialog;
   gint response;
 
   panel_return_val_if_fail (parent == NULL || GTK_IS_WINDOW (parent), FALSE);
   panel_return_val_if_fail (plugin_name != NULL, FALSE);
 
-  dialog = gtk_message_dialog_new (parent,
-                                   GTK_DIALOG_DESTROY_WITH_PARENT,
-                                   GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
-                                   _("Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"),
-                                   plugin_name);
-  gtk_window_set_title (GTK_WINDOW (dialog),
-                        _("Plugin Restart"));
-  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), _("The plugin restarted more than once in "
-                                            "the last %d seconds. If you press Execute the panel will try to restart "
-                                            "the plugin otherwise it will be permanently removed from the panel."),
-                                            PANEL_PLUGIN_AUTO_RESTART);
-  gtk_dialog_add_buttons (
-    GTK_DIALOG (dialog), _("_Execute"), GTK_RESPONSE_OK, _("_Remove"), GTK_RESPONSE_CLOSE, NULL);
+  primary_text = g_strdup_printf (_("Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"), plugin_name);
+  secondary_text = g_strdup_printf (_("The plugin restarted more than once in "
+                                      "the last %d seconds. If you press Execute the panel will try to restart "
+                                      "the plugin otherwise it will be permanently removed from the panel."),
+                                    PANEL_PLUGIN_AUTO_RESTART);
+
+  dialog = xfce_message_dialog_new (parent, _("Plugin Restart"), "dialog-question", primary_text,
+                                    secondary_text, _("_Execute"), GTK_RESPONSE_OK, _("_Remove"), GTK_RESPONSE_CLOSE, NULL);
+
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 
   response = gtk_dialog_run (GTK_DIALOG (dialog));
   gtk_widget_destroy (dialog);
+  g_free (primary_text);
+  g_free (secondary_text);
 
   return (response == GTK_RESPONSE_OK);
 }

@@ -1534,7 +1534,7 @@ panel_preferences_dialog_item_remove (GtkWidget *button,
   panel_preferences_dialog_item_get_selected (dialog, &iter, &selected);
   if (G_LIKELY (selected != NULL))
     {
-      GtkWidget *widget;
+      const gchar *label = _("Remove");
       gchar *primary;
       const gchar *secondary;
       guint n_selected = g_list_length (selected);
@@ -1553,17 +1553,7 @@ panel_preferences_dialog_item_remove (GtkWidget *button,
         }
 
       /* create question dialog (similar code is also in xfce-panel-plugin.c) */
-      widget = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (button)),
-                                       GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION,
-                                       GTK_BUTTONS_NONE, "%s", primary);
-      gtk_window_set_title (GTK_WINDOW (widget), _("Remove Item"));
-      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (widget), "%s", secondary);
-      gtk_dialog_add_buttons (
-        GTK_DIALOG (widget), _("_Cancel"), GTK_RESPONSE_NO, _("_Remove"), GTK_RESPONSE_YES, NULL);
-      gtk_dialog_set_default_response (GTK_DIALOG (widget), GTK_RESPONSE_NO);
-
-      /* run the dialog */
-      if (gtk_dialog_run (GTK_DIALOG (widget)) == GTK_RESPONSE_YES)
+      if (xfce_dialog_confirm (GTK_WINDOW (gtk_widget_get_toplevel (button)), "list-remove", label, secondary, "%s", primary))
         {
           /* update selection so the view can be scrolled to selection when reloaded */
           GObject *treeview = gtk_builder_get_object (GTK_BUILDER (dialog), "item-treeview");
@@ -1583,12 +1573,10 @@ panel_preferences_dialog_item_remove (GtkWidget *button,
               gtk_tree_selection_select_iter (selection, &iter);
             }
 
-          gtk_widget_hide (widget);
           for (GList *lp = selected; lp != NULL; lp = lp->next)
             xfce_panel_plugin_provider_emit_signal (lp->data, PROVIDER_SIGNAL_REMOVE_PLUGIN);
         }
 
-      gtk_widget_destroy (widget);
       g_list_free (selected);
     }
 }

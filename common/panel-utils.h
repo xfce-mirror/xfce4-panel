@@ -57,6 +57,10 @@ panel_utils_wl_surface_commit (GtkWidget *widget);
 void
 panel_utils_widget_remap (GtkWidget *widget);
 
+GtkLabel *
+panel_utils_gtk_dialog_find_label_by_text (GtkDialog *dialog,
+                                           const gchar *label_text);
+
 G_END_DECLS
 
 #endif /* !__PANEL_UTILS_H__ */
