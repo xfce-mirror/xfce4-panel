@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-05-06 12:49+0200\n"
+"POT-Creation-Date: 2024-06-19 00:49+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>, 2013-2015,2017-2020,2022-2024\n"
 "Language-Team: Dutch (http://app.transifex.com/xfce/xfce4-panel/language/nl/)\n"
@@ -44,77 +44,66 @@ msgstr "Werkbalk"
 msgid "Customize the panel"
 msgstr "Pas de werkbalk aan"
 
-#. I18N: %s is the name of the plugin
-#: libxfce4panel/xfce-panel-plugin.c:1094
-#: panel/panel-preferences-dialog.c:1542
-#, c-format
-msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "Weet u zeker dat u '%s' wil verwijderen?"
+#: libxfce4panel/xfce-panel-plugin.c:1088
+#: panel/panel-preferences-dialog.c:1537
+msgid "Remove"
+msgstr "Verwijderen"
 
-#: libxfce4panel/xfce-panel-plugin.c:1099
-#: panel/panel-preferences-dialog.c:1557
-msgid "Remove Item"
-msgstr "Element verwijderen"
-
-#: libxfce4panel/xfce-panel-plugin.c:1102
+#: libxfce4panel/xfce-panel-plugin.c:1089
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "Verwijderen van het element uit de werkbalk houdt tevens in dat zijn instellingen verloren zullen gaan."
 
-#: libxfce4panel/xfce-panel-plugin.c:1103 panel/panel-dialogs.c:157
-#: panel/panel-preferences-dialog.c:1560
-#: plugins/applicationsmenu/applicationsmenu.c:606
-#: plugins/directorymenu/directorymenu.c:466
-#: plugins/directorymenu/directorymenu.c:938
-msgid "_Cancel"
-msgstr "_Afbreken"
+#: libxfce4panel/xfce-panel-plugin.c:1093
+#: panel/panel-preferences-dialog.c:1544
+#, c-format
+msgid "Are you sure that you want to remove \"%s\"?"
+msgstr "Weet u zeker dat u '%s' wil verwijderen?"
+
+#. properties item
+#: libxfce4panel/xfce-panel-plugin.c:1215
+msgid "_Properties"
+msgstr "Eigenscha_ppen"
+
+#. about item
+#: libxfce4panel/xfce-panel-plugin.c:1226 panel/panel-window.c:3751
+msgid "_About"
+msgstr "_Over"
+
+#. move item
+#: libxfce4panel/xfce-panel-plugin.c:1237
+msgid "_Move"
+msgstr "_Verplaatsen"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1104
-#: libxfce4panel/xfce-panel-plugin.c:1271 panel/panel-application.c:362
-#: panel/panel-plugin-external.c:421 panel/panel-preferences-dialog.c:1081
-#: panel/panel-preferences-dialog.c:1560
+#: libxfce4panel/xfce-panel-plugin.c:1253 panel/panel-application.c:357
+#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1083
 #: panel/panel-preferences-dialog.glade:1240
 #: plugins/launcher/launcher-dialog.c:841
 msgid "_Remove"
 msgstr "_Verwijderen"
 
-#. properties item
-#: libxfce4panel/xfce-panel-plugin.c:1233
-msgid "_Properties"
-msgstr "Eigenscha_ppen"
-
-#. about item
-#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3751
-msgid "_About"
-msgstr "_Over"
-
-#. move item
-#: libxfce4panel/xfce-panel-plugin.c:1255
-msgid "_Move"
-msgstr "_Verplaatsen"
-
-#: libxfce4panel/xfce-panel-plugin.c:1289
+#: libxfce4panel/xfce-panel-plugin.c:1271
 msgid "Pane_l"
 msgstr "_Werkbalk"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3688
+#: libxfce4panel/xfce-panel-plugin.c:1279 panel/panel-window.c:3688
 msgid "Add _New Items..."
 msgstr "_Nieuwe elementen toevoegen..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3699
+#: libxfce4panel/xfce-panel-plugin.c:1290 panel/panel-window.c:3699
 msgid "Panel Pr_eferences..."
 msgstr "Werkbalkvoork_euren..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3726
+#: libxfce4panel/xfce-panel-plugin.c:1307 panel/panel-window.c:3726
 msgid "Log _Out"
 msgstr "Af_melden"
 
 #. help item
-#: libxfce4panel/xfce-panel-plugin.c:1341 panel/panel-item-dialog.c:207
+#: libxfce4panel/xfce-panel-plugin.c:1323 panel/panel-item-dialog.c:207
 #: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3742
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
@@ -130,7 +119,7 @@ msgid "_Help"
 msgstr "_Hulp"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1352
+#: libxfce4panel/xfce-panel-plugin.c:1334
 msgid "About"
 msgstr "Over"
 
@@ -252,18 +241,14 @@ msgstr "Uitvoeren"
 msgid "Failed to launch the migration application"
 msgstr "Kon de migratietoepassing niet openen"
 
-#: panel/panel-application.c:351
+#: panel/panel-application.c:347
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr "Invoegsel '%s' kon niet worden geladen, wilt u het verwijderen uit de instellingen van xfce4-panel?"
 
-#: panel/panel-application.c:353
-msgid "Plugin loading failure"
-msgstr "Kon invoegsel niet laden"
-
-#: panel/panel-application.c:356
+#: panel/panel-application.c:349
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -273,42 +258,46 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr "Dit invoegsel staat in de huidige instellingen van xfce4-panel maar kon niet worden geladen, vermoedelijk wegens een installatieprobleem. Als u weet waar u mee bezig bent, dan kunt u het blijvend verwijderen. Zo niet, dan kunt u beter afsluiten en een reservekopie maken van de huidige instellingen met %s, voordat u uw installatie gaat nakijken en gaat proberen om xfce4-panel opnieuw te starten."
 
-#: panel/panel-application.c:362
+#: panel/panel-application.c:356
+msgid "Plugin loading failure"
+msgstr "Kon invoegsel niet laden"
+
+#: panel/panel-application.c:357
 msgid "_Quit"
 msgstr "A_fsluiten"
 
-#: panel/panel-application.c:1034
+#: panel/panel-application.c:1037
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Dit zal een nieuw starter-invoegsel toevoegen aan de werkbalk en voegt de geplaatste bestanden in als menu-onderdelen."
 
-#: panel/panel-application.c:1037
+#: panel/panel-application.c:1040
 msgid "Create _Launcher"
 msgstr "Maak starter"
 
-#: panel/panel-application.c:1038
+#: panel/panel-application.c:1041
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Maak een nieuwe starter van %d bureaubladbestand"
 msgstr[1] "Maak een nieuwe starter van %d bureaubladbestanden"
 
-#: panel/panel-application.c:1799
+#: panel/panel-application.c:1802
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "U hebt X (de grafische omgeving) gestart zonder sessiebeheerder. Wanneer u op sluiten klikt, dan zal dat de grafische omgeving afsluiten."
 
-#: panel/panel-application.c:1802
+#: panel/panel-application.c:1805
 msgid "Quit"
 msgstr "Sluiten"
 
-#: panel/panel-application.c:1802
+#: panel/panel-application.c:1805
 msgid "Are you sure you want to quit the panel?"
 msgstr "Weet u zeker dat u de werkbalk wil afsluiten?"
 
-#: panel/panel-application.c:1810
+#: panel/panel-application.c:1813
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Kon de opdracht '%s' niet uitvoeren"
@@ -341,6 +330,13 @@ msgstr "Vincent Tunru <projects@vinnl.nl>\nPjotr pjotrvertaalt@gmail.com"
 msgid "Add New Item"
 msgstr "Voeg nieuw element toe"
 
+#: panel/panel-dialogs.c:157 plugins/actions/actions.c:870
+#: plugins/applicationsmenu/applicationsmenu.c:606
+#: plugins/directorymenu/directorymenu.c:466
+#: plugins/directorymenu/directorymenu.c:938
+msgid "_Cancel"
+msgstr "_Afbreken"
+
 #: panel/panel-dialogs.c:157 panel/panel-item-dialog.c:203
 #: panel/panel-preferences-dialog.glade:1223
 #: plugins/launcher/launcher-dialog.glade:219
@@ -351,7 +347,7 @@ msgstr "_Toevoegen"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Kies a.u.b. een werkbalk voor het nieuwe invoegsel:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1026
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1028
 #, c-format
 msgid "Panel %d"
 msgstr "Werkbalk %d"
@@ -393,16 +389,12 @@ msgstr "_Zoeken:"
 msgid "Enter search phrase here"
 msgstr "Geef hier een zoekterm op"
 
-#: panel/panel-plugin-external.c:412
+#: panel/panel-plugin-external.c:413
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "Het invoegsel '%s' heeft onverwacht de werkbalk verlaten, wilt u het herstarten?"
 
-#: panel/panel-plugin-external.c:415
-msgid "Plugin Restart"
-msgstr "Invoegsel herstarten"
-
-#: panel/panel-plugin-external.c:416
+#: panel/panel-plugin-external.c:414
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -410,43 +402,47 @@ msgid ""
 "permanently removed from the panel."
 msgstr "Het invoegsel is meer dan één keer opnieuw opgestart in de afgelopen %d seconden. Druk op 'Uitvoeren' om te proberen het invoegsel opnieuw te starten, anders zal dit invoegsel blijvend van de werkbalk worden verwijderd."
 
-#: panel/panel-plugin-external.c:421
+#: panel/panel-plugin-external.c:419
+msgid "Plugin Restart"
+msgstr "Invoegsel herstarten"
+
+#: panel/panel-plugin-external.c:420
 msgid "_Execute"
 msgstr "_Uitvoeren"
 
-#: panel/panel-preferences-dialog.c:579
+#: panel/panel-preferences-dialog.c:581
 msgid "Automatic"
 msgstr "Automatisch"
 
-#: panel/panel-preferences-dialog.c:588
+#: panel/panel-preferences-dialog.c:590
 msgid "Primary"
 msgstr "Primair"
 
 #. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:607
+#: panel/panel-preferences-dialog.c:609
 #, c-format
 msgid "Monitor %d"
 msgstr "Beeldscherm %d"
 
-#: panel/panel-preferences-dialog.c:1080
+#: panel/panel-preferences-dialog.c:1082
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "De instellingen van de werkbalk en de invoegsels zullen blijvend verwijderd worden"
 
-#: panel/panel-preferences-dialog.c:1089
+#: panel/panel-preferences-dialog.c:1091
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Weet u zeker dat u werkbalk %d wil verwijderen?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1380
+#: panel/panel-preferences-dialog.c:1382
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1385
+#: panel/panel-preferences-dialog.c:1387
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -455,21 +451,21 @@ msgstr "Interne naam: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1397
+#: panel/panel-preferences-dialog.c:1399
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Interne naam: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1544
+#: panel/panel-preferences-dialog.c:1546
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Als u een element van de werkbalk verwijdert, dan kan dit niet meer ongedaan worden gemaakt."
 
-#: panel/panel-preferences-dialog.c:1548
+#: panel/panel-preferences-dialog.c:1550
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr " Weet u zeker dat u deze %d elementen wilt verwijderen?"
 
-#: panel/panel-preferences-dialog.c:1550
+#: panel/panel-preferences-dialog.c:1552
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Als u hen uit de werkbalk verwijdert, dan gaan ze blijvend verloren."
 
@@ -828,133 +824,133 @@ msgstr "Toon een bevestigingsdialoog met een aftelling van 30 seconden voor somm
 msgid "_Actions"
 msgstr "Acties"
 
-#: plugins/actions/actions.c:166
+#: plugins/actions/actions.c:167
 msgid "Log Out"
 msgstr "Afmelden"
 
-#: plugins/actions/actions.c:167
+#: plugins/actions/actions.c:168
 msgid "_Log Out"
 msgstr "Af_melden"
 
-#: plugins/actions/actions.c:168
+#: plugins/actions/actions.c:169
 msgid "Are you sure you want to log out?"
 msgstr "Weet u zeker dat u zich wil afmelden?"
 
-#: plugins/actions/actions.c:169
+#: plugins/actions/actions.c:170
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Afmelden vindt plaats over %d seconden."
 
-#: plugins/actions/actions.c:174
+#: plugins/actions/actions.c:175
 msgid "Log Out..."
 msgstr "Afmelden..."
 
-#: plugins/actions/actions.c:175
+#: plugins/actions/actions.c:176
 msgid "Log _Out..."
 msgstr "Af_melden..."
 
-#: plugins/actions/actions.c:181
+#: plugins/actions/actions.c:182
 msgid "Switch User"
 msgstr "Gebruiker wisselen"
 
-#: plugins/actions/actions.c:182
+#: plugins/actions/actions.c:183
 msgid "_Switch User"
 msgstr "Gebruiker _wisselen"
 
-#: plugins/actions/actions.c:188
+#: plugins/actions/actions.c:189
 msgid "Lock Screen"
 msgstr "Scherm vergrendelen"
 
-#: plugins/actions/actions.c:189
+#: plugins/actions/actions.c:190
 msgid "Loc_k Screen"
 msgstr "Scherm _vergrendelen"
 
-#: plugins/actions/actions.c:195
+#: plugins/actions/actions.c:196
 msgid "Hibernate"
 msgstr "Slaapstand"
 
-#: plugins/actions/actions.c:196
+#: plugins/actions/actions.c:197
 msgid "_Hibernate"
 msgstr "_Slaapstand"
 
-#: plugins/actions/actions.c:197
+#: plugins/actions/actions.c:198
 msgid "Do you want to suspend to disk?"
 msgstr "Wilt u de slaapstand laten ingaan (wegschrijven op schijf)?"
 
-#: plugins/actions/actions.c:198
+#: plugins/actions/actions.c:199
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Slaapstand gaat in over %d seconden."
 
-#: plugins/actions/actions.c:203
+#: plugins/actions/actions.c:204
 msgid "Hybrid Sleep"
 msgstr "Hybride slaapstand"
 
-#: plugins/actions/actions.c:204
+#: plugins/actions/actions.c:205
 msgid "_Hybrid Sleep"
 msgstr "_Hybride slaapstand"
 
-#: plugins/actions/actions.c:205
+#: plugins/actions/actions.c:206
 msgid "Do you want to hibernate and suspend the system?"
 msgstr "Wilt u het systeem zowel in slaapstand als in pauzestand brengen?"
 
-#: plugins/actions/actions.c:206
+#: plugins/actions/actions.c:207
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr "Over %d seconden wordt de computer zowel in slaapstand als in pauzestand gebracht."
 
-#: plugins/actions/actions.c:211
+#: plugins/actions/actions.c:212
 msgid "Suspend"
 msgstr "Pauzestand"
 
-#: plugins/actions/actions.c:212
+#: plugins/actions/actions.c:213
 msgid "Sus_pend"
 msgstr "_Pauzestand"
 
-#: plugins/actions/actions.c:213
+#: plugins/actions/actions.c:214
 msgid "Do you want to suspend to RAM?"
 msgstr "Wilt u de pauzestand laten ingaan (wegschrijven naar RAM)?"
 
-#: plugins/actions/actions.c:214
+#: plugins/actions/actions.c:215
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Pauzestand gaat in over %d seconden."
 
-#: plugins/actions/actions.c:219
+#: plugins/actions/actions.c:220
 msgid "Restart"
 msgstr "Herstarten"
 
-#: plugins/actions/actions.c:220
+#: plugins/actions/actions.c:221
 msgid "_Restart"
 msgstr "_Herstarten"
 
-#: plugins/actions/actions.c:221
+#: plugins/actions/actions.c:222
 msgid "Are you sure you want to restart?"
 msgstr "Weet u zeker dat u wilt herstarten?"
 
-#: plugins/actions/actions.c:222
+#: plugins/actions/actions.c:223
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Herstart vindt plaats over %d seconden."
 
-#: plugins/actions/actions.c:227
+#: plugins/actions/actions.c:228
 msgid "Shut Down"
 msgstr "Afsluiten"
 
-#: plugins/actions/actions.c:228
+#: plugins/actions/actions.c:229
 msgid "Shut _Down"
 msgstr "_Afsluiten"
 
-#: plugins/actions/actions.c:229
+#: plugins/actions/actions.c:230
 msgid "Are you sure you want to shut down?"
 msgstr "Weet u zeker dat u wilt afsluiten?"
 
-#: plugins/actions/actions.c:230
+#: plugins/actions/actions.c:231
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "De computer zal worden uitgezet over %d seconden."
 
-#: plugins/actions/actions.c:731 plugins/separator/separator-dialog.glade:26
+#: plugins/actions/actions.c:732 plugins/separator/separator-dialog.glade:26
 #: plugins/separator/separator-dialog.glade:38
 #: plugins/separator/separator.desktop.in.in:4
 msgid "Separator"
@@ -1062,7 +1058,7 @@ msgid "_OK"
 msgstr "_Oké"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:643 plugins/clock/clock.c:1044
+#: plugins/applicationsmenu/applicationsmenu.c:643 plugins/clock/clock.c:1048
 #: plugins/launcher/launcher.c:2500
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -1103,20 +1099,20 @@ msgid "Show help options"
 msgstr "Toon hulpopties"
 
 #. TRANSLATORS: adjust this accordingly for your locale format
-#: plugins/clock/clock.c:43
+#: plugins/clock/clock.c:47
 msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
 
-#: plugins/clock/clock.c:162
+#: plugins/clock/clock.c:166
 msgid "Week %V"
 msgstr "Week %V"
 
-#: plugins/clock/clock.c:480
+#: plugins/clock/clock.c:484
 msgid "Failed to execute clock command"
 msgstr "Kon de klokopdracht niet uitvoeren"
 
-#: plugins/clock/clock.c:983
+#: plugins/clock/clock.c:987
 msgid "Custom Format"
 msgstr "Aangepaste bestandopmaak"
 
@@ -2192,36 +2188,32 @@ msgstr "Toon vensters van alle _monitors"
 msgid "Show only _minimized windows"
 msgstr "Toon alleen ge_minimaliseerde vensters"
 
-#: plugins/tasklist/tasklist-widget.c:3109
+#: plugins/tasklist/tasklist-widget.c:3105
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Kan geen nieuwe instantie starten van '%s'"
 
-#: plugins/tasklist/tasklist-widget.c:3113
-msgid "Error"
-msgstr "Fout"
-
-#: plugins/tasklist/tasklist-widget.c:3142
+#: plugins/tasklist/tasklist-widget.c:3132
 msgid "Launch New Instance"
 msgstr "Nieuwe instantie starten"
 
-#: plugins/tasklist/tasklist-widget.c:3886
+#: plugins/tasklist/tasklist-widget.c:3876
 msgid "Mi_nimize All"
 msgstr "Alles mi_nimaliseren"
 
-#: plugins/tasklist/tasklist-widget.c:3893
+#: plugins/tasklist/tasklist-widget.c:3883
 msgid "Un_minimize All"
 msgstr "Alles _ONTminimaliseren"
 
-#: plugins/tasklist/tasklist-widget.c:3900
+#: plugins/tasklist/tasklist-widget.c:3890
 msgid "Ma_ximize All"
 msgstr "Alles ma_ximaliseren"
 
-#: plugins/tasklist/tasklist-widget.c:3907
+#: plugins/tasklist/tasklist-widget.c:3897
 msgid "_Unmaximize All"
 msgstr "Alles ONT_maximaliseren"
 
-#: plugins/tasklist/tasklist-widget.c:3918
+#: plugins/tasklist/tasklist-widget.c:3908
 msgid "_Close All"
 msgstr "Alles _sluiten"
 
