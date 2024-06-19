@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-05-06 12:49+0200\n"
+"POT-Creation-Date: 2024-06-19 00:49+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Gordon Freeman, 2023-2024\n"
 "Language-Team: Ukrainian (http://app.transifex.com/xfce/xfce4-panel/language/uk/)\n"
@@ -50,77 +50,66 @@ msgstr "Панель"
 msgid "Customize the panel"
 msgstr "Упорядкувати панель"
 
-#. I18N: %s is the name of the plugin
-#: libxfce4panel/xfce-panel-plugin.c:1094
-#: panel/panel-preferences-dialog.c:1542
-#, c-format
-msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "Дійсно бажаєте видалити \"%s\"?"
+#: libxfce4panel/xfce-panel-plugin.c:1088
+#: panel/panel-preferences-dialog.c:1537
+msgid "Remove"
+msgstr "Вилучити"
 
-#: libxfce4panel/xfce-panel-plugin.c:1099
-#: panel/panel-preferences-dialog.c:1557
-msgid "Remove Item"
-msgstr "Вилучити елемент"
-
-#: libxfce4panel/xfce-panel-plugin.c:1102
+#: libxfce4panel/xfce-panel-plugin.c:1089
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "Вилучення елемента з панелі означає, що вся його конфіґурація буде втрачена."
 
-#: libxfce4panel/xfce-panel-plugin.c:1103 panel/panel-dialogs.c:157
-#: panel/panel-preferences-dialog.c:1560
-#: plugins/applicationsmenu/applicationsmenu.c:606
-#: plugins/directorymenu/directorymenu.c:466
-#: plugins/directorymenu/directorymenu.c:938
-msgid "_Cancel"
-msgstr "_Скасувати"
+#: libxfce4panel/xfce-panel-plugin.c:1093
+#: panel/panel-preferences-dialog.c:1544
+#, c-format
+msgid "Are you sure that you want to remove \"%s\"?"
+msgstr "Дійсно бажаєте видалити \"%s\"?"
+
+#. properties item
+#: libxfce4panel/xfce-panel-plugin.c:1215
+msgid "_Properties"
+msgstr "_Властивості"
+
+#. about item
+#: libxfce4panel/xfce-panel-plugin.c:1226 panel/panel-window.c:3751
+msgid "_About"
+msgstr "_Про елемент"
+
+#. move item
+#: libxfce4panel/xfce-panel-plugin.c:1237
+msgid "_Move"
+msgstr "Пере_містити"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1104
-#: libxfce4panel/xfce-panel-plugin.c:1271 panel/panel-application.c:362
-#: panel/panel-plugin-external.c:421 panel/panel-preferences-dialog.c:1081
-#: panel/panel-preferences-dialog.c:1560
+#: libxfce4panel/xfce-panel-plugin.c:1253 panel/panel-application.c:357
+#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1083
 #: panel/panel-preferences-dialog.glade:1240
 #: plugins/launcher/launcher-dialog.c:841
 msgid "_Remove"
 msgstr "В_илучити"
 
-#. properties item
-#: libxfce4panel/xfce-panel-plugin.c:1233
-msgid "_Properties"
-msgstr "_Властивості"
-
-#. about item
-#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3751
-msgid "_About"
-msgstr "_Про елемент"
-
-#. move item
-#: libxfce4panel/xfce-panel-plugin.c:1255
-msgid "_Move"
-msgstr "Пере_містити"
-
-#: libxfce4panel/xfce-panel-plugin.c:1289
+#: libxfce4panel/xfce-panel-plugin.c:1271
 msgid "Pane_l"
 msgstr "Пане_ль"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3688
+#: libxfce4panel/xfce-panel-plugin.c:1279 panel/panel-window.c:3688
 msgid "Add _New Items..."
 msgstr "Дода_ти нові елементи..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3699
+#: libxfce4panel/xfce-panel-plugin.c:1290 panel/panel-window.c:3699
 msgid "Panel Pr_eferences..."
 msgstr "Налашт_ування панелі..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3726
+#: libxfce4panel/xfce-panel-plugin.c:1307 panel/panel-window.c:3726
 msgid "Log _Out"
 msgstr "Вийти з _сеансу"
 
 #. help item
-#: libxfce4panel/xfce-panel-plugin.c:1341 panel/panel-item-dialog.c:207
+#: libxfce4panel/xfce-panel-plugin.c:1323 panel/panel-item-dialog.c:207
 #: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3742
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
@@ -136,7 +125,7 @@ msgid "_Help"
 msgstr "_Допомога"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1352
+#: libxfce4panel/xfce-panel-plugin.c:1334
 msgid "About"
 msgstr "Про елемент"
 
@@ -258,18 +247,14 @@ msgstr "Виконати"
 msgid "Failed to launch the migration application"
 msgstr "Не вдалось запустити програму міграції"
 
-#: panel/panel-application.c:351
+#: panel/panel-application.c:347
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr "Розширення \"%s\" не було завантажено, бажаєте його видалити з конфігурації панелі xfce4?"
 
-#: panel/panel-application.c:353
-msgid "Plugin loading failure"
-msgstr "Збій завантаження розширення"
-
-#: panel/panel-application.c:356
+#: panel/panel-application.c:349
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -279,21 +264,25 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr "Це розширення є у поточній конфігурації панелі xfce4, але його не вдалося завантажити, ймовірно, через проблему з установкою. Якщо ви знаєте, що робите, ви можете видалити його назавжди, інакше вам краще вийти і зробити резервну копію поточної конфігурації за допомогою %s, перед тим, як перевірити установку і спробувати запустити панель xfce4 ще раз."
 
-#: panel/panel-application.c:362
+#: panel/panel-application.c:356
+msgid "Plugin loading failure"
+msgstr "Збій завантаження розширення"
+
+#: panel/panel-application.c:357
 msgid "_Quit"
 msgstr "Вийти"
 
-#: panel/panel-application.c:1034
+#: panel/panel-application.c:1037
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Це створить новий запускач розширення на панелі і вставить кинуті файли як пункти меню."
 
-#: panel/panel-application.c:1037
+#: panel/panel-application.c:1040
 msgid "Create _Launcher"
 msgstr "Створити _запускач"
 
-#: panel/panel-application.c:1038
+#: panel/panel-application.c:1041
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -302,21 +291,21 @@ msgstr[1] "Створити новий запускач з desktop-файлів 
 msgstr[2] "Створити новий запускач з desktop-файлів %d"
 msgstr[3] "Створити новий запускач з desktop-файлів %d"
 
-#: panel/panel-application.c:1799
+#: panel/panel-application.c:1802
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Ви запустили X без менеджера сесії. Натискання на кнопку виходу закриє X-сервер."
 
-#: panel/panel-application.c:1802
+#: panel/panel-application.c:1805
 msgid "Quit"
 msgstr "Завершити"
 
-#: panel/panel-application.c:1802
+#: panel/panel-application.c:1805
 msgid "Are you sure you want to quit the panel?"
 msgstr "Ви впевнені, що бажаєте закрити панель?"
 
-#: panel/panel-application.c:1810
+#: panel/panel-application.c:1813
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Не вдалось виконати команду \"%s\""
@@ -349,6 +338,13 @@ msgstr "Дмитро Нікітін/nЯрема aka Knedlyk"
 msgid "Add New Item"
 msgstr "Додати новий елемент"
 
+#: panel/panel-dialogs.c:157 plugins/actions/actions.c:870
+#: plugins/applicationsmenu/applicationsmenu.c:606
+#: plugins/directorymenu/directorymenu.c:466
+#: plugins/directorymenu/directorymenu.c:938
+msgid "_Cancel"
+msgstr "_Скасувати"
+
 #: panel/panel-dialogs.c:157 panel/panel-item-dialog.c:203
 #: panel/panel-preferences-dialog.glade:1223
 #: plugins/launcher/launcher-dialog.glade:219
@@ -359,7 +355,7 @@ msgstr "_Додати"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Будь-ласка виберіть панель для нового розширення:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1026
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1028
 #, c-format
 msgid "Panel %d"
 msgstr "Панель %d"
@@ -401,16 +397,12 @@ msgstr "_Пошук:"
 msgid "Enter search phrase here"
 msgstr "Введіть тут фразу пошуку"
 
-#: panel/panel-plugin-external.c:412
+#: panel/panel-plugin-external.c:413
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "Розширення \"%s\" раптово зникло з панелі, бажаєте його перезапустити?"
 
-#: panel/panel-plugin-external.c:415
-msgid "Plugin Restart"
-msgstr "Перезавантажити розширення"
-
-#: panel/panel-plugin-external.c:416
+#: panel/panel-plugin-external.c:414
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -418,43 +410,47 @@ msgid ""
 "permanently removed from the panel."
 msgstr "Розширення перезапускалось більше одного разу за останніх %d секунд. Якщо Ви натиснете Виконати панель спробує перезапустити це розширення, інакше воно буде повністю видалено з панелі."
 
-#: panel/panel-plugin-external.c:421
+#: panel/panel-plugin-external.c:419
+msgid "Plugin Restart"
+msgstr "Перезавантажити розширення"
+
+#: panel/panel-plugin-external.c:420
 msgid "_Execute"
 msgstr "Вико_нати"
 
-#: panel/panel-preferences-dialog.c:579
+#: panel/panel-preferences-dialog.c:581
 msgid "Automatic"
 msgstr "Автоматично"
 
-#: panel/panel-preferences-dialog.c:588
+#: panel/panel-preferences-dialog.c:590
 msgid "Primary"
 msgstr "Початково"
 
 #. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:607
+#: panel/panel-preferences-dialog.c:609
 #, c-format
 msgid "Monitor %d"
 msgstr "Монітор %d"
 
-#: panel/panel-preferences-dialog.c:1080
+#: panel/panel-preferences-dialog.c:1082
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Панель та конфігурації розширень будуть видалені"
 
-#: panel/panel-preferences-dialog.c:1089
+#: panel/panel-preferences-dialog.c:1091
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Ви впевнені, що бажаєте видалити панель %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1380
+#: panel/panel-preferences-dialog.c:1382
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(зовнішній)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1385
+#: panel/panel-preferences-dialog.c:1387
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -463,21 +459,21 @@ msgstr "Внутрішня назва: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1397
+#: panel/panel-preferences-dialog.c:1399
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Внутрішня назва: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1544
+#: panel/panel-preferences-dialog.c:1546
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Якщо Ви видалите цей елемент з панелі, він буде повністю втрачений."
 
-#: panel/panel-preferences-dialog.c:1548
+#: panel/panel-preferences-dialog.c:1550
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Ви впевнені, що хочете видалити ці %d елементи?"
 
-#: panel/panel-preferences-dialog.c:1550
+#: panel/panel-preferences-dialog.c:1552
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Якщо ви видалите їх з панелі, вони будуть остаточно втрачені."
 
@@ -836,133 +832,133 @@ msgstr "Показати діалогове вікно підтвердженн�
 msgid "_Actions"
 msgstr "_Дії"
 
-#: plugins/actions/actions.c:166
+#: plugins/actions/actions.c:167
 msgid "Log Out"
 msgstr "Вийти з сеансу"
 
-#: plugins/actions/actions.c:167
+#: plugins/actions/actions.c:168
 msgid "_Log Out"
 msgstr "_Вийти з сеансу"
 
-#: plugins/actions/actions.c:168
+#: plugins/actions/actions.c:169
 msgid "Are you sure you want to log out?"
 msgstr "Дійсно бажаєте вийти?"
 
-#: plugins/actions/actions.c:169
+#: plugins/actions/actions.c:170
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Вихід через %d секунд."
 
-#: plugins/actions/actions.c:174
+#: plugins/actions/actions.c:175
 msgid "Log Out..."
 msgstr "Вийти з сеансу..."
 
-#: plugins/actions/actions.c:175
+#: plugins/actions/actions.c:176
 msgid "Log _Out..."
 msgstr "Вийти з _сеансу..."
 
-#: plugins/actions/actions.c:181
+#: plugins/actions/actions.c:182
 msgid "Switch User"
 msgstr "Переключити користувача"
 
-#: plugins/actions/actions.c:182
+#: plugins/actions/actions.c:183
 msgid "_Switch User"
 msgstr "_Переключити користувача"
 
-#: plugins/actions/actions.c:188
+#: plugins/actions/actions.c:189
 msgid "Lock Screen"
 msgstr "Блокувати екран"
 
-#: plugins/actions/actions.c:189
+#: plugins/actions/actions.c:190
 msgid "Loc_k Screen"
 msgstr "_Блокувати екран"
 
-#: plugins/actions/actions.c:195
+#: plugins/actions/actions.c:196
 msgid "Hibernate"
 msgstr "Приспати"
 
-#: plugins/actions/actions.c:196
+#: plugins/actions/actions.c:197
 msgid "_Hibernate"
 msgstr "_Приспати"
 
-#: plugins/actions/actions.c:197
+#: plugins/actions/actions.c:198
 msgid "Do you want to suspend to disk?"
 msgstr "Ви бажаєте призупинити на диск?"
 
-#: plugins/actions/actions.c:198
+#: plugins/actions/actions.c:199
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Комп'ютер засне через %d секунд."
 
-#: plugins/actions/actions.c:203
+#: plugins/actions/actions.c:204
 msgid "Hybrid Sleep"
 msgstr "Гібридна сплячка"
 
-#: plugins/actions/actions.c:204
+#: plugins/actions/actions.c:205
 msgid "_Hybrid Sleep"
 msgstr "_Гібридна сплячка"
 
-#: plugins/actions/actions.c:205
+#: plugins/actions/actions.c:206
 msgid "Do you want to hibernate and suspend the system?"
 msgstr "Ви бажаєте перевести систему у сплячку і приспати?"
 
-#: plugins/actions/actions.c:206
+#: plugins/actions/actions.c:207
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr "Засинання і сплячка через %d секунд."
 
-#: plugins/actions/actions.c:211
+#: plugins/actions/actions.c:212
 msgid "Suspend"
 msgstr "Призупинити"
 
-#: plugins/actions/actions.c:212
+#: plugins/actions/actions.c:213
 msgid "Sus_pend"
 msgstr "При_зупинити"
 
-#: plugins/actions/actions.c:213
+#: plugins/actions/actions.c:214
 msgid "Do you want to suspend to RAM?"
 msgstr "Ви бажаєте призупинити на RAM?"
 
-#: plugins/actions/actions.c:214
+#: plugins/actions/actions.c:215
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Комп'ютер призупиниться через %d секунд."
 
-#: plugins/actions/actions.c:219
+#: plugins/actions/actions.c:220
 msgid "Restart"
 msgstr "Перезапустити"
 
-#: plugins/actions/actions.c:220
+#: plugins/actions/actions.c:221
 msgid "_Restart"
 msgstr "_Перезапустити"
 
-#: plugins/actions/actions.c:221
+#: plugins/actions/actions.c:222
 msgid "Are you sure you want to restart?"
 msgstr "Дійсно бажаєте перезавантажити?"
 
-#: plugins/actions/actions.c:222
+#: plugins/actions/actions.c:223
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Перезавантаження комп'ютера через %d секунд."
 
-#: plugins/actions/actions.c:227
+#: plugins/actions/actions.c:228
 msgid "Shut Down"
 msgstr "Вимкнути комп'ютер"
 
-#: plugins/actions/actions.c:228
+#: plugins/actions/actions.c:229
 msgid "Shut _Down"
 msgstr "_Вимкнути комп'ютер"
 
-#: plugins/actions/actions.c:229
+#: plugins/actions/actions.c:230
 msgid "Are you sure you want to shut down?"
 msgstr "Ви впевнені, що бажаєте виключити?"
 
-#: plugins/actions/actions.c:230
+#: plugins/actions/actions.c:231
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Вимкнення комп'ютера за %d секунд."
 
-#: plugins/actions/actions.c:731 plugins/separator/separator-dialog.glade:26
+#: plugins/actions/actions.c:732 plugins/separator/separator-dialog.glade:26
 #: plugins/separator/separator-dialog.glade:38
 #: plugins/separator/separator.desktop.in.in:4
 msgid "Separator"
@@ -1070,7 +1066,7 @@ msgid "_OK"
 msgstr "_Гаразд"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:643 plugins/clock/clock.c:1044
+#: plugins/applicationsmenu/applicationsmenu.c:643 plugins/clock/clock.c:1048
 #: plugins/launcher/launcher.c:2500
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -1111,20 +1107,20 @@ msgid "Show help options"
 msgstr "Показати опції допомоги"
 
 #. TRANSLATORS: adjust this accordingly for your locale format
-#: plugins/clock/clock.c:43
+#: plugins/clock/clock.c:47
 msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
 
-#: plugins/clock/clock.c:162
+#: plugins/clock/clock.c:166
 msgid "Week %V"
 msgstr "Тиждень %V"
 
-#: plugins/clock/clock.c:480
+#: plugins/clock/clock.c:484
 msgid "Failed to execute clock command"
 msgstr "Не вдалось виконати команду годинника"
 
-#: plugins/clock/clock.c:983
+#: plugins/clock/clock.c:987
 msgid "Custom Format"
 msgstr "Довільний формат"
 
@@ -2200,36 +2196,32 @@ msgstr "Показувати вікна з усіх моні_торів"
 msgid "Show only _minimized windows"
 msgstr "Показувати тіл_ьки мінімізовані вікна"
 
-#: plugins/tasklist/tasklist-widget.c:3109
+#: plugins/tasklist/tasklist-widget.c:3105
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Неможливо запустити новий екземпляр для '%s' "
 
-#: plugins/tasklist/tasklist-widget.c:3113
-msgid "Error"
-msgstr "Помилка"
-
-#: plugins/tasklist/tasklist-widget.c:3142
+#: plugins/tasklist/tasklist-widget.c:3132
 msgid "Launch New Instance"
 msgstr "Запустити новий екземпляр"
 
-#: plugins/tasklist/tasklist-widget.c:3886
+#: plugins/tasklist/tasklist-widget.c:3876
 msgid "Mi_nimize All"
 msgstr "Мінімізува_ти всі"
 
-#: plugins/tasklist/tasklist-widget.c:3893
+#: plugins/tasklist/tasklist-widget.c:3883
 msgid "Un_minimize All"
 msgstr "Д_емінімізувати всі"
 
-#: plugins/tasklist/tasklist-widget.c:3900
+#: plugins/tasklist/tasklist-widget.c:3890
 msgid "Ma_ximize All"
 msgstr "Ма_ксимізувати всі"
 
-#: plugins/tasklist/tasklist-widget.c:3907
+#: plugins/tasklist/tasklist-widget.c:3897
 msgid "_Unmaximize All"
 msgstr "Демаксимізувати всі"
 
-#: plugins/tasklist/tasklist-widget.c:3918
+#: plugins/tasklist/tasklist-widget.c:3908
 msgid "_Close All"
 msgstr "Закрити в_сі"
 
