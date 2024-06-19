@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-03-30 00:47+0100\n"
+"POT-Creation-Date: 2024-06-19 00:49+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Ivan <personal@live.hk>, 2020\n"
 "Language-Team: Chinese (Hong Kong) (http://app.transifex.com/xfce/xfce4-panel/language/zh_HK/)\n"
@@ -39,7 +39,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "面板;設置;首選項;任務欄;自動隱藏;應用程序菜單;開始;按鈕;啟動器;通知區域;狀態;圖標;插件;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3630
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3676
 msgid "Panel"
 msgstr "面板"
 
@@ -47,78 +47,67 @@ msgstr "面板"
 msgid "Customize the panel"
 msgstr "自訂面板"
 
-#. I18N: %s is the name of the plugin
-#: libxfce4panel/xfce-panel-plugin.c:1096
-#: panel/panel-preferences-dialog.c:1402
-#, c-format
-msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "確定要移除「%s」嗎？"
+#: libxfce4panel/xfce-panel-plugin.c:1088
+#: panel/panel-preferences-dialog.c:1537
+msgid "Remove"
+msgstr "移除"
 
-#: libxfce4panel/xfce-panel-plugin.c:1101
-#: panel/panel-preferences-dialog.c:1405
-msgid "Remove Item"
-msgstr ""
-
-#: libxfce4panel/xfce-panel-plugin.c:1103
+#: libxfce4panel/xfce-panel-plugin.c:1089
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "從面板上卸下該項目也意味著其配置將丟失。"
 
-#: libxfce4panel/xfce-panel-plugin.c:1104 panel/panel-dialogs.c:164
-#: panel/panel-preferences-dialog.c:1409
-#: plugins/applicationsmenu/applicationsmenu.c:602
-#: plugins/directorymenu/directorymenu.c:461
-#: plugins/directorymenu/directorymenu.c:936
-msgid "_Cancel"
-msgstr "取消(_C)"
-
-#. remove
-#: libxfce4panel/xfce-panel-plugin.c:1105
-#: libxfce4panel/xfce-panel-plugin.c:1272 panel/panel-application.c:382
-#: panel/panel-plugin-external.c:409 panel/panel-preferences-dialog.c:1047
-#: panel/panel-preferences-dialog.c:1410
-#: panel/panel-preferences-dialog.glade:1240
-#: plugins/launcher/launcher-dialog.c:851
-msgid "_Remove"
-msgstr "刪除(_R)"
+#: libxfce4panel/xfce-panel-plugin.c:1093
+#: panel/panel-preferences-dialog.c:1544
+#, c-format
+msgid "Are you sure that you want to remove \"%s\"?"
+msgstr "確定要移除「%s」嗎？"
 
 #. properties item
-#: libxfce4panel/xfce-panel-plugin.c:1234
+#: libxfce4panel/xfce-panel-plugin.c:1215
 msgid "_Properties"
 msgstr "屬性(_P)"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1245 panel/panel-window.c:3706
+#: libxfce4panel/xfce-panel-plugin.c:1226 panel/panel-window.c:3751
 msgid "_About"
 msgstr "關於(_A)"
 
 #. move item
-#: libxfce4panel/xfce-panel-plugin.c:1256
+#: libxfce4panel/xfce-panel-plugin.c:1237
 msgid "_Move"
 msgstr "移動(_M)"
 
-#: libxfce4panel/xfce-panel-plugin.c:1290
+#. remove
+#: libxfce4panel/xfce-panel-plugin.c:1253 panel/panel-application.c:357
+#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1083
+#: panel/panel-preferences-dialog.glade:1240
+#: plugins/launcher/launcher-dialog.c:841
+msgid "_Remove"
+msgstr "刪除(_R)"
+
+#: libxfce4panel/xfce-panel-plugin.c:1271
 msgid "Pane_l"
 msgstr "面板(_L)"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1298 panel/panel-window.c:3642
+#: libxfce4panel/xfce-panel-plugin.c:1279 panel/panel-window.c:3688
 msgid "Add _New Items..."
 msgstr "加入新項目(_N)..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1309 panel/panel-window.c:3653
+#: libxfce4panel/xfce-panel-plugin.c:1290 panel/panel-window.c:3699
 msgid "Panel Pr_eferences..."
 msgstr "面板偏好設定(_E)..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1326 panel/panel-window.c:3681
+#: libxfce4panel/xfce-panel-plugin.c:1307 panel/panel-window.c:3726
 msgid "Log _Out"
 msgstr "登出(_O)"
 
 #. help item
-#: libxfce4panel/xfce-panel-plugin.c:1342 panel/panel-item-dialog.c:198
-#: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3697
+#: libxfce4panel/xfce-panel-plugin.c:1323 panel/panel-item-dialog.c:207
+#: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3742
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
 #: plugins/clock/clock-dialog.glade:120
@@ -126,146 +115,143 @@ msgstr "登出(_O)"
 #: plugins/launcher/launcher-dialog.glade:398
 #: plugins/pager/pager-dialog.glade:81
 #: plugins/separator/separator-dialog.glade:69
+#: plugins/showdesktop/showdesktop-dialog.glade:49
 #: plugins/tasklist/tasklist-dialog.glade:93
 #: plugins/windowmenu/windowmenu-dialog.glade:63
 msgid "_Help"
 msgstr "求助(_H)"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1353
+#: libxfce4panel/xfce-panel-plugin.c:1334
 msgid "About"
 msgstr "關於"
 
-#: panel/main.c:82
+#: panel/main.c:66
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "顯示「面板偏好設定」對話窗"
 
-#: panel/main.c:82 panel/main.c:83
+#: panel/main.c:66 panel/main.c:67
 msgid "PANEL-NUMBER"
 msgstr "面板號碼"
 
-#: panel/main.c:83
+#: panel/main.c:67
 msgid "Show the 'Add New Items' dialog"
 msgstr "顯示「加入新項目」對話窗"
 
-#: panel/main.c:84
+#: panel/main.c:68
 msgid "Save the panel configuration"
 msgstr "儲存面板組態"
 
-#: panel/main.c:85
+#: panel/main.c:69
 msgid "Add a new plugin to the panel"
 msgstr "加入新插件至面板"
 
-#: panel/main.c:85
+#: panel/main.c:69
 msgid "PLUGIN-NAME"
 msgstr "插件名稱"
 
-#: panel/main.c:86
+#: panel/main.c:70
 msgid "Restart the running panel instance"
 msgstr "重新啟動執行中的面板實體"
 
-#: panel/main.c:87
+#: panel/main.c:71
 msgid "Quit the running panel instance"
 msgstr "結束執行中的面板實體"
 
-#: panel/main.c:88
+#: panel/main.c:72
 msgid "Do not wait for a window manager on startup"
 msgstr "啟動時不要等待視窗管理器"
 
-#: panel/main.c:89 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: panel/main.c:73 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "印出版本資訊並結束"
 
 #. parse context options
-#: panel/main.c:273
+#: panel/main.c:258
 msgid "[ARGUMENTS...]"
 msgstr "[參數...]"
 
-#: panel/main.c:283
+#: panel/main.c:268
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "輸入 \"%s --help\" 以瞭解用法。"
 
-#: panel/main.c:300
+#: panel/main.c:285
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce 開發團隊。保留所有權利。"
 
-#: panel/main.c:301
+#: panel/main.c:286
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "請回報錯誤至 <%s>。"
 
 #. quit without error if an instance is running
-#: panel/main.c:409
+#: panel/main.c:394
 msgid "There is already a running instance"
 msgstr "已經有執行中的實體"
 
 #. spawn ourselfs again
-#: panel/main.c:420
+#: panel/main.c:405
 msgid "Restarting..."
 msgstr "正在重新啟動..."
 
-#: panel/main.c:437
+#: panel/main.c:422
 msgid "Failed to show the preferences dialog"
 msgstr "未能顯示偏好設定對話窗"
 
-#: panel/main.c:439
+#: panel/main.c:424
 msgid "Failed to show the add new items dialog"
 msgstr "未能顯示加入新項目對話窗"
 
-#: panel/main.c:441
+#: panel/main.c:426
 msgid "Failed to save the panel configuration"
 msgstr "未能儲存面板組態"
 
-#: panel/main.c:443
+#: panel/main.c:428
 msgid "Failed to add a plugin to the panel"
 msgstr "未能加入插件至面板"
 
-#: panel/main.c:445
+#: panel/main.c:430
 msgid "Failed to restart the panel"
 msgstr "未能重新啟動面板"
 
-#: panel/main.c:447
+#: panel/main.c:432
 msgid "Failed to quit the panel"
 msgstr "未能結束面板"
 
-#: panel/main.c:449
+#: panel/main.c:434
 msgid "Failed to send D-Bus message"
 msgstr "未能傳送 D-Bus 訊息"
 
-#: panel/main.c:459
-msgid "Execute"
-msgstr "執行"
+#: panel/main.c:442 panel/main.c:462
+#, c-format
+msgid "No running instance of %s was found"
+msgstr "找不到執行中的 %s 實體"
 
-#: panel/main.c:460
+#: panel/main.c:443
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "想要啟動面板嗎？如果要的話，請確認在登出時您有儲存工作階段，這樣該面板才能在下一次您登入時自動啟動。"
 
-#: panel/main.c:463 panel/main.c:477
-#, c-format
-msgid "No running instance of %s was found"
-msgstr "找不到執行中的 %s 實體"
+#: panel/main.c:448
+msgid "Execute"
+msgstr "執行"
 
-#: panel/panel-application.c:216
+#: panel/panel-application.c:214
 msgid "Failed to launch the migration application"
 msgstr "未能啟動轉移應用程式"
 
-#: panel/panel-application.c:371
+#: panel/panel-application.c:347
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr ""
 
-#: panel/panel-application.c:373
-msgid "Plugin loading failure"
-msgstr ""
-
-#: panel/panel-application.c:376
+#: panel/panel-application.c:349
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -275,105 +261,115 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr ""
 
-#: panel/panel-application.c:383
+#: panel/panel-application.c:356
+msgid "Plugin loading failure"
+msgstr ""
+
+#: panel/panel-application.c:357
 msgid "_Quit"
 msgstr "結束(_Q)"
 
-#: panel/panel-application.c:1058
-msgid "Create _Launcher"
-msgstr "建立啟動列(_L)"
-
-#: panel/panel-application.c:1059
+#: panel/panel-application.c:1037
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "這會在面板尚建立新的啟動列插件，並將放下的檔案插入為選單項目。"
 
-#: panel/panel-application.c:1061
+#: panel/panel-application.c:1040
+msgid "Create _Launcher"
+msgstr "建立啟動列(_L)"
+
+#: panel/panel-application.c:1041
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "由 %d 項桌面檔建立新的啟動列"
 
-#: panel/panel-application.c:1824
+#: panel/panel-application.c:1802
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "若未透過工作階段管理程式啟動 X。只要點擊「結束」就會關閉 X 伺服器。"
 
-#: panel/panel-application.c:1826
+#: panel/panel-application.c:1805
 msgid "Quit"
 msgstr "結束"
 
-#: panel/panel-application.c:1827
+#: panel/panel-application.c:1805
 msgid "Are you sure you want to quit the panel?"
 msgstr "確定要結束該面板嗎？"
 
-#: panel/panel-application.c:1835
+#: panel/panel-application.c:1813
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "未能執行「%s」指令"
 
-#: panel/panel-dbus-client.c:218
+#: panel/panel-dbus-client.c:213
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "指定了無效的插件事件語法。請使用 PLUGIN-NAME:NAME[:TYPE:VALUE]。"
 
-#: panel/panel-dbus-client.c:248
+#: panel/panel-dbus-client.c:243
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
 msgstr "暗示類型「%s」無效。有效的類型為真假值 (bool)、倍精度 (double)、整數 (int)、字串 (string)、單位 (unit)。"
 
-#: panel/panel-dialogs.c:58
+#: panel/panel-dialogs.c:53
 msgid "Unable to open the e-mail address"
 msgstr "無法打開電子郵件地址"
 
-#: panel/panel-dialogs.c:84
+#: panel/panel-dialogs.c:79
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Xfce 桌面環境的面板"
 
-#: panel/panel-dialogs.c:88
+#: panel/panel-dialogs.c:83
 msgid "translator-credits"
 msgstr "Cheng-Chia Tseng <pswo10680@gmail.com>, 2010.\nWalter Cheuk <wwycheuk@gmail.com>, 2013."
 
-#. setup the dialog
-#: panel/panel-dialogs.c:162
+#: panel/panel-dialogs.c:157
 msgid "Add New Item"
 msgstr "加入新項目"
 
-#: panel/panel-dialogs.c:165 panel/panel-item-dialog.c:194
+#: panel/panel-dialogs.c:157 plugins/actions/actions.c:870
+#: plugins/applicationsmenu/applicationsmenu.c:606
+#: plugins/directorymenu/directorymenu.c:466
+#: plugins/directorymenu/directorymenu.c:938
+msgid "_Cancel"
+msgstr "取消(_C)"
+
+#: panel/panel-dialogs.c:157 panel/panel-item-dialog.c:203
 #: panel/panel-preferences-dialog.glade:1223
 #: plugins/launcher/launcher-dialog.glade:219
 msgid "_Add"
 msgstr "加入(_A)"
 
-#: panel/panel-dialogs.c:176
+#: panel/panel-dialogs.c:168
 msgid "Please choose a panel for the new plugin:"
 msgstr "請為新插件選擇面板："
 
-#: panel/panel-dialogs.c:196 panel/panel-preferences-dialog.c:986
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1028
 #, c-format
 msgid "Panel %d"
 msgstr "面板 %d"
 
-#: panel/panel-dialogs.c:236
+#: panel/panel-dialogs.c:227
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr "因為面板正在以 kiosk 模式執行中，您不被允許以一般使用者身份變更面板的組態"
 
-#: panel/panel-dialogs.c:238
+#: panel/panel-dialogs.c:229
 msgid "Modifying the panel is not allowed"
 msgstr "修改面板不被允許"
 
-#: panel/panel-item-dialog.c:186 plugins/launcher/launcher-dialog.glade:198
+#: panel/panel-item-dialog.c:195 plugins/launcher/launcher-dialog.glade:198
 msgid "Add New Items"
 msgstr "加入新項目"
 
-#: panel/panel-item-dialog.c:202 panel/panel-preferences-dialog.glade:163
-#: panel/panel-tic-tac-toe.c:119 plugins/actions/actions-dialog.glade:82
+#: panel/panel-item-dialog.c:211 panel/panel-preferences-dialog.glade:163
+#: panel/panel-tic-tac-toe.c:118 plugins/actions/actions-dialog.glade:82
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:55
 #: plugins/clock/clock-dialog.glade:105
 #: plugins/directorymenu/directorymenu-dialog.glade:34
@@ -381,29 +377,26 @@ msgstr "加入新項目"
 #: plugins/launcher/launcher-dialog.glade:414
 #: plugins/pager/pager-dialog.glade:97
 #: plugins/separator/separator-dialog.glade:54
+#: plugins/showdesktop/showdesktop-dialog.glade:34
 #: plugins/tasklist/tasklist-dialog.glade:77
 #: plugins/windowmenu/windowmenu-dialog.glade:48
 msgid "_Close"
 msgstr "關閉(_C)"
 
-#: panel/panel-item-dialog.c:218 plugins/launcher/launcher-dialog.glade:272
+#: panel/panel-item-dialog.c:227 plugins/launcher/launcher-dialog.glade:272
 msgid "_Search:"
 msgstr "搜尋(_S)："
 
-#: panel/panel-item-dialog.c:226
+#: panel/panel-item-dialog.c:235
 msgid "Enter search phrase here"
 msgstr "在這裡輸入搜尋詞語"
 
-#: panel/panel-plugin-external.c:400
+#: panel/panel-plugin-external.c:413
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "插件「%s」不正常地離開了面板，想要重新啟動它嗎？"
 
-#: panel/panel-plugin-external.c:403
-msgid "Plugin Restart"
-msgstr ""
-
-#: panel/panel-plugin-external.c:404
+#: panel/panel-plugin-external.c:414
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -411,43 +404,47 @@ msgid ""
 "permanently removed from the panel."
 msgstr "該插件在 %d 秒內重新啟動超過一次。若您按下「執行」，面板將試著重新啟動該插件，否則它將永久自面板上移除。"
 
-#: panel/panel-plugin-external.c:408
+#: panel/panel-plugin-external.c:419
+msgid "Plugin Restart"
+msgstr ""
+
+#: panel/panel-plugin-external.c:420
 msgid "_Execute"
 msgstr "執行(_E)"
 
-#: panel/panel-preferences-dialog.c:541
+#: panel/panel-preferences-dialog.c:581
 msgid "Automatic"
 msgstr "自動"
 
-#: panel/panel-preferences-dialog.c:551
+#: panel/panel-preferences-dialog.c:590
 msgid "Primary"
 msgstr "主要"
 
 #. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:570
+#: panel/panel-preferences-dialog.c:609
 #, c-format
 msgid "Monitor %d"
 msgstr "顯示器 %d"
 
-#: panel/panel-preferences-dialog.c:1048
+#: panel/panel-preferences-dialog.c:1082
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "面板與插件組態將被永久移除"
 
-#: panel/panel-preferences-dialog.c:1049
+#: panel/panel-preferences-dialog.c:1091
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "確定要移除面板 %d 嗎？"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1244
+#: panel/panel-preferences-dialog.c:1382
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(外部)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1249
+#: panel/panel-preferences-dialog.c:1387
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -456,14 +453,23 @@ msgstr "內部名稱：%s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1261
+#: panel/panel-preferences-dialog.c:1399
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "內部名稱：%s-%d"
 
-#: panel/panel-preferences-dialog.c:1407
+#: panel/panel-preferences-dialog.c:1546
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "如果要從面板移除該項目，它將永遠消失。"
+
+#: panel/panel-preferences-dialog.c:1550
+#, c-format
+msgid "Are you sure that you want to remove these %d items?"
+msgstr ""
+
+#: panel/panel-preferences-dialog.c:1552
+msgid "If you remove them from the panel, they are permanently lost."
+msgstr ""
 
 #: panel/panel-preferences-dialog.glade:13
 msgid "Never"
@@ -712,47 +718,47 @@ msgstr "將目前所選的項目向下移動一列"
 msgid "Ite_ms"
 msgstr "項目(_M)"
 
-#: panel/panel-tic-tac-toe.c:117
+#: panel/panel-tic-tac-toe.c:116
 msgid "_New Game"
 msgstr "新增遊戲(_N)"
 
-#: panel/panel-tic-tac-toe.c:128
+#: panel/panel-tic-tac-toe.c:127
 msgid "_Level:"
 msgstr "等級(_L)："
 
-#: panel/panel-tic-tac-toe.c:134
+#: panel/panel-tic-tac-toe.c:133
 msgid "Novice"
 msgstr "新手"
 
-#: panel/panel-tic-tac-toe.c:135
+#: panel/panel-tic-tac-toe.c:134
 msgid "Intermediate"
 msgstr "中等"
 
-#: panel/panel-tic-tac-toe.c:136
+#: panel/panel-tic-tac-toe.c:135
 msgid "Experienced"
 msgstr "老手"
 
-#: panel/panel-tic-tac-toe.c:137
+#: panel/panel-tic-tac-toe.c:136
 msgid "Expert"
 msgstr "專家"
 
-#: panel/panel-window.c:3667
+#: panel/panel-window.c:3713
 msgid "_Lock Panel"
 msgstr "鎖住面板(_L)"
 
-#: migrate/main.c:106
+#: migrate/main.c:98
 msgid "Failed to load the default configuration"
 msgstr "未能載入預設組態"
 
-#: migrate/main.c:118
+#: migrate/main.c:110
 msgid "Panel config needs migration..."
 msgstr "面板組態需要遷移..."
 
-#: migrate/main.c:122
+#: migrate/main.c:114
 msgid "Failed to migrate the existing configuration"
 msgstr "未能轉移現有面板組態"
 
-#: migrate/main.c:128
+#: migrate/main.c:120
 msgid "Panel configuration has been updated."
 msgstr "面板組態已經更新。"
 
@@ -762,7 +768,7 @@ msgstr "面板組態已經更新。"
 msgid "Action Buttons"
 msgstr "動作按鈕"
 
-#: plugins/actions/actions-dialog.glade:38 plugins/actions/actions.c:36
+#: plugins/actions/actions-dialog.glade:38 plugins/actions/actions.c:37
 msgid "Session Menu"
 msgstr "工作階段選單"
 
@@ -820,144 +826,144 @@ msgstr "針對某些動作顯示倒數 30 秒的確認對話窗。"
 msgid "_Actions"
 msgstr "動作(_A)"
 
-#: plugins/actions/actions.c:157
+#: plugins/actions/actions.c:167
 msgid "Log Out"
 msgstr "登出"
 
-#: plugins/actions/actions.c:158
+#: plugins/actions/actions.c:168
 msgid "_Log Out"
 msgstr "登出(_L)"
 
-#: plugins/actions/actions.c:159
+#: plugins/actions/actions.c:169
 msgid "Are you sure you want to log out?"
 msgstr "確定要登出嗎？"
 
-#: plugins/actions/actions.c:160
+#: plugins/actions/actions.c:170
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "%d 秒內登出。"
 
-#: plugins/actions/actions.c:166
+#: plugins/actions/actions.c:175
 msgid "Log Out..."
 msgstr "登出..."
 
-#: plugins/actions/actions.c:167
+#: plugins/actions/actions.c:176
 msgid "Log _Out..."
 msgstr "登出(_O)..."
 
-#: plugins/actions/actions.c:174
+#: plugins/actions/actions.c:182
 msgid "Switch User"
 msgstr "切換使用者"
 
-#: plugins/actions/actions.c:175
+#: plugins/actions/actions.c:183
 msgid "_Switch User"
 msgstr "切換使用者(_S)"
 
-#: plugins/actions/actions.c:182
+#: plugins/actions/actions.c:189
 msgid "Lock Screen"
 msgstr "鎖住螢幕"
 
-#: plugins/actions/actions.c:183
+#: plugins/actions/actions.c:190
 msgid "Loc_k Screen"
 msgstr "鎖住螢幕(_O)"
 
-#: plugins/actions/actions.c:190
+#: plugins/actions/actions.c:196
 msgid "Hibernate"
 msgstr "休眠"
 
-#: plugins/actions/actions.c:191
+#: plugins/actions/actions.c:197
 msgid "_Hibernate"
 msgstr "休眠(_H)"
 
-#: plugins/actions/actions.c:192
+#: plugins/actions/actions.c:198
 msgid "Do you want to suspend to disk?"
 msgstr "想要將電腦暫停至磁碟中嗎？"
 
-#: plugins/actions/actions.c:193
+#: plugins/actions/actions.c:199
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "%d 秒內電腦休眠。"
 
-#: plugins/actions/actions.c:199
+#: plugins/actions/actions.c:204
 msgid "Hybrid Sleep"
 msgstr "混合睡眠"
 
-#: plugins/actions/actions.c:200
+#: plugins/actions/actions.c:205
 msgid "_Hybrid Sleep"
 msgstr "混合睡眠(_H)"
 
-#: plugins/actions/actions.c:201
+#: plugins/actions/actions.c:206
 msgid "Do you want to hibernate and suspend the system?"
 msgstr "你是否打算把系統休眠？"
 
-#: plugins/actions/actions.c:202
+#: plugins/actions/actions.c:207
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr "在 %d秒內休眠與暫停電腦。"
 
-#: plugins/actions/actions.c:208
+#: plugins/actions/actions.c:212
 msgid "Suspend"
 msgstr "暫停"
 
-#: plugins/actions/actions.c:209
+#: plugins/actions/actions.c:213
 msgid "Sus_pend"
 msgstr "暫停(_P)"
 
-#: plugins/actions/actions.c:210
+#: plugins/actions/actions.c:214
 msgid "Do you want to suspend to RAM?"
 msgstr "想要將電腦暫停至 RAM 中嗎？"
 
-#: plugins/actions/actions.c:211
+#: plugins/actions/actions.c:215
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "%d 秒內暫停電腦。"
 
-#: plugins/actions/actions.c:217
+#: plugins/actions/actions.c:220
 msgid "Restart"
 msgstr "重新啟動"
 
-#: plugins/actions/actions.c:218
+#: plugins/actions/actions.c:221
 msgid "_Restart"
 msgstr "重新啟動"
 
-#: plugins/actions/actions.c:219
+#: plugins/actions/actions.c:222
 msgid "Are you sure you want to restart?"
 msgstr "確定要重新啟動嗎？"
 
-#: plugins/actions/actions.c:220
+#: plugins/actions/actions.c:223
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "%d 秒內重新啟動電腦。"
 
-#: plugins/actions/actions.c:226
+#: plugins/actions/actions.c:228
 msgid "Shut Down"
 msgstr "關機"
 
-#: plugins/actions/actions.c:227
+#: plugins/actions/actions.c:229
 msgid "Shut _Down"
 msgstr "關機(_D)"
 
-#: plugins/actions/actions.c:228
+#: plugins/actions/actions.c:230
 msgid "Are you sure you want to shut down?"
 msgstr "確定要關機嗎？"
 
-#: plugins/actions/actions.c:229
+#: plugins/actions/actions.c:231
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "%d 秒內關閉電腦。"
 
-#: plugins/actions/actions.c:677 plugins/separator/separator-dialog.glade:26
+#: plugins/actions/actions.c:732 plugins/separator/separator-dialog.glade:26
 #: plugins/separator/separator-dialog.glade:38
 #: plugins/separator/separator.desktop.in.in:4
 msgid "Separator"
 msgstr "分隔符"
 
-#: plugins/actions/actions.c:1111
+#: plugins/actions/actions.c:1165
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "無法執行動作「%s」"
 
-#: plugins/actions/actions.c:1316
+#: plugins/actions/actions.c:1369
 msgid "Little Mouse"
 msgstr ""
 
@@ -1039,23 +1045,23 @@ msgid "Menu File"
 msgstr "選單檔案"
 
 #. I18N: default tooltip of the application menu
-#: plugins/applicationsmenu/applicationsmenu.c:37
+#: plugins/applicationsmenu/applicationsmenu.c:38
 msgid "Applications"
 msgstr "應用"
 
-#: plugins/applicationsmenu/applicationsmenu.c:600
-#: plugins/directorymenu/directorymenu.c:459
+#: plugins/applicationsmenu/applicationsmenu.c:606
+#: plugins/directorymenu/directorymenu.c:466
 msgid "Select An Icon"
 msgstr "選取圖示"
 
-#: plugins/applicationsmenu/applicationsmenu.c:603
-#: plugins/directorymenu/directorymenu.c:462
+#: plugins/applicationsmenu/applicationsmenu.c:606
+#: plugins/directorymenu/directorymenu.c:466
 msgid "_OK"
 msgstr "好(_O)"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:641 plugins/clock/clock.c:1040
-#: plugins/launcher/launcher.c:2480
+#: plugins/applicationsmenu/applicationsmenu.c:643 plugins/clock/clock.c:1048
+#: plugins/launcher/launcher.c:2500
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "未能執行「%s」指令。"
@@ -1095,20 +1101,20 @@ msgid "Show help options"
 msgstr "顯示幫助選項"
 
 #. TRANSLATORS: adjust this accordingly for your locale format
-#: plugins/clock/clock.c:46
+#: plugins/clock/clock.c:47
 msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
 
-#: plugins/clock/clock.c:153
+#: plugins/clock/clock.c:166
 msgid "Week %V"
 msgstr "第 %V 週"
 
-#: plugins/clock/clock.c:474
+#: plugins/clock/clock.c:484
 msgid "Failed to execute clock command"
 msgstr "未能執行時鐘指令"
 
-#: plugins/clock/clock.c:979
+#: plugins/clock/clock.c:987
 msgid "Custom Format"
 msgstr "自訂格式"
 
@@ -1279,313 +1285,313 @@ msgstr ""
 msgid "Clock Options"
 msgstr "時鐘選項"
 
-#: plugins/clock/clock-digital.h:27
+#: plugins/clock/clock-digital.h:30
 msgctxt "Time"
 msgid "%R"
 msgstr ""
 
-#: plugins/clock/clock-digital.h:28
+#: plugins/clock/clock-digital.h:31
 msgctxt "Date"
 msgid "%Y-%m-%d"
 msgstr ""
 
-#: plugins/clock/clock-fuzzy.c:82
+#: plugins/clock/clock-fuzzy.c:79
 msgid "Night"
 msgstr "深夜"
 
-#: plugins/clock/clock-fuzzy.c:83
+#: plugins/clock/clock-fuzzy.c:80
 msgid "Early morning"
 msgstr "清晨"
 
-#: plugins/clock/clock-fuzzy.c:84
+#: plugins/clock/clock-fuzzy.c:81
 msgid "Morning"
 msgstr "早上"
 
-#: plugins/clock/clock-fuzzy.c:85
+#: plugins/clock/clock-fuzzy.c:82
 msgid "Almost noon"
 msgstr "傍午"
 
-#: plugins/clock/clock-fuzzy.c:86
+#: plugins/clock/clock-fuzzy.c:83
 msgid "Noon"
 msgstr "中午"
 
-#: plugins/clock/clock-fuzzy.c:87
+#: plugins/clock/clock-fuzzy.c:84
 msgid "Afternoon"
 msgstr "午後"
 
-#: plugins/clock/clock-fuzzy.c:88
+#: plugins/clock/clock-fuzzy.c:85
 msgid "Evening"
 msgstr "傍晚"
 
-#: plugins/clock/clock-fuzzy.c:89
+#: plugins/clock/clock-fuzzy.c:86
 msgid "Late evening"
 msgstr "晚上"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: plugins/clock/clock-fuzzy.c:96
+#: plugins/clock/clock-fuzzy.c:92
 #, no-c-format
 msgid "%0 o'clock"
 msgstr "%0點鐘"
 
-#: plugins/clock/clock-fuzzy.c:97
+#: plugins/clock/clock-fuzzy.c:93
 #, no-c-format
 msgid "five past %0"
 msgstr "%0點零五分"
 
-#: plugins/clock/clock-fuzzy.c:98
+#: plugins/clock/clock-fuzzy.c:94
 #, no-c-format
 msgid "ten past %0"
 msgstr "%0點零十分"
 
-#: plugins/clock/clock-fuzzy.c:99
+#: plugins/clock/clock-fuzzy.c:95
 #, no-c-format
 msgid "quarter past %0"
 msgstr "%0點零十五分"
 
-#: plugins/clock/clock-fuzzy.c:100
+#: plugins/clock/clock-fuzzy.c:96
 #, no-c-format
 msgid "twenty past %0"
 msgstr "%0點零二十分"
 
-#: plugins/clock/clock-fuzzy.c:101
+#: plugins/clock/clock-fuzzy.c:97
 #, no-c-format
 msgid "twenty five past %0"
 msgstr "%0點過二十五分"
 
-#: plugins/clock/clock-fuzzy.c:102
+#: plugins/clock/clock-fuzzy.c:98
 #, no-c-format
 msgid "half past %0"
 msgstr "%0點半"
 
-#: plugins/clock/clock-fuzzy.c:103
+#: plugins/clock/clock-fuzzy.c:99
 #, no-c-format
 msgid "twenty five to %1"
 msgstr "再二十五分後%1點"
 
-#: plugins/clock/clock-fuzzy.c:104
+#: plugins/clock/clock-fuzzy.c:100
 #, no-c-format
 msgid "twenty to %1"
 msgstr "再二十分後%1點"
 
-#: plugins/clock/clock-fuzzy.c:105
+#: plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "quarter to %1"
 msgstr "再十五分後%1點"
 
-#: plugins/clock/clock-fuzzy.c:106
+#: plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "ten to %1"
 msgstr "再十分後%1點"
 
-#: plugins/clock/clock-fuzzy.c:107
+#: plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "five to %1"
 msgstr "再五分後%1點"
 
-#: plugins/clock/clock-fuzzy.c:108
+#: plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "%1 o'clock"
 msgstr "%1點鐘"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: plugins/clock/clock-fuzzy.c:115
+#: plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "%0點鐘"
 
-#: plugins/clock/clock-fuzzy.c:116
+#: plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "%0點零五分"
 
-#: plugins/clock/clock-fuzzy.c:117
+#: plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "%0點零十分"
 
-#: plugins/clock/clock-fuzzy.c:118
+#: plugins/clock/clock-fuzzy.c:113
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "%0點零十五分"
 
-#: plugins/clock/clock-fuzzy.c:119
+#: plugins/clock/clock-fuzzy.c:114
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "%0點零二十分"
 
-#: plugins/clock/clock-fuzzy.c:120
+#: plugins/clock/clock-fuzzy.c:115
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "%0點零二十五分"
 
-#: plugins/clock/clock-fuzzy.c:121
+#: plugins/clock/clock-fuzzy.c:116
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "%0點半"
 
-#: plugins/clock/clock-fuzzy.c:122
+#: plugins/clock/clock-fuzzy.c:117
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "再二十五分後%1點"
 
-#: plugins/clock/clock-fuzzy.c:123
+#: plugins/clock/clock-fuzzy.c:118
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "再二十分後%1點"
 
-#: plugins/clock/clock-fuzzy.c:124
+#: plugins/clock/clock-fuzzy.c:119
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "再十五分後%1點"
 
-#: plugins/clock/clock-fuzzy.c:125
+#: plugins/clock/clock-fuzzy.c:120
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "再十分後%1點"
 
-#: plugins/clock/clock-fuzzy.c:126
+#: plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "再五分後%1點"
 
-#: plugins/clock/clock-fuzzy.c:127
+#: plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "%1點鐘"
 
-#: plugins/clock/clock-fuzzy.c:132
+#: plugins/clock/clock-fuzzy.c:126
 msgctxt "am"
 msgid "one"
 msgstr "一"
 
-#: plugins/clock/clock-fuzzy.c:133
+#: plugins/clock/clock-fuzzy.c:127
 msgctxt "am"
 msgid "two"
 msgstr "二"
 
-#: plugins/clock/clock-fuzzy.c:134
+#: plugins/clock/clock-fuzzy.c:128
 msgctxt "am"
 msgid "three"
 msgstr "三"
 
-#: plugins/clock/clock-fuzzy.c:135
+#: plugins/clock/clock-fuzzy.c:129
 msgctxt "am"
 msgid "four"
 msgstr "四"
 
-#: plugins/clock/clock-fuzzy.c:136
+#: plugins/clock/clock-fuzzy.c:130
 msgctxt "am"
 msgid "five"
 msgstr "五"
 
-#: plugins/clock/clock-fuzzy.c:137
+#: plugins/clock/clock-fuzzy.c:131
 msgctxt "am"
 msgid "six"
 msgstr "六"
 
-#: plugins/clock/clock-fuzzy.c:138
+#: plugins/clock/clock-fuzzy.c:132
 msgctxt "am"
 msgid "seven"
 msgstr "七"
 
-#: plugins/clock/clock-fuzzy.c:139
+#: plugins/clock/clock-fuzzy.c:133
 msgctxt "am"
 msgid "eight"
 msgstr "八"
 
-#: plugins/clock/clock-fuzzy.c:140
+#: plugins/clock/clock-fuzzy.c:134
 msgctxt "am"
 msgid "nine"
 msgstr "九"
 
-#: plugins/clock/clock-fuzzy.c:141
+#: plugins/clock/clock-fuzzy.c:135
 msgctxt "am"
 msgid "ten"
 msgstr "十"
 
-#: plugins/clock/clock-fuzzy.c:142
+#: plugins/clock/clock-fuzzy.c:136
 msgctxt "am"
 msgid "eleven"
 msgstr "十一"
 
 #. I18N: 12 AM is midnight
-#: plugins/clock/clock-fuzzy.c:144
+#: plugins/clock/clock-fuzzy.c:138
 msgctxt "am"
 msgid "twelve"
 msgstr "十二"
 
-#: plugins/clock/clock-fuzzy.c:149
+#: plugins/clock/clock-fuzzy.c:142
 msgctxt "pm"
 msgid "one"
 msgstr "一"
 
-#: plugins/clock/clock-fuzzy.c:150
+#: plugins/clock/clock-fuzzy.c:143
 msgctxt "pm"
 msgid "two"
 msgstr "二"
 
-#: plugins/clock/clock-fuzzy.c:151
+#: plugins/clock/clock-fuzzy.c:144
 msgctxt "pm"
 msgid "three"
 msgstr "三"
 
-#: plugins/clock/clock-fuzzy.c:152
+#: plugins/clock/clock-fuzzy.c:145
 msgctxt "pm"
 msgid "four"
 msgstr "四"
 
-#: plugins/clock/clock-fuzzy.c:153
+#: plugins/clock/clock-fuzzy.c:146
 msgctxt "pm"
 msgid "five"
 msgstr "五"
 
-#: plugins/clock/clock-fuzzy.c:154
+#: plugins/clock/clock-fuzzy.c:147
 msgctxt "pm"
 msgid "six"
 msgstr "六"
 
-#: plugins/clock/clock-fuzzy.c:155
+#: plugins/clock/clock-fuzzy.c:148
 msgctxt "pm"
 msgid "seven"
 msgstr "七"
 
-#: plugins/clock/clock-fuzzy.c:156
+#: plugins/clock/clock-fuzzy.c:149
 msgctxt "pm"
 msgid "eight"
 msgstr "八"
 
-#: plugins/clock/clock-fuzzy.c:157
+#: plugins/clock/clock-fuzzy.c:150
 msgctxt "pm"
 msgid "nine"
 msgstr "九"
 
-#: plugins/clock/clock-fuzzy.c:158
+#: plugins/clock/clock-fuzzy.c:151
 msgctxt "pm"
 msgid "ten"
 msgstr "十"
 
-#: plugins/clock/clock-fuzzy.c:159
+#: plugins/clock/clock-fuzzy.c:152
 msgctxt "pm"
 msgid "eleven"
 msgstr "十一"
 
 #. I18N: 12 PM is noon
-#: plugins/clock/clock-fuzzy.c:161
+#: plugins/clock/clock-fuzzy.c:154
 msgctxt "pm"
 msgid "twelve"
 msgstr "十二"
@@ -1594,46 +1600,46 @@ msgstr "十二"
 msgid "What time is it?"
 msgstr "現在幾點？"
 
-#: plugins/directorymenu/directorymenu.c:289
+#: plugins/directorymenu/directorymenu.c:298
 #: plugins/directorymenu/directorymenu.desktop.in.in:4
 #: plugins/directorymenu/directorymenu-dialog.glade:18
 msgid "Directory Menu"
 msgstr "目錄選單"
 
-#: plugins/directorymenu/directorymenu.c:693
+#: plugins/directorymenu/directorymenu.c:696
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "無法啟動應用程式「%s」"
 
-#: plugins/directorymenu/directorymenu.c:724
+#: plugins/directorymenu/directorymenu.c:727
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "無法查詢「%s」的內容類型"
 
-#: plugins/directorymenu/directorymenu.c:733
+#: plugins/directorymenu/directorymenu.c:736
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "找不到「%s」的預設應用程式"
 
-#: plugins/directorymenu/directorymenu.c:749
+#: plugins/directorymenu/directorymenu.c:752
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "無法為「%s」啟動預設應用程式"
 
-#: plugins/directorymenu/directorymenu.c:844
+#: plugins/directorymenu/directorymenu.c:846
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "未能執行「%s」分類的偏好應用程式"
 
-#: plugins/directorymenu/directorymenu.c:925
+#: plugins/directorymenu/directorymenu.c:927
 msgid "Create New Folder"
 msgstr "建立新資料夾"
 
-#: plugins/directorymenu/directorymenu.c:930
+#: plugins/directorymenu/directorymenu.c:932
 msgid "Create New Text Document"
 msgstr "創建新的文本文檔"
 
-#: plugins/directorymenu/directorymenu.c:937
+#: plugins/directorymenu/directorymenu.c:938
 msgid "C_reate"
 msgstr "建立(_R)"
 
@@ -1641,11 +1647,11 @@ msgstr "建立(_R)"
 msgid "Create & _Open"
 msgstr ""
 
-#: plugins/directorymenu/directorymenu.c:952
+#: plugins/directorymenu/directorymenu.c:951
 msgid "Enter the new name:"
 msgstr "輸入新名稱："
 
-#: plugins/directorymenu/directorymenu.c:988
+#: plugins/directorymenu/directorymenu.c:987
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr ""
@@ -1654,15 +1660,15 @@ msgstr ""
 msgid "Open Folder"
 msgstr "開啟資料夾"
 
-#: plugins/directorymenu/directorymenu.c:1082
+#: plugins/directorymenu/directorymenu.c:1083
 msgid "Open in Terminal"
 msgstr "在終端機開啟"
 
-#: plugins/directorymenu/directorymenu.c:1095
+#: plugins/directorymenu/directorymenu.c:1097
 msgid "Create Folder..."
 msgstr "創建文件夾..."
 
-#: plugins/directorymenu/directorymenu.c:1108
+#: plugins/directorymenu/directorymenu.c:1111
 msgid "Create Text Document..."
 msgstr "建立文字文件..."
 
@@ -1719,34 +1725,34 @@ msgstr "檔案樣式(_F)："
 msgid "Filtering"
 msgstr "篩選方式"
 
-#: plugins/launcher/launcher.c:394
+#: plugins/launcher/launcher.c:431
 msgid "Open launcher menu"
 msgstr "開啟啟動列選單"
 
-#: plugins/launcher/launcher.c:1592
+#: plugins/launcher/launcher.c:1615
 msgid "Unnamed Item"
 msgstr "未命名項目"
 
-#: plugins/launcher/launcher.c:1794
+#: plugins/launcher/launcher.c:1817
 msgid "No items"
 msgstr "無項目"
 
-#: plugins/launcher/launcher-dialog.c:784
+#: plugins/launcher/launcher-dialog.c:781
 msgid "Failed to open desktop item editor"
 msgstr "未能開啟桌面項目編輯器"
 
-#: plugins/launcher/launcher-dialog.c:852
+#: plugins/launcher/launcher-dialog.c:842
 msgid "If you delete an item, it will be permanently removed"
 msgstr "若刪除項目，其會被永久移除"
 
-#: plugins/launcher/launcher-dialog.c:853
+#: plugins/launcher/launcher-dialog.c:852
+msgid "Unnamed item"
+msgstr "未命名項目"
+
+#: plugins/launcher/launcher-dialog.c:854
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "確定要移除「%s」嗎？"
-
-#: plugins/launcher/launcher-dialog.c:854
-msgid "Unnamed item"
-msgstr "未命名項目"
 
 #: plugins/launcher/launcher-dialog.glade:30
 msgid "Default"
@@ -1856,15 +1862,15 @@ msgstr "進階"
 msgid "Program launcher with optional menu"
 msgstr "程式啟動列，可附加選單"
 
-#: plugins/pager/pager.c:689 plugins/pager/pager-dialog.glade:64
+#: plugins/pager/pager.c:703 plugins/pager/pager-dialog.glade:64
 msgid "Workspace _Settings..."
 msgstr "工作區設定值(_S)..."
 
-#: plugins/pager/pager.c:790
+#: plugins/pager/pager.c:802
 msgid "Unable to open the workspace settings"
 msgstr "無法開啟工作區設定值"
 
-#: plugins/pager/pager-buttons.c:588 plugins/windowmenu/windowmenu.c:902
+#: plugins/pager/pager-buttons.c:596 plugins/windowmenu/windowmenu.c:920
 #, c-format
 msgid "Workspace %d"
 msgstr "工作區 %d"
@@ -1925,28 +1931,38 @@ msgstr "延展(_E)"
 msgid "Adds a separator or space between panel items"
 msgstr "在面板項目間加入分隔符或空格"
 
-#: plugins/showdesktop/showdesktop.c:245
+#: plugins/showdesktop/showdesktop.c:321
 msgid "Restore the minimized windows"
 msgstr "還原最小化的視窗"
 
-#: plugins/showdesktop/showdesktop.c:247
+#: plugins/showdesktop/showdesktop.c:323
 msgid "Minimize all open windows and show the desktop"
 msgstr "最小化所有開啟視窗並顯示桌面"
 
-#: plugins/showdesktop/showdesktop.c:250
+#: plugins/showdesktop/showdesktop.c:326
+#: plugins/showdesktop/showdesktop-dialog.glade:18
 #: plugins/showdesktop/showdesktop.desktop.in.in:4
 msgid "Show Desktop"
 msgstr "顯示桌面"
+
+#: plugins/showdesktop/showdesktop-dialog.glade:92
+msgid "_Show on mouse hover"
+msgstr ""
+
+#: plugins/showdesktop/showdesktop-dialog.glade:113
+#: plugins/systray/sn-dialog.glade:300
+msgid "Behavior"
+msgstr "行為"
 
 #: plugins/showdesktop/showdesktop.desktop.in.in:5
 msgid "Hide all windows and show the desktop"
 msgstr "隱藏所有視窗並顯示桌面"
 
-#: plugins/systray/sn-dialog.c:645
+#: plugins/systray/sn-dialog.c:416
 msgid "Clear"
 msgstr "清除"
 
-#: plugins/systray/sn-dialog.c:646
+#: plugins/systray/sn-dialog.c:421
 msgid "Are you sure you want to clear the list of known items?"
 msgstr ""
 
@@ -1998,10 +2014,6 @@ msgstr ""
 msgid "Item buttons will take a square when it's possible"
 msgstr ""
 
-#: plugins/systray/sn-dialog.glade:300
-msgid "Behavior"
-msgstr "行為"
-
 #: plugins/systray/sn-dialog.glade:386 plugins/systray/sn-dialog.glade:618
 msgid "Item"
 msgstr ""
@@ -2050,22 +2062,22 @@ msgstr ""
 msgid "Systray Icons"
 msgstr ""
 
-#: plugins/systray/systray.c:145
+#: plugins/systray/systray.c:149
 msgid "Unable to start the notification area"
 msgstr "無法啟動通知區域"
 
 #. create fake error and show it
-#: plugins/systray/systray.c:406
+#: plugins/systray/systray.c:409
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "很有可能另一套工具組接管了通知區域的功能。此區域將無法使用。"
 
-#: plugins/systray/systray.c:408
+#: plugins/systray/systray.c:411
 msgid "The notification area lost selection"
 msgstr "通知區域失去選取項目"
 
-#: plugins/systray/systray-manager.c:402
+#: plugins/systray/systray-manager.c:386
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "未能獲取螢幕 %d 的管理程式選取"
@@ -2178,36 +2190,32 @@ msgstr "顯示所有螢幕的視窗(_N)"
 msgid "Show only _minimized windows"
 msgstr "只顯示最小化的視窗(_M)"
 
-#: plugins/tasklist/tasklist-widget.c:3109
+#: plugins/tasklist/tasklist-widget.c:3105
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:3113
-msgid "Error"
-msgstr "錯誤"
-
-#: plugins/tasklist/tasklist-widget.c:3142
+#: plugins/tasklist/tasklist-widget.c:3132
 msgid "Launch New Instance"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:3887
+#: plugins/tasklist/tasklist-widget.c:3876
 msgid "Mi_nimize All"
 msgstr "全部最小化(_N)"
 
-#: plugins/tasklist/tasklist-widget.c:3894
+#: plugins/tasklist/tasklist-widget.c:3883
 msgid "Un_minimize All"
 msgstr "取消最小化(_M)"
 
-#: plugins/tasklist/tasklist-widget.c:3901
+#: plugins/tasklist/tasklist-widget.c:3890
 msgid "Ma_ximize All"
 msgstr "全部最大化(_X)"
 
-#: plugins/tasklist/tasklist-widget.c:3908
+#: plugins/tasklist/tasklist-widget.c:3897
 msgid "_Unmaximize All"
 msgstr "取消最大化(_U)"
 
-#: plugins/tasklist/tasklist-widget.c:3919
+#: plugins/tasklist/tasklist-widget.c:3908
 msgid "_Close All"
 msgstr "全部關閉(_C)"
 
@@ -2215,28 +2223,28 @@ msgstr "全部關閉(_C)"
 msgid "Switch between open windows using buttons"
 msgstr "使用按鈕切換開啟的視窗"
 
-#: plugins/windowmenu/windowmenu.c:698
+#: plugins/windowmenu/windowmenu.c:721
 msgid "Desktop"
 msgstr "桌面"
 
-#: plugins/windowmenu/windowmenu.c:1298
+#: plugins/windowmenu/windowmenu.c:1315
 msgid "No Windows"
 msgstr "無視窗"
 
-#: plugins/windowmenu/windowmenu.c:1313
+#: plugins/windowmenu/windowmenu.c:1330
 msgid "Urgent Windows"
 msgstr "緊急視窗"
 
-#: plugins/windowmenu/windowmenu.c:1358
+#: plugins/windowmenu/windowmenu.c:1375
 msgid "Add Workspace"
 msgstr "新增工作區"
 
-#: plugins/windowmenu/windowmenu.c:1380
+#: plugins/windowmenu/windowmenu.c:1397
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "移除工作區「%s」"
 
-#: plugins/windowmenu/windowmenu.c:1382
+#: plugins/windowmenu/windowmenu.c:1399
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "移除工作區 %d"
