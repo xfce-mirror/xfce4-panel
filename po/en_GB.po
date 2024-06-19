@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-05-06 12:49+0200\n"
+"POT-Creation-Date: 2024-06-19 00:49+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2017,2022-2024\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/xfce/xfce4-panel/language/en_GB/)\n"
@@ -48,77 +48,66 @@ msgstr "Panel"
 msgid "Customize the panel"
 msgstr "Customise the panel"
 
-#. I18N: %s is the name of the plugin
-#: libxfce4panel/xfce-panel-plugin.c:1094
-#: panel/panel-preferences-dialog.c:1542
-#, c-format
-msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "Are you sure that you want to remove \"%s\"?"
+#: libxfce4panel/xfce-panel-plugin.c:1088
+#: panel/panel-preferences-dialog.c:1537
+msgid "Remove"
+msgstr "Remove"
 
-#: libxfce4panel/xfce-panel-plugin.c:1099
-#: panel/panel-preferences-dialog.c:1557
-msgid "Remove Item"
-msgstr "Remove Item"
-
-#: libxfce4panel/xfce-panel-plugin.c:1102
+#: libxfce4panel/xfce-panel-plugin.c:1089
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "Removing the item from the panel also means its configuration will be lost."
 
-#: libxfce4panel/xfce-panel-plugin.c:1103 panel/panel-dialogs.c:157
-#: panel/panel-preferences-dialog.c:1560
-#: plugins/applicationsmenu/applicationsmenu.c:606
-#: plugins/directorymenu/directorymenu.c:466
-#: plugins/directorymenu/directorymenu.c:938
-msgid "_Cancel"
-msgstr "_Cancel"
+#: libxfce4panel/xfce-panel-plugin.c:1093
+#: panel/panel-preferences-dialog.c:1544
+#, c-format
+msgid "Are you sure that you want to remove \"%s\"?"
+msgstr "Are you sure that you want to remove \"%s\"?"
+
+#. properties item
+#: libxfce4panel/xfce-panel-plugin.c:1215
+msgid "_Properties"
+msgstr "_Properties"
+
+#. about item
+#: libxfce4panel/xfce-panel-plugin.c:1226 panel/panel-window.c:3751
+msgid "_About"
+msgstr "_About"
+
+#. move item
+#: libxfce4panel/xfce-panel-plugin.c:1237
+msgid "_Move"
+msgstr "_Move"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1104
-#: libxfce4panel/xfce-panel-plugin.c:1271 panel/panel-application.c:362
-#: panel/panel-plugin-external.c:421 panel/panel-preferences-dialog.c:1081
-#: panel/panel-preferences-dialog.c:1560
+#: libxfce4panel/xfce-panel-plugin.c:1253 panel/panel-application.c:357
+#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1083
 #: panel/panel-preferences-dialog.glade:1240
 #: plugins/launcher/launcher-dialog.c:841
 msgid "_Remove"
 msgstr "_Remove"
 
-#. properties item
-#: libxfce4panel/xfce-panel-plugin.c:1233
-msgid "_Properties"
-msgstr "_Properties"
-
-#. about item
-#: libxfce4panel/xfce-panel-plugin.c:1244 panel/panel-window.c:3751
-msgid "_About"
-msgstr "_About"
-
-#. move item
-#: libxfce4panel/xfce-panel-plugin.c:1255
-msgid "_Move"
-msgstr "_Move"
-
-#: libxfce4panel/xfce-panel-plugin.c:1289
+#: libxfce4panel/xfce-panel-plugin.c:1271
 msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1297 panel/panel-window.c:3688
+#: libxfce4panel/xfce-panel-plugin.c:1279 panel/panel-window.c:3688
 msgid "Add _New Items..."
 msgstr "Add _New Items..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1308 panel/panel-window.c:3699
+#: libxfce4panel/xfce-panel-plugin.c:1290 panel/panel-window.c:3699
 msgid "Panel Pr_eferences..."
 msgstr "Panel Pr_eferences..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1325 panel/panel-window.c:3726
+#: libxfce4panel/xfce-panel-plugin.c:1307 panel/panel-window.c:3726
 msgid "Log _Out"
 msgstr "Log _Out"
 
 #. help item
-#: libxfce4panel/xfce-panel-plugin.c:1341 panel/panel-item-dialog.c:207
+#: libxfce4panel/xfce-panel-plugin.c:1323 panel/panel-item-dialog.c:207
 #: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3742
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
@@ -134,7 +123,7 @@ msgid "_Help"
 msgstr "_Help"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1352
+#: libxfce4panel/xfce-panel-plugin.c:1334
 msgid "About"
 msgstr "About"
 
@@ -256,18 +245,14 @@ msgstr "Execute"
 msgid "Failed to launch the migration application"
 msgstr "Failed to launch the migration application"
 
-#: panel/panel-application.c:351
+#: panel/panel-application.c:347
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel configuration?"
 
-#: panel/panel-application.c:353
-msgid "Plugin loading failure"
-msgstr "Plugin loading failure"
-
-#: panel/panel-application.c:356
+#: panel/panel-application.c:349
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -277,42 +262,46 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr "This plugin is in the current xfce4-panel configuration but could not be loaded, probably due to an installation issue. If you know what you're doing, you can remove it permanently, otherwise you'd better quit and make a backup of the current configuration using %s, before checking your installation and trying to start xfce4-panel again."
 
-#: panel/panel-application.c:362
+#: panel/panel-application.c:356
+msgid "Plugin loading failure"
+msgstr "Plugin loading failure"
+
+#: panel/panel-application.c:357
 msgid "_Quit"
 msgstr "_Quit"
 
-#: panel/panel-application.c:1034
+#: panel/panel-application.c:1037
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "This will create a new launcher plug-in on the panel and inserts the dropped files as menu items."
 
-#: panel/panel-application.c:1037
+#: panel/panel-application.c:1040
 msgid "Create _Launcher"
 msgstr "Create _Launcher"
 
-#: panel/panel-application.c:1038
+#: panel/panel-application.c:1041
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Create new launcher from %d desktop file"
 msgstr[1] "Create new launcher from %d desktop files"
 
-#: panel/panel-application.c:1799
+#: panel/panel-application.c:1802
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "You have started X without session manager. Clicking Quit will close the X server."
 
-#: panel/panel-application.c:1802
+#: panel/panel-application.c:1805
 msgid "Quit"
 msgstr "Quit"
 
-#: panel/panel-application.c:1802
+#: panel/panel-application.c:1805
 msgid "Are you sure you want to quit the panel?"
 msgstr "Are you sure you want to quit the panel?"
 
-#: panel/panel-application.c:1810
+#: panel/panel-application.c:1813
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Failed to execute command \"%s\""
@@ -345,6 +334,13 @@ msgstr "Jeff Bailes <thepizzaking@gmail.com>, 2010"
 msgid "Add New Item"
 msgstr "Add New Item"
 
+#: panel/panel-dialogs.c:157 plugins/actions/actions.c:870
+#: plugins/applicationsmenu/applicationsmenu.c:606
+#: plugins/directorymenu/directorymenu.c:466
+#: plugins/directorymenu/directorymenu.c:938
+msgid "_Cancel"
+msgstr "_Cancel"
+
 #: panel/panel-dialogs.c:157 panel/panel-item-dialog.c:203
 #: panel/panel-preferences-dialog.glade:1223
 #: plugins/launcher/launcher-dialog.glade:219
@@ -355,7 +351,7 @@ msgstr "_Add"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Please choose a panel for the new plug-in:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1026
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1028
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -397,16 +393,12 @@ msgstr "_Search:"
 msgid "Enter search phrase here"
 msgstr "Enter search phrase here"
 
-#: panel/panel-plugin-external.c:412
+#: panel/panel-plugin-external.c:413
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "Plug-in \"%s\" unexpectedly left the panel, do you want to restart it?"
 
-#: panel/panel-plugin-external.c:415
-msgid "Plugin Restart"
-msgstr "Plugin Restart"
-
-#: panel/panel-plugin-external.c:416
+#: panel/panel-plugin-external.c:414
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -414,43 +406,47 @@ msgid ""
 "permanently removed from the panel."
 msgstr "The plug-in restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plug-in otherwise it will be permanently removed from the panel."
 
-#: panel/panel-plugin-external.c:421
+#: panel/panel-plugin-external.c:419
+msgid "Plugin Restart"
+msgstr "Plugin Restart"
+
+#: panel/panel-plugin-external.c:420
 msgid "_Execute"
 msgstr "_Execute"
 
-#: panel/panel-preferences-dialog.c:579
+#: panel/panel-preferences-dialog.c:581
 msgid "Automatic"
 msgstr "Automatic"
 
-#: panel/panel-preferences-dialog.c:588
+#: panel/panel-preferences-dialog.c:590
 msgid "Primary"
 msgstr "Primary"
 
 #. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:607
+#: panel/panel-preferences-dialog.c:609
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: panel/panel-preferences-dialog.c:1080
+#: panel/panel-preferences-dialog.c:1082
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "The panel and plug-in configurations will be permanently removed"
 
-#: panel/panel-preferences-dialog.c:1089
+#: panel/panel-preferences-dialog.c:1091
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Are you sure you want to remove panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1380
+#: panel/panel-preferences-dialog.c:1382
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(external)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1385
+#: panel/panel-preferences-dialog.c:1387
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -459,21 +455,21 @@ msgstr "Internal name: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1397
+#: panel/panel-preferences-dialog.c:1399
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Internal name: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1544
+#: panel/panel-preferences-dialog.c:1546
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "If you remove the item from the panel, it is permanently lost."
 
-#: panel/panel-preferences-dialog.c:1548
+#: panel/panel-preferences-dialog.c:1550
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Are you sure that you want to remove these %d items?"
 
-#: panel/panel-preferences-dialog.c:1550
+#: panel/panel-preferences-dialog.c:1552
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "If you remove them from the panel, they are permanently lost."
 
@@ -832,133 +828,133 @@ msgstr "Show a confirmation dialogue with a 30 second timeout for some of the ac
 msgid "_Actions"
 msgstr "_Actions"
 
-#: plugins/actions/actions.c:166
+#: plugins/actions/actions.c:167
 msgid "Log Out"
 msgstr "Log Out"
 
-#: plugins/actions/actions.c:167
+#: plugins/actions/actions.c:168
 msgid "_Log Out"
 msgstr "_Log Out"
 
-#: plugins/actions/actions.c:168
+#: plugins/actions/actions.c:169
 msgid "Are you sure you want to log out?"
 msgstr "Are you sure you want to log out?"
 
-#: plugins/actions/actions.c:169
+#: plugins/actions/actions.c:170
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Logging out in %d seconds."
 
-#: plugins/actions/actions.c:174
+#: plugins/actions/actions.c:175
 msgid "Log Out..."
 msgstr "Log Out..."
 
-#: plugins/actions/actions.c:175
+#: plugins/actions/actions.c:176
 msgid "Log _Out..."
 msgstr "Log _Out..."
 
-#: plugins/actions/actions.c:181
+#: plugins/actions/actions.c:182
 msgid "Switch User"
 msgstr "Switch User"
 
-#: plugins/actions/actions.c:182
+#: plugins/actions/actions.c:183
 msgid "_Switch User"
 msgstr "_Switch User"
 
-#: plugins/actions/actions.c:188
+#: plugins/actions/actions.c:189
 msgid "Lock Screen"
 msgstr "Lock Screen"
 
-#: plugins/actions/actions.c:189
+#: plugins/actions/actions.c:190
 msgid "Loc_k Screen"
 msgstr "Loc_k Screen"
 
-#: plugins/actions/actions.c:195
+#: plugins/actions/actions.c:196
 msgid "Hibernate"
 msgstr "Hibernate"
 
-#: plugins/actions/actions.c:196
+#: plugins/actions/actions.c:197
 msgid "_Hibernate"
 msgstr "_Hibernate"
 
-#: plugins/actions/actions.c:197
+#: plugins/actions/actions.c:198
 msgid "Do you want to suspend to disk?"
 msgstr "Do you want to suspend to disk?"
 
-#: plugins/actions/actions.c:198
+#: plugins/actions/actions.c:199
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Hibernating computer in %d seconds."
 
-#: plugins/actions/actions.c:203
+#: plugins/actions/actions.c:204
 msgid "Hybrid Sleep"
 msgstr "Hybrid Sleep"
 
-#: plugins/actions/actions.c:204
+#: plugins/actions/actions.c:205
 msgid "_Hybrid Sleep"
 msgstr "_Hybrid Sleep"
 
-#: plugins/actions/actions.c:205
+#: plugins/actions/actions.c:206
 msgid "Do you want to hibernate and suspend the system?"
 msgstr "Do you want to hibernate and suspend the system?"
 
-#: plugins/actions/actions.c:206
+#: plugins/actions/actions.c:207
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr "Hibernating and Suspending computer in %d seconds."
 
-#: plugins/actions/actions.c:211
+#: plugins/actions/actions.c:212
 msgid "Suspend"
 msgstr "Suspend"
 
-#: plugins/actions/actions.c:212
+#: plugins/actions/actions.c:213
 msgid "Sus_pend"
 msgstr "Sus_pend"
 
-#: plugins/actions/actions.c:213
+#: plugins/actions/actions.c:214
 msgid "Do you want to suspend to RAM?"
 msgstr "Do you want to suspend to RAM?"
 
-#: plugins/actions/actions.c:214
+#: plugins/actions/actions.c:215
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Suspending computer in %d seconds."
 
-#: plugins/actions/actions.c:219
+#: plugins/actions/actions.c:220
 msgid "Restart"
 msgstr "Restart"
 
-#: plugins/actions/actions.c:220
+#: plugins/actions/actions.c:221
 msgid "_Restart"
 msgstr "_Restart"
 
-#: plugins/actions/actions.c:221
+#: plugins/actions/actions.c:222
 msgid "Are you sure you want to restart?"
 msgstr "Are you sure you want to restart?"
 
-#: plugins/actions/actions.c:222
+#: plugins/actions/actions.c:223
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Restarting computer in %d seconds."
 
-#: plugins/actions/actions.c:227
+#: plugins/actions/actions.c:228
 msgid "Shut Down"
 msgstr "Shut Down"
 
-#: plugins/actions/actions.c:228
+#: plugins/actions/actions.c:229
 msgid "Shut _Down"
 msgstr "Shut _Down"
 
-#: plugins/actions/actions.c:229
+#: plugins/actions/actions.c:230
 msgid "Are you sure you want to shut down?"
 msgstr "Are you sure you want to shut down?"
 
-#: plugins/actions/actions.c:230
+#: plugins/actions/actions.c:231
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Turning off computer in %d seconds."
 
-#: plugins/actions/actions.c:731 plugins/separator/separator-dialog.glade:26
+#: plugins/actions/actions.c:732 plugins/separator/separator-dialog.glade:26
 #: plugins/separator/separator-dialog.glade:38
 #: plugins/separator/separator.desktop.in.in:4
 msgid "Separator"
@@ -1066,7 +1062,7 @@ msgid "_OK"
 msgstr "_OK"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:643 plugins/clock/clock.c:1044
+#: plugins/applicationsmenu/applicationsmenu.c:643 plugins/clock/clock.c:1048
 #: plugins/launcher/launcher.c:2500
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -1107,20 +1103,20 @@ msgid "Show help options"
 msgstr "Show help options"
 
 #. TRANSLATORS: adjust this accordingly for your locale format
-#: plugins/clock/clock.c:43
+#: plugins/clock/clock.c:47
 msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
 
-#: plugins/clock/clock.c:162
+#: plugins/clock/clock.c:166
 msgid "Week %V"
 msgstr "Week %V"
 
-#: plugins/clock/clock.c:480
+#: plugins/clock/clock.c:484
 msgid "Failed to execute clock command"
 msgstr "Failed to execute clock command"
 
-#: plugins/clock/clock.c:983
+#: plugins/clock/clock.c:987
 msgid "Custom Format"
 msgstr "Custom Format"
 
@@ -2196,36 +2192,32 @@ msgstr "Show windows from all mo_nitors"
 msgid "Show only _minimized windows"
 msgstr "Show only _minimised windows"
 
-#: plugins/tasklist/tasklist-widget.c:3109
+#: plugins/tasklist/tasklist-widget.c:3105
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Unable to start new instance of '%s'"
 
-#: plugins/tasklist/tasklist-widget.c:3113
-msgid "Error"
-msgstr "Error"
-
-#: plugins/tasklist/tasklist-widget.c:3142
+#: plugins/tasklist/tasklist-widget.c:3132
 msgid "Launch New Instance"
 msgstr "Launch New Instance"
 
-#: plugins/tasklist/tasklist-widget.c:3886
+#: plugins/tasklist/tasklist-widget.c:3876
 msgid "Mi_nimize All"
 msgstr "Mi_nimise All"
 
-#: plugins/tasklist/tasklist-widget.c:3893
+#: plugins/tasklist/tasklist-widget.c:3883
 msgid "Un_minimize All"
 msgstr "Un_minimise All"
 
-#: plugins/tasklist/tasklist-widget.c:3900
+#: plugins/tasklist/tasklist-widget.c:3890
 msgid "Ma_ximize All"
 msgstr "Ma_ximise All"
 
-#: plugins/tasklist/tasklist-widget.c:3907
+#: plugins/tasklist/tasklist-widget.c:3897
 msgid "_Unmaximize All"
 msgstr "_Unmaximise All"
 
-#: plugins/tasklist/tasklist-widget.c:3918
+#: plugins/tasklist/tasklist-widget.c:3908
 msgid "_Close All"
 msgstr "_Close All"
 
