@@ -34,10 +34,6 @@
 #include <X11/Xlib.h>
 #include <X11/extensions/shape.h>
 #include <libxfce4windowing/xfw-x11.h>
-#define tasklist_window_get_xid(window) \
-  (xfw_windowing_get () == XFW_WINDOWING_X11 ? xfw_window_x11_get_xid (window) : 0LU)
-#else
-#define tasklist_window_get_xid(window) 0LU
 #endif
 
 #ifdef HAVE_MATH_H
@@ -3540,14 +3536,14 @@ xfce_tasklist_button_drag_data_get (GtkWidget *button,
                                     guint timestamp,
                                     XfceTasklistChild *child)
 {
-  gulong xid;
+  gulong wid;
 
   panel_return_if_fail (XFW_IS_WINDOW (child->window));
 
-  xid = tasklist_window_get_xid (child->window);
+  wid = xfw_window_get_id (child->window);
   gtk_selection_data_set (selection_data,
                           gtk_selection_data_get_target (selection_data),
-                          8, (guchar *) &xid, sizeof (gulong));
+                          8, (guchar *) &wid, sizeof (gulong));
 }
 
 
@@ -3587,7 +3583,7 @@ xfce_tasklist_button_drag_data_received (GtkWidget *button,
                                          XfceTasklistChild *child2)
 {
   GList *li, *sibling;
-  gulong xid;
+  gulong wid;
   XfceTasklistChild *child;
   XfceTasklist *tasklist = XFCE_TASKLIST (child2->tasklist);
   GtkAllocation allocation;
@@ -3606,7 +3602,7 @@ xfce_tasklist_button_drag_data_received (GtkWidget *button,
       || (!xfce_tasklist_horizontal (tasklist) && y >= allocation.height / 2))
     sibling = g_list_next (sibling);
 
-  xid = *((gulong *) (gpointer) gtk_selection_data_get_data (selection_data));
+  wid = *((gulong *) (gpointer) gtk_selection_data_get_data (selection_data));
   for (li = tasklist->windows; li != NULL; li = li->next)
     {
       child = li->data;
@@ -3615,7 +3611,7 @@ xfce_tasklist_button_drag_data_received (GtkWidget *button,
           && child != child2 /* drop on the same button */
           && g_list_next (li) != sibling /* drop start of next button */
           && child->window != NULL
-          && tasklist_window_get_xid (child->window) == xid)
+          && xfw_window_get_id (child->window) == wid)
         {
           /* swap items */
           tasklist->windows = g_list_delete_link (tasklist->windows, li);
