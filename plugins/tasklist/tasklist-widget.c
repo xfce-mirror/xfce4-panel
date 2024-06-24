@@ -38,7 +38,7 @@
 #define tasklist_window_get_wid(window) \
   (xfw_windowing_get () == XFW_WINDOWING_X11 ? xfw_window_x11_get_xid (window) : ((gulong) window))
 #else
-#define tasklist_window_get_wid(window) 0LU
+#define tasklist_window_get_wid(window) ((gulong) window)
 #endif
 
 #ifdef HAVE_MATH_H
