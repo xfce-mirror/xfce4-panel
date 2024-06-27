@@ -2703,18 +2703,17 @@ panel_window_screen_layout_changed (GdkScreen *screen,
               return;
             }
         }
-
-#ifdef HAVE_GTK_LAYER_SHELL
-      /* the compositor does not manage to display the panel on the right monitor
-       * by itself in general */
-      if (gtk_layer_is_supported ())
-        {
-          gtk_layer_set_monitor (GTK_WINDOW (window), monitor);
-          if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
-            gtk_layer_set_monitor (GTK_WINDOW (window->autohide_window), monitor);
-        }
-#endif
     }
+#ifdef HAVE_GTK_LAYER_SHELL
+    /* the compositor does not manage to display the panel on the right monitor
+      * by itself in general */
+    if (gtk_layer_is_supported () && !window->span_monitors)
+      {
+        gtk_layer_set_monitor (GTK_WINDOW (window), monitor);
+        if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
+          gtk_layer_set_monitor (GTK_WINDOW (window->autohide_window), monitor);
+      }
+#endif
 
   /* set the new working area of the panel */
   window->area = a;
