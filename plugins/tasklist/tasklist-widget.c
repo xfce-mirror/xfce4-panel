@@ -2978,8 +2978,9 @@ xfce_tasklist_button_workspace_changed (XfwWindow *window,
 
 
 static void
-xfce_tasklist_button_geometry_changed2 (XfwWindow *window,
-                                        XfceTasklistChild *child)
+xfce_tasklist_button_monitors_changed (XfwWindow *window,
+                                       GParamSpec *pspec,
+                                       XfceTasklistChild *child)
 {
   XfwWorkspace *active_ws;
 
@@ -3682,8 +3683,8 @@ xfce_tasklist_button_new (XfwWindow *window,
                     G_CALLBACK (xfce_tasklist_button_state_changed), child);
   g_signal_connect (G_OBJECT (window), "workspace-changed",
                     G_CALLBACK (xfce_tasklist_button_workspace_changed), child);
-  g_signal_connect (G_OBJECT (window), "geometry-changed",
-                    G_CALLBACK (xfce_tasklist_button_geometry_changed2), child);
+  g_signal_connect (G_OBJECT (window), "notify::monitors",
+                    G_CALLBACK (xfce_tasklist_button_monitors_changed), child);
 
   /* poke functions */
   xfce_tasklist_button_icon_changed (window, child);
