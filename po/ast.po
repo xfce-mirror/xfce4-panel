@@ -41,6 +41,9 @@ msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr ""
+"paneles;axustes;preferencies;barra de tarees;autoanubrir;menú "
+"d'aplicaciones;entamar;botones;llanzador;area de "
+"notificación;estáu;iconos;plugins;"
 
 #: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2979
 msgid "Panel"
@@ -61,6 +64,8 @@ msgstr "¿De xuru que quies desaniciar «%s»?"
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr ""
+"Esborrar l'oxetu del panel quier decir que la so configuración va "
+"desaniciase."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1084 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1326
@@ -172,7 +177,7 @@ msgstr "Amosar información de versión y colar"
 #: ../panel/main.c:208
 #, c-format
 msgid "Name %s lost on the message dbus, exiting."
-msgstr ""
+msgstr "Nun s'atopa %s nel mensax de dbus. Colando"
 
 #. parse context options
 #: ../panel/main.c:270
@@ -233,7 +238,7 @@ msgstr "Fallu al unviar un mensaxe D-Bus"
 
 #: ../panel/main.c:440
 msgid "Execute"
-msgstr ""
+msgstr "Executar"
 
 #: ../panel/main.c:441
 msgid ""
@@ -305,10 +310,12 @@ msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
 msgstr ""
+"\"%s\" ye un tipu de conseyu non válidu. Tien que ser bool, double, int, "
+"string o uint."
 
 #: ../panel/panel-dialogs.c:58
 msgid "Unable to open the e-mail address"
-msgstr ""
+msgstr "Nun pudo abrise la direición de corréu elleutrónicu"
 
 #: ../panel/panel-dialogs.c:84
 msgid "The panel of the Xfce Desktop Environment"
@@ -404,7 +411,7 @@ msgstr "Automáticu"
 
 #: ../panel/panel-preferences-dialog.c:528
 msgid "Primary"
-msgstr ""
+msgstr "Primariu"
 
 #. I18N: monitor name in the output selector
 #: ../panel/panel-preferences-dialog.c:547
@@ -491,19 +498,19 @@ msgstr "Imaxe de fondu"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "Panel Preferences"
-msgstr ""
+msgstr "Axustes del panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Profiles:"
-msgstr ""
+msgstr "Perfiles:"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid "_Backup and restore"
-msgstr ""
+msgstr "_Backup y restaurar"
 
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Switch between panel presets"
-msgstr ""
+msgstr "Movese ente axustes predeterminaos de panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Add a new panel"
@@ -515,7 +522,7 @@ msgstr "Desancia'l panel esbilláu anguaño"
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "<b>General</b>"
-msgstr ""
+msgstr "<b>Xeneral</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid "M_ode:"
@@ -523,7 +530,7 @@ msgstr "M_ou:"
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Span mo_nitors"
-msgstr ""
+msgstr "Pantalles este_ndíes"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Select this option to extend the panel over multiple monitors."
@@ -555,7 +562,7 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
-msgstr ""
+msgstr "Anubrir panel au_tomaticamente:"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid "O_utput:"
@@ -565,11 +572,11 @@ msgstr "S_alida:"
 #. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:29
 msgid "<b>Measurements</b>"
-msgstr ""
+msgstr "<b>Midíes</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Row _size (pixels):"
-msgstr ""
+msgstr "Tamañu de la filera (Pixel_s)"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Num_ber of rows:"
@@ -598,11 +605,11 @@ msgstr "P_antalla"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Dark mode"
-msgstr ""
+msgstr "Mou prietu"
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "<b>Background</b>"
-msgstr ""
+msgstr "<b>Fondu</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 #: ../plugins/separator/separator-dialog.glade.h:7
@@ -627,29 +634,31 @@ msgstr "Esbilla una imaxe de fondu"
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "<b>Icons</b>"
-msgstr ""
+msgstr "<b>Iconos</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Adjust size au_tomatically"
-msgstr ""
+msgstr "Afi_tar tamañu atomáticamente"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Fixed icon _size (pixels):"
-msgstr ""
+msgstr "Tamañu d'iconu iguáu (pixels):"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 msgid "<b>Opacity</b>"
-msgstr ""
+msgstr "<b>Opacidá</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 msgid "Configure..."
-msgstr ""
+msgstr "Configurar..."
 
 #: ../panel/panel-preferences-dialog.glade.h:49
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr ""
+"<b>El compositor ta desautiváu agora mesmu</b>\n"
+"Permiti'l compositor nel xestor de ventanas pa cambear los axustes d'opacidá nel panel."
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:52
@@ -759,15 +768,15 @@ msgstr "Menñu de sesión"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "Full Name"
-msgstr ""
+msgstr "Nome completu"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
 msgid "Username"
-msgstr ""
+msgstr "Nome d'usuariu"
 
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid "User ID"
-msgstr ""
+msgstr "ID d'usuariu"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
 msgid "Custom"
@@ -779,11 +788,11 @@ msgstr "As_peutu:"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "Title:"
-msgstr ""
+msgstr "Títulu:"
 
 #: ../plugins/actions/actions-dialog.glade.h:11
 msgid "Custo_m title:"
-msgstr ""
+msgstr "Títulu personalizáu:"
 
 #: ../plugins/actions/actions-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:27
@@ -873,20 +882,20 @@ msgstr "Ivernaráse l'ordenador en %d segundos."
 
 #: ../plugins/actions/actions.c:207
 msgid "Hybrid Sleep"
-msgstr ""
+msgstr "Sueñu híbridu"
 
 #: ../plugins/actions/actions.c:208
 msgid "_Hybrid Sleep"
-msgstr ""
+msgstr "Sueñu _híbridu"
 
 #: ../plugins/actions/actions.c:209
 msgid "Do you want to hibernate and suspend the system?"
-msgstr ""
+msgstr "¿Quies ivernar ya suspender el to sistema?"
 
 #: ../plugins/actions/actions.c:210
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
-msgstr ""
+msgstr "Ivernando ya suspendiendo l'ordenador. Resten %d segundos."
 
 #: ../plugins/actions/actions.c:216
 msgid "Suspend"
@@ -952,7 +961,7 @@ msgstr "Fallu al executar l'aición «%s»"
 
 #: ../plugins/actions/actions.c:1279
 msgid "Little Mouse"
-msgstr ""
+msgstr "Mur pequeñu"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
@@ -1090,7 +1099,7 @@ msgstr "Amosar opciones d'ayuda"
 #: ../plugins/clock/clock.c:46
 msgctxt "Date"
 msgid "%A %d %B %Y"
-msgstr ""
+msgstr "%A %d %B %Y"
 
 #: ../plugins/clock/clock.c:174
 msgid "Week %V"
@@ -1118,7 +1127,7 @@ msgstr "Dixital"
 
 #: ../plugins/clock/clock-dialog.glade.h:4
 msgid "Fuzzy"
-msgstr ""
+msgstr "Ensarañáu"
 
 #: ../plugins/clock/clock-dialog.glade.h:5
 msgid "LCD"
@@ -1199,7 +1208,7 @@ msgstr "F_ormatu:"
 #. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:25
 msgid "F_uzziness:"
-msgstr ""
+msgstr "Ensarañá_u:"
 
 #: ../plugins/clock/clock-dialog.glade.h:26
 msgid "Show _inactive dots"
@@ -1217,7 +1226,7 @@ msgstr "Opciones de reló"
 #: ../plugins/clock/clock-digital.h:25
 msgctxt "Time"
 msgid "%a %_d %b, %R"
-msgstr ""
+msgstr "%a %_d %b, %R"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Night"
@@ -1225,7 +1234,7 @@ msgstr "Nueche"
 
 #: ../plugins/clock/clock-fuzzy.c:88
 msgid "Early morning"
-msgstr ""
+msgstr "Alborecida"
 
 #: ../plugins/clock/clock-fuzzy.c:89
 msgid "Morning"
@@ -1249,7 +1258,7 @@ msgstr "Nueche"
 
 #: ../plugins/clock/clock-fuzzy.c:94
 msgid "Late evening"
-msgstr ""
+msgstr "Atapecida"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
@@ -1487,7 +1496,7 @@ msgstr "Crear carpeta nueva"
 
 #: ../plugins/directorymenu/directorymenu.c:933
 msgid "Create New Text Document"
-msgstr ""
+msgstr "Crear documentu de testu nueu"
 
 #: ../plugins/directorymenu/directorymenu.c:940
 msgid "C_reate"
@@ -1495,7 +1504,7 @@ msgstr "C_rear"
 
 #: ../plugins/directorymenu/directorymenu.c:941
 msgid "Create & _Open"
-msgstr ""
+msgstr "Crear ya abrir (_o)"
 
 #: ../plugins/directorymenu/directorymenu.c:955
 msgid "Enter the new name:"
@@ -1504,7 +1513,7 @@ msgstr "Introduz el nome nuevu:"
 #: ../plugins/directorymenu/directorymenu.c:991
 #, c-format
 msgid "Failed to create folder: %s"
-msgstr ""
+msgstr "Fallu al crear carpeta: %s"
 
 #: ../plugins/directorymenu/directorymenu.c:1076
 msgid "Open Folder"
@@ -1516,11 +1525,11 @@ msgstr "Abrir na terminal"
 
 #: ../plugins/directorymenu/directorymenu.c:1110
 msgid "Create Folder..."
-msgstr ""
+msgstr "Crear carpeta..."
 
 #: ../plugins/directorymenu/directorymenu.c:1127
 msgid "Create Text Document..."
-msgstr ""
+msgstr "Crear documentu de testu..."
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
@@ -1536,19 +1545,19 @@ msgstr "Direutoriu _base:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "Show 'New Text _Document'"
-msgstr ""
+msgstr "Amosar \"Nueu _documentu de testu\""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid "Show '_New Folder'"
-msgstr ""
+msgstr "Amosar \"_Nueva carpeta\""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
 msgid "Show 'Open in _Terminal'"
-msgstr ""
+msgstr "Amosar \"Abrir na _terminal\""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
 msgid "Show '_Open _Folder'"
-msgstr ""
+msgstr "Amosar \"Abrir carpeta\" (_o _f)"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
 msgid "Menu"
@@ -1678,7 +1687,7 @@ msgstr "Amestar un elementu baleru"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "Add a new hyperlink"
-msgstr ""
+msgstr "Añedir un enllaz"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "Disable t_ooltips"
@@ -1735,7 +1744,7 @@ msgstr "Botones"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 msgid "Miniature View"
-msgstr ""
+msgstr "Vista de miniatures"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
 #: ../plugins/pager/pager.desktop.in.in.h:1
@@ -1748,11 +1757,11 @@ msgstr "Númbe_ru de fileres:"
 
 #: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Show workspace number"
-msgstr ""
+msgstr "Amosar númberu de la estaya de trabayu"
 
 #: ../plugins/pager/pager-dialog.glade.h:9
 msgid "Switch workspaces using the mouse wheel"
-msgstr ""
+msgstr "Movese peles estayes de trabayu cola rueda del mur"
 
 #: ../plugins/pager/pager-dialog.glade.h:10
 msgid "<b>Appearance</b>"
@@ -1805,27 +1814,27 @@ msgstr "Llimpiar"
 
 #: ../plugins/systray/sn-dialog.c:650
 msgid "Are you sure you want to clear the list of known items?"
-msgstr ""
+msgstr "¿De xuru que quies llimpiar la llista d'oxetos conocíos?"
 
 #: ../plugins/systray/sn-dialog.glade.h:1
 msgid "Status Tray Items"
-msgstr ""
+msgstr "Oxetos de la barra d'estáu"
 
 #: ../plugins/systray/sn-dialog.glade.h:2
 msgid "C_lear Known Items"
-msgstr ""
+msgstr "_Llimpiar oxetos conocíos"
 
 #: ../plugins/systray/sn-dialog.glade.h:3
 msgid "Resets the list of items and their visibility settings"
-msgstr ""
+msgstr "Torna la llista d'oxetos ya los sos axustes de visibilidá"
 
 #: ../plugins/systray/sn-dialog.glade.h:4
 msgid "_Fixed icon size (pixels):"
-msgstr ""
+msgstr "Tamañu d'iconu iguáu (pixels) (_f)"
 
 #: ../plugins/systray/sn-dialog.glade.h:5
 msgid "Adjust size _automatically"
-msgstr ""
+msgstr "Aferir tamañu _automáticamente"
 
 #: ../plugins/systray/sn-dialog.glade.h:6
 msgid "Icons"
@@ -1833,27 +1842,27 @@ msgstr "Iconos"
 
 #: ../plugins/systray/sn-dialog.glade.h:7
 msgid "Arrange _items in a single row"
-msgstr ""
+msgstr "Amosar oxetos na mesma f_ilera"
 
 #: ../plugins/systray/sn-dialog.glade.h:8
 msgid "If enabled, ensure that the items are laid out in a single row"
-msgstr ""
+msgstr "Si s'autiva fae que los oxetos s'amuesen nuna mesma filera"
 
 #: ../plugins/systray/sn-dialog.glade.h:9
 msgid "_Hide items by default"
-msgstr ""
+msgstr "Anubrir oxetos de manu (_h)"
 
 #: ../plugins/systray/sn-dialog.glade.h:10
 msgid "When enabled, all new items will be marked as \"Hidden\""
-msgstr ""
+msgstr "Tolos nuevos oxetos marcaranse comu \"Anubríu\""
 
 #: ../plugins/systray/sn-dialog.glade.h:11
 msgid "_Square items"
-msgstr ""
+msgstr "Cuadrar oxeto_s"
 
 #: ../plugins/systray/sn-dialog.glade.h:12
 msgid "Item buttons will take a square when it's possible"
-msgstr ""
+msgstr "Los oxetos axeitaranse n'un cuadru si ye posible."
 
 #: ../plugins/systray/sn-dialog.glade.h:13
 msgid "Behavior"
@@ -1861,7 +1870,7 @@ msgstr "Comportamientu"
 
 #: ../plugins/systray/sn-dialog.glade.h:14
 msgid "Item"
-msgstr ""
+msgstr "Oxetu"
 
 #: ../plugins/systray/sn-dialog.glade.h:15
 msgid "Hidden"
@@ -1869,43 +1878,43 @@ msgstr "Anubría"
 
 #: ../plugins/systray/sn-dialog.glade.h:16
 msgid "Move the selected item one row up"
-msgstr ""
+msgstr "Amover l'oxetu esbilláu una filera pa enriba"
 
 #: ../plugins/systray/sn-dialog.glade.h:17
 msgid "Move the selected item one row down"
-msgstr ""
+msgstr "Amover l'oxetu esbilláu una filera p'abaxu"
 
 #: ../plugins/systray/sn-dialog.glade.h:18
 msgid "Known Items"
-msgstr ""
+msgstr "Oxetos conocíos"
 
 #: ../plugins/systray/sn-dialog.glade.h:19
 msgid "_Menu is primary action"
-msgstr ""
+msgstr "_Menú ye l'aición primaria"
 
 #: ../plugins/systray/sn-dialog.glade.h:20
 msgid "Left click will always display the menu for item"
-msgstr ""
+msgstr "Clic esquierdu amuesa siempres el menú pal oxetu"
 
 #: ../plugins/systray/sn-dialog.glade.h:21
 msgid "_Request symbolic icons"
-msgstr ""
+msgstr "_Riquirir iconos simbólicos"
 
 #: ../plugins/systray/sn-dialog.glade.h:22
 msgid "Load symbolic icons if available"
-msgstr ""
+msgstr "Cargar iconos simbólicos si tan a manu"
 
 #: ../plugins/systray/sn-dialog.glade.h:23
 msgid "Features"
-msgstr ""
+msgstr "Carauterístiques"
 
 #: ../plugins/systray/sn-dialog.glade.h:24
 msgid "Status Notifiers"
-msgstr ""
+msgstr "Notificaciones d'estáu"
 
 #: ../plugins/systray/sn-dialog.glade.h:25
 msgid "Systray Icons"
-msgstr ""
+msgstr "Iconos de la barra de sistema"
 
 #: ../plugins/systray/systray.c:146
 msgid "Unable to start the notification area"
@@ -1931,13 +1940,15 @@ msgstr "Fallu al alquirir la seleición del xestor pa la pantalla %d"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Status Tray Plugin"
-msgstr ""
+msgstr "Plugin de la barra d'estáu"
 
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid ""
 "Provides status notifier items (application indicators) and legacy systray "
 "items"
 msgstr ""
+"Amuesa oxetos de notificación d'estáu (indicadores d'aplicaciones) ya oxetos"
+" de la barra de sistema"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
@@ -1957,11 +1968,11 @@ msgstr "Minimizar ventana"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Timestamp"
-msgstr ""
+msgstr "Etiqueta d'hora"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Group title and timestamp"
-msgstr ""
+msgstr "Títulu de grupu ya etiqueta d'hora"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "Window title"
@@ -2010,7 +2021,7 @@ msgstr "Restaurar ventanes minimizaes a les estayes de trabayu d'anguaño"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "D_raw window frame when hovering a button"
-msgstr ""
+msgstr "Debuxa_r cuadru de ventana al pasar perriba d'un botón"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:24
 msgid "_Switch windows using the mouse wheel"
@@ -2035,7 +2046,7 @@ msgstr "Amosar namái ventanes _minimizaes"
 #: ../plugins/tasklist/tasklist-widget.c:2992
 #, c-format
 msgid "Unable to start new instance of '%s'"
-msgstr ""
+msgstr "Nun se pudo llanzar otra istancia de '%s'"
 
 #: ../plugins/tasklist/tasklist-widget.c:2996
 msgid "Error"
