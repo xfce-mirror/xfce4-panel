@@ -24,6 +24,7 @@
 #include "panel-utils.h"
 
 #include <libxfce4ui/libxfce4ui.h>
+#include <libxfce4windowing/libxfce4windowing.h>
 
 
 
@@ -309,4 +310,13 @@ panel_utils_gtk_dialog_find_label_by_text (GtkDialog *dialog,
   label = label_data->label;
   g_free (label_data);
   return label;
+}
+
+
+
+gint
+panel_utils_compare_xfw_gdk_monitors (gconstpointer a,
+                                      gconstpointer b)
+{
+  return xfw_monitor_get_gdk_monitor ((XfwMonitor *) a) == b ? 0 : 1;
 }
