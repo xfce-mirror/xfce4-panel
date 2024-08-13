@@ -2995,7 +2995,7 @@ panel_window_xfw_window_on_panel_monitor (PanelWindow *window,
               if (p_monitor != monitor)
                 {
                   monitor = p_monitor;
-                  if (g_list_find (monitors, monitor))
+                  if (g_list_find_custom (monitors, monitor, panel_utils_compare_xfw_gdk_monitors))
                     return TRUE;
                 }
             }
@@ -3011,14 +3011,14 @@ panel_window_xfw_window_on_panel_monitor (PanelWindow *window,
               if (p_monitor != monitor)
                 {
                   monitor = p_monitor;
-                  if (g_list_find (monitors, monitor))
+                  if (g_list_find_custom (monitors, monitor, panel_utils_compare_xfw_gdk_monitors))
                     return TRUE;
                 }
             }
         }
     }
 #ifdef HAVE_GTK_LAYER_SHELL
-  else if (g_list_find (monitors, gtk_layer_get_monitor (GTK_WINDOW (window))))
+  else if (g_list_find_custom (monitors, gtk_layer_get_monitor (GTK_WINDOW (window)), panel_utils_compare_xfw_gdk_monitors))
     return TRUE;
 #endif
 

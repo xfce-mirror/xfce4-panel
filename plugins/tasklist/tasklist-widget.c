@@ -2569,8 +2569,7 @@ xfce_tasklist_button_visible (XfceTasklistChild *child,
       GdkWindow *window = gtk_widget_get_window (GTK_WIDGET (tasklist));
       GdkMonitor *monitor = gdk_display_get_monitor_at_window (tasklist->display, window);
       GList *monitors = xfw_window_get_monitors (child->window);
-
-      if (!g_list_find (monitors, monitor))
+      if (!g_list_find_custom (monitors, monitor, panel_utils_compare_xfw_gdk_monitors))
         return FALSE;
     }
 
