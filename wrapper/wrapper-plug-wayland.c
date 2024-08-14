@@ -166,6 +166,10 @@ wrapper_plug_wayland_init (WrapperPlugWayland *plug)
   plug->geometry.width = 1;
   plug->geometry.height = 1;
 
+  /* set a minimum size to start with so as not to block plugin allocation (e.g. for systray,
+   * see #849); this will then correct itself through geometry exchanges between socket and plug */
+  gtk_widget_set_size_request (GTK_WIDGET (plug), 16, 16);
+
   /* add panel css classes so they apply to external plugins as they do to internal ones */
   context = gtk_widget_get_style_context (GTK_WIDGET (plug));
   gtk_style_context_add_class (context, "panel");
