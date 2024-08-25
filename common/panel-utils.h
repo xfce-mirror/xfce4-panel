@@ -61,6 +61,10 @@ GtkLabel *
 panel_utils_gtk_dialog_find_label_by_text (GtkDialog *dialog,
                                            const gchar *label_text);
 
+gint
+panel_utils_compare_xfw_gdk_monitors (gconstpointer a,
+                                      gconstpointer b);
+
 G_END_DECLS
 
 #endif /* !__PANEL_UTILS_H__ */
