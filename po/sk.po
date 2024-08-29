@@ -8,6 +8,7 @@
 # 785411ef824cced88d3e197f5af1b61a_da6a977 <e5fae5b35c0c625157d991b31e113de3_956341>, 2021
 # Jose Riha <jose1711@gmail.com>, 2020
 # Juraj Brosz <juro@jurajbrosz.info>, 2004
+# menom menom, 2024
 # Robert Hartl <hartl.robert@gmail.com>, 2009-2010
 # Roman Moravčík <roman.moravcik@gmail.com>, 2006
 # Roman Moravčík <roman.moravcik@gmail.com>, 2006
@@ -19,7 +20,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
 "POT-Creation-Date: 2024-06-19 00:49+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: 785411ef824cced88d3e197f5af1b61a_da6a977 <e5fae5b35c0c625157d991b31e113de3_956341>, 2021\n"
+"Last-Translator: menom menom, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/xfce/xfce4-panel/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -253,7 +254,7 @@ msgstr "Nepodarilo sa spustiť aplikáciu pre migráciu"
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
-msgstr ""
+msgstr "Plugin \"%s\" sa nepodarilo načítať, chcete ho odstrániť z konfigurácie xfce4-panel?"
 
 #: panel/panel-application.c:349
 #, c-format
@@ -263,11 +264,11 @@ msgid ""
 "doing, you can remove it permanently, otherwise you'd better quit and make a"
 " backup of the current configuration using %s, before checking your "
 "installation and trying to start xfce4-panel again."
-msgstr ""
+msgstr "Tento plugin je v aktuálnej konfigurácii xfce4-panel, ale nedal sa načítať, pravdepodobne kvôli problému s inštaláciou. Ak viete, čo robíte, môžete to natrvalo odstrániť, inak by ste mali skončiť a vytvoriť si zálohu aktuálnej konfigurácie pomocou %s, než skontrolujete inštaláciu a skúsite znova spustiť xfce4-panel."
 
 #: panel/panel-application.c:356
 msgid "Plugin loading failure"
-msgstr ""
+msgstr "Zlyhanie načítania doplnku"
 
 #: panel/panel-application.c:357
 msgid "_Quit"
@@ -413,7 +414,7 @@ msgstr "Zásuvný modul sa počas predchádzajúcich %d sekúnd reštartoval via
 
 #: panel/panel-plugin-external.c:419
 msgid "Plugin Restart"
-msgstr ""
+msgstr "Reštart doplnku"
 
 #: panel/panel-plugin-external.c:420
 msgid "_Execute"
@@ -472,11 +473,11 @@ msgstr "Ak odstránite položku z panela, bude navždy stratená."
 #: panel/panel-preferences-dialog.c:1550
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
-msgstr ""
+msgstr "Naozaj chcete odstrániť tieto položky %d ?"
 
 #: panel/panel-preferences-dialog.c:1552
 msgid "If you remove them from the panel, they are permanently lost."
-msgstr ""
+msgstr "Ak ich z panela odstránite, budú natrvalo stratené."
 
 #: panel/panel-preferences-dialog.glade:13
 msgid "Never"
@@ -566,14 +567,14 @@ msgstr "Vyberte túto možnosť pre skrytie ušiek panela a uzamknutie pozície"
 
 #: panel/panel-preferences-dialog.glade:453
 msgid "_Reserve space on screen edges for the panel"
-msgstr ""
+msgstr "_Vyhradiť miesto na okrajoch obrazovky pre panel"
 
 #: panel/panel-preferences-dialog.glade:457
 msgid ""
 "Select this option if you don't want maximized windows to cover the area "
 "behind the panel. This only works when the panel is attached to a screen "
 "edge."
-msgstr ""
+msgstr "Túto možnosť vyberte, ak nechcete, aby maximalizované okná pokrývali oblasť za panelom. Toto funguje iba vtedy, keď je panel pripevnený k okraju obrazovky."
 
 #: panel/panel-preferences-dialog.glade:478
 msgid "Au_tomatically hide the panel:"
@@ -599,11 +600,11 @@ msgstr "Počet _riadkov:"
 
 #: panel/panel-preferences-dialog.glade:606
 msgid "L_ength (pixels):"
-msgstr ""
+msgstr "_Dĺžka (v pixeloch):"
 
 #: panel/panel-preferences-dialog.glade:635
 msgid "Border width (pixels):"
-msgstr ""
+msgstr "Šírka orámovania (v pixeloch):"
 
 #: panel/panel-preferences-dialog.glade:658
 msgid "A_utomatically increase the length"
@@ -994,7 +995,7 @@ msgstr "_Titulok tlačidla:"
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:136
 msgid "Show button on one _line"
-msgstr ""
+msgstr "Zobraziť tlačidlo na jednom _riadku"
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:151
 msgid "_Show button title"
@@ -1127,31 +1128,31 @@ msgstr "Vlastný formát"
 
 #: plugins/clock/clock-dialog.glade:13
 msgid "Decimal"
-msgstr ""
+msgstr "Desatinné"
 
 #: plugins/clock/clock-dialog.glade:16
 msgid "Sexagesimal"
-msgstr ""
+msgstr "Šesťdesiatinné"
 
 #: plugins/clock/clock-dialog.glade:19
 msgid "Binary time"
-msgstr ""
+msgstr "Binárny čas"
 
 #: plugins/clock/clock-dialog.glade:30
 msgid "Date, then time"
-msgstr ""
+msgstr "Dátum, potom čas"
 
 #: plugins/clock/clock-dialog.glade:33
 msgid "Time, then date"
-msgstr ""
+msgstr "Čas, potom dátum"
 
 #: plugins/clock/clock-dialog.glade:36
 msgid "Date Only"
-msgstr ""
+msgstr "Iba dátum"
 
 #: plugins/clock/clock-dialog.glade:39
 msgid "Time Only"
-msgstr ""
+msgstr "Iba čas"
 
 #: plugins/clock/clock-dialog.glade:71
 msgid "Analog"
@@ -1199,7 +1200,7 @@ msgstr "Nastavenie času"
 msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
-msgstr ""
+msgstr "Ak je nastavený, tento príkaz sa spustí po kliknutí ľavým tlačidlom myši na doplnok namiesto zobrazenia predvoleného kalendára."
 
 #: plugins/clock/clock-dialog.glade:261
 msgid "Co_mmand:"
@@ -1207,11 +1208,11 @@ msgstr "_Príkaz"
 
 #: plugins/clock/clock-dialog.glade:273
 msgid "_Show week numbers"
-msgstr ""
+msgstr "_Zobraziť čísla týždňov"
 
 #: plugins/clock/clock-dialog.glade:294
 msgid "Calendar"
-msgstr ""
+msgstr "Kalendár"
 
 #: plugins/clock/clock-dialog.glade:329 plugins/clock/clock-dialog.glade:669
 #: plugins/clock/clock-dialog.glade:791
@@ -1244,7 +1245,7 @@ msgstr "24-_hodinový čas"
 
 #: plugins/clock/clock-dialog.glade:508
 msgid "Binary mode:"
-msgstr ""
+msgstr "Binárny režim:"
 
 #: plugins/clock/clock-dialog.glade:524
 msgid "Display _seconds"
@@ -1266,11 +1267,11 @@ msgstr "Zobraziť _mriežku"
 
 #: plugins/clock/clock-dialog.glade:640 plugins/clock/clock-dialog.glade:762
 msgid "Font:"
-msgstr ""
+msgstr "Písmo:"
 
 #: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
 msgid "Format:"
-msgstr ""
+msgstr "Formát:"
 
 #: plugins/clock/clock-dialog.glade:670 plugins/clock/clock-dialog.glade:792
 msgid ""
@@ -1278,7 +1279,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
 "the &quot;Help&quot; page for additional information."
-msgstr ""
+msgstr "Formát popisuje časti dátumu a času, ktoré sa majú vložiť do panelu. Napríklad %Y bude nahradené rokom, %m mesiacom a dňom. Podobne, značky &lt;b&gt;&lt;/b&gt; urobia text tučným. Ďalšie informácie nájdete na stránke Pomocníka."
 
 #: plugins/clock/clock-dialog.glade:699
 msgid "Date"
@@ -1286,7 +1287,7 @@ msgstr "Dátum"
 
 #: plugins/clock/clock-dialog.glade:744
 msgid "Time"
-msgstr ""
+msgstr "Čas"
 
 #: plugins/clock/clock-dialog.glade:871
 msgid "Clock Options"
@@ -1300,7 +1301,7 @@ msgstr "%R"
 #: plugins/clock/clock-digital.h:31
 msgctxt "Date"
 msgid "%Y-%m-%d"
-msgstr ""
+msgstr "%Y-%m-%d"
 
 #: plugins/clock/clock-fuzzy.c:79
 msgid "Night"
@@ -1908,7 +1909,7 @@ msgstr "Prepnutie pracovnej plochy pomocou kolieska myši"
 
 #: plugins/pager/pager-dialog.glade:224
 msgid "Wrap around workspaces"
-msgstr ""
+msgstr "Otočte pracovné priestory"
 
 #: plugins/pager/pager-dialog.glade:241
 msgid "<b>Appearance</b>"
@@ -1954,7 +1955,7 @@ msgstr "Zobraziť pracovnú plochu"
 
 #: plugins/showdesktop/showdesktop-dialog.glade:92
 msgid "_Show on mouse hover"
-msgstr ""
+msgstr "_Zobraziť po umiestnení kurzora myši či touchpadu"
 
 #: plugins/showdesktop/showdesktop-dialog.glade:113
 #: plugins/systray/sn-dialog.glade:300
@@ -2113,7 +2114,7 @@ msgstr "Minimalizovať okno"
 
 #: plugins/tasklist/tasklist-dialog.glade:32
 msgid "New Instance"
-msgstr ""
+msgstr "Nová inštancia"
 
 #: plugins/tasklist/tasklist-dialog.glade:43
 msgid "Timestamp"
@@ -2154,7 +2155,7 @@ msgstr "Zobraziť _uško"
 
 #: plugins/tasklist/tasklist-dialog.glade:191
 msgid "Show _tooltips"
-msgstr ""
+msgstr "Zobraziť _popisy"
 
 #: plugins/tasklist/tasklist-dialog.glade:214
 msgid "Sorting _order:"
@@ -2166,7 +2167,7 @@ msgstr "Akcia stre_dného tlačidla:"
 
 #: plugins/tasklist/tasklist-dialog.glade:335
 msgid "_Group windows by application"
-msgstr ""
+msgstr "_Zoskupujte okná podľa aplikácie"
 
 #: plugins/tasklist/tasklist-dialog.glade:351
 msgid "Restore minimized windows to current _workspace"
@@ -2204,7 +2205,7 @@ msgstr "Nie je možné spustiť novú inštanciu aplikácie „%s“"
 
 #: plugins/tasklist/tasklist-widget.c:3132
 msgid "Launch New Instance"
-msgstr ""
+msgstr "Spustite novú inštanciu"
 
 #: plugins/tasklist/tasklist-widget.c:3876
 msgid "Mi_nimize All"
