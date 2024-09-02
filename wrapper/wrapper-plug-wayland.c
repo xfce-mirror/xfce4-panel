@@ -28,7 +28,7 @@
 #include "common/panel-private.h"
 #include "common/panel-utils.h"
 
-#include <gtk-layer-shell/gtk-layer-shell.h>
+#include <gtk-layer-shell.h>
 #include <libxfce4windowing/libxfce4windowing.h>
 
 

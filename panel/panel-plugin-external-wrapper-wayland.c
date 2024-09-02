@@ -27,7 +27,7 @@
 #include "common/panel-debug.h"
 #include "common/panel-private.h"
 
-#include <gtk-layer-shell/gtk-layer-shell.h>
+#include <gtk-layer-shell.h>
 
 
 

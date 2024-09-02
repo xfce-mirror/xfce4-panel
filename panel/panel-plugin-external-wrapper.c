@@ -34,7 +34,7 @@
 #ifdef HAVE_GTK_LAYER_SHELL
 #include "panel-plugin-external-wrapper-wayland.h"
 
-#include <gtk-layer-shell/gtk-layer-shell.h>
+#include <gtk-layer-shell.h>
 #endif
 
 #include "common/panel-dbus.h"

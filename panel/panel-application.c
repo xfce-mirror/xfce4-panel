@@ -43,7 +43,7 @@
 #include <xfconf/xfconf.h>
 
 #ifdef HAVE_GTK_LAYER_SHELL
-#include <gtk-layer-shell/gtk-layer-shell.h>
+#include <gtk-layer-shell.h>
 #else
 #define gtk_layer_is_supported() FALSE
 #endif
