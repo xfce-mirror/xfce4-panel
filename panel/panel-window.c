@@ -1681,6 +1681,7 @@ panel_window_size_allocate (GtkWidget *widget,
 
       panel_window_size_allocate_set_xy (window, w, h, &x, &y);
       panel_window_move (window, GTK_WINDOW (window->autohide_window), x, y);
+      gtk_widget_show (window->autohide_window);
 
       /* slide out the panel window with popdown_speed, but ignore panels that are floating, i.e. not
          attached to a GdkScreen border (i.e. including panels which are on a monitor border, but
@@ -1728,9 +1729,8 @@ panel_window_size_allocate (GtkWidget *widget,
           && window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER)
         panel_window_screen_struts_set (window);
 
-      /* move the autohide window offscreen */
       if (window->autohide_window != NULL)
-        panel_window_move (window, GTK_WINDOW (window->autohide_window), -9999, -9999);
+        gtk_widget_hide (window->autohide_window);
 
       panel_window_move (window, GTK_WINDOW (window), window->alloc.x, window->alloc.y);
     }
@@ -3486,6 +3486,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
                                 "gravity", GDK_GRAVITY_STATIC,
                                 "name", "XfcePanelWindowHidden",
                                 NULL);
+          window->autohide_window = popup;
 
           context = gtk_widget_get_style_context (GTK_WIDGET (popup));
           style_class = g_strdup_printf ("%s-%d-%s", "panel", window->id, "hidden");
@@ -3505,16 +3506,8 @@ panel_window_set_autohide_behavior (PanelWindow *window,
                   GdkMonitor *monitor = gdk_display_get_monitor_at_window (window->display, gdkwindow);
                   gtk_layer_set_monitor (GTK_WINDOW (popup), monitor);
                 }
-
-              /* must be done once here before the window is mapped so that subsequent
-               * resizing is taken into account */
-              gtk_widget_set_size_request (popup, window->autohide_size, window->autohide_size);
             }
 #endif
-
-          /* move the window offscreen */
-          window->autohide_window = popup;
-          panel_window_move (window, GTK_WINDOW (window->autohide_window), -9999, -9999);
 
           /* bind some properties to sync the two windows */
           for (i = 0; i < G_N_ELEMENTS (properties); i++)
@@ -3540,10 +3533,6 @@ panel_window_set_autohide_behavior (PanelWindow *window,
                             G_CALLBACK (panel_window_autohide_drag_motion), window);
           g_signal_connect (G_OBJECT (popup), "drag-leave",
                             G_CALLBACK (panel_window_autohide_drag_leave), window);
-
-          /* show the window */
-          if (WINDOWING_IS_X11 () || gtk_layer_is_supported ())
-            gtk_widget_show (popup);
         }
 
       if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_ALWAYS)
