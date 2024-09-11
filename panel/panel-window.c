@@ -700,8 +700,10 @@ panel_window_init (PanelWindow *window)
   /* a workaround to force external plugins to fully re-render on X11 when scale factor changes */
   g_signal_connect (window, "notify::scale-factor", G_CALLBACK (panel_window_force_redraw), NULL);
 
-  /* block autohide when the panel has input focus, e.g. via a GtkEntry in a plugin */
-  g_signal_connect (window, "notify::is-active", G_CALLBACK (panel_window_is_active_changed), NULL);
+  /* block autohide when the panel has input focus, e.g. via a GtkEntry in a plugin; this only
+   * works well on X11: on-demand layer-shell focus management is too temperamental */
+  if (WINDOWING_IS_X11 ())
+    g_signal_connect (window, "notify::is-active", G_CALLBACK (panel_window_is_active_changed), NULL);
 }
 
 
