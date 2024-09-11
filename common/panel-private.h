@@ -87,6 +87,8 @@
  * without asking the user what to do */
 #define PANEL_PLUGIN_AUTO_RESTART (60)
 
+#define OFFSCREEN (-9999)
+
 /* integer swap functions */
 #define SWAP_INTEGER(a, b) \
   G_STMT_START \

@@ -369,23 +369,21 @@ static void
 wrapper_plug_wayland_set_geometry (WrapperPlug *plug,
                                    const GdkRectangle *geometry)
 {
-  GdkRectangle monitor_geom;
-  gint old_margin_x = gtk_layer_get_margin (GTK_WINDOW (plug), GTK_LAYER_SHELL_EDGE_LEFT);
-  gint old_margin_y = gtk_layer_get_margin (GTK_WINDOW (plug), GTK_LAYER_SHELL_EDGE_TOP);
-
   WRAPPER_PLUG_WAYLAND (plug)->geometry = *geometry;
 
   /* acts as a lower bound for allocation (see size_allocate() above) */
   gtk_widget_set_size_request (GTK_WIDGET (plug), geometry->width, geometry->height);
 
-  gtk_layer_set_margin (GTK_WINDOW (plug), GTK_LAYER_SHELL_EDGE_LEFT, geometry->x);
-  gtk_layer_set_margin (GTK_WINDOW (plug), GTK_LAYER_SHELL_EDGE_TOP, geometry->y);
-
-  /* manual commit needed if plug was off-screen */
-  gdk_monitor_get_geometry (gtk_layer_get_monitor (GTK_WINDOW (plug)), &monitor_geom);
-  if (old_margin_x <= geometry->width || old_margin_x >= monitor_geom.width
-      || old_margin_y <= geometry->height || old_margin_y >= monitor_geom.height)
-    panel_utils_wl_surface_commit (GTK_WIDGET (plug));
+  if (geometry->x == OFFSCREEN && geometry->y == OFFSCREEN)
+    {
+      gtk_widget_hide (GTK_WIDGET (plug));
+    }
+  else
+    {
+      gtk_layer_set_margin (GTK_WINDOW (plug), GTK_LAYER_SHELL_EDGE_LEFT, geometry->x);
+      gtk_layer_set_margin (GTK_WINDOW (plug), GTK_LAYER_SHELL_EDGE_TOP, geometry->y);
+      gtk_widget_show (GTK_WIDGET (plug));
+    }
 }
 
 

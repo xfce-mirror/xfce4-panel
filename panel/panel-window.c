@@ -1641,7 +1641,7 @@ panel_window_size_allocate (GtkWidget *widget,
         return;
 
       /* window is invisible */
-      window->alloc.x = window->alloc.y = -9999;
+      window->alloc.x = window->alloc.y = OFFSCREEN;
 
       /* set hidden window size */
       w = h = window->autohide_size;
@@ -1885,27 +1885,37 @@ panel_window_move (PanelWindow *window,
 #ifdef HAVE_GTK_LAYER_SHELL
   if (gtk_layer_is_supported ())
     {
-      gint old_margin_x = gtk_layer_get_margin (moved, GTK_LAYER_SHELL_EDGE_LEFT);
-      gint old_margin_y = gtk_layer_get_margin (moved, GTK_LAYER_SHELL_EDGE_TOP);
+      gint margin_left = x - window->area.x;
+      gint margin_top = y - window->area.y;
 
-      gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_TOP, y - window->area.y);
-      gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_LEFT, x - window->area.x);
       if (moved == GTK_WINDOW (window))
         {
-          gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_BOTTOM,
-                                window->area.y + window->area.height - y - window->alloc.height);
-          gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_RIGHT,
-                                window->area.x + window->area.width - x - window->alloc.width);
+          gint margin_right = window->area.x + window->area.width - x - window->alloc.width;
+          gint margin_bottom = window->area.y + window->area.height - y - window->alloc.height;
+
+          if (margin_left <= -window->alloc.width || margin_right <= -window->alloc.width
+              || margin_top <= -window->alloc.height || margin_bottom <= -window->alloc.height)
+            {
+              gtk_widget_hide (GTK_WIDGET (moved));
+            }
+          else
+            {
+              gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_LEFT, margin_left);
+              gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_RIGHT, margin_right);
+              gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_TOP, margin_top);
+              gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_BOTTOM, margin_bottom);
+              gtk_widget_show (GTK_WIDGET (moved));
+            }
 
           /* move external plugins */
           gtk_container_foreach (GTK_CONTAINER (gtk_bin_get_child (GTK_BIN (window))),
                                  panel_window_move_plugin, window);
         }
-
-      /* manual commit needed if window to be moved was off-screen */
-      if (old_margin_x <= window->alloc.width || old_margin_x >= window->area.width
-          || old_margin_y <= window->alloc.height || old_margin_y >= window->area.height)
-        panel_utils_wl_surface_commit (GTK_WIDGET (moved));
+      else
+        {
+          gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_LEFT, margin_left);
+          gtk_layer_set_margin (moved, GTK_LAYER_SHELL_EDGE_TOP, margin_top);
+        }
     }
   else
 #endif
@@ -3178,19 +3188,7 @@ panel_window_autohide_timeout (gpointer user_data)
     }
 
   /* move the windows around */
-  if (gtk_layer_is_supported () && window->autohide_state == AUTOHIDE_VISIBLE)
-    {
-      /*
-       * queue_resize() has no effect when the window is off-screen on Wayland. Also, in
-       * some cases, it is enough to move it back, but sometimes, for some reason, it must
-       * be remapped first. So let's remap it in general, which in particular results in
-       * an effective queue_resize(), which in turn causes the window to be moved.
-       * See also panel_utils_wl_surface_commit().
-       */
-      panel_utils_widget_remap (GTK_WIDGET (window));
-    }
-  else
-    gtk_widget_queue_resize (GTK_WIDGET (window));
+  gtk_widget_queue_resize (GTK_WIDGET (window));
 
   /* check whether the panel should be animated on autohide */
   if (!window->floating || window->popdown_speed > 0)
@@ -3304,7 +3302,6 @@ static void
 panel_window_autohide_queue (PanelWindow *window,
                              AutohideState new_state)
 {
-  AutohideState old_state = window->autohide_state;
   guint delay;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
@@ -3331,14 +3328,7 @@ panel_window_autohide_queue (PanelWindow *window,
   if (new_state == AUTOHIDE_VISIBLE)
     {
       /* queue a resize to make sure the panel is visible */
-      if ((old_state == AUTOHIDE_HIDDEN || old_state == AUTOHIDE_POPUP)
-          && gtk_layer_is_supported ())
-        {
-          /* see other remap in autohide_timeout() */
-          panel_utils_widget_remap (GTK_WIDGET (window));
-        }
-      else
-        gtk_widget_queue_resize (GTK_WIDGET (window));
+      gtk_widget_queue_resize (GTK_WIDGET (window));
     }
   else
     {

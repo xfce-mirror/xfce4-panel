@@ -1244,7 +1244,7 @@ xfce_tasklist_size_allocate (GtkWidget *widget,
     }
   else
     {
-      child_alloc.x = child_alloc.y = -9999;
+      child_alloc.x = child_alloc.y = OFFSCREEN;
     }
 
   gtk_widget_size_allocate (tasklist->arrow_button, &child_alloc);
@@ -1316,7 +1316,7 @@ xfce_tasklist_size_allocate (GtkWidget *widget,
           gtk_widget_get_preferred_size (child->button, NULL, &child_req);
 
           /* move the button offscreen */
-          child_alloc.y = child_alloc.x = -9999;
+          child_alloc.y = child_alloc.x = OFFSCREEN;
           child_alloc.width = child_req.width;
           child_alloc.height = child_req.height;
         }
