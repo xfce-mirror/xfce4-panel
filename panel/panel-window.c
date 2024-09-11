@@ -402,8 +402,6 @@ struct _PanelWindow
   guint autohide_size;
   guint popdown_speed;
   gint popdown_progress;
-  gboolean is_active;
-  guint is_active_idle_id;
 
   /* popup/down delay from gtk style */
   guint popup_delay;
@@ -625,35 +623,13 @@ panel_window_force_redraw (PanelWindow *window)
 
 
 
-static gboolean
-panel_window_is_active_changed_idle (gpointer data)
-{
-  PanelWindow *window = data;
-  gboolean is_active = gtk_window_is_active (GTK_WINDOW (window));
-
-  if (is_active != window->is_active)
-    {
-      window->is_active = is_active;
-      if (is_active)
-        panel_window_freeze_autohide (window);
-      else
-        panel_window_thaw_autohide (window);
-    }
-
-  window->is_active_idle_id = 0;
-  return FALSE;
-}
-
-
-
 static void
 panel_window_is_active_changed (PanelWindow *window)
 {
-  /* this property can change several times in a row on Wayland when the panel is remapped,
-   * which can cause the panel to flicker, and it shouldn't be a problem to aggregate these
-   * changes in general */
-  if (window->is_active_idle_id == 0)
-    window->is_active_idle_id = g_idle_add (panel_window_is_active_changed_idle, window);
+  if (gtk_window_is_active (GTK_WINDOW (window)))
+    panel_window_freeze_autohide (window);
+  else
+    panel_window_thaw_autohide (window);
 }
 
 
@@ -1053,9 +1029,6 @@ panel_window_finalize (GObject *object)
 
   if (G_UNLIKELY (window->opacity_timeout_id != 0))
     g_source_remove (window->opacity_timeout_id);
-
-  if (G_UNLIKELY (window->is_active_idle_id != 0))
-    g_source_remove (window->is_active_idle_id);
 
   /* destroy the autohide window */
   if (window->autohide_window != NULL)
