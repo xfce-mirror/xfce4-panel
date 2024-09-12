@@ -1439,6 +1439,37 @@ panel_window_button_release_event (GtkWidget *widget,
 
 
 
+#ifdef HAVE_GTK_LAYER_SHELL
+static void
+set_anchor (PanelWindow *window)
+{
+  g_signal_handlers_disconnect_by_func (window, set_anchor, NULL);
+  panel_window_layer_set_anchor (window);
+}
+
+
+
+static gboolean
+set_anchor_default (gpointer window)
+{
+  /*
+   * Disable left/right or top/bottom anchor pairs during allocation, so that the panel
+   * is not stretched between the two anchors, preventing it from shrinking. Quite an
+   * ugly hack but it works until it gets better. This must be done around a full allocation,
+   * however, not in the middle, otherwise protocol errors may occur (allocation limits are
+   * not the same depending on whether the layer-shell surface has three anchors or only two).
+   */
+  gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+  gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
+  gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+  gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
+  g_signal_connect (window, "size-allocate", G_CALLBACK (set_anchor), NULL);
+  return FALSE;
+}
+#endif
+
+
+
 static void
 panel_window_get_preferred_width (GtkWidget *widget,
                                   gint *minimum_width,
@@ -1483,6 +1514,15 @@ panel_window_get_preferred_width (GtkWidget *widget,
       length = window->area.width * window->length;
       m_width = CLAMP (m_width, length, window->area.width);
       n_width = CLAMP (n_width, length, window->area.width);
+
+#ifdef HAVE_GTK_LAYER_SHELL
+      if (gtk_layer_is_supported ()
+          && window->snap_position != SNAP_POSITION_NONE
+          && n_width != window->alloc.width)
+        {
+          g_idle_add (set_anchor_default, window);
+        }
+#endif
     }
 
   if (minimum_width != NULL)
@@ -1538,6 +1578,15 @@ panel_window_get_preferred_height (GtkWidget *widget,
       length = window->area.height * window->length;
       m_height = CLAMP (m_height, length, window->area.height);
       n_height = CLAMP (n_height, length, window->area.height);
+
+#ifdef HAVE_GTK_LAYER_SHELL
+      if (gtk_layer_is_supported ()
+          && window->snap_position != SNAP_POSITION_NONE
+          && n_height != window->alloc.height)
+        {
+          g_idle_add (set_anchor_default, window);
+        }
+#endif
     }
 
   if (minimum_height != NULL)
@@ -1545,22 +1594,6 @@ panel_window_get_preferred_height (GtkWidget *widget,
 
   if (natural_height != NULL)
     *natural_height = n_height;
-
-#ifdef HAVE_GTK_LAYER_SHELL
-  /*
-   * Disable left/right or top/bottom anchor pairs during allocation, so that the panel
-   * is not stretched between the two anchors, preventing it from shrinking. Quite an
-   * ugly hack but it works until it gets better.
-   */
-  if (gtk_layer_is_supported () && window->snap_position != SNAP_POSITION_NONE)
-    {
-      GtkWindow *gtkwindow = GTK_WINDOW (widget);
-      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
-      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
-      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
-      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
-    }
-#endif
 }
 
 
@@ -1599,10 +1632,6 @@ panel_window_size_allocate (GtkWidget *widget,
 
   gtk_widget_set_allocation (widget, alloc);
   window->alloc = *alloc;
-
-  /* re-enable anchor pairs, see above in get_preferred_height() */
-  if (gtk_layer_is_supported () && window->snap_position != SNAP_POSITION_NONE)
-    panel_window_layer_set_anchor (window);
 
   if (G_UNLIKELY (window->autohide_state == AUTOHIDE_HIDDEN
                   || window->autohide_state == AUTOHIDE_POPUP))
