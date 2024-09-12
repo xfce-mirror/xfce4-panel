@@ -293,8 +293,15 @@ panel_plugin_external_wrapper_wayland_set_geometry (PanelPluginExternal *externa
     }
 
   gtk_widget_get_allocation (GTK_WIDGET (external), &alloc);
-  x = alloc.x + gtk_layer_get_margin (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_LEFT);
-  y = alloc.y + gtk_layer_get_margin (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_TOP);
+  if (gtk_widget_get_visible (GTK_WIDGET (window)))
+    {
+      x = alloc.x + gtk_layer_get_margin (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_LEFT);
+      y = alloc.y + gtk_layer_get_margin (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_TOP);
+    }
+  else
+    {
+      x = y = OFFSCREEN;
+    }
   if (x != geom->x || y != geom->y || alloc.width != geom->width || alloc.height != geom->height)
     {
       GValue value = G_VALUE_INIT;
