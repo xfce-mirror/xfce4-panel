@@ -817,42 +817,6 @@ panel_window_get_property (GObject *object,
 
 
 
-#ifdef HAVE_GTK_LAYER_SHELL
-static gboolean
-set_anchor (gpointer data)
-{
-  panel_window_layer_set_anchor (data);
-  return FALSE;
-}
-#endif
-
-
-
-static void
-queue_change_length (PanelWindow *window)
-{
-  gtk_widget_queue_resize (GTK_WIDGET (window));
-
-#ifdef HAVE_GTK_LAYER_SHELL
-  /*
-   * Disable left/right or top/bottom anchor pairs during allocation, so that the panel
-   * is not stretched between the two anchors, which would prevent it from shrinking.
-   * Quite an ugly hack but it works until it gets better.
-   */
-  if (gtk_layer_is_supported () && window->snap_position != SNAP_POSITION_NONE)
-    {
-      GtkWindow *gtkwindow = GTK_WINDOW (window);
-      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
-      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
-      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
-      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
-      g_idle_add (set_anchor, window);
-    }
-#endif
-}
-
-
-
 static void
 panel_window_set_property (GObject *object,
                            guint prop_id,
@@ -949,7 +913,7 @@ panel_window_set_property (GObject *object,
           if (update)
             panel_window_screen_update_borders (window);
 
-          queue_change_length (window);
+          gtk_widget_queue_resize (GTK_WIDGET (window));
         }
       break;
 
@@ -966,7 +930,7 @@ panel_window_set_property (GObject *object,
       if (window->length_adjust != val_bool)
         {
           window->length_adjust = !!val_bool;
-          queue_change_length (window);
+          gtk_widget_queue_resize (GTK_WIDGET (window));
         }
       break;
 
@@ -1581,6 +1545,22 @@ panel_window_get_preferred_height (GtkWidget *widget,
 
   if (natural_height != NULL)
     *natural_height = n_height;
+
+#ifdef HAVE_GTK_LAYER_SHELL
+  /*
+   * Disable left/right or top/bottom anchor pairs during allocation, so that the panel
+   * is not stretched between the two anchors, preventing it from shrinking. Quite an
+   * ugly hack but it works until it gets better.
+   */
+  if (gtk_layer_is_supported () && window->snap_position != SNAP_POSITION_NONE)
+    {
+      GtkWindow *gtkwindow = GTK_WINDOW (widget);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+      gtk_layer_set_anchor (gtkwindow, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
+    }
+#endif
 }
 
 
@@ -1619,6 +1599,10 @@ panel_window_size_allocate (GtkWidget *widget,
 
   gtk_widget_set_allocation (widget, alloc);
   window->alloc = *alloc;
+
+  /* re-enable anchor pairs, see above in get_preferred_height() */
+  if (gtk_layer_is_supported () && window->snap_position != SNAP_POSITION_NONE)
+    panel_window_layer_set_anchor (window);
 
   if (G_UNLIKELY (window->autohide_state == AUTOHIDE_HIDDEN
                   || window->autohide_state == AUTOHIDE_POPUP))
