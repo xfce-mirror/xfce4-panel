@@ -41,6 +41,16 @@
 #define tasklist_window_get_wid(window) ((gulong) window)
 #endif
 
+#ifdef HAVE_GTK_LAYER_SHELL
+#include <gtk-layer-shell.h>
+#define tasklist_get_monitor(tasklist) \
+  (gtk_layer_is_supported () ? gtk_layer_get_monitor (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tasklist)))) \
+                             : gdk_display_get_monitor_at_window (tasklist->display, gtk_widget_get_window (GTK_WIDGET (tasklist))))
+#else
+#define tasklist_get_monitor(tasklist) \
+  gdk_display_get_monitor_at_window (tasklist->display, gtk_widget_get_window (GTK_WIDGET (tasklist)))
+#endif
+
 #ifdef HAVE_MATH_H
 #include <math.h>
 #endif
@@ -2566,8 +2576,7 @@ xfce_tasklist_button_visible (XfceTasklistChild *child,
 
   if (xfce_tasklist_filter_monitors (tasklist))
     {
-      GdkWindow *window = gtk_widget_get_window (GTK_WIDGET (tasklist));
-      GdkMonitor *monitor = gdk_display_get_monitor_at_window (tasklist->display, window);
+      GdkMonitor *monitor = tasklist_get_monitor (tasklist);
       GList *monitors = xfw_window_get_monitors (child->window);
       if (!g_list_find_custom (monitors, monitor, panel_utils_compare_xfw_gdk_monitors))
         return FALSE;

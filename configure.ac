@@ -16,17 +16,20 @@ XDT_VERSION_INIT([4.19.4], [git])
 dnl minimum required versions
 m4_define([glib_minimum_version], [2.72.0])
 m4_define([gtk_minimum_version], [3.24.0])
-m4_define([libx11_minimum_version], [1.6.7])
 m4_define([cairo_minimum_version], [1.16])
-m4_define([gtk_layer_shell_minimum_version], [0.7.0])
-m4_define([libwnck_minimum_version], [3.0])
-m4_define([wayland_client_minimum_version], [1.15])
 m4_define([libxfce4util_minimum_version], [4.17.2])
 m4_define([libxfce4ui_minimum_version], [4.17.1])
 m4_define([libxfce4windowing_minimum_version], [4.19.4])
 m4_define([garcon_minimum_version], [4.17.0])
 m4_define([exo_minimum_version], [0.11.2])
 m4_define([xfconf_minimum_version], [4.13.2])
+
+m4_define([libx11_minimum_version], [1.6.7])
+m4_define([libxext_minimum_version], [1.0.0])
+m4_define([libwnck_minimum_version], [3.0])
+
+m4_define([wayland_client_minimum_version], [1.15])
+m4_define([gtk_layer_shell_minimum_version], [0.7.0])
 
 dnl ***************************
 dnl *** Initialize autoconf ***
@@ -155,6 +158,7 @@ XDT_CHECK_OPTIONAL_FEATURE([X11],
                            [x11],
                            [
                              XDT_FEATURE_DEPENDENCY([LIBX11], [x11], [libx11_minimum_version])
+                             XDT_FEATURE_DEPENDENCY([LIBXEXT], [xext], [libxext_minimum_version])
                              XDT_FEATURE_DEPENDENCY([GDK_X11], [gdk-x11-3.0], [gtk_minimum_version])
                              XDT_FEATURE_DEPENDENCY([GTK_X11], [gtk+-x11-3.0], [gtk_minimum_version])
                              XDT_FEATURE_DEPENDENCY([LIBWNCK], [libwnck-3.0], [libwnck_minimum_version])

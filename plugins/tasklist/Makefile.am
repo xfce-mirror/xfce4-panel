@@ -28,6 +28,8 @@ libtasklist_la_CFLAGS = \
 	$(LIBXFCE4WINDOWING_CFLAGS) \
 	$(LIBXFCE4WINDOWINGUI_CFLAGS) \
 	$(LIBX11_CFLAGS) \
+	$(LIBXEXT_CFLAGS) \
+	$(GTK_LAYER_SHELL_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 libtasklist_la_LDFLAGS = \
@@ -42,12 +44,15 @@ libtasklist_la_LIBADD = \
 	$(top_builddir)/common/libpanel-common.la \
 	$(GTK_LIBS) \
 	$(EXO_LIBS) \
+	$(XFCONF_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
 	$(LIBXFCE4WINDOWING_LIBS) \
 	$(LIBXFCE4WINDOWINGUI_LIBS) \
-	$(LIBX11_LIBS) -lXext \
-	$(XFCONF_LIBS)
+	$(LIBX11_LIBS) \
+	$(LIBXEXT_LIBS) \
+	$(GTK_LAYER_SHELL_LIBS) \
+	$(NULL)
 
 libtasklist_la_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
