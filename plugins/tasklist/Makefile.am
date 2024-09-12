@@ -29,6 +29,7 @@ libtasklist_la_CFLAGS = \
 	$(LIBXFCE4WINDOWINGUI_CFLAGS) \
 	$(LIBX11_CFLAGS) \
 	$(LIBXEXT_CFLAGS) \
+	$(GTK_LAYER_SHELL_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 libtasklist_la_LDFLAGS = \
@@ -50,6 +51,7 @@ libtasklist_la_LIBADD = \
 	$(LIBXFCE4WINDOWINGUI_LIBS) \
 	$(LIBX11_LIBS) \
 	$(LIBXEXT_LIBS) \
+	$(GTK_LAYER_SHELL_LIBS) \
 	$(NULL)
 
 libtasklist_la_DEPENDENCIES = \
