@@ -5,7 +5,7 @@
 # 
 # Translators:
 # Xfce Bot <transifex@xfce.org>, 2022
-# Marek Adamski, 2023
+# Marek Adamski, 2024
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-30 00:48+0200\n"
 "PO-Revision-Date: 2022-12-22 11:35+0000\n"
-"Last-Translator: Marek Adamski, 2023\n"
+"Last-Translator: Marek Adamski, 2024\n"
 "Language-Team: Polish (https://app.transifex.com/xfce/teams/16840/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -174,7 +174,7 @@ msgstr "Kończy działanie bieżącego wystąpienia programu"
 
 #: ../panel/main.c:87
 msgid "Do not wait for a window manager on startup"
-msgstr "Nie czekaj na manadżer okien na starcie"
+msgstr "Nie czekaj na menedżer okien podczas uruchamiania"
 
 #: ../panel/main.c:88
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
@@ -186,7 +186,8 @@ msgstr "Wypisuje informacje o wersji i kończy"
 #: ../panel/main.c:208
 #, c-format
 msgid "Name %s lost on the message dbus, exiting."
-msgstr "Nazwa %s nie znajduje się w dbusie wiadomości, zakończenie działania."
+msgstr ""
+"Nazwa %s utracona w magistrali komunikatów sesji, kończenie działania."
 
 #. parse context options
 #: ../panel/main.c:271
@@ -1211,8 +1212,8 @@ msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
 msgstr ""
-"Jeśli ustawiono, to polecenie jest uruchamiane, gdy wtyczkę kliknięto lewym "
-"przyciskiem myszy, zamiast wyświetlania domyślnego kalendarza."
+"Jeśli ustawiono, to polecenie jest uruchamiane po kliknięciu wtyczki lewym "
+"przyciskiem myszy zamiast wyświetlania domyślnego kalendarza."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Co_mmand:"
@@ -1340,7 +1341,7 @@ msgstr "poranek"
 
 #: ../plugins/clock/clock-fuzzy.c:91
 msgid "Almost noon"
-msgstr "przed południem"
+msgstr "przedpołudnie"
 
 #: ../plugins/clock/clock-fuzzy.c:92
 msgid "Noon"
@@ -1356,74 +1357,74 @@ msgstr "wieczór"
 
 #: ../plugins/clock/clock-fuzzy.c:95
 msgid "Late evening"
-msgstr "Późny wieczór"
+msgstr "późny wieczór"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
 #: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "%0 o'clock"
-msgstr "Godzina %0"
+msgstr "godzina %0"
 
 #: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "five past %0"
-msgstr "Pięć po %0"
+msgstr "pięć po %0"
 
 #: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "ten past %0"
-msgstr "Dziesięć po %0"
+msgstr "dziesięć po %0"
 
 #: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "quarter past %0"
-msgstr "Piętnaście po %0"
+msgstr "kwadrans po %0"
 
 #: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "twenty past %0"
-msgstr "Dwadzieścia po %0"
+msgstr "dwadzieścia po %0"
 
 #: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five past %0"
-msgstr "Dwadzieścia pięć po %0"
+msgstr "dwadzieścia pięć po %0"
 
 #: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "half past %0"
-msgstr "Wpół do %1"
+msgstr "wpół do %1"
 
 #: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "twenty five to %1"
-msgstr "Za dwadzieścia pięć %1"
+msgstr "za dwadzieścia pięć %1"
 
 #: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "twenty to %1"
-msgstr "Za dwadzieścia %1"
+msgstr "za dwadzieścia %1"
 
 #: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "quarter to %1"
-msgstr "Za piętnaście %1"
+msgstr "kwadrans do %1"
 
 #: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "ten to %1"
-msgstr "Za dziesięć %1"
+msgstr "za dziesięć %1"
 
 #: ../plugins/clock/clock-fuzzy.c:113
 #, no-c-format
 msgid "five to %1"
-msgstr "Za pięć %1"
+msgstr "za pięć %1"
 
 #: ../plugins/clock/clock-fuzzy.c:114
 #, no-c-format
 msgid "%1 o'clock"
-msgstr "Godzina %1"
+msgstr "godzina %1"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
@@ -1485,7 +1486,7 @@ msgstr "za dwadzieścia %1"
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
-msgstr "za piętnaście %1"
+msgstr "kwadrans do %1"
 
 #: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
@@ -1664,7 +1665,7 @@ msgstr "Nie udało się uruchomić preferowanego programu dla kategorii „%s�
 
 #: ../plugins/directorymenu/directorymenu.c:929
 msgid "Create New Folder"
-msgstr "Utwórz nowy folder"
+msgstr "Utwórz nowy katalog"
 
 #: ../plugins/directorymenu/directorymenu.c:934
 msgid "Create New Text Document"
@@ -1697,7 +1698,7 @@ msgstr "Otwórz w terminalu"
 
 #: ../plugins/directorymenu/directorymenu.c:1101
 msgid "Create Folder..."
-msgstr "Utwórz folder..."
+msgstr "Utwórz katalog..."
 
 #: ../plugins/directorymenu/directorymenu.c:1114
 msgid "Create Text Document..."
@@ -1717,19 +1718,19 @@ msgstr "_Podstawowy katalog:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "Show 'New Text _Document'"
-msgstr "Wyświetla 'Nowy _dokument tekstowy'"
+msgstr "Wyświetla „Utwórz _dokument tekstowy”"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid "Show '_New Folder'"
-msgstr "Wyświetla '_Nowy folder'"
+msgstr "Wyświetla „Utwórz _katalog”"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
 msgid "Show 'Open in _Terminal'"
-msgstr "Wyświetla 'Otwórz w _terminalu'"
+msgstr "Wyświetla „Otwórz w _terminalu”"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
 msgid "Show '_Open _Folder'"
-msgstr "Wyświetla '_Otwórz'"
+msgstr "Wyświetla „_Otwórz”"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
 msgid "Menu"
@@ -1829,15 +1830,15 @@ msgstr "_Usuń element"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "Add Appli_cation"
-msgstr "Dodaj _aplikację"
+msgstr "Dodaj _program"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:12
 msgid "New _Application"
-msgstr "Nowa _aplikacja"
+msgstr "Nowy p_rogram"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "New _Link"
-msgstr "Nowy _link"
+msgstr "Nowe _dowiązanie"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "Add one or more existing items to the launcher"
@@ -2224,7 +2225,7 @@ msgstr "Wyświetlanie tylko _zminimalizowanych okien"
 #: ../plugins/tasklist/tasklist-widget.c:3131
 #, c-format
 msgid "Unable to start new instance of '%s'"
-msgstr "Nie można uruchomić nowego wystąpienia '%s'"
+msgstr "Nie można uruchomić nowego wystąpienia „%s”"
 
 #: ../plugins/tasklist/tasklist-widget.c:3135
 msgid "Error"
