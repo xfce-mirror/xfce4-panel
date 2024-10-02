@@ -190,7 +190,7 @@ XDT_CHECK_OPTIONAL_PACKAGE([DBUSMENU], [dbusmenu-gtk3-0.4],
 dnl ***************************************
 dnl *** Check for gobject-introspection ***
 dnl ***************************************
-GOBJECT_INTROSPECTION_CHECK([1.66.0])
+GOBJECT_INTROSPECTION_CHECK([1.72.0])
 
 dnl *************************
 dnl *** Check for vapigen ***
