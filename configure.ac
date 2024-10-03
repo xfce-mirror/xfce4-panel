@@ -28,7 +28,7 @@ m4_define([libx11_minimum_version], [1.6.7])
 m4_define([libxext_minimum_version], [1.0.0])
 m4_define([libwnck_minimum_version], [3.0])
 
-m4_define([wayland_client_minimum_version], [1.15])
+m4_define([wayland_client_minimum_version], [1.20])
 m4_define([gtk_layer_shell_minimum_version], [0.7.0])
 
 dnl ***************************
