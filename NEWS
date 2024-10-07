@@ -1,3 +1,58 @@
+4.19.5 (2024-10-07)
+======
+- Use new xfw_window_activate() signature in libwindowing 4.19.6
+- build: Adjust Wayland requirements for Xfce 4.20
+- build: Bump requirements for Xfce 4.20
+- wayland: tasklist: Fix monitor detection when panel is remapped
+- x11: tasklist: Properly check for libxext
+- wayland: autohide: Do not block when panel has input focus
+- Revert "panel: Fix panel flickering during autohide on Wayland"
+- wayland: autohide: Show/hide panel instead of moving it offscreen
+- autohide: Show/hide autohide window instead of moving it offscreen
+- wayland: Avoid allocation loop when the panel is anchored to an edge
+- Revert "wayland: Avoid allocation loop when the panel is anchored to
+  an edge"
+- wayland: Avoid allocation loop when the panel is anchored to an edge
+- Fix gtk-layer-shell includes
+- Switch to XfwMonitor
+- wayland: wrapper: Prevent plugin allocation blocking
+- tasklist: Connect to XfwWindow::notify::monitors
+- panel: Fix panel flickering during autohide on Wayland
+- Always set gtk_layer_shell monitor on change
+- Add debug key for PANEL_DEBUG_ACTIONS
+- tasklist: Fix Wayland window drag and drop
+- panel: Do not remove plugin when disregarding restart dialog
+- panel: Replace remaining gtk_message_dialog_new with
+  xfce_message_dialog_new
+- common: Introduce panel_utils_gtk_dialog_find_label_by_text
+- tasklist: Use xfce_dialog_show_error when starting new instance fails
+- actions: Use xfce_message_dialog_new in confirmation dialogs
+- panel, libxfce4panel: Use xfce_dialog_confirm in plugin removal
+  confirmation
+- gcc-analyzer: Add false positive file
+- scan-build: Add false positive file
+- scan-build: tasklist: Fix core.NullDereference
+- Revert "Add new CI builds to build without X11 and Wayland"
+- Apply .clang-format file
+- Remove unnecessary dirname in local includes
+- clang-format: Use IncludeBlocks::Regroup
+- build: Add missing CFLAGS and LIBS from gio-unix-2.0
+- build: Add missing math.h includes
+- build: Silence -Wstring-plus-int from clang
+- fix build on OpenBSD after 0c56766b
+- Translation Updates:
+  Albanian, Amharic, Arabic, Armenian (Armenia), Asturian, Basque,
+  Belarusian, Bengali, Bulgarian, Catalan, Chinese (China), Chinese
+  (Hong Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch,
+  Eastern Armenian, English (Australia), English (United Kingdom),
+  Estonian, Finnish, French, Galician, Georgian, German, Greek, Hebrew,
+  Hungarian, Icelandic, Indonesian, Interlingue, Italian, Japanese,
+  Kazakh, Korean, Lithuanian, Malay, Norwegian Bokmål, Norwegian
+  Nynorsk, Occitan (post 1500), Panjabi (Punjabi), Polish, Portuguese,
+  Portuguese (Brazil), Romanian, Russian, Serbian, Sinhala, Slovak,
+  Slovenian, Spanish, Swedish, Thai, Turkish, Ukrainian, Uyghur,
+  Vietnamese
+
 4.19.4 (2024-05-16)
 ======
 - clang-format: Break after assignment operator

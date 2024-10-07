@@ -11,7 +11,7 @@ dnl ***************************
 m4_define([libxfce4panel_verinfo], [4:0:0]) dnl current:revision:age
 m4_define([libxfce4panel_version_api], [2.0])
 m4_define([xfce4_panel_config_version], [2])
-XDT_VERSION_INIT([4.19.4], [git])
+XDT_VERSION_INIT([4.19.5])
 
 dnl minimum required versions
 m4_define([glib_minimum_version], [2.72.0])
