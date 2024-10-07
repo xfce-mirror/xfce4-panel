@@ -3534,7 +3534,7 @@ xfce_tasklist_button_activate (XfceTasklistChild *child,
             }
         }
 
-      xfw_window_activate (child->window, timestamp, NULL);
+      xfw_window_activate (child->window, NULL, timestamp, NULL);
     }
 
   return TRUE;

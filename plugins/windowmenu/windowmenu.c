@@ -987,12 +987,12 @@ window_menu_plugin_menu_window_item_activate (GtkWidget *mi,
       workspace = xfw_window_get_workspace (window);
       if (workspace != NULL)
         xfw_workspace_activate (workspace, NULL);
-      xfw_window_activate (window, event->time, NULL);
+      xfw_window_activate (window, NULL, event->time, NULL);
     }
   else if (event->button == 2)
     {
       /* active the window (bring it to this workspace) */
-      xfw_window_activate (window, event->time, NULL);
+      xfw_window_activate (window, NULL, event->time, NULL);
     }
   else if (event->button == 3)
     {
