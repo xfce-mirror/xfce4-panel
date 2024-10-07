@@ -673,7 +673,7 @@ clock_plugin_configure_plugin_mode_changed (GtkComboBox *combo,
   switch (mode)
     {
     case CLOCK_PLUGIN_MODE_ANALOG:
-      active = 1 << 1;
+      active = 1 << 1 | 1 << 3;
       break;
 
     case CLOCK_PLUGIN_MODE_BINARY:
