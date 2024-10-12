@@ -2733,6 +2733,7 @@ xfce_tasklist_button_icon_changed (XfwWindow *window,
   cairo_surface_t *surface;
   XfceTasklist *tasklist = child->tasklist;
   gint icon_size, scale_factor, old_width = -1, old_height = -1;
+  gint rows;
 
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
   panel_return_if_fail (GTK_IS_WIDGET (child->icon));
@@ -2752,9 +2753,17 @@ xfce_tasklist_button_icon_changed (XfwWindow *window,
     icon_size = xfce_panel_plugin_get_icon_size (xfce_tasklist_get_panel_plugin (tasklist));
 
   if (child->tasklist->show_labels)
-    icon_size = MIN (icon_size, child->tasklist->max_button_size - 4);
+    {
+      rows = MAX (child->tasklist->nrows, 1);
+      rows = MAX (rows, child->tasklist->size / child->tasklist->max_button_size);
+      icon_size = MIN (icon_size, child->tasklist->size / rows - 4);
+      if (child->tasklist->show_labels && xfce_tasklist_deskbar (child->tasklist))
+        icon_size = MIN (icon_size, child->tasklist->max_button_size - 4);
+    }
   else
-    icon_size = MIN (icon_size, child->tasklist->size / child->tasklist->nrows - 4);
+    {
+      icon_size = MIN (icon_size, child->tasklist->size / child->tasklist->nrows - 4);
+    }
 
   /* get the window icon */
   pixbuf = xfw_window_get_icon (child->window, icon_size, scale_factor);
@@ -4208,6 +4217,7 @@ xfce_tasklist_group_button_icon_changed (XfwApplication *app,
   GSList *li;
   gboolean all_minimized_in_group = TRUE;
   gint icon_size, scale_factor;
+  gint rows;
 
   panel_return_if_fail (XFCE_IS_TASKLIST (group_child->tasklist));
   panel_return_if_fail (XFW_IS_APPLICATION (app));
@@ -4222,9 +4232,17 @@ xfce_tasklist_group_button_icon_changed (XfwApplication *app,
   icon_size = xfce_panel_plugin_get_icon_size (xfce_tasklist_get_panel_plugin (group_child->tasklist));
 
   if (group_child->tasklist->show_labels)
-    icon_size = MIN (icon_size, group_child->tasklist->max_button_size - 4);
+    {
+      rows = MAX (group_child->tasklist->nrows, 1);
+      rows = MAX (rows, group_child->tasklist->size / group_child->tasklist->max_button_size);
+      icon_size = MIN (icon_size, group_child->tasklist->size / rows - 4);
+      if (group_child->tasklist->show_labels && xfce_tasklist_deskbar (group_child->tasklist))
+        icon_size = MIN (icon_size, group_child->tasklist->max_button_size - 4);
+    }
   else
-    icon_size = MIN (icon_size, group_child->tasklist->size / group_child->tasklist->nrows - 4);
+    {
+      icon_size = MIN (icon_size, group_child->tasklist->size / group_child->tasklist->nrows - 4);
+    }
 
   scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (group_child->tasklist));
   context = gtk_widget_get_style_context (GTK_WIDGET (group_child->icon));
