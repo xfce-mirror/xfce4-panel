@@ -55,9 +55,9 @@ xfce_clock_analog_draw (GtkWidget *widget,
                         cairo_t *cr);
 static void
 xfce_clock_analog_draw_ticks (cairo_t *cr,
-                              gdouble  xc,
-                              gdouble  yc,
-                              gdouble  radius,
+                              gdouble xc,
+                              gdouble yc,
+                              gdouble radius,
                               gboolean is_24h);
 static void
 xfce_clock_analog_draw_pointer (cairo_t *cr,
@@ -290,9 +290,9 @@ xfce_clock_analog_draw (GtkWidget *widget,
 
 static void
 xfce_clock_analog_draw_ticks (cairo_t *cr,
-                              gdouble  xc,
-                              gdouble  yc,
-                              gdouble  radius,
+                              gdouble xc,
+                              gdouble yc,
+                              gdouble radius,
                               gboolean is_24h)
 {
   gint i;
