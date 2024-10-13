@@ -4236,7 +4236,7 @@ xfce_tasklist_group_button_icon_changed (XfwApplication *app,
       rows = MAX (group_child->tasklist->nrows, 1);
       rows = MAX (rows, group_child->tasklist->size / group_child->tasklist->max_button_size);
       icon_size = MIN (icon_size, group_child->tasklist->size / rows - 4);
-      if (group_child->tasklist->show_labels && xfce_tasklist_deskbar (group_child->tasklist))
+      if (xfce_tasklist_deskbar (group_child->tasklist))
         icon_size = MIN (icon_size, group_child->tasklist->max_button_size - 4);
     }
   else
