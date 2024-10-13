@@ -83,7 +83,7 @@ G_DEFINE_AUTOPTR_CLEANUP_FUNC (XfcePanelPlugin, g_object_unref)
  *
  * Defines padding to be used for panel plugin icons (size difference between the button and the icon)
  *
- * Since: 4.20
+ * Since: 4.19.6
  **/
 #define XFCE_PANEL_PLUGIN_ICON_PADDING (4)
 
