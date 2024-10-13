@@ -198,7 +198,6 @@ struct _XfceTasklist
 
   /* number of rows of window buttons */
   gint nrows;
-  gdouble nrows_ratio;
 
   /* switch window with the mouse wheel */
   guint window_scrolling : 1;
@@ -446,9 +445,6 @@ static void
 xfce_tasklist_group_button_add_window (XfceTasklistChild *group_child,
                                        XfceTasklistChild *window_child);
 static void
-xfce_tasklist_button_icon_changed (XfwWindow *window,
-                                   XfceTasklistChild *child);
-static void
 xfce_tasklist_group_button_icon_changed (XfwApplication *app,
                                          XfceTasklistChild *group_child);
 static XfceTasklistChild *
@@ -692,7 +688,6 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->skipped_windows = NULL;
   tasklist->mode = XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
   tasklist->nrows = 1;
-  tasklist->nrows_ratio = 1;
   tasklist->all_workspaces = FALSE;
   tasklist->button_relief = GTK_RELIEF_NORMAL;
   tasklist->switch_workspace = TRUE;
@@ -996,7 +991,6 @@ xfce_tasklist_get_preferred_length (GtkWidget *widget,
   XfceTasklistChild *child;
   gint child_size = tasklist->size / tasklist->nrows;
   gint child_length = 0;
-  gdouble nrows_ratio = tasklist->nrows_ratio;
 
   for (li = tasklist->windows, n_windows = 0; li != NULL; li = li->next)
     {
@@ -1013,7 +1007,6 @@ xfce_tasklist_get_preferred_length (GtkWidget *widget,
     }
 
   tasklist->n_windows = n_windows;
-  tasklist->nrows_ratio = 1;
 
   if (n_windows != 0)
     {
@@ -1021,7 +1014,6 @@ xfce_tasklist_get_preferred_length (GtkWidget *widget,
       if (tasklist->show_labels)
         {
           rows = MAX (rows, tasklist->size / tasklist->max_button_size);
-          tasklist->nrows_ratio = (gdouble) tasklist->nrows / (gdouble) rows;
           child_size = MIN (child_size, tasklist->max_button_size);
           child_length = CLAMP (child_length, tasklist->min_button_length, tasklist->max_button_length);
         }
@@ -1040,16 +1032,6 @@ xfce_tasklist_get_preferred_length (GtkWidget *widget,
       else
         length = (tasklist->size / rows) * cols;
     }
-
-  if (tasklist->nrows_ratio != nrows_ratio)
-    for (li = tasklist->windows; li != NULL; li = li->next)
-      {
-        child = li->data;
-        if (child->type == CHILD_TYPE_GROUP)
-          xfce_tasklist_group_button_icon_changed (child->app, child);
-        else
-          xfce_tasklist_button_icon_changed (child->window, child);
-      }
 
   /* set the requested sizes */
   if (natural_length != NULL)
@@ -2764,8 +2746,7 @@ xfce_tasklist_button_icon_changed (XfwWindow *window,
       && !gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &icon_size, NULL))
     icon_size = 16;
   else
-    icon_size = xfce_panel_plugin_get_icon_size (xfce_tasklist_get_panel_plugin (tasklist))
-                * child->tasklist->nrows_ratio;
+    icon_size = xfce_panel_plugin_get_icon_size (xfce_tasklist_get_panel_plugin (tasklist));
 
   /* get the window icon */
   pixbuf = xfw_window_get_icon (child->window, icon_size, scale_factor);
@@ -4230,8 +4211,7 @@ xfce_tasklist_group_button_icon_changed (XfwApplication *app,
   if (group_child->tasklist->minimized_icon_lucency == 0)
     return;
 
-  icon_size = xfce_panel_plugin_get_icon_size (xfce_tasklist_get_panel_plugin (group_child->tasklist))
-              * group_child->tasklist->nrows_ratio;
+  icon_size = xfce_panel_plugin_get_icon_size (xfce_tasklist_get_panel_plugin (group_child->tasklist));
   scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (group_child->tasklist));
   context = gtk_widget_get_style_context (GTK_WIDGET (group_child->icon));
 
