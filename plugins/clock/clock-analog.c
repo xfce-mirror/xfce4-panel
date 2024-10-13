@@ -34,6 +34,7 @@
 #define CLOCK_SCALE 0.08
 #define TICKS_TO_RADIANS(x) (G_PI - (G_PI / 30.0) * (x))
 #define HOURS_TO_RADIANS(x, y) (G_PI - (G_PI / 6.0) * (((x) > 12 ? (x) - 12 : (x)) + (y) / 60.0))
+#define HOURS_TO_RADIANS_24(x, y) (G_PI - (G_PI / 12.0) * ((x) + (y) / 60.0))
 
 
 
@@ -56,7 +57,8 @@ static void
 xfce_clock_analog_draw_ticks (cairo_t *cr,
                               gdouble xc,
                               gdouble yc,
-                              gdouble radius);
+                              gdouble radius,
+                              gboolean is_24h);
 static void
 xfce_clock_analog_draw_pointer (cairo_t *cr,
                                 gdouble xc,
@@ -75,6 +77,7 @@ enum
 {
   PROP_0,
   PROP_SHOW_SECONDS,
+  PROP_SHOW_MILITARY,
   PROP_SIZE_RATIO,
   PROP_ORIENTATION
 };
@@ -86,6 +89,7 @@ struct _XfceClockAnalog
   ClockTimeTimeout *timeout;
 
   guint show_seconds : 1;
+  guint show_military : 1; /* 24-hour clock */
   ClockTime *time;
 };
 
@@ -130,6 +134,13 @@ xfce_clock_analog_class_init (XfceClockAnalogClass *klass)
                                                          FALSE,
                                                          G_PARAM_READWRITE
                                                            | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_SHOW_MILITARY,
+                                   g_param_spec_boolean ("show-military", NULL, NULL,
+                                                         FALSE,
+                                                         G_PARAM_READWRITE
+                                                           | G_PARAM_STATIC_STRINGS));
 }
 
 
@@ -138,6 +149,7 @@ static void
 xfce_clock_analog_init (XfceClockAnalog *analog)
 {
   analog->show_seconds = FALSE;
+  analog->show_military = FALSE;
 }
 
 
@@ -157,6 +169,10 @@ xfce_clock_analog_set_property (GObject *object,
 
     case PROP_SHOW_SECONDS:
       analog->show_seconds = g_value_get_boolean (value);
+      break;
+
+    case PROP_SHOW_MILITARY:
+      analog->show_military = g_value_get_boolean (value);
       break;
 
     default:
@@ -184,6 +200,10 @@ xfce_clock_analog_get_property (GObject *object,
     {
     case PROP_SHOW_SECONDS:
       g_value_set_boolean (value, analog->show_seconds);
+      break;
+
+    case PROP_SHOW_MILITARY:
+      g_value_set_boolean (value, analog->show_military);
       break;
 
     case PROP_SIZE_RATIO:
@@ -240,7 +260,7 @@ xfce_clock_analog_draw (GtkWidget *widget,
   gdk_cairo_set_source_rgba (cr, &fg_rgba);
 
   /* draw the ticks */
-  xfce_clock_analog_draw_ticks (cr, xc, yc, radius);
+  xfce_clock_analog_draw_ticks (cr, xc, yc, radius, analog->show_military);
 
   if (analog->show_seconds)
     {
@@ -254,7 +274,10 @@ xfce_clock_analog_draw (GtkWidget *widget,
   xfce_clock_analog_draw_pointer (cr, xc, yc, radius, angle, 0.8, FALSE);
 
   /* hour pointer */
-  angle = HOURS_TO_RADIANS (g_date_time_get_hour (time), g_date_time_get_minute (time));
+  if (analog->show_military)
+    angle = HOURS_TO_RADIANS_24 (g_date_time_get_hour (time), g_date_time_get_minute (time));
+  else
+    angle = HOURS_TO_RADIANS (g_date_time_get_hour (time), g_date_time_get_minute (time));
   xfce_clock_analog_draw_pointer (cr, xc, yc, radius, angle, 0.5, FALSE);
 
   /* cleanup */
@@ -269,15 +292,16 @@ static void
 xfce_clock_analog_draw_ticks (cairo_t *cr,
                               gdouble xc,
                               gdouble yc,
-                              gdouble radius)
+                              gdouble radius,
+                              gboolean is_24h)
 {
   gint i;
   gdouble x, y, angle;
 
-  for (i = 0; i < 12; i++)
+  for (i = 0; i < 24; i++)
     {
       /* calculate */
-      angle = HOURS_TO_RADIANS (i, 0);
+      angle = HOURS_TO_RADIANS_24 (i, 0);
       x = xc + sin (angle) * (radius * (1.0 - CLOCK_SCALE));
       y = yc + cos (angle) * (radius * (1.0 - CLOCK_SCALE));
 
@@ -289,7 +313,7 @@ xfce_clock_analog_draw_ticks (cairo_t *cr,
           cairo_line_to (cr, x - radius * CLOCK_SCALE * 1.2, y - radius * CLOCK_SCALE);
           cairo_close_path (cr);
         }
-      else if (i % 3 == 0)
+      else if (i % 6 == 0)
         {
           /* draw rectangle */
           x = x + cos (angle) * radius * CLOCK_SCALE * 0.6 + sin (angle) * radius * CLOCK_SCALE;
@@ -306,11 +330,18 @@ xfce_clock_analog_draw_ticks (cairo_t *cr,
           cairo_line_to (cr, x, y);
           cairo_close_path (cr);
         }
-      else
+      else if (i % 2 == 0)
+        {
+          /* draw larger arc */
+          cairo_move_to (cr, x, y);
+          cairo_arc (cr, x, y, radius * CLOCK_SCALE, 0, 2 * G_PI);
+          cairo_close_path (cr);
+        }
+      else if (is_24h)
         {
           /* draw arc */
           cairo_move_to (cr, x, y);
-          cairo_arc (cr, x, y, radius * CLOCK_SCALE, 0, 2 * G_PI);
+          cairo_arc (cr, x, y, radius * CLOCK_SCALE * 0.5, 0, 2 * G_PI);
           cairo_close_path (cr);
         }
     }
