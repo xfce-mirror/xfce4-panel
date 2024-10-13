@@ -1237,6 +1237,7 @@ clock_plugin_set_mode (ClockPlugin *plugin)
     {
       /* analog */
       { "show-seconds", G_TYPE_BOOLEAN },
+      { "show-military", G_TYPE_BOOLEAN },
       { NULL },
     },
     {
