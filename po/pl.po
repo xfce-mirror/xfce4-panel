@@ -36,13 +36,13 @@ msgstr ""
 
 #: panel-desktop-handler.desktop.in:4
 msgid "Create Launcher on the panel"
-msgstr "Dodaje do panelu aplet aktywatora"
+msgstr "Dodaje aktywator do panelu"
 
 #: panel-desktop-handler.desktop.in:5
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop "
 "file"
-msgstr "Dodaje do panelu aplet aktywatora wykorzystując do tego wskazany plik .desktop"
+msgstr "Dodaje nowy aktywator do panelu na podstawie informacji z tego pliku pulpitu"
 
 #: panel-preferences.desktop.in:8
 msgid ""
@@ -72,7 +72,7 @@ msgstr "Usunięcie elementu z panelu oznacza również utratę jego konfiguracji
 #: panel/panel-preferences-dialog.c:1544
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "Usunąć aplet „%s”?"
+msgstr "Czy na pewno chcesz usunąć „%s”?"
 
 #. properties item
 #: libxfce4panel/xfce-panel-plugin.c:1215
@@ -104,12 +104,12 @@ msgstr "Pane_l"
 #. add new items
 #: libxfce4panel/xfce-panel-plugin.c:1279 panel/panel-window.c:3688
 msgid "Add _New Items..."
-msgstr "_Dodaj aplet..."
+msgstr "_Dodaj nowe elementy..."
 
 #. customize panel
 #: libxfce4panel/xfce-panel-plugin.c:1290 panel/panel-window.c:3699
 msgid "Panel Pr_eferences..."
-msgstr "_Ustawienia..."
+msgstr "_Ustawienia panelu..."
 
 #. logout item
 #: libxfce4panel/xfce-panel-plugin.c:1307 panel/panel-window.c:3726
@@ -143,11 +143,11 @@ msgstr "Wyświetla okno ustawień panelu"
 
 #: panel/main.c:66 panel/main.c:67
 msgid "PANEL-NUMBER"
-msgstr "NUMER_PANELU"
+msgstr "NUMER-PANELU"
 
 #: panel/main.c:67
 msgid "Show the 'Add New Items' dialog"
-msgstr "Wyświetla okno dodawania apletów"
+msgstr "Wyświetla okno dodawania elementów"
 
 #: panel/main.c:68
 msgid "Save the panel configuration"
@@ -155,11 +155,11 @@ msgstr "Zapisuje konfigurację panelu"
 
 #: panel/main.c:69
 msgid "Add a new plugin to the panel"
-msgstr "Umieszcza nowy aplet na panelu"
+msgstr "Dodaj nową wtyczkę do panelu"
 
 #: panel/main.c:69
 msgid "PLUGIN-NAME"
-msgstr "APLET"
+msgstr "NAZWA-WTYCZKI"
 
 #: panel/main.c:70
 msgid "Restart the running panel instance"
@@ -214,7 +214,7 @@ msgstr "Nie udało się wyświetlić okna preferencji"
 
 #: panel/main.c:424
 msgid "Failed to show the add new items dialog"
-msgstr "Nie udało się wyświetlić okna dodawania apletów"
+msgstr "Nie udało się wyświetlić okna dodawania elementów"
 
 #: panel/main.c:426
 msgid "Failed to save the panel configuration"
@@ -222,7 +222,7 @@ msgstr "Nie udało się zapisać konfiguracji panelu"
 
 #: panel/main.c:428
 msgid "Failed to add a plugin to the panel"
-msgstr "Nie udało się dodać apletu do panelu"
+msgstr "Nie udało się dodać wtyczki do panelu"
 
 #: panel/main.c:430
 msgid "Failed to restart the panel"
@@ -284,7 +284,7 @@ msgstr "Za_kończ"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Do panelu zostanie dodany nowy aplet aktywatora z zawartością przeciągniętych plików."
+msgstr "Spowoduje to utworzenie nowej wtyczki aktywatora na panelu i wstawienie upuszczonych plików jako elementów menu."
 
 #: panel/panel-application.c:1040
 msgid "Create _Launcher"
@@ -311,7 +311,7 @@ msgstr "Zakończ"
 
 #: panel/panel-application.c:1805
 msgid "Are you sure you want to quit the panel?"
-msgstr "Zakończyć działanie panelu?"
+msgstr "Czy na pewno chcesz zakończyć działanie panelu?"
 
 #: panel/panel-application.c:1813
 #, c-format
@@ -321,7 +321,7 @@ msgstr "Nie udało się wykonać polecenia „%s”."
 #: panel/panel-dbus-client.c:213
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Użyto nieprawidłowej składni zdarzenia wtyczki. Proszę użyć wyrażenia PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr "Użyto nieprawidłowej składni zdarzenia wtyczki. Użyj wyrażenia NAZWA-WTYCZKI:NAZWA[:TYP:WARTOŚĆ]."
 
 #: panel/panel-dbus-client.c:243
 #, c-format
@@ -344,7 +344,7 @@ msgstr "Piotr Sokół <psokol.l10n@gmail.com>, 2008, 2009, 2010, 2011, 2012, 201
 
 #: panel/panel-dialogs.c:157
 msgid "Add New Item"
-msgstr "Dodawanie aktywatora"
+msgstr "Dodawanie elementu"
 
 #: panel/panel-dialogs.c:157 plugins/actions/actions.c:870
 #: plugins/applicationsmenu/applicationsmenu.c:606
@@ -361,7 +361,7 @@ msgstr "_Dodaj"
 
 #: panel/panel-dialogs.c:168
 msgid "Please choose a panel for the new plugin:"
-msgstr "Proszę wybrać panel, do którego zostanie dodany aplet:"
+msgstr "Wybierz panel dla nowej wtyczki:"
 
 #: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1028
 #, c-format
@@ -380,7 +380,7 @@ msgstr "Nie zezwolono na modyfikowanie paneli"
 
 #: panel/panel-item-dialog.c:195 plugins/launcher/launcher-dialog.glade:198
 msgid "Add New Items"
-msgstr "Dodawanie apletów"
+msgstr "Dodawanie elementów"
 
 #: panel/panel-item-dialog.c:211 panel/panel-preferences-dialog.glade:163
 #: panel/panel-tic-tac-toe.c:118 plugins/actions/actions-dialog.glade:82
@@ -408,7 +408,7 @@ msgstr "Wprowadza wyszukiwany ciąg"
 #: panel/panel-plugin-external.c:413
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "Aplet „%s” niespodziewanie zakończył działanie. Uruchomić go ponownie?"
+msgstr "Wtyczka „%s” niespodziewanie zakończyła działanie. Uruchomić ją ponownie?"
 
 #: panel/panel-plugin-external.c:414
 #, c-format
@@ -416,11 +416,11 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "W ciągu ostatnich %d sekund podjęto kilkukrotną próbę ponownego uruchomienia apletu. Ponowić próbę ponownego uruchomienia apletu czy usunąć aplet z panelu?"
+msgstr "W ciągu ostatnich %d sekund podjęto kilkukrotną próbę ponownego uruchomienia wtyczki. Ponowić próbę ponownego uruchomienia wtyczki czy usunąć ją z panelu?"
 
 #: panel/panel-plugin-external.c:419
 msgid "Plugin Restart"
-msgstr "Ponowne uruchomienie apletu"
+msgstr "Ponowne uruchomienie wtyczki"
 
 #: panel/panel-plugin-external.c:420
 msgid "_Execute"
@@ -442,12 +442,12 @@ msgstr "Monitor %d"
 
 #: panel/panel-preferences-dialog.c:1082
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "Panel zostanie usunięty wraz z konfiguracją apletów."
+msgstr "Konfiguracje panelu i wtyczek zostaną trwale usunięte"
 
 #: panel/panel-preferences-dialog.c:1091
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
-msgstr "Usunąć panel %d?"
+msgstr "Czy na pewno chcesz usunąć panel „%d”?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
@@ -474,12 +474,12 @@ msgstr "Wewnętrzna nazwa: %s-%d"
 
 #: panel/panel-preferences-dialog.c:1546
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Aplet zostanie nieodwracalnie usunięty."
+msgstr "Element zostanie nieodwracalnie usunięty."
 
 #: panel/panel-preferences-dialog.c:1550
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
-msgstr "Czy na pewno chcesz usunąć te aplety: %d?"
+msgstr "Czy na pewno chcesz usunąć te elementy: %d?"
 
 #: panel/panel-preferences-dialog.c:1552
 msgid "If you remove them from the panel, they are permanently lost."
@@ -573,7 +573,7 @@ msgstr "Ukrywa uchwyty panelu i blokuje jego położenie."
 
 #: panel/panel-preferences-dialog.glade:453
 msgid "_Reserve space on screen edges for the panel"
-msgstr "_Rezerwacja miejsca na krawędziach ekranu dla panelu"
+msgstr "_Rezerwacja miejsca dla panelu na krawędziach ekranu"
 
 #: panel/panel-preferences-dialog.glade:457
 msgid ""
@@ -620,7 +620,7 @@ msgstr "_Rozciągnięcie"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Automatycznie zwiększa długość panelu, jeśli aplety będą wymagać więcej przestrzeni."
+msgstr "Automatycznie zwiększa długość panelu, jeśli wtyczki będą wymagać więcej miejsca."
 
 #: panel/panel-preferences-dialog.glade:712
 msgid "D_isplay"
@@ -703,11 +703,11 @@ msgstr "Wyg_ląd"
 
 #: panel/panel-preferences-dialog.glade:1228
 msgid "Add new item to this panel"
-msgstr "Dodaje nowy aplet do panelu"
+msgstr "Dodaje nowy element do panelu"
 
 #: panel/panel-preferences-dialog.glade:1245
 msgid "Remove currently selected item"
-msgstr "Usuwa zaznaczony aplet"
+msgstr "Usuwa zaznaczony element"
 
 #: panel/panel-preferences-dialog.glade:1261
 #: plugins/launcher/launcher-dialog.glade:559
@@ -721,16 +721,16 @@ msgstr "Wyświetla informacje na temat zaznaczonego elementu"
 #: panel/panel-preferences-dialog.glade:1325
 #: plugins/launcher/launcher-dialog.glade:509
 msgid "Move currently selected item up by one row"
-msgstr "Przemieszcza wybrany element jeden wiersz w górę"
+msgstr "Przemieszcza wybrany element o jeden wiersz w górę"
 
 #: panel/panel-preferences-dialog.glade:1346
 #: plugins/launcher/launcher-dialog.glade:529
 msgid "Move currently selected item down by one row"
-msgstr "Przemieszcza wybrany element jeden wiersz w dół"
+msgstr "Przemieszcza wybrany element o jeden wiersz w dół"
 
 #: panel/panel-preferences-dialog.glade:1380
 msgid "Ite_ms"
-msgstr "_Aplety"
+msgstr "_Elementy"
 
 #: panel/panel-tic-tac-toe.c:116
 msgid "_New Game"
@@ -850,7 +850,7 @@ msgstr "_Wyloguj"
 
 #: plugins/actions/actions.c:169
 msgid "Are you sure you want to log out?"
-msgstr "Wylogować bieżącego użytkownika?"
+msgstr "Czy na pewno chcesz wylogować bieżącego użytkownika?"
 
 #: plugins/actions/actions.c:170
 #, c-format
@@ -942,7 +942,7 @@ msgstr "_Uruchom ponownie"
 
 #: plugins/actions/actions.c:222
 msgid "Are you sure you want to restart?"
-msgstr "Uruchomić komputer ponownie?"
+msgstr "Czy na pewno chcesz uruchomić komputer ponownie?"
 
 #: plugins/actions/actions.c:223
 #, c-format
@@ -959,7 +959,7 @@ msgstr "_Wyłącz"
 
 #: plugins/actions/actions.c:230
 msgid "Are you sure you want to shut down?"
-msgstr "Wyłączyć komputer?"
+msgstr "Czy na pewno chcesz wyłączyć komputer?"
 
 #: plugins/actions/actions.c:231
 #, c-format
@@ -1361,7 +1361,7 @@ msgstr "dziesięć po %0"
 #: plugins/clock/clock-fuzzy.c:95
 #, no-c-format
 msgid "quarter past %0"
-msgstr "kwadrans po %0"
+msgstr "piętnaście po %0"
 
 #: plugins/clock/clock-fuzzy.c:96
 #, no-c-format
@@ -1391,7 +1391,7 @@ msgstr "za dwadzieścia %1"
 #: plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "quarter to %1"
-msgstr "kwadrans do %1"
+msgstr "za piętnaście %1"
 
 #: plugins/clock/clock-fuzzy.c:102
 #, no-c-format
@@ -1432,7 +1432,7 @@ msgstr "dziesięć po %0"
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
-msgstr "kwadrans po %0"
+msgstr "piętnaście po %0"
 
 #: plugins/clock/clock-fuzzy.c:114
 #, no-c-format
@@ -1468,7 +1468,7 @@ msgstr "za dwadzieścia %1"
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
-msgstr "kwadrans do %1"
+msgstr "za piętnaście %1"
 
 #: plugins/clock/clock-fuzzy.c:120
 #, no-c-format
@@ -1727,7 +1727,7 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Wprowadza wzory określające typy plików wyświetlanych w menu, rozdzielone znakiem średnika (np. *.txt;*.doc)"
+msgstr "Wprowadza listę wzorów do określania, które pliki będą widoczne w katalogu. Jeśli określisz tutaj więcej niż jeden wzór, elementy listy muszą być rozdzielone średnikami (np. *.txt;*.doc)."
 
 #: plugins/directorymenu/directorymenu-dialog.glade:301
 msgid "_File Pattern:"
@@ -1749,7 +1749,7 @@ msgstr "Nienazwany element"
 
 #: plugins/launcher/launcher.c:1817
 msgid "No items"
-msgstr "Brak aktywatorów"
+msgstr "Brak elementów"
 
 #: plugins/launcher/launcher-dialog.c:781
 msgid "Failed to open desktop item editor"
@@ -1757,7 +1757,7 @@ msgstr "Nie udało się otworzyć edytora elementów pulpitu"
 
 #: plugins/launcher/launcher-dialog.c:842
 msgid "If you delete an item, it will be permanently removed"
-msgstr "Aktywator zostanie nieodwracalnie usunięty."
+msgstr "Element zostanie nieodwracalnie usunięty."
 
 #: plugins/launcher/launcher-dialog.c:852
 msgid "Unnamed item"
@@ -1766,7 +1766,7 @@ msgstr "Nienazwany element"
 #: plugins/launcher/launcher-dialog.c:854
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr "Usunąć aktywator „%s”?"
+msgstr "Czy na pewno chcesz usunąć „%s”?"
 
 #: plugins/launcher/launcher-dialog.glade:30
 msgid "Default"
@@ -1823,7 +1823,7 @@ msgstr "Nowe _dowiązanie"
 #: plugins/launcher/launcher-dialog.glade:205
 #: plugins/launcher/launcher-dialog.glade:599
 msgid "Add one or more existing items to the launcher"
-msgstr "Dodaje istniejące aktywatory do apletu"
+msgstr "Dodaje istniejące elementy do aktywatora"
 
 #: plugins/launcher/launcher-dialog.glade:379
 #: plugins/launcher/launcher.desktop.in.in:4
@@ -1832,11 +1832,11 @@ msgstr "Aktywator"
 
 #: plugins/launcher/launcher-dialog.glade:579
 msgid "Delete the currently selected item"
-msgstr "Usuwa zaznaczony aktywator"
+msgstr "Usuwa zaznaczony element"
 
 #: plugins/launcher/launcher-dialog.glade:619
 msgid "Add a new empty item"
-msgstr "Dodaje nowy aktywator"
+msgstr "Dodaje nowy pusty element"
 
 #: plugins/launcher/launcher-dialog.glade:639
 msgid "Add a new hyperlink"
@@ -1858,11 +1858,11 @@ msgstr "Wyświetlanie _etykiety zamiast ikony"
 
 #: plugins/launcher/launcher-dialog.glade:713
 msgid "Show last _used item in panel"
-msgstr "Wyświetlanie ostatnio _użytego aktywatora"
+msgstr "Wyświetlanie ostatnio _użytego elementu"
 
 #: plugins/launcher/launcher-dialog.glade:717
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr "Wyświetla ostatnio użyty aktywator menu na panelu."
+msgstr "Wyświetla ostatnio użyty element menu na panelu."
 
 #: plugins/launcher/launcher-dialog.glade:736
 msgid "_Arrow button position:"
@@ -1943,7 +1943,7 @@ msgstr "_Rozciągnięcie"
 
 #: plugins/separator/separator.desktop.in.in:5
 msgid "Adds a separator or space between panel items"
-msgstr "Rozdziela aplety za pomocą odstępu lub separatora"
+msgstr "Rozdziela elementy panelu za pomocą odstępu lub separatora"
 
 #: plugins/showdesktop/showdesktop.c:321
 msgid "Restore the minimized windows"
@@ -2085,7 +2085,7 @@ msgstr "Nie można uruchomić obszaru powiadamiania"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "Prawdopodobnie inny widżet przejął funkcję obszaru powiadamiania. Aplet nie będzie używany."
+msgstr "Prawdopodobnie inny widżet przejął funkcję obszaru powiadamiania. Obszar ten będzie nieużywany."
 
 #: plugins/systray/systray.c:411
 msgid "The notification area lost selection"
