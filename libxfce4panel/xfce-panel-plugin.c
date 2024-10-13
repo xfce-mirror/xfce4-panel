@@ -2040,7 +2040,7 @@ xfce_panel_plugin_get_icon_size (XfcePanelPlugin *plugin)
          Some assumptions: We set 0px padding on panel buttons in the panel's internal
          css, we expect that each button still has a 1px border, so we deduct 4px from
          the panel width for the size steps to avoid clipping. */
-      if (width <= 16 + XFCE_PANEL_PLUGIN_ICON_PADDING)
+      if (width < 16 + XFCE_PANEL_PLUGIN_ICON_PADDING)
         return 12;
       else if (width < 24 + XFCE_PANEL_PLUGIN_ICON_PADDING)
         return 16;
