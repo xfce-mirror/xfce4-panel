@@ -79,6 +79,15 @@ typedef gboolean (*XfcePanelPluginCheck) (GdkScreen *screen);
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (XfcePanelPlugin, g_object_unref)
 
 /**
+ * XFCE_PANEL_PLUGIN_ICON_PADDING:
+ *
+ * Defines padding to be used for panel plugin icons (size difference between the button and the icon)
+ *
+ * Since: 4.19.6
+ **/
+#define XFCE_PANEL_PLUGIN_ICON_PADDING (4)
+
+/**
  * XfcePanelPluginClass:
  * @construct :               This function is for object orientated plugins and
  *                            triggered after the init function of the object.
