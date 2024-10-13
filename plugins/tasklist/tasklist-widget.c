@@ -78,7 +78,6 @@
 #define DRAG_ACTIVATE_TIMEOUT (500)
 
 
-
 /* locking helpers for tasklist->locked */
 #define xfce_taskbar_lock(tasklist) \
   G_STMT_START { XFCE_TASKLIST (tasklist)->locked++; } \
@@ -2752,13 +2751,10 @@ xfce_tasklist_button_icon_changed (XfwWindow *window,
     {
       gint rows = MAX (child->tasklist->nrows, 1);
       rows = MAX (rows, child->tasklist->size / child->tasklist->max_button_size);
-      icon_size = MIN (icon_size, child->tasklist->size / rows - 4);
       if (xfce_tasklist_deskbar (child->tasklist))
-        icon_size = MIN (icon_size, child->tasklist->max_button_size - 4);
-    }
-  else
-    {
-      icon_size = MIN (icon_size, child->tasklist->size / child->tasklist->nrows - 4);
+        icon_size = MIN (icon_size, child->tasklist->max_button_size - XFCE_PANEL_PLUGIN_ICON_PADDING);
+      else
+        icon_size = MIN (icon_size, child->tasklist->size / rows - XFCE_PANEL_PLUGIN_ICON_PADDING);
     }
 
   /* get the window icon */
@@ -4230,13 +4226,10 @@ xfce_tasklist_group_button_icon_changed (XfwApplication *app,
     {
       gint rows = MAX (group_child->tasklist->nrows, 1);
       rows = MAX (rows, group_child->tasklist->size / group_child->tasklist->max_button_size);
-      icon_size = MIN (icon_size, group_child->tasklist->size / rows - 4);
       if (xfce_tasklist_deskbar (group_child->tasklist))
-        icon_size = MIN (icon_size, group_child->tasklist->max_button_size - 4);
-    }
-  else
-    {
-      icon_size = MIN (icon_size, group_child->tasklist->size / group_child->tasklist->nrows - 4);
+        icon_size = MIN (icon_size, group_child->tasklist->max_button_size - XFCE_PANEL_PLUGIN_ICON_PADDING);
+      else
+        icon_size = MIN (icon_size, group_child->tasklist->size / rows - XFCE_PANEL_PLUGIN_ICON_PADDING);
     }
 
   scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (group_child->tasklist));
