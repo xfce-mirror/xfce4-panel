@@ -162,8 +162,9 @@ xfce_clock_digital_init (XfceClockDigital *digital)
   digital->time_font = g_strdup (DEFAULT_FONT);
   digital->time_format = g_strdup (DEFAULT_DIGITAL_TIME_FORMAT);
 
+  gtk_widget_set_valign (GTK_WIDGET (digital), GTK_ALIGN_CENTER);
   digital->vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-  gtk_box_pack_start (GTK_BOX (digital), digital->vbox, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (digital), digital->vbox, TRUE, FALSE, 0);
   gtk_box_set_homogeneous (GTK_BOX (digital->vbox), TRUE);
 
   digital->time_label = gtk_label_new (NULL);
@@ -172,8 +173,8 @@ xfce_clock_digital_init (XfceClockDigital *digital)
   gtk_label_set_justify (GTK_LABEL (digital->time_label), GTK_JUSTIFY_CENTER);
   gtk_label_set_justify (GTK_LABEL (digital->date_label), GTK_JUSTIFY_CENTER);
 
-  gtk_box_pack_start (GTK_BOX (digital->vbox), digital->time_label, TRUE, FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (digital->vbox), digital->date_label, TRUE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (digital->vbox), digital->time_label, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (digital->vbox), digital->date_label, FALSE, FALSE, 0);
 
   gtk_widget_show_all (digital->vbox);
 }
