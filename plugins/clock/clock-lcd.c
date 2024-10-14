@@ -328,22 +328,8 @@ xfce_clock_lcd_draw (GtkWidget *widget,
   if (!lcd->show_military && ticks > 12)
     ticks -= 12;
 
-  if (ticks == 1 || (ticks >= 10 && ticks < 20))
-    offset_x -= size * (RELATIVE_SPACE * 4);
-
-  /* queue a resize when the number of hour digits changed,
-   * because we might miss the exact second (due to slightly delayed
-   * timeout) we queue a resize the first 3 seconds or anything in
-   * the first minute */
-  if ((ticks == 10 || ticks == 0) && g_date_time_get_minute (time) == 0
-      && (!lcd->show_seconds || g_date_time_get_second (time) < 3))
-    g_object_notify (G_OBJECT (lcd), "size-ratio");
-
-  if (ticks >= 10)
-    {
-      /* draw the number and increase the offset */
-      offset_x = xfce_clock_lcd_draw_digit (cr, ticks >= 20 ? 2 : 1, size, offset_x, offset_y);
-    }
+  /* draw the number and increase the offset */
+  offset_x = xfce_clock_lcd_draw_digit (cr, ticks / 10, size, offset_x, offset_y);
 
   /* draw the other number of the hour and increase the offset */
   offset_x = xfce_clock_lcd_draw_digit (cr, ticks % 10, size, offset_x, offset_y);
@@ -402,32 +388,15 @@ static gdouble
 xfce_clock_lcd_get_ratio (XfceClockLcd *lcd)
 {
   gdouble ratio;
-  gint ticks;
-  GDateTime *time;
 
-  /* get the local time */
-  time = clock_time_get_time (lcd->time);
+  /* 8(space)8:8(space)8 */
+  ratio = (4 * RELATIVE_DIGIT) + RELATIVE_DOTS + (2 * RELATIVE_SPACE);
 
-  /* 8:8(space)8 */
-  ratio = (3 * RELATIVE_DIGIT) + RELATIVE_DOTS + RELATIVE_SPACE;
-
-  ticks = g_date_time_get_hour (time);
-  g_date_time_unref (time);
-
-  if (!lcd->show_military && ticks > 12)
-    ticks -= 12;
-
-  if (ticks == 1)
-    ratio -= RELATIVE_SPACE * 4; /* only show 1 */
-  else if (ticks >= 10 && ticks < 20)
-    ratio += RELATIVE_SPACE * 2; /* 1 + space */
-  else if (ticks >= 20)
-    ratio += RELATIVE_DIGIT + RELATIVE_SPACE;
-
-  /* (space):88 */
+  /* extra :8(space)8 */
   if (lcd->show_seconds)
     ratio += (2 * RELATIVE_DIGIT) + RELATIVE_SPACE + RELATIVE_DOTS;
 
+  /* extra (space)A */
   if (lcd->show_meridiem)
     ratio += RELATIVE_DIGIT + RELATIVE_SPACE;
 
