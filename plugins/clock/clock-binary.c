@@ -55,8 +55,6 @@ gint
 xfce_clock_binary_get_cols (XfceClockBinary *binary);
 gint
 xfce_clock_binary_get_rows (XfceClockBinary *binary);
-gdouble
-xfce_clock_binary_get_ratio (XfceClockBinary *binary);
 static void
 xfce_clock_binary_get_preferred_width_for_height (GtkWidget *widget,
                                                   gint height,
@@ -532,29 +530,6 @@ xfce_clock_binary_get_rows (XfceClockBinary *binary)
       break;
     }
   return rows;
-}
-
-
-
-gdouble
-xfce_clock_binary_get_ratio (XfceClockBinary *binary)
-{
-  gdouble ratio = 1.0;
-
-  switch (binary->mode)
-    {
-    case MODE_DECIMAL:
-      ratio = binary->show_seconds ? 1.5 : 1.0;
-      break;
-    case MODE_SEXAGESIMAL:
-      ratio = binary->show_seconds ? 2.0 : 3.0;
-      break;
-    case MODE_BINARY_TIME:
-      ratio = binary->show_seconds ? 1.5 : 2.5;
-      break;
-    }
-
-  return ratio;
 }
 
 
