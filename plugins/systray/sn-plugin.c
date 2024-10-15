@@ -93,7 +93,7 @@ sn_plugin_init (SnPlugin *plugin)
 #endif
   plugin->idle_startup = 0;
   plugin->names_ordered = NULL;
-  plugin->names_hidden = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+  plugin->names_hidden = NULL;
 
   /* Statusnotifier init */
   plugin->item = NULL;
