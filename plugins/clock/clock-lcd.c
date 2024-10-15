@@ -471,7 +471,6 @@ xfce_clock_lcd_get_request_mode (GtkWidget *widget)
 
 
 
-
 static gdouble
 xfce_clock_lcd_draw_dots (cairo_t *cr,
                           gdouble size,

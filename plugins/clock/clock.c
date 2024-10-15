@@ -643,7 +643,6 @@ clock_plugin_get_request_mode (GtkWidget *widget)
 
 
 
-
 static void
 clock_plugin_configure_plugin_mode_changed (GtkComboBox *combo,
                                             ClockPluginDialog *dialog)

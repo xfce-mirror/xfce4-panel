@@ -171,7 +171,6 @@ xfce_clock_binary_class_init (XfceClockBinaryClass *klass)
                                                          FALSE,
                                                          G_PARAM_READWRITE
                                                            | G_PARAM_STATIC_STRINGS));
-
 }
 
 
@@ -208,13 +207,11 @@ xfce_clock_binary_set_property (GObject *object,
     case PROP_SHOW_SECONDS:
       binary->show_seconds = g_value_get_boolean (value);
       gtk_widget_queue_resize (GTK_WIDGET (binary));
-      //g_object_notify (object, "size-ratio");
       break;
 
     case PROP_MODE:
       binary->mode = g_value_get_uint (value);
       gtk_widget_queue_resize (GTK_WIDGET (binary));
-      //g_object_notify (object, "size-ratio");
       break;
 
     case PROP_SHOW_INACTIVE:
@@ -616,7 +613,6 @@ xfce_clock_binary_get_request_mode (GtkWidget *widget)
   else
     return GTK_SIZE_REQUEST_HEIGHT_FOR_WIDTH;
 }
-
 
 
 

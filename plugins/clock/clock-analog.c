@@ -457,7 +457,6 @@ xfce_clock_analog_get_request_mode (GtkWidget *widget)
 
 
 
-
 static gboolean
 xfce_clock_analog_update (XfceClockAnalog *analog,
                           ClockTime *time)
