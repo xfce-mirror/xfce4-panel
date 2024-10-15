@@ -86,8 +86,6 @@ static gboolean
 clock_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                            gint size);
 static void
-clock_plugin_size_ratio_changed (XfcePanelPlugin *panel_plugin);
-static void
 clock_plugin_mode_changed (XfcePanelPlugin *panel_plugin,
                            XfcePanelPluginMode mode);
 static void
@@ -100,6 +98,18 @@ static gboolean
 clock_plugin_tooltip (gpointer user_data);
 static void
 clock_plugin_set_calendar_options (ClockPlugin *plugin);
+static void
+clock_plugin_get_preferred_width_for_height (GtkWidget *widget,
+                                             gint height,
+                                             gint *minimum_width,
+                                             gint *natural_width);
+static void
+clock_plugin_get_preferred_height_for_width (GtkWidget *widget,
+                                             gint width,
+                                             gint *minimum_height,
+                                             gint *natural_height);
+static GtkSizeRequestMode
+clock_plugin_get_request_mode (GtkWidget *widget);
 
 
 
@@ -212,11 +222,17 @@ static void
 clock_plugin_class_init (ClockPluginClass *klass)
 {
   GObjectClass *gobject_class;
+  GtkWidgetClass *gtkwidget_class;
   XfcePanelPluginClass *plugin_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->set_property = clock_plugin_set_property;
   gobject_class->get_property = clock_plugin_get_property;
+
+  gtkwidget_class = GTK_WIDGET_CLASS (klass);
+  gtkwidget_class->get_preferred_width_for_height = clock_plugin_get_preferred_width_for_height;
+  gtkwidget_class->get_preferred_height_for_width = clock_plugin_get_preferred_height_for_width;
+  gtkwidget_class->get_request_mode = clock_plugin_get_request_mode;
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = clock_plugin_construct;
@@ -561,58 +577,7 @@ static gboolean
 clock_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                            gint size)
 {
-  ClockPlugin *plugin = CLOCK_PLUGIN (panel_plugin);
-  gdouble ratio;
-  gint ratio_size;
-  gint offset;
-
-  if (plugin->clock == NULL)
-    return TRUE;
-
-  /* get the width:height ratio */
-  g_object_get (G_OBJECT (plugin->clock), "size-ratio", &ratio, NULL);
-  if (ratio > 0)
-    {
-      ratio_size = size;
-      offset = 0;
-    }
-  else
-    {
-      ratio_size = -1;
-      offset = 0;
-    }
-
-  /* set the clock size */
-  if (xfce_panel_plugin_get_mode (panel_plugin) == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
-    {
-      if (ratio > 0)
-        {
-          ratio_size = ceil (ratio_size * ratio);
-          ratio_size += offset;
-        }
-
-      gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), ratio_size, size);
-    }
-  else
-    {
-      if (ratio > 0)
-        {
-          ratio_size = ceil (ratio_size / ratio);
-          ratio_size += offset;
-        }
-
-      gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, ratio_size);
-    }
-
   return TRUE;
-}
-
-
-
-static void
-clock_plugin_size_ratio_changed (XfcePanelPlugin *panel_plugin)
-{
-  clock_plugin_size_changed (panel_plugin, xfce_panel_plugin_get_size (panel_plugin));
 }
 
 
@@ -623,6 +588,11 @@ clock_plugin_mode_changed (XfcePanelPlugin *panel_plugin,
 {
   ClockPlugin *plugin = CLOCK_PLUGIN (panel_plugin);
   GtkOrientation orientation;
+  GtkOrientation container_orientation;
+
+  container_orientation = (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL) ? GTK_ORIENTATION_HORIZONTAL
+                                                                      : GTK_ORIENTATION_VERTICAL;
+  g_object_set (G_OBJECT (plugin->clock), "container-orientation", container_orientation, NULL);
 
   if (plugin->rotate_vertically)
     {
@@ -630,9 +600,45 @@ clock_plugin_mode_changed (XfcePanelPlugin *panel_plugin,
                                                               : GTK_ORIENTATION_HORIZONTAL;
       g_object_set (G_OBJECT (plugin->clock), "orientation", orientation, NULL);
     }
+}
 
-  /* do a size update */
-  clock_plugin_size_changed (panel_plugin, xfce_panel_plugin_get_size (panel_plugin));
+
+
+static void
+clock_plugin_get_preferred_height_for_width (GtkWidget *widget,
+                                             gint width,
+                                             gint *minimum_height,
+                                             gint *natural_height)
+{
+  ClockPlugin *plugin = CLOCK_PLUGIN (widget);
+
+  gtk_widget_get_preferred_height_for_width (plugin->button, width, minimum_height, natural_height);
+}
+
+
+
+static void
+clock_plugin_get_preferred_width_for_height (GtkWidget *widget,
+                                             gint height,
+                                             gint *minimum_width,
+                                             gint *natural_width)
+{
+  ClockPlugin *plugin = CLOCK_PLUGIN (widget);
+
+  gtk_widget_get_preferred_width_for_height (plugin->button, height, minimum_width, natural_width);
+}
+
+
+
+static GtkSizeRequestMode
+clock_plugin_get_request_mode (GtkWidget *widget)
+{
+  XfcePanelPlugin *panel_plugin = XFCE_PANEL_PLUGIN (widget);
+
+  if (xfce_panel_plugin_get_mode (panel_plugin) == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
+    return GTK_SIZE_REQUEST_WIDTH_FOR_HEIGHT;
+  else
+    return GTK_SIZE_REQUEST_HEIGHT_FOR_WIDTH;
 }
 
 
@@ -1272,6 +1278,7 @@ clock_plugin_set_mode (ClockPlugin *plugin)
     }
   };
   GtkOrientation orientation;
+  GtkOrientation container_orientation;
 
   panel_return_if_fail (CLOCK_IS_PLUGIN (plugin));
 
@@ -1290,6 +1297,11 @@ clock_plugin_set_mode (ClockPlugin *plugin)
   else
     plugin->clock = xfce_clock_lcd_new (plugin->time, plugin->sleep_monitor);
 
+  container_orientation = (xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin))
+                           == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
+                            ? GTK_ORIENTATION_HORIZONTAL
+                            : GTK_ORIENTATION_VERTICAL;
+  g_object_set (G_OBJECT (plugin->clock), "container-orientation", container_orientation, NULL);
 
   if (plugin->rotate_vertically)
     {
@@ -1299,13 +1311,6 @@ clock_plugin_set_mode (ClockPlugin *plugin)
                       : GTK_ORIENTATION_HORIZONTAL;
       g_object_set (G_OBJECT (plugin->clock), "orientation", orientation, NULL);
     }
-
-  /* watch width/height changes */
-  g_signal_connect_swapped (G_OBJECT (plugin->clock), "notify::size-ratio",
-                            G_CALLBACK (clock_plugin_size_ratio_changed), plugin);
-
-  clock_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
-                             xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
 
   panel_properties_bind (NULL, G_OBJECT (plugin->clock),
                          xfce_panel_plugin_get_property_base (XFCE_PANEL_PLUGIN (plugin)),
