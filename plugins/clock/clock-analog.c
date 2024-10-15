@@ -70,6 +70,18 @@ xfce_clock_analog_draw_pointer (cairo_t *cr,
 static gboolean
 xfce_clock_analog_update (XfceClockAnalog *analog,
                           ClockTime *time);
+static void
+xfce_clock_analog_get_preferred_width_for_height (GtkWidget *widget,
+                                                  gint height,
+                                                  gint *minimum_width,
+                                                  gint *natural_width);
+static void
+xfce_clock_analog_get_preferred_height_for_width (GtkWidget *widget,
+                                                  gint width,
+                                                  gint *minimum_height,
+                                                  gint *natural_height);
+static GtkSizeRequestMode
+xfce_clock_analog_get_request_mode (GtkWidget *widget);
 
 
 
@@ -78,8 +90,8 @@ enum
   PROP_0,
   PROP_SHOW_SECONDS,
   PROP_SHOW_MILITARY,
-  PROP_SIZE_RATIO,
-  PROP_ORIENTATION
+  PROP_ORIENTATION,
+  PROP_CONTAINER_ORIENTATION,
 };
 
 struct _XfceClockAnalog
@@ -88,6 +100,7 @@ struct _XfceClockAnalog
 
   ClockTimeTimeout *timeout;
 
+  GtkOrientation container_orientation;
   guint show_seconds : 1;
   guint show_military : 1; /* 24-hour clock */
   ClockTime *time;
@@ -112,17 +125,21 @@ xfce_clock_analog_class_init (XfceClockAnalogClass *klass)
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->draw = xfce_clock_analog_draw;
-
-  g_object_class_install_property (gobject_class,
-                                   PROP_SIZE_RATIO,
-                                   g_param_spec_double ("size-ratio", NULL, NULL,
-                                                        -1, G_MAXDOUBLE, 1.0,
-                                                        G_PARAM_READABLE
-                                                          | G_PARAM_STATIC_STRINGS));
+  gtkwidget_class->get_preferred_width_for_height = xfce_clock_analog_get_preferred_width_for_height;
+  gtkwidget_class->get_preferred_height_for_width = xfce_clock_analog_get_preferred_height_for_width;
+  gtkwidget_class->get_request_mode = xfce_clock_analog_get_request_mode;
 
   g_object_class_install_property (gobject_class,
                                    PROP_ORIENTATION,
                                    g_param_spec_enum ("orientation", NULL, NULL,
+                                                      GTK_TYPE_ORIENTATION,
+                                                      GTK_ORIENTATION_HORIZONTAL,
+                                                      G_PARAM_WRITABLE
+                                                        | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_CONTAINER_ORIENTATION,
+                                   g_param_spec_enum ("container-orientation", NULL, NULL,
                                                       GTK_TYPE_ORIENTATION,
                                                       GTK_ORIENTATION_HORIZONTAL,
                                                       G_PARAM_WRITABLE
@@ -148,6 +165,7 @@ xfce_clock_analog_class_init (XfceClockAnalogClass *klass)
 static void
 xfce_clock_analog_init (XfceClockAnalog *analog)
 {
+  analog->container_orientation = GTK_ORIENTATION_HORIZONTAL;
   analog->show_seconds = FALSE;
   analog->show_military = FALSE;
 }
@@ -165,6 +183,10 @@ xfce_clock_analog_set_property (GObject *object,
   switch (prop_id)
     {
     case PROP_ORIENTATION:
+      break;
+
+    case PROP_CONTAINER_ORIENTATION:
+      analog->container_orientation = g_value_get_enum (value);
       break;
 
     case PROP_SHOW_SECONDS:
@@ -204,10 +226,6 @@ xfce_clock_analog_get_property (GObject *object,
 
     case PROP_SHOW_MILITARY:
       g_value_set_boolean (value, analog->show_military);
-      break;
-
-    case PROP_SIZE_RATIO:
-      g_value_set_double (value, 1.0);
       break;
 
     default:
@@ -392,6 +410,49 @@ xfce_clock_analog_draw_pointer (cairo_t *cr,
       /* fill the pointer */
       cairo_fill (cr);
     }
+}
+
+
+
+static void
+xfce_clock_analog_get_preferred_width_for_height (GtkWidget *widget,
+                                                  gint height,
+                                                  gint *minimum_width,
+                                                  gint *natural_width)
+{
+  if (minimum_width != NULL)
+    *minimum_width = height;
+
+  if (natural_width != NULL)
+    *natural_width = height;
+}
+
+
+
+static void
+xfce_clock_analog_get_preferred_height_for_width (GtkWidget *widget,
+                                                  gint width,
+                                                  gint *minimum_height,
+                                                  gint *natural_height)
+{
+  if (minimum_height != NULL)
+    *minimum_height = width;
+
+  if (natural_height != NULL)
+    *natural_height = width;
+}
+
+
+
+static GtkSizeRequestMode
+xfce_clock_analog_get_request_mode (GtkWidget *widget)
+{
+  XfceClockAnalog *analog = XFCE_CLOCK_ANALOG (widget);
+
+  if (analog->container_orientation == GTK_ORIENTATION_HORIZONTAL)
+    return GTK_SIZE_REQUEST_WIDTH_FOR_HEIGHT;
+  else
+    return GTK_SIZE_REQUEST_HEIGHT_FOR_WIDTH;
 }
 
 

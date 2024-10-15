@@ -381,9 +381,9 @@ panel_itembar_get_preferred_length (GtkWidget *widget,
 
           /* get the child's size request */
           if (IS_HORIZONTAL (itembar))
-            gtk_widget_get_preferred_width (child->widget, &child_len_min, &child_len);
+            gtk_widget_get_preferred_width_for_height (child->widget, itembar->size * itembar->nrows, &child_len_min, &child_len);
           else
-            gtk_widget_get_preferred_height (child->widget, &child_len_min, &child_len);
+            gtk_widget_get_preferred_height_for_width (child->widget, itembar->size * itembar->nrows, &child_len_min, &child_len);
           /* check if the small child fits in a row */
           if (child->option == CHILD_OPTION_SMALL
               && itembar->nrows > 1)
@@ -542,9 +542,9 @@ panel_itembar_size_allocate (GtkWidget *widget,
             continue;
 
           if (IS_HORIZONTAL (itembar))
-            gtk_widget_get_preferred_width (child->widget, &child_len_min, &child_len);
+            gtk_widget_get_preferred_width_for_height (child->widget, itembar->size * itembar->nrows, &child_len_min, &child_len);
           else
-            gtk_widget_get_preferred_height (child->widget, &child_len_min, &child_len);
+            gtk_widget_get_preferred_height_for_width (child->widget, itembar->size * itembar->nrows, &child_len_min, &child_len);
 
           /* child will allocate at least 1 pixel */
           CHILD_MIN_ALLOC_LEN (child_len);
@@ -664,9 +664,9 @@ panel_itembar_size_allocate (GtkWidget *widget,
         continue;
 
       if (IS_HORIZONTAL (itembar))
-        gtk_widget_get_preferred_width (child->widget, &child_len_min, &child_len);
+        gtk_widget_get_preferred_width_for_height (child->widget, itembar->size * itembar->nrows, &child_len_min, &child_len);
       else
-        gtk_widget_get_preferred_height (child->widget, &child_len_min, &child_len);
+        gtk_widget_get_preferred_height_for_width (child->widget, itembar->size * itembar->nrows, &child_len_min, &child_len);
 
       if (G_UNLIKELY (!expand_children_fit && child->option == CHILD_OPTION_EXPAND))
         {
