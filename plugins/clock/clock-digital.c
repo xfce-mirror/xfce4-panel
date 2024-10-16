@@ -56,8 +56,8 @@ enum
   PROP_DIGITAL_TIME_FONT,
   PROP_DIGITAL_DATE_FORMAT,
   PROP_DIGITAL_DATE_FONT,
-  PROP_SIZE_RATIO,
   PROP_ORIENTATION,
+  PROP_CONTAINER_ORIENTATION,
 };
 
 struct _XfceClockDigital
@@ -100,13 +100,6 @@ xfce_clock_digital_class_init (XfceClockDigitalClass *klass)
   gobject_class->get_property = xfce_clock_digital_get_property;
 
   g_object_class_install_property (gobject_class,
-                                   PROP_SIZE_RATIO,
-                                   g_param_spec_double ("size-ratio", NULL, NULL,
-                                                        -1, G_MAXDOUBLE, 0.0,
-                                                        G_PARAM_READABLE
-                                                          | G_PARAM_STATIC_STRINGS));
-
-  g_object_class_install_property (gobject_class,
                                    PROP_DIGITAL_LAYOUT,
                                    g_param_spec_uint ("digital-layout",
                                                       NULL, NULL,
@@ -118,6 +111,14 @@ xfce_clock_digital_class_init (XfceClockDigitalClass *klass)
   g_object_class_install_property (gobject_class,
                                    PROP_ORIENTATION,
                                    g_param_spec_enum ("orientation", NULL, NULL,
+                                                      GTK_TYPE_ORIENTATION,
+                                                      GTK_ORIENTATION_HORIZONTAL,
+                                                      G_PARAM_WRITABLE
+                                                        | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_CONTAINER_ORIENTATION,
+                                   g_param_spec_enum ("container-orientation", NULL, NULL,
                                                       GTK_TYPE_ORIENTATION,
                                                       GTK_ORIENTATION_HORIZONTAL,
                                                       G_PARAM_WRITABLE
@@ -162,8 +163,9 @@ xfce_clock_digital_init (XfceClockDigital *digital)
   digital->time_font = g_strdup (DEFAULT_FONT);
   digital->time_format = g_strdup (DEFAULT_DIGITAL_TIME_FORMAT);
 
+  gtk_widget_set_valign (GTK_WIDGET (digital), GTK_ALIGN_CENTER);
   digital->vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-  gtk_box_pack_start (GTK_BOX (digital), digital->vbox, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (digital), digital->vbox, TRUE, FALSE, 0);
   gtk_box_set_homogeneous (GTK_BOX (digital->vbox), TRUE);
 
   digital->time_label = gtk_label_new (NULL);
@@ -172,8 +174,8 @@ xfce_clock_digital_init (XfceClockDigital *digital)
   gtk_label_set_justify (GTK_LABEL (digital->time_label), GTK_JUSTIFY_CENTER);
   gtk_label_set_justify (GTK_LABEL (digital->date_label), GTK_JUSTIFY_CENTER);
 
-  gtk_box_pack_start (GTK_BOX (digital->vbox), digital->time_label, TRUE, FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (digital->vbox), digital->date_label, TRUE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (digital->vbox), digital->time_label, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (digital->vbox), digital->date_label, FALSE, FALSE, 0);
 
   gtk_widget_show_all (digital->vbox);
 }
@@ -195,6 +197,9 @@ xfce_clock_digital_set_property (GObject *object,
                            g_value_get_enum (value) == GTK_ORIENTATION_HORIZONTAL ? 0 : 270);
       gtk_label_set_angle (GTK_LABEL (digital->date_label),
                            g_value_get_enum (value) == GTK_ORIENTATION_HORIZONTAL ? 0 : 270);
+      break;
+
+    case PROP_CONTAINER_ORIENTATION:
       break;
 
     case PROP_DIGITAL_LAYOUT:
@@ -263,10 +268,6 @@ xfce_clock_digital_get_property (GObject *object,
 
     case PROP_DIGITAL_TIME_FONT:
       g_value_set_string (value, digital->time_font);
-      break;
-
-    case PROP_SIZE_RATIO:
-      g_value_set_double (value, -1.0);
       break;
 
     default:
