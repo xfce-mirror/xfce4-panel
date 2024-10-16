@@ -695,7 +695,7 @@ clock_plugin_configure_plugin_mode_changed (GtkComboBox *combo,
       break;
 
     case CLOCK_PLUGIN_MODE_LCD:
-      active = 1 << 1 | 1 << 3 | 1 << 4 | 1 << 5;
+      active = 1 << 1 | 1 << 3 | 1 << 4 | 1 << 5 | 1 << 12;
       break;
 
     default:
@@ -1274,6 +1274,7 @@ clock_plugin_set_mode (ClockPlugin *plugin)
       { "show-military", G_TYPE_BOOLEAN },
       { "show-meridiem", G_TYPE_BOOLEAN },
       { "flash-separators", G_TYPE_BOOLEAN },
+      { "show-inactive", G_TYPE_BOOLEAN },
       { NULL },
     }
   };
