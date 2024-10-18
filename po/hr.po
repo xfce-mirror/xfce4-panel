@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-06-19 00:49+0200\n"
+"POT-Creation-Date: 2024-10-18 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Ivica  Kolić <ikoli@yahoo.com>, 2013-2015,2018-2020,2023\n"
 "Language-Team: Croatian (http://app.transifex.com/xfce/xfce4-panel/language/hr/)\n"
@@ -37,7 +37,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr ""
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3676
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3686
 msgid "Panel"
 msgstr "Ploča"
 
@@ -67,7 +67,7 @@ msgid "_Properties"
 msgstr "_Svojstva"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1226 panel/panel-window.c:3751
+#: libxfce4panel/xfce-panel-plugin.c:1226 panel/panel-window.c:3761
 msgid "_About"
 msgstr "_O programu"
 
@@ -89,23 +89,23 @@ msgid "Pane_l"
 msgstr "Ploč_a"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1279 panel/panel-window.c:3688
+#: libxfce4panel/xfce-panel-plugin.c:1279 panel/panel-window.c:3698
 msgid "Add _New Items..."
 msgstr "Dodaj _nove stavke..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1290 panel/panel-window.c:3699
+#: libxfce4panel/xfce-panel-plugin.c:1290 panel/panel-window.c:3709
 msgid "Panel Pr_eferences..."
 msgstr "Osobitosti pl_oče..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1307 panel/panel-window.c:3726
+#: libxfce4panel/xfce-panel-plugin.c:1307 panel/panel-window.c:3736
 msgid "Log _Out"
 msgstr "Odja_va"
 
 #. help item
 #: libxfce4panel/xfce-panel-plugin.c:1323 panel/panel-item-dialog.c:207
-#: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3742
+#: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3752
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
 #: plugins/clock/clock-dialog.glade:120
@@ -378,6 +378,7 @@ msgstr "Dodaj nove stavke"
 #: plugins/pager/pager-dialog.glade:97
 #: plugins/separator/separator-dialog.glade:54
 #: plugins/showdesktop/showdesktop-dialog.glade:34
+#: plugins/systray/sn-dialog.glade:65
 #: plugins/tasklist/tasklist-dialog.glade:77
 #: plugins/windowmenu/windowmenu-dialog.glade:48
 msgid "_Close"
@@ -742,7 +743,7 @@ msgstr "Iskusni"
 msgid "Expert"
 msgstr "Ekspert"
 
-#: panel/panel-window.c:3713
+#: panel/panel-window.c:3723
 msgid "_Lock Panel"
 msgstr "_Zaključaj ploču"
 
@@ -1060,7 +1061,7 @@ msgid "_OK"
 msgstr "_U redu"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:643 plugins/clock/clock.c:1048
+#: plugins/applicationsmenu/applicationsmenu.c:643 plugins/clock/clock.c:1054
 #: plugins/launcher/launcher.c:2500
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -1106,15 +1107,15 @@ msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
 
-#: plugins/clock/clock.c:166
+#: plugins/clock/clock.c:176
 msgid "Week %V"
 msgstr "Tjedan %V"
 
-#: plugins/clock/clock.c:484
+#: plugins/clock/clock.c:500
 msgid "Failed to execute clock command"
 msgstr "Neuspjelo izvršenje naredbe sata"
 
-#: plugins/clock/clock.c:987
+#: plugins/clock/clock.c:993
 msgid "Custom Format"
 msgstr "Prilagođeni format"
 
@@ -1250,8 +1251,8 @@ msgid "F_uzziness:"
 msgstr "Z_amućenost:"
 
 #: plugins/clock/clock-dialog.glade:579
-msgid "Show _inactive dots"
-msgstr "Pokaži _neaktivne točke"
+msgid "Show _inactive segments"
+msgstr ""
 
 #: plugins/clock/clock-dialog.glade:594
 msgid "Show gri_d"
