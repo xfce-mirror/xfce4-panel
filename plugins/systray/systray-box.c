@@ -665,7 +665,7 @@ systray_box_remove (GtkContainer *container,
       panel_assert (GTK_WIDGET (li->data) == child);
 
       /* unparent widget */
-      box->children = g_slist_remove_link (box->children, li);
+      box->children = g_slist_delete_link (box->children, li);
       gtk_widget_unparent (child);
 
       /* resize, so we update has-hidden */
