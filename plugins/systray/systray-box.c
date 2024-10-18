@@ -666,6 +666,7 @@ systray_box_remove (GtkContainer *container,
 
       /* unparent widget */
       box->children = g_slist_remove_link (box->children, li);
+      g_slist_free_1 (li);
       gtk_widget_unparent (child);
 
       /* resize, so we update has-hidden */
