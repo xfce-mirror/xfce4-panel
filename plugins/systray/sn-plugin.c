@@ -183,6 +183,8 @@ sn_plugin_mode_changed (XfcePanelPlugin *panel_plugin,
 #ifdef ENABLE_X11
   if (plugin->systray_box != NULL)
     systray_plugin_orientation_changed (panel_plugin, panel_orientation);
+#else
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (plugin->box), panel_orientation);
 #endif
 
   sn_plugin_size_changed (panel_plugin, xfce_panel_plugin_get_size (panel_plugin));
