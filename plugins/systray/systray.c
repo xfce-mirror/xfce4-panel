@@ -199,7 +199,6 @@ systray_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
 {
   SnPlugin *plugin = SN_PLUGIN (panel_plugin);
 
-  gtk_orientable_set_orientation (GTK_ORIENTABLE (plugin->box), orientation);
   systray_box_set_orientation (SYSTRAY_BOX (plugin->systray_box), orientation);
 
   if (G_LIKELY (plugin->manager != NULL))
