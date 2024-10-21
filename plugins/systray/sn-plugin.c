@@ -180,6 +180,9 @@ sn_plugin_mode_changed (XfcePanelPlugin *panel_plugin,
                                                         : GTK_ORIENTATION_HORIZONTAL;
 
   sn_config_set_orientation (plugin->config, panel_orientation, orientation);
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (plugin->box), panel_orientation);
+
 #ifdef ENABLE_X11
   if (plugin->systray_box != NULL)
     systray_plugin_orientation_changed (panel_plugin, panel_orientation);
