@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Daniel Muñiz Fontoira <dani@damufo.eu>, 2018-2020
+# Daniel Muñiz Fontoira <dani@damufo.eu>, 2024
 # Leandro Regueiro <leandro.regueiro@gmail.com>, 2008-2010
 # Ricardo Domínguez Rouco <riklaren@gmail.com>, 2006
 # Xosé, 2015,2017-2018
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
 "POT-Creation-Date: 2024-10-18 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Daniel Muñiz Fontoira <dani@damufo.eu>, 2018-2020\n"
+"Last-Translator: Daniel Muñiz Fontoira <dani@damufo.eu>, 2024\n"
 "Language-Team: Galician (http://app.transifex.com/xfce/xfce4-panel/language/gl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -247,7 +248,7 @@ msgstr "Produciuse un fallo ao iniciar a aplicación de migración"
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
-msgstr ""
+msgstr "O engadido «%s» non se puido cargar, quere eliminalo da configuración de xfce4-panel?"
 
 #: panel/panel-application.c:349
 #, c-format
@@ -257,11 +258,11 @@ msgid ""
 "doing, you can remove it permanently, otherwise you'd better quit and make a"
 " backup of the current configuration using %s, before checking your "
 "installation and trying to start xfce4-panel again."
-msgstr ""
+msgstr "Este engadido está na configuración actual do panel xfce4 pero non se puido cargar, probablemente debido a un problema de instalación. Se sabe o que está a facer, pode eliminalo permanentemente, se non, é mellor que saia e faga unha copia de seguranza da configuración actual usando %s, antes de comprobar a súa instalación e tentar iniciar xfce4-panel de novo."
 
 #: panel/panel-application.c:356
 msgid "Plugin loading failure"
-msgstr ""
+msgstr "Produciuse un fallo ao cargar o engadido"
 
 #: panel/panel-application.c:357
 msgid "_Quit"
@@ -406,7 +407,7 @@ msgstr "O engadido reiniciouse máis dunha vez nos últimos %d segundos. Se prem
 
 #: panel/panel-plugin-external.c:419
 msgid "Plugin Restart"
-msgstr ""
+msgstr "Reiniciar o engadido"
 
 #: panel/panel-plugin-external.c:420
 msgid "_Execute"
@@ -465,11 +466,11 @@ msgstr "Se elimina o elemento do panel, perderase permanentemente."
 #: panel/panel-preferences-dialog.c:1550
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
-msgstr ""
+msgstr "Desexa realmente retirar estes %d elementos?"
 
 #: panel/panel-preferences-dialog.c:1552
 msgid "If you remove them from the panel, they are permanently lost."
-msgstr ""
+msgstr "Se os retira do panel, perderanse permanentemente."
 
 #: panel/panel-preferences-dialog.glade:13
 msgid "Never"
@@ -559,14 +560,14 @@ msgstr "Seleccione esta opción para agochar as asas do panel e bloquear a súa 
 
 #: panel/panel-preferences-dialog.glade:453
 msgid "_Reserve space on screen edges for the panel"
-msgstr ""
+msgstr "_Reservar espazo nos bordos da pantalla para o panel"
 
 #: panel/panel-preferences-dialog.glade:457
 msgid ""
 "Select this option if you don't want maximized windows to cover the area "
 "behind the panel. This only works when the panel is attached to a screen "
 "edge."
-msgstr ""
+msgstr "Seleccione esta opción se desexa que as xanelas maximizadas cubran a zona por detrás do panel. Isto só funciona cando o panel está ancorado a unha beira da pantalla."
 
 #: panel/panel-preferences-dialog.glade:478
 msgid "Au_tomatically hide the panel:"
@@ -592,11 +593,11 @@ msgstr "_Número de filas:"
 
 #: panel/panel-preferences-dialog.glade:606
 msgid "L_ength (pixels):"
-msgstr ""
+msgstr "_Ancho (píxeles):"
 
 #: panel/panel-preferences-dialog.glade:635
 msgid "Border width (pixels):"
-msgstr ""
+msgstr "Ancho do bordo (píxeles):"
 
 #: panel/panel-preferences-dialog.glade:658
 msgid "A_utomatically increase the length"
@@ -987,7 +988,7 @@ msgstr "_Título do botón:"
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:136
 msgid "Show button on one _line"
-msgstr ""
+msgstr "Amosar o botón nunha _liña"
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:151
 msgid "_Show button title"
@@ -1120,31 +1121,31 @@ msgstr "Formato personalizado"
 
 #: plugins/clock/clock-dialog.glade:13
 msgid "Decimal"
-msgstr ""
+msgstr "Decimal"
 
 #: plugins/clock/clock-dialog.glade:16
 msgid "Sexagesimal"
-msgstr ""
+msgstr "Sesaxesimal"
 
 #: plugins/clock/clock-dialog.glade:19
 msgid "Binary time"
-msgstr ""
+msgstr "Hora binaria"
 
 #: plugins/clock/clock-dialog.glade:30
 msgid "Date, then time"
-msgstr ""
+msgstr "Data e despois a hora"
 
 #: plugins/clock/clock-dialog.glade:33
 msgid "Time, then date"
-msgstr ""
+msgstr "Hora e despois a data"
 
 #: plugins/clock/clock-dialog.glade:36
 msgid "Date Only"
-msgstr ""
+msgstr "Só a data"
 
 #: plugins/clock/clock-dialog.glade:39
 msgid "Time Only"
-msgstr ""
+msgstr "Só a hora"
 
 #: plugins/clock/clock-dialog.glade:71
 msgid "Analog"
@@ -1192,7 +1193,7 @@ msgstr "Configuración da hora"
 msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
-msgstr ""
+msgstr "Se está definido, esta orde execútase cando se fai clic no engadido co botón esquerdo, en lugar de amosar o calendario predeterminado."
 
 #: plugins/clock/clock-dialog.glade:261
 msgid "Co_mmand:"
@@ -1200,11 +1201,11 @@ msgstr "_Orde:"
 
 #: plugins/clock/clock-dialog.glade:273
 msgid "_Show week numbers"
-msgstr ""
+msgstr "Amosar os números de _semana"
 
 #: plugins/clock/clock-dialog.glade:294
 msgid "Calendar"
-msgstr ""
+msgstr "Calendario"
 
 #: plugins/clock/clock-dialog.glade:329 plugins/clock/clock-dialog.glade:669
 #: plugins/clock/clock-dialog.glade:791
@@ -1237,7 +1238,7 @@ msgstr "Reloxo de 24 _horas"
 
 #: plugins/clock/clock-dialog.glade:508
 msgid "Binary mode:"
-msgstr ""
+msgstr "Modo binario:"
 
 #: plugins/clock/clock-dialog.glade:524
 msgid "Display _seconds"
@@ -1251,7 +1252,7 @@ msgstr "E_xactitude:"
 
 #: plugins/clock/clock-dialog.glade:579
 msgid "Show _inactive segments"
-msgstr ""
+msgstr "Amosar os segmentos _inactivos"
 
 #: plugins/clock/clock-dialog.glade:594
 msgid "Show gri_d"
@@ -1259,11 +1260,11 @@ msgstr "Amosar gra_de"
 
 #: plugins/clock/clock-dialog.glade:640 plugins/clock/clock-dialog.glade:762
 msgid "Font:"
-msgstr ""
+msgstr "Tipo de letra:"
 
 #: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
 msgid "Format:"
-msgstr ""
+msgstr "Formato:"
 
 #: plugins/clock/clock-dialog.glade:670 plugins/clock/clock-dialog.glade:792
 msgid ""
@@ -1271,7 +1272,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
 "the &quot;Help&quot; page for additional information."
-msgstr ""
+msgstr "O formato describe as partes da data e hora a inserir no panel. Por exemplo, %Y substitúese polo ano, %m polo mes e %d polo día. Igualmente, as etiquetas &lt;b&gt;&lt;/b&gt; porán o texto en letra grosa. Vexa a páxina «Axuda» para información adicional."
 
 #: plugins/clock/clock-dialog.glade:699
 msgid "Date"
@@ -1279,7 +1280,7 @@ msgstr "Data"
 
 #: plugins/clock/clock-dialog.glade:744
 msgid "Time"
-msgstr ""
+msgstr "Hora"
 
 #: plugins/clock/clock-dialog.glade:871
 msgid "Clock Options"
@@ -1293,7 +1294,7 @@ msgstr "%R"
 #: plugins/clock/clock-digital.h:31
 msgctxt "Date"
 msgid "%Y-%m-%d"
-msgstr ""
+msgstr "%Y-%m-%d"
 
 #: plugins/clock/clock-fuzzy.c:79
 msgid "Night"
@@ -1901,7 +1902,7 @@ msgstr "Cambiar de espazo de traballo usando a roda do rato"
 
 #: plugins/pager/pager-dialog.glade:224
 msgid "Wrap around workspaces"
-msgstr ""
+msgstr "Repartir entre os espazos de traballo"
 
 #: plugins/pager/pager-dialog.glade:241
 msgid "<b>Appearance</b>"
@@ -1947,7 +1948,7 @@ msgstr "Amosar o escritorio"
 
 #: plugins/showdesktop/showdesktop-dialog.glade:92
 msgid "_Show on mouse hover"
-msgstr ""
+msgstr "_Amosar ao pasar o rato"
 
 #: plugins/showdesktop/showdesktop-dialog.glade:113
 #: plugins/systray/sn-dialog.glade:300
@@ -2106,7 +2107,7 @@ msgstr "Minimizar a xanela"
 
 #: plugins/tasklist/tasklist-dialog.glade:32
 msgid "New Instance"
-msgstr ""
+msgstr "Nova instancia"
 
 #: plugins/tasklist/tasklist-dialog.glade:43
 msgid "Timestamp"
@@ -2147,7 +2148,7 @@ msgstr "Amosar a _asa"
 
 #: plugins/tasklist/tasklist-dialog.glade:191
 msgid "Show _tooltips"
-msgstr ""
+msgstr "Amosar as _suxestións de ferramentas"
 
 #: plugins/tasklist/tasklist-dialog.glade:214
 msgid "Sorting _order:"
@@ -2159,7 +2160,7 @@ msgstr "Acción do botón _central do rato:"
 
 #: plugins/tasklist/tasklist-dialog.glade:335
 msgid "_Group windows by application"
-msgstr ""
+msgstr "A_grupar as xanelas por aplicación"
 
 #: plugins/tasklist/tasklist-dialog.glade:351
 msgid "Restore minimized windows to current _workspace"
@@ -2197,7 +2198,7 @@ msgstr "Non se puido iniciar a nova instancia de «%s»"
 
 #: plugins/tasklist/tasklist-widget.c:3132
 msgid "Launch New Instance"
-msgstr ""
+msgstr "Iniciar unha nova instancia"
 
 #: plugins/tasklist/tasklist-widget.c:3876
 msgid "Mi_nimize All"
