@@ -1,3 +1,33 @@
+4.19.6 (2024-11-01)
+======
+- systray: Handle general container orientation on Wayland too
+- systray: Fix GSList element leak
+- migrate/default.xml.in: Remove unused plugin id
+- Added "show inactive" prop to lcd clock (repurposed from binary clock)
+- Reworked sizing mechanism in clock plugin and its widgets
+- Reduce minimum button size to improve layout at very small panel 
+sizes.
+- Use width_for_height when plugin requests it
+- LCD and digital clock layout fixes
+- systray: Fix leak in sn_plugin_init
+- Added a missing property bind for 24hr analogue clock
+- Added XFCE_PANEL_PLUGIN_ICON_PADDING (API change)
+- tasklist: Keep icon sizes as specified by the user
+- Revert "wayland: tasklist: Fix icon size in multirow mode"
+- systray: Add missing translation
+- clock: Added 24h clock mode to the analog clock
+- Translation Updates:
+  Albanian, Arabic, Armenian (Armenia), Asturian, Basque, Belarusian,
+  Bengali, Bulgarian, Catalan, Chinese (China), Chinese (Hong Kong),
+  Chinese (Taiwan), Croatian, Czech, Danish, Dutch, Eastern Armenian,
+  English (Australia), English (United Kingdom), Estonian, Finnish,
+  French, Galician, German, Greek, Hebrew, Hungarian, Icelandic,
+  Indonesian, Interlingue, Italian, Japanese, Kazakh, Korean,
+  Lithuanian, Malay, Norwegian Bokmål, Norwegian Nynorsk, Occitan
+  (post 1500), Panjabi (Punjabi), Polish, Portuguese, Portuguese
+  (Brazil), Romanian, Russian, Serbian, Sinhala, Slovak, Slovenian,
+  Spanish, Swedish, Thai, Turkish, Ukrainian, Uyghur
+
 4.19.5 (2024-10-07)
 ======
 - Use new xfw_window_activate() signature in libwindowing 4.19.6
