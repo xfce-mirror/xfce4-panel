@@ -7,7 +7,7 @@
 # k3dar, 2022
 # b537cbea55af75c3f49fe8b21c4cf8ea_f0ce149, 2023
 # Martin Šiška <martin-siska@email.cz>, 2024
-# Michal Várady <miko.vaji@gmail.com>, 2013-2015,2017-2020
+# Michal Várady <miko.vaji@gmail.com>, 2013-2015,2017-2020,2024
 # Pavel Borecki <pavel.borecki@gmail.com>, 2018
 # Petr Šimáček <petr.simacek@gmail.com>, 2015
 # Pavel Pernička <pernicka.pa@gmail.com>, 2019
@@ -17,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
 "POT-Creation-Date: 2024-10-18 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Martin Šiška <martin-siska@email.cz>, 2024\n"
+"Last-Translator: Michal Várady <miko.vaji@gmail.com>, 2013-2015,2017-2020,2024\n"
 "Language-Team: Czech (http://app.transifex.com/xfce/xfce4-panel/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -251,7 +251,7 @@ msgstr "Nepodařilo se spustit migraci aplikace"
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
-msgstr "Nepodařilo se načíst zásuvný modul \"%s\", přejete si jej odebrat z nastavení panelu?"
+msgstr "Nepodařilo se načíst zásuvný modul „%s“, chcete jej odebrat z nastavení panelu xfce4?"
 
 #: panel/panel-application.c:349
 #, c-format
@@ -261,7 +261,7 @@ msgid ""
 "doing, you can remove it permanently, otherwise you'd better quit and make a"
 " backup of the current configuration using %s, before checking your "
 "installation and trying to start xfce4-panel again."
-msgstr "Tento zásuvný modul je v současném nastavení panelu, ale nepodařilo se jej načíst, pravděpodobně kvůli chybě v instalaci. Pokud víte, co děláte, můžete jej trvale odebrat, v opačném případě byste měli úlohu panelu ukončit a vytvořit zálohu současného nastavení pomocí %s, předtím, než zkontrolujete instalaci a pokusíte se panel zapnout znovu."
+msgstr "Tento zásuvný modul je v aktuálním nastavení panelu xfce4, ale nepodařilo se jej načíst, pravděpodobně kvůli chybě v instalaci. Pokud víte, co děláte, můžete jej trvale odebrat, v opačném případě byste měli úlohu panelu ukončit a vytvořit zálohu současného nastavení pomocí %s, předtím, než zkontrolujete instalaci a pokusíte se panel znovu spustit."
 
 #: panel/panel-application.c:356
 msgid "Plugin loading failure"
@@ -471,11 +471,11 @@ msgstr "Pokud odstraníte položku z panelu, bude nenávratně ztracena."
 #: panel/panel-preferences-dialog.c:1550
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
-msgstr "Opravdu chcete odebrat %d položky?"
+msgstr "Opravdu chcete odebrat těchto %d položek?"
 
 #: panel/panel-preferences-dialog.c:1552
 msgid "If you remove them from the panel, they are permanently lost."
-msgstr "Pokud je odstraníte z panelu, budou nenávratně ztraceny."
+msgstr "Pokud je odstraníte z panelu, budou trvale ztraceny."
 
 #: panel/panel-preferences-dialog.glade:13
 msgid "Never"
@@ -1257,7 +1257,7 @@ msgstr "_Přesnost:"
 
 #: plugins/clock/clock-dialog.glade:579
 msgid "Show _inactive segments"
-msgstr ""
+msgstr "Zobrazit _neaktivní segmenty"
 
 #: plugins/clock/clock-dialog.glade:594
 msgid "Show gri_d"
@@ -1277,7 +1277,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
 "the &quot;Help&quot; page for additional information."
-msgstr "Formát popisuje části data a času, které se mají vložit do panelu. Například %Y se zobrazí jako rok, %m jako měsíc a %d jako den. Podobně &lt;b&gt;&lt;/b&gt; tagy učiní text tučným. Viz &quot;Help&quot; stránku pro další informace."
+msgstr "Formát popisuje části data a času, které se mají vložit do panelu. Například %Y bude nahrazeno rokem, %m měsícem a %d dnem. Podobně značky &lt;b&gt;&lt;/b&gt; změní text na tučný. Pro další informace navštivte stránku &quot;Nápověda&quot;."
 
 #: plugins/clock/clock-dialog.glade:699
 msgid "Date"
@@ -1907,7 +1907,7 @@ msgstr "Přepnout pracovní plochy pomocí kolečka myši"
 
 #: plugins/pager/pager-dialog.glade:224
 msgid "Wrap around workspaces"
-msgstr "Obtéct okolo pracovních ploch"
+msgstr "Přecházet z poslední stránky na první a naopak"
 
 #: plugins/pager/pager-dialog.glade:241
 msgid "<b>Appearance</b>"
@@ -1915,7 +1915,7 @@ msgstr "<b>Vzhled</b>"
 
 #: plugins/pager/pager.desktop.in.in:5
 msgid "Switch between virtual desktops"
-msgstr "Přepínání mezi virtuálními prostředními"
+msgstr "Přepínání mezi virtuálními plochami"
 
 #: plugins/separator/separator-dialog.glade:23
 msgid "Transparent"
@@ -1943,7 +1943,7 @@ msgstr "Obnovit minimalizovaná okna"
 
 #: plugins/showdesktop/showdesktop.c:323
 msgid "Minimize all open windows and show the desktop"
-msgstr "Minimalizovat všechna otevřená okna a zobrazí pracovní plochu"
+msgstr "Minimalizovat všechna otevřená okna a zobrazit pracovní plochu"
 
 #: plugins/showdesktop/showdesktop.c:326
 #: plugins/showdesktop/showdesktop-dialog.glade:18
