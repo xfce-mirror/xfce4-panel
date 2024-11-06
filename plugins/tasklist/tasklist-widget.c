@@ -99,6 +99,15 @@
 #define xfce_tasklist_deskbar(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
 #define xfce_tasklist_filter_monitors(tasklist) (!(tasklist)->all_monitors && (tasklist)->n_monitors > 1)
 
+static inline const gchar *
+xfce_tasklist_app_get_name (XfwApplication *app)
+{
+  const gchar *name = xfw_application_get_name (app);
+  if (xfce_str_is_empty (name))
+    name = xfw_application_get_class_id (app);
+  return name;
+}
+
 
 
 typedef enum _XfceTasklistSortOrder
@@ -2643,9 +2652,9 @@ xfce_tasklist_button_compare (gconstpointer child_a,
 
           /* get the group name if available */
           if (G_LIKELY (app_a != NULL))
-            name_a = xfw_application_get_name (app_a);
+            name_a = xfce_tasklist_app_get_name (app_a);
           if (G_LIKELY (app_b != NULL))
-            name_b = xfw_application_get_name (app_b);
+            name_b = xfce_tasklist_app_get_name (app_b);
 
           /* if there is no app name, use the window name */
           if (xfce_str_is_empty (name_a)
@@ -2682,14 +2691,14 @@ xfce_tasklist_button_compare (gconstpointer child_a,
       if (a->window != NULL)
         name_a = xfw_window_get_name (a->window);
       else if (a->app != NULL)
-        name_a = xfw_application_get_name (a->app);
+        name_a = xfce_tasklist_app_get_name (a->app);
       else
         name_a = NULL;
 
       if (b->window != NULL)
         name_b = xfw_window_get_name (b->window);
       else if (b->app != NULL)
-        name_b = xfw_application_get_name (b->app);
+        name_b = xfce_tasklist_app_get_name (b->app);
       else
         name_b = NULL;
 
@@ -4188,7 +4197,7 @@ xfce_tasklist_group_button_name_changed (XfwApplication *app,
     }
 
   /* create the button label */
-  name = xfw_application_get_name (group_child->app);
+  name = xfce_tasklist_app_get_name (group_child->app);
   gtk_label_set_text (GTK_LABEL (group_child->label), name);
 
   /* don't sort if there is no need to update the sorting (ie. only number
