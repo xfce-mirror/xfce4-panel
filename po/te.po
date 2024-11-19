@@ -1,17 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# ప్రవీణ్ ఇళ్ళ <mail2ipn@gmail.com>, 2011
+# Xfce Bot <transifex@xfce.org>, 2022
+# Nick Schermer <nick@xfce.org>, 2023
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Xfce4-panel\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-04 06:31+0200\n"
-"PO-Revision-Date: 2018-09-14 00:27+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
-"Language-Team: Telugu (http://www.transifex.com/xfce/xfce4-panel/language/te/)\n"
+"POT-Creation-Date: 2023-05-30 00:48+0200\n"
+"PO-Revision-Date: 2020-12-28 17:37+0000\n"
+"Last-Translator: Nick Schermer <nick@xfce.org>, 2023\n"
+"Language-Team: Telugu (https://app.transifex.com/xfce/teams/16840/te/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,88 +33,92 @@ msgid ""
 msgstr ""
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2666
-#: ../migrate/main.c:117
+msgid ""
+"panels;settings;preferences;taskbar;autohide;application "
+"menu;start;buttons;launcher;notification area;status;icons;plugins;"
+msgstr ""
+
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2979
 msgid "Panel"
 msgstr "ప్యానల్"
 
-#: ../panel-preferences.desktop.in.h:2
+#: ../panel-preferences.desktop.in.h:3
 msgid "Customize the panel"
 msgstr "ప్యానల్‌ను అనురూపించు"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1047
-#: ../panel/panel-preferences-dialog.c:1168
+#: ../libxfce4panel/xfce-panel-plugin.c:1078
+#: ../panel/panel-preferences-dialog.c:1321
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "\"%s\"ని ఖచ్చితంగా తీసివేయాలనుకుంటున్నారా?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1052
-#: ../panel/panel-preferences-dialog.c:1171
-msgid "If you remove the item from the panel, it is permanently lost."
+#: ../libxfce4panel/xfce-panel-plugin.c:1083
+msgid ""
+"Removing the item from the panel also means its configuration will be lost."
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1053 ../panel/panel-dialogs.c:127
-#: ../panel/panel-preferences-dialog.c:1173
-#: ../plugins/applicationsmenu/applicationsmenu.c:538
-#: ../plugins/directorymenu/directorymenu.c:394
-msgid "Cancel"
-msgstr "రద్దుచేయి"
+#: ../libxfce4panel/xfce-panel-plugin.c:1084 ../panel/panel-dialogs.c:164
+#: ../panel/panel-preferences-dialog.c:1326
+#: ../plugins/applicationsmenu/applicationsmenu.c:602
+#: ../plugins/directorymenu/directorymenu.c:474
+#: ../plugins/directorymenu/directorymenu.c:939
+msgid "_Cancel"
+msgstr "రద్దుచేయి (_C)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1054
-#: ../panel/panel-plugin-external.c:436
-#: ../panel/panel-preferences-dialog.c:896
-#: ../panel/panel-preferences-dialog.c:1174
-#: ../plugins/launcher/launcher-dialog.c:854
-msgid "Remove"
-msgstr ""
-
-#: ../libxfce4panel/xfce-panel-plugin.c:1195
-msgid "_Properties"
-msgstr ""
-
-#: ../libxfce4panel/xfce-panel-plugin.c:1210
-msgid "_About"
-msgstr "గురించి (_A)"
-
-#: ../libxfce4panel/xfce-panel-plugin.c:1225
-msgid "_Move"
-msgstr "తరలించు (_M)"
-
-#: ../libxfce4panel/xfce-panel-plugin.c:1249
+#: ../libxfce4panel/xfce-panel-plugin.c:1085
+#: ../libxfce4panel/xfce-panel-plugin.c:1260
+#: ../panel/panel-plugin-external.c:448
+#: ../panel/panel-preferences-dialog.c:961
+#: ../panel/panel-preferences-dialog.c:1327
+#: ../panel/panel-preferences-dialog.glade.h:59
+#: ../plugins/launcher/launcher-dialog.c:859
 msgid "_Remove"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1270
+#: ../libxfce4panel/xfce-panel-plugin.c:1210
+msgid "_Properties"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1225 ../panel/panel-window.c:3070
+msgid "_About"
+msgstr "గురించి (_A)"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1240
+msgid "_Move"
+msgstr "తరలించు (_M)"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1281
 msgid "Pane_l"
 msgstr "ప్యానల్ (_I)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1279 ../panel/panel-window.c:2679
+#: ../libxfce4panel/xfce-panel-plugin.c:1290 ../panel/panel-window.c:2992
 msgid "Add _New Items..."
 msgstr "కొత్త అంశాలను చేర్చు...(_N)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1294 ../panel/panel-window.c:2694
+#: ../libxfce4panel/xfce-panel-plugin.c:1305 ../panel/panel-window.c:3007
 msgid "Panel Pr_eferences..."
 msgstr "ప్యానల్ ప్రాధాన్యతలు...(_e)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1315 ../panel/panel-window.c:2726
+#: ../libxfce4panel/xfce-panel-plugin.c:1326 ../panel/panel-window.c:3039
 msgid "Log _Out"
 msgstr "నిష్క్రమించు (_O)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1335
-#: ../panel/panel-preferences-dialog.glade.h:12
-#: ../plugins/actions/actions-dialog.glade.h:4
+#: ../libxfce4panel/xfce-panel-plugin.c:1346 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3059
+#: ../plugins/actions/actions-dialog.glade.h:8
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#: ../plugins/clock/clock-dialog.glade.h:8
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-#: ../plugins/launcher/launcher-dialog.glade.h:16
-#: ../plugins/pager/pager-dialog.glade.h:10
+#: ../plugins/launcher/launcher-dialog.glade.h:20
+#: ../plugins/pager/pager-dialog.glade.h:4
 #: ../plugins/separator/separator-dialog.glade.h:6
-#: ../plugins/systray/systray-dialog.glade.h:3
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "_Help"
 msgstr "సహాయం (_H)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1350
+#: ../libxfce4panel/xfce-panel-plugin.c:1361
 msgid "About"
 msgstr "గురించి"
 
@@ -157,118 +165,119 @@ msgstr ""
 msgid "Print version information and exit"
 msgstr "రూపాంతరము సమాచారం ముద్రించు మరియు నిష్క్రమించు"
 
-#: ../panel/main.c:207
+#: ../panel/main.c:208
 #, c-format
 msgid "Name %s lost on the message dbus, exiting."
 msgstr ""
 
 #. parse context options
-#: ../panel/main.c:258
+#: ../panel/main.c:270
 msgid "[ARGUMENTS...]"
 msgstr "[వాదనలు...]"
 
-#: ../panel/main.c:265
+#: ../panel/main.c:277
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "వాడుకకు '%s --help' టైపు చేయండి."
 
-#: ../panel/main.c:284
+#: ../panel/main.c:296
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce అభివృద్ధి బృందం. అన్ని హక్కులు కేటాయించబడినవి."
 
-#: ../panel/main.c:285
+#: ../panel/main.c:297
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "దయచేసి బగ్‌లను <%s>కు నివేదించండి."
 
-#: ../panel/main.c:351
+#. quit without error if an instance is running
+#: ../panel/main.c:395
 msgid "There is already a running instance"
 msgstr "అక్కడ ఇదివరకే ఒక ప్రక్రియ నడుస్తున్నది"
 
 #. spawn ourselfs again
-#: ../panel/main.c:394
+#: ../panel/main.c:403
 msgid "Restarting..."
 msgstr "పునఃప్రారంభిస్తున్నది..."
 
-#: ../panel/main.c:409
+#: ../panel/main.c:418
 msgid "Failed to show the preferences dialog"
 msgstr ""
 
-#: ../panel/main.c:411
+#: ../panel/main.c:420
 msgid "Failed to show the add new items dialog"
 msgstr ""
 
-#: ../panel/main.c:413
+#: ../panel/main.c:422
 msgid "Failed to save the panel configuration"
 msgstr ""
 
-#: ../panel/main.c:415
+#: ../panel/main.c:424
 msgid "Failed to add a plugin to the panel"
 msgstr ""
 
-#: ../panel/main.c:417
+#: ../panel/main.c:426
 msgid "Failed to restart the panel"
 msgstr ""
 
-#: ../panel/main.c:419
+#: ../panel/main.c:428
 msgid "Failed to quit the panel"
 msgstr ""
 
-#: ../panel/main.c:421
+#: ../panel/main.c:430
 msgid "Failed to send D-Bus message"
 msgstr ""
 
-#: ../panel/main.c:431 ../panel/panel-plugin-external.c:435
+#: ../panel/main.c:440
 msgid "Execute"
 msgstr ""
 
-#: ../panel/main.c:432
+#: ../panel/main.c:441
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr ""
 
-#: ../panel/main.c:435 ../panel/main.c:449
+#: ../panel/main.c:444 ../panel/main.c:458
 #, c-format
 msgid "No running instance of %s was found"
 msgstr ""
 
-#: ../panel/panel-application.c:215
+#: ../panel/panel-application.c:217
 msgid "Failed to launch the migration application"
 msgstr ""
 
-#: ../panel/panel-application.c:982
+#: ../panel/panel-application.c:998
 msgid "Create _Launcher"
 msgstr "ప్రారంభకాన్ని సృష్టించండి (_L)"
 
-#: ../panel/panel-application.c:983
+#: ../panel/panel-application.c:999
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr ""
 
-#: ../panel/panel-application.c:985
+#: ../panel/panel-application.c:1001
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../panel/panel-application.c:1724
+#: ../panel/panel-application.c:1741
 msgid "Quit"
 msgstr "నిష్క్రమించు"
 
-#: ../panel/panel-application.c:1725
+#: ../panel/panel-application.c:1742
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr ""
 
-#: ../panel/panel-application.c:1726
+#: ../panel/panel-application.c:1743
 msgid "Are you sure you want to quit the panel?"
 msgstr ""
 
-#: ../panel/panel-application.c:1734
+#: ../panel/panel-application.c:1751
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr ""
@@ -285,78 +294,82 @@ msgid ""
 "uint."
 msgstr ""
 
-#: ../panel/panel-dialogs.c:49
+#: ../panel/panel-dialogs.c:58
+msgid "Unable to open the e-mail address"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:84
 msgid "The panel of the Xfce Desktop Environment"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:54
+#: ../panel/panel-dialogs.c:88
 msgid "translator-credits"
 msgstr "Praveen Illa <mail2ipn@gmail.com>, 2011."
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:162 ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Add New Item"
 msgstr "కొత్త అంశాన్ని చేర్చు"
 
-#: ../panel/panel-dialogs.c:128
-msgid "Add"
+#: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:201
+#: ../panel/panel-preferences-dialog.glade.h:57
+#: ../plugins/launcher/launcher-dialog.glade.h:16
+msgid "_Add"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:139
+#: ../panel/panel-dialogs.c:176
 msgid "Please choose a panel for the new plugin:"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:831
+#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:896
 #, c-format
 msgid "Panel %d"
 msgstr "ప్యానల్ %d"
 
-#: ../panel/panel-dialogs.c:199
+#: ../panel/panel-dialogs.c:236
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:201
+#: ../panel/panel-dialogs.c:238
 msgid "Modifying the panel is not allowed"
 msgstr ""
 
-#: ../panel/panel-item-dialog.c:194
+#: ../panel/panel-item-dialog.c:195
 msgid "Add New Items"
 msgstr "కొత్త అంశాలను చేర్చు"
 
-#: ../panel/panel-item-dialog.c:196
-msgid "Add new plugins to the panel"
-msgstr "ప్యానల్‌కు కొత్త ప్లగిన్‌లను జతచేయి"
-
-#: ../panel/panel-item-dialog.c:202
-msgid "_Add"
-msgstr ""
-
-#: ../panel/panel-item-dialog.c:206
-msgid "Help"
-msgstr ""
-
-#: ../panel/panel-item-dialog.c:208 ../panel/panel-tic-tac-toe.c:124
+#: ../panel/panel-item-dialog.c:209
+#: ../panel/panel-preferences-dialog.glade.h:11
+#: ../panel/panel-tic-tac-toe.c:125
+#: ../plugins/actions/actions-dialog.glade.h:7
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
+#: ../plugins/clock/clock-dialog.glade.h:7
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 #: ../plugins/launcher/launcher-dialog.glade.h:17
-msgid "Close"
-msgstr "మూసివేయి"
+#: ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/separator/separator-dialog.glade.h:5
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
+msgid "_Close"
+msgstr "మూసివేయి (_C)"
 
-#: ../panel/panel-item-dialog.c:221
-#: ../plugins/launcher/launcher-dialog.glade.h:3
+#: ../panel/panel-item-dialog.c:225
+#: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "_Search:"
 msgstr "వెతుకు (_S):"
 
-#: ../panel/panel-item-dialog.c:229
+#: ../panel/panel-item-dialog.c:233
 msgid "Enter search phrase here"
 msgstr ""
 
-#: ../panel/panel-plugin-external.c:429
+#: ../panel/panel-plugin-external.c:441
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr ""
 
-#: ../panel/panel-plugin-external.c:431
+#: ../panel/panel-plugin-external.c:443
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -364,51 +377,61 @@ msgid ""
 "permanently removed from the panel."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.c:486
+#: ../panel/panel-plugin-external.c:447
+msgid "_Execute"
+msgstr "అమలుపరుచు (_E)"
+
+#: ../panel/panel-preferences-dialog.c:518
 msgid "Automatic"
 msgstr "స్వయంచాలకం"
 
-#: ../panel/panel-preferences-dialog.c:496
+#: ../panel/panel-preferences-dialog.c:528
 msgid "Primary"
 msgstr ""
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:515
+#: ../panel/panel-preferences-dialog.c:547
 #, c-format
 msgid "Monitor %d"
 msgstr "మానిటర్ %d"
 
-#: ../panel/panel-preferences-dialog.c:897
+#: ../panel/panel-preferences-dialog.c:962
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.c:898
+#: ../panel/panel-preferences-dialog.c:963
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "మీరు ఖచ్చితంగా %d ప్యానల్‌ను తీసివేయాలనుకుంటున్నారా?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1010
+#: ../panel/panel-preferences-dialog.c:1163
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1015
+#: ../panel/panel-preferences-dialog.c:1168
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "అంతర్గత పేరు: %s-%d\nPID: %d"
+msgstr ""
+"అంతర్గత పేరు: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1027
+#: ../panel/panel-preferences-dialog.c:1180
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "అంతర్గత పేరు: %s-%d"
+
+#: ../panel/panel-preferences-dialog.c:1324
+msgid "If you remove the item from the panel, it is permanently lost."
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
@@ -448,60 +471,53 @@ msgstr ""
 msgid "Background image"
 msgstr "నేపథ్య చిత్రం"
 
-#: ../panel/panel-preferences-dialog.glade.h:11
-#: ../plugins/actions/actions-dialog.glade.h:3
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
-#: ../plugins/pager/pager-dialog.glade.h:9
-#: ../plugins/separator/separator-dialog.glade.h:5
-#: ../plugins/systray/systray-dialog.glade.h:2
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
-msgid "_Close"
-msgstr "మూసివేయి (_C)"
-
-#: ../panel/panel-preferences-dialog.glade.h:13
-msgid "Add a new panel"
-msgstr "ఒక కొత్త ప్యానల్ జతచేయి"
-
-#: ../panel/panel-preferences-dialog.glade.h:14
-msgid "Remove the currently selected panel"
-msgstr "ప్రస్తుతం ఎంపికచేసిన ప్యానలును తీసివేయి"
-
-#: ../panel/panel-preferences-dialog.glade.h:15
-msgid "Backup and restore"
+#: ../panel/panel-preferences-dialog.glade.h:10
+msgid "Panel Preferences"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../panel/panel-preferences-dialog.glade.h:13
+msgid "Profiles:"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:14
+msgid "_Backup and restore"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Switch between panel presets"
 msgstr ""
 
+#: ../panel/panel-preferences-dialog.glade.h:16
+msgid "Add a new panel"
+msgstr "ఒక కొత్త ప్యానల్ జతచేయి"
+
 #: ../panel/panel-preferences-dialog.glade.h:17
+msgid "Remove the currently selected panel"
+msgstr "ప్రస్తుతం ఎంపికచేసిన ప్యానలును తీసివేయి"
+
+#: ../panel/panel-preferences-dialog.glade.h:18
+msgid "<b>General</b>"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:19
 msgid "M_ode:"
 msgstr "రీతి (_o):"
 
-#: ../panel/panel-preferences-dialog.glade.h:18
-msgid "O_utput:"
-msgstr "అవుట్‌పుట్ (_u):"
-
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Span mo_nitors"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:22
 msgid "_Lock panel"
 msgstr "ప్యానల్‌ను స్థిరపరుచు (_L)"
 
-#: ../panel/panel-preferences-dialog.glade.h:22
+#: ../panel/panel-preferences-dialog.glade.h:23
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:23
-msgid "Automatically hide the panel:"
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:24
@@ -515,214 +531,193 @@ msgid ""
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:26
-#: ../plugins/actions/actions-dialog.glade.h:9
-#: ../plugins/launcher/launcher-dialog.glade.h:23
-msgid "General"
-msgstr "సాధారణ"
+msgid "Au_tomatically hide the panel:"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:27
-msgid "A_utomatically increase the length"
-msgstr "స్వయంచాలకంగా పొడవును పెంచు (_u)"
+msgid "O_utput:"
+msgstr "అవుట్‌పుట్ (_u):"
 
-#: ../panel/panel-preferences-dialog.glade.h:28
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
+#: ../panel/panel-preferences-dialog.glade.h:29
+msgid "<b>Measurements</b>"
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:30
-#, no-c-format
-msgid "L_ength (%):"
-msgstr "పొడవు (%) (_e):"
+msgid "Row _size (pixels):"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Num_ber of rows:"
 msgstr "అడ్డవరుసల సంఖ్య (_b):"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
-msgid "Row _Size (pixels):"
-msgstr "అడ్డువరుస పరిమాణం (పిక్సెళ్ళు)(_S):"
+#: ../panel/panel-preferences-dialog.glade.h:33
+#, no-c-format
+msgid "L_ength (%):"
+msgstr "పొడవు (%) (_e):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:34
-msgid "Measurements"
-msgstr "కొలతలు"
+msgid "A_utomatically increase the length"
+msgstr "స్వయంచాలకంగా పొడవును పెంచు (_u)"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "D_isplay"
 msgstr "ప్రదర్శన (_i)"
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:37
+msgid "Dark mode"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:38
+msgid "<b>Background</b>"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:39
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Style:"
 msgstr "శైలి (_S):"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "C_olor:"
 msgstr "రంగు (_o):"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "Pick a Panel Color"
 msgstr "ప్యానల్ రంగుని ఎన్నుకోండి"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:42
 msgid "_File:"
 msgstr "ఫైల్ (_F):"
 
-#: ../panel/panel-preferences-dialog.glade.h:40
+#: ../panel/panel-preferences-dialog.glade.h:43
 msgid "Select A Background Image"
 msgstr "ఒక నేపథ్య చిత్రాన్ని ఎంచుకోండి"
 
-#: ../panel/panel-preferences-dialog.glade.h:41
-msgid "Background"
-msgstr "నేపథ్యం"
+#: ../panel/panel-preferences-dialog.glade.h:44
+msgid "<b>Icons</b>"
+msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:42
+#: ../panel/panel-preferences-dialog.glade.h:45
+msgid "Adjust size au_tomatically"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:46
+msgid "Fixed icon _size (pixels):"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:47
+msgid "<b>Opacity</b>"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:48
+msgid "Configure..."
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:49
+msgid ""
+"<b>Compositing is currently disabled</b>\n"
+"Enable compositing in the window manager for opacity settings in the panel."
+msgstr ""
+
+#. I18N: label for the enter transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:52
+msgid "_Enter:"
+msgstr ""
+
+#. I18N: label for the leave transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:54
+msgid "_Leave:"
+msgstr "వదిలివేయి (_L):"
+
+#: ../panel/panel-preferences-dialog.glade.h:55
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr ""
 
-#. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:44
-msgid "_Enter:"
-msgstr ""
-
-#. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:46
-msgid "_Leave:"
-msgstr "వదిలివేయి (_L):"
-
-#: ../panel/panel-preferences-dialog.glade.h:47
-msgid "Opacity"
-msgstr "ఒపాసిటి"
-
-#: ../panel/panel-preferences-dialog.glade.h:48
-msgid ""
-"Enable compositing in the window manager for opacity settings in the panel."
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:49
+#: ../panel/panel-preferences-dialog.glade.h:56
 msgid "Appeara_nce"
 msgstr "కనిపించువిధము (_n)"
 
-#: ../panel/panel-preferences-dialog.glade.h:50
-#: ../plugins/launcher/launcher-dialog.glade.h:18
-#: ../plugins/systray/systray-dialog.glade.h:8
-msgid "Move currently selected item up by one row"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:51
-#: ../plugins/launcher/launcher-dialog.glade.h:19
-#: ../plugins/systray/systray-dialog.glade.h:9
-msgid "Move currently selected item down by one row"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:52
+#: ../panel/panel-preferences-dialog.glade.h:58
 msgid "Add new item to this panel"
 msgstr "కొత్త అంశాన్ని ఈ ప్యానల్‌కు జతచేయి"
 
-#: ../panel/panel-preferences-dialog.glade.h:53
+#: ../panel/panel-preferences-dialog.glade.h:60
 msgid "Remove currently selected item"
 msgstr "ప్రస్తుతం ఎంపికచేసిన అంశాన్ని తీసివేయి"
 
-#: ../panel/panel-preferences-dialog.glade.h:54
-#: ../plugins/launcher/launcher-dialog.glade.h:22
+#: ../panel/panel-preferences-dialog.glade.h:61
+#: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Edit the currently selected item"
 msgstr "ప్రస్తుతము ఎంచుకున్న అంశమును సవరించు"
 
-#: ../panel/panel-preferences-dialog.glade.h:55
+#: ../panel/panel-preferences-dialog.glade.h:62
 msgid "Show about information of the currently selected item"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:56
+#: ../panel/panel-preferences-dialog.glade.h:63
+#: ../plugins/launcher/launcher-dialog.glade.h:21
+msgid "Move currently selected item up by one row"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:64
+#: ../plugins/launcher/launcher-dialog.glade.h:22
+msgid "Move currently selected item down by one row"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:65
 msgid "Ite_ms"
 msgstr "అంశాలు (_m)"
 
-#: ../panel/panel-tic-tac-toe.c:122
+#: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
 msgstr "కొత్త ఆట (_N)"
 
-#: ../panel/panel-tic-tac-toe.c:133
+#: ../panel/panel-tic-tac-toe.c:134
 msgid "_Level:"
 msgstr "స్థాయి (_L):"
 
-#: ../panel/panel-tic-tac-toe.c:139
+#: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
 msgstr ""
 
-#: ../panel/panel-tic-tac-toe.c:140
+#: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
 msgstr ""
 
-#: ../panel/panel-tic-tac-toe.c:141
+#: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
 msgstr ""
 
-#: ../panel/panel-tic-tac-toe.c:142
+#: ../panel/panel-tic-tac-toe.c:143
 msgid "Expert"
 msgstr ""
 
-#: ../panel/panel-window.c:2711
+#: ../panel/panel-window.c:3024
 msgid "_Lock Panel"
 msgstr "ప్యానల్‌కు తాళంవేయి (_L)"
 
-#: ../migrate/main.c:116
-msgid "Welcome to the first start of the panel"
-msgstr "ప్యానల్ యొక్క మొదటి ప్రారంభమునకు స్వాగతం"
-
-#: ../migrate/main.c:125
-msgid ""
-"Because the panel moved to a new system for storing the settings, it has to "
-"load a fresh initial configuration."
-msgstr ""
-
-#: ../migrate/main.c:127 ../migrate/main.c:136
-msgid "Choose below which setup you want for the first startup."
-msgstr ""
-
-#: ../migrate/main.c:129
-msgid "Migrate old config"
-msgstr ""
-
-#: ../migrate/main.c:130
-msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr ""
-
-#: ../migrate/main.c:141
-msgid "Use default config"
-msgstr ""
-
-#: ../migrate/main.c:142
-msgid "Load the default configuration"
-msgstr ""
-
-#: ../migrate/main.c:148
-msgid "One empty panel"
-msgstr ""
-
-#: ../migrate/main.c:149
-msgid "Start with one empty panel"
-msgstr ""
-
-#: ../migrate/main.c:160
-msgid "Failed to migrate the old panel configuration"
-msgstr ""
-
-#: ../migrate/main.c:172
+#: ../migrate/main.c:110
 msgid "Failed to load the default configuration"
 msgstr ""
 
-#: ../migrate/main.c:185
+#: ../migrate/main.c:122
 msgid "Panel config needs migration..."
 msgstr ""
 
-#: ../migrate/main.c:189
+#: ../migrate/main.c:126
 msgid "Failed to migrate the existing configuration"
 msgstr ""
 
-#: ../migrate/main.c:195
+#: ../migrate/main.c:132
 msgid "Panel configuration has been updated."
 msgstr ""
 
@@ -731,178 +726,203 @@ msgstr ""
 msgid "Action Buttons"
 msgstr "చర్య బొత్తాలు"
 
-#: ../plugins/actions/actions-dialog.glade.h:2
+#: ../plugins/actions/actions-dialog.glade.h:2 ../plugins/actions/actions.c:40
 msgid "Session Menu"
 msgstr "చర్యాకాల మెనూ"
 
+#: ../plugins/actions/actions-dialog.glade.h:3
+msgid "Full Name"
+msgstr ""
+
+#: ../plugins/actions/actions-dialog.glade.h:4
+msgid "Username"
+msgstr ""
+
 #: ../plugins/actions/actions-dialog.glade.h:5
-msgid "Invert buttons _orientation"
+msgid "User ID"
 msgstr ""
 
 #: ../plugins/actions/actions-dialog.glade.h:6
-msgid "_Show confirmation dialog"
+msgid "Custom"
 msgstr ""
 
-#: ../plugins/actions/actions-dialog.glade.h:7
-msgid ""
-"Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr ""
-
-#: ../plugins/actions/actions-dialog.glade.h:8
+#: ../plugins/actions/actions-dialog.glade.h:9
 msgid "Appeara_nce:"
 msgstr "కనిపించువిధము (_n):"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
-msgid "Visible"
+msgid "Title:"
 msgstr ""
 
 #: ../plugins/actions/actions-dialog.glade.h:11
+msgid "Custo_m title:"
+msgstr ""
+
+#: ../plugins/actions/actions-dialog.glade.h:12
+#: ../plugins/launcher/launcher-dialog.glade.h:27
+msgid "General"
+msgstr "సాధారణ"
+
+#: ../plugins/actions/actions-dialog.glade.h:13
+msgid "Visible"
+msgstr ""
+
+#: ../plugins/actions/actions-dialog.glade.h:14
 msgid "Action"
 msgstr "చర్య"
 
-#: ../plugins/actions/actions-dialog.glade.h:12
+#: ../plugins/actions/actions-dialog.glade.h:15
+msgid "_Show confirmation dialog"
+msgstr ""
+
+#: ../plugins/actions/actions-dialog.glade.h:16
+msgid ""
+"Show a confirmation dialog with a 30 second timeout for some of the actions."
+msgstr ""
+
+#: ../plugins/actions/actions-dialog.glade.h:17
 msgid "_Actions"
 msgstr "చర్యలు (_A):"
 
-#: ../plugins/actions/actions.c:152
+#: ../plugins/actions/actions.c:165
 msgid "Log Out"
 msgstr "నిష్క్రమించు"
 
-#: ../plugins/actions/actions.c:153
+#: ../plugins/actions/actions.c:166
 msgid "_Log Out"
 msgstr "నిష్క్రమించు (_L)"
 
-#: ../plugins/actions/actions.c:154
+#: ../plugins/actions/actions.c:167
 msgid "Are you sure you want to log out?"
 msgstr "మీరు ఖచ్చితంగా నిష్క్రమించాలనుకుంటున్నారా?"
 
-#: ../plugins/actions/actions.c:155
+#: ../plugins/actions/actions.c:168
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr ""
 
-#: ../plugins/actions/actions.c:160
+#: ../plugins/actions/actions.c:174
 msgid "Log Out..."
 msgstr "నిష్క్రమించు..."
 
-#: ../plugins/actions/actions.c:161
+#: ../plugins/actions/actions.c:175
 msgid "Log _Out..."
 msgstr "నిష్క్రమించు...(_O)"
 
-#: ../plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:182
 msgid "Switch User"
 msgstr "వాడుకరిని మార్చు"
 
-#: ../plugins/actions/actions.c:168
+#: ../plugins/actions/actions.c:183
 msgid "_Switch User"
 msgstr "వాడుకరిని మార్చు (_S)"
 
-#: ../plugins/actions/actions.c:174
+#: ../plugins/actions/actions.c:190
 msgid "Lock Screen"
 msgstr "తెరకు తాళంవేయి"
 
-#: ../plugins/actions/actions.c:175
+#: ../plugins/actions/actions.c:191
 msgid "Loc_k Screen"
 msgstr "తెరకు తాళంవేయి (_o)"
 
-#: ../plugins/actions/actions.c:181
+#: ../plugins/actions/actions.c:198
 msgid "Hibernate"
 msgstr "సుప్తావస్థ"
 
-#: ../plugins/actions/actions.c:182
+#: ../plugins/actions/actions.c:199
 msgid "_Hibernate"
 msgstr "సుప్తావస్థ (_H)"
 
-#: ../plugins/actions/actions.c:183
+#: ../plugins/actions/actions.c:200
 msgid "Do you want to suspend to disk?"
 msgstr ""
 
-#: ../plugins/actions/actions.c:184
+#: ../plugins/actions/actions.c:201
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr ""
 
-#: ../plugins/actions/actions.c:189
+#: ../plugins/actions/actions.c:207
 msgid "Hybrid Sleep"
 msgstr ""
 
-#: ../plugins/actions/actions.c:190
+#: ../plugins/actions/actions.c:208
 msgid "_Hybrid Sleep"
 msgstr ""
 
-#: ../plugins/actions/actions.c:191
+#: ../plugins/actions/actions.c:209
 msgid "Do you want to hibernate and suspend the system?"
 msgstr ""
 
-#: ../plugins/actions/actions.c:192
+#: ../plugins/actions/actions.c:210
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr ""
 
-#: ../plugins/actions/actions.c:197
+#: ../plugins/actions/actions.c:216
 msgid "Suspend"
 msgstr "తాత్కాలికంగా నిలిపివేయి"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:217
 msgid "Sus_pend"
 msgstr "తాత్కాలికంగా నిలిపివేయి (_p)"
 
-#: ../plugins/actions/actions.c:199
+#: ../plugins/actions/actions.c:218
 msgid "Do you want to suspend to RAM?"
 msgstr ""
 
-#: ../plugins/actions/actions.c:200
+#: ../plugins/actions/actions.c:219
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr ""
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:225
 msgid "Restart"
 msgstr "పునఃప్రారంభించు"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:226
 msgid "_Restart"
 msgstr "పునఃప్రారంభించు (_R)"
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:227
 msgid "Are you sure you want to restart?"
 msgstr "మీరు ఖచ్చితంగా పునఃప్రారంభించాలనుకుంటున్నారా?"
 
-#: ../plugins/actions/actions.c:208
+#: ../plugins/actions/actions.c:228
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr ""
 
-#: ../plugins/actions/actions.c:213
+#: ../plugins/actions/actions.c:234
 msgid "Shut Down"
 msgstr "మూసివేయి"
 
-#: ../plugins/actions/actions.c:214
+#: ../plugins/actions/actions.c:235
 msgid "Shut _Down"
 msgstr "మూసివేయి (_D)"
 
-#: ../plugins/actions/actions.c:215
+#: ../plugins/actions/actions.c:236
 msgid "Are you sure you want to shut down?"
 msgstr "మీరు ఖచ్చితంగా మూసివేయ్యాలనుకుంటున్నారా?"
 
-#: ../plugins/actions/actions.c:216
+#: ../plugins/actions/actions.c:237
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr ""
 
-#: ../plugins/actions/actions.c:615
+#: ../plugins/actions/actions.c:685
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "వేర్పకము"
 
-#: ../plugins/actions/actions.c:1022
+#: ../plugins/actions/actions.c:1110
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr ""
 
-#: ../plugins/actions/actions.c:1189
-msgid "John Doe"
+#: ../plugins/actions/actions.c:1279
+msgid "Little Mouse"
 msgstr ""
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
@@ -946,13 +966,11 @@ msgid ""
 msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
-#: ../plugins/clock/clock-dialog.glade.h:15
+#: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
-#: ../plugins/pager/pager-dialog.glade.h:6
 #: ../plugins/separator/separator-dialog.glade.h:9
-#: ../plugins/systray/systray-dialog.glade.h:7
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Appearance"
 msgstr "కనిపించువిధము"
 
@@ -985,18 +1003,19 @@ msgstr "మెను ఫైల్"
 msgid "Applications"
 msgstr ""
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:536
-#: ../plugins/directorymenu/directorymenu.c:392
+#: ../plugins/applicationsmenu/applicationsmenu.c:600
+#: ../plugins/directorymenu/directorymenu.c:472
 msgid "Select An Icon"
 msgstr "ఒక ప్రతీకను ఎంచుకోండి"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:539
-#: ../plugins/directorymenu/directorymenu.c:395
-msgid "OK"
+#: ../plugins/applicationsmenu/applicationsmenu.c:603
+#: ../plugins/directorymenu/directorymenu.c:475
+msgid "_OK"
 msgstr ""
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:581
-#: ../plugins/clock/clock.c:918 ../plugins/launcher/launcher.c:2381
+#. show an error dialog
+#: ../plugins/applicationsmenu/applicationsmenu.c:639
+#: ../plugins/clock/clock.c:955 ../plugins/launcher/launcher.c:2517
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" ఆదేశాన్ని అమలుపరుచుటలో విఫలమైంది."
@@ -1041,15 +1060,15 @@ msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr ""
 
-#: ../plugins/clock/clock.c:177
+#: ../plugins/clock/clock.c:174
 msgid "Week %V"
 msgstr "వారము %V"
 
-#: ../plugins/clock/clock.c:470
+#: ../plugins/clock/clock.c:465
 msgid "Failed to execute clock command"
 msgstr ""
 
-#: ../plugins/clock/clock.c:857
+#: ../plugins/clock/clock.c:894
 msgid "Custom Format"
 msgstr "అనురూపిత ఫార్మేటు"
 
@@ -1078,25 +1097,25 @@ msgstr "LCD"
 msgid "Clock"
 msgstr "గడియారం"
 
-#: ../plugins/clock/clock-dialog.glade.h:7
+#: ../plugins/clock/clock-dialog.glade.h:9
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:8
+#: ../plugins/clock/clock-dialog.glade.h:10
 msgid "Time_zone:"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:9
+#: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Time and Date _Settings..."
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:10
+#: ../plugins/clock/clock-dialog.glade.h:12
 msgid "Time Settings"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:12
+#: ../plugins/clock/clock-dialog.glade.h:14
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1105,60 +1124,60 @@ msgid ""
 "page for additional information."
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:13
+#: ../plugins/clock/clock-dialog.glade.h:15
 msgid "_Tooltip format:"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:14
+#: ../plugins/clock/clock-dialog.glade.h:16
 msgid "_Layout:"
 msgstr "నమూనా (_L):"
 
-#: ../plugins/clock/clock-dialog.glade.h:16
+#: ../plugins/clock/clock-dialog.glade.h:18
 msgid "Sho_w AM/PM"
 msgstr "AM/PM చూపించు (_w)"
 
-#: ../plugins/clock/clock-dialog.glade.h:17
+#: ../plugins/clock/clock-dialog.glade.h:19
 msgid "Fl_ash time separators"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:18
+#: ../plugins/clock/clock-dialog.glade.h:20
 msgid "24-_hour clock"
 msgstr "24-గంటల గడియారం (_h)"
 
-#: ../plugins/clock/clock-dialog.glade.h:19
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Display _seconds"
 msgstr "సెకనులను చూపించు (_s)"
 
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:23
 msgid "F_ormat:"
 msgstr "ఫార్మేటు (_o):"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:23
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "F_uzziness:"
 msgstr "అస్పష్టత (_u):"
 
-#: ../plugins/clock/clock-dialog.glade.h:24
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "Show _inactive dots"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:27
 msgid "Show gri_d"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:28
 msgid "Clock Options"
 msgstr "గడియారము ఐచ్ఛికాలు"
 
 #. TRANSLATORS: adjust this accordingly for your locale format
 #: ../plugins/clock/clock-digital.h:25
 msgctxt "Time"
-msgid "%R"
+msgid "%a %_d %b, %R"
 msgstr ""
 
 #: ../plugins/clock/clock-fuzzy.c:87
@@ -1392,44 +1411,77 @@ msgstr "పన్నెండు"
 msgid "What time is it?"
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:242
+#: ../plugins/directorymenu/directorymenu.c:301
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:579
+#: ../plugins/directorymenu/directorymenu.c:690
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:611
+#: ../plugins/directorymenu/directorymenu.c:722
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:620
+#: ../plugins/directorymenu/directorymenu.c:731
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:636
+#: ../plugins/directorymenu/directorymenu.c:747
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:734
+#: ../plugins/directorymenu/directorymenu.c:845
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:808
+#: ../plugins/directorymenu/directorymenu.c:928
+msgid "Create New Folder"
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu.c:933
+msgid "Create New Text Document"
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu.c:940
+msgid "C_reate"
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu.c:941
+msgid "Create & _Open"
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu.c:955
+msgid "Enter the new name:"
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu.c:991
+#, c-format
+msgid "Failed to create folder: %s"
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu.c:1076
 msgid "Open Folder"
 msgstr "సంచయమును తెరువు"
 
-#: ../plugins/directorymenu/directorymenu.c:823
+#: ../plugins/directorymenu/directorymenu.c:1093
 msgid "Open in Terminal"
 msgstr "టెర్మినల్‌లో తెరువు"
+
+#: ../plugins/directorymenu/directorymenu.c:1110
+msgid "Create Folder..."
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu.c:1127
+msgid "Create Text Document..."
+msgstr ""
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
@@ -1444,143 +1496,175 @@ msgid "_Base Directory:"
 msgstr ""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
+msgid "Show 'New Text _Document'"
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+msgid "Show '_New Folder'"
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
+msgid "Show 'Open in _Terminal'"
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
+msgid "Show '_Open _Folder'"
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
+msgid "Menu"
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:13
 msgid "Show _hidden files"
 msgstr "దాగివున్న ఫైళ్ళను చూపించు (_h)"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:14
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:15
 msgid "_File Pattern:"
 msgstr "దస్త్ర సరళి (_F):"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:16
 #: ../plugins/tasklist/tasklist-dialog.glade.h:29
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
 msgid "Filtering"
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:392
+#: ../plugins/launcher/launcher.c:409
 msgid "Open launcher menu"
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:1599
+#: ../plugins/launcher/launcher.c:1647
 msgid "Unnamed Item"
 msgstr "పేరులేని అంశం"
 
-#: ../plugins/launcher/launcher.c:1780
+#: ../plugins/launcher/launcher.c:1835
 msgid "No items"
 msgstr "ఏ అంశాలు లేవు"
 
-#: ../plugins/launcher/launcher-dialog.c:796
+#: ../plugins/launcher/launcher-dialog.c:792
 msgid "Failed to open desktop item editor"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:855
+#: ../plugins/launcher/launcher-dialog.c:860
 msgid "If you delete an item, it will be permanently removed"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:856
+#: ../plugins/launcher/launcher-dialog.c:861
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:857
+#: ../plugins/launcher/launcher-dialog.c:862
 msgid "Unnamed item"
 msgstr "పేరుపెట్టని అంశం"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:2
-msgid "Add one or more existing items to the launcher"
-msgstr ""
-
-#: ../plugins/launcher/launcher-dialog.glade.h:4
+#: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Default"
 msgstr "అప్రమేయం"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:5
+#: ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "North"
 msgstr "ఉత్తరం"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:6
+#: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "West"
 msgstr "పశ్చిమం"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:7
+#: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "East"
 msgstr "తూర్పు"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:8
+#: ../plugins/launcher/launcher-dialog.glade.h:5
 msgid "South"
 msgstr "దక్షిణం"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:9
+#: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "Inside Button"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.glade.h:10
+#: ../plugins/launcher/launcher-dialog.glade.h:7
+msgid "Up"
+msgstr "పైన"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:8
+msgid "Down"
+msgstr "కింద"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "_Edit Item"
 msgstr "అంశాన్ని సవరించు (_E)"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:11
+#: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "D_elete Item"
 msgstr "అంశాన్ని తొలగించు (_e)"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:12
+#: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "Add Appli_cation"
 msgstr "అనువర్తనాన్ని జతచేయి (_c)"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:13
+#: ../plugins/launcher/launcher-dialog.glade.h:12
 msgid "New _Application"
 msgstr "కొత్త అనువర్తనము (_A)"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:14
+#: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "New _Link"
 msgstr "కొత్త లంకె (_L)"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
+msgid "Add one or more existing items to the launcher"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.glade.h:19
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
 msgstr "ప్రారంభకము"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:20
-msgid "Add a new empty item"
-msgstr ""
-
-#: ../plugins/launcher/launcher-dialog.glade.h:21
+#: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "Delete the currently selected item"
 msgstr "ప్రస్తుతము ఎంచుకోబడిన అంశాన్ని తొలగించు"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:24
+#: ../plugins/launcher/launcher-dialog.glade.h:25
+msgid "Add a new empty item"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.glade.h:26
+msgid "Add a new hyperlink"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "Disable t_ooltips"
 msgstr "సాధనచిట్కాలను అచేతనపరుచు (_o)"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:25
+#: ../plugins/launcher/launcher-dialog.glade.h:29
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.glade.h:26
+#: ../plugins/launcher/launcher-dialog.glade.h:30
 msgid "Show _label instead of icon"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.glade.h:27
+#: ../plugins/launcher/launcher-dialog.glade.h:31
 msgid "Show last _used item in panel"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.glade.h:28
+#: ../plugins/launcher/launcher-dialog.glade.h:32
 msgid "Select this option to move the clicked menu item to the panel."
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.glade.h:29
+#: ../plugins/launcher/launcher-dialog.glade.h:33
 msgid "_Arrow button position:"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.glade.h:30
+#: ../plugins/launcher/launcher-dialog.glade.h:34
 msgid "Advanced"
 msgstr "ఉన్నత"
 
@@ -1588,46 +1672,47 @@ msgstr "ఉన్నత"
 msgid "Program launcher with optional menu"
 msgstr ""
 
-#: ../plugins/pager/pager.c:449 ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager.c:541 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
 msgstr "కార్యక్షేత్రము అమరికలు...(_S)"
 
-#: ../plugins/pager/pager.c:537
+#: ../plugins/pager/pager.c:629
 msgid "Unable to open the workspace settings"
 msgstr ""
 
-#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:870
+#: ../plugins/pager/pager-buttons.c:590 ../plugins/windowmenu/windowmenu.c:873
 #, c-format
 msgid "Workspace %d"
 msgstr "కార్యక్షేత్రం %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:1
+msgid "Buttons"
+msgstr "బొత్తాలు"
+
+#: ../plugins/pager/pager-dialog.glade.h:2
+msgid "Miniature View"
+msgstr ""
+
+#: ../plugins/pager/pager-dialog.glade.h:3
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Workspace Switcher"
 msgstr "కార్యక్షేత్రాల మార్పకం"
 
-#: ../plugins/pager/pager-dialog.glade.h:2
+#: ../plugins/pager/pager-dialog.glade.h:7
 msgid "Number of _rows:"
 msgstr "అడ్డవరుసల సంఖ్య (_r):"
 
-#: ../plugins/pager/pager-dialog.glade.h:3
-msgid "Show mi_niature view"
-msgstr ""
-
-#: ../plugins/pager/pager-dialog.glade.h:4
-msgid ""
-"Show a miniature view of the workspace with rectangles for the visible "
-"windows"
-msgstr ""
-
-#: ../plugins/pager/pager-dialog.glade.h:7
-msgid "Switch workspaces using the mouse _wheel"
-msgstr ""
-
 #: ../plugins/pager/pager-dialog.glade.h:8
-#: ../plugins/tasklist/tasklist-dialog.glade.h:25
-msgid "Behaviour"
-msgstr "ప్రవర్తన"
+msgid "Show workspace number"
+msgstr ""
+
+#: ../plugins/pager/pager-dialog.glade.h:9
+msgid "Switch workspaces using the mouse wheel"
+msgstr ""
+
+#: ../plugins/pager/pager-dialog.glade.h:10
+msgid "<b>Appearance</b>"
+msgstr "<b>కనిపించువిధము</b>"
 
 #: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Switch between virtual desktops"
@@ -1653,15 +1738,15 @@ msgstr "విస్తరించు (_E)"
 msgid "Adds a separator or space between panel items"
 msgstr ""
 
-#: ../plugins/showdesktop/showdesktop.c:216
+#: ../plugins/showdesktop/showdesktop.c:242
 msgid "Restore the minimized windows"
 msgstr ""
 
-#: ../plugins/showdesktop/showdesktop.c:218
+#: ../plugins/showdesktop/showdesktop.c:244
 msgid "Minimize all open windows and show the desktop"
 msgstr ""
 
-#: ../plugins/showdesktop/showdesktop.c:221
+#: ../plugins/showdesktop/showdesktop.c:247
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "డెస్క్‍టాప్ చూపించు"
@@ -1670,61 +1755,142 @@ msgstr "డెస్క్‍టాప్ చూపించు"
 msgid "Hide all windows and show the desktop"
 msgstr ""
 
-#: ../plugins/systray/systray.c:458
+#: ../plugins/systray/sn-dialog.c:649
+msgid "Clear"
+msgstr "శుభ్రపరుచు"
+
+#: ../plugins/systray/sn-dialog.c:650
+msgid "Are you sure you want to clear the list of known items?"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:1
+msgid "Status Tray Items"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:2
+msgid "C_lear Known Items"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:3
+msgid "Resets the list of items and their visibility settings"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:4
+msgid "_Fixed icon size (pixels):"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:5
+msgid "Adjust size _automatically"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:6
+msgid "Icons"
+msgstr "ప్రతీక"
+
+#: ../plugins/systray/sn-dialog.glade.h:7
+msgid "Arrange _items in a single row"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:8
+msgid "If enabled, ensure that the items are laid out in a single row"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:9
+msgid "_Hide items by default"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:10
+msgid "When enabled, all new items will be marked as \"Hidden\""
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:11
+msgid "_Square items"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:12
+msgid "Item buttons will take a square when it's possible"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:13
+msgid "Behavior"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:14
+msgid "Item"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:15
+msgid "Hidden"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:16
+msgid "Move the selected item one row up"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:17
+msgid "Move the selected item one row down"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:18
+msgid "Known Items"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:19
+msgid "_Menu is primary action"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:20
+msgid "Left click will always display the menu for item"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:21
+msgid "_Request symbolic icons"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:22
+msgid "Load symbolic icons if available"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:23
+msgid "Features"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:24
+msgid "Status Notifiers"
+msgstr ""
+
+#: ../plugins/systray/sn-dialog.glade.h:25
+msgid "Systray Icons"
+msgstr ""
+
+#: ../plugins/systray/systray.c:146
 msgid "Unable to start the notification area"
 msgstr ""
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:980
+#: ../plugins/systray/systray.c:413
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr ""
 
-#: ../plugins/systray/systray.c:982
+#: ../plugins/systray/systray.c:415
 msgid "The notification area lost selection"
 msgstr ""
 
-#: ../plugins/systray/systray.c:1246
-msgid "Clear"
-msgstr "శుభ్రపరుచు"
-
-#: ../plugins/systray/systray.c:1247
-msgid "Are you sure you want to clear the list of known applications?"
-msgstr ""
-
-#: ../plugins/systray/systray-dialog.glade.h:1
-#: ../plugins/systray/systray.desktop.in.in.h:1
-msgid "Notification Area"
-msgstr "ప్రకటన ప్రాంతము"
-
-#: ../plugins/systray/systray-dialog.glade.h:4
-msgid "_Maximum icon size (px):"
-msgstr "గరిష్ట ప్రతీక పరిమాణం (px) (_M):"
-
-#: ../plugins/systray/systray-dialog.glade.h:5
-msgid "Sq_uare icons"
-msgstr ""
-
-#: ../plugins/systray/systray-dialog.glade.h:6
-msgid "Show _frame"
-msgstr "చట్రాన్ని చూపించు (_f)"
-
-#: ../plugins/systray/systray-dialog.glade.h:10
-msgid "C_lear Known Applications"
-msgstr "తెలిసిన అనువర్తనాలను శుభ్రపరుచు (_l)"
-
-#: ../plugins/systray/systray-dialog.glade.h:11
-msgid "Known Applications"
-msgstr "తెలిసిన అనువర్తనాలు"
-
-#: ../plugins/systray/systray-manager.c:403
+#: ../plugins/systray/systray-manager.c:432
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr ""
 
+#: ../plugins/systray/systray.desktop.in.in.h:1
+msgid "Status Tray Plugin"
+msgstr ""
+
 #: ../plugins/systray/systray.desktop.in.in.h:2
-msgid "Area where notification icons appear"
+msgid ""
+"Provides status notifier items (application indicators) and legacy systray "
+"items"
 msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
@@ -1804,35 +1970,52 @@ msgstr ""
 msgid "_Switch windows using the mouse wheel"
 msgstr ""
 
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+msgid "Behaviour"
+msgstr "ప్రవర్తన"
+
 #: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Show windows from _all workspaces or viewports"
 msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:27
-msgid "Show only _minimized windows"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:28
 msgid "Show windows from all mo_nitors"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3492
+#: ../plugins/tasklist/tasklist-dialog.glade.h:28
+msgid "Show only _minimized windows"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-widget.c:2992
+#, c-format
+msgid "Unable to start new instance of '%s'"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-widget.c:2996
+msgid "Error"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-widget.c:3040
+msgid "Launch New Instance..."
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-widget.c:3782
 msgid "Mi_nimize All"
 msgstr "అన్నిటినీ కనిష్టీకరించు (_n)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3500
+#: ../plugins/tasklist/tasklist-widget.c:3790
 msgid "Un_minimize All"
 msgstr "అన్నిటినీ కనిష్టీకరించవద్దు (_n)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3508
+#: ../plugins/tasklist/tasklist-widget.c:3798
 msgid "Ma_ximize All"
 msgstr "అన్నిటినీ గరిష్టీకరించు (_n)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3516
+#: ../plugins/tasklist/tasklist-widget.c:3806
 msgid "_Unmaximize All"
 msgstr "అన్నిటినీ గరిష్టీకరించవద్దు (_n)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3528
+#: ../plugins/tasklist/tasklist-widget.c:3818
 msgid "_Close All"
 msgstr "అన్నిటినీ మూసివేయి (_C)"
 
@@ -1840,28 +2023,28 @@ msgstr "అన్నిటినీ మూసివేయి (_C)"
 msgid "Switch between open windows using buttons"
 msgstr ""
 
-#: ../plugins/windowmenu/windowmenu.c:668
+#: ../plugins/windowmenu/windowmenu.c:670
 msgid "Desktop"
 msgstr "డెస్క్‍టాప్"
 
-#: ../plugins/windowmenu/windowmenu.c:1272
+#: ../plugins/windowmenu/windowmenu.c:1274
 msgid "No Windows"
 msgstr "ఏ కిటికీలు లేవు"
 
-#: ../plugins/windowmenu/windowmenu.c:1287
+#: ../plugins/windowmenu/windowmenu.c:1289
 msgid "Urgent Windows"
 msgstr "అత్యవసర కిటికీలు"
 
-#: ../plugins/windowmenu/windowmenu.c:1330
+#: ../plugins/windowmenu/windowmenu.c:1332
 msgid "Add Workspace"
 msgstr "కార్యక్షేత్రాన్ని జతచేయి"
 
-#: ../plugins/windowmenu/windowmenu.c:1353
+#: ../plugins/windowmenu/windowmenu.c:1355
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "\"%s\" కార్యక్షేత్రాన్ని తీసివేయి"
 
-#: ../plugins/windowmenu/windowmenu.c:1355
+#: ../plugins/windowmenu/windowmenu.c:1357
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "%d కార్యక్షేత్రాన్ని తీసివేయి"
@@ -1879,23 +2062,23 @@ msgstr "బాణం"
 msgid "Window Menu"
 msgstr "విండో మెనూ"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Button layout:"
 msgstr "బటన్ నమూనా:"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show workspace a_ctions"
 msgstr "కార్యక్షేత్రాల చర్యలను చూపించు (_c)"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Show workspace _names"
 msgstr "కార్యక్షేత్రాల పేర్లను చూపించు (_n)"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Enable _urgency notification"
 msgstr ""
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:11
 msgid "Show windows from _all workspaces"
 msgstr "అన్ని కార్యక్షేత్రాల నుండి విండోలను చూపించు (_a)"
 
