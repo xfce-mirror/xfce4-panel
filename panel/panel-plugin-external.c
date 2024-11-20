@@ -79,6 +79,9 @@ panel_plugin_external_get_name (XfcePanelPluginProvider *provider);
 static gint
 panel_plugin_external_get_unique_id (XfcePanelPluginProvider *provider);
 static void
+panel_plugin_external_hidden_event (XfcePanelPluginProvider *provider,
+                                    gboolean hidden);
+static void
 panel_plugin_external_set_size (XfcePanelPluginProvider *provider,
                                 gint size);
 static void
@@ -229,6 +232,7 @@ panel_plugin_external_provider_init (XfcePanelPluginProviderInterface *iface)
 {
   iface->get_name = panel_plugin_external_get_name;
   iface->get_unique_id = panel_plugin_external_get_unique_id;
+  iface->hidden_event = panel_plugin_external_hidden_event;
   iface->set_size = panel_plugin_external_set_size;
   iface->set_icon_size = panel_plugin_external_set_icon_size;
   iface->set_dark_mode = panel_plugin_external_set_dark_mode;
@@ -822,6 +826,26 @@ panel_plugin_external_get_unique_id (XfcePanelPluginProvider *provider)
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), -1);
 
   return get_instance_private (provider)->unique_id;
+}
+
+
+
+static void
+panel_plugin_external_hidden_event (XfcePanelPluginProvider *provider,
+                                    gboolean hidden)
+{
+  GValue value = G_VALUE_INIT;
+
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  g_value_init (&value, G_TYPE_BOOLEAN);
+  g_value_set_boolean (&value, hidden);
+
+  panel_plugin_external_queue_add (PANEL_PLUGIN_EXTERNAL (provider),
+                                   PROVIDER_PROP_TYPE_EVENT_HIDDEN, &value);
+
+  g_value_unset (&value);
 }
 
 
