@@ -3315,6 +3315,7 @@ panel_window_autohide_queue (PanelWindow *window,
     {
       /* queue a resize to make sure the panel is visible */
       gtk_widget_queue_resize (GTK_WIDGET (window));
+      panel_window_plugins_update (window, PLUGIN_PROP_HIDDEN_EVENT);
     }
   else
     {
