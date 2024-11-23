@@ -224,6 +224,9 @@ static void
 panel_window_plugins_update (PanelWindow *window,
                              PluginProp prop);
 static void
+panel_window_plugin_emit_hidden_event (GtkWidget *widget,
+                                       gpointer user_data);
+static void
 panel_window_plugin_set_mode (GtkWidget *widget,
                               gpointer user_data);
 static void
@@ -267,6 +270,7 @@ enum
 
 enum _PluginProp
 {
+  PLUGIN_PROP_HIDDEN_EVENT,
   PLUGIN_PROP_MODE,
   PLUGIN_PROP_SCREEN_POSITION,
   PLUGIN_PROP_NROWS,
@@ -3150,15 +3154,22 @@ panel_window_autohide_timeout (gpointer user_data)
   /* update the status */
   if (window->autohide_state == AUTOHIDE_POPDOWN
       || window->autohide_state == AUTOHIDE_POPDOWN_SLOW)
-    window->autohide_state = AUTOHIDE_HIDDEN;
+    {
+      window->autohide_state = AUTOHIDE_HIDDEN;
+      panel_window_plugins_update (window, PLUGIN_PROP_HIDDEN_EVENT);
+    }
   else if (window->autohide_state == AUTOHIDE_POPUP)
-    window->autohide_state = AUTOHIDE_VISIBLE;
+    {
+      window->autohide_state = AUTOHIDE_VISIBLE;
+      panel_window_plugins_update (window, PLUGIN_PROP_HIDDEN_EVENT);
+    }
 
   /* needs a recheck when timeout is over on Wayland, see panel_window_pointer_is_outside() */
   if (gtk_layer_is_supported () && window->autohide_state == AUTOHIDE_HIDDEN
       && !panel_window_pointer_is_outside (window))
     {
       window->autohide_state = AUTOHIDE_VISIBLE;
+      panel_window_plugins_update (window, PLUGIN_PROP_HIDDEN_EVENT);
       return FALSE;
     }
 
@@ -3822,6 +3833,10 @@ panel_window_plugins_update (PanelWindow *window,
 
   switch (prop)
     {
+    case PLUGIN_PROP_HIDDEN_EVENT:
+      func = panel_window_plugin_emit_hidden_event;
+      break;
+
     case PLUGIN_PROP_MODE:
       func = panel_window_plugin_set_mode;
       break;
@@ -3857,6 +3872,19 @@ panel_window_plugins_update (PanelWindow *window,
       panel_return_if_fail (GTK_IS_CONTAINER (itembar));
       gtk_container_foreach (GTK_CONTAINER (itembar), func, window);
     }
+}
+
+
+
+static void
+panel_window_plugin_emit_hidden_event (GtkWidget *widget,
+                                       gpointer user_data)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (widget));
+  panel_return_if_fail (PANEL_IS_WINDOW (user_data));
+
+  xfce_panel_plugin_provider_emit_hidden_event (XFCE_PANEL_PLUGIN_PROVIDER (widget),
+                                                PANEL_WINDOW (user_data)->autohide_state == AUTOHIDE_HIDDEN);
 }
 
 
