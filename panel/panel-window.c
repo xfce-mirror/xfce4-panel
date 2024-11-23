@@ -3154,15 +3154,15 @@ panel_window_autohide_timeout (gpointer user_data)
   /* update the status */
   if (window->autohide_state == AUTOHIDE_POPDOWN
       || window->autohide_state == AUTOHIDE_POPDOWN_SLOW)
-  {
-    window->autohide_state = AUTOHIDE_HIDDEN;
-    panel_window_plugins_update (window, PLUGIN_PROP_HIDDEN_EVENT);
-  }
+    {
+      window->autohide_state = AUTOHIDE_HIDDEN;
+      panel_window_plugins_update (window, PLUGIN_PROP_HIDDEN_EVENT);
+    }
   else if (window->autohide_state == AUTOHIDE_POPUP)
-  {
-    window->autohide_state = AUTOHIDE_VISIBLE;
-    panel_window_plugins_update (window, PLUGIN_PROP_HIDDEN_EVENT);
-  }
+    {
+      window->autohide_state = AUTOHIDE_VISIBLE;
+      panel_window_plugins_update (window, PLUGIN_PROP_HIDDEN_EVENT);
+    }
 
   /* needs a recheck when timeout is over on Wayland, see panel_window_pointer_is_outside() */
   if (gtk_layer_is_supported () && window->autohide_state == AUTOHIDE_HIDDEN
