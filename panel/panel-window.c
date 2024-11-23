@@ -406,6 +406,7 @@ struct _PanelWindow
   guint autohide_size;
   guint popdown_speed;
   gint popdown_progress;
+  gboolean last_hidden_event_value;
 
   /* popup/down delay from gtk style */
   guint popup_delay;
@@ -668,6 +669,9 @@ panel_window_init (PanelWindow *window)
   window->opacity_timeout_id = 0;
   window->autohide_block = 0;
   window->autohide_size = DEFAULT_AUTOHIDE_SIZE;
+
+  /* start at true to be sure we send the first non-hidden event */
+  window->last_hidden_event_value = TRUE;
   window->popup_delay = DEFAULT_POPUP_DELAY;
   window->popdown_delay = DEFAULT_POPDOWN_DELAY;
   window->popdown_speed = DEFAULT_POPDOWN_SPEED;
@@ -3315,6 +3319,7 @@ panel_window_autohide_queue (PanelWindow *window,
     {
       /* queue a resize to make sure the panel is visible */
       gtk_widget_queue_resize (GTK_WIDGET (window));
+      panel_window_plugins_update (window, PLUGIN_PROP_HIDDEN_EVENT);
     }
   else
     {
@@ -3834,6 +3839,13 @@ panel_window_plugins_update (PanelWindow *window,
   switch (prop)
     {
     case PLUGIN_PROP_HIDDEN_EVENT:
+      gboolean event_value = window->autohide_state == AUTOHIDE_HIDDEN;
+
+      /* don't send the same event twice */
+      if (window->last_hidden_event_value == event_value)
+        return;
+
+      window->last_hidden_event_value = event_value;
       func = panel_window_plugin_emit_hidden_event;
       break;
 
