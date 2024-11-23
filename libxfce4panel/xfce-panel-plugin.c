@@ -323,13 +323,13 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                                             G_TYPE_NONE, 0);
 
   /**
-   * XfcePanelPlugin::hidden
+   * XfcePanelPlugin::hidden-event
    * @plugin : an #XfcePanelPlugin.
    *
    * This signal is emmitted when the panel the @plugin is on
    * is transitionning between hidden/visble.
    *
-   * Since: 4.22
+   * Since: 4.21.0
    **/
   plugin_signals[HIDDEN_EVENT] = g_signal_new (g_intern_static_string ("hidden-event"),
                                                G_TYPE_FROM_CLASS (klass),
