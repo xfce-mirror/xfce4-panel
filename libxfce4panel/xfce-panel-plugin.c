@@ -211,6 +211,7 @@ struct _XfcePanelPluginPrivate
   gint size; /* single row size */
   gint icon_size;
   gboolean dark_mode;
+  gboolean hidden;
   guint expand : 1;
   guint shrink : 1;
   guint nrows;
@@ -751,6 +752,7 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
   plugin->priv->size = 0;
   plugin->priv->icon_size = 0;
   plugin->priv->dark_mode = FALSE;
+  plugin->priv->hidden = FALSE;
   plugin->priv->small = FALSE;
   plugin->priv->expand = FALSE;
   plugin->priv->shrink = FALSE;
@@ -1500,8 +1502,14 @@ xfce_panel_plugin_hidden_event (XfcePanelPluginProvider *provider,
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
-  g_signal_emit (G_OBJECT (plugin),
-                 plugin_signals[HIDDEN_EVENT], 0, hidden);
+  /* check if update is required */
+  if (G_LIKELY (plugin->priv->hidden != hidden))
+    {
+      plugin->priv->hidden = hidden;
+
+      g_signal_emit (G_OBJECT (plugin),
+                     plugin_signals[HIDDEN_EVENT], 0, hidden);
+    }
 }
 
 
