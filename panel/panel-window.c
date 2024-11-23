@@ -3833,13 +3833,14 @@ panel_window_plugins_update (PanelWindow *window,
 {
   GtkWidget *itembar;
   GtkCallback func;
+  gboolean event_value;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
 
   switch (prop)
     {
     case PLUGIN_PROP_HIDDEN_EVENT:
-      gboolean event_value = window->autohide_state == AUTOHIDE_HIDDEN;
+      event_value = window->autohide_state == AUTOHIDE_HIDDEN;
 
       /* don't send the same event twice */
       if (window->last_hidden_event_value == event_value)
