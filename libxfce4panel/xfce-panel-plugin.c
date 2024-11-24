@@ -136,6 +136,9 @@ static void
 xfce_panel_plugin_show_about (XfcePanelPluginProvider *provider);
 static void
 xfce_panel_plugin_removed (XfcePanelPluginProvider *provider);
+static void
+xfce_panel_plugin_hidden_event (XfcePanelPluginProvider *provider,
+                                gboolean hidden);
 static gboolean
 xfce_panel_plugin_remote_event (XfcePanelPluginProvider *provider,
                                 const gchar *name,
@@ -175,6 +178,7 @@ enum
   ABOUT,
   CONFIGURE_PLUGIN,
   FREE_DATA,
+  HIDDEN_EVENT,
   ORIENTATION_CHANGED,
   REMOTE_EVENT,
   REMOVED,
@@ -207,6 +211,7 @@ struct _XfcePanelPluginPrivate
   gint size; /* single row size */
   gint icon_size;
   gboolean dark_mode;
+  gboolean hidden;
   guint expand : 1;
   guint shrink : 1;
   guint nrows;
@@ -317,6 +322,23 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                                             NULL, NULL,
                                             g_cclosure_marshal_VOID__VOID,
                                             G_TYPE_NONE, 0);
+
+  /**
+   * XfcePanelPlugin::hidden-event
+   * @plugin : an #XfcePanelPlugin.
+   *
+   * This signal is emmitted when the panel the @plugin is on
+   * is transitionning between hidden/visble.
+   *
+   * Since: 4.21.0
+   **/
+  plugin_signals[HIDDEN_EVENT] = g_signal_new (g_intern_static_string ("hidden-event"),
+                                               G_TYPE_FROM_CLASS (klass),
+                                               G_SIGNAL_RUN_LAST,
+                                               G_STRUCT_OFFSET (XfcePanelPluginClass, hidden_event),
+                                               NULL, NULL,
+                                               g_cclosure_marshal_VOID__BOOLEAN,
+                                               G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
 
   /**
    * XfcePanelPlugin::orientation-changed
@@ -730,6 +752,7 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
   plugin->priv->size = 0;
   plugin->priv->icon_size = 0;
   plugin->priv->dark_mode = FALSE;
+  plugin->priv->hidden = FALSE;
   plugin->priv->small = FALSE;
   plugin->priv->expand = FALSE;
   plugin->priv->shrink = FALSE;
@@ -764,6 +787,7 @@ xfce_panel_plugin_provider_init (XfcePanelPluginProviderInterface *iface)
 {
   iface->get_name = (ProviderToPluginChar) xfce_panel_plugin_get_name;
   iface->get_unique_id = (ProviderToPluginInt) xfce_panel_plugin_get_unique_id;
+  iface->hidden_event = xfce_panel_plugin_hidden_event;
   iface->set_size = xfce_panel_plugin_set_size;
   iface->set_icon_size = xfce_panel_plugin_set_icon_size;
   iface->set_dark_mode = xfce_panel_plugin_set_dark_mode;
@@ -1466,6 +1490,25 @@ xfce_panel_plugin_set_dark_mode (XfcePanelPluginProvider *provider,
                     "gtk-application-prefer-dark-theme",
                     dark_mode,
                     NULL);
+    }
+}
+
+
+static void
+xfce_panel_plugin_hidden_event (XfcePanelPluginProvider *provider,
+                                gboolean hidden)
+{
+  XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
+
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
+
+  /* check if update is required */
+  if (G_LIKELY (plugin->priv->hidden != hidden))
+    {
+      plugin->priv->hidden = hidden;
+
+      g_signal_emit (G_OBJECT (plugin),
+                     plugin_signals[HIDDEN_EVENT], 0, hidden);
     }
 }
 
