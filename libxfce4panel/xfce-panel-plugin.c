@@ -328,7 +328,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    * @plugin : an #XfcePanelPlugin.
    *
    * This signal is emmitted when the panel the @plugin is on
-   * is transitionning between hidden/visble.
+   * is transitioning between hidden/visble.
    *
    * Since: 4.21.0
    **/
