@@ -95,7 +95,7 @@ msgstr "_Przemieść"
 #: panel/panel-preferences-dialog.glade:1240
 #: plugins/launcher/launcher-dialog.c:841
 msgid "_Remove"
-msgstr "_Usuń"
+msgstr "U_suń"
 
 #: libxfce4panel/xfce-panel-plugin.c:1271
 msgid "Pane_l"
@@ -155,7 +155,7 @@ msgstr "Zapisuje konfigurację panelu"
 
 #: panel/main.c:69
 msgid "Add a new plugin to the panel"
-msgstr "Dodaj nową wtyczkę do panelu"
+msgstr "Dodaje nową wtyczkę do panelu"
 
 #: panel/main.c:69
 msgid "PLUGIN-NAME"
@@ -171,7 +171,7 @@ msgstr "Kończy działanie bieżącego wystąpienia programu"
 
 #: panel/main.c:72
 msgid "Do not wait for a window manager on startup"
-msgstr "Nie czekaj na menedżer okien podczas uruchamiania"
+msgstr "Brak oczekiwania na menedżer okien podczas uruchamiania"
 
 #: panel/main.c:73 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
@@ -234,7 +234,7 @@ msgstr "Nie udało się zakończyć działania panelu"
 
 #: panel/main.c:434
 msgid "Failed to send D-Bus message"
-msgstr "Nie udało się wysłać wiadomości systemu D-Bus"
+msgstr "Nie udało się wysłać komunikatu systemu D-Bus"
 
 #: panel/main.c:442 panel/main.c:462
 #, c-format
@@ -245,7 +245,7 @@ msgstr "Nie odnaleziono uruchomionego wystąpienia %s"
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "Uruchomić panel? Proszę zapisać sesję przed wylogowaniem, aby panel został uruchomiony podczas następnego logowania."
+msgstr "Uruchomić panel? Zapisz sesję przed wylogowaniem, aby panel został uruchomiony podczas następnego logowania."
 
 #: panel/main.c:448
 msgid "Execute"
@@ -270,7 +270,7 @@ msgid ""
 "doing, you can remove it permanently, otherwise you'd better quit and make a"
 " backup of the current configuration using %s, before checking your "
 "installation and trying to start xfce4-panel again."
-msgstr "Ta wtyczka znajduje się w bieżącej konfiguracji xfce4-panel, ale nie można jej załadować, prawdopodobnie z powodu problemów z instalacją. Jeśli wiesz, co robisz, możesz usunąć ją na stałe, w przeciwnym razie lepiej zakończ program i wykonaj kopię zapasową bieżącej konfiguracji za pomocą %s, zanim sprawdzisz instalację i spróbujesz ponownie uruchomić xfce4-panel."
+msgstr "Ta wtyczka znajduje się w bieżącej konfiguracji xfce4-panel, ale nie można jej załadować, prawdopodobnie z powodu problemów z instalacją. Jeśli wiesz, co robisz, możesz usunąć ją na stałe, w przeciwnym razie lepiej zakończ program i wykonaj kopię zapasową bieżącej konfiguracji za pomocą %s, zanim spraw dzisz instalację ispróbujesz ponownie uruchomić xfce4-panel."
 
 #: panel/panel-application.c:356
 msgid "Plugin loading failure"
@@ -284,7 +284,7 @@ msgstr "Za_kończ"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Spowoduje to utworzenie nowej wtyczki aktywatora na panelu i wstawienie upuszczonych plików jako elementów menu."
+msgstr "Spowoduje to utworzenie nowej wtyczki aktywatora na panelu i wstawienie upuszczonych plików jako elementów menu."
 
 #: panel/panel-application.c:1040
 msgid "Create _Launcher"
@@ -328,7 +328,7 @@ msgstr "Użyto nieprawidłowej składni zdarzenia wtyczki. Użyj wyrażenia NAZW
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "Nieprawidłowy typ podpowiedzi „%s”. Prawidłowe typy to bool, double, int, string i uint."
+msgstr "Nieprawidłowy typ podpowiedzi „%s”. Prawidłowe typy to bool, double, int, string i uint."
 
 #: panel/panel-dialogs.c:53
 msgid "Unable to open the e-mail address"
@@ -417,7 +417,7 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "W ciągu ostatnich %d sekund podjęto kilkukrotną próbę ponownego uruchomienia wtyczki. Ponowić próbę ponownego uruchomienia wtyczki czy usunąć ją z panelu?"
+msgstr "W ciągu ostatnich %d sekund podjęto kilkukrotną próbę ponownego uruchomienia wtyczki. Ponowić próbę ponownego uruchomienia wtyczki czy usunąć ją z panelu?"
 
 #: panel/panel-plugin-external.c:419
 msgid "Plugin Restart"
@@ -443,7 +443,7 @@ msgstr "Monitor %d"
 
 #: panel/panel-preferences-dialog.c:1082
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "Konfiguracje panelu i wtyczek zostaną trwale usunięte"
+msgstr "Konfiguracje panelu i wtyczek zostaną trwale usunięte"
 
 #: panel/panel-preferences-dialog.c:1091
 #, c-format
@@ -680,7 +680,7 @@ msgstr "Konfiguruj..."
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>Obsługa kompozycji jest obecnie wyłączona</b>\nProszę włączyć obsługę kompozycji menedżera okien, aby uzyskać dostęp do ustawień nieprzezroczystości panelu."
+msgstr "<b>Obsługa kompozycji jest obecnie wyłączona</b>\nWłącz obsługę kompozycji menedżera okien, aby uzyskać dostęp do ustawień nieprzezroczystości panelu."
 
 #. I18N: label for the enter transparency slider
 #: panel/panel-preferences-dialog.glade:1106
@@ -696,7 +696,7 @@ msgstr "_Nieaktywny:"
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "Określa stopień przezroczystości panelu, kiedy kursor myszy znajduje się poza panelem. Całkowita przezroczystość dla wartości 0 i brak przezroczystości dla wartości 100."
+msgstr "Określa stopień przezroczystości panelu, kiedy kursor myszy znajduje się poza panelem. Całkowita przezroczystość dla wartości 0 i brak przezroczystości dla wartości 100."
 
 #: panel/panel-preferences-dialog.glade:1173
 msgid "Appeara_nce"
@@ -909,7 +909,7 @@ msgstr "_Uśpij hybrydowo"
 
 #: plugins/actions/actions.c:206
 msgid "Do you want to hibernate and suspend the system?"
-msgstr "Zahibernować i wstrzymać działanie komputera?"
+msgstr "Zahibernować i wstrzymać działanie komputera?"
 
 #: plugins/actions/actions.c:207
 #, c-format
@@ -1024,7 +1024,7 @@ msgstr "Uproszczone _nazwy programów"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Wyświetla w menu ogólne nazwy programów, np. „Przeglądarka plików” zamiast „Thunar”"
+msgstr "Wyświetla w menu ogólne nazwy programów, np. „Przeglądarka plików” zamiast „Thunar”"
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:229
 #: plugins/clock/clock-dialog.glade:405
@@ -1189,7 +1189,7 @@ msgstr "Zegar"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Określa nazwę strefy czasowej pochodzącej z systemowej bazy danych, np. „Europe/Warsaw”. Proszę pozostawić puste pole, aby użyć lokalnej strefy czasowej."
+msgstr "Określa nazwę strefy czasowej pochodzącej z systemowej bazy danych, np. „Europe/Warsaw”. Pozostaw puste pole, aby użyć lokalnej strefy czasowej."
 
 #: plugins/clock/clock-dialog.glade:183
 msgid "Time_zone:"
@@ -1197,11 +1197,11 @@ msgstr "_Strefa czasowa:"
 
 #: plugins/clock/clock-dialog.glade:194
 msgid "Time and Date _Settings..."
-msgstr "_Ustawienia godziny i daty..."
+msgstr "_Ustawienia czasu i daty..."
 
 #: plugins/clock/clock-dialog.glade:214
 msgid "Time Settings"
-msgstr "Ustawienia godziny"
+msgstr "Ustawienia czasu"
 
 #: plugins/clock/clock-dialog.glade:250
 msgid ""
@@ -1228,7 +1228,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "Określa formatowanie wskazań daty i godziny. Np. ciąg %Y zostanie zastąpiony przez bieżący rok, %m przez miesiąc, a %d przez dzień. Podobnie znaczniki <b></b> sprawią, że wyświetlany tekst zostanie wytłuszczony. Więcej informacji można znaleźć w dokumentacji programu."
+msgstr "Określa formatowanie wskazań daty i godziny. Na przykład ciąg %Y zostanie zastąpiony przez bieżący rok, %m przez miesiąc, a %d przez dzień. Podobnie znaczniki <b></b> sprawią, że wyświetlany tekst zostanie wytłuszczony. Więcej informacji można znaleźć w dokumentacji programu."
 
 #: plugins/clock/clock-dialog.glade:358
 msgid "_Tooltip format:"
@@ -1286,7 +1286,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
 "the &quot;Help&quot; page for additional information."
-msgstr "Format opisuje części daty i godziny, które należy wstawić do panelu. Na przykład %Y zostanie zastąpiony rokiem, %m miesiącem, a %d dniem. Analogicznie znaczniki &lt;b&gt;&lt;/b&gt; sprawią, że tekst zostanie pogrubiony. Zobacz „Pomoc”, aby uzyskać dodatkowe informacje."
+msgstr "Format opisuje części daty i godziny, które należy wstawić do panelu. Na przykład %Y zostanie zastąpiony rokiem, %m miesiącem, a %d dniem. Analogicznie znaczniki &lt;b&gt;&lt;/b&gt; sprawią, że tekst zostanie pogrubiony. Zobacz „Pomoc”, aby uzyskać dodatkowe informacje."
 
 #: plugins/clock/clock-dialog.glade:699
 msgid "Date"
@@ -1664,7 +1664,7 @@ msgstr "Utwórz i _otwórz"
 
 #: plugins/directorymenu/directorymenu.c:951
 msgid "Enter the new name:"
-msgstr "Wprowadź nazwę:"
+msgstr "Wprowadź nową nazwę:"
 
 #: plugins/directorymenu/directorymenu.c:987
 #, c-format
@@ -1952,7 +1952,7 @@ msgstr "Przywraca zminimalizowane okna"
 
 #: plugins/showdesktop/showdesktop.c:323
 msgid "Minimize all open windows and show the desktop"
-msgstr "Minimalizuje wszystkie otwarte okna i wyświetla pulpit"
+msgstr "Minimalizuje wszystkie otwarte okna i wyświetla pulpit"
 
 #: plugins/showdesktop/showdesktop.c:326
 #: plugins/showdesktop/showdesktop-dialog.glade:18
@@ -1971,7 +1971,7 @@ msgstr "Zachowanie"
 
 #: plugins/showdesktop/showdesktop.desktop.in.in:5
 msgid "Hide all windows and show the desktop"
-msgstr "Minimalizuje wszystkie okna i wyświetla pulpit"
+msgstr "Minimalizuje wszystkie okna i wyświetla pulpit"
 
 #: plugins/systray/sn-dialog.c:416
 msgid "Clear"
@@ -1991,7 +1991,7 @@ msgstr "Wy_czyść znane elementy"
 
 #: plugins/systray/sn-dialog.glade:84
 msgid "Resets the list of items and their visibility settings"
-msgstr "Resetuje listę elementów i ich ustawienia widoczności"
+msgstr "Resetuje listę elementów i ich ustawienia widoczności"
 
 #: plugins/systray/sn-dialog.glade:144
 msgid "_Fixed icon size (pixels):"
@@ -2011,7 +2011,7 @@ msgstr "Ułóż _elementy w jednym rzędzie"
 
 #: plugins/systray/sn-dialog.glade:250
 msgid "If enabled, ensure that the items are laid out in a single row"
-msgstr "Jeśli włączone, upewnia się, że elementy są ułożone w jednym rzędzie"
+msgstr "Jeśli włączone, upewnia się, że elementy są ułożone w jednym rzędzie"
 
 #: plugins/systray/sn-dialog.glade:262
 msgid "_Hide items by default"
@@ -2039,11 +2039,11 @@ msgstr "Ukryty"
 
 #: plugins/systray/sn-dialog.glade:426 plugins/systray/sn-dialog.glade:658
 msgid "Move the selected item one row up"
-msgstr "Przemieszcza wybrany element o jeden wiersz w górę"
+msgstr "Przemieszcza wybrany element o jeden wiersz w górę"
 
 #: plugins/systray/sn-dialog.glade:446 plugins/systray/sn-dialog.glade:678
 msgid "Move the selected item one row down"
-msgstr "Przemieszcza wybrany element o jeden wiersz w dół"
+msgstr "Przemieszcza wybrany element o jeden wiersz w dół"
 
 #: plugins/systray/sn-dialog.glade:479 plugins/systray/sn-dialog.glade:711
 msgid "Known Items"
@@ -2105,7 +2105,7 @@ msgstr "Wtyczka zasobnika stanu"
 msgid ""
 "Provides status notifier items (application indicators) and legacy systray "
 "items"
-msgstr "Zapewnia elementy powiadamiające o stanie (wskaźniki programów) i starsze elementy zasobnika systemowego"
+msgstr "Zapewnia elementy powiadamiające o stanie (wskaźniki programów) i starsze elementy zasobnika systemowego"
 
 #: plugins/tasklist/tasklist-dialog.glade:23
 msgid "Nothing"
@@ -2129,7 +2129,7 @@ msgstr "Według znacznika czasu"
 
 #: plugins/tasklist/tasklist-dialog.glade:46
 msgid "Group title and timestamp"
-msgstr "Według nazwy grupy i znacznika czasu"
+msgstr "Według nazwy grupy i znacznika czasu"
 
 #: plugins/tasklist/tasklist-dialog.glade:49
 msgid "Window title"
@@ -2137,11 +2137,11 @@ msgstr "Według nazwy okna"
 
 #: plugins/tasklist/tasklist-dialog.glade:52
 msgid "Group title and window title"
-msgstr "Według nazwy grupy i okna"
+msgstr "Według nazwy grupy i okna"
 
 #: plugins/tasklist/tasklist-dialog.glade:55
 msgid "None, allow drag-and-drop"
-msgstr "Żaden, pozwalaj na przeciągnij i upuść"
+msgstr "Żaden, pozwalaj na przeciąganie i upuszczanie"
 
 #: plugins/tasklist/tasklist-dialog.glade:61
 #: plugins/tasklist/tasklist.desktop.in.in:4
