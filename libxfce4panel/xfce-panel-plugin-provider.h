@@ -45,6 +45,8 @@ struct _XfcePanelPluginProviderInterface
   /*<public >*/
   const gchar *(*get_name) (XfcePanelPluginProvider *provider);
   gint (*get_unique_id) (XfcePanelPluginProvider *provider);
+  void (*hidden_event) (XfcePanelPluginProvider *provider,
+                        gboolean hidden);
   void (*set_size) (XfcePanelPluginProvider *provider,
                     gint size);
   void (*set_icon_size) (XfcePanelPluginProvider *provider,
@@ -115,6 +117,7 @@ typedef enum /*< skip >*/
   PROVIDER_PROP_TYPE_ACTION_SHOW_CONFIGURE, /* none */
   PROVIDER_PROP_TYPE_ACTION_SHOW_ABOUT, /* none */
   PROVIDER_PROP_TYPE_ACTION_ASK_REMOVE, /* none */
+  PROVIDER_PROP_TYPE_EVENT_HIDDEN, /* gboolean */
 
   /* WrapperPlug, using the same enum and D-Bus signal for simplicity */
   PROVIDER_PROP_TYPE_SET_OPACITY, /* gdouble */
@@ -159,6 +162,10 @@ xfce_panel_plugin_provider_get_name (XfcePanelPluginProvider *provider);
 
 gint
 xfce_panel_plugin_provider_get_unique_id (XfcePanelPluginProvider *provider);
+
+void
+xfce_panel_plugin_provider_emit_hidden_event (XfcePanelPluginProvider *provider,
+                                              gboolean hidden);
 
 void
 xfce_panel_plugin_provider_set_size (XfcePanelPluginProvider *provider,

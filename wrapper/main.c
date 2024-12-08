@@ -172,6 +172,10 @@ wrapper_gproxy_set (GDBusProxy *proxy,
           xfce_panel_plugin_provider_ask_remove (provider);
           break;
 
+        case PROVIDER_PROP_TYPE_EVENT_HIDDEN:
+          xfce_panel_plugin_provider_emit_hidden_event (provider, g_variant_get_boolean (variant));
+          break;
+
         default:
           g_critical ("Received unknown plugin property %u for %s-%d",
                       type, xfce_panel_plugin_provider_get_name (provider),
