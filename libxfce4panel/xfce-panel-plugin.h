@@ -147,7 +147,6 @@ struct _XfcePanelPluginClass
 
   /*< private >*/
   void (*reserved1) (void);
-  void (*reserved2) (void);
 };
 
 
