@@ -5,16 +5,17 @@
 # 
 # Translators:
 # Xfce Bot <transifex@xfce.org>, 2022
+# Cas Pascal <casboi86@gmail.com>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-14 00:47+0100\n"
+"POT-Creation-Date: 2023-05-30 00:48+0200\n"
 "PO-Revision-Date: 2022-12-22 11:35+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>, 2022\n"
-"Language-Team: Vietnamese (https://www.transifex.com/xfce/teams/16840/vi/)\n"
+"Last-Translator: Cas Pascal <casboi86@gmail.com>, 2024\n"
+"Language-Team: Vietnamese (https://app.transifex.com/xfce/teams/16840/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -62,6 +63,8 @@ msgstr ""
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr ""
+"Việc gỡ bỏ một mục khỏi thanh tác vụ sẽ đồng thời xoá các cài đặt hiện có "
+"của mục đấy."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1088 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1422
@@ -85,7 +88,7 @@ msgstr "_Gỡ bỏ "
 #. properties item
 #: ../libxfce4panel/xfce-panel-plugin.c:1218
 msgid "_Properties"
-msgstr ""
+msgstr "Thuộc tính"
 
 #. about item
 #: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3041
@@ -206,7 +209,7 @@ msgstr "Hãy gởi báo lỗi đến <%s>."
 #. quit without error if an instance is running
 #: ../panel/main.c:398
 msgid "There is already a running instance"
-msgstr ""
+msgstr "Đã có một thanh tác vụ đang chạy rồi"
 
 #. spawn ourselfs again
 #: ../panel/main.c:406
@@ -243,7 +246,7 @@ msgstr "Gửi tin nhắn D-Bus thất bại"
 
 #: ../panel/main.c:443
 msgid "Execute"
-msgstr ""
+msgstr "Thực thi"
 
 #: ../panel/main.c:444
 msgid ""
@@ -256,11 +259,11 @@ msgstr ""
 #: ../panel/main.c:447 ../panel/main.c:461
 #, c-format
 msgid "No running instance of %s was found"
-msgstr ""
+msgstr "Không tìm thấy phiên của %s"
 
 #: ../panel/panel-application.c:220
 msgid "Failed to launch the migration application"
-msgstr ""
+msgstr "Không thể chạy ứng dụng di cư"
 
 #: ../panel/panel-application.c:1012
 msgid "Create _Launcher"
@@ -289,6 +292,8 @@ msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr ""
+"Bạn đã chạy X mà không kèm theo bộ quản lý phiên làm việc. Nhấn vào Thoát sẽ"
+" đóng máy chủ X."
 
 #: ../panel/panel-application.c:1774
 msgid "Are you sure you want to quit the panel?"
@@ -313,7 +318,7 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:58
 msgid "Unable to open the e-mail address"
-msgstr ""
+msgstr "Không thể mở email."
 
 #: ../panel/panel-dialogs.c:84
 msgid "The panel of the Xfce Desktop Environment"
@@ -332,7 +337,7 @@ msgstr "Thêm mục mới"
 #: ../panel/panel-preferences-dialog.glade.h:56
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
-msgstr ""
+msgstr "Thêm"
 
 #: ../panel/panel-dialogs.c:176
 msgid "Please choose a panel for the new plugin:"
@@ -391,7 +396,7 @@ msgstr "Phần mở rộng \"%s\" thoát không mong đợi , bạn có muốn k
 
 #: ../panel/panel-plugin-external.c:519
 msgid "Plugin Restart"
-msgstr ""
+msgstr "Khởi động lại Plugin"
 
 #: ../panel/panel-plugin-external.c:520
 #, c-format
@@ -414,7 +419,7 @@ msgstr "Tự động"
 
 #: ../panel/panel-preferences-dialog.c:556
 msgid "Primary"
-msgstr ""
+msgstr "Chính"
 
 #. I18N: monitor name in the output selector
 #: ../panel/panel-preferences-dialog.c:575
@@ -464,7 +469,7 @@ msgstr "Không bao giờ"
 
 #: ../panel/panel-preferences-dialog.glade.h:2
 msgid "Intelligently"
-msgstr ""
+msgstr "Thông minh"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Always"
@@ -488,7 +493,7 @@ msgstr "Không (sử dụng kiểu của hệ thống)"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
 msgid "Solid color"
-msgstr ""
+msgstr "Màu duy nhất"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "Background image"
@@ -496,19 +501,19 @@ msgstr "Ảnh nền"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "Panel Preferences"
-msgstr ""
+msgstr "Cấu hình thanh tác vụ"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Profiles:"
-msgstr ""
+msgstr "Hồ sơ:"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid "_Backup and restore"
-msgstr ""
+msgstr "Sao lưu và khôi phục"
 
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Switch between panel presets"
-msgstr ""
+msgstr "Chuyển giữa các cấu hình thanh tác vụ  "
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Add a new panel"
@@ -520,7 +525,7 @@ msgstr "Gỡ bỏ thanh panel vừa được chọn"
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "<b>General</b>"
-msgstr ""
+msgstr "<b>Chung</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid "M_ode:"
@@ -528,7 +533,7 @@ msgstr "_Chế độ"
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Span mo_nitors"
-msgstr ""
+msgstr "Mở rộng sang nhiều màn hình"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Select this option to extend the panel over multiple monitors."
@@ -1048,7 +1053,7 @@ msgstr "_Đồng "
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:650
-#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2491
+#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2487
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Thực thi lệnh \"%s\", thất bại."
@@ -1731,7 +1736,7 @@ msgstr "Mở thực đơn launcher"
 msgid "Unnamed Item"
 msgstr "Mục không được đặt tên"
 
-#: ../plugins/launcher/launcher.c:1797
+#: ../plugins/launcher/launcher.c:1801
 msgid "No items"
 msgstr "Không có mục nào"
 
@@ -2184,36 +2189,36 @@ msgstr ""
 msgid "Show only _minimized windows"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3119
+#: ../plugins/tasklist/tasklist-widget.c:3131
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3123
+#: ../plugins/tasklist/tasklist-widget.c:3135
 msgid "Error"
 msgstr "Lỗi"
 
-#: ../plugins/tasklist/tasklist-widget.c:3152
+#: ../plugins/tasklist/tasklist-widget.c:3164
 msgid "Launch New Instance"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3899
+#: ../plugins/tasklist/tasklist-widget.c:3911
 msgid "Mi_nimize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3906
+#: ../plugins/tasklist/tasklist-widget.c:3918
 msgid "Un_minimize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3913
+#: ../plugins/tasklist/tasklist-widget.c:3925
 msgid "Ma_ximize All"
 msgstr "_Phóng to tất cả"
 
-#: ../plugins/tasklist/tasklist-widget.c:3920
+#: ../plugins/tasklist/tasklist-widget.c:3932
 msgid "_Unmaximize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3931
+#: ../plugins/tasklist/tasklist-widget.c:3943
 msgid "_Close All"
 msgstr "Đó_ng tất cả"
 
