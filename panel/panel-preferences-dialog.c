@@ -1278,51 +1278,57 @@ get_launcher_data (XfcePanelPluginProvider *provider,
 
   if (xfconf_channel_has_property (channel, prop))
     {
+      /* xfconf_channel_get_string_list() should not return NULL if the property exists
+       * according to its documentation, but it does return NULL instead of an empty
+       * array, at least until 4.20.0 */
       gchar **desktop_files = xfconf_channel_get_string_list (channel, prop);
-      if (desktop_files[0] != NULL)
+      if (desktop_files != NULL)
         {
-          gchar *dirname = g_strdup_printf (PANEL_PLUGIN_RELATIVE_PATH G_DIR_SEPARATOR_S "%s-%d",
-                                            xfce_panel_plugin_provider_get_name (provider),
-                                            xfce_panel_plugin_provider_get_unique_id (provider));
-          gchar *filename = g_build_filename (dirname, desktop_files[0], NULL);
-          gchar *path = xfce_resource_save_location (XFCE_RESOURCE_CONFIG, filename, FALSE);
-          GKeyFile *keyfile = g_key_file_new ();
-
-          if (g_key_file_load_from_file (keyfile, path, G_KEY_FILE_NONE, NULL))
+          if (desktop_files[0] != NULL)
             {
-              *display_name = g_key_file_get_locale_string (keyfile, G_KEY_FILE_DESKTOP_GROUP,
-                                                            G_KEY_FILE_DESKTOP_KEY_NAME, NULL, NULL);
-              if (*display_name != NULL)
+              gchar *dirname = g_strdup_printf (PANEL_PLUGIN_RELATIVE_PATH G_DIR_SEPARATOR_S "%s-%d",
+                                                xfce_panel_plugin_provider_get_name (provider),
+                                                xfce_panel_plugin_provider_get_unique_id (provider));
+              gchar *filename = g_build_filename (dirname, desktop_files[0], NULL);
+              gchar *path = xfce_resource_save_location (XFCE_RESOURCE_CONFIG, filename, FALSE);
+              GKeyFile *keyfile = g_key_file_new ();
+
+              if (g_key_file_load_from_file (keyfile, path, G_KEY_FILE_NONE, NULL))
                 {
-                  gchar *icon_name = g_key_file_get_string (keyfile, G_KEY_FILE_DESKTOP_GROUP,
-                                                            G_KEY_FILE_DESKTOP_KEY_ICON, NULL);
-                  if (icon_name != NULL)
+                  *display_name = g_key_file_get_locale_string (keyfile, G_KEY_FILE_DESKTOP_GROUP,
+                                                                G_KEY_FILE_DESKTOP_KEY_NAME, NULL, NULL);
+                  if (*display_name != NULL)
                     {
-                      if (g_path_is_absolute (icon_name))
+                      gchar *icon_name = g_key_file_get_string (keyfile, G_KEY_FILE_DESKTOP_GROUP,
+                                                                G_KEY_FILE_DESKTOP_KEY_ICON, NULL);
+                      if (icon_name != NULL)
                         {
-                          GFile *file = g_file_new_for_path (icon_name);
-                          *icon = g_file_icon_new (file);
-                          g_object_unref (file);
+                          if (g_path_is_absolute (icon_name))
+                            {
+                              GFile *file = g_file_new_for_path (icon_name);
+                              *icon = g_file_icon_new (file);
+                              g_object_unref (file);
+                            }
+                          else
+                            *icon = g_themed_icon_new (icon_name);
+
+                          g_free (icon_name);
                         }
                       else
-                        *icon = g_themed_icon_new (icon_name);
+                        *icon = g_themed_icon_new (panel_module_get_icon_name (module));
 
-                      g_free (icon_name);
+                      success = TRUE;
                     }
-                  else
-                    *icon = g_themed_icon_new (panel_module_get_icon_name (module));
-
-                  success = TRUE;
                 }
+
+              g_key_file_free (keyfile);
+              g_free (path);
+              g_free (filename);
+              g_free (dirname);
             }
 
-          g_key_file_free (keyfile);
-          g_free (path);
-          g_free (filename);
-          g_free (dirname);
+          g_strfreev (desktop_files);
         }
-
-      g_strfreev (desktop_files);
     }
 
   g_free (prop);
