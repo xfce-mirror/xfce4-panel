@@ -597,21 +597,25 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
 
       if (n_monitors >= 1)
         {
+          GHashTable *models = g_hash_table_new (g_str_hash, g_str_equal);
           for (i = 0; i < n_monitors; i++)
             {
+              const gchar *model;
               monitor = gdk_display_get_monitor (display, i);
-              name = g_strdup (gdk_monitor_get_model (monitor));
-              if (xfce_str_is_empty (name))
+              model = gdk_monitor_get_model (monitor);
+              if (xfce_str_is_empty (model) || !g_hash_table_add (models, (gpointer) model))
                 {
-                  g_free (name);
-
                   /* I18N: monitor name in the output selector */
                   title = g_strdup_printf (_("Monitor %d"), i + 1);
-                  name = g_strdup_printf ("monitor-%d", i);
+                  if (xfce_str_is_empty (model))
+                    name = g_strdup_printf ("monitor-%d", i);
+                  else
+                    name = g_strdup_printf ("monitor-%d-%s", i, model);
                 }
               else
                 {
                   /* use the randr name for the title */
+                  name = g_strdup (model);
                   title = g_strdup (name);
                 }
 
@@ -628,6 +632,8 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
               g_free (name);
               g_free (title);
             }
+
+          g_hash_table_destroy (models);
         }
 
       /* add the output from the config if still nothing has been selected */

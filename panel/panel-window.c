@@ -2714,8 +2714,20 @@ panel_window_screen_layout_changed (GdkScreen *screen,
               monitor = gdk_display_get_monitor (window->display, n);
               if (monitor != NULL)
                 {
-                  gdk_monitor_get_geometry (monitor, &a);
-                  panel_return_if_fail (a.width > 0 && a.height > 0);
+                  const gchar *model = gdk_monitor_get_model (monitor);
+                  gboolean matches = xfce_str_is_empty (model);
+                  if (!matches)
+                    {
+                      gchar *p = g_strstr_len (window->output_name + 8, -1, "-");
+                      if (p != NULL && g_strcmp0 (p + 1, model) == 0)
+                        matches = TRUE;
+                    }
+
+                  if (matches)
+                    {
+                      gdk_monitor_get_geometry (monitor, &a);
+                      panel_return_if_fail (a.width > 0 && a.height > 0);
+                    }
                 }
             }
           else
