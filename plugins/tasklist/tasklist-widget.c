@@ -840,7 +840,7 @@ xfce_tasklist_set_property (GObject *object,
       break;
 
     case PROP_INCLUDE_ALL_WORKSPACES:
-      xfce_tasklist_set_include_all_workspaces (tasklist, g_value_get_boolean (value));
+      xfce_tasklist_set_include_all_workspaces (tasklist, !WINDOWING_IS_X11 () || g_value_get_boolean (value));
       break;
 
     case PROP_INCLUDE_ALL_MONITORS:
@@ -857,7 +857,7 @@ xfce_tasklist_set_property (GObject *object,
       break;
 
     case PROP_SWITCH_WORKSPACE_ON_UNMINIMIZE:
-      tasklist->switch_workspace = g_value_get_boolean (value);
+      tasklist->switch_workspace = WINDOWING_IS_X11 () && g_value_get_boolean (value);
       break;
 
     case PROP_SHOW_ONLY_MINIMIZED:

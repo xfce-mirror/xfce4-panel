@@ -257,6 +257,10 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   if (!WINDOWING_IS_X11 ())
     {
       /* not functional in x11, so avoid confusion */
+      object = gtk_builder_get_object (builder, "include-all-workspaces");
+      gtk_widget_hide (GTK_WIDGET (object));
+      object = gtk_builder_get_object (builder, "switch-workspace-on-unminimize");
+      gtk_widget_hide (GTK_WIDGET (object));
       object = gtk_builder_get_object (builder, "show-wireframes");
       gtk_widget_hide (GTK_WIDGET (object));
     }
