@@ -696,9 +696,9 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->skipped_windows = NULL;
   tasklist->mode = XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
   tasklist->nrows = 1;
-  tasklist->all_workspaces = FALSE;
+  tasklist->all_workspaces = !WINDOWING_IS_X11 ();
   tasklist->button_relief = GTK_RELIEF_NORMAL;
-  tasklist->switch_workspace = TRUE;
+  tasklist->switch_workspace = WINDOWING_IS_X11 ();
   tasklist->only_minimized = FALSE;
   tasklist->show_labels = TRUE;
   tasklist->show_wireframes = FALSE;
