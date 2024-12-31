@@ -249,9 +249,9 @@ window_menu_plugin_init (WindowMenuPlugin *plugin)
 {
   plugin->button_style = BUTTON_STYLE_ICON;
   plugin->workspace_actions = FALSE;
-  plugin->workspace_names = TRUE;
+  plugin->workspace_names = WINDOWING_IS_X11 ();
   plugin->urgentcy_notification = TRUE;
-  plugin->all_workspaces = TRUE;
+  plugin->all_workspaces = WINDOWING_IS_X11 ();
   plugin->urgent_windows = 0;
   plugin->minimized_icon_lucency = DEFAULT_MINIMIZED_ICON_LUCENCY;
   plugin->ellipsize_mode = DEFAULT_ELLIPSIZE_MODE;
@@ -353,7 +353,7 @@ window_menu_plugin_set_property (GObject *object,
       break;
 
     case PROP_WORKSPACE_NAMES:
-      plugin->workspace_names = g_value_get_boolean (value);
+      plugin->workspace_names = WINDOWING_IS_X11 () && g_value_get_boolean (value);
       break;
 
     case PROP_URGENTCY_NOTIFICATION:
@@ -374,7 +374,7 @@ window_menu_plugin_set_property (GObject *object,
       break;
 
     case PROP_ALL_WORKSPACES:
-      plugin->all_workspaces = g_value_get_boolean (value);
+      plugin->all_workspaces = WINDOWING_IS_X11 () && g_value_get_boolean (value);
       break;
 
     default:
@@ -589,6 +589,14 @@ window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
       g_object_bind_property (G_OBJECT (plugin), names[i],
                               G_OBJECT (object), "active",
                               G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
+    }
+
+  if (!WINDOWING_IS_X11 ())
+    {
+      object = gtk_builder_get_object (builder, "workspace-names");
+      gtk_widget_hide (GTK_WIDGET (object));
+      object = gtk_builder_get_object (builder, "frame1");
+      gtk_widget_hide (GTK_WIDGET (object));
     }
 
   gtk_widget_show (GTK_WIDGET (dialog));
