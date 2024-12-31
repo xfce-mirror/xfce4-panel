@@ -700,15 +700,18 @@ pager_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   xfce_panel_plugin_menu_show_configure (panel_plugin);
 
-  mi = panel_image_menu_item_new_with_mnemonic (_("Workspace _Settings..."));
-  xfce_panel_plugin_menu_insert_item (panel_plugin, GTK_MENU_ITEM (mi));
-  g_signal_connect (G_OBJECT (mi), "activate",
-                    G_CALLBACK (pager_plugin_configure_workspace_settings), NULL);
-  gtk_widget_show (mi);
+  if (WINDOWING_IS_X11 ())
+    {
+      mi = panel_image_menu_item_new_with_mnemonic (_("Workspace _Settings..."));
+      xfce_panel_plugin_menu_insert_item (panel_plugin, GTK_MENU_ITEM (mi));
+      g_signal_connect (G_OBJECT (mi), "activate",
+                        G_CALLBACK (pager_plugin_configure_workspace_settings), NULL);
+      gtk_widget_show (mi);
 
-  image = gtk_image_new_from_icon_name ("org.xfce.panel.pager", GTK_ICON_SIZE_MENU);
-  panel_image_menu_item_set_image (mi, image);
-  gtk_widget_show (image);
+      image = gtk_image_new_from_icon_name ("org.xfce.panel.pager", GTK_ICON_SIZE_MENU);
+      panel_image_menu_item_set_image (mi, image);
+      gtk_widget_show (image);
+    }
 
   panel_properties_bind (NULL, G_OBJECT (plugin),
                          xfce_panel_plugin_get_property_base (panel_plugin),
@@ -862,8 +865,11 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
   object = gtk_builder_get_object (builder, "settings-button");
   panel_return_if_fail (GTK_IS_BUTTON (object));
-  g_signal_connect (G_OBJECT (object), "clicked",
-                    G_CALLBACK (pager_plugin_configure_workspace_settings), dialog);
+  if (WINDOWING_IS_X11 ())
+    g_signal_connect (G_OBJECT (object), "clicked",
+                      G_CALLBACK (pager_plugin_configure_workspace_settings), dialog);
+  else
+    gtk_widget_hide (GTK_WIDGET (object));
 
   object = gtk_builder_get_object (builder, "appearance");
   panel_return_if_fail (GTK_IS_COMBO_BOX (object));
