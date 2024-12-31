@@ -3042,16 +3042,12 @@ xfce_panel_plugin_popup_window (XfcePanelPlugin *plugin,
       gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
       gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
       gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_RIGHT, FALSE);
+      gtk_layer_set_keyboard_mode (GTK_WINDOW (window), GTK_LAYER_SHELL_KEYBOARD_MODE_ON_DEMAND);
 
-      /* this ensures, if the compositor implements it correctly, that at least the Esc key will
-       * hide the window, because the grab below does not always work correctly, even when it
-       * claims to have succeeded (especially for external plugins) */
-      gtk_layer_set_keyboard_mode (GTK_WINDOW (window), GTK_LAYER_SHELL_KEYBOARD_MODE_EXCLUSIVE);
-
-      /* also necessary for the above to work in general since external plugins are on overlay */
+      /* necessary to gain keyboard focus in general since external plugins are on overlay */
       gtk_layer_set_layer (GTK_WINDOW (window), GTK_LAYER_SHELL_LAYER_OVERLAY);
 
-      /* still useful, even in exlusive mode above, for example during an Alt-TAB */
+      /* still useful, even we were in exlusive mode above, for example during an Alt-TAB */
       g_signal_connect (window, "notify::has-toplevel-focus",
                         G_CALLBACK (xfce_panel_plugin_popup_window_has_toplevel_focus), plugin);
     }
