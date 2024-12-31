@@ -326,6 +326,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   /**
    * XfcePanelPlugin::hidden-event
    * @plugin : an #XfcePanelPlugin.
+   * @hidden : new hidden state of the panel.
    *
    * This signal is emmitted when the panel the @plugin is on
    * is transitioning between hidden/visble.

@@ -100,7 +100,7 @@ G_DEFINE_AUTOPTR_CLEANUP_FUNC (XfcePanelPlugin, g_object_unref)
  * @screen_position_changed : See #XfcePanelPlugin::screen-position-changed for more information.
  * @size_changed :            See #XfcePanelPlugin::size-changed for more information.
  * @orientation_changed :     See #XfcePanelPlugin::orientation-changed for more information.
- * @hidden-event :            See #XfcePanelPlugin::hidden-event for more information.
+ * @hidden_event :            See #XfcePanelPlugin::hidden-event for more information.
  * @free_data :               See #XfcePanelPlugin::free-data for more information.
  * @save :                    See #XfcePanelPlugin::save for more information.
  * @about :                   See #XfcePanelPlugin::about for more information.
