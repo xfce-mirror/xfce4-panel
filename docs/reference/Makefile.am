@@ -27,7 +27,7 @@ CFILE_GLOB=
 
 # Header files to ignore when scanning
 IGNORE_HFILES= \
-	libxfce4panel-alias.h \
+	libxfce4panel-visibility.h \
 	libxfce4panel-marshal.h \
 	xfce-panel-plugin-provider.h \
 	libxfce4panel-enum-types.h

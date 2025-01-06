@@ -24,7 +24,7 @@
 #include "xfce-panel-macros.h"
 #include "xfce-panel-plugin-provider.h"
 #include "xfce-panel-plugin.h"
-#include "libxfce4panel-alias.h"
+#include "libxfce4panel-visibility.h"
 
 #include "common/panel-private.h"
 
@@ -3223,4 +3223,4 @@ xfce_panel_plugin_save_location (XfcePanelPlugin *plugin,
 
 
 #define __XFCE_PANEL_PLUGIN_C__
-#include "libxfce4panel-aliasdef.c"
+#include "libxfce4panel-visibility.c"

@@ -15,8 +15,8 @@ libxfce4panel_public_built_sources = \
 
 libxfce4panel_built_sources = \
 	$(libxfce4panel_public_built_sources) \
-	libxfce4panel-alias.h \
-	libxfce4panel-aliasdef.c \
+	libxfce4panel-visibility.h \
+	libxfce4panel-visibility.c \
 	libxfce4panel-enum-types.c \
 	libxfce4panel-marshal.c \
 	libxfce4panel-marshal.h
@@ -88,11 +88,11 @@ libxfce4panel-marshal.c: libxfce4panel-marshal.list Makefile
 	$(AM_V_GEN) echo "#include <libxfce4panel/libxfce4panel-marshal.h>" > $@ \
 	&& glib-genmarshal --prefix=_libxfce4panel_marshal --body $< >> $@
 
-libxfce4panel-alias.h: make-libxfce4panel-alias.pl libxfce4panel.symbols
-	$(AM_V_GEN) $(PERL) $(srcdir)/make-libxfce4panel-alias.pl $(srcdir)/libxfce4panel.symbols > $@
+libxfce4panel-visibility.h: libxfce4panel.symbols Makefile
+	$(AM_V_GEN) $(XDT_GEN_VISIBILITY) --kind=header $< $@
 
-libxfce4panel-aliasdef.c: make-libxfce4panel-alias.pl libxfce4panel.symbols
-	$(AM_V_GEN) $(PERL) $(srcdir)/make-libxfce4panel-alias.pl -def < $(srcdir)/libxfce4panel.symbols > $@
+libxfce4panel-visibility.c: libxfce4panel.symbols Makefile
+	$(AM_V_GEN) $(XDT_GEN_VISIBILITY) --kind=source $< $@
 
 libxfce4panel-enum-types.h: $(libxfce4panel_headers) Makefile
 	$(AM_V_GEN) ( cd $(srcdir) && glib-mkenums \
@@ -104,12 +104,12 @@ libxfce4panel-enum-types.h: $(libxfce4panel_headers) Makefile
 
 libxfce4panel-enum-types.c:  $(libxfce4panel_headers) Makefile
 	$(AM_V_GEN) ( cd $(srcdir) && glib-mkenums \
-		--fhead "#include <libxfce4panel/libxfce4panel-enums.h>\n#include <libxfce4panel/libxfce4panel-enum-types.h>\n\n#include <libxfce4panel/libxfce4panel-alias.h>" \
+		--fhead "#include <libxfce4panel/libxfce4panel-enums.h>\n#include <libxfce4panel/libxfce4panel-enum-types.h>\n\n#include <libxfce4panel/libxfce4panel-visibility.h>" \
 		--fprod "\n/* enumerations from \"@filename@\" */" \
 		--vhead "GType\n@enum_name@_get_type (void)\n{\n\tstatic GType type = 0;\n\tif (type == 0) {\n\tstatic const G@Type@Value values[] = {"\
 		--vprod "\t{ @VALUENAME@, \"@VALUENAME@\", \"@valuenick@\" }," \
 		--vtail "\t{ 0, NULL, NULL }\n\t};\n\ttype = g_@type@_register_static (\"@EnumName@\", values);\n  }\n\treturn type;\n}\n" \
-		--ftail "\n#define __LIBXFCE4PANEL_ENUM_TYPES_C__\n#include <libxfce4panel/libxfce4panel-aliasdef.c>\n" \
+		--ftail "\n#define __LIBXFCE4PANEL_ENUM_TYPES_C__\n#include <libxfce4panel/libxfce4panel-visibility.c>\n" \
 		$(libxfce4panel_headers) ) > $@
 
 DISTCLEANFILES += \
@@ -117,10 +117,6 @@ DISTCLEANFILES += \
 
 BUILT_SOURCES = \
 	$(libxfce4panel_built_sources)
-
-CLEANFILES = \
-	actual-abi \
-	expected-abi
 
 endif
 # endif MAINTAINER_MODE
@@ -167,14 +163,13 @@ endif
 # endif HAVE_INTROSPECTION
 
 EXTRA_DIST = \
-	abicheck.sh \
 	libxfce4panel.symbols \
 	libxfce4panel-2.0.deps \
 	Libxfce4panel-2.0.metadata \
-	libxfce4panel-alias.h \
-	libxfce4panel-aliasdef.c \
+	libxfce4panel-visibility.h \
+	libxfce4panel-visibility.c \
 	libxfce4panel-marshal.list \
-	make-libxfce4panel-alias.pl
+	$(NULL)
 
 if ENABLE_VAPIGEN
 -include $(VAPIGEN_MAKEFILE)
@@ -190,10 +185,6 @@ libxfce4panel_2_0_vapi_FILES = Libxfce4panel-2.0.gir
 
 vapidir = $(datadir)/vala/vapi
 vapi_DATA = $(VAPIGEN_VAPIS) $(VAPIGEN_VAPIS:.vapi=.deps)
-endif
-
-if HAVE_GNUC_VISIBILITY
-TESTS =	abicheck.sh
 endif
 
 # required for gtk-doc

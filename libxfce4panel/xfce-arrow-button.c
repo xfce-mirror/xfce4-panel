@@ -23,7 +23,7 @@
 
 #include "xfce-arrow-button.h"
 #include "xfce-panel-macros.h"
-#include "libxfce4panel-alias.h"
+#include "libxfce4panel-visibility.h"
 
 #include "common/panel-private.h"
 
@@ -657,4 +657,4 @@ xfce_arrow_button_set_blinking (XfceArrowButton *button,
 
 
 #define __XFCE_ARROW_BUTTON_C__
-#include "libxfce4panel-aliasdef.c"
+#include "libxfce4panel-visibility.c"
