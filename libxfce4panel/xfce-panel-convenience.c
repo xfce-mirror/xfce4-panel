@@ -23,7 +23,7 @@
 
 #include "xfce-panel-convenience.h"
 #include "xfce-panel-macros.h"
-#include "libxfce4panel-alias.h"
+#include "libxfce4panel-visibility.h"
 
 #include <libxfce4util/libxfce4util.h>
 
@@ -355,4 +355,4 @@ xfce_panel_set_image_from_source (GtkImage *image,
 
 
 #define __XFCE_PANEL_CONVENIENCE_C__
-#include "libxfce4panel-aliasdef.c"
+#include "libxfce4panel-visibility.c"

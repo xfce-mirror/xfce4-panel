@@ -71,7 +71,7 @@ AC_PROG_CC()
 AM_PROG_CC_C_O()
 LT_PATH_LD([])
 AC_PROG_INSTALL()
-AC_CHECK_PROGS([PERL], [perl5 perl])
+AC_PATH_PROG([XDT_GEN_VISIBILITY], [xdt-gen-visibility])
 m4_ifdef([AC_PROG_SED], [AC_PROG_SED], [AC_CHECK_PROG(SED, sed, sed)])
 
 dnl **************************
@@ -217,22 +217,27 @@ XDT_FEATURE_LINKER_OPTS()
 dnl ****************************************
 dnl *** Check for ELF visibility support ***
 dnl ****************************************
-AC_ARG_ENABLE([visibility], AS_HELP_STRING([--disable-visibility], [Do not use ELF visibility attributes]), [], [enable_visibility=yes])
+AC_ARG_ENABLE([visibility],
+              AS_HELP_STRING([--disable-visibility],
+                             [Do not use ELF visibility attributes]),
+              [enable_visibility=$enableval], [enable_visibility=yes])
 have_gnuc_visibility=no
-if test x"$enable_visibility" != x"no"; then
-  dnl Check whether the compiler supports the visibility attribute
-  save_CFLAGS="$CFLAGS"
-  CFLAGS="$CFLAGS -Wall -Werror"
+if test "x$enable_visibility" != "xno"; then
+  XDT_SUPPORTED_FLAGS([xdt_vis_test_cflags], [-Wall -Werror -Wno-unused-parameter -fvisibility=hidden])
+  saved_CFLAGS="$CFLAGS"
+  CFLAGS="$CFLAGS $xdt_vis_test_cflags"
   AC_MSG_CHECKING([whether $CC supports the GNUC visibility attribute])
   AC_COMPILE_IFELSE([AC_LANG_SOURCE(
   [
-    void test_default (void);
-    void test_hidden (void);
-
-    void __attribute__ ((visibility("default"))) test_default (void) {}
-    void __attribute__ ((visibility("hidden"))) test_hidden (void) {}
-
-    int main (int argc, char **argv) { test_default (); test_hidden (); return 0; }
+    void test_default(void);
+    void test_hidden(void);
+    void __attribute__((visibility("default"))) test_default(void) {}
+    void __attribute__((visibility("hidden"))) test_hidden(void) {}
+    int main(int argc, char **argv) {
+      test_default();
+      test_hidden();
+      return 0;
+    }
   ])],
   [
     have_gnuc_visibility=yes
@@ -241,12 +246,12 @@ if test x"$enable_visibility" != x"no"; then
   [
     AC_MSG_RESULT([no])
   ])
-  CFLAGS="$save_CFLAGS"
+  CFLAGS="$saved_CFLAGS"
 fi
-if test x"$have_gnuc_visibility" = x"yes"; then
-  CPPFLAGS="$CPPFLAGS -DHAVE_GNUC_VISIBILITY"
+if test "x$have_gnuc_visibility" = "xyes"; then
+  CPPFLAGS="$CPPFLAGS -DENABLE_SYMBOL_VISIBILITY=1"
+  CFLAGS="$CFLAGS -fvisibility=hidden"
 fi
-AM_CONDITIONAL([HAVE_GNUC_VISIBILITY], [test x"$have_gnuc_visibility" = x"yes"])
 
 dnl *********************************
 dnl *** Substitute platform flags ***
