@@ -753,11 +753,11 @@ msgstr "Nạp cấu hình mặc định, thất bại"
 
 #: migrate/main.c:110
 msgid "Panel config needs migration..."
-msgstr ""
+msgstr "Cấu hình thanh tác vụ cần phải được nâng cấp"
 
 #: migrate/main.c:114
 msgid "Failed to migrate the existing configuration"
-msgstr ""
+msgstr "Không thể nâng cấp cấu hình hiện tại"
 
 #: migrate/main.c:120
 msgid "Panel configuration has been updated."
@@ -775,15 +775,15 @@ msgstr "Thực đơn phiên chạy"
 
 #: plugins/actions/actions-dialog.glade:49
 msgid "Full Name"
-msgstr ""
+msgstr "Tên đầy đủ"
 
 #: plugins/actions/actions-dialog.glade:52
 msgid "Username"
-msgstr ""
+msgstr "Tên đăng nhập"
 
 #: plugins/actions/actions-dialog.glade:55
 msgid "User ID"
-msgstr ""
+msgstr "ID người dùng"
 
 #: plugins/actions/actions-dialog.glade:58
 msgid "Custom"
@@ -795,11 +795,11 @@ msgstr "_Diện mạo:"
 
 #: plugins/actions/actions-dialog.glade:188
 msgid "Title:"
-msgstr ""
+msgstr "Tên:"
 
 #: plugins/actions/actions-dialog.glade:201
 msgid "Custo_m title:"
-msgstr ""
+msgstr "Tên tuỳ chỉnh:"
 
 #: plugins/actions/actions-dialog.glade:255
 #: plugins/launcher/launcher-dialog.glade:667
@@ -887,20 +887,20 @@ msgstr "Chuẩn bị ngủ đông trong khoảng %d giây."
 
 #: plugins/actions/actions.c:204
 msgid "Hybrid Sleep"
-msgstr ""
+msgstr "Ngủ kết hợp"
 
 #: plugins/actions/actions.c:205
 msgid "_Hybrid Sleep"
-msgstr ""
+msgstr "Ngủ kết _hợp"
 
 #: plugins/actions/actions.c:206
 msgid "Do you want to hibernate and suspend the system?"
-msgstr ""
+msgstr "Bạn có muốn ngủ đông và tạm dừng máy?"
 
 #: plugins/actions/actions.c:207
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
-msgstr ""
+msgstr "Sẽ ngủ đông và tạm dừng sau %d giây."
 
 #: plugins/actions/actions.c:212
 msgid "Suspend"
@@ -962,11 +962,11 @@ msgstr "Phần ngăn cách"
 #: plugins/actions/actions.c:1165
 #, c-format
 msgid "Failed to run action \"%s\""
-msgstr ""
+msgstr "Không thể thực thi hành động \"%s\""
 
 #: plugins/actions/actions.c:1369
 msgid "Little Mouse"
-msgstr ""
+msgstr "Chuột nhỏ"
 
 #: plugins/actions/actions.desktop.in.in:5
 msgid "Log out, lock or other system actions"
@@ -988,7 +988,7 @@ msgstr "_Tiêu đề nút:"
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:136
 msgid "Show button on one _line"
-msgstr ""
+msgstr "Hiện các nút trên một hàng duy nhất"
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:151
 msgid "_Show button title"
@@ -1048,7 +1048,7 @@ msgstr "Tệp tin thực đơn"
 #. I18N: default tooltip of the application menu
 #: plugins/applicationsmenu/applicationsmenu.c:38
 msgid "Applications"
-msgstr ""
+msgstr "Ứng dụng"
 
 #: plugins/applicationsmenu/applicationsmenu.c:606
 #: plugins/directorymenu/directorymenu.c:466
@@ -1093,7 +1093,7 @@ msgstr "Tùy chọn:"
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:31
 #: plugins/windowmenu/xfce4-popup-windowmenu.sh:31
 msgid "Popup menu at current mouse position"
-msgstr ""
+msgstr "Hiện menu ở vị trí con trỏ"
 
 #: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:32
@@ -1105,7 +1105,7 @@ msgstr "Hiển thị các tùy chọn trợ giúp"
 #: plugins/clock/clock.c:47
 msgctxt "Date"
 msgid "%A %d %B %Y"
-msgstr ""
+msgstr "%A %d %B %Y"
 
 #: plugins/clock/clock.c:176
 msgid "Week %V"
@@ -1121,31 +1121,31 @@ msgstr "Định dạng tùy chọn"
 
 #: plugins/clock/clock-dialog.glade:13
 msgid "Decimal"
-msgstr ""
+msgstr "Thập phân"
 
 #: plugins/clock/clock-dialog.glade:16
 msgid "Sexagesimal"
-msgstr ""
+msgstr "Lục thập phân"
 
 #: plugins/clock/clock-dialog.glade:19
 msgid "Binary time"
-msgstr ""
+msgstr "Giờ nhị phân"
 
 #: plugins/clock/clock-dialog.glade:30
 msgid "Date, then time"
-msgstr ""
+msgstr "Ngày, đến giờ"
 
 #: plugins/clock/clock-dialog.glade:33
 msgid "Time, then date"
-msgstr ""
+msgstr "Giờ, đến ngày "
 
 #: plugins/clock/clock-dialog.glade:36
 msgid "Date Only"
-msgstr ""
+msgstr "Chỉ ngày"
 
 #: plugins/clock/clock-dialog.glade:39
 msgid "Time Only"
-msgstr ""
+msgstr "Chỉ giờ"
 
 #: plugins/clock/clock-dialog.glade:71
 msgid "Analog"
@@ -1161,7 +1161,7 @@ msgstr "Số"
 
 #: plugins/clock/clock-dialog.glade:80
 msgid "Fuzzy"
-msgstr ""
+msgstr "Dài dòng"
 
 #: plugins/clock/clock-dialog.glade:83
 msgid "LCD"
@@ -1175,7 +1175,7 @@ msgstr "Đồng hồ"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr ""
+msgstr "Tên của một múi giờ trong cơ sở dữ liệu zoneinfo, ví dụ \"Asia/Ho_Chi_Minh\". Để trống để sử dụng giờ cục bộ."
 
 #: plugins/clock/clock-dialog.glade:183
 msgid "Time_zone:"
@@ -1193,7 +1193,7 @@ msgstr "Cài đặt giờ"
 msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
-msgstr ""
+msgstr "Khi bật, lệnh này sẽ chạy khi nhấn chuột trái vào plugin thay vì hiển thị bộ lịch mặc định."
 
 #: plugins/clock/clock-dialog.glade:261
 msgid "Co_mmand:"
@@ -1201,11 +1201,11 @@ msgstr "_Lệnh"
 
 #: plugins/clock/clock-dialog.glade:273
 msgid "_Show week numbers"
-msgstr ""
+msgstr "Hiện số tuần"
 
 #: plugins/clock/clock-dialog.glade:294
 msgid "Calendar"
-msgstr ""
+msgstr "Bộ lịch"
 
 #: plugins/clock/clock-dialog.glade:329 plugins/clock/clock-dialog.glade:669
 #: plugins/clock/clock-dialog.glade:791
@@ -1230,7 +1230,7 @@ msgstr "Hiện AM/PM"
 
 #: plugins/clock/clock-dialog.glade:450
 msgid "Fl_ash time separators"
-msgstr ""
+msgstr "Nhấp nháy dấu chia cách giờ phút"
 
 #: plugins/clock/clock-dialog.glade:465
 msgid "24-_hour clock"
@@ -1238,7 +1238,7 @@ msgstr "Đồng hồ 24 giờ"
 
 #: plugins/clock/clock-dialog.glade:508
 msgid "Binary mode:"
-msgstr ""
+msgstr "Chế độ nhị phân:"
 
 #: plugins/clock/clock-dialog.glade:524
 msgid "Display _seconds"
@@ -1248,11 +1248,11 @@ msgstr "Hiện _giây"
 #. or parts of the day.
 #: plugins/clock/clock-dialog.glade:545
 msgid "F_uzziness:"
-msgstr ""
+msgstr "Độ dài dòng:"
 
 #: plugins/clock/clock-dialog.glade:579
 msgid "Show _inactive segments"
-msgstr ""
+msgstr "Hiện các phần không hoạt động"
 
 #: plugins/clock/clock-dialog.glade:594
 msgid "Show gri_d"
@@ -1260,11 +1260,11 @@ msgstr "Hiện thị _lưới"
 
 #: plugins/clock/clock-dialog.glade:640 plugins/clock/clock-dialog.glade:762
 msgid "Font:"
-msgstr ""
+msgstr "Phông chữ:"
 
 #: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
 msgid "Format:"
-msgstr ""
+msgstr "Định dạng:"
 
 #: plugins/clock/clock-dialog.glade:670 plugins/clock/clock-dialog.glade:792
 msgid ""
@@ -1272,7 +1272,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
 "the &quot;Help&quot; page for additional information."
-msgstr ""
+msgstr "Định dạng miêu tả các thành phần ngày giờ để chèn vào thanh. Ví dụ, %Y chỉ thị cho năm, %m chỉ thị cho tháng và %d cho ngày. Tương tự, các tag &lt;b&gt;&lt;/b&gt; sẽ tô đậm chữ. Vào trang &quot;Help&quot; để xem thêm các thông tin."
 
 #: plugins/clock/clock-dialog.glade:699
 msgid "Date"
@@ -1280,7 +1280,7 @@ msgstr "Ngày tháng"
 
 #: plugins/clock/clock-dialog.glade:744
 msgid "Time"
-msgstr ""
+msgstr "Giờ"
 
 #: plugins/clock/clock-dialog.glade:871
 msgid "Clock Options"
@@ -1310,11 +1310,11 @@ msgstr "Buổi sáng"
 
 #: plugins/clock/clock-fuzzy.c:82
 msgid "Almost noon"
-msgstr ""
+msgstr "Sắp trưa"
 
 #: plugins/clock/clock-fuzzy.c:83
 msgid "Noon"
-msgstr ""
+msgstr "Trưa"
 
 #: plugins/clock/clock-fuzzy.c:84
 msgid "Afternoon"
@@ -1363,32 +1363,32 @@ msgstr "0% giờ hai mươi năm phút"
 #: plugins/clock/clock-fuzzy.c:98
 #, no-c-format
 msgid "half past %0"
-msgstr ""
+msgstr "%0 rưỡi"
 
 #: plugins/clock/clock-fuzzy.c:99
 #, no-c-format
 msgid "twenty five to %1"
-msgstr ""
+msgstr "%1 kém hai mươi lăm"
 
 #: plugins/clock/clock-fuzzy.c:100
 #, no-c-format
 msgid "twenty to %1"
-msgstr ""
+msgstr "%1 kém hai mươi"
 
 #: plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "quarter to %1"
-msgstr ""
+msgstr "%1 kém mười lăm"
 
 #: plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "ten to %1"
-msgstr ""
+msgstr "%1 kém mười"
 
 #: plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "five to %1"
-msgstr ""
+msgstr "%1 kém năm"
 
 #: plugins/clock/clock-fuzzy.c:104
 #, no-c-format
@@ -1437,37 +1437,37 @@ msgstr "0% giờ hai mươi năm phút"
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
-msgstr ""
+msgstr "%0 rưỡi"
 
 #: plugins/clock/clock-fuzzy.c:117
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
-msgstr ""
+msgstr "%1 kém hai mươi lăm"
 
 #: plugins/clock/clock-fuzzy.c:118
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
-msgstr ""
+msgstr "%1 kém hai mươi"
 
 #: plugins/clock/clock-fuzzy.c:119
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
-msgstr ""
+msgstr "%1 kém mười lăm"
 
 #: plugins/clock/clock-fuzzy.c:120
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
-msgstr ""
+msgstr "%1 kém mười"
 
 #: plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
-msgstr ""
+msgstr "%1 kém năm"
 
 #: plugins/clock/clock-fuzzy.c:122
 #, no-c-format
@@ -1615,7 +1615,7 @@ msgstr "Chạy ứng dụng \"%s\", thất bại"
 #: plugins/directorymenu/directorymenu.c:727
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr ""
+msgstr "Không thể xác định kiểu dữ liệu cho \"%s\""
 
 #: plugins/directorymenu/directorymenu.c:736
 #, c-format
@@ -1638,7 +1638,7 @@ msgstr "Tạo thư mục"
 
 #: plugins/directorymenu/directorymenu.c:932
 msgid "Create New Text Document"
-msgstr ""
+msgstr "Tạo tài liệu mới"
 
 #: plugins/directorymenu/directorymenu.c:938
 msgid "C_reate"
@@ -1646,7 +1646,7 @@ msgstr "_Tạo"
 
 #: plugins/directorymenu/directorymenu.c:938
 msgid "Create & _Open"
-msgstr ""
+msgstr "Tạo và mở"
 
 #: plugins/directorymenu/directorymenu.c:951
 msgid "Enter the new name:"
@@ -1655,7 +1655,7 @@ msgstr "Nhập tên mới"
 #: plugins/directorymenu/directorymenu.c:987
 #, c-format
 msgid "Failed to create folder: %s"
-msgstr ""
+msgstr "Không thể tạo thư mục: %s"
 
 #: plugins/directorymenu/directorymenu.c:1069
 msgid "Open Folder"
@@ -1667,11 +1667,11 @@ msgstr "Mở trong dòng lệnh"
 
 #: plugins/directorymenu/directorymenu.c:1097
 msgid "Create Folder..."
-msgstr ""
+msgstr "Tạo thư mục..."
 
 #: plugins/directorymenu/directorymenu.c:1111
 msgid "Create Text Document..."
-msgstr ""
+msgstr "Tạo tệp văn bản..."
 
 #: plugins/directorymenu/directorymenu.desktop.in.in:5
 msgid "Show a directory tree in a menu"
@@ -1687,19 +1687,19 @@ msgstr "Đường _dẫn:"
 
 #: plugins/directorymenu/directorymenu-dialog.glade:179
 msgid "Show 'New Text _Document'"
-msgstr ""
+msgstr "Hiện 'Tạo tệp văn bản'"
 
 #: plugins/directorymenu/directorymenu-dialog.glade:194
 msgid "Show '_New Folder'"
-msgstr ""
+msgstr "Hiện 'Tạo thư mục'"
 
 #: plugins/directorymenu/directorymenu-dialog.glade:209
 msgid "Show 'Open in _Terminal'"
-msgstr ""
+msgstr "Hiện 'Mở trong hộp lệnh'"
 
 #: plugins/directorymenu/directorymenu-dialog.glade:224
 msgid "Show '_Open _Folder'"
-msgstr ""
+msgstr "Hiện 'Mở thư mục'"
 
 #: plugins/directorymenu/directorymenu-dialog.glade:243
 msgid "Menu"
@@ -1740,7 +1740,7 @@ msgstr "Không có mục nào"
 
 #: plugins/launcher/launcher-dialog.c:781
 msgid "Failed to open desktop item editor"
-msgstr ""
+msgstr "Không thể mở trình chỉnh sửa tập tin desktop"
 
 #: plugins/launcher/launcher-dialog.c:842
 msgid "If you delete an item, it will be permanently removed"
@@ -1781,11 +1781,11 @@ msgstr "Kèm trong nút"
 
 #: plugins/launcher/launcher-dialog.glade:96
 msgid "Up"
-msgstr ""
+msgstr "Trên"
 
 #: plugins/launcher/launcher-dialog.glade:105
 msgid "Down"
-msgstr ""
+msgstr "Dưới"
 
 #: plugins/launcher/launcher-dialog.glade:120
 msgid "_Edit Item"
@@ -1827,7 +1827,7 @@ msgstr "Thêm một mục trống mới"
 
 #: plugins/launcher/launcher-dialog.glade:639
 msgid "Add a new hyperlink"
-msgstr ""
+msgstr "Tạo hyperlink"
 
 #: plugins/launcher/launcher-dialog.glade:682
 msgid "Disable t_ooltips"
@@ -1853,7 +1853,7 @@ msgstr "Chọn tùy chọn này để di chuyển mục được chọn đến t
 
 #: plugins/launcher/launcher-dialog.glade:736
 msgid "_Arrow button position:"
-msgstr ""
+msgstr "Vị trí nút mũi tên:"
 
 #: plugins/launcher/launcher-dialog.glade:779
 msgid "Advanced"
@@ -1878,11 +1878,11 @@ msgstr "Không gian %d"
 
 #: plugins/pager/pager-dialog.glade:15
 msgid "Buttons"
-msgstr ""
+msgstr "Nút"
 
 #: plugins/pager/pager-dialog.glade:19
 msgid "Miniature View"
-msgstr ""
+msgstr "Hiển nhị gọn"
 
 #: plugins/pager/pager-dialog.glade:48 plugins/pager/pager.desktop.in.in:4
 msgid "Workspace Switcher"
@@ -1894,15 +1894,15 @@ msgstr "Số _hàng:"
 
 #: plugins/pager/pager-dialog.glade:197
 msgid "Show workspace number"
-msgstr ""
+msgstr "Hiện chỉ số của các không gian làm việc"
 
 #: plugins/pager/pager-dialog.glade:210
 msgid "Switch workspaces using the mouse wheel"
-msgstr ""
+msgstr "Chuyển đổi qua các không gian làm việc bằng bánh xe chuột"
 
 #: plugins/pager/pager-dialog.glade:224
 msgid "Wrap around workspaces"
-msgstr ""
+msgstr "Đi vòng lại khi vượt quá không gian làm việc cuối/đầu"
 
 #: plugins/pager/pager-dialog.glade:241
 msgid "<b>Appearance</b>"
