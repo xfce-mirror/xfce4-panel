@@ -708,7 +708,7 @@ launcher_plugin_items_delete_configs (LauncherPlugin *plugin)
 
   if (!succeed)
     {
-      g_message ("launcher-%d: Failed to cleanup the configuration: %s",
+      g_warning ("launcher-%d: Failed to cleanup the configuration: %s",
                  xfce_panel_plugin_get_unique_id (XFCE_PANEL_PLUGIN (plugin)),
                  error->message);
       g_error_free (error);
@@ -1160,7 +1160,7 @@ launcher_plugin_removed (XfcePanelPlugin *panel_plugin)
 
   if (!g_file_delete (plugin->config_directory, NULL, &error))
     {
-      g_message ("launcher-%d: Failed to cleanup the configuration: %s",
+      g_warning ("launcher-%d: Failed to cleanup the configuration: %s",
                  xfce_panel_plugin_get_unique_id (panel_plugin),
                  error->message);
       g_error_free (error);

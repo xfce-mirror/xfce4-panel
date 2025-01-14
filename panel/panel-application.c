@@ -1255,7 +1255,7 @@ panel_application_load (PanelApplication *application,
       display = XOpenDisplay (NULL);
       if (display == NULL)
         {
-          g_message ("Unable to open display from environment variable DISPLAY='%s', exiting.",
+          g_warning ("Unable to open display from environment variable DISPLAY='%s', exiting.",
                      g_getenv ("DISPLAY"));
           return FALSE;
         }
@@ -1612,7 +1612,7 @@ panel_application_new_window (PanelApplication *application,
   if (!panel_window_has_position (PANEL_WINDOW (window)))
     {
       if (!new_window)
-        g_message ("No panel position set, restoring default");
+        g_warning ("No panel position set, restoring default");
 
       /* create a position so not all panels overlap */
       idx = g_slist_index (application->windows, window);

@@ -175,7 +175,7 @@ xfce_panel_pixbuf_from_source_at_size_and_scale (const gchar *source,
       pixbuf = gdk_pixbuf_new_from_file (source, &error);
       if (G_UNLIKELY (pixbuf == NULL))
         {
-          g_message ("Failed to load image \"%s\": %s",
+          g_warning ("Failed to load image \"%s\": %s",
                      source, error->message);
           g_error_free (error);
         }
