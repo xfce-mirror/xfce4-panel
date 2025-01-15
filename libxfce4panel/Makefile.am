@@ -169,6 +169,7 @@ EXTRA_DIST = \
 	libxfce4panel-visibility.h \
 	libxfce4panel-visibility.c \
 	libxfce4panel-marshal.list \
+	meson.build \
 	$(NULL)
 
 if ENABLE_VAPIGEN
