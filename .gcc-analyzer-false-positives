@@ -1,5 +1,5 @@
 # pager_plugin_get_master_plugin() can only return NULL in init() for the first plugin
-pager.c:[0-9]+:[0-9]+: warning: dereference of NULL 'master_plugin' \[CWE-476\] \[-Wanalyzer-null-dereference\]
+pager.c:[0-9]+:[0-9]+: warning: dereference of NULL .master_plugin. \[CWE-476\] \[-Wanalyzer-null-dereference\]
 
 # child is NULL iff tasklist is NULL, which is checked above in panel_return_val_if_fail()
-tasklist-widget.c:[0-9]+:[0-9]+: warning: dereference of NULL 'child' \[CWE-476\] \[-Wanalyzer-null-dereference\]
+tasklist-widget.c:[0-9]+:[0-9]+: warning: dereference of NULL .child. \[CWE-476\] \[-Wanalyzer-null-dereference\]

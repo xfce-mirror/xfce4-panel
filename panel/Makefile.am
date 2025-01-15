@@ -145,6 +145,8 @@ EXTRA_DIST = \
 	panel-dbus-service-infos.xml \
 	panel-plugin-external-wrapper-infos.xml \
 	panel-preferences-dialog.glade \
-	panel-marshal.list
+	panel-marshal.list \
+	meson.build \
+	$(NULL)
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

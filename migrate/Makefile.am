@@ -44,6 +44,8 @@ migrate_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la
 
 EXTRA_DIST = \
-	default.xml
+	default.xml \
+	meson.build \
+	$(NULL)
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:
