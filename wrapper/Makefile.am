@@ -85,4 +85,9 @@ DISTCLEANFILES = \
 
 endif
 
+EXTRA_DIST = \
+	wrapper-external-infos.xml \
+	meson.build \
+	$(NULL)
+
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

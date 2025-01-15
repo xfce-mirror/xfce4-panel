@@ -38,7 +38,12 @@ dist-hook: ChangeLog
 EXTRA_DIST = \
 	$(desktop_in_files) \
 	m4/introspection.m4 \
-	m4/vapigen.m4
+	m4/vapigen.m4 \
+	meson.build \
+	meson_options.txt \
+	po/meson.build \
+	xfce-revision.h.in \
+	$(NULL)
 
 DISTCLEANFILES = \
 	$(desktop_DATA)
