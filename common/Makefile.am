@@ -38,6 +38,8 @@ libpanel_common_la_LIBADD = \
 
 EXTRA_DIST = \
 	panel-dbus.h \
-	panel-private.h
+	panel-private.h \
+	meson.build \
+	$(NULL)
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:
