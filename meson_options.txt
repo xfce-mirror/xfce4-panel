@@ -1,0 +1,62 @@
+option(
+  'gtk-doc',
+  type: 'boolean',
+  value: false,
+  description: 'Build gtk-doc HTML',
+)
+
+option(
+  'introspection',
+  type: 'boolean',
+  value: true,
+  description: 'Build gobject-introspection files',
+)
+
+option(
+  'vala',
+  type: 'feature',
+  value: 'auto',
+  description: 'Build Vala language bindings',
+)
+
+option(
+  'visibility',
+  type: 'boolean',
+  value: true,
+  description: 'Build with GNU symbol visibility',
+)
+
+option(
+  'x11',
+  type: 'feature',
+  value: 'auto',
+  description: 'Support for the X11 windowing system',
+)
+
+option(
+  'wayland',
+  type: 'feature',
+  value: 'auto',
+  description: 'Support for the Wayland windowing system',
+)
+
+option(
+  'gtk-layer-shell',
+  type: 'feature',
+  value: 'auto',
+  description: 'Gtk Layer Shell support (Wayland only)',
+)
+
+option(
+  'dbusmenu',
+  type: 'feature',
+  value: 'auto',
+  description: 'DBusMenu support for status notifier items',
+)
+
+option(
+  'helper-path-prefix',
+  type: 'string',
+  value: '',
+  description: 'Path prefix under which helper executables will be installed (default: $libdir)',
+)
