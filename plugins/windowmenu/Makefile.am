@@ -72,7 +72,9 @@ desktop_DATA = $(desktop_in_files:.desktop.in.in=.desktop)
 EXTRA_DIST = \
 	windowmenu-dialog.glade \
 	xfce4-popup-windowmenu.sh \
-	$(desktop_in_files)
+	$(desktop_in_files) \
+	meson.build \
+	$(NULL)
 
 DISTCLEANFILES = \
 	$(desktop_DATA) \
