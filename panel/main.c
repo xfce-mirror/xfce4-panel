@@ -229,7 +229,7 @@ main (gint argc,
 
   panel_debug (PANEL_DEBUG_MAIN,
                "version %s on gtk+ %d.%d.%d (%d.%d.%d), glib %d.%d.%d (%d.%d.%d)",
-               LIBXFCE4PANEL_VERSION,
+               VERSION,
                gtk_major_version, gtk_minor_version, gtk_micro_version,
                GTK_MAJOR_VERSION, GTK_MINOR_VERSION, GTK_MICRO_VERSION,
                glib_major_version, glib_minor_version, glib_micro_version,
