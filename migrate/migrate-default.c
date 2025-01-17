@@ -22,7 +22,7 @@
 
 #include "migrate-default.h"
 
-#include "libxfce4panel/xfce-panel-macros.h"
+#include "libxfce4panel/libxfce4panel.h"
 
 #include <gtk/gtk.h>
 #include <libxfce4util/libxfce4util.h>
