@@ -2,7 +2,6 @@
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"libpanel-common\" \
-	-DHELPDIR=\"$(docdir)/html\" \
 	$(PLATFORM_CPPFLAGS)
 
 noinst_LTLIBRARIES = \

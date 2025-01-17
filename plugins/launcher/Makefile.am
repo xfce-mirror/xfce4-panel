@@ -2,7 +2,6 @@
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"liblauncher\" \
-	-DSN_API_NOT_YET_FROZEN \
 	$(PLATFORM_CPPFLAGS)
 
 plugindir = $(libdir)/xfce4/panel/plugins
