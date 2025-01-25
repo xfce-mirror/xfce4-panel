@@ -870,6 +870,7 @@ actions_plugin_action_confirmation (ActionsPlugin *plugin,
                                     initial_label_text, _("_Cancel"), GTK_RESPONSE_CANCEL,
                                     XFCE_BUTTON_TYPE_MIXED, icon_name, _(entry->mnemonic), GTK_RESPONSE_ACCEPT,
                                     NULL);
+  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
   gtk_window_set_keep_above (GTK_WINDOW (dialog), TRUE);
   gtk_window_stick (GTK_WINDOW (dialog));
   gtk_window_set_skip_taskbar_hint (GTK_WINDOW (dialog), TRUE);
