@@ -90,13 +90,10 @@ libpanel_deps = [
   libxfce4ui,
   libxfce4util,
   libm,
+  gtk_layer_shell,
 ]
 if need_libintl
   libpanel_deps += libintl
-endif
-if have_gtk_layer_shell
-  # so it isn't included in the pkg-config file if wayland is disabled
-  libpanel_deps += gtk_layer_shell
 endif
 
 libpanel_so_version = '4'
