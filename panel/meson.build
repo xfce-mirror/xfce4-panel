@@ -77,6 +77,7 @@ panel_sources += custom_target(
 executable(
   'xfce4-panel',
   panel_sources,
+  sources: xfce_revision_h,
   c_args: [
     '-DG_LOG_DOMAIN="@0@"'.format('xfce4-panel'),
     '-DHELPERDIR="@0@"'.format(helper_path_prefix / 'xfce4' / 'panel'),
