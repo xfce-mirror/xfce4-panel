@@ -19,6 +19,9 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+#ifdef HAVE_XFCE_REVISION_H
+#include "xfce-revision.h"
+#endif
 
 #include "panel-dialogs.h"
 #include "panel-tic-tac-toe.h"
@@ -81,7 +84,7 @@ panel_dialogs_show_about (void)
   gtk_about_dialog_set_license (GTK_ABOUT_DIALOG (about_dialog), XFCE_LICENSE_GPL);
   gtk_about_dialog_set_program_name (GTK_ABOUT_DIALOG (about_dialog), PACKAGE_NAME);
   gtk_about_dialog_set_translator_credits (GTK_ABOUT_DIALOG (about_dialog), _("translator-credits"));
-  gtk_about_dialog_set_version (GTK_ABOUT_DIALOG (about_dialog), PACKAGE_VERSION);
+  gtk_about_dialog_set_version (GTK_ABOUT_DIALOG (about_dialog), VERSION_FULL);
   gtk_about_dialog_set_website (GTK_ABOUT_DIALOG (about_dialog), "https://docs.xfce.org/xfce/xfce4-panel/start");
   gtk_about_dialog_set_logo_icon_name (GTK_ABOUT_DIALOG (about_dialog), "org.xfce.panel");
   gtk_window_set_destroy_with_parent (GTK_WINDOW (about_dialog), TRUE);

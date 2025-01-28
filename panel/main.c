@@ -20,6 +20,9 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+#ifdef HAVE_XFCE_REVISION_H
+#include "xfce-revision.h"
+#endif
 
 #include "panel-application.h"
 #include "panel-dbus-client.h"
@@ -229,7 +232,7 @@ main (gint argc,
 
   panel_debug (PANEL_DEBUG_MAIN,
                "version %s on gtk+ %d.%d.%d (%d.%d.%d), glib %d.%d.%d (%d.%d.%d)",
-               VERSION,
+               VERSION_FULL,
                gtk_major_version, gtk_minor_version, gtk_micro_version,
                GTK_MAJOR_VERSION, GTK_MINOR_VERSION, GTK_MICRO_VERSION,
                glib_major_version, glib_minor_version, glib_micro_version,
@@ -280,7 +283,7 @@ main (gint argc,
         g_print ("%s (%s)", *opt_arguments, PACKAGE_NAME);
       else
         g_print ("%s", PACKAGE_NAME);
-      g_print (" %s (Xfce %s)\n\n", PACKAGE_VERSION, xfce_version_string ());
+      g_print (" %s (Xfce %s)\n\n", VERSION_FULL, xfce_version_string ());
       g_print ("%s\n", "Copyright (c) 2004-2024");
       g_print ("\t%s\n\n", _("The Xfce development team. All rights reserved."));
       g_print (_("Please report bugs to <%s>."), PACKAGE_BUGREPORT);
