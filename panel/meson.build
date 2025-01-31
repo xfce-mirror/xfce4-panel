@@ -37,7 +37,7 @@ if enable_x11
   ]
 endif
 
-if have_gtk_layer_shell
+if gtk_layer_shell.found()
   panel_sources += [
     'panel-plugin-external-wrapper-wayland.c',
     'panel-plugin-external-wrapper-wayland.h',

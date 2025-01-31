@@ -13,7 +13,7 @@ if enable_x11
   ]
 endif
 
-if have_gtk_layer_shell
+if gtk_layer_shell.found()
   wrapper_sources += [
     'wrapper-plug-wayland.c',
     'wrapper-plug-wayland.h',
