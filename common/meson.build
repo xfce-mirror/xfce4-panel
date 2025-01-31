@@ -1,5 +1,5 @@
 libpanel_common = static_library(
-  'libpanel-common',
+  'panel-common',
   [
     'panel-debug.c',
     'panel-debug.h',
