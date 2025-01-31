@@ -85,15 +85,14 @@ enable_wayland = not get_option('wayland').disabled()
 foreach dep : wayland_deps
   enable_wayland = enable_wayland and dep.found()
 endforeach
-have_gtk_layer_shell = false
-gtk_layer_shell = []
 if enable_wayland
   feature_cflags += '-DENABLE_WAYLAND=1'
   gtk_layer_shell = dependency('gtk-layer-shell-0', version: dependency_versions['gtk-layer-shell'], required: get_option('gtk-layer-shell'))
   if gtk_layer_shell.found()
-    have_gtk_layer_shell = true
     feature_cflags += '-DHAVE_GTK_LAYER_SHELL=1'
   endif
+else
+  gtk_layer_shell = dependency('')
 endif
 
 if not enable_x11 and not enable_wayland
