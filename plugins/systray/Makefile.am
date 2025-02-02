@@ -97,6 +97,7 @@ EXTRA_DIST = \
 	sn-dialog.glade \
 	systray-marshal.list \
 	meson.build \
+	sn-watcher.xml \
 	$(NULL)
 
 DISTCLEANFILES = \
@@ -105,7 +106,6 @@ DISTCLEANFILES = \
 #
 # Rules to auto-generate built sources
 #
-if MAINTAINER_MODE
 BUILT_SOURCES = \
 	$(libsystray_built_sources)
 
@@ -128,6 +128,5 @@ systray-marshal.h: systray-marshal.list Makefile
 systray-marshal.c: systray-marshal.list Makefile
 	$(AM_V_GEN) echo "#include \"systray-marshal.h\"" > $@ \
 	&& glib-genmarshal --prefix=_systray_marshal --body $< >> $@
-endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:
