@@ -1,5 +1,5 @@
 dnl
-dnl Copyright (c) 2004-2024 The Xfce development team
+dnl Copyright (c) 2004-2025 The Xfce development team
 dnl
 dnl 2005-2007 Jasper Huijsmans <jasper@xfce.org>
 dnl 2006-2008 Nick Schermer <nick@xfce.org>
@@ -19,7 +19,7 @@ m4_define([gtk_minimum_version], [3.24.0])
 m4_define([cairo_minimum_version], [1.16])
 m4_define([libxfce4util_minimum_version], [4.17.2])
 m4_define([libxfce4ui_minimum_version], [4.17.1])
-m4_define([libxfce4windowing_minimum_version], [4.19.6])
+m4_define([libxfce4windowing_minimum_version], [4.20.1])
 m4_define([garcon_minimum_version], [4.17.0])
 m4_define([exo_minimum_version], [0.11.2])
 m4_define([xfconf_minimum_version], [4.13.2])
@@ -34,7 +34,7 @@ m4_define([gtk_layer_shell_minimum_version], [0.7.0])
 dnl ***************************
 dnl *** Initialize autoconf ***
 dnl ***************************
-AC_COPYRIGHT([Copyright (c) 2004-2024 The Xfce development team. All rights reserved.
+AC_COPYRIGHT([Copyright (c) 2004-2025 The Xfce development team. All rights reserved.
   Written for Xfce by Jasper Huijsmans <jasper@xfce.org> and Nick Schermer <nick@xfce.org>.])
 AC_INIT([xfce4-panel],[xdt_version],[https://gitlab.xfce.org/xfce/xfce4-panel/-/issues],[xfce4-panel])
 AC_PREREQ([2.69])
