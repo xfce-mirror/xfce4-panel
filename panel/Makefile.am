@@ -7,7 +7,6 @@ AM_CPPFLAGS = \
 	-DLIBDIR=\"$(libdir)\" \
 	-DHELPERDIR=\"$(HELPER_PATH_PREFIX)/xfce4/panel\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
-	-DDBUS_API_SUBJECT_TO_CHANGE \
 	$(PLATFORM_CPPFLAGS)
 
 bin_PROGRAMS = \

@@ -23,7 +23,7 @@
 #include "panel-private.h"
 #include "panel-xfconf.h"
 
-#include "libxfce4panel/xfce-panel-macros.h"
+#include "libxfce4panel/libxfce4panel.h"
 
 
 
