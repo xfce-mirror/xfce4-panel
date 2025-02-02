@@ -60,15 +60,6 @@ wrapper_2_0_LDADD = \
 wrapper_2_0_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la
 
-if MAINTAINER_MODE
-
-#wrapper-marshal.h: $(top_builddir)/panel/panel-marshal.list Makefile
-#	$(AM_V_GEN)glib-genmarshal --header --prefix=wrapper_marshal $< > $@
-#
-#wrapper-marshal.c: $(top_builddir)/panel/panel-marshal.list Makefile
-#	$(AM_V_GEN) echo "#include <wrapper/wrapper-marshal.h>" > $@ \
-#	&& glib-genmarshal --body --prefix=wrapper_marshal $< >> $@
-
 wrapper-external-exported.c:
 wrapper-external-exported.h: wrapper-external-infos.xml Makefile
 	$(AM_V_GEN) $(GDBUS_CODEGEN) \
@@ -82,8 +73,6 @@ BUILT_SOURCES = \
 
 DISTCLEANFILES = \
 	$(wrapper_built_sources)
-
-endif
 
 EXTRA_DIST = \
 	wrapper-external-infos.xml \

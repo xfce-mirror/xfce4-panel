@@ -98,8 +98,6 @@ xfce4_panel_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la
 
-if MAINTAINER_MODE
-
 panel-marshal.h: panel-marshal.list Makefile
 	$(AM_V_GEN) glib-genmarshal --prefix=_panel_marshal --internal --header $< > $@
 
@@ -126,20 +124,11 @@ panel-plugin-external-wrapper-exported.c: panel-plugin-external-wrapper-infos.xm
 panel-preferences-dialog-ui.h: $(srcdir)/panel-preferences-dialog.glade Makefile
 	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=panel_preferences_dialog_ui $< >$@
 
-#panel-marshal.h: $(srcdir)/panel-marshal.list Makefile
-#	$(AM_V_GEN) glib-genmarshal --header --prefix=panel_marshal $< > $@
-#
-#panel-marshal.c: $(srcdir)/panel-marshal.list Makefile
-#	$(AM_V_GEN) echo "#include <panel/panel-marshal.h>" > $@ \
-#	&& glib-genmarshal --body --prefix=panel_marshal $< >> $@
-
 DISTCLEANFILES = \
 	$(xfce4_panel_built_sources)
 
 BUILT_SOURCES = \
 	$(xfce4_panel_built_sources)
-
-endif
 
 EXTRA_DIST = \
 	panel-dbus-service-infos.xml \
