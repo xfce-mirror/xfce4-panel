@@ -25,7 +25,7 @@ dependency_versions = {
   'gtk': '>= 3.24.0',
   'libxfce4ui': '>= 4.17.1',
   'libxfce4util': '>= 4.17.2',
-  'libxfce4windowing': '>= 4.19.6',
+  'libxfce4windowing': '>= 4.20.1',
   'xfconf': '>= 4.13.2',
 
   'libwnck': '>= 3.0',
