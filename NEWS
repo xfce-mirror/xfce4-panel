@@ -1,3 +1,33 @@
+4.20.1 (2025-02-02)
+======
+- build: Bump libxfce4windowing required version to 4.20.1
+- Update copyright year
+- meson-build: Don't add 'lib' prefix in static lib name
+- meson-build: Simplify feature opt dep management
+- meson-build: Ensure xfce-revision.h was generated when using it
+- build: Use VERSION_FULL intead of VERSION or PACKAGE_VERSION
+- autotools-build: Fix EXTRA_DIST redefinition
+- meson-build: Remove unneeded conditional
+- actions: Restore dialog accept on Enter behavior
+- Add meson build
+- Turn some messages into warnings
+- build: Migrate to xdt-gen-visibility and xdt-check-abi
+- wayland: windowmenu: Hide irrelevant workspace options
+- wayland: pager: Hide workspace settings
+- docs: Add missing parameter to XfcePanelPlugin::hidden-event
+- wayland: libxfce4panel: Set kbd interact to on-demand for popup 
+windows
+- tasklist: Add missing workspace property initialization on Wayland
+- panel: Deal with duplicated monitor models
+- tasklist: Disable workspace related properties on Wayland
+- prefs-dialog: Don't trust xfconf_channel_get_string_list() return 
+value
+- libxfce4panel: Fix XfcePanelPlugin size
+- Add an hidden-event signal for plugins
+- Translation Updates:
+  Albanian, Catalan, Chinese (China), Danish, Hungarian, Russian,
+  Slovak, Vietnamese
+
 4.20.0 (2024-12-15)
 ======
 
