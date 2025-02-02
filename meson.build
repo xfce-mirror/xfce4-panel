@@ -1,7 +1,7 @@
 project(
   'xfce4-panel',
   'c',
-version : '4.20.1-dev',
+version : '4.20.2',
   license : 'GPL-2',
   meson_version : '>= 0.56.0',
   default_options : ['c_std=gnu11', 'buildtype=debugoptimized', 'warning_level=2', 'b_ndebug=if-release']
