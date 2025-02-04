@@ -73,6 +73,10 @@ AM_PROG_CC_C_O()
 LT_PATH_LD([])
 AC_PROG_INSTALL()
 AC_PATH_PROG([XDT_GEN_VISIBILITY], [xdt-gen-visibility])
+AC_PATH_PROG([XDT_CSOURCE], [xdt-csource])
+if test x"$XDT_CSOURCE" = x""; then
+  AC_MSG_ERROR([Could not find xdt-csource in PATH, please install xfce4-dev-tools])
+fi
 m4_ifdef([AC_PROG_SED], [AC_PROG_SED], [AC_CHECK_PROG(SED, sed, sed)])
 
 dnl **************************
