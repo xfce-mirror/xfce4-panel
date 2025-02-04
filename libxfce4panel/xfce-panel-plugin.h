@@ -132,8 +132,6 @@ struct _XfcePanelPluginClass
                             gint size);
   void (*orientation_changed) (XfcePanelPlugin *plugin,
                                GtkOrientation orientation);
-  void (*hidden_event) (XfcePanelPlugin *plugin,
-                        gboolean hidden);
   void (*free_data) (XfcePanelPlugin *plugin);
   void (*save) (XfcePanelPlugin *plugin);
   void (*about) (XfcePanelPlugin *plugin);
@@ -148,6 +146,10 @@ struct _XfcePanelPluginClass
                         XfcePanelPluginMode mode);
   void (*nrows_changed) (XfcePanelPlugin *plugin,
                          guint rows);
+
+  /* new in 4.20.1 */
+  void (*hidden_event) (XfcePanelPlugin *plugin,
+                        gboolean hidden);
 
   /*< private >*/
   void (*reserved1) (void);
