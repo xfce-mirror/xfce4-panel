@@ -1,34 +1,20 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Xfce
-# This file is distributed under the same license as the xfce4-panel.master package.
+# This file is distributed under the same license as the xfce4-panel.xfce-4-20 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Ápo. <apostolos.papadimitriu@gmail.com>, 2016-2017
-# Ápo. <apostolos.papadimitriu@gmail.com>, 2016
-# Ápo. <apostolos.papadimitriu@gmail.com>, 2017
-# Christos Arvanitis <arvchristos@gmail.com>, 2019
-# ebal <ebalaskas@ebalaskas.gr>, 2009
-# Efstathios Iosifidis <iefstathios@gmail.com>, 2014-2015,2018
-# Efstathios Iosifidis <iosifidis@opensuse.org>, 2012
-# Evaggelos Balaskas <ebal@ebal.gr>, 2008-2010
-# Ioannis LM, 2019,2022
-# Ioannis LM, 2019,2022-2024
-# nonviotale <nonviotale@gmail.com>, 2013
-# Panagiotis Tabakis, 2015-2016
-# Panagiotis Tabakis, 2016
-# Spiros Georgaras <sng@hellug.gr>, 2010
-# Stathis Kamperis <ekamperi@auth.gr>, 2006
-# Stavros Giannouris <StavrosG2002@freemail.gr>, 2005
-# Stavros Giannouris <stavros@hellug.gr>, 2005-2006,2008-2010
-# Πέτρος Σαμαράς <psamaras1@gmail.com>, 2017-2019,2021
+# Xfce Bot <transifex@xfce.org>, 2025
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Xfce4-panel\n"
+"Project-Id-Version: xfce4-panel.xfce-4-20\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-10-18 00:47+0200\n"
-"PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Ioannis LM, 2019,2022-2024\n"
-"Language-Team: Greek (http://app.transifex.com/xfce/xfce4-panel/language/el/)\n"
+"POT-Creation-Date: 2025-02-14 12:29+0100\n"
+"PO-Revision-Date: 2025-02-14 11:29+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>, 2025\n"
+"Language-Team: Greek (https://app.transifex.com/xfce/teams/16840/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -49,9 +35,12 @@ msgstr "Προσθήκη νέου εκκινητή στο ταμπλό από α
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
-msgstr "ταμπλό;ρυθμίσεις;προτιμήσεις;γραμμή εργασιών;αυτόματη απόκρυψη;μενού εφαρμογής;έναρξη;κουμπιά;εκκινητής;περιοχή ειδοποιήσεων;εμφάνιση;εικονίδια;πρόσθετα;"
+msgstr ""
+"ταμπλό;ρυθμίσεις;προτιμήσεις;γραμμή εργασιών;αυτόματη απόκρυψη;μενού "
+"εφαρμογής;έναρξη;κουμπιά;εκκινητής;περιοχή "
+"ειδοποιήσεων;εμφάνιση;εικονίδια;πρόσθετα;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3686
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3710
 msgid "Panel"
 msgstr "Ταμπλό"
 
@@ -59,67 +48,69 @@ msgstr "Ταμπλό"
 msgid "Customize the panel"
 msgstr "Προσαρμογή του ταμπλό"
 
-#: libxfce4panel/xfce-panel-plugin.c:1088
-#: panel/panel-preferences-dialog.c:1537
+#: libxfce4panel/xfce-panel-plugin.c:1113
+#: panel/panel-preferences-dialog.c:1549
 msgid "Remove"
 msgstr "Αφαίρεση"
 
-#: libxfce4panel/xfce-panel-plugin.c:1089
+#: libxfce4panel/xfce-panel-plugin.c:1114
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
-msgstr "Η αφαίρεση του αντικειμένου από το ταμπλό συνεπάγεται και την απώλεια των ρυθμίσεων του."
+msgstr ""
+"Η αφαίρεση του αντικειμένου από το ταμπλό συνεπάγεται και την απώλεια των "
+"ρυθμίσεων του."
 
-#: libxfce4panel/xfce-panel-plugin.c:1093
-#: panel/panel-preferences-dialog.c:1544
+#: libxfce4panel/xfce-panel-plugin.c:1118
+#: panel/panel-preferences-dialog.c:1556
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Θέλετε σίγουρα να αφαιρέσετε το \"%s\";"
 
 #. properties item
-#: libxfce4panel/xfce-panel-plugin.c:1215
+#: libxfce4panel/xfce-panel-plugin.c:1240
 msgid "_Properties"
 msgstr "_Ιδιότητες"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1226 panel/panel-window.c:3761
+#: libxfce4panel/xfce-panel-plugin.c:1251 panel/panel-window.c:3785
 msgid "_About"
 msgstr "_Περί"
 
 #. move item
-#: libxfce4panel/xfce-panel-plugin.c:1237
+#: libxfce4panel/xfce-panel-plugin.c:1262
 msgid "_Move"
 msgstr "_Μετακίνηση"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1253 panel/panel-application.c:357
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1083
+#: libxfce4panel/xfce-panel-plugin.c:1278 panel/panel-application.c:357
+#: panel/panel-plugin-external.c:424 panel/panel-preferences-dialog.c:1089
 #: panel/panel-preferences-dialog.glade:1240
 #: plugins/launcher/launcher-dialog.c:841
 msgid "_Remove"
 msgstr "_Αφαίρεση"
 
-#: libxfce4panel/xfce-panel-plugin.c:1271
+#: libxfce4panel/xfce-panel-plugin.c:1296
 msgid "Pane_l"
 msgstr "Ταμπ_λό"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1279 panel/panel-window.c:3698
+#: libxfce4panel/xfce-panel-plugin.c:1304 panel/panel-window.c:3722
 msgid "Add _New Items..."
 msgstr "Προσθήκη _νέων αντικειμένων..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1290 panel/panel-window.c:3709
+#: libxfce4panel/xfce-panel-plugin.c:1315 panel/panel-window.c:3733
 msgid "Panel Pr_eferences..."
 msgstr "Π_ροτιμήσεις ταμπλό..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1307 panel/panel-window.c:3736
+#: libxfce4panel/xfce-panel-plugin.c:1332 panel/panel-window.c:3760
 msgid "Log _Out"
 msgstr "Απ_οσύνδεση"
 
 #. help item
-#: libxfce4panel/xfce-panel-plugin.c:1323 panel/panel-item-dialog.c:207
-#: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3752
+#: libxfce4panel/xfce-panel-plugin.c:1348 panel/panel-item-dialog.c:207
+#: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3776
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
 #: plugins/clock/clock-dialog.glade:120
@@ -134,121 +125,125 @@ msgid "_Help"
 msgstr "_Βοήθεια"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1334
+#: libxfce4panel/xfce-panel-plugin.c:1359
 msgid "About"
 msgstr "Περί"
 
-#: panel/main.c:66
+#: panel/main.c:69
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Εμφάνιση του 'Προτιμήσεις ταμπλό'"
 
-#: panel/main.c:66 panel/main.c:67
+#: panel/main.c:69 panel/main.c:70
 msgid "PANEL-NUMBER"
 msgstr "ΑΡΙΘΜΟΣ-ΤΑΜΠΛΟ"
 
-#: panel/main.c:67
+#: panel/main.c:70
 msgid "Show the 'Add New Items' dialog"
 msgstr "Εμφάνιση του 'Προσθήκη νέων αντικειμένων'"
 
-#: panel/main.c:68
+#: panel/main.c:71
 msgid "Save the panel configuration"
 msgstr "Αποθήκευση της ρύθμισης παραμέτρων του ταμπλό"
 
-#: panel/main.c:69
+#: panel/main.c:72
 msgid "Add a new plugin to the panel"
 msgstr "Προσθήκη ενός νέου πρόσθετου στο ταμπλό"
 
-#: panel/main.c:69
+#: panel/main.c:72
 msgid "PLUGIN-NAME"
 msgstr "ΟΝΟΜΑ-ΠΡΟΣΘΕΤΟΥ"
 
-#: panel/main.c:70
+#: panel/main.c:73
 msgid "Restart the running panel instance"
 msgstr "Επανεκκίνηση της τρέχουσας διεργασίας του ταμπλό"
 
-#: panel/main.c:71
+#: panel/main.c:74
 msgid "Quit the running panel instance"
 msgstr "Τερματισμός της τρέχουσας διεργασίας του ταμπλό"
 
-#: panel/main.c:72
+#: panel/main.c:75
 msgid "Do not wait for a window manager on startup"
 msgstr "Μη αναμονή για διαχειριστή παραθύρων κατά την εκκίνηση"
 
-#: panel/main.c:73 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: panel/main.c:76 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "Εμφάνιση πληροφοριών έκδοσης και έξοδος"
 
 #. parse context options
-#: panel/main.c:258
+#: panel/main.c:261
 msgid "[ARGUMENTS...]"
 msgstr "[ΟΡΙΣΜΑΤΑ...]"
 
-#: panel/main.c:268
+#: panel/main.c:271
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Για πληροφορίες χρήσης πληκτρολογήστε \"%s --help\"."
 
-#: panel/main.c:285
+#: panel/main.c:288
 msgid "The Xfce development team. All rights reserved."
-msgstr "Η ομάδα ανάπτυξης του Xfce. Με την επιφύλαξη παντός νόμιμου δικαιώματος."
+msgstr ""
+"Η ομάδα ανάπτυξης του Xfce. Με την επιφύλαξη παντός νόμιμου δικαιώματος."
 
-#: panel/main.c:286
+#: panel/main.c:289
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Παρακαλώ αναφέρατε σφάλματα στο <%s>."
 
 #. quit without error if an instance is running
-#: panel/main.c:394
+#: panel/main.c:397
 msgid "There is already a running instance"
 msgstr "Υπάρχει ήδη μια εκτελούμενη διεργασία"
 
 #. spawn ourselfs again
-#: panel/main.c:405
+#: panel/main.c:408
 msgid "Restarting..."
 msgstr "Επανεκκίνηση..."
 
-#: panel/main.c:422
+#: panel/main.c:425
 msgid "Failed to show the preferences dialog"
 msgstr "Απέτυχε η εμφάνιση των προτιμήσεων"
 
-#: panel/main.c:424
+#: panel/main.c:427
 msgid "Failed to show the add new items dialog"
 msgstr "Απέτυχε η εμφάνιση της προσθήκης νέων αντικειμένων"
 
-#: panel/main.c:426
+#: panel/main.c:429
 msgid "Failed to save the panel configuration"
 msgstr "Απέτυχε η αποθήκευση ρύθμισης του ταμπλό"
 
-#: panel/main.c:428
+#: panel/main.c:431
 msgid "Failed to add a plugin to the panel"
 msgstr "Απέτυχε η προσθήκη νέου πρόσθετου στο ταμπλό"
 
-#: panel/main.c:430
+#: panel/main.c:433
 msgid "Failed to restart the panel"
 msgstr "Απέτυχε η επανεκκίνηση του ταμπλό"
 
-#: panel/main.c:432
+#: panel/main.c:435
 msgid "Failed to quit the panel"
 msgstr "Απέτυχε ο τερματισμός του ταμπλό"
 
-#: panel/main.c:434
+#: panel/main.c:437
 msgid "Failed to send D-Bus message"
 msgstr "Απέτυχε η αποστολή μηνύματος D-BUS"
 
-#: panel/main.c:442 panel/main.c:462
+#: panel/main.c:445 panel/main.c:465
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Δεν βρέθηκε να τρέχει κάποια διεργασία του %s"
 
-#: panel/main.c:443
+#: panel/main.c:446
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "Θέλετε να εκκινηθεί το ταμπλό; Εάν το κάνετε, βεβαιωθείτε ότι έχετε αποθηκεύσει τη συνεδρία κατά την αποσύνδεσή σας, ώστε το ταμπλό να εκκινηθεί αυτόματα την επόμενη φορά που θα συνδεθείτε."
+msgstr ""
+"Θέλετε να εκκινηθεί το ταμπλό; Εάν το κάνετε, βεβαιωθείτε ότι έχετε "
+"αποθηκεύσει τη συνεδρία κατά την αποσύνδεσή σας, ώστε το ταμπλό να εκκινηθεί"
+" αυτόματα την επόμενη φορά που θα συνδεθείτε."
 
-#: panel/main.c:448
+#: panel/main.c:451
 msgid "Execute"
 msgstr "Εκτέλεση"
 
@@ -261,7 +256,9 @@ msgstr "Απέτυχε η εκκίνηση εφαρμογής για τη μετ
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
-msgstr "Το πρόσθετο \"%s\" δεν μπόρεσε να φορτωθεί, θέλετε να το αφαιρέσετε από το ταμπλό;"
+msgstr ""
+"Το πρόσθετο \"%s\" δεν μπόρεσε να φορτωθεί, θέλετε να το αφαιρέσετε από το "
+"ταμπλό;"
 
 #: panel/panel-application.c:349
 #, c-format
@@ -271,7 +268,13 @@ msgid ""
 "doing, you can remove it permanently, otherwise you'd better quit and make a"
 " backup of the current configuration using %s, before checking your "
 "installation and trying to start xfce4-panel again."
-msgstr "Αυτό το πρόσθετο βρίσκεται στη τρέχουσα διαμόρφωση του ταμπλό, αλλά δεν δεν μπόρεσε να φορτωθεί, πιθανότατα λόγω προβλήματος στην εγκατάσταση. Αν ξέρετε τι κάνετε, μπορείτε να το αφαιρέσετε οριστικά, διαφορετικά είναι καλύτερα να φύγετε και να δημιουργήσετε ένα αντίγραφο της τρέχουσας διαμόρφωσης χρησιμοποιώντας το %s, πριν ελέγξετε την εγκατάσταση και προσπαθήσετε να εκκινήσετε ξανά το ταμπλό του xfce4."
+msgstr ""
+"Αυτό το πρόσθετο βρίσκεται στη τρέχουσα διαμόρφωση του ταμπλό, αλλά δεν δεν "
+"μπόρεσε να φορτωθεί, πιθανότατα λόγω προβλήματος στην εγκατάσταση. Αν ξέρετε"
+" τι κάνετε, μπορείτε να το αφαιρέσετε οριστικά, διαφορετικά είναι καλύτερα "
+"να φύγετε και να δημιουργήσετε ένα αντίγραφο της τρέχουσας διαμόρφωσης "
+"χρησιμοποιώντας το %s, πριν ελέγξετε την εγκατάσταση και προσπαθήσετε να "
+"εκκινήσετε ξανά το ταμπλό του xfce4."
 
 #: panel/panel-application.c:356
 msgid "Plugin loading failure"
@@ -285,7 +288,9 @@ msgstr "Έ_ξοδος"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Αυτό θα δημιουργήσει νέο πρόσθετο εκκινητή στο ταμπλό και θα εισάγει τα παραδοθέντα αρχεία ως αντικείμενα του μενού."
+msgstr ""
+"Αυτό θα δημιουργήσει νέο πρόσθετο εκκινητή στο ταμπλό και θα εισάγει τα "
+"παραδοθέντα αρχεία ως αντικείμενα του μενού."
 
 #: panel/panel-application.c:1040
 msgid "Create _Launcher"
@@ -302,7 +307,9 @@ msgstr[1] "Δημιουργία νέου εκκινητή από τα %d αρχ�
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "Ξεκινήσατε το Xfce χωρίς διαχειριστή συνεδρίας. Επιλέγοντας έξοδο θα κλείσει ο X server."
+msgstr ""
+"Ξεκινήσατε το Xfce χωρίς διαχειριστή συνεδρίας. Επιλέγοντας έξοδο θα κλείσει"
+" ο X server."
 
 #: panel/panel-application.c:1805
 msgid "Quit"
@@ -320,60 +327,73 @@ msgstr "Απέτυχε η εκτέλεση της εντολής \"%s\""
 #: panel/panel-dbus-client.c:213
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Ορίσατε μη έγκυρη σύνταξη για το πρόσθετο: Χρησιμοποιήστε το ΟΝΟΜΑ-ΠΡΟΣΘΕΤΟΥ:ΟΝΟΜΑ[:ΤΥΠΟΣ:ΤΙΜΗ]."
+msgstr ""
+"Ορίσατε μη έγκυρη σύνταξη για το πρόσθετο: Χρησιμοποιήστε το ΟΝΟΜΑ-"
+"ΠΡΟΣΘΕΤΟΥ:ΟΝΟΜΑ[:ΤΥΠΟΣ:ΤΙΜΗ]."
 
 #: panel/panel-dbus-client.c:243
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "Μη έγκυρος τύπος \"%s\". Οι έγκυροι τύποι είναι bool, double, int, string και uint."
+msgstr ""
+"Μη έγκυρος τύπος \"%s\". Οι έγκυροι τύποι είναι bool, double, int, string "
+"και uint."
 
-#: panel/panel-dialogs.c:53
+#: panel/panel-dialogs.c:56
 msgid "Unable to open the e-mail address"
 msgstr "Αδύνατη η πρόσβαση στη διεύθυνση e-mail"
 
-#: panel/panel-dialogs.c:79
+#: panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Το ταμπλό του περιβάλλοντος εργασίας Xfce"
 
-#: panel/panel-dialogs.c:83
+#: panel/panel-dialogs.c:86
 msgid "translator-credits"
-msgstr "Ευάγγελος Μπαλάσκας <ebalaskas@ebalaskas.gr>\nΣταύρος Γιαννούρης <stavrosg@hellug.gr>\nΣτάθης Καμπέρης <ekamperi@auth.gr>\nΣπύρος Γεωργαράς <sng@hellug.gr>\nΕυστάθιος Ιωσηφίδης <iosifidis@opensuse.org>\nΠέτρος Σαμαράς <petros@theoreio.gr>\nΙωάννης"
+msgstr ""
+"Ευάγγελος Μπαλάσκας <ebalaskas@ebalaskas.gr>\n"
+"Σταύρος Γιαννούρης <stavrosg@hellug.gr>\n"
+"Στάθης Καμπέρης <ekamperi@auth.gr>\n"
+"Σπύρος Γεωργαράς <sng@hellug.gr>\n"
+"Ευστάθιος Ιωσηφίδης <iosifidis@opensuse.org>\n"
+"Πέτρος Σαμαράς <petros@theoreio.gr>\n"
+"Ιωάννης"
 
-#: panel/panel-dialogs.c:157
+#: panel/panel-dialogs.c:160
 msgid "Add New Item"
 msgstr "Προσθήκη νέου αντικειμένου"
 
-#: panel/panel-dialogs.c:157 plugins/actions/actions.c:870
+#: panel/panel-dialogs.c:160 plugins/actions/actions.c:870
 #: plugins/applicationsmenu/applicationsmenu.c:606
 #: plugins/directorymenu/directorymenu.c:466
 #: plugins/directorymenu/directorymenu.c:938
 msgid "_Cancel"
 msgstr "Άκ_υρο"
 
-#: panel/panel-dialogs.c:157 panel/panel-item-dialog.c:203
+#: panel/panel-dialogs.c:160 panel/panel-item-dialog.c:203
 #: panel/panel-preferences-dialog.glade:1223
 #: plugins/launcher/launcher-dialog.glade:219
 msgid "_Add"
 msgstr "_Προσθήκη"
 
-#: panel/panel-dialogs.c:168
+#: panel/panel-dialogs.c:171
 msgid "Please choose a panel for the new plugin:"
 msgstr "Παρακαλώ επιλέξτε ένα ταμπλό για το νέο πρόσθετο:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1028
+#: panel/panel-dialogs.c:191 panel/panel-preferences-dialog.c:1034
 #, c-format
 msgid "Panel %d"
 msgstr "Ταμπλό %d"
 
-#: panel/panel-dialogs.c:227
+#: panel/panel-dialogs.c:230
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "Επειδή το ταμπλό είναι σε λειτουργία kiosk, δεν σας επιτρέπεται να κάνετε αλλαγές στην ρύθμιση παραμέτρων του ταμπλό σαν απλός χρήστης."
+msgstr ""
+"Επειδή το ταμπλό είναι σε λειτουργία kiosk, δεν σας επιτρέπεται να κάνετε "
+"αλλαγές στην ρύθμιση παραμέτρων του ταμπλό σαν απλός χρήστης."
 
-#: panel/panel-dialogs.c:229
+#: panel/panel-dialogs.c:232
 msgid "Modifying the panel is not allowed"
 msgstr "Η τροποποίηση του ταμπλό δεν επιτρέπεται"
 
@@ -405,24 +425,29 @@ msgstr "Ανα_ζήτηση:"
 msgid "Enter search phrase here"
 msgstr "Εισάγετε εδώ τη φράση για αναζήτηση"
 
-#: panel/panel-plugin-external.c:413
+#: panel/panel-plugin-external.c:417
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "Το πρόσθετο \"%s\" έφυγε απροσδόκητα από το ταμπλό, θέλετε να το επανεκκινήσετε;"
+msgstr ""
+"Το πρόσθετο \"%s\" έφυγε απροσδόκητα από το ταμπλό, θέλετε να το "
+"επανεκκινήσετε;"
 
-#: panel/panel-plugin-external.c:414
+#: panel/panel-plugin-external.c:418
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Το πρόσθετο επανεκκινήθηκε περισσότερες από μία φορές τα τελευταία %d δευτερόλεπτα. Εάν πατήσετε εκτέλεση, το ταμπλό θα προσπαθήσει να επανεκκινήσει το πρόσθετο αλλιώς αυτό θα αφαιρεθεί οριστικά από το ταμπλό."
+msgstr ""
+"Το πρόσθετο επανεκκινήθηκε περισσότερες από μία φορές τα τελευταία %d "
+"δευτερόλεπτα. Εάν πατήσετε εκτέλεση, το ταμπλό θα προσπαθήσει να "
+"επανεκκινήσει το πρόσθετο αλλιώς αυτό θα αφαιρεθεί οριστικά από το ταμπλό."
 
-#: panel/panel-plugin-external.c:419
+#: panel/panel-plugin-external.c:423
 msgid "Plugin Restart"
 msgstr "Επανεκκίνηση πρόσθετου"
 
-#: panel/panel-plugin-external.c:420
+#: panel/panel-plugin-external.c:424
 msgid "_Execute"
 msgstr "_Εκτέλεση"
 
@@ -440,48 +465,52 @@ msgstr "Κύρια"
 msgid "Monitor %d"
 msgstr "Οθόνη %d"
 
-#: panel/panel-preferences-dialog.c:1082
+#: panel/panel-preferences-dialog.c:1088
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "Οι ρυθμίσεις των προσθέτων και των παραμέτρων του ταμπλό θα αφαιρεθούν οριστικά."
+msgstr ""
+"Οι ρυθμίσεις των προσθέτων και των παραμέτρων του ταμπλό θα αφαιρεθούν "
+"οριστικά."
 
-#: panel/panel-preferences-dialog.c:1091
+#: panel/panel-preferences-dialog.c:1097
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Θέλετε σίγουρα να αφαιρέσετε το ταμπλό %d;"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1382
+#: panel/panel-preferences-dialog.c:1394
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(εξωτερικό/)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1387
+#: panel/panel-preferences-dialog.c:1399
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "Εσωτερικό όνομα: %s-%d\nPID: %d"
+msgstr ""
+"Εσωτερικό όνομα: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1399
+#: panel/panel-preferences-dialog.c:1411
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Εσωτερικό όνομα: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1546
+#: panel/panel-preferences-dialog.c:1558
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Εάν αφαιρέσετε το αντικείμενο από το ταμπλό, χάνεται οριστικά."
 
-#: panel/panel-preferences-dialog.c:1550
+#: panel/panel-preferences-dialog.c:1562
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Θέλετε σίγουρα να αφαιρέσετε αυτά τα %d αντικείμενα;"
 
-#: panel/panel-preferences-dialog.c:1552
+#: panel/panel-preferences-dialog.c:1564
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Εάν τα αφαιρέσετε από το ταμπλό, χάνονται οριστικά."
 
@@ -569,7 +598,9 @@ msgstr "Κ_λείδωμα ταμπλό"
 #: panel/panel-preferences-dialog.glade:440
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr "Επιλέξτε το για να αποκρύψετε τις χειρολαβές στο ταμπλό και να το κλειδώσετε στην θέση του."
+msgstr ""
+"Επιλέξτε το για να αποκρύψετε τις χειρολαβές στο ταμπλό και να το κλειδώσετε"
+" στην θέση του."
 
 #: panel/panel-preferences-dialog.glade:453
 msgid "_Reserve space on screen edges for the panel"
@@ -580,7 +611,10 @@ msgid ""
 "Select this option if you don't want maximized windows to cover the area "
 "behind the panel. This only works when the panel is attached to a screen "
 "edge."
-msgstr "Επιλέξτε το εάν θέλετε τα μεγιστοποιημένα παράθυρα να μη καλύπτουν την περιοχή πίσω από το ταμπλό. Αυτό δουλεύει μόνο όταν το ταμπλό είναι προσαρτημένο στην άκρη της οθόνης."
+msgstr ""
+"Επιλέξτε το εάν θέλετε τα μεγιστοποιημένα παράθυρα να μη καλύπτουν την "
+"περιοχή πίσω από το ταμπλό. Αυτό δουλεύει μόνο όταν το ταμπλό είναι "
+"προσαρτημένο στην άκρη της οθόνης."
 
 #: panel/panel-preferences-dialog.glade:478
 msgid "Au_tomatically hide the panel:"
@@ -620,7 +654,9 @@ msgstr "Α_υτόματη αύξηση του μήκους"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Επιλέξτε το για να γίνεται αυτόματη αύξηση του μήκους του ταμπλό, όταν τα πρόσθετα ζητούν περισσότερο χώρο."
+msgstr ""
+"Επιλέξτε το για να γίνεται αυτόματη αύξηση του μήκους του ταμπλό, όταν τα "
+"πρόσθετα ζητούν περισσότερο χώρο."
 
 #: panel/panel-preferences-dialog.glade:712
 msgid "D_isplay"
@@ -679,7 +715,9 @@ msgstr "Παραμετροποίηση..."
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>Στοιχειοθέτηση απενεργοποιημένη</b>\nΕνεργοποιήστε τη στοιχειοθέτηση στον διαχειριστή παραθύρων για ρυθμίσεις διαφάνειας στο ταμπλό."
+msgstr ""
+"<b>Στοιχειοθέτηση απενεργοποιημένη</b>\n"
+"Ενεργοποιήστε τη στοιχειοθέτηση στον διαχειριστή παραθύρων για ρυθμίσεις διαφάνειας στο ταμπλό."
 
 #. I18N: label for the enter transparency slider
 #: panel/panel-preferences-dialog.glade:1106
@@ -695,7 +733,9 @@ msgstr "Α_ποχώρηση:"
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "Διαφάνεια όταν ο δείκτης είναι εκτός του ταμπλό, μεταξύ 0 (διαφανές) και 100 (αδιαφανές)."
+msgstr ""
+"Διαφάνεια όταν ο δείκτης είναι εκτός του ταμπλό, μεταξύ 0 (διαφανές) και 100"
+" (αδιαφανές)."
 
 #: panel/panel-preferences-dialog.glade:1173
 msgid "Appeara_nce"
@@ -756,7 +796,7 @@ msgstr "Πεπειραμένος"
 msgid "Expert"
 msgstr "Έμπειρος"
 
-#: panel/panel-window.c:3723
+#: panel/panel-window.c:3747
 msgid "_Lock Panel"
 msgstr "_Κλείδωμα ταμπλό"
 
@@ -834,7 +874,8 @@ msgstr "_Εμφάνιση παραθύρου επιβεβαίωσης"
 #: plugins/actions/actions-dialog.glade:338
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Εμφάνιση παραθύρου επιβεβαίωσης κάποιων ενεργειών για 30 δευτερόλεπτα."
+msgstr ""
+"Εμφάνιση παραθύρου επιβεβαίωσης κάποιων ενεργειών για 30 δευτερόλεπτα."
 
 #: plugins/actions/actions-dialog.glade:354
 msgid "_Actions"
@@ -972,12 +1013,12 @@ msgstr "Τερματισμός του υπολογιστή σε %d δευτερ�
 msgid "Separator"
 msgstr "Διαχωριστικό"
 
-#: plugins/actions/actions.c:1165
+#: plugins/actions/actions.c:1166
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Απέτυχε η εκτέλεση της ενέργειας \"%s\""
 
-#: plugins/actions/actions.c:1369
+#: plugins/actions/actions.c:1370
 msgid "Little Mouse"
 msgstr "Μικρό ποντίκι"
 
@@ -1023,7 +1064,9 @@ msgstr "Εμφάνιση γενικού ονόματος εφ_αρμογών"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Επιλέξτε το για να εμφανίζονται τα γενικά ονόματα των εφαρμογών στο μενού, για παράδειγμα \"Διαχειριστής αρχείων\" αντί του \"Thunar\""
+msgstr ""
+"Επιλέξτε το για να εμφανίζονται τα γενικά ονόματα των εφαρμογών στο μενού, "
+"για παράδειγμα \"Διαχειριστής αρχείων\" αντί του \"Thunar\""
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:229
 #: plugins/clock/clock-dialog.glade:405
@@ -1188,7 +1231,9 @@ msgstr "Ρολόι"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Ορίστε μια ζώνη ώρας που να αντιστοιχεί σε αρχείο της βάσης δεδομένων zoneinfo, π.χ \"Europe/Athens\". Αφήστε το κενό για χρήση της τοπικής ώρας."
+msgstr ""
+"Ορίστε μια ζώνη ώρας που να αντιστοιχεί σε αρχείο της βάσης δεδομένων "
+"zoneinfo, π.χ \"Europe/Athens\". Αφήστε το κενό για χρήση της τοπικής ώρας."
 
 #: plugins/clock/clock-dialog.glade:183
 msgid "Time_zone:"
@@ -1206,7 +1251,9 @@ msgstr "Ρυθμίσεις ώρας"
 msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
-msgstr "Αν οριστεί, εκτελείται αυτή η εντολή όταν κάνετε αριστερό κλικ στο πρόσθετο, αντί να εμφανίζεται το προεπιλεγμένο ημερολόγιο."
+msgstr ""
+"Αν οριστεί, εκτελείται αυτή η εντολή όταν κάνετε αριστερό κλικ στο πρόσθετο,"
+" αντί να εμφανίζεται το προεπιλεγμένο ημερολόγιο."
 
 #: plugins/clock/clock-dialog.glade:261
 msgid "Co_mmand:"
@@ -1227,7 +1274,11 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "Η διαμόρφωση καθορίζει τη μορφή της ημερομηνίας και της ώρας στο ταμπλό. Για παράδειγμα, το %Υ θα δείξει το έτος, το %m το μήνα και το %d την ημέρα. Επίσης τα σύμβολα <b><b/> θα κάνουν το κείμενο έντονο. Για περισσότερες πληροφορίες δείτε τη σελίδα \"Βοήθειας\"."
+msgstr ""
+"Η διαμόρφωση καθορίζει τη μορφή της ημερομηνίας και της ώρας στο ταμπλό. Για"
+" παράδειγμα, το %Υ θα δείξει το έτος, το %m το μήνα και το %d την ημέρα. "
+"Επίσης τα σύμβολα <b><b/> θα κάνουν το κείμενο έντονο. Για περισσότερες "
+"πληροφορίες δείτε τη σελίδα \"Βοήθειας\"."
 
 #: plugins/clock/clock-dialog.glade:358
 msgid "_Tooltip format:"
@@ -1285,7 +1336,11 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
 "the &quot;Help&quot; page for additional information."
-msgstr "Η διαμόρφωση καθορίζει τη μορφή της ημερομηνίας και την ώρας στο ταμπλό. Για παράδειγμα, το %Y θα δείξει το έτος, το %m το μήνα και το %d την ημέρα. Επίσης τα σύμβολα &lt;b&gt;&lt;/b&gt; θα κάνουν το κείμενο έντονο. Για περισσότερες πληροφορίες δείτε τη σελίδα &quot;Help&quot;."
+msgstr ""
+"Η διαμόρφωση καθορίζει τη μορφή της ημερομηνίας και την ώρας στο ταμπλό. Για"
+" παράδειγμα, το %Y θα δείξει το έτος, το %m το μήνα και το %d την ημέρα. "
+"Επίσης τα σύμβολα &lt;b&gt;&lt;/b&gt; θα κάνουν το κείμενο έντονο. Για "
+"περισσότερες πληροφορίες δείτε τη σελίδα &quot;Help&quot;."
 
 #: plugins/clock/clock-dialog.glade:699
 msgid "Date"
@@ -1727,7 +1782,11 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Eισάγετε λίστα με τις επεκτάσεις των αρχείων που θα χρησιμοποιούνται για τον προσδιορισμό των αρχείων που είναι ορατά σε έναν κατάλογο. Εάν εδώ καθορίσετε περισσότερες από μία, θα πρέπει να διαχωρίζονται με ερωτηματικό (π.χ.*.txt;*.doc)."
+msgstr ""
+"Eισάγετε λίστα με τις επεκτάσεις των αρχείων που θα χρησιμοποιούνται για τον"
+" προσδιορισμό των αρχείων που είναι ορατά σε έναν κατάλογο. Εάν εδώ "
+"καθορίσετε περισσότερες από μία, θα πρέπει να διαχωρίζονται με ερωτηματικό "
+"(π.χ.*.txt;*.doc)."
 
 #: plugins/directorymenu/directorymenu-dialog.glade:301
 msgid "_File Pattern:"
@@ -1850,7 +1909,9 @@ msgstr "Απενεργοποίηση ανα_δυόμενων κειμένων"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "Επιλέξτε το για να απενεργοποιηθούν τα αναδυόμενα κείμενα κατά τη μετακίνηση επάνω από τα κουμπιά του ταμπλό ή στα αντικείμενα του μενού."
+msgstr ""
+"Επιλέξτε το για να απενεργοποιηθούν τα αναδυόμενα κείμενα κατά τη μετακίνηση"
+" επάνω από τα κουμπιά του ταμπλό ή στα αντικείμενα του μενού."
 
 #: plugins/launcher/launcher-dialog.glade:698
 msgid "Show _label instead of icon"
@@ -1862,7 +1923,9 @@ msgstr "Εμφάνιση του τελευταίου _χρησιμοποιημέ
 
 #: plugins/launcher/launcher-dialog.glade:717
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr "Επιλέξτε το για να μετακινήσετε τα επιλεγμένα αντικείμενα του μενού στο ταμπλό."
+msgstr ""
+"Επιλέξτε το για να μετακινήσετε τα επιλεγμένα αντικείμενα του μενού στο "
+"ταμπλό."
 
 #: plugins/launcher/launcher-dialog.glade:736
 msgid "_Arrow button position:"
@@ -1876,15 +1939,15 @@ msgstr "Για προχωρημένους"
 msgid "Program launcher with optional menu"
 msgstr "Εκκινητής προγράμματος με επιλογή μενού"
 
-#: plugins/pager/pager.c:703 plugins/pager/pager-dialog.glade:64
+#: plugins/pager/pager.c:705 plugins/pager/pager-dialog.glade:64
 msgid "Workspace _Settings..."
 msgstr "Ρυθμίσεις _χώρου εργασίας..."
 
-#: plugins/pager/pager.c:802
+#: plugins/pager/pager.c:805
 msgid "Unable to open the workspace settings"
 msgstr "Αδύνατη η πρόσβαση στις ρυθμίσεων των χώρων εργασίας"
 
-#: plugins/pager/pager-buttons.c:596 plugins/windowmenu/windowmenu.c:920
+#: plugins/pager/pager-buttons.c:596 plugins/windowmenu/windowmenu.c:928
 #, c-format
 msgid "Workspace %d"
 msgstr "Χώρος εργασίας %d"
@@ -1951,7 +2014,8 @@ msgstr "Επαναφορά των ελαχιστοποιημένων παραθ�
 
 #: plugins/showdesktop/showdesktop.c:323
 msgid "Minimize all open windows and show the desktop"
-msgstr "Ελαχιστοποίηση όλων των παραθύρων και εμφάνιση της επιφάνειας εργασίας"
+msgstr ""
+"Ελαχιστοποίηση όλων των παραθύρων και εμφάνιση της επιφάνειας εργασίας"
 
 #: plugins/showdesktop/showdesktop.c:326
 #: plugins/showdesktop/showdesktop-dialog.glade:18
@@ -2026,7 +2090,8 @@ msgstr "_Τετράγωνα αντικείμενα"
 
 #: plugins/systray/sn-dialog.glade:282
 msgid "Item buttons will take a square when it's possible"
-msgstr "Τα κουμπιά των αντικειμένων θα λαμβάνουν τετράγωνη μορφή, εάν είναι δυνατόν"
+msgstr ""
+"Τα κουμπιά των αντικειμένων θα λαμβάνουν τετράγωνη μορφή, εάν είναι δυνατόν"
 
 #: plugins/systray/sn-dialog.glade:386 plugins/systray/sn-dialog.glade:618
 msgid "Item"
@@ -2085,7 +2150,9 @@ msgstr "Αδύνατη η εκκίνηση της περιοχής ειδοπο�
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "Πιθανότατα ένα άλλο γραφικό στοιχείο ανέλαβε τη λειτουργία της περιοχής ειδοποιήσεων. Αυτή η περιοχή θα παραμείνει αχρησιμοποίητη."
+msgstr ""
+"Πιθανότατα ένα άλλο γραφικό στοιχείο ανέλαβε τη λειτουργία της περιοχής "
+"ειδοποιήσεων. Αυτή η περιοχή θα παραμείνει αχρησιμοποίητη."
 
 #: plugins/systray/systray.c:411
 msgid "The notification area lost selection"
@@ -2104,7 +2171,9 @@ msgstr "Πρόσθετο εμφάνισης αντικειμένων"
 msgid ""
 "Provides status notifier items (application indicators) and legacy systray "
 "items"
-msgstr "Παρέχει εμφάνιση ειδοποιήσεων (δείκτες εφαρμογών) και εμφάνιση αντικειμένων συστήματος"
+msgstr ""
+"Παρέχει εμφάνιση ειδοποιήσεων (δείκτες εφαρμογών) και εμφάνιση αντικειμένων "
+"συστήματος"
 
 #: plugins/tasklist/tasklist-dialog.glade:23
 msgid "Nothing"
@@ -2181,7 +2250,9 @@ msgstr "_Επαναφορά ελαχιστοποίησης των παραθύρ
 
 #: plugins/tasklist/tasklist-dialog.glade:367
 msgid "D_raw window frame when hovering a button"
-msgstr "Σχε_δίαση του περιγράμματος παραθύρου όταν ο δείκτης περνάει πάνω από ένα κουμπί"
+msgstr ""
+"Σχε_δίαση του περιγράμματος παραθύρου όταν ο δείκτης περνάει πάνω από ένα "
+"κουμπί"
 
 #: plugins/tasklist/tasklist-dialog.glade:383
 msgid "_Switch windows using the mouse wheel"
@@ -2204,32 +2275,32 @@ msgstr "Προβολή παραθύρων από όλες τις ο_θόνες"
 msgid "Show only _minimized windows"
 msgstr "Εμφάνιση μόνο ελαχιστοποι_ημένων παραθύρων"
 
-#: plugins/tasklist/tasklist-widget.c:3105
+#: plugins/tasklist/tasklist-widget.c:3114
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Αδύνατη η εκκίνηση νέας διεργασίας του '%s'"
 
-#: plugins/tasklist/tasklist-widget.c:3132
+#: plugins/tasklist/tasklist-widget.c:3141
 msgid "Launch New Instance"
 msgstr "Εκκίνηση νέας διεργασίας"
 
-#: plugins/tasklist/tasklist-widget.c:3876
+#: plugins/tasklist/tasklist-widget.c:3885
 msgid "Mi_nimize All"
 msgstr "Ελα_χιστοποίηση όλων"
 
-#: plugins/tasklist/tasklist-widget.c:3883
+#: plugins/tasklist/tasklist-widget.c:3892
 msgid "Un_minimize All"
 msgstr "Αποε_λαχιστοποίηση όλων"
 
-#: plugins/tasklist/tasklist-widget.c:3890
+#: plugins/tasklist/tasklist-widget.c:3899
 msgid "Ma_ximize All"
 msgstr "Με_γιστοποίηση όλων"
 
-#: plugins/tasklist/tasklist-widget.c:3897
+#: plugins/tasklist/tasklist-widget.c:3906
 msgid "_Unmaximize All"
 msgstr "Α_πομεγιστοποίηση όλων"
 
-#: plugins/tasklist/tasklist-widget.c:3908
+#: plugins/tasklist/tasklist-widget.c:3917
 msgid "_Close All"
 msgstr "_Κλείσιμο όλων"
 
@@ -2237,28 +2308,28 @@ msgstr "_Κλείσιμο όλων"
 msgid "Switch between open windows using buttons"
 msgstr "Χρήση κουμπιών για την εναλλαγή μεταξύ των ανοιχτών παραθύρων"
 
-#: plugins/windowmenu/windowmenu.c:721
+#: plugins/windowmenu/windowmenu.c:729
 msgid "Desktop"
 msgstr "Επιφάνεια εργασίας"
 
-#: plugins/windowmenu/windowmenu.c:1315
+#: plugins/windowmenu/windowmenu.c:1323
 msgid "No Windows"
 msgstr "Δεν υπάρχουν παράθυρα"
 
-#: plugins/windowmenu/windowmenu.c:1330
+#: plugins/windowmenu/windowmenu.c:1338
 msgid "Urgent Windows"
 msgstr "Επείγοντα παράθυρα"
 
-#: plugins/windowmenu/windowmenu.c:1375
+#: plugins/windowmenu/windowmenu.c:1383
 msgid "Add Workspace"
 msgstr "Προσθήκη χώρου εργασίας"
 
-#: plugins/windowmenu/windowmenu.c:1397
+#: plugins/windowmenu/windowmenu.c:1405
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Αφαίρεση του χώρου εργασίας \"%s\""
 
-#: plugins/windowmenu/windowmenu.c:1399
+#: plugins/windowmenu/windowmenu.c:1407
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Αφαίρεση του χώρου εργασίας %d"
