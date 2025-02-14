@@ -1,30 +1,20 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Xfce
-# This file is distributed under the same license as the xfce4-panel.master package.
+# This file is distributed under the same license as the xfce4-panel.xfce-4-20 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# adrien vigneron <adrien.v@ml1.net>, 2017
-# Charles Monzat <c.monzat@laposte.net>, 2018
-# Charles Monzat <c.monzat@laposte.net>, 2017-2018
-# Collet Etienne <xanaxlnx@gmail.com>, 2005
-# David D, 2024
-# Gaël Bonithon <gael@xfce.org>, 2023
-# jc1 <jc1.quebecos@gmail.com>, 2013,2017
-# jc1 <jc1.quebecos@gmail.com>, 2013,2017,2022-2023
-# Jérôme Guelfucci <jeromeg@xfce.org>, 2009
-# Olivier Fourdan <fourdan@xfce.org>, 2004
-# roxfr <roxfr@outlook.fr>, 2022
-# Urien Desterres <urien.desterres@gmail.com>, 2014
-# Wallon Wallon, 2022-2024
-# Yannick Le Guen <leguen.yannick@gmail.com>, 2014-2015,2017-2020
+# Xfce Bot <transifex@xfce.org>, 2025
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Xfce4-panel\n"
+"Project-Id-Version: xfce4-panel.xfce-4-20\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-10-18 00:47+0200\n"
-"PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: David D, 2024\n"
-"Language-Team: French (http://app.transifex.com/xfce/xfce4-panel/language/fr/)\n"
+"POT-Creation-Date: 2025-02-14 12:29+0100\n"
+"PO-Revision-Date: 2025-02-14 11:29+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>, 2025\n"
+"Language-Team: French (https://app.transifex.com/xfce/teams/16840/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -39,15 +29,20 @@ msgstr "Créer un lanceur sur le tableau de bord"
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop "
 "file"
-msgstr "Ajouter un nouveau lanceur dans le tableau de bord avec les informations de ce fichier desktop"
+msgstr ""
+"Ajouter un nouveau lanceur dans le tableau de bord avec les informations de "
+"ce fichier desktop"
 
 #: panel-preferences.desktop.in:8
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
-msgstr "tableaux de bord;paramètres;préférences;barre des tâches;masquage automatique;menu des applications;démarrer;boutons;lanceur;zone de notifications;état;icônes;greffons;"
+msgstr ""
+"tableaux de bord;paramètres;préférences;barre des tâches;masquage "
+"automatique;menu des applications;démarrer;boutons;lanceur;zone de "
+"notifications;état;icônes;greffons;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3686
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3710
 msgid "Panel"
 msgstr "Tableau de bord"
 
@@ -55,67 +50,69 @@ msgstr "Tableau de bord"
 msgid "Customize the panel"
 msgstr "Personnaliser le tableau de bord"
 
-#: libxfce4panel/xfce-panel-plugin.c:1088
-#: panel/panel-preferences-dialog.c:1537
+#: libxfce4panel/xfce-panel-plugin.c:1113
+#: panel/panel-preferences-dialog.c:1549
 msgid "Remove"
 msgstr "Supprimer"
 
-#: libxfce4panel/xfce-panel-plugin.c:1089
+#: libxfce4panel/xfce-panel-plugin.c:1114
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
-msgstr "Supprimer l’élément du tableau de bord signifie également que sa configuration sera perdue."
+msgstr ""
+"Supprimer l’élément du tableau de bord signifie également que sa "
+"configuration sera perdue."
 
-#: libxfce4panel/xfce-panel-plugin.c:1093
-#: panel/panel-preferences-dialog.c:1544
+#: libxfce4panel/xfce-panel-plugin.c:1118
+#: panel/panel-preferences-dialog.c:1556
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Voulez-vous vraiment supprimer « %s » ?"
 
 #. properties item
-#: libxfce4panel/xfce-panel-plugin.c:1215
+#: libxfce4panel/xfce-panel-plugin.c:1240
 msgid "_Properties"
 msgstr "_Propriétés"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1226 panel/panel-window.c:3761
+#: libxfce4panel/xfce-panel-plugin.c:1251 panel/panel-window.c:3785
 msgid "_About"
 msgstr "À _propos"
 
 #. move item
-#: libxfce4panel/xfce-panel-plugin.c:1237
+#: libxfce4panel/xfce-panel-plugin.c:1262
 msgid "_Move"
 msgstr "_Déplacer"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1253 panel/panel-application.c:357
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1083
+#: libxfce4panel/xfce-panel-plugin.c:1278 panel/panel-application.c:357
+#: panel/panel-plugin-external.c:424 panel/panel-preferences-dialog.c:1089
 #: panel/panel-preferences-dialog.glade:1240
 #: plugins/launcher/launcher-dialog.c:841
 msgid "_Remove"
 msgstr "_Supprimer"
 
-#: libxfce4panel/xfce-panel-plugin.c:1271
+#: libxfce4panel/xfce-panel-plugin.c:1296
 msgid "Pane_l"
 msgstr "Tableau de _bord"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1279 panel/panel-window.c:3698
+#: libxfce4panel/xfce-panel-plugin.c:1304 panel/panel-window.c:3722
 msgid "Add _New Items..."
 msgstr "Ajouter de _nouveaux éléments…"
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1290 panel/panel-window.c:3709
+#: libxfce4panel/xfce-panel-plugin.c:1315 panel/panel-window.c:3733
 msgid "Panel Pr_eferences..."
 msgstr "Pr_éférences du tableau de bord…"
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1307 panel/panel-window.c:3736
+#: libxfce4panel/xfce-panel-plugin.c:1332 panel/panel-window.c:3760
 msgid "Log _Out"
 msgstr "Dé_connexion"
 
 #. help item
-#: libxfce4panel/xfce-panel-plugin.c:1323 panel/panel-item-dialog.c:207
-#: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3752
+#: libxfce4panel/xfce-panel-plugin.c:1348 panel/panel-item-dialog.c:207
+#: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3776
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
 #: plugins/clock/clock-dialog.glade:120
@@ -130,121 +127,125 @@ msgid "_Help"
 msgstr "_Aide"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1334
+#: libxfce4panel/xfce-panel-plugin.c:1359
 msgid "About"
 msgstr "À propos"
 
-#: panel/main.c:66
+#: panel/main.c:69
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Afficher la boîte de dialogue « Préférences du tableau de bord »."
 
-#: panel/main.c:66 panel/main.c:67
+#: panel/main.c:69 panel/main.c:70
 msgid "PANEL-NUMBER"
 msgstr "NUMÉRO-TABLBORD"
 
-#: panel/main.c:67
+#: panel/main.c:70
 msgid "Show the 'Add New Items' dialog"
 msgstr "Afficher la boîte de dialogue « Ajouter de nouveaux éléments »."
 
-#: panel/main.c:68
+#: panel/main.c:71
 msgid "Save the panel configuration"
 msgstr "Enregistrer la configuration du tableau de bord"
 
-#: panel/main.c:69
+#: panel/main.c:72
 msgid "Add a new plugin to the panel"
 msgstr "Ajouter un nouveau greffon au tableau de bord"
 
-#: panel/main.c:69
+#: panel/main.c:72
 msgid "PLUGIN-NAME"
 msgstr "NOM-GREFFON"
 
-#: panel/main.c:70
+#: panel/main.c:73
 msgid "Restart the running panel instance"
 msgstr "Redémarrer l’instance du tableau de bord en cours d’exécution"
 
-#: panel/main.c:71
+#: panel/main.c:74
 msgid "Quit the running panel instance"
 msgstr "Quitter l’instance du tableau de bord en cours d’exécution"
 
-#: panel/main.c:72
+#: panel/main.c:75
 msgid "Do not wait for a window manager on startup"
 msgstr "Ne pas attendre un gestionnaire de fenêtres au démarrage"
 
-#: panel/main.c:73 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: panel/main.c:76 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "Afficher les informations sur la version et quitter"
 
 #. parse context options
-#: panel/main.c:258
+#: panel/main.c:261
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTS…]"
 
-#: panel/main.c:268
+#: panel/main.c:271
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Taper « %s --help » pour plus d’aide."
 
-#: panel/main.c:285
+#: panel/main.c:288
 msgid "The Xfce development team. All rights reserved."
 msgstr "L’équipe de développement de Xfce. Tous droits réservés."
 
-#: panel/main.c:286
+#: panel/main.c:289
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Veuillez signaler les bogues à <%s>."
 
 #. quit without error if an instance is running
-#: panel/main.c:394
+#: panel/main.c:397
 msgid "There is already a running instance"
 msgstr "Il y a déjà un tableau de bord en cours d’exécution"
 
 #. spawn ourselfs again
-#: panel/main.c:405
+#: panel/main.c:408
 msgid "Restarting..."
 msgstr "Redémarrage…"
 
-#: panel/main.c:422
+#: panel/main.c:425
 msgid "Failed to show the preferences dialog"
 msgstr "Impossible d’afficher la fenêtre des préférences"
 
-#: panel/main.c:424
+#: panel/main.c:427
 msgid "Failed to show the add new items dialog"
-msgstr "Impossible d’afficher la boîte de dialogue « Ajouter de nouveaux éléments »."
+msgstr ""
+"Impossible d’afficher la boîte de dialogue « Ajouter de nouveaux éléments »."
 
-#: panel/main.c:426
+#: panel/main.c:429
 msgid "Failed to save the panel configuration"
 msgstr "Impossible d’enregistrer la configuration du tableau de bord"
 
-#: panel/main.c:428
+#: panel/main.c:431
 msgid "Failed to add a plugin to the panel"
 msgstr "Impossible d’ajouter un greffon dans le tableau de bord"
 
-#: panel/main.c:430
+#: panel/main.c:433
 msgid "Failed to restart the panel"
 msgstr "Impossible de redémarrer le tableau de bord"
 
-#: panel/main.c:432
+#: panel/main.c:435
 msgid "Failed to quit the panel"
 msgstr "Impossible de quitter le tableau de bord"
 
-#: panel/main.c:434
+#: panel/main.c:437
 msgid "Failed to send D-Bus message"
 msgstr "Impossible d’envoyer un message D-Bus"
 
-#: panel/main.c:442 panel/main.c:462
+#: panel/main.c:445 panel/main.c:465
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Aucune instance de %s n’a été trouvée"
 
-#: panel/main.c:443
+#: panel/main.c:446
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "Voulez-vous démarrer le tableau de bord ? Si oui, veillez à ce que la session soit enregistrée lors de la déconnexion, de sorte que le tableau de bord soit relancé à la prochaine ouverture de session."
+msgstr ""
+"Voulez-vous démarrer le tableau de bord ? Si oui, veillez à ce que la "
+"session soit enregistrée lors de la déconnexion, de sorte que le tableau de "
+"bord soit relancé à la prochaine ouverture de session."
 
-#: panel/main.c:448
+#: panel/main.c:451
 msgid "Execute"
 msgstr "Exécuter"
 
@@ -257,7 +258,9 @@ msgstr "Impossible de lancer la procédure de migration"
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
-msgstr "Le greffon « %s » n’a pas pu être chargé, voulez-vous le supprimer de la configuration de xfce4-panel ?"
+msgstr ""
+"Le greffon « %s » n’a pas pu être chargé, voulez-vous le supprimer de la "
+"configuration de xfce4-panel ?"
 
 #: panel/panel-application.c:349
 #, c-format
@@ -267,7 +270,13 @@ msgid ""
 "doing, you can remove it permanently, otherwise you'd better quit and make a"
 " backup of the current configuration using %s, before checking your "
 "installation and trying to start xfce4-panel again."
-msgstr "Ce greffon se trouve dans la configuration actuelle de xfce4-panel mais n’a pas pu être chargé, probablement à cause d’un problème d’installation. Si vous savez ce que vous faites, vous pouvez le supprimer définitivement, sinon vous feriez mieux de quitter et de faire une sauvegarde de la configuration actuelle en utilisant %s, avant de vérifier votre installation et d’essayer de redémarrer xfce4-panel."
+msgstr ""
+"Ce greffon se trouve dans la configuration actuelle de xfce4-panel mais n’a "
+"pas pu être chargé, probablement à cause d’un problème d’installation. Si "
+"vous savez ce que vous faites, vous pouvez le supprimer définitivement, "
+"sinon vous feriez mieux de quitter et de faire une sauvegarde de la "
+"configuration actuelle en utilisant %s, avant de vérifier votre installation"
+" et d’essayer de redémarrer xfce4-panel."
 
 #: panel/panel-application.c:356
 msgid "Plugin loading failure"
@@ -281,7 +290,9 @@ msgstr "_Quitter"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Un nouveau greffon « Lanceur » va être créé sur le tableau de bord et un élément de menu y sera inséré pour chaque fichier déposé."
+msgstr ""
+"Un nouveau greffon « Lanceur » va être créé sur le tableau de bord et un "
+"élément de menu y sera inséré pour chaque fichier déposé."
 
 #: panel/panel-application.c:1040
 msgid "Create _Launcher"
@@ -299,7 +310,9 @@ msgstr[2] "Créer un lanceur à partir de %d fichiers desktop"
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "Vous avez démarré le serveur X sans gestionnaire de session. Cliquer sur Quitter fermera le serveur X."
+msgstr ""
+"Vous avez démarré le serveur X sans gestionnaire de session. Cliquer sur "
+"Quitter fermera le serveur X."
 
 #: panel/panel-application.c:1805
 msgid "Quit"
@@ -317,60 +330,67 @@ msgstr "Impossible d’exécuter la commande « %s »"
 #: panel/panel-dbus-client.c:213
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Erreur de syntaxe spécifiée pour l’événement du greffon. Utiliser NOM-GREFFON:NOM[:TYPE:VALEUR]."
+msgstr ""
+"Erreur de syntaxe spécifiée pour l’événement du greffon. Utiliser NOM-"
+"GREFFON:NOM[:TYPE:VALEUR]."
 
 #: panel/panel-dbus-client.c:243
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "Type non valide trouvé : « %s ». Les types valides sont bool, double, int, string et uint."
+msgstr ""
+"Type non valide trouvé : « %s ». Les types valides sont bool, double, int, "
+"string et uint."
 
-#: panel/panel-dialogs.c:53
+#: panel/panel-dialogs.c:56
 msgid "Unable to open the e-mail address"
 msgstr "Impossible d’ouvrir l’adresse électronique"
 
-#: panel/panel-dialogs.c:79
+#: panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Tableau de bord de l’environnement de bureau Xfce"
 
-#: panel/panel-dialogs.c:83
+#: panel/panel-dialogs.c:86
 msgid "translator-credits"
 msgstr "L’équipe de traduction francophone de Xfce"
 
-#: panel/panel-dialogs.c:157
+#: panel/panel-dialogs.c:160
 msgid "Add New Item"
 msgstr "Ajouter un nouvel élément"
 
-#: panel/panel-dialogs.c:157 plugins/actions/actions.c:870
+#: panel/panel-dialogs.c:160 plugins/actions/actions.c:870
 #: plugins/applicationsmenu/applicationsmenu.c:606
 #: plugins/directorymenu/directorymenu.c:466
 #: plugins/directorymenu/directorymenu.c:938
 msgid "_Cancel"
 msgstr "_Annuler"
 
-#: panel/panel-dialogs.c:157 panel/panel-item-dialog.c:203
+#: panel/panel-dialogs.c:160 panel/panel-item-dialog.c:203
 #: panel/panel-preferences-dialog.glade:1223
 #: plugins/launcher/launcher-dialog.glade:219
 msgid "_Add"
 msgstr "_Ajouter"
 
-#: panel/panel-dialogs.c:168
+#: panel/panel-dialogs.c:171
 msgid "Please choose a panel for the new plugin:"
 msgstr "Veuillez sélectionner un tableau de bord pour le nouveau greffon :"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1028
+#: panel/panel-dialogs.c:191 panel/panel-preferences-dialog.c:1034
 #, c-format
 msgid "Panel %d"
 msgstr "Tableau de bord %d"
 
-#: panel/panel-dialogs.c:227
+#: panel/panel-dialogs.c:230
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "Le tableau de bord est en cours d’exécution en mode restreint, vous n’êtes donc pas autorisé à apporter des modifications à la configuration du tableau de bord en tant qu’utilisateur normal."
+msgstr ""
+"Le tableau de bord est en cours d’exécution en mode restreint, vous n’êtes "
+"donc pas autorisé à apporter des modifications à la configuration du tableau"
+" de bord en tant qu’utilisateur normal."
 
-#: panel/panel-dialogs.c:229
+#: panel/panel-dialogs.c:232
 msgid "Modifying the panel is not allowed"
 msgstr "Modification du tableau de bord interdite"
 
@@ -402,24 +422,29 @@ msgstr "_Rechercher :"
 msgid "Enter search phrase here"
 msgstr "Saisir vos termes de recherche ici"
 
-#: panel/panel-plugin-external.c:413
+#: panel/panel-plugin-external.c:417
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "Le greffon « %s » a quitté le tableau de bord de manière inattendue. Voulez-vous le redémarrer ?"
+msgstr ""
+"Le greffon « %s » a quitté le tableau de bord de manière inattendue. Voulez-"
+"vous le redémarrer ?"
 
-#: panel/panel-plugin-external.c:414
+#: panel/panel-plugin-external.c:418
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Le greffon a redémarré plusieurs fois au cours des %d dernières secondes. Si vous cliquez sur « Exécuter », le tableau de bord essaiera de redémarrer le greffon, sinon il sera définitivement supprimé du tableau de bord."
+msgstr ""
+"Le greffon a redémarré plusieurs fois au cours des %d dernières secondes. Si"
+" vous cliquez sur « Exécuter », le tableau de bord essaiera de redémarrer le"
+" greffon, sinon il sera définitivement supprimé du tableau de bord."
 
-#: panel/panel-plugin-external.c:419
+#: panel/panel-plugin-external.c:423
 msgid "Plugin Restart"
 msgstr "Redémarrage du greffon"
 
-#: panel/panel-plugin-external.c:420
+#: panel/panel-plugin-external.c:424
 msgid "_Execute"
 msgstr "E_xécuter"
 
@@ -437,50 +462,56 @@ msgstr "Primaire"
 msgid "Monitor %d"
 msgstr "Moniteur %d"
 
-#: panel/panel-preferences-dialog.c:1082
+#: panel/panel-preferences-dialog.c:1088
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "Les configurations du tableau de bord et des greffons seront supprimées définitivement"
+msgstr ""
+"Les configurations du tableau de bord et des greffons seront supprimées "
+"définitivement"
 
-#: panel/panel-preferences-dialog.c:1091
+#: panel/panel-preferences-dialog.c:1097
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Voulez-vous vraiment supprimer le tableau de bord %d ?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1382
+#: panel/panel-preferences-dialog.c:1394
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(externe)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1387
+#: panel/panel-preferences-dialog.c:1399
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "Nom interne : %s-%d\nPID : %d"
+msgstr ""
+"Nom interne : %s-%d\n"
+"PID : %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1399
+#: panel/panel-preferences-dialog.c:1411
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nom interne : %s-%d"
 
-#: panel/panel-preferences-dialog.c:1546
+#: panel/panel-preferences-dialog.c:1558
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Si vous supprimez l’élément du tableau de bord, il le sera définitivement."
+msgstr ""
+"Si vous supprimez l’élément du tableau de bord, il le sera définitivement."
 
-#: panel/panel-preferences-dialog.c:1550
+#: panel/panel-preferences-dialog.c:1562
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Voulez-vous vraiment supprimer ces  %d éléments ?"
 
-#: panel/panel-preferences-dialog.c:1552
+#: panel/panel-preferences-dialog.c:1564
 msgid "If you remove them from the panel, they are permanently lost."
-msgstr "Si vous les supprimez du tableau de bord, ils seront définitivement perdus."
+msgstr ""
+"Si vous les supprimez du tableau de bord, ils seront définitivement perdus."
 
 #: panel/panel-preferences-dialog.glade:13
 msgid "Never"
@@ -557,7 +588,9 @@ msgstr "Étendre à tous les moni_teurs"
 
 #: panel/panel-preferences-dialog.glade:423
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr "Sélectionner cette option pour étendre le tableau de bord sur plusieurs moniteurs."
+msgstr ""
+"Sélectionner cette option pour étendre le tableau de bord sur plusieurs "
+"moniteurs."
 
 #: panel/panel-preferences-dialog.glade:436
 msgid "_Lock panel"
@@ -566,18 +599,24 @@ msgstr "_Verrouiller le tableau de bord"
 #: panel/panel-preferences-dialog.glade:440
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr "Sélectionner cette option pour masquer les poignées du tableau de bord et verrouiller sa position."
+msgstr ""
+"Sélectionner cette option pour masquer les poignées du tableau de bord et "
+"verrouiller sa position."
 
 #: panel/panel-preferences-dialog.glade:453
 msgid "_Reserve space on screen edges for the panel"
-msgstr "_Réserver de l’espace sur les bords de l’écran pour le tableau de bord"
+msgstr ""
+"_Réserver de l’espace sur les bords de l’écran pour le tableau de bord"
 
 #: panel/panel-preferences-dialog.glade:457
 msgid ""
 "Select this option if you don't want maximized windows to cover the area "
 "behind the panel. This only works when the panel is attached to a screen "
 "edge."
-msgstr "Sélectionner cette option si vous ne voulez pas que les fenêtres maximisées recouvrent la zone derrière le tableau de bord. Cela fonctionne uniquement lorsque le tableau de bord est rattaché à un bord de l’écran."
+msgstr ""
+"Sélectionner cette option si vous ne voulez pas que les fenêtres maximisées "
+"recouvrent la zone derrière le tableau de bord. Cela fonctionne uniquement "
+"lorsque le tableau de bord est rattaché à un bord de l’écran."
 
 #: panel/panel-preferences-dialog.glade:478
 msgid "Au_tomatically hide the panel:"
@@ -617,7 +656,9 @@ msgstr "A_ugmenter automatiquement la largeur"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Sélectionner cette option pour augmenter automatiquement la largeur du tableau de bord si les greffons demandent plus d’espace."
+msgstr ""
+"Sélectionner cette option pour augmenter automatiquement la largeur du "
+"tableau de bord si les greffons demandent plus d’espace."
 
 #: panel/panel-preferences-dialog.glade:712
 msgid "D_isplay"
@@ -676,7 +717,9 @@ msgstr "Configuration…"
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>La composition est actuellement désactivée</b>\nActiver la composition dans le gestionnaire de fenêtres pour afficher les réglages d’opacité du tableau de bord."
+msgstr ""
+"<b>La composition est actuellement désactivée</b>\n"
+"Activer la composition dans le gestionnaire de fenêtres pour afficher les réglages d’opacité du tableau de bord."
 
 #. I18N: label for the enter transparency slider
 #: panel/panel-preferences-dialog.glade:1106
@@ -692,7 +735,9 @@ msgstr "_Sortie :"
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "Transparence lorsque la souris ne survole pas le tableau de bord, 0 étant complètement transparent et 100 complètement opaque."
+msgstr ""
+"Transparence lorsque la souris ne survole pas le tableau de bord, 0 étant "
+"complètement transparent et 100 complètement opaque."
 
 #: panel/panel-preferences-dialog.glade:1173
 msgid "Appeara_nce"
@@ -753,7 +798,7 @@ msgstr "Confirmé"
 msgid "Expert"
 msgstr "Expert"
 
-#: panel/panel-window.c:3723
+#: panel/panel-window.c:3747
 msgid "_Lock Panel"
 msgstr "_Verrouiller le tableau de bord"
 
@@ -831,7 +876,9 @@ msgstr "_Afficher une boîte de dialogue de confirmation"
 #: plugins/actions/actions-dialog.glade:338
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Afficher une boîte de dialogue avec un délai d’attente de 30 secondes pour certaines actions."
+msgstr ""
+"Afficher une boîte de dialogue avec un délai d’attente de 30 secondes pour "
+"certaines actions."
 
 #: plugins/actions/actions-dialog.glade:354
 msgid "_Actions"
@@ -905,12 +952,15 @@ msgstr "Mise en veille _hybride"
 
 #: plugins/actions/actions.c:206
 msgid "Do you want to hibernate and suspend the system?"
-msgstr "Voulez-vous mettre en veille et placer le système en veille prolongée ?"
+msgstr ""
+"Voulez-vous mettre en veille et placer le système en veille prolongée ?"
 
 #: plugins/actions/actions.c:207
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
-msgstr "Mise en veille et mise en veille prolongée de l’ordinateur dans %d secondes. "
+msgstr ""
+"Mise en veille et mise en veille prolongée de l’ordinateur dans %d secondes."
+" "
 
 #: plugins/actions/actions.c:212
 msgid "Suspend"
@@ -969,12 +1019,12 @@ msgstr "Extinction dans %d secondes."
 msgid "Separator"
 msgstr "Séparateur"
 
-#: plugins/actions/actions.c:1165
+#: plugins/actions/actions.c:1166
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Impossible d’exécuter l’action « %s »"
 
-#: plugins/actions/actions.c:1369
+#: plugins/actions/actions.c:1370
 msgid "Little Mouse"
 msgstr "Petite souris"
 
@@ -1020,7 +1070,9 @@ msgstr "Afficher les noms d’_application génériques"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Sélectionner cette option pour afficher le nom générique de l’application dans le menu, par exemple « Gestionnaire de fichiers » au lieu de « Thunar »"
+msgstr ""
+"Sélectionner cette option pour afficher le nom générique de l’application "
+"dans le menu, par exemple « Gestionnaire de fichiers » au lieu de « Thunar »"
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:229
 #: plugins/clock/clock-dialog.glade:405
@@ -1185,7 +1237,10 @@ msgstr "Horloge"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Le nom d’un fuseau horaire correspondant à un fichier dans la base de données zoneinfo, par exemple « Europe/Paris ». Laisser vide pour utiliser l’heure locale."
+msgstr ""
+"Le nom d’un fuseau horaire correspondant à un fichier dans la base de "
+"données zoneinfo, par exemple « Europe/Paris ». Laisser vide pour utiliser "
+"l’heure locale."
 
 #: plugins/clock/clock-dialog.glade:183
 msgid "Time_zone:"
@@ -1203,7 +1258,9 @@ msgstr "Paramètres heure"
 msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
-msgstr "Si activé, cette commande est exécutée lorsque le greffon est à gauche, au lieu d’afficher le calendrier par défaut."
+msgstr ""
+"Si activé, cette commande est exécutée lorsque le greffon est à gauche, au "
+"lieu d’afficher le calendrier par défaut."
 
 #: plugins/clock/clock-dialog.glade:261
 msgid "Co_mmand:"
@@ -1224,7 +1281,11 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "Le format décrit les parties de la date et de l’heure à insérer dans le tableau de bord. Par exemple, %Y sera remplacé par l’année, %m par le mois et %d par le jour. De même, les balises <b> </b> afficheront le texte en gras. Voir la page « Aide » pour plus d’informations."
+msgstr ""
+"Le format décrit les parties de la date et de l’heure à insérer dans le "
+"tableau de bord. Par exemple, %Y sera remplacé par l’année, %m par le mois "
+"et %d par le jour. De même, les balises <b> </b> afficheront le texte en "
+"gras. Voir la page « Aide » pour plus d’informations."
 
 #: plugins/clock/clock-dialog.glade:358
 msgid "_Tooltip format:"
@@ -1282,7 +1343,11 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
 "the &quot;Help&quot; page for additional information."
-msgstr "Le format décrit les parties de la date et de l’heure à insérer dans le tableau de bord. Par exemple, %Y sera remplacé par l’année, %m par le mois et %dpar le jour. De même, les balises &lt;b&gt;&lt;/b&gt;  rendront le texte en gras. Voir la page &quot;Help&quot; pour plus d’informations."
+msgstr ""
+"Le format décrit les parties de la date et de l’heure à insérer dans le "
+"tableau de bord. Par exemple, %Y sera remplacé par l’année, %m par le mois "
+"et %dpar le jour. De même, les balises &lt;b&gt;&lt;/b&gt;  rendront le "
+"texte en gras. Voir la page &quot;Help&quot; pour plus d’informations."
 
 #: plugins/clock/clock-dialog.glade:699
 msgid "Date"
@@ -1724,7 +1789,11 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Saisir une liste de motifs qui seront utilisés pour déterminer quels fichiers afficher dans un répertoire. Si vous spécifiez ici plus d’un motif, les éléments de la liste devront être séparés par des points-virgules (par exemple *.txt;*.doc)."
+msgstr ""
+"Saisir une liste de motifs qui seront utilisés pour déterminer quels "
+"fichiers afficher dans un répertoire. Si vous spécifiez ici plus d’un motif,"
+" les éléments de la liste devront être séparés par des points-virgules (par "
+"exemple *.txt;*.doc)."
 
 #: plugins/directorymenu/directorymenu-dialog.glade:301
 msgid "_File Pattern:"
@@ -1847,7 +1916,9 @@ msgstr "Désactiver les inf_obulles"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "Sélectionner cette option pour désactiver les infobulles lorsque la souris se déplace sur le bouton du tableau de bord ou les éléments du menu."
+msgstr ""
+"Sélectionner cette option pour désactiver les infobulles lorsque la souris "
+"se déplace sur le bouton du tableau de bord ou les éléments du menu."
 
 #: plugins/launcher/launcher-dialog.glade:698
 msgid "Show _label instead of icon"
@@ -1859,7 +1930,9 @@ msgstr "Afficher le _dernier élément utilisé dans le tableau de bord"
 
 #: plugins/launcher/launcher-dialog.glade:717
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr "Choisir cette option pour déplacer l’élément du menu sélectionné sur le tableau de bord."
+msgstr ""
+"Choisir cette option pour déplacer l’élément du menu sélectionné sur le "
+"tableau de bord."
 
 #: plugins/launcher/launcher-dialog.glade:736
 msgid "_Arrow button position:"
@@ -1873,15 +1946,15 @@ msgstr "Avancé"
 msgid "Program launcher with optional menu"
 msgstr "Lanceur de programme avec menu facultatif"
 
-#: plugins/pager/pager.c:703 plugins/pager/pager-dialog.glade:64
+#: plugins/pager/pager.c:705 plugins/pager/pager-dialog.glade:64
 msgid "Workspace _Settings..."
 msgstr "_Paramètres des espaces de travail…"
 
-#: plugins/pager/pager.c:802
+#: plugins/pager/pager.c:805
 msgid "Unable to open the workspace settings"
 msgstr "Impossible d’ouvrir les paramètres des espaces de travail"
 
-#: plugins/pager/pager-buttons.c:596 plugins/windowmenu/windowmenu.c:920
+#: plugins/pager/pager-buttons.c:596 plugins/windowmenu/windowmenu.c:928
 #, c-format
 msgid "Workspace %d"
 msgstr "Espace de travail %d"
@@ -1940,7 +2013,8 @@ msgstr "É_tendre"
 
 #: plugins/separator/separator.desktop.in.in:5
 msgid "Adds a separator or space between panel items"
-msgstr "Ajoute un séparateur ou un espace entre les éléments du tableau de bord"
+msgstr ""
+"Ajoute un séparateur ou un espace entre les éléments du tableau de bord"
 
 #: plugins/showdesktop/showdesktop.c:321
 msgid "Restore the minimized windows"
@@ -2007,7 +2081,8 @@ msgstr "Organiser les é_léments sur une seule ligne"
 
 #: plugins/systray/sn-dialog.glade:250
 msgid "If enabled, ensure that the items are laid out in a single row"
-msgstr "Si activé, s’assure que les éléments sont disposés sur une seule ligne"
+msgstr ""
+"Si activé, s’assure que les éléments sont disposés sur une seule ligne"
 
 #: plugins/systray/sn-dialog.glade:262
 msgid "_Hide items by default"
@@ -2023,7 +2098,8 @@ msgstr "Éléments _carrés"
 
 #: plugins/systray/sn-dialog.glade:282
 msgid "Item buttons will take a square when it's possible"
-msgstr "Les boutons des éléments prennent une forme carrée quand cela est possible"
+msgstr ""
+"Les boutons des éléments prennent une forme carrée quand cela est possible"
 
 #: plugins/systray/sn-dialog.glade:386 plugins/systray/sn-dialog.glade:618
 msgid "Item"
@@ -2082,7 +2158,9 @@ msgstr "Impossible de démarrer la zone de notification"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "Il est probable qu’une autre application assure déjà la fonction de zone de notification. Cette zone restera inutilisée."
+msgstr ""
+"Il est probable qu’une autre application assure déjà la fonction de zone de "
+"notification. Cette zone restera inutilisée."
 
 #: plugins/systray/systray.c:411
 msgid "The notification area lost selection"
@@ -2101,7 +2179,9 @@ msgstr "Greffon de barre d’état"
 msgid ""
 "Provides status notifier items (application indicators) and legacy systray "
 "items"
-msgstr "Fournit des éléments d’indication d’état (indicateurs des applications) et des éléments de la zone de notification historique"
+msgstr ""
+"Fournit des éléments d’indication d’état (indicateurs des applications) et "
+"des éléments de la zone de notification historique"
 
 #: plugins/tasklist/tasklist-dialog.glade:23
 msgid "Nothing"
@@ -2201,32 +2281,32 @@ msgstr "Afficher les fenêtres de tous les _moniteurs"
 msgid "Show only _minimized windows"
 msgstr "Afficher uniquement les fenêtres _réduites"
 
-#: plugins/tasklist/tasklist-widget.c:3105
+#: plugins/tasklist/tasklist-widget.c:3114
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Impossible de démarrer une nouvelle instance de « %s »"
 
-#: plugins/tasklist/tasklist-widget.c:3132
+#: plugins/tasklist/tasklist-widget.c:3141
 msgid "Launch New Instance"
 msgstr "Lancer une nouvelle instance"
 
-#: plugins/tasklist/tasklist-widget.c:3876
+#: plugins/tasklist/tasklist-widget.c:3885
 msgid "Mi_nimize All"
 msgstr "Tout _réduire"
 
-#: plugins/tasklist/tasklist-widget.c:3883
+#: plugins/tasklist/tasklist-widget.c:3892
 msgid "Un_minimize All"
 msgstr "Tout _afficher"
 
-#: plugins/tasklist/tasklist-widget.c:3890
+#: plugins/tasklist/tasklist-widget.c:3899
 msgid "Ma_ximize All"
 msgstr "Tout _maximiser"
 
-#: plugins/tasklist/tasklist-widget.c:3897
+#: plugins/tasklist/tasklist-widget.c:3906
 msgid "_Unmaximize All"
 msgstr "Tout r_estaurer"
 
-#: plugins/tasklist/tasklist-widget.c:3908
+#: plugins/tasklist/tasklist-widget.c:3917
 msgid "_Close All"
 msgstr "Tout _fermer"
 
@@ -2234,28 +2314,28 @@ msgstr "Tout _fermer"
 msgid "Switch between open windows using buttons"
 msgstr "Basculer entre les fenêtres ouvertes en utilisant des boutons"
 
-#: plugins/windowmenu/windowmenu.c:721
+#: plugins/windowmenu/windowmenu.c:729
 msgid "Desktop"
 msgstr "Bureau"
 
-#: plugins/windowmenu/windowmenu.c:1315
+#: plugins/windowmenu/windowmenu.c:1323
 msgid "No Windows"
 msgstr "Aucune fenêtre"
 
-#: plugins/windowmenu/windowmenu.c:1330
+#: plugins/windowmenu/windowmenu.c:1338
 msgid "Urgent Windows"
 msgstr "Fenêtres urgentes"
 
-#: plugins/windowmenu/windowmenu.c:1375
+#: plugins/windowmenu/windowmenu.c:1383
 msgid "Add Workspace"
 msgstr "Ajouter un espace de travail"
 
-#: plugins/windowmenu/windowmenu.c:1397
+#: plugins/windowmenu/windowmenu.c:1405
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Supprimer l’espace de travail « %s »"
 
-#: plugins/windowmenu/windowmenu.c:1399
+#: plugins/windowmenu/windowmenu.c:1407
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Supprimer l’espace de travail %d"
