@@ -1,24 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Xfce
-# This file is distributed under the same license as the xfce4-panel.master package.
+# This file is distributed under the same license as the xfce4-panel.xfce-4-20 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# ByungHyun Choi<byunghyun.choi@gmail.com>, 2005
-# Seong-ho Cho <darkcircle.0426@gmail.com>, 2013
-# 1763f4a4329a2376c933c5e919a36cbc_341ca53 <1f851310383599d03339229d772e1290_119292>, 2017-2018
-# lego37yoon <lego37yoon@outlook.com>, 2014
-# Seok Chae <seok.chae@gmail.com>, 2023
-# Seong-ho Cho <darkcircle.0426@gmail.com>, 2013-2014,2016-2020,2022-2024
-# Thomas Sungjin Kang <potopro@gmail.com>, 2013
-# Thomas Sungjin Kang <potopro@gmail.com>, 2015
+# Seong-ho Cho <darkcircle.0426@gmail.com>, 2025
+# Seok Chae <seok.chae@gmail.com>, 2025
+# Xfce Bot <transifex@xfce.org>, 2025
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Xfce4-panel\n"
+"Project-Id-Version: xfce4-panel.xfce-4-20\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-10-18 00:47+0200\n"
-"PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>, 2013-2014,2016-2020,2022-2024\n"
-"Language-Team: Korean (http://app.transifex.com/xfce/xfce4-panel/language/ko/)\n"
+"POT-Creation-Date: 2025-02-14 12:29+0100\n"
+"PO-Revision-Date: 2025-02-14 11:29+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>, 2025\n"
+"Language-Team: Korean (https://app.transifex.com/xfce/teams/16840/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -39,9 +37,13 @@ msgstr "이 데스크톱 파일의 정보에 기반하여 새 실행 아이콘�
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
-msgstr "panels;패널;창;settings;설정;preferences;기본설정;기본 설정;taskbar;작업표시줄;작업 표시줄;autohide;자동숨김;자동 숨김;application menu;프로그램메뉴;프로그램 메뉴;어플리케이션 메뉴;어플리케이션메뉴start;시작;buttons;버튼;보턴;단추;launcher;실행아이콘;실행 아이콘;notification area;알림영역;알림 영역;status;상태;icons;아이콘;plugins;플러그인;"
+msgstr ""
+"panels;패널;창;settings;설정;preferences;기본설정;기본 설정;taskbar;작업표시줄;작업 "
+"표시줄;autohide;자동숨김;자동 숨김;application menu;프로그램메뉴;프로그램 메뉴;어플리케이션 "
+"메뉴;어플리케이션메뉴start;시작;buttons;버튼;보턴;단추;launcher;실행아이콘;실행 아이콘;notification "
+"area;알림영역;알림 영역;status;상태;icons;아이콘;plugins;플러그인;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3686
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3710
 msgid "Panel"
 msgstr "패널"
 
@@ -49,67 +51,67 @@ msgstr "패널"
 msgid "Customize the panel"
 msgstr "패널 개별 설정"
 
-#: libxfce4panel/xfce-panel-plugin.c:1088
-#: panel/panel-preferences-dialog.c:1537
+#: libxfce4panel/xfce-panel-plugin.c:1113
+#: panel/panel-preferences-dialog.c:1549
 msgid "Remove"
 msgstr "제거"
 
-#: libxfce4panel/xfce-panel-plugin.c:1089
+#: libxfce4panel/xfce-panel-plugin.c:1114
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "항목을 패널에서 제거하면 설정도 지워집니다."
 
-#: libxfce4panel/xfce-panel-plugin.c:1093
-#: panel/panel-preferences-dialog.c:1544
+#: libxfce4panel/xfce-panel-plugin.c:1118
+#: panel/panel-preferences-dialog.c:1556
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "\"%s\"을(를) 정말로 없애시렵니까?"
+msgstr "\"%s\"을(를) 제거하시렵니까?"
 
 #. properties item
-#: libxfce4panel/xfce-panel-plugin.c:1215
+#: libxfce4panel/xfce-panel-plugin.c:1240
 msgid "_Properties"
 msgstr "속성(_P)"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1226 panel/panel-window.c:3761
+#: libxfce4panel/xfce-panel-plugin.c:1251 panel/panel-window.c:3785
 msgid "_About"
 msgstr "정보(_A)"
 
 #. move item
-#: libxfce4panel/xfce-panel-plugin.c:1237
+#: libxfce4panel/xfce-panel-plugin.c:1262
 msgid "_Move"
 msgstr "이동(_M)"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1253 panel/panel-application.c:357
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1083
+#: libxfce4panel/xfce-panel-plugin.c:1278 panel/panel-application.c:357
+#: panel/panel-plugin-external.c:424 panel/panel-preferences-dialog.c:1089
 #: panel/panel-preferences-dialog.glade:1240
 #: plugins/launcher/launcher-dialog.c:841
 msgid "_Remove"
 msgstr "제거(_R)"
 
-#: libxfce4panel/xfce-panel-plugin.c:1271
+#: libxfce4panel/xfce-panel-plugin.c:1296
 msgid "Pane_l"
 msgstr "패널(_L)"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1279 panel/panel-window.c:3698
+#: libxfce4panel/xfce-panel-plugin.c:1304 panel/panel-window.c:3722
 msgid "Add _New Items..."
 msgstr "새 항목 추가(_N)..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1290 panel/panel-window.c:3709
+#: libxfce4panel/xfce-panel-plugin.c:1315 panel/panel-window.c:3733
 msgid "Panel Pr_eferences..."
 msgstr "패널 기본 설정(_E)..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1307 panel/panel-window.c:3736
+#: libxfce4panel/xfce-panel-plugin.c:1332 panel/panel-window.c:3760
 msgid "Log _Out"
 msgstr "로그아웃(_O)"
 
 #. help item
-#: libxfce4panel/xfce-panel-plugin.c:1323 panel/panel-item-dialog.c:207
-#: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3752
+#: libxfce4panel/xfce-panel-plugin.c:1348 panel/panel-item-dialog.c:207
+#: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3776
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
 #: plugins/clock/clock-dialog.glade:120
@@ -124,121 +126,121 @@ msgid "_Help"
 msgstr "도움말(_H)"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1334
+#: libxfce4panel/xfce-panel-plugin.c:1359
 msgid "About"
 msgstr "정보"
 
-#: panel/main.c:66
+#: panel/main.c:69
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "'패널 기본 설정' 대화상자 표시"
 
-#: panel/main.c:66 panel/main.c:67
+#: panel/main.c:69 panel/main.c:70
 msgid "PANEL-NUMBER"
 msgstr "<패널-번호>"
 
-#: panel/main.c:67
+#: panel/main.c:70
 msgid "Show the 'Add New Items' dialog"
 msgstr "'새 항목 추가' 대화상자 표시"
 
-#: panel/main.c:68
+#: panel/main.c:71
 msgid "Save the panel configuration"
 msgstr "패널 설정 저장하기"
 
-#: panel/main.c:69
+#: panel/main.c:72
 msgid "Add a new plugin to the panel"
 msgstr "패널에 새 항목 추가"
 
-#: panel/main.c:69
+#: panel/main.c:72
 msgid "PLUGIN-NAME"
 msgstr "<플러그인-이름>"
 
-#: panel/main.c:70
+#: panel/main.c:73
 msgid "Restart the running panel instance"
 msgstr "실행 중인 패널 인스턴스 다시 시작"
 
-#: panel/main.c:71
+#: panel/main.c:74
 msgid "Quit the running panel instance"
 msgstr "실행 중인 패널 인스턴스 끝내기"
 
-#: panel/main.c:72
+#: panel/main.c:75
 msgid "Do not wait for a window manager on startup"
 msgstr "시작시 창 관리자 기다리지 않기"
 
-#: panel/main.c:73 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: panel/main.c:76 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
-msgstr "버전 정보를 출력하고 끝내기"
+msgstr "버전 정보를 출력하고 나가기"
 
 #. parse context options
-#: panel/main.c:258
+#: panel/main.c:261
 msgid "[ARGUMENTS...]"
 msgstr "<인자...>"
 
-#: panel/main.c:268
+#: panel/main.c:271
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "사용방법을 보려면 \"%s --help\"를 입력하십시오."
 
-#: panel/main.c:285
+#: panel/main.c:288
 msgid "The Xfce development team. All rights reserved."
-msgstr "XFCE 개발 팀. All rights reserved."
+msgstr "Xfce 개발 팀. All rights reserved."
 
-#: panel/main.c:286
+#: panel/main.c:289
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr "<%s>(으)로 버그를 알려주십시오."
+msgstr "<%s>에게 버그를 보내십시오."
 
 #. quit without error if an instance is running
-#: panel/main.c:394
+#: panel/main.c:397
 msgid "There is already a running instance"
 msgstr "이미 실행 중인 인스턴스가 있습니다"
 
 #. spawn ourselfs again
-#: panel/main.c:405
+#: panel/main.c:408
 msgid "Restarting..."
 msgstr "다시 시작하는 중..."
 
-#: panel/main.c:422
+#: panel/main.c:425
 msgid "Failed to show the preferences dialog"
 msgstr "기본 설정 대화상자 표시에 실패했습니다"
 
-#: panel/main.c:424
+#: panel/main.c:427
 msgid "Failed to show the add new items dialog"
 msgstr "새 항목 추가 대화상자 표시에 실패했습니다"
 
-#: panel/main.c:426
+#: panel/main.c:429
 msgid "Failed to save the panel configuration"
 msgstr "패널 설정 저장에 실패했습니다"
 
-#: panel/main.c:428
+#: panel/main.c:431
 msgid "Failed to add a plugin to the panel"
 msgstr "패널 플러그인 추가에 실패했습니다"
 
-#: panel/main.c:430
+#: panel/main.c:433
 msgid "Failed to restart the panel"
 msgstr "패널 다시 시작에 실패했습니다"
 
-#: panel/main.c:432
+#: panel/main.c:435
 msgid "Failed to quit the panel"
 msgstr "패널 끝내기에 실패했습니다"
 
-#: panel/main.c:434
+#: panel/main.c:437
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus 메시지를 보내는데 실패했습니다"
 
-#: panel/main.c:442 panel/main.c:462
+#: panel/main.c:445 panel/main.c:465
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "실행 중인 %s 인스턴스가 없습니다"
 
-#: panel/main.c:443
+#: panel/main.c:446
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "패널을 시작하시렵니까? 패널을 시작 하면 로그아웃시 세션을 저장하는지 확인하여 다음 로그인시 패널이 자동으로 시작하도록 합니다."
+msgstr "패널을 시작하시겠습니까? 패널을 시작하면 다음 로그인시 설정된 패널이 자동으로 시작됩니다."
 
-#: panel/main.c:448
+#: panel/main.c:451
 msgid "Execute"
 msgstr "실행"
 
@@ -261,7 +263,10 @@ msgid ""
 "doing, you can remove it permanently, otherwise you'd better quit and make a"
 " backup of the current configuration using %s, before checking your "
 "installation and trying to start xfce4-panel again."
-msgstr "현재 xfce4-panel 설정에 이 플러그인이 있지만, 아마도 설치 문제 때문에 불러올 수 없는 것 같습니다. 어떤 조치를 취하고 있는지 안다면 완전히 제고할 수 있습니다. 그렇지 않으면 설치 상태를 확인하고 xfce4-panel 을 다시 시작해보기 전, 이 프로그램을 빠져 나간 후 %s을(를) 활용하여 현재 설정을 백업하시는게 좋습니다."
+msgstr ""
+"현재 xfce4-panel 설정에 이 플러그인이 있지만, 아마도 설치 문제 때문에 불러올 수 없는 것 같습니다. 어떤 조치를 취하고 "
+"있는지 안다면 완전히 제고할 수 있습니다. 그렇지 않으면 설치 상태를 확인하고 xfce4-panel 을 다시 시작해보기 전, 이 "
+"프로그램을 빠져 나간 후 %s을(를) 활용하여 현재 설정을 백업하시는게 좋습니다."
 
 #: panel/panel-application.c:356
 msgid "Plugin loading failure"
@@ -269,7 +274,7 @@ msgstr "플러그인 불러오기 실패"
 
 #: panel/panel-application.c:357
 msgid "_Quit"
-msgstr "종료(_Q)"
+msgstr "끝내기(_Q)"
 
 #: panel/panel-application.c:1037
 msgid ""
@@ -299,7 +304,7 @@ msgstr "끝내기"
 
 #: panel/panel-application.c:1805
 msgid "Are you sure you want to quit the panel?"
-msgstr "정말 패널을 종료하시렵니까?"
+msgstr "정말 패널을 종료하시겠습니까?"
 
 #: panel/panel-application.c:1813
 #, c-format
@@ -318,51 +323,53 @@ msgid ""
 "uint."
 msgstr "잘못된 힌트 유형 \"%s\" 입니다. 올바른 유형은 bool, double, int string 그리고 uint 입니다."
 
-#: panel/panel-dialogs.c:53
+#: panel/panel-dialogs.c:56
 msgid "Unable to open the e-mail address"
 msgstr "이메일 주소를 열 수 없습니다"
 
-#: panel/panel-dialogs.c:79
+#: panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "XFCE 데스크톱 환경의 패널"
 
-#: panel/panel-dialogs.c:83
+#: panel/panel-dialogs.c:86
 msgid "translator-credits"
-msgstr "ByungHyun Choi<byunghyun.choi@gmail.com>\nSeong-ho Cho <darkcircle.0426@gmail.com>\nJunggyu Park <bagjunggyu@gmail.com>"
+msgstr ""
+"ByungHyun Choi <byunghyun.choi@gmail.com>\n"
+"Seong-ho Cho <shcho@gnome.org>"
 
-#: panel/panel-dialogs.c:157
+#: panel/panel-dialogs.c:160
 msgid "Add New Item"
 msgstr "새 항목 추가"
 
-#: panel/panel-dialogs.c:157 plugins/actions/actions.c:870
+#: panel/panel-dialogs.c:160 plugins/actions/actions.c:870
 #: plugins/applicationsmenu/applicationsmenu.c:606
 #: plugins/directorymenu/directorymenu.c:466
 #: plugins/directorymenu/directorymenu.c:938
 msgid "_Cancel"
 msgstr "취소(_C)"
 
-#: panel/panel-dialogs.c:157 panel/panel-item-dialog.c:203
+#: panel/panel-dialogs.c:160 panel/panel-item-dialog.c:203
 #: panel/panel-preferences-dialog.glade:1223
 #: plugins/launcher/launcher-dialog.glade:219
 msgid "_Add"
 msgstr "추가(_A)"
 
-#: panel/panel-dialogs.c:168
+#: panel/panel-dialogs.c:171
 msgid "Please choose a panel for the new plugin:"
 msgstr "새 플러그인을 둘 패널을 선택하십시오:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1028
+#: panel/panel-dialogs.c:191 panel/panel-preferences-dialog.c:1034
 #, c-format
 msgid "Panel %d"
 msgstr "패널 %d"
 
-#: panel/panel-dialogs.c:227
+#: panel/panel-dialogs.c:230
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr "패널이 키오스크 모드로 동작하고 있기 때문에, 정식 사용자로서의 패널 환경설정을 바꾸도록 허락하지 않았습니다"
 
-#: panel/panel-dialogs.c:229
+#: panel/panel-dialogs.c:232
 msgid "Modifying the panel is not allowed"
 msgstr "패널 편집을 허용하지 않았습니다"
 
@@ -394,24 +401,26 @@ msgstr "검색(_S):"
 msgid "Enter search phrase here"
 msgstr "검색 문구를 여기에 입력합니다"
 
-#: panel/panel-plugin-external.c:413
+#: panel/panel-plugin-external.c:417
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "플러그인 \"%s\"을(를) 예기치 않게 패널에서 제거했습니다. 다시 시작 하시렵니까?"
+msgstr "플러그인 \"%s\"을(를) 예기치 않게 패널에서 제거했습니다. 다시 시작 하시겠습니까?"
 
-#: panel/panel-plugin-external.c:414
+#: panel/panel-plugin-external.c:418
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "최근 %d 초 안에 플러그인을 한 번 이상 다시 시작했습니다. 패널 실행을 누르시면 플러그인 다시 시작을 시도할 것이고, 그렇지 않으면 패널에서 완전히 제거합니다."
+msgstr ""
+"최근 %d 초 안에 플러그인을 한 번 이상 다시 시작했습니다. 패널 실행을 누르시면 플러그인 다시 시작을 시도할 것이고, 그렇지 않으면 "
+"패널에서 완전히 제거합니다."
 
-#: panel/panel-plugin-external.c:419
+#: panel/panel-plugin-external.c:423
 msgid "Plugin Restart"
 msgstr "플러그인 다시 시작"
 
-#: panel/panel-plugin-external.c:420
+#: panel/panel-plugin-external.c:424
 msgid "_Execute"
 msgstr "실행(_E)"
 
@@ -429,48 +438,50 @@ msgstr "우선 순위"
 msgid "Monitor %d"
 msgstr "모니터 %d"
 
-#: panel/panel-preferences-dialog.c:1082
+#: panel/panel-preferences-dialog.c:1088
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "패널과 플러그인 환경설정을 완전히 제거합니다"
 
-#: panel/panel-preferences-dialog.c:1091
+#: panel/panel-preferences-dialog.c:1097
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
-msgstr "패널 %d을(를) 정말로 없애시렵니까?"
+msgstr "패널 %d을(를) 정말로 삭제하시겠습니까?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1382
+#: panel/panel-preferences-dialog.c:1394
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(외부)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1387
+#: panel/panel-preferences-dialog.c:1399
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "내부 이름: %s-%d\nPID: %d"
+msgstr ""
+"내부 이름: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1399
+#: panel/panel-preferences-dialog.c:1411
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "내부 이름: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1546
+#: panel/panel-preferences-dialog.c:1558
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "항목을 패널에서 제거하면 완전히 잃게 됩니다."
 
-#: panel/panel-preferences-dialog.c:1550
+#: panel/panel-preferences-dialog.c:1562
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "항목 %d개를 정말로 제거하시렵니까?"
 
-#: panel/panel-preferences-dialog.c:1552
+#: panel/panel-preferences-dialog.c:1564
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "패널에서 제거하면 완전히 잃어버립니다."
 
@@ -569,7 +580,8 @@ msgid ""
 "Select this option if you don't want maximized windows to cover the area "
 "behind the panel. This only works when the panel is attached to a screen "
 "edge."
-msgstr "최대화 창이 패널 뒤 공간을 차지하지 않게 하려면 이 옵션을 선택하십시오. 이 옵션은 패널이 화면 가장자리에 붙었을 때만 동작합니다."
+msgstr ""
+"최대화 창이 패널 뒤 공간을 차지하지 않게 하렴녀 이 옵션을 선택하십시오. 이 옵션은 패널이 화면 가장자리에 붙었을 때만 동작합니다."
 
 #: panel/panel-preferences-dialog.glade:478
 msgid "Au_tomatically hide the panel:"
@@ -668,7 +680,9 @@ msgstr "설정..."
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>합성 비활성화 상태</b>\n패널의 투명도 설정을 위해 창 관리자에서 합성을 활성화합니다."
+msgstr ""
+"<b>합성 비활성화 상태</b>\n"
+"패널의 투명도 설정을 위해 창 관리자에서 합성을 활성화합니다."
 
 #. I18N: label for the enter transparency slider
 #: panel/panel-preferences-dialog.glade:1106
@@ -745,7 +759,7 @@ msgstr "숙련자"
 msgid "Expert"
 msgstr "전문가"
 
-#: panel/panel-window.c:3723
+#: panel/panel-window.c:3747
 msgid "_Lock Panel"
 msgstr "패널 고정(_L)"
 
@@ -839,7 +853,7 @@ msgstr "로그아웃(_L)"
 
 #: plugins/actions/actions.c:169
 msgid "Are you sure you want to log out?"
-msgstr "정말로 로그아웃 하시렵니까?"
+msgstr "정말로 로그아웃 하시겠습니까?"
 
 #: plugins/actions/actions.c:170
 #, c-format
@@ -880,7 +894,7 @@ msgstr "최대 절전(_H)"
 
 #: plugins/actions/actions.c:198
 msgid "Do you want to suspend to disk?"
-msgstr "디스크를 대기 상태로 두시렵니까?"
+msgstr "디스크 대기 모드로 전환하시겠습니까?"
 
 #: plugins/actions/actions.c:199
 #, c-format
@@ -897,7 +911,7 @@ msgstr "하이브리드 대기(_H)"
 
 #: plugins/actions/actions.c:206
 msgid "Do you want to hibernate and suspend the system?"
-msgstr "최대 절전 및 대기 상태로 진입하시렵니까?"
+msgstr "최대 절전 및 대기 상태로 전환하시겠습니까?"
 
 #: plugins/actions/actions.c:207
 #, c-format
@@ -914,7 +928,7 @@ msgstr "대기(_P)"
 
 #: plugins/actions/actions.c:214
 msgid "Do you want to suspend to RAM?"
-msgstr "RAM을 대기 상태로 두시렵니까?"
+msgstr "RAM 대기 모드로 전환하시겠습니까?"
 
 #: plugins/actions/actions.c:215
 #, c-format
@@ -931,7 +945,7 @@ msgstr "다시 시작(_R)"
 
 #: plugins/actions/actions.c:222
 msgid "Are you sure you want to restart?"
-msgstr "정말로 다시 시작 하시렵니까?"
+msgstr "정말로 다시 시작 하시겠습니까?"
 
 #: plugins/actions/actions.c:223
 #, c-format
@@ -948,7 +962,7 @@ msgstr "시스템 종료(_D)"
 
 #: plugins/actions/actions.c:230
 msgid "Are you sure you want to shut down?"
-msgstr "정말로 컴퓨터를 끄시렵니까?"
+msgstr "정말로 컴퓨터를 종료하시겠습니까?"
 
 #: plugins/actions/actions.c:231
 #, c-format
@@ -961,12 +975,12 @@ msgstr "%d초 후 컴퓨터를 끕니다."
 msgid "Separator"
 msgstr "구분선"
 
-#: plugins/actions/actions.c:1165
+#: plugins/actions/actions.c:1166
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "\"%s\" 동작을 실행하는데 실패했습니다"
 
-#: plugins/actions/actions.c:1369
+#: plugins/actions/actions.c:1370
 msgid "Little Mouse"
 msgstr "작은 생쥐"
 
@@ -1177,7 +1191,9 @@ msgstr "시계"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "시간대 정보 데이터베이스에 있는 파일과 관련된 시간대 이름이며, 예를 들어 \"America/New_York\"이 있습니다. 지역 시간대를 사용하려면 빈 칸으로 두십시오."
+msgstr ""
+"시간대 정보 데이터베이스에 있는 파일과 관련된 시간대 이름이며, 예를 들어 \"America/New_York\"이 있습니다. 지역 "
+"시간대를 사용하려면 빈 칸으로 두십시오."
 
 #: plugins/clock/clock-dialog.glade:183
 msgid "Time_zone:"
@@ -1216,7 +1232,10 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "이 형식은 파일 이름에 들어갈 날짜와 시간 부분을 나타냅니다. 예를 들어, %Y은(는) 연도를 대신하고, %m은(는) 달 수를 그리고 %d은(는) 날짜의 일 수를 나타냅니다. <b></b> 태그는 글씨를 굵게 강조합니다. 좀 더 알아보시려면 날짜 유틸리티 문서를 보십시오."
+msgstr ""
+"이 형식은 파일 이름에 들어갈 날짜와 시간 부분을 나타냅니다. 예를 들어, %Y은(는) 연도를 대신하고, %m은(는) 달 수를 그리고 "
+"%d은(는) 날짜의 일 수를 나타냅니다. <b></b> 태그는 글씨를 굵게 강조합니다. 좀 더 알아보시려면 날짜 유틸리티 문서를 "
+"보십시오."
 
 #: plugins/clock/clock-dialog.glade:358
 msgid "_Tooltip format:"
@@ -1274,7 +1293,10 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
 "the &quot;Help&quot; page for additional information."
-msgstr "이 형식은 패널에 들어갈 날짜 및 시간 부분을 설명합니다. 예를 들면 %Y는 연도, %m는 월 %d는 한 달 중 일 수를 나타냅니다. 이와 비슷하게 &lt;b&gt;&lt;/b&gt; 태그를 사용하면 내용을 굵게 표시합니다. 추가 정보는 &quot;도움말&quot; 페이지를 살펴보십시오."
+msgstr ""
+"이 형식은 패널에 들어갈 날짜 및 시간 부분을 설명합니다. 예를 들면 %Y는 연도, %m는 월 %d는 한 달 중 일 수를 나타냅니다. "
+"이와 비슷하게 &lt;b&gt;&lt;/b&gt; 태그를 사용하면 내용을 굵게 표시합니다. 추가 정보는 &quot;도움말&quot; "
+"페이지를 살펴보십시오."
 
 #: plugins/clock/clock-dialog.glade:699
 msgid "Date"
@@ -1716,11 +1738,13 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "디렉터리에서 어떤 파일을 보여줄지 결정하는데 사용할 패턴의 목록을 입력합니다. 여기에 하나 이상의 패턴을 지정한다면, 목록의 항목은 반드시 세미콜론으로 구분해야 합니다(e.g. *.txt;*.doc)."
+msgstr ""
+"디렉터리에서 어떤 파일을 보여줄지 결정하는데 사용할 패턴의 목록을 입력합니다. 여기에 하나 이상의 패턴을 지정한다면, 목록의 항목은 "
+"반드시 세미콜론으로 구분해야 합니다(e.g. *.txt;*.doc)."
 
 #: plugins/directorymenu/directorymenu-dialog.glade:301
 msgid "_File Pattern:"
-msgstr "파일 패턴(_F):"
+msgstr "파일 형식(_F):"
 
 #: plugins/directorymenu/directorymenu-dialog.glade:316
 #: plugins/tasklist/tasklist-dialog.glade:492
@@ -1755,7 +1779,7 @@ msgstr "이름 없는 항목"
 #: plugins/launcher/launcher-dialog.c:854
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr "\"%s\"을(를) 정말 제거하시렵니까?"
+msgstr "\"%s\"을(를) 정말 제거하시겠습니까?"
 
 #: plugins/launcher/launcher-dialog.glade:30
 msgid "Default"
@@ -1783,11 +1807,11 @@ msgstr "안쪽 단추"
 
 #: plugins/launcher/launcher-dialog.glade:96
 msgid "Up"
-msgstr "위"
+msgstr "위로"
 
 #: plugins/launcher/launcher-dialog.glade:105
 msgid "Down"
-msgstr "아래"
+msgstr "아래로"
 
 #: plugins/launcher/launcher-dialog.glade:120
 msgid "_Edit Item"
@@ -1859,21 +1883,21 @@ msgstr "화살표 단추 위치(_A):"
 
 #: plugins/launcher/launcher-dialog.glade:779
 msgid "Advanced"
-msgstr "고급"
+msgstr "자세히"
 
 #: plugins/launcher/launcher.desktop.in.in:5
 msgid "Program launcher with optional menu"
 msgstr "선택 메뉴가 있는 프로그램 실행 아이콘입니다"
 
-#: plugins/pager/pager.c:703 plugins/pager/pager-dialog.glade:64
+#: plugins/pager/pager.c:705 plugins/pager/pager-dialog.glade:64
 msgid "Workspace _Settings..."
 msgstr "작업 공간 설정(_S)..."
 
-#: plugins/pager/pager.c:802
+#: plugins/pager/pager.c:805
 msgid "Unable to open the workspace settings"
 msgstr "작업 공간 설정을 열 수 없습니다"
 
-#: plugins/pager/pager-buttons.c:596 plugins/windowmenu/windowmenu.c:920
+#: plugins/pager/pager-buttons.c:596 plugins/windowmenu/windowmenu.c:928
 #, c-format
 msgid "Workspace %d"
 msgstr "작업 공간 %d"
@@ -1963,11 +1987,11 @@ msgstr "모든 창을 숨기고 데스크톱 표시합니다"
 
 #: plugins/systray/sn-dialog.c:416
 msgid "Clear"
-msgstr "정리"
+msgstr "지우기"
 
 #: plugins/systray/sn-dialog.c:421
 msgid "Are you sure you want to clear the list of known items?"
-msgstr "알려진 항목 목록을 정말로 삭제하시겠습니까?"
+msgstr "알려진 항목 목록을 정말로 지우시겠습니까?"
 
 #: plugins/systray/sn-dialog.glade:48
 msgid "Status Tray Items"
@@ -2193,32 +2217,32 @@ msgstr "모든 모니터의 창 표시(_N)"
 msgid "Show only _minimized windows"
 msgstr "숨겨둔 창만 표시(_M)"
 
-#: plugins/tasklist/tasklist-widget.c:3105
+#: plugins/tasklist/tasklist-widget.c:3114
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "새 '%s' 인스턴스를 시작할 수 없습니다"
 
-#: plugins/tasklist/tasklist-widget.c:3132
+#: plugins/tasklist/tasklist-widget.c:3141
 msgid "Launch New Instance"
 msgstr "새 인스턴스 실행"
 
-#: plugins/tasklist/tasklist-widget.c:3876
+#: plugins/tasklist/tasklist-widget.c:3885
 msgid "Mi_nimize All"
 msgstr "모두 최소화(_N)"
 
-#: plugins/tasklist/tasklist-widget.c:3883
+#: plugins/tasklist/tasklist-widget.c:3892
 msgid "Un_minimize All"
 msgstr "모두 최소화 취소(_M)"
 
-#: plugins/tasklist/tasklist-widget.c:3890
+#: plugins/tasklist/tasklist-widget.c:3899
 msgid "Ma_ximize All"
 msgstr "모두 최대화(_X)"
 
-#: plugins/tasklist/tasklist-widget.c:3897
+#: plugins/tasklist/tasklist-widget.c:3906
 msgid "_Unmaximize All"
 msgstr "모두 최대화 취소(_U)"
 
-#: plugins/tasklist/tasklist-widget.c:3908
+#: plugins/tasklist/tasklist-widget.c:3917
 msgid "_Close All"
 msgstr "모두 닫기(_C)"
 
@@ -2226,28 +2250,28 @@ msgstr "모두 닫기(_C)"
 msgid "Switch between open windows using buttons"
 msgstr "단추를 사용하여 열려있는 창을 전환합니다"
 
-#: plugins/windowmenu/windowmenu.c:721
+#: plugins/windowmenu/windowmenu.c:729
 msgid "Desktop"
 msgstr "데스크톱"
 
-#: plugins/windowmenu/windowmenu.c:1315
+#: plugins/windowmenu/windowmenu.c:1323
 msgid "No Windows"
 msgstr "창 없음"
 
-#: plugins/windowmenu/windowmenu.c:1330
+#: plugins/windowmenu/windowmenu.c:1338
 msgid "Urgent Windows"
 msgstr "긴급 창"
 
-#: plugins/windowmenu/windowmenu.c:1375
+#: plugins/windowmenu/windowmenu.c:1383
 msgid "Add Workspace"
 msgstr "작업 공간 추가"
 
-#: plugins/windowmenu/windowmenu.c:1397
+#: plugins/windowmenu/windowmenu.c:1405
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "작업 공간 \"%s\" 제거"
 
-#: plugins/windowmenu/windowmenu.c:1399
+#: plugins/windowmenu/windowmenu.c:1407
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "작업 공간 %d번 제거"
