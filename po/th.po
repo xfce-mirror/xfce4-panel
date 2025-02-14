@@ -1,19 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Xfce
-# This file is distributed under the same license as the xfce4-panel.master package.
+# This file is distributed under the same license as the xfce4-panel.xfce-4-20 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Theppitak Karoonboonyanan <thep@linux.thai.net>, 2013
-# Theppitak Karoonboonyanan <theppitak@gmail.com>, 2013,2015,2017,2021
-# Theppitak Karoonboonyanan <theppitak@gmail.com>, 2013
+# Theppitak Karoonboonyanan <theppitak@gmail.com>, 2025
+# Xfce Bot <transifex@xfce.org>, 2025
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Xfce4-panel\n"
+"Project-Id-Version: xfce4-panel.xfce-4-20\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-10-18 00:47+0200\n"
-"PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Theppitak Karoonboonyanan <theppitak@gmail.com>, 2013,2015,2017,2021\n"
-"Language-Team: Thai (http://app.transifex.com/xfce/xfce4-panel/language/th/)\n"
+"POT-Creation-Date: 2025-02-14 12:29+0100\n"
+"PO-Revision-Date: 2025-02-14 11:29+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>, 2025\n"
+"Language-Team: Thai (https://app.transifex.com/xfce/teams/16840/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -34,9 +36,10 @@ msgstr "เพิ่มปุ่มเรียกปุ่มใหม่ลง
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
-msgstr "พาเนล;ตั้งค่า;ปรับแต่ง;แถบงาน;ซ่อนอัตโนมัติ;เมนูแอปพลิเคชัน;เริ่ม;ปุ่ม;ปุ่มเรียก;พื้นที่แจ้งเหตุ;สถานะ;ไอคอน;ปลั๊กอิน;"
+msgstr ""
+"พาเนล;ตั้งค่า;ปรับแต่ง;แถบงาน;ซ่อนอัตโนมัติ;เมนูแอปพลิเคชัน;เริ่ม;ปุ่ม;ปุ่มเรียก;พื้นที่แจ้งเหตุ;สถานะ;ไอคอน;ปลั๊กอิน;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3686
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3710
 msgid "Panel"
 msgstr "พาเนล"
 
@@ -44,67 +47,68 @@ msgstr "พาเนล"
 msgid "Customize the panel"
 msgstr "ปรับแต่งพาเนล"
 
-#: libxfce4panel/xfce-panel-plugin.c:1088
-#: panel/panel-preferences-dialog.c:1537
+#: libxfce4panel/xfce-panel-plugin.c:1113
+#: panel/panel-preferences-dialog.c:1549
 msgid "Remove"
 msgstr "ถอดถอน"
 
-#: libxfce4panel/xfce-panel-plugin.c:1089
+#: libxfce4panel/xfce-panel-plugin.c:1114
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
-msgstr "การลบรายการนี้ออกจากพาเนลจะหมายถึงการลบค่าตั้งต่างๆ ของรายการนี้ทิ้งด้วย"
+msgstr ""
+"การลบรายการนี้ออกจากพาเนลจะหมายถึงการลบค่าตั้งต่างๆ ของรายการนี้ทิ้งด้วย"
 
-#: libxfce4panel/xfce-panel-plugin.c:1093
-#: panel/panel-preferences-dialog.c:1544
+#: libxfce4panel/xfce-panel-plugin.c:1118
+#: panel/panel-preferences-dialog.c:1556
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "แน่ใจหรือไม่ว่าคุณต้องการลบ \"%s\"?"
+msgstr "คุณแน่ใจหรือไม่ว่าต้องการลบ \"%s\"?"
 
 #. properties item
-#: libxfce4panel/xfce-panel-plugin.c:1215
+#: libxfce4panel/xfce-panel-plugin.c:1240
 msgid "_Properties"
 msgstr "คุณ_สมบัติ"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1226 panel/panel-window.c:3761
+#: libxfce4panel/xfce-panel-plugin.c:1251 panel/panel-window.c:3785
 msgid "_About"
 msgstr "เ_กี่ยวกับ"
 
 #. move item
-#: libxfce4panel/xfce-panel-plugin.c:1237
+#: libxfce4panel/xfce-panel-plugin.c:1262
 msgid "_Move"
 msgstr "_ย้าย"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1253 panel/panel-application.c:357
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1083
+#: libxfce4panel/xfce-panel-plugin.c:1278 panel/panel-application.c:357
+#: panel/panel-plugin-external.c:424 panel/panel-preferences-dialog.c:1089
 #: panel/panel-preferences-dialog.glade:1240
 #: plugins/launcher/launcher-dialog.c:841
 msgid "_Remove"
-msgstr "เอา_ออก"
+msgstr "_ลบ"
 
-#: libxfce4panel/xfce-panel-plugin.c:1271
+#: libxfce4panel/xfce-panel-plugin.c:1296
 msgid "Pane_l"
 msgstr "_พาเนล"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1279 panel/panel-window.c:3698
+#: libxfce4panel/xfce-panel-plugin.c:1304 panel/panel-window.c:3722
 msgid "Add _New Items..."
 msgstr "เพิ่มรายการใ_หม่..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1290 panel/panel-window.c:3709
+#: libxfce4panel/xfce-panel-plugin.c:1315 panel/panel-window.c:3733
 msgid "Panel Pr_eferences..."
 msgstr "_ปรับแต่งพาเนล..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1307 panel/panel-window.c:3736
+#: libxfce4panel/xfce-panel-plugin.c:1332 panel/panel-window.c:3760
 msgid "Log _Out"
 msgstr "_ออกจากระบบ"
 
 #. help item
-#: libxfce4panel/xfce-panel-plugin.c:1323 panel/panel-item-dialog.c:207
-#: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3752
+#: libxfce4panel/xfce-panel-plugin.c:1348 panel/panel-item-dialog.c:207
+#: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3776
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
 #: plugins/clock/clock-dialog.glade:120
@@ -119,121 +123,124 @@ msgid "_Help"
 msgstr "_วิธีใช้"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1334
+#: libxfce4panel/xfce-panel-plugin.c:1359
 msgid "About"
 msgstr "เกี่ยวกับ"
 
-#: panel/main.c:66
+#: panel/main.c:69
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "แสดงกล่องโต้ตอบ 'ปรับแต่งพาเนล'"
 
-#: panel/main.c:66 panel/main.c:67
+#: panel/main.c:69 panel/main.c:70
 msgid "PANEL-NUMBER"
 msgstr "หมายเลขพาเนล"
 
-#: panel/main.c:67
+#: panel/main.c:70
 msgid "Show the 'Add New Items' dialog"
 msgstr "แสดงกล่องโต้ตอบ 'เพิ่มรายการใหม่'"
 
-#: panel/main.c:68
+#: panel/main.c:71
 msgid "Save the panel configuration"
 msgstr "บันทึกค่าตั้งของพาเนล"
 
-#: panel/main.c:69
+#: panel/main.c:72
 msgid "Add a new plugin to the panel"
 msgstr "เพิ่มปลั๊กอินลงในพาเนล"
 
-#: panel/main.c:69
+#: panel/main.c:72
 msgid "PLUGIN-NAME"
 msgstr "ชื่อปลั๊กอิน"
 
-#: panel/main.c:70
+#: panel/main.c:73
 msgid "Restart the running panel instance"
 msgstr "เริ่มเปิดพาเนลที่กำลังทำงานอยู่ใหม่"
 
-#: panel/main.c:71
+#: panel/main.c:74
 msgid "Quit the running panel instance"
 msgstr "จบการทำงานพาเนลที่กำลังทำงานอยู่"
 
-#: panel/main.c:72
+#: panel/main.c:75
 msgid "Do not wait for a window manager on startup"
 msgstr "ไม่ต้องรอโปรแกรมจัดการหน้าต่างขณะเริ่มทำงาน"
 
-#: panel/main.c:73 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: panel/main.c:76 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "แสดงข้อมูลรุ่นแล้วจบการทำงาน"
 
 #. parse context options
-#: panel/main.c:258
+#: panel/main.c:261
 msgid "[ARGUMENTS...]"
 msgstr "[อาร์กิวเมนต์...]"
 
-#: panel/main.c:268
+#: panel/main.c:271
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "สั่ง \"%s --help\" เพื่อดูวิธีใช้"
 
-#: panel/main.c:285
+#: panel/main.c:288
 msgid "The Xfce development team. All rights reserved."
 msgstr "The Xfce development team. All rights reserved."
 
-#: panel/main.c:286
+#: panel/main.c:289
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr "หากพบปัญหา กรุณารายงานที่ <%s>"
+msgstr "หากพบปัญหา กรุณารายงานไปที่ <%s>"
 
 #. quit without error if an instance is running
-#: panel/main.c:394
+#: panel/main.c:397
 msgid "There is already a running instance"
 msgstr "มีอินสแตนซ์อื่นทำงานอยู่ก่อนแล้ว"
 
 #. spawn ourselfs again
-#: panel/main.c:405
+#: panel/main.c:408
 msgid "Restarting..."
 msgstr "กำลังเริ่มเปิดใหม่..."
 
-#: panel/main.c:422
+#: panel/main.c:425
 msgid "Failed to show the preferences dialog"
 msgstr "แสดงกล่องโต้ตอบปรับแต่งไม่สำเร็จ"
 
-#: panel/main.c:424
+#: panel/main.c:427
 msgid "Failed to show the add new items dialog"
 msgstr "แสดงกล่องโต้ตอบเพิ่มรายการใหม่ไม่สำเร็จ"
 
-#: panel/main.c:426
+#: panel/main.c:429
 msgid "Failed to save the panel configuration"
 msgstr "บันทึกค่าตั้งของพาเนลไม่สำเร็จ"
 
-#: panel/main.c:428
+#: panel/main.c:431
 msgid "Failed to add a plugin to the panel"
 msgstr "เพิ่มปลั๊กอินลงในพาเนลไม่สำเร็จ"
 
-#: panel/main.c:430
+#: panel/main.c:433
 msgid "Failed to restart the panel"
 msgstr "เริ่มเปิดพาเนลใหม่ไม่สำเร็จ"
 
-#: panel/main.c:432
+#: panel/main.c:435
 msgid "Failed to quit the panel"
 msgstr "จบการทำงานของพาเนลไม่สำเร็จ"
 
-#: panel/main.c:434
+#: panel/main.c:437
 msgid "Failed to send D-Bus message"
 msgstr "ส่งข้อความ D-Bus ไม่สำเร็จ"
 
-#: panel/main.c:442 panel/main.c:462
+#: panel/main.c:445 panel/main.c:465
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "ไม่พบอินสแตนซ์ของ %s ที่ทำงานอยู่"
 
-#: panel/main.c:443
+#: panel/main.c:446
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "คุณต้องการจะเปิดทำงานพาเนลหรือไม่? ถ้าต้องการ ก็กรุณาตรวจสอบให้แน่ใจว่าคุณได้บันทึกวาระขณะออกจากระบบ เพื่อที่วาระจะได้เปิดทำงานพาเนลโดยอัตโนมัติเมื่อคุณเข้าระบบครั้งต่อไป"
+msgstr ""
+"คุณต้องการจะเปิดทำงานพาเนลหรือไม่? ถ้าต้องการ "
+"ก็กรุณาตรวจสอบให้แน่ใจว่าคุณได้บันทึกวาระขณะออกจากระบบ "
+"เพื่อที่วาระจะได้เปิดทำงานพาเนลโดยอัตโนมัติเมื่อคุณเข้าระบบครั้งต่อไป"
 
-#: panel/main.c:448
+#: panel/main.c:451
 msgid "Execute"
 msgstr "เปิดทำงาน"
 
@@ -270,7 +277,9 @@ msgstr "_ออก"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "นี่จะเป็นการสร้างปลั๊กอินปุ่มเรียกโปรแกรมลงในพาเนล และแทรกแฟ้มที่ปล่อยเข้าเป็นรายการเมนู"
+msgstr ""
+"นี่จะเป็นการสร้างปลั๊กอินปุ่มเรียกโปรแกรมลงในพาเนล "
+"และแทรกแฟ้มที่ปล่อยเข้าเป็นรายการเมนู"
 
 #: panel/panel-application.c:1040
 msgid "Create _Launcher"
@@ -286,7 +295,9 @@ msgstr[0] "สร้างปุ่มเรียกโปรแกรมจา
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "คุณได้เปิดทำงาน X โดยไม่มีโปรแกรมจัดการวาระ ถ้าคลิกปุ่ม \"ออก\" ก็จะเป็นการปิด X server"
+msgstr ""
+"คุณได้เปิดทำงาน X โดยไม่มีโปรแกรมจัดการวาระ ถ้าคลิกปุ่ม \"ออก\" "
+"ก็จะเป็นการปิด X server"
 
 #: panel/panel-application.c:1805
 msgid "Quit"
@@ -304,60 +315,66 @@ msgstr "เรียกทำงานคำสั่ง \"%s\" ไม่สำ�
 #: panel/panel-dbus-client.c:213
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "รูปแบบของเหตุการณ์ปลั๊กอินผิดไวยากรณ์ กรุณาใช้รูปแบบ ชื่อปลั๊กอิน:ชื่อ[:ชนิด:ค่า]"
+msgstr ""
+"รูปแบบของเหตุการณ์ปลั๊กอินผิดไวยากรณ์ กรุณาใช้รูปแบบ "
+"ชื่อปลั๊กอิน:ชื่อ[:ชนิด:ค่า]"
 
 #: panel/panel-dbus-client.c:243
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "ชนิด \"%s\" ของ hint ไม่ถูกต้อง ชนิดที่ใช้ได้คือ bool, double, int, string และ uint"
+msgstr ""
+"ชนิด \"%s\" ของ hint ไม่ถูกต้อง ชนิดที่ใช้ได้คือ bool, double, int, string "
+"และ uint"
 
-#: panel/panel-dialogs.c:53
+#: panel/panel-dialogs.c:56
 msgid "Unable to open the e-mail address"
 msgstr "ไม่สามารถเปิดที่อยู่อีเมลนี้ได้"
 
-#: panel/panel-dialogs.c:79
+#: panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "พาเนลของเดสก์ท็อป Xfce"
 
-#: panel/panel-dialogs.c:83
+#: panel/panel-dialogs.c:86
 msgid "translator-credits"
-msgstr "Theppitak Karoonboonyanan <theppitak@gmail.com>"
+msgstr "Theppitak Karoonboonyanan <thep@linux.thai.net>"
 
-#: panel/panel-dialogs.c:157
+#: panel/panel-dialogs.c:160
 msgid "Add New Item"
 msgstr "เพิ่มรายการใหม่"
 
-#: panel/panel-dialogs.c:157 plugins/actions/actions.c:870
+#: panel/panel-dialogs.c:160 plugins/actions/actions.c:870
 #: plugins/applicationsmenu/applicationsmenu.c:606
 #: plugins/directorymenu/directorymenu.c:466
 #: plugins/directorymenu/directorymenu.c:938
 msgid "_Cancel"
 msgstr "_ยกเลิก"
 
-#: panel/panel-dialogs.c:157 panel/panel-item-dialog.c:203
+#: panel/panel-dialogs.c:160 panel/panel-item-dialog.c:203
 #: panel/panel-preferences-dialog.glade:1223
 #: plugins/launcher/launcher-dialog.glade:219
 msgid "_Add"
 msgstr "เ_พิ่ม"
 
-#: panel/panel-dialogs.c:168
+#: panel/panel-dialogs.c:171
 msgid "Please choose a panel for the new plugin:"
 msgstr "กรุณาเลือกพาเนลให้กับปลั๊กอินตัวใหม่:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1028
+#: panel/panel-dialogs.c:191 panel/panel-preferences-dialog.c:1034
 #, c-format
 msgid "Panel %d"
 msgstr "พาเนล %d"
 
-#: panel/panel-dialogs.c:227
+#: panel/panel-dialogs.c:230
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "เนื่องจากพาเนลกำลังทำงานอยู่ในโหมดเครื่องขายของ คุณจึงไม่ได้รับอนุญาตให้เปลี่ยนค่าตั้งของพาเนลในฐานะผู้ใช้ธรรมดา"
+msgstr ""
+"เนื่องจากพาเนลกำลังทำงานอยู่ในโหมดเครื่องขายของ "
+"คุณจึงไม่ได้รับอนุญาตให้เปลี่ยนค่าตั้งของพาเนลในฐานะผู้ใช้ธรรมดา"
 
-#: panel/panel-dialogs.c:229
+#: panel/panel-dialogs.c:232
 msgid "Modifying the panel is not allowed"
 msgstr "ไม่อนุญาตให้ปรับเปลี่ยนพาเนล"
 
@@ -389,24 +406,29 @@ msgstr "_ค้นหา:"
 msgid "Enter search phrase here"
 msgstr "ป้อนคำค้นที่นี่"
 
-#: panel/panel-plugin-external.c:413
+#: panel/panel-plugin-external.c:417
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "ปลั๊กอิน \"%s\" หลุดจากพาเนลกะทันหัน คุณต้องการจะเริ่มปลั๊กอินดังกล่าวใหม่หรือไม่?"
+msgstr ""
+"ปลั๊กอิน \"%s\" หลุดจากพาเนลกะทันหัน "
+"คุณต้องการจะเริ่มปลั๊กอินดังกล่าวใหม่หรือไม่?"
 
-#: panel/panel-plugin-external.c:414
+#: panel/panel-plugin-external.c:418
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "ปลั๊กอินนี้เริ่มทำงานใหม่เกินหนึ่งครั้งใน %d วินาทีที่ผ่านมา ถ้าคุณกดปุ่ม \"เรียกทำงาน\" พาเนลก็จะพยายามเปิดปลั๊กอินนี้ใหม่ มิฉะนั้นก็จะลบปลั๊กอินนี้ออกจากพาเนลอย่างถาวร"
+msgstr ""
+"ปลั๊กอินนี้เริ่มทำงานใหม่เกินหนึ่งครั้งใน %d วินาทีที่ผ่านมา ถ้าคุณกดปุ่ม "
+"\"เรียกทำงาน\" พาเนลก็จะพยายามเปิดปลั๊กอินนี้ใหม่ "
+"มิฉะนั้นก็จะลบปลั๊กอินนี้ออกจากพาเนลอย่างถาวร"
 
-#: panel/panel-plugin-external.c:419
+#: panel/panel-plugin-external.c:423
 msgid "Plugin Restart"
 msgstr ""
 
-#: panel/panel-plugin-external.c:420
+#: panel/panel-plugin-external.c:424
 msgid "_Execute"
 msgstr "เรียก_ทำงาน"
 
@@ -424,54 +446,56 @@ msgstr "จอหลัก"
 msgid "Monitor %d"
 msgstr "จอภาพ %d"
 
-#: panel/panel-preferences-dialog.c:1082
+#: panel/panel-preferences-dialog.c:1088
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "พาเนลนี้รวมทั้งค่าตั้งปลั๊กอินต่างๆ จะถูกลบทิ้งอย่างถาวร"
 
-#: panel/panel-preferences-dialog.c:1091
+#: panel/panel-preferences-dialog.c:1097
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "ยืนยันที่จะลบพาเนล %d หรือไม่?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1382
+#: panel/panel-preferences-dialog.c:1394
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(ภายนอก)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1387
+#: panel/panel-preferences-dialog.c:1399
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "ชื่อภายใน: %s-%d\nPID: %d"
+msgstr ""
+"ชื่อภายใน: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1399
+#: panel/panel-preferences-dialog.c:1411
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "ชื่อภายใน: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1546
+#: panel/panel-preferences-dialog.c:1558
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "ถ้าคุณลบรายการนี้ออกจากพาเนล ก็จะเป็นการลบอย่างถาวร"
 
-#: panel/panel-preferences-dialog.c:1550
+#: panel/panel-preferences-dialog.c:1562
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr ""
 
-#: panel/panel-preferences-dialog.c:1552
+#: panel/panel-preferences-dialog.c:1564
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr ""
 
 #: panel/panel-preferences-dialog.glade:13
 msgid "Never"
-msgstr "ไม่ทำ"
+msgstr "ไม่เลย"
 
 #: panel/panel-preferences-dialog.glade:16
 msgid "Intelligently"
@@ -604,7 +628,8 @@ msgstr "เพิ่มความยาวโดย_อัตโนมัต�
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "เลือกตัวเลือกนี้เพื่อให้พาเนลขยายความยาวโดยอัตโนมัติถ้าปลั๊กอินร้องขอเนื้อที่เพิ่ม"
+msgstr ""
+"เลือกตัวเลือกนี้เพื่อให้พาเนลขยายความยาวโดยอัตโนมัติถ้าปลั๊กอินร้องขอเนื้อที่เพิ่ม"
 
 #: panel/panel-preferences-dialog.glade:712
 msgid "D_isplay"
@@ -663,7 +688,9 @@ msgstr "ตั้งค่า..."
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>การทำ composite ถูกปิดอยู่</b>\nคุณต้องเปิดใช้ composite ในโปรแกรมจัดการหน้าต่างเพื่อจะกำหนดค่าความทึบแสงต่างๆ ในพาเนลได้"
+msgstr ""
+"<b>การทำ composite ถูกปิดอยู่</b>\n"
+"คุณต้องเปิดใช้ composite ในโปรแกรมจัดการหน้าต่างเพื่อจะกำหนดค่าความทึบแสงต่างๆ ในพาเนลได้"
 
 #. I18N: label for the enter transparency slider
 #: panel/panel-preferences-dialog.glade:1106
@@ -679,7 +706,9 @@ msgstr "เมาส์ออ_ก:"
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "ความโปร่งแสงของพาเนลเมื่อตัวชี้เมาส์ไม่ได้วางอยู่บนพาเนล โดยค่า 0 หมายถึงโปร่งใสเต็มที่ และ 100 หมายถึงทึบแสงเต็มที่"
+msgstr ""
+"ความโปร่งแสงของพาเนลเมื่อตัวชี้เมาส์ไม่ได้วางอยู่บนพาเนล โดยค่า 0 "
+"หมายถึงโปร่งใสเต็มที่ และ 100 หมายถึงทึบแสงเต็มที่"
 
 #: panel/panel-preferences-dialog.glade:1173
 msgid "Appeara_nce"
@@ -740,7 +769,7 @@ msgstr "มีประสบการณ์"
 msgid "Expert"
 msgstr "ชำนาญ"
 
-#: panel/panel-window.c:3723
+#: panel/panel-window.c:3747
 msgid "_Lock Panel"
 msgstr "_ตรึงพาเนล"
 
@@ -922,7 +951,7 @@ msgstr "เริ่มเปิดเครื่องใหม่"
 
 #: plugins/actions/actions.c:221
 msgid "_Restart"
-msgstr "เริ่มเปิดเครื่องใ_หม่"
+msgstr "เ_ริ่มเปิดเครื่องใหม่"
 
 #: plugins/actions/actions.c:222
 msgid "Are you sure you want to restart?"
@@ -956,12 +985,12 @@ msgstr "จะปิดเครื่องภายใน %d วินาท�
 msgid "Separator"
 msgstr "ขีดคั่น"
 
-#: plugins/actions/actions.c:1165
+#: plugins/actions/actions.c:1166
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "การกระทำ \"%s\" ทำไม่สำเร็จ"
 
-#: plugins/actions/actions.c:1369
+#: plugins/actions/actions.c:1370
 msgid "Little Mouse"
 msgstr "สามัญชน คนธรรมดา"
 
@@ -1007,7 +1036,9 @@ msgstr "แสดงชื่อ_ทั่วไปของโปรแกร�
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "เลือกตัวเลือกนี้ถ้าต้องการแสดงชื่อทั่วไปของโปรแกรมในเมนู เช่น \"โปรแกรมจัดการแฟ้ม\" แทนที่จะเป็น \"Thunar\""
+msgstr ""
+"เลือกตัวเลือกนี้ถ้าต้องการแสดงชื่อทั่วไปของโปรแกรมในเมนู เช่น "
+"\"โปรแกรมจัดการแฟ้ม\" แทนที่จะเป็น \"Thunar\""
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:229
 #: plugins/clock/clock-dialog.glade:405
@@ -1072,7 +1103,7 @@ msgstr "แสดงเมนูหมวดหมู่ของโปรแก
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:27
 #: plugins/windowmenu/xfce4-popup-windowmenu.sh:27
 msgid "Usage:"
-msgstr "วิธีใช้:"
+msgstr "การใช้งาน:"
 
 #: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:28
@@ -1172,7 +1203,9 @@ msgstr "นาฬิกา"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "ชื่อของเขตเวลาตามชื่อแฟ้มในฐานข้อมูล zoneinfo ตัวอย่างเช่น \"America/New_York\" หากปล่อยเป็นค่าว่างไว้จะหมายถึงเวลาท้องถิ่นของระบบ"
+msgstr ""
+"ชื่อของเขตเวลาตามชื่อแฟ้มในฐานข้อมูล zoneinfo ตัวอย่างเช่น "
+"\"America/New_York\" หากปล่อยเป็นค่าว่างไว้จะหมายถึงเวลาท้องถิ่นของระบบ"
 
 #: plugins/clock/clock-dialog.glade:183
 msgid "Time_zone:"
@@ -1211,7 +1244,11 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "รูปแบบซึ่งกำหนดส่วนต่างๆ ของวันที่และเวลาที่จะแทรกลงในพาเนล ตัวอย่างเช่น %Y จะถูกแทนที่ด้วยปี ค.ศ., %m แทนหมายเลขเดือน และ %d แทนวันที่ ในทำนองเดียวกัน แท็ก <b></b> จะทำให้ข้อความเป็นตัวหนา ดูข้อมูลเพิ่มเติมได้ที่หน้า \"วิธีใช้\""
+msgstr ""
+"รูปแบบซึ่งกำหนดส่วนต่างๆ ของวันที่และเวลาที่จะแทรกลงในพาเนล ตัวอย่างเช่น %Y "
+"จะถูกแทนที่ด้วยปี ค.ศ., %m แทนหมายเลขเดือน และ %d แทนวันที่ ในทำนองเดียวกัน "
+"แท็ก <b></b> จะทำให้ข้อความเป็นตัวหนา ดูข้อมูลเพิ่มเติมได้ที่หน้า "
+"\"วิธีใช้\""
 
 #: plugins/clock/clock-dialog.glade:358
 msgid "_Tooltip format:"
@@ -1711,7 +1748,10 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "ป้อนรายการแพตเทิร์นที่จะใช้กรองแฟ้มที่จะแสดงในไดเรกทอรี ถ้าคุณระบุมากกว่าหนึ่งแพตเทิร์น ก็คั่นแพตเทิร์นต่างๆ ด้วยอัฒภาค (เช่น *.txt;*.doc)"
+msgstr ""
+"ป้อนรายการแพตเทิร์นที่จะใช้กรองแฟ้มที่จะแสดงในไดเรกทอรี "
+"ถ้าคุณระบุมากกว่าหนึ่งแพตเทิร์น ก็คั่นแพตเทิร์นต่างๆ ด้วยอัฒภาค (เช่น "
+"*.txt;*.doc)"
 
 #: plugins/directorymenu/directorymenu-dialog.glade:301
 msgid "_File Pattern:"
@@ -1812,7 +1852,7 @@ msgstr "เพิ่มรายการที่มีอยู่ตั้ง
 #: plugins/launcher/launcher-dialog.glade:379
 #: plugins/launcher/launcher.desktop.in.in:4
 msgid "Launcher"
-msgstr "ปุ่มเรียก"
+msgstr "ตัวเรียกแอปพลิเคชัน"
 
 #: plugins/launcher/launcher-dialog.glade:579
 msgid "Delete the currently selected item"
@@ -1834,7 +1874,8 @@ msgstr "ปิดคำแ_นะนำเครื่องมือ"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "เลือกตัวเลือกนี้ถ้าต้องการปิดคำแนะนำเครื่องมือเมื่อเลื่อนเมาส์ไปวางบนปุ่มหรือรายการเมนูบนพาเนล"
+msgstr ""
+"เลือกตัวเลือกนี้ถ้าต้องการปิดคำแนะนำเครื่องมือเมื่อเลื่อนเมาส์ไปวางบนปุ่มหรือรายการเมนูบนพาเนล"
 
 #: plugins/launcher/launcher-dialog.glade:698
 msgid "Show _label instead of icon"
@@ -1860,15 +1901,15 @@ msgstr "ขั้นสูง"
 msgid "Program launcher with optional menu"
 msgstr "ปุ่มเรียกโปรแกรมพร้อมเมนูประกอบถ้ามี"
 
-#: plugins/pager/pager.c:703 plugins/pager/pager-dialog.glade:64
+#: plugins/pager/pager.c:705 plugins/pager/pager-dialog.glade:64
 msgid "Workspace _Settings..."
 msgstr "_ตั้งค่าพื้นที่ทำงาน..."
 
-#: plugins/pager/pager.c:802
+#: plugins/pager/pager.c:805
 msgid "Unable to open the workspace settings"
 msgstr "ไม่สามารถเปิดโปรแกรมตั้งค่าพื้นที่ทำงาน"
 
-#: plugins/pager/pager-buttons.c:596 plugins/windowmenu/windowmenu.c:920
+#: plugins/pager/pager-buttons.c:596 plugins/windowmenu/windowmenu.c:928
 #, c-format
 msgid "Workspace %d"
 msgstr "พื้นที่ทำงาน %d"
@@ -1974,7 +2015,8 @@ msgstr "_ล้างรายการที่ทราบ"
 
 #: plugins/systray/sn-dialog.glade:84
 msgid "Resets the list of items and their visibility settings"
-msgstr "ล้างรายชื่อของรายการ พร้อมทั้งค่าการแสดง/ซ่อนของรายการเหล่านั้น"
+msgstr ""
+"ล้างรายชื่อของรายการที่ทราบ พร้อมทั้งค่าตั้งการแสดง/ซ่อนของรายการเหล่านั้น"
 
 #: plugins/systray/sn-dialog.glade:144
 msgid "_Fixed icon size (pixels):"
@@ -2069,7 +2111,9 @@ msgstr "ไม่สามารถเปิดทำงานพื้นที
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "เป็นไปได้ว่าวิดเจ็ตอื่นได้ยึดหน้าที่ของพื้นที่แจ้งเหตุไป พื้นที่นี้จะไม่ถูกใช้งาน"
+msgstr ""
+"เป็นไปได้ว่าวิดเจ็ตอื่นได้ยึดหน้าที่ของพื้นที่แจ้งเหตุไป "
+"พื้นที่นี้จะไม่ถูกใช้งาน"
 
 #: plugins/systray/systray.c:411
 msgid "The notification area lost selection"
@@ -2188,32 +2232,32 @@ msgstr "แสดงหน้าต่างจากทุก_จอภาพ"
 msgid "Show only _minimized windows"
 msgstr "แสดงเฉพาะหน้าต่างที่_ย่อเก็บ"
 
-#: plugins/tasklist/tasklist-widget.c:3105
+#: plugins/tasklist/tasklist-widget.c:3114
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "ไม่สามารถเปิดทำงานอินสแตนซ์ใหม่ของ '%s'"
 
-#: plugins/tasklist/tasklist-widget.c:3132
+#: plugins/tasklist/tasklist-widget.c:3141
 msgid "Launch New Instance"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:3876
+#: plugins/tasklist/tasklist-widget.c:3885
 msgid "Mi_nimize All"
 msgstr "_ย่อเก็บหน้าต่างทั้งหมด"
 
-#: plugins/tasklist/tasklist-widget.c:3883
+#: plugins/tasklist/tasklist-widget.c:3892
 msgid "Un_minimize All"
 msgstr "_คืนขนาดหน้าต่างทั้งหมด"
 
-#: plugins/tasklist/tasklist-widget.c:3890
+#: plugins/tasklist/tasklist-widget.c:3899
 msgid "Ma_ximize All"
 msgstr "_ขยายแผ่หน้าต่างทั้งหมด"
 
-#: plugins/tasklist/tasklist-widget.c:3897
+#: plugins/tasklist/tasklist-widget.c:3906
 msgid "_Unmaximize All"
 msgstr "เ_ลิกขยายแผ่หน้าต่างทั้งหมด"
 
-#: plugins/tasklist/tasklist-widget.c:3908
+#: plugins/tasklist/tasklist-widget.c:3917
 msgid "_Close All"
 msgstr "ปิ_ดหน้าต่างทั้งหมด"
 
@@ -2221,28 +2265,28 @@ msgstr "ปิ_ดหน้าต่างทั้งหมด"
 msgid "Switch between open windows using buttons"
 msgstr "สลับไปมาระหว่างหน้าต่างที่เปิดอยู่โดยใช้ปุ่มกด"
 
-#: plugins/windowmenu/windowmenu.c:721
+#: plugins/windowmenu/windowmenu.c:729
 msgid "Desktop"
 msgstr "พื้นโต๊ะ"
 
-#: plugins/windowmenu/windowmenu.c:1315
+#: plugins/windowmenu/windowmenu.c:1323
 msgid "No Windows"
 msgstr "ไม่มีหน้าต่าง"
 
-#: plugins/windowmenu/windowmenu.c:1330
+#: plugins/windowmenu/windowmenu.c:1338
 msgid "Urgent Windows"
 msgstr "หน้าต่างเร่งด่วน"
 
-#: plugins/windowmenu/windowmenu.c:1375
+#: plugins/windowmenu/windowmenu.c:1383
 msgid "Add Workspace"
 msgstr "เพิ่มพื้นที่ทำงาน"
 
-#: plugins/windowmenu/windowmenu.c:1397
+#: plugins/windowmenu/windowmenu.c:1405
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "ลบพื้นที่ทำงาน \"%s\""
 
-#: plugins/windowmenu/windowmenu.c:1399
+#: plugins/windowmenu/windowmenu.c:1407
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "ลบพื้นที่ทำงาน %d"
