@@ -1,18 +1,20 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Xfce
-# This file is distributed under the same license as the xfce4-panel.master package.
+# This file is distributed under the same license as the xfce4-panel.xfce-4-20 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Real School <localization@ehayq.am>, 2019
-# Samvel Harutyunyan <samvel@ehayq.am>, 2020
+# Xfce Bot <transifex@xfce.org>, 2025
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Xfce4-panel\n"
+"Project-Id-Version: xfce4-panel.xfce-4-20\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-10-18 00:47+0200\n"
-"PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Samvel Harutyunyan <samvel@ehayq.am>, 2020\n"
-"Language-Team: Armenian (Armenia) (http://app.transifex.com/xfce/xfce4-panel/language/hy_AM/)\n"
+"POT-Creation-Date: 2025-02-14 12:29+0100\n"
+"PO-Revision-Date: 2025-02-14 11:29+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>, 2025\n"
+"Language-Team: Armenian (Armenia) (https://app.transifex.com/xfce/teams/16840/hy_AM/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27,15 +29,19 @@ msgstr "Ստեղծել գործարկիչ ընտրացանկի վրայ"
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop "
 "file"
-msgstr "Յաւելել նոր գործարկիչ վահանակում՝ հիմնուած աշխատասեղանի նիշի տեղեկոյթի վրայ։"
+msgstr ""
+"Յաւելել նոր գործարկիչ վահանակում՝ հիմնուած աշխատասեղանի նիշի տեղեկոյթի վրայ։"
 
 #: panel-preferences.desktop.in:8
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
-msgstr "վահանակ,կարգաւորումներ;առաջադրանքների տող;ինքնապահում;ծրագրերի ընտրացանկ;մեկնարկ․կոճակներ;գործարկիչ;ծանուցումների տարածք;կարգավիճակ;պատկերակներ;ներդրօն;"
+msgstr ""
+"վահանակ,կարգաւորումներ;առաջադրանքների տող;ինքնապահում;ծրագրերի "
+"ընտրացանկ;մեկնարկ․կոճակներ;գործարկիչ;ծանուցումների "
+"տարածք;կարգավիճակ;պատկերակներ;ներդրօն;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3686
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3710
 msgid "Panel"
 msgstr "Ընտրացանկ"
 
@@ -43,67 +49,67 @@ msgstr "Ընտրացանկ"
 msgid "Customize the panel"
 msgstr "Ընտրացանկի կարգաւորումներ"
 
-#: libxfce4panel/xfce-panel-plugin.c:1088
-#: panel/panel-preferences-dialog.c:1537
+#: libxfce4panel/xfce-panel-plugin.c:1113
+#: panel/panel-preferences-dialog.c:1549
 msgid "Remove"
 msgstr "Հեռացնել"
 
-#: libxfce4panel/xfce-panel-plugin.c:1089
+#: libxfce4panel/xfce-panel-plugin.c:1114
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "Պատկերակի ջնջումը վահանակից կը զրոյացնի դրա կարգաբերումը։"
 
-#: libxfce4panel/xfce-panel-plugin.c:1093
-#: panel/panel-preferences-dialog.c:1544
+#: libxfce4panel/xfce-panel-plugin.c:1118
+#: panel/panel-preferences-dialog.c:1556
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Վստա՞հ եք, որ ուզում եք հեռացնել %s֊ը։"
 
 #. properties item
-#: libxfce4panel/xfce-panel-plugin.c:1215
+#: libxfce4panel/xfce-panel-plugin.c:1240
 msgid "_Properties"
 msgstr "_Յատկութիւններ"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1226 panel/panel-window.c:3761
+#: libxfce4panel/xfce-panel-plugin.c:1251 panel/panel-window.c:3785
 msgid "_About"
 msgstr "_Ձեռնարկ"
 
 #. move item
-#: libxfce4panel/xfce-panel-plugin.c:1237
+#: libxfce4panel/xfce-panel-plugin.c:1262
 msgid "_Move"
 msgstr "_Շարժ"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1253 panel/panel-application.c:357
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1083
+#: libxfce4panel/xfce-panel-plugin.c:1278 panel/panel-application.c:357
+#: panel/panel-plugin-external.c:424 panel/panel-preferences-dialog.c:1089
 #: panel/panel-preferences-dialog.glade:1240
 #: plugins/launcher/launcher-dialog.c:841
 msgid "_Remove"
 msgstr "_Հեռացնել"
 
-#: libxfce4panel/xfce-panel-plugin.c:1271
+#: libxfce4panel/xfce-panel-plugin.c:1296
 msgid "Pane_l"
 msgstr "Ընտրացան_կ"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1279 panel/panel-window.c:3698
+#: libxfce4panel/xfce-panel-plugin.c:1304 panel/panel-window.c:3722
 msgid "Add _New Items..."
 msgstr "Աւելացներ _Նոր Տարրեր..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1290 panel/panel-window.c:3709
+#: libxfce4panel/xfce-panel-plugin.c:1315 panel/panel-window.c:3733
 msgid "Panel Pr_eferences..."
 msgstr "Վահանակի Կար_գաւորումներ..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1307 panel/panel-window.c:3736
+#: libxfce4panel/xfce-panel-plugin.c:1332 panel/panel-window.c:3760
 msgid "Log _Out"
 msgstr "դուրս գալ"
 
 #. help item
-#: libxfce4panel/xfce-panel-plugin.c:1323 panel/panel-item-dialog.c:207
-#: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3752
+#: libxfce4panel/xfce-panel-plugin.c:1348 panel/panel-item-dialog.c:207
+#: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3776
 #: plugins/actions/actions-dialog.glade:97
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
 #: plugins/clock/clock-dialog.glade:120
@@ -118,121 +124,124 @@ msgid "_Help"
 msgstr "Աւգնութիւն"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1334
+#: libxfce4panel/xfce-panel-plugin.c:1359
 msgid "About"
 msgstr "Ձեռնարկ"
 
-#: panel/main.c:66
+#: panel/main.c:69
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Ցուցադրել «Վահանակի Նախընտրութիւններ»֊ի երկխաւսութիւնը"
 
-#: panel/main.c:66 panel/main.c:67
+#: panel/main.c:69 panel/main.c:70
 msgid "PANEL-NUMBER"
 msgstr "ՎԱՀԱՆԱԿԻ֊ՀԱՄԱՐԸ"
 
-#: panel/main.c:67
+#: panel/main.c:70
 msgid "Show the 'Add New Items' dialog"
 msgstr "Ցուցադրել «Յաւելել Նոր Տարրեր»֊ի երկխաւսութիւնը"
 
-#: panel/main.c:68
+#: panel/main.c:71
 msgid "Save the panel configuration"
 msgstr "Պահել ընտրացանկի կազմաձեւումը"
 
-#: panel/main.c:69
+#: panel/main.c:72
 msgid "Add a new plugin to the panel"
 msgstr "Յաւելել նոր ներդրոն՝ ընտրացանկում"
 
-#: panel/main.c:69
+#: panel/main.c:72
 msgid "PLUGIN-NAME"
 msgstr "ՆԵՐԴՐԱՒՆԻ֊ԱՆՈՒՆ"
 
-#: panel/main.c:70
+#: panel/main.c:73
 msgid "Restart the running panel instance"
 msgstr "Վերագործարկել ընտրացանկի գործուն աւրինակը"
 
-#: panel/main.c:71
+#: panel/main.c:74
 msgid "Quit the running panel instance"
 msgstr "Փակել ընտրացանկի գործուն աւրինակը"
 
-#: panel/main.c:72
+#: panel/main.c:75
 msgid "Do not wait for a window manager on startup"
 msgstr "Չսպասել պատուհանի կառավարչին, մեկնարկի ժամանակ"
 
-#: panel/main.c:73 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: panel/main.c:76 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "Ցուցադրել տարբերակի վերաբերեալ տեղեկոյթը եւ դուրս գալ"
 
 #. parse context options
-#: panel/main.c:258
+#: panel/main.c:261
 msgid "[ARGUMENTS...]"
 msgstr "[ՅԵՆԱՐԿՆԵՐ...]"
 
-#: panel/main.c:268
+#: panel/main.c:271
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Մուտքագրէք «%s --help» աջակցութեան համար։"
 
-#: panel/main.c:285
+#: panel/main.c:288
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce֊ի մշակման խումբ։ Բոլոր իրաւունքները պաշտպանուած են։"
 
-#: panel/main.c:286
+#: panel/main.c:289
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Սխալների մասին կարող էք զեկուցել <%s> հասցէով։"
 
 #. quit without error if an instance is running
-#: panel/main.c:394
+#: panel/main.c:397
 msgid "There is already a running instance"
 msgstr "Արդէն կայ գործուն աւրինակ"
 
 #. spawn ourselfs again
-#: panel/main.c:405
+#: panel/main.c:408
 msgid "Restarting..."
 msgstr "Վերագործարկում..."
 
-#: panel/main.c:422
+#: panel/main.c:425
 msgid "Failed to show the preferences dialog"
 msgstr "Չյաջողուեց ցուցադրել նախընտրութիւնների երկխաւսութիւնը"
 
-#: panel/main.c:424
+#: panel/main.c:427
 msgid "Failed to show the add new items dialog"
 msgstr "Չյաջողուեց ցոյց տալ «յաւելել նոր տարրեր»֊ի երկխաւսութիւնը"
 
-#: panel/main.c:426
+#: panel/main.c:429
 msgid "Failed to save the panel configuration"
 msgstr "Չյաջողուեց պահել ընտրացանկի կարգաւորումները"
 
-#: panel/main.c:428
+#: panel/main.c:431
 msgid "Failed to add a plugin to the panel"
 msgstr "Չյաջողուեց յաւելել ներդրաւն` ընտրացանկում"
 
-#: panel/main.c:430
+#: panel/main.c:433
 msgid "Failed to restart the panel"
 msgstr "Չյաջողուեց վերագործարկել վահանակը"
 
-#: panel/main.c:432
+#: panel/main.c:435
 msgid "Failed to quit the panel"
 msgstr "Չյաջողուեց դուրս գալ ընտրացանկից"
 
-#: panel/main.c:434
+#: panel/main.c:437
 msgid "Failed to send D-Bus message"
 msgstr "Չյաջողուեց ուղարկել D-Bus հաղորդագրութիւն"
 
-#: panel/main.c:442 panel/main.c:462
+#: panel/main.c:445 panel/main.c:465
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "%s֊ի գործարկուող աւրինակ՝ չի յայտնաբերուել"
 
-#: panel/main.c:443
+#: panel/main.c:446
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "Գործարկե՞լ ընտրացանկը։ Եթե այո, ապա համոզուէք որ պահել էք նիստը դուրս գալուց, որպէսզի ընտրացանկն ինքնաշխատաւրէն միանայ յաջորդ գործարկումների ժամանակ։"
+msgstr ""
+"Գործարկե՞լ ընտրացանկը։ Եթե այո, ապա համոզուէք որ պահել էք նիստը դուրս "
+"գալուց, որպէսզի ընտրացանկն ինքնաշխատաւրէն միանայ յաջորդ գործարկումների "
+"ժամանակ։"
 
-#: panel/main.c:448
+#: panel/main.c:451
 msgid "Execute"
 msgstr "Գործարկել"
 
@@ -269,7 +278,9 @@ msgstr "_Դուրս գալ"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Կը ստեղծուի նոր գործարկչի նեդրաւն ընտրացանկում եւ նիշերը կը ներդրուեն, որպէս ցանկի տարրեր։"
+msgstr ""
+"Կը ստեղծուի նոր գործարկչի նեդրաւն ընտրացանկում եւ նիշերը կը ներդրուեն, որպէս"
+" ցանկի տարրեր։"
 
 #: panel/panel-application.c:1040
 msgid "Create _Launcher"
@@ -286,7 +297,9 @@ msgstr[1] "Ստեղծել նոր գործարկիչ %d աշխատասեղանի 
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "X֊ը գործարկուել է առանց նիստի կառավարչի։ «Դուրս Գալ»֊ի սեղմումը կփակի X֊սպասարկիչը։"
+msgstr ""
+"X֊ը գործարկուել է առանց նիստի կառավարչի։ «Դուրս Գալ»֊ի սեղմումը կփակի "
+"X֊սպասարկիչը։"
 
 #: panel/panel-application.c:1805
 msgid "Quit"
@@ -304,60 +317,66 @@ msgstr "Չյաջողուեց գործարկել «%s» հրամանը"
 #: panel/panel-dbus-client.c:213
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Նշուել է ներդրաւնի անվաւեր շարահիւսութիւն։ Գործածէք՝ ՆԵՐԴՐԱՒՆ֊ԱՆՈՒՆ․ԱՆՈՒՆ[․ՏԻՊ․ԱՐԺԷՔ]։"
+msgstr ""
+"Նշուել է ներդրաւնի անվաւեր շարահիւսութիւն։ Գործածէք՝ "
+"ՆԵՐԴՐԱՒՆ֊ԱՆՈՒՆ․ԱՆՈՒՆ[․ՏԻՊ․ԱՐԺԷՔ]։"
 
 #: panel/panel-dbus-client.c:243
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "Ակնարկի անվաւեր «%s» տեսակ։ Վաւեր են՝ տրամաբանական, երկուական, տողային եւ միաւորային տեսակները։"
+msgstr ""
+"Ակնարկի անվաւեր «%s» տեսակ։ Վաւեր են՝ տրամաբանական, երկուական, տողային եւ "
+"միաւորային տեսակները։"
 
-#: panel/panel-dialogs.c:53
+#: panel/panel-dialogs.c:56
 msgid "Unable to open the e-mail address"
 msgstr "Հնարաւոր չէ բացել էլ․ հասցէն"
 
-#: panel/panel-dialogs.c:79
+#: panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Xfce-ի Աշխատասեղանի Միջավայրի ընտրացանկ"
 
-#: panel/panel-dialogs.c:83
+#: panel/panel-dialogs.c:86
 msgid "translator-credits"
 msgstr "Թարգմանութիւն"
 
-#: panel/panel-dialogs.c:157
+#: panel/panel-dialogs.c:160
 msgid "Add New Item"
 msgstr "Աւելացնել Նոր Տարր"
 
-#: panel/panel-dialogs.c:157 plugins/actions/actions.c:870
+#: panel/panel-dialogs.c:160 plugins/actions/actions.c:870
 #: plugins/applicationsmenu/applicationsmenu.c:606
 #: plugins/directorymenu/directorymenu.c:466
 #: plugins/directorymenu/directorymenu.c:938
 msgid "_Cancel"
 msgstr "_Չեղարկել"
 
-#: panel/panel-dialogs.c:157 panel/panel-item-dialog.c:203
+#: panel/panel-dialogs.c:160 panel/panel-item-dialog.c:203
 #: panel/panel-preferences-dialog.glade:1223
 #: plugins/launcher/launcher-dialog.glade:219
 msgid "_Add"
 msgstr "_Աւելացնել"
 
-#: panel/panel-dialogs.c:168
+#: panel/panel-dialogs.c:171
 msgid "Please choose a panel for the new plugin:"
 msgstr "Ընտրել ընտրացանկը, նոր ներդրաւնի համար:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1028
+#: panel/panel-dialogs.c:191 panel/panel-preferences-dialog.c:1034
 #, c-format
 msgid "Panel %d"
 msgstr "Ընտրացանկ %d"
 
-#: panel/panel-dialogs.c:227
+#: panel/panel-dialogs.c:230
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "Քանի որ ընտրացանկը գործարկուում է սովորական եղանակով, թոյլատրուում է կատարել փոփոխութիւններ ընտրացանկի կազմաձեւման մէջ, որպէս սովորական աւգտատէր։"
+msgstr ""
+"Քանի որ ընտրացանկը գործարկուում է սովորական եղանակով, թոյլատրուում է կատարել"
+" փոփոխութիւններ ընտրացանկի կազմաձեւման մէջ, որպէս սովորական աւգտատէր։"
 
-#: panel/panel-dialogs.c:229
+#: panel/panel-dialogs.c:232
 msgid "Modifying the panel is not allowed"
 msgstr "Ընտրացանկի փոփոխումը չի թույլատրուում"
 
@@ -389,24 +408,27 @@ msgstr "_Գտնել․"
 msgid "Enter search phrase here"
 msgstr "Մուտքագրէք որոնուող նիւթն այստեղ"
 
-#: panel/panel-plugin-external.c:413
+#: panel/panel-plugin-external.c:417
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "«%s» ներդրաւնն անհետացել է ընտրացանկից։ Վերագործարկե՞ լ այն։"
 
-#: panel/panel-plugin-external.c:414
+#: panel/panel-plugin-external.c:418
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Ներդրաւնը՝ %d վայրկեանի ընթացքում, գործարկուել է մեկից աւելի անգամ։ «Գործարկել» հրամանը սեղմելու դէպքում՝ ընտրացանկը կը փորձի վերագործարկել ներդրաւնը, հակառակ դէպքում՝ այն վերջնականապէս կը հեռացուի ընտրացանկից։"
+msgstr ""
+"Ներդրաւնը՝ %d վայրկեանի ընթացքում, գործարկուել է մեկից աւելի անգամ։ "
+"«Գործարկել» հրամանը սեղմելու դէպքում՝ ընտրացանկը կը փորձի վերագործարկել "
+"ներդրաւնը, հակառակ դէպքում՝ այն վերջնականապէս կը հեռացուի ընտրացանկից։"
 
-#: panel/panel-plugin-external.c:419
+#: panel/panel-plugin-external.c:423
 msgid "Plugin Restart"
 msgstr ""
 
-#: panel/panel-plugin-external.c:420
+#: panel/panel-plugin-external.c:424
 msgid "_Execute"
 msgstr "_Գործարկել"
 
@@ -424,48 +446,50 @@ msgstr "Առաջնային"
 msgid "Monitor %d"
 msgstr "Ցուցասարք %d"
 
-#: panel/panel-preferences-dialog.c:1082
+#: panel/panel-preferences-dialog.c:1088
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Ընտրացանկի եւ ներդրաւնի կազմաձեւումները անվերադարձ կը հեռացուեն"
 
-#: panel/panel-preferences-dialog.c:1091
+#: panel/panel-preferences-dialog.c:1097
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Հեռացնե՞լ ընտրացանկ %d-ն։"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1382
+#: panel/panel-preferences-dialog.c:1394
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">  (արտաքին) </span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1387
+#: panel/panel-preferences-dialog.c:1399
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "Ներքին անուն․ %s-%d\\n\"\n\"PID․ %d"
+msgstr ""
+"Ներքին անուն․ %s-%d\\n\"\n"
+"\"PID․ %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1399
+#: panel/panel-preferences-dialog.c:1411
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Ներքին անուն․ %s-%d"
 
-#: panel/panel-preferences-dialog.c:1546
+#: panel/panel-preferences-dialog.c:1558
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Տարրի հեռացման դէպքում՝ այն կը կորի անվերադարձ։"
 
-#: panel/panel-preferences-dialog.c:1550
+#: panel/panel-preferences-dialog.c:1562
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr ""
 
-#: panel/panel-preferences-dialog.c:1552
+#: panel/panel-preferences-dialog.c:1564
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr ""
 
@@ -604,7 +628,9 @@ msgstr "Ե_րկարացնել ինքնաշխատաւրէն"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Ինքնաշխատաւրէն երկարացնում է վահանկը, եթե ներդրաւնները պահանջում են յաւելեալ տարածք։"
+msgstr ""
+"Ինքնաշխատաւրէն երկարացնում է վահանկը, եթե ներդրաւնները պահանջում են յաւելեալ"
+" տարածք։"
 
 #: panel/panel-preferences-dialog.glade:712
 msgid "D_isplay"
@@ -663,7 +689,9 @@ msgstr "Կազմաձեւել․․․"
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>Բաղադրումը ներկայումս անջատուած է</b>\nԹոյլատրել բաղադրումը  պատուհանի կառավարչում, ընտրացանկի կարգաւորումների անթափանցիկութեան համար։"
+msgstr ""
+"<b>Բաղադրումը ներկայումս անջատուած է</b>\n"
+"Թոյլատրել բաղադրումը  պատուհանի կառավարչում, ընտրացանկի կարգաւորումների անթափանցիկութեան համար։"
 
 #. I18N: label for the enter transparency slider
 #: panel/panel-preferences-dialog.glade:1106
@@ -679,7 +707,9 @@ msgstr "_Դուրս գալ․"
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "Թափանցիկութիւնը, երբ սլաքը գտնուում է ընտրացանկի վրայ, 0֊ն ամբողջապէս թափանցիկ, իսկ 100֊ը՝ ամբողջապէս անթափանց։"
+msgstr ""
+"Թափանցիկութիւնը, երբ սլաքը գտնուում է ընտրացանկի վրայ, 0֊ն ամբողջապէս "
+"թափանցիկ, իսկ 100֊ը՝ ամբողջապէս անթափանց։"
 
 #: panel/panel-preferences-dialog.glade:1173
 msgid "Appeara_nce"
@@ -740,7 +770,7 @@ msgstr "Հմուտ"
 msgid "Expert"
 msgstr "Փորձառու"
 
-#: panel/panel-window.c:3723
+#: panel/panel-window.c:3747
 msgid "_Lock Panel"
 msgstr "_Կողպել Ընտրացանկը"
 
@@ -818,7 +848,9 @@ msgstr "_Ցուցադրել հաստատման երկխաւսութիւնը"
 #: plugins/actions/actions-dialog.glade:338
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Ցուցադրել հաստատման երկխաւսութիւնը, որոշ գործողութիւնների համար 30 վայրկեանի ընթացքում։"
+msgstr ""
+"Ցուցադրել հաստատման երկխաւսութիւնը, որոշ գործողութիւնների համար 30 վայրկեանի"
+" ընթացքում։"
 
 #: plugins/actions/actions-dialog.glade:354
 msgid "_Actions"
@@ -956,12 +988,12 @@ msgstr "Համակարգչի անջատում %d վայրկյանի ընթացք
 msgid "Separator"
 msgstr "Բաժանիչ"
 
-#: plugins/actions/actions.c:1165
+#: plugins/actions/actions.c:1166
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Չյաջողուեց գործարկել «%s» գործողութիւնը"
 
-#: plugins/actions/actions.c:1369
+#: plugins/actions/actions.c:1370
 msgid "Little Mouse"
 msgstr "Փոքր Մկնիկ"
 
@@ -1007,7 +1039,9 @@ msgstr "Ցուցադրել յաւելուածների ընդհանրացուած
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Ցուցադրում է յաւելուածների ընդհանրացուած անունները ցանկում, աւրինակ ՝ \\\"Նիշային կառավարիչ\\\" \\\"Նիշք\\\"֊ի փոխարէն"
+msgstr ""
+"Ցուցադրում է յաւելուածների ընդհանրացուած անունները ցանկում, աւրինակ ՝ "
+"\\\"Նիշային կառավարիչ\\\" \\\"Նիշք\\\"֊ի փոխարէն"
 
 #: plugins/applicationsmenu/applicationsmenu-dialog.glade:229
 #: plugins/clock/clock-dialog.glade:405
@@ -1172,7 +1206,10 @@ msgstr "Ժամացոյց"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Ժամային գաւտի՝ համատասխան տեղեկոյթի շտեմարանում գտնուող նիշին, աւրինակ՝ «Հայաստան/Երեւ_ան»։ Թողնել դատարկ, տեղային ժամային գաւտու աւգտագործման համար։"
+msgstr ""
+"Ժամային գաւտի՝ համատասխան տեղեկոյթի շտեմարանում գտնուող նիշին, աւրինակ՝ "
+"«Հայաստան/Երեւ_ան»։ Թողնել դատարկ, տեղային ժամային գաւտու աւգտագործման "
+"համար։"
 
 #: plugins/clock/clock-dialog.glade:183
 msgid "Time_zone:"
@@ -1211,7 +1248,11 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "Ձեւաչափը ներկայացնում է ընտրացանկ ներդրուող ամսաթիւն ու ժամը։ Աւրինակ՝ %Y-ն կը նշանակուի տարուայ համար, %m֊ը՝ ամսվա եւ %d֊ն աւրուայ համար։ Ներառեալ՝ <b> </b>֊ն՝ գրոյթը կը դարձնեն թաւ։ Լրացուցիչ տեղեկոյթի համար, տե՛ս «Աջակցութիւն» էջը։"
+msgstr ""
+"Ձեւաչափը ներկայացնում է ընտրացանկ ներդրուող ամսաթիւն ու ժամը։ Աւրինակ՝ %Y-ն "
+"կը նշանակուի տարուայ համար, %m֊ը՝ ամսվա եւ %d֊ն աւրուայ համար։ Ներառեալ՝ <b>"
+" </b>֊ն՝ գրոյթը կը դարձնեն թաւ։ Լրացուցիչ տեղեկոյթի համար, տե՛ս "
+"«Աջակցութիւն» էջը։"
 
 #: plugins/clock/clock-dialog.glade:358
 msgid "_Tooltip format:"
@@ -1711,7 +1752,10 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Մուտքագրեք այն աւրինակների ցուցակը, որոնք կոգտագործուեն որոշելու համար, թե որ նիշերն են տեսանելի՝ նշարանում։ Եթե նշեք մեկից աւելի աւրինակ, ցանկի տարրերը պէտք է բաժանվեն մի կետ֊ստորակետերով (աւր․՝ *.txt;*.doc):"
+msgstr ""
+"Մուտքագրեք այն աւրինակների ցուցակը, որոնք կոգտագործուեն որոշելու համար, թե "
+"որ նիշերն են տեսանելի՝ նշարանում։ Եթե նշեք մեկից աւելի աւրինակ, ցանկի "
+"տարրերը պէտք է բաժանվեն մի կետ֊ստորակետերով (աւր․՝ *.txt;*.doc):"
 
 #: plugins/directorymenu/directorymenu-dialog.glade:301
 msgid "_File Pattern:"
@@ -1834,7 +1878,9 @@ msgstr "Անջատել գոր_ծիքայուշերը"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "Նշեք այս ընտրանքը՝ գործիքահուշերի անջատման համար, երբ տեղափոխուում են ընտրացանկի կոճակը կամ ցանկի տարրերը։"
+msgstr ""
+"Նշեք այս ընտրանքը՝ գործիքահուշերի անջատման համար, երբ տեղափոխուում են "
+"ընտրացանկի կոճակը կամ ցանկի տարրերը։"
 
 #: plugins/launcher/launcher-dialog.glade:698
 msgid "Show _label instead of icon"
@@ -1860,15 +1906,15 @@ msgstr "Յառաջացած"
 msgid "Program launcher with optional menu"
 msgstr "Ծրագրի գործարկիչ՝ ընտրովի ցանկով"
 
-#: plugins/pager/pager.c:703 plugins/pager/pager-dialog.glade:64
+#: plugins/pager/pager.c:705 plugins/pager/pager-dialog.glade:64
 msgid "Workspace _Settings..."
 msgstr "Աշխատատարածքի _կարգաւորումներ..."
 
-#: plugins/pager/pager.c:802
+#: plugins/pager/pager.c:805
 msgid "Unable to open the workspace settings"
 msgstr "Չյաջողուեց բացել աշխատատարածքի կարգաւորումները"
 
-#: plugins/pager/pager-buttons.c:596 plugins/windowmenu/windowmenu.c:920
+#: plugins/pager/pager-buttons.c:596 plugins/windowmenu/windowmenu.c:928
 #, c-format
 msgid "Workspace %d"
 msgstr "%d Աշխատատարածք"
@@ -2069,7 +2115,9 @@ msgstr "Չյաջողուեց գործարկել ծանուցման տիրոյթ�
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "Ամենայն հաւանականութեամբ՝ եւս մեկ հարմարանք ստանձնեց ծանուցման տիրոյթի գործառոյթը։ Այս տարածքը չի աւգտագործուի։"
+msgstr ""
+"Ամենայն հաւանականութեամբ՝ եւս մեկ հարմարանք ստանձնեց ծանուցման տիրոյթի "
+"գործառոյթը։ Այս տարածքը չի աւգտագործուի։"
 
 #: plugins/systray/systray.c:411
 msgid "The notification area lost selection"
@@ -2188,32 +2236,32 @@ msgstr "Ցուցադրել պատուհանները բոլոր ցու_ցասար
 msgid "Show only _minimized windows"
 msgstr "Ցուցադրել միայն _փոքրացուած պատուհանները"
 
-#: plugins/tasklist/tasklist-widget.c:3105
+#: plugins/tasklist/tasklist-widget.c:3114
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:3132
+#: plugins/tasklist/tasklist-widget.c:3141
 msgid "Launch New Instance"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:3876
+#: plugins/tasklist/tasklist-widget.c:3885
 msgid "Mi_nimize All"
 msgstr "Փո_քրացնել Բոլորը"
 
-#: plugins/tasklist/tasklist-widget.c:3883
+#: plugins/tasklist/tasklist-widget.c:3892
 msgid "Un_minimize All"
 msgstr "Մե_ծացնել Բոլորը"
 
-#: plugins/tasklist/tasklist-widget.c:3890
+#: plugins/tasklist/tasklist-widget.c:3899
 msgid "Ma_ximize All"
 msgstr "Առ_աւելացնել Բոլորը"
 
-#: plugins/tasklist/tasklist-widget.c:3897
+#: plugins/tasklist/tasklist-widget.c:3906
 msgid "_Unmaximize All"
 msgstr "_Մեծացնել Բոլորը"
 
-#: plugins/tasklist/tasklist-widget.c:3908
+#: plugins/tasklist/tasklist-widget.c:3917
 msgid "_Close All"
 msgstr "_Փակել Բոլորը"
 
@@ -2221,28 +2269,28 @@ msgstr "_Փակել Բոլորը"
 msgid "Switch between open windows using buttons"
 msgstr "Փոխել բացուած պատուհանները՝ կոճակների աւգնութեամբ"
 
-#: plugins/windowmenu/windowmenu.c:721
+#: plugins/windowmenu/windowmenu.c:729
 msgid "Desktop"
 msgstr "Աշխատասեղան"
 
-#: plugins/windowmenu/windowmenu.c:1315
+#: plugins/windowmenu/windowmenu.c:1323
 msgid "No Windows"
 msgstr "Պատուհաններ Չկան"
 
-#: plugins/windowmenu/windowmenu.c:1330
+#: plugins/windowmenu/windowmenu.c:1338
 msgid "Urgent Windows"
 msgstr "Անհրաժեշտ Պատուհաններ"
 
-#: plugins/windowmenu/windowmenu.c:1375
+#: plugins/windowmenu/windowmenu.c:1383
 msgid "Add Workspace"
 msgstr "Աւելացնել Աշխատատարածք"
 
-#: plugins/windowmenu/windowmenu.c:1397
+#: plugins/windowmenu/windowmenu.c:1405
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Հեռացնել «%s» Աշխատատարածքը"
 
-#: plugins/windowmenu/windowmenu.c:1399
+#: plugins/windowmenu/windowmenu.c:1407
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Հեռացնել %d Աշխատատարածքը"
