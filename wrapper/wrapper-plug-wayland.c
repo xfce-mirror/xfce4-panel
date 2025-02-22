@@ -181,6 +181,17 @@ wrapper_plug_wayland_init (WrapperPlugWayland *plug)
   gtk_css_provider_load_from_data (provider, "* { background: rgba(0,0,0,0); }", -1, NULL);
   gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (provider),
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+  /* avoid allocation issues with GtkProgressBar style properties: see #911 */
+  gtk_css_provider_load_from_data (provider,
+                                   "progressbar {"
+                                   "-GtkProgressBar-min-vertical-bar-height: 1;"
+                                   "-GtkProgressBar-min-horizontal-bar-width: 1;"
+                                   "}",
+                                   -1, NULL);
+  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+                                             GTK_STYLE_PROVIDER (provider),
+                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
   g_object_unref (provider);
 
   /* set layer shell properties */
