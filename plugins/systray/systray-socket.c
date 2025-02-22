@@ -196,10 +196,22 @@ static gboolean
 systray_socket_draw (GtkWidget *widget,
                      cairo_t *cr)
 {
-  /* clear to parent-relative pixmap */
-  cairo_set_source_rgb (cr, 0, 0, 0);
-  cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
-  cairo_fill (cr);
+  SystraySocket *socket = SYSTRAY_SOCKET (widget);
+
+  if (socket->is_composited)
+    {
+      /* clear to transparent */
+      cairo_set_source_rgba (cr, 0, 0, 0, 0);
+      cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+      cairo_fill (cr);
+    }
+  else if (socket->parent_relative_bg)
+    {
+      /* clear to parent-relative pixmap */
+      cairo_set_source_rgb (cr, 0, 0, 0);
+      cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+      cairo_fill (cr);
+    }
 
   return FALSE;
 }
