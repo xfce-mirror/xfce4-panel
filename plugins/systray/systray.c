@@ -270,7 +270,6 @@ systray_plugin_box_draw_icon (GtkWidget *child,
       /* skip hidden (see offscreen in box widget) icons */
       if (alloc.x > -1 && alloc.y > -1)
         {
-          // FIXME
           GtkWidget *box = gtk_widget_get_parent (child);
           gtk_widget_get_allocation (box, &box_alloc);
           alloc.x -= box_alloc.x;
