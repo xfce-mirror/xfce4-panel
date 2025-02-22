@@ -261,6 +261,7 @@ systray_plugin_box_draw_icon (GtkWidget *child,
 {
   cairo_t *cr = user_data;
   GtkAllocation alloc;
+  GtkAllocation box_alloc;
 
   if (systray_socket_is_composited (SYSTRAY_SOCKET (child)))
     {
@@ -269,7 +270,10 @@ systray_plugin_box_draw_icon (GtkWidget *child,
       /* skip hidden (see offscreen in box widget) icons */
       if (alloc.x > -1 && alloc.y > -1)
         {
-          // FIXME
+          GtkWidget *box = gtk_widget_get_parent (child);
+          gtk_widget_get_allocation (box, &box_alloc);
+          alloc.x -= box_alloc.x;
+          alloc.y -= box_alloc.y;
           gdk_cairo_set_source_window (cr, gtk_widget_get_window (child),
                                        alloc.x, alloc.y);
           cairo_paint (cr);
