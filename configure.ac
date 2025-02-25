@@ -40,6 +40,9 @@ AC_INIT([xfce4-panel],[xdt_version],[https://gitlab.xfce.org/xfce/xfce4-panel/-/
 AC_PREREQ([2.69])
 AC_REVISION([xdt_version_build])
 AC_DEFINE([VERSION_FULL], [PACKAGE_VERSION], [Alias for VERSION and PACKAGE_VERSION for meson compatibility])
+COPYRIGHT_YEAR=2025
+AC_DEFINE_UNQUOTED([COPYRIGHT_YEAR], ["$COPYRIGHT_YEAR"], [Copyright year])
+AC_SUBST([COPYRIGHT_YEAR])
 
 dnl ***************************
 dnl *** Initialize automake ***
