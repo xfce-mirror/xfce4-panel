@@ -11,6 +11,7 @@ dnl ***************************
 m4_define([libxfce4panel_verinfo], [4:0:0]) dnl current:revision:age
 m4_define([libxfce4panel_version_api], [2.0])
 m4_define([xfce4_panel_config_version], [2])
+m4_define([copyright_year], [2025])
 XDT_VERSION_INIT([4.20.3], [git])
 
 dnl minimum required versions
@@ -34,12 +35,15 @@ m4_define([gtk_layer_shell_minimum_version], [0.7.0])
 dnl ***************************
 dnl *** Initialize autoconf ***
 dnl ***************************
-AC_COPYRIGHT([Copyright (c) 2004-2025 The Xfce development team. All rights reserved.
+AC_COPYRIGHT([Copyright (c) 2004-copyright_year() The Xfce development team. All rights reserved.
   Written for Xfce by Jasper Huijsmans <jasper@xfce.org> and Nick Schermer <nick@xfce.org>.])
 AC_INIT([xfce4-panel],[xdt_version],[https://gitlab.xfce.org/xfce/xfce4-panel/-/issues],[xfce4-panel])
 AC_PREREQ([2.69])
 AC_REVISION([xdt_version_build])
 AC_DEFINE([VERSION_FULL], [PACKAGE_VERSION], [Alias for VERSION and PACKAGE_VERSION for meson compatibility])
+COPYRIGHT_YEAR=copyright_year()
+AC_DEFINE_UNQUOTED([COPYRIGHT_YEAR], ["$COPYRIGHT_YEAR"], [Copyright year])
+AC_SUBST([COPYRIGHT_YEAR])
 
 dnl ***************************
 dnl *** Initialize automake ***
