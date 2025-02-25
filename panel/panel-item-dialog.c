@@ -126,6 +126,7 @@ enum
   COLUMN_ICON_NAME,
   COLUMN_MODULE,
   COLUMN_SENSITIVE,
+  COLUMN_TOOLTIP,
   N_COLUMNS
 };
 
@@ -245,7 +246,7 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   gtk_widget_show (scroll);
 
   /* create the store and automatically sort it */
-  dialog->store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_OBJECT, G_TYPE_BOOLEAN);
+  dialog->store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_OBJECT, G_TYPE_BOOLEAN, G_TYPE_STRING);
   gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (dialog->store), COLUMN_MODULE, panel_item_dialog_compare_func, NULL, NULL);
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (dialog->store), COLUMN_MODULE, GTK_SORT_ASCENDING);
 
@@ -260,6 +261,7 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (treeview), FALSE);
   gtk_tree_view_set_enable_search (GTK_TREE_VIEW (treeview), FALSE);
   gtk_tree_view_set_row_separator_func (GTK_TREE_VIEW (treeview), panel_item_dialog_separator_func, NULL, NULL);
+  gtk_tree_view_set_tooltip_column (GTK_TREE_VIEW (treeview), COLUMN_TOOLTIP);
   g_signal_connect_swapped (G_OBJECT (treeview), "start-interactive-search", G_CALLBACK (gtk_widget_grab_focus), entry);
   gtk_container_add (GTK_CONTAINER (scroll), treeview);
   gtk_widget_show (treeview);
@@ -607,7 +609,6 @@ panel_item_dialog_populate_store (PanelItemDialog *dialog)
   GList *modules, *li;
   gint n;
   GtkTreeIter iter;
-  PanelModule *module;
 
   panel_return_if_fail (PANEL_IS_ITEM_DIALOG (dialog));
   panel_return_if_fail (PANEL_IS_MODULE_FACTORY (dialog->factory));
@@ -620,14 +621,18 @@ panel_item_dialog_populate_store (PanelItemDialog *dialog)
   modules = panel_module_factory_get_modules (dialog->factory);
   for (li = modules, n = 0; li != NULL; li = li->next, n++)
     {
-      module = PANEL_MODULE (li->data);
+      PanelModule *module = PANEL_MODULE (li->data);
+      gchar *tooltip = g_strdup_printf (_("Internal name: %s"), panel_module_get_name (module));
 
       gtk_list_store_insert_with_values (
         dialog->store, &iter, n,
         COLUMN_MODULE, module,
         COLUMN_ICON_NAME, panel_module_get_icon_name (module),
         COLUMN_SENSITIVE, panel_module_is_usable (module, gtk_widget_get_screen (GTK_WIDGET (dialog))),
+        COLUMN_TOOLTIP, tooltip,
         -1);
+
+      g_free (tooltip);
     }
 
   g_list_free (modules);
