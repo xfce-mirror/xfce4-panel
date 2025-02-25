@@ -707,17 +707,35 @@ panel_item_dialog_compare_func (GtkTreeModel *model,
 
 
 static gboolean
+search_text_in_module_string (const gchar *text,
+                              const gchar *string)
+{
+  gboolean visible = FALSE;
+
+  if (G_LIKELY (string != NULL))
+    {
+      gchar *normalized = g_utf8_normalize (string, -1, G_NORMALIZE_ALL);
+      gchar *casefolded = g_utf8_casefold (normalized, -1);
+      visible = (strstr (casefolded, text) != NULL);
+      g_free (casefolded);
+      g_free (normalized);
+    }
+
+  return visible;
+}
+
+
+
+static gboolean
 panel_item_dialog_visible_func (GtkTreeModel *model,
                                 GtkTreeIter *iter,
                                 gpointer user_data)
 {
   GtkEntry *entry = GTK_ENTRY (user_data);
-  const gchar *text, *name, *comment;
+  const gchar *text;
   PanelModule *module;
   gchar *normalized;
   gchar *text_casefolded;
-  gchar *name_casefolded;
-  gchar *comment_casefolded;
   gboolean visible = FALSE;
 
   /* search string from dialog */
@@ -736,36 +754,15 @@ panel_item_dialog_visible_func (GtkTreeModel *model,
   text_casefolded = g_utf8_casefold (normalized, -1);
   g_free (normalized);
 
-  name = panel_module_get_display_name (module);
-  if (G_LIKELY (name != NULL))
-    {
-      /* casefold the name */
-      normalized = g_utf8_normalize (name, -1, G_NORMALIZE_ALL);
-      name_casefolded = g_utf8_casefold (normalized, -1);
-      g_free (normalized);
+  const gchar *module_strings[] = {
+    panel_module_get_name (module),
+    panel_module_get_display_name (module),
+    panel_module_get_comment (module),
+    NULL,
+  };
 
-      /* search */
-      visible = (strstr (name_casefolded, text_casefolded) != NULL);
-
-      g_free (name_casefolded);
-    }
-
-  if (!visible)
-    {
-      comment = panel_module_get_comment (module);
-      if (comment != NULL)
-        {
-          /* casefold the comment */
-          normalized = g_utf8_normalize (comment, -1, G_NORMALIZE_ALL);
-          comment_casefolded = g_utf8_casefold (normalized, -1);
-          g_free (normalized);
-
-          /* search */
-          visible = (strstr (comment_casefolded, text_casefolded) != NULL);
-
-          g_free (comment_casefolded);
-        }
-    }
+  for (const gchar **p = module_strings; *p != NULL && !visible; p++)
+    visible = search_text_in_module_string (text_casefolded, *p);
 
   g_free (text_casefolded);
   g_object_unref (G_OBJECT (module));
