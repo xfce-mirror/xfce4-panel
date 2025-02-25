@@ -1,0 +1,2355 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce4-panel.xfce-4-20 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Fiero Veneto, 2025
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-panel.xfce-4-20\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2025-02-14 12:47+0100\n"
+"PO-Revision-Date: 2025-02-14 11:29+0000\n"
+"Last-Translator: Fiero Veneto, 2025\n"
+"Language-Team: Venetian (https://app.transifex.com/xfce/teams/16840/vec/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: vec\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: panel-desktop-handler.desktop.in:4
+msgid "Create Launcher on the panel"
+msgstr "Crear un inisiador inte el paneło"
+
+#: panel-desktop-handler.desktop.in:5
+msgid ""
+"Add a new launcher to the panel based on the information of this desktop "
+"file"
+msgstr ""
+"Zontar un inisiador inte el paneło co l'informasion de sto file del desktop"
+
+#: panel-preferences.desktop.in:8
+msgid ""
+"panels;settings;preferences;taskbar;autohide;application "
+"menu;start;buttons;launcher;notification area;status;icons;plugins;"
+msgstr ""
+"panełi;inpostasion;prefarense;bara de atività;scóndare in automàtico;menù de"
+" łe app;inìsio;botoni;inisiador;àrea de łe notìfeghe;stato;icone;estension;"
+
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3710
+msgid "Panel"
+msgstr "Paneło"
+
+#: panel-preferences.desktop.in:16
+msgid "Customize the panel"
+msgstr "Personałiza el paneło"
+
+#: libxfce4panel/xfce-panel-plugin.c:1113
+#: panel/panel-preferences-dialog.c:1549
+msgid "Remove"
+msgstr "Cavar"
+
+#: libxfce4panel/xfce-panel-plugin.c:1114
+msgid ""
+"Removing the item from the panel also means its configuration will be lost."
+msgstr ""
+"Cavando sto ełemento dal paneło ìnplega pèrdare tuta ła so configurasion!"
+
+#: libxfce4panel/xfce-panel-plugin.c:1118
+#: panel/panel-preferences-dialog.c:1556
+#, c-format
+msgid "Are you sure that you want to remove \"%s\"?"
+msgstr "Seguro de vołer cavar \"%s\"?"
+
+#. properties item
+#: libxfce4panel/xfce-panel-plugin.c:1240
+msgid "_Properties"
+msgstr "_Propietà"
+
+#. about item
+#: libxfce4panel/xfce-panel-plugin.c:1251 panel/panel-window.c:3785
+msgid "_About"
+msgstr "Arente _de"
+
+#. move item
+#: libxfce4panel/xfce-panel-plugin.c:1262
+msgid "_Move"
+msgstr "_Spostar"
+
+#. remove
+#: libxfce4panel/xfce-panel-plugin.c:1278 panel/panel-application.c:357
+#: panel/panel-plugin-external.c:424 panel/panel-preferences-dialog.c:1089
+#: panel/panel-preferences-dialog.glade:1240
+#: plugins/launcher/launcher-dialog.c:841
+msgid "_Remove"
+msgstr "_Cavar"
+
+#: libxfce4panel/xfce-panel-plugin.c:1296
+msgid "Pane_l"
+msgstr "P_aneło"
+
+#. add new items
+#: libxfce4panel/xfce-panel-plugin.c:1304 panel/panel-window.c:3722
+msgid "Add _New Items..."
+msgstr "Zontar_novi ełementi..."
+
+#. customize panel
+#: libxfce4panel/xfce-panel-plugin.c:1315 panel/panel-window.c:3733
+msgid "Panel Pr_eferences..."
+msgstr "Prefarense del_paneło..."
+
+#. logout item
+#: libxfce4panel/xfce-panel-plugin.c:1332 panel/panel-window.c:3760
+msgid "Log _Out"
+msgstr "Sarar_Sesion"
+
+#. help item
+#: libxfce4panel/xfce-panel-plugin.c:1348 panel/panel-item-dialog.c:207
+#: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3776
+#: plugins/actions/actions-dialog.glade:97
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
+#: plugins/clock/clock-dialog.glade:120
+#: plugins/directorymenu/directorymenu-dialog.glade:49
+#: plugins/launcher/launcher-dialog.glade:398
+#: plugins/pager/pager-dialog.glade:81
+#: plugins/separator/separator-dialog.glade:69
+#: plugins/showdesktop/showdesktop-dialog.glade:49
+#: plugins/tasklist/tasklist-dialog.glade:93
+#: plugins/windowmenu/windowmenu-dialog.glade:63
+msgid "_Help"
+msgstr "_Juto"
+
+#. about item
+#: libxfce4panel/xfce-panel-plugin.c:1359
+msgid "About"
+msgstr "Arente de"
+
+#: panel/main.c:69
+msgid "Show the 'Panel Preferences' dialog"
+msgstr "Mostrar ła fenestra de prefarense del paneło"
+
+#: panel/main.c:69 panel/main.c:70
+msgid "PANEL-NUMBER"
+msgstr "NÙMARO-DEL-PANEŁO"
+
+#: panel/main.c:70
+msgid "Show the 'Add New Items' dialog"
+msgstr "Mostrar ła fenestra de zontar novi ełementi"
+
+#: panel/main.c:71
+msgid "Save the panel configuration"
+msgstr "Salvar ła configurasion del paneło"
+
+#: panel/main.c:72
+msgid "Add a new plugin to the panel"
+msgstr "Zontar na nova estension al paneło"
+
+#: panel/main.c:72
+msgid "PLUGIN-NAME"
+msgstr "NOME-DE-ŁA-ESTENSION"
+
+#: panel/main.c:73
+msgid "Restart the running panel instance"
+msgstr "Scumisiar da novo ła istansa del paneło drio ndare"
+
+#: panel/main.c:74
+msgid "Quit the running panel instance"
+msgstr "Sarar ła istansa del paneło drio ndare"
+
+#: panel/main.c:75
+msgid "Do not wait for a window manager on startup"
+msgstr "No sta spetar el zestor de fenestre al reinisiar"
+
+#: panel/main.c:76 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
+msgid "Print version information and exit"
+msgstr "Stanpar informasion de ła version e ndar fora"
+
+#. parse context options
+#: panel/main.c:261
+msgid "[ARGUMENTS...]"
+msgstr "[ARGOMENTI...]"
+
+#: panel/main.c:271
+#, c-format
+msgid "Type \"%s --help\" for usage."
+msgstr "Scrivi \"%s --help\" par védare łe istrusion de come che el se dòpara."
+
+#: panel/main.c:288
+msgid "The Xfce development team. All rights reserved."
+msgstr "Ła scuadra de desviłupo de Xfce. Tuti i diriti i ze riservai."
+
+#: panel/main.c:289
+#, c-format
+msgid "Please report bugs to <%s>."
+msgstr "Par piazere; reporta i erori a <%s>."
+
+#. quit without error if an instance is running
+#: panel/main.c:397
+msgid "There is already a running instance"
+msgstr "Ła ghe ze za na instansa drio ndar"
+
+#. spawn ourselfs again
+#: panel/main.c:408
+msgid "Restarting..."
+msgstr "Drio reinisiar..."
+
+#: panel/main.c:425
+msgid "Failed to show the preferences dialog"
+msgstr "No se ga podesto mostrar ła fenestra de łe prefarense"
+
+#: panel/main.c:427
+msgid "Failed to show the add new items dialog"
+msgstr "No se ga podesto mostrar ła fenestra par zontar novi ełementi"
+
+#: panel/main.c:429
+msgid "Failed to save the panel configuration"
+msgstr "No se ga mia podesto salvar ła configurasion del paneło"
+
+#: panel/main.c:431
+msgid "Failed to add a plugin to the panel"
+msgstr "No se ga mia podesto zontar na estension al paneło"
+
+#: panel/main.c:433
+msgid "Failed to restart the panel"
+msgstr "No se ga mia podesto reinisiar el paneło"
+
+#: panel/main.c:435
+msgid "Failed to quit the panel"
+msgstr "No se ga mia podesto sarar el paneło"
+
+#: panel/main.c:437
+msgid "Failed to send D-Bus message"
+msgstr "No se ga podesto inviar el mesajo de D-Bus"
+
+#: panel/main.c:445 panel/main.c:465
+#, c-format
+msgid "No running instance of %s was found"
+msgstr "No se ga mia catà nisuna istansa de %s drio ndar"
+
+#: panel/main.c:446
+msgid ""
+"Do you want to start the panel? If you do, make sure you save the session on"
+" logout, so the panel is automatically started the next time you login."
+msgstr ""
+"Vuto reinisiar el paneło? Se ło vołe far, el se asegure de salvar ła sesion "
+"ndando fora, cusita che el paneło el se inisiarà automategamente ła prósima "
+"volta che el inìsia ła sesion."
+
+#: panel/main.c:451
+msgid "Execute"
+msgstr "Inisiar"
+
+#: panel/panel-application.c:214
+msgid "Failed to launch the migration application"
+msgstr "No se ga podesto inisiar ła aplicasion de migrasion"
+
+#: panel/panel-application.c:347
+#, c-format
+msgid ""
+"Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
+" configuration?"
+msgstr ""
+"No se połe cargar ła estension \"%s\". Vołeo ełiminarlo de ła configurasion "
+"de xfce4-panel?"
+
+#: panel/panel-application.c:349
+#, c-format
+msgid ""
+"This plugin is in the current xfce4-panel configuration but could not be "
+"loaded, probably due to an installation issue. If you know what you're "
+"doing, you can remove it permanently, otherwise you'd better quit and make a"
+" backup of the current configuration using %s, before checking your "
+"installation and trying to start xfce4-panel again."
+msgstr ""
+"Sta estension ła ghe ze inte ła atuałe configurasion de xfce4-panel, parò no"
+" ła se połe cargar, probabilmente par via de un problema inte ła so "
+"instałasion. Se el sa cueło che el ze drio far, el połe ełiminarla de forma "
+"permanente, de altra forma mejo che el vaga fora de ła sesion e el fasa na "
+"còpia de ła configurasion atuałe doparando %s, dopo el controłe ła so "
+"instałasion e el trate de reinisiar xfce-panel da novo, "
+
+#: panel/panel-application.c:356
+msgid "Plugin loading failure"
+msgstr "No se ga podesto cargar ła estension"
+
+#: panel/panel-application.c:357
+msgid "_Quit"
+msgstr "_Sara"
+
+#: panel/panel-application.c:1037
+msgid ""
+"This will create a new launcher plugin on the panel and inserts the dropped "
+"files as menu items."
+msgstr ""
+"Sta asion ła crearà un inisiador novo inte el paneło e ła zontarà i file che"
+" i vien dasai ndar cofà ełementi del menù."
+
+#: panel/panel-application.c:1040
+msgid "Create _Launcher"
+msgstr "Crear un _inisiador"
+
+#: panel/panel-application.c:1041
+#, c-format
+msgid "Create new launcher from %d desktop file"
+msgid_plural "Create new launcher from %d desktop files"
+msgstr[0] ""
+msgstr[1] ""
+
+#: panel/panel-application.c:1802
+msgid ""
+"You have started X without session manager. Clicking Quit will close the X "
+"server."
+msgstr ""
+"EL sistema X Windows el ze stà scumisià sensa un zestor de sesion. Strucando"
+" \"ndar fora\" se sararà el server X."
+
+#: panel/panel-application.c:1805
+msgid "Quit"
+msgstr "Ndar fora"
+
+#: panel/panel-application.c:1805
+msgid "Are you sure you want to quit the panel?"
+msgstr "Zeło seguro che el vołe sarar el paneło?"
+
+#: panel/panel-application.c:1813
+#, c-format
+msgid "Failed to execute command \"%s\""
+msgstr "No se ga podesto lavorar el órdane  «%s»"
+
+#: panel/panel-dbus-client.c:213
+msgid ""
+"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr ""
+"Ła sintasi del evento par ła estension no ła ze vàłida. Dòpara NOME-DE-ŁA-"
+"ESTENSION:NOME[:TIPO:VAŁORE]."
+
+#: panel/panel-dbus-client.c:243
+#, c-format
+msgid ""
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and "
+"uint."
+msgstr ""
+"El tipo «%s» no el ze vàłido. I tipi vàłidi i ze bool, double, int, string e"
+" uint."
+
+#: panel/panel-dialogs.c:56
+msgid "Unable to open the e-mail address"
+msgstr "No se ga podesto vèrzare el inderiso e-mail."
+
+#: panel/panel-dialogs.c:82
+msgid "The panel of the Xfce Desktop Environment"
+msgstr "El paneło del Anbiente Desktop Xfce"
+
+#: panel/panel-dialogs.c:86
+msgid "translator-credits"
+msgstr "Atualmente no dispunìbiłe."
+
+#: panel/panel-dialogs.c:160
+msgid "Add New Item"
+msgstr "Zonta un novo ełemento"
+
+#: panel/panel-dialogs.c:160 plugins/actions/actions.c:870
+#: plugins/applicationsmenu/applicationsmenu.c:606
+#: plugins/directorymenu/directorymenu.c:466
+#: plugins/directorymenu/directorymenu.c:938
+msgid "_Cancel"
+msgstr "Tornar_ indrio"
+
+#: panel/panel-dialogs.c:160 panel/panel-item-dialog.c:203
+#: panel/panel-preferences-dialog.glade:1223
+#: plugins/launcher/launcher-dialog.glade:219
+msgid "_Add"
+msgstr "_Zontar"
+
+#: panel/panel-dialogs.c:171
+msgid "Please choose a panel for the new plugin:"
+msgstr "Ełezi el paneło par ła nova estension:"
+
+#: panel/panel-dialogs.c:191 panel/panel-preferences-dialog.c:1034
+#, c-format
+msgid "Panel %d"
+msgstr "Paneło %d"
+
+#: panel/panel-dialogs.c:230
+msgid ""
+"Because the panel is running in kiosk mode, you are not allowed to make "
+"changes to the panel configuration as a regular user"
+msgstr ""
+"Posto che el paneło el ze in ezecusion inte el \"modo chiosco\", no se ghe "
+"permete far canbi inte ła configurasion del paneło"
+
+#: panel/panel-dialogs.c:232
+msgid "Modifying the panel is not allowed"
+msgstr "No łe vien permeteste modìfeghe al paneło"
+
+#: panel/panel-item-dialog.c:195 plugins/launcher/launcher-dialog.glade:198
+msgid "Add New Items"
+msgstr "Zontar novi ełementi"
+
+#: panel/panel-item-dialog.c:211 panel/panel-preferences-dialog.glade:163
+#: panel/panel-tic-tac-toe.c:118 plugins/actions/actions-dialog.glade:82
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:55
+#: plugins/clock/clock-dialog.glade:105
+#: plugins/directorymenu/directorymenu-dialog.glade:34
+#: plugins/launcher/launcher-dialog.glade:235
+#: plugins/launcher/launcher-dialog.glade:414
+#: plugins/pager/pager-dialog.glade:97
+#: plugins/separator/separator-dialog.glade:54
+#: plugins/showdesktop/showdesktop-dialog.glade:34
+#: plugins/systray/sn-dialog.glade:65
+#: plugins/tasklist/tasklist-dialog.glade:77
+#: plugins/windowmenu/windowmenu-dialog.glade:48
+msgid "_Close"
+msgstr "_Sarar"
+
+#: panel/panel-item-dialog.c:227 plugins/launcher/launcher-dialog.glade:272
+msgid "_Search:"
+msgstr "_Sercar:"
+
+#: panel/panel-item-dialog.c:235
+msgid "Enter search phrase here"
+msgstr "El scriva el tèrmane de reserca cuà"
+
+#: panel/panel-plugin-external.c:417
+#, c-format
+msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
+msgstr ""
+"Ła estension del paneło «%s» ła se ga sarà sensa spetàrseło. Se vołe "
+"reinisiarlo? "
+
+#: panel/panel-plugin-external.c:418
+#, c-format
+msgid ""
+"The plugin restarted more than once in the last %d seconds. If you press "
+"Execute the panel will try to restart the plugin otherwise it will be "
+"permanently removed from the panel."
+msgstr ""
+"Ła estension ła se ga reinisià pì de na volta inte i ùltemi %d secondi. Se "
+"te struchi \"Inisiar\" se tentarà de reinisiar ła estension, se no ła se "
+"ełiminarà dal paneło de forma permanente. "
+
+#: panel/panel-plugin-external.c:423
+msgid "Plugin Restart"
+msgstr "Drio reinisiar ła estension"
+
+#: panel/panel-plugin-external.c:424
+msgid "_Execute"
+msgstr "_Inisiar"
+
+#: panel/panel-preferences-dialog.c:581
+msgid "Automatic"
+msgstr "Automàtego"
+
+#: panel/panel-preferences-dialog.c:590
+msgid "Primary"
+msgstr "Prinsipałe"
+
+#. I18N: monitor name in the output selector
+#: panel/panel-preferences-dialog.c:609
+#, c-format
+msgid "Monitor %d"
+msgstr "Monitor %d"
+
+#: panel/panel-preferences-dialog.c:1088
+msgid "The panel and plugin configurations will be permanently removed"
+msgstr ""
+"Łe configurasion del paneło e de łe estesion łe vegnarà ełiminae de forma "
+"permanente."
+
+#: panel/panel-preferences-dialog.c:1097
+#, c-format
+msgid "Are you sure you want to remove panel %d?"
+msgstr "Seguro de vołer ełiminar el paneło %d?"
+
+#. I18N: append (external) in the preferences dialog if the plugin
+#. * runs external
+#: panel/panel-preferences-dialog.c:1394
+#, c-format
+msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
+msgstr "%s <span color=\"grey\" size=\"small\">(esterno)</span>"
+
+#. I18N: tooltip in preferences dialog when hovering an item in the list
+#. * for external plugins
+#: panel/panel-preferences-dialog.c:1399
+#, c-format
+msgid ""
+"Internal name: %s-%d\n"
+"PID: %d"
+msgstr ""
+"Nome interno: %s-%d\n"
+"PID: %d"
+
+#. I18N: tooltip in preferences dialog when hovering an item in the list
+#. * for internal plugins
+#: panel/panel-preferences-dialog.c:1411
+#, c-format
+msgid "Internal name: %s-%d"
+msgstr "Nome interno: %s-%d"
+
+#: panel/panel-preferences-dialog.c:1558
+msgid "If you remove the item from the panel, it is permanently lost."
+msgstr ""
+"Se el ełìmina el ełemento dal paneło, el vegnarà perdesto de forma "
+"permanente."
+
+#: panel/panel-preferences-dialog.c:1562
+#, c-format
+msgid "Are you sure that you want to remove these %d items?"
+msgstr "Zeło seguro che el vołe ełiminar sti %d ełementi?"
+
+#: panel/panel-preferences-dialog.c:1564
+msgid "If you remove them from the panel, they are permanently lost."
+msgstr "Se łi ełìmina dal paneło, i vegnarà perdesto par senpre."
+
+#: panel/panel-preferences-dialog.glade:13
+msgid "Never"
+msgstr "Mai"
+
+#: panel/panel-preferences-dialog.glade:16
+msgid "Intelligently"
+msgstr "De forma intełizente"
+
+#: panel/panel-preferences-dialog.glade:19
+msgid "Always"
+msgstr "Senpre"
+
+#: panel/panel-preferences-dialog.glade:81
+msgid "Horizontal"
+msgstr "Orizontałe"
+
+#: panel/panel-preferences-dialog.glade:84
+msgid "Vertical"
+msgstr "Verticałe"
+
+#: panel/panel-preferences-dialog.glade:87
+msgid "Deskbar"
+msgstr "Bara del desktop"
+
+#: panel/panel-preferences-dialog.glade:134
+msgid "None (use system style)"
+msgstr "Doparar stiłe del sistema"
+
+#: panel/panel-preferences-dialog.glade:137
+msgid "Solid color"
+msgstr "Cołore sòłido"
+
+#: panel/panel-preferences-dialog.glade:140
+msgid "Background image"
+msgstr "Imàzene de sfondo"
+
+#: panel/panel-preferences-dialog.glade:146
+msgid "Panel Preferences"
+msgstr "Prefarense del paneło"
+
+#: panel/panel-preferences-dialog.glade:223
+msgid "Profiles:"
+msgstr "Profiłi:"
+
+#: panel/panel-preferences-dialog.glade:251
+msgid "_Backup and restore"
+msgstr "Còpia de seguresa e _restaurasion"
+
+#: panel/panel-preferences-dialog.glade:255
+msgid "Switch between panel presets"
+msgstr "Canbiar łe prefarense del paneło"
+
+#: panel/panel-preferences-dialog.glade:299
+msgid "Add a new panel"
+msgstr "Zontar un novo paneło"
+
+#: panel/panel-preferences-dialog.glade:324
+msgid "Remove the currently selected panel"
+msgstr "Ełiminar el paneło ełezesto"
+
+#: panel/panel-preferences-dialog.glade:375
+#: panel/panel-preferences-dialog.glade:738
+msgid "<b>General</b>"
+msgstr "<b>Zenerałe</b>"
+
+#: panel/panel-preferences-dialog.glade:390
+msgid "M_ode:"
+msgstr "_Modo:"
+
+#: panel/panel-preferences-dialog.glade:419
+msgid "Span mo_nitors"
+msgstr "Esténdar a tuti i schermi"
+
+#: panel/panel-preferences-dialog.glade:423
+msgid "Select this option to extend the panel over multiple monitors."
+msgstr "Ełezi sta opsion par esténdar el paneło a pì schermi."
+
+#: panel/panel-preferences-dialog.glade:436
+msgid "_Lock panel"
+msgstr "Bloca el paneło inte _ła atuałe pozision"
+
+#: panel/panel-preferences-dialog.glade:440
+msgid ""
+"Select this option to hide the handles of the panel and lock its position."
+msgstr ""
+"Ełezi sta opsion par scóndar ła manìlia dal paneło e blocar ła so pozision."
+
+#: panel/panel-preferences-dialog.glade:453
+msgid "_Reserve space on screen edges for the panel"
+msgstr "_Riservar spàsio ai bordi del schermo par el paneło"
+
+#: panel/panel-preferences-dialog.glade:457
+msgid ""
+"Select this option if you don't want maximized windows to cover the area "
+"behind the panel. This only works when the panel is attached to a screen "
+"edge."
+msgstr ""
+"Ełezi sta opsion se no el vołe che łe feneste masimizae łe cuerza l'àrea da "
+"drio el paneło. Sta funsion ła và solché se el paneło el ze unio a un bordo "
+"del schermo."
+
+#: panel/panel-preferences-dialog.glade:478
+msgid "Au_tomatically hide the panel:"
+msgstr "_Scóndar automategamente el paneło:"
+
+#: panel/panel-preferences-dialog.glade:519
+msgid "O_utput:"
+msgstr "O_utput:"
+
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
+#: panel/panel-preferences-dialog.glade:563
+msgid "<b>Measurements</b>"
+msgstr "<b>Mezure</b>"
+
+#: panel/panel-preferences-dialog.glade:578
+msgid "Row _size (pixels):"
+msgstr "Row _size (pixels):"
+
+#: panel/panel-preferences-dialog.glade:592
+msgid "Num_ber of rows:"
+msgstr "Nùmaro de _righe:"
+
+#: panel/panel-preferences-dialog.glade:606
+msgid "L_ength (pixels):"
+msgstr "Longh_esa (pixel):"
+
+#: panel/panel-preferences-dialog.glade:635
+msgid "Border width (pixels):"
+msgstr "Larghesa dei bordi (pixel):"
+
+#: panel/panel-preferences-dialog.glade:658
+msgid "A_utomatically increase the length"
+msgstr "Aumentar ła longhesa _automategamente"
+
+#: panel/panel-preferences-dialog.glade:662
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr ""
+"Ełezi sta opsion par aumentar automategamente ła longhesa del paneło se łe "
+"estension łe dimanda pì spàsio."
+
+#: panel/panel-preferences-dialog.glade:712
+msgid "D_isplay"
+msgstr "_Vizuałizasion"
+
+#: panel/panel-preferences-dialog.glade:753
+msgid "Dark mode"
+msgstr "Modo scuro"
+
+#: panel/panel-preferences-dialog.glade:793
+msgid "<b>Background</b>"
+msgstr "<b>Sfondo</b>"
+
+#: panel/panel-preferences-dialog.glade:808
+#: plugins/separator/separator-dialog.glade:119
+msgid "_Style:"
+msgstr "_Stiłe:"
+
+#: panel/panel-preferences-dialog.glade:840
+msgid "C_olor:"
+msgstr "_Cołore:"
+
+#: panel/panel-preferences-dialog.glade:855
+msgid "Pick a Panel Color"
+msgstr "Ełezi el cołore del paneło"
+
+#: panel/panel-preferences-dialog.glade:868
+msgid "_File:"
+msgstr "_File:"
+
+#: panel/panel-preferences-dialog.glade:881
+msgid "Select A Background Image"
+msgstr "Ełezi na imàzene de sfondo"
+
+#: panel/panel-preferences-dialog.glade:908
+msgid "<b>Icons</b>"
+msgstr "<b>Icone</b>"
+
+#: panel/panel-preferences-dialog.glade:922
+msgid "Adjust size au_tomatically"
+msgstr "Justa ła grandesa _automategamente"
+
+#: panel/panel-preferences-dialog.glade:959
+msgid "Fixed icon _size (pixels):"
+msgstr "Grandesa de _łe icone fise (pixel):"
+
+#: panel/panel-preferences-dialog.glade:1002
+msgid "<b>Opacity</b>"
+msgstr "<b>Opasità</b>"
+
+#: panel/panel-preferences-dialog.glade:1028
+msgid "Configure..."
+msgstr "Configurar..."
+
+#: panel/panel-preferences-dialog.glade:1066
+msgid ""
+"<b>Compositing is currently disabled</b>\n"
+"Enable compositing in the window manager for opacity settings in the panel."
+msgstr ""
+"<b>Ła conpozision ła ze desativada</b>\n"
+"Ativa ła conpozision inte el zestor de fenestre par védar łe opsion de opasità del paneło."
+
+#. I18N: label for the enter transparency slider
+#: panel/panel-preferences-dialog.glade:1106
+msgid "_Enter:"
+msgstr "_Co che el cursor ghe pasa insima:"
+
+#. I18N: label for the leave transparency slider
+#: panel/panel-preferences-dialog.glade:1133
+msgid "_Leave:"
+msgstr "_Co che no el vien doparà"
+
+#: panel/panel-preferences-dialog.glade:1146
+msgid ""
+"Transparency when the pointer is not hovering over the panel, with 0 being "
+"fully transparent and 100 fully opaque."
+msgstr ""
+"Trasparensa co che el cursor no el ze insima al paneło:\n"
+"0 totalmente trasparente e 100 totalmente opaco."
+
+#: panel/panel-preferences-dialog.glade:1173
+msgid "Appeara_nce"
+msgstr "_Aparensa"
+
+#: panel/panel-preferences-dialog.glade:1228
+msgid "Add new item to this panel"
+msgstr "Zontar un novo ełemento a sto paneło"
+
+#: panel/panel-preferences-dialog.glade:1245
+msgid "Remove currently selected item"
+msgstr "Ełiminar el ełemento ełezesto"
+
+#: panel/panel-preferences-dialog.glade:1261
+#: plugins/launcher/launcher-dialog.glade:559
+msgid "Edit the currently selected item"
+msgstr "Modifegar el ełemento ełezesto"
+
+#: panel/panel-preferences-dialog.glade:1282
+msgid "Show about information of the currently selected item"
+msgstr "Mostrar informasion de l'ełemento ełezesto"
+
+#: panel/panel-preferences-dialog.glade:1325
+#: plugins/launcher/launcher-dialog.glade:509
+msgid "Move currently selected item up by one row"
+msgstr "Sposta el ełemento ełezesto na riga sora"
+
+#: panel/panel-preferences-dialog.glade:1346
+#: plugins/launcher/launcher-dialog.glade:529
+msgid "Move currently selected item down by one row"
+msgstr "Sposta el ełemento ełezesto na riga baso"
+
+#: panel/panel-preferences-dialog.glade:1380
+msgid "Ite_ms"
+msgstr "_Ełementi"
+
+#: panel/panel-tic-tac-toe.c:116
+msgid "_New Game"
+msgstr "_Zogo novo"
+
+#: panel/panel-tic-tac-toe.c:127
+msgid "_Level:"
+msgstr "_Liveło:"
+
+#: panel/panel-tic-tac-toe.c:133
+msgid "Novice"
+msgstr "Prinsipiante"
+
+#: panel/panel-tic-tac-toe.c:134
+msgid "Intermediate"
+msgstr "Intermèdio"
+
+#: panel/panel-tic-tac-toe.c:135
+msgid "Experienced"
+msgstr "Avansà"
+
+#: panel/panel-tic-tac-toe.c:136
+msgid "Expert"
+msgstr "Esperto"
+
+#: panel/panel-window.c:3747
+msgid "_Lock Panel"
+msgstr "_Blocar el paneło"
+
+#: migrate/main.c:98
+msgid "Failed to load the default configuration"
+msgstr "No se ga podesto cargar ła configurasion predetermenada"
+
+#: migrate/main.c:110
+msgid "Panel config needs migration..."
+msgstr "Ghe ze da migrar ła configurasion del paneło..."
+
+#: migrate/main.c:114
+msgid "Failed to migrate the existing configuration"
+msgstr "No se ga podesto migrar ła configurasion ezistente"
+
+#: migrate/main.c:120
+msgid "Panel configuration has been updated."
+msgstr "Ła configurasion del paneło ła ze stada atuałizada."
+
+#: plugins/actions/actions-dialog.glade:35
+#: plugins/actions/actions-dialog.glade:64
+#: plugins/actions/actions.desktop.in.in:4
+msgid "Action Buttons"
+msgstr "Botoni de asion"
+
+#: plugins/actions/actions-dialog.glade:38 plugins/actions/actions.c:37
+msgid "Session Menu"
+msgstr "Menù de sesion"
+
+#: plugins/actions/actions-dialog.glade:49
+msgid "Full Name"
+msgstr "Nome conpleto"
+
+#: plugins/actions/actions-dialog.glade:52
+msgid "Username"
+msgstr "Nome de l'utente"
+
+#: plugins/actions/actions-dialog.glade:55
+msgid "User ID"
+msgstr "Identifegador de l'utente"
+
+#: plugins/actions/actions-dialog.glade:58
+msgid "Custom"
+msgstr "Personałizar"
+
+#: plugins/actions/actions-dialog.glade:162
+msgid "Appeara_nce:"
+msgstr "_Aparensa:"
+
+#: plugins/actions/actions-dialog.glade:188
+msgid "Title:"
+msgstr "Tìtuło"
+
+#: plugins/actions/actions-dialog.glade:201
+msgid "Custo_m title:"
+msgstr "_Tìtuło personałizà:"
+
+#: plugins/actions/actions-dialog.glade:255
+#: plugins/launcher/launcher-dialog.glade:667
+msgid "General"
+msgstr "Zenerałe"
+
+#: plugins/actions/actions-dialog.glade:303
+msgid "Visible"
+msgstr "Vizìbiłe"
+
+#: plugins/actions/actions-dialog.glade:314
+msgid "Action"
+msgstr "Asion"
+
+#: plugins/actions/actions-dialog.glade:334
+msgid "_Show confirmation dialog"
+msgstr "_Mostrar ła fenestra de conferma"
+
+#: plugins/actions/actions-dialog.glade:338
+msgid ""
+"Show a confirmation dialog with a 30 second timeout for some of the actions."
+msgstr ""
+"Mostrar ła fenestra de conferma co un timer de 30 secondi par racuante "
+"asion."
+
+#: plugins/actions/actions-dialog.glade:354
+msgid "_Actions"
+msgstr "_Asion"
+
+#: plugins/actions/actions.c:167
+msgid "Log Out"
+msgstr "Sarar sesion"
+
+#: plugins/actions/actions.c:168
+msgid "_Log Out"
+msgstr "_Sarar sesion"
+
+#: plugins/actions/actions.c:169
+msgid "Are you sure you want to log out?"
+msgstr "Seguro de vołer sarar ła sesion?"
+
+#: plugins/actions/actions.c:170
+#, c-format
+msgid "Logging out in %d seconds."
+msgstr "Ła sesion ła vegnarà sarada in %d secondi."
+
+#: plugins/actions/actions.c:175
+msgid "Log Out..."
+msgstr "Sarar sesion..."
+
+#: plugins/actions/actions.c:176
+msgid "Log _Out..."
+msgstr "Sarar _sesion..."
+
+#: plugins/actions/actions.c:182
+msgid "Switch User"
+msgstr "Canbiar de utente"
+
+#: plugins/actions/actions.c:183
+msgid "_Switch User"
+msgstr "Canbiar de _utente"
+
+#: plugins/actions/actions.c:189
+msgid "Lock Screen"
+msgstr "Blocar schermo"
+
+#: plugins/actions/actions.c:190
+msgid "Loc_k Screen"
+msgstr "_Blocar schermo"
+
+#: plugins/actions/actions.c:196
+msgid "Hibernate"
+msgstr "Ibernar"
+
+#: plugins/actions/actions.c:197
+msgid "_Hibernate"
+msgstr "_Ibernar"
+
+#: plugins/actions/actions.c:198
+msgid "Do you want to suspend to disk?"
+msgstr "Vołer ibernar el dispozitivo?"
+
+#: plugins/actions/actions.c:199
+#, c-format
+msgid "Hibernating computer in %d seconds."
+msgstr "El dispozitivo el vegnarà ibernà in %d secondi."
+
+#: plugins/actions/actions.c:204
+msgid "Hybrid Sleep"
+msgstr "Sospension ìbrida"
+
+#: plugins/actions/actions.c:205
+msgid "_Hybrid Sleep"
+msgstr "_Sospension ìbrida"
+
+#: plugins/actions/actions.c:206
+msgid "Do you want to hibernate and suspend the system?"
+msgstr "Vołer che el sistema el entre in sospension ìbrida?"
+
+#: plugins/actions/actions.c:207
+#, c-format
+msgid "Hibernating and Suspending computer in %d seconds."
+msgstr "El dispozitivo el entrarà in sospension ìbrida in %d secondi."
+
+#: plugins/actions/actions.c:212
+msgid "Suspend"
+msgstr "Sospéndar"
+
+#: plugins/actions/actions.c:213
+msgid "Sus_pend"
+msgstr "_Sospéndar"
+
+#: plugins/actions/actions.c:214
+msgid "Do you want to suspend to RAM?"
+msgstr "Vołer sospender el dispozitivo?"
+
+#: plugins/actions/actions.c:215
+#, c-format
+msgid "Suspending computer in %d seconds."
+msgstr "El dispozitivo el vegnarà sospendesto in %d secondi."
+
+#: plugins/actions/actions.c:220
+msgid "Restart"
+msgstr "Reinisiar"
+
+#: plugins/actions/actions.c:221
+msgid "_Restart"
+msgstr "_Reinisiar"
+
+#: plugins/actions/actions.c:222
+msgid "Are you sure you want to restart?"
+msgstr "Seguro de vołer reinisiar?"
+
+#: plugins/actions/actions.c:223
+#, c-format
+msgid "Restarting computer in %d seconds."
+msgstr "El dispozitivo el vegnarà reinisià in %d secondi."
+
+#: plugins/actions/actions.c:228
+msgid "Shut Down"
+msgstr "Stuare"
+
+#: plugins/actions/actions.c:229
+msgid "Shut _Down"
+msgstr "_Stuare"
+
+#: plugins/actions/actions.c:230
+msgid "Are you sure you want to shut down?"
+msgstr "Seguro de vołer stuar?"
+
+#: plugins/actions/actions.c:231
+#, c-format
+msgid "Turning off computer in %d seconds."
+msgstr "El dispozitivo el vegnarà stuà in %d secondi."
+
+#: plugins/actions/actions.c:732 plugins/separator/separator-dialog.glade:26
+#: plugins/separator/separator-dialog.glade:38
+#: plugins/separator/separator.desktop.in.in:4
+msgid "Separator"
+msgstr "Divizòrio"
+
+#: plugins/actions/actions.c:1166
+#, c-format
+msgid "Failed to run action \"%s\""
+msgstr "No ghe ga podesto portar vanti ła asion «%s»"
+
+#: plugins/actions/actions.c:1370
+msgid "Little Mouse"
+msgstr "Mouse ceo"
+
+#: plugins/actions/actions.desktop.in.in:5
+msgid "Log out, lock or other system actions"
+msgstr "Sarar sesion, blocar sesion o altre asion del sistema"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:23
+#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:4
+msgid "Applications Menu"
+msgstr "Menù App"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:101
+#: plugins/directorymenu/directorymenu-dialog.glade:122
+msgid "_Icon:"
+msgstr "_Ìcone"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:125
+msgid "Button _title:"
+msgstr "Tìtuło del _boton:"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:136
+msgid "Show button on one _line"
+msgstr "Mostra el boton inte na _lìnea"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:151
+msgid "_Show button title"
+msgstr "Mostrar el _tìtuło del boton"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:166
+msgid "Show application d_escription in tooltip"
+msgstr "Mostrar na _descrision emerzente de ła aplicasion"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:182
+msgid "Show ic_ons in menu"
+msgstr "Mostrar łe icone _inte el menù"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:197
+msgid "Show generic application n_ames"
+msgstr "Mostrar i nomi zenèreghi _de łe aplicasion"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:201
+msgid ""
+"Select this option to show the generic application name in the menu, for "
+"example \"File Manager\" instead of \"Thunar\""
+msgstr ""
+"Ativa sta opsion par mostrar el nome zenèrego de łe aplicasion, par ezénpio "
+"«Zestor de archivi» al posto de «Thunar»"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:229
+#: plugins/clock/clock-dialog.glade:405
+#: plugins/directorymenu/directorymenu-dialog.glade:150
+#: plugins/separator/separator-dialog.glade:177
+#: plugins/tasklist/tasklist-dialog.glade:257
+#: plugins/windowmenu/windowmenu-dialog.glade:206
+msgid "Appearance"
+msgstr "Aparensa"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:267
+msgid "Use the _default menu"
+msgstr "Doparar el _menù predetermenà"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:282
+msgid "Ed_it Menu"
+msgstr "_Modifegar el menù"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:304
+msgid "Use c_ustom menu file:"
+msgstr "Doparar un _file personałizà:"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:333
+msgid "Menu _file:"
+msgstr "_File del menù:"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:346
+msgid "Select A Menu File"
+msgstr "Ełèzar un file del menù"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:371
+msgid "Menu File"
+msgstr "File del menù"
+
+#. I18N: default tooltip of the application menu
+#: plugins/applicationsmenu/applicationsmenu.c:38
+msgid "Applications"
+msgstr "Aplicasion"
+
+#: plugins/applicationsmenu/applicationsmenu.c:606
+#: plugins/directorymenu/directorymenu.c:466
+msgid "Select An Icon"
+msgstr "Ełèzi na icona"
+
+#: plugins/applicationsmenu/applicationsmenu.c:606
+#: plugins/directorymenu/directorymenu.c:466
+msgid "_OK"
+msgstr "_Acetar"
+
+#. show an error dialog
+#: plugins/applicationsmenu/applicationsmenu.c:643 plugins/clock/clock.c:1054
+#: plugins/launcher/launcher.c:2500
+#, c-format
+msgid "Failed to execute command \"%s\"."
+msgstr "No se ga podesto portar vanti el órdane «%s»."
+
+#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:5
+msgid "Show a menu containing categories of installed applications"
+msgstr "Mostrar un menù co łe categorie de łe aplicasion instałae"
+
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:27
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:27
+msgid "Usage:"
+msgstr "Dòparasion:"
+
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:28
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:28
+msgid "OPTION"
+msgstr "OPSION"
+
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:30
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:30
+msgid "Options:"
+msgstr "Opsion:"
+
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:31
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:31
+msgid "Popup menu at current mouse position"
+msgstr "Mostrar el menù inte ła pozision del cursor"
+
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:32
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:32
+msgid "Show help options"
+msgstr "Mostrar łe opsion de juto"
+
+#. TRANSLATORS: adjust this accordingly for your locale format
+#: plugins/clock/clock.c:47
+msgctxt "Date"
+msgid "%A %d %B %Y"
+msgstr "%A %d de %B del %Y"
+
+#: plugins/clock/clock.c:176
+msgid "Week %V"
+msgstr "Stimana %V"
+
+#: plugins/clock/clock.c:500
+msgid "Failed to execute clock command"
+msgstr "No se ga podesto portar vanti el comando del rełojo"
+
+#: plugins/clock/clock.c:993
+msgid "Custom Format"
+msgstr "Personałizar formato"
+
+#: plugins/clock/clock-dialog.glade:13
+msgid "Decimal"
+msgstr "Desimałe"
+
+#: plugins/clock/clock-dialog.glade:16
+msgid "Sexagesimal"
+msgstr "Sesazezimałe"
+
+#: plugins/clock/clock-dialog.glade:19
+msgid "Binary time"
+msgstr "Ora binària"
+
+#: plugins/clock/clock-dialog.glade:30
+msgid "Date, then time"
+msgstr "Data e ora"
+
+#: plugins/clock/clock-dialog.glade:33
+msgid "Time, then date"
+msgstr "Ora e data"
+
+#: plugins/clock/clock-dialog.glade:36
+msgid "Date Only"
+msgstr "Solché data"
+
+#: plugins/clock/clock-dialog.glade:39
+msgid "Time Only"
+msgstr "Solché ora"
+
+#: plugins/clock/clock-dialog.glade:71
+msgid "Analog"
+msgstr "Anałòzego"
+
+#: plugins/clock/clock-dialog.glade:74
+msgid "Binary"
+msgstr "Binàrio"
+
+#: plugins/clock/clock-dialog.glade:77
+msgid "Digital"
+msgstr "Dizitałe"
+
+#: plugins/clock/clock-dialog.glade:80
+msgid "Fuzzy"
+msgstr "Inprecizo"
+
+#: plugins/clock/clock-dialog.glade:83
+msgid "LCD"
+msgstr "LCD"
+
+#: plugins/clock/clock-dialog.glade:89 plugins/clock/clock.desktop.in.in:4
+msgid "Clock"
+msgstr "Rełojo"
+
+#: plugins/clock/clock-dialog.glade:172
+msgid ""
+"Name of a timezone corresponding a file in the zoneinfo database, for "
+"example \"America/New_York\". Leave empty to use the localtime."
+msgstr ""
+"Nome del fuzo oràrio corispondente a un file del database, par ezénpio "
+"«Europe/Rome»"
+
+#: plugins/clock/clock-dialog.glade:183
+msgid "Time_zone:"
+msgstr "_Fuzo oràrio:"
+
+#: plugins/clock/clock-dialog.glade:194
+msgid "Time and Date _Settings..."
+msgstr "Configurar ła ora _e ła data..."
+
+#: plugins/clock/clock-dialog.glade:214
+msgid "Time Settings"
+msgstr "Configurasion de ła ora"
+
+#: plugins/clock/clock-dialog.glade:250
+msgid ""
+"If set, this command is run when the plugin is left-clicked, instead of "
+"displaying the default calendar."
+msgstr ""
+"Se configurà, sto órdane el vien scumisià fazendo click sanco inte ła "
+"estension, al posto de mostrar el całendàrio cofà predefinio."
+
+#: plugins/clock/clock-dialog.glade:261
+msgid "Co_mmand:"
+msgstr "_Órdane:"
+
+#: plugins/clock/clock-dialog.glade:273
+msgid "_Show week numbers"
+msgstr "_Mostrar i nùmari de ła stimana"
+
+#: plugins/clock/clock-dialog.glade:294
+msgid "Calendar"
+msgstr "Całendàrio"
+
+#: plugins/clock/clock-dialog.glade:329 plugins/clock/clock-dialog.glade:669
+#: plugins/clock/clock-dialog.glade:791
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"page for additional information."
+msgstr ""
+"El formato el descrive łe parte de ła data e ła ora che łe vegnarà mostrae "
+"inte el paneło. Par ezénpio, %Y el sostituirà el ano, %m el meze %d el dì. "
+"De forma conpagna, łe targhete <b></b> łe marcarà el testo in nereto. "
+"Consulta ła pàzena de juto par ver pì informasion."
+
+#: plugins/clock/clock-dialog.glade:358
+msgid "_Tooltip format:"
+msgstr "Formato de l'informasion _emerzente:"
+
+#: plugins/clock/clock-dialog.glade:371 plugins/clock/clock-dialog.glade:619
+msgid "_Layout:"
+msgstr "_Dizegno"
+
+#: plugins/clock/clock-dialog.glade:435
+msgid "Sho_w AM/PM"
+msgstr "Mostrar co _AM/PM"
+
+#: plugins/clock/clock-dialog.glade:450
+msgid "Fl_ash time separators"
+msgstr "_Separador intermitente"
+
+#: plugins/clock/clock-dialog.glade:465
+msgid "24-_hour clock"
+msgstr "_Rełojo de 24 ORE"
+
+#: plugins/clock/clock-dialog.glade:508
+msgid "Binary mode:"
+msgstr "Modo binàrio:"
+
+#: plugins/clock/clock-dialog.glade:524
+msgid "Display _seconds"
+msgstr "_Mostrar i secondi"
+
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
+#: plugins/clock/clock-dialog.glade:545
+msgid "F_uzziness:"
+msgstr "_Inprecizion"
+
+#: plugins/clock/clock-dialog.glade:579
+msgid "Show _inactive segments"
+msgstr "Mostrar i segmenti _inativi"
+
+#: plugins/clock/clock-dialog.glade:594
+msgid "Show gri_d"
+msgstr "Mostrar ła _grea"
+
+#: plugins/clock/clock-dialog.glade:640 plugins/clock/clock-dialog.glade:762
+msgid "Font:"
+msgstr "T"
+
+#: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
+msgid "Format:"
+msgstr "Formato:"
+
+#: plugins/clock/clock-dialog.glade:670 plugins/clock/clock-dialog.glade:792
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
+"the &quot;Help&quot; page for additional information."
+msgstr ""
+"El formato el descrive łe parte de ła data e ła ora che łe vegnarà mostrae "
+"inte el paneło. Par ezénpio, %Y el sostituirà el ano, %m el meze %d el dì. "
+"De forma conpagna, łe targhete &lt;b&gt;&lt;/b&gt; łe marcarà el testo in "
+"nereto. Consulta ła pàzena de &quot;Juto&quot; par ver pì informasion."
+
+#: plugins/clock/clock-dialog.glade:699
+msgid "Date"
+msgstr "Data"
+
+#: plugins/clock/clock-dialog.glade:744
+msgid "Time"
+msgstr "Ora"
+
+#: plugins/clock/clock-dialog.glade:871
+msgid "Clock Options"
+msgstr "Opsion del rełojo"
+
+#: plugins/clock/clock-digital.h:30
+msgctxt "Time"
+msgid "%R"
+msgstr "%R"
+
+#: plugins/clock/clock-digital.h:31
+msgctxt "Date"
+msgid "%Y-%m-%d"
+msgstr "%Y-%m-%d"
+
+#: plugins/clock/clock-fuzzy.c:79
+msgid "Night"
+msgstr "Note"
+
+#: plugins/clock/clock-fuzzy.c:80
+msgid "Early morning"
+msgstr "Matina presto"
+
+#: plugins/clock/clock-fuzzy.c:81
+msgid "Morning"
+msgstr "Matina"
+
+#: plugins/clock/clock-fuzzy.c:82
+msgid "Almost noon"
+msgstr "Verso mezodì"
+
+#: plugins/clock/clock-fuzzy.c:83
+msgid "Noon"
+msgstr "Mezodì"
+
+#: plugins/clock/clock-fuzzy.c:84
+msgid "Afternoon"
+msgstr "Dopo mezodì"
+
+#: plugins/clock/clock-fuzzy.c:85
+msgid "Evening"
+msgstr "Verso sera"
+
+#: plugins/clock/clock-fuzzy.c:86
+msgid "Late evening"
+msgstr "Note"
+
+#. I18N: %0 will be replaced with the preceding hour, %1 with
+#. * the comming hour
+#: plugins/clock/clock-fuzzy.c:92
+#, no-c-format
+msgid "%0 o'clock"
+msgstr "%0 boti"
+
+#: plugins/clock/clock-fuzzy.c:93
+#, no-c-format
+msgid "five past %0"
+msgstr "%0 e sìncue"
+
+#: plugins/clock/clock-fuzzy.c:94
+#, no-c-format
+msgid "ten past %0"
+msgstr "%0 e dieze"
+
+#: plugins/clock/clock-fuzzy.c:95
+#, no-c-format
+msgid "quarter past %0"
+msgstr "%0 e un cuarto"
+
+#: plugins/clock/clock-fuzzy.c:96
+#, no-c-format
+msgid "twenty past %0"
+msgstr "%0 e vinti"
+
+#: plugins/clock/clock-fuzzy.c:97
+#, no-c-format
+msgid "twenty five past %0"
+msgstr "%0 e vintisìncue"
+
+#: plugins/clock/clock-fuzzy.c:98
+#, no-c-format
+msgid "half past %0"
+msgstr "%0 e meza"
+
+#: plugins/clock/clock-fuzzy.c:99
+#, no-c-format
+msgid "twenty five to %1"
+msgstr "%0 manca vintisìncue"
+
+#: plugins/clock/clock-fuzzy.c:100
+#, no-c-format
+msgid "twenty to %1"
+msgstr "%1 manca vinti"
+
+#: plugins/clock/clock-fuzzy.c:101
+#, no-c-format
+msgid "quarter to %1"
+msgstr "%1 manca un cuarto"
+
+#: plugins/clock/clock-fuzzy.c:102
+#, no-c-format
+msgid "ten to %1"
+msgstr "%1 manca dieze"
+
+#: plugins/clock/clock-fuzzy.c:103
+#, no-c-format
+msgid "five to %1"
+msgstr "%1 manca sìncue"
+
+#: plugins/clock/clock-fuzzy.c:104
+#, no-c-format
+msgid "%1 o'clock"
+msgstr "%1 boti"
+
+#. I18N: some languages have a singular form for the first hour,
+#. * other languages should just use the same strings as above
+#: plugins/clock/clock-fuzzy.c:110
+#, no-c-format
+msgctxt "one"
+msgid "%0 o'clock"
+msgstr "%0 boti"
+
+#: plugins/clock/clock-fuzzy.c:111
+#, no-c-format
+msgctxt "one"
+msgid "five past %0"
+msgstr "%0 e sìncue"
+
+#: plugins/clock/clock-fuzzy.c:112
+#, no-c-format
+msgctxt "one"
+msgid "ten past %0"
+msgstr "%0 e dieze"
+
+#: plugins/clock/clock-fuzzy.c:113
+#, no-c-format
+msgctxt "one"
+msgid "quarter past %0"
+msgstr "%0 e un cuarto"
+
+#: plugins/clock/clock-fuzzy.c:114
+#, no-c-format
+msgctxt "one"
+msgid "twenty past %0"
+msgstr "%0 e vinti"
+
+#: plugins/clock/clock-fuzzy.c:115
+#, no-c-format
+msgctxt "one"
+msgid "twenty five past %0"
+msgstr "%0 e vintisìncue"
+
+#: plugins/clock/clock-fuzzy.c:116
+#, no-c-format
+msgctxt "one"
+msgid "half past %0"
+msgstr "%0 e meza"
+
+#: plugins/clock/clock-fuzzy.c:117
+#, no-c-format
+msgctxt "one"
+msgid "twenty five to %1"
+msgstr "%0 manca vintisìncue"
+
+#: plugins/clock/clock-fuzzy.c:118
+#, no-c-format
+msgctxt "one"
+msgid "twenty to %1"
+msgstr "%1 manca vinti"
+
+#: plugins/clock/clock-fuzzy.c:119
+#, no-c-format
+msgctxt "one"
+msgid "quarter to %1"
+msgstr "%1 manca un cuarto"
+
+#: plugins/clock/clock-fuzzy.c:120
+#, no-c-format
+msgctxt "one"
+msgid "ten to %1"
+msgstr "%1 manca dieze"
+
+#: plugins/clock/clock-fuzzy.c:121
+#, no-c-format
+msgctxt "one"
+msgid "five to %1"
+msgstr "%1 manca sìncue"
+
+#: plugins/clock/clock-fuzzy.c:122
+#, no-c-format
+msgctxt "one"
+msgid "%1 o'clock"
+msgstr "%1 boti"
+
+#: plugins/clock/clock-fuzzy.c:126
+msgctxt "am"
+msgid "one"
+msgstr "Un boto"
+
+#: plugins/clock/clock-fuzzy.c:127
+msgctxt "am"
+msgid "two"
+msgstr "Du boti"
+
+#: plugins/clock/clock-fuzzy.c:128
+msgctxt "am"
+msgid "three"
+msgstr "Trè boti"
+
+#: plugins/clock/clock-fuzzy.c:129
+msgctxt "am"
+msgid "four"
+msgstr "Cuatro boti"
+
+#: plugins/clock/clock-fuzzy.c:130
+msgctxt "am"
+msgid "five"
+msgstr "Sìncue boti"
+
+#: plugins/clock/clock-fuzzy.c:131
+msgctxt "am"
+msgid "six"
+msgstr "Sie boti"
+
+#: plugins/clock/clock-fuzzy.c:132
+msgctxt "am"
+msgid "seven"
+msgstr "Sete boti"
+
+#: plugins/clock/clock-fuzzy.c:133
+msgctxt "am"
+msgid "eight"
+msgstr "Oto boti"
+
+#: plugins/clock/clock-fuzzy.c:134
+msgctxt "am"
+msgid "nine"
+msgstr "Nove boti"
+
+#: plugins/clock/clock-fuzzy.c:135
+msgctxt "am"
+msgid "ten"
+msgstr "Dieze boti"
+
+#: plugins/clock/clock-fuzzy.c:136
+msgctxt "am"
+msgid "eleven"
+msgstr "Ùndaze"
+
+#. I18N: 12 AM is midnight
+#: plugins/clock/clock-fuzzy.c:138
+msgctxt "am"
+msgid "twelve"
+msgstr "Dódaze"
+
+#: plugins/clock/clock-fuzzy.c:142
+msgctxt "pm"
+msgid "one"
+msgstr "Un boto"
+
+#: plugins/clock/clock-fuzzy.c:143
+msgctxt "pm"
+msgid "two"
+msgstr "Du boti"
+
+#: plugins/clock/clock-fuzzy.c:144
+msgctxt "pm"
+msgid "three"
+msgstr "Trè boti"
+
+#: plugins/clock/clock-fuzzy.c:145
+msgctxt "pm"
+msgid "four"
+msgstr "Cuatro boti"
+
+#: plugins/clock/clock-fuzzy.c:146
+msgctxt "pm"
+msgid "five"
+msgstr "Sìncue boti"
+
+#: plugins/clock/clock-fuzzy.c:147
+msgctxt "pm"
+msgid "six"
+msgstr "Sie boti"
+
+#: plugins/clock/clock-fuzzy.c:148
+msgctxt "pm"
+msgid "seven"
+msgstr "Sete boti"
+
+#: plugins/clock/clock-fuzzy.c:149
+msgctxt "pm"
+msgid "eight"
+msgstr "Oto boti"
+
+#: plugins/clock/clock-fuzzy.c:150
+msgctxt "pm"
+msgid "nine"
+msgstr "Nove boti"
+
+#: plugins/clock/clock-fuzzy.c:151
+msgctxt "pm"
+msgid "ten"
+msgstr "Dieze boti"
+
+#: plugins/clock/clock-fuzzy.c:152
+msgctxt "pm"
+msgid "eleven"
+msgstr "Ùndaze"
+
+#. I18N: 12 PM is noon
+#: plugins/clock/clock-fuzzy.c:154
+msgctxt "pm"
+msgid "twelve"
+msgstr "Dódaze"
+
+#: plugins/clock/clock.desktop.in.in:5
+msgid "What time is it?"
+msgstr "Che ora ze?"
+
+#: plugins/directorymenu/directorymenu.c:298
+#: plugins/directorymenu/directorymenu.desktop.in.in:4
+#: plugins/directorymenu/directorymenu-dialog.glade:18
+msgid "Directory Menu"
+msgstr "Menù de łe cartełe"
+
+#: plugins/directorymenu/directorymenu.c:696
+#, c-format
+msgid "Failed to launch application \"%s\""
+msgstr "No se ga podesto inisiar ła aplicasion \"%s\""
+
+#: plugins/directorymenu/directorymenu.c:727
+#, c-format
+msgid "Failed to query content type for \"%s\""
+msgstr "No se ga podesto determenar el tipo de contegnuo de \"%s\""
+
+#: plugins/directorymenu/directorymenu.c:736
+#, c-format
+msgid "No default application found for \"%s\""
+msgstr "No se ga podesto catar ła aplicasion predetermenada par «%s»"
+
+#: plugins/directorymenu/directorymenu.c:752
+#, c-format
+msgid "Failed to launch default application for \"%s\""
+msgstr "No se ga podesto inisiar ła aplicasion determenada par «%s»"
+
+#: plugins/directorymenu/directorymenu.c:846
+#, c-format
+msgid "Failed to execute the preferred application for category \"%s\""
+msgstr "No se ga podesto inisiar ła aplicasion preferia par ła categoria «%s»"
+
+#: plugins/directorymenu/directorymenu.c:927
+msgid "Create New Folder"
+msgstr "Crear na carteła nova"
+
+#: plugins/directorymenu/directorymenu.c:932
+msgid "Create New Text Document"
+msgstr "Crear un novo documento"
+
+#: plugins/directorymenu/directorymenu.c:938
+msgid "C_reate"
+msgstr "C_rear"
+
+#: plugins/directorymenu/directorymenu.c:938
+msgid "Create & _Open"
+msgstr "Crear e vèrzare"
+
+#: plugins/directorymenu/directorymenu.c:951
+msgid "Enter the new name:"
+msgstr "El scriva el nome novo:"
+
+#: plugins/directorymenu/directorymenu.c:987
+#, c-format
+msgid "Failed to create folder: %s"
+msgstr "No se ga podesto crear ła carteła: %s"
+
+#: plugins/directorymenu/directorymenu.c:1069
+msgid "Open Folder"
+msgstr "Vèrzare carteła"
+
+#: plugins/directorymenu/directorymenu.c:1083
+msgid "Open in Terminal"
+msgstr "Vèrzare inte un terminałe"
+
+#: plugins/directorymenu/directorymenu.c:1097
+msgid "Create Folder..."
+msgstr "Crear ła carteła..."
+
+#: plugins/directorymenu/directorymenu.c:1111
+msgid "Create Text Document..."
+msgstr "Crear el documento de testo..."
+
+#: plugins/directorymenu/directorymenu.desktop.in.in:5
+msgid "Show a directory tree in a menu"
+msgstr "Mostrar l'àlbara de cartełe adentro de un menù"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:99
+msgid "Select A Directory"
+msgstr "Ełèzar na carteła"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:135
+msgid "_Base Directory:"
+msgstr "Carteła _baze:"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:179
+msgid "Show 'New Text _Document'"
+msgstr "Mostrar «Novo _documento de testo»"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:194
+msgid "Show '_New Folder'"
+msgstr "Mostrar «Nova carteła»"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:209
+msgid "Show 'Open in _Terminal'"
+msgstr "Mostrar «Verzare inte un terminałe»"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:224
+msgid "Show '_Open _Folder'"
+msgstr "Mostrar «_Vèrzare ła carteła»"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:243
+msgid "Menu"
+msgstr "Menù"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:272
+msgid "Show _hidden files"
+msgstr "Mostrar i file _sconti"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:289
+msgid ""
+"Enter a list of patterns that will be used to determine which files are "
+"visible in a directory. If you specify more than one pattern here, the list "
+"items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr ""
+"El scriva na lista de patterns par determenar cuałi file i ga da vegner "
+"mostrai adentro de na carteła. Se el spesìfega pì de un pattern, se ga da "
+"separar i ełementi de ła lista par un ponto e vìrgoła (par ezénpio, "
+"*.txt;*.doc)."
+
+#: plugins/directorymenu/directorymenu-dialog.glade:301
+msgid "_File Pattern:"
+msgstr "_Pattern de file:"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:316
+#: plugins/tasklist/tasklist-dialog.glade:492
+#: plugins/windowmenu/windowmenu-dialog.glade:260
+msgid "Filtering"
+msgstr "Filtri"
+
+#: plugins/launcher/launcher.c:431
+msgid "Open launcher menu"
+msgstr "Vèrzare el menù de l'inisiador"
+
+#: plugins/launcher/launcher.c:1615
+msgid "Unnamed Item"
+msgstr "Ełemento sensa nome"
+
+#: plugins/launcher/launcher.c:1817
+msgid "No items"
+msgstr "Sensa ełementi"
+
+#: plugins/launcher/launcher-dialog.c:781
+msgid "Failed to open desktop item editor"
+msgstr "No se ga podesto vèrzare el editor de ełementi del desktop"
+
+#: plugins/launcher/launcher-dialog.c:842
+msgid "If you delete an item, it will be permanently removed"
+msgstr "Se el ełìmena un ełemento el vegnarà ełiminà de forma permanente"
+
+#: plugins/launcher/launcher-dialog.c:852
+msgid "Unnamed item"
+msgstr "Ełemento sensa nome"
+
+#: plugins/launcher/launcher-dialog.c:854
+#, c-format
+msgid "Are you sure you want to remove \"%s\"?"
+msgstr "Seguro de vołer ełiminar «%s»?"
+
+#: plugins/launcher/launcher-dialog.glade:30
+msgid "Default"
+msgstr "Predetermenà"
+
+#: plugins/launcher/launcher-dialog.glade:33
+msgid "North"
+msgstr "Nord"
+
+#: plugins/launcher/launcher-dialog.glade:36
+msgid "West"
+msgstr "Òvest"
+
+#: plugins/launcher/launcher-dialog.glade:39
+msgid "East"
+msgstr "Est"
+
+#: plugins/launcher/launcher-dialog.glade:42
+msgid "South"
+msgstr "Sud"
+
+#: plugins/launcher/launcher-dialog.glade:45
+msgid "Inside Button"
+msgstr "Adentro del boton"
+
+#: plugins/launcher/launcher-dialog.glade:96
+msgid "Up"
+msgstr "Par sora"
+
+#: plugins/launcher/launcher-dialog.glade:105
+msgid "Down"
+msgstr "Par baso"
+
+#: plugins/launcher/launcher-dialog.glade:120
+msgid "_Edit Item"
+msgstr "_Modifegar el ełemento"
+
+#: plugins/launcher/launcher-dialog.glade:130
+msgid "D_elete Item"
+msgstr "_Ełiminar el ełemento"
+
+#: plugins/launcher/launcher-dialog.glade:146
+msgid "Add Appli_cation"
+msgstr "_Zontar na aplicasion"
+
+#: plugins/launcher/launcher-dialog.glade:162
+msgid "New _Application"
+msgstr "Nova _aplicasion"
+
+#: plugins/launcher/launcher-dialog.glade:172
+msgid "New _Link"
+msgstr "_Novo cołegamento"
+
+#: plugins/launcher/launcher-dialog.glade:205
+#: plugins/launcher/launcher-dialog.glade:599
+msgid "Add one or more existing items to the launcher"
+msgstr "Zontar uno o pì ełementi inisiadori"
+
+#: plugins/launcher/launcher-dialog.glade:379
+#: plugins/launcher/launcher.desktop.in.in:4
+msgid "Launcher"
+msgstr "Inisiador"
+
+#: plugins/launcher/launcher-dialog.glade:579
+msgid "Delete the currently selected item"
+msgstr "Ełiminar el ełemento ełezesto"
+
+#: plugins/launcher/launcher-dialog.glade:619
+msgid "Add a new empty item"
+msgstr "Zontar un novo ełemento"
+
+#: plugins/launcher/launcher-dialog.glade:639
+msgid "Add a new hyperlink"
+msgstr "Zontar un ipercołegamento novo"
+
+#: plugins/launcher/launcher-dialog.glade:682
+msgid "Disable t_ooltips"
+msgstr "_Dezativar łe informasion emerzenti"
+
+#: plugins/launcher/launcher-dialog.glade:686
+msgid ""
+"Select this option to disable the tooltips when moving over the panel button"
+" or menu items."
+msgstr ""
+"Ełèzar sta opsion par dezativar l'informasion emerzente sora del boton del "
+"paneło o i ełementi del menù."
+
+#: plugins/launcher/launcher-dialog.glade:698
+msgid "Show _label instead of icon"
+msgstr "Mostrar _targheta al posto de icone"
+
+#: plugins/launcher/launcher-dialog.glade:713
+msgid "Show last _used item in panel"
+msgstr "_Mostrar el ùltemo ełemento doparà"
+
+#: plugins/launcher/launcher-dialog.glade:717
+msgid "Select this option to move the clicked menu item to the panel."
+msgstr "Ełèzar sta opsion par móvare el ełemento del menù ativà."
+
+#: plugins/launcher/launcher-dialog.glade:736
+msgid "_Arrow button position:"
+msgstr "_Pozision de ła frécia"
+
+#: plugins/launcher/launcher-dialog.glade:779
+msgid "Advanced"
+msgstr "Opsion avansae"
+
+#: plugins/launcher/launcher.desktop.in.in:5
+msgid "Program launcher with optional menu"
+msgstr "Inisiador de programi co un menù opsionałe"
+
+#: plugins/pager/pager.c:705 plugins/pager/pager-dialog.glade:64
+msgid "Workspace _Settings..."
+msgstr "Configurar i _spasi de lavoro..."
+
+#: plugins/pager/pager.c:805
+msgid "Unable to open the workspace settings"
+msgstr "No se ga podesto vèrzar ła configurasion de łe àree de lavoro"
+
+#: plugins/pager/pager-buttons.c:596 plugins/windowmenu/windowmenu.c:928
+#, c-format
+msgid "Workspace %d"
+msgstr "Spàsio de lavoro %d"
+
+#: plugins/pager/pager-dialog.glade:15
+msgid "Buttons"
+msgstr "Botoni"
+
+#: plugins/pager/pager-dialog.glade:19
+msgid "Miniature View"
+msgstr "Vista de miniatura"
+
+#: plugins/pager/pager-dialog.glade:48 plugins/pager/pager.desktop.in.in:4
+msgid "Workspace Switcher"
+msgstr "Ełetor de spasi de lavoro"
+
+#: plugins/pager/pager-dialog.glade:131
+msgid "Number of _rows:"
+msgstr "_Nùmaro de righe:"
+
+#: plugins/pager/pager-dialog.glade:197
+msgid "Show workspace number"
+msgstr "Mostrar el nùmaro del spàsio de lavoro"
+
+#: plugins/pager/pager-dialog.glade:210
+msgid "Switch workspaces using the mouse wheel"
+msgstr "Canbiar de àrea de lavoro co ła rodeła del mouse"
+
+#: plugins/pager/pager-dialog.glade:224
+msgid "Wrap around workspaces"
+msgstr "Móvarse intrà i spasi de lavoro"
+
+#: plugins/pager/pager-dialog.glade:241
+msgid "<b>Appearance</b>"
+msgstr "<b>Aparensa</b>"
+
+#: plugins/pager/pager.desktop.in.in:5
+msgid "Switch between virtual desktops"
+msgstr "Canbiar intrà desktop virtuałi"
+
+#: plugins/separator/separator-dialog.glade:23
+msgid "Transparent"
+msgstr "Trasparente"
+
+#: plugins/separator/separator-dialog.glade:29
+msgid "Handle"
+msgstr "Manìlia"
+
+#: plugins/separator/separator-dialog.glade:32
+msgid "Dots"
+msgstr "Ponti"
+
+#: plugins/separator/separator-dialog.glade:156
+msgid "_Expand"
+msgstr "_Espàndare"
+
+#: plugins/separator/separator.desktop.in.in:5
+msgid "Adds a separator or space between panel items"
+msgstr "Zonta un separador o un spàsio intrà i ełementi del paneło"
+
+#: plugins/showdesktop/showdesktop.c:321
+msgid "Restore the minimized windows"
+msgstr "Restaurar łe fenestre minimizae"
+
+#: plugins/showdesktop/showdesktop.c:323
+msgid "Minimize all open windows and show the desktop"
+msgstr "Minimizar tute łe fenestre e mostrar el desktop"
+
+#: plugins/showdesktop/showdesktop.c:326
+#: plugins/showdesktop/showdesktop-dialog.glade:18
+#: plugins/showdesktop/showdesktop.desktop.in.in:4
+msgid "Show Desktop"
+msgstr "Mostrar el desktop"
+
+#: plugins/showdesktop/showdesktop-dialog.glade:92
+msgid "_Show on mouse hover"
+msgstr "_Mostrar co se ghe pasa el mouse insima"
+
+#: plugins/showdesktop/showdesktop-dialog.glade:113
+#: plugins/systray/sn-dialog.glade:300
+msgid "Behavior"
+msgstr "Conportamento"
+
+#: plugins/showdesktop/showdesktop.desktop.in.in:5
+msgid "Hide all windows and show the desktop"
+msgstr "Minimizar tute łe fenestre e mostrar el desktop"
+
+#: plugins/systray/sn-dialog.c:416
+msgid "Clear"
+msgstr "Descanceła"
+
+#: plugins/systray/sn-dialog.c:421
+msgid "Are you sure you want to clear the list of known items?"
+msgstr "Seguro de vołer descancełar ła lista de ełementi conosesti?"
+
+#: plugins/systray/sn-dialog.glade:48
+msgid "Status Tray Items"
+msgstr "Ełementi de l'àrea de łe notìfeghe"
+
+#: plugins/systray/sn-dialog.glade:80
+msgid "C_lear Known Items"
+msgstr "_Descanceła ełementi conosesti"
+
+#: plugins/systray/sn-dialog.glade:84
+msgid "Resets the list of items and their visibility settings"
+msgstr "Rezeta ła lista de ełementi e łe so configurasion de vizibiłità"
+
+#: plugins/systray/sn-dialog.glade:144
+msgid "_Fixed icon size (pixels):"
+msgstr "_Grandesa fisa de l'icona (pixel):"
+
+#: plugins/systray/sn-dialog.glade:185
+msgid "Adjust size _automatically"
+msgstr "_Justa ła grandesa automategamente"
+
+#: plugins/systray/sn-dialog.glade:213
+msgid "Icons"
+msgstr "Icone"
+
+#: plugins/systray/sn-dialog.glade:246
+msgid "Arrange _items in a single row"
+msgstr "Organizar i _ełementi inte na soła riga"
+
+#: plugins/systray/sn-dialog.glade:250
+msgid "If enabled, ensure that the items are laid out in a single row"
+msgstr "Se ła vien ativada, i ełementi i se inlinearà inte na riga soła"
+
+#: plugins/systray/sn-dialog.glade:262
+msgid "_Hide items by default"
+msgstr "_Scóndar i ełementi cofà asion predetermenada"
+
+#: plugins/systray/sn-dialog.glade:266
+msgid "When enabled, all new items will be marked as \"Hidden\""
+msgstr "Se ła vien ativada, i novi ełementi i vegnarà marcai cofà sconti"
+
+#: plugins/systray/sn-dialog.glade:278
+msgid "_Square items"
+msgstr "_Ełementi cuadrai"
+
+#: plugins/systray/sn-dialog.glade:282
+msgid "Item buttons will take a square when it's possible"
+msgstr "I botoni dei ełementi i adotarà na forma cuadrada co ze pusìbiłe"
+
+#: plugins/systray/sn-dialog.glade:386 plugins/systray/sn-dialog.glade:618
+msgid "Item"
+msgstr "Ełemento"
+
+#: plugins/systray/sn-dialog.glade:398 plugins/systray/sn-dialog.glade:630
+msgid "Hidden"
+msgstr "Sconto"
+
+#: plugins/systray/sn-dialog.glade:426 plugins/systray/sn-dialog.glade:658
+msgid "Move the selected item one row up"
+msgstr "Ełevar de na riga el ełemento ełezesto"
+
+#: plugins/systray/sn-dialog.glade:446 plugins/systray/sn-dialog.glade:678
+msgid "Move the selected item one row down"
+msgstr "Sbasar de na riga el ełemento ełezesto"
+
+#: plugins/systray/sn-dialog.glade:479 plugins/systray/sn-dialog.glade:711
+msgid "Known Items"
+msgstr "Ełementi conosesti"
+
+#: plugins/systray/sn-dialog.glade:512
+msgid "_Menu is primary action"
+msgstr "Ła asion prinsipałe ła ze el _menù"
+
+#: plugins/systray/sn-dialog.glade:516
+msgid "Left click will always display the menu for item"
+msgstr "El click sanco senpre el mostrarà el menù de l'ełemento"
+
+#: plugins/systray/sn-dialog.glade:528
+msgid "_Request symbolic icons"
+msgstr "_Dimandar icone sinbòłeghe"
+
+#: plugins/systray/sn-dialog.glade:532
+msgid "Load symbolic icons if available"
+msgstr "Cargar łe icone sinbòłeghe se łe ze dispunìbiłi"
+
+#: plugins/systray/sn-dialog.glade:550
+msgid "Features"
+msgstr "Caraterìsteghe"
+
+#: plugins/systray/sn-dialog.glade:566
+msgid "Status Notifiers"
+msgstr "Notifegasion de stato"
+
+#: plugins/systray/sn-dialog.glade:720
+msgid "Systray Icons"
+msgstr "Icone de l'àrea de notìfega"
+
+#: plugins/systray/systray.c:149
+msgid "Unable to start the notification area"
+msgstr "No se ga podesto inisiar l'àrea de notìfega"
+
+#. create fake error and show it
+#: plugins/systray/systray.c:409
+msgid ""
+"Most likely another widget took over the function of a notification area. "
+"This area will be unused."
+msgstr ""
+"Probabilmente un'altra estension ła funsiona cofà àrea de notìfega. Sta àrea"
+" duplegada no ła vegnarà doparada."
+
+#: plugins/systray/systray.c:411
+msgid "The notification area lost selection"
+msgstr "L'àrea de notìfega ła ga perdesto l'ełesion"
+
+#: plugins/systray/systray-manager.c:386
+#, c-format
+msgid "Failed to acquire manager selection for screen %d"
+msgstr "No se ga podesto acuizir el zestor de l'ełesion par el schermo %d"
+
+#: plugins/systray/systray.desktop.in.in:5
+msgid "Status Tray Plugin"
+msgstr "Estension de l'àrea de notìfega"
+
+#: plugins/systray/systray.desktop.in.in:6
+msgid ""
+"Provides status notifier items (application indicators) and legacy systray "
+"items"
+msgstr ""
+"El ne da cosiensa de notìfeghe de stato (notìfeghe de łe aplicasion) e "
+"ełementi de l'àrea del sistema ereditai"
+
+#: plugins/tasklist/tasklist-dialog.glade:23
+msgid "Nothing"
+msgstr "Dezativar"
+
+#: plugins/tasklist/tasklist-dialog.glade:26
+msgid "Close Window"
+msgstr "Sarar ła fenestra"
+
+#: plugins/tasklist/tasklist-dialog.glade:29
+msgid "Minimize Window"
+msgstr "Minimizar ła fenestra"
+
+#: plugins/tasklist/tasklist-dialog.glade:32
+msgid "New Instance"
+msgstr "Nova istansa"
+
+#: plugins/tasklist/tasklist-dialog.glade:43
+msgid "Timestamp"
+msgstr "Marca tenporałe"
+
+#: plugins/tasklist/tasklist-dialog.glade:46
+msgid "Group title and timestamp"
+msgstr "Tìtuło del grupo e marca de tenpo"
+
+#: plugins/tasklist/tasklist-dialog.glade:49
+msgid "Window title"
+msgstr "Tìtuło de ła fenestra"
+
+#: plugins/tasklist/tasklist-dialog.glade:52
+msgid "Group title and window title"
+msgstr "Tìtuło del grupo e tìtuło de ła fenestra"
+
+#: plugins/tasklist/tasklist-dialog.glade:55
+msgid "None, allow drag-and-drop"
+msgstr "Nisuna, permeti de tore e dasar"
+
+#: plugins/tasklist/tasklist-dialog.glade:61
+#: plugins/tasklist/tasklist.desktop.in.in:4
+msgid "Window Buttons"
+msgstr "Botoni de łe fenestre"
+
+#: plugins/tasklist/tasklist-dialog.glade:143
+msgid "Show button _labels"
+msgstr "Mostrar łe _targhete dei botoni"
+
+#: plugins/tasklist/tasklist-dialog.glade:159
+msgid "Show _flat buttons"
+msgstr "Mostrar i botoni _piani"
+
+#: plugins/tasklist/tasklist-dialog.glade:175
+msgid "Show _handle"
+msgstr "Mostrar łe _manìlie"
+
+#: plugins/tasklist/tasklist-dialog.glade:191
+msgid "Show _tooltips"
+msgstr "Mostrar _informasion dei instrumenti"
+
+#: plugins/tasklist/tasklist-dialog.glade:214
+msgid "Sorting _order:"
+msgstr "_Órdane:"
+
+#: plugins/tasklist/tasklist-dialog.glade:297
+msgid "Mi_ddle click action:"
+msgstr "Asion del click sentrałe"
+
+#: plugins/tasklist/tasklist-dialog.glade:335
+msgid "_Group windows by application"
+msgstr "_Ingrupar fenestre de ła istesa aplicasion"
+
+#: plugins/tasklist/tasklist-dialog.glade:351
+msgid "Restore minimized windows to current _workspace"
+msgstr "_Restaurar łe fenestre minimizae inte el spàsio de lavoro ativo"
+
+#: plugins/tasklist/tasklist-dialog.glade:367
+msgid "D_raw window frame when hovering a button"
+msgstr "_Dizegnar el contorno de ła fenestra co se ghe pasa insima al boton"
+
+#: plugins/tasklist/tasklist-dialog.glade:383
+msgid "_Switch windows using the mouse wheel"
+msgstr "_Canbiar de fenestra co ła rodeła del mouse"
+
+#: plugins/tasklist/tasklist-dialog.glade:405
+msgid "Behaviour"
+msgstr "Conportamento"
+
+#: plugins/tasklist/tasklist-dialog.glade:438
+#: plugins/windowmenu/windowmenu-dialog.glade:239
+msgid "Show windows from _all workspaces"
+msgstr "Mostrar łe fenestre de _tuti i spasi de lavoro"
+
+#: plugins/tasklist/tasklist-dialog.glade:454
+msgid "Show windows from all mo_nitors"
+msgstr "Mostrar łe finestre de tuti i sch_ermi"
+
+#: plugins/tasklist/tasklist-dialog.glade:470
+msgid "Show only _minimized windows"
+msgstr "Mostrar solché łe fenestre minimizae"
+
+#: plugins/tasklist/tasklist-widget.c:3114
+#, c-format
+msgid "Unable to start new instance of '%s'"
+msgstr "No se połe inisiar na nova istansa de «%s»"
+
+#: plugins/tasklist/tasklist-widget.c:3141
+msgid "Launch New Instance"
+msgstr "Inìsia na nova istansa"
+
+#: plugins/tasklist/tasklist-widget.c:3885
+msgid "Mi_nimize All"
+msgstr "Minimiza tute łe fenestre"
+
+#: plugins/tasklist/tasklist-widget.c:3892
+msgid "Un_minimize All"
+msgstr "Restàurta tute łe fenestre"
+
+#: plugins/tasklist/tasklist-widget.c:3899
+msgid "Ma_ximize All"
+msgstr "_Masimiza tute łe fenestre"
+
+#: plugins/tasklist/tasklist-widget.c:3906
+msgid "_Unmaximize All"
+msgstr "_Demasimiza tute łe fenestre"
+
+#: plugins/tasklist/tasklist-widget.c:3917
+msgid "_Close All"
+msgstr "_Sara tute łe fenestre"
+
+#: plugins/tasklist/tasklist.desktop.in.in:5
+msgid "Switch between open windows using buttons"
+msgstr "_Canbiar de fenestra co i botoni"
+
+#: plugins/windowmenu/windowmenu.c:729
+msgid "Desktop"
+msgstr "Desktop"
+
+#: plugins/windowmenu/windowmenu.c:1323
+msgid "No Windows"
+msgstr "Sensa fenestre"
+
+#: plugins/windowmenu/windowmenu.c:1338
+msgid "Urgent Windows"
+msgstr "Fenestre urzenti"
+
+#: plugins/windowmenu/windowmenu.c:1383
+msgid "Add Workspace"
+msgstr "Zontar spàsio de laoro"
+
+#: plugins/windowmenu/windowmenu.c:1405
+#, c-format
+msgid "Remove Workspace \"%s\""
+msgstr "Ełiminar el spàsio de lavoro «%s»"
+
+#: plugins/windowmenu/windowmenu.c:1407
+#, c-format
+msgid "Remove Workspace %d"
+msgstr "Ełiminar el spàsio de lavoro «%d»"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:23
+msgid "Icon"
+msgstr "Icona"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:26
+msgid "Arrow"
+msgstr "Frécia"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:32
+#: plugins/windowmenu/windowmenu.desktop.in.in:4
+msgid "Window Menu"
+msgstr "Menù de łe fenestre"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:119
+msgid "Button layout:"
+msgstr "Dizegno del boton"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:155
+msgid "Show workspace a_ctions"
+msgstr "Mostrar łe _asion inte i spasi de lavoro"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:170
+msgid "Show workspace _names"
+msgstr "Mostrar i _nomi inte i spasi de lavoro"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:185
+msgid "Enable _urgency notification"
+msgstr "Ativar łe notì_feghe inportanti"
+
+#: plugins/windowmenu/windowmenu.desktop.in.in:5
+msgid "Switch between open windows using a menu"
+msgstr "Canbiar de fenestra co un menù"
