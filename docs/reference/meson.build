@@ -12,6 +12,15 @@ if get_option('gtk-doc')
     configuration: conf_data,
   )
 
+  configure_file(
+    configuration: configuration_data({
+      'COPYRIGHT_YEAR': copyright_year,
+    }),
+    input: 'libxfce4panel-docs.xml.in',
+    output: 'libxfce4panel-docs.xml',
+    install: false,
+  )
+
   gnome.gtkdoc(
     libxfce4panel_doc_name,
     src_dir: 'libxfce4panel',
@@ -21,7 +30,7 @@ if get_option('gtk-doc')
       'xfce-panel-plugin-provider.h',
       'libxfce4panel-enum-types.h',
     ],
-    main_xml: 'libxfce4panel-docs.xml',
+    main_xml: meson.project_build_root() / 'docs' / 'reference' / 'libxfce4panel-docs.xml',
     dependencies: libxfce4panel_dep,
     gobject_typesfile: 'libxfce4panel.types',
     install: true,
