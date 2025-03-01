@@ -15,7 +15,7 @@ m4_define([copyright_year], [2025])
 XDT_VERSION_INIT([4.20.0], [git])
 
 dnl minimum required versions
-m4_define([glib_minimum_version], [2.72.0])
+m4_define([glib_minimum_version], [2.74.0])
 m4_define([gtk_minimum_version], [3.24.0])
 m4_define([cairo_minimum_version], [1.16])
 m4_define([libxfce4util_minimum_version], [4.17.2])

@@ -843,9 +843,17 @@ panel_itembar_add (GtkContainer *container,
 
 
 
-/* for lack of being able to find the reason why extra references accumulate, let's
+/*
+ * For lack of being able to find the reason why extra references accumulate, let's
  * eliminate them after the item has been removed from the panel and all priority
- * operations have been performed, until triggering the destruction of the item */
+ * operations have been performed, until triggering the destruction of the item.
+ * As a reminder: references accumulate particularly when plugins are moved (simply
+ * via the preferences dialog, no need for dnd). So by calling panel_itembar_reorder_child(),
+ * which does nothing in particular. So it could be that the problem is internal to GTK,
+ * and/or that we're implementing something wrong in this container, but it's not just
+ * a matter of a missing g_object_unref() somewhere: the number of accumulated references
+ * can quickly rise to several dozen.
+ */
 static gboolean
 panel_itembar_unref (gpointer data)
 {
@@ -855,12 +863,16 @@ panel_itembar_unref (gpointer data)
 
   /* should always be true if there were no memory leak, except in the case below */
   if (*provider == NULL)
-    return FALSE;
+    {
+      g_free (provider);
+      return FALSE;
+    }
 
   /* leave if the widget was reparented (drag and drop should be the only case) */
   if (gtk_widget_get_parent (GTK_WIDGET (*provider)) != NULL)
     {
       g_signal_handlers_disconnect_by_func (*provider, gtk_widget_destroyed, provider);
+      g_free (provider);
       return FALSE;
     }
 
@@ -877,6 +889,7 @@ panel_itembar_unref (gpointer data)
                "%s-%d: number of extra references removed to release the plugin: %d",
                name, id, n);
   g_free (name);
+  g_free (provider);
 
   return FALSE;
 }
@@ -890,8 +903,6 @@ panel_itembar_remove (GtkContainer *container,
   PanelItembarChild *child;
   PanelItembar *itembar = PANEL_ITEMBAR (container);
 
-  static GtkWidget *swidget;
-
   panel_return_if_fail (PANEL_IS_ITEMBAR (itembar));
   panel_return_if_fail (GTK_IS_WIDGET (widget));
   panel_return_if_fail (gtk_widget_get_parent (widget) == GTK_WIDGET (container));
@@ -900,11 +911,13 @@ panel_itembar_remove (GtkContainer *container,
   child = panel_itembar_get_child (itembar, widget);
   if (G_LIKELY (child != NULL))
     {
+      GtkWidget **provider = g_new (GtkWidget *, 1);
+
       itembar->children = g_slist_remove (itembar->children, child);
 
-      swidget = widget;
-      g_signal_connect (widget, "destroy", G_CALLBACK (gtk_widget_destroyed), &swidget);
-      g_idle_add (panel_itembar_unref, &swidget);
+      *provider = widget;
+      g_signal_connect (widget, "destroy", G_CALLBACK (gtk_widget_destroyed), provider);
+      g_idle_add (panel_itembar_unref, provider);
 
       gtk_widget_unparent (widget);
 
