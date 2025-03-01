@@ -1663,8 +1663,8 @@ panel_application_remove_window (PanelApplication *application,
   itembar = gtk_bin_get_child (GTK_BIN (window));
   gtk_container_foreach (GTK_CONTAINER (itembar), panel_application_plugin_remove, NULL);
 
-  /* destroy */
-  gtk_widget_destroy (GTK_WIDGET (window));
+  /* destroy window after all plugins are released, see panel_itembar_unref() */
+  g_idle_add_once ((GSourceOnceFunc) gtk_widget_destroy, window);
 
   /* remove the panel settings */
   property = g_strdup_printf (PANELS_PROPERTY_BASE, panel_id);
