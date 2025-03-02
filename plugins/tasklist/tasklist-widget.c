@@ -458,6 +458,9 @@ xfce_tasklist_group_button_icon_changed (XfwApplication *app,
 static XfceTasklistChild *
 xfce_tasklist_group_button_new (XfwApplication *app,
                                 XfceTasklist *tasklist);
+static void
+xfce_tasklist_group_button_child_destroyed (XfceTasklistChild *group_child,
+                                            GtkWidget *child_button);
 
 /* potential public functions */
 static void
@@ -1988,14 +1991,14 @@ xfce_tasklist_window_removed (XfwScreen *screen,
 
 #ifdef ENABLE_X11
           /* hide the wireframe */
-          if (G_UNLIKELY (n > 5 && tasklist->show_wireframes))
+          if (G_UNLIKELY (n > 6 && tasklist->show_wireframes))
             {
               xfce_tasklist_wireframe_hide (tasklist);
               n--;
             }
 #endif
 
-          panel_return_if_fail (n == 5);
+          panel_return_if_fail (n == 6);
 
           /* destroy the button, this will free the child data in the
            * container remove function */
@@ -3008,6 +3011,42 @@ xfce_tasklist_button_monitors_changed (XfwWindow *window,
 
 
 
+static void
+xfce_tasklist_button_application_changed (XfwWindow *window,
+                                          GParamSpec *pspec,
+                                          XfceTasklistChild *child)
+{
+  XfwApplication *old_app;
+
+  panel_return_if_fail (child->window == window);
+  panel_return_if_fail (XFCE_IS_TASKLIST (child->tasklist));
+  panel_return_if_fail (XFW_IS_SCREEN (child->tasklist->screen));
+
+  old_app = child->app;
+  child->app = xfw_window_get_application (window);
+  if (child->tasklist->grouping)
+    {
+      XfceTasklistChild *old_group_child = g_hash_table_lookup (child->tasklist->apps, old_app);
+      XfceTasklistChild *group_child = g_hash_table_lookup (child->tasklist->apps, child->app);
+
+      if (old_group_child != NULL)
+        {
+          g_signal_handlers_disconnect_by_data (child->button, old_group_child);
+          g_signal_handlers_disconnect_by_data (child->window, old_group_child);
+          xfce_tasklist_group_button_child_destroyed (old_group_child, child->button);
+        }
+
+      if (group_child == NULL)
+        {
+          group_child = xfce_tasklist_group_button_new (child->app, child->tasklist);
+          g_hash_table_insert (child->tasklist->apps, child->app, group_child);
+        }
+      xfce_tasklist_group_button_add_window (group_child, child);
+    }
+}
+
+
+
 #ifdef ENABLE_X11
 static void
 xfce_tasklist_button_geometry_changed (XfwWindow *window,
@@ -3692,6 +3731,8 @@ xfce_tasklist_button_new (XfwWindow *window,
                     G_CALLBACK (xfce_tasklist_button_workspace_changed), child);
   g_signal_connect (G_OBJECT (window), "notify::monitors",
                     G_CALLBACK (xfce_tasklist_button_monitors_changed), child);
+  g_signal_connect (G_OBJECT (window), "notify::application",
+                    G_CALLBACK (xfce_tasklist_button_application_changed), child);
 
   /* poke functions */
   xfce_tasklist_button_icon_changed (window, child);
@@ -4338,6 +4379,8 @@ xfce_tasklist_group_button_remove (XfceTasklistChild *group_child)
 
   g_slist_free (group_child->windows);
   group_child->windows = NULL;
+  g_object_unref (group_child->app);
+  group_child->app = NULL;
 
   /* destroy the button, this will free the remaining child
    * data in the container remove function */
@@ -4526,7 +4569,7 @@ xfce_tasklist_group_button_new (XfwApplication *app,
 
   child = xfce_tasklist_child_new (tasklist);
   child->type = CHILD_TYPE_GROUP;
-  child->app = app;
+  child->app = g_object_ref (app);
 
   gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (child->button)), "group-button");
   g_signal_connect_after (G_OBJECT (child->button), "draw",
