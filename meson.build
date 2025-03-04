@@ -145,8 +145,9 @@ if has_bind_textdomain_codeset
 endif
   
 headers = [
-  'math.h',
+  'sys/prctl.h',
   'sys/wait.h',
+  'math.h',
 ]
 foreach header : headers
   if cc.check_header(header)
