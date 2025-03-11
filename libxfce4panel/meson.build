@@ -14,7 +14,9 @@ libpanel_headers = [
   'xfce-panel-plugin.h',
 ]
 
-libpanel_headers += configure_file(
+# do not add this header to GI sources, it creates unsolvable conflicts with other
+# libs whose identifier prefix is Xfce, e.g. libxfce4ui and libxfce4util
+configure_file(
   configuration: configuration_data({
     'LIBXFCE4PANEL_VERSION': meson.project_version(),
     'LIBXFCE4PANEL_VERSION_MAJOR': version_parts[0],
@@ -23,7 +25,8 @@ libpanel_headers += configure_file(
   }),
   input: 'libxfce4panel-config.h.in',
   output: 'libxfce4panel-config.h',
-  install: false,
+  install: true,
+  install_dir: libpanel_install_dir,
 )
 
 libpanel_sources_gir = [
@@ -146,13 +149,9 @@ if get_option('introspection')
     sources: libpanel_sources_gir + libpanel_headers + libpanel_enums,
     namespace: 'Libxfce4panel',
     nsversion: libxfce4panel_version_api,
-    identifier_prefix: [
-      'Xfce',
-      'Plugin',
-    ],
+    identifier_prefix: 'Xfce',
     symbol_prefix: [
       'xfce',
-      'libxfce4panel',
     ],
     export_packages: libpanel_pkgname,
     includes: [

@@ -132,8 +132,6 @@ INTROSPECTION_SCANNER_ARGS = \
 	--warn-all \
 	--identifier-prefix=Xfce \
 	--identifier-prefix=xfce \
-	--identifier-prefix=LIBXFCE4PANEL \
-	--identifier-prefix=libxfce4panel \
 	--identifier-prefix=Plugin \
 	--c-include=libxfce4panel/libxfce4panel.h
 INTROSPECTION_COMPILER_ARGS = \
@@ -142,7 +140,7 @@ INTROSPECTION_COMPILER_ARGS = \
 	--includedir=.
 
 if HAVE_INTROSPECTION
-introspection_sources = $(libxfce4panel_2_0_la_SOURCES)
+introspection_sources = $(filter-out libxfce4panel-config.h, $(libxfce4panel_2_0_la_SOURCES))
 
 Libxfce4panel-2.0.gir: libxfce4panel-2.0.la Makefile
 Libxfce4panel_2_0_gir_INCLUDES = GObject-2.0 GLib-2.0 Gio-2.0 Gtk-3.0 Libxfce4util-1.0
