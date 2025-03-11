@@ -132,8 +132,6 @@ INTROSPECTION_SCANNER_ARGS = \
 	--warn-all \
 	--identifier-prefix=Xfce \
 	--identifier-prefix=xfce \
-	--identifier-prefix=LIBXFCE4PANEL \
-	--identifier-prefix=libxfce4panel \
 	--identifier-prefix=Plugin \
 	--c-include=libxfce4panel/libxfce4panel.h
 INTROSPECTION_COMPILER_ARGS = \
