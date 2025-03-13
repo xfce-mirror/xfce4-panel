@@ -245,12 +245,12 @@ sn_box_list_changed (SnBox *box,
           if (!sn_config_is_hidden (box->config, SN_ITEM_TYPE_DEFAULT,
                                     sn_button_get_name (button)))
             {
-              gtk_widget_map (GTK_WIDGET (button));
+              gtk_widget_show (GTK_WIDGET (button));
               n_visible_children++;
             }
           else
             {
-              gtk_widget_set_mapped (GTK_WIDGET (button), box->show_hidden);
+              gtk_widget_set_visible (GTK_WIDGET (button), box->show_hidden);
               n_hidden_children++;
             }
         }
@@ -407,11 +407,11 @@ sn_box_measure_and_allocate (GtkWidget *widget,
               n_hidden_children++;
               if (!box->show_hidden)
                 {
-                  gtk_widget_unmap (GTK_WIDGET (button));
+                  gtk_widget_hide (GTK_WIDGET (button));
                   continue;
                 }
             }
-          gtk_widget_map (GTK_WIDGET (button));
+          gtk_widget_show (GTK_WIDGET (button));
           n_visible_children++;
 
           gtk_widget_get_preferred_size (GTK_WIDGET (button), NULL, &child_req);
