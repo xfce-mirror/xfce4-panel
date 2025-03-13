@@ -3489,6 +3489,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
               gtk_layer_init_for_window (GTK_WINDOW (popup));
               gtk_layer_set_anchor (GTK_WINDOW (popup), GTK_LAYER_SHELL_EDGE_TOP, TRUE);
               gtk_layer_set_anchor (GTK_WINDOW (popup), GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+              gtk_layer_set_exclusive_zone (GTK_WINDOW (popup), -1);
               if (gtk_widget_get_realized (GTK_WIDGET (window)))
                 {
                   GdkWindow *gdkwindow = gtk_widget_get_window (GTK_WIDGET (window));
