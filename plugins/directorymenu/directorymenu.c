@@ -27,7 +27,6 @@
 #include "common/panel-utils.h"
 #include "common/panel-xfconf.h"
 
-#include <exo/exo.h>
 #include <gio/gdesktopappinfo.h>
 #include <gio/gio.h>
 #include <libxfce4ui/libxfce4ui.h>
@@ -462,15 +461,15 @@ directory_menu_plugin_configure_plugin_icon_chooser (GtkWidget *button,
 
   panel_return_if_fail (DIRECTORY_MENU_IS_PLUGIN (plugin));
 
-  chooser = exo_icon_chooser_dialog_new (
+  chooser = xfce_icon_chooser_dialog_new (
     _("Select An Icon"), parent, _("_Cancel"), GTK_RESPONSE_CANCEL, _("_OK"), GTK_RESPONSE_ACCEPT, NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_ACCEPT);
 
-  exo_icon_chooser_dialog_set_icon (EXO_ICON_CHOOSER_DIALOG (chooser), plugin->icon_name);
+  xfce_icon_chooser_dialog_set_icon (XFCE_ICON_CHOOSER_DIALOG (chooser), plugin->icon_name);
 
   if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_ACCEPT)
     {
-      icon = exo_icon_chooser_dialog_get_icon (EXO_ICON_CHOOSER_DIALOG (chooser));
+      icon = xfce_icon_chooser_dialog_get_icon (XFCE_ICON_CHOOSER_DIALOG (chooser));
       g_object_set (G_OBJECT (plugin), "icon-name", icon, NULL);
       g_free (icon);
 
@@ -780,7 +779,7 @@ directory_menu_plugin_menu_open (GtkWidget *mi,
   gchar *argv[3];
   gboolean startup_notify = FALSE;
 
-  /* try to work around the exo code and get the direct command */
+  /* try to work around the libxfce4ui code and get the direct command */
   rc = xfce_rc_config_open (XFCE_RESOURCE_CONFIG, "xfce4/helpers.rc", TRUE);
   if (G_LIKELY (rc != NULL))
     {
@@ -821,7 +820,7 @@ directory_menu_plugin_menu_open (GtkWidget *mi,
           argv[1] = path_as_arg ? (gchar *) working_dir : NULL;
           argv[2] = NULL;
 
-          /* try to spawn the program, if this fails we try exo for
+          /* try to spawn the program, if this fails we try libxfce4ui for
            * a decent error message */
           result = xfce_spawn (gtk_widget_get_screen (mi),
                                working_dir, argv, NULL, 0,
@@ -836,11 +835,11 @@ directory_menu_plugin_menu_open (GtkWidget *mi,
     }
 
   if (!result
-      && !exo_execute_preferred_application_on_screen (category,
-                                                       path_as_arg ? working_dir : NULL,
-                                                       working_dir,
-                                                       NULL,
-                                                       gtk_widget_get_screen (mi), &error))
+      && !xfce_execute_preferred_application (category,
+                                              path_as_arg ? working_dir : NULL,
+                                              working_dir,
+                                              NULL,
+                                              &error))
     {
       xfce_dialog_show_error (
         NULL, error, _("Failed to execute the preferred application for category \"%s\""), category);

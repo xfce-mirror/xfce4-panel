@@ -28,7 +28,6 @@ shared_module(
     gtk,
     x11_deps,
     gtk_layer_shell,
-    exo,
     libxfce4util,
     libxfce4ui,
     libxfce4windowing,

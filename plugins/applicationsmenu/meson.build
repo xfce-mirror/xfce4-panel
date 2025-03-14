@@ -24,7 +24,6 @@ shared_module(
   ],
   dependencies: [
     gtk,
-    exo,
     garcon,
     garcon_gtk3,
     libxfce4util,

@@ -20,11 +20,10 @@ i18n = import('i18n')
 
 dependency_versions = {
   'cairo': '>= 1.16.0',
-  'exo': '>= 0.11.2',
   'garcon': '>= 4.17.0',
   'glib': '>= 2.74.0',
   'gtk': '>= 3.24.0',
-  'libxfce4ui': '>= 4.17.1',
+  'libxfce4ui': '>= 4.21.0',
   'libxfce4util': '>= 4.17.2',
   'libxfce4windowing': '>= 4.20.1',
   'xfconf': '>= 4.13.2',
@@ -41,7 +40,6 @@ dependency_versions = {
 }
 
 cairo = dependency('cairo', version: dependency_versions['cairo'])
-exo = dependency('exo-2', version: dependency_versions['exo'])
 garcon = dependency('garcon-1', version: dependency_versions['garcon'])
 garcon_gtk3 = dependency('garcon-gtk3-1', version: dependency_versions['garcon'])
 glib = dependency('glib-2.0', version: dependency_versions['glib'])

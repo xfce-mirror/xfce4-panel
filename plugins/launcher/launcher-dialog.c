@@ -763,12 +763,12 @@ launcher_dialog_item_desktop_item_edit (GtkWidget *widget,
   /* build command */
   if (uri != NULL)
     {
-      command = g_strdup_printf ("exo-desktop-item-edit '%s'", uri);
+      command = g_strdup_printf ("xfce-desktop-item-edit '%s'", uri);
     }
   else
     {
       filename = launcher_plugin_unique_filename (dialog->plugin);
-      command = g_strdup_printf ("exo-desktop-item-edit -t %s -c '%s'", type, filename);
+      command = g_strdup_printf ("xfce-desktop-item-edit -t %s -c '%s'", type, filename);
       g_free (filename);
     }
 

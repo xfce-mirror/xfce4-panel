@@ -25,7 +25,6 @@ shared_module(
   dependencies: [
     gio_unix,
     gtk,
-    exo,
     libxfce4util,
     libxfce4ui,
     xfconf,
