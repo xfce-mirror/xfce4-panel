@@ -1616,7 +1616,10 @@ panel_window_size_allocate (GtkWidget *widget,
                   || window->autohide_state == AUTOHIDE_POPUP))
     {
       /* autohide timeout is already running, so let's wait with hiding the panel */
-      if (window->autohide_timeout_id != 0 || window->popdown_progress != -G_MAXINT)
+      if ((window->autohide_timeout_id != 0 || window->popdown_progress != -G_MAXINT)
+          /* may be false on wayland where gtk_widget_queue_resize() does not
+           * always trigger size_allocate() */
+          && gtk_widget_get_visible (window->autohide_window))
         return;
 
       /* window is invisible */
@@ -3235,6 +3238,10 @@ panel_window_autohide_ease_out (gpointer data)
   panel_window_get_position (window, &x, &y);
   w = panel_screen_get_width (window->screen);
   h = panel_screen_get_height (window->screen);
+
+  /* may be true on wayland where gtk_widget_queue_resize() does not always trigger size_allocate() */
+  if (window->popdown_progress == -G_MAXINT)
+    window->popdown_progress = IS_HORIZONTAL (window) ? window->alloc.height : window->alloc.width;
 
   if (IS_HORIZONTAL (window))
     {
