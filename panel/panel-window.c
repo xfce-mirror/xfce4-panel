@@ -2793,9 +2793,6 @@ panel_window_screen_layout_changed (GdkScreen *screen,
   /* update the struts if needed (ie. we need to reset the struts) */
   if (force_struts_update)
     panel_window_screen_struts_set (window);
-
-  if (!gtk_widget_get_visible (GTK_WIDGET (window)))
-    gtk_widget_show (GTK_WIDGET (window));
 }
 
 

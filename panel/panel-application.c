@@ -1626,6 +1626,8 @@ panel_application_new_window (PanelApplication *application,
   if (new_window)
     panel_application_save (application, SAVE_PANEL_IDS);
 
+  gtk_widget_show (GTK_WIDGET (window));
+
   return PANEL_WINDOW (window);
 }
 
