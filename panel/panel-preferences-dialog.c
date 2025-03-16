@@ -1068,9 +1068,6 @@ panel_preferences_dialog_panel_add (GtkWidget *widget,
   window = panel_application_new_window (dialog->application,
                                          gtk_widget_get_screen (widget), -1, TRUE);
 
-  /* show window */
-  gtk_widget_show (GTK_WIDGET (window));
-
   /* rebuild the selector */
   panel_id = panel_window_get_id (window);
   panel_preferences_dialog_panel_combobox_rebuild (dialog, panel_id);
