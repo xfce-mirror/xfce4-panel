@@ -20,13 +20,11 @@ i18n = import('i18n')
 
 dependency_versions = {
   'cairo': '>= 1.16.0',
-  'garcon': '>= 4.17.0',
   'glib': '>= 2.74.0',
   'gtk': '>= 3.24.0',
+  'xfce4': '>= 4.18.0',
   'libxfce4ui': '>= 4.21.0',
-  'libxfce4util': '>= 4.17.2',
   'libxfce4windowing': '>= 4.20.1',
-  'xfconf': '>= 4.13.2',
 
   'libwnck': '>= 3.0',
   'libx11': '>= 1.6.7',
@@ -40,17 +38,17 @@ dependency_versions = {
 }
 
 cairo = dependency('cairo', version: dependency_versions['cairo'])
-garcon = dependency('garcon-1', version: dependency_versions['garcon'])
-garcon_gtk3 = dependency('garcon-gtk3-1', version: dependency_versions['garcon'])
+garcon = dependency('garcon-1', version: dependency_versions['xfce4'])
+garcon_gtk3 = dependency('garcon-gtk3-1', version: dependency_versions['xfce4'])
 glib = dependency('glib-2.0', version: dependency_versions['glib'])
 gio_unix = dependency('gio-unix-2.0', version: dependency_versions['glib'])
 gmodule = dependency('gmodule-2.0', version: dependency_versions['glib'])
 gtk = dependency('gtk+-3.0', version: dependency_versions['gtk'])
 libxfce4ui = dependency('libxfce4ui-2', version: dependency_versions['libxfce4ui'])
-libxfce4util = dependency('libxfce4util-1.0', version: dependency_versions['libxfce4util'])
+libxfce4util = dependency('libxfce4util-1.0', version: dependency_versions['xfce4'])
 libxfce4windowing = dependency('libxfce4windowing-0', version: dependency_versions['libxfce4windowing'])
 libxfce4windowingui = dependency('libxfce4windowingui-0', version: dependency_versions['libxfce4windowing'])
-xfconf = dependency('libxfconf-0', version: dependency_versions['xfconf'])
+xfconf = dependency('libxfconf-0', version: dependency_versions['xfce4'])
 
 xdt_gen_visibility = find_program('xdt-gen-visibility', required: true)
 xdt_csource = find_program('xdt-csource', required: true)
