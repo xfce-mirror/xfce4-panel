@@ -28,7 +28,6 @@
 #include "common/panel-utils.h"
 #include "common/panel-xfconf.h"
 
-#include <exo/exo.h>
 #include <garcon-gtk/garcon-gtk.h>
 #include <garcon/garcon.h>
 #include <libxfce4ui/libxfce4ui.h>
@@ -602,15 +601,15 @@ applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget *button,
 
   panel_return_if_fail (APPLICATIONS_MENU_IS_PLUGIN (plugin));
 
-  chooser = exo_icon_chooser_dialog_new (
+  chooser = xfce_icon_chooser_dialog_new (
     _("Select An Icon"), parent, _("_Cancel"), GTK_RESPONSE_CANCEL, _("_OK"), GTK_RESPONSE_ACCEPT, NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_ACCEPT);
 
-  exo_icon_chooser_dialog_set_icon (EXO_ICON_CHOOSER_DIALOG (chooser), plugin->button_icon);
+  xfce_icon_chooser_dialog_set_icon (XFCE_ICON_CHOOSER_DIALOG (chooser), plugin->button_icon);
 
   if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_ACCEPT)
     {
-      icon = exo_icon_chooser_dialog_get_icon (EXO_ICON_CHOOSER_DIALOG (chooser));
+      icon = xfce_icon_chooser_dialog_get_icon (XFCE_ICON_CHOOSER_DIALOG (chooser));
       g_object_set (G_OBJECT (plugin), "button-icon", icon, NULL);
       g_free (icon);
 

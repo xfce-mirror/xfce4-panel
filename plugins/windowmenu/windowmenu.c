@@ -27,7 +27,6 @@
 #include "common/panel-utils.h"
 #include "common/panel-xfconf.h"
 
-#include <exo/exo.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 #include <libxfce4ui/libxfce4ui.h>
@@ -1105,7 +1104,7 @@ window_menu_plugin_menu_window_item_new (XfwWindow *window,
           if (xfw_window_is_minimized (window)
               && plugin->minimized_icon_lucency < 100)
             {
-              lucent = exo_gdk_pixbuf_lucent (pixbuf, plugin->minimized_icon_lucency);
+              lucent = xfce_gdk_pixbuf_lucent (pixbuf, plugin->minimized_icon_lucency);
               if (G_LIKELY (lucent != NULL))
                 pixbuf = lucent;
             }
