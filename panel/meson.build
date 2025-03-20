@@ -67,13 +67,6 @@ panel_sources += gnome.gdbus_codegen(
   install_header: false,
 )
 
-panel_sources += custom_target(
-  'panel-preferences-dialog-ui.h',
-  input: 'panel-preferences-dialog.glade',
-  output: 'panel-preferences-dialog-ui.h',
-  command: [xdt_csource, '--static', '--strip-comments', '--strip-content', '--name=panel_preferences_dialog_ui', '--output=@OUTPUT@', '@INPUT@'],
-)
-
 executable(
   'xfce4-panel',
   panel_sources,

@@ -1,5 +1,3 @@
-DISTCLEANFILES =
-
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"libxfce4panel\" \
@@ -79,8 +77,6 @@ pkgconfig_DATA = libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).pc
 #
 # Build sources
 #
-if MAINTAINER_MODE
-
 libxfce4panel-marshal.h: libxfce4panel-marshal.list Makefile
 	$(AM_V_GEN) glib-genmarshal --prefix=_libxfce4panel_marshal --internal --header $< > $@
 
@@ -112,14 +108,11 @@ libxfce4panel-enum-types.c:  $(libxfce4panel_headers) Makefile
 		--ftail "\n#define __LIBXFCE4PANEL_ENUM_TYPES_C__\n#include <libxfce4panel/libxfce4panel-visibility.c>\n" \
 		$(libxfce4panel_headers) ) > $@
 
-DISTCLEANFILES += \
+DISTCLEANFILES = \
 	$(libxfce4panel_built_sources)
 
 BUILT_SOURCES = \
 	$(libxfce4panel_built_sources)
-
-endif
-# endif MAINTAINER_MODE
 
 
 # GObject Introspection

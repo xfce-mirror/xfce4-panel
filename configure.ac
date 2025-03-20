@@ -74,9 +74,8 @@ AM_PROG_CC_C_O()
 LT_PATH_LD([])
 AC_PROG_INSTALL()
 AC_PATH_PROG([XDT_GEN_VISIBILITY], [xdt-gen-visibility])
-AC_PATH_PROG([XDT_CSOURCE], [xdt-csource])
-if test x"$XDT_CSOURCE" = x""; then
-  AC_MSG_ERROR([Could not find xdt-csource in PATH, please install xfce4-dev-tools])
+if test x"$XDT_GEN_VISIBILITY" = x""; then
+  AC_MSG_ERROR([Could not find xdt-gen-visibility in PATH, please install xfce4-dev-tools])
 fi
 m4_ifdef([AC_PROG_SED], [AC_PROG_SED], [AC_CHECK_PROG(SED, sed, sed)])
 
@@ -138,6 +137,7 @@ dnl ***********************************
 dnl *** Check for gdbus-codegen ***
 dnl ***********************************
 XDT_CHECK_PACKAGE_BINARY([GDBUS_CODEGEN], [gio-2.0], [gdbus_codegen], [gdbus-codegen])
+XDT_CHECK_PACKAGE_BINARY([GLIB_COMPILE_RESOURCES], [gio-2.0], [glib_compile_resources], [glib-compile-resources])
 
 dnl ***********************************
 dnl *** Check for required packages ***
