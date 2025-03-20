@@ -21,7 +21,6 @@
 #include "config.h"
 #endif
 
-#include "actions-dialog_ui.h"
 #include "actions.h"
 
 #include "common/panel-debug.h"
@@ -687,8 +686,7 @@ actions_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   panel_return_if_fail (plugin->items != NULL);
 
   /* setup the dialog */
-  builder = panel_utils_builder_new (panel_plugin, actions_dialog_ui,
-                                     actions_dialog_ui_length, &dialog);
+  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/actions-dialog.glade", &dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 

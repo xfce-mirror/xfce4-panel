@@ -47,18 +47,12 @@ plugin_sources += gnome.gdbus_codegen(
   install_header: false,
 )
 
-plugin_sources += custom_target(
-  'sn-dialog-ui.h',
-  input: 'sn-dialog.glade',
-  output: 'sn-dialog-ui.h',
-  command: [xdt_csource, '--static', '--strip-comments', '--strip-content', '--name=sn_dialog_ui', '--output=@OUTPUT@', '@INPUT@'],
-)
-
 plugin_install_subdir = 'xfce4' / 'panel' / 'plugins'
 
 shared_module(
   'systray',
   plugin_sources,
+  sources: xfce4_panel_resources_c,
   gnu_symbol_visibility: 'hidden',
   c_args: [
     '-DG_LOG_DOMAIN="@0@"'.format('libsystray'),

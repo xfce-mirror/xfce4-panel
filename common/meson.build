@@ -23,3 +23,9 @@ libpanel_common = static_library(
   ],
   install: false,
 )
+
+xfce4_panel_resources_c = gnome.compile_resources(
+  'xfce4-panel-resources',
+  'resources' / 'xfce4-panel.gresource.xml',
+  source_dir: 'resources',
+)

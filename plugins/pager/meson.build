@@ -5,18 +5,12 @@ plugin_sources = [
   'pager-buttons.h',
 ]
 
-plugin_sources += custom_target(
-  'pager-dialog_ui.h',
-  input: 'pager-dialog.glade',
-  output: 'pager-dialog_ui.h',
-  command: [xdt_csource, '--static', '--strip-comments', '--strip-content', '--name=pager_dialog_ui', '--output=@OUTPUT@', '@INPUT@'],
-)
-
 plugin_install_subdir = 'xfce4' / 'panel' / 'plugins'
 
 shared_module(
   'pager',
   plugin_sources,
+  sources: xfce4_panel_resources_c,
   gnu_symbol_visibility: 'hidden',
   c_args: [
     '-DG_LOG_DOMAIN="@0@"'.format('libpager'),
