@@ -20,7 +20,6 @@
 #include "config.h"
 #endif
 
-#include "tasklist-dialog_ui.h"
 #include "tasklist-widget.h"
 #include "tasklist.h"
 
@@ -217,8 +216,7 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   GObject *object;
 
   /* setup the dialog */
-  builder = panel_utils_builder_new (panel_plugin, tasklist_dialog_ui,
-                                     tasklist_dialog_ui_length, &dialog);
+  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/tasklist-dialog.glade", &dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 

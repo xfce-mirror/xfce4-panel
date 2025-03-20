@@ -20,7 +20,6 @@
 #include "config.h"
 #endif
 
-#include "applicationsmenu-dialog_ui.h"
 #include "applicationsmenu.h"
 
 #include "common/panel-debug.h"
@@ -660,8 +659,7 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                                  "show-tooltips", "show-button-title", "small" };
 
   /* setup the dialog */
-  builder = panel_utils_builder_new (panel_plugin, applicationsmenu_dialog_ui,
-                                     applicationsmenu_dialog_ui_length, &dialog);
+  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/applicationsmenu-dialog.glade", &dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 

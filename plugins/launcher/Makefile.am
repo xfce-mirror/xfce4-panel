@@ -10,11 +10,8 @@ plugindir = $(libdir)/xfce4/panel/plugins
 plugin_LTLIBRARIES = \
 	liblauncher.la
 
-liblauncher_built_sources = \
-	launcher-dialog_ui.h
-
 liblauncher_la_SOURCES = \
-	$(liblauncher_built_sources) \
+	$(top_srcdir)/common/xfce4-panel-resources.c \
 	launcher.c \
 	launcher.h \
 	launcher-dialog.c \
@@ -63,23 +60,11 @@ desktop_DATA = $(desktop_in_files:.desktop.in.in=.desktop)
 	$(AM_V_GEN) $(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@
 
 EXTRA_DIST = \
-	launcher-dialog.glade \
 	$(desktop_in_files) \
 	meson.build \
 	$(NULL)
 
 DISTCLEANFILES = \
 	$(desktop_DATA)
-
-if MAINTAINER_MODE
-BUILT_SOURCES = \
-	$(liblauncher_built_sources)
-
-DISTCLEANFILES += \
-	$(libclock_built_sources)
-
-launcher-dialog_ui.h: launcher-dialog.glade
-	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=launcher_dialog_ui $< >$@
-endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

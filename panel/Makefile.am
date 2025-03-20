@@ -14,13 +14,14 @@ bin_PROGRAMS = \
 	xfce4-panel
 
 xfce4_panel_built_sources = \
+	$(top_srcdir)/common/xfce4-panel-resources.c \
 	panel-gdbus-exported-service.h \
 	panel-gdbus-exported-service.c \
 	panel-marshal.c \
 	panel-marshal.h \
 	panel-plugin-external-wrapper-exported.h \
 	panel-plugin-external-wrapper-exported.c \
-	panel-preferences-dialog-ui.h
+	$(NULL)
 
 xfce4_panel_SOURCES = \
 	$(xfce4_panel_built_sources) \
@@ -121,9 +122,6 @@ panel-plugin-external-wrapper-exported.c: panel-plugin-external-wrapper-infos.xm
 	--generate-c-code panel-plugin-external-wrapper-exported \
 	$(srcdir)/panel-plugin-external-wrapper-infos.xml
 
-panel-preferences-dialog-ui.h: $(srcdir)/panel-preferences-dialog.glade Makefile
-	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=panel_preferences_dialog_ui $< >$@
-
 DISTCLEANFILES = \
 	$(xfce4_panel_built_sources)
 
@@ -133,7 +131,6 @@ BUILT_SOURCES = \
 EXTRA_DIST = \
 	panel-dbus-service-infos.xml \
 	panel-plugin-external-wrapper-infos.xml \
-	panel-preferences-dialog.glade \
 	panel-marshal.list \
 	meson.build \
 	$(NULL)

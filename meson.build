@@ -55,7 +55,6 @@ libxfce4windowingui = dependency('libxfce4windowingui-0', version: dependency_ve
 xfconf = dependency('libxfconf-0', version: dependency_versions['xfconf'])
 
 xdt_gen_visibility = find_program('xdt-gen-visibility', required: true)
-xdt_csource = find_program('xdt-csource', required: true)
 
 # Feature: 'x11'
 x11_deps = []

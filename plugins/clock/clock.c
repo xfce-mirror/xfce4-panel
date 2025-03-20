@@ -23,7 +23,6 @@
 
 #include "clock-analog.h"
 #include "clock-binary.h"
-#include "clock-dialog_ui.h"
 #include "clock-digital.h"
 #include "clock-fuzzy.h"
 #include "clock-lcd.h"
@@ -1151,8 +1150,7 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   panel_return_if_fail (CLOCK_IS_PLUGIN (plugin));
 
   /* setup the dialog */
-  builder = panel_utils_builder_new (panel_plugin, clock_dialog_ui,
-                                     clock_dialog_ui_length, &window);
+  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/clock-dialog.glade", &window);
   if (G_UNLIKELY (builder == NULL))
     return;
 
