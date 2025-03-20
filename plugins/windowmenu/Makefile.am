@@ -9,11 +9,8 @@ plugindir = $(libdir)/xfce4/panel/plugins
 plugin_LTLIBRARIES = \
 	libwindowmenu.la
 
-libwindowmenu_built_sources = \
-	windowmenu-dialog_ui.h
-
 libwindowmenu_la_SOURCES = \
-	$(libwindowmenu_built_sources) \
+	$(top_srcdir)/common/xfce4-panel-resources.c \
 	windowmenu.c \
 	windowmenu.h
 
@@ -68,7 +65,6 @@ desktop_DATA = $(desktop_in_files:.desktop.in.in=.desktop)
 	$(AM_V_GEN) $(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@
 
 EXTRA_DIST = \
-	windowmenu-dialog.glade \
 	xfce4-popup-windowmenu.sh \
 	$(desktop_in_files) \
 	meson.build \
@@ -77,16 +73,5 @@ EXTRA_DIST = \
 DISTCLEANFILES = \
 	$(desktop_DATA) \
 	xfce4-popup-windowmenu
-
-if MAINTAINER_MODE
-BUILT_SOURCES = \
-	$(libwindowmenu_built_sources)
-
-DISTCLEANFILES += \
-	$(libwindowmenu_built_sources)
-
-windowmenu-dialog_ui.h: windowmenu-dialog.glade
-	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=windowmenu_dialog_ui $< >$@
-endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

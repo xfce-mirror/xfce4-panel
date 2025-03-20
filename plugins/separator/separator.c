@@ -21,7 +21,6 @@
 #include "config.h"
 #endif
 
-#include "separator-dialog_ui.h"
 #include "separator.h"
 
 #include "common/panel-private.h"
@@ -364,8 +363,7 @@ separator_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   panel_return_if_fail (SEPARATOR_IS_PLUGIN (plugin));
 
   /* setup the dialog */
-  builder = panel_utils_builder_new (panel_plugin, separator_dialog_ui,
-                                     separator_dialog_ui_length, &dialog);
+  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/separator-dialog.glade", &dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 

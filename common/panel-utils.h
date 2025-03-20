@@ -31,8 +31,7 @@ _panel_utils_weak_notify (gpointer data,
 
 GtkBuilder *
 panel_utils_builder_new (XfcePanelPlugin *panel_plugin,
-                         const gchar *buffer,
-                         gsize length,
+                         const gchar *resource,
                          GObject **dialog_return) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
 void

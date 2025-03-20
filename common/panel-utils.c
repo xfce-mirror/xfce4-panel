@@ -87,8 +87,7 @@ panel_utils_unblock_autohide (XfcePanelPlugin *panel_plugin)
 
 GtkBuilder *
 panel_utils_builder_new (XfcePanelPlugin *panel_plugin,
-                         const gchar *buffer,
-                         gsize length,
+                         const gchar *resource,
                          GObject **dialog_return)
 {
   GError *error = NULL;
@@ -99,7 +98,7 @@ panel_utils_builder_new (XfcePanelPlugin *panel_plugin,
 
   builder = gtk_builder_new ();
   gtk_builder_set_translation_domain (builder, GETTEXT_PACKAGE);
-  if (gtk_builder_add_from_string (builder, buffer, length, &error))
+  if (gtk_builder_add_from_resource (builder, resource, &error))
     {
       dialog = gtk_builder_get_object (builder, "dialog");
       if (G_LIKELY (dialog != NULL))
