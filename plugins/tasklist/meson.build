@@ -5,13 +5,6 @@ plugin_sources = [
   'tasklist-widget.h',
 ]
 
-plugin_sources += custom_target(
-  'tasklist-dialog_ui.h',
-  input: 'tasklist-dialog.glade',
-  output: 'tasklist-dialog_ui.h',
-  command: [xdt_csource, '--static', '--strip-comments', '--strip-content', '--name=tasklist_dialog_ui', '--output=@OUTPUT@', '@INPUT@'],
-)
-
 plugin_install_subdir = 'xfce4' / 'panel' / 'plugins'
 
 shared_module(

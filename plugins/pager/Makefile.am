@@ -10,11 +10,7 @@ plugindir = $(libdir)/xfce4/panel/plugins
 plugin_LTLIBRARIES = \
 	libpager.la
 
-libpager_built_sources = \
-	pager-dialog_ui.h
-
 libpager_la_SOURCES = \
-	$(libpager_built_sources) \
 	pager.c \
 	pager.h \
 	pager-buttons.h \
@@ -63,23 +59,11 @@ desktop_DATA = $(desktop_in_files:.desktop.in.in=.desktop)
 	$(AM_V_GEN) $(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@
 
 EXTRA_DIST = \
-	pager-dialog.glade \
 	$(desktop_in_files) \
 	meson.build \
 	$(NULL)
 
 DISTCLEANFILES = \
 	$(desktop_DATA)
-
-if MAINTAINER_MODE
-BUILT_SOURCES = \
-	$(libpager_built_sources)
-
-DISTCLEANFILES += \
-	$(libpager_built_sources)
-
-pager-dialog_ui.h: pager-dialog.glade
-	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=pager_dialog_ui $< >$@
-endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

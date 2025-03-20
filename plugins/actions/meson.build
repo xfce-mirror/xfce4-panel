@@ -3,13 +3,6 @@ plugin_sources = [
   'actions.h',
 ]
 
-plugin_sources += custom_target(
-  'actions-dialog_ui.h',
-  input: 'actions-dialog.glade',
-  output: 'actions-dialog_ui.h',
-  command: [xdt_csource, '--static', '--strip-comments', '--strip-content', '--name=actions_dialog_ui', '--output=@OUTPUT@', '@INPUT@'],
-)
-
 plugin_install_subdir = 'xfce4' / 'panel' / 'plugins'
 
 shared_module(

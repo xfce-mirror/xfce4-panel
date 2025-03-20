@@ -3,13 +3,6 @@ plugin_sources = [
   'applicationsmenu.h',
 ]
 
-plugin_sources += custom_target(
-  'applicationsmenu-dialog_ui.h',
-  input: 'applicationsmenu-dialog.glade',
-  output: 'applicationsmenu-dialog_ui.h',
-  command: [xdt_csource, '--static', '--strip-comments', '--strip-content', '--name=applicationsmenu_dialog_ui', '--output=@OUTPUT@', '@INPUT@'],
-)
-
 plugin_install_subdir = 'xfce4' / 'panel' / 'plugins'
 
 shared_module(

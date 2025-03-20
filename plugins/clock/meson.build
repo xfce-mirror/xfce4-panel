@@ -17,13 +17,6 @@ plugin_sources = [
   'clock-sleep-monitor.h',
 ]
 
-plugin_sources += custom_target(
-  'clock-dialog_ui.h',
-  input: 'clock-dialog.glade',
-  output: 'clock-dialog_ui.h',
-  command: [xdt_csource, '--static', '--strip-comments', '--strip-content', '--name=clock_dialog_ui', '--output=@OUTPUT@', '@INPUT@'],
-)
-
 plugin_install_subdir = 'xfce4' / 'panel' / 'plugins'
 
 shared_module(

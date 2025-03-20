@@ -3,13 +3,6 @@ plugin_sources = [
   'directorymenu.h',
 ]
 
-plugin_sources += custom_target(
-  'directorymenu-dialog_ui.h',
-  input: 'directorymenu-dialog.glade',
-  output: 'directorymenu-dialog_ui.h',
-  command: [xdt_csource, '--static', '--strip-comments', '--strip-content', '--name=directorymenu_dialog_ui', '--output=@OUTPUT@', '@INPUT@'],
-)
-
 plugin_install_subdir = 'xfce4' / 'panel' / 'plugins'
 
 shared_module(

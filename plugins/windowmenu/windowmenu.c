@@ -20,7 +20,6 @@
 #include "config.h"
 #endif
 
-#include "windowmenu-dialog_ui.h"
 #include "windowmenu.h"
 
 #include "common/panel-private.h"
@@ -575,8 +574,7 @@ window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                            "style" };
 
   /* setup the dialog */
-  builder = panel_utils_builder_new (panel_plugin, windowmenu_dialog_ui,
-                                     windowmenu_dialog_ui_length, &dialog);
+  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/windowmenu-dialog.glade", &dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 
