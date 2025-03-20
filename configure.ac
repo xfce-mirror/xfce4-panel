@@ -72,10 +72,15 @@ AC_PROG_CC()
 AM_PROG_CC_C_O()
 LT_PATH_LD([])
 AC_PROG_INSTALL()
-AC_PATH_PROG([XDT_GEN_VISIBILITY], [xdt-gen-visibility])
+AC_PATH_PROG([XDT_GEN_VISIBILITY], [xdt-gen-visibility], [], [$PWD:$PATH])
 if test x"$XDT_GEN_VISIBILITY" = x""; then
   AC_MSG_ERROR([Could not find xdt-gen-visibility in PATH, please install xfce4-dev-tools])
+elif test x"$XDT_GEN_VISIBILITY" = x"$PWD/xdt-gen-visibility"; then
+  XDT_GEN_VISIBILITY_DIST="xdt-gen-visibility"
+else
+  XDT_GEN_VISIBILITY_DIST=""
 fi
+AC_SUBST([XDT_GEN_VISIBILITY_DIST])
 m4_ifdef([AC_PROG_SED], [AC_PROG_SED], [AC_CHECK_PROG(SED, sed, sed)])
 
 dnl **************************

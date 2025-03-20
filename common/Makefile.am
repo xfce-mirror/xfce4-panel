@@ -40,7 +40,7 @@ xfce4-panel-resources.c: $(srcdir)/resources/xfce4-panel.gresource.xml $(libpane
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir)/resources --generate-source $<
 
 BUILT_SOURCES = \
-	$(xfce4-panel-resources.c) \
+	xfce4-panel-resources.c \
 	$(NULL)
 
 DISTCLEANFILES = \
