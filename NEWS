@@ -1,3 +1,67 @@
+4.21.0 (2025-03-22)
+======
+- build: Search for xdt-gen-visibility also in the working tree
+- build: Replace xdt-csource with glib-compile-resources
+- build: Define xfce4 min version >= 4.18
+- Replace deprecated exo with libxfce4ui 4.21.0
+- panel: Show window in panel_application_new_window()
+- wayland: autohide: Mitigate lack of size_allocate()
+- systray: Use correct gtk functions to show/hide items
+- wayland: Set exclusive zone for autohide window
+- build: Remove libxfce4panel-config.h from GI
+- meson-build: Add missing check for sys/prctl.h
+- tasklist: Support window app changes
+- itembar: Fix memory leak mitigation on plugins
+- build: Automate copyright year management
+- item-dialog: Also search for plugins by their module name
+- item-dialog: Add tooltip showing the module name
+- I18n: Update po/LINGUAS list
+- wayland: wrapper: Set GtkProgressBar style properties to min values
+- Revert "systray: Always Use cairo_set_source_rgb() to clear icon 
+background"
+- systray: Always Use cairo_set_source_rgb() to clear icon background
+- systray: Fix legacy icons being drawn with offset
+- meson-build: Use SPDX license expression
+- autotools-build: Check for xfce4-dev-tools in configure.ac
+- libxfce4panel: Fix ABI break
+- meson-build: Update debug/optimization flag management
+- autotools-build: Get rid of maintainer mode where gdbus-codegen is 
+used
+- autotools-build: Remove some deprecated or unused CFLAGS
+- libxfce4panel: Add missing include guards
+- libxfce4panel: Don't install xfce-panel-plugin-provider.h
+- build: Bump libxfce4windowing required version to 4.20.1
+- Update copyright year
+- meson-build: Don't add 'lib' prefix in static lib name
+- meson-build: Simplify feature opt dep management
+- meson-build: Ensure xfce-revision.h was generated when using it
+- build: Use VERSION_FULL intead of VERSION or PACKAGE_VERSION
+- autotools-build: Fix EXTRA_DIST redefinition
+- meson-build: Remove unneeded conditional
+- actions: Restore dialog accept on Enter behavior
+- Add meson build
+- Turn some messages into warnings
+- build: Migrate to xdt-gen-visibility and xdt-check-abi
+- wayland: windowmenu: Hide irrelevant workspace options
+- wayland: pager: Hide workspace settings
+- docs: Add missing parameter to XfcePanelPlugin::hidden-event
+- wayland: libxfce4panel: Set kbd interact to on-demand for popup 
+windows
+- tasklist: Add missing workspace property initialization on Wayland
+- panel: Deal with duplicated monitor models
+- tasklist: Disable workspace related properties on Wayland
+- prefs-dialog: Don't trust xfconf_channel_get_string_list() return 
+value
+- libxfce4panel: Fix XfcePanelPlugin size
+- Add an hidden-event signal for plugins
+- Translation Updates:
+  Albanian, Bulgarian, Catalan, Chinese (China), Chinese (Taiwan),
+  Czech, Danish, Dutch, English (United Kingdom), Estonian, French,
+  German, Hebrew, Hungarian, Indonesian, Italian, Japanese, Lithuanian,
+  Norwegian Bokmål, Polish, Portuguese, Portuguese (Brazil), Romanian,
+  Russian, Serbian, Slovak, Swedish, Turkish, Ukrainian, Venetian,
+  Vietnamese
+
 4.20.0 (2024-12-15)
 ======
 
