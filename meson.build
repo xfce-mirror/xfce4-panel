@@ -20,7 +20,7 @@ i18n = import('i18n')
 
 dependency_versions = {
   'cairo': '>= 1.16.0',
-  'glib': '>= 2.74.0',
+  'glib': '>= 2.72.0',
   'gtk': '>= 3.24.0',
   'xfce4': '>= 4.18.0',
   'libxfce4windowing': '>= 4.20.1',
