@@ -5,18 +5,12 @@ plugin_sources = [
   'launcher-dialog.h',
 ]
 
-plugin_sources += custom_target(
-  'launcher-dialog_ui.h',
-  input: 'launcher-dialog.glade',
-  output: 'launcher-dialog_ui.h',
-  command: [xdt_csource, '--static', '--strip-comments', '--strip-content', '--name=launcher_dialog_ui', '--output=@OUTPUT@', '@INPUT@'],
-)
-
 plugin_install_subdir = 'xfce4' / 'panel' / 'plugins'
 
 shared_module(
   'launcher',
   plugin_sources,
+  sources: xfce4_panel_resources_c,
   gnu_symbol_visibility: 'hidden',
   c_args: [
     '-DG_LOG_DOMAIN="@0@"'.format('liblauncher'),

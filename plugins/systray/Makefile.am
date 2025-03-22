@@ -13,12 +13,12 @@ plugin_LTLIBRARIES = \
 libsystray_built_sources = \
 	sn-watcher.h \
 	sn-watcher.c \
-	sn-dialog-ui.h \
 	systray-marshal.c \
 	systray-marshal.h
 
 libsystray_la_SOURCES = \
 	$(libsystray_built_sources) \
+	$(top_srcdir)/common/xfce4-panel-resources.c \
 	sn-config.c \
 	sn-config.h \
 	sn-backend.c \
@@ -94,7 +94,6 @@ desktop_DATA = $(desktop_in_files:.desktop.in.in=.desktop)
 
 EXTRA_DIST = \
 	$(desktop_in_files) \
-	sn-dialog.glade \
 	systray-marshal.list \
 	meson.build \
 	sn-watcher.xml \
@@ -118,9 +117,6 @@ sn-watcher.c: sn-watcher.xml Makefile
 	--interface-prefix org.kde.StatusNotifierWatcher \
 	--generate-c-code sn-watcher \
 	$(srcdir)/sn-watcher.xml
-
-sn-dialog-ui.h: sn-dialog.glade
-	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=sn_dialog_ui $< >$@
 
 systray-marshal.h: systray-marshal.list Makefile
 	$(AM_V_GEN) glib-genmarshal --header --internal --prefix=_systray_marshal $< > $@

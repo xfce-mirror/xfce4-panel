@@ -23,7 +23,6 @@
 #include "config.h"
 #endif
 
-#include "sn-dialog-ui.h"
 #include "sn-dialog.h"
 
 #include "common/panel-private.h"
@@ -484,8 +483,7 @@ sn_dialog_build (SnDialog *dialog)
   gtk_builder_set_translation_domain (dialog->builder, GETTEXT_PACKAGE);
 
   /* load the builder data into the object */
-  if (gtk_builder_add_from_string (dialog->builder, sn_dialog_ui,
-                                   sn_dialog_ui_length, &error))
+  if (gtk_builder_add_from_resource (dialog->builder, "/org/xfce/panel/sn-dialog.glade", &error))
     {
       object = gtk_builder_get_object (dialog->builder, "dialog");
       g_return_val_if_fail (XFCE_IS_TITLED_DIALOG (object), FALSE);

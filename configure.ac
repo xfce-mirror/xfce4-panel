@@ -46,8 +46,7 @@ dnl ***************************
 dnl *** Initialize automake ***
 dnl ***************************
 AC_CONFIG_HEADERS([config.h])
-AM_INIT_AUTOMAKE([1.8 no-dist-gzip dist-bzip2 tar-ustar foreign])
-AM_MAINTAINER_MODE()
+AM_INIT_AUTOMAKE([1.8 no-dist-gzip dist-bzip2 tar-ustar foreign subdir-objects])
 AC_CONFIG_MACRO_DIRS([m4])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
@@ -73,11 +72,15 @@ AC_PROG_CC()
 AM_PROG_CC_C_O()
 LT_PATH_LD([])
 AC_PROG_INSTALL()
-AC_PATH_PROG([XDT_GEN_VISIBILITY], [xdt-gen-visibility])
-AC_PATH_PROG([XDT_CSOURCE], [xdt-csource])
-if test x"$XDT_CSOURCE" = x""; then
-  AC_MSG_ERROR([Could not find xdt-csource in PATH, please install xfce4-dev-tools])
+AC_PATH_PROG([XDT_GEN_VISIBILITY], [xdt-gen-visibility], [], [$PWD:$PATH])
+if test x"$XDT_GEN_VISIBILITY" = x""; then
+  AC_MSG_ERROR([Could not find xdt-gen-visibility in PATH, please install xfce4-dev-tools])
+elif test x"$XDT_GEN_VISIBILITY" = x"$PWD/xdt-gen-visibility"; then
+  XDT_GEN_VISIBILITY_DIST="xdt-gen-visibility"
+else
+  XDT_GEN_VISIBILITY_DIST=""
 fi
+AC_SUBST([XDT_GEN_VISIBILITY_DIST])
 m4_ifdef([AC_PROG_SED], [AC_PROG_SED], [AC_CHECK_PROG(SED, sed, sed)])
 
 dnl **************************
@@ -138,6 +141,7 @@ dnl ***********************************
 dnl *** Check for gdbus-codegen ***
 dnl ***********************************
 XDT_CHECK_PACKAGE_BINARY([GDBUS_CODEGEN], [gio-2.0], [gdbus_codegen], [gdbus-codegen])
+XDT_CHECK_PACKAGE_BINARY([GLIB_COMPILE_RESOURCES], [gio-2.0], [glib_compile_resources], [glib-compile-resources])
 
 dnl ***********************************
 dnl *** Check for required packages ***

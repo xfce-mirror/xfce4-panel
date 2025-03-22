@@ -43,6 +43,7 @@ EXTRA_DIST = \
 	meson_options.txt \
 	po/meson.build \
 	xfce-revision.h.in \
+	$(XDT_GEN_VISIBILITY_DIST) \
 	$(NULL)
 
 DISTCLEANFILES = \

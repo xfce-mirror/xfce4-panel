@@ -22,7 +22,6 @@
 #endif
 
 #include "pager-buttons.h"
-#include "pager-dialog_ui.h"
 #include "pager.h"
 
 #include "common/panel-debug.h"
@@ -851,8 +850,7 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   panel_return_if_fail (PAGER_IS_PLUGIN (plugin));
 
   /* setup the dialog */
-  builder = panel_utils_builder_new (panel_plugin, pager_dialog_ui,
-                                     pager_dialog_ui_length, &dialog);
+  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/pager-dialog.glade", &dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 

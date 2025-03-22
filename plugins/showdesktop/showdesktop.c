@@ -21,7 +21,6 @@
 #include "config.h"
 #endif
 
-#include "showdesktop-dialog_ui.h"
 #include "showdesktop.h"
 
 #include "common/panel-private.h"
@@ -563,8 +562,7 @@ showdesktop_configure (XfcePanelPlugin *panel_plugin)
   panel_return_if_fail (SHOW_DESKTOP_IS_PLUGIN (plugin));
 
   /* setup the dialog */
-  builder = panel_utils_builder_new (panel_plugin, showdesktop_dialog_ui,
-                                     showdesktop_dialog_ui_length, &dialog);
+  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/showdesktop-dialog.glade", &dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 

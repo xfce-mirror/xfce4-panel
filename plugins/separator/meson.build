@@ -3,18 +3,12 @@ plugin_sources = [
   'separator.h',
 ]
 
-plugin_sources += custom_target(
-  'separator-dialog_ui.h',
-  input: 'separator-dialog.glade',
-  output: 'separator-dialog_ui.h',
-  command: [xdt_csource, '--static', '--strip-comments', '--strip-content', '--name=separator_dialog_ui', '--output=@OUTPUT@', '@INPUT@'],
-)
-
 plugin_install_subdir = 'xfce4' / 'panel' / 'plugins'
 
 shared_module(
   'separator',
   plugin_sources,
+  sources: xfce4_panel_resources_c,
   gnu_symbol_visibility: 'hidden',
   c_args: [
     '-DG_LOG_DOMAIN="@0@"'.format('libseparator'),

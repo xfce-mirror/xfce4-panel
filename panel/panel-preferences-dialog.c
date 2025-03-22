@@ -26,7 +26,6 @@
 #include "panel-itembar.h"
 #include "panel-module.h"
 #include "panel-plugin-external.h"
-#include "panel-preferences-dialog-ui.h"
 #include "panel-preferences-dialog.h"
 
 #include "common/panel-private.h"
@@ -238,8 +237,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
 
   /* load the builder data into the object */
   gtk_builder_set_translation_domain (GTK_BUILDER (dialog), GETTEXT_PACKAGE);
-  gtk_builder_add_from_string (GTK_BUILDER (dialog), panel_preferences_dialog_ui,
-                               panel_preferences_dialog_ui_length, NULL);
+  gtk_builder_add_from_resource (GTK_BUILDER (dialog), "/org/xfce/panel/panel-preferences-dialog.glade", NULL);
 
   /* get the dialog */
   window = gtk_builder_get_object (GTK_BUILDER (dialog), "dialog");
