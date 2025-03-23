@@ -1,3 +1,37 @@
+4.20.4 (2025-03-23)
+======
+- meson-build: Revert glib version change
+- build: Define xfce4 min version >= 4.18
+- build: Search for xdt-gen-visibility also in the working tree
+- build: Replace xdt-csource with glib-compile-resources
+- build: Fix wrong macro for min version
+- panel: Show window in panel_application_new_window()
+- wayland: autohide: Mitigate lack of size_allocate()
+- systray: Use correct gtk functions to show/hide items
+- wayland: Set exclusive zone for autohide window
+- build: Remove libxfce4panel-config.h from GI
+- meson-build: Add missing check for sys/prctl.h
+- tasklist: Support window app changes
+- build: Automate copyright year management
+- item-dialog: Also search for plugins by their module name
+- I18n: Update po/LINGUAS list
+- wayland: wrapper: Set GtkProgressBar style properties to min values
+- systray: Fix legacy icons being drawn with offset
+- meson-build: Use SPDX license expression
+- autotools-build: Check for xfce4-dev-tools in configure.ac
+- Translation Updates:
+  Albanian, Amharic, Arabic, Armenian (Armenia), Asturian, Basque,
+  Belarusian, Bengali, Bulgarian, Catalan, Chinese (China), Chinese
+  (Hong Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch,
+  Eastern Armenian, English (Australia), English (United Kingdom),
+  Estonian, Finnish, French, Galician, Georgian, German, Greek, Hebrew,
+  Hungarian, Icelandic, Indonesian, Interlingue, Italian, Japanese,
+  Kazakh, Korean, Lithuanian, Malay, Norwegian Bokmål, Norwegian
+  Nynorsk, Occitan (post 1500), Panjabi (Punjabi), Polish, Portuguese,
+  Portuguese (Brazil), Romanian, Russian, Serbian, Sinhala, Slovak,
+  Slovenian, Spanish, Swedish, Thai, Turkish, Ukrainian, Venetian,
+  Vietnamese
+
 4.20.3 (2025-02-04)
 ======
 - libxfce4panel: Fix ABI break

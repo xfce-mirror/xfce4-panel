@@ -12,7 +12,7 @@ m4_define([libxfce4panel_verinfo], [4:0:0]) dnl current:revision:age
 m4_define([libxfce4panel_version_api], [2.0])
 m4_define([xfce4_panel_config_version], [2])
 m4_define([copyright_year], [2025])
-XDT_VERSION_INIT([4.20.3], [git])
+XDT_VERSION_INIT([4.20.4])
 
 dnl minimum required versions
 m4_define([glib_minimum_version], [2.72.0])
