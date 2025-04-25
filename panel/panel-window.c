@@ -1612,8 +1612,9 @@ panel_window_size_allocate (GtkWidget *widget,
   gtk_widget_set_allocation (widget, alloc);
   window->alloc = *alloc;
 
-  if (G_UNLIKELY (window->autohide_state == AUTOHIDE_HIDDEN
-                  || window->autohide_state == AUTOHIDE_POPUP))
+  if (G_UNLIKELY (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER
+                  && (window->autohide_state == AUTOHIDE_HIDDEN
+                      || window->autohide_state == AUTOHIDE_POPUP)))
     {
       /* autohide timeout is already running, so let's wait with hiding the panel */
       if ((window->autohide_timeout_id != 0 || window->popdown_progress != -G_MAXINT)
@@ -3167,7 +3168,7 @@ panel_window_autohide_timeout (gpointer user_data)
   PanelWindow *window = PANEL_WINDOW (user_data);
 
   panel_return_val_if_fail (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER, FALSE);
-  panel_return_val_if_fail (window->autohide_block == 0, FALSE);
+  panel_return_val_if_fail (window->autohide_block == 0 || window->autohide_state == AUTOHIDE_POPUP, FALSE);
 
   /* wait for all external plugins to be embedded on Wayland, othewise there may be a crash
    * when remapping panel window in autohide_queue() */
@@ -3327,10 +3328,21 @@ panel_window_autohide_queue (PanelWindow *window,
     g_source_remove (window->autohide_ease_out_id);
 
   /* set new autohide state */
-  window->autohide_state = new_state;
+  if (new_state == AUTOHIDE_VISIBLE
+      && (window->autohide_state == AUTOHIDE_HIDDEN || window->autohide_state == AUTOHIDE_POPUP)
+      && gtk_layer_is_supported ())
+    /*
+     * For some reason, calling gtk_widget_queue_resize() below doesn't always trigger
+     * size_allocate() on wayland, whereas it seems to trigger it more reliably when calling
+     * it later from panel_window_autohide_timeout(), so let's do it there instead. This avoids
+     * using panel_utils_widget_remap(), which should really only be used as a last resort.
+     */
+    window->autohide_state = AUTOHIDE_POPUP;
+  else
+    window->autohide_state = new_state;
 
   /* already hidden */
-  if (new_state == AUTOHIDE_HIDDEN)
+  if (window->autohide_state == AUTOHIDE_HIDDEN)
     return;
 
   /* force a layout update to disable struts */
@@ -3338,7 +3350,7 @@ panel_window_autohide_queue (PanelWindow *window,
       || window->snap_position != SNAP_POSITION_NONE)
     panel_window_screen_layout_changed (window->screen, window);
 
-  if (new_state == AUTOHIDE_VISIBLE)
+  if (window->autohide_state == AUTOHIDE_VISIBLE)
     {
       /* queue a resize to make sure the panel is visible */
       gtk_widget_queue_resize (GTK_WIDGET (window));
@@ -3347,9 +3359,9 @@ panel_window_autohide_queue (PanelWindow *window,
   else
     {
       /* timeout delay */
-      if (new_state == AUTOHIDE_POPDOWN)
+      if (window->autohide_state == AUTOHIDE_POPDOWN)
         delay = window->popdown_delay;
-      else if (new_state == AUTOHIDE_POPDOWN_SLOW)
+      else if (window->autohide_state == AUTOHIDE_POPDOWN_SLOW)
         delay = window->popdown_delay * 4;
       else
         delay = window->popup_delay;
