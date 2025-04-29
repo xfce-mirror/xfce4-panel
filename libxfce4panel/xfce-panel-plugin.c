@@ -2068,17 +2068,15 @@ xfce_panel_plugin_set_small (XfcePanelPlugin *plugin,
 gint
 xfce_panel_plugin_get_icon_size (XfcePanelPlugin *plugin)
 {
-  gint width;
-
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), FALSE);
   g_return_val_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin), FALSE);
 
 
-  width = xfce_panel_plugin_get_size (plugin) / xfce_panel_plugin_get_nrows (plugin);
-
   /* 0 is handled as 'automatic sizing' */
   if (plugin->priv->icon_size == 0)
     {
+      gint width = xfce_panel_plugin_get_size (plugin) / xfce_panel_plugin_get_nrows (plugin);
+
       /* Since symbolic icons are usually only provided in 16px we
       *  try to be clever and use size steps.
          Some assumptions: We set 0px padding on panel buttons in the panel's internal
@@ -2097,7 +2095,7 @@ xfce_panel_plugin_get_icon_size (XfcePanelPlugin *plugin)
     }
   else
     {
-      return MIN (plugin->priv->icon_size, width - XFCE_PANEL_PLUGIN_ICON_PADDING);
+      return plugin->priv->icon_size;
     }
 }
 
