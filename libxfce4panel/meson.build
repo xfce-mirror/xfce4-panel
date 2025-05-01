@@ -50,14 +50,12 @@ libpanel_sources += gnome.genmarshal(
   install_header: false,
 )
 
-libpanel_sources += custom_target(
-  'libxfce4panel-visibility.h',
+libpanel_sources += configure_file(
   input: 'libxfce4panel.symbols',
   output: 'libxfce4panel-visibility.h',
   command: [xdt_gen_visibility, '--kind=header', '@INPUT@', '@OUTPUT@'],
 )
-libpanel_sources += custom_target(
-  'libxfce4panel-visibility.c',
+libpanel_sources += configure_file(
   input: 'libxfce4panel.symbols',
   output: 'libxfce4panel-visibility.c',
   command: [xdt_gen_visibility, '--kind=source', '@INPUT@', '@OUTPUT@'],
