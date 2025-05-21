@@ -101,7 +101,7 @@ panel_plugin_external_wrapper_x11_init (PanelPluginExternalWrapperX11 *wrapper)
                     G_CALLBACK (panel_plugin_external_wrapper_x11_socket_plug_added), wrapper);
   g_signal_connect (wrapper->socket, "plug-removed",
                     G_CALLBACK (panel_plugin_external_wrapper_x11_socket_plug_removed), wrapper);
-  gtk_box_pack_start (GTK_BOX (wrapper), wrapper->socket, TRUE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (wrapper), wrapper->socket, TRUE, TRUE, 0);
   gtk_widget_show (wrapper->socket);
 }
 
