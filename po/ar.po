@@ -5,16 +5,17 @@
 # 
 # Translators:
 # Xfce Bot <transifex@xfce.org>, 2022
+# Abdualrahman Hasan, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-14 00:47+0100\n"
+"POT-Creation-Date: 2023-05-30 00:48+0200\n"
 "PO-Revision-Date: 2022-12-22 11:35+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>, 2022\n"
-"Language-Team: Arabic (https://www.transifex.com/xfce/teams/16840/ar/)\n"
+"Last-Translator: Abdualrahman Hasan, 2025\n"
+"Language-Team: Arabic (https://app.transifex.com/xfce/teams/16840/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -400,7 +401,7 @@ msgstr "الملحق \"%s\" غادَر اللوحة بشكل غير متوقع, 
 
 #: ../panel/panel-plugin-external.c:519
 msgid "Plugin Restart"
-msgstr ""
+msgstr "إعادة تشغيل الملحق"
 
 #: ../panel/panel-plugin-external.c:520
 #, c-format
@@ -510,7 +511,7 @@ msgstr "تفضيلات اللوحة"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Profiles:"
-msgstr ""
+msgstr "ملفات تعريف:"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid "_Backup and restore"
@@ -555,7 +556,7 @@ msgstr "حدد هذا الخيار لإخفاء مؤشرات الشريط وإق
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "_Reserve space on screen edges for the panel"
-msgstr ""
+msgstr "_حجز مساحة على حدود الشاشة للوحة"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
@@ -563,10 +564,12 @@ msgid ""
 "behind the panel. This only works when the panel is attached to a screen "
 "edge."
 msgstr ""
+"حدد هذا الخيار إذا كنت لا تريد تكبير النوافذ لتغطية المنطقة خلف اللوحة. هذا "
+"يعمل فقط عندما تكون اللوحة مرتبطة بركن من الشاشة."
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
-msgstr ""
+msgstr "إخفاء اللوحة _تلقائيا:"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid "O_utput:"
@@ -576,11 +579,11 @@ msgstr "مخرجات:"
 #. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:29
 msgid "<b>Measurements</b>"
-msgstr ""
+msgstr "<b>المقاييس</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Row _size (pixels):"
-msgstr ""
+msgstr "_حجم الصف (بالبكسل):"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Num_ber of rows:"
@@ -588,7 +591,7 @@ msgstr "عدد الصفوف:"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "L_ength (pixels):"
-msgstr ""
+msgstr "_الطول (بالبكسل):"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "A_utomatically increase the length"
@@ -611,7 +614,7 @@ msgstr "الوضع الداكن"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "<b>Background</b>"
-msgstr ""
+msgstr "<b>الخلفية</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 #: ../plugins/separator/separator-dialog.glade.h:7
@@ -640,11 +643,11 @@ msgstr "<b>الأيقونات</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Adjust size au_tomatically"
-msgstr ""
+msgstr "ضبط الحجم _تلقائيا"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Fixed icon _size (pixels):"
-msgstr ""
+msgstr "_حجم الأيقونات الثابت (بالبكسل):"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "<b>Opacity</b>"
@@ -790,7 +793,7 @@ msgstr "العنوان:"
 
 #: ../plugins/actions/actions-dialog.glade.h:11
 msgid "Custo_m title:"
-msgstr ""
+msgstr "عنوان _مخصص:"
 
 #: ../plugins/actions/actions-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:27
@@ -878,20 +881,20 @@ msgstr "الكمبيوتر يسبت بعد %d ثانية."
 
 #: ../plugins/actions/actions.c:209
 msgid "Hybrid Sleep"
-msgstr ""
+msgstr "السكون الهجين"
 
 #: ../plugins/actions/actions.c:210
 msgid "_Hybrid Sleep"
-msgstr ""
+msgstr "_السكون الهجين"
 
 #: ../plugins/actions/actions.c:211
 msgid "Do you want to hibernate and suspend the system?"
-msgstr ""
+msgstr "هل تريد إسبات وتعليق النظام؟"
 
 #: ../plugins/actions/actions.c:212
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
-msgstr ""
+msgstr "إسبات وتعليق الحاسوب في %d ثوان."
 
 #: ../plugins/actions/actions.c:218
 msgid "Suspend"
@@ -957,7 +960,7 @@ msgstr "فشل في تشغيل الإجراء \"%s\""
 
 #: ../plugins/actions/actions.c:1327
 msgid "Little Mouse"
-msgstr ""
+msgstr "الفأرة الصغيرة"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
@@ -979,7 +982,7 @@ msgstr "عنوان الزر:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Show button on one _line"
-msgstr ""
+msgstr "إظهار الزر على _خط واحد"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "_Show button title"
@@ -1055,7 +1058,7 @@ msgstr "_موافق"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:650
-#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2491
+#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2487
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "فشل تنفيد الأمر \"%s\"."
@@ -1114,31 +1117,31 @@ msgstr "تهيئة خاصة"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
 msgid "Decimal"
-msgstr ""
+msgstr "عشري"
 
 #: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Sexagesimal"
-msgstr ""
+msgstr "ستيني"
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Binary time"
-msgstr ""
+msgstr "الوقت الثنائي"
 
 #: ../plugins/clock/clock-dialog.glade.h:4
 msgid "Date, then time"
-msgstr ""
+msgstr "التاريخ، ثم الوقت"
 
 #: ../plugins/clock/clock-dialog.glade.h:5
 msgid "Time, then date"
-msgstr ""
+msgstr "الوقت، ثم التاريخ"
 
 #: ../plugins/clock/clock-dialog.glade.h:6
 msgid "Date Only"
-msgstr ""
+msgstr "تاريخ فقط"
 
 #: ../plugins/clock/clock-dialog.glade.h:7
 msgid "Time Only"
-msgstr ""
+msgstr "وقت فقط"
 
 #: ../plugins/clock/clock-dialog.glade.h:8
 msgid "Analog"
@@ -1197,7 +1200,7 @@ msgstr "أم_ر:"
 
 #: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Calendar"
-msgstr ""
+msgstr "التقويم"
 
 #: ../plugins/clock/clock-dialog.glade.h:24
 #, no-c-format
@@ -1233,7 +1236,7 @@ msgstr "استخدم ساعة ال 24"
 
 #: ../plugins/clock/clock-dialog.glade.h:31
 msgid "Binary mode:"
-msgstr ""
+msgstr "النظام الثنائي"
 
 #: ../plugins/clock/clock-dialog.glade.h:32
 msgid "Display _seconds"
@@ -1255,11 +1258,11 @@ msgstr "عرض الشبك_ة"
 
 #: ../plugins/clock/clock-dialog.glade.h:37
 msgid "Font:"
-msgstr ""
+msgstr "الخط:"
 
 #: ../plugins/clock/clock-dialog.glade.h:38
 msgid "Format:"
-msgstr ""
+msgstr "التنسيق:"
 
 #: ../plugins/clock/clock-dialog.glade.h:40
 #, no-c-format
@@ -1276,7 +1279,7 @@ msgstr "التاريخ"
 
 #: ../plugins/clock/clock-dialog.glade.h:42
 msgid "Time"
-msgstr ""
+msgstr "وقت"
 
 #: ../plugins/clock/clock-dialog.glade.h:43
 msgid "Clock Options"
@@ -1648,7 +1651,7 @@ msgstr "أن_شئ"
 
 #: ../plugins/directorymenu/directorymenu.c:942
 msgid "Create & _Open"
-msgstr ""
+msgstr "أنشأ و_افتح"
 
 #: ../plugins/directorymenu/directorymenu.c:956
 msgid "Enter the new name:"
@@ -1689,19 +1692,19 @@ msgstr "_إختيار مجلد:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "Show 'New Text _Document'"
-msgstr ""
+msgstr "إظهار '_مستند نصي جديد'"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid "Show '_New Folder'"
-msgstr ""
+msgstr "إظهار 'مجلد _جديد'"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
 msgid "Show 'Open in _Terminal'"
-msgstr ""
+msgstr "إظهار 'فتح في _الوحدة الطرفية'"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
 msgid "Show '_Open _Folder'"
-msgstr ""
+msgstr "إظهار '_فتح _مجلد'"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
 msgid "Menu"
@@ -1739,7 +1742,7 @@ msgstr "فتح قائمة الإطلاق"
 msgid "Unnamed Item"
 msgstr "عنصر بدون اسم"
 
-#: ../plugins/launcher/launcher.c:1797
+#: ../plugins/launcher/launcher.c:1801
 msgid "No items"
 msgstr "لا توجد عناصر"
 
@@ -1998,7 +2001,7 @@ msgstr ""
 
 #: ../plugins/systray/sn-dialog.glade.h:9
 msgid "_Hide items by default"
-msgstr ""
+msgstr "_إخفاء العناصر إفتراضيا"
 
 #: ../plugins/systray/sn-dialog.glade.h:10
 msgid "When enabled, all new items will be marked as \"Hidden\""
@@ -2018,7 +2021,7 @@ msgstr "السلوك"
 
 #: ../plugins/systray/sn-dialog.glade.h:14
 msgid "Item"
-msgstr ""
+msgstr "عنصر"
 
 #: ../plugins/systray/sn-dialog.glade.h:15
 msgid "Hidden"
@@ -2034,7 +2037,7 @@ msgstr ""
 
 #: ../plugins/systray/sn-dialog.glade.h:18
 msgid "Known Items"
-msgstr ""
+msgstr "العناصر المعروفة"
 
 #: ../plugins/systray/sn-dialog.glade.h:19
 msgid "_Menu is primary action"
@@ -2042,7 +2045,7 @@ msgstr ""
 
 #: ../plugins/systray/sn-dialog.glade.h:20
 msgid "Left click will always display the menu for item"
-msgstr ""
+msgstr "النقرة اليسرى ستعرض قائمة العنصر دوما"
 
 #: ../plugins/systray/sn-dialog.glade.h:21
 msgid "_Request symbolic icons"
@@ -2054,7 +2057,7 @@ msgstr ""
 
 #: ../plugins/systray/sn-dialog.glade.h:23
 msgid "Features"
-msgstr ""
+msgstr "المميزات"
 
 #: ../plugins/systray/sn-dialog.glade.h:24
 msgid "Status Notifiers"
@@ -2110,7 +2113,7 @@ msgstr "تصغير النافذة"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "New Instance"
-msgstr ""
+msgstr "مثيل جديد"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
 msgid "Timestamp"
@@ -2151,7 +2154,7 @@ msgstr "عرض المقبض"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show _tooltips"
-msgstr ""
+msgstr "إظهار _تلميحات سريعة"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
@@ -2163,7 +2166,7 @@ msgstr "إجرا_ء الزر الأوسط:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "_Group windows by application"
-msgstr ""
+msgstr "_اجمع النوافذ بترتيب التطبيق"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Restore minimized windows to current _workspace"
@@ -2194,36 +2197,36 @@ msgstr "عرض النوافذ من جميع الشاشات"
 msgid "Show only _minimized windows"
 msgstr "عرض فقط النوافذ المصغرة"
 
-#: ../plugins/tasklist/tasklist-widget.c:3119
+#: ../plugins/tasklist/tasklist-widget.c:3131
 #, c-format
 msgid "Unable to start new instance of '%s'"
-msgstr ""
+msgstr "غير قادر على بدء مثيل جديد من '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:3123
+#: ../plugins/tasklist/tasklist-widget.c:3135
 msgid "Error"
 msgstr "خطأ"
 
-#: ../plugins/tasklist/tasklist-widget.c:3152
+#: ../plugins/tasklist/tasklist-widget.c:3164
 msgid "Launch New Instance"
-msgstr ""
+msgstr "تشغيل مثيل جديد"
 
-#: ../plugins/tasklist/tasklist-widget.c:3899
+#: ../plugins/tasklist/tasklist-widget.c:3911
 msgid "Mi_nimize All"
 msgstr "صغّر الكل"
 
-#: ../plugins/tasklist/tasklist-widget.c:3906
+#: ../plugins/tasklist/tasklist-widget.c:3918
 msgid "Un_minimize All"
 msgstr "ألغِ تص_غير الكل"
 
-#: ../plugins/tasklist/tasklist-widget.c:3913
+#: ../plugins/tasklist/tasklist-widget.c:3925
 msgid "Ma_ximize All"
 msgstr "ك_بّر الكل"
 
-#: ../plugins/tasklist/tasklist-widget.c:3920
+#: ../plugins/tasklist/tasklist-widget.c:3932
 msgid "_Unmaximize All"
 msgstr "_ألغِ تكبير الكل"
 
-#: ../plugins/tasklist/tasklist-widget.c:3931
+#: ../plugins/tasklist/tasklist-widget.c:3943
 msgid "_Close All"
 msgstr "_إغلاق الكل"
 
