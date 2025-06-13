@@ -832,13 +832,18 @@ clock_plugin_validate_format_specifier (GtkEntry *entry,
                                         ClockPlugin *plugin)
 {
   GtkStyleContext *context;
+  gchar *clock_time;
 
   context = gtk_widget_get_style_context (GTK_WIDGET (entry));
 
-  if (!clock_time_strdup_strftime (plugin->time, format))
+  clock_time = clock_time_strdup_strftime (plugin->time, format);
+  if (!clock_time)
     gtk_style_context_add_class (context, "error");
   else
-    gtk_style_context_remove_class (context, "error");
+    {
+      gtk_style_context_remove_class (context, "error");
+      g_free (clock_time);
+    }
 }
 
 
