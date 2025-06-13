@@ -230,7 +230,10 @@ clock_time_strdup_strftime (ClockTime *time,
 
   /* Explicitely return NULL if a format specifier fails */
   if (xfce_str_is_empty (str))
-    return NULL;
+    {
+      g_free (str);
+      return NULL;
+    }
   else
     return str;
 }
