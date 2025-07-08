@@ -3219,6 +3219,15 @@ xfce_tasklist_button_menu_destroy (GtkWidget *menu,
 
 
 
+static void
+xfce_tasklist_menu_deactivate (GtkWidget *attach_widget,
+                               GtkMenu *menu)
+{
+  gtk_menu_shell_deactivate (GTK_MENU_SHELL (menu));
+}
+
+
+
 static gboolean
 xfce_tasklist_button_button_press_event (GtkWidget *button,
                                          GdkEventButton *event,
@@ -3252,7 +3261,7 @@ xfce_tasklist_button_button_press_event (GtkWidget *button,
       g_signal_connect (G_OBJECT (menu), "deactivate",
                         G_CALLBACK (xfce_tasklist_button_menu_destroy), child);
 
-      gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
+      gtk_menu_attach_to_widget (GTK_MENU (menu), button, xfce_tasklist_menu_deactivate);
       xfce_panel_plugin_popup_menu (plugin, GTK_MENU (menu), button, (GdkEvent *) event);
 
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
@@ -4148,7 +4157,7 @@ xfce_tasklist_group_button_button_press_event (GtkWidget *button,
       g_signal_connect (G_OBJECT (menu), "deactivate",
                         G_CALLBACK (xfce_tasklist_group_button_menu_destroy), group_child);
 
-      gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
+      gtk_menu_attach_to_widget (GTK_MENU (menu), button, xfce_tasklist_menu_deactivate);
       xfce_panel_plugin_popup_menu (plugin, GTK_MENU (menu), button, (GdkEvent *) event);
 
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
