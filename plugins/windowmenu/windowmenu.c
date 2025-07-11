@@ -438,6 +438,8 @@ window_menu_plugin_screen_changed (GtkWidget *widget,
   /* set the new screen */
   plugin->screen = screen;
   manager = xfw_screen_get_workspace_manager (screen);
+
+  /* window<->workspace association only works on X11, where there is only one workspace group */
   plugin->workspace_group = xfw_workspace_manager_list_workspace_groups (manager)->data;
 
   /* connect signal to monitor this screen */
@@ -866,11 +868,21 @@ static void
 window_menu_plugin_workspace_add (GtkWidget *mi,
                                   WindowMenuPlugin *plugin)
 {
+  GdkMonitor *monitor;
+  GList *groups;
+
   panel_return_if_fail (WINDOW_MENU_IS_PLUGIN (plugin));
   panel_return_if_fail (XFW_IS_WORKSPACE_GROUP (plugin->workspace_group));
 
+  /* adding/rmoving workspaces is also available on wayland and it seems reasonable
+   * to do it on the last workspace group for the monitor the plugin is on */
+  monitor = panel_utils_get_monitor_at_widget (GTK_WIDGET (plugin));
+  groups = panel_utils_list_workspace_groups_for_monitor (plugin->screen, monitor);
+
   /* increase the number of workspaces */
-  xfw_workspace_group_create_workspace (plugin->workspace_group, NULL, NULL);
+  xfw_workspace_group_create_workspace (g_list_last (groups)->data, NULL, NULL);
+
+  g_list_free (groups);
 }
 
 
@@ -880,12 +892,22 @@ window_menu_plugin_workspace_remove (GtkWidget *mi,
                                      WindowMenuPlugin *plugin)
 {
   XfwWorkspace *workspace;
+  GdkMonitor *monitor;
+  GList *groups;
+
   panel_return_if_fail (WINDOW_MENU_IS_PLUGIN (plugin));
   panel_return_if_fail (XFW_IS_WORKSPACE_GROUP (plugin->workspace_group));
 
+  /* adding/rmoving workspaces is also available on wayland and it seems reasonable
+   * to do it on the last workspace group for the monitor the plugin is on */
+  monitor = panel_utils_get_monitor_at_widget (GTK_WIDGET (plugin));
+  groups = panel_utils_list_workspace_groups_for_monitor (plugin->screen, monitor);
+
   /* decrease the number of workspaces */
-  workspace = g_list_last (xfw_workspace_group_list_workspaces (plugin->workspace_group))->data;
+  workspace = g_list_last (xfw_workspace_group_list_workspaces (g_list_last (groups)->data))->data;
   xfw_workspace_remove (workspace, NULL);
+
+  g_list_free (groups);
 }
 
 

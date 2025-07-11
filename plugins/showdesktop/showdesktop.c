@@ -347,6 +347,8 @@ show_desktop_plugin_button_release_event (GtkToggleButton *button,
       if (li == NULL)
         return FALSE;
 
+      /* shading and window<->workspace association only work on X11,
+       * where there is only one workspace group */
       active_ws = xfw_workspace_group_get_active_workspace (li->data);
       windows = xfw_screen_get_windows (plugin->xfw_screen);
 

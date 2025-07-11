@@ -24,7 +24,6 @@
 #include "panel-utils.h"
 
 #include <libxfce4ui/libxfce4ui.h>
-#include <libxfce4windowing/libxfce4windowing.h>
 
 
 
@@ -318,4 +317,96 @@ panel_utils_compare_xfw_gdk_monitors (gconstpointer a,
                                       gconstpointer b)
 {
   return xfw_monitor_get_gdk_monitor ((XfwMonitor *) a) == b ? 0 : 1;
+}
+
+
+
+GdkMonitor *
+panel_utils_get_monitor_at_widget (GtkWidget *widget)
+{
+  GdkDisplay *display = gdk_display_get_default ();
+  GdkWindow *window = gtk_widget_get_window (widget);
+  if (window != NULL)
+    return gdk_display_get_monitor_at_window (display, window);
+
+  return gdk_display_get_monitor (display, 0);
+}
+
+
+
+GList *
+panel_utils_list_workspace_groups_for_monitor (XfwScreen *xfw_screen,
+                                               GdkMonitor *monitor)
+{
+  XfwWorkspaceManager *manager = xfw_screen_get_workspace_manager (xfw_screen);
+  GList *groups = NULL;
+  for (GList *lp = xfw_workspace_manager_list_workspace_groups (manager); lp != NULL; lp = lp->next)
+    if (g_list_find_custom (xfw_workspace_group_get_monitors (lp->data), monitor, panel_utils_compare_xfw_gdk_monitors))
+      groups = g_list_prepend (groups, lp->data);
+
+  return g_list_reverse (groups);
+}
+
+
+
+GList *
+panel_utils_list_workspaces_for_monitor (XfwScreen *xfw_screen,
+                                         GdkMonitor *monitor)
+{
+  GList *groups = panel_utils_list_workspace_groups_for_monitor (xfw_screen, monitor);
+  GList *workspaces = NULL;
+  for (GList *lp = groups; lp != NULL; lp = lp->next)
+    for (GList *lq = xfw_workspace_group_list_workspaces (lp->data); lq != NULL; lq = lq->next)
+      workspaces = g_list_prepend (workspaces, lq->data);
+
+  g_list_free (groups);
+  return g_list_reverse (workspaces);
+}
+
+
+
+XfwWorkspace *
+panel_utils_get_active_workspace_for_monitor (XfwScreen *xfw_screen,
+                                              GdkMonitor *monitor)
+{
+  GList *groups = panel_utils_list_workspace_groups_for_monitor (xfw_screen, monitor);
+  XfwWorkspace *workspace = NULL;
+  for (GList *lp = groups; lp != NULL; lp = lp->next)
+    {
+      workspace = xfw_workspace_group_get_active_workspace (lp->data);
+      if (workspace != NULL)
+        break;
+    }
+
+  g_list_free (groups);
+  return workspace;
+}
+
+
+
+guint
+panel_utils_get_workspace_count_for_monitor (XfwScreen *xfw_screen,
+                                             GdkMonitor *monitor)
+{
+  GList *groups = panel_utils_list_workspace_groups_for_monitor (xfw_screen, monitor);
+  guint count = 0;
+  for (GList *lp = groups; lp != NULL; lp = lp->next)
+    count += xfw_workspace_group_get_workspace_count (lp->data);
+
+  g_list_free (groups);
+  return count;
+}
+
+
+
+gint
+panel_utils_get_workspace_number_for_monitor (XfwScreen *xfw_screen,
+                                              GdkMonitor *monitor,
+                                              XfwWorkspace *workspace)
+{
+  GList *workspaces = panel_utils_list_workspaces_for_monitor (xfw_screen, monitor);
+  gint number = g_list_index (workspaces, workspace);
+
+  g_list_free (workspaces);
+  return number;
 }
