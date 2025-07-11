@@ -67,6 +67,7 @@ shared_module(
     x11_deps,
     libxfce4util,
     libxfce4ui,
+    libxfce4windowing,
     xfconf,
   ],
   link_with: [
