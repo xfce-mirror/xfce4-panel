@@ -1680,6 +1680,9 @@ xfce_tasklist_connect_screen (XfceTasklist *tasklist)
   tasklist->display = gtk_widget_get_display (GTK_WIDGET (tasklist));
   tasklist->screen = xfw_screen_get_default ();
   manager = xfw_screen_get_workspace_manager (tasklist->screen);
+
+  /* window button visibility based on window<->workspace association only works on X11,
+   * where there is only one workspace group */
   tasklist->workspace_group = xfw_workspace_manager_list_workspace_groups (manager)->data;
 
   /* add all existing windows on this screen */

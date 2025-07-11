@@ -22,6 +22,7 @@
 #include "libxfce4panel/libxfce4panel.h"
 
 #include <gtk/gtk.h>
+#include <libxfce4windowing/libxfce4windowing.h>
 
 G_BEGIN_DECLS
 
@@ -63,6 +64,30 @@ panel_utils_gtk_dialog_find_label_by_text (GtkDialog *dialog,
 gint
 panel_utils_compare_xfw_gdk_monitors (gconstpointer a,
                                       gconstpointer b);
+
+GdkMonitor *
+panel_utils_get_monitor_at_widget (GtkWidget *widget);
+
+GList *
+panel_utils_list_workspace_groups_for_monitor (XfwScreen *xfw_screen,
+                                               GdkMonitor *monitor);
+
+GList *
+panel_utils_list_workspaces_for_monitor (XfwScreen *xfw_screen,
+                                         GdkMonitor *monitor);
+
+XfwWorkspace *
+panel_utils_get_active_workspace_for_monitor (XfwScreen *xfw_screen,
+                                              GdkMonitor *monitor);
+
+guint
+panel_utils_get_workspace_count_for_monitor (XfwScreen *xfw_screen,
+                                             GdkMonitor *monitor);
+
+gint
+panel_utils_get_workspace_number_for_monitor (XfwScreen *xfw_screen,
+                                              GdkMonitor *monitor,
+                                              XfwWorkspace *workspace);
 
 G_END_DECLS
 

@@ -21,6 +21,7 @@ shared_module(
     gtk,
     libxfce4util,
     libxfce4ui,
+    libxfce4windowing,
     xfconf,
   ],
   link_with: [
