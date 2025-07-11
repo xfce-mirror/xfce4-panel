@@ -20,6 +20,7 @@ libseparator_la_CFLAGS = \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(CAIRO_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
+	$(LIBXFCE4WINDOWING_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 libseparator_la_LDFLAGS = \
@@ -36,6 +37,7 @@ libseparator_la_LIBADD = \
 	$(CAIRO_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
+	$(LIBXFCE4WINDOWING_LIBS) \
 	$(XFCONF_LIBS)
 
 libseparator_la_DEPENDENCIES = \
