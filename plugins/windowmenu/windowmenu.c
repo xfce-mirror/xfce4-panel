@@ -53,6 +53,7 @@ struct _WindowMenuPlugin
   GtkWidget *icon;
 
   /* settings */
+  GObject *settings_dialog;
   guint button_style : 1;
   guint workspace_actions : 1;
   guint workspace_names : 1;
@@ -569,14 +570,14 @@ window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   WindowMenuPlugin *plugin = WINDOW_MENU_PLUGIN (panel_plugin);
   GtkBuilder *builder;
-  GObject *dialog, *object;
+  GObject *object;
   guint i;
   const gchar *names[] = { "workspace-actions", "workspace-names",
                            "urgentcy-notification", "all-workspaces",
                            "style" };
 
   /* setup the dialog */
-  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/windowmenu-dialog.glade", &dialog);
+  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/windowmenu-dialog.glade", &plugin->settings_dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 
@@ -598,7 +599,7 @@ window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
       gtk_widget_hide (GTK_WIDGET (object));
     }
 
-  gtk_widget_show (GTK_WIDGET (dialog));
+  gtk_widget_show (GTK_WIDGET (plugin->settings_dialog));
 }
 
 

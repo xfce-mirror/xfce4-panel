@@ -147,6 +147,7 @@ struct _ClockPlugin
   GtkWidget *calendar_window;
   GtkWidget *calendar;
 
+  GObject *settings_dialog;
   gchar *command;
   guint show_week_numbers : 1;
   ClockPluginMode mode;
@@ -1148,14 +1149,13 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   ClockPlugin *plugin = CLOCK_PLUGIN (panel_plugin);
   ClockPluginDialog *dialog;
   GtkBuilder *builder;
-  GObject *window;
   GObject *object;
   GObject *combo;
 
   panel_return_if_fail (CLOCK_IS_PLUGIN (plugin));
 
   /* setup the dialog */
-  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/clock-dialog.glade", &window);
+  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/clock-dialog.glade", &plugin->settings_dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 
@@ -1234,7 +1234,7 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                                               GTK_ENTRY (object),
                                               digital_date_formats);
 
-  gtk_widget_show (GTK_WIDGET (window));
+  gtk_widget_show (GTK_WIDGET (plugin->settings_dialog));
 }
 
 

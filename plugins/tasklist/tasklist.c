@@ -40,6 +40,7 @@ struct _TasklistPlugin
   /* the tasklist widget */
   GtkWidget *tasklist;
   GtkWidget *handle;
+  GObject *settings_dialog;
 };
 
 
@@ -212,11 +213,10 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   TasklistPlugin *plugin = TASKLIST_PLUGIN (panel_plugin);
   GtkBuilder *builder;
-  GObject *dialog;
   GObject *object;
 
   /* setup the dialog */
-  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/tasklist-dialog.glade", &dialog);
+  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/tasklist-dialog.glade", &plugin->settings_dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 
@@ -263,7 +263,7 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
       gtk_widget_hide (GTK_WIDGET (object));
     }
 
-  gtk_widget_show (GTK_WIDGET (dialog));
+  gtk_widget_show (GTK_WIDGET (plugin->settings_dialog));
 }
 
 

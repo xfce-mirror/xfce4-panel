@@ -35,18 +35,6 @@ typedef struct _PanelUtilsGtkLabelData
 
 
 
-void
-_panel_utils_weak_notify (gpointer data,
-                          GObject *where_the_object_was)
-{
-  if (XFCE_IS_PANEL_PLUGIN (data))
-    xfce_panel_plugin_unblock_menu (data);
-  else
-    g_object_unref (data);
-}
-
-
-
 static void
 panel_utils_help_button_clicked (GtkWidget *button,
                                  XfcePanelPlugin *panel_plugin)
@@ -94,6 +82,13 @@ panel_utils_builder_new (XfcePanelPlugin *panel_plugin,
   GObject *dialog, *button;
 
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (panel_plugin), NULL);
+  panel_return_val_if_fail (dialog_return != NULL, NULL);
+
+  if (*dialog_return != NULL)
+    {
+      gtk_window_present (GTK_WINDOW (*dialog_return));
+      return NULL;
+    }
 
   builder = gtk_builder_new ();
   gtk_builder_set_translation_domain (builder, GETTEXT_PACKAGE);
@@ -102,11 +97,8 @@ panel_utils_builder_new (XfcePanelPlugin *panel_plugin,
       dialog = gtk_builder_get_object (builder, "dialog");
       if (G_LIKELY (dialog != NULL))
         {
-          g_object_weak_ref (G_OBJECT (dialog), _panel_utils_weak_notify, builder);
+          g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) G_CALLBACK (g_object_unref), builder);
           xfce_panel_plugin_take_window (panel_plugin, GTK_WINDOW (dialog));
-
-          xfce_panel_plugin_block_menu (panel_plugin);
-          g_object_weak_ref (G_OBJECT (dialog), _panel_utils_weak_notify, panel_plugin);
 
           g_signal_connect_swapped (dialog, "show",
                                     G_CALLBACK (panel_utils_block_autohide), panel_plugin);
@@ -123,8 +115,8 @@ panel_utils_builder_new (XfcePanelPlugin *panel_plugin,
             g_signal_connect (G_OBJECT (button), "clicked",
                               G_CALLBACK (panel_utils_help_button_clicked), panel_plugin);
 
-          if (G_LIKELY (dialog_return != NULL))
-            *dialog_return = dialog;
+          *dialog_return = dialog;
+          g_object_add_weak_pointer (dialog, (gpointer *) dialog_return);
 
           return builder;
         }
