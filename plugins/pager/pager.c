@@ -126,6 +126,7 @@ struct _PagerPlugin
 #endif
 
   /* settings */
+  GObject *settings_dialog;
   guint scrolling : 1;
   guint wrap_workspaces : 1;
   guint miniature_view : 1;
@@ -858,14 +859,14 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   PagerPlugin *plugin = PAGER_PLUGIN (panel_plugin);
   GtkBuilder *builder;
-  GObject *dialog, *object;
+  GObject *object;
   GdkMonitor *monitor;
   GList *groups;
 
   panel_return_if_fail (PAGER_IS_PLUGIN (plugin));
 
   /* setup the dialog */
-  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/pager-dialog.glade", &dialog);
+  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/pager-dialog.glade", &plugin->settings_dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 
@@ -873,7 +874,7 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   panel_return_if_fail (GTK_IS_BUTTON (object));
   if (WINDOWING_IS_X11 ())
     g_signal_connect (G_OBJECT (object), "clicked",
-                      G_CALLBACK (pager_plugin_configure_workspace_settings), dialog);
+                      G_CALLBACK (pager_plugin_configure_workspace_settings), plugin->settings_dialog);
   else
     gtk_widget_hide (GTK_WIDGET (object));
 
@@ -930,7 +931,7 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
     }
   g_list_free (groups);
 
-  gtk_widget_show (GTK_WIDGET (dialog));
+  gtk_widget_show (GTK_WIDGET (plugin->settings_dialog));
 }
 
 

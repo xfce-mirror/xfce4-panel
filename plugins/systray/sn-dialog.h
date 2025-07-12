@@ -32,6 +32,8 @@ G_DECLARE_FINAL_TYPE (SnDialog, sn_dialog, SN, DIALOG, GObject)
 SnDialog *
 sn_dialog_new (SnConfig *config,
                GdkScreen *screen);
+void
+sn_dialog_present (SnDialog *dialog);
 
 G_END_DECLS
 

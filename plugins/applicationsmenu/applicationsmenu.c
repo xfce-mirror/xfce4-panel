@@ -53,6 +53,7 @@ struct _ApplicationsMenuPlugin
 
   guint is_constructed : 1;
 
+  GObject *settings_dialog;
   guint show_button_title : 1;
   guint small : 1;
   gchar *button_title;
@@ -651,14 +652,14 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   ApplicationsMenuPlugin *plugin = APPLICATIONS_MENU_PLUGIN (panel_plugin);
   GtkBuilder *builder;
   GtkWidget *image;
-  GObject *dialog, *object, *object2;
+  GObject *object, *object2;
   guint i;
   gchar *path;
   const gchar *check_names[] = { "show-generic-names", "show-menu-icons",
                                  "show-tooltips", "show-button-title", "small" };
 
   /* setup the dialog */
-  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/applicationsmenu-dialog.glade", &dialog);
+  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/applicationsmenu-dialog.glade", &plugin->settings_dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 
@@ -729,7 +730,7 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_signal_connect (G_OBJECT (object), "file-set",
                     G_CALLBACK (applications_menu_plugin_configure_plugin_file_set), plugin);
 
-  gtk_widget_show (GTK_WIDGET (dialog));
+  gtk_widget_show (GTK_WIDGET (plugin->settings_dialog));
 }
 
 

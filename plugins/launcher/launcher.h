@@ -58,6 +58,13 @@ launcher_plugin_item_is_editable (LauncherPlugin *plugin,
 GIcon *
 launcher_plugin_tooltip_icon (const gchar *icon_name);
 
+GObject **
+launcher_plugin_get_settings_dialog_pointer (LauncherPlugin *plugin);
+
+void
+launcher_plugin_set_settings_dialog (LauncherPlugin *plugin,
+                                     GObject *settings_dialog);
+
 G_END_DECLS
 
 #endif /* !__LAUNCHER_H__ */

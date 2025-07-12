@@ -94,6 +94,22 @@ sn_dialog_init (SnDialog *dialog)
 
 
 static void
+sn_dialog_finalize (GObject *object)
+{
+  SnDialog *dialog = SN_DIALOG (object);
+
+  if (dialog->dialog != NULL)
+    gtk_widget_destroy (dialog->dialog);
+
+  if (dialog->builder != NULL)
+    g_object_unref (dialog->builder);
+
+  G_OBJECT_CLASS (sn_dialog_parent_class)->finalize (object);
+}
+
+
+
+static void
 sn_dialog_add_item (SnDialog *dialog,
                     GObject *store,
                     GIcon *icon,
@@ -665,16 +681,9 @@ sn_dialog_new (SnConfig *config,
 
 
 
-static void
-sn_dialog_finalize (GObject *object)
+void
+sn_dialog_present (SnDialog *dialog)
 {
-  SnDialog *dialog = SN_DIALOG (object);
-
-  if (dialog->dialog != NULL)
-    gtk_widget_destroy (dialog->dialog);
-
-  if (dialog->builder != NULL)
-    g_object_unref (dialog->builder);
-
-  G_OBJECT_CLASS (sn_dialog_parent_class)->finalize (object);
+  g_return_if_fail (GTK_IS_DIALOG (dialog->dialog));
+  gtk_window_present (GTK_WINDOW (dialog->dialog));
 }

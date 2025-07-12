@@ -210,15 +210,19 @@ static void
 sn_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   SnPlugin *plugin = SN_PLUGIN (panel_plugin);
-  SnDialog *dialog;
 
-  dialog = sn_dialog_new (plugin->config, gtk_widget_get_screen (GTK_WIDGET (plugin)));
-  if (dialog != NULL)
+  if (plugin->sn_dialog != NULL)
     {
-      xfce_panel_plugin_block_menu (panel_plugin);
+      sn_dialog_present (plugin->sn_dialog);
+      return;
+    }
+
+  plugin->sn_dialog = sn_dialog_new (plugin->config, gtk_widget_get_screen (GTK_WIDGET (plugin)));
+  if (plugin->sn_dialog != NULL)
+    {
       xfce_panel_plugin_block_autohide (panel_plugin, TRUE);
-      g_object_weak_ref (G_OBJECT (dialog), _panel_utils_weak_notify, panel_plugin);
-      g_object_weak_ref (G_OBJECT (dialog), sn_plugin_unblock_autohide, panel_plugin);
+      g_object_weak_ref (G_OBJECT (plugin->sn_dialog), sn_plugin_unblock_autohide, panel_plugin);
+      g_object_add_weak_pointer (G_OBJECT (plugin->sn_dialog), (gpointer *) &plugin->sn_dialog);
     }
 }
 

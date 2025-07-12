@@ -106,6 +106,7 @@ struct _ShowDesktopPlugin
   guint drag_timeout;
 
   /* mouse hover timeout */
+  GObject *settings_dialog;
   gboolean show_on_hover;
   guint enter_timeout_id;
   gboolean shown_on_hover;
@@ -558,13 +559,12 @@ showdesktop_configure (XfcePanelPlugin *panel_plugin)
 {
   ShowDesktopPlugin *plugin = SHOW_DESKTOP_PLUGIN (panel_plugin);
   GtkBuilder *builder;
-  GObject *dialog;
   GObject *show_on_mouse_hover;
 
   panel_return_if_fail (SHOW_DESKTOP_IS_PLUGIN (plugin));
 
   /* setup the dialog */
-  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/showdesktop-dialog.glade", &dialog);
+  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/showdesktop-dialog.glade", &plugin->settings_dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 
@@ -573,5 +573,5 @@ showdesktop_configure (XfcePanelPlugin *panel_plugin)
                           G_OBJECT (show_on_mouse_hover), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
-  gtk_widget_show (GTK_WIDGET (dialog));
+  gtk_widget_show (GTK_WIDGET (plugin->settings_dialog));
 }

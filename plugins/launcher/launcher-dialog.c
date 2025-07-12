@@ -1149,7 +1149,7 @@ launcher_dialog_show (LauncherPlugin *plugin)
 {
   LauncherPluginDialog *dialog;
   GtkBuilder *builder;
-  GObject *window, *object, *item;
+  GObject **window, *object, *item;
   guint i;
   GtkTreeSelection *selection;
   const gchar *button_names[] = { "item-add", "item-delete",
@@ -1164,9 +1164,12 @@ launcher_dialog_show (LauncherPlugin *plugin)
   panel_return_if_fail (LAUNCHER_IS_PLUGIN (plugin));
 
   /* setup the dialog */
-  builder = panel_utils_builder_new (XFCE_PANEL_PLUGIN (plugin), "/org/xfce/panel/launcher-dialog.glade", &window);
+  window = launcher_plugin_get_settings_dialog_pointer (plugin);
+  builder = panel_utils_builder_new (XFCE_PANEL_PLUGIN (plugin), "/org/xfce/panel/launcher-dialog.glade", window);
   if (G_UNLIKELY (builder == NULL))
     return;
+
+  launcher_plugin_set_settings_dialog (plugin, *window);
 
   /* create structure */
   dialog = g_slice_new0 (LauncherPluginDialog);
@@ -1174,7 +1177,7 @@ launcher_dialog_show (LauncherPlugin *plugin)
   dialog->plugin = plugin;
   dialog->items = NULL;
 
-  g_signal_connect (G_OBJECT (window), "response",
+  g_signal_connect (G_OBJECT (*window), "response",
                     G_CALLBACK (launcher_dialog_response), dialog);
 
   /* connect item buttons */
@@ -1235,7 +1238,7 @@ launcher_dialog_show (LauncherPlugin *plugin)
   /* setup responses for the add dialog */
   object = gtk_builder_get_object (builder, "dialog-add");
   gtk_window_set_screen (GTK_WINDOW (object),
-                         gtk_window_get_screen (GTK_WINDOW (window)));
+                         gtk_window_get_screen (GTK_WINDOW (*window)));
   g_signal_connect (G_OBJECT (object), "response",
                     G_CALLBACK (launcher_dialog_add_response), dialog);
   g_signal_connect (G_OBJECT (object), "delete-event",
@@ -1275,5 +1278,5 @@ launcher_dialog_show (LauncherPlugin *plugin)
                             G_CALLBACK (launcher_dialog_items_load), dialog);
 
   /* show the dialog */
-  gtk_widget_show (GTK_WIDGET (window));
+  gtk_widget_show (GTK_WIDGET (*window));
 }

@@ -21,6 +21,7 @@
 
 #include "sn-backend.h"
 #include "sn-config.h"
+#include "sn-dialog.h"
 
 #ifdef ENABLE_X11
 #include "systray-manager.h"
@@ -55,17 +56,14 @@ struct _SnPlugin
   GtkWidget *item;
   GtkWidget *sn_box;
 
-  /* Systray settings */
-  GSList *names_ordered;
-  GHashTable *names_hidden;
-
-  GtkBuilder *configure_builder;
-
-  /* Statusnotifier settings */
+  /* Settings */
 #ifdef HAVE_DBUSMENU
   SnBackend *backend;
 #endif
   SnConfig *config;
+  GSList *names_ordered;
+  GHashTable *names_hidden;
+  SnDialog *sn_dialog;
 };
 
 void

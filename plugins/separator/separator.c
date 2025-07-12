@@ -85,7 +85,8 @@ struct _SeparatorPlugin
   /* parent type */
   XfcePanelPlugin __parent__;
 
-  /* separator style */
+  /* settings */
+  GObject *settings_dialog;
   SeparatorPluginStyle style;
 };
 
@@ -357,13 +358,12 @@ separator_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   SeparatorPlugin *plugin = SEPARATOR_PLUGIN (panel_plugin);
   GtkBuilder *builder;
-  GObject *dialog;
   GObject *style, *expand;
 
   panel_return_if_fail (SEPARATOR_IS_PLUGIN (plugin));
 
   /* setup the dialog */
-  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/separator-dialog.glade", &dialog);
+  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/separator-dialog.glade", &plugin->settings_dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 
@@ -377,7 +377,7 @@ separator_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                           G_OBJECT (expand), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
-  gtk_widget_show (GTK_WIDGET (dialog));
+  gtk_widget_show (GTK_WIDGET (plugin->settings_dialog));
 }
 
 

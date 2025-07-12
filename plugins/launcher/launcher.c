@@ -226,6 +226,7 @@ struct _LauncherPlugin
 
   guint menu_timeout_id;
 
+  GObject *settings_dialog;
   guint disable_tooltips : 1;
   guint move_first : 1;
   guint show_label : 1;
@@ -2785,4 +2786,23 @@ out:
   g_object_unref (G_OBJECT (item_file));
 
   return editable;
+}
+
+
+
+GObject **
+launcher_plugin_get_settings_dialog_pointer (LauncherPlugin *plugin)
+{
+  panel_return_val_if_fail (LAUNCHER_IS_PLUGIN (plugin), NULL);
+  return &plugin->settings_dialog;
+}
+
+
+
+void
+launcher_plugin_set_settings_dialog (LauncherPlugin *plugin,
+                                     GObject *settings_dialog)
+{
+  panel_return_if_fail (LAUNCHER_IS_PLUGIN (plugin));
+  plugin->settings_dialog = settings_dialog;
 }

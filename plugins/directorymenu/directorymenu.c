@@ -43,6 +43,7 @@ struct _DirectoryMenuPlugin
   GtkWidget *button;
   GtkWidget *icon;
 
+  GObject *settings_dialog;
   GFile *base_directory;
   gchar *icon_name;
   guint open_folder;
@@ -492,10 +493,10 @@ directory_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   DirectoryMenuPlugin *plugin = DIRECTORY_MENU_PLUGIN (panel_plugin);
   GtkBuilder *builder;
   GtkWidget *image;
-  GObject *dialog, *object;
+  GObject *object;
 
   /* setup the dialog */
-  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/directorymenu-dialog.glade", &dialog);
+  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/directorymenu-dialog.glade", &plugin->settings_dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 
@@ -555,7 +556,7 @@ directory_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                           G_OBJECT (object), "active",
                           G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
 
-  gtk_widget_show (GTK_WIDGET (dialog));
+  gtk_widget_show (GTK_WIDGET (plugin->settings_dialog));
 }
 
 

@@ -109,6 +109,7 @@ struct _ActionsPlugin
 {
   XfcePanelPlugin __parent__;
 
+  GObject *settings_dialog;
   AppearanceType type;
   ButtonTitleType button_title;
   gchar *custom_title;
@@ -668,7 +669,6 @@ actions_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   ActionsPlugin *plugin = ACTIONS_PLUGIN (panel_plugin);
   GtkBuilder *builder;
-  GObject *dialog;
   GObject *object;
   GObject *combo;
   ActionEntry *entry;
@@ -686,7 +686,7 @@ actions_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   panel_return_if_fail (plugin->items != NULL);
 
   /* setup the dialog */
-  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/actions-dialog.glade", &dialog);
+  builder = panel_utils_builder_new (panel_plugin, "/org/xfce/panel/actions-dialog.glade", &plugin->settings_dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 
@@ -792,7 +792,7 @@ actions_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_signal_connect_swapped (G_OBJECT (store), "row-inserted",
                             G_CALLBACK (actions_plugin_configure_store_idle), plugin);
 
-  gtk_widget_show (GTK_WIDGET (dialog));
+  gtk_widget_show (GTK_WIDGET (plugin->settings_dialog));
 }
 
 

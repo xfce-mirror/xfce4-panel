@@ -26,10 +26,6 @@
 
 G_BEGIN_DECLS
 
-void
-_panel_utils_weak_notify (gpointer data,
-                          GObject *where_the_object_was);
-
 GtkBuilder *
 panel_utils_builder_new (XfcePanelPlugin *panel_plugin,
                          const gchar *resource,
