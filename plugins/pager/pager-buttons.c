@@ -23,6 +23,7 @@
 #include "pager-buttons.h"
 
 #include "common/panel-private.h"
+#include "common/panel-utils.h"
 
 #include <libxfce4ui/libxfce4ui.h>
 
@@ -78,7 +79,6 @@ struct _PagerButtons
   guint rebuild_id;
 
   XfwScreen *xfw_screen;
-  XfwWorkspaceGroup *workspace_group;
 
   gint rows;
   gboolean numbering;
@@ -196,6 +196,36 @@ pager_buttons_get_property (GObject *object,
 
 
 static void
+workspace_group_created (XfwWorkspaceManager *manager,
+                         XfwWorkspaceGroup *group,
+                         PagerButtons *pager)
+{
+  g_signal_connect (group, "active-workspace-changed",
+                    G_CALLBACK (pager_buttons_screen_workspace_changed), pager);
+  g_signal_connect (group, "workspace-added",
+                    G_CALLBACK (pager_buttons_screen_workspace_created), pager);
+  g_signal_connect (group, "workspace-removed",
+                    G_CALLBACK (pager_buttons_screen_workspace_destroyed), pager);
+  g_signal_connect (group, "viewports-changed",
+                    G_CALLBACK (pager_buttons_screen_viewports_changed), pager);
+}
+
+
+
+static void
+workspace_group_destroyed (XfwWorkspaceManager *manager,
+                           XfwWorkspaceGroup *group,
+                           PagerButtons *pager)
+{
+  g_signal_handlers_disconnect_by_func (group, pager_buttons_screen_workspace_changed, pager);
+  g_signal_handlers_disconnect_by_func (group, pager_buttons_screen_workspace_created, pager);
+  g_signal_handlers_disconnect_by_func (group, pager_buttons_screen_workspace_destroyed, pager);
+  g_signal_handlers_disconnect_by_func (group, pager_buttons_screen_viewports_changed, pager);
+}
+
+
+
+static void
 pager_buttons_set_property (GObject *object,
                             guint prop_id,
                             const GValue *value,
@@ -210,16 +240,10 @@ pager_buttons_set_property (GObject *object,
       pager->xfw_screen = g_value_dup_object (value);
       panel_return_if_fail (XFW_IS_SCREEN (pager->xfw_screen));
       manager = xfw_screen_get_workspace_manager (pager->xfw_screen);
-      pager->workspace_group = xfw_workspace_manager_list_workspace_groups (manager)->data;
-
-      g_signal_connect (G_OBJECT (pager->workspace_group), "active-workspace-changed",
-                        G_CALLBACK (pager_buttons_screen_workspace_changed), pager);
-      g_signal_connect (G_OBJECT (pager->workspace_group), "workspace-added",
-                        G_CALLBACK (pager_buttons_screen_workspace_created), pager);
-      g_signal_connect (G_OBJECT (pager->workspace_group), "workspace-removed",
-                        G_CALLBACK (pager_buttons_screen_workspace_destroyed), pager);
-      g_signal_connect (G_OBJECT (pager->workspace_group), "viewports-changed",
-                        G_CALLBACK (pager_buttons_screen_viewports_changed), pager);
+      g_signal_connect (manager, "workspace-group-created", G_CALLBACK (workspace_group_created), pager);
+      g_signal_connect (manager, "workspace-group-destroyed", G_CALLBACK (workspace_group_destroyed), pager);
+      for (GList *lp = xfw_workspace_manager_list_workspace_groups (manager); lp != NULL; lp = lp->next)
+        workspace_group_created (manager, lp->data, pager);
 
       pager_buttons_queue_rebuild (pager);
       break;
@@ -254,14 +278,9 @@ pager_buttons_finalize (GObject *object)
 
   if (G_LIKELY (pager->xfw_screen != NULL))
     {
-      g_signal_handlers_disconnect_by_func (G_OBJECT (pager->workspace_group),
-                                            G_CALLBACK (pager_buttons_screen_workspace_changed), pager);
-      g_signal_handlers_disconnect_by_func (G_OBJECT (pager->workspace_group),
-                                            G_CALLBACK (pager_buttons_screen_workspace_created), pager);
-      g_signal_handlers_disconnect_by_func (G_OBJECT (pager->workspace_group),
-                                            G_CALLBACK (pager_buttons_screen_workspace_destroyed), pager);
-      g_signal_handlers_disconnect_by_func (G_OBJECT (pager->workspace_group),
-                                            G_CALLBACK (pager_buttons_screen_viewports_changed), pager);
+      XfwWorkspaceManager *manager = xfw_screen_get_workspace_manager (pager->xfw_screen);
+      for (GList *lp = xfw_workspace_manager_list_workspace_groups (manager); lp != NULL; lp = lp->next)
+        workspace_group_destroyed (manager, lp->data, pager);
 
       g_object_unref (G_OBJECT (pager->xfw_screen));
     }
@@ -298,6 +317,7 @@ static gboolean
 pager_buttons_rebuild_idle (gpointer user_data)
 {
   PagerButtons *pager = PAGER_BUTTONS (user_data);
+  XfwWorkspaceManager *manager;
   GList *li, *workspaces;
   XfwWorkspace *active_ws;
   gint n, n_workspaces;
@@ -314,6 +334,7 @@ pager_buttons_rebuild_idle (gpointer user_data)
   gchar text[8];
   GdkRectangle *rect = NULL;
   GdkScreen *screen;
+  GdkMonitor *monitor;
   guint scale_factor;
 
   panel_return_val_if_fail (PAGER_IS_BUTTONS (pager), FALSE);
@@ -325,8 +346,9 @@ pager_buttons_rebuild_idle (gpointer user_data)
   g_slist_free (pager->buttons);
   pager->buttons = NULL;
 
-  active_ws = xfw_workspace_group_get_active_workspace (pager->workspace_group);
-  workspaces = xfw_workspace_group_list_workspaces (pager->workspace_group);
+  monitor = panel_utils_get_monitor_at_widget (GTK_WIDGET (pager));
+  active_ws = panel_utils_get_active_workspace_for_monitor (pager->xfw_screen, monitor);
+  workspaces = panel_utils_list_workspaces_for_monitor (pager->xfw_screen, monitor);
   if (workspaces == NULL)
     goto leave;
 
@@ -375,8 +397,10 @@ workspace_layout:
     }
 
   /* set workspace layout so changing workspace and moving windows between workspaces
-   * via keyboard shortcuts or dnd work correctly in all directions */
-  xfw_workspace_group_set_layout (pager->workspace_group, rows, 0, NULL);
+   * via keyboard shortcuts or dnd work correctly in all directions;
+   * workspace layout is only supported on X11, where there is only one workspace group */
+  manager = xfw_screen_get_workspace_manager (pager->xfw_screen);
+  xfw_workspace_group_set_layout (xfw_workspace_manager_list_workspace_groups (manager)->data, rows, 0, NULL);
 
   panel_plugin = gtk_widget_get_ancestor (GTK_WIDGET (pager), XFCE_TYPE_PANEL_PLUGIN);
 
@@ -445,7 +469,7 @@ workspace_layout:
           gtk_widget_show (button);
 
           label = gtk_label_new (NULL);
-          g_object_set_data (G_OBJECT (label), "numbering", GINT_TO_POINTER (pager->numbering));
+          g_object_set_data (G_OBJECT (label), "pager", pager);
           g_signal_connect_object (G_OBJECT (workspace), "name-changed",
                                    G_CALLBACK (pager_buttons_workspace_button_label), label, 0);
           pager_buttons_workspace_button_label (workspace, label);
@@ -475,6 +499,7 @@ workspace_layout:
   pager->buttons = g_slist_reverse (pager->buttons);
 
 leave:
+  g_list_free (workspaces);
 
   return FALSE;
 }
@@ -511,15 +536,21 @@ pager_buttons_screen_workspace_changed (XfwWorkspaceGroup *group,
   gint active = -1, n;
   XfwWorkspace *active_ws;
   GSList *li;
+  GdkMonitor *monitor;
+  GList *monitors;
 
   panel_return_if_fail (XFW_IS_WORKSPACE_GROUP (group));
   panel_return_if_fail (previous_workspace == NULL || XFW_IS_WORKSPACE (previous_workspace));
   panel_return_if_fail (PAGER_IS_BUTTONS (pager));
-  panel_return_if_fail (pager->workspace_group == group);
 
-  active_ws = xfw_workspace_group_get_active_workspace (group);
+  monitor = panel_utils_get_monitor_at_widget (GTK_WIDGET (pager));
+  monitors = xfw_workspace_group_get_monitors (group);
+  if (!g_list_find_custom (monitors, monitor, panel_utils_compare_xfw_gdk_monitors))
+    return;
+
+  active_ws = panel_utils_get_active_workspace_for_monitor (pager->xfw_screen, monitor);
   if (G_LIKELY (active_ws != NULL))
-    active = xfw_workspace_get_number (active_ws);
+    active = panel_utils_get_workspace_number_for_monitor (pager->xfw_screen, monitor, active_ws);
 
   for (li = pager->buttons, n = 0; li != NULL; li = li->next, n++)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (li->data), n == active);
@@ -535,7 +566,6 @@ pager_buttons_screen_workspace_created (XfwWorkspaceGroup *group,
   panel_return_if_fail (XFW_IS_WORKSPACE_GROUP (group));
   panel_return_if_fail (XFW_IS_WORKSPACE (created_workspace));
   panel_return_if_fail (PAGER_IS_BUTTONS (pager));
-  panel_return_if_fail (pager->workspace_group == group);
 
   pager_buttons_queue_rebuild (pager);
 }
@@ -550,7 +580,6 @@ pager_buttons_screen_workspace_destroyed (XfwWorkspaceGroup *group,
   panel_return_if_fail (XFW_IS_WORKSPACE_GROUP (group));
   panel_return_if_fail (XFW_IS_WORKSPACE (destroyed_workspace));
   panel_return_if_fail (PAGER_IS_BUTTONS (pager));
-  panel_return_if_fail (pager->workspace_group == group);
 
   pager_buttons_queue_rebuild (pager);
 }
@@ -563,7 +592,6 @@ pager_buttons_screen_viewports_changed (XfwWorkspaceGroup *group,
 {
   panel_return_if_fail (XFW_IS_WORKSPACE_GROUP (group));
   panel_return_if_fail (PAGER_IS_BUTTONS (pager));
-  panel_return_if_fail (pager->workspace_group == group);
 
   /* yes we are extremely lazy here, but this event is
    * also emitted when the viewport setup changes... */
@@ -579,12 +607,12 @@ pager_buttons_workspace_button_label (XfwWorkspace *workspace,
 {
   const gchar *name;
   gchar *utf8 = NULL, *name_fallback = NULL, *name_num = NULL;
-  gboolean numbering;
+  PagerButtons *pager;
+  GdkMonitor *monitor;
+  gint number;
 
   panel_return_if_fail (XFW_IS_WORKSPACE (workspace));
   panel_return_if_fail (GTK_IS_LABEL (label));
-
-  numbering = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (label), "numbering"));
 
   /* try to get a utf-8 valid name */
   name = xfw_workspace_get_name (workspace);
@@ -592,14 +620,15 @@ pager_buttons_workspace_button_label (XfwWorkspace *workspace,
       && !g_utf8_validate (name, -1, NULL))
     name = utf8 = g_locale_to_utf8 (name, -1, NULL, NULL, NULL);
 
-  if (xfce_str_is_empty (name))
-    name = name_fallback = g_strdup_printf (_("Workspace %d"),
-                                            xfw_workspace_get_number (workspace) + 1);
+  pager = g_object_get_data (G_OBJECT (label), "pager");
+  monitor = panel_utils_get_monitor_at_widget (GTK_WIDGET (pager));
+  number = panel_utils_get_workspace_number_for_monitor (pager->xfw_screen, monitor, workspace);
 
-  if (numbering)
-    name = name_num = g_strdup_printf ("%d - %s",
-                                       xfw_workspace_get_number (workspace) + 1,
-                                       name);
+  if (xfce_str_is_empty (name))
+    name = name_fallback = g_strdup_printf (_("Workspace %d"), number + 1);
+
+  if (pager->numbering)
+    name = name_num = g_strdup_printf ("%d - %s", number + 1, name);
 
   gtk_label_set_text (GTK_LABEL (label), name);
 
@@ -616,6 +645,7 @@ pager_buttons_workspace_button_toggled (GtkWidget *button,
 {
   PagerButtons *pager;
   XfwWorkspace *active_ws;
+  GdkMonitor *monitor;
 
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
   panel_return_if_fail (XFW_IS_WORKSPACE (workspace));
@@ -623,7 +653,8 @@ pager_buttons_workspace_button_toggled (GtkWidget *button,
   if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
     {
       pager = PAGER_BUTTONS (gtk_widget_get_ancestor (button, PAGER_TYPE_BUTTONS));
-      active_ws = xfw_workspace_group_get_active_workspace (pager->workspace_group);
+      monitor = panel_utils_get_monitor_at_widget (button);
+      active_ws = panel_utils_get_active_workspace_for_monitor (pager->xfw_screen, monitor);
       if (active_ws != workspace)
         xfw_workspace_activate (workspace, NULL);
     }
@@ -635,18 +666,20 @@ static void
 pager_buttons_viewport_button_toggled (GtkWidget *button,
                                        PagerButtons *pager)
 {
+  XfwWorkspaceManager *manager;
   gint *vp_info;
 
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
   panel_return_if_fail (PAGER_IS_BUTTONS (pager));
-  panel_return_if_fail (XFW_IS_WORKSPACE_GROUP (pager->workspace_group));
 
   vp_info = g_object_get_data (G_OBJECT (button), "viewport-info");
   if (G_UNLIKELY (vp_info == NULL))
     return;
 
-  xfw_workspace_group_move_viewport (pager->workspace_group, vp_info[VIEWPORT_X],
-                                     vp_info[VIEWPORT_Y], NULL);
+  /* viewports are only supported on X11, where there is only one workspace group */
+  manager = xfw_screen_get_workspace_manager (pager->xfw_screen);
+  xfw_workspace_group_move_viewport (xfw_workspace_manager_list_workspace_groups (manager)->data,
+                                     vp_info[VIEWPORT_X], vp_info[VIEWPORT_Y], NULL);
 }
 
 
