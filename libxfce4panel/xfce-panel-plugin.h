@@ -260,10 +260,10 @@ xfce_panel_plugin_get_locked (XfcePanelPlugin *plugin);
 void
 xfce_panel_plugin_remove (XfcePanelPlugin *plugin);
 
-void
+G_DEPRECATED void
 xfce_panel_plugin_block_menu (XfcePanelPlugin *plugin);
 
-void
+G_DEPRECATED void
 xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin);
 
 void
