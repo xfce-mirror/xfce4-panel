@@ -2408,6 +2408,10 @@ xfce_panel_plugin_remove (XfcePanelPlugin *plugin)
  *
  * Block configuring the plugin. This will make the "Properties" menu
  * item insensitive.
+ *
+ * Deprecated: 4.21.1: Don't use this function, better to gtk_window_present()
+ * the settings dialog if it already exists instead.
+ * See also https://gitlab.xfce.org/xfce/xfce4-panel/-/issues/937
  **/
 void
 xfce_panel_plugin_block_menu (XfcePanelPlugin *plugin)
@@ -2426,6 +2430,10 @@ xfce_panel_plugin_block_menu (XfcePanelPlugin *plugin)
  *
  * Unblock configuring the plugin. This will make the "Properties" menu
  * item sensitive.
+ *
+ * Deprecated: 4.21.1: Don't use this function, better to gtk_window_present()
+ * the settings dialog if it already exists instead.
+ * See also https://gitlab.xfce.org/xfce/xfce4-panel/-/issues/937
  **/
 void
 xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin)
