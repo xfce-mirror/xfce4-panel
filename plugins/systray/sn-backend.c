@@ -18,10 +18,6 @@
 
 
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
 #include "sn-backend.h"
 #include "sn-item.h"
 #include "sn-watcher.h"
