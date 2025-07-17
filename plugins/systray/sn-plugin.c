@@ -18,10 +18,6 @@
 
 
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
 #include "sn-box.h"
 #include "sn-button.h"
 #include "sn-dialog.h"

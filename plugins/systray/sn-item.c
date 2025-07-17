@@ -18,10 +18,6 @@
 
 
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
 #include "sn-item.h"
 
 #include "common/panel-debug.h"

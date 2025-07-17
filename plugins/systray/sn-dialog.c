@@ -19,10 +19,6 @@
 
 
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
 #include "sn-dialog.h"
 
 #include "common/panel-private.h"
