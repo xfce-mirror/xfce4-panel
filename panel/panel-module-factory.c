@@ -215,18 +215,23 @@ panel_module_factory_load_modules (PanelModuleFactory *factory)
 
           for (const gchar *const *p = sys_datadirs; *p != NULL; p++)
             {
-              if (g_hash_table_add (unique, (gpointer) *p) && g_str_has_suffix (*p, datadir_suffix))
+              /* avoid trailing '/' or similar that could break string comparison below */
+              gchar *path = g_canonicalize_filename (*p, NULL);
+
+              if (g_hash_table_add (unique, (gpointer) path) && g_str_has_suffix (path, datadir_suffix))
                 {
-                  gsize prefix_len = g_strrstr_len (*p, -1, datadir_suffix) - *p;
-                  gchar *prefix = g_strndup (*p, prefix_len);
-                  gchar *datadir = g_strconcat (*p, plugin_dir_suffix, NULL);
+                  gsize prefix_len = g_strrstr_len (path, -1, datadir_suffix) - path;
+                  gchar *prefix = g_strndup (path, prefix_len);
+                  gchar *datadir = g_strconcat (path, plugin_dir_suffix, NULL);
                   gchar *libdir = g_strconcat (prefix, libdir_suffix, plugin_dir_suffix, NULL);
                   datadirs = g_list_prepend (datadirs, datadir);
                   libdirs = g_list_prepend (libdirs, libdir);
-                  if (!build_dirs_added && g_strcmp0 (prefix, PREFIX))
+                  if (!build_dirs_added && g_strcmp0 (prefix, PREFIX) == 0)
                     build_dirs_added = TRUE;
                   g_free (prefix);
                 }
+
+              g_free (path);
             }
 
           g_hash_table_destroy (unique);
