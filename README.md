@@ -33,17 +33,17 @@ See [NEWS](https://gitlab.xfce.org/xfce/xfce4-panel/-/blob/master/NEWS) for deta
 From source: 
 
     % cd xfce4-panel
-    % ./autogen.sh
-    % make
-    % make install
+    % meson setup build
+    % meson compile -C build
+    % meson install -C build
 
 From release tarball:
 
-    % tar xf xfce4-panel-<version>.tar.bz2
+    % tar xf xfce4-panel-<version>.tar.xz
     % cd xfce4-panel-<version>
-    % ./configure
-    % make
-    % make install
+    % meson setup build
+    % meson compile -C build
+    % meson install -C build
 
 ### Reporting Bugs
 
