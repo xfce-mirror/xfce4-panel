@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Xfce
-# This file is distributed under the same license as the xfce4-panel.master package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
 # Balázs Meskó <meskobalazs@mailbox.org>, 2018
@@ -16,8 +16,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
-"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-10-18 00:47+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-18 00:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: László Varga, 2024\n"
 "Language-Team: Hungarian (http://app.transifex.com/xfce/xfce4-panel/language/hu/)\n"
@@ -27,235 +27,1243 @@ msgstr ""
 "Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: panel-desktop-handler.desktop.in:4
-msgid "Create Launcher on the panel"
-msgstr "Indító létrehozása a panelen"
+#: ../common/resources/panel-preferences-dialog.glade.h:1
+msgid "Never"
+msgstr "Soha"
 
-#: panel-desktop-handler.desktop.in:5
+#: ../common/resources/panel-preferences-dialog.glade.h:2
+msgid "Intelligently"
+msgstr "Intelligensen"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:3
+msgid "Always"
+msgstr "Mindig"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:4
+msgid "Horizontal"
+msgstr "Vízszintes"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:5
+msgid "Vertical"
+msgstr "Függőleges"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:6
+msgid "Deskbar"
+msgstr "Asztalsáv"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:7
+msgid "None (use system style)"
+msgstr "Nincs (rendszerstílus használata)"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:8
+msgid "Solid color"
+msgstr "Homogén szín"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:9
+msgid "Background image"
+msgstr "Háttérkép"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:10
+msgid "Panel Preferences"
+msgstr "Panel beállításai"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:11
+#: ../common/resources/actions-dialog.glade.h:7
+#: ../common/resources/applicationsmenu-dialog.glade.h:3
+#: ../common/resources/clock-dialog.glade.h:14
+#: ../common/resources/directorymenu-dialog.glade.h:2
+#: ../common/resources/launcher-dialog.glade.h:17
+#: ../common/resources/pager-dialog.glade.h:6
+#: ../common/resources/separator-dialog.glade.h:5
+#: ../common/resources/showdesktop-dialog.glade.h:2
+#: ../common/resources/sn-dialog.glade.h:2
+#: ../common/resources/tasklist-dialog.glade.h:11
+#: ../common/resources/windowmenu-dialog.glade.h:4
+#: ../panel/panel-item-dialog.c:205 ../panel/panel-tic-tac-toe.c:110
+msgid "_Close"
+msgstr "_Bezárás"
+
+#. help item
+#: ../common/resources/panel-preferences-dialog.glade.h:12
+#: ../common/resources/actions-dialog.glade.h:8
+#: ../common/resources/applicationsmenu-dialog.glade.h:2
+#: ../common/resources/clock-dialog.glade.h:15
+#: ../common/resources/directorymenu-dialog.glade.h:3
+#: ../common/resources/launcher-dialog.glade.h:20
+#: ../common/resources/pager-dialog.glade.h:5
+#: ../common/resources/separator-dialog.glade.h:6
+#: ../common/resources/showdesktop-dialog.glade.h:3
+#: ../common/resources/tasklist-dialog.glade.h:12
+#: ../common/resources/windowmenu-dialog.glade.h:5
+#: ../libxfce4panel/xfce-panel-plugin.c:1344 ../panel/panel-item-dialog.c:201
+#: ../panel/panel-window.c:3800
+msgid "_Help"
+msgstr "_Súgó"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:13
+msgid "Profiles:"
+msgstr "Profilok:"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:14
+msgid "_Backup and restore"
+msgstr "_Biztonsági mentés és helyreállítás"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:15
+msgid "Switch between panel presets"
+msgstr "Váltás a panel-előbeállítások között"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:16
+msgid "Add a new panel"
+msgstr "Új panel hozzáadása"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:17
+msgid "Remove the currently selected panel"
+msgstr "A kiválasztott panel eltávolítása"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:18
+msgid "<b>General</b>"
+msgstr "<b>Általános</b>"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:19
+msgid "M_ode:"
+msgstr "Mó_d:"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:20
+msgid "Span mo_nitors"
+msgstr "Több mo_nitoron"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:21
+msgid "Select this option to extend the panel over multiple monitors."
+msgstr "A panel kiterjesztése több monitorra."
+
+#: ../common/resources/panel-preferences-dialog.glade.h:22
+msgid "_Lock panel"
+msgstr "_Panel zárolása"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:23
 msgid ""
-"Add a new launcher to the panel based on the information of this desktop "
-"file"
-msgstr "Új indító hozzáadása a panelhez ezen asztali fájl információi alapján"
+"Select this option to hide the handles of the panel and lock its position."
+msgstr "A panel fogantyúinak elrejtése és a pozíciójának zárolása."
 
-#: panel-preferences.desktop.in:8
+#: ../common/resources/panel-preferences-dialog.glade.h:24
+msgid "_Reserve space on screen edges for the panel"
+msgstr "Terület _fenntartása a képernyő szélen a panelhez"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:25
 msgid ""
-"panels;settings;preferences;taskbar;autohide;application "
-"menu;start;buttons;launcher;notification area;status;icons;plugins;"
-msgstr "panelek;beállítások;feladatsáv;automatikus elrejtés;alkalmazásmenü;indítás;indító;értesítési terület;állapot;ikonok;bővítmények;"
+"Select this option if you don't want maximized windows to cover the area "
+"behind the panel. This only works when the panel is attached to a screen "
+"edge."
+msgstr "A teljes méretű ablakok ne fedjék le a panel mögötti területet. Ez csak akkor működik, ha a panel a képernyő széléhez van rögzítve."
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3686
-msgid "Panel"
-msgstr "Panel"
+#: ../common/resources/panel-preferences-dialog.glade.h:26
+msgid "Au_tomatically hide the panel:"
+msgstr "A panel au_tomatikus elrejtése:"
 
-#: panel-preferences.desktop.in:16
-msgid "Customize the panel"
-msgstr "A panel személyre szabása"
+#: ../common/resources/panel-preferences-dialog.glade.h:27
+msgid "O_utput:"
+msgstr "_Kimenet:"
 
-#: libxfce4panel/xfce-panel-plugin.c:1088
-#: panel/panel-preferences-dialog.c:1537
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
+#: ../common/resources/panel-preferences-dialog.glade.h:29
+msgid "<b>Measurements</b>"
+msgstr "<b>Méretek</b>"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:30
+msgid "Row _size (pixels):"
+msgstr "Sor_méret (képpont):"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:31
+msgid "Num_ber of rows:"
+msgstr "_Sorok száma:"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:32
+msgid "L_ength (pixels):"
+msgstr "_Hossz (pixel):"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:33
+msgid "Border width (pixels):"
+msgstr "Keret szélessége (képpont):"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:34
+msgid "A_utomatically increase the length"
+msgstr "A hossz a_utomatikus növelése"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:35
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr "A panel méretének automatikus növelése, ha a bővítmények több helyet igényelnek."
+
+#: ../common/resources/panel-preferences-dialog.glade.h:36
+msgid "D_isplay"
+msgstr "_Megjelenítés"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:37
+msgid "Dark mode"
+msgstr "Sötét mód"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:38
+msgid "<b>Background</b>"
+msgstr "<b>Háttér</b>"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:39
+#: ../common/resources/separator-dialog.glade.h:7
+msgid "_Style:"
+msgstr "_Stílus:"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:40
+msgid "C_olor:"
+msgstr "Szí_n:"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:41
+msgid "Pick a Panel Color"
+msgstr "Válasszon panelszínt"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:42
+msgid "_File:"
+msgstr "_Fájl:"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:43
+msgid "Select A Background Image"
+msgstr "Válasszon háttérképet"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:44
+msgid "<b>Icons</b>"
+msgstr "<b>Ikonok</b>"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:45
+msgid "Adjust size au_tomatically"
+msgstr "Méret au_tomatikus állítása"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:46
+msgid "Fixed icon _size (pixels):"
+msgstr "Fix _ikonméret (képpont):"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:47
+msgid "<b>Opacity</b>"
+msgstr "<b>Átlátszatlanság</b>"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:48
+msgid "Configure..."
+msgstr "Beállítás…"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:49
+msgid ""
+"<b>Compositing is currently disabled</b>\n"
+"Enable compositing in the window manager for opacity settings in the panel."
+msgstr "<b>A kompozitálás jelenleg le van tiltva</b>\nEngedélyezze a kompozitálást a az ablakkezelőben, hogy beállíthassa a panel átlátszatlanságát."
+
+#. I18N: label for the enter transparency slider
+#: ../common/resources/panel-preferences-dialog.glade.h:52
+msgid "_Enter:"
+msgstr "Rám_utatás:"
+
+#. I18N: label for the leave transparency slider
+#: ../common/resources/panel-preferences-dialog.glade.h:54
+msgid "_Leave:"
+msgstr "_Elhagyás:"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:55
+msgid ""
+"Transparency when the pointer is not hovering over the panel, with 0 being "
+"fully transparent and 100 fully opaque."
+msgstr "Átlátszóság, amikor a mutató nem a panel fölött áll, 0 (átlátszó) és 100 (átlátszatlan) között."
+
+#: ../common/resources/panel-preferences-dialog.glade.h:56
+msgid "Appeara_nce"
+msgstr "_Megjelenés"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:57
+#: ../common/resources/launcher-dialog.glade.h:16 ../panel/panel-dialogs.c:157
+#: ../panel/panel-item-dialog.c:197
+msgid "_Add"
+msgstr "_Hozzáadás"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:58
+msgid "Add new item to this panel"
+msgstr "Új elem hozzáadása a panelhez"
+
+#. remove
+#: ../common/resources/panel-preferences-dialog.glade.h:59
+#: ../libxfce4panel/xfce-panel-plugin.c:1274 ../panel/panel-application.c:353
+#: ../panel/panel-plugin-external.c:420
+#: ../panel/panel-preferences-dialog.c:1080
+#: ../plugins/launcher/launcher-dialog.c:836
+msgid "_Remove"
+msgstr "_Eltávolítás"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:60
+msgid "Remove currently selected item"
+msgstr "A kiválasztott elem eltávolítása"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:61
+#: ../common/resources/launcher-dialog.glade.h:23
+msgid "Edit the currently selected item"
+msgstr "A kiválasztott elem szerkesztése"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:62
+msgid "Show about information of the currently selected item"
+msgstr "A kiválasztott elem névjegy-információinak megjelenítése"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:63
+#: ../common/resources/launcher-dialog.glade.h:21
+msgid "Move currently selected item up by one row"
+msgstr "A kiválasztott elem mozgatása egy sorral feljebb"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:64
+#: ../common/resources/launcher-dialog.glade.h:22
+msgid "Move currently selected item down by one row"
+msgstr "A kiválasztott elem mozgatása egy sorral lejjebb"
+
+#: ../common/resources/panel-preferences-dialog.glade.h:65
+msgid "Ite_ms"
+msgstr "_Elemek"
+
+#: ../common/resources/actions-dialog.glade.h:1
+msgid "Action Buttons"
+msgstr "Műveletgombok"
+
+#: ../common/resources/actions-dialog.glade.h:2
+#: ../plugins/actions/actions.c:32
+msgid "Session Menu"
+msgstr "Munkamenet menü"
+
+#: ../common/resources/actions-dialog.glade.h:3
+msgid "Full Name"
+msgstr "Teljes név"
+
+#: ../common/resources/actions-dialog.glade.h:4
+msgid "Username"
+msgstr "Felhasználónév"
+
+#: ../common/resources/actions-dialog.glade.h:5
+msgid "User ID"
+msgstr "Felhasználóazonosító"
+
+#: ../common/resources/actions-dialog.glade.h:6
+msgid "Custom"
+msgstr "Egyéni"
+
+#: ../common/resources/actions-dialog.glade.h:9
+msgid "Appeara_nce:"
+msgstr "_Megjelenés:"
+
+#: ../common/resources/actions-dialog.glade.h:10
+msgid "Title:"
+msgstr "Cím:"
+
+#: ../common/resources/actions-dialog.glade.h:11
+msgid "Custo_m title:"
+msgstr "Egyéni cí_m:"
+
+#: ../common/resources/actions-dialog.glade.h:12
+#: ../common/resources/launcher-dialog.glade.h:27
+msgid "General"
+msgstr "Általános"
+
+#: ../common/resources/actions-dialog.glade.h:13
+msgid "Visible"
+msgstr "Látható"
+
+#: ../common/resources/actions-dialog.glade.h:14
+msgid "Action"
+msgstr "Művelet"
+
+#: ../common/resources/actions-dialog.glade.h:15
+msgid "_Show confirmation dialog"
+msgstr "M_egerősítési ablak megjelenítése"
+
+#: ../common/resources/actions-dialog.glade.h:16
+msgid ""
+"Show a confirmation dialog with a 30 second timeout for some of the actions."
+msgstr "Megerősítési ablak megjelenítése az egyes műveletekhez 30 másodperces időkorláttal."
+
+#: ../common/resources/actions-dialog.glade.h:17
+msgid "_Actions"
+msgstr "_Műveletek"
+
+#: ../common/resources/applicationsmenu-dialog.glade.h:1
+msgid "Applications Menu"
+msgstr "Alkalmazások menü"
+
+#: ../common/resources/applicationsmenu-dialog.glade.h:4
+#: ../common/resources/directorymenu-dialog.glade.h:5
+msgid "_Icon:"
+msgstr "_Ikon:"
+
+#: ../common/resources/applicationsmenu-dialog.glade.h:5
+msgid "Button _title:"
+msgstr "Gomb_cím:"
+
+#: ../common/resources/applicationsmenu-dialog.glade.h:6
+msgid "Show button on one _line"
+msgstr "A gomb megjelenítése egy _sorban"
+
+#: ../common/resources/applicationsmenu-dialog.glade.h:7
+msgid "_Show button title"
+msgstr "_Gombfelirat megjelenítése"
+
+#: ../common/resources/applicationsmenu-dialog.glade.h:8
+msgid "Show application d_escription in tooltip"
+msgstr "_Alkalmazás leírásának megjelenítése a buboréksúgóban"
+
+#: ../common/resources/applicationsmenu-dialog.glade.h:9
+msgid "Show ic_ons in menu"
+msgstr "I_konok megjelenítése a menüben"
+
+#: ../common/resources/applicationsmenu-dialog.glade.h:10
+msgid "Show generic application n_ames"
+msgstr "Általános _alkalmazásnevek megjelenítése"
+
+#: ../common/resources/applicationsmenu-dialog.glade.h:11
+msgid ""
+"Select this option to show the generic application name in the menu, for "
+"example \"File Manager\" instead of \"Thunar\""
+msgstr "Az általános alkalmazásnév, például a „Thunar” helyett a „Fájlkezelő” megjelenítése a menüben"
+
+#: ../common/resources/applicationsmenu-dialog.glade.h:12
+#: ../common/resources/clock-dialog.glade.h:28
+#: ../common/resources/directorymenu-dialog.glade.h:7
+#: ../common/resources/separator-dialog.glade.h:9
+#: ../common/resources/tasklist-dialog.glade.h:18
+#: ../common/resources/windowmenu-dialog.glade.h:10
+msgid "Appearance"
+msgstr "Megjelenés"
+
+#: ../common/resources/applicationsmenu-dialog.glade.h:13
+msgid "Use the _default menu"
+msgstr "Alapértelmezett _menü használata"
+
+#: ../common/resources/applicationsmenu-dialog.glade.h:14
+msgid "Ed_it Menu"
+msgstr "Menü s_zerkesztése"
+
+#: ../common/resources/applicationsmenu-dialog.glade.h:15
+msgid "Use c_ustom menu file:"
+msgstr "_Egyéni menüfájl használata:"
+
+#: ../common/resources/applicationsmenu-dialog.glade.h:16
+msgid "Menu _file:"
+msgstr "Me_nüfájl:"
+
+#: ../common/resources/applicationsmenu-dialog.glade.h:17
+msgid "Select A Menu File"
+msgstr "Válasszon menüfájlt"
+
+#: ../common/resources/applicationsmenu-dialog.glade.h:18
+msgid "Menu File"
+msgstr "Menüfájl"
+
+#: ../common/resources/clock-dialog.glade.h:1
+msgid "Decimal"
+msgstr "10-es számrendszer"
+
+#: ../common/resources/clock-dialog.glade.h:2
+msgid "Sexagesimal"
+msgstr "60-as számrendszer"
+
+#: ../common/resources/clock-dialog.glade.h:3
+msgid "Binary time"
+msgstr "Bináris idő"
+
+#: ../common/resources/clock-dialog.glade.h:4
+msgid "Date, then time"
+msgstr "Dátum, idő"
+
+#: ../common/resources/clock-dialog.glade.h:5
+msgid "Time, then date"
+msgstr "Idő, dátum"
+
+#: ../common/resources/clock-dialog.glade.h:6
+msgid "Date Only"
+msgstr "Csak dátum"
+
+#: ../common/resources/clock-dialog.glade.h:7
+msgid "Time Only"
+msgstr "Csak idő"
+
+#: ../common/resources/clock-dialog.glade.h:8
+msgid "Analog"
+msgstr "Analóg"
+
+#: ../common/resources/clock-dialog.glade.h:9
+msgid "Binary"
+msgstr "Bináris"
+
+#: ../common/resources/clock-dialog.glade.h:10
+msgid "Digital"
+msgstr "Digitális"
+
+#: ../common/resources/clock-dialog.glade.h:11
+msgid "Fuzzy"
+msgstr "Szöveges"
+
+#: ../common/resources/clock-dialog.glade.h:12
+msgid "LCD"
+msgstr "LCD"
+
+#: ../common/resources/clock-dialog.glade.h:13
+msgid "Clock"
+msgstr "Óra"
+
+#: ../common/resources/clock-dialog.glade.h:16
+msgid ""
+"Name of a timezone corresponding a file in the zoneinfo database, for "
+"example \"America/New_York\". Leave empty to use the localtime."
+msgstr "Az időzóna neve, mely megegyezik a rendszer időzóna adatbázisával. Hagyja üresen a helyi időhöz való visszatéréshez."
+
+#: ../common/resources/clock-dialog.glade.h:17
+msgid "Time_zone:"
+msgstr "Idő_zóna:"
+
+#: ../common/resources/clock-dialog.glade.h:18
+msgid "Time and Date _Settings..."
+msgstr "Idő- és dátumbeállítások…"
+
+#: ../common/resources/clock-dialog.glade.h:19
+msgid "Time Settings"
+msgstr "Időbeállítások"
+
+#: ../common/resources/clock-dialog.glade.h:20
+msgid ""
+"If set, this command is run when the plugin is left-clicked, instead of "
+"displaying the default calendar."
+msgstr "Bekapcsolva a megadott program indul erre a bővítményre kattintva, nem az alapértelmezett naptár."
+
+#: ../common/resources/clock-dialog.glade.h:21
+msgid "Co_mmand:"
+msgstr "Pa_rancs:"
+
+#: ../common/resources/clock-dialog.glade.h:22
+msgid "_Show week numbers"
+msgstr "_Hetek számának megjelenítése"
+
+#: ../common/resources/clock-dialog.glade.h:23
+msgid "Calendar"
+msgstr "Naptár"
+
+#: ../common/resources/clock-dialog.glade.h:25
+#, no-c-format
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"page for additional information."
+msgstr "A formátum leírja a panelbe beszúrandó dátum és idő részeket. Például a %Y az évre, a %m a hónapra, a %d pedig a napra lesz cserélve. Hasonlóan, a <b></b> címkék félkövérré teszik a szöveget. További információkért lásd a „Súgó” oldalt."
+
+#: ../common/resources/clock-dialog.glade.h:26
+msgid "_Tooltip format:"
+msgstr "B_uboréksúgó formátuma:"
+
+#: ../common/resources/clock-dialog.glade.h:27
+msgid "_Layout:"
+msgstr "_Elrendezés:"
+
+#: ../common/resources/clock-dialog.glade.h:29
+msgid "Sho_w AM/PM"
+msgstr "DE/D_U megjelenítése"
+
+#: ../common/resources/clock-dialog.glade.h:30
+msgid "Fl_ash time separators"
+msgstr "I_dőelválasztók villogtatása"
+
+#: ../common/resources/clock-dialog.glade.h:31
+msgid "24-_hour clock"
+msgstr "2_4 órás óra használata"
+
+#: ../common/resources/clock-dialog.glade.h:32
+msgid "Binary mode:"
+msgstr "Bináris mód:"
+
+#: ../common/resources/clock-dialog.glade.h:33
+msgid "Display _seconds"
+msgstr "Máso_dpercek megjelenítése"
+
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
+#: ../common/resources/clock-dialog.glade.h:35
+msgid "F_uzziness:"
+msgstr "_Pontosság:"
+
+#: ../common/resources/clock-dialog.glade.h:36
+msgid "Show _inactive segments"
+msgstr ""
+
+#: ../common/resources/clock-dialog.glade.h:37
+msgid "Show gri_d"
+msgstr "_Rács megjelenítése"
+
+#: ../common/resources/clock-dialog.glade.h:38
+msgid "Font:"
+msgstr "Betű:"
+
+#: ../common/resources/clock-dialog.glade.h:39
+msgid "Format:"
+msgstr "Formátum:"
+
+#: ../common/resources/clock-dialog.glade.h:41
+#, no-c-format
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
+"the &quot;Help&quot; page for additional information."
+msgstr "A formátum leírja a panelbe beszúrandó dátum és idő részeket. Például a %Y az évre, a %m a hónapra, a %d pedig a napra lesz cserélve. Hasonlóan, a &lt;b&gt;&lt;/b&gt; címkék félkövérré teszik a szöveget. További információkért lásd a „Súgó” oldalt."
+
+#: ../common/resources/clock-dialog.glade.h:42
+msgid "Date"
+msgstr "Dátum"
+
+#: ../common/resources/clock-dialog.glade.h:43
+msgid "Time"
+msgstr "Idő"
+
+#: ../common/resources/clock-dialog.glade.h:44
+msgid "Clock Options"
+msgstr "Óra beállításai"
+
+#: ../common/resources/directorymenu-dialog.glade.h:1
+#: ../plugins/directorymenu/directorymenu.c:293
+msgid "Directory Menu"
+msgstr "Könyvtár menü"
+
+#: ../common/resources/directorymenu-dialog.glade.h:4
+msgid "Select A Directory"
+msgstr "Válasszon könyvtárat"
+
+#: ../common/resources/directorymenu-dialog.glade.h:6
+msgid "_Base Directory:"
+msgstr "_Alapkönyvtár:"
+
+#: ../common/resources/directorymenu-dialog.glade.h:8
+msgid "Show 'New Text _Document'"
+msgstr "„Új szöveges _dokumentum” megjelenítése"
+
+#: ../common/resources/directorymenu-dialog.glade.h:9
+msgid "Show '_New Folder'"
+msgstr "„_Új mappa” megjelenítése"
+
+#: ../common/resources/directorymenu-dialog.glade.h:10
+msgid "Show 'Open in _Terminal'"
+msgstr "„Megnyitás _terminálban” megjelenítése"
+
+#: ../common/resources/directorymenu-dialog.glade.h:11
+msgid "Show '_Open _Folder'"
+msgstr "„Mappa _megnyitása” megjelenítése"
+
+#: ../common/resources/directorymenu-dialog.glade.h:12
+msgid "Menu"
+msgstr "Menü"
+
+#: ../common/resources/directorymenu-dialog.glade.h:13
+msgid "Show _hidden files"
+msgstr "_Rejtett fájlok megjelenítése"
+
+#: ../common/resources/directorymenu-dialog.glade.h:14
+msgid ""
+"Enter a list of patterns that will be used to determine which files are "
+"visible in a directory. If you specify more than one pattern here, the list "
+"items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr "Adja meg a könyvtárban látható fájlok névmintáinak listáját. Ha több mintát ad meg, akkor a lista elemeit pontosvesszővel válassza el (például: *.txt;*.doc)."
+
+#: ../common/resources/directorymenu-dialog.glade.h:15
+msgid "_File Pattern:"
+msgstr "_Fájlminta:"
+
+#: ../common/resources/directorymenu-dialog.glade.h:16
+#: ../common/resources/tasklist-dialog.glade.h:28
+#: ../common/resources/windowmenu-dialog.glade.h:12
+msgid "Filtering"
+msgstr "Szűrés"
+
+#: ../common/resources/launcher-dialog.glade.h:1
+msgid "Default"
+msgstr "Alapértelmezett"
+
+#: ../common/resources/launcher-dialog.glade.h:2
+msgid "North"
+msgstr "Észak"
+
+#: ../common/resources/launcher-dialog.glade.h:3
+msgid "West"
+msgstr "Nyugat"
+
+#: ../common/resources/launcher-dialog.glade.h:4
+msgid "East"
+msgstr "Kelet"
+
+#: ../common/resources/launcher-dialog.glade.h:5
+msgid "South"
+msgstr "Dél"
+
+#: ../common/resources/launcher-dialog.glade.h:6
+msgid "Inside Button"
+msgstr "Gombon belül"
+
+#: ../common/resources/launcher-dialog.glade.h:7
+msgid "Up"
+msgstr "Fel"
+
+#: ../common/resources/launcher-dialog.glade.h:8
+msgid "Down"
+msgstr "Le"
+
+#: ../common/resources/launcher-dialog.glade.h:9
+msgid "_Edit Item"
+msgstr "_Elem szerkesztése"
+
+#: ../common/resources/launcher-dialog.glade.h:10
+msgid "D_elete Item"
+msgstr "Elem _törlése"
+
+#: ../common/resources/launcher-dialog.glade.h:11
+msgid "Add Appli_cation"
+msgstr "Alkalmazás _hozzáadása"
+
+#: ../common/resources/launcher-dialog.glade.h:12
+msgid "New _Application"
+msgstr "Új _alkalmazás"
+
+#: ../common/resources/launcher-dialog.glade.h:13
+msgid "New _Link"
+msgstr "Új _hivatkozás"
+
+#: ../common/resources/launcher-dialog.glade.h:14
+#: ../panel/panel-item-dialog.c:192
+msgid "Add New Items"
+msgstr "Új elemek felvétele"
+
+#: ../common/resources/launcher-dialog.glade.h:15
+msgid "Add one or more existing items to the launcher"
+msgstr "Adjon legalább egy meglévő elemet az indítóhoz"
+
+#: ../common/resources/launcher-dialog.glade.h:18
+#: ../panel/panel-item-dialog.c:221
+msgid "_Search:"
+msgstr "_Keresés:"
+
+#: ../common/resources/launcher-dialog.glade.h:19
+msgid "Launcher"
+msgstr "Indító"
+
+#: ../common/resources/launcher-dialog.glade.h:24
+msgid "Delete the currently selected item"
+msgstr "A kiválasztott elem törlése"
+
+#: ../common/resources/launcher-dialog.glade.h:25
+msgid "Add a new empty item"
+msgstr "Új üres elem hozzáadása"
+
+#: ../common/resources/launcher-dialog.glade.h:26
+msgid "Add a new hyperlink"
+msgstr "Új hiperhivatkozás hozzáadása"
+
+#: ../common/resources/launcher-dialog.glade.h:28
+msgid "Disable t_ooltips"
+msgstr "B_uboréksúgók letiltása"
+
+#: ../common/resources/launcher-dialog.glade.h:29
+msgid ""
+"Select this option to disable the tooltips when moving over the panel button"
+" or menu items."
+msgstr "A buboréksúgók letiltása a panel gombjaira vagy menüelemekre mutatáskor."
+
+#: ../common/resources/launcher-dialog.glade.h:30
+msgid "Show _label instead of icon"
+msgstr "_Címke megjelenítése ikon helyett"
+
+#: ../common/resources/launcher-dialog.glade.h:31
+msgid "Show last _used item in panel"
+msgstr "_Utoljára használt elem megjelenítése a panelen"
+
+#: ../common/resources/launcher-dialog.glade.h:32
+msgid "Select this option to move the clicked menu item to the panel."
+msgstr "A kattintással kiválasztott menüelem panelre mozgatása."
+
+#: ../common/resources/launcher-dialog.glade.h:33
+msgid "_Arrow button position:"
+msgstr "_Nyílgomb pozíciója:"
+
+#: ../common/resources/launcher-dialog.glade.h:34
+msgid "Advanced"
+msgstr "Speciális"
+
+#: ../common/resources/pager-dialog.glade.h:1
+msgid "Buttons"
+msgstr "Gombok"
+
+#: ../common/resources/pager-dialog.glade.h:2
+msgid "Miniature View"
+msgstr "Miniatűr nézet"
+
+#: ../common/resources/pager-dialog.glade.h:3
+msgid "Workspace Switcher"
+msgstr "Munkaterület-váltó"
+
+#: ../common/resources/pager-dialog.glade.h:4 ../plugins/pager/pager.c:706
+msgid "Workspace _Settings..."
+msgstr "M_unkaterület beállításai…"
+
+#: ../common/resources/pager-dialog.glade.h:7
+msgid "Number of _rows:"
+msgstr "_Sorok száma:"
+
+#: ../common/resources/pager-dialog.glade.h:8
+msgid "Show workspace number"
+msgstr "Munkaterületek számainak megjelenítése"
+
+#: ../common/resources/pager-dialog.glade.h:9
+msgid "Switch workspaces using the mouse wheel"
+msgstr "Munkaterületek közti váltás egérgörgővel"
+
+#: ../common/resources/pager-dialog.glade.h:10
+msgid "Wrap around workspaces"
+msgstr "Körkörös váltás a munkaterületek között"
+
+#: ../common/resources/pager-dialog.glade.h:11
+msgid "<b>Appearance</b>"
+msgstr "<b>Megjelenés</b>"
+
+#: ../common/resources/separator-dialog.glade.h:1
+msgid "Transparent"
+msgstr "Átlátszó"
+
+#: ../common/resources/separator-dialog.glade.h:2
+#: ../plugins/actions/actions.c:726
+msgid "Separator"
+msgstr "Elválasztó"
+
+#: ../common/resources/separator-dialog.glade.h:3
+msgid "Handle"
+msgstr "Fogantyú"
+
+#: ../common/resources/separator-dialog.glade.h:4
+msgid "Dots"
+msgstr "Pontok"
+
+#: ../common/resources/separator-dialog.glade.h:8
+msgid "_Expand"
+msgstr "Bő_vítés"
+
+#: ../common/resources/showdesktop-dialog.glade.h:1
+#: ../plugins/showdesktop/showdesktop.c:322
+msgid "Show Desktop"
+msgstr "Asztal megjelenítése"
+
+#: ../common/resources/showdesktop-dialog.glade.h:4
+msgid "_Show on mouse hover"
+msgstr ""
+
+#: ../common/resources/showdesktop-dialog.glade.h:5
+#: ../common/resources/sn-dialog.glade.h:14
+msgid "Behavior"
+msgstr "Viselkedés"
+
+#: ../common/resources/sn-dialog.glade.h:1
+msgid "Status Tray Items"
+msgstr "Állapottálca-elemek"
+
+#: ../common/resources/sn-dialog.glade.h:3
+msgid "C_lear Known Items"
+msgstr "_Ismert elemek törlése"
+
+#: ../common/resources/sn-dialog.glade.h:4
+msgid "Resets the list of items and their visibility settings"
+msgstr "Alaphelyzetbe állítja az elemlistát és a láthatósági beállításokat"
+
+#: ../common/resources/sn-dialog.glade.h:5
+msgid "_Fixed icon size (pixels):"
+msgstr "Fix _ikonméret (képpont):"
+
+#: ../common/resources/sn-dialog.glade.h:6
+msgid "Adjust size _automatically"
+msgstr "Méret _automatikus állítása"
+
+#: ../common/resources/sn-dialog.glade.h:7
+msgid "Icons"
+msgstr "Ikonok"
+
+#: ../common/resources/sn-dialog.glade.h:8
+msgid "Arrange _items in a single row"
+msgstr "_Elemek rendezése 1 sorba"
+
+#: ../common/resources/sn-dialog.glade.h:9
+msgid "If enabled, ensure that the items are laid out in a single row"
+msgstr "Bekapcsolva az elemek egyetlen sorban lesznek"
+
+#: ../common/resources/sn-dialog.glade.h:10
+msgid "_Hide items by default"
+msgstr "Elemek el_rejtése alapból"
+
+#: ../common/resources/sn-dialog.glade.h:11
+msgid "When enabled, all new items will be marked as \"Hidden\""
+msgstr "Ha engedélyezve van, az új elemek rejtettnek lesznek jelölve"
+
+#: ../common/resources/sn-dialog.glade.h:12
+msgid "_Square items"
+msgstr "_Négyszögletes elemek"
+
+#: ../common/resources/sn-dialog.glade.h:13
+msgid "Item buttons will take a square when it's possible"
+msgstr "Az elemgombok négyszögletesek lesznek, ha lehetséges"
+
+#: ../common/resources/sn-dialog.glade.h:15
+msgid "Item"
+msgstr "Elem"
+
+#: ../common/resources/sn-dialog.glade.h:16
+msgid "Hidden"
+msgstr "Rejtett"
+
+#: ../common/resources/sn-dialog.glade.h:17
+msgid "Move the selected item one row up"
+msgstr "A kijelölt elem egy sorral feljebb helyezése"
+
+#: ../common/resources/sn-dialog.glade.h:18
+msgid "Move the selected item one row down"
+msgstr "A kijelölt elem egy sorral lejjebb helyezése"
+
+#: ../common/resources/sn-dialog.glade.h:19
+msgid "Known Items"
+msgstr "Ismert elemek"
+
+#: ../common/resources/sn-dialog.glade.h:20
+msgid "_Menu is primary action"
+msgstr "_Menü az elsődleges művelet"
+
+#: ../common/resources/sn-dialog.glade.h:21
+msgid "Left click will always display the menu for item"
+msgstr "A bal kattintás mindig az elem menüjét jeleníti meg"
+
+#: ../common/resources/sn-dialog.glade.h:22
+msgid "_Request symbolic icons"
+msgstr "Szimbolikus ikonok _kérése"
+
+#: ../common/resources/sn-dialog.glade.h:23
+msgid "Load symbolic icons if available"
+msgstr "Szimbolikus ikonok betöltése, ha elérhetők"
+
+#: ../common/resources/sn-dialog.glade.h:24
+msgid "Features"
+msgstr "Funkciók"
+
+#: ../common/resources/sn-dialog.glade.h:25
+msgid "Status Notifiers"
+msgstr "Állapotértesítők"
+
+#: ../common/resources/sn-dialog.glade.h:26
+msgid "Systray Icons"
+msgstr "Rendszertálcaikonok"
+
+#: ../common/resources/tasklist-dialog.glade.h:1
+msgid "Nothing"
+msgstr "Semmi"
+
+#: ../common/resources/tasklist-dialog.glade.h:2
+msgid "Close Window"
+msgstr "Ablak bezárása"
+
+#: ../common/resources/tasklist-dialog.glade.h:3
+msgid "Minimize Window"
+msgstr "Ablak minimalizálása"
+
+#: ../common/resources/tasklist-dialog.glade.h:4
+msgid "New Instance"
+msgstr "Új példány"
+
+#: ../common/resources/tasklist-dialog.glade.h:5
+msgid "Timestamp"
+msgstr "Időbélyeg"
+
+#: ../common/resources/tasklist-dialog.glade.h:6
+msgid "Group title and timestamp"
+msgstr "Csoport címe és időbélyege"
+
+#: ../common/resources/tasklist-dialog.glade.h:7
+msgid "Window title"
+msgstr "Ablakcím"
+
+#: ../common/resources/tasklist-dialog.glade.h:8
+msgid "Group title and window title"
+msgstr "Csoport címe és ablakcíme"
+
+#: ../common/resources/tasklist-dialog.glade.h:9
+msgid "None, allow drag-and-drop"
+msgstr "Nincs, fogd és vidd művelet engedélyezése"
+
+#: ../common/resources/tasklist-dialog.glade.h:10
+msgid "Window Buttons"
+msgstr "Ablakgombok"
+
+#: ../common/resources/tasklist-dialog.glade.h:13
+msgid "Show button _labels"
+msgstr "_Gombfeliratok megjelenítése"
+
+#: ../common/resources/tasklist-dialog.glade.h:14
+msgid "Show _flat buttons"
+msgstr "_Lapos gombok megjelenítése"
+
+#: ../common/resources/tasklist-dialog.glade.h:15
+msgid "Show _handle"
+msgstr "F_ogantyú megjelenítése"
+
+#: ../common/resources/tasklist-dialog.glade.h:16
+msgid "Show _tooltips"
+msgstr "_Buboréksúgó megjelenítése"
+
+#: ../common/resources/tasklist-dialog.glade.h:17
+msgid "Sorting _order:"
+msgstr "_Rendezési sorrend:"
+
+#: ../common/resources/tasklist-dialog.glade.h:19
+msgid "Mi_ddle click action:"
+msgstr "Középső egérgomb _funkciója:"
+
+#: ../common/resources/tasklist-dialog.glade.h:20
+msgid "_Group windows by application"
+msgstr "Ablakok _csoportosítása alkalmazásonként"
+
+#: ../common/resources/tasklist-dialog.glade.h:21
+msgid "Restore minimized windows to current _workspace"
+msgstr "Minimalizált ablakok visszaállítása a jelenlegi _munkaterületre"
+
+#: ../common/resources/tasklist-dialog.glade.h:22
+msgid "D_raw window frame when hovering a button"
+msgstr "_Ablakkeret rajzolása gombra mutatáskor"
+
+#: ../common/resources/tasklist-dialog.glade.h:23
+msgid "_Switch windows using the mouse wheel"
+msgstr "_Ablakok közti váltás egérgörgővel"
+
+#: ../common/resources/tasklist-dialog.glade.h:24
+msgid "Behaviour"
+msgstr "Viselkedés"
+
+#: ../common/resources/tasklist-dialog.glade.h:25
+#: ../common/resources/windowmenu-dialog.glade.h:11
+msgid "Show windows from _all workspaces"
+msgstr "Az ö_sszes munkaterület ablakainak megjelenítése"
+
+#: ../common/resources/tasklist-dialog.glade.h:26
+msgid "Show windows from all mo_nitors"
+msgstr "Az összes m_onitor ablakainak megjelenítése"
+
+#: ../common/resources/tasklist-dialog.glade.h:27
+msgid "Show only _minimized windows"
+msgstr "Csak _minimalizált ablakok megjelenítése"
+
+#: ../common/resources/windowmenu-dialog.glade.h:1
+msgid "Icon"
+msgstr "Ikon"
+
+#: ../common/resources/windowmenu-dialog.glade.h:2
+msgid "Arrow"
+msgstr "Nyíl"
+
+#: ../common/resources/windowmenu-dialog.glade.h:3
+msgid "Window Menu"
+msgstr "Ablakmenü"
+
+#: ../common/resources/windowmenu-dialog.glade.h:6
+msgid "Button layout:"
+msgstr "Gombelrendezés:"
+
+#: ../common/resources/windowmenu-dialog.glade.h:7
+msgid "Show workspace a_ctions"
+msgstr "_Munkaterület-műveletek megjelenítése"
+
+#: ../common/resources/windowmenu-dialog.glade.h:8
+msgid "Show workspace _names"
+msgstr "Munkaterületek _neveinek megjelenítése"
+
+#: ../common/resources/windowmenu-dialog.glade.h:9
+msgid "Enable _urgency notification"
+msgstr "_Sürgősségi értesítés engedélyezése"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1109
+#: ../panel/panel-preferences-dialog.c:1540
 msgid "Remove"
 msgstr "Eltávolítás"
 
-#: libxfce4panel/xfce-panel-plugin.c:1089
+#: ../libxfce4panel/xfce-panel-plugin.c:1110
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "Ha eltávolítja az elemet a panelről, akkor a beállításai is elvesznek."
 
-#: libxfce4panel/xfce-panel-plugin.c:1093
-#: panel/panel-preferences-dialog.c:1544
+#: ../libxfce4panel/xfce-panel-plugin.c:1114
+#: ../panel/panel-preferences-dialog.c:1547
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Biztos, hogy eltávolítja a következőt: „%s”?"
 
 #. properties item
-#: libxfce4panel/xfce-panel-plugin.c:1215
+#: ../libxfce4panel/xfce-panel-plugin.c:1236
 msgid "_Properties"
 msgstr "_Tulajdonságok"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1226 panel/panel-window.c:3761
+#: ../libxfce4panel/xfce-panel-plugin.c:1247 ../panel/panel-window.c:3809
 msgid "_About"
 msgstr "_Névjegy"
 
 #. move item
-#: libxfce4panel/xfce-panel-plugin.c:1237
+#: ../libxfce4panel/xfce-panel-plugin.c:1258
 msgid "_Move"
 msgstr "Át_helyezés"
 
-#. remove
-#: libxfce4panel/xfce-panel-plugin.c:1253 panel/panel-application.c:357
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1083
-#: panel/panel-preferences-dialog.glade:1240
-#: plugins/launcher/launcher-dialog.c:841
-msgid "_Remove"
-msgstr "_Eltávolítás"
-
-#: libxfce4panel/xfce-panel-plugin.c:1271
+#: ../libxfce4panel/xfce-panel-plugin.c:1292
 msgid "Pane_l"
 msgstr "_Panel"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1279 panel/panel-window.c:3698
+#: ../libxfce4panel/xfce-panel-plugin.c:1300 ../panel/panel-window.c:3746
 msgid "Add _New Items..."
 msgstr "Új _elemek hozzáadása…"
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1290 panel/panel-window.c:3709
+#: ../libxfce4panel/xfce-panel-plugin.c:1311 ../panel/panel-window.c:3757
 msgid "Panel Pr_eferences..."
 msgstr "_Panel beállításai…"
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1307 panel/panel-window.c:3736
+#: ../libxfce4panel/xfce-panel-plugin.c:1328 ../panel/panel-window.c:3784
 msgid "Log _Out"
 msgstr "_Kijelentkezés"
 
-#. help item
-#: libxfce4panel/xfce-panel-plugin.c:1323 panel/panel-item-dialog.c:207
-#: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3752
-#: plugins/actions/actions-dialog.glade:97
-#: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
-#: plugins/clock/clock-dialog.glade:120
-#: plugins/directorymenu/directorymenu-dialog.glade:49
-#: plugins/launcher/launcher-dialog.glade:398
-#: plugins/pager/pager-dialog.glade:81
-#: plugins/separator/separator-dialog.glade:69
-#: plugins/showdesktop/showdesktop-dialog.glade:49
-#: plugins/tasklist/tasklist-dialog.glade:93
-#: plugins/windowmenu/windowmenu-dialog.glade:63
-msgid "_Help"
-msgstr "_Súgó"
-
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1334
+#: ../libxfce4panel/xfce-panel-plugin.c:1355
 msgid "About"
 msgstr "Névjegy"
 
-#: panel/main.c:66
+#: ../panel/main.c:66
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "A „Panel beállításai” ablak megjelenítése"
 
-#: panel/main.c:66 panel/main.c:67
+#: ../panel/main.c:66 ../panel/main.c:67
 msgid "PANEL-NUMBER"
 msgstr "PANELSZÁM"
 
-#: panel/main.c:67
+#: ../panel/main.c:67
 msgid "Show the 'Add New Items' dialog"
 msgstr "Az „Új elemek hozzáadása” ablak megjelenítése"
 
-#: panel/main.c:68
+#: ../panel/main.c:68
 msgid "Save the panel configuration"
 msgstr "Panel beállításainak mentése"
 
-#: panel/main.c:69
+#: ../panel/main.c:69
 msgid "Add a new plugin to the panel"
 msgstr "Új bővítmény hozzáadása a panelhez"
 
-#: panel/main.c:69
+#: ../panel/main.c:69
 msgid "PLUGIN-NAME"
 msgstr "BŐVÍTMÉNYNÉV"
 
-#: panel/main.c:70
+#: ../panel/main.c:70
 msgid "Restart the running panel instance"
 msgstr "A panel futó példányának újraindítása"
 
-#: panel/main.c:71
+#: ../panel/main.c:71
 msgid "Quit the running panel instance"
 msgstr "Kilépés a panel futó példányából"
 
-#: panel/main.c:72
+#: ../panel/main.c:72
 msgid "Do not wait for a window manager on startup"
 msgstr "Ne várjon az ablakkezelőre indításkor"
 
-#: panel/main.c:73 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
-#: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
-#: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
+#: ../panel/main.c:73
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "Verzióinformációk kiírása és kilépés"
 
 #. parse context options
-#: panel/main.c:258
+#: ../panel/main.c:258
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTUMOK…]"
 
-#: panel/main.c:268
+#: ../panel/main.c:268
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Segítségért adja ki a „%s --help” parancsot."
 
-#: panel/main.c:285
+#: ../panel/main.c:285
 msgid "The Xfce development team. All rights reserved."
 msgstr "Az Xfce fejlesztőcsapata. Minden jog fenntartva."
 
-#: panel/main.c:286
+#: ../panel/main.c:286
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "A hibákat ide jelentse: <%s>."
 
 #. quit without error if an instance is running
-#: panel/main.c:394
+#: ../panel/main.c:394
 msgid "There is already a running instance"
 msgstr "Már fut egy példány"
 
 #. spawn ourselfs again
-#: panel/main.c:405
+#: ../panel/main.c:405
 msgid "Restarting..."
 msgstr "Újraindítás…"
 
-#: panel/main.c:422
+#: ../panel/main.c:422
 msgid "Failed to show the preferences dialog"
 msgstr "A beállítóablak megjelenítése sikertelen"
 
-#: panel/main.c:424
+#: ../panel/main.c:424
 msgid "Failed to show the add new items dialog"
 msgstr "Az „Új elemek hozzáadása” ablak megjelenítése sikertelen"
 
-#: panel/main.c:426
+#: ../panel/main.c:426
 msgid "Failed to save the panel configuration"
 msgstr "A panel beállításainak mentése sikertelen"
 
-#: panel/main.c:428
+#: ../panel/main.c:428
 msgid "Failed to add a plugin to the panel"
 msgstr "A bővítmény panelhez adása sikertelen"
 
-#: panel/main.c:430
+#: ../panel/main.c:430
 msgid "Failed to restart the panel"
 msgstr "A panel újraindítása sikertelen"
 
-#: panel/main.c:432
+#: ../panel/main.c:432
 msgid "Failed to quit the panel"
 msgstr "A panelből való kilépés sikertelen"
 
-#: panel/main.c:434
+#: ../panel/main.c:434
 msgid "Failed to send D-Bus message"
 msgstr "A D-Bus üzenet elküldése sikertelen"
 
-#: panel/main.c:442 panel/main.c:462
+#: ../panel/main.c:442 ../panel/main.c:462
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Nem található a(z) %s futó példánya"
 
-#: panel/main.c:443
+#: ../panel/main.c:443
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Elindítja a panelt? Ebben az esetben mentse a munkamenetet kilépéskor, így a panel a következő bejelentkezéskor automatikusan elindul."
 
-#: panel/main.c:448
+#: ../panel/main.c:448
 msgid "Execute"
 msgstr "Végrehajtás"
 
-#: panel/panel-application.c:214
+#: ../panel/panel-application.c:210
 msgid "Failed to launch the migration application"
 msgstr "A költöztető alkalmazás indítása sikertelen"
 
-#: panel/panel-application.c:347
+#: ../panel/panel-application.c:343
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr "A(z) „%s” bővítmény nem tölthető be, eltávolítja az xfce4-panel beállításaiból?"
 
-#: panel/panel-application.c:349
+#: ../panel/panel-application.c:345
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -265,144 +1273,119 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr "Ez a bővítmény szerepel az xfce4-panel jelenlegi beállításaiban, de nem tölthető be, talán telepítési hiba miatt. Ha tudja, hogy mit csinál, akkor végleg eltávolíthatja, de ha nem, akkor inkább lépjen ki, és készítsen biztonsági másolatot a jelenlegi beállításokról a(z) %s használatával, mielőtt ellenőrizné a telepítését és megpróbálná újra elindítani az xfce-panelt."
 
-#: panel/panel-application.c:356
+#: ../panel/panel-application.c:352
 msgid "Plugin loading failure"
 msgstr "Bővítménybetöltési hiba"
 
-#: panel/panel-application.c:357
+#: ../panel/panel-application.c:353
 msgid "_Quit"
 msgstr "_Kilépés"
 
-#: panel/panel-application.c:1037
+#: ../panel/panel-application.c:1033
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Ez egy új indítóbővítményt hoz létre a panelen, a ráejtett fájlokat pedig menüelemekként szúrja be."
 
-#: panel/panel-application.c:1040
+#: ../panel/panel-application.c:1036
 msgid "Create _Launcher"
 msgstr "_Indító létrehozása"
 
-#: panel/panel-application.c:1041
+#: ../panel/panel-application.c:1037
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Új indító létrehozása %d asztali fájlból"
 msgstr[1] "Új indító létrehozása %d asztali fájlból"
 
-#: panel/panel-application.c:1802
+#: ../panel/panel-application.c:1800
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Az X-et munkamenet-kezelő nélkül indította. A Kilépés gombra kattintás bezárja az X kiszolgálót."
 
-#: panel/panel-application.c:1805
+#: ../panel/panel-application.c:1803
 msgid "Quit"
 msgstr "Kilépés"
 
-#: panel/panel-application.c:1805
+#: ../panel/panel-application.c:1803
 msgid "Are you sure you want to quit the panel?"
 msgstr "Biztos, hogy kilép a panelből?"
 
-#: panel/panel-application.c:1813
+#: ../panel/panel-application.c:1811
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "A(z) „%s” parancs indítása sikertelen"
 
-#: panel/panel-dbus-client.c:213
+#: ../panel/panel-dbus-client.c:209
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "Érvénytelen bővítményesemény-szintaxis megadva. Használja a BŐVÍTMÉNYNÉV:NÉV[:TÍPUS:ÉRTÉK] alakot."
 
-#: panel/panel-dbus-client.c:243
+#: ../panel/panel-dbus-client.c:239
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
 msgstr "Érvénytelen tipptípus: „%s”. Az érvényes típusok: bool, double, int, string és uint."
 
-#: panel/panel-dialogs.c:53
+#: ../panel/panel-dialogs.c:53
 msgid "Unable to open the e-mail address"
 msgstr "Az e-mail-cím nem nyitható meg"
 
-#: panel/panel-dialogs.c:79
+#: ../panel/panel-dialogs.c:79
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Az Xfce asztali környezet panelja"
 
-#: panel/panel-dialogs.c:83
+#: ../panel/panel-dialogs.c:83
 msgid "translator-credits"
 msgstr "Kelemen Gábor <kelemeng at gnome dot hu>,\nMeskó Balázs <mesko dot balazs at fsf dot hu>"
 
-#: panel/panel-dialogs.c:157
+#: ../panel/panel-dialogs.c:157
 msgid "Add New Item"
 msgstr "Új elem felvétele"
 
-#: panel/panel-dialogs.c:157 plugins/actions/actions.c:870
-#: plugins/applicationsmenu/applicationsmenu.c:606
-#: plugins/directorymenu/directorymenu.c:466
-#: plugins/directorymenu/directorymenu.c:938
+#: ../panel/panel-dialogs.c:157 ../plugins/actions/actions.c:864
+#: ../plugins/applicationsmenu/applicationsmenu.c:601
+#: ../plugins/directorymenu/directorymenu.c:461
+#: ../plugins/directorymenu/directorymenu.c:932
 msgid "_Cancel"
 msgstr "Mé_gse"
 
-#: panel/panel-dialogs.c:157 panel/panel-item-dialog.c:203
-#: panel/panel-preferences-dialog.glade:1223
-#: plugins/launcher/launcher-dialog.glade:219
-msgid "_Add"
-msgstr "_Hozzáadás"
-
-#: panel/panel-dialogs.c:168
+#: ../panel/panel-dialogs.c:168
 msgid "Please choose a panel for the new plugin:"
 msgstr "Válasszon panelt az új bővítményhez:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1028
+#: ../panel/panel-dialogs.c:188 ../panel/panel-preferences-dialog.c:1028
 #, c-format
 msgid "Panel %d"
 msgstr "%d. panel"
 
-#: panel/panel-dialogs.c:227
+#: ../panel/panel-dialogs.c:227
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr "Mivel a panel kioszk módban fut, normál felhasználóként nem módosíthatja a panel beállításait"
 
-#: panel/panel-dialogs.c:229
+#: ../panel/panel-dialogs.c:229
 msgid "Modifying the panel is not allowed"
 msgstr "A panel módosítása nem engedélyezett"
 
-#: panel/panel-item-dialog.c:195 plugins/launcher/launcher-dialog.glade:198
-msgid "Add New Items"
-msgstr "Új elemek felvétele"
-
-#: panel/panel-item-dialog.c:211 panel/panel-preferences-dialog.glade:163
-#: panel/panel-tic-tac-toe.c:118 plugins/actions/actions-dialog.glade:82
-#: plugins/applicationsmenu/applicationsmenu-dialog.glade:55
-#: plugins/clock/clock-dialog.glade:105
-#: plugins/directorymenu/directorymenu-dialog.glade:34
-#: plugins/launcher/launcher-dialog.glade:235
-#: plugins/launcher/launcher-dialog.glade:414
-#: plugins/pager/pager-dialog.glade:97
-#: plugins/separator/separator-dialog.glade:54
-#: plugins/showdesktop/showdesktop-dialog.glade:34
-#: plugins/systray/sn-dialog.glade:65
-#: plugins/tasklist/tasklist-dialog.glade:77
-#: plugins/windowmenu/windowmenu-dialog.glade:48
-msgid "_Close"
-msgstr "_Bezárás"
-
-#: panel/panel-item-dialog.c:227 plugins/launcher/launcher-dialog.glade:272
-msgid "_Search:"
-msgstr "_Keresés:"
-
-#: panel/panel-item-dialog.c:235
+#: ../panel/panel-item-dialog.c:229
 msgid "Enter search phrase here"
 msgstr "Adja meg a keresőkifejezést"
 
-#: panel/panel-plugin-external.c:413
+#: ../panel/panel-item-dialog.c:618
+#, c-format
+msgid "Internal name: %s"
+msgstr ""
+
+#: ../panel/panel-plugin-external.c:413
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "A(z) „%s” bővítmény összeomlott, újraindítja?"
 
-#: panel/panel-plugin-external.c:414
+#: ../panel/panel-plugin-external.c:414
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -410,47 +1393,47 @@ msgid ""
 "permanently removed from the panel."
 msgstr "A bővítmény többször is újraindult az elmúlt %d másodpercben. A Végrehajtás gomb megnyomásával a panel megpróbálja újraindítani a bővítményt, ellenkező esetben az véglegesen el lesz távolítva a panelről."
 
-#: panel/panel-plugin-external.c:419
+#: ../panel/panel-plugin-external.c:419
 msgid "Plugin Restart"
 msgstr "Bővítmény újraindítása"
 
-#: panel/panel-plugin-external.c:420
+#: ../panel/panel-plugin-external.c:420
 msgid "_Execute"
 msgstr "_Végrehajtás"
 
-#: panel/panel-preferences-dialog.c:581
+#: ../panel/panel-preferences-dialog.c:575
 msgid "Automatic"
 msgstr "Automatikus"
 
-#: panel/panel-preferences-dialog.c:590
+#: ../panel/panel-preferences-dialog.c:584
 msgid "Primary"
 msgstr "Elsődleges"
 
 #. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:609
+#: ../panel/panel-preferences-dialog.c:603
 #, c-format
 msgid "Monitor %d"
 msgstr "%d. monitor"
 
-#: panel/panel-preferences-dialog.c:1082
+#: ../panel/panel-preferences-dialog.c:1079
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "A panel és a bővítmények beállításai el lesznek távolítva"
 
-#: panel/panel-preferences-dialog.c:1091
+#: ../panel/panel-preferences-dialog.c:1088
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Biztos, hogy eltávolítja a(z) %d. panelt?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1382
+#: ../panel/panel-preferences-dialog.c:1385
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(külső)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1387
+#: ../panel/panel-preferences-dialog.c:1390
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -459,1831 +1442,779 @@ msgstr "Belső név: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1399
+#: ../panel/panel-preferences-dialog.c:1402
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Belső név: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1546
+#: ../panel/panel-preferences-dialog.c:1549
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Ha eltávolítja az elemet a panelről, az véglegesen elvész."
 
-#: panel/panel-preferences-dialog.c:1550
+#: ../panel/panel-preferences-dialog.c:1553
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Biztos, hogy eltávolítja ezeket az %d elemeket? "
 
-#: panel/panel-preferences-dialog.c:1552
+#: ../panel/panel-preferences-dialog.c:1555
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr ""
 
-#: panel/panel-preferences-dialog.glade:13
-msgid "Never"
-msgstr "Soha"
-
-#: panel/panel-preferences-dialog.glade:16
-msgid "Intelligently"
-msgstr "Intelligensen"
-
-#: panel/panel-preferences-dialog.glade:19
-msgid "Always"
-msgstr "Mindig"
-
-#: panel/panel-preferences-dialog.glade:81
-msgid "Horizontal"
-msgstr "Vízszintes"
-
-#: panel/panel-preferences-dialog.glade:84
-msgid "Vertical"
-msgstr "Függőleges"
-
-#: panel/panel-preferences-dialog.glade:87
-msgid "Deskbar"
-msgstr "Asztalsáv"
-
-#: panel/panel-preferences-dialog.glade:134
-msgid "None (use system style)"
-msgstr "Nincs (rendszerstílus használata)"
-
-#: panel/panel-preferences-dialog.glade:137
-msgid "Solid color"
-msgstr "Homogén szín"
-
-#: panel/panel-preferences-dialog.glade:140
-msgid "Background image"
-msgstr "Háttérkép"
-
-#: panel/panel-preferences-dialog.glade:146
-msgid "Panel Preferences"
-msgstr "Panel beállításai"
-
-#: panel/panel-preferences-dialog.glade:223
-msgid "Profiles:"
-msgstr "Profilok:"
-
-#: panel/panel-preferences-dialog.glade:251
-msgid "_Backup and restore"
-msgstr "_Biztonsági mentés és helyreállítás"
-
-#: panel/panel-preferences-dialog.glade:255
-msgid "Switch between panel presets"
-msgstr "Váltás a panel-előbeállítások között"
-
-#: panel/panel-preferences-dialog.glade:299
-msgid "Add a new panel"
-msgstr "Új panel hozzáadása"
-
-#: panel/panel-preferences-dialog.glade:324
-msgid "Remove the currently selected panel"
-msgstr "A kiválasztott panel eltávolítása"
-
-#: panel/panel-preferences-dialog.glade:375
-#: panel/panel-preferences-dialog.glade:738
-msgid "<b>General</b>"
-msgstr "<b>Általános</b>"
-
-#: panel/panel-preferences-dialog.glade:390
-msgid "M_ode:"
-msgstr "Mó_d:"
-
-#: panel/panel-preferences-dialog.glade:419
-msgid "Span mo_nitors"
-msgstr "Több mo_nitoron"
-
-#: panel/panel-preferences-dialog.glade:423
-msgid "Select this option to extend the panel over multiple monitors."
-msgstr "A panel kiterjesztése több monitorra."
-
-#: panel/panel-preferences-dialog.glade:436
-msgid "_Lock panel"
-msgstr "_Panel zárolása"
-
-#: panel/panel-preferences-dialog.glade:440
-msgid ""
-"Select this option to hide the handles of the panel and lock its position."
-msgstr "A panel fogantyúinak elrejtése és a pozíciójának zárolása."
-
-#: panel/panel-preferences-dialog.glade:453
-msgid "_Reserve space on screen edges for the panel"
-msgstr "Terület _fenntartása a képernyő szélen a panelhez"
-
-#: panel/panel-preferences-dialog.glade:457
-msgid ""
-"Select this option if you don't want maximized windows to cover the area "
-"behind the panel. This only works when the panel is attached to a screen "
-"edge."
-msgstr "A teljes méretű ablakok ne fedjék le a panel mögötti területet. Ez csak akkor működik, ha a panel a képernyő széléhez van rögzítve."
-
-#: panel/panel-preferences-dialog.glade:478
-msgid "Au_tomatically hide the panel:"
-msgstr "A panel au_tomatikus elrejtése:"
-
-#: panel/panel-preferences-dialog.glade:519
-msgid "O_utput:"
-msgstr "_Kimenet:"
-
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
-#: panel/panel-preferences-dialog.glade:563
-msgid "<b>Measurements</b>"
-msgstr "<b>Méretek</b>"
-
-#: panel/panel-preferences-dialog.glade:578
-msgid "Row _size (pixels):"
-msgstr "Sor_méret (képpont):"
-
-#: panel/panel-preferences-dialog.glade:592
-msgid "Num_ber of rows:"
-msgstr "_Sorok száma:"
-
-#: panel/panel-preferences-dialog.glade:606
-msgid "L_ength (pixels):"
-msgstr "_Hossz (pixel):"
-
-#: panel/panel-preferences-dialog.glade:635
-msgid "Border width (pixels):"
-msgstr "Keret szélessége (képpont):"
-
-#: panel/panel-preferences-dialog.glade:658
-msgid "A_utomatically increase the length"
-msgstr "A hossz a_utomatikus növelése"
-
-#: panel/panel-preferences-dialog.glade:662
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
-msgstr "A panel méretének automatikus növelése, ha a bővítmények több helyet igényelnek."
-
-#: panel/panel-preferences-dialog.glade:712
-msgid "D_isplay"
-msgstr "_Megjelenítés"
-
-#: panel/panel-preferences-dialog.glade:753
-msgid "Dark mode"
-msgstr "Sötét mód"
-
-#: panel/panel-preferences-dialog.glade:793
-msgid "<b>Background</b>"
-msgstr "<b>Háttér</b>"
-
-#: panel/panel-preferences-dialog.glade:808
-#: plugins/separator/separator-dialog.glade:119
-msgid "_Style:"
-msgstr "_Stílus:"
-
-#: panel/panel-preferences-dialog.glade:840
-msgid "C_olor:"
-msgstr "Szí_n:"
-
-#: panel/panel-preferences-dialog.glade:855
-msgid "Pick a Panel Color"
-msgstr "Válasszon panelszínt"
-
-#: panel/panel-preferences-dialog.glade:868
-msgid "_File:"
-msgstr "_Fájl:"
-
-#: panel/panel-preferences-dialog.glade:881
-msgid "Select A Background Image"
-msgstr "Válasszon háttérképet"
-
-#: panel/panel-preferences-dialog.glade:908
-msgid "<b>Icons</b>"
-msgstr "<b>Ikonok</b>"
-
-#: panel/panel-preferences-dialog.glade:922
-msgid "Adjust size au_tomatically"
-msgstr "Méret au_tomatikus állítása"
-
-#: panel/panel-preferences-dialog.glade:959
-msgid "Fixed icon _size (pixels):"
-msgstr "Fix _ikonméret (képpont):"
-
-#: panel/panel-preferences-dialog.glade:1002
-msgid "<b>Opacity</b>"
-msgstr "<b>Átlátszatlanság</b>"
-
-#: panel/panel-preferences-dialog.glade:1028
-msgid "Configure..."
-msgstr "Beállítás…"
-
-#: panel/panel-preferences-dialog.glade:1066
-msgid ""
-"<b>Compositing is currently disabled</b>\n"
-"Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>A kompozitálás jelenleg le van tiltva</b>\nEngedélyezze a kompozitálást a az ablakkezelőben, hogy beállíthassa a panel átlátszatlanságát."
-
-#. I18N: label for the enter transparency slider
-#: panel/panel-preferences-dialog.glade:1106
-msgid "_Enter:"
-msgstr "Rám_utatás:"
-
-#. I18N: label for the leave transparency slider
-#: panel/panel-preferences-dialog.glade:1133
-msgid "_Leave:"
-msgstr "_Elhagyás:"
-
-#: panel/panel-preferences-dialog.glade:1146
-msgid ""
-"Transparency when the pointer is not hovering over the panel, with 0 being "
-"fully transparent and 100 fully opaque."
-msgstr "Átlátszóság, amikor a mutató nem a panel fölött áll, 0 (átlátszó) és 100 (átlátszatlan) között."
-
-#: panel/panel-preferences-dialog.glade:1173
-msgid "Appeara_nce"
-msgstr "_Megjelenés"
-
-#: panel/panel-preferences-dialog.glade:1228
-msgid "Add new item to this panel"
-msgstr "Új elem hozzáadása a panelhez"
-
-#: panel/panel-preferences-dialog.glade:1245
-msgid "Remove currently selected item"
-msgstr "A kiválasztott elem eltávolítása"
-
-#: panel/panel-preferences-dialog.glade:1261
-#: plugins/launcher/launcher-dialog.glade:559
-msgid "Edit the currently selected item"
-msgstr "A kiválasztott elem szerkesztése"
-
-#: panel/panel-preferences-dialog.glade:1282
-msgid "Show about information of the currently selected item"
-msgstr "A kiválasztott elem névjegy-információinak megjelenítése"
-
-#: panel/panel-preferences-dialog.glade:1325
-#: plugins/launcher/launcher-dialog.glade:509
-msgid "Move currently selected item up by one row"
-msgstr "A kiválasztott elem mozgatása egy sorral feljebb"
-
-#: panel/panel-preferences-dialog.glade:1346
-#: plugins/launcher/launcher-dialog.glade:529
-msgid "Move currently selected item down by one row"
-msgstr "A kiválasztott elem mozgatása egy sorral lejjebb"
-
-#: panel/panel-preferences-dialog.glade:1380
-msgid "Ite_ms"
-msgstr "_Elemek"
-
-#: panel/panel-tic-tac-toe.c:116
+#: ../panel/panel-tic-tac-toe.c:108
 msgid "_New Game"
 msgstr "Ú_j játék"
 
-#: panel/panel-tic-tac-toe.c:127
+#: ../panel/panel-tic-tac-toe.c:119
 msgid "_Level:"
 msgstr "S_zint:"
 
-#: panel/panel-tic-tac-toe.c:133
+#: ../panel/panel-tic-tac-toe.c:125
 msgid "Novice"
 msgstr "Újonc"
 
-#: panel/panel-tic-tac-toe.c:134
+#: ../panel/panel-tic-tac-toe.c:126
 msgid "Intermediate"
 msgstr "Haladó"
 
-#: panel/panel-tic-tac-toe.c:135
+#: ../panel/panel-tic-tac-toe.c:127
 msgid "Experienced"
 msgstr "Gyakorlott"
 
-#: panel/panel-tic-tac-toe.c:136
+#: ../panel/panel-tic-tac-toe.c:128
 msgid "Expert"
 msgstr "Szakértő"
 
-#: panel/panel-window.c:3723
+#: ../panel/panel-window.c:3734
+msgid "Panel"
+msgstr "Panel"
+
+#: ../panel/panel-window.c:3771
 msgid "_Lock Panel"
 msgstr "_Panel zárolása"
 
-#: migrate/main.c:98
+#: ../migrate/main.c:94
 msgid "Failed to load the default configuration"
 msgstr "Az alapértelmezett beállítások betöltése sikertelen"
 
-#: migrate/main.c:110
+#: ../migrate/main.c:106
 msgid "Panel config needs migration..."
 msgstr "A panel beállításait át kell költöztetni…"
 
-#: migrate/main.c:114
+#: ../migrate/main.c:110
 msgid "Failed to migrate the existing configuration"
 msgstr "A meglévő beállítások átköltöztetése sikertelen"
 
-#: migrate/main.c:120
+#: ../migrate/main.c:116
 msgid "Panel configuration has been updated."
 msgstr "A panel beállításai frissítve lettek."
 
-#: plugins/actions/actions-dialog.glade:35
-#: plugins/actions/actions-dialog.glade:64
-#: plugins/actions/actions.desktop.in.in:4
-msgid "Action Buttons"
-msgstr "Műveletgombok"
-
-#: plugins/actions/actions-dialog.glade:38 plugins/actions/actions.c:37
-msgid "Session Menu"
-msgstr "Munkamenet menü"
-
-#: plugins/actions/actions-dialog.glade:49
-msgid "Full Name"
-msgstr "Teljes név"
-
-#: plugins/actions/actions-dialog.glade:52
-msgid "Username"
-msgstr "Felhasználónév"
-
-#: plugins/actions/actions-dialog.glade:55
-msgid "User ID"
-msgstr "Felhasználóazonosító"
-
-#: plugins/actions/actions-dialog.glade:58
-msgid "Custom"
-msgstr "Egyéni"
-
-#: plugins/actions/actions-dialog.glade:162
-msgid "Appeara_nce:"
-msgstr "_Megjelenés:"
-
-#: plugins/actions/actions-dialog.glade:188
-msgid "Title:"
-msgstr "Cím:"
-
-#: plugins/actions/actions-dialog.glade:201
-msgid "Custo_m title:"
-msgstr "Egyéni cí_m:"
-
-#: plugins/actions/actions-dialog.glade:255
-#: plugins/launcher/launcher-dialog.glade:667
-msgid "General"
-msgstr "Általános"
-
-#: plugins/actions/actions-dialog.glade:303
-msgid "Visible"
-msgstr "Látható"
-
-#: plugins/actions/actions-dialog.glade:314
-msgid "Action"
-msgstr "Művelet"
-
-#: plugins/actions/actions-dialog.glade:334
-msgid "_Show confirmation dialog"
-msgstr "M_egerősítési ablak megjelenítése"
-
-#: plugins/actions/actions-dialog.glade:338
-msgid ""
-"Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Megerősítési ablak megjelenítése az egyes műveletekhez 30 másodperces időkorláttal."
-
-#: plugins/actions/actions-dialog.glade:354
-msgid "_Actions"
-msgstr "_Műveletek"
-
-#: plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:163
 msgid "Log Out"
 msgstr "Kijelentkezés"
 
-#: plugins/actions/actions.c:168
+#: ../plugins/actions/actions.c:164
 msgid "_Log Out"
 msgstr "_Kijelentkezés"
 
-#: plugins/actions/actions.c:169
+#: ../plugins/actions/actions.c:165
 msgid "Are you sure you want to log out?"
 msgstr "Biztos, hogy kijelentkezik?"
 
-#: plugins/actions/actions.c:170
+#: ../plugins/actions/actions.c:166
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Kijelentkezés %d másodperc múlva."
 
-#: plugins/actions/actions.c:175
+#: ../plugins/actions/actions.c:171
 msgid "Log Out..."
 msgstr "Kijelentkezés…"
 
-#: plugins/actions/actions.c:176
+#: ../plugins/actions/actions.c:172
 msgid "Log _Out..."
 msgstr "_Kijelentkezés…"
 
-#: plugins/actions/actions.c:182
+#: ../plugins/actions/actions.c:178
 msgid "Switch User"
 msgstr "Felhasználóváltás"
 
-#: plugins/actions/actions.c:183
+#: ../plugins/actions/actions.c:179
 msgid "_Switch User"
 msgstr "Felhasználó_váltás"
 
-#: plugins/actions/actions.c:189
+#: ../plugins/actions/actions.c:185
 msgid "Lock Screen"
 msgstr "Képernyő zárolása"
 
-#: plugins/actions/actions.c:190
+#: ../plugins/actions/actions.c:186
 msgid "Loc_k Screen"
 msgstr "Képernyő _zárolása"
 
-#: plugins/actions/actions.c:196
+#: ../plugins/actions/actions.c:192
 msgid "Hibernate"
 msgstr "Hibernálás"
 
-#: plugins/actions/actions.c:197
+#: ../plugins/actions/actions.c:193
 msgid "_Hibernate"
 msgstr "_Hibernálás"
 
-#: plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:194
 msgid "Do you want to suspend to disk?"
 msgstr "Lemezre menti a munkamenete állapotát?"
 
-#: plugins/actions/actions.c:199
+#: ../plugins/actions/actions.c:195
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "A számítógép hibernálása %d másodperc múlva."
 
-#: plugins/actions/actions.c:204
+#: ../plugins/actions/actions.c:200
 msgid "Hybrid Sleep"
 msgstr "Hibrid alvás"
 
-#: plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:201
 msgid "_Hybrid Sleep"
 msgstr "_Hibrid alvás"
 
-#: plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:202
 msgid "Do you want to hibernate and suspend the system?"
 msgstr "Biztos, hogy hibernálja és felfüggeszti a rendszert?"
 
-#: plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:203
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
 msgstr "Számítógép hibernálása és felfüggesztése %d másodperc múlva."
 
-#: plugins/actions/actions.c:212
+#: ../plugins/actions/actions.c:208
 msgid "Suspend"
 msgstr "Felfüggesztés"
 
-#: plugins/actions/actions.c:213
+#: ../plugins/actions/actions.c:209
 msgid "Sus_pend"
 msgstr "_Felfüggesztés"
 
-#: plugins/actions/actions.c:214
+#: ../plugins/actions/actions.c:210
 msgid "Do you want to suspend to RAM?"
 msgstr "Memóriába menti a munkamenete állapotát?"
 
-#: plugins/actions/actions.c:215
+#: ../plugins/actions/actions.c:211
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "A számítógép felfüggesztése %d másodperc múlva."
 
-#: plugins/actions/actions.c:220
+#: ../plugins/actions/actions.c:216
 msgid "Restart"
 msgstr "Újraindítás"
 
-#: plugins/actions/actions.c:221
+#: ../plugins/actions/actions.c:217
 msgid "_Restart"
 msgstr "Új_raindítás"
 
-#: plugins/actions/actions.c:222
+#: ../plugins/actions/actions.c:218
 msgid "Are you sure you want to restart?"
 msgstr "Biztos, hogy újraindítja a számítógépet?"
 
-#: plugins/actions/actions.c:223
+#: ../plugins/actions/actions.c:219
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "A számítógép újraindítása %d másodperc múlva."
 
-#: plugins/actions/actions.c:228
+#: ../plugins/actions/actions.c:224
 msgid "Shut Down"
 msgstr "Leállítás"
 
-#: plugins/actions/actions.c:229
+#: ../plugins/actions/actions.c:225
 msgid "Shut _Down"
 msgstr "_Leállítás"
 
-#: plugins/actions/actions.c:230
+#: ../plugins/actions/actions.c:226
 msgid "Are you sure you want to shut down?"
 msgstr "Biztos, hogy leállítja a számítógépet?"
 
-#: plugins/actions/actions.c:231
+#: ../plugins/actions/actions.c:227
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "A számítógép kikapcsolása %d másodperc múlva."
 
-#: plugins/actions/actions.c:732 plugins/separator/separator-dialog.glade:26
-#: plugins/separator/separator-dialog.glade:38
-#: plugins/separator/separator.desktop.in.in:4
-msgid "Separator"
-msgstr "Elválasztó"
-
-#: plugins/actions/actions.c:1165
+#: ../plugins/actions/actions.c:1160
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "A(z) „%s” művelet futtatása sikertelen"
 
-#: plugins/actions/actions.c:1369
+#: ../plugins/actions/actions.c:1364
 msgid "Little Mouse"
 msgstr "Kis egér"
 
-#: plugins/actions/actions.desktop.in.in:5
-msgid "Log out, lock or other system actions"
-msgstr "Kijelentkezés, zárolás vagy más rendszerműveletek"
-
-#: plugins/applicationsmenu/applicationsmenu-dialog.glade:23
-#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:4
-msgid "Applications Menu"
-msgstr "Alkalmazások menü"
-
-#: plugins/applicationsmenu/applicationsmenu-dialog.glade:101
-#: plugins/directorymenu/directorymenu-dialog.glade:122
-msgid "_Icon:"
-msgstr "_Ikon:"
-
-#: plugins/applicationsmenu/applicationsmenu-dialog.glade:125
-msgid "Button _title:"
-msgstr "Gomb_cím:"
-
-#: plugins/applicationsmenu/applicationsmenu-dialog.glade:136
-msgid "Show button on one _line"
-msgstr "A gomb megjelenítése egy _sorban"
-
-#: plugins/applicationsmenu/applicationsmenu-dialog.glade:151
-msgid "_Show button title"
-msgstr "_Gombfelirat megjelenítése"
-
-#: plugins/applicationsmenu/applicationsmenu-dialog.glade:166
-msgid "Show application d_escription in tooltip"
-msgstr "_Alkalmazás leírásának megjelenítése a buboréksúgóban"
-
-#: plugins/applicationsmenu/applicationsmenu-dialog.glade:182
-msgid "Show ic_ons in menu"
-msgstr "I_konok megjelenítése a menüben"
-
-#: plugins/applicationsmenu/applicationsmenu-dialog.glade:197
-msgid "Show generic application n_ames"
-msgstr "Általános _alkalmazásnevek megjelenítése"
-
-#: plugins/applicationsmenu/applicationsmenu-dialog.glade:201
-msgid ""
-"Select this option to show the generic application name in the menu, for "
-"example \"File Manager\" instead of \"Thunar\""
-msgstr "Az általános alkalmazásnév, például a „Thunar” helyett a „Fájlkezelő” megjelenítése a menüben"
-
-#: plugins/applicationsmenu/applicationsmenu-dialog.glade:229
-#: plugins/clock/clock-dialog.glade:405
-#: plugins/directorymenu/directorymenu-dialog.glade:150
-#: plugins/separator/separator-dialog.glade:177
-#: plugins/tasklist/tasklist-dialog.glade:257
-#: plugins/windowmenu/windowmenu-dialog.glade:206
-msgid "Appearance"
-msgstr "Megjelenés"
-
-#: plugins/applicationsmenu/applicationsmenu-dialog.glade:267
-msgid "Use the _default menu"
-msgstr "Alapértelmezett _menü használata"
-
-#: plugins/applicationsmenu/applicationsmenu-dialog.glade:282
-msgid "Ed_it Menu"
-msgstr "Menü s_zerkesztése"
-
-#: plugins/applicationsmenu/applicationsmenu-dialog.glade:304
-msgid "Use c_ustom menu file:"
-msgstr "_Egyéni menüfájl használata:"
-
-#: plugins/applicationsmenu/applicationsmenu-dialog.glade:333
-msgid "Menu _file:"
-msgstr "Me_nüfájl:"
-
-#: plugins/applicationsmenu/applicationsmenu-dialog.glade:346
-msgid "Select A Menu File"
-msgstr "Válasszon menüfájlt"
-
-#: plugins/applicationsmenu/applicationsmenu-dialog.glade:371
-msgid "Menu File"
-msgstr "Menüfájl"
-
 #. I18N: default tooltip of the application menu
-#: plugins/applicationsmenu/applicationsmenu.c:38
+#: ../plugins/applicationsmenu/applicationsmenu.c:32
 msgid "Applications"
 msgstr "Alkalmazások"
 
-#: plugins/applicationsmenu/applicationsmenu.c:606
-#: plugins/directorymenu/directorymenu.c:466
+#: ../plugins/applicationsmenu/applicationsmenu.c:601
+#: ../plugins/directorymenu/directorymenu.c:461
 msgid "Select An Icon"
 msgstr "Válasszon ikont"
 
-#: plugins/applicationsmenu/applicationsmenu.c:606
-#: plugins/directorymenu/directorymenu.c:466
+#: ../plugins/applicationsmenu/applicationsmenu.c:601
+#: ../plugins/directorymenu/directorymenu.c:461
 msgid "_OK"
 msgstr "_OK"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:643 plugins/clock/clock.c:1054
-#: plugins/launcher/launcher.c:2500
+#: ../plugins/applicationsmenu/applicationsmenu.c:638
+#: ../plugins/clock/clock.c:1055 ../plugins/launcher/launcher.c:2497
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "A(z) „%s” végrehajtása indítása sikertelen."
 
-#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:5
-msgid "Show a menu containing categories of installed applications"
-msgstr "A telepített alkalmazásokat kategorizálva tartalmazó menü megjelenítése"
-
-#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
-#: plugins/directorymenu/xfce4-popup-directorymenu.sh:27
-#: plugins/windowmenu/xfce4-popup-windowmenu.sh:27
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:27
 msgid "Usage:"
 msgstr "Használat:"
 
-#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
-#: plugins/directorymenu/xfce4-popup-directorymenu.sh:28
-#: plugins/windowmenu/xfce4-popup-windowmenu.sh:28
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
 msgid "OPTION"
 msgstr "KAPCSOLÓ"
 
-#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
-#: plugins/directorymenu/xfce4-popup-directorymenu.sh:30
-#: plugins/windowmenu/xfce4-popup-windowmenu.sh:30
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:30
 msgid "Options:"
 msgstr "Kapcsolók:"
 
-#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
-#: plugins/directorymenu/xfce4-popup-directorymenu.sh:31
-#: plugins/windowmenu/xfce4-popup-windowmenu.sh:31
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
 msgid "Popup menu at current mouse position"
 msgstr "Menü megjelenítése az aktuális egérpozícióban"
 
-#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
-#: plugins/directorymenu/xfce4-popup-directorymenu.sh:32
-#: plugins/windowmenu/xfce4-popup-windowmenu.sh:32
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
 msgid "Show help options"
 msgstr "Súgólehetőségek megjelenítése"
 
 #. TRANSLATORS: adjust this accordingly for your locale format
-#: plugins/clock/clock.c:47
+#: ../plugins/clock/clock.c:42
 msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%Y. %B %d., %A"
 
-#: plugins/clock/clock.c:176
+#: ../plugins/clock/clock.c:172
 msgid "Week %V"
 msgstr "%V. hét"
 
-#: plugins/clock/clock.c:500
+#: ../plugins/clock/clock.c:496
 msgid "Failed to execute clock command"
 msgstr "Az óra parancs végrehajtása sikertelen"
 
-#: plugins/clock/clock.c:993
+#: ../plugins/clock/clock.c:994
 msgid "Custom Format"
 msgstr "Egyéni formátum"
 
-#: plugins/clock/clock-dialog.glade:13
-msgid "Decimal"
-msgstr "10-es számrendszer"
-
-#: plugins/clock/clock-dialog.glade:16
-msgid "Sexagesimal"
-msgstr "60-as számrendszer"
-
-#: plugins/clock/clock-dialog.glade:19
-msgid "Binary time"
-msgstr "Bináris idő"
-
-#: plugins/clock/clock-dialog.glade:30
-msgid "Date, then time"
-msgstr "Dátum, idő"
-
-#: plugins/clock/clock-dialog.glade:33
-msgid "Time, then date"
-msgstr "Idő, dátum"
-
-#: plugins/clock/clock-dialog.glade:36
-msgid "Date Only"
-msgstr "Csak dátum"
-
-#: plugins/clock/clock-dialog.glade:39
-msgid "Time Only"
-msgstr "Csak idő"
-
-#: plugins/clock/clock-dialog.glade:71
-msgid "Analog"
-msgstr "Analóg"
-
-#: plugins/clock/clock-dialog.glade:74
-msgid "Binary"
-msgstr "Bináris"
-
-#: plugins/clock/clock-dialog.glade:77
-msgid "Digital"
-msgstr "Digitális"
-
-#: plugins/clock/clock-dialog.glade:80
-msgid "Fuzzy"
-msgstr "Szöveges"
-
-#: plugins/clock/clock-dialog.glade:83
-msgid "LCD"
-msgstr "LCD"
-
-#: plugins/clock/clock-dialog.glade:89 plugins/clock/clock.desktop.in.in:4
-msgid "Clock"
-msgstr "Óra"
-
-#: plugins/clock/clock-dialog.glade:172
-msgid ""
-"Name of a timezone corresponding a file in the zoneinfo database, for "
-"example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Az időzóna neve, mely megegyezik a rendszer időzóna adatbázisával. Hagyja üresen a helyi időhöz való visszatéréshez."
-
-#: plugins/clock/clock-dialog.glade:183
-msgid "Time_zone:"
-msgstr "Idő_zóna:"
-
-#: plugins/clock/clock-dialog.glade:194
-msgid "Time and Date _Settings..."
-msgstr "Idő- és dátumbeállítások…"
-
-#: plugins/clock/clock-dialog.glade:214
-msgid "Time Settings"
-msgstr "Időbeállítások"
-
-#: plugins/clock/clock-dialog.glade:250
-msgid ""
-"If set, this command is run when the plugin is left-clicked, instead of "
-"displaying the default calendar."
-msgstr "Bekapcsolva a megadott program indul erre a bővítményre kattintva, nem az alapértelmezett naptár."
-
-#: plugins/clock/clock-dialog.glade:261
-msgid "Co_mmand:"
-msgstr "Pa_rancs:"
-
-#: plugins/clock/clock-dialog.glade:273
-msgid "_Show week numbers"
-msgstr "_Hetek számának megjelenítése"
-
-#: plugins/clock/clock-dialog.glade:294
-msgid "Calendar"
-msgstr "Naptár"
-
-#: plugins/clock/clock-dialog.glade:329 plugins/clock/clock-dialog.glade:669
-#: plugins/clock/clock-dialog.glade:791
-msgid ""
-"The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with"
-" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
-"page for additional information."
-msgstr "A formátum leírja a panelbe beszúrandó dátum és idő részeket. Például a %Y az évre, a %m a hónapra, a %d pedig a napra lesz cserélve. Hasonlóan, a <b></b> címkék félkövérré teszik a szöveget. További információkért lásd a „Súgó” oldalt."
-
-#: plugins/clock/clock-dialog.glade:358
-msgid "_Tooltip format:"
-msgstr "B_uboréksúgó formátuma:"
-
-#: plugins/clock/clock-dialog.glade:371 plugins/clock/clock-dialog.glade:619
-msgid "_Layout:"
-msgstr "_Elrendezés:"
-
-#: plugins/clock/clock-dialog.glade:435
-msgid "Sho_w AM/PM"
-msgstr "DE/D_U megjelenítése"
-
-#: plugins/clock/clock-dialog.glade:450
-msgid "Fl_ash time separators"
-msgstr "I_dőelválasztók villogtatása"
-
-#: plugins/clock/clock-dialog.glade:465
-msgid "24-_hour clock"
-msgstr "2_4 órás óra használata"
-
-#: plugins/clock/clock-dialog.glade:508
-msgid "Binary mode:"
-msgstr "Bináris mód:"
-
-#: plugins/clock/clock-dialog.glade:524
-msgid "Display _seconds"
-msgstr "Máso_dpercek megjelenítése"
-
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
-#: plugins/clock/clock-dialog.glade:545
-msgid "F_uzziness:"
-msgstr "_Pontosság:"
-
-#: plugins/clock/clock-dialog.glade:579
-msgid "Show _inactive segments"
-msgstr ""
-
-#: plugins/clock/clock-dialog.glade:594
-msgid "Show gri_d"
-msgstr "_Rács megjelenítése"
-
-#: plugins/clock/clock-dialog.glade:640 plugins/clock/clock-dialog.glade:762
-msgid "Font:"
-msgstr "Betű:"
-
-#: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
-msgid "Format:"
-msgstr "Formátum:"
-
-#: plugins/clock/clock-dialog.glade:670 plugins/clock/clock-dialog.glade:792
-msgid ""
-"The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with"
-" the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
-"the &quot;Help&quot; page for additional information."
-msgstr "A formátum leírja a panelbe beszúrandó dátum és idő részeket. Például a %Y az évre, a %m a hónapra, a %d pedig a napra lesz cserélve. Hasonlóan, a &lt;b&gt;&lt;/b&gt; címkék félkövérré teszik a szöveget. További információkért lásd a „Súgó” oldalt."
-
-#: plugins/clock/clock-dialog.glade:699
-msgid "Date"
-msgstr "Dátum"
-
-#: plugins/clock/clock-dialog.glade:744
-msgid "Time"
-msgstr "Idő"
-
-#: plugins/clock/clock-dialog.glade:871
-msgid "Clock Options"
-msgstr "Óra beállításai"
-
-#: plugins/clock/clock-digital.h:30
+#: ../plugins/clock/clock-digital.h:30
 msgctxt "Time"
 msgid "%R"
 msgstr "%R"
 
-#: plugins/clock/clock-digital.h:31
+#: ../plugins/clock/clock-digital.h:31
 msgctxt "Date"
 msgid "%Y-%m-%d"
 msgstr "%Y-%m-%d"
 
-#: plugins/clock/clock-fuzzy.c:79
+#: ../plugins/clock/clock-fuzzy.c:75
 msgid "Night"
 msgstr "Éjszaka"
 
-#: plugins/clock/clock-fuzzy.c:80
+#: ../plugins/clock/clock-fuzzy.c:76
 msgid "Early morning"
 msgstr "Kora reggel"
 
-#: plugins/clock/clock-fuzzy.c:81
+#: ../plugins/clock/clock-fuzzy.c:77
 msgid "Morning"
 msgstr "Reggel"
 
-#: plugins/clock/clock-fuzzy.c:82
+#: ../plugins/clock/clock-fuzzy.c:78
 msgid "Almost noon"
 msgstr "Majdnem dél"
 
-#: plugins/clock/clock-fuzzy.c:83
+#: ../plugins/clock/clock-fuzzy.c:79
 msgid "Noon"
 msgstr "Dél"
 
-#: plugins/clock/clock-fuzzy.c:84
+#: ../plugins/clock/clock-fuzzy.c:80
 msgid "Afternoon"
 msgstr "Délután"
 
-#: plugins/clock/clock-fuzzy.c:85
+#: ../plugins/clock/clock-fuzzy.c:81
 msgid "Evening"
 msgstr "Este"
 
-#: plugins/clock/clock-fuzzy.c:86
+#: ../plugins/clock/clock-fuzzy.c:82
 msgid "Late evening"
 msgstr "Késő este"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: plugins/clock/clock-fuzzy.c:92
+#: ../plugins/clock/clock-fuzzy.c:88
 #, no-c-format
 msgid "%0 o'clock"
 msgstr "%0 óra"
 
-#: plugins/clock/clock-fuzzy.c:93
+#: ../plugins/clock/clock-fuzzy.c:89
 #, no-c-format
 msgid "five past %0"
 msgstr "öt perccel múlt %0"
 
-#: plugins/clock/clock-fuzzy.c:94
+#: ../plugins/clock/clock-fuzzy.c:90
 #, no-c-format
 msgid "ten past %0"
 msgstr "tíz perccel múlt %0"
 
-#: plugins/clock/clock-fuzzy.c:95
+#: ../plugins/clock/clock-fuzzy.c:91
 #, no-c-format
 msgid "quarter past %0"
 msgstr "negyed %1"
 
-#: plugins/clock/clock-fuzzy.c:96
+#: ../plugins/clock/clock-fuzzy.c:92
 #, no-c-format
 msgid "twenty past %0"
 msgstr "tíz perc múlva fél %1"
 
-#: plugins/clock/clock-fuzzy.c:97
+#: ../plugins/clock/clock-fuzzy.c:93
 #, no-c-format
 msgid "twenty five past %0"
 msgstr "öt perc múlva fél %1"
 
-#: plugins/clock/clock-fuzzy.c:98
+#: ../plugins/clock/clock-fuzzy.c:94
 #, no-c-format
 msgid "half past %0"
 msgstr "fél %1"
 
-#: plugins/clock/clock-fuzzy.c:99
+#: ../plugins/clock/clock-fuzzy.c:95
 #, no-c-format
 msgid "twenty five to %1"
 msgstr "öt perccel múlt fél %1"
 
-#: plugins/clock/clock-fuzzy.c:100
+#: ../plugins/clock/clock-fuzzy.c:96
 #, no-c-format
 msgid "twenty to %1"
 msgstr "tíz perccel múlt fél %1"
 
-#: plugins/clock/clock-fuzzy.c:101
+#: ../plugins/clock/clock-fuzzy.c:97
 #, no-c-format
 msgid "quarter to %1"
 msgstr "háromnegyed %1"
 
-#: plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:98
 #, no-c-format
 msgid "ten to %1"
 msgstr "tíz perc múlva %1"
 
-#: plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:99
 #, no-c-format
 msgid "five to %1"
 msgstr "öt perc múlva %1"
 
-#: plugins/clock/clock-fuzzy.c:104
+#: ../plugins/clock/clock-fuzzy.c:100
 #, no-c-format
 msgid "%1 o'clock"
 msgstr "%1 óra"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: plugins/clock/clock-fuzzy.c:110
+#: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "%0 óra"
 
-#: plugins/clock/clock-fuzzy.c:111
+#: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "öt perccel múlt %0"
 
-#: plugins/clock/clock-fuzzy.c:112
+#: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "tíz perccel múlt %0"
 
-#: plugins/clock/clock-fuzzy.c:113
+#: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "negyed %1"
 
-#: plugins/clock/clock-fuzzy.c:114
+#: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "tíz perc múlva fél %1"
 
-#: plugins/clock/clock-fuzzy.c:115
+#: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "öt perc múlva fél %1"
 
-#: plugins/clock/clock-fuzzy.c:116
+#: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "fél %1"
 
-#: plugins/clock/clock-fuzzy.c:117
+#: ../plugins/clock/clock-fuzzy.c:113
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "öt perccel múlt fél %1"
 
-#: plugins/clock/clock-fuzzy.c:118
+#: ../plugins/clock/clock-fuzzy.c:114
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "tíz perccel múlt fél %1"
 
-#: plugins/clock/clock-fuzzy.c:119
+#: ../plugins/clock/clock-fuzzy.c:115
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "háromnegyed %1"
 
-#: plugins/clock/clock-fuzzy.c:120
+#: ../plugins/clock/clock-fuzzy.c:116
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "tíz perc múlva %1"
 
-#: plugins/clock/clock-fuzzy.c:121
+#: ../plugins/clock/clock-fuzzy.c:117
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "öt perc múlva %1"
 
-#: plugins/clock/clock-fuzzy.c:122
+#: ../plugins/clock/clock-fuzzy.c:118
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "%1 óra"
 
-#: plugins/clock/clock-fuzzy.c:126
+#: ../plugins/clock/clock-fuzzy.c:122
 msgctxt "am"
 msgid "one"
 msgstr "egy"
 
-#: plugins/clock/clock-fuzzy.c:127
+#: ../plugins/clock/clock-fuzzy.c:123
 msgctxt "am"
 msgid "two"
 msgstr "kettő"
 
-#: plugins/clock/clock-fuzzy.c:128
+#: ../plugins/clock/clock-fuzzy.c:124
 msgctxt "am"
 msgid "three"
 msgstr "három"
 
-#: plugins/clock/clock-fuzzy.c:129
+#: ../plugins/clock/clock-fuzzy.c:125
 msgctxt "am"
 msgid "four"
 msgstr "négy"
 
-#: plugins/clock/clock-fuzzy.c:130
+#: ../plugins/clock/clock-fuzzy.c:126
 msgctxt "am"
 msgid "five"
 msgstr "öt"
 
-#: plugins/clock/clock-fuzzy.c:131
+#: ../plugins/clock/clock-fuzzy.c:127
 msgctxt "am"
 msgid "six"
 msgstr "hat"
 
-#: plugins/clock/clock-fuzzy.c:132
+#: ../plugins/clock/clock-fuzzy.c:128
 msgctxt "am"
 msgid "seven"
 msgstr "hét"
 
-#: plugins/clock/clock-fuzzy.c:133
+#: ../plugins/clock/clock-fuzzy.c:129
 msgctxt "am"
 msgid "eight"
 msgstr "nyolc"
 
-#: plugins/clock/clock-fuzzy.c:134
+#: ../plugins/clock/clock-fuzzy.c:130
 msgctxt "am"
 msgid "nine"
 msgstr "kilenc"
 
-#: plugins/clock/clock-fuzzy.c:135
+#: ../plugins/clock/clock-fuzzy.c:131
 msgctxt "am"
 msgid "ten"
 msgstr "tíz"
 
-#: plugins/clock/clock-fuzzy.c:136
+#: ../plugins/clock/clock-fuzzy.c:132
 msgctxt "am"
 msgid "eleven"
 msgstr "tizenegy"
 
 #. I18N: 12 AM is midnight
-#: plugins/clock/clock-fuzzy.c:138
+#: ../plugins/clock/clock-fuzzy.c:134
 msgctxt "am"
 msgid "twelve"
 msgstr "tizenkettő"
 
-#: plugins/clock/clock-fuzzy.c:142
+#: ../plugins/clock/clock-fuzzy.c:138
 msgctxt "pm"
 msgid "one"
 msgstr "egy"
 
-#: plugins/clock/clock-fuzzy.c:143
+#: ../plugins/clock/clock-fuzzy.c:139
 msgctxt "pm"
 msgid "two"
 msgstr "kettő"
 
-#: plugins/clock/clock-fuzzy.c:144
+#: ../plugins/clock/clock-fuzzy.c:140
 msgctxt "pm"
 msgid "three"
 msgstr "három"
 
-#: plugins/clock/clock-fuzzy.c:145
+#: ../plugins/clock/clock-fuzzy.c:141
 msgctxt "pm"
 msgid "four"
 msgstr "négy"
 
-#: plugins/clock/clock-fuzzy.c:146
+#: ../plugins/clock/clock-fuzzy.c:142
 msgctxt "pm"
 msgid "five"
 msgstr "öt"
 
-#: plugins/clock/clock-fuzzy.c:147
+#: ../plugins/clock/clock-fuzzy.c:143
 msgctxt "pm"
 msgid "six"
 msgstr "hat"
 
-#: plugins/clock/clock-fuzzy.c:148
+#: ../plugins/clock/clock-fuzzy.c:144
 msgctxt "pm"
 msgid "seven"
 msgstr "hét"
 
-#: plugins/clock/clock-fuzzy.c:149
+#: ../plugins/clock/clock-fuzzy.c:145
 msgctxt "pm"
 msgid "eight"
 msgstr "nyolc"
 
-#: plugins/clock/clock-fuzzy.c:150
+#: ../plugins/clock/clock-fuzzy.c:146
 msgctxt "pm"
 msgid "nine"
 msgstr "kilenc"
 
-#: plugins/clock/clock-fuzzy.c:151
+#: ../plugins/clock/clock-fuzzy.c:147
 msgctxt "pm"
 msgid "ten"
 msgstr "tíz"
 
-#: plugins/clock/clock-fuzzy.c:152
+#: ../plugins/clock/clock-fuzzy.c:148
 msgctxt "pm"
 msgid "eleven"
 msgstr "tizenegy"
 
 #. I18N: 12 PM is noon
-#: plugins/clock/clock-fuzzy.c:154
+#: ../plugins/clock/clock-fuzzy.c:150
 msgctxt "pm"
 msgid "twelve"
 msgstr "tizenkettő"
 
-#: plugins/clock/clock.desktop.in.in:5
-msgid "What time is it?"
-msgstr "Mennyi az idő?"
-
-#: plugins/directorymenu/directorymenu.c:298
-#: plugins/directorymenu/directorymenu.desktop.in.in:4
-#: plugins/directorymenu/directorymenu-dialog.glade:18
-msgid "Directory Menu"
-msgstr "Könyvtár menü"
-
-#: plugins/directorymenu/directorymenu.c:696
+#: ../plugins/directorymenu/directorymenu.c:690
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "A(z) „%s” alkalmazás indítása sikertelen"
 
-#: plugins/directorymenu/directorymenu.c:727
+#: ../plugins/directorymenu/directorymenu.c:721
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "A(z) „%s” tartalomtípusának lekérése sikertelen"
 
-#: plugins/directorymenu/directorymenu.c:736
+#: ../plugins/directorymenu/directorymenu.c:730
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Nem található alapértelmezett alkalmazás ehhez: „%s”"
 
-#: plugins/directorymenu/directorymenu.c:752
+#: ../plugins/directorymenu/directorymenu.c:746
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "A(z) „%s” alapértelmezett alkalmazásának indítása sikertelen"
 
-#: plugins/directorymenu/directorymenu.c:846
+#: ../plugins/directorymenu/directorymenu.c:840
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "A(z) „%s” kategória alapértelmezett alkalmazásának indítása sikertelen"
 
-#: plugins/directorymenu/directorymenu.c:927
+#: ../plugins/directorymenu/directorymenu.c:921
 msgid "Create New Folder"
 msgstr "Új mappa létrehozása"
 
-#: plugins/directorymenu/directorymenu.c:932
+#: ../plugins/directorymenu/directorymenu.c:926
 msgid "Create New Text Document"
 msgstr "Új szöveges dokumentum létrehozása"
 
-#: plugins/directorymenu/directorymenu.c:938
+#: ../plugins/directorymenu/directorymenu.c:932
 msgid "C_reate"
 msgstr "_Létrehozás"
 
-#: plugins/directorymenu/directorymenu.c:938
+#: ../plugins/directorymenu/directorymenu.c:932
 msgid "Create & _Open"
 msgstr "Létrehozás és _megnyitás"
 
-#: plugins/directorymenu/directorymenu.c:951
+#: ../plugins/directorymenu/directorymenu.c:945
 msgid "Enter the new name:"
 msgstr "Adja meg az új nevet:"
 
-#: plugins/directorymenu/directorymenu.c:987
+#: ../plugins/directorymenu/directorymenu.c:981
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Nem sikerült létrehozni a mappát: %s"
 
-#: plugins/directorymenu/directorymenu.c:1069
+#: ../plugins/directorymenu/directorymenu.c:1063
 msgid "Open Folder"
 msgstr "Mappa megnyitása"
 
-#: plugins/directorymenu/directorymenu.c:1083
+#: ../plugins/directorymenu/directorymenu.c:1077
 msgid "Open in Terminal"
 msgstr "Terminálban fusson"
 
-#: plugins/directorymenu/directorymenu.c:1097
+#: ../plugins/directorymenu/directorymenu.c:1091
 msgid "Create Folder..."
 msgstr "Mappa létrehozása…"
 
-#: plugins/directorymenu/directorymenu.c:1111
+#: ../plugins/directorymenu/directorymenu.c:1105
 msgid "Create Text Document..."
 msgstr "Szöveges dokumentum létrehozása…"
 
-#: plugins/directorymenu/directorymenu.desktop.in.in:5
-msgid "Show a directory tree in a menu"
-msgstr "A könyvtárfa megjelenítése menüben"
-
-#: plugins/directorymenu/directorymenu-dialog.glade:99
-msgid "Select A Directory"
-msgstr "Válasszon könyvtárat"
-
-#: plugins/directorymenu/directorymenu-dialog.glade:135
-msgid "_Base Directory:"
-msgstr "_Alapkönyvtár:"
-
-#: plugins/directorymenu/directorymenu-dialog.glade:179
-msgid "Show 'New Text _Document'"
-msgstr "„Új szöveges _dokumentum” megjelenítése"
-
-#: plugins/directorymenu/directorymenu-dialog.glade:194
-msgid "Show '_New Folder'"
-msgstr "„_Új mappa” megjelenítése"
-
-#: plugins/directorymenu/directorymenu-dialog.glade:209
-msgid "Show 'Open in _Terminal'"
-msgstr "„Megnyitás _terminálban” megjelenítése"
-
-#: plugins/directorymenu/directorymenu-dialog.glade:224
-msgid "Show '_Open _Folder'"
-msgstr "„Mappa _megnyitása” megjelenítése"
-
-#: plugins/directorymenu/directorymenu-dialog.glade:243
-msgid "Menu"
-msgstr "Menü"
-
-#: plugins/directorymenu/directorymenu-dialog.glade:272
-msgid "Show _hidden files"
-msgstr "_Rejtett fájlok megjelenítése"
-
-#: plugins/directorymenu/directorymenu-dialog.glade:289
-msgid ""
-"Enter a list of patterns that will be used to determine which files are "
-"visible in a directory. If you specify more than one pattern here, the list "
-"items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Adja meg a könyvtárban látható fájlok névmintáinak listáját. Ha több mintát ad meg, akkor a lista elemeit pontosvesszővel válassza el (például: *.txt;*.doc)."
-
-#: plugins/directorymenu/directorymenu-dialog.glade:301
-msgid "_File Pattern:"
-msgstr "_Fájlminta:"
-
-#: plugins/directorymenu/directorymenu-dialog.glade:316
-#: plugins/tasklist/tasklist-dialog.glade:492
-#: plugins/windowmenu/windowmenu-dialog.glade:260
-msgid "Filtering"
-msgstr "Szűrés"
-
-#: plugins/launcher/launcher.c:431
+#: ../plugins/launcher/launcher.c:428
 msgid "Open launcher menu"
 msgstr "Indítómenü megnyitása"
 
-#: plugins/launcher/launcher.c:1615
+#: ../plugins/launcher/launcher.c:1612
 msgid "Unnamed Item"
 msgstr "Névtelen elem"
 
-#: plugins/launcher/launcher.c:1817
+#: ../plugins/launcher/launcher.c:1814
 msgid "No items"
 msgstr "Nincs elem"
 
-#: plugins/launcher/launcher-dialog.c:781
+#: ../plugins/launcher/launcher-dialog.c:776
 msgid "Failed to open desktop item editor"
 msgstr "Az asztalielem-szerkesztő megnyitása sikertelen"
 
-#: plugins/launcher/launcher-dialog.c:842
+#: ../plugins/launcher/launcher-dialog.c:837
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Ha töröl egy elemet, akkor az véglegesen elvész"
 
-#: plugins/launcher/launcher-dialog.c:852
+#: ../plugins/launcher/launcher-dialog.c:847
 msgid "Unnamed item"
 msgstr "Névtelen elem"
 
-#: plugins/launcher/launcher-dialog.c:854
+#: ../plugins/launcher/launcher-dialog.c:849
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Biztos, hogy eltávolítja a következőt: „%s”?"
 
-#: plugins/launcher/launcher-dialog.glade:30
-msgid "Default"
-msgstr "Alapértelmezett"
-
-#: plugins/launcher/launcher-dialog.glade:33
-msgid "North"
-msgstr "Észak"
-
-#: plugins/launcher/launcher-dialog.glade:36
-msgid "West"
-msgstr "Nyugat"
-
-#: plugins/launcher/launcher-dialog.glade:39
-msgid "East"
-msgstr "Kelet"
-
-#: plugins/launcher/launcher-dialog.glade:42
-msgid "South"
-msgstr "Dél"
-
-#: plugins/launcher/launcher-dialog.glade:45
-msgid "Inside Button"
-msgstr "Gombon belül"
-
-#: plugins/launcher/launcher-dialog.glade:96
-msgid "Up"
-msgstr "Fel"
-
-#: plugins/launcher/launcher-dialog.glade:105
-msgid "Down"
-msgstr "Le"
-
-#: plugins/launcher/launcher-dialog.glade:120
-msgid "_Edit Item"
-msgstr "_Elem szerkesztése"
-
-#: plugins/launcher/launcher-dialog.glade:130
-msgid "D_elete Item"
-msgstr "Elem _törlése"
-
-#: plugins/launcher/launcher-dialog.glade:146
-msgid "Add Appli_cation"
-msgstr "Alkalmazás _hozzáadása"
-
-#: plugins/launcher/launcher-dialog.glade:162
-msgid "New _Application"
-msgstr "Új _alkalmazás"
-
-#: plugins/launcher/launcher-dialog.glade:172
-msgid "New _Link"
-msgstr "Új _hivatkozás"
-
-#: plugins/launcher/launcher-dialog.glade:205
-#: plugins/launcher/launcher-dialog.glade:599
-msgid "Add one or more existing items to the launcher"
-msgstr "Adjon legalább egy meglévő elemet az indítóhoz"
-
-#: plugins/launcher/launcher-dialog.glade:379
-#: plugins/launcher/launcher.desktop.in.in:4
-msgid "Launcher"
-msgstr "Indító"
-
-#: plugins/launcher/launcher-dialog.glade:579
-msgid "Delete the currently selected item"
-msgstr "A kiválasztott elem törlése"
-
-#: plugins/launcher/launcher-dialog.glade:619
-msgid "Add a new empty item"
-msgstr "Új üres elem hozzáadása"
-
-#: plugins/launcher/launcher-dialog.glade:639
-msgid "Add a new hyperlink"
-msgstr "Új hiperhivatkozás hozzáadása"
-
-#: plugins/launcher/launcher-dialog.glade:682
-msgid "Disable t_ooltips"
-msgstr "B_uboréksúgók letiltása"
-
-#: plugins/launcher/launcher-dialog.glade:686
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button"
-" or menu items."
-msgstr "A buboréksúgók letiltása a panel gombjaira vagy menüelemekre mutatáskor."
-
-#: plugins/launcher/launcher-dialog.glade:698
-msgid "Show _label instead of icon"
-msgstr "_Címke megjelenítése ikon helyett"
-
-#: plugins/launcher/launcher-dialog.glade:713
-msgid "Show last _used item in panel"
-msgstr "_Utoljára használt elem megjelenítése a panelen"
-
-#: plugins/launcher/launcher-dialog.glade:717
-msgid "Select this option to move the clicked menu item to the panel."
-msgstr "A kattintással kiválasztott menüelem panelre mozgatása."
-
-#: plugins/launcher/launcher-dialog.glade:736
-msgid "_Arrow button position:"
-msgstr "_Nyílgomb pozíciója:"
-
-#: plugins/launcher/launcher-dialog.glade:779
-msgid "Advanced"
-msgstr "Speciális"
-
-#: plugins/launcher/launcher.desktop.in.in:5
-msgid "Program launcher with optional menu"
-msgstr "Programindító elhagyható menüvel"
-
-#: plugins/pager/pager.c:703 plugins/pager/pager-dialog.glade:64
-msgid "Workspace _Settings..."
-msgstr "M_unkaterület beállításai…"
-
-#: plugins/pager/pager.c:802
+#: ../plugins/pager/pager.c:806
 msgid "Unable to open the workspace settings"
 msgstr "A munkaterület beállításai nem nyithatók meg"
 
-#: plugins/pager/pager-buttons.c:596 plugins/windowmenu/windowmenu.c:920
+#: ../plugins/pager/pager-buttons.c:624 ../plugins/windowmenu/windowmenu.c:946
 #, c-format
 msgid "Workspace %d"
 msgstr "%d. munkaterület"
 
-#: plugins/pager/pager-dialog.glade:15
-msgid "Buttons"
-msgstr "Gombok"
-
-#: plugins/pager/pager-dialog.glade:19
-msgid "Miniature View"
-msgstr "Miniatűr nézet"
-
-#: plugins/pager/pager-dialog.glade:48 plugins/pager/pager.desktop.in.in:4
-msgid "Workspace Switcher"
-msgstr "Munkaterület-váltó"
-
-#: plugins/pager/pager-dialog.glade:131
-msgid "Number of _rows:"
-msgstr "_Sorok száma:"
-
-#: plugins/pager/pager-dialog.glade:197
-msgid "Show workspace number"
-msgstr "Munkaterületek számainak megjelenítése"
-
-#: plugins/pager/pager-dialog.glade:210
-msgid "Switch workspaces using the mouse wheel"
-msgstr "Munkaterületek közti váltás egérgörgővel"
-
-#: plugins/pager/pager-dialog.glade:224
-msgid "Wrap around workspaces"
-msgstr "Körkörös váltás a munkaterületek között"
-
-#: plugins/pager/pager-dialog.glade:241
-msgid "<b>Appearance</b>"
-msgstr "<b>Megjelenés</b>"
-
-#: plugins/pager/pager.desktop.in.in:5
-msgid "Switch between virtual desktops"
-msgstr "Váltás virtuális asztalok között"
-
-#: plugins/separator/separator-dialog.glade:23
-msgid "Transparent"
-msgstr "Átlátszó"
-
-#: plugins/separator/separator-dialog.glade:29
-msgid "Handle"
-msgstr "Fogantyú"
-
-#: plugins/separator/separator-dialog.glade:32
-msgid "Dots"
-msgstr "Pontok"
-
-#: plugins/separator/separator-dialog.glade:156
-msgid "_Expand"
-msgstr "Bő_vítés"
-
-#: plugins/separator/separator.desktop.in.in:5
-msgid "Adds a separator or space between panel items"
-msgstr "Elválasztó vagy hely beszúrása a panelelemek közé"
-
-#: plugins/showdesktop/showdesktop.c:321
+#: ../plugins/showdesktop/showdesktop.c:317
 msgid "Restore the minimized windows"
 msgstr "Rejtett ablakok visszaállítása"
 
-#: plugins/showdesktop/showdesktop.c:323
+#: ../plugins/showdesktop/showdesktop.c:319
 msgid "Minimize all open windows and show the desktop"
 msgstr "Összes ablak minimalizálása, és az asztal megjelenítése"
 
-#: plugins/showdesktop/showdesktop.c:326
-#: plugins/showdesktop/showdesktop-dialog.glade:18
-#: plugins/showdesktop/showdesktop.desktop.in.in:4
-msgid "Show Desktop"
-msgstr "Asztal megjelenítése"
-
-#: plugins/showdesktop/showdesktop-dialog.glade:92
-msgid "_Show on mouse hover"
-msgstr ""
-
-#: plugins/showdesktop/showdesktop-dialog.glade:113
-#: plugins/systray/sn-dialog.glade:300
-msgid "Behavior"
-msgstr "Viselkedés"
-
-#: plugins/showdesktop/showdesktop.desktop.in.in:5
-msgid "Hide all windows and show the desktop"
-msgstr "Összes ablak elrejtése, és az asztal megjelenítése"
-
-#: plugins/systray/sn-dialog.c:416
+#: ../plugins/systray/sn-dialog.c:427
 msgid "Clear"
 msgstr "Törlés"
 
-#: plugins/systray/sn-dialog.c:421
+#: ../plugins/systray/sn-dialog.c:432
 msgid "Are you sure you want to clear the list of known items?"
 msgstr "Biztos, hogy törli az ismert elemek listáját?"
 
-#: plugins/systray/sn-dialog.glade:48
-msgid "Status Tray Items"
-msgstr "Állapottálca-elemek"
-
-#: plugins/systray/sn-dialog.glade:80
-msgid "C_lear Known Items"
-msgstr "_Ismert elemek törlése"
-
-#: plugins/systray/sn-dialog.glade:84
-msgid "Resets the list of items and their visibility settings"
-msgstr "Alaphelyzetbe állítja az elemlistát és a láthatósági beállításokat"
-
-#: plugins/systray/sn-dialog.glade:144
-msgid "_Fixed icon size (pixels):"
-msgstr "Fix _ikonméret (képpont):"
-
-#: plugins/systray/sn-dialog.glade:185
-msgid "Adjust size _automatically"
-msgstr "Méret _automatikus állítása"
-
-#: plugins/systray/sn-dialog.glade:213
-msgid "Icons"
-msgstr "Ikonok"
-
-#: plugins/systray/sn-dialog.glade:246
-msgid "Arrange _items in a single row"
-msgstr "_Elemek rendezése 1 sorba"
-
-#: plugins/systray/sn-dialog.glade:250
-msgid "If enabled, ensure that the items are laid out in a single row"
-msgstr "Bekapcsolva az elemek egyetlen sorban lesznek"
-
-#: plugins/systray/sn-dialog.glade:262
-msgid "_Hide items by default"
-msgstr "Elemek el_rejtése alapból"
-
-#: plugins/systray/sn-dialog.glade:266
-msgid "When enabled, all new items will be marked as \"Hidden\""
-msgstr "Ha engedélyezve van, az új elemek rejtettnek lesznek jelölve"
-
-#: plugins/systray/sn-dialog.glade:278
-msgid "_Square items"
-msgstr "_Négyszögletes elemek"
-
-#: plugins/systray/sn-dialog.glade:282
-msgid "Item buttons will take a square when it's possible"
-msgstr "Az elemgombok négyszögletesek lesznek, ha lehetséges"
-
-#: plugins/systray/sn-dialog.glade:386 plugins/systray/sn-dialog.glade:618
-msgid "Item"
-msgstr "Elem"
-
-#: plugins/systray/sn-dialog.glade:398 plugins/systray/sn-dialog.glade:630
-msgid "Hidden"
-msgstr "Rejtett"
-
-#: plugins/systray/sn-dialog.glade:426 plugins/systray/sn-dialog.glade:658
-msgid "Move the selected item one row up"
-msgstr "A kijelölt elem egy sorral feljebb helyezése"
-
-#: plugins/systray/sn-dialog.glade:446 plugins/systray/sn-dialog.glade:678
-msgid "Move the selected item one row down"
-msgstr "A kijelölt elem egy sorral lejjebb helyezése"
-
-#: plugins/systray/sn-dialog.glade:479 plugins/systray/sn-dialog.glade:711
-msgid "Known Items"
-msgstr "Ismert elemek"
-
-#: plugins/systray/sn-dialog.glade:512
-msgid "_Menu is primary action"
-msgstr "_Menü az elsődleges művelet"
-
-#: plugins/systray/sn-dialog.glade:516
-msgid "Left click will always display the menu for item"
-msgstr "A bal kattintás mindig az elem menüjét jeleníti meg"
-
-#: plugins/systray/sn-dialog.glade:528
-msgid "_Request symbolic icons"
-msgstr "Szimbolikus ikonok _kérése"
-
-#: plugins/systray/sn-dialog.glade:532
-msgid "Load symbolic icons if available"
-msgstr "Szimbolikus ikonok betöltése, ha elérhetők"
-
-#: plugins/systray/sn-dialog.glade:550
-msgid "Features"
-msgstr "Funkciók"
-
-#: plugins/systray/sn-dialog.glade:566
-msgid "Status Notifiers"
-msgstr "Állapotértesítők"
-
-#: plugins/systray/sn-dialog.glade:720
-msgid "Systray Icons"
-msgstr "Rendszertálcaikonok"
-
-#: plugins/systray/systray.c:149
+#: ../plugins/systray/systray.c:145
 msgid "Unable to start the notification area"
 msgstr "Az értesítési terület nem indítható el"
 
 #. create fake error and show it
-#: plugins/systray/systray.c:409
+#: ../plugins/systray/systray.c:409
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Valószínűleg egy másik felületi elem átvette az értesítési terület funkcióját. Ez a terület nem kerül felhasználásra."
 
-#: plugins/systray/systray.c:411
+#: ../plugins/systray/systray.c:411
 msgid "The notification area lost selection"
 msgstr "Az értesítési terület elvesztette a kiválasztást"
 
-#: plugins/systray/systray-manager.c:386
+#: ../plugins/systray/systray-manager.c:382
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "A(z) %d. képernyő kezelőkiválasztásának megszerzése sikertelen"
 
-#: plugins/systray/systray.desktop.in.in:5
-msgid "Status Tray Plugin"
-msgstr "Állapottálca-bővítmény"
-
-#: plugins/systray/systray.desktop.in.in:6
-msgid ""
-"Provides status notifier items (application indicators) and legacy systray "
-"items"
-msgstr "Állapottálca-elemeket (alkalmazásindikátorokat) és örökölt rendszertálca-elemeket biztosít"
-
-#: plugins/tasklist/tasklist-dialog.glade:23
-msgid "Nothing"
-msgstr "Semmi"
-
-#: plugins/tasklist/tasklist-dialog.glade:26
-msgid "Close Window"
-msgstr "Ablak bezárása"
-
-#: plugins/tasklist/tasklist-dialog.glade:29
-msgid "Minimize Window"
-msgstr "Ablak minimalizálása"
-
-#: plugins/tasklist/tasklist-dialog.glade:32
-msgid "New Instance"
-msgstr "Új példány"
-
-#: plugins/tasklist/tasklist-dialog.glade:43
-msgid "Timestamp"
-msgstr "Időbélyeg"
-
-#: plugins/tasklist/tasklist-dialog.glade:46
-msgid "Group title and timestamp"
-msgstr "Csoport címe és időbélyege"
-
-#: plugins/tasklist/tasklist-dialog.glade:49
-msgid "Window title"
-msgstr "Ablakcím"
-
-#: plugins/tasklist/tasklist-dialog.glade:52
-msgid "Group title and window title"
-msgstr "Csoport címe és ablakcíme"
-
-#: plugins/tasklist/tasklist-dialog.glade:55
-msgid "None, allow drag-and-drop"
-msgstr "Nincs, fogd és vidd művelet engedélyezése"
-
-#: plugins/tasklist/tasklist-dialog.glade:61
-#: plugins/tasklist/tasklist.desktop.in.in:4
-msgid "Window Buttons"
-msgstr "Ablakgombok"
-
-#: plugins/tasklist/tasklist-dialog.glade:143
-msgid "Show button _labels"
-msgstr "_Gombfeliratok megjelenítése"
-
-#: plugins/tasklist/tasklist-dialog.glade:159
-msgid "Show _flat buttons"
-msgstr "_Lapos gombok megjelenítése"
-
-#: plugins/tasklist/tasklist-dialog.glade:175
-msgid "Show _handle"
-msgstr "F_ogantyú megjelenítése"
-
-#: plugins/tasklist/tasklist-dialog.glade:191
-msgid "Show _tooltips"
-msgstr "_Buboréksúgó megjelenítése"
-
-#: plugins/tasklist/tasklist-dialog.glade:214
-msgid "Sorting _order:"
-msgstr "_Rendezési sorrend:"
-
-#: plugins/tasklist/tasklist-dialog.glade:297
-msgid "Mi_ddle click action:"
-msgstr "Középső egérgomb _funkciója:"
-
-#: plugins/tasklist/tasklist-dialog.glade:335
-msgid "_Group windows by application"
-msgstr "Ablakok _csoportosítása alkalmazásonként"
-
-#: plugins/tasklist/tasklist-dialog.glade:351
-msgid "Restore minimized windows to current _workspace"
-msgstr "Minimalizált ablakok visszaállítása a jelenlegi _munkaterületre"
-
-#: plugins/tasklist/tasklist-dialog.glade:367
-msgid "D_raw window frame when hovering a button"
-msgstr "_Ablakkeret rajzolása gombra mutatáskor"
-
-#: plugins/tasklist/tasklist-dialog.glade:383
-msgid "_Switch windows using the mouse wheel"
-msgstr "_Ablakok közti váltás egérgörgővel"
-
-#: plugins/tasklist/tasklist-dialog.glade:405
-msgid "Behaviour"
-msgstr "Viselkedés"
-
-#: plugins/tasklist/tasklist-dialog.glade:438
-#: plugins/windowmenu/windowmenu-dialog.glade:239
-msgid "Show windows from _all workspaces"
-msgstr "Az ö_sszes munkaterület ablakainak megjelenítése"
-
-#: plugins/tasklist/tasklist-dialog.glade:454
-msgid "Show windows from all mo_nitors"
-msgstr "Az összes m_onitor ablakainak megjelenítése"
-
-#: plugins/tasklist/tasklist-dialog.glade:470
-msgid "Show only _minimized windows"
-msgstr "Csak _minimalizált ablakok megjelenítése"
-
-#: plugins/tasklist/tasklist-widget.c:3105
+#: ../plugins/tasklist/tasklist-widget.c:3156
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "A(z) „%s” új példánya nem indítható el"
 
-#: plugins/tasklist/tasklist-widget.c:3132
+#: ../plugins/tasklist/tasklist-widget.c:3183
 msgid "Launch New Instance"
 msgstr "Új példány indítása"
 
-#: plugins/tasklist/tasklist-widget.c:3876
+#: ../plugins/tasklist/tasklist-widget.c:3938
 msgid "Mi_nimize All"
 msgstr "Összes mi_nimalizálása"
 
-#: plugins/tasklist/tasklist-widget.c:3883
+#: ../plugins/tasklist/tasklist-widget.c:3945
 msgid "Un_minimize All"
 msgstr "Összes _eredeti méretű"
 
-#: plugins/tasklist/tasklist-widget.c:3890
+#: ../plugins/tasklist/tasklist-widget.c:3952
 msgid "Ma_ximize All"
 msgstr "Összes ma_ximalizálás"
 
-#: plugins/tasklist/tasklist-widget.c:3897
+#: ../plugins/tasklist/tasklist-widget.c:3959
 msgid "_Unmaximize All"
 msgstr "Összes _eredeti méretű"
 
-#: plugins/tasklist/tasklist-widget.c:3908
+#: ../plugins/tasklist/tasklist-widget.c:3970
 msgid "_Close All"
 msgstr "Összes _bezárása"
 
-#: plugins/tasklist/tasklist.desktop.in.in:5
-msgid "Switch between open windows using buttons"
-msgstr "Átváltás a nyitott ablakok között, gombok használatával"
-
-#: plugins/windowmenu/windowmenu.c:721
+#: ../plugins/windowmenu/windowmenu.c:725
 msgid "Desktop"
 msgstr "Asztal"
 
-#: plugins/windowmenu/windowmenu.c:1315
+#: ../plugins/windowmenu/windowmenu.c:1341
 msgid "No Windows"
 msgstr "Nincsenek ablakok"
 
-#: plugins/windowmenu/windowmenu.c:1330
+#: ../plugins/windowmenu/windowmenu.c:1356
 msgid "Urgent Windows"
 msgstr "Sürgős ablakok"
 
-#: plugins/windowmenu/windowmenu.c:1375
+#: ../plugins/windowmenu/windowmenu.c:1407
 msgid "Add Workspace"
 msgstr "Munkaterület hozzáadása"
 
-#: plugins/windowmenu/windowmenu.c:1397
+#: ../plugins/windowmenu/windowmenu.c:1429
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "„%s” munkaterület eltávolítása"
 
-#: plugins/windowmenu/windowmenu.c:1399
+#: ../plugins/windowmenu/windowmenu.c:1431
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "%d. munkaterület eltávolítása"
-
-#: plugins/windowmenu/windowmenu-dialog.glade:23
-msgid "Icon"
-msgstr "Ikon"
-
-#: plugins/windowmenu/windowmenu-dialog.glade:26
-msgid "Arrow"
-msgstr "Nyíl"
-
-#: plugins/windowmenu/windowmenu-dialog.glade:32
-#: plugins/windowmenu/windowmenu.desktop.in.in:4
-msgid "Window Menu"
-msgstr "Ablakmenü"
-
-#: plugins/windowmenu/windowmenu-dialog.glade:119
-msgid "Button layout:"
-msgstr "Gombelrendezés:"
-
-#: plugins/windowmenu/windowmenu-dialog.glade:155
-msgid "Show workspace a_ctions"
-msgstr "_Munkaterület-műveletek megjelenítése"
-
-#: plugins/windowmenu/windowmenu-dialog.glade:170
-msgid "Show workspace _names"
-msgstr "Munkaterületek _neveinek megjelenítése"
-
-#: plugins/windowmenu/windowmenu-dialog.glade:185
-msgid "Enable _urgency notification"
-msgstr "_Sürgősségi értesítés engedélyezése"
-
-#: plugins/windowmenu/windowmenu.desktop.in.in:5
-msgid "Switch between open windows using a menu"
-msgstr "Átváltás a nyitott ablakok között, menü használatával"
