@@ -373,7 +373,7 @@ panel_module_new_from_desktop_file (const gchar *filename,
       module_unique = xfce_rc_read_entry (rc, "X-XFCE-Unique", NULL);
       if (G_LIKELY (module_unique == NULL))
         module->unique_mode = UNIQUE_FALSE;
-      else if (strcasecmp (module_unique, "screen") == 0)
+      else if (strcasecmp (module_unique, "screen") == 0 && WINDOWING_IS_X11 ())
         module->unique_mode = UNIQUE_SCREEN;
       else if (strcasecmp (module_unique, "true") == 0)
         module->unique_mode = UNIQUE_TRUE;
