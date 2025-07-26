@@ -1626,7 +1626,11 @@ panel_application_new_window (PanelApplication *application,
   if (new_window)
     panel_application_save (application, SAVE_PANEL_IDS);
 
-  gtk_widget_show (GTK_WIDGET (window));
+  /*
+   * Do not show the panel window here, this will trigger allocation and/or critical
+   * warnings if the output to which it is assigned is disconnected. It will be shown
+   * in panel_window_screen_layout_changed() if necessary.
+   */
 
   return PANEL_WINDOW (window);
 }
