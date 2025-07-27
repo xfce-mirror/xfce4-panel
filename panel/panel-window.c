@@ -2798,12 +2798,14 @@ panel_window_screen_layout_changed (GdkScreen *screen,
   /*
    * The panel window may be hidden if the output to which it is assigned is disconnected,
    * and must be shown when that output is reconnected. This is always true on X11, but on
-   * Wayland it should only be done if the window has not been autohidden.
+   * Wayland it should only be done if the window has not been autohidden, or if it's shown
+   * for the first time.
    */
   if (!gtk_widget_get_visible (GTK_WIDGET (window))
       && (!gtk_layer_is_supported ()
           || window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER
-          || window->autohide_state == AUTOHIDE_VISIBLE))
+          || window->autohide_state == AUTOHIDE_VISIBLE
+          || !gtk_widget_get_realized (GTK_WIDGET (window))))
     gtk_widget_show (GTK_WIDGET (window));
 }
 
