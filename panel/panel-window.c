@@ -389,6 +389,9 @@ struct _PanelWindow
   gboolean floating;
   guint span_monitors : 1;
   gchar *output_name;
+#ifdef HAVE_GTK_LAYER_SHELL
+  guint set_monitor_id;
+#endif
 
   /* allocated position of the panel */
   GdkRectangle alloc;
@@ -1035,6 +1038,11 @@ panel_window_finalize (GObject *object)
 
   if (G_UNLIKELY (window->opacity_timeout_id != 0))
     g_source_remove (window->opacity_timeout_id);
+
+#ifdef HAVE_GTK_LAYER_SHELL
+  if (G_UNLIKELY (window->set_monitor_id != 0))
+    g_source_remove (window->set_monitor_id);
+#endif
 
   /* destroy the autohide window */
   if (window->autohide_window != NULL)
@@ -2618,6 +2626,27 @@ panel_window_display_layout_debug (GtkWidget *widget)
 
 
 
+#ifdef HAVE_GTK_LAYER_SHELL
+static gboolean
+panel_window_set_monitor (gpointer data)
+{
+  PanelWindow *window = data;
+  GdkMonitor *monitor = g_object_get_data (G_OBJECT (window), "layer-shell-monitor");
+
+  if (monitor == NULL)
+    gtk_widget_hide (GTK_WIDGET (window));
+
+  gtk_layer_set_monitor (GTK_WINDOW (window), monitor);
+  if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
+    gtk_layer_set_monitor (GTK_WINDOW (window->autohide_window), monitor);
+
+  window->set_monitor_id = 0;
+  return FALSE;
+}
+#endif
+
+
+
 static void
 panel_window_screen_layout_changed (GdkScreen *screen,
                                     PanelWindow *window)
@@ -2760,7 +2789,28 @@ panel_window_screen_layout_changed (GdkScreen *screen,
 
               /* hide the panel if the monitor was not found */
               if (gtk_widget_get_visible (GTK_WIDGET (window)))
-                gtk_widget_hide (GTK_WIDGET (window));
+                {
+#ifdef HAVE_GTK_LAYER_SHELL
+                  /*
+                   * Hiding the panel on the fly may cause a protocol error, whereas there seems to
+                   * be nothing wrong here. So there doesn't seem to be anything better to do than
+                   * delay this action.
+                   * See https://gitlab.xfce.org/xfce/xfce4-panel/-/issues/940.
+                   * Also: don't do `gtk_layer_set_monitor (GTK_WINDOW (window), NULL)` here, it
+                   * causes gtk-layer-shell to remap the panel window and leads gtk to a really
+                   * weird state, where monitors no longer have a model…
+                   */
+                  if (gtk_layer_is_supported ())
+                    {
+                      if (window->set_monitor_id != 0)
+                        g_source_remove (window->set_monitor_id);
+                      window->set_monitor_id = g_timeout_add_seconds (1, panel_window_set_monitor, window);
+                      g_object_set_data (G_OBJECT (window), "layer-shell-monitor", NULL);
+                    }
+                  else
+#endif
+                    gtk_widget_hide (GTK_WIDGET (window));
+                }
               return;
             }
         }
@@ -2771,9 +2821,12 @@ panel_window_screen_layout_changed (GdkScreen *screen,
    * by itself in general */
   if (gtk_layer_is_supported () && !window->span_monitors)
     {
-      gtk_layer_set_monitor (GTK_WINDOW (window), monitor);
-      if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
-        gtk_layer_set_monitor (GTK_WINDOW (window->autohide_window), monitor);
+      /* delay also this one, so it doesn't make _layout_changed() recurse because
+       * of panel window remap, which messes up automatic mode */
+      if (window->set_monitor_id != 0)
+        g_source_remove (window->set_monitor_id);
+      window->set_monitor_id = g_idle_add (panel_window_set_monitor, window);
+      g_object_set_data (G_OBJECT (window), "layer-shell-monitor", monitor);
     }
 #endif
 
