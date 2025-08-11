@@ -135,6 +135,7 @@
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="model">style-model</property>
+                            <property name="halign">GTK_ALIGN_END</property>
                             <child>
                               <object class="GtkCellRendererText" id="cellrenderertext1"/>
                               <attributes>
@@ -157,7 +158,7 @@
                     </child>
                     <child>
                       <object class="GtkCheckButton" id="expand">
-                        <property name="label" translatable="yes">_Auto-size</property>
+                        <property name="label" translatable="yes">_Expand</property>
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
                         <property name="receives-default">False</property>
@@ -167,14 +168,14 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">1</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkBox" id="hbox2">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="spacing">133</property>
+                        <property name="spacing">12</property>
                         <child>
                           <object class="GtkLabel" id="label3">
                             <property name="visible">True</property>
@@ -193,21 +194,21 @@
                           <object class="GtkSpinButton" id="size-scale">
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
-                            <property name="width-chars">6</property>
+                            <property name="width-chars">4</property>
                             <property name="adjustment">size</property>
-                            <property name="update-policy">if-valid</property>
+                            <property name="halign">GTK_ALIGN_END</property>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
+                            <property name="expand">True</property>
                             <property name="fill">True</property>
-                            <property name="position">2</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">2</property>
+                        <property name="position">1</property>
                       </packing>
                     </child>
                   </object>

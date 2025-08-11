@@ -29,9 +29,9 @@
 
 
 #define SEPARATOR_OFFSET (0.15)
-#define MIN_SIZE (3)
+#define MIN_SIZE (0)
 #define DEFAULT_SIZE (8)
-#define MAX_SIZE (10000)
+#define MAX_SIZE (G_MAXUINT)
 #define DOTS_OFFSET (4)
 #define DOTS_SIZE (3)
 #define HANDLE_SIZE (4)
@@ -216,14 +216,14 @@ separator_plugin_set_property (GObject *object,
     case PROP_EXPAND:
       xfce_panel_plugin_set_expand (XFCE_PANEL_PLUGIN (plugin),
                                     g_value_get_boolean (value));
-      separator_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin), xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
-      gtk_widget_queue_draw (GTK_WIDGET (object));
+      separator_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
+                                     xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
       break;
 
     case PROP_SIZE:
       plugin->size = g_value_get_uint (value);
-      separator_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin), xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
-      gtk_widget_queue_draw (GTK_WIDGET (object));
+      separator_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
+                                     xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
       break;
 
     default:
