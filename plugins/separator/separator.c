@@ -29,7 +29,9 @@
 
 
 #define SEPARATOR_OFFSET (0.15)
-#define SEPARATOR_SIZE (8)
+#define MIN_SIZE (0)
+#define DEFAULT_SIZE (8)
+#define MAX_SIZE (G_MAXUINT)
 #define DOTS_OFFSET (4)
 #define DOTS_SIZE (3)
 #define HANDLE_SIZE (4)
@@ -84,13 +86,15 @@ struct _SeparatorPlugin
   /* settings */
   GObject *settings_dialog;
   SeparatorPluginStyle style;
+  guint size;
 };
 
 enum
 {
   PROP_0,
   PROP_STYLE,
-  PROP_EXPAND
+  PROP_EXPAND,
+  PROP_SIZE
 };
 
 
@@ -135,6 +139,15 @@ separator_plugin_class_init (SeparatorPluginClass *klass)
                                                          NULL, NULL,
                                                          FALSE,
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_SIZE,
+                                   g_param_spec_uint ("size",
+                                                      NULL, NULL,
+                                                      MIN_SIZE,
+                                                      MAX_SIZE,
+                                                      DEFAULT_SIZE,
+                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 }
 
 
@@ -143,6 +156,7 @@ static void
 separator_plugin_init (SeparatorPlugin *plugin)
 {
   plugin->style = SEPARATOR_PLUGIN_STYLE_DEFAULT;
+  plugin->size = DEFAULT_SIZE;
 }
 
 
@@ -165,6 +179,10 @@ separator_plugin_get_property (GObject *object,
     case PROP_EXPAND:
       expand = xfce_panel_plugin_get_expand (XFCE_PANEL_PLUGIN (plugin));
       g_value_set_boolean (value, expand);
+      break;
+
+    case PROP_SIZE:
+      g_value_set_uint (value, plugin->size);
       break;
 
     default:
@@ -198,6 +216,14 @@ separator_plugin_set_property (GObject *object,
     case PROP_EXPAND:
       xfce_panel_plugin_set_expand (XFCE_PANEL_PLUGIN (plugin),
                                     g_value_get_boolean (value));
+      separator_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
+                                     xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
+      break;
+
+    case PROP_SIZE:
+      plugin->size = g_value_get_uint (value);
+      separator_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
+                                     xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
       break;
 
     default:
@@ -315,6 +341,7 @@ separator_plugin_construct (XfcePanelPlugin *panel_plugin)
   const PanelProperty properties[] = {
     { "style", G_TYPE_UINT },
     { "expand", G_TYPE_BOOLEAN },
+    { "size", G_TYPE_UINT },
     { NULL }
   };
 
@@ -336,13 +363,27 @@ static gboolean
 separator_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                                gint size)
 {
-  /* set the minimum separator size */
-  if (xfce_panel_plugin_get_orientation (panel_plugin) == GTK_ORIENTATION_HORIZONTAL)
-    gtk_widget_set_size_request (GTK_WIDGET (panel_plugin),
-                                 SEPARATOR_SIZE, size);
+  SeparatorPlugin *plugin = SEPARATOR_PLUGIN (panel_plugin);
+
+  if (xfce_panel_plugin_get_expand (panel_plugin))
+    {
+      /* set the minimum separator size */
+      if (xfce_panel_plugin_get_orientation (panel_plugin) == GTK_ORIENTATION_HORIZONTAL)
+        gtk_widget_set_size_request (GTK_WIDGET (panel_plugin),
+                                     MIN_SIZE, size);
+      else
+        gtk_widget_set_size_request (GTK_WIDGET (panel_plugin),
+                                     size, MIN_SIZE);
+    }
   else
-    gtk_widget_set_size_request (GTK_WIDGET (panel_plugin),
-                                 size, SEPARATOR_SIZE);
+    {
+      if (xfce_panel_plugin_get_orientation (panel_plugin) == GTK_ORIENTATION_HORIZONTAL)
+        gtk_widget_set_size_request (GTK_WIDGET (panel_plugin),
+                                     plugin->size, size);
+      else
+        gtk_widget_set_size_request (GTK_WIDGET (panel_plugin),
+                                     size, plugin->size);
+    }
 
   return TRUE;
 }
@@ -354,7 +395,7 @@ separator_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   SeparatorPlugin *plugin = SEPARATOR_PLUGIN (panel_plugin);
   GtkBuilder *builder;
-  GObject *style, *expand;
+  GObject *style, *expand, *size, *size_scale;
 
   panel_return_if_fail (SEPARATOR_IS_PLUGIN (plugin));
 
@@ -372,6 +413,20 @@ separator_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_object_bind_property (G_OBJECT (plugin), "expand",
                           G_OBJECT (expand), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+
+  size = gtk_builder_get_object (builder, "size");
+
+  gtk_adjustment_set_lower (GTK_ADJUSTMENT (size), MIN_SIZE);
+  gtk_adjustment_set_upper (GTK_ADJUSTMENT (size), MAX_SIZE);
+
+  g_object_bind_property (G_OBJECT (plugin), "size",
+                          G_OBJECT (size), "value",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+
+  size_scale = gtk_builder_get_object (builder, "size-scale");
+  g_object_bind_property (G_OBJECT (expand), "active",
+                          G_OBJECT (size_scale), "sensitive",
+                          G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
 
   gtk_widget_show (GTK_WIDGET (plugin->settings_dialog));
 }
