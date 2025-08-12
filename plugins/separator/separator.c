@@ -94,7 +94,7 @@ enum
   PROP_0,
   PROP_STYLE,
   PROP_EXPAND,
-  PROP_SIZE
+  PROP_SIZE,
 };
 
 
