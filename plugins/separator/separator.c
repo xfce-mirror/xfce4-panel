@@ -29,7 +29,7 @@
 
 
 #define SEPARATOR_OFFSET (0.15)
-#define MIN_SIZE (0)
+#define MIN_SIZE (1)
 #define DEFAULT_SIZE (8)
 #define MAX_SIZE (G_MAXUINT)
 #define DOTS_OFFSET (4)
