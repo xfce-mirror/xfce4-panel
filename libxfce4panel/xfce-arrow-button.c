@@ -32,8 +32,8 @@
  *
  * Toggle button with (optional) arrow. The arrow direction will be
  * inverted when the button is toggled.
- * Since 4.8 it is also possible to make the button blink and pack additional
- * widgets in the button, using gtk_container_add().
+ * Since 4.8 it is also possible to make the button blink and pack an additional
+ * widget in the button, using gtk_container_add().
  **/
 
 
