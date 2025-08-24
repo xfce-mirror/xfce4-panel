@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-07-18 10:56+0200\n"
+"POT-Creation-Date: 2025-08-12 12:47+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Quentin PAGÈS, 2020,2022-2025\n"
 "Language-Team: Occitan (post 1500) (http://app.transifex.com/xfce/xfce4-panel/language/oc/)\n"
@@ -37,7 +37,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panèls;paramètres;configuracion;reglatges;preferéncias;barra;amagar;rescondre;aplicacions;menú;menut;menu;aviar;aviar;boton;aviador;aviaire;notificacions;estatus;icònas;extensions;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3734
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3789
 msgid "Panel"
 msgstr "Tablèu de bòrd"
 
@@ -93,7 +93,7 @@ msgstr "Preferéncias del panèl"
 #: common/resources/launcher-dialog.glade:235
 #: common/resources/launcher-dialog.glade:414
 #: common/resources/pager-dialog.glade:97
-#: common/resources/separator-dialog.glade:54
+#: common/resources/separator-dialog.glade:58
 #: common/resources/showdesktop-dialog.glade:34
 #: common/resources/sn-dialog.glade:65
 #: common/resources/tasklist-dialog.glade:77
@@ -110,12 +110,12 @@ msgstr "_Tampar"
 #: common/resources/directorymenu-dialog.glade:49
 #: common/resources/launcher-dialog.glade:398
 #: common/resources/pager-dialog.glade:81
-#: common/resources/separator-dialog.glade:69
+#: common/resources/separator-dialog.glade:73
 #: common/resources/showdesktop-dialog.glade:49
 #: common/resources/tasklist-dialog.glade:93
 #: common/resources/windowmenu-dialog.glade:63
 #: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:3800
+#: panel/panel-window.c:3855
 msgid "_Help"
 msgstr "_Ajuda"
 
@@ -229,7 +229,7 @@ msgid "<b>Background</b>"
 msgstr "<b>Rèireplan</b>"
 
 #: common/resources/panel-preferences-dialog.glade:808
-#: common/resources/separator-dialog.glade:119
+#: common/resources/separator-dialog.glade:123
 msgid "_Style:"
 msgstr "E_stil :"
 
@@ -308,7 +308,7 @@ msgstr "Apondre un element novèl al tablèu de bòrd"
 #. remove
 #: common/resources/panel-preferences-dialog.glade:1240
 #: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:353
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1080
+#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1081
 #: plugins/launcher/launcher-dialog.c:836
 msgid "_Remove"
 msgstr "_Suprimir"
@@ -447,7 +447,7 @@ msgstr "Seleccionatz aquesta opcion per afichar lo nom generic de l'aplicacion d
 #: common/resources/applicationsmenu-dialog.glade:229
 #: common/resources/clock-dialog.glade:405
 #: common/resources/directorymenu-dialog.glade:150
-#: common/resources/separator-dialog.glade:177
+#: common/resources/separator-dialog.glade:222
 #: common/resources/tasklist-dialog.glade:257
 #: common/resources/windowmenu-dialog.glade:206
 msgid "Appearance"
@@ -852,27 +852,31 @@ msgstr "Plegar los espacis de trabalh"
 msgid "<b>Appearance</b>"
 msgstr "<b>Aparéncia</b>"
 
-#: common/resources/separator-dialog.glade:23
+#: common/resources/separator-dialog.glade:27
 msgid "Transparent"
 msgstr "Transparent"
 
-#: common/resources/separator-dialog.glade:26
-#: common/resources/separator-dialog.glade:38 plugins/actions/actions.c:726
+#: common/resources/separator-dialog.glade:30
+#: common/resources/separator-dialog.glade:42 plugins/actions/actions.c:726
 #: plugins/separator/separator.desktop.in.in:4
 msgid "Separator"
 msgstr "Separador"
 
-#: common/resources/separator-dialog.glade:29
+#: common/resources/separator-dialog.glade:33
 msgid "Handle"
 msgstr "Ponhada"
 
-#: common/resources/separator-dialog.glade:32
+#: common/resources/separator-dialog.glade:36
 msgid "Dots"
 msgstr "Punts"
 
-#: common/resources/separator-dialog.glade:156
+#: common/resources/separator-dialog.glade:161
 msgid "_Expand"
 msgstr "Es_pandir"
+
+#: common/resources/separator-dialog.glade:183
+msgid "Si_ze:"
+msgstr "T_alha :"
 
 #: common/resources/showdesktop-dialog.glade:18
 #: plugins/showdesktop/showdesktop.c:322
@@ -1113,7 +1117,7 @@ msgid "Enable _urgency notification"
 msgstr "Activar las notificacions _urgentas"
 
 #: libxfce4panel/xfce-panel-plugin.c:1109
-#: panel/panel-preferences-dialog.c:1540
+#: panel/panel-preferences-dialog.c:1541
 msgid "Remove"
 msgstr "Suprimir"
 
@@ -1123,7 +1127,7 @@ msgid ""
 msgstr "Suprimir l’element del panèl significa tanben que sa configuracion serà perduda."
 
 #: libxfce4panel/xfce-panel-plugin.c:1114
-#: panel/panel-preferences-dialog.c:1547
+#: panel/panel-preferences-dialog.c:1548
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Sètz segur que volètz suprimir « %s » ?"
@@ -1134,7 +1138,7 @@ msgid "_Properties"
 msgstr "_Proprietats"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3809
+#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3864
 msgid "_About"
 msgstr "A _prepaus"
 
@@ -1148,17 +1152,17 @@ msgid "Pane_l"
 msgstr "Tablèu de _bòrd"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3746
+#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3801
 msgid "Add _New Items..."
 msgstr "Apondre d'elements _novèls ..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3757
+#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3812
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferéncias del tablèu de bòrd..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3784
+#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3839
 msgid "Log _Out"
 msgstr "Des_connexion"
 
@@ -1327,21 +1331,21 @@ msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Crear un aviador a partir de %d fichièr de burèu"
 msgstr[1] "Crear un aviador a partir de %d fichièrs de burèu"
 
-#: panel/panel-application.c:1800
+#: panel/panel-application.c:1804
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Avètz aviat lo servidor X sens gestionari de sesilha. En clicant sus Quitar tamparà lo servidor X."
 
-#: panel/panel-application.c:1803
+#: panel/panel-application.c:1807
 msgid "Quit"
 msgstr "Quitar"
 
-#: panel/panel-application.c:1803
+#: panel/panel-application.c:1807
 msgid "Are you sure you want to quit the panel?"
 msgstr "Sètz segur que volètz quitar lo tablèu de bòrd ?"
 
-#: panel/panel-application.c:1811
+#: panel/panel-application.c:1815
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Impossible d'executar la comanda « %s »"
@@ -1444,25 +1448,25 @@ msgstr "Principal"
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: panel/panel-preferences-dialog.c:1079
+#: panel/panel-preferences-dialog.c:1080
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Las configuracions del tablèu de bòrd e dels empeutons seràn suprimidas definitivament"
 
-#: panel/panel-preferences-dialog.c:1088
+#: panel/panel-preferences-dialog.c:1089
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Sètz segur que volètz suprimir lo tablèu de bòrd %d ?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1385
+#: panel/panel-preferences-dialog.c:1386
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(extèrne)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1390
+#: panel/panel-preferences-dialog.c:1391
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1471,21 +1475,21 @@ msgstr "Nom intèrne : %s-%d\nPID : %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1402
+#: panel/panel-preferences-dialog.c:1403
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nom intèrne : %s-%d"
 
-#: panel/panel-preferences-dialog.c:1549
+#: panel/panel-preferences-dialog.c:1550
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Se suprimissètz l'element del tablèu de bòrd, o serà definitivament."
 
-#: panel/panel-preferences-dialog.c:1553
+#: panel/panel-preferences-dialog.c:1554
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Volètz vertadièrament suprimir aquestes %d elements ?"
 
-#: panel/panel-preferences-dialog.c:1555
+#: panel/panel-preferences-dialog.c:1556
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Se los suprimissètz del panèl, son perduts definitivament."
 
@@ -1513,7 +1517,7 @@ msgstr "Confirmat"
 msgid "Expert"
 msgstr "Expèrt"
 
-#: panel/panel-window.c:3771
+#: panel/panel-window.c:3826
 msgid "_Lock Panel"
 msgstr "_Varrolhar lo tablèu de bòrd"
 
