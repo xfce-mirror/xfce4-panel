@@ -41,6 +41,8 @@ msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr ""
+"كۆزنەكچە؛تەڭشەك؛مايىللىق؛ۋەزىپە بالداق؛ئۆزلۈكىدىن يوشۇر؛پىروگرامما "
+"تىزىملىكى؛باشلا؛توپچە؛قوزغاتقۇچ؛ئۇقتۇرۇش رايونى؛ھالەت؛سىنبەلگە؛قىستۇرما؛"
 
 #: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2965
 msgid "Panel"
@@ -65,7 +67,7 @@ msgstr ""
 #: ../libxfce4panel/xfce-panel-plugin.c:1087
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
-msgstr ""
+msgstr "تۈر كۆزنەكچىدىن چىقىرىۋېتىلسە سەپلىمىنىڭمۇ يوقىلىشىدىن دېرەك بېرىدۇ."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1088 ../panel/panel-dialogs.c:164
 #: ../panel/panel-preferences-dialog.c:1422
@@ -247,7 +249,7 @@ msgstr "D-Bus ئۇچۇرىنى ئەۋەتىش مەغلۇپ بولدى"
 
 #: ../panel/main.c:443
 msgid "Execute"
-msgstr ""
+msgstr "ئىجرا قىل"
 
 #: ../panel/main.c:444
 msgid ""
@@ -282,8 +284,8 @@ msgstr ""
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ئۈستەلئۈستى ھۆججىتى %d دىن ئىجراچى قۇرۇش"
+msgstr[1] "ئۈستەلئۈستى ھۆججىتى %d دىن ئىجراچى قۇرۇش"
 
 #: ../panel/panel-application.c:1772
 msgid "Quit"
@@ -324,7 +326,7 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:58
 msgid "Unable to open the e-mail address"
-msgstr ""
+msgstr "ئېلخەت ئادرېسىنى ئاچالمايدۇ"
 
 #: ../panel/panel-dialogs.c:84
 msgid "The panel of the Xfce Desktop Environment"
@@ -343,7 +345,7 @@ msgstr "يېڭى تۈر قوشۇش"
 #: ../panel/panel-preferences-dialog.glade.h:56
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "_Add"
-msgstr ""
+msgstr "قوش(_A)"
 
 #: ../panel/panel-dialogs.c:176
 msgid "Please choose a panel for the new plugin:"
@@ -402,7 +404,7 @@ msgstr "قىستۇرما «%s» تېخىغىچە كۆزنەكتە بار، قا�
 
 #: ../panel/panel-plugin-external.c:519
 msgid "Plugin Restart"
-msgstr ""
+msgstr "قىستۇرمىنى قايتا قوزغات"
 
 #: ../panel/panel-plugin-external.c:520
 #, c-format
@@ -425,7 +427,7 @@ msgstr "ئاپتوماتىك"
 
 #: ../panel/panel-preferences-dialog.c:556
 msgid "Primary"
-msgstr ""
+msgstr "ئاساسىي"
 
 #. I18N: monitor name in the output selector
 #: ../panel/panel-preferences-dialog.c:575
@@ -477,7 +479,7 @@ msgstr "زادىلا"
 
 #: ../panel/panel-preferences-dialog.glade.h:2
 msgid "Intelligently"
-msgstr ""
+msgstr "ئىدراكلىق"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Always"
@@ -509,19 +511,19 @@ msgstr "تەگلىك سۈرەت"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "Panel Preferences"
-msgstr ""
+msgstr "كۆزنەكچە مايىللىقى"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Profiles:"
-msgstr ""
+msgstr "سەپلىمە ھۆججەت:"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid "_Backup and restore"
-msgstr ""
+msgstr "زاپاسلا ۋە ئەسلىگە كەلتۈر(_B)"
 
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Switch between panel presets"
-msgstr ""
+msgstr "كۆزنەكچە ئالدىن تەڭشەك ئارىسىدا ئالماشتۇرىدۇ"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Add a new panel"
@@ -533,7 +535,7 @@ msgstr "ھازىرقى كۆزنەكنى ئۆچۈر"
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "<b>General</b>"
-msgstr ""
+msgstr "<b>ئادەتتىكى</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid "M_ode:"
@@ -559,7 +561,7 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "_Reserve space on screen edges for the panel"
-msgstr ""
+msgstr "ئېكران گىرۋىكىدە كۆزنەكچىگە بوشلۇق قالدۇرىدۇ(_R)"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
@@ -567,10 +569,13 @@ msgid ""
 "behind the panel. This only works when the panel is attached to a screen "
 "edge."
 msgstr ""
+"چوڭايتىلغان كۆزنەكنىڭ كەينى كۆزنەكنىڭ ھەممە يېرىنى قاپلىۋېتىشىنى "
+"خالىمىسىڭىز، بۇنى تاللاڭ. بۇ پەقەت كۆزنەك ئېكران گىرۋىكىگە چاپلىشىپ تۇرغان "
+"ۋاقىتتىلا ئىشلەيدۇ."
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
-msgstr ""
+msgstr "كۆزنەكچىنى ئۆزلۈكىدىن يوشۇر(_T):"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid "O_utput:"
@@ -580,11 +585,11 @@ msgstr "چىقىرىش(_U)"
 #. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:29
 msgid "<b>Measurements</b>"
-msgstr ""
+msgstr "<b>ئۆلچىمى</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Row _size (pixels):"
-msgstr ""
+msgstr "قۇر چوڭلۇقى(پىكسېل):"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Num_ber of rows:"
@@ -592,7 +597,7 @@ msgstr "قۇر سانى(_B):"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "L_ength (pixels):"
-msgstr ""
+msgstr "ئۇزۇنلۇقى(پىكسېل)(_E):"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "A_utomatically increase the length"
@@ -611,11 +616,11 @@ msgstr "كۆرسەتكۈچ(_I)"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Dark mode"
-msgstr ""
+msgstr "قاراڭغۇ ھالەت"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "<b>Background</b>"
-msgstr ""
+msgstr "<b>تەگلىك</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 #: ../plugins/separator/separator-dialog.glade.h:7
@@ -640,29 +645,31 @@ msgstr "تەگلىك رەسىمىنى تاللاش"
 
 #: ../panel/panel-preferences-dialog.glade.h:43
 msgid "<b>Icons</b>"
-msgstr ""
+msgstr "<b>سىنبەلگە</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Adjust size au_tomatically"
-msgstr ""
+msgstr "چوڭلۇقىنى ئۆزلۈكىدىن تەڭشە(_T)"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Fixed icon _size (pixels):"
-msgstr ""
+msgstr "مۇقىم سىنبەلگە چوڭلۇقى(پىكسېل)(_S):"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "<b>Opacity</b>"
-msgstr ""
+msgstr "<b>تۇتۇقلۇقى</b>"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 msgid "Configure..."
-msgstr ""
+msgstr "سەپلىمە…"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr ""
+"<b>نۆۋەتتە بىرىكتۈرۈش ھالىتى چەكلەنگەن</b>\n"
+"كۆزنەكچىنىڭ تۇتۇقلۇق تەڭشىكى ئۈچۈن كۆزنەك باشقۇرغۇچنىڭ بىرىكتۈرۈش ھالىتىنى قوزغىتىدۇ."
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:51
@@ -772,15 +779,15 @@ msgstr "ئەڭگىمە تىزىملىكى"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "Full Name"
-msgstr ""
+msgstr "تولۇق ئاتى"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
 msgid "Username"
-msgstr ""
+msgstr "ئىشلەتكۈچى ئاتى"
 
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid "User ID"
-msgstr ""
+msgstr "ئىشلەتكۈچى كىملىكى"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
 msgid "Custom"
@@ -792,11 +799,11 @@ msgstr "كۆرۈنۈشى(_N):"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "Title:"
-msgstr ""
+msgstr "ماۋزۇ:"
 
 #: ../plugins/actions/actions-dialog.glade.h:11
 msgid "Custo_m title:"
-msgstr ""
+msgstr "ئىختىيارى ماۋزۇ(_M):"
 
 #: ../plugins/actions/actions-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:27
@@ -886,20 +893,20 @@ msgstr "يەنە %d سېكۇنتتىن كېيىن ئۈچەككە كىرىدۇ."
 
 #: ../plugins/actions/actions.c:209
 msgid "Hybrid Sleep"
-msgstr ""
+msgstr "ئۈچەك ئۇيقۇ"
 
 #: ../plugins/actions/actions.c:210
 msgid "_Hybrid Sleep"
-msgstr ""
+msgstr "ئۈچەك ئۇيقۇ(_H)"
 
 #: ../plugins/actions/actions.c:211
 msgid "Do you want to hibernate and suspend the system?"
-msgstr ""
+msgstr "سىستېمىنى ئۈچەككە كىرگۈزۈپ ۋە توڭلىتامسىز؟"
 
 #: ../plugins/actions/actions.c:212
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
-msgstr ""
+msgstr "كومپيۇتېر %d سېكۇنتتىن كېيىن ئۈچەككە كىرىپ ۋە توڭلىتىلىدۇ."
 
 #: ../plugins/actions/actions.c:218
 msgid "Suspend"
@@ -965,7 +972,7 @@ msgstr "مەشغۇلات «%s» ئىجرا قىلىش مەغلۇپ بولدى"
 
 #: ../plugins/actions/actions.c:1327
 msgid "Little Mouse"
-msgstr ""
+msgstr "كىچىك چاشقان"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
@@ -987,7 +994,7 @@ msgstr "توپچا ماۋزۇسى(_T):"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Show button on one _line"
-msgstr ""
+msgstr "توپچىنى بىر قۇدا كۆرسەت(_L)"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "_Show button title"
@@ -1049,7 +1056,7 @@ msgstr "تىزىملىك ھۆججىتى"
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu.c:39
 msgid "Applications"
-msgstr ""
+msgstr "پىروگرامما"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:609
 #: ../plugins/directorymenu/directorymenu.c:469
@@ -1106,7 +1113,7 @@ msgstr "ياردەم تاللانمىلىرىنى كۆرسىتىدۇ"
 #: ../plugins/clock/clock.c:47
 msgctxt "Date"
 msgid "%A %d %B %Y"
-msgstr ""
+msgstr "%Y-يىلى %b-ئاينىڭ %d-كۈنى %A"
 
 #: ../plugins/clock/clock.c:178
 msgid "Week %V"
@@ -1122,31 +1129,31 @@ msgstr "ئىختىيارى فورمات"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
 msgid "Decimal"
-msgstr ""
+msgstr "ئونلۇق"
 
 #: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Sexagesimal"
-msgstr ""
+msgstr "ئون ئالتىلىك"
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Binary time"
-msgstr ""
+msgstr "ئىككىلىك"
 
 #: ../plugins/clock/clock-dialog.glade.h:4
 msgid "Date, then time"
-msgstr ""
+msgstr "چېسلا، ئاندىن ۋاقىت"
 
 #: ../plugins/clock/clock-dialog.glade.h:5
 msgid "Time, then date"
-msgstr ""
+msgstr "ۋاقىت، ئاندىن چېسلا"
 
 #: ../plugins/clock/clock-dialog.glade.h:6
 msgid "Date Only"
-msgstr ""
+msgstr "چېسلالا"
 
 #: ../plugins/clock/clock-dialog.glade.h:7
 msgid "Time Only"
-msgstr ""
+msgstr "ۋاقىتلا"
 
 #: ../plugins/clock/clock-dialog.glade.h:8
 msgid "Analog"
@@ -1198,6 +1205,8 @@ msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
 msgstr ""
+"ئەگەر تەڭشەلسە، چاشقىنەكتە سول چېكىلگەندە كۆڭۈلدىكى يىلنامەنى كۆرسەتمەي "
+"ئورنىغا مەزكۇر بۇيرۇقنى ئىجرا قىلىدۇ."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Co_mmand:"
@@ -1205,7 +1214,7 @@ msgstr "بۇيرۇق(_M):"
 
 #: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Calendar"
-msgstr ""
+msgstr "يىلنامە"
 
 #: ../plugins/clock/clock-dialog.glade.h:24
 #, no-c-format
@@ -1242,7 +1251,7 @@ msgstr "24-سائەت (_H)"
 
 #: ../plugins/clock/clock-dialog.glade.h:31
 msgid "Binary mode:"
-msgstr ""
+msgstr "ئىككىلىك ھالەت:"
 
 #: ../plugins/clock/clock-dialog.glade.h:32
 msgid "Display _seconds"
@@ -1264,11 +1273,11 @@ msgstr "سېتكىلارنى كۆرسەت(_D)"
 
 #: ../plugins/clock/clock-dialog.glade.h:37
 msgid "Font:"
-msgstr ""
+msgstr "خەت نۇسخا:"
 
 #: ../plugins/clock/clock-dialog.glade.h:38
 msgid "Format:"
-msgstr ""
+msgstr "فورمات:"
 
 #: ../plugins/clock/clock-dialog.glade.h:40
 #, no-c-format
@@ -1278,6 +1287,10 @@ msgid ""
 " the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
 "the &quot;Help&quot; page for additional information."
 msgstr ""
+"كۆزنەكچىگە قىستۇرىدىغان چېسلا ۋە ۋاقىتنىڭ پىچىمىنى چۈشەندۈرىدۇ. مەسىلەن: يىل"
+" %Y بىلەن، ئاي %m بىلەن، كۈن %d بىلەن ئىپادىلىنىدۇ. شۇنداقلا، تومراق "
+"كۆرسىتىش ئۈچۈن <b></b> بەلگىسى بىلەن قورشاپ قويسا بولىدۇ. باشقا ئۇچۇرلارنى "
+"بىلمەكچى بولسىڭىز «ياردەم» بېتىگە قاراڭ."
 
 #: ../plugins/clock/clock-dialog.glade.h:41
 msgid "Date"
@@ -1285,7 +1298,7 @@ msgstr "چېسلا"
 
 #: ../plugins/clock/clock-dialog.glade.h:42
 msgid "Time"
-msgstr ""
+msgstr "ۋاقىت"
 
 #: ../plugins/clock/clock-dialog.glade.h:43
 msgid "Clock Options"
@@ -1295,12 +1308,12 @@ msgstr "سائەت تاللانمىلىرى"
 #: ../plugins/clock/clock-digital.h:25
 msgctxt "Time"
 msgid "%R"
-msgstr ""
+msgstr "%R"
 
 #: ../plugins/clock/clock-digital.h:26
 msgctxt "Date"
 msgid "%Y-%m-%d"
-msgstr ""
+msgstr "%Y-%m-%d"
 
 #: ../plugins/clock/clock-digital.h:27
 msgctxt "Time"
@@ -1651,7 +1664,7 @@ msgstr "يېڭى مۇندەرىجە قۇر"
 
 #: ../plugins/directorymenu/directorymenu.c:934
 msgid "Create New Text Document"
-msgstr ""
+msgstr "يېڭى تېكىست پۈتۈك قۇر"
 
 #: ../plugins/directorymenu/directorymenu.c:941
 msgid "C_reate"
@@ -1659,7 +1672,7 @@ msgstr "قۇر(_R)"
 
 #: ../plugins/directorymenu/directorymenu.c:942
 msgid "Create & _Open"
-msgstr ""
+msgstr "قۇرۇپ ۋە ئاچ(_O)"
 
 #: ../plugins/directorymenu/directorymenu.c:956
 msgid "Enter the new name:"
@@ -1668,7 +1681,7 @@ msgstr "يېڭى ئات:"
 #: ../plugins/directorymenu/directorymenu.c:992
 #, c-format
 msgid "Failed to create folder: %s"
-msgstr ""
+msgstr "قىسقۇچ قۇرالمىدى: %s"
 
 #: ../plugins/directorymenu/directorymenu.c:1075
 msgid "Open Folder"
@@ -1680,11 +1693,11 @@ msgstr "تېرمىنالدا ئېچىش"
 
 #: ../plugins/directorymenu/directorymenu.c:1101
 msgid "Create Folder..."
-msgstr ""
+msgstr "قىسقۇچ قۇر…"
 
 #: ../plugins/directorymenu/directorymenu.c:1114
 msgid "Create Text Document..."
-msgstr ""
+msgstr "تېكىست پۈتۈك قۇر…"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
@@ -1700,19 +1713,19 @@ msgstr "ئاساس مۇندەرىجە"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "Show 'New Text _Document'"
-msgstr ""
+msgstr "«يېڭى تېكىست پۈتۈك» كۆرسەت"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid "Show '_New Folder'"
-msgstr ""
+msgstr "«يېڭى قىسقۇچ(_N)» كۆرسەت"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
 msgid "Show 'Open in _Terminal'"
-msgstr ""
+msgstr "«تېرمىنالدا ئاچ(_T)» كۆرسەت"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
 msgid "Show '_Open _Folder'"
-msgstr ""
+msgstr "«قىسقۇچ ئاچ(_O)» كۆرسەت"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
 msgid "Menu"
@@ -1842,7 +1855,7 @@ msgstr "يېڭى قۇرۇق تۈر قوش"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "Add a new hyperlink"
-msgstr ""
+msgstr "يېڭى ئۇلانما قوش"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "Disable t_ooltips"
@@ -1899,7 +1912,7 @@ msgstr "توپچىلار"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 msgid "Miniature View"
-msgstr ""
+msgstr "قىسقارتىلما كۆرۈنۈش"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
 #: ../plugins/pager/pager.desktop.in.in.h:1
@@ -1912,15 +1925,15 @@ msgstr "قۇر نومۇرى(_R):"
 
 #: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Show workspace number"
-msgstr ""
+msgstr "خىزمەت بوشلۇقى نومۇرى"
 
 #: ../plugins/pager/pager-dialog.glade.h:9
 msgid "Switch workspaces using the mouse wheel"
-msgstr ""
+msgstr "چاشقىنەك غالتىكىدە خىزمەت بوشلۇقىنى ئالماشتۇرىدۇ(_W)"
 
 #: ../plugins/pager/pager-dialog.glade.h:10
 msgid "Wrap around workspaces"
-msgstr ""
+msgstr "خىزمەت بوشلۇقى ئەتراپىنى ئورايدۇ"
 
 #: ../plugins/pager/pager-dialog.glade.h:11
 msgid "<b>Appearance</b>"
@@ -1973,27 +1986,27 @@ msgstr "تازىلا"
 
 #: ../plugins/systray/sn-dialog.c:654
 msgid "Are you sure you want to clear the list of known items?"
-msgstr ""
+msgstr "تونۇش تۈر تىزىمىنى راستتىنلا تازىلىۋېتەمسىز؟"
 
 #: ../plugins/systray/sn-dialog.glade.h:1
 msgid "Status Tray Items"
-msgstr ""
+msgstr "ھالەت بالداق تۈرى"
 
 #: ../plugins/systray/sn-dialog.glade.h:2
 msgid "C_lear Known Items"
-msgstr ""
+msgstr "تونۇش تۈرنى تازىلا(_L)"
 
 #: ../plugins/systray/sn-dialog.glade.h:3
 msgid "Resets the list of items and their visibility settings"
-msgstr ""
+msgstr "تۈر تىزىمى ۋە كۆرۈنۈشچانلىق تەڭشىكىنى ئەسلىگە قايتۇرىدۇ"
 
 #: ../plugins/systray/sn-dialog.glade.h:4
 msgid "_Fixed icon size (pixels):"
-msgstr ""
+msgstr "مۇقىم سىنبەلگە چوڭلۇقى(پىكسېل)(_F):"
 
 #: ../plugins/systray/sn-dialog.glade.h:5
 msgid "Adjust size _automatically"
-msgstr ""
+msgstr "چوڭلۇقىنى ئۆزلۈكىدىن تەڭشە(_A)"
 
 #: ../plugins/systray/sn-dialog.glade.h:6
 msgid "Icons"
@@ -2001,27 +2014,27 @@ msgstr "سىنبەلگىلەر"
 
 #: ../plugins/systray/sn-dialog.glade.h:7
 msgid "Arrange _items in a single row"
-msgstr ""
+msgstr "تۈرلەرنى بىر قۇرغا رەتلە(_I)"
 
 #: ../plugins/systray/sn-dialog.glade.h:8
 msgid "If enabled, ensure that the items are laid out in a single row"
-msgstr ""
+msgstr "ئەگەر قوزغىتىلسا، تۈرلەرنى بىر قۇرغا رەتلەشكە كاپالەتلىك قىلىدۇ"
 
 #: ../plugins/systray/sn-dialog.glade.h:9
 msgid "_Hide items by default"
-msgstr ""
+msgstr "كۆڭۈلدىكى ئەھۋالدا تۈرنى يوشۇر(_H)"
 
 #: ../plugins/systray/sn-dialog.glade.h:10
 msgid "When enabled, all new items will be marked as \"Hidden\""
-msgstr ""
+msgstr "قوزغىتىلغاندا، بارلىق يېڭى تۈرگە «يوشۇرۇن» بەلگىسى سالىدۇ"
 
 #: ../plugins/systray/sn-dialog.glade.h:11
 msgid "_Square items"
-msgstr ""
+msgstr "چاسا تۈر(_S)"
 
 #: ../plugins/systray/sn-dialog.glade.h:12
 msgid "Item buttons will take a square when it's possible"
-msgstr ""
+msgstr "تۈر توپچىسىغا ئامالنىڭ بارىچە چاسا سىنبەلگە ئىشلىتىدۇ"
 
 #: ../plugins/systray/sn-dialog.glade.h:13
 msgid "Behavior"
@@ -2029,7 +2042,7 @@ msgstr "ھەرىكىتى"
 
 #: ../plugins/systray/sn-dialog.glade.h:14
 msgid "Item"
-msgstr ""
+msgstr "تۈر"
 
 #: ../plugins/systray/sn-dialog.glade.h:15
 msgid "Hidden"
@@ -2037,43 +2050,43 @@ msgstr "يوشۇرۇن"
 
 #: ../plugins/systray/sn-dialog.glade.h:16
 msgid "Move the selected item one row up"
-msgstr ""
+msgstr "تاللانغان تۈرنى ئۈستىگە بىر قۇر يۆتكەيدۇ"
 
 #: ../plugins/systray/sn-dialog.glade.h:17
 msgid "Move the selected item one row down"
-msgstr ""
+msgstr "تاللانغان تۈرنى ئاستىغا بىر قۇر يۆتكەيدۇ"
 
 #: ../plugins/systray/sn-dialog.glade.h:18
 msgid "Known Items"
-msgstr ""
+msgstr "تونۇش تۈر"
 
 #: ../plugins/systray/sn-dialog.glade.h:19
 msgid "_Menu is primary action"
-msgstr ""
+msgstr "تىزىملىك ئاساسىي مەشغۇلات(_M)"
 
 #: ../plugins/systray/sn-dialog.glade.h:20
 msgid "Left click will always display the menu for item"
-msgstr ""
+msgstr "سول توپچە چېكىلسە ھەمىشە تۈر تىزىملىكىنى كۆرسىتىدۇ"
 
 #: ../plugins/systray/sn-dialog.glade.h:21
 msgid "_Request symbolic icons"
-msgstr ""
+msgstr "سىمۋوللۇق سىنبەلگە ئىلتىماسى(_R)"
 
 #: ../plugins/systray/sn-dialog.glade.h:22
 msgid "Load symbolic icons if available"
-msgstr ""
+msgstr "ئەگەر مۇمكىن بولسا سىمۋوللۇق سىنبەلگىنى يۈكلە"
 
 #: ../plugins/systray/sn-dialog.glade.h:23
 msgid "Features"
-msgstr ""
+msgstr "ئىقتىدار"
 
 #: ../plugins/systray/sn-dialog.glade.h:24
 msgid "Status Notifiers"
-msgstr ""
+msgstr "ھالەت ئۇقتۇرغۇچ"
 
 #: ../plugins/systray/sn-dialog.glade.h:25
 msgid "Systray Icons"
-msgstr ""
+msgstr "سىستېما بالداق سىنبەلگىسى"
 
 #: ../plugins/systray/systray.c:146
 msgid "Unable to start the notification area"
@@ -2099,13 +2112,15 @@ msgstr "ئېكران %d manager selection نى ئېلىش مەغلۇپ بولد�
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Status Tray Plugin"
-msgstr ""
+msgstr "ھالەت بالداق قىستۇرمىسى"
 
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid ""
 "Provides status notifier items (application indicators) and legacy systray "
 "items"
 msgstr ""
+"ھالەت ئۇقتۇرغۇچ تۈرى (پىروگرامما كۆرسەتكۈچ) ۋە كونا سىستېما بالداق تۈرى "
+"بىلەن تەمىنلەيدۇ"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Nothing"
@@ -2121,7 +2136,7 @@ msgstr "كۆزنەكنى كىچىكلەت"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "New Instance"
-msgstr ""
+msgstr "يېڭى مىسال"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
 msgid "Timestamp"
@@ -2162,7 +2177,7 @@ msgstr "handle كۆرسەتسۇن(_H)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show _tooltips"
-msgstr ""
+msgstr "قورال ئەسكەرتىشىنى كۆرسەت(_T)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
@@ -2174,7 +2189,7 @@ msgstr "ئوتتۇرا توپچا بېسىلغاندا(_D):"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "_Group windows by application"
-msgstr ""
+msgstr "كۆزنەكنى پىروگرامما بويىچە گۇرۇپپىلا(_G)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Restore minimized windows to current _workspace"
@@ -2209,7 +2224,7 @@ msgstr "كىچىكلىتىلگەن كۆزنەكلەرنىلا كۆرسەت"
 #: ../plugins/tasklist/tasklist-widget.c:3131
 #, c-format
 msgid "Unable to start new instance of '%s'"
-msgstr ""
+msgstr "يېڭى مىسال «%s» نى قوزغىتالمىدى"
 
 #: ../plugins/tasklist/tasklist-widget.c:3135
 msgid "Error"
@@ -2217,7 +2232,7 @@ msgstr "خاتالىق"
 
 #: ../plugins/tasklist/tasklist-widget.c:3164
 msgid "Launch New Instance"
-msgstr ""
+msgstr "يېڭى مىسالنى قوزغات"
 
 #: ../plugins/tasklist/tasklist-widget.c:3911
 msgid "Mi_nimize All"
