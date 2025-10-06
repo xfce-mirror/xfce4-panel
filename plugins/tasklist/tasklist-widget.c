@@ -1659,6 +1659,23 @@ xfce_tasklist_arrow_button_toggled (GtkWidget *button,
 
 
 static void
+workspace_group_destroyed (XfwWorkspaceManager *manager,
+                           XfwWorkspaceGroup *group,
+                           XfceTasklist *tasklist)
+{
+  if (group == tasklist->workspace_group)
+    {
+      tasklist->workspace_group = xfw_workspace_manager_list_workspace_groups (manager)->data;
+      g_signal_connect (G_OBJECT (tasklist->workspace_group), "active-workspace-changed",
+                        G_CALLBACK (xfce_tasklist_active_workspace_changed), tasklist);
+      g_signal_connect (G_OBJECT (tasklist->workspace_group), "viewports-changed",
+                        G_CALLBACK (xfce_tasklist_viewports_changed), tasklist);
+    }
+}
+
+
+
+static void
 xfce_tasklist_connect_screen (XfceTasklist *tasklist)
 {
   GList *windows, *li;
@@ -1678,8 +1695,10 @@ xfce_tasklist_connect_screen (XfceTasklist *tasklist)
   manager = xfw_screen_get_workspace_manager (tasklist->screen);
 
   /* window button visibility based on window<->workspace association only works on X11,
-   * where there is only one workspace group */
-  tasklist->workspace_group = xfw_workspace_manager_list_workspace_groups (manager)->data;
+   * where there is only one workspace group, but it can be destroyed on wayland, so let's
+   * manage this in a minimalist way */
+  g_signal_connect_object (manager, "workspace-group-destroyed", G_CALLBACK (workspace_group_destroyed), tasklist, 0);
+  workspace_group_destroyed (manager, NULL, tasklist);
 
   /* add all existing windows on this screen */
   windows = xfw_screen_get_windows (tasklist->screen);
@@ -1695,14 +1714,10 @@ xfce_tasklist_connect_screen (XfceTasklist *tasklist)
   xfce_tasklist_active_window_changed (tasklist->screen, NULL, tasklist);
   g_signal_connect (G_OBJECT (tasklist->screen), "active-window-changed",
                     G_CALLBACK (xfce_tasklist_active_window_changed), tasklist);
-  g_signal_connect (G_OBJECT (tasklist->workspace_group), "active-workspace-changed",
-                    G_CALLBACK (xfce_tasklist_active_workspace_changed), tasklist);
   g_signal_connect (G_OBJECT (tasklist->screen), "window-opened",
                     G_CALLBACK (xfce_tasklist_window_added), tasklist);
   g_signal_connect (G_OBJECT (tasklist->screen), "window-closed",
                     G_CALLBACK (xfce_tasklist_window_removed), tasklist);
-  g_signal_connect (G_OBJECT (tasklist->workspace_group), "viewports-changed",
-                    G_CALLBACK (xfce_tasklist_viewports_changed), tasklist);
 
   /* update the viewport if not all monitors are shown */
   if (!tasklist->all_monitors)

@@ -403,6 +403,17 @@ window_menu_plugin_style_updated (GtkWidget *widget)
 
 
 static void
+workspace_group_destroyed (XfwWorkspaceManager *manager,
+                           XfwWorkspaceGroup *group,
+                           WindowMenuPlugin *plugin)
+{
+  if (group == plugin->workspace_group)
+    plugin->workspace_group = xfw_workspace_manager_list_workspace_groups (manager)->data;
+}
+
+
+
+static void
 window_menu_plugin_screen_changed (GtkWidget *widget,
                                    GdkScreen *previous_screen)
 {
@@ -436,8 +447,10 @@ window_menu_plugin_screen_changed (GtkWidget *widget,
   plugin->screen = screen;
   manager = xfw_screen_get_workspace_manager (screen);
 
-  /* window<->workspace association only works on X11, where there is only one workspace group */
-  plugin->workspace_group = xfw_workspace_manager_list_workspace_groups (manager)->data;
+  /* window<->workspace association only works on X11, where there is only one workspace group,
+   * but it can be destroyed on wayland, so let's manage this in a minimalist way */
+  g_signal_connect_object (manager, "workspace-group-destroyed", G_CALLBACK (workspace_group_destroyed), plugin, 0);
+  workspace_group_destroyed (manager, NULL, plugin);
 
   /* connect signal to monitor this screen */
   g_signal_connect (G_OBJECT (plugin->screen), "active-window-changed",
