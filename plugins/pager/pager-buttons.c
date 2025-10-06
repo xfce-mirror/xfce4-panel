@@ -275,8 +275,12 @@ pager_buttons_finalize (GObject *object)
   if (G_LIKELY (pager->xfw_screen != NULL))
     {
       XfwWorkspaceManager *manager = xfw_screen_get_workspace_manager (pager->xfw_screen);
+      g_signal_handlers_disconnect_by_data (manager, pager);
       for (GList *lp = xfw_workspace_manager_list_workspace_groups (manager); lp != NULL; lp = lp->next)
-        workspace_group_destroyed (manager, lp->data, pager);
+        {
+          g_signal_handlers_disconnect_by_data (lp->data, pager);
+          workspace_group_destroyed (manager, lp->data, pager);
+        }
 
       g_object_unref (G_OBJECT (pager->xfw_screen));
     }
