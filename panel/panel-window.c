@@ -261,6 +261,7 @@ enum
   PROP_OUTPUT_NAME,
   PROP_POSITION,
   PROP_ENABLE_STRUTS,
+  PROP_KEEP_BELLOW,
   PROP_DARK_MODE
 };
 
@@ -369,6 +370,8 @@ struct _PanelWindow
   StrutsEgde struts_edge;
   gulong struts[N_STRUTS];
   guint struts_enabled : 1;
+
+  guint keep_bellow : 1;
 
   /* dark mode */
   gboolean dark_mode;
@@ -577,6 +580,12 @@ panel_window_class_init (PanelWindowClass *klass)
                                                          TRUE,
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
+  g_object_class_install_property (gobject_class,
+                                   PROP_KEEP_BELLOW,
+                                   g_param_spec_boolean ("keep-bellow", NULL, NULL,
+                                                         FALSE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
   gtk_widget_class_install_style_property (gtkwidget_class,
                                            g_param_spec_uint ("popup-delay",
                                                               NULL,
@@ -638,6 +647,43 @@ panel_window_is_active_changed (PanelWindow *window)
 
 
 static void
+panel_window_keep_bellow_changed (PanelWindow *window)
+{
+  if (!gtk_widget_get_realized (GTK_WIDGET (window)))
+    return;
+
+  gboolean should_keep_bellow = window->keep_bellow && window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER;
+
+  if (should_keep_bellow)
+    gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_UTILITY);
+  else
+    gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_DOCK);
+
+  if (WINDOWING_IS_X11 ())
+    {
+      gtk_widget_hide (GTK_WIDGET (window));
+      gtk_widget_show (GTK_WIDGET (window));
+
+      /* set window to the back */
+      gtk_window_set_keep_below (GTK_WINDOW (window), TRUE);
+      gtk_window_set_skip_pager_hint (GTK_WINDOW (window), TRUE);
+      gtk_window_set_skip_taskbar_hint (GTK_WINDOW (window), TRUE);
+    }
+
+#ifdef HAVE_GTK_LAYER_SHELL
+  if (gtk_layer_is_supported ())
+    {
+      if (should_keep_bellow)
+        gtk_layer_set_layer (GTK_WINDOW (window), GTK_LAYER_SHELL_LAYER_BOTTOM);
+      else
+        gtk_layer_set_layer (GTK_WINDOW (window), GTK_LAYER_SHELL_LAYER_TOP);
+    }
+#endif
+}
+
+
+
+static void
 panel_window_init (PanelWindow *window)
 {
   window->id = -1;
@@ -648,6 +694,7 @@ panel_window_init (PanelWindow *window)
   window->xfw_active_window = NULL;
   window->struts_edge = STRUTS_EDGE_NONE;
   window->struts_enabled = TRUE;
+  window->keep_bellow = FALSE;
   window->mode = XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
   window->size = 48;
   window->icon_size = 0;
@@ -707,6 +754,9 @@ panel_window_init (PanelWindow *window)
    * works well on X11: on-demand layer-shell focus management is too temperamental */
   if (WINDOWING_IS_X11 ())
     g_signal_connect (window, "notify::is-active", G_CALLBACK (panel_window_is_active_changed), NULL);
+
+  /* Handle keep-bellow */
+  g_signal_connect (window, "notify::keep-bellow", G_CALLBACK (panel_window_keep_bellow_changed), NULL);
 }
 
 
@@ -788,6 +838,10 @@ panel_window_get_property (GObject *object,
 
     case PROP_ENABLE_STRUTS:
       g_value_set_boolean (value, window->struts_enabled);
+      break;
+
+    case PROP_KEEP_BELLOW:
+      g_value_set_boolean (value, window->keep_bellow);
       break;
 
     default:
@@ -988,6 +1042,10 @@ panel_window_set_property (GObject *object,
           window->struts_enabled = val_bool;
           panel_window_screen_layout_changed (window->screen, window);
         }
+      break;
+
+    case PROP_KEEP_BELLOW:
+      window->keep_bellow = g_value_get_boolean (value);
       break;
 
     default:
@@ -3628,6 +3686,9 @@ panel_window_set_autohide_behavior (PanelWindow *window,
       gtk_widget_destroy (window->autohide_window);
       window->autohide_window = NULL;
     }
+  panel_window_keep_bellow_changed (window);
+
+  g_warning ("Layer is %d and keep-bellow is %b", gtk_layer_get_layer (GTK_WINDOW (window)), window->keep_bellow);
 }
 
 
