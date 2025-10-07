@@ -647,27 +647,55 @@ panel_window_is_active_changed (PanelWindow *window)
 
 
 static void
-panel_window_keep_bellow_changed (PanelWindow *window)
+panel_window_keep_bellow (PanelWindow *window)
 {
+  gboolean      should_keep_bellow;
+  GdkX11Window *gdk_window;
+  Display      *x_display;
+  Window        x_window;
+
   if (!gtk_widget_get_realized (GTK_WIDGET (window)))
     return;
 
-  gboolean should_keep_bellow = window->keep_bellow && window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER;
-
-  if (should_keep_bellow)
-    gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_UTILITY);
-  else
-    gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_DOCK);
+  should_keep_bellow = window->keep_bellow && window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER;
 
   if (WINDOWING_IS_X11 ())
     {
       gtk_widget_hide (GTK_WIDGET (window));
       gtk_widget_show (GTK_WIDGET (window));
 
+      if (should_keep_bellow)
+        gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_NORMAL);
+      else
+        gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_DOCK);
+
       /* set window to the back */
-      gtk_window_set_keep_below (GTK_WINDOW (window), TRUE);
-      gtk_window_set_skip_pager_hint (GTK_WINDOW (window), TRUE);
-      gtk_window_set_skip_taskbar_hint (GTK_WINDOW (window), TRUE);
+      gtk_window_set_keep_below (GTK_WINDOW (window), should_keep_bellow);
+      gtk_window_set_skip_pager_hint (GTK_WINDOW (window), should_keep_bellow);
+      gtk_window_set_skip_taskbar_hint (GTK_WINDOW (window), should_keep_bellow);
+
+      /* make window sticky (GTK doesn't have a function for that :/ )*/
+      gdk_window = gtk_widget_get_window ( GTK_WIDGET (window));
+      x_display = GDK_WINDOW_XDISPLAY (gdk_window);
+      x_window = GDK_WINDOW_XID (gdk_window);
+
+      Atom _NET_WM_STATE = XInternAtom (x_display, "_NET_WM_STATE", FALSE);
+      Atom _NET_WM_STATE_STICKY = XInternAtom (x_display, "_NET_WM_STATE_STICKY", FALSE);
+
+      XEvent xevent = {0};
+      xevent.xclient.type = ClientMessage;
+      xevent.xclient.serial = 0;
+      xevent.xclient.send_event = True;
+      xevent.xclient.window = x_window;
+      xevent.xclient.message_type = _NET_WM_STATE;
+      xevent.xclient.format = 32;
+      xevent.xclient.data.l[0] = 1;  // _NET_WM_STATE_ADD
+      xevent.xclient.data.l[1] = _NET_WM_STATE_STICKY;
+
+      XSendEvent (x_display, DefaultRootWindow (x_display), False,
+                 SubstructureRedirectMask | SubstructureNotifyMask, &xevent);
+
+      XFlush (x_display);
     }
 
 #ifdef HAVE_GTK_LAYER_SHELL
@@ -754,9 +782,6 @@ panel_window_init (PanelWindow *window)
    * works well on X11: on-demand layer-shell focus management is too temperamental */
   if (WINDOWING_IS_X11 ())
     g_signal_connect (window, "notify::is-active", G_CALLBACK (panel_window_is_active_changed), NULL);
-
-  /* Handle keep-bellow */
-  g_signal_connect (window, "notify::keep-bellow", G_CALLBACK (panel_window_keep_bellow_changed), NULL);
 }
 
 
@@ -1046,6 +1071,7 @@ panel_window_set_property (GObject *object,
 
     case PROP_KEEP_BELLOW:
       window->keep_bellow = g_value_get_boolean (value);
+      panel_window_keep_bellow (window);
       break;
 
     default:
@@ -3686,9 +3712,9 @@ panel_window_set_autohide_behavior (PanelWindow *window,
       gtk_widget_destroy (window->autohide_window);
       window->autohide_window = NULL;
     }
-  panel_window_keep_bellow_changed (window);
 
-  g_warning ("Layer is %d and keep-bellow is %b", gtk_layer_get_layer (GTK_WINDOW (window)), window->keep_bellow);
+  /* change stacking order */
+  panel_window_keep_bellow (window);
 }
 
 
