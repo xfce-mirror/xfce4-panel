@@ -174,13 +174,13 @@ typedef GTypeModule XfcePanelTypeModule;
   } \
 \
   GType \
-    type_name##_get_type (void) \
+  type_name##_get_type (void) \
   { \
     return type_name##_type; \
   } \
 \
   void \
-    type_name##_register_type (XfcePanelTypeModule *type_module) \
+  type_name##_register_type (XfcePanelTypeModule *type_module) \
   { \
     GType plugin_define_type_id; \
     static const GTypeInfo plugin_define_type_info = { \
