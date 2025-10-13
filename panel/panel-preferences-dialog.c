@@ -1751,6 +1751,9 @@ panel_preferences_dialog_item_selection_changed (GtkTreeSelection *selection,
               panel_return_if_fail (GTK_IS_WIDGET (object));
               gtk_widget_set_sensitive (GTK_WIDGET (object), FALSE);
             }
+          object = gtk_builder_get_object (GTK_BUILDER (dialog), "item-remove");
+          panel_return_if_fail (GTK_IS_WIDGET (object));
+          gtk_widget_set_sensitive (GTK_WIDGET (object), TRUE);
           g_list_free (selected);
           return;
         }
@@ -1760,6 +1763,10 @@ panel_preferences_dialog_item_selection_changed (GtkTreeSelection *selection,
       items = panel_itembar_get_n_children (PANEL_ITEMBAR (itembar)) - 1;
 
       /* update sensitivity of buttons */
+      object = gtk_builder_get_object (GTK_BUILDER (dialog), "item-add");
+      panel_return_if_fail (GTK_IS_WIDGET (object));
+      gtk_widget_set_sensitive (GTK_WIDGET (object), TRUE);
+
       object = gtk_builder_get_object (GTK_BUILDER (dialog), "item-up");
       panel_return_if_fail (GTK_IS_WIDGET (object));
       gtk_widget_set_sensitive (GTK_WIDGET (object), !!(position > 0 && position <= items));
@@ -1795,6 +1802,9 @@ panel_preferences_dialog_item_selection_changed (GtkTreeSelection *selection,
           panel_return_if_fail (GTK_IS_WIDGET (object));
           gtk_widget_set_sensitive (GTK_WIDGET (object), FALSE);
         }
+      object = gtk_builder_get_object (GTK_BUILDER (dialog), "item-add");
+      panel_return_if_fail (GTK_IS_WIDGET (object));
+      gtk_widget_set_sensitive (GTK_WIDGET (object), TRUE);
     }
 }
 
