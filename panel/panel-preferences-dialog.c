@@ -521,6 +521,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   panel_preferences_dialog_bindings_add (dialog, "position-locked", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "autohide-behavior", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "enable-struts", "active", 0);
+  panel_preferences_dialog_bindings_add (dialog, "keep-below", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "size", "value", 0);
   panel_preferences_dialog_bindings_add (dialog, "nrows", "value", 0);
   panel_preferences_dialog_bindings_add (dialog, "length-adjust", "active", 0);
