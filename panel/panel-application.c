@@ -296,6 +296,7 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
     { "output-name", G_TYPE_STRING },
     { "position", G_TYPE_STRING },
     { "enable-struts", G_TYPE_BOOLEAN },
+    { "keep-below", G_TYPE_BOOLEAN },
     { NULL }
   };
   const PanelProperty global_properties[] = {

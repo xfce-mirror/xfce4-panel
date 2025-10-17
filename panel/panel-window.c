@@ -261,6 +261,7 @@ enum
   PROP_OUTPUT_NAME,
   PROP_POSITION,
   PROP_ENABLE_STRUTS,
+  PROP_KEEP_BELOW,
   PROP_DARK_MODE
 };
 
@@ -369,6 +370,7 @@ struct _PanelWindow
   StrutsEgde struts_edge;
   gulong struts[N_STRUTS];
   guint struts_enabled : 1;
+  guint keep_below : 1;
 
   /* dark mode */
   gboolean dark_mode;
@@ -577,6 +579,12 @@ panel_window_class_init (PanelWindowClass *klass)
                                                          TRUE,
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
+  g_object_class_install_property (gobject_class,
+                                   PROP_KEEP_BELOW,
+                                   g_param_spec_boolean ("keep-below", NULL, NULL,
+                                                         FALSE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
   gtk_widget_class_install_style_property (gtkwidget_class,
                                            g_param_spec_uint ("popup-delay",
                                                               NULL,
@@ -638,6 +646,51 @@ panel_window_is_active_changed (PanelWindow *window)
 
 
 static void
+panel_window_keep_below (PanelWindow *window)
+{
+  gboolean should_keep_below = window->keep_below && (window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER);
+
+#ifdef HAVE_GTK_LAYER_SHELL
+  if (gtk_layer_is_supported ())
+    {
+      if (should_keep_below)
+        gtk_layer_set_layer (GTK_WINDOW (window), GTK_LAYER_SHELL_LAYER_BOTTOM);
+      else
+        gtk_layer_set_layer (GTK_WINDOW (window), GTK_LAYER_SHELL_LAYER_TOP);
+    }
+#endif
+
+#ifdef ENABLE_X11
+  if (!WINDOWING_IS_X11 ())
+    return;
+
+  GdkX11Window *gdk_window;
+
+  gtk_widget_hide (GTK_WIDGET (window));
+
+  if (should_keep_below)
+    gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_UTILITY);
+  else
+    gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_DOCK);
+
+  gdk_window = gtk_widget_get_window (GTK_WIDGET (window));
+
+  /* Set motif hint to only close, so that WM won't Minimize window on "Showing Desktop" */
+  gdk_window_set_functions (gdk_window, GDK_FUNC_CLOSE);
+
+  /* Send proper hints */
+  gtk_window_set_keep_below (GTK_WINDOW (window), should_keep_below);
+  gtk_window_set_skip_pager_hint (GTK_WINDOW (window), should_keep_below);
+  gtk_window_set_skip_taskbar_hint (GTK_WINDOW (window), should_keep_below);
+  gtk_window_stick (GTK_WINDOW (window));
+
+  gtk_widget_show (GTK_WIDGET (window));
+#endif
+}
+
+
+
+static void
 panel_window_init (PanelWindow *window)
 {
   window->id = -1;
@@ -648,6 +701,7 @@ panel_window_init (PanelWindow *window)
   window->xfw_active_window = NULL;
   window->struts_edge = STRUTS_EDGE_NONE;
   window->struts_enabled = TRUE;
+  window->keep_below = FALSE;
   window->mode = XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
   window->size = 48;
   window->icon_size = 0;
@@ -788,6 +842,10 @@ panel_window_get_property (GObject *object,
 
     case PROP_ENABLE_STRUTS:
       g_value_set_boolean (value, window->struts_enabled);
+      break;
+
+    case PROP_KEEP_BELOW:
+      g_value_set_boolean (value, window->keep_below);
       break;
 
     default:
@@ -988,6 +1046,11 @@ panel_window_set_property (GObject *object,
           window->struts_enabled = val_bool;
           panel_window_screen_layout_changed (window->screen, window);
         }
+      break;
+
+    case PROP_KEEP_BELOW:
+      window->keep_below = g_value_get_boolean (value);
+      panel_window_keep_below (window);
       break;
 
     default:
@@ -3518,6 +3581,8 @@ panel_window_set_autohide_behavior (PanelWindow *window,
 {
   GtkWidget *popup;
   guint i;
+  gboolean should_remap;
+
   const gchar *properties[] = { "enter-opacity", "leave-opacity",
                                 "borders", "background-style",
                                 "background-rgba",
@@ -3528,6 +3593,9 @@ panel_window_set_autohide_behavior (PanelWindow *window,
   /* do nothing if the behavior hasn't changed at all */
   if (window->autohide_behavior == behavior)
     return;
+
+  should_remap = (window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER && behavior != AUTOHIDE_BEHAVIOR_NEVER) ||
+                 (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER && behavior == AUTOHIDE_BEHAVIOR_NEVER);
 
   /* remember the new behavior */
   window->autohide_behavior = behavior;
@@ -3628,6 +3696,10 @@ panel_window_set_autohide_behavior (PanelWindow *window,
       gtk_widget_destroy (window->autohide_window);
       window->autohide_window = NULL;
     }
+
+  /* change stacking order if autohide changed*/
+  if (should_remap)
+    panel_window_keep_below (window);
 }
 
 
