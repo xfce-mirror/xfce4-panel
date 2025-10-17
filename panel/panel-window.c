@@ -654,7 +654,7 @@ panel_window_keep_below (PanelWindow *window)
   Display *x_display;
   Window x_window;
 
-  should_keep_below = window->keep_below && window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER;
+  gboolean should_keep_below = window->keep_below && window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER;
 
 #ifdef HAVE_GTK_LAYER_SHELL
   if (WINDOWING_IS_WAYLAND () && gtk_layer_is_supported ())
