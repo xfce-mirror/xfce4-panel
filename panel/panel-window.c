@@ -370,7 +370,6 @@ struct _PanelWindow
   StrutsEgde struts_edge;
   gulong struts[N_STRUTS];
   guint struts_enabled : 1;
-
   guint keep_below : 1;
 
   /* dark mode */
