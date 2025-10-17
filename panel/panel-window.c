@@ -648,12 +648,7 @@ panel_window_is_active_changed (PanelWindow *window)
 static void
 panel_window_keep_below (PanelWindow *window)
 {
-  gboolean should_keep_below;
-  GdkX11Window *gdk_window;
-  Display *x_display;
-  Window x_window;
-
-  gboolean should_keep_below = window->keep_below && window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER;
+  gboolean should_keep_below = window->keep_below && (window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER);
 
 #ifdef HAVE_GTK_LAYER_SHELL
   if (gtk_layer_is_supported ())
@@ -669,6 +664,8 @@ panel_window_keep_below (PanelWindow *window)
   if (!WINDOWING_IS_X11 ())
     return;
 
+  GdkX11Window *gdk_window;
+
   gtk_widget_hide (GTK_WIDGET (window));
 
   if (should_keep_below)
@@ -677,8 +674,6 @@ panel_window_keep_below (PanelWindow *window)
     gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_DOCK);
 
   gdk_window = gtk_widget_get_window (GTK_WIDGET (window));
-  x_display = GDK_WINDOW_XDISPLAY (gdk_window);
-  x_window = GDK_WINDOW_XID (gdk_window);
 
   /* Set motif hint to only close, so that WM won't Minimize window on "Showing Desktop" */
   gdk_window_set_functions (gdk_window, GDK_FUNC_CLOSE);
@@ -687,26 +682,7 @@ panel_window_keep_below (PanelWindow *window)
   gtk_window_set_keep_below (GTK_WINDOW (window), should_keep_below);
   gtk_window_set_skip_pager_hint (GTK_WINDOW (window), should_keep_below);
   gtk_window_set_skip_taskbar_hint (GTK_WINDOW (window), should_keep_below);
-
-  /* Make window sticky (GTK doesn't have a function for that :/)*/
-  Atom _NET_WM_STATE = XInternAtom (x_display, "_NET_WM_STATE", FALSE);
-  Atom _NET_WM_STATE_STICKY = XInternAtom (x_display, "_NET_WM_STATE_STICKY", FALSE);
-
-  XEvent xevent = { 0 };
-  xevent.xclient.type = ClientMessage;
-  xevent.xclient.serial = 0;
-  xevent.xclient.send_event = True;
-  xevent.xclient.window = x_window;
-  xevent.xclient.message_type = _NET_WM_STATE;
-  xevent.xclient.format = 32;
-  xevent.xclient.data.l[0] = 1; // _NET_WM_STATE_ADD
-  xevent.xclient.data.l[1] = _NET_WM_STATE_STICKY;
-  xevent.xclient.data.l[2] = 0;
-
-  XSendEvent (x_display, DefaultRootWindow (x_display), FALSE,
-              SubstructureRedirectMask | SubstructureNotifyMask, &xevent);
-
-  XFlush (x_display);
+  gtk_window_stick (GTK_WINDOW (window));
 
   gtk_widget_show (GTK_WIDGET (window));
 #endif
@@ -3605,6 +3581,8 @@ panel_window_set_autohide_behavior (PanelWindow *window,
 {
   GtkWidget *popup;
   guint i;
+  gboolean should_remap;
+
   const gchar *properties[] = { "enter-opacity", "leave-opacity",
                                 "borders", "background-style",
                                 "background-rgba",
@@ -3615,6 +3593,9 @@ panel_window_set_autohide_behavior (PanelWindow *window,
   /* do nothing if the behavior hasn't changed at all */
   if (window->autohide_behavior == behavior)
     return;
+
+  should_remap = (window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER && behavior != AUTOHIDE_BEHAVIOR_NEVER) ||
+                 (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER && behavior == AUTOHIDE_BEHAVIOR_NEVER);
 
   /* remember the new behavior */
   window->autohide_behavior = behavior;
@@ -3716,8 +3697,10 @@ panel_window_set_autohide_behavior (PanelWindow *window,
       window->autohide_window = NULL;
     }
 
-  /* change stacking order */
-  panel_window_keep_below (window);
+  g_warning ("Should remap %b", should_remap);
+  /* change stacking order if autohide changed*/
+  if (should_remap)
+    panel_window_keep_below (window);
 }
 
 
