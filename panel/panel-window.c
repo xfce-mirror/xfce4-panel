@@ -676,7 +676,7 @@ panel_window_keep_below (PanelWindow *window)
   gdk_window = gtk_widget_get_window (GTK_WIDGET (window));
 
   /* Set motif hint to only close, so that WM won't Minimize window on "Showing Desktop" */
-  gdk_window_set_functions (gdk_window, GDK_FUNC_CLOSE);
+  gdk_window_set_functions (gtk_widget_get_window (GTK_WIDGET (window)), GDK_FUNC_CLOSE);
 
   /* Send proper hints */
   gtk_window_set_keep_below (GTK_WINDOW (window), should_keep_below);
