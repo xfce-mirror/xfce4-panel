@@ -648,7 +648,7 @@ panel_window_is_active_changed (PanelWindow *window)
 static void
 panel_window_keep_below (PanelWindow *window)
 {
-  gboolean should_keep_below = window->keep_below && (window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER);
+  gboolean should_keep_below = window->keep_below && window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER;
 
 #ifdef HAVE_GTK_LAYER_SHELL
   if (gtk_layer_is_supported ())
