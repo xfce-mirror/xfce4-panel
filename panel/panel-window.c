@@ -3698,7 +3698,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
       window->autohide_window = NULL;
     }
 
-  /* change stacking order if autohide changed*/
+  /* change stacking order if autohide changed */
   if (should_remap)
     panel_window_keep_below (window);
 }
