@@ -50,11 +50,13 @@ struct _WindowMenuPlugin
 
   /* settings */
   GObject *settings_dialog;
-  guint button_style : 1;
+  guint button_style : 2;
   guint workspace_actions : 1;
   guint workspace_names : 1;
   guint urgentcy_notification : 1;
+  guint active_window_italics : 1;
   guint all_workspaces : 1;
+  guint foreground_application_only : 1;
 
   /* urgent window counter */
   gint urgent_windows;
@@ -72,13 +74,16 @@ enum
   PROP_WORKSPACE_ACTIONS,
   PROP_WORKSPACE_NAMES,
   PROP_URGENTCY_NOTIFICATION,
-  PROP_ALL_WORKSPACES
+  PROP_ACTIVE_WINDOW_ITALICS,
+  PROP_ALL_WORKSPACES,
+  PROP_FOREGROUND_APPLICATION_ONLY
 };
 
 enum
 {
   BUTTON_STYLE_ICON = 0,
-  BUTTON_STYLE_ARROW
+  BUTTON_STYLE_ARROW,
+  BUTTON_STYLE_TEXT
 };
 
 
@@ -108,6 +113,9 @@ window_menu_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
 static gboolean
 window_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                                  gint size);
+static void
+window_menu_plugin_mode_changed (XfcePanelPlugin *panel_plugin,
+                                 XfcePanelPluginMode mode);
 static void
 window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin);
 static gboolean
@@ -170,6 +178,7 @@ window_menu_plugin_class_init (WindowMenuPluginClass *klass)
   plugin_class->free_data = window_menu_plugin_free_data;
   plugin_class->screen_position_changed = window_menu_plugin_screen_position_changed;
   plugin_class->size_changed = window_menu_plugin_size_changed;
+  plugin_class->mode_changed = window_menu_plugin_mode_changed;
   plugin_class->configure_plugin = window_menu_plugin_configure_plugin;
   plugin_class->remote_event = window_menu_plugin_remote_event;
 
@@ -178,7 +187,7 @@ window_menu_plugin_class_init (WindowMenuPluginClass *klass)
                                    g_param_spec_uint ("style",
                                                       NULL, NULL,
                                                       BUTTON_STYLE_ICON,
-                                                      BUTTON_STYLE_ARROW,
+                                                      BUTTON_STYLE_TEXT,
                                                       BUTTON_STYLE_ICON,
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
@@ -204,8 +213,22 @@ window_menu_plugin_class_init (WindowMenuPluginClass *klass)
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_ACTIVE_WINDOW_ITALICS,
+                                   g_param_spec_boolean ("active-window-italics",
+                                                         NULL, NULL,
+                                                         TRUE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_ALL_WORKSPACES,
                                    g_param_spec_boolean ("all-workspaces",
+                                                         NULL, NULL,
+                                                         TRUE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+ 
+  g_object_class_install_property (gobject_class,
+                                   PROP_FOREGROUND_APPLICATION_ONLY,
+                                   g_param_spec_boolean ("foreground-application-only",
                                                          NULL, NULL,
                                                          TRUE,
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
@@ -246,7 +269,9 @@ window_menu_plugin_init (WindowMenuPlugin *plugin)
   plugin->workspace_actions = FALSE;
   plugin->workspace_names = WINDOWING_IS_X11 ();
   plugin->urgentcy_notification = TRUE;
+  plugin->active_window_italics = TRUE;
   plugin->all_workspaces = WINDOWING_IS_X11 ();
+  plugin->foreground_application_only = FALSE;
   plugin->urgent_windows = 0;
   plugin->minimized_icon_lucency = DEFAULT_MINIMIZED_ICON_LUCENCY;
   plugin->ellipsize_mode = DEFAULT_ELLIPSIZE_MODE;
@@ -260,6 +285,8 @@ window_menu_plugin_init (WindowMenuPlugin *plugin)
   gtk_widget_set_name (plugin->button, "windowmenu-button");
   g_signal_connect (G_OBJECT (plugin->button), "toggled",
                     G_CALLBACK (window_menu_plugin_menu), plugin);
+
+  /* start with the icon widget and a default icon */
 
   plugin->icon = gtk_image_new_from_icon_name ("user-desktop", GTK_ICON_SIZE_BUTTON);
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
@@ -293,9 +320,17 @@ window_menu_plugin_get_property (GObject *object,
     case PROP_URGENTCY_NOTIFICATION:
       g_value_set_boolean (value, plugin->urgentcy_notification);
       break;
+    
+    case PROP_ACTIVE_WINDOW_ITALICS:
+      g_value_set_boolean (value, plugin->active_window_italics);
+      break;
 
     case PROP_ALL_WORKSPACES:
       g_value_set_boolean (value, plugin->all_workspaces);
+      break;
+      
+    case PROP_FOREGROUND_APPLICATION_ONLY:
+      g_value_set_boolean (value, plugin->foreground_application_only);
       break;
 
     default:
@@ -324,14 +359,48 @@ window_menu_plugin_set_property (GObject *object,
     case PROP_STYLE:
       button_style = g_value_get_uint (value);
       if (plugin->button_style != button_style)
+          /* button style has been changed */
         {
+          /* destroy previous widget, at the same time removing it from the button */
+ 
+          if(plugin->button_style == BUTTON_STYLE_ICON ||
+             plugin->button_style == BUTTON_STYLE_TEXT)
+             gtk_widget_destroy(plugin->icon);
+  
+  /* plugin->icon can reference an icon or a label widget, depending on button_style.
+   * Since at most either one is in use at a given time, why not recycle the same variable
+   * and save introducing another one? Admittingly, this might look confusing, hence this
+   * remark */
+  
           plugin->button_style = button_style;
 
-          /* show or hide the icon */
-          if (button_style == BUTTON_STYLE_ICON)
+          /* add newly selected object to button: */
+          switch(button_style)
+          {
+          case BUTTON_STYLE_ICON:
+            plugin->icon = gtk_image_new();
+            gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
             gtk_widget_show (plugin->icon);
-          else
-            gtk_widget_hide (plugin->icon);
+            break;
+            
+          case BUTTON_STYLE_TEXT:
+            {
+            gchar *formatted_text;
+            
+            plugin->icon = gtk_label_new (NULL);
+            /* actually it's not an icon, but a label; see comment above */
+
+            /* make sure the label is not printed in bold which is the default: */         
+            formatted_text = g_markup_printf_escaped("<span weight=\"normal\">%s</span>",_("Windows"));
+            gtk_label_set_markup(GTK_LABEL(plugin->icon), formatted_text);
+            g_free(formatted_text);
+            gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
+            window_menu_plugin_mode_changed(panel_plugin,
+                             xfce_panel_plugin_get_mode (panel_plugin));
+            gtk_widget_show (plugin->icon);
+            }
+            break;
+          }
 
           /* update the plugin */
           xfce_panel_plugin_set_small (panel_plugin, plugin->button_style == BUTTON_STYLE_ICON);
@@ -368,8 +437,16 @@ window_menu_plugin_set_property (GObject *object,
         }
       break;
 
+    case PROP_ACTIVE_WINDOW_ITALICS:
+      plugin->active_window_italics = g_value_get_boolean (value);
+      break;
+
     case PROP_ALL_WORKSPACES:
       plugin->all_workspaces = WINDOWING_IS_X11 () && g_value_get_boolean (value);
+      break;
+
+    case PROP_FOREGROUND_APPLICATION_ONLY:
+      plugin->foreground_application_only = g_value_get_boolean (value);
       break;
 
     default:
@@ -471,7 +548,9 @@ window_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "workspace-actions", G_TYPE_BOOLEAN },
     { "workspace-names", G_TYPE_BOOLEAN },
     { "urgentcy-notification", G_TYPE_BOOLEAN },
+    { "active-window-italics", G_TYPE_BOOLEAN },
     { "all-workspaces", G_TYPE_BOOLEAN },
+    { "foreground-application-only", G_TYPE_BOOLEAN },
     { NULL }
   };
 
@@ -553,7 +632,7 @@ window_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
     }
   else
     {
-      /* set the size of the arrow button */
+      /* set the size of the arrow button or text */
       if (xfce_panel_plugin_get_orientation (panel_plugin) == GTK_ORIENTATION_HORIZONTAL)
         {
           gtk_widget_get_preferred_width (plugin->button, NULL, &button_size);
@@ -572,7 +651,19 @@ window_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   return TRUE;
 }
 
+static void
+window_menu_plugin_mode_changed(XfcePanelPlugin *panel_plugin, XfcePanelPluginMode mode)
+{
+  WindowMenuPlugin *plugin = WINDOW_MENU_PLUGIN (panel_plugin);
 
+  if(plugin->button_style == BUTTON_STYLE_TEXT)
+  {
+    /* code copied from actions.c: */
+    gtk_label_set_angle (GTK_LABEL (plugin->icon), (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL) ? 270 : 0);
+    gtk_label_set_ellipsize (GTK_LABEL (plugin->icon),
+      (mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR) ? PANGO_ELLIPSIZE_END : PANGO_ELLIPSIZE_NONE);
+  }
+}
 
 static void
 window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
@@ -582,7 +673,8 @@ window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   GObject *object;
   guint i;
   const gchar *names[] = { "workspace-actions", "workspace-names",
-                           "urgentcy-notification", "all-workspaces",
+                           "urgentcy-notification", "active-window-italics",
+                           "all-workspaces", "foreground-application-only",
                            "style" };
 
   /* setup the dialog */
@@ -1097,9 +1189,11 @@ window_menu_plugin_menu_window_item_new (XfwWindow *window,
   label = gtk_bin_get_child (GTK_BIN (mi));
   panel_return_val_if_fail (GTK_IS_LABEL (label), NULL);
   /* modify the label font if needed */
-  if (xfw_window_is_active (window))
+  if (plugin->active_window_italics && xfw_window_is_active (window))
     label_text = g_strdup_printf ("<b><i>%s</i></b>", name);
-  else if (xfw_window_is_urgent (window))
+  /* if active_window_italics is configured to false (not ticked), display
+     active window in bold only (as for urgent windows in any case) */
+  else if (xfw_window_is_active (window) || xfw_window_is_urgent (window))
     label_text = g_strdup_printf ("<b>%s</b>", name);
   if (label_text)
     {
@@ -1260,6 +1354,9 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
   const gchar *name = NULL;
   gchar *utf8 = NULL, *label;
   gint size;
+  XfwApplication *foregroundapplication = NULL;
+  /* needs to be intzialize for the compiler not to act up, because otherwise it believes it
+   * might be used unitialized (which would not be the case) */
 
   panel_return_val_if_fail (WINDOW_MENU_IS_PLUGIN (plugin), NULL);
   panel_return_val_if_fail (XFW_IS_SCREEN (plugin->screen), NULL);
@@ -1289,6 +1386,14 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
       fake.next = fake.prev = NULL;
       fake.data = active_workspace;
       workspaces = &fake;
+    }
+    
+  if (plugin->foreground_application_only)
+    {
+      /* which application is currently in foreground? */
+      /* (not relevant and thus skipped if foreground_application_only is not set) */
+      foregroundapplication =
+        xfw_window_get_application(xfw_screen_get_active_window(plugin->screen));
     }
 
   for (lp = workspaces; lp != NULL; lp = lp->next, n_workspaces++)
@@ -1324,6 +1429,11 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
           if (window_workspace != workspace
               && !(window_workspace == NULL
                    && workspace == active_workspace))
+            continue;
+            
+          /* show only windows from the current foreground application */
+          if (plugin->foreground_application_only
+              && xfw_window_get_application(window) != foregroundapplication)
             continue;
 
           /* create the menu item */
