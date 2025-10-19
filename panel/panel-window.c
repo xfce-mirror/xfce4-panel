@@ -684,7 +684,7 @@ panel_window_keep_below (PanelWindow *window)
   gtk_window_set_skip_taskbar_hint (GTK_WINDOW (window), should_keep_below);
   gtk_window_stick (GTK_WINDOW (window));
 
-  gtk_widget_show (GTK_WIDGET (window));
+  panel_utils_widget_remap (GTK_WIDGET (window));
 #endif
 }
 
