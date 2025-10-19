@@ -660,32 +660,24 @@ panel_window_keep_below (PanelWindow *window)
     }
 #endif
 
-#ifdef ENABLE_X11
-  if (!WINDOWING_IS_X11 ())
-    return;
+  if (WINDOWING_IS_X11 ())
+    {
+      if (should_keep_below)
+        gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_UTILITY);
+      else
+        gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_DOCK);
 
-  GdkX11Window *gdk_window;
+      /* Set motif hint to only close, so that WM won't Minimize window on "Showing Desktop" */
+      gdk_window_set_functions (gtk_widget_get_window (GTK_WIDGET (window)), GDK_FUNC_CLOSE);
 
-  gtk_widget_hide (GTK_WIDGET (window));
-
-  if (should_keep_below)
-    gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_UTILITY);
-  else
-    gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_DOCK);
-
-  gdk_window = gtk_widget_get_window (GTK_WIDGET (window));
-
-  /* Set motif hint to only close, so that WM won't Minimize window on "Showing Desktop" */
-  gdk_window_set_functions (gtk_widget_get_window (GTK_WIDGET (window)), GDK_FUNC_CLOSE);
-
-  /* Send proper hints */
-  gtk_window_set_keep_below (GTK_WINDOW (window), should_keep_below);
-  gtk_window_set_skip_pager_hint (GTK_WINDOW (window), should_keep_below);
-  gtk_window_set_skip_taskbar_hint (GTK_WINDOW (window), should_keep_below);
-  gtk_window_stick (GTK_WINDOW (window));
+      /* Send proper hints */
+      gtk_window_set_keep_below (GTK_WINDOW (window), should_keep_below);
+      gtk_window_set_skip_pager_hint (GTK_WINDOW (window), should_keep_below);
+      gtk_window_set_skip_taskbar_hint (GTK_WINDOW (window), should_keep_below);
+      gtk_window_stick (GTK_WINDOW (window));
+    }
 
   panel_utils_widget_remap (GTK_WIDGET (window));
-#endif
 }
 
 
