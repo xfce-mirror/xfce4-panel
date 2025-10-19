@@ -114,12 +114,6 @@ panel_item_list_model_class_init (PanelItemListModelClass *klass)
 static void
 panel_item_list_model_init (PanelItemListModel *model)
 {
-  g_object_set (model, "list-flags",
-                XFCE_ITEM_LIST_MODEL_REORDERABLE
-                  | XFCE_ITEM_LIST_MODEL_EDITABLE
-                  | XFCE_ITEM_LIST_MODEL_ADDABLE
-                  | XFCE_ITEM_LIST_MODEL_REMOVABLE,
-                NULL);
   model->application = panel_application_get ();
   model->channel = xfconf_channel_get (XFCE_PANEL_CHANNEL_NAME);
 }
@@ -287,6 +281,21 @@ panel_item_list_model_set_panel (PanelItemListModel *model,
       model->itembar = g_object_ref (itembar);
       g_signal_connect_swapped (model->itembar, "changed", G_CALLBACK (panel_item_list_model_reload), model);
     }
+
+  if (panel == NULL || panel_window_get_locked (panel))
+    {
+      g_object_set (model, "list-flags", XFCE_ITEM_LIST_MODEL_NONE, NULL);
+    }
+  else
+    {
+      g_object_set (model, "list-flags",
+                    XFCE_ITEM_LIST_MODEL_REORDERABLE
+                      | XFCE_ITEM_LIST_MODEL_EDITABLE
+                      | XFCE_ITEM_LIST_MODEL_ADDABLE
+                      | XFCE_ITEM_LIST_MODEL_REMOVABLE,
+                    NULL);
+    }
+
 
   panel_item_list_model_reload (model);
 }
