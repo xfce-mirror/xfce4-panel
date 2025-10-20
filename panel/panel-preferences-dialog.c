@@ -521,6 +521,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   panel_preferences_dialog_bindings_add (dialog, "position-locked", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "autohide-behavior", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "enable-struts", "active", 0);
+  panel_preferences_dialog_bindings_add (dialog, "keep-below", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "size", "value", 0);
   panel_preferences_dialog_bindings_add (dialog, "nrows", "value", 0);
   panel_preferences_dialog_bindings_add (dialog, "length-adjust", "active", 0);
@@ -727,20 +728,29 @@ static void
 panel_preferences_dialog_autohide_changed (GtkComboBox *combobox,
                                            PanelPreferencesDialog *dialog)
 {
-  GObject *object;
+  GObject *struts_object, *below_object;
 
   panel_return_if_fail (GTK_IS_COMBO_BOX (combobox));
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
   panel_return_if_fail (PANEL_WINDOW (dialog->active));
 
-  object = gtk_builder_get_object (GTK_BUILDER (dialog), "enable-struts");
-  panel_return_if_fail (GTK_IS_WIDGET (object));
+  struts_object = gtk_builder_get_object (GTK_BUILDER (dialog), "enable-struts");
+  panel_return_if_fail (GTK_IS_WIDGET (struts_object));
+
+  below_object = gtk_builder_get_object (GTK_BUILDER (dialog), "keep-below");
+  panel_return_if_fail (GTK_IS_WIDGET (struts_object));
 
   /* make "don't reserve space on borders" sensitive only when autohide is disabled */
   if (gtk_combo_box_get_active (combobox) == 0)
-    gtk_widget_set_sensitive (GTK_WIDGET (object), TRUE);
+    {
+      gtk_widget_set_sensitive (GTK_WIDGET (struts_object), TRUE);
+      gtk_widget_set_sensitive (GTK_WIDGET (below_object), TRUE);
+    }
   else
-    gtk_widget_set_sensitive (GTK_WIDGET (object), FALSE);
+    {
+      gtk_widget_set_sensitive (GTK_WIDGET (struts_object), FALSE);
+      gtk_widget_set_sensitive (GTK_WIDGET (below_object), FALSE);
+    }
 }
 
 
