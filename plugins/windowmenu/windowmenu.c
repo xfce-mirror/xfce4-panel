@@ -50,7 +50,7 @@ struct _WindowMenuPlugin
 
   /* settings */
   GObject *settings_dialog;
-  guint button_style : 1;
+  guint button_style : 2;
   guint workspace_actions : 1;
   guint workspace_names : 1;
   guint urgentcy_notification : 1;
@@ -78,7 +78,8 @@ enum
 enum
 {
   BUTTON_STYLE_ICON = 0,
-  BUTTON_STYLE_ARROW
+  BUTTON_STYLE_ARROW,
+  BUTTON_STYLE_TEXT
 };
 
 
@@ -108,6 +109,9 @@ window_menu_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
 static gboolean
 window_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                                  gint size);
+static void
+window_menu_plugin_mode_changed (XfcePanelPlugin *panel_plugin,
+                                 XfcePanelPluginMode mode);
 static void
 window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin);
 static gboolean
@@ -170,6 +174,7 @@ window_menu_plugin_class_init (WindowMenuPluginClass *klass)
   plugin_class->free_data = window_menu_plugin_free_data;
   plugin_class->screen_position_changed = window_menu_plugin_screen_position_changed;
   plugin_class->size_changed = window_menu_plugin_size_changed;
+  plugin_class->mode_changed = window_menu_plugin_mode_changed;
   plugin_class->configure_plugin = window_menu_plugin_configure_plugin;
   plugin_class->remote_event = window_menu_plugin_remote_event;
 
@@ -178,7 +183,7 @@ window_menu_plugin_class_init (WindowMenuPluginClass *klass)
                                    g_param_spec_uint ("style",
                                                       NULL, NULL,
                                                       BUTTON_STYLE_ICON,
-                                                      BUTTON_STYLE_ARROW,
+                                                      BUTTON_STYLE_TEXT,
                                                       BUTTON_STYLE_ICON,
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
@@ -324,14 +329,48 @@ window_menu_plugin_set_property (GObject *object,
     case PROP_STYLE:
       button_style = g_value_get_uint (value);
       if (plugin->button_style != button_style)
+          /* button style has been changed */
         {
+          /* destroy previous widget, at the same time removing it from the button */
+ 
+          if(plugin->button_style == BUTTON_STYLE_ICON ||
+             plugin->button_style == BUTTON_STYLE_TEXT)
+             gtk_widget_destroy(plugin->icon);
+  
+  /* plugin->icon can reference an icon or a label widget, depending on button_style.
+   * Since at most either one is in use at a given time, why not recycle the same variable
+   * and save introducing another one? Admittingly, this might look confusing, hence this
+   * remark */
+  
           plugin->button_style = button_style;
 
-          /* show or hide the icon */
-          if (button_style == BUTTON_STYLE_ICON)
+          /* add newly selected object to button: */
+          switch(button_style)
+          {
+          case BUTTON_STYLE_ICON:
+            plugin->icon = gtk_image_new();
+            gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
             gtk_widget_show (plugin->icon);
-          else
-            gtk_widget_hide (plugin->icon);
+            break;
+            
+          case BUTTON_STYLE_TEXT:
+            {
+            gchar *formatted_text;
+            
+            plugin->icon = gtk_label_new (NULL);
+            /* actually it's not an icon, but a label; see comment above */
+
+            /* make sure the label is not printed in bold which is the default: */         
+            formatted_text = g_markup_printf_escaped("<span weight=\"normal\">%s</span>",_("Windows"));
+            gtk_label_set_markup(GTK_LABEL(plugin->icon), formatted_text);
+            g_free(formatted_text);
+            gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
+            window_menu_plugin_mode_changed(panel_plugin,
+                             xfce_panel_plugin_get_mode (panel_plugin));
+            gtk_widget_show (plugin->icon);
+            }
+            break;
+          }
 
           /* update the plugin */
           xfce_panel_plugin_set_small (panel_plugin, plugin->button_style == BUTTON_STYLE_ICON);
@@ -553,7 +592,7 @@ window_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
     }
   else
     {
-      /* set the size of the arrow button */
+      /* set the size of the arrow button or text */
       if (xfce_panel_plugin_get_orientation (panel_plugin) == GTK_ORIENTATION_HORIZONTAL)
         {
           gtk_widget_get_preferred_width (plugin->button, NULL, &button_size);
@@ -572,7 +611,19 @@ window_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   return TRUE;
 }
 
+static void
+window_menu_plugin_mode_changed(XfcePanelPlugin *panel_plugin, XfcePanelPluginMode mode)
+{
+  WindowMenuPlugin *plugin = WINDOW_MENU_PLUGIN (panel_plugin);
 
+  if(plugin->button_style == BUTTON_STYLE_TEXT)
+  {
+    /* code copied from actions.c: */
+    gtk_label_set_angle (GTK_LABEL (plugin->icon), (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL) ? 270 : 0);
+    gtk_label_set_ellipsize (GTK_LABEL (plugin->icon),
+      (mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR) ? PANGO_ELLIPSIZE_END : PANGO_ELLIPSIZE_NONE);
+  }
+}
 
 static void
 window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
