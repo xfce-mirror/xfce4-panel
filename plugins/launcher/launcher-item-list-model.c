@@ -163,6 +163,7 @@ launcher_item_list_model_get_item_value (XfceItemListModel *list_model,
     case XFCE_ITEM_LIST_MODEL_COLUMN_REMOVABLE:
       gboolean removable = FALSE;
       gboolean editable = launcher_plugin_item_is_editable (model->plugin, item, &removable);
+
       g_value_set_boolean (value, editable && removable);
       break;
     }

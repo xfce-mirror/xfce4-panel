@@ -253,7 +253,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   g_signal_connect (G_OBJECT (object), "file-set",
                     G_CALLBACK (panel_preferences_dialog_bg_image_file_set), dialog);
 
-  /* PanelItemListView */
+  /* get item_list_view */
   dialog->item_list_view = GTK_WIDGET (gtk_builder_get_object (GTK_BUILDER (dialog), "item-list-view"));
 
   /* connect the output changed signal */
@@ -812,8 +812,9 @@ panel_preferences_dialog_panel_sensitive (PanelPreferencesDialog *dialog)
   panel_return_if_fail (GTK_IS_WIDGET (object));
   gtk_widget_set_sensitive (GTK_WIDGET (object), !locked);
 
-  /* Installing a new model */
+  /* install new model */
   XfceItemListModel *list_model = panel_item_list_model_new (dialog->active);
+
   panel_item_list_view_set_model (PANEL_ITEM_LIST_VIEW (dialog->item_list_view), PANEL_ITEM_LIST_MODEL (list_model));
   g_object_unref (list_model);
 }
