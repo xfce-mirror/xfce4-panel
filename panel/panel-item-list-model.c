@@ -350,6 +350,7 @@ panel_item_list_model_get_launcher_keyfile (PanelItemListModel *model,
         }
       g_strfreev (desktop_files);
     }
+  g_free (property_name);
   return keyfile;
 }
 

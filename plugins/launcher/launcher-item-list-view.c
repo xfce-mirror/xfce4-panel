@@ -156,7 +156,7 @@ launcher_item_list_view_init (LauncherItemListView *view)
   g_clear_object (&new_item_icon);
   g_clear_pointer (&new_item_icon_value, g_variant_unref);
 
-  /* Create "New Link" item */
+  /* create "New Link" item */
   GMenuItem *new_link_item = g_menu_item_new (NULL, "launcher-item-list-view.new-link");
   GIcon *new_link_icon = g_themed_icon_new ("applications-internet-symbolic");
   GVariant *new_link_icon_value = g_icon_serialize (new_link_icon);
