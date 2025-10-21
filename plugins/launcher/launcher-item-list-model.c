@@ -198,9 +198,11 @@ launcher_item_list_model_save (LauncherItemListModel *model)
       g_ptr_array_add (save_items, save_item);
     }
 
+  g_signal_handlers_block_by_func (model->plugin, G_CALLBACK (launcher_item_list_model_reload), model);
   g_object_set (model->plugin, "items", save_items, NULL);
-  xfconf_array_free (save_items);
+  g_signal_handlers_unblock_by_func (model->plugin, G_CALLBACK (launcher_item_list_model_reload), model);
 
+  xfconf_array_free (save_items);
   launcher_item_list_model_reload_items (model);
 }
 
