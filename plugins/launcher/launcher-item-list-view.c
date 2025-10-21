@@ -308,14 +308,17 @@ launcher_item_list_view_select_n_last (LauncherItemListView *view,
 
   for (gint i = index_start; i < n_items; ++i)
     {
+      if (i == index_start)
+        {
+          GtkTreePath *cursor_path = gtk_tree_path_new_from_indices (index_start, -1);
+          gtk_tree_view_set_cursor (GTK_TREE_VIEW (tree_view), cursor_path, NULL, FALSE);
+          gtk_tree_path_free (cursor_path);
+        }
+
       GtkTreePath *path = gtk_tree_path_new_from_indices (i, -1);
       gtk_tree_selection_select_path (selection, path);
       gtk_tree_path_free (path);
     }
-
-  GtkTreePath *path = gtk_tree_path_new_from_indices (index_start, -1);
-  gtk_tree_view_set_cursor (GTK_TREE_VIEW (tree_view), path, NULL, FALSE);
-  gtk_tree_path_free (path);
 }
 
 
