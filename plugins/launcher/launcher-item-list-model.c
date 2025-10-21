@@ -187,6 +187,7 @@ launcher_item_list_model_remove (XfceItemListModel *list_model,
 static void
 launcher_item_list_model_save (LauncherItemListModel *model)
 {
+  /* create an array to save */
   GPtrArray *save_items = g_ptr_array_new ();
 
   for (GSList *l = model->items; l != NULL; l = l->next)
@@ -198,11 +199,15 @@ launcher_item_list_model_save (LauncherItemListModel *model)
       g_ptr_array_add (save_items, save_item);
     }
 
+  /* save */
   g_signal_handlers_block_by_func (model->plugin, G_CALLBACK (launcher_item_list_model_reload), model);
-  g_object_set (model->plugin, "items", save_items, NULL);
+  {
+    g_object_set (model->plugin, "items", save_items, NULL);
+  }
   g_signal_handlers_unblock_by_func (model->plugin, G_CALLBACK (launcher_item_list_model_reload), model);
-
   xfconf_array_free (save_items);
+
+  /* reload model */
   launcher_item_list_model_reload_items (model);
 }
 
@@ -273,13 +278,18 @@ launcher_item_list_model_insert (LauncherItemListModel *model,
 
   for (GList *l = items; l != NULL; l = l->next, ++index)
     {
+      /* insert */
       model->items = g_slist_insert (model->items, g_object_ref (l->data), index);
 
+      /* GtkTreeModel signals */
       GtkTreePath *path = gtk_tree_path_new_from_indices (index, -1);
       GtkTreeIter iter;
+
       xfce_item_list_model_set_index (XFCE_ITEM_LIST_MODEL (model), &iter, index);
       gtk_tree_model_row_inserted (GTK_TREE_MODEL (model), path, &iter);
       gtk_tree_path_free (path);
     }
+
+  /* save state */
   launcher_item_list_model_save (model);
 }

@@ -48,6 +48,7 @@ enum
 };
 
 
+
 static void
 launcher_dialog_add_store_insert (gpointer key,
                                   gpointer value,
@@ -75,15 +76,19 @@ launcher_dialog_add_store_insert (gpointer key,
                                   gpointer value,
                                   gpointer user_data)
 {
+  /* Append row */
   GarconMenuItem *item = GARCON_MENU_ITEM (value);
   GtkTreeModel *model = GTK_TREE_MODEL (user_data);
   GtkListStore *store = user_data;
   GtkTreeIter iter;
 
   gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+
+  /* Filling a row */
   GIcon *icon = launcher_get_item_icon (item);
   gchar *name = launcher_get_item_name (item);
   gchar *tooltip = launcher_get_item_tooltip (item);
+
   gtk_list_store_set (store, &iter,
                       COL_ICON, icon,
                       COL_NAME, name,
@@ -118,6 +123,7 @@ launcher_dialog_edit_show (LauncherPluginDialog *dialog,
                            const gchar *type)
 {
   gchar *command = NULL;
+
   if (uri != NULL)
     {
       command = g_strdup_printf ("xfce-desktop-item-edit '%s'", uri);
@@ -125,6 +131,7 @@ launcher_dialog_edit_show (LauncherPluginDialog *dialog,
   else
     {
       gchar *filename = launcher_plugin_unique_filename (dialog->plugin);
+
       command = g_strdup_printf ("xfce-desktop-item-edit -t %s -c '%s'", type, filename);
       g_free (filename);
     }
@@ -133,9 +140,11 @@ launcher_dialog_edit_show (LauncherPluginDialog *dialog,
   GtkWidget *widget = GTK_WIDGET (gtk_builder_get_object (dialog->builder, "dialog"));
   GdkScreen *screen = gtk_widget_get_screen (widget);
   GError *error = NULL;
+
   if (!xfce_spawn_command_line (screen, command, FALSE, FALSE, TRUE, &error))
     {
       GtkWidget *toplevel = gtk_widget_get_toplevel (widget);
+
       xfce_dialog_show_error (GTK_WINDOW (toplevel), error, _("Failed to open desktop item editor"));
       g_error_free (error);
     }
@@ -323,6 +332,7 @@ launcher_dialog_add_response (GtkWidget *widget,
       GList *list = gtk_tree_selection_get_selected_rows (selection, &add_model);
       GList *items = NULL;
 
+      /* creating a list of items */
       for (GList *l = list; l != NULL; l = l->next)
         {
           GarconMenuItem *item;
@@ -336,7 +346,9 @@ launcher_dialog_add_response (GtkWidget *widget,
             items = g_list_append (items, item);
         }
 
+      /* adding new items */
       GObject *item_list_view = gtk_builder_get_object (dialog->builder, "item-list-view");
+      
       launcher_item_list_view_append (LAUNCHER_ITEM_LIST_VIEW (item_list_view), items);
 
       g_list_free (list);
@@ -460,7 +472,10 @@ launcher_dialog_show (LauncherPlugin *plugin)
   object = gtk_builder_get_object (builder, "item-list-view");
   g_signal_connect_swapped (object, "add-item", G_CALLBACK (launcher_dialog_add_show), dialog);
   g_signal_connect_swapped (object, "edit-item", G_CALLBACK (launcher_dialog_edit_show), dialog);
+
+  /* install model */
   XfceItemListModel *model = launcher_item_list_model_new (plugin);
+
   launcher_item_list_view_set_model (LAUNCHER_ITEM_LIST_VIEW (object), LAUNCHER_ITEM_LIST_MODEL (model));
   g_object_unref (model);
 

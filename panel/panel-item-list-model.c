@@ -25,6 +25,8 @@
 
 #include "common/panel-private.h"
 
+
+
 struct _PanelItemListModel
 {
   XfceItemListModel __parent__;
@@ -190,21 +192,15 @@ panel_item_list_model_get_item_value (XfceItemListModel *list_model,
       break;
 
     case XFCE_ITEM_LIST_MODEL_COLUMN_ICON:
-      GIcon *icon = panel_item_list_model_get_item_icon (model, index);
-      g_value_set_object (value, icon);
-      g_object_unref (icon);
+      g_value_take_object (value, panel_item_list_model_get_item_icon (model, index));
       break;
 
     case XFCE_ITEM_LIST_MODEL_COLUMN_NAME:
-      gchar *name = panel_item_list_model_get_item_name (model, index);
-      g_value_set_string (value, name);
-      g_free (name);
+      g_value_take_string (value, panel_item_list_model_get_item_name (model, index));
       break;
 
     case XFCE_ITEM_LIST_MODEL_COLUMN_TOOLTIP:
-      gchar *tooltip = panel_item_list_model_get_item_tooltip (model, index);
-      g_value_set_string (value, tooltip);
-      g_free (tooltip);
+      g_value_take_string (value, panel_item_list_model_get_item_tooltip (model, index));
       break;
 
     case XFCE_ITEM_LIST_MODEL_COLUMN_EDITABLE:
@@ -268,35 +264,35 @@ static void
 panel_item_list_model_set_panel (PanelItemListModel *model,
                                  PanelWindow *panel)
 {
+  /* clear old data */
   if (model->itembar != NULL)
     g_signal_handlers_disconnect_by_data (model->itembar, model);
 
   g_clear_object (&model->panel);
   g_clear_object (&model->itembar);
 
+  /* install new data */
   if (panel != NULL)
     {
       PanelItembar *itembar = PANEL_ITEMBAR (gtk_bin_get_child (GTK_BIN (panel)));
+
       model->panel = g_object_ref (panel);
       model->itembar = g_object_ref (itembar);
       g_signal_connect_swapped (model->itembar, "changed", G_CALLBACK (panel_item_list_model_reload), model);
     }
 
-  if (panel == NULL || panel_window_get_locked (panel))
+  /* setup list-flags */
+  XfceItemListModelFlags list_flags = XFCE_ITEM_LIST_MODEL_NONE;
+  if (panel != NULL && !panel_window_get_locked (panel))
     {
-      g_object_set (model, "list-flags", XFCE_ITEM_LIST_MODEL_NONE, NULL);
+      list_flags = XFCE_ITEM_LIST_MODEL_REORDERABLE
+                   | XFCE_ITEM_LIST_MODEL_EDITABLE
+                   | XFCE_ITEM_LIST_MODEL_ADDABLE
+                   | XFCE_ITEM_LIST_MODEL_REMOVABLE;
     }
-  else
-    {
-      g_object_set (model, "list-flags",
-                    XFCE_ITEM_LIST_MODEL_REORDERABLE
-                      | XFCE_ITEM_LIST_MODEL_EDITABLE
-                      | XFCE_ITEM_LIST_MODEL_ADDABLE
-                      | XFCE_ITEM_LIST_MODEL_REMOVABLE,
-                    NULL);
-    }
+  g_object_set (model, "list-flags", list_flags, NULL);
 
-
+  /* reload model */
   panel_item_list_model_reload (model);
 }
 
@@ -335,6 +331,7 @@ panel_item_list_model_get_launcher_keyfile (PanelItemListModel *model,
   if (xfconf_channel_has_property (model->channel, property_name))
     {
       gchar **desktop_files = xfconf_channel_get_string_list (model->channel, property_name);
+
       if (desktop_files[0] != NULL)
         {
           gchar *dirname = g_strdup_printf (PANEL_PLUGIN_RELATIVE_PATH G_DIR_SEPARATOR_S "%s-%d",
@@ -371,6 +368,7 @@ panel_item_list_model_get_launcher_icon (PanelItemListModel *model,
       if (g_path_is_absolute (icon_name))
         {
           GFile *file = g_file_new_for_path (icon_name);
+
           icon = g_file_icon_new (file);
           g_object_unref (file);
         }
@@ -500,6 +498,7 @@ panel_item_list_model_new (PanelWindow *panel)
   g_return_val_if_fail (panel == NULL || PANEL_IS_WINDOW (panel), NULL);
 
   PanelItemListModel *model = g_object_new (PANEL_TYPE_ITEM_LIST_MODEL, NULL);
+
   panel_item_list_model_set_panel (model, panel);
   return XFCE_ITEM_LIST_MODEL (model);
 }

@@ -19,6 +19,8 @@
 #include "panel-item-list-view.h"
 #include "panel-item-dialog.h"
 
+
+
 struct _PanelItemListView
 {
   GtkBox __parent__;
@@ -64,7 +66,7 @@ panel_item_list_view_class_init (PanelItemListViewClass *klass)
 static void
 panel_item_list_view_init (PanelItemListView *view)
 {
-  /* Configure XfceItemListView */
+  /* setup list_view */
   view->list_view = xfce_item_list_view_new (NULL);
   g_signal_connect_swapped (view->list_view, "add-item", G_CALLBACK (panel_item_list_view_add_item), view);
   g_signal_connect_swapped (view->list_view, "remove-items", G_CALLBACK (panel_item_list_view_remove_items), view);
@@ -72,33 +74,41 @@ panel_item_list_view_init (PanelItemListView *view)
   gtk_box_pack_start (GTK_BOX (view), view->list_view, TRUE, TRUE, 0);
   gtk_widget_show (view->list_view);
 
-  /* Configure TreeView */
+  /* setup tree_view */
   GtkWidget *tree_view = xfce_item_list_view_get_tree_view (XFCE_ITEM_LIST_VIEW (view->list_view));
   GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree_view));
+
   g_signal_connect_swapped (selection, "changed", G_CALLBACK (panel_item_list_view_selection_changed), view);
   gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
 
-  /* Create "About" action */
+  /* create actions */
   GSimpleActionGroup *action_group = g_simple_action_group_new ();
+
+  /* create "About" action */
   view->about_action = g_simple_action_new ("about-item", NULL);
   g_signal_connect_swapped (view->about_action, "activate", G_CALLBACK (panel_item_list_view_about_item), view);
   g_action_map_add_action (G_ACTION_MAP (action_group), G_ACTION (view->about_action));
   gtk_widget_insert_action_group (GTK_WIDGET (view), "panel-item-list-view", G_ACTION_GROUP (action_group));
+
   g_object_unref (action_group);
 
+  /* create menu items */
   GMenu *menu = xfce_item_list_view_get_menu (XFCE_ITEM_LIST_VIEW (view->list_view));
+
+  /* create "About" menu item */
   GMenuItem *menu_item = g_menu_item_new (_("About the item"), "panel-item-list-view.about-item");
   GIcon *icon = g_themed_icon_new ("help-about-symbolic");
   GVariant *serialized_icon = g_icon_serialize (icon);
+
   g_menu_item_set_attribute_value (menu_item, G_MENU_ATTRIBUTE_ICON, serialized_icon);
-  g_variant_unref (serialized_icon);
-  g_object_unref (icon);
   g_menu_item_set_attribute_value (menu_item, XFCE_MENU_ATTRIBUTE_TOOLTIP, g_variant_new_string (_("Show about information of the currently selected item")));
   g_menu_item_set_attribute_value (menu_item, XFCE_MENU_ATTRIBUTE_HIDE_LABEL, g_variant_new_boolean (TRUE));
   g_menu_append_item (menu, menu_item);
+  g_variant_unref (serialized_icon);
+  g_object_unref (icon);
   g_object_unref (menu_item);
 
-  /* Reload state */
+  /* update action state */
   panel_item_list_view_selection_changed (view);
 }
 
@@ -140,6 +150,7 @@ panel_item_list_view_remove_items (PanelItemListView *view,
       XfceItemListModel *model = xfce_item_list_view_get_model (XFCE_ITEM_LIST_VIEW (view->list_view));
       XfcePanelPluginProvider *provider = panel_item_list_model_get_item_provider (PANEL_ITEM_LIST_MODEL (model), items[0]);
       PanelModule *module = panel_module_get_from_plugin_provider (provider);
+
       primary = g_strdup_printf (_("Are you sure that you want to remove \"%s\"?"), panel_module_get_display_name (module));
       secondary = _("If you remove the item from the panel, it is permanently lost.");
     }
@@ -151,8 +162,8 @@ panel_item_list_view_remove_items (PanelItemListView *view,
 
   GtkWindow *toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view)));
   gboolean confirmed = xfce_dialog_confirm (toplevel, "list-remove", _("Remove"), secondary, "%s", primary);
-  g_free (primary);
 
+  g_free (primary);
   return !confirmed;
 }
 
@@ -178,7 +189,8 @@ panel_item_list_view_selection_changed (PanelItemListView *view)
   gint n_sel_items = xfce_item_list_view_get_selected_items (XFCE_ITEM_LIST_VIEW (view->list_view), &sel_items);
   XfceItemListModel *model = xfce_item_list_view_get_model (XFCE_ITEM_LIST_VIEW (view->list_view));
 
-  g_simple_action_set_enabled (view->about_action, n_sel_items == 1 && xfce_item_list_model_test (model, sel_items[0], PANEL_ITEM_LIST_MODEL_COLUMN_ABOUT));
+  g_simple_action_set_enabled (view->about_action,
+                               n_sel_items == 1 && xfce_item_list_model_test (model, sel_items[0], PANEL_ITEM_LIST_MODEL_COLUMN_ABOUT));
   g_free (sel_items);
 }
 

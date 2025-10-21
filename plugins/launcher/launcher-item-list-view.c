@@ -23,8 +23,6 @@ enum
   DROP_TARGET_ROW
 };
 
-static int signals[N_SIGNALS];
-
 
 
 static gboolean
@@ -59,6 +57,10 @@ launcher_item_list_view_select_n_last (LauncherItemListView *view,
 
 
 
+static int signals[N_SIGNALS];
+
+
+
 G_DEFINE_TYPE (LauncherItemListView, launcher_item_list_view, GTK_TYPE_BOX)
 
 
@@ -68,6 +70,7 @@ launcher_item_list_view_class_init (LauncherItemListViewClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+  /* a signal that requires opening a dialog */
   signals[ADD_ITEM] = g_signal_new ("add-item",
                                     G_TYPE_FROM_CLASS (object_class),
                                     G_SIGNAL_RUN_LAST,
@@ -76,6 +79,7 @@ launcher_item_list_view_class_init (LauncherItemListViewClass *klass)
                                     NULL,
                                     G_TYPE_NONE, 0);
 
+  /* a signal that requires opening a dialog */
   signals[EDIT_ITEM] = g_signal_new ("edit-item",
                                      G_TYPE_FROM_CLASS (object_class),
                                      G_SIGNAL_RUN_LAST,
@@ -90,6 +94,7 @@ launcher_item_list_view_class_init (LauncherItemListViewClass *klass)
 static void
 launcher_item_list_view_init (LauncherItemListView *view)
 {
+  /* setup list_view */
   view->list_view = xfce_item_list_view_new (NULL);
   g_signal_connect_swapped (view->list_view, "add-item", G_CALLBACK (launcher_item_list_view_add_item), view);
   g_signal_connect_swapped (view->list_view, "remove-items", G_CALLBACK (launcher_item_list_view_remove_items), view);
@@ -97,23 +102,35 @@ launcher_item_list_view_init (LauncherItemListView *view)
   gtk_box_pack_start (GTK_BOX (view), view->list_view, TRUE, TRUE, 0);
   gtk_widget_show (view->list_view);
 
+  /* setup tree_view */
   GtkWidget *tree_view = xfce_item_list_view_get_tree_view (XFCE_ITEM_LIST_VIEW (view->list_view));
+
   g_signal_connect_swapped (tree_view, "drag-data-received", G_CALLBACK (launcher_item_list_view_drag_data_received), view);
+
+  /* setup tree selection */
   GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree_view));
+
   gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
 
+  /* setup icon column */
   GtkTreeViewColumn *icon_column = gtk_tree_view_get_column (GTK_TREE_VIEW (tree_view), XFCE_ITEM_LIST_VIEW_COLUMN_ICON);
   GtkCellRenderer *icon_renderer = g_object_get_data (G_OBJECT (icon_column), "renderer");
+
   gtk_tree_view_column_set_spacing (icon_column, 2);
   g_object_set (icon_renderer, "stock-size", 5, NULL);
 
+  /* create actions */
   GSimpleActionGroup *action_group = g_simple_action_group_new ();
 
+  /* create "New Application" action */
   GSimpleAction *new_item_action = g_simple_action_new ("new-item", NULL);
+
   g_signal_connect_swapped (new_item_action, "activate", G_CALLBACK (launcher_item_list_view_new_item), view);
   g_action_map_add_action (G_ACTION_MAP (action_group), G_ACTION (new_item_action));
 
+  /* create "New Link" action */
   GSimpleAction *new_link_action = g_simple_action_new ("new-link", NULL);
+
   g_signal_connect_swapped (new_link_action, "activate", G_CALLBACK (launcher_item_list_view_new_link), view);
   g_action_map_add_action (G_ACTION_MAP (action_group), G_ACTION (new_link_action));
 
@@ -123,11 +140,14 @@ launcher_item_list_view_init (LauncherItemListView *view)
   g_object_unref (new_item_action);
   g_object_unref (new_link_action);
 
+  /* create menu items */
   GMenu *menu = xfce_item_list_view_get_menu (XFCE_ITEM_LIST_VIEW (view->list_view));
 
+  /* create "New Application" item */
   GMenuItem *new_item_item = g_menu_item_new (NULL, "launcher-item-list-view.new-item");
   GIcon *new_item_icon = g_themed_icon_new ("document-new-symbolic");
   GVariant *new_item_icon_value = g_icon_serialize (new_item_icon);
+
   g_menu_item_set_attribute_value (new_item_item, G_MENU_ATTRIBUTE_ICON, new_item_icon_value);
   g_menu_item_set_attribute_value (new_item_item, XFCE_MENU_ATTRIBUTE_TOOLTIP, g_variant_new_string (_("Add a new empty item")));
   g_menu_item_set_attribute_value (new_item_item, XFCE_MENU_ATTRIBUTE_HIDE_LABEL, g_variant_new_boolean (TRUE));
@@ -136,9 +156,11 @@ launcher_item_list_view_init (LauncherItemListView *view)
   g_clear_object (&new_item_icon);
   g_clear_pointer (&new_item_icon_value, g_variant_unref);
 
+  /* Create "New Link" item */
   GMenuItem *new_link_item = g_menu_item_new (NULL, "launcher-item-list-view.new-link");
   GIcon *new_link_icon = g_themed_icon_new ("applications-internet-symbolic");
   GVariant *new_link_icon_value = g_icon_serialize (new_link_icon);
+
   g_menu_item_set_attribute_value (new_link_item, G_MENU_ATTRIBUTE_ICON, new_link_icon_value);
   g_menu_item_set_attribute_value (new_link_item, XFCE_MENU_ATTRIBUTE_TOOLTIP, g_variant_new_string (_("Add a new hyperlink")));
   g_menu_item_set_attribute_value (new_link_item, XFCE_MENU_ATTRIBUTE_HIDE_LABEL, g_variant_new_boolean (TRUE));
@@ -185,8 +207,8 @@ launcher_item_list_view_remove_items (LauncherItemListView *view,
 
   GtkWindow *toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view)));
   gboolean confirmed = xfce_dialog_confirm (toplevel, "edit-delete", _("_Remove"), secondary, "%s", primary);
-  g_free (primary);
 
+  g_free (primary);
   return !confirmed;
 }
 
@@ -238,15 +260,18 @@ launcher_item_list_view_drag_data_received (LauncherItemListView *view,
 
     case DROP_TARGET_URI:
       gchar **uris = gtk_selection_data_get_uris (data);
+
       if (uris == NULL)
         {
           gtk_drag_finish (context, FALSE, FALSE, timestamp);
         }
       else
         {
+          /* finding a position to insert */
           gint position = -1;
           GtkTreePath *path = NULL;
           GtkTreeViewDropPosition drop_position;
+
           if (gtk_tree_view_get_dest_row_at_pos (GTK_TREE_VIEW (tree_view), x, y, &path, &drop_position)
               && gtk_tree_path_get_depth (path) > 0)
             {
@@ -257,9 +282,12 @@ launcher_item_list_view_drag_data_received (LauncherItemListView *view,
           else
             {
               XfceItemListModel *model = xfce_item_list_view_get_model (XFCE_ITEM_LIST_VIEW (view->list_view));
+
               position = xfce_item_list_model_get_n_items (model);
             }
           gtk_tree_path_free (path);
+
+          /* insert */
           launcher_item_list_view_append_uris (view, position, uris);
           gtk_drag_finish (context, TRUE, FALSE, timestamp);
         }
@@ -275,16 +303,21 @@ launcher_item_list_view_append_uris (LauncherItemListView *view,
                                      gint position,
                                      gchar **uris)
 {
+  /* create a list of menu items */
   GList *items = NULL;
+
   for (gint i = 0; uris[i] != NULL; ++i)
     {
       if (g_str_has_suffix (uris[i], ".desktop"))
         {
           GarconMenuItem *item = garcon_menu_item_new_for_uri (uris[i]);
+
           if (item != NULL)
             items = g_list_append (items, item);
         }
     }
+
+  /* append */
   launcher_item_list_view_append (view, items);
   g_list_free_full (items, (GDestroyNotify) g_object_unref);
 }
@@ -297,25 +330,35 @@ launcher_item_list_view_select_n_last (LauncherItemListView *view,
 {
   g_return_if_fail (LAUNCHER_IS_ITEM_LIST_VIEW (view));
 
+  /* unselect all */
   GtkWidget *tree_view = xfce_item_list_view_get_tree_view (XFCE_ITEM_LIST_VIEW (view->list_view));
   GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree_view));
+
   gtk_tree_selection_unselect_all (selection);
 
+  /* search for starting index */
   XfceItemListModel *model = xfce_item_list_view_get_model (XFCE_ITEM_LIST_VIEW (view->list_view));
   gint n_items = xfce_item_list_model_get_n_items (model);
+
   g_return_if_fail (n_last <= n_items);
+
   gint index_start = n_items - n_last;
 
+  /* region selection */
   for (gint i = index_start; i < n_items; ++i)
     {
+      /* place cursor on first row */
       if (i == index_start)
         {
           GtkTreePath *cursor_path = gtk_tree_path_new_from_indices (index_start, -1);
+
           gtk_tree_view_set_cursor (GTK_TREE_VIEW (tree_view), cursor_path, NULL, FALSE);
           gtk_tree_path_free (cursor_path);
         }
 
+      /* select row */
       GtkTreePath *path = gtk_tree_path_new_from_indices (i, -1);
+
       gtk_tree_selection_select_path (selection, path);
       gtk_tree_path_free (path);
     }
@@ -330,13 +373,16 @@ launcher_item_list_view_set_model (LauncherItemListView *view,
   g_return_if_fail (LAUNCHER_IS_ITEM_LIST_VIEW (view));
   g_return_if_fail (LAUNCHER_IS_ITEM_LIST_MODEL (model));
 
+  /* install new model */
   xfce_item_list_view_set_model (XFCE_ITEM_LIST_VIEW (view->list_view), XFCE_ITEM_LIST_MODEL (model));
 
+  /* setup DnD */
   GtkWidget *tree_view = xfce_item_list_view_get_tree_view (XFCE_ITEM_LIST_VIEW (view->list_view));
   static const GtkTargetEntry drop_targets[] = {
     { "GTK_TREE_MODEL_ROW", GTK_TARGET_SAME_WIDGET, DROP_TARGET_ROW },
     { "text/uri-list", 0, DROP_TARGET_URI },
   };
+
   gtk_tree_view_enable_model_drag_dest (GTK_TREE_VIEW (tree_view), drop_targets, G_N_ELEMENTS (drop_targets), GDK_ACTION_MOVE);
 }
 
@@ -350,9 +396,13 @@ launcher_item_list_view_append (LauncherItemListView *view,
 
   if (items != NULL)
     {
+      /* insert new data */
       XfceItemListModel *model = xfce_item_list_view_get_model (XFCE_ITEM_LIST_VIEW (view->list_view));
       gint index = xfce_item_list_model_get_n_items (model);
+
       launcher_item_list_model_insert (LAUNCHER_ITEM_LIST_MODEL (model), index, items);
+
+      /* select rows with new data */
       launcher_item_list_view_select_n_last (view, g_list_length (items));
     }
 }
