@@ -3,6 +3,12 @@ plugin_sources = [
   'launcher.h',
   'launcher-dialog.c',
   'launcher-dialog.h',
+  'launcher-item-list-model.c',
+  'launcher-item-list-model.h',
+  'launcher-item-list-view.c',
+  'launcher-item-list-view.h',
+  'launcher-item-info.h',
+  'launcher-item-info.c',
 ]
 
 plugin_install_subdir = 'xfce4' / 'panel' / 'plugins'
