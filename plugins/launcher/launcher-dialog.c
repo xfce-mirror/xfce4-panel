@@ -56,9 +56,9 @@ launcher_dialog_add_store_insert (gpointer key,
 static void
 launcher_dialog_add_show (LauncherPluginDialog *dialog);
 static void
-launcher_dialog_edit_show (LauncherPluginDialog *dialog,
-                           const gchar *uri,
-                           const gchar *type);
+launcher_desktop_item_editor_show (LauncherPluginDialog *dialog,
+                                   const gchar *uri,
+                                   const gchar *type);
 static gboolean
 launcher_dialog_press_event (LauncherPluginDialog *dialog,
                              const gchar *object_name);
@@ -118,9 +118,9 @@ launcher_dialog_add_show (LauncherPluginDialog *dialog)
 
 
 static void
-launcher_dialog_edit_show (LauncherPluginDialog *dialog,
-                           const gchar *uri,
-                           const gchar *type)
+launcher_desktop_item_editor_show (LauncherPluginDialog *dialog,
+                                   const gchar *uri,
+                                   const gchar *type)
 {
   gchar *command = NULL;
 
@@ -348,7 +348,7 @@ launcher_dialog_add_response (GtkWidget *widget,
 
       /* adding new items */
       GObject *item_list_view = gtk_builder_get_object (dialog->builder, "item-list-view");
-      
+
       launcher_item_list_view_append (LAUNCHER_ITEM_LIST_VIEW (item_list_view), items);
 
       g_list_free (list);
@@ -471,7 +471,7 @@ launcher_dialog_show (LauncherPlugin *plugin)
   /* setup item-list-view */
   object = gtk_builder_get_object (builder, "item-list-view");
   g_signal_connect_swapped (object, "add-item", G_CALLBACK (launcher_dialog_add_show), dialog);
-  g_signal_connect_swapped (object, "edit-item", G_CALLBACK (launcher_dialog_edit_show), dialog);
+  g_signal_connect_swapped (object, "edit-item", G_CALLBACK (launcher_desktop_item_editor_show), dialog);
 
   /* install model */
   XfceItemListModel *model = launcher_item_list_model_new (plugin);
