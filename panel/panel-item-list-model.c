@@ -316,29 +316,10 @@ panel_item_list_model_reload_items (PanelItemListModel *model)
 static void
 panel_item_list_model_reload (PanelItemListModel *model)
 {
-  /* Inform GktTreeModel about changes */
   gint prev_n_items = g_list_length (model->items);
 
   panel_item_list_model_reload_items (model);
-  gint cur_n_items = g_list_length (model->items);
-
-  for (gint i = prev_n_items - 1; i >= cur_n_items; --i)
-    {
-      GtkTreePath *path = gtk_tree_path_new_from_indices (i, -1);
-      gtk_tree_model_row_deleted (GTK_TREE_MODEL (model), path);
-      gtk_tree_path_free (path);
-    }
-
-  for (gint i = prev_n_items; i < cur_n_items; ++i)
-    {
-      GtkTreePath *path = gtk_tree_path_new_from_indices (i, -1);
-      GtkTreeIter iter;
-      xfce_item_list_model_set_index (XFCE_ITEM_LIST_MODEL (model), &iter, i);
-      gtk_tree_model_row_inserted (GTK_TREE_MODEL (model), path, &iter);
-      gtk_tree_path_free (path);
-    }
-
-  xfce_item_list_model_changed (XFCE_ITEM_LIST_MODEL (model));
+  xfce_item_list_model_reloaded (XFCE_ITEM_LIST_MODEL (model), prev_n_items);
 }
 
 
