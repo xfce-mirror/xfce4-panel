@@ -29,12 +29,6 @@ G_BEGIN_DECLS
 #define PANEL_TYPE_ITEM_LIST_MODEL (panel_item_list_model_get_type ())
 G_DECLARE_FINAL_TYPE (PanelItemListModel, panel_item_list_model, PANEL, ITEM_LIST_MODEL, XfceItemListModel)
 
-enum
-{
-  PANEL_ITEM_LIST_MODEL_COLUMN_ABOUT = XFCE_ITEM_LIST_MODEL_COLUMN_USER,
-  PANEL_ITEM_LIST_MODEL_N_COLUMNS,
-};
-
 XfceItemListModel *
 panel_item_list_model_new (PanelWindow *panel);
 

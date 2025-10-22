@@ -175,8 +175,14 @@ panel_item_list_view_selection_changed (PanelItemListView *view)
   gint n_sel_items = xfce_item_list_view_get_selected_items (XFCE_ITEM_LIST_VIEW (view->list_view), &sel_items);
   XfceItemListModel *model = xfce_item_list_view_get_model (XFCE_ITEM_LIST_VIEW (view->list_view));
 
-  g_simple_action_set_enabled (view->about_action,
-                               n_sel_items == 1 && xfce_item_list_model_test (model, sel_items[0], PANEL_ITEM_LIST_MODEL_COLUMN_ABOUT));
+  gboolean about_enabled = FALSE;
+  if (n_sel_items == 1)
+    {
+      XfcePanelPluginProvider *provider = panel_item_list_model_get_item_provider (PANEL_ITEM_LIST_MODEL (model), sel_items[0]);
+      
+      about_enabled = xfce_panel_plugin_provider_get_show_about (provider);
+    }
+  g_simple_action_set_enabled (view->about_action, about_enabled);
   g_free (sel_items);
 }
 

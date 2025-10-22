@@ -43,11 +43,6 @@ struct _PanelItemListModel
 static void
 panel_item_list_model_finalize (GObject *object);
 static gint
-panel_item_list_model_get_list_n_columns (XfceItemListModel *list_model);
-static GType
-panel_item_list_model_get_list_column_type (XfceItemListModel *list_model,
-                                            gint column);
-static gint
 panel_item_list_model_get_n_items (XfceItemListModel *list_model);
 static void
 panel_item_list_model_get_item_value (XfceItemListModel *list_model,
@@ -104,8 +99,6 @@ panel_item_list_model_class_init (PanelItemListModelClass *klass)
 
   object_class->finalize = panel_item_list_model_finalize;
 
-  list_class->get_list_n_columns = panel_item_list_model_get_list_n_columns;
-  list_class->get_list_column_type = panel_item_list_model_get_list_column_type;
   list_class->get_n_items = panel_item_list_model_get_n_items;
   list_class->get_item_value = panel_item_list_model_get_item_value;
   list_class->move = panel_item_list_model_move;
@@ -134,30 +127,6 @@ panel_item_list_model_finalize (GObject *object)
   g_clear_object (&model->itembar);
   g_clear_pointer (&model->items, g_list_free);
   G_OBJECT_CLASS (panel_item_list_model_parent_class)->finalize (object);
-}
-
-
-
-static gint
-panel_item_list_model_get_list_n_columns (XfceItemListModel *list_model)
-{
-  return PANEL_ITEM_LIST_MODEL_N_COLUMNS;
-}
-
-
-
-static GType
-panel_item_list_model_get_list_column_type (XfceItemListModel *list_model,
-                                            gint column)
-{
-  switch (column)
-    {
-    case PANEL_ITEM_LIST_MODEL_COLUMN_ABOUT:
-      return G_TYPE_BOOLEAN;
-
-    default:
-      return XFCE_ITEM_LIST_MODEL_CLASS (panel_item_list_model_parent_class)->get_list_column_type (list_model, column);
-    }
 }
 
 
@@ -209,10 +178,6 @@ panel_item_list_model_get_item_value (XfceItemListModel *list_model,
 
     case XFCE_ITEM_LIST_MODEL_COLUMN_REMOVABLE:
       g_value_set_boolean (value, !panel_window_get_locked (model->panel));
-      break;
-
-    case PANEL_ITEM_LIST_MODEL_COLUMN_ABOUT:
-      g_value_set_boolean (value, xfce_panel_plugin_provider_get_show_about (provider));
       break;
 
     default:
