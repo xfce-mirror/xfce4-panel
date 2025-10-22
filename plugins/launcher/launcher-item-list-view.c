@@ -134,7 +134,7 @@ launcher_item_list_view_init (LauncherItemListView *view)
   GtkCellRenderer *icon_renderer = g_object_get_data (G_OBJECT (icon_column), "renderer");
 
   gtk_tree_view_column_set_spacing (icon_column, 2);
-  g_object_set (icon_renderer, "stock-size", 5, NULL);
+  g_object_set (icon_renderer, "stock-size", GTK_ICON_SIZE_DND, NULL);
 
   /* create actions */
   GSimpleActionGroup *action_group = g_simple_action_group_new ();

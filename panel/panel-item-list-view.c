@@ -76,6 +76,12 @@ panel_item_list_view_init (PanelItemListView *view)
   g_signal_connect_swapped (selection, "changed", G_CALLBACK (panel_item_list_view_selection_changed), view);
   gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
 
+  /* setup icon column */
+  GtkTreeViewColumn *icon_column = gtk_tree_view_get_column (GTK_TREE_VIEW (tree_view), XFCE_ITEM_LIST_VIEW_COLUMN_ICON);
+  GtkCellRendererPixbuf *icon_renderer = g_object_get_data (G_OBJECT (icon_column), "renderer");
+
+  g_object_set (icon_renderer, "stock-size", GTK_ICON_SIZE_LARGE_TOOLBAR, NULL);
+
   /* create actions */
   GSimpleActionGroup *action_group = g_simple_action_group_new ();
 
