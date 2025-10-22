@@ -17,7 +17,6 @@
  */
 
 #include "launcher-item-list-view.h"
-#include "launcher-item-info.h"
 
 
 
@@ -211,7 +210,7 @@ launcher_item_list_view_remove_items (LauncherItemListView *view,
     {
       XfceItemListModel *model = xfce_item_list_view_get_model (XFCE_ITEM_LIST_VIEW (view->list_view));
       GarconMenuItem *item = launcher_item_list_model_get_item (LAUNCHER_ITEM_LIST_MODEL (model), items[0]);
-      gchar *name = launcher_get_item_name (item);
+      gchar *name = launcher_item_list_model_get_item_name_text (item);
 
       primary = g_strdup_printf (_("Are you sure you want to remove \"%s\"?"), name);
       secondary = _("If you delete an item, it will be permanently removed");

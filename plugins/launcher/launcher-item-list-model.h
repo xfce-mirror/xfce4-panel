@@ -40,6 +40,18 @@ launcher_item_list_model_insert (LauncherItemListModel *model,
                                  gint index,
                                  GList *items);
 
+gchar *
+launcher_item_list_model_get_item_name_text (GarconMenuItem *item);
+
+gchar *
+launcher_item_list_model_get_item_name_markup (GarconMenuItem *item);
+
+GIcon *
+launcher_item_list_model_get_item_icon (GarconMenuItem *item);
+
+gchar *
+launcher_item_list_model_get_item_tooltip (GarconMenuItem *item);
+
 G_END_DECLS
 
 #endif /* !__LAUNCHER_ITEM_LIST_MODEL_H__ */

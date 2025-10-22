@@ -31,8 +31,6 @@ struct _PanelItemListView
 
 
 
-static void
-panel_item_list_view_finalize (GObject *object);
 static gboolean
 panel_item_list_view_add_item (PanelItemListView *view);
 static gboolean
@@ -56,9 +54,6 @@ G_DEFINE_TYPE (PanelItemListView, panel_item_list_view, GTK_TYPE_BOX)
 static void
 panel_item_list_view_class_init (PanelItemListViewClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  object_class->finalize = panel_item_list_view_finalize;
 }
 
 
@@ -89,6 +84,7 @@ panel_item_list_view_init (PanelItemListView *view)
   g_signal_connect_swapped (view->about_action, "activate", G_CALLBACK (panel_item_list_view_about_item), view);
   g_action_map_add_action (G_ACTION_MAP (action_group), G_ACTION (view->about_action));
   gtk_widget_insert_action_group (GTK_WIDGET (view), "panel-item-list-view", G_ACTION_GROUP (action_group));
+  g_object_unref (view->about_action);
 
   g_object_unref (action_group);
 
@@ -110,17 +106,6 @@ panel_item_list_view_init (PanelItemListView *view)
 
   /* update action state */
   panel_item_list_view_selection_changed (view);
-}
-
-
-
-static void
-panel_item_list_view_finalize (GObject *object)
-{
-  PanelItemListView *view = PANEL_ITEM_LIST_VIEW (object);
-
-  g_object_unref (view->about_action);
-  G_OBJECT_CLASS (panel_item_list_view_parent_class)->finalize (object);
 }
 
 

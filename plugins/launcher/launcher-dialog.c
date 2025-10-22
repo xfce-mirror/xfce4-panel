@@ -17,7 +17,6 @@
  */
 
 #include "launcher-dialog.h"
-#include "launcher-item-info.h"
 #include "launcher-item-list-view.h"
 
 #include "common/panel-private.h"
@@ -85,9 +84,9 @@ launcher_dialog_add_store_insert (gpointer key,
   gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 
   /* Filling a row */
-  GIcon *icon = launcher_get_item_icon (item);
-  gchar *name = launcher_get_item_name (item);
-  gchar *tooltip = launcher_get_item_tooltip (item);
+  GIcon *icon = launcher_item_list_model_get_item_icon (item);
+  gchar *name = launcher_item_list_model_get_item_name_text (item);
+  gchar *tooltip = launcher_item_list_model_get_item_tooltip (item);
 
   gtk_list_store_set (store, &iter,
                       COL_ICON, icon,
