@@ -167,7 +167,6 @@ launcher_item_list_view_init (LauncherItemListView *view)
 
   g_menu_item_set_attribute_value (new_item_item, G_MENU_ATTRIBUTE_ICON, new_item_icon_value);
   g_menu_item_set_attribute_value (new_item_item, XFCE_MENU_ATTRIBUTE_TOOLTIP, g_variant_new_string (_("Add a new empty item")));
-  g_menu_item_set_attribute_value (new_item_item, XFCE_MENU_ATTRIBUTE_HIDE_LABEL, g_variant_new_boolean (TRUE));
   g_menu_append_item (menu, new_item_item);
   g_object_unref (new_item_item);
   g_clear_object (&new_item_icon);
@@ -180,7 +179,6 @@ launcher_item_list_view_init (LauncherItemListView *view)
 
   g_menu_item_set_attribute_value (new_link_item, G_MENU_ATTRIBUTE_ICON, new_link_icon_value);
   g_menu_item_set_attribute_value (new_link_item, XFCE_MENU_ATTRIBUTE_TOOLTIP, g_variant_new_string (_("Add a new hyperlink")));
-  g_menu_item_set_attribute_value (new_link_item, XFCE_MENU_ATTRIBUTE_HIDE_LABEL, g_variant_new_boolean (TRUE));
   g_menu_append_item (menu, new_link_item);
   g_object_unref (new_link_item);
   g_clear_object (&new_link_icon);

@@ -98,13 +98,12 @@ panel_item_list_view_init (PanelItemListView *view)
   GMenu *menu = xfce_item_list_view_get_menu (XFCE_ITEM_LIST_VIEW (view->list_view));
 
   /* create "About" menu item */
-  GMenuItem *menu_item = g_menu_item_new (_("About the item"), "panel-item-list-view.about-item");
+  GMenuItem *menu_item = g_menu_item_new (_("About the _item"), "panel-item-list-view.about-item");
   GIcon *icon = g_themed_icon_new ("help-about-symbolic");
   GVariant *serialized_icon = g_icon_serialize (icon);
 
   g_menu_item_set_attribute_value (menu_item, G_MENU_ATTRIBUTE_ICON, serialized_icon);
   g_menu_item_set_attribute_value (menu_item, XFCE_MENU_ATTRIBUTE_TOOLTIP, g_variant_new_string (_("Show about information of the currently selected item")));
-  g_menu_item_set_attribute_value (menu_item, XFCE_MENU_ATTRIBUTE_HIDE_LABEL, g_variant_new_boolean (TRUE));
   g_menu_append_item (menu, menu_item);
   g_variant_unref (serialized_icon);
   g_object_unref (icon);
