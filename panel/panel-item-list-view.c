@@ -179,7 +179,7 @@ panel_item_list_view_selection_changed (PanelItemListView *view)
   if (n_sel_items == 1)
     {
       XfcePanelPluginProvider *provider = panel_item_list_model_get_item_provider (PANEL_ITEM_LIST_MODEL (model), sel_items[0]);
-      
+
       about_enabled = xfce_panel_plugin_provider_get_show_about (provider);
     }
   g_simple_action_set_enabled (view->about_action, about_enabled);
