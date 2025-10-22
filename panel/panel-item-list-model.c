@@ -70,25 +70,25 @@ static void
 panel_item_list_model_reload (PanelItemListModel *model);
 static GKeyFile *
 panel_item_list_model_get_launcher_keyfile (PanelItemListModel *model,
-                                            gint index);
+                                            XfcePanelPluginProvider *provider);
 static GIcon *
 panel_item_list_model_get_launcher_icon (PanelItemListModel *model,
-                                         gint index);
+                                         XfcePanelPluginProvider *provider);
 static gchar *
 panel_item_list_model_get_launcher_name (PanelItemListModel *model,
-                                         gint index);
-gboolean
+                                         XfcePanelPluginProvider *provider);
+static gboolean
 panel_item_list_model_is_launcher (PanelItemListModel *model,
-                                   gint index);
+                                   XfcePanelPluginProvider *provider);
 static GIcon *
 panel_item_list_model_get_item_icon (PanelItemListModel *model,
-                                     gint index);
+                                     XfcePanelPluginProvider *provider);
 static gchar *
-panel_item_list_model_get_item_name (PanelItemListModel *model,
-                                     gint index);
+panel_item_list_model_get_item_name_markup (PanelItemListModel *model,
+                                            XfcePanelPluginProvider *provider);
 static gchar *
 panel_item_list_model_get_item_tooltip (PanelItemListModel *model,
-                                        gint index);
+                                        XfcePanelPluginProvider *provider);
 
 
 
@@ -192,15 +192,15 @@ panel_item_list_model_get_item_value (XfceItemListModel *list_model,
       break;
 
     case XFCE_ITEM_LIST_MODEL_COLUMN_ICON:
-      g_value_take_object (value, panel_item_list_model_get_item_icon (model, index));
+      g_value_take_object (value, panel_item_list_model_get_item_icon (model, provider));
       break;
 
     case XFCE_ITEM_LIST_MODEL_COLUMN_NAME:
-      g_value_take_string (value, panel_item_list_model_get_item_name (model, index));
+      g_value_take_string (value, panel_item_list_model_get_item_name_markup (model, provider));
       break;
 
     case XFCE_ITEM_LIST_MODEL_COLUMN_TOOLTIP:
-      g_value_take_string (value, panel_item_list_model_get_item_tooltip (model, index));
+      g_value_take_string (value, panel_item_list_model_get_item_tooltip (model, provider));
       break;
 
     case XFCE_ITEM_LIST_MODEL_COLUMN_EDITABLE:
@@ -322,9 +322,8 @@ panel_item_list_model_reload (PanelItemListModel *model)
 
 static GKeyFile *
 panel_item_list_model_get_launcher_keyfile (PanelItemListModel *model,
-                                            gint index)
+                                            XfcePanelPluginProvider *provider)
 {
-  XfcePanelPluginProvider *provider = panel_item_list_model_get_item_provider (model, index);
   gchar *property_name = g_strdup_printf (PLUGINS_PROPERTY_BASE "/items", xfce_panel_plugin_provider_get_unique_id (provider));
   GKeyFile *keyfile = NULL;
 
@@ -358,9 +357,9 @@ panel_item_list_model_get_launcher_keyfile (PanelItemListModel *model,
 
 static GIcon *
 panel_item_list_model_get_launcher_icon (PanelItemListModel *model,
-                                         gint index)
+                                         XfcePanelPluginProvider *provider)
 {
-  GKeyFile *keyfile = panel_item_list_model_get_launcher_keyfile (model, index);
+  GKeyFile *keyfile = panel_item_list_model_get_launcher_keyfile (model, provider);
   gchar *icon_name = g_key_file_get_string (keyfile, G_KEY_FILE_DESKTOP_GROUP, G_KEY_FILE_DESKTOP_KEY_ICON, NULL);
   GIcon *icon = NULL;
 
@@ -387,9 +386,9 @@ panel_item_list_model_get_launcher_icon (PanelItemListModel *model,
 
 static gchar *
 panel_item_list_model_get_launcher_name (PanelItemListModel *model,
-                                         gint index)
+                                         XfcePanelPluginProvider *provider)
 {
-  GKeyFile *keyfile = panel_item_list_model_get_launcher_keyfile (model, index);
+  GKeyFile *keyfile = panel_item_list_model_get_launcher_keyfile (model, provider);
   gchar *name = g_key_file_get_locale_string (keyfile, G_KEY_FILE_DESKTOP_GROUP, G_KEY_FILE_DESKTOP_KEY_NAME, NULL, NULL);
 
   g_key_file_free (keyfile);
@@ -398,12 +397,10 @@ panel_item_list_model_get_launcher_name (PanelItemListModel *model,
 
 
 
-gboolean
+static gboolean
 panel_item_list_model_is_launcher (PanelItemListModel *model,
-                                   gint index)
+                                   XfcePanelPluginProvider *provider)
 {
-  XfcePanelPluginProvider *provider = panel_item_list_model_get_item_provider (model, index);
-
   return g_strcmp0 (xfce_panel_plugin_provider_get_name (provider), "launcher") == 0;
 }
 
@@ -411,16 +408,15 @@ panel_item_list_model_is_launcher (PanelItemListModel *model,
 
 static GIcon *
 panel_item_list_model_get_item_icon (PanelItemListModel *model,
-                                     gint index)
+                                     XfcePanelPluginProvider *provider)
 {
   GIcon *icon = NULL;
 
-  if (panel_item_list_model_is_launcher (model, index))
-    icon = panel_item_list_model_get_launcher_icon (model, index);
+  if (panel_item_list_model_is_launcher (model, provider))
+    icon = panel_item_list_model_get_launcher_icon (model, provider);
 
   if (icon == NULL)
     {
-      XfcePanelPluginProvider *provider = panel_item_list_model_get_item_provider (model, index);
       PanelModule *module = panel_module_get_from_plugin_provider (provider);
       icon = g_themed_icon_new (panel_module_get_icon_name (module));
     }
@@ -431,32 +427,23 @@ panel_item_list_model_get_item_icon (PanelItemListModel *model,
 
 
 static gchar *
-panel_item_list_model_get_item_name (PanelItemListModel *model,
-                                     gint index)
+panel_item_list_model_get_item_name_markup (PanelItemListModel *model,
+                                            XfcePanelPluginProvider *provider)
 {
+  gchar *name_text = panel_item_list_model_get_item_name_text (model, provider);
   gchar *name = NULL;
 
-  if (panel_item_list_model_is_launcher (model, index))
-    name = panel_item_list_model_get_launcher_name (model, index);
-
-  if (name == NULL)
+  if (PANEL_IS_PLUGIN_EXTERNAL (provider))
     {
-      XfcePanelPluginProvider *provider = panel_item_list_model_get_item_provider (model, index);
-      PanelModule *module = panel_module_get_from_plugin_provider (provider);
-      const gchar *module_name = panel_module_get_display_name (module);
-
-      if (PANEL_IS_PLUGIN_EXTERNAL (provider))
-        {
-          /* I18N: append (external) in the preferences dialog if the plugin
-           * runs external */
-          name = g_strdup_printf (_("%s <span color=\"grey\" size=\"small\">(external)</span>"), module_name);
-        }
-      else
-        {
-          name = g_strdup (module_name);
-        }
+      /* I18N: append (external) in the preferences dialog if the plugin
+       * runs external */
+      name = g_strdup_printf (_("%s <span color=\"grey\" size=\"small\">(external)</span>"), name_text);
     }
-
+  else
+    {
+      name = g_strdup (name_text);
+    }
+  g_free (name_text);
   return name;
 }
 
@@ -464,9 +451,8 @@ panel_item_list_model_get_item_name (PanelItemListModel *model,
 
 static gchar *
 panel_item_list_model_get_item_tooltip (PanelItemListModel *model,
-                                        gint index)
+                                        XfcePanelPluginProvider *provider)
 {
-  XfcePanelPluginProvider *provider = panel_item_list_model_get_item_provider (model, index);
   gchar *tooltip = NULL;
 
   if (PANEL_IS_PLUGIN_EXTERNAL (provider))
@@ -524,4 +510,28 @@ panel_item_list_model_get_item_provider (PanelItemListModel *model,
   g_return_val_if_fail (index >= 0 && index < xfce_item_list_model_get_n_items (XFCE_ITEM_LIST_MODEL (model)), NULL);
 
   return g_list_nth_data (model->items, index);
+}
+
+
+
+gchar *
+panel_item_list_model_get_item_name_text (PanelItemListModel *model,
+                                          XfcePanelPluginProvider *provider)
+{
+  g_return_val_if_fail (PANEL_IS_ITEM_LIST_MODEL (model), NULL);
+  g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);
+
+  gchar *name = NULL;
+
+  if (panel_item_list_model_is_launcher (model, provider))
+    name = panel_item_list_model_get_launcher_name (model, provider);
+
+  if (name == NULL)
+    {
+      PanelModule *module = panel_module_get_from_plugin_provider (provider);
+
+      name = g_strdup (panel_module_get_display_name (module));
+    }
+
+  return name;
 }

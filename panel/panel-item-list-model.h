@@ -45,6 +45,10 @@ XfcePanelPluginProvider *
 panel_item_list_model_get_item_provider (PanelItemListModel *model,
                                          gint index);
 
+gchar *
+panel_item_list_model_get_item_name_text (PanelItemListModel *model,
+                                          XfcePanelPluginProvider *provider);
+
 G_END_DECLS
 
 #endif /* !__PANEL_ITEM_LIST_MODEL_H__ */

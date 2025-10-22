@@ -134,10 +134,11 @@ panel_item_list_view_remove_items (PanelItemListView *view,
     {
       XfceItemListModel *model = xfce_item_list_view_get_model (XFCE_ITEM_LIST_VIEW (view->list_view));
       XfcePanelPluginProvider *provider = panel_item_list_model_get_item_provider (PANEL_ITEM_LIST_MODEL (model), items[0]);
-      PanelModule *module = panel_module_get_from_plugin_provider (provider);
+      gchar *name = panel_item_list_model_get_item_name_text (PANEL_ITEM_LIST_MODEL (model), provider);
 
-      primary = g_strdup_printf (_("Are you sure that you want to remove \"%s\"?"), panel_module_get_display_name (module));
+      primary = g_strdup_printf (_("Are you sure that you want to remove \"%s\"?"), name);
       secondary = _("If you remove the item from the panel, it is permanently lost.");
+      g_free (name);
     }
   else
     {
