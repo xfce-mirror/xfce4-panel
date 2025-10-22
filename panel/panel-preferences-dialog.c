@@ -265,6 +265,20 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   g_free (path_new);
   connect_signal ("panel-switch", "clicked", panel_preferences_dialog_panel_switch);
 
+  /* general tab */
+  if (WINDOWING_IS_WAYLAND ())
+    {
+      object = gtk_builder_get_object (GTK_BUILDER (dialog), "keep-below");
+      panel_return_if_fail (G_IS_OBJECT (object));
+
+      XfconfChannel *xfconf_channel = panel_properties_get_channel (G_OBJECT (dialog->application));
+      panel_return_if_fail (XFCONF_IS_CHANNEL (xfconf_channel));
+
+      gboolean all_internal_forced = xfconf_channel_get_bool (xfconf_channel, "/force-all-internal", FALSE);
+
+      gtk_widget_set_sensitive (GTK_WIDGET (object), all_internal_forced);
+    }
+
   /* appearance tab */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "background-style");
   panel_return_if_fail (G_IS_OBJECT (object));
@@ -740,11 +754,18 @@ panel_preferences_dialog_autohide_changed (GtkComboBox *combobox,
   below_object = gtk_builder_get_object (GTK_BUILDER (dialog), "keep-below");
   panel_return_if_fail (GTK_IS_WIDGET (struts_object));
 
+  XfconfChannel *xfconf_channel = panel_properties_get_channel (G_OBJECT (dialog->application));
+  panel_return_if_fail (XFCONF_IS_CHANNEL (xfconf_channel));
+
+  gboolean all_internal_forced = WINDOWING_IS_WAYLAND () && xfconf_channel_get_bool (xfconf_channel, "/force-all-internal", FALSE);
+
   /* make "don't reserve space on borders" sensitive only when autohide is disabled */
   if (gtk_combo_box_get_active (combobox) == 0)
     {
       gtk_widget_set_sensitive (GTK_WIDGET (struts_object), TRUE);
-      gtk_widget_set_sensitive (GTK_WIDGET (below_object), TRUE);
+
+      if (WINDOWING_IS_X11() || all_internal_forced)
+        gtk_widget_set_sensitive (GTK_WIDGET (below_object), TRUE);
     }
   else
     {

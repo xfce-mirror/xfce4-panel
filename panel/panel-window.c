@@ -648,6 +648,12 @@ panel_window_is_active_changed (PanelWindow *window)
 static void
 panel_window_keep_below (PanelWindow *window)
 {
+  XfconfChannel *xfconf_channel = panel_properties_get_channel (G_OBJECT (panel_application_get ()));
+  panel_return_if_fail (XFCONF_IS_CHANNEL (xfconf_channel));
+
+  if (WINDOWING_IS_WAYLAND () && !xfconf_channel_get_bool (xfconf_channel, "/force-all-internal", FALSE))
+    return;
+
   gboolean should_keep_below = window->keep_below && window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER;
 
 #ifdef HAVE_GTK_LAYER_SHELL
