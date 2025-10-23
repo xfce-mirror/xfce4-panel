@@ -144,18 +144,18 @@ launcher_item_list_view_init (LauncherItemListView *view)
 
   g_signal_connect_swapped (new_item_action, "activate", G_CALLBACK (launcher_item_list_view_new_item), view);
   g_action_map_add_action (G_ACTION_MAP (action_group), G_ACTION (new_item_action));
+  g_object_unref (new_item_action);
 
   /* create "New Link" action */
   GSimpleAction *new_link_action = g_simple_action_new ("new-link", NULL);
 
   g_signal_connect_swapped (new_link_action, "activate", G_CALLBACK (launcher_item_list_view_new_link), view);
   g_action_map_add_action (G_ACTION_MAP (action_group), G_ACTION (new_link_action));
-
-  gtk_widget_insert_action_group (GTK_WIDGET (view), "launcher-item-list-view", G_ACTION_GROUP (action_group));
-
-  g_object_unref (action_group);
-  g_object_unref (new_item_action);
   g_object_unref (new_link_action);
+
+  /* insert action group */
+  gtk_widget_insert_action_group (GTK_WIDGET (view), "launcher-item-list-view", G_ACTION_GROUP (action_group));
+  g_object_unref (action_group);
 
   /* create menu items */
   GMenu *menu = xfce_item_list_view_get_menu (XFCE_ITEM_LIST_VIEW (view->list_view));
