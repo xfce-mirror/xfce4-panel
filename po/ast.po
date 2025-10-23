@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-07-18 10:56+0200\n"
+"POT-Creation-Date: 2025-10-23 12:52+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Ḷḷumex03, 2014\n"
 "Language-Team: Asturian (http://app.transifex.com/xfce/xfce4-panel/language/ast/)\n"
@@ -39,7 +39,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "paneles;axustes;preferencies;barra de tarees;autoanubrir;menú d'aplicaciones;entamar;botones;llanzador;area de notificación;estáu;iconos;plugins;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3734
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3858
 msgid "Panel"
 msgstr "Panel"
 
@@ -95,7 +95,7 @@ msgstr "Axustes del panel"
 #: common/resources/launcher-dialog.glade:235
 #: common/resources/launcher-dialog.glade:414
 #: common/resources/pager-dialog.glade:97
-#: common/resources/separator-dialog.glade:54
+#: common/resources/separator-dialog.glade:58
 #: common/resources/showdesktop-dialog.glade:34
 #: common/resources/sn-dialog.glade:65
 #: common/resources/tasklist-dialog.glade:77
@@ -112,12 +112,12 @@ msgstr "_Zarrar"
 #: common/resources/directorymenu-dialog.glade:49
 #: common/resources/launcher-dialog.glade:398
 #: common/resources/pager-dialog.glade:81
-#: common/resources/separator-dialog.glade:69
+#: common/resources/separator-dialog.glade:73
 #: common/resources/showdesktop-dialog.glade:49
 #: common/resources/tasklist-dialog.glade:93
 #: common/resources/windowmenu-dialog.glade:63
 #: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:3800
+#: panel/panel-window.c:3924
 msgid "_Help"
 msgstr "_Ayuda"
 
@@ -142,7 +142,7 @@ msgid "Remove the currently selected panel"
 msgstr "Desancia'l panel esbilláu anguaño"
 
 #: common/resources/panel-preferences-dialog.glade:375
-#: common/resources/panel-preferences-dialog.glade:738
+#: common/resources/panel-preferences-dialog.glade:755
 msgid "<b>General</b>"
 msgstr "<b>Xeneral</b>"
 
@@ -173,172 +173,183 @@ msgstr "Afo_rrar espaciu nos berbesos de la pantalla pal panel"
 
 #: common/resources/panel-preferences-dialog.glade:457
 msgid ""
-"Select this option if you don't want maximized windows to cover the area "
-"behind the panel. This only works when the panel is attached to a screen "
-"edge."
-msgstr "Esbilla esta opción si nun quies que les ventanes maximizaes atoten l'area endetrás del panel. Esto namái furrula cuandu'l panel tea pegáu al berbesu de la pantalla."
+"Select this option if you don't want maximized windows to overlap the panel "
+"area. This only works when the panel is attached to a screen edge and "
+"autohide is disabled."
+msgstr ""
 
-#: common/resources/panel-preferences-dialog.glade:478
+#: common/resources/panel-preferences-dialog.glade:470
+msgid "_Keep panel below windows"
+msgstr ""
+
+#: common/resources/panel-preferences-dialog.glade:474
+msgid ""
+"Select this option if you want windows to cover the panel. When autohide is "
+"enabled, panel is always on top. On wayland option is greyed out unless "
+"/force-all-internal property is set."
+msgstr ""
+
+#: common/resources/panel-preferences-dialog.glade:495
 msgid "Au_tomatically hide the panel:"
 msgstr "Anubrir panel au_tomaticamente:"
 
-#: common/resources/panel-preferences-dialog.glade:519
+#: common/resources/panel-preferences-dialog.glade:536
 msgid "O_utput:"
 msgstr "S_alida:"
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
-#: common/resources/panel-preferences-dialog.glade:563
+#: common/resources/panel-preferences-dialog.glade:580
 msgid "<b>Measurements</b>"
 msgstr "<b>Midíes</b>"
 
-#: common/resources/panel-preferences-dialog.glade:578
+#: common/resources/panel-preferences-dialog.glade:595
 msgid "Row _size (pixels):"
 msgstr "Tamañu de la filera (Pixel_s)"
 
-#: common/resources/panel-preferences-dialog.glade:592
+#: common/resources/panel-preferences-dialog.glade:609
 msgid "Num_ber of rows:"
 msgstr "Núm_beru de fileres."
 
-#: common/resources/panel-preferences-dialog.glade:606
+#: common/resources/panel-preferences-dialog.glade:623
 msgid "L_ength (pixels):"
 msgstr "_Llargor (pixels)"
 
-#: common/resources/panel-preferences-dialog.glade:635
+#: common/resources/panel-preferences-dialog.glade:652
 msgid "Border width (pixels):"
 msgstr "Anchor del berbesu (pixels):"
 
-#: common/resources/panel-preferences-dialog.glade:658
+#: common/resources/panel-preferences-dialog.glade:675
 msgid "A_utomatically increase the length"
 msgstr "Aumentar automáticamente la llonxitú"
 
-#: common/resources/panel-preferences-dialog.glade:662
+#: common/resources/panel-preferences-dialog.glade:679
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr "Esbilla esta opción p'aumentar automáticamente la llonxitú del panel si los complementos piden más espaciu."
 
-#: common/resources/panel-preferences-dialog.glade:712
+#: common/resources/panel-preferences-dialog.glade:729
 msgid "D_isplay"
 msgstr "P_antalla"
 
-#: common/resources/panel-preferences-dialog.glade:753
+#: common/resources/panel-preferences-dialog.glade:770
 msgid "Dark mode"
 msgstr "Mou prietu"
 
-#: common/resources/panel-preferences-dialog.glade:793
+#: common/resources/panel-preferences-dialog.glade:810
 msgid "<b>Background</b>"
 msgstr "<b>Fondu</b>"
 
-#: common/resources/panel-preferences-dialog.glade:808
-#: common/resources/separator-dialog.glade:119
+#: common/resources/panel-preferences-dialog.glade:825
+#: common/resources/separator-dialog.glade:123
 msgid "_Style:"
 msgstr "E_stilu:"
 
-#: common/resources/panel-preferences-dialog.glade:840
+#: common/resources/panel-preferences-dialog.glade:857
 msgid "C_olor:"
 msgstr "C_olor:"
 
-#: common/resources/panel-preferences-dialog.glade:855
+#: common/resources/panel-preferences-dialog.glade:872
 msgid "Pick a Panel Color"
 msgstr "Escueyi una color del panel"
 
-#: common/resources/panel-preferences-dialog.glade:868
+#: common/resources/panel-preferences-dialog.glade:885
 msgid "_File:"
 msgstr "_Ficheru:"
 
-#: common/resources/panel-preferences-dialog.glade:881
+#: common/resources/panel-preferences-dialog.glade:898
 msgid "Select A Background Image"
 msgstr "Esbilla una imaxe de fondu"
 
-#: common/resources/panel-preferences-dialog.glade:908
+#: common/resources/panel-preferences-dialog.glade:925
 msgid "<b>Icons</b>"
 msgstr "<b>Iconos</b>"
 
-#: common/resources/panel-preferences-dialog.glade:922
+#: common/resources/panel-preferences-dialog.glade:939
 msgid "Adjust size au_tomatically"
 msgstr "Afi_tar tamañu atomáticamente"
 
-#: common/resources/panel-preferences-dialog.glade:959
+#: common/resources/panel-preferences-dialog.glade:976
 msgid "Fixed icon _size (pixels):"
 msgstr "Tamañu d'iconu iguáu (pixels):"
 
-#: common/resources/panel-preferences-dialog.glade:1002
+#: common/resources/panel-preferences-dialog.glade:1019
 msgid "<b>Opacity</b>"
 msgstr "<b>Opacidá</b>"
 
-#: common/resources/panel-preferences-dialog.glade:1028
+#: common/resources/panel-preferences-dialog.glade:1045
 msgid "Configure..."
 msgstr "Configurar..."
 
-#: common/resources/panel-preferences-dialog.glade:1066
+#: common/resources/panel-preferences-dialog.glade:1083
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr "<b>El compositor ta desautiváu agora mesmu</b>\nPermiti'l compositor nel xestor de ventanas pa cambear los axustes d'opacidá nel panel."
 
 #. I18N: label for the enter transparency slider
-#: common/resources/panel-preferences-dialog.glade:1106
+#: common/resources/panel-preferences-dialog.glade:1123
 msgid "_Enter:"
 msgstr "_Introducir:"
 
 #. I18N: label for the leave transparency slider
-#: common/resources/panel-preferences-dialog.glade:1133
+#: common/resources/panel-preferences-dialog.glade:1150
 msgid "_Leave:"
 msgstr "_Dexar:"
 
-#: common/resources/panel-preferences-dialog.glade:1146
+#: common/resources/panel-preferences-dialog.glade:1163
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "La tresparencia cuando'l punteru nun tea enriba'l panel, con 0 siendo tresparente y 100 opacu."
 
-#: common/resources/panel-preferences-dialog.glade:1173
+#: common/resources/panel-preferences-dialog.glade:1190
 msgid "Appeara_nce"
 msgstr "As_peutu"
 
-#: common/resources/panel-preferences-dialog.glade:1223
+#: common/resources/panel-preferences-dialog.glade:1240
 #: common/resources/launcher-dialog.glade:219 panel/panel-dialogs.c:157
 #: panel/panel-item-dialog.c:197
 msgid "_Add"
 msgstr "_Amestar"
 
-#: common/resources/panel-preferences-dialog.glade:1228
+#: common/resources/panel-preferences-dialog.glade:1245
 msgid "Add new item to this panel"
 msgstr "Amestar l'elementu nuevu a esti panel"
 
 #. remove
-#: common/resources/panel-preferences-dialog.glade:1240
-#: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:353
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1080
+#: common/resources/panel-preferences-dialog.glade:1257
+#: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:354
+#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1103
 #: plugins/launcher/launcher-dialog.c:836
 msgid "_Remove"
 msgstr "_Desaniciar"
 
-#: common/resources/panel-preferences-dialog.glade:1245
+#: common/resources/panel-preferences-dialog.glade:1262
 msgid "Remove currently selected item"
 msgstr "Desaniciar l'elementu esbilláu anguaño"
 
-#: common/resources/panel-preferences-dialog.glade:1261
+#: common/resources/panel-preferences-dialog.glade:1278
 #: common/resources/launcher-dialog.glade:559
 msgid "Edit the currently selected item"
 msgstr "Editar l'elementu esbilláu anguaño"
 
-#: common/resources/panel-preferences-dialog.glade:1282
+#: common/resources/panel-preferences-dialog.glade:1299
 msgid "Show about information of the currently selected item"
 msgstr "Amosar información tocante al elementu esbilláu anguaño"
 
-#: common/resources/panel-preferences-dialog.glade:1325
+#: common/resources/panel-preferences-dialog.glade:1342
 #: common/resources/launcher-dialog.glade:509
 msgid "Move currently selected item up by one row"
 msgstr "Mover l'oxetu esbilláu anguaño una filera hacia arriba"
 
-#: common/resources/panel-preferences-dialog.glade:1346
+#: common/resources/panel-preferences-dialog.glade:1363
 #: common/resources/launcher-dialog.glade:529
 msgid "Move currently selected item down by one row"
 msgstr "Mover l'oxetu esbilláu anguaño una filera hacia abaxo"
 
-#: common/resources/panel-preferences-dialog.glade:1380
+#: common/resources/panel-preferences-dialog.glade:1397
 msgid "Ite_ms"
 msgstr "O_xetos"
 
@@ -449,7 +460,7 @@ msgstr "Esbilla esta opción p'amosar el nome xenéricu l'aplicación nel menú,
 #: common/resources/applicationsmenu-dialog.glade:229
 #: common/resources/clock-dialog.glade:405
 #: common/resources/directorymenu-dialog.glade:150
-#: common/resources/separator-dialog.glade:177
+#: common/resources/separator-dialog.glade:222
 #: common/resources/tasklist-dialog.glade:257
 #: common/resources/windowmenu-dialog.glade:206
 msgid "Appearance"
@@ -854,27 +865,31 @@ msgstr "Movese alredior de les estayes de trabayu"
 msgid "<b>Appearance</b>"
 msgstr "<b>Aspeutu</b>"
 
-#: common/resources/separator-dialog.glade:23
+#: common/resources/separator-dialog.glade:27
 msgid "Transparent"
 msgstr "Tresparente"
 
-#: common/resources/separator-dialog.glade:26
-#: common/resources/separator-dialog.glade:38 plugins/actions/actions.c:726
+#: common/resources/separator-dialog.glade:30
+#: common/resources/separator-dialog.glade:42 plugins/actions/actions.c:726
 #: plugins/separator/separator.desktop.in.in:4
 msgid "Separator"
 msgstr "Separtador"
 
-#: common/resources/separator-dialog.glade:29
+#: common/resources/separator-dialog.glade:33
 msgid "Handle"
 msgstr "Remanar"
 
-#: common/resources/separator-dialog.glade:32
+#: common/resources/separator-dialog.glade:36
 msgid "Dots"
 msgstr "Puntos"
 
-#: common/resources/separator-dialog.glade:156
+#: common/resources/separator-dialog.glade:161
 msgid "_Expand"
 msgstr "_Espander"
+
+#: common/resources/separator-dialog.glade:183
+msgid "Si_ze:"
+msgstr ""
 
 #: common/resources/showdesktop-dialog.glade:18
 #: plugins/showdesktop/showdesktop.c:322
@@ -1115,7 +1130,7 @@ msgid "Enable _urgency notification"
 msgstr "Habilitar notificación _urxencia"
 
 #: libxfce4panel/xfce-panel-plugin.c:1109
-#: panel/panel-preferences-dialog.c:1540
+#: panel/panel-preferences-dialog.c:1563
 msgid "Remove"
 msgstr "Desanciar"
 
@@ -1125,7 +1140,7 @@ msgid ""
 msgstr "Esborrar l'oxetu del panel quier decir que la so configuración va desaniciase."
 
 #: libxfce4panel/xfce-panel-plugin.c:1114
-#: panel/panel-preferences-dialog.c:1547
+#: panel/panel-preferences-dialog.c:1570
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "¿De xuru que quies desaniciar «%s»?"
@@ -1136,7 +1151,7 @@ msgid "_Properties"
 msgstr "_Propiedaes"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3809
+#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3933
 msgid "_About"
 msgstr "_Tocante a"
 
@@ -1150,17 +1165,17 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3746
+#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3870
 msgid "Add _New Items..."
 msgstr "Amestar elementos _nuevos..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3757
+#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3881
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferencies del panel..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3784
+#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3908
 msgid "Log _Out"
 msgstr "Zarrar _sesión"
 
@@ -1287,14 +1302,14 @@ msgstr "Executar"
 msgid "Failed to launch the migration application"
 msgstr "Fallu al llanzar l'aplicación de migración"
 
-#: panel/panel-application.c:343
+#: panel/panel-application.c:344
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr "Nun se pudo cargar el plugin \"%s\". ¿Quies desanicialo de la configuración del panel xfce4?"
 
-#: panel/panel-application.c:345
+#: panel/panel-application.c:346
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -1304,46 +1319,46 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr "Esti plugin ta na configuración del panel xfce4, pero nun se pudo cargar. Esto pué debese a problemes cola istalación. Si sabes lo que faes, puedes desanicialu dafechu. Sinon, sedría meyor colar ya facer un backup de la configuración d'anguañu con %s; dempués, compreba la to istalación ya intenta aniciar el panel xfc4 otra vegada."
 
-#: panel/panel-application.c:352
+#: panel/panel-application.c:353
 msgid "Plugin loading failure"
 msgstr "Hebu un fallu al cargar el plugin"
 
-#: panel/panel-application.c:353
+#: panel/panel-application.c:354
 msgid "_Quit"
 msgstr "_Colar"
 
-#: panel/panel-application.c:1033
+#: panel/panel-application.c:1034
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Esto creará un complementu de llanzador nuevu nel panel ya inxertará los ficheros soltaos como elementos del menú."
 
-#: panel/panel-application.c:1036
+#: panel/panel-application.c:1037
 msgid "Create _Launcher"
 msgstr "Crear _llanzador"
 
-#: panel/panel-application.c:1037
+#: panel/panel-application.c:1038
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Crear nueu llanzador dende l'archivu d'escritoriu %d"
 msgstr[1] "Crear nueu llanzador dende los archivos d'escritoriu %d"
 
-#: panel/panel-application.c:1800
+#: panel/panel-application.c:1805
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Aniciesti X ensin el xestor de sesión. Primir Colar zarrará'l sirvidor X."
 
-#: panel/panel-application.c:1803
+#: panel/panel-application.c:1808
 msgid "Quit"
 msgstr "Colar"
 
-#: panel/panel-application.c:1803
+#: panel/panel-application.c:1808
 msgid "Are you sure you want to quit the panel?"
 msgstr "¿De xuru que quies colar d'esti panel?"
 
-#: panel/panel-application.c:1811
+#: panel/panel-application.c:1816
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Fallu al executar el comandu «%s»"
@@ -1387,7 +1402,7 @@ msgstr "_Encaboxar"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Por favor, esbilla un panel pal complementu nuevu:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1028
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1050
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -1432,39 +1447,39 @@ msgstr "Reaniciar plugin"
 msgid "_Execute"
 msgstr "_Executar"
 
-#: panel/panel-preferences-dialog.c:575
+#: panel/panel-preferences-dialog.c:586
 msgid "Automatic"
 msgstr "Automáticu"
 
-#: panel/panel-preferences-dialog.c:584
+#: panel/panel-preferences-dialog.c:595
 msgid "Primary"
 msgstr "Primariu"
 
 #. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:603
+#: panel/panel-preferences-dialog.c:614
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: panel/panel-preferences-dialog.c:1079
+#: panel/panel-preferences-dialog.c:1102
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Desaniciaránse dafechu les configuraciones del panel y del complementu"
 
-#: panel/panel-preferences-dialog.c:1088
+#: panel/panel-preferences-dialog.c:1111
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "¿De xuru que quies desaniciar el panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1385
+#: panel/panel-preferences-dialog.c:1408
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(esternu)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1390
+#: panel/panel-preferences-dialog.c:1413
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1473,21 +1488,21 @@ msgstr "Nome internu: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1402
+#: panel/panel-preferences-dialog.c:1425
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nome internu: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1549
+#: panel/panel-preferences-dialog.c:1572
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Si desanicies l'elementu del panel, perderáse dafechu."
 
-#: panel/panel-preferences-dialog.c:1553
+#: panel/panel-preferences-dialog.c:1576
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "¿De xuru que quies desaniciar estos %d oxetos?"
 
-#: panel/panel-preferences-dialog.c:1555
+#: panel/panel-preferences-dialog.c:1578
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Si los desanicies del panel perderanse dafechu pa siempres."
 
@@ -1515,7 +1530,7 @@ msgstr "Con esperiencia"
 msgid "Expert"
 msgstr "Espertu"
 
-#: panel/panel-window.c:3771
+#: panel/panel-window.c:3895
 msgid "_Lock Panel"
 msgstr "_Bloquiar panel"
 
@@ -2170,7 +2185,7 @@ msgstr "Llanzador de programa con menú opcional"
 msgid "Unable to open the workspace settings"
 msgstr "Nun puen abrise los axustes de la estaya de trabayu"
 
-#: plugins/pager/pager-buttons.c:624 plugins/windowmenu/windowmenu.c:946
+#: plugins/pager/pager-buttons.c:628 plugins/windowmenu/windowmenu.c:959
 #, c-format
 msgid "Workspace %d"
 msgstr "Estaya de trabayu %d"
@@ -2233,32 +2248,32 @@ msgid ""
 "items"
 msgstr "Amuesa oxetos de notificación d'estáu (indicadores d'aplicaciones) ya oxetos de la barra de sistema"
 
-#: plugins/tasklist/tasklist-widget.c:3156
+#: plugins/tasklist/tasklist-widget.c:3171
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Nun se pudo llanzar otra istancia de '%s'"
 
-#: plugins/tasklist/tasklist-widget.c:3183
+#: plugins/tasklist/tasklist-widget.c:3198
 msgid "Launch New Instance"
 msgstr "Llanzar istancia nueva"
 
-#: plugins/tasklist/tasklist-widget.c:3938
+#: plugins/tasklist/tasklist-widget.c:3953
 msgid "Mi_nimize All"
 msgstr "Mi_nimizar too"
 
-#: plugins/tasklist/tasklist-widget.c:3945
+#: plugins/tasklist/tasklist-widget.c:3960
 msgid "Un_minimize All"
 msgstr "De_smaximizar too"
 
-#: plugins/tasklist/tasklist-widget.c:3952
+#: plugins/tasklist/tasklist-widget.c:3967
 msgid "Ma_ximize All"
 msgstr "Ma_ximizar too"
 
-#: plugins/tasklist/tasklist-widget.c:3959
+#: plugins/tasklist/tasklist-widget.c:3974
 msgid "_Unmaximize All"
 msgstr "_Desmaxinimizar too"
 
-#: plugins/tasklist/tasklist-widget.c:3970
+#: plugins/tasklist/tasklist-widget.c:3985
 msgid "_Close All"
 msgstr "_Zarrar too"
 
@@ -2266,28 +2281,28 @@ msgstr "_Zarrar too"
 msgid "Switch between open windows using buttons"
 msgstr "Intercamudar ventanes abiertes usando los botones"
 
-#: plugins/windowmenu/windowmenu.c:725
+#: plugins/windowmenu/windowmenu.c:738
 msgid "Desktop"
 msgstr "Escritoriu"
 
-#: plugins/windowmenu/windowmenu.c:1341
+#: plugins/windowmenu/windowmenu.c:1354
 msgid "No Windows"
 msgstr "Ensin ventanes"
 
-#: plugins/windowmenu/windowmenu.c:1356
+#: plugins/windowmenu/windowmenu.c:1369
 msgid "Urgent Windows"
 msgstr "Ventanes urxentes"
 
-#: plugins/windowmenu/windowmenu.c:1407
+#: plugins/windowmenu/windowmenu.c:1420
 msgid "Add Workspace"
 msgstr "Amestar estaya de trabayu"
 
-#: plugins/windowmenu/windowmenu.c:1429
+#: plugins/windowmenu/windowmenu.c:1442
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Desaniciar estaya de trabayu «%s»"
 
-#: plugins/windowmenu/windowmenu.c:1431
+#: plugins/windowmenu/windowmenu.c:1444
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Desaniciar estaya de trabayu %d"
