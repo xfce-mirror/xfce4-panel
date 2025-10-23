@@ -123,6 +123,7 @@ panel_item_list_model_finalize (GObject *object)
   if (model->itembar != NULL)
     g_signal_handlers_disconnect_by_data (model->itembar, model);
 
+  g_clear_object (&model->application);
   g_clear_object (&model->panel);
   g_clear_object (&model->itembar);
   g_clear_pointer (&model->items, g_list_free);
