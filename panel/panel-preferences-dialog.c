@@ -345,7 +345,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
 
   /* create "About" action */
   GMenu *menu = xfce_item_list_view_get_menu (dialog->item_view);
-  GMenuItem *about = g_menu_item_new (_("About the item"), "xfce-item-list-view.about");
+  GMenuItem *about = g_menu_item_new (C_ ("plugin context menu", "_About"), "xfce-item-list-view.about");
   GIcon *icon = g_themed_icon_new ("help-about-symbolic");
   g_menu_item_set_icon (about, icon);
   g_menu_item_set_attribute_value (about, XFCE_MENU_ATTRIBUTE_TOOLTIP,
