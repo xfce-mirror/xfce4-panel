@@ -174,7 +174,7 @@ struct _PanelPreferencesDialog
 
   /* items list widgets and store */
   XfceItemListView *item_view;
-  GtkWidget *tree_view;
+  GtkTreeView *tree_view;
   XfceItemListStore *store;
 
   /* item about action */
@@ -221,6 +221,8 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   GObject *window;
   GObject *object;
   GObject *info;
+  GtkTreeViewColumn *column;
+  GtkCellRenderer *renderer;
   GtkTreeSelection *selection;
   gchar *path_old;
   gchar *path_new;
@@ -320,8 +322,13 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   g_signal_connect (dialog->item_view, "remove-items", G_CALLBACK (panel_preferences_dialog_items_remove), dialog);
   g_signal_connect (dialog->item_view, "add-item", G_CALLBACK (panel_preferences_dialog_item_add), dialog);
   g_signal_connect (dialog->item_view, "edit-item", G_CALLBACK (panel_preferences_dialog_item_properties), dialog);
-  dialog->tree_view = xfce_item_list_view_get_tree_view (dialog->item_view);
+  dialog->tree_view = GTK_TREE_VIEW (xfce_item_list_view_get_tree_view (dialog->item_view));
   xfce_item_list_view_set_model (dialog->item_view, XFCE_ITEM_LIST_MODEL (dialog->store));
+
+  /* setup renderers */
+  column = gtk_tree_view_get_column (dialog->tree_view, XFCE_ITEM_LIST_VIEW_COLUMN_ICON);
+  renderer = g_object_get_data (G_OBJECT (column), "renderer");
+  g_object_set (renderer, "stock-size", GTK_ICON_SIZE_LARGE_TOOLBAR, NULL);
 
   /* create "About" action */
   GMenu *menu = xfce_item_list_view_get_menu (dialog->item_view);
@@ -342,7 +349,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   g_object_unref (dialog->about);
 
   /* setup tree selection */
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->tree_view));
+  selection = gtk_tree_view_get_selection (dialog->tree_view);
   gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
   g_signal_connect (G_OBJECT (selection), "changed",
                     G_CALLBACK (panel_preferences_dialog_item_selection_changed), dialog);
@@ -1228,7 +1235,7 @@ panel_preferences_dialog_item_get_selected (PanelPreferencesDialog *dialog,
 
   /* get the treeview selection */
   panel_return_val_if_fail (GTK_IS_WIDGET (dialog->tree_view), NULL);
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->tree_view));
+  selection = gtk_tree_view_get_selection (dialog->tree_view);
 
   /* get the selection items */
   if (gtk_tree_selection_count_selected_rows (selection) > 0)
@@ -1355,7 +1362,7 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget *itembar,
   /* memorize selected item */
   panel_preferences_dialog_item_get_selected (dialog, NULL, &selected);
   panel_return_if_fail (GTK_IS_WIDGET (dialog->tree_view));
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->tree_view));
+  selection = gtk_tree_view_get_selection (dialog->tree_view);
 
   g_signal_handlers_block_by_func (dialog->store, G_CALLBACK (panel_preferences_dialog_before_item_remove), dialog);
   xfce_item_list_store_clear (dialog->store);
@@ -1433,7 +1440,7 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget *itembar,
   selected = gtk_tree_selection_get_selected_rows (selection, NULL);
   if (selected != NULL)
     {
-      gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (dialog->tree_view), selected->data, NULL, TRUE, 0, 0);
+      gtk_tree_view_scroll_to_cell (dialog->tree_view, selected->data, NULL, TRUE, 0, 0);
       g_list_free (selected);
     }
 }
@@ -1495,15 +1502,14 @@ panel_preferences_dialog_after_item_move (XfceItemListStore *store,
 {
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
-  GtkWidget *treeview = dialog->tree_view;
-  panel_return_if_fail (GTK_IS_WIDGET (treeview));
-  GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+  panel_return_if_fail (GTK_IS_WIDGET (dialog->tree_view));
+  GtkTreeSelection *selection = gtk_tree_view_get_selection (dialog->tree_view);
   panel_preferences_dialog_item_selection_changed (selection, dialog);
 
   /* make the new selected position visible if moved out of area */
   GtkTreePath *path = gtk_tree_path_new_from_indices (dest_index, -1);
-  gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (treeview), path, NULL, FALSE, 0, 0);
-  gtk_tree_view_set_cursor (GTK_TREE_VIEW (treeview), path, NULL, FALSE);
+  gtk_tree_view_scroll_to_cell (dialog->tree_view, path, NULL, FALSE, 0, 0);
+  gtk_tree_view_set_cursor (dialog->tree_view, path, NULL, FALSE);
   gtk_tree_path_free (path);
 }
 
@@ -1568,8 +1574,7 @@ panel_preferences_dialog_before_item_remove (XfceItemListStore *store,
   if (G_LIKELY (selected != NULL))
     {
       /* update selection so the view can be scrolled to selection when reloaded */
-      GObject *treeview = G_OBJECT (dialog->tree_view);
-      GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+      GtkTreeSelection *selection = gtk_tree_view_get_selection (dialog->tree_view);
       gboolean update_selection = TRUE;
       if (!gtk_tree_model_iter_previous (GTK_TREE_MODEL (dialog->store), &iter))
         {
@@ -1758,9 +1763,8 @@ panel_preferences_dialog_show_internal (PanelWindow *active,
           widget = gtk_builder_get_object (GTK_BUILDER (dialog_singleton), "notebook");
           panel_return_if_fail (GTK_IS_WIDGET (widget));
           gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 2);
-          widget = G_OBJECT (dialog_singleton->tree_view);
-          panel_return_if_fail (GTK_IS_WIDGET (widget));
-          gtk_tree_view_set_cursor (GTK_TREE_VIEW (widget), path, NULL, FALSE);
+          panel_return_if_fail (GTK_IS_WIDGET (dialog_singleton->tree_view));
+          gtk_tree_view_set_cursor (dialog_singleton->tree_view, path, NULL, FALSE);
           gtk_tree_path_free (path);
           g_object_set_data (G_OBJECT (active), "prefs-dialog-item", NULL);
         }
