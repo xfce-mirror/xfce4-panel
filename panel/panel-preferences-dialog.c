@@ -123,11 +123,6 @@ panel_preferences_dialog_before_item_move (XfceItemListStore *store,
                                            gint source_index,
                                            gint dest_index,
                                            PanelPreferencesDialog *dialog);
-static void
-panel_preferences_dialog_after_item_move (XfceItemListStore *store,
-                                          gint source_index,
-                                          gint dest_index,
-                                          PanelPreferencesDialog *dialog);
 static gboolean
 panel_preferences_dialog_items_remove (GtkWidget *item_view,
                                        const gint *items,
@@ -329,7 +324,6 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   dialog->store = xfce_item_list_store_new (N_ITEM_COLUMNS,
                                             G_TYPE_OBJECT); /* ITEM_COLUMN_PROVIDER */
   g_signal_connect (dialog->store, "before-move-item", G_CALLBACK (panel_preferences_dialog_before_item_move), dialog);
-  g_signal_connect (dialog->store, "after-move-item", G_CALLBACK (panel_preferences_dialog_after_item_move), dialog);
   g_signal_connect (dialog->store, "before-remove-item", G_CALLBACK (panel_preferences_dialog_before_item_remove), dialog);
 
   /* build tree for panel items */
@@ -1517,27 +1511,6 @@ panel_preferences_dialog_before_item_move (XfceItemListStore *store,
         }
       gtk_tree_path_free (path);
     }
-}
-
-
-
-static void
-panel_preferences_dialog_after_item_move (XfceItemListStore *store,
-                                          gint source_index,
-                                          gint dest_index,
-                                          PanelPreferencesDialog *dialog)
-{
-  panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
-
-  panel_return_if_fail (GTK_IS_WIDGET (dialog->tree_view));
-  GtkTreeSelection *selection = gtk_tree_view_get_selection (dialog->tree_view);
-  panel_preferences_dialog_item_selection_changed (selection, dialog);
-
-  /* make the new selected position visible if moved out of area */
-  GtkTreePath *path = gtk_tree_path_new_from_indices (dest_index, -1);
-  gtk_tree_view_scroll_to_cell (dialog->tree_view, path, NULL, FALSE, 0, 0);
-  gtk_tree_view_set_cursor (dialog->tree_view, path, NULL, FALSE);
-  gtk_tree_path_free (path);
 }
 
 
