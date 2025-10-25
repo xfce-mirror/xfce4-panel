@@ -152,6 +152,7 @@ panel_preferences_dialog_item_selection_changed (GtkTreeSelection *selection,
 enum
 {
   ITEM_COLUMN_PROVIDER = XFCE_ITEM_LIST_MODEL_COLUMN_USER,
+  ITEM_COLUMN_ABOUT,
   N_ITEM_COLUMNS
 };
 
@@ -322,7 +323,8 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
 
   /* create store for panel items */
   dialog->store = xfce_item_list_store_new (N_ITEM_COLUMNS,
-                                            G_TYPE_OBJECT); /* ITEM_COLUMN_PROVIDER */
+                                            G_TYPE_OBJECT, /* ITEM_COLUMN_PROVIDER */
+                                            G_TYPE_BOOLEAN); /* ITEM_COLUMN_ABOUT */
   g_signal_connect (dialog->store, "before-move-item", G_CALLBACK (panel_preferences_dialog_before_item_move), dialog);
   g_signal_connect (dialog->store, "before-remove-item", G_CALLBACK (panel_preferences_dialog_before_item_remove), dialog);
 
@@ -1441,6 +1443,8 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget *itembar,
                                                             xfce_panel_plugin_provider_get_show_configure (li->data),
                                                             ITEM_COLUMN_PROVIDER,
                                                             li->data,
+                                                            ITEM_COLUMN_ABOUT,
+                                                            xfce_panel_plugin_provider_get_show_about (li->data),
                                                             -1);
       xfce_item_list_model_set_index (XFCE_ITEM_LIST_MODEL (dialog->store), &iter, index);
 
@@ -1659,41 +1663,15 @@ static void
 panel_preferences_dialog_item_selection_changed (GtkTreeSelection *selection,
                                                  PanelPreferencesDialog *dialog)
 {
-  GList *selected = NULL;
-  GtkWidget *itembar;
-  gboolean active;
-
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
-  panel_preferences_dialog_item_get_selected (dialog, NULL, &selected);
-  if (G_LIKELY (selected != NULL))
-    {
-      /* leave if the selection change is irrelevant */
-      itembar = gtk_widget_get_parent (GTK_WIDGET (selected->data));
-      if (itembar != gtk_bin_get_child (GTK_BIN (dialog->active)))
-        {
-          g_list_free (selected);
-          return;
-        }
+  gint *sel_items = NULL;
+  gint n_sel_items = xfce_item_list_view_get_selected_items (dialog->item_view, &sel_items);
+  XfceItemListModel *model = xfce_item_list_view_get_model (dialog->item_view);
 
-      if (g_list_length (selected) > 1)
-        {
-          /* make all actions insensitive */
-          g_simple_action_set_enabled (dialog->about, FALSE);
-          g_list_free (selected);
-          return;
-        }
-
-      /* update sensitivity of actions */
-      active = xfce_panel_plugin_provider_get_show_about (selected->data);
-      g_simple_action_set_enabled (dialog->about, active);
-      g_list_free (selected);
-    }
-  else
-    {
-      /* make all actions insensitive */
-      g_simple_action_set_enabled (dialog->about, FALSE);
-    }
+  /* update sensitivity of actions */
+  g_simple_action_set_enabled (dialog->about, n_sel_items == 1 && xfce_item_list_model_test (model, sel_items[0], ITEM_COLUMN_ABOUT));
+  g_free (sel_items);
 }
 
 
