@@ -1583,7 +1583,7 @@ panel_preferences_dialog_items_remove (GtkWidget *item_view,
       gboolean confirmed = xfce_dialog_confirm (GTK_WINDOW (gtk_widget_get_toplevel (item_view)), "list-remove", label, secondary, "%s", primary);
       g_list_free (selected);
 
-       /* continue propagation? */
+      /* continue propagation? */
       return !confirmed;
     }
 
