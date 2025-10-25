@@ -345,6 +345,8 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   GMenuItem *about = g_menu_item_new (_("About the item"), "xfce-item-list-view.about");
   GIcon *icon = g_themed_icon_new ("help-about-symbolic");
   g_menu_item_set_icon (about, icon);
+  g_menu_item_set_attribute_value (about, XFCE_MENU_ATTRIBUTE_TOOLTIP,
+                                   g_variant_new_string (_("Show about information of the currently selected item")));
   g_object_unref (icon);
   g_menu_append_item (menu, about);
   g_object_unref (about);
