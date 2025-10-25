@@ -149,11 +149,6 @@ panel_preferences_dialog_item_about (GAction *about,
                                      GVariant *parameter,
                                      PanelPreferencesDialog *dialog);
 static void
-panel_preferences_dialog_item_row_changed (GtkTreeModel *model,
-                                           GtkTreePath *path,
-                                           GtkTreeIter *iter,
-                                           PanelPreferencesDialog *dialog);
-static void
 panel_preferences_dialog_item_selection_changed (GtkTreeSelection *selection,
                                                  PanelPreferencesDialog *dialog);
 
@@ -344,8 +339,6 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   g_signal_connect (dialog->item_view, "edit-item", G_CALLBACK (panel_preferences_dialog_item_properties), dialog);
   dialog->tree_view = xfce_item_list_view_get_tree_view (dialog->item_view);
   xfce_item_list_view_set_model (dialog->item_view, XFCE_ITEM_LIST_MODEL (dialog->store));
-  g_signal_connect (G_OBJECT (dialog->store), "row-changed",
-                    G_CALLBACK (panel_preferences_dialog_item_row_changed), dialog);
 
   /* create "About" action */
   GMenu *menu = xfce_item_list_view_get_menu (dialog->item_view);
@@ -1393,9 +1386,6 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget *itembar,
   xfce_item_list_store_clear (dialog->store);
   g_signal_handlers_unblock_by_func (dialog->store, G_CALLBACK (panel_preferences_dialog_before_item_remove), dialog);
 
-  g_signal_handlers_block_by_func (G_OBJECT (dialog->store),
-                                   G_CALLBACK (panel_preferences_dialog_item_row_changed), dialog);
-
   /* add items to the store */
   items = gtk_container_get_children (GTK_CONTAINER (itembar));
   for (li = items, i = 0; li != NULL; li = li->next, i++)
@@ -1463,9 +1453,6 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget *itembar,
 
   g_list_free (items);
   g_list_free (selected);
-
-  g_signal_handlers_unblock_by_func (G_OBJECT (dialog->store),
-                                     G_CALLBACK (panel_preferences_dialog_item_row_changed), dialog);
 
   /* scroll to selection */
   selected = gtk_tree_selection_get_selected_rows (selection, NULL);
@@ -1684,50 +1671,6 @@ panel_preferences_dialog_item_about (GAction *about,
   provider = panel_preferences_dialog_item_get_selected (dialog, NULL, NULL);
   if (G_LIKELY (provider != NULL))
     xfce_panel_plugin_provider_show_about (provider);
-}
-
-
-
-static void
-panel_preferences_dialog_item_row_changed (GtkTreeModel *model,
-                                           GtkTreePath *path,
-                                           GtkTreeIter *iter,
-                                           PanelPreferencesDialog *dialog)
-{
-  XfcePanelPluginProvider *provider = NULL;
-  gint position;
-  GtkWidget *itembar;
-  gint store_position;
-
-  panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
-  panel_return_if_fail (GTK_TREE_MODEL (dialog->store) == model);
-  panel_return_if_fail (PANEL_IS_WINDOW (dialog->active));
-
-  /* get the changed row */
-  gtk_tree_model_get (model, iter, ITEM_COLUMN_PROVIDER, &provider, -1);
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
-  store_position = gtk_tree_path_get_indices (path)[0];
-
-  /* actual position on the panel */
-  itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
-  position = panel_itembar_get_child_index (PANEL_ITEMBAR (itembar),
-                                            GTK_WIDGET (provider));
-
-  /* correct position in the list */
-  if (position < store_position)
-    store_position--;
-
-  /* move the item on the panel */
-  if (position != store_position)
-    {
-      panel_itembar_reorder_child (PANEL_ITEMBAR (itembar),
-                                   GTK_WIDGET (provider),
-                                   store_position);
-
-      panel_application_save_window (dialog->application,
-                                     dialog->active,
-                                     SAVE_PLUGIN_IDS);
-    }
 }
 
 
