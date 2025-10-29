@@ -2471,10 +2471,20 @@ xfce_tasklist_button_visible (XfceTasklistChild *child,
 
   if (xfce_tasklist_filter_monitors (tasklist))
     {
-      //GdkMonitor *monitor = tasklist_get_monitor (tasklist);
-      GdkMonitor *monitor = gdk_display_get_monitor(tasklist->display, tasklist->monitor_index);
-      GList *monitors = xfw_window_get_monitors (child->window);
-      if (!g_list_find_custom (monitors, monitor, panel_utils_compare_xfw_gdk_monitors))
+      gboolean found = FALSE;
+      GdkMonitor *my_monitor = gdk_display_get_monitor(tasklist->display, tasklist->monitor_index);
+      for (GList *li = xfw_window_get_monitors (child->window); li != NULL; li = li->next)
+        {
+          GdkMonitor *his_monitor = xfw_monitor_get_gdk_monitor(li->data);
+
+          if(my_monitor == his_monitor) 
+            {
+              found = TRUE;
+              break;
+            }
+        }
+
+      if (!found)
         return FALSE;
     }
 
