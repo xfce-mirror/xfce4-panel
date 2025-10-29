@@ -18,18 +18,18 @@
 
 #include "tasklist-widget.h"
 
-#include "common/panel-debug.h"
-#include "common/panel-private.h"
-#include "common/panel-utils.h"
+// #include "common/panel-debug.h"
+// #include "common/panel-private.h"
+// #include "common/panel-utils.h"
 
-#include <libxfce4ui/libxfce4ui.h>
-#include <libxfce4windowing/libxfce4windowing.h>
-#include <libxfce4windowingui/libxfce4windowingui.h>
+// #include <libxfce4ui/libxfce4ui.h>
+// #include <libxfce4windowing/libxfce4windowing.h>
+// #include <libxfce4windowingui/libxfce4windowingui.h>
 
 #ifdef ENABLE_X11
-#include <X11/Xlib.h>
-#include <X11/extensions/shape.h>
-#include <libxfce4windowing/xfw-x11.h>
+// #include <X11/Xlib.h>
+// #include <X11/extensions/shape.h>
+// #include <libxfce4windowing/xfw-x11.h>
 // Wayland does not supply a window id.  The window pointer should work for our purposes.
 #define tasklist_window_get_wid(window) \
   (xfw_windowing_get () == XFW_WINDOWING_X11 ? xfw_window_x11_get_xid (window) : ((gulong) window))
@@ -106,30 +106,6 @@ xfce_tasklist_app_get_name (XfwApplication *app)
 
 
 
-typedef enum _XfceTasklistSortOrder
-{
-  XFCE_TASKLIST_SORT_ORDER_TIMESTAMP, /* sort by unique_id */
-  XFCE_TASKLIST_SORT_ORDER_GROUP_TIMESTAMP, /* sort by group and then by timestamp */
-  XFCE_TASKLIST_SORT_ORDER_TITLE, /* sort by window title */
-  XFCE_TASKLIST_SORT_ORDER_GROUP_TITLE, /* sort by group and then by title */
-  XFCE_TASKLIST_SORT_ORDER_DND, /* append and support dnd */
-
-  XFCE_TASKLIST_SORT_ORDER_MIN = XFCE_TASKLIST_SORT_ORDER_TIMESTAMP,
-  XFCE_TASKLIST_SORT_ORDER_MAX = XFCE_TASKLIST_SORT_ORDER_DND,
-  XFCE_TASKLIST_SORT_ORDER_DEFAULT = XFCE_TASKLIST_SORT_ORDER_GROUP_TIMESTAMP
-} XfceTasklistSortOrder;
-
-typedef enum _XfceTasklistMClick
-{
-  XFCE_TASKLIST_MIDDLE_CLICK_NOTHING, /* do nothing */
-  XFCE_TASKLIST_MIDDLE_CLICK_CLOSE_WINDOW, /* close the window */
-  XFCE_TASKLIST_MIDDLE_CLICK_MINIMIZE_WINDOW, /* minimize, never minimize with button 1 */
-  XFCE_TASKLIST_MIDDLE_CLICK_NEW_INSTANCE, /* launches a new instance of the window */
-
-  XFCE_TASKLIST_MIDDLE_CLICK_MIN = XFCE_TASKLIST_MIDDLE_CLICK_NOTHING,
-  XFCE_TASKLIST_MIDDLE_CLICK_MAX = XFCE_TASKLIST_MIDDLE_CLICK_NEW_INSTANCE,
-  XFCE_TASKLIST_MIDDLE_CLICK_DEFAULT = XFCE_TASKLIST_MIDDLE_CLICK_NOTHING
-} XfceTasklistMClick;
 
 enum
 {
@@ -2496,7 +2472,7 @@ xfce_tasklist_button_visible (XfceTasklistChild *child,
   if (xfce_tasklist_filter_monitors (tasklist))
     {
       //GdkMonitor *monitor = tasklist_get_monitor (tasklist);
-      GdkMonitor *monitor = gdk_display_get_monitor(tasklist->display, tasklist->monitor_index)
+      GdkMonitor *monitor = gdk_display_get_monitor(tasklist->display, tasklist->monitor_index);
       GList *monitors = xfw_window_get_monitors (child->window);
       if (!g_list_find_custom (monitors, monitor, panel_utils_compare_xfw_gdk_monitors))
         return FALSE;

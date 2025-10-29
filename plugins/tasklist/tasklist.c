@@ -291,7 +291,7 @@ tasklist_plugin_configure_monitor_combobox (GtkBuilder    *builder,
       name = g_strdup_printf ("monitor-%d", i);
 
       title = g_strdup(gdk_monitor_get_model (monitor));
-      if (panel_str_is_empty (title))
+      if (xfce_str_is_empty (title))
         {
           g_free (title);
           title = g_strdup_printf (_("Monitor %d"), i + 1);
