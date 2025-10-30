@@ -31,8 +31,8 @@
 /* Taken from panel/panel-preferences-dialog.c */
 enum
 {
-  OUTPUT_NAME,
-  OUTPUT_TITLE
+  MONITOR_IDX,
+  MONITOR_TITLE
 };
 
 
@@ -215,7 +215,6 @@ tasklist_plugin_include_monitors_changed (GtkComboBox *combobox, XfceTasklist *t
 {
   GtkTreeIter   iter;
   GtkTreeModel *model;
-  gchar        *name;
   gint          index;
   guint         all_monitors;
   GValue        value = G_VALUE_INIT;
@@ -225,16 +224,16 @@ tasklist_plugin_include_monitors_changed (GtkComboBox *combobox, XfceTasklist *t
   if (gtk_combo_box_get_active_iter (combobox, &iter))
     {
       model = gtk_combo_box_get_model (combobox);
-      gtk_tree_model_get (model, &iter, OUTPUT_NAME, &name, -1);
-      if (sscanf (name, "monitor-%d", &index) == 1)
+      gtk_tree_model_get (model, &iter, MONITOR_IDX, &index, -1);
+
+      if(index > 0)
         {
+          index --;
           all_monitors = 0;
         }
       else
-        {
-          index = 0;
-          all_monitors = 1;
-        }
+        all_monitors = 1;
+        
 
       /* set monitor index */
       g_value_set_uint(&value, index);
@@ -243,8 +242,6 @@ tasklist_plugin_include_monitors_changed (GtkComboBox *combobox, XfceTasklist *t
       /* set all monitors flag */
       g_value_set_uint(&value, all_monitors);
       g_object_set_property(G_OBJECT(tasklist), "include-all-monitors", &value);
-
-      g_free (name);
     }
 }
 
@@ -260,7 +257,7 @@ tasklist_plugin_configure_monitor_combobox (GtkBuilder    *builder,
   GObject     *combobox, *store;
   GdkDisplay  *display;
   GdkMonitor  *monitor;
-  gchar       *title, *name;
+  gchar       *title;
   gboolean     selected = FALSE;
 
   /* Get ComboBox, make sure it is here */
@@ -284,8 +281,8 @@ tasklist_plugin_configure_monitor_combobox (GtkBuilder    *builder,
 
   /* Insert primary option: do not filter buttons by monitor */
   gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
-                                     OUTPUT_NAME, "all",
-                                     OUTPUT_TITLE, caption->str, -1);
+                                     MONITOR_IDX, 0,
+                                     MONITOR_TITLE, caption->str, -1);
 
   g_string_free(caption, TRUE);
 
@@ -298,9 +295,6 @@ tasklist_plugin_configure_monitor_combobox (GtkBuilder    *builder,
 
       monitor = gdk_display_get_monitor (display, i);
 
-      /* `name` must have this format since it is parsed later with sscanf() */
-      name = g_strdup_printf ("monitor-%d", i);
-
       title = g_strdup(gdk_monitor_get_model (monitor));
       if (xfce_str_is_empty (title))
         {
@@ -310,8 +304,8 @@ tasklist_plugin_configure_monitor_combobox (GtkBuilder    *builder,
 
       /* insert row into model */
       gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
-                                         OUTPUT_NAME, name,
-                                         OUTPUT_TITLE, title, -1);
+                                         MONITOR_IDX, i + 1,
+                                         MONITOR_TITLE, title, -1);
 
       /* if we have any monitor chosen - select it in combobox */
       if (!tasklist->all_monitors && tasklist->monitor_index == (guint)i)
@@ -320,7 +314,6 @@ tasklist_plugin_configure_monitor_combobox (GtkBuilder    *builder,
           selected = TRUE;
         }
 
-      g_free (name);
       g_free (title);
     }
 

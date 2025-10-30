@@ -58,9 +58,9 @@
   </object>
   <object class="GtkListStore" id="monitors-model">
     <columns>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-      <!-- column-name title -->
+      <!-- monitor index -->
+      <column type="gint"/>
+      <!-- monitor title -->
       <column type="gchararray"/>
     </columns>
   </object>
