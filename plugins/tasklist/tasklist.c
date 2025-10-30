@@ -272,11 +272,22 @@ tasklist_plugin_configure_monitor_combobox (GtkBuilder    *builder,
   panel_return_if_fail (GTK_IS_LIST_STORE (store));
   gtk_list_store_clear (GTK_LIST_STORE (store));
 
+  /*
+    Translations have an underscore to indicate the mnemonic.
+    But in the ComboBox we do not want to show the underscore,
+    so we remove it after translation.
+
+    TODO: actually remove '_' in the translation strings
+  */
+  GString* caption = g_string_new(_("Show windows from all mo_nitors"));
+  g_string_replace(caption, "_", "", 1);
+
   /* Insert primary option: do not filter buttons by monitor */
   gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
                                      OUTPUT_NAME, "all",
-                                     OUTPUT_TITLE, _("Show windows from all monitors"), -1);
+                                     OUTPUT_TITLE, caption->str, -1);
 
+  g_string_free(caption, TRUE);
 
   /* Get total number of monitors */
   display = gtk_widget_get_display (GTK_WIDGET (dialog));
