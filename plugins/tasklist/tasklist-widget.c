@@ -19,6 +19,7 @@
 #include "tasklist-widget.h"
 
 #ifdef ENABLE_X11
+// Wayland does not supply a window id.  The window pointer should work for our purposes.
 #define tasklist_window_get_wid(window) \
   (xfw_windowing_get () == XFW_WINDOWING_X11 ? xfw_window_x11_get_xid (window) : ((gulong) window))
 #else
