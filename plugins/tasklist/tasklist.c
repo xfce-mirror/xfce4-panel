@@ -28,6 +28,13 @@
 
 #define HANDLE_SIZE (4)
 
+/* Taken from panel/panel-preferences-dialog.c */
+enum
+{
+  MONITOR_IDX,
+  MONITOR_TITLE
+};
+
 
 struct _TasklistPlugin
 {
@@ -124,6 +131,7 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "grouping", G_TYPE_BOOLEAN },
     { "include-all-workspaces", G_TYPE_BOOLEAN },
     { "include-all-monitors", G_TYPE_BOOLEAN },
+    { "include-single-monitor", G_TYPE_UINT}, 
     { "flat-buttons", G_TYPE_BOOLEAN },
     { "switch-workspace-on-unminimize", G_TYPE_BOOLEAN },
     { "show-only-minimized", G_TYPE_BOOLEAN },
@@ -202,6 +210,125 @@ tasklist_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
   xfce_tasklist_update_monitor_geometry (XFCE_TASKLIST (plugin->tasklist));
 }
 
+static void
+tasklist_plugin_include_monitors_changed (GtkComboBox *combobox, XfceTasklist *tasklist)
+{
+  GtkTreeIter   iter;
+  GtkTreeModel *model;
+  gint          index;
+  guint         all_monitors;
+  GValue        value = G_VALUE_INIT;
+
+  g_value_init(&value, G_TYPE_UINT);
+
+  if (gtk_combo_box_get_active_iter (combobox, &iter))
+    {
+      model = gtk_combo_box_get_model (combobox);
+      gtk_tree_model_get (model, &iter, MONITOR_IDX, &index, -1);
+
+      if(index > 0)
+        {
+          index --;
+          all_monitors = 0;
+        }
+      else
+        all_monitors = 1;
+        
+
+      /* set monitor index */
+      g_value_set_uint(&value, index);
+      g_object_set_property(G_OBJECT(tasklist), "include-single-monitor", &value);
+
+      /* set all monitors flag */
+      g_value_set_uint(&value, all_monitors);
+      g_object_set_property(G_OBJECT(tasklist), "include-all-monitors", &value);
+    }
+}
+
+static void
+tasklist_plugin_configure_monitor_combobox (GtkBuilder    *builder, 
+                                            GObject       *dialog,
+                                            XfceTasklist  *tasklist)
+{
+  /* This function configures ComboBox with monitors name */
+
+  GtkTreeIter  iter;
+  gint         n_monitors, i, n = 0;
+  GObject     *combobox, *store;
+  GdkDisplay  *display;
+  GdkMonitor  *monitor;
+  gchar       *title;
+  gboolean     selected = FALSE;
+
+  /* Get ComboBox, make sure it is here */
+  combobox = gtk_builder_get_object (builder, "include-monitors");
+  panel_return_if_fail (GTK_IS_COMBO_BOX (combobox));
+
+  /* Get ComboBox model, make sure it is here, clear it */
+  store = gtk_builder_get_object (builder, "monitors-model");
+  panel_return_if_fail (GTK_IS_LIST_STORE (store));
+  gtk_list_store_clear (GTK_LIST_STORE (store));
+
+  /*
+    Translations have an underscore to indicate the mnemonic.
+    But in the ComboBox we do not want to show the underscore,
+    so we remove it after translation.
+
+    TODO: actually remove '_' in the translation strings
+  */
+  GString* caption = g_string_new(_("Show windows from all mo_nitors"));
+  g_string_replace(caption, "_", "", 1);
+
+  /* Insert primary option: do not filter buttons by monitor */
+  gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
+                                     MONITOR_IDX, 0,
+                                     MONITOR_TITLE, caption->str, -1);
+
+  g_string_free(caption, TRUE);
+
+  /* Get total number of monitors */
+  display = gtk_widget_get_display (GTK_WIDGET (dialog));
+  n_monitors = gdk_display_get_n_monitors (display);
+  for (i = 0; i < n_monitors; i++)
+    {
+      /* Taken from panel/panel-preferences-dialog.c */
+
+      monitor = gdk_display_get_monitor (display, i);
+
+      title = g_strdup(gdk_monitor_get_model (monitor));
+      if (xfce_str_is_empty (title))
+        {
+          g_free (title);
+          title = g_strdup_printf (_("Monitor %d"), i + 1);
+        }
+
+      /* insert row into model */
+      gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
+                                         MONITOR_IDX, i + 1,
+                                         MONITOR_TITLE, title, -1);
+
+      /* if we have any monitor chosen - select it in combobox */
+      if (!tasklist->all_monitors && tasklist->monitor_index == (guint)i)
+        {
+          gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combobox), &iter);
+          selected = TRUE;
+        }
+
+      g_free (title);
+    }
+
+  /* select default combobox row if none selected previously */
+  if (!selected)
+    gtk_combo_box_set_active (GTK_COMBO_BOX (combobox), 0);
+
+  /* catch `changed` events */
+  g_signal_connect (
+    gtk_builder_get_object (builder, "include-monitors"),
+    "changed",
+    G_CALLBACK (tasklist_plugin_include_monitors_changed),
+    tasklist
+  );
+}
 
 
 static void
@@ -237,7 +364,6 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   TASKLIST_DIALOG_BIND ("show-labels", "active")
   TASKLIST_DIALOG_BIND ("grouping", "active")
   TASKLIST_DIALOG_BIND ("include-all-workspaces", "active")
-  TASKLIST_DIALOG_BIND ("include-all-monitors", "active")
   TASKLIST_DIALOG_BIND ("flat-buttons", "active")
   TASKLIST_DIALOG_BIND_INV ("switch-workspace-on-unminimize", "active")
   TASKLIST_DIALOG_BIND ("show-only-minimized", "active")
@@ -258,6 +384,8 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
       object = gtk_builder_get_object (builder, "show-wireframes");
       gtk_widget_hide (GTK_WIDGET (object));
     }
+
+  tasklist_plugin_configure_monitor_combobox(builder, plugin->settings_dialog, XFCE_TASKLIST (plugin->tasklist));
 
   gtk_widget_show (GTK_WIDGET (plugin->settings_dialog));
 }

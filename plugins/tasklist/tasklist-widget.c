@@ -18,18 +18,7 @@
 
 #include "tasklist-widget.h"
 
-#include "common/panel-debug.h"
-#include "common/panel-private.h"
-#include "common/panel-utils.h"
-
-#include <libxfce4ui/libxfce4ui.h>
-#include <libxfce4windowing/libxfce4windowing.h>
-#include <libxfce4windowingui/libxfce4windowingui.h>
-
 #ifdef ENABLE_X11
-#include <X11/Xlib.h>
-#include <X11/extensions/shape.h>
-#include <libxfce4windowing/xfw-x11.h>
 // Wayland does not supply a window id.  The window pointer should work for our purposes.
 #define tasklist_window_get_wid(window) \
   (xfw_windowing_get () == XFW_WINDOWING_X11 ? xfw_window_x11_get_xid (window) : ((gulong) window))
@@ -105,31 +94,9 @@ xfce_tasklist_app_get_name (XfwApplication *app)
 }
 
 
-
-typedef enum _XfceTasklistSortOrder
-{
-  XFCE_TASKLIST_SORT_ORDER_TIMESTAMP, /* sort by unique_id */
-  XFCE_TASKLIST_SORT_ORDER_GROUP_TIMESTAMP, /* sort by group and then by timestamp */
-  XFCE_TASKLIST_SORT_ORDER_TITLE, /* sort by window title */
-  XFCE_TASKLIST_SORT_ORDER_GROUP_TITLE, /* sort by group and then by title */
-  XFCE_TASKLIST_SORT_ORDER_DND, /* append and support dnd */
-
-  XFCE_TASKLIST_SORT_ORDER_MIN = XFCE_TASKLIST_SORT_ORDER_TIMESTAMP,
-  XFCE_TASKLIST_SORT_ORDER_MAX = XFCE_TASKLIST_SORT_ORDER_DND,
-  XFCE_TASKLIST_SORT_ORDER_DEFAULT = XFCE_TASKLIST_SORT_ORDER_GROUP_TIMESTAMP
-} XfceTasklistSortOrder;
-
-typedef enum _XfceTasklistMClick
-{
-  XFCE_TASKLIST_MIDDLE_CLICK_NOTHING, /* do nothing */
-  XFCE_TASKLIST_MIDDLE_CLICK_CLOSE_WINDOW, /* close the window */
-  XFCE_TASKLIST_MIDDLE_CLICK_MINIMIZE_WINDOW, /* minimize, never minimize with button 1 */
-  XFCE_TASKLIST_MIDDLE_CLICK_NEW_INSTANCE, /* launches a new instance of the window */
-
-  XFCE_TASKLIST_MIDDLE_CLICK_MIN = XFCE_TASKLIST_MIDDLE_CLICK_NOTHING,
-  XFCE_TASKLIST_MIDDLE_CLICK_MAX = XFCE_TASKLIST_MIDDLE_CLICK_NEW_INSTANCE,
-  XFCE_TASKLIST_MIDDLE_CLICK_DEFAULT = XFCE_TASKLIST_MIDDLE_CLICK_NOTHING
-} XfceTasklistMClick;
+/*
+  moved to header: _XfceTasklistSortOrder, _XfceTasklistMClick, _XfceTasklist
+*/
 
 enum
 {
@@ -137,6 +104,7 @@ enum
   PROP_GROUPING,
   PROP_INCLUDE_ALL_WORKSPACES,
   PROP_INCLUDE_ALL_MONITORS,
+  PROP_INCLUDE_SINGLE_MONITOR,
   PROP_FLAT_BUTTONS,
   PROP_SWITCH_WORKSPACE_ON_UNMINIMIZE,
   PROP_SHOW_LABELS,
@@ -150,112 +118,6 @@ enum
   PROP_INCLUDE_ALL_BLINKING,
   PROP_MIDDLE_CLICK,
   PROP_LABEL_DECORATIONS
-};
-
-struct _XfceTasklist
-{
-  GtkContainer __parent__;
-
-  /* lock counter */
-  gint locked;
-
-  /* the screen of this tasklist */
-  XfwScreen *screen;
-  XfwWorkspaceGroup *workspace_group;
-  GdkDisplay *display;
-
-  /* window children in the tasklist */
-  GList *windows;
-
-  /* windows we monitor, but that are excluded from the tasklist */
-  GSList *skipped_windows;
-
-  /* arrow button of the overflow menu */
-  GtkWidget *arrow_button;
-
-  /* applications of all the windows in the taskbar */
-  GHashTable *apps;
-
-  /* normal or iconbox style */
-  guint show_labels : 1;
-
-  /* size of the panel pluin */
-  gint size;
-
-  /* mode (orientation) of the tasklist */
-  XfcePanelPluginMode mode;
-
-  /* relief of the tasklist buttons */
-  GtkReliefStyle button_relief;
-
-  /* whether we show windows from all workspaces or
-   * only the active workspace */
-  guint all_workspaces : 1;
-
-  /* whether we switch to another workspace when we try to
-   * unminimize a window on another workspace */
-  guint switch_workspace : 1;
-
-  /* whether we only show monimized windows in the
-   * tasklist */
-  guint only_minimized : 1;
-
-  /* number of rows of window buttons */
-  gint nrows;
-
-  /* switch window with the mouse wheel */
-  guint window_scrolling : 1;
-  guint wrap_windows : 1;
-
-  /* whether we show blinking windows from all workspaces
-   * or only the active workspace */
-  guint all_blinking : 1;
-
-  /* action to preform when middle clicking */
-  XfceTasklistMClick middle_click;
-
-  /* whether decorate labels when window is not visible */
-  guint label_decorations : 1;
-
-  /* whether we only show windows that are in the geometry of
-   * the monitor the tasklist is on */
-  guint all_monitors : 1;
-  guint n_monitors;
-
-  /* whether we show wireframes when hovering a button in
-   * the tasklist */
-  guint show_wireframes : 1;
-
-  /* icon geometries update timeout */
-  guint update_icon_geometries_id;
-
-  /* idle monitor geometry update */
-  guint update_monitor_geometry_id;
-
-  /* button grouping */
-  guint grouping : 1;
-
-  /* sorting order of the buttons */
-  XfceTasklistSortOrder sort_order;
-
-  /* dummy properties */
-  guint show_handle : 1;
-  guint show_tooltips : 1;
-
-#ifdef ENABLE_X11
-  /* wireframe window */
-  Window wireframe_window;
-#endif
-
-  /* gtk style properties */
-  gint max_button_length;
-  gint min_button_length;
-  gint max_button_size;
-  PangoEllipsizeMode ellipsize_mode;
-  gint minimized_icon_lucency;
-  gint menu_max_width_chars;
-
-  gint n_windows;
 };
 
 typedef enum
@@ -596,6 +458,15 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_INCLUDE_SINGLE_MONITOR,
+                                   g_param_spec_uint ("include-single-monitor",
+                                                      NULL, NULL,
+                                                      0,
+                                                      32,
+                                                      0,
+                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_WINDOW_SCROLLING,
                                    g_param_spec_boolean ("window-scrolling",
                                                          NULL, NULL,
@@ -763,6 +634,10 @@ xfce_tasklist_get_property (GObject *object,
       g_value_set_boolean (value, tasklist->all_monitors);
       break;
 
+    case PROP_INCLUDE_SINGLE_MONITOR:
+      g_value_set_uint (value, tasklist->monitor_index);
+      break;
+
     case PROP_FLAT_BUTTONS:
       g_value_set_boolean (value, !!(tasklist->button_relief == GTK_RELIEF_NONE));
       break;
@@ -844,6 +719,10 @@ xfce_tasklist_set_property (GObject *object,
 
     case PROP_INCLUDE_ALL_MONITORS:
       xfce_tasklist_set_include_all_monitors (tasklist, g_value_get_boolean (value));
+      break;
+
+    case PROP_INCLUDE_SINGLE_MONITOR:
+      tasklist->monitor_index = g_value_get_uint (value);
       break;
 
     case PROP_FLAT_BUTTONS:
@@ -2583,9 +2462,20 @@ xfce_tasklist_button_visible (XfceTasklistChild *child,
 
   if (xfce_tasklist_filter_monitors (tasklist))
     {
-      GdkMonitor *monitor = tasklist_get_monitor (tasklist);
-      GList *monitors = xfw_window_get_monitors (child->window);
-      if (!g_list_find_custom (monitors, monitor, panel_utils_compare_xfw_gdk_monitors))
+      gboolean found = FALSE;
+      GdkMonitor *my_monitor = gdk_display_get_monitor(tasklist->display, tasklist->monitor_index);
+      for (GList *li = xfw_window_get_monitors (child->window); li != NULL; li = li->next)
+        {
+          GdkMonitor *his_monitor = xfw_monitor_get_gdk_monitor(li->data);
+
+          if(my_monitor == his_monitor) 
+            {
+              found = TRUE;
+              break;
+            }
+        }
+
+      if (!found)
         return FALSE;
     }
 
