@@ -82,7 +82,7 @@
 #define xfce_tasklist_horizontal(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 #define xfce_tasklist_vertical(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
 #define xfce_tasklist_deskbar(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
-#define xfce_tasklist_filter_monitors(tasklist) (!(tasklist)->all_monitors)
+#define xfce_tasklist_filter_monitors(tasklist) (!(tasklist)->all_monitors && (tasklist)->n_monitors > 1)
 
 static inline const gchar *
 xfce_tasklist_app_get_name (XfwApplication *app)
@@ -94,7 +94,9 @@ xfce_tasklist_app_get_name (XfwApplication *app)
 }
 
 
-
+/*
+  moved to header: _XfceTasklistSortOrder, _XfceTasklistMClick, _XfceTasklist
+*/
 
 enum
 {
