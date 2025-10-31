@@ -442,7 +442,7 @@ launcher_dialog_tree_save (LauncherPluginDialog *dialog)
 {
   GPtrArray *array;
 
-  /* set items */
+  /* save items */
   array = g_ptr_array_new ();
   gtk_tree_model_foreach (GTK_TREE_MODEL (dialog->store),
                           launcher_dialog_tree_save_foreach, array);
@@ -706,6 +706,9 @@ launcher_dialog_item_changed (GarconMenuItem *item,
 static void
 launcher_dialog_item_list_changed (LauncherPluginDialog *dialog)
 {
+  g_return_if_fail (GTK_IS_BUILDER (dialog->builder));
+  g_return_if_fail (XFCE_IS_ITEM_LIST_MODEL (dialog->store));
+
   GObject *object;
   gint n_items = xfce_item_list_model_get_n_items (XFCE_ITEM_LIST_MODEL (dialog->store));
 
@@ -810,7 +813,7 @@ launcher_dialog_items_load (LauncherPluginDialog *dialog)
   GSList *li;
   GtkTreeIter iter;
 
-  /* If the new state is identical to the old one, then do not reset the storage */
+  /* if the new state is identical to the old one, then do not reset the storage */
   GSList *new_items = launcher_plugin_get_items (dialog->plugin);
   GSList *prev = dialog->items, *cur = new_items;
   for (; prev != NULL && cur != NULL; prev = prev->next, cur = cur->next)
@@ -1006,7 +1009,7 @@ launcher_dialog_show (LauncherPlugin *plugin)
   xfce_item_list_view_set_model (XFCE_ITEM_LIST_VIEW (object), XFCE_ITEM_LIST_MODEL (dialog->store));
   g_object_unref (dialog->store);
 
-  /* get itemview & treeview  */
+  /* get itemview & treeview */
   object = gtk_builder_get_object (builder, "item-view");
   g_signal_connect (object, "edit-item", G_CALLBACK (launcher_dialog_item_edit), dialog);
   g_signal_connect (object, "add-item", G_CALLBACK (launcher_dialog_item_add), dialog);
