@@ -836,7 +836,7 @@ launcher_dialog_items_load (LauncherPluginDialog *dialog)
       xfce_item_list_store_clear (XFCE_ITEM_LIST_STORE (dialog->store));
 
       /* insert the launcher items */
-      dialog->items = new_items;
+      dialog->items = g_slist_copy (new_items);
       for (li = dialog->items; li != NULL; li = li->next)
         {
           gint index = xfce_item_list_store_insert (XFCE_ITEM_LIST_STORE (dialog->store), -1);
@@ -853,7 +853,7 @@ launcher_dialog_items_load (LauncherPluginDialog *dialog)
 
       g_signal_handlers_unblock_by_func (dialog->store, G_CALLBACK (launcher_dialog_tree_save), dialog);
     }
-
+  g_slist_free (new_items);
   launcher_dialog_item_list_changed (dialog);
 }
 
