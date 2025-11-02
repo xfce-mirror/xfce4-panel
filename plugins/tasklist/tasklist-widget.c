@@ -327,6 +327,10 @@ xfce_tasklist_set_include_all_workspaces (XfceTasklist *tasklist,
 static void
 xfce_tasklist_set_include_all_monitors (XfceTasklist *tasklist,
                                         gboolean all_monitors);
+
+static void
+xfce_tasklist_set_include_single_monitor (XfceTasklist *tasklist, const gchar *name);
+
 static void
 xfce_tasklist_set_button_relief (XfceTasklist *tasklist,
                                  GtkReliefStyle button_relief);
@@ -459,12 +463,10 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
 
   g_object_class_install_property (gobject_class,
                                    PROP_INCLUDE_SINGLE_MONITOR,
-                                   g_param_spec_uint ("include-single-monitor",
-                                                      NULL, NULL,
-                                                      0,
-                                                      32,
-                                                      0,
-                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+                                   g_param_spec_string ("include-single-monitor",
+                                                        NULL, NULL,
+                                                        "all",
+                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_WINDOW_SCROLLING,
@@ -576,6 +578,8 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->show_tooltips = TRUE;
   tasklist->all_monitors = TRUE;
   tasklist->n_monitors = 0;
+  tasklist->monitor_name = NULL;
+  tasklist->gdkmonitor = NULL;
   tasklist->window_scrolling = TRUE;
   tasklist->wrap_windows = FALSE;
   tasklist->all_blinking = TRUE;
@@ -635,7 +639,7 @@ xfce_tasklist_get_property (GObject *object,
       break;
 
     case PROP_INCLUDE_SINGLE_MONITOR:
-      g_value_set_uint (value, tasklist->monitor_index);
+      g_value_set_string (value, tasklist->monitor_name);
       break;
 
     case PROP_FLAT_BUTTONS:
@@ -722,7 +726,7 @@ xfce_tasklist_set_property (GObject *object,
       break;
 
     case PROP_INCLUDE_SINGLE_MONITOR:
-      tasklist->monitor_index = g_value_get_uint (value);
+      xfce_tasklist_set_include_single_monitor (tasklist, g_value_get_string (value));
       break;
 
     case PROP_FLAT_BUTTONS:
@@ -2463,12 +2467,17 @@ xfce_tasklist_button_visible (XfceTasklistChild *child,
   if (xfce_tasklist_filter_monitors (tasklist))
     {
       gboolean found = FALSE;
-      GdkMonitor *my_monitor = gdk_display_get_monitor(tasklist->display, tasklist->monitor_index);
+
+      if (tasklist->gdkmonitor == NULL)
+        {
+          tasklist->gdkmonitor = xfce_tasklist_find_my_monitor (tasklist);
+        }
+
       for (GList *li = xfw_window_get_monitors (child->window); li != NULL; li = li->next)
         {
-          GdkMonitor *his_monitor = xfw_monitor_get_gdk_monitor(li->data);
+          GdkMonitor *his_monitor = xfw_monitor_get_gdk_monitor (li->data);
 
-          if(my_monitor == his_monitor) 
+          if (tasklist->gdkmonitor == his_monitor)
             {
               found = TRUE;
               break;
@@ -4569,7 +4578,22 @@ xfce_tasklist_set_include_all_monitors (XfceTasklist *tasklist,
     }
 }
 
+static void
+xfce_tasklist_set_include_single_monitor (XfceTasklist *tasklist, const gchar *name)
+{
+  if (tasklist->monitor_name)
+    {
+      g_free (tasklist->monitor_name);
+      tasklist->monitor_name = NULL;
+    }
 
+
+  tasklist->monitor_name = g_strdup (name);
+  tasklist->gdkmonitor = xfce_tasklist_find_my_monitor (tasklist);
+
+  if (tasklist->screen != NULL)
+    xfce_tasklist_active_workspace_changed (tasklist->workspace_group, NULL, tasklist);
+}
 
 static void
 xfce_tasklist_set_button_relief (XfceTasklist *tasklist,
@@ -4837,4 +4861,29 @@ xfce_tasklist_update_monitor_geometry (XfceTasklist *tasklist)
         gdk_threads_add_idle_full (G_PRIORITY_LOW, xfce_tasklist_update_monitor_geometry_idle,
                                    tasklist, xfce_tasklist_update_monitor_geometry_idle_destroy);
     }
+}
+
+GdkMonitor *
+xfce_tasklist_find_my_monitor (XfceTasklist *tasklist)
+{
+  guint index;
+  guint n_monitors;
+
+  if (!tasklist->display)
+    return NULL;
+
+  n_monitors = gdk_display_get_n_monitors (tasklist->display);
+
+  if (sscanf (tasklist->monitor_name, "monitor-%d", &index) == 1)
+    return gdk_display_get_monitor (tasklist->display, index);
+
+  for (guint i = 0; i < n_monitors; i++)
+    {
+      GdkMonitor *monitor = gdk_display_get_monitor (tasklist->display, i);
+      const gchar *model = gdk_monitor_get_model (monitor);
+      if (g_strcmp0 (model, tasklist->monitor_name) == 0)
+        return monitor;
+    }
+
+  return NULL;
 }
