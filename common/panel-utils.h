@@ -24,6 +24,13 @@
 #include <gtk/gtk.h>
 #include <libxfce4windowing/libxfce4windowing.h>
 
+enum
+{
+  OUTPUT_NAME,
+  OUTPUT_TITLE
+};
+
+
 G_BEGIN_DECLS
 
 GtkBuilder *
@@ -85,6 +92,14 @@ panel_utils_get_workspace_number_for_monitor (XfwScreen *xfw_screen,
                                               GdkMonitor *monitor,
                                               XfwWorkspace *workspace);
 
+gboolean panel_utils_populate_output_list(GtkListStore *store,
+                                          GtkComboBox *box,
+                                          const gchar *output_name,
+                                          gboolean *output_selected,
+                                          GdkDisplay *display,
+                                          gint n_monitors,
+                                          GtkTreeIter *iter,
+                                          gint *n);
 G_END_DECLS
 
 #endif /* !__PANEL_UTILS_H__ */
