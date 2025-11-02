@@ -203,48 +203,6 @@ tasklist_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
 }
 
 static void
-tasklist_plugin_include_monitors_changed (GtkComboBox *combobox, XfceTasklist *tasklist)
-{
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  gchar *output_name;
-  guint all_monitors;
-  GValue value = G_VALUE_INIT;
-
-  gtk_combo_box_get_active (combobox);
-
-  if (gtk_combo_box_get_active_iter (combobox, &iter))
-    {
-      model = gtk_combo_box_get_model (combobox);
-      gtk_tree_model_get (model, &iter, OUTPUT_NAME, &output_name, -1);
-
-      if (g_strcmp0 (output_name, "all") == 0)
-        {
-          all_monitors = 1;
-        }
-      else
-        {
-          all_monitors = 0;
-        }
-
-      /* set monitor index */
-      g_value_init (&value, G_TYPE_STRING);
-      g_value_set_string (&value, output_name);
-      g_object_set_property (G_OBJECT (tasklist), "include-single-monitor", &value);
-      g_value_unset (&value);
-
-      /* set all monitors flag */
-      g_value_init (&value, G_TYPE_UINT);
-      g_value_set_uint (&value, all_monitors);
-      g_object_set_property (G_OBJECT (tasklist), "include-all-monitors", &value);
-      g_value_unset (&value);
-
-      g_free (output_name);
-    }
-}
-
-
-static void
 tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   TasklistPlugin *plugin = TASKLIST_PLUGIN (panel_plugin);
