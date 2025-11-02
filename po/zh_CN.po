@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-10-23 12:52+0200\n"
+"POT-Creation-Date: 2025-11-02 12:52+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: 玉堂白鹤 <yjwork@qq.com>, 2015,2017-2020,2022-2025\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/xfce/xfce4-panel/language/zh_CN/)\n"
@@ -50,7 +50,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "面板;设置;首选项;任务栏;自动隐藏;应用程序菜单;开始;按钮;启动器;通知区域;状态;图标;插件; "
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3858
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3859
 msgid "Panel"
 msgstr "面板"
 
@@ -128,7 +128,7 @@ msgstr "关闭(_C)"
 #: common/resources/tasklist-dialog.glade:93
 #: common/resources/windowmenu-dialog.glade:63
 #: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:3924
+#: panel/panel-window.c:3925
 msgid "_Help"
 msgstr "帮助(_H)"
 
@@ -196,9 +196,8 @@ msgstr "保持面板在窗口之下(_K)"
 #: common/resources/panel-preferences-dialog.glade:474
 msgid ""
 "Select this option if you want windows to cover the panel. When autohide is "
-"enabled, panel is always on top. On wayland option is greyed out unless "
-"/force-all-internal property is set."
-msgstr "如需让窗口覆盖面板，请选择此选项。启用自动隐藏功能时，面板始终位于最上方。使用 Wayland 时，除非设置了 /force-all-internal 属性，否则该选项将被禁用。"
+"enabled, panel is always on top."
+msgstr ""
 
 #: common/resources/panel-preferences-dialog.glade:495
 msgid "Au_tomatically hide the panel:"
@@ -332,7 +331,7 @@ msgstr "在面板上添加新项目"
 #. remove
 #: common/resources/panel-preferences-dialog.glade:1257
 #: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:354
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1103
+#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1108
 #: plugins/launcher/launcher-dialog.c:836
 msgid "_Remove"
 msgstr "移除(_R)"
@@ -1141,7 +1140,7 @@ msgid "Enable _urgency notification"
 msgstr "启用紧急通知(_U)"
 
 #: libxfce4panel/xfce-panel-plugin.c:1109
-#: panel/panel-preferences-dialog.c:1563
+#: panel/panel-preferences-dialog.c:1568
 msgid "Remove"
 msgstr "移除"
 
@@ -1151,7 +1150,7 @@ msgid ""
 msgstr "从面板上移除此项目，其配置也将丢失。"
 
 #: libxfce4panel/xfce-panel-plugin.c:1114
-#: panel/panel-preferences-dialog.c:1570
+#: panel/panel-preferences-dialog.c:1575
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "您确定要移除 “%s” 吗？"
@@ -1162,7 +1161,7 @@ msgid "_Properties"
 msgstr "属性(_P)"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3933
+#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3934
 msgid "_About"
 msgstr "关于(_A)"
 
@@ -1176,17 +1175,17 @@ msgid "Pane_l"
 msgstr "面板(_L)"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3870
+#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3871
 msgid "Add _New Items..."
 msgstr "添加新项目(_N)..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3881
+#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3882
 msgid "Panel Pr_eferences..."
 msgstr "面板首选项(_E)..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3908
+#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3909
 msgid "Log _Out"
 msgstr "注销(_O)"
 
@@ -1412,7 +1411,7 @@ msgstr "取消(_C)"
 msgid "Please choose a panel for the new plugin:"
 msgstr "请为新插件挑选面板："
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1050
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1055
 #, c-format
 msgid "Panel %d"
 msgstr "面板 %d"
@@ -1457,39 +1456,39 @@ msgstr "插件重启"
 msgid "_Execute"
 msgstr "执行(_E)"
 
-#: panel/panel-preferences-dialog.c:586
+#: panel/panel-preferences-dialog.c:593
 msgid "Automatic"
 msgstr "自动"
 
-#: panel/panel-preferences-dialog.c:595
+#: panel/panel-preferences-dialog.c:602
 msgid "Primary"
 msgstr "主要的"
 
 #. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:614
+#: panel/panel-preferences-dialog.c:621
 #, c-format
 msgid "Monitor %d"
 msgstr "显示器 %d"
 
-#: panel/panel-preferences-dialog.c:1102
+#: panel/panel-preferences-dialog.c:1107
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "将永远移除面板和插件配置"
 
-#: panel/panel-preferences-dialog.c:1111
+#: panel/panel-preferences-dialog.c:1116
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "您确定要移除面板 %d 吗？"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1408
+#: panel/panel-preferences-dialog.c:1413
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(外部)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1413
+#: panel/panel-preferences-dialog.c:1418
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1498,21 +1497,21 @@ msgstr "内部名称：%s-%d\nPID：%d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1425
+#: panel/panel-preferences-dialog.c:1430
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "内部名称：%s-%d"
 
-#: panel/panel-preferences-dialog.c:1572
+#: panel/panel-preferences-dialog.c:1577
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "如果您从面板上移除此项目，它将永远消失。"
 
-#: panel/panel-preferences-dialog.c:1576
+#: panel/panel-preferences-dialog.c:1581
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "您确定要移除这%d个项目吗？"
 
-#: panel/panel-preferences-dialog.c:1578
+#: panel/panel-preferences-dialog.c:1583
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "如果将它们从面板中移除，它们将永久丢失。"
 
@@ -1540,7 +1539,7 @@ msgstr "高级"
 msgid "Expert"
 msgstr "专家"
 
-#: panel/panel-window.c:3895
+#: panel/panel-window.c:3896
 msgid "_Lock Panel"
 msgstr "锁定面板(_L)"
 
