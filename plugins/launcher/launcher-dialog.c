@@ -463,7 +463,8 @@ launcher_dialog_tree_save (LauncherPluginDialog *dialog)
       do
         {
           gtk_tree_model_get (GTK_TREE_MODEL (dialog->store), &iter, ITEM_COL_ITEM, &item, -1);
-          new_items = g_slist_append (new_items, g_object_ref (item));
+          if (G_LIKELY (item != NULL))
+            new_items = g_slist_append (new_items, item);
         }
       while (gtk_tree_model_iter_next (GTK_TREE_MODEL (dialog->store), &iter));
     }
@@ -875,6 +876,8 @@ launcher_dialog_item_edit (XfceItemListView *item_view,
 
   /* build command */
   gchar *uri = garcon_menu_item_get_uri (item);
+
+  g_object_unref (item);
   launcher_dialog_item_desktop_item_edit (GTK_WIDGET (item_view), NULL, uri, dialog);
   g_free (uri);
 
