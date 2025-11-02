@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-10-23 12:52+0200\n"
+"POT-Creation-Date: 2025-11-02 12:52+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Wallon Wallon, 2022-2025\n"
 "Language-Team: French (http://app.transifex.com/xfce/xfce4-panel/language/fr/)\n"
@@ -47,7 +47,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "tableaux de bord;paramètres;préférences;barre de tâches;masquage automatique;menu des applications;démarrer;boutons;lanceur;zone de notification;état;icônes;greffons;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3858
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3859
 msgid "Panel"
 msgstr "Tableau de bord"
 
@@ -125,7 +125,7 @@ msgstr "_Fermer"
 #: common/resources/tasklist-dialog.glade:93
 #: common/resources/windowmenu-dialog.glade:63
 #: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:3924
+#: panel/panel-window.c:3925
 msgid "_Help"
 msgstr "_Aide"
 
@@ -193,9 +193,8 @@ msgstr "_Conserver le panneau sous les fenêtres"
 #: common/resources/panel-preferences-dialog.glade:474
 msgid ""
 "Select this option if you want windows to cover the panel. When autohide is "
-"enabled, panel is always on top. On wayland option is greyed out unless "
-"/force-all-internal property is set."
-msgstr "Sélectionnez cette option si vous souhaitez que les fenêtres recouvrent le panneau. Lorsque la fonction de masquage automatique est activée, le panneau reste toujours au premier plan. Avec Wayland, cette option est grisée sauf si la propriété /force-all-internal est définie."
+"enabled, panel is always on top."
+msgstr ""
 
 #: common/resources/panel-preferences-dialog.glade:495
 msgid "Au_tomatically hide the panel:"
@@ -329,7 +328,7 @@ msgstr "Ajouter un nouvel élément à ce tableau de bord"
 #. remove
 #: common/resources/panel-preferences-dialog.glade:1257
 #: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:354
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1103
+#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1108
 #: plugins/launcher/launcher-dialog.c:836
 msgid "_Remove"
 msgstr "_Supprimer"
@@ -1138,7 +1137,7 @@ msgid "Enable _urgency notification"
 msgstr "Activer les notifications _urgentes"
 
 #: libxfce4panel/xfce-panel-plugin.c:1109
-#: panel/panel-preferences-dialog.c:1563
+#: panel/panel-preferences-dialog.c:1568
 msgid "Remove"
 msgstr "Supprimer"
 
@@ -1148,7 +1147,7 @@ msgid ""
 msgstr "Supprimer l’élément du tableau de bord signifie également que sa configuration sera perdue."
 
 #: libxfce4panel/xfce-panel-plugin.c:1114
-#: panel/panel-preferences-dialog.c:1570
+#: panel/panel-preferences-dialog.c:1575
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Voulez-vous vraiment supprimer « %s » ?"
@@ -1159,7 +1158,7 @@ msgid "_Properties"
 msgstr "_Propriétés"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3933
+#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3934
 msgid "_About"
 msgstr "À _propos"
 
@@ -1173,17 +1172,17 @@ msgid "Pane_l"
 msgstr "Tableau de _bord"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3870
+#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3871
 msgid "Add _New Items..."
 msgstr "Ajouter de _nouveaux éléments…"
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3881
+#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3882
 msgid "Panel Pr_eferences..."
 msgstr "Pr_éférences du tableau de bord…"
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3908
+#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3909
 msgid "Log _Out"
 msgstr "Dé_connexion"
 
@@ -1411,7 +1410,7 @@ msgstr "_Annuler"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Veuillez sélectionner un tableau de bord pour le nouveau greffon :"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1050
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1055
 #, c-format
 msgid "Panel %d"
 msgstr "Tableau de bord %d"
@@ -1456,39 +1455,39 @@ msgstr "Redémarrage du greffon"
 msgid "_Execute"
 msgstr "E_xécuter"
 
-#: panel/panel-preferences-dialog.c:586
+#: panel/panel-preferences-dialog.c:593
 msgid "Automatic"
 msgstr "Automatique"
 
-#: panel/panel-preferences-dialog.c:595
+#: panel/panel-preferences-dialog.c:602
 msgid "Primary"
 msgstr "Primaire"
 
 #. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:614
+#: panel/panel-preferences-dialog.c:621
 #, c-format
 msgid "Monitor %d"
 msgstr "Moniteur %d"
 
-#: panel/panel-preferences-dialog.c:1102
+#: panel/panel-preferences-dialog.c:1107
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Les configurations du tableau de bord et des greffons seront supprimées définitivement"
 
-#: panel/panel-preferences-dialog.c:1111
+#: panel/panel-preferences-dialog.c:1116
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Voulez-vous vraiment supprimer le tableau de bord %d ?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1408
+#: panel/panel-preferences-dialog.c:1413
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(externe)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1413
+#: panel/panel-preferences-dialog.c:1418
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1497,21 +1496,21 @@ msgstr "Nom interne : %s-%d\nPID : %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1425
+#: panel/panel-preferences-dialog.c:1430
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nom interne : %s-%d"
 
-#: panel/panel-preferences-dialog.c:1572
+#: panel/panel-preferences-dialog.c:1577
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Si vous supprimez l’élément du tableau de bord, il le sera définitivement."
 
-#: panel/panel-preferences-dialog.c:1576
+#: panel/panel-preferences-dialog.c:1581
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Voulez-vous vraiment supprimer ces  %d éléments ?"
 
-#: panel/panel-preferences-dialog.c:1578
+#: panel/panel-preferences-dialog.c:1583
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Si vous les supprimez du tableau de bord, ils seront définitivement perdus."
 
@@ -1539,7 +1538,7 @@ msgstr "Confirmé"
 msgid "Expert"
 msgstr "Expert"
 
-#: panel/panel-window.c:3895
+#: panel/panel-window.c:3896
 msgid "_Lock Panel"
 msgstr "_Verrouiller le tableau de bord"
 
