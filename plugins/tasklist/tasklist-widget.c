@@ -5112,10 +5112,10 @@ xfce_tasklist_populate_output_list (GtkBuilder *builder,
 
   /* catch `changed` events */
   g_signal_connect (
-     combobox,
-     "changed",
-     G_CALLBACK (xfce_tasklist_include_monitors_changed),
-     tasklist);
+    combobox,
+    "changed",
+    G_CALLBACK (xfce_tasklist_include_monitors_changed),
+    tasklist);
 }
 
 

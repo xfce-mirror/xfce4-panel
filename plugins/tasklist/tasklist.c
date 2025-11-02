@@ -298,7 +298,7 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
       gtk_widget_hide (GTK_WIDGET (object));
     }
 
-  xfce_tasklist_populate_output_list (builder, plugin->settings_dialog, XFCE_TASKLIST(plugin->tasklist));
+  xfce_tasklist_populate_output_list (builder, plugin->settings_dialog, XFCE_TASKLIST (plugin->tasklist));
 
   gtk_widget_show (GTK_WIDGET (plugin->settings_dialog));
 }
