@@ -342,9 +342,10 @@ panel_module_new_from_desktop_file (const gchar *filename,
           /* run mode of the module, by default everything runs in
            * the wrapper, unless defined otherwise or unsupported */
           if (forced_mode != PANEL_MODULE_RUN_MODE_INTERNAL
-              && (WINDOWING_IS_X11 () || gtk_layer_is_supported ())
-              && (forced_mode == PANEL_MODULE_RUN_MODE_EXTERNAL
-                  || !xfce_rc_read_bool_entry (rc, "X-XFCE-Internal", FALSE)))
+              && ((WINDOWING_IS_X11 ()
+                   && (forced_mode == PANEL_MODULE_RUN_MODE_EXTERNAL
+                       || !xfce_rc_read_bool_entry (rc, "X-XFCE-Internal", FALSE)))
+                  || (gtk_layer_is_supported () && forced_mode == PANEL_MODULE_RUN_MODE_EXTERNAL)))
             {
               module->mode = PANEL_MODULE_RUN_MODE_EXTERNAL;
               g_free (module->api);
