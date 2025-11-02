@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-10-23 12:52+0200\n"
+"POT-Creation-Date: 2025-11-02 12:52+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>, 2013-2015,2017-2020,2024-2025\n"
 "Language-Team: Czech (http://app.transifex.com/xfce/xfce4-panel/language/cs/)\n"
@@ -41,7 +41,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panely;nastavení;předvolby;panel úloh;automatické skrytí;nabídka aplikace;spustit;tlačítka;spouštěč;oznamovací oblast;stav;ikony;zásuvné moduly;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3858
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3859
 msgid "Panel"
 msgstr "Panel"
 
@@ -119,7 +119,7 @@ msgstr "_Zavřít"
 #: common/resources/tasklist-dialog.glade:93
 #: common/resources/windowmenu-dialog.glade:63
 #: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:3924
+#: panel/panel-window.c:3925
 msgid "_Help"
 msgstr "_Nápověda"
 
@@ -187,9 +187,8 @@ msgstr "_Panel pod okny"
 #: common/resources/panel-preferences-dialog.glade:474
 msgid ""
 "Select this option if you want windows to cover the panel. When autohide is "
-"enabled, panel is always on top. On wayland option is greyed out unless "
-"/force-all-internal property is set."
-msgstr "Pokud chcete, aby okna překrývala panel, vyberte tuto volbu. Když je automatické skrývání povoleno, panel zůstane vždy nahoře. Při použití protokolu wayland je tato možnost nedostupná, pokud není nastavena vlastnost /force-all-internal."
+"enabled, panel is always on top."
+msgstr "Pokud chcete, aby okna překrývala panel, vyberte tuto volbu. Když je automatické skrývání povoleno, panel zůstane vždy nahoře."
 
 #: common/resources/panel-preferences-dialog.glade:495
 msgid "Au_tomatically hide the panel:"
@@ -323,7 +322,7 @@ msgstr "Přidat novou položku na tento panel"
 #. remove
 #: common/resources/panel-preferences-dialog.glade:1257
 #: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:354
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1103
+#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1108
 #: plugins/launcher/launcher-dialog.c:836
 msgid "_Remove"
 msgstr "_Odebrat"
@@ -1132,7 +1131,7 @@ msgid "Enable _urgency notification"
 msgstr "Povolit oznámení o _urgenci"
 
 #: libxfce4panel/xfce-panel-plugin.c:1109
-#: panel/panel-preferences-dialog.c:1563
+#: panel/panel-preferences-dialog.c:1568
 msgid "Remove"
 msgstr "Odstranění"
 
@@ -1142,7 +1141,7 @@ msgid ""
 msgstr "Odstraněním položky z panelu přijdete o její konfiguraci."
 
 #: libxfce4panel/xfce-panel-plugin.c:1114
-#: panel/panel-preferences-dialog.c:1570
+#: panel/panel-preferences-dialog.c:1575
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Opravdu chcete odstranit „%s“?"
@@ -1153,7 +1152,7 @@ msgid "_Properties"
 msgstr "_Vlastnosti"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3933
+#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3934
 msgid "_About"
 msgstr "_O aplikaci"
 
@@ -1167,17 +1166,17 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3870
+#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3871
 msgid "Add _New Items..."
 msgstr "Přidat _nové položky…"
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3881
+#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3882
 msgid "Panel Pr_eferences..."
 msgstr "Na_stavení panelu…"
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3908
+#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3909
 msgid "Log _Out"
 msgstr "Od_hlásit se"
 
@@ -1406,7 +1405,7 @@ msgstr "_Zrušit"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Zvolte panel pro nový zásuvný modul:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1050
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1055
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -1451,39 +1450,39 @@ msgstr "Restartovat zásuvný modul"
 msgid "_Execute"
 msgstr "_Spustit"
 
-#: panel/panel-preferences-dialog.c:586
+#: panel/panel-preferences-dialog.c:593
 msgid "Automatic"
 msgstr "Automaticky"
 
-#: panel/panel-preferences-dialog.c:595
+#: panel/panel-preferences-dialog.c:602
 msgid "Primary"
 msgstr "Primární"
 
 #. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:614
+#: panel/panel-preferences-dialog.c:621
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: panel/panel-preferences-dialog.c:1102
+#: panel/panel-preferences-dialog.c:1107
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Nastavení panelu a zásuvného modulu budou trvale odebrána"
 
-#: panel/panel-preferences-dialog.c:1111
+#: panel/panel-preferences-dialog.c:1116
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Opravdu chcete odebrat panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1408
+#: panel/panel-preferences-dialog.c:1413
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(externí)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1413
+#: panel/panel-preferences-dialog.c:1418
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1492,21 +1491,21 @@ msgstr "Vnitřní název: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1425
+#: panel/panel-preferences-dialog.c:1430
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Vnitřní název: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1572
+#: panel/panel-preferences-dialog.c:1577
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Pokud odstraníte položku z panelu, bude nenávratně ztracena."
 
-#: panel/panel-preferences-dialog.c:1576
+#: panel/panel-preferences-dialog.c:1581
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Opravdu chcete odebrat těchto %d položek?"
 
-#: panel/panel-preferences-dialog.c:1578
+#: panel/panel-preferences-dialog.c:1583
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Pokud je odstraníte z panelu, budou trvale ztraceny."
 
@@ -1534,7 +1533,7 @@ msgstr "Zkušený"
 msgid "Expert"
 msgstr "Expert"
 
-#: panel/panel-window.c:3895
+#: panel/panel-window.c:3896
 msgid "_Lock Panel"
 msgstr "_Uzamknout panel"
 
