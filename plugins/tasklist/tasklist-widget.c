@@ -5005,6 +5005,73 @@ xfce_tasklist_update_monitor_geometry (XfceTasklist *tasklist)
     }
 }
 
+void
+xfce_tasklist_populate_output_list (GtkBuilder *builder,
+                                    GObject *dialog,
+                                    XfceTasklist *tasklist)
+{
+  /* This function configures ComboBox with monitors name */
+  GtkTreeIter iter;
+  gint n_monitors, n = 0;
+  GObject *combobox, *store;
+  GdkDisplay *display;
+  gboolean selected = FALSE;
+
+  /* Get ComboBox, make sure it is here */
+  combobox = gtk_builder_get_object (builder, "include-monitors");
+  panel_return_if_fail (GTK_IS_COMBO_BOX (combobox));
+
+  /* Get ComboBox model, make sure it is here, clear it */
+  store = gtk_builder_get_object (builder, "monitors-model");
+  panel_return_if_fail (GTK_IS_LIST_STORE (store));
+  gtk_list_store_clear (GTK_LIST_STORE (store));
+
+  /*
+    Translations have an underscore to indicate the mnemonic.
+    But in the ComboBox we do not want to show the underscore,
+    so we remove it after translation.
+
+    TODO: actually remove '_' in the translation strings
+  */
+  GString *caption = g_string_new (_("Show windows from all mo_nitors"));
+  g_string_replace (caption, "_", "", 1);
+
+  /* Insert primary option: do not filter buttons by monitor */
+  gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
+                                     OUTPUT_NAME, "all",
+                                     OUTPUT_TITLE, caption->str, -1);
+
+  g_string_free (caption, TRUE);
+
+  /* Get total number of monitors */
+  display = gtk_widget_get_display (GTK_WIDGET (dialog));
+  n_monitors = gdk_display_get_n_monitors (display);
+
+  if (n_monitors > 1)
+    {
+      panel_utils_populate_output_list (GTK_LIST_STORE (store),
+                                        GTK_COMBO_BOX (combobox),
+                                        tasklist->monitor_name,
+                                        &selected,
+                                        display,
+                                        n_monitors,
+                                        &iter,
+                                        &n);
+    }
+
+  /* select default combobox row if none selected previously */
+  if (!selected)
+    gtk_combo_box_set_active (GTK_COMBO_BOX (combobox), 0);
+
+  /* catch `changed` events */
+  // g_signal_connect (
+  //   gtk_builder_get_object (builder, "include-monitors"),
+  //   "changed",
+  //   G_CALLBACK (tasklist_plugin_include_monitors_changed),
+  //   tasklist);
+}
+
+
 GdkMonitor *
 xfce_tasklist_find_my_monitor (XfceTasklist *tasklist)
 {
