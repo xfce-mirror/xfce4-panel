@@ -2107,8 +2107,6 @@ xfce_tasklist_include_monitors_changed (GtkComboBox *combobox, XfceTasklist *tas
   guint all_monitors;
   GValue value = G_VALUE_INIT;
 
-  gtk_combo_box_get_active (combobox);
-
   if (!gtk_combo_box_get_active_iter (combobox, &iter))
     return;
 
@@ -2666,11 +2664,8 @@ xfce_tasklist_button_visible (XfceTasklistChild *child,
         {
           GdkMonitor *his_monitor = xfw_monitor_get_gdk_monitor (li->data);
 
-          if (tasklist->gdkmonitor == his_monitor)
-            {
-              found = TRUE;
-              break;
-            }
+          if ((found = (tasklist->gdkmonitor == his_monitor)))
+            break;
         }
 
       if (!found)
