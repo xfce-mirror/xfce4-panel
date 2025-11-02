@@ -410,6 +410,7 @@ gboolean panel_utils_populate_output_list(GtkListStore *store,
 {
   gchar *title, *name;
   GHashTable *models = g_hash_table_new (g_str_hash, g_str_equal);
+
   for (gint i = 0; i < n_monitors; i++)
     {
       const gchar *model;
@@ -430,11 +431,11 @@ gboolean panel_utils_populate_output_list(GtkListStore *store,
           name = g_strdup (model);
           title = g_strdup (name);
         }
-
-      gtk_list_store_insert_with_values (GTK_LIST_STORE (store), iter, *n++,
+      
+      gtk_list_store_insert_with_values (GTK_LIST_STORE (store), iter, (*n)++,
                                           OUTPUT_NAME, name,
                                           OUTPUT_TITLE, title, -1);
-      if (!*output_selected
+      if (!(*output_selected)
           && g_strcmp0 (name, output_name) == 0)
         {
           gtk_combo_box_set_active_iter (GTK_COMBO_BOX (box), iter);

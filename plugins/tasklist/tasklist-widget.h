@@ -19,14 +19,12 @@
 #ifndef __XFCE_TASKLIST_H__
 #define __XFCE_TASKLIST_H__
 
-#include "libxfce4panel/libxfce4panel.h"
-
-#include <gtk/gtk.h>
-
 #include "common/panel-debug.h"
 #include "common/panel-private.h"
 #include "common/panel-utils.h"
+#include "libxfce4panel/libxfce4panel.h"
 
+#include <gtk/gtk.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4windowing/libxfce4windowing.h>
 #include <libxfce4windowingui/libxfce4windowingui.h>
@@ -139,7 +137,8 @@ struct _XfceTasklist
   guint n_monitors;
 
   /* we only show windows from this monitor */
-  guint monitor_index;
+  gchar *monitor_name;
+  GdkMonitor *gdkmonitor;
 
   /* whether we show wireframes when hovering a button in
    * the tasklist */
@@ -192,6 +191,9 @@ xfce_tasklist_set_nrows (XfceTasklist *tasklist,
 
 void
 xfce_tasklist_update_monitor_geometry (XfceTasklist *tasklist);
+
+GdkMonitor *
+xfce_tasklist_find_my_monitor (XfceTasklist *tasklist);
 
 G_END_DECLS
 
