@@ -399,14 +399,15 @@ panel_utils_get_workspace_number_for_monitor (XfwScreen *xfw_screen,
   return number;
 }
 
-gboolean panel_utils_populate_output_list(GtkListStore *store,
-                                          GtkComboBox *box,
-                                          const gchar *output_name,
-                                          gboolean *output_selected,
-                                          GdkDisplay *display,
-                                          gint n_monitors,
-                                          GtkTreeIter *iter,
-                                          gint *n)
+gboolean
+panel_utils_populate_output_list (GtkListStore *store,
+                                  GtkComboBox *box,
+                                  const gchar *output_name,
+                                  gboolean *output_selected,
+                                  GdkDisplay *display,
+                                  gint n_monitors,
+                                  GtkTreeIter *iter,
+                                  gint *n)
 {
   gchar *title, *name;
   GHashTable *models = g_hash_table_new (g_str_hash, g_str_equal);
@@ -414,7 +415,7 @@ gboolean panel_utils_populate_output_list(GtkListStore *store,
   for (gint i = 0; i < n_monitors; i++)
     {
       const gchar *model;
-      GdkMonitor* monitor = gdk_display_get_monitor (display, i);
+      GdkMonitor *monitor = gdk_display_get_monitor (display, i);
       model = gdk_monitor_get_model (monitor);
       if (xfce_str_is_empty (model) || !g_hash_table_add (models, (gpointer) model))
         {
@@ -431,10 +432,10 @@ gboolean panel_utils_populate_output_list(GtkListStore *store,
           name = g_strdup (model);
           title = g_strdup (name);
         }
-      
+
       gtk_list_store_insert_with_values (GTK_LIST_STORE (store), iter, (*n)++,
-                                          OUTPUT_NAME, name,
-                                          OUTPUT_TITLE, title, -1);
+                                         OUTPUT_NAME, name,
+                                         OUTPUT_TITLE, title, -1);
       if (!(*output_selected)
           && g_strcmp0 (name, output_name) == 0)
         {
