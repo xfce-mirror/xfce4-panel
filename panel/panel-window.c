@@ -649,7 +649,8 @@ static void
 panel_window_keep_below (PanelWindow *window)
 {
   XfconfChannel *channel = xfconf_channel_get (XFCE_PANEL_CHANNEL_NAME);
-  if (WINDOWING_IS_WAYLAND () && !xfconf_channel_get_bool (channel, "/force-all-internal", FALSE))
+  if (WINDOWING_IS_WAYLAND ()
+      && (!gtk_layer_is_supported () || xfconf_channel_get_bool (channel, "/force-all-external", FALSE)))
     return;
 
   gboolean should_keep_below = window->keep_below && window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER;

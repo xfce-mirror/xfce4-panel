@@ -32,6 +32,12 @@
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4util/libxfce4util.h>
 
+#ifdef HAVE_GTK_LAYER_SHELL
+#include <gtk-layer-shell.h>
+#else
+#define gtk_layer_is_supported() FALSE
+#endif
+
 #ifdef HAVE_MATH_H
 #include <math.h>
 #endif
@@ -271,8 +277,9 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
       XfconfChannel *channel = xfconf_channel_get (XFCE_PANEL_CHANNEL_NAME);
       object = gtk_builder_get_object (GTK_BUILDER (dialog), "keep-below");
       panel_return_if_fail (G_IS_OBJECT (object));
-      gtk_widget_set_sensitive (GTK_WIDGET (object),
-                                xfconf_channel_get_bool (channel, "/force-all-internal", FALSE));
+      gtk_widget_set_visible (
+        GTK_WIDGET (object),
+        gtk_layer_is_supported () && !xfconf_channel_get_bool (channel, "/force-all-external", FALSE));
     }
 
   /* appearance tab */
@@ -753,10 +760,8 @@ panel_preferences_dialog_autohide_changed (GtkComboBox *combobox,
   /* make "don't reserve space on borders" sensitive only when autohide is disabled */
   if (gtk_combo_box_get_active (combobox) == 0)
     {
-      XfconfChannel *channel = xfconf_channel_get (XFCE_PANEL_CHANNEL_NAME);
       gtk_widget_set_sensitive (GTK_WIDGET (struts_object), TRUE);
-      if (WINDOWING_IS_X11 () || xfconf_channel_get_bool (channel, "/force-all-internal", FALSE))
-        gtk_widget_set_sensitive (GTK_WIDGET (below_object), TRUE);
+      gtk_widget_set_sensitive (GTK_WIDGET (below_object), TRUE);
     }
   else
     {
