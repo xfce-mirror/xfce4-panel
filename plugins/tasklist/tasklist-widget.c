@@ -399,6 +399,10 @@ xfce_tasklist_skipped_windows_state_changed (XfwWindow *window,
                                              XfwWindowState changed_state,
                                              XfwWindowState new_state,
                                              XfceTasklist *tasklist);
+
+static void
+xfce_tasklist_include_monitors_changed (GtkComboBox *combobox, XfceTasklist *tasklist);
+
 static void
 xfce_tasklist_sort (XfceTasklist *tasklist,
                     gboolean sort_groups);
@@ -2091,6 +2095,49 @@ xfce_tasklist_skipped_windows_state_changed (XfwWindow *window,
     }
 }
 
+static void
+xfce_tasklist_include_monitors_changed (GtkComboBox *combobox, XfceTasklist *tasklist)
+{
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  panel_return_if_fail (GTK_IS_COMBO_BOX (combobox));
+
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  gchar *output_name;
+  guint all_monitors;
+  GValue value = G_VALUE_INIT;
+
+  gtk_combo_box_get_active (combobox);
+
+  if (!gtk_combo_box_get_active_iter (combobox, &iter))
+    return;
+
+  model = gtk_combo_box_get_model (combobox);
+  gtk_tree_model_get (model, &iter, OUTPUT_NAME, &output_name, -1);
+
+  if (g_strcmp0 (output_name, "all") == 0)
+    {
+      all_monitors = 1;
+    }
+  else
+    {
+      all_monitors = 0;
+    }
+
+  /* set monitor index */
+  g_value_init (&value, G_TYPE_STRING);
+  g_value_set_string (&value, output_name);
+  g_object_set_property (G_OBJECT (tasklist), "include-single-monitor", &value);
+  g_value_unset (&value);
+
+  /* set all monitors flag */
+  g_value_init (&value, G_TYPE_UINT);
+  g_value_set_uint (&value, all_monitors);
+  g_object_set_property (G_OBJECT (tasklist), "include-all-monitors", &value);
+  g_value_unset (&value);
+
+  g_free (output_name);
+}
 
 
 static void
@@ -5064,11 +5111,11 @@ xfce_tasklist_populate_output_list (GtkBuilder *builder,
     gtk_combo_box_set_active (GTK_COMBO_BOX (combobox), 0);
 
   /* catch `changed` events */
-  // g_signal_connect (
-  //   gtk_builder_get_object (builder, "include-monitors"),
-  //   "changed",
-  //   G_CALLBACK (tasklist_plugin_include_monitors_changed),
-  //   tasklist);
+  g_signal_connect (
+     combobox,
+     "changed",
+     G_CALLBACK (xfce_tasklist_include_monitors_changed),
+     tasklist);
 }
 
 
