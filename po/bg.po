@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-10-23 12:52+0200\n"
+"POT-Creation-Date: 2025-11-02 12:52+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Kiril Kirilov <cybercop_montana@abv.bg>, 2014-2015,2017-2020,2022-2025\n"
 "Language-Team: Bulgarian (http://app.transifex.com/xfce/xfce4-panel/language/bg/)\n"
@@ -39,7 +39,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "панели;настройки;предпочитания;лента на задачите;автоматично скриване;меню на програмите;бутони;стартер;зона за уведомяване;състояние;икони;добавки;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3858
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3859
 msgid "Panel"
 msgstr "Панел"
 
@@ -117,7 +117,7 @@ msgstr "_Затваряне"
 #: common/resources/tasklist-dialog.glade:93
 #: common/resources/windowmenu-dialog.glade:63
 #: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:3924
+#: panel/panel-window.c:3925
 msgid "_Help"
 msgstr "_Помощ"
 
@@ -185,9 +185,8 @@ msgstr "Панелът да се държи под прозорците"
 #: common/resources/panel-preferences-dialog.glade:474
 msgid ""
 "Select this option if you want windows to cover the panel. When autohide is "
-"enabled, panel is always on top. On wayland option is greyed out unless "
-"/force-all-internal property is set."
-msgstr "Изберете тази опция, ако искате прозорците да покриват панела. Когато автоматичното скриване е активирано, панелът винаги е отгоре. На wayland, опцията е сива, освен ако не е зададено свойството /force-all-internal."
+"enabled, panel is always on top."
+msgstr ""
 
 #: common/resources/panel-preferences-dialog.glade:495
 msgid "Au_tomatically hide the panel:"
@@ -321,7 +320,7 @@ msgstr "Добавяне на нов елемент в този панел"
 #. remove
 #: common/resources/panel-preferences-dialog.glade:1257
 #: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:354
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1103
+#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1108
 #: plugins/launcher/launcher-dialog.c:836
 msgid "_Remove"
 msgstr "_Премахване"
@@ -1130,7 +1129,7 @@ msgid "Enable _urgency notification"
 msgstr "Включване на спешни уведомявания"
 
 #: libxfce4panel/xfce-panel-plugin.c:1109
-#: panel/panel-preferences-dialog.c:1563
+#: panel/panel-preferences-dialog.c:1568
 msgid "Remove"
 msgstr "Премахване"
 
@@ -1140,7 +1139,7 @@ msgid ""
 msgstr "При премахване на елемента от панела, конфигурацията му също ще бъде изгубена."
 
 #: libxfce4panel/xfce-panel-plugin.c:1114
-#: panel/panel-preferences-dialog.c:1570
+#: panel/panel-preferences-dialog.c:1575
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Сигурни ли сте, че искате да премахнете „%s“?"
@@ -1151,7 +1150,7 @@ msgid "_Properties"
 msgstr "_Свойства"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3933
+#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3934
 msgid "_About"
 msgstr "_Относно"
 
@@ -1165,17 +1164,17 @@ msgid "Pane_l"
 msgstr "Панел"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3870
+#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3871
 msgid "Add _New Items..."
 msgstr "Добавяне на нови елементи..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3881
+#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3882
 msgid "Panel Pr_eferences..."
 msgstr "Настройки на панела..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3908
+#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3909
 msgid "Log _Out"
 msgstr "Изход"
 
@@ -1402,7 +1401,7 @@ msgstr "_Отказ"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Моля, изберете панел за новата добавка:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1050
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1055
 #, c-format
 msgid "Panel %d"
 msgstr "Панел %d"
@@ -1447,39 +1446,39 @@ msgstr "Рестартиране на добавка"
 msgid "_Execute"
 msgstr "_Изпълнение"
 
-#: panel/panel-preferences-dialog.c:586
+#: panel/panel-preferences-dialog.c:593
 msgid "Automatic"
 msgstr "Автоматично"
 
-#: panel/panel-preferences-dialog.c:595
+#: panel/panel-preferences-dialog.c:602
 msgid "Primary"
 msgstr "Главен"
 
 #. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:614
+#: panel/panel-preferences-dialog.c:621
 #, c-format
 msgid "Monitor %d"
 msgstr "Монитор %d"
 
-#: panel/panel-preferences-dialog.c:1102
+#: panel/panel-preferences-dialog.c:1107
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Избраният панел ще бъде напълно премахнат заедно с всичките му елементи"
 
-#: panel/panel-preferences-dialog.c:1111
+#: panel/panel-preferences-dialog.c:1116
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Наистина ли искате да премахнете панел %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1408
+#: panel/panel-preferences-dialog.c:1413
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(external)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1413
+#: panel/panel-preferences-dialog.c:1418
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1488,21 +1487,21 @@ msgstr "Вътрешно име: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1425
+#: panel/panel-preferences-dialog.c:1430
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Вътрешно име: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1572
+#: panel/panel-preferences-dialog.c:1577
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Ако премахнете този елемент от панела, той ще бъде изгубен окончателно."
 
-#: panel/panel-preferences-dialog.c:1576
+#: panel/panel-preferences-dialog.c:1581
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Сигурни ли сте, че искате да премахнете тези %d елемента?"
 
-#: panel/panel-preferences-dialog.c:1578
+#: panel/panel-preferences-dialog.c:1583
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Ако ги премахнете от панела, те ще бъдат изгубени безвъзвратно."
 
@@ -1530,7 +1529,7 @@ msgstr "Опитен"
 msgid "Expert"
 msgstr "Експерт"
 
-#: panel/panel-window.c:3895
+#: panel/panel-window.c:3896
 msgid "_Lock Panel"
 msgstr "Заключване на панел"
 
