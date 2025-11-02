@@ -33,7 +33,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-10-23 12:52+0200\n"
+"POT-Creation-Date: 2025-11-02 12:52+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Michael Martins, 2025\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/xfce/xfce4-panel/language/pt_BR/)\n"
@@ -59,7 +59,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "painéis;configurações;preferências;barra de tarefas,ocultar automaticamente;menu de aplicativos;botões;lançador;área de notificação;status;ícones;plugins;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3858
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3859
 msgid "Panel"
 msgstr "Painel"
 
@@ -137,7 +137,7 @@ msgstr "_Fechar"
 #: common/resources/tasklist-dialog.glade:93
 #: common/resources/windowmenu-dialog.glade:63
 #: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:3924
+#: panel/panel-window.c:3925
 msgid "_Help"
 msgstr "Aj_uda"
 
@@ -196,18 +196,17 @@ msgid ""
 "Select this option if you don't want maximized windows to overlap the panel "
 "area. This only works when the panel is attached to a screen edge and "
 "autohide is disabled."
-msgstr ""
+msgstr "Selecione esta opção se não quiser que as janelas maximizadas se sobreponham à área do painel. Isso só funciona quando o painel está anexado à borda da tela e a ocultação automática está desativada."
 
 #: common/resources/panel-preferences-dialog.glade:470
 msgid "_Keep panel below windows"
-msgstr ""
+msgstr "_Manter o painel abaixo das janelas"
 
 #: common/resources/panel-preferences-dialog.glade:474
 msgid ""
 "Select this option if you want windows to cover the panel. When autohide is "
-"enabled, panel is always on top. On wayland option is greyed out unless "
-"/force-all-internal property is set."
-msgstr ""
+"enabled, panel is always on top."
+msgstr "Selecione esta opção se quiser que as janelas cubram o painel. Quando a ocultação automática está ativada, o painel permanece sempre visível."
 
 #: common/resources/panel-preferences-dialog.glade:495
 msgid "Au_tomatically hide the panel:"
@@ -341,7 +340,7 @@ msgstr "Adicionar novo item ao painel"
 #. remove
 #: common/resources/panel-preferences-dialog.glade:1257
 #: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:354
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1103
+#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1108
 #: plugins/launcher/launcher-dialog.c:836
 msgid "_Remove"
 msgstr "_Remover"
@@ -1150,7 +1149,7 @@ msgid "Enable _urgency notification"
 msgstr "Habilitar notificação de _urgência"
 
 #: libxfce4panel/xfce-panel-plugin.c:1109
-#: panel/panel-preferences-dialog.c:1563
+#: panel/panel-preferences-dialog.c:1568
 msgid "Remove"
 msgstr "Remover"
 
@@ -1160,7 +1159,7 @@ msgid ""
 msgstr "A remoção do item do painel também significa que a sua configuração será perdida."
 
 #: libxfce4panel/xfce-panel-plugin.c:1114
-#: panel/panel-preferences-dialog.c:1570
+#: panel/panel-preferences-dialog.c:1575
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Tem certeza que deseja remover \"%s\"?"
@@ -1171,7 +1170,7 @@ msgid "_Properties"
 msgstr "_Propriedades"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3933
+#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3934
 msgid "_About"
 msgstr "_Sobre"
 
@@ -1185,17 +1184,17 @@ msgid "Pane_l"
 msgstr "Paine_l"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3870
+#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3871
 msgid "Add _New Items..."
 msgstr "Adicionar _novos itens..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3881
+#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3882
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferências do painel..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3908
+#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3909
 msgid "Log _Out"
 msgstr "Encerrar sessã_o"
 
@@ -1423,7 +1422,7 @@ msgstr "_Cancelar"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Escolha um painel para o novo plug-in:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1050
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1055
 #, c-format
 msgid "Panel %d"
 msgstr "Painel %d"
@@ -1468,39 +1467,39 @@ msgstr "Reiniciar plugin"
 msgid "_Execute"
 msgstr "_Executar"
 
-#: panel/panel-preferences-dialog.c:586
+#: panel/panel-preferences-dialog.c:593
 msgid "Automatic"
 msgstr "Automático"
 
-#: panel/panel-preferences-dialog.c:595
+#: panel/panel-preferences-dialog.c:602
 msgid "Primary"
 msgstr "Primário"
 
 #. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:614
+#: panel/panel-preferences-dialog.c:621
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: panel/panel-preferences-dialog.c:1102
+#: panel/panel-preferences-dialog.c:1107
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "O painel e as configurações do plug-in serão removidas permanentemente"
 
-#: panel/panel-preferences-dialog.c:1111
+#: panel/panel-preferences-dialog.c:1116
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Tem certeza que deseja remover o painel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1408
+#: panel/panel-preferences-dialog.c:1413
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(externo)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1413
+#: panel/panel-preferences-dialog.c:1418
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1509,21 +1508,21 @@ msgstr "Nome interno: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1425
+#: panel/panel-preferences-dialog.c:1430
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nome interno: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1572
+#: panel/panel-preferences-dialog.c:1577
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Se você remover o item do painel, ele será perdido permanentemente."
 
-#: panel/panel-preferences-dialog.c:1576
+#: panel/panel-preferences-dialog.c:1581
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Tem certeza que deseja remover estes %d itens?"
 
-#: panel/panel-preferences-dialog.c:1578
+#: panel/panel-preferences-dialog.c:1583
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Se removê-los do painel, eles serão perdidos permanentemente."
 
@@ -1551,7 +1550,7 @@ msgstr "Experiente"
 msgid "Expert"
 msgstr "Perito"
 
-#: panel/panel-window.c:3895
+#: panel/panel-window.c:3896
 msgid "_Lock Panel"
 msgstr "_Travar painel"
 
