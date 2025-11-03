@@ -216,12 +216,12 @@ struct _XfceTasklist
   /* whether decorate labels when window is not visible */
   guint label_decorations : 1;
 
-  /* whether we only show windows that are in the geometry of
-   * the monitor the tasklist is on */
+  /* 
+    We only show window buttons for selected monitor.
+  */
   guint all_monitors : 1;
+  guint my_monitor_only: 1;
   guint n_monitors;
-
-  /* we only show windows from this monitor */
   gchar *monitor_name;
   GdkMonitor *gdkmonitor;
 
@@ -712,6 +712,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->show_handle = TRUE;
   tasklist->show_tooltips = TRUE;
   tasklist->all_monitors = TRUE;
+  tasklist->my_monitor_only = FALSE;
   tasklist->n_monitors = 0;
   tasklist->monitor_name = NULL;
   tasklist->gdkmonitor = NULL;
@@ -2100,9 +2101,10 @@ xfce_tasklist_include_monitors_changed (GtkComboBox *combobox, XfceTasklist *tas
   else
     {
       tasklist->all_monitors = 0;
+      if(g_strcmp0 (output_name, "mine_only") == 0)
+        tasklist->my_monitor_only = 1;
     }
 
-  /* set monitor index */
   g_value_init (&value, G_TYPE_STRING);
   g_value_set_string (&value, output_name);
   g_object_set_property (G_OBJECT (tasklist), "include-single-monitor", &value);
@@ -5029,12 +5031,22 @@ xfce_tasklist_populate_output_list (GtkBuilder *builder,
 
     TODO: actually remove '_' in the translation strings
   */
-  GString *caption = g_string_new (_("Show windows from all mo_nitors"));
+  GString *caption = g_string_new (_("All mo_nitors"));
   g_string_replace (caption, "_", "", 1);
 
   /* Insert primary option: do not filter buttons by monitor */
   gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
                                      OUTPUT_NAME, "all",
+                                     OUTPUT_TITLE, caption->str, -1);
+
+  g_string_free (caption, TRUE);
+
+  caption = g_string_new (_("Panel's _monitor"));
+  g_string_replace (caption, "_", "", 1);
+
+  /* Secondary option: panel's monitor only */
+  gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
+                                     OUTPUT_NAME, "mine_only",
                                      OUTPUT_TITLE, caption->str, -1);
 
   g_string_free (caption, TRUE);
@@ -5076,6 +5088,9 @@ xfce_tasklist_find_my_monitor (XfceTasklist *tasklist)
 
   if (!tasklist->display)
     return NULL;
+
+  if(tasklist->my_monitor_only)
+    return tasklist_get_monitor (tasklist);
 
   n_monitors = gdk_display_get_n_monitors (tasklist->display);
 
