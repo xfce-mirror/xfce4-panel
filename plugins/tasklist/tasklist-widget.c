@@ -5018,7 +5018,7 @@ xfce_tasklist_populate_output_list (GtkBuilder *builder,
   /*
     TODO: add translation (don't forget .glade 'Show windows _from')
   */
- 
+
   /* Insert primary option: do not filter buttons by monitor */
   gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
                                      OUTPUT_NAME, "all",
