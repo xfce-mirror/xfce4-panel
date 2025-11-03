@@ -122,7 +122,7 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "show-labels", G_TYPE_BOOLEAN },
     { "grouping", G_TYPE_BOOLEAN },
     { "include-all-workspaces", G_TYPE_BOOLEAN },
-    { "include-single-monitor", G_TYPE_STRING },
+    { "monitor-to-include", G_TYPE_STRING },
     { "flat-buttons", G_TYPE_BOOLEAN },
     { "switch-workspace-on-unminimize", G_TYPE_BOOLEAN },
     { "show-only-minimized", G_TYPE_BOOLEAN },

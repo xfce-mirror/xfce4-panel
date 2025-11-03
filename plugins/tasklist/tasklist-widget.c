@@ -135,7 +135,7 @@ enum
   PROP_0,
   PROP_GROUPING,
   PROP_INCLUDE_ALL_WORKSPACES,
-  PROP_INCLUDE_SINGLE_MONITOR,
+  PROP_MONITOR_TO_INCLUDE,
   PROP_FLAT_BUTTONS,
   PROP_SWITCH_WORKSPACE_ON_UNMINIMIZE,
   PROP_SHOW_LABELS,
@@ -216,11 +216,11 @@ struct _XfceTasklist
   /* whether decorate labels when window is not visible */
   guint label_decorations : 1;
 
-  /* 
+  /*
     We only show window buttons for selected monitor.
   */
   guint all_monitors : 1;
-  guint my_monitor_only: 1;
+  guint my_monitor_only : 1;
   guint n_monitors;
   gchar *monitor_name;
   GdkMonitor *gdkmonitor;
@@ -400,7 +400,7 @@ xfce_tasklist_skipped_windows_state_changed (XfwWindow *window,
                                              XfceTasklist *tasklist);
 
 static void
-xfce_tasklist_include_monitors_changed (GtkComboBox *combobox, XfceTasklist *tasklist);
+xfce_tasklist_monitor_to_include_changed (GtkComboBox *combobox, XfceTasklist *tasklist);
 
 static void
 xfce_tasklist_sort (XfceTasklist *tasklist,
@@ -471,7 +471,7 @@ xfce_tasklist_set_include_all_workspaces (XfceTasklist *tasklist,
                                           gboolean all_workspaces);
 
 static void
-xfce_tasklist_set_include_single_monitor (XfceTasklist *tasklist, const gchar *name);
+xfce_tasklist_set_monitor_to_include (XfceTasklist *tasklist, const gchar *name);
 
 static void
 xfce_tasklist_set_button_relief (XfceTasklist *tasklist,
@@ -597,8 +597,8 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_INCLUDE_SINGLE_MONITOR,
-                                   g_param_spec_string ("include-single-monitor",
+                                   PROP_MONITOR_TO_INCLUDE,
+                                   g_param_spec_string ("monitor-to-include",
                                                         NULL, NULL,
                                                         "all",
                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
@@ -770,7 +770,7 @@ xfce_tasklist_get_property (GObject *object,
       g_value_set_boolean (value, tasklist->all_workspaces);
       break;
 
-    case PROP_INCLUDE_SINGLE_MONITOR:
+    case PROP_MONITOR_TO_INCLUDE:
       g_value_set_string (value, tasklist->monitor_name);
       break;
 
@@ -853,8 +853,8 @@ xfce_tasklist_set_property (GObject *object,
       xfce_tasklist_set_include_all_workspaces (tasklist, !WINDOWING_IS_X11 () || g_value_get_boolean (value));
       break;
 
-    case PROP_INCLUDE_SINGLE_MONITOR:
-      xfce_tasklist_set_include_single_monitor (tasklist, g_value_get_string (value));
+    case PROP_MONITOR_TO_INCLUDE:
+      xfce_tasklist_set_monitor_to_include (tasklist, g_value_get_string (value));
       break;
 
     case PROP_FLAT_BUTTONS:
@@ -2078,7 +2078,7 @@ xfce_tasklist_skipped_windows_state_changed (XfwWindow *window,
 }
 
 static void
-xfce_tasklist_include_monitors_changed (GtkComboBox *combobox, XfceTasklist *tasklist)
+xfce_tasklist_monitor_to_include_changed (GtkComboBox *combobox, XfceTasklist *tasklist)
 {
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
   panel_return_if_fail (GTK_IS_COMBO_BOX (combobox));
@@ -2094,20 +2094,9 @@ xfce_tasklist_include_monitors_changed (GtkComboBox *combobox, XfceTasklist *tas
   model = gtk_combo_box_get_model (combobox);
   gtk_tree_model_get (model, &iter, OUTPUT_NAME, &output_name, -1);
 
-  if (g_strcmp0 (output_name, "all") == 0)
-    {
-      tasklist->all_monitors = 1;
-    }
-  else
-    {
-      tasklist->all_monitors = 0;
-      if(g_strcmp0 (output_name, "mine_only") == 0)
-        tasklist->my_monitor_only = 1;
-    }
-
   g_value_init (&value, G_TYPE_STRING);
   g_value_set_string (&value, output_name);
-  g_object_set_property (G_OBJECT (tasklist), "include-single-monitor", &value);
+  g_object_set_property (G_OBJECT (tasklist), "monitor-to-include", &value);
   g_value_unset (&value);
 
   g_free (output_name);
@@ -4719,7 +4708,7 @@ xfce_tasklist_set_include_all_workspaces (XfceTasklist *tasklist,
 }
 
 static void
-xfce_tasklist_set_include_single_monitor (XfceTasklist *tasklist, const gchar *name)
+xfce_tasklist_set_monitor_to_include (XfceTasklist *tasklist, const gchar *name)
 {
   if (tasklist->monitor_name)
     {
@@ -4727,9 +4716,11 @@ xfce_tasklist_set_include_single_monitor (XfceTasklist *tasklist, const gchar *n
       tasklist->monitor_name = NULL;
     }
 
-
   tasklist->monitor_name = g_strdup (name);
   tasklist->gdkmonitor = xfce_tasklist_find_my_monitor (tasklist);
+
+  tasklist->all_monitors = (g_strcmp0 (tasklist->monitor_name, "all") == 0);
+  tasklist->my_monitor_only = (g_strcmp0 (tasklist->monitor_name, "mine_only") == 0);
 
   if (tasklist->screen != NULL)
     xfce_tasklist_active_workspace_changed (tasklist->workspace_group, NULL, tasklist);
@@ -5016,7 +5007,7 @@ xfce_tasklist_populate_output_list (GtkBuilder *builder,
   gboolean selected = FALSE;
 
   /* Get ComboBox, make sure it is here */
-  combobox = gtk_builder_get_object (builder, "include-monitors");
+  combobox = gtk_builder_get_object (builder, "monitor-to-include");
   panel_return_if_fail (GTK_IS_COMBO_BOX (combobox));
 
   /* Get ComboBox model, make sure it is here, clear it */
@@ -5041,6 +5032,10 @@ xfce_tasklist_populate_output_list (GtkBuilder *builder,
 
   g_string_free (caption, TRUE);
 
+  /* Make active if user previously selected */
+  if ((selected = (!selected && g_strcmp0 (tasklist->monitor_name, "all") == 0)))
+    gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combobox), &iter);
+
   caption = g_string_new (_("Panel's _monitor"));
   g_string_replace (caption, "_", "", 1);
 
@@ -5050,6 +5045,10 @@ xfce_tasklist_populate_output_list (GtkBuilder *builder,
                                      OUTPUT_TITLE, caption->str, -1);
 
   g_string_free (caption, TRUE);
+
+  /* Make active if user previously selected */
+  if ((selected = (!selected && g_strcmp0 (tasklist->monitor_name, "mine_only") == 0)))
+    gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combobox), &iter);
 
   /* Get total number of monitors */
   display = gtk_widget_get_display (GTK_WIDGET (dialog));
@@ -5075,7 +5074,7 @@ xfce_tasklist_populate_output_list (GtkBuilder *builder,
   g_signal_connect (
     combobox,
     "changed",
-    G_CALLBACK (xfce_tasklist_include_monitors_changed),
+    G_CALLBACK (xfce_tasklist_monitor_to_include_changed),
     tasklist);
 }
 
@@ -5089,7 +5088,7 @@ xfce_tasklist_find_my_monitor (XfceTasklist *tasklist)
   if (!tasklist->display)
     return NULL;
 
-  if(tasklist->my_monitor_only)
+  if (tasklist->my_monitor_only)
     return tasklist_get_monitor (tasklist);
 
   n_monitors = gdk_display_get_n_monitors (tasklist->display);
