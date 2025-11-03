@@ -135,7 +135,6 @@ enum
   PROP_0,
   PROP_GROUPING,
   PROP_INCLUDE_ALL_WORKSPACES,
-  PROP_INCLUDE_ALL_MONITORS,
   PROP_INCLUDE_SINGLE_MONITOR,
   PROP_FLAT_BUTTONS,
   PROP_SWITCH_WORKSPACE_ON_UNMINIMIZE,
@@ -470,9 +469,6 @@ xfce_tasklist_group_button_child_destroyed (XfceTasklistChild *group_child,
 static void
 xfce_tasklist_set_include_all_workspaces (XfceTasklist *tasklist,
                                           gboolean all_workspaces);
-static void
-xfce_tasklist_set_include_all_monitors (XfceTasklist *tasklist,
-                                        gboolean all_monitors);
 
 static void
 xfce_tasklist_set_include_single_monitor (XfceTasklist *tasklist, const gchar *name);
@@ -540,13 +536,6 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                    g_param_spec_boolean ("include-all-workspaces",
                                                          NULL, NULL,
                                                          FALSE,
-                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
-
-  g_object_class_install_property (gobject_class,
-                                   PROP_INCLUDE_ALL_MONITORS,
-                                   g_param_spec_boolean ("include-all-monitors",
-                                                         NULL, NULL,
-                                                         TRUE,
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
@@ -780,10 +769,6 @@ xfce_tasklist_get_property (GObject *object,
       g_value_set_boolean (value, tasklist->all_workspaces);
       break;
 
-    case PROP_INCLUDE_ALL_MONITORS:
-      g_value_set_boolean (value, tasklist->all_monitors);
-      break;
-
     case PROP_INCLUDE_SINGLE_MONITOR:
       g_value_set_string (value, tasklist->monitor_name);
       break;
@@ -865,10 +850,6 @@ xfce_tasklist_set_property (GObject *object,
 
     case PROP_INCLUDE_ALL_WORKSPACES:
       xfce_tasklist_set_include_all_workspaces (tasklist, !WINDOWING_IS_X11 () || g_value_get_boolean (value));
-      break;
-
-    case PROP_INCLUDE_ALL_MONITORS:
-      xfce_tasklist_set_include_all_monitors (tasklist, g_value_get_boolean (value));
       break;
 
     case PROP_INCLUDE_SINGLE_MONITOR:
@@ -2104,7 +2085,6 @@ xfce_tasklist_include_monitors_changed (GtkComboBox *combobox, XfceTasklist *tas
   GtkTreeIter iter;
   GtkTreeModel *model;
   gchar *output_name;
-  guint all_monitors;
   GValue value = G_VALUE_INIT;
 
   if (!gtk_combo_box_get_active_iter (combobox, &iter))
@@ -2115,23 +2095,17 @@ xfce_tasklist_include_monitors_changed (GtkComboBox *combobox, XfceTasklist *tas
 
   if (g_strcmp0 (output_name, "all") == 0)
     {
-      all_monitors = 1;
+      tasklist->all_monitors = 1;
     }
   else
     {
-      all_monitors = 0;
+      tasklist->all_monitors = 0;
     }
 
   /* set monitor index */
   g_value_init (&value, G_TYPE_STRING);
   g_value_set_string (&value, output_name);
   g_object_set_property (G_OBJECT (tasklist), "include-single-monitor", &value);
-  g_value_unset (&value);
-
-  /* set all monitors flag */
-  g_value_init (&value, G_TYPE_UINT);
-  g_value_set_uint (&value, all_monitors);
-  g_object_set_property (G_OBJECT (tasklist), "include-all-monitors", &value);
   g_value_unset (&value);
 
   g_free (output_name);
@@ -4739,26 +4713,6 @@ xfce_tasklist_set_include_all_workspaces (XfceTasklist *tasklist,
           /* make sure sorting is ok */
           xfce_tasklist_sort (tasklist, TRUE);
         }
-    }
-}
-
-
-
-static void
-xfce_tasklist_set_include_all_monitors (XfceTasklist *tasklist,
-                                        gboolean all_monitors)
-{
-  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
-
-  all_monitors = !!all_monitors;
-
-  if (tasklist->all_monitors != all_monitors)
-    {
-      tasklist->all_monitors = all_monitors;
-
-      /* update all windows */
-      if (tasklist->screen != NULL)
-        xfce_tasklist_active_workspace_changed (tasklist->workspace_group, NULL, tasklist);
     }
 }
 
