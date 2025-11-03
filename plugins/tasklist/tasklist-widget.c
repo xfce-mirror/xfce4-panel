@@ -5016,35 +5016,22 @@ xfce_tasklist_populate_output_list (GtkBuilder *builder,
   gtk_list_store_clear (GTK_LIST_STORE (store));
 
   /*
-    Translations have an underscore to indicate the mnemonic.
-    But in the ComboBox we do not want to show the underscore,
-    so we remove it after translation.
-
-    TODO: actually remove '_' in the translation strings
+    TODO: add translation (don't forget .glade 'Show windows _from')
   */
-  GString *caption = g_string_new (_("All mo_nitors"));
-  g_string_replace (caption, "_", "", 1);
-
+ 
   /* Insert primary option: do not filter buttons by monitor */
   gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
                                      OUTPUT_NAME, "all",
-                                     OUTPUT_TITLE, caption->str, -1);
-
-  g_string_free (caption, TRUE);
+                                     OUTPUT_TITLE, _("All monitors"), -1);
 
   /* Make active if user previously selected */
   if ((selected = (!selected && g_strcmp0 (tasklist->monitor_name, "all") == 0)))
     gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combobox), &iter);
 
-  caption = g_string_new (_("Panel's _monitor"));
-  g_string_replace (caption, "_", "", 1);
-
   /* Secondary option: panel's monitor only */
   gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
                                      OUTPUT_NAME, "mine_only",
-                                     OUTPUT_TITLE, caption->str, -1);
-
-  g_string_free (caption, TRUE);
+                                     OUTPUT_TITLE, _("Panel's monitor"), -1);
 
   /* Make active if user previously selected */
   if ((selected = (!selected && g_strcmp0 (tasklist->monitor_name, "mine_only") == 0)))
