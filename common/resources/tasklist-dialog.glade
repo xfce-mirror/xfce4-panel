@@ -459,22 +459,43 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBox" id="include-monitors">
+                          <object class="GtkBox" id="hbox4">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="model">monitors-model</property>
+                            <property name="can-focus">False</property>
+                            <property name="spacing">12</property>
                             <child>
-                              <object class="GtkCellRendererText"/>
-                              <attributes>
-                                <attribute name="text">1</attribute>
-                              </attributes>
+                              <object class="GtkLabel" id="label7">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Show windows _from:</property>
+                                <property name="use-underline">True</property>
+                                <property name="mnemonic-widget">sort-order</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkComboBox" id="include-monitors">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="model">monitors-model</property>
+                                <child>
+                                  <object class="GtkCellRendererText"/>
+                                  <attributes>
+                                    <attribute name="text">1</attribute>
+                                  </attributes>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
                             </child>
                           </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">2</property>
-                          </packing>
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="show-only-minimized">
