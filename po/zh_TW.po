@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-11-02 12:52+0100\n"
+"POT-Creation-Date: 2025-11-04 12:53+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: 黃柏諺 <s8321414@gmail.com>, 2019-2020,2022-2025\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/xfce/xfce4-panel/language/zh_TW/)\n"
@@ -61,41 +61,41 @@ msgstr "聰明地"
 msgid "Always"
 msgstr "總是"
 
-#: common/resources/panel-preferences-dialog.glade:81
+#: common/resources/panel-preferences-dialog.glade:71
 msgid "Horizontal"
 msgstr "水平"
 
-#: common/resources/panel-preferences-dialog.glade:84
+#: common/resources/panel-preferences-dialog.glade:74
 msgid "Vertical"
 msgstr "垂直"
 
-#: common/resources/panel-preferences-dialog.glade:87
+#: common/resources/panel-preferences-dialog.glade:77
 msgid "Deskbar"
 msgstr "桌面列"
 
-#: common/resources/panel-preferences-dialog.glade:134
+#: common/resources/panel-preferences-dialog.glade:124
 msgid "None (use system style)"
 msgstr "無 (使用系統樣式)"
 
-#: common/resources/panel-preferences-dialog.glade:137
+#: common/resources/panel-preferences-dialog.glade:127
 msgid "Solid color"
 msgstr "填滿色彩"
 
-#: common/resources/panel-preferences-dialog.glade:140
+#: common/resources/panel-preferences-dialog.glade:130
 msgid "Background image"
 msgstr "背景影像"
 
-#: common/resources/panel-preferences-dialog.glade:146
+#: common/resources/panel-preferences-dialog.glade:136
 msgid "Panel Preferences"
 msgstr "面板偏好設定"
 
-#: common/resources/panel-preferences-dialog.glade:163
+#: common/resources/panel-preferences-dialog.glade:153
 #: common/resources/actions-dialog.glade:82
 #: common/resources/applicationsmenu-dialog.glade:55
 #: common/resources/clock-dialog.glade:105
 #: common/resources/directorymenu-dialog.glade:34
-#: common/resources/launcher-dialog.glade:235
-#: common/resources/launcher-dialog.glade:414
+#: common/resources/launcher-dialog.glade:103
+#: common/resources/launcher-dialog.glade:270
 #: common/resources/pager-dialog.glade:97
 #: common/resources/separator-dialog.glade:58
 #: common/resources/showdesktop-dialog.glade:34
@@ -107,12 +107,12 @@ msgid "_Close"
 msgstr "關閉(_C)"
 
 #. help item
-#: common/resources/panel-preferences-dialog.glade:178
+#: common/resources/panel-preferences-dialog.glade:168
 #: common/resources/actions-dialog.glade:97
 #: common/resources/applicationsmenu-dialog.glade:39
 #: common/resources/clock-dialog.glade:120
 #: common/resources/directorymenu-dialog.glade:49
-#: common/resources/launcher-dialog.glade:398
+#: common/resources/launcher-dialog.glade:254
 #: common/resources/pager-dialog.glade:81
 #: common/resources/separator-dialog.glade:73
 #: common/resources/showdesktop-dialog.glade:49
@@ -123,234 +123,193 @@ msgstr "關閉(_C)"
 msgid "_Help"
 msgstr "說明(_H)"
 
-#: common/resources/panel-preferences-dialog.glade:223
+#: common/resources/panel-preferences-dialog.glade:213
 msgid "Profiles:"
 msgstr "設定檔："
 
-#: common/resources/panel-preferences-dialog.glade:251
+#: common/resources/panel-preferences-dialog.glade:241
 msgid "_Backup and restore"
 msgstr "備份與還原(_B)"
 
-#: common/resources/panel-preferences-dialog.glade:255
+#: common/resources/panel-preferences-dialog.glade:245
 msgid "Switch between panel presets"
 msgstr "在預設配置好的面板設定中切換"
 
-#: common/resources/panel-preferences-dialog.glade:299
+#: common/resources/panel-preferences-dialog.glade:289
 msgid "Add a new panel"
 msgstr "新增面板"
 
-#: common/resources/panel-preferences-dialog.glade:324
+#: common/resources/panel-preferences-dialog.glade:314
 msgid "Remove the currently selected panel"
 msgstr "移除目前所選的面板"
 
-#: common/resources/panel-preferences-dialog.glade:375
-#: common/resources/panel-preferences-dialog.glade:755
+#: common/resources/panel-preferences-dialog.glade:365
+#: common/resources/panel-preferences-dialog.glade:745
 msgid "<b>General</b>"
 msgstr "<b>一般</b>"
 
-#: common/resources/panel-preferences-dialog.glade:390
+#: common/resources/panel-preferences-dialog.glade:380
 msgid "M_ode:"
 msgstr "模式(_O)："
 
-#: common/resources/panel-preferences-dialog.glade:419
+#: common/resources/panel-preferences-dialog.glade:409
 msgid "Span mo_nitors"
 msgstr "跨越螢幕(_N)"
 
-#: common/resources/panel-preferences-dialog.glade:423
+#: common/resources/panel-preferences-dialog.glade:413
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "選取此選項以將面板擴展至多個螢幕。"
 
-#: common/resources/panel-preferences-dialog.glade:436
+#: common/resources/panel-preferences-dialog.glade:426
 msgid "_Lock panel"
 msgstr "鎖住面板(_L)"
 
-#: common/resources/panel-preferences-dialog.glade:440
+#: common/resources/panel-preferences-dialog.glade:430
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr "選取此選項以隱藏面板的控制把並且鎖住其位置。"
 
-#: common/resources/panel-preferences-dialog.glade:453
+#: common/resources/panel-preferences-dialog.glade:443
 msgid "_Reserve space on screen edges for the panel"
 msgstr "在螢幕邊緣為面板預留空間(_R)"
 
-#: common/resources/panel-preferences-dialog.glade:457
+#: common/resources/panel-preferences-dialog.glade:447
 msgid ""
 "Select this option if you don't want maximized windows to overlap the panel "
 "area. This only works when the panel is attached to a screen edge and "
 "autohide is disabled."
 msgstr "若您不想讓最大化的視窗覆蓋面板後的區域，請選取此選項。此功能僅在面板附著於螢幕邊緣且自動隱藏功能已停用時生效。"
 
-#: common/resources/panel-preferences-dialog.glade:470
+#: common/resources/panel-preferences-dialog.glade:460
 msgid "_Keep panel below windows"
 msgstr "將面板維持在視窗之下(_K)"
 
-#: common/resources/panel-preferences-dialog.glade:474
+#: common/resources/panel-preferences-dialog.glade:464
 msgid ""
 "Select this option if you want windows to cover the panel. When autohide is "
 "enabled, panel is always on top."
 msgstr "若需視窗覆蓋面板，請選取此選項。啟用自動隱藏功能時，面板將始終置頂。"
 
-#: common/resources/panel-preferences-dialog.glade:495
+#: common/resources/panel-preferences-dialog.glade:485
 msgid "Au_tomatically hide the panel:"
 msgstr "自動隱藏面板：(_T)"
 
-#: common/resources/panel-preferences-dialog.glade:536
+#: common/resources/panel-preferences-dialog.glade:526
 msgid "O_utput:"
 msgstr "輸入(_U)："
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
-#: common/resources/panel-preferences-dialog.glade:580
+#: common/resources/panel-preferences-dialog.glade:570
 msgid "<b>Measurements</b>"
 msgstr "<b>測量</b>"
 
-#: common/resources/panel-preferences-dialog.glade:595
+#: common/resources/panel-preferences-dialog.glade:585
 msgid "Row _size (pixels):"
 msgstr "欄位大小（像素）：(_S)"
 
-#: common/resources/panel-preferences-dialog.glade:609
+#: common/resources/panel-preferences-dialog.glade:599
 msgid "Num_ber of rows:"
 msgstr "列數(_B)："
 
-#: common/resources/panel-preferences-dialog.glade:623
+#: common/resources/panel-preferences-dialog.glade:613
 msgid "L_ength (pixels):"
 msgstr "長度（像素）(_E)："
 
-#: common/resources/panel-preferences-dialog.glade:652
+#: common/resources/panel-preferences-dialog.glade:642
 msgid "Border width (pixels):"
 msgstr "邊框寬度（畫素）："
 
-#: common/resources/panel-preferences-dialog.glade:675
+#: common/resources/panel-preferences-dialog.glade:665
 msgid "A_utomatically increase the length"
 msgstr "自動增加長度(_U)"
 
-#: common/resources/panel-preferences-dialog.glade:679
+#: common/resources/panel-preferences-dialog.glade:669
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr "選取此選項以在插件需要更多空間時自動增長面板。"
 
-#: common/resources/panel-preferences-dialog.glade:729
+#: common/resources/panel-preferences-dialog.glade:719
 msgid "D_isplay"
 msgstr "顯示(_I)"
 
-#: common/resources/panel-preferences-dialog.glade:770
+#: common/resources/panel-preferences-dialog.glade:760
 msgid "Dark mode"
 msgstr "深色模式"
 
-#: common/resources/panel-preferences-dialog.glade:810
+#: common/resources/panel-preferences-dialog.glade:800
 msgid "<b>Background</b>"
 msgstr "<b>背景</b>"
 
-#: common/resources/panel-preferences-dialog.glade:825
+#: common/resources/panel-preferences-dialog.glade:815
 #: common/resources/separator-dialog.glade:123
 msgid "_Style:"
 msgstr "樣式(_S)："
 
-#: common/resources/panel-preferences-dialog.glade:857
+#: common/resources/panel-preferences-dialog.glade:847
 msgid "C_olor:"
 msgstr "色彩(_O)："
 
-#: common/resources/panel-preferences-dialog.glade:872
+#: common/resources/panel-preferences-dialog.glade:862
 msgid "Pick a Panel Color"
 msgstr "挑選面板顏色"
 
-#: common/resources/panel-preferences-dialog.glade:885
+#: common/resources/panel-preferences-dialog.glade:875
 msgid "_File:"
 msgstr "檔案(_F)："
 
-#: common/resources/panel-preferences-dialog.glade:898
+#: common/resources/panel-preferences-dialog.glade:888
 msgid "Select A Background Image"
 msgstr "選取背景影像"
 
-#: common/resources/panel-preferences-dialog.glade:925
+#: common/resources/panel-preferences-dialog.glade:915
 msgid "<b>Icons</b>"
 msgstr "<b>圖示</b>"
 
-#: common/resources/panel-preferences-dialog.glade:939
+#: common/resources/panel-preferences-dialog.glade:929
 msgid "Adjust size au_tomatically"
 msgstr "自動調整大小(_T)"
 
-#: common/resources/panel-preferences-dialog.glade:976
+#: common/resources/panel-preferences-dialog.glade:966
 msgid "Fixed icon _size (pixels):"
 msgstr "固定圖示大小（像素）：(_S)"
 
-#: common/resources/panel-preferences-dialog.glade:1019
+#: common/resources/panel-preferences-dialog.glade:1009
 msgid "<b>Opacity</b>"
 msgstr "<b>不透明度</b>"
 
-#: common/resources/panel-preferences-dialog.glade:1045
+#: common/resources/panel-preferences-dialog.glade:1035
 msgid "Configure..."
 msgstr "設定……"
 
-#: common/resources/panel-preferences-dialog.glade:1083
+#: common/resources/panel-preferences-dialog.glade:1073
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr "<b>目前已停用合成</b>\n在視窗管理員中啟用合成以在面板上使用不透明設定。"
 
 #. I18N: label for the enter transparency slider
-#: common/resources/panel-preferences-dialog.glade:1123
+#: common/resources/panel-preferences-dialog.glade:1113
 msgid "_Enter:"
 msgstr "進入(_E)："
 
 #. I18N: label for the leave transparency slider
-#: common/resources/panel-preferences-dialog.glade:1150
+#: common/resources/panel-preferences-dialog.glade:1140
 msgid "_Leave:"
 msgstr "退出(_L)："
 
-#: common/resources/panel-preferences-dialog.glade:1163
+#: common/resources/panel-preferences-dialog.glade:1153
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "當指標沒有停在面板上時的透明度，0 代表完全透明，100 代表完全不透明。"
 
-#: common/resources/panel-preferences-dialog.glade:1190
+#: common/resources/panel-preferences-dialog.glade:1180
 msgid "Appeara_nce"
 msgstr "外觀(_N)"
 
-#: common/resources/panel-preferences-dialog.glade:1240
-#: common/resources/launcher-dialog.glade:219 panel/panel-dialogs.c:157
-#: panel/panel-item-dialog.c:197
-msgid "_Add"
-msgstr "新增(_A)"
-
-#: common/resources/panel-preferences-dialog.glade:1245
-msgid "Add new item to this panel"
-msgstr "新增項目至此面板"
-
-#. remove
-#: common/resources/panel-preferences-dialog.glade:1257
-#: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:354
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1108
-#: plugins/launcher/launcher-dialog.c:836
-msgid "_Remove"
-msgstr "移除(_R)"
-
-#: common/resources/panel-preferences-dialog.glade:1262
-msgid "Remove currently selected item"
-msgstr "移除目前所選的項目"
-
-#: common/resources/panel-preferences-dialog.glade:1278
-#: common/resources/launcher-dialog.glade:559
-msgid "Edit the currently selected item"
-msgstr "編輯目前所選的項目"
-
-#: common/resources/panel-preferences-dialog.glade:1299
-msgid "Show about information of the currently selected item"
-msgstr "顯示關於目前所選項目的資訊"
-
-#: common/resources/panel-preferences-dialog.glade:1342
-#: common/resources/launcher-dialog.glade:509
-msgid "Move currently selected item up by one row"
-msgstr "將目前所選的項目向上移動一列"
-
-#: common/resources/panel-preferences-dialog.glade:1363
-#: common/resources/launcher-dialog.glade:529
-msgid "Move currently selected item down by one row"
-msgstr "將目前所選的項目向下移動一列"
-
-#: common/resources/panel-preferences-dialog.glade:1397
+#: common/resources/panel-preferences-dialog.glade:1208
 msgid "Ite_ms"
 msgstr "項目(_M)"
 
@@ -393,7 +352,7 @@ msgid "Custo_m title:"
 msgstr "自訂標題：(_M)"
 
 #: common/resources/actions-dialog.glade:255
-#: common/resources/launcher-dialog.glade:667
+#: common/resources/launcher-dialog.glade:306
 msgid "General"
 msgstr "一般"
 
@@ -742,91 +701,55 @@ msgstr "南方"
 msgid "Inside Button"
 msgstr "按鈕內"
 
-#: common/resources/launcher-dialog.glade:96
-msgid "Up"
-msgstr "上"
-
-#: common/resources/launcher-dialog.glade:105
-msgid "Down"
-msgstr "下"
-
-#: common/resources/launcher-dialog.glade:120
-msgid "_Edit Item"
-msgstr "編輯項目(_E)"
-
-#: common/resources/launcher-dialog.glade:130
-msgid "D_elete Item"
-msgstr "刪除項目(_E)"
-
-#: common/resources/launcher-dialog.glade:146
-msgid "Add Appli_cation"
-msgstr "新增應用程式(_C)"
-
-#: common/resources/launcher-dialog.glade:162
-msgid "New _Application"
-msgstr "新增應用程式(_A)"
-
-#: common/resources/launcher-dialog.glade:172
-msgid "New _Link"
-msgstr "新增連結(_L)"
-
-#: common/resources/launcher-dialog.glade:198 panel/panel-item-dialog.c:192
+#: common/resources/launcher-dialog.glade:66 panel/panel-item-dialog.c:192
 msgid "Add New Items"
 msgstr "新增項目"
 
-#: common/resources/launcher-dialog.glade:205
-#: common/resources/launcher-dialog.glade:599
+#: common/resources/launcher-dialog.glade:73
 msgid "Add one or more existing items to the launcher"
 msgstr "新增一個或多個現有項目至啟動器"
 
-#: common/resources/launcher-dialog.glade:272 panel/panel-item-dialog.c:221
+#: common/resources/launcher-dialog.glade:87 panel/panel-dialogs.c:157
+#: panel/panel-item-dialog.c:197
+msgid "_Add"
+msgstr "新增(_A)"
+
+#: common/resources/launcher-dialog.glade:140 panel/panel-item-dialog.c:221
 msgid "_Search:"
 msgstr "搜尋(_S)："
 
-#: common/resources/launcher-dialog.glade:379
+#: common/resources/launcher-dialog.glade:235
 #: plugins/launcher/launcher.desktop.in.in:4
 msgid "Launcher"
 msgstr "啟動器"
 
-#: common/resources/launcher-dialog.glade:579
-msgid "Delete the currently selected item"
-msgstr "刪除目前所選的項目"
-
-#: common/resources/launcher-dialog.glade:619
-msgid "Add a new empty item"
-msgstr "新增空的項目"
-
-#: common/resources/launcher-dialog.glade:639
-msgid "Add a new hyperlink"
-msgstr "新增超連結"
-
-#: common/resources/launcher-dialog.glade:682
+#: common/resources/launcher-dialog.glade:321
 msgid "Disable t_ooltips"
 msgstr "停用提示框(_O)"
 
-#: common/resources/launcher-dialog.glade:686
+#: common/resources/launcher-dialog.glade:325
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
 msgstr "選取此選項以停用移動至面板按鈕上方或選單項目上方所顯示的提示框"
 
-#: common/resources/launcher-dialog.glade:698
+#: common/resources/launcher-dialog.glade:337
 msgid "Show _label instead of icon"
 msgstr "顯示標籤而不是圖示(_L)"
 
-#: common/resources/launcher-dialog.glade:713
+#: common/resources/launcher-dialog.glade:352
 msgid "Show last _used item in panel"
 msgstr "在面板內顯示最近使用的項目(_U)"
 
-#: common/resources/launcher-dialog.glade:717
+#: common/resources/launcher-dialog.glade:356
 msgid "Select this option to move the clicked menu item to the panel."
 msgstr "選取此項目將點擊的選單項目移至面板。"
 
-#: common/resources/launcher-dialog.glade:736
+#: common/resources/launcher-dialog.glade:375
 msgid "_Arrow button position:"
 msgstr "箭號按鈕位置(_A)："
 
-#: common/resources/launcher-dialog.glade:779
+#: common/resources/launcher-dialog.glade:418
 msgid "Advanced"
 msgstr "進階"
 
@@ -1131,7 +1054,7 @@ msgid "Enable _urgency notification"
 msgstr "啟用緊急通知(_U)"
 
 #: libxfce4panel/xfce-panel-plugin.c:1109
-#: panel/panel-preferences-dialog.c:1568
+#: panel/panel-preferences-dialog.c:1536
 msgid "Remove"
 msgstr "移除"
 
@@ -1141,7 +1064,7 @@ msgid ""
 msgstr "若從面板移除項目，其設定也會失去。"
 
 #: libxfce4panel/xfce-panel-plugin.c:1114
-#: panel/panel-preferences-dialog.c:1575
+#: panel/panel-preferences-dialog.c:1543
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "確定要移除「%s」嗎？"
@@ -1160,6 +1083,13 @@ msgstr "關於(_A)"
 #: libxfce4panel/xfce-panel-plugin.c:1258
 msgid "_Move"
 msgstr "移動(_M)"
+
+#. remove
+#: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:354
+#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1113
+#: plugins/launcher/launcher-dialog.c:935
+msgid "_Remove"
+msgstr "移除(_R)"
 
 #: libxfce4panel/xfce-panel-plugin.c:1292
 msgid "Pane_l"
@@ -1402,7 +1332,7 @@ msgstr "取消(_C)"
 msgid "Please choose a panel for the new plugin:"
 msgstr "請為新插件選擇面板："
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1055
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1060
 #, c-format
 msgid "Panel %d"
 msgstr "面板 %d"
@@ -1447,25 +1377,34 @@ msgstr "外掛程式重新啟動"
 msgid "_Execute"
 msgstr "執行(_E)"
 
-#: panel/panel-preferences-dialog.c:593
+#: panel/panel-preferences-dialog.c:348
+msgctxt "plugin context menu"
+msgid "_About"
+msgstr "關於(_A)"
+
+#: panel/panel-preferences-dialog.c:352
+msgid "Show about information of the currently selected item"
+msgstr "顯示關於目前所選項目的資訊"
+
+#: panel/panel-preferences-dialog.c:588
 msgid "Automatic"
 msgstr "自動"
 
-#: panel/panel-preferences-dialog.c:602
+#: panel/panel-preferences-dialog.c:597
 msgid "Primary"
 msgstr "主要"
 
 #. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:621
+#: panel/panel-preferences-dialog.c:616
 #, c-format
 msgid "Monitor %d"
 msgstr "顯示器 %d"
 
-#: panel/panel-preferences-dialog.c:1107
+#: panel/panel-preferences-dialog.c:1112
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "面板與插件組態將被永久移除"
 
-#: panel/panel-preferences-dialog.c:1116
+#: panel/panel-preferences-dialog.c:1121
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "確定要移除 %d 面板嗎？"
@@ -1493,16 +1432,17 @@ msgstr "內部名稱：%s-%d\nPID: %d"
 msgid "Internal name: %s-%d"
 msgstr "內部名稱：%s-%d"
 
-#: panel/panel-preferences-dialog.c:1577
+#: panel/panel-preferences-dialog.c:1545
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "如果要從面板移除該項目，它將永遠消失。"
 
-#: panel/panel-preferences-dialog.c:1581
+#: panel/panel-preferences-dialog.c:1549
+#: plugins/launcher/launcher-dialog.c:930
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "確定要移除這 %d 個項目嗎？"
 
-#: panel/panel-preferences-dialog.c:1583
+#: panel/panel-preferences-dialog.c:1551
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "若將它們從面板移除，它們將永久遺失。"
 
@@ -2160,22 +2100,32 @@ msgstr "未命名項目"
 msgid "No items"
 msgstr "無項目"
 
-#: plugins/launcher/launcher-dialog.c:776
+#: plugins/launcher/launcher-dialog.c:611
 msgid "Failed to open desktop item editor"
 msgstr "未能開啟桌面項目編輯器"
 
-#: plugins/launcher/launcher-dialog.c:837
-msgid "If you delete an item, it will be permanently removed"
-msgstr "若刪除項目，它將被永遠移除"
-
-#: plugins/launcher/launcher-dialog.c:847
+#: plugins/launcher/launcher-dialog.c:922
 msgid "Unnamed item"
 msgstr "未命名項目"
 
-#: plugins/launcher/launcher-dialog.c:849
+#: plugins/launcher/launcher-dialog.c:923
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "確定要移除「%s」嗎？"
+
+#: plugins/launcher/launcher-dialog.c:936
+msgid "If you delete an item, it will be permanently removed"
+msgstr "若刪除項目，它將被永遠移除"
+
+#: plugins/launcher/launcher-dialog.c:1033
+#: plugins/launcher/launcher-dialog.c:1034
+msgid "Add a new empty item"
+msgstr "新增空的項目"
+
+#: plugins/launcher/launcher-dialog.c:1047
+#: plugins/launcher/launcher-dialog.c:1048
+msgid "Add a new hyperlink"
+msgstr "新增超連結"
 
 #: plugins/launcher/launcher.desktop.in.in:5
 msgid "Program launcher with optional menu"
