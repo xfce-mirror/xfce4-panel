@@ -28,7 +28,6 @@
 
 #define HANDLE_SIZE (4)
 
-
 struct _TasklistPlugin
 {
   XfcePanelPlugin __parent__;
@@ -123,7 +122,7 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "show-labels", G_TYPE_BOOLEAN },
     { "grouping", G_TYPE_BOOLEAN },
     { "include-all-workspaces", G_TYPE_BOOLEAN },
-    { "include-all-monitors", G_TYPE_BOOLEAN },
+    { "monitor-to-include", G_TYPE_STRING },
     { "flat-buttons", G_TYPE_BOOLEAN },
     { "switch-workspace-on-unminimize", G_TYPE_BOOLEAN },
     { "show-only-minimized", G_TYPE_BOOLEAN },
@@ -202,8 +201,6 @@ tasklist_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
   xfce_tasklist_update_monitor_geometry (XFCE_TASKLIST (plugin->tasklist));
 }
 
-
-
 static void
 tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
@@ -237,7 +234,6 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   TASKLIST_DIALOG_BIND ("show-labels", "active")
   TASKLIST_DIALOG_BIND ("grouping", "active")
   TASKLIST_DIALOG_BIND ("include-all-workspaces", "active")
-  TASKLIST_DIALOG_BIND ("include-all-monitors", "active")
   TASKLIST_DIALOG_BIND ("flat-buttons", "active")
   TASKLIST_DIALOG_BIND_INV ("switch-workspace-on-unminimize", "active")
   TASKLIST_DIALOG_BIND ("show-only-minimized", "active")
@@ -258,6 +254,8 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
       object = gtk_builder_get_object (builder, "show-wireframes");
       gtk_widget_hide (GTK_WIDGET (object));
     }
+
+  xfce_tasklist_populate_output_list (builder, plugin->settings_dialog, XFCE_TASKLIST (plugin->tasklist));
 
   gtk_widget_show (GTK_WIDGET (plugin->settings_dialog));
 }

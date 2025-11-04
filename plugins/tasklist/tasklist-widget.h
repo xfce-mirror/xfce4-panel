@@ -43,6 +43,14 @@ xfce_tasklist_set_nrows (XfceTasklist *tasklist,
 void
 xfce_tasklist_update_monitor_geometry (XfceTasklist *tasklist);
 
+void
+xfce_tasklist_populate_output_list (GtkBuilder *builder,
+                                    GObject *dialog,
+                                    XfceTasklist *tasklist);
+
+GdkMonitor *
+xfce_tasklist_find_my_monitor (XfceTasklist *tasklist);
+
 G_END_DECLS
 
 #endif /* !__XFCE_TASKLIST_H__ */
