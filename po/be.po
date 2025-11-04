@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-07-18 10:56+0200\n"
+"POT-Creation-Date: 2025-11-04 12:53+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: nab <nab@mail.by>, 2004\n"
 "Language-Team: Belarusian (http://app.transifex.com/xfce/xfce4-panel/language/be/)\n"
@@ -37,7 +37,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "панэлі;налады;налады;панэль задач;аўтахаванне;меню праграм;запуск;кнопкі;запускальнік;прастора апавяшчэнняў;статус;значкі;убудовы;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3734
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3859
 msgid "Panel"
 msgstr "Панэль"
 
@@ -57,43 +57,43 @@ msgstr "Разумна"
 msgid "Always"
 msgstr "Заўсёды"
 
-#: common/resources/panel-preferences-dialog.glade:81
+#: common/resources/panel-preferences-dialog.glade:71
 msgid "Horizontal"
 msgstr "Гарызантальная"
 
-#: common/resources/panel-preferences-dialog.glade:84
+#: common/resources/panel-preferences-dialog.glade:74
 msgid "Vertical"
 msgstr "Вертыкальная"
 
-#: common/resources/panel-preferences-dialog.glade:87
+#: common/resources/panel-preferences-dialog.glade:77
 msgid "Deskbar"
 msgstr "Бакавая панэль"
 
-#: common/resources/panel-preferences-dialog.glade:134
+#: common/resources/panel-preferences-dialog.glade:124
 msgid "None (use system style)"
 msgstr "Няма (выкарыстоўваць сістэмны стыль)"
 
-#: common/resources/panel-preferences-dialog.glade:137
+#: common/resources/panel-preferences-dialog.glade:127
 msgid "Solid color"
 msgstr "Суцэльны колер"
 
-#: common/resources/panel-preferences-dialog.glade:140
+#: common/resources/panel-preferences-dialog.glade:130
 msgid "Background image"
 msgstr "Выява фону"
 
-#: common/resources/panel-preferences-dialog.glade:146
+#: common/resources/panel-preferences-dialog.glade:136
 msgid "Panel Preferences"
 msgstr "Налады панэлі"
 
-#: common/resources/panel-preferences-dialog.glade:163
+#: common/resources/panel-preferences-dialog.glade:153
 #: common/resources/actions-dialog.glade:82
 #: common/resources/applicationsmenu-dialog.glade:55
 #: common/resources/clock-dialog.glade:105
 #: common/resources/directorymenu-dialog.glade:34
-#: common/resources/launcher-dialog.glade:235
-#: common/resources/launcher-dialog.glade:414
+#: common/resources/launcher-dialog.glade:103
+#: common/resources/launcher-dialog.glade:270
 #: common/resources/pager-dialog.glade:97
-#: common/resources/separator-dialog.glade:54
+#: common/resources/separator-dialog.glade:58
 #: common/resources/showdesktop-dialog.glade:34
 #: common/resources/sn-dialog.glade:65
 #: common/resources/tasklist-dialog.glade:77
@@ -103,240 +103,209 @@ msgid "_Close"
 msgstr "_Закрыць"
 
 #. help item
-#: common/resources/panel-preferences-dialog.glade:178
+#: common/resources/panel-preferences-dialog.glade:168
 #: common/resources/actions-dialog.glade:97
 #: common/resources/applicationsmenu-dialog.glade:39
 #: common/resources/clock-dialog.glade:120
 #: common/resources/directorymenu-dialog.glade:49
-#: common/resources/launcher-dialog.glade:398
+#: common/resources/launcher-dialog.glade:254
 #: common/resources/pager-dialog.glade:81
-#: common/resources/separator-dialog.glade:69
+#: common/resources/separator-dialog.glade:73
 #: common/resources/showdesktop-dialog.glade:49
 #: common/resources/tasklist-dialog.glade:93
 #: common/resources/windowmenu-dialog.glade:63
 #: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:3800
+#: panel/panel-window.c:3925
 msgid "_Help"
 msgstr "_Даведка"
 
-#: common/resources/panel-preferences-dialog.glade:223
+#: common/resources/panel-preferences-dialog.glade:213
 msgid "Profiles:"
 msgstr "Профілі:"
 
-#: common/resources/panel-preferences-dialog.glade:251
+#: common/resources/panel-preferences-dialog.glade:241
 msgid "_Backup and restore"
 msgstr "_Стварэнне рэзервовай копіі і аднаўленне"
 
-#: common/resources/panel-preferences-dialog.glade:255
+#: common/resources/panel-preferences-dialog.glade:245
 msgid "Switch between panel presets"
 msgstr "Пераключыцца паміж вызначанымі панэлямі"
 
-#: common/resources/panel-preferences-dialog.glade:299
+#: common/resources/panel-preferences-dialog.glade:289
 msgid "Add a new panel"
 msgstr "Дадаць новую панэль"
 
-#: common/resources/panel-preferences-dialog.glade:324
+#: common/resources/panel-preferences-dialog.glade:314
 msgid "Remove the currently selected panel"
 msgstr "Выдаліць абраную панэль"
 
-#: common/resources/panel-preferences-dialog.glade:375
-#: common/resources/panel-preferences-dialog.glade:738
+#: common/resources/panel-preferences-dialog.glade:365
+#: common/resources/panel-preferences-dialog.glade:745
 msgid "<b>General</b>"
 msgstr "<b>Асноўны</b>"
 
-#: common/resources/panel-preferences-dialog.glade:390
+#: common/resources/panel-preferences-dialog.glade:380
 msgid "M_ode:"
 msgstr "Рэ_жым:"
 
-#: common/resources/panel-preferences-dialog.glade:419
+#: common/resources/panel-preferences-dialog.glade:409
 msgid "Span mo_nitors"
 msgstr "Аб'яднаць эк_раны"
 
-#: common/resources/panel-preferences-dialog.glade:423
+#: common/resources/panel-preferences-dialog.glade:413
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Абярыце гэты параметр для пашырэння панэлі на некалькі манітораў."
 
-#: common/resources/panel-preferences-dialog.glade:436
+#: common/resources/panel-preferences-dialog.glade:426
 msgid "_Lock panel"
 msgstr "_Заблакаваць панэль"
 
-#: common/resources/panel-preferences-dialog.glade:440
+#: common/resources/panel-preferences-dialog.glade:430
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr "Абярыце гэты параметр для хавання рэгулятараў і блакавання панэлі."
 
-#: common/resources/panel-preferences-dialog.glade:453
+#: common/resources/panel-preferences-dialog.glade:443
 msgid "_Reserve space on screen edges for the panel"
 msgstr ""
 
-#: common/resources/panel-preferences-dialog.glade:457
+#: common/resources/panel-preferences-dialog.glade:447
 msgid ""
-"Select this option if you don't want maximized windows to cover the area "
-"behind the panel. This only works when the panel is attached to a screen "
-"edge."
+"Select this option if you don't want maximized windows to overlap the panel "
+"area. This only works when the panel is attached to a screen edge and "
+"autohide is disabled."
 msgstr ""
 
-#: common/resources/panel-preferences-dialog.glade:478
+#: common/resources/panel-preferences-dialog.glade:460
+msgid "_Keep panel below windows"
+msgstr ""
+
+#: common/resources/panel-preferences-dialog.glade:464
+msgid ""
+"Select this option if you want windows to cover the panel. When autohide is "
+"enabled, panel is always on top."
+msgstr ""
+
+#: common/resources/panel-preferences-dialog.glade:485
 msgid "Au_tomatically hide the panel:"
 msgstr "_Аўтаматычна хаваць панэль:"
 
-#: common/resources/panel-preferences-dialog.glade:519
+#: common/resources/panel-preferences-dialog.glade:526
 msgid "O_utput:"
 msgstr "Вы_вад:"
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
-#: common/resources/panel-preferences-dialog.glade:563
+#: common/resources/panel-preferences-dialog.glade:570
 msgid "<b>Measurements</b>"
 msgstr "<b>Вымярэнні</b>"
 
-#: common/resources/panel-preferences-dialog.glade:578
+#: common/resources/panel-preferences-dialog.glade:585
 msgid "Row _size (pixels):"
 msgstr "Памер _радка ў пікселях:"
 
-#: common/resources/panel-preferences-dialog.glade:592
+#: common/resources/panel-preferences-dialog.glade:599
 msgid "Num_ber of rows:"
 msgstr "Коль_касць радкоў:"
 
-#: common/resources/panel-preferences-dialog.glade:606
+#: common/resources/panel-preferences-dialog.glade:613
 msgid "L_ength (pixels):"
 msgstr ""
 
-#: common/resources/panel-preferences-dialog.glade:635
+#: common/resources/panel-preferences-dialog.glade:642
 msgid "Border width (pixels):"
 msgstr ""
 
-#: common/resources/panel-preferences-dialog.glade:658
+#: common/resources/panel-preferences-dialog.glade:665
 msgid "A_utomatically increase the length"
 msgstr "Аў_таматычна павялічваць даўжыню"
 
-#: common/resources/panel-preferences-dialog.glade:662
+#: common/resources/panel-preferences-dialog.glade:669
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr "Абярыце гэты параметр для аўтаматычнага павелічэння даўжыні панэлі пры недахопу прасторы для размяшчэння ўбудоў."
 
-#: common/resources/panel-preferences-dialog.glade:712
+#: common/resources/panel-preferences-dialog.glade:719
 msgid "D_isplay"
 msgstr "_Дысплей"
 
-#: common/resources/panel-preferences-dialog.glade:753
+#: common/resources/panel-preferences-dialog.glade:760
 msgid "Dark mode"
 msgstr "Цёмны рэжым"
 
-#: common/resources/panel-preferences-dialog.glade:793
+#: common/resources/panel-preferences-dialog.glade:800
 msgid "<b>Background</b>"
 msgstr "<b>Фон</b>"
 
-#: common/resources/panel-preferences-dialog.glade:808
-#: common/resources/separator-dialog.glade:119
+#: common/resources/panel-preferences-dialog.glade:815
+#: common/resources/separator-dialog.glade:123
 msgid "_Style:"
 msgstr "_Стыль:"
 
-#: common/resources/panel-preferences-dialog.glade:840
+#: common/resources/panel-preferences-dialog.glade:847
 msgid "C_olor:"
 msgstr "Ко_лер:"
 
-#: common/resources/panel-preferences-dialog.glade:855
+#: common/resources/panel-preferences-dialog.glade:862
 msgid "Pick a Panel Color"
 msgstr "Абраць колер панэлі"
 
-#: common/resources/panel-preferences-dialog.glade:868
+#: common/resources/panel-preferences-dialog.glade:875
 msgid "_File:"
 msgstr "_Файл:"
 
-#: common/resources/panel-preferences-dialog.glade:881
+#: common/resources/panel-preferences-dialog.glade:888
 msgid "Select A Background Image"
 msgstr "Абраць фонавую выяву"
 
-#: common/resources/panel-preferences-dialog.glade:908
+#: common/resources/panel-preferences-dialog.glade:915
 msgid "<b>Icons</b>"
 msgstr "<b>Значкі</b>"
 
-#: common/resources/panel-preferences-dialog.glade:922
+#: common/resources/panel-preferences-dialog.glade:929
 msgid "Adjust size au_tomatically"
 msgstr "Аўтаматычна _падладжваць памер"
 
-#: common/resources/panel-preferences-dialog.glade:959
+#: common/resources/panel-preferences-dialog.glade:966
 msgid "Fixed icon _size (pixels):"
 msgstr "Фіксаваны памер _значкоў у пікселях"
 
-#: common/resources/panel-preferences-dialog.glade:1002
+#: common/resources/panel-preferences-dialog.glade:1009
 msgid "<b>Opacity</b>"
 msgstr "<b>Непразрыстасць</b>"
 
-#: common/resources/panel-preferences-dialog.glade:1028
+#: common/resources/panel-preferences-dialog.glade:1035
 msgid "Configure..."
 msgstr "Наладзіць..."
 
-#: common/resources/panel-preferences-dialog.glade:1066
+#: common/resources/panel-preferences-dialog.glade:1073
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr "<b>Зараз кампазітынг выключаны</b>\nУключыце кампазітынг у кіраўніку акон, каб наладзіць непразрыстасць панэлі."
 
 #. I18N: label for the enter transparency slider
-#: common/resources/panel-preferences-dialog.glade:1106
+#: common/resources/panel-preferences-dialog.glade:1113
 msgid "_Enter:"
 msgstr "_Увод:"
 
 #. I18N: label for the leave transparency slider
-#: common/resources/panel-preferences-dialog.glade:1133
+#: common/resources/panel-preferences-dialog.glade:1140
 msgid "_Leave:"
 msgstr "_Стандартна:"
 
-#: common/resources/panel-preferences-dialog.glade:1146
+#: common/resources/panel-preferences-dialog.glade:1153
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "Празрыстасць, калі паказальнік мышы знаходзіцца не на панэлі (0 - цалкам празрыста, 100 - непразрыста)."
 
-#: common/resources/panel-preferences-dialog.glade:1173
+#: common/resources/panel-preferences-dialog.glade:1180
 msgid "Appeara_nce"
 msgstr "Выг_ляд"
 
-#: common/resources/panel-preferences-dialog.glade:1223
-#: common/resources/launcher-dialog.glade:219 panel/panel-dialogs.c:157
-#: panel/panel-item-dialog.c:197
-msgid "_Add"
-msgstr "_Дадаць"
-
-#: common/resources/panel-preferences-dialog.glade:1228
-msgid "Add new item to this panel"
-msgstr "Дадаць новы элемент на гэтую панэль"
-
-#. remove
-#: common/resources/panel-preferences-dialog.glade:1240
-#: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:353
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1080
-#: plugins/launcher/launcher-dialog.c:836
-msgid "_Remove"
-msgstr "_Выдаліць"
-
-#: common/resources/panel-preferences-dialog.glade:1245
-msgid "Remove currently selected item"
-msgstr "Выдаліць абраны элемент"
-
-#: common/resources/panel-preferences-dialog.glade:1261
-#: common/resources/launcher-dialog.glade:559
-msgid "Edit the currently selected item"
-msgstr "Рэдагаваць абраны элемент"
-
-#: common/resources/panel-preferences-dialog.glade:1282
-msgid "Show about information of the currently selected item"
-msgstr "Паказаць інфармацыю пра абраны элемент"
-
-#: common/resources/panel-preferences-dialog.glade:1325
-#: common/resources/launcher-dialog.glade:509
-msgid "Move currently selected item up by one row"
-msgstr "Перамясціць абраны элемент на адзін радок вышэй"
-
-#: common/resources/panel-preferences-dialog.glade:1346
-#: common/resources/launcher-dialog.glade:529
-msgid "Move currently selected item down by one row"
-msgstr "Перамясціць абраны элемент на адзін радок ніжэй"
-
-#: common/resources/panel-preferences-dialog.glade:1380
+#: common/resources/panel-preferences-dialog.glade:1208
 msgid "Ite_ms"
 msgstr "Эле_менты"
 
@@ -379,7 +348,7 @@ msgid "Custo_m title:"
 msgstr "_Адвольны загаловак:"
 
 #: common/resources/actions-dialog.glade:255
-#: common/resources/launcher-dialog.glade:667
+#: common/resources/launcher-dialog.glade:306
 msgid "General"
 msgstr "Асноўныя налады"
 
@@ -447,7 +416,7 @@ msgstr "Абярыце гэты параметр для адлюстраванн
 #: common/resources/applicationsmenu-dialog.glade:229
 #: common/resources/clock-dialog.glade:405
 #: common/resources/directorymenu-dialog.glade:150
-#: common/resources/separator-dialog.glade:177
+#: common/resources/separator-dialog.glade:222
 #: common/resources/tasklist-dialog.glade:257
 #: common/resources/windowmenu-dialog.glade:206
 msgid "Appearance"
@@ -728,91 +697,55 @@ msgstr "Паўднёвы"
 msgid "Inside Button"
 msgstr "Унутры кнопкі"
 
-#: common/resources/launcher-dialog.glade:96
-msgid "Up"
-msgstr "Вышэй"
-
-#: common/resources/launcher-dialog.glade:105
-msgid "Down"
-msgstr "Ніжэй"
-
-#: common/resources/launcher-dialog.glade:120
-msgid "_Edit Item"
-msgstr "_Рэдагаваць элемент"
-
-#: common/resources/launcher-dialog.glade:130
-msgid "D_elete Item"
-msgstr "Вы_даліць элемент"
-
-#: common/resources/launcher-dialog.glade:146
-msgid "Add Appli_cation"
-msgstr "Дадаць _праграму"
-
-#: common/resources/launcher-dialog.glade:162
-msgid "New _Application"
-msgstr "Новая _праграма"
-
-#: common/resources/launcher-dialog.glade:172
-msgid "New _Link"
-msgstr "Новая _спасылка"
-
-#: common/resources/launcher-dialog.glade:198 panel/panel-item-dialog.c:192
+#: common/resources/launcher-dialog.glade:66 panel/panel-item-dialog.c:192
 msgid "Add New Items"
 msgstr "Дадаць новыя элементы"
 
-#: common/resources/launcher-dialog.glade:205
-#: common/resources/launcher-dialog.glade:599
+#: common/resources/launcher-dialog.glade:73
 msgid "Add one or more existing items to the launcher"
 msgstr "Дадаць адзін альбо некалькі элементаў у запуск"
 
-#: common/resources/launcher-dialog.glade:272 panel/panel-item-dialog.c:221
+#: common/resources/launcher-dialog.glade:87 panel/panel-dialogs.c:157
+#: panel/panel-item-dialog.c:197
+msgid "_Add"
+msgstr "_Дадаць"
+
+#: common/resources/launcher-dialog.glade:140 panel/panel-item-dialog.c:221
 msgid "_Search:"
 msgstr "_Пошук:"
 
-#: common/resources/launcher-dialog.glade:379
+#: common/resources/launcher-dialog.glade:235
 #: plugins/launcher/launcher.desktop.in.in:4
 msgid "Launcher"
 msgstr "Запускальнік"
 
-#: common/resources/launcher-dialog.glade:579
-msgid "Delete the currently selected item"
-msgstr "Выдаліць абраны элемент"
-
-#: common/resources/launcher-dialog.glade:619
-msgid "Add a new empty item"
-msgstr "Дадаць новы пусты элемент"
-
-#: common/resources/launcher-dialog.glade:639
-msgid "Add a new hyperlink"
-msgstr "Дадаць новую гіперспасылку"
-
-#: common/resources/launcher-dialog.glade:682
+#: common/resources/launcher-dialog.glade:321
 msgid "Disable t_ooltips"
 msgstr "Адключыць выплыўныя падказкі"
 
-#: common/resources/launcher-dialog.glade:686
+#: common/resources/launcher-dialog.glade:325
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
 msgstr "Абярыце гэты параметр, каб адключыць выплыўныя падказкі для кнопак панэлі і элементаў меню."
 
-#: common/resources/launcher-dialog.glade:698
+#: common/resources/launcher-dialog.glade:337
 msgid "Show _label instead of icon"
 msgstr "Паказваць _адмеціну замест значка"
 
-#: common/resources/launcher-dialog.glade:713
+#: common/resources/launcher-dialog.glade:352
 msgid "Show last _used item in panel"
 msgstr "Паказваць на панэлі _апошні выкарыстаны элемент"
 
-#: common/resources/launcher-dialog.glade:717
+#: common/resources/launcher-dialog.glade:356
 msgid "Select this option to move the clicked menu item to the panel."
 msgstr "Абярыце гэты параметр для перамяшчэння элемента меню на панэль."
 
-#: common/resources/launcher-dialog.glade:736
+#: common/resources/launcher-dialog.glade:375
 msgid "_Arrow button position:"
 msgstr "_Становішча кнопкі са стрэлкай:"
 
-#: common/resources/launcher-dialog.glade:779
+#: common/resources/launcher-dialog.glade:418
 msgid "Advanced"
 msgstr "Дадаткова"
 
@@ -852,27 +785,31 @@ msgstr ""
 msgid "<b>Appearance</b>"
 msgstr "<b>Выгляд</b>"
 
-#: common/resources/separator-dialog.glade:23
+#: common/resources/separator-dialog.glade:27
 msgid "Transparent"
 msgstr "Празрысты"
 
-#: common/resources/separator-dialog.glade:26
-#: common/resources/separator-dialog.glade:38 plugins/actions/actions.c:726
+#: common/resources/separator-dialog.glade:30
+#: common/resources/separator-dialog.glade:42 plugins/actions/actions.c:726
 #: plugins/separator/separator.desktop.in.in:4
 msgid "Separator"
 msgstr "Падзяляльнік"
 
-#: common/resources/separator-dialog.glade:29
+#: common/resources/separator-dialog.glade:33
 msgid "Handle"
 msgstr "Рэгулятар"
 
-#: common/resources/separator-dialog.glade:32
+#: common/resources/separator-dialog.glade:36
 msgid "Dots"
 msgstr "Кропкі"
 
-#: common/resources/separator-dialog.glade:156
+#: common/resources/separator-dialog.glade:161
 msgid "_Expand"
 msgstr "Па_шыральнік"
+
+#: common/resources/separator-dialog.glade:183
+msgid "Si_ze:"
+msgstr ""
 
 #: common/resources/showdesktop-dialog.glade:18
 #: plugins/showdesktop/showdesktop.c:322
@@ -1113,7 +1050,7 @@ msgid "Enable _urgency notification"
 msgstr "Уключыць _паведамленні пра тэрміновасць"
 
 #: libxfce4panel/xfce-panel-plugin.c:1109
-#: panel/panel-preferences-dialog.c:1540
+#: panel/panel-preferences-dialog.c:1536
 msgid "Remove"
 msgstr "Выдаліць"
 
@@ -1123,7 +1060,7 @@ msgid ""
 msgstr "Пры выдаленні элемента з панэлі яго налады таксама страцяцца"
 
 #: libxfce4panel/xfce-panel-plugin.c:1114
-#: panel/panel-preferences-dialog.c:1547
+#: panel/panel-preferences-dialog.c:1543
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Сапраўды хочаце выдаліць \"%s\"?"
@@ -1134,7 +1071,7 @@ msgid "_Properties"
 msgstr "_Уласцівасці"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3809
+#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3934
 msgid "_About"
 msgstr "_Пра праграму"
 
@@ -1143,22 +1080,29 @@ msgstr "_Пра праграму"
 msgid "_Move"
 msgstr "Пера_мясціць"
 
+#. remove
+#: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:354
+#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1113
+#: plugins/launcher/launcher-dialog.c:935
+msgid "_Remove"
+msgstr "_Выдаліць"
+
 #: libxfce4panel/xfce-panel-plugin.c:1292
 msgid "Pane_l"
 msgstr "Панэль"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3746
+#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3871
 msgid "Add _New Items..."
 msgstr "Дадаць новы элемент..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3757
+#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3882
 msgid "Panel Pr_eferences..."
 msgstr "Налады панэлі..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3784
+#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3909
 msgid "Log _Out"
 msgstr "Скончыць _сеанс"
 
@@ -1285,14 +1229,14 @@ msgstr "Запусціць"
 msgid "Failed to launch the migration application"
 msgstr "Не атрымалася запусціць праграму пераносу"
 
-#: panel/panel-application.c:343
+#: panel/panel-application.c:344
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr ""
 
-#: panel/panel-application.c:345
+#: panel/panel-application.c:346
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -1302,25 +1246,25 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr ""
 
-#: panel/panel-application.c:352
+#: panel/panel-application.c:353
 msgid "Plugin loading failure"
 msgstr ""
 
-#: panel/panel-application.c:353
+#: panel/panel-application.c:354
 msgid "_Quit"
 msgstr "Вы_йсьці"
 
-#: panel/panel-application.c:1033
+#: panel/panel-application.c:1034
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Гэтае дзеянне створыць новую ўбудову запуску на панэлі і дадасць перацягнутыя файлы як элементы меню."
 
-#: panel/panel-application.c:1036
+#: panel/panel-application.c:1037
 msgid "Create _Launcher"
 msgstr "Стврыць _запускальнік"
 
-#: panel/panel-application.c:1037
+#: panel/panel-application.c:1038
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -1329,21 +1273,21 @@ msgstr[1] "Стварыць новы запускальнік на панэлі 
 msgstr[2] "Стварыць новы запускальнік на панэлі з %d файлаў працоўнага стала"
 msgstr[3] "Стварыць новы запускальнік на панэлі з %d файлаў працоўнага стала"
 
-#: panel/panel-application.c:1800
+#: panel/panel-application.c:1805
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Вы запусцілі x-сервер без кіраўніка сеансаў. Пстрыкніце на Quit, і X-server закрыецца."
 
-#: panel/panel-application.c:1803
+#: panel/panel-application.c:1808
 msgid "Quit"
 msgstr "Выхад"
 
-#: panel/panel-application.c:1803
+#: panel/panel-application.c:1808
 msgid "Are you sure you want to quit the panel?"
 msgstr "Сапраўды хочаце закрыць панэль?"
 
-#: panel/panel-application.c:1811
+#: panel/panel-application.c:1816
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Не атрымалася запусціць загад \"%s\""
@@ -1387,7 +1331,7 @@ msgstr "_Скасаваць"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Абярыце панэль для новай убудовы:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1028
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1060
 #, c-format
 msgid "Panel %d"
 msgstr "Панэль %d"
@@ -1432,39 +1376,48 @@ msgstr ""
 msgid "_Execute"
 msgstr "_Запуск"
 
-#: panel/panel-preferences-dialog.c:575
+#: panel/panel-preferences-dialog.c:348
+msgctxt "plugin context menu"
+msgid "_About"
+msgstr "_Пра праграму"
+
+#: panel/panel-preferences-dialog.c:352
+msgid "Show about information of the currently selected item"
+msgstr "Паказаць інфармацыю пра абраны элемент"
+
+#: panel/panel-preferences-dialog.c:588
 msgid "Automatic"
 msgstr "Аўтаматычна"
 
-#: panel/panel-preferences-dialog.c:584
+#: panel/panel-preferences-dialog.c:597
 msgid "Primary"
 msgstr "Асноўны"
 
 #. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:603
+#: panel/panel-preferences-dialog.c:616
 #, c-format
 msgid "Monitor %d"
 msgstr "Манітор %d"
 
-#: panel/panel-preferences-dialog.c:1079
+#: panel/panel-preferences-dialog.c:1112
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Панэль і ўсе яе элементы будуць назаўжды выдаленыя"
 
-#: panel/panel-preferences-dialog.c:1088
+#: panel/panel-preferences-dialog.c:1121
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Сапраўды хочаце выдаліць панэль %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1385
+#: panel/panel-preferences-dialog.c:1413
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(вонкавы)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1390
+#: panel/panel-preferences-dialog.c:1418
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1473,21 +1426,22 @@ msgstr "Унутраная назва: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1402
+#: panel/panel-preferences-dialog.c:1430
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Унутраная назва: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1549
+#: panel/panel-preferences-dialog.c:1545
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Калі вы выдаліце гэты элемент з панэлі, то ён назаўсёды страціцца."
 
-#: panel/panel-preferences-dialog.c:1553
+#: panel/panel-preferences-dialog.c:1549
+#: plugins/launcher/launcher-dialog.c:930
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr ""
 
-#: panel/panel-preferences-dialog.c:1555
+#: panel/panel-preferences-dialog.c:1551
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr ""
 
@@ -1515,7 +1469,7 @@ msgstr "Дасведчаны"
 msgid "Expert"
 msgstr "Эксперт"
 
-#: panel/panel-window.c:3771
+#: panel/panel-window.c:3896
 msgid "_Lock Panel"
 msgstr "_Заблакаваць панэль"
 
@@ -2145,22 +2099,32 @@ msgstr "Элемент без назвы"
 msgid "No items"
 msgstr "Элементы адсутнічаюць"
 
-#: plugins/launcher/launcher-dialog.c:776
+#: plugins/launcher/launcher-dialog.c:611
 msgid "Failed to open desktop item editor"
 msgstr "Не атрымалася адкрыць рэдактар элементаў працоўнага стала"
 
-#: plugins/launcher/launcher-dialog.c:837
-msgid "If you delete an item, it will be permanently removed"
-msgstr "Калі вы выдаліце гэты элемент з панэлі, то ён страціцца"
-
-#: plugins/launcher/launcher-dialog.c:847
+#: plugins/launcher/launcher-dialog.c:922
 msgid "Unnamed item"
 msgstr "Элемент без назвы"
 
-#: plugins/launcher/launcher-dialog.c:849
+#: plugins/launcher/launcher-dialog.c:923
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Сапраўды хочаце выдаліць \"%s\"?"
+
+#: plugins/launcher/launcher-dialog.c:936
+msgid "If you delete an item, it will be permanently removed"
+msgstr "Калі вы выдаліце гэты элемент з панэлі, то ён страціцца"
+
+#: plugins/launcher/launcher-dialog.c:1033
+#: plugins/launcher/launcher-dialog.c:1034
+msgid "Add a new empty item"
+msgstr "Дадаць новы пусты элемент"
+
+#: plugins/launcher/launcher-dialog.c:1047
+#: plugins/launcher/launcher-dialog.c:1048
+msgid "Add a new hyperlink"
+msgstr "Дадаць новую гіперспасылку"
 
 #: plugins/launcher/launcher.desktop.in.in:5
 msgid "Program launcher with optional menu"
@@ -2170,7 +2134,7 @@ msgstr "Запускальнік праграм з апцыянальным мэ
 msgid "Unable to open the workspace settings"
 msgstr "Не атрымалася адкрыць налады працоўных прастораў"
 
-#: plugins/pager/pager-buttons.c:624 plugins/windowmenu/windowmenu.c:946
+#: plugins/pager/pager-buttons.c:628 plugins/windowmenu/windowmenu.c:959
 #, c-format
 msgid "Workspace %d"
 msgstr "Працоўная прастора %d"
@@ -2233,32 +2197,32 @@ msgid ""
 "items"
 msgstr "Забяспечвае элементамі апавяшчэння (індыкатары праграм) і старымі элементамі прасторы апавяшчэнняў"
 
-#: plugins/tasklist/tasklist-widget.c:3156
+#: plugins/tasklist/tasklist-widget.c:3171
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Немагчыма запусціць новы асобнік \"%s\""
 
-#: plugins/tasklist/tasklist-widget.c:3183
+#: plugins/tasklist/tasklist-widget.c:3198
 msgid "Launch New Instance"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:3938
+#: plugins/tasklist/tasklist-widget.c:3953
 msgid "Mi_nimize All"
 msgstr "З_гарнуць усе"
 
-#: plugins/tasklist/tasklist-widget.c:3945
+#: plugins/tasklist/tasklist-widget.c:3960
 msgid "Un_minimize All"
 msgstr "Раз_гарнуць усе"
 
-#: plugins/tasklist/tasklist-widget.c:3952
+#: plugins/tasklist/tasklist-widget.c:3967
 msgid "Ma_ximize All"
 msgstr "Раз_гарнуць усе"
 
-#: plugins/tasklist/tasklist-widget.c:3959
+#: plugins/tasklist/tasklist-widget.c:3974
 msgid "_Unmaximize All"
 msgstr "_Згарнуць усе"
 
-#: plugins/tasklist/tasklist-widget.c:3970
+#: plugins/tasklist/tasklist-widget.c:3985
 msgid "_Close All"
 msgstr "_Закрыць усе"
 
@@ -2266,28 +2230,28 @@ msgstr "_Закрыць усе"
 msgid "Switch between open windows using buttons"
 msgstr "Пераключацца паміж адкрытымі вокнамі праз кнопкі"
 
-#: plugins/windowmenu/windowmenu.c:725
+#: plugins/windowmenu/windowmenu.c:738
 msgid "Desktop"
 msgstr "Працоўны стол"
 
-#: plugins/windowmenu/windowmenu.c:1341
+#: plugins/windowmenu/windowmenu.c:1354
 msgid "No Windows"
 msgstr "Без акон"
 
-#: plugins/windowmenu/windowmenu.c:1356
+#: plugins/windowmenu/windowmenu.c:1369
 msgid "Urgent Windows"
 msgstr "Тэрміновыя вокны"
 
-#: plugins/windowmenu/windowmenu.c:1407
+#: plugins/windowmenu/windowmenu.c:1420
 msgid "Add Workspace"
 msgstr "Дадаць працоўную прастору"
 
-#: plugins/windowmenu/windowmenu.c:1429
+#: plugins/windowmenu/windowmenu.c:1442
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Выдаліць працоўную прастору \"%s\""
 
-#: plugins/windowmenu/windowmenu.c:1431
+#: plugins/windowmenu/windowmenu.c:1444
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Выдаліць прастору %d"
