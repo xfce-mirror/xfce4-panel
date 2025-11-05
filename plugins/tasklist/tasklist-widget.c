@@ -216,9 +216,7 @@ struct _XfceTasklist
   /* whether decorate labels when window is not visible */
   guint label_decorations : 1;
 
-  /*
-    We only show window buttons for selected monitor.
-  */
+  /* we only show window buttons for selected monitors */
   guint all_monitors : 1;
   guint my_monitor_only : 1;
   guint n_monitors;
