@@ -5024,7 +5024,7 @@ xfce_tasklist_populate_output_list (GtkBuilder *builder,
   /* Secondary option: panel's monitor only */
   gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
                                      OUTPUT_NAME, "mine_only",
-                                     OUTPUT_TITLE, _("Panel's monitor"), -1);
+                                     OUTPUT_TITLE, _("panel's monitor"), -1);
 
   /* Make active if user previously selected */
   if ((selected = (!selected && g_strcmp0 (tasklist->monitor_name, "mine_only") == 0)))
