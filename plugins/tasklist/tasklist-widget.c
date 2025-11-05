@@ -4708,12 +4708,7 @@ xfce_tasklist_set_include_all_workspaces (XfceTasklist *tasklist,
 static void
 xfce_tasklist_set_monitor_to_include (XfceTasklist *tasklist, const gchar *name)
 {
-  if (tasklist->monitor_name)
-    {
-      g_free (tasklist->monitor_name);
-      tasklist->monitor_name = NULL;
-    }
-
+  g_free (tasklist->monitor_name);
   tasklist->monitor_name = g_strdup (name);
   tasklist->gdkmonitor = xfce_tasklist_find_my_monitor (tasklist);
 
