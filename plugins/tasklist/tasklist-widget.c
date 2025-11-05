@@ -398,7 +398,8 @@ xfce_tasklist_skipped_windows_state_changed (XfwWindow *window,
                                              XfceTasklist *tasklist);
 
 static void
-xfce_tasklist_monitor_to_include_changed (GtkComboBox *combobox, XfceTasklist *tasklist);
+xfce_tasklist_monitor_to_include_changed (GtkComboBox *combobox,
+                                          XfceTasklist *tasklist);
 
 static void
 xfce_tasklist_sort (XfceTasklist *tasklist,
