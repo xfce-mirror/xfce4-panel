@@ -2092,10 +2092,7 @@ xfce_tasklist_monitor_to_include_changed (GtkComboBox *combobox, XfceTasklist *t
   model = gtk_combo_box_get_model (combobox);
   gtk_tree_model_get (model, &iter, OUTPUT_NAME, &output_name, -1);
 
-  g_value_init (&value, G_TYPE_STRING);
-  g_value_set_string (&value, output_name);
-  g_object_set_property (G_OBJECT (tasklist), "monitor-to-include", &value);
-  g_value_unset (&value);
+  g_object_set (G_OBJECT (tasklist), "monitor-to-include", output_name, NULL);
 
   g_free (output_name);
 }
