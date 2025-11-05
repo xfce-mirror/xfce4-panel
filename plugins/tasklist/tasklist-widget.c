@@ -5062,8 +5062,6 @@ xfce_tasklist_find_my_monitor (XfceTasklist *tasklist)
   guint index;
   guint n_monitors;
 
-  if (!tasklist->display)
-    return NULL;
 
   if (tasklist->my_monitor_only)
     return tasklist_get_monitor (tasklist);
