@@ -93,7 +93,7 @@
 #define xfce_tasklist_horizontal(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 #define xfce_tasklist_vertical(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
 #define xfce_tasklist_deskbar(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
-#define xfce_tasklist_filter_monitors(tasklist) ((tasklist)->n_monitors > 1 && g_strcmp0 (tasklist->monitors_to_include, "all") == 0)
+#define xfce_tasklist_filter_monitors(tasklist) ((tasklist)->n_monitors > 1 && g_strcmp0 (tasklist->monitors_to_include, "all") != 0)
 
 static inline const gchar *
 xfce_tasklist_app_get_name (XfwApplication *app)
@@ -1728,7 +1728,7 @@ xfce_tasklist_connect_screen (XfceTasklist *tasklist)
                     G_CALLBACK (xfce_tasklist_window_removed), tasklist);
 
   /* update the viewport if not all monitors are shown */
-  if (g_strcmp0 (tasklist->monitors_to_include, "all") == 0)
+  if (g_strcmp0 (tasklist->monitors_to_include, "all") != 0)
     {
       /* update the monitor geometry */
       xfce_tasklist_update_monitor_geometry (tasklist);
@@ -1804,7 +1804,7 @@ xfce_tasklist_configure_event (GtkWidget *widget,
 {
   panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), FALSE);
 
-  if (g_strcmp0 (tasklist->monitors_to_include, "all") == 0)
+  if (g_strcmp0 (tasklist->monitors_to_include, "all") != 0)
     {
       /* update the monitor geometry */
       xfce_tasklist_update_monitor_geometry (tasklist);
