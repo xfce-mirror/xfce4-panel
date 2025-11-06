@@ -90,8 +90,8 @@ showdesktop_configure (XfcePanelPlugin *panel_plugin);
 
 static gboolean
 show_desktop_plugin_remote_event (XfcePanelPlugin *panel_plugin,
-                                  const gchar     *name,
-                                  const GValue    *value);
+                                  const gchar *name,
+                                  const GValue *value);
 
 
 
@@ -558,8 +558,8 @@ show_desktop_plugin_get_property (GObject *object,
 
 static gboolean
 show_desktop_plugin_remote_event (XfcePanelPlugin *panel_plugin,
-                                  const gchar     *name,
-                                  const GValue    *value)
+                                  const gchar *name,
+                                  const GValue *value)
 {
   ShowDesktopPlugin *plugin = SHOW_DESKTOP_PLUGIN (panel_plugin);
 
