@@ -28,6 +28,7 @@
 
 #define HANDLE_SIZE (4)
 
+
 struct _TasklistPlugin
 {
   XfcePanelPlugin __parent__;
@@ -200,6 +201,8 @@ tasklist_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
    * the panel is moved to another monitor during runtime */
   xfce_tasklist_update_monitor_geometry (XFCE_TASKLIST (plugin->tasklist));
 }
+
+
 
 static void
 tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)

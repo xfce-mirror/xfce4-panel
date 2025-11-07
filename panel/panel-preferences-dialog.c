@@ -599,9 +599,9 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
           panel_utils_populate_output_list (GTK_LIST_STORE (store),
                                             GTK_COMBO_BOX (object),
                                             output_name,
-                                            &output_selected,
                                             display,
                                             n_monitors,
+                                            &output_selected,
                                             &iter,
                                             &n);
         }
