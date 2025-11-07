@@ -93,7 +93,7 @@
 #define xfce_tasklist_horizontal(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 #define xfce_tasklist_vertical(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
 #define xfce_tasklist_deskbar(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
-#define xfce_tasklist_filter_monitors(tasklist) ((tasklist)->n_monitors > 1 && g_strcmp0 (tasklist->monitors_to_include, MONITORS_TO_INCLUDE_ALL) != 0)
+#define xfce_tasklist_filter_monitors(tasklist) ((tasklist)->n_monitors > 1 && (tasklist)->monitors_to_include != monitors_to_include_all)
 
 static inline const gchar *
 xfce_tasklist_app_get_name (XfwApplication *app)
@@ -219,7 +219,7 @@ struct _XfceTasklist
 
   /* we only show window buttons for selected monitors */
   guint n_monitors;
-  gchar *monitors_to_include;
+  const gchar *monitors_to_include;
 
   /* whether we show wireframes when hovering a button in
    * the tasklist */
@@ -305,6 +305,9 @@ typedef struct _XfceTasklistChild
 static const GtkTargetEntry source_targets[] = {
   { "application/x-wnck-window-id", 0, 0 }
 };
+
+static const gchar *monitors_to_include_all;
+static const gchar *monitors_to_include_panel;
 
 
 
@@ -677,6 +680,9 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                              MIN_MENU_MAX_WIDTH_CHARS, MAX_MENU_MAX_WIDTH_CHARS,
                                                              DEFAULT_MENU_MAX_WIDTH_CHARS,
                                                              G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
+
+  monitors_to_include_all = g_intern_static_string (MONITORS_TO_INCLUDE_ALL);
+  monitors_to_include_panel = g_intern_static_string (MONITORS_TO_INCLUDE_PANEL);
 }
 
 
@@ -703,7 +709,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->show_handle = TRUE;
   tasklist->show_tooltips = TRUE;
   tasklist->n_monitors = 0;
-  tasklist->monitors_to_include = g_strdup (MONITORS_TO_INCLUDE_ALL);
+  tasklist->monitors_to_include = monitors_to_include_all;
   tasklist->window_scrolling = TRUE;
   tasklist->wrap_windows = FALSE;
   tasklist->all_blinking = TRUE;
@@ -931,8 +937,6 @@ xfce_tasklist_finalize (GObject *object)
   /* destroy the wireframe window */
   xfce_tasklist_wireframe_destroy (tasklist);
 #endif
-
-  g_free (tasklist->monitors_to_include);
 
   (*G_OBJECT_CLASS (xfce_tasklist_parent_class)->finalize) (object);
 }
@@ -1721,7 +1725,7 @@ xfce_tasklist_connect_screen (XfceTasklist *tasklist)
                     G_CALLBACK (xfce_tasklist_window_removed), tasklist);
 
   /* update the viewport if not all monitors are shown */
-  if (g_strcmp0 (tasklist->monitors_to_include, MONITORS_TO_INCLUDE_ALL) != 0)
+  if (tasklist->monitors_to_include != monitors_to_include_all)
     {
       /* update the monitor geometry */
       xfce_tasklist_update_monitor_geometry (tasklist);
@@ -1797,7 +1801,7 @@ xfce_tasklist_configure_event (GtkWidget *widget,
 {
   panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), FALSE);
 
-  if (g_strcmp0 (tasklist->monitors_to_include, MONITORS_TO_INCLUDE_ALL) != 0)
+  if (tasklist->monitors_to_include != monitors_to_include_all)
     {
       /* update the monitor geometry */
       xfce_tasklist_update_monitor_geometry (tasklist);
@@ -2576,7 +2580,7 @@ xfce_tasklist_find_my_monitor (XfceTasklist *tasklist)
 {
   guint index;
 
-  if (g_strcmp0 (tasklist->monitors_to_include, MONITORS_TO_INCLUDE_PANEL) == 0)
+  if (tasklist->monitors_to_include == monitors_to_include_panel)
     return tasklist_get_monitor (tasklist);
 
   if (sscanf (tasklist->monitors_to_include, "monitor-%d", &index) == 1)
@@ -2585,8 +2589,8 @@ xfce_tasklist_find_my_monitor (XfceTasklist *tasklist)
   for (guint i = 0; i < tasklist->n_monitors; i++)
     {
       GdkMonitor *monitor = gdk_display_get_monitor (tasklist->display, i);
-      const gchar *model = gdk_monitor_get_model (monitor);
-      if (g_strcmp0 (model, tasklist->monitors_to_include) == 0)
+      const gchar *model = g_intern_string (gdk_monitor_get_model (monitor));
+      if (model == tasklist->monitors_to_include)
         return monitor;
     }
 
@@ -4694,8 +4698,7 @@ xfce_tasklist_set_monitors_to_include (XfceTasklist *tasklist,
 
   if (g_strcmp0 (monitors_to_include, tasklist->monitors_to_include) != 0)
     {
-      g_free (tasklist->monitors_to_include);
-      tasklist->monitors_to_include = g_strdup (monitors_to_include);
+      tasklist->monitors_to_include = g_intern_string (monitors_to_include);
       if (tasklist->screen != NULL)
         xfce_tasklist_active_workspace_changed (tasklist->workspace_group, NULL, tasklist);
     }
@@ -5022,7 +5025,7 @@ xfce_tasklist_populate_output_list (GtkBuilder *builder,
                                      OUTPUT_TITLE, _("all monitors"), -1);
 
   /* make active if user previously selected */
-  if ((selected = (!selected && g_strcmp0 (tasklist->monitors_to_include, MONITORS_TO_INCLUDE_ALL) == 0)))
+  if ((selected = (!selected && tasklist->monitors_to_include == monitors_to_include_all)))
     gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combobox), &iter);
 
   /* secondary option: panel's monitor only */
@@ -5031,7 +5034,7 @@ xfce_tasklist_populate_output_list (GtkBuilder *builder,
                                      OUTPUT_TITLE, _("panel's monitor"), -1);
 
   /* make active if user previously selected */
-  if ((selected = (!selected && g_strcmp0 (tasklist->monitors_to_include, MONITORS_TO_INCLUDE_PANEL) == 0)))
+  if ((selected = (!selected && tasklist->monitors_to_include == monitors_to_include_panel)))
     gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combobox), &iter);
 
   if (tasklist->n_monitors > 1)
