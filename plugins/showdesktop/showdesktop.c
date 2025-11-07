@@ -565,7 +565,10 @@ show_desktop_plugin_remote_event (XfcePanelPlugin *panel_plugin,
 
   if (g_strcmp0 (name, "show") == 0)
     {
-      gtk_button_clicked (GTK_BUTTON (plugin->button));
+      if (G_VALUE_HOLDS_BOOLEAN (value))
+        xfw_screen_set_show_desktop (plugin->xfw_screen, g_value_get_boolean (value));
+      else
+        gtk_button_clicked (GTK_BUTTON (plugin->button));
 
       return TRUE;
     }
