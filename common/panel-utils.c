@@ -399,24 +399,26 @@ panel_utils_get_workspace_number_for_monitor (XfwScreen *xfw_screen,
   return number;
 }
 
-gboolean
+
+
+void
 panel_utils_populate_output_list (GtkListStore *store,
                                   GtkComboBox *box,
                                   const gchar *output_name,
-                                  gboolean *output_selected,
                                   GdkDisplay *display,
                                   gint n_monitors,
+                                  gboolean *output_selected,
                                   GtkTreeIter *iter,
                                   gint *n)
 {
-  gchar *title, *name;
   GHashTable *models = g_hash_table_new (g_str_hash, g_str_equal);
 
   for (gint i = 0; i < n_monitors; i++)
     {
-      const gchar *model;
       GdkMonitor *monitor = gdk_display_get_monitor (display, i);
-      model = gdk_monitor_get_model (monitor);
+      const gchar *model = gdk_monitor_get_model (monitor);
+      gchar *title, *name;
+
       if (xfce_str_is_empty (model) || !g_hash_table_add (models, (gpointer) model))
         {
           /* I18N: monitor name in the output selector */
@@ -448,6 +450,4 @@ panel_utils_populate_output_list (GtkListStore *store,
     }
 
   g_hash_table_destroy (models);
-
-  return TRUE;
 }
