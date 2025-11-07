@@ -23,6 +23,9 @@
 
 #include <gtk/gtk.h>
 
+#define MONITORS_TO_INCLUDE_ALL "all"
+#define MONITORS_TO_INCLUDE_PANEL "panel-monitor"
+
 G_BEGIN_DECLS
 
 #define XFCE_TYPE_TASKLIST (xfce_tasklist_get_type ())
