@@ -147,6 +147,24 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
                          xfce_panel_plugin_get_property_base (panel_plugin),
                          properties, FALSE);
 
+  /* backward compatibility */
+  XfconfChannel *channel = panel_properties_get_channel (G_OBJECT (panel_plugin));
+  const gchar *property_base = xfce_panel_plugin_get_property_base (panel_plugin);
+  gchar *old_property = g_strdup_printf ("%s/%s", property_base, "include-all-monitors");
+  gchar *new_property = g_strdup_printf ("%s/%s", property_base, "monitors-to-include");
+
+  if (!xfconf_channel_has_property (channel, new_property)
+      && xfconf_channel_has_property (channel, old_property))
+    {
+      if (xfconf_channel_get_bool (channel, old_property, FALSE))
+        xfconf_channel_set_string (channel, new_property, MONITORS_TO_INCLUDE_ALL);
+      else
+        xfconf_channel_set_string (channel, new_property, MONITORS_TO_INCLUDE_PANEL);
+    }
+
+  g_free (old_property);
+  g_free (new_property);
+
   /* show the tasklist */
   gtk_widget_show (plugin->tasklist);
 }
