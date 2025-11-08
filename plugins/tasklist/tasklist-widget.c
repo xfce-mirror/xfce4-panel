@@ -93,7 +93,7 @@
 #define xfce_tasklist_horizontal(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 #define xfce_tasklist_vertical(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
 #define xfce_tasklist_deskbar(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
-#define xfce_tasklist_filter_monitors(tasklist) ((tasklist)->n_monitors > 1 && (tasklist)->monitors_to_include != monitors_to_include_all)
+#define xfce_tasklist_filter_monitors(tasklist) ((tasklist)->monitors_to_include != monitors_to_include_all && (tasklist)->n_monitors > 1)
 
 static inline const gchar *
 xfce_tasklist_app_get_name (XfwApplication *app)
@@ -533,6 +533,13 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_MONITORS_TO_INCLUDE,
+                                   g_param_spec_string ("monitors-to-include",
+                                                        NULL, NULL,
+                                                        MONITORS_TO_INCLUDE_ALL,
+                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_FLAT_BUTTONS,
                                    g_param_spec_boolean ("flat-buttons",
                                                          NULL, NULL,
@@ -589,13 +596,6 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                       XFCE_TASKLIST_SORT_ORDER_MAX,
                                                       XFCE_TASKLIST_SORT_ORDER_DEFAULT,
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
-
-  g_object_class_install_property (gobject_class,
-                                   PROP_MONITORS_TO_INCLUDE,
-                                   g_param_spec_string ("monitors-to-include",
-                                                        NULL, NULL,
-                                                        MONITORS_TO_INCLUDE_ALL,
-                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_WINDOW_SCROLLING,
@@ -4980,12 +4980,12 @@ static void
 xfce_tasklist_monitors_to_include_changed (GtkComboBox *combobox,
                                            XfceTasklist *tasklist)
 {
-  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
-  panel_return_if_fail (GTK_IS_COMBO_BOX (combobox));
-
   GtkTreeIter iter;
   GtkTreeModel *model;
   gchar *monitors_to_include;
+
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  panel_return_if_fail (GTK_IS_COMBO_BOX (combobox));
 
   if (!gtk_combo_box_get_active_iter (combobox, &iter))
     return;
