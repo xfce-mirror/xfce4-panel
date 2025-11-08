@@ -88,6 +88,11 @@ show_desktop_plugin_get_property (GObject *object,
 static void
 showdesktop_configure (XfcePanelPlugin *panel_plugin);
 
+static gboolean
+show_desktop_plugin_remote_event (XfcePanelPlugin *panel_plugin,
+                                  const gchar *name,
+                                  const GValue *value);
+
 
 
 struct _ShowDesktopPlugin
@@ -135,6 +140,7 @@ show_desktop_plugin_class_init (ShowDesktopPluginClass *klass)
   plugin_class->free_data = show_desktop_plugin_free_data;
   plugin_class->size_changed = show_desktop_plugin_size_changed;
   plugin_class->configure_plugin = showdesktop_configure;
+  plugin_class->remote_event = show_desktop_plugin_remote_event;
 
   gobject_class->set_property = show_desktop_plugin_set_property;
   gobject_class->get_property = show_desktop_plugin_get_property;
@@ -549,6 +555,26 @@ show_desktop_plugin_get_property (GObject *object,
 }
 
 
+
+static gboolean
+show_desktop_plugin_remote_event (XfcePanelPlugin *panel_plugin,
+                                  const gchar *name,
+                                  const GValue *value)
+{
+  ShowDesktopPlugin *plugin = SHOW_DESKTOP_PLUGIN (panel_plugin);
+
+  if (g_strcmp0 (name, "show") == 0)
+    {
+      if (G_VALUE_HOLDS_BOOLEAN (value))
+        xfw_screen_set_show_desktop (plugin->xfw_screen, g_value_get_boolean (value));
+      else
+        gtk_button_clicked (GTK_BUTTON (plugin->button));
+
+      return TRUE;
+    }
+
+  return FALSE;
+}
 
 void
 showdesktop_configure (XfcePanelPlugin *panel_plugin)
