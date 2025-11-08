@@ -156,12 +156,6 @@ enum
   N_ITEM_COLUMNS
 };
 
-enum
-{
-  OUTPUT_NAME,
-  OUTPUT_TITLE
-};
-
 struct _PanelPreferencesDialog
 {
   GtkBuilder __parent__;
@@ -508,7 +502,6 @@ static void
 panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
 {
   GdkDisplay *display;
-  GdkMonitor *monitor;
   gint n_monitors = 1;
   GObject *object;
   GObject *store;
@@ -517,8 +510,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   gboolean selector_visible = TRUE;
   GtkTreeIter iter;
   gboolean output_selected = FALSE;
-  gint n = 0, i;
-  gchar *name, *title;
+  gint n = 0;
   gboolean span_monitors_sensitive = FALSE;
   gboolean icon_size_set;
 
@@ -604,43 +596,14 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
 
       if (n_monitors >= 1)
         {
-          GHashTable *models = g_hash_table_new (g_str_hash, g_str_equal);
-          for (i = 0; i < n_monitors; i++)
-            {
-              const gchar *model;
-              monitor = gdk_display_get_monitor (display, i);
-              model = gdk_monitor_get_model (monitor);
-              if (xfce_str_is_empty (model) || !g_hash_table_add (models, (gpointer) model))
-                {
-                  /* I18N: monitor name in the output selector */
-                  title = g_strdup_printf (_("Monitor %d"), i + 1);
-                  if (xfce_str_is_empty (model))
-                    name = g_strdup_printf ("monitor-%d", i);
-                  else
-                    name = g_strdup_printf ("monitor-%d-%s", i, model);
-                }
-              else
-                {
-                  /* use the randr name for the title */
-                  name = g_strdup (model);
-                  title = g_strdup (name);
-                }
-
-              gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
-                                                 OUTPUT_NAME, name,
-                                                 OUTPUT_TITLE, title, -1);
-              if (!output_selected
-                  && g_strcmp0 (name, output_name) == 0)
-                {
-                  gtk_combo_box_set_active_iter (GTK_COMBO_BOX (object), &iter);
-                  output_selected = TRUE;
-                }
-
-              g_free (name);
-              g_free (title);
-            }
-
-          g_hash_table_destroy (models);
+          panel_utils_populate_output_list (GTK_LIST_STORE (store),
+                                            GTK_COMBO_BOX (object),
+                                            output_name,
+                                            display,
+                                            n_monitors,
+                                            &output_selected,
+                                            &iter,
+                                            &n);
         }
 
       /* add the output from the config if still nothing has been selected */

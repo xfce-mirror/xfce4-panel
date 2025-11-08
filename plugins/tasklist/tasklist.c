@@ -123,7 +123,7 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "show-labels", G_TYPE_BOOLEAN },
     { "grouping", G_TYPE_BOOLEAN },
     { "include-all-workspaces", G_TYPE_BOOLEAN },
-    { "include-all-monitors", G_TYPE_BOOLEAN },
+    { "monitors-to-include", G_TYPE_STRING },
     { "flat-buttons", G_TYPE_BOOLEAN },
     { "switch-workspace-on-unminimize", G_TYPE_BOOLEAN },
     { "show-only-minimized", G_TYPE_BOOLEAN },
@@ -146,6 +146,24 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
   panel_properties_bind (NULL, G_OBJECT (plugin->tasklist),
                          xfce_panel_plugin_get_property_base (panel_plugin),
                          properties, FALSE);
+
+  /* backward compatibility */
+  XfconfChannel *channel = panel_properties_get_channel (G_OBJECT (panel_plugin));
+  const gchar *property_base = xfce_panel_plugin_get_property_base (panel_plugin);
+  gchar *old_property = g_strdup_printf ("%s/%s", property_base, "include-all-monitors");
+  gchar *new_property = g_strdup_printf ("%s/%s", property_base, "monitors-to-include");
+
+  if (!xfconf_channel_has_property (channel, new_property)
+      && xfconf_channel_has_property (channel, old_property))
+    {
+      if (xfconf_channel_get_bool (channel, old_property, FALSE))
+        xfconf_channel_set_string (channel, new_property, MONITORS_TO_INCLUDE_ALL);
+      else
+        xfconf_channel_set_string (channel, new_property, MONITORS_TO_INCLUDE_PANEL);
+    }
+
+  g_free (old_property);
+  g_free (new_property);
 
   /* show the tasklist */
   gtk_widget_show (plugin->tasklist);
@@ -237,7 +255,6 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   TASKLIST_DIALOG_BIND ("show-labels", "active")
   TASKLIST_DIALOG_BIND ("grouping", "active")
   TASKLIST_DIALOG_BIND ("include-all-workspaces", "active")
-  TASKLIST_DIALOG_BIND ("include-all-monitors", "active")
   TASKLIST_DIALOG_BIND ("flat-buttons", "active")
   TASKLIST_DIALOG_BIND_INV ("switch-workspace-on-unminimize", "active")
   TASKLIST_DIALOG_BIND ("show-only-minimized", "active")
@@ -258,6 +275,8 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
       object = gtk_builder_get_object (builder, "show-wireframes");
       gtk_widget_hide (GTK_WIDGET (object));
     }
+
+  xfce_tasklist_populate_output_list (builder, plugin->settings_dialog, XFCE_TASKLIST (plugin->tasklist));
 
   gtk_widget_show (GTK_WIDGET (plugin->settings_dialog));
 }

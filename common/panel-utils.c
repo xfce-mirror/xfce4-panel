@@ -398,3 +398,56 @@ panel_utils_get_workspace_number_for_monitor (XfwScreen *xfw_screen,
   g_list_free (workspaces);
   return number;
 }
+
+
+
+void
+panel_utils_populate_output_list (GtkListStore *store,
+                                  GtkComboBox *box,
+                                  const gchar *output_name,
+                                  GdkDisplay *display,
+                                  gint n_monitors,
+                                  gboolean *output_selected,
+                                  GtkTreeIter *iter,
+                                  gint *n)
+{
+  GHashTable *models = g_hash_table_new (g_str_hash, g_str_equal);
+
+  for (gint i = 0; i < n_monitors; i++)
+    {
+      GdkMonitor *monitor = gdk_display_get_monitor (display, i);
+      const gchar *model = gdk_monitor_get_model (monitor);
+      gchar *title, *name;
+
+      if (xfce_str_is_empty (model) || !g_hash_table_add (models, (gpointer) model))
+        {
+          /* I18N: monitor name in the output selector */
+          title = g_strdup_printf (_("Monitor %d"), i + 1);
+          if (xfce_str_is_empty (model))
+            name = g_strdup_printf ("monitor-%d", i);
+          else
+            name = g_strdup_printf ("monitor-%d-%s", i, model);
+        }
+      else
+        {
+          /* use the randr name for the title */
+          name = g_strdup (model);
+          title = g_strdup (name);
+        }
+
+      gtk_list_store_insert_with_values (GTK_LIST_STORE (store), iter, (*n)++,
+                                         OUTPUT_NAME, name,
+                                         OUTPUT_TITLE, title, -1);
+      if (!(*output_selected)
+          && g_strcmp0 (name, output_name) == 0)
+        {
+          gtk_combo_box_set_active_iter (GTK_COMBO_BOX (box), iter);
+          *output_selected = TRUE;
+        }
+
+      g_free (name);
+      g_free (title);
+    }
+
+  g_hash_table_destroy (models);
+}
