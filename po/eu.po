@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-11-04 12:53+0100\n"
+"POT-Creation-Date: 2025-11-08 12:52+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: beriain, 2019-2020,2022-2024\n"
 "Language-Team: Basque (http://app.transifex.com/xfce/xfce4-panel/language/eu/)\n"
@@ -102,7 +102,7 @@ msgstr "Panel hobespenak"
 #: common/resources/separator-dialog.glade:58
 #: common/resources/showdesktop-dialog.glade:34
 #: common/resources/sn-dialog.glade:65
-#: common/resources/tasklist-dialog.glade:77
+#: common/resources/tasklist-dialog.glade:86
 #: common/resources/windowmenu-dialog.glade:48 panel/panel-item-dialog.c:205
 #: panel/panel-tic-tac-toe.c:110
 msgid "_Close"
@@ -118,7 +118,7 @@ msgstr "_Itxi"
 #: common/resources/pager-dialog.glade:81
 #: common/resources/separator-dialog.glade:73
 #: common/resources/showdesktop-dialog.glade:49
-#: common/resources/tasklist-dialog.glade:93
+#: common/resources/tasklist-dialog.glade:102
 #: common/resources/windowmenu-dialog.glade:63
 #: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
 #: panel/panel-window.c:3925
@@ -423,7 +423,7 @@ msgstr "Aukera hau hautatu menuan aplikazioaren izen generikoa bistartzeko, adib
 #: common/resources/clock-dialog.glade:405
 #: common/resources/directorymenu-dialog.glade:150
 #: common/resources/separator-dialog.glade:222
-#: common/resources/tasklist-dialog.glade:257
+#: common/resources/tasklist-dialog.glade:266
 #: common/resources/windowmenu-dialog.glade:206
 msgid "Appearance"
 msgstr "Itxura"
@@ -674,7 +674,7 @@ msgid "_File Pattern:"
 msgstr "_Fitxategi patroia:"
 
 #: common/resources/directorymenu-dialog.glade:316
-#: common/resources/tasklist-dialog.glade:492
+#: common/resources/tasklist-dialog.glade:529
 #: common/resources/windowmenu-dialog.glade:260
 msgid "Filtering"
 msgstr "Iragazten"
@@ -818,7 +818,7 @@ msgid "Si_ze:"
 msgstr ""
 
 #: common/resources/showdesktop-dialog.glade:18
-#: plugins/showdesktop/showdesktop.c:322
+#: plugins/showdesktop/showdesktop.c:327
 #: plugins/showdesktop/showdesktop.desktop.in.in:4
 msgid "Show Desktop"
 msgstr "Ikusi mahaigaina"
@@ -964,65 +964,65 @@ msgstr "Taldekatu izenburu eta leiho izenburuz"
 msgid "None, allow drag-and-drop"
 msgstr "Batez, onartu arrastratu-eta-jaregin"
 
-#: common/resources/tasklist-dialog.glade:61
+#: common/resources/tasklist-dialog.glade:70
 #: plugins/tasklist/tasklist.desktop.in.in:4
 msgid "Window Buttons"
 msgstr "Leiho botoiak"
 
-#: common/resources/tasklist-dialog.glade:143
+#: common/resources/tasklist-dialog.glade:152
 msgid "Show button _labels"
 msgstr "Ikusi botoi e_tiketak"
 
-#: common/resources/tasklist-dialog.glade:159
+#: common/resources/tasklist-dialog.glade:168
 msgid "Show _flat buttons"
 msgstr "Botoi _mugikorrak erabili"
 
-#: common/resources/tasklist-dialog.glade:175
+#: common/resources/tasklist-dialog.glade:184
 msgid "Show _handle"
 msgstr "Ikusi _kudeatzailea"
 
-#: common/resources/tasklist-dialog.glade:191
+#: common/resources/tasklist-dialog.glade:200
 msgid "Show _tooltips"
 msgstr "Argibideak erakutsi"
 
-#: common/resources/tasklist-dialog.glade:214
+#: common/resources/tasklist-dialog.glade:223
 msgid "Sorting _order:"
 msgstr "Sailkatze ordena:"
 
-#: common/resources/tasklist-dialog.glade:297
+#: common/resources/tasklist-dialog.glade:306
 msgid "Mi_ddle click action:"
 msgstr "Er_diko botoiaren ekintza:"
 
-#: common/resources/tasklist-dialog.glade:335
+#: common/resources/tasklist-dialog.glade:344
 msgid "_Group windows by application"
 msgstr "Leihoak aplikazioen arabera taldekatu"
 
-#: common/resources/tasklist-dialog.glade:351
+#: common/resources/tasklist-dialog.glade:360
 msgid "Restore minimized windows to current _workspace"
 msgstr "Berrezarri minimizaturiko leihoak uneko lan-eremuan"
 
-#: common/resources/tasklist-dialog.glade:367
+#: common/resources/tasklist-dialog.glade:376
 msgid "D_raw window frame when hovering a button"
 msgstr "Ma_rraztu leiho markoa botoia nabarmentzean"
 
-#: common/resources/tasklist-dialog.glade:383
+#: common/resources/tasklist-dialog.glade:392
 msgid "_Switch windows using the mouse wheel"
 msgstr "Idazmahai birtualak sagu _gurpilaren bidez txandakatu"
 
-#: common/resources/tasklist-dialog.glade:405
+#: common/resources/tasklist-dialog.glade:414
 msgid "Behaviour"
 msgstr "Portamoldea"
 
-#: common/resources/tasklist-dialog.glade:438
+#: common/resources/tasklist-dialog.glade:447
 #: common/resources/windowmenu-dialog.glade:239
 msgid "Show windows from _all workspaces"
 msgstr "Ikusi lan-eremu guztietako leihoak"
 
-#: common/resources/tasklist-dialog.glade:454
-msgid "Show windows from all mo_nitors"
-msgstr "Ikusi mo_nitore guztietako leihoak"
-
 #: common/resources/tasklist-dialog.glade:470
+msgid "Show windows _from:"
+msgstr ""
+
+#: common/resources/tasklist-dialog.glade:507
 msgid "Show only _minimized windows"
 msgstr "Ikusi bakarrik _minimizatutako leihoak"
 
@@ -1055,8 +1055,14 @@ msgstr "Ikusi idazmahai ize_nak"
 msgid "Enable _urgency notification"
 msgstr "Gait_u larrialdiko berri-ematea"
 
+#. I18N: monitor name in the output selector
+#: common/panel-utils.c:425
+#, c-format
+msgid "Monitor %d"
+msgstr "%d monitorea"
+
 #: libxfce4panel/xfce-panel-plugin.c:1109
-#: panel/panel-preferences-dialog.c:1536
+#: panel/panel-preferences-dialog.c:1499
 msgid "Remove"
 msgstr "Ezabatu"
 
@@ -1066,7 +1072,7 @@ msgid ""
 msgstr "Elementua paneletik kentzean bere konfigurazioa galduko da ere."
 
 #: libxfce4panel/xfce-panel-plugin.c:1114
-#: panel/panel-preferences-dialog.c:1543
+#: panel/panel-preferences-dialog.c:1506
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Ziur al zaude \"%s\" idazmahaia ezabatu nahi duzula?"
@@ -1088,7 +1094,7 @@ msgstr "_Mugitu"
 
 #. remove
 #: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:354
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1113
+#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1076
 #: plugins/launcher/launcher-dialog.c:935
 msgid "_Remove"
 msgstr "_Ezabatu"
@@ -1335,7 +1341,7 @@ msgstr "_Utzi"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Mesedez hautatu plugin berriarentzat panel bat:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1060
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1023
 #, c-format
 msgid "Panel %d"
 msgstr "%d panela"
@@ -1380,48 +1386,42 @@ msgstr "Plugina berrabiarazi"
 msgid "_Execute"
 msgstr "_Exekutatu"
 
-#: panel/panel-preferences-dialog.c:348
+#: panel/panel-preferences-dialog.c:342
 msgctxt "plugin context menu"
 msgid "_About"
 msgstr "_Honi buruz"
 
-#: panel/panel-preferences-dialog.c:352
+#: panel/panel-preferences-dialog.c:346
 msgid "Show about information of the currently selected item"
 msgstr "Hautaturiko elementuaren argibideak bistarazi"
 
-#: panel/panel-preferences-dialog.c:588
+#: panel/panel-preferences-dialog.c:580
 msgid "Automatic"
 msgstr "Automatikoa"
 
-#: panel/panel-preferences-dialog.c:597
+#: panel/panel-preferences-dialog.c:589
 msgid "Primary"
 msgstr "Funtsezkoa"
 
-#. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:616
-#, c-format
-msgid "Monitor %d"
-msgstr "%d monitorea"
-
-#: panel/panel-preferences-dialog.c:1112
+#: panel/panel-preferences-dialog.c:1075
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Panela eta plugin konfigurazioak betirako kenduko dira"
 
-#: panel/panel-preferences-dialog.c:1121
+#: panel/panel-preferences-dialog.c:1084
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Ziur al zaude %d panela ezabatu nahi duzula?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1413
+#: panel/panel-preferences-dialog.c:1376
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(kanpokoa)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1418
+#: panel/panel-preferences-dialog.c:1381
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1430,22 +1430,22 @@ msgstr "Barne-izena: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1430
+#: panel/panel-preferences-dialog.c:1393
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Barne-izena: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1545
+#: panel/panel-preferences-dialog.c:1508
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Elementua paneletik ezabatzen baduzu betirako galduko da."
 
-#: panel/panel-preferences-dialog.c:1549
+#: panel/panel-preferences-dialog.c:1512
 #: plugins/launcher/launcher-dialog.c:930
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "%d elementu hauek benetan ezabatu nahi dituzu?"
 
-#: panel/panel-preferences-dialog.c:1551
+#: panel/panel-preferences-dialog.c:1514
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Paneletik ezabatzen badituzu, betiko galduko dira."
 
@@ -2151,11 +2151,11 @@ msgstr "Idazmahai birtualen artean aldatu"
 msgid "Adds a separator or space between panel items"
 msgstr "Panel elementuen artean lekua edo bereizle bat gehitu"
 
-#: plugins/showdesktop/showdesktop.c:317
+#: plugins/showdesktop/showdesktop.c:322
 msgid "Restore the minimized windows"
 msgstr "Berrezarri minimizatutako leihoak"
 
-#: plugins/showdesktop/showdesktop.c:319
+#: plugins/showdesktop/showdesktop.c:324
 msgid "Minimize all open windows and show the desktop"
 msgstr "Minimizatu leiho guztiak eta mahaigaina bistarazi"
 
@@ -2201,34 +2201,42 @@ msgid ""
 "items"
 msgstr "Egoera berri-emailearen elementuak (aplikazio adierazleak) eta jasotako systray elementuak hornitzen ditu"
 
-#: plugins/tasklist/tasklist-widget.c:3171
+#: plugins/tasklist/tasklist-widget.c:3200
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Ezin da '%s' instantzia berria hasi"
 
-#: plugins/tasklist/tasklist-widget.c:3198
+#: plugins/tasklist/tasklist-widget.c:3227
 msgid "Launch New Instance"
 msgstr "Instantzia berria abiarazi"
 
-#: plugins/tasklist/tasklist-widget.c:3953
+#: plugins/tasklist/tasklist-widget.c:3982
 msgid "Mi_nimize All"
 msgstr "Mi_nimizatu dena"
 
-#: plugins/tasklist/tasklist-widget.c:3960
+#: plugins/tasklist/tasklist-widget.c:3989
 msgid "Un_minimize All"
 msgstr "De_sminimizatu dena"
 
-#: plugins/tasklist/tasklist-widget.c:3967
+#: plugins/tasklist/tasklist-widget.c:3996
 msgid "Ma_ximize All"
 msgstr "Ma_ximizatu dena"
 
-#: plugins/tasklist/tasklist-widget.c:3974
+#: plugins/tasklist/tasklist-widget.c:4003
 msgid "_Unmaximize All"
 msgstr "_Desmaximizatu dena"
 
-#: plugins/tasklist/tasklist-widget.c:3985
+#: plugins/tasklist/tasklist-widget.c:4014
 msgid "_Close All"
 msgstr "_Itxi dena"
+
+#: plugins/tasklist/tasklist-widget.c:5025
+msgid "all monitors"
+msgstr ""
+
+#: plugins/tasklist/tasklist-widget.c:5034
+msgid "panel's monitor"
+msgstr ""
 
 #: plugins/tasklist/tasklist.desktop.in.in:5
 msgid "Switch between open windows using buttons"
