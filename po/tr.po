@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-11-04 12:53+0100\n"
+"POT-Creation-Date: 2025-11-08 12:52+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Mustafa Tınmaz, 2025\n"
 "Language-Team: Turkish (http://app.transifex.com/xfce/xfce4-panel/language/tr/)\n"
@@ -113,7 +113,7 @@ msgstr "Panel Tercihleri"
 #: common/resources/separator-dialog.glade:58
 #: common/resources/showdesktop-dialog.glade:34
 #: common/resources/sn-dialog.glade:65
-#: common/resources/tasklist-dialog.glade:77
+#: common/resources/tasklist-dialog.glade:86
 #: common/resources/windowmenu-dialog.glade:48 panel/panel-item-dialog.c:205
 #: panel/panel-tic-tac-toe.c:110
 msgid "_Close"
@@ -129,7 +129,7 @@ msgstr "_Kapat"
 #: common/resources/pager-dialog.glade:81
 #: common/resources/separator-dialog.glade:73
 #: common/resources/showdesktop-dialog.glade:49
-#: common/resources/tasklist-dialog.glade:93
+#: common/resources/tasklist-dialog.glade:102
 #: common/resources/windowmenu-dialog.glade:63
 #: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
 #: panel/panel-window.c:3925
@@ -434,7 +434,7 @@ msgstr "Menüde uygulamanın genel adını görmek için bu seçeneği seçin, �
 #: common/resources/clock-dialog.glade:405
 #: common/resources/directorymenu-dialog.glade:150
 #: common/resources/separator-dialog.glade:222
-#: common/resources/tasklist-dialog.glade:257
+#: common/resources/tasklist-dialog.glade:266
 #: common/resources/windowmenu-dialog.glade:206
 msgid "Appearance"
 msgstr "Görünüm"
@@ -685,7 +685,7 @@ msgid "_File Pattern:"
 msgstr "_Dosya Örüntüsü:"
 
 #: common/resources/directorymenu-dialog.glade:316
-#: common/resources/tasklist-dialog.glade:492
+#: common/resources/tasklist-dialog.glade:529
 #: common/resources/windowmenu-dialog.glade:260
 msgid "Filtering"
 msgstr "Süz"
@@ -829,7 +829,7 @@ msgid "Si_ze:"
 msgstr "_Boyut:"
 
 #: common/resources/showdesktop-dialog.glade:18
-#: plugins/showdesktop/showdesktop.c:322
+#: plugins/showdesktop/showdesktop.c:327
 #: plugins/showdesktop/showdesktop.desktop.in.in:4
 msgid "Show Desktop"
 msgstr "Masaüstünü Göster"
@@ -975,65 +975,65 @@ msgstr "Küme başlığı ve pencere başlığı"
 msgid "None, allow drag-and-drop"
 msgstr "Hiçbiri, sürükle-bıraka izin ver"
 
-#: common/resources/tasklist-dialog.glade:61
+#: common/resources/tasklist-dialog.glade:70
 #: plugins/tasklist/tasklist.desktop.in.in:4
 msgid "Window Buttons"
 msgstr "Pencere Düğmeleri"
 
-#: common/resources/tasklist-dialog.glade:143
+#: common/resources/tasklist-dialog.glade:152
 msgid "Show button _labels"
 msgstr "Düğme _etiketlerini göster"
 
-#: common/resources/tasklist-dialog.glade:159
+#: common/resources/tasklist-dialog.glade:168
 msgid "Show _flat buttons"
 msgstr "_Düz düğmeler göster"
 
-#: common/resources/tasklist-dialog.glade:175
+#: common/resources/tasklist-dialog.glade:184
 msgid "Show _handle"
 msgstr "Çerçeve gös_ter"
 
-#: common/resources/tasklist-dialog.glade:191
+#: common/resources/tasklist-dialog.glade:200
 msgid "Show _tooltips"
 msgstr "İpuçlarını _göster"
 
-#: common/resources/tasklist-dialog.glade:214
+#: common/resources/tasklist-dialog.glade:223
 msgid "Sorting _order:"
 msgstr "Sıralama _düzeni:"
 
-#: common/resources/tasklist-dialog.glade:297
+#: common/resources/tasklist-dialog.glade:306
 msgid "Mi_ddle click action:"
 msgstr "Orta tıklatma eylemi:"
 
-#: common/resources/tasklist-dialog.glade:335
+#: common/resources/tasklist-dialog.glade:344
 msgid "_Group windows by application"
 msgstr "_Uygulamaya göre pencereleri grupla"
 
-#: common/resources/tasklist-dialog.glade:351
+#: common/resources/tasklist-dialog.glade:360
 msgid "Restore minimized windows to current _workspace"
 msgstr "Küçültülmüş pencereyi geçerli _çalışma alanına geri yükle"
 
-#: common/resources/tasklist-dialog.glade:367
+#: common/resources/tasklist-dialog.glade:376
 msgid "D_raw window frame when hovering a button"
 msgstr "Düğme üze_rindeyken pencere çerçevesi çiz"
 
-#: common/resources/tasklist-dialog.glade:383
+#: common/resources/tasklist-dialog.glade:392
 msgid "_Switch windows using the mouse wheel"
 msgstr "_Pencereler arasında fare tekerleği kullanarak geçiş yap"
 
-#: common/resources/tasklist-dialog.glade:405
+#: common/resources/tasklist-dialog.glade:414
 msgid "Behaviour"
 msgstr "Davranış"
 
-#: common/resources/tasklist-dialog.glade:438
+#: common/resources/tasklist-dialog.glade:447
 #: common/resources/windowmenu-dialog.glade:239
 msgid "Show windows from _all workspaces"
 msgstr "Tüm çalışma alanlarından _pencereleri göster"
 
-#: common/resources/tasklist-dialog.glade:454
-msgid "Show windows from all mo_nitors"
-msgstr "Tüm mo_nitörlerdeki pencereleri göster"
-
 #: common/resources/tasklist-dialog.glade:470
+msgid "Show windows _from:"
+msgstr ""
+
+#: common/resources/tasklist-dialog.glade:507
 msgid "Show only _minimized windows"
 msgstr "Yalnızca _küçültülmüş pencereleri göster"
 
@@ -1066,8 +1066,14 @@ msgstr "Çalışma alanı _isimlerini göster"
 msgid "Enable _urgency notification"
 msgstr "Acil _bildirimini etkinleştir"
 
+#. I18N: monitor name in the output selector
+#: common/panel-utils.c:425
+#, c-format
+msgid "Monitor %d"
+msgstr "Ekran %d"
+
 #: libxfce4panel/xfce-panel-plugin.c:1109
-#: panel/panel-preferences-dialog.c:1536
+#: panel/panel-preferences-dialog.c:1499
 msgid "Remove"
 msgstr "Kaldır"
 
@@ -1077,7 +1083,7 @@ msgid ""
 msgstr "Ögenin panelden kaldırılması, yapılandırmasının kaybedileceği anlamına da gelir."
 
 #: libxfce4panel/xfce-panel-plugin.c:1114
-#: panel/panel-preferences-dialog.c:1543
+#: panel/panel-preferences-dialog.c:1506
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "'%s' ögesini kaldırmak istediğinizden emin misiniz?"
@@ -1099,7 +1105,7 @@ msgstr "_Taşı"
 
 #. remove
 #: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:354
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1113
+#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1076
 #: plugins/launcher/launcher-dialog.c:935
 msgid "_Remove"
 msgstr "_Kaldır"
@@ -1346,7 +1352,7 @@ msgstr "İ_ptal"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Lütfen yeni eklenti için panel seçin:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1060
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1023
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -1391,48 +1397,42 @@ msgstr "Eklentiyi Yeniden Başlat"
 msgid "_Execute"
 msgstr "Ç_alıştır"
 
-#: panel/panel-preferences-dialog.c:348
+#: panel/panel-preferences-dialog.c:342
 msgctxt "plugin context menu"
 msgid "_About"
 msgstr "_Hakkında"
 
-#: panel/panel-preferences-dialog.c:352
+#: panel/panel-preferences-dialog.c:346
 msgid "Show about information of the currently selected item"
 msgstr "Seçili ögenin hakkında bilgisini göster"
 
-#: panel/panel-preferences-dialog.c:588
+#: panel/panel-preferences-dialog.c:580
 msgid "Automatic"
 msgstr "Kendiliğinden"
 
-#: panel/panel-preferences-dialog.c:597
+#: panel/panel-preferences-dialog.c:589
 msgid "Primary"
 msgstr "Birincil"
 
-#. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:616
-#, c-format
-msgid "Monitor %d"
-msgstr "Ekran %d"
-
-#: panel/panel-preferences-dialog.c:1112
+#: panel/panel-preferences-dialog.c:1075
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Panel ve eklenti ayarları kalıcı olarak silinecek"
 
-#: panel/panel-preferences-dialog.c:1121
+#: panel/panel-preferences-dialog.c:1084
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "%d. paneli kaldırmak istediğinize emin misiniz?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1413
+#: panel/panel-preferences-dialog.c:1376
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(dış)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1418
+#: panel/panel-preferences-dialog.c:1381
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1441,22 +1441,22 @@ msgstr "İç ad: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1430
+#: panel/panel-preferences-dialog.c:1393
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "İç ad: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1545
+#: panel/panel-preferences-dialog.c:1508
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Panelden ögeyi kaldırdığınızda tümüyle yitirilir."
 
-#: panel/panel-preferences-dialog.c:1549
+#: panel/panel-preferences-dialog.c:1512
 #: plugins/launcher/launcher-dialog.c:930
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Bu %dögelerini kaldırmak istediğinizden emin misiniz?"
 
-#: panel/panel-preferences-dialog.c:1551
+#: panel/panel-preferences-dialog.c:1514
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Bunları panelden kaldırırsanız, kalıcı olarak kaybolurlar."
 
@@ -2162,11 +2162,11 @@ msgstr "Sanal masaüstleri arasında geçiş yap"
 msgid "Adds a separator or space between panel items"
 msgstr "Panel ögeleri arasına ayırıcı veya boşluk ekler"
 
-#: plugins/showdesktop/showdesktop.c:317
+#: plugins/showdesktop/showdesktop.c:322
 msgid "Restore the minimized windows"
 msgstr "Gizlenmiş pencereleri geri getir"
 
-#: plugins/showdesktop/showdesktop.c:319
+#: plugins/showdesktop/showdesktop.c:324
 msgid "Minimize all open windows and show the desktop"
 msgstr "Tüm pencereleri küçült ve masaüstünü göster"
 
@@ -2212,34 +2212,42 @@ msgid ""
 "items"
 msgstr "Durum bildirim öğeleri (uygulama göstergeleri) ve eski sistem tepsisi öğeleri sağlar"
 
-#: plugins/tasklist/tasklist-widget.c:3171
+#: plugins/tasklist/tasklist-widget.c:3200
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Yeni '%s' örneği başlatılamıyor"
 
-#: plugins/tasklist/tasklist-widget.c:3198
+#: plugins/tasklist/tasklist-widget.c:3227
 msgid "Launch New Instance"
 msgstr "Yeni Örnek Başlat"
 
-#: plugins/tasklist/tasklist-widget.c:3953
+#: plugins/tasklist/tasklist-widget.c:3982
 msgid "Mi_nimize All"
 msgstr "Tümünü _Küçült"
 
-#: plugins/tasklist/tasklist-widget.c:3960
+#: plugins/tasklist/tasklist-widget.c:3989
 msgid "Un_minimize All"
 msgstr "Küçültmeleri Geri Al"
 
-#: plugins/tasklist/tasklist-widget.c:3967
+#: plugins/tasklist/tasklist-widget.c:3996
 msgid "Ma_ximize All"
 msgstr "Tümünü _Büyüt"
 
-#: plugins/tasklist/tasklist-widget.c:3974
+#: plugins/tasklist/tasklist-widget.c:4003
 msgid "_Unmaximize All"
 msgstr "Büyültmeleri Geri Al"
 
-#: plugins/tasklist/tasklist-widget.c:3985
+#: plugins/tasklist/tasklist-widget.c:4014
 msgid "_Close All"
 msgstr "Tümünü _Kapat"
+
+#: plugins/tasklist/tasklist-widget.c:5025
+msgid "all monitors"
+msgstr ""
+
+#: plugins/tasklist/tasklist-widget.c:5034
+msgid "panel's monitor"
+msgstr ""
 
 #: plugins/tasklist/tasklist.desktop.in.in:5
 msgid "Switch between open windows using buttons"
