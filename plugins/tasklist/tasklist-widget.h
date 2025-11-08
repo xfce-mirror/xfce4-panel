@@ -23,6 +23,9 @@
 
 #include <gtk/gtk.h>
 
+#define MONITORS_TO_INCLUDE_ALL "all"
+#define MONITORS_TO_INCLUDE_PANEL "panel-monitor"
+
 G_BEGIN_DECLS
 
 #define XFCE_TYPE_TASKLIST (xfce_tasklist_get_type ())
@@ -42,6 +45,11 @@ xfce_tasklist_set_nrows (XfceTasklist *tasklist,
 
 void
 xfce_tasklist_update_monitor_geometry (XfceTasklist *tasklist);
+
+void
+xfce_tasklist_populate_output_list (GtkBuilder *builder,
+                                    GObject *dialog,
+                                    XfceTasklist *tasklist);
 
 G_END_DECLS
 
