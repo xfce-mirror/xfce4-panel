@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-11-04 12:53+0100\n"
+"POT-Creation-Date: 2025-11-08 12:52+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Junghee Lee <daemul72@gmail.com>, 2025\n"
 "Language-Team: Korean (http://app.transifex.com/xfce/xfce4-panel/language/ko/)\n"
@@ -101,7 +101,7 @@ msgstr "패널 기본 설정"
 #: common/resources/separator-dialog.glade:58
 #: common/resources/showdesktop-dialog.glade:34
 #: common/resources/sn-dialog.glade:65
-#: common/resources/tasklist-dialog.glade:77
+#: common/resources/tasklist-dialog.glade:86
 #: common/resources/windowmenu-dialog.glade:48 panel/panel-item-dialog.c:205
 #: panel/panel-tic-tac-toe.c:110
 msgid "_Close"
@@ -117,7 +117,7 @@ msgstr "닫기(_C)"
 #: common/resources/pager-dialog.glade:81
 #: common/resources/separator-dialog.glade:73
 #: common/resources/showdesktop-dialog.glade:49
-#: common/resources/tasklist-dialog.glade:93
+#: common/resources/tasklist-dialog.glade:102
 #: common/resources/windowmenu-dialog.glade:63
 #: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
 #: panel/panel-window.c:3925
@@ -422,7 +422,7 @@ msgstr "메뉴에서 일반적 프로그램 이름을 보이려면 이 옵션을
 #: common/resources/clock-dialog.glade:405
 #: common/resources/directorymenu-dialog.glade:150
 #: common/resources/separator-dialog.glade:222
-#: common/resources/tasklist-dialog.glade:257
+#: common/resources/tasklist-dialog.glade:266
 #: common/resources/windowmenu-dialog.glade:206
 msgid "Appearance"
 msgstr "모양새"
@@ -673,7 +673,7 @@ msgid "_File Pattern:"
 msgstr "파일 패턴(_F):"
 
 #: common/resources/directorymenu-dialog.glade:316
-#: common/resources/tasklist-dialog.glade:492
+#: common/resources/tasklist-dialog.glade:529
 #: common/resources/windowmenu-dialog.glade:260
 msgid "Filtering"
 msgstr "필터링"
@@ -817,7 +817,7 @@ msgid "Si_ze:"
 msgstr "크기(_Z):"
 
 #: common/resources/showdesktop-dialog.glade:18
-#: plugins/showdesktop/showdesktop.c:322
+#: plugins/showdesktop/showdesktop.c:327
 #: plugins/showdesktop/showdesktop.desktop.in.in:4
 msgid "Show Desktop"
 msgstr "데스크톱 표시"
@@ -963,65 +963,65 @@ msgstr "제목과 창 제목 모으기"
 msgid "None, allow drag-and-drop"
 msgstr "아니오, 끌어 놓기를 허용합니다"
 
-#: common/resources/tasklist-dialog.glade:61
+#: common/resources/tasklist-dialog.glade:70
 #: plugins/tasklist/tasklist.desktop.in.in:4
 msgid "Window Buttons"
 msgstr "창 단추"
 
-#: common/resources/tasklist-dialog.glade:143
+#: common/resources/tasklist-dialog.glade:152
 msgid "Show button _labels"
 msgstr "단추 이름 표시(_L)"
 
-#: common/resources/tasklist-dialog.glade:159
+#: common/resources/tasklist-dialog.glade:168
 msgid "Show _flat buttons"
 msgstr "밋밋한 단추로 표시(_F)"
 
-#: common/resources/tasklist-dialog.glade:175
+#: common/resources/tasklist-dialog.glade:184
 msgid "Show _handle"
 msgstr "손잡이 표시(_H)"
 
-#: common/resources/tasklist-dialog.glade:191
+#: common/resources/tasklist-dialog.glade:200
 msgid "Show _tooltips"
 msgstr "풍선 도움말 표시(_T)"
 
-#: common/resources/tasklist-dialog.glade:214
+#: common/resources/tasklist-dialog.glade:223
 msgid "Sorting _order:"
 msgstr "정렬 순서(_O):"
 
-#: common/resources/tasklist-dialog.glade:297
+#: common/resources/tasklist-dialog.glade:306
 msgid "Mi_ddle click action:"
 msgstr "가운데 단추 누름 동작(_D):"
 
-#: common/resources/tasklist-dialog.glade:335
+#: common/resources/tasklist-dialog.glade:344
 msgid "_Group windows by application"
 msgstr "프로그램 단위로 창 묶기(_G)"
 
-#: common/resources/tasklist-dialog.glade:351
+#: common/resources/tasklist-dialog.glade:360
 msgid "Restore minimized windows to current _workspace"
 msgstr "현재 작업 공간에 숨겨둔 창 표시(_W)"
 
-#: common/resources/tasklist-dialog.glade:367
+#: common/resources/tasklist-dialog.glade:376
 msgid "D_raw window frame when hovering a button"
 msgstr "단추 위에 커서 올려두었을 때 창 틀 표시(_R)"
 
-#: common/resources/tasklist-dialog.glade:383
+#: common/resources/tasklist-dialog.glade:392
 msgid "_Switch windows using the mouse wheel"
 msgstr "마우스 휠로 창 전환(_S)"
 
-#: common/resources/tasklist-dialog.glade:405
+#: common/resources/tasklist-dialog.glade:414
 msgid "Behaviour"
 msgstr "행동"
 
-#: common/resources/tasklist-dialog.glade:438
+#: common/resources/tasklist-dialog.glade:447
 #: common/resources/windowmenu-dialog.glade:239
 msgid "Show windows from _all workspaces"
 msgstr "모든 작업 공간의 창 표시(_A)"
 
-#: common/resources/tasklist-dialog.glade:454
-msgid "Show windows from all mo_nitors"
-msgstr "모든 모니터의 창 표시(_N)"
-
 #: common/resources/tasklist-dialog.glade:470
+msgid "Show windows _from:"
+msgstr ""
+
+#: common/resources/tasklist-dialog.glade:507
 msgid "Show only _minimized windows"
 msgstr "숨겨둔 창만 표시(_M)"
 
@@ -1054,8 +1054,14 @@ msgstr "작업 공간 이름 표시(_N)"
 msgid "Enable _urgency notification"
 msgstr "긴급 알림 활성화(_U)"
 
+#. I18N: monitor name in the output selector
+#: common/panel-utils.c:425
+#, c-format
+msgid "Monitor %d"
+msgstr "모니터 %d"
+
 #: libxfce4panel/xfce-panel-plugin.c:1109
-#: panel/panel-preferences-dialog.c:1536
+#: panel/panel-preferences-dialog.c:1499
 msgid "Remove"
 msgstr "제거"
 
@@ -1065,7 +1071,7 @@ msgid ""
 msgstr "항목을 패널에서 제거하면 설정도 지워집니다."
 
 #: libxfce4panel/xfce-panel-plugin.c:1114
-#: panel/panel-preferences-dialog.c:1543
+#: panel/panel-preferences-dialog.c:1506
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "\"%s\"을(를) 정말로 없애시렵니까?"
@@ -1087,7 +1093,7 @@ msgstr "이동(_M)"
 
 #. remove
 #: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:354
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1113
+#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1076
 #: plugins/launcher/launcher-dialog.c:935
 msgid "_Remove"
 msgstr "제거(_R)"
@@ -1333,7 +1339,7 @@ msgstr "취소(_C)"
 msgid "Please choose a panel for the new plugin:"
 msgstr "새 플러그인을 둘 패널을 선택하십시오:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1060
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1023
 #, c-format
 msgid "Panel %d"
 msgstr "패널 %d"
@@ -1378,48 +1384,42 @@ msgstr "플러그인 다시 시작"
 msgid "_Execute"
 msgstr "실행(_E)"
 
-#: panel/panel-preferences-dialog.c:348
+#: panel/panel-preferences-dialog.c:342
 msgctxt "plugin context menu"
 msgid "_About"
 msgstr "정보(_A)"
 
-#: panel/panel-preferences-dialog.c:352
+#: panel/panel-preferences-dialog.c:346
 msgid "Show about information of the currently selected item"
 msgstr "현재 선택한 항목의 정보에 대해 표시"
 
-#: panel/panel-preferences-dialog.c:588
+#: panel/panel-preferences-dialog.c:580
 msgid "Automatic"
 msgstr "자동"
 
-#: panel/panel-preferences-dialog.c:597
+#: panel/panel-preferences-dialog.c:589
 msgid "Primary"
 msgstr "우선 순위"
 
-#. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:616
-#, c-format
-msgid "Monitor %d"
-msgstr "모니터 %d"
-
-#: panel/panel-preferences-dialog.c:1112
+#: panel/panel-preferences-dialog.c:1075
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "패널과 플러그인 환경설정을 완전히 제거합니다"
 
-#: panel/panel-preferences-dialog.c:1121
+#: panel/panel-preferences-dialog.c:1084
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "패널 %d을(를) 정말로 없애시렵니까?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1413
+#: panel/panel-preferences-dialog.c:1376
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(외부)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1418
+#: panel/panel-preferences-dialog.c:1381
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1428,22 +1428,22 @@ msgstr "내부 이름: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1430
+#: panel/panel-preferences-dialog.c:1393
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "내부 이름: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1545
+#: panel/panel-preferences-dialog.c:1508
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "항목을 패널에서 제거하면 완전히 잃게 됩니다."
 
-#: panel/panel-preferences-dialog.c:1549
+#: panel/panel-preferences-dialog.c:1512
 #: plugins/launcher/launcher-dialog.c:930
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "항목 %d개를 정말로 제거하시렵니까?"
 
-#: panel/panel-preferences-dialog.c:1551
+#: panel/panel-preferences-dialog.c:1514
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "패널에서 제거하면 완전히 잃어버립니다."
 
@@ -2149,11 +2149,11 @@ msgstr "가상 데스크톱을 전환합니다"
 msgid "Adds a separator or space between panel items"
 msgstr "항목 사이에 빈 공간이나 구분선을 추가합니다"
 
-#: plugins/showdesktop/showdesktop.c:317
+#: plugins/showdesktop/showdesktop.c:322
 msgid "Restore the minimized windows"
 msgstr "숨긴 창 복원"
 
-#: plugins/showdesktop/showdesktop.c:319
+#: plugins/showdesktop/showdesktop.c:324
 msgid "Minimize all open windows and show the desktop"
 msgstr "모든 창을 최소화하고 데스크톱 표시"
 
@@ -2199,34 +2199,42 @@ msgid ""
 "items"
 msgstr "상태 알림 항목(프로그램 표시)과 구형 시스템 트레이 항목을 나타냅니다"
 
-#: plugins/tasklist/tasklist-widget.c:3171
+#: plugins/tasklist/tasklist-widget.c:3200
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "새 '%s' 인스턴스를 시작할 수 없습니다"
 
-#: plugins/tasklist/tasklist-widget.c:3198
+#: plugins/tasklist/tasklist-widget.c:3227
 msgid "Launch New Instance"
 msgstr "새 인스턴스 실행"
 
-#: plugins/tasklist/tasklist-widget.c:3953
+#: plugins/tasklist/tasklist-widget.c:3982
 msgid "Mi_nimize All"
 msgstr "모두 최소화(_N)"
 
-#: plugins/tasklist/tasklist-widget.c:3960
+#: plugins/tasklist/tasklist-widget.c:3989
 msgid "Un_minimize All"
 msgstr "모두 최소화 취소(_M)"
 
-#: plugins/tasklist/tasklist-widget.c:3967
+#: plugins/tasklist/tasklist-widget.c:3996
 msgid "Ma_ximize All"
 msgstr "모두 최대화(_X)"
 
-#: plugins/tasklist/tasklist-widget.c:3974
+#: plugins/tasklist/tasklist-widget.c:4003
 msgid "_Unmaximize All"
 msgstr "모두 최대화 취소(_U)"
 
-#: plugins/tasklist/tasklist-widget.c:3985
+#: plugins/tasklist/tasklist-widget.c:4014
 msgid "_Close All"
 msgstr "모두 닫기(_C)"
+
+#: plugins/tasklist/tasklist-widget.c:5025
+msgid "all monitors"
+msgstr ""
+
+#: plugins/tasklist/tasklist-widget.c:5034
+msgid "panel's monitor"
+msgstr ""
 
 #: plugins/tasklist/tasklist.desktop.in.in:5
 msgid "Switch between open windows using buttons"
