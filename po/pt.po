@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-11-04 12:53+0100\n"
+"POT-Creation-Date: 2025-11-08 12:52+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>, 2019-2025\n"
 "Language-Team: Portuguese (http://app.transifex.com/xfce/xfce4-panel/language/pt/)\n"
@@ -99,7 +99,7 @@ msgstr "Preferências do painel"
 #: common/resources/separator-dialog.glade:58
 #: common/resources/showdesktop-dialog.glade:34
 #: common/resources/sn-dialog.glade:65
-#: common/resources/tasklist-dialog.glade:77
+#: common/resources/tasklist-dialog.glade:86
 #: common/resources/windowmenu-dialog.glade:48 panel/panel-item-dialog.c:205
 #: panel/panel-tic-tac-toe.c:110
 msgid "_Close"
@@ -115,7 +115,7 @@ msgstr "_Fechar"
 #: common/resources/pager-dialog.glade:81
 #: common/resources/separator-dialog.glade:73
 #: common/resources/showdesktop-dialog.glade:49
-#: common/resources/tasklist-dialog.glade:93
+#: common/resources/tasklist-dialog.glade:102
 #: common/resources/windowmenu-dialog.glade:63
 #: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
 #: panel/panel-window.c:3925
@@ -420,7 +420,7 @@ msgstr "Ativar esta opção para mostrar o nome da aplicação no menu, por exem
 #: common/resources/clock-dialog.glade:405
 #: common/resources/directorymenu-dialog.glade:150
 #: common/resources/separator-dialog.glade:222
-#: common/resources/tasklist-dialog.glade:257
+#: common/resources/tasklist-dialog.glade:266
 #: common/resources/windowmenu-dialog.glade:206
 msgid "Appearance"
 msgstr "Aparência"
@@ -671,7 +671,7 @@ msgid "_File Pattern:"
 msgstr "Extensão do _ficheiro:"
 
 #: common/resources/directorymenu-dialog.glade:316
-#: common/resources/tasklist-dialog.glade:492
+#: common/resources/tasklist-dialog.glade:529
 #: common/resources/windowmenu-dialog.glade:260
 msgid "Filtering"
 msgstr "Filtrar"
@@ -815,7 +815,7 @@ msgid "Si_ze:"
 msgstr "_Tamanho:"
 
 #: common/resources/showdesktop-dialog.glade:18
-#: plugins/showdesktop/showdesktop.c:322
+#: plugins/showdesktop/showdesktop.c:327
 #: plugins/showdesktop/showdesktop.desktop.in.in:4
 msgid "Show Desktop"
 msgstr "Mostrar a área de trabalho"
@@ -961,65 +961,65 @@ msgstr "Título do grupo e da janela"
 msgid "None, allow drag-and-drop"
 msgstr "Nenhum, permitir arrastar e largar"
 
-#: common/resources/tasklist-dialog.glade:61
+#: common/resources/tasklist-dialog.glade:70
 #: plugins/tasklist/tasklist.desktop.in.in:4
 msgid "Window Buttons"
 msgstr "Botões de janela"
 
-#: common/resources/tasklist-dialog.glade:143
+#: common/resources/tasklist-dialog.glade:152
 msgid "Show button _labels"
 msgstr "Mostrar r_ótulos dos botões"
 
-#: common/resources/tasklist-dialog.glade:159
+#: common/resources/tasklist-dialog.glade:168
 msgid "Show _flat buttons"
 msgstr "Mostrar _botões lisos"
 
-#: common/resources/tasklist-dialog.glade:175
+#: common/resources/tasklist-dialog.glade:184
 msgid "Show _handle"
 msgstr "Mostrar _manípulo"
 
-#: common/resources/tasklist-dialog.glade:191
+#: common/resources/tasklist-dialog.glade:200
 msgid "Show _tooltips"
 msgstr "Mostrar dicas"
 
-#: common/resources/tasklist-dialog.glade:214
+#: common/resources/tasklist-dialog.glade:223
 msgid "Sorting _order:"
 msgstr "Tipo de _ordenação:"
 
-#: common/resources/tasklist-dialog.glade:297
+#: common/resources/tasklist-dialog.glade:306
 msgid "Mi_ddle click action:"
 msgstr "Ação com a ro_da do rato:"
 
-#: common/resources/tasklist-dialog.glade:335
+#: common/resources/tasklist-dialog.glade:344
 msgid "_Group windows by application"
 msgstr "A_grupar janelas por aplicação"
 
-#: common/resources/tasklist-dialog.glade:351
+#: common/resources/tasklist-dialog.glade:360
 msgid "Restore minimized windows to current _workspace"
 msgstr "Restaurar janelas minimi_zadas para a área de trabalho atual"
 
-#: common/resources/tasklist-dialog.glade:367
+#: common/resources/tasklist-dialog.glade:376
 msgid "D_raw window frame when hovering a button"
 msgstr "Desenha_r caixilho da janela ao passar sobre um botão"
 
-#: common/resources/tasklist-dialog.glade:383
+#: common/resources/tasklist-dialog.glade:392
 msgid "_Switch windows using the mouse wheel"
 msgstr "Mu_dar de janela com a roda do rato"
 
-#: common/resources/tasklist-dialog.glade:405
+#: common/resources/tasklist-dialog.glade:414
 msgid "Behaviour"
 msgstr "Comportamento"
 
-#: common/resources/tasklist-dialog.glade:438
+#: common/resources/tasklist-dialog.glade:447
 #: common/resources/windowmenu-dialog.glade:239
 msgid "Show windows from _all workspaces"
 msgstr "Mostrar janelas de _todas as áreas de trabalho"
 
-#: common/resources/tasklist-dialog.glade:454
-msgid "Show windows from all mo_nitors"
-msgstr "Mostrar janelas de todos os mo_nitores"
-
 #: common/resources/tasklist-dialog.glade:470
+msgid "Show windows _from:"
+msgstr ""
+
+#: common/resources/tasklist-dialog.glade:507
 msgid "Show only _minimized windows"
 msgstr "Mostrar apenas janelas _minimizadas"
 
@@ -1052,8 +1052,14 @@ msgstr "Mostrar _nomes das áreas de trabalho"
 msgid "Enable _urgency notification"
 msgstr "Ativar notificação de _urgência"
 
+#. I18N: monitor name in the output selector
+#: common/panel-utils.c:425
+#, c-format
+msgid "Monitor %d"
+msgstr "Monitor %d"
+
 #: libxfce4panel/xfce-panel-plugin.c:1109
-#: panel/panel-preferences-dialog.c:1536
+#: panel/panel-preferences-dialog.c:1499
 msgid "Remove"
 msgstr "Remover"
 
@@ -1063,7 +1069,7 @@ msgid ""
 msgstr "A remoção do item do painel também significa que a sua configuração será perdida."
 
 #: libxfce4panel/xfce-panel-plugin.c:1114
-#: panel/panel-preferences-dialog.c:1543
+#: panel/panel-preferences-dialog.c:1506
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Tem a certeza que pretende remover \"%s\"?"
@@ -1085,7 +1091,7 @@ msgstr "_Mover"
 
 #. remove
 #: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:354
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1113
+#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1076
 #: plugins/launcher/launcher-dialog.c:935
 msgid "_Remove"
 msgstr "_Remover"
@@ -1333,7 +1339,7 @@ msgstr "_Cancelar"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Escolher um painel para o novo suplemento:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1060
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1023
 #, c-format
 msgid "Panel %d"
 msgstr "Painel %d"
@@ -1378,48 +1384,42 @@ msgstr "Reiniciar plugin"
 msgid "_Execute"
 msgstr "_Executar"
 
-#: panel/panel-preferences-dialog.c:348
+#: panel/panel-preferences-dialog.c:342
 msgctxt "plugin context menu"
 msgid "_About"
 msgstr "_Sobre"
 
-#: panel/panel-preferences-dialog.c:352
+#: panel/panel-preferences-dialog.c:346
 msgid "Show about information of the currently selected item"
 msgstr "Mostrar informações do item selecionado"
 
-#: panel/panel-preferences-dialog.c:588
+#: panel/panel-preferences-dialog.c:580
 msgid "Automatic"
 msgstr "Automático"
 
-#: panel/panel-preferences-dialog.c:597
+#: panel/panel-preferences-dialog.c:589
 msgid "Primary"
 msgstr "Principal"
 
-#. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:616
-#, c-format
-msgid "Monitor %d"
-msgstr "Monitor %d"
-
-#: panel/panel-preferences-dialog.c:1112
+#: panel/panel-preferences-dialog.c:1075
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "As configurações do painel e do módulo serão removidas permanentemente"
 
-#: panel/panel-preferences-dialog.c:1121
+#: panel/panel-preferences-dialog.c:1084
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Tem a certeza que pretende remover o painel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1413
+#: panel/panel-preferences-dialog.c:1376
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(externo)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1418
+#: panel/panel-preferences-dialog.c:1381
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1428,22 +1428,22 @@ msgstr "Nome interno: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1430
+#: panel/panel-preferences-dialog.c:1393
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nome interno: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1545
+#: panel/panel-preferences-dialog.c:1508
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Se remover este item do painel, será perdido permanentemente."
 
-#: panel/panel-preferences-dialog.c:1549
+#: panel/panel-preferences-dialog.c:1512
 #: plugins/launcher/launcher-dialog.c:930
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Tem a certeza que pretende remover estes %d itens?"
 
-#: panel/panel-preferences-dialog.c:1551
+#: panel/panel-preferences-dialog.c:1514
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Se os remover do painel, perdem-se definitivamente."
 
@@ -2149,11 +2149,11 @@ msgstr "Trocar entre ambientes de trabalho virtuais"
 msgid "Adds a separator or space between panel items"
 msgstr "Adiciona um separador ou espaço entre os itens do painel"
 
-#: plugins/showdesktop/showdesktop.c:317
+#: plugins/showdesktop/showdesktop.c:322
 msgid "Restore the minimized windows"
 msgstr "Restaurar as janelas minimizadas"
 
-#: plugins/showdesktop/showdesktop.c:319
+#: plugins/showdesktop/showdesktop.c:324
 msgid "Minimize all open windows and show the desktop"
 msgstr "Minimizar todas as janelas abertas e mostrar a área de trabalho"
 
@@ -2199,34 +2199,42 @@ msgid ""
 "items"
 msgstr "Fornece itens notificadores de estado (indicadores de aplicação) e itens de área de notificação do sistema antigos"
 
-#: plugins/tasklist/tasklist-widget.c:3171
+#: plugins/tasklist/tasklist-widget.c:3200
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Incapaz de iniciar nova instância de '%s'"
 
-#: plugins/tasklist/tasklist-widget.c:3198
+#: plugins/tasklist/tasklist-widget.c:3227
 msgid "Launch New Instance"
 msgstr "Lançar nova instância"
 
-#: plugins/tasklist/tasklist-widget.c:3953
+#: plugins/tasklist/tasklist-widget.c:3982
 msgid "Mi_nimize All"
 msgstr "Mi_nimizar todas"
 
-#: plugins/tasklist/tasklist-widget.c:3960
+#: plugins/tasklist/tasklist-widget.c:3989
 msgid "Un_minimize All"
 msgstr "Reverter _minimização"
 
-#: plugins/tasklist/tasklist-widget.c:3967
+#: plugins/tasklist/tasklist-widget.c:3996
 msgid "Ma_ximize All"
 msgstr "Ma_ximizar todas"
 
-#: plugins/tasklist/tasklist-widget.c:3974
+#: plugins/tasklist/tasklist-widget.c:4003
 msgid "_Unmaximize All"
 msgstr "_Reverter maximização"
 
-#: plugins/tasklist/tasklist-widget.c:3985
+#: plugins/tasklist/tasklist-widget.c:4014
 msgid "_Close All"
 msgstr "Fechar _todas"
+
+#: plugins/tasklist/tasklist-widget.c:5025
+msgid "all monitors"
+msgstr ""
+
+#: plugins/tasklist/tasklist-widget.c:5034
+msgid "panel's monitor"
+msgstr ""
 
 #: plugins/tasklist/tasklist.desktop.in.in:5
 msgid "Switch between open windows using buttons"
