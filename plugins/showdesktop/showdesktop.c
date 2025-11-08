@@ -87,7 +87,6 @@ show_desktop_plugin_get_property (GObject *object,
                                   GParamSpec *pspec);
 static void
 showdesktop_configure (XfcePanelPlugin *panel_plugin);
-
 static gboolean
 show_desktop_plugin_remote_event (XfcePanelPlugin *panel_plugin,
                                   const gchar *name,
