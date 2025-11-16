@@ -5,16 +5,17 @@
 # 
 # Translators:
 # Xfce Bot <transifex@xfce.org>, 2022
+# Warut Bunprasert <warut.b@disroot.org>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-14 00:47+0100\n"
+"POT-Creation-Date: 2023-05-30 00:48+0200\n"
 "PO-Revision-Date: 2022-12-22 11:35+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>, 2022\n"
-"Language-Team: Thai (https://www.transifex.com/xfce/teams/16840/th/)\n"
+"Last-Translator: Warut Bunprasert <warut.b@disroot.org>, 2025\n"
+"Language-Team: Thai (https://app.transifex.com/xfce/teams/16840/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -56,7 +57,7 @@ msgstr "แน่ใจหรือไม่ว่าคุณต้องกา
 #: ../libxfce4panel/xfce-panel-plugin.c:1085
 #: ../panel/panel-preferences-dialog.c:1418
 msgid "Remove Item"
-msgstr ""
+msgstr "ลบรายการ"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1087
 msgid ""
@@ -401,7 +402,7 @@ msgstr ""
 
 #: ../panel/panel-plugin-external.c:519
 msgid "Plugin Restart"
-msgstr ""
+msgstr "เริ่มปลั๊กอินใหม่"
 
 #: ../panel/panel-plugin-external.c:520
 #, c-format
@@ -557,7 +558,7 @@ msgstr "เลือกตัวเลือกนี้เพื่อซ่อ
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "_Reserve space on screen edges for the panel"
-msgstr ""
+msgstr "_สงวนพื้นที่ขอบหน้าจอสำหรับพาเนล"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
@@ -565,6 +566,8 @@ msgid ""
 "behind the panel. This only works when the panel is attached to a screen "
 "edge."
 msgstr ""
+"เลือกตัวเลือกนี้ถ้าคุณไม่ต้องการให้หน้าต่างที่ขยายแผ่สามารถใช้เนื้อที่ครอบคลุมพื้นที่หลังพาเนลด้วย"
+" มีผลเมื่อพาเนลวางอยู่ติดขอบหน้าจอเท่านั้น"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Au_tomatically hide the panel:"
@@ -590,7 +593,7 @@ msgstr "จำนวนแ_ถว:"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "L_ength (pixels):"
-msgstr ""
+msgstr "ความ_ยาว (พิกเซล):"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "A_utomatically increase the length"
@@ -985,7 +988,7 @@ msgstr "ฉ_ลากปุ่ม:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Show button on one _line"
-msgstr ""
+msgstr "แสดงปุ่มแถวเ_ดียว"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "_Show button title"
@@ -1061,7 +1064,7 @@ msgstr "_ตกลง"
 
 #. show an error dialog
 #: ../plugins/applicationsmenu/applicationsmenu.c:650
-#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2491
+#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2487
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "เรียกทำงานคำสั่ง \"%s\" ไม่สำเร็จ"
@@ -1120,31 +1123,31 @@ msgstr "รูปแบบกำหนดเอง"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
 msgid "Decimal"
-msgstr ""
+msgstr "ทศนิยม"
 
 #: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Sexagesimal"
-msgstr ""
+msgstr "เลขฐานหกสิบ"
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Binary time"
-msgstr ""
+msgstr "เวลาไบนารี่"
 
 #: ../plugins/clock/clock-dialog.glade.h:4
 msgid "Date, then time"
-msgstr ""
+msgstr "วันที่และเวลา"
 
 #: ../plugins/clock/clock-dialog.glade.h:5
 msgid "Time, then date"
-msgstr ""
+msgstr "เวลาและวันที่"
 
 #: ../plugins/clock/clock-dialog.glade.h:6
 msgid "Date Only"
-msgstr ""
+msgstr "วันที่เท่านั้น"
 
 #: ../plugins/clock/clock-dialog.glade.h:7
 msgid "Time Only"
-msgstr ""
+msgstr "เวลาเท่านั้น"
 
 #: ../plugins/clock/clock-dialog.glade.h:8
 msgid "Analog"
@@ -1196,6 +1199,8 @@ msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
 msgstr ""
+"หากตั้งค่าไว้ คำสั่งนี้จะถูกรันเมื่อคลิกซ้ายที่ปลั๊กอิน "
+"แทนที่จะแสดงปฏิทินปริยาย"
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Co_mmand:"
@@ -1203,7 +1208,7 @@ msgstr "_คำสั่ง:"
 
 #: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Calendar"
-msgstr ""
+msgstr "ปฏิทิน"
 
 #: ../plugins/clock/clock-dialog.glade.h:24
 #, no-c-format
@@ -1240,7 +1245,7 @@ msgstr "นาฬิกาแบบ 24 _ชั่วโมง"
 
 #: ../plugins/clock/clock-dialog.glade.h:31
 msgid "Binary mode:"
-msgstr ""
+msgstr "โหมดไบนารี:"
 
 #: ../plugins/clock/clock-dialog.glade.h:32
 msgid "Display _seconds"
@@ -1262,11 +1267,11 @@ msgstr "แสดงเส้น_ตะแกรง"
 
 #: ../plugins/clock/clock-dialog.glade.h:37
 msgid "Font:"
-msgstr ""
+msgstr "แบบอักษร:"
 
 #: ../plugins/clock/clock-dialog.glade.h:38
 msgid "Format:"
-msgstr ""
+msgstr "รูปแบบ:"
 
 #: ../plugins/clock/clock-dialog.glade.h:40
 #, no-c-format
@@ -1276,6 +1281,10 @@ msgid ""
 " the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
 "the &quot;Help&quot; page for additional information."
 msgstr ""
+"รูปแบบซึ่งกำหนดส่วนต่างๆ ของวันที่และเวลาที่จะแทรกลงในพาเนล ตัวอย่างเช่น %Y "
+"จะถูกแทนที่ด้วยปี ค.ศ., %m แทนหมายเลขเดือน และ %d แทนวันที่ ในทำนองเดียวกัน "
+"แท็ก <b></b> จะทำให้ข้อความเป็นตัวหนา ดูข้อมูลเพิ่มเติมได้ที่หน้า "
+"\"วิธีใช้\""
 
 #: ../plugins/clock/clock-dialog.glade.h:41
 msgid "Date"
@@ -1283,7 +1292,7 @@ msgstr "วันที่"
 
 #: ../plugins/clock/clock-dialog.glade.h:42
 msgid "Time"
-msgstr ""
+msgstr "เวลา"
 
 #: ../plugins/clock/clock-dialog.glade.h:43
 msgid "Clock Options"
@@ -1298,7 +1307,7 @@ msgstr "%R"
 #: ../plugins/clock/clock-digital.h:26
 msgctxt "Date"
 msgid "%Y-%m-%d"
-msgstr ""
+msgstr "%Y-%m-%d"
 
 #: ../plugins/clock/clock-digital.h:27
 msgctxt "Time"
@@ -1746,7 +1755,7 @@ msgstr "เปิดเมนูปุ่มเรียก"
 msgid "Unnamed Item"
 msgstr "รายการไม่มีชื่อ"
 
-#: ../plugins/launcher/launcher.c:1797
+#: ../plugins/launcher/launcher.c:1801
 msgid "No items"
 msgstr "ไม่มีรายการ"
 
@@ -1915,7 +1924,7 @@ msgstr "สลับพื้นที่ทำงานด้วยลูกก
 
 #: ../plugins/pager/pager-dialog.glade.h:10
 msgid "Wrap around workspaces"
-msgstr ""
+msgstr "ย้ายรอบพื้นที่ทำงาน"
 
 #: ../plugins/pager/pager-dialog.glade.h:11
 msgid "<b>Appearance</b>"
@@ -2116,7 +2125,7 @@ msgstr "ย่อเก็บหน้าต่าง"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "New Instance"
-msgstr ""
+msgstr "อินสแตนซ์ใหม่"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
 msgid "Timestamp"
@@ -2157,7 +2166,7 @@ msgstr "แสดง_มือจับ"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show _tooltips"
-msgstr ""
+msgstr "แสดง_คำแนะนำเครื่องมือ"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
@@ -2169,7 +2178,7 @@ msgstr "การกระทำเมื่อคลิกเมาส์ปุ
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "_Group windows by application"
-msgstr ""
+msgstr "_จัดกลุ่มหน้าต่างตามโปรแกรม"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Restore minimized windows to current _workspace"
@@ -2200,36 +2209,36 @@ msgstr "แสดงหน้าต่างจากทุก_จอภาพ"
 msgid "Show only _minimized windows"
 msgstr "แสดงเฉพาะหน้าต่างที่_ย่อเก็บ"
 
-#: ../plugins/tasklist/tasklist-widget.c:3119
+#: ../plugins/tasklist/tasklist-widget.c:3131
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "ไม่สามารถเปิดทำงานอินสแตนซ์ใหม่ของ '%s'"
 
-#: ../plugins/tasklist/tasklist-widget.c:3123
+#: ../plugins/tasklist/tasklist-widget.c:3135
 msgid "Error"
 msgstr "ผิดพลาด"
 
-#: ../plugins/tasklist/tasklist-widget.c:3152
+#: ../plugins/tasklist/tasklist-widget.c:3164
 msgid "Launch New Instance"
-msgstr ""
+msgstr "เริ่มอินสแตนซ์ใหม่"
 
-#: ../plugins/tasklist/tasklist-widget.c:3899
+#: ../plugins/tasklist/tasklist-widget.c:3911
 msgid "Mi_nimize All"
 msgstr "_ย่อเก็บหน้าต่างทั้งหมด"
 
-#: ../plugins/tasklist/tasklist-widget.c:3906
+#: ../plugins/tasklist/tasklist-widget.c:3918
 msgid "Un_minimize All"
 msgstr "_คืนขนาดหน้าต่างทั้งหมด"
 
-#: ../plugins/tasklist/tasklist-widget.c:3913
+#: ../plugins/tasklist/tasklist-widget.c:3925
 msgid "Ma_ximize All"
 msgstr "_ขยายแผ่หน้าต่างทั้งหมด"
 
-#: ../plugins/tasklist/tasklist-widget.c:3920
+#: ../plugins/tasklist/tasklist-widget.c:3932
 msgid "_Unmaximize All"
 msgstr "เ_ลิกขยายแผ่หน้าต่างทั้งหมด"
 
-#: ../plugins/tasklist/tasklist-widget.c:3931
+#: ../plugins/tasklist/tasklist-widget.c:3943
 msgid "_Close All"
 msgstr "ปิ_ดหน้าต่างทั้งหมด"
 
