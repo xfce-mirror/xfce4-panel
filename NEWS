@@ -1,3 +1,51 @@
+4.21.1 (2025-11-16)
+======
+- build: Rename POTFILES.in to POTFILES (for good…)
+- build: Rename POTFILES.in to POTFILES
+- showdesktop: Add remote-event to change plugin state
+- tasklist: Extend include-all-monitors option to monitors-to-include
+- launcher: Use XfceItemListView from libxfce4ui
+- prefs-dialog: Use XfceItemListView from libxfce4ui
+- wayland: Set plugins internal unless forced external
+- Implement a keep below option
+- prefs-dialog: Reset add/remove buttons sensitivity when needed
+- wayland: Minimalist management of workspace group change when unused
+- pager: Add missing signal handler disconnections
+- I18n: Update po/LINGUAS list
+- libxfce4panel: Clarify doc
+- separator: Allow manual size as opposed to just fixed or automatic 
+size
+- README.md: Add uninstall info
+- wayland: panel: Delay hiding panel window when screen layout changes
+- wayland: panel: Ensure panel window is shown at least once
+- panel: Don't show panel window too early
+- panel: Restrict X-XFCE-Unique=SCREEN to X11
+- Fix string comparison when searching for plugin dirs
+- Update README after switchover to meson
+- Remove autotools build
+- libxfce4panel: Deprecate xfce_panel_plugin_(block|unblock)_menu
+- Stop using xfce_panel_plugin_(block|unblock)_menu
+- wayland: Support multiple workspace groups where it makes sense
+- tasklist: Deactivate context menu when its button is destroyed
+- clock: Fix string leaks related to clock_time_strdup_strftime
+- x11: Let GtkSocket expand if possible
+- meson-build: Use configure_file() to generate GNU visibility files
+- libxfce4panel: Restore possibility to oversize icons
+- wayland: autohide: Try to trigger size_allocate() more reliably
+- panel: Show window when new output is connected
+- Translation Updates:
+  Albanian, Amharic, Arabic, Armenian (Armenia), Asturian, Basque,
+  Belarusian, Bengali, Bulgarian, Catalan, Chinese (China), Chinese
+  (Hong Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch,
+  Eastern Armenian, English (Australia), English (United Kingdom),
+  Estonian, Finnish, French, Galician, Georgian, German, Greek, Hebrew,
+  Hungarian, Icelandic, Indonesian, Interlingue, Italian, Japanese,
+  Kazakh, Korean, Lithuanian, Malay, Norwegian Bokmål, Norwegian
+  Nynorsk, Occitan (post 1500), Panjabi (Punjabi), Polish, Portuguese,
+  Portuguese (Brazil), Romanian, Russian, Serbian, Sinhala, Slovak,
+  Slovenian, Spanish, Swedish, Tatar, Thai, Turkish, Ukrainian, Uyghur,
+  Venetian, Vietnamese
+
 4.21.0 (2025-03-22)
 ======
 - build: Search for xdt-gen-visibility also in the working tree
