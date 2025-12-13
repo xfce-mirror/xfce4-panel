@@ -50,7 +50,7 @@ struct _WindowMenuPlugin
 
   /* settings */
   GObject *settings_dialog;
-  guint button_style : 2;
+  guint button_style;
   guint workspace_actions : 1;
   guint workspace_names : 1;
   guint urgentcy_notification : 1;
