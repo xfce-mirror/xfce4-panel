@@ -1401,10 +1401,12 @@ launcher_plugin_pack_widgets (LauncherPlugin *plugin)
 
   panel_return_if_fail (LAUNCHER_IS_PLUGIN (plugin));
 
-  /* leave when the arrow button is not visible */
   if (!gtk_widget_get_visible (plugin->arrow)
       || plugin->arrow_position == LAUNCHER_ARROW_INTERNAL)
-    return;
+    {
+      gtk_box_set_child_packing (GTK_BOX (plugin->box), plugin->button, TRUE, TRUE, 0, GTK_PACK_START);
+      return;
+    }
 
   pos = launcher_plugin_default_arrow_type (plugin);
   panel_assert (pos != LAUNCHER_ARROW_DEFAULT);
