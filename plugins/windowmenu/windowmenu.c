@@ -329,48 +329,47 @@ window_menu_plugin_set_property (GObject *object,
     case PROP_STYLE:
       button_style = g_value_get_uint (value);
       if (plugin->button_style != button_style)
-          /* button style has been changed */
+        /* button style has been changed */
         {
           /* destroy previous widget, at the same time removing it from the button */
- 
-          if(plugin->button_style == BUTTON_STYLE_ICON ||
-             plugin->button_style == BUTTON_STYLE_TEXT)
-             gtk_widget_destroy(plugin->icon);
-  
-  /* plugin->icon can reference an icon or a label widget, depending on button_style.
-   * Since at most either one is in use at a given time, why not recycle the same variable
-   * and save introducing another one? Admittingly, this might look confusing, hence this
-   * remark */
-  
+
+          if (plugin->button_style == BUTTON_STYLE_ICON || plugin->button_style == BUTTON_STYLE_TEXT)
+            gtk_widget_destroy (plugin->icon);
+
+          /* plugin->icon can reference an icon or a label widget, depending on button_style.
+           * Since at most either one is in use at a given time, why not recycle the same variable
+           * and save introducing another one? Admittingly, this might look confusing, hence this
+           * remark */
+
           plugin->button_style = button_style;
 
           /* add newly selected object to button: */
-          switch(button_style)
-          {
-          case BUTTON_STYLE_ICON:
-            plugin->icon = gtk_image_new();
-            gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
-            gtk_widget_show (plugin->icon);
-            break;
-            
-          case BUTTON_STYLE_TEXT:
+          switch (button_style)
             {
-            gchar *formatted_text;
-            
-            plugin->icon = gtk_label_new (NULL);
-            /* actually it's not an icon, but a label; see comment above */
+            case BUTTON_STYLE_ICON:
+              plugin->icon = gtk_image_new ();
+              gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
+              gtk_widget_show (plugin->icon);
+              break;
 
-            /* make sure the label is not printed in bold which is the default: */         
-            formatted_text = g_markup_printf_escaped("<span weight=\"normal\">%s</span>",_("Windows"));
-            gtk_label_set_markup(GTK_LABEL(plugin->icon), formatted_text);
-            g_free(formatted_text);
-            gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
-            window_menu_plugin_mode_changed(panel_plugin,
-                             xfce_panel_plugin_get_mode (panel_plugin));
-            gtk_widget_show (plugin->icon);
+            case BUTTON_STYLE_TEXT:
+              {
+                gchar *formatted_text;
+
+                plugin->icon = gtk_label_new (NULL);
+                /* actually it's not an icon, but a label; see comment above */
+
+                /* make sure the label is not printed in bold which is the default: */
+                formatted_text = g_markup_printf_escaped ("<span weight=\"normal\">%s</span>",_("Windows"));
+                gtk_label_set_markup (GTK_LABEL (plugin->icon), formatted_text);
+                g_free (formatted_text);
+                gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
+                window_menu_plugin_mode_changed (panel_plugin,
+                                                 xfce_panel_plugin_get_mode (panel_plugin));
+                gtk_widget_show (plugin->icon);
+              }
+              break;
             }
-            break;
-          }
 
           /* update the plugin */
           xfce_panel_plugin_set_small (panel_plugin, plugin->button_style == BUTTON_STYLE_ICON);
@@ -612,16 +611,16 @@ window_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 }
 
 static void
-window_menu_plugin_mode_changed(XfcePanelPlugin *panel_plugin, XfcePanelPluginMode mode)
+window_menu_plugin_mode_changed (XfcePanelPlugin *panel_plugin, XfcePanelPluginMode mode)
 {
   WindowMenuPlugin *plugin = WINDOW_MENU_PLUGIN (panel_plugin);
 
-  if(plugin->button_style == BUTTON_STYLE_TEXT)
-  {
-    gtk_label_set_angle (GTK_LABEL (plugin->icon), (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL) ? 270 : 0);
-    gtk_label_set_ellipsize (GTK_LABEL (plugin->icon),
-      (mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR) ? PANGO_ELLIPSIZE_END : PANGO_ELLIPSIZE_NONE);
-  }
+  if (plugin->button_style == BUTTON_STYLE_TEXT)
+    {
+      gtk_label_set_angle (GTK_LABEL (plugin->icon), (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL) ? 270 : 0);
+      gtk_label_set_ellipsize (GTK_LABEL (plugin->icon),
+                               (mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR) ? PANGO_ELLIPSIZE_END : PANGO_ELLIPSIZE_NONE);
+    }
 }
 
 static void
