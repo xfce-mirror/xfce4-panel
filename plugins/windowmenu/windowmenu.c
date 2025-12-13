@@ -618,7 +618,6 @@ window_menu_plugin_mode_changed(XfcePanelPlugin *panel_plugin, XfcePanelPluginMo
 
   if(plugin->button_style == BUTTON_STYLE_TEXT)
   {
-    /* code copied from actions.c: */
     gtk_label_set_angle (GTK_LABEL (plugin->icon), (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL) ? 270 : 0);
     gtk_label_set_ellipsize (GTK_LABEL (plugin->icon),
       (mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR) ? PANGO_ELLIPSIZE_END : PANGO_ELLIPSIZE_NONE);
