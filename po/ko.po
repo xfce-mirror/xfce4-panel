@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-08-12 12:47+0200\n"
+"POT-Creation-Date: 2025-11-08 12:52+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Junghee Lee <daemul72@gmail.com>, 2025\n"
 "Language-Team: Korean (http://app.transifex.com/xfce/xfce4-panel/language/ko/)\n"
@@ -42,7 +42,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panels;패널;창;settings;설정;preferences;기본설정;기본 설정;taskbar;작업표시줄;작업 표시줄;autohide;자동숨김;자동 숨김;application menu;프로그램메뉴;프로그램 메뉴;어플리케이션 메뉴;어플리케이션메뉴start;시작;buttons;버튼;보턴;단추;launcher;실행아이콘;실행 아이콘;notification area;알림영역;알림 영역;status;상태;icons;아이콘;plugins;플러그인;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3789
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3859
 msgid "Panel"
 msgstr "패널"
 
@@ -62,286 +62,255 @@ msgstr "알아서"
 msgid "Always"
 msgstr "항상"
 
-#: common/resources/panel-preferences-dialog.glade:81
+#: common/resources/panel-preferences-dialog.glade:71
 msgid "Horizontal"
 msgstr "수평"
 
-#: common/resources/panel-preferences-dialog.glade:84
+#: common/resources/panel-preferences-dialog.glade:74
 msgid "Vertical"
 msgstr "수직"
 
-#: common/resources/panel-preferences-dialog.glade:87
+#: common/resources/panel-preferences-dialog.glade:77
 msgid "Deskbar"
 msgstr "데스크 표시줄"
 
-#: common/resources/panel-preferences-dialog.glade:134
+#: common/resources/panel-preferences-dialog.glade:124
 msgid "None (use system style)"
 msgstr "없음(시스템 방식 사용)"
 
-#: common/resources/panel-preferences-dialog.glade:137
+#: common/resources/panel-preferences-dialog.glade:127
 msgid "Solid color"
 msgstr "단일 색상"
 
-#: common/resources/panel-preferences-dialog.glade:140
+#: common/resources/panel-preferences-dialog.glade:130
 msgid "Background image"
 msgstr "배경 그림"
 
-#: common/resources/panel-preferences-dialog.glade:146
+#: common/resources/panel-preferences-dialog.glade:136
 msgid "Panel Preferences"
 msgstr "패널 기본 설정"
 
-#: common/resources/panel-preferences-dialog.glade:163
+#: common/resources/panel-preferences-dialog.glade:153
 #: common/resources/actions-dialog.glade:82
 #: common/resources/applicationsmenu-dialog.glade:55
 #: common/resources/clock-dialog.glade:105
 #: common/resources/directorymenu-dialog.glade:34
-#: common/resources/launcher-dialog.glade:235
-#: common/resources/launcher-dialog.glade:414
+#: common/resources/launcher-dialog.glade:103
+#: common/resources/launcher-dialog.glade:270
 #: common/resources/pager-dialog.glade:97
 #: common/resources/separator-dialog.glade:58
 #: common/resources/showdesktop-dialog.glade:34
 #: common/resources/sn-dialog.glade:65
-#: common/resources/tasklist-dialog.glade:77
+#: common/resources/tasklist-dialog.glade:86
 #: common/resources/windowmenu-dialog.glade:48 panel/panel-item-dialog.c:205
 #: panel/panel-tic-tac-toe.c:110
 msgid "_Close"
 msgstr "닫기(_C)"
 
 #. help item
-#: common/resources/panel-preferences-dialog.glade:178
+#: common/resources/panel-preferences-dialog.glade:168
 #: common/resources/actions-dialog.glade:97
 #: common/resources/applicationsmenu-dialog.glade:39
 #: common/resources/clock-dialog.glade:120
 #: common/resources/directorymenu-dialog.glade:49
-#: common/resources/launcher-dialog.glade:398
+#: common/resources/launcher-dialog.glade:254
 #: common/resources/pager-dialog.glade:81
 #: common/resources/separator-dialog.glade:73
 #: common/resources/showdesktop-dialog.glade:49
-#: common/resources/tasklist-dialog.glade:93
+#: common/resources/tasklist-dialog.glade:102
 #: common/resources/windowmenu-dialog.glade:63
 #: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:3855
+#: panel/panel-window.c:3925
 msgid "_Help"
 msgstr "도움말(_H)"
 
-#: common/resources/panel-preferences-dialog.glade:223
+#: common/resources/panel-preferences-dialog.glade:213
 msgid "Profiles:"
 msgstr "프로파일:"
 
-#: common/resources/panel-preferences-dialog.glade:251
+#: common/resources/panel-preferences-dialog.glade:241
 msgid "_Backup and restore"
 msgstr "백업 및 복구(_B)"
 
-#: common/resources/panel-preferences-dialog.glade:255
+#: common/resources/panel-preferences-dialog.glade:245
 msgid "Switch between panel presets"
 msgstr "패널 프리셋을 전환합니다"
 
-#: common/resources/panel-preferences-dialog.glade:299
+#: common/resources/panel-preferences-dialog.glade:289
 msgid "Add a new panel"
 msgstr "새 패널 추가"
 
-#: common/resources/panel-preferences-dialog.glade:324
+#: common/resources/panel-preferences-dialog.glade:314
 msgid "Remove the currently selected panel"
 msgstr "현재 선택한 패널 제거"
 
-#: common/resources/panel-preferences-dialog.glade:375
-#: common/resources/panel-preferences-dialog.glade:738
+#: common/resources/panel-preferences-dialog.glade:365
+#: common/resources/panel-preferences-dialog.glade:745
 msgid "<b>General</b>"
 msgstr "<b>일반</b>"
 
-#: common/resources/panel-preferences-dialog.glade:390
+#: common/resources/panel-preferences-dialog.glade:380
 msgid "M_ode:"
 msgstr "모드(_O):"
 
-#: common/resources/panel-preferences-dialog.glade:419
+#: common/resources/panel-preferences-dialog.glade:409
 msgid "Span mo_nitors"
 msgstr "모니터 확장(_N)"
 
-#: common/resources/panel-preferences-dialog.glade:423
+#: common/resources/panel-preferences-dialog.glade:413
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "패널을 다중 모니터의 길이만큼 확장하려면 이 옵션을 선택합니다."
 
-#: common/resources/panel-preferences-dialog.glade:436
+#: common/resources/panel-preferences-dialog.glade:426
 msgid "_Lock panel"
 msgstr "패널 고정(_L)"
 
-#: common/resources/panel-preferences-dialog.glade:440
+#: common/resources/panel-preferences-dialog.glade:430
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr "패널의 손잡이를 숨기고 위치를 고정하려면 이 옵션을 선택하십시오."
 
-#: common/resources/panel-preferences-dialog.glade:453
+#: common/resources/panel-preferences-dialog.glade:443
 msgid "_Reserve space on screen edges for the panel"
 msgstr "화면 가장자리에 창 여백 공간 할당(_R)"
 
-#: common/resources/panel-preferences-dialog.glade:457
+#: common/resources/panel-preferences-dialog.glade:447
 msgid ""
-"Select this option if you don't want maximized windows to cover the area "
-"behind the panel. This only works when the panel is attached to a screen "
-"edge."
-msgstr "최대화 창이 패널 뒤 공간을 차지하지 않게 하려면 이 옵션을 선택하십시오. 이 옵션은 패널이 화면 가장자리에 붙었을 때만 동작합니다."
+"Select this option if you don't want maximized windows to overlap the panel "
+"area. This only works when the panel is attached to a screen edge and "
+"autohide is disabled."
+msgstr ""
 
-#: common/resources/panel-preferences-dialog.glade:478
+#: common/resources/panel-preferences-dialog.glade:460
+msgid "_Keep panel below windows"
+msgstr ""
+
+#: common/resources/panel-preferences-dialog.glade:464
+msgid ""
+"Select this option if you want windows to cover the panel. When autohide is "
+"enabled, panel is always on top."
+msgstr ""
+
+#: common/resources/panel-preferences-dialog.glade:485
 msgid "Au_tomatically hide the panel:"
 msgstr "패널 자동 숨김(_T):"
 
-#: common/resources/panel-preferences-dialog.glade:519
+#: common/resources/panel-preferences-dialog.glade:526
 msgid "O_utput:"
 msgstr "출력(_U):"
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
-#: common/resources/panel-preferences-dialog.glade:563
+#: common/resources/panel-preferences-dialog.glade:570
 msgid "<b>Measurements</b>"
 msgstr "<b>측정</b>"
 
-#: common/resources/panel-preferences-dialog.glade:578
+#: common/resources/panel-preferences-dialog.glade:585
 msgid "Row _size (pixels):"
 msgstr "열 높이(_S) (픽셀):"
 
-#: common/resources/panel-preferences-dialog.glade:592
+#: common/resources/panel-preferences-dialog.glade:599
 msgid "Num_ber of rows:"
 msgstr "줄 수(_B):"
 
-#: common/resources/panel-preferences-dialog.glade:606
+#: common/resources/panel-preferences-dialog.glade:613
 msgid "L_ength (pixels):"
 msgstr "길이(픽셀) (_E):"
 
-#: common/resources/panel-preferences-dialog.glade:635
+#: common/resources/panel-preferences-dialog.glade:642
 msgid "Border width (pixels):"
 msgstr "테두리 너비(픽셀):"
 
-#: common/resources/panel-preferences-dialog.glade:658
+#: common/resources/panel-preferences-dialog.glade:665
 msgid "A_utomatically increase the length"
 msgstr "길이 자동 확장(_U)"
 
-#: common/resources/panel-preferences-dialog.glade:662
+#: common/resources/panel-preferences-dialog.glade:669
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr "플러그인이 더 많은 공간을 필요로 한다면 패널의 길이를 자동으로 늘이는 이 옵션을 선택하십시오."
 
-#: common/resources/panel-preferences-dialog.glade:712
+#: common/resources/panel-preferences-dialog.glade:719
 msgid "D_isplay"
 msgstr "표시(_I)"
 
-#: common/resources/panel-preferences-dialog.glade:753
+#: common/resources/panel-preferences-dialog.glade:760
 msgid "Dark mode"
 msgstr "다크 모드"
 
-#: common/resources/panel-preferences-dialog.glade:793
+#: common/resources/panel-preferences-dialog.glade:800
 msgid "<b>Background</b>"
 msgstr "<b>배경</b>"
 
-#: common/resources/panel-preferences-dialog.glade:808
+#: common/resources/panel-preferences-dialog.glade:815
 #: common/resources/separator-dialog.glade:123
 msgid "_Style:"
 msgstr "스타일(_S):"
 
-#: common/resources/panel-preferences-dialog.glade:840
+#: common/resources/panel-preferences-dialog.glade:847
 msgid "C_olor:"
 msgstr "색(_O):"
 
-#: common/resources/panel-preferences-dialog.glade:855
+#: common/resources/panel-preferences-dialog.glade:862
 msgid "Pick a Panel Color"
 msgstr "패널 색 선택"
 
-#: common/resources/panel-preferences-dialog.glade:868
+#: common/resources/panel-preferences-dialog.glade:875
 msgid "_File:"
 msgstr "파일(_F):"
 
-#: common/resources/panel-preferences-dialog.glade:881
+#: common/resources/panel-preferences-dialog.glade:888
 msgid "Select A Background Image"
 msgstr "배경 그림 선택"
 
-#: common/resources/panel-preferences-dialog.glade:908
+#: common/resources/panel-preferences-dialog.glade:915
 msgid "<b>Icons</b>"
 msgstr "<b>아이콘</b>"
 
-#: common/resources/panel-preferences-dialog.glade:922
+#: common/resources/panel-preferences-dialog.glade:929
 msgid "Adjust size au_tomatically"
 msgstr "크기 자동 조정(_T)"
 
-#: common/resources/panel-preferences-dialog.glade:959
+#: common/resources/panel-preferences-dialog.glade:966
 msgid "Fixed icon _size (pixels):"
 msgstr "아이콘 크기 고정(_S) (픽셀):"
 
-#: common/resources/panel-preferences-dialog.glade:1002
+#: common/resources/panel-preferences-dialog.glade:1009
 msgid "<b>Opacity</b>"
 msgstr "<b>투명도</b>"
 
-#: common/resources/panel-preferences-dialog.glade:1028
+#: common/resources/panel-preferences-dialog.glade:1035
 msgid "Configure..."
 msgstr "설정..."
 
-#: common/resources/panel-preferences-dialog.glade:1066
+#: common/resources/panel-preferences-dialog.glade:1073
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr "<b>합성 비활성화 상태</b>\n패널의 투명도 설정을 위해 창 관리자에서 합성을 활성화합니다."
 
 #. I18N: label for the enter transparency slider
-#: common/resources/panel-preferences-dialog.glade:1106
+#: common/resources/panel-preferences-dialog.glade:1113
 msgid "_Enter:"
 msgstr "커서 내부 위치(_E):"
 
 #. I18N: label for the leave transparency slider
-#: common/resources/panel-preferences-dialog.glade:1133
+#: common/resources/panel-preferences-dialog.glade:1140
 msgid "_Leave:"
 msgstr "커서 외부 위치(_L):"
 
-#: common/resources/panel-preferences-dialog.glade:1146
+#: common/resources/panel-preferences-dialog.glade:1153
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "마우스 포인터가 패널 위로 올라가지 않았을 때의 투명도입니다. 0은 완전히 투명해지고 100은 완전히 불투명해집니다."
 
-#: common/resources/panel-preferences-dialog.glade:1173
+#: common/resources/panel-preferences-dialog.glade:1180
 msgid "Appeara_nce"
 msgstr "모양새(_N)"
 
-#: common/resources/panel-preferences-dialog.glade:1223
-#: common/resources/launcher-dialog.glade:219 panel/panel-dialogs.c:157
-#: panel/panel-item-dialog.c:197
-msgid "_Add"
-msgstr "추가(_A)"
-
-#: common/resources/panel-preferences-dialog.glade:1228
-msgid "Add new item to this panel"
-msgstr "패널에 새 항목 추가"
-
-#. remove
-#: common/resources/panel-preferences-dialog.glade:1240
-#: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:353
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1081
-#: plugins/launcher/launcher-dialog.c:836
-msgid "_Remove"
-msgstr "제거(_R)"
-
-#: common/resources/panel-preferences-dialog.glade:1245
-msgid "Remove currently selected item"
-msgstr "현재 선택한 항목 제거"
-
-#: common/resources/panel-preferences-dialog.glade:1261
-#: common/resources/launcher-dialog.glade:559
-msgid "Edit the currently selected item"
-msgstr "현재 선택한 항목 편집"
-
-#: common/resources/panel-preferences-dialog.glade:1282
-msgid "Show about information of the currently selected item"
-msgstr "현재 선택한 항목의 정보에 대해 표시"
-
-#: common/resources/panel-preferences-dialog.glade:1325
-#: common/resources/launcher-dialog.glade:509
-msgid "Move currently selected item up by one row"
-msgstr "현재 선택한 목록을 한 줄 위로 옮기기"
-
-#: common/resources/panel-preferences-dialog.glade:1346
-#: common/resources/launcher-dialog.glade:529
-msgid "Move currently selected item down by one row"
-msgstr "현재 선택한 목록을 한 줄 아래로 옮기기"
-
-#: common/resources/panel-preferences-dialog.glade:1380
+#: common/resources/panel-preferences-dialog.glade:1208
 msgid "Ite_ms"
 msgstr "항목(_M)"
 
@@ -384,7 +353,7 @@ msgid "Custo_m title:"
 msgstr "개별 제목(_M):"
 
 #: common/resources/actions-dialog.glade:255
-#: common/resources/launcher-dialog.glade:667
+#: common/resources/launcher-dialog.glade:306
 msgid "General"
 msgstr "일반"
 
@@ -453,7 +422,7 @@ msgstr "메뉴에서 일반적 프로그램 이름을 보이려면 이 옵션을
 #: common/resources/clock-dialog.glade:405
 #: common/resources/directorymenu-dialog.glade:150
 #: common/resources/separator-dialog.glade:222
-#: common/resources/tasklist-dialog.glade:257
+#: common/resources/tasklist-dialog.glade:266
 #: common/resources/windowmenu-dialog.glade:206
 msgid "Appearance"
 msgstr "모양새"
@@ -704,7 +673,7 @@ msgid "_File Pattern:"
 msgstr "파일 패턴(_F):"
 
 #: common/resources/directorymenu-dialog.glade:316
-#: common/resources/tasklist-dialog.glade:492
+#: common/resources/tasklist-dialog.glade:529
 #: common/resources/windowmenu-dialog.glade:260
 msgid "Filtering"
 msgstr "필터링"
@@ -733,91 +702,55 @@ msgstr "남"
 msgid "Inside Button"
 msgstr "안쪽 단추"
 
-#: common/resources/launcher-dialog.glade:96
-msgid "Up"
-msgstr "위"
-
-#: common/resources/launcher-dialog.glade:105
-msgid "Down"
-msgstr "아래"
-
-#: common/resources/launcher-dialog.glade:120
-msgid "_Edit Item"
-msgstr "항목 편집(_E)"
-
-#: common/resources/launcher-dialog.glade:130
-msgid "D_elete Item"
-msgstr "항목 제거(_E)"
-
-#: common/resources/launcher-dialog.glade:146
-msgid "Add Appli_cation"
-msgstr "프로그램 추가(_C)"
-
-#: common/resources/launcher-dialog.glade:162
-msgid "New _Application"
-msgstr "새 프로그램(_A)"
-
-#: common/resources/launcher-dialog.glade:172
-msgid "New _Link"
-msgstr "새 연결(_L)"
-
-#: common/resources/launcher-dialog.glade:198 panel/panel-item-dialog.c:192
+#: common/resources/launcher-dialog.glade:66 panel/panel-item-dialog.c:192
 msgid "Add New Items"
 msgstr "새 항목 추가"
 
-#: common/resources/launcher-dialog.glade:205
-#: common/resources/launcher-dialog.glade:599
+#: common/resources/launcher-dialog.glade:73
 msgid "Add one or more existing items to the launcher"
 msgstr "하나 이상의 존재하는 항목을 실행 아이콘에 추가"
 
-#: common/resources/launcher-dialog.glade:272 panel/panel-item-dialog.c:221
+#: common/resources/launcher-dialog.glade:87 panel/panel-dialogs.c:157
+#: panel/panel-item-dialog.c:197
+msgid "_Add"
+msgstr "추가(_A)"
+
+#: common/resources/launcher-dialog.glade:140 panel/panel-item-dialog.c:221
 msgid "_Search:"
 msgstr "검색(_S):"
 
-#: common/resources/launcher-dialog.glade:379
+#: common/resources/launcher-dialog.glade:235
 #: plugins/launcher/launcher.desktop.in.in:4
 msgid "Launcher"
 msgstr "실행 아이콘"
 
-#: common/resources/launcher-dialog.glade:579
-msgid "Delete the currently selected item"
-msgstr "현재 선택한 항목 삭제"
-
-#: common/resources/launcher-dialog.glade:619
-msgid "Add a new empty item"
-msgstr "새 빈 항목 추가"
-
-#: common/resources/launcher-dialog.glade:639
-msgid "Add a new hyperlink"
-msgstr "새 하이퍼링크 추가"
-
-#: common/resources/launcher-dialog.glade:682
+#: common/resources/launcher-dialog.glade:321
 msgid "Disable t_ooltips"
 msgstr "풍선 도움말 비활성화(_O)"
 
-#: common/resources/launcher-dialog.glade:686
+#: common/resources/launcher-dialog.glade:325
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
 msgstr "패널 단추나 메뉴 항목 위로 마우스 포인터를 옮길 때 풍선 도움말 표시를 비활성화하려면 이 옵션을 선택합니다."
 
-#: common/resources/launcher-dialog.glade:698
+#: common/resources/launcher-dialog.glade:337
 msgid "Show _label instead of icon"
 msgstr "아이콘 대신 레이블 표시(_L)"
 
-#: common/resources/launcher-dialog.glade:713
+#: common/resources/launcher-dialog.glade:352
 msgid "Show last _used item in panel"
 msgstr "최근 사용된 항목을 패널에 표시(_U)"
 
-#: common/resources/launcher-dialog.glade:717
+#: common/resources/launcher-dialog.glade:356
 msgid "Select this option to move the clicked menu item to the panel."
 msgstr "누른 메뉴 항목을 패널에 옮기려면 이 옵션을 선택합니다."
 
-#: common/resources/launcher-dialog.glade:736
+#: common/resources/launcher-dialog.glade:375
 msgid "_Arrow button position:"
 msgstr "화살표 단추 위치(_A):"
 
-#: common/resources/launcher-dialog.glade:779
+#: common/resources/launcher-dialog.glade:418
 msgid "Advanced"
 msgstr "고급"
 
@@ -884,7 +817,7 @@ msgid "Si_ze:"
 msgstr "크기(_Z):"
 
 #: common/resources/showdesktop-dialog.glade:18
-#: plugins/showdesktop/showdesktop.c:322
+#: plugins/showdesktop/showdesktop.c:327
 #: plugins/showdesktop/showdesktop.desktop.in.in:4
 msgid "Show Desktop"
 msgstr "데스크톱 표시"
@@ -1030,65 +963,65 @@ msgstr "제목과 창 제목 모으기"
 msgid "None, allow drag-and-drop"
 msgstr "아니오, 끌어 놓기를 허용합니다"
 
-#: common/resources/tasklist-dialog.glade:61
+#: common/resources/tasklist-dialog.glade:70
 #: plugins/tasklist/tasklist.desktop.in.in:4
 msgid "Window Buttons"
 msgstr "창 단추"
 
-#: common/resources/tasklist-dialog.glade:143
+#: common/resources/tasklist-dialog.glade:152
 msgid "Show button _labels"
 msgstr "단추 이름 표시(_L)"
 
-#: common/resources/tasklist-dialog.glade:159
+#: common/resources/tasklist-dialog.glade:168
 msgid "Show _flat buttons"
 msgstr "밋밋한 단추로 표시(_F)"
 
-#: common/resources/tasklist-dialog.glade:175
+#: common/resources/tasklist-dialog.glade:184
 msgid "Show _handle"
 msgstr "손잡이 표시(_H)"
 
-#: common/resources/tasklist-dialog.glade:191
+#: common/resources/tasklist-dialog.glade:200
 msgid "Show _tooltips"
 msgstr "풍선 도움말 표시(_T)"
 
-#: common/resources/tasklist-dialog.glade:214
+#: common/resources/tasklist-dialog.glade:223
 msgid "Sorting _order:"
 msgstr "정렬 순서(_O):"
 
-#: common/resources/tasklist-dialog.glade:297
+#: common/resources/tasklist-dialog.glade:306
 msgid "Mi_ddle click action:"
 msgstr "가운데 단추 누름 동작(_D):"
 
-#: common/resources/tasklist-dialog.glade:335
+#: common/resources/tasklist-dialog.glade:344
 msgid "_Group windows by application"
 msgstr "프로그램 단위로 창 묶기(_G)"
 
-#: common/resources/tasklist-dialog.glade:351
+#: common/resources/tasklist-dialog.glade:360
 msgid "Restore minimized windows to current _workspace"
 msgstr "현재 작업 공간에 숨겨둔 창 표시(_W)"
 
-#: common/resources/tasklist-dialog.glade:367
+#: common/resources/tasklist-dialog.glade:376
 msgid "D_raw window frame when hovering a button"
 msgstr "단추 위에 커서 올려두었을 때 창 틀 표시(_R)"
 
-#: common/resources/tasklist-dialog.glade:383
+#: common/resources/tasklist-dialog.glade:392
 msgid "_Switch windows using the mouse wheel"
 msgstr "마우스 휠로 창 전환(_S)"
 
-#: common/resources/tasklist-dialog.glade:405
+#: common/resources/tasklist-dialog.glade:414
 msgid "Behaviour"
 msgstr "행동"
 
-#: common/resources/tasklist-dialog.glade:438
+#: common/resources/tasklist-dialog.glade:447
 #: common/resources/windowmenu-dialog.glade:239
 msgid "Show windows from _all workspaces"
 msgstr "모든 작업 공간의 창 표시(_A)"
 
-#: common/resources/tasklist-dialog.glade:454
-msgid "Show windows from all mo_nitors"
-msgstr "모든 모니터의 창 표시(_N)"
-
 #: common/resources/tasklist-dialog.glade:470
+msgid "Show windows _from:"
+msgstr ""
+
+#: common/resources/tasklist-dialog.glade:507
 msgid "Show only _minimized windows"
 msgstr "숨겨둔 창만 표시(_M)"
 
@@ -1121,8 +1054,14 @@ msgstr "작업 공간 이름 표시(_N)"
 msgid "Enable _urgency notification"
 msgstr "긴급 알림 활성화(_U)"
 
+#. I18N: monitor name in the output selector
+#: common/panel-utils.c:425
+#, c-format
+msgid "Monitor %d"
+msgstr "모니터 %d"
+
 #: libxfce4panel/xfce-panel-plugin.c:1109
-#: panel/panel-preferences-dialog.c:1541
+#: panel/panel-preferences-dialog.c:1499
 msgid "Remove"
 msgstr "제거"
 
@@ -1132,7 +1071,7 @@ msgid ""
 msgstr "항목을 패널에서 제거하면 설정도 지워집니다."
 
 #: libxfce4panel/xfce-panel-plugin.c:1114
-#: panel/panel-preferences-dialog.c:1548
+#: panel/panel-preferences-dialog.c:1506
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "\"%s\"을(를) 정말로 없애시렵니까?"
@@ -1143,7 +1082,7 @@ msgid "_Properties"
 msgstr "속성(_P)"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3864
+#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3934
 msgid "_About"
 msgstr "정보(_A)"
 
@@ -1152,22 +1091,29 @@ msgstr "정보(_A)"
 msgid "_Move"
 msgstr "이동(_M)"
 
+#. remove
+#: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:354
+#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1076
+#: plugins/launcher/launcher-dialog.c:935
+msgid "_Remove"
+msgstr "제거(_R)"
+
 #: libxfce4panel/xfce-panel-plugin.c:1292
 msgid "Pane_l"
 msgstr "패널(_L)"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3801
+#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3871
 msgid "Add _New Items..."
 msgstr "새 항목 추가(_N)..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3812
+#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3882
 msgid "Panel Pr_eferences..."
 msgstr "패널 기본 설정(_E)..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3839
+#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3909
 msgid "Log _Out"
 msgstr "로그아웃(_O)"
 
@@ -1294,14 +1240,14 @@ msgstr "실행"
 msgid "Failed to launch the migration application"
 msgstr "마이그레이션 프로그램을 실행하는데 실패했습니다"
 
-#: panel/panel-application.c:343
+#: panel/panel-application.c:344
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr "\"%s\" 플러그인을 불러올 수 없습니다. xfce4-panel 설정에서 제거하시렵니까?"
 
-#: panel/panel-application.c:345
+#: panel/panel-application.c:346
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -1311,45 +1257,45 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr "현재 xfce4-panel 설정에 이 플러그인이 있지만, 아마도 설치 문제 때문에 불러올 수 없는 것 같습니다. 어떤 조치를 취하고 있는지 안다면 완전히 제고할 수 있습니다. 그렇지 않으면 설치 상태를 확인하고 xfce4-panel 을 다시 시작해보기 전, 이 프로그램을 빠져 나간 후 %s을(를) 활용하여 현재 설정을 백업하시는게 좋습니다."
 
-#: panel/panel-application.c:352
+#: panel/panel-application.c:353
 msgid "Plugin loading failure"
 msgstr "플러그인 불러오기 실패"
 
-#: panel/panel-application.c:353
+#: panel/panel-application.c:354
 msgid "_Quit"
 msgstr "종료(_Q)"
 
-#: panel/panel-application.c:1033
+#: panel/panel-application.c:1034
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "패널에 새 실행 아이콘 플러그인을 만들고 파일을 메뉴 항목으로 넣습니다."
 
-#: panel/panel-application.c:1036
+#: panel/panel-application.c:1037
 msgid "Create _Launcher"
 msgstr "실행 아이콘 만들기(_L)"
 
-#: panel/panel-application.c:1037
+#: panel/panel-application.c:1038
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "데스크톱 파일 %d개에 대한 새 실행 아이콘 만들기"
 
-#: panel/panel-application.c:1804
+#: panel/panel-application.c:1805
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "세션 매니저 없이 X를 시작했습니다. 나가기를 누르면 X 서버가 닫힙니다."
 
-#: panel/panel-application.c:1807
+#: panel/panel-application.c:1808
 msgid "Quit"
 msgstr "끝내기"
 
-#: panel/panel-application.c:1807
+#: panel/panel-application.c:1808
 msgid "Are you sure you want to quit the panel?"
 msgstr "정말 패널을 종료하시렵니까?"
 
-#: panel/panel-application.c:1815
+#: panel/panel-application.c:1816
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" 명령을 실행하지 못 했습니다."
@@ -1393,7 +1339,7 @@ msgstr "취소(_C)"
 msgid "Please choose a panel for the new plugin:"
 msgstr "새 플러그인을 둘 패널을 선택하십시오:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1028
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1023
 #, c-format
 msgid "Panel %d"
 msgstr "패널 %d"
@@ -1438,39 +1384,42 @@ msgstr "플러그인 다시 시작"
 msgid "_Execute"
 msgstr "실행(_E)"
 
-#: panel/panel-preferences-dialog.c:575
+#: panel/panel-preferences-dialog.c:342
+msgctxt "plugin context menu"
+msgid "_About"
+msgstr "정보(_A)"
+
+#: panel/panel-preferences-dialog.c:346
+msgid "Show about information of the currently selected item"
+msgstr "현재 선택한 항목의 정보에 대해 표시"
+
+#: panel/panel-preferences-dialog.c:580
 msgid "Automatic"
 msgstr "자동"
 
-#: panel/panel-preferences-dialog.c:584
+#: panel/panel-preferences-dialog.c:589
 msgid "Primary"
 msgstr "우선 순위"
 
-#. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:603
-#, c-format
-msgid "Monitor %d"
-msgstr "모니터 %d"
-
-#: panel/panel-preferences-dialog.c:1080
+#: panel/panel-preferences-dialog.c:1075
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "패널과 플러그인 환경설정을 완전히 제거합니다"
 
-#: panel/panel-preferences-dialog.c:1089
+#: panel/panel-preferences-dialog.c:1084
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "패널 %d을(를) 정말로 없애시렵니까?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1386
+#: panel/panel-preferences-dialog.c:1376
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(외부)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1391
+#: panel/panel-preferences-dialog.c:1381
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1479,21 +1428,22 @@ msgstr "내부 이름: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1403
+#: panel/panel-preferences-dialog.c:1393
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "내부 이름: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1550
+#: panel/panel-preferences-dialog.c:1508
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "항목을 패널에서 제거하면 완전히 잃게 됩니다."
 
-#: panel/panel-preferences-dialog.c:1554
+#: panel/panel-preferences-dialog.c:1512
+#: plugins/launcher/launcher-dialog.c:930
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "항목 %d개를 정말로 제거하시렵니까?"
 
-#: panel/panel-preferences-dialog.c:1556
+#: panel/panel-preferences-dialog.c:1514
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "패널에서 제거하면 완전히 잃어버립니다."
 
@@ -1521,7 +1471,7 @@ msgstr "숙련자"
 msgid "Expert"
 msgstr "전문가"
 
-#: panel/panel-window.c:3826
+#: panel/panel-window.c:3896
 msgid "_Lock Panel"
 msgstr "패널 고정(_L)"
 
@@ -2151,22 +2101,32 @@ msgstr "이름 없는 항목"
 msgid "No items"
 msgstr "항목 없음"
 
-#: plugins/launcher/launcher-dialog.c:776
+#: plugins/launcher/launcher-dialog.c:611
 msgid "Failed to open desktop item editor"
 msgstr "데스크톱 항목 편집기를 여는데 실패했습니다"
 
-#: plugins/launcher/launcher-dialog.c:837
-msgid "If you delete an item, it will be permanently removed"
-msgstr "항목을 삭제하면, 완전히 제거합니다"
-
-#: plugins/launcher/launcher-dialog.c:847
+#: plugins/launcher/launcher-dialog.c:922
 msgid "Unnamed item"
 msgstr "이름 없는 항목"
 
-#: plugins/launcher/launcher-dialog.c:849
+#: plugins/launcher/launcher-dialog.c:923
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "\"%s\"을(를) 정말 제거하시렵니까?"
+
+#: plugins/launcher/launcher-dialog.c:936
+msgid "If you delete an item, it will be permanently removed"
+msgstr "항목을 삭제하면, 완전히 제거합니다"
+
+#: plugins/launcher/launcher-dialog.c:1033
+#: plugins/launcher/launcher-dialog.c:1034
+msgid "Add a new empty item"
+msgstr "새 빈 항목 추가"
+
+#: plugins/launcher/launcher-dialog.c:1047
+#: plugins/launcher/launcher-dialog.c:1048
+msgid "Add a new hyperlink"
+msgstr "새 하이퍼링크 추가"
 
 #: plugins/launcher/launcher.desktop.in.in:5
 msgid "Program launcher with optional menu"
@@ -2176,7 +2136,7 @@ msgstr "선택 메뉴가 있는 프로그램 실행 아이콘입니다"
 msgid "Unable to open the workspace settings"
 msgstr "작업 공간 설정을 열 수 없습니다"
 
-#: plugins/pager/pager-buttons.c:624 plugins/windowmenu/windowmenu.c:946
+#: plugins/pager/pager-buttons.c:628 plugins/windowmenu/windowmenu.c:959
 #, c-format
 msgid "Workspace %d"
 msgstr "작업 공간 %d"
@@ -2189,11 +2149,11 @@ msgstr "가상 데스크톱을 전환합니다"
 msgid "Adds a separator or space between panel items"
 msgstr "항목 사이에 빈 공간이나 구분선을 추가합니다"
 
-#: plugins/showdesktop/showdesktop.c:317
+#: plugins/showdesktop/showdesktop.c:322
 msgid "Restore the minimized windows"
 msgstr "숨긴 창 복원"
 
-#: plugins/showdesktop/showdesktop.c:319
+#: plugins/showdesktop/showdesktop.c:324
 msgid "Minimize all open windows and show the desktop"
 msgstr "모든 창을 최소화하고 데스크톱 표시"
 
@@ -2239,61 +2199,69 @@ msgid ""
 "items"
 msgstr "상태 알림 항목(프로그램 표시)과 구형 시스템 트레이 항목을 나타냅니다"
 
-#: plugins/tasklist/tasklist-widget.c:3156
+#: plugins/tasklist/tasklist-widget.c:3200
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "새 '%s' 인스턴스를 시작할 수 없습니다"
 
-#: plugins/tasklist/tasklist-widget.c:3183
+#: plugins/tasklist/tasklist-widget.c:3227
 msgid "Launch New Instance"
 msgstr "새 인스턴스 실행"
 
-#: plugins/tasklist/tasklist-widget.c:3938
+#: plugins/tasklist/tasklist-widget.c:3982
 msgid "Mi_nimize All"
 msgstr "모두 최소화(_N)"
 
-#: plugins/tasklist/tasklist-widget.c:3945
+#: plugins/tasklist/tasklist-widget.c:3989
 msgid "Un_minimize All"
 msgstr "모두 최소화 취소(_M)"
 
-#: plugins/tasklist/tasklist-widget.c:3952
+#: plugins/tasklist/tasklist-widget.c:3996
 msgid "Ma_ximize All"
 msgstr "모두 최대화(_X)"
 
-#: plugins/tasklist/tasklist-widget.c:3959
+#: plugins/tasklist/tasklist-widget.c:4003
 msgid "_Unmaximize All"
 msgstr "모두 최대화 취소(_U)"
 
-#: plugins/tasklist/tasklist-widget.c:3970
+#: plugins/tasklist/tasklist-widget.c:4014
 msgid "_Close All"
 msgstr "모두 닫기(_C)"
+
+#: plugins/tasklist/tasklist-widget.c:5025
+msgid "all monitors"
+msgstr ""
+
+#: plugins/tasklist/tasklist-widget.c:5034
+msgid "panel's monitor"
+msgstr ""
 
 #: plugins/tasklist/tasklist.desktop.in.in:5
 msgid "Switch between open windows using buttons"
 msgstr "단추를 사용하여 열려있는 창을 전환합니다"
 
-#: plugins/windowmenu/windowmenu.c:725
+#: plugins/windowmenu/windowmenu.c:738
 msgid "Desktop"
 msgstr "데스크톱"
 
-#: plugins/windowmenu/windowmenu.c:1341
+#: plugins/windowmenu/windowmenu.c:1354
 msgid "No Windows"
 msgstr "창 없음"
 
-#: plugins/windowmenu/windowmenu.c:1356
+#: plugins/windowmenu/windowmenu.c:1369
 msgid "Urgent Windows"
 msgstr "긴급 창"
 
-#: plugins/windowmenu/windowmenu.c:1407
+#: plugins/windowmenu/windowmenu.c:1420
 msgid "Add Workspace"
 msgstr "작업 공간 추가"
 
-#: plugins/windowmenu/windowmenu.c:1429
+#: plugins/windowmenu/windowmenu.c:1442
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "작업 공간 \"%s\" 제거"
 
-#: plugins/windowmenu/windowmenu.c:1431
+#: plugins/windowmenu/windowmenu.c:1444
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "작업 공간 %d번 제거"

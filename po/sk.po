@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-07-18 10:56+0200\n"
+"POT-Creation-Date: 2025-11-08 12:52+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: menom menom, 2024-2025\n"
 "Language-Team: Slovak (http://app.transifex.com/xfce/xfce4-panel/language/sk/)\n"
@@ -44,7 +44,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panely;nastavenia;predvoľby;panel úloh;automatické;skrytie;skrývanie;ponuka;aplikácií;štart;spúšťacie;tlačidlá;spúšťač;oblasť;oznámení;upozornení;stav;ikony;zásuvné;moduly;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3734
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3859
 msgid "Panel"
 msgstr "Panel"
 
@@ -64,286 +64,255 @@ msgstr "Inteligentne"
 msgid "Always"
 msgstr "Vždy"
 
-#: common/resources/panel-preferences-dialog.glade:81
+#: common/resources/panel-preferences-dialog.glade:71
 msgid "Horizontal"
 msgstr "Vodorovná"
 
-#: common/resources/panel-preferences-dialog.glade:84
+#: common/resources/panel-preferences-dialog.glade:74
 msgid "Vertical"
 msgstr "Zvislá"
 
-#: common/resources/panel-preferences-dialog.glade:87
+#: common/resources/panel-preferences-dialog.glade:77
 msgid "Deskbar"
 msgstr "Pracovná lišta"
 
-#: common/resources/panel-preferences-dialog.glade:134
+#: common/resources/panel-preferences-dialog.glade:124
 msgid "None (use system style)"
 msgstr "Žiadny (použiť systémový štýl)"
 
-#: common/resources/panel-preferences-dialog.glade:137
+#: common/resources/panel-preferences-dialog.glade:127
 msgid "Solid color"
 msgstr "Jednofarebný"
 
-#: common/resources/panel-preferences-dialog.glade:140
+#: common/resources/panel-preferences-dialog.glade:130
 msgid "Background image"
 msgstr "Obrázok pozadia"
 
-#: common/resources/panel-preferences-dialog.glade:146
+#: common/resources/panel-preferences-dialog.glade:136
 msgid "Panel Preferences"
 msgstr "Predvoľby panela"
 
-#: common/resources/panel-preferences-dialog.glade:163
+#: common/resources/panel-preferences-dialog.glade:153
 #: common/resources/actions-dialog.glade:82
 #: common/resources/applicationsmenu-dialog.glade:55
 #: common/resources/clock-dialog.glade:105
 #: common/resources/directorymenu-dialog.glade:34
-#: common/resources/launcher-dialog.glade:235
-#: common/resources/launcher-dialog.glade:414
+#: common/resources/launcher-dialog.glade:103
+#: common/resources/launcher-dialog.glade:270
 #: common/resources/pager-dialog.glade:97
-#: common/resources/separator-dialog.glade:54
+#: common/resources/separator-dialog.glade:58
 #: common/resources/showdesktop-dialog.glade:34
 #: common/resources/sn-dialog.glade:65
-#: common/resources/tasklist-dialog.glade:77
+#: common/resources/tasklist-dialog.glade:86
 #: common/resources/windowmenu-dialog.glade:48 panel/panel-item-dialog.c:205
 #: panel/panel-tic-tac-toe.c:110
 msgid "_Close"
 msgstr "_Zatvoriť"
 
 #. help item
-#: common/resources/panel-preferences-dialog.glade:178
+#: common/resources/panel-preferences-dialog.glade:168
 #: common/resources/actions-dialog.glade:97
 #: common/resources/applicationsmenu-dialog.glade:39
 #: common/resources/clock-dialog.glade:120
 #: common/resources/directorymenu-dialog.glade:49
-#: common/resources/launcher-dialog.glade:398
+#: common/resources/launcher-dialog.glade:254
 #: common/resources/pager-dialog.glade:81
-#: common/resources/separator-dialog.glade:69
+#: common/resources/separator-dialog.glade:73
 #: common/resources/showdesktop-dialog.glade:49
-#: common/resources/tasklist-dialog.glade:93
+#: common/resources/tasklist-dialog.glade:102
 #: common/resources/windowmenu-dialog.glade:63
 #: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:3800
+#: panel/panel-window.c:3925
 msgid "_Help"
 msgstr "_Pomocník"
 
-#: common/resources/panel-preferences-dialog.glade:223
+#: common/resources/panel-preferences-dialog.glade:213
 msgid "Profiles:"
 msgstr "Profily:"
 
-#: common/resources/panel-preferences-dialog.glade:251
+#: common/resources/panel-preferences-dialog.glade:241
 msgid "_Backup and restore"
 msgstr "_Zálohovať a obnoviť"
 
-#: common/resources/panel-preferences-dialog.glade:255
+#: common/resources/panel-preferences-dialog.glade:245
 msgid "Switch between panel presets"
 msgstr "Prepínanie medzi predvoľbami panelu"
 
-#: common/resources/panel-preferences-dialog.glade:299
+#: common/resources/panel-preferences-dialog.glade:289
 msgid "Add a new panel"
 msgstr "Pridať nový panel"
 
-#: common/resources/panel-preferences-dialog.glade:324
+#: common/resources/panel-preferences-dialog.glade:314
 msgid "Remove the currently selected panel"
 msgstr "Odstrániť aktuálne vybraný panel"
 
-#: common/resources/panel-preferences-dialog.glade:375
-#: common/resources/panel-preferences-dialog.glade:738
+#: common/resources/panel-preferences-dialog.glade:365
+#: common/resources/panel-preferences-dialog.glade:745
 msgid "<b>General</b>"
 msgstr "<b>Všeobecné</b>"
 
-#: common/resources/panel-preferences-dialog.glade:390
+#: common/resources/panel-preferences-dialog.glade:380
 msgid "M_ode:"
 msgstr "R_ežim:"
 
-#: common/resources/panel-preferences-dialog.glade:419
+#: common/resources/panel-preferences-dialog.glade:409
 msgid "Span mo_nitors"
 msgstr "Roztiahnuť cez viac mo_nitorov"
 
-#: common/resources/panel-preferences-dialog.glade:423
+#: common/resources/panel-preferences-dialog.glade:413
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Túto možnosť vyberte pre rozšírenie panela cez viac monitorov."
 
-#: common/resources/panel-preferences-dialog.glade:436
+#: common/resources/panel-preferences-dialog.glade:426
 msgid "_Lock panel"
 msgstr "_Zamknúť panel"
 
-#: common/resources/panel-preferences-dialog.glade:440
+#: common/resources/panel-preferences-dialog.glade:430
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr "Vyberte túto možnosť pre skrytie ušiek panela a uzamknutie pozície"
 
-#: common/resources/panel-preferences-dialog.glade:453
+#: common/resources/panel-preferences-dialog.glade:443
 msgid "_Reserve space on screen edges for the panel"
 msgstr "_Vyhradiť miesto na okrajoch obrazovky pre panel"
 
-#: common/resources/panel-preferences-dialog.glade:457
+#: common/resources/panel-preferences-dialog.glade:447
 msgid ""
-"Select this option if you don't want maximized windows to cover the area "
-"behind the panel. This only works when the panel is attached to a screen "
-"edge."
-msgstr "Túto možnosť vyberte, ak nechcete, aby maximalizované okná pokrývali oblasť za panelom. Toto funguje iba vtedy, keď je panel pripevnený k okraju obrazovky."
+"Select this option if you don't want maximized windows to overlap the panel "
+"area. This only works when the panel is attached to a screen edge and "
+"autohide is disabled."
+msgstr ""
 
-#: common/resources/panel-preferences-dialog.glade:478
+#: common/resources/panel-preferences-dialog.glade:460
+msgid "_Keep panel below windows"
+msgstr ""
+
+#: common/resources/panel-preferences-dialog.glade:464
+msgid ""
+"Select this option if you want windows to cover the panel. When autohide is "
+"enabled, panel is always on top."
+msgstr ""
+
+#: common/resources/panel-preferences-dialog.glade:485
 msgid "Au_tomatically hide the panel:"
 msgstr "Au_tomaticky skryť panel:"
 
-#: common/resources/panel-preferences-dialog.glade:519
+#: common/resources/panel-preferences-dialog.glade:526
 msgid "O_utput:"
 msgstr "_Výstup:"
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
-#: common/resources/panel-preferences-dialog.glade:563
+#: common/resources/panel-preferences-dialog.glade:570
 msgid "<b>Measurements</b>"
 msgstr "<b>Rozmery</b>"
 
-#: common/resources/panel-preferences-dialog.glade:578
+#: common/resources/panel-preferences-dialog.glade:585
 msgid "Row _size (pixels):"
 msgstr "_Veľkosť riadka (pixely):"
 
-#: common/resources/panel-preferences-dialog.glade:592
+#: common/resources/panel-preferences-dialog.glade:599
 msgid "Num_ber of rows:"
 msgstr "Počet _riadkov:"
 
-#: common/resources/panel-preferences-dialog.glade:606
+#: common/resources/panel-preferences-dialog.glade:613
 msgid "L_ength (pixels):"
 msgstr "_Dĺžka (v pixeloch):"
 
-#: common/resources/panel-preferences-dialog.glade:635
+#: common/resources/panel-preferences-dialog.glade:642
 msgid "Border width (pixels):"
 msgstr "Šírka orámovania (v pixeloch):"
 
-#: common/resources/panel-preferences-dialog.glade:658
+#: common/resources/panel-preferences-dialog.glade:665
 msgid "A_utomatically increase the length"
 msgstr "_Automaticky predĺžiť"
 
-#: common/resources/panel-preferences-dialog.glade:662
+#: common/resources/panel-preferences-dialog.glade:669
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr "Túto možnosť vyberte pre automatické zväčšenie dĺžky panela, pokiaľ zásuvné moduly požadujú viac priestoru."
 
-#: common/resources/panel-preferences-dialog.glade:712
+#: common/resources/panel-preferences-dialog.glade:719
 msgid "D_isplay"
 msgstr "D_isplej"
 
-#: common/resources/panel-preferences-dialog.glade:753
+#: common/resources/panel-preferences-dialog.glade:760
 msgid "Dark mode"
 msgstr "Tmavý režim"
 
-#: common/resources/panel-preferences-dialog.glade:793
+#: common/resources/panel-preferences-dialog.glade:800
 msgid "<b>Background</b>"
 msgstr "<b>Pozadie</b>"
 
-#: common/resources/panel-preferences-dialog.glade:808
-#: common/resources/separator-dialog.glade:119
+#: common/resources/panel-preferences-dialog.glade:815
+#: common/resources/separator-dialog.glade:123
 msgid "_Style:"
 msgstr "Š_týl:"
 
-#: common/resources/panel-preferences-dialog.glade:840
+#: common/resources/panel-preferences-dialog.glade:847
 msgid "C_olor:"
 msgstr "_Farba:"
 
-#: common/resources/panel-preferences-dialog.glade:855
+#: common/resources/panel-preferences-dialog.glade:862
 msgid "Pick a Panel Color"
 msgstr "Vyberte farbu panela"
 
-#: common/resources/panel-preferences-dialog.glade:868
+#: common/resources/panel-preferences-dialog.glade:875
 msgid "_File:"
 msgstr "_Súbor:"
 
-#: common/resources/panel-preferences-dialog.glade:881
+#: common/resources/panel-preferences-dialog.glade:888
 msgid "Select A Background Image"
 msgstr "Výber obrázku pozadia"
 
-#: common/resources/panel-preferences-dialog.glade:908
+#: common/resources/panel-preferences-dialog.glade:915
 msgid "<b>Icons</b>"
 msgstr "<b>Ikony</b>"
 
-#: common/resources/panel-preferences-dialog.glade:922
+#: common/resources/panel-preferences-dialog.glade:929
 msgid "Adjust size au_tomatically"
 msgstr "Upraviť veľkosť au_tomaticky"
 
-#: common/resources/panel-preferences-dialog.glade:959
+#: common/resources/panel-preferences-dialog.glade:966
 msgid "Fixed icon _size (pixels):"
 msgstr "Pevná veľkosť ik_on (pixely):"
 
-#: common/resources/panel-preferences-dialog.glade:1002
+#: common/resources/panel-preferences-dialog.glade:1009
 msgid "<b>Opacity</b>"
 msgstr "<b>Priehľadnosť</b>"
 
-#: common/resources/panel-preferences-dialog.glade:1028
+#: common/resources/panel-preferences-dialog.glade:1035
 msgid "Configure..."
 msgstr "Nastaviť..."
 
-#: common/resources/panel-preferences-dialog.glade:1066
+#: common/resources/panel-preferences-dialog.glade:1073
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr "<b>Kompozitnosť je momentálne vypnutá</b>\nNa nastavenie priehľadnosti panela zapnite kompozitnost v správcovi okien."
 
 #. I18N: label for the enter transparency slider
-#: common/resources/panel-preferences-dialog.glade:1106
+#: common/resources/panel-preferences-dialog.glade:1113
 msgid "_Enter:"
 msgstr "_Vstup:"
 
 #. I18N: label for the leave transparency slider
-#: common/resources/panel-preferences-dialog.glade:1133
+#: common/resources/panel-preferences-dialog.glade:1140
 msgid "_Leave:"
 msgstr "_Opustenie:"
 
-#: common/resources/panel-preferences-dialog.glade:1146
+#: common/resources/panel-preferences-dialog.glade:1153
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "Priehľadnosť v okamihu umiestnenia kurzora myši mimo panel. Hodnota 0 znamená plnú priehľadnosť, hodnota 100 plnú nepriehľadnosť."
 
-#: common/resources/panel-preferences-dialog.glade:1173
+#: common/resources/panel-preferences-dialog.glade:1180
 msgid "Appeara_nce"
 msgstr "_Vzhľad"
 
-#: common/resources/panel-preferences-dialog.glade:1223
-#: common/resources/launcher-dialog.glade:219 panel/panel-dialogs.c:157
-#: panel/panel-item-dialog.c:197
-msgid "_Add"
-msgstr "_Pridať"
-
-#: common/resources/panel-preferences-dialog.glade:1228
-msgid "Add new item to this panel"
-msgstr "Pridá novú položku na tento panel"
-
-#. remove
-#: common/resources/panel-preferences-dialog.glade:1240
-#: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:353
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1080
-#: plugins/launcher/launcher-dialog.c:836
-msgid "_Remove"
-msgstr "_Odstrániť"
-
-#: common/resources/panel-preferences-dialog.glade:1245
-msgid "Remove currently selected item"
-msgstr "Odstrániť aktuálne vybranú položku"
-
-#: common/resources/panel-preferences-dialog.glade:1261
-#: common/resources/launcher-dialog.glade:559
-msgid "Edit the currently selected item"
-msgstr "Upraviť aktuálne vybranú položku"
-
-#: common/resources/panel-preferences-dialog.glade:1282
-msgid "Show about information of the currently selected item"
-msgstr "Zobraziť informácie o aktuálne vybranej položke"
-
-#: common/resources/panel-preferences-dialog.glade:1325
-#: common/resources/launcher-dialog.glade:509
-msgid "Move currently selected item up by one row"
-msgstr "Presunúť aktuálne vybranú položku o jeden riadok vyššie"
-
-#: common/resources/panel-preferences-dialog.glade:1346
-#: common/resources/launcher-dialog.glade:529
-msgid "Move currently selected item down by one row"
-msgstr "Presunúť aktuálne vybranú položku o jeden riadok nižšie"
-
-#: common/resources/panel-preferences-dialog.glade:1380
+#: common/resources/panel-preferences-dialog.glade:1208
 msgid "Ite_ms"
 msgstr "_Položky"
 
@@ -386,7 +355,7 @@ msgid "Custo_m title:"
 msgstr "V_lastný názov:"
 
 #: common/resources/actions-dialog.glade:255
-#: common/resources/launcher-dialog.glade:667
+#: common/resources/launcher-dialog.glade:306
 msgid "General"
 msgstr "Všeobecné"
 
@@ -454,8 +423,8 @@ msgstr "Vyberte túto možnosť pre zobrazenie všeobecných názvov aplikácií
 #: common/resources/applicationsmenu-dialog.glade:229
 #: common/resources/clock-dialog.glade:405
 #: common/resources/directorymenu-dialog.glade:150
-#: common/resources/separator-dialog.glade:177
-#: common/resources/tasklist-dialog.glade:257
+#: common/resources/separator-dialog.glade:222
+#: common/resources/tasklist-dialog.glade:266
 #: common/resources/windowmenu-dialog.glade:206
 msgid "Appearance"
 msgstr "Vzhľad"
@@ -706,7 +675,7 @@ msgid "_File Pattern:"
 msgstr "_Vzorka súbora:"
 
 #: common/resources/directorymenu-dialog.glade:316
-#: common/resources/tasklist-dialog.glade:492
+#: common/resources/tasklist-dialog.glade:529
 #: common/resources/windowmenu-dialog.glade:260
 msgid "Filtering"
 msgstr "Filtrovanie"
@@ -735,91 +704,55 @@ msgstr "Dole"
 msgid "Inside Button"
 msgstr "V tlačidle"
 
-#: common/resources/launcher-dialog.glade:96
-msgid "Up"
-msgstr "Hore"
-
-#: common/resources/launcher-dialog.glade:105
-msgid "Down"
-msgstr "Dole"
-
-#: common/resources/launcher-dialog.glade:120
-msgid "_Edit Item"
-msgstr "U_praviť položku"
-
-#: common/resources/launcher-dialog.glade:130
-msgid "D_elete Item"
-msgstr "O_dstrániť položku"
-
-#: common/resources/launcher-dialog.glade:146
-msgid "Add Appli_cation"
-msgstr "Pridať apliká_ciu"
-
-#: common/resources/launcher-dialog.glade:162
-msgid "New _Application"
-msgstr "Nová _aplikácia"
-
-#: common/resources/launcher-dialog.glade:172
-msgid "New _Link"
-msgstr "Nový _odkaz"
-
-#: common/resources/launcher-dialog.glade:198 panel/panel-item-dialog.c:192
+#: common/resources/launcher-dialog.glade:66 panel/panel-item-dialog.c:192
 msgid "Add New Items"
 msgstr "Pridať nové položky"
 
-#: common/resources/launcher-dialog.glade:205
-#: common/resources/launcher-dialog.glade:599
+#: common/resources/launcher-dialog.glade:73
 msgid "Add one or more existing items to the launcher"
 msgstr "Pridať jednu a viac existujúcich položiek na spúšťač"
 
-#: common/resources/launcher-dialog.glade:272 panel/panel-item-dialog.c:221
+#: common/resources/launcher-dialog.glade:87 panel/panel-dialogs.c:157
+#: panel/panel-item-dialog.c:197
+msgid "_Add"
+msgstr "_Pridať"
+
+#: common/resources/launcher-dialog.glade:140 panel/panel-item-dialog.c:221
 msgid "_Search:"
 msgstr "_Hľadať:"
 
-#: common/resources/launcher-dialog.glade:379
+#: common/resources/launcher-dialog.glade:235
 #: plugins/launcher/launcher.desktop.in.in:4
 msgid "Launcher"
 msgstr "Spúšťač"
 
-#: common/resources/launcher-dialog.glade:579
-msgid "Delete the currently selected item"
-msgstr "Odstrániť aktuálne vybranú položku"
-
-#: common/resources/launcher-dialog.glade:619
-msgid "Add a new empty item"
-msgstr "Pridať novú prázdnu položku"
-
-#: common/resources/launcher-dialog.glade:639
-msgid "Add a new hyperlink"
-msgstr "Pridať nový hypertextový odkaz"
-
-#: common/resources/launcher-dialog.glade:682
+#: common/resources/launcher-dialog.glade:321
 msgid "Disable t_ooltips"
 msgstr "_Zakázať popisky"
 
-#: common/resources/launcher-dialog.glade:686
+#: common/resources/launcher-dialog.glade:325
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
 msgstr "Vyberte túto možnosť pre zakázanie zobrazovania plávajúcej nápovedy pri prejdení kurzora myši nad tlačidlo panela alebo položky ponuky."
 
-#: common/resources/launcher-dialog.glade:698
+#: common/resources/launcher-dialog.glade:337
 msgid "Show _label instead of icon"
 msgstr "Zobraziť _názov namiesto ikony"
 
-#: common/resources/launcher-dialog.glade:713
+#: common/resources/launcher-dialog.glade:352
 msgid "Show last _used item in panel"
 msgstr "Zobraziť naposledy _použitú položku na paneli"
 
-#: common/resources/launcher-dialog.glade:717
+#: common/resources/launcher-dialog.glade:356
 msgid "Select this option to move the clicked menu item to the panel."
 msgstr "Vyberte túto možnosť pre presun položky ponuky na panel."
 
-#: common/resources/launcher-dialog.glade:736
+#: common/resources/launcher-dialog.glade:375
 msgid "_Arrow button position:"
 msgstr "Pozícia tlačidla so šípkou"
 
-#: common/resources/launcher-dialog.glade:779
+#: common/resources/launcher-dialog.glade:418
 msgid "Advanced"
 msgstr "Pokročilé"
 
@@ -859,30 +792,34 @@ msgstr "Otočte pracovné priestory"
 msgid "<b>Appearance</b>"
 msgstr "<b>Vzhľad</b>"
 
-#: common/resources/separator-dialog.glade:23
+#: common/resources/separator-dialog.glade:27
 msgid "Transparent"
 msgstr "Priesvitný"
 
-#: common/resources/separator-dialog.glade:26
-#: common/resources/separator-dialog.glade:38 plugins/actions/actions.c:726
+#: common/resources/separator-dialog.glade:30
+#: common/resources/separator-dialog.glade:42 plugins/actions/actions.c:726
 #: plugins/separator/separator.desktop.in.in:4
 msgid "Separator"
 msgstr "Oddeľovač"
 
-#: common/resources/separator-dialog.glade:29
+#: common/resources/separator-dialog.glade:33
 msgid "Handle"
 msgstr "Uško"
 
-#: common/resources/separator-dialog.glade:32
+#: common/resources/separator-dialog.glade:36
 msgid "Dots"
 msgstr "Bodky"
 
-#: common/resources/separator-dialog.glade:156
+#: common/resources/separator-dialog.glade:161
 msgid "_Expand"
 msgstr "_Roztiahnuť"
 
+#: common/resources/separator-dialog.glade:183
+msgid "Si_ze:"
+msgstr ""
+
 #: common/resources/showdesktop-dialog.glade:18
-#: plugins/showdesktop/showdesktop.c:322
+#: plugins/showdesktop/showdesktop.c:327
 #: plugins/showdesktop/showdesktop.desktop.in.in:4
 msgid "Show Desktop"
 msgstr "Zobraziť pracovnú plochu"
@@ -1028,65 +965,65 @@ msgstr "Zoskupovať titulok a titulok okna"
 msgid "None, allow drag-and-drop"
 msgstr "Žiadne, povoliť funkciu potiahni a pusť"
 
-#: common/resources/tasklist-dialog.glade:61
+#: common/resources/tasklist-dialog.glade:70
 #: plugins/tasklist/tasklist.desktop.in.in:4
 msgid "Window Buttons"
 msgstr "Tlačidlá okna"
 
-#: common/resources/tasklist-dialog.glade:143
+#: common/resources/tasklist-dialog.glade:152
 msgid "Show button _labels"
 msgstr "Zobrazovať _názvy tlačidiel"
 
-#: common/resources/tasklist-dialog.glade:159
+#: common/resources/tasklist-dialog.glade:168
 msgid "Show _flat buttons"
 msgstr "Zobraziť _ploché tlačidlá"
 
-#: common/resources/tasklist-dialog.glade:175
+#: common/resources/tasklist-dialog.glade:184
 msgid "Show _handle"
 msgstr "Zobraziť _uško"
 
-#: common/resources/tasklist-dialog.glade:191
+#: common/resources/tasklist-dialog.glade:200
 msgid "Show _tooltips"
 msgstr "Zobraziť _popisy"
 
-#: common/resources/tasklist-dialog.glade:214
+#: common/resources/tasklist-dialog.glade:223
 msgid "Sorting _order:"
 msgstr "_Zoradenie"
 
-#: common/resources/tasklist-dialog.glade:297
+#: common/resources/tasklist-dialog.glade:306
 msgid "Mi_ddle click action:"
 msgstr "Akcia stre_dného tlačidla:"
 
-#: common/resources/tasklist-dialog.glade:335
+#: common/resources/tasklist-dialog.glade:344
 msgid "_Group windows by application"
 msgstr "_Zoskupujte okná podľa aplikácie"
 
-#: common/resources/tasklist-dialog.glade:351
+#: common/resources/tasklist-dialog.glade:360
 msgid "Restore minimized windows to current _workspace"
 msgstr "Obnoví minimalizované okná na tejto _pracovnej ploche"
 
-#: common/resources/tasklist-dialog.glade:367
+#: common/resources/tasklist-dialog.glade:376
 msgid "D_raw window frame when hovering a button"
 msgstr "Vykresľovať _rám okna pri umiestnení kurzora myši nad tlačidlo"
 
-#: common/resources/tasklist-dialog.glade:383
+#: common/resources/tasklist-dialog.glade:392
 msgid "_Switch windows using the mouse wheel"
 msgstr "Prepínať okná _kolieskom myši"
 
-#: common/resources/tasklist-dialog.glade:405
+#: common/resources/tasklist-dialog.glade:414
 msgid "Behaviour"
 msgstr "Správanie"
 
-#: common/resources/tasklist-dialog.glade:438
+#: common/resources/tasklist-dialog.glade:447
 #: common/resources/windowmenu-dialog.glade:239
 msgid "Show windows from _all workspaces"
 msgstr "Zobraziť okná zo _všetkých pracovných plôch"
 
-#: common/resources/tasklist-dialog.glade:454
-msgid "Show windows from all mo_nitors"
-msgstr "Zobraziť okná zo všetkých mo_nitorov"
-
 #: common/resources/tasklist-dialog.glade:470
+msgid "Show windows _from:"
+msgstr ""
+
+#: common/resources/tasklist-dialog.glade:507
 msgid "Show only _minimized windows"
 msgstr "Zobraziť iba _minimalizované okná"
 
@@ -1119,8 +1056,14 @@ msgstr "Zobraziť _názvy pracovných plôch"
 msgid "Enable _urgency notification"
 msgstr "Povoliť _naliehavé oznámenia"
 
+#. I18N: monitor name in the output selector
+#: common/panel-utils.c:425
+#, c-format
+msgid "Monitor %d"
+msgstr "Monitor %d"
+
 #: libxfce4panel/xfce-panel-plugin.c:1109
-#: panel/panel-preferences-dialog.c:1540
+#: panel/panel-preferences-dialog.c:1499
 msgid "Remove"
 msgstr "Odstrániť"
 
@@ -1130,7 +1073,7 @@ msgid ""
 msgstr "Odstránením položky z panela je tiež myslená strata konfigurácie tejto položky."
 
 #: libxfce4panel/xfce-panel-plugin.c:1114
-#: panel/panel-preferences-dialog.c:1547
+#: panel/panel-preferences-dialog.c:1506
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Ste si istý, že chcete odstrániť „%s“?"
@@ -1141,7 +1084,7 @@ msgid "_Properties"
 msgstr "_Vlastnosti"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3809
+#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3934
 msgid "_About"
 msgstr "_O aplikácii ..."
 
@@ -1150,22 +1093,29 @@ msgstr "_O aplikácii ..."
 msgid "_Move"
 msgstr "_Presunúť"
 
+#. remove
+#: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:354
+#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1076
+#: plugins/launcher/launcher-dialog.c:935
+msgid "_Remove"
+msgstr "_Odstrániť"
+
 #: libxfce4panel/xfce-panel-plugin.c:1292
 msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3746
+#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3871
 msgid "Add _New Items..."
 msgstr "Pridať _nové položky..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3757
+#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3882
 msgid "Panel Pr_eferences..."
 msgstr "_Nastavenia panela..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3784
+#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3909
 msgid "Log _Out"
 msgstr "_Odhlásiť"
 
@@ -1292,14 +1242,14 @@ msgstr "Spustiť"
 msgid "Failed to launch the migration application"
 msgstr "Nepodarilo sa spustiť aplikáciu pre migráciu"
 
-#: panel/panel-application.c:343
+#: panel/panel-application.c:344
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr "Plugin \"%s\" sa nepodarilo načítať, chcete ho odstrániť z konfigurácie xfce4-panel?"
 
-#: panel/panel-application.c:345
+#: panel/panel-application.c:346
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -1309,25 +1259,25 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr "Tento plugin je v aktuálnej konfigurácii xfce4-panel, ale nedal sa načítať, pravdepodobne kvôli problému s inštaláciou. Ak viete, čo robíte, môžete to natrvalo odstrániť, inak by ste mali skončiť a vytvoriť si zálohu aktuálnej konfigurácie pomocou %s, než skontrolujete inštaláciu a skúsite znova spustiť xfce4-panel."
 
-#: panel/panel-application.c:352
+#: panel/panel-application.c:353
 msgid "Plugin loading failure"
 msgstr "Zlyhanie načítania doplnku"
 
-#: panel/panel-application.c:353
+#: panel/panel-application.c:354
 msgid "_Quit"
 msgstr "_Ukončiť"
 
-#: panel/panel-application.c:1033
+#: panel/panel-application.c:1034
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Toto vytvorí nový zásuvný modul spúšťača na paneli a vloží súbory ako položky ponuky."
 
-#: panel/panel-application.c:1036
+#: panel/panel-application.c:1037
 msgid "Create _Launcher"
 msgstr "Vytvoriť _spúšťač"
 
-#: panel/panel-application.c:1037
+#: panel/panel-application.c:1038
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -1336,21 +1286,21 @@ msgstr[1] "Vytvoriť nový spúšťač z %d súborov plochy"
 msgstr[2] "Vytvoriť nový spúšťač z %d súborov plochy"
 msgstr[3] "Vytvoriť nový spúšťač z %d súborov plochy"
 
-#: panel/panel-application.c:1800
+#: panel/panel-application.c:1805
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Spustili ste X server bez správcu relácie. Kliknutím na tlačidlo Ukončiť zatvoríte X server."
 
-#: panel/panel-application.c:1803
+#: panel/panel-application.c:1808
 msgid "Quit"
 msgstr "Ukončiť"
 
-#: panel/panel-application.c:1803
+#: panel/panel-application.c:1808
 msgid "Are you sure you want to quit the panel?"
 msgstr "Naozaj chcete ukončiť panel?"
 
-#: panel/panel-application.c:1811
+#: panel/panel-application.c:1816
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Nepodarilo sa spustiť príkaz „%s“"
@@ -1394,7 +1344,7 @@ msgstr "_Zrušiť"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Prosím vyberte panel pre nový zásuvný modul:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1028
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1023
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -1439,39 +1389,42 @@ msgstr "Reštart doplnku"
 msgid "_Execute"
 msgstr "_Spustiť"
 
-#: panel/panel-preferences-dialog.c:575
+#: panel/panel-preferences-dialog.c:342
+msgctxt "plugin context menu"
+msgid "_About"
+msgstr "_O programe"
+
+#: panel/panel-preferences-dialog.c:346
+msgid "Show about information of the currently selected item"
+msgstr "Zobraziť informácie o aktuálne vybranej položke"
+
+#: panel/panel-preferences-dialog.c:580
 msgid "Automatic"
 msgstr "Automatický"
 
-#: panel/panel-preferences-dialog.c:584
+#: panel/panel-preferences-dialog.c:589
 msgid "Primary"
 msgstr "Hlavný"
 
-#. I18N: monitor name in the output selector
-#: panel/panel-preferences-dialog.c:603
-#, c-format
-msgid "Monitor %d"
-msgstr "Monitor %d"
-
-#: panel/panel-preferences-dialog.c:1079
+#: panel/panel-preferences-dialog.c:1075
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Nastavenia panela a zásuvných modulov budú natrvalo odstránené"
 
-#: panel/panel-preferences-dialog.c:1088
+#: panel/panel-preferences-dialog.c:1084
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Naozaj chcete odstrániť panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1385
+#: panel/panel-preferences-dialog.c:1376
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(external)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1390
+#: panel/panel-preferences-dialog.c:1381
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1480,21 +1433,22 @@ msgstr "Interný názov: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1402
+#: panel/panel-preferences-dialog.c:1393
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Interný názov: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1549
+#: panel/panel-preferences-dialog.c:1508
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Ak odstránite položku z panela, bude navždy stratená."
 
-#: panel/panel-preferences-dialog.c:1553
+#: panel/panel-preferences-dialog.c:1512
+#: plugins/launcher/launcher-dialog.c:930
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Naozaj chcete odstrániť tieto položky %d ?"
 
-#: panel/panel-preferences-dialog.c:1555
+#: panel/panel-preferences-dialog.c:1514
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Ak ich z panela odstránite, budú natrvalo stratené."
 
@@ -1522,7 +1476,7 @@ msgstr "Skúsený"
 msgid "Expert"
 msgstr "Expert"
 
-#: panel/panel-window.c:3771
+#: panel/panel-window.c:3896
 msgid "_Lock Panel"
 msgstr "_Zamknúť panel"
 
@@ -2152,22 +2106,32 @@ msgstr "Nepomenovaná položka"
 msgid "No items"
 msgstr "Žiadne položky"
 
-#: plugins/launcher/launcher-dialog.c:776
+#: plugins/launcher/launcher-dialog.c:611
 msgid "Failed to open desktop item editor"
 msgstr "Nepodarilo sa otvoriť editor položiek pracovnej plochy"
 
-#: plugins/launcher/launcher-dialog.c:837
-msgid "If you delete an item, it will be permanently removed"
-msgstr "Ak zmažete položku, tak bude trvalo odstránená"
-
-#: plugins/launcher/launcher-dialog.c:847
+#: plugins/launcher/launcher-dialog.c:922
 msgid "Unnamed item"
 msgstr "Nepomenovaná položka"
 
-#: plugins/launcher/launcher-dialog.c:849
+#: plugins/launcher/launcher-dialog.c:923
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Ste si istý, že chcete odstrániť „%s“?"
+
+#: plugins/launcher/launcher-dialog.c:936
+msgid "If you delete an item, it will be permanently removed"
+msgstr "Ak zmažete položku, tak bude trvalo odstránená"
+
+#: plugins/launcher/launcher-dialog.c:1033
+#: plugins/launcher/launcher-dialog.c:1034
+msgid "Add a new empty item"
+msgstr "Pridať novú prázdnu položku"
+
+#: plugins/launcher/launcher-dialog.c:1047
+#: plugins/launcher/launcher-dialog.c:1048
+msgid "Add a new hyperlink"
+msgstr "Pridať nový hypertextový odkaz"
 
 #: plugins/launcher/launcher.desktop.in.in:5
 msgid "Program launcher with optional menu"
@@ -2177,7 +2141,7 @@ msgstr "Programový spúšťač s nastaviteľnou ponukou"
 msgid "Unable to open the workspace settings"
 msgstr "Nedajú sa otvoriť nastavenia pracovnej plochy"
 
-#: plugins/pager/pager-buttons.c:624 plugins/windowmenu/windowmenu.c:946
+#: plugins/pager/pager-buttons.c:628 plugins/windowmenu/windowmenu.c:959
 #, c-format
 msgid "Workspace %d"
 msgstr "Pracovná plocha %d"
@@ -2190,11 +2154,11 @@ msgstr "Prepínač virtuálnych pracovných plôch"
 msgid "Adds a separator or space between panel items"
 msgstr "Pridá oddeľovač alebo medzeru medzi položkami panela"
 
-#: plugins/showdesktop/showdesktop.c:317
+#: plugins/showdesktop/showdesktop.c:322
 msgid "Restore the minimized windows"
 msgstr "Obnoviť minimalizované okná"
 
-#: plugins/showdesktop/showdesktop.c:319
+#: plugins/showdesktop/showdesktop.c:324
 msgid "Minimize all open windows and show the desktop"
 msgstr "Minimalizuje všetky otvorené okná a zobrazí pracovnú plochu"
 
@@ -2240,61 +2204,69 @@ msgid ""
 "items"
 msgstr "Poskytuje oznamovače stavu (indikátory aplikácií) a bývalé položky systémovej lišty"
 
-#: plugins/tasklist/tasklist-widget.c:3156
+#: plugins/tasklist/tasklist-widget.c:3200
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "Nie je možné spustiť novú inštanciu aplikácie „%s“"
 
-#: plugins/tasklist/tasklist-widget.c:3183
+#: plugins/tasklist/tasklist-widget.c:3227
 msgid "Launch New Instance"
 msgstr "Spustite novú inštanciu"
 
-#: plugins/tasklist/tasklist-widget.c:3938
+#: plugins/tasklist/tasklist-widget.c:3982
 msgid "Mi_nimize All"
 msgstr "Mi_nimalizovať všetko"
 
-#: plugins/tasklist/tasklist-widget.c:3945
+#: plugins/tasklist/tasklist-widget.c:3989
 msgid "Un_minimize All"
 msgstr "Obnoviť všetko z _minima"
 
-#: plugins/tasklist/tasklist-widget.c:3952
+#: plugins/tasklist/tasklist-widget.c:3996
 msgid "Ma_ximize All"
 msgstr "Ma_ximalizovať všetko"
 
-#: plugins/tasklist/tasklist-widget.c:3959
+#: plugins/tasklist/tasklist-widget.c:4003
 msgid "_Unmaximize All"
 msgstr "Ob_noviť všetko z maxima"
 
-#: plugins/tasklist/tasklist-widget.c:3970
+#: plugins/tasklist/tasklist-widget.c:4014
 msgid "_Close All"
 msgstr "_Zatvoriť všetko"
+
+#: plugins/tasklist/tasklist-widget.c:5025
+msgid "all monitors"
+msgstr ""
+
+#: plugins/tasklist/tasklist-widget.c:5034
+msgid "panel's monitor"
+msgstr ""
 
 #: plugins/tasklist/tasklist.desktop.in.in:5
 msgid "Switch between open windows using buttons"
 msgstr "Prepínanie okien tlačidlami"
 
-#: plugins/windowmenu/windowmenu.c:725
+#: plugins/windowmenu/windowmenu.c:738
 msgid "Desktop"
 msgstr "Pracovná plocha"
 
-#: plugins/windowmenu/windowmenu.c:1341
+#: plugins/windowmenu/windowmenu.c:1354
 msgid "No Windows"
 msgstr "Žiadne okná"
 
-#: plugins/windowmenu/windowmenu.c:1356
+#: plugins/windowmenu/windowmenu.c:1369
 msgid "Urgent Windows"
 msgstr "Naliehavé okná"
 
-#: plugins/windowmenu/windowmenu.c:1407
+#: plugins/windowmenu/windowmenu.c:1420
 msgid "Add Workspace"
 msgstr "Pridať pracovnú plochu"
 
-#: plugins/windowmenu/windowmenu.c:1429
+#: plugins/windowmenu/windowmenu.c:1442
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Odstrániť pracovnú plochu „%s“"
 
-#: plugins/windowmenu/windowmenu.c:1431
+#: plugins/windowmenu/windowmenu.c:1444
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Odstrániť pracovnú plochu %d"

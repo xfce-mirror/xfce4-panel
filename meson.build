@@ -1,7 +1,7 @@
 project(
   'xfce4-panel',
   'c',
-version : '4.21.0-dev',
+version : '4.21.1-dev',
   license : 'GPL-2.0-or-later',
   meson_version : '>= 0.56.0',
   default_options : ['c_std=gnu11', 'buildtype=debugoptimized', 'warning_level=2']
@@ -23,7 +23,7 @@ dependency_versions = {
   'glib': '>= 2.74.0',
   'gtk': '>= 3.24.0',
   'xfce4': '>= 4.18.0',
-  'libxfce4ui': '>= 4.21.0',
+  'libxfce4ui': '>= 4.21.3',
   'libxfce4windowing': '>= 4.20.1',
 
   'libwnck': '>= 3.0',
@@ -183,7 +183,7 @@ if get_option('debug') and optimization in ['0', 'g']
     '-DDEBUG_TRACE=1',
     '-DG_ENABLE_DEBUG',
   ]
-elif optimization in ['3', 'minsize']
+elif optimization in ['3', 's']
   extra_cflags += [
     '-DNDEBUG',
     '-DG_DISABLE_CAST_CHECKS',
