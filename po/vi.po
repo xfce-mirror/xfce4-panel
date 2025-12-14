@@ -39,6 +39,10 @@ msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr ""
+"panels;settings;preferences;taskbar;autohide;application "
+"menu;start;buttons;launcher;notification area;status;icons;plugins;bảng điều"
+" khiển;cài đặt;tùy chọn;thanh tác vụ;tự động ẩn;menu ứng dụng;bắt "
+"đầu;nút;trình khởi chạy;vùng thông báo;trạng thái;biểu tượng;phần bổ trợ;"
 
 #: panel-preferences.desktop.in:15 panel/panel-window.c:3710
 msgid "Panel"
@@ -136,6 +140,8 @@ msgstr "Hiện hộp thoại 'Tùy thích'"
 #: panel/main.c:69 panel/main.c:70
 msgid "PANEL-NUMBER"
 msgstr ""
+"BẢNG ĐIỀU KHIỂN ĐIỀU KHIỂN ĐIỀU KHIỂN ĐIỀU KHIỂN ĐIỀU KHIỂN ĐIỀU KHIỂN-"
+"NUMBER"
 
 #: panel/main.c:70
 msgid "Show the 'Add New Items' dialog"
@@ -151,7 +157,7 @@ msgstr "Thêm phần mở rộng cho thanh panel"
 
 #: panel/main.c:72
 msgid "PLUGIN-NAME"
-msgstr ""
+msgstr "PLUGIN-NAME"
 
 #: panel/main.c:73
 msgid "Restart the running panel instance"
@@ -323,6 +329,8 @@ msgstr "Thực thi lệnh \"%s\" thất bại"
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
+"Cú pháp sự kiện PLUGIN được chỉ định không hợp lệ. Sử dụng PLUGIN-"
+"NAME:NAME[:TYPE:VALUE]."
 
 #: panel/panel-dbus-client.c:243
 #, c-format
@@ -330,6 +338,8 @@ msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
 msgstr ""
+"Loại gợi ý không hợp lệ \"%s\". Các loại hợp lệ là bool, double, int, string"
+" và uint."
 
 #: panel/panel-dialogs.c:56
 msgid "Unable to open the e-mail address"
@@ -461,7 +471,7 @@ msgstr "Bạn có chắc là muốn xóa thanh panel %d?"
 #: panel/panel-preferences-dialog.c:1394
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
-msgstr ""
+msgstr "%s <span color=\"grey\" size=\"small\">(bên ngoài)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
@@ -471,13 +481,15 @@ msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
 msgstr ""
+"Tên nội bộ: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
 #: panel/panel-preferences-dialog.c:1411
 #, c-format
 msgid "Internal name: %s-%d"
-msgstr ""
+msgstr "Tên nội bộ: %s-%d"
 
 #: panel/panel-preferences-dialog.c:1558
 msgid "If you remove the item from the panel, it is permanently lost."
@@ -514,7 +526,7 @@ msgstr "Dọc"
 
 #: panel/panel-preferences-dialog.glade:87
 msgid "Deskbar"
-msgstr ""
+msgstr "Thanh để bàn"
 
 #: panel/panel-preferences-dialog.glade:134
 msgid "None (use system style)"
@@ -760,19 +772,19 @@ msgstr "_Mức độ:"
 
 #: panel/panel-tic-tac-toe.c:133
 msgid "Novice"
-msgstr ""
+msgstr "Người mới"
 
 #: panel/panel-tic-tac-toe.c:134
 msgid "Intermediate"
-msgstr ""
+msgstr "Trung cấp"
 
 #: panel/panel-tic-tac-toe.c:135
 msgid "Experienced"
-msgstr ""
+msgstr "Có kinh nghiệm"
 
 #: panel/panel-tic-tac-toe.c:136
 msgid "Expert"
-msgstr ""
+msgstr "Chuyên gia"
 
 #: panel/panel-window.c:3747
 msgid "_Lock Panel"
@@ -1334,12 +1346,12 @@ msgstr "Tùy chọn đồng hồ"
 #: plugins/clock/clock-digital.h:30
 msgctxt "Time"
 msgid "%R"
-msgstr ""
+msgstr "%R"
 
 #: plugins/clock/clock-digital.h:31
 msgctxt "Date"
 msgid "%Y-%m-%d"
-msgstr ""
+msgstr "%Y-%m-%d"
 
 #: plugins/clock/clock-fuzzy.c:79
 msgid "Night"
@@ -1968,7 +1980,7 @@ msgstr "Trong suốt"
 
 #: plugins/separator/separator-dialog.glade:29
 msgid "Handle"
-msgstr ""
+msgstr "Xử lý"
 
 #: plugins/separator/separator-dialog.glade:32
 msgid "Dots"
@@ -2087,31 +2099,31 @@ msgstr "Các mục đã biết"
 
 #: plugins/systray/sn-dialog.glade:512
 msgid "_Menu is primary action"
-msgstr ""
+msgstr "_Menu là hành động chính"
 
 #: plugins/systray/sn-dialog.glade:516
 msgid "Left click will always display the menu for item"
-msgstr ""
+msgstr "Nhấp chuột trái sẽ luôn màn hình menu cho mục"
 
 #: plugins/systray/sn-dialog.glade:528
 msgid "_Request symbolic icons"
-msgstr ""
+msgstr "Yêu cầu biểu tượng tượng t_rưng"
 
 #: plugins/systray/sn-dialog.glade:532
 msgid "Load symbolic icons if available"
-msgstr ""
+msgstr "Tải các biểu tượng tượng trưng nếu có"
 
 #: plugins/systray/sn-dialog.glade:550
 msgid "Features"
-msgstr ""
+msgstr "Đặc trưng"
 
 #: plugins/systray/sn-dialog.glade:566
 msgid "Status Notifiers"
-msgstr ""
+msgstr "Trình thông báo trạng thái"
 
 #: plugins/systray/sn-dialog.glade:720
 msgid "Systray Icons"
-msgstr ""
+msgstr "Biểu tượng hệ thống"
 
 #: plugins/systray/systray.c:149
 msgid "Unable to start the notification area"
@@ -2123,25 +2135,29 @@ msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr ""
+"Rất có thể một tiện ích khác đã đảm nhận chức năng của khu vực thông báo. "
+"Khu vực này sẽ không được sử dụng."
 
 #: plugins/systray/systray.c:411
 msgid "The notification area lost selection"
-msgstr ""
+msgstr "Vùng thông báo bị mất lựa chọn"
 
 #: plugins/systray/systray-manager.c:386
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr ""
+msgstr "Không lấy được lựa chọn người quản lý cho màn hình %d"
 
 #: plugins/systray/systray.desktop.in.in:5
 msgid "Status Tray Plugin"
-msgstr ""
+msgstr "Plugin khay trạng thái"
 
 #: plugins/systray/systray.desktop.in.in:6
 msgid ""
 "Provides status notifier items (application indicators) and legacy systray "
 "items"
 msgstr ""
+"Cung cấp các mục thông báo trạng thái (chỉ báo ứng dụng) và các mục hệ thống"
+" cũ"
 
 #: plugins/tasklist/tasklist-dialog.glade:23
 msgid "Nothing"
@@ -2157,15 +2173,15 @@ msgstr "Thu nhỏ cửa sổ"
 
 #: plugins/tasklist/tasklist-dialog.glade:32
 msgid "New Instance"
-msgstr ""
+msgstr "Phiên bản mới"
 
 #: plugins/tasklist/tasklist-dialog.glade:43
 msgid "Timestamp"
-msgstr ""
+msgstr "Dấu thời gian"
 
 #: plugins/tasklist/tasklist-dialog.glade:46
 msgid "Group title and timestamp"
-msgstr ""
+msgstr "Tiêu đề nhóm và dấu thời gian"
 
 #: plugins/tasklist/tasklist-dialog.glade:49
 msgid "Window title"
@@ -2198,7 +2214,7 @@ msgstr "Hiển thị _tay cầm"
 
 #: plugins/tasklist/tasklist-dialog.glade:191
 msgid "Show _tooltips"
-msgstr ""
+msgstr "Hiển _thị chú giải công cụ"
 
 #: plugins/tasklist/tasklist-dialog.glade:214
 msgid "Sorting _order:"
@@ -2210,15 +2226,15 @@ msgstr "Thao tác nhấn chuột giữa:"
 
 #: plugins/tasklist/tasklist-dialog.glade:335
 msgid "_Group windows by application"
-msgstr ""
+msgstr "Nhóm các cửa sổ theo ứn_g dụng"
 
 #: plugins/tasklist/tasklist-dialog.glade:351
 msgid "Restore minimized windows to current _workspace"
-msgstr ""
+msgstr "_Khôi phục các cửa sổ thu nhỏ về không gian làm việc hiện tại"
 
 #: plugins/tasklist/tasklist-dialog.glade:367
 msgid "D_raw window frame when hovering a button"
-msgstr ""
+msgstr "_Vẽ khung cửa sổ khi di chuột vào nút"
 
 #: plugins/tasklist/tasklist-dialog.glade:383
 msgid "_Switch windows using the mouse wheel"
@@ -2235,28 +2251,28 @@ msgstr "Hiển thị cửa sổ trên mọi không gian làm việc"
 
 #: plugins/tasklist/tasklist-dialog.glade:454
 msgid "Show windows from all mo_nitors"
-msgstr ""
+msgstr "Hiể_n thị cửa sổ từ tất cả các màn hình"
 
 #: plugins/tasklist/tasklist-dialog.glade:470
 msgid "Show only _minimized windows"
-msgstr ""
+msgstr "_Chỉ hiển thị các cửa sổ thu nhỏ"
 
 #: plugins/tasklist/tasklist-widget.c:3114
 #, c-format
 msgid "Unable to start new instance of '%s'"
-msgstr ""
+msgstr "Không thể bắt đầu phiên bản mới của '%s'"
 
 #: plugins/tasklist/tasklist-widget.c:3141
 msgid "Launch New Instance"
-msgstr ""
+msgstr "Khởi chạy phiên bản mới"
 
 #: plugins/tasklist/tasklist-widget.c:3885
 msgid "Mi_nimize All"
-msgstr ""
+msgstr "_Giảm thiểu Tất cả"
 
 #: plugins/tasklist/tasklist-widget.c:3892
 msgid "Un_minimize All"
-msgstr ""
+msgstr "Giả_m thiểu Tất cả"
 
 #: plugins/tasklist/tasklist-widget.c:3899
 msgid "Ma_ximize All"
@@ -2264,7 +2280,7 @@ msgstr "_Phóng to tất cả"
 
 #: plugins/tasklist/tasklist-widget.c:3906
 msgid "_Unmaximize All"
-msgstr ""
+msgstr "_Tối đa hóa Tất cả"
 
 #: plugins/tasklist/tasklist-widget.c:3917
 msgid "_Close All"
@@ -2272,7 +2288,7 @@ msgstr "Đó_ng tất cả"
 
 #: plugins/tasklist/tasklist.desktop.in.in:5
 msgid "Switch between open windows using buttons"
-msgstr ""
+msgstr "Chuyển đổi giữa các cửa sổ đang mở bằng các nút"
 
 #: plugins/windowmenu/windowmenu.c:729
 msgid "Desktop"
@@ -2284,7 +2300,7 @@ msgstr "Không có cửa sổ"
 
 #: plugins/windowmenu/windowmenu.c:1338
 msgid "Urgent Windows"
-msgstr ""
+msgstr "Windows khẩn cấp"
 
 #: plugins/windowmenu/windowmenu.c:1383
 msgid "Add Workspace"
@@ -2306,7 +2322,7 @@ msgstr "Biểu tượng"
 
 #: plugins/windowmenu/windowmenu-dialog.glade:26
 msgid "Arrow"
-msgstr ""
+msgstr "Mũi tên"
 
 #: plugins/windowmenu/windowmenu-dialog.glade:32
 #: plugins/windowmenu/windowmenu.desktop.in.in:4
@@ -2319,15 +2335,15 @@ msgstr "Cách bố trí nút:"
 
 #: plugins/windowmenu/windowmenu-dialog.glade:155
 msgid "Show workspace a_ctions"
-msgstr ""
+msgstr "Hiển thị _các tác vụ trong không gian làm việc"
 
 #: plugins/windowmenu/windowmenu-dialog.glade:170
 msgid "Show workspace _names"
-msgstr ""
+msgstr "Hiể_n thị tên không gian làm việc"
 
 #: plugins/windowmenu/windowmenu-dialog.glade:185
 msgid "Enable _urgency notification"
-msgstr ""
+msgstr "_Bật thông báo khẩn cấp"
 
 #: plugins/windowmenu/windowmenu.desktop.in.in:5
 msgid "Switch between open windows using a menu"
