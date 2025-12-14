@@ -7,6 +7,7 @@
 # Duy Truong Nguyen <truongap.ars@gmail.com>, 2014
 # file aio <fileaio@gmail.com>, 2013
 # Lâm Vĩnh Niên <nienvl@yahoo.ca>, 2004
+# Loc Huynh <https://github.com/hthienloc>, 2025
 # Phan Vĩnh Thịnh <teppi82@gmail.com>, 2006
 # Phan Vĩnh Thịnh <teppi@vnlinux.org>, 2006
 msgid ""
@@ -15,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
 "POT-Creation-Date: 2025-11-08 12:52+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Cas Pascal <casboi86@gmail.com>, 2024-2025\n"
+"Last-Translator: Phan Vĩnh Thịnh <teppi@vnlinux.org>, 2006\n"
 "Language-Team: Vietnamese (http://app.transifex.com/xfce/xfce4-panel/language/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,17 +32,17 @@ msgstr "Tạo trình chạy trên thanh tác vụ"
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop "
 "file"
-msgstr "Thêm một trình chạy mới trên thanh tác vụ dựa vào thông tin của tập tin desktop"
+msgstr "Thêm một trình chạy mới trên thanh tác vụ dựa vào thông tin của tệp desktop"
 
 #: panel-preferences.desktop.in:8
 msgid ""
 "panels;settings;preferences;taskbar;autohide;application "
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
-msgstr ""
+msgstr "panels;settings;preferences;taskbar;autohide;application menu;start;buttons;launcher;notification area;status;icons;plugins;bảng điều khiển;cài đặt;tùy chọn;thanh tác vụ;tự động ẩn;menu ứng dụng;bắt đầu;nút;trình khởi chạy;vùng thông báo;trạng thái;biểu tượng;phần bổ trợ;"
 
 #: panel-preferences.desktop.in:15 panel/panel-window.c:3859
 msgid "Panel"
-msgstr "Thanh tác vụ"
+msgstr "Bảng điều khiển"
 
 #: panel-preferences.desktop.in:16
 msgid "Customize the panel"
@@ -69,11 +70,11 @@ msgstr "Dọc"
 
 #: common/resources/panel-preferences-dialog.glade:77
 msgid "Deskbar"
-msgstr ""
+msgstr "Thanh để bàn"
 
 #: common/resources/panel-preferences-dialog.glade:124
 msgid "None (use system style)"
-msgstr "Không (sử dụng kiểu của hệ thống)"
+msgstr "Không có có có có có có (sử dụng kiểu của hệ thống)"
 
 #: common/resources/panel-preferences-dialog.glade:127
 msgid "Solid color"
@@ -102,7 +103,7 @@ msgstr "Cấu hình thanh tác vụ"
 #: common/resources/windowmenu-dialog.glade:48 panel/panel-item-dialog.c:205
 #: panel/panel-tic-tac-toe.c:110
 msgid "_Close"
-msgstr "Đóng"
+msgstr "Đó_ng"
 
 #. help item
 #: common/resources/panel-preferences-dialog.glade:168
@@ -119,7 +120,7 @@ msgstr "Đóng"
 #: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
 #: panel/panel-window.c:3925
 msgid "_Help"
-msgstr "Trợ giúp "
+msgstr "_Trợ giúp"
 
 #: common/resources/panel-preferences-dialog.glade:213
 msgid "Profiles:"
@@ -127,11 +128,11 @@ msgstr "Hồ sơ:"
 
 #: common/resources/panel-preferences-dialog.glade:241
 msgid "_Backup and restore"
-msgstr "Sao lưu và khôi phục"
+msgstr "_Sao lưu và khôi phục"
 
 #: common/resources/panel-preferences-dialog.glade:245
 msgid "Switch between panel presets"
-msgstr "Chuyển giữa các cấu hình thanh tác vụ  "
+msgstr "Chuyển giữa các cấu hình thanh tác vụ"
 
 #: common/resources/panel-preferences-dialog.glade:289
 msgid "Add a new panel"
@@ -148,15 +149,15 @@ msgstr "<b>Chung</b>"
 
 #: common/resources/panel-preferences-dialog.glade:380
 msgid "M_ode:"
-msgstr "_Chế độ"
+msgstr "_Chế độ:"
 
 #: common/resources/panel-preferences-dialog.glade:409
 msgid "Span mo_nitors"
-msgstr "Mở rộng sang nhiều màn hình"
+msgstr "Mở rộng sang _nhiều màn hình"
 
 #: common/resources/panel-preferences-dialog.glade:413
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr "Lựa chọn tuỳ chọn này để mở rộng thanh tác vụ qua nhiều màn hình."
+msgstr "Chọn tuỳ Chọn này để mở rộng thanh tác vụ qua nhiều màn hình."
 
 #: common/resources/panel-preferences-dialog.glade:426
 msgid "_Lock panel"
@@ -165,36 +166,36 @@ msgstr "_Khóa thanh tác vụ"
 #: common/resources/panel-preferences-dialog.glade:430
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr "Lựa chọn tùy chọn này sẽ ẩn đi phần tay cầm của thanh panel và khóa vị trí của nó."
+msgstr "Chọn tùy Chọn này sẽ ẩn đi phần tay cầm của thanh bảng điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển và khóa vị trí của nó."
 
 #: common/resources/panel-preferences-dialog.glade:443
 msgid "_Reserve space on screen edges for the panel"
-msgstr "Sử dụng một phần của cạnh màn hình cho thanh tác vụ"
+msgstr "_Sử dụng một phần của cạnh màn hình cho thanh tác vụ"
 
 #: common/resources/panel-preferences-dialog.glade:447
 msgid ""
 "Select this option if you don't want maximized windows to overlap the panel "
 "area. This only works when the panel is attached to a screen edge and "
 "autohide is disabled."
-msgstr ""
+msgstr "Chọn tùy Chọn này nếu bạn không muốn các cửa sổ zoom chồng lên khu vực bảng điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển. Tính năng này chỉ hoạt động khi bảng điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển được gắn vào cạnh màn hình và tính năng tự động ẩn đã tắt."
 
 #: common/resources/panel-preferences-dialog.glade:460
 msgid "_Keep panel below windows"
-msgstr ""
+msgstr "Giữ bảng điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều _khiển bên dưới cửa sổ"
 
 #: common/resources/panel-preferences-dialog.glade:464
 msgid ""
 "Select this option if you want windows to cover the panel. When autohide is "
 "enabled, panel is always on top."
-msgstr ""
+msgstr "Chọn tùy Chọn này nếu bạn muốn cửa sổ che bảng điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển. Khi tính năng tự động ẩn đã bật, bảng điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển luôn ở trên cùng."
 
 #: common/resources/panel-preferences-dialog.glade:485
 msgid "Au_tomatically hide the panel:"
-msgstr "Tự động ẩn thanh tác vụ:"
+msgstr "_Tự động ẩn thanh tác vụ:"
 
 #: common/resources/panel-preferences-dialog.glade:526
 msgid "O_utput:"
-msgstr "Đầu ra:"
+msgstr "Đầ_u ra:"
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
@@ -204,7 +205,7 @@ msgstr "Độ dài và kích cỡ"
 
 #: common/resources/panel-preferences-dialog.glade:585
 msgid "Row _size (pixels):"
-msgstr "Độ lớn hàng (điểm ảnh):"
+msgstr "Độ _lớn hàng (điểm ảnh):"
 
 #: common/resources/panel-preferences-dialog.glade:599
 msgid "Num_ber of rows:"
@@ -212,7 +213,7 @@ msgstr "_Số hàng:"
 
 #: common/resources/panel-preferences-dialog.glade:613
 msgid "L_ength (pixels):"
-msgstr "Độ dài (điểm ảnh):"
+msgstr "Độ _dài (điểm ảnh):"
 
 #: common/resources/panel-preferences-dialog.glade:642
 msgid "Border width (pixels):"
@@ -220,13 +221,13 @@ msgstr "Kích cỡ biên (điểm ảnh):"
 
 #: common/resources/panel-preferences-dialog.glade:665
 msgid "A_utomatically increase the length"
-msgstr "Tự động tăng chiều dài"
+msgstr "Tự động tăng chiề_u dài"
 
 #: common/resources/panel-preferences-dialog.glade:669
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Lựa chọn tùy chọn này để tự động tăng chiều dài của thanh panel nếu phần mở rộng đòi hỏi nhiều không gian hơn."
+msgstr "Chọn tùy Chọn này để tự động tăng chiều dài của thanh bảng điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển nếu phần mở rộng đòi hỏi nhiều không gian hơn."
 
 #: common/resources/panel-preferences-dialog.glade:719
 msgid "D_isplay"
@@ -255,11 +256,11 @@ msgstr "Chọn một màu cho thanh tác vụ"
 
 #: common/resources/panel-preferences-dialog.glade:875
 msgid "_File:"
-msgstr "_Tệp tin"
+msgstr "_Tệp tin:"
 
 #: common/resources/panel-preferences-dialog.glade:888
 msgid "Select A Background Image"
-msgstr "Lựa chọn hình ảnh nền"
+msgstr "Chọn hình ảnh nền"
 
 #: common/resources/panel-preferences-dialog.glade:915
 msgid "<b>Icons</b>"
@@ -267,11 +268,11 @@ msgstr "<b>Biểu tượng</b>"
 
 #: common/resources/panel-preferences-dialog.glade:929
 msgid "Adjust size au_tomatically"
-msgstr "Tự động điều chỉnh kích cỡ"
+msgstr "_Tự động điều chỉnh kích cỡ"
 
 #: common/resources/panel-preferences-dialog.glade:966
 msgid "Fixed icon _size (pixels):"
-msgstr "Kích cỡ cố định biểu tượng (điểm ảnh):"
+msgstr "_Kích cỡ cố định biểu tượng (điểm ảnh):"
 
 #: common/resources/panel-preferences-dialog.glade:1009
 msgid "<b>Opacity</b>"
@@ -285,7 +286,7 @@ msgstr "Cấu hình..."
 msgid ""
 "<b>Compositing is currently disabled</b>\n"
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "<b>Bộ tổng hợp đang được tắt</b>\nHãy bật bộ tổng hợp trong cài đặt trình quản lí cửa sổ để chỉnh sửa mục này."
+msgstr "<b>Bộ tổng hợp đang được tắt</b>\nHãy Bật bộ tổng hợp trong cài đặt trình quản lí cửa sổ để chỉnh sửa mục này."
 
 #. I18N: label for the enter transparency slider
 #: common/resources/panel-preferences-dialog.glade:1113
@@ -305,7 +306,7 @@ msgstr "Độ đục/mờ khi con trỏ đang không nằm trong thanh, 0 là tr
 
 #: common/resources/panel-preferences-dialog.glade:1180
 msgid "Appeara_nce"
-msgstr "Diện mạo"
+msgstr "Diệ_n mạo"
 
 #: common/resources/panel-preferences-dialog.glade:1208
 msgid "Ite_ms"
@@ -327,7 +328,7 @@ msgstr "Tên đầy đủ"
 
 #: common/resources/actions-dialog.glade:52
 msgid "Username"
-msgstr "Tên đăng nhập"
+msgstr "Tên người dùng"
 
 #: common/resources/actions-dialog.glade:55
 msgid "User ID"
@@ -347,7 +348,7 @@ msgstr "Tên:"
 
 #: common/resources/actions-dialog.glade:201
 msgid "Custo_m title:"
-msgstr "Tên tuỳ chỉnh:"
+msgstr "_Tên tuỳ chỉnh:"
 
 #: common/resources/actions-dialog.glade:255
 #: common/resources/launcher-dialog.glade:306
@@ -369,7 +370,7 @@ msgstr "_Hiển thị hộp thoại xác nhận"
 #: common/resources/actions-dialog.glade:338
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Hiển thị hộp thoại xác nhận trong vòng 30 giây cho một vài "
+msgstr "Hiển thị hộp thoại xác nhận trong vòng 30 giây cho một vài."
 
 #: common/resources/actions-dialog.glade:354
 msgid "_Actions"
@@ -383,7 +384,7 @@ msgstr "Thực đơn ứng dụng"
 #: common/resources/applicationsmenu-dialog.glade:101
 #: common/resources/directorymenu-dialog.glade:122
 msgid "_Icon:"
-msgstr "Biể_u tượng"
+msgstr "Biể_u tượng:"
 
 #: common/resources/applicationsmenu-dialog.glade:125
 msgid "Button _title:"
@@ -391,7 +392,7 @@ msgstr "_Tiêu đề nút:"
 
 #: common/resources/applicationsmenu-dialog.glade:136
 msgid "Show button on one _line"
-msgstr "Hiện các nút trên một hàng duy nhất"
+msgstr "_Hiện các nút trên một hàng duy nhất"
 
 #: common/resources/applicationsmenu-dialog.glade:151
 msgid "_Show button title"
@@ -399,7 +400,7 @@ msgstr "_Hiển thị tiêu đề nút"
 
 #: common/resources/applicationsmenu-dialog.glade:166
 msgid "Show application d_escription in tooltip"
-msgstr "Hiển thị chú thích cho ứng dụng trong tooltip"
+msgstr "_Hiển thị chú thích cho ứng dụng trong tooltip"
 
 #: common/resources/applicationsmenu-dialog.glade:182
 msgid "Show ic_ons in menu"
@@ -407,13 +408,13 @@ msgstr "Hiển thị _biểu tượng trong thực đơn"
 
 #: common/resources/applicationsmenu-dialog.glade:197
 msgid "Show generic application n_ames"
-msgstr "Hiển thị tên chung cho ứng dụng"
+msgstr "_Hiển thị tên chung cho ứng dụng"
 
 #: common/resources/applicationsmenu-dialog.glade:201
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Chọn tùy chọn này để hiển thị tên chung của ứng dụng trong thực đơn, ví dụ \"Quản lý tệp tin\" thay vì \"Thunar\""
+msgstr "Chọn tùy Chọn này để hiển thị tên chung của ứng dụng trong thực đơn, ví dụ \"Quản lý Tệp tin\" thay vì \"Thunar\""
 
 #: common/resources/applicationsmenu-dialog.glade:229
 #: common/resources/clock-dialog.glade:405
@@ -422,11 +423,11 @@ msgstr "Chọn tùy chọn này để hiển thị tên chung của ứng dụng
 #: common/resources/tasklist-dialog.glade:266
 #: common/resources/windowmenu-dialog.glade:206
 msgid "Appearance"
-msgstr "Diện mạo"
+msgstr "Giao diện"
 
 #: common/resources/applicationsmenu-dialog.glade:267
 msgid "Use the _default menu"
-msgstr "Sử dụng thực đơn mặc định"
+msgstr "Sử _dụng thực đơn mặc định"
 
 #: common/resources/applicationsmenu-dialog.glade:282
 msgid "Ed_it Menu"
@@ -434,7 +435,7 @@ msgstr "_Sửa thực đơn"
 
 #: common/resources/applicationsmenu-dialog.glade:304
 msgid "Use c_ustom menu file:"
-msgstr "Sử dụng tệp tin thực đơn tùy chọn:"
+msgstr "_Sử dụng tệp tin thực đơn tùy chọn:"
 
 #: common/resources/applicationsmenu-dialog.glade:333
 msgid "Menu _file:"
@@ -442,7 +443,7 @@ msgstr "Tệp tin thự_c đơn:"
 
 #: common/resources/applicationsmenu-dialog.glade:346
 msgid "Select A Menu File"
-msgstr "Lựa chọn một tệp tin thực đơn"
+msgstr "Chọn một Tệp tin thực đơn"
 
 #: common/resources/applicationsmenu-dialog.glade:371
 msgid "Menu File"
@@ -466,7 +467,7 @@ msgstr "Ngày, đến giờ"
 
 #: common/resources/clock-dialog.glade:33
 msgid "Time, then date"
-msgstr "Giờ, đến ngày "
+msgstr "Giờ, đến ngày"
 
 #: common/resources/clock-dialog.glade:36
 msgid "Date Only"
@@ -508,7 +509,7 @@ msgstr "Tên của một múi giờ trong cơ sở dữ liệu zoneinfo, ví d�
 
 #: common/resources/clock-dialog.glade:183
 msgid "Time_zone:"
-msgstr "_Múi giờ"
+msgstr "_Múi giờ:"
 
 #: common/resources/clock-dialog.glade:194
 msgid "Time and Date _Settings..."
@@ -526,15 +527,15 @@ msgstr "Khi bật, lệnh này sẽ chạy khi nhấn chuột trái vào plugin 
 
 #: common/resources/clock-dialog.glade:261
 msgid "Co_mmand:"
-msgstr "_Lệnh"
+msgstr "_Lệnh:"
 
 #: common/resources/clock-dialog.glade:273
 msgid "_Show week numbers"
-msgstr "Hiện số tuần"
+msgstr "Hiện _số tuần"
 
 #: common/resources/clock-dialog.glade:294
 msgid "Calendar"
-msgstr "Bộ lịch"
+msgstr "Lịch"
 
 #: common/resources/clock-dialog.glade:329
 #: common/resources/clock-dialog.glade:669
@@ -544,7 +545,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "Định dạng miêu tả phần ngày và giờ được chèn vào thanh panel. Ví dụ, %Y sẽ tương ứng với năm, %m tương ứng vơi tháng và %d tương ứng với ngày. Tương tự, thẻ <b></b> sẽ làm chữ in đậm. Xem \"Trợ giúp\" để có thêm thông tin chi tiết."
+msgstr "Định dạng miêu tả phần ngày và giờ được chèn vào thanh bảng điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển. Ví dụ, %Y sẽ tương ứng với năm, %m tương ứng vơi tháng và %d tương ứng với ngày. Tương tự, thẻ <b></b> sẽ làm chữ in đậm. Xem \"Trợ giúp\" để có thêm thông tin chi tiết."
 
 #: common/resources/clock-dialog.glade:358
 msgid "_Tooltip format:"
@@ -557,15 +558,15 @@ msgstr "Cách _bố trí:"
 
 #: common/resources/clock-dialog.glade:435
 msgid "Sho_w AM/PM"
-msgstr "Hiện AM/PM"
+msgstr "_Hiện AM/PM"
 
 #: common/resources/clock-dialog.glade:450
 msgid "Fl_ash time separators"
-msgstr "Nhấp nháy dấu chia cách giờ phút"
+msgstr "Nhấp nháy dấu chi_a cách giờ phút"
 
 #: common/resources/clock-dialog.glade:465
 msgid "24-_hour clock"
-msgstr "Đồng hồ 24 giờ"
+msgstr "Đồng _hồ 24 giờ"
 
 #: common/resources/clock-dialog.glade:508
 msgid "Binary mode:"
@@ -579,11 +580,11 @@ msgstr "Hiện _giây"
 #. or parts of the day.
 #: common/resources/clock-dialog.glade:545
 msgid "F_uzziness:"
-msgstr "Độ dài dòng:"
+msgstr "Độ _dài dòng:"
 
 #: common/resources/clock-dialog.glade:579
 msgid "Show _inactive segments"
-msgstr "Hiện các phần không hoạt động"
+msgstr "H_iện các phần không hoạt động"
 
 #: common/resources/clock-dialog.glade:594
 msgid "Show gri_d"
@@ -610,11 +611,11 @@ msgstr "Định dạng miêu tả các thành phần ngày giờ để chèn và
 
 #: common/resources/clock-dialog.glade:699
 msgid "Date"
-msgstr "Ngày tháng"
+msgstr "Ngày"
 
 #: common/resources/clock-dialog.glade:744
 msgid "Time"
-msgstr "Giờ"
+msgstr "Thời gian"
 
 #: common/resources/clock-dialog.glade:871
 msgid "Clock Options"
@@ -624,11 +625,11 @@ msgstr "Tùy chọn đồng hồ"
 #: plugins/directorymenu/directorymenu.c:293
 #: plugins/directorymenu/directorymenu.desktop.in.in:4
 msgid "Directory Menu"
-msgstr "Thực đơn thư mục"
+msgstr "Thực đơn Thư mục"
 
 #: common/resources/directorymenu-dialog.glade:99
 msgid "Select A Directory"
-msgstr "Lựa chọn một thư mục"
+msgstr "Chọn một Thư mục"
 
 #: common/resources/directorymenu-dialog.glade:135
 msgid "_Base Directory:"
@@ -636,23 +637,23 @@ msgstr "Đường _dẫn:"
 
 #: common/resources/directorymenu-dialog.glade:179
 msgid "Show 'New Text _Document'"
-msgstr "Hiện 'Tạo tệp văn bản'"
+msgstr "_Hiện 'Tạo tệp văn bản'"
 
 #: common/resources/directorymenu-dialog.glade:194
 msgid "Show '_New Folder'"
-msgstr "Hiện 'Tạo thư mục'"
+msgstr "Hiệ_n 'Tạo Thư mục'"
 
 #: common/resources/directorymenu-dialog.glade:209
 msgid "Show 'Open in _Terminal'"
-msgstr "Hiện 'Mở trong hộp lệnh'"
+msgstr "Hiện 'Mở _trong hộp lệnh'"
 
 #: common/resources/directorymenu-dialog.glade:224
 msgid "Show '_Open _Folder'"
-msgstr "Hiện 'Mở thư mục'"
+msgstr "__Hiện 'Mở thư mục'"
 
 #: common/resources/directorymenu-dialog.glade:243
 msgid "Menu"
-msgstr "Thực đơn"
+msgstr "Trình đơn"
 
 #: common/resources/directorymenu-dialog.glade:272
 msgid "Show _hidden files"
@@ -710,7 +711,7 @@ msgstr "Thêm một hay nhiều mục đang too"
 #: common/resources/launcher-dialog.glade:87 panel/panel-dialogs.c:157
 #: panel/panel-item-dialog.c:197
 msgid "_Add"
-msgstr "Thêm"
+msgstr "_Thêm"
 
 #: common/resources/launcher-dialog.glade:140 panel/panel-item-dialog.c:221
 msgid "_Search:"
@@ -719,17 +720,17 @@ msgstr "Tìm _kiếm:"
 #: common/resources/launcher-dialog.glade:235
 #: plugins/launcher/launcher.desktop.in.in:4
 msgid "Launcher"
-msgstr "Trình gọi"
+msgstr "Trình khởi chạy"
 
 #: common/resources/launcher-dialog.glade:321
 msgid "Disable t_ooltips"
-msgstr "Vô hiệu hóa tooltip_s"
+msgstr "Tắt tooltip_s"
 
 #: common/resources/launcher-dialog.glade:325
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "Chọn tùy chọn này để vô hiệu hóa chú thích khi bạn di chuyển qua một nút hay mục của thực đơn."
+msgstr "Chọn tùy Chọn này để tắt chú thích khi bạn di chuyển qua một nút hay mục của thực đơn."
 
 #: common/resources/launcher-dialog.glade:337
 msgid "Show _label instead of icon"
@@ -737,15 +738,15 @@ msgstr "Hiện tên tha_y vì biểu tượng"
 
 #: common/resources/launcher-dialog.glade:352
 msgid "Show last _used item in panel"
-msgstr "Hiển thị mục được sử dụng lần cuối trên thanh tác vụ"
+msgstr "Hiển thị mục được sử dụng lần c_uối trên thanh tác vụ"
 
 #: common/resources/launcher-dialog.glade:356
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr "Chọn tuỳ chọn này để di chuyển mục được chọn đến thanh tác vụ."
+msgstr "Chọn tuỳ Chọn này để di chuyển mục được Chọn đến thanh tác vụ."
 
 #: common/resources/launcher-dialog.glade:375
 msgid "_Arrow button position:"
-msgstr "Vị trí nút mũi tên:"
+msgstr "_Vị trí nút mũi tên:"
 
 #: common/resources/launcher-dialog.glade:418
 msgid "Advanced"
@@ -799,7 +800,7 @@ msgstr "Phần ngăn cách"
 
 #: common/resources/separator-dialog.glade:33
 msgid "Handle"
-msgstr ""
+msgstr "Xử lý"
 
 #: common/resources/separator-dialog.glade:36
 msgid "Dots"
@@ -811,7 +812,7 @@ msgstr "_Mở rộng"
 
 #: common/resources/separator-dialog.glade:183
 msgid "Si_ze:"
-msgstr ""
+msgstr "_Kích cỡ:"
 
 #: common/resources/showdesktop-dialog.glade:18
 #: plugins/showdesktop/showdesktop.c:327
@@ -821,7 +822,7 @@ msgstr "Hiển thị nền"
 
 #: common/resources/showdesktop-dialog.glade:92
 msgid "_Show on mouse hover"
-msgstr "Hiện lên khi chạm chuột"
+msgstr "_Hiện lên khi chạm chuột"
 
 #: common/resources/showdesktop-dialog.glade:113
 #: common/resources/sn-dialog.glade:300
@@ -834,19 +835,19 @@ msgstr "Các mục trạng thái"
 
 #: common/resources/sn-dialog.glade:80
 msgid "C_lear Known Items"
-msgstr "Xoá các mục đã biết rồi"
+msgstr "_Xoá các mục đã biết rồi"
 
 #: common/resources/sn-dialog.glade:84
 msgid "Resets the list of items and their visibility settings"
-msgstr "Đặt lại danh sách mục và cấu hình hiển thị của chúng"
+msgstr "Đặt lại danh sách mục và cài đặt hiển thị của chúng"
 
 #: common/resources/sn-dialog.glade:144
 msgid "_Fixed icon size (pixels):"
-msgstr "Kích cỡ biểu tượng cố định (điểm ảnh):"
+msgstr "_Kích cỡ biểu tượng cố định (điểm ảnh):"
 
 #: common/resources/sn-dialog.glade:185
 msgid "Adjust size _automatically"
-msgstr "Tự động thay đổi kích cỡ"
+msgstr "Tự động th_ay đổi kích cỡ"
 
 #: common/resources/sn-dialog.glade:213
 msgid "Icons"
@@ -854,7 +855,7 @@ msgstr "Biểu tượng"
 
 #: common/resources/sn-dialog.glade:246
 msgid "Arrange _items in a single row"
-msgstr "Sắp xếp các mục trên cùng một hàng"
+msgstr "_Sắp xếp các mục trên cùng một hàng"
 
 #: common/resources/sn-dialog.glade:250
 msgid "If enabled, ensure that the items are laid out in a single row"
@@ -862,7 +863,7 @@ msgstr "Khi bật, đảm bảo các mục được hiển thị trên một hà
 
 #: common/resources/sn-dialog.glade:262
 msgid "_Hide items by default"
-msgstr "Mặc định ẩn các mục"
+msgstr "mặc địn_h ẩn các mục"
 
 #: common/resources/sn-dialog.glade:266
 msgid "When enabled, all new items will be marked as \"Hidden\""
@@ -870,7 +871,7 @@ msgstr "Khi bật, tất cả các mục mới sẽ được đánh dấu \"Ẩn
 
 #: common/resources/sn-dialog.glade:278
 msgid "_Square items"
-msgstr "Mục nút hình vuông"
+msgstr "_Mục nút hình vuông"
 
 #: common/resources/sn-dialog.glade:282
 msgid "Item buttons will take a square when it's possible"
@@ -898,31 +899,31 @@ msgstr "Các mục đã biết"
 
 #: common/resources/sn-dialog.glade:512
 msgid "_Menu is primary action"
-msgstr ""
+msgstr "_Menu là hành động chính"
 
 #: common/resources/sn-dialog.glade:516
 msgid "Left click will always display the menu for item"
-msgstr ""
+msgstr "Nhấp chuột trái sẽ luôn màn hình menu cho mục"
 
 #: common/resources/sn-dialog.glade:528
 msgid "_Request symbolic icons"
-msgstr ""
+msgstr "Yêu cầu biểu tượng tượng t_rưng"
 
 #: common/resources/sn-dialog.glade:532
 msgid "Load symbolic icons if available"
-msgstr ""
+msgstr "Tải các biểu tượng tượng trưng nếu có"
 
 #: common/resources/sn-dialog.glade:550
 msgid "Features"
-msgstr ""
+msgstr "Đặc trưng"
 
 #: common/resources/sn-dialog.glade:566
 msgid "Status Notifiers"
-msgstr ""
+msgstr "Trình thông báo trạng thái"
 
 #: common/resources/sn-dialog.glade:720
 msgid "Systray Icons"
-msgstr ""
+msgstr "Biểu tượng hệ thống"
 
 #: common/resources/tasklist-dialog.glade:23
 msgid "Nothing"
@@ -930,23 +931,23 @@ msgstr "Không có gì"
 
 #: common/resources/tasklist-dialog.glade:26
 msgid "Close Window"
-msgstr "Đóng cửa sổ"
+msgstr "Đóng Cửa sổ"
 
 #: common/resources/tasklist-dialog.glade:29
 msgid "Minimize Window"
-msgstr "Thu nhỏ cửa sổ"
+msgstr "Thu nhỏ Cửa sổ"
 
 #: common/resources/tasklist-dialog.glade:32
 msgid "New Instance"
-msgstr ""
+msgstr "Phiên bản mới"
 
 #: common/resources/tasklist-dialog.glade:43
 msgid "Timestamp"
-msgstr ""
+msgstr "Dấu thời gian"
 
 #: common/resources/tasklist-dialog.glade:46
 msgid "Group title and timestamp"
-msgstr ""
+msgstr "Tiêu đề nhóm và dấu thời gian"
 
 #: common/resources/tasklist-dialog.glade:49
 msgid "Window title"
@@ -958,12 +959,12 @@ msgstr "Nhóm tiêu đề và tiên đề ứng dụng"
 
 #: common/resources/tasklist-dialog.glade:55
 msgid "None, allow drag-and-drop"
-msgstr "Không, cho phép di-và-thả"
+msgstr "Không có có có có có có, cho phép di-và-thả"
 
 #: common/resources/tasklist-dialog.glade:70
 #: plugins/tasklist/tasklist.desktop.in.in:4
 msgid "Window Buttons"
-msgstr "Các nút cửa sổ"
+msgstr "Các nút Cửa sổ"
 
 #: common/resources/tasklist-dialog.glade:152
 msgid "Show button _labels"
@@ -979,7 +980,7 @@ msgstr "Hiển thị _tay cầm"
 
 #: common/resources/tasklist-dialog.glade:200
 msgid "Show _tooltips"
-msgstr ""
+msgstr "Hiển _thị chú giải công cụ"
 
 #: common/resources/tasklist-dialog.glade:223
 msgid "Sorting _order:"
@@ -987,19 +988,19 @@ msgstr "Phân _loại theo:"
 
 #: common/resources/tasklist-dialog.glade:306
 msgid "Mi_ddle click action:"
-msgstr "Thao tác nhấn chuột giữa:"
+msgstr "_Thao tác nhấn chuột giữa:"
 
 #: common/resources/tasklist-dialog.glade:344
 msgid "_Group windows by application"
-msgstr ""
+msgstr "Nhóm các cửa sổ theo ứn_g dụng"
 
 #: common/resources/tasklist-dialog.glade:360
 msgid "Restore minimized windows to current _workspace"
-msgstr ""
+msgstr "_Khôi phục các cửa sổ thu nhỏ về không gian làm việc hiện tại"
 
 #: common/resources/tasklist-dialog.glade:376
 msgid "D_raw window frame when hovering a button"
-msgstr ""
+msgstr "_Vẽ khung cửa sổ khi di chuột vào nút"
 
 #: common/resources/tasklist-dialog.glade:392
 msgid "_Switch windows using the mouse wheel"
@@ -1012,15 +1013,15 @@ msgstr "Hành vi"
 #: common/resources/tasklist-dialog.glade:447
 #: common/resources/windowmenu-dialog.glade:239
 msgid "Show windows from _all workspaces"
-msgstr "Hiển thị cửa sổ trên mọi không gian làm việc"
+msgstr "Hiển thị cử_a sổ trên mọi không gian làm việc"
 
 #: common/resources/tasklist-dialog.glade:470
 msgid "Show windows _from:"
-msgstr ""
+msgstr "_Hiển thị các cửa sổ từ:"
 
 #: common/resources/tasklist-dialog.glade:507
 msgid "Show only _minimized windows"
-msgstr ""
+msgstr "_Chỉ hiển thị các cửa sổ thu nhỏ"
 
 #: common/resources/windowmenu-dialog.glade:23
 msgid "Icon"
@@ -1028,12 +1029,12 @@ msgstr "Biểu tượng"
 
 #: common/resources/windowmenu-dialog.glade:26
 msgid "Arrow"
-msgstr ""
+msgstr "Mũi tên"
 
 #: common/resources/windowmenu-dialog.glade:32
 #: plugins/windowmenu/windowmenu.desktop.in.in:4
 msgid "Window Menu"
-msgstr "Thực đơn cửa sổ"
+msgstr "Thực đơn Cửa sổ"
 
 #: common/resources/windowmenu-dialog.glade:119
 msgid "Button layout:"
@@ -1041,15 +1042,15 @@ msgstr "Cách bố trí nút:"
 
 #: common/resources/windowmenu-dialog.glade:155
 msgid "Show workspace a_ctions"
-msgstr ""
+msgstr "Hiển thị _các tác vụ trong không gian làm việc"
 
 #: common/resources/windowmenu-dialog.glade:170
 msgid "Show workspace _names"
-msgstr ""
+msgstr "Hiể_n thị tên không gian làm việc"
 
 #: common/resources/windowmenu-dialog.glade:185
 msgid "Enable _urgency notification"
-msgstr ""
+msgstr "_Bật thông báo khẩn cấp"
 
 #. I18N: monitor name in the output selector
 #: common/panel-utils.c:425
@@ -1060,12 +1061,12 @@ msgstr "Màn hình %d"
 #: libxfce4panel/xfce-panel-plugin.c:1109
 #: panel/panel-preferences-dialog.c:1499
 msgid "Remove"
-msgstr "Gỡ"
+msgstr "Xóa"
 
 #: libxfce4panel/xfce-panel-plugin.c:1110
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
-msgstr "Việc gỡ bỏ một mục khỏi thanh tác vụ sẽ đồng thời xoá các cài đặt hiện có của mục đấy."
+msgstr "Việc gỡ bỏ một mục khỏi thanh tác vụ sẽ đồng thời xoá các cấu hình hiện có của mục đấy."
 
 #: libxfce4panel/xfce-panel-plugin.c:1114
 #: panel/panel-preferences-dialog.c:1506
@@ -1076,7 +1077,7 @@ msgstr "Bạn có chắc là bạn muốn loại bỏ \"%s\"?"
 #. properties item
 #: libxfce4panel/xfce-panel-plugin.c:1236
 msgid "_Properties"
-msgstr "Thuộc tính"
+msgstr "_Thuộc tính"
 
 #. about item
 #: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3934
@@ -1093,7 +1094,7 @@ msgstr "_Di chuyển"
 #: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1076
 #: plugins/launcher/launcher-dialog.c:935
 msgid "_Remove"
-msgstr "_Gỡ bỏ "
+msgstr "_Gỡ bỏ"
 
 #: libxfce4panel/xfce-panel-plugin.c:1292
 msgid "Pane_l"
@@ -1117,7 +1118,7 @@ msgstr "Đăng _xuất"
 #. about item
 #: libxfce4panel/xfce-panel-plugin.c:1355
 msgid "About"
-msgstr "Thông tin"
+msgstr "Giới thiệu"
 
 #: panel/main.c:66
 msgid "Show the 'Panel Preferences' dialog"
@@ -1125,7 +1126,7 @@ msgstr "Hiện hộp thoại 'Tùy thích'"
 
 #: panel/main.c:66 panel/main.c:67
 msgid "PANEL-NUMBER"
-msgstr ""
+msgstr "BẢNG ĐIỀU KHIỂN ĐIỀU KHIỂN ĐIỀU KHIỂN ĐIỀU KHIỂN ĐIỀU KHIỂN ĐIỀU KHIỂN-NUMBER"
 
 #: panel/main.c:67
 msgid "Show the 'Add New Items' dialog"
@@ -1133,7 +1134,7 @@ msgstr "Hiển thị hộp thoại \"Thêm mục mới\""
 
 #: panel/main.c:68
 msgid "Save the panel configuration"
-msgstr "Lưu thiết lập của thanh tác vụ"
+msgstr "Lưu cấu hình của thanh tác vụ"
 
 #: panel/main.c:69
 msgid "Add a new plugin to the panel"
@@ -1141,7 +1142,7 @@ msgstr "Thêm phần mở rộng cho thanh tác vụ"
 
 #: panel/main.c:69
 msgid "PLUGIN-NAME"
-msgstr ""
+msgstr "PLUGIN-NAME"
 
 #: panel/main.c:70
 msgid "Restart the running panel instance"
@@ -1169,11 +1170,11 @@ msgstr "[ĐỐI SỐ...]"
 #: panel/main.c:268
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr "Nhập \"%s --help\" để biết cách sử dụng"
+msgstr "Nhập \"%s --help\" để biết cách sử dụng."
 
 #: panel/main.c:285
 msgid "The Xfce development team. All rights reserved."
-msgstr "Nhóm phát triển Xfce. Tất cả các quyền được bảo lưu"
+msgstr "Nhóm phát triển Xfce. Tất cả các quyền được bảo lưu."
 
 #: panel/main.c:286
 #, c-format
@@ -1200,7 +1201,7 @@ msgstr "Hiển thị hộp thoại thêm mục mới thất bại"
 
 #: panel/main.c:426
 msgid "Failed to save the panel configuration"
-msgstr "Lưu "
+msgstr "Lưu"
 
 #: panel/main.c:428
 msgid "Failed to add a plugin to the panel"
@@ -1242,7 +1243,7 @@ msgstr "Không thể chạy ứng dụng di cư"
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
-msgstr "Plugin \"%s\" không thể chạy, bạn có muốn gỡ bỏ nó khỏi cấu hình của xfce4-panel không?"
+msgstr "Plugin \"%s\" không thể chạy, bạn có muốn gỡ bỏ nó khỏi cấu hình của xfce4-bảng điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển không?"
 
 #: panel/panel-application.c:346
 #, c-format
@@ -1252,11 +1253,11 @@ msgid ""
 "doing, you can remove it permanently, otherwise you'd better quit and make a"
 " backup of the current configuration using %s, before checking your "
 "installation and trying to start xfce4-panel again."
-msgstr "Plugin này đang ở trong cấu hình xfce4-panel hiện tại nhưng không thể chạy, có thể là do lỗi khi cài đặt. Nếu bạn hiểu rõ về việc bạn đang làm, bạn có thể gỡ bỏ nó vĩnh viễn, nếu không, bạn nên thoát và sao lưu cấu hình hiện tại bằng %s, trước khi thử chạy lại xfce4-panel."
+msgstr "Plugin này đang ở trong cấu hình xfce4-bảng điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển hiện tại nhưng không thể chạy, có thể là do lỗi khi cấu hình. Nếu bạn hiểu rõ về việc bạn đang làm, bạn có thể gỡ bỏ nó vĩnh viễn, nếu không, bạn nên thoát và sao lưu cấu hình hiện tại bằng %s, trước khi thử chạy lại xfce4-bảng điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển."
 
 #: panel/panel-application.c:353
 msgid "Plugin loading failure"
-msgstr "Lỗi khi chạy plugin"
+msgstr "Lỗi khi chạy Plugin"
 
 #: panel/panel-application.c:354
 msgid "_Quit"
@@ -1300,14 +1301,14 @@ msgstr "Thực thi lệnh \"%s\" thất bại"
 #: panel/panel-dbus-client.c:209
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
+msgstr "Cú pháp sự kiện PLUGIN được chỉ định không hợp lệ. Sử dụng PLUGIN-NAME:NAME[:TYPE:VALUE]."
 
 #: panel/panel-dbus-client.c:239
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr ""
+msgstr "Loại gợi ý không hợp lệ \"%s\". Các loại hợp lệ là bool, double, int, string và uint."
 
 #: panel/panel-dialogs.c:53
 msgid "Unable to open the e-mail address"
@@ -1319,7 +1320,7 @@ msgstr "Thanh tác vụ của môi trường màn hình XFCE"
 
 #: panel/panel-dialogs.c:83
 msgid "translator-credits"
-msgstr "Giới thiệu-Người dịch"
+msgstr "giới thiệu-Người dịch"
 
 #: panel/panel-dialogs.c:157
 msgid "Add New Item"
@@ -1358,7 +1359,7 @@ msgstr "Nhập cụm từ cần tìm vào đây"
 #: panel/panel-item-dialog.c:618
 #, c-format
 msgid "Internal name: %s"
-msgstr ""
+msgstr "Tên nội bộ: %s"
 
 #: panel/panel-plugin-external.c:413
 #, c-format
@@ -1388,7 +1389,7 @@ msgstr "_Thông tin"
 
 #: panel/panel-preferences-dialog.c:346
 msgid "Show about information of the currently selected item"
-msgstr "Hiển thị thông tin về mục được chọn"
+msgstr "Hiển thị giới thiệu giới thiệu mục được chọn"
 
 #: panel/panel-preferences-dialog.c:580
 msgid "Automatic"
@@ -1412,7 +1413,7 @@ msgstr "Bạn có chắc là muốn xoá thanh tác vụ %d?"
 #: panel/panel-preferences-dialog.c:1376
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
-msgstr ""
+msgstr "%s <span color=\"grey\" size=\"small\">(bên ngoài)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
@@ -1421,14 +1422,14 @@ msgstr ""
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr ""
+msgstr "Tên nội bộ: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
 #: panel/panel-preferences-dialog.c:1393
 #, c-format
 msgid "Internal name: %s-%d"
-msgstr ""
+msgstr "Tên nội bộ: %s-%d"
 
 #: panel/panel-preferences-dialog.c:1508
 msgid "If you remove the item from the panel, it is permanently lost."
@@ -1454,19 +1455,19 @@ msgstr "_Mức độ:"
 
 #: panel/panel-tic-tac-toe.c:125
 msgid "Novice"
-msgstr ""
+msgstr "Người mới"
 
 #: panel/panel-tic-tac-toe.c:126
 msgid "Intermediate"
-msgstr ""
+msgstr "Trung cấp"
 
 #: panel/panel-tic-tac-toe.c:127
 msgid "Experienced"
-msgstr ""
+msgstr "Có kinh nghiệm"
 
 #: panel/panel-tic-tac-toe.c:128
 msgid "Expert"
-msgstr ""
+msgstr "Chuyên gia"
 
 #: panel/panel-window.c:3896
 msgid "_Lock Panel"
@@ -1478,7 +1479,7 @@ msgstr "Nạp cấu hình mặc định, thất bại"
 
 #: migrate/main.c:106
 msgid "Panel config needs migration..."
-msgstr "Cấu hình thanh tác vụ cần phải được nâng cấp"
+msgstr "Cấu hình thanh tác vụ cần phải được nâng cấp..."
 
 #: migrate/main.c:110
 msgid "Failed to migrate the existing configuration"
@@ -1511,7 +1512,7 @@ msgstr "Thoát ra..."
 
 #: plugins/actions/actions.c:172
 msgid "Log _Out..."
-msgstr "Đăng _nhập"
+msgstr "Đăng _nhập..."
 
 #: plugins/actions/actions.c:178
 msgid "Switch User"
@@ -1635,12 +1636,12 @@ msgstr "Ứng dụng"
 #: plugins/applicationsmenu/applicationsmenu.c:601
 #: plugins/directorymenu/directorymenu.c:461
 msgid "Select An Icon"
-msgstr "Lựa chọn một biểu tượng"
+msgstr "Chọn một biểu tượng"
 
 #: plugins/applicationsmenu/applicationsmenu.c:601
 #: plugins/directorymenu/directorymenu.c:461
 msgid "_OK"
-msgstr "_Đồng "
+msgstr "_Đồ_ng"
 
 #. show an error dialog
 #: plugins/applicationsmenu/applicationsmenu.c:638 plugins/clock/clock.c:1055
@@ -1681,7 +1682,7 @@ msgstr "Hiện menu ở vị trí con trỏ"
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:32
 #: plugins/windowmenu/xfce4-popup-windowmenu.sh:32
 msgid "Show help options"
-msgstr "Hiển thị các tùy chọn trợ giúp"
+msgstr "Hiển thị tùy chọn trợ giúp"
 
 #. TRANSLATORS: adjust this accordingly for your locale format
 #: plugins/clock/clock.c:42
@@ -1704,12 +1705,12 @@ msgstr "Định dạng tùy chọn"
 #: plugins/clock/clock-digital.h:30
 msgctxt "Time"
 msgid "%R"
-msgstr ""
+msgstr "%R"
 
 #: plugins/clock/clock-digital.h:31
 msgctxt "Date"
 msgid "%Y-%m-%d"
-msgstr ""
+msgstr "%Y-%m-%d"
 
 #: plugins/clock/clock-fuzzy.c:75
 msgid "Night"
@@ -2043,7 +2044,7 @@ msgstr "Thực thi ứng dụng ưa thích cho tệp tin dạng \"%s\", thất b
 
 #: plugins/directorymenu/directorymenu.c:921
 msgid "Create New Folder"
-msgstr "Tạo thư mục"
+msgstr "Tạo Thư mục"
 
 #: plugins/directorymenu/directorymenu.c:926
 msgid "Create New Text Document"
@@ -2055,11 +2056,11 @@ msgstr "_Tạo"
 
 #: plugins/directorymenu/directorymenu.c:932
 msgid "Create & _Open"
-msgstr "Tạo và mở"
+msgstr "Tạ_o và mở"
 
 #: plugins/directorymenu/directorymenu.c:945
 msgid "Enter the new name:"
-msgstr "Nhập tên mới"
+msgstr "Nhập tên mới:"
 
 #: plugins/directorymenu/directorymenu.c:981
 #, c-format
@@ -2068,7 +2069,7 @@ msgstr "Không thể tạo thư mục: %s"
 
 #: plugins/directorymenu/directorymenu.c:1063
 msgid "Open Folder"
-msgstr "Mở thư mục"
+msgstr "Mở Thư mục"
 
 #: plugins/directorymenu/directorymenu.c:1077
 msgid "Open in Terminal"
@@ -2076,7 +2077,7 @@ msgstr "Mở trong dòng lệnh"
 
 #: plugins/directorymenu/directorymenu.c:1091
 msgid "Create Folder..."
-msgstr "Tạo thư mục..."
+msgstr "Tạo Thư mục..."
 
 #: plugins/directorymenu/directorymenu.c:1105
 msgid "Create Text Document..."
@@ -2096,7 +2097,7 @@ msgstr "Mục không được đặt tên"
 
 #: plugins/launcher/launcher.c:1814
 msgid "No items"
-msgstr "Không có mục nào"
+msgstr "Không mục nào"
 
 #: plugins/launcher/launcher-dialog.c:611
 msgid "Failed to open desktop item editor"
@@ -2175,79 +2176,79 @@ msgstr "Không thể khởi động vùng thông báo"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr ""
+msgstr "Rất có thể một tiện ích khác đã đảm nhận chức năng của khu vực thông báo. Khu vực này sẽ không được sử dụng."
 
 #: plugins/systray/systray.c:411
 msgid "The notification area lost selection"
-msgstr ""
+msgstr "Vùng thông báo bị mất lựa chọn"
 
 #: plugins/systray/systray-manager.c:382
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr ""
+msgstr "Không lấy được lựa chọn người quản lý cho màn hình %d"
 
 #: plugins/systray/systray.desktop.in.in:5
 msgid "Status Tray Plugin"
-msgstr ""
+msgstr "Plugin khay trạng thái"
 
 #: plugins/systray/systray.desktop.in.in:6
 msgid ""
 "Provides status notifier items (application indicators) and legacy systray "
 "items"
-msgstr ""
+msgstr "Cung cấp các mục thông báo trạng thái (chỉ báo ứng dụng) và các mục hệ thống cũ"
 
 #: plugins/tasklist/tasklist-widget.c:3200
 #, c-format
 msgid "Unable to start new instance of '%s'"
-msgstr ""
+msgstr "Không thể bắt đầu phiên bản mới của '%s'"
 
 #: plugins/tasklist/tasklist-widget.c:3227
 msgid "Launch New Instance"
-msgstr ""
+msgstr "Khởi chạy phiên bản mới"
 
 #: plugins/tasklist/tasklist-widget.c:3982
 msgid "Mi_nimize All"
-msgstr ""
+msgstr "_Giảm thiểu Tất cả"
 
 #: plugins/tasklist/tasklist-widget.c:3989
 msgid "Un_minimize All"
-msgstr ""
+msgstr "Giả_m thiểu Tất cả"
 
 #: plugins/tasklist/tasklist-widget.c:3996
 msgid "Ma_ximize All"
-msgstr "_Phóng to tất cả"
+msgstr "_Phóng to Tất cả"
 
 #: plugins/tasklist/tasklist-widget.c:4003
 msgid "_Unmaximize All"
-msgstr ""
+msgstr "_Tối đa hóa Tất cả"
 
 #: plugins/tasklist/tasklist-widget.c:4014
 msgid "_Close All"
-msgstr "Đó_ng tất cả"
+msgstr "Đó_ng Tất cả"
 
 #: plugins/tasklist/tasklist-widget.c:5025
 msgid "all monitors"
-msgstr ""
+msgstr "tất cả màn hình"
 
 #: plugins/tasklist/tasklist-widget.c:5034
 msgid "panel's monitor"
-msgstr ""
+msgstr "màn hình của bảng điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển điều khiển"
 
 #: plugins/tasklist/tasklist.desktop.in.in:5
 msgid "Switch between open windows using buttons"
-msgstr ""
+msgstr "Chuyển đổi giữa các cửa sổ đang mở bằng các nút"
 
 #: plugins/windowmenu/windowmenu.c:738
 msgid "Desktop"
-msgstr "Màn hình"
+msgstr "Màn hình nền"
 
 #: plugins/windowmenu/windowmenu.c:1354
 msgid "No Windows"
-msgstr "Không có cửa sổ"
+msgstr "Không cửa sổ"
 
 #: plugins/windowmenu/windowmenu.c:1369
 msgid "Urgent Windows"
-msgstr ""
+msgstr "Windows khẩn cấp"
 
 #: plugins/windowmenu/windowmenu.c:1420
 msgid "Add Workspace"
