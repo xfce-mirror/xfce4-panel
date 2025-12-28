@@ -46,7 +46,7 @@ struct _WindowMenuPlugin
 
   /* panel widgets */
   GtkWidget *button;
-  GtkWidget *icon;
+  GtkWidget *widget;
 
   /* settings */
   GObject *settings_dialog;
@@ -266,9 +266,9 @@ window_menu_plugin_init (WindowMenuPlugin *plugin)
   g_signal_connect (G_OBJECT (plugin->button), "toggled",
                     G_CALLBACK (window_menu_plugin_menu), plugin);
 
-  plugin->icon = gtk_image_new_from_icon_name ("user-desktop", GTK_ICON_SIZE_BUTTON);
-  gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
-  gtk_widget_show (plugin->icon);
+  plugin->widget = gtk_image_new_from_icon_name ("user-desktop", GTK_ICON_SIZE_BUTTON);
+  gtk_container_add (GTK_CONTAINER (plugin->button), plugin->widget);
+  gtk_widget_show (plugin->widget);
 }
 
 
@@ -334,12 +334,7 @@ window_menu_plugin_set_property (GObject *object,
           /* destroy previous widget, at the same time removing it from the button */
 
           if (plugin->button_style == BUTTON_STYLE_ICON || plugin->button_style == BUTTON_STYLE_TEXT)
-            gtk_widget_destroy (plugin->icon);
-
-          /* plugin->icon can reference an icon or a label widget, depending on button_style.
-           * Since at most either one is in use at a given time, why not recycle the same variable
-           * and save introducing another one? Admittingly, this might look confusing, hence this
-           * remark */
+            gtk_widget_destroy (plugin->widget);
 
           plugin->button_style = button_style;
 
@@ -347,26 +342,25 @@ window_menu_plugin_set_property (GObject *object,
           switch (button_style)
             {
             case BUTTON_STYLE_ICON:
-              plugin->icon = gtk_image_new ();
-              gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
-              gtk_widget_show (plugin->icon);
+              plugin->widget = gtk_image_new ();
+              gtk_container_add (GTK_CONTAINER (plugin->button), plugin->widget);
+              gtk_widget_show (plugin->widget);
               break;
 
             case BUTTON_STYLE_TEXT:
               {
                 gchar *formatted_text;
 
-                plugin->icon = gtk_label_new (NULL);
-                /* actually it's not an icon, but a label; see comment above */
+                plugin->widget = gtk_label_new (NULL);
 
                 /* make sure the label is not printed in bold which is the default: */
                 formatted_text = g_markup_printf_escaped ("<span weight=\"normal\">%s</span>",_("Windows"));
-                gtk_label_set_markup (GTK_LABEL (plugin->icon), formatted_text);
+                gtk_label_set_markup (GTK_LABEL (plugin->widget), formatted_text);
                 g_free (formatted_text);
-                gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
+                gtk_container_add (GTK_CONTAINER (plugin->button), plugin->widget);
                 window_menu_plugin_mode_changed (panel_plugin,
                                                  xfce_panel_plugin_get_mode (panel_plugin));
-                gtk_widget_show (plugin->icon);
+                gtk_widget_show (plugin->widget);
               }
               break;
             }
@@ -617,8 +611,8 @@ window_menu_plugin_mode_changed (XfcePanelPlugin *panel_plugin, XfcePanelPluginM
 
   if (plugin->button_style == BUTTON_STYLE_TEXT)
     {
-      gtk_label_set_angle (GTK_LABEL (plugin->icon), (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL) ? 270 : 0);
-      gtk_label_set_ellipsize (GTK_LABEL (plugin->icon),
+      gtk_label_set_angle (GTK_LABEL (plugin->widget), (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL) ? 270 : 0);
+      gtk_label_set_ellipsize (GTK_LABEL (plugin->widget),
                                (mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR) ? PANGO_ELLIPSIZE_END : PANGO_ELLIPSIZE_NONE);
     }
 }
@@ -727,7 +721,7 @@ window_menu_plugin_set_icon (WindowMenuPlugin *plugin,
   if (!xfw_window_is_active (window))
     return;
 
-  gtk_widget_set_tooltip_text (plugin->icon, xfw_window_get_name (window));
+  gtk_widget_set_tooltip_text (plugin->widget, xfw_window_get_name (window));
 
   icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (plugin));
   scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (plugin));
@@ -736,13 +730,13 @@ window_menu_plugin_set_icon (WindowMenuPlugin *plugin,
   if (G_LIKELY (pixbuf != NULL))
     {
       cairo_surface_t *surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
-      gtk_image_set_from_surface (GTK_IMAGE (plugin->icon), surface);
+      gtk_image_set_from_surface (GTK_IMAGE (plugin->widget), surface);
       cairo_surface_destroy (surface);
     }
   else
     {
-      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->icon), "image-missing", icon_size);
-      gtk_image_set_pixel_size (GTK_IMAGE (plugin->icon), icon_size);
+      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->widget), "image-missing", icon_size);
+      gtk_image_set_pixel_size (GTK_IMAGE (plugin->widget), icon_size);
     }
 }
 
@@ -755,11 +749,11 @@ window_menu_plugin_active_window_changed (XfwScreen *screen,
 {
   XfwWindow *window;
   gint icon_size;
-  GtkWidget *icon = GTK_WIDGET (plugin->icon);
+  GtkWidget *widget = GTK_WIDGET (plugin->widget);
   XfwWindowType type;
 
   panel_return_if_fail (WINDOW_MENU_IS_PLUGIN (plugin));
-  panel_return_if_fail (GTK_IMAGE (icon));
+  panel_return_if_fail (GTK_IMAGE (widget));
   panel_return_if_fail (XFW_IS_SCREEN (screen));
   panel_return_if_fail (plugin->screen == screen);
 
@@ -782,9 +776,9 @@ show_desktop_icon:
 
           /* desktop is shown right now */
           icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (plugin));
-          gtk_image_set_from_icon_name (GTK_IMAGE (icon), "user-desktop", icon_size);
-          gtk_image_set_pixel_size (GTK_IMAGE (icon), icon_size);
-          gtk_widget_set_tooltip_text (GTK_WIDGET (icon), _("Desktop"));
+          gtk_image_set_from_icon_name (GTK_IMAGE (widget), "user-desktop", icon_size);
+          gtk_image_set_pixel_size (GTK_IMAGE (widget), icon_size);
+          gtk_widget_set_tooltip_text (GTK_WIDGET (widget), _("Desktop"));
         }
     }
 }
