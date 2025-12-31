@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-11-08 12:52+0100\n"
+"POT-Creation-Date: 2025-12-31 12:54+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Mișu Moldovan <dumol@xfce.org>, 2015\n"
 "Language-Team: Romanian (http://app.transifex.com/xfce/xfce4-panel/language/ro/)\n"
@@ -98,7 +98,7 @@ msgstr "Preferințe panou"
 #: common/resources/showdesktop-dialog.glade:34
 #: common/resources/sn-dialog.glade:65
 #: common/resources/tasklist-dialog.glade:86
-#: common/resources/windowmenu-dialog.glade:48 panel/panel-item-dialog.c:205
+#: common/resources/windowmenu-dialog.glade:51 panel/panel-item-dialog.c:205
 #: panel/panel-tic-tac-toe.c:110
 msgid "_Close"
 msgstr "_Închide"
@@ -114,7 +114,7 @@ msgstr "_Închide"
 #: common/resources/separator-dialog.glade:73
 #: common/resources/showdesktop-dialog.glade:49
 #: common/resources/tasklist-dialog.glade:102
-#: common/resources/windowmenu-dialog.glade:63
+#: common/resources/windowmenu-dialog.glade:66
 #: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
 #: panel/panel-window.c:3925
 msgid "_Help"
@@ -419,7 +419,7 @@ msgstr "Selectați această opțiune pentru a afișa numele generice ale aplica�
 #: common/resources/directorymenu-dialog.glade:150
 #: common/resources/separator-dialog.glade:222
 #: common/resources/tasklist-dialog.glade:266
-#: common/resources/windowmenu-dialog.glade:206
+#: common/resources/windowmenu-dialog.glade:209
 msgid "Appearance"
 msgstr "Aspect"
 
@@ -670,7 +670,7 @@ msgstr "Modele de _fișiere:"
 
 #: common/resources/directorymenu-dialog.glade:316
 #: common/resources/tasklist-dialog.glade:529
-#: common/resources/windowmenu-dialog.glade:260
+#: common/resources/windowmenu-dialog.glade:263
 msgid "Filtering"
 msgstr "Filtrare"
 
@@ -1009,7 +1009,7 @@ msgid "Behaviour"
 msgstr "Comportament"
 
 #: common/resources/tasklist-dialog.glade:447
-#: common/resources/windowmenu-dialog.glade:239
+#: common/resources/windowmenu-dialog.glade:242
 msgid "Show windows from _all workspaces"
 msgstr "Afișează ferestrele din to_ate spațiile de lucru"
 
@@ -1029,24 +1029,28 @@ msgstr "Pictogramă"
 msgid "Arrow"
 msgstr "Săgeată"
 
-#: common/resources/windowmenu-dialog.glade:32
+#: common/resources/windowmenu-dialog.glade:29
+msgid "Text"
+msgstr "Text"
+
+#: common/resources/windowmenu-dialog.glade:35
 #: plugins/windowmenu/windowmenu.desktop.in.in:4
 msgid "Window Menu"
 msgstr "Listă de ferestre"
 
-#: common/resources/windowmenu-dialog.glade:119
+#: common/resources/windowmenu-dialog.glade:122
 msgid "Button layout:"
 msgstr "Aspectul butonului:"
 
-#: common/resources/windowmenu-dialog.glade:155
+#: common/resources/windowmenu-dialog.glade:158
 msgid "Show workspace a_ctions"
 msgstr "Afișează a_cțiunile spațiilor de lucru"
 
-#: common/resources/windowmenu-dialog.glade:170
+#: common/resources/windowmenu-dialog.glade:173
 msgid "Show workspace _names"
 msgstr "Afișează _numele spațiilor de lucru"
 
-#: common/resources/windowmenu-dialog.glade:185
+#: common/resources/windowmenu-dialog.glade:188
 msgid "Enable _urgency notification"
 msgstr "Activează notificarea _urgenței"
 
@@ -1645,7 +1649,7 @@ msgstr "_Ok"
 
 #. show an error dialog
 #: plugins/applicationsmenu/applicationsmenu.c:638 plugins/clock/clock.c:1055
-#: plugins/launcher/launcher.c:2497
+#: plugins/launcher/launcher.c:2499
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Nu s-a putut executa comanda „%s”."
@@ -2091,11 +2095,11 @@ msgstr "Afișează un arbore de directoare în meniu"
 msgid "Open launcher menu"
 msgstr "Deschide meniul lansatorului"
 
-#: plugins/launcher/launcher.c:1612
+#: plugins/launcher/launcher.c:1614
 msgid "Unnamed Item"
 msgstr "Element fără nume"
 
-#: plugins/launcher/launcher.c:1814
+#: plugins/launcher/launcher.c:1816
 msgid "No items"
 msgstr "Niciun element"
 
@@ -2134,7 +2138,7 @@ msgstr "Lansator de programe cu meniu opțional"
 msgid "Unable to open the workspace settings"
 msgstr "Nu s-au putut deschide opțiunile pentru spațiile de lucru"
 
-#: plugins/pager/pager-buttons.c:628 plugins/windowmenu/windowmenu.c:959
+#: plugins/pager/pager-buttons.c:628 plugins/windowmenu/windowmenu.c:992
 #, c-format
 msgid "Workspace %d"
 msgstr "Spațiul de lucru %d"
@@ -2238,28 +2242,32 @@ msgstr "monitorul panoului"
 msgid "Switch between open windows using buttons"
 msgstr "Schimbați între ferestrele deschise utilizând butoanele"
 
-#: plugins/windowmenu/windowmenu.c:738
+#: plugins/windowmenu/windowmenu.c:351
+msgid "Windows"
+msgstr ""
+
+#: plugins/windowmenu/windowmenu.c:771
 msgid "Desktop"
 msgstr "Birou"
 
-#: plugins/windowmenu/windowmenu.c:1354
+#: plugins/windowmenu/windowmenu.c:1387
 msgid "No Windows"
 msgstr "Nicio fereastră"
 
-#: plugins/windowmenu/windowmenu.c:1369
+#: plugins/windowmenu/windowmenu.c:1402
 msgid "Urgent Windows"
 msgstr "Ferestre urgente"
 
-#: plugins/windowmenu/windowmenu.c:1420
+#: plugins/windowmenu/windowmenu.c:1453
 msgid "Add Workspace"
 msgstr "Adăugare spațiu de lucru"
 
-#: plugins/windowmenu/windowmenu.c:1442
+#: plugins/windowmenu/windowmenu.c:1475
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Elimină spațiul de lucru „%s”"
 
-#: plugins/windowmenu/windowmenu.c:1444
+#: plugins/windowmenu/windowmenu.c:1477
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Elimină spațiul de lucru %d"
