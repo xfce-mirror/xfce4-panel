@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-11-08 12:52+0100\n"
+"POT-Creation-Date: 2025-12-31 12:54+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2009,2013-2015,2017-2020,2022-2024\n"
 "Language-Team: Kazakh (http://app.transifex.com/xfce/xfce4-panel/language/kk/)\n"
@@ -94,7 +94,7 @@ msgstr "Панель баптаулары"
 #: common/resources/showdesktop-dialog.glade:34
 #: common/resources/sn-dialog.glade:65
 #: common/resources/tasklist-dialog.glade:86
-#: common/resources/windowmenu-dialog.glade:48 panel/panel-item-dialog.c:205
+#: common/resources/windowmenu-dialog.glade:51 panel/panel-item-dialog.c:205
 #: panel/panel-tic-tac-toe.c:110
 msgid "_Close"
 msgstr "_Жабу"
@@ -110,7 +110,7 @@ msgstr "_Жабу"
 #: common/resources/separator-dialog.glade:73
 #: common/resources/showdesktop-dialog.glade:49
 #: common/resources/tasklist-dialog.glade:102
-#: common/resources/windowmenu-dialog.glade:63
+#: common/resources/windowmenu-dialog.glade:66
 #: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
 #: panel/panel-window.c:3925
 msgid "_Help"
@@ -415,7 +415,7 @@ msgstr "Мәзірде қолданбалардың негізгі атауын 
 #: common/resources/directorymenu-dialog.glade:150
 #: common/resources/separator-dialog.glade:222
 #: common/resources/tasklist-dialog.glade:266
-#: common/resources/windowmenu-dialog.glade:206
+#: common/resources/windowmenu-dialog.glade:209
 msgid "Appearance"
 msgstr "Сыртқы түрі"
 
@@ -666,7 +666,7 @@ msgstr "_Файл үлгісі:"
 
 #: common/resources/directorymenu-dialog.glade:316
 #: common/resources/tasklist-dialog.glade:529
-#: common/resources/windowmenu-dialog.glade:260
+#: common/resources/windowmenu-dialog.glade:263
 msgid "Filtering"
 msgstr "Сүзгілеу"
 
@@ -1005,7 +1005,7 @@ msgid "Behaviour"
 msgstr "Мінез-құлығы"
 
 #: common/resources/tasklist-dialog.glade:447
-#: common/resources/windowmenu-dialog.glade:239
+#: common/resources/windowmenu-dialog.glade:242
 msgid "Show windows from _all workspaces"
 msgstr "Барлық жұмыс орындар тере_зелерін көрсету"
 
@@ -1025,24 +1025,28 @@ msgstr "Таңбаша"
 msgid "Arrow"
 msgstr "Сызықша"
 
-#: common/resources/windowmenu-dialog.glade:32
+#: common/resources/windowmenu-dialog.glade:29
+msgid "Text"
+msgstr "Мәтін"
+
+#: common/resources/windowmenu-dialog.glade:35
 #: plugins/windowmenu/windowmenu.desktop.in.in:4
 msgid "Window Menu"
 msgstr "Терезелер мәзірі"
 
-#: common/resources/windowmenu-dialog.glade:119
+#: common/resources/windowmenu-dialog.glade:122
 msgid "Button layout:"
 msgstr "Батырмалардың орналасуы:"
 
-#: common/resources/windowmenu-dialog.glade:155
+#: common/resources/windowmenu-dialog.glade:158
 msgid "Show workspace a_ctions"
 msgstr "Жұмыс орны әре_кеттерін көрсету"
 
-#: common/resources/windowmenu-dialog.glade:170
+#: common/resources/windowmenu-dialog.glade:173
 msgid "Show workspace _names"
 msgstr "Жұмыс оры_ндардың аттарын көрсету"
 
-#: common/resources/windowmenu-dialog.glade:185
+#: common/resources/windowmenu-dialog.glade:188
 msgid "Enable _urgency notification"
 msgstr "Шұғыл _хабарлауды іске қосу"
 
@@ -1640,7 +1644,7 @@ msgstr "_ОК"
 
 #. show an error dialog
 #: plugins/applicationsmenu/applicationsmenu.c:638 plugins/clock/clock.c:1055
-#: plugins/launcher/launcher.c:2497
+#: plugins/launcher/launcher.c:2499
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" командасын орындау сәтсіз аяқталды"
@@ -2086,11 +2090,11 @@ msgstr "Мәзірде бумалар ағашын көрсету"
 msgid "Open launcher menu"
 msgstr "Жөнелткіш мәзірін ашу"
 
-#: plugins/launcher/launcher.c:1612
+#: plugins/launcher/launcher.c:1614
 msgid "Unnamed Item"
 msgstr "Атаусыз элемент"
 
-#: plugins/launcher/launcher.c:1814
+#: plugins/launcher/launcher.c:1816
 msgid "No items"
 msgstr "Элементтер жоқ"
 
@@ -2129,7 +2133,7 @@ msgstr "Қосымша мәзірі бар бағдарлама жіберуші
 msgid "Unable to open the workspace settings"
 msgstr "Жұмыс орындар баптауларын ашу мүмкін емес"
 
-#: plugins/pager/pager-buttons.c:628 plugins/windowmenu/windowmenu.c:959
+#: plugins/pager/pager-buttons.c:628 plugins/windowmenu/windowmenu.c:992
 #, c-format
 msgid "Workspace %d"
 msgstr "Жұмыс орны %d"
@@ -2233,28 +2237,32 @@ msgstr ""
 msgid "Switch between open windows using buttons"
 msgstr "Ашық терезелер арасында батырмалар арқылы ауысу"
 
-#: plugins/windowmenu/windowmenu.c:738
+#: plugins/windowmenu/windowmenu.c:351
+msgid "Windows"
+msgstr ""
+
+#: plugins/windowmenu/windowmenu.c:771
 msgid "Desktop"
 msgstr "Жұмыс үстелі"
 
-#: plugins/windowmenu/windowmenu.c:1354
+#: plugins/windowmenu/windowmenu.c:1387
 msgid "No Windows"
 msgstr "Терезелер жоқ"
 
-#: plugins/windowmenu/windowmenu.c:1369
+#: plugins/windowmenu/windowmenu.c:1402
 msgid "Urgent Windows"
 msgstr "Шұғыл терезелер"
 
-#: plugins/windowmenu/windowmenu.c:1420
+#: plugins/windowmenu/windowmenu.c:1453
 msgid "Add Workspace"
 msgstr "Жұмыс орнын қосу"
 
-#: plugins/windowmenu/windowmenu.c:1442
+#: plugins/windowmenu/windowmenu.c:1475
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "\"%s\" жұмыс орнын өшіру"
 
-#: plugins/windowmenu/windowmenu.c:1444
+#: plugins/windowmenu/windowmenu.c:1477
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "%d жұмыс орнын өшіру"
