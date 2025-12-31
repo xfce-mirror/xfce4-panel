@@ -330,16 +330,14 @@ window_menu_plugin_set_property (GObject *object,
     case PROP_STYLE:
       button_style = g_value_get_uint (value);
       if (plugin->button_style != button_style)
-        /* button style has been changed */
         {
           /* destroy previous widget, at the same time removing it from the button */
-
           if (plugin->button_style == BUTTON_STYLE_ICON || plugin->button_style == BUTTON_STYLE_TEXT)
             gtk_widget_destroy (plugin->widget);
 
           plugin->button_style = button_style;
 
-          /* add newly selected object to button: */
+          /* add newly selected object to button */
           switch (button_style)
             {
             case BUTTON_STYLE_ICON:
