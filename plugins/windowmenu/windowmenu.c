@@ -79,7 +79,8 @@ enum
 {
   BUTTON_STYLE_ICON = 0,
   BUTTON_STYLE_ARROW,
-  BUTTON_STYLE_TEXT
+  BUTTON_STYLE_TEXT,
+  N_BUTTON_STYLES,
 };
 
 
@@ -183,7 +184,7 @@ window_menu_plugin_class_init (WindowMenuPluginClass *klass)
                                    g_param_spec_uint ("style",
                                                       NULL, NULL,
                                                       BUTTON_STYLE_ICON,
-                                                      BUTTON_STYLE_TEXT,
+                                                      N_BUTTON_STYLES - 1,
                                                       BUTTON_STYLE_ICON,
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
