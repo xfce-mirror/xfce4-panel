@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-11-08 12:52+0100\n"
+"POT-Creation-Date: 2025-12-31 12:54+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: heskjestad, 2024-2025\n"
 "Language-Team: Norwegian Bokmål (http://app.transifex.com/xfce/xfce4-panel/language/nb/)\n"
@@ -104,7 +104,7 @@ msgstr "Panelinnstillinger"
 #: common/resources/showdesktop-dialog.glade:34
 #: common/resources/sn-dialog.glade:65
 #: common/resources/tasklist-dialog.glade:86
-#: common/resources/windowmenu-dialog.glade:48 panel/panel-item-dialog.c:205
+#: common/resources/windowmenu-dialog.glade:51 panel/panel-item-dialog.c:205
 #: panel/panel-tic-tac-toe.c:110
 msgid "_Close"
 msgstr "_Lukk"
@@ -120,7 +120,7 @@ msgstr "_Lukk"
 #: common/resources/separator-dialog.glade:73
 #: common/resources/showdesktop-dialog.glade:49
 #: common/resources/tasklist-dialog.glade:102
-#: common/resources/windowmenu-dialog.glade:63
+#: common/resources/windowmenu-dialog.glade:66
 #: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
 #: panel/panel-window.c:3925
 msgid "_Help"
@@ -425,7 +425,7 @@ msgstr "Velg denne for å vise generiske programnavn i menyen, for eksempel «Fi
 #: common/resources/directorymenu-dialog.glade:150
 #: common/resources/separator-dialog.glade:222
 #: common/resources/tasklist-dialog.glade:266
-#: common/resources/windowmenu-dialog.glade:206
+#: common/resources/windowmenu-dialog.glade:209
 msgid "Appearance"
 msgstr "Utseende"
 
@@ -676,7 +676,7 @@ msgstr "_Filmønster"
 
 #: common/resources/directorymenu-dialog.glade:316
 #: common/resources/tasklist-dialog.glade:529
-#: common/resources/windowmenu-dialog.glade:260
+#: common/resources/windowmenu-dialog.glade:263
 msgid "Filtering"
 msgstr "Filtrering"
 
@@ -1015,7 +1015,7 @@ msgid "Behaviour"
 msgstr "Oppførsel"
 
 #: common/resources/tasklist-dialog.glade:447
-#: common/resources/windowmenu-dialog.glade:239
+#: common/resources/windowmenu-dialog.glade:242
 msgid "Show windows from _all workspaces"
 msgstr "Vis _vinduer fra alle arbeindsområder"
 
@@ -1035,24 +1035,28 @@ msgstr "Ikon"
 msgid "Arrow"
 msgstr "Pil"
 
-#: common/resources/windowmenu-dialog.glade:32
+#: common/resources/windowmenu-dialog.glade:29
+msgid "Text"
+msgstr "Tekst"
+
+#: common/resources/windowmenu-dialog.glade:35
 #: plugins/windowmenu/windowmenu.desktop.in.in:4
 msgid "Window Menu"
 msgstr "Vindusmeny"
 
-#: common/resources/windowmenu-dialog.glade:119
+#: common/resources/windowmenu-dialog.glade:122
 msgid "Button layout:"
 msgstr "Knapputseende:"
 
-#: common/resources/windowmenu-dialog.glade:155
+#: common/resources/windowmenu-dialog.glade:158
 msgid "Show workspace a_ctions"
 msgstr "Vis arbeinds_områdehandlinger"
 
-#: common/resources/windowmenu-dialog.glade:170
+#: common/resources/windowmenu-dialog.glade:173
 msgid "Show workspace _names"
 msgstr "Vis arbeidsområde_navn"
 
-#: common/resources/windowmenu-dialog.glade:185
+#: common/resources/windowmenu-dialog.glade:188
 msgid "Enable _urgency notification"
 msgstr "Slå på _viktigvarsling"
 
@@ -1650,7 +1654,7 @@ msgstr "_OK"
 
 #. show an error dialog
 #: plugins/applicationsmenu/applicationsmenu.c:638 plugins/clock/clock.c:1055
-#: plugins/launcher/launcher.c:2497
+#: plugins/launcher/launcher.c:2499
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Klarte ikke kjøre kommandoen «%s»."
@@ -2096,11 +2100,11 @@ msgstr "Vis mappestruktur i en meny"
 msgid "Open launcher menu"
 msgstr "Åpne oppstarter-menyen"
 
-#: plugins/launcher/launcher.c:1612
+#: plugins/launcher/launcher.c:1614
 msgid "Unnamed Item"
 msgstr "Uten navn"
 
-#: plugins/launcher/launcher.c:1814
+#: plugins/launcher/launcher.c:1816
 msgid "No items"
 msgstr "Ingen element"
 
@@ -2139,7 +2143,7 @@ msgstr "Programstarter med valgfri undermeny"
 msgid "Unable to open the workspace settings"
 msgstr "Klarte ikke åpne innstillinger for arbeidsområde"
 
-#: plugins/pager/pager-buttons.c:628 plugins/windowmenu/windowmenu.c:959
+#: plugins/pager/pager-buttons.c:628 plugins/windowmenu/windowmenu.c:992
 #, c-format
 msgid "Workspace %d"
 msgstr "Arbeidsområde %d"
@@ -2243,28 +2247,32 @@ msgstr ""
 msgid "Switch between open windows using buttons"
 msgstr "Skifte mellom åpne vinduer med taster"
 
-#: plugins/windowmenu/windowmenu.c:738
+#: plugins/windowmenu/windowmenu.c:351
+msgid "Windows"
+msgstr ""
+
+#: plugins/windowmenu/windowmenu.c:771
 msgid "Desktop"
 msgstr "Skrivebord"
 
-#: plugins/windowmenu/windowmenu.c:1354
+#: plugins/windowmenu/windowmenu.c:1387
 msgid "No Windows"
 msgstr "Ingen vinduer"
 
-#: plugins/windowmenu/windowmenu.c:1369
+#: plugins/windowmenu/windowmenu.c:1402
 msgid "Urgent Windows"
 msgstr "Prioriterte vinduer"
 
-#: plugins/windowmenu/windowmenu.c:1420
+#: plugins/windowmenu/windowmenu.c:1453
 msgid "Add Workspace"
 msgstr "Legg til arbeidsområde"
 
-#: plugins/windowmenu/windowmenu.c:1442
+#: plugins/windowmenu/windowmenu.c:1475
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Fjern arbeidsområde «%s»"
 
-#: plugins/windowmenu/windowmenu.c:1444
+#: plugins/windowmenu/windowmenu.c:1477
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Fjern arbeidsområde %d"
