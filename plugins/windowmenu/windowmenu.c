@@ -348,20 +348,11 @@ window_menu_plugin_set_property (GObject *object,
               break;
 
             case BUTTON_STYLE_TEXT:
-              {
-                gchar *formatted_text;
-
-                plugin->widget = gtk_label_new (NULL);
-
-                /* make sure the label is not printed in bold which is the default: */
-                formatted_text = g_markup_printf_escaped ("<span weight=\"normal\">%s</span>",_("Windows"));
-                gtk_label_set_markup (GTK_LABEL (plugin->widget), formatted_text);
-                g_free (formatted_text);
-                gtk_container_add (GTK_CONTAINER (plugin->button), plugin->widget);
-                window_menu_plugin_mode_changed (panel_plugin,
-                                                 xfce_panel_plugin_get_mode (panel_plugin));
-                gtk_widget_show (plugin->widget);
-              }
+              plugin->widget = gtk_label_new (NULL);
+              gtk_label_set_text (GTK_LABEL (plugin->widget), _("Windows"));
+              gtk_container_add (GTK_CONTAINER (plugin->button), plugin->widget);
+              window_menu_plugin_mode_changed (panel_plugin, xfce_panel_plugin_get_mode (panel_plugin));
+              gtk_widget_show (plugin->widget);
               break;
             }
 
