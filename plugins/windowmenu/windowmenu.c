@@ -46,11 +46,11 @@ struct _WindowMenuPlugin
 
   /* panel widgets */
   GtkWidget *button;
-  GtkWidget *icon;
+  GtkWidget *widget;
 
   /* settings */
   GObject *settings_dialog;
-  guint button_style : 1;
+  guint button_style;
   guint workspace_actions : 1;
   guint workspace_names : 1;
   guint urgentcy_notification : 1;
@@ -78,7 +78,9 @@ enum
 enum
 {
   BUTTON_STYLE_ICON = 0,
-  BUTTON_STYLE_ARROW
+  BUTTON_STYLE_ARROW,
+  BUTTON_STYLE_TEXT,
+  N_BUTTON_STYLES,
 };
 
 
@@ -108,6 +110,9 @@ window_menu_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
 static gboolean
 window_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                                  gint size);
+static void
+window_menu_plugin_mode_changed (XfcePanelPlugin *panel_plugin,
+                                 XfcePanelPluginMode mode);
 static void
 window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin);
 static gboolean
@@ -170,6 +175,7 @@ window_menu_plugin_class_init (WindowMenuPluginClass *klass)
   plugin_class->free_data = window_menu_plugin_free_data;
   plugin_class->screen_position_changed = window_menu_plugin_screen_position_changed;
   plugin_class->size_changed = window_menu_plugin_size_changed;
+  plugin_class->mode_changed = window_menu_plugin_mode_changed;
   plugin_class->configure_plugin = window_menu_plugin_configure_plugin;
   plugin_class->remote_event = window_menu_plugin_remote_event;
 
@@ -178,7 +184,7 @@ window_menu_plugin_class_init (WindowMenuPluginClass *klass)
                                    g_param_spec_uint ("style",
                                                       NULL, NULL,
                                                       BUTTON_STYLE_ICON,
-                                                      BUTTON_STYLE_ARROW,
+                                                      N_BUTTON_STYLES - 1,
                                                       BUTTON_STYLE_ICON,
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
@@ -261,9 +267,9 @@ window_menu_plugin_init (WindowMenuPlugin *plugin)
   g_signal_connect (G_OBJECT (plugin->button), "toggled",
                     G_CALLBACK (window_menu_plugin_menu), plugin);
 
-  plugin->icon = gtk_image_new_from_icon_name ("user-desktop", GTK_ICON_SIZE_BUTTON);
-  gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
-  gtk_widget_show (plugin->icon);
+  plugin->widget = gtk_image_new_from_icon_name ("user-desktop", GTK_ICON_SIZE_BUTTON);
+  gtk_container_add (GTK_CONTAINER (plugin->button), plugin->widget);
+  gtk_widget_show (plugin->widget);
 }
 
 
@@ -325,13 +331,29 @@ window_menu_plugin_set_property (GObject *object,
       button_style = g_value_get_uint (value);
       if (plugin->button_style != button_style)
         {
+          /* destroy previous widget, at the same time removing it from the button */
+          if (plugin->button_style == BUTTON_STYLE_ICON || plugin->button_style == BUTTON_STYLE_TEXT)
+            gtk_widget_destroy (plugin->widget);
+
           plugin->button_style = button_style;
 
-          /* show or hide the icon */
-          if (button_style == BUTTON_STYLE_ICON)
-            gtk_widget_show (plugin->icon);
-          else
-            gtk_widget_hide (plugin->icon);
+          /* add newly selected object to button */
+          switch (button_style)
+            {
+            case BUTTON_STYLE_ICON:
+              plugin->widget = gtk_image_new ();
+              gtk_container_add (GTK_CONTAINER (plugin->button), plugin->widget);
+              gtk_widget_show (plugin->widget);
+              break;
+
+            case BUTTON_STYLE_TEXT:
+              plugin->widget = gtk_label_new (NULL);
+              gtk_label_set_text (GTK_LABEL (plugin->widget), _("Windows"));
+              gtk_container_add (GTK_CONTAINER (plugin->button), plugin->widget);
+              window_menu_plugin_mode_changed (panel_plugin, xfce_panel_plugin_get_mode (panel_plugin));
+              gtk_widget_show (plugin->widget);
+              break;
+            }
 
           /* update the plugin */
           xfce_panel_plugin_set_small (panel_plugin, plugin->button_style == BUTTON_STYLE_ICON);
@@ -553,7 +575,7 @@ window_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
     }
   else
     {
-      /* set the size of the arrow button */
+      /* set the size of the arrow button or text */
       if (xfce_panel_plugin_get_orientation (panel_plugin) == GTK_ORIENTATION_HORIZONTAL)
         {
           gtk_widget_get_preferred_width (plugin->button, NULL, &button_size);
@@ -572,7 +594,18 @@ window_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   return TRUE;
 }
 
+static void
+window_menu_plugin_mode_changed (XfcePanelPlugin *panel_plugin, XfcePanelPluginMode mode)
+{
+  WindowMenuPlugin *plugin = WINDOW_MENU_PLUGIN (panel_plugin);
 
+  if (plugin->button_style == BUTTON_STYLE_TEXT)
+    {
+      gtk_label_set_angle (GTK_LABEL (plugin->widget), (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL) ? 270 : 0);
+      gtk_label_set_ellipsize (GTK_LABEL (plugin->widget),
+                               (mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR) ? PANGO_ELLIPSIZE_END : PANGO_ELLIPSIZE_NONE);
+    }
+}
 
 static void
 window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
@@ -678,7 +711,7 @@ window_menu_plugin_set_icon (WindowMenuPlugin *plugin,
   if (!xfw_window_is_active (window))
     return;
 
-  gtk_widget_set_tooltip_text (plugin->icon, xfw_window_get_name (window));
+  gtk_widget_set_tooltip_text (plugin->widget, xfw_window_get_name (window));
 
   icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (plugin));
   scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (plugin));
@@ -687,13 +720,13 @@ window_menu_plugin_set_icon (WindowMenuPlugin *plugin,
   if (G_LIKELY (pixbuf != NULL))
     {
       cairo_surface_t *surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, NULL);
-      gtk_image_set_from_surface (GTK_IMAGE (plugin->icon), surface);
+      gtk_image_set_from_surface (GTK_IMAGE (plugin->widget), surface);
       cairo_surface_destroy (surface);
     }
   else
     {
-      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->icon), "image-missing", icon_size);
-      gtk_image_set_pixel_size (GTK_IMAGE (plugin->icon), icon_size);
+      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->widget), "image-missing", icon_size);
+      gtk_image_set_pixel_size (GTK_IMAGE (plugin->widget), icon_size);
     }
 }
 
@@ -706,11 +739,11 @@ window_menu_plugin_active_window_changed (XfwScreen *screen,
 {
   XfwWindow *window;
   gint icon_size;
-  GtkWidget *icon = GTK_WIDGET (plugin->icon);
+  GtkWidget *widget = GTK_WIDGET (plugin->widget);
   XfwWindowType type;
 
   panel_return_if_fail (WINDOW_MENU_IS_PLUGIN (plugin));
-  panel_return_if_fail (GTK_IMAGE (icon));
+  panel_return_if_fail (GTK_IMAGE (widget));
   panel_return_if_fail (XFW_IS_SCREEN (screen));
   panel_return_if_fail (plugin->screen == screen);
 
@@ -733,9 +766,9 @@ show_desktop_icon:
 
           /* desktop is shown right now */
           icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (plugin));
-          gtk_image_set_from_icon_name (GTK_IMAGE (icon), "user-desktop", icon_size);
-          gtk_image_set_pixel_size (GTK_IMAGE (icon), icon_size);
-          gtk_widget_set_tooltip_text (GTK_WIDGET (icon), _("Desktop"));
+          gtk_image_set_from_icon_name (GTK_IMAGE (widget), "user-desktop", icon_size);
+          gtk_image_set_pixel_size (GTK_IMAGE (widget), icon_size);
+          gtk_widget_set_tooltip_text (GTK_WIDGET (widget), _("Desktop"));
         }
     }
 }
