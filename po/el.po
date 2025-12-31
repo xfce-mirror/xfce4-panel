@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-11-08 12:52+0100\n"
+"POT-Creation-Date: 2025-12-31 12:54+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Ioannis LM, 2019,2022-2025\n"
 "Language-Team: Greek (http://app.transifex.com/xfce/xfce4-panel/language/el/)\n"
@@ -111,7 +111,7 @@ msgstr "Προτιμήσεις ταμπλό"
 #: common/resources/showdesktop-dialog.glade:34
 #: common/resources/sn-dialog.glade:65
 #: common/resources/tasklist-dialog.glade:86
-#: common/resources/windowmenu-dialog.glade:48 panel/panel-item-dialog.c:205
+#: common/resources/windowmenu-dialog.glade:51 panel/panel-item-dialog.c:205
 #: panel/panel-tic-tac-toe.c:110
 msgid "_Close"
 msgstr "_Κλείσιμο"
@@ -127,7 +127,7 @@ msgstr "_Κλείσιμο"
 #: common/resources/separator-dialog.glade:73
 #: common/resources/showdesktop-dialog.glade:49
 #: common/resources/tasklist-dialog.glade:102
-#: common/resources/windowmenu-dialog.glade:63
+#: common/resources/windowmenu-dialog.glade:66
 #: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
 #: panel/panel-window.c:3925
 msgid "_Help"
@@ -432,7 +432,7 @@ msgstr "Επιλέξτε το για να εμφανίζονται τα γενι
 #: common/resources/directorymenu-dialog.glade:150
 #: common/resources/separator-dialog.glade:222
 #: common/resources/tasklist-dialog.glade:266
-#: common/resources/windowmenu-dialog.glade:206
+#: common/resources/windowmenu-dialog.glade:209
 msgid "Appearance"
 msgstr "Εμφάνιση"
 
@@ -683,7 +683,7 @@ msgstr "_Μοτίβο:"
 
 #: common/resources/directorymenu-dialog.glade:316
 #: common/resources/tasklist-dialog.glade:529
-#: common/resources/windowmenu-dialog.glade:260
+#: common/resources/windowmenu-dialog.glade:263
 msgid "Filtering"
 msgstr "Φιλτράρισμα"
 
@@ -1022,7 +1022,7 @@ msgid "Behaviour"
 msgstr "Συμπεριφορά"
 
 #: common/resources/tasklist-dialog.glade:447
-#: common/resources/windowmenu-dialog.glade:239
+#: common/resources/windowmenu-dialog.glade:242
 msgid "Show windows from _all workspaces"
 msgstr "Προβολή παραθύρων από ό_λους τους χώρους εργασίας"
 
@@ -1042,24 +1042,28 @@ msgstr "Εικονίδιο"
 msgid "Arrow"
 msgstr "Βέλος"
 
-#: common/resources/windowmenu-dialog.glade:32
+#: common/resources/windowmenu-dialog.glade:29
+msgid "Text"
+msgstr "Κείμενο"
+
+#: common/resources/windowmenu-dialog.glade:35
 #: plugins/windowmenu/windowmenu.desktop.in.in:4
 msgid "Window Menu"
 msgstr "Μενού παραθύρων"
 
-#: common/resources/windowmenu-dialog.glade:119
+#: common/resources/windowmenu-dialog.glade:122
 msgid "Button layout:"
 msgstr "Διάταξη κουμπιών:"
 
-#: common/resources/windowmenu-dialog.glade:155
+#: common/resources/windowmenu-dialog.glade:158
 msgid "Show workspace a_ctions"
 msgstr "Εμφάνιση εν_εργειών στους χώρους εργασίας"
 
-#: common/resources/windowmenu-dialog.glade:170
+#: common/resources/windowmenu-dialog.glade:173
 msgid "Show workspace _names"
 msgstr "Εμφάνιση ο_νομάτων των χώρων εργασίας"
 
-#: common/resources/windowmenu-dialog.glade:185
+#: common/resources/windowmenu-dialog.glade:188
 msgid "Enable _urgency notification"
 msgstr "Ενεργοποίηση επεί_γουσας ειδοποίησης"
 
@@ -1657,7 +1661,7 @@ msgstr "_Εντάξει"
 
 #. show an error dialog
 #: plugins/applicationsmenu/applicationsmenu.c:638 plugins/clock/clock.c:1055
-#: plugins/launcher/launcher.c:2497
+#: plugins/launcher/launcher.c:2499
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Απέτυχε η εκτέλεση της εντολής \"%s\"."
@@ -2103,11 +2107,11 @@ msgstr "Εμφάνιση δενδρική δομής καταλόγου στο �
 msgid "Open launcher menu"
 msgstr "Άνοιγμα μενού εκκινητή"
 
-#: plugins/launcher/launcher.c:1612
+#: plugins/launcher/launcher.c:1614
 msgid "Unnamed Item"
 msgstr "Αντικείμενο χωρίς όνομα"
 
-#: plugins/launcher/launcher.c:1814
+#: plugins/launcher/launcher.c:1816
 msgid "No items"
 msgstr "Δε βρέθηκαν αντικείμενα"
 
@@ -2146,7 +2150,7 @@ msgstr "Εκκινητής προγράμματος με επιλογή μενο
 msgid "Unable to open the workspace settings"
 msgstr "Αδύνατη η πρόσβαση στις ρυθμίσεων των χώρων εργασίας"
 
-#: plugins/pager/pager-buttons.c:628 plugins/windowmenu/windowmenu.c:959
+#: plugins/pager/pager-buttons.c:628 plugins/windowmenu/windowmenu.c:992
 #, c-format
 msgid "Workspace %d"
 msgstr "Χώρος εργασίας %d"
@@ -2250,28 +2254,32 @@ msgstr ""
 msgid "Switch between open windows using buttons"
 msgstr "Χρήση κουμπιών για την εναλλαγή μεταξύ των ανοιχτών παραθύρων"
 
-#: plugins/windowmenu/windowmenu.c:738
+#: plugins/windowmenu/windowmenu.c:351
+msgid "Windows"
+msgstr ""
+
+#: plugins/windowmenu/windowmenu.c:771
 msgid "Desktop"
 msgstr "Επιφάνεια εργασίας"
 
-#: plugins/windowmenu/windowmenu.c:1354
+#: plugins/windowmenu/windowmenu.c:1387
 msgid "No Windows"
 msgstr "Δεν υπάρχουν παράθυρα"
 
-#: plugins/windowmenu/windowmenu.c:1369
+#: plugins/windowmenu/windowmenu.c:1402
 msgid "Urgent Windows"
 msgstr "Επείγοντα παράθυρα"
 
-#: plugins/windowmenu/windowmenu.c:1420
+#: plugins/windowmenu/windowmenu.c:1453
 msgid "Add Workspace"
 msgstr "Προσθήκη χώρου εργασίας"
 
-#: plugins/windowmenu/windowmenu.c:1442
+#: plugins/windowmenu/windowmenu.c:1475
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Αφαίρεση του χώρου εργασίας \"%s\""
 
-#: plugins/windowmenu/windowmenu.c:1444
+#: plugins/windowmenu/windowmenu.c:1477
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Αφαίρεση του χώρου εργασίας %d"
