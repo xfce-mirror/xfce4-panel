@@ -5,7 +5,7 @@
 # Translators:
 # ByungHyun Choi<byunghyun.choi@gmail.com>, 2005
 # Seong-ho Cho <darkcircle.0426@gmail.com>, 2013
-# Junghee Lee <daemul72@gmail.com>, 2025
+# JungHee Lee <daemul72@gmail.com>, 2025
 # 1763f4a4329a2376c933c5e919a36cbc_341ca53 <1f851310383599d03339229d772e1290_119292>, 2017-2018
 # lego37yoon <lego37yoon@outlook.com>, 2014
 # Seok Chae <seok.chae@gmail.com>, 2023
@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-11-08 12:52+0100\n"
+"POT-Creation-Date: 2025-12-31 12:54+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Junghee Lee <daemul72@gmail.com>, 2025\n"
+"Last-Translator: JungHee Lee <daemul72@gmail.com>, 2025\n"
 "Language-Team: Korean (http://app.transifex.com/xfce/xfce4-panel/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -102,7 +102,7 @@ msgstr "패널 기본 설정"
 #: common/resources/showdesktop-dialog.glade:34
 #: common/resources/sn-dialog.glade:65
 #: common/resources/tasklist-dialog.glade:86
-#: common/resources/windowmenu-dialog.glade:48 panel/panel-item-dialog.c:205
+#: common/resources/windowmenu-dialog.glade:51 panel/panel-item-dialog.c:205
 #: panel/panel-tic-tac-toe.c:110
 msgid "_Close"
 msgstr "닫기(_C)"
@@ -118,7 +118,7 @@ msgstr "닫기(_C)"
 #: common/resources/separator-dialog.glade:73
 #: common/resources/showdesktop-dialog.glade:49
 #: common/resources/tasklist-dialog.glade:102
-#: common/resources/windowmenu-dialog.glade:63
+#: common/resources/windowmenu-dialog.glade:66
 #: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
 #: panel/panel-window.c:3925
 msgid "_Help"
@@ -423,7 +423,7 @@ msgstr "메뉴에서 일반적 프로그램 이름을 보이려면 이 옵션을
 #: common/resources/directorymenu-dialog.glade:150
 #: common/resources/separator-dialog.glade:222
 #: common/resources/tasklist-dialog.glade:266
-#: common/resources/windowmenu-dialog.glade:206
+#: common/resources/windowmenu-dialog.glade:209
 msgid "Appearance"
 msgstr "모양새"
 
@@ -674,7 +674,7 @@ msgstr "파일 패턴(_F):"
 
 #: common/resources/directorymenu-dialog.glade:316
 #: common/resources/tasklist-dialog.glade:529
-#: common/resources/windowmenu-dialog.glade:260
+#: common/resources/windowmenu-dialog.glade:263
 msgid "Filtering"
 msgstr "필터링"
 
@@ -1013,7 +1013,7 @@ msgid "Behaviour"
 msgstr "행동"
 
 #: common/resources/tasklist-dialog.glade:447
-#: common/resources/windowmenu-dialog.glade:239
+#: common/resources/windowmenu-dialog.glade:242
 msgid "Show windows from _all workspaces"
 msgstr "모든 작업 공간의 창 표시(_A)"
 
@@ -1033,24 +1033,28 @@ msgstr "아이콘"
 msgid "Arrow"
 msgstr "방향키"
 
-#: common/resources/windowmenu-dialog.glade:32
+#: common/resources/windowmenu-dialog.glade:29
+msgid "Text"
+msgstr "본문"
+
+#: common/resources/windowmenu-dialog.glade:35
 #: plugins/windowmenu/windowmenu.desktop.in.in:4
 msgid "Window Menu"
 msgstr "창 메뉴"
 
-#: common/resources/windowmenu-dialog.glade:119
+#: common/resources/windowmenu-dialog.glade:122
 msgid "Button layout:"
 msgstr "단추 배치:"
 
-#: common/resources/windowmenu-dialog.glade:155
+#: common/resources/windowmenu-dialog.glade:158
 msgid "Show workspace a_ctions"
 msgstr "작업 공간 움직임 표시(_C)"
 
-#: common/resources/windowmenu-dialog.glade:170
+#: common/resources/windowmenu-dialog.glade:173
 msgid "Show workspace _names"
 msgstr "작업 공간 이름 표시(_N)"
 
-#: common/resources/windowmenu-dialog.glade:185
+#: common/resources/windowmenu-dialog.glade:188
 msgid "Enable _urgency notification"
 msgstr "긴급 알림 활성화(_U)"
 
@@ -1647,7 +1651,7 @@ msgstr "확인(_O)"
 
 #. show an error dialog
 #: plugins/applicationsmenu/applicationsmenu.c:638 plugins/clock/clock.c:1055
-#: plugins/launcher/launcher.c:2497
+#: plugins/launcher/launcher.c:2499
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" 명령 실행에 실패했습니다."
@@ -2093,11 +2097,11 @@ msgstr "메뉴에서 디렉터리 트리를 보여줍니다"
 msgid "Open launcher menu"
 msgstr "실행 아이콘 메뉴 열기"
 
-#: plugins/launcher/launcher.c:1612
+#: plugins/launcher/launcher.c:1614
 msgid "Unnamed Item"
 msgstr "이름 없는 항목"
 
-#: plugins/launcher/launcher.c:1814
+#: plugins/launcher/launcher.c:1816
 msgid "No items"
 msgstr "항목 없음"
 
@@ -2136,7 +2140,7 @@ msgstr "선택 메뉴가 있는 프로그램 실행 아이콘입니다"
 msgid "Unable to open the workspace settings"
 msgstr "작업 공간 설정을 열 수 없습니다"
 
-#: plugins/pager/pager-buttons.c:628 plugins/windowmenu/windowmenu.c:959
+#: plugins/pager/pager-buttons.c:628 plugins/windowmenu/windowmenu.c:992
 #, c-format
 msgid "Workspace %d"
 msgstr "작업 공간 %d"
@@ -2240,28 +2244,32 @@ msgstr ""
 msgid "Switch between open windows using buttons"
 msgstr "단추를 사용하여 열려있는 창을 전환합니다"
 
-#: plugins/windowmenu/windowmenu.c:738
+#: plugins/windowmenu/windowmenu.c:351
+msgid "Windows"
+msgstr ""
+
+#: plugins/windowmenu/windowmenu.c:771
 msgid "Desktop"
 msgstr "데스크톱"
 
-#: plugins/windowmenu/windowmenu.c:1354
+#: plugins/windowmenu/windowmenu.c:1387
 msgid "No Windows"
 msgstr "창 없음"
 
-#: plugins/windowmenu/windowmenu.c:1369
+#: plugins/windowmenu/windowmenu.c:1402
 msgid "Urgent Windows"
 msgstr "긴급 창"
 
-#: plugins/windowmenu/windowmenu.c:1420
+#: plugins/windowmenu/windowmenu.c:1453
 msgid "Add Workspace"
 msgstr "작업 공간 추가"
 
-#: plugins/windowmenu/windowmenu.c:1442
+#: plugins/windowmenu/windowmenu.c:1475
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "작업 공간 \"%s\" 제거"
 
-#: plugins/windowmenu/windowmenu.c:1444
+#: plugins/windowmenu/windowmenu.c:1477
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "작업 공간 %d번 제거"
