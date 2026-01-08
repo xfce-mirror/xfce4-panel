@@ -407,12 +407,26 @@ window_menu_plugin_style_updated (GtkWidget *widget)
 
 
 static void
+workspace_group_created (XfwWorkspaceManager *manager,
+                         XfwWorkspaceGroup *group,
+                         WindowMenuPlugin *plugin)
+{
+  if (plugin->workspace_group == NULL)
+    plugin->workspace_group = xfw_workspace_manager_list_workspace_groups (manager)->data;
+}
+
+
+
+static void
 workspace_group_destroyed (XfwWorkspaceManager *manager,
                            XfwWorkspaceGroup *group,
                            WindowMenuPlugin *plugin)
 {
   if (group == plugin->workspace_group)
-    plugin->workspace_group = xfw_workspace_manager_list_workspace_groups (manager)->data;
+    {
+      GList *groups = xfw_workspace_manager_list_workspace_groups (manager);
+      plugin->workspace_group = groups == NULL ? NULL : groups->data;
+    }
 }
 
 
@@ -453,6 +467,7 @@ window_menu_plugin_screen_changed (GtkWidget *widget,
 
   /* window<->workspace association only works on X11, where there is only one workspace group,
    * but it can be destroyed on wayland, so let's manage this in a minimalist way */
+  g_signal_connect_object (manager, "workspace-group-created", G_CALLBACK (workspace_group_created), plugin, 0);
   g_signal_connect_object (manager, "workspace-group-destroyed", G_CALLBACK (workspace_group_destroyed), plugin, 0);
   workspace_group_destroyed (manager, NULL, plugin);
 
