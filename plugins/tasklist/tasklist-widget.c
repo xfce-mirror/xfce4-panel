@@ -1664,17 +1664,42 @@ xfce_tasklist_arrow_button_toggled (GtkWidget *button,
 
 
 static void
-workspace_group_destroyed (XfwWorkspaceManager *manager,
-                           XfwWorkspaceGroup *group,
-                           XfceTasklist *tasklist)
+workspace_group_created (XfwWorkspaceManager *manager,
+                         XfwWorkspaceGroup *group,
+                         XfceTasklist *tasklist)
 {
-  if (group == tasklist->workspace_group)
+  if (tasklist->workspace_group == NULL)
     {
       tasklist->workspace_group = xfw_workspace_manager_list_workspace_groups (manager)->data;
       g_signal_connect (G_OBJECT (tasklist->workspace_group), "active-workspace-changed",
                         G_CALLBACK (xfce_tasklist_active_workspace_changed), tasklist);
       g_signal_connect (G_OBJECT (tasklist->workspace_group), "viewports-changed",
                         G_CALLBACK (xfce_tasklist_viewports_changed), tasklist);
+    }
+}
+
+
+
+static void
+workspace_group_destroyed (XfwWorkspaceManager *manager,
+                           XfwWorkspaceGroup *group,
+                           XfceTasklist *tasklist)
+{
+  if (group == tasklist->workspace_group)
+    {
+      GList *groups = xfw_workspace_manager_list_workspace_groups (manager);
+      if (groups != NULL)
+        {
+          tasklist->workspace_group = groups->data;
+          g_signal_connect (G_OBJECT (tasklist->workspace_group), "active-workspace-changed",
+                            G_CALLBACK (xfce_tasklist_active_workspace_changed), tasklist);
+          g_signal_connect (G_OBJECT (tasklist->workspace_group), "viewports-changed",
+                            G_CALLBACK (xfce_tasklist_viewports_changed), tasklist);
+        }
+      else
+        {
+          tasklist->workspace_group = NULL;
+        }
     }
 }
 
@@ -1702,6 +1727,7 @@ xfce_tasklist_connect_screen (XfceTasklist *tasklist)
   /* window button visibility based on window<->workspace association only works on X11,
    * where there is only one workspace group, but it can be destroyed on wayland, so let's
    * manage this in a minimalist way */
+  g_signal_connect_object (manager, "workspace-group-created", G_CALLBACK (workspace_group_created), tasklist, 0);
   g_signal_connect_object (manager, "workspace-group-destroyed", G_CALLBACK (workspace_group_destroyed), tasklist, 0);
   workspace_group_destroyed (manager, NULL, tasklist);
 

@@ -52,6 +52,9 @@ pager_buttons_screen_workspace_destroyed (XfwWorkspaceGroup *group,
                                           XfwWorkspace *destroyed_workspace,
                                           PagerButtons *pager);
 static void
+pager_buttons_screen_monitors_changed (XfwWorkspaceGroup *group,
+                                       PagerButtons *pager);
+static void
 pager_buttons_screen_viewports_changed (XfwWorkspaceGroup *group,
                                         PagerButtons *pager);
 static void
@@ -202,6 +205,8 @@ workspace_group_created (XfwWorkspaceManager *manager,
                     G_CALLBACK (pager_buttons_screen_workspace_created), pager);
   g_signal_connect (group, "workspace-removed",
                     G_CALLBACK (pager_buttons_screen_workspace_destroyed), pager);
+  g_signal_connect (group, "monitors-changed",
+                    G_CALLBACK (pager_buttons_screen_monitors_changed), pager);
   g_signal_connect (group, "viewports-changed",
                     G_CALLBACK (pager_buttons_screen_viewports_changed), pager);
 }
@@ -216,6 +221,7 @@ workspace_group_destroyed (XfwWorkspaceManager *manager,
   g_signal_handlers_disconnect_by_func (group, pager_buttons_screen_workspace_changed, pager);
   g_signal_handlers_disconnect_by_func (group, pager_buttons_screen_workspace_created, pager);
   g_signal_handlers_disconnect_by_func (group, pager_buttons_screen_workspace_destroyed, pager);
+  g_signal_handlers_disconnect_by_func (group, pager_buttons_screen_monitors_changed, pager);
   g_signal_handlers_disconnect_by_func (group, pager_buttons_screen_viewports_changed, pager);
 }
 
@@ -579,6 +585,18 @@ pager_buttons_screen_workspace_destroyed (XfwWorkspaceGroup *group,
 {
   panel_return_if_fail (XFW_IS_WORKSPACE_GROUP (group));
   panel_return_if_fail (XFW_IS_WORKSPACE (destroyed_workspace));
+  panel_return_if_fail (PAGER_IS_BUTTONS (pager));
+
+  pager_buttons_queue_rebuild (pager);
+}
+
+
+
+static void
+pager_buttons_screen_monitors_changed (XfwWorkspaceGroup *group,
+                                       PagerButtons *pager)
+{
+  panel_return_if_fail (XFW_IS_WORKSPACE_GROUP (group));
   panel_return_if_fail (PAGER_IS_BUTTONS (pager));
 
   pager_buttons_queue_rebuild (pager);
