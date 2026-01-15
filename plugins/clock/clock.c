@@ -74,6 +74,13 @@ clock_plugin_button_press_event (GtkWidget *widget,
                                  GdkEventButton *event,
                                  ClockPlugin *plugin);
 static void
+clock_plugin_configure_config_tool_changed (ClockPlugin *plugin,
+                                            gpointer user_data);
+static void
+clock_plugin_configure_run_config_tool (GtkMenuItem *item,
+                                        ClockPlugin *plugin);
+
+static void
 clock_plugin_construct (XfcePanelPlugin *panel_plugin);
 static void
 clock_plugin_free_data (XfcePanelPlugin *panel_plugin);
@@ -151,9 +158,10 @@ struct _ClockPlugin
 
   gchar *tooltip_format;
   ClockTimeTimeout *tooltip_timeout;
+  ClockTime *time;
 
   gchar *time_config_tool;
-  ClockTime *time;
+  GtkWidget *time_config_item;
 
   /* may be NULL if no sleep monitor could be instatiated */
   ClockSleepMonitor *sleep_monitor;
@@ -311,6 +319,20 @@ clock_plugin_init (ClockPlugin *plugin)
   g_signal_connect (G_OBJECT (plugin->button), "leave-notify-event",
                     G_CALLBACK (clock_plugin_leave_notify_event), plugin);
   gtk_widget_show (plugin->button);
+
+  g_signal_connect (G_OBJECT (plugin), "notify::time-config-tool",
+                    G_CALLBACK (clock_plugin_configure_config_tool_changed),
+                    NULL);
+
+  plugin->time_config_item = gtk_menu_item_new_with_mnemonic ("Time _settings");
+
+  g_signal_connect (G_OBJECT (plugin->time_config_item), "activate", G_CALLBACK (clock_plugin_configure_run_config_tool), plugin);
+
+  xfce_panel_plugin_menu_insert_item (XFCE_PANEL_PLUGIN (plugin), GTK_MENU_ITEM (plugin->time_config_item));
+
+  gtk_widget_show (plugin->time_config_item);
+
+  clock_plugin_configure_config_tool_changed (plugin, NULL);
 }
 
 
@@ -561,6 +583,8 @@ clock_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
   if (plugin->sleep_monitor != NULL)
     g_object_unref (G_OBJECT (plugin->sleep_monitor));
+
+  g_object_unref (G_OBJECT (plugin->time_config_item));
 
   g_free (plugin->tooltip_format);
   g_free (plugin->time_config_tool);
@@ -1023,34 +1047,35 @@ clock_plugin_configure_plugin_free (gpointer user_data)
 
 
 static void
-clock_plugin_configure_config_tool_changed (ClockPluginDialog *dialog)
+clock_plugin_configure_config_tool_changed (ClockPlugin *plugin,
+                                            gpointer user_data)
 {
-  GObject *object;
+  gchar **application;
   gchar *path;
 
-  panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
-  panel_return_if_fail (CLOCK_IS_PLUGIN (dialog->plugin));
+  panel_return_if_fail (CLOCK_IS_PLUGIN (plugin));
+  panel_return_if_fail (GTK_IS_MENU_ITEM (plugin->time_config_item));
 
-  object = gtk_builder_get_object (dialog->builder, "run-time-config-tool");
-  panel_return_if_fail (GTK_IS_BUTTON (object));
-  path = g_find_program_in_path (dialog->plugin->time_config_tool);
-  gtk_widget_set_visible (GTK_WIDGET (object), path != NULL);
+  application = g_strsplit (plugin->time_config_tool, " ", -1);
+  path = g_find_program_in_path (application[0]);
+  gtk_widget_set_sensitive (plugin->time_config_item, path != NULL);
+
   g_free (path);
+  g_free (application);
 }
 
-
-
 static void
-clock_plugin_configure_run_config_tool (GtkWidget *button,
+clock_plugin_configure_run_config_tool (GtkMenuItem *item,
                                         ClockPlugin *plugin)
 {
   GError *error = NULL;
 
+  panel_return_if_fail (GTK_IS_MENU_ITEM (item));
   panel_return_if_fail (CLOCK_IS_PLUGIN (plugin));
 
-  if (!xfce_spawn_command_line (gtk_widget_get_screen (button),
+  if (!xfce_spawn_command_line (gtk_widget_get_screen (GTK_WIDGET (item)),
                                 plugin->time_config_tool,
-                                FALSE, FALSE, TRUE, &error))
+                                FALSE, FALSE, FALSE, &error))
     {
       xfce_dialog_show_error (NULL, error, _("Failed to execute command \"%s\"."), plugin->time_config_tool);
       g_error_free (error);
@@ -1159,14 +1184,9 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   dialog->plugin = plugin;
   dialog->builder = builder;
 
-  object = gtk_builder_get_object (builder, "run-time-config-tool");
-  panel_return_if_fail (GTK_IS_BUTTON (object));
-  g_signal_connect_swapped (G_OBJECT (plugin), "notify::time-config-tool",
-                            G_CALLBACK (clock_plugin_configure_config_tool_changed),
-                            dialog);
-  clock_plugin_configure_config_tool_changed (dialog);
-  g_signal_connect (G_OBJECT (object), "clicked",
-                    G_CALLBACK (clock_plugin_configure_run_config_tool), plugin);
+  object = gtk_builder_get_object (builder, "time-config-tool-name");
+  panel_return_if_fail (GTK_IS_ENTRY (object));
+  g_object_bind_property (G_OBJECT (plugin), "time-config-tool", object, "text", G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
   object = gtk_builder_get_object (builder, "timezone-name");
   panel_return_if_fail (GTK_IS_ENTRY (object));
