@@ -1051,7 +1051,7 @@ clock_plugin_configure_config_tool_changed (ClockPlugin *plugin,
                                             gpointer user_data)
 {
   gchar **application;
-  gchar  *path;
+  gchar *path;
 
   panel_return_if_fail (CLOCK_IS_PLUGIN (plugin));
   panel_return_if_fail (GTK_IS_MENU_ITEM (plugin->time_config_item));
