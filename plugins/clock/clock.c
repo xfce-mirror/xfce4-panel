@@ -1048,7 +1048,7 @@ clock_plugin_configure_plugin_free (gpointer user_data)
 
 static void
 clock_plugin_configure_config_tool_changed (ClockPlugin *plugin,
-					    gpointer user_data)
+                                            gpointer user_data)
 {
   gchar **application;
   gchar  *path;
