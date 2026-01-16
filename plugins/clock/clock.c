@@ -1058,7 +1058,7 @@ clock_plugin_configure_config_tool_changed (ClockPlugin *plugin,
   gtk_widget_set_sensitive (plugin->time_config_item, path != NULL);
 
   g_free (path);
-  g_free (application);
+  g_strfreev (application);
 }
 
 static void
