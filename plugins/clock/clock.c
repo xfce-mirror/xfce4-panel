@@ -1066,7 +1066,7 @@ clock_plugin_configure_config_tool_changed (ClockPlugin *plugin,
   gtk_widget_set_sensitive (plugin->time_config_item, sensitive);
 
   if (!sensitive)
-    gtk_widget_set_tooltip_text (plugin->time_config_item, _("Configuration tool not found, please set it in settings dialog"));
+    gtk_widget_set_tooltip_text (plugin->time_config_item, _("Configuration tool not found, please set it in the settings dialog"));
   else
     gtk_widget_set_tooltip_text (plugin->time_config_item, NULL);
 
