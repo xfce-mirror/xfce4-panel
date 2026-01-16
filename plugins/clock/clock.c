@@ -1049,6 +1049,7 @@ clock_plugin_configure_config_tool_changed (ClockPlugin *plugin,
 {
   gchar **application;
   gchar *path;
+  gboolean sensitive;
 
   panel_return_if_fail (CLOCK_IS_PLUGIN (plugin));
   panel_return_if_fail (GTK_IS_MENU_ITEM (plugin->time_config_item));
@@ -1060,7 +1061,14 @@ clock_plugin_configure_config_tool_changed (ClockPlugin *plugin,
   else
     path = NULL;
 
-  gtk_widget_set_sensitive (plugin->time_config_item, path != NULL);
+  sensitive = path != NULL;
+
+  gtk_widget_set_sensitive (plugin->time_config_item, sensitive);
+
+  if (!sensitive)
+    gtk_widget_set_tooltip_text (plugin->time_config_item, _("Configuration tool not found, please set it in settings dialog"));
+  else
+    gtk_widget_set_tooltip_text (plugin->time_config_item, NULL);
 
   g_free (path);
   g_strfreev (application);
