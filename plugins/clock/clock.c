@@ -1054,7 +1054,12 @@ clock_plugin_configure_config_tool_changed (ClockPlugin *plugin,
   panel_return_if_fail (GTK_IS_MENU_ITEM (plugin->time_config_item));
 
   application = g_strsplit (plugin->time_config_tool, " ", -1);
-  path = g_find_program_in_path (application[0]);
+
+  if (application[0] != NULL)
+    path = g_find_program_in_path (application[0]);
+  else
+    path = NULL;
+
   gtk_widget_set_sensitive (plugin->time_config_item, path != NULL);
 
   g_free (path);
