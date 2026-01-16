@@ -323,7 +323,6 @@ clock_plugin_init (ClockPlugin *plugin)
   g_signal_connect (G_OBJECT (plugin), "notify::time-config-tool",
                     G_CALLBACK (clock_plugin_configure_config_tool_changed),
                     NULL);
-
   plugin->time_config_item = gtk_menu_item_new_with_mnemonic ("Time _settings");
 
   g_signal_connect (G_OBJECT (plugin->time_config_item), "activate", G_CALLBACK (clock_plugin_configure_run_config_tool), plugin);
