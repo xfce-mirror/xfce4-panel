@@ -324,13 +324,9 @@ clock_plugin_init (ClockPlugin *plugin)
                     G_CALLBACK (clock_plugin_configure_config_tool_changed),
                     NULL);
   plugin->time_config_item = gtk_menu_item_new_with_mnemonic (_("Time _settings"));
-
   g_signal_connect (G_OBJECT (plugin->time_config_item), "activate", G_CALLBACK (clock_plugin_configure_run_config_tool), plugin);
-
   xfce_panel_plugin_menu_insert_item (XFCE_PANEL_PLUGIN (plugin), GTK_MENU_ITEM (plugin->time_config_item));
-
   gtk_widget_show (plugin->time_config_item);
-
   clock_plugin_configure_config_tool_changed (plugin, NULL);
 }
 
@@ -1055,16 +1051,13 @@ clock_plugin_configure_config_tool_changed (ClockPlugin *plugin,
   panel_return_if_fail (GTK_IS_MENU_ITEM (plugin->time_config_item));
 
   application = g_strsplit (plugin->time_config_tool, " ", -1);
-
   if (application[0] != NULL)
     path = g_find_program_in_path (application[0]);
   else
     path = NULL;
 
   sensitive = path != NULL;
-
   gtk_widget_set_sensitive (plugin->time_config_item, sensitive);
-
   if (!sensitive)
     gtk_widget_set_tooltip_text (plugin->time_config_item, _("Configuration tool not found, please set it in the settings dialog"));
   else
