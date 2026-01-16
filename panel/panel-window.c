@@ -388,7 +388,8 @@ struct _PanelWindow
   guint span_monitors : 1;
   gchar *output_name;
 #ifdef HAVE_GTK_LAYER_SHELL
-  guint set_monitor_id;
+  guint show_id;
+  gboolean in_screen_layout_changed;
 #endif
 
   /* allocated position of the panel */
@@ -1096,8 +1097,8 @@ panel_window_finalize (GObject *object)
     g_source_remove (window->opacity_timeout_id);
 
 #ifdef HAVE_GTK_LAYER_SHELL
-  if (G_UNLIKELY (window->set_monitor_id != 0))
-    g_source_remove (window->set_monitor_id);
+  if (G_UNLIKELY (window->show_id != 0))
+    g_source_remove (window->show_id);
 #endif
 
   /* destroy the autohide window */
@@ -2684,19 +2685,28 @@ panel_window_display_layout_debug (GtkWidget *widget)
 
 #ifdef HAVE_GTK_LAYER_SHELL
 static gboolean
-panel_window_set_monitor (gpointer data)
+panel_window_show (gpointer data)
 {
   PanelWindow *window = data;
-  GdkMonitor *monitor = g_object_get_data (G_OBJECT (window), "layer-shell-monitor");
 
-  if (monitor == NULL)
-    gtk_widget_hide (GTK_WIDGET (window));
+  /* showing the panel here should not trigger _screen_layout_changed(), but it does when
+   * things go wrong, so let's at least minimize the damage also in this case */
+  window->in_screen_layout_changed = TRUE;
 
-  gtk_layer_set_monitor (GTK_WINDOW (window), monitor);
-  if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
-    gtk_layer_set_monitor (GTK_WINDOW (window->autohide_window), monitor);
+  /*
+   * The panel window may be hidden if the output to which it is assigned is disconnected,
+   * and must be shown when that output is reconnected. This is always true on X11, but on
+   * Wayland it should only be done if the window has not been autohidden, or if it's shown
+   * for the first time.
+   */
+  if (!gtk_widget_get_visible (GTK_WIDGET (window))
+      && (window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER
+          || window->autohide_state == AUTOHIDE_VISIBLE
+          || !gtk_widget_get_realized (GTK_WIDGET (window))))
+    gtk_widget_show (GTK_WIDGET (window));
 
-  window->set_monitor_id = 0;
+  window->in_screen_layout_changed = FALSE;
+  window->show_id = 0;
   return FALSE;
 }
 #endif
@@ -2722,10 +2732,36 @@ panel_window_screen_layout_changed (GdkScreen *screen,
   if (window->base_x == -1 && window->base_y == -1)
     return;
 
+#ifdef HAVE_GTK_LAYER_SHELL
+  /* avoid any recursion when remapping the panel, here or in gtk-layer-shell */
+  if (window->in_screen_layout_changed)
+    return;
+  window->in_screen_layout_changed = TRUE;
+
+  if (G_UNLIKELY (window->show_id != 0))
+    {
+      g_source_remove (window->show_id);
+      window->show_id = 0;
+    }
+#endif
+
   /* n_monitors == 0 should be a temporary state, it can happen on Wayland */
   n_monitors = gdk_display_get_n_monitors (window->display);
   if (n_monitors == 0)
-    return;
+    {
+      panel_debug (PANEL_DEBUG_POSITIONING, "%p: no monitor found, hiding window", window);
+
+      /* hide the panel first, so it is not remapped by gtk-layer-shell */
+      gtk_widget_hide (GTK_WIDGET (window));
+
+#ifdef HAVE_GTK_LAYER_SHELL
+      if (gtk_layer_is_supported ())
+        gtk_layer_set_monitor (GTK_WINDOW (window), NULL);
+#endif
+
+      window->in_screen_layout_changed = FALSE;
+      return;
+    }
 
   /* print the display layout when debugging is enabled */
   if (G_UNLIKELY (panel_debug_has_domain (PANEL_DEBUG_YES)))
@@ -2768,8 +2804,6 @@ panel_window_screen_layout_changed (GdkScreen *screen,
 
       a.width -= a.x;
       a.height -= a.y;
-
-      panel_return_if_fail (a.width > 0 && a.height > 0);
     }
   else
     {
@@ -2780,7 +2814,6 @@ panel_window_screen_layout_changed (GdkScreen *screen,
           monitor = gdk_display_get_monitor_at_point (window->display, window->base_x,
                                                       window->base_y);
           gdk_monitor_get_geometry (monitor, &a);
-          panel_return_if_fail (a.width > 0 && a.height > 0);
         }
       else if (g_strcmp0 (window->output_name, "Primary") == 0)
         {
@@ -2790,7 +2823,6 @@ panel_window_screen_layout_changed (GdkScreen *screen,
             monitor = gdk_display_get_monitor (window->display, 0);
 
           gdk_monitor_get_geometry (monitor, &a);
-          panel_return_if_fail (a.width > 0 && a.height > 0);
         }
       else
         {
@@ -2836,55 +2868,27 @@ panel_window_screen_layout_changed (GdkScreen *screen,
                     }
                 }
             }
-
-          if (G_UNLIKELY (a.height == 0 && a.width == 0))
-            {
-              panel_debug (PANEL_DEBUG_POSITIONING,
-                           "%p: monitor %s not found, hiding window",
-                           window, window->output_name);
-
-              /* hide the panel if the monitor was not found */
-              if (gtk_widget_get_visible (GTK_WIDGET (window)))
-                {
-#ifdef HAVE_GTK_LAYER_SHELL
-                  /*
-                   * Hiding the panel on the fly may cause a protocol error, whereas there seems to
-                   * be nothing wrong here. So there doesn't seem to be anything better to do than
-                   * delay this action.
-                   * See https://gitlab.xfce.org/xfce/xfce4-panel/-/issues/940.
-                   * Also: don't do `gtk_layer_set_monitor (GTK_WINDOW (window), NULL)` here, it
-                   * causes gtk-layer-shell to remap the panel window and leads gtk to a really
-                   * weird state, where monitors no longer have a model…
-                   */
-                  if (gtk_layer_is_supported ())
-                    {
-                      if (window->set_monitor_id != 0)
-                        g_source_remove (window->set_monitor_id);
-                      window->set_monitor_id = g_timeout_add_seconds (1, panel_window_set_monitor, window);
-                      g_object_set_data (G_OBJECT (window), "layer-shell-monitor", NULL);
-                    }
-                  else
-#endif
-                    gtk_widget_hide (GTK_WIDGET (window));
-                }
-              return;
-            }
         }
     }
 
-#ifdef HAVE_GTK_LAYER_SHELL
-  /* the compositor does not manage to display the panel on the right monitor
-   * by itself in general */
-  if (gtk_layer_is_supported () && !window->span_monitors)
+  /* monitor was not found or is an unusable fake monitor on wayland */
+  if (G_UNLIKELY (a.height == 0 || a.width == 0))
     {
-      /* delay also this one, so it doesn't make _layout_changed() recurse because
-       * of panel window remap, which messes up automatic mode */
-      if (window->set_monitor_id != 0)
-        g_source_remove (window->set_monitor_id);
-      window->set_monitor_id = g_idle_add (panel_window_set_monitor, window);
-      g_object_set_data (G_OBJECT (window), "layer-shell-monitor", monitor);
-    }
+      panel_debug (PANEL_DEBUG_POSITIONING,
+                   "%p: monitor %s not found, hiding window",
+                   window, window->output_name);
+
+      /* hide the panel first, so it is not remapped by gtk-layer-shell */
+      gtk_widget_hide (GTK_WIDGET (window));
+
+#ifdef HAVE_GTK_LAYER_SHELL
+      if (gtk_layer_is_supported ())
+        gtk_layer_set_monitor (GTK_WINDOW (window), NULL);
 #endif
+
+      window->in_screen_layout_changed = FALSE;
+      return;
+    }
 
   /* set the new working area of the panel */
   window->area = a;
@@ -2904,18 +2908,36 @@ panel_window_screen_layout_changed (GdkScreen *screen,
   if (force_struts_update)
     panel_window_screen_struts_set (window);
 
-  /*
-   * The panel window may be hidden if the output to which it is assigned is disconnected,
-   * and must be shown when that output is reconnected. This is always true on X11, but on
-   * Wayland it should only be done if the window has not been autohidden, or if it's shown
-   * for the first time.
-   */
-  if (!gtk_widget_get_visible (GTK_WIDGET (window))
-      && (!gtk_layer_is_supported ()
-          || window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER
-          || window->autohide_state == AUTOHIDE_VISIBLE
-          || !gtk_widget_get_realized (GTK_WIDGET (window))))
-    gtk_widget_show (GTK_WIDGET (window));
+#ifdef HAVE_GTK_LAYER_SHELL
+  if (gtk_layer_is_supported ())
+    {
+      /* we need to set this properly so it is consistent with e.g. "length-max" */
+      if (monitor != gtk_layer_get_monitor (GTK_WINDOW (window)))
+        {
+          /* hide the panel first, so it is not remapped by gtk-layer-shell */
+          gtk_widget_hide (GTK_WIDGET (window));
+
+          gtk_layer_set_monitor (GTK_WINDOW (window), monitor);
+        }
+
+      /*
+       * We have to delay this to avoid gtk-layer-shell infinite loop and/or protocol errors
+       * https://gitlab.xfce.org/xfce/xfce4-panel/-/issues/940
+       * https://gitlab.xfce.org/xfce/xfce4-panel/-/issues/962
+       * https://github.com/wmww/gtk-layer-shell/issues/217
+       */
+      window->show_id = g_idle_add (panel_window_show, window);
+    }
+  else
+#endif
+    /*
+     * The panel window may be hidden if the output to which it is assigned is disconnected,
+     * and must be shown when that output is reconnected. This is always true on X11.
+     */
+    if (!gtk_widget_get_visible (GTK_WIDGET (window)))
+      gtk_widget_show (GTK_WIDGET (window));
+
+  window->in_screen_layout_changed = FALSE;
 }
 
 
