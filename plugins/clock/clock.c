@@ -583,8 +583,6 @@ clock_plugin_free_data (XfcePanelPlugin *panel_plugin)
   if (plugin->sleep_monitor != NULL)
     g_object_unref (G_OBJECT (plugin->sleep_monitor));
 
-  g_object_unref (G_OBJECT (plugin->time_config_item));
-
   g_free (plugin->tooltip_format);
   g_free (plugin->time_config_tool);
   g_free (plugin->command);
