@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-12-31 12:54+0100\n"
+"POT-Creation-Date: 2026-01-17 00:55+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Samvel Harutyunyan <samvel@ehayq.am>, 2020\n"
 "Language-Team: Armenian (Armenia) (http://app.transifex.com/xfce/xfce4-panel/language/hy_AM/)\n"
@@ -412,7 +412,7 @@ msgid ""
 msgstr "Ցուցադրում է յաւելուածների ընդհանրացուած անունները ցանկում, աւրինակ ՝ \\\"Նիշային կառավարիչ\\\" \\\"Նիշք\\\"֊ի փոխարէն"
 
 #: common/resources/applicationsmenu-dialog.glade:229
-#: common/resources/clock-dialog.glade:405
+#: common/resources/clock-dialog.glade:418
 #: common/resources/directorymenu-dialog.glade:150
 #: common/resources/separator-dialog.glade:222
 #: common/resources/tasklist-dialog.glade:266
@@ -506,35 +506,41 @@ msgstr "Ժամային գաւտի՝ համատասխան տեղեկոյթի շտ
 msgid "Time_zone:"
 msgstr "Ժամային _գաւտի․"
 
-#: common/resources/clock-dialog.glade:194
-msgid "Time and Date _Settings..."
-msgstr "Ժամի եւ ամսաթուի _կարգաւորումներ․․․"
+#: common/resources/clock-dialog.glade:200
+msgid ""
+"Command to start on right-click \"Time settings\" menu item. Default is "
+"\"time-admin\"."
+msgstr ""
 
-#: common/resources/clock-dialog.glade:214
+#: common/resources/clock-dialog.glade:211
+msgid "Configuration tool:"
+msgstr ""
+
+#: common/resources/clock-dialog.glade:227
 msgid "Time Settings"
 msgstr "Ժամի կարգաւորումներ"
 
-#: common/resources/clock-dialog.glade:250
+#: common/resources/clock-dialog.glade:263
 msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
 msgstr ""
 
-#: common/resources/clock-dialog.glade:261
+#: common/resources/clock-dialog.glade:274
 msgid "Co_mmand:"
 msgstr "Հր_աման․"
 
-#: common/resources/clock-dialog.glade:273
+#: common/resources/clock-dialog.glade:286
 msgid "_Show week numbers"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:294
+#: common/resources/clock-dialog.glade:307
 msgid "Calendar"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:329
-#: common/resources/clock-dialog.glade:669
-#: common/resources/clock-dialog.glade:791
+#: common/resources/clock-dialog.glade:342
+#: common/resources/clock-dialog.glade:682
+#: common/resources/clock-dialog.glade:804
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -542,61 +548,61 @@ msgid ""
 "page for additional information."
 msgstr "Ձեւաչափը ներկայացնում է ընտրացանկ ներդրուող ամսաթիւն ու ժամը։ Աւրինակ՝ %Y-ն կը նշանակուի տարուայ համար, %m֊ը՝ ամսվա եւ %d֊ն աւրուայ համար։ Ներառեալ՝ <b> </b>֊ն՝ գրոյթը կը դարձնեն թաւ։ Լրացուցիչ տեղեկոյթի համար, տե՛ս «Աջակցութիւն» էջը։"
 
-#: common/resources/clock-dialog.glade:358
+#: common/resources/clock-dialog.glade:371
 msgid "_Tooltip format:"
 msgstr "_Գործիքայուշի ձեւաչափ․"
 
-#: common/resources/clock-dialog.glade:371
-#: common/resources/clock-dialog.glade:619
+#: common/resources/clock-dialog.glade:384
+#: common/resources/clock-dialog.glade:632
 msgid "_Layout:"
 msgstr "_Շարակարգ․"
 
-#: common/resources/clock-dialog.glade:435
+#: common/resources/clock-dialog.glade:448
 msgid "Sho_w AM/PM"
 msgstr "Ցուցա_դրել AM/PM֊ը"
 
-#: common/resources/clock-dialog.glade:450
+#: common/resources/clock-dialog.glade:463
 msgid "Fl_ash time separators"
 msgstr "ժա_մանակի բաժանիչներ"
 
-#: common/resources/clock-dialog.glade:465
+#: common/resources/clock-dialog.glade:478
 msgid "24-_hour clock"
 msgstr "24-_ժամեայ ժամացոյց"
 
-#: common/resources/clock-dialog.glade:508
+#: common/resources/clock-dialog.glade:521
 msgid "Binary mode:"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:524
+#: common/resources/clock-dialog.glade:537
 msgid "Display _seconds"
 msgstr "Ցուցադրել _վայրկեանները"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: common/resources/clock-dialog.glade:545
+#: common/resources/clock-dialog.glade:558
 msgid "F_uzziness:"
 msgstr "Ան_որոշութիւն․"
 
-#: common/resources/clock-dialog.glade:579
+#: common/resources/clock-dialog.glade:592
 msgid "Show _inactive segments"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:594
+#: common/resources/clock-dialog.glade:607
 msgid "Show gri_d"
 msgstr "Ցուցադրել ցանց_ը"
 
-#: common/resources/clock-dialog.glade:640
-#: common/resources/clock-dialog.glade:762
+#: common/resources/clock-dialog.glade:653
+#: common/resources/clock-dialog.glade:775
 msgid "Font:"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:653
-#: common/resources/clock-dialog.glade:775
+#: common/resources/clock-dialog.glade:666
+#: common/resources/clock-dialog.glade:788
 msgid "Format:"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:670
-#: common/resources/clock-dialog.glade:792
+#: common/resources/clock-dialog.glade:683
+#: common/resources/clock-dialog.glade:805
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -604,15 +610,15 @@ msgid ""
 "the &quot;Help&quot; page for additional information."
 msgstr ""
 
-#: common/resources/clock-dialog.glade:699
+#: common/resources/clock-dialog.glade:712
 msgid "Date"
 msgstr "Ամսաթիւ"
 
-#: common/resources/clock-dialog.glade:744
+#: common/resources/clock-dialog.glade:757
 msgid "Time"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:871
+#: common/resources/clock-dialog.glade:884
 msgid "Clock Options"
 msgstr "Ժամացոյցի Ընտրանքներ"
 
@@ -1644,7 +1650,7 @@ msgid "_OK"
 msgstr "_Բարի"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:638 plugins/clock/clock.c:1055
+#: plugins/applicationsmenu/applicationsmenu.c:638 plugins/clock/clock.c:1083
 #: plugins/launcher/launcher.c:2499
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -1690,17 +1696,25 @@ msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A%d%B %Y"
 
-#: plugins/clock/clock.c:172
+#: plugins/clock/clock.c:180
 msgid "Week %V"
 msgstr "%V֊երրորդ շաբաթ"
 
-#: plugins/clock/clock.c:496
+#: plugins/clock/clock.c:326
+msgid "Time _settings"
+msgstr ""
+
+#: plugins/clock/clock.c:513
 msgid "Failed to execute clock command"
 msgstr "Չյաջողուեց գործարկել ժամացույցի հրամանը"
 
-#: plugins/clock/clock.c:994
+#: plugins/clock/clock.c:1011
 msgid "Custom Format"
 msgstr "Այլ Ձեւաչափ"
+
+#: plugins/clock/clock.c:1062
+msgid "Configuration tool not found, please set it in the settings dialog"
+msgstr ""
 
 #: plugins/clock/clock-digital.h:30
 msgctxt "Time"
@@ -2134,7 +2148,7 @@ msgstr "Ծրագրի գործարկիչ՝ ընտրովի ցանկով"
 msgid "Unable to open the workspace settings"
 msgstr "Չյաջողուեց բացել աշխատատարածքի կարգաւորումները"
 
-#: plugins/pager/pager-buttons.c:628 plugins/windowmenu/windowmenu.c:992
+#: plugins/pager/pager-buttons.c:646 plugins/windowmenu/windowmenu.c:1007
 #, c-format
 msgid "Workspace %d"
 msgstr "%d Աշխատատարածք"
@@ -2197,40 +2211,40 @@ msgid ""
 "items"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:3200
+#: plugins/tasklist/tasklist-widget.c:3226
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:3227
+#: plugins/tasklist/tasklist-widget.c:3253
 msgid "Launch New Instance"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:3982
+#: plugins/tasklist/tasklist-widget.c:4008
 msgid "Mi_nimize All"
 msgstr "Փո_քրացնել Բոլորը"
 
-#: plugins/tasklist/tasklist-widget.c:3989
+#: plugins/tasklist/tasklist-widget.c:4015
 msgid "Un_minimize All"
 msgstr "Մե_ծացնել Բոլորը"
 
-#: plugins/tasklist/tasklist-widget.c:3996
+#: plugins/tasklist/tasklist-widget.c:4022
 msgid "Ma_ximize All"
 msgstr "Առ_աւելացնել Բոլորը"
 
-#: plugins/tasklist/tasklist-widget.c:4003
+#: plugins/tasklist/tasklist-widget.c:4029
 msgid "_Unmaximize All"
 msgstr "_Մեծացնել Բոլորը"
 
-#: plugins/tasklist/tasklist-widget.c:4014
+#: plugins/tasklist/tasklist-widget.c:4040
 msgid "_Close All"
 msgstr "_Փակել Բոլորը"
 
-#: plugins/tasklist/tasklist-widget.c:5025
+#: plugins/tasklist/tasklist-widget.c:5051
 msgid "all monitors"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:5034
+#: plugins/tasklist/tasklist-widget.c:5060
 msgid "panel's monitor"
 msgstr ""
 
@@ -2242,28 +2256,28 @@ msgstr "Փոխել բացուած պատուհանները՝ կոճակների 
 msgid "Windows"
 msgstr ""
 
-#: plugins/windowmenu/windowmenu.c:771
+#: plugins/windowmenu/windowmenu.c:786
 msgid "Desktop"
 msgstr "Աշխատասեղան"
 
-#: plugins/windowmenu/windowmenu.c:1387
+#: plugins/windowmenu/windowmenu.c:1402
 msgid "No Windows"
 msgstr "Պատուհաններ Չկան"
 
-#: plugins/windowmenu/windowmenu.c:1402
+#: plugins/windowmenu/windowmenu.c:1417
 msgid "Urgent Windows"
 msgstr "Անհրաժեշտ Պատուհաններ"
 
-#: plugins/windowmenu/windowmenu.c:1453
+#: plugins/windowmenu/windowmenu.c:1468
 msgid "Add Workspace"
 msgstr "Աւելացնել Աշխատատարածք"
 
-#: plugins/windowmenu/windowmenu.c:1475
+#: plugins/windowmenu/windowmenu.c:1490
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Հեռացնել «%s» Աշխատատարածքը"
 
-#: plugins/windowmenu/windowmenu.c:1477
+#: plugins/windowmenu/windowmenu.c:1492
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Հեռացնել %d Աշխատատարածքը"
