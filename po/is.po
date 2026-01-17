@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-12-31 12:54+0100\n"
+"POT-Creation-Date: 2026-01-17 00:55+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>, 2014-2015,2017-2018,2024\n"
 "Language-Team: Icelandic (http://app.transifex.com/xfce/xfce4-panel/language/is/)\n"
@@ -413,7 +413,7 @@ msgid ""
 msgstr "Veldu þennan möguleika til að birta almenn heiti forrita í valmynd, til dæmis \"Skráastjóri\" í stað \"Thunar\""
 
 #: common/resources/applicationsmenu-dialog.glade:229
-#: common/resources/clock-dialog.glade:405
+#: common/resources/clock-dialog.glade:418
 #: common/resources/directorymenu-dialog.glade:150
 #: common/resources/separator-dialog.glade:222
 #: common/resources/tasklist-dialog.glade:266
@@ -507,35 +507,41 @@ msgstr "Heiti tímabeltis samkvæmt skrá í zoneinfo gagnagrunni; til dæmis \"
 msgid "Time_zone:"
 msgstr "Tíma_belti:"
 
-#: common/resources/clock-dialog.glade:194
-msgid "Time and Date _Settings..."
-msgstr "Tíma og dag_setningarstillingar..."
+#: common/resources/clock-dialog.glade:200
+msgid ""
+"Command to start on right-click \"Time settings\" menu item. Default is "
+"\"time-admin\"."
+msgstr ""
 
-#: common/resources/clock-dialog.glade:214
+#: common/resources/clock-dialog.glade:211
+msgid "Configuration tool:"
+msgstr ""
+
+#: common/resources/clock-dialog.glade:227
 msgid "Time Settings"
 msgstr "Tímastillingar"
 
-#: common/resources/clock-dialog.glade:250
+#: common/resources/clock-dialog.glade:263
 msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
 msgstr ""
 
-#: common/resources/clock-dialog.glade:261
+#: common/resources/clock-dialog.glade:274
 msgid "Co_mmand:"
 msgstr "Skipu_n:"
 
-#: common/resources/clock-dialog.glade:273
+#: common/resources/clock-dialog.glade:286
 msgid "_Show week numbers"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:294
+#: common/resources/clock-dialog.glade:307
 msgid "Calendar"
 msgstr "Dagatal"
 
-#: common/resources/clock-dialog.glade:329
-#: common/resources/clock-dialog.glade:669
-#: common/resources/clock-dialog.glade:791
+#: common/resources/clock-dialog.glade:342
+#: common/resources/clock-dialog.glade:682
+#: common/resources/clock-dialog.glade:804
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -543,61 +549,61 @@ msgid ""
 "page for additional information."
 msgstr "Sniðið lýsir hlutum dagsetninga og tíma sem settir verða á skjástikuna. Til dæmis verður %Y skipt út fyrir ártal, %m verður mánuður og %d verður dagsetning. Á svipaðan hátt gera <b></b> merki innlagðan texta feitletraðan. Skoðaðu síðuna \"Hjálp\" til að fá vitneskju um meira."
 
-#: common/resources/clock-dialog.glade:358
+#: common/resources/clock-dialog.glade:371
 msgid "_Tooltip format:"
 msgstr "S_nið ábendinga:"
 
-#: common/resources/clock-dialog.glade:371
-#: common/resources/clock-dialog.glade:619
+#: common/resources/clock-dialog.glade:384
+#: common/resources/clock-dialog.glade:632
 msgid "_Layout:"
 msgstr "_Framsetning:"
 
-#: common/resources/clock-dialog.glade:435
+#: common/resources/clock-dialog.glade:448
 msgid "Sho_w AM/PM"
 msgstr "Sýna FH/_EH"
 
-#: common/resources/clock-dialog.glade:450
+#: common/resources/clock-dialog.glade:463
 msgid "Fl_ash time separators"
 msgstr "Blikka tíma_aðgreinum"
 
-#: common/resources/clock-dialog.glade:465
+#: common/resources/clock-dialog.glade:478
 msgid "24-_hour clock"
 msgstr "24 _klst. klukka"
 
-#: common/resources/clock-dialog.glade:508
+#: common/resources/clock-dialog.glade:521
 msgid "Binary mode:"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:524
+#: common/resources/clock-dialog.glade:537
 msgid "Display _seconds"
 msgstr "_Sýna sekúndur"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: common/resources/clock-dialog.glade:545
+#: common/resources/clock-dialog.glade:558
 msgid "F_uzziness:"
 msgstr "Ó_nákvæmni:"
 
-#: common/resources/clock-dialog.glade:579
+#: common/resources/clock-dialog.glade:592
 msgid "Show _inactive segments"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:594
+#: common/resources/clock-dialog.glade:607
 msgid "Show gri_d"
 msgstr "Sýna _hnitanet"
 
-#: common/resources/clock-dialog.glade:640
-#: common/resources/clock-dialog.glade:762
+#: common/resources/clock-dialog.glade:653
+#: common/resources/clock-dialog.glade:775
 msgid "Font:"
 msgstr "Letur:"
 
-#: common/resources/clock-dialog.glade:653
-#: common/resources/clock-dialog.glade:775
+#: common/resources/clock-dialog.glade:666
+#: common/resources/clock-dialog.glade:788
 msgid "Format:"
 msgstr "Snið:"
 
-#: common/resources/clock-dialog.glade:670
-#: common/resources/clock-dialog.glade:792
+#: common/resources/clock-dialog.glade:683
+#: common/resources/clock-dialog.glade:805
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -605,15 +611,15 @@ msgid ""
 "the &quot;Help&quot; page for additional information."
 msgstr ""
 
-#: common/resources/clock-dialog.glade:699
+#: common/resources/clock-dialog.glade:712
 msgid "Date"
 msgstr "Dagsetning"
 
-#: common/resources/clock-dialog.glade:744
+#: common/resources/clock-dialog.glade:757
 msgid "Time"
 msgstr "Tími"
 
-#: common/resources/clock-dialog.glade:871
+#: common/resources/clock-dialog.glade:884
 msgid "Clock Options"
 msgstr "Eiginleikar klukku"
 
@@ -1645,7 +1651,7 @@ msgid "_OK"
 msgstr "Í _lagi"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:638 plugins/clock/clock.c:1055
+#: plugins/applicationsmenu/applicationsmenu.c:638 plugins/clock/clock.c:1083
 #: plugins/launcher/launcher.c:2499
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -1691,17 +1697,25 @@ msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%A %d. %B %Y"
 
-#: plugins/clock/clock.c:172
+#: plugins/clock/clock.c:180
 msgid "Week %V"
 msgstr "Vika %V"
 
-#: plugins/clock/clock.c:496
+#: plugins/clock/clock.c:326
+msgid "Time _settings"
+msgstr ""
+
+#: plugins/clock/clock.c:513
 msgid "Failed to execute clock command"
 msgstr "Gat ekki keyrt klukkuskipun"
 
-#: plugins/clock/clock.c:994
+#: plugins/clock/clock.c:1011
 msgid "Custom Format"
 msgstr "Sérsnið"
+
+#: plugins/clock/clock.c:1062
+msgid "Configuration tool not found, please set it in the settings dialog"
+msgstr ""
 
 #: plugins/clock/clock-digital.h:30
 msgctxt "Time"
@@ -2135,7 +2149,7 @@ msgstr "Forritaræsir með mögulegri valmynd"
 msgid "Unable to open the workspace settings"
 msgstr "Tókst ekki að opna vinnusvæðastillingar"
 
-#: plugins/pager/pager-buttons.c:628 plugins/windowmenu/windowmenu.c:992
+#: plugins/pager/pager-buttons.c:646 plugins/windowmenu/windowmenu.c:1007
 #, c-format
 msgid "Workspace %d"
 msgstr "Vinnusvæði %d"
@@ -2198,40 +2212,40 @@ msgid ""
 "items"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:3200
+#: plugins/tasklist/tasklist-widget.c:3226
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:3227
+#: plugins/tasklist/tasklist-widget.c:3253
 msgid "Launch New Instance"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:3982
+#: plugins/tasklist/tasklist-widget.c:4008
 msgid "Mi_nimize All"
 msgstr "_Lágmarka alla"
 
-#: plugins/tasklist/tasklist-widget.c:3989
+#: plugins/tasklist/tasklist-widget.c:4015
 msgid "Un_minimize All"
 msgstr "Stæ_kka alla"
 
-#: plugins/tasklist/tasklist-widget.c:3996
+#: plugins/tasklist/tasklist-widget.c:4022
 msgid "Ma_ximize All"
 msgstr "_Hámarka alla"
 
-#: plugins/tasklist/tasklist-widget.c:4003
+#: plugins/tasklist/tasklist-widget.c:4029
 msgid "_Unmaximize All"
 msgstr "_Minnka alla"
 
-#: plugins/tasklist/tasklist-widget.c:4014
+#: plugins/tasklist/tasklist-widget.c:4040
 msgid "_Close All"
 msgstr "Loka _öllu"
 
-#: plugins/tasklist/tasklist-widget.c:5025
+#: plugins/tasklist/tasklist-widget.c:5051
 msgid "all monitors"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:5034
+#: plugins/tasklist/tasklist-widget.c:5060
 msgid "panel's monitor"
 msgstr ""
 
@@ -2243,28 +2257,28 @@ msgstr "Skipta á milli opinna glugga með hnöppum"
 msgid "Windows"
 msgstr ""
 
-#: plugins/windowmenu/windowmenu.c:771
+#: plugins/windowmenu/windowmenu.c:786
 msgid "Desktop"
 msgstr "Skjáborð"
 
-#: plugins/windowmenu/windowmenu.c:1387
+#: plugins/windowmenu/windowmenu.c:1402
 msgid "No Windows"
 msgstr "Engir gluggar"
 
-#: plugins/windowmenu/windowmenu.c:1402
+#: plugins/windowmenu/windowmenu.c:1417
 msgid "Urgent Windows"
 msgstr "Áríðandi gluggar"
 
-#: plugins/windowmenu/windowmenu.c:1453
+#: plugins/windowmenu/windowmenu.c:1468
 msgid "Add Workspace"
 msgstr "Bæta við vinnusvæði"
 
-#: plugins/windowmenu/windowmenu.c:1475
+#: plugins/windowmenu/windowmenu.c:1490
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Fjarlægja vinnusvæði \"%s\""
 
-#: plugins/windowmenu/windowmenu.c:1477
+#: plugins/windowmenu/windowmenu.c:1492
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Fjarlægja vinnusvæði %d"
