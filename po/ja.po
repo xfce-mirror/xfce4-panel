@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-12-31 12:54+0100\n"
+"POT-Creation-Date: 2026-01-17 00:55+0100\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2019-2020,2022-2026\n"
 "Language-Team: Japanese (http://app.transifex.com/xfce/xfce4-panel/language/ja/)\n"
@@ -414,7 +414,7 @@ msgid ""
 msgstr "アプリケーションを一般名でメニューに表示する場合にこのオプションを選択してください。例えば \"Thunar\" は \"ファイルマネージャー\" と表示されます。"
 
 #: common/resources/applicationsmenu-dialog.glade:229
-#: common/resources/clock-dialog.glade:405
+#: common/resources/clock-dialog.glade:418
 #: common/resources/directorymenu-dialog.glade:150
 #: common/resources/separator-dialog.glade:222
 #: common/resources/tasklist-dialog.glade:266
@@ -508,35 +508,41 @@ msgstr "zoneinfo database 内と一致するタイムゾーン名を指定して
 msgid "Time_zone:"
 msgstr "タイムゾーン(_Z):"
 
-#: common/resources/clock-dialog.glade:194
-msgid "Time and Date _Settings..."
-msgstr "日付と時刻の設定(_S)..."
+#: common/resources/clock-dialog.glade:200
+msgid ""
+"Command to start on right-click \"Time settings\" menu item. Default is "
+"\"time-admin\"."
+msgstr ""
 
-#: common/resources/clock-dialog.glade:214
+#: common/resources/clock-dialog.glade:211
+msgid "Configuration tool:"
+msgstr ""
+
+#: common/resources/clock-dialog.glade:227
 msgid "Time Settings"
 msgstr "時刻の設定"
 
-#: common/resources/clock-dialog.glade:250
+#: common/resources/clock-dialog.glade:263
 msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
 msgstr "設定するとプラグインを左クリックしたときに、デフォルトのカレンダーを表示する代わりにこのコマンドを実行します。"
 
-#: common/resources/clock-dialog.glade:261
+#: common/resources/clock-dialog.glade:274
 msgid "Co_mmand:"
 msgstr "コマンド(_M):"
 
-#: common/resources/clock-dialog.glade:273
+#: common/resources/clock-dialog.glade:286
 msgid "_Show week numbers"
 msgstr "週番号を表示する(_S)"
 
-#: common/resources/clock-dialog.glade:294
+#: common/resources/clock-dialog.glade:307
 msgid "Calendar"
 msgstr "カレンダー"
 
-#: common/resources/clock-dialog.glade:329
-#: common/resources/clock-dialog.glade:669
-#: common/resources/clock-dialog.glade:791
+#: common/resources/clock-dialog.glade:342
+#: common/resources/clock-dialog.glade:682
+#: common/resources/clock-dialog.glade:804
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -544,61 +550,61 @@ msgid ""
 "page for additional information."
 msgstr "この形式はパネルに表示される日付と時刻部分を表します。例えば、%Y は年に、%m は月に、%d は日に置き換えられます。また、<b></b> タグで太字にすることもできます。詳しくは \"ヘルプ\" ページを参照してください。"
 
-#: common/resources/clock-dialog.glade:358
+#: common/resources/clock-dialog.glade:371
 msgid "_Tooltip format:"
 msgstr "ツールチップの形式(_T):"
 
-#: common/resources/clock-dialog.glade:371
-#: common/resources/clock-dialog.glade:619
+#: common/resources/clock-dialog.glade:384
+#: common/resources/clock-dialog.glade:632
 msgid "_Layout:"
 msgstr "レイアウト(_L):"
 
-#: common/resources/clock-dialog.glade:435
+#: common/resources/clock-dialog.glade:448
 msgid "Sho_w AM/PM"
 msgstr "AM/PMを表示する(_W)"
 
-#: common/resources/clock-dialog.glade:450
+#: common/resources/clock-dialog.glade:463
 msgid "Fl_ash time separators"
 msgstr "時刻の区切りを点滅する(_A)"
 
-#: common/resources/clock-dialog.glade:465
+#: common/resources/clock-dialog.glade:478
 msgid "24-_hour clock"
 msgstr "24 時間制にする(_H)"
 
-#: common/resources/clock-dialog.glade:508
+#: common/resources/clock-dialog.glade:521
 msgid "Binary mode:"
 msgstr "バイナリモード:"
 
-#: common/resources/clock-dialog.glade:524
+#: common/resources/clock-dialog.glade:537
 msgid "Display _seconds"
 msgstr "秒を表示する(_S)"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: common/resources/clock-dialog.glade:545
+#: common/resources/clock-dialog.glade:558
 msgid "F_uzziness:"
 msgstr "曖昧さ(_U):"
 
-#: common/resources/clock-dialog.glade:579
+#: common/resources/clock-dialog.glade:592
 msgid "Show _inactive segments"
 msgstr "非アクティブなセグメントを表示(_I)"
 
-#: common/resources/clock-dialog.glade:594
+#: common/resources/clock-dialog.glade:607
 msgid "Show gri_d"
 msgstr "グリッドを表示する(_D)"
 
-#: common/resources/clock-dialog.glade:640
-#: common/resources/clock-dialog.glade:762
+#: common/resources/clock-dialog.glade:653
+#: common/resources/clock-dialog.glade:775
 msgid "Font:"
 msgstr "フォント: "
 
-#: common/resources/clock-dialog.glade:653
-#: common/resources/clock-dialog.glade:775
+#: common/resources/clock-dialog.glade:666
+#: common/resources/clock-dialog.glade:788
 msgid "Format:"
 msgstr "フォーマット: "
 
-#: common/resources/clock-dialog.glade:670
-#: common/resources/clock-dialog.glade:792
+#: common/resources/clock-dialog.glade:683
+#: common/resources/clock-dialog.glade:805
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -606,15 +612,15 @@ msgid ""
 "the &quot;Help&quot; page for additional information."
 msgstr "この形式はパネルに表示される日付と時刻部分を表します。例えば、%Y は年に、%m は月に、%d は日に置き換えられます。また、&lt;b&gt;&lt;/b&gt; タグで太字にすることもできます。詳しくは &quot;ヘルプ&quot; ページを参照してください。"
 
-#: common/resources/clock-dialog.glade:699
+#: common/resources/clock-dialog.glade:712
 msgid "Date"
 msgstr "日付"
 
-#: common/resources/clock-dialog.glade:744
+#: common/resources/clock-dialog.glade:757
 msgid "Time"
 msgstr "時刻"
 
-#: common/resources/clock-dialog.glade:871
+#: common/resources/clock-dialog.glade:884
 msgid "Clock Options"
 msgstr "時計のオプション"
 
@@ -1645,7 +1651,7 @@ msgid "_OK"
 msgstr "OK(_O)"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:638 plugins/clock/clock.c:1055
+#: plugins/applicationsmenu/applicationsmenu.c:638 plugins/clock/clock.c:1083
 #: plugins/launcher/launcher.c:2499
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -1691,17 +1697,25 @@ msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr "%Y 年 %B  %d 日 %A  "
 
-#: plugins/clock/clock.c:172
+#: plugins/clock/clock.c:180
 msgid "Week %V"
 msgstr "第 %V 週"
 
-#: plugins/clock/clock.c:496
+#: plugins/clock/clock.c:326
+msgid "Time _settings"
+msgstr ""
+
+#: plugins/clock/clock.c:513
 msgid "Failed to execute clock command"
 msgstr "時計コマンドの実行に失敗しました"
 
-#: plugins/clock/clock.c:994
+#: plugins/clock/clock.c:1011
 msgid "Custom Format"
 msgstr "カスタム"
+
+#: plugins/clock/clock.c:1062
+msgid "Configuration tool not found, please set it in the settings dialog"
+msgstr ""
 
 #: plugins/clock/clock-digital.h:30
 msgctxt "Time"
@@ -2135,7 +2149,7 @@ msgstr "オプションでメニューが付くプログラムランチャーで
 msgid "Unable to open the workspace settings"
 msgstr "ワークスペース設定を開くことができません"
 
-#: plugins/pager/pager-buttons.c:628 plugins/windowmenu/windowmenu.c:992
+#: plugins/pager/pager-buttons.c:646 plugins/windowmenu/windowmenu.c:1007
 #, c-format
 msgid "Workspace %d"
 msgstr "ワークスペース %d"
@@ -2198,40 +2212,40 @@ msgid ""
 "items"
 msgstr "ステータス通知アイテム（アプリケーションインジケーター）とレガシーシステムトレイアイテムを提供します"
 
-#: plugins/tasklist/tasklist-widget.c:3200
+#: plugins/tasklist/tasklist-widget.c:3226
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "'%s' の新しいインスタンスを開始できません"
 
-#: plugins/tasklist/tasklist-widget.c:3227
+#: plugins/tasklist/tasklist-widget.c:3253
 msgid "Launch New Instance"
 msgstr "新しいインスタンスを起動"
 
-#: plugins/tasklist/tasklist-widget.c:3982
+#: plugins/tasklist/tasklist-widget.c:4008
 msgid "Mi_nimize All"
 msgstr "すべて最小化(_N)"
 
-#: plugins/tasklist/tasklist-widget.c:3989
+#: plugins/tasklist/tasklist-widget.c:4015
 msgid "Un_minimize All"
 msgstr "すべて元に戻す(_M)"
 
-#: plugins/tasklist/tasklist-widget.c:3996
+#: plugins/tasklist/tasklist-widget.c:4022
 msgid "Ma_ximize All"
 msgstr "すべて最大化(_X)"
 
-#: plugins/tasklist/tasklist-widget.c:4003
+#: plugins/tasklist/tasklist-widget.c:4029
 msgid "_Unmaximize All"
 msgstr "すべて元に戻す(_U)"
 
-#: plugins/tasklist/tasklist-widget.c:4014
+#: plugins/tasklist/tasklist-widget.c:4040
 msgid "_Close All"
 msgstr "すべて閉じる(_C)"
 
-#: plugins/tasklist/tasklist-widget.c:5025
+#: plugins/tasklist/tasklist-widget.c:5051
 msgid "all monitors"
 msgstr "すべてのモニター"
 
-#: plugins/tasklist/tasklist-widget.c:5034
+#: plugins/tasklist/tasklist-widget.c:5060
 msgid "panel's monitor"
 msgstr "パネルのモニター"
 
@@ -2243,28 +2257,28 @@ msgstr "開いているウィンドウをボタンを使って切り替えます
 msgid "Windows"
 msgstr "ウィンドウ"
 
-#: plugins/windowmenu/windowmenu.c:771
+#: plugins/windowmenu/windowmenu.c:786
 msgid "Desktop"
 msgstr "デスクトップ"
 
-#: plugins/windowmenu/windowmenu.c:1387
+#: plugins/windowmenu/windowmenu.c:1402
 msgid "No Windows"
 msgstr "ウィンドウなし"
 
-#: plugins/windowmenu/windowmenu.c:1402
+#: plugins/windowmenu/windowmenu.c:1417
 msgid "Urgent Windows"
 msgstr "緊急通知ウィンドウ"
 
-#: plugins/windowmenu/windowmenu.c:1453
+#: plugins/windowmenu/windowmenu.c:1468
 msgid "Add Workspace"
 msgstr "ワークスペースの追加"
 
-#: plugins/windowmenu/windowmenu.c:1475
+#: plugins/windowmenu/windowmenu.c:1490
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "ワークスペース \"%s\" の削除"
 
-#: plugins/windowmenu/windowmenu.c:1477
+#: plugins/windowmenu/windowmenu.c:1492
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "ワークスペース %d を削除"
