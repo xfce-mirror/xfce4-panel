@@ -1624,8 +1624,10 @@ panel_window_size_allocate (GtkWidget *widget,
                   && (window->autohide_state == AUTOHIDE_HIDDEN
                       || window->autohide_state == AUTOHIDE_POPUP)))
     {
+      gboolean autohide_running = window->autohide_timeout_id != 0 || window->popdown_progress != -G_MAXINT;
+
       /* autohide timeout is already running, so let's wait with hiding the panel */
-      if ((window->autohide_timeout_id != 0 || window->popdown_progress != -G_MAXINT)
+      if (autohide_running
           /* may be false on wayland where gtk_widget_queue_resize() does not
            * always trigger size_allocate() */
           && gtk_widget_get_visible (window->autohide_window))
@@ -1695,8 +1697,8 @@ panel_window_size_allocate (GtkWidget *widget,
         window->floating = TRUE;
 
       /* make the panel invisible without animation */
-      if (window->floating
-          || window->popdown_speed == 0)
+      if (!autohide_running
+          && (window->floating || window->popdown_speed == 0))
         {
           /* cancel any pending animations */
           if (window->autohide_ease_out_id != 0)
