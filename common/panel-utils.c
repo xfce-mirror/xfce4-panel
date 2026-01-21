@@ -245,8 +245,11 @@ panel_utils_wl_surface_commit (GtkWidget *widget)
 void
 panel_utils_widget_remap (GtkWidget *widget)
 {
-  gtk_widget_hide (GTK_WIDGET (widget));
-  gtk_widget_show (GTK_WIDGET (widget));
+  if (gtk_widget_get_visible (widget))
+    {
+      gtk_widget_hide (GTK_WIDGET (widget));
+      gtk_widget_show (GTK_WIDGET (widget));
+    }
 }
 
 
