@@ -477,6 +477,7 @@ window_menu_plugin_screen_changed (GtkWidget *widget,
       g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->screen),
                                             window_menu_plugin_active_window_changed, plugin);
       g_object_unref (plugin->screen);
+      plugin->workspace_group = NULL;
     }
 
   /* set the new screen */
