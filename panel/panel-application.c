@@ -864,7 +864,8 @@ panel_application_plugin_insert (PanelApplication *application,
                         GTK_WIDGET (provider), position);
 
   /* send all the needed info about the panel to the plugin */
-  panel_window_set_provider_info (window, provider, FALSE);
+  if (gtk_widget_get_realized (GTK_WIDGET (window)))
+    panel_window_set_provider_info (window, provider, FALSE);
 
   /* show the plugin */
   gtk_widget_show (provider);
