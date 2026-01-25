@@ -2697,14 +2697,17 @@ panel_window_screen_layout_changed (GdkScreen *screen,
 
 #ifdef HAVE_GTK_LAYER_SHELL
   /* avoid any recursion when remapping the panel, here or in gtk-layer-shell */
-  if (window->in_screen_layout_changed)
-    return;
-  window->in_screen_layout_changed = TRUE;
-
-  if (G_UNLIKELY (window->show_id != 0))
+  if (gtk_layer_is_supported ())
     {
-      g_source_remove (window->show_id);
-      window->show_id = 0;
+      if (window->in_screen_layout_changed)
+        return;
+      window->in_screen_layout_changed = TRUE;
+
+      if (G_UNLIKELY (window->show_id != 0))
+        {
+          g_source_remove (window->show_id);
+          window->show_id = 0;
+        }
     }
 #endif
 
@@ -2719,9 +2722,10 @@ panel_window_screen_layout_changed (GdkScreen *screen,
 
 #ifdef HAVE_GTK_LAYER_SHELL
       if (gtk_layer_is_supported ())
-        gtk_layer_set_monitor (GTK_WINDOW (window), NULL);
-
-      window->in_screen_layout_changed = FALSE;
+        {
+          gtk_layer_set_monitor (GTK_WINDOW (window), NULL);
+          window->in_screen_layout_changed = FALSE;
+        }
 #endif
       return;
     }
@@ -2846,9 +2850,10 @@ panel_window_screen_layout_changed (GdkScreen *screen,
 
 #ifdef HAVE_GTK_LAYER_SHELL
       if (gtk_layer_is_supported ())
-        gtk_layer_set_monitor (GTK_WINDOW (window), NULL);
-
-      window->in_screen_layout_changed = FALSE;
+        {
+          gtk_layer_set_monitor (GTK_WINDOW (window), NULL);
+          window->in_screen_layout_changed = FALSE;
+        }
 #endif
       return;
     }
