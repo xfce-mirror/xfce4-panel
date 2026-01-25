@@ -1814,6 +1814,7 @@ xfce_tasklist_disconnect_screen (XfceTasklist *tasklist)
   panel_assert (tasklist->skipped_windows == NULL);
 
   g_clear_object (&tasklist->screen);
+  tasklist->workspace_group = NULL;
   tasklist->display = NULL;
 }
 
