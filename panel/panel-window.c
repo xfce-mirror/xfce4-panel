@@ -2079,6 +2079,21 @@ panel_window_filter (GdkXEvent *xev,
 
 
 
+static gboolean
+set_all_provider_info (gpointer data)
+{
+  PanelWindow *window = data;
+  GtkWidget *itembar = gtk_bin_get_child (GTK_BIN (window));
+  GList *plugins = gtk_container_get_children (GTK_CONTAINER (itembar));
+  for (GList *lp = plugins; lp != NULL; lp = lp->next)
+    panel_window_set_provider_info (window, lp->data, FALSE);
+
+  g_list_free (plugins);
+  return FALSE;
+}
+
+
+
 static void
 panel_window_realize (GtkWidget *widget)
 {
@@ -2097,6 +2112,9 @@ panel_window_realize (GtkWidget *widget)
 
   /* redirect some corner cases (see issue #227) */
   gdk_window_add_filter (gdkwindow, panel_window_filter, window);
+
+  /* be sure to set all provider infos if the panel was hidden at startup */
+  g_idle_add (set_all_provider_info, window);
 }
 
 
