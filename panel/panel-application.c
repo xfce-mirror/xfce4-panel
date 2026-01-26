@@ -202,6 +202,9 @@ panel_application_init (PanelApplication *application)
   application->drop_occurred = FALSE;
   application->autohide_block = 0;
 
+  /* set application name so internal plugins can't override it */
+  g_set_application_name (PACKAGE_NAME);
+
   /* get the xfconf channel (singleton) */
   application->xfconf = xfconf_channel_get (XFCE_PANEL_CHANNEL_NAME);
 
