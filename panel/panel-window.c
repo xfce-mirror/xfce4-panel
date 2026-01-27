@@ -391,6 +391,7 @@ struct _PanelWindow
   gchar *output_name;
 #ifdef HAVE_GTK_LAYER_SHELL
   guint show_id;
+  guint set_anchor_default_id;
   gboolean in_screen_layout_changed;
   gulong set_anchor_id;
 #endif
@@ -1044,6 +1045,8 @@ panel_window_finalize (GObject *object)
 #ifdef HAVE_GTK_LAYER_SHELL
   if (G_UNLIKELY (window->show_id != 0))
     g_source_remove (window->show_id);
+  if (window->set_anchor_default_id != 0)
+    g_source_remove (window->set_anchor_default_id);
 #endif
 
   /* destroy the autohide window */
@@ -1463,6 +1466,7 @@ set_anchor_default (gpointer data)
       window->set_anchor_id = g_signal_connect (window, "size-allocate", G_CALLBACK (set_anchor), NULL);
     }
 
+  window->set_anchor_default_id = 0;
   return FALSE;
 }
 #endif
@@ -1519,7 +1523,9 @@ panel_window_get_preferred_width (GtkWidget *widget,
           && window->snap_position != SNAP_POSITION_NONE
           && n_width != window->alloc.width)
         {
-          g_idle_add (set_anchor_default, window);
+          if (window->set_anchor_default_id != 0)
+            g_source_remove (window->set_anchor_default_id);
+          window->set_anchor_default_id = g_idle_add (set_anchor_default, window);
         }
 #endif
     }
@@ -1583,7 +1589,9 @@ panel_window_get_preferred_height (GtkWidget *widget,
           && window->snap_position != SNAP_POSITION_NONE
           && n_height != window->alloc.height)
         {
-          g_idle_add (set_anchor_default, window);
+          if (window->set_anchor_default_id != 0)
+            g_source_remove (window->set_anchor_default_id);
+          window->set_anchor_default_id = g_idle_add (set_anchor_default, window);
         }
 #endif
     }
