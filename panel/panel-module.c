@@ -447,16 +447,10 @@ panel_module_new_plugin (PanelModule *module,
               debug_type = "construct-func";
             }
 
-          if (G_LIKELY (plugin != NULL))
-            break;
-          else
+          if (G_UNLIKELY (plugin == NULL))
             g_type_module_unuse (G_TYPE_MODULE (module));
         }
-
-      /* fall-through (make wrapper plugin), probably a plugin with
-       * preinit_func which is not supported for internal plugins
-       * note: next comment tells GCC7 to ignore the fallthrough */
-      /* fall through */
+      break;
 
     case PANEL_MODULE_RUN_MODE_EXTERNAL:
       plugin = panel_plugin_external_wrapper_new (module, unique_id, arguments);
