@@ -173,35 +173,35 @@ systray_manager_class_init (SystrayManagerClass *klass)
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = systray_manager_finalize;
 
-  systray_manager_signals[ICON_ADDED] = g_signal_new (g_intern_static_string ("icon-added"),
+  systray_manager_signals[ICON_ADDED] = g_signal_new (g_intern_string ("icon-added"),
                                                       G_OBJECT_CLASS_TYPE (klass),
                                                       G_SIGNAL_RUN_LAST,
                                                       0, NULL, NULL,
                                                       g_cclosure_marshal_VOID__OBJECT,
                                                       G_TYPE_NONE, 1, GTK_TYPE_SOCKET);
 
-  systray_manager_signals[ICON_REMOVED] = g_signal_new (g_intern_static_string ("icon-removed"),
+  systray_manager_signals[ICON_REMOVED] = g_signal_new (g_intern_string ("icon-removed"),
                                                         G_OBJECT_CLASS_TYPE (klass),
                                                         G_SIGNAL_RUN_LAST,
                                                         0, NULL, NULL,
                                                         g_cclosure_marshal_VOID__OBJECT,
                                                         G_TYPE_NONE, 1, GTK_TYPE_SOCKET);
 
-  systray_manager_signals[MESSAGE_SENT] = g_signal_new (g_intern_static_string ("message-sent"),
+  systray_manager_signals[MESSAGE_SENT] = g_signal_new (g_intern_string ("message-sent"),
                                                         G_OBJECT_CLASS_TYPE (klass),
                                                         G_SIGNAL_RUN_LAST,
                                                         0, NULL, NULL,
                                                         _systray_marshal_VOID__OBJECT_STRING_LONG_LONG,
                                                         G_TYPE_NONE, 4, GTK_TYPE_SOCKET, G_TYPE_STRING, G_TYPE_LONG, G_TYPE_LONG);
 
-  systray_manager_signals[MESSAGE_CANCELLED] = g_signal_new (g_intern_static_string ("message-cancelled"),
+  systray_manager_signals[MESSAGE_CANCELLED] = g_signal_new (g_intern_string ("message-cancelled"),
                                                              G_OBJECT_CLASS_TYPE (klass),
                                                              G_SIGNAL_RUN_LAST,
                                                              0, NULL, NULL,
                                                              _systray_marshal_VOID__OBJECT_LONG,
                                                              G_TYPE_NONE, 2, GTK_TYPE_SOCKET, G_TYPE_LONG);
 
-  systray_manager_signals[LOST_SELECTION] = g_signal_new (g_intern_static_string ("lost-selection"),
+  systray_manager_signals[LOST_SELECTION] = g_signal_new (g_intern_string ("lost-selection"),
                                                           G_OBJECT_CLASS_TYPE (klass),
                                                           G_SIGNAL_RUN_LAST,
                                                           0, NULL, NULL,

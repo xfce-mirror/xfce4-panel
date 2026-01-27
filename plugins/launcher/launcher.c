@@ -332,7 +332,7 @@ launcher_plugin_class_init (LauncherPluginClass *klass)
                                                       LAUNCHER_ARROW_DEFAULT,
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
-  launcher_signals[ITEMS_CHANGED] = g_signal_new (g_intern_static_string ("items-changed"),
+  launcher_signals[ITEMS_CHANGED] = g_signal_new (g_intern_string ("items-changed"),
                                                   G_TYPE_FROM_CLASS (klass),
                                                   G_SIGNAL_RUN_FIRST,
                                                   0, NULL, NULL,
