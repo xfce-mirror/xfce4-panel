@@ -215,7 +215,7 @@ panel_module_factory_load_modules (PanelModuleFactory *factory)
         {
           const gchar *const *sys_datadirs = g_get_system_data_dirs ();
           const gchar *user_datadir = g_get_user_data_dir ();
-          GHashTable *unique = g_hash_table_new (g_str_hash, g_str_equal);
+          GHashTable *unique = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
           for (const gchar *const *p = sys_datadirs; *p != NULL; p++)
             {
@@ -234,8 +234,6 @@ panel_module_factory_load_modules (PanelModuleFactory *factory)
                     build_dirs_added = TRUE;
                   g_free (prefix);
                 }
-
-              g_free (path);
             }
 
           g_hash_table_destroy (unique);
