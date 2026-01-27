@@ -1056,8 +1056,12 @@ panel_window_set_property (GObject *object,
       break;
 
     case PROP_KEEP_BELOW:
-      window->keep_below = g_value_get_boolean (value);
-      panel_window_keep_below (window);
+      val_bool = g_value_get_boolean (value);
+      if (val_bool != window->keep_below)
+        {
+          window->keep_below = val_bool;
+          panel_window_keep_below (window);
+        }
       break;
 
     default:
