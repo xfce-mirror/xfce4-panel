@@ -94,7 +94,7 @@ clock_time_class_init (ClockTimeClass *klass)
                                                         DEFAULT_TIMEZONE,
                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
-  clock_time_signals[TIME_CHANGED] = g_signal_new (g_intern_string ("time-changed"),
+  clock_time_signals[TIME_CHANGED] = g_signal_new (g_intern_static_string ("time-changed"),
                                                    G_TYPE_FROM_CLASS (gobject_class),
                                                    G_SIGNAL_RUN_LAST,
                                                    0, NULL, NULL,
