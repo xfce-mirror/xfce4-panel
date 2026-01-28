@@ -166,14 +166,14 @@ sn_backend_class_init (SnBackendClass *klass)
   object_class = G_OBJECT_CLASS (klass);
   object_class->finalize = sn_backend_finalize;
 
-  sn_backend_signals[ITEM_ADDED] = g_signal_new (g_intern_string ("item-added"),
+  sn_backend_signals[ITEM_ADDED] = g_signal_new (g_intern_static_string ("item-added"),
                                                  G_TYPE_FROM_CLASS (object_class),
                                                  G_SIGNAL_RUN_LAST,
                                                  0, NULL, NULL,
                                                  g_cclosure_marshal_VOID__OBJECT,
                                                  G_TYPE_NONE, 1, SN_TYPE_ITEM);
 
-  sn_backend_signals[ITEM_REMOVED] = g_signal_new (g_intern_string ("item-removed"),
+  sn_backend_signals[ITEM_REMOVED] = g_signal_new (g_intern_static_string ("item-removed"),
                                                    G_TYPE_FROM_CLASS (object_class),
                                                    G_SIGNAL_RUN_LAST,
                                                    0, NULL, NULL,

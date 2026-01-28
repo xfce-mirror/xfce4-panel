@@ -196,42 +196,42 @@ sn_item_class_init (SnItemClass *klass)
                                    g_param_spec_boolean ("exposed", NULL, NULL, FALSE,
                                                          G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
-  sn_item_signals[EXPOSE] = g_signal_new (g_intern_string ("expose"),
+  sn_item_signals[EXPOSE] = g_signal_new (g_intern_static_string ("expose"),
                                           G_TYPE_FROM_CLASS (object_class),
                                           G_SIGNAL_RUN_LAST,
                                           0, NULL, NULL,
                                           g_cclosure_marshal_VOID__VOID,
                                           G_TYPE_NONE, 0);
 
-  sn_item_signals[SEAL] = g_signal_new (g_intern_string ("seal"),
+  sn_item_signals[SEAL] = g_signal_new (g_intern_static_string ("seal"),
                                         G_TYPE_FROM_CLASS (object_class),
                                         G_SIGNAL_RUN_LAST,
                                         0, NULL, NULL,
                                         g_cclosure_marshal_VOID__VOID,
                                         G_TYPE_NONE, 0);
 
-  sn_item_signals[FINISH] = g_signal_new (g_intern_string ("finish"),
+  sn_item_signals[FINISH] = g_signal_new (g_intern_static_string ("finish"),
                                           G_TYPE_FROM_CLASS (object_class),
                                           G_SIGNAL_RUN_LAST,
                                           0, NULL, NULL,
                                           g_cclosure_marshal_VOID__VOID,
                                           G_TYPE_NONE, 0);
 
-  sn_item_signals[TOOLTIP_CHANGED] = g_signal_new (g_intern_string ("tooltip-changed"),
+  sn_item_signals[TOOLTIP_CHANGED] = g_signal_new (g_intern_static_string ("tooltip-changed"),
                                                    G_TYPE_FROM_CLASS (object_class),
                                                    G_SIGNAL_RUN_LAST,
                                                    0, NULL, NULL,
                                                    g_cclosure_marshal_VOID__VOID,
                                                    G_TYPE_NONE, 0);
 
-  sn_item_signals[ICON_CHANGED] = g_signal_new (g_intern_string ("icon-changed"),
+  sn_item_signals[ICON_CHANGED] = g_signal_new (g_intern_static_string ("icon-changed"),
                                                 G_TYPE_FROM_CLASS (object_class),
                                                 G_SIGNAL_RUN_LAST,
                                                 0, NULL, NULL,
                                                 g_cclosure_marshal_VOID__VOID,
                                                 G_TYPE_NONE, 0);
 
-  sn_item_signals[MENU_CHANGED] = g_signal_new (g_intern_string ("menu-changed"),
+  sn_item_signals[MENU_CHANGED] = g_signal_new (g_intern_static_string ("menu-changed"),
                                                 G_TYPE_FROM_CLASS (object_class),
                                                 G_SIGNAL_RUN_LAST,
                                                 0, NULL, NULL,

@@ -69,7 +69,7 @@ clock_sleep_monitor_class_init (ClockSleepMonitorClass *klass)
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = clock_sleep_monitor_finalize;
 
-  clock_sleep_monitor_woke_up_signal = g_signal_new (g_intern_string ("woke-up"),
+  clock_sleep_monitor_woke_up_signal = g_signal_new (g_intern_static_string ("woke-up"),
                                                      G_TYPE_FROM_CLASS (gobject_class),
                                                      G_SIGNAL_RUN_LAST,
                                                      0, NULL, NULL,

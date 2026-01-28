@@ -180,35 +180,35 @@ sn_config_class_init (SnConfigClass *klass)
                                                        G_TYPE_PTR_ARRAY,
                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
-  sn_config_signals[CONFIGURATION_CHANGED] = g_signal_new (g_intern_string ("configuration-changed"),
+  sn_config_signals[CONFIGURATION_CHANGED] = g_signal_new (g_intern_static_string ("configuration-changed"),
                                                            G_TYPE_FROM_CLASS (object_class),
                                                            G_SIGNAL_RUN_LAST,
                                                            0, NULL, NULL,
                                                            g_cclosure_marshal_VOID__VOID,
                                                            G_TYPE_NONE, 0);
 
-  sn_config_signals[ICONS_CHANGED] = g_signal_new (g_intern_string ("icons-changed"),
+  sn_config_signals[ICONS_CHANGED] = g_signal_new (g_intern_static_string ("icons-changed"),
                                                    G_TYPE_FROM_CLASS (object_class),
                                                    G_SIGNAL_RUN_LAST,
                                                    0, NULL, NULL,
                                                    g_cclosure_marshal_VOID__VOID,
                                                    G_TYPE_NONE, 0);
 
-  sn_config_signals[ITEM_LIST_CHANGED] = g_signal_new (g_intern_string ("items-list-changed"),
+  sn_config_signals[ITEM_LIST_CHANGED] = g_signal_new (g_intern_static_string ("items-list-changed"),
                                                        G_TYPE_FROM_CLASS (object_class),
                                                        G_SIGNAL_RUN_LAST,
                                                        0, NULL, NULL,
                                                        g_cclosure_marshal_VOID__VOID,
                                                        G_TYPE_NONE, 0);
 
-  sn_config_signals[COLLECT_KNOWN_ITEMS] = g_signal_new (g_intern_string ("collect-known-items"),
+  sn_config_signals[COLLECT_KNOWN_ITEMS] = g_signal_new (g_intern_static_string ("collect-known-items"),
                                                          G_TYPE_FROM_CLASS (object_class),
                                                          G_SIGNAL_RUN_LAST,
                                                          0, NULL, NULL,
                                                          g_cclosure_marshal_generic,
                                                          G_TYPE_NONE, 1, G_TYPE_POINTER);
 
-  sn_config_signals[LEGACY_ITEM_LIST_CHANGED] = g_signal_new (g_intern_string ("legacy-items-list-changed"),
+  sn_config_signals[LEGACY_ITEM_LIST_CHANGED] = g_signal_new (g_intern_static_string ("legacy-items-list-changed"),
                                                               G_TYPE_FROM_CLASS (object_class),
                                                               G_SIGNAL_RUN_LAST,
                                                               0, NULL, NULL,
