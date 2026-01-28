@@ -217,15 +217,24 @@ panel_module_load (GTypeModule *type_module)
       if (make_resident)
         g_module_make_resident (module->library);
     }
-  else if (!g_module_symbol (module->library, "xfce_panel_module_construct",
-                             (gpointer) &module->construct_func))
+  else
     {
-      g_critical ("Module \"%s\" lacks a plugin register function.",
-                  module->filename);
-
-      panel_module_unload (type_module);
-
-      return FALSE;
+      if (g_module_symbol (module->library, "xfce_panel_module_construct",
+                           (gpointer) &module->construct_func))
+        {
+          /* avoid static memory allocation issues when removing the plugin, with e.g
+           * g_intern_static_string() or G_PARAM_STATIC_STRINGS in signals/properties
+           * declarations, and keep plugin types in memory so plugin can be re-added
+           * after being removed */
+          if (module->mode == PANEL_MODULE_RUN_MODE_INTERNAL)
+            g_module_make_resident (module->library);
+        }
+      else
+        {
+          g_critical ("Module \"%s\" lacks a plugin register function.", module->filename);
+          panel_module_unload (type_module);
+          return FALSE;
+        }
     }
 
   return TRUE;
