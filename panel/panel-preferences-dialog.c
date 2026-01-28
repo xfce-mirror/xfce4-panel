@@ -1532,43 +1532,15 @@ panel_preferences_dialog_before_item_remove (XfceItemListStore *store,
                                              gint index,
                                              PanelPreferencesDialog *dialog)
 {
-  GList *selected = NULL;
-  GtkTreeIter iter;
-
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
-  panel_preferences_dialog_item_get_selected (dialog, &iter, &selected);
-  if (G_LIKELY (selected != NULL))
-    {
-      /* update selection so the view can be scrolled to selection when reloaded */
-      GtkTreeSelection *selection = gtk_tree_view_get_selection (dialog->tree_view);
-      gboolean update_selection = TRUE;
-      if (!gtk_tree_model_iter_previous (GTK_TREE_MODEL (dialog->store), &iter))
-        {
-          GList *paths = gtk_tree_selection_get_selected_rows (selection, NULL);
-          gtk_tree_model_get_iter (GTK_TREE_MODEL (dialog->store), &iter, g_list_last (paths)->data);
-          g_list_free_full (paths, (GDestroyNotify) gtk_tree_path_free);
-          if (!gtk_tree_model_iter_next (GTK_TREE_MODEL (dialog->store), &iter))
-            update_selection = FALSE;
-        }
-      if (update_selection)
-        {
-          gtk_tree_selection_unselect_all (selection);
-          gtk_tree_selection_select_iter (selection, &iter);
-        }
-
-      /* block the changed signal */
-      GtkWidget *itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
-      g_signal_handler_block (G_OBJECT (itembar), dialog->items_changed_handler_id);
-
-      for (GList *lp = selected; lp != NULL; lp = lp->next)
-        xfce_panel_plugin_provider_emit_signal (lp->data, PROVIDER_SIGNAL_REMOVE_PLUGIN);
-
-      /* unblock the changed signal */
-      g_signal_handler_unblock (G_OBJECT (itembar), dialog->items_changed_handler_id);
-
-      g_list_free (selected);
-    }
+  GtkWidget *itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
+  g_signal_handler_block (G_OBJECT (itembar), dialog->items_changed_handler_id);
+  GValue provider_val = G_VALUE_INIT;
+  xfce_item_list_model_get_item_value (XFCE_ITEM_LIST_MODEL (store), index, ITEM_COLUMN_PROVIDER, &provider_val);
+  xfce_panel_plugin_provider_emit_signal (g_value_get_object (&provider_val), PROVIDER_SIGNAL_REMOVE_PLUGIN);
+  g_value_reset (&provider_val);
+  g_signal_handler_unblock (G_OBJECT (itembar), dialog->items_changed_handler_id);
 }
 
 
