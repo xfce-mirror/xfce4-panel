@@ -1517,6 +1517,7 @@ panel_preferences_dialog_items_remove (GtkWidget *item_view,
       /* create question dialog (similar code is also in xfce-panel-plugin.c) */
       gboolean confirmed = xfce_dialog_confirm (GTK_WINDOW (gtk_widget_get_toplevel (item_view)), "list-remove", label, secondary, "%s", primary);
       g_list_free (selected);
+      g_free (primary);
 
       /* continue propagation? */
       return !confirmed;
