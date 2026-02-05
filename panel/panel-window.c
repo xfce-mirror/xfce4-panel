@@ -63,7 +63,7 @@
 
 
 
-typedef enum _StrutsEgde StrutsEgde;
+typedef enum _StrutsEdge StrutsEdge;
 typedef enum _AutohideBehavior AutohideBehavior;
 typedef enum _AutohideState AutohideState;
 typedef enum _SnapPosition SnapPosition;
@@ -159,7 +159,7 @@ static void
 panel_window_style_updated (GtkWidget *widget);
 static void
 panel_window_realize (GtkWidget *widget);
-static StrutsEgde
+static StrutsEdge
 panel_window_screen_struts_edge (PanelWindow *window);
 static void
 panel_window_screen_struts_set (PanelWindow *window);
@@ -324,7 +324,7 @@ enum
   EDGE_GRAVITY_END = (SNAP_POSITION_SE - SNAP_POSITION_E)
 };
 
-enum _StrutsEgde
+enum _StrutsEdge
 {
   STRUTS_EDGE_NONE = 0,
   STRUTS_EDGE_LEFT,
@@ -367,7 +367,7 @@ struct _PanelWindow
   GdkRectangle area;
 
   /* struts information */
-  StrutsEgde struts_edge;
+  StrutsEdge struts_edge;
   gulong struts[N_STRUTS];
   guint struts_enabled : 1;
   guint keep_below : 1;
@@ -2195,7 +2195,7 @@ panel_window_realize (GtkWidget *widget)
 
 
 
-static StrutsEgde
+static StrutsEdge
 panel_window_screen_struts_edge (PanelWindow *window)
 {
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), STRUTS_EDGE_NONE);
@@ -2778,7 +2778,7 @@ panel_window_screen_layout_changed (GdkScreen *screen,
   gint n_monitors, n;
   const gchar *name;
   GdkMonitor *monitor = NULL;
-  StrutsEgde struts_edge;
+  StrutsEdge struts_edge;
   gboolean force_struts_update = FALSE;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
