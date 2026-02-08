@@ -1636,6 +1636,7 @@ panel_application_duplicate_plugin_config_dir (const gchar *plugin_name,
 }
 
 
+
 /**
  * panel_application_duplicate_window:
  * @application: the panel application
@@ -1742,7 +1743,7 @@ panel_application_duplicate_window (PanelApplication *application,
                                      (gpointer *) &prop_name,
                                      (gpointer *) &prop_value))
         {
-          /* skip plugin-ids — we'll build a new one below */
+          /* skip plugin-ids, we'll build a new one below */
           if (g_str_has_suffix (prop_name, "/plugin-ids"))
             continue;
 
@@ -1766,7 +1767,7 @@ panel_application_duplicate_window (PanelApplication *application,
    *
    * Position coordinates in xfconf use the panel's center point.
    * For snapped panels (p != 0), the snap position overrides the
-   * stored x,y — the window manager places the panel at the snapped
+   * stored x,y; the window manager places the panel at the snapped
    * edge regardless. So we must query the real window position to
    * get accurate coordinates.
    *
@@ -1787,8 +1788,8 @@ panel_application_duplicate_window (PanelApplication *application,
    * For vertical panels on the right:    shift x left  (-offset)
    *
    * Corner positions (NE, NW, SE, SW) get offsets in BOTH directions
-   * because the panel orientation is ambiguous at corners — it could
-   * be horizontal or vertical.
+   * because the panel orientation is ambiguous at corners (it could
+   * be horizontal or vertical).
    */
   g_snprintf (buf, sizeof (buf), "%s/position", new_base);
   source_position = xfconf_channel_get_string (channel, buf, NULL);
@@ -1797,8 +1798,8 @@ panel_application_duplicate_window (PanelApplication *application,
       if (sscanf (source_position, "p=%d;", &snap_position) == 1)
         {
           /* get the source panel's actual on-screen position and
-           * dimensions — this is where it truly is, regardless of
-           * what the stored xfconf coordinates say */
+           * dimensions (this is where it truly is, regardless of
+           * what the stored xfconf coordinates say) */
           gtk_window_get_position (GTK_WINDOW (source_window),
                                    &actual_x, &actual_y);
           actual_width = gtk_widget_get_allocated_width (GTK_WIDGET (source_window));
@@ -1861,7 +1862,7 @@ panel_application_duplicate_window (PanelApplication *application,
             dy = offset;
 
           /* use snap position 0 (NONE) so the duplicate is
-           * free-floating at the offset coordinates — otherwise
+           * free-floating at the offset coordinates, otherwise
            * the snap position forces it to dock at the same
            * edge/corner as the original */
           new_position = g_strdup_printf ("p=0;x=%d;y=%d",
@@ -1966,7 +1967,7 @@ panel_application_duplicate_window (PanelApplication *application,
       new_plugin_names = NULL;
     }
 
-  /* now create the panel window — using new_window=FALSE so it reads
+  /* now create the panel window, using new_window=FALSE so it reads
    * all the xfconf properties we just wrote (size, mode, etc.) and
    * does NOT reset them to defaults */
   new_window = panel_application_new_window (application, screen,
@@ -1974,7 +1975,7 @@ panel_application_duplicate_window (PanelApplication *application,
   if (new_window == NULL)
     {
       /* clean up orphaned xfconf properties since window creation
-       * failed — remove the panel properties and all plugin properties
+       * failed, so remove the panel properties and all plugin properties
        * we wrote above */
       g_snprintf (buf, sizeof (buf),
                   PANELS_PROPERTY_BASE, new_id);
@@ -1998,18 +1999,55 @@ panel_application_duplicate_window (PanelApplication *application,
     }
 
   /* insert each plugin widget into the new panel using the IDs and
-   * names we stored during the copy loop above */
+   * names we stored during the copy loop above. If a plugin can't
+   * be inserted (e.g., a unique plugin like systray that already
+   * exists), clean up its orphaned xfconf properties and remove
+   * it from the plugin-ids array */
   if (new_plugin_ids != NULL)
     {
+      gboolean need_ids_update = FALSE;
+
       for (i = 0; i < new_plugin_ids->len; i++)
         {
           value = g_ptr_array_index (new_plugin_ids, i);
           new_plugin_id = g_value_get_int (value);
           plugin_name_str = g_ptr_array_index (new_plugin_names, i);
 
-          panel_application_plugin_insert (application, new_window,
-                                           plugin_name_str, new_plugin_id,
-                                           NULL, -1);
+          if (!panel_application_plugin_insert (application, new_window,
+                                                plugin_name_str, new_plugin_id,
+                                                NULL, -1))
+            {
+              /* remove orphaned xfconf properties for this plugin */
+              g_snprintf (buf, sizeof (buf),
+                          PLUGINS_PROPERTY_BASE, new_plugin_id);
+              xfconf_channel_reset_property (channel, buf, TRUE);
+
+              /* mark for removal from the plugin-ids array */
+              g_value_set_int (value, -1);
+              need_ids_update = TRUE;
+            }
+        }
+
+      /* rewrite the plugin-ids array if any plugins were skipped */
+      if (need_ids_update)
+        {
+          GPtrArray *final_ids = g_ptr_array_new ();
+
+          for (i = 0; i < new_plugin_ids->len; i++)
+            {
+              value = g_ptr_array_index (new_plugin_ids, i);
+              if (g_value_get_int (value) != -1)
+                {
+                  GValue *copy = g_new0 (GValue, 1);
+                  g_value_init (copy, G_TYPE_INT);
+                  g_value_copy (value, copy);
+                  g_ptr_array_add (final_ids, copy);
+                }
+            }
+
+          g_snprintf (buf, sizeof (buf), PLUGIN_IDS_PROPERTY_BASE, new_id);
+          xfconf_channel_set_arrayv (channel, buf, final_ids);
+          xfconf_array_free (final_ids);
         }
 
       xfconf_array_free (new_plugin_ids);
