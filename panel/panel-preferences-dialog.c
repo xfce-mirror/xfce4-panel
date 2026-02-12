@@ -96,6 +96,9 @@ static void
 panel_preferences_dialog_panel_add (GtkWidget *widget,
                                     PanelPreferencesDialog *dialog);
 static void
+panel_preferences_dialog_panel_duplicate (GtkWidget *widget,
+                                          PanelPreferencesDialog *dialog);
+static void
 panel_preferences_dialog_panel_remove (GtkWidget *widget,
                                        PanelPreferencesDialog *dialog);
 static gboolean
@@ -247,6 +250,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
 
   /* panel selector buttons and combobox */
   connect_signal ("panel-add", "clicked", panel_preferences_dialog_panel_add);
+  connect_signal ("panel-duplicate", "clicked", panel_preferences_dialog_panel_duplicate);
   connect_signal ("panel-remove", "clicked", panel_preferences_dialog_panel_remove);
   connect_signal ("panel-combobox", "changed", panel_preferences_dialog_panel_combobox_changed);
   g_signal_connect_object (display, "monitor-added",
@@ -898,6 +902,10 @@ panel_preferences_dialog_panel_sensitive (PanelPreferencesDialog *dialog)
   windows = panel_application_get_windows (dialog->application);
   gtk_widget_set_sensitive (GTK_WIDGET (object), !locked && g_slist_length (windows) > 1);
 
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-duplicate");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  gtk_widget_set_sensitive (GTK_WIDGET (object), !locked);
+
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-add");
   panel_return_if_fail (GTK_IS_WIDGET (object));
   gtk_widget_set_sensitive (GTK_WIDGET (object), !panel_application_get_locked (dialog->application));
@@ -1061,6 +1069,32 @@ panel_preferences_dialog_panel_add (GtkWidget *widget,
   /* rebuild the selector */
   panel_id = panel_window_get_id (window);
   panel_preferences_dialog_panel_combobox_rebuild (dialog, panel_id);
+}
+
+
+
+static void
+panel_preferences_dialog_panel_duplicate (GtkWidget *widget,
+                                          PanelPreferencesDialog *dialog)
+{
+  PanelWindow *new_window;
+  gint new_panel_id;
+
+  /* leave if the window is locked */
+  if (panel_window_get_locked (dialog->active))
+    return;
+
+  /* duplicate the currently selected panel */
+  new_window = panel_application_duplicate_window (dialog->application,
+                                                    dialog->active);
+  if (new_window != NULL)
+    {
+      gtk_widget_show (GTK_WIDGET (new_window));
+
+      /* select the new panel in the combobox */
+      new_panel_id = panel_window_get_id (new_window);
+      panel_preferences_dialog_panel_combobox_rebuild (dialog, new_panel_id);
+    }
 }
 
 
