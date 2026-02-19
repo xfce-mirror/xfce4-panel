@@ -8,7 +8,10 @@ plugin_install_subdir = 'xfce4' / 'panel' / 'plugins'
 shared_module(
   'showdesktop',
   plugin_sources,
-  sources: xfce4_panel_resources_c,
+  sources: [
+    xfce4_panel_resources_c,
+    libxfce4panel_h,
+  ],
   gnu_symbol_visibility: 'hidden',
   c_args: [
     '-DG_LOG_DOMAIN="@0@"'.format('libshowdesktop'),
