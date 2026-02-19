@@ -73,6 +73,7 @@ executable(
   sources: [
     xfce_revision_h,
     xfce4_panel_resources_c,
+    libxfce4panel_h,
   ],
   c_args: [
     '-DG_LOG_DOMAIN="@0@"'.format('xfce4-panel'),

@@ -8,6 +8,9 @@ libpanel_common = static_library(
     'panel-xfconf.c',
     'panel-xfconf.h',
   ],
+  sources: [
+    libxfce4panel_h,
+  ],
   c_args: [
     '-DG_LOG_DOMAIN="@0@"'.format('libpanel-common'),
   ],
