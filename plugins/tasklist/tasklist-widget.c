@@ -3507,6 +3507,8 @@ xfce_tasklist_button_proxy_menu_item (XfceTasklistChild *child,
   g_signal_connect (G_OBJECT (mi), "button-release-event",
                     G_CALLBACK (xfce_tasklist_button_button_release_event), child);
 
+  g_signal_connect_object (child->window, "closed", G_CALLBACK (gtk_widget_destroy), mi, G_CONNECT_SWAPPED);
+
   /* TODO item dnd */
 
   return mi;
