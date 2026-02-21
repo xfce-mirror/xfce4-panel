@@ -31,6 +31,9 @@ wrapper_sources += gnome.gdbus_codegen(
 executable(
   'wrapper-2.0',
   wrapper_sources,
+  sources: [
+    libxfce4panel_h,
+  ],
   c_args: [
     '-DG_LOG_DOMAIN="@0@"'.format('xfce4-panel-wrapper'),
   ],

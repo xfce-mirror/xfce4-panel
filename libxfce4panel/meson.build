@@ -6,7 +6,6 @@ libpanel_install_dir = get_option('prefix') / get_option('includedir') / libpane
 
 libpanel_headers = [
   'libxfce4panel-enums.h',
-  'libxfce4panel.h',
   'xfce-arrow-button.h',
   'xfce-panel-convenience.h',
   'xfce-panel-image.h',
@@ -16,7 +15,7 @@ libpanel_headers = [
 
 # do not add this header to GI sources, it creates unsolvable conflicts with other
 # libs whose identifier prefix is Xfce, e.g. libxfce4ui and libxfce4util
-configure_file(
+libpanel_config_h = configure_file(
   configuration: configuration_data({
     'LIBXFCE4PANEL_VERSION': meson.project_version(),
     'LIBXFCE4PANEL_VERSION_MAJOR': version_parts[0],
@@ -83,6 +82,20 @@ libpanel_enums += gnome.mkenums(
   vtail: '\t{ 0, NULL, NULL }\n\t};\n\ttype = g_@type@_register_static ("@EnumName@", values);\n  }\n\treturn type;\n}\n',
   ftail: '\n#define __LIBXFCE4PANEL_ENUM_TYPES_C__\n#include "libxfce4panel-visibility.c"\n',
 )
+
+libxfce4panel_h = custom_target(
+  'libxfce4panel.h',
+  input: 'libxfce4panel.h.in',
+  output: 'libxfce4panel.h',
+  command: ['cp', '@INPUT@', '@OUTPUT@'],
+  depends: [
+    libpanel_enums,
+  ],
+  depend_files: [
+    libpanel_config_h,
+  ],
+)
+libpanel_sources += libxfce4panel_h
 
 libpanel_deps = [
   glib,
