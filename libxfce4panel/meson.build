@@ -94,6 +94,8 @@ libxfce4panel_h = custom_target(
   depend_files: [
     libpanel_config_h,
   ],
+  install: true,
+  install_dir: libpanel_install_dir,
 )
 libpanel_sources += libxfce4panel_h
 
