@@ -1536,6 +1536,532 @@ panel_application_add_new_item (PanelApplication *application,
 
 
 
+/**
+ * panel_application_duplicate_plugin_config_dir:
+ * @plugin_name: the plugin type name (e.g., "launcher")
+ * @source_id: the source plugin's unique ID
+ * @new_id: the new plugin's unique ID
+ *
+ * Copies a plugin's configuration directory (e.g.,
+ * ~/.config/xfce4/panel/launcher-5/) to a new directory for the
+ * duplicated plugin. This handles file-based config that plugins
+ * like the launcher store outside of xfconf.
+ */
+static void
+panel_application_duplicate_plugin_config_dir (const gchar *plugin_name,
+                                               gint source_id,
+                                               gint new_id)
+{
+  gchar *source_rel, *dest_rel;
+  gchar *source_path, *dest_path;
+  GFile *source_dir, *dest_dir;
+  GFileEnumerator *enumerator;
+  GFileInfo *info;
+  GFile *source_file, *dest_file;
+
+  /* build the relative config paths:
+   * e.g., "xfce4/panel/launcher-5" → "xfce4/panel/launcher-10001" */
+  source_rel = g_strdup_printf (PANEL_PLUGIN_RELATIVE_PATH
+                                G_DIR_SEPARATOR_S "%s-%d",
+                                plugin_name, source_id);
+  source_path = xfce_resource_save_location (XFCE_RESOURCE_CONFIG,
+                                             source_rel, FALSE);
+
+  /* check whether the source directory actually exists */
+  if (source_path == NULL || !g_file_test (source_path, G_FILE_TEST_IS_DIR))
+    {
+      g_free (source_rel);
+      g_free (source_path);
+      return;
+    }
+
+  dest_rel = g_strdup_printf (PANEL_PLUGIN_RELATIVE_PATH
+                              G_DIR_SEPARATOR_S "%s-%d",
+                              plugin_name, new_id);
+  dest_path = xfce_resource_save_location (XFCE_RESOURCE_CONFIG,
+                                           dest_rel, TRUE);
+  if (dest_path == NULL)
+    {
+      g_warning ("Failed to get save location for %s-%d", plugin_name, new_id);
+      g_free (source_rel);
+      g_free (dest_rel);
+      g_free (source_path);
+      return;
+    }
+
+  /* xfce_resource_save_location only creates parent directories, so
+   * we need to explicitly create the destination directory itself */
+  g_mkdir_with_parents (dest_path, 0700);
+
+  source_dir = g_file_new_for_path (source_path);
+  dest_dir = g_file_new_for_path (dest_path);
+
+  /* copy each file from the source config directory to the new one */
+  enumerator = g_file_enumerate_children (source_dir,
+                                          G_FILE_ATTRIBUTE_STANDARD_NAME,
+                                          G_FILE_QUERY_INFO_NONE,
+                                          NULL, NULL);
+  if (enumerator != NULL)
+    {
+      while ((info = g_file_enumerator_next_file (enumerator,
+                                                  NULL, NULL)) != NULL)
+        {
+          const gchar *name = g_file_info_get_name (info);
+          GError *error = NULL;
+          source_file = g_file_get_child (source_dir, name);
+          dest_file = g_file_get_child (dest_dir, name);
+
+          if (!g_file_copy (source_file, dest_file,
+                            G_FILE_COPY_NONE, NULL, NULL, NULL, &error))
+            {
+              g_warning ("Failed to copy plugin config file \"%s\": %s",
+                         name, error->message);
+              g_error_free (error);
+            }
+
+          g_object_unref (source_file);
+          g_object_unref (dest_file);
+          g_object_unref (info);
+        }
+
+      g_object_unref (enumerator);
+    }
+
+  g_object_unref (source_dir);
+  g_object_unref (dest_dir);
+  g_free (source_rel);
+  g_free (dest_rel);
+  g_free (source_path);
+  g_free (dest_path);
+}
+
+
+
+/**
+ * panel_application_duplicate_window:
+ * @application: the panel application
+ * @source_window: the panel window to duplicate
+ *
+ * Duplicates a panel window by copying all xfconf properties and
+ * file-based plugin configs from the source panel, then creating a
+ * new panel that reads those settings. Each plugin gets a fresh
+ * unique ID.
+ *
+ * Returns: the newly created PanelWindow, or %NULL on failure.
+ */
+PanelWindow *
+panel_application_duplicate_window (PanelApplication *application,
+                                    PanelWindow *source_window)
+{
+  PanelWindow *new_window;
+  XfconfChannel *channel;
+  GdkScreen *screen;
+  gint source_id, new_id;
+  gchar source_base[128], new_base[128];
+  gchar source_plugin_base[128], new_plugin_base[128];
+  gchar buf[128];
+  GPtrArray *source_plugin_ids;
+  GPtrArray *new_plugin_ids;
+  GPtrArray *new_plugin_names;
+  GPtrArray *ids;
+  GValue *value;
+  GHashTable *properties;
+  GHashTableIter iter;
+  const gchar *prop_name;
+  const GValue *prop_value;
+  gint id, plugin_id;
+  gint source_plugin_id, new_plugin_id;
+  gchar *plugin_name_str;
+  gchar *source_position;
+  gchar *new_position;
+  gint snap_position;
+  gint actual_x, actual_y, actual_width, actual_height;
+  gint center_x, center_y;
+  gint offset, dx, dy;
+  guint source_size;
+  guint i;
+  GSList *li;
+  gint max_id;
+  gint max_plugin_id;
+  gint next_plugin_id;
+
+  panel_return_val_if_fail (PANEL_IS_APPLICATION (application), NULL);
+  panel_return_val_if_fail (PANEL_IS_WINDOW (source_window), NULL);
+
+  channel = application->xfconf;
+  screen = gtk_window_get_screen (GTK_WINDOW (source_window));
+  source_id = panel_window_get_id (source_window);
+
+  /* find the next available panel ID by looking at the highest
+   * existing ID and incrementing by one */
+  max_id = 0;
+  for (li = application->windows; li != NULL; li = li->next)
+    {
+      id = panel_window_get_id (li->data);
+      if (id > max_id)
+        max_id = id;
+    }
+  new_id = max_id + 1;
+
+  /* find the highest existing plugin ID across all panels so our
+   * new IDs don't collide with any existing plugins */
+  max_plugin_id = 0;
+  for (li = application->windows; li != NULL; li = li->next)
+    {
+      id = panel_window_get_id (li->data);
+
+      g_snprintf (buf, sizeof (buf), PLUGIN_IDS_PROPERTY_BASE, id);
+      ids = xfconf_channel_get_arrayv (channel, buf);
+      if (ids != NULL)
+        {
+          for (i = 0; i < ids->len; i++)
+            {
+              value = g_ptr_array_index (ids, i);
+              panel_assert (value != NULL);
+              plugin_id = g_value_get_int (value);
+              if (plugin_id > max_plugin_id)
+                max_plugin_id = plugin_id;
+            }
+          xfconf_array_free (ids);
+        }
+    }
+  next_plugin_id = max_plugin_id;
+
+  /* build the xfconf base paths for source and destination panels */
+  g_snprintf (source_base, sizeof (source_base),
+              PANELS_PROPERTY_BASE, source_id);
+  g_snprintf (new_base, sizeof (new_base),
+              PANELS_PROPERTY_BASE, new_id);
+
+  /* copy all panel properties from source to new panel (including
+   * size, mode, position, opacity, background, etc.) */
+  properties = xfconf_channel_get_properties (channel, source_base);
+  if (properties != NULL)
+    {
+      g_hash_table_iter_init (&iter, properties);
+      while (g_hash_table_iter_next (&iter,
+                                     (gpointer *) &prop_name,
+                                     (gpointer *) &prop_value))
+        {
+          /* skip plugin-ids, we'll build a new one below */
+          if (g_str_has_suffix (prop_name, "/plugin-ids"))
+            continue;
+
+          /* replace the source base path with the new base path */
+          if (g_str_has_prefix (prop_name, source_base))
+            {
+              const gchar *suffix = prop_name + strlen (source_base);
+              gchar *new_prop = g_strconcat (new_base, suffix, NULL);
+              xfconf_channel_set_property (channel, new_prop, prop_value);
+              g_free (new_prop);
+            }
+        }
+
+      g_hash_table_destroy (properties);
+    }
+
+  /* offset the duplicated panel's position so it doesn't sit directly
+   * on top of the source panel. We read the source panel's ACTUAL
+   * screen position (not the stored xfconf coordinates, which may be
+   * stale for snapped panels) and compute the offset from that.
+   *
+   * Position coordinates in xfconf use the panel's center point.
+   * For snapped panels (p != 0), the snap position overrides the
+   * stored x,y; the window manager places the panel at the snapped
+   * edge regardless. So we must query the real window position to
+   * get accurate coordinates.
+   *
+   * The offset direction depends on the snap position:
+   *
+   * Snap position enum values (from panel-window.c):
+   *   0       = NONE
+   *   1-4     = E, NE, EC, SE  (right edge)
+   *   5-8     = W, NW, WC, SW  (left edge)
+   *   9       = NC              (top center)
+   *   10      = SC              (bottom center)
+   *   11      = N               (top)
+   *   12      = S               (bottom)
+   *
+   * For horizontal panels at the top:    shift y down  (+offset)
+   * For horizontal panels at the bottom: shift y up    (-offset)
+   * For vertical panels on the left:     shift x right (+offset)
+   * For vertical panels on the right:    shift x left  (-offset)
+   *
+   * Corner positions (NE, NW, SE, SW) get offsets in BOTH directions
+   * because the panel orientation is ambiguous at corners (it could
+   * be horizontal or vertical).
+   */
+  g_snprintf (buf, sizeof (buf), "%s/position", new_base);
+  source_position = xfconf_channel_get_string (channel, buf, NULL);
+  if (source_position != NULL)
+    {
+      if (sscanf (source_position, "p=%d;", &snap_position) == 1)
+        {
+          /* get the source panel's actual on-screen position and
+           * dimensions (this is where it truly is, regardless of
+           * what the stored xfconf coordinates say) */
+          gtk_window_get_position (GTK_WINDOW (source_window),
+                                   &actual_x, &actual_y);
+          actual_width = gtk_widget_get_allocated_width (GTK_WIDGET (source_window));
+          actual_height = gtk_widget_get_allocated_height (GTK_WIDGET (source_window));
+
+          /* convert to center point (xfconf position format) */
+          center_x = actual_x + actual_width / 2;
+          center_y = actual_y + actual_height / 2;
+
+          /* offset by the panel's thickness plus a small gap so the
+           * duplicate sits right next to the original without
+           * overlapping. Coordinates are center-point based, so an
+           * offset of exactly source_size would make edges touch;
+           * we add 4px for a visible gap between them */
+          g_snprintf (buf, sizeof (buf), "%s/size", new_base);
+          source_size = xfconf_channel_get_uint (channel, buf, 48);
+          offset = (gint) source_size + 4;
+          dx = 0;
+          dy = 0;
+
+          /* determine vertical offset based on top/bottom position */
+          switch (snap_position)
+            {
+            case 2:  /* NE - top right */
+            case 6:  /* NW - top left */
+            case 9:  /* NC - top center */
+            case 11: /* N  - top */
+              dy = offset;   /* shift down */
+              break;
+
+            case 4:  /* SE - bottom right */
+            case 8:  /* SW - bottom left */
+            case 10: /* SC - bottom center */
+            case 12: /* S  - bottom */
+              dy = -offset;  /* shift up */
+              break;
+            }
+
+          /* determine horizontal offset based on left/right position */
+          switch (snap_position)
+            {
+            case 1:  /* E  - right */
+            case 2:  /* NE - top right */
+            case 3:  /* EC - right center */
+            case 4:  /* SE - bottom right */
+              dx = -offset;  /* shift left */
+              break;
+
+            case 5:  /* W  - left */
+            case 6:  /* NW - top left */
+            case 7:  /* WC - left center */
+            case 8:  /* SW - bottom left */
+              dx = offset;   /* shift right */
+              break;
+            }
+
+          /* fallback: if no offset was determined (SNAP_POSITION_NONE),
+           * shift down so the duplicate is at least visible */
+          if (dx == 0 && dy == 0)
+            dy = offset;
+
+          /* use snap position 0 (NONE) so the duplicate is
+           * free-floating at the offset coordinates, otherwise
+           * the snap position forces it to dock at the same
+           * edge/corner as the original */
+          new_position = g_strdup_printf ("p=0;x=%d;y=%d",
+                                          center_x + dx,
+                                          center_y + dy);
+          g_snprintf (buf, sizeof (buf), "%s/position", new_base);
+          xfconf_channel_set_string (channel, buf, new_position);
+          g_free (new_position);
+        }
+      g_free (source_position);
+    }
+
+  /* read the source panel's plugin-ids array */
+  g_snprintf (buf, sizeof (buf), PLUGIN_IDS_PROPERTY_BASE, source_id);
+  source_plugin_ids = xfconf_channel_get_arrayv (channel, buf);
+
+  if (source_plugin_ids != NULL)
+    {
+      new_plugin_ids = g_ptr_array_new ();
+      new_plugin_names = g_ptr_array_new_with_free_func (g_free);
+
+      for (i = 0; i < source_plugin_ids->len; i++)
+        {
+          value = g_ptr_array_index (source_plugin_ids, i);
+          panel_assert (value != NULL);
+          source_plugin_id = g_value_get_int (value);
+
+          /* get the plugin type name (e.g., "clock", "separator") */
+          g_snprintf (source_plugin_base, sizeof (source_plugin_base),
+                      PLUGINS_PROPERTY_BASE, source_plugin_id);
+          plugin_name_str = xfconf_channel_get_string (channel,
+                                                       source_plugin_base,
+                                                       NULL);
+          if (plugin_name_str == NULL)
+            continue;
+
+          /* allocate a new unique plugin ID */
+          new_plugin_id = ++next_plugin_id;
+
+          /* write the plugin type name for the new plugin */
+          g_snprintf (new_plugin_base, sizeof (new_plugin_base),
+                      PLUGINS_PROPERTY_BASE, new_plugin_id);
+          xfconf_channel_set_string (channel, new_plugin_base,
+                                     plugin_name_str);
+
+          /* copy all xfconf sub-properties from source to new plugin */
+          properties = xfconf_channel_get_properties (channel,
+                                                      source_plugin_base);
+          if (properties != NULL)
+            {
+              g_hash_table_iter_init (&iter, properties);
+              while (g_hash_table_iter_next (&iter,
+                                             (gpointer *) &prop_name,
+                                             (gpointer *) &prop_value))
+                {
+                  /* skip the root property (plugin type name) */
+                  if (g_strcmp0 (prop_name, source_plugin_base) == 0)
+                    continue;
+
+                  if (g_str_has_prefix (prop_name, source_plugin_base))
+                    {
+                      const gchar *suffix =
+                        prop_name + strlen (source_plugin_base);
+                      gchar *new_prop =
+                        g_strconcat (new_plugin_base, suffix, NULL);
+                      xfconf_channel_set_property (channel, new_prop,
+                                                   prop_value);
+                      g_free (new_prop);
+                    }
+                }
+
+              g_hash_table_destroy (properties);
+            }
+
+          /* copy file-based config directories (e.g., launcher desktop
+           * files stored in ~/.config/xfce4/panel/launcher-<ID>/) */
+          panel_application_duplicate_plugin_config_dir (plugin_name_str,
+                                                        source_plugin_id,
+                                                        new_plugin_id);
+
+          /* store plugin name for later insertion into the new panel */
+          g_ptr_array_add (new_plugin_names, g_strdup (plugin_name_str));
+
+          /* add the new plugin ID to the array */
+          value = g_new0 (GValue, 1);
+          g_value_init (value, G_TYPE_INT);
+          g_value_set_int (value, new_plugin_id);
+          g_ptr_array_add (new_plugin_ids, value);
+
+          g_free (plugin_name_str);
+        }
+
+      /* write the new plugin-ids array to xfconf */
+      g_snprintf (buf, sizeof (buf), PLUGIN_IDS_PROPERTY_BASE, new_id);
+      xfconf_channel_set_arrayv (channel, buf, new_plugin_ids);
+
+      xfconf_array_free (source_plugin_ids);
+    }
+  else
+    {
+      new_plugin_ids = NULL;
+      new_plugin_names = NULL;
+    }
+
+  /* now create the panel window, using new_window=FALSE so it reads
+   * all the xfconf properties we just wrote (size, mode, etc.) and
+   * does NOT reset them to defaults */
+  new_window = panel_application_new_window (application, screen,
+                                             new_id, FALSE);
+  if (new_window == NULL)
+    {
+      /* clean up orphaned xfconf properties since window creation
+       * failed, so remove the panel properties and all plugin properties
+       * we wrote above */
+      g_snprintf (buf, sizeof (buf),
+                  PANELS_PROPERTY_BASE, new_id);
+      xfconf_channel_reset_property (channel, buf, TRUE);
+
+      if (new_plugin_ids != NULL)
+        {
+          for (i = 0; i < new_plugin_ids->len; i++)
+            {
+              value = g_ptr_array_index (new_plugin_ids, i);
+              new_plugin_id = g_value_get_int (value);
+              g_snprintf (buf, sizeof (buf),
+                          PLUGINS_PROPERTY_BASE, new_plugin_id);
+              xfconf_channel_reset_property (channel, buf, TRUE);
+            }
+          xfconf_array_free (new_plugin_ids);
+          g_ptr_array_free (new_plugin_names, TRUE);
+        }
+
+      return NULL;
+    }
+
+  /* insert each plugin widget into the new panel using the IDs and
+   * names we stored during the copy loop above. If a plugin can't
+   * be inserted (e.g., a unique plugin like systray that already
+   * exists), clean up its orphaned xfconf properties and remove
+   * it from the plugin-ids array */
+  if (new_plugin_ids != NULL)
+    {
+      gboolean need_ids_update = FALSE;
+
+      for (i = 0; i < new_plugin_ids->len; i++)
+        {
+          value = g_ptr_array_index (new_plugin_ids, i);
+          new_plugin_id = g_value_get_int (value);
+          plugin_name_str = g_ptr_array_index (new_plugin_names, i);
+
+          if (!panel_application_plugin_insert (application, new_window,
+                                                plugin_name_str, new_plugin_id,
+                                                NULL, -1))
+            {
+              /* remove orphaned xfconf properties for this plugin */
+              g_snprintf (buf, sizeof (buf),
+                          PLUGINS_PROPERTY_BASE, new_plugin_id);
+              xfconf_channel_reset_property (channel, buf, TRUE);
+
+              /* mark for removal from the plugin-ids array */
+              g_value_set_int (value, -1);
+              need_ids_update = TRUE;
+            }
+        }
+
+      /* rewrite the plugin-ids array if any plugins were skipped */
+      if (need_ids_update)
+        {
+          GPtrArray *final_ids = g_ptr_array_new ();
+
+          for (i = 0; i < new_plugin_ids->len; i++)
+            {
+              value = g_ptr_array_index (new_plugin_ids, i);
+              if (g_value_get_int (value) != -1)
+                {
+                  GValue *copy = g_new0 (GValue, 1);
+                  g_value_init (copy, G_TYPE_INT);
+                  g_value_copy (value, copy);
+                  g_ptr_array_add (final_ids, copy);
+                }
+            }
+
+          g_snprintf (buf, sizeof (buf), PLUGIN_IDS_PROPERTY_BASE, new_id);
+          xfconf_channel_set_arrayv (channel, buf, final_ids);
+          xfconf_array_free (final_ids);
+        }
+
+      xfconf_array_free (new_plugin_ids);
+      g_ptr_array_free (new_plugin_names, TRUE);
+    }
+
+  /* save everything so the new panel is fully persisted */
+  panel_application_save (application, SAVE_EVERYTHING);
+
+  return new_window;
+}
+
+
+
 PanelWindow *
 panel_application_new_window (PanelApplication *application,
                               GdkScreen *screen,
