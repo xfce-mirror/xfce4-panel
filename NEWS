@@ -1,3 +1,22 @@
+4.20.7 (2026-03-02)
+======
+- tasklist: Destroy group menu item if window is closed
+- panel: Make non-GObject internal plugins resident
+- Revert "plugins: Do not use g_intern_static_string"
+- panel: Do not fall through when internal plugin failed to load
+- wayland: panel: Track set_anchor_default source id
+- plugins: Do not use g_intern_static_string
+- panel: Fix wrong memory management
+- panel: Be sure to set plugin properties when appropriate
+- Set application name so internal plugins can't override it
+- plugins: Reset workspace group when needed
+- wayland: Guard layer-shell related code also at runtime
+- wayland: Review screen layout change management
+- common: Only remap widget if visible
+- wayland: autohide: Fix autohide of floating panel
+- wayland: Handle null workspace group list when a group is destroyed
+- wayland: panel: Delay hiding panel window when screen layout changes
+
 4.20.6 (2025-12-29)
 ======
 - arrow-fix: Restoring the button size after the arrow disappears
