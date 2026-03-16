@@ -67,7 +67,7 @@ libpanel_enums += gnome.mkenums(
   install_dir: libpanel_install_dir,
   sources: libpanel_headers,
   fhead: '#if !defined(_LIBXFCE4PANEL_INSIDE_LIBXFCE4PANEL_H) && !defined(LIBXFCE4PANEL_COMPILATION)\n#error "Only <libxfce4panel/libxfce4panel.h> can be included directly, this file may disappear or change contents"\n#endif\n\n#ifndef __LIBXFCE4PANEL_ENUM_TYPES_H__\n#define __LIBXFCE4PANEL_ENUM_TYPES_H__\n#include <glib-object.h>\nG_BEGIN_DECLS\n',
-  fprod: '/* enumerations from "@filename@" */\n',
+  fprod: '/* enumerations from "@basename@" */\n',
   vhead: 'GType @enum_name@_get_type (void) G_GNUC_CONST;\n#define XFCE_TYPE_@ENUMSHORT@ (@enum_name@_get_type())\n',
   ftail: 'G_END_DECLS\n\n#endif /* !__LIBXFCE4PANEL_ENUM_TYPES_H__ */',
 )
@@ -76,7 +76,7 @@ libpanel_enums += gnome.mkenums(
   install_header: false,
   sources: libpanel_headers,
   fhead: '#include "libxfce4panel-enums.h"\n#include "libxfce4panel-enum-types.h"\n\n#include "libxfce4panel-visibility.h"',
-  fprod: '\n/* enumerations from "@filename@" */',
+  fprod: '\n/* enumerations from "@basename@" */',
   vhead: 'GType\n@enum_name@_get_type (void)\n{\n\tstatic GType type = 0;\n\tif (type == 0) {\n\tstatic const G@Type@Value values[] = {',
   vprod: '\t{ @VALUENAME@, "@VALUENAME@", "@valuenick@" },',
   vtail: '\t{ 0, NULL, NULL }\n\t};\n\ttype = g_@type@_register_static ("@EnumName@", values);\n  }\n\treturn type;\n}\n',
