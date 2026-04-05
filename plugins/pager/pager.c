@@ -454,8 +454,8 @@ pager_plugin_scroll_event (GtkWidget *widget,
       if (xfw_workspace_get_state (active_ws) & XFW_WORKSPACE_STATE_VIRTUAL)
         {
           /* Viewport mode (compiz) */
-          guint          scale_factor;
-          GdkRectangle  *rect;
+          guint scale_factor;
+          GdkRectangle *rect;
           GdkScreen *screen = gdk_screen_get_default ();
           int viewport_x;
           int viewport_y;
@@ -477,7 +477,7 @@ pager_plugin_scroll_event (GtkWidget *widget,
           viewport_y = rect->y;
 
           if (scrolling_direction == GDK_SCROLL_UP
-            || scrolling_direction == GDK_SCROLL_LEFT)
+              || scrolling_direction == GDK_SCROLL_LEFT)
             scroll_direction = -1;
           else
             scroll_direction = 1;
@@ -512,7 +512,7 @@ pager_plugin_scroll_event (GtkWidget *widget,
     {
       /* Real workspaces */
       if (scrolling_direction == GDK_SCROLL_UP
-        || scrolling_direction == GDK_SCROLL_LEFT)
+          || scrolling_direction == GDK_SCROLL_LEFT)
         active_n--;
       else
         active_n++;
@@ -525,7 +525,7 @@ pager_plugin_scroll_event (GtkWidget *widget,
           else if (active_n > n_workspaces)
             active_n = 0;
         }
-      else if (active_n < 0 || active_n > n_workspaces )
+      else if (active_n < 0 || active_n > n_workspaces)
         {
           /* We do not need to do anything */
           return TRUE;
