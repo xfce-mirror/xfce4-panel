@@ -454,8 +454,8 @@ pager_plugin_scroll_event (GtkWidget *widget,
       if (xfw_workspace_get_state (active_ws) & XFW_WORKSPACE_STATE_VIRTUAL)
         {
           /* Viewport mode (compiz) */
-          guint scale_factor;
-          GdkRectangle *rect;
+          guint scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (plugin));
+          GdkRectangle *rect = xfw_workspace_get_geometry (active_ws);
           GdkScreen *screen = gdk_screen_get_default ();
           int viewport_x;
           int viewport_y;
@@ -463,12 +463,8 @@ pager_plugin_scroll_event (GtkWidget *widget,
           int workspace_width;
           int scroll_direction;
 
-          scale_factor = gdk_window_get_scale_factor (gtk_widget_get_window (GTK_WIDGET (plugin)));
-          rect = xfw_workspace_get_geometry (active_ws);
-
-          /* Total workspacesize, e.g. 5120x1024 (5120=4x1280) */
-          /* Only width is needed, virtual workspaces are stacked */
-          /* horizontally. */
+          /* Total workspace size, e.g. 5120x1024 (5120=4x1280)
+           * Only width is needed, virtual workspaces are stacked horizontally */
           workspace_width = rect->width;
           /* Current screensize, e.g. 1280x1024 */
           screen_width = panel_screen_get_width (screen) * scale_factor;
