@@ -1350,6 +1350,8 @@ actions_plugin_pack_idle (gpointer data)
     }
   else
     {
+      char buf[16];
+
       switch (plugin->button_title)
         {
         case BUTTON_TITLE_TYPE_FULLNAME:
@@ -1372,11 +1374,8 @@ actions_plugin_pack_idle (gpointer data)
           break;
 
         case BUTTON_TITLE_TYPE_USERID:
-          {
-            char buf[16];
-            snprintf (buf, sizeof (buf), "%u", (unsigned) getuid ());
-            button_title = buf;
-          }
+          snprintf (buf, sizeof (buf), "%u", (unsigned) getuid ());
+          button_title = buf;
           break;
 
         default:
