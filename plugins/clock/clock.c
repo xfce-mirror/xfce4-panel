@@ -184,11 +184,11 @@ static const gchar *tooltip_formats[] = {
 static const gchar *digital_time_formats[] = {
   DEFAULT_DIGITAL_TIME_FORMAT,
   "%T",
-  "%_H:%M",
+  "%-H:%M",
   "%H:%M",
   "%I:%M %p",
   "%H:%M:%S",
-  "%l:%M:%S %P",
+  "%-l:%M:%S %P",
   NULL
 };
 
