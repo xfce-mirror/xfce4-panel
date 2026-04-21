@@ -1,0 +1,2302 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# BoneNI, 2026
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-30 00:48+0200\n"
+"PO-Revision-Date: 2022-12-22 11:35+0000\n"
+"Last-Translator: BoneNI, 2026\n"
+"Language-Team: Lao (https://app.transifex.com/xfce/teams/16840/lo/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: lo\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../panel-desktop-handler.desktop.in.h:1
+msgid "Create Launcher on the panel"
+msgstr "ສ້າງຕົວເລີ່ມເທິງແຖບ"
+
+#: ../panel-desktop-handler.desktop.in.h:2
+msgid ""
+"Add a new launcher to the panel based on the information of this desktop "
+"file"
+msgstr "ເພີ່ມຕົວເລີ່ມໃໝ່ໃສ່ແຖບ ໂດຍອີງຕາມຂໍ້ມູນຂອງໄຟລ໌ເດັສທັອບນີ້"
+
+#: ../panel-preferences.desktop.in.h:1
+msgid ""
+"panels;settings;preferences;taskbar;autohide;application "
+"menu;start;buttons;launcher;notification area;status;icons;plugins;"
+msgstr ""
+"ແຖບ;ການຕັ້ງຄ່າ;ຄວາມມັກ;ແຖບງານ;ຊ່ອນອັດຕະໂນມັດ;ເມນູແອັບພລິເຄຊັນ;ເລີ່ມ;ປຸ່ມ;ຕົວເລີ່ມ;ເຂດແຈ້ງເຕືອນ;ສະຖານະ;ໄອຄອນ;ປລັກອິນ;"
+
+#: ../panel-preferences.desktop.in.h:2 ../panel/panel-window.c:2965
+msgid "Panel"
+msgstr "ແຖບ"
+
+#: ../panel-preferences.desktop.in.h:3
+msgid "Customize the panel"
+msgstr "ປັບແຕ່ງແຖບ"
+
+#. I18N: %s is the name of the plugin
+#: ../libxfce4panel/xfce-panel-plugin.c:1080
+#: ../panel/panel-preferences-dialog.c:1415
+#, c-format
+msgid "Are you sure that you want to remove \"%s\"?"
+msgstr "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບ \"%s\" ອອກ?"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1085
+#: ../panel/panel-preferences-dialog.c:1418
+msgid "Remove Item"
+msgstr "ລົບລາຍການອອກ"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1087
+msgid ""
+"Removing the item from the panel also means its configuration will be lost."
+msgstr "ການລຶບລາຍການອອກຈາກແຖບ ໝາຍຄວາມວ່າການຕັ້ງຄ່າຂອງມັນຈະສູນຫາຍໄປນຳ."
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1088 ../panel/panel-dialogs.c:164
+#: ../panel/panel-preferences-dialog.c:1422
+#: ../plugins/applicationsmenu/applicationsmenu.c:611
+#: ../plugins/directorymenu/directorymenu.c:471
+#: ../plugins/directorymenu/directorymenu.c:940
+msgid "_Cancel"
+msgstr "ຍົກເລີກ(_C)"
+
+#. remove
+#: ../libxfce4panel/xfce-panel-plugin.c:1089
+#: ../libxfce4panel/xfce-panel-plugin.c:1256
+#: ../panel/panel-plugin-external.c:525
+#: ../panel/panel-preferences-dialog.c:1052
+#: ../panel/panel-preferences-dialog.c:1423
+#: ../panel/panel-preferences-dialog.glade.h:58
+#: ../plugins/launcher/launcher-dialog.c:861
+msgid "_Remove"
+msgstr "ລຶບອອກ(_R)"
+
+#. properties item
+#: ../libxfce4panel/xfce-panel-plugin.c:1218
+msgid "_Properties"
+msgstr "ຄຸນສົມບັດ(_P)"
+
+#. about item
+#: ../libxfce4panel/xfce-panel-plugin.c:1229 ../panel/panel-window.c:3041
+msgid "_About"
+msgstr "ກ່ຽວກັບ(_A)"
+
+#. move item
+#: ../libxfce4panel/xfce-panel-plugin.c:1240
+msgid "_Move"
+msgstr "ຍ້າຍ(_M)"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1274
+msgid "Pane_l"
+msgstr "ແຖບ(_L)"
+
+#. add new items
+#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:2977
+msgid "Add _New Items..."
+msgstr "ເພີ່ມລາຍການໃໝ່(_N)..."
+
+#. customize panel
+#: ../libxfce4panel/xfce-panel-plugin.c:1293 ../panel/panel-window.c:2988
+msgid "Panel Pr_eferences..."
+msgstr "ການຕັ້ງຄ່າແຖບ(_E)..."
+
+#. logout item
+#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:3016
+msgid "Log _Out"
+msgstr "ອອກຈາກລະບົບ(_O)"
+
+#. help item
+#: ../libxfce4panel/xfce-panel-plugin.c:1326 ../panel/panel-item-dialog.c:205
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:3032
+#: ../plugins/actions/actions-dialog.glade.h:8
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#: ../plugins/clock/clock-dialog.glade.h:15
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
+#: ../plugins/launcher/launcher-dialog.glade.h:20
+#: ../plugins/pager/pager-dialog.glade.h:4
+#: ../plugins/separator/separator-dialog.glade.h:6
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
+msgid "_Help"
+msgstr "ຊ່ວຍເຫຼືອ(_H)"
+
+#. about item
+#: ../libxfce4panel/xfce-panel-plugin.c:1337
+msgid "About"
+msgstr "ກ່ຽວກັບ"
+
+#: ../panel/main.c:81
+msgid "Show the 'Panel Preferences' dialog"
+msgstr "ສະແດງໜ້າຕ່າງ 'ການຕັ້ງຄ່າແຖບ'"
+
+#: ../panel/main.c:81 ../panel/main.c:82
+msgid "PANEL-NUMBER"
+msgstr "ໝາຍເລກແຖບ"
+
+#: ../panel/main.c:82
+msgid "Show the 'Add New Items' dialog"
+msgstr "ສະແດງໜ້າຕ່າງ 'ເພີ່ມລາຍການໃໝ່'"
+
+#: ../panel/main.c:83
+msgid "Save the panel configuration"
+msgstr "ບັນທຶກການຕັ້ງຄ່າແຖບ"
+
+#: ../panel/main.c:84
+msgid "Add a new plugin to the panel"
+msgstr "ເພີ່ມປລັກອິນໃໝ່ໃສ່ແຖບ"
+
+#: ../panel/main.c:84
+msgid "PLUGIN-NAME"
+msgstr "ຊື່ປລັກອິນ"
+
+#: ../panel/main.c:85
+msgid "Restart the running panel instance"
+msgstr "ເລີ່ມລະບົບແຖບທີ່ກຳລັງເຮັດວຽກໃໝ່"
+
+#: ../panel/main.c:86
+msgid "Quit the running panel instance"
+msgstr "ອອກຈາກແຖບທີ່ກຳລັງເຮັດວຽກ"
+
+#: ../panel/main.c:87
+msgid "Do not wait for a window manager on startup"
+msgstr "ບໍ່ຕ້ອງຖ້າຕົວຈັດການໜ້າຕ່າງເມື່ອເລີ່ມຕົ້ນລະບົບ"
+
+#: ../panel/main.c:88
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
+msgid "Print version information and exit"
+msgstr "ສະແດງຂໍ້ມູນເວີຊັນແລ້ວອອກ"
+
+#: ../panel/main.c:208
+#, c-format
+msgid "Name %s lost on the message dbus, exiting."
+msgstr "ຊື່ %s ຫາຍໄປຈາກ dbus, ກຳລັງອອກ."
+
+#. parse context options
+#: ../panel/main.c:271
+msgid "[ARGUMENTS...]"
+msgstr "[ອາຣກິວເມັນ...]"
+
+#: ../panel/main.c:278
+#, c-format
+msgid "Type \"%s --help\" for usage."
+msgstr "ພິມ \"%s --help\" ເພື່ອເບິ່ງວິທີໃຊ້."
+
+#: ../panel/main.c:297
+msgid "The Xfce development team. All rights reserved."
+msgstr "ທີມພັດທະນາ Xfce. ສະຫງວນລິຂະສິດ."
+
+#: ../panel/main.c:298
+#, c-format
+msgid "Please report bugs to <%s>."
+msgstr "ກະລຸນາລາຍງານບັນຫາໄປທີ່ <%s>."
+
+#. quit without error if an instance is running
+#: ../panel/main.c:398
+msgid "There is already a running instance"
+msgstr "ມີຕົວເຄື່ອງທີ່ກຳລັງເຮັດວຽກຢູ່ແລ້ວ"
+
+#. spawn ourselfs again
+#: ../panel/main.c:406
+msgid "Restarting..."
+msgstr "ກຳລັງເລີ່ມໃໝ່..."
+
+#: ../panel/main.c:421
+msgid "Failed to show the preferences dialog"
+msgstr "ບໍ່ສາມາດສະແດງໜ້າຕ່າງການຕັ້ງຄ່າ"
+
+#: ../panel/main.c:423
+msgid "Failed to show the add new items dialog"
+msgstr "ບໍ່ສາມາດສະແດງໜ້າຕ່າງເພີ່ມລາຍການໃໝ່"
+
+#: ../panel/main.c:425
+msgid "Failed to save the panel configuration"
+msgstr "ບໍ່ສາມາດບັນທຶກການຕັ້ງຄ່າແຖບ"
+
+#: ../panel/main.c:427
+msgid "Failed to add a plugin to the panel"
+msgstr "ບໍ່ສາມາດເພີ່ມປລັກອິນໃສ່ແຖບ"
+
+#: ../panel/main.c:429
+msgid "Failed to restart the panel"
+msgstr "ບໍ່ສາມາດເລີ່ມແຖບໃໝ່"
+
+#: ../panel/main.c:431
+msgid "Failed to quit the panel"
+msgstr "ບໍ່ສາມາດອອກຈາກແຖບ"
+
+#: ../panel/main.c:433
+msgid "Failed to send D-Bus message"
+msgstr "ບໍ່ສາມາດສົ່ງຂໍ້ຄວາມ D-Bus"
+
+#: ../panel/main.c:443
+msgid "Execute"
+msgstr "ປະຕິບັດການ"
+
+#: ../panel/main.c:444
+msgid ""
+"Do you want to start the panel? If you do, make sure you save the session on"
+" logout, so the panel is automatically started the next time you login."
+msgstr ""
+"ທ່ານຕ້ອງການເລີ່ມແຖບເຄື່ອງມືບໍ່? ຫາກຕ້ອງການ, "
+"ກະລຸນາແນ່ໃຈວ່າໄດ້ບັນທຶກເຊດຊັນຕອນອອກຈາກລະບົບ "
+"ເພື່ອໃຫ້ແຖບເລີ່ມເຮັດວຽກໂດຍອັດຕະໂນມັດໃນຄັ້ງຕໍ່ໄປທີ່ທ່ານເຂົ້າລະບົບ."
+
+#: ../panel/main.c:447 ../panel/main.c:461
+#, c-format
+msgid "No running instance of %s was found"
+msgstr "ບໍ່ພົບຕົວເຄື່ອງທີ່ກຳລັງເຮັດວຽກຂອງ %s"
+
+#: ../panel/panel-application.c:220
+msgid "Failed to launch the migration application"
+msgstr "ບໍ່ສາມາດເລີ່ມແອັບພລິເຄຊັນການເຄື່ອນຍ້າຍ (migration)"
+
+#: ../panel/panel-application.c:1012
+msgid "Create _Launcher"
+msgstr "ສ້າງຕົວເລີ່ມ(_L)"
+
+#: ../panel/panel-application.c:1013
+msgid ""
+"This will create a new launcher plugin on the panel and inserts the dropped "
+"files as menu items."
+msgstr ""
+"ນີ້ຈະສ້າງປລັກອິນຕົວເລີ່ມໃໝ່ເທິງແຖບ ແລະ ແຊກໄຟລ໌ທີ່ລາກມາວາງໃຫ້ເປັນລາຍການເມນູ."
+
+#: ../panel/panel-application.c:1015
+#, c-format
+msgid "Create new launcher from %d desktop file"
+msgid_plural "Create new launcher from %d desktop files"
+msgstr[0] "ສ້າງຕົວເລີ່ມໃໝ່ຈາກໄຟລ໌ເດັສທັອບ %d ໄຟລ໌"
+
+#: ../panel/panel-application.c:1772
+msgid "Quit"
+msgstr "ອອກ"
+
+#: ../panel/panel-application.c:1773
+msgid ""
+"You have started X without session manager. Clicking Quit will close the X "
+"server."
+msgstr "ທ່ານໄດ້ເລີ່ມ X ໂດຍບໍ່ມີຕົວຈັດການເຊດຊັນ. ການຄລິກ 'ອອກ' ຈະປິດເຊີບເວີ X."
+
+#: ../panel/panel-application.c:1774
+msgid "Are you sure you want to quit the panel?"
+msgstr "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການອອກຈາກແຖບ?"
+
+#: ../panel/panel-application.c:1782
+#, c-format
+msgid "Failed to execute command \"%s\""
+msgstr "ບໍ່ສາມາດປະຕິບັດຄຳສັ່ງ \"%s\""
+
+#: ../panel/panel-dbus-client.c:218
+msgid ""
+"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr "ໄວຍາກອນເຫດການປລັກອິນບໍ່ຖືກຕ້ອງ. ກະລຸນາໃຊ້ ຊື່ປລັກອິນ:ຊື່[:ປະເພດ:ຄ່າ]."
+
+#: ../panel/panel-dbus-client.c:248
+#, c-format
+msgid ""
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and "
+"uint."
+msgstr ""
+"ປະເພດ hint \"%s\" ບໍ່ຖືກຕ້ອງ. ປະເພດທີ່ໃຊ້ໄດ້ຄື bool, double, int, string ແລະ"
+" uint."
+
+#: ../panel/panel-dialogs.c:58
+msgid "Unable to open the e-mail address"
+msgstr "ບໍ່ສາມາດເປີດທີ່ຢູ່ອີເມລ໌ໄດ້"
+
+#: ../panel/panel-dialogs.c:84
+msgid "The panel of the Xfce Desktop Environment"
+msgstr "ແຖບເຄື່ອງມືຂອງສະພາບແວດລ້ອມເດັສທັອບ Xfce"
+
+#: ../panel/panel-dialogs.c:88
+msgid "translator-credits"
+msgstr "ລາຍຊື່ຜູ້ແປ"
+
+#. setup the dialog
+#: ../panel/panel-dialogs.c:162
+msgid "Add New Item"
+msgstr "ເພີ່ມລາຍການໃໝ່"
+
+#: ../panel/panel-dialogs.c:165 ../panel/panel-item-dialog.c:201
+#: ../panel/panel-preferences-dialog.glade.h:56
+#: ../plugins/launcher/launcher-dialog.glade.h:16
+msgid "_Add"
+msgstr "ເພີ່ມ(_A)"
+
+#: ../panel/panel-dialogs.c:176
+msgid "Please choose a panel for the new plugin:"
+msgstr "ກະລຸນາເລືອກແຖບສຳລັບປລັກອິນໃໝ່:"
+
+#: ../panel/panel-dialogs.c:196 ../panel/panel-preferences-dialog.c:991
+#, c-format
+msgid "Panel %d"
+msgstr "ແຖບ %d"
+
+#: ../panel/panel-dialogs.c:236
+msgid ""
+"Because the panel is running in kiosk mode, you are not allowed to make "
+"changes to the panel configuration as a regular user"
+msgstr ""
+"ເນື່ອງຈາກແຖບກຳລັງເຮັດວຽກໃນໂໝດ kiosk, "
+"ທ່ານຈຶ່ງບໍ່ໄດ້ຮັບອະນຸຍາດໃຫ້ປ່ຽນແປງການຕັ້ງຄ່າແຖບໃນຖານະຜູ້ໃຊ້ທົ່ວໄປ"
+
+#: ../panel/panel-dialogs.c:238
+msgid "Modifying the panel is not allowed"
+msgstr "ບໍ່ອະນຸຍາດໃຫ້ແກ້ໄຂແຖບ"
+
+#: ../panel/panel-item-dialog.c:195
+#: ../plugins/launcher/launcher-dialog.glade.h:14
+msgid "Add New Items"
+msgstr "ເພີ່ມລາຍການໃໝ່"
+
+#: ../panel/panel-item-dialog.c:209
+#: ../panel/panel-preferences-dialog.glade.h:11
+#: ../panel/panel-tic-tac-toe.c:125
+#: ../plugins/actions/actions-dialog.glade.h:7
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
+#: ../plugins/clock/clock-dialog.glade.h:14
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+#: ../plugins/launcher/launcher-dialog.glade.h:17
+#: ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/separator/separator-dialog.glade.h:5
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
+msgid "_Close"
+msgstr "ປິດ(_C)"
+
+#: ../panel/panel-item-dialog.c:225
+#: ../plugins/launcher/launcher-dialog.glade.h:18
+msgid "_Search:"
+msgstr "ຄົ້ນຫາ(_S):"
+
+#: ../panel/panel-item-dialog.c:233
+msgid "Enter search phrase here"
+msgstr "ໃສ່ຄຳຄົ້ນຫາຢູ່ນີ້"
+
+#: ../panel/panel-plugin-external.c:516
+#, c-format
+msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
+msgstr "ປລັກອິນ \"%s\" ຢຸດເຮັດວຽກຢ່າງກະທັນຫັນ, ທ່ານຕ້ອງການເລີ່ມມັນໃໝ່ບໍ່?"
+
+#: ../panel/panel-plugin-external.c:519
+msgid "Plugin Restart"
+msgstr "ເລີ່ມປລັກອິນໃໝ່"
+
+#: ../panel/panel-plugin-external.c:520
+#, c-format
+msgid ""
+"The plugin restarted more than once in the last %d seconds. If you press "
+"Execute the panel will try to restart the plugin otherwise it will be "
+"permanently removed from the panel."
+msgstr ""
+"ປລັກອິນເລີ່ມໃໝ່ຫຼາຍກວ່າໜຶ່ງຄັ້ງໃນ %d ວິນາທີທີ່ຜ່ານມາ. ຫາກທ່ານກົດ "
+"'ປະຕິບັດການ' ແຖບຈະລອງເລີ່ມປລັກອິນໃໝ່ "
+"ອີກບໍ່ດັ່ງນັ້ນມັນຈະຖືກລຶບອອກຈາກແຖບຢ່າງຖາວອນ."
+
+#: ../panel/panel-plugin-external.c:524
+msgid "_Execute"
+msgstr "ປະຕິບັດການ(_E)"
+
+#: ../panel/panel-preferences-dialog.c:546
+msgid "Automatic"
+msgstr "ອັດຕະໂນມັດ"
+
+#: ../panel/panel-preferences-dialog.c:556
+msgid "Primary"
+msgstr "ຫຼັກ"
+
+#. I18N: monitor name in the output selector
+#: ../panel/panel-preferences-dialog.c:575
+#, c-format
+msgid "Monitor %d"
+msgstr "ເຝົ້າເບິ່ງ %d"
+
+#: ../panel/panel-preferences-dialog.c:1053
+msgid "The panel and plugin configurations will be permanently removed"
+msgstr "ການຕັ້ງຄ່າແຖບ ແລະ ປລັກອິນຈະຖືກລຶບອອກຢ່າງຖາວອນ"
+
+#: ../panel/panel-preferences-dialog.c:1054
+#, c-format
+msgid "Are you sure you want to remove panel %d?"
+msgstr "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບແຖບ %d ອອກ?"
+
+#. I18N: append (external) in the preferences dialog if the plugin
+#. * runs external
+#: ../panel/panel-preferences-dialog.c:1257
+#, c-format
+msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
+msgstr "%s <span color=\"grey\" size=\"small\">(ພາຍນອກ)</span>"
+
+#. I18N: tooltip in preferences dialog when hovering an item in the list
+#. * for external plugins
+#: ../panel/panel-preferences-dialog.c:1262
+#, c-format
+msgid ""
+"Internal name: %s-%d\n"
+"PID: %d"
+msgstr ""
+"ຊື່ພາຍໃນ: %s-%d\n"
+"PID: %d"
+
+#. I18N: tooltip in preferences dialog when hovering an item in the list
+#. * for internal plugins
+#: ../panel/panel-preferences-dialog.c:1274
+#, c-format
+msgid "Internal name: %s-%d"
+msgstr "ຊື່ພາຍໃນ: %s-%d"
+
+#: ../panel/panel-preferences-dialog.c:1420
+msgid "If you remove the item from the panel, it is permanently lost."
+msgstr "ຫາກທ່ານລຶບລາຍການອອກຈາກແຖບ, ມັນຈະສູນຫາຍໄປຢ່າງຖາວອນ."
+
+#: ../panel/panel-preferences-dialog.glade.h:1
+msgid "Never"
+msgstr "ບໍ່ເຄີຍ"
+
+#: ../panel/panel-preferences-dialog.glade.h:2
+msgid "Intelligently"
+msgstr "ແບບສະຫຼາດ"
+
+#: ../panel/panel-preferences-dialog.glade.h:3
+msgid "Always"
+msgstr "ສະເໝີ"
+
+#: ../panel/panel-preferences-dialog.glade.h:4
+msgid "Horizontal"
+msgstr "ແນວນອນ"
+
+#: ../panel/panel-preferences-dialog.glade.h:5
+msgid "Vertical"
+msgstr "ແນວຕັ້ງ"
+
+#: ../panel/panel-preferences-dialog.glade.h:6
+msgid "Deskbar"
+msgstr "ແຖບຕັ້ງໂຕະ"
+
+#: ../panel/panel-preferences-dialog.glade.h:7
+msgid "None (use system style)"
+msgstr "ບໍ່ມີ (ໃຊ້ຮູບແບບຂອງລະບົບ)"
+
+#: ../panel/panel-preferences-dialog.glade.h:8
+msgid "Solid color"
+msgstr "ສີລ້ວນ"
+
+#: ../panel/panel-preferences-dialog.glade.h:9
+msgid "Background image"
+msgstr "ຮູບພື້ນຫຼັງ"
+
+#: ../panel/panel-preferences-dialog.glade.h:10
+msgid "Panel Preferences"
+msgstr "ການຕັ້ງຄ່າແຖບ"
+
+#: ../panel/panel-preferences-dialog.glade.h:13
+msgid "Profiles:"
+msgstr "ໂປຣໄຟລ໌:"
+
+#: ../panel/panel-preferences-dialog.glade.h:14
+msgid "_Backup and restore"
+msgstr "ສຳຮອງ ແລະ ກູ້ຄືນ(_B)"
+
+#: ../panel/panel-preferences-dialog.glade.h:15
+msgid "Switch between panel presets"
+msgstr "ສະຫຼັບລະຫວ່າງຄ່າທີ່ຕັ້ງໄວ້ຂອງແຖບ"
+
+#: ../panel/panel-preferences-dialog.glade.h:16
+msgid "Add a new panel"
+msgstr "ເພີ່ມແຖບໃໝ່"
+
+#: ../panel/panel-preferences-dialog.glade.h:17
+msgid "Remove the currently selected panel"
+msgstr "ລຶບແຖບທີ່ເລືອກຢູ່ອອກ"
+
+#: ../panel/panel-preferences-dialog.glade.h:18
+msgid "<b>General</b>"
+msgstr "<b>ທົ່ວໄປ</b>"
+
+#: ../panel/panel-preferences-dialog.glade.h:19
+msgid "M_ode:"
+msgstr "ໂໝດ(_O):"
+
+#: ../panel/panel-preferences-dialog.glade.h:20
+msgid "Span mo_nitors"
+msgstr "ຂະຫຍາຍເຕັມຈໍພາບ(_N)"
+
+#: ../panel/panel-preferences-dialog.glade.h:21
+msgid "Select this option to extend the panel over multiple monitors."
+msgstr "ເລືອກຕົວເລືອກນີ້ເພື່ອຂະຫຍາຍແຖບໃຫ້ກວມເອົາຫຼາຍຈໍພາບ."
+
+#: ../panel/panel-preferences-dialog.glade.h:22
+msgid "_Lock panel"
+msgstr "ລັອກແຖບ(_L)"
+
+#: ../panel/panel-preferences-dialog.glade.h:23
+msgid ""
+"Select this option to hide the handles of the panel and lock its position."
+msgstr "ເລືອກຕົວເລືອກນີ້ເພື່ອຊ່ອນບ່ອນຈັບຂອງແຖບ ແລະ ລັອກຕຳແໜ່ງຂອງມັນ."
+
+#: ../panel/panel-preferences-dialog.glade.h:24
+msgid "_Reserve space on screen edges for the panel"
+msgstr "ຈອງພື້ນທີ່ຂອບຈໍພາບໄວ້ໃຫ້ແຖບ(_R)"
+
+#: ../panel/panel-preferences-dialog.glade.h:25
+msgid ""
+"Select this option if you don't want maximized windows to cover the area "
+"behind the panel. This only works when the panel is attached to a screen "
+"edge."
+msgstr ""
+"ເລືອກຕົວເລືອກນີ້ ຫາກທ່ານບໍ່ຕ້ອງການໃຫ້ໜ້າຕ່າງທີ່ຂະຫຍາຍໃຫຍ່ສຸດ "
+"ປົກຄຸມພື້ນທີ່ທາງຫຼັງແຖບພາເນລ. ສິ່ງນີ້ຈະເຮັດວຽກໄດ້ "
+"ກໍຕໍ່ເມື່ອແຖບພາເນລຖືກຕິດຢູ່ກັບຂອບຈໍເທົ່ານັ້ນ."
+
+#: ../panel/panel-preferences-dialog.glade.h:26
+msgid "Au_tomatically hide the panel:"
+msgstr "ຊ່ອນແຖບໂດຍອັດຕະໂນມັດ(_T):"
+
+#: ../panel/panel-preferences-dialog.glade.h:27
+msgid "O_utput:"
+msgstr "ການສະແດງຜົນ(_U):"
+
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
+#: ../panel/panel-preferences-dialog.glade.h:29
+msgid "<b>Measurements</b>"
+msgstr "<b>ຂະໜາດ</b>"
+
+#: ../panel/panel-preferences-dialog.glade.h:30
+msgid "Row _size (pixels):"
+msgstr "ຂະໜາດແຖວ (ພິກເຊວ)(_S):"
+
+#: ../panel/panel-preferences-dialog.glade.h:31
+msgid "Num_ber of rows:"
+msgstr "ຈຳນວນແຖວ(_B):"
+
+#: ../panel/panel-preferences-dialog.glade.h:32
+msgid "L_ength (pixels):"
+msgstr "ຄວາມຍາວ (ພິກເຊວ)(_E):"
+
+#: ../panel/panel-preferences-dialog.glade.h:33
+msgid "A_utomatically increase the length"
+msgstr "ເພີ່ມຄວາມຍາວໂດຍອັດຕະໂນມັດ(_U)"
+
+#: ../panel/panel-preferences-dialog.glade.h:34
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr ""
+"ເລືອກຕົວເລືອກນີ້ເພື່ອເພີ່ມຄວາມຍາວຂອງແຖບໂດຍອັດຕະໂນມັດ "
+"ຫາກປລັກອິນຕ້ອງການພື້ນທີ່ເພີ່ມ."
+
+#: ../panel/panel-preferences-dialog.glade.h:35
+msgid "D_isplay"
+msgstr "ການສະແດງຜົນ(_I)"
+
+#: ../panel/panel-preferences-dialog.glade.h:36
+msgid "Dark mode"
+msgstr "ໂໝດມືດ"
+
+#: ../panel/panel-preferences-dialog.glade.h:37
+msgid "<b>Background</b>"
+msgstr "<b>ພື້ນຫຼັງ</b>"
+
+#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../plugins/separator/separator-dialog.glade.h:7
+msgid "_Style:"
+msgstr "ຮູບແບບ(_S):"
+
+#: ../panel/panel-preferences-dialog.glade.h:39
+msgid "C_olor:"
+msgstr "ສີ(_O):"
+
+#: ../panel/panel-preferences-dialog.glade.h:40
+msgid "Pick a Panel Color"
+msgstr "ເລືອກສີແຖບ"
+
+#: ../panel/panel-preferences-dialog.glade.h:41
+msgid "_File:"
+msgstr "ໄຟລ໌(_F):"
+
+#: ../panel/panel-preferences-dialog.glade.h:42
+msgid "Select A Background Image"
+msgstr "ເລືອກຮູບພື້ນຫຼັງ"
+
+#: ../panel/panel-preferences-dialog.glade.h:43
+msgid "<b>Icons</b>"
+msgstr "<b>ໄອຄອນ</b>"
+
+#: ../panel/panel-preferences-dialog.glade.h:44
+msgid "Adjust size au_tomatically"
+msgstr "ປັບຂະໜາດໂດຍອັດຕະໂນມັດ(_T)"
+
+#: ../panel/panel-preferences-dialog.glade.h:45
+msgid "Fixed icon _size (pixels):"
+msgstr "ກຳນົດຂະໜາດໄອຄອນຕາຍຕົວ (ພິກເຊວ)(_S):"
+
+#: ../panel/panel-preferences-dialog.glade.h:46
+msgid "<b>Opacity</b>"
+msgstr "<b>ຄວາມທຶບແສງ</b>"
+
+#: ../panel/panel-preferences-dialog.glade.h:47
+msgid "Configure..."
+msgstr "ຕັ້ງຄ່າ..."
+
+#: ../panel/panel-preferences-dialog.glade.h:48
+msgid ""
+"<b>Compositing is currently disabled</b>\n"
+"Enable compositing in the window manager for opacity settings in the panel."
+msgstr ""
+"<b>ຂະບວນການ Compositing ຖືກປິດຢູ່</b>\n"
+"ເປີດໃຊ້ compositing ໃນຕົວຈັດການໜ້າຕ່າງ ເພື່ອຕັ້ງຄ່າຄວາມທຶບແສງໃນແຖບ."
+
+#. I18N: label for the enter transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:51
+msgid "_Enter:"
+msgstr "ເມື່ອເມົາສ໌ເຂົ້າ(_E):"
+
+#. I18N: label for the leave transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:53
+msgid "_Leave:"
+msgstr "ເມື່ອເມົາສ໌ອອກ(_L):"
+
+#: ../panel/panel-preferences-dialog.glade.h:54
+msgid ""
+"Transparency when the pointer is not hovering over the panel, with 0 being "
+"fully transparent and 100 fully opaque."
+msgstr ""
+"ຄວາມໂປ່ງໃສເມື່ອຕົວຊີ້ເມົາສ໌ບໍ່ໄດ້ຢູ່ເທິງແຖບ, ໂດຍ 0 ຄືໂປ່ງໃສທັງໝົດ ແລະ 100 "
+"ຄືທຶບແສງທັງໝົດ."
+
+#: ../panel/panel-preferences-dialog.glade.h:55
+msgid "Appeara_nce"
+msgstr "ຮູບລັກສະນະ(_N)"
+
+#: ../panel/panel-preferences-dialog.glade.h:57
+msgid "Add new item to this panel"
+msgstr "ເພີ່ມລາຍການໃໝ່ໃສ່ພາແນລນີ້"
+
+#: ../panel/panel-preferences-dialog.glade.h:59
+msgid "Remove currently selected item"
+msgstr "ລຶບລາຍການທີ່ເລືອກໃນປັດຈຸບັນອອກ"
+
+#: ../panel/panel-preferences-dialog.glade.h:60
+#: ../plugins/launcher/launcher-dialog.glade.h:23
+msgid "Edit the currently selected item"
+msgstr "ແກ້ໄຂລາຍການທີ່ເລືອກໃນປັດຈຸບັນ"
+
+#: ../panel/panel-preferences-dialog.glade.h:61
+msgid "Show about information of the currently selected item"
+msgstr "ສະແດງຂໍ້ມູນກ່ຽວກັບຂອງລາຍການທີ່ເລືອກຢູ່"
+
+#: ../panel/panel-preferences-dialog.glade.h:62
+#: ../plugins/launcher/launcher-dialog.glade.h:21
+msgid "Move currently selected item up by one row"
+msgstr "ຍ້າຍລາຍການທີ່ເລືອກຂຶ້ນເທິງໜຶ່ງແຖວ"
+
+#: ../panel/panel-preferences-dialog.glade.h:63
+#: ../plugins/launcher/launcher-dialog.glade.h:22
+msgid "Move currently selected item down by one row"
+msgstr "ຍ້າຍລາຍການທີ່ເລືອກລົງລຸ່ມໜຶ່ງແຖວ"
+
+#: ../panel/panel-preferences-dialog.glade.h:64
+msgid "Ite_ms"
+msgstr "ລາຍການ(_M)"
+
+#: ../panel/panel-tic-tac-toe.c:123
+msgid "_New Game"
+msgstr "ເກມໃໝ່(_N)"
+
+#: ../panel/panel-tic-tac-toe.c:134
+msgid "_Level:"
+msgstr "ລະດັບ(_L):"
+
+#: ../panel/panel-tic-tac-toe.c:140
+msgid "Novice"
+msgstr "ມືໃໝ່"
+
+#: ../panel/panel-tic-tac-toe.c:141
+msgid "Intermediate"
+msgstr "ລະດັບກາງ"
+
+#: ../panel/panel-tic-tac-toe.c:142
+msgid "Experienced"
+msgstr "ຜູ້ມີປະສົບການ"
+
+#: ../panel/panel-tic-tac-toe.c:143
+msgid "Expert"
+msgstr "ຜູ້ຊ່ຽວຊານ"
+
+#: ../panel/panel-window.c:3002
+msgid "_Lock Panel"
+msgstr "ລັອກແຖບ(_L)"
+
+#: ../migrate/main.c:111
+msgid "Failed to load the default configuration"
+msgstr "ບໍ່ສາມາດໂຫຼດການຕັ້ງຄ່າເລີ່ມຕົ້ນ"
+
+#: ../migrate/main.c:123
+msgid "Panel config needs migration..."
+msgstr "ການຕັ້ງຄ່າແຖບຈຳເປັນຕ້ອງມີການເຄື່ອນຍ້າຍ (migration)..."
+
+#: ../migrate/main.c:127
+msgid "Failed to migrate the existing configuration"
+msgstr "ບໍ່ສາມາດເຄື່ອນຍ້າຍການຕັ້ງຄ່າທີ່ມີຢູ່"
+
+#: ../migrate/main.c:133
+msgid "Panel configuration has been updated."
+msgstr "ການຕັ້ງຄ່າແຖບໄດ້ຖືກອັບເດດແລ້ວ."
+
+#: ../plugins/actions/actions-dialog.glade.h:1
+#: ../plugins/actions/actions.desktop.in.in.h:1
+msgid "Action Buttons"
+msgstr "ປຸ່ມການກະທຳ"
+
+#: ../plugins/actions/actions-dialog.glade.h:2 ../plugins/actions/actions.c:40
+msgid "Session Menu"
+msgstr "ເມນູເຊດຊັນ"
+
+#: ../plugins/actions/actions-dialog.glade.h:3
+msgid "Full Name"
+msgstr "ຊື່ເຕັມ"
+
+#: ../plugins/actions/actions-dialog.glade.h:4
+msgid "Username"
+msgstr "ຊື່ຜູ້ໃຊ້"
+
+#: ../plugins/actions/actions-dialog.glade.h:5
+msgid "User ID"
+msgstr "ໄອດີຜູ້ໃຊ້"
+
+#: ../plugins/actions/actions-dialog.glade.h:6
+msgid "Custom"
+msgstr "ກຳນົດເອງ"
+
+#: ../plugins/actions/actions-dialog.glade.h:9
+msgid "Appeara_nce:"
+msgstr "ຮູບລັກສະນະ(_N):"
+
+#: ../plugins/actions/actions-dialog.glade.h:10
+msgid "Title:"
+msgstr "ຫົວຂໍ້:"
+
+#: ../plugins/actions/actions-dialog.glade.h:11
+msgid "Custo_m title:"
+msgstr "ຫົວຂໍ້ກຳນົດເອງ(_M):"
+
+#: ../plugins/actions/actions-dialog.glade.h:12
+#: ../plugins/launcher/launcher-dialog.glade.h:27
+msgid "General"
+msgstr "ທົ່ວໄປ"
+
+#: ../plugins/actions/actions-dialog.glade.h:13
+msgid "Visible"
+msgstr "ສະແດງໃຫ້ເຫັນ"
+
+#: ../plugins/actions/actions-dialog.glade.h:14
+msgid "Action"
+msgstr "ການກະທຳ"
+
+#: ../plugins/actions/actions-dialog.glade.h:15
+msgid "_Show confirmation dialog"
+msgstr "ສະແດງໜ້າຕ່າງຢືນຢັນ(_S)"
+
+#: ../plugins/actions/actions-dialog.glade.h:16
+msgid ""
+"Show a confirmation dialog with a 30 second timeout for some of the actions."
+msgstr "ສະແດງໜ້າຕ່າງຢືນຢັນພ້ອມການນັບຖອຍຫຼັງ 30 ວິນາທີ ສຳລັບບາງການກະທຳ."
+
+#: ../plugins/actions/actions-dialog.glade.h:17
+msgid "_Actions"
+msgstr "ການກະທຳ(_A)"
+
+#: ../plugins/actions/actions.c:167
+msgid "Log Out"
+msgstr "ອອກຈາກລະບົບ"
+
+#: ../plugins/actions/actions.c:168
+msgid "_Log Out"
+msgstr "ອອກຈາກລະບົບ(_L)"
+
+#: ../plugins/actions/actions.c:169
+msgid "Are you sure you want to log out?"
+msgstr "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການອອກຈາກລະບົບ?"
+
+#: ../plugins/actions/actions.c:170
+#, c-format
+msgid "Logging out in %d seconds."
+msgstr "ຈະອອກຈາກລະບົບໃນອີກ %d ວິນາທີ."
+
+#: ../plugins/actions/actions.c:176
+msgid "Log Out..."
+msgstr "ອອກຈາກລະບົບ..."
+
+#: ../plugins/actions/actions.c:177
+msgid "Log _Out..."
+msgstr "ອອກຈາກລະບົບ(_O)..."
+
+#: ../plugins/actions/actions.c:184
+msgid "Switch User"
+msgstr "ສະຫຼັບຜູ້ໃຊ້"
+
+#: ../plugins/actions/actions.c:185
+msgid "_Switch User"
+msgstr "ສະຫຼັບຜູ້ໃຊ້(_S)"
+
+#: ../plugins/actions/actions.c:192
+msgid "Lock Screen"
+msgstr "ລັອກໜ້າຈໍ"
+
+#: ../plugins/actions/actions.c:193
+msgid "Loc_k Screen"
+msgstr "ລັອກໜ້າຈໍ(_K)"
+
+#: ../plugins/actions/actions.c:200
+msgid "Hibernate"
+msgstr "ຈຳສິນ (Hibernate)"
+
+#: ../plugins/actions/actions.c:201
+msgid "_Hibernate"
+msgstr "ຈຳສິນ(_H)"
+
+#: ../plugins/actions/actions.c:202
+msgid "Do you want to suspend to disk?"
+msgstr "ທ່ານຕ້ອງການພັກເຄື່ອງລົງດິສກ໌ (Hibernate) ບໍ່?"
+
+#: ../plugins/actions/actions.c:203
+#, c-format
+msgid "Hibernating computer in %d seconds."
+msgstr "ຈະເຂົ້າສູ່ໂໝດຈຳສິນໃນອີກ %d ວິນາທີ."
+
+#: ../plugins/actions/actions.c:209
+msgid "Hybrid Sleep"
+msgstr "ຫຼັບແບບໄຮບຣິດ (Hybrid Sleep)"
+
+#: ../plugins/actions/actions.c:210
+msgid "_Hybrid Sleep"
+msgstr "ຫຼັບແບບໄຮບຣິດ(_H)"
+
+#: ../plugins/actions/actions.c:211
+msgid "Do you want to hibernate and suspend the system?"
+msgstr "ທ່ານຕ້ອງການທັງຈຳສິນ ແລະ ພັກເຄື່ອງບໍ່?"
+
+#: ../plugins/actions/actions.c:212
+#, c-format
+msgid "Hibernating and Suspending computer in %d seconds."
+msgstr "ຈະເຂົ້າສູ່ໂໝດຫຼັບແບບໄຮບຣິດໃນອີກ %d ວິນາທີ."
+
+#: ../plugins/actions/actions.c:218
+msgid "Suspend"
+msgstr "ພັກເຄື່ອງ (Suspend)"
+
+#: ../plugins/actions/actions.c:219
+msgid "Sus_pend"
+msgstr "ພັກເຄື່ອງ(_P)"
+
+#: ../plugins/actions/actions.c:220
+msgid "Do you want to suspend to RAM?"
+msgstr "ທ່ານຕ້ອງການພັກເຄື່ອງລົງແຣມ (Suspend) ບໍ່?"
+
+#: ../plugins/actions/actions.c:221
+#, c-format
+msgid "Suspending computer in %d seconds."
+msgstr "ຈະພັກເຄື່ອງໃນອີກ %d ວິນາທີ."
+
+#: ../plugins/actions/actions.c:227
+msgid "Restart"
+msgstr "ເລີ່ມລະບົບໃໝ່"
+
+#: ../plugins/actions/actions.c:228
+msgid "_Restart"
+msgstr "ເລີ່ມລະບົບໃໝ່(_R)"
+
+#: ../plugins/actions/actions.c:229
+msgid "Are you sure you want to restart?"
+msgstr "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການເລີ່ມລະບົບໃໝ່?"
+
+#: ../plugins/actions/actions.c:230
+#, c-format
+msgid "Restarting computer in %d seconds."
+msgstr "ຈະເລີ່ມລະບົບໃໝ່ໃນອີກ %d ວິນາທີ."
+
+#: ../plugins/actions/actions.c:236
+msgid "Shut Down"
+msgstr "ປິດເຄື່ອງ"
+
+#: ../plugins/actions/actions.c:237
+msgid "Shut _Down"
+msgstr "ປິດເຄື່ອງ(_D)"
+
+#: ../plugins/actions/actions.c:238
+msgid "Are you sure you want to shut down?"
+msgstr "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການປິດເຄື່ອງ?"
+
+#: ../plugins/actions/actions.c:239
+#, c-format
+msgid "Turning off computer in %d seconds."
+msgstr "ຈະປິດເຄື່ອງໃນອີກ %d ວິນາທີ."
+
+#: ../plugins/actions/actions.c:688
+#: ../plugins/separator/separator-dialog.glade.h:2
+#: ../plugins/separator/separator.desktop.in.in.h:1
+msgid "Separator"
+msgstr "ຕົວຂັ້ນ"
+
+#: ../plugins/actions/actions.c:1122
+#, c-format
+msgid "Failed to run action \"%s\""
+msgstr "ບໍ່ສາມາດປະຕິບັດການ \"%s\""
+
+#: ../plugins/actions/actions.c:1327
+msgid "Little Mouse"
+msgstr "ໜູນ້ອຍ"
+
+#: ../plugins/actions/actions.desktop.in.in.h:2
+msgid "Log out, lock or other system actions"
+msgstr "ອອກຈາກລະບົບ, ລັອກ ຫຼື ການກະທຳອື່ນໆຂອງລະບົບ"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
+#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:1
+msgid "Applications Menu"
+msgstr "ເມນູແອັບພລິເຄຊັນ"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
+msgid "_Icon:"
+msgstr "ໄອຄອນ(_I):"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
+msgid "Button _title:"
+msgstr "ຫົວຂໍ້ປຸ່ມ(_T):"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+msgid "Show button on one _line"
+msgstr "ສະແດງປຸ່ມໃນແຖວດຽວ(_L)"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+msgid "_Show button title"
+msgstr "ສະແດງຫົວຂໍ້ປຸ່ມ(_S)"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
+msgid "Show application d_escription in tooltip"
+msgstr "ສະແດງລາຍລະອຽດແອັບພລິເຄຊັນໃນຄຳແນະນຳເຄື່ອງມື(_E)"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+msgid "Show ic_ons in menu"
+msgstr "ສະແດງໄອຄອນໃນເມນູ(_O)"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+msgid "Show generic application n_ames"
+msgstr "ສະແດງຊື່ທົ່ວໄປຂອງແອັບພລິເຄຊັນ(_A)"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
+msgid ""
+"Select this option to show the generic application name in the menu, for "
+"example \"File Manager\" instead of \"Thunar\""
+msgstr ""
+"ເລືອກຕົວເລືອກນີ້ເພື່ອສະແດງຊື່ທົ່ວໄປຂອງແອັບພລິເຄຊັນໃນເມນູ, ຕົວຢ່າງ "
+"\"ຕົວຈັດການໄຟລ໌\" ແທນທີ່ \"Thunar\""
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
+#: ../plugins/clock/clock-dialog.glade.h:27
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
+#: ../plugins/separator/separator-dialog.glade.h:9
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
+msgid "Appearance"
+msgstr "ຮູບລັກສະນະ"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+msgid "Use the _default menu"
+msgstr "ໃຊ້ເມນູເລີ່ມຕົ້ນ(_D)"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
+msgid "Ed_it Menu"
+msgstr "ແກ້ໄຂເມນູ(_I)"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
+msgid "Use c_ustom menu file:"
+msgstr "ໃຊ້ໄຟລ໌ເມນູທີ່ກຳນົດເອງ(_U):"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:16
+msgid "Menu _file:"
+msgstr "ໄຟລ໌ເມນູ(_F):"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:17
+msgid "Select A Menu File"
+msgstr "ເລືອກໄຟລ໌ເມນູ"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:18
+msgid "Menu File"
+msgstr "ໄຟລ໌ເມນູ"
+
+#. I18N: default tooltip of the application menu
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
+msgid "Applications"
+msgstr "ແອັບພລິເຄຊັນ"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:609
+#: ../plugins/directorymenu/directorymenu.c:469
+msgid "Select An Icon"
+msgstr "ເລືອກໄອຄອນ"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:612
+#: ../plugins/directorymenu/directorymenu.c:472
+msgid "_OK"
+msgstr "ຕົກລົງ(_O)"
+
+#. show an error dialog
+#: ../plugins/applicationsmenu/applicationsmenu.c:650
+#: ../plugins/clock/clock.c:1072 ../plugins/launcher/launcher.c:2487
+#, c-format
+msgid "Failed to execute command \"%s\"."
+msgstr "ບໍ່ສາມາດປະຕິບັດຄຳສັ່ງ \"%s\"."
+
+#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
+msgid "Show a menu containing categories of installed applications"
+msgstr "ສະແດງເມນູທີ່ແບ່ງໝວດໝູ່ຂອງແອັບພລິເຄຊັນທີ່ຕິດຕັ້ງໄວ້"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:27
+msgid "Usage:"
+msgstr "ວິທີໃຊ້:"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
+msgid "OPTION"
+msgstr "ຕົວເລືອກ"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:30
+msgid "Options:"
+msgstr "ຕົວເລືອກ:"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
+msgid "Popup menu at current mouse position"
+msgstr "ສະແດງເມນູປັອບອັບຢູ່ຕຳແໜ່ງເມົາສ໌ປັດຈຸບັນ"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
+msgid "Show help options"
+msgstr "ສະແດງຕົວເລືອກການຊ່ວຍເຫຼືອ"
+
+#. TRANSLATORS: adjust this accordingly for your locale format
+#: ../plugins/clock/clock.c:47
+msgctxt "Date"
+msgid "%A %d %B %Y"
+msgstr "%A %d %B %Y"
+
+#: ../plugins/clock/clock.c:178
+msgid "Week %V"
+msgstr "ອາທິດ %V"
+
+#: ../plugins/clock/clock.c:490
+msgid "Failed to execute clock command"
+msgstr "ບໍ່ສາມາດປະຕິບັດຄຳສັ່ງໂມງ"
+
+#: ../plugins/clock/clock.c:1011
+msgid "Custom Format"
+msgstr "ຮູບແບບກຳນົດເອງ"
+
+#: ../plugins/clock/clock-dialog.glade.h:1
+msgid "Decimal"
+msgstr "ເລກຖານສິບ"
+
+#: ../plugins/clock/clock-dialog.glade.h:2
+msgid "Sexagesimal"
+msgstr "ເລກຖານຫົກສິບ"
+
+#: ../plugins/clock/clock-dialog.glade.h:3
+msgid "Binary time"
+msgstr "ເວລາເລກຖານສອງ"
+
+#: ../plugins/clock/clock-dialog.glade.h:4
+msgid "Date, then time"
+msgstr "ວັນທີ, ແລ້ວຈຶ່ງເວລາ"
+
+#: ../plugins/clock/clock-dialog.glade.h:5
+msgid "Time, then date"
+msgstr "ເວລາ, ແລ້ວຈຶ່ງວັນທີ"
+
+#: ../plugins/clock/clock-dialog.glade.h:6
+msgid "Date Only"
+msgstr "ວັນທີເທົ່ານັ້ນ"
+
+#: ../plugins/clock/clock-dialog.glade.h:7
+msgid "Time Only"
+msgstr "ເວລາເທົ່ານັ້ນ"
+
+#: ../plugins/clock/clock-dialog.glade.h:8
+msgid "Analog"
+msgstr "ອານາລັອກ (ເຂັມ)"
+
+#: ../plugins/clock/clock-dialog.glade.h:9
+msgid "Binary"
+msgstr "ເລກຖານສອງ"
+
+#: ../plugins/clock/clock-dialog.glade.h:10
+msgid "Digital"
+msgstr "ດິຈິຕອນ"
+
+#: ../plugins/clock/clock-dialog.glade.h:11
+msgid "Fuzzy"
+msgstr "ແບບປະມານ"
+
+#: ../plugins/clock/clock-dialog.glade.h:12
+msgid "LCD"
+msgstr "LCD"
+
+#: ../plugins/clock/clock-dialog.glade.h:13
+#: ../plugins/clock/clock.desktop.in.in.h:1
+msgid "Clock"
+msgstr "ໂມງ"
+
+#: ../plugins/clock/clock-dialog.glade.h:16
+msgid ""
+"Name of a timezone corresponding a file in the zoneinfo database, for "
+"example \"America/New_York\". Leave empty to use the localtime."
+msgstr ""
+"ຊື່ຂອງເຂດເວລາທີ່ກົງກັບໄຟລ໌ໃນຖານຂໍ້ມູນ zoneinfo, ຕົວຢ່າງ \"Asia/Vientiane\". "
+"ປະວ່າງໄວ້ເພື່ອໃຊ້ເວລາທ້ອງຖິ່ນ."
+
+#: ../plugins/clock/clock-dialog.glade.h:17
+msgid "Time_zone:"
+msgstr "ເຂດເວລາ(_Z):"
+
+#: ../plugins/clock/clock-dialog.glade.h:18
+msgid "Time and Date _Settings..."
+msgstr "ການຕັ້ງຄ່າເວລາ ແລະ ວັນທີ(_S)..."
+
+#: ../plugins/clock/clock-dialog.glade.h:19
+msgid "Time Settings"
+msgstr "ຕັ້ງຄ່າເວລາ"
+
+#: ../plugins/clock/clock-dialog.glade.h:20
+msgid ""
+"If set, this command is run when the plugin is left-clicked, instead of "
+"displaying the default calendar."
+msgstr ""
+"ຫາກຕັ້ງໄວ້, ຄຳສັ່ງນີ້ຈະເຮັດວຽກເມື່ອຄລິກຊ້າຍທີ່ປລັກອິນ, "
+"ແທນທີ່ຈະສະແດງປະຕິທິນເລີ່ມຕົ້ນ."
+
+#: ../plugins/clock/clock-dialog.glade.h:21
+msgid "Co_mmand:"
+msgstr "ຄຳສັ່ງ(_M):"
+
+#: ../plugins/clock/clock-dialog.glade.h:22
+msgid "Calendar"
+msgstr "ປະຕິທິນ"
+
+#: ../plugins/clock/clock-dialog.glade.h:24
+#, no-c-format
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"page for additional information."
+msgstr ""
+"ຮູບແບບທີ່ໃຊ້ກຳນົດສ່ວນຂອງວັນທີ ແລະ ເວລາທີ່ຈະໃສ່ໃນແຖບ. ຕົວຢ່າງ, %Y "
+"ຈະຖືກແທນທີ່ດ້ວຍປີ, %m ແທນທີ່ດ້ວຍເດືອນ ແລະ %d ແທນທີ່ດ້ວຍວັນ. ໃນທຳນອງດຽວກັນ, "
+"ແທັກ <b></b> ຈະເຮັດໃຫ້ຂໍ້ຄວາມເປັນຕົວໜາ. ເບິ່ງໜ້າ \"ຊ່ວຍເຫຼືອ\" "
+"ສຳລັບຂໍ້ມູນເພີ່ມເຕີມ."
+
+#: ../plugins/clock/clock-dialog.glade.h:25
+msgid "_Tooltip format:"
+msgstr "ຮູບແບບຄຳແນະນຳເຄື່ອງມື(_T):"
+
+#: ../plugins/clock/clock-dialog.glade.h:26
+msgid "_Layout:"
+msgstr "ຜັງການຈັດວາງ(_L):"
+
+#: ../plugins/clock/clock-dialog.glade.h:28
+msgid "Sho_w AM/PM"
+msgstr "ສະແດງ AM/PM(_W)"
+
+#: ../plugins/clock/clock-dialog.glade.h:29
+msgid "Fl_ash time separators"
+msgstr "ຕົວຂັ້ນເວລາແບບກະພິບ(_A)"
+
+#: ../plugins/clock/clock-dialog.glade.h:30
+msgid "24-_hour clock"
+msgstr "ໂມງແບບ 24 ຊົ່ວໂມງ(_H)"
+
+#: ../plugins/clock/clock-dialog.glade.h:31
+msgid "Binary mode:"
+msgstr "ໂໝດເລກຖານສອງ:"
+
+#: ../plugins/clock/clock-dialog.glade.h:32
+msgid "Display _seconds"
+msgstr "ສະແດງວິນາທີ(_S)"
+
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
+#: ../plugins/clock/clock-dialog.glade.h:34
+msgid "F_uzziness:"
+msgstr "ລະດັບການປະມານ(_U):"
+
+#: ../plugins/clock/clock-dialog.glade.h:35
+msgid "Show _inactive dots"
+msgstr "ສະແດງຈຸດທີ່ບໍ່ໄດ້ໃຊ້(_I)"
+
+#: ../plugins/clock/clock-dialog.glade.h:36
+msgid "Show gri_d"
+msgstr "ສະແດງເສັ້ນຕາຕະລາງ(_D)"
+
+#: ../plugins/clock/clock-dialog.glade.h:37
+msgid "Font:"
+msgstr "ຟອນ:"
+
+#: ../plugins/clock/clock-dialog.glade.h:38
+msgid "Format:"
+msgstr "ຮູບແບບ:"
+
+#: ../plugins/clock/clock-dialog.glade.h:40
+#, no-c-format
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
+"the &quot;Help&quot; page for additional information."
+msgstr ""
+"ຮູບແບບທີ່ໃຊ້ກຳນົດສ່ວນຂອງວັນທີ ແລະ ເວລາທີ່ຈະໃສ່ໃນແຖບ. ຕົວຢ່າງ, %Y "
+"ຈະຖືກແທນທີ່ດ້ວຍປີ, %m ແທນທີ່ດ້ວຍເດືອນ ແລະ %d ແທນທີ່ດ້ວຍວັນ. ໃນທຳນອງດຽວກັນ, "
+"ແທັກ &lt;b&gt;&lt;/b&gt; ຈະເຮັດໃຫ້ຂໍ້ຄວາມເປັນຕົວໜາ. ເບິ່ງໜ້າ "
+"&quot;ຊ່ວຍເຫຼືອ&quot; ສຳລັບຂໍ້ມູນເພີ່ມເຕີມ."
+
+#: ../plugins/clock/clock-dialog.glade.h:41
+msgid "Date"
+msgstr "ວັນທີ"
+
+#: ../plugins/clock/clock-dialog.glade.h:42
+msgid "Time"
+msgstr "ເວລາ"
+
+#: ../plugins/clock/clock-dialog.glade.h:43
+msgid "Clock Options"
+msgstr "ຕົວເລືອກໂມງ"
+
+#. TRANSLATORS: adjust this accordingly for your locale format
+#: ../plugins/clock/clock-digital.h:25
+msgctxt "Time"
+msgid "%R"
+msgstr "%R"
+
+#: ../plugins/clock/clock-digital.h:26
+msgctxt "Date"
+msgid "%Y-%m-%d"
+msgstr "%Y-%m-%d"
+
+#: ../plugins/clock/clock-digital.h:27
+msgctxt "Time"
+msgid "%a %_d %b, %R"
+msgstr "%a %_d %b, %R"
+
+#: ../plugins/clock/clock-fuzzy.c:88
+msgid "Night"
+msgstr "ກາງຄືນ"
+
+#: ../plugins/clock/clock-fuzzy.c:89
+msgid "Early morning"
+msgstr "ຕອນເຊົ້າມືດ"
+
+#: ../plugins/clock/clock-fuzzy.c:90
+msgid "Morning"
+msgstr "ຕອນເຊົ້າ"
+
+#: ../plugins/clock/clock-fuzzy.c:91
+msgid "Almost noon"
+msgstr "ເກືອບທ່ຽງ"
+
+#: ../plugins/clock/clock-fuzzy.c:92
+msgid "Noon"
+msgstr "ຕອນທ່ຽງ"
+
+#: ../plugins/clock/clock-fuzzy.c:93
+msgid "Afternoon"
+msgstr "ຕອນບ່າຍ"
+
+#: ../plugins/clock/clock-fuzzy.c:94
+msgid "Evening"
+msgstr "ຕອນແລງ"
+
+#: ../plugins/clock/clock-fuzzy.c:95
+msgid "Late evening"
+msgstr "ຕອນເດິກ"
+
+#. I18N: %0 will be replaced with the preceding hour, %1 with
+#. * the comming hour
+#: ../plugins/clock/clock-fuzzy.c:102
+#, no-c-format
+msgid "%0 o'clock"
+msgstr "%0 ໂມງ"
+
+#: ../plugins/clock/clock-fuzzy.c:103
+#, no-c-format
+msgid "five past %0"
+msgstr "%0 ໂມງ ຫ້ານາທີ"
+
+#: ../plugins/clock/clock-fuzzy.c:104
+#, no-c-format
+msgid "ten past %0"
+msgstr "%0 ໂມງ ສິບນາທີ"
+
+#: ../plugins/clock/clock-fuzzy.c:105
+#, no-c-format
+msgid "quarter past %0"
+msgstr "%0 ໂມງ ສິບຫ້ານາທີ"
+
+#: ../plugins/clock/clock-fuzzy.c:106
+#, no-c-format
+msgid "twenty past %0"
+msgstr "%0 ໂມງ ຊາວນາທີ"
+
+#: ../plugins/clock/clock-fuzzy.c:107
+#, no-c-format
+msgid "twenty five past %0"
+msgstr "%0 ໂມງ ຊາວຫ້ານາທີ"
+
+#: ../plugins/clock/clock-fuzzy.c:108
+#, no-c-format
+msgid "half past %0"
+msgstr "%0 ໂມງເຄິ່ງ"
+
+#: ../plugins/clock/clock-fuzzy.c:109
+#, no-c-format
+msgid "twenty five to %1"
+msgstr "ອີກຊາວຫ້ານາທີ %1 ໂມງ"
+
+#: ../plugins/clock/clock-fuzzy.c:110
+#, no-c-format
+msgid "twenty to %1"
+msgstr "ອີກຊາວນາທີ %1 ໂມງ"
+
+#: ../plugins/clock/clock-fuzzy.c:111
+#, no-c-format
+msgid "quarter to %1"
+msgstr "ອີກສິບຫ້ານາທີ %1 ໂມງ"
+
+#: ../plugins/clock/clock-fuzzy.c:112
+#, no-c-format
+msgid "ten to %1"
+msgstr "ອີກສິບນາທີ %1 ໂມງ"
+
+#: ../plugins/clock/clock-fuzzy.c:113
+#, no-c-format
+msgid "five to %1"
+msgstr "ອີກຫ້ານາທີ %1 ໂມງ"
+
+#: ../plugins/clock/clock-fuzzy.c:114
+#, no-c-format
+msgid "%1 o'clock"
+msgstr "%1 ໂມງ"
+
+#. I18N: some languages have a singular form for the first hour,
+#. * other languages should just use the same strings as above
+#: ../plugins/clock/clock-fuzzy.c:121
+#, no-c-format
+msgctxt "one"
+msgid "%0 o'clock"
+msgstr "%0 ໂມງ"
+
+#: ../plugins/clock/clock-fuzzy.c:122
+#, no-c-format
+msgctxt "one"
+msgid "five past %0"
+msgstr "%0 ໂມງ ຫ້ານາທີ"
+
+#: ../plugins/clock/clock-fuzzy.c:123
+#, no-c-format
+msgctxt "one"
+msgid "ten past %0"
+msgstr "%0 ໂມງ ສິບນາທີ"
+
+#: ../plugins/clock/clock-fuzzy.c:124
+#, no-c-format
+msgctxt "one"
+msgid "quarter past %0"
+msgstr "%0 ໂມງ ສິບຫ້ານາທີ"
+
+#: ../plugins/clock/clock-fuzzy.c:125
+#, no-c-format
+msgctxt "one"
+msgid "twenty past %0"
+msgstr "%0 ໂມງ ຊາວນາທີ"
+
+#: ../plugins/clock/clock-fuzzy.c:126
+#, no-c-format
+msgctxt "one"
+msgid "twenty five past %0"
+msgstr "%0 ໂມງ ຊາວຫ້ານາທີ"
+
+#: ../plugins/clock/clock-fuzzy.c:127
+#, no-c-format
+msgctxt "one"
+msgid "half past %0"
+msgstr "%0 ໂມງເຄິ່ງ"
+
+#: ../plugins/clock/clock-fuzzy.c:128
+#, no-c-format
+msgctxt "one"
+msgid "twenty five to %1"
+msgstr "ອີກຊາວຫ້ານາທີ %1 ໂມງ"
+
+#: ../plugins/clock/clock-fuzzy.c:129
+#, no-c-format
+msgctxt "one"
+msgid "twenty to %1"
+msgstr "ອີກຊາວນາທີ %1 ໂມງ"
+
+#: ../plugins/clock/clock-fuzzy.c:130
+#, no-c-format
+msgctxt "one"
+msgid "quarter to %1"
+msgstr "ອີກສິບຫ້ານາທີ %1 ໂມງ"
+
+#: ../plugins/clock/clock-fuzzy.c:131
+#, no-c-format
+msgctxt "one"
+msgid "ten to %1"
+msgstr "ອີກສິບນາທີ %1 ໂມງ"
+
+#: ../plugins/clock/clock-fuzzy.c:132
+#, no-c-format
+msgctxt "one"
+msgid "five to %1"
+msgstr "ອີກຫ້ານາທີ %1 ໂມງ"
+
+#: ../plugins/clock/clock-fuzzy.c:133
+#, no-c-format
+msgctxt "one"
+msgid "%1 o'clock"
+msgstr "%1 ໂມງ"
+
+#: ../plugins/clock/clock-fuzzy.c:138
+msgctxt "am"
+msgid "one"
+msgstr "ໜຶ່ງ"
+
+#: ../plugins/clock/clock-fuzzy.c:139
+msgctxt "am"
+msgid "two"
+msgstr "ສອງ"
+
+#: ../plugins/clock/clock-fuzzy.c:140
+msgctxt "am"
+msgid "three"
+msgstr "ສາມ"
+
+#: ../plugins/clock/clock-fuzzy.c:141
+msgctxt "am"
+msgid "four"
+msgstr "ສີ່"
+
+#: ../plugins/clock/clock-fuzzy.c:142
+msgctxt "am"
+msgid "five"
+msgstr "ຫ້າ"
+
+#: ../plugins/clock/clock-fuzzy.c:143
+msgctxt "am"
+msgid "six"
+msgstr "ຫົກ"
+
+#: ../plugins/clock/clock-fuzzy.c:144
+msgctxt "am"
+msgid "seven"
+msgstr "ເຈັດ"
+
+#: ../plugins/clock/clock-fuzzy.c:145
+msgctxt "am"
+msgid "eight"
+msgstr "ແປດ"
+
+#: ../plugins/clock/clock-fuzzy.c:146
+msgctxt "am"
+msgid "nine"
+msgstr "ເກົ້າ"
+
+#: ../plugins/clock/clock-fuzzy.c:147
+msgctxt "am"
+msgid "ten"
+msgstr "ສິບ"
+
+#: ../plugins/clock/clock-fuzzy.c:148
+msgctxt "am"
+msgid "eleven"
+msgstr "ສິບເອັດ"
+
+#. I18N: 12 AM is midnight
+#: ../plugins/clock/clock-fuzzy.c:150
+msgctxt "am"
+msgid "twelve"
+msgstr "ສິບສອງ"
+
+#: ../plugins/clock/clock-fuzzy.c:155
+msgctxt "pm"
+msgid "one"
+msgstr "ໜຶ່ງ"
+
+#: ../plugins/clock/clock-fuzzy.c:156
+msgctxt "pm"
+msgid "two"
+msgstr "ສອງ"
+
+#: ../plugins/clock/clock-fuzzy.c:157
+msgctxt "pm"
+msgid "three"
+msgstr "ສາມ"
+
+#: ../plugins/clock/clock-fuzzy.c:158
+msgctxt "pm"
+msgid "four"
+msgstr "ສີ່"
+
+#: ../plugins/clock/clock-fuzzy.c:159
+msgctxt "pm"
+msgid "five"
+msgstr "ຫ້າ"
+
+#: ../plugins/clock/clock-fuzzy.c:160
+msgctxt "pm"
+msgid "six"
+msgstr "ຫົກ"
+
+#: ../plugins/clock/clock-fuzzy.c:161
+msgctxt "pm"
+msgid "seven"
+msgstr "ເຈັດ"
+
+#: ../plugins/clock/clock-fuzzy.c:162
+msgctxt "pm"
+msgid "eight"
+msgstr "ແປດ"
+
+#: ../plugins/clock/clock-fuzzy.c:163
+msgctxt "pm"
+msgid "nine"
+msgstr "ເກົ້າ"
+
+#: ../plugins/clock/clock-fuzzy.c:164
+msgctxt "pm"
+msgid "ten"
+msgstr "ສິບ"
+
+#: ../plugins/clock/clock-fuzzy.c:165
+msgctxt "pm"
+msgid "eleven"
+msgstr "ສິບເອັດ"
+
+#. I18N: 12 PM is noon
+#: ../plugins/clock/clock-fuzzy.c:167
+msgctxt "pm"
+msgid "twelve"
+msgstr "ສິບສອງ"
+
+#: ../plugins/clock/clock.desktop.in.in.h:2
+msgid "What time is it?"
+msgstr "ຕອນນີ້ເວລາຈັກໂມງແລ້ວ?"
+
+#: ../plugins/directorymenu/directorymenu.c:299
+#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
+msgid "Directory Menu"
+msgstr "ເມນູໂຟນເດີ"
+
+#: ../plugins/directorymenu/directorymenu.c:696
+#, c-format
+msgid "Failed to launch application \"%s\""
+msgstr "ບໍ່ສາມາດເລີ່ມແອັບພລິເຄຊັນ \"%s\""
+
+#: ../plugins/directorymenu/directorymenu.c:728
+#, c-format
+msgid "Failed to query content type for \"%s\""
+msgstr "ບໍ່ສາມາດສອບຖາມປະເພດເນື້ອຫາສຳລັບ \"%s\""
+
+#: ../plugins/directorymenu/directorymenu.c:737
+#, c-format
+msgid "No default application found for \"%s\""
+msgstr "ບໍ່ພົບແອັບພລິເຄຊັນເລີ່ມຕົ້ນສຳລັບ \"%s\""
+
+#: ../plugins/directorymenu/directorymenu.c:753
+#, c-format
+msgid "Failed to launch default application for \"%s\""
+msgstr "ບໍ່ສາມາດເລີ່ມແອັບພລິເຄຊັນເລີ່ມຕົ້ນສຳລັບ \"%s\""
+
+#: ../plugins/directorymenu/directorymenu.c:848
+#, c-format
+msgid "Failed to execute the preferred application for category \"%s\""
+msgstr "ບໍ່ສາມາດປະຕິບັດແອັບພລິເຄຊັນທີ່ຕ້ອງການສຳລັບໝວດໝູ່ \"%s\""
+
+#: ../plugins/directorymenu/directorymenu.c:929
+msgid "Create New Folder"
+msgstr "ສ້າງໂຟນເດີໃໝ່"
+
+#: ../plugins/directorymenu/directorymenu.c:934
+msgid "Create New Text Document"
+msgstr "ສ້າງເອກະສານຂໍ້ຄວາມໃໝ່"
+
+#: ../plugins/directorymenu/directorymenu.c:941
+msgid "C_reate"
+msgstr "ສ້າງ(_R)"
+
+#: ../plugins/directorymenu/directorymenu.c:942
+msgid "Create & _Open"
+msgstr "ສ້າງ ແລະ ເປີດ(_O)"
+
+#: ../plugins/directorymenu/directorymenu.c:956
+msgid "Enter the new name:"
+msgstr "ໃສ່ຊື່ໃໝ່:"
+
+#: ../plugins/directorymenu/directorymenu.c:992
+#, c-format
+msgid "Failed to create folder: %s"
+msgstr "ບໍ່ສາມາດສ້າງໂຟນເດີ: %s"
+
+#: ../plugins/directorymenu/directorymenu.c:1075
+msgid "Open Folder"
+msgstr "ເປີດໂຟນເດີ"
+
+#: ../plugins/directorymenu/directorymenu.c:1088
+msgid "Open in Terminal"
+msgstr "ເປີດໃນເທີມີນອລ"
+
+#: ../plugins/directorymenu/directorymenu.c:1101
+msgid "Create Folder..."
+msgstr "ສ້າງໂຟນເດີ..."
+
+#: ../plugins/directorymenu/directorymenu.c:1114
+msgid "Create Text Document..."
+msgstr "ສ້າງເອກະສານຂໍ້ຄວາມ..."
+
+#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
+msgid "Show a directory tree in a menu"
+msgstr "ສະແດງໂຄງສ້າງໂຟນເດີໃນເມນູ"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
+msgid "Select A Directory"
+msgstr "ເລືອກໂຟນເດີ"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
+msgid "_Base Directory:"
+msgstr "ໂຟນເດີຫຼັກ(_B):"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
+msgid "Show 'New Text _Document'"
+msgstr "ສະແດງ 'ສ້າງເອກະສານຂໍ້ຄວາມໃໝ່'(_D)"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+msgid "Show '_New Folder'"
+msgstr "ສະແດງ 'ສ້າງໂຟນເດີໃໝ່'(_N)"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
+msgid "Show 'Open in _Terminal'"
+msgstr "ສະແດງ 'ເປີດໃນເທີມີນອລ'(_T)"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
+msgid "Show '_Open _Folder'"
+msgstr "ສະແດງ 'ເປີດໂຟນເດີ'(_O)"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:12
+msgid "Menu"
+msgstr "ເມນູ"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:13
+msgid "Show _hidden files"
+msgstr "ສະແດງໄຟລ໌ທີ່ຊ່ອນຢູ່(_H)"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:14
+msgid ""
+"Enter a list of patterns that will be used to determine which files are "
+"visible in a directory. If you specify more than one pattern here, the list "
+"items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr ""
+"ໃສ່ລາຍການຮູບແບບທີ່ຈະໃຊ້ກຳນົດວ່າໄຟລ໌ໃດຈະສະແດງໃຫ້ເຫັນໃນໂຟນເດີ. "
+"ຫາກທ່ານລະບຸຫຼາຍກວ່າໜຶ່ງຮູບແບບ, ຕ້ອງຂັ້ນແຕ່ລະລາຍການດ້ວຍເຄື່ອງໝາຍຈ້ຳຈຸດ (ເຊັ່ນ"
+" *.txt;*.doc)."
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:15
+msgid "_File Pattern:"
+msgstr "ຮູບແບບໄຟລ໌(_F):"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:28
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:12
+msgid "Filtering"
+msgstr "ການກັ່ນຕອງ"
+
+#: ../plugins/launcher/launcher.c:401
+msgid "Open launcher menu"
+msgstr "ເປີດເມນູຕົວເລີ່ມ"
+
+#: ../plugins/launcher/launcher.c:1599
+msgid "Unnamed Item"
+msgstr "ລາຍການທີ່ບໍ່ມີຊື່"
+
+#: ../plugins/launcher/launcher.c:1801
+msgid "No items"
+msgstr "ບໍ່ມີລາຍການ"
+
+#: ../plugins/launcher/launcher-dialog.c:794
+msgid "Failed to open desktop item editor"
+msgstr "ບໍ່ສາມາດເປີດຕົວແກ້ໄຂລາຍການເດັສທັອບ"
+
+#: ../plugins/launcher/launcher-dialog.c:862
+msgid "If you delete an item, it will be permanently removed"
+msgstr "ຫາກທ່ານລຶບລາຍການ, ມັນຈະຖືກລຶບອອກຢ່າງຖາວອນ"
+
+#: ../plugins/launcher/launcher-dialog.c:863
+#, c-format
+msgid "Are you sure you want to remove \"%s\"?"
+msgstr "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບ \"%s\" ອອກ?"
+
+#: ../plugins/launcher/launcher-dialog.c:864
+msgid "Unnamed item"
+msgstr "ລາຍການທີ່ບໍ່ມີຊື່"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:1
+msgid "Default"
+msgstr "ເລີ່ມຕົ້ນ"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:2
+msgid "North"
+msgstr "ທິດເໜືອ"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:3
+msgid "West"
+msgstr "ທິດຕາເວັນຕົກ"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:4
+msgid "East"
+msgstr "ທິດຕາເວັນອອກ"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:5
+msgid "South"
+msgstr "ທິດໃຕ້"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:6
+msgid "Inside Button"
+msgstr "ພາຍໃນປຸ່ມ"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:7
+msgid "Up"
+msgstr "ຂຶ້ນ"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:8
+msgid "Down"
+msgstr "ລົງ"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:9
+msgid "_Edit Item"
+msgstr "ແກ້ໄຂລາຍການ(_E)"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:10
+msgid "D_elete Item"
+msgstr "ລຶບລາຍການ(_E)"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:11
+msgid "Add Appli_cation"
+msgstr "ເພີ່ມແອັບພລິເຄຊັນ(_C)"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:12
+msgid "New _Application"
+msgstr "ແອັບພລິເຄຊັນໃໝ່(_A)"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:13
+msgid "New _Link"
+msgstr "ລິ້ງໃໝ່(_L)"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:15
+msgid "Add one or more existing items to the launcher"
+msgstr "ເພີ່ມລາຍການທີ່ມີຢູ່ແລ້ວໜຶ່ງຢ່າງ ຫຼື ຫຼາຍກວ່າເຂົ້າໃນຕົວເລີ່ມ"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:19
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
+msgid "Launcher"
+msgstr "ຕົວເລີ່ມ"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:24
+msgid "Delete the currently selected item"
+msgstr "ລຶບລາຍການທີ່ເລືອກໃນປັດຈຸບັນອອກ"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:25
+msgid "Add a new empty item"
+msgstr "ເພີ່ມລາຍການໃໝ່ທີ່ຫວ່າງເປົ່າ"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:26
+msgid "Add a new hyperlink"
+msgstr "ເພີ່ມໄຮເປີລິ້ງໃໝ່"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:28
+msgid "Disable t_ooltips"
+msgstr "ປິດຄຳແນະນຳເຄື່ອງມື(_O)"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:29
+msgid ""
+"Select this option to disable the tooltips when moving over the panel button"
+" or menu items."
+msgstr ""
+"ເລືອກຕົວເລືອກນີ້ເພື່ອປິດຄຳແນະນຳເຄື່ອງມື ເມື່ອຍ້າຍເມົາສ໌ໄປເທິງປຸ່ມແຖບ ຫຼື "
+"ລາຍການເມນູ."
+
+#: ../plugins/launcher/launcher-dialog.glade.h:30
+msgid "Show _label instead of icon"
+msgstr "ສະແດງປ້າຍຊື່ແທນໄອຄອນ(_L)"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:31
+msgid "Show last _used item in panel"
+msgstr "ສະແດງລາຍການທີ່ໃຊ້ລ້າສຸດໃນແຖບ(_U)"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:32
+msgid "Select this option to move the clicked menu item to the panel."
+msgstr "ເລືອກຕົວເລືອກນີ້ເພື່ອຍ້າຍລາຍການເມນູທີ່ຖືກຄລິກໄປໄວ້ທີ່ແຖບ."
+
+#: ../plugins/launcher/launcher-dialog.glade.h:33
+msgid "_Arrow button position:"
+msgstr "ຕຳແໜ່ງປຸ່ມລູກສອນ(_A):"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:34
+msgid "Advanced"
+msgstr "ຂັ້ນສູງ"
+
+#: ../plugins/launcher/launcher.desktop.in.in.h:2
+msgid "Program launcher with optional menu"
+msgstr "ຕົວເລີ່ມໂປຣແກຣມພ້ອມເມນູເສີມ"
+
+#: ../plugins/pager/pager.c:665 ../plugins/pager/pager-dialog.glade.h:6
+msgid "Workspace _Settings..."
+msgstr "ຕັ້ງຄ່າພື້ນທີ່ເຮັດວຽກ(_S)..."
+
+#: ../plugins/pager/pager.c:759
+msgid "Unable to open the workspace settings"
+msgstr "ບໍ່ສາມາດເປີດການຕັ້ງຄ່າພື້ນທີ່ເຮັດວຽກ"
+
+#: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:917
+#, c-format
+msgid "Workspace %d"
+msgstr "ພື້ນທີ່ເຮັດວຽກ %d"
+
+#: ../plugins/pager/pager-dialog.glade.h:1
+msgid "Buttons"
+msgstr "ປຸ່ມ"
+
+#: ../plugins/pager/pager-dialog.glade.h:2
+msgid "Miniature View"
+msgstr "ມຸມມອງຂະໜາດນ້ອຍ"
+
+#: ../plugins/pager/pager-dialog.glade.h:3
+#: ../plugins/pager/pager.desktop.in.in.h:1
+msgid "Workspace Switcher"
+msgstr "ຕົວສະຫຼັບພື້ນທີ່ເຮັດວຽກ"
+
+#: ../plugins/pager/pager-dialog.glade.h:7
+msgid "Number of _rows:"
+msgstr "ຈຳນວນແຖວ(_R):"
+
+#: ../plugins/pager/pager-dialog.glade.h:8
+msgid "Show workspace number"
+msgstr "ສະແດງເລກລຳດັບພື້ນທີ່ເຮັດວຽກ"
+
+#: ../plugins/pager/pager-dialog.glade.h:9
+msgid "Switch workspaces using the mouse wheel"
+msgstr "ສະຫຼັບພື້ນທີ່ເຮັດວຽກໂດຍໃຊ້ລູກກິ້ງເມົາສ໌"
+
+#: ../plugins/pager/pager-dialog.glade.h:10
+msgid "Wrap around workspaces"
+msgstr "ວົນຮອບພື້ນທີ່ເຮັດວຽກ"
+
+#: ../plugins/pager/pager-dialog.glade.h:11
+msgid "<b>Appearance</b>"
+msgstr "<b>ຮູບລັກສະນະ</b>"
+
+#: ../plugins/pager/pager.desktop.in.in.h:2
+msgid "Switch between virtual desktops"
+msgstr "ສະຫຼັບລະຫວ່າງເດັສທັອບສະເໝືອນ"
+
+#: ../plugins/separator/separator-dialog.glade.h:1
+msgid "Transparent"
+msgstr "ໂປ່ງໃສ"
+
+#: ../plugins/separator/separator-dialog.glade.h:3
+msgid "Handle"
+msgstr "ບ່ອນຈັບ"
+
+#: ../plugins/separator/separator-dialog.glade.h:4
+msgid "Dots"
+msgstr "ຈຸດ"
+
+#: ../plugins/separator/separator-dialog.glade.h:8
+msgid "_Expand"
+msgstr "ຂະຫຍາຍ(_E)"
+
+#: ../plugins/separator/separator.desktop.in.in.h:2
+msgid "Adds a separator or space between panel items"
+msgstr "ເພີ່ມຕົວຂັ້ນ ຫຼື ຊ່ອງຫວ່າງລະຫວ່າງລາຍການແຖບ"
+
+#: ../plugins/showdesktop/showdesktop.c:241
+msgid "Restore the minimized windows"
+msgstr "ຄືນຄ່າໜ້າຕ່າງທີ່ຫຍໍ້ໄວ້"
+
+#: ../plugins/showdesktop/showdesktop.c:243
+msgid "Minimize all open windows and show the desktop"
+msgstr "ຫຍໍ້ໜ້າຕ່າງທີ່ເປີດຢູ່ທັງໝົດ ແລະ ສະແດງເດັສທັອບ"
+
+#: ../plugins/showdesktop/showdesktop.c:246
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
+msgid "Show Desktop"
+msgstr "ສະແດງເດັສທັອບ"
+
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
+msgid "Hide all windows and show the desktop"
+msgstr "ຊ່ອນໜ້າຕ່າງທັງໝົດ ແລະ ສະແດງເດັສທັອບ"
+
+#: ../plugins/systray/sn-dialog.c:653
+msgid "Clear"
+msgstr "ລ້າງຄ່າ"
+
+#: ../plugins/systray/sn-dialog.c:654
+msgid "Are you sure you want to clear the list of known items?"
+msgstr "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລ້າງລາຍຊື່ລາຍການທີ່ຮູ້ຈັກ?"
+
+#: ../plugins/systray/sn-dialog.glade.h:1
+msgid "Status Tray Items"
+msgstr "ລາຍການໃນຖາດສະຖານະ"
+
+#: ../plugins/systray/sn-dialog.glade.h:2
+msgid "C_lear Known Items"
+msgstr "ລ້າງລາຍການທີ່ຮູ້ຈັກ(_L)"
+
+#: ../plugins/systray/sn-dialog.glade.h:3
+msgid "Resets the list of items and their visibility settings"
+msgstr "ລ້າງຄ່າລາຍການ ແລະ ການຕັ້ງຄ່າການສະແດງຜົນຂອງພວກມັນ"
+
+#: ../plugins/systray/sn-dialog.glade.h:4
+msgid "_Fixed icon size (pixels):"
+msgstr "ກຳນົດຂະໜາດໄອຄອນຕາຍຕົວ (ພິກເຊວ)(_F):"
+
+#: ../plugins/systray/sn-dialog.glade.h:5
+msgid "Adjust size _automatically"
+msgstr "ປັບຂະໜາດໂດຍອັດຕະໂນມັດ(_A)"
+
+#: ../plugins/systray/sn-dialog.glade.h:6
+msgid "Icons"
+msgstr "ໄອຄອນ"
+
+#: ../plugins/systray/sn-dialog.glade.h:7
+msgid "Arrange _items in a single row"
+msgstr "ຈັດລຽງລາຍການໃນແຖວດຽວ(_I)"
+
+#: ../plugins/systray/sn-dialog.glade.h:8
+msgid "If enabled, ensure that the items are laid out in a single row"
+msgstr "ຫາກເປີດໃຊ້, ຈະຈັດລຽງລາຍການໃຫ້ຢູ່ໃນແຖວດຽວ"
+
+#: ../plugins/systray/sn-dialog.glade.h:9
+msgid "_Hide items by default"
+msgstr "ຊ່ອນລາຍການໂດຍເລີ່ມຕົ້ນ(_H)"
+
+#: ../plugins/systray/sn-dialog.glade.h:10
+msgid "When enabled, all new items will be marked as \"Hidden\""
+msgstr "ເມື່ອເປີດໃຊ້, ລາຍການໃໝ່ທັງໝົດຈະຖືກກຳນົດເປັນ \"ຊ່ອນຢູ່\""
+
+#: ../plugins/systray/sn-dialog.glade.h:11
+msgid "_Square items"
+msgstr "ລາຍການແບບຈະຕຸລັດ(_S)"
+
+#: ../plugins/systray/sn-dialog.glade.h:12
+msgid "Item buttons will take a square when it's possible"
+msgstr "ປຸ່ມລາຍການຈະເປັນຮູບຈະຕຸລັດຫາກເປັນໄປໄດ້"
+
+#: ../plugins/systray/sn-dialog.glade.h:13
+msgid "Behavior"
+msgstr "ພຶດຕິກຳ"
+
+#: ../plugins/systray/sn-dialog.glade.h:14
+msgid "Item"
+msgstr "ລາຍການ"
+
+#: ../plugins/systray/sn-dialog.glade.h:15
+msgid "Hidden"
+msgstr "ຊ່ອນຢູ່"
+
+#: ../plugins/systray/sn-dialog.glade.h:16
+msgid "Move the selected item one row up"
+msgstr "ຍ້າຍລາຍການທີ່ເລືອກຂຶ້ນໜຶ່ງແຖວ"
+
+#: ../plugins/systray/sn-dialog.glade.h:17
+msgid "Move the selected item one row down"
+msgstr "ຍ້າຍລາຍການທີ່ເລືອກລົງໜຶ່ງແຖວ"
+
+#: ../plugins/systray/sn-dialog.glade.h:18
+msgid "Known Items"
+msgstr "ລາຍການທີ່ຮູ້ຈັກ"
+
+#: ../plugins/systray/sn-dialog.glade.h:19
+msgid "_Menu is primary action"
+msgstr "ໃຫ້ເມນູເປັນການກະທຳຫຼັກ(_M)"
+
+#: ../plugins/systray/sn-dialog.glade.h:20
+msgid "Left click will always display the menu for item"
+msgstr "ການຄລິກຊ້າຍຈະສະແດງເມນູສຳລັບລາຍການສະເໝີ"
+
+#: ../plugins/systray/sn-dialog.glade.h:21
+msgid "_Request symbolic icons"
+msgstr "ຮ້ອງຂໍໄອຄອນແບບສັນຍະລັກ(_R)"
+
+#: ../plugins/systray/sn-dialog.glade.h:22
+msgid "Load symbolic icons if available"
+msgstr "ໂຫຼດໄອຄອນແບບສັນຍະລັກຫາກມີໃຫ້ໃຊ້"
+
+#: ../plugins/systray/sn-dialog.glade.h:23
+msgid "Features"
+msgstr "ຄຸນສົມບັດພິເສດ"
+
+#: ../plugins/systray/sn-dialog.glade.h:24
+msgid "Status Notifiers"
+msgstr "ຕົວແຈ້ງເຕືອນສະຖານະ"
+
+#: ../plugins/systray/sn-dialog.glade.h:25
+msgid "Systray Icons"
+msgstr "ໄອຄອນໃນຖາດລະບົບ"
+
+#: ../plugins/systray/systray.c:146
+msgid "Unable to start the notification area"
+msgstr "ບໍ່ສາມາດເລີ່ມເຂດແຈ້ງເຕືອນ"
+
+#. create fake error and show it
+#: ../plugins/systray/systray.c:407
+msgid ""
+"Most likely another widget took over the function of a notification area. "
+"This area will be unused."
+msgstr ""
+"ເປັນໄປໄດ້ວ່າວິດເຈັດອື່ນໄດ້ເຂົ້າມາເຮັດໜ້າທີ່ແທນເຂດແຈ້ງເຕືອນແລ້ວ. "
+"ພື້ນທີ່ນີ້ຈະບໍ່ຖືກໃຊ້ງານ."
+
+#: ../plugins/systray/systray.c:409
+msgid "The notification area lost selection"
+msgstr "ເຂດແຈ້ງເຕືອນສູນເສຍການເລືອກ"
+
+#: ../plugins/systray/systray-manager.c:400
+#, c-format
+msgid "Failed to acquire manager selection for screen %d"
+msgstr "ບໍ່ສາມາດໄດ້ຮັບການເລືອກຕົວຈັດການສຳລັບໜ້າຈໍ %d"
+
+#: ../plugins/systray/systray.desktop.in.in.h:1
+msgid "Status Tray Plugin"
+msgstr "ປລັກອິນຖາດສະຖານະ"
+
+#: ../plugins/systray/systray.desktop.in.in.h:2
+msgid ""
+"Provides status notifier items (application indicators) and legacy systray "
+"items"
+msgstr ""
+"ໃຫ້ບໍລິການລາຍການແຈ້ງເຕືອນສະຖານະ (ຕົວຊີ້ບອກແອັບພລິເຄຊັນ) ແລະ "
+"ລາຍການຖາດລະບົບແບບເກົ່າ"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:1
+msgid "Nothing"
+msgstr "ບໍ່ມີຫຍັງ"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:2
+msgid "Close Window"
+msgstr "ປິດໜ້າຕ່າງ"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:3
+msgid "Minimize Window"
+msgstr "ຫຍໍ້ໜ້າຕ່າງ"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:4
+msgid "New Instance"
+msgstr "ເປີດຕົວໃໝ່ (Instance ໃໝ່)"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+msgid "Timestamp"
+msgstr "ເວລາທີ່ບັນທຶກ (Timestamp)"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:6
+msgid "Group title and timestamp"
+msgstr "ຈັດກຸ່ມຕາມຫົວຂໍ້ ແລະ ເວລາທີ່ບັນທຶກ"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:7
+msgid "Window title"
+msgstr "ຊື່ໜ້າຕ່າງ"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+msgid "Group title and window title"
+msgstr "ຈັດກຸ່ມຕາມຫົວຂໍ້ ແລະ ຊື່ໜ້າຕ່າງ"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:9
+msgid "None, allow drag-and-drop"
+msgstr "ບໍ່ມີ, ອະນຸຍາດໃຫ້ລາກ ແລະ ວາງ"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:1
+msgid "Window Buttons"
+msgstr "ປຸ່ມໜ້າຕ່າງ"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+msgid "Show button _labels"
+msgstr "ສະແດງປ້າຍຊື່ປຸ່ມ(_L)"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+msgid "Show _flat buttons"
+msgstr "ສະແດງປຸ່ມແບບຮາບພຽງ(_F)"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+msgid "Show _handle"
+msgstr "ສະແດງບ່ອນຈັບ(_H)"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+msgid "Show _tooltips"
+msgstr "ສະແດງຄຳແນະນຳເຄື່ອງມື(_T)"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+msgid "Sorting _order:"
+msgstr "ລຳດັບການຈັດລຽງ(_O):"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+msgid "Mi_ddle click action:"
+msgstr "ການກະທຳເມື່ອຄລິກກາງ(_D):"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+msgid "_Group windows by application"
+msgstr "ຈັດກຸ່ມໜ້າຕ່າງຕາມແອັບພລິເຄຊັນ(_G)"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+msgid "Restore minimized windows to current _workspace"
+msgstr "ຄືນຄ່າໜ້າຕ່າງທີ່ຫຍໍ້ໄວ້ໄປຍັງພື້ນທີ່ເຮັດວຽກປັດຈຸບັນ(_W)"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+msgid "D_raw window frame when hovering a button"
+msgstr "ແຕ້ມກອບໜ້າຕ່າງເມື່ອເມົາສ໌ຊີ້ໃສ່ປຸ່ມ(_R)"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
+msgid "_Switch windows using the mouse wheel"
+msgstr "ສະຫຼັບໜ້າຕ່າງໂດຍໃຊ້ລູກກິ້ງເມົາສ໌(_S)"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:24
+msgid "Behaviour"
+msgstr "ພຶດຕິກຳ"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:11
+msgid "Show windows from _all workspaces"
+msgstr "ສະແດງໜ້າຕ່າງຈາກທຸກພື້ນທີ່ເຮັດວຽກ(_A)"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:26
+msgid "Show windows from all mo_nitors"
+msgstr "ສະແດງໜ້າຕ່າງຈາກທຸກໆຈໍພາບ(_N)"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:27
+msgid "Show only _minimized windows"
+msgstr "ສະແດງສະເພາະໜ້າຕ່າງທີ່ຫຍໍ້ໄວ້(_M)"
+
+#: ../plugins/tasklist/tasklist-widget.c:3131
+#, c-format
+msgid "Unable to start new instance of '%s'"
+msgstr "ບໍ່ສາມາດເລີ່ມຕົວເຄື່ອງໃໝ່ຂອງ '%s'"
+
+#: ../plugins/tasklist/tasklist-widget.c:3135
+msgid "Error"
+msgstr "ຂໍ້ຜິດພາດ"
+
+#: ../plugins/tasklist/tasklist-widget.c:3164
+msgid "Launch New Instance"
+msgstr "ເລີ່ມຕົວເຄື່ອງໃໝ່"
+
+#: ../plugins/tasklist/tasklist-widget.c:3911
+msgid "Mi_nimize All"
+msgstr "ຫຍໍ້ທັງໝົດ(_N)"
+
+#: ../plugins/tasklist/tasklist-widget.c:3918
+msgid "Un_minimize All"
+msgstr "ຄືນຄ່າທັງໝົດ(_M)"
+
+#: ../plugins/tasklist/tasklist-widget.c:3925
+msgid "Ma_ximize All"
+msgstr "ຂະຫຍາຍທັງໝົດ(_X)"
+
+#: ../plugins/tasklist/tasklist-widget.c:3932
+msgid "_Unmaximize All"
+msgstr "ຍົກເລີກການຂະຫຍາຍທັງໝົດ(_U)"
+
+#: ../plugins/tasklist/tasklist-widget.c:3943
+msgid "_Close All"
+msgstr "ປິດທັງໝົດ(_C)"
+
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:2
+msgid "Switch between open windows using buttons"
+msgstr "ສະຫຼັບລະຫວ່າງໜ້າຕ່າງທີ່ເປີດຢູ່ໂດຍໃຊ້ປຸ່ມ"
+
+#: ../plugins/windowmenu/windowmenu.c:710
+msgid "Desktop"
+msgstr "ໜ້າຈໍ"
+
+#: ../plugins/windowmenu/windowmenu.c:1320
+msgid "No Windows"
+msgstr "ບໍ່ມີໜ້າຕ່າງ"
+
+#: ../plugins/windowmenu/windowmenu.c:1335
+msgid "Urgent Windows"
+msgstr "ໜ້າຕ່າງດ່ວນ"
+
+#: ../plugins/windowmenu/windowmenu.c:1377
+msgid "Add Workspace"
+msgstr "ເພີ່ມພື້ນທີ່ເຮັດວຽກ"
+
+#: ../plugins/windowmenu/windowmenu.c:1397
+#, c-format
+msgid "Remove Workspace \"%s\""
+msgstr "ລຶບພື້ນທີ່ເຮັດວຽກ \"%s\""
+
+#: ../plugins/windowmenu/windowmenu.c:1399
+#, c-format
+msgid "Remove Workspace %d"
+msgstr "ລຶບພື້ນທີ່ເຮັດວຽກ %d"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
+msgid "Icon"
+msgstr "ໄອຄອນ"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
+msgid "Arrow"
+msgstr "ລູກສອນ"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
+#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:1
+msgid "Window Menu"
+msgstr "ເມນູໜ້າຕ່າງ"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
+msgid "Button layout:"
+msgstr "ຜັງການຈັດວາງປຸ່ມ:"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
+msgid "Show workspace a_ctions"
+msgstr "ສະແດງການກະທຳຂອງພື້ນທີ່ເຮັດວຽກ(_C)"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
+msgid "Show workspace _names"
+msgstr "ສະແດງຊື່ພື້ນທີ່ເຮັດວຽກ(_N)"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
+msgid "Enable _urgency notification"
+msgstr "ເປີດໃຊ້ການແຈ້ງເຕືອນດ່ວນ(_U)"
+
+#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
+msgid "Switch between open windows using a menu"
+msgstr "ສະຫຼັບລະຫວ່າງໜ້າຕ່າງທີ່ເປີດຢູ່ໂດຍໃຊ້ເມນູ"
