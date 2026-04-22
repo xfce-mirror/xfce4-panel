@@ -1858,6 +1858,7 @@ panel_window_size_allocate (GtkWidget *widget,
 
       /* allocate the itembar */
       gtk_widget_size_allocate (child, &child_alloc);
+      gtk_widget_set_clip (child, alloc);
     }
 }
 
