@@ -378,6 +378,37 @@ panel_application_remove_plugin_dialog (GtkWindow *parent,
 
 
 static void
+panel_application_plugin_delete_config (PanelApplication *application,
+                                        const gchar *name,
+                                        gint unique_id)
+{
+  gchar *property;
+  gchar *filename, *path;
+
+  panel_return_if_fail (PANEL_IS_APPLICATION (application));
+  panel_return_if_fail (!xfce_str_is_empty (name));
+  panel_return_if_fail (unique_id != -1);
+
+  /* remove the xfconf property */
+  property = g_strdup_printf (PLUGINS_PROPERTY_BASE, unique_id);
+  if (xfconf_channel_has_property (application->xfconf, property))
+    xfconf_channel_reset_property (application->xfconf, property, TRUE);
+  g_free (property);
+
+  /* lookup the rc file */
+  filename = g_strdup_printf (PANEL_PLUGIN_RC_RELATIVE_PATH, name, unique_id);
+  path = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, filename);
+  g_free (filename);
+
+  /* unlink the rc file */
+  if (G_LIKELY (path != NULL))
+    g_unlink (path);
+  g_free (path);
+}
+
+
+
+static void
 panel_application_load_real (PanelApplication *application)
 {
   PanelWindow *window;
@@ -476,8 +507,7 @@ panel_application_load_real (PanelApplication *application)
                   if (panel_application_remove_plugin_dialog (GTK_WINDOW (window), name))
                     {
                       save_changed_ids = TRUE;
-                      if (xfconf_channel_has_property (application->xfconf, buf))
-                        xfconf_channel_reset_property (application->xfconf, buf, TRUE);
+                      panel_application_plugin_delete_config (application, name, unique_id);
                     }
                   else
                     {
@@ -637,37 +667,6 @@ panel_application_plugin_move (GtkWidget *item,
                     G_CALLBACK (panel_application_plugin_move_drag_end), application);
   g_signal_connect (G_OBJECT (item), "drag-data-get",
                     G_CALLBACK (panel_application_plugin_move_drag_data_get), application);
-}
-
-
-
-static void
-panel_application_plugin_delete_config (PanelApplication *application,
-                                        const gchar *name,
-                                        gint unique_id)
-{
-  gchar *property;
-  gchar *filename, *path;
-
-  panel_return_if_fail (PANEL_IS_APPLICATION (application));
-  panel_return_if_fail (!xfce_str_is_empty (name));
-  panel_return_if_fail (unique_id != -1);
-
-  /* remove the xfconf property */
-  property = g_strdup_printf (PLUGINS_PROPERTY_BASE, unique_id);
-  if (xfconf_channel_has_property (application->xfconf, property))
-    xfconf_channel_reset_property (application->xfconf, property, TRUE);
-  g_free (property);
-
-  /* lookup the rc file */
-  filename = g_strdup_printf (PANEL_PLUGIN_RC_RELATIVE_PATH, name, unique_id);
-  path = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, filename);
-  g_free (filename);
-
-  /* unlink the rc file */
-  if (G_LIKELY (path != NULL))
-    g_unlink (path);
-  g_free (path);
 }
 
 
