@@ -55,6 +55,9 @@ sn_item_is_menu_only (SnItem *item);
 GtkWidget *
 sn_item_get_menu (SnItem *item);
 
+gboolean
+sn_item_needs_attention (SnItem *item);
+
 void
 sn_item_activate (SnItem *item,
                   gint x_root,

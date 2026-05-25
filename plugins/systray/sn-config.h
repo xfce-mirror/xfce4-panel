@@ -37,6 +37,7 @@ G_DECLARE_FINAL_TYPE (SnConfig, sn_config, SN, CONFIG, GObject)
 #define DEFAULT_ORIENTATION GTK_ORIENTATION_HORIZONTAL
 #define DEFAULT_PANEL_ORIENTATION GTK_ORIENTATION_HORIZONTAL
 #define DEFAULT_PANEL_SIZE 28
+#define DEFAULT_TEMP_REVEAL_ATTENTION_ITEMS FALSE
 #define DEFAULT_HIDE_NEW_ITEMS FALSE
 
 typedef enum _SnItemType
@@ -129,6 +130,9 @@ gboolean
 sn_config_items_clear (SnConfig *config);
 gboolean
 sn_config_legacy_items_clear (SnConfig *config);
+
+gboolean
+sn_config_get_temp_reveal_attention_items (SnConfig *config);
 
 G_END_DECLS
 
