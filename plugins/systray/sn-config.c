@@ -58,6 +58,7 @@ struct _SnConfig
   gboolean symbolic_icons;
   gboolean menu_is_primary;
   gboolean hide_new_items;
+  gboolean temp_reveal_attention_items;
   GList *known_items[N_SN_ITEM_TYPES];
   GHashTable *hidden_items[N_SN_ITEM_TYPES];
 
@@ -84,6 +85,7 @@ enum
   PROP_HIDE_NEW_ITEMS,
   PROP_KNOWN_ITEMS,
   PROP_HIDDEN_ITEMS,
+  PROP_TEMP_REVEAL_ATTENTION_ITEMS,
   PROP_KNOWN_LEGACY_ITEMS,
   PROP_HIDDEN_LEGACY_ITEMS
 };
@@ -147,6 +149,13 @@ sn_config_class_init (SnConfigClass *klass)
                                    g_param_spec_boolean ("hide-new-items", NULL, NULL,
                                                          DEFAULT_HIDE_NEW_ITEMS,
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property(object_class,
+                                  PROP_TEMP_REVEAL_ATTENTION_ITEMS,
+                                  g_param_spec_boolean("temp-reveal-attention-items",
+                                                       NULL, NULL,
+                                                       FALSE,
+                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
                                    PROP_KNOWN_ITEMS,
@@ -222,6 +231,7 @@ sn_config_init (SnConfig *config)
   config->square_icons = DEFAULT_SQUARE_ICONS;
   config->symbolic_icons = DEFAULT_SYMBOLIC_ICONS;
   config->hide_new_items = DEFAULT_HIDE_NEW_ITEMS;
+  config->temp_reveal_attention_items = DEFAULT_TEMP_REVEAL_ATTENTION_ITEMS;
   for (gint n = 0; n < N_SN_ITEM_TYPES; n++)
     {
       config->known_items[n] = NULL;
@@ -313,6 +323,10 @@ sn_config_get_property (GObject *object,
 
     case PROP_HIDE_NEW_ITEMS:
       g_value_set_boolean (value, config->hide_new_items);
+      break;
+
+    case PROP_TEMP_REVEAL_ATTENTION_ITEMS:
+      g_value_set_boolean(value, config->temp_reveal_attention_items);
       break;
 
     case PROP_KNOWN_ITEMS:
@@ -431,6 +445,16 @@ sn_config_set_property (GObject *object,
           config->hide_new_items = val;
           g_signal_emit (G_OBJECT (config), sn_config_signals[ITEM_LIST_CHANGED], 0);
           g_signal_emit (G_OBJECT (config), sn_config_signals[LEGACY_ITEM_LIST_CHANGED], 0);
+        }
+      break;
+
+
+    case PROP_TEMP_REVEAL_ATTENTION_ITEMS:
+      val = g_value_get_boolean(value);
+      if (config->temp_reveal_attention_items != val)
+        {
+          config->temp_reveal_attention_items = val;
+          g_signal_emit(G_OBJECT(config), sn_config_signals[CONFIGURATION_CHANGED],0);
         }
       break;
 
@@ -801,6 +825,15 @@ sn_config_get_hidden_legacy_items (SnConfig *config)
 
 
 gboolean
+sn_config_get_temp_reveal_attention_items (SnConfig *config)
+{
+  g_return_val_if_fail (SN_IS_CONFIG (config), FALSE);
+  return config->temp_reveal_attention_items;
+}
+
+
+
+gboolean
 sn_config_add_known_item (SnConfig *config,
                           SnItemType type,
                           const gchar *name)
@@ -972,6 +1005,7 @@ sn_config_new (XfcePanelPlugin *plugin)
     { "symbolic-icons", G_TYPE_BOOLEAN },
     { "menu-is-primary", G_TYPE_BOOLEAN },
     { "hide-new-items", G_TYPE_BOOLEAN },
+    { "temp-reveal-attention-items", G_TYPE_BOOLEAN },
     { "known-items", G_TYPE_PTR_ARRAY },
     { "hidden-items", G_TYPE_PTR_ARRAY },
     { "known-legacy-items", G_TYPE_PTR_ARRAY },
