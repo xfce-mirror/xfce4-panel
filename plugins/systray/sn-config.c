@@ -150,12 +150,12 @@ sn_config_class_init (SnConfigClass *klass)
                                                          DEFAULT_HIDE_NEW_ITEMS,
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
-  g_object_class_install_property(object_class,
-                                  PROP_TEMP_REVEAL_ATTENTION_ITEMS,
-                                  g_param_spec_boolean("temp-reveal-attention-items",
-                                                       NULL, NULL,
-                                                       FALSE,
-                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+  g_object_class_install_property (object_class,
+                                   PROP_TEMP_REVEAL_ATTENTION_ITEMS,
+                                   g_param_spec_boolean ("temp-reveal-attention-items",
+                                                         NULL, NULL,
+                                                         FALSE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
                                    PROP_KNOWN_ITEMS,
@@ -326,7 +326,7 @@ sn_config_get_property (GObject *object,
       break;
 
     case PROP_TEMP_REVEAL_ATTENTION_ITEMS:
-      g_value_set_boolean(value, config->temp_reveal_attention_items);
+      g_value_set_boolean (value, config->temp_reveal_attention_items);
       break;
 
     case PROP_KNOWN_ITEMS:
@@ -450,11 +450,11 @@ sn_config_set_property (GObject *object,
 
 
     case PROP_TEMP_REVEAL_ATTENTION_ITEMS:
-      val = g_value_get_boolean(value);
+      val = g_value_get_boolean (value);
       if (config->temp_reveal_attention_items != val)
         {
           config->temp_reveal_attention_items = val;
-          g_signal_emit(G_OBJECT(config), sn_config_signals[CONFIGURATION_CHANGED],0);
+          g_signal_emit (G_OBJECT (config), sn_config_signals[CONFIGURATION_CHANGED], 0);
         }
       break;
 
