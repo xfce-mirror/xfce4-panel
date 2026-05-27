@@ -367,7 +367,7 @@ sn_box_measure_and_allocate (GtkWidget *widget,
   SnButton *button;
   GList *known_items, *li, *li_int, *li_tmp;
   gint panel_size, config_nrows, icon_size, hx_size, hy_size, nrows;
-  gboolean single_row, single_horizontal, square_icons, rect_child, temp_reveal_attention_items;
+  gboolean single_row, single_horizontal, square_icons, rect_child, show_on_needs_attention;
   gint total_length, column_length, item_length, row;
   GtkRequisition child_req;
   GtkAllocation child_alloc;
@@ -379,7 +379,7 @@ sn_box_measure_and_allocate (GtkWidget *widget,
   icon_size = sn_config_get_icon_size (box->config);
   single_row = sn_config_get_single_row (box->config);
   square_icons = sn_config_get_square_icons (box->config);
-  temp_reveal_attention_items = sn_config_get_temp_reveal_attention_items (box->config);
+  show_on_needs_attention = sn_config_get_show_on_needs_attention (box->config);
 
   if (square_icons)
     {
@@ -406,7 +406,7 @@ sn_box_measure_and_allocate (GtkWidget *widget,
           button = li_tmp->data;
           SnItem *item = sn_button_get_item (button);
           if (sn_config_is_hidden (box->config, SN_ITEM_TYPE_DEFAULT, sn_button_get_name (button))
-              && !(temp_reveal_attention_items && sn_item_needs_attention (item)))
+              && !(show_on_needs_attention && sn_item_needs_attention (item)))
             {
               n_hidden_children++;
               if (!box->show_hidden)
