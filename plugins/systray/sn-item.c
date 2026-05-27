@@ -1077,12 +1077,7 @@ sn_item_get_menu (SnItem *item)
 gboolean
 sn_item_needs_attention (SnItem *item)
 {
-  if (g_str_has_prefix(item->status, "NeedsAttention") || (item->attention_icon_name != NULL))
-    {
-      return TRUE;
-    }
-
-  return FALSE;
+  return item->attention_icon_name != NULL || g_str_has_prefix (item->status, "NeedsAttention");
 }
 
 

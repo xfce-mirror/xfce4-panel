@@ -283,9 +283,9 @@ sn_box_add (GtkContainer *container,
   g_hash_table_replace (box->children, g_strdup (name), li);
 
   sn_signal_connect_weak_swapped (sn_button_get_item(button), "status-changed",
-                                  G_CALLBACK (gtk_widget_queue_resize), GTK_WIDGET(container));
+                                  G_CALLBACK (gtk_widget_queue_resize), container);
   sn_signal_connect_weak_swapped (sn_button_get_item(button), "icon-changed",
-                                  G_CALLBACK (gtk_widget_queue_resize), GTK_WIDGET(container));
+                                  G_CALLBACK (gtk_widget_queue_resize), container);
 
   gtk_widget_set_parent (child, GTK_WIDGET (box));
 
@@ -405,8 +405,8 @@ sn_box_measure_and_allocate (GtkWidget *widget,
         {
           button = li_tmp->data;
           SnItem *item = sn_button_get_item(button);
-          if (sn_config_is_hidden (box->config, SN_ITEM_TYPE_DEFAULT,
-                                   sn_button_get_name (button)) && !(temp_reveal_attention_items && sn_item_needs_attention(item)))
+          if (sn_config_is_hidden (box->config, SN_ITEM_TYPE_DEFAULT, sn_button_get_name (button))
+              && !(temp_reveal_attention_items && sn_item_needs_attention(item)))
             {
               n_hidden_children++;
               if (!box->show_hidden)
