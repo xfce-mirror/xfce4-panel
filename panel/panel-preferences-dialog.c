@@ -1701,9 +1701,7 @@ panel_preferences_dialog_show_internal (PanelWindow *active,
       gtk_widget_show (GTK_WIDGET (plug_child));
 
       /* destroy the plug */
-      plug = dialog_singleton->socket_plug;
-      dialog_singleton->socket_plug = NULL;
-
+      plug = g_steal_pointer (&dialog_singleton->socket_plug);
       g_signal_handlers_disconnect_by_func (G_OBJECT (plug),
                                             G_CALLBACK (panel_preferences_dialog_plug_deleted), NULL);
       gtk_widget_destroy (plug);

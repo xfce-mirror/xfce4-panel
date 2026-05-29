@@ -44,11 +44,6 @@ panel_properties_bind (XfconfChannel *channel,
 void
 panel_properties_unbind (GObject *object);
 
-GType
-panel_properties_value_array_get_type (void) G_GNUC_CONST;
-
-G_END_DECLS
-
 G_END_DECLS
 
 #endif /* !__PANEL_XFCONF_H__ */

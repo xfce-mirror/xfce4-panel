@@ -2156,7 +2156,7 @@ panel_window_filter (GdkXEvent *xev,
 
 
 
-static gboolean
+static void
 set_all_provider_info (gpointer data)
 {
   PanelWindow *window = data;
@@ -2166,7 +2166,6 @@ set_all_provider_info (gpointer data)
     panel_window_set_provider_info (window, lp->data, FALSE);
 
   g_list_free (plugins);
-  return FALSE;
 }
 
 
@@ -2191,7 +2190,7 @@ panel_window_realize (GtkWidget *widget)
   gdk_window_add_filter (gdkwindow, panel_window_filter, window);
 
   /* be sure to set all provider infos if the panel was hidden at startup */
-  g_idle_add (set_all_provider_info, window);
+  g_idle_add_once (set_all_provider_info, window);
 }
 
 
@@ -3789,15 +3788,13 @@ panel_window_set_autohide_behavior (PanelWindow *window,
 
 
 
-static gboolean
+static void
 panel_window_active_window_monitors_idle (gpointer data)
 {
   PanelWindow *window = data;
 
   if (window->xfw_active_window != NULL)
     panel_window_active_window_monitors (window->xfw_active_window, NULL, window);
-
-  return FALSE;
 }
 
 
@@ -3843,7 +3840,7 @@ panel_window_update_autohide_window (PanelWindow *window,
 
               /* wait for panel position to be initialized */
               if (window->base_x == -1 && window->base_y == -1)
-                g_idle_add (panel_window_active_window_monitors_idle, window);
+                g_idle_add_once (panel_window_active_window_monitors_idle, window);
               else
                 panel_window_active_window_monitors (window->xfw_active_window, NULL, window);
 

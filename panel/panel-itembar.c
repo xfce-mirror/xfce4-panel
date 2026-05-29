@@ -850,7 +850,7 @@ panel_itembar_add (GtkContainer *container,
  * a matter of a missing g_object_unref() somewhere: the number of accumulated references
  * can quickly rise to several dozen.
  */
-static gboolean
+static void
 panel_itembar_unref (gpointer data)
 {
   XfcePanelPluginProvider **provider = data;
@@ -861,7 +861,7 @@ panel_itembar_unref (gpointer data)
   if (*provider == NULL)
     {
       g_free (provider);
-      return FALSE;
+      return;
     }
 
   /* leave if the widget was reparented (drag and drop should be the only case) */
@@ -869,7 +869,7 @@ panel_itembar_unref (gpointer data)
     {
       g_signal_handlers_disconnect_by_func (*provider, gtk_widget_destroyed, provider);
       g_free (provider);
-      return FALSE;
+      return;
     }
 
   name = g_strdup (xfce_panel_plugin_provider_get_name (*provider));
@@ -886,8 +886,6 @@ panel_itembar_unref (gpointer data)
                name, id, n);
   g_free (name);
   g_free (provider);
-
-  return FALSE;
 }
 
 
@@ -913,7 +911,7 @@ panel_itembar_remove (GtkContainer *container,
 
       *provider = widget;
       g_signal_connect (widget, "destroy", G_CALLBACK (gtk_widget_destroyed), provider);
-      g_idle_add (panel_itembar_unref, provider);
+      g_idle_add_once (panel_itembar_unref, provider);
 
       gtk_widget_unparent (widget);
 

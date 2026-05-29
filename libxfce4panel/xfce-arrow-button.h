@@ -40,6 +40,7 @@ typedef struct _XfceArrowButton XfceArrowButton;
 #define XFCE_IS_ARROW_BUTTON(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_ARROW_BUTTON))
 #define XFCE_IS_ARROW_BUTTON_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_ARROW_BUTTON))
 #define XFCE_ARROW_BUTTON_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_ARROW_BUTTON, XfceArrowButtonClass))
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (XfceArrowButton, g_object_unref)
 
 struct _XfceArrowButtonClass
 {

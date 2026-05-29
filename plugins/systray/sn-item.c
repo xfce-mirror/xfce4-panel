@@ -476,7 +476,7 @@ sn_item_item_callback (GObject *source_object,
 
 
 
-static gboolean
+static void
 sn_item_start_failed (gpointer user_data)
 {
   SnItem *item = user_data;
@@ -485,8 +485,6 @@ sn_item_start_failed (gpointer user_data)
   panel_debug (PANEL_DEBUG_SYSTRAY, "%s: Finishing on error for item '%s'",
                G_STRLOC, SN_IS_ITEM (item) ? item->id : "");
   g_signal_emit (G_OBJECT (item), sn_item_signals[FINISH], 0);
-
-  return G_SOURCE_REMOVE;
 }
 
 
@@ -499,7 +497,7 @@ sn_item_start (SnItem *item)
 
   if (!g_dbus_is_name (item->bus_name))
     {
-      g_idle_add (sn_item_start_failed, item);
+      g_idle_add_once (sn_item_start_failed, item);
       return;
     }
 
@@ -632,8 +630,7 @@ sn_item_extract_pixbuf (GVariant *variant)
               data = g_variant_get_data (array_value);
               if (data != NULL)
                 {
-                  if (array != NULL)
-                    g_free (array);
+                  g_free (array);
                   array = g_memdup2 (data, size);
                   lwidth = width;
                   lheight = height;
@@ -730,12 +727,12 @@ sn_item_get_all_properties_result (GObject *source_object,
 
   while (g_variant_iter_loop (iter, "{&sv}", &name, &value))
     {
-      if (!g_strcmp0 (name, "Id"))
+      if (g_strcmp0 (name, "Id") == 0)
         {
           if (item->id == NULL)
             item->id = g_variant_dup_string (value, NULL);
         }
-      else if (!g_strcmp0 (name, "Status"))
+      else if (g_strcmp0 (name, "Status") == 0)
         {
           cstr_val1 = g_variant_get_string (value, NULL);
           update_new_string (cstr_val1, status, update_icon);
@@ -746,15 +743,15 @@ sn_item_get_all_properties_result (GObject *source_object,
               update_exposed = TRUE;
             }
         }
-      else if (!g_strcmp0 (name, "Title"))
+      else if (g_strcmp0 (name, "Title") == 0)
         {
           cstr_val1 = g_variant_get_string (value, NULL);
           update_new_string (cstr_val1, title, update_tooltip);
         }
-      else if (!g_strcmp0 (name, "ToolTip"))
+      else if (g_strcmp0 (name, "ToolTip") == 0)
         {
           cstr_val1 = g_variant_get_type_string (value);
-          if (!g_strcmp0 (cstr_val1, "(sa(iiay)ss)"))
+          if (g_strcmp0 (cstr_val1, "(sa(iiay)ss)") == 0)
             {
               g_variant_get (value, "(sa(iiay)ss)", NULL, NULL, &str_val1, &str_val2);
               update_new_string (str_val1, tooltip_title, update_tooltip);
@@ -762,7 +759,7 @@ sn_item_get_all_properties_result (GObject *source_object,
               g_free (str_val1);
               g_free (str_val2);
             }
-          else if (!g_strcmp0 (cstr_val1, "s"))
+          else if (g_strcmp0 (cstr_val1, "s") == 0)
             {
               cstr_val1 = g_variant_get_string (value, NULL);
               update_new_string (cstr_val1, tooltip_title, update_tooltip);
@@ -774,7 +771,7 @@ sn_item_get_all_properties_result (GObject *source_object,
               update_new_string (NULL, tooltip_subtitle, update_tooltip);
             }
         }
-      else if (!g_strcmp0 (name, "ItemIsMenu"))
+      else if (g_strcmp0 (name, "ItemIsMenu") == 0)
         {
           bool_val1 = g_variant_get_boolean (value);
           if (bool_val1 != item->item_is_menu)
@@ -783,52 +780,52 @@ sn_item_get_all_properties_result (GObject *source_object,
               update_menu = TRUE;
             }
         }
-      else if (!g_strcmp0 (name, "Menu"))
+      else if (g_strcmp0 (name, "Menu") == 0)
         {
           cstr_val1 = g_variant_get_string (value, NULL);
           update_new_string (cstr_val1, menu_object_path, update_menu);
         }
-      else if (!g_strcmp0 (name, "IconThemePath"))
+      else if (g_strcmp0 (name, "IconThemePath") == 0)
         {
           cstr_val1 = g_variant_get_string (value, NULL);
           update_new_string (cstr_val1, icon_theme_path, update_icon);
         }
-      else if (!g_strcmp0 (name, "IconName"))
+      else if (g_strcmp0 (name, "IconName") == 0)
         {
           cstr_val1 = g_variant_get_string (value, NULL);
           update_new_string (cstr_val1, icon_name, update_icon);
         }
-      else if (!g_strcmp0 (name, "IconPixmap"))
+      else if (g_strcmp0 (name, "IconPixmap") == 0)
         {
           pb_val1 = sn_item_extract_pixbuf (value);
           update_new_pixbuf (pb_val1, icon_pixbuf, update_icon);
         }
-      else if (!g_strcmp0 (name, "IconAccessibleDesc"))
+      else if (g_strcmp0 (name, "IconAccessibleDesc") == 0)
         {
           cstr_val1 = g_variant_get_string (value, NULL);
           update_new_string (cstr_val1, icon_desc, update_tooltip);
         }
-      else if (!g_strcmp0 (name, "AttentionIconName"))
+      else if (g_strcmp0 (name, "AttentionIconName") == 0)
         {
           cstr_val1 = g_variant_get_string (value, NULL);
           update_new_string (cstr_val1, attention_icon_name, update_icon);
         }
-      else if (!g_strcmp0 (name, "AttentionIconPixmap"))
+      else if (g_strcmp0 (name, "AttentionIconPixmap") == 0)
         {
           pb_val1 = sn_item_extract_pixbuf (value);
           update_new_pixbuf (pb_val1, attention_icon_pixbuf, update_icon);
         }
-      else if (!g_strcmp0 (name, "AttentionAccessibleDesc"))
+      else if (g_strcmp0 (name, "AttentionAccessibleDesc") == 0)
         {
           cstr_val1 = g_variant_get_string (value, NULL);
           update_new_string (cstr_val1, attention_desc, update_tooltip);
         }
-      else if (!g_strcmp0 (name, "OverlayIconName"))
+      else if (g_strcmp0 (name, "OverlayIconName") == 0)
         {
           cstr_val1 = g_variant_get_string (value, NULL);
           update_new_string (cstr_val1, overlay_icon_name, update_icon);
         }
-      else if (!g_strcmp0 (name, "OverlayIconPixmap"))
+      else if (g_strcmp0 (name, "OverlayIconPixmap") == 0)
         {
           pb_val1 = sn_item_extract_pixbuf (value);
           update_new_pixbuf (pb_val1, overlay_icon_pixbuf, update_icon);

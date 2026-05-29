@@ -656,7 +656,7 @@ sn_backend_host_items_changed_remove_item (gpointer key,
 
   for (i = 0; context->items[i] != NULL; i++)
     {
-      if (!g_strcmp0 (key, context->items[i]))
+      if (g_strcmp0 (key, context->items[i]) == 0)
         return FALSE;
     }
 
