@@ -524,6 +524,21 @@
                                   </packing>
                                 </child>
                                 <child>
+				                              <object class="GtkCheckButton" id="checkbutton-show-on-needs-attention">
+				                            <property name="label" translatable="yes">_Reveal hidden items when they demand attention</property>
+				                            <property name="visible">True</property>
+				                            <property name="can-focus">True</property>
+				                            <property name="receives-default">False</property>
+				                            <property name="use-underline">True</property>
+				                            <property name="draw-indicator">True</property>
+				                          </object>
+				                          <packing>
+				                            <property name="expand">False</property>
+				                            <property name="fill">True</property>
+				                            <property name="pack-type">start</property>
+				                          </packing>
+                                </child>
+                                <child>
                                   <object class="GtkCheckButton" id="checkbutton-symbolic-icons">
                                     <property name="label" translatable="yes">_Request symbolic icons</property>
                                     <property name="visible">True</property>

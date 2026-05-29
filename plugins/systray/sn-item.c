@@ -114,6 +114,7 @@ enum
   EXPOSE,
   SEAL,
   FINISH,
+  STATUS_CHANGED,
   TOOLTIP_CHANGED,
   ICON_CHANGED,
   MENU_CHANGED,
@@ -191,6 +192,13 @@ sn_item_class_init (SnItemClass *klass)
                                    PROP_EXPOSED,
                                    g_param_spec_boolean ("exposed", NULL, NULL, FALSE,
                                                          G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
+
+  sn_item_signals[STATUS_CHANGED] = g_signal_new (g_intern_static_string ("status-changed"),
+                                                  G_TYPE_FROM_CLASS (object_class),
+                                                  G_SIGNAL_RUN_LAST,
+                                                  0, NULL, NULL,
+                                                  g_cclosure_marshal_VOID__VOID,
+                                                  G_TYPE_NONE, 0);
 
   sn_item_signals[EXPOSE] = g_signal_new (g_intern_static_string ("expose"),
                                           G_TYPE_FROM_CLASS (object_class),
@@ -688,6 +696,7 @@ sn_item_get_all_properties_result (GObject *source_object,
   gboolean update_tooltip = FALSE;
   gboolean update_icon = FALSE;
   gboolean update_menu = FALSE;
+  gboolean update_status = FALSE;
 
   properties = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
   if (properties == NULL)
@@ -738,13 +747,7 @@ sn_item_get_all_properties_result (GObject *source_object,
       else if (!g_strcmp0 (name, "Status"))
         {
           cstr_val1 = g_variant_get_string (value, NULL);
-          update_new_string (cstr_val1, status, update_icon);
-          bool_val1 = g_strcmp0 (item->status, "Passive") != 0;
-          if (bool_val1 != item->exposed)
-            {
-              item->exposed = bool_val1;
-              update_exposed = TRUE;
-            }
+          update_new_string (cstr_val1, status, update_status);
         }
       else if (!g_strcmp0 (name, "Title"))
         {
@@ -847,6 +850,7 @@ sn_item_get_all_properties_result (GObject *source_object,
       if (item->id != NULL)
         {
           item->initialized = TRUE;
+          update_status = TRUE;
           update_exposed = TRUE;
           update_tooltip = FALSE;
           update_icon = TRUE;
@@ -854,6 +858,19 @@ sn_item_get_all_properties_result (GObject *source_object,
         }
       else
         return;
+    }
+
+  if (update_status)
+    {
+      bool_val1 = g_strcmp0 (item->status, "Passive") != 0;
+      if (bool_val1 != item->exposed)
+        {
+          item->exposed = bool_val1;
+          update_exposed = TRUE;
+        }
+      update_icon = TRUE;
+
+      g_signal_emit (G_OBJECT (item), sn_item_signals[STATUS_CHANGED], 0);
     }
 
   if (update_exposed)
@@ -1053,6 +1070,14 @@ sn_item_get_menu (SnItem *item)
 #else
   return NULL;
 #endif
+}
+
+
+
+gboolean
+sn_item_needs_attention (SnItem *item)
+{
+  return item->attention_icon_name != NULL || g_str_has_prefix (item->status, "NeedsAttention");
 }
 
 
