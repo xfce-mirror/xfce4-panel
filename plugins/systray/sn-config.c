@@ -154,7 +154,7 @@ sn_config_class_init (SnConfigClass *klass)
                                    PROP_SHOW_ON_NEEDS_ATTENTION,
                                    g_param_spec_boolean ("show-on-needs-attention",
                                                          NULL, NULL,
-                                                         FALSE,
+                                                         DEFAULT_SHOW_ON_NEEDS_ATTENTION,
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
