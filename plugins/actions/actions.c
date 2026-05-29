@@ -1158,6 +1158,7 @@ actions_plugin_action_activate (GtkWidget *widget,
   if (!succeed)
     {
       xfce_dialog_show_error (NULL, error, _("Failed to run action \"%s\""), _(entry->display_name));
+      g_error_free (error);
     }
 }
 
