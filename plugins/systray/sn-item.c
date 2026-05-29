@@ -476,7 +476,7 @@ sn_item_item_callback (GObject *source_object,
 
 
 
-static gboolean
+static void
 sn_item_start_failed (gpointer user_data)
 {
   SnItem *item = user_data;
@@ -485,8 +485,6 @@ sn_item_start_failed (gpointer user_data)
   panel_debug (PANEL_DEBUG_SYSTRAY, "%s: Finishing on error for item '%s'",
                G_STRLOC, SN_IS_ITEM (item) ? item->id : "");
   g_signal_emit (G_OBJECT (item), sn_item_signals[FINISH], 0);
-
-  return G_SOURCE_REMOVE;
 }
 
 
@@ -499,7 +497,7 @@ sn_item_start (SnItem *item)
 
   if (!g_dbus_is_name (item->bus_name))
     {
-      g_idle_add (sn_item_start_failed, item);
+      g_idle_add_once (sn_item_start_failed, item);
       return;
     }
 
