@@ -561,6 +561,12 @@ sn_dialog_build (SnDialog *dialog)
                               G_OBJECT (object), "active",
                               G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
+      object = gtk_builder_get_object (dialog->builder, "checkbutton-show-on-needs-attention");
+      g_return_val_if_fail (GTK_IS_WIDGET (object), FALSE);
+      g_object_bind_property (G_OBJECT (dialog->config), "show-on-needs-attention",
+                              G_OBJECT (object), "active",
+                              G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+
       dialog->store = gtk_builder_get_object (dialog->builder, "items-store");
       g_return_val_if_fail (GTK_IS_LIST_STORE (dialog->store), FALSE);
       sn_dialog_update_names (dialog, dialog->store, SN_ITEM_TYPE_DEFAULT);
