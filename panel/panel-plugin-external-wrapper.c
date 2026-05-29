@@ -209,9 +209,9 @@ panel_plugin_external_wrapper_constructed (GObject *object)
         }
       else
         {
-          g_signal_connect (priv->skeleton, "handle_provider_signal",
+          g_signal_connect (priv->skeleton, "handle-provider-signal",
                             G_CALLBACK (panel_plugin_external_wrapper_dbus_provider_signal), object);
-          g_signal_connect (priv->skeleton, "handle_remote_event_result",
+          g_signal_connect (priv->skeleton, "handle-remote-event-result",
                             G_CALLBACK (panel_plugin_external_wrapper_dbus_remote_event_result), object);
 
           panel_debug (PANEL_DEBUG_EXTERNAL, "Exported object at path %s", path);

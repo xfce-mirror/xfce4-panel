@@ -185,9 +185,9 @@ show_desktop_plugin_init (ShowDesktopPlugin *plugin)
 
   /* allow toggle the button when drag something.*/
   gtk_drag_dest_set (GTK_WIDGET (plugin->button), 0, NULL, 0, 0);
-  g_signal_connect (G_OBJECT (plugin->button), "drag_motion",
+  g_signal_connect (G_OBJECT (plugin->button), "drag-motion",
                     G_CALLBACK (show_desktop_plugin_drag_motion), plugin);
-  g_signal_connect (G_OBJECT (plugin->button), "drag_leave",
+  g_signal_connect (G_OBJECT (plugin->button), "drag-leave",
                     G_CALLBACK (show_desktop_plugin_drag_leave), plugin);
 
   plugin->icon = gtk_image_new_from_icon_name ("org.xfce.panel.showdesktop", GTK_ICON_SIZE_MENU);

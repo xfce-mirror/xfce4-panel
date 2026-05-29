@@ -133,17 +133,17 @@ panel_dbus_service_init (PanelDBusService *service)
                                                       "/org/xfce/Panel",
                                                       &error)))
         {
-          g_signal_connect (service, "handle_add_new_item",
+          g_signal_connect (service, "handle-add-new-item",
                             G_CALLBACK (panel_dbus_service_add_new_item), service);
-          g_signal_connect (service, "handle_display_items_dialog",
+          g_signal_connect (service, "handle-display-items-dialog",
                             G_CALLBACK (panel_dbus_service_display_items_dialog), service);
-          g_signal_connect (service, "handle_display_preferences_dialog",
+          g_signal_connect (service, "handle-display-preferences-dialog",
                             G_CALLBACK (panel_dbus_service_display_preferences_dialog), service);
-          g_signal_connect (service, "handle_plugin_event",
+          g_signal_connect (service, "handle-plugin-event",
                             G_CALLBACK (panel_dbus_service_plugin_event), service);
-          g_signal_connect (service, "handle_save",
+          g_signal_connect (service, "handle-save",
                             G_CALLBACK (panel_dbus_service_save), service);
-          g_signal_connect (service, "handle_terminate",
+          g_signal_connect (service, "handle-terminate",
                             G_CALLBACK (panel_dbus_service_terminate), service);
         }
       else
