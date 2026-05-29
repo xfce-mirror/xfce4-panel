@@ -906,6 +906,7 @@ xfce_panel_plugin_set_property (GObject *object,
                                 GParamSpec *pspec)
 {
   XfcePanelPluginPrivate *priv = XFCE_PANEL_PLUGIN (object)->priv;
+  GtkStyleContext *context;
   gchar *name;
 
   switch (prop_id)
@@ -917,12 +918,17 @@ xfce_panel_plugin_set_property (GObject *object,
       else
         priv->unique_id = g_value_get_int (value);
 
+      context = gtk_widget_get_style_context (GTK_WIDGET(object));
+      gtk_style_context_add_class (context, "panel-plugin");
+
       if (priv->unique_id != -1 && priv->name != NULL)
         {
           /* give the widget a unique name for theming */
           name = g_strdup_printf ("%s-%d", priv->name, priv->unique_id);
           gtk_widget_set_name (GTK_WIDGET (object), name);
           g_free (name);
+
+          gtk_style_context_add_class (context, priv->name);
         }
       break;
 
