@@ -282,6 +282,11 @@ sn_box_add (GtkContainer *container,
   li = g_list_prepend (li, button);
   g_hash_table_replace (box->children, g_strdup (name), li);
 
+  sn_signal_connect_weak_swapped (sn_button_get_item (button), "status-changed",
+                                  G_CALLBACK (gtk_widget_queue_resize), container);
+  sn_signal_connect_weak_swapped (sn_button_get_item (button), "icon-changed",
+                                  G_CALLBACK (gtk_widget_queue_resize), container);
+
   gtk_widget_set_parent (child, GTK_WIDGET (box));
 
   gtk_widget_queue_resize (GTK_WIDGET (container));
@@ -362,7 +367,7 @@ sn_box_measure_and_allocate (GtkWidget *widget,
   SnButton *button;
   GList *known_items, *li, *li_int, *li_tmp;
   gint panel_size, config_nrows, icon_size, hx_size, hy_size, nrows;
-  gboolean single_row, single_horizontal, square_icons, rect_child;
+  gboolean single_row, single_horizontal, square_icons, rect_child, show_on_needs_attention;
   gint total_length, column_length, item_length, row;
   GtkRequisition child_req;
   GtkAllocation child_alloc;
@@ -374,6 +379,8 @@ sn_box_measure_and_allocate (GtkWidget *widget,
   icon_size = sn_config_get_icon_size (box->config);
   single_row = sn_config_get_single_row (box->config);
   square_icons = sn_config_get_square_icons (box->config);
+  show_on_needs_attention = sn_config_get_show_on_needs_attention (box->config);
+
   if (square_icons)
     {
       nrows = single_row ? 1 : MAX (1, config_nrows);
@@ -397,8 +404,9 @@ sn_box_measure_and_allocate (GtkWidget *widget,
       for (li_tmp = li_int; li_tmp != NULL; li_tmp = li_tmp->next)
         {
           button = li_tmp->data;
-          if (sn_config_is_hidden (box->config, SN_ITEM_TYPE_DEFAULT,
-                                   sn_button_get_name (button)))
+          SnItem *item = sn_button_get_item (button);
+          if (sn_config_is_hidden (box->config, SN_ITEM_TYPE_DEFAULT, sn_button_get_name (button))
+              && !(show_on_needs_attention && sn_item_needs_attention (item)))
             {
               n_hidden_children++;
               if (!box->show_hidden)

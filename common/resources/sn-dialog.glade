@@ -254,23 +254,7 @@
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkCheckButton" id="checkbutton-hide-new-items">
-                            <property name="label" translatable="yes">_Hide items by default</property>
-                            <property name="visible">True</property>
-                            <property name="can-focus">True</property>
-                            <property name="receives-default">False</property>
-                            <property name="tooltip-text" translatable="yes">When enabled, all new items will be marked as "Hidden"</property>
-                            <property name="use-underline">True</property>
-                            <property name="draw-indicator">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">2</property>
+                            <property name="pack-type">start</property>
                           </packing>
                         </child>
                         <child>
@@ -286,7 +270,23 @@
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">True</property>
-                            <property name="position">2</property>
+                            <property name="pack-type">start</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkCheckButton" id="checkbutton-hide-new-items">
+                            <property name="label" translatable="yes">_Hide items by default</property>
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">False</property>
+                            <property name="tooltip-text" translatable="yes">When enabled, all new items will be marked as "Hidden"</property>
+                            <property name="use-underline">True</property>
+                            <property name="draw-indicator">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="pack-type">start</property>
                           </packing>
                         </child>
                       </object>
@@ -357,6 +357,7 @@
                                     <property name="can-focus">True</property>
                                     <property name="hscrollbar-policy">never</property>
                                     <property name="shadow-type">in</property>
+                                    <property name="height-request">200</property>
                                     <child>
                                       <object class="GtkTreeView" id="items-treeview">
                                         <property name="visible">True</property>
@@ -507,6 +508,21 @@
                                 <property name="can-focus">False</property>
                                 <property name="orientation">vertical</property>
                                 <property name="spacing">6</property>
+		                <child>
+		                  <object class="GtkCheckButton" id="checkbutton-show-on-needs-attention">
+		                    <property name="label" translatable="yes">_Reveal hidden items when they demand attention</property>
+		                    <property name="visible">True</property>
+		                    <property name="can-focus">True</property>
+		                    <property name="receives-default">False</property>
+		                    <property name="use-underline">True</property>
+		                    <property name="draw-indicator">True</property>
+		                  </object>
+		                  <packing>
+		                    <property name="expand">False</property>
+		                    <property name="fill">True</property>
+		                    <property name="pack-type">start</property>
+		                  </packing>
+		                </child>
                                 <child>
                                   <object class="GtkCheckButton" id="checkbutton-menu-is-primary">
                                     <property name="label" translatable="yes">_Menu is primary action</property>
@@ -520,7 +536,7 @@
                                   <packing>
                                     <property name="expand">True</property>
                                     <property name="fill">True</property>
-                                    <property name="position">0</property>
+                                    <property name="pack-type">start</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -536,7 +552,7 @@
                                   <packing>
                                     <property name="expand">False</property>
                                     <property name="fill">True</property>
-                                    <property name="position">1</property>
+                                    <property name="pack-type">start</property>
                                   </packing>
                                 </child>
                               </object>
@@ -588,6 +604,7 @@
                                 <property name="can-focus">True</property>
                                 <property name="hscrollbar-policy">never</property>
                                 <property name="shadow-type">in</property>
+                                <property name="height-request">200</property>
                                 <child>
                                   <object class="GtkTreeView" id="legacy-items-treeview">
                                     <property name="visible">True</property>

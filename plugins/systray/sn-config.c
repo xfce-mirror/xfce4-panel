@@ -58,6 +58,7 @@ struct _SnConfig
   gboolean symbolic_icons;
   gboolean menu_is_primary;
   gboolean hide_new_items;
+  gboolean show_on_needs_attention;
   GList *known_items[N_SN_ITEM_TYPES];
   GHashTable *hidden_items[N_SN_ITEM_TYPES];
 
@@ -84,6 +85,7 @@ enum
   PROP_HIDE_NEW_ITEMS,
   PROP_KNOWN_ITEMS,
   PROP_HIDDEN_ITEMS,
+  PROP_SHOW_ON_NEEDS_ATTENTION,
   PROP_KNOWN_LEGACY_ITEMS,
   PROP_HIDDEN_LEGACY_ITEMS
 };
@@ -146,6 +148,13 @@ sn_config_class_init (SnConfigClass *klass)
                                    PROP_HIDE_NEW_ITEMS,
                                    g_param_spec_boolean ("hide-new-items", NULL, NULL,
                                                          DEFAULT_HIDE_NEW_ITEMS,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (object_class,
+                                   PROP_SHOW_ON_NEEDS_ATTENTION,
+                                   g_param_spec_boolean ("show-on-needs-attention",
+                                                         NULL, NULL,
+                                                         FALSE,
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
@@ -222,6 +231,7 @@ sn_config_init (SnConfig *config)
   config->square_icons = DEFAULT_SQUARE_ICONS;
   config->symbolic_icons = DEFAULT_SYMBOLIC_ICONS;
   config->hide_new_items = DEFAULT_HIDE_NEW_ITEMS;
+  config->show_on_needs_attention = DEFAULT_SHOW_ON_NEEDS_ATTENTION;
   for (gint n = 0; n < N_SN_ITEM_TYPES; n++)
     {
       config->known_items[n] = NULL;
@@ -313,6 +323,10 @@ sn_config_get_property (GObject *object,
 
     case PROP_HIDE_NEW_ITEMS:
       g_value_set_boolean (value, config->hide_new_items);
+      break;
+
+    case PROP_SHOW_ON_NEEDS_ATTENTION:
+      g_value_set_boolean (value, config->show_on_needs_attention);
       break;
 
     case PROP_KNOWN_ITEMS:
@@ -431,6 +445,16 @@ sn_config_set_property (GObject *object,
           config->hide_new_items = val;
           g_signal_emit (G_OBJECT (config), sn_config_signals[ITEM_LIST_CHANGED], 0);
           g_signal_emit (G_OBJECT (config), sn_config_signals[LEGACY_ITEM_LIST_CHANGED], 0);
+        }
+      break;
+
+
+    case PROP_SHOW_ON_NEEDS_ATTENTION:
+      val = g_value_get_boolean (value);
+      if (config->show_on_needs_attention != val)
+        {
+          config->show_on_needs_attention = val;
+          g_signal_emit (G_OBJECT (config), sn_config_signals[CONFIGURATION_CHANGED], 0);
         }
       break;
 
@@ -801,6 +825,15 @@ sn_config_get_hidden_legacy_items (SnConfig *config)
 
 
 gboolean
+sn_config_get_show_on_needs_attention (SnConfig *config)
+{
+  g_return_val_if_fail (SN_IS_CONFIG (config), FALSE);
+  return config->show_on_needs_attention;
+}
+
+
+
+gboolean
 sn_config_add_known_item (SnConfig *config,
                           SnItemType type,
                           const gchar *name)
@@ -972,6 +1005,7 @@ sn_config_new (XfcePanelPlugin *plugin)
     { "symbolic-icons", G_TYPE_BOOLEAN },
     { "menu-is-primary", G_TYPE_BOOLEAN },
     { "hide-new-items", G_TYPE_BOOLEAN },
+    { "show-on-needs-attention", G_TYPE_BOOLEAN },
     { "known-items", G_TYPE_PTR_ARRAY },
     { "hidden-items", G_TYPE_PTR_ARRAY },
     { "known-legacy-items", G_TYPE_PTR_ARRAY },
