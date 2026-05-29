@@ -630,8 +630,7 @@ sn_item_extract_pixbuf (GVariant *variant)
               data = g_variant_get_data (array_value);
               if (data != NULL)
                 {
-                  if (array != NULL)
-                    g_free (array);
+                  g_free (array);
                   array = g_memdup2 (data, size);
                   lwidth = width;
                   lheight = height;
