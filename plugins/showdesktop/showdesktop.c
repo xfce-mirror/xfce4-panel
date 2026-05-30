@@ -414,12 +414,7 @@ show_desktop_plugin_drag_leave (GtkWidget *widget,
                                 guint time,
                                 ShowDesktopPlugin *plugin)
 {
-  if (plugin->drag_timeout != 0)
-    {
-      g_source_remove (plugin->drag_timeout);
-      plugin->drag_timeout = 0;
-    }
-
+  g_clear_handle_id (&plugin->drag_timeout, g_source_remove);
   gtk_drag_unhighlight (GTK_WIDGET (widget));
 }
 
@@ -500,11 +495,7 @@ show_desktop_plugin_leave (GtkToggleButton *button,
       xfw_screen_set_show_desktop (plugin->xfw_screen, FALSE);
     }
 
-  if (plugin->enter_timeout_id != 0)
-    {
-      g_source_remove (plugin->enter_timeout_id);
-      plugin->enter_timeout_id = 0;
-    }
+  g_clear_handle_id (&plugin->enter_timeout_id, g_source_remove);
 
   return FALSE;
 }

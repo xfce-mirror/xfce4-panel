@@ -446,17 +446,7 @@ panel_preferences_dialog_response (GtkWidget *window,
 static void
 panel_preferences_dialog_bindings_unbind (PanelPreferencesDialog *dialog)
 {
-  GSList *li;
-
-  if (dialog->bindings != NULL)
-    {
-      /* remove all bindings */
-      for (li = dialog->bindings; li != NULL; li = li->next)
-        g_object_unref (G_OBJECT (li->data));
-
-      g_slist_free (dialog->bindings);
-      dialog->bindings = NULL;
-    }
+  g_clear_slist (&dialog->bindings, g_object_unref);
 
   /* disconnect image watch */
   if (dialog->bg_image_notify_handler_id != 0)

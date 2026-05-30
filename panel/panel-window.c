@@ -2797,11 +2797,7 @@ panel_window_screen_layout_changed (GdkScreen *screen,
         return;
       window->in_screen_layout_changed = TRUE;
 
-      if (G_UNLIKELY (window->show_id != 0))
-        {
-          g_source_remove (window->show_id);
-          window->show_id = 0;
-        }
+      g_clear_handle_id (&window->show_id, g_source_remove);
     }
 #endif
 
@@ -3589,11 +3585,7 @@ static void
 panel_window_opacity_enter_queue (PanelWindow *window,
                                   gboolean enter)
 {
-  if (window->opacity_timeout_id != 0)
-    {
-      g_source_remove (window->opacity_timeout_id);
-      window->opacity_timeout_id = 0;
-    }
+  g_clear_handle_id (&window->opacity_timeout_id, g_source_remove);
 
   /* avoid flickering by using the same timeout as for autohide when leaving */
   if (enter)

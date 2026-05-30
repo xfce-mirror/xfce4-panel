@@ -67,8 +67,6 @@ panel_plugin_external_child_watch (GPid pid,
 static void
 panel_plugin_external_child_watch_destroyed (gpointer user_data);
 static void
-panel_plugin_external_queue_free (PanelPluginExternal *external);
-static void
 panel_plugin_external_queue_send_to_child (PanelPluginExternal *external);
 static const gchar *
 panel_plugin_external_get_name (XfcePanelPluginProvider *provider);
@@ -249,6 +247,16 @@ panel_plugin_external_provider_init (XfcePanelPluginProviderInterface *iface)
 
 
 static void
+plugin_property_free (gpointer data)
+{
+  PluginProperty *property = data;
+  g_value_unset (&property->value);
+  g_slice_free (PluginProperty, property);
+}
+
+
+
+static void
 panel_plugin_external_finalize (GObject *object)
 {
   PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (object);
@@ -265,15 +273,14 @@ panel_plugin_external_finalize (GObject *object)
   if (priv->watch_id != 0)
     {
       /* remove the child watch and don't leave zombies */
-      g_source_remove (priv->watch_id);
-      priv->watch_id = 0;
+      g_clear_handle_id (&priv->watch_id, g_source_remove);
       if (priv->pid != 0)
         g_child_watch_add (priv->pid,
                            (GChildWatchFunc) (void (*) (void)) g_spawn_close_pid,
                            NULL);
     }
 
-  panel_plugin_external_queue_free (external);
+  g_clear_slist (&priv->queue, plugin_property_free);
 
   g_strfreev (priv->arguments);
 
@@ -465,8 +472,7 @@ panel_plugin_external_child_ask_restart (PanelPluginExternal *external)
       if (priv->watch_id != 0)
         {
           /* remove the child watch and don't leave zombies */
-          g_source_remove (priv->watch_id);
-          priv->watch_id = 0;
+          g_clear_handle_id (&priv->watch_id, g_source_remove);
           if (priv->pid != 0)
             g_child_watch_add (priv->pid,
                                (GChildWatchFunc) (void (*) (void)) g_spawn_close_pid,
@@ -636,7 +642,7 @@ panel_plugin_external_child_respawn (gpointer user_data)
       return TRUE;
     }
 
-  panel_plugin_external_queue_free (external);
+  g_clear_slist (&priv->queue, plugin_property_free);
 
   window = gtk_widget_get_toplevel (GTK_WIDGET (external));
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
@@ -765,27 +771,6 @@ panel_plugin_external_child_watch_destroyed (gpointer user_data)
 
 
 static void
-panel_plugin_external_queue_free (PanelPluginExternal *external)
-{
-  PanelPluginExternalPrivate *priv = get_instance_private (external);
-  PluginProperty *property;
-
-  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
-
-  for (GSList *li = priv->queue; li != NULL; li = li->next)
-    {
-      property = li->data;
-      g_value_unset (&property->value);
-      g_slice_free (PluginProperty, property);
-    }
-
-  g_slist_free (priv->queue);
-  priv->queue = NULL;
-}
-
-
-
-static void
 panel_plugin_external_queue_send_to_child (PanelPluginExternal *external)
 {
   PanelPluginExternalPrivate *priv = get_instance_private (external);
@@ -798,7 +783,7 @@ panel_plugin_external_queue_send_to_child (PanelPluginExternal *external)
 
       (*PANEL_PLUGIN_EXTERNAL_GET_CLASS (external)->set_properties) (external, priv->queue);
 
-      panel_plugin_external_queue_free (external);
+      g_clear_slist (&priv->queue, plugin_property_free);
     }
 }
 
@@ -1158,7 +1143,7 @@ panel_plugin_external_restart (PanelPluginExternal *external)
                    panel_module_get_name (priv->module),
                    priv->unique_id, priv->pid);
 
-      panel_plugin_external_queue_free (external);
+      g_clear_slist (&priv->queue, plugin_property_free);
 
       if (priv->embedded)
         panel_plugin_external_queue_add_action (external, PROVIDER_PROP_TYPE_ACTION_QUIT_FOR_RESTART);

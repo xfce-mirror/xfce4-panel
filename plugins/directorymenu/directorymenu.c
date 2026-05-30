@@ -80,8 +80,6 @@ directory_menu_plugin_set_property (GObject *object,
 static void
 directory_menu_plugin_construct (XfcePanelPlugin *panel_plugin);
 static void
-directory_menu_plugin_free_file_patterns (DirectoryMenuPlugin *plugin);
-static void
 directory_menu_plugin_free_data (XfcePanelPlugin *panel_plugin);
 static gboolean
 directory_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
@@ -322,9 +320,7 @@ directory_menu_plugin_set_property (GObject *object,
     case PROP_FILE_PATTERN:
       g_free (plugin->file_pattern);
       plugin->file_pattern = g_value_dup_string (value);
-
-      directory_menu_plugin_free_file_patterns (plugin);
-
+      g_clear_slist (&plugin->patterns, (GDestroyNotify) g_pattern_spec_free);
       array = g_strsplit (plugin->file_pattern, ";", -1);
       if (G_LIKELY (array != NULL))
         {
@@ -382,22 +378,6 @@ directory_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
 
 
 static void
-directory_menu_plugin_free_file_patterns (DirectoryMenuPlugin *plugin)
-{
-  GSList *li;
-
-  panel_return_if_fail (DIRECTORY_MENU_IS_PLUGIN (plugin));
-
-  for (li = plugin->patterns; li != NULL; li = li->next)
-    g_pattern_spec_free (li->data);
-
-  g_slist_free (plugin->patterns);
-  plugin->patterns = NULL;
-}
-
-
-
-static void
 directory_menu_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
   DirectoryMenuPlugin *plugin = DIRECTORY_MENU_PLUGIN (panel_plugin);
@@ -406,8 +386,7 @@ directory_menu_plugin_free_data (XfcePanelPlugin *panel_plugin)
     g_object_unref (G_OBJECT (plugin->base_directory));
   g_free (plugin->icon_name);
   g_free (plugin->file_pattern);
-
-  directory_menu_plugin_free_file_patterns (plugin);
+  g_clear_slist (&plugin->patterns, (GDestroyNotify) g_pattern_spec_free);
 }
 
 

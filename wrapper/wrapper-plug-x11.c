@@ -192,8 +192,7 @@ wrapper_plug_x11_set_background_color (WrapperPlug *plug,
   if (color == NULL)
     {
       gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (xplug->style_provider), "", -1, NULL);
-      g_free (xplug->image);
-      xplug->image = NULL;
+      g_clear_pointer (&xplug->image, g_free);
       return;
     }
 

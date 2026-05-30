@@ -147,8 +147,7 @@ panel_module_dispose (GObject *object)
       g_free (module->display_name);
       g_free (module->comment);
       g_free (module->icon_name);
-      g_free (module->api);
-      module->api = NULL;
+      g_clear_pointer (&module->api, g_free);
       if (module->plugin_type != G_TYPE_NONE)
         {
           /* a module containing type implementations must exist forever */

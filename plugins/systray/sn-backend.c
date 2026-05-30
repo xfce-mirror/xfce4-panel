@@ -283,9 +283,7 @@ sn_backend_watcher_bus_acquired (GDBusConnection *connection,
   if (error != NULL)
     {
       g_error_free (error);
-
-      g_object_unref (backend->watcher_skeleton);
-      backend->watcher_skeleton = NULL;
+      g_clear_object (&backend->watcher_skeleton);
     }
 }
 
@@ -573,13 +571,7 @@ sn_backend_host_name_vanished (GDBusConnection *connection,
                                gpointer user_data)
 {
   SnBackend *backend = user_data;
-
-  if (backend->host_proxy != NULL)
-    {
-      g_object_unref (backend->host_proxy);
-      backend->host_proxy = NULL;
-    }
-
+  g_clear_object (&backend->host_proxy);
   sn_backend_host_clear_items (backend);
 }
 
