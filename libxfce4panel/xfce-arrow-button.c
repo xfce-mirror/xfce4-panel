@@ -240,11 +240,7 @@ xfce_arrow_button_dispose (GObject *object)
 {
   XfceArrowButton *button = XFCE_ARROW_BUTTON (object);
 
-  if (button->priv->blinking_timeout_id != 0)
-    {
-      g_source_remove (button->priv->blinking_timeout_id);
-      button->priv->blinking_timeout_id = 0;
-    }
+  g_clear_handle_id (&button->priv->blinking_timeout_id, g_source_remove);
 
   (*G_OBJECT_CLASS (xfce_arrow_button_parent_class)->dispose) (object);
 }

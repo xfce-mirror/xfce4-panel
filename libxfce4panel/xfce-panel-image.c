@@ -834,14 +834,8 @@ xfce_panel_image_clear (XfcePanelImage *image)
 
   g_return_if_fail (XFCE_IS_PANEL_IMAGE (image));
 
-  if (priv->idle_load_id != 0)
-    g_source_remove (priv->idle_load_id);
-
-  if (priv->source != NULL)
-    {
-      g_free (priv->source);
-      priv->source = NULL;
-    }
+  g_clear_handle_id (&priv->idle_load_id, g_source_remove);
+  g_clear_pointer (&priv->source, g_free);
 
   xfce_panel_image_unref_null (priv->pixbuf);
   xfce_panel_image_unref_null (priv->cache);

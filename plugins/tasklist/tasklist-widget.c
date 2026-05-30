@@ -1787,11 +1787,7 @@ xfce_tasklist_disconnect_screen (XfceTasklist *tasklist)
   panel_return_if_fail (n == 2);
 
   /* delete all known apps (and their buttons) */
-  if (tasklist->apps != NULL)
-    {
-      g_hash_table_destroy (tasklist->apps);
-      tasklist->apps = NULL;
-    }
+  g_clear_pointer (&tasklist->apps, g_hash_table_destroy);
 
   /* disconnect from all skipped windows */
   for (li = tasklist->skipped_windows; li != NULL; li = lnext)
@@ -3203,8 +3199,7 @@ xfce_tasklist_button_get_child_path (XfceTasklistChild *child)
           path = g_strdup_printf ("/proc/%d/exe", pid);
           if (!g_file_test (path, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_SYMLINK))
             {
-              g_free (path);
-              path = NULL;
+              g_clear_pointer (&path, g_free);
             }
         }
     }
@@ -4468,10 +4463,8 @@ xfce_tasklist_group_button_remove (XfceTasklistChild *group_child)
       panel_return_if_fail (n == 2);
     }
 
-  g_slist_free (group_child->windows);
-  group_child->windows = NULL;
-  g_object_unref (group_child->app);
-  group_child->app = NULL;
+  g_clear_slist (&group_child->windows, NULL);
+  g_clear_object (&group_child->app);
 
   /* destroy the button, this will free the remaining child
    * data in the container remove function */

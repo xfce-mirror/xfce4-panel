@@ -528,11 +528,7 @@ sn_item_invalidate (SnItem *item,
   if (force_update)
     {
       /* force menu update (see issue #567) */
-      if (item->menu_object_path != NULL)
-        {
-          g_free (item->menu_object_path);
-          item->menu_object_path = NULL;
-        }
+      g_clear_pointer (&item->menu_object_path, g_free);
     }
 
   g_dbus_proxy_call (item->properties_proxy,
@@ -867,16 +863,13 @@ sn_item_get_all_properties_result (GObject *source_object,
           if (g_strcmp0 (item->status, "NeedsAttention") != 0)
             {
               g_clear_object (&item->attention_icon_pixbuf);
-              g_free (item->attention_icon_name);
-              item->attention_icon_name = NULL;
+              g_clear_pointer (&item->attention_icon_name, g_free);
             }
           g_signal_emit (G_OBJECT (item), sn_item_signals[ICON_CHANGED], 0);
         }
       if (update_menu)
         {
-          if (item->cached_menu != NULL)
-            g_object_unref (item->cached_menu);
-          item->cached_menu = NULL;
+          g_clear_object (&item->cached_menu);
           g_signal_emit (G_OBJECT (item), sn_item_signals[MENU_CHANGED], 0);
         }
     }

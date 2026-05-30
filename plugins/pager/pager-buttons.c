@@ -349,8 +349,7 @@ pager_buttons_rebuild_idle (gpointer user_data)
   gtk_container_foreach (GTK_CONTAINER (pager),
                          (GtkCallback) (void (*) (void)) gtk_widget_destroy, NULL);
 
-  g_slist_free (pager->buttons);
-  pager->buttons = NULL;
+  g_clear_slist (&pager->buttons, NULL);
 
   monitor = panel_utils_get_monitor_at_widget (GTK_WIDGET (pager));
   active_ws = panel_utils_get_active_workspace_for_monitor (pager->xfw_screen, monitor);

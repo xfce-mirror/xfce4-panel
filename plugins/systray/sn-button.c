@@ -73,8 +73,8 @@ struct _SnButton
 
   GtkWidget *box;
 
-  guint menu_deactivate_handler;
-  guint menu_size_allocate_handler;
+  gulong menu_deactivate_handler;
+  gulong menu_size_allocate_handler;
   guint menu_size_allocate_idle_handler;
 };
 
@@ -226,13 +226,7 @@ sn_button_menu_deactivate (GtkWidget *widget,
                            GtkMenu *menu)
 {
   SnButton *button = SN_BUTTON (widget);
-
-  if (button->menu_deactivate_handler != 0)
-    {
-      g_signal_handler_disconnect (menu, button->menu_deactivate_handler);
-      button->menu_deactivate_handler = 0;
-    }
-
+  g_clear_signal_handler (&button->menu_deactivate_handler, menu);
   gtk_widget_unset_state_flags (widget, GTK_STATE_FLAG_ACTIVE);
 }
 
@@ -432,25 +426,13 @@ sn_button_menu_changed (GtkWidget *widget,
     {
       if (button->menu_deactivate_handler != 0)
         {
-          g_signal_handler_disconnect (button->menu, button->menu_deactivate_handler);
-          button->menu_deactivate_handler = 0;
-
+          g_clear_signal_handler (&button->menu_deactivate_handler, button->menu);
           gtk_widget_unset_state_flags (widget, GTK_STATE_FLAG_ACTIVE);
           gtk_menu_popdown (GTK_MENU (button->menu));
         }
 
-      if (button->menu_size_allocate_handler != 0)
-        {
-          g_signal_handler_disconnect (button->menu, button->menu_size_allocate_handler);
-          button->menu_size_allocate_handler = 0;
-        }
-
-      if (button->menu_size_allocate_idle_handler != 0)
-        {
-          g_source_remove (button->menu_size_allocate_idle_handler);
-          button->menu_size_allocate_idle_handler = 0;
-        }
-
+      g_clear_signal_handler (&button->menu_size_allocate_handler, button->menu);
+      g_clear_handle_id (&button->menu_size_allocate_idle_handler, g_source_remove);
       gtk_menu_detach (GTK_MENU (button->menu));
     }
 

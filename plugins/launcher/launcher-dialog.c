@@ -802,8 +802,7 @@ launcher_dialog_items_unload (LauncherPluginDialog *dialog)
       g_object_unref (G_OBJECT (li->data));
     }
 
-  g_slist_free (dialog->items);
-  dialog->items = NULL;
+  g_clear_slist (&dialog->items, NULL);
 }
 
 

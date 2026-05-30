@@ -463,30 +463,13 @@ static void
 applications_menu_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
   ApplicationsMenuPlugin *plugin = APPLICATIONS_MENU_PLUGIN (panel_plugin);
-  GtkIconTheme *icon_theme;
 
   if (plugin->menu != NULL)
     gtk_widget_destroy (plugin->menu);
 
-  if (plugin->style_updated_id != 0)
-    {
-      g_signal_handler_disconnect (plugin->button, plugin->style_updated_id);
-      plugin->style_updated_id = 0;
-    }
-
-  if (plugin->screen_changed_id != 0)
-    {
-      g_signal_handler_disconnect (plugin->button, plugin->screen_changed_id);
-      plugin->screen_changed_id = 0;
-    }
-
-  if (plugin->theme_changed_id != 0)
-    {
-      icon_theme = gtk_icon_theme_get_default ();
-      g_signal_handler_disconnect (G_OBJECT (icon_theme),
-                                   plugin->theme_changed_id);
-      plugin->theme_changed_id = 0;
-    }
+  g_clear_signal_handler (&plugin->style_updated_id, plugin->button);
+  g_clear_signal_handler (&plugin->screen_changed_id, plugin->button);
+  g_clear_signal_handler (&plugin->theme_changed_id, gtk_icon_theme_get_default ());
 
   g_free (plugin->button_title);
   g_free (plugin->button_icon);
