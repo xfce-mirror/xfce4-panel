@@ -550,7 +550,7 @@ panel_window_class_init (PanelWindowClass *klass)
                                                       AUTOHIDE_BEHAVIOR_NEVER,
                                                       AUTOHIDE_BEHAVIOR_ALWAYS,
                                                       AUTOHIDE_BEHAVIOR_NEVER,
-                                                      G_PARAM_READWRITE));
+                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_POPDOWN_SPEED,
