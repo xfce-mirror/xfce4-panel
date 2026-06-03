@@ -563,10 +563,10 @@ sn_item_pixbuf_equals (GdkPixbuf *p1,
   guint p1l, p2l;
   guint i;
 
-  if (p1 == p2 || (p1 == NULL && p2 == NULL))
+  if (p1 == p2)
     return TRUE;
 
-  if ((p1 == NULL) != (p2 == NULL))
+  if (p1 == NULL || p2 == NULL)
     return FALSE;
 
   p1p = gdk_pixbuf_get_pixels_with_length (p1, &p1l);

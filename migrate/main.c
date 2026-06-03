@@ -78,10 +78,7 @@ main (gint argc,
       if (g_getenv ("XFCE_PANEL_MIGRATE_DEFAULT") != NULL
           || migrate_vendor_default)
         {
-          if (filename_default == NULL)
-            g_message ("Tried to auto-migrate, but no default configuration found");
-          else
-            goto migrate_default;
+          goto migrate_default;
         }
 
       if (filename_default != NULL)

@@ -555,7 +555,7 @@ xfce_panel_image_load (gpointer data)
         dest_w = 16;
       else if (dest_w > 22 && dest_w < 24)
         dest_w = 22;
-      else if (dest_w > 24 && dest_w < 32)
+      else if (dest_w > 24)
         dest_w = 24;
 
       dest_h = dest_w;

@@ -3670,8 +3670,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
     return;
 
   should_remap = window->keep_below
-                 && ((window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER && behavior != AUTOHIDE_BEHAVIOR_NEVER)
-                     || (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER && behavior == AUTOHIDE_BEHAVIOR_NEVER));
+                 && (window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER || behavior == AUTOHIDE_BEHAVIOR_NEVER);
 
   /* remember the new behavior */
   window->autohide_behavior = behavior;
@@ -3688,7 +3687,6 @@ panel_window_set_autohide_behavior (PanelWindow *window,
           gchar *style_class;
 
           /* create the window */
-          panel_return_if_fail (window->autohide_window == NULL);
           popup = g_object_new (PANEL_TYPE_BASE_WINDOW,
                                 "type", GTK_WINDOW_TOPLEVEL,
                                 "decorated", FALSE,
