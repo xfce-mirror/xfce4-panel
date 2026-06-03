@@ -413,6 +413,7 @@ panel_plugin_external_wrapper_remote_event (PanelPluginExternal *external,
                                                 variant,
                                                 *handle),
                                  NULL);
+  g_variant_unref (variant);
 
   return G_DBUS_METHOD_INVOCATION_HANDLED;
 }
