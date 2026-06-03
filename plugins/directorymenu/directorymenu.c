@@ -32,6 +32,12 @@
 #define DIALOG_RESPONSE_CREATE 0
 #define DIALOG_RESPONSE_OPEN 1
 
+typedef enum
+{
+  DIRECTORY_MENU_SORT_BY_NAME,
+  DIRECTORY_MENU_SORT_BY_DATE_MODIFIED
+} DirectoryMenuSortMode;
+
 struct _DirectoryMenuPlugin
 {
   XfcePanelPlugin __parent__;
@@ -46,8 +52,10 @@ struct _DirectoryMenuPlugin
   guint open_in_terminal;
   guint new_folder;
   guint new_document;
+  guint sort_mode;
   gchar *file_pattern;
   guint hidden_files : 1;
+  guint sort_reversed : 1;
 
   GSList *patterns;
 };
@@ -62,7 +70,9 @@ enum
   PROP_OPEN_FOLDER,
   PROP_OPEN_IN_TERMINAL,
   PROP_NEW_FOLDER,
-  PROP_NEW_DOCUMENT
+  PROP_NEW_DOCUMENT,
+  PROP_SORT_MODE,
+  PROP_SORT_REVERSED
 };
 
 
@@ -164,6 +174,22 @@ directory_menu_plugin_class_init (DirectoryMenuPluginClass *klass)
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_SORT_MODE,
+                                   g_param_spec_uint ("sort-mode",
+                                                      NULL, NULL,
+                                                      DIRECTORY_MENU_SORT_BY_NAME,
+                                                      DIRECTORY_MENU_SORT_BY_DATE_MODIFIED,
+                                                      DIRECTORY_MENU_SORT_BY_NAME,
+                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_SORT_REVERSED,
+                                   g_param_spec_boolean ("sort-reversed",
+                                                         NULL, NULL,
+                                                         FALSE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_FILE_PATTERN,
                                    g_param_spec_string ("file-pattern",
                                                         NULL, NULL,
@@ -245,6 +271,14 @@ directory_menu_plugin_get_property (GObject *object,
       g_value_set_boolean (value, plugin->new_document);
       break;
 
+    case PROP_SORT_MODE:
+      g_value_set_uint (value, plugin->sort_mode);
+      break;
+
+    case PROP_SORT_REVERSED:
+      g_value_set_boolean (value, plugin->sort_reversed);
+      break;
+
     case PROP_FILE_PATTERN:
       g_value_set_string (value, xfce_str_is_empty (plugin->file_pattern) ? "" : plugin->file_pattern);
       break;
@@ -317,6 +351,14 @@ directory_menu_plugin_set_property (GObject *object,
       plugin->new_document = g_value_get_boolean (value);
       break;
 
+    case PROP_SORT_MODE:
+      plugin->sort_mode = g_value_get_uint (value);
+      break;
+
+    case PROP_SORT_REVERSED:
+      plugin->sort_reversed = g_value_get_boolean (value);
+      break;
+
     case PROP_FILE_PATTERN:
       g_free (plugin->file_pattern);
       plugin->file_pattern = g_value_dup_string (value);
@@ -355,6 +397,8 @@ directory_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "open-in-terminal", G_TYPE_BOOLEAN },
     { "new-folder", G_TYPE_BOOLEAN },
     { "new-document", G_TYPE_BOOLEAN },
+    { "sort-mode", G_TYPE_UINT },
+    { "sort-reversed", G_TYPE_BOOLEAN },
     { "file-pattern", G_TYPE_STRING },
     { "hidden-files", G_TYPE_BOOLEAN },
     { NULL }
@@ -519,6 +563,18 @@ directory_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                           G_OBJECT (object), "active",
                           G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
 
+  object = gtk_builder_get_object (builder, "sort-mode");
+  panel_return_if_fail (GTK_IS_COMBO_BOX (object));
+  g_object_bind_property (G_OBJECT (plugin), "sort-mode",
+                          G_OBJECT (object), "active",
+                          G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
+
+  object = gtk_builder_get_object (builder, "sort-reversed");
+  panel_return_if_fail (GTK_IS_CHECK_BUTTON (object));
+  g_object_bind_property (G_OBJECT (plugin), "sort-reversed",
+                          G_OBJECT (object), "active",
+                          G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
+
   object = gtk_builder_get_object (builder, "file-pattern");
   panel_return_if_fail (GTK_IS_ENTRY (object));
   g_object_bind_property (G_OBJECT (plugin), "file-pattern",
@@ -606,14 +662,18 @@ directory_menu_plugin_deactivate (GtkWidget *menu,
 
 static gint
 directory_menu_plugin_menu_sort (gconstpointer a,
-                                 gconstpointer b)
+                                 gconstpointer b,
+                                 gpointer user_data)
 {
+  DirectoryMenuPlugin *plugin = DIRECTORY_MENU_PLUGIN (user_data);
   GFileType type_a = g_file_info_get_file_type (G_FILE_INFO (a));
   GFileType type_b = g_file_info_get_file_type (G_FILE_INFO (b));
   gboolean hidden_a, hidden_b;
   const gchar *display_name_a, *display_name_b;
   gchar *sort_display_name_a, *sort_display_name_b;
   gint sort_value;
+
+  panel_return_val_if_fail (DIRECTORY_MENU_IS_PLUGIN (plugin), 0);
 
   if (type_a != type_b)
     {
@@ -631,6 +691,18 @@ directory_menu_plugin_menu_sort (gconstpointer a,
   if (hidden_a != hidden_b)
     return hidden_a ? -1 : 1;
 
+  if (plugin->sort_mode == DIRECTORY_MENU_SORT_BY_DATE_MODIFIED)
+    {
+      guint64 modified_a = g_file_info_get_attribute_uint64 (G_FILE_INFO (a),
+                                                             G_FILE_ATTRIBUTE_TIME_MODIFIED);
+      guint64 modified_b = g_file_info_get_attribute_uint64 (G_FILE_INFO (b),
+                                                             G_FILE_ATTRIBUTE_TIME_MODIFIED);
+
+      if (modified_a != modified_b)
+        return plugin->sort_reversed ? (modified_a < modified_b ? -1 : 1)
+                                     : (modified_a > modified_b ? -1 : 1);
+    }
+
   display_name_a = g_file_info_get_display_name (G_FILE_INFO (a));
   display_name_b = g_file_info_get_display_name (G_FILE_INFO (b));
   sort_display_name_a = g_utf8_collate_key_for_filename (display_name_a, -1);
@@ -639,7 +711,8 @@ directory_menu_plugin_menu_sort (gconstpointer a,
                        sort_display_name_b);
   g_free (sort_display_name_a);
   g_free (sort_display_name_b);
-  return sort_value;
+
+  return plugin->sort_reversed ? -sort_value : sort_value;
 }
 
 
@@ -1098,7 +1171,8 @@ directory_menu_plugin_menu_load (GtkWidget *menu,
                                     "," G_FILE_ATTRIBUTE_STANDARD_NAME
                                     "," G_FILE_ATTRIBUTE_STANDARD_TYPE
                                     "," G_FILE_ATTRIBUTE_STANDARD_IS_HIDDEN
-                                    "," G_FILE_ATTRIBUTE_STANDARD_ICON,
+                                    "," G_FILE_ATTRIBUTE_STANDARD_ICON
+                                    "," G_FILE_ATTRIBUTE_TIME_MODIFIED,
                                     G_FILE_QUERY_INFO_NONE, NULL, NULL);
   if (G_LIKELY (iter != NULL))
     {
@@ -1139,7 +1213,7 @@ directory_menu_plugin_menu_load (GtkWidget *menu,
                 }
             }
 
-          infos = g_slist_insert_sorted (infos, info, directory_menu_plugin_menu_sort);
+          infos = g_slist_insert_sorted_with_data (infos, info, directory_menu_plugin_menu_sort, plugin);
         }
 
       g_object_unref (G_OBJECT (iter));
