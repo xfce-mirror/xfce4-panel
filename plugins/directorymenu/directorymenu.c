@@ -35,7 +35,8 @@
 typedef enum
 {
   DIRECTORY_MENU_SORT_BY_NAME,
-  DIRECTORY_MENU_SORT_BY_DATE_MODIFIED
+  DIRECTORY_MENU_SORT_BY_DATE_MODIFIED,
+  DIRECTORY_MENU_N_SORT_MODES
 } DirectoryMenuSortMode;
 
 struct _DirectoryMenuPlugin
@@ -72,7 +73,7 @@ enum
   PROP_NEW_FOLDER,
   PROP_NEW_DOCUMENT,
   PROP_SORT_MODE,
-  PROP_SORT_REVERSED
+  PROP_SORT_REVERSED,
 };
 
 
@@ -178,7 +179,7 @@ directory_menu_plugin_class_init (DirectoryMenuPluginClass *klass)
                                    g_param_spec_uint ("sort-mode",
                                                       NULL, NULL,
                                                       DIRECTORY_MENU_SORT_BY_NAME,
-                                                      DIRECTORY_MENU_SORT_BY_DATE_MODIFIED,
+                                                      DIRECTORY_MENU_N_SORT_MODES - 1,
                                                       DIRECTORY_MENU_SORT_BY_NAME,
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
