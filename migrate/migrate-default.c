@@ -290,9 +290,7 @@ migrate_default_end_element_handler (GMarkupParseContext *context,
 
   if (strcmp (element_name, "channel") == 0)
     {
-      if (G_LIKELY (parser->channel != NULL))
-        parser->channel = NULL;
-
+      parser->channel = NULL;
       if (parser->path != NULL)
         {
           g_set_error_literal (error, G_MARKUP_ERROR_UNKNOWN_ELEMENT, G_MARKUP_ERROR,
