@@ -1273,7 +1273,7 @@ panel_application_load (PanelApplication *application,
       atom_names = g_new0 (gchar *, wfwm->atom_count + 1);
 
       for (i = 0; i < wfwm->atom_count; i++)
-        atom_names[i] = g_strdup_printf ("WM_S%d", i);
+        atom_names[i] = g_strdup_printf ("WM_S%u", i);
 
       if (!XInternAtoms (wfwm->dpy, atom_names, wfwm->atom_count, False, wfwm->atoms))
         wfwm->atom_count = 0;
