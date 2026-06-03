@@ -2603,11 +2603,10 @@ xfce_tasklist_wireframe_update (XfceTasklist *tasklist,
 static GdkMonitor *
 xfce_tasklist_find_my_monitor (XfceTasklist *tasklist)
 {
-  guint index;
-
   if (tasklist->monitors_to_include == monitors_to_include_panel)
     return tasklist_get_monitor (tasklist);
 
+  gint index;
   if (sscanf (tasklist->monitors_to_include, "monitor-%d", &index) == 1)
     return gdk_display_get_monitor (tasklist->display, index);
 
