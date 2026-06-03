@@ -2,3 +2,20 @@ include:
   - project: 'xfce/xfce4-dev-tools'
     file: '/ci/build_project.yml'
 
+scan-build:
+  rules:
+    - if: $SCAN_BUILD == null
+      when: never
+    - !reference [.static-analysis, rules]
+  needs:
+    - job: "build-clang-autotools"
+      optional: true
+    - job: "build-clang-meson"
+      optional: true
+  variables:
+    FALSE_POSITIVE_FILE: ".scan-build-false-positives"
+    WARNING_REGEX: 'warning:.+\[(?!-Wdeprecated-declarations).+\]'
+    EXCLUDE_REGEX: 'build/tmp-introspect'
+    GREP_OPTIONS: "-P"
+  extends: .static-analysis
+
