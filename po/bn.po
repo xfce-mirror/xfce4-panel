@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-12-31 12:54+0100\n"
+"POT-Creation-Date: 2026-06-04 00:53+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Rafiul Haque, 2017\n"
 "Language-Team: Bengali (http://app.transifex.com/xfce/xfce4-panel/language/bn/)\n"
@@ -36,7 +36,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr ""
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3859
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3935
 msgid "Panel"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgstr ""
 #: common/resources/actions-dialog.glade:82
 #: common/resources/applicationsmenu-dialog.glade:55
 #: common/resources/clock-dialog.glade:105
-#: common/resources/directorymenu-dialog.glade:34
+#: common/resources/directorymenu-dialog.glade:48
 #: common/resources/launcher-dialog.glade:103
 #: common/resources/launcher-dialog.glade:270
 #: common/resources/pager-dialog.glade:97
@@ -106,15 +106,15 @@ msgstr "বন্ধ (_C)"
 #: common/resources/actions-dialog.glade:97
 #: common/resources/applicationsmenu-dialog.glade:39
 #: common/resources/clock-dialog.glade:120
-#: common/resources/directorymenu-dialog.glade:49
+#: common/resources/directorymenu-dialog.glade:63
 #: common/resources/launcher-dialog.glade:254
 #: common/resources/pager-dialog.glade:81
 #: common/resources/separator-dialog.glade:73
 #: common/resources/showdesktop-dialog.glade:49
 #: common/resources/tasklist-dialog.glade:102
 #: common/resources/windowmenu-dialog.glade:66
-#: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:3925
+#: libxfce4panel/xfce-panel-plugin.c:1342 panel/panel-item-dialog.c:201
+#: panel/panel-window.c:4001
 msgid "_Help"
 msgstr "সহায়তা (_H)"
 
@@ -378,7 +378,7 @@ msgid "Applications Menu"
 msgstr "অ্যাপ্লিকেশন মেনু"
 
 #: common/resources/applicationsmenu-dialog.glade:101
-#: common/resources/directorymenu-dialog.glade:122
+#: common/resources/directorymenu-dialog.glade:136
 msgid "_Icon:"
 msgstr "আইকন: (_I)"
 
@@ -413,8 +413,8 @@ msgid ""
 msgstr "মেনুতে সাধারণ অ্যাপ্লিকেশনের নাম প্রদর্শন করতে এই অপশনটি নির্বাচন করুন, উদাহরণস্বরূপ \"Thunar\"-এর পরিবর্তে \"ফাইল ব্যবস্থাপক\""
 
 #: common/resources/applicationsmenu-dialog.glade:229
-#: common/resources/clock-dialog.glade:405
-#: common/resources/directorymenu-dialog.glade:150
+#: common/resources/clock-dialog.glade:418
+#: common/resources/directorymenu-dialog.glade:164
 #: common/resources/separator-dialog.glade:222
 #: common/resources/tasklist-dialog.glade:266
 #: common/resources/windowmenu-dialog.glade:209
@@ -507,35 +507,41 @@ msgstr ""
 msgid "Time_zone:"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:194
-msgid "Time and Date _Settings..."
+#: common/resources/clock-dialog.glade:200
+msgid ""
+"Command to start on right-click \"Time settings\" menu item. Default is "
+"\"time-admin\"."
 msgstr ""
 
-#: common/resources/clock-dialog.glade:214
+#: common/resources/clock-dialog.glade:211
+msgid "Configuration tool:"
+msgstr ""
+
+#: common/resources/clock-dialog.glade:227
 msgid "Time Settings"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:250
+#: common/resources/clock-dialog.glade:263
 msgid ""
 "If set, this command is run when the plugin is left-clicked, instead of "
 "displaying the default calendar."
 msgstr ""
 
-#: common/resources/clock-dialog.glade:261
+#: common/resources/clock-dialog.glade:274
 msgid "Co_mmand:"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:273
+#: common/resources/clock-dialog.glade:286
 msgid "_Show week numbers"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:294
+#: common/resources/clock-dialog.glade:307
 msgid "Calendar"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:329
-#: common/resources/clock-dialog.glade:669
-#: common/resources/clock-dialog.glade:791
+#: common/resources/clock-dialog.glade:342
+#: common/resources/clock-dialog.glade:682
+#: common/resources/clock-dialog.glade:804
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -543,61 +549,61 @@ msgid ""
 "page for additional information."
 msgstr ""
 
-#: common/resources/clock-dialog.glade:358
+#: common/resources/clock-dialog.glade:371
 msgid "_Tooltip format:"
 msgstr "টুলটিপ বিন্যাস: (_T)"
 
-#: common/resources/clock-dialog.glade:371
-#: common/resources/clock-dialog.glade:619
+#: common/resources/clock-dialog.glade:384
+#: common/resources/clock-dialog.glade:632
 msgid "_Layout:"
 msgstr "বহির্বিন্যাস: (_L)"
 
-#: common/resources/clock-dialog.glade:435
+#: common/resources/clock-dialog.glade:448
 msgid "Sho_w AM/PM"
 msgstr "AM/PM প্রদর্শন করা হবে (_w)"
 
-#: common/resources/clock-dialog.glade:450
+#: common/resources/clock-dialog.glade:463
 msgid "Fl_ash time separators"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:465
+#: common/resources/clock-dialog.glade:478
 msgid "24-_hour clock"
 msgstr "২৪ ঘন্টার ঘড়ি (_h)"
 
-#: common/resources/clock-dialog.glade:508
+#: common/resources/clock-dialog.glade:521
 msgid "Binary mode:"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:524
+#: common/resources/clock-dialog.glade:537
 msgid "Display _seconds"
 msgstr "সেকেন্ড প্রদর্শন করা হবে (_s)"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: common/resources/clock-dialog.glade:545
+#: common/resources/clock-dialog.glade:558
 msgid "F_uzziness:"
 msgstr "ফাজিনেস‌: (_u)"
 
-#: common/resources/clock-dialog.glade:579
+#: common/resources/clock-dialog.glade:592
 msgid "Show _inactive segments"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:594
+#: common/resources/clock-dialog.glade:607
 msgid "Show gri_d"
 msgstr "গ্রিড প্রদর্শন করা হবে (_d)"
 
-#: common/resources/clock-dialog.glade:640
-#: common/resources/clock-dialog.glade:762
+#: common/resources/clock-dialog.glade:653
+#: common/resources/clock-dialog.glade:775
 msgid "Font:"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:653
-#: common/resources/clock-dialog.glade:775
+#: common/resources/clock-dialog.glade:666
+#: common/resources/clock-dialog.glade:788
 msgid "Format:"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:670
-#: common/resources/clock-dialog.glade:792
+#: common/resources/clock-dialog.glade:683
+#: common/resources/clock-dialog.glade:805
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with"
@@ -605,68 +611,88 @@ msgid ""
 "the &quot;Help&quot; page for additional information."
 msgstr ""
 
-#: common/resources/clock-dialog.glade:699
+#: common/resources/clock-dialog.glade:712
 msgid "Date"
 msgstr "তারিখ"
 
-#: common/resources/clock-dialog.glade:744
+#: common/resources/clock-dialog.glade:757
 msgid "Time"
 msgstr ""
 
-#: common/resources/clock-dialog.glade:871
+#: common/resources/clock-dialog.glade:884
 msgid "Clock Options"
 msgstr "ঘড়ির অপশন"
 
-#: common/resources/directorymenu-dialog.glade:18
-#: plugins/directorymenu/directorymenu.c:293
+#: common/resources/directorymenu-dialog.glade:23
+msgid "Name"
+msgstr "নাম"
+
+#: common/resources/directorymenu-dialog.glade:26
+msgid "Modification Date"
+msgstr ""
+
+#: common/resources/directorymenu-dialog.glade:32
+#: plugins/directorymenu/directorymenu.c:326
 #: plugins/directorymenu/directorymenu.desktop.in.in:4
 msgid "Directory Menu"
 msgstr "ডিরেক্টরি মেনু"
 
-#: common/resources/directorymenu-dialog.glade:99
+#: common/resources/directorymenu-dialog.glade:113
 msgid "Select A Directory"
 msgstr "একটি ডিরেক্টরি নির্বাচন করা হবে"
 
-#: common/resources/directorymenu-dialog.glade:135
+#: common/resources/directorymenu-dialog.glade:149
 msgid "_Base Directory:"
 msgstr "ভিত্তি ডিরেক্টরি: (_B)"
 
-#: common/resources/directorymenu-dialog.glade:179
+#: common/resources/directorymenu-dialog.glade:193
 msgid "Show 'New Text _Document'"
 msgstr ""
 
-#: common/resources/directorymenu-dialog.glade:194
+#: common/resources/directorymenu-dialog.glade:208
 msgid "Show '_New Folder'"
 msgstr ""
 
-#: common/resources/directorymenu-dialog.glade:209
+#: common/resources/directorymenu-dialog.glade:223
 msgid "Show 'Open in _Terminal'"
 msgstr ""
 
-#: common/resources/directorymenu-dialog.glade:224
+#: common/resources/directorymenu-dialog.glade:238
 msgid "Show '_Open _Folder'"
 msgstr ""
 
-#: common/resources/directorymenu-dialog.glade:243
+#: common/resources/directorymenu-dialog.glade:257
 msgid "Menu"
 msgstr "মেনু"
 
-#: common/resources/directorymenu-dialog.glade:272
+#: common/resources/directorymenu-dialog.glade:288
+msgid "Sort _by:"
+msgstr ""
+
+#: common/resources/directorymenu-dialog.glade:318
+msgid "Reverse sort _order"
+msgstr ""
+
+#: common/resources/directorymenu-dialog.glade:337
+msgid "Sorting"
+msgstr ""
+
+#: common/resources/directorymenu-dialog.glade:366
 msgid "Show _hidden files"
 msgstr "গোপন ফাইল প্রদর্শন করা হবে (_h)"
 
-#: common/resources/directorymenu-dialog.glade:289
+#: common/resources/directorymenu-dialog.glade:383
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr "ডিরেক্টরিতে কোন কোন ফাইল দৃশ্যমান হবে তা নির্ধারণ করার জন্য প্যাটার্নের তালিকা দিন। আপনি যদি এখানে একটির বেশী প্যাটার্ন উল্লেখ করতে চান, তালিকার আইটেমগুলো অবশ্যই সেমিকোলন দ্বারা বিভাজিত হতে হবে (যেমন: *.txt;*.doc)।"
 
-#: common/resources/directorymenu-dialog.glade:301
+#: common/resources/directorymenu-dialog.glade:395
 msgid "_File Pattern:"
 msgstr "ফাইলের প্যাটার্ন: (_F)"
 
-#: common/resources/directorymenu-dialog.glade:316
+#: common/resources/directorymenu-dialog.glade:410
 #: common/resources/tasklist-dialog.glade:529
 #: common/resources/windowmenu-dialog.glade:263
 msgid "Filtering"
@@ -760,7 +786,7 @@ msgstr ""
 msgid "Workspace Switcher"
 msgstr "কর্মপরিসর পরিবর্তক"
 
-#: common/resources/pager-dialog.glade:64 plugins/pager/pager.c:706
+#: common/resources/pager-dialog.glade:64 plugins/pager/pager.c:768
 msgid "Workspace _Settings..."
 msgstr "কর্মপরিসরের বৈশিষ্ট্যাবলী... (_S)"
 
@@ -1053,70 +1079,70 @@ msgid "Enable _urgency notification"
 msgstr "জরুরী ঘোষনা সক্রিয় করুন (_u)"
 
 #. I18N: monitor name in the output selector
-#: common/panel-utils.c:425
+#: common/panel-utils.c:428
 #, c-format
 msgid "Monitor %d"
 msgstr "মনিটর %d"
 
-#: libxfce4panel/xfce-panel-plugin.c:1109
-#: panel/panel-preferences-dialog.c:1499
+#: libxfce4panel/xfce-panel-plugin.c:1107
+#: panel/panel-preferences-dialog.c:1489
 msgid "Remove"
 msgstr ""
 
-#: libxfce4panel/xfce-panel-plugin.c:1110
+#: libxfce4panel/xfce-panel-plugin.c:1108
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr ""
 
-#: libxfce4panel/xfce-panel-plugin.c:1114
-#: panel/panel-preferences-dialog.c:1506
+#: libxfce4panel/xfce-panel-plugin.c:1112
+#: panel/panel-preferences-dialog.c:1496
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "আপনি কি নিশ্চিতভাবে \"%s\" অপসারণ করতে চান?"
 
 #. properties item
-#: libxfce4panel/xfce-panel-plugin.c:1236
+#: libxfce4panel/xfce-panel-plugin.c:1234
 msgid "_Properties"
 msgstr ""
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3934
+#: libxfce4panel/xfce-panel-plugin.c:1245 panel/panel-window.c:4010
 msgid "_About"
 msgstr "পরিচিতি (_A)"
 
 #. move item
-#: libxfce4panel/xfce-panel-plugin.c:1258
+#: libxfce4panel/xfce-panel-plugin.c:1256
 msgid "_Move"
 msgstr "সরানো হবে (_M)"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:354
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1076
-#: plugins/launcher/launcher-dialog.c:935
+#: libxfce4panel/xfce-panel-plugin.c:1272 panel/panel-application.c:357
+#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1066
+#: plugins/launcher/launcher-dialog.c:934
 msgid "_Remove"
 msgstr ""
 
-#: libxfce4panel/xfce-panel-plugin.c:1292
+#: libxfce4panel/xfce-panel-plugin.c:1290
 msgid "Pane_l"
 msgstr ""
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3871
+#: libxfce4panel/xfce-panel-plugin.c:1298 panel/panel-window.c:3947
 msgid "Add _New Items..."
 msgstr "নতুন আইটেম যোগ করা হবে... (_N)"
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3882
+#: libxfce4panel/xfce-panel-plugin.c:1309 panel/panel-window.c:3958
 msgid "Panel Pr_eferences..."
 msgstr "প্যানেলের পছন্দসমূহ... (_e)"
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3909
+#: libxfce4panel/xfce-panel-plugin.c:1326 panel/panel-window.c:3985
 msgid "Log _Out"
 msgstr ""
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1355
+#: libxfce4panel/xfce-panel-plugin.c:1353
 msgid "About"
 msgstr ""
 
@@ -1234,18 +1260,18 @@ msgstr ""
 msgid "Execute"
 msgstr ""
 
-#: panel/panel-application.c:210
+#: panel/panel-application.c:213
 msgid "Failed to launch the migration application"
 msgstr "মাইগ্রেশন অ্যাপ্লিকেশন চালু করতে ব্যর্থ"
 
-#: panel/panel-application.c:344
+#: panel/panel-application.c:347
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr ""
 
-#: panel/panel-application.c:346
+#: panel/panel-application.c:349
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -1255,46 +1281,46 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr ""
 
-#: panel/panel-application.c:353
+#: panel/panel-application.c:356
 msgid "Plugin loading failure"
 msgstr ""
 
-#: panel/panel-application.c:354
+#: panel/panel-application.c:357
 msgid "_Quit"
 msgstr "প্রস্থান (_Q)"
 
-#: panel/panel-application.c:1034
+#: panel/panel-application.c:1037
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr ""
 
-#: panel/panel-application.c:1037
+#: panel/panel-application.c:1040
 msgid "Create _Launcher"
 msgstr ""
 
-#: panel/panel-application.c:1038
+#: panel/panel-application.c:1041
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] ""
 msgstr[1] ""
 
-#: panel/panel-application.c:1805
+#: panel/panel-application.c:1808
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr ""
 
-#: panel/panel-application.c:1808
+#: panel/panel-application.c:1811
 msgid "Quit"
 msgstr ""
 
-#: panel/panel-application.c:1808
+#: panel/panel-application.c:1811
 msgid "Are you sure you want to quit the panel?"
 msgstr "আপনি কি নিশ্চিত ভাবে প্যানেলটি মুছে ফেলতে চান?"
 
-#: panel/panel-application.c:1816
+#: panel/panel-application.c:1819
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" কমান্ডটি এক্সিকিউট করতে ব্যর্থ"
@@ -1328,9 +1354,9 @@ msgid "Add New Item"
 msgstr "নতুন আইটেম যোগ করা হবে"
 
 #: panel/panel-dialogs.c:157 plugins/actions/actions.c:864
-#: plugins/applicationsmenu/applicationsmenu.c:601
-#: plugins/directorymenu/directorymenu.c:461
-#: plugins/directorymenu/directorymenu.c:932
+#: plugins/applicationsmenu/applicationsmenu.c:584
+#: plugins/directorymenu/directorymenu.c:485
+#: plugins/directorymenu/directorymenu.c:985
 msgid "_Cancel"
 msgstr "বাতিল (_C)"
 
@@ -1338,7 +1364,7 @@ msgstr "বাতিল (_C)"
 msgid "Please choose a panel for the new plugin:"
 msgstr "নতুন প্লাগইনের জন্য অনুগ্রহ করে একটি প্যানেল বেছে নিন:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1023
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1013
 #, c-format
 msgid "Panel %d"
 msgstr "প্যানেল %d"
@@ -1362,12 +1388,12 @@ msgstr "এখানে অনুসন্ধান শব্দসমষ্ট�
 msgid "Internal name: %s"
 msgstr ""
 
-#: panel/panel-plugin-external.c:413
+#: panel/panel-plugin-external.c:420
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "\"%s\" প্লাগইন প্যানেলে নেই, আপনি কি এটি পুনরায় শুরু করতে চান?"
 
-#: panel/panel-plugin-external.c:414
+#: panel/panel-plugin-external.c:421
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -1375,11 +1401,11 @@ msgid ""
 "permanently removed from the panel."
 msgstr "গত %d সেকেন্ডে প্লাগইনটি একাধিকবার পুনরায় আরম্ভ হয়েছে। আপনি 'কার্যকর' চাপলে প্যানেল প্লাগইনটি পুনরায় আরম্ভ করার চেষ্টা করবে নতুবা এটি প্যানেল থেকে চিরতরে অপসারণ করা হবে।"
 
-#: panel/panel-plugin-external.c:419
+#: panel/panel-plugin-external.c:426
 msgid "Plugin Restart"
 msgstr ""
 
-#: panel/panel-plugin-external.c:420
+#: panel/panel-plugin-external.c:427
 msgid "_Execute"
 msgstr "চালানো (_E)"
 
@@ -1392,33 +1418,33 @@ msgstr "পরিচিতি (_A)"
 msgid "Show about information of the currently selected item"
 msgstr "বর্তমানে নির্বাচিত আইটেম সম্পর্কিত তথ্যাবলী প্রদর্শন"
 
-#: panel/panel-preferences-dialog.c:580
+#: panel/panel-preferences-dialog.c:570
 msgid "Automatic"
 msgstr "স্বয়ংক্রিয়"
 
-#: panel/panel-preferences-dialog.c:589
+#: panel/panel-preferences-dialog.c:579
 msgid "Primary"
 msgstr "প্রাথমিক"
 
-#: panel/panel-preferences-dialog.c:1075
+#: panel/panel-preferences-dialog.c:1065
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "প্যানেল এবং প্যানেল কনফিগারেশন স্থায়ীভাবে মুছে যাবে"
 
-#: panel/panel-preferences-dialog.c:1084
+#: panel/panel-preferences-dialog.c:1074
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "আপনি কি নিশ্চিত ভাবে %d মুছে ফেলতে চান?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1376
+#: panel/panel-preferences-dialog.c:1366
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1381
+#: panel/panel-preferences-dialog.c:1371
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1427,22 +1453,22 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1393
+#: panel/panel-preferences-dialog.c:1383
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "মধ্যবর্তী নাম: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1508
+#: panel/panel-preferences-dialog.c:1498
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "আপনি যদি প্যানেল থেকে আইটেমটি অপসারণ করতে চান, তাহলে এটি স্থায়ীভাবে হারিয়ে যাবে। "
 
-#: panel/panel-preferences-dialog.c:1512
-#: plugins/launcher/launcher-dialog.c:930
+#: panel/panel-preferences-dialog.c:1502
+#: plugins/launcher/launcher-dialog.c:929
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr ""
 
-#: panel/panel-preferences-dialog.c:1514
+#: panel/panel-preferences-dialog.c:1504
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr ""
 
@@ -1470,7 +1496,7 @@ msgstr "অভিজ্ঞ"
 msgid "Expert"
 msgstr "দক্ষ"
 
-#: panel/panel-window.c:3896
+#: panel/panel-window.c:3972
 msgid "_Lock Panel"
 msgstr ""
 
@@ -1621,7 +1647,7 @@ msgstr ""
 msgid "Failed to run action \"%s\""
 msgstr ""
 
-#: plugins/actions/actions.c:1364
+#: plugins/actions/actions.c:1367
 msgid "Little Mouse"
 msgstr ""
 
@@ -1634,18 +1660,18 @@ msgstr "লগআউট, আবদ্ধ বা অন্যান্য সি�
 msgid "Applications"
 msgstr ""
 
-#: plugins/applicationsmenu/applicationsmenu.c:601
-#: plugins/directorymenu/directorymenu.c:461
+#: plugins/applicationsmenu/applicationsmenu.c:584
+#: plugins/directorymenu/directorymenu.c:485
 msgid "Select An Icon"
 msgstr "একটি আইকন নির্বাচন করা হবে"
 
-#: plugins/applicationsmenu/applicationsmenu.c:601
-#: plugins/directorymenu/directorymenu.c:461
+#: plugins/applicationsmenu/applicationsmenu.c:584
+#: plugins/directorymenu/directorymenu.c:485
 msgid "_OK"
 msgstr ""
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:638 plugins/clock/clock.c:1055
+#: plugins/applicationsmenu/applicationsmenu.c:621 plugins/clock/clock.c:1083
 #: plugins/launcher/launcher.c:2499
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -1691,17 +1717,25 @@ msgctxt "Date"
 msgid "%A %d %B %Y"
 msgstr ""
 
-#: plugins/clock/clock.c:172
+#: plugins/clock/clock.c:180
 msgid "Week %V"
 msgstr "সপ্তাহ %V"
 
-#: plugins/clock/clock.c:496
+#: plugins/clock/clock.c:326
+msgid "Time _settings"
+msgstr ""
+
+#: plugins/clock/clock.c:513
 msgid "Failed to execute clock command"
 msgstr "ঘড়ির কমান্ড চালাতে ব্যর্থ"
 
-#: plugins/clock/clock.c:994
+#: plugins/clock/clock.c:1011
 msgid "Custom Format"
 msgstr "স্বনির্বাচিত বিন্যাস"
+
+#: plugins/clock/clock.c:1062
+msgid "Configuration tool not found, please set it in the settings dialog"
+msgstr ""
 
 #: plugins/clock/clock-digital.h:30
 msgctxt "Time"
@@ -2018,69 +2052,69 @@ msgstr "বার"
 msgid "What time is it?"
 msgstr "কয়টা বাজে?"
 
-#: plugins/directorymenu/directorymenu.c:690
+#: plugins/directorymenu/directorymenu.c:743
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "\"%s\" অ্যাপ্লিকেশন চালু করতে ব্যর্থ"
 
-#: plugins/directorymenu/directorymenu.c:721
+#: plugins/directorymenu/directorymenu.c:774
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "\"%s\" এর জন্য কোয়েরির বিষয়বস্তু টাইপ করতে ব্যর্থ"
 
-#: plugins/directorymenu/directorymenu.c:730
+#: plugins/directorymenu/directorymenu.c:783
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "\"%s\" এর জন্য কোনো ডিফল্ট অ্যাপ্লিকেশন পাওয়া যায়নি"
 
-#: plugins/directorymenu/directorymenu.c:746
+#: plugins/directorymenu/directorymenu.c:799
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "\"%s\" এর জন্য ডিফল্ট অ্যাপ্লিকেশন চালু করতে ব্যর্থ"
 
-#: plugins/directorymenu/directorymenu.c:840
+#: plugins/directorymenu/directorymenu.c:893
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "\"%s\" এই ক্যাটাগরির জন্য পছন্দসই অ্যাপ্লিকেশন চালাতে ব্যর্থ"
 
-#: plugins/directorymenu/directorymenu.c:921
+#: plugins/directorymenu/directorymenu.c:974
 msgid "Create New Folder"
 msgstr "নতুন ফোল্ডার তৈরি করুন"
 
-#: plugins/directorymenu/directorymenu.c:926
+#: plugins/directorymenu/directorymenu.c:979
 msgid "Create New Text Document"
 msgstr ""
 
-#: plugins/directorymenu/directorymenu.c:932
+#: plugins/directorymenu/directorymenu.c:985
 msgid "C_reate"
 msgstr "তৈরি (_r)"
 
-#: plugins/directorymenu/directorymenu.c:932
+#: plugins/directorymenu/directorymenu.c:985
 msgid "Create & _Open"
 msgstr ""
 
-#: plugins/directorymenu/directorymenu.c:945
+#: plugins/directorymenu/directorymenu.c:998
 msgid "Enter the new name:"
 msgstr "নতুন নাম দিন:"
 
-#: plugins/directorymenu/directorymenu.c:981
+#: plugins/directorymenu/directorymenu.c:1034
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr ""
 
-#: plugins/directorymenu/directorymenu.c:1063
+#: plugins/directorymenu/directorymenu.c:1116
 msgid "Open Folder"
 msgstr "ফোল্ডার খুলুন"
 
-#: plugins/directorymenu/directorymenu.c:1077
+#: plugins/directorymenu/directorymenu.c:1130
 msgid "Open in Terminal"
 msgstr "টার্মিনালে খুলুন"
 
-#: plugins/directorymenu/directorymenu.c:1091
+#: plugins/directorymenu/directorymenu.c:1144
 msgid "Create Folder..."
 msgstr ""
 
-#: plugins/directorymenu/directorymenu.c:1105
+#: plugins/directorymenu/directorymenu.c:1158
 msgid "Create Text Document..."
 msgstr ""
 
@@ -2104,26 +2138,26 @@ msgstr "কোন আইটেম নেই"
 msgid "Failed to open desktop item editor"
 msgstr "ডেস্কটপ আইটেম সম্পাদক খুলতে ব্যর্থ"
 
-#: plugins/launcher/launcher-dialog.c:922
+#: plugins/launcher/launcher-dialog.c:921
 msgid "Unnamed item"
 msgstr "নামবিহীন উপাদান"
 
-#: plugins/launcher/launcher-dialog.c:923
+#: plugins/launcher/launcher-dialog.c:922
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "আপনি \"%s\" মুছে ফেলতে চান?"
 
-#: plugins/launcher/launcher-dialog.c:936
+#: plugins/launcher/launcher-dialog.c:935
 msgid "If you delete an item, it will be permanently removed"
 msgstr "আপনি কোনো আইটেম মুছে ফেললে, এটি স্থায়ীভাবে অপসারিত হবে"
 
+#: plugins/launcher/launcher-dialog.c:1032
 #: plugins/launcher/launcher-dialog.c:1033
-#: plugins/launcher/launcher-dialog.c:1034
 msgid "Add a new empty item"
 msgstr "একটি নতুন ফাঁকা উপাদান যোগ করা হবে"
 
+#: plugins/launcher/launcher-dialog.c:1046
 #: plugins/launcher/launcher-dialog.c:1047
-#: plugins/launcher/launcher-dialog.c:1048
 msgid "Add a new hyperlink"
 msgstr ""
 
@@ -2131,11 +2165,11 @@ msgstr ""
 msgid "Program launcher with optional menu"
 msgstr "ঐচ্ছিক মেনু সহকারে প্রোগ্রাম লঞ্চার"
 
-#: plugins/pager/pager.c:806
+#: plugins/pager/pager.c:868
 msgid "Unable to open the workspace settings"
 msgstr ""
 
-#: plugins/pager/pager-buttons.c:628 plugins/windowmenu/windowmenu.c:992
+#: plugins/pager/pager-buttons.c:645 plugins/windowmenu/windowmenu.c:1008
 #, c-format
 msgid "Workspace %d"
 msgstr "%d কর্মস্থান"
@@ -2198,40 +2232,40 @@ msgid ""
 "items"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:3200
+#: plugins/tasklist/tasklist-widget.c:3224
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:3227
+#: plugins/tasklist/tasklist-widget.c:3251
 msgid "Launch New Instance"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:3982
+#: plugins/tasklist/tasklist-widget.c:4008
 msgid "Mi_nimize All"
 msgstr "সমস্ত ছোট করা হবে (_n)"
 
-#: plugins/tasklist/tasklist-widget.c:3989
+#: plugins/tasklist/tasklist-widget.c:4015
 msgid "Un_minimize All"
 msgstr "সমস্ত ছোট থেকে বড় করা হবে (_m)"
 
-#: plugins/tasklist/tasklist-widget.c:3996
+#: plugins/tasklist/tasklist-widget.c:4022
 msgid "Ma_ximize All"
 msgstr "সমস্ত বড় করা হবে (_x)"
 
-#: plugins/tasklist/tasklist-widget.c:4003
+#: plugins/tasklist/tasklist-widget.c:4029
 msgid "_Unmaximize All"
 msgstr "সমস্ত বড় থেকে ছোট করা হবে (_U)"
 
-#: plugins/tasklist/tasklist-widget.c:4014
+#: plugins/tasklist/tasklist-widget.c:4040
 msgid "_Close All"
 msgstr "সমস্ত বন্ধ করা হবে (_C)"
 
-#: plugins/tasklist/tasklist-widget.c:5025
+#: plugins/tasklist/tasklist-widget.c:5049
 msgid "all monitors"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:5034
+#: plugins/tasklist/tasklist-widget.c:5058
 msgid "panel's monitor"
 msgstr ""
 
@@ -2243,28 +2277,28 @@ msgstr "বোতাম ব্যবহার করে খোলা উইন�
 msgid "Windows"
 msgstr ""
 
-#: plugins/windowmenu/windowmenu.c:771
+#: plugins/windowmenu/windowmenu.c:787
 msgid "Desktop"
 msgstr "ডেস্কটপ"
 
-#: plugins/windowmenu/windowmenu.c:1387
+#: plugins/windowmenu/windowmenu.c:1403
 msgid "No Windows"
 msgstr "কোন উইন্ডো নেই"
 
-#: plugins/windowmenu/windowmenu.c:1402
+#: plugins/windowmenu/windowmenu.c:1418
 msgid "Urgent Windows"
 msgstr "জরুরি উইন্ডো"
 
-#: plugins/windowmenu/windowmenu.c:1453
+#: plugins/windowmenu/windowmenu.c:1469
 msgid "Add Workspace"
 msgstr "কর্মস্থান যোগ করা হবে"
 
-#: plugins/windowmenu/windowmenu.c:1475
+#: plugins/windowmenu/windowmenu.c:1491
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "\"%s\" কর্মস্থান অপসারণ করা হবে"
 
-#: plugins/windowmenu/windowmenu.c:1477
+#: plugins/windowmenu/windowmenu.c:1493
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "%d কর্মস্থান অপসারণ করা হবে"
