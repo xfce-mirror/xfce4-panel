@@ -63,19 +63,18 @@ void
 panel_dialogs_show_about (void)
 {
   GtkWidget *about_dialog;
-  gchar **authors;
-
-  authors = g_new0 (gchar *, 6);
-  authors[1] = g_strdup ("Andrzej Radecki <ndrwrdck@gmail.com>");
-  authors[1] = g_strdup ("Gaël Bonithon <gael@xfce.org>");
-  authors[3] = g_strdup ("Jasper Huijsmans <jasper@xfce.org>");
-  authors[0] = g_strdup ("Nick Schermer <nick@xfce.org>");
-  authors[2] = g_strdup ("Simon Steinbeiß <simon@xfce.org>");
-  authors[4] = g_strdup ("Tic-Tac-Toe <tictactoe@xfce.org>");
+  const gchar *authors[] = {
+    "Nick Schermer <nick@xfce.org>",
+    "Jasper Huijsmans <jasper@xfce.org>",
+    "Andrzej Radecki <ndrwrdck@gmail.com>",
+    "Simon Steinbeiß <simon@xfce.org>",
+    "Gaël Bonithon <gael@xfce.org>",
+    "Tic-Tac-Toe <tictactoe@xfce.org>",
+    NULL,
+  };
 
   about_dialog = gtk_about_dialog_new ();
-  gtk_about_dialog_set_authors (GTK_ABOUT_DIALOG (about_dialog), (const gchar **) authors);
-  g_strfreev (authors);
+  gtk_about_dialog_set_authors (GTK_ABOUT_DIALOG (about_dialog), authors);
   gtk_about_dialog_set_comments (GTK_ABOUT_DIALOG (about_dialog), _("The panel of the Xfce Desktop Environment"));
   gtk_about_dialog_set_copyright (GTK_ABOUT_DIALOG (about_dialog), "Copyright \302\251 2004-" COPYRIGHT_YEAR " The Xfce development team");
   gtk_about_dialog_set_license (GTK_ABOUT_DIALOG (about_dialog), XFCE_LICENSE_GPL);

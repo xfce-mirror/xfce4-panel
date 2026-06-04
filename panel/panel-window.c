@@ -911,22 +911,14 @@ panel_window_set_property (GObject *object,
       break;
 
     case PROP_ICON_SIZE:
-      val_uint = g_value_get_uint (value);
-      if (window->icon_size != val_uint)
-        {
-          window->icon_size = val_uint;
-        }
+      window->icon_size = g_value_get_uint (value);
 
       /* send the new icon size to the panel plugins */
       panel_window_plugins_update (window, PLUGIN_PROP_ICON_SIZE);
       break;
 
     case PROP_DARK_MODE:
-      val_bool = g_value_get_boolean (value);
-      if (window->dark_mode != val_bool)
-        {
-          window->dark_mode = val_bool;
-        }
+      window->dark_mode = g_value_get_boolean (value);
 
       /* set dark mode for the main application and plugins */
       g_object_set (gtk_settings_get_default (),
@@ -965,11 +957,7 @@ panel_window_set_property (GObject *object,
       break;
 
     case PROP_LENGTH_MAX:
-      val_uint = g_value_get_uint (value);
-      if (window->length_max != val_uint)
-        {
-          window->length_max = val_uint;
-        }
+      window->length_max = g_value_get_uint (value);
       break;
 
     case PROP_LENGTH_ADJUST:
@@ -997,11 +985,7 @@ panel_window_set_property (GObject *object,
 
 
     case PROP_POPDOWN_SPEED:
-      val_uint = g_value_get_uint (value);
-      if (window->popdown_speed != val_uint)
-        {
-          window->popdown_speed = val_uint;
-        }
+      window->popdown_speed = g_value_get_uint (value);
       break;
 
     case PROP_SPAN_MONITORS:
@@ -3670,8 +3654,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
     return;
 
   should_remap = window->keep_below
-                 && ((window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER && behavior != AUTOHIDE_BEHAVIOR_NEVER)
-                     || (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER && behavior == AUTOHIDE_BEHAVIOR_NEVER));
+                 && (window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER || behavior == AUTOHIDE_BEHAVIOR_NEVER);
 
   /* remember the new behavior */
   window->autohide_behavior = behavior;
@@ -3688,7 +3671,6 @@ panel_window_set_autohide_behavior (PanelWindow *window,
           gchar *style_class;
 
           /* create the window */
-          panel_return_if_fail (window->autohide_window == NULL);
           popup = g_object_new (PANEL_TYPE_BASE_WINDOW,
                                 "type", GTK_WINDOW_TOPLEVEL,
                                 "decorated", FALSE,

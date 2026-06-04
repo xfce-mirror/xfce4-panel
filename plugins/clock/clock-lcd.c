@@ -594,7 +594,7 @@ xfce_clock_lcd_draw_digit (cairo_t *cr,
   panel_return_val_if_fail (number <= 11, offset_x);
 
   gdk_cairo_set_source_rgba (cr, rgba);
-  for (i = 0; i < 9; i++)
+  for (i = 0; i < 8; i++)
     {
       /* get the segment we're going to draw */
       segment = numbers[number][i];

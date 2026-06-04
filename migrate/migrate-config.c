@@ -165,7 +165,6 @@ migrate_config (XfconfChannel *channel,
                 GError **error)
 {
   GHashTable *plugins;
-  guint n, n_panels;
   gchar buf[50];
   gboolean horizontal;
 
@@ -184,8 +183,8 @@ migrate_config (XfconfChannel *channel,
   /* migrate horizontal to mode property */
   if (configver < 2)
     {
-      n_panels = xfconf_channel_get_uint (channel, PANELS_PROPERTY_PREFIX, 0);
-      for (n = 0; n < n_panels; n++)
+      gint n_panels = xfconf_channel_get_uint (channel, PANELS_PROPERTY_PREFIX, 0);
+      for (gint n = 0; n < n_panels; n++)
         {
           /* read and remove old property */
           g_snprintf (buf, sizeof (buf), PANELS_PROPERTY_BASE "/horizontal", n);

@@ -2603,11 +2603,10 @@ xfce_tasklist_wireframe_update (XfceTasklist *tasklist,
 static GdkMonitor *
 xfce_tasklist_find_my_monitor (XfceTasklist *tasklist)
 {
-  guint index;
-
   if (tasklist->monitors_to_include == monitors_to_include_panel)
     return tasklist_get_monitor (tasklist);
 
+  gint index;
   if (sscanf (tasklist->monitors_to_include, "monitor-%d", &index) == 1)
     return gdk_display_get_monitor (tasklist->display, index);
 
@@ -2997,7 +2996,7 @@ xfce_tasklist_button_state_changed (XfwWindow *window,
       /* only start blinking if the window requesting urgency
        * notification is not the active window */
       blink = PANEL_HAS_FLAG (new_state, XFW_WINDOW_STATE_URGENT);
-      if (!blink || (blink && !xfw_window_is_active (window)))
+      if (!blink || !xfw_window_is_active (window))
         {
           /* if we have all_blinking set make sure we toggle visibility of the button
            * in case the window is not in the current workspace */
