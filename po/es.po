@@ -44,7 +44,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-01-17 00:55+0100\n"
+"POT-Creation-Date: 2026-06-04 00:53+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Ulices, 2026\n"
 "Language-Team: Spanish (http://app.transifex.com/xfce/xfce4-panel/language/es/)\n"
@@ -70,7 +70,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "paneles;configuración;preferencias;barra de tareas;ocultación automática;menú de aplicación;inicio;botones;lanzador;área de notificación;estado;iconos;complementos;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3859
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3935
 msgid "Panel"
 msgstr "Panel"
 
@@ -122,7 +122,7 @@ msgstr "Preferencias del panel"
 #: common/resources/actions-dialog.glade:82
 #: common/resources/applicationsmenu-dialog.glade:55
 #: common/resources/clock-dialog.glade:105
-#: common/resources/directorymenu-dialog.glade:34
+#: common/resources/directorymenu-dialog.glade:48
 #: common/resources/launcher-dialog.glade:103
 #: common/resources/launcher-dialog.glade:270
 #: common/resources/pager-dialog.glade:97
@@ -140,15 +140,15 @@ msgstr "_Cerrar"
 #: common/resources/actions-dialog.glade:97
 #: common/resources/applicationsmenu-dialog.glade:39
 #: common/resources/clock-dialog.glade:120
-#: common/resources/directorymenu-dialog.glade:49
+#: common/resources/directorymenu-dialog.glade:63
 #: common/resources/launcher-dialog.glade:254
 #: common/resources/pager-dialog.glade:81
 #: common/resources/separator-dialog.glade:73
 #: common/resources/showdesktop-dialog.glade:49
 #: common/resources/tasklist-dialog.glade:102
 #: common/resources/windowmenu-dialog.glade:66
-#: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:3925
+#: libxfce4panel/xfce-panel-plugin.c:1342 panel/panel-item-dialog.c:201
+#: panel/panel-window.c:4001
 msgid "_Help"
 msgstr "Ay_uda"
 
@@ -412,7 +412,7 @@ msgid "Applications Menu"
 msgstr "Menú de aplicaciones"
 
 #: common/resources/applicationsmenu-dialog.glade:101
-#: common/resources/directorymenu-dialog.glade:122
+#: common/resources/directorymenu-dialog.glade:136
 msgid "_Icon:"
 msgstr "_Icono:"
 
@@ -448,7 +448,7 @@ msgstr "Active esta opción para mostrar el nombre genérico de las aplicaciones
 
 #: common/resources/applicationsmenu-dialog.glade:229
 #: common/resources/clock-dialog.glade:418
-#: common/resources/directorymenu-dialog.glade:150
+#: common/resources/directorymenu-dialog.glade:164
 #: common/resources/separator-dialog.glade:222
 #: common/resources/tasklist-dialog.glade:266
 #: common/resources/windowmenu-dialog.glade:209
@@ -657,56 +657,76 @@ msgstr "Hora"
 msgid "Clock Options"
 msgstr "Opciones del reloj"
 
-#: common/resources/directorymenu-dialog.glade:18
-#: plugins/directorymenu/directorymenu.c:293
+#: common/resources/directorymenu-dialog.glade:23
+msgid "Name"
+msgstr "Nombre"
+
+#: common/resources/directorymenu-dialog.glade:26
+msgid "Modification Date"
+msgstr ""
+
+#: common/resources/directorymenu-dialog.glade:32
+#: plugins/directorymenu/directorymenu.c:326
 #: plugins/directorymenu/directorymenu.desktop.in.in:4
 msgid "Directory Menu"
 msgstr "Menú de carpetas"
 
-#: common/resources/directorymenu-dialog.glade:99
+#: common/resources/directorymenu-dialog.glade:113
 msgid "Select A Directory"
 msgstr "Seleccionar una carpeta"
 
-#: common/resources/directorymenu-dialog.glade:135
+#: common/resources/directorymenu-dialog.glade:149
 msgid "_Base Directory:"
 msgstr "Carpeta _base:"
 
-#: common/resources/directorymenu-dialog.glade:179
+#: common/resources/directorymenu-dialog.glade:193
 msgid "Show 'New Text _Document'"
 msgstr "Mostrar «_Documento de texto nuevo»"
 
-#: common/resources/directorymenu-dialog.glade:194
+#: common/resources/directorymenu-dialog.glade:208
 msgid "Show '_New Folder'"
 msgstr "Mostrar «Carpeta _nueva»"
 
-#: common/resources/directorymenu-dialog.glade:209
+#: common/resources/directorymenu-dialog.glade:223
 msgid "Show 'Open in _Terminal'"
 msgstr "Mostrar «Abrir en un _terminal»"
 
-#: common/resources/directorymenu-dialog.glade:224
+#: common/resources/directorymenu-dialog.glade:238
 msgid "Show '_Open _Folder'"
 msgstr "Mostrar «_Abrir la carpeta»"
 
-#: common/resources/directorymenu-dialog.glade:243
+#: common/resources/directorymenu-dialog.glade:257
 msgid "Menu"
 msgstr "Menú"
 
-#: common/resources/directorymenu-dialog.glade:272
+#: common/resources/directorymenu-dialog.glade:288
+msgid "Sort _by:"
+msgstr ""
+
+#: common/resources/directorymenu-dialog.glade:318
+msgid "Reverse sort _order"
+msgstr ""
+
+#: common/resources/directorymenu-dialog.glade:337
+msgid "Sorting"
+msgstr ""
+
+#: common/resources/directorymenu-dialog.glade:366
 msgid "Show _hidden files"
 msgstr "Mostrar los archivos _ocultos"
 
-#: common/resources/directorymenu-dialog.glade:289
+#: common/resources/directorymenu-dialog.glade:383
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr "Escriba una lista de patrones para determinar qué archivos son visibles en una carpeta. Si especifica más de un patrón, se deben separar los elementos de la lista por punto y coma (por ejemplo, *.txt;*.doc)."
 
-#: common/resources/directorymenu-dialog.glade:301
+#: common/resources/directorymenu-dialog.glade:395
 msgid "_File Pattern:"
 msgstr "_Patrón de archivos:"
 
-#: common/resources/directorymenu-dialog.glade:316
+#: common/resources/directorymenu-dialog.glade:410
 #: common/resources/tasklist-dialog.glade:529
 #: common/resources/windowmenu-dialog.glade:263
 msgid "Filtering"
@@ -800,7 +820,7 @@ msgstr "Vista de miniaturas"
 msgid "Workspace Switcher"
 msgstr "Selector de áreas de trabajo"
 
-#: common/resources/pager-dialog.glade:64 plugins/pager/pager.c:706
+#: common/resources/pager-dialog.glade:64 plugins/pager/pager.c:768
 msgid "Workspace _Settings..."
 msgstr "Con_figurar las áreas de trabajo…"
 
@@ -1093,70 +1113,70 @@ msgid "Enable _urgency notification"
 msgstr "Activar las noti_ficaciones urgentes"
 
 #. I18N: monitor name in the output selector
-#: common/panel-utils.c:425
+#: common/panel-utils.c:428
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: libxfce4panel/xfce-panel-plugin.c:1109
-#: panel/panel-preferences-dialog.c:1499
+#: libxfce4panel/xfce-panel-plugin.c:1107
+#: panel/panel-preferences-dialog.c:1489
 msgid "Remove"
 msgstr "Quitar"
 
-#: libxfce4panel/xfce-panel-plugin.c:1110
+#: libxfce4panel/xfce-panel-plugin.c:1108
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "Al eliminar el elemento del panel también se perderá su configuración."
 
-#: libxfce4panel/xfce-panel-plugin.c:1114
-#: panel/panel-preferences-dialog.c:1506
+#: libxfce4panel/xfce-panel-plugin.c:1112
+#: panel/panel-preferences-dialog.c:1496
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "¿Seguro que quiere eliminar «%s»?"
 
 #. properties item
-#: libxfce4panel/xfce-panel-plugin.c:1236
+#: libxfce4panel/xfce-panel-plugin.c:1234
 msgid "_Properties"
 msgstr "_Propiedades"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3934
+#: libxfce4panel/xfce-panel-plugin.c:1245 panel/panel-window.c:4010
 msgid "_About"
 msgstr "Acerca _de"
 
 #. move item
-#: libxfce4panel/xfce-panel-plugin.c:1258
+#: libxfce4panel/xfce-panel-plugin.c:1256
 msgid "_Move"
 msgstr "_Mover"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:354
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1076
-#: plugins/launcher/launcher-dialog.c:935
+#: libxfce4panel/xfce-panel-plugin.c:1272 panel/panel-application.c:357
+#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1066
+#: plugins/launcher/launcher-dialog.c:934
 msgid "_Remove"
 msgstr "_Eliminar"
 
-#: libxfce4panel/xfce-panel-plugin.c:1292
+#: libxfce4panel/xfce-panel-plugin.c:1290
 msgid "Pane_l"
 msgstr "P_anel"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3871
+#: libxfce4panel/xfce-panel-plugin.c:1298 panel/panel-window.c:3947
 msgid "Add _New Items..."
 msgstr "_Añadir elementos nuevos..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3882
+#: libxfce4panel/xfce-panel-plugin.c:1309 panel/panel-window.c:3958
 msgid "Panel Pr_eferences..."
 msgstr "_Preferencias del panel..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3909
+#: libxfce4panel/xfce-panel-plugin.c:1326 panel/panel-window.c:3985
 msgid "Log _Out"
 msgstr "_Cerrar sesión"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1355
+#: libxfce4panel/xfce-panel-plugin.c:1353
 msgid "About"
 msgstr "Acerca de"
 
@@ -1274,18 +1294,18 @@ msgstr "¿Quiere iniciar el panel? Si lo hace, asegúrese de guardar la sesión 
 msgid "Execute"
 msgstr "Ejecutar"
 
-#: panel/panel-application.c:210
+#: panel/panel-application.c:213
 msgid "Failed to launch the migration application"
 msgstr "No se ha podido iniciar la aplicación de migración"
 
-#: panel/panel-application.c:344
+#: panel/panel-application.c:347
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr "No se puede cargar el complemento \"%s\". ¿Quiere eliminarlo de la configuración de xfce4-panel?"
 
-#: panel/panel-application.c:346
+#: panel/panel-application.c:349
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -1295,25 +1315,25 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr "Este complemento está en la configuración actual de xfce4-panel, pero no se puede cargar, probablemente a causa de un problema en la instalación. Si sabe lo que hace, puede eliminarlo permanentemente, de otra manera mejor salga de la sesión y haga un respaldo de la configuración actual utilizando %s, antes de revisar su instalación y tratar de iniciar xfce4-panel de nuevo."
 
-#: panel/panel-application.c:353
+#: panel/panel-application.c:356
 msgid "Plugin loading failure"
 msgstr "Fallo al cargar el complemento"
 
-#: panel/panel-application.c:354
+#: panel/panel-application.c:357
 msgid "_Quit"
 msgstr "_Salir"
 
-#: panel/panel-application.c:1034
+#: panel/panel-application.c:1037
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Esta acción creará un lanzador nuevo en el panel e insertará los archivos que se suelten como elementos del menú."
 
-#: panel/panel-application.c:1037
+#: panel/panel-application.c:1040
 msgid "Create _Launcher"
 msgstr "Crear un _lanzador"
 
-#: panel/panel-application.c:1038
+#: panel/panel-application.c:1041
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -1321,21 +1341,21 @@ msgstr[0] "Crear un nuevo lanzador a partir de %d archivo .desktop"
 msgstr[1] "Crear un nuevo lanzador a partir de %d archivos de escritorio"
 msgstr[2] "Crear un nuevo lanzador a partir de %d archivos de escritorio"
 
-#: panel/panel-application.c:1805
+#: panel/panel-application.c:1808
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Ha iniciado el sistema X Window sin un gestor de sesión. Al pulsar Salir se cerrará el servidor X."
 
-#: panel/panel-application.c:1808
+#: panel/panel-application.c:1811
 msgid "Quit"
 msgstr "Salir"
 
-#: panel/panel-application.c:1808
+#: panel/panel-application.c:1811
 msgid "Are you sure you want to quit the panel?"
 msgstr "¿Seguro que quiere cerrar el panel?"
 
-#: panel/panel-application.c:1816
+#: panel/panel-application.c:1819
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "No se ha podido ejecutar la orden «%s»"
@@ -1369,9 +1389,9 @@ msgid "Add New Item"
 msgstr "Añadir un elemento nuevo"
 
 #: panel/panel-dialogs.c:157 plugins/actions/actions.c:864
-#: plugins/applicationsmenu/applicationsmenu.c:601
-#: plugins/directorymenu/directorymenu.c:461
-#: plugins/directorymenu/directorymenu.c:932
+#: plugins/applicationsmenu/applicationsmenu.c:584
+#: plugins/directorymenu/directorymenu.c:485
+#: plugins/directorymenu/directorymenu.c:985
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -1379,7 +1399,7 @@ msgstr "_Cancelar"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Seleccione un panel para el complemento nuevo:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1023
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1013
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -1403,12 +1423,12 @@ msgstr "Escriba el término de búsqueda aquí"
 msgid "Internal name: %s"
 msgstr "Nombre interno: %s"
 
-#: panel/panel-plugin-external.c:413
+#: panel/panel-plugin-external.c:420
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "El complemento del panel «%s» se ha cerrado inesperadamente, ¿Quiere reiniciarlo?"
 
-#: panel/panel-plugin-external.c:414
+#: panel/panel-plugin-external.c:421
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -1416,11 +1436,11 @@ msgid ""
 "permanently removed from the panel."
 msgstr "El complemento se ha reiniciado más de una vez en los últimos %d segundos. Si pulsa Ejecutar se intentará reiniciar el complemento, sino se eliminará permanentemente del panel."
 
-#: panel/panel-plugin-external.c:419
+#: panel/panel-plugin-external.c:426
 msgid "Plugin Restart"
 msgstr "Reinicio del complemento"
 
-#: panel/panel-plugin-external.c:420
+#: panel/panel-plugin-external.c:427
 msgid "_Execute"
 msgstr "_Ejecutar"
 
@@ -1433,33 +1453,33 @@ msgstr "Acerca _de"
 msgid "Show about information of the currently selected item"
 msgstr "Mostrar información acerca del elemento seleccionado"
 
-#: panel/panel-preferences-dialog.c:580
+#: panel/panel-preferences-dialog.c:570
 msgid "Automatic"
 msgstr "Automático"
 
-#: panel/panel-preferences-dialog.c:589
+#: panel/panel-preferences-dialog.c:579
 msgid "Primary"
 msgstr "Principal"
 
-#: panel/panel-preferences-dialog.c:1075
+#: panel/panel-preferences-dialog.c:1065
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Las configuraciones del panel y de los complementos se eliminarán permanentemente"
 
-#: panel/panel-preferences-dialog.c:1084
+#: panel/panel-preferences-dialog.c:1074
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "¿Seguro que quiere eliminar el panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1376
+#: panel/panel-preferences-dialog.c:1366
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(externo)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1381
+#: panel/panel-preferences-dialog.c:1371
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1468,22 +1488,22 @@ msgstr "Nombre interno: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1393
+#: panel/panel-preferences-dialog.c:1383
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nombre interno: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1508
+#: panel/panel-preferences-dialog.c:1498
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Si elimina el elemento del panel, se perderá permanentemente."
 
-#: panel/panel-preferences-dialog.c:1512
-#: plugins/launcher/launcher-dialog.c:930
+#: panel/panel-preferences-dialog.c:1502
+#: plugins/launcher/launcher-dialog.c:929
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "¿Está seguro que quiere eliminar estos %d elementos?"
 
-#: panel/panel-preferences-dialog.c:1514
+#: panel/panel-preferences-dialog.c:1504
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Si los elimina del panel, se perderán para siempre."
 
@@ -1511,7 +1531,7 @@ msgstr "Experimentado"
 msgid "Expert"
 msgstr "Experto"
 
-#: panel/panel-window.c:3896
+#: panel/panel-window.c:3972
 msgid "_Lock Panel"
 msgstr "_Bloquear el panel"
 
@@ -1662,7 +1682,7 @@ msgstr "El equipo se apagará en %d segundos."
 msgid "Failed to run action \"%s\""
 msgstr "No se ha podido ejecutar la acción «%s»"
 
-#: plugins/actions/actions.c:1364
+#: plugins/actions/actions.c:1367
 msgid "Little Mouse"
 msgstr "Ratón pequeño"
 
@@ -1675,18 +1695,18 @@ msgstr "Cerrar sesión, bloquear sesión u otras acciones del sistema"
 msgid "Applications"
 msgstr "Aplicaciones"
 
-#: plugins/applicationsmenu/applicationsmenu.c:601
-#: plugins/directorymenu/directorymenu.c:461
+#: plugins/applicationsmenu/applicationsmenu.c:584
+#: plugins/directorymenu/directorymenu.c:485
 msgid "Select An Icon"
 msgstr "Seleccione un icono"
 
-#: plugins/applicationsmenu/applicationsmenu.c:601
-#: plugins/directorymenu/directorymenu.c:461
+#: plugins/applicationsmenu/applicationsmenu.c:584
+#: plugins/directorymenu/directorymenu.c:485
 msgid "_OK"
 msgstr "_Aceptar"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:638 plugins/clock/clock.c:1083
+#: plugins/applicationsmenu/applicationsmenu.c:621 plugins/clock/clock.c:1083
 #: plugins/launcher/launcher.c:2499
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -2067,69 +2087,69 @@ msgstr "Doce"
 msgid "What time is it?"
 msgstr "¿Qué hora es?"
 
-#: plugins/directorymenu/directorymenu.c:690
+#: plugins/directorymenu/directorymenu.c:743
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "No se ha podido iniciar la aplicación «%s»."
 
-#: plugins/directorymenu/directorymenu.c:721
+#: plugins/directorymenu/directorymenu.c:774
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "No se ha podido determinar el tipo de contenido de «%s»"
 
-#: plugins/directorymenu/directorymenu.c:730
+#: plugins/directorymenu/directorymenu.c:783
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "No se ha encontrado la aplicación predeterminada para «%s»"
 
-#: plugins/directorymenu/directorymenu.c:746
+#: plugins/directorymenu/directorymenu.c:799
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "No se ha podido iniciar la aplicación predeterminada para «%s»"
 
-#: plugins/directorymenu/directorymenu.c:840
+#: plugins/directorymenu/directorymenu.c:893
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "No se ha podido ejecutar la aplicación preferida para la categoría «%s»"
 
-#: plugins/directorymenu/directorymenu.c:921
+#: plugins/directorymenu/directorymenu.c:974
 msgid "Create New Folder"
 msgstr "Crear una carpeta nueva"
 
-#: plugins/directorymenu/directorymenu.c:926
+#: plugins/directorymenu/directorymenu.c:979
 msgid "Create New Text Document"
 msgstr "Crear un documento de texto nuevo"
 
-#: plugins/directorymenu/directorymenu.c:932
+#: plugins/directorymenu/directorymenu.c:985
 msgid "C_reate"
 msgstr "C_rear"
 
-#: plugins/directorymenu/directorymenu.c:932
+#: plugins/directorymenu/directorymenu.c:985
 msgid "Create & _Open"
 msgstr "Crear y _abrir"
 
-#: plugins/directorymenu/directorymenu.c:945
+#: plugins/directorymenu/directorymenu.c:998
 msgid "Enter the new name:"
 msgstr "Escriba el nombre nuevo:"
 
-#: plugins/directorymenu/directorymenu.c:981
+#: plugins/directorymenu/directorymenu.c:1034
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "No se ha podido crear la carpeta: %s"
 
-#: plugins/directorymenu/directorymenu.c:1063
+#: plugins/directorymenu/directorymenu.c:1116
 msgid "Open Folder"
 msgstr "Abrir la carpeta"
 
-#: plugins/directorymenu/directorymenu.c:1077
+#: plugins/directorymenu/directorymenu.c:1130
 msgid "Open in Terminal"
 msgstr "Abrir en un terminal"
 
-#: plugins/directorymenu/directorymenu.c:1091
+#: plugins/directorymenu/directorymenu.c:1144
 msgid "Create Folder..."
 msgstr "Crear la carpeta..."
 
-#: plugins/directorymenu/directorymenu.c:1105
+#: plugins/directorymenu/directorymenu.c:1158
 msgid "Create Text Document..."
 msgstr "Crear el documento de texto..."
 
@@ -2153,26 +2173,26 @@ msgstr "Sin elementos"
 msgid "Failed to open desktop item editor"
 msgstr "No se ha podido abrir el editor de elementos del escritorio"
 
-#: plugins/launcher/launcher-dialog.c:922
+#: plugins/launcher/launcher-dialog.c:921
 msgid "Unnamed item"
 msgstr "Elemento sin nombre"
 
-#: plugins/launcher/launcher-dialog.c:923
+#: plugins/launcher/launcher-dialog.c:922
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "¿Seguro que quiere eliminar «%s»?"
 
-#: plugins/launcher/launcher-dialog.c:936
+#: plugins/launcher/launcher-dialog.c:935
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Si borra un elemento, se eliminará permanentemente"
 
+#: plugins/launcher/launcher-dialog.c:1032
 #: plugins/launcher/launcher-dialog.c:1033
-#: plugins/launcher/launcher-dialog.c:1034
 msgid "Add a new empty item"
 msgstr "Añadir un elemento nuevo"
 
+#: plugins/launcher/launcher-dialog.c:1046
 #: plugins/launcher/launcher-dialog.c:1047
-#: plugins/launcher/launcher-dialog.c:1048
 msgid "Add a new hyperlink"
 msgstr "Añadir un hiperenlace nuevo"
 
@@ -2180,11 +2200,11 @@ msgstr "Añadir un hiperenlace nuevo"
 msgid "Program launcher with optional menu"
 msgstr "Lanzador de programas con un menú opcional"
 
-#: plugins/pager/pager.c:806
+#: plugins/pager/pager.c:868
 msgid "Unable to open the workspace settings"
 msgstr "No se ha podido abrir la configuración de las áreas de trabajo"
 
-#: plugins/pager/pager-buttons.c:646 plugins/windowmenu/windowmenu.c:1007
+#: plugins/pager/pager-buttons.c:645 plugins/windowmenu/windowmenu.c:1008
 #, c-format
 msgid "Workspace %d"
 msgstr "Área de trabajo %d"
@@ -2247,12 +2267,12 @@ msgid ""
 "items"
 msgstr "Proporciona elementos de notificación de estado (indicadores de aplicación) y elementos de la bandeja del sistema heredados"
 
-#: plugins/tasklist/tasklist-widget.c:3226
+#: plugins/tasklist/tasklist-widget.c:3224
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr "No se puede iniciar una instancia nueva de '%s'"
 
-#: plugins/tasklist/tasklist-widget.c:3253
+#: plugins/tasklist/tasklist-widget.c:3251
 msgid "Launch New Instance"
 msgstr "Iniciar una instancia nueva"
 
@@ -2276,11 +2296,11 @@ msgstr "_Desmaximizar todas las ventanas"
 msgid "_Close All"
 msgstr "_Cerrar todas las ventanas"
 
-#: plugins/tasklist/tasklist-widget.c:5051
+#: plugins/tasklist/tasklist-widget.c:5049
 msgid "all monitors"
 msgstr "todos los monitores"
 
-#: plugins/tasklist/tasklist-widget.c:5060
+#: plugins/tasklist/tasklist-widget.c:5058
 msgid "panel's monitor"
 msgstr "monitor del panel"
 
@@ -2292,28 +2312,28 @@ msgstr "Cambiar entre ventanas con los botones"
 msgid "Windows"
 msgstr "Ventanas"
 
-#: plugins/windowmenu/windowmenu.c:786
+#: plugins/windowmenu/windowmenu.c:787
 msgid "Desktop"
 msgstr "Escritorio"
 
-#: plugins/windowmenu/windowmenu.c:1402
+#: plugins/windowmenu/windowmenu.c:1403
 msgid "No Windows"
 msgstr "Sin ventanas"
 
-#: plugins/windowmenu/windowmenu.c:1417
+#: plugins/windowmenu/windowmenu.c:1418
 msgid "Urgent Windows"
 msgstr "Ventanas urgentes"
 
-#: plugins/windowmenu/windowmenu.c:1468
+#: plugins/windowmenu/windowmenu.c:1469
 msgid "Add Workspace"
 msgstr "Añadir un área de trabajo"
 
-#: plugins/windowmenu/windowmenu.c:1490
+#: plugins/windowmenu/windowmenu.c:1491
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Eliminar el área de trabajo «%s»"
 
-#: plugins/windowmenu/windowmenu.c:1492
+#: plugins/windowmenu/windowmenu.c:1493
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Eliminar el área de trabajo %d"
