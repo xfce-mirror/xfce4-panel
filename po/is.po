@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-01-17 00:55+0100\n"
+"POT-Creation-Date: 2026-06-04 00:53+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>, 2014-2015,2017-2018,2024\n"
 "Language-Team: Icelandic (http://app.transifex.com/xfce/xfce4-panel/language/is/)\n"
@@ -36,7 +36,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr ""
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3859
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3935
 msgid "Panel"
 msgstr "Skjástika"
 
@@ -88,7 +88,7 @@ msgstr "Kjörstillingar skjástiku"
 #: common/resources/actions-dialog.glade:82
 #: common/resources/applicationsmenu-dialog.glade:55
 #: common/resources/clock-dialog.glade:105
-#: common/resources/directorymenu-dialog.glade:34
+#: common/resources/directorymenu-dialog.glade:48
 #: common/resources/launcher-dialog.glade:103
 #: common/resources/launcher-dialog.glade:270
 #: common/resources/pager-dialog.glade:97
@@ -106,15 +106,15 @@ msgstr "Lo_ka"
 #: common/resources/actions-dialog.glade:97
 #: common/resources/applicationsmenu-dialog.glade:39
 #: common/resources/clock-dialog.glade:120
-#: common/resources/directorymenu-dialog.glade:49
+#: common/resources/directorymenu-dialog.glade:63
 #: common/resources/launcher-dialog.glade:254
 #: common/resources/pager-dialog.glade:81
 #: common/resources/separator-dialog.glade:73
 #: common/resources/showdesktop-dialog.glade:49
 #: common/resources/tasklist-dialog.glade:102
 #: common/resources/windowmenu-dialog.glade:66
-#: libxfce4panel/xfce-panel-plugin.c:1344 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:3925
+#: libxfce4panel/xfce-panel-plugin.c:1342 panel/panel-item-dialog.c:201
+#: panel/panel-window.c:4001
 msgid "_Help"
 msgstr "_Hjálp"
 
@@ -378,7 +378,7 @@ msgid "Applications Menu"
 msgstr "Forritavalmynd"
 
 #: common/resources/applicationsmenu-dialog.glade:101
-#: common/resources/directorymenu-dialog.glade:122
+#: common/resources/directorymenu-dialog.glade:136
 msgid "_Icon:"
 msgstr "Táknm_ynd:"
 
@@ -414,7 +414,7 @@ msgstr "Veldu þennan möguleika til að birta almenn heiti forrita í valmynd, 
 
 #: common/resources/applicationsmenu-dialog.glade:229
 #: common/resources/clock-dialog.glade:418
-#: common/resources/directorymenu-dialog.glade:150
+#: common/resources/directorymenu-dialog.glade:164
 #: common/resources/separator-dialog.glade:222
 #: common/resources/tasklist-dialog.glade:266
 #: common/resources/windowmenu-dialog.glade:209
@@ -623,56 +623,76 @@ msgstr "Tími"
 msgid "Clock Options"
 msgstr "Eiginleikar klukku"
 
-#: common/resources/directorymenu-dialog.glade:18
-#: plugins/directorymenu/directorymenu.c:293
+#: common/resources/directorymenu-dialog.glade:23
+msgid "Name"
+msgstr "Heiti"
+
+#: common/resources/directorymenu-dialog.glade:26
+msgid "Modification Date"
+msgstr ""
+
+#: common/resources/directorymenu-dialog.glade:32
+#: plugins/directorymenu/directorymenu.c:326
 #: plugins/directorymenu/directorymenu.desktop.in.in:4
 msgid "Directory Menu"
 msgstr "Möppuvalmynd"
 
-#: common/resources/directorymenu-dialog.glade:99
+#: common/resources/directorymenu-dialog.glade:113
 msgid "Select A Directory"
 msgstr "Veldu möppu"
 
-#: common/resources/directorymenu-dialog.glade:135
+#: common/resources/directorymenu-dialog.glade:149
 msgid "_Base Directory:"
 msgstr "_Grunnmappa:"
 
-#: common/resources/directorymenu-dialog.glade:179
+#: common/resources/directorymenu-dialog.glade:193
 msgid "Show 'New Text _Document'"
 msgstr "_Birta 'Nýtt textaskjal'"
 
-#: common/resources/directorymenu-dialog.glade:194
+#: common/resources/directorymenu-dialog.glade:208
 msgid "Show '_New Folder'"
 msgstr "Birta '_Ný mappa'"
 
-#: common/resources/directorymenu-dialog.glade:209
+#: common/resources/directorymenu-dialog.glade:223
 msgid "Show 'Open in _Terminal'"
 msgstr "Bir_ta 'Opna í skjáhermi'"
 
-#: common/resources/directorymenu-dialog.glade:224
+#: common/resources/directorymenu-dialog.glade:238
 msgid "Show '_Open _Folder'"
 msgstr "Birta '_Opna möppu'"
 
-#: common/resources/directorymenu-dialog.glade:243
+#: common/resources/directorymenu-dialog.glade:257
 msgid "Menu"
 msgstr "Valmynd"
 
-#: common/resources/directorymenu-dialog.glade:272
+#: common/resources/directorymenu-dialog.glade:288
+msgid "Sort _by:"
+msgstr ""
+
+#: common/resources/directorymenu-dialog.glade:318
+msgid "Reverse sort _order"
+msgstr ""
+
+#: common/resources/directorymenu-dialog.glade:337
+msgid "Sorting"
+msgstr ""
+
+#: common/resources/directorymenu-dialog.glade:366
 msgid "Show _hidden files"
 msgstr "Sýna _faldar skrár"
 
-#: common/resources/directorymenu-dialog.glade:289
+#: common/resources/directorymenu-dialog.glade:383
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr "Settu inn lista með þeim mynstrum sem verða notuð til að ákvarða hvaða skrár verði sýnilegar í möppu. Ef þú tiltekur hér fleiri en eitt mynstur, þurfa færslurnar að vera aðgreindar með tvípunktum (t.d. *.txt:*.doc)."
 
-#: common/resources/directorymenu-dialog.glade:301
+#: common/resources/directorymenu-dialog.glade:395
 msgid "_File Pattern:"
 msgstr "Skráa_mynstur:"
 
-#: common/resources/directorymenu-dialog.glade:316
+#: common/resources/directorymenu-dialog.glade:410
 #: common/resources/tasklist-dialog.glade:529
 #: common/resources/windowmenu-dialog.glade:263
 msgid "Filtering"
@@ -766,7 +786,7 @@ msgstr "Smækkuð sýn"
 msgid "Workspace Switcher"
 msgstr "Vinnusvæðaskiptir"
 
-#: common/resources/pager-dialog.glade:64 plugins/pager/pager.c:706
+#: common/resources/pager-dialog.glade:64 plugins/pager/pager.c:768
 msgid "Workspace _Settings..."
 msgstr "_Stillingar vinnusvæða..."
 
@@ -1059,70 +1079,70 @@ msgid "Enable _urgency notification"
 msgstr "Virkja áríðandi tilkynningar"
 
 #. I18N: monitor name in the output selector
-#: common/panel-utils.c:425
+#: common/panel-utils.c:428
 #, c-format
 msgid "Monitor %d"
 msgstr "Skjátæki %d"
 
-#: libxfce4panel/xfce-panel-plugin.c:1109
-#: panel/panel-preferences-dialog.c:1499
+#: libxfce4panel/xfce-panel-plugin.c:1107
+#: panel/panel-preferences-dialog.c:1489
 msgid "Remove"
 msgstr "Fjarlægja"
 
-#: libxfce4panel/xfce-panel-plugin.c:1110
+#: libxfce4panel/xfce-panel-plugin.c:1108
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr ""
 
-#: libxfce4panel/xfce-panel-plugin.c:1114
-#: panel/panel-preferences-dialog.c:1506
+#: libxfce4panel/xfce-panel-plugin.c:1112
+#: panel/panel-preferences-dialog.c:1496
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Ertu viss að þú viljir fjarlægja \"%s\"?"
 
 #. properties item
-#: libxfce4panel/xfce-panel-plugin.c:1236
+#: libxfce4panel/xfce-panel-plugin.c:1234
 msgid "_Properties"
 msgstr "Ei_ginleikar"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1247 panel/panel-window.c:3934
+#: libxfce4panel/xfce-panel-plugin.c:1245 panel/panel-window.c:4010
 msgid "_About"
 msgstr "_Um hugbúnaðinn"
 
 #. move item
-#: libxfce4panel/xfce-panel-plugin.c:1258
+#: libxfce4panel/xfce-panel-plugin.c:1256
 msgid "_Move"
 msgstr "_Flytja"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1274 panel/panel-application.c:354
-#: panel/panel-plugin-external.c:420 panel/panel-preferences-dialog.c:1076
-#: plugins/launcher/launcher-dialog.c:935
+#: libxfce4panel/xfce-panel-plugin.c:1272 panel/panel-application.c:357
+#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1066
+#: plugins/launcher/launcher-dialog.c:934
 msgid "_Remove"
 msgstr "Fja_rlægja"
 
-#: libxfce4panel/xfce-panel-plugin.c:1292
+#: libxfce4panel/xfce-panel-plugin.c:1290
 msgid "Pane_l"
 msgstr "Skjásti_ka"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1300 panel/panel-window.c:3871
+#: libxfce4panel/xfce-panel-plugin.c:1298 panel/panel-window.c:3947
 msgid "Add _New Items..."
 msgstr "Bæta við _nýjum atriðum..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1311 panel/panel-window.c:3882
+#: libxfce4panel/xfce-panel-plugin.c:1309 panel/panel-window.c:3958
 msgid "Panel Pr_eferences..."
 msgstr "_Kjörstillingar skjástiku..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1328 panel/panel-window.c:3909
+#: libxfce4panel/xfce-panel-plugin.c:1326 panel/panel-window.c:3985
 msgid "Log _Out"
 msgstr "_Skrá út"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1355
+#: libxfce4panel/xfce-panel-plugin.c:1353
 msgid "About"
 msgstr "Um hugbúnaðinn"
 
@@ -1240,18 +1260,18 @@ msgstr "Viltu ræsa skjástikuna? Ef svo er, gakktu úr skugga um að þú visti
 msgid "Execute"
 msgstr "Keyra"
 
-#: panel/panel-application.c:210
+#: panel/panel-application.c:213
 msgid "Failed to launch the migration application"
 msgstr "Mistókst að ræsa yfirfærsluforritið"
 
-#: panel/panel-application.c:344
+#: panel/panel-application.c:347
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr ""
 
-#: panel/panel-application.c:346
+#: panel/panel-application.c:349
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -1261,46 +1281,46 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr ""
 
-#: panel/panel-application.c:353
+#: panel/panel-application.c:356
 msgid "Plugin loading failure"
 msgstr ""
 
-#: panel/panel-application.c:354
+#: panel/panel-application.c:357
 msgid "_Quit"
 msgstr "_Hætta"
 
-#: panel/panel-application.c:1034
+#: panel/panel-application.c:1037
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Þetta býr til nýtt ræsiíforrit á skjástikunni og setur skrárnar sem sleppt er þar sem valmyndafærslur."
 
-#: panel/panel-application.c:1037
+#: panel/panel-application.c:1040
 msgid "Create _Launcher"
 msgstr "Bú_a til forritaræsi..."
 
-#: panel/panel-application.c:1038
+#: panel/panel-application.c:1041
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Búa til nýjan ræsi úr %d skjáborðsskrá"
 msgstr[1] "Búa til nýjan ræsi úr %d skjáborðsskrám"
 
-#: panel/panel-application.c:1805
+#: panel/panel-application.c:1808
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Þú ræstir X án setustjórnunar. Ef smellt er á \"Hætta\" verður X-þjóninum lokað."
 
-#: panel/panel-application.c:1808
+#: panel/panel-application.c:1811
 msgid "Quit"
 msgstr "Hætta"
 
-#: panel/panel-application.c:1808
+#: panel/panel-application.c:1811
 msgid "Are you sure you want to quit the panel?"
 msgstr "Ertu viss um að þú viljir slökkva á skjástiku?"
 
-#: panel/panel-application.c:1816
+#: panel/panel-application.c:1819
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Gat ekki keyrt skipunina \"%s\""
@@ -1334,9 +1354,9 @@ msgid "Add New Item"
 msgstr "Bæta við nýju atriði"
 
 #: panel/panel-dialogs.c:157 plugins/actions/actions.c:864
-#: plugins/applicationsmenu/applicationsmenu.c:601
-#: plugins/directorymenu/directorymenu.c:461
-#: plugins/directorymenu/directorymenu.c:932
+#: plugins/applicationsmenu/applicationsmenu.c:584
+#: plugins/directorymenu/directorymenu.c:485
+#: plugins/directorymenu/directorymenu.c:985
 msgid "_Cancel"
 msgstr "_Hætta við"
 
@@ -1344,7 +1364,7 @@ msgstr "_Hætta við"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Veldu skjástiku undir nýja íhlutinn:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1023
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1013
 #, c-format
 msgid "Panel %d"
 msgstr "Skjástika %d"
@@ -1368,12 +1388,12 @@ msgstr "Sláðu hér inn leitarstreng"
 msgid "Internal name: %s"
 msgstr ""
 
-#: panel/panel-plugin-external.c:413
+#: panel/panel-plugin-external.c:420
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "Viðbótin \"%s\" hvarf óvænt af skjástikunni, viltu endurræsa hana núna?"
 
-#: panel/panel-plugin-external.c:414
+#: panel/panel-plugin-external.c:421
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -1381,11 +1401,11 @@ msgid ""
 "permanently removed from the panel."
 msgstr "Viðbótin endurræstist oftar en einu sinni á síðustu %d sekúndum. Ef þú ýtir á 'Keyra' mun skjástikan reyna að endurræsa viðbótina, en annars verður henni endanlega eytt af skjástikunni."
 
-#: panel/panel-plugin-external.c:419
+#: panel/panel-plugin-external.c:426
 msgid "Plugin Restart"
 msgstr ""
 
-#: panel/panel-plugin-external.c:420
+#: panel/panel-plugin-external.c:427
 msgid "_Execute"
 msgstr "_Keyra"
 
@@ -1398,33 +1418,33 @@ msgstr "_Um hugbúnaðinn"
 msgid "Show about information of the currently selected item"
 msgstr "Sýna upplýsingar um valið atriði"
 
-#: panel/panel-preferences-dialog.c:580
+#: panel/panel-preferences-dialog.c:570
 msgid "Automatic"
 msgstr "Sjálfvirkt"
 
-#: panel/panel-preferences-dialog.c:589
+#: panel/panel-preferences-dialog.c:579
 msgid "Primary"
 msgstr "Aðal"
 
-#: panel/panel-preferences-dialog.c:1075
+#: panel/panel-preferences-dialog.c:1065
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Skjástikan og stillingar viðbótarinnar verða endanlega fjarlægð"
 
-#: panel/panel-preferences-dialog.c:1084
+#: panel/panel-preferences-dialog.c:1074
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Ertu viss að þú viljir fjarlægja skjástiku %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1376
+#: panel/panel-preferences-dialog.c:1366
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(ytra)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1381
+#: panel/panel-preferences-dialog.c:1371
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1433,22 +1453,22 @@ msgstr "Innra heiti: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1393
+#: panel/panel-preferences-dialog.c:1383
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Innra heiti: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1508
+#: panel/panel-preferences-dialog.c:1498
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Ef þú fjarlægir atriði af skjástikunni, tapast það endanlega."
 
-#: panel/panel-preferences-dialog.c:1512
-#: plugins/launcher/launcher-dialog.c:930
+#: panel/panel-preferences-dialog.c:1502
+#: plugins/launcher/launcher-dialog.c:929
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr ""
 
-#: panel/panel-preferences-dialog.c:1514
+#: panel/panel-preferences-dialog.c:1504
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr ""
 
@@ -1476,7 +1496,7 @@ msgstr "Vanur"
 msgid "Expert"
 msgstr "Snillingur"
 
-#: panel/panel-window.c:3896
+#: panel/panel-window.c:3972
 msgid "_Lock Panel"
 msgstr "Læsa skjástiku"
 
@@ -1627,7 +1647,7 @@ msgstr "Slekk á tölvu eftir %d sekúndur."
 msgid "Failed to run action \"%s\""
 msgstr "Gat ekki keyrt aðgerðina \"%s\""
 
-#: plugins/actions/actions.c:1364
+#: plugins/actions/actions.c:1367
 msgid "Little Mouse"
 msgstr ""
 
@@ -1640,18 +1660,18 @@ msgstr "Skrá út, læsa eða aðrar kerfisaðgerðir"
 msgid "Applications"
 msgstr "Forrit"
 
-#: plugins/applicationsmenu/applicationsmenu.c:601
-#: plugins/directorymenu/directorymenu.c:461
+#: plugins/applicationsmenu/applicationsmenu.c:584
+#: plugins/directorymenu/directorymenu.c:485
 msgid "Select An Icon"
 msgstr "Veldu táknmynd"
 
-#: plugins/applicationsmenu/applicationsmenu.c:601
-#: plugins/directorymenu/directorymenu.c:461
+#: plugins/applicationsmenu/applicationsmenu.c:584
+#: plugins/directorymenu/directorymenu.c:485
 msgid "_OK"
 msgstr "Í _lagi"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:638 plugins/clock/clock.c:1083
+#: plugins/applicationsmenu/applicationsmenu.c:621 plugins/clock/clock.c:1083
 #: plugins/launcher/launcher.c:2499
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -2032,69 +2052,69 @@ msgstr "tólf"
 msgid "What time is it?"
 msgstr "Hvað er klukkan?"
 
-#: plugins/directorymenu/directorymenu.c:690
+#: plugins/directorymenu/directorymenu.c:743
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Mistókst að keyra forrit \"%s\""
 
-#: plugins/directorymenu/directorymenu.c:721
+#: plugins/directorymenu/directorymenu.c:774
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Mistókst að yfirfara tegund innihalds \"%s\""
 
-#: plugins/directorymenu/directorymenu.c:730
+#: plugins/directorymenu/directorymenu.c:783
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Ekkert sjálfgefið forrit fannst fyrir \"%s\""
 
-#: plugins/directorymenu/directorymenu.c:746
+#: plugins/directorymenu/directorymenu.c:799
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Mistókst að keyra sjálfgefið forrit fyrir \"%s\""
 
-#: plugins/directorymenu/directorymenu.c:840
+#: plugins/directorymenu/directorymenu.c:893
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Mistókst að keyra valið forrit fyrir flokkinn \"%s\""
 
-#: plugins/directorymenu/directorymenu.c:921
+#: plugins/directorymenu/directorymenu.c:974
 msgid "Create New Folder"
 msgstr "Búa til nýja möppu"
 
-#: plugins/directorymenu/directorymenu.c:926
+#: plugins/directorymenu/directorymenu.c:979
 msgid "Create New Text Document"
 msgstr "Búa til nýtt textaskjal"
 
-#: plugins/directorymenu/directorymenu.c:932
+#: plugins/directorymenu/directorymenu.c:985
 msgid "C_reate"
 msgstr "_Búa til"
 
-#: plugins/directorymenu/directorymenu.c:932
+#: plugins/directorymenu/directorymenu.c:985
 msgid "Create & _Open"
 msgstr "Útbúa _og opna"
 
-#: plugins/directorymenu/directorymenu.c:945
+#: plugins/directorymenu/directorymenu.c:998
 msgid "Enter the new name:"
 msgstr "Skrifaðu inn nýtt heiti:"
 
-#: plugins/directorymenu/directorymenu.c:981
+#: plugins/directorymenu/directorymenu.c:1034
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Mistókst að búa til möppu: %s"
 
-#: plugins/directorymenu/directorymenu.c:1063
+#: plugins/directorymenu/directorymenu.c:1116
 msgid "Open Folder"
 msgstr "Opna möppu"
 
-#: plugins/directorymenu/directorymenu.c:1077
+#: plugins/directorymenu/directorymenu.c:1130
 msgid "Open in Terminal"
 msgstr "Opna í skjáhermi"
 
-#: plugins/directorymenu/directorymenu.c:1091
+#: plugins/directorymenu/directorymenu.c:1144
 msgid "Create Folder..."
 msgstr "Búa til möppu..."
 
-#: plugins/directorymenu/directorymenu.c:1105
+#: plugins/directorymenu/directorymenu.c:1158
 msgid "Create Text Document..."
 msgstr "Búa til textaskjal..."
 
@@ -2118,26 +2138,26 @@ msgstr "Engin atriði"
 msgid "Failed to open desktop item editor"
 msgstr "Mistókst að ræsa ritil fyrir skjáborðsatriði"
 
-#: plugins/launcher/launcher-dialog.c:922
+#: plugins/launcher/launcher-dialog.c:921
 msgid "Unnamed item"
 msgstr "Nafnlaust atriði"
 
-#: plugins/launcher/launcher-dialog.c:923
+#: plugins/launcher/launcher-dialog.c:922
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Ertu viss um að þú viljir fjarlægja \"%s\"?"
 
-#: plugins/launcher/launcher-dialog.c:936
+#: plugins/launcher/launcher-dialog.c:935
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Ef þú eyðir hlut, verður hann endanlega fjarlægður"
 
+#: plugins/launcher/launcher-dialog.c:1032
 #: plugins/launcher/launcher-dialog.c:1033
-#: plugins/launcher/launcher-dialog.c:1034
 msgid "Add a new empty item"
 msgstr "Bæta við nýjum auðum hlut"
 
+#: plugins/launcher/launcher-dialog.c:1046
 #: plugins/launcher/launcher-dialog.c:1047
-#: plugins/launcher/launcher-dialog.c:1048
 msgid "Add a new hyperlink"
 msgstr "Bæta við nýjum veftengli"
 
@@ -2145,11 +2165,11 @@ msgstr "Bæta við nýjum veftengli"
 msgid "Program launcher with optional menu"
 msgstr "Forritaræsir með mögulegri valmynd"
 
-#: plugins/pager/pager.c:806
+#: plugins/pager/pager.c:868
 msgid "Unable to open the workspace settings"
 msgstr "Tókst ekki að opna vinnusvæðastillingar"
 
-#: plugins/pager/pager-buttons.c:646 plugins/windowmenu/windowmenu.c:1007
+#: plugins/pager/pager-buttons.c:645 plugins/windowmenu/windowmenu.c:1008
 #, c-format
 msgid "Workspace %d"
 msgstr "Vinnusvæði %d"
@@ -2212,12 +2232,12 @@ msgid ""
 "items"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:3226
+#: plugins/tasklist/tasklist-widget.c:3224
 #, c-format
 msgid "Unable to start new instance of '%s'"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:3253
+#: plugins/tasklist/tasklist-widget.c:3251
 msgid "Launch New Instance"
 msgstr ""
 
@@ -2241,11 +2261,11 @@ msgstr "_Minnka alla"
 msgid "_Close All"
 msgstr "Loka _öllu"
 
-#: plugins/tasklist/tasklist-widget.c:5051
+#: plugins/tasklist/tasklist-widget.c:5049
 msgid "all monitors"
 msgstr ""
 
-#: plugins/tasklist/tasklist-widget.c:5060
+#: plugins/tasklist/tasklist-widget.c:5058
 msgid "panel's monitor"
 msgstr ""
 
@@ -2257,28 +2277,28 @@ msgstr "Skipta á milli opinna glugga með hnöppum"
 msgid "Windows"
 msgstr ""
 
-#: plugins/windowmenu/windowmenu.c:786
+#: plugins/windowmenu/windowmenu.c:787
 msgid "Desktop"
 msgstr "Skjáborð"
 
-#: plugins/windowmenu/windowmenu.c:1402
+#: plugins/windowmenu/windowmenu.c:1403
 msgid "No Windows"
 msgstr "Engir gluggar"
 
-#: plugins/windowmenu/windowmenu.c:1417
+#: plugins/windowmenu/windowmenu.c:1418
 msgid "Urgent Windows"
 msgstr "Áríðandi gluggar"
 
-#: plugins/windowmenu/windowmenu.c:1468
+#: plugins/windowmenu/windowmenu.c:1469
 msgid "Add Workspace"
 msgstr "Bæta við vinnusvæði"
 
-#: plugins/windowmenu/windowmenu.c:1490
+#: plugins/windowmenu/windowmenu.c:1491
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Fjarlægja vinnusvæði \"%s\""
 
-#: plugins/windowmenu/windowmenu.c:1492
+#: plugins/windowmenu/windowmenu.c:1493
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Fjarlægja vinnusvæði %d"
