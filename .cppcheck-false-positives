@@ -1,6 +1,8 @@
-nullPointer:plugins/launcher/launcher-dialog.c:601
 nullPointer:migrate/migrate-default.c:219
 nullPointer:migrate/migrate-default.c:263
 sizeofDivisionMemfunc:plugins/actions/actions.c:1452
 memleak:panel/panel-tic-tac-toe.c:637
 unreadVariable:panel/main.c:221
+redundantCondition:panel/panel-window.c:656
+multiCondition:panel/panel-window.c:1407
+knownArgument:panel/panel-preferences-dialog.c:630
