@@ -173,7 +173,7 @@ wrapper_gproxy_set (GDBusProxy *proxy,
           break;
 
         default:
-          g_critical ("Received unknown plugin property %u for %s-%d",
+          g_critical ("Received unknown plugin property %d for %s-%d",
                       type, xfce_panel_plugin_provider_get_name (provider),
                       xfce_panel_plugin_provider_get_unique_id (provider));
           break;
