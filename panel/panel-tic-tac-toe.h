@@ -24,9 +24,6 @@
 G_BEGIN_DECLS
 
 #define PANEL_TYPE_TIC_TAC_TOE (panel_tic_tac_toe_get_type ())
-#ifndef glib_autoptr_clear_XfceTitledDialog
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (XfceTitledDialog, g_object_unref)
-#endif
 G_DECLARE_FINAL_TYPE (PanelTicTacToe, panel_tic_tac_toe, PANEL, TIC_TAC_TOE, XfceTitledDialog)
 
 void
