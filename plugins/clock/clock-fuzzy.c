@@ -319,7 +319,7 @@ xfce_clock_fuzzy_update (XfceClockFuzzy *fuzzy,
       time_format = _(i18n_hour_sectors[sector]);
 
       /* add hour offset (%0 or %1 on the string) */
-      p = strchr (time_format, '%');
+      p = (gchar *) strchr (time_format, '%');
       panel_assert (p != NULL && g_ascii_isdigit (*(p + 1)));
       if (G_LIKELY (p != NULL))
         hour += g_ascii_digit_value (*(p + 1));
@@ -336,7 +336,7 @@ xfce_clock_fuzzy_update (XfceClockFuzzy *fuzzy,
           time_format = _(i18n_hour_sectors_one[sector]);
 
           /* make sure we have to correct digit for the replace pattern */
-          p = strchr (time_format, '%');
+          p = (gchar *) strchr (time_format, '%');
           panel_assert (p != NULL && g_ascii_isdigit (*(p + 1)));
         }
 
@@ -344,7 +344,7 @@ xfce_clock_fuzzy_update (XfceClockFuzzy *fuzzy,
 
       /* replace the %? with the hour name */
       g_snprintf (pattern, sizeof (pattern), "%%%c", p != NULL ? *(p + 1) : '0');
-      p = strstr (time_format, pattern);
+      p = (gchar *) strstr (time_format, pattern);
       if (p != NULL)
         {
           g_string_append_len (string, time_format, p - time_format);
