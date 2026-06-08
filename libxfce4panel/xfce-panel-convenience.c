@@ -190,7 +190,7 @@ xfce_panel_pixbuf_from_source_at_size_and_scale (const gchar *source,
       if (G_UNLIKELY (pixbuf == NULL))
         {
           /* try to lookup names like application.png in the theme */
-          p = strrchr (source, '.');
+          p = (gchar *) strrchr (source, '.');
           if (p != NULL)
             {
               name = g_strndup (source, p - source);
