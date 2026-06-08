@@ -1,3 +1,84 @@
+4.21.2 (2026-06-08)
+======
+- build: Require libxfce4ui 4.21.8 and remove wrong define guard
+- cppcheck: Fix knownArgument
+- cppcheck: Fix multiCondition
+- cppcheck: Fix redundantCondition
+- cppcheck: Fix invalidPrintfArgType_uint
+- cppcheck: Fix unmatchedSuppression
+- cppcheck: Fix unreadVariable
+- cppcheck: Fix invalidPrintfArgType_sint
+- cppcheck: Fix mismatchAllocDealloc
+- cppcheck: Fix memleak
+- cppcheck: Fix duplicateConditionalAssign
+- cppcheck: Fix sizeofDivisionMemfunc
+- cppcheck: Fix arrayIndexOutOfBounds
+- cppcheck: Fix nullPointer
+- cppcheck: Fix knownConditionTrueFalse
+- cppcheck: Fix redundantCondition
+- cppcheck: Fix invalidScanfArgType_int
+- cppcheck: Add project config file
+- directorymenu: Add sorting option
+- scan-build: Update false positive file after clang version bump
+- gcc-analyzer: Update false positive file after gcc version bump
+- gobject_linter: Fix g_param_spec_static_strings
+- gobject-linter: Fix use_clear_functions
+- gobject-linter: Fix unnecessary_null_check
+- gobject-linter: Fix use_g_steal_pointer
+- gobject-linter: Fix missing_implementation
+- gobject-linter: Fix missing_autoptr_cleanup
+- gobject-linter: Fix g_error_leak
+- gobject-linter: Fix signal_canonical_name
+- gobject-linter: Fix use_g_source_once
+- gobject-linter: Fix strcmp_explicit_comparison
+- panel: Use same code to cleanup plugin config everywhere
+- icons: Fix non-zero page opacity
+- panel: Set itembar clip when allocating window
+- I18n: Update po/LINGUAS list
+- clock: Change space padded default time formats to not padded
+- actions: Fix variable used out of scope
+- pager: Fix workspace switch for Compiz when scrolling over pager
+- build: Do not display full path in generated headers
+- build: Install missing libxfce4panel.h
+- build: Be sure to generate sub-headers before including 
+libxfce4panel.h
+- tasklist: Destroy group menu item if window is closed
+- panel: Fix typo
+- prefs-dialog: Fix string leak when removing panel item
+- panel: Make non-GObject internal plugins resident
+- Revert "plugins: Do not use g_intern_static_string"
+- prefs-dialog: Rewrite function for removing an item
+- panel: Do not fall through when internal plugin failed to load
+- wayland: panel: Track set_anchor_default source id
+- plugins: Do not use g_intern_static_string
+- panel: Fix wrong memory management
+- panel: Set keep-below property only if necessary
+- panel: Be sure to set plugin properties when appropriate
+- Set application name so internal plugins can't override it
+- panel: Don't set GdkWMFunction if not realized
+- plugins: Reset workspace group when needed
+- wayland: Guard layer-shell related code also at runtime
+- wayland: Review screen layout change management
+- common: Only remap widget if visible
+- wayland: autohide: Fix autohide of floating panel
+- clock: Move "Time and Date Settings" button to plugin right-click menu
+- wayland: Handle null workspace group list when a group is destroyed
+- windowmenu: Add new style type "Text"
+- arrow-fix: Restoring the button size after the arrow disappears
+- build: Fix typo in optimization level
+- Translation Updates:
+  Albanian, Amharic, Arabic, Armenian (Armenia), Asturian, Basque,
+  Belarusian, Bengali, Bulgarian, Catalan, Chinese (China), Chinese
+  (Hong Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch,
+  Eastern Armenian, English (Australia), English (United Kingdom),
+  Estonian, Finnish, French, Galician, Georgian, German, Greek, Hebrew,
+  Hungarian, Icelandic, Indonesian, Interlingue, Italian, Japanese,
+  Kazakh, Korean, Lao, Lithuanian, Malay, Norwegian Bokmål, Norwegian
+  Nynorsk, Occitan (post 1500), Panjabi (Punjabi), Polish, Portuguese,
+  Portuguese (Brazil), Romanian, Russian, Serbian, Slovak, Slovenian,
+  Spanish, Swedish, Tatar, Thai, Turkish, Ukrainian, Uyghur, Venetian,
+  Vietnamese
+
 4.21.1 (2025-11-16)
 ======
 - build: Rename POTFILES.in to POTFILES (for good…)
