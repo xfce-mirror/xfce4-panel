@@ -917,7 +917,7 @@ xfce_panel_plugin_set_property (GObject *object,
         {
           priv->name = g_value_dup_string (value);
 
-          context = gtk_widget_get_style_context (GTK_WIDGET (object));
+          GtkStyleContext *context = gtk_widget_get_style_context (GTK_WIDGET (object));
           gtk_style_context_add_class (context, "panel-plugin");
           gtk_style_context_add_class (context, priv->name);
         }
