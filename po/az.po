@@ -1,0 +1,2307 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce4-panel.master package.
+# 
+# Translators:
+# Bilgin Gamer <mdyos@inbox.ru>, 2026
+# Bilgin Gamer <mdyos@inbox.ru>, 2026
+msgid ""
+msgstr ""
+"Project-Id-Version: Xfce4-panel\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2026-06-04 00:53+0200\n"
+"PO-Revision-Date: 2013-07-02 20:26+0000\n"
+"Last-Translator: Bilgin Gamer <mdyos@inbox.ru>, 2026\n"
+"Language-Team: Azerbaijani (http://app.transifex.com/xfce/xfce4-panel/language/az/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: az\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: panel-desktop-handler.desktop.in:4
+msgid "Create Launcher on the panel"
+msgstr "Paneldə Başladıcı yarat"
+
+#: panel-desktop-handler.desktop.in:5
+msgid ""
+"Add a new launcher to the panel based on the information of this desktop "
+"file"
+msgstr "Bu iş masası faylına əsaslanaraq paneldə yeni bir çalışdırıcı yarat"
+
+#: panel-preferences.desktop.in:8
+msgid ""
+"panels;settings;preferences;taskbar;autohide;application "
+"menu;start;buttons;launcher;notification area;status;icons;plugins;"
+msgstr "panellər;quruluşlar;üstünlüklər;görəv çubuğu;özgizləyiş;uyğulama seçməsi;başlayış;düymələr;çalışdırıcı;bildiriş bölgəsi;durum;ikonlar;artırmalar"
+
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3935
+msgid "Panel"
+msgstr "Panel"
+
+#: panel-preferences.desktop.in:16
+msgid "Customize the panel"
+msgstr "Paneli özəlləşdir"
+
+#: common/resources/panel-preferences-dialog.glade:13
+msgid "Never"
+msgstr "Heç vaxt"
+
+#: common/resources/panel-preferences-dialog.glade:16
+msgid "Intelligently"
+msgstr "Ağıllıca"
+
+#: common/resources/panel-preferences-dialog.glade:19
+msgid "Always"
+msgstr "Hər Zaman"
+
+#: common/resources/panel-preferences-dialog.glade:71
+msgid "Horizontal"
+msgstr "Horizontal"
+
+#: common/resources/panel-preferences-dialog.glade:74
+msgid "Vertical"
+msgstr "Dikək"
+
+#: common/resources/panel-preferences-dialog.glade:77
+msgid "Deskbar"
+msgstr "Masa çubuğu"
+
+#: common/resources/panel-preferences-dialog.glade:124
+msgid "None (use system style)"
+msgstr "Heç biri (sistem görkəmini işlət)"
+
+#: common/resources/panel-preferences-dialog.glade:127
+msgid "Solid color"
+msgstr "Bir rəng"
+
+#: common/resources/panel-preferences-dialog.glade:130
+msgid "Background image"
+msgstr "Arxa plan şəkli"
+
+#: common/resources/panel-preferences-dialog.glade:136
+msgid "Panel Preferences"
+msgstr "Panel Üstünlükləri"
+
+#: common/resources/panel-preferences-dialog.glade:153
+#: common/resources/actions-dialog.glade:82
+#: common/resources/applicationsmenu-dialog.glade:55
+#: common/resources/clock-dialog.glade:105
+#: common/resources/directorymenu-dialog.glade:48
+#: common/resources/launcher-dialog.glade:103
+#: common/resources/launcher-dialog.glade:270
+#: common/resources/pager-dialog.glade:97
+#: common/resources/separator-dialog.glade:58
+#: common/resources/showdesktop-dialog.glade:34
+#: common/resources/sn-dialog.glade:65
+#: common/resources/tasklist-dialog.glade:86
+#: common/resources/windowmenu-dialog.glade:51 panel/panel-item-dialog.c:205
+#: panel/panel-tic-tac-toe.c:110
+msgid "_Close"
+msgstr "_Bağla"
+
+#. help item
+#: common/resources/panel-preferences-dialog.glade:168
+#: common/resources/actions-dialog.glade:97
+#: common/resources/applicationsmenu-dialog.glade:39
+#: common/resources/clock-dialog.glade:120
+#: common/resources/directorymenu-dialog.glade:63
+#: common/resources/launcher-dialog.glade:254
+#: common/resources/pager-dialog.glade:81
+#: common/resources/separator-dialog.glade:73
+#: common/resources/showdesktop-dialog.glade:49
+#: common/resources/tasklist-dialog.glade:102
+#: common/resources/windowmenu-dialog.glade:66
+#: libxfce4panel/xfce-panel-plugin.c:1342 panel/panel-item-dialog.c:201
+#: panel/panel-window.c:4001
+msgid "_Help"
+msgstr "_Yardım"
+
+#: common/resources/panel-preferences-dialog.glade:213
+msgid "Profiles:"
+msgstr "Profillər:"
+
+#: common/resources/panel-preferences-dialog.glade:241
+msgid "_Backup and restore"
+msgstr "Yedəklə və _qaytar"
+
+#: common/resources/panel-preferences-dialog.glade:245
+msgid "Switch between panel presets"
+msgstr "Panel ön quruluşları arasında keçirt"
+
+#: common/resources/panel-preferences-dialog.glade:289
+msgid "Add a new panel"
+msgstr "Yeni panel artır"
+
+#: common/resources/panel-preferences-dialog.glade:314
+msgid "Remove the currently selected panel"
+msgstr "Seçilmiş paneli qaldır"
+
+#: common/resources/panel-preferences-dialog.glade:365
+#: common/resources/panel-preferences-dialog.glade:745
+msgid "<b>General</b>"
+msgstr "<b>Ümumi</b>"
+
+#: common/resources/panel-preferences-dialog.glade:380
+msgid "M_ode:"
+msgstr "_Durum:"
+
+#: common/resources/panel-preferences-dialog.glade:409
+msgid "Span mo_nitors"
+msgstr "_Monitorları Birləşdir"
+
+#: common/resources/panel-preferences-dialog.glade:413
+msgid "Select this option to extend the panel over multiple monitors."
+msgstr "Paneli çoxlu monitor üzərində genişlətmək üçün bu seçimi seçin."
+
+#: common/resources/panel-preferences-dialog.glade:426
+msgid "_Lock panel"
+msgstr "Paneli B_ərkit"
+
+#: common/resources/panel-preferences-dialog.glade:430
+msgid ""
+"Select this option to hide the handles of the panel and lock its position."
+msgstr "Panelin əllərini gizlətmək və yerləşimini bərkitmək üçün bu seçimi seçin."
+
+#: common/resources/panel-preferences-dialog.glade:443
+msgid "_Reserve space on screen edges for the panel"
+msgstr "Bu panel üçün ekran qıraqlarında ara _saxla"
+
+#: common/resources/panel-preferences-dialog.glade:447
+msgid ""
+"Select this option if you don't want maximized windows to overlap the panel "
+"area. This only works when the panel is attached to a screen edge and "
+"autohide is disabled."
+msgstr "Böyüdülmüş pəncərələrin panel bölgəsini örtməsini istəmirsinizsə, bu seçimi seçin. Bu ancaq, panelin ekran qırağına bərkidilişi və özbaşına gizlədilişin qoşulu olmadığı zaman işləyir."
+
+#: common/resources/panel-preferences-dialog.glade:460
+msgid "_Keep panel below windows"
+msgstr "Paneli pəncərələrin altında _saxla"
+
+#: common/resources/panel-preferences-dialog.glade:464
+msgid ""
+"Select this option if you want windows to cover the panel. When autohide is "
+"enabled, panel is always on top."
+msgstr "Pəncərələrin paneli örtməsini istəyirsinizsə, bu seçimi seçin. Özbaşına gizlədiliş qoşulu olduqda, panel daim üstdə olacaq."
+
+#: common/resources/panel-preferences-dialog.glade:485
+msgid "Au_tomatically hide the panel:"
+msgstr "Paneli _özbaşına gizlət:"
+
+#: common/resources/panel-preferences-dialog.glade:526
+msgid "O_utput:"
+msgstr "Ç_ıxarılış:"
+
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
+#: common/resources/panel-preferences-dialog.glade:570
+msgid "<b>Measurements</b>"
+msgstr "<b>Ölçülər</b>"
+
+#: common/resources/panel-preferences-dialog.glade:585
+msgid "Row _size (pixels):"
+msgstr "Sətir ö_lçüsü (piksellər):"
+
+#: common/resources/panel-preferences-dialog.glade:599
+msgid "Num_ber of rows:"
+msgstr "Sətir _sayı:"
+
+#: common/resources/panel-preferences-dialog.glade:613
+msgid "L_ength (pixels):"
+msgstr "_Uzunluq (piksellər):"
+
+#: common/resources/panel-preferences-dialog.glade:642
+msgid "Border width (pixels):"
+msgstr "Qıraq enliliyi (piksellər):"
+
+#: common/resources/panel-preferences-dialog.glade:665
+msgid "A_utomatically increase the length"
+msgstr "Uzunluğu ö_zbaşına artır"
+
+#: common/resources/panel-preferences-dialog.glade:669
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr "Qoşmalar daha çox ara istədikdə panelin uzunluğunu özbaşına artırmaq üçün bu seçimi seçin."
+
+#: common/resources/panel-preferences-dialog.glade:719
+msgid "D_isplay"
+msgstr "_Ekran"
+
+#: common/resources/panel-preferences-dialog.glade:760
+msgid "Dark mode"
+msgstr "Tünd durum"
+
+#: common/resources/panel-preferences-dialog.glade:800
+msgid "<b>Background</b>"
+msgstr "<b>Arxa Plan</b>"
+
+#: common/resources/panel-preferences-dialog.glade:815
+#: common/resources/separator-dialog.glade:123
+msgid "_Style:"
+msgstr "_Görkəm:"
+
+#: common/resources/panel-preferences-dialog.glade:847
+msgid "C_olor:"
+msgstr "_Rəng:"
+
+#: common/resources/panel-preferences-dialog.glade:862
+msgid "Pick a Panel Color"
+msgstr "Panel Rəngini Seç"
+
+#: common/resources/panel-preferences-dialog.glade:875
+msgid "_File:"
+msgstr "_Fayl:"
+
+#: common/resources/panel-preferences-dialog.glade:888
+msgid "Select A Background Image"
+msgstr "Arxa Plan Şəkli Seç"
+
+#: common/resources/panel-preferences-dialog.glade:915
+msgid "<b>Icons</b>"
+msgstr "<b>İkonlar</b>"
+
+#: common/resources/panel-preferences-dialog.glade:929
+msgid "Adjust size au_tomatically"
+msgstr "Ölçünü özba_şına ayarla"
+
+#: common/resources/panel-preferences-dialog.glade:966
+msgid "Fixed icon _size (pixels):"
+msgstr "Uyğunlanmış simgə ö_lçüsü (piksellər):"
+
+#: common/resources/panel-preferences-dialog.glade:1009
+msgid "<b>Opacity</b>"
+msgstr "<b>Görünürlük</b>"
+
+#: common/resources/panel-preferences-dialog.glade:1035
+msgid "Configure..."
+msgstr "Görkəmlət..."
+
+#: common/resources/panel-preferences-dialog.glade:1073
+msgid ""
+"<b>Compositing is currently disabled</b>\n"
+"Enable compositing in the window manager for opacity settings in the panel."
+msgstr "<b>Kompozitləniş indi qoşulu deyil</b>\nPaneldə görünürlük quruluşları üçün pəncərə yönətmənində kompozitlənişi qoşun."
+
+#. I18N: label for the enter transparency slider
+#: common/resources/panel-preferences-dialog.glade:1113
+msgid "_Enter:"
+msgstr "_Yönəliş:"
+
+#. I18N: label for the leave transparency slider
+#: common/resources/panel-preferences-dialog.glade:1140
+msgid "_Leave:"
+msgstr "_Buraxılış:"
+
+#: common/resources/panel-preferences-dialog.glade:1153
+msgid ""
+"Transparency when the pointer is not hovering over the panel, with 0 being "
+"fully transparent and 100 fully opaque."
+msgstr "Göstəricinin panel üzərində hərəkət etmədiyi zaman görünürlük, 0 ilə tam şəffaf və 100 ilə tam görünən."
+
+#: common/resources/panel-preferences-dialog.glade:1180
+msgid "Appeara_nce"
+msgstr "_Üz Görünüşü"
+
+#: common/resources/panel-preferences-dialog.glade:1208
+msgid "Ite_ms"
+msgstr "_Elementlər"
+
+#: common/resources/actions-dialog.glade:35
+#: common/resources/actions-dialog.glade:64
+#: plugins/actions/actions.desktop.in.in:4
+msgid "Action Buttons"
+msgstr "Eyləm Düymələri"
+
+#: common/resources/actions-dialog.glade:38 plugins/actions/actions.c:32
+msgid "Session Menu"
+msgstr "Oturum Seçməsi"
+
+#: common/resources/actions-dialog.glade:49
+msgid "Full Name"
+msgstr "Bütün Ad"
+
+#: common/resources/actions-dialog.glade:52
+msgid "Username"
+msgstr "İşlədici Adı"
+
+#: common/resources/actions-dialog.glade:55
+msgid "User ID"
+msgstr "İşlədici TL'si"
+
+#: common/resources/actions-dialog.glade:58
+msgid "Custom"
+msgstr "Özəl"
+
+#: common/resources/actions-dialog.glade:162
+msgid "Appeara_nce:"
+msgstr "Üz _Görünüşü:"
+
+#: common/resources/actions-dialog.glade:188
+msgid "Title:"
+msgstr "Başlıq:"
+
+#: common/resources/actions-dialog.glade:201
+msgid "Custo_m title:"
+msgstr "Özəl başlı_q:"
+
+#: common/resources/actions-dialog.glade:255
+#: common/resources/launcher-dialog.glade:306
+msgid "General"
+msgstr "Ümumi"
+
+#: common/resources/actions-dialog.glade:303
+msgid "Visible"
+msgstr "Görünən"
+
+#: common/resources/actions-dialog.glade:314
+msgid "Action"
+msgstr "Eyləm"
+
+#: common/resources/actions-dialog.glade:334
+msgid "_Show confirmation dialog"
+msgstr "_Onaylanış dialoqunu göstər"
+
+#: common/resources/actions-dialog.glade:338
+msgid ""
+"Show a confirmation dialog with a 30 second timeout for some of the actions."
+msgstr "Bir sıra eyləm üçün onaylanış dialoqunu 30 saniyə içində göstər."
+
+#: common/resources/actions-dialog.glade:354
+msgid "_Actions"
+msgstr "E_yləmlər"
+
+#: common/resources/applicationsmenu-dialog.glade:23
+#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:4
+msgid "Applications Menu"
+msgstr "Uyğulamalar Seçməsi"
+
+#: common/resources/applicationsmenu-dialog.glade:101
+#: common/resources/directorymenu-dialog.glade:136
+msgid "_Icon:"
+msgstr "_İmgə:"
+
+#: common/resources/applicationsmenu-dialog.glade:125
+msgid "Button _title:"
+msgstr "Düymə _başlığı:"
+
+#: common/resources/applicationsmenu-dialog.glade:136
+msgid "Show button on one _line"
+msgstr "Düyməni bir ç_izgidə göstər"
+
+#: common/resources/applicationsmenu-dialog.glade:151
+msgid "_Show button title"
+msgstr "Düymə b_aşlığını göstər"
+
+#: common/resources/applicationsmenu-dialog.glade:166
+msgid "Show application d_escription in tooltip"
+msgstr "Uyğulama açıqla_masını alət ipucusunda göstər"
+
+#: common/resources/applicationsmenu-dialog.glade:182
+msgid "Show ic_ons in menu"
+msgstr "İm_gələri seçmədə göstər"
+
+#: common/resources/applicationsmenu-dialog.glade:197
+msgid "Show generic application n_ames"
+msgstr "Ümumilənmiş uyğulama a_dlarını göstər"
+
+#: common/resources/applicationsmenu-dialog.glade:201
+msgid ""
+"Select this option to show the generic application name in the menu, for "
+"example \"File Manager\" instead of \"Thunar\""
+msgstr "Seçmədə ümumi uyğulama adını göstərmək üçün bu seçimi seçin, götürək \"Thunar\" yerinə \"Fayl Yönəldicisi\" kimi."
+
+#: common/resources/applicationsmenu-dialog.glade:229
+#: common/resources/clock-dialog.glade:418
+#: common/resources/directorymenu-dialog.glade:164
+#: common/resources/separator-dialog.glade:222
+#: common/resources/tasklist-dialog.glade:266
+#: common/resources/windowmenu-dialog.glade:209
+msgid "Appearance"
+msgstr "Görünüş"
+
+#: common/resources/applicationsmenu-dialog.glade:267
+msgid "Use the _default menu"
+msgstr "_Varsayılan seçməni işlət"
+
+#: common/resources/applicationsmenu-dialog.glade:282
+msgid "Ed_it Menu"
+msgstr "Seçməni _Düzəlt"
+
+#: common/resources/applicationsmenu-dialog.glade:304
+msgid "Use c_ustom menu file:"
+msgstr "_Özəl seçmə faylı işlət:"
+
+#: common/resources/applicationsmenu-dialog.glade:333
+msgid "Menu _file:"
+msgstr "Seçmə _faylı:"
+
+#: common/resources/applicationsmenu-dialog.glade:346
+msgid "Select A Menu File"
+msgstr "Seçmə Faylı Seç"
+
+#: common/resources/applicationsmenu-dialog.glade:371
+msgid "Menu File"
+msgstr "Seçmə Faylı"
+
+#: common/resources/clock-dialog.glade:13
+msgid "Decimal"
+msgstr "Onluq"
+
+#: common/resources/clock-dialog.glade:16
+msgid "Sexagesimal"
+msgstr "Altmışlıq"
+
+#: common/resources/clock-dialog.glade:19
+msgid "Binary time"
+msgstr "İkili vaxt"
+
+#: common/resources/clock-dialog.glade:30
+msgid "Date, then time"
+msgstr "Tarix, sonra vaxt"
+
+#: common/resources/clock-dialog.glade:33
+msgid "Time, then date"
+msgstr "Vaxt, sonra tarix"
+
+#: common/resources/clock-dialog.glade:36
+msgid "Date Only"
+msgstr "Ancaq Tarix"
+
+#: common/resources/clock-dialog.glade:39
+msgid "Time Only"
+msgstr "Ancaq Vaxt"
+
+#: common/resources/clock-dialog.glade:71
+msgid "Analog"
+msgstr "Analoq"
+
+#: common/resources/clock-dialog.glade:74
+msgid "Binary"
+msgstr "İkili"
+
+#: common/resources/clock-dialog.glade:77
+msgid "Digital"
+msgstr "Sayılı"
+
+#: common/resources/clock-dialog.glade:80
+msgid "Fuzzy"
+msgstr "Bulanıq"
+
+#: common/resources/clock-dialog.glade:83
+msgid "LCD"
+msgstr "LCD"
+
+#: common/resources/clock-dialog.glade:89 plugins/clock/clock.desktop.in.in:4
+msgid "Clock"
+msgstr "Saat"
+
+#: common/resources/clock-dialog.glade:172
+msgid ""
+"Name of a timezone corresponding a file in the zoneinfo database, for "
+"example \"America/New_York\". Leave empty to use the localtime."
+msgstr "Bölgəbilgisi verilənbazasındakı fayla uyğun vaxtbölgəsi adı, götürək üçün \"Amerika/Nü_York\". Yerlivaxt işlətmək üçün boş buraxın."
+
+#: common/resources/clock-dialog.glade:183
+msgid "Time_zone:"
+msgstr "Vaxt_bölgəsi:"
+
+#: common/resources/clock-dialog.glade:200
+msgid ""
+"Command to start on right-click \"Time settings\" menu item. Default is "
+"\"time-admin\"."
+msgstr "Sağ-tıq \"Vaxt quruluşları\" seçməsi elementində başladılış üçün göstəriş. \"time-admin\" varsayılandır."
+
+#: common/resources/clock-dialog.glade:211
+msgid "Configuration tool:"
+msgstr "Görkəmləniş aləti:"
+
+#: common/resources/clock-dialog.glade:227
+msgid "Time Settings"
+msgstr "Vaxt Quruluşları"
+
+#: common/resources/clock-dialog.glade:263
+msgid ""
+"If set, this command is run when the plugin is left-clicked, instead of "
+"displaying the default calendar."
+msgstr "Qurulduqda, qoşma sol-tıqlanarkən varsayılan kalendarın göstərilişi yerinə, bu göstəriş çalışacaq."
+
+#: common/resources/clock-dialog.glade:274
+msgid "Co_mmand:"
+msgstr "_Göstəriş:"
+
+#: common/resources/clock-dialog.glade:286
+msgid "_Show week numbers"
+msgstr "Həftə _sayılarını göstər"
+
+#: common/resources/clock-dialog.glade:307
+msgid "Calendar"
+msgstr "Kalendar"
+
+#: common/resources/clock-dialog.glade:342
+#: common/resources/clock-dialog.glade:682
+#: common/resources/clock-dialog.glade:804
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"page for additional information."
+msgstr "Bu panelə yeritmək üçün tarix və vaxt bölümlərinin açıqlanış biçimi. Götürək, %Y il ilə, %m ay ilə, %d gün ilə dəyişiləcək. Uyğun şəkildə, <b></b> etiketi yazını qalınlaşdıracaq. Artıq bilgi üçün \"Kömək\" səhifəsinə baxın."
+
+#: common/resources/clock-dialog.glade:371
+msgid "_Tooltip format:"
+msgstr "_İpucu biçimi:"
+
+#: common/resources/clock-dialog.glade:384
+#: common/resources/clock-dialog.glade:632
+msgid "_Layout:"
+msgstr "_Düzülüş:"
+
+#: common/resources/clock-dialog.glade:448
+msgid "Sho_w AM/PM"
+msgstr "AM/PM'i G_östər"
+
+#: common/resources/clock-dialog.glade:463
+msgid "Fl_ash time separators"
+msgstr "Vaxt ayrıcılarını _parlat"
+
+#: common/resources/clock-dialog.glade:478
+msgid "24-_hour clock"
+msgstr "24-s_aatlı saat"
+
+#: common/resources/clock-dialog.glade:521
+msgid "Binary mode:"
+msgstr "İkilik durumu:"
+
+#: common/resources/clock-dialog.glade:537
+msgid "Display _seconds"
+msgstr "Saniyələri g_östər"
+
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
+#: common/resources/clock-dialog.glade:558
+msgid "F_uzziness:"
+msgstr "B_ulanıqlıq:"
+
+#: common/resources/clock-dialog.glade:592
+msgid "Show _inactive segments"
+msgstr "İ_şləməyən seqmentləri göstər"
+
+#: common/resources/clock-dialog.glade:607
+msgid "Show gri_d"
+msgstr "_Toru göstər"
+
+#: common/resources/clock-dialog.glade:653
+#: common/resources/clock-dialog.glade:775
+msgid "Font:"
+msgstr "Yazılış:"
+
+#: common/resources/clock-dialog.glade:666
+#: common/resources/clock-dialog.glade:788
+msgid "Format:"
+msgstr "Biçim:"
+
+#: common/resources/clock-dialog.glade:683
+#: common/resources/clock-dialog.glade:805
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
+"the &quot;Help&quot; page for additional information."
+msgstr "Bu panelə yeritmək üçün tarix və vaxt bölümlərinin açıqlanış biçimi. Götürək, %Y il ilə, %m ay ilə, %d gün ilə dəyişiləcək. Uyğun şəkildə, &lt;b&gt;&lt;/b&gt; etiketləri yazını qalınlaşdıracaq. Artıq bilgi üçün &quot;Kömək&quot; səhifəsinə baxın."
+
+#: common/resources/clock-dialog.glade:712
+msgid "Date"
+msgstr "Tarix"
+
+#: common/resources/clock-dialog.glade:757
+msgid "Time"
+msgstr "Vaxt"
+
+#: common/resources/clock-dialog.glade:884
+msgid "Clock Options"
+msgstr "Saat Seçimləri"
+
+#: common/resources/directorymenu-dialog.glade:23
+msgid "Name"
+msgstr "Ad"
+
+#: common/resources/directorymenu-dialog.glade:26
+msgid "Modification Date"
+msgstr "Dəyişim Tarixi"
+
+#: common/resources/directorymenu-dialog.glade:32
+#: plugins/directorymenu/directorymenu.c:326
+#: plugins/directorymenu/directorymenu.desktop.in.in:4
+msgid "Directory Menu"
+msgstr "Qovluq Seçməsi"
+
+#: common/resources/directorymenu-dialog.glade:113
+msgid "Select A Directory"
+msgstr "Qovluq Seç"
+
+#: common/resources/directorymenu-dialog.glade:149
+msgid "_Base Directory:"
+msgstr "_Başlıca Qovluq:"
+
+#: common/resources/directorymenu-dialog.glade:193
+msgid "Show 'New Text _Document'"
+msgstr "'Yeni Yazı S_ənədi'ni Göstər"
+
+#: common/resources/directorymenu-dialog.glade:208
+msgid "Show '_New Folder'"
+msgstr "'_Yeni Qovluğu' Göstər"
+
+#: common/resources/directorymenu-dialog.glade:223
+msgid "Show 'Open in _Terminal'"
+msgstr "'_Terminalda Aç'ı Göstər"
+
+#: common/resources/directorymenu-dialog.glade:238
+msgid "Show '_Open _Folder'"
+msgstr "'_Qovluğu _Aç'ı Göstər"
+
+#: common/resources/directorymenu-dialog.glade:257
+msgid "Menu"
+msgstr "Seçmə"
+
+#: common/resources/directorymenu-dialog.glade:288
+msgid "Sort _by:"
+msgstr "_Çeşidlə:"
+
+#: common/resources/directorymenu-dialog.glade:318
+msgid "Reverse sort _order"
+msgstr "Tərs çeşidləniş _sırarı"
+
+#: common/resources/directorymenu-dialog.glade:337
+msgid "Sorting"
+msgstr "Çeşidləniş"
+
+#: common/resources/directorymenu-dialog.glade:366
+msgid "Show _hidden files"
+msgstr "_Gizli faylları göstər"
+
+#: common/resources/directorymenu-dialog.glade:383
+msgid ""
+"Enter a list of patterns that will be used to determine which files are "
+"visible in a directory. If you specify more than one pattern here, the list "
+"items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr "Qovluqlarda görünə biləcək faylların bəlirlənişi üçün işlədiləcək şablon sıralığını yerit. Burada birdən artıq şablonu göstərirsinizsə, sıralıq elementləri nöqtəli-vergülllərlə ayrılmalıdır (götürək, *.txt;*.doc)."
+
+#: common/resources/directorymenu-dialog.glade:395
+msgid "_File Pattern:"
+msgstr "_Fayl Şablonu:"
+
+#: common/resources/directorymenu-dialog.glade:410
+#: common/resources/tasklist-dialog.glade:529
+#: common/resources/windowmenu-dialog.glade:263
+msgid "Filtering"
+msgstr "Süzgü"
+
+#: common/resources/launcher-dialog.glade:30
+msgid "Default"
+msgstr "Varsayılan"
+
+#: common/resources/launcher-dialog.glade:33
+msgid "North"
+msgstr "Şimal"
+
+#: common/resources/launcher-dialog.glade:36
+msgid "West"
+msgstr "Qərb"
+
+#: common/resources/launcher-dialog.glade:39
+msgid "East"
+msgstr "Şərq"
+
+#: common/resources/launcher-dialog.glade:42
+msgid "South"
+msgstr "Cənub"
+
+#: common/resources/launcher-dialog.glade:45
+msgid "Inside Button"
+msgstr "İçəri Düymə"
+
+#: common/resources/launcher-dialog.glade:66 panel/panel-item-dialog.c:192
+msgid "Add New Items"
+msgstr "Yeni Elementlər Artır"
+
+#: common/resources/launcher-dialog.glade:73
+msgid "Add one or more existing items to the launcher"
+msgstr "Başladıcıya bir və ya daha çox var olan element artır"
+
+#: common/resources/launcher-dialog.glade:87 panel/panel-dialogs.c:157
+#: panel/panel-item-dialog.c:197
+msgid "_Add"
+msgstr "_Artır"
+
+#: common/resources/launcher-dialog.glade:140 panel/panel-item-dialog.c:221
+msgid "_Search:"
+msgstr "_Axtar"
+
+#: common/resources/launcher-dialog.glade:235
+#: plugins/launcher/launcher.desktop.in.in:4
+msgid "Launcher"
+msgstr "Başladıcı"
+
+#: common/resources/launcher-dialog.glade:321
+msgid "Disable t_ooltips"
+msgstr "İpucuları qoşma"
+
+#: common/resources/launcher-dialog.glade:325
+msgid ""
+"Select this option to disable the tooltips when moving over the panel button"
+" or menu items."
+msgstr "Panel düyməsi və ya seçmə elementləri üzərinə daşındıqda ipucuları qoşmamaq üçün bu seçimi seçin."
+
+#: common/resources/launcher-dialog.glade:337
+msgid "Show _label instead of icon"
+msgstr "İkon yerinə _etiket göstər"
+
+#: common/resources/launcher-dialog.glade:352
+msgid "Show last _used item in panel"
+msgstr "Paneldə _işlədilmiş son elementi göstər"
+
+#: common/resources/launcher-dialog.glade:356
+msgid "Select this option to move the clicked menu item to the panel."
+msgstr "Tıqlanmış seçmə elementini panelə daşımaq üçün bu seçimi seçin."
+
+#: common/resources/launcher-dialog.glade:375
+msgid "_Arrow button position:"
+msgstr "_Ox düyməsinin yerləşimi:"
+
+#: common/resources/launcher-dialog.glade:418
+msgid "Advanced"
+msgstr "Gəlişmiş"
+
+#: common/resources/pager-dialog.glade:15
+msgid "Buttons"
+msgstr "Düymələr"
+
+#: common/resources/pager-dialog.glade:19
+msgid "Miniature View"
+msgstr "Yığcam Görünüş"
+
+#: common/resources/pager-dialog.glade:48 plugins/pager/pager.desktop.in.in:4
+msgid "Workspace Switcher"
+msgstr "İş-bölgəsi Dəyişdiricisi"
+
+#: common/resources/pager-dialog.glade:64 plugins/pager/pager.c:768
+msgid "Workspace _Settings..."
+msgstr "İş-bölgəsi _Quruluşları..."
+
+#: common/resources/pager-dialog.glade:131
+msgid "Number of _rows:"
+msgstr "Sıra _sayı:"
+
+#: common/resources/pager-dialog.glade:197
+msgid "Show workspace number"
+msgstr "İş-bölgəsi sayını göstər"
+
+#: common/resources/pager-dialog.glade:210
+msgid "Switch workspaces using the mouse wheel"
+msgstr "İş-bölgələrini dəyişdirmək üçün siçan təkərini işlət"
+
+#: common/resources/pager-dialog.glade:224
+msgid "Wrap around workspaces"
+msgstr "İş-bölgələri arasında dolaşım"
+
+#: common/resources/pager-dialog.glade:241
+msgid "<b>Appearance</b>"
+msgstr "<b>Görünüş</b>"
+
+#: common/resources/separator-dialog.glade:27
+msgid "Transparent"
+msgstr "Saydam"
+
+#: common/resources/separator-dialog.glade:30
+#: common/resources/separator-dialog.glade:42 plugins/actions/actions.c:726
+#: plugins/separator/separator.desktop.in.in:4
+msgid "Separator"
+msgstr "Ayırıcı"
+
+#: common/resources/separator-dialog.glade:33
+msgid "Handle"
+msgstr "Qulp"
+
+#: common/resources/separator-dialog.glade:36
+msgid "Dots"
+msgstr "Nöqtələr"
+
+#: common/resources/separator-dialog.glade:161
+msgid "_Expand"
+msgstr "_Genişlət"
+
+#: common/resources/separator-dialog.glade:183
+msgid "Si_ze:"
+msgstr "_Ölçü:"
+
+#: common/resources/showdesktop-dialog.glade:18
+#: plugins/showdesktop/showdesktop.c:327
+#: plugins/showdesktop/showdesktop.desktop.in.in:4
+msgid "Show Desktop"
+msgstr "İş Masasını göstər"
+
+#: common/resources/showdesktop-dialog.glade:92
+msgid "_Show on mouse hover"
+msgstr "Siçan asılışında gö_stər"
+
+#: common/resources/showdesktop-dialog.glade:113
+#: common/resources/sn-dialog.glade:300
+msgid "Behavior"
+msgstr "Davranış"
+
+#: common/resources/sn-dialog.glade:48
+msgid "Status Tray Items"
+msgstr "Durum Tutucusu Elementləri"
+
+#: common/resources/sn-dialog.glade:80
+msgid "C_lear Known Items"
+msgstr "Bilinən Elementləri _Təmizlə"
+
+#: common/resources/sn-dialog.glade:84
+msgid "Resets the list of items and their visibility settings"
+msgstr "Elementlər sıralığını və onların görünürlük quruluşlarını sıfırlayır"
+
+#: common/resources/sn-dialog.glade:144
+msgid "_Fixed icon size (pixels):"
+msgstr "T_utulmuş ikon ölçüsü (piksellərdə):"
+
+#: common/resources/sn-dialog.glade:185
+msgid "Adjust size _automatically"
+msgstr "Ölçünü _özbaşına ayarla"
+
+#: common/resources/sn-dialog.glade:213
+msgid "Icons"
+msgstr "İkonlar"
+
+#: common/resources/sn-dialog.glade:246
+msgid "Arrange _items in a single row"
+msgstr "_Elementləri bircə sırada düz"
+
+#: common/resources/sn-dialog.glade:250
+msgid "If enabled, ensure that the items are laid out in a single row"
+msgstr "Qoşuluykən, elementlərin bir sırada düzüldüyündən əmin olun"
+
+#: common/resources/sn-dialog.glade:262
+msgid "_Hide items by default"
+msgstr "Elementləri varsayılaraq gi_zlət"
+
+#: common/resources/sn-dialog.glade:266
+msgid "When enabled, all new items will be marked as \"Hidden\""
+msgstr "Qoşuluykən, bütün yeni elementlər \"Gizli\" kimi işarələnəcək"
+
+#: common/resources/sn-dialog.glade:278
+msgid "_Square items"
+msgstr "_Dördbucaq elementlər"
+
+#: common/resources/sn-dialog.glade:282
+msgid "Item buttons will take a square when it's possible"
+msgstr "Düymələr mümkün olduqda dörbucaq şəklini alacaq"
+
+#: common/resources/sn-dialog.glade:386 common/resources/sn-dialog.glade:618
+msgid "Item"
+msgstr "Element"
+
+#: common/resources/sn-dialog.glade:398 common/resources/sn-dialog.glade:630
+msgid "Hidden"
+msgstr "Gizli"
+
+#: common/resources/sn-dialog.glade:426 common/resources/sn-dialog.glade:658
+msgid "Move the selected item one row up"
+msgstr "Seçilmiş elementi bir sıra yuxarı daşı"
+
+#: common/resources/sn-dialog.glade:446 common/resources/sn-dialog.glade:678
+msgid "Move the selected item one row down"
+msgstr "Seçilmiş elementi bir sıra aşağı daşı"
+
+#: common/resources/sn-dialog.glade:479 common/resources/sn-dialog.glade:711
+msgid "Known Items"
+msgstr "Bilinən Elementlər"
+
+#: common/resources/sn-dialog.glade:512
+msgid "_Menu is primary action"
+msgstr "_Seçmə ilkin eyləmdir"
+
+#: common/resources/sn-dialog.glade:516
+msgid "Left click will always display the menu for item"
+msgstr "Sol tıq daim element üçün seçməni göstərəcək"
+
+#: common/resources/sn-dialog.glade:528
+msgid "_Request symbolic icons"
+msgstr "Simvolik ikonlar _istə"
+
+#: common/resources/sn-dialog.glade:532
+msgid "Load symbolic icons if available"
+msgstr "Əlçatan ikən simvolik ikonları yüklə"
+
+#: common/resources/sn-dialog.glade:550
+msgid "Features"
+msgstr "Özəlliklər"
+
+#: common/resources/sn-dialog.glade:566
+msgid "Status Notifiers"
+msgstr "Durum Bildirişçiləri"
+
+#: common/resources/sn-dialog.glade:720
+msgid "Systray Icons"
+msgstr "Sistutucu İkonları"
+
+#: common/resources/tasklist-dialog.glade:23
+msgid "Nothing"
+msgstr "Heç nə"
+
+#: common/resources/tasklist-dialog.glade:26
+msgid "Close Window"
+msgstr "Pəncərəni Bağla"
+
+#: common/resources/tasklist-dialog.glade:29
+msgid "Minimize Window"
+msgstr "Pəncərəni Kiçilt"
+
+#: common/resources/tasklist-dialog.glade:32
+msgid "New Instance"
+msgstr "Yeni Örnək"
+
+#: common/resources/tasklist-dialog.glade:43
+msgid "Timestamp"
+msgstr "Vaxt Damğası"
+
+#: common/resources/tasklist-dialog.glade:46
+msgid "Group title and timestamp"
+msgstr "Qrup başlığı və vaxt damğası"
+
+#: common/resources/tasklist-dialog.glade:49
+msgid "Window title"
+msgstr "Pəncərə başlığı"
+
+#: common/resources/tasklist-dialog.glade:52
+msgid "Group title and window title"
+msgstr "Qrup başlığı və pəncərə başlığı"
+
+#: common/resources/tasklist-dialog.glade:55
+msgid "None, allow drag-and-drop"
+msgstr "Heç biri, dart-buraxa yol ver"
+
+#: common/resources/tasklist-dialog.glade:70
+#: plugins/tasklist/tasklist.desktop.in.in:4
+msgid "Window Buttons"
+msgstr "Pəncərə Düymələri"
+
+#: common/resources/tasklist-dialog.glade:152
+msgid "Show button _labels"
+msgstr "Düymə _etiketlərini göstər"
+
+#: common/resources/tasklist-dialog.glade:168
+msgid "Show _flat buttons"
+msgstr "_Yastı düymələri göstər"
+
+#: common/resources/tasklist-dialog.glade:184
+msgid "Show _handle"
+msgstr "_Qulpu göstər"
+
+#: common/resources/tasklist-dialog.glade:200
+msgid "Show _tooltips"
+msgstr "_İpucuları göstər"
+
+#: common/resources/tasklist-dialog.glade:223
+msgid "Sorting _order:"
+msgstr "Çeşidləniş _sırası:"
+
+#: common/resources/tasklist-dialog.glade:306
+msgid "Mi_ddle click action:"
+msgstr "_Orta düymə eyləmi:"
+
+#: common/resources/tasklist-dialog.glade:344
+msgid "_Group windows by application"
+msgstr "Pəncərələri uyğulamaya görə to_pla"
+
+#: common/resources/tasklist-dialog.glade:360
+msgid "Restore minimized windows to current _workspace"
+msgstr "Kiçildilmiş pəncərələri indiki _iş-bölgəsinə qaytar"
+
+#: common/resources/tasklist-dialog.glade:376
+msgid "D_raw window frame when hovering a button"
+msgstr "Düymə üzərindəykən pəncərə çərçivəsi _çiz"
+
+#: common/resources/tasklist-dialog.glade:392
+msgid "_Switch windows using the mouse wheel"
+msgstr "Pəncərələri siçan təkəri işlədərək _dəyişdir"
+
+#: common/resources/tasklist-dialog.glade:414
+msgid "Behaviour"
+msgstr "Davranış"
+
+#: common/resources/tasklist-dialog.glade:447
+#: common/resources/windowmenu-dialog.glade:242
+msgid "Show windows from _all workspaces"
+msgstr "B_ütün iş-bölgələrindəki pəncərələri göstər"
+
+#: common/resources/tasklist-dialog.glade:470
+msgid "Show windows _from:"
+msgstr "Bu_radakı pəncərələri göstər:"
+
+#: common/resources/tasklist-dialog.glade:507
+msgid "Show only _minimized windows"
+msgstr "Ancaq _kiçildilmiş pəncərələri göstər"
+
+#: common/resources/windowmenu-dialog.glade:23
+msgid "Icon"
+msgstr "İkon"
+
+#: common/resources/windowmenu-dialog.glade:26
+msgid "Arrow"
+msgstr "Ox"
+
+#: common/resources/windowmenu-dialog.glade:29
+msgid "Text"
+msgstr "Yazı"
+
+#: common/resources/windowmenu-dialog.glade:35
+#: plugins/windowmenu/windowmenu.desktop.in.in:4
+msgid "Window Menu"
+msgstr "Pəncərə Seçməsi"
+
+#: common/resources/windowmenu-dialog.glade:122
+msgid "Button layout:"
+msgstr "Düymə qaplaması:"
+
+#: common/resources/windowmenu-dialog.glade:158
+msgid "Show workspace a_ctions"
+msgstr "İş-bölgəsi ey_ləmlərini göstər"
+
+#: common/resources/windowmenu-dialog.glade:173
+msgid "Show workspace _names"
+msgstr "İş-bölgəsi _adlarını göstər"
+
+#: common/resources/windowmenu-dialog.glade:188
+msgid "Enable _urgency notification"
+msgstr "T_əcili bildirişləri qoş"
+
+#. I18N: monitor name in the output selector
+#: common/panel-utils.c:428
+#, c-format
+msgid "Monitor %d"
+msgstr "Monitor %d"
+
+#: libxfce4panel/xfce-panel-plugin.c:1107
+#: panel/panel-preferences-dialog.c:1489
+msgid "Remove"
+msgstr "Sil"
+
+#: libxfce4panel/xfce-panel-plugin.c:1108
+msgid ""
+"Removing the item from the panel also means its configuration will be lost."
+msgstr "Elementin paneldən silinişi eləcə də onun görkəmlənişinin yox edilişi deməkdir."
+
+#: libxfce4panel/xfce-panel-plugin.c:1112
+#: panel/panel-preferences-dialog.c:1496
+#, c-format
+msgid "Are you sure that you want to remove \"%s\"?"
+msgstr "\"%s\" silinişini istədiyinizdən əminsinizmi?"
+
+#. properties item
+#: libxfce4panel/xfce-panel-plugin.c:1234
+msgid "_Properties"
+msgstr "_Özəlliklər"
+
+#. about item
+#: libxfce4panel/xfce-panel-plugin.c:1245 panel/panel-window.c:4010
+msgid "_About"
+msgstr "_Bilgi"
+
+#. move item
+#: libxfce4panel/xfce-panel-plugin.c:1256
+msgid "_Move"
+msgstr "_Daşı"
+
+#. remove
+#: libxfce4panel/xfce-panel-plugin.c:1272 panel/panel-application.c:357
+#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1066
+#: plugins/launcher/launcher-dialog.c:934
+msgid "_Remove"
+msgstr "_Sil"
+
+#: libxfce4panel/xfce-panel-plugin.c:1290
+msgid "Pane_l"
+msgstr "_Panel"
+
+#. add new items
+#: libxfce4panel/xfce-panel-plugin.c:1298 panel/panel-window.c:3947
+msgid "Add _New Items..."
+msgstr "_Yeni Elementlər Artır..."
+
+#. customize panel
+#: libxfce4panel/xfce-panel-plugin.c:1309 panel/panel-window.c:3958
+msgid "Panel Pr_eferences..."
+msgstr "Panel _Üstünlükləri..."
+
+#. logout item
+#: libxfce4panel/xfce-panel-plugin.c:1326 panel/panel-window.c:3985
+msgid "Log _Out"
+msgstr "Oturumdan _Çıx"
+
+#. about item
+#: libxfce4panel/xfce-panel-plugin.c:1353
+msgid "About"
+msgstr "Bilgi"
+
+#: panel/main.c:66
+msgid "Show the 'Panel Preferences' dialog"
+msgstr "'Panel Özəllikləri' dialoqunu göstər"
+
+#: panel/main.c:66 panel/main.c:67
+msgid "PANEL-NUMBER"
+msgstr "PANEL-SAYISI"
+
+#: panel/main.c:67
+msgid "Show the 'Add New Items' dialog"
+msgstr "'Yeni Elementlər Artır' dialoqunu göstər"
+
+#: panel/main.c:68
+msgid "Save the panel configuration"
+msgstr "Panel görkəmlənişini qoru"
+
+#: panel/main.c:69
+msgid "Add a new plugin to the panel"
+msgstr "Panelə yeni qoşma artır"
+
+#: panel/main.c:69
+msgid "PLUGIN-NAME"
+msgstr "QOŞMA-ADI"
+
+#: panel/main.c:70
+msgid "Restart the running panel instance"
+msgstr "Çalışan panel örnəyini yenidən başlat"
+
+#: panel/main.c:71
+msgid "Quit the running panel instance"
+msgstr "Çalışan panel örnəyindən çıx"
+
+#: panel/main.c:72
+msgid "Do not wait for a window manager on startup"
+msgstr "Açılışda pəncərə yönətmənini gözləmə"
+
+#: panel/main.c:73 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
+msgid "Print version information and exit"
+msgstr "Sürüm bilgisini yazdır, çıx"
+
+#. parse context options
+#: panel/main.c:258
+msgid "[ARGUMENTS...]"
+msgstr "[ARQUMENTLƏR...]"
+
+#: panel/main.c:268
+#, c-format
+msgid "Type \"%s --help\" for usage."
+msgstr "İşlədiliş üçün \"%s --help\" yazın."
+
+#: panel/main.c:285
+msgid "The Xfce development team. All rights reserved."
+msgstr "Xfce gəliştirici birliyi. Bütün hüquqlar qorunur."
+
+#: panel/main.c:286
+#, c-format
+msgid "Please report bugs to <%s>."
+msgstr "Lütfən, yanlışları bura: <%s> bildirin."
+
+#. quit without error if an instance is running
+#: panel/main.c:394
+msgid "There is already a running instance"
+msgstr "Çalışan bir örnək artıq var"
+
+#. spawn ourselfs again
+#: panel/main.c:405
+msgid "Restarting..."
+msgstr "Yenidən başladılır..."
+
+#: panel/main.c:422
+msgid "Failed to show the preferences dialog"
+msgstr "Üstünlüklər dialoqunun göstərilişi uğursuz oldu"
+
+#: panel/main.c:424
+msgid "Failed to show the add new items dialog"
+msgstr "Yeni elementlər artır dialoqunun göstərilişi uğursuz oldu"
+
+#: panel/main.c:426
+msgid "Failed to save the panel configuration"
+msgstr "Panel görkəmlənişinin qorunuşu uğursuz oldu"
+
+#: panel/main.c:428
+msgid "Failed to add a plugin to the panel"
+msgstr "Panelə qoşma artırılışı uğursuz oldu"
+
+#: panel/main.c:430
+msgid "Failed to restart the panel"
+msgstr "Panelin yenidən başladılışı uğursuz oldu"
+
+#: panel/main.c:432
+msgid "Failed to quit the panel"
+msgstr "Paneldən çıxış uğursuz oldu"
+
+#: panel/main.c:434
+msgid "Failed to send D-Bus message"
+msgstr "D-Bus göndərişinin göndərilişi uğursuz oldu"
+
+#: panel/main.c:442 panel/main.c:462
+#, c-format
+msgid "No running instance of %s was found"
+msgstr "Çalışan %s örnəyi tapılmayıb"
+
+#: panel/main.c:443
+msgid ""
+"Do you want to start the panel? If you do, make sure you save the session on"
+" logout, so the panel is automatically started the next time you login."
+msgstr "Paneli başlatmaq istəyirsiniz? Elədirsə, oturum çıxışında oturumu qoruduğunuzdan əmin olun, beləcə, bir sonrakı girişinizdə panel özbaşına başladılacaq."
+
+#: panel/main.c:448
+msgid "Execute"
+msgstr "Yetir"
+
+#: panel/panel-application.c:213
+msgid "Failed to launch the migration application"
+msgstr "Daşıma uyğulamasının çalışdırılışı uğursuz oldu"
+
+#: panel/panel-application.c:347
+#, c-format
+msgid ""
+"Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
+" configuration?"
+msgstr "\"%s\" qoşması yüklənilə bilmir, onu xfce4-panel'i görkəmlənişindən silmək istəyirsinizmi?"
+
+#: panel/panel-application.c:349
+#, c-format
+msgid ""
+"This plugin is in the current xfce4-panel configuration but could not be "
+"loaded, probably due to an installation issue. If you know what you're "
+"doing, you can remove it permanently, otherwise you'd better quit and make a"
+" backup of the current configuration using %s, before checking your "
+"installation and trying to start xfce4-panel again."
+msgstr "Bu qoşma, indiki xfce4-panel görkəmlənişidir, ancaq yüklənilə bilmir, çox güman bu, quraşdırılış yanlışından qaynaqlanır. Nə etdiyinizi bilirsinizsə, onu birdəfəlik silə bilərsiniz, əks halda, quraşdırılışınızı yoxlamadan və xfce4-panel'ini yenidən başlatmağa çalışmadan öncə, çıxaraq %s işlədib indiki görkəmlənişin yedəyini düzəldin."
+
+#: panel/panel-application.c:356
+msgid "Plugin loading failure"
+msgstr "Qoşma yüklənişinin uğursuzluğu"
+
+#: panel/panel-application.c:357
+msgid "_Quit"
+msgstr "_Çıx"
+
+#: panel/panel-application.c:1037
+msgid ""
+"This will create a new launcher plugin on the panel and inserts the dropped "
+"files as menu items."
+msgstr ""
+
+#: panel/panel-application.c:1040
+msgid "Create _Launcher"
+msgstr ""
+
+#: panel/panel-application.c:1041
+#, c-format
+msgid "Create new launcher from %d desktop file"
+msgid_plural "Create new launcher from %d desktop files"
+msgstr[0] ""
+msgstr[1] ""
+
+#: panel/panel-application.c:1808
+msgid ""
+"You have started X without session manager. Clicking Quit will close the X "
+"server."
+msgstr ""
+
+#: panel/panel-application.c:1811
+msgid "Quit"
+msgstr "Çıx"
+
+#: panel/panel-application.c:1811
+msgid "Are you sure you want to quit the panel?"
+msgstr ""
+
+#: panel/panel-application.c:1819
+#, c-format
+msgid "Failed to execute command \"%s\""
+msgstr ""
+
+#: panel/panel-dbus-client.c:209
+msgid ""
+"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr ""
+
+#: panel/panel-dbus-client.c:239
+#, c-format
+msgid ""
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and "
+"uint."
+msgstr ""
+
+#: panel/panel-dialogs.c:53
+msgid "Unable to open the e-mail address"
+msgstr ""
+
+#: panel/panel-dialogs.c:79
+msgid "The panel of the Xfce Desktop Environment"
+msgstr ""
+
+#: panel/panel-dialogs.c:83
+msgid "translator-credits"
+msgstr ""
+
+#: panel/panel-dialogs.c:157
+msgid "Add New Item"
+msgstr ""
+
+#: panel/panel-dialogs.c:157 plugins/actions/actions.c:864
+#: plugins/applicationsmenu/applicationsmenu.c:584
+#: plugins/directorymenu/directorymenu.c:485
+#: plugins/directorymenu/directorymenu.c:985
+msgid "_Cancel"
+msgstr "_Dayandır"
+
+#: panel/panel-dialogs.c:168
+msgid "Please choose a panel for the new plugin:"
+msgstr ""
+
+#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1013
+#, c-format
+msgid "Panel %d"
+msgstr ""
+
+#: panel/panel-dialogs.c:227
+msgid ""
+"Because the panel is running in kiosk mode, you are not allowed to make "
+"changes to the panel configuration as a regular user"
+msgstr ""
+
+#: panel/panel-dialogs.c:229
+msgid "Modifying the panel is not allowed"
+msgstr ""
+
+#: panel/panel-item-dialog.c:229
+msgid "Enter search phrase here"
+msgstr ""
+
+#: panel/panel-item-dialog.c:618
+#, c-format
+msgid "Internal name: %s"
+msgstr ""
+
+#: panel/panel-plugin-external.c:420
+#, c-format
+msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
+msgstr ""
+
+#: panel/panel-plugin-external.c:421
+#, c-format
+msgid ""
+"The plugin restarted more than once in the last %d seconds. If you press "
+"Execute the panel will try to restart the plugin otherwise it will be "
+"permanently removed from the panel."
+msgstr ""
+
+#: panel/panel-plugin-external.c:426
+msgid "Plugin Restart"
+msgstr ""
+
+#: panel/panel-plugin-external.c:427
+msgid "_Execute"
+msgstr "_Çalışdır"
+
+#: panel/panel-preferences-dialog.c:342
+msgctxt "plugin context menu"
+msgid "_About"
+msgstr "_Bilgi"
+
+#: panel/panel-preferences-dialog.c:346
+msgid "Show about information of the currently selected item"
+msgstr ""
+
+#: panel/panel-preferences-dialog.c:570
+msgid "Automatic"
+msgstr "Özü edən"
+
+#: panel/panel-preferences-dialog.c:579
+msgid "Primary"
+msgstr ""
+
+#: panel/panel-preferences-dialog.c:1065
+msgid "The panel and plugin configurations will be permanently removed"
+msgstr ""
+
+#: panel/panel-preferences-dialog.c:1074
+#, c-format
+msgid "Are you sure you want to remove panel %d?"
+msgstr ""
+
+#. I18N: append (external) in the preferences dialog if the plugin
+#. * runs external
+#: panel/panel-preferences-dialog.c:1366
+#, c-format
+msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
+msgstr ""
+
+#. I18N: tooltip in preferences dialog when hovering an item in the list
+#. * for external plugins
+#: panel/panel-preferences-dialog.c:1371
+#, c-format
+msgid ""
+"Internal name: %s-%d\n"
+"PID: %d"
+msgstr ""
+
+#. I18N: tooltip in preferences dialog when hovering an item in the list
+#. * for internal plugins
+#: panel/panel-preferences-dialog.c:1383
+#, c-format
+msgid "Internal name: %s-%d"
+msgstr ""
+
+#: panel/panel-preferences-dialog.c:1498
+msgid "If you remove the item from the panel, it is permanently lost."
+msgstr ""
+
+#: panel/panel-preferences-dialog.c:1502
+#: plugins/launcher/launcher-dialog.c:929
+#, c-format
+msgid "Are you sure that you want to remove these %d items?"
+msgstr ""
+
+#: panel/panel-preferences-dialog.c:1504
+msgid "If you remove them from the panel, they are permanently lost."
+msgstr ""
+
+#: panel/panel-tic-tac-toe.c:108
+msgid "_New Game"
+msgstr ""
+
+#: panel/panel-tic-tac-toe.c:119
+msgid "_Level:"
+msgstr ""
+
+#: panel/panel-tic-tac-toe.c:125
+msgid "Novice"
+msgstr ""
+
+#: panel/panel-tic-tac-toe.c:126
+msgid "Intermediate"
+msgstr ""
+
+#: panel/panel-tic-tac-toe.c:127
+msgid "Experienced"
+msgstr ""
+
+#: panel/panel-tic-tac-toe.c:128
+msgid "Expert"
+msgstr ""
+
+#: panel/panel-window.c:3972
+msgid "_Lock Panel"
+msgstr ""
+
+#: migrate/main.c:94
+msgid "Failed to load the default configuration"
+msgstr ""
+
+#: migrate/main.c:106
+msgid "Panel config needs migration..."
+msgstr ""
+
+#: migrate/main.c:110
+msgid "Failed to migrate the existing configuration"
+msgstr ""
+
+#: migrate/main.c:116
+msgid "Panel configuration has been updated."
+msgstr ""
+
+#: plugins/actions/actions.c:163
+msgid "Log Out"
+msgstr "Ayrıl"
+
+#: plugins/actions/actions.c:164
+msgid "_Log Out"
+msgstr "Oturumdan Çı_x"
+
+#: plugins/actions/actions.c:165
+msgid "Are you sure you want to log out?"
+msgstr ""
+
+#: plugins/actions/actions.c:166
+#, c-format
+msgid "Logging out in %d seconds."
+msgstr ""
+
+#: plugins/actions/actions.c:171
+msgid "Log Out..."
+msgstr ""
+
+#: plugins/actions/actions.c:172
+msgid "Log _Out..."
+msgstr ""
+
+#: plugins/actions/actions.c:178
+msgid "Switch User"
+msgstr ""
+
+#: plugins/actions/actions.c:179
+msgid "_Switch User"
+msgstr ""
+
+#: plugins/actions/actions.c:185
+msgid "Lock Screen"
+msgstr ""
+
+#: plugins/actions/actions.c:186
+msgid "Loc_k Screen"
+msgstr ""
+
+#: plugins/actions/actions.c:192
+msgid "Hibernate"
+msgstr ""
+
+#: plugins/actions/actions.c:193
+msgid "_Hibernate"
+msgstr "_Yatırt"
+
+#: plugins/actions/actions.c:194
+msgid "Do you want to suspend to disk?"
+msgstr ""
+
+#: plugins/actions/actions.c:195
+#, c-format
+msgid "Hibernating computer in %d seconds."
+msgstr ""
+
+#: plugins/actions/actions.c:200
+msgid "Hybrid Sleep"
+msgstr ""
+
+#: plugins/actions/actions.c:201
+msgid "_Hybrid Sleep"
+msgstr ""
+
+#: plugins/actions/actions.c:202
+msgid "Do you want to hibernate and suspend the system?"
+msgstr ""
+
+#: plugins/actions/actions.c:203
+#, c-format
+msgid "Hibernating and Suspending computer in %d seconds."
+msgstr ""
+
+#: plugins/actions/actions.c:208
+msgid "Suspend"
+msgstr ""
+
+#: plugins/actions/actions.c:209
+msgid "Sus_pend"
+msgstr "_Asğıya al"
+
+#: plugins/actions/actions.c:210
+msgid "Do you want to suspend to RAM?"
+msgstr ""
+
+#: plugins/actions/actions.c:211
+#, c-format
+msgid "Suspending computer in %d seconds."
+msgstr ""
+
+#: plugins/actions/actions.c:216
+msgid "Restart"
+msgstr ""
+
+#: plugins/actions/actions.c:217
+msgid "_Restart"
+msgstr "_Yenidən Başlat"
+
+#: plugins/actions/actions.c:218
+msgid "Are you sure you want to restart?"
+msgstr ""
+
+#: plugins/actions/actions.c:219
+#, c-format
+msgid "Restarting computer in %d seconds."
+msgstr ""
+
+#: plugins/actions/actions.c:224
+msgid "Shut Down"
+msgstr ""
+
+#: plugins/actions/actions.c:225
+msgid "Shut _Down"
+msgstr "_Söndür"
+
+#: plugins/actions/actions.c:226
+msgid "Are you sure you want to shut down?"
+msgstr ""
+
+#: plugins/actions/actions.c:227
+#, c-format
+msgid "Turning off computer in %d seconds."
+msgstr ""
+
+#: plugins/actions/actions.c:1160
+#, c-format
+msgid "Failed to run action \"%s\""
+msgstr ""
+
+#: plugins/actions/actions.c:1367
+msgid "Little Mouse"
+msgstr ""
+
+#: plugins/actions/actions.desktop.in.in:5
+msgid "Log out, lock or other system actions"
+msgstr ""
+
+#. I18N: default tooltip of the application menu
+#: plugins/applicationsmenu/applicationsmenu.c:32
+msgid "Applications"
+msgstr ""
+
+#: plugins/applicationsmenu/applicationsmenu.c:584
+#: plugins/directorymenu/directorymenu.c:485
+msgid "Select An Icon"
+msgstr ""
+
+#: plugins/applicationsmenu/applicationsmenu.c:584
+#: plugins/directorymenu/directorymenu.c:485
+msgid "_OK"
+msgstr "_Oldu"
+
+#. show an error dialog
+#: plugins/applicationsmenu/applicationsmenu.c:621 plugins/clock/clock.c:1083
+#: plugins/launcher/launcher.c:2499
+#, c-format
+msgid "Failed to execute command \"%s\"."
+msgstr ""
+
+#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:5
+msgid "Show a menu containing categories of installed applications"
+msgstr ""
+
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:27
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:27
+msgid "Usage:"
+msgstr ""
+
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:28
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:28
+msgid "OPTION"
+msgstr ""
+
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:30
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:30
+msgid "Options:"
+msgstr "Seçimlər:"
+
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:31
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:31
+msgid "Popup menu at current mouse position"
+msgstr ""
+
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:32
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:32
+msgid "Show help options"
+msgstr ""
+
+#. TRANSLATORS: adjust this accordingly for your locale format
+#: plugins/clock/clock.c:42
+msgctxt "Date"
+msgid "%A %d %B %Y"
+msgstr ""
+
+#: plugins/clock/clock.c:180
+msgid "Week %V"
+msgstr ""
+
+#: plugins/clock/clock.c:326
+msgid "Time _settings"
+msgstr ""
+
+#: plugins/clock/clock.c:513
+msgid "Failed to execute clock command"
+msgstr ""
+
+#: plugins/clock/clock.c:1011
+msgid "Custom Format"
+msgstr ""
+
+#: plugins/clock/clock.c:1062
+msgid "Configuration tool not found, please set it in the settings dialog"
+msgstr ""
+
+#: plugins/clock/clock-digital.h:30
+msgctxt "Time"
+msgid "%R"
+msgstr ""
+
+#: plugins/clock/clock-digital.h:31
+msgctxt "Date"
+msgid "%Y-%m-%d"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:75
+msgid "Night"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:76
+msgid "Early morning"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:77
+msgid "Morning"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:78
+msgid "Almost noon"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:79
+msgid "Noon"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:80
+msgid "Afternoon"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:81
+msgid "Evening"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:82
+msgid "Late evening"
+msgstr ""
+
+#. I18N: %0 will be replaced with the preceding hour, %1 with
+#. * the comming hour
+#: plugins/clock/clock-fuzzy.c:88
+#, no-c-format
+msgid "%0 o'clock"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:89
+#, no-c-format
+msgid "five past %0"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:90
+#, no-c-format
+msgid "ten past %0"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:91
+#, no-c-format
+msgid "quarter past %0"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:92
+#, no-c-format
+msgid "twenty past %0"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:93
+#, no-c-format
+msgid "twenty five past %0"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:94
+#, no-c-format
+msgid "half past %0"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:95
+#, no-c-format
+msgid "twenty five to %1"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:96
+#, no-c-format
+msgid "twenty to %1"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:97
+#, no-c-format
+msgid "quarter to %1"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:98
+#, no-c-format
+msgid "ten to %1"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:99
+#, no-c-format
+msgid "five to %1"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:100
+#, no-c-format
+msgid "%1 o'clock"
+msgstr ""
+
+#. I18N: some languages have a singular form for the first hour,
+#. * other languages should just use the same strings as above
+#: plugins/clock/clock-fuzzy.c:106
+#, no-c-format
+msgctxt "one"
+msgid "%0 o'clock"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:107
+#, no-c-format
+msgctxt "one"
+msgid "five past %0"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:108
+#, no-c-format
+msgctxt "one"
+msgid "ten past %0"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:109
+#, no-c-format
+msgctxt "one"
+msgid "quarter past %0"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:110
+#, no-c-format
+msgctxt "one"
+msgid "twenty past %0"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:111
+#, no-c-format
+msgctxt "one"
+msgid "twenty five past %0"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:112
+#, no-c-format
+msgctxt "one"
+msgid "half past %0"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:113
+#, no-c-format
+msgctxt "one"
+msgid "twenty five to %1"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:114
+#, no-c-format
+msgctxt "one"
+msgid "twenty to %1"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:115
+#, no-c-format
+msgctxt "one"
+msgid "quarter to %1"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:116
+#, no-c-format
+msgctxt "one"
+msgid "ten to %1"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:117
+#, no-c-format
+msgctxt "one"
+msgid "five to %1"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:118
+#, no-c-format
+msgctxt "one"
+msgid "%1 o'clock"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:122
+msgctxt "am"
+msgid "one"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:123
+msgctxt "am"
+msgid "two"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:124
+msgctxt "am"
+msgid "three"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:125
+msgctxt "am"
+msgid "four"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:126
+msgctxt "am"
+msgid "five"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:127
+msgctxt "am"
+msgid "six"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:128
+msgctxt "am"
+msgid "seven"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:129
+msgctxt "am"
+msgid "eight"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:130
+msgctxt "am"
+msgid "nine"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:131
+msgctxt "am"
+msgid "ten"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:132
+msgctxt "am"
+msgid "eleven"
+msgstr ""
+
+#. I18N: 12 AM is midnight
+#: plugins/clock/clock-fuzzy.c:134
+msgctxt "am"
+msgid "twelve"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:138
+msgctxt "pm"
+msgid "one"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:139
+msgctxt "pm"
+msgid "two"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:140
+msgctxt "pm"
+msgid "three"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:141
+msgctxt "pm"
+msgid "four"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:142
+msgctxt "pm"
+msgid "five"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:143
+msgctxt "pm"
+msgid "six"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:144
+msgctxt "pm"
+msgid "seven"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:145
+msgctxt "pm"
+msgid "eight"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:146
+msgctxt "pm"
+msgid "nine"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:147
+msgctxt "pm"
+msgid "ten"
+msgstr ""
+
+#: plugins/clock/clock-fuzzy.c:148
+msgctxt "pm"
+msgid "eleven"
+msgstr ""
+
+#. I18N: 12 PM is noon
+#: plugins/clock/clock-fuzzy.c:150
+msgctxt "pm"
+msgid "twelve"
+msgstr ""
+
+#: plugins/clock/clock.desktop.in.in:5
+msgid "What time is it?"
+msgstr ""
+
+#: plugins/directorymenu/directorymenu.c:743
+#, c-format
+msgid "Failed to launch application \"%s\""
+msgstr ""
+
+#: plugins/directorymenu/directorymenu.c:774
+#, c-format
+msgid "Failed to query content type for \"%s\""
+msgstr ""
+
+#: plugins/directorymenu/directorymenu.c:783
+#, c-format
+msgid "No default application found for \"%s\""
+msgstr ""
+
+#: plugins/directorymenu/directorymenu.c:799
+#, c-format
+msgid "Failed to launch default application for \"%s\""
+msgstr ""
+
+#: plugins/directorymenu/directorymenu.c:893
+#, c-format
+msgid "Failed to execute the preferred application for category \"%s\""
+msgstr ""
+
+#: plugins/directorymenu/directorymenu.c:974
+msgid "Create New Folder"
+msgstr ""
+
+#: plugins/directorymenu/directorymenu.c:979
+msgid "Create New Text Document"
+msgstr ""
+
+#: plugins/directorymenu/directorymenu.c:985
+msgid "C_reate"
+msgstr "_Yarat"
+
+#: plugins/directorymenu/directorymenu.c:985
+msgid "Create & _Open"
+msgstr ""
+
+#: plugins/directorymenu/directorymenu.c:998
+msgid "Enter the new name:"
+msgstr ""
+
+#: plugins/directorymenu/directorymenu.c:1034
+#, c-format
+msgid "Failed to create folder: %s"
+msgstr ""
+
+#: plugins/directorymenu/directorymenu.c:1116
+msgid "Open Folder"
+msgstr ""
+
+#: plugins/directorymenu/directorymenu.c:1130
+msgid "Open in Terminal"
+msgstr ""
+
+#: plugins/directorymenu/directorymenu.c:1144
+msgid "Create Folder..."
+msgstr ""
+
+#: plugins/directorymenu/directorymenu.c:1158
+msgid "Create Text Document..."
+msgstr ""
+
+#: plugins/directorymenu/directorymenu.desktop.in.in:5
+msgid "Show a directory tree in a menu"
+msgstr ""
+
+#: plugins/launcher/launcher.c:428
+msgid "Open launcher menu"
+msgstr ""
+
+#: plugins/launcher/launcher.c:1614
+msgid "Unnamed Item"
+msgstr ""
+
+#: plugins/launcher/launcher.c:1816
+msgid "No items"
+msgstr ""
+
+#: plugins/launcher/launcher-dialog.c:611
+msgid "Failed to open desktop item editor"
+msgstr ""
+
+#: plugins/launcher/launcher-dialog.c:921
+msgid "Unnamed item"
+msgstr ""
+
+#: plugins/launcher/launcher-dialog.c:922
+#, c-format
+msgid "Are you sure you want to remove \"%s\"?"
+msgstr ""
+
+#: plugins/launcher/launcher-dialog.c:935
+msgid "If you delete an item, it will be permanently removed"
+msgstr ""
+
+#: plugins/launcher/launcher-dialog.c:1032
+#: plugins/launcher/launcher-dialog.c:1033
+msgid "Add a new empty item"
+msgstr ""
+
+#: plugins/launcher/launcher-dialog.c:1046
+#: plugins/launcher/launcher-dialog.c:1047
+msgid "Add a new hyperlink"
+msgstr ""
+
+#: plugins/launcher/launcher.desktop.in.in:5
+msgid "Program launcher with optional menu"
+msgstr ""
+
+#: plugins/pager/pager.c:868
+msgid "Unable to open the workspace settings"
+msgstr ""
+
+#: plugins/pager/pager-buttons.c:645 plugins/windowmenu/windowmenu.c:1008
+#, c-format
+msgid "Workspace %d"
+msgstr ""
+
+#: plugins/pager/pager.desktop.in.in:5
+msgid "Switch between virtual desktops"
+msgstr ""
+
+#: plugins/separator/separator.desktop.in.in:5
+msgid "Adds a separator or space between panel items"
+msgstr ""
+
+#: plugins/showdesktop/showdesktop.c:322
+msgid "Restore the minimized windows"
+msgstr ""
+
+#: plugins/showdesktop/showdesktop.c:324
+msgid "Minimize all open windows and show the desktop"
+msgstr ""
+
+#: plugins/showdesktop/showdesktop.desktop.in.in:5
+msgid "Hide all windows and show the desktop"
+msgstr ""
+
+#: plugins/systray/sn-dialog.c:427
+msgid "Clear"
+msgstr "Təmizlə"
+
+#: plugins/systray/sn-dialog.c:432
+msgid "Are you sure you want to clear the list of known items?"
+msgstr ""
+
+#: plugins/systray/systray.c:145
+msgid "Unable to start the notification area"
+msgstr ""
+
+#. create fake error and show it
+#: plugins/systray/systray.c:409
+msgid ""
+"Most likely another widget took over the function of a notification area. "
+"This area will be unused."
+msgstr ""
+
+#: plugins/systray/systray.c:411
+msgid "The notification area lost selection"
+msgstr ""
+
+#: plugins/systray/systray-manager.c:382
+#, c-format
+msgid "Failed to acquire manager selection for screen %d"
+msgstr ""
+
+#: plugins/systray/systray.desktop.in.in:5
+msgid "Status Tray Plugin"
+msgstr ""
+
+#: plugins/systray/systray.desktop.in.in:6
+msgid ""
+"Provides status notifier items (application indicators) and legacy systray "
+"items"
+msgstr ""
+
+#: plugins/tasklist/tasklist-widget.c:3224
+#, c-format
+msgid "Unable to start new instance of '%s'"
+msgstr ""
+
+#: plugins/tasklist/tasklist-widget.c:3251
+msgid "Launch New Instance"
+msgstr ""
+
+#: plugins/tasklist/tasklist-widget.c:4008
+msgid "Mi_nimize All"
+msgstr ""
+
+#: plugins/tasklist/tasklist-widget.c:4015
+msgid "Un_minimize All"
+msgstr ""
+
+#: plugins/tasklist/tasklist-widget.c:4022
+msgid "Ma_ximize All"
+msgstr ""
+
+#: plugins/tasklist/tasklist-widget.c:4029
+msgid "_Unmaximize All"
+msgstr ""
+
+#: plugins/tasklist/tasklist-widget.c:4040
+msgid "_Close All"
+msgstr ""
+
+#: plugins/tasklist/tasklist-widget.c:5049
+msgid "all monitors"
+msgstr ""
+
+#: plugins/tasklist/tasklist-widget.c:5058
+msgid "panel's monitor"
+msgstr ""
+
+#: plugins/tasklist/tasklist.desktop.in.in:5
+msgid "Switch between open windows using buttons"
+msgstr ""
+
+#: plugins/windowmenu/windowmenu.c:351
+msgid "Windows"
+msgstr ""
+
+#: plugins/windowmenu/windowmenu.c:787
+msgid "Desktop"
+msgstr "İş qoyuluğu"
+
+#: plugins/windowmenu/windowmenu.c:1403
+msgid "No Windows"
+msgstr ""
+
+#: plugins/windowmenu/windowmenu.c:1418
+msgid "Urgent Windows"
+msgstr ""
+
+#: plugins/windowmenu/windowmenu.c:1469
+msgid "Add Workspace"
+msgstr ""
+
+#: plugins/windowmenu/windowmenu.c:1491
+#, c-format
+msgid "Remove Workspace \"%s\""
+msgstr ""
+
+#: plugins/windowmenu/windowmenu.c:1493
+#, c-format
+msgid "Remove Workspace %d"
+msgstr "%d İş bölgəsini sil"
+
+#: plugins/windowmenu/windowmenu.desktop.in.in:5
+msgid "Switch between open windows using a menu"
+msgstr ""
