@@ -906,7 +906,6 @@ xfce_panel_plugin_set_property (GObject *object,
                                 GParamSpec *pspec)
 {
   XfcePanelPluginPrivate *priv = XFCE_PANEL_PLUGIN (object)->priv;
-  GtkStyleContext *context;
   gchar *name;
 
   switch (prop_id)
