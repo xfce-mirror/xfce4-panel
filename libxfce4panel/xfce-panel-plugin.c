@@ -913,9 +913,17 @@ xfce_panel_plugin_set_property (GObject *object,
     case PROP_NAME:
     case PROP_UNIQUE_ID:
       if (prop_id == PROP_NAME)
-        priv->name = g_value_dup_string (value);
+        {
+          priv->name = g_value_dup_string (value);
+
+          GtkStyleContext *context = gtk_widget_get_style_context (GTK_WIDGET (object));
+          gtk_style_context_add_class (context, "panel-plugin");
+          gtk_style_context_add_class (context, priv->name);
+        }
       else
-        priv->unique_id = g_value_get_int (value);
+        {
+          priv->unique_id = g_value_get_int (value);
+        }
 
       if (priv->unique_id != -1 && priv->name != NULL)
         {
