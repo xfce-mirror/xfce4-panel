@@ -1637,30 +1637,31 @@ msgstr "\"%s\" uyğulamasının başladılışı uğursuz oldu"
 #: ../plugins/directorymenu/directorymenu.c:728
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr ""
+msgstr "\"%s\" üçün içərik biçiminin sorğusu uğursuz oldu"
 
 #: ../plugins/directorymenu/directorymenu.c:737
 #, c-format
 msgid "No default application found for \"%s\""
-msgstr ""
+msgstr "\"%s\" üçün varsayılan uyğulama tapılmayıb"
 
 #: ../plugins/directorymenu/directorymenu.c:753
 #, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr ""
+msgstr "\"%s\" üçün varsayılan uyğulamanın başladılışı uğursuz oldu"
 
 #: ../plugins/directorymenu/directorymenu.c:848
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr ""
+"\"%s\" katqeoriyası üçün üstün görülmüş uyğulamanın yetirilişi uğursuz oldu"
 
 #: ../plugins/directorymenu/directorymenu.c:929
 msgid "Create New Folder"
-msgstr ""
+msgstr "Yeni Qovluq Yarat"
 
 #: ../plugins/directorymenu/directorymenu.c:934
 msgid "Create New Text Document"
-msgstr ""
+msgstr "Yeni Yazı Sənədi Yarat"
 
 #: ../plugins/directorymenu/directorymenu.c:941
 msgid "C_reate"
@@ -1668,36 +1669,36 @@ msgstr "_Yarat"
 
 #: ../plugins/directorymenu/directorymenu.c:942
 msgid "Create & _Open"
-msgstr ""
+msgstr "Yarat & _Aç"
 
 #: ../plugins/directorymenu/directorymenu.c:956
 msgid "Enter the new name:"
-msgstr ""
+msgstr "Yeni adı yerit:"
 
 #: ../plugins/directorymenu/directorymenu.c:992
 #, c-format
 msgid "Failed to create folder: %s"
-msgstr ""
+msgstr "Qovluq yaradılışı uğursuz oldu: %s"
 
 #: ../plugins/directorymenu/directorymenu.c:1075
 msgid "Open Folder"
-msgstr ""
+msgstr "Qovluğu Aç"
 
 #: ../plugins/directorymenu/directorymenu.c:1088
 msgid "Open in Terminal"
-msgstr ""
+msgstr "Terminalda Aç"
 
 #: ../plugins/directorymenu/directorymenu.c:1101
 msgid "Create Folder..."
-msgstr ""
+msgstr "Qovluq Yarat..."
 
 #: ../plugins/directorymenu/directorymenu.c:1114
 msgid "Create Text Document..."
-msgstr ""
+msgstr "Yazı Sənədi Yarat..."
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
-msgstr ""
+msgstr "Seçmədə düzün ağacını göstər"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 msgid "Select A Directory"
@@ -1753,32 +1754,32 @@ msgstr "Süzgü"
 
 #: ../plugins/launcher/launcher.c:401
 msgid "Open launcher menu"
-msgstr ""
+msgstr "Başladıcı seçməsini aç"
 
 #: ../plugins/launcher/launcher.c:1599
 msgid "Unnamed Item"
-msgstr ""
+msgstr "Adlandırılmamış Element"
 
 #: ../plugins/launcher/launcher.c:1801
 msgid "No items"
-msgstr ""
+msgstr "Element yoxdur"
 
 #: ../plugins/launcher/launcher-dialog.c:794
 msgid "Failed to open desktop item editor"
-msgstr ""
+msgstr "İş masası elementi düzəldicisinin açılışı uğursuz oldu"
 
 #: ../plugins/launcher/launcher-dialog.c:862
 msgid "If you delete an item, it will be permanently removed"
-msgstr ""
+msgstr "Elementi silsəniz, onu birdəfəlik itirəcəksiniz"
 
 #: ../plugins/launcher/launcher-dialog.c:863
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr ""
+msgstr "\"%s\" silmək istədiyinizdən əminsiniz?"
 
 #: ../plugins/launcher/launcher-dialog.c:864
 msgid "Unnamed item"
-msgstr ""
+msgstr "Adlandırılmamış element"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Default"
@@ -1847,11 +1848,11 @@ msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "Add a new empty item"
-msgstr ""
+msgstr "Yeni boş element artır"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "Add a new hyperlink"
-msgstr ""
+msgstr "Yeni hiperkeçid artır"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "Disable t_ooltips"
@@ -1887,7 +1888,7 @@ msgstr "Gəlişmiş"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr ""
+msgstr "Seçimli seçmə ilə proqram başladıcısı"
 
 #: ../plugins/pager/pager.c:665 ../plugins/pager/pager-dialog.glade.h:6
 msgid "Workspace _Settings..."
@@ -1895,12 +1896,12 @@ msgstr "İş-bölgəsi _Quruluşları..."
 
 #: ../plugins/pager/pager.c:759
 msgid "Unable to open the workspace settings"
-msgstr ""
+msgstr "İş-bölgəsi quruluşlarının açıla bilmir"
 
 #: ../plugins/pager/pager-buttons.c:596 ../plugins/windowmenu/windowmenu.c:917
 #, c-format
 msgid "Workspace %d"
-msgstr ""
+msgstr "İş-bölgəsi %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:1
 msgid "Buttons"
@@ -1937,7 +1938,7 @@ msgstr "<b>Görünüş</b>"
 
 #: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Switch between virtual desktops"
-msgstr ""
+msgstr "Virtual iş masaları arasında keçid"
 
 #: ../plugins/separator/separator-dialog.glade.h:1
 msgid "Transparent"
@@ -1957,15 +1958,15 @@ msgstr "_Genişlət"
 
 #: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Adds a separator or space between panel items"
-msgstr ""
+msgstr "Panel elementləri arasında ayırıcı və ya boşluq artırır"
 
 #: ../plugins/showdesktop/showdesktop.c:241
 msgid "Restore the minimized windows"
-msgstr ""
+msgstr "Kiçildilmiş pəncərələri qaytarır"
 
 #: ../plugins/showdesktop/showdesktop.c:243
 msgid "Minimize all open windows and show the desktop"
-msgstr ""
+msgstr "Bütün açıq pəncərələri kiçilt və iş masasını göstər"
 
 #: ../plugins/showdesktop/showdesktop.c:246
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
@@ -1974,7 +1975,7 @@ msgstr "İş Masasını göstər"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Hide all windows and show the desktop"
-msgstr ""
+msgstr "Bütün pəncərələri gizlət və iş masasını göstər"
 
 #: ../plugins/systray/sn-dialog.c:653
 msgid "Clear"
@@ -1982,7 +1983,7 @@ msgstr "Təmizlə"
 
 #: ../plugins/systray/sn-dialog.c:654
 msgid "Are you sure you want to clear the list of known items?"
-msgstr ""
+msgstr "Bilinən elementlərin sıralığını təmizləmək istədiyinizdən əminsiniz?"
 
 #: ../plugins/systray/sn-dialog.glade.h:1
 msgid "Status Tray Items"
@@ -2086,7 +2087,7 @@ msgstr "Sistutucu İkonları"
 
 #: ../plugins/systray/systray.c:146
 msgid "Unable to start the notification area"
-msgstr ""
+msgstr "Bildiriş bölgəsini başlatmaq olmur"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:407
@@ -2094,25 +2095,29 @@ msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr ""
+"Böyük olasılıqla başqa bir vidjet bildiriş bölgəsi üzərində işləyişi ələ "
+"keçirdib. Bu bölgə işlənməyəcək."
 
 #: ../plugins/systray/systray.c:409
 msgid "The notification area lost selection"
-msgstr ""
+msgstr "Bildiriş bölgəsi seçimi itirib"
 
 #: ../plugins/systray/systray-manager.c:400
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr ""
+msgstr "Ekran %d üçün yönəldici seçiminin əldə edilişi uğursuz oldu"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Status Tray Plugin"
-msgstr ""
+msgstr "Durum Tutucusu Qoşması"
 
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid ""
 "Provides status notifier items (application indicators) and legacy systray "
 "items"
 msgstr ""
+"Durum bildiricisi elementlərini (uyğulama bildirənlərini) və köhnə sistutucu"
+" elementlərini sağlayır"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Nothing"
@@ -2215,7 +2220,7 @@ msgstr "Ancaq _kiçildilmiş pəncərələri göstər"
 #: ../plugins/tasklist/tasklist-widget.c:3131
 #, c-format
 msgid "Unable to start new instance of '%s'"
-msgstr ""
+msgstr "'%s' yeni örnəyini başlatmaq olmur"
 
 #: ../plugins/tasklist/tasklist-widget.c:3135
 msgid "Error"
@@ -2223,31 +2228,31 @@ msgstr "Yanlış"
 
 #: ../plugins/tasklist/tasklist-widget.c:3164
 msgid "Launch New Instance"
-msgstr ""
+msgstr "Yeni Örnək Başlat"
 
 #: ../plugins/tasklist/tasklist-widget.c:3911
 msgid "Mi_nimize All"
-msgstr ""
+msgstr "_Hamısını Kiçilt"
 
 #: ../plugins/tasklist/tasklist-widget.c:3918
 msgid "Un_minimize All"
-msgstr ""
+msgstr "Bütün Kiçilişləri Qa_ytar"
 
 #: ../plugins/tasklist/tasklist-widget.c:3925
 msgid "Ma_ximize All"
-msgstr ""
+msgstr "Hamısını B_öyüt"
 
 #: ../plugins/tasklist/tasklist-widget.c:3932
 msgid "_Unmaximize All"
-msgstr ""
+msgstr "Bütün Böyüdülüşləri _Qaytar"
 
 #: ../plugins/tasklist/tasklist-widget.c:3943
 msgid "_Close All"
-msgstr ""
+msgstr "Hamısını _Bağla"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Switch between open windows using buttons"
-msgstr ""
+msgstr "Açıq pəncərələr arasında düymələri işlədərək keçirt"
 
 #: ../plugins/windowmenu/windowmenu.c:710
 msgid "Desktop"
@@ -2255,20 +2260,20 @@ msgstr "İş qoyağı"
 
 #: ../plugins/windowmenu/windowmenu.c:1320
 msgid "No Windows"
-msgstr ""
+msgstr "Pəncərəsiz"
 
 #: ../plugins/windowmenu/windowmenu.c:1335
 msgid "Urgent Windows"
-msgstr ""
+msgstr "Təcili Pəncərələr"
 
 #: ../plugins/windowmenu/windowmenu.c:1377
 msgid "Add Workspace"
-msgstr ""
+msgstr "İş-bölgəsi Artır"
 
 #: ../plugins/windowmenu/windowmenu.c:1397
 #, c-format
 msgid "Remove Workspace \"%s\""
-msgstr ""
+msgstr "\"%s\" İş-bölgəsini Sil"
 
 #: ../plugins/windowmenu/windowmenu.c:1399
 #, c-format
@@ -2306,4 +2311,4 @@ msgstr "T_əcili bildirişləri qoş"
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
 msgid "Switch between open windows using a menu"
-msgstr ""
+msgstr "Açıq pəncərələr arasında seçmə işlədərək keçirt"
