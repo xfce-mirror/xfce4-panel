@@ -54,6 +54,9 @@
 #define XFCE_PANEL_PLUGIN_CONSTRUCTED(plugin) \
   PANEL_HAS_FLAG (XFCE_PANEL_PLUGIN (plugin)->priv->flags, \
                   PLUGIN_FLAG_CONSTRUCTED)
+#define XFCE_PANEL_PLUGIN_CONSTRUCT_CALLED(plugin) \
+  (XFCE_PANEL_PLUGIN_GET_CLASS (plugin)->construct == NULL \
+   || PANEL_HAS_FLAG (plugin->priv->flags, PLUGIN_FLAG_REALIZED))
 
 
 
@@ -982,7 +985,8 @@ xfce_panel_plugin_dispose (GObject *object)
   if (!PANEL_HAS_FLAG (plugin->priv->flags, PLUGIN_FLAG_DISPOSED))
     {
       /* allow the plugin to cleanup */
-      g_signal_emit (G_OBJECT (object), plugin_signals[FREE_DATA], 0);
+      if (XFCE_PANEL_PLUGIN_CONSTRUCT_CALLED (plugin))
+        g_signal_emit (G_OBJECT (object), plugin_signals[FREE_DATA], 0);
 
       /* plugin disposed, don't try this again */
       PANEL_SET_FLAG (plugin->priv->flags, PLUGIN_FLAG_DISPOSED);
@@ -1431,6 +1435,9 @@ xfce_panel_plugin_set_size (XfcePanelPluginProvider *provider,
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
+  if (!XFCE_PANEL_PLUGIN_CONSTRUCT_CALLED (plugin))
+    return;
+
   /* check if update is required, -1 for forced property emit
    * by xfce_panel_plugin_set_nrows */
   if (G_LIKELY (plugin->priv->size != size))
@@ -1505,6 +1512,9 @@ xfce_panel_plugin_hidden_event (XfcePanelPluginProvider *provider,
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
+  if (!XFCE_PANEL_PLUGIN_CONSTRUCT_CALLED (plugin))
+    return;
+
   /* check if update is required */
   if (G_LIKELY (plugin->priv->hidden != hidden))
     {
@@ -1526,6 +1536,9 @@ xfce_panel_plugin_set_mode (XfcePanelPluginProvider *provider,
   GtkOrientation new_orientation;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
+
+  if (!XFCE_PANEL_PLUGIN_CONSTRUCT_CALLED (plugin))
+    return;
 
   /* check if update is required */
   if (G_LIKELY (plugin->priv->mode != mode))
@@ -1561,6 +1574,9 @@ xfce_panel_plugin_set_nrows (XfcePanelPluginProvider *provider,
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
+  if (!XFCE_PANEL_PLUGIN_CONSTRUCT_CALLED (plugin))
+    return;
+
   nrows = MAX (nrows, 1);
 
   /* check if update is required */
@@ -1588,6 +1604,9 @@ xfce_panel_plugin_set_screen_position (XfcePanelPluginProvider *provider,
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
+  if (!XFCE_PANEL_PLUGIN_CONSTRUCT_CALLED (plugin))
+    return;
+
   /* check if update is required */
   if (G_LIKELY (plugin->priv->screen_position != screen_position
                 || xfce_screen_position_is_floating (screen_position)))
@@ -1610,6 +1629,9 @@ xfce_panel_plugin_save (XfcePanelPluginProvider *provider)
   XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
+
+  if (!XFCE_PANEL_PLUGIN_CONSTRUCT_CALLED (plugin))
+    return;
 
   /* only send the save signal if the plugin is not locked */
   if (XFCE_PANEL_PLUGIN (provider)->priv->menu_blocked == 0
@@ -1637,6 +1659,9 @@ xfce_panel_plugin_show_configure (XfcePanelPluginProvider *provider)
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
+  if (!XFCE_PANEL_PLUGIN_CONSTRUCT_CALLED (plugin))
+    return;
+
   if (plugin->priv->menu_blocked == 0
       && !xfce_panel_plugin_get_locked (plugin))
     g_signal_emit (G_OBJECT (plugin), plugin_signals[CONFIGURE_PLUGIN], 0);
@@ -1659,6 +1684,9 @@ static void
 xfce_panel_plugin_show_about (XfcePanelPluginProvider *provider)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
+
+  if (!XFCE_PANEL_PLUGIN_CONSTRUCT_CALLED (XFCE_PANEL_PLUGIN (provider)))
+    return;
 
   g_signal_emit (G_OBJECT (provider), plugin_signals[ABOUT], 0);
 }
@@ -1687,6 +1715,9 @@ xfce_panel_plugin_remote_event (XfcePanelPluginProvider *provider,
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (provider), TRUE);
   panel_return_val_if_fail (name != NULL, TRUE);
   panel_return_val_if_fail (value == NULL || G_IS_VALUE (value), TRUE);
+
+  if (!XFCE_PANEL_PLUGIN_CONSTRUCT_CALLED (XFCE_PANEL_PLUGIN (provider)))
+    return FALSE;
 
   g_signal_emit (G_OBJECT (provider), plugin_signals[REMOTE_EVENT], 0,
                  name, value, &stop_emission);
