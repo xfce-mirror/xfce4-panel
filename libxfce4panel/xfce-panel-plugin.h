@@ -174,7 +174,7 @@ struct _XfcePanelPlugin
 
 
 GType
-xfce_panel_plugin_get_type (void) G_GNUC_CONST;
+xfce_panel_plugin_get_type (void);
 
 const gchar *
 xfce_panel_plugin_get_name (XfcePanelPlugin *plugin) G_GNUC_PURE;

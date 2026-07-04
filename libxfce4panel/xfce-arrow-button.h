@@ -68,7 +68,7 @@ struct _XfceArrowButton
 };
 
 GType
-xfce_arrow_button_get_type (void) G_GNUC_CONST;
+xfce_arrow_button_get_type (void);
 
 GtkWidget *
 xfce_arrow_button_new (GtkArrowType arrow_type) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
