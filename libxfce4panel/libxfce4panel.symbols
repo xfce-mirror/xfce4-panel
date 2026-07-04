@@ -5,11 +5,11 @@ var:libxfce4panel_micro_version
 var:libxfce4panel_minor_version
 
 # file:libxfce4panel-enum-types
-xfce_screen_position_get_type attr:G_GNUC_CONST
-xfce_panel_plugin_mode_get_type attr:G_GNUC_CONST
+xfce_screen_position_get_type
+xfce_panel_plugin_mode_get_type
 
 # file:xfce-arrow-button
-xfce_arrow_button_get_type attr:G_GNUC_CONST
+xfce_arrow_button_get_type
 xfce_arrow_button_new attr:G_GNUC_MALLOC attr:G_GNUC_WARN_UNUSED_RESULT
 xfce_arrow_button_get_arrow_type
 xfce_arrow_button_set_arrow_type
@@ -25,7 +25,7 @@ xfce_panel_pixbuf_from_source_at_size
 xfce_panel_set_image_from_source
 
 # file:xfce-panel-image
-xfce_panel_image_get_type attr:G_GNUC_CONST
+xfce_panel_image_get_type
 xfce_panel_image_new attr:G_GNUC_MALLOC
 xfce_panel_image_new_from_pixbuf attr:G_GNUC_MALLOC
 xfce_panel_image_new_from_source attr:G_GNUC_MALLOC
@@ -36,7 +36,7 @@ xfce_panel_image_get_size
 xfce_panel_image_clear
 
 # file:xfce-panel-plugin
-xfce_panel_plugin_get_type attr:G_GNUC_CONST
+xfce_panel_plugin_get_type
 xfce_panel_plugin_get_name attr:G_GNUC_PURE
 xfce_panel_plugin_get_display_name attr:G_GNUC_PURE
 xfce_panel_plugin_get_comment attr:G_GNUC_PURE

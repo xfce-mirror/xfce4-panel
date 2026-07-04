@@ -67,7 +67,7 @@ struct _XfcePanelImage
 
 GType
 xfce_panel_image_get_type (void)
-  G_GNUC_CONST G_GNUC_DEPRECATED;
+  G_GNUC_DEPRECATED;
 
 GtkWidget *
 xfce_panel_image_new (void)
