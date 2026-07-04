@@ -45,7 +45,7 @@ void
 panel_properties_unbind (GObject *object);
 
 GType
-panel_properties_value_array_get_type (void) G_GNUC_CONST;
+panel_properties_value_array_get_type (void);
 
 G_END_DECLS
 
