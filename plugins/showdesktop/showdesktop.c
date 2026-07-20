@@ -91,6 +91,8 @@ static gboolean
 show_desktop_plugin_remote_event (XfcePanelPlugin *panel_plugin,
                                   const gchar *name,
                                   const GValue *value);
+static void
+show_desktop_plugin_update_tooltip (ShowDesktopPlugin *plugin);
 
 
 
@@ -111,6 +113,9 @@ struct _ShowDesktopPlugin
   guint enter_timeout_id;
   gboolean shown_on_hover;
 
+  /* tooltip visibility control */
+  gboolean show_tooltip;
+
   /* the xfw screen */
   XfwScreen *xfw_screen;
 };
@@ -119,6 +124,7 @@ enum
 {
   PROP_0,
   PROP_SHOW_ON_HOVER,
+  PROP_SHOW_TOOLTIP,
   N_PROPERTIES,
 };
 
@@ -150,6 +156,13 @@ show_desktop_plugin_class_init (ShowDesktopPluginClass *klass)
                                                          NULL, NULL,
                                                          FALSE,
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_CONSTRUCT));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_SHOW_TOOLTIP,
+                                   g_param_spec_boolean ("show-tooltip",
+                                                         NULL, NULL,
+                                                         TRUE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_CONSTRUCT));
 }
 
 
@@ -160,6 +173,7 @@ show_desktop_plugin_init (ShowDesktopPlugin *plugin)
   GtkWidget *button;
 
   plugin->xfw_screen = NULL;
+  plugin->show_tooltip = TRUE;
 
   /* monitor screen changes */
   g_signal_connect (G_OBJECT (plugin), "screen-changed",
@@ -202,6 +216,7 @@ show_desktop_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
   const PanelProperty properties[] = {
     { "show-on-hover", G_TYPE_BOOLEAN },
+    { "show-tooltip", G_TYPE_BOOLEAN },
     { NULL }
   };
 
@@ -301,11 +316,39 @@ show_desktop_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 
 
 static void
+show_desktop_plugin_update_tooltip (ShowDesktopPlugin *plugin)
+{
+  const gchar *text;
+  gboolean active;
+
+  panel_return_if_fail (SHOW_DESKTOP_IS_PLUGIN (plugin));
+  panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (plugin->button));
+
+  if (!plugin->show_tooltip)
+    {
+      gtk_widget_set_tooltip_text (GTK_WIDGET (plugin->button), NULL);
+      panel_utils_set_atk_info (GTK_WIDGET (plugin->button), "Show Desktop", NULL);
+      return;
+    }
+
+  active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button));
+
+  if (active)
+    text = _("Restore the minimized windows");
+  else
+    text = _("Minimize all open windows and show the desktop");
+
+  gtk_widget_set_tooltip_text (GTK_WIDGET (plugin->button), text);
+  panel_utils_set_atk_info (GTK_WIDGET (plugin->button), _("Show Desktop"), text);
+}
+
+
+
+static void
 show_desktop_plugin_toggled (GtkToggleButton *button,
                              ShowDesktopPlugin *plugin)
 {
   gboolean active;
-  const gchar *text;
 
   panel_return_if_fail (SHOW_DESKTOP_IS_PLUGIN (plugin));
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
@@ -318,13 +361,8 @@ show_desktop_plugin_toggled (GtkToggleButton *button,
   if (active != xfw_screen_get_show_desktop (plugin->xfw_screen))
     xfw_screen_set_show_desktop (plugin->xfw_screen, active);
 
-  if (active)
-    text = _("Restore the minimized windows");
-  else
-    text = _("Minimize all open windows and show the desktop");
-
-  gtk_widget_set_tooltip_text (GTK_WIDGET (button), text);
-  panel_utils_set_atk_info (GTK_WIDGET (button), _("Show Desktop"), text);
+  /* update tooltip if enabled */
+  show_desktop_plugin_update_tooltip (plugin);
 }
 
 
@@ -516,6 +554,11 @@ show_desktop_plugin_set_property (GObject *object,
       plugin->show_on_hover = g_value_get_boolean (value);
       break;
 
+    case PROP_SHOW_TOOLTIP:
+      plugin->show_tooltip = g_value_get_boolean (value);
+      show_desktop_plugin_update_tooltip (plugin);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -536,6 +579,10 @@ show_desktop_plugin_get_property (GObject *object,
     {
     case PROP_SHOW_ON_HOVER:
       g_value_set_boolean (value, plugin->show_on_hover);
+      break;
+
+    case PROP_SHOW_TOOLTIP:
+      g_value_set_boolean (value, plugin->show_tooltip);
       break;
 
     default:
@@ -572,6 +619,7 @@ showdesktop_configure (XfcePanelPlugin *panel_plugin)
   ShowDesktopPlugin *plugin = SHOW_DESKTOP_PLUGIN (panel_plugin);
   GtkBuilder *builder;
   GObject *show_on_mouse_hover;
+  GObject *show_tooltip_checkbox;
 
   panel_return_if_fail (SHOW_DESKTOP_IS_PLUGIN (plugin));
 
@@ -583,6 +631,11 @@ showdesktop_configure (XfcePanelPlugin *panel_plugin)
   show_on_mouse_hover = gtk_builder_get_object (builder, "show-on-hover");
   g_object_bind_property (G_OBJECT (plugin), "show-on-hover",
                           G_OBJECT (show_on_mouse_hover), "active",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+
+  show_tooltip_checkbox = gtk_builder_get_object (builder, "show-tooltip");
+  g_object_bind_property (G_OBJECT (plugin), "show-tooltip",
+                          G_OBJECT (show_tooltip_checkbox), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
   gtk_widget_show (GTK_WIDGET (plugin->settings_dialog));
