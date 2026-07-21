@@ -323,6 +323,9 @@ sn_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
   SnPlugin *plugin = SN_PLUGIN (panel_plugin);
 
+  /* setup transation domain */
+  xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
+
 #ifdef ENABLE_X11
   plugin->manager = NULL;
 #endif
