@@ -78,8 +78,7 @@ systray_plugin_configuration_changed (SnConfig *config,
 
   /* known-legacy-items */
   {
-    g_slist_free_full (plugin->names_ordered, g_free);
-    plugin->names_ordered = NULL;
+    g_clear_slist (&plugin->names_ordered, g_free);
 
     /* add new values */
     list = sn_config_get_known_items (config, SN_ITEM_TYPE_LEGACY);
@@ -169,8 +168,7 @@ systray_plugin_screen_changed (GtkWidget *widget,
     {
       /* unregister this screen screen */
       systray_manager_unregister (plugin->manager);
-      g_object_unref (G_OBJECT (plugin->manager));
-      plugin->manager = NULL;
+      g_clear_object (&plugin->manager);
     }
 
   /* schedule a delayed startup */

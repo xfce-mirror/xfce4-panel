@@ -2368,8 +2368,7 @@ xfce_panel_plugin_menu_destroy (XfcePanelPlugin *plugin)
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
   panel_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin));
 
-  g_slist_free_full (plugin->priv->menu_items, g_object_unref);
-  plugin->priv->menu_items = NULL;
+  g_clear_slist (&plugin->priv->menu_items, g_object_unref);
 
   /* ignore the request for destruction if the menu is popped up */
   if (plugin->priv->menu != NULL && !gtk_widget_get_visible (GTK_WIDGET (plugin->priv->menu)))

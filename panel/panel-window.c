@@ -3751,8 +3751,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
 
       /* destroy the autohide window */
       panel_return_if_fail (GTK_IS_WINDOW (window->autohide_window));
-      gtk_widget_destroy (window->autohide_window);
-      window->autohide_window = NULL;
+      g_clear_pointer (&window->autohide_window, gtk_widget_destroy);
     }
 
   /* change stacking order if autohide changed */

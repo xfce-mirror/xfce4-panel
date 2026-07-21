@@ -443,11 +443,7 @@ clock_plugin_leave_notify_event (GtkWidget *widget,
                                  ClockPlugin *plugin)
 {
   /* stop a running tooltip timeout when we leave the widget */
-  if (plugin->tooltip_timeout != NULL)
-    {
-      clock_time_timeout_free (plugin->tooltip_timeout);
-      plugin->tooltip_timeout = NULL;
-    }
+  g_clear_pointer (&plugin->tooltip_timeout, clock_time_timeout_free);
 
   return FALSE;
 }
