@@ -2790,13 +2790,11 @@ xfce_panel_plugin_position_menu (GtkMenu *menu,
 
 
 
-static gboolean
+static void
 xfce_panel_plugin_popup_menu_reposition (gpointer data)
 {
   gtk_menu_reposition (data);
   g_object_set_data (data, "menu-reposition-id", GUINT_TO_POINTER (0));
-
-  return FALSE;
 }
 
 
@@ -2878,7 +2876,7 @@ xfce_panel_plugin_popup_menu (XfcePanelPlugin *plugin,
   if (id != 0)
     g_source_remove (id);
 
-  id = g_idle_add (xfce_panel_plugin_popup_menu_reposition, menu);
+  id = g_idle_add_once (xfce_panel_plugin_popup_menu_reposition, menu);
   g_object_set_data (G_OBJECT (menu), "menu-reposition-id", GUINT_TO_POINTER (id));
 
   /* pop up the menu */
@@ -2925,13 +2923,11 @@ xfce_panel_plugin_popup_window_button_press_event (GtkWidget *window,
 
 
 
-static gboolean
+static void
 xfce_panel_plugin_popup_window_hide_idle (gpointer data)
 {
   gtk_widget_hide (data);
   g_object_set_data (data, "window-hide-id", GUINT_TO_POINTER (0));
-
-  return FALSE;
 }
 
 
@@ -2946,7 +2942,7 @@ xfce_panel_plugin_popup_window_has_toplevel_focus (GObject *window,
       /* delay hiding so button-press event is consumed in between, otherwise we could
        * re-enter the plugin signal handler with a hidden window and show it again */
       g_object_set_data (window, "window-hide-id",
-                         GUINT_TO_POINTER (g_idle_add (xfce_panel_plugin_popup_window_hide_idle, window)));
+                         GUINT_TO_POINTER (g_idle_add_once (xfce_panel_plugin_popup_window_hide_idle, window)));
     }
 }
 
