@@ -2,6 +2,7 @@
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"libclock\" \
+	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	$(PLATFORM_CPPFLAGS)
 
 plugindir = $(libdir)/xfce4/panel/plugins

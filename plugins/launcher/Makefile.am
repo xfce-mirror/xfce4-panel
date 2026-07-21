@@ -2,6 +2,7 @@
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"liblauncher\" \
+	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	-DSN_API_NOT_YET_FROZEN \
 	$(PLATFORM_CPPFLAGS)
 
