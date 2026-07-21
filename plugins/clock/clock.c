@@ -544,6 +544,9 @@ clock_plugin_construct (XfcePanelPlugin *panel_plugin)
     { NULL }
   };
 
+  /* setup transation domain */
+  xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
+
   /* show configure */
   xfce_panel_plugin_menu_show_configure (panel_plugin);
 
