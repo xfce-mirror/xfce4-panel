@@ -250,9 +250,9 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   connect_signal ("panel-remove", "clicked", panel_preferences_dialog_panel_remove);
   connect_signal ("panel-combobox", "changed", panel_preferences_dialog_panel_combobox_changed);
   g_signal_connect_object (display, "monitor-added",
-                           G_CALLBACK (panel_preferences_dialog_monitors_changed), dialog, 0);
+                           G_CALLBACK (panel_preferences_dialog_monitors_changed), dialog, G_CONNECT_DEFAULT);
   g_signal_connect_object (display, "monitor-removed",
-                           G_CALLBACK (panel_preferences_dialog_monitors_changed), dialog, 0);
+                           G_CALLBACK (panel_preferences_dialog_monitors_changed), dialog, G_CONNECT_DEFAULT);
 
   /* check if xfce4-panel-profiles or panel-switch are installed and if either is show the button */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-profiles");

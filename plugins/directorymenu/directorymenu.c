@@ -1120,7 +1120,7 @@ directory_menu_plugin_menu_load (GtkWidget *menu,
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
       g_signal_connect_data (G_OBJECT (mi), "activate",
                              G_CALLBACK (directory_menu_plugin_menu_open_folder),
-                             g_object_ref (dir), (GClosureNotify) (void (*) (void)) g_object_unref, 0);
+                             g_object_ref (dir), (GClosureNotify) (void (*) (void)) g_object_unref, G_CONNECT_DEFAULT);
       gtk_widget_show (mi);
 
       image = gtk_image_new_from_icon_name ("folder-open", GTK_ICON_SIZE_MENU);
@@ -1134,7 +1134,7 @@ directory_menu_plugin_menu_load (GtkWidget *menu,
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
       g_signal_connect_data (G_OBJECT (mi), "activate",
                              G_CALLBACK (directory_menu_plugin_menu_open_terminal),
-                             g_object_ref (dir), (GClosureNotify) (void (*) (void)) g_object_unref, 0);
+                             g_object_ref (dir), (GClosureNotify) (void (*) (void)) g_object_unref, G_CONNECT_DEFAULT);
       gtk_widget_show (mi);
 
       image = gtk_image_new_from_icon_name ("utilities-terminal", GTK_ICON_SIZE_MENU);
@@ -1148,7 +1148,7 @@ directory_menu_plugin_menu_load (GtkWidget *menu,
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
       g_signal_connect_data (G_OBJECT (mi), "activate",
                              G_CALLBACK (directory_menu_plugin_menu_new_folder),
-                             g_object_ref (dir), (GClosureNotify) (void (*) (void)) g_object_unref, 0);
+                             g_object_ref (dir), (GClosureNotify) (void (*) (void)) g_object_unref, G_CONNECT_DEFAULT);
       gtk_widget_show (mi);
 
       image = gtk_image_new_from_icon_name ("folder-new", GTK_ICON_SIZE_MENU);
@@ -1162,7 +1162,7 @@ directory_menu_plugin_menu_load (GtkWidget *menu,
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
       g_signal_connect_data (G_OBJECT (mi), "activate",
                              G_CALLBACK (directory_menu_plugin_menu_new_document),
-                             g_object_ref (dir), (GClosureNotify) (void (*) (void)) g_object_unref, 0);
+                             g_object_ref (dir), (GClosureNotify) (void (*) (void)) g_object_unref, G_CONNECT_DEFAULT);
       gtk_widget_show (mi);
 
       image = gtk_image_new_from_icon_name ("document-new", GTK_ICON_SIZE_MENU);
@@ -1303,7 +1303,7 @@ directory_menu_plugin_menu_load (GtkWidget *menu,
 
               g_signal_connect_data (G_OBJECT (mi), "activate",
                                      G_CALLBACK (directory_menu_plugin_menu_launch_desktop_file),
-                                     desktopinfo, (GClosureNotify) (void (*) (void)) g_object_unref, 0);
+                                     desktopinfo, (GClosureNotify) (void (*) (void)) g_object_unref, G_CONNECT_DEFAULT);
 
               g_object_unref (G_OBJECT (file));
             }
@@ -1311,7 +1311,7 @@ directory_menu_plugin_menu_load (GtkWidget *menu,
             {
               g_signal_connect_data (G_OBJECT (mi), "activate",
                                      G_CALLBACK (directory_menu_plugin_menu_launch), file,
-                                     (GClosureNotify) (void (*) (void)) g_object_unref, 0);
+                                     (GClosureNotify) (void (*) (void)) g_object_unref, G_CONNECT_DEFAULT);
             }
 
           g_object_unref (G_OBJECT (info));

@@ -2037,9 +2037,9 @@ panel_window_screen_changed (GtkWidget *widget,
   window->screen = screen;
   window->display = gdk_screen_get_display (screen);
   g_signal_connect_object (G_OBJECT (window->screen), "monitors-changed",
-                           G_CALLBACK (panel_window_screen_layout_changed), window, 0);
+                           G_CALLBACK (panel_window_screen_layout_changed), window, G_CONNECT_DEFAULT);
   g_signal_connect_object (G_OBJECT (window->screen), "size-changed",
-                           G_CALLBACK (panel_window_screen_layout_changed), window, 0);
+                           G_CALLBACK (panel_window_screen_layout_changed), window, G_CONNECT_DEFAULT);
 
   /* update the screen layout */
   panel_window_screen_layout_changed (screen, window);
@@ -3309,7 +3309,7 @@ panel_window_xfw_window_closed (XfwWindow *xfw_window,
       {
         g_signal_handlers_disconnect_by_func (lp->data, panel_window_xfw_window_closed, window);
         g_signal_connect_object (lp->data, "closed",
-                                 G_CALLBACK (panel_window_xfw_window_closed), window, 0);
+                                 G_CALLBACK (panel_window_xfw_window_closed), window, G_CONNECT_DEFAULT);
         break;
       }
 
@@ -3823,7 +3823,7 @@ panel_window_update_autohide_window (PanelWindow *window,
               g_signal_handlers_disconnect_by_func (active_window,
                                                     panel_window_xfw_window_closed, window);
               g_signal_connect_object (G_OBJECT (active_window), "closed",
-                                       G_CALLBACK (panel_window_xfw_window_closed), window, 0);
+                                       G_CALLBACK (panel_window_xfw_window_closed), window, G_CONNECT_DEFAULT);
             }
           else
             /* simulate a geometry change for immediate hiding when the new active

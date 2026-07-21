@@ -150,7 +150,7 @@ wrapper_plug_wayland_active_window_changed (XfwScreen *screen,
   window = xfw_screen_get_active_window (screen);
   if (window != NULL)
     g_signal_connect_object (window, "state-changed",
-                             G_CALLBACK (wrapper_plug_wayland_window_state_changed), plug, 0);
+                             G_CALLBACK (wrapper_plug_wayland_window_state_changed), plug, G_CONNECT_DEFAULT);
 }
 
 static void
@@ -204,7 +204,7 @@ wrapper_plug_wayland_init (WrapperPlugWayland *plug)
   plug->xfw_screen = xfw_screen_get_default ();
   wrapper_plug_wayland_active_window_changed (plug->xfw_screen, NULL, plug);
   g_signal_connect_object (plug->xfw_screen, "active-window-changed",
-                           G_CALLBACK (wrapper_plug_wayland_active_window_changed), plug, 0);
+                           G_CALLBACK (wrapper_plug_wayland_active_window_changed), plug, G_CONNECT_DEFAULT);
 }
 
 
