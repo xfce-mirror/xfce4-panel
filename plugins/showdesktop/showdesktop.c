@@ -434,7 +434,7 @@ show_desktop_plugin_show_desktop_changed (XfwScreen *xfw_screen,
 
 
 
-static gboolean
+static void
 show_desktop_plugin_drag_timeout (gpointer data)
 {
   ShowDesktopPlugin *plugin = (ShowDesktopPlugin *) data;
@@ -443,8 +443,6 @@ show_desktop_plugin_drag_timeout (gpointer data)
 
   /* activate button to toggle show desktop */
   g_signal_emit_by_name (G_OBJECT (plugin->button), "clicked", plugin);
-
-  return FALSE;
 }
 
 
@@ -470,9 +468,9 @@ show_desktop_plugin_drag_motion (GtkWidget *widget,
                                  ShowDesktopPlugin *plugin)
 {
   if (plugin->drag_timeout == 0)
-    plugin->drag_timeout = g_timeout_add (DRAG_ACTIVATE_TIMEOUT,
-                                          show_desktop_plugin_drag_timeout,
-                                          plugin);
+    plugin->drag_timeout = g_timeout_add_once (DRAG_ACTIVATE_TIMEOUT,
+                                               show_desktop_plugin_drag_timeout,
+                                               plugin);
 
   gtk_drag_highlight (GTK_WIDGET (widget));
 
@@ -483,7 +481,7 @@ show_desktop_plugin_drag_motion (GtkWidget *widget,
 
 
 
-static gboolean
+static void
 show_desktop_plugin_enter_timeout (gpointer data)
 {
   ShowDesktopPlugin *plugin = (ShowDesktopPlugin *) data;
@@ -495,8 +493,6 @@ show_desktop_plugin_enter_timeout (gpointer data)
     }
 
   plugin->enter_timeout_id = 0;
-
-  return FALSE;
 }
 
 
@@ -512,9 +508,9 @@ show_desktop_plugin_enter (GtkToggleButton *widget,
   if (plugin->enter_timeout_id == 0
       && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button)))
     {
-      plugin->enter_timeout_id = g_timeout_add (HOVER_ACTIVATE_TIMEOUT,
-                                                show_desktop_plugin_enter_timeout,
-                                                plugin);
+      plugin->enter_timeout_id = g_timeout_add_once (HOVER_ACTIVATE_TIMEOUT,
+                                                     show_desktop_plugin_enter_timeout,
+                                                     plugin);
     }
 
   return FALSE;

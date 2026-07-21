@@ -837,8 +837,7 @@ launcher_plugin_set_property (GObject *object,
       else
         {
           launcher_plugin_items_delete_configs (plugin);
-          g_slist_free_full (plugin->items, (GDestroyNotify) g_object_unref);
-          plugin->items = NULL;
+          g_clear_slist (&plugin->items, g_object_unref);
         }
 
       /* emit signal */
@@ -1129,8 +1128,8 @@ launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
   /* release the cached pixbuf */
   if (plugin->surface != NULL)
     cairo_surface_destroy (plugin->surface);
-  if (plugin->icon_name != NULL)
-    g_free (plugin->icon_name);
+
+  g_free (plugin->icon_name);
 }
 
 
@@ -1151,8 +1150,7 @@ launcher_plugin_removed (XfcePanelPlugin *panel_plugin)
   if (plugin->config_monitor != NULL)
     {
       g_file_monitor_cancel (plugin->config_monitor);
-      g_object_unref (G_OBJECT (plugin->config_monitor));
-      plugin->config_monitor = NULL;
+      g_clear_object (&plugin->config_monitor);
     }
 
   /* cleanup desktop files in the config dir */
@@ -1320,8 +1318,7 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
           GdkPixbuf *pixbuf;
           gint scale_factor;
 
-          cairo_surface_destroy (plugin->surface);
-          plugin->surface = NULL;
+          g_clear_pointer (&plugin->surface, cairo_surface_destroy);
           scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (plugin));
           pixbuf = gdk_pixbuf_new_from_file_at_size (plugin->icon_name,
                                                      icon_size * scale_factor,
@@ -1764,8 +1761,7 @@ launcher_plugin_menu_destroy (LauncherPlugin *plugin)
   if (plugin->menu != NULL)
     {
       /* destroy the menu */
-      gtk_widget_destroy (plugin->menu);
-      plugin->menu = NULL;
+      g_clear_pointer (&plugin->menu, gtk_widget_destroy);
 
       /* deactivate the toggle button */
       if (plugin->arrow_position != LAUNCHER_ARROW_INTERNAL)
@@ -2398,11 +2394,7 @@ launcher_plugin_tooltip_icon_invalidate (GObject *object)
 static void
 launcher_plugin_icon_invalidate (LauncherPlugin *plugin)
 {
-  if (plugin->surface != NULL)
-    {
-      cairo_surface_destroy (plugin->surface);
-      plugin->surface = NULL;
-    }
+  g_clear_pointer (&plugin->surface, cairo_surface_destroy);
 }
 
 

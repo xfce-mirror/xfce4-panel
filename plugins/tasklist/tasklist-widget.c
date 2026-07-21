@@ -1729,8 +1729,8 @@ xfce_tasklist_connect_screen (XfceTasklist *tasklist)
   /* window button visibility based on window<->workspace association only works on X11,
    * where there is only one workspace group, but it can be destroyed on wayland, so let's
    * manage this in a minimalist way */
-  g_signal_connect_object (manager, "workspace-group-created", G_CALLBACK (workspace_group_created), tasklist, 0);
-  g_signal_connect_object (manager, "workspace-group-destroyed", G_CALLBACK (workspace_group_destroyed), tasklist, 0);
+  g_signal_connect_object (manager, "workspace-group-created", G_CALLBACK (workspace_group_created), tasklist, G_CONNECT_DEFAULT);
+  g_signal_connect_object (manager, "workspace-group-destroyed", G_CALLBACK (workspace_group_destroyed), tasklist, G_CONNECT_DEFAULT);
   workspace_group_destroyed (manager, NULL, tasklist);
 
   /* add all existing windows on this screen */
@@ -3517,7 +3517,7 @@ xfce_tasklist_button_proxy_menu_item (XfceTasklistChild *child,
       g_object_ref (G_OBJECT (child->window));
       g_signal_connect_data (G_OBJECT (mi), "enter-notify-event",
                              G_CALLBACK (xfce_tasklist_button_enter_notify_event), child,
-                             xfce_tasklist_button_enter_notify_event_disconnected, 0);
+                             xfce_tasklist_button_enter_notify_event_disconnected, G_CONNECT_DEFAULT);
     }
 
   g_signal_connect (G_OBJECT (mi), "activate",

@@ -352,9 +352,9 @@ main (gint argc,
 
       /* connect to service signals */
       g_signal_connect_object (dbus_gproxy, "g-signal::Set",
-                               G_CALLBACK (wrapper_gproxy_set), provider, 0);
+                               G_CALLBACK (wrapper_gproxy_set), provider, G_CONNECT_DEFAULT);
       g_signal_connect_object (dbus_gproxy, "g-signal::RemoteEvent",
-                               G_CALLBACK (wrapper_gproxy_remote_event), provider, 0);
+                               G_CALLBACK (wrapper_gproxy_remote_event), provider, G_CONNECT_DEFAULT);
 
       /* show the plugin */
       gtk_widget_show (GTK_WIDGET (provider));

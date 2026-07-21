@@ -486,8 +486,8 @@ window_menu_plugin_screen_changed (GtkWidget *widget,
 
   /* window<->workspace association only works on X11, where there is only one workspace group,
    * but it can be destroyed on wayland, so let's manage this in a minimalist way */
-  g_signal_connect_object (manager, "workspace-group-created", G_CALLBACK (workspace_group_created), plugin, 0);
-  g_signal_connect_object (manager, "workspace-group-destroyed", G_CALLBACK (workspace_group_destroyed), plugin, 0);
+  g_signal_connect_object (manager, "workspace-group-created", G_CALLBACK (workspace_group_created), plugin, G_CONNECT_DEFAULT);
+  g_signal_connect_object (manager, "workspace-group-destroyed", G_CALLBACK (workspace_group_destroyed), plugin, G_CONNECT_DEFAULT);
   workspace_group_destroyed (manager, NULL, plugin);
 
   /* connect signal to monitor this screen */

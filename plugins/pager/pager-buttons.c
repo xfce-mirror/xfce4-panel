@@ -476,7 +476,7 @@ workspace_layout:
           label = gtk_label_new (NULL);
           g_object_set_data (G_OBJECT (label), "pager", pager);
           g_signal_connect_object (G_OBJECT (workspace), "name-changed",
-                                   G_CALLBACK (pager_buttons_workspace_button_label), label, 0);
+                                   G_CALLBACK (pager_buttons_workspace_button_label), label, G_CONNECT_DEFAULT);
           pager_buttons_workspace_button_label (workspace, label);
           gtk_label_set_angle (GTK_LABEL (label),
                                pager->orientation == GTK_ORIENTATION_HORIZONTAL ? 0 : 270);

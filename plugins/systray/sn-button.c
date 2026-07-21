@@ -389,15 +389,13 @@ sn_button_unrealize (GtkWidget *widget)
 
 
 
-static gboolean
+static void
 sn_button_menu_size_changed_idle (gpointer user_data)
 {
   SnButton *button = user_data;
 
   gtk_menu_reposition (GTK_MENU (button->menu));
   button->menu_size_allocate_idle_handler = 0;
-
-  return G_SOURCE_REMOVE;
 }
 
 
@@ -410,7 +408,7 @@ sn_button_menu_size_changed (GtkWidget *widget)
   /* defer gtk_menu_reposition call since it may not work in size event handler */
   if (button->menu_size_allocate_idle_handler == 0)
     {
-      button->menu_size_allocate_idle_handler = g_idle_add (sn_button_menu_size_changed_idle, button);
+      button->menu_size_allocate_idle_handler = g_idle_add_once (sn_button_menu_size_changed_idle, button);
     }
 }
 

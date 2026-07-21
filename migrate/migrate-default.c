@@ -167,8 +167,7 @@ migrate_default_start_element_handler (GMarkupParseContext *context,
           xfconf_channel_set_arrayv (parser->channel, prop_path, parser->array);
           g_free (prop_path);
 
-          xfconf_array_free (parser->array);
-          parser->array = NULL;
+          g_clear_pointer (&parser->array, xfconf_array_free);
         }
 
       if (G_LIKELY (attribute_names != NULL))
@@ -305,8 +304,7 @@ migrate_default_end_element_handler (GMarkupParseContext *context,
           xfconf_channel_set_arrayv (parser->channel, prop_path, parser->array);
           g_free (prop_path);
 
-          xfconf_array_free (parser->array);
-          parser->array = NULL;
+          g_clear_pointer (&parser->array, xfconf_array_free);
         }
 
       li = g_slist_last (parser->path);

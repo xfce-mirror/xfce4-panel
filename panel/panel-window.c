@@ -1494,7 +1494,7 @@ set_anchor (PanelWindow *window)
 
 
 
-static gboolean
+static void
 set_anchor_default (gpointer data)
 {
   PanelWindow *window = data;
@@ -1519,7 +1519,6 @@ set_anchor_default (gpointer data)
     }
 
   window->set_anchor_default_id = 0;
-  return FALSE;
 }
 #endif
 
@@ -1577,7 +1576,7 @@ panel_window_get_preferred_width (GtkWidget *widget,
         {
           if (window->set_anchor_default_id != 0)
             g_source_remove (window->set_anchor_default_id);
-          window->set_anchor_default_id = g_idle_add (set_anchor_default, window);
+          window->set_anchor_default_id = g_idle_add_once (set_anchor_default, window);
         }
 #endif
     }
@@ -1643,7 +1642,7 @@ panel_window_get_preferred_height (GtkWidget *widget,
         {
           if (window->set_anchor_default_id != 0)
             g_source_remove (window->set_anchor_default_id);
-          window->set_anchor_default_id = g_idle_add (set_anchor_default, window);
+          window->set_anchor_default_id = g_idle_add_once (set_anchor_default, window);
         }
 #endif
     }
@@ -2037,9 +2036,9 @@ panel_window_screen_changed (GtkWidget *widget,
   window->screen = screen;
   window->display = gdk_screen_get_display (screen);
   g_signal_connect_object (G_OBJECT (window->screen), "monitors-changed",
-                           G_CALLBACK (panel_window_screen_layout_changed), window, 0);
+                           G_CALLBACK (panel_window_screen_layout_changed), window, G_CONNECT_DEFAULT);
   g_signal_connect_object (G_OBJECT (window->screen), "size-changed",
-                           G_CALLBACK (panel_window_screen_layout_changed), window, 0);
+                           G_CALLBACK (panel_window_screen_layout_changed), window, G_CONNECT_DEFAULT);
 
   /* update the screen layout */
   panel_window_screen_layout_changed (screen, window);
@@ -2719,7 +2718,7 @@ panel_window_display_layout_debug (GtkWidget *widget)
 
 
 #ifdef HAVE_GTK_LAYER_SHELL
-static gboolean
+static void
 panel_window_show (gpointer data)
 {
   PanelWindow *window = data;
@@ -2748,7 +2747,6 @@ panel_window_show (gpointer data)
 
   window->in_screen_layout_changed = FALSE;
   window->show_id = 0;
-  return FALSE;
 }
 #endif
 
@@ -2970,7 +2968,7 @@ panel_window_screen_layout_changed (GdkScreen *screen,
        * https://gitlab.xfce.org/xfce/xfce4-panel/-/issues/962
        * https://github.com/wmww/gtk-layer-shell/issues/217
        */
-      window->show_id = g_idle_add (panel_window_show, window);
+      window->show_id = g_idle_add_once (panel_window_show, window);
 
       window->in_screen_layout_changed = FALSE;
     }
@@ -3309,7 +3307,7 @@ panel_window_xfw_window_closed (XfwWindow *xfw_window,
       {
         g_signal_handlers_disconnect_by_func (lp->data, panel_window_xfw_window_closed, window);
         g_signal_connect_object (lp->data, "closed",
-                                 G_CALLBACK (panel_window_xfw_window_closed), window, 0);
+                                 G_CALLBACK (panel_window_xfw_window_closed), window, G_CONNECT_DEFAULT);
         break;
       }
 
@@ -3552,15 +3550,13 @@ panel_window_autohide_queue (PanelWindow *window,
 
 
 
-static gboolean
+static void
 panel_window_opacity_enter_timeout (gpointer data)
 {
   PanelWindow *window = data;
 
   panel_base_window_opacity_enter (PANEL_BASE_WINDOW (window), FALSE);
   window->opacity_timeout_id = 0;
-
-  return FALSE;
 }
 
 
@@ -3576,7 +3572,7 @@ panel_window_opacity_enter_queue (PanelWindow *window,
     panel_base_window_opacity_enter (PANEL_BASE_WINDOW (window), TRUE);
   else
     window->opacity_timeout_id =
-      g_timeout_add (DEFAULT_POPDOWN_DELAY, panel_window_opacity_enter_timeout, window);
+      g_timeout_add_once (DEFAULT_POPDOWN_DELAY, panel_window_opacity_enter_timeout, window);
 }
 
 
@@ -3751,8 +3747,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
 
       /* destroy the autohide window */
       panel_return_if_fail (GTK_IS_WINDOW (window->autohide_window));
-      gtk_widget_destroy (window->autohide_window);
-      window->autohide_window = NULL;
+      g_clear_pointer (&window->autohide_window, gtk_widget_destroy);
     }
 
   /* change stacking order if autohide changed */
@@ -3823,7 +3818,7 @@ panel_window_update_autohide_window (PanelWindow *window,
               g_signal_handlers_disconnect_by_func (active_window,
                                                     panel_window_xfw_window_closed, window);
               g_signal_connect_object (G_OBJECT (active_window), "closed",
-                                       G_CALLBACK (panel_window_xfw_window_closed), window, 0);
+                                       G_CALLBACK (panel_window_xfw_window_closed), window, G_CONNECT_DEFAULT);
             }
           else
             /* simulate a geometry change for immediate hiding when the new active

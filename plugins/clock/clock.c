@@ -443,11 +443,7 @@ clock_plugin_leave_notify_event (GtkWidget *widget,
                                  ClockPlugin *plugin)
 {
   /* stop a running tooltip timeout when we leave the widget */
-  if (plugin->tooltip_timeout != NULL)
-    {
-      clock_time_timeout_free (plugin->tooltip_timeout);
-      plugin->tooltip_timeout = NULL;
-    }
+  g_clear_pointer (&plugin->tooltip_timeout, clock_time_timeout_free);
 
   return FALSE;
 }
@@ -1208,7 +1204,7 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   object = gtk_builder_get_object (builder, "mode");
   g_signal_connect_data (G_OBJECT (object), "changed",
                          G_CALLBACK (clock_plugin_configure_plugin_mode_changed), dialog,
-                         (GClosureNotify) (void (*) (void)) clock_plugin_configure_plugin_free, 0);
+                         (GClosureNotify) (void (*) (void)) clock_plugin_configure_plugin_free, G_CONNECT_DEFAULT);
   g_object_bind_property (G_OBJECT (plugin), "mode",
                           G_OBJECT (object), "active",
                           G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);

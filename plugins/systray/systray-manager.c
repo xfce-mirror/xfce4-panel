@@ -370,8 +370,7 @@ systray_manager_register (SystrayManager *manager,
   else
     {
       /* release the invisible */
-      g_object_unref (G_OBJECT (manager->invisible));
-      manager->invisible = NULL;
+      g_clear_object (&manager->invisible);
 
       /* desktroy the invisible window */
       gtk_widget_destroy (invisible);
