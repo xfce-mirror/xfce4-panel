@@ -1128,8 +1128,8 @@ launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
   /* release the cached pixbuf */
   if (plugin->surface != NULL)
     cairo_surface_destroy (plugin->surface);
-  if (plugin->icon_name != NULL)
-    g_free (plugin->icon_name);
+
+  g_free (plugin->icon_name);
 }
 
 
