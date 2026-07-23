@@ -2600,21 +2600,22 @@ xfce_tasklist_wireframe_update (XfceTasklist *tasklist,
 /**
  * Tasklist Buttons
  **/
-static GdkMonitor *
+static XfwMonitor *
 xfce_tasklist_find_my_monitor (XfceTasklist *tasklist)
 {
   if (tasklist->monitors_to_include == monitors_to_include_panel)
-    return tasklist_get_monitor (tasklist);
+    return xfw_screen_get_monitor_from_gdk_monitor (tasklist->screen, tasklist_get_monitor (tasklist));
 
+  GList *monitors = xfw_screen_get_monitors (tasklist->screen);
   gint index;
   if (sscanf (tasklist->monitors_to_include, "monitor-%d", &index) == 1)
-    return gdk_display_get_monitor (tasklist->display, index);
+    return g_list_nth_data (monitors, index);
 
-  for (guint i = 0; i < tasklist->n_monitors; i++)
+  for (GList *lp = monitors; lp != NULL; lp = lp->next)
     {
-      GdkMonitor *monitor = gdk_display_get_monitor (tasklist->display, i);
-      const gchar *model = g_intern_string (gdk_monitor_get_model (monitor));
-      if (model == tasklist->monitors_to_include)
+      XfwMonitor *monitor = lp->data;
+      const gchar *name = g_intern_string (xfw_monitor_get_connector (monitor));
+      if (name == tasklist->monitors_to_include)
         return monitor;
     }
 
@@ -2636,9 +2637,9 @@ xfce_tasklist_button_visible (XfceTasklistChild *child,
 
   if (xfce_tasklist_filter_monitors (tasklist))
     {
-      GdkMonitor *monitor = xfce_tasklist_find_my_monitor (tasklist);
+      XfwMonitor *monitor = xfce_tasklist_find_my_monitor (tasklist);
       GList *monitors = xfw_window_get_monitors (child->window);
-      if (!g_list_find_custom (monitors, monitor, panel_utils_compare_xfw_gdk_monitors))
+      if (!g_list_find (monitors, monitor))
         return FALSE;
     }
 

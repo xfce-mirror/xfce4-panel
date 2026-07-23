@@ -170,9 +170,7 @@ panel_window_snap_position (PanelWindow *window);
 static void
 panel_window_layer_set_anchor (PanelWindow *window);
 static void
-panel_window_display_layout_debug (GtkWidget *widget);
-static void
-panel_window_screen_layout_changed (GdkScreen *screen,
+panel_window_screen_layout_changed (XfwScreen *screen,
                                     PanelWindow *window);
 static void
 panel_window_active_window_changed (XfwScreen *screen,
@@ -361,6 +359,7 @@ struct _PanelWindow
   guint locked : 1;
 
   /* screen and working area of this panel */
+  XfwScreen *xfw_screen;
   GdkScreen *screen;
   GdkDisplay *display;
   GdkRectangle area;
@@ -397,7 +396,6 @@ struct _PanelWindow
   GdkRectangle alloc;
 
   /* autohiding */
-  XfwScreen *xfw_screen;
   XfwWindow *xfw_active_window;
   GtkWidget *autohide_window;
   AutohideBehavior autohide_behavior;
@@ -889,7 +887,7 @@ panel_window_set_property (GObject *object,
       if (window->mode != val_mode)
         {
           window->mode = val_mode;
-          panel_window_screen_layout_changed (window->screen, window);
+          panel_window_screen_layout_changed (window->xfw_screen, window);
         }
       panel_base_window_orientation_changed (PANEL_BASE_WINDOW (window), window->mode);
       /* send the new orientation and screen position to the panel plugins */
@@ -995,7 +993,7 @@ panel_window_set_property (GObject *object,
       if (window->span_monitors != val_bool)
         {
           window->span_monitors = !!val_bool;
-          panel_window_screen_layout_changed (window->screen, window);
+          panel_window_screen_layout_changed (window->xfw_screen, window);
         }
       break;
 
@@ -1008,7 +1006,7 @@ panel_window_set_property (GObject *object,
       else
         window->output_name = g_strdup (val_string);
 
-      panel_window_screen_layout_changed (window->screen, window);
+      panel_window_screen_layout_changed (window->xfw_screen, window);
       break;
 
     case PROP_POSITION:
@@ -1023,7 +1021,7 @@ panel_window_set_property (GObject *object,
           if (gtk_layer_is_supported ())
             panel_window_layer_set_anchor (window);
 
-          panel_window_screen_layout_changed (window->screen, window);
+          panel_window_screen_layout_changed (window->xfw_screen, window);
 
           /* send the new screen position to the panel plugins */
           panel_window_plugins_update (window, PLUGIN_PROP_SCREEN_POSITION);
@@ -1035,7 +1033,7 @@ panel_window_set_property (GObject *object,
       if (val_bool != window->struts_enabled)
         {
           window->struts_enabled = val_bool;
-          panel_window_screen_layout_changed (window->screen, window);
+          panel_window_screen_layout_changed (window->xfw_screen, window);
         }
       break;
 
@@ -1328,7 +1326,7 @@ panel_window_motion_notify_event (GtkWidget *widget,
       /* set base point to cursor position and update working area */
       window->base_x = pointer_x;
       window->base_y = pointer_y;
-      panel_window_screen_layout_changed (window->screen, window);
+      panel_window_screen_layout_changed (window->xfw_screen, window);
     }
 
   /* calculate the new window position, but keep it inside the working geometry */
@@ -1362,7 +1360,7 @@ panel_window_motion_notify_event (GtkWidget *widget,
     }
 
   /* update the working area */
-  panel_window_screen_layout_changed (window->screen, window);
+  panel_window_screen_layout_changed (window->xfw_screen, window);
 
   return retval;
 }
@@ -2025,21 +2023,9 @@ panel_window_screen_changed (GtkWidget *widget,
   if (G_UNLIKELY (window->screen == screen))
     return;
 
-  /* disconnect from previous screen */
-  if (G_UNLIKELY (window->screen != NULL))
-    g_signal_handlers_disconnect_by_func (G_OBJECT (window->screen),
-                                          panel_window_screen_layout_changed, window);
-
   /* set the new screen */
   window->screen = screen;
   window->display = gdk_screen_get_display (screen);
-  g_signal_connect_object (G_OBJECT (window->screen), "monitors-changed",
-                           G_CALLBACK (panel_window_screen_layout_changed), window, G_CONNECT_DEFAULT);
-  g_signal_connect_object (G_OBJECT (window->screen), "size-changed",
-                           G_CALLBACK (panel_window_screen_layout_changed), window, G_CONNECT_DEFAULT);
-
-  /* update the screen layout */
-  panel_window_screen_layout_changed (screen, window);
 
   /* update current xfw-screen */
   xfw_screen = xfw_screen_get_default ();
@@ -2648,66 +2634,53 @@ panel_window_layer_set_anchor (PanelWindow *window)
 
 
 static void
-panel_window_display_layout_debug (GtkWidget *widget)
+panel_window_display_layout_debug (PanelWindow *window)
 {
-  GdkDisplay *display;
-  GdkScreen *screen;
-  GdkMonitor *monitor;
-  gint m, n_monitors;
-  gint w, h;
-  GdkRectangle rect;
-  GString *str;
-  const gchar *name;
-  gboolean composite = FALSE;
-
-  panel_return_if_fail (GTK_IS_WIDGET (widget));
   panel_return_if_fail (panel_debug_has_domain (PANEL_DEBUG_YES));
 
-  str = g_string_new (NULL);
+  GString *str = g_string_new (NULL);
 
-  display = gtk_widget_get_display (widget);
-  screen = gtk_widget_get_screen (widget);
+  gint w = panel_screen_get_width (window->screen);
+  gint h = panel_screen_get_height (window->screen);
 
-  w = panel_screen_get_width (screen);
-  h = panel_screen_get_height (screen);
-
-  g_string_append_printf (str, "screen-0[%p]=[%d,%d]", screen, w, h);
+  g_string_append_printf (str, "screen-0[%p]=[%d,%d]", window->xfw_screen, w, h);
 
   if (panel_debug_has_domain (PANEL_DEBUG_DISPLAY_LAYOUT))
     {
       g_string_append_printf (str, "{comp=%s, sys=%p, rgba=%p}",
-                              PANEL_DEBUG_BOOL (gdk_screen_is_composited (screen)),
-                              gdk_screen_get_system_visual (screen),
-                              gdk_screen_get_rgba_visual (screen));
+                              PANEL_DEBUG_BOOL (gdk_screen_is_composited (window->screen)),
+                              gdk_screen_get_system_visual (window->screen),
+                              gdk_screen_get_rgba_visual (window->screen));
     }
 
   str = g_string_append (str, " (");
 
-  n_monitors = gdk_display_get_n_monitors (display);
-  for (m = 0; m < n_monitors; m++)
+  GList *monitors = xfw_screen_get_monitors (window->xfw_screen);
+  for (GList *lp = monitors; lp != NULL; lp = lp->next)
     {
-      monitor = gdk_display_get_monitor (display, m);
-      name = gdk_monitor_get_model (monitor);
+      XfwMonitor *monitor = lp->data;
+      const gchar *name = xfw_monitor_get_connector (monitor);
       if (name == NULL)
-        name = g_strdup_printf ("monitor-%d", m);
+        name = g_strdup_printf ("monitor-%d", g_list_index (monitors, monitor));
 
-      gdk_monitor_get_geometry (monitor, &rect);
+      GdkRectangle rect;
+      xfw_monitor_get_logical_geometry (monitor, &rect);
       g_string_append_printf (str, "%s=[%d,%d;%d,%d]", name,
                               rect.x, rect.y, rect.width, rect.height);
 
-      if (m < n_monitors - 1)
+      if (lp->next != NULL)
         g_string_append (str, ", ");
     }
 
   g_string_append (str, ")");
 
   G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  composite = gdk_display_supports_composite (display);
+  gboolean composite = gdk_display_supports_composite (window->display);
   G_GNUC_END_IGNORE_DEPRECATIONS
 
   panel_debug (PANEL_DEBUG_DISPLAY_LAYOUT,
-               "%p: display=%s{comp=%s}, %s", widget,
-               gdk_display_get_name (display),
+               "%p: display=%s{comp=%s}, %s", window,
+               gdk_display_get_name (window->display),
                PANEL_DEBUG_BOOL (composite),
                str->str);
 
@@ -2752,19 +2725,15 @@ panel_window_show (gpointer data)
 
 
 static void
-panel_window_screen_layout_changed (GdkScreen *screen,
+panel_window_screen_layout_changed (XfwScreen *screen,
                                     PanelWindow *window)
 {
-  GdkRectangle a = { 0 }, b;
-  gint n_monitors, n;
-  const gchar *name;
-  GdkMonitor *monitor = NULL;
-  StrutsEdge struts_edge;
-  gboolean force_struts_update = FALSE;
+  GdkRectangle a = { 0 };
+  XfwMonitor *monitor = NULL;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
-  panel_return_if_fail (GDK_IS_SCREEN (screen));
-  panel_return_if_fail (window->screen == screen);
+  panel_return_if_fail (XFW_IS_SCREEN (screen));
+  panel_return_if_fail (window->xfw_screen == screen);
 
   /* leave when the screen position if not set */
   if (window->base_x == -1 && window->base_y == -1)
@@ -2782,9 +2751,9 @@ panel_window_screen_layout_changed (GdkScreen *screen,
     }
 #endif
 
-  /* n_monitors == 0 should be a temporary state, it can happen on Wayland */
-  n_monitors = gdk_display_get_n_monitors (window->display);
-  if (n_monitors == 0)
+  /* monitors == NULL should be a temporary state, it can happen on Wayland */
+  GList *monitors = xfw_screen_get_monitors (window->xfw_screen);
+  if (monitors == NULL)
     {
       panel_debug (PANEL_DEBUG_POSITIONING, "%p: no monitor found, hiding window", window);
 
@@ -2803,36 +2772,36 @@ panel_window_screen_layout_changed (GdkScreen *screen,
 
   /* print the display layout when debugging is enabled */
   if (G_UNLIKELY (panel_debug_has_domain (PANEL_DEBUG_YES)))
-    panel_window_display_layout_debug (GTK_WIDGET (window));
+    panel_window_display_layout_debug (window);
 
   /* update the struts edge of this window and check if we need to force
    * a struts update (ie. remove struts that are currently set) */
-  struts_edge = panel_window_screen_struts_edge (window);
-  if (window->struts_edge != struts_edge && struts_edge == STRUTS_EDGE_NONE)
-    force_struts_update = TRUE;
+  StrutsEdge struts_edge = panel_window_screen_struts_edge (window);
+  gboolean force_struts_update = window->struts_edge != struts_edge && struts_edge == STRUTS_EDGE_NONE;
   window->struts_edge = struts_edge;
 
   panel_debug (PANEL_DEBUG_POSITIONING,
                "%p: screen=%p, monitors=%d, output-name=%s, span-monitors=%s, base=%d,%d",
                window, screen,
-               n_monitors, window->output_name,
+               g_list_length (monitors), window->output_name,
                PANEL_DEBUG_BOOL (window->span_monitors),
                window->base_x, window->base_y);
 
   if ((window->output_name == NULL || g_strcmp0 (window->output_name, "Automatic") == 0)
-      && (window->span_monitors || n_monitors == 1))
+      && (window->span_monitors || g_list_length (monitors) == 1))
     {
       /* get the screen geometry we also use this if there is only
        * one monitor and no output is choosen, as a fast-path */
-      monitor = gdk_display_get_monitor (window->display, 0);
-      gdk_monitor_get_geometry (monitor, &a);
+      monitor = monitors->data;
+      xfw_monitor_get_logical_geometry (monitor, &a);
 
       a.width += a.x;
       a.height += a.y;
 
-      for (n = 1; n < n_monitors; n++)
+      for (GList *lp = monitors->next; lp != NULL; lp = lp->next)
         {
-          gdk_monitor_get_geometry (gdk_display_get_monitor (window->display, n), &b);
+          GdkRectangle b;
+          xfw_monitor_get_logical_geometry (lp->data, &b);
 
           a.x = MIN (a.x, b.x);
           a.y = MIN (a.y, b.y);
@@ -2849,58 +2818,58 @@ panel_window_screen_layout_changed (GdkScreen *screen,
           || window->output_name == NULL)
         {
           /* get the monitor geometry based on the panel position */
-          monitor = gdk_display_get_monitor_at_point (window->display, window->base_x,
-                                                      window->base_y);
-          gdk_monitor_get_geometry (monitor, &a);
+          GdkMonitor *gdk_monitor = gdk_display_get_monitor_at_point (window->display, window->base_x, window->base_y);
+          monitor = xfw_screen_get_monitor_from_gdk_monitor (window->xfw_screen, gdk_monitor);
+          xfw_monitor_get_logical_geometry (monitor, &a);
         }
       else if (g_strcmp0 (window->output_name, "Primary") == 0)
         {
           /* get the primary monitor */
-          monitor = gdk_display_get_primary_monitor (window->display);
+          monitor = xfw_screen_get_primary_monitor (window->xfw_screen);
           if (monitor == NULL)
-            monitor = gdk_display_get_monitor (window->display, 0);
+            monitor = monitors->data;
 
-          gdk_monitor_get_geometry (monitor, &a);
+          xfw_monitor_get_logical_geometry (monitor, &a);
         }
       else
         {
           /* check if we've stored the monitor number in the config or
            * should lookup the number from the randr output name */
+          gint n;
           if (strncmp (window->output_name, "monitor-", 8) == 0
               && sscanf (window->output_name, "monitor-%d", &n) == 1)
             {
               /* check if extracted monitor number is out of range */
-              monitor = gdk_display_get_monitor (window->display, n);
+              monitor = g_list_nth_data (monitors, n);
               if (monitor != NULL)
                 {
-                  const gchar *model = gdk_monitor_get_model (monitor);
-                  gboolean matches = xfce_str_is_empty (model);
+                  const gchar *name = xfw_monitor_get_connector (monitor);
+                  gboolean matches = xfce_str_is_empty (name);
                   if (!matches)
                     {
                       gchar *p = g_strstr_len (window->output_name + 8, -1, "-");
-                      if (p != NULL && g_strcmp0 (p + 1, model) == 0)
+                      if (p != NULL && g_strcmp0 (p + 1, name) == 0)
                         matches = TRUE;
                     }
 
                   if (matches)
                     {
-                      gdk_monitor_get_geometry (monitor, &a);
-                      panel_return_if_fail (a.width > 0 && a.height > 0);
+                      xfw_monitor_get_logical_geometry (monitor, &a);
                     }
                 }
             }
           else
             {
               /* detect the monitor number by output name */
-              for (n = 0; n < n_monitors; n++)
+              for (GList *lp = monitors; lp != NULL; lp = lp->next)
                 {
-                  monitor = gdk_display_get_monitor (window->display, n);
-                  name = gdk_monitor_get_model (monitor);
+                  monitor = lp->data;
+                  const gchar *name = xfw_monitor_get_connector (monitor);
 
                   /* check if this is the monitor we're looking for */
                   if (g_strcmp0 (window->output_name, name) == 0)
                     {
-                      gdk_monitor_get_geometry (monitor, &a);
+                      xfw_monitor_get_logical_geometry (monitor, &a);
                       panel_return_if_fail (a.width > 0 && a.height > 0);
                       break;
                     }
@@ -2950,15 +2919,17 @@ panel_window_screen_layout_changed (GdkScreen *screen,
 #ifdef HAVE_GTK_LAYER_SHELL
   if (gtk_layer_is_supported ())
     {
+      GdkMonitor *gdk_monitor = xfw_monitor_get_gdk_monitor (monitor);
+
       /* we need to set this properly so it is consistent with e.g. "length-max" */
-      if (monitor != gtk_layer_get_monitor (GTK_WINDOW (window)))
+      if (gdk_monitor != gtk_layer_get_monitor (GTK_WINDOW (window)))
         {
           /* hide the panel first, so it is not remapped by gtk-layer-shell */
           gtk_widget_hide (GTK_WIDGET (window));
 
-          gtk_layer_set_monitor (GTK_WINDOW (window), monitor);
+          gtk_layer_set_monitor (GTK_WINDOW (window), gdk_monitor);
           if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
-            gtk_layer_set_monitor (GTK_WINDOW (window->autohide_window), monitor);
+            gtk_layer_set_monitor (GTK_WINDOW (window->autohide_window), gdk_monitor);
         }
 
       /*
@@ -3586,7 +3557,7 @@ panel_window_autohide_queue (PanelWindow *window,
   /* force a layout update to disable struts */
   if (window->struts_edge != STRUTS_EDGE_NONE
       || window->snap_position != SNAP_POSITION_NONE)
-    panel_window_screen_layout_changed (window->screen, window);
+    panel_window_screen_layout_changed (window->xfw_screen, window);
 
   if (window->autohide_state == AUTOHIDE_VISIBLE)
     {
@@ -3833,6 +3804,8 @@ panel_window_update_xfw_screen (PanelWindow *window,
       panel_window_update_active_window (window, NULL);
       g_signal_handlers_disconnect_by_func (window->xfw_screen,
                                             panel_window_active_window_changed, window);
+      g_signal_handlers_disconnect_by_func (window->xfw_screen,
+                                            panel_window_screen_layout_changed, window);
       g_object_unref (window->xfw_screen);
     }
 
@@ -3842,7 +3815,10 @@ panel_window_update_xfw_screen (PanelWindow *window,
   /* connect to the new screen */
   if (screen != NULL)
     {
+      panel_window_screen_layout_changed (screen, window);
       panel_window_active_window_changed (screen, NULL, window);
+      g_signal_connect (G_OBJECT (screen), "monitors-changed",
+                        G_CALLBACK (panel_window_screen_layout_changed), window);
       g_signal_connect (G_OBJECT (screen), "active-window-changed",
                         G_CALLBACK (panel_window_active_window_changed), window);
     }
