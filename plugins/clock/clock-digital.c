@@ -234,7 +234,8 @@ xfce_clock_digital_set_property (GObject *object,
 
   /* reschedule the timeout and redraw */
   clock_time_timeout_set_interval (digital->timeout,
-                                   clock_time_interval_from_format (digital->time_format));
+                                   MIN (clock_time_interval_from_format (digital->time_format),
+                                        clock_time_interval_from_format (digital->date_format)));
   xfce_clock_digital_update (digital, digital->time);
 }
 
@@ -428,7 +429,8 @@ xfce_clock_digital_new (ClockTime *time,
   XfceClockDigital *digital = g_object_new (XFCE_CLOCK_TYPE_DIGITAL, NULL);
 
   digital->time = time;
-  digital->timeout = clock_time_timeout_new (clock_time_interval_from_format (digital->time_format),
+  digital->timeout = clock_time_timeout_new (MIN (clock_time_interval_from_format (digital->time_format),
+                                                  clock_time_interval_from_format (digital->date_format)),
                                              digital->time,
                                              sleep_monitor,
                                              G_CALLBACK (xfce_clock_digital_update), digital);
