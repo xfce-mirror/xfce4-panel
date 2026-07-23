@@ -209,9 +209,8 @@ static void
 panel_window_set_autohide_behavior (PanelWindow *window,
                                     AutohideBehavior behavior);
 static void
-panel_window_update_autohide_window (PanelWindow *window,
-                                     XfwScreen *screen,
-                                     XfwWindow *active_window);
+panel_window_update_xfw_screen (PanelWindow *window,
+                                XfwScreen *screen);
 static void
 panel_window_menu_popup (PanelWindow *window,
                          GdkEventButton *event,
@@ -1081,8 +1080,8 @@ panel_window_finalize (GObject *object)
 {
   PanelWindow *window = PANEL_WINDOW (object);
 
-  /* disconnect from active screen and window */
-  panel_window_update_autohide_window (window, NULL, NULL);
+  /* disconnect from active screen */
+  panel_window_update_xfw_screen (window, NULL);
 
   /* stop running autohide timeout */
   if (G_UNLIKELY (window->autohide_timeout_id != 0))
@@ -2014,7 +2013,6 @@ panel_window_screen_changed (GtkWidget *widget,
                              GdkScreen *previous_screen)
 {
   PanelWindow *window = PANEL_WINDOW (widget);
-  XfwWindow *xfw_window;
   XfwScreen *xfw_screen;
   GdkScreen *screen;
 
@@ -2043,11 +2041,12 @@ panel_window_screen_changed (GtkWidget *widget,
   /* update the screen layout */
   panel_window_screen_layout_changed (screen, window);
 
-  /* update xfw screen to be used for the autohide feature */
+  /* update current xfw-screen */
   xfw_screen = xfw_screen_get_default ();
-  xfw_window = xfw_screen_get_active_window (xfw_screen);
-
-  panel_window_update_autohide_window (window, xfw_screen, xfw_window);
+  if (xfw_screen != window->xfw_screen)
+    panel_window_update_xfw_screen (window, xfw_screen);
+  else
+    g_object_unref (xfw_screen);
 }
 
 
@@ -2985,6 +2984,70 @@ panel_window_screen_layout_changed (GdkScreen *screen,
 
 
 static void
+panel_window_active_window_monitors_idle (gpointer data)
+{
+  PanelWindow *window = data;
+
+  if (window->xfw_active_window != NULL)
+    panel_window_active_window_monitors (window->xfw_active_window, NULL, window);
+}
+
+
+
+static void
+panel_window_update_active_window (PanelWindow *window,
+                                   XfwWindow *active_window)
+{
+  /* disconnect from previously active window */
+  if (G_LIKELY (window->xfw_active_window != NULL))
+    {
+      g_signal_handlers_disconnect_by_func (window->xfw_active_window,
+                                            panel_window_active_window_geometry_changed, window);
+      g_signal_handlers_disconnect_by_func (window->xfw_active_window,
+                                            panel_window_active_window_state_changed, window);
+      if (gtk_layer_is_supported ())
+        g_signal_handlers_disconnect_by_func (window->xfw_active_window,
+                                              panel_window_active_window_monitors, window);
+    }
+
+  /* remember the new window */
+  window->xfw_active_window = active_window;
+
+  /* connect to the new window */
+  if (active_window != NULL)
+    {
+      g_signal_connect (G_OBJECT (active_window), "geometry-changed",
+                        G_CALLBACK (panel_window_active_window_geometry_changed), window);
+      g_signal_connect (G_OBJECT (active_window), "state-changed",
+                        G_CALLBACK (panel_window_active_window_state_changed), window);
+      if (gtk_layer_is_supported ())
+        {
+          g_signal_connect (G_OBJECT (active_window), "notify::monitors",
+                            G_CALLBACK (panel_window_active_window_monitors), window);
+
+          /* wait for panel position to be initialized */
+          if (window->base_x == -1 && window->base_y == -1)
+            g_idle_add_once (panel_window_active_window_monitors_idle, window);
+          else
+            panel_window_active_window_monitors (window->xfw_active_window, NULL, window);
+
+          /* stay connected even if the window is not active anymore, because
+           * closing it can impact intellihide on Wayland */
+          g_signal_handlers_disconnect_by_func (active_window,
+                                                panel_window_xfw_window_closed, window);
+          g_signal_connect_object (G_OBJECT (active_window), "closed",
+                                   G_CALLBACK (panel_window_xfw_window_closed), window, G_CONNECT_DEFAULT);
+        }
+      else
+        /* simulate a geometry change for immediate hiding when the new active
+         * window already overlaps the panel */
+        panel_window_active_window_geometry_changed (active_window, window);
+    }
+}
+
+
+
+static void
 panel_window_active_window_changed (XfwScreen *screen,
                                     XfwWindow *previous_window,
                                     PanelWindow *window)
@@ -2998,7 +3061,7 @@ panel_window_active_window_changed (XfwScreen *screen,
   active_window = xfw_screen_get_active_window (screen);
 
   /* update the active window to be used for the autohide feature */
-  panel_window_update_autohide_window (window, screen, active_window);
+  panel_window_update_active_window (window, active_window);
 }
 
 
@@ -3758,95 +3821,30 @@ panel_window_set_autohide_behavior (PanelWindow *window,
 
 
 static void
-panel_window_active_window_monitors_idle (gpointer data)
-{
-  PanelWindow *window = data;
-
-  if (window->xfw_active_window != NULL)
-    panel_window_active_window_monitors (window->xfw_active_window, NULL, window);
-}
-
-
-
-static void
-panel_window_update_autohide_window (PanelWindow *window,
-                                     XfwScreen *screen,
-                                     XfwWindow *active_window)
+panel_window_update_xfw_screen (PanelWindow *window,
+                                XfwScreen *screen)
 {
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (screen == NULL || XFW_IS_SCREEN (screen));
-  panel_return_if_fail (active_window == NULL || XFW_IS_WINDOW (active_window));
 
-  /* first update active window, in case window->xfw_screen is released below */
-  if (G_LIKELY (active_window != window->xfw_active_window))
+  /* disconnect from previous screen */
+  if (G_LIKELY (window->xfw_screen != NULL))
     {
-      /* disconnect from previously active window */
-      if (G_LIKELY (window->xfw_active_window != NULL))
-        {
-          g_signal_handlers_disconnect_by_func (window->xfw_active_window,
-                                                panel_window_active_window_geometry_changed, window);
-          g_signal_handlers_disconnect_by_func (window->xfw_active_window,
-                                                panel_window_active_window_state_changed, window);
-          if (gtk_layer_is_supported ())
-            g_signal_handlers_disconnect_by_func (window->xfw_active_window,
-                                                  panel_window_active_window_monitors, window);
-        }
-
-      /* remember the new window */
-      window->xfw_active_window = active_window;
-
-      /* connect to the new window but only if it is not a desktop/root-type window */
-      if (active_window != NULL)
-        {
-          g_signal_connect (G_OBJECT (active_window), "geometry-changed",
-                            G_CALLBACK (panel_window_active_window_geometry_changed), window);
-          g_signal_connect (G_OBJECT (active_window), "state-changed",
-                            G_CALLBACK (panel_window_active_window_state_changed), window);
-          if (gtk_layer_is_supported ())
-            {
-              g_signal_connect (G_OBJECT (active_window), "notify::monitors",
-                                G_CALLBACK (panel_window_active_window_monitors), window);
-
-              /* wait for panel position to be initialized */
-              if (window->base_x == -1 && window->base_y == -1)
-                g_idle_add_once (panel_window_active_window_monitors_idle, window);
-              else
-                panel_window_active_window_monitors (window->xfw_active_window, NULL, window);
-
-              /* stay connected even if the window is not active anymore, because
-               * closing it can impact intellihide on Wayland */
-              g_signal_handlers_disconnect_by_func (active_window,
-                                                    panel_window_xfw_window_closed, window);
-              g_signal_connect_object (G_OBJECT (active_window), "closed",
-                                       G_CALLBACK (panel_window_xfw_window_closed), window, G_CONNECT_DEFAULT);
-            }
-          else
-            /* simulate a geometry change for immediate hiding when the new active
-             * window already overlaps the panel */
-            panel_window_active_window_geometry_changed (active_window, window);
-        }
+      panel_window_update_active_window (window, NULL);
+      g_signal_handlers_disconnect_by_func (window->xfw_screen,
+                                            panel_window_active_window_changed, window);
+      g_object_unref (window->xfw_screen);
     }
 
-  /* update current screen */
-  if (screen != window->xfw_screen)
+  /* remember new screen */
+  window->xfw_screen = screen;
+
+  /* connect to the new screen */
+  if (screen != NULL)
     {
-      /* disconnect from previous screen */
-      if (G_LIKELY (window->xfw_screen != NULL))
-        {
-          g_signal_handlers_disconnect_by_func (window->xfw_screen,
-                                                panel_window_active_window_changed, window);
-          g_object_unref (window->xfw_screen);
-        }
-
-      /* remember new screen */
-      window->xfw_screen = screen;
-
-      /* connect to the new screen */
-      if (screen != NULL)
-        {
-          g_signal_connect (G_OBJECT (screen), "active-window-changed",
-                            G_CALLBACK (panel_window_active_window_changed), window);
-        }
+      panel_window_active_window_changed (screen, NULL, window);
+      g_signal_connect (G_OBJECT (screen), "active-window-changed",
+                        G_CALLBACK (panel_window_active_window_changed), window);
     }
 }
 
