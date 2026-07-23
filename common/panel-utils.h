@@ -89,6 +89,16 @@ panel_utils_get_workspace_number_for_monitor (XfwScreen *xfw_screen,
                                               GdkMonitor *monitor,
                                               XfwWorkspace *workspace);
 
+void
+panel_utils_populate_output_list (GtkListStore *store,
+                                  GtkComboBox *box,
+                                  const gchar *output_name,
+                                  GdkDisplay *display,
+                                  gint n_monitors,
+                                  gboolean *output_selected,
+                                  GtkTreeIter *iter,
+                                  gint *n);
+
 G_END_DECLS
 
 #endif /* !__PANEL_UTILS_H__ */
