@@ -413,3 +413,61 @@ panel_utils_get_workspace_number_for_monitor (XfwScreen *xfw_screen,
   g_list_free (workspaces);
   return number;
 }
+
+
+
+void
+panel_utils_populate_output_list (GtkListStore *store,
+                                  GtkComboBox *box,
+                                  const gchar *output_name,
+                                  GdkDisplay *display,
+                                  gint n_monitors,
+                                  gboolean *output_selected,
+                                  GtkTreeIter *iter,
+                                  gint *n)
+{
+  GHashTable *connectors = g_hash_table_new (g_str_hash, g_str_equal);
+  XfwScreen *screen = xfw_screen_get_default ();
+  GList *monitors = xfw_screen_get_monitors (screen);
+
+  for (GList *lp = monitors; lp != NULL; lp = lp->next)
+    {
+      XfwMonitor *monitor = lp->data;
+      const gchar *connector = xfw_monitor_get_connector (monitor);
+      gchar *title, *name;
+
+      if (xfce_str_is_empty (connector) || !g_hash_table_add (connectors, (gpointer) connector))
+        {
+          gint i = g_list_index (monitors, monitor);
+
+          /* I18N: monitor name in the output selector */
+          title = g_strdup_printf (_("Monitor %d"), i + 1);
+          if (xfce_str_is_empty (connector))
+            name = g_strdup_printf ("monitor-%d", i);
+          else
+            name = g_strdup_printf ("monitor-%d-%s", i, connector);
+        }
+      else
+        {
+          /* use the randr name for the title */
+          name = g_strdup (connector);
+          title = g_strdup (name);
+        }
+
+      gtk_list_store_insert_with_values (GTK_LIST_STORE (store), iter, (*n)++,
+                                         OUTPUT_NAME, name,
+                                         OUTPUT_TITLE, title, -1);
+      if (!(*output_selected)
+          && g_strcmp0 (name, output_name) == 0)
+        {
+          gtk_combo_box_set_active_iter (GTK_COMBO_BOX (box), iter);
+          *output_selected = TRUE;
+        }
+
+      g_free (name);
+      g_free (title);
+    }
+
+  g_hash_table_destroy (connectors);
+  g_object_unref (screen);
+}

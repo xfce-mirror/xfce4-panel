@@ -23,7 +23,7 @@ dependency_versions = {
   'glib': '>= 2.72.0',
   'gtk': '>= 3.24.0',
   'xfce4': '>= 4.18.0',
-  'libxfce4windowing': '>= 4.20.1',
+  'libxfce4windowing': '>= 4.20.6',
 
   'libwnck': '>= 3.0',
   'libx11': '>= 1.6.7',

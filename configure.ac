@@ -19,7 +19,7 @@ m4_define([glib_minimum_version], [2.72.0])
 m4_define([gtk_minimum_version], [3.24.0])
 m4_define([cairo_minimum_version], [1.16])
 m4_define([xfce4_minimum_version], [4.18.0])
-m4_define([libxfce4windowing_minimum_version], [4.20.1])
+m4_define([libxfce4windowing_minimum_version], [4.20.6])
 
 m4_define([libx11_minimum_version], [1.6.7])
 m4_define([libxext_minimum_version], [1.0.0])
