@@ -717,7 +717,6 @@ pager_plugin_screen_changed (GtkWidget *widget,
                              GdkScreen *previous_screen)
 {
   PagerPlugin *plugin = PAGER_PLUGIN (widget);
-  GdkScreen *screen;
   XfwScreen *xfw_screen;
   XfwWorkspaceManager *manager;
 
@@ -726,16 +725,18 @@ pager_plugin_screen_changed (GtkWidget *widget,
   if (plugin->xfw_screen != xfw_screen)
     {
       if (plugin->xfw_screen != NULL)
-        g_object_unref (plugin->xfw_screen);
+        {
+          manager = xfw_screen_get_workspace_manager (xfw_screen);
+          g_signal_handlers_disconnect_by_data (xfw_workspace_manager_list_workspace_groups (manager)->data, plugin);
+          g_signal_handlers_disconnect_by_data (plugin->xfw_screen, plugin);
+          g_object_unref (plugin->xfw_screen);
+        }
 
       plugin->xfw_screen = xfw_screen;
       manager = xfw_screen_get_workspace_manager (xfw_screen);
       pager_plugin_screen_layout_changed (plugin, NULL);
 
-      screen = gdk_screen_get_default ();
-      g_signal_connect_object (G_OBJECT (screen), "monitors-changed",
-                               G_CALLBACK (pager_plugin_screen_layout_changed), plugin, G_CONNECT_SWAPPED);
-      g_signal_connect_object (G_OBJECT (screen), "size-changed",
+      g_signal_connect_object (G_OBJECT (xfw_screen), "monitors-changed",
                                G_CALLBACK (pager_plugin_screen_layout_changed), plugin, G_CONNECT_SWAPPED);
       g_signal_connect_object (G_OBJECT (xfw_screen), "window-manager-changed",
                                G_CALLBACK (pager_plugin_screen_layout_changed), plugin, G_CONNECT_SWAPPED);
