@@ -229,8 +229,9 @@ xfce_clock_digital_set_property (GObject *object,
     }
 
   /* reschedule the timeout and redraw */
-  clock_time_timeout_set_interval (digital->timeout,
-                                   clock_time_interval_from_format (digital->time_format));
+  guint interval = MIN (clock_time_interval_from_format (digital->date_format),
+                        clock_time_interval_from_format (digital->time_format));
+  clock_time_timeout_set_interval (digital->timeout, interval);
   xfce_clock_digital_update (digital, digital->time);
 }
 
