@@ -84,8 +84,7 @@ static void
 panel_preferences_dialog_panel_combobox_changed (GtkComboBox *combobox,
                                                  PanelPreferencesDialog *dialog);
 static void
-panel_preferences_dialog_monitors_changed (GdkDisplay *display,
-                                           GdkMonitor *monitor,
+panel_preferences_dialog_monitors_changed (XfwScreen *screen,
                                            PanelPreferencesDialog *dialog);
 static gboolean
 panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog,
@@ -159,12 +158,6 @@ enum
   N_ITEM_COLUMNS
 };
 
-enum
-{
-  OUTPUT_NAME,
-  OUTPUT_TITLE
-};
-
 struct _PanelPreferencesDialog
 {
   GtkBuilder __parent__;
@@ -217,7 +210,6 @@ panel_preferences_dialog_class_init (PanelPreferencesDialogClass *klass)
 static void
 panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
 {
-  GdkDisplay *display = gdk_display_get_default ();
   GObject *window;
   GObject *object;
   GObject *info;
@@ -254,10 +246,10 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   connect_signal ("panel-add", "clicked", panel_preferences_dialog_panel_add);
   connect_signal ("panel-remove", "clicked", panel_preferences_dialog_panel_remove);
   connect_signal ("panel-combobox", "changed", panel_preferences_dialog_panel_combobox_changed);
-  g_signal_connect_object (display, "monitor-added",
+  XfwScreen *screen = xfw_screen_get_default ();
+  g_signal_connect_object (screen, "monitors-changed",
                            G_CALLBACK (panel_preferences_dialog_monitors_changed), dialog, 0);
-  g_signal_connect_object (display, "monitor-removed",
-                           G_CALLBACK (panel_preferences_dialog_monitors_changed), dialog, 0);
+  g_object_unref (screen);
 
   /* check if xfce4-panel-profiles or panel-switch are installed and if either is show the button */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-profiles");
@@ -500,7 +492,6 @@ static void
 panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
 {
   GdkDisplay *display;
-  GdkMonitor *monitor;
   gint n_monitors = 1;
   GObject *object;
   GObject *store;
@@ -509,8 +500,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   gboolean selector_visible = TRUE;
   GtkTreeIter iter;
   gboolean output_selected = FALSE;
-  gint n = 0, i;
-  gchar *name, *title;
+  gint n = 0;
   gboolean span_monitors_sensitive = FALSE;
   gboolean icon_size_set;
 
@@ -595,43 +585,14 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
 
       if (n_monitors >= 1)
         {
-          GHashTable *models = g_hash_table_new (g_str_hash, g_str_equal);
-          for (i = 0; i < n_monitors; i++)
-            {
-              const gchar *model;
-              monitor = gdk_display_get_monitor (display, i);
-              model = gdk_monitor_get_model (monitor);
-              if (xfce_str_is_empty (model) || !g_hash_table_add (models, (gpointer) model))
-                {
-                  /* I18N: monitor name in the output selector */
-                  title = g_strdup_printf (_("Monitor %d"), i + 1);
-                  if (xfce_str_is_empty (model))
-                    name = g_strdup_printf ("monitor-%d", i);
-                  else
-                    name = g_strdup_printf ("monitor-%d-%s", i, model);
-                }
-              else
-                {
-                  /* use the randr name for the title */
-                  name = g_strdup (model);
-                  title = g_strdup (name);
-                }
-
-              gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
-                                                 OUTPUT_NAME, name,
-                                                 OUTPUT_TITLE, title, -1);
-              if (!output_selected
-                  && g_strcmp0 (name, output_name) == 0)
-                {
-                  gtk_combo_box_set_active_iter (GTK_COMBO_BOX (object), &iter);
-                  output_selected = TRUE;
-                }
-
-              g_free (name);
-              g_free (title);
-            }
-
-          g_hash_table_destroy (models);
+          panel_utils_populate_output_list (GTK_LIST_STORE (store),
+                                            GTK_COMBO_BOX (object),
+                                            output_name,
+                                            display,
+                                            n_monitors,
+                                            &output_selected,
+                                            &iter,
+                                            &n);
         }
 
       /* add the output from the config if still nothing has been selected */
@@ -989,8 +950,7 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox *combobox,
 
 
 static void
-panel_preferences_dialog_monitors_changed (GdkDisplay *display,
-                                           GdkMonitor *monitor,
+panel_preferences_dialog_monitors_changed (XfwScreen *screen,
                                            PanelPreferencesDialog *dialog)
 {
   GObject *combobox = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-combobox");
