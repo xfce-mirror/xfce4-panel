@@ -86,8 +86,7 @@ static void
 panel_preferences_dialog_panel_combobox_changed (GtkComboBox *combobox,
                                                  PanelPreferencesDialog *dialog);
 static void
-panel_preferences_dialog_monitors_changed (GdkDisplay *display,
-                                           GdkMonitor *monitor,
+panel_preferences_dialog_monitors_changed (XfwScreen *screen,
                                            PanelPreferencesDialog *dialog);
 static gboolean
 panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog,
@@ -213,7 +212,6 @@ panel_preferences_dialog_class_init (PanelPreferencesDialogClass *klass)
 static void
 panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
 {
-  GdkDisplay *display = gdk_display_get_default ();
   GObject *window;
   GObject *object;
   GObject *info;
@@ -249,10 +247,10 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   connect_signal ("panel-add", "clicked", panel_preferences_dialog_panel_add);
   connect_signal ("panel-remove", "clicked", panel_preferences_dialog_panel_remove);
   connect_signal ("panel-combobox", "changed", panel_preferences_dialog_panel_combobox_changed);
-  g_signal_connect_object (display, "monitor-added",
+  XfwScreen *screen = xfw_screen_get_default ();
+  g_signal_connect_object (screen, "monitors-changed",
                            G_CALLBACK (panel_preferences_dialog_monitors_changed), dialog, G_CONNECT_DEFAULT);
-  g_signal_connect_object (display, "monitor-removed",
-                           G_CALLBACK (panel_preferences_dialog_monitors_changed), dialog, G_CONNECT_DEFAULT);
+  g_object_unref (screen);
 
   /* check if xfce4-panel-profiles or panel-switch are installed and if either is show the button */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-profiles");
@@ -970,8 +968,7 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox *combobox,
 
 
 static void
-panel_preferences_dialog_monitors_changed (GdkDisplay *display,
-                                           GdkMonitor *monitor,
+panel_preferences_dialog_monitors_changed (XfwScreen *screen,
                                            PanelPreferencesDialog *dialog)
 {
   GObject *combobox = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-combobox");

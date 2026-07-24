@@ -414,27 +414,31 @@ panel_utils_populate_output_list (GtkListStore *store,
                                   GtkTreeIter *iter,
                                   gint *n)
 {
-  GHashTable *models = g_hash_table_new (g_str_hash, g_str_equal);
+  GHashTable *connectors = g_hash_table_new (g_str_hash, g_str_equal);
+  XfwScreen *screen = xfw_screen_get_default ();
+  GList *monitors = xfw_screen_get_monitors (screen);
 
-  for (gint i = 0; i < n_monitors; i++)
+  for (GList *lp = monitors; lp != NULL; lp = lp->next)
     {
-      GdkMonitor *monitor = gdk_display_get_monitor (display, i);
-      const gchar *model = gdk_monitor_get_model (monitor);
+      XfwMonitor *monitor = lp->data;
+      const gchar *connector = xfw_monitor_get_connector (monitor);
       gchar *title, *name;
 
-      if (xfce_str_is_empty (model) || !g_hash_table_add (models, (gpointer) model))
+      if (xfce_str_is_empty (connector) || !g_hash_table_add (connectors, (gpointer) connector))
         {
+          gint i = g_list_index (monitors, monitor);
+
           /* I18N: monitor name in the output selector */
           title = g_strdup_printf (_("Monitor %d"), i + 1);
-          if (xfce_str_is_empty (model))
+          if (xfce_str_is_empty (connector))
             name = g_strdup_printf ("monitor-%d", i);
           else
-            name = g_strdup_printf ("monitor-%d-%s", i, model);
+            name = g_strdup_printf ("monitor-%d-%s", i, connector);
         }
       else
         {
           /* use the randr name for the title */
-          name = g_strdup (model);
+          name = g_strdup (connector);
           title = g_strdup (name);
         }
 
@@ -452,5 +456,6 @@ panel_utils_populate_output_list (GtkListStore *store,
       g_free (title);
     }
 
-  g_hash_table_destroy (models);
+  g_hash_table_destroy (connectors);
+  g_object_unref (screen);
 }
