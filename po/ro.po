@@ -7,14 +7,14 @@
 # Dumitru Moldovan <dumol@gnome.org>, 2015
 # Dumitru Moldovan <dumol@gnome.org>, 2015
 # Mișu Moldovan <dumol@xfce.org>, 2015
-# Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2024-2025
+# Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2024-2026
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-06-04 00:53+0200\n"
+"POT-Creation-Date: 2026-07-25 00:59+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Mișu Moldovan <dumol@xfce.org>, 2015\n"
+"Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2024-2026\n"
 "Language-Team: Romanian (http://app.transifex.com/xfce/xfce4-panel/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +38,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panouri;configurări;preferințe;bara de activități;auto-ascunder;meniu aplicație;start;butoane;lansator;zonă de notificare;stare; pictograme;module;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3935
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3886
 msgid "Panel"
 msgstr "Panou"
 
@@ -115,8 +115,8 @@ msgstr "_Închide"
 #: common/resources/showdesktop-dialog.glade:49
 #: common/resources/tasklist-dialog.glade:102
 #: common/resources/windowmenu-dialog.glade:66
-#: libxfce4panel/xfce-panel-plugin.c:1342 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:4001
+#: libxfce4panel/xfce-panel-plugin.c:1354 panel/panel-item-dialog.c:201
+#: panel/panel-window.c:3952
 msgid "_Help"
 msgstr "_Ajutor"
 
@@ -732,7 +732,7 @@ msgstr "Adăugați elemente noi"
 msgid "Add one or more existing items to the launcher"
 msgstr "Adăugați unul sau mai multe elemente existente în lansator"
 
-#: common/resources/launcher-dialog.glade:87 panel/panel-dialogs.c:157
+#: common/resources/launcher-dialog.glade:87 panel/panel-dialogs.c:156
 #: panel/panel-item-dialog.c:197
 msgid "_Add"
 msgstr "_Adaugă"
@@ -788,7 +788,7 @@ msgstr "Vizualizare în miniatură"
 msgid "Workspace Switcher"
 msgstr "Comutator de spații de lucru"
 
-#: common/resources/pager-dialog.glade:64 plugins/pager/pager.c:768
+#: common/resources/pager-dialog.glade:64 plugins/pager/pager.c:772
 msgid "Workspace _Settings..."
 msgstr "_Opțiuni pentru spațiile de lucru…"
 
@@ -817,7 +817,7 @@ msgid "Transparent"
 msgstr "Transparent"
 
 #: common/resources/separator-dialog.glade:30
-#: common/resources/separator-dialog.glade:42 plugins/actions/actions.c:726
+#: common/resources/separator-dialog.glade:42 plugins/actions/actions.c:729
 #: plugins/separator/separator.desktop.in.in:4
 msgid "Separator"
 msgstr "Separator"
@@ -839,7 +839,7 @@ msgid "Si_ze:"
 msgstr "Dimen_siune:"
 
 #: common/resources/showdesktop-dialog.glade:18
-#: plugins/showdesktop/showdesktop.c:327
+#: plugins/showdesktop/showdesktop.c:345
 #: plugins/showdesktop/showdesktop.desktop.in.in:4
 msgid "Show Desktop"
 msgstr "Afișează biroul"
@@ -848,7 +848,11 @@ msgstr "Afișează biroul"
 msgid "_Show on mouse hover"
 msgstr "Afișează la trecerea mouse-ului"
 
-#: common/resources/showdesktop-dialog.glade:113
+#: common/resources/showdesktop-dialog.glade:107
+msgid "Show _tooltip"
+msgstr "Afișează _indiciu"
+
+#: common/resources/showdesktop-dialog.glade:128
 #: common/resources/sn-dialog.glade:300
 msgid "Behavior"
 msgstr "Comportament"
@@ -1081,70 +1085,70 @@ msgid "Enable _urgency notification"
 msgstr "Activează notificarea _urgenței"
 
 #. I18N: monitor name in the output selector
-#: common/panel-utils.c:428
+#: common/panel-utils.c:432
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitorul %d"
 
-#: libxfce4panel/xfce-panel-plugin.c:1107
-#: panel/panel-preferences-dialog.c:1489
+#: libxfce4panel/xfce-panel-plugin.c:1119
+#: panel/panel-preferences-dialog.c:1486
 msgid "Remove"
 msgstr "Elimină"
 
-#: libxfce4panel/xfce-panel-plugin.c:1108
+#: libxfce4panel/xfce-panel-plugin.c:1120
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "Eliminarea elementului din panou înseamnă de asemenea, că se va pierde configurația acestuia."
 
-#: libxfce4panel/xfce-panel-plugin.c:1112
-#: panel/panel-preferences-dialog.c:1496
+#: libxfce4panel/xfce-panel-plugin.c:1124
+#: panel/panel-preferences-dialog.c:1493
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Sigur doriți să eliminați „%s”?"
 
 #. properties item
-#: libxfce4panel/xfce-panel-plugin.c:1234
+#: libxfce4panel/xfce-panel-plugin.c:1246
 msgid "_Properties"
 msgstr "_Proprietăți"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1245 panel/panel-window.c:4010
+#: libxfce4panel/xfce-panel-plugin.c:1257 panel/panel-window.c:3961
 msgid "_About"
 msgstr "_Despre"
 
 #. move item
-#: libxfce4panel/xfce-panel-plugin.c:1256
+#: libxfce4panel/xfce-panel-plugin.c:1268
 msgid "_Move"
 msgstr "_Mutare"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1272 panel/panel-application.c:357
-#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1066
+#: libxfce4panel/xfce-panel-plugin.c:1284 panel/panel-application.c:357
+#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1063
 #: plugins/launcher/launcher-dialog.c:934
 msgid "_Remove"
 msgstr "_Elimină"
 
-#: libxfce4panel/xfce-panel-plugin.c:1290
+#: libxfce4panel/xfce-panel-plugin.c:1302
 msgid "Pane_l"
 msgstr "P_anou"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1298 panel/panel-window.c:3947
+#: libxfce4panel/xfce-panel-plugin.c:1310 panel/panel-window.c:3898
 msgid "Add _New Items..."
 msgstr "Adăugați elemente _noi…"
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1309 panel/panel-window.c:3958
+#: libxfce4panel/xfce-panel-plugin.c:1321 panel/panel-window.c:3909
 msgid "Panel Pr_eferences..."
 msgstr "_Preferințe pentru panouri…"
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1326 panel/panel-window.c:3985
+#: libxfce4panel/xfce-panel-plugin.c:1338 panel/panel-window.c:3936
 msgid "Log _Out"
 msgstr "_Ieșire"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1353
+#: libxfce4panel/xfce-panel-plugin.c:1365
 msgid "About"
 msgstr "Despre"
 
@@ -1344,41 +1348,41 @@ msgstr "Tip nevalid de hint: „%s”. Tipurile valide sunt: bool, double, int, 
 msgid "Unable to open the e-mail address"
 msgstr "Nu se poate deschide adresa de poștă electronică"
 
-#: panel/panel-dialogs.c:79
+#: panel/panel-dialogs.c:78
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Panoul mediului grafic de birou Xfce"
 
-#: panel/panel-dialogs.c:83
+#: panel/panel-dialogs.c:82
 msgid "translator-credits"
 msgstr "Mișu Moldovan <dumol@xfce.org>, 2015.\nRemus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2024, 2025, 2026."
 
-#: panel/panel-dialogs.c:157
+#: panel/panel-dialogs.c:156
 msgid "Add New Item"
 msgstr "Adăugați noi elemente"
 
-#: panel/panel-dialogs.c:157 plugins/actions/actions.c:864
-#: plugins/applicationsmenu/applicationsmenu.c:584
-#: plugins/directorymenu/directorymenu.c:485
-#: plugins/directorymenu/directorymenu.c:985
+#: panel/panel-dialogs.c:156 plugins/actions/actions.c:867
+#: plugins/applicationsmenu/applicationsmenu.c:587
+#: plugins/directorymenu/directorymenu.c:488
+#: plugins/directorymenu/directorymenu.c:988
 msgid "_Cancel"
 msgstr "_Renunță"
 
-#: panel/panel-dialogs.c:168
+#: panel/panel-dialogs.c:167
 msgid "Please choose a panel for the new plugin:"
 msgstr "Alegeți un panou pentru noul modul:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1013
+#: panel/panel-dialogs.c:187 panel/panel-preferences-dialog.c:1010
 #, c-format
 msgid "Panel %d"
 msgstr "Panoul %d"
 
-#: panel/panel-dialogs.c:227
+#: panel/panel-dialogs.c:226
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr "Deoarece panoul rulează în modul chioșc `kiosk~, nu vi se permite să efectuați modificări la configurația panoului ca un utilizator obișnuit"
 
-#: panel/panel-dialogs.c:229
+#: panel/panel-dialogs.c:228
 msgid "Modifying the panel is not allowed"
 msgstr "Modificarea panoului nu este permisă"
 
@@ -1412,42 +1416,42 @@ msgstr "Repornire modul"
 msgid "_Execute"
 msgstr "_Execută"
 
-#: panel/panel-preferences-dialog.c:342
+#: panel/panel-preferences-dialog.c:340
 msgctxt "plugin context menu"
 msgid "_About"
 msgstr "_Despre"
 
-#: panel/panel-preferences-dialog.c:346
+#: panel/panel-preferences-dialog.c:344
 msgid "Show about information of the currently selected item"
 msgstr "Afișează detalii despre elementul selectat"
 
-#: panel/panel-preferences-dialog.c:570
+#: panel/panel-preferences-dialog.c:568
 msgid "Automatic"
 msgstr "Automată"
 
-#: panel/panel-preferences-dialog.c:579
+#: panel/panel-preferences-dialog.c:577
 msgid "Primary"
 msgstr "Primar"
 
-#: panel/panel-preferences-dialog.c:1065
+#: panel/panel-preferences-dialog.c:1062
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Configurațiile panoului și ale modulelor sale vor fi eliminate definitiv"
 
-#: panel/panel-preferences-dialog.c:1074
+#: panel/panel-preferences-dialog.c:1071
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Sigur doriți să eliminați panoul %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1366
+#: panel/panel-preferences-dialog.c:1363
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1371
+#: panel/panel-preferences-dialog.c:1368
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1456,22 +1460,22 @@ msgstr "Nume intern: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1383
+#: panel/panel-preferences-dialog.c:1380
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nume intern: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1498
+#: panel/panel-preferences-dialog.c:1495
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Dacă eliminați acest element din panou, el va fi șters definitiv."
 
-#: panel/panel-preferences-dialog.c:1502
+#: panel/panel-preferences-dialog.c:1499
 #: plugins/launcher/launcher-dialog.c:929
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Sunteți sigur că doriți să eliminați aceste %d elemente?"
 
-#: panel/panel-preferences-dialog.c:1504
+#: panel/panel-preferences-dialog.c:1501
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Dacă le eliminați din panou, acestea sunt pierdute definitiv."
 
@@ -1499,23 +1503,23 @@ msgstr "Avansat"
 msgid "Expert"
 msgstr "Expert"
 
-#: panel/panel-window.c:3972
+#: panel/panel-window.c:3923
 msgid "_Lock Panel"
 msgstr "B_lochează panoul"
 
-#: migrate/main.c:94
+#: migrate/main.c:91
 msgid "Failed to load the default configuration"
 msgstr "Nu s-a putut încărca configurația implicită"
 
-#: migrate/main.c:106
+#: migrate/main.c:103
 msgid "Panel config needs migration..."
 msgstr "Configurația panoului trebuie migrată…"
 
-#: migrate/main.c:110
+#: migrate/main.c:107
 msgid "Failed to migrate the existing configuration"
 msgstr "Nu s-a putut migra configurația existentă"
 
-#: migrate/main.c:116
+#: migrate/main.c:113
 msgid "Panel configuration has been updated."
 msgstr "Configurația panoului a fost actualizată."
 
@@ -1645,12 +1649,12 @@ msgstr "Sigur doriți să opriți calculatorul?"
 msgid "Turning off computer in %d seconds."
 msgstr "Calculatorul va fi oprit în %d secunde."
 
-#: plugins/actions/actions.c:1160
+#: plugins/actions/actions.c:1163
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Nu s-a putut executa acțiunea „%s”"
 
-#: plugins/actions/actions.c:1367
+#: plugins/actions/actions.c:1370
 msgid "Little Mouse"
 msgstr "Șoricel mic"
 
@@ -1663,19 +1667,19 @@ msgstr "Ieșire, blocare a ecranului sau alte acțiuni de sistem"
 msgid "Applications"
 msgstr "Aplicații"
 
-#: plugins/applicationsmenu/applicationsmenu.c:584
-#: plugins/directorymenu/directorymenu.c:485
+#: plugins/applicationsmenu/applicationsmenu.c:587
+#: plugins/directorymenu/directorymenu.c:488
 msgid "Select An Icon"
 msgstr "Selectați o pictogramă"
 
-#: plugins/applicationsmenu/applicationsmenu.c:584
-#: plugins/directorymenu/directorymenu.c:485
+#: plugins/applicationsmenu/applicationsmenu.c:587
+#: plugins/directorymenu/directorymenu.c:488
 msgid "_OK"
 msgstr "_Ok"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:621 plugins/clock/clock.c:1083
-#: plugins/launcher/launcher.c:2499
+#: plugins/applicationsmenu/applicationsmenu.c:624 plugins/clock/clock.c:1082
+#: plugins/launcher/launcher.c:2494
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Nu s-a putut executa comanda „%s”."
@@ -1728,15 +1732,15 @@ msgstr "Săptămâna %V"
 msgid "Time _settings"
 msgstr "Opțiuni _pentru oră"
 
-#: plugins/clock/clock.c:513
+#: plugins/clock/clock.c:509
 msgid "Failed to execute clock command"
 msgstr "Nu s-a putut executa comanda pentru ceas"
 
-#: plugins/clock/clock.c:1011
+#: plugins/clock/clock.c:1010
 msgid "Custom Format"
 msgstr "Format personalizat"
 
-#: plugins/clock/clock.c:1062
+#: plugins/clock/clock.c:1061
 msgid "Configuration tool not found, please set it in the settings dialog"
 msgstr "Instrumentul de configurare nu a fost găsit, vă rugăm să îl definiți în dialogul de configurări"
 
@@ -2055,69 +2059,69 @@ msgstr "douăsprezece"
 msgid "What time is it?"
 msgstr "Cât e ceasul?"
 
-#: plugins/directorymenu/directorymenu.c:743
+#: plugins/directorymenu/directorymenu.c:746
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Nu s-a putut lansa aplicația «%s»"
 
-#: plugins/directorymenu/directorymenu.c:774
+#: plugins/directorymenu/directorymenu.c:777
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Nu s-a putut afla tipul de conținut pentru „%s”"
 
-#: plugins/directorymenu/directorymenu.c:783
+#: plugins/directorymenu/directorymenu.c:786
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Nu s-a găsit nicio aplicație implicită pentru „%s”"
 
-#: plugins/directorymenu/directorymenu.c:799
+#: plugins/directorymenu/directorymenu.c:802
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Lansarea aplicației implicite pentru „%s” a eșuat"
 
-#: plugins/directorymenu/directorymenu.c:893
+#: plugins/directorymenu/directorymenu.c:896
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Nu s-a putut executa aplicația preferată pentru categoria „%s”"
 
-#: plugins/directorymenu/directorymenu.c:974
+#: plugins/directorymenu/directorymenu.c:977
 msgid "Create New Folder"
 msgstr "Creați un dosar nou"
 
-#: plugins/directorymenu/directorymenu.c:979
+#: plugins/directorymenu/directorymenu.c:982
 msgid "Create New Text Document"
 msgstr "Creați un document text nou"
 
-#: plugins/directorymenu/directorymenu.c:985
+#: plugins/directorymenu/directorymenu.c:988
 msgid "C_reate"
 msgstr "_Creează"
 
-#: plugins/directorymenu/directorymenu.c:985
+#: plugins/directorymenu/directorymenu.c:988
 msgid "Create & _Open"
 msgstr "Creează și de_schide"
 
-#: plugins/directorymenu/directorymenu.c:998
+#: plugins/directorymenu/directorymenu.c:1001
 msgid "Enter the new name:"
 msgstr "Introduceți noul nume:"
 
-#: plugins/directorymenu/directorymenu.c:1034
+#: plugins/directorymenu/directorymenu.c:1037
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Crearea dosarului: %s a eșuat"
 
-#: plugins/directorymenu/directorymenu.c:1116
+#: plugins/directorymenu/directorymenu.c:1119
 msgid "Open Folder"
 msgstr "Deschide dosarul"
 
-#: plugins/directorymenu/directorymenu.c:1130
+#: plugins/directorymenu/directorymenu.c:1133
 msgid "Open in Terminal"
 msgstr "Deschide în terminal"
 
-#: plugins/directorymenu/directorymenu.c:1144
+#: plugins/directorymenu/directorymenu.c:1147
 msgid "Create Folder..."
 msgstr "Creează dosar..."
 
-#: plugins/directorymenu/directorymenu.c:1158
+#: plugins/directorymenu/directorymenu.c:1161
 msgid "Create Text Document..."
 msgstr "Creează document text..."
 
@@ -2133,7 +2137,7 @@ msgstr "Deschide meniul lansatorului"
 msgid "Unnamed Item"
 msgstr "Element fără nume"
 
-#: plugins/launcher/launcher.c:1816
+#: plugins/launcher/launcher.c:1815
 msgid "No items"
 msgstr "Niciun element"
 
@@ -2168,11 +2172,11 @@ msgstr "Adăugați o nouă hiperlegătură"
 msgid "Program launcher with optional menu"
 msgstr "Lansator de programe cu meniu opțional"
 
-#: plugins/pager/pager.c:868
+#: plugins/pager/pager.c:872
 msgid "Unable to open the workspace settings"
 msgstr "Nu s-au putut deschide opțiunile pentru spațiile de lucru"
 
-#: plugins/pager/pager-buttons.c:645 plugins/windowmenu/windowmenu.c:1008
+#: plugins/pager/pager-buttons.c:645 plugins/windowmenu/windowmenu.c:1011
 #, c-format
 msgid "Workspace %d"
 msgstr "Spațiul de lucru %d"
@@ -2185,11 +2189,11 @@ msgstr "Comutare între birourile virtuale"
 msgid "Adds a separator or space between panel items"
 msgstr "Adăugați un separator ori un spațiu între elementele panoului"
 
-#: plugins/showdesktop/showdesktop.c:322
+#: plugins/showdesktop/showdesktop.c:340
 msgid "Restore the minimized windows"
 msgstr "Restaurează ferestrele minimizate"
 
-#: plugins/showdesktop/showdesktop.c:324
+#: plugins/showdesktop/showdesktop.c:342
 msgid "Minimize all open windows and show the desktop"
 msgstr "Minimizează toate ferestrele și afișează biroul"
 
@@ -2205,22 +2209,22 @@ msgstr "Golește"
 msgid "Are you sure you want to clear the list of known items?"
 msgstr "Sunteți sigur că doriți să goliți lista de elemente cunoscute?"
 
-#: plugins/systray/systray.c:145
+#: plugins/systray/systray.c:144
 msgid "Unable to start the notification area"
 msgstr "Nu s-a putut inițializa zona de notificare"
 
 #. create fake error and show it
-#: plugins/systray/systray.c:409
+#: plugins/systray/systray.c:407
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Cel mai probabil un alt modul sau aplicație a preluat deja funcționalitatea zonei de notificare. Această zonă nu va fi folosită."
 
-#: plugins/systray/systray.c:411
+#: plugins/systray/systray.c:409
 msgid "The notification area lost selection"
 msgstr "Zona de notificare a pierdut selecția"
 
-#: plugins/systray/systray-manager.c:382
+#: plugins/systray/systray-manager.c:381
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Nu s-a putut obține selecția gestionarului pentru ecranul %d"
@@ -2280,28 +2284,28 @@ msgstr "Schimbați între ferestrele deschise utilizând butoanele"
 msgid "Windows"
 msgstr "Ferestre"
 
-#: plugins/windowmenu/windowmenu.c:787
+#: plugins/windowmenu/windowmenu.c:790
 msgid "Desktop"
 msgstr "Birou"
 
-#: plugins/windowmenu/windowmenu.c:1403
+#: plugins/windowmenu/windowmenu.c:1406
 msgid "No Windows"
 msgstr "Nicio fereastră"
 
-#: plugins/windowmenu/windowmenu.c:1418
+#: plugins/windowmenu/windowmenu.c:1421
 msgid "Urgent Windows"
 msgstr "Ferestre urgente"
 
-#: plugins/windowmenu/windowmenu.c:1469
+#: plugins/windowmenu/windowmenu.c:1472
 msgid "Add Workspace"
 msgstr "Adăugare spațiu de lucru"
 
-#: plugins/windowmenu/windowmenu.c:1491
+#: plugins/windowmenu/windowmenu.c:1494
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Elimină spațiul de lucru „%s”"
 
-#: plugins/windowmenu/windowmenu.c:1493
+#: plugins/windowmenu/windowmenu.c:1496
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Elimină spațiul de lucru %d"
