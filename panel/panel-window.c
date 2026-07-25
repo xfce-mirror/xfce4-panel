@@ -163,6 +163,14 @@ static void
 panel_window_style_updated (GtkWidget *widget);
 static void
 panel_window_realize (GtkWidget *widget);
+#ifdef HAVE_GTK_LAYER_SHELL
+static void
+panel_window_hide (GtkWidget *widget);
+static void
+_panel_window_show (GtkWidget *widget);
+static void
+panel_window_unmap (GtkWidget *widget);
+#endif
 static StrutsEgde
 panel_window_screen_struts_edge (PanelWindow *window);
 static void
@@ -392,6 +400,7 @@ struct _PanelWindow
   guint set_anchor_default_id;
   gboolean in_screen_layout_changed;
   gulong set_anchor_id;
+  gboolean do_not_restart_on_unmap;
 #endif
 
   /* allocated position of the panel */
@@ -479,6 +488,14 @@ panel_window_class_init (PanelWindowClass *klass)
   gtkwidget_class->screen_changed = panel_window_screen_changed;
   gtkwidget_class->style_updated = panel_window_style_updated;
   gtkwidget_class->realize = panel_window_realize;
+#ifdef HAVE_GTK_LAYER_SHELL
+  if (gtk_layer_is_supported ())
+    {
+      gtkwidget_class->hide = panel_window_hide;
+      gtkwidget_class->show = _panel_window_show;
+      gtkwidget_class->unmap = panel_window_unmap;
+    }
+#endif
 
   g_object_class_install_property (gobject_class,
                                    PROP_ID,
@@ -2110,6 +2127,50 @@ panel_window_realize (GtkWidget *widget)
   /* be sure to set all provider infos if the panel was hidden at startup */
   g_idle_add (set_all_provider_info, window);
 }
+
+
+
+#ifdef HAVE_GTK_LAYER_SHELL
+static void
+panel_window_hide (GtkWidget *widget)
+{
+  PanelWindow *window = PANEL_WINDOW (widget);
+  window->do_not_restart_on_unmap = TRUE;
+
+  GTK_WIDGET_CLASS (panel_window_parent_class)->hide (widget);
+}
+
+
+
+static void
+_panel_window_show (GtkWidget *widget)
+{
+  PanelWindow *window = PANEL_WINDOW (widget);
+  window->do_not_restart_on_unmap = FALSE;
+
+  GTK_WIDGET_CLASS (panel_window_parent_class)->show (widget);
+}
+
+
+
+static void
+panel_window_unmap (GtkWidget *widget)
+{
+  PanelWindow *window = PANEL_WINDOW (widget);
+
+  /*
+   * This means that the unmap signal was emitted on its own, i.e. gtk_widget_unmap() was called
+   * outside of GTK, i.e. gtk-layer-shell did so because it is in an unrecoverable state. There
+   * is nothing else to do but restart to avoid a protocol error.
+   */
+  if (!window->do_not_restart_on_unmap)
+    {
+      panel_dbus_service_exit_panel (TRUE);
+    }
+
+  GTK_WIDGET_CLASS (panel_window_parent_class)->unmap (widget);
+}
+#endif
 
 
 
