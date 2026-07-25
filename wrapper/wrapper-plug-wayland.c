@@ -198,6 +198,7 @@ wrapper_plug_wayland_init (WrapperPlugWayland *plug)
   gtk_layer_init_for_window (GTK_WINDOW (plug));
   gtk_layer_set_layer (GTK_WINDOW (plug), GTK_LAYER_SHELL_LAYER_OVERLAY);
   gtk_layer_set_exclusive_zone (GTK_WINDOW (plug), -1);
+  gtk_layer_set_namespace (GTK_WINDOW (plug), "xfce4-panel");
   gtk_layer_set_anchor (GTK_WINDOW (plug), GTK_LAYER_SHELL_EDGE_TOP, TRUE);
   gtk_layer_set_anchor (GTK_WINDOW (plug), GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
   gtk_layer_set_keyboard_mode (GTK_WINDOW (plug), GTK_LAYER_SHELL_KEYBOARD_MODE_ON_DEMAND);

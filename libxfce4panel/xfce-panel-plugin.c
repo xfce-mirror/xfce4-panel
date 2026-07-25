@@ -3068,6 +3068,7 @@ xfce_panel_plugin_popup_window (XfcePanelPlugin *plugin,
                                                    gtk_widget_get_window (GTK_WIDGET (plugin)));
       gtk_layer_set_monitor (window, monitor);
       gtk_layer_set_exclusive_zone (window, -1);
+      gtk_layer_set_namespace (window, "xfce4-panel");
       gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_TOP, TRUE);
       gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_BOTTOM, FALSE);
       gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
