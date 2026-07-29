@@ -1,3 +1,28 @@
+4.20.8 (2026-07-29)
+======
+- wayland: Set layer-shell namespace
+- wayland: Restart panel when gtk-layer-shell is in unrecoverable state
+- Use XfwMonitor to match monitor by name
+- Refactor XfwScreen management a bit
+- clock: Deduce update interval from date and time formats
+- Fix autotools build
+- Set translation domain for plugins
+- Remove G_GNUC_CONST (complement)
+- Remove G_GNUC_CONST
+- libxfce4panel: Do not emit signals if construct() has not been called
+- I18n: Update po/LINGUAS list
+- Fix -Wdiscarded-qualifiers compiler warning for autotools builds
+- build: Replace wrong define guard with libxfce4ui version check
+- panel: Use same code to cleanup plugin config everywhere
+- icons: Fix non-zero page opacity
+- panel: Set itembar clip when allocating window
+- I18n: Update po/LINGUAS list
+- actions: Fix variable used out of scope
+- pager: Fix workspace switch for Compiz when scrolling over pager
+- build: Do not display full path in generated headers
+- Translation Updates:
+  Azerbaijani, Catalan, Georgian, Greek, Italian, Lao
+
 4.20.7 (2026-03-02)
 ======
 - tasklist: Destroy group menu item if window is closed
