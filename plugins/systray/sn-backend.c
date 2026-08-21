@@ -369,7 +369,7 @@ sn_backend_watcher_register_item (SnWatcher *watcher_skeleton,
                                                      G_IO_ERROR,
                                                      G_IO_ERROR_INVALID_ARGUMENT,
                                                      "Invalid bus name");
-      return FALSE;
+      return TRUE;
     }
 
   key = g_strdup_printf ("%s%s", bus_name, object_path);
