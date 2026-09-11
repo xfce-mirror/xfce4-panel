@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the xfce4-panel.master package.
 # 
 # Translators:
+# BoneNI, 2026
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-06-04 00:53+0200\n"
+"POT-Creation-Date: 2026-07-25 00:59+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: BoneNI, 2026\n"
 "Language-Team: Lao (http://app.transifex.com/xfce/xfce4-panel/language/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,7 +34,7 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "ແຖບ;ການຕັ້ງຄ່າ;ຄວາມມັກ;ແຖບງານ;ຊ່ອນອັດຕະໂນມັດ;ເມນູແອັບພລິເຄຊັນ;ເລີ່ມ;ປຸ່ມ;ຕົວເລີ່ມ;ເຂດແຈ້ງເຕືອນ;ສະຖານະ;ໄອຄອນ;ປລັກອິນ;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3935
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3886
 msgid "Panel"
 msgstr "ແຖບ"
 
@@ -110,8 +111,8 @@ msgstr "ປິດ(_C)"
 #: common/resources/showdesktop-dialog.glade:49
 #: common/resources/tasklist-dialog.glade:102
 #: common/resources/windowmenu-dialog.glade:66
-#: libxfce4panel/xfce-panel-plugin.c:1342 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:4001
+#: libxfce4panel/xfce-panel-plugin.c:1354 panel/panel-item-dialog.c:201
+#: panel/panel-window.c:3952
 msgid "_Help"
 msgstr "ຊ່ວຍເຫຼືອ(_H)"
 
@@ -626,7 +627,7 @@ msgstr "ຊື່"
 
 #: common/resources/directorymenu-dialog.glade:26
 msgid "Modification Date"
-msgstr ""
+msgstr "ວັນທີແກ້ໄຂ"
 
 #: common/resources/directorymenu-dialog.glade:32
 #: plugins/directorymenu/directorymenu.c:326
@@ -664,15 +665,15 @@ msgstr "ເມນູ"
 
 #: common/resources/directorymenu-dialog.glade:288
 msgid "Sort _by:"
-msgstr ""
+msgstr "ຮຽງລຳດັບ_ຕາມ:"
 
 #: common/resources/directorymenu-dialog.glade:318
 msgid "Reverse sort _order"
-msgstr ""
+msgstr "ປີ້ນຄ່າການຮຽງ_ລຳດັບ"
 
 #: common/resources/directorymenu-dialog.glade:337
 msgid "Sorting"
-msgstr ""
+msgstr "ການຮຽງລຳດັບ"
 
 #: common/resources/directorymenu-dialog.glade:366
 msgid "Show _hidden files"
@@ -727,7 +728,7 @@ msgstr "ເພີ່ມລາຍການໃໝ່"
 msgid "Add one or more existing items to the launcher"
 msgstr "ເພີ່ມລາຍການທີ່ມີຢູ່ແລ້ວໜຶ່ງຢ່າງ ຫຼື ຫຼາຍກວ່າເຂົ້າໃນຕົວເລີ່ມ"
 
-#: common/resources/launcher-dialog.glade:87 panel/panel-dialogs.c:157
+#: common/resources/launcher-dialog.glade:87 panel/panel-dialogs.c:156
 #: panel/panel-item-dialog.c:197
 msgid "_Add"
 msgstr "ເພີ່ມ(_A)"
@@ -783,7 +784,7 @@ msgstr "ມຸມມອງຂະໜາດນ້ອຍ"
 msgid "Workspace Switcher"
 msgstr "ຕົວສະຫຼັບພື້ນທີ່ເຮັດວຽກ"
 
-#: common/resources/pager-dialog.glade:64 plugins/pager/pager.c:768
+#: common/resources/pager-dialog.glade:64 plugins/pager/pager.c:772
 msgid "Workspace _Settings..."
 msgstr "ຕັ້ງຄ່າພື້ນທີ່ເຮັດວຽກ(_S)..."
 
@@ -812,7 +813,7 @@ msgid "Transparent"
 msgstr "ໂປ່ງໃສ"
 
 #: common/resources/separator-dialog.glade:30
-#: common/resources/separator-dialog.glade:42 plugins/actions/actions.c:726
+#: common/resources/separator-dialog.glade:42 plugins/actions/actions.c:729
 #: plugins/separator/separator.desktop.in.in:4
 msgid "Separator"
 msgstr "ຕົວຂັ້ນ"
@@ -834,7 +835,7 @@ msgid "Si_ze:"
 msgstr "ຂະໜາດ(_Z):"
 
 #: common/resources/showdesktop-dialog.glade:18
-#: plugins/showdesktop/showdesktop.c:327
+#: plugins/showdesktop/showdesktop.c:345
 #: plugins/showdesktop/showdesktop.desktop.in.in:4
 msgid "Show Desktop"
 msgstr "ສະແດງເດັສທັອບ"
@@ -843,7 +844,11 @@ msgstr "ສະແດງເດັສທັອບ"
 msgid "_Show on mouse hover"
 msgstr "ສະແດງເມື່ອເມົາສ໌ຊີ້ໃສ່(_S)"
 
-#: common/resources/showdesktop-dialog.glade:113
+#: common/resources/showdesktop-dialog.glade:107
+msgid "Show _tooltip"
+msgstr "ສະແດງ_ຄຳແນະນຳ"
+
+#: common/resources/showdesktop-dialog.glade:128
 #: common/resources/sn-dialog.glade:300
 msgid "Behavior"
 msgstr "ພຶດຕິກຳ"
@@ -1076,70 +1081,70 @@ msgid "Enable _urgency notification"
 msgstr "ເປີດໃຊ້ການແຈ້ງເຕືອນດ່ວນ(_U)"
 
 #. I18N: monitor name in the output selector
-#: common/panel-utils.c:428
+#: common/panel-utils.c:432
 #, c-format
 msgid "Monitor %d"
 msgstr "ຈໍພາບ %d"
 
-#: libxfce4panel/xfce-panel-plugin.c:1107
-#: panel/panel-preferences-dialog.c:1489
+#: libxfce4panel/xfce-panel-plugin.c:1119
+#: panel/panel-preferences-dialog.c:1486
 msgid "Remove"
 msgstr "ລຶບອອກ"
 
-#: libxfce4panel/xfce-panel-plugin.c:1108
+#: libxfce4panel/xfce-panel-plugin.c:1120
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "ການລຶບລາຍການອອກຈາກແຖບ ໝາຍຄວາມວ່າການຕັ້ງຄ່າຂອງມັນຈະສູນຫາຍໄປນຳ."
 
-#: libxfce4panel/xfce-panel-plugin.c:1112
-#: panel/panel-preferences-dialog.c:1496
+#: libxfce4panel/xfce-panel-plugin.c:1124
+#: panel/panel-preferences-dialog.c:1493
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບ \"%s\" ອອກ?"
 
 #. properties item
-#: libxfce4panel/xfce-panel-plugin.c:1234
+#: libxfce4panel/xfce-panel-plugin.c:1246
 msgid "_Properties"
 msgstr "ຄຸນສົມບັດ(_P)"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1245 panel/panel-window.c:4010
+#: libxfce4panel/xfce-panel-plugin.c:1257 panel/panel-window.c:3961
 msgid "_About"
 msgstr "ກ່ຽວກັບ(_A)"
 
 #. move item
-#: libxfce4panel/xfce-panel-plugin.c:1256
+#: libxfce4panel/xfce-panel-plugin.c:1268
 msgid "_Move"
 msgstr "ຍ້າຍ(_M)"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1272 panel/panel-application.c:357
-#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1066
+#: libxfce4panel/xfce-panel-plugin.c:1284 panel/panel-application.c:357
+#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1063
 #: plugins/launcher/launcher-dialog.c:934
 msgid "_Remove"
 msgstr "ລຶບອອກ(_R)"
 
-#: libxfce4panel/xfce-panel-plugin.c:1290
+#: libxfce4panel/xfce-panel-plugin.c:1302
 msgid "Pane_l"
 msgstr "ແຖບ(_L)"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1298 panel/panel-window.c:3947
+#: libxfce4panel/xfce-panel-plugin.c:1310 panel/panel-window.c:3898
 msgid "Add _New Items..."
 msgstr "ເພີ່ມລາຍການໃໝ່(_N)..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1309 panel/panel-window.c:3958
+#: libxfce4panel/xfce-panel-plugin.c:1321 panel/panel-window.c:3909
 msgid "Panel Pr_eferences..."
 msgstr "ການຕັ້ງຄ່າແຖບ(_E)..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1326 panel/panel-window.c:3985
+#: libxfce4panel/xfce-panel-plugin.c:1338 panel/panel-window.c:3936
 msgid "Log _Out"
 msgstr "ອອກຈາກລະບົບ(_O)"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1353
+#: libxfce4panel/xfce-panel-plugin.c:1365
 msgid "About"
 msgstr "ກ່ຽວກັບ"
 
@@ -1337,41 +1342,41 @@ msgstr "ປະເພດ hint \"%s\" ບໍ່ຖືກຕ້ອງ. ປະເພ
 msgid "Unable to open the e-mail address"
 msgstr "ບໍ່ສາມາດເປີດທີ່ຢູ່ອີເມລ໌ໄດ້"
 
-#: panel/panel-dialogs.c:79
+#: panel/panel-dialogs.c:78
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "ແຖບເຄື່ອງມືຂອງສະພາບແວດລ້ອມເດັສທັອບ Xfce"
 
-#: panel/panel-dialogs.c:83
+#: panel/panel-dialogs.c:82
 msgid "translator-credits"
 msgstr "ລາຍຊື່ຜູ້ແປ"
 
-#: panel/panel-dialogs.c:157
+#: panel/panel-dialogs.c:156
 msgid "Add New Item"
 msgstr "ເພີ່ມລາຍການໃໝ່"
 
-#: panel/panel-dialogs.c:157 plugins/actions/actions.c:864
-#: plugins/applicationsmenu/applicationsmenu.c:584
-#: plugins/directorymenu/directorymenu.c:485
-#: plugins/directorymenu/directorymenu.c:985
+#: panel/panel-dialogs.c:156 plugins/actions/actions.c:867
+#: plugins/applicationsmenu/applicationsmenu.c:587
+#: plugins/directorymenu/directorymenu.c:488
+#: plugins/directorymenu/directorymenu.c:988
 msgid "_Cancel"
 msgstr "ຍົກເລີກ(_C)"
 
-#: panel/panel-dialogs.c:168
+#: panel/panel-dialogs.c:167
 msgid "Please choose a panel for the new plugin:"
 msgstr "ກະລຸນາເລືອກແຖບສຳລັບປລັກອິນໃໝ່:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1013
+#: panel/panel-dialogs.c:187 panel/panel-preferences-dialog.c:1010
 #, c-format
 msgid "Panel %d"
 msgstr "ແຖບ %d"
 
-#: panel/panel-dialogs.c:227
+#: panel/panel-dialogs.c:226
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr "ເນື່ອງຈາກແຖບກຳລັງເຮັດວຽກໃນໂໝດ kiosk, ທ່ານຈຶ່ງບໍ່ໄດ້ຮັບອະນຸຍາດໃຫ້ປ່ຽນແປງການຕັ້ງຄ່າແຖບໃນຖານະຜູ້ໃຊ້ທົ່ວໄປ"
 
-#: panel/panel-dialogs.c:229
+#: panel/panel-dialogs.c:228
 msgid "Modifying the panel is not allowed"
 msgstr "ບໍ່ອະນຸຍາດໃຫ້ແກ້ໄຂແຖບ"
 
@@ -1405,42 +1410,42 @@ msgstr "ເລີ່ມປລັກອິນໃໝ່"
 msgid "_Execute"
 msgstr "ປະຕິບັດການ(_E)"
 
-#: panel/panel-preferences-dialog.c:342
+#: panel/panel-preferences-dialog.c:340
 msgctxt "plugin context menu"
 msgid "_About"
 msgstr "ກ່ຽວກັບ(_A)"
 
-#: panel/panel-preferences-dialog.c:346
+#: panel/panel-preferences-dialog.c:344
 msgid "Show about information of the currently selected item"
 msgstr "ສະແດງຂໍ້ມູນກ່ຽວກັບຂອງລາຍການທີ່ເລືອກຢູ່"
 
-#: panel/panel-preferences-dialog.c:570
+#: panel/panel-preferences-dialog.c:568
 msgid "Automatic"
 msgstr "ອັດຕະໂນມັດ"
 
-#: panel/panel-preferences-dialog.c:579
+#: panel/panel-preferences-dialog.c:577
 msgid "Primary"
 msgstr "ຫຼັກ"
 
-#: panel/panel-preferences-dialog.c:1065
+#: panel/panel-preferences-dialog.c:1062
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "ການຕັ້ງຄ່າແຖບ ແລະ ປລັກອິນຈະຖືກລຶບອອກຢ່າງຖາວອນ"
 
-#: panel/panel-preferences-dialog.c:1074
+#: panel/panel-preferences-dialog.c:1071
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບແຖບ %d ອອກ?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1366
+#: panel/panel-preferences-dialog.c:1363
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(ພາຍນອກ)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1371
+#: panel/panel-preferences-dialog.c:1368
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1449,22 +1454,22 @@ msgstr "ຊື່ພາຍໃນ: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1383
+#: panel/panel-preferences-dialog.c:1380
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "ຊື່ພາຍໃນ: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1498
+#: panel/panel-preferences-dialog.c:1495
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "ຫາກທ່ານລຶບລາຍການອອກຈາກແຖບ, ມັນຈະສູນຫາຍໄປຢ່າງຖາວອນ."
 
-#: panel/panel-preferences-dialog.c:1502
+#: panel/panel-preferences-dialog.c:1499
 #: plugins/launcher/launcher-dialog.c:929
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບ %d ລາຍການນີ້ອອກ?"
 
-#: panel/panel-preferences-dialog.c:1504
+#: panel/panel-preferences-dialog.c:1501
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "ຫາກທ່ານລຶບພວກມັນອອກຈາກແຖບ, ພວກມັນຈະສູນຫາຍໄປຢ່າງຖາວອນ."
 
@@ -1492,23 +1497,23 @@ msgstr "ຜູ້ມີປະສົບການ"
 msgid "Expert"
 msgstr "ຜູ້ຊ່ຽວຊານ"
 
-#: panel/panel-window.c:3972
+#: panel/panel-window.c:3923
 msgid "_Lock Panel"
 msgstr "ລັອກແຖບ(_L)"
 
-#: migrate/main.c:94
+#: migrate/main.c:91
 msgid "Failed to load the default configuration"
 msgstr "ບໍ່ສາມາດໂຫຼດການຕັ້ງຄ່າເລີ່ມຕົ້ນ"
 
-#: migrate/main.c:106
+#: migrate/main.c:103
 msgid "Panel config needs migration..."
 msgstr "ການຕັ້ງຄ່າແຖບຈຳເປັນຕ້ອງມີການເຄື່ອນຍ້າຍ (migration)..."
 
-#: migrate/main.c:110
+#: migrate/main.c:107
 msgid "Failed to migrate the existing configuration"
 msgstr "ບໍ່ສາມາດເຄື່ອນຍ້າຍການຕັ້ງຄ່າທີ່ມີຢູ່"
 
-#: migrate/main.c:116
+#: migrate/main.c:113
 msgid "Panel configuration has been updated."
 msgstr "ການຕັ້ງຄ່າແຖບໄດ້ຖືກອັບເດດແລ້ວ."
 
@@ -1638,12 +1643,12 @@ msgstr "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການປິ
 msgid "Turning off computer in %d seconds."
 msgstr "ຈະປິດເຄື່ອງໃນອີກ %d ວິນາທີ."
 
-#: plugins/actions/actions.c:1160
+#: plugins/actions/actions.c:1163
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "ບໍ່ສາມາດປະຕິບັດການ \"%s\""
 
-#: plugins/actions/actions.c:1367
+#: plugins/actions/actions.c:1370
 msgid "Little Mouse"
 msgstr "ໜູນ້ອຍ"
 
@@ -1656,19 +1661,19 @@ msgstr "ອອກຈາກລະບົບ, ລັອກ ຫຼື ການກ�
 msgid "Applications"
 msgstr "ແອັບພລິເຄຊັນ"
 
-#: plugins/applicationsmenu/applicationsmenu.c:584
-#: plugins/directorymenu/directorymenu.c:485
+#: plugins/applicationsmenu/applicationsmenu.c:587
+#: plugins/directorymenu/directorymenu.c:488
 msgid "Select An Icon"
 msgstr "ເລືອກໄອຄອນ"
 
-#: plugins/applicationsmenu/applicationsmenu.c:584
-#: plugins/directorymenu/directorymenu.c:485
+#: plugins/applicationsmenu/applicationsmenu.c:587
+#: plugins/directorymenu/directorymenu.c:488
 msgid "_OK"
 msgstr "ຕົກລົງ(_O)"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:621 plugins/clock/clock.c:1083
-#: plugins/launcher/launcher.c:2499
+#: plugins/applicationsmenu/applicationsmenu.c:624 plugins/clock/clock.c:1082
+#: plugins/launcher/launcher.c:2494
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "ບໍ່ສາມາດປະຕິບັດຄຳສັ່ງ \"%s\"."
@@ -1721,15 +1726,15 @@ msgstr "ອາທິດ %V"
 msgid "Time _settings"
 msgstr "ຕັ້ງຄ່າເວລາ(_S)"
 
-#: plugins/clock/clock.c:513
+#: plugins/clock/clock.c:509
 msgid "Failed to execute clock command"
 msgstr "ບໍ່ສາມາດປະຕິບັດຄຳສັ່ງໂມງ"
 
-#: plugins/clock/clock.c:1011
+#: plugins/clock/clock.c:1010
 msgid "Custom Format"
 msgstr "ຮູບແບບກຳນົດເອງ"
 
-#: plugins/clock/clock.c:1062
+#: plugins/clock/clock.c:1061
 msgid "Configuration tool not found, please set it in the settings dialog"
 msgstr "ບໍ່ພົບເຄື່ອງມືຕັ້ງຄ່າ, ກະລຸນາຕັ້ງຄ່າມັນໃນໜ້າຕ່າງການຕັ້ງຄ່າ"
 
@@ -2048,69 +2053,69 @@ msgstr "ສິບສອງ"
 msgid "What time is it?"
 msgstr "ຕອນນີ້ເວລາຈັກໂມງແລ້ວ?"
 
-#: plugins/directorymenu/directorymenu.c:743
+#: plugins/directorymenu/directorymenu.c:746
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "ບໍ່ສາມາດເລີ່ມແອັບພລິເຄຊັນ \"%s\""
 
-#: plugins/directorymenu/directorymenu.c:774
+#: plugins/directorymenu/directorymenu.c:777
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "ບໍ່ສາມາດສອບຖາມປະເພດເນື້ອຫາສຳລັບ \"%s\""
 
-#: plugins/directorymenu/directorymenu.c:783
+#: plugins/directorymenu/directorymenu.c:786
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "ບໍ່ພົບແອັບພລິເຄຊັນເລີ່ມຕົ້ນສຳລັບ \"%s\""
 
-#: plugins/directorymenu/directorymenu.c:799
+#: plugins/directorymenu/directorymenu.c:802
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "ບໍ່ສາມາດເລີ່ມແອັບພລິເຄຊັນເລີ່ມຕົ້ນສຳລັບ \"%s\""
 
-#: plugins/directorymenu/directorymenu.c:893
+#: plugins/directorymenu/directorymenu.c:896
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "ບໍ່ສາມາດປະຕິບັດແອັບພລິເຄຊັນທີ່ຕ້ອງການສຳລັບໝວດໝູ່ \"%s\""
 
-#: plugins/directorymenu/directorymenu.c:974
+#: plugins/directorymenu/directorymenu.c:977
 msgid "Create New Folder"
 msgstr "ສ້າງໂຟນເດີໃໝ່"
 
-#: plugins/directorymenu/directorymenu.c:979
+#: plugins/directorymenu/directorymenu.c:982
 msgid "Create New Text Document"
 msgstr "ສ້າງເອກະສານຂໍ້ຄວາມໃໝ່"
 
-#: plugins/directorymenu/directorymenu.c:985
+#: plugins/directorymenu/directorymenu.c:988
 msgid "C_reate"
 msgstr "ສ້າງ(_R)"
 
-#: plugins/directorymenu/directorymenu.c:985
+#: plugins/directorymenu/directorymenu.c:988
 msgid "Create & _Open"
 msgstr "ສ້າງ ແລະ ເປີດ(_O)"
 
-#: plugins/directorymenu/directorymenu.c:998
+#: plugins/directorymenu/directorymenu.c:1001
 msgid "Enter the new name:"
 msgstr "ໃສ່ຊື່ໃໝ່:"
 
-#: plugins/directorymenu/directorymenu.c:1034
+#: plugins/directorymenu/directorymenu.c:1037
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "ບໍ່ສາມາດສ້າງໂຟນເດີ: %s"
 
-#: plugins/directorymenu/directorymenu.c:1116
+#: plugins/directorymenu/directorymenu.c:1119
 msgid "Open Folder"
 msgstr "ເປີດໂຟນເດີ"
 
-#: plugins/directorymenu/directorymenu.c:1130
+#: plugins/directorymenu/directorymenu.c:1133
 msgid "Open in Terminal"
 msgstr "ເປີດໃນເທີມີນອລ"
 
-#: plugins/directorymenu/directorymenu.c:1144
+#: plugins/directorymenu/directorymenu.c:1147
 msgid "Create Folder..."
 msgstr "ສ້າງໂຟນເດີ..."
 
-#: plugins/directorymenu/directorymenu.c:1158
+#: plugins/directorymenu/directorymenu.c:1161
 msgid "Create Text Document..."
 msgstr "ສ້າງເອກະສານຂໍ້ຄວາມ..."
 
@@ -2126,7 +2131,7 @@ msgstr "ເປີດເມນູຕົວເລີ່ມ"
 msgid "Unnamed Item"
 msgstr "ລາຍການທີ່ບໍ່ມີຊື່"
 
-#: plugins/launcher/launcher.c:1816
+#: plugins/launcher/launcher.c:1815
 msgid "No items"
 msgstr "ບໍ່ມີລາຍການ"
 
@@ -2161,11 +2166,11 @@ msgstr "ເພີ່ມໄຮເປີລິ້ງໃໝ່"
 msgid "Program launcher with optional menu"
 msgstr "ຕົວເລີ່ມໂປຣແກຣມພ້ອມເມນູເສີມ"
 
-#: plugins/pager/pager.c:868
+#: plugins/pager/pager.c:872
 msgid "Unable to open the workspace settings"
 msgstr "ບໍ່ສາມາດເປີດການຕັ້ງຄ່າພື້ນທີ່ເຮັດວຽກ"
 
-#: plugins/pager/pager-buttons.c:645 plugins/windowmenu/windowmenu.c:1008
+#: plugins/pager/pager-buttons.c:645 plugins/windowmenu/windowmenu.c:1011
 #, c-format
 msgid "Workspace %d"
 msgstr "ພື້ນທີ່ເຮັດວຽກ %d"
@@ -2178,11 +2183,11 @@ msgstr "ສະຫຼັບລະຫວ່າງເດັສທັອບສະເ
 msgid "Adds a separator or space between panel items"
 msgstr "ເພີ່ມຕົວຂັ້ນ ຫຼື ຊ່ອງຫວ່າງລະຫວ່າງລາຍການແຖບ"
 
-#: plugins/showdesktop/showdesktop.c:322
+#: plugins/showdesktop/showdesktop.c:340
 msgid "Restore the minimized windows"
 msgstr "ຄືນຄ່າໜ້າຕ່າງທີ່ຫຍໍ້ໄວ້"
 
-#: plugins/showdesktop/showdesktop.c:324
+#: plugins/showdesktop/showdesktop.c:342
 msgid "Minimize all open windows and show the desktop"
 msgstr "ຫຍໍ້ໜ້າຕ່າງທີ່ເປີດຢູ່ທັງໝົດ ແລະ ສະແດງເດັສທັອບ"
 
@@ -2198,22 +2203,22 @@ msgstr "ລ້າງຄ່າ"
 msgid "Are you sure you want to clear the list of known items?"
 msgstr "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລ້າງລາຍຊື່ລາຍການທີ່ຮູ້ຈັກ?"
 
-#: plugins/systray/systray.c:145
+#: plugins/systray/systray.c:144
 msgid "Unable to start the notification area"
 msgstr "ບໍ່ສາມາດເລີ່ມເຂດແຈ້ງເຕືອນ"
 
 #. create fake error and show it
-#: plugins/systray/systray.c:409
+#: plugins/systray/systray.c:407
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "ເປັນໄປໄດ້ວ່າວິດເຈັດອື່ນໄດ້ເຂົ້າມາເຮັດໜ້າທີ່ແທນເຂດແຈ້ງເຕືອນແລ້ວ. ພື້ນທີ່ນີ້ຈະບໍ່ຖືກໃຊ້ງານ."
 
-#: plugins/systray/systray.c:411
+#: plugins/systray/systray.c:409
 msgid "The notification area lost selection"
 msgstr "ເຂດແຈ້ງເຕືອນສູນເສຍການເລືອກ"
 
-#: plugins/systray/systray-manager.c:382
+#: plugins/systray/systray-manager.c:381
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "ບໍ່ສາມາດໄດ້ຮັບການເລືອກຕົວຈັດການສຳລັບໜ້າຈໍ %d"
@@ -2273,28 +2278,28 @@ msgstr "ສະຫຼັບລະຫວ່າງໜ້າຕ່າງທີ່ເ
 msgid "Windows"
 msgstr "ໜ້າຕ່າງ"
 
-#: plugins/windowmenu/windowmenu.c:787
+#: plugins/windowmenu/windowmenu.c:790
 msgid "Desktop"
 msgstr "ເດັສທັອບ"
 
-#: plugins/windowmenu/windowmenu.c:1403
+#: plugins/windowmenu/windowmenu.c:1406
 msgid "No Windows"
 msgstr "ບໍ່ມີໜ້າຕ່າງ"
 
-#: plugins/windowmenu/windowmenu.c:1418
+#: plugins/windowmenu/windowmenu.c:1421
 msgid "Urgent Windows"
 msgstr "ໜ້າຕ່າງດ່ວນ"
 
-#: plugins/windowmenu/windowmenu.c:1469
+#: plugins/windowmenu/windowmenu.c:1472
 msgid "Add Workspace"
 msgstr "ເພີ່ມພື້ນທີ່ເຮັດວຽກ"
 
-#: plugins/windowmenu/windowmenu.c:1491
+#: plugins/windowmenu/windowmenu.c:1494
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "ລຶບພື້ນທີ່ເຮັດວຽກ \"%s\""
 
-#: plugins/windowmenu/windowmenu.c:1493
+#: plugins/windowmenu/windowmenu.c:1496
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "ລຶບພື້ນທີ່ເຮັດວຽກ %d"
