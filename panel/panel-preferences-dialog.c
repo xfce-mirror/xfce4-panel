@@ -701,7 +701,7 @@ panel_preferences_dialog_autohide_changed (GtkComboBox *combobox,
   panel_return_if_fail (GTK_IS_WIDGET (struts_object));
 
   below_object = gtk_builder_get_object (GTK_BUILDER (dialog), "keep-below");
-  panel_return_if_fail (GTK_IS_WIDGET (struts_object));
+  panel_return_if_fail (GTK_IS_WIDGET (below_object));
 
   /* make "don't reserve space on borders" sensitive only when autohide is disabled */
   if (gtk_combo_box_get_active (combobox) == 0)
