@@ -159,6 +159,8 @@ static void
 panel_window_style_updated (GtkWidget *widget);
 static void
 panel_window_realize (GtkWidget *widget);
+static void
+panel_window_map (GtkWidget *widget);
 #ifdef HAVE_GTK_LAYER_SHELL
 static void
 panel_window_hide (GtkWidget *widget);
@@ -486,6 +488,7 @@ panel_window_class_init (PanelWindowClass *klass)
   gtkwidget_class->screen_changed = panel_window_screen_changed;
   gtkwidget_class->style_updated = panel_window_style_updated;
   gtkwidget_class->realize = panel_window_realize;
+  gtkwidget_class->map = panel_window_map;
 #ifdef HAVE_GTK_LAYER_SHELL
   if (gtk_layer_is_supported ())
     {
@@ -683,31 +686,7 @@ panel_window_keep_below (PanelWindow *window)
 #endif
 
   if (WINDOWING_IS_X11 ())
-    {
-      if (should_keep_below)
-        gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_UTILITY);
-      else
-        gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_DOCK);
-
-      /* Set motif hint to only close, so that WM won't Minimize window on "Showing Desktop" */
-      if (gtk_widget_get_realized (GTK_WIDGET (window)))
-        {
-          g_signal_handlers_disconnect_by_func (window, panel_window_keep_below, NULL);
-          gdk_window_set_functions (gtk_widget_get_window (GTK_WIDGET (window)), GDK_FUNC_CLOSE);
-        }
-      else
-        {
-          g_signal_connect (window, "realize", G_CALLBACK (panel_window_keep_below), NULL);
-        }
-
-      /* Send proper hints */
-      gtk_window_set_keep_below (GTK_WINDOW (window), should_keep_below);
-      gtk_window_set_skip_pager_hint (GTK_WINDOW (window), should_keep_below);
-      gtk_window_set_skip_taskbar_hint (GTK_WINDOW (window), should_keep_below);
-      gtk_window_stick (GTK_WINDOW (window));
-    }
-
-  panel_utils_widget_remap (GTK_WIDGET (window));
+    gtk_window_set_keep_below (GTK_WINDOW (window), should_keep_below);
 }
 
 
@@ -1060,7 +1039,7 @@ panel_window_set_property (GObject *object,
       if (val_bool != window->keep_below)
         {
           window->keep_below = val_bool;
-          panel_window_keep_below (window);
+          panel_utils_widget_remap (GTK_WIDGET (window));
         }
       break;
 
@@ -2177,6 +2156,18 @@ panel_window_realize (GtkWidget *widget)
 
   /* be sure to set all provider infos if the panel was hidden at startup */
   g_idle_add_once (set_all_provider_info, window);
+}
+
+
+
+static void
+panel_window_map (GtkWidget *widget)
+{
+  PanelWindow *window = PANEL_WINDOW (widget);
+
+  panel_window_keep_below (PANEL_WINDOW (window));
+
+  (*GTK_WIDGET_CLASS (panel_window_parent_class)->map) (widget);
 }
 
 
@@ -3746,7 +3737,8 @@ panel_window_set_autohide_behavior (PanelWindow *window,
     return;
 
   should_remap = window->keep_below
-                 && (window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER || behavior == AUTOHIDE_BEHAVIOR_NEVER);
+                 && !((window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER)
+                      ^ (behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY || behavior == AUTOHIDE_BEHAVIOR_ALWAYS));
 
   /* remember the new behavior */
   window->autohide_behavior = behavior;
@@ -3849,7 +3841,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
 
   /* change stacking order if autohide changed */
   if (should_remap)
-    panel_window_keep_below (window);
+    panel_utils_widget_remap (GTK_WIDGET (window));
 }
 
 
