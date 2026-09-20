@@ -3720,7 +3720,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
   if (window->autohide_behavior == behavior)
     return;
 
-  should_remap = window->keep_below
+  should_remap = WINDOWING_IS_WAYLAND () && window->keep_below
                  && (window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER || behavior == AUTOHIDE_BEHAVIOR_NEVER);
 
   /* remember the new behavior */
