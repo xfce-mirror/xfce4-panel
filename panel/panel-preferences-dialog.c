@@ -263,15 +263,12 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   connect_signal ("panel-switch", "clicked", panel_preferences_dialog_panel_switch);
 
   /* general tab */
-  if (WINDOWING_IS_WAYLAND ())
-    {
-      XfconfChannel *channel = xfconf_channel_get (XFCE_PANEL_CHANNEL_NAME);
-      object = gtk_builder_get_object (GTK_BUILDER (dialog), "keep-below");
-      panel_return_if_fail (G_IS_OBJECT (object));
-      gtk_widget_set_visible (
-        GTK_WIDGET (object),
-        gtk_layer_is_supported () && !xfconf_channel_get_bool (channel, "/force-all-external", FALSE));
-    }
+  XfconfChannel *channel = xfconf_channel_get (XFCE_PANEL_CHANNEL_NAME);
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "keep-below");
+  panel_return_if_fail (G_IS_OBJECT (object));
+  gtk_widget_set_visible (
+    GTK_WIDGET (object),
+    gtk_layer_is_supported () && !xfconf_channel_get_bool (channel, "/force-all-external", FALSE));
 
   /* appearance tab */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "background-style");

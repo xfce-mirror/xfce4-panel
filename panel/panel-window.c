@@ -666,8 +666,7 @@ static void
 panel_window_keep_below (PanelWindow *window)
 {
   XfconfChannel *channel = xfconf_channel_get (XFCE_PANEL_CHANNEL_NAME);
-  if (WINDOWING_IS_WAYLAND ()
-      && (!gtk_layer_is_supported () || xfconf_channel_get_bool (channel, "/force-all-external", FALSE)))
+  if (!gtk_layer_is_supported () || xfconf_channel_get_bool (channel, "/force-all-external", FALSE))
     return;
 
   gboolean should_keep_below = window->keep_below && window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER;
@@ -681,31 +680,6 @@ panel_window_keep_below (PanelWindow *window)
         gtk_layer_set_layer (GTK_WINDOW (window), GTK_LAYER_SHELL_LAYER_TOP);
     }
 #endif
-
-  if (WINDOWING_IS_X11 ())
-    {
-      if (should_keep_below)
-        gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_UTILITY);
-      else
-        gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_DOCK);
-
-      /* Set motif hint to only close, so that WM won't Minimize window on "Showing Desktop" */
-      if (gtk_widget_get_realized (GTK_WIDGET (window)))
-        {
-          g_signal_handlers_disconnect_by_func (window, panel_window_keep_below, NULL);
-          gdk_window_set_functions (gtk_widget_get_window (GTK_WIDGET (window)), GDK_FUNC_CLOSE);
-        }
-      else
-        {
-          g_signal_connect (window, "realize", G_CALLBACK (panel_window_keep_below), NULL);
-        }
-
-      /* Send proper hints */
-      gtk_window_set_keep_below (GTK_WINDOW (window), should_keep_below);
-      gtk_window_set_skip_pager_hint (GTK_WINDOW (window), should_keep_below);
-      gtk_window_set_skip_taskbar_hint (GTK_WINDOW (window), should_keep_below);
-      gtk_window_stick (GTK_WINDOW (window));
-    }
 
   panel_utils_widget_remap (GTK_WIDGET (window));
 }
