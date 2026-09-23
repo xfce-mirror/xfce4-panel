@@ -669,9 +669,8 @@ panel_window_keep_below (PanelWindow *window)
   if (!gtk_layer_is_supported () || xfconf_channel_get_bool (channel, "/force-all-external", FALSE))
     return;
 
-  gboolean should_keep_below = window->keep_below && window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER;
-
 #ifdef HAVE_GTK_LAYER_SHELL
+  gboolean should_keep_below = window->keep_below && window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER;
   if (gtk_layer_is_supported ())
     {
       if (should_keep_below)
