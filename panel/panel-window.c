@@ -1034,9 +1034,7 @@ panel_window_set_property (GObject *object,
       if (val_bool != window->keep_below)
         {
           window->keep_below = val_bool;
-
-          if (WINDOWING_IS_WAYLAND ())
-            panel_window_keep_below (window);
+          panel_window_keep_below (window);
         }
       break;
 
@@ -3721,7 +3719,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
   if (window->autohide_behavior == behavior)
     return;
 
-  should_remap = WINDOWING_IS_WAYLAND () && window->keep_below
+  should_remap = window->keep_below
                  && (window->autohide_behavior == AUTOHIDE_BEHAVIOR_NEVER || behavior == AUTOHIDE_BEHAVIOR_NEVER);
 
   /* remember the new behavior */

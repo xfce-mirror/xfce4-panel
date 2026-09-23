@@ -268,7 +268,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   panel_return_if_fail (G_IS_OBJECT (object));
   gtk_widget_set_visible (
     GTK_WIDGET (object),
-    WINDOWING_IS_WAYLAND () && gtk_layer_is_supported () && !xfconf_channel_get_bool (channel, "/force-all-external", FALSE));
+    gtk_layer_is_supported () && !xfconf_channel_get_bool (channel, "/force-all-external", FALSE));
 
   /* appearance tab */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "background-style");
