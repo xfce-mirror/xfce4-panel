@@ -88,6 +88,7 @@ executable(
     libxfce4util,
     libxfce4ui,
     libxfce4windowing,
+    libxfce4session_client,
     xfconf,
     x11_deps,
     wayland_deps,
