@@ -34,6 +34,7 @@
 #include "libxfce4panel/xfce-panel-plugin-provider.h"
 
 #include <glib/gstdio.h>
+#include <libxfce4session-client/libxfce4session-client.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4util/libxfce4util.h>
 #include <xfconf/xfconf.h>
@@ -1788,18 +1789,13 @@ panel_application_logout (void)
   GError *error = NULL;
   const gchar *command = "xfce4-session-logout";
 
-#ifdef ENABLE_X11
   /* first try to session client to logout else fallback and spawn xfce4-session-logout */
-  if (WINDOWING_IS_X11 ())
+  XfceSessionClient *sm_client = xfce_session_client_get ();
+  if (sm_client != NULL && xfce_session_client_is_connected (sm_client))
     {
-      XfceSMClient *sm_client = xfce_sm_client_get ();
-      if (xfce_sm_client_is_connected (sm_client))
-        {
-          xfce_sm_client_request_shutdown (sm_client, XFCE_SM_CLIENT_SHUTDOWN_HINT_ASK);
-          return;
-        }
+      xfce_session_client_request_shutdown (sm_client, XFCE_SESSION_CLIENT_SHUTDOWN_HINT_ASK);
+      return;
     }
-#endif
 
   if (g_getenv ("SESSION_MANAGER") == NULL)
     {
