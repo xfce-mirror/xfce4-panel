@@ -246,18 +246,19 @@ xfce_revision_h = vcs_tag(
   replace_string: '@REVISION@',
 )
 
-desktop_files = [
-  'panel-desktop-handler.desktop.in',
-  'panel-preferences.desktop.in',
-]
-foreach file : desktop_files
+desktop_files = {
+  'panel-desktop-handler.desktop.in': 'applications',
+  'panel-preferences.desktop.in': 'applications',
+  'xfce4-panel.desktop.in': 'xfce4' / 'applications',
+}
+foreach file, dest : desktop_files
   i18n.merge_file(
     input: file,
     output: file.substring(0, -3),
     po_dir: 'po',
     type: 'desktop',
     install: true,
-    install_dir: get_option('prefix') / get_option('datadir') / 'applications',
+    install_dir: get_option('prefix') / get_option('datadir') / dest,
   )
 endforeach
 
