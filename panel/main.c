@@ -362,6 +362,7 @@ launch_panel:
   sm_client = xfce_session_client_new ();
   xfce_session_client_set_restart_style (sm_client, XFCE_SESSION_CLIENT_RESTART_IMMEDIATELY);
   xfce_session_client_set_priority (sm_client, XFCE_SESSION_CLIENT_PRIORITY_CORE);
+  xfce_session_client_set_desktop_file (sm_client, DATADIR "/xfce4/applications/" PACKAGE ".desktop");
   g_signal_connect (G_OBJECT (sm_client), "replaced", G_CALLBACK (panel_sm_client_replaced), NULL);
   g_signal_connect (G_OBJECT (sm_client), "quit", G_CALLBACK (panel_sm_client_quit), NULL);
   if (!xfce_session_client_connect (sm_client, &error))
