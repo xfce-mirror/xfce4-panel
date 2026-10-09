@@ -25,6 +25,7 @@ dependency_versions = {
   'xfce4': '>= 4.18.0',
   'libxfce4ui': '>= 4.21.8',
   'libxfce4windowing': '>= 4.20.6',
+  'libxfce4session-client': '>= 4.21.2',
 
   'libwnck': '>= 3.0',
   'libx11': '>= 1.6.7',
@@ -48,6 +49,7 @@ libxfce4ui = dependency('libxfce4ui-2', version: dependency_versions['libxfce4ui
 libxfce4util = dependency('libxfce4util-1.0', version: dependency_versions['xfce4'])
 libxfce4windowing = dependency('libxfce4windowing-0', version: dependency_versions['libxfce4windowing'])
 libxfce4windowingui = dependency('libxfce4windowingui-0', version: dependency_versions['libxfce4windowing'])
+libxfce4session_client = dependency('libxfce4session-client-1', version: dependency_versions['libxfce4session-client'])
 xfconf = dependency('libxfconf-0', version: dependency_versions['xfce4'])
 
 xdt_gen_visibility = find_program('xdt-gen-visibility', required: true)
@@ -244,18 +246,19 @@ xfce_revision_h = vcs_tag(
   replace_string: '@REVISION@',
 )
 
-desktop_files = [
-  'panel-desktop-handler.desktop.in',
-  'panel-preferences.desktop.in',
-]
-foreach file : desktop_files
+desktop_files = {
+  'panel-desktop-handler.desktop.in': 'applications',
+  'panel-preferences.desktop.in': 'applications',
+  'xfce4-panel.desktop.in': 'xfce4' / 'applications',
+}
+foreach file, dest : desktop_files
   i18n.merge_file(
     input: file,
     output: file.substring(0, -3),
     po_dir: 'po',
     type: 'desktop',
     install: true,
-    install_dir: get_option('prefix') / get_option('datadir') / 'applications',
+    install_dir: get_option('prefix') / get_option('datadir') / dest,
   )
 endforeach
 

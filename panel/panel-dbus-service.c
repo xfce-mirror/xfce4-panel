@@ -28,6 +28,7 @@
 #include "libxfce4panel/libxfce4panel.h"
 
 #include <gio/gio.h>
+#include <libxfce4session-client/libxfce4session-client.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4util/libxfce4util.h>
 
@@ -465,13 +466,11 @@ panel_dbus_service_get (void)
 void
 panel_dbus_service_exit_panel (gboolean restart)
 {
-#ifdef ENABLE_X11
-  if (WINDOWING_IS_X11 ())
+  XfceSessionClient *sm_client = xfce_session_client_get ();
+  if (sm_client != NULL)
     {
-      XfceSMClient *sm_client = xfce_sm_client_get ();
-      xfce_sm_client_set_restart_style (sm_client, XFCE_SM_CLIENT_RESTART_NORMAL);
+      xfce_session_client_discard (sm_client);
     }
-#endif
 
   dbus_exit_restart = !!restart;
 
