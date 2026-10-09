@@ -1,3 +1,31 @@
+4.21.3 (2026-10-09)
+======
+- Add an xfce4-panel desktop file
+- Use XfceSessionClient instead of XfceSMClient
+- Make "Keep Below" option Wayland exclusive
+- systray: Avoid crash when bus_name contains garbage
+- wayland: Set layer-shell namespace
+- wayland: Restart panel when gtk-layer-shell is in unrecoverable state
+- Use XfwMonitor to match monitor by name
+- Refactor XfwScreen management a bit
+- clock: Deduce update interval from date and time formats
+- gobject-linter: Fix use_g_source_once
+- gobject-linter: Fix unnecessary_null_check
+- gobject-linter: Fix use_clear_functions
+- gobject-linter: Fix use_explicit_default_flags
+- Set translation domain for plugins
+- showdesktop: Add show-tooltip preference
+- Remove G_GNUC_CONST
+- libxfce4panel: Do not emit signals if construct() has not been called
+- I18n: Update po/LINGUAS list
+- libxfce4panel: Add generic plugin class and generic name class
+- Translation Updates:
+  Azerbaijani, Bulgarian, Catalan, Chinese (China), Chinese (Taiwan),
+  Czech, Dutch, English (United Kingdom), Estonian, French, Georgian,
+  German, Hungarian, Italian, Japanese, Kazakh, Lao, Lithuanian,
+  Occitan (post 1500), Polish, Portuguese, Romanian, Russian, Serbian,
+  Slovak, Slovenian, Spanish, Swedish, Thai, Turkish, Uyghur
+
 4.21.2 (2026-06-08)
 ======
 - build: Require libxfce4ui 4.21.8 and remove wrong define guard
