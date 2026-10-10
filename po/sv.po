@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-07-25 00:59+0200\n"
+"POT-Creation-Date: 2026-10-10 00:55+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Luna Jernberg <droidbittin@gmail.com>, 2024-2026\n"
 "Language-Team: Swedish (http://app.transifex.com/xfce/xfce4-panel/language/sv/)\n"
@@ -46,13 +46,29 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "paneler;inställningar;inställningar;programfält;autodölj;programmeny;start;knappar;startare;aviseringsområde;status;ikoner;insticksprogram;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3886
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3922
 msgid "Panel"
 msgstr "Panel"
 
 #: panel-preferences.desktop.in:16
 msgid "Customize the panel"
 msgstr "Anpassa panelen"
+
+#: xfce4-panel.desktop.in:8
+msgid ""
+"panels;taskbar;autohide;application menu;start;buttons;launcher;notification"
+" area;status;icons;plugins;"
+msgstr ""
+
+#: xfce4-panel.desktop.in:12
+msgid "Xfce Panel"
+msgstr "Xfce Panel"
+
+#: xfce4-panel.desktop.in:13
+msgid ""
+"Panel/dock that can display application launchers, open windows, a clock, "
+"and much more"
+msgstr ""
 
 #: common/resources/panel-preferences-dialog.glade:13
 msgid "Never"
@@ -124,7 +140,7 @@ msgstr "_Stäng"
 #: common/resources/tasklist-dialog.glade:102
 #: common/resources/windowmenu-dialog.glade:66
 #: libxfce4panel/xfce-panel-plugin.c:1354 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:3952
+#: panel/panel-window.c:3988
 msgid "_Help"
 msgstr "_Hjälp"
 
@@ -1099,7 +1115,7 @@ msgid "Monitor %d"
 msgstr "Skärm %d"
 
 #: libxfce4panel/xfce-panel-plugin.c:1119
-#: panel/panel-preferences-dialog.c:1486
+#: panel/panel-preferences-dialog.c:1483
 msgid "Remove"
 msgstr "Ta bort"
 
@@ -1109,7 +1125,7 @@ msgid ""
 msgstr "Om du tar bort objektet från panelen betyder det också att dess konfiguration kommer att bli borttagen."
 
 #: libxfce4panel/xfce-panel-plugin.c:1124
-#: panel/panel-preferences-dialog.c:1493
+#: panel/panel-preferences-dialog.c:1490
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Är du säker på att du vill ta bort \"%s\"?"
@@ -1120,7 +1136,7 @@ msgid "_Properties"
 msgstr "Egenska_per"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1257 panel/panel-window.c:3961
+#: libxfce4panel/xfce-panel-plugin.c:1257 panel/panel-window.c:3997
 msgid "_About"
 msgstr "_Om"
 
@@ -1130,8 +1146,8 @@ msgid "_Move"
 msgstr "_Flytta"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1284 panel/panel-application.c:357
-#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1063
+#: libxfce4panel/xfce-panel-plugin.c:1284 panel/panel-application.c:358
+#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1060
 #: plugins/launcher/launcher-dialog.c:934
 msgid "_Remove"
 msgstr "Ta bo_rt"
@@ -1141,17 +1157,17 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1310 panel/panel-window.c:3898
+#: libxfce4panel/xfce-panel-plugin.c:1310 panel/panel-window.c:3934
 msgid "Add _New Items..."
 msgstr "Lägg till _nya objekt..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1321 panel/panel-window.c:3909
+#: libxfce4panel/xfce-panel-plugin.c:1321 panel/panel-window.c:3945
 msgid "Panel Pr_eferences..."
 msgstr "Panelinstä_llningar..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1338 panel/panel-window.c:3936
+#: libxfce4panel/xfce-panel-plugin.c:1338 panel/panel-window.c:3972
 msgid "Log _Out"
 msgstr "Logga _ut"
 
@@ -1160,69 +1176,69 @@ msgstr "Logga _ut"
 msgid "About"
 msgstr "Om"
 
-#: panel/main.c:66
+#: panel/main.c:67
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Visa dialogrutan \"Panelinställningar\""
 
-#: panel/main.c:66 panel/main.c:67
+#: panel/main.c:67 panel/main.c:68
 msgid "PANEL-NUMBER"
 msgstr "PANELNUMMER"
 
-#: panel/main.c:67
+#: panel/main.c:68
 msgid "Show the 'Add New Items' dialog"
 msgstr "Visa dialogrutan \"Lägg till nya objekt\""
 
-#: panel/main.c:68
+#: panel/main.c:69
 msgid "Save the panel configuration"
 msgstr "Spara panelkonfigurationen"
 
-#: panel/main.c:69
+#: panel/main.c:70
 msgid "Add a new plugin to the panel"
 msgstr "Lägg till en ny insticksmodul till panelen"
 
-#: panel/main.c:69
+#: panel/main.c:70
 msgid "PLUGIN-NAME"
 msgstr "INSTICKSNAMN"
 
-#: panel/main.c:70
+#: panel/main.c:71
 msgid "Restart the running panel instance"
 msgstr "Starta om körande panelinstans"
 
-#: panel/main.c:71
+#: panel/main.c:72
 msgid "Quit the running panel instance"
 msgstr "Avsluta den körande panelinstansen"
 
-#: panel/main.c:72
+#: panel/main.c:73
 msgid "Do not wait for a window manager on startup"
 msgstr "Vänta inte på en fönsterhanterare vi start"
 
-#: panel/main.c:73 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: panel/main.c:74 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "Visa versionsinformation och avsluta"
 
 #. parse context options
-#: panel/main.c:258
+#: panel/main.c:267
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENT...]"
 
-#: panel/main.c:268
+#: panel/main.c:274
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Skriv \"%s --help\" för användningshjälp."
 
-#: panel/main.c:285
+#: panel/main.c:291
 msgid "The Xfce development team. All rights reserved."
 msgstr "The Xfce development team. Alla rättigheter är reserverade."
 
-#: panel/main.c:286
+#: panel/main.c:292
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Rapportera fel till <%s>.\nSkicka synpunkter på översättningen till\n<tp-sv@listor.tp-sv.se>."
 
 #. quit without error if an instance is running
-#: panel/main.c:394
+#: panel/main.c:397
 msgid "There is already a running instance"
 msgstr "Det finns redan en körande instans"
 
@@ -1274,18 +1290,18 @@ msgstr "Vill du starta om panelen? Om du gör det så försäkra dig om att du s
 msgid "Execute"
 msgstr "Kör"
 
-#: panel/panel-application.c:213
+#: panel/panel-application.c:214
 msgid "Failed to launch the migration application"
 msgstr "Misslyckades med att starta migreringsprogrammet"
 
-#: panel/panel-application.c:347
+#: panel/panel-application.c:348
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr "Insticksprogrammet \"%s\" kunde inte laddas, vill du ta bort det från xfce4-panel konfigurationen?"
 
-#: panel/panel-application.c:349
+#: panel/panel-application.c:350
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -1295,46 +1311,46 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr "Denna insticksmodul är i den aktuella xfce4-panelkonfigurationen men kunde inte laddas, förmodligen på grund av ett installationsproblem. Om du vet vad du gör kan du ta bort det permanent, annars är det bättre att du avslutar och gör en säkerhetskopia av den aktuella konfigurationen genom att använda %s, innan du kontrollerar din installation och försöker starta xfce4-panel igen."
 
-#: panel/panel-application.c:356
+#: panel/panel-application.c:357
 msgid "Plugin loading failure"
 msgstr "Det gick inte att ladda insticksprogrammet"
 
-#: panel/panel-application.c:357
+#: panel/panel-application.c:358
 msgid "_Quit"
 msgstr "A_vsluta"
 
-#: panel/panel-application.c:1037
+#: panel/panel-application.c:1038
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Detta kommer att skapa ett nytt programstartsinsticksprogram på panelen och fogar in släppta filer som menyobjekt."
 
-#: panel/panel-application.c:1040
+#: panel/panel-application.c:1041
 msgid "Create _Launcher"
 msgstr "Skapa pro_gramstartare"
 
-#: panel/panel-application.c:1041
+#: panel/panel-application.c:1042
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Skapa en ny programstartare från skrivbordsfil %d"
 msgstr[1] "Skapa en ny programstartare från skrivbordsfiler %d"
 
-#: panel/panel-application.c:1808
+#: panel/panel-application.c:1804
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Du har startat X utan en sessionshanterare. Klicka på Avsluta för att stänga X-servern."
 
-#: panel/panel-application.c:1811
+#: panel/panel-application.c:1807
 msgid "Quit"
 msgstr "Avsluta"
 
-#: panel/panel-application.c:1811
+#: panel/panel-application.c:1807
 msgid "Are you sure you want to quit the panel?"
 msgstr "Är du säker på att du vill avsluta panelen?"
 
-#: panel/panel-application.c:1819
+#: panel/panel-application.c:1815
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Det gick inte att köra kommandot \"%s\""
@@ -1378,7 +1394,7 @@ msgstr "_Avbryt"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Välj en panel för den nya insticksmodulen:"
 
-#: panel/panel-dialogs.c:187 panel/panel-preferences-dialog.c:1010
+#: panel/panel-dialogs.c:187 panel/panel-preferences-dialog.c:1007
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -1423,42 +1439,42 @@ msgstr "Starta om insticksmodul"
 msgid "_Execute"
 msgstr "_Starta"
 
-#: panel/panel-preferences-dialog.c:340
+#: panel/panel-preferences-dialog.c:337
 msgctxt "plugin context menu"
 msgid "_About"
 msgstr "_Om"
 
-#: panel/panel-preferences-dialog.c:344
+#: panel/panel-preferences-dialog.c:341
 msgid "Show about information of the currently selected item"
 msgstr "Visa om-information för det valda objektet"
 
-#: panel/panel-preferences-dialog.c:568
+#: panel/panel-preferences-dialog.c:565
 msgid "Automatic"
 msgstr "Automatiskt"
 
-#: panel/panel-preferences-dialog.c:577
+#: panel/panel-preferences-dialog.c:574
 msgid "Primary"
 msgstr "Primär"
 
-#: panel/panel-preferences-dialog.c:1062
+#: panel/panel-preferences-dialog.c:1059
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Panelen och instickskonfigurationerna kommer att permanent tas bort"
 
-#: panel/panel-preferences-dialog.c:1071
+#: panel/panel-preferences-dialog.c:1068
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Är du säker på att du vill ta bort panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1363
+#: panel/panel-preferences-dialog.c:1360
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1368
+#: panel/panel-preferences-dialog.c:1365
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1467,22 +1483,22 @@ msgstr "Internt namn: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1380
+#: panel/panel-preferences-dialog.c:1377
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Internt namn: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1495
+#: panel/panel-preferences-dialog.c:1492
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Om du tar bort objektet från panelen så kan du inte ångra det."
 
-#: panel/panel-preferences-dialog.c:1499
+#: panel/panel-preferences-dialog.c:1496
 #: plugins/launcher/launcher-dialog.c:929
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Är du säker på att du vill ta bort dessa %d objekt?"
 
-#: panel/panel-preferences-dialog.c:1501
+#: panel/panel-preferences-dialog.c:1498
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Om du tar bort dem från panelen försvinner de permanent."
 
@@ -1510,7 +1526,7 @@ msgstr "Erfaren"
 msgid "Expert"
 msgstr "Expert"
 
-#: panel/panel-window.c:3923
+#: panel/panel-window.c:3959
 msgid "_Lock Panel"
 msgstr "_Lås panel"
 
