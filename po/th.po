@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-07-25 00:59+0200\n"
+"POT-Creation-Date: 2026-10-10 00:55+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Warut Bunprasert <warut.b@disroot.org>, 2025-2026\n"
 "Language-Team: Thai (http://app.transifex.com/xfce/xfce4-panel/language/th/)\n"
@@ -37,13 +37,29 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "พาเนล;ตั้งค่า;ปรับแต่ง;แถบงาน;ซ่อนอัตโนมัติ;เมนูแอปพลิเคชัน;เริ่ม;ปุ่ม;ปุ่มเรียก;พื้นที่แจ้งเหตุ;สถานะ;ไอคอน;ปลั๊กอิน;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3886
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3922
 msgid "Panel"
 msgstr "พาเนล"
 
 #: panel-preferences.desktop.in:16
 msgid "Customize the panel"
 msgstr "ปรับแต่งพาเนล"
+
+#: xfce4-panel.desktop.in:8
+msgid ""
+"panels;taskbar;autohide;application menu;start;buttons;launcher;notification"
+" area;status;icons;plugins;"
+msgstr ""
+
+#: xfce4-panel.desktop.in:12
+msgid "Xfce Panel"
+msgstr "พาเนล Xfce"
+
+#: xfce4-panel.desktop.in:13
+msgid ""
+"Panel/dock that can display application launchers, open windows, a clock, "
+"and much more"
+msgstr ""
 
 #: common/resources/panel-preferences-dialog.glade:13
 msgid "Never"
@@ -115,7 +131,7 @@ msgstr "ปิ_ด"
 #: common/resources/tasklist-dialog.glade:102
 #: common/resources/windowmenu-dialog.glade:66
 #: libxfce4panel/xfce-panel-plugin.c:1354 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:3952
+#: panel/panel-window.c:3988
 msgid "_Help"
 msgstr "_วิธีใช้"
 
@@ -1090,7 +1106,7 @@ msgid "Monitor %d"
 msgstr "จอภาพ %d"
 
 #: libxfce4panel/xfce-panel-plugin.c:1119
-#: panel/panel-preferences-dialog.c:1486
+#: panel/panel-preferences-dialog.c:1483
 msgid "Remove"
 msgstr "ถอดถอน"
 
@@ -1100,7 +1116,7 @@ msgid ""
 msgstr "การลบรายการนี้ออกจากพาเนลจะหมายถึงการลบค่าตั้งต่างๆ ของรายการนี้ทิ้งด้วย"
 
 #: libxfce4panel/xfce-panel-plugin.c:1124
-#: panel/panel-preferences-dialog.c:1493
+#: panel/panel-preferences-dialog.c:1490
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "แน่ใจหรือไม่ว่าคุณต้องการลบ \"%s\"?"
@@ -1111,7 +1127,7 @@ msgid "_Properties"
 msgstr "คุณ_สมบัติ"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1257 panel/panel-window.c:3961
+#: libxfce4panel/xfce-panel-plugin.c:1257 panel/panel-window.c:3997
 msgid "_About"
 msgstr "เ_กี่ยวกับ"
 
@@ -1121,8 +1137,8 @@ msgid "_Move"
 msgstr "_ย้าย"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1284 panel/panel-application.c:357
-#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1063
+#: libxfce4panel/xfce-panel-plugin.c:1284 panel/panel-application.c:358
+#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1060
 #: plugins/launcher/launcher-dialog.c:934
 msgid "_Remove"
 msgstr "เอา_ออก"
@@ -1132,17 +1148,17 @@ msgid "Pane_l"
 msgstr "_พาเนล"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1310 panel/panel-window.c:3898
+#: libxfce4panel/xfce-panel-plugin.c:1310 panel/panel-window.c:3934
 msgid "Add _New Items..."
 msgstr "เพิ่มรายการใ_หม่..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1321 panel/panel-window.c:3909
+#: libxfce4panel/xfce-panel-plugin.c:1321 panel/panel-window.c:3945
 msgid "Panel Pr_eferences..."
 msgstr "_ปรับแต่งพาเนล..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1338 panel/panel-window.c:3936
+#: libxfce4panel/xfce-panel-plugin.c:1338 panel/panel-window.c:3972
 msgid "Log _Out"
 msgstr "_ออกจากระบบ"
 
@@ -1151,69 +1167,69 @@ msgstr "_ออกจากระบบ"
 msgid "About"
 msgstr "เกี่ยวกับ"
 
-#: panel/main.c:66
+#: panel/main.c:67
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "แสดงกล่องโต้ตอบ 'ปรับแต่งพาเนล'"
 
-#: panel/main.c:66 panel/main.c:67
+#: panel/main.c:67 panel/main.c:68
 msgid "PANEL-NUMBER"
 msgstr "หมายเลขพาเนล"
 
-#: panel/main.c:67
+#: panel/main.c:68
 msgid "Show the 'Add New Items' dialog"
 msgstr "แสดงกล่องโต้ตอบ 'เพิ่มรายการใหม่'"
 
-#: panel/main.c:68
+#: panel/main.c:69
 msgid "Save the panel configuration"
 msgstr "บันทึกค่าตั้งของพาเนล"
 
-#: panel/main.c:69
+#: panel/main.c:70
 msgid "Add a new plugin to the panel"
 msgstr "เพิ่มปลั๊กอินลงในพาเนล"
 
-#: panel/main.c:69
+#: panel/main.c:70
 msgid "PLUGIN-NAME"
 msgstr "ชื่อปลั๊กอิน"
 
-#: panel/main.c:70
+#: panel/main.c:71
 msgid "Restart the running panel instance"
 msgstr "เริ่มเปิดพาเนลที่กำลังทำงานอยู่ใหม่"
 
-#: panel/main.c:71
+#: panel/main.c:72
 msgid "Quit the running panel instance"
 msgstr "จบการทำงานพาเนลที่กำลังทำงานอยู่"
 
-#: panel/main.c:72
+#: panel/main.c:73
 msgid "Do not wait for a window manager on startup"
 msgstr "ไม่ต้องรอโปรแกรมจัดการหน้าต่างขณะเริ่มทำงาน"
 
-#: panel/main.c:73 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: panel/main.c:74 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "แสดงข้อมูลรุ่นแล้วจบการทำงาน"
 
 #. parse context options
-#: panel/main.c:258
+#: panel/main.c:267
 msgid "[ARGUMENTS...]"
 msgstr "[อาร์กิวเมนต์...]"
 
-#: panel/main.c:268
+#: panel/main.c:274
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "สั่ง \"%s --help\" เพื่อดูวิธีใช้"
 
-#: panel/main.c:285
+#: panel/main.c:291
 msgid "The Xfce development team. All rights reserved."
 msgstr "The Xfce development team. All rights reserved."
 
-#: panel/main.c:286
+#: panel/main.c:292
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "หากพบปัญหา กรุณารายงานที่ <%s>"
 
 #. quit without error if an instance is running
-#: panel/main.c:394
+#: panel/main.c:397
 msgid "There is already a running instance"
 msgstr "มีอินสแตนซ์อื่นทำงานอยู่ก่อนแล้ว"
 
@@ -1265,18 +1281,18 @@ msgstr "คุณต้องการจะเปิดทำงานพาเ
 msgid "Execute"
 msgstr "เปิดทำงาน"
 
-#: panel/panel-application.c:213
+#: panel/panel-application.c:214
 msgid "Failed to launch the migration application"
 msgstr "เรียกโปรแกรมย้ายระบบไม่สำเร็จ"
 
-#: panel/panel-application.c:347
+#: panel/panel-application.c:348
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr "ไม่สามารถโหลดปลั๊กอิน \"%s\" ได้ คุณต้องการลบออกจากการค่าตั้งพาเนล xfce4 หรือไม่"
 
-#: panel/panel-application.c:349
+#: panel/panel-application.c:350
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -1286,45 +1302,45 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr "ปลั๊กอินนี้อยู่ในการตั้งค่าพาเนล xfce4 ปัจจุบัน แต่ไม่สามารถโหลดได้ อาจเนื่องมาจากปัญหาการติดตั้ง หากคุณรู้เกิดอะไรขึ้น คุณสามารถลบออกได้อย่างถาวร ไม่เช่นนั้นคุณควรออกและสำรองข้อมูลการตั้งค่าปัจจุบันโดยใช้ %s ก่อนที่จะตรวจสอบการติดตั้งและลองเริ่ม xfce4-panel อีกครั้ง"
 
-#: panel/panel-application.c:356
+#: panel/panel-application.c:357
 msgid "Plugin loading failure"
 msgstr "การโหลดปลั๊กอินล้มเหลว"
 
-#: panel/panel-application.c:357
+#: panel/panel-application.c:358
 msgid "_Quit"
 msgstr "_ออก"
 
-#: panel/panel-application.c:1037
+#: panel/panel-application.c:1038
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "นี่จะเป็นการสร้างปลั๊กอินปุ่มเรียกโปรแกรมลงในพาเนล และแทรกแฟ้มที่ปล่อยเข้าเป็นรายการเมนู"
 
-#: panel/panel-application.c:1040
+#: panel/panel-application.c:1041
 msgid "Create _Launcher"
 msgstr "สร้างปุ่_มเรียก"
 
-#: panel/panel-application.c:1041
+#: panel/panel-application.c:1042
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "สร้างปุ่มเรียกโปรแกรมจากแฟ้มเดสก์ท็อป %d แฟ้ม"
 
-#: panel/panel-application.c:1808
+#: panel/panel-application.c:1804
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "คุณได้เปิดทำงาน X โดยไม่มีโปรแกรมจัดการวาระ ถ้าคลิกปุ่ม \"ออก\" ก็จะเป็นการปิด X server"
 
-#: panel/panel-application.c:1811
+#: panel/panel-application.c:1807
 msgid "Quit"
 msgstr "ออก"
 
-#: panel/panel-application.c:1811
+#: panel/panel-application.c:1807
 msgid "Are you sure you want to quit the panel?"
 msgstr "ยืนยันที่จะปิดพาเนลหรือไม่?"
 
-#: panel/panel-application.c:1819
+#: panel/panel-application.c:1815
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "เรียกทำงานคำสั่ง \"%s\" ไม่สำเร็จ"
@@ -1368,7 +1384,7 @@ msgstr "_ยกเลิก"
 msgid "Please choose a panel for the new plugin:"
 msgstr "กรุณาเลือกพาเนลให้กับปลั๊กอินตัวใหม่:"
 
-#: panel/panel-dialogs.c:187 panel/panel-preferences-dialog.c:1010
+#: panel/panel-dialogs.c:187 panel/panel-preferences-dialog.c:1007
 #, c-format
 msgid "Panel %d"
 msgstr "พาเนล %d"
@@ -1413,42 +1429,42 @@ msgstr "เริ่มปลั๊กอินใหม่"
 msgid "_Execute"
 msgstr "เรียก_ทำงาน"
 
-#: panel/panel-preferences-dialog.c:340
+#: panel/panel-preferences-dialog.c:337
 msgctxt "plugin context menu"
 msgid "_About"
 msgstr "เ_กี่ยวกับ"
 
-#: panel/panel-preferences-dialog.c:344
+#: panel/panel-preferences-dialog.c:341
 msgid "Show about information of the currently selected item"
 msgstr "แสดงข้อมูลเกี่ยวกับรายการที่เลือกอยู่"
 
-#: panel/panel-preferences-dialog.c:568
+#: panel/panel-preferences-dialog.c:565
 msgid "Automatic"
 msgstr "อัตโนมัติ"
 
-#: panel/panel-preferences-dialog.c:577
+#: panel/panel-preferences-dialog.c:574
 msgid "Primary"
 msgstr "จอหลัก"
 
-#: panel/panel-preferences-dialog.c:1062
+#: panel/panel-preferences-dialog.c:1059
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "พาเนลนี้รวมทั้งค่าตั้งปลั๊กอินต่างๆ จะถูกลบทิ้งอย่างถาวร"
 
-#: panel/panel-preferences-dialog.c:1071
+#: panel/panel-preferences-dialog.c:1068
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "ยืนยันที่จะลบพาเนล %d หรือไม่?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1363
+#: panel/panel-preferences-dialog.c:1360
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(ภายนอก)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1368
+#: panel/panel-preferences-dialog.c:1365
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1457,22 +1473,22 @@ msgstr "ชื่อภายใน: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1380
+#: panel/panel-preferences-dialog.c:1377
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "ชื่อภายใน: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1495
+#: panel/panel-preferences-dialog.c:1492
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "ถ้าคุณลบรายการนี้ออกจากพาเนล ก็จะเป็นการลบอย่างถาวร"
 
-#: panel/panel-preferences-dialog.c:1499
+#: panel/panel-preferences-dialog.c:1496
 #: plugins/launcher/launcher-dialog.c:929
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "คุณแน่ใจหรือไม่ว่าต้องการลบรายการ %d เหล่านี้"
 
-#: panel/panel-preferences-dialog.c:1501
+#: panel/panel-preferences-dialog.c:1498
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "หากคุณลบออกจากพาเนล การลบจะทำให้หายไปอย่างถาวร"
 
@@ -1500,7 +1516,7 @@ msgstr "มีประสบการณ์"
 msgid "Expert"
 msgstr "ชำนาญ"
 
-#: panel/panel-window.c:3923
+#: panel/panel-window.c:3959
 msgid "_Lock Panel"
 msgstr "_ตรึงพาเนล"
 
