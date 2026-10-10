@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-07-25 00:59+0200\n"
+"POT-Creation-Date: 2026-10-10 00:55+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
-"Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2024-2026\n"
+"Last-Translator: Mișu Moldovan <dumol@xfce.org>, 2015\n"
 "Language-Team: Romanian (http://app.transifex.com/xfce/xfce4-panel/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,13 +38,29 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "panouri;configurări;preferințe;bara de activități;auto-ascunder;meniu aplicație;start;butoane;lansator;zonă de notificare;stare; pictograme;module;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3886
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3922
 msgid "Panel"
 msgstr "Panou"
 
 #: panel-preferences.desktop.in:16
 msgid "Customize the panel"
 msgstr "Personalizați panoul"
+
+#: xfce4-panel.desktop.in:8
+msgid ""
+"panels;taskbar;autohide;application menu;start;buttons;launcher;notification"
+" area;status;icons;plugins;"
+msgstr "panouri;bara de activități;auto-ascundere;meniu aplicații;start;butoane;lansator;zonă de notificare;stare; pictograme;module;"
+
+#: xfce4-panel.desktop.in:12
+msgid "Xfce Panel"
+msgstr "Panou Xfce"
+
+#: xfce4-panel.desktop.in:13
+msgid ""
+"Panel/dock that can display application launchers, open windows, a clock, "
+"and much more"
+msgstr "Panou/doc care poate afișa pictograme de lansare a aplicațiilor, ferestre deschise, un ceas și multe altele"
 
 #: common/resources/panel-preferences-dialog.glade:13
 msgid "Never"
@@ -116,7 +132,7 @@ msgstr "_Închide"
 #: common/resources/tasklist-dialog.glade:102
 #: common/resources/windowmenu-dialog.glade:66
 #: libxfce4panel/xfce-panel-plugin.c:1354 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:3952
+#: panel/panel-window.c:3988
 msgid "_Help"
 msgstr "_Ajutor"
 
@@ -1091,7 +1107,7 @@ msgid "Monitor %d"
 msgstr "Monitorul %d"
 
 #: libxfce4panel/xfce-panel-plugin.c:1119
-#: panel/panel-preferences-dialog.c:1486
+#: panel/panel-preferences-dialog.c:1483
 msgid "Remove"
 msgstr "Elimină"
 
@@ -1101,7 +1117,7 @@ msgid ""
 msgstr "Eliminarea elementului din panou înseamnă de asemenea, că se va pierde configurația acestuia."
 
 #: libxfce4panel/xfce-panel-plugin.c:1124
-#: panel/panel-preferences-dialog.c:1493
+#: panel/panel-preferences-dialog.c:1490
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Sigur doriți să eliminați „%s”?"
@@ -1112,7 +1128,7 @@ msgid "_Properties"
 msgstr "_Proprietăți"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1257 panel/panel-window.c:3961
+#: libxfce4panel/xfce-panel-plugin.c:1257 panel/panel-window.c:3997
 msgid "_About"
 msgstr "_Despre"
 
@@ -1122,8 +1138,8 @@ msgid "_Move"
 msgstr "_Mutare"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1284 panel/panel-application.c:357
-#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1063
+#: libxfce4panel/xfce-panel-plugin.c:1284 panel/panel-application.c:358
+#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1060
 #: plugins/launcher/launcher-dialog.c:934
 msgid "_Remove"
 msgstr "_Elimină"
@@ -1133,17 +1149,17 @@ msgid "Pane_l"
 msgstr "P_anou"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1310 panel/panel-window.c:3898
+#: libxfce4panel/xfce-panel-plugin.c:1310 panel/panel-window.c:3934
 msgid "Add _New Items..."
 msgstr "Adăugați elemente _noi…"
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1321 panel/panel-window.c:3909
+#: libxfce4panel/xfce-panel-plugin.c:1321 panel/panel-window.c:3945
 msgid "Panel Pr_eferences..."
 msgstr "_Preferințe pentru panouri…"
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1338 panel/panel-window.c:3936
+#: libxfce4panel/xfce-panel-plugin.c:1338 panel/panel-window.c:3972
 msgid "Log _Out"
 msgstr "_Ieșire"
 
@@ -1152,69 +1168,69 @@ msgstr "_Ieșire"
 msgid "About"
 msgstr "Despre"
 
-#: panel/main.c:66
+#: panel/main.c:67
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Afișează fereastra cu preferințele pentru panouri"
 
-#: panel/main.c:66 panel/main.c:67
+#: panel/main.c:67 panel/main.c:68
 msgid "PANEL-NUMBER"
 msgstr "NUMĂRUL-PANOULUI"
 
-#: panel/main.c:67
+#: panel/main.c:68
 msgid "Show the 'Add New Items' dialog"
 msgstr "Afișează fereastra pentru adăugarea de noi elemente"
 
-#: panel/main.c:68
+#: panel/main.c:69
 msgid "Save the panel configuration"
 msgstr "Salvează opțiunile panoului"
 
-#: panel/main.c:69
+#: panel/main.c:70
 msgid "Add a new plugin to the panel"
 msgstr "Adăugați un nou modul în panou"
 
-#: panel/main.c:69
+#: panel/main.c:70
 msgid "PLUGIN-NAME"
 msgstr "NUMELE-MODULULUI"
 
-#: panel/main.c:70
+#: panel/main.c:71
 msgid "Restart the running panel instance"
 msgstr "Repornește instanța pornită a panoului"
 
-#: panel/main.c:71
+#: panel/main.c:72
 msgid "Quit the running panel instance"
 msgstr "Închide instanța pornită a panoului"
 
-#: panel/main.c:72
+#: panel/main.c:73
 msgid "Do not wait for a window manager on startup"
 msgstr "Nu aștepta pornirea unui administrator de ferestre"
 
-#: panel/main.c:73 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: panel/main.c:74 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "Afișează informațiile despre versiune și iese"
 
 #. parse context options
-#: panel/main.c:258
+#: panel/main.c:267
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTE…]"
 
-#: panel/main.c:268
+#: panel/main.c:274
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Încercați «%s --help» pentru detalii de utilizare."
 
-#: panel/main.c:285
+#: panel/main.c:291
 msgid "The Xfce development team. All rights reserved."
 msgstr "Echipa de dezvoltare Xfce. Toate drepturile sunt rezervate."
 
-#: panel/main.c:286
+#: panel/main.c:292
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Raportați problemele la <%s>."
 
 #. quit without error if an instance is running
-#: panel/main.c:394
+#: panel/main.c:397
 msgid "There is already a running instance"
 msgstr "Există deja o instanță pornită"
 
@@ -1266,18 +1282,18 @@ msgstr "Dacă doriți să porniți panoul, salvați sesiunea la ieșire, astfel 
 msgid "Execute"
 msgstr "Execută"
 
-#: panel/panel-application.c:213
+#: panel/panel-application.c:214
 msgid "Failed to launch the migration application"
 msgstr "Nu s-a putut lansa programul de migrare"
 
-#: panel/panel-application.c:347
+#: panel/panel-application.c:348
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr "Modulul „%s” nu a putut fi încărcat, doriți să îl eliminați din configurația xfce4-panel?"
 
-#: panel/panel-application.c:349
+#: panel/panel-application.c:350
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -1287,25 +1303,25 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr "Acest modul este în configurația curentă a xfce4-panel, dar nu a putut fi încărcat, probabil din cauza unei probleme de instalare. Dacă știți ce faceți, îl puteți elimina definitiv, altfel ar fi mai bine să renunțați și să faceți o copie de rezervă a configurației curente utilizând %s, înainte de a verifica instalarea și de a încerca să porniți din nou xfce4-panel."
 
-#: panel/panel-application.c:356
+#: panel/panel-application.c:357
 msgid "Plugin loading failure"
 msgstr "Eșec la încărcarea modulului"
 
-#: panel/panel-application.c:357
+#: panel/panel-application.c:358
 msgid "_Quit"
 msgstr "_Ieșire"
 
-#: panel/panel-application.c:1037
+#: panel/panel-application.c:1038
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Această acțiune va crea un nou modul de tip lansator în panou și va insera ca elemente de meniu fișierele plasate cu mausul."
 
-#: panel/panel-application.c:1040
+#: panel/panel-application.c:1041
 msgid "Create _Launcher"
 msgstr "Creează un _lansator"
 
-#: panel/panel-application.c:1041
+#: panel/panel-application.c:1042
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -1313,21 +1329,21 @@ msgstr[0] "Creează un nou lansator din acest fișier „*.desktop”"
 msgstr[1] "Creează un nou lansator din cele %d fișiere „*.desktop”"
 msgstr[2] "Creează un nou lansator din cele %d de fișiere „*.desktop”"
 
-#: panel/panel-application.c:1808
+#: panel/panel-application.c:1804
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Ați pornit serverul X fără un administrator de sesiune. Dacă alegeți „Ieșire” veți închide serverul X."
 
-#: panel/panel-application.c:1811
+#: panel/panel-application.c:1807
 msgid "Quit"
 msgstr "Ieșire"
 
-#: panel/panel-application.c:1811
+#: panel/panel-application.c:1807
 msgid "Are you sure you want to quit the panel?"
 msgstr "Sigur doriți să închideți panoul?"
 
-#: panel/panel-application.c:1819
+#: panel/panel-application.c:1815
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Nu s-a putut executa comanda «%s»"
@@ -1371,7 +1387,7 @@ msgstr "_Renunță"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Alegeți un panou pentru noul modul:"
 
-#: panel/panel-dialogs.c:187 panel/panel-preferences-dialog.c:1010
+#: panel/panel-dialogs.c:187 panel/panel-preferences-dialog.c:1007
 #, c-format
 msgid "Panel %d"
 msgstr "Panoul %d"
@@ -1416,42 +1432,42 @@ msgstr "Repornire modul"
 msgid "_Execute"
 msgstr "_Execută"
 
-#: panel/panel-preferences-dialog.c:340
+#: panel/panel-preferences-dialog.c:337
 msgctxt "plugin context menu"
 msgid "_About"
 msgstr "_Despre"
 
-#: panel/panel-preferences-dialog.c:344
+#: panel/panel-preferences-dialog.c:341
 msgid "Show about information of the currently selected item"
 msgstr "Afișează detalii despre elementul selectat"
 
-#: panel/panel-preferences-dialog.c:568
+#: panel/panel-preferences-dialog.c:565
 msgid "Automatic"
 msgstr "Automată"
 
-#: panel/panel-preferences-dialog.c:577
+#: panel/panel-preferences-dialog.c:574
 msgid "Primary"
 msgstr "Primar"
 
-#: panel/panel-preferences-dialog.c:1062
+#: panel/panel-preferences-dialog.c:1059
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Configurațiile panoului și ale modulelor sale vor fi eliminate definitiv"
 
-#: panel/panel-preferences-dialog.c:1071
+#: panel/panel-preferences-dialog.c:1068
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Sigur doriți să eliminați panoul %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1363
+#: panel/panel-preferences-dialog.c:1360
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1368
+#: panel/panel-preferences-dialog.c:1365
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1460,22 +1476,22 @@ msgstr "Nume intern: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1380
+#: panel/panel-preferences-dialog.c:1377
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nume intern: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1495
+#: panel/panel-preferences-dialog.c:1492
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Dacă eliminați acest element din panou, el va fi șters definitiv."
 
-#: panel/panel-preferences-dialog.c:1499
+#: panel/panel-preferences-dialog.c:1496
 #: plugins/launcher/launcher-dialog.c:929
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Sunteți sigur că doriți să eliminați aceste %d elemente?"
 
-#: panel/panel-preferences-dialog.c:1501
+#: panel/panel-preferences-dialog.c:1498
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Dacă le eliminați din panou, acestea sunt pierdute definitiv."
 
@@ -1503,7 +1519,7 @@ msgstr "Avansat"
 msgid "Expert"
 msgstr "Expert"
 
-#: panel/panel-window.c:3923
+#: panel/panel-window.c:3959
 msgid "_Lock Panel"
 msgstr "B_lochează panoul"
 
