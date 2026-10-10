@@ -29,7 +29,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-07-25 00:59+0200\n"
+"POT-Creation-Date: 2026-10-10 00:55+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Betül İpek, 2026\n"
 "Language-Team: Turkish (http://app.transifex.com/xfce/xfce4-panel/language/tr/)\n"
@@ -55,13 +55,29 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "paneller; ayarlar; tercihler; görev çubuğu; otomatik gizle; uygulama menüsü; başlat; düğmeler; başlatıcı; bildirim alanı; durum; simgeler; eklentiler;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3886
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3922
 msgid "Panel"
 msgstr "Panel"
 
 #: panel-preferences.desktop.in:16
 msgid "Customize the panel"
 msgstr "Paneli özelleştir"
+
+#: xfce4-panel.desktop.in:8
+msgid ""
+"panels;taskbar;autohide;application menu;start;buttons;launcher;notification"
+" area;status;icons;plugins;"
+msgstr ""
+
+#: xfce4-panel.desktop.in:12
+msgid "Xfce Panel"
+msgstr "Xfce Panel"
+
+#: xfce4-panel.desktop.in:13
+msgid ""
+"Panel/dock that can display application launchers, open windows, a clock, "
+"and much more"
+msgstr ""
 
 #: common/resources/panel-preferences-dialog.glade:13
 msgid "Never"
@@ -133,7 +149,7 @@ msgstr "_Kapat"
 #: common/resources/tasklist-dialog.glade:102
 #: common/resources/windowmenu-dialog.glade:66
 #: libxfce4panel/xfce-panel-plugin.c:1354 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:3952
+#: panel/panel-window.c:3988
 msgid "_Help"
 msgstr "_Yardım"
 
@@ -1108,7 +1124,7 @@ msgid "Monitor %d"
 msgstr "Ekran %d"
 
 #: libxfce4panel/xfce-panel-plugin.c:1119
-#: panel/panel-preferences-dialog.c:1486
+#: panel/panel-preferences-dialog.c:1483
 msgid "Remove"
 msgstr "Kaldır"
 
@@ -1118,7 +1134,7 @@ msgid ""
 msgstr "Ögenin panelden kaldırılması, yapılandırmasının kaybedileceği anlamına da gelir."
 
 #: libxfce4panel/xfce-panel-plugin.c:1124
-#: panel/panel-preferences-dialog.c:1493
+#: panel/panel-preferences-dialog.c:1490
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "'%s' ögesini kaldırmak istediğinizden emin misiniz?"
@@ -1129,7 +1145,7 @@ msgid "_Properties"
 msgstr "_Özellikler"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1257 panel/panel-window.c:3961
+#: libxfce4panel/xfce-panel-plugin.c:1257 panel/panel-window.c:3997
 msgid "_About"
 msgstr "_Hakkında"
 
@@ -1139,8 +1155,8 @@ msgid "_Move"
 msgstr "_Taşı"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1284 panel/panel-application.c:357
-#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1063
+#: libxfce4panel/xfce-panel-plugin.c:1284 panel/panel-application.c:358
+#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1060
 #: plugins/launcher/launcher-dialog.c:934
 msgid "_Remove"
 msgstr "_Kaldır"
@@ -1150,17 +1166,17 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1310 panel/panel-window.c:3898
+#: libxfce4panel/xfce-panel-plugin.c:1310 panel/panel-window.c:3934
 msgid "Add _New Items..."
 msgstr "_Yeni Öge Ekle..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1321 panel/panel-window.c:3909
+#: libxfce4panel/xfce-panel-plugin.c:1321 panel/panel-window.c:3945
 msgid "Panel Pr_eferences..."
 msgstr "Panel T_ercihleri..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1338 panel/panel-window.c:3936
+#: libxfce4panel/xfce-panel-plugin.c:1338 panel/panel-window.c:3972
 msgid "Log _Out"
 msgstr "Çıkış _Yap"
 
@@ -1169,69 +1185,69 @@ msgstr "Çıkış _Yap"
 msgid "About"
 msgstr "Hakkında"
 
-#: panel/main.c:66
+#: panel/main.c:67
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "'Panel Tercihleri' penceresini göster"
 
-#: panel/main.c:66 panel/main.c:67
+#: panel/main.c:67 panel/main.c:68
 msgid "PANEL-NUMBER"
 msgstr "PANEL-NUMARASI"
 
-#: panel/main.c:67
+#: panel/main.c:68
 msgid "Show the 'Add New Items' dialog"
 msgstr "'Yeni Öge Ekle' penceresini göster"
 
-#: panel/main.c:68
+#: panel/main.c:69
 msgid "Save the panel configuration"
 msgstr "Panel yapılandırmasını kaydet"
 
-#: panel/main.c:69
+#: panel/main.c:70
 msgid "Add a new plugin to the panel"
 msgstr "Panele yeni eklenti ekle"
 
-#: panel/main.c:69
+#: panel/main.c:70
 msgid "PLUGIN-NAME"
 msgstr "EKLENTİ-ADI"
 
-#: panel/main.c:70
+#: panel/main.c:71
 msgid "Restart the running panel instance"
 msgstr "Çalışan panel örneğini yeniden başlat"
 
-#: panel/main.c:71
+#: panel/main.c:72
 msgid "Quit the running panel instance"
 msgstr "Çalışan panel örneğinden çık"
 
-#: panel/main.c:72
+#: panel/main.c:73
 msgid "Do not wait for a window manager on startup"
 msgstr "Başlangıçta bir pencere yöneticisi için bekleme"
 
-#: panel/main.c:73 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: panel/main.c:74 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "Sürüm bilgisini yazdır ve çık"
 
 #. parse context options
-#: panel/main.c:258
+#: panel/main.c:267
 msgid "[ARGUMENTS...]"
 msgstr "[SEÇENEKLER...]"
 
-#: panel/main.c:268
+#: panel/main.c:274
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Kullanım için \"%s --help\" yazınız."
 
-#: panel/main.c:285
+#: panel/main.c:291
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce geliştirici takımı. Tüm hakları saklıdır."
 
-#: panel/main.c:286
+#: panel/main.c:292
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Lütfen hataları <%s> adresine bildirin."
 
 #. quit without error if an instance is running
-#: panel/main.c:394
+#: panel/main.c:397
 msgid "There is already a running instance"
 msgstr "Halihazırda çalışan panel örneği var"
 
@@ -1283,18 +1299,18 @@ msgstr "Paneli başlatmak istiyor musunuz? Öyleyse, çıkışta oturumu kaydett
 msgid "Execute"
 msgstr "Çalıştır"
 
-#: panel/panel-application.c:213
+#: panel/panel-application.c:214
 msgid "Failed to launch the migration application"
 msgstr "Geçiş uygulaması başlatılamadı"
 
-#: panel/panel-application.c:347
+#: panel/panel-application.c:348
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr "\"%s\" eklentisi yüklenemedi, xfce4-panel yapılandırmasından kaldırmak istiyor musunuz?"
 
-#: panel/panel-application.c:349
+#: panel/panel-application.c:350
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -1304,46 +1320,46 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr "Bu eklenti mevcut xfce4-panel yapılandırmasında yer alıyor ancak muhtemelen bir kurulum sorunu nedeniyle yüklenemedi. Ne yaptığınızı biliyorsanız, kalıcı olarak kaldırabilirsiniz, aksi takdirde kurulumunuzu kontrol etmeden ve xfce4-panel'i tekrar başlatmayı denemeden önce çıkmanız ve %s kullanarak mevcut yapılandırmanın bir yedeğini almanız daha iyi olur."
 
-#: panel/panel-application.c:356
+#: panel/panel-application.c:357
 msgid "Plugin loading failure"
 msgstr "Eklenti yükleme hatası"
 
-#: panel/panel-application.c:357
+#: panel/panel-application.c:358
 msgid "_Quit"
 msgstr "_Çıkış"
 
-#: panel/panel-application.c:1037
+#: panel/panel-application.c:1038
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Bu panelde yeni başlatıcı eklentisi oluşturur ve eklenen dosyaları menü ögeleri olarak ekler."
 
-#: panel/panel-application.c:1040
+#: panel/panel-application.c:1041
 msgid "Create _Launcher"
 msgstr "_Başlatıcı Oluştur"
 
-#: panel/panel-application.c:1041
+#: panel/panel-application.c:1042
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "%d masaüstü dosyasından yeni başlatıcı oluştur"
 msgstr[1] "%d masaüstü dosyalarından yeni başlatıcı oluştur"
 
-#: panel/panel-application.c:1808
+#: panel/panel-application.c:1804
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "X'i oturum yöneticisi olmadan başlattınız. Çık'ı tıklattığınızda X sunucusu kapanır."
 
-#: panel/panel-application.c:1811
+#: panel/panel-application.c:1807
 msgid "Quit"
 msgstr "Çık"
 
-#: panel/panel-application.c:1811
+#: panel/panel-application.c:1807
 msgid "Are you sure you want to quit the panel?"
 msgstr "Paneli kapatmak istediğinizden emin misiniz?"
 
-#: panel/panel-application.c:1819
+#: panel/panel-application.c:1815
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" komutu çalıştırılamadı"
@@ -1387,7 +1403,7 @@ msgstr "İ_ptal"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Lütfen yeni eklenti için panel seçin:"
 
-#: panel/panel-dialogs.c:187 panel/panel-preferences-dialog.c:1010
+#: panel/panel-dialogs.c:187 panel/panel-preferences-dialog.c:1007
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -1432,42 +1448,42 @@ msgstr "Eklentiyi Yeniden Başlat"
 msgid "_Execute"
 msgstr "Ç_alıştır"
 
-#: panel/panel-preferences-dialog.c:340
+#: panel/panel-preferences-dialog.c:337
 msgctxt "plugin context menu"
 msgid "_About"
 msgstr "_Hakkında"
 
-#: panel/panel-preferences-dialog.c:344
+#: panel/panel-preferences-dialog.c:341
 msgid "Show about information of the currently selected item"
 msgstr "Seçili ögenin hakkında bilgisini göster"
 
-#: panel/panel-preferences-dialog.c:568
+#: panel/panel-preferences-dialog.c:565
 msgid "Automatic"
 msgstr "Kendiliğinden"
 
-#: panel/panel-preferences-dialog.c:577
+#: panel/panel-preferences-dialog.c:574
 msgid "Primary"
 msgstr "Birincil"
 
-#: panel/panel-preferences-dialog.c:1062
+#: panel/panel-preferences-dialog.c:1059
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Panel ve eklenti ayarları kalıcı olarak silinecek"
 
-#: panel/panel-preferences-dialog.c:1071
+#: panel/panel-preferences-dialog.c:1068
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "%d. paneli kaldırmak istediğinize emin misiniz?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1363
+#: panel/panel-preferences-dialog.c:1360
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(dış)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1368
+#: panel/panel-preferences-dialog.c:1365
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1476,22 +1492,22 @@ msgstr "İç ad: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1380
+#: panel/panel-preferences-dialog.c:1377
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "İç ad: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1495
+#: panel/panel-preferences-dialog.c:1492
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Panelden ögeyi kaldırdığınızda tümüyle yitirilir."
 
-#: panel/panel-preferences-dialog.c:1499
+#: panel/panel-preferences-dialog.c:1496
 #: plugins/launcher/launcher-dialog.c:929
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Bu %dögelerini kaldırmak istediğinizden emin misiniz?"
 
-#: panel/panel-preferences-dialog.c:1501
+#: panel/panel-preferences-dialog.c:1498
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Bunları panelden kaldırırsanız, kalıcı olarak kaybolurlar."
 
@@ -1519,7 +1535,7 @@ msgstr "Deneyimli"
 msgid "Expert"
 msgstr "Uzman"
 
-#: panel/panel-window.c:3923
+#: panel/panel-window.c:3959
 msgid "_Lock Panel"
 msgstr "Pane_li Kilitle"
 
