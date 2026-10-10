@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-07-25 00:59+0200\n"
+"POT-Creation-Date: 2026-10-10 00:55+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: BoneNI, 2026\n"
 "Language-Team: Lao (http://app.transifex.com/xfce/xfce4-panel/language/lo/)\n"
@@ -34,13 +34,29 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "ແຖບ;ການຕັ້ງຄ່າ;ຄວາມມັກ;ແຖບງານ;ຊ່ອນອັດຕະໂນມັດ;ເມນູແອັບພລິເຄຊັນ;ເລີ່ມ;ປຸ່ມ;ຕົວເລີ່ມ;ເຂດແຈ້ງເຕືອນ;ສະຖານະ;ໄອຄອນ;ປລັກອິນ;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3886
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3922
 msgid "Panel"
 msgstr "ແຖບ"
 
 #: panel-preferences.desktop.in:16
 msgid "Customize the panel"
 msgstr "ປັບແຕ່ງແຖບ"
+
+#: xfce4-panel.desktop.in:8
+msgid ""
+"panels;taskbar;autohide;application menu;start;buttons;launcher;notification"
+" area;status;icons;plugins;"
+msgstr ""
+
+#: xfce4-panel.desktop.in:12
+msgid "Xfce Panel"
+msgstr "ແຜງ Xfce"
+
+#: xfce4-panel.desktop.in:13
+msgid ""
+"Panel/dock that can display application launchers, open windows, a clock, "
+"and much more"
+msgstr ""
 
 #: common/resources/panel-preferences-dialog.glade:13
 msgid "Never"
@@ -112,7 +128,7 @@ msgstr "ປິດ(_C)"
 #: common/resources/tasklist-dialog.glade:102
 #: common/resources/windowmenu-dialog.glade:66
 #: libxfce4panel/xfce-panel-plugin.c:1354 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:3952
+#: panel/panel-window.c:3988
 msgid "_Help"
 msgstr "ຊ່ວຍເຫຼືອ(_H)"
 
@@ -1087,7 +1103,7 @@ msgid "Monitor %d"
 msgstr "ຈໍພາບ %d"
 
 #: libxfce4panel/xfce-panel-plugin.c:1119
-#: panel/panel-preferences-dialog.c:1486
+#: panel/panel-preferences-dialog.c:1483
 msgid "Remove"
 msgstr "ລຶບອອກ"
 
@@ -1097,7 +1113,7 @@ msgid ""
 msgstr "ການລຶບລາຍການອອກຈາກແຖບ ໝາຍຄວາມວ່າການຕັ້ງຄ່າຂອງມັນຈະສູນຫາຍໄປນຳ."
 
 #: libxfce4panel/xfce-panel-plugin.c:1124
-#: panel/panel-preferences-dialog.c:1493
+#: panel/panel-preferences-dialog.c:1490
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບ \"%s\" ອອກ?"
@@ -1108,7 +1124,7 @@ msgid "_Properties"
 msgstr "ຄຸນສົມບັດ(_P)"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1257 panel/panel-window.c:3961
+#: libxfce4panel/xfce-panel-plugin.c:1257 panel/panel-window.c:3997
 msgid "_About"
 msgstr "ກ່ຽວກັບ(_A)"
 
@@ -1118,8 +1134,8 @@ msgid "_Move"
 msgstr "ຍ້າຍ(_M)"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1284 panel/panel-application.c:357
-#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1063
+#: libxfce4panel/xfce-panel-plugin.c:1284 panel/panel-application.c:358
+#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1060
 #: plugins/launcher/launcher-dialog.c:934
 msgid "_Remove"
 msgstr "ລຶບອອກ(_R)"
@@ -1129,17 +1145,17 @@ msgid "Pane_l"
 msgstr "ແຖບ(_L)"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1310 panel/panel-window.c:3898
+#: libxfce4panel/xfce-panel-plugin.c:1310 panel/panel-window.c:3934
 msgid "Add _New Items..."
 msgstr "ເພີ່ມລາຍການໃໝ່(_N)..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1321 panel/panel-window.c:3909
+#: libxfce4panel/xfce-panel-plugin.c:1321 panel/panel-window.c:3945
 msgid "Panel Pr_eferences..."
 msgstr "ການຕັ້ງຄ່າແຖບ(_E)..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1338 panel/panel-window.c:3936
+#: libxfce4panel/xfce-panel-plugin.c:1338 panel/panel-window.c:3972
 msgid "Log _Out"
 msgstr "ອອກຈາກລະບົບ(_O)"
 
@@ -1148,69 +1164,69 @@ msgstr "ອອກຈາກລະບົບ(_O)"
 msgid "About"
 msgstr "ກ່ຽວກັບ"
 
-#: panel/main.c:66
+#: panel/main.c:67
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "ສະແດງໜ້າຕ່າງ 'ການຕັ້ງຄ່າແຖບ'"
 
-#: panel/main.c:66 panel/main.c:67
+#: panel/main.c:67 panel/main.c:68
 msgid "PANEL-NUMBER"
 msgstr "ໝາຍເລກແຖບ"
 
-#: panel/main.c:67
+#: panel/main.c:68
 msgid "Show the 'Add New Items' dialog"
 msgstr "ສະແດງໜ້າຕ່າງ 'ເພີ່ມລາຍການໃໝ່'"
 
-#: panel/main.c:68
+#: panel/main.c:69
 msgid "Save the panel configuration"
 msgstr "ບັນທຶກການຕັ້ງຄ່າແຖບ"
 
-#: panel/main.c:69
+#: panel/main.c:70
 msgid "Add a new plugin to the panel"
 msgstr "ເພີ່ມປລັກອິນໃໝ່ໃສ່ແຖບ"
 
-#: panel/main.c:69
+#: panel/main.c:70
 msgid "PLUGIN-NAME"
 msgstr "ຊື່ປລັກອິນ"
 
-#: panel/main.c:70
+#: panel/main.c:71
 msgid "Restart the running panel instance"
 msgstr "ເລີ່ມລະບົບແຖບທີ່ກຳລັງເຮັດວຽກໃໝ່"
 
-#: panel/main.c:71
+#: panel/main.c:72
 msgid "Quit the running panel instance"
 msgstr "ອອກຈາກແຖບທີ່ກຳລັງເຮັດວຽກ"
 
-#: panel/main.c:72
+#: panel/main.c:73
 msgid "Do not wait for a window manager on startup"
 msgstr "ບໍ່ຕ້ອງຖ້າຕົວຈັດການໜ້າຕ່າງເມື່ອເລີ່ມຕົ້ນລະບົບ"
 
-#: panel/main.c:73 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: panel/main.c:74 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "ສະແດງຂໍ້ມູນເວີຊັນແລ້ວອອກ"
 
 #. parse context options
-#: panel/main.c:258
+#: panel/main.c:267
 msgid "[ARGUMENTS...]"
 msgstr "[ອາຣກິວເມັນ...]"
 
-#: panel/main.c:268
+#: panel/main.c:274
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "ພິມ \"%s --help\" ເພື່ອເບິ່ງວິທີໃຊ້."
 
-#: panel/main.c:285
+#: panel/main.c:291
 msgid "The Xfce development team. All rights reserved."
 msgstr "ທີມພັດທະນາ Xfce. ສະຫງວນລິຂະສິດທັງໝົດ."
 
-#: panel/main.c:286
+#: panel/main.c:292
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "ກະລຸນາລາຍງານບັນຫາ (bug) ໄປທີ່ <%s>."
 
 #. quit without error if an instance is running
-#: panel/main.c:394
+#: panel/main.c:397
 msgid "There is already a running instance"
 msgstr "ມີຕົວເຄື່ອງທີ່ກຳລັງເຮັດວຽກຢູ່ແລ້ວ"
 
@@ -1262,18 +1278,18 @@ msgstr "ທ່ານຕ້ອງການເລີ່ມແຖບເຄື່ອ
 msgid "Execute"
 msgstr "ປະຕິບັດການ"
 
-#: panel/panel-application.c:213
+#: panel/panel-application.c:214
 msgid "Failed to launch the migration application"
 msgstr "ບໍ່ສາມາດເລີ່ມແອັບພລິເຄຊັນການເຄື່ອນຍ້າຍ (migration)"
 
-#: panel/panel-application.c:347
+#: panel/panel-application.c:348
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr "ບໍ່ສາມາດໂຫຼດປລັກອິນ \"%s\" ໄດ້, ທ່ານຕ້ອງການລຶບມັນອອກຈາກການຕັ້ງຄ່າ xfce4-panel ບໍ່?"
 
-#: panel/panel-application.c:349
+#: panel/panel-application.c:350
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -1283,45 +1299,45 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr "ປລັກອິນນີ້ມີຢູ່ໃນການຕັ້ງຄ່າ xfce4-panel ປັດຈຸບັນ ແຕ່ບໍ່ສາມາດໂຫຼດໄດ້ ເຊິ່ງອາດເກີດຈາກບັນຫາການຕິດຕັ້ງ. ຫາກທ່ານໝັ້ນໃຈ, ສາມາດລຶບມັນອອກຢ່າງຖາວອນໄດ້, ຖ້າບໍ່ດັ່ງນັ້ນ ຄວນອອກຈາກລະບົບ ແລະ ສຳຮອງຂໍ້ມູນການຕັ້ງຄ່າປັດຈຸບັນໂດຍໃຊ້ %s ກ່ອນທີ່ຈະກວດສອບການຕິດຕັ້ງ ແລະ ລອງເລີ່ມ xfce4-panel ອີກຄັ້ງ."
 
-#: panel/panel-application.c:356
+#: panel/panel-application.c:357
 msgid "Plugin loading failure"
 msgstr "ການໂຫຼດປລັກອິນລົ້ມເຫຼວ"
 
-#: panel/panel-application.c:357
+#: panel/panel-application.c:358
 msgid "_Quit"
 msgstr "ອອກ(_Q)"
 
-#: panel/panel-application.c:1037
+#: panel/panel-application.c:1038
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "ນີ້ຈະສ້າງປລັກອິນຕົວເລີ່ມໃໝ່ເທິງແຖບ ແລະ ແຊກໄຟລ໌ທີ່ລາກມາວາງໃຫ້ເປັນລາຍການເມນູ."
 
-#: panel/panel-application.c:1040
+#: panel/panel-application.c:1041
 msgid "Create _Launcher"
 msgstr "ສ້າງຕົວເລີ່ມ(_L)"
 
-#: panel/panel-application.c:1041
+#: panel/panel-application.c:1042
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "ສ້າງຕົວເລີ່ມໃໝ່ຈາກໄຟລ໌ເດັສທັອບ %d ໄຟລ໌"
 
-#: panel/panel-application.c:1808
+#: panel/panel-application.c:1804
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "ທ່ານໄດ້ເລີ່ມ X ໂດຍບໍ່ມີຕົວຈັດການເຊດຊັນ. ການຄລິກ 'ອອກ' ຈະປິດເຊີບເວີ X."
 
-#: panel/panel-application.c:1811
+#: panel/panel-application.c:1807
 msgid "Quit"
 msgstr "ອອກ"
 
-#: panel/panel-application.c:1811
+#: panel/panel-application.c:1807
 msgid "Are you sure you want to quit the panel?"
 msgstr "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການອອກຈາກແຖບ?"
 
-#: panel/panel-application.c:1819
+#: panel/panel-application.c:1815
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "ບໍ່ສາມາດປະຕິບັດຄຳສັ່ງ \"%s\""
@@ -1365,7 +1381,7 @@ msgstr "ຍົກເລີກ(_C)"
 msgid "Please choose a panel for the new plugin:"
 msgstr "ກະລຸນາເລືອກແຖບສຳລັບປລັກອິນໃໝ່:"
 
-#: panel/panel-dialogs.c:187 panel/panel-preferences-dialog.c:1010
+#: panel/panel-dialogs.c:187 panel/panel-preferences-dialog.c:1007
 #, c-format
 msgid "Panel %d"
 msgstr "ແຖບ %d"
@@ -1410,42 +1426,42 @@ msgstr "ເລີ່ມປລັກອິນໃໝ່"
 msgid "_Execute"
 msgstr "ປະຕິບັດການ(_E)"
 
-#: panel/panel-preferences-dialog.c:340
+#: panel/panel-preferences-dialog.c:337
 msgctxt "plugin context menu"
 msgid "_About"
 msgstr "ກ່ຽວກັບ(_A)"
 
-#: panel/panel-preferences-dialog.c:344
+#: panel/panel-preferences-dialog.c:341
 msgid "Show about information of the currently selected item"
 msgstr "ສະແດງຂໍ້ມູນກ່ຽວກັບຂອງລາຍການທີ່ເລືອກຢູ່"
 
-#: panel/panel-preferences-dialog.c:568
+#: panel/panel-preferences-dialog.c:565
 msgid "Automatic"
 msgstr "ອັດຕະໂນມັດ"
 
-#: panel/panel-preferences-dialog.c:577
+#: panel/panel-preferences-dialog.c:574
 msgid "Primary"
 msgstr "ຫຼັກ"
 
-#: panel/panel-preferences-dialog.c:1062
+#: panel/panel-preferences-dialog.c:1059
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "ການຕັ້ງຄ່າແຖບ ແລະ ປລັກອິນຈະຖືກລຶບອອກຢ່າງຖາວອນ"
 
-#: panel/panel-preferences-dialog.c:1071
+#: panel/panel-preferences-dialog.c:1068
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບແຖບ %d ອອກ?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1363
+#: panel/panel-preferences-dialog.c:1360
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(ພາຍນອກ)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1368
+#: panel/panel-preferences-dialog.c:1365
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1454,22 +1470,22 @@ msgstr "ຊື່ພາຍໃນ: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1380
+#: panel/panel-preferences-dialog.c:1377
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "ຊື່ພາຍໃນ: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1495
+#: panel/panel-preferences-dialog.c:1492
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "ຫາກທ່ານລຶບລາຍການອອກຈາກແຖບ, ມັນຈະສູນຫາຍໄປຢ່າງຖາວອນ."
 
-#: panel/panel-preferences-dialog.c:1499
+#: panel/panel-preferences-dialog.c:1496
 #: plugins/launcher/launcher-dialog.c:929
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບ %d ລາຍການນີ້ອອກ?"
 
-#: panel/panel-preferences-dialog.c:1501
+#: panel/panel-preferences-dialog.c:1498
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "ຫາກທ່ານລຶບພວກມັນອອກຈາກແຖບ, ພວກມັນຈະສູນຫາຍໄປຢ່າງຖາວອນ."
 
@@ -1497,7 +1513,7 @@ msgstr "ຜູ້ມີປະສົບການ"
 msgid "Expert"
 msgstr "ຜູ້ຊ່ຽວຊານ"
 
-#: panel/panel-window.c:3923
+#: panel/panel-window.c:3959
 msgid "_Lock Panel"
 msgstr "ລັອກແຖບ(_L)"
 
