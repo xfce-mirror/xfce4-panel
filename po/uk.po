@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-06-04 00:53+0200\n"
+"POT-Creation-Date: 2026-10-10 00:55+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: Pavlo Marianov <acid@jack.kyiv.ua>, 2025\n"
 "Language-Team: Ukrainian (http://app.transifex.com/xfce/xfce4-panel/language/uk/)\n"
@@ -43,13 +43,29 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "панелі;налаштування;властивості;панель завдань;самоховання;меню програм;початок;кнопки;запускач;область сповіщень;стан;значки;розширення;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3935
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3922
 msgid "Panel"
 msgstr "Панель"
 
 #: panel-preferences.desktop.in:16
 msgid "Customize the panel"
 msgstr "Упорядкувати панель"
+
+#: xfce4-panel.desktop.in:8
+msgid ""
+"panels;taskbar;autohide;application menu;start;buttons;launcher;notification"
+" area;status;icons;plugins;"
+msgstr ""
+
+#: xfce4-panel.desktop.in:12
+msgid "Xfce Panel"
+msgstr "Панель Xfce"
+
+#: xfce4-panel.desktop.in:13
+msgid ""
+"Panel/dock that can display application launchers, open windows, a clock, "
+"and much more"
+msgstr ""
 
 #: common/resources/panel-preferences-dialog.glade:13
 msgid "Never"
@@ -120,8 +136,8 @@ msgstr "_Закрити"
 #: common/resources/showdesktop-dialog.glade:49
 #: common/resources/tasklist-dialog.glade:102
 #: common/resources/windowmenu-dialog.glade:66
-#: libxfce4panel/xfce-panel-plugin.c:1342 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:4001
+#: libxfce4panel/xfce-panel-plugin.c:1354 panel/panel-item-dialog.c:201
+#: panel/panel-window.c:3988
 msgid "_Help"
 msgstr "_Допомога"
 
@@ -737,7 +753,7 @@ msgstr "Додати нові елементи"
 msgid "Add one or more existing items to the launcher"
 msgstr "Додати одну або більше наявних елементів до запускача"
 
-#: common/resources/launcher-dialog.glade:87 panel/panel-dialogs.c:157
+#: common/resources/launcher-dialog.glade:87 panel/panel-dialogs.c:156
 #: panel/panel-item-dialog.c:197
 msgid "_Add"
 msgstr "_Додати"
@@ -793,7 +809,7 @@ msgstr "Мініатюрний вигляд"
 msgid "Workspace Switcher"
 msgstr "Перемикач Робочих областей"
 
-#: common/resources/pager-dialog.glade:64 plugins/pager/pager.c:768
+#: common/resources/pager-dialog.glade:64 plugins/pager/pager.c:772
 msgid "Workspace _Settings..."
 msgstr "Властивост_і Робочих областей..."
 
@@ -822,7 +838,7 @@ msgid "Transparent"
 msgstr "Прозорість"
 
 #: common/resources/separator-dialog.glade:30
-#: common/resources/separator-dialog.glade:42 plugins/actions/actions.c:726
+#: common/resources/separator-dialog.glade:42 plugins/actions/actions.c:729
 #: plugins/separator/separator.desktop.in.in:4
 msgid "Separator"
 msgstr "Розділювач"
@@ -844,7 +860,7 @@ msgid "Si_ze:"
 msgstr "Роз_мір:"
 
 #: common/resources/showdesktop-dialog.glade:18
-#: plugins/showdesktop/showdesktop.c:327
+#: plugins/showdesktop/showdesktop.c:345
 #: plugins/showdesktop/showdesktop.desktop.in.in:4
 msgid "Show Desktop"
 msgstr "Показати Стільницю"
@@ -853,7 +869,11 @@ msgstr "Показати Стільницю"
 msgid "_Show on mouse hover"
 msgstr "_Показувати при наведенні миші"
 
-#: common/resources/showdesktop-dialog.glade:113
+#: common/resources/showdesktop-dialog.glade:107
+msgid "Show _tooltip"
+msgstr ""
+
+#: common/resources/showdesktop-dialog.glade:128
 #: common/resources/sn-dialog.glade:300
 msgid "Behavior"
 msgstr "Поведінка"
@@ -1086,136 +1106,136 @@ msgid "Enable _urgency notification"
 msgstr "Дозволити ва_жливі сповіщення"
 
 #. I18N: monitor name in the output selector
-#: common/panel-utils.c:428
+#: common/panel-utils.c:432
 #, c-format
 msgid "Monitor %d"
 msgstr "Монітор %d"
 
-#: libxfce4panel/xfce-panel-plugin.c:1107
-#: panel/panel-preferences-dialog.c:1489
+#: libxfce4panel/xfce-panel-plugin.c:1119
+#: panel/panel-preferences-dialog.c:1483
 msgid "Remove"
 msgstr "Вилучити"
 
-#: libxfce4panel/xfce-panel-plugin.c:1108
+#: libxfce4panel/xfce-panel-plugin.c:1120
 msgid ""
 "Removing the item from the panel also means its configuration will be lost."
 msgstr "Вилучення елемента з панелі означає, що вся його конфіґурація буде втрачена."
 
-#: libxfce4panel/xfce-panel-plugin.c:1112
-#: panel/panel-preferences-dialog.c:1496
+#: libxfce4panel/xfce-panel-plugin.c:1124
+#: panel/panel-preferences-dialog.c:1490
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Дійсно бажаєте видалити \"%s\"?"
 
 #. properties item
-#: libxfce4panel/xfce-panel-plugin.c:1234
+#: libxfce4panel/xfce-panel-plugin.c:1246
 msgid "_Properties"
 msgstr "_Властивості"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1245 panel/panel-window.c:4010
+#: libxfce4panel/xfce-panel-plugin.c:1257 panel/panel-window.c:3997
 msgid "_About"
 msgstr "_Про елемент"
 
 #. move item
-#: libxfce4panel/xfce-panel-plugin.c:1256
+#: libxfce4panel/xfce-panel-plugin.c:1268
 msgid "_Move"
 msgstr "Пере_містити"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1272 panel/panel-application.c:357
-#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1066
+#: libxfce4panel/xfce-panel-plugin.c:1284 panel/panel-application.c:358
+#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1060
 #: plugins/launcher/launcher-dialog.c:934
 msgid "_Remove"
 msgstr "В_илучити"
 
-#: libxfce4panel/xfce-panel-plugin.c:1290
+#: libxfce4panel/xfce-panel-plugin.c:1302
 msgid "Pane_l"
 msgstr "Пане_ль"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1298 panel/panel-window.c:3947
+#: libxfce4panel/xfce-panel-plugin.c:1310 panel/panel-window.c:3934
 msgid "Add _New Items..."
 msgstr "Дода_ти нові елементи..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1309 panel/panel-window.c:3958
+#: libxfce4panel/xfce-panel-plugin.c:1321 panel/panel-window.c:3945
 msgid "Panel Pr_eferences..."
 msgstr "Налашт_ування панелі..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1326 panel/panel-window.c:3985
+#: libxfce4panel/xfce-panel-plugin.c:1338 panel/panel-window.c:3972
 msgid "Log _Out"
 msgstr "Вийти з _сеансу"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1353
+#: libxfce4panel/xfce-panel-plugin.c:1365
 msgid "About"
 msgstr "Про елемент"
 
-#: panel/main.c:66
+#: panel/main.c:67
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Показати діалог 'Налаштування панелі'"
 
-#: panel/main.c:66 panel/main.c:67
+#: panel/main.c:67 panel/main.c:68
 msgid "PANEL-NUMBER"
 msgstr "ПАНЕЛЬ-НОМЕР"
 
-#: panel/main.c:67
+#: panel/main.c:68
 msgid "Show the 'Add New Items' dialog"
 msgstr "Показати діалог 'Додати нові елементи'"
 
-#: panel/main.c:68
+#: panel/main.c:69
 msgid "Save the panel configuration"
 msgstr "Зберегти конфігурацію панелі"
 
-#: panel/main.c:69
+#: panel/main.c:70
 msgid "Add a new plugin to the panel"
 msgstr "Додати нове розширення до панелі"
 
-#: panel/main.c:69
+#: panel/main.c:70
 msgid "PLUGIN-NAME"
 msgstr "РОЗШИРЕННЯ-НАЗВА"
 
-#: panel/main.c:70
+#: panel/main.c:71
 msgid "Restart the running panel instance"
 msgstr "Перезапустити діючі екземпляри панелі"
 
-#: panel/main.c:71
+#: panel/main.c:72
 msgid "Quit the running panel instance"
 msgstr "Завершення запущених екземплярів панелі"
 
-#: panel/main.c:72
+#: panel/main.c:73
 msgid "Do not wait for a window manager on startup"
 msgstr "Не очікувати на запуск менеджера вікон"
 
-#: panel/main.c:73 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: panel/main.c:74 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "Надрукувати інформацію про версію і вийти"
 
 #. parse context options
-#: panel/main.c:258
+#: panel/main.c:267
 msgid "[ARGUMENTS...]"
 msgstr "[АРГУМЕНТИ...]"
 
-#: panel/main.c:268
+#: panel/main.c:274
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Наберіть \"%s --help\" для використання."
 
-#: panel/main.c:285
+#: panel/main.c:291
 msgid "The Xfce development team. All rights reserved."
 msgstr "Команда розробки Xfce. Всі права захищені."
 
-#: panel/main.c:286
+#: panel/main.c:292
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Сповістіть про помилку на <%s>."
 
 #. quit without error if an instance is running
-#: panel/main.c:394
+#: panel/main.c:397
 msgid "There is already a running instance"
 msgstr "Вже існує запущений екземпляр"
 
@@ -1267,18 +1287,18 @@ msgstr "Ви бажаєте запустити панель? Якщо так, т
 msgid "Execute"
 msgstr "Виконати"
 
-#: panel/panel-application.c:213
+#: panel/panel-application.c:214
 msgid "Failed to launch the migration application"
 msgstr "Не вдалось запустити програму міграції"
 
-#: panel/panel-application.c:347
+#: panel/panel-application.c:348
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr "Розширення \"%s\" не було завантажено, бажаєте його видалити з конфігурації панелі xfce4?"
 
-#: panel/panel-application.c:349
+#: panel/panel-application.c:350
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -1288,25 +1308,25 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr "Це розширення є у поточній конфігурації панелі xfce4, але його не вдалося завантажити, ймовірно, через проблему з установкою. Якщо ви знаєте, що робите, ви можете видалити його назавжди, інакше вам краще вийти і зробити резервну копію поточної конфігурації за допомогою %s, перед тим, як перевірити установку і спробувати запустити панель xfce4 ще раз."
 
-#: panel/panel-application.c:356
+#: panel/panel-application.c:357
 msgid "Plugin loading failure"
 msgstr "Збій завантаження розширення"
 
-#: panel/panel-application.c:357
+#: panel/panel-application.c:358
 msgid "_Quit"
 msgstr "Вийти"
 
-#: panel/panel-application.c:1037
+#: panel/panel-application.c:1038
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Це створить новий запускач розширення на панелі і вставить кинуті файли як пункти меню."
 
-#: panel/panel-application.c:1040
+#: panel/panel-application.c:1041
 msgid "Create _Launcher"
 msgstr "Створити _запускач"
 
-#: panel/panel-application.c:1041
+#: panel/panel-application.c:1042
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -1315,21 +1335,21 @@ msgstr[1] "Створити новий запускач з desktop-файлів 
 msgstr[2] "Створити новий запускач з desktop-файлів %d"
 msgstr[3] "Створити новий запускач з desktop-файлів %d"
 
-#: panel/panel-application.c:1808
+#: panel/panel-application.c:1804
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Ви запустили X без менеджера сесії. Натискання на кнопку виходу закриє X-сервер."
 
-#: panel/panel-application.c:1811
+#: panel/panel-application.c:1807
 msgid "Quit"
 msgstr "Завершити"
 
-#: panel/panel-application.c:1811
+#: panel/panel-application.c:1807
 msgid "Are you sure you want to quit the panel?"
 msgstr "Ви впевнені, що бажаєте закрити панель?"
 
-#: panel/panel-application.c:1819
+#: panel/panel-application.c:1815
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Не вдалось виконати команду \"%s\""
@@ -1350,41 +1370,41 @@ msgstr "Неправильний тип виклику \"%s\". Правильн�
 msgid "Unable to open the e-mail address"
 msgstr "Неможливо відкрити адресу e-mail"
 
-#: panel/panel-dialogs.c:79
+#: panel/panel-dialogs.c:78
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Панель для середовища стільниці Xfce"
 
-#: panel/panel-dialogs.c:83
+#: panel/panel-dialogs.c:82
 msgid "translator-credits"
 msgstr "Дмитро Нікітін/nЯрема aka Knedlyk"
 
-#: panel/panel-dialogs.c:157
+#: panel/panel-dialogs.c:156
 msgid "Add New Item"
 msgstr "Додати новий елемент"
 
-#: panel/panel-dialogs.c:157 plugins/actions/actions.c:864
-#: plugins/applicationsmenu/applicationsmenu.c:584
-#: plugins/directorymenu/directorymenu.c:485
-#: plugins/directorymenu/directorymenu.c:985
+#: panel/panel-dialogs.c:156 plugins/actions/actions.c:867
+#: plugins/applicationsmenu/applicationsmenu.c:587
+#: plugins/directorymenu/directorymenu.c:488
+#: plugins/directorymenu/directorymenu.c:988
 msgid "_Cancel"
 msgstr "_Скасувати"
 
-#: panel/panel-dialogs.c:168
+#: panel/panel-dialogs.c:167
 msgid "Please choose a panel for the new plugin:"
 msgstr "Будь-ласка виберіть панель для нового розширення:"
 
-#: panel/panel-dialogs.c:188 panel/panel-preferences-dialog.c:1013
+#: panel/panel-dialogs.c:187 panel/panel-preferences-dialog.c:1007
 #, c-format
 msgid "Panel %d"
 msgstr "Панель %d"
 
-#: panel/panel-dialogs.c:227
+#: panel/panel-dialogs.c:226
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr "Через встановлений режим кіоска, Вам не дозволено робити зміни до конфігурації панелі в режимі звичайного користувача"
 
-#: panel/panel-dialogs.c:229
+#: panel/panel-dialogs.c:228
 msgid "Modifying the panel is not allowed"
 msgstr "Модифікацію панелі не дозволено"
 
@@ -1418,42 +1438,42 @@ msgstr "Перезавантажити розширення"
 msgid "_Execute"
 msgstr "Вико_нати"
 
-#: panel/panel-preferences-dialog.c:342
+#: panel/panel-preferences-dialog.c:337
 msgctxt "plugin context menu"
 msgid "_About"
 msgstr "_Про програму"
 
-#: panel/panel-preferences-dialog.c:346
+#: panel/panel-preferences-dialog.c:341
 msgid "Show about information of the currently selected item"
 msgstr "Показати інформацію про поточний виділений елемент"
 
-#: panel/panel-preferences-dialog.c:570
+#: panel/panel-preferences-dialog.c:565
 msgid "Automatic"
 msgstr "Автоматично"
 
-#: panel/panel-preferences-dialog.c:579
+#: panel/panel-preferences-dialog.c:574
 msgid "Primary"
 msgstr "Початково"
 
-#: panel/panel-preferences-dialog.c:1065
+#: panel/panel-preferences-dialog.c:1059
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Панель та конфігурації розширень будуть видалені"
 
-#: panel/panel-preferences-dialog.c:1074
+#: panel/panel-preferences-dialog.c:1068
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Ви впевнені, що бажаєте видалити панель %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1366
+#: panel/panel-preferences-dialog.c:1360
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(зовнішній)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1371
+#: panel/panel-preferences-dialog.c:1365
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1462,22 +1482,22 @@ msgstr "Внутрішня назва: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1383
+#: panel/panel-preferences-dialog.c:1377
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Внутрішня назва: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1498
+#: panel/panel-preferences-dialog.c:1492
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Якщо Ви видалите цей елемент з панелі, він буде повністю втрачений."
 
-#: panel/panel-preferences-dialog.c:1502
+#: panel/panel-preferences-dialog.c:1496
 #: plugins/launcher/launcher-dialog.c:929
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "Ви впевнені, що хочете видалити ці %d елементи?"
 
-#: panel/panel-preferences-dialog.c:1504
+#: panel/panel-preferences-dialog.c:1498
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "Якщо ви видалите їх з панелі, вони будуть остаточно втрачені."
 
@@ -1505,23 +1525,23 @@ msgstr "Досвідчений"
 msgid "Expert"
 msgstr "Експерт"
 
-#: panel/panel-window.c:3972
+#: panel/panel-window.c:3959
 msgid "_Lock Panel"
 msgstr "_Заблокувати панель"
 
-#: migrate/main.c:94
+#: migrate/main.c:91
 msgid "Failed to load the default configuration"
 msgstr "Не вдалось завантажити типову конфігурацію"
 
-#: migrate/main.c:106
+#: migrate/main.c:103
 msgid "Panel config needs migration..."
 msgstr "Потрібно провести міграцію конфігурації панелі..."
 
-#: migrate/main.c:110
+#: migrate/main.c:107
 msgid "Failed to migrate the existing configuration"
 msgstr "Не вдалось провести міграцію старої конфігурації панелі"
 
-#: migrate/main.c:116
+#: migrate/main.c:113
 msgid "Panel configuration has been updated."
 msgstr "Конфігурацію панелі оновлено."
 
@@ -1651,12 +1671,12 @@ msgstr "Ви впевнені, що бажаєте виключити?"
 msgid "Turning off computer in %d seconds."
 msgstr "Вимкнення комп'ютера за %d секунд."
 
-#: plugins/actions/actions.c:1160
+#: plugins/actions/actions.c:1163
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Не вдається запустити дію \"%s\""
 
-#: plugins/actions/actions.c:1367
+#: plugins/actions/actions.c:1370
 msgid "Little Mouse"
 msgstr "Маленька мишка"
 
@@ -1669,19 +1689,19 @@ msgstr "Завершення сеансу, блокування чи інші с
 msgid "Applications"
 msgstr "Програми"
 
-#: plugins/applicationsmenu/applicationsmenu.c:584
-#: plugins/directorymenu/directorymenu.c:485
+#: plugins/applicationsmenu/applicationsmenu.c:587
+#: plugins/directorymenu/directorymenu.c:488
 msgid "Select An Icon"
 msgstr "Вибрати значок"
 
-#: plugins/applicationsmenu/applicationsmenu.c:584
-#: plugins/directorymenu/directorymenu.c:485
+#: plugins/applicationsmenu/applicationsmenu.c:587
+#: plugins/directorymenu/directorymenu.c:488
 msgid "_OK"
 msgstr "_Гаразд"
 
 #. show an error dialog
-#: plugins/applicationsmenu/applicationsmenu.c:621 plugins/clock/clock.c:1083
-#: plugins/launcher/launcher.c:2499
+#: plugins/applicationsmenu/applicationsmenu.c:624 plugins/clock/clock.c:1082
+#: plugins/launcher/launcher.c:2494
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Не вдається виконати команду \"%s\"."
@@ -1734,15 +1754,15 @@ msgstr "Тиждень %V"
 msgid "Time _settings"
 msgstr ""
 
-#: plugins/clock/clock.c:513
+#: plugins/clock/clock.c:509
 msgid "Failed to execute clock command"
 msgstr "Не вдалось виконати команду годинника"
 
-#: plugins/clock/clock.c:1011
+#: plugins/clock/clock.c:1010
 msgid "Custom Format"
 msgstr "Довільний формат"
 
-#: plugins/clock/clock.c:1062
+#: plugins/clock/clock.c:1061
 msgid "Configuration tool not found, please set it in the settings dialog"
 msgstr ""
 
@@ -2061,69 +2081,69 @@ msgstr "дванадцять"
 msgid "What time is it?"
 msgstr "Котра година?"
 
-#: plugins/directorymenu/directorymenu.c:743
+#: plugins/directorymenu/directorymenu.c:746
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Не вдається запустити програму \"%s\""
 
-#: plugins/directorymenu/directorymenu.c:774
+#: plugins/directorymenu/directorymenu.c:777
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Не вдається запитати вміст типу для \"%s\""
 
-#: plugins/directorymenu/directorymenu.c:783
+#: plugins/directorymenu/directorymenu.c:786
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Не знайдено типової програми для \"%s\""
 
-#: plugins/directorymenu/directorymenu.c:799
+#: plugins/directorymenu/directorymenu.c:802
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Не вдається запустити типову програму для \"%s\""
 
-#: plugins/directorymenu/directorymenu.c:893
+#: plugins/directorymenu/directorymenu.c:896
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Не вдається запустити улюблену програму для категорії \"%s\""
 
-#: plugins/directorymenu/directorymenu.c:974
+#: plugins/directorymenu/directorymenu.c:977
 msgid "Create New Folder"
 msgstr "Створити нову теку"
 
-#: plugins/directorymenu/directorymenu.c:979
+#: plugins/directorymenu/directorymenu.c:982
 msgid "Create New Text Document"
 msgstr "Створіть новий текстовий документ"
 
-#: plugins/directorymenu/directorymenu.c:985
+#: plugins/directorymenu/directorymenu.c:988
 msgid "C_reate"
 msgstr "С_творити"
 
-#: plugins/directorymenu/directorymenu.c:985
+#: plugins/directorymenu/directorymenu.c:988
 msgid "Create & _Open"
 msgstr "Створити і _відкрити"
 
-#: plugins/directorymenu/directorymenu.c:998
+#: plugins/directorymenu/directorymenu.c:1001
 msgid "Enter the new name:"
 msgstr "Введіть нову назву:"
 
-#: plugins/directorymenu/directorymenu.c:1034
+#: plugins/directorymenu/directorymenu.c:1037
 #, c-format
 msgid "Failed to create folder: %s"
 msgstr "Не вдалося створити теку: %s"
 
-#: plugins/directorymenu/directorymenu.c:1116
+#: plugins/directorymenu/directorymenu.c:1119
 msgid "Open Folder"
 msgstr "Відкрити теку"
 
-#: plugins/directorymenu/directorymenu.c:1130
+#: plugins/directorymenu/directorymenu.c:1133
 msgid "Open in Terminal"
 msgstr "Відкрити у Терміналі"
 
-#: plugins/directorymenu/directorymenu.c:1144
+#: plugins/directorymenu/directorymenu.c:1147
 msgid "Create Folder..."
 msgstr "Створити теку..."
 
-#: plugins/directorymenu/directorymenu.c:1158
+#: plugins/directorymenu/directorymenu.c:1161
 msgid "Create Text Document..."
 msgstr "Створення текстового документа..."
 
@@ -2139,7 +2159,7 @@ msgstr "Відкрити меню пускача"
 msgid "Unnamed Item"
 msgstr "Неназваний елемент"
 
-#: plugins/launcher/launcher.c:1816
+#: plugins/launcher/launcher.c:1815
 msgid "No items"
 msgstr "Немає елементів"
 
@@ -2174,11 +2194,11 @@ msgstr "Додати нове гіперпосилання"
 msgid "Program launcher with optional menu"
 msgstr "Кнопка запуску з додатковим меню"
 
-#: plugins/pager/pager.c:868
+#: plugins/pager/pager.c:872
 msgid "Unable to open the workspace settings"
 msgstr "Неможливо відкрити властивості робочої області"
 
-#: plugins/pager/pager-buttons.c:645 plugins/windowmenu/windowmenu.c:1008
+#: plugins/pager/pager-buttons.c:645 plugins/windowmenu/windowmenu.c:1011
 #, c-format
 msgid "Workspace %d"
 msgstr "Робоча область %d"
@@ -2191,11 +2211,11 @@ msgstr "Перемикатись між віртуальними стільни�
 msgid "Adds a separator or space between panel items"
 msgstr "Додавання розділювача або інтервалу між елементами панелі"
 
-#: plugins/showdesktop/showdesktop.c:322
+#: plugins/showdesktop/showdesktop.c:340
 msgid "Restore the minimized windows"
 msgstr "Підняти мінімізовані вікна"
 
-#: plugins/showdesktop/showdesktop.c:324
+#: plugins/showdesktop/showdesktop.c:342
 msgid "Minimize all open windows and show the desktop"
 msgstr "Мінімізувати всі відкриті вікна та показати стільницю"
 
@@ -2211,22 +2231,22 @@ msgstr "Очистити"
 msgid "Are you sure you want to clear the list of known items?"
 msgstr "Ви дійсно хочете очистити список відомих елементів?"
 
-#: plugins/systray/systray.c:145
+#: plugins/systray/systray.c:144
 msgid "Unable to start the notification area"
 msgstr "Не можу запустити область повідомлень"
 
 #. create fake error and show it
-#: plugins/systray/systray.c:409
+#: plugins/systray/systray.c:407
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Швидше за все інший віджет взяв на себе цю функцію в області повідомлень. Ця область неможливо буде використовувати."
 
-#: plugins/systray/systray.c:411
+#: plugins/systray/systray.c:409
 msgid "The notification area lost selection"
 msgstr "Область повідомлень втратила виділення"
 
-#: plugins/systray/systray-manager.c:382
+#: plugins/systray/systray-manager.c:381
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Не вдалось отримати управління виділеним для екрану %d"
@@ -2286,28 +2306,28 @@ msgstr "Перемикатись між відкритими вікнами ви
 msgid "Windows"
 msgstr ""
 
-#: plugins/windowmenu/windowmenu.c:787
+#: plugins/windowmenu/windowmenu.c:790
 msgid "Desktop"
 msgstr "Стільниця"
 
-#: plugins/windowmenu/windowmenu.c:1403
+#: plugins/windowmenu/windowmenu.c:1406
 msgid "No Windows"
 msgstr "Без вікон"
 
-#: plugins/windowmenu/windowmenu.c:1418
+#: plugins/windowmenu/windowmenu.c:1421
 msgid "Urgent Windows"
 msgstr "Важливі вікна"
 
-#: plugins/windowmenu/windowmenu.c:1469
+#: plugins/windowmenu/windowmenu.c:1472
 msgid "Add Workspace"
 msgstr "Додати робочу область"
 
-#: plugins/windowmenu/windowmenu.c:1491
+#: plugins/windowmenu/windowmenu.c:1494
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Видалити робочу область \"%s\""
 
-#: plugins/windowmenu/windowmenu.c:1493
+#: plugins/windowmenu/windowmenu.c:1496
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Видалити робочу область %d"
