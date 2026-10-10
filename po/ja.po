@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-07-25 00:59+0200\n"
+"POT-Creation-Date: 2026-10-10 00:55+0200\n"
 "PO-Revision-Date: 2013-07-02 20:26+0000\n"
 "Last-Translator: UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2019-2020,2022-2026\n"
 "Language-Team: Japanese (http://app.transifex.com/xfce/xfce4-panel/language/ja/)\n"
@@ -37,13 +37,29 @@ msgid ""
 "menu;start;buttons;launcher;notification area;status;icons;plugins;"
 msgstr "パネル;設定;環境設定;タスクバー;自動非表示;アプリケーションメニュー;スタート;ボタン;ランチャー;通知領域;ステータス;アイコン;プラグイン;"
 
-#: panel-preferences.desktop.in:15 panel/panel-window.c:3886
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3922
 msgid "Panel"
 msgstr "パネル"
 
 #: panel-preferences.desktop.in:16
 msgid "Customize the panel"
 msgstr "パネルをカスタマイズする"
+
+#: xfce4-panel.desktop.in:8
+msgid ""
+"panels;taskbar;autohide;application menu;start;buttons;launcher;notification"
+" area;status;icons;plugins;"
+msgstr ""
+
+#: xfce4-panel.desktop.in:12
+msgid "Xfce Panel"
+msgstr "Xfce パネル"
+
+#: xfce4-panel.desktop.in:13
+msgid ""
+"Panel/dock that can display application launchers, open windows, a clock, "
+"and much more"
+msgstr ""
 
 #: common/resources/panel-preferences-dialog.glade:13
 msgid "Never"
@@ -115,7 +131,7 @@ msgstr "閉じる(_C)"
 #: common/resources/tasklist-dialog.glade:102
 #: common/resources/windowmenu-dialog.glade:66
 #: libxfce4panel/xfce-panel-plugin.c:1354 panel/panel-item-dialog.c:201
-#: panel/panel-window.c:3952
+#: panel/panel-window.c:3988
 msgid "_Help"
 msgstr "ヘルプ(_H)"
 
@@ -1090,7 +1106,7 @@ msgid "Monitor %d"
 msgstr "モニター %d"
 
 #: libxfce4panel/xfce-panel-plugin.c:1119
-#: panel/panel-preferences-dialog.c:1486
+#: panel/panel-preferences-dialog.c:1483
 msgid "Remove"
 msgstr "削除"
 
@@ -1100,7 +1116,7 @@ msgid ""
 msgstr "パネルからアイテムを削除すると、その設定も失われます。"
 
 #: libxfce4panel/xfce-panel-plugin.c:1124
-#: panel/panel-preferences-dialog.c:1493
+#: panel/panel-preferences-dialog.c:1490
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "\"%s\" を削除しますか？"
@@ -1111,7 +1127,7 @@ msgid "_Properties"
 msgstr "プロパティ(_P)"
 
 #. about item
-#: libxfce4panel/xfce-panel-plugin.c:1257 panel/panel-window.c:3961
+#: libxfce4panel/xfce-panel-plugin.c:1257 panel/panel-window.c:3997
 msgid "_About"
 msgstr "このプログラムについて(_A)"
 
@@ -1121,8 +1137,8 @@ msgid "_Move"
 msgstr "移動(_M)"
 
 #. remove
-#: libxfce4panel/xfce-panel-plugin.c:1284 panel/panel-application.c:357
-#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1063
+#: libxfce4panel/xfce-panel-plugin.c:1284 panel/panel-application.c:358
+#: panel/panel-plugin-external.c:427 panel/panel-preferences-dialog.c:1060
 #: plugins/launcher/launcher-dialog.c:934
 msgid "_Remove"
 msgstr "削除(_R)"
@@ -1132,17 +1148,17 @@ msgid "Pane_l"
 msgstr "パネル(_L)"
 
 #. add new items
-#: libxfce4panel/xfce-panel-plugin.c:1310 panel/panel-window.c:3898
+#: libxfce4panel/xfce-panel-plugin.c:1310 panel/panel-window.c:3934
 msgid "Add _New Items..."
 msgstr "新しいアイテムを追加する(_N)..."
 
 #. customize panel
-#: libxfce4panel/xfce-panel-plugin.c:1321 panel/panel-window.c:3909
+#: libxfce4panel/xfce-panel-plugin.c:1321 panel/panel-window.c:3945
 msgid "Panel Pr_eferences..."
 msgstr "パネルの設定(_E)..."
 
 #. logout item
-#: libxfce4panel/xfce-panel-plugin.c:1338 panel/panel-window.c:3936
+#: libxfce4panel/xfce-panel-plugin.c:1338 panel/panel-window.c:3972
 msgid "Log _Out"
 msgstr "ログアウト(_O)"
 
@@ -1151,69 +1167,69 @@ msgstr "ログアウト(_O)"
 msgid "About"
 msgstr "このソフトウェアについて"
 
-#: panel/main.c:66
+#: panel/main.c:67
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "'パネルの設定' ダイアログを表示する"
 
-#: panel/main.c:66 panel/main.c:67
+#: panel/main.c:67 panel/main.c:68
 msgid "PANEL-NUMBER"
 msgstr "PANEL-NUMBER"
 
-#: panel/main.c:67
+#: panel/main.c:68
 msgid "Show the 'Add New Items' dialog"
 msgstr "'新しいアイテムを追加する' ダイアログを表示する"
 
-#: panel/main.c:68
+#: panel/main.c:69
 msgid "Save the panel configuration"
 msgstr "パネルの設定を保存する"
 
-#: panel/main.c:69
+#: panel/main.c:70
 msgid "Add a new plugin to the panel"
 msgstr "パネルに新しいプラグインを追加する"
 
-#: panel/main.c:69
+#: panel/main.c:70
 msgid "PLUGIN-NAME"
 msgstr "PLUGIN-NAME"
 
-#: panel/main.c:70
+#: panel/main.c:71
 msgid "Restart the running panel instance"
 msgstr "動作中のパネルインスタンスを再起動する"
 
-#: panel/main.c:71
+#: panel/main.c:72
 msgid "Quit the running panel instance"
 msgstr "動作中のパネルインスタンスを終了する"
 
-#: panel/main.c:72
+#: panel/main.c:73
 msgid "Do not wait for a window manager on startup"
 msgstr "ウィンドウマネージャーの起動を待たない"
 
-#: panel/main.c:73 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: panel/main.c:74 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "バージョン情報を表示して終了する"
 
 #. parse context options
-#: panel/main.c:258
+#: panel/main.c:267
 msgid "[ARGUMENTS...]"
 msgstr "[引数...]"
 
-#: panel/main.c:268
+#: panel/main.c:274
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "\"%s --help\" と入力すると使用方法が表示されます。"
 
-#: panel/main.c:285
+#: panel/main.c:291
 msgid "The Xfce development team. All rights reserved."
 msgstr "The Xfce development team. All rights reserved."
 
-#: panel/main.c:286
+#: panel/main.c:292
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "バグは <%s> まで報告してください。"
 
 #. quit without error if an instance is running
-#: panel/main.c:394
+#: panel/main.c:397
 msgid "There is already a running instance"
 msgstr "すでに実行中のインスタンスがあります"
 
@@ -1265,18 +1281,18 @@ msgstr "パネルを起動しますか？起動した場合、ログアウト時
 msgid "Execute"
 msgstr "実行"
 
-#: panel/panel-application.c:213
+#: panel/panel-application.c:214
 msgid "Failed to launch the migration application"
 msgstr "移行アプリケーションの起動に失敗しました"
 
-#: panel/panel-application.c:347
+#: panel/panel-application.c:348
 #, c-format
 msgid ""
 "Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
 " configuration?"
 msgstr "\"%s\" プライグインはロードできませんでした。xfce4-panel の構成から削除しますか?"
 
-#: panel/panel-application.c:349
+#: panel/panel-application.c:350
 #, c-format
 msgid ""
 "This plugin is in the current xfce4-panel configuration but could not be "
@@ -1286,45 +1302,45 @@ msgid ""
 "installation and trying to start xfce4-panel again."
 msgstr "このプラグインは現在の xfce4-panel 構成で設定されていますが、おそらくインストール時の問題が原因でロードできませんでした。何をしようとしているのかわかっている場合は、永久に削除できますが、そうでない場合はインストール内容確認とxfce4-panel を再起動する前に終了し、 %sを使用して現在の設定をバックアップする ことをお勧めします。"
 
-#: panel/panel-application.c:356
+#: panel/panel-application.c:357
 msgid "Plugin loading failure"
 msgstr "プラグインのロード失敗"
 
-#: panel/panel-application.c:357
+#: panel/panel-application.c:358
 msgid "_Quit"
 msgstr "終了(_Q)"
 
-#: panel/panel-application.c:1037
+#: panel/panel-application.c:1038
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "パネル上に新しいランチャーを作成し、ドロップしたファイルをメニューアイテムとして挿入します。"
 
-#: panel/panel-application.c:1040
+#: panel/panel-application.c:1041
 msgid "Create _Launcher"
 msgstr "ランチャーを作成(_L)"
 
-#: panel/panel-application.c:1041
+#: panel/panel-application.c:1042
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "%d 個のデスクトップファイルから新しいランチャーを作成します"
 
-#: panel/panel-application.c:1808
+#: panel/panel-application.c:1804
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "セッションマネージャーなしでXを起動しました。「終了」をクリックするとXサーバーを閉じます。"
 
-#: panel/panel-application.c:1811
+#: panel/panel-application.c:1807
 msgid "Quit"
 msgstr "終了"
 
-#: panel/panel-application.c:1811
+#: panel/panel-application.c:1807
 msgid "Are you sure you want to quit the panel?"
 msgstr "パネルを終了しますか？"
 
-#: panel/panel-application.c:1819
+#: panel/panel-application.c:1815
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "コマンド \"%s\" の実行に失敗しました"
@@ -1368,7 +1384,7 @@ msgstr "キャンセル(_C)"
 msgid "Please choose a panel for the new plugin:"
 msgstr "新しいプラグインのパネルを選択してください:"
 
-#: panel/panel-dialogs.c:187 panel/panel-preferences-dialog.c:1010
+#: panel/panel-dialogs.c:187 panel/panel-preferences-dialog.c:1007
 #, c-format
 msgid "Panel %d"
 msgstr "パネル %d"
@@ -1413,42 +1429,42 @@ msgstr "プラグインを再起動"
 msgid "_Execute"
 msgstr "実行(_E)"
 
-#: panel/panel-preferences-dialog.c:340
+#: panel/panel-preferences-dialog.c:337
 msgctxt "plugin context menu"
 msgid "_About"
 msgstr "このプログラムについて(_A)"
 
-#: panel/panel-preferences-dialog.c:344
+#: panel/panel-preferences-dialog.c:341
 msgid "Show about information of the currently selected item"
 msgstr "現在選択されているアイテムの情報を表示します"
 
-#: panel/panel-preferences-dialog.c:568
+#: panel/panel-preferences-dialog.c:565
 msgid "Automatic"
 msgstr "自動"
 
-#: panel/panel-preferences-dialog.c:577
+#: panel/panel-preferences-dialog.c:574
 msgid "Primary"
 msgstr "プライマリー"
 
-#: panel/panel-preferences-dialog.c:1062
+#: panel/panel-preferences-dialog.c:1059
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "パネルとプラグインの設定は完全に削除されます"
 
-#: panel/panel-preferences-dialog.c:1071
+#: panel/panel-preferences-dialog.c:1068
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "パネル %d を削除しますか？"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: panel/panel-preferences-dialog.c:1363
+#: panel/panel-preferences-dialog.c:1360
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(外部)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: panel/panel-preferences-dialog.c:1368
+#: panel/panel-preferences-dialog.c:1365
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -1457,22 +1473,22 @@ msgstr "内部名: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: panel/panel-preferences-dialog.c:1380
+#: panel/panel-preferences-dialog.c:1377
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "内部名: %s-%d"
 
-#: panel/panel-preferences-dialog.c:1495
+#: panel/panel-preferences-dialog.c:1492
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "パネルから削除すると、このアイテムは完全に失われます。"
 
-#: panel/panel-preferences-dialog.c:1499
+#: panel/panel-preferences-dialog.c:1496
 #: plugins/launcher/launcher-dialog.c:929
 #, c-format
 msgid "Are you sure that you want to remove these %d items?"
 msgstr "これら %d 個のアイテムを削除してもよろしいですか？"
 
-#: panel/panel-preferences-dialog.c:1501
+#: panel/panel-preferences-dialog.c:1498
 msgid "If you remove them from the panel, they are permanently lost."
 msgstr "パネルからそれらを削除すると、それらは永久に失われます。"
 
@@ -1500,7 +1516,7 @@ msgstr "上級者"
 msgid "Expert"
 msgstr "達人"
 
-#: panel/panel-window.c:3923
+#: panel/panel-window.c:3959
 msgid "_Lock Panel"
 msgstr "パネルをロック(_L)"
 
