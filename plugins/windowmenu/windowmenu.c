@@ -1150,9 +1150,9 @@ window_menu_plugin_menu_window_item_new (XfwWindow *window,
   panel_return_val_if_fail (GTK_IS_LABEL (label), NULL);
   /* modify the label font if needed */
   if (xfw_window_is_active (window))
-    label_text = g_strdup_printf ("<b><i>%s</i></b>", name);
+    label_text = g_markup_printf_escaped ("<b><i>%s</i></b>", name);
   else if (xfw_window_is_urgent (window))
-    label_text = g_strdup_printf ("<b>%s</b>", name);
+    label_text = g_markup_printf_escaped ("<b>%s</b>", name);
   if (label_text)
     {
       gtk_label_set_markup (GTK_LABEL (label), label_text);
