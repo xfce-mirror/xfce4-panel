@@ -617,11 +617,11 @@ applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget *button,
       g_free (icon);
 
       image = gtk_image_new ();
+      gtk_container_remove (GTK_CONTAINER (button), gtk_bin_get_child (GTK_BIN (button)));
+      gtk_container_add (GTK_CONTAINER (button), image);
       xfce_panel_set_image_from_source (GTK_IMAGE (image), plugin->button_icon,
                                         NULL, DIALOG_ICON_SIZE,
                                         gtk_widget_get_scale_factor (GTK_WIDGET (plugin)));
-      gtk_container_remove (GTK_CONTAINER (button), gtk_bin_get_child (GTK_BIN (button)));
-      gtk_container_add (GTK_CONTAINER (button), image);
       gtk_widget_show (image);
     }
 
@@ -687,10 +687,10 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                     G_CALLBACK (applications_menu_plugin_configure_plugin_icon_chooser), plugin);
 
   image = gtk_image_new ();
+  gtk_container_add (GTK_CONTAINER (object), image);
   xfce_panel_set_image_from_source (GTK_IMAGE (image), plugin->button_icon,
                                     NULL, DIALOG_ICON_SIZE,
                                     gtk_widget_get_scale_factor (GTK_WIDGET (plugin)));
-  gtk_container_add (GTK_CONTAINER (object), image);
   gtk_widget_show (image);
 
   /* whether we show the edit menu button */
