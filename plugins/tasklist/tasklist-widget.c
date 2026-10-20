@@ -3448,9 +3448,9 @@ xfce_tasklist_button_proxy_menu_item (XfceTasklistChild *child,
   gtk_label_set_ellipsize (GTK_LABEL (label), tasklist->ellipsize_mode);
 
   if (xfw_window_is_active (child->window))
-    label_text = g_strdup_printf ("<b><i>%s</i></b>", gtk_label_get_text (GTK_LABEL (label)));
+    label_text = g_markup_printf_escaped ("<b><i>%s</i></b>", gtk_label_get_text (GTK_LABEL (label)));
   else if (xfw_window_is_urgent (child->window))
-    label_text = g_strdup_printf ("<b>%s</b>", gtk_label_get_text (GTK_LABEL (label)));
+    label_text = g_markup_printf_escaped ("<b>%s</b>", gtk_label_get_text (GTK_LABEL (label)));
 
   if (label_text != NULL)
     {
