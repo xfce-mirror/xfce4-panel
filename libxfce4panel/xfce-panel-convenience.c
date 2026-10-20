@@ -145,7 +145,8 @@ xfce_panel_get_channel_name (void)
 
 
 static GdkPixbuf *
-xfce_panel_pixbuf_from_source_at_size_and_scale (const gchar *source,
+xfce_panel_pixbuf_from_source_at_size_and_scale (GtkStyleContext *context,
+                                                 const gchar *source,
                                                  GtkIconTheme *icon_theme,
                                                  gint dest_width,
                                                  gint dest_height,
@@ -182,31 +183,38 @@ xfce_panel_pixbuf_from_source_at_size_and_scale (const gchar *source,
         icon_theme = gtk_icon_theme_get_default ();
 
       /* try to load from the icon theme */
-      pixbuf = gtk_icon_theme_load_icon_for_scale (icon_theme, source, size, scale, 0, NULL);
-      if (G_UNLIKELY (pixbuf == NULL))
+      GtkIconInfo *info = gtk_icon_theme_lookup_icon_for_scale (icon_theme, source, size, scale, 0);
+      if (info != NULL)
         {
-          /* try to lookup names like application.png in the theme */
-          p = strrchr (source, '.');
-          if (p != NULL)
-            {
-              name = g_strndup (source, p - source);
-              pixbuf = gtk_icon_theme_load_icon_for_scale (icon_theme, name, size, scale, 0, NULL);
-              g_free (name);
-            }
-
-          /* maybe they point to a file in the pixbufs folder */
+          pixbuf = context != NULL ? gtk_icon_info_load_symbolic_for_context (info, context, NULL, NULL)
+                                   : gtk_icon_info_load_icon (info, NULL);
           if (G_UNLIKELY (pixbuf == NULL))
             {
-              filename = g_build_filename ("pixmaps", source, NULL);
-              name = xfce_resource_lookup (XFCE_RESOURCE_DATA, filename);
-              g_free (filename);
-
-              if (name != NULL)
+              /* try to lookup names like application.png in the theme */
+              p = strrchr (source, '.');
+              if (p != NULL)
                 {
-                  pixbuf = gdk_pixbuf_new_from_file (name, NULL);
+                  name = g_strndup (source, p - source);
+                  pixbuf = gtk_icon_theme_load_icon_for_scale (icon_theme, name, size, scale, 0, NULL);
                   g_free (name);
                 }
+
+              /* maybe they point to a file in the pixbufs folder */
+              if (G_UNLIKELY (pixbuf == NULL))
+                {
+                  filename = g_build_filename ("pixmaps", source, NULL);
+                  name = xfce_resource_lookup (XFCE_RESOURCE_DATA, filename);
+                  g_free (filename);
+
+                  if (name != NULL)
+                    {
+                      pixbuf = gdk_pixbuf_new_from_file (name, NULL);
+                      g_free (name);
+                    }
+                }
             }
+
+          g_object_unref (info);
         }
     }
 
@@ -283,7 +291,7 @@ xfce_panel_pixbuf_from_source_at_size (const gchar *source,
                                        gint dest_width,
                                        gint dest_height)
 {
-  return xfce_panel_pixbuf_from_source_at_size_and_scale (source, icon_theme, dest_width, dest_height, 1);
+  return xfce_panel_pixbuf_from_source_at_size_and_scale (NULL, source, icon_theme, dest_width, dest_height, 1);
 }
 
 
@@ -338,7 +346,8 @@ xfce_panel_set_image_from_source (GtkImage *image,
 
   g_return_if_fail (GTK_IS_IMAGE (image));
 
-  pixbuf = xfce_panel_pixbuf_from_source_at_size_and_scale (source, icon_theme, size, size, scale);
+  pixbuf = xfce_panel_pixbuf_from_source_at_size_and_scale (gtk_widget_get_style_context (GTK_WIDGET (image)),
+                                                            source, icon_theme, size, size, scale);
   if (G_LIKELY (pixbuf != NULL))
     {
       cairo_surface_t *surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale, NULL);
