@@ -394,13 +394,15 @@ panel_plugin_external_wrapper_remote_event (PanelPluginExternal *external,
   *handle = ++handle_counter;
 
   if (value == NULL)
-    variant = g_variant_new_variant (g_variant_new_byte ('\0'));
+    variant = g_variant_ref_sink (g_variant_new_variant (g_variant_new_byte ('\0')));
   else
-    variant = panel_plugin_external_wrapper_gvalue_prop_to_gvariant (value);
-  if (variant == NULL)
     {
-      g_warning ("Failed to convert value from gvalue:%s to gvariant", G_VALUE_TYPE_NAME (value));
-      variant = g_variant_new_variant (g_variant_new_byte ('\0'));
+      variant = panel_plugin_external_wrapper_gvalue_prop_to_gvariant (value);
+      if (variant == NULL)
+        {
+          g_warning ("Failed to convert value from gvalue:%s to gvariant", G_VALUE_TYPE_NAME (value));
+          variant = g_variant_ref_sink (g_variant_new_variant (g_variant_new_byte ('\0')));
+        }
     }
 
   g_dbus_connection_emit_signal (priv->connection,
