@@ -42,6 +42,7 @@
 #define gtk_layer_is_supported() FALSE
 #endif
 
+#include <libxfce4session-client/libxfce4session-client.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4windowing/libxfce4windowing.h>
 
@@ -2189,6 +2190,12 @@ panel_window_unmap (GtkWidget *widget)
    */
   if (!window->do_not_restart_on_unmap)
     {
+      XfceSessionClient *sm_client = xfce_session_client_get ();
+      if (sm_client != NULL)
+        {
+          xfce_session_client_discard (sm_client);
+        }
+
       panel_dbus_service_exit_panel (TRUE);
     }
 
