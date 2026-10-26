@@ -356,6 +356,12 @@ panel_dbus_service_terminate (XfcePanelExportedService *skeleton,
 {
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
 
+  XfceSessionClient *sm_client = xfce_session_client_get ();
+  if (sm_client != NULL)
+    {
+      xfce_session_client_discard (sm_client);
+    }
+
   panel_dbus_service_exit_panel (restart);
 
   xfce_panel_exported_service_complete_terminate (skeleton,
@@ -466,12 +472,6 @@ panel_dbus_service_get (void)
 void
 panel_dbus_service_exit_panel (gboolean restart)
 {
-  XfceSessionClient *sm_client = xfce_session_client_get ();
-  if (sm_client != NULL)
-    {
-      xfce_session_client_discard (sm_client);
-    }
-
   dbus_exit_restart = !!restart;
 
   gtk_main_quit ();
