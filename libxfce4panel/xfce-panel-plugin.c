@@ -2537,6 +2537,7 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
   GdkRectangle geometry;
   gint x, y;
   GdkWindow *window;
+  gboolean is_horizontal;
 
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), GTK_ARROW_NONE);
   g_return_val_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin), GTK_ARROW_NONE);
@@ -2544,11 +2545,23 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
   /* get the plugin screen position */
   screen_position = xfce_panel_plugin_get_screen_position (plugin);
 
+  is_horizontal = xfce_screen_position_get_orientation (screen_position) == GTK_ORIENTATION_HORIZONTAL;
+
   /* detect the arrow type */
   if (xfce_screen_position_is_top (screen_position))
-    return GTK_ARROW_DOWN;
+    {
+      if (is_horizontal)
+        return GTK_ARROW_DOWN;
+      else
+        return xfce_screen_position_is_left (screen_position) ? GTK_ARROW_RIGHT : GTK_ARROW_LEFT;
+    }
   else if (xfce_screen_position_is_bottom (screen_position))
-    return GTK_ARROW_UP;
+    {
+      if (is_horizontal)
+        return GTK_ARROW_UP;
+      else
+        return xfce_screen_position_is_left (screen_position) ? GTK_ARROW_RIGHT : GTK_ARROW_LEFT;
+    }
   else if (xfce_screen_position_is_left (screen_position))
     return GTK_ARROW_RIGHT;
   else if (xfce_screen_position_is_right (screen_position))

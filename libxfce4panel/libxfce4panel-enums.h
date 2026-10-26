@@ -154,7 +154,8 @@ typedef enum /*<enum,prefix=XFCE_SCREEN_POSITION >*/
  * Returns: %TRUE if on the top of the screen, %FALSE otherwise
  **/
 #define xfce_screen_position_is_top(position) \
-  (position >= XFCE_SCREEN_POSITION_NW_H && position <= XFCE_SCREEN_POSITION_NE_H)
+  ((position >= XFCE_SCREEN_POSITION_NW_H && position <= XFCE_SCREEN_POSITION_NE_H) \
+   || (position == XFCE_SCREEN_POSITION_NW_V) || (position == XFCE_SCREEN_POSITION_NE_V))
 
 /**
  * xfce_screen_position_is_left:
@@ -166,7 +167,8 @@ typedef enum /*<enum,prefix=XFCE_SCREEN_POSITION >*/
  * Returns: %TRUE if on the left of the screen, %FALSE otherwise
  **/
 #define xfce_screen_position_is_left(position) \
-  (position >= XFCE_SCREEN_POSITION_NW_V && position <= XFCE_SCREEN_POSITION_SW_V)
+  ((position >= XFCE_SCREEN_POSITION_NW_V && position <= XFCE_SCREEN_POSITION_SW_V) \
+   || (position == XFCE_SCREEN_POSITION_NW_H) || (position == XFCE_SCREEN_POSITION_SW_H))
 
 /**
  * xfce_screen_position_is_right:
@@ -178,7 +180,8 @@ typedef enum /*<enum,prefix=XFCE_SCREEN_POSITION >*/
  * Returns: %TRUE if on the right of the screen, %FALSE otherwise
  **/
 #define xfce_screen_position_is_right(position) \
-  (position >= XFCE_SCREEN_POSITION_NE_V && position <= XFCE_SCREEN_POSITION_SE_V)
+  ((position >= XFCE_SCREEN_POSITION_NE_V && position <= XFCE_SCREEN_POSITION_SE_V) \
+   || (position == XFCE_SCREEN_POSITION_NE_H) || (position == XFCE_SCREEN_POSITION_SE_H))
 
 /**
  * xfce_screen_position_is_bottom:
@@ -190,7 +193,8 @@ typedef enum /*<enum,prefix=XFCE_SCREEN_POSITION >*/
  * Returns: %TRUE if on the bottom of the screen, %FALSE otherwise
  **/
 #define xfce_screen_position_is_bottom(position) \
-  (position >= XFCE_SCREEN_POSITION_SW_H && position <= XFCE_SCREEN_POSITION_SE_H)
+  ((position >= XFCE_SCREEN_POSITION_SW_H && position <= XFCE_SCREEN_POSITION_SE_H) \
+   || (position == XFCE_SCREEN_POSITION_SW_V) || (position == XFCE_SCREEN_POSITION_SE_V))
 
 G_END_DECLS
 
