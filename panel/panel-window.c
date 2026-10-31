@@ -397,6 +397,7 @@ struct _PanelWindow
   gchar *output_name;
 #ifdef HAVE_GTK_LAYER_SHELL
   guint show_id;
+  guint screen_layout_changed_id;
   guint set_anchor_default_id;
   gboolean in_screen_layout_changed;
   gulong set_anchor_id;
@@ -1060,6 +1061,8 @@ panel_window_finalize (GObject *object)
 #ifdef HAVE_GTK_LAYER_SHELL
   if (G_UNLIKELY (window->show_id != 0))
     g_source_remove (window->show_id);
+  if (G_UNLIKELY (window->screen_layout_changed_id != 0))
+    g_source_remove (window->screen_layout_changed_id);
   if (window->set_anchor_default_id != 0)
     g_source_remove (window->set_anchor_default_id);
 #endif
@@ -2703,12 +2706,22 @@ panel_window_display_layout_debug (PanelWindow *window)
 
 #ifdef HAVE_GTK_LAYER_SHELL
 static gboolean
+panel_window_screen_layout_changed_idle (gpointer data)
+{
+  PanelWindow *window = data;
+  window->screen_layout_changed_id = 0;
+  panel_window_screen_layout_changed (window->xfw_screen, window);
+  return FALSE;
+}
+
+
+
+static gboolean
 panel_window_show (gpointer data)
 {
   PanelWindow *window = data;
 
-  /* showing the panel here should not trigger _screen_layout_changed(), but it does when
-   * things go wrong, so let's at least minimize the damage also in this case */
+  /* mapping can dispatch updated output geometry; defer layout updates until it finishes */
   window->in_screen_layout_changed = TRUE;
 
   /*
@@ -2757,14 +2770,17 @@ panel_window_screen_layout_changed (XfwScreen *screen,
   if (gtk_layer_is_supported ())
     {
       if (window->in_screen_layout_changed)
-        return;
+        {
+          /* mapping can dispatch updated output geometry; apply it after the remap */
+          if (window->screen_layout_changed_id == 0)
+            window->screen_layout_changed_id =
+              g_idle_add (panel_window_screen_layout_changed_idle, window);
+          return;
+        }
       window->in_screen_layout_changed = TRUE;
 
-      if (G_UNLIKELY (window->show_id != 0))
-        {
-          g_source_remove (window->show_id);
-          window->show_id = 0;
-        }
+      g_clear_handle_id (&window->screen_layout_changed_id, g_source_remove);
+      g_clear_handle_id (&window->show_id, g_source_remove);
     }
 #endif
 
