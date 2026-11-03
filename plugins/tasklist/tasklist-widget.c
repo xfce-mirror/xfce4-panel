@@ -1217,8 +1217,10 @@ xfce_tasklist_size_allocate (GtkWidget *widget,
   if (!xfce_tasklist_horizontal (tasklist))
     TRANSPOSE_AREA (area);
 
-  /* panel size has not been sent yet */
-  if (area.height != tasklist->size)
+  /* The panel size is normally received before the first allocation, but a
+   * theme can change the plugin's geometry (for example a border around its
+   * box). Returning here in that case leaves every button at 1x1px. */
+  if (tasklist->size == 0)
     return;
 
   /* TODO if we compare the allocation with the requisition we can
