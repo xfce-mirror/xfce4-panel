@@ -121,26 +121,16 @@ if helper_path_prefix == ''
   helper_path_prefix = get_option('prefix') / get_option('libdir')
 endif
 
-need_libintl = false
-has_bind_textdomain_codeset = cc.has_function('bind_textdomain_codeset')
-if not has_bind_textdomain_codeset
+if cc.has_function('bind_textdomain_codeset')
+  feature_cflags += '-DHAVE_BIND_TEXTDOMAIN_CODESET=1'
+  libintl = dependency('', required: false)
+else
   libintl = cc.find_library('intl', required: false)
-  if libintl.found()
-    has_bind_textdomain_codeset = cc.has_function(
-      'bind_textdomain_codeset',
-      dependencies: [
-        libintl, 
-      ],
-    )
-    if has_bind_textdomain_codeset
-      need_libintl = true 
-    endif
+  if libintl.found() and cc.has_function('bind_textdomain_codeset', dependencies: libintl)
+    feature_cflags += '-DHAVE_BIND_TEXTDOMAIN_CODESET=1'
   endif
 endif
-if has_bind_textdomain_codeset
-  feature_cflags += '-DHAVE_BIND_TEXTDOMAIN_CODESET=1'
-endif
-  
+
 headers = [
   'sys/prctl.h',
   'sys/wait.h',
