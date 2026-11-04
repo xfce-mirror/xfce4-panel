@@ -103,14 +103,12 @@ libpanel_deps = [
   glib,
   gmodule,
   gtk,
+  libintl,
   libxfce4ui,
   libxfce4util,
   libm,
   gtk_layer_shell,
 ]
-if need_libintl
-  libpanel_deps += libintl
-endif
 
 libpanel_so_version = '4'
 libpanel_version = '@0@.0.0'.format(libpanel_so_version)
