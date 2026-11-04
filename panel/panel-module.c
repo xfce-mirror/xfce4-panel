@@ -333,7 +333,10 @@ panel_module_new_from_desktop_file (const gchar *filename,
   module_name = xfce_rc_read_entry_untranslated (rc, "X-XFCE-Module", NULL);
   if (G_LIKELY (module_name != NULL))
     {
+      G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+      /* this function works fine for us, and we need this path afterwards */
       path = g_module_build_path (libdir, module_name);
+      G_GNUC_END_IGNORE_DEPRECATIONS
       found = g_file_test (path, G_FILE_TEST_EXISTS);
 
       if (G_LIKELY (found))
