@@ -215,8 +215,7 @@ wrapper_plug_x11_set_background_image (WrapperPlug *plug,
   WrapperPlugX11 *xplug = WRAPPER_PLUG_X11 (plug);
   GdkRectangle geom = { 0 };
 
-  g_free (xplug->image);
-  xplug->image = g_strdup (image);
+  g_set_str (&xplug->image, image);
 
   /*
    * Normally, socket geometry should always be retrieved in this way (or better still via
