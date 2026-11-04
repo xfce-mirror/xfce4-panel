@@ -307,18 +307,18 @@ directory_menu_plugin_set_property (GObject *object,
   gchar **array;
   guint i;
   gint size;
-  const gchar *path;
+  const gchar *str;
 
   switch (prop_id)
     {
     case PROP_BASE_DIRECTORY:
-      path = g_value_get_string (value);
+      str = g_value_get_string (value);
       if (xfce_str_is_empty (path))
-        path = g_get_home_dir ();
+        str = g_get_home_dir ();
 
       if (plugin->base_directory != NULL)
         g_object_unref (G_OBJECT (plugin->base_directory));
-      plugin->base_directory = g_file_new_for_commandline_arg (path);
+      plugin->base_directory = g_file_new_for_commandline_arg (str);
 
       display_name = g_file_get_parse_name (plugin->base_directory);
       gtk_widget_set_tooltip_text (plugin->button, display_name);
@@ -329,9 +329,8 @@ directory_menu_plugin_set_property (GObject *object,
       break;
 
     case PROP_ICON_NAME:
-      g_free (plugin->icon_name);
-      plugin->icon_name = xfce_str_is_empty (g_value_get_string (value)) ? g_strdup (DEFAULT_ICON_NAME)
-                                                                         : g_value_dup_string (value);
+      str = g_value_get_string (value);
+      g_set_str (&plugin->icon_name, xfce_str_is_empty (str) ? DEFAULT_ICON_NAME : str);
       size = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
       directory_menu_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin), size);
       break;

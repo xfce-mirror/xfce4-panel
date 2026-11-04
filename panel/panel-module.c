@@ -200,8 +200,7 @@ panel_module_load (GTypeModule *type_module)
 
       /* from now on, run this plugin in a wrapper */
       module->mode = PANEL_MODULE_RUN_MODE_EXTERNAL;
-      g_free (module->api);
-      module->api = g_strdup (LIBXFCE4PANEL_VERSION_API);
+      g_set_str (&module->api, LIBXFCE4PANEL_VERSION_API);
 
       return FALSE;
     }
@@ -352,8 +351,7 @@ panel_module_new_from_desktop_file (const gchar *filename,
                   || (gtk_layer_is_supported () && forced_mode == PANEL_MODULE_RUN_MODE_EXTERNAL)))
             {
               module->mode = PANEL_MODULE_RUN_MODE_EXTERNAL;
-              g_free (module->api);
-              module->api = g_strdup (xfce_rc_read_entry (rc, "X-XFCE-API", LIBXFCE4PANEL_VERSION_API));
+              g_set_str (&module->api, xfce_rc_read_entry (rc, "X-XFCE-API", LIBXFCE4PANEL_VERSION_API));
             }
           else
             module->mode = PANEL_MODULE_RUN_MODE_INTERNAL;

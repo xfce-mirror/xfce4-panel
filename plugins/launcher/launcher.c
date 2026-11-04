@@ -1827,8 +1827,7 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
               gint scale_factor;
 
               /* remember the icon name for recreating the pixbuf when panel size changes */
-              g_free (plugin->icon_name);
-              plugin->icon_name = g_strdup (icon_name);
+              g_set_str (&plugin->icon_name, icon_name);
               scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (plugin));
               pixbuf = gdk_pixbuf_new_from_file_at_size (icon_name,
                                                          icon_size * scale_factor,

@@ -380,11 +380,11 @@ applications_menu_plugin_set_property (GObject *object,
       break;
 
     case PROP_BUTTON_ICON:
-      g_free (plugin->button_icon);
-      plugin->button_icon = xfce_str_is_empty (g_value_get_string (value)) ? g_strdup (DEFAULT_ICON_NAME)
-                                                                           : g_value_dup_string (value);
-
-      force_a_resize = TRUE;
+      {
+        const gchar *str = g_value_get_string (value);
+        g_set_str (&plugin->icon_name, xfce_str_is_empty (str) ? DEFAULT_ICON_NAME : str);
+        force_a_resize = TRUE;
+      }
       break;
 
     case PROP_CUSTOM_MENU:
