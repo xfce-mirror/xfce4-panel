@@ -19,23 +19,23 @@ gnome = import('gnome')
 i18n = import('i18n')
 
 dependency_versions = {
-  'cairo': '>= 1.16.0',
-  'glib': '>= 2.74.0',
-  'gtk': '>= 3.24.0',
-  'xfce4': '>= 4.18.0',
+  'cairo': '>= 1.18.0',
+  'glib': '>= 2.80.0',
+  'gtk': '>= 3.24.41',
+  'xfce4': '>= 4.20.0',
   'libxfce4ui': '>= 4.21.8',
   'libxfce4windowing': '>= 4.20.6',
   'libxfce4session-client': '>= 4.21.2',
 
-  'libwnck': '>= 3.0',
-  'libx11': '>= 1.6.7',
-  'libxext': '>= 1.0.0',
+  'libwnck': '>= 43.0',
+  'libx11': '>= 1.8.7',
+  'libxext': '>= 1.3.4',
 
-  'gtk-layer-shell': '>= 0.7.0',
-  'wayland': '>= 1.20',
+  'gtk-layer-shell': '>= 0.8.2',
+  'wayland': '>= 1.22',
 
-  'gir': '>= 1.72.0',
-  'dbusmenu': '>= 16.04.0',
+  'gir': '>= 1.80.1',
+  'dbusmenu': '>= 18.10.0',
 }
 
 cairo = dependency('cairo', version: dependency_versions['cairo'])
