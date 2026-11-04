@@ -102,7 +102,7 @@ migrate_default_property_path (ConfigParser *parser)
       g_string_append (path, (const gchar *) li->data);
     }
 
-  return g_string_free (path, FALSE);
+  return g_string_free_and_steal (path);
 }
 
 
