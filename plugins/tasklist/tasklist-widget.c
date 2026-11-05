@@ -1218,7 +1218,7 @@ xfce_tasklist_size_allocate (GtkWidget *widget,
     TRANSPOSE_AREA (area);
 
   /* panel size has not been sent yet */
-  if (area.height != tasklist->size)
+  if (tasklist->size == 0)
     return;
 
   /* TODO if we compare the allocation with the requisition we can
