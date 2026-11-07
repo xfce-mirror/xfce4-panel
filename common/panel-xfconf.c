@@ -115,7 +115,7 @@ panel_properties_bind (XfconfChannel *channel,
       if (G_LIKELY (prop->type != GDK_TYPE_RGBA))
         xfconf_g_property_bind (channel, property, prop->type, object, prop->property);
       else
-        xfconf_g_property_bind_gdkrgba (channel, property, object, prop->property);
+        xfconf_g_property_bind (channel, property, G_TYPE_PTR_ARRAY, object, prop->property);
 
       g_free (property);
     }
