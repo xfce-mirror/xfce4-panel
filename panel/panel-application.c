@@ -511,7 +511,7 @@ panel_application_load_real (PanelApplication *application)
                     {
                       save_changed_ids = FALSE;
                       j = array->len;
-                      gtk_main_quit ();
+                      panel_dbus_service_exit_panel (FALSE);
                     }
                 }
 
@@ -1684,7 +1684,7 @@ panel_application_remove_window (PanelApplication *application,
   /* quit if there are no windows */
   /* TODO, allow removing all windows and ask user what to do */
   if (application->windows == NULL)
-    gtk_main_quit ();
+    panel_dbus_service_exit_panel (FALSE);
 }
 
 

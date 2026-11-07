@@ -125,7 +125,10 @@ panel_signal_handler (gint signum)
                g_strsignal (signum), signum,
                signum == SIGUSR1 ? "restarting" : "quitting");
 
-  panel_dbus_service_exit_panel (signum == SIGUSR1);
+  if (signum == SIGUSR1)
+    panel_dbus_service_exit_panel (TRUE);
+  else
+    gtk_main_quit ();
 }
 
 
