@@ -125,18 +125,7 @@ panel_signal_handler (gint signum)
                g_strsignal (signum), signum,
                signum == SIGUSR1 ? "restarting" : "quitting");
 
-  gboolean restart = signum == SIGUSR1;
-
-  if (restart)
-    {
-      XfceSessionClient *sm_client = xfce_session_client_get ();
-      if (sm_client != NULL)
-        {
-          xfce_session_client_discard (sm_client);
-        }
-    }
-
-  panel_dbus_service_exit_panel (restart);
+  panel_dbus_service_exit_panel (signum == SIGUSR1);
 }
 
 
