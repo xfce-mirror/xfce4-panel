@@ -57,6 +57,10 @@ xfce_panel_set_image_from_source (GtkImage *image,
                                   gint size,
                                   gint scale);
 
+void
+xfce_panel_gtk_show_about_dialog (const gchar *first_property_name,
+                                  ...);
+
 G_END_DECLS
 
 #endif /* !__XFCE_PANEL_CONVENIENCE_H__ */

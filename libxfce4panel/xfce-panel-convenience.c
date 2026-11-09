@@ -359,5 +359,32 @@ xfce_panel_set_image_from_source (GtkImage *image,
 
 
 
+/**
+ * xfce_panel_gtk_show_about_dialog:
+ * @first_property_name: the name of the first property
+ * @...: value of first property, followed by more properties, %NULL-terminated
+ *
+ * This is an adaptation of gtk_show_about_dialog() where the dialog is destroyed
+ * instead of being hidden when it is closed, so that if plugins are running
+ * in-process (flagged as "internal"), they display their own about dialog instead
+ * of all sharing the same one.
+ *
+ * Since: 4.21.4
+ */
+void
+xfce_panel_gtk_show_about_dialog (const gchar *first_property_name,
+                                  ...)
+{
+  GtkWidget *dialog = gtk_about_dialog_new ();
+  g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+
+  va_list var_args;
+  va_start (var_args, first_property_name);
+  g_object_set_valist (G_OBJECT (dialog), first_property_name, var_args);
+  va_end (var_args);
+
+  gtk_window_present (GTK_WINDOW (dialog));
+}
+
 #define __XFCE_PANEL_CONVENIENCE_C__
 #include "libxfce4panel-visibility.c"
