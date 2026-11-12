@@ -1,6 +1,8 @@
 plugin_sources = [
   'clock.c',
   'clock.h',
+  'clock-jalali-calendar.c',
+  'clock-jalali-calendar.h',
   'clock-time.c',
   'clock-time.h',
   'clock-analog.c',

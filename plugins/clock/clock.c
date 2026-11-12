@@ -21,6 +21,7 @@
 #include "clock-binary.h"
 #include "clock-digital.h"
 #include "clock-fuzzy.h"
+#include "clock-jalali-calendar.h"
 #include "clock-lcd.h"
 #include "clock-sleep-monitor.h"
 #include "clock-time.h"
@@ -122,6 +123,7 @@ enum
   PROP_TOOLTIP_FORMAT,
   PROP_COMMAND,
   PROP_SHOW_WEEK_NUMBERS,
+  PROP_USE_JALALI_CALENDAR,
   PROP_ROTATE_VERTICALLY,
   PROP_TIME_CONFIG_TOOL
 };
@@ -153,6 +155,7 @@ struct _ClockPlugin
   GObject *settings_dialog;
   gchar *command;
   guint show_week_numbers : 1;
+  guint use_jalali_calendar : 1;
   ClockPluginMode mode;
   guint rotate_vertically : 1;
 
@@ -282,6 +285,13 @@ clock_plugin_class_init (ClockPluginClass *klass)
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_USE_JALALI_CALENDAR,
+                                   g_param_spec_boolean ("use-jalali-calendar",
+                                                         NULL, NULL,
+                                                         FALSE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_TIME_CONFIG_TOOL,
                                    g_param_spec_string ("time-config-tool",
                                                         NULL, NULL,
@@ -300,6 +310,7 @@ clock_plugin_init (ClockPlugin *plugin)
   plugin->tooltip_timeout = NULL;
   plugin->command = g_strdup ("");
   plugin->show_week_numbers = TRUE;
+  plugin->use_jalali_calendar = FALSE;
   plugin->time_config_tool = g_strdup (DEFAULT_TIME_CONFIG_TOOL);
   plugin->rotate_vertically = TRUE;
   plugin->time = clock_time_new ();
@@ -358,6 +369,10 @@ clock_plugin_get_property (GObject *object,
       g_value_set_boolean (value, plugin->show_week_numbers);
       break;
 
+    case PROP_USE_JALALI_CALENDAR:
+      g_value_set_boolean (value, plugin->use_jalali_calendar);
+      break;
+
     case PROP_TIME_CONFIG_TOOL:
       g_value_set_string (value, plugin->time_config_tool);
       break;
@@ -413,6 +428,13 @@ clock_plugin_set_property (GObject *object,
       plugin->show_week_numbers = g_value_get_boolean (value);
       if (plugin->calendar_window != NULL)
         clock_plugin_set_calendar_options (plugin);
+      break;
+
+    case PROP_USE_JALALI_CALENDAR:
+      plugin->use_jalali_calendar = g_value_get_boolean (value);
+      if (plugin->calendar != NULL)
+        gtk_stack_set_visible_child_name (GTK_STACK (plugin->calendar),
+                                          plugin->use_jalali_calendar ? "jalali" : "gregorian");
       break;
 
     case PROP_TIME_CONFIG_TOOL:
@@ -530,6 +552,7 @@ clock_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "tooltip-format", G_TYPE_STRING },
     { "command", G_TYPE_STRING },
     { "show-week-numbers", G_TYPE_BOOLEAN },
+    { "use-jalali-calendar", G_TYPE_BOOLEAN },
     { "rotate-vertically", G_TYPE_BOOLEAN },
     { "time-config-tool", G_TYPE_STRING },
     { NULL }
@@ -1229,6 +1252,11 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                           G_OBJECT (object), "active",
                           G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
 
+  object = gtk_builder_get_object (builder, "use-jalali-calendar");
+  g_object_bind_property (G_OBJECT (plugin), "use-jalali-calendar",
+                          G_OBJECT (object), "active",
+                          G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
+
   object = gtk_builder_get_object (builder, "digital-layout");
   g_signal_connect (G_OBJECT (object), "changed",
                     G_CALLBACK (clock_plugin_digital_layout_changed), dialog);
@@ -1361,13 +1389,19 @@ clock_plugin_calendar_show (GtkWidget *calendar_window,
                             ClockPlugin *plugin)
 {
   GDateTime *time;
+  GtkWidget *gregorian_calendar;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
 
   time = clock_time_get_time (plugin->time);
-  gtk_calendar_select_month (GTK_CALENDAR (plugin->calendar), g_date_time_get_month (time) - 1,
+  gtk_stack_set_visible_child_name (GTK_STACK (plugin->calendar),
+                                    plugin->use_jalali_calendar ? "jalali" : "gregorian");
+  gregorian_calendar = gtk_stack_get_child_by_name (GTK_STACK (plugin->calendar), "gregorian");
+  gtk_calendar_select_month (GTK_CALENDAR (gregorian_calendar), g_date_time_get_month (time) - 1,
                              g_date_time_get_year (time));
-  gtk_calendar_select_day (GTK_CALENDAR (plugin->calendar), g_date_time_get_day_of_month (time));
+  gtk_calendar_select_day (GTK_CALENDAR (gregorian_calendar), g_date_time_get_day_of_month (time));
+  clock_jalali_calendar_set_date (
+    gtk_stack_get_child_by_name (GTK_STACK (plugin->calendar), "jalali"), time);
   g_date_time_unref (time);
 }
 
@@ -1384,10 +1418,12 @@ clock_plugin_popup_calendar (ClockPlugin *plugin)
       g_signal_connect (G_OBJECT (plugin->calendar_window), "hide",
                         G_CALLBACK (clock_plugin_calendar_hide), plugin);
 
-      plugin->calendar = gtk_calendar_new ();
+      plugin->calendar = gtk_stack_new ();
+      gtk_stack_add_named (GTK_STACK (plugin->calendar), gtk_calendar_new (), "gregorian");
+      gtk_stack_add_named (GTK_STACK (plugin->calendar), clock_jalali_calendar_new (), "jalali");
       clock_plugin_set_calendar_options (plugin);
       gtk_container_add (GTK_CONTAINER (plugin->calendar_window), plugin->calendar);
-      gtk_widget_show (plugin->calendar);
+      gtk_widget_show_all (plugin->calendar);
     }
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button), TRUE);
@@ -1421,8 +1457,17 @@ static void
 clock_plugin_set_calendar_options (ClockPlugin *plugin)
 {
   GtkCalendarDisplayOptions options = GTK_CALENDAR_SHOW_HEADING | GTK_CALENDAR_SHOW_DAY_NAMES;
+  GtkWidget *gregorian_calendar;
+  GtkWidget *jalali_calendar;
+
+  if (!GTK_IS_STACK (plugin->calendar))
+    return;
+
   if (plugin->show_week_numbers)
     options |= GTK_CALENDAR_SHOW_WEEK_NUMBERS;
 
-  gtk_calendar_set_display_options (GTK_CALENDAR (plugin->calendar), options);
+  gregorian_calendar = gtk_stack_get_child_by_name (GTK_STACK (plugin->calendar), "gregorian");
+  jalali_calendar = gtk_stack_get_child_by_name (GTK_STACK (plugin->calendar), "jalali");
+  gtk_calendar_set_display_options (GTK_CALENDAR (gregorian_calendar), options);
+  clock_jalali_calendar_set_show_week_numbers (jalali_calendar, plugin->show_week_numbers);
 }
