@@ -6,7 +6,9 @@
  * Software Foundation; either version 2 of the License, or (at your option)
  * any later version.
  */
+#include "config.h"
 
+#include <glib/gi18n-lib.h>
 #include "clock-jalali-calendar.h"
 
 #include "common/panel-private.h"
