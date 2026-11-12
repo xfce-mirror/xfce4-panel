@@ -7,10 +7,11 @@
  * any later version.
  */
 
-#include <glib/gi18n-lib.h>
 #include "clock-jalali-calendar.h"
 
 #include "common/panel-private.h"
+
+#include <glib/gi18n-lib.h>
 
 /*
  * The calendar conversion routines are adapted from jalaali-js, which
@@ -52,9 +53,12 @@ typedef struct
   gboolean show_week_numbers;
 } ClockJalaliCalendar;
 
-static void clock_jalali_calendar_previous (GtkButton *button, gpointer user_data);
-static void clock_jalali_calendar_next (GtkButton *button, gpointer user_data);
-static void clock_jalali_calendar_day_clicked (GtkButton *button, gpointer user_data);
+static void
+clock_jalali_calendar_previous (GtkButton *button, gpointer user_data);
+static void
+clock_jalali_calendar_next (GtkButton *button, gpointer user_data);
+static void
+clock_jalali_calendar_day_clicked (GtkButton *button, gpointer user_data);
 
 static const gchar *month_names[] = {
   N_ ("Farvardin"), N_ ("Ordibehesht"), N_ ("Khordad"),
@@ -80,7 +84,7 @@ static const gchar *weekday_names_fa[] = {
 static gboolean
 calendar_uses_persian_labels (void)
 {
-  const gchar * const *languages = g_get_language_names ();
+  const gchar *const *languages = g_get_language_names ();
   return languages[0] != NULL && g_str_has_prefix (languages[0], "fa");
 }
 
@@ -209,7 +213,7 @@ static gchar *
 calendar_number (gint number)
 {
   gchar *ascii = g_strdup_printf ("%d", number);
-  const gchar * const *languages = g_get_language_names ();
+  const gchar *const *languages = g_get_language_names ();
   GString *localized;
   const gchar *p;
 
@@ -330,8 +334,8 @@ calendar_render (ClockJalaliCalendar *calendar)
   rows = (first_weekday + days + 6) / 7;
   new_year_weekday = weekday_for_jalali_date (calendar->year, 1, 1);
   first_day_of_year = calendar->month <= 6
-                      ? (calendar->month - 1) * 31 + 1
-                      : 186 + (calendar->month - 7) * 30 + 1;
+                        ? (calendar->month - 1) * 31 + 1
+                        : 186 + (calendar->month - 7) * 30 + 1;
 
   if (calendar->show_week_numbers)
     for (row = 0; row < rows; row++)
@@ -356,8 +360,8 @@ calendar_render (ClockJalaliCalendar *calendar)
       gtk_widget_set_size_request (button, 34, 30);
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button),
                                     calendar->year == calendar->selected_year
-                                    && calendar->month == calendar->selected_month
-                                    && day == calendar->selected_day);
+                                      && calendar->month == calendar->selected_month
+                                      && day == calendar->selected_day);
       if (calendar->year == calendar->today_year
           && calendar->month == calendar->today_month
           && day == calendar->today_day)
@@ -409,7 +413,7 @@ clock_jalali_calendar_next (GtkButton *button,
 
 static void
 clock_jalali_calendar_day_clicked (GtkButton *button,
-                                  gpointer user_data)
+                                   gpointer user_data)
 {
   ClockJalaliCalendar *calendar = g_object_get_data (G_OBJECT (button), "calendar-data");
   if (calendar == NULL)
