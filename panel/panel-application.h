@@ -72,6 +72,10 @@ panel_application_new_window (PanelApplication *application,
                               gint id,
                               gboolean new_window);
 
+PanelWindow *
+panel_application_duplicate_window (PanelApplication *application,
+                                    PanelWindow *source_window);
+
 void
 panel_application_remove_window (PanelApplication *application,
                                  PanelWindow *window);
