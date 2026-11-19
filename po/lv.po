@@ -1,1965 +1,2351 @@
-# translation of lv.po to Latvian
-# Latvian translations for xfce4-panel package.
-# Copyright (C) 2002-2007 The Xfce development team.
-# This file is distributed under the same license as the xfce4-pane package.
-#
-# Rihards Prieditis <rprieditis@inbox.lv>, 2007.
-# Rihards Prieditis <RPrieditis@gmail.com>, 2008.
-# Rihards Prieditis <rprieditis@gmail.com>, 2009.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce4-panel.xfce-4-20 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Gatis Kalniņš <>, 2025
+# Xfce Bot <transifex@xfce.org>, 2025
+# Nick Schermer <nick@xfce.org>, 2025
+# Rihards Priedītis <rprieditis@gmail.com>, 2026
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.7.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-16 21:39+0100\n"
-"PO-Revision-Date: 2009-10-16 14:32+0100\n"
-"Last-Translator: Rihards Prieditis <rprieditis@gmail.com>\n"
-"Language-Team: Latvian <translation-team-lv@lists.sourceforge.net>\n"
-"Language: lv\n"
+"Project-Id-Version: xfce4-panel.xfce-4-20\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2025-02-14 12:47+0100\n"
+"PO-Revision-Date: 2025-02-14 11:29+0000\n"
+"Last-Translator: Rihards Priedītis <rprieditis@gmail.com>, 2026\n"
+"Language-Team: Latvian (https://app.transifex.com/xfce/teams/16840/lv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
-"2);\n"
-"X-Poedit-Language: Latvian\n"
-"X-Poedit-Country: Latvia\n"
+"Language: lv\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
 
-#: ../panel-desktop-handler.desktop.in.h:1
-#, fuzzy
+#: panel-desktop-handler.desktop.in:4
 msgid "Create Launcher on the panel"
-msgstr "Par Xfce paneli"
+msgstr "Izveidot palaidēju panelī"
 
-#: ../panel-desktop-handler.desktop.in.h:2
+#: panel-desktop-handler.desktop.in:5
 msgid ""
-"Add a new launcher to the panel based on the information of this desktop file"
+"Add a new launcher to the panel based on the information of this desktop "
+"file"
 msgstr ""
+"Pievienot panelim jaunu palaidēju, izmantojot šī .desktop faila informāciju"
 
-#: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:7 ../panel/panel-window.c:2353
-#: ../migrate/main.c:117
-#, fuzzy
+#: panel-preferences.desktop.in:8
+msgid ""
+"panels;settings;preferences;taskbar;autohide;application "
+"menu;start;buttons;launcher;notification area;status;icons;plugins;"
+msgstr ""
+"paneļi;iestatījumi;uzdevumjosla;automātiska paslēpšana;lietotņu "
+"izvēlne;starts;pogas;palaidējs;paziņojumu "
+"lauks;statuss;ikonas;spraudņi;panels;settings;preferences;taskbar;autohide;application"
+" menu;start;buttons;launcher;notification area;status;icons;plugins;"
+
+#: panel-preferences.desktop.in:15 panel/panel-window.c:3710
 msgid "Panel"
-msgstr "Panelis %d"
+msgstr "Panelis"
 
-#: ../panel-preferences.desktop.in.h:2
-#, fuzzy
+#: panel-preferences.desktop.in:16
 msgid "Customize the panel"
-msgstr "Par Xfce paneli"
+msgstr "Pielāgot paneli"
 
-#. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1032
-#: ../panel/panel-preferences-dialog.c:1123
-#, fuzzy, c-format
+#: libxfce4panel/xfce-panel-plugin.c:1113
+#: panel/panel-preferences-dialog.c:1549
+msgid "Remove"
+msgstr "Noņemt"
+
+#: libxfce4panel/xfce-panel-plugin.c:1114
+msgid ""
+"Removing the item from the panel also means its configuration will be lost."
+msgstr "Noņemot vienumu no paneļa, tiks zaudēta arī tā konfigurācija."
+
+#: libxfce4panel/xfce-panel-plugin.c:1118
+#: panel/panel-preferences-dialog.c:1556
+#, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "Esat drošs, ka vēlaties noņemt darbavietu '%s'?"
+msgstr "Vai tiešām vēlaties noņemt „%s”?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1126
-msgid "If you remove the item from the panel, it is permanently lost."
-msgstr ""
+#. properties item
+#: libxfce4panel/xfce-panel-plugin.c:1240
+msgid "_Properties"
+msgstr "Īpašī_bas"
+
+#. about item
+#: libxfce4panel/xfce-panel-plugin.c:1251 panel/panel-window.c:3785
+msgid "_About"
+msgstr "_Par"
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1197
-#, fuzzy
+#: libxfce4panel/xfce-panel-plugin.c:1262
 msgid "_Move"
-msgstr "Pārvietot"
+msgstr "_Pārvietot"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1231
-#, fuzzy
+#. remove
+#: libxfce4panel/xfce-panel-plugin.c:1278 panel/panel-application.c:357
+#: panel/panel-plugin-external.c:424 panel/panel-preferences-dialog.c:1089
+#: panel/panel-preferences-dialog.glade:1240
+#: plugins/launcher/launcher-dialog.c:841
+msgid "_Remove"
+msgstr "_Noņemt"
+
+#: libxfce4panel/xfce-panel-plugin.c:1296
 msgid "Pane_l"
-msgstr "Panelis %d"
+msgstr "Pane_lis"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2365
-#, fuzzy
+#: libxfce4panel/xfce-panel-plugin.c:1304 panel/panel-window.c:3722
 msgid "Add _New Items..."
-msgstr "Pievienot jaunus vienumus..."
+msgstr "Pievienot _jaunus vienumus..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2376
+#: libxfce4panel/xfce-panel-plugin.c:1315 panel/panel-window.c:3733
 msgid "Panel Pr_eferences..."
-msgstr ""
+msgstr "Paneļa ie_statījumi..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2404
+#: libxfce4panel/xfce-panel-plugin.c:1332 panel/panel-window.c:3760
 msgid "Log _Out"
-msgstr ""
+msgstr "_Atteikties"
 
-#: ../panel/main.c:80
-#, fuzzy
+#. help item
+#: libxfce4panel/xfce-panel-plugin.c:1348 panel/panel-item-dialog.c:207
+#: panel/panel-preferences-dialog.glade:178 panel/panel-window.c:3776
+#: plugins/actions/actions-dialog.glade:97
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:39
+#: plugins/clock/clock-dialog.glade:120
+#: plugins/directorymenu/directorymenu-dialog.glade:49
+#: plugins/launcher/launcher-dialog.glade:398
+#: plugins/pager/pager-dialog.glade:81
+#: plugins/separator/separator-dialog.glade:69
+#: plugins/showdesktop/showdesktop-dialog.glade:49
+#: plugins/tasklist/tasklist-dialog.glade:93
+#: plugins/windowmenu/windowmenu-dialog.glade:63
+msgid "_Help"
+msgstr "_Palīdzība"
+
+#. about item
+#: libxfce4panel/xfce-panel-plugin.c:1359
+msgid "About"
+msgstr "Par"
+
+#: panel/main.c:69
 msgid "Show the 'Panel Preferences' dialog"
-msgstr "Rādīt \"Pielāgot paneli\" dialogu"
+msgstr "Parādīt dialoglodziņu „Paneļa iestatījumi”"
 
-#: ../panel/main.c:80 ../panel/main.c:81
+#: panel/main.c:69 panel/main.c:70
 msgid "PANEL-NUMBER"
-msgstr ""
+msgstr "PANEL-NUMBER"
 
-#: ../panel/main.c:81
-#, fuzzy
+#: panel/main.c:70
 msgid "Show the 'Add New Items' dialog"
-msgstr "Rādīt \"Pievienot jaunus vienumus\" dialogu"
+msgstr "Parādīt dialoglodziņu „Pievienot jaunus vienumus”"
 
-#: ../panel/main.c:82
+#: panel/main.c:71
 msgid "Save the panel configuration"
 msgstr "Saglabāt paneļa konfigurāciju"
 
-#: ../panel/main.c:83
-#, fuzzy
+#: panel/main.c:72
 msgid "Add a new plugin to the panel"
-msgstr "Pievienot jaunu paneli"
+msgstr "Pievienot panelim jaunu spraudni"
 
-#: ../panel/main.c:83
+#: panel/main.c:72
 msgid "PLUGIN-NAME"
-msgstr ""
+msgstr "PLUGIN-NAME"
 
-#: ../panel/main.c:84
-#, fuzzy
+#: panel/main.c:73
 msgid "Restart the running panel instance"
-msgstr "Atiestata skrejošo xfce4-panel instanci"
+msgstr "Pārstartēt darbojošos paneļa instanci"
 
-#: ../panel/main.c:85
+#: panel/main.c:74
 msgid "Quit the running panel instance"
-msgstr ""
+msgstr "Beigt darbojošās paneļa instances darbu"
 
-#: ../panel/main.c:86
+#: panel/main.c:75
 msgid "Do not wait for a window manager on startup"
-msgstr ""
+msgstr "Startējot negaidīt logu pārvaldnieku"
 
-#: ../panel/main.c:87
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
+#: panel/main.c:76 plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:33
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "Izdrukāt versijas informāciju un iziet"
 
 #. parse context options
-#: ../panel/main.c:236
+#: panel/main.c:261
 msgid "[ARGUMENTS...]"
-msgstr ""
+msgstr "[ARGUMENTI...]"
 
-#: ../panel/main.c:243
+#: panel/main.c:271
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr ""
+msgstr "Lai uzzinātu, kā lietot, ievadiet „%s --help”."
 
-#: ../panel/main.c:262
+#: panel/main.c:288
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce izstrādātāju komanda. Visas tiesības paturētas."
 
-#: ../panel/main.c:263
+#: panel/main.c:289
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr "Lūdzu ziņojiet pa kļūdām uz <%s>."
+msgstr "Lūdzu, ziņojiet par kļūdām <%s>."
 
-#: ../panel/main.c:321
-#, fuzzy
+#. quit without error if an instance is running
+#: panel/main.c:397
 msgid "There is already a running instance"
-msgstr "Paziņošanas ikonas laukums, jau skrien šai ekrānā"
+msgstr "Jau darbojas cita instance"
 
 #. spawn ourselfs again
-#: ../panel/main.c:366
-#, fuzzy
+#: panel/main.c:408
 msgid "Restarting..."
-msgstr "Atiestate"
+msgstr "Pārstartē..."
 
-#: ../panel/main.c:381
-#, fuzzy
+#: panel/main.c:425
 msgid "Failed to show the preferences dialog"
-msgstr "Neizdevās atvērt displeju"
+msgstr "Neizdevās parādīt iestatījumu dialoglodziņu"
 
-#: ../panel/main.c:383
-#, fuzzy
+#: panel/main.c:427
 msgid "Failed to show the add new items dialog"
-msgstr "Rādīt \"Pievienot jaunus vienumus\" dialogu"
+msgstr "Neizdevās parādīt jaunu vienumu pievienošanas dialoglodziņu"
 
-#: ../panel/main.c:385
-#, fuzzy
+#: panel/main.c:429
 msgid "Failed to save the panel configuration"
-msgstr "Saglabāt paneļa konfigurāciju"
+msgstr "Neizdevās saglabāt paneļa konfigurāciju"
 
-#: ../panel/main.c:387
+#: panel/main.c:431
 msgid "Failed to add a plugin to the panel"
-msgstr ""
+msgstr "Neizdevās pievienot panelim spraudni"
 
-#: ../panel/main.c:389
-#, fuzzy
+#: panel/main.c:433
 msgid "Failed to restart the panel"
-msgstr "Pievienot vienumus panelim"
+msgstr "Neizdevās pārstartēt paneli"
 
-#: ../panel/main.c:391
-#, fuzzy
+#: panel/main.c:435
 msgid "Failed to quit the panel"
-msgstr "Neizdevāsa izpildīt 'xfce4-panel -c'"
+msgstr "Neizdevās beigt paneļa darbu"
 
-#: ../panel/main.c:393
-#, fuzzy
+#: panel/main.c:437
 msgid "Failed to send D-Bus message"
-msgstr "Neizdevās atvērt displeju"
+msgstr "Neizdevās nosūtīt D-Bus ziņojumu"
 
-#: ../panel/main.c:404
-msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on "
-"logout, so the panel is automatically started the next time you login."
-msgstr ""
-
-#: ../panel/main.c:407 ../panel/main.c:421
+#: panel/main.c:445 panel/main.c:465
 #, c-format
 msgid "No running instance of %s was found"
-msgstr ""
+msgstr "Netika atrasta neviena darbojoša %s instance"
 
-#: ../panel/panel-application.c:216
+#: panel/main.c:446
+msgid ""
+"Do you want to start the panel? If you do, make sure you save the session on"
+" logout, so the panel is automatically started the next time you login."
+msgstr ""
+"Vai vēlaties startēt paneli? Ja jā, atsakoties saglabājiet sesiju, lai "
+"nākamreiz piesakoties panelis tiktu startēts automātiski."
+
+#: panel/main.c:451
+msgid "Execute"
+msgstr "Izpildīt"
+
+#: panel/panel-application.c:214
 msgid "Failed to launch the migration application"
+msgstr "Neizdevās palaist migrēšanas lietotni"
+
+#: panel/panel-application.c:347
+#, c-format
+msgid ""
+"Plugin \"%s\" could not be loaded, do you want to remove it from xfce4-panel"
+" configuration?"
 msgstr ""
+"Spraudni „%s” neizdevās ielādēt. Vai vēlaties to noņemt no xfce4-panel "
+"konfigurācijas?"
 
-#: ../panel/panel-application.c:982
-#, fuzzy
-msgid "Create _Launcher"
-msgstr "Par Xfce paneli"
+#: panel/panel-application.c:349
+#, c-format
+msgid ""
+"This plugin is in the current xfce4-panel configuration but could not be "
+"loaded, probably due to an installation issue. If you know what you're "
+"doing, you can remove it permanently, otherwise you'd better quit and make a"
+" backup of the current configuration using %s, before checking your "
+"installation and trying to start xfce4-panel again."
+msgstr ""
+"Šis spraudnis ir pašreizējā xfce4-panel konfigurācijā, taču to neizdevās "
+"ielādēt, iespējams, instalēšanas problēmas dēļ. Ja zināt, ko darāt, varat to"
+" neatgriezeniski noņemt; citādi labāk beidziet darbu un, pirms pārbaudīt "
+"instalāciju un mēģināt xfce4-panel startēt vēlreiz, izveidojiet pašreizējās "
+"konfigurācijas dublējumu ar %s."
 
-#: ../panel/panel-application.c:983
+#: panel/panel-application.c:356
+msgid "Plugin loading failure"
+msgstr "Spraudņa ielāde neizdevās"
+
+#: panel/panel-application.c:357
+msgid "_Quit"
+msgstr "_Iziet"
+
+#: panel/panel-application.c:1037
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr ""
+"Panelī tiks izveidots jauns palaidēja spraudnis, un nomestie faili tiks "
+"ievietoti kā izvēlnes vienumi."
 
-#: ../panel/panel-application.c:985
+#: panel/panel-application.c:1040
+msgid "Create _Launcher"
+msgstr "Izveidot _palaidēju"
+
+#: panel/panel-application.c:1041
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Izveidot jaunu palaidēju no %d .desktop faila"
+msgstr[1] "Izveidot jaunu palaidēju no %d .desktop failiem"
+msgstr[2] "Izveidot jaunu palaidēju no %d .desktop failiem"
 
-#: ../panel/panel-application.c:1725
+#: panel/panel-application.c:1802
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr ""
+"X ir startēts bez sesiju pārvaldnieka. Noklikšķinot uz „Iziet”, X serveris "
+"tiks aizvērts."
 
-#: ../panel/panel-application.c:1726
-#, fuzzy
+#: panel/panel-application.c:1805
+msgid "Quit"
+msgstr "Iziet"
+
+#: panel/panel-application.c:1805
 msgid "Are you sure you want to quit the panel?"
-msgstr "Esat drošs, ka vēlaties noņemt darbavietu %d?"
+msgstr "Vai tiešām vēlaties beigt paneļa darbu?"
 
-#: ../panel/panel-application.c:1734
-#, fuzzy, c-format
+#: panel/panel-application.c:1813
+#, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "Neizdevās palaist \"%s\""
+msgstr "Neizdevās izpildīt komandu „%s”"
 
-#: ../panel/panel-dbus-client.c:211
+#: panel/panel-dbus-client.c:213
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
+"Norādīta nederīga spraudņa notikuma sintakse. Izmantojiet PLUGIN-"
+"NAME:NAME[:TYPE:VALUE]."
 
-#: ../panel/panel-dbus-client.c:244
+#: panel/panel-dbus-client.c:243
 #, c-format
 msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and "
+"uint."
 msgstr ""
+"Nederīgs norādes tips „%s”. Derīgie tipi ir bool, double, int, string un "
+"uint."
 
-#: ../panel/panel-dialogs.c:65
-msgid "Maintainers"
-msgstr ""
+#: panel/panel-dialogs.c:56
+msgid "Unable to open the e-mail address"
+msgstr "Neizdevās atvērt e-pasta adresi"
 
-#: ../panel/panel-dialogs.c:68
-msgid "Deskbar Mode"
-msgstr ""
-
-#: ../panel/panel-dialogs.c:71
-msgid "Inactive Maintainers"
-msgstr ""
-
-#: ../panel/panel-dialogs.c:82
+#: panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
-msgstr ""
+msgstr "Xfce darbvirsmas vides panelis"
 
-#: ../panel/panel-dialogs.c:87
+#: panel/panel-dialogs.c:86
 msgid "translator-credits"
-msgstr ""
+msgstr "Rihards Priedītis <rprieditis@gmail.com>"
 
-#. setup the dialog
-#: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:27
-#, fuzzy
+#: panel/panel-dialogs.c:160
 msgid "Add New Item"
-msgstr "Pievienot jaunus vienumus"
+msgstr "Pievienot jaunu vienumu"
 
-#: ../panel/panel-dialogs.c:172
+#: panel/panel-dialogs.c:160 plugins/actions/actions.c:870
+#: plugins/applicationsmenu/applicationsmenu.c:606
+#: plugins/directorymenu/directorymenu.c:466
+#: plugins/directorymenu/directorymenu.c:938
+msgid "_Cancel"
+msgstr "A_tcelt"
+
+#: panel/panel-dialogs.c:160 panel/panel-item-dialog.c:203
+#: panel/panel-preferences-dialog.glade:1223
+#: plugins/launcher/launcher-dialog.glade:219
+msgid "_Add"
+msgstr "_Pievienot"
+
+#: panel/panel-dialogs.c:171
 msgid "Please choose a panel for the new plugin:"
-msgstr ""
+msgstr "Izvēlieties jaunā spraudņa paneli:"
 
-#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:806
+#: panel/panel-dialogs.c:191 panel/panel-preferences-dialog.c:1034
 #, c-format
 msgid "Panel %d"
 msgstr "Panelis %d"
 
-#: ../panel/panel-dialogs.c:232
+#: panel/panel-dialogs.c:230
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr ""
+"Panelis darbojas kioska režīmā, tāpēc parastam lietotājam nav atļauts mainīt"
+" paneļa konfigurāciju"
 
-#: ../panel/panel-dialogs.c:234
+#: panel/panel-dialogs.c:232
 msgid "Modifying the panel is not allowed"
-msgstr ""
+msgstr "Paneli mainīt nav atļauts"
 
-#: ../panel/panel-item-dialog.c:190
+#: panel/panel-item-dialog.c:195 plugins/launcher/launcher-dialog.glade:198
 msgid "Add New Items"
 msgstr "Pievienot jaunus vienumus"
 
-#: ../panel/panel-item-dialog.c:192
-#, fuzzy
-msgid "Add new plugins to the panel"
-msgstr "Pievienot vienumus panelim"
+#: panel/panel-item-dialog.c:211 panel/panel-preferences-dialog.glade:163
+#: panel/panel-tic-tac-toe.c:118 plugins/actions/actions-dialog.glade:82
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:55
+#: plugins/clock/clock-dialog.glade:105
+#: plugins/directorymenu/directorymenu-dialog.glade:34
+#: plugins/launcher/launcher-dialog.glade:235
+#: plugins/launcher/launcher-dialog.glade:414
+#: plugins/pager/pager-dialog.glade:97
+#: plugins/separator/separator-dialog.glade:54
+#: plugins/showdesktop/showdesktop-dialog.glade:34
+#: plugins/systray/sn-dialog.glade:65
+#: plugins/tasklist/tasklist-dialog.glade:77
+#: plugins/windowmenu/windowmenu-dialog.glade:48
+msgid "_Close"
+msgstr "_Aizvērt"
 
-#: ../panel/panel-item-dialog.c:216
-#: ../plugins/launcher/launcher-dialog.glade.h:28
+#: panel/panel-item-dialog.c:227 plugins/launcher/launcher-dialog.glade:272
 msgid "_Search:"
 msgstr "_Meklēt:"
 
-#: ../panel/panel-item-dialog.c:224
+#: panel/panel-item-dialog.c:235
 msgid "Enter search phrase here"
-msgstr ""
+msgstr "Ievadiet meklējamo frāzi"
 
-#: ../panel/panel-plugin-external.c:429
+#: panel/panel-plugin-external.c:417
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
+msgstr "Spraudnis „%s” negaidīti pameta paneli. Vai vēlaties to pārstartēt?"
 
-#: ../panel/panel-plugin-external.c:431
+#: panel/panel-plugin-external.c:418
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
 msgstr ""
+"Pēdējās %d sekundēs spraudnis pārstartējās vairāk nekā vienreiz. Ja "
+"nospiedīsiet „Izpildīt”, panelis mēģinās spraudni pārstartēt, citādi tas "
+"tiks neatgriezeniski noņemts no paneļa."
 
-#: ../panel/panel-preferences-dialog.c:472
+#: panel/panel-plugin-external.c:423
+msgid "Plugin Restart"
+msgstr "Spraudņa pārstartēšana"
+
+#: panel/panel-plugin-external.c:424
+msgid "_Execute"
+msgstr "Iz_pildīt"
+
+#: panel/panel-preferences-dialog.c:581
 msgid "Automatic"
-msgstr "Automātiska"
+msgstr "Automātiski"
 
-#. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:491
-#, c-format
-msgid "Screen %d"
-msgstr ""
+#: panel/panel-preferences-dialog.c:590
+msgid "Primary"
+msgstr "Primārais"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:517
-#, fuzzy, c-format
+#: panel/panel-preferences-dialog.c:609
+#, c-format
 msgid "Monitor %d"
-msgstr "Savienot monitorus"
+msgstr "Monitors %d"
 
-#: ../panel/panel-preferences-dialog.c:872
-#, fuzzy
+#: panel/panel-preferences-dialog.c:1088
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "Izvēlētais panelis un visi tā vienumi tiks noņemti."
+msgstr "Paneļa un spraudņu konfigurācija tiks neatgriezeniski noņemta"
 
-#: ../panel/panel-preferences-dialog.c:873
-#, fuzzy, c-format
+#: panel/panel-preferences-dialog.c:1097
+#, c-format
 msgid "Are you sure you want to remove panel %d?"
-msgstr "Esat drošs, ka vēlaties noņemt darbavietu %d?"
+msgstr "Vai tiešām vēlaties noņemt paneli %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:965
+#: panel/panel-preferences-dialog.c:1394
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
-msgstr ""
+msgstr "%s <span color=\"grey\" size=\"small\">(ārējs)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:970
+#: panel/panel-preferences-dialog.c:1399
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
 msgstr ""
+"Iekšējais nosaukums: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:982
+#: panel/panel-preferences-dialog.c:1411
 #, c-format
 msgid "Internal name: %s-%d"
-msgstr ""
+msgstr "Iekšējais nosaukums: %s-%d"
 
-#: ../panel/panel-preferences-dialog.glade.h:1
+#: panel/panel-preferences-dialog.c:1558
+msgid "If you remove the item from the panel, it is permanently lost."
+msgstr "Ja vienumu noņemsiet no paneļa, tas tiks neatgriezeniski zaudēts."
+
+#: panel/panel-preferences-dialog.c:1562
+#, c-format
+msgid "Are you sure that you want to remove these %d items?"
+msgstr "Vai tiešām vēlaties noņemt šos vienumus (%d)?"
+
+#: panel/panel-preferences-dialog.c:1564
+msgid "If you remove them from the panel, they are permanently lost."
+msgstr "Ja tos noņemsiet no paneļa, tie tiks neatgriezeniski zaudēti."
+
+#: panel/panel-preferences-dialog.glade:13
+msgid "Never"
+msgstr "Nekad"
+
+#: panel/panel-preferences-dialog.glade:16
+msgid "Intelligently"
+msgstr "Gudri"
+
+#: panel/panel-preferences-dialog.glade:19
+msgid "Always"
+msgstr "Vienmēr"
+
+#: panel/panel-preferences-dialog.glade:81
 msgid "Horizontal"
 msgstr "Horizontāls"
 
-#: ../panel/panel-preferences-dialog.glade.h:2
+#: panel/panel-preferences-dialog.glade:84
 msgid "Vertical"
 msgstr "Vertikāls"
 
-#: ../panel/panel-preferences-dialog.glade.h:3
+#: panel/panel-preferences-dialog.glade:87
 msgid "Deskbar"
-msgstr ""
+msgstr "Sānu josla"
 
-#: ../panel/panel-preferences-dialog.glade.h:4
+#: panel/panel-preferences-dialog.glade:134
 msgid "None (use system style)"
-msgstr ""
+msgstr "Nav (izmantot sistēmas stilu)"
 
-#: ../panel/panel-preferences-dialog.glade.h:5
+#: panel/panel-preferences-dialog.glade:137
 msgid "Solid color"
-msgstr ""
+msgstr "Vienlaidu krāsa"
 
-#: ../panel/panel-preferences-dialog.glade.h:6
+#: panel/panel-preferences-dialog.glade:140
 msgid "Background image"
-msgstr ""
+msgstr "Fona attēls"
 
-#: ../panel/panel-preferences-dialog.glade.h:8
-#, fuzzy
+#: panel/panel-preferences-dialog.glade:146
+msgid "Panel Preferences"
+msgstr "Paneļa iestatījumi"
+
+#: panel/panel-preferences-dialog.glade:223
+msgid "Profiles:"
+msgstr "Profili:"
+
+#: panel/panel-preferences-dialog.glade:251
+msgid "_Backup and restore"
+msgstr "_Dublēt un atjaunot"
+
+#: panel/panel-preferences-dialog.glade:255
+msgid "Switch between panel presets"
+msgstr "Pārslēgties starp paneļu sagatavēm"
+
+#: panel/panel-preferences-dialog.glade:299
 msgid "Add a new panel"
-msgstr "Pievienot jaunus vienumus"
+msgstr "Pievienot jaunu paneli"
 
-#: ../panel/panel-preferences-dialog.glade.h:9
-#, fuzzy
+#: panel/panel-preferences-dialog.glade:324
 msgid "Remove the currently selected panel"
-msgstr "Noņemt pašreiz atlasīto paneli"
+msgstr "Noņemt pašlaik atlasīto paneli"
 
-#: ../panel/panel-preferences-dialog.glade.h:10
+#: panel/panel-preferences-dialog.glade:375
+#: panel/panel-preferences-dialog.glade:738
+msgid "<b>General</b>"
+msgstr "<b>Vispārīgi</b>"
+
+#: panel/panel-preferences-dialog.glade:390
 msgid "M_ode:"
-msgstr ""
+msgstr "_Režīms:"
 
-#: ../panel/panel-preferences-dialog.glade.h:11
-msgid "O_utput:"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:12
-#, fuzzy
+#: panel/panel-preferences-dialog.glade:419
 msgid "Span mo_nitors"
-msgstr "Savienot monitorus"
+msgstr "Pāri vairākiem _monitoriem"
 
-#: ../panel/panel-preferences-dialog.glade.h:13
+#: panel/panel-preferences-dialog.glade:423
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr ""
+msgstr "Atzīmējiet šo opciju, lai panelis stieptos pāri vairākiem monitoriem."
 
-#: ../panel/panel-preferences-dialog.glade.h:14
+#: panel/panel-preferences-dialog.glade:436
 msgid "_Lock panel"
-msgstr ""
+msgstr "_Bloķēt paneli"
 
-#: ../panel/panel-preferences-dialog.glade.h:15
+#: panel/panel-preferences-dialog.glade:440
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr ""
+"Atzīmējiet šo opciju, lai paslēptu paneļa turus un nofiksētu tā novietojumu."
 
-#: ../panel/panel-preferences-dialog.glade.h:16
-msgid "Automatically show and _hide the panel"
-msgstr ""
+#: panel/panel-preferences-dialog.glade:453
+msgid "_Reserve space on screen edges for the panel"
+msgstr "_Rezervēt panelim vietu ekrāna malās"
 
-#: ../panel/panel-preferences-dialog.glade.h:17
+#: panel/panel-preferences-dialog.glade:457
 msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
+"Select this option if you don't want maximized windows to cover the area "
+"behind the panel. This only works when the panel is attached to a screen "
+"edge."
 msgstr ""
+"Atzīmējiet šo opciju, ja nevēlaties, lai maksimizētie logi aizsegtu apgabalu"
+" aiz paneļa. Tas darbojas tikai tad, ja panelis piestiprināts pie ekrāna "
+"malas."
 
-#: ../panel/panel-preferences-dialog.glade.h:18
-msgid "Don't _reserve space on borders"
-msgstr ""
+#: panel/panel-preferences-dialog.glade:478
+msgid "Au_tomatically hide the panel:"
+msgstr "Automātiski _paslēpt paneli:"
 
-#: ../panel/panel-preferences-dialog.glade.h:19
-msgid ""
-"Select this option if you want maximized windows to cover the area behind "
-"the panel. This only works when the panel is attached to a screen edge."
-msgstr ""
+#: panel/panel-preferences-dialog.glade:519
+msgid "O_utput:"
+msgstr "_Izvade:"
 
-#: ../panel/panel-preferences-dialog.glade.h:20
-#: ../plugins/actions/actions-dialog.glade.h:6
-#: ../plugins/launcher/launcher-dialog.glade.h:19
-msgid "General"
-msgstr ""
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
+#: panel/panel-preferences-dialog.glade:563
+msgid "<b>Measurements</b>"
+msgstr "<b>Izmēri</b>"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
-#, fuzzy
-msgid "Row _Size (pixels):"
-msgstr "_Izmērs (pikseļos):"
+#: panel/panel-preferences-dialog.glade:578
+msgid "Row _size (pixels):"
+msgstr "Rindas _augstums (pikseļos):"
 
-#: ../panel/panel-preferences-dialog.glade.h:23
-#, no-c-format
-msgid "L_ength (%):"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:24
-#, fuzzy
+#: panel/panel-preferences-dialog.glade:592
 msgid "Num_ber of rows:"
-msgstr "_Rindu skaits:"
+msgstr "Rindu _skaits:"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: panel/panel-preferences-dialog.glade:606
+msgid "L_ength (pixels):"
+msgstr "_Garums (pikseļos):"
+
+#: panel/panel-preferences-dialog.glade:635
+msgid "Border width (pixels):"
+msgstr "Apmales platums (pikseļos):"
+
+#: panel/panel-preferences-dialog.glade:658
 msgid "A_utomatically increase the length"
-msgstr ""
+msgstr "Automātiski pa_lielināt garumu"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: panel/panel-preferences-dialog.glade:662
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr ""
+"Atzīmējiet šo opciju, lai paneļa garums automātiski palielinātos, ja "
+"spraudņiem vajag vairāk vietas."
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:28
-msgid "Measurements"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: panel/panel-preferences-dialog.glade:712
 msgid "D_isplay"
-msgstr ""
+msgstr "_Displejs"
 
-#: ../panel/panel-preferences-dialog.glade.h:30
-#: ../plugins/separator/separator-dialog.glade.h:2
+#: panel/panel-preferences-dialog.glade:753
+msgid "Dark mode"
+msgstr "Tumšais režīms"
+
+#: panel/panel-preferences-dialog.glade:793
+msgid "<b>Background</b>"
+msgstr "<b>Fons</b>"
+
+#: panel/panel-preferences-dialog.glade:808
+#: plugins/separator/separator-dialog.glade:119
 msgid "_Style:"
-msgstr ""
+msgstr "_Stils:"
 
-#: ../panel/panel-preferences-dialog.glade.h:31
-msgid "_Alpha:"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:32
-msgid ""
-"Alpha value of the panel background, with 0 being fully transparent and 100 "
-"fully opaque."
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: panel/panel-preferences-dialog.glade:840
 msgid "C_olor:"
-msgstr ""
+msgstr "_Krāsa:"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: panel/panel-preferences-dialog.glade:855
 msgid "Pick a Panel Color"
-msgstr ""
+msgstr "Izvēlieties paneļa krāsu"
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: panel/panel-preferences-dialog.glade:868
 msgid "_File:"
-msgstr ""
+msgstr "_Fails:"
 
-#: ../panel/panel-preferences-dialog.glade.h:36
-#, fuzzy
+#: panel/panel-preferences-dialog.glade:881
 msgid "Select A Background Image"
-msgstr "Norādiet ikonu priekš \"%s\""
+msgstr "Izvēlieties fona attēlu"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
-msgid "Background"
+#: panel/panel-preferences-dialog.glade:908
+msgid "<b>Icons</b>"
+msgstr "<b>Ikonas</b>"
+
+#: panel/panel-preferences-dialog.glade:922
+msgid "Adjust size au_tomatically"
+msgstr "Automātiski pielāgot _izmēru"
+
+#: panel/panel-preferences-dialog.glade:959
+msgid "Fixed icon _size (pixels):"
+msgstr "Fiksēts ikonu _izmērs (pikseļos):"
+
+#: panel/panel-preferences-dialog.glade:1002
+msgid "<b>Opacity</b>"
+msgstr "<b>Necaurredzamība</b>"
+
+#: panel/panel-preferences-dialog.glade:1028
+msgid "Configure..."
+msgstr "Iestatīt..."
+
+#: panel/panel-preferences-dialog.glade:1066
+msgid ""
+"<b>Compositing is currently disabled</b>\n"
+"Enable compositing in the window manager for opacity settings in the panel."
 msgstr ""
+"<b>Kompozicionēšana pašlaik ir atspējota</b>\n"
+"Lai panelī iestatītu necaurredzamību, iespējojiet kompozicionēšanu logu pārvaldniekā."
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: panel/panel-preferences-dialog.glade:1106
 msgid "_Enter:"
-msgstr ""
+msgstr "_Ienākot:"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:41
-#, fuzzy
+#: panel/panel-preferences-dialog.glade:1133
 msgid "_Leave:"
-msgstr "_Nosaukums:"
+msgstr "_Izejot:"
 
-#: ../panel/panel-preferences-dialog.glade.h:42
-msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully "
-"transparent and 100 fully opaque."
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:43
+#: panel/panel-preferences-dialog.glade:1146
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr ""
+"Caurspīdīgums, kad rādītājs neatrodas virs paneļa: 0 — pilnīgi caurspīdīgs, "
+"100 — pilnīgi necaurredzams."
 
-#: ../panel/panel-preferences-dialog.glade.h:44
-msgid "Opacity"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:45
-msgid ""
-"Enable compositing in the window manager for opacity settings in the panel."
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:46
-#, fuzzy
+#: panel/panel-preferences-dialog.glade:1173
 msgid "Appeara_nce"
-msgstr "Izskats"
+msgstr "Iz_skats"
 
-#: ../panel/panel-preferences-dialog.glade.h:47
-#: ../plugins/launcher/launcher-dialog.glade.h:13
-#, fuzzy
-msgid "Move currently selected item up by one row"
-msgstr "Noņemt pašreiz atlasīto paneli"
-
-#: ../panel/panel-preferences-dialog.glade.h:48
-#: ../plugins/launcher/launcher-dialog.glade.h:14
-#, fuzzy
-msgid "Move currently selected item down by one row"
-msgstr "Noņemt pašreiz atlasīto paneli"
-
-#: ../panel/panel-preferences-dialog.glade.h:49
-#, fuzzy
+#: panel/panel-preferences-dialog.glade:1228
 msgid "Add new item to this panel"
-msgstr "Pievienot vienumus panelim"
+msgstr "Pievienot šim panelim jaunu vienumu"
 
-#: ../panel/panel-preferences-dialog.glade.h:50
-#, fuzzy
+#: panel/panel-preferences-dialog.glade:1245
 msgid "Remove currently selected item"
-msgstr "Noņemt pašreiz atlasīto paneli"
+msgstr "Noņemt pašlaik atlasīto vienumu"
 
-#: ../panel/panel-preferences-dialog.glade.h:51
-#: ../plugins/launcher/launcher-dialog.glade.h:18
-#, fuzzy
+#: panel/panel-preferences-dialog.glade:1261
+#: plugins/launcher/launcher-dialog.glade:559
 msgid "Edit the currently selected item"
-msgstr "Noņemt pašreiz atlasīto paneli"
+msgstr "Rediģēt pašlaik atlasīto vienumu"
 
-#: ../panel/panel-preferences-dialog.glade.h:52
-#, fuzzy
+#: panel/panel-preferences-dialog.glade:1282
 msgid "Show about information of the currently selected item"
-msgstr "Noņemt pašreiz atlasīto paneli"
+msgstr "Rādīt informāciju par pašlaik atlasīto vienumu"
 
-#: ../panel/panel-preferences-dialog.glade.h:53
-#, fuzzy
+#: panel/panel-preferences-dialog.glade:1325
+#: plugins/launcher/launcher-dialog.glade:509
+msgid "Move currently selected item up by one row"
+msgstr "Pārvietot pašlaik atlasīto vienumu par vienu rindu augšup"
+
+#: panel/panel-preferences-dialog.glade:1346
+#: plugins/launcher/launcher-dialog.glade:529
+msgid "Move currently selected item down by one row"
+msgstr "Pārvietot pašlaik atlasīto vienumu par vienu rindu lejup"
+
+#: panel/panel-preferences-dialog.glade:1380
 msgid "Ite_ms"
-msgstr "Pievienot vienumus"
+msgstr "_Vienumi"
 
-#: ../panel/panel-tic-tac-toe.c:123
+#: panel/panel-tic-tac-toe.c:116
 msgid "_New Game"
-msgstr ""
+msgstr "_Jauna spēle"
 
-#: ../panel/panel-tic-tac-toe.c:134
-#, fuzzy
+#: panel/panel-tic-tac-toe.c:127
 msgid "_Level:"
-msgstr "_Nosaukums:"
+msgstr "_Līmenis:"
 
-#: ../panel/panel-tic-tac-toe.c:140
+#: panel/panel-tic-tac-toe.c:133
 msgid "Novice"
-msgstr ""
+msgstr "Iesācējs"
 
-#: ../panel/panel-tic-tac-toe.c:141
+#: panel/panel-tic-tac-toe.c:134
 msgid "Intermediate"
-msgstr ""
+msgstr "Vidējs"
 
-#: ../panel/panel-tic-tac-toe.c:142
+#: panel/panel-tic-tac-toe.c:135
 msgid "Experienced"
-msgstr ""
+msgstr "Pieredzējis"
 
-#: ../panel/panel-tic-tac-toe.c:143
+#: panel/panel-tic-tac-toe.c:136
 msgid "Expert"
-msgstr ""
+msgstr "Eksperts"
 
-#: ../panel/panel-window.c:2390
-#, fuzzy
+#: panel/panel-window.c:3747
 msgid "_Lock Panel"
-msgstr "Xfce panelis"
+msgstr "_Bloķēt paneli"
 
-#: ../migrate/main.c:116
-#, fuzzy
-msgid "Welcome to the first start of the panel"
-msgstr "Pievienot vienumus panelim"
-
-#: ../migrate/main.c:125
-msgid ""
-"Because the panel moved to a new system for storing the settings, it has to "
-"load a fresh initial configuration."
-msgstr ""
-
-#: ../migrate/main.c:127 ../migrate/main.c:136
-msgid "Choose below which setup you want for the first startup."
-msgstr ""
-
-#: ../migrate/main.c:129
-msgid "Migrate old config"
-msgstr ""
-
-#: ../migrate/main.c:130
-#, fuzzy
-msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr "Saglabāt paneļa konfigurāciju"
-
-#: ../migrate/main.c:141
-msgid "Use default config"
-msgstr ""
-
-#: ../migrate/main.c:142
-#, fuzzy
-msgid "Load the default configuration"
-msgstr "Saglabāt paneļa konfigurāciju"
-
-#: ../migrate/main.c:148
-msgid "One empty panel"
-msgstr ""
-
-#: ../migrate/main.c:149
-msgid "Start with one empty panel"
-msgstr ""
-
-#: ../migrate/main.c:160
-#, fuzzy
-msgid "Failed to migrate the old panel configuration"
-msgstr "Saglabāt paneļa konfigurāciju"
-
-#: ../migrate/main.c:172
-#, fuzzy
+#: migrate/main.c:98
 msgid "Failed to load the default configuration"
-msgstr "Saglabāt paneļa konfigurāciju"
+msgstr "Neizdevās ielādēt noklusējuma konfigurāciju"
 
-#: ../migrate/main.c:185
+#: migrate/main.c:110
 msgid "Panel config needs migration..."
-msgstr ""
+msgstr "Paneļa konfigurācija jāmigrē..."
 
-#: ../migrate/main.c:189
-#, fuzzy
+#: migrate/main.c:114
 msgid "Failed to migrate the existing configuration"
-msgstr "Saglabāt paneļa konfigurāciju"
+msgstr "Neizdevās migrēt esošo konfigurāciju"
 
-#: ../migrate/main.c:195
+#: migrate/main.c:120
 msgid "Panel configuration has been updated."
-msgstr ""
+msgstr "Paneļa konfigurācija ir atjaunināta."
 
-#: ../plugins/actions/actions-dialog.glade.h:1
-#: ../plugins/actions/actions.desktop.in.in.h:1
+#: plugins/actions/actions-dialog.glade:35
+#: plugins/actions/actions-dialog.glade:64
+#: plugins/actions/actions.desktop.in.in:4
 msgid "Action Buttons"
 msgstr "Darbību pogas"
 
-#: ../plugins/actions/actions-dialog.glade.h:2
-#, fuzzy
+#: plugins/actions/actions-dialog.glade:38 plugins/actions/actions.c:37
+msgid "Session Menu"
+msgstr "Sesijas izvēlne"
+
+#: plugins/actions/actions-dialog.glade:49
+msgid "Full Name"
+msgstr "Pilnais vārds"
+
+#: plugins/actions/actions-dialog.glade:52
+msgid "Username"
+msgstr "Lietotājvārds"
+
+#: plugins/actions/actions-dialog.glade:55
+msgid "User ID"
+msgstr "Lietotāja ID"
+
+#: plugins/actions/actions-dialog.glade:58
+msgid "Custom"
+msgstr "Pielāgots"
+
+#: plugins/actions/actions-dialog.glade:162
 msgid "Appeara_nce:"
-msgstr "Izskats"
+msgstr "Iz_skats:"
 
-#: ../plugins/actions/actions-dialog.glade.h:3
-#, fuzzy
-msgid "Invert buttons _orientation"
-msgstr "B_ultas poga"
+#: plugins/actions/actions-dialog.glade:188
+msgid "Title:"
+msgstr "Virsraksts:"
 
-#: ../plugins/actions/actions-dialog.glade.h:4
+#: plugins/actions/actions-dialog.glade:201
+msgid "Custo_m title:"
+msgstr "Pielāgots _virsraksts:"
+
+#: plugins/actions/actions-dialog.glade:255
+#: plugins/launcher/launcher-dialog.glade:667
+msgid "General"
+msgstr "Vispārīgi"
+
+#: plugins/actions/actions-dialog.glade:303
+msgid "Visible"
+msgstr "Redzams"
+
+#: plugins/actions/actions-dialog.glade:314
+msgid "Action"
+msgstr "Darbība"
+
+#: plugins/actions/actions-dialog.glade:334
 msgid "_Show confirmation dialog"
-msgstr ""
+msgstr "_Rādīt apstiprinājuma dialoglodziņu"
 
-#: ../plugins/actions/actions-dialog.glade.h:5
+#: plugins/actions/actions-dialog.glade:338
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
 msgstr ""
+"Dažām darbībām rādīt apstiprinājuma dialoglodziņu ar 30 sekunžu noildzi."
 
-#: ../plugins/actions/actions-dialog.glade.h:7
-msgid "Visible"
-msgstr ""
-
-#: ../plugins/actions/actions-dialog.glade.h:8
-#, fuzzy
-msgid "Action"
-msgstr "Darbību pogas"
-
-#: ../plugins/actions/actions-dialog.glade.h:9
-#, fuzzy
+#: plugins/actions/actions-dialog.glade:354
 msgid "_Actions"
-msgstr "Paneļa darbības"
+msgstr "_Darbības"
 
-#: ../plugins/actions/actions-dialog.glade.h:10
-#, fuzzy
-msgid "Session Menu"
-msgstr "Logu saraksts"
-
-#: ../plugins/actions/actions.c:151
+#: plugins/actions/actions.c:167
 msgid "Log Out"
-msgstr ""
+msgstr "Atteikties"
 
-#: ../plugins/actions/actions.c:152
+#: plugins/actions/actions.c:168
 msgid "_Log Out"
-msgstr ""
+msgstr "_Atteikties"
 
-#: ../plugins/actions/actions.c:153
-#, fuzzy
+#: plugins/actions/actions.c:169
 msgid "Are you sure you want to log out?"
-msgstr "Esat drošs, ka vēlaties noņemt darbavietu '%s'?"
+msgstr "Vai tiešām vēlaties atteikties?"
 
-#: ../plugins/actions/actions.c:154
+#: plugins/actions/actions.c:170
 #, c-format
 msgid "Logging out in %d seconds."
-msgstr ""
+msgstr "Atteikšanās pēc %d s."
 
-#: ../plugins/actions/actions.c:159
+#: plugins/actions/actions.c:175
 msgid "Log Out..."
-msgstr ""
+msgstr "Atteikties..."
 
-#: ../plugins/actions/actions.c:160
+#: plugins/actions/actions.c:176
 msgid "Log _Out..."
-msgstr ""
+msgstr "_Atteikties..."
 
-#: ../plugins/actions/actions.c:166
+#: plugins/actions/actions.c:182
 msgid "Switch User"
-msgstr ""
+msgstr "Nomainīt lietotāju"
 
-#: ../plugins/actions/actions.c:167
+#: plugins/actions/actions.c:183
 msgid "_Switch User"
-msgstr ""
+msgstr "_Nomainīt lietotāju"
 
-#: ../plugins/actions/actions.c:173
-#, fuzzy
+#: plugins/actions/actions.c:189
 msgid "Lock Screen"
-msgstr "Aizslēgt ekrānu"
+msgstr "Bloķēt ekrānu"
 
-#: ../plugins/actions/actions.c:174
-#, fuzzy
+#: plugins/actions/actions.c:190
 msgid "Loc_k Screen"
-msgstr "Aizslēgt ekrānu"
+msgstr "_Bloķēt ekrānu"
 
-#: ../plugins/actions/actions.c:180
+#: plugins/actions/actions.c:196
 msgid "Hibernate"
-msgstr ""
+msgstr "Hibernēt"
 
-#: ../plugins/actions/actions.c:181
+#: plugins/actions/actions.c:197
 msgid "_Hibernate"
-msgstr ""
+msgstr "_Hibernēt"
 
-#: ../plugins/actions/actions.c:182
+#: plugins/actions/actions.c:198
 msgid "Do you want to suspend to disk?"
-msgstr ""
+msgstr "Vai vēlaties hibernēt datoru (saglabāt stāvokli diskā)?"
 
-#: ../plugins/actions/actions.c:183
+#: plugins/actions/actions.c:199
 #, c-format
 msgid "Hibernating computer in %d seconds."
-msgstr ""
+msgstr "Datora hibernēšana pēc %d s."
 
-#: ../plugins/actions/actions.c:188
+#: plugins/actions/actions.c:204
+msgid "Hybrid Sleep"
+msgstr "Hibrīdā iesnaudināšana"
+
+#: plugins/actions/actions.c:205
+msgid "_Hybrid Sleep"
+msgstr "Hi_brīdā iesnaudināšana"
+
+#: plugins/actions/actions.c:206
+msgid "Do you want to hibernate and suspend the system?"
+msgstr "Vai vēlaties hibernēt un iesnaudināt sistēmu?"
+
+#: plugins/actions/actions.c:207
+#, c-format
+msgid "Hibernating and Suspending computer in %d seconds."
+msgstr "Datora hibernēšana un iesnaudināšana pēc %d s."
+
+#: plugins/actions/actions.c:212
 msgid "Suspend"
-msgstr ""
+msgstr "Iesnaudināt"
 
-#: ../plugins/actions/actions.c:189
+#: plugins/actions/actions.c:213
 msgid "Sus_pend"
-msgstr ""
+msgstr "Iesnau_dināt"
 
-#: ../plugins/actions/actions.c:190
+#: plugins/actions/actions.c:214
 msgid "Do you want to suspend to RAM?"
-msgstr ""
+msgstr "Vai vēlaties iesnaudināt datoru (saglabāt stāvokli RAM)?"
 
-#: ../plugins/actions/actions.c:191
+#: plugins/actions/actions.c:215
 #, c-format
 msgid "Suspending computer in %d seconds."
-msgstr ""
+msgstr "Datora iesnaudināšana pēc %d s."
 
-#: ../plugins/actions/actions.c:196
+#: plugins/actions/actions.c:220
 msgid "Restart"
-msgstr "Atiestate"
+msgstr "Pārstartēt"
 
-#: ../plugins/actions/actions.c:197
-#, fuzzy
+#: plugins/actions/actions.c:221
 msgid "_Restart"
-msgstr "Atiestate"
+msgstr "_Pārstartēt"
 
-#: ../plugins/actions/actions.c:198
-#, fuzzy
+#: plugins/actions/actions.c:222
 msgid "Are you sure you want to restart?"
-msgstr "Esat drošs, ka vēlaties noņemt darbavietu '%s'?"
+msgstr "Vai tiešām vēlaties pārstartēt?"
 
-#: ../plugins/actions/actions.c:199
+#: plugins/actions/actions.c:223
 #, c-format
 msgid "Restarting computer in %d seconds."
-msgstr ""
+msgstr "Datora pārstartēšana pēc %d s."
 
-#: ../plugins/actions/actions.c:204
+#: plugins/actions/actions.c:228
 msgid "Shut Down"
-msgstr ""
+msgstr "Izslēgt"
 
-#: ../plugins/actions/actions.c:205
+#: plugins/actions/actions.c:229
 msgid "Shut _Down"
-msgstr ""
+msgstr "Iz_slēgt"
 
-#: ../plugins/actions/actions.c:206
-#, fuzzy
+#: plugins/actions/actions.c:230
 msgid "Are you sure you want to shut down?"
-msgstr "Esat drošs, ka vēlaties noņemt darbavietu %d?"
+msgstr "Vai tiešām vēlaties izslēgt datoru?"
 
-#: ../plugins/actions/actions.c:207
+#: plugins/actions/actions.c:231
 #, c-format
 msgid "Turning off computer in %d seconds."
-msgstr ""
+msgstr "Datora izslēgšana pēc %d s."
 
-#: ../plugins/actions/actions.c:621
-#: ../plugins/separator/separator-dialog.glade.h:1
-#: ../plugins/separator/separator.desktop.in.in.h:1
-#, fuzzy
+#: plugins/actions/actions.c:732 plugins/separator/separator-dialog.glade:26
+#: plugins/separator/separator-dialog.glade:38
+#: plugins/separator/separator.desktop.in.in:4
 msgid "Separator"
-msgstr "Atdalītāja stils"
+msgstr "Atdalītājs"
 
-#: ../plugins/actions/actions.c:976
-#, fuzzy, c-format
+#: plugins/actions/actions.c:1166
+#, c-format
 msgid "Failed to run action \"%s\""
-msgstr "Neizdevās palaist \"%s\""
+msgstr "Neizdevās izpildīt darbību „%s”"
 
-#: ../plugins/actions/actions.c:1147
-msgid "John Doe"
-msgstr ""
+#: plugins/actions/actions.c:1370
+msgid "Little Mouse"
+msgstr "Mazā pelīte"
 
-#: ../plugins/actions/actions.desktop.in.in.h:2
-#, fuzzy
+#: plugins/actions/actions.desktop.in.in:5
 msgid "Log out, lock or other system actions"
-msgstr "Atteikties vai noslēgt ekrānu"
+msgstr "Atteikšanās, bloķēšana un citas sistēmas darbības"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
-#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:1
-#, fuzzy
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:23
+#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:4
 msgid "Applications Menu"
-msgstr "Slēptās lietotnes"
+msgstr "Lietotņu izvēlne"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
-#, fuzzy
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:101
+#: plugins/directorymenu/directorymenu-dialog.glade:122
+msgid "_Icon:"
+msgstr "_Ikona:"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:125
+msgid "Button _title:"
+msgstr "Pogas _virsraksts:"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:136
+msgid "Show button on one _line"
+msgstr "Rādīt pogu vienā _rindā"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:151
+msgid "_Show button title"
+msgstr "_Rādīt pogas virsrakstu"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:166
+msgid "Show application d_escription in tooltip"
+msgstr "Rādīt lietotnes _aprakstu paskaidrē"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:182
+msgid "Show ic_ons in menu"
+msgstr "Rādīt _ikonas izvēlnē"
+
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:197
 msgid "Show generic application n_ames"
-msgstr "Slēptās lietotnes"
+msgstr "Rādīt lietotņu _vispārīgos nosaukumus"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:201
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
 msgstr ""
+"Atzīmējiet šo opciju, lai izvēlnē rādītu lietotnes vispārīgo nosaukumu, "
+"piemēram, „Failu pārvaldnieks”, nevis „Thunar”"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
-msgid "Show ic_ons in menu"
-msgstr ""
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
-#, fuzzy
-msgid "_Show button title"
-msgstr "B_ultas poga"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
-#, fuzzy
-msgid "Button _title:"
-msgstr "Paneļa darbības"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
-#, fuzzy
-msgid "_Icon:"
-msgstr "_Ikona:"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid "Show application d_escription in tooltip"
-msgstr ""
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
-#: ../plugins/clock/clock-dialog.glade.h:10
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
-#: ../plugins/pager/pager-dialog.glade.h:6
-#: ../plugins/separator/separator-dialog.glade.h:4
-#: ../plugins/systray/systray-dialog.glade.h:4
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:229
+#: plugins/clock/clock-dialog.glade:405
+#: plugins/directorymenu/directorymenu-dialog.glade:150
+#: plugins/separator/separator-dialog.glade:177
+#: plugins/tasklist/tasklist-dialog.glade:257
+#: plugins/windowmenu/windowmenu-dialog.glade:206
 msgid "Appearance"
 msgstr "Izskats"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:267
 msgid "Use the _default menu"
-msgstr ""
+msgstr "Izmantot _noklusējuma izvēlni"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:282
 msgid "Ed_it Menu"
-msgstr ""
+msgstr "_Rediģēt izvēlni"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:304
 msgid "Use c_ustom menu file:"
-msgstr ""
+msgstr "Izmantot _pielāgotu izvēlnes failu:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:333
 msgid "Menu _file:"
-msgstr ""
+msgstr "Izvēlnes _fails:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
-#, fuzzy
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:346
 msgid "Select A Menu File"
-msgstr "Norādiet ikonu priekš \"%s\""
+msgstr "Izvēlieties izvēlnes failu"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
+#: plugins/applicationsmenu/applicationsmenu-dialog.glade:371
 msgid "Menu File"
-msgstr ""
+msgstr "Izvēlnes fails"
 
 #. I18N: default tooltip of the application menu
-#: ../plugins/applicationsmenu/applicationsmenu.c:39
-#, fuzzy
+#: plugins/applicationsmenu/applicationsmenu.c:38
 msgid "Applications"
-msgstr "Slēptās lietotnes"
+msgstr "Lietotnes"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:644
-#: ../plugins/directorymenu/directorymenu.c:388
-#, fuzzy
+#: plugins/applicationsmenu/applicationsmenu.c:606
+#: plugins/directorymenu/directorymenu.c:466
 msgid "Select An Icon"
-msgstr "Norādiet ikonu priekš \"%s\""
+msgstr "Izvēlieties ikonu"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:685
-#: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
-#, fuzzy, c-format
+#: plugins/applicationsmenu/applicationsmenu.c:606
+#: plugins/directorymenu/directorymenu.c:466
+msgid "_OK"
+msgstr "_Labi"
+
+#. show an error dialog
+#: plugins/applicationsmenu/applicationsmenu.c:643 plugins/clock/clock.c:1054
+#: plugins/launcher/launcher.c:2500
+#, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "Neizdevās palaist \"%s\""
+msgstr "Neizdevās izpildīt komandu „%s”."
 
-#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
+#: plugins/applicationsmenu/applicationsmenu.desktop.in.in:5
 msgid "Show a menu containing categories of installed applications"
-msgstr ""
+msgstr "Rādīt izvēlni ar instalēto lietotņu kategorijām"
 
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:27
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:27
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:27
 msgid "Usage:"
-msgstr ""
+msgstr "Lietošana:"
 
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:28
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:28
 msgid "OPTION"
-msgstr ""
+msgstr "OPCIJA"
 
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:30
-#, fuzzy
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:30
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:30
 msgid "Options:"
-msgstr "Pulksteņa uzstādījumi"
+msgstr "Opcijas:"
 
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:31
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:31
 msgid "Popup menu at current mouse position"
-msgstr ""
+msgstr "Atvērt izvēlni pie peles pašreizējās atrašanās vietas"
 
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
-#, fuzzy
+#: plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
+#: plugins/directorymenu/xfce4-popup-directorymenu.sh:32
+#: plugins/windowmenu/xfce4-popup-windowmenu.sh:32
 msgid "Show help options"
-msgstr "Izmantot _plakanās pogas"
+msgstr "Rādīt palīdzības opcijas"
 
-#: ../plugins/clock/clock.c:174
+#. TRANSLATORS: adjust this accordingly for your locale format
+#: plugins/clock/clock.c:47
+msgctxt "Date"
+msgid "%A %d %B %Y"
+msgstr "%A, %Y. gada %d. %B"
+
+#: plugins/clock/clock.c:176
 msgid "Week %V"
-msgstr ""
+msgstr "%V. nedēļa"
 
-#: ../plugins/clock/clock.c:457
+#: plugins/clock/clock.c:500
 msgid "Failed to execute clock command"
-msgstr ""
+msgstr "Neizdevās izpildīt pulksteņa komandu"
 
-#: ../plugins/clock/clock.c:807
-#, fuzzy
+#: plugins/clock/clock.c:993
 msgid "Custom Format"
-msgstr "Pielāgota"
+msgstr "Pielāgots formāts"
 
-#: ../plugins/clock/clock-dialog.glade.h:1
-#: ../plugins/clock/clock.desktop.in.in.h:1
+#: plugins/clock/clock-dialog.glade:13
+msgid "Decimal"
+msgstr "Decimālais"
+
+#: plugins/clock/clock-dialog.glade:16
+msgid "Sexagesimal"
+msgstr "Sešdesmitnieku"
+
+#: plugins/clock/clock-dialog.glade:19
+msgid "Binary time"
+msgstr "Binārais laiks"
+
+#: plugins/clock/clock-dialog.glade:30
+msgid "Date, then time"
+msgstr "Datums, tad laiks"
+
+#: plugins/clock/clock-dialog.glade:33
+msgid "Time, then date"
+msgstr "Laiks, tad datums"
+
+#: plugins/clock/clock-dialog.glade:36
+msgid "Date Only"
+msgstr "Tikai datums"
+
+#: plugins/clock/clock-dialog.glade:39
+msgid "Time Only"
+msgstr "Tikai laiks"
+
+#: plugins/clock/clock-dialog.glade:71
+msgid "Analog"
+msgstr "Analogais"
+
+#: plugins/clock/clock-dialog.glade:74
+msgid "Binary"
+msgstr "Binārais"
+
+#: plugins/clock/clock-dialog.glade:77
+msgid "Digital"
+msgstr "Digitālais"
+
+#: plugins/clock/clock-dialog.glade:80
+msgid "Fuzzy"
+msgstr "Aptuvenais"
+
+#: plugins/clock/clock-dialog.glade:83
+msgid "LCD"
+msgstr "LCD"
+
+#: plugins/clock/clock-dialog.glade:89 plugins/clock/clock.desktop.in.in:4
 msgid "Clock"
 msgstr "Pulkstenis"
 
-#: ../plugins/clock/clock-dialog.glade.h:2
+#: plugins/clock/clock-dialog.glade:172
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
 msgstr ""
+"Laika joslas nosaukums, kas atbilst failam zoneinfo datubāzē, piemēram, "
+"„America/New_York”. Lai izmantotu vietējo laiku, atstājiet tukšu."
 
-#: ../plugins/clock/clock-dialog.glade.h:3
+#: plugins/clock/clock-dialog.glade:183
 msgid "Time_zone:"
-msgstr ""
+msgstr "Laika _josla:"
 
-#: ../plugins/clock/clock-dialog.glade.h:4
-#, fuzzy
+#: plugins/clock/clock-dialog.glade:194
 msgid "Time and Date _Settings..."
-msgstr "Darbavietu pārslēdzējs"
+msgstr "Laika un datuma _iestatījumi..."
 
-#: ../plugins/clock/clock-dialog.glade.h:5
+#: plugins/clock/clock-dialog.glade:214
 msgid "Time Settings"
+msgstr "Laika iestatījumi"
+
+#: plugins/clock/clock-dialog.glade:250
+msgid ""
+"If set, this command is run when the plugin is left-clicked, instead of "
+"displaying the default calendar."
 msgstr ""
+"Ja iestatīta, šī komanda tiek palaista, ar kreiso pogu noklikšķinot uz "
+"spraudņa, nevis tiek rādīts noklusējuma kalendārs."
 
-#: ../plugins/clock/clock-dialog.glade.h:6
-msgid "_Layout:"
-msgstr ""
+#: plugins/clock/clock-dialog.glade:261
+msgid "Co_mmand:"
+msgstr "Ko_manda:"
 
-#: ../plugins/clock/clock-dialog.glade.h:7
-#, fuzzy
-msgid "_Tooltip format:"
-msgstr "Paskaidres formāts"
+#: plugins/clock/clock-dialog.glade:273
+msgid "_Show week numbers"
+msgstr "_Rādīt nedēļu numurus"
 
-#: ../plugins/clock/clock-dialog.glade.h:9
-#, no-c-format
+#: plugins/clock/clock-dialog.glade:294
+msgid "Calendar"
+msgstr "Kalendārs"
+
+#: plugins/clock/clock-dialog.glade:329 plugins/clock/clock-dialog.glade:669
+#: plugins/clock/clock-dialog.glade:791
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with "
-"the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
 msgstr ""
+"Formāts nosaka, kuras datuma un laika daļas ievietot panelī. Piemēram, %Y "
+"tiks aizstāts ar gadu, %m ar mēnesi un %d ar dienu. Līdzīgi birkas <b></b> "
+"padarīs tekstu treknu. Sīkāku informāciju skatiet palīdzības lapā."
 
-#: ../plugins/clock/clock-dialog.glade.h:11
-msgid "Display _seconds"
-msgstr "Attēlot _sekundes"
+#: plugins/clock/clock-dialog.glade:358
+msgid "_Tooltip format:"
+msgstr "_Paskaidres formāts:"
 
-#: ../plugins/clock/clock-dialog.glade.h:12
-msgid "True _binary clock"
-msgstr "Patiess _binārs pulkstenis"
+#: plugins/clock/clock-dialog.glade:371 plugins/clock/clock-dialog.glade:619
+msgid "_Layout:"
+msgstr "_Izkārtojums:"
 
-#: ../plugins/clock/clock-dialog.glade.h:13
-#, fuzzy
-msgid "24-_hour clock"
-msgstr "Izmantot 24-_stundu pulksteni"
-
-#: ../plugins/clock/clock-dialog.glade.h:14
-#, fuzzy
-msgid "Fl_ash time separators"
-msgstr "_Mirkšķināt laika atdalītāju"
-
-#: ../plugins/clock/clock-dialog.glade.h:15
+#: plugins/clock/clock-dialog.glade:435
 msgid "Sho_w AM/PM"
 msgstr "Rādī_t AM/PM"
 
-#: ../plugins/clock/clock-dialog.glade.h:16
-msgid "F_ormat:"
-msgstr ""
+#: plugins/clock/clock-dialog.glade:450
+msgid "Fl_ash time separators"
+msgstr "_Mirgojoši laika atdalītāji"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:18
+#: plugins/clock/clock-dialog.glade:465
+msgid "24-_hour clock"
+msgstr "24 _stundu pulkstenis"
+
+#: plugins/clock/clock-dialog.glade:508
+msgid "Binary mode:"
+msgstr "Binārais režīms:"
+
+#: plugins/clock/clock-dialog.glade:524
+msgid "Display _seconds"
+msgstr "Rādīt _sekundes"
+
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
+#: plugins/clock/clock-dialog.glade:545
 msgid "F_uzziness:"
-msgstr ""
+msgstr "_Aptuvenība:"
 
-#: ../plugins/clock/clock-dialog.glade.h:19
-msgid "Show _inactive dots"
-msgstr ""
+#: plugins/clock/clock-dialog.glade:579
+msgid "Show _inactive segments"
+msgstr "Rādīt _neaktīvos segmentus"
 
-#: ../plugins/clock/clock-dialog.glade.h:20
-#, fuzzy
+#: plugins/clock/clock-dialog.glade:594
 msgid "Show gri_d"
-msgstr "Rādīt _turi"
+msgstr "Rādīt _režģi"
 
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: plugins/clock/clock-dialog.glade:640 plugins/clock/clock-dialog.glade:762
+msgid "Font:"
+msgstr "Fonts:"
+
+#: plugins/clock/clock-dialog.glade:653 plugins/clock/clock-dialog.glade:775
+msgid "Format:"
+msgstr "Formāts:"
+
+#: plugins/clock/clock-dialog.glade:670 plugins/clock/clock-dialog.glade:792
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See "
+"the &quot;Help&quot; page for additional information."
+msgstr ""
+"Formāts nosaka, kuras datuma un laika daļas ievietot panelī. Piemēram, %Y "
+"tiks aizstāts ar gadu, %m ar mēnesi un %d ar dienu. Līdzīgi birkas "
+"&lt;b&gt;&lt;/b&gt; padarīs tekstu treknu. Sīkāku informāciju skatiet "
+"palīdzības lapā."
+
+#: plugins/clock/clock-dialog.glade:699
+msgid "Date"
+msgstr "Datums"
+
+#: plugins/clock/clock-dialog.glade:744
+msgid "Time"
+msgstr "Laiks"
+
+#: plugins/clock/clock-dialog.glade:871
 msgid "Clock Options"
-msgstr "Pulksteņa uzstādījumi"
+msgstr "Pulksteņa opcijas"
 
-#: ../plugins/clock/clock-dialog.glade.h:22
-msgid "Analog"
-msgstr "Analogs"
+#: plugins/clock/clock-digital.h:30
+msgctxt "Time"
+msgid "%R"
+msgstr "%R"
 
-#: ../plugins/clock/clock-dialog.glade.h:23
-msgid "Binary"
-msgstr "Binārs"
+#: plugins/clock/clock-digital.h:31
+msgctxt "Date"
+msgid "%Y-%m-%d"
+msgstr "%d.%m.%Y"
 
-#: ../plugins/clock/clock-dialog.glade.h:24
-msgid "Digital"
-msgstr "Digitāls"
-
-#: ../plugins/clock/clock-dialog.glade.h:25
-msgid "Fuzzy"
-msgstr ""
-
-#: ../plugins/clock/clock-dialog.glade.h:26
-msgid "LCD"
-msgstr "LCD"
-
-#: ../plugins/clock/clock-fuzzy.c:88
-#, fuzzy
+#: plugins/clock/clock-fuzzy.c:79
 msgid "Night"
-msgstr "Labajā"
+msgstr "Nakts"
 
-#: ../plugins/clock/clock-fuzzy.c:89
+#: plugins/clock/clock-fuzzy.c:80
 msgid "Early morning"
-msgstr ""
+msgstr "Agrs rīts"
 
-#: ../plugins/clock/clock-fuzzy.c:90
+#: plugins/clock/clock-fuzzy.c:81
 msgid "Morning"
-msgstr ""
+msgstr "Rīts"
 
-#: ../plugins/clock/clock-fuzzy.c:91
+#: plugins/clock/clock-fuzzy.c:82
 msgid "Almost noon"
-msgstr ""
+msgstr "Gandrīz pusdienlaiks"
 
-#: ../plugins/clock/clock-fuzzy.c:92
-#, fuzzy
+#: plugins/clock/clock-fuzzy.c:83
 msgid "Noon"
-msgstr "Nav ikonas"
+msgstr "Pusdienlaiks"
 
-#: ../plugins/clock/clock-fuzzy.c:93
+#: plugins/clock/clock-fuzzy.c:84
 msgid "Afternoon"
-msgstr ""
+msgstr "Pēcpusdiena"
 
-#: ../plugins/clock/clock-fuzzy.c:94
+#: plugins/clock/clock-fuzzy.c:85
 msgid "Evening"
-msgstr ""
+msgstr "Vakars"
 
-#: ../plugins/clock/clock-fuzzy.c:95
+#: plugins/clock/clock-fuzzy.c:86
 msgid "Late evening"
-msgstr ""
+msgstr "Vēls vakars"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: ../plugins/clock/clock-fuzzy.c:102
+#: plugins/clock/clock-fuzzy.c:92
 #, no-c-format
 msgid "%0 o'clock"
-msgstr ""
+msgstr "pulkstenis %0"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: plugins/clock/clock-fuzzy.c:93
 #, no-c-format
 msgid "five past %0"
-msgstr ""
+msgstr "%0 un piecas"
 
-#: ../plugins/clock/clock-fuzzy.c:104
+#: plugins/clock/clock-fuzzy.c:94
 #, no-c-format
 msgid "ten past %0"
-msgstr ""
+msgstr "%0 un desmit"
 
-#: ../plugins/clock/clock-fuzzy.c:105
+#: plugins/clock/clock-fuzzy.c:95
 #, no-c-format
 msgid "quarter past %0"
-msgstr ""
+msgstr "%0 un ceturksnis"
 
-#: ../plugins/clock/clock-fuzzy.c:106
+#: plugins/clock/clock-fuzzy.c:96
 #, no-c-format
 msgid "twenty past %0"
-msgstr ""
+msgstr "%0 un divdesmit"
 
-#: ../plugins/clock/clock-fuzzy.c:107
+#: plugins/clock/clock-fuzzy.c:97
 #, no-c-format
 msgid "twenty five past %0"
-msgstr ""
+msgstr "%0 un divdesmit piecas"
 
-#: ../plugins/clock/clock-fuzzy.c:108
+#: plugins/clock/clock-fuzzy.c:98
 #, no-c-format
 msgid "half past %0"
-msgstr ""
+msgstr "pus%1"
 
-#: ../plugins/clock/clock-fuzzy.c:109
+#: plugins/clock/clock-fuzzy.c:99
 #, no-c-format
 msgid "twenty five to %1"
-msgstr ""
+msgstr "bez divdesmit piecām %1"
 
-#: ../plugins/clock/clock-fuzzy.c:110
+#: plugins/clock/clock-fuzzy.c:100
 #, no-c-format
 msgid "twenty to %1"
-msgstr ""
+msgstr "bez divdesmit %1"
 
-#: ../plugins/clock/clock-fuzzy.c:111
+#: plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "quarter to %1"
-msgstr ""
+msgstr "bez ceturkšņa %1"
 
-#: ../plugins/clock/clock-fuzzy.c:112
+#: plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "ten to %1"
-msgstr ""
+msgstr "bez desmit %1"
 
-#: ../plugins/clock/clock-fuzzy.c:113
+#: plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "five to %1"
-msgstr ""
+msgstr "bez piecām %1"
 
-#: ../plugins/clock/clock-fuzzy.c:114
+#: plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "%1 o'clock"
-msgstr ""
+msgstr "pulkstenis %1"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: ../plugins/clock/clock-fuzzy.c:121
+#: plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
-msgstr ""
+msgstr "pulkstenis %0"
 
-#: ../plugins/clock/clock-fuzzy.c:122
+#: plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
-msgstr ""
+msgstr "%0 un piecas"
 
-#: ../plugins/clock/clock-fuzzy.c:123
+#: plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
-msgstr ""
+msgstr "%0 un desmit"
 
-#: ../plugins/clock/clock-fuzzy.c:124
+#: plugins/clock/clock-fuzzy.c:113
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
-msgstr ""
+msgstr "%0 un ceturksnis"
 
-#: ../plugins/clock/clock-fuzzy.c:125
+#: plugins/clock/clock-fuzzy.c:114
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
-msgstr ""
+msgstr "%0 un divdesmit"
 
-#: ../plugins/clock/clock-fuzzy.c:126
+#: plugins/clock/clock-fuzzy.c:115
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
-msgstr ""
+msgstr "%0 un divdesmit piecas"
 
-#: ../plugins/clock/clock-fuzzy.c:127
+#: plugins/clock/clock-fuzzy.c:116
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
-msgstr ""
+msgstr "pus%1"
 
-#: ../plugins/clock/clock-fuzzy.c:128
+#: plugins/clock/clock-fuzzy.c:117
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
-msgstr ""
+msgstr "bez divdesmit piecām %1"
 
-#: ../plugins/clock/clock-fuzzy.c:129
+#: plugins/clock/clock-fuzzy.c:118
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
-msgstr ""
+msgstr "bez divdesmit %1"
 
-#: ../plugins/clock/clock-fuzzy.c:130
+#: plugins/clock/clock-fuzzy.c:119
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
-msgstr ""
+msgstr "bez ceturkšņa %1"
 
-#: ../plugins/clock/clock-fuzzy.c:131
+#: plugins/clock/clock-fuzzy.c:120
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
-msgstr ""
+msgstr "bez desmit %1"
 
-#: ../plugins/clock/clock-fuzzy.c:132
+#: plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
-msgstr ""
+msgstr "bez piecām %1"
 
-#: ../plugins/clock/clock-fuzzy.c:133
+#: plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
-msgstr ""
+msgstr "pulkstenis %1"
 
-#: ../plugins/clock/clock-fuzzy.c:138
+#: plugins/clock/clock-fuzzy.c:126
+msgctxt "am"
 msgid "one"
-msgstr ""
+msgstr "viens"
 
-#: ../plugins/clock/clock-fuzzy.c:139
+#: plugins/clock/clock-fuzzy.c:127
+msgctxt "am"
 msgid "two"
-msgstr ""
+msgstr "divi"
 
-#: ../plugins/clock/clock-fuzzy.c:140
+#: plugins/clock/clock-fuzzy.c:128
+msgctxt "am"
 msgid "three"
-msgstr ""
+msgstr "trīs"
 
-#: ../plugins/clock/clock-fuzzy.c:141
+#: plugins/clock/clock-fuzzy.c:129
+msgctxt "am"
 msgid "four"
-msgstr ""
+msgstr "četri"
 
-#: ../plugins/clock/clock-fuzzy.c:142
+#: plugins/clock/clock-fuzzy.c:130
+msgctxt "am"
 msgid "five"
-msgstr ""
+msgstr "pieci"
 
-#: ../plugins/clock/clock-fuzzy.c:143
+#: plugins/clock/clock-fuzzy.c:131
+msgctxt "am"
 msgid "six"
-msgstr ""
+msgstr "seši"
 
-#: ../plugins/clock/clock-fuzzy.c:144
+#: plugins/clock/clock-fuzzy.c:132
+msgctxt "am"
 msgid "seven"
-msgstr ""
+msgstr "septiņi"
 
-#: ../plugins/clock/clock-fuzzy.c:145
-#, fuzzy
+#: plugins/clock/clock-fuzzy.c:133
+msgctxt "am"
 msgid "eight"
-msgstr "Labajā"
+msgstr "astoņi"
 
-#: ../plugins/clock/clock-fuzzy.c:146
-#, fuzzy
+#: plugins/clock/clock-fuzzy.c:134
+msgctxt "am"
 msgid "nine"
-msgstr "_Līnija"
+msgstr "deviņi"
 
-#: ../plugins/clock/clock-fuzzy.c:147
+#: plugins/clock/clock-fuzzy.c:135
+msgctxt "am"
 msgid "ten"
-msgstr ""
+msgstr "desmit"
 
-#: ../plugins/clock/clock-fuzzy.c:148
+#: plugins/clock/clock-fuzzy.c:136
+msgctxt "am"
 msgid "eleven"
-msgstr ""
+msgstr "vienpadsmit"
 
-#: ../plugins/clock/clock-fuzzy.c:149
+#. I18N: 12 AM is midnight
+#: plugins/clock/clock-fuzzy.c:138
+msgctxt "am"
 msgid "twelve"
-msgstr ""
+msgstr "divpadsmit"
 
-#: ../plugins/clock/clock.desktop.in.in.h:2
+#: plugins/clock/clock-fuzzy.c:142
+msgctxt "pm"
+msgid "one"
+msgstr "viens"
+
+#: plugins/clock/clock-fuzzy.c:143
+msgctxt "pm"
+msgid "two"
+msgstr "divi"
+
+#: plugins/clock/clock-fuzzy.c:144
+msgctxt "pm"
+msgid "three"
+msgstr "trīs"
+
+#: plugins/clock/clock-fuzzy.c:145
+msgctxt "pm"
+msgid "four"
+msgstr "četri"
+
+#: plugins/clock/clock-fuzzy.c:146
+msgctxt "pm"
+msgid "five"
+msgstr "pieci"
+
+#: plugins/clock/clock-fuzzy.c:147
+msgctxt "pm"
+msgid "six"
+msgstr "seši"
+
+#: plugins/clock/clock-fuzzy.c:148
+msgctxt "pm"
+msgid "seven"
+msgstr "septiņi"
+
+#: plugins/clock/clock-fuzzy.c:149
+msgctxt "pm"
+msgid "eight"
+msgstr "astoņi"
+
+#: plugins/clock/clock-fuzzy.c:150
+msgctxt "pm"
+msgid "nine"
+msgstr "deviņi"
+
+#: plugins/clock/clock-fuzzy.c:151
+msgctxt "pm"
+msgid "ten"
+msgstr "desmit"
+
+#: plugins/clock/clock-fuzzy.c:152
+msgctxt "pm"
+msgid "eleven"
+msgstr "vienpadsmit"
+
+#. I18N: 12 PM is noon
+#: plugins/clock/clock-fuzzy.c:154
+msgctxt "pm"
+msgid "twelve"
+msgstr "divpadsmit"
+
+#: plugins/clock/clock.desktop.in.in:5
 msgid "What time is it?"
-msgstr "Cik rāda pulkstenis?"
+msgstr "Cik ir pulkstenis?"
 
-#: ../plugins/directorymenu/directorymenu.c:246
-#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
+#: plugins/directorymenu/directorymenu.c:298
+#: plugins/directorymenu/directorymenu.desktop.in.in:4
+#: plugins/directorymenu/directorymenu-dialog.glade:18
 msgid "Directory Menu"
-msgstr ""
+msgstr "Mapju izvēlne"
 
-#: ../plugins/directorymenu/directorymenu.c:569
-#, fuzzy, c-format
+#: plugins/directorymenu/directorymenu.c:696
+#, c-format
 msgid "Failed to launch application \"%s\""
-msgstr "Neizdevās palaist \"%s\""
+msgstr "Neizdevās palaist lietotni „%s”"
 
-#: ../plugins/directorymenu/directorymenu.c:600
+#: plugins/directorymenu/directorymenu.c:727
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr ""
+msgstr "Neizdevās noteikt „%s” satura tipu"
 
-#: ../plugins/directorymenu/directorymenu.c:609
-#, fuzzy, c-format
+#: plugins/directorymenu/directorymenu.c:736
+#, c-format
 msgid "No default application found for \"%s\""
-msgstr "Norādiet ikonu priekš \"%s\""
+msgstr "Nav atrasta „%s” noklusējuma lietotne"
 
-#: ../plugins/directorymenu/directorymenu.c:624
-#, fuzzy, c-format
+#: plugins/directorymenu/directorymenu.c:752
+#, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr "Neizdevās palaist \"%s\""
+msgstr "Neizdevās palaist „%s” noklusējuma lietotni"
 
-#: ../plugins/directorymenu/directorymenu.c:716
+#: plugins/directorymenu/directorymenu.c:846
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr ""
+msgstr "Neizdevās izpildīt kategorijas „%s” vēlamo lietotni"
 
-#: ../plugins/directorymenu/directorymenu.c:789
+#: plugins/directorymenu/directorymenu.c:927
+msgid "Create New Folder"
+msgstr "Izveidot jaunu mapi"
+
+#: plugins/directorymenu/directorymenu.c:932
+msgid "Create New Text Document"
+msgstr "Izveidot jaunu teksta dokumentu"
+
+#: plugins/directorymenu/directorymenu.c:938
+msgid "C_reate"
+msgstr "Iz_veidot"
+
+#: plugins/directorymenu/directorymenu.c:938
+msgid "Create & _Open"
+msgstr "Izveidot un _atvērt"
+
+#: plugins/directorymenu/directorymenu.c:951
+msgid "Enter the new name:"
+msgstr "Ievadiet jauno nosaukumu:"
+
+#: plugins/directorymenu/directorymenu.c:987
+#, c-format
+msgid "Failed to create folder: %s"
+msgstr "Neizdevās izveidot mapi: %s"
+
+#: plugins/directorymenu/directorymenu.c:1069
 msgid "Open Folder"
-msgstr ""
+msgstr "Atvērt mapi"
 
-#: ../plugins/directorymenu/directorymenu.c:800
-#, fuzzy
+#: plugins/directorymenu/directorymenu.c:1083
 msgid "Open in Terminal"
-msgstr "Izpildīt _terminālī"
+msgstr "Atvērt terminālī"
 
-#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
+#: plugins/directorymenu/directorymenu.c:1097
+msgid "Create Folder..."
+msgstr "Izveidot mapi..."
+
+#: plugins/directorymenu/directorymenu.c:1111
+msgid "Create Text Document..."
+msgstr "Izveidot teksta dokumentu..."
+
+#: plugins/directorymenu/directorymenu.desktop.in.in:5
 msgid "Show a directory tree in a menu"
-msgstr ""
+msgstr "Rādīt mapju koku izvēlnē"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
-#, fuzzy
+#: plugins/directorymenu/directorymenu-dialog.glade:99
 msgid "Select A Directory"
-msgstr "Norādiet ikonu priekš \"%s\""
+msgstr "Izvēlieties mapi"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
+#: plugins/directorymenu/directorymenu-dialog.glade:135
 msgid "_Base Directory:"
-msgstr ""
+msgstr "_Bāzes mape:"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
+#: plugins/directorymenu/directorymenu-dialog.glade:179
+msgid "Show 'New Text _Document'"
+msgstr "Rādīt „Jauns teksta _dokuments”"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:194
+msgid "Show '_New Folder'"
+msgstr "Rādīt „_Jauna mape”"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:209
+msgid "Show 'Open in _Terminal'"
+msgstr "Rādīt „Atvērt _terminālī”"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:224
+msgid "Show '_Open _Folder'"
+msgstr "Rādīt „Atvērt _mapi”"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:243
+msgid "Menu"
+msgstr "Izvēlne"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:272
+msgid "Show _hidden files"
+msgstr "Rādīt _slēptos failus"
+
+#: plugins/directorymenu/directorymenu-dialog.glade:289
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr ""
+"Ievadiet šablonu sarakstu, pēc kura noteikt, kuri mapes faili ir redzami. Ja"
+" norādāt vairākus šablonus, saraksta vienumi jāatdala ar semikolu (piemēram,"
+" *.txt;*.doc)."
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
+#: plugins/directorymenu/directorymenu-dialog.glade:301
 msgid "_File Pattern:"
-msgstr ""
+msgstr "_Failu šablons:"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
-#, fuzzy
-msgid "Show _hidden files"
-msgstr "Rādīt _turi"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
+#: plugins/directorymenu/directorymenu-dialog.glade:316
+#: plugins/tasklist/tasklist-dialog.glade:492
+#: plugins/windowmenu/windowmenu-dialog.glade:260
 msgid "Filtering"
-msgstr ""
+msgstr "Filtrēšana"
 
-#: ../plugins/launcher/launcher.c:405
+#: plugins/launcher/launcher.c:431
 msgid "Open launcher menu"
-msgstr ""
+msgstr "Atvērt palaidēja izvēlni"
 
-#: ../plugins/launcher/launcher.c:1575
-#, fuzzy
+#: plugins/launcher/launcher.c:1615
 msgid "Unnamed Item"
-msgstr "Nenosaukts"
+msgstr "Nenosaukts vienums"
 
-#: ../plugins/launcher/launcher.c:1728
-#, fuzzy
+#: plugins/launcher/launcher.c:1817
 msgid "No items"
-msgstr "Jauns vienums"
+msgstr "Nav vienumu"
 
-#: ../plugins/launcher/launcher-dialog.c:798
-#, fuzzy
+#: plugins/launcher/launcher-dialog.c:781
 msgid "Failed to open desktop item editor"
-msgstr "Neizdevās atvērt displeju"
+msgstr "Neizdevās atvērt .desktop vienumu redaktoru"
 
-#: ../plugins/launcher/launcher-dialog.c:857
+#: plugins/launcher/launcher-dialog.c:842
 msgid "If you delete an item, it will be permanently removed"
-msgstr ""
+msgstr "Ja vienumu izdzēsīsiet, tas tiks neatgriezeniski noņemts"
 
-#: ../plugins/launcher/launcher-dialog.c:858
-#, fuzzy, c-format
-msgid "Are you sure you want to remove \"%s\"?"
-msgstr "Esat drošs, ka vēlaties noņemt darbavietu '%s'?"
-
-#: ../plugins/launcher/launcher-dialog.c:859
-#, fuzzy
+#: plugins/launcher/launcher-dialog.c:852
 msgid "Unnamed item"
-msgstr "Nenosaukts"
+msgstr "Nenosaukts vienums"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:1
+#: plugins/launcher/launcher-dialog.c:854
+#, c-format
+msgid "Are you sure you want to remove \"%s\"?"
+msgstr "Vai tiešām vēlaties noņemt „%s”?"
+
+#: plugins/launcher/launcher-dialog.glade:30
 msgid "Default"
-msgstr "Noklusētais"
+msgstr "Noklusējums"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:2
+#: plugins/launcher/launcher-dialog.glade:33
 msgid "North"
-msgstr ""
+msgstr "Ziemeļi"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:3
+#: plugins/launcher/launcher-dialog.glade:36
 msgid "West"
-msgstr ""
+msgstr "Rietumi"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:4
+#: plugins/launcher/launcher-dialog.glade:39
 msgid "East"
-msgstr ""
+msgstr "Austrumi"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:5
-#, fuzzy
+#: plugins/launcher/launcher-dialog.glade:42
 msgid "South"
-msgstr "Par"
+msgstr "Dienvidi"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:6
+#: plugins/launcher/launcher-dialog.glade:45
 msgid "Inside Button"
-msgstr "Iekšējā poga"
+msgstr "Pogas iekšpusē"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:7
+#: plugins/launcher/launcher-dialog.glade:96
+msgid "Up"
+msgstr "Augšup"
+
+#: plugins/launcher/launcher-dialog.glade:105
+msgid "Down"
+msgstr "Lejup"
+
+#: plugins/launcher/launcher-dialog.glade:120
 msgid "_Edit Item"
-msgstr ""
+msgstr "_Rediģēt vienumu"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:8
+#: plugins/launcher/launcher-dialog.glade:130
 msgid "D_elete Item"
-msgstr ""
+msgstr "_Dzēst vienumu"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:9
-#, fuzzy
+#: plugins/launcher/launcher-dialog.glade:146
 msgid "Add Appli_cation"
-msgstr "Slēptās lietotnes"
+msgstr "Pievienot _lietotni"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:10
-#, fuzzy
+#: plugins/launcher/launcher-dialog.glade:162
 msgid "New _Application"
-msgstr "Slēptās lietotnes"
+msgstr "_Jauna lietotne"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:11
-#, fuzzy
+#: plugins/launcher/launcher-dialog.glade:172
 msgid "New _Link"
-msgstr "Jauns panelis"
+msgstr "Jauna _saite"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:12
-#: ../plugins/launcher/launcher.desktop.in.in.h:1
+#: plugins/launcher/launcher-dialog.glade:205
+#: plugins/launcher/launcher-dialog.glade:599
+msgid "Add one or more existing items to the launcher"
+msgstr "Pievienot palaidējam vienu vai vairākus esošus vienumus"
+
+#: plugins/launcher/launcher-dialog.glade:379
+#: plugins/launcher/launcher.desktop.in.in:4
 msgid "Launcher"
 msgstr "Palaidējs"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:15
-msgid "Add one or more existing items to the launcher"
-msgstr ""
-
-#: ../plugins/launcher/launcher-dialog.glade.h:16
-#, fuzzy
-msgid "Add a new empty item"
-msgstr "Pievienot jaunus vienumus"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:17
-#, fuzzy
+#: plugins/launcher/launcher-dialog.glade:579
 msgid "Delete the currently selected item"
-msgstr "Noņemt pašreiz atlasīto paneli"
+msgstr "Dzēst pašlaik atlasīto vienumu"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:20
+#: plugins/launcher/launcher-dialog.glade:619
+msgid "Add a new empty item"
+msgstr "Pievienot jaunu tukšu vienumu"
+
+#: plugins/launcher/launcher-dialog.glade:639
+msgid "Add a new hyperlink"
+msgstr "Pievienot jaunu hipersaiti"
+
+#: plugins/launcher/launcher-dialog.glade:682
 msgid "Disable t_ooltips"
-msgstr ""
+msgstr "Atspējot _paskaidres"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:21
+#: plugins/launcher/launcher-dialog.glade:686
 msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
+"Select this option to disable the tooltips when moving over the panel button"
+" or menu items."
 msgstr ""
+"Atzīmējiet šo opciju, lai atspējotu paskaidres, novietojot rādītāju virs "
+"paneļa pogas vai izvēlnes vienumiem."
 
-#: ../plugins/launcher/launcher-dialog.glade.h:22
-#, fuzzy
+#: plugins/launcher/launcher-dialog.glade:698
 msgid "Show _label instead of icon"
-msgstr "Rādīt _lietotnes ikonas"
+msgstr "Rādīt _etiķeti ikonas vietā"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:23
+#: plugins/launcher/launcher-dialog.glade:713
 msgid "Show last _used item in panel"
-msgstr ""
+msgstr "Rādīt panelī pēdējo _izmantoto vienumu"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:24
+#: plugins/launcher/launcher-dialog.glade:717
 msgid "Select this option to move the clicked menu item to the panel."
 msgstr ""
+"Atzīmējiet šo opciju, lai noklikšķināto izvēlnes vienumu pārvietotu uz "
+"paneli."
 
-#: ../plugins/launcher/launcher-dialog.glade.h:25
-#, fuzzy
+#: plugins/launcher/launcher-dialog.glade:736
 msgid "_Arrow button position:"
-msgstr "B_ultas poga"
+msgstr "_Bultiņas pogas novietojums:"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:26
+#: plugins/launcher/launcher-dialog.glade:779
 msgid "Advanced"
-msgstr ""
+msgstr "Paplašināti"
 
-#: ../plugins/launcher/launcher.desktop.in.in.h:2
+#: plugins/launcher/launcher.desktop.in.in:5
 msgid "Program launcher with optional menu"
-msgstr "Programmu palaidējs ar iespējamu izvēlni"
+msgstr "Programmu palaidējs ar neobligātu izvēlni"
 
-#: ../plugins/pager/pager.c:368 ../plugins/pager/pager-dialog.glade.h:5
-#, fuzzy
+#: plugins/pager/pager.c:705 plugins/pager/pager-dialog.glade:64
 msgid "Workspace _Settings..."
-msgstr "Darbavietu pārslēdzējs"
+msgstr "Darba vietu _iestatījumi..."
 
-#: ../plugins/pager/pager.c:451
+#: plugins/pager/pager.c:805
 msgid "Unable to open the workspace settings"
-msgstr ""
+msgstr "Neizdevās atvērt darba vietu iestatījumus"
 
-#: ../plugins/pager/pager-buttons.c:579 ../plugins/windowmenu/windowmenu.c:857
+#: plugins/pager/pager-buttons.c:596 plugins/windowmenu/windowmenu.c:928
 #, c-format
 msgid "Workspace %d"
-msgstr "Darbavieta %d"
+msgstr "Darba vieta %d"
 
-#: ../plugins/pager/pager-dialog.glade.h:1
-#: ../plugins/pager/pager.desktop.in.in.h:1
+#: plugins/pager/pager-dialog.glade:15
+msgid "Buttons"
+msgstr "Pogas"
+
+#: plugins/pager/pager-dialog.glade:19
+msgid "Miniature View"
+msgstr "Miniatūrskats"
+
+#: plugins/pager/pager-dialog.glade:48 plugins/pager/pager.desktop.in.in:4
 msgid "Workspace Switcher"
-msgstr "Darbavietu pārslēdzējs"
+msgstr "Darba vietu pārslēdzējs"
 
-#: ../plugins/pager/pager-dialog.glade.h:2
-#, fuzzy
+#: plugins/pager/pager-dialog.glade:131
 msgid "Number of _rows:"
 msgstr "_Rindu skaits:"
 
-#: ../plugins/pager/pager-dialog.glade.h:3
-msgid "Show mi_niature view"
-msgstr ""
+#: plugins/pager/pager-dialog.glade:197
+msgid "Show workspace number"
+msgstr "Rādīt darba vietas numuru"
 
-#: ../plugins/pager/pager-dialog.glade.h:4
-msgid ""
-"Show a miniature view of the workspace with rectangles for the visible "
-"windows"
-msgstr ""
+#: plugins/pager/pager-dialog.glade:210
+msgid "Switch workspaces using the mouse wheel"
+msgstr "Pārslēgt darba vietas ar peles ritenīti"
 
-#: ../plugins/pager/pager-dialog.glade.h:7
-msgid "Switch workspaces using the mouse _wheel"
-msgstr "Pārslēgt darbavietas izmantojot peles _ritentiņu"
+#: plugins/pager/pager-dialog.glade:224
+msgid "Wrap around workspaces"
+msgstr "Pārslēgšanās pa apli starp darba vietām"
 
-#: ../plugins/pager/pager-dialog.glade.h:8
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
-msgid "Behaviour"
-msgstr ""
+#: plugins/pager/pager-dialog.glade:241
+msgid "<b>Appearance</b>"
+msgstr "<b>Izskats</b>"
 
-#: ../plugins/pager/pager.desktop.in.in.h:2
+#: plugins/pager/pager.desktop.in.in:5
 msgid "Switch between virtual desktops"
-msgstr "Pārslēgtiem starp virtuālajām darbvirsmām"
+msgstr "Pārslēgties starp virtuālajām darbvirsmām"
 
-#: ../plugins/separator/separator-dialog.glade.h:3
-msgid "_Expand"
-msgstr ""
-
-#: ../plugins/separator/separator-dialog.glade.h:5
-#, fuzzy
+#: plugins/separator/separator-dialog.glade:23
 msgid "Transparent"
-msgstr "_Caurspīdība (%s):"
+msgstr "Caurspīdīgs"
 
-#: ../plugins/separator/separator-dialog.glade.h:6
-#, fuzzy
+#: plugins/separator/separator-dialog.glade:29
 msgid "Handle"
-msgstr "Tureklis:"
+msgstr "Turis"
 
-#: ../plugins/separator/separator-dialog.glade.h:7
-#, fuzzy
+#: plugins/separator/separator-dialog.glade:32
 msgid "Dots"
-msgstr "_Punkti"
+msgstr "Punkti"
 
-#: ../plugins/separator/separator.desktop.in.in.h:2
-#, fuzzy
+#: plugins/separator/separator-dialog.glade:156
+msgid "_Expand"
+msgstr "_Izplest"
+
+#: plugins/separator/separator.desktop.in.in:5
 msgid "Adds a separator or space between panel items"
-msgstr "Pievieno atstarpi vai līniju starp paneļa vienumiem"
+msgstr "Pievieno atdalītāju vai atstarpi starp paneļa vienumiem"
 
-#: ../plugins/showdesktop/showdesktop.c:210
-#, fuzzy
+#: plugins/showdesktop/showdesktop.c:321
 msgid "Restore the minimized windows"
-msgstr "Atjaunot slēptos logus"
+msgstr "Atjaunot minimizētos logus"
 
-#: ../plugins/showdesktop/showdesktop.c:212
-#, fuzzy
+#: plugins/showdesktop/showdesktop.c:323
 msgid "Minimize all open windows and show the desktop"
-msgstr "Slēpt visus logus un rādīt darbvirsmu"
+msgstr "Minimizēt visus atvērtos logus un parādīt darbvirsmu"
 
-#: ../plugins/showdesktop/showdesktop.c:215
-#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
+#: plugins/showdesktop/showdesktop.c:326
+#: plugins/showdesktop/showdesktop-dialog.glade:18
+#: plugins/showdesktop/showdesktop.desktop.in.in:4
 msgid "Show Desktop"
 msgstr "Rādīt darbvirsmu"
 
-#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
-msgid "Hide all windows and show the desktop"
-msgstr "Slēpt visus logus un rādīt darbvirsmu"
+#: plugins/showdesktop/showdesktop-dialog.glade:92
+msgid "_Show on mouse hover"
+msgstr "_Rādīt, novietojot peli"
 
-#: ../plugins/systray/systray.c:398
-#, fuzzy
+#: plugins/showdesktop/showdesktop-dialog.glade:113
+#: plugins/systray/sn-dialog.glade:300
+msgid "Behavior"
+msgstr "Uzvedība"
+
+#: plugins/showdesktop/showdesktop.desktop.in.in:5
+msgid "Hide all windows and show the desktop"
+msgstr "Paslēpt visus logus un parādīt darbvirsmu"
+
+#: plugins/systray/sn-dialog.c:416
+msgid "Clear"
+msgstr "Notīrīt"
+
+#: plugins/systray/sn-dialog.c:421
+msgid "Are you sure you want to clear the list of known items?"
+msgstr "Vai tiešām vēlaties notīrīt zināmo vienumu sarakstu?"
+
+#: plugins/systray/sn-dialog.glade:48
+msgid "Status Tray Items"
+msgstr "Statusa paneļa vienumi"
+
+#: plugins/systray/sn-dialog.glade:80
+msgid "C_lear Known Items"
+msgstr "_Notīrīt zināmos vienumus"
+
+#: plugins/systray/sn-dialog.glade:84
+msgid "Resets the list of items and their visibility settings"
+msgstr "Atiestata vienumu sarakstu un to redzamības iestatījumus"
+
+#: plugins/systray/sn-dialog.glade:144
+msgid "_Fixed icon size (pixels):"
+msgstr "_Fiksēts ikonu izmērs (pikseļos):"
+
+#: plugins/systray/sn-dialog.glade:185
+msgid "Adjust size _automatically"
+msgstr "Pielāgot izmēru _automātiski"
+
+#: plugins/systray/sn-dialog.glade:213
+msgid "Icons"
+msgstr "Ikonas"
+
+#: plugins/systray/sn-dialog.glade:246
+msgid "Arrange _items in a single row"
+msgstr "Izkārtot _vienumus vienā rindā"
+
+#: plugins/systray/sn-dialog.glade:250
+msgid "If enabled, ensure that the items are laid out in a single row"
+msgstr "Ja iespējots, vienumi tiek izkārtoti vienā rindā"
+
+#: plugins/systray/sn-dialog.glade:262
+msgid "_Hide items by default"
+msgstr "_Pēc noklusējuma paslēpt vienumus"
+
+#: plugins/systray/sn-dialog.glade:266
+msgid "When enabled, all new items will be marked as \"Hidden\""
+msgstr "Ja iespējots, visi jaunie vienumi tiek atzīmēti kā „Paslēpts”"
+
+#: plugins/systray/sn-dialog.glade:278
+msgid "_Square items"
+msgstr "_Kvadrātveida vienumi"
+
+#: plugins/systray/sn-dialog.glade:282
+msgid "Item buttons will take a square when it's possible"
+msgstr "Vienumu pogas, ja iespējams, būs kvadrātveida"
+
+#: plugins/systray/sn-dialog.glade:386 plugins/systray/sn-dialog.glade:618
+msgid "Item"
+msgstr "Vienums"
+
+#: plugins/systray/sn-dialog.glade:398 plugins/systray/sn-dialog.glade:630
+msgid "Hidden"
+msgstr "Paslēpts"
+
+#: plugins/systray/sn-dialog.glade:426 plugins/systray/sn-dialog.glade:658
+msgid "Move the selected item one row up"
+msgstr "Pārvietot atlasīto vienumu par vienu rindu augšup"
+
+#: plugins/systray/sn-dialog.glade:446 plugins/systray/sn-dialog.glade:678
+msgid "Move the selected item one row down"
+msgstr "Pārvietot atlasīto vienumu par vienu rindu lejup"
+
+#: plugins/systray/sn-dialog.glade:479 plugins/systray/sn-dialog.glade:711
+msgid "Known Items"
+msgstr "Zināmie vienumi"
+
+#: plugins/systray/sn-dialog.glade:512
+msgid "_Menu is primary action"
+msgstr "_Izvēlne ir primārā darbība"
+
+#: plugins/systray/sn-dialog.glade:516
+msgid "Left click will always display the menu for item"
+msgstr "Kreisais klikšķis vienmēr parāda vienuma izvēlni"
+
+#: plugins/systray/sn-dialog.glade:528
+msgid "_Request symbolic icons"
+msgstr "_Pieprasīt simboliskas ikonas"
+
+#: plugins/systray/sn-dialog.glade:532
+msgid "Load symbolic icons if available"
+msgstr "Ielādēt simboliskas ikonas, ja pieejamas"
+
+#: plugins/systray/sn-dialog.glade:550
+msgid "Features"
+msgstr "Iespējas"
+
+#: plugins/systray/sn-dialog.glade:566
+msgid "Status Notifiers"
+msgstr "Statusa paziņotāji"
+
+#: plugins/systray/sn-dialog.glade:720
+msgid "Systray Icons"
+msgstr "Sistēmas paneļa ikonas"
+
+#: plugins/systray/systray.c:149
 msgid "Unable to start the notification area"
-msgstr "Steidzamā paziņošana"
+msgstr "Neizdevās startēt paziņojumu lauku"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:868
+#: plugins/systray/systray.c:409
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr ""
+"Visticamāk, paziņojumu lauka funkciju pārņēmusi cita logdaļa. Šis lauks "
+"netiks izmantots."
 
-#: ../plugins/systray/systray.c:870
-#, fuzzy
+#: plugins/systray/systray.c:411
 msgid "The notification area lost selection"
-msgstr "Sistēmas joslas pārvaldnieks zaudēja atlasi"
+msgstr "Paziņojumu lauks zaudēja atlasi"
 
-#: ../plugins/systray/systray.c:1023
-msgid "Are you sure you want to clear the list of known applications?"
-msgstr "Esat drošs, ka vēlaties notīrīt zināmo lietotņu sarakstu?"
-
-#: ../plugins/systray/systray-dialog.glade.h:1
-#: ../plugins/systray/systray.desktop.in.in.h:1
-msgid "Notification Area"
-msgstr "Paziņošanas ikonu laukums"
-
-#: ../plugins/systray/systray-dialog.glade.h:2
-msgid "_Maximum icon size (px):"
-msgstr ""
-
-#: ../plugins/systray/systray-dialog.glade.h:3
-msgid "Show _frame"
-msgstr "Rādīt _rāmi"
-
-#: ../plugins/systray/systray-dialog.glade.h:5
-#, fuzzy
-msgid "C_lear Known Applications"
-msgstr "Norādiet lietotni"
-
-#: ../plugins/systray/systray-dialog.glade.h:6
-#, fuzzy
-msgid "Known Applications"
-msgstr "Slēptās lietotnes"
-
-#: ../plugins/systray/systray-manager.c:404
+#: plugins/systray/systray-manager.c:386
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr "Neizdevās iegūt atlases pārvaldnieku ekrānam %d"
+msgstr "Neizdevās iegūt ekrāna %d pārvaldnieka atlasi"
 
-#: ../plugins/systray/systray.desktop.in.in.h:2
-msgid "Area where notification icons appear"
-msgstr "Laukums, kur parādās paziņošanas ikonas"
+#: plugins/systray/systray.desktop.in.in:5
+msgid "Status Tray Plugin"
+msgstr "Statusa paneļa spraudnis"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:1
-msgid "Never"
+#: plugins/systray/systray.desktop.in.in:6
+msgid ""
+"Provides status notifier items (application indicators) and legacy systray "
+"items"
 msgstr ""
+"Nodrošina statusa paziņotāju vienumus (lietotņu indikatorus) un vecā tipa "
+"sistēmas paneļa vienumus"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:2
-msgid "Always"
-msgstr ""
+#: plugins/tasklist/tasklist-dialog.glade:23
+msgid "Nothing"
+msgstr "Nekas"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:3
-msgid "When space is limited"
-msgstr ""
+#: plugins/tasklist/tasklist-dialog.glade:26
+msgid "Close Window"
+msgstr "Aizvērt logu"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:4
+#: plugins/tasklist/tasklist-dialog.glade:29
+msgid "Minimize Window"
+msgstr "Minimizēt logu"
+
+#: plugins/tasklist/tasklist-dialog.glade:32
+msgid "New Instance"
+msgstr "Jauna instance"
+
+#: plugins/tasklist/tasklist-dialog.glade:43
 msgid "Timestamp"
-msgstr ""
+msgstr "Laikspiedols"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+#: plugins/tasklist/tasklist-dialog.glade:46
 msgid "Group title and timestamp"
-msgstr ""
+msgstr "Grupas virsraksts un laikspiedols"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:6
-#, fuzzy
+#: plugins/tasklist/tasklist-dialog.glade:49
 msgid "Window title"
-msgstr "Logu saraksts"
+msgstr "Loga virsraksts"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:7
+#: plugins/tasklist/tasklist-dialog.glade:52
 msgid "Group title and window title"
-msgstr ""
+msgstr "Grupas virsraksts un loga virsraksts"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+#: plugins/tasklist/tasklist-dialog.glade:55
 msgid "None, allow drag-and-drop"
-msgstr ""
+msgstr "Nav, atļaut vilkšanu un nomešanu"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist.desktop.in.in.h:1
-#, fuzzy
+#: plugins/tasklist/tasklist-dialog.glade:61
+#: plugins/tasklist/tasklist.desktop.in.in:4
 msgid "Window Buttons"
-msgstr "Darbību pogas"
+msgstr "Logu pogas"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+#: plugins/tasklist/tasklist-dialog.glade:143
 msgid "Show button _labels"
-msgstr ""
+msgstr "Rādīt pogu _etiķetes"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
-#, fuzzy
+#: plugins/tasklist/tasklist-dialog.glade:159
 msgid "Show _flat buttons"
-msgstr "Izmantot _plakanās pogas"
+msgstr "Rādīt _plakanas pogas"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: plugins/tasklist/tasklist-dialog.glade:175
 msgid "Show _handle"
 msgstr "Rādīt _turi"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: plugins/tasklist/tasklist-dialog.glade:191
+msgid "Show _tooltips"
+msgstr "Rādīt _paskaidres"
+
+#: plugins/tasklist/tasklist-dialog.glade:214
 msgid "Sorting _order:"
-msgstr ""
+msgstr "Kārtošanas _secība:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
-msgid "Window _grouping:"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: plugins/tasklist/tasklist-dialog.glade:297
 msgid "Mi_ddle click action:"
-msgstr ""
+msgstr "_Vidējā klikšķa darbība:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: plugins/tasklist/tasklist-dialog.glade:335
+msgid "_Group windows by application"
+msgstr "_Grupēt logus pēc lietotnes"
+
+#: plugins/tasklist/tasklist-dialog.glade:351
 msgid "Restore minimized windows to current _workspace"
-msgstr ""
+msgstr "Atjaunot minimizētos logus pašreizējā _darba vietā"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: plugins/tasklist/tasklist-dialog.glade:367
 msgid "D_raw window frame when hovering a button"
-msgstr ""
+msgstr "Zīmēt loga _rāmi, novietojot rādītāju virs pogas"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
-#, fuzzy
+#: plugins/tasklist/tasklist-dialog.glade:383
 msgid "_Switch windows using the mouse wheel"
-msgstr "Pārslēgt darbavietas izmantojot peles _ritentiņu"
+msgstr "_Pārslēgt logus ar peles ritenīti"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
-#, fuzzy
-msgid "Show windows from _all workspaces or viewports"
-msgstr "Rādīt _logus no visām darbavietām"
+#: plugins/tasklist/tasklist-dialog.glade:405
+msgid "Behaviour"
+msgstr "Uzvedība"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
-#, fuzzy
+#: plugins/tasklist/tasklist-dialog.glade:438
+#: plugins/windowmenu/windowmenu-dialog.glade:239
+msgid "Show windows from _all workspaces"
+msgstr "Rādīt _visu darba vietu logus"
+
+#: plugins/tasklist/tasklist-dialog.glade:454
 msgid "Show windows from all mo_nitors"
-msgstr "Rādīt _logus no visām darbavietām"
+msgstr "Rādīt _visu monitoru logus"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:23
+#: plugins/tasklist/tasklist-dialog.glade:470
 msgid "Show only _minimized windows"
-msgstr ""
+msgstr "Rādīt tikai _minimizētos logus"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:25
-msgid "Nothing"
-msgstr ""
+#: plugins/tasklist/tasklist-widget.c:3114
+#, c-format
+msgid "Unable to start new instance of '%s'"
+msgstr "Neizdevās startēt jaunu „%s” instanci"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:26
-#, fuzzy
-msgid "Close Window"
-msgstr "Logu saraksts"
+#: plugins/tasklist/tasklist-widget.c:3141
+msgid "Launch New Instance"
+msgstr "Palaist jaunu instanci"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:27
-msgid "Minimize Window"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist-widget.c:3308
+#: plugins/tasklist/tasklist-widget.c:3885
 msgid "Mi_nimize All"
-msgstr ""
+msgstr "Mi_nimizēt visus"
 
-#: ../plugins/tasklist/tasklist-widget.c:3317
+#: plugins/tasklist/tasklist-widget.c:3892
 msgid "Un_minimize All"
-msgstr ""
+msgstr "Atjaunot visus no mi_nimizēta"
 
-#: ../plugins/tasklist/tasklist-widget.c:3323
+#: plugins/tasklist/tasklist-widget.c:3899
 msgid "Ma_ximize All"
-msgstr ""
+msgstr "Mak_simizēt visus"
 
-#: ../plugins/tasklist/tasklist-widget.c:3332
+#: plugins/tasklist/tasklist-widget.c:3906
 msgid "_Unmaximize All"
-msgstr ""
+msgstr "Atjaunot visus no _maksimizēta"
 
-#: ../plugins/tasklist/tasklist-widget.c:3342
+#: plugins/tasklist/tasklist-widget.c:3917
 msgid "_Close All"
-msgstr ""
+msgstr "_Aizvērt visus"
 
-#: ../plugins/tasklist/tasklist.desktop.in.in.h:2
+#: plugins/tasklist/tasklist.desktop.in.in:5
 msgid "Switch between open windows using buttons"
-msgstr "Pārslēgties starp atvērtiem logiem izmantojot pogas"
+msgstr "Pārslēgties starp atvērtajiem logiem ar pogām"
 
-#: ../plugins/windowmenu/windowmenu.c:655
-#, fuzzy
+#: plugins/windowmenu/windowmenu.c:729
 msgid "Desktop"
-msgstr "Rādīt darbvirsmu"
+msgstr "Darbvirsma"
 
-#: ../plugins/windowmenu/windowmenu.c:1246
-#, fuzzy
+#: plugins/windowmenu/windowmenu.c:1323
 msgid "No Windows"
-msgstr "Logu saraksts"
+msgstr "Nav logu"
 
-#: ../plugins/windowmenu/windowmenu.c:1261
+#: plugins/windowmenu/windowmenu.c:1338
 msgid "Urgent Windows"
-msgstr ""
+msgstr "Steidzami logi"
 
-#: ../plugins/windowmenu/windowmenu.c:1303
-#, fuzzy
+#: plugins/windowmenu/windowmenu.c:1383
 msgid "Add Workspace"
-msgstr "Pievienot darbavietu"
+msgstr "Pievienot darba vietu"
 
-#: ../plugins/windowmenu/windowmenu.c:1323
-#, fuzzy, c-format
+#: plugins/windowmenu/windowmenu.c:1405
+#, c-format
 msgid "Remove Workspace \"%s\""
-msgstr "Noņemt darbavietu '%s'"
+msgstr "Noņemt darba vietu „%s”"
 
-#: ../plugins/windowmenu/windowmenu.c:1325
+#: plugins/windowmenu/windowmenu.c:1407
 #, c-format
 msgid "Remove Workspace %d"
-msgstr "Noņemt darbavietu %d"
+msgstr "Noņemt darba vietu %d"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
-#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:1
-#, fuzzy
-msgid "Window Menu"
-msgstr "Logu saraksts"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
-msgid "Button layout:"
-msgstr ""
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
-#, fuzzy
-msgid "Show workspace a_ctions"
-msgstr "Rādīt dar_bavietas darbības"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
-msgid "Show workspace _names"
-msgstr "Rādīt dar_bavietu nosaukumus"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
-#, fuzzy
-msgid "Enable _urgency notification"
-msgstr "Steidzamā paziņošana"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
-#, fuzzy
-msgid "Show windows from _all workspaces"
-msgstr "Rādīt _logus no visām darbavietām"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
-#, fuzzy
+#: plugins/windowmenu/windowmenu-dialog.glade:23
 msgid "Icon"
-msgstr "_Ikona:"
+msgstr "Ikona"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
-#, fuzzy
+#: plugins/windowmenu/windowmenu-dialog.glade:26
 msgid "Arrow"
-msgstr "_Bulta:"
+msgstr "Bultiņa"
 
-#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
+#: plugins/windowmenu/windowmenu-dialog.glade:32
+#: plugins/windowmenu/windowmenu.desktop.in.in:4
+msgid "Window Menu"
+msgstr "Loga izvēlne"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:119
+msgid "Button layout:"
+msgstr "Pogu izkārtojums:"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:155
+msgid "Show workspace a_ctions"
+msgstr "Rādīt darba vietu _darbības"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:170
+msgid "Show workspace _names"
+msgstr "Rādīt darba vietu _nosaukumus"
+
+#: plugins/windowmenu/windowmenu-dialog.glade:185
+msgid "Enable _urgency notification"
+msgstr "Iespējot _steidzamības paziņojumus"
+
+#: plugins/windowmenu/windowmenu.desktop.in.in:5
 msgid "Switch between open windows using a menu"
-msgstr "Pārslēgties starp atvērtiem logiem izmantojot izvēlnes"
-
-#~ msgid "_Orientation:"
-#~ msgstr "_Novietojums:"
-
-#, fuzzy
-#~ msgid "_First button:"
-#~ msgstr "B_ultas poga"
-
-#, fuzzy
-#~ msgid "_Second button:"
-#~ msgstr "_Ikonas poga"
-
-#, fuzzy
-#~ msgid "Disabled"
-#~ msgstr "Izslē_gt"
-
-#, fuzzy
-#~ msgid "No applications found"
-#~ msgstr "Norādiet ikonu priekš \"%s\""
-
-#, fuzzy
-#~ msgid "Failed to load the applications menu"
-#~ msgstr "Neizdevās palaist \"%s\""
-
-#, fuzzy
-#~ msgid "Transparency"
-#~ msgstr "_Caurspīdība (%s):"
-
-#, fuzzy
-#~ msgid "Xfce Menu"
-#~ msgstr "Xfce panelis"
-
-#, fuzzy
-#~ msgid "Failed to open manual"
-#~ msgstr "Neizdevās atvērt displeju"
-
-#, fuzzy
-#~ msgid "C_ompositing"
-#~ msgstr "Pozīcija"
+msgstr "Pārslēgties starp atvērtajiem logiem ar izvēlni"
