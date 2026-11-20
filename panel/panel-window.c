@@ -1686,7 +1686,7 @@ panel_window_size_allocate (GtkWidget *widget,
                   && (window->autohide_state == AUTOHIDE_HIDDEN
                       || window->autohide_state == AUTOHIDE_POPUP)))
     {
-      gboolean autohide_running = window->autohide_timeout_id != 0 || window->popdown_progress != -G_MAXINT;
+      gboolean autohide_running = window->autohide_timeout_id != 0 || window->autohide_ease_out_id != 0;
 
       /* autohide timeout is already running, so let's wait with hiding the panel */
       if (autohide_running
@@ -1735,8 +1735,12 @@ panel_window_size_allocate (GtkWidget *widget,
         gtk_window_resize (GTK_WINDOW (window->autohide_window), w, h);
 
       panel_window_size_allocate_set_xy (window, w, h, &x, &y);
+
+      /* on wayland it should be moved before being shown, to avoid protocol error
+       * on X11/xfwm4, it should be moved after, so it is taken into account */
       panel_window_move (window, GTK_WINDOW (window->autohide_window), x, y);
       gtk_widget_show (window->autohide_window);
+      panel_window_move (window, GTK_WINDOW (window->autohide_window), x, y);
 
       /* slide out the panel window with popdown_speed, but ignore panels that are floating, i.e. not
          attached to a GdkScreen border (i.e. including panels which are on a monitor border, but
