@@ -2815,6 +2815,141 @@ xfce_panel_plugin_popup_menu_reposition (gpointer data)
 
 
 
+enum
+{
+  PENDING_MENU_TIMEOUT_MS = 1000,
+};
+
+typedef struct
+{
+  XfcePanelPlugin *plugin;
+  GtkMenu *menu;
+  GtkWidget *widget;
+  GdkPoint point;
+  gboolean has_point;
+  GdkEvent *trigger_event;
+  gulong map_id;
+  gulong destroy_id;
+  guint source_id;
+} PendingMenu;
+
+
+
+static void
+xfce_panel_plugin_pending_menu_free (gpointer data)
+{
+  PendingMenu *pending = data;
+
+  if (pending->map_id != 0)
+    g_signal_handler_disconnect (pending->widget, pending->map_id);
+  if (pending->destroy_id != 0)
+    g_signal_handler_disconnect (pending->widget, pending->destroy_id);
+  if (pending->source_id != 0)
+    g_source_remove (pending->source_id);
+  if (pending->plugin != NULL)
+    {
+      g_object_remove_weak_pointer (G_OBJECT (pending->plugin), (gpointer *) &pending->plugin);
+      if (!PANEL_HAS_FLAG (pending->plugin->priv->flags, PLUGIN_FLAG_DISPOSED))
+        xfce_panel_plugin_block_autohide (pending->plugin, FALSE);
+    }
+  if (pending->trigger_event != NULL)
+    gdk_event_free (pending->trigger_event);
+  g_slice_free (PendingMenu, pending);
+}
+
+
+
+static void
+xfce_panel_plugin_pending_menu_cancel (PendingMenu *pending)
+{
+  g_object_set_data (G_OBJECT (pending->menu), "pending-menu", NULL);
+}
+
+
+
+static gboolean
+xfce_panel_plugin_pending_menu_popup (gpointer data)
+{
+  PendingMenu *pending = data;
+
+  pending->source_id = 0;
+  g_object_steal_data (G_OBJECT (pending->menu), "pending-menu");
+  if (pending->plugin != NULL)
+    xfce_panel_plugin_popup_menu_at_point (pending->plugin, pending->menu, pending->widget,
+                                           pending->has_point ? &pending->point : NULL,
+                                           pending->trigger_event);
+  xfce_panel_plugin_pending_menu_free (pending);
+
+  return G_SOURCE_REMOVE;
+}
+
+
+
+static gboolean
+xfce_panel_plugin_pending_menu_timeout (gpointer data)
+{
+  PendingMenu *pending = data;
+
+  pending->source_id = 0;
+  xfce_panel_plugin_pending_menu_cancel (pending);
+
+  return G_SOURCE_REMOVE;
+}
+
+
+
+static void
+xfce_panel_plugin_pending_menu_mapped (GtkWidget *widget,
+                                       PendingMenu *pending)
+{
+  g_signal_handler_disconnect (widget, pending->map_id);
+  pending->map_id = 0;
+  g_source_remove (pending->source_id);
+  pending->source_id = g_idle_add (xfce_panel_plugin_pending_menu_popup, pending);
+}
+
+
+
+static void
+xfce_panel_plugin_pending_menu_widget_destroyed (GtkWidget *widget,
+                                                 PendingMenu *pending)
+{
+  xfce_panel_plugin_pending_menu_cancel (pending);
+}
+
+
+
+static void
+xfce_panel_plugin_popup_menu_when_mapped (XfcePanelPlugin *plugin,
+                                          GtkMenu *menu,
+                                          GtkWidget *widget,
+                                          const GdkPoint *point,
+                                          const GdkEvent *trigger_event)
+{
+  PendingMenu *pending = g_slice_new0 (PendingMenu);
+
+  pending->plugin = plugin;
+  pending->menu = menu;
+  pending->widget = widget;
+  pending->has_point = point != NULL;
+  if (point != NULL)
+    pending->point = *point;
+  if (trigger_event != NULL)
+    pending->trigger_event = gdk_event_copy (trigger_event);
+
+  g_object_add_weak_pointer (G_OBJECT (plugin), (gpointer *) &pending->plugin);
+  xfce_panel_plugin_block_autohide (plugin, TRUE);
+  g_object_set_data_full (G_OBJECT (menu), "pending-menu", pending,
+                          xfce_panel_plugin_pending_menu_free);
+  pending->map_id = g_signal_connect (widget, "map",
+                                      G_CALLBACK (xfce_panel_plugin_pending_menu_mapped), pending);
+  pending->destroy_id = g_signal_connect (widget, "destroy",
+                                          G_CALLBACK (xfce_panel_plugin_pending_menu_widget_destroyed), pending);
+  pending->source_id = g_timeout_add (PENDING_MENU_TIMEOUT_MS, xfce_panel_plugin_pending_menu_timeout, pending);
+}
+
+
+
 /**
  * xfce_panel_plugin_popup_menu:
  * @plugin        : an #XfcePanelPlugin.
@@ -2864,6 +2999,12 @@ xfce_panel_plugin_popup_menu_at_point (XfcePanelPlugin *plugin,
   GtkArrowType arrow = GTK_ARROW_NONE;
   GdkRectangle rect;
   guint id;
+
+  if (gtk_layer_is_supported () && widget != NULL && !gtk_widget_get_mapped (widget))
+    {
+      xfce_panel_plugin_popup_menu_when_mapped (plugin, menu, widget, point, trigger_event);
+      return;
+    }
 
   /* check if conditions are met to pop up menu at widget */
   if (widget != NULL)
