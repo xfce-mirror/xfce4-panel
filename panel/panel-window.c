@@ -1678,13 +1678,19 @@ panel_window_size_allocate (GtkWidget *widget,
   gint w, h, x, y;
   PanelBorders borders;
   GtkWidget *child;
+  gboolean shown_on_layer;
 
   gtk_widget_set_allocation (widget, alloc);
   window->alloc = *alloc;
 
+  shown_on_layer = window->autohide_window != NULL
+                   && gtk_layer_is_supported ()
+                   && gtk_widget_get_visible (widget)
+                   && !gtk_widget_get_visible (window->autohide_window);
+
   if (G_UNLIKELY (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER
                   && (window->autohide_state == AUTOHIDE_HIDDEN
-                      || window->autohide_state == AUTOHIDE_POPUP)))
+                      || (window->autohide_state == AUTOHIDE_POPUP && !shown_on_layer))))
     {
       gboolean autohide_running = window->autohide_timeout_id != 0 || window->autohide_ease_out_id != 0;
 
@@ -3597,7 +3603,8 @@ panel_window_autohide_queue (PanelWindow *window,
   /* set new autohide state */
   if (new_state == AUTOHIDE_VISIBLE
       && (window->autohide_state == AUTOHIDE_HIDDEN || window->autohide_state == AUTOHIDE_POPUP)
-      && gtk_layer_is_supported ())
+      && gtk_layer_is_supported ()
+      && (window->autohide_state == AUTOHIDE_HIDDEN || !gtk_widget_get_visible (GTK_WIDGET (window))))
     /*
      * For some reason, calling gtk_widget_queue_resize() below doesn't always trigger
      * size_allocate() on wayland, whereas it seems to trigger it more reliably when calling
@@ -3697,6 +3704,9 @@ panel_window_autohide_drag_leave (GtkWidget *widget,
 {
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (window->autohide_window == widget);
+
+  if (gtk_layer_is_supported () && !gtk_widget_get_visible (window->autohide_window))
+    return;
 
   /* we left the autohide window before the panel was shown, stop the queue */
   panel_window_autohide_queue (window, AUTOHIDE_HIDDEN);
