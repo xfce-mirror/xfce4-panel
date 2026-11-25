@@ -1359,6 +1359,7 @@ clock_plugin_popup_calendar (ClockPlugin *plugin)
   if (plugin->calendar_window == NULL)
     {
       plugin->calendar_window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+      gtk_window_set_title (GTK_WINDOW (plugin->calendar_window), _("Calendar"));
       g_signal_connect (G_OBJECT (plugin->calendar_window), "show",
                         G_CALLBACK (clock_plugin_calendar_show), plugin);
       g_signal_connect (G_OBJECT (plugin->calendar_window), "hide",
