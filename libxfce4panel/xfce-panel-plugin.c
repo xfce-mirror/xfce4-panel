@@ -2792,6 +2792,23 @@ xfce_panel_plugin_popup_menu_reposition (gpointer data)
 
 
 
+#ifdef HAVE_GTK_LAYER_SHELL
+static void
+popup_menu_when_panel_is_visible (GtkWidget *toplevel,
+                                  GtkMenu *menu)
+{
+  GtkWidget *widget = g_object_get_data (G_OBJECT (menu), "menu-widget");
+  GdkGravity widget_anchor = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (menu), "widget-anchor"));
+  GdkGravity menu_anchor = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (menu), "menu-anchor"));
+  GdkEvent *event = g_object_get_data (G_OBJECT (menu), "menu-event");
+
+  g_signal_handlers_disconnect_by_func (toplevel, popup_menu_when_panel_is_visible, menu);
+  gtk_menu_popup_at_widget (menu, widget, widget_anchor, menu_anchor, event);
+}
+#endif
+
+
+
 /**
  * xfce_panel_plugin_popup_menu:
  * @plugin        : an #XfcePanelPlugin.
@@ -2874,7 +2891,22 @@ xfce_panel_plugin_popup_menu (XfcePanelPlugin *plugin,
 
   /* pop up the menu */
   if (popup_at_widget)
-    gtk_menu_popup_at_widget (menu, widget, widget_anchor, menu_anchor, trigger_event);
+    {
+#ifdef HAVE_GTK_LAYER_SHELL
+      /* when the panel is autohidden on wayland, it may not be visible yet */
+      GtkWidget *toplevel = gtk_widget_get_toplevel (GTK_WIDGET (plugin));
+      if (gtk_layer_is_supported () && !gtk_widget_is_visible (toplevel))
+        {
+          g_object_set_data (G_OBJECT (menu), "menu-widget", widget);
+          g_object_set_data (G_OBJECT (menu), "widget-anchor", GINT_TO_POINTER (widget_anchor));
+          g_object_set_data (G_OBJECT (menu), "menu-anchor", GINT_TO_POINTER (menu_anchor));
+          g_object_set_data_full (G_OBJECT (menu), "menu-event", gdk_event_copy (trigger_event), (GDestroyNotify) gdk_event_free);
+          g_signal_connect (toplevel, "show", G_CALLBACK (popup_menu_when_panel_is_visible), menu);
+        }
+      else
+#endif
+        gtk_menu_popup_at_widget (menu, widget, widget_anchor, menu_anchor, trigger_event);
+    }
   else
     gtk_menu_popup_at_pointer (menu, trigger_event);
 }
