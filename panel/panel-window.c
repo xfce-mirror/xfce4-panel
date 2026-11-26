@@ -3685,6 +3685,10 @@ panel_window_autohide_drag_leave (GtkWidget *widget,
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (window->autohide_window == widget);
 
+  /* avoid show/hide loop in edge cases */
+  if (gtk_layer_is_supported () && !gtk_widget_get_visible (window->autohide_window))
+    return;
+
   /* we left the autohide window before the panel was shown, stop the queue */
   panel_window_autohide_queue (window, AUTOHIDE_HIDDEN);
 }
