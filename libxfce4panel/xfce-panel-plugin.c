@@ -2840,7 +2840,6 @@ xfce_panel_plugin_popup_menu (XfcePanelPlugin *plugin,
 {
   GdkGravity widget_anchor, menu_anchor;
   gboolean popup_at_widget = TRUE;
-  guint id;
 
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
   g_return_if_fail (GTK_IS_MENU (menu));
@@ -2881,14 +2880,6 @@ xfce_panel_plugin_popup_menu (XfcePanelPlugin *plugin,
   /* register the menu */
   xfce_panel_plugin_register_menu (plugin, menu);
 
-  /* since we requested a panel lock, queue a menu repositioning in case the panel is hidden */
-  id = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (menu), "menu-reposition-id"));
-  if (id != 0)
-    g_source_remove (id);
-
-  id = g_idle_add (xfce_panel_plugin_popup_menu_reposition, menu);
-  g_object_set_data (G_OBJECT (menu), "menu-reposition-id", GUINT_TO_POINTER (id));
-
   /* pop up the menu */
   if (popup_at_widget)
     {
@@ -2905,7 +2896,16 @@ xfce_panel_plugin_popup_menu (XfcePanelPlugin *plugin,
         }
       else
 #endif
-        gtk_menu_popup_at_widget (menu, widget, widget_anchor, menu_anchor, trigger_event);
+        {
+          /* since we requested a panel lock, queue a menu repositioning in case the panel is hidden */
+          guint id = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (menu), "menu-reposition-id"));
+          if (id != 0)
+            g_source_remove (id);
+          id = g_idle_add (xfce_panel_plugin_popup_menu_reposition, menu);
+          g_object_set_data (G_OBJECT (menu), "menu-reposition-id", GUINT_TO_POINTER (id));
+
+          gtk_menu_popup_at_widget (menu, widget, widget_anchor, menu_anchor, trigger_event);
+        }
     }
   else
     gtk_menu_popup_at_pointer (menu, trigger_event);
